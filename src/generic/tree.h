@@ -82,20 +82,20 @@ namespace oomph
     virtual ~Tree();
 
     /// Broken copy constructor
-    Tree(const Tree &dummy)
+    Tree(const Tree& dummy)
     {
       BrokenCopy::broken_copy("Tree");
     }
 
     /// Broken assignment operator
-    void operator=(const Tree &)
+    void operator=(const Tree&)
     {
       BrokenCopy::broken_assign("Tree");
     }
 
     /// \short Return the pointer to the object (RefineableElement)
     /// represented by the tree
-    RefineableElement *object_pt() const
+    RefineableElement* object_pt() const
     {
       return Object_pt;
     }
@@ -110,7 +110,7 @@ namespace oomph
     /// to aid code readability specific enums have been defined for
     /// specific trees. However, these are simply aliases for ints and
     /// the general interface can be implemented once, here.
-    Tree *son_pt(const int &son_index) const
+    Tree* son_pt(const int& son_index) const
     {
       // If there are no sons, return NULL (0)
       if (Son_pt.size() == 0)
@@ -129,7 +129,7 @@ namespace oomph
     /// (To aid code readability specific enums have been defined for
     /// specific trees. However, these are simply aliases for ints and
     /// the general interface can be implemented once, here).
-    void set_son_pt(const Vector<Tree *> &son_pt)
+    void set_son_pt(const Vector<Tree*>& son_pt)
     {
       Son_pt = son_pt;
     }
@@ -147,13 +147,13 @@ namespace oomph
     }
 
     /// Return pointer to root of the tree
-    TreeRoot *&root_pt()
+    TreeRoot*& root_pt()
     {
       return Root_pt;
     }
 
     /// Return pointer to root of the tree (const version)
-    TreeRoot *root_pt() const
+    TreeRoot* root_pt() const
     {
       return Root_pt;
     }
@@ -167,11 +167,11 @@ namespace oomph
     /// criterion: bool object_pt()-> to_be_p_refined() = true
     /// or bool object_pt()-> to_be_p_unrefined() = true
     template<class ELEMENT>
-    void p_refine_if_required(Mesh *&mesh_pt);
+    void p_refine_if_required(Mesh*& mesh_pt);
 
     /// \short If required, merge the four sons for unrefinement --
     /// criterion: bool object_pt()-> sons_to_be_unrefined() = true
-    void merge_sons_if_required(Mesh *&mesh_pt);
+    void merge_sons_if_required(Mesh*& mesh_pt);
 
     /// \short Call the RefineableElement's deactivate_element() function.
     void deactivate_object();
@@ -179,16 +179,16 @@ namespace oomph
     /// \short A function that constructs a specific type of tree. This
     /// MUST be overloaded for each specific tree type. The use of such a
     /// function allows the generic implementation of split_if_required().
-    virtual Tree *construct_son(RefineableElement *const &object_pt,
-                                Tree *const &father_pt,
-                                const int &son_type) = 0;
+    virtual Tree* construct_son(RefineableElement* const& object_pt,
+                                Tree* const& father_pt,
+                                const int& son_type) = 0;
 
     /// Function pointer to argument-free void Tree member function
     typedef void (Tree::*VoidMemberFctPt)();
 
     /// Function pointer to a void Tree member function that takes a
     /// pointer to a mesh as its argument
-    typedef void (Tree::*VoidMeshPtArgumentMemberFctPt)(Mesh *&mesh_pt);
+    typedef void (Tree::*VoidMeshPtArgumentMemberFctPt)(Mesh*& mesh_pt);
 
     /// \short Traverse the tree and execute void Tree member function
     /// member_function() at all its "nodes"
@@ -197,7 +197,7 @@ namespace oomph
     /// \short Traverse the tree and excute void Tree member function
     /// that takes a pointer to a mesh as an argument
     void traverse_all(Tree::VoidMeshPtArgumentMemberFctPt member_function,
-                      Mesh *&mesh_pt);
+                      Mesh*& mesh_pt);
 
     /// \short Traverse the tree and execute void Tree member function
     /// member_function() at all its "nodes" aparat from the leaves
@@ -210,13 +210,13 @@ namespace oomph
     /// \short  Traverse the tree and execute void Tree member function
     /// that takes a pointer to a mesh as an argument only at its leaves
     void traverse_leaves(Tree::VoidMeshPtArgumentMemberFctPt member_function,
-                         Mesh *&mesh_pt);
+                         Mesh*& mesh_pt);
 
     /// Traverse tree and stick pointers to leaf "nodes" (only) into Vector
-    void stick_leaves_into_vector(Vector<Tree *> &);
+    void stick_leaves_into_vector(Vector<Tree*>&);
 
     /// Traverse and stick pointers to all "nodes" into Vector
-    void stick_all_tree_nodes_into_vector(Vector<Tree *> &);
+    void stick_all_tree_nodes_into_vector(Vector<Tree*>&);
 
     /// Return son type
     int son_type() const
@@ -240,13 +240,13 @@ namespace oomph
     }
 
     /// Return pointer to father: NULL if it's a root node
-    Tree *father_pt() const
+    Tree* father_pt() const
     {
       return Father_pt;
     }
 
     /// Set the father
-    void set_father_pt(Tree *const &father_pt)
+    void set_father_pt(Tree* const& father_pt)
     {
       Father_pt = father_pt;
     }
@@ -260,7 +260,7 @@ namespace oomph
     /// \short Max. allowed discrepancy in neighbour finding routine
     /// (distance between points when identified from two neighbouring
     /// elements)
-    static double &max_neighbour_finding_tolerance()
+    static double& max_neighbour_finding_tolerance()
     {
       return Max_neighbour_finding_tolerance;
     }
@@ -284,7 +284,7 @@ namespace oomph
     /// Protected because Trees can only be created internally,
     /// during the split operation. Only TreeRoots can be
     /// created externally.
-    Tree(RefineableElement *const &object_pt);
+    Tree(RefineableElement* const& object_pt);
 
     /// \short Constructor for tree that has a father: Pass it the pointer
     /// to its object, the pointer to its father and tell it what type
@@ -292,19 +292,19 @@ namespace oomph
     /// Protected because Trees can only be created internally,
     /// during the split operation.  Only TreeRoots can be
     /// created externally.
-    Tree(RefineableElement *const &object_pt,
-         Tree *const &father_pt,
-         const int &son_type);
+    Tree(RefineableElement* const& object_pt,
+         Tree* const& father_pt,
+         const int& son_type);
 
     /// Pointer to the root of the tree
-    TreeRoot *Root_pt;
+    TreeRoot* Root_pt;
 
   protected:
     /// Pointer to the Father of the Tree
-    Tree *Father_pt;
+    Tree* Father_pt;
 
     /// Vector of pointers to the sons of the Tree
-    Vector<Tree *> Son_pt;
+    Vector<Tree*> Son_pt;
 
     /// Level of the Tree (level 0 = root)
     int Level;
@@ -313,7 +313,7 @@ namespace oomph
     int Son_type;
 
     /// Pointer to the object represented by the tree
-    RefineableElement *Object_pt;
+    RefineableElement* Object_pt;
 
     /// \short Max. allowed discrepancy in neighbour finding routine
     /// (distance between points when identified from two neighbouring
@@ -334,7 +334,7 @@ namespace oomph
     /// Neighbour_pt[direction] returns the pointer to the
     /// TreeRoot's neighbour in the (enumerated) direction.
     /// Returns NULL if there's no neighbour in this direction.
-    std::map<int, TreeRoot *> Neighbour_pt;
+    std::map<int, TreeRoot*> Neighbour_pt;
 
     /// \short Map of booleans used for periodic boundaries:
     /// Neighbour_periodic_direction[directon] returns true if the
@@ -345,46 +345,46 @@ namespace oomph
 
   public:
     /// Constructor for the (empty) root tree
-    TreeRoot(RefineableElement *const &object_pt) : Tree(object_pt)
+    TreeRoot(RefineableElement* const& object_pt) : Tree(object_pt)
     {
       // TreeRoot is the Root
       Root_pt = this;
     }
 
     /// Broken copy constructor
-    TreeRoot(const TreeRoot &dummy)
+    TreeRoot(const TreeRoot& dummy)
     {
       BrokenCopy::broken_copy("TreeRoot");
     }
 
     /// Broken assignment operator
-    void operator=(const TreeRoot &)
+    void operator=(const TreeRoot&)
     {
       BrokenCopy::broken_assign("TreeRoot");
     }
 
     /// \short Return the pointer to the neighbouring TreeRoots in specified
     /// direction.  Returns NULL if there's no neighbour in this direction.
-    TreeRoot *&neighbour_pt(const int &direction)
+    TreeRoot*& neighbour_pt(const int& direction)
     {
       return Neighbour_pt[direction];
     }
 
     /// \short Return whether the neighbour in the particular direction
     /// is periodic.
-    bool is_neighbour_periodic(const int &direction)
+    bool is_neighbour_periodic(const int& direction)
     {
       return Neighbour_periodic[direction];
     }
 
     ///\short Set the neighbour in particular direction to be periodic
-    void set_neighbour_periodic(const int &direction)
+    void set_neighbour_periodic(const int& direction)
     {
       Neighbour_periodic[direction] = true;
     }
 
     ///\short Set the neighbour in particular direction to be nonperiodic
-    void set_neighbour_nonperiodic(const int &direction)
+    void set_neighbour_nonperiodic(const int& direction)
     {
       Neighbour_periodic[direction] = false;
     }
@@ -394,7 +394,7 @@ namespace oomph
     {
       // Loop over the neighbours and test whether they are non-null
       unsigned count = 0;
-      for (std::map<int, TreeRoot *>::iterator it = Neighbour_pt.begin();
+      for (std::map<int, TreeRoot*>::iterator it = Neighbour_pt.begin();
            it != Neighbour_pt.end();
            it++)
       {
@@ -420,7 +420,7 @@ namespace oomph
   public:
     /// \short Constructor for Tree forest: Pass Vector of
     /// (pointers to) constituents trees.
-    TreeForest(Vector<TreeRoot *> &trees_pt);
+    TreeForest(Vector<TreeRoot*>& trees_pt);
 
     /// Default constructor (empty and broken)
     TreeForest()
@@ -433,13 +433,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    TreeForest(const TreeForest &dummy)
+    TreeForest(const TreeForest& dummy)
     {
       BrokenCopy::broken_copy("TreeForest");
     }
 
     /// Broken assignment operator
-    void operator=(const TreeForest &)
+    void operator=(const TreeForest&)
     {
       BrokenCopy::broken_assign("TreeForest");
     }
@@ -449,14 +449,14 @@ namespace oomph
     virtual ~TreeForest();
 
     /// Traverse forst and stick pointers to leaf "nodes" into Vector
-    void stick_leaves_into_vector(Vector<Tree *> &forest_nodes);
+    void stick_leaves_into_vector(Vector<Tree*>& forest_nodes);
 
     /// Traverse forest and stick pointers to all "nodes" into Vector
-    void stick_all_tree_nodes_into_vector(Vector<Tree *> &all_forest_nodes);
+    void stick_all_tree_nodes_into_vector(Vector<Tree*>& all_forest_nodes);
 
     /// \short Document/check the neighbours of all the nodes in the forest.
     /// This must be overloaded for different types of forest.
-    virtual void check_all_neighbours(DocInfo &doc_info) = 0;
+    virtual void check_all_neighbours(DocInfo& doc_info) = 0;
 
     /// \short Open output files that will store any hanging nodes in the
     /// forest. Return a vector of the output streams. This is included in
@@ -464,13 +464,13 @@ namespace oomph
     /// mesh adaptation in two and three dimensions. The need for pointers
     /// to the output streams is because one cannot copy a stream!
     virtual void open_hanging_node_files(
-      DocInfo &doc_info, Vector<std::ofstream *> &output_stream) = 0;
+      DocInfo& doc_info, Vector<std::ofstream*>& output_stream) = 0;
 
     /// \short Close output files that will store any hanging nodes in the
     /// forest and delete any associated storage.
     /// This can be performed genercially in this base class.
-    void close_hanging_node_files(DocInfo &doc_info,
-                                  Vector<std::ofstream *> &output_stream);
+    void close_hanging_node_files(DocInfo& doc_info,
+                                  Vector<std::ofstream*>& output_stream);
 
     /// Number of trees in forest
     unsigned ntree()
@@ -479,7 +479,7 @@ namespace oomph
     }
 
     /// Return pointer to i-th tree in forest
-    TreeRoot *tree_pt(const unsigned &i) const
+    TreeRoot* tree_pt(const unsigned& i) const
     {
       return Trees_pt[i];
     }
@@ -493,7 +493,7 @@ namespace oomph
 
   protected:
     /// Vector containing the pointers to the trees
-    Vector<TreeRoot *> Trees_pt;
+    Vector<TreeRoot*> Trees_pt;
   };
 
 } // namespace oomph

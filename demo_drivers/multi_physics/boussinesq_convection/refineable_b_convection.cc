@@ -97,9 +97,9 @@ public:
   /// \short Overloaded version of the problem's access function to
   /// the mesh. Recasts the pointer to the base Mesh object to
   /// the actual mesh type.
-  RectangularQuadMesh<ELEMENT> *mesh_pt()
+  RectangularQuadMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<RectangularQuadMesh<ELEMENT> *>(Problem::mesh_pt());
+    return dynamic_cast<RectangularQuadMesh<ELEMENT>*>(Problem::mesh_pt());
   } // end of access function to specic mesh
 
   /// Actions before adapt:(empty)
@@ -119,12 +119,12 @@ public:
   }
 
   /// Fix pressure in element e at pressure dof pdof and set to pvalue
-  void fix_pressure(const unsigned &e,
-                    const unsigned &pdof,
-                    const double &pvalue)
+  void fix_pressure(const unsigned& e,
+                    const unsigned& pdof,
+                    const double& pvalue)
   {
     // Cast to specific element and fix pressure
-    dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e))
+    dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))
       ->fix_pressure(pdof, pvalue);
   } // end_of_fix_pressure
 
@@ -178,7 +178,7 @@ RefineableConvectionProblem<ELEMENT>::RefineableConvectionProblem() :
   double l_y = 1.0;
 
   // Build the mesh
-  RefineableRectangularQuadMesh<ELEMENT> *cast_mesh_pt =
+  RefineableRectangularQuadMesh<ELEMENT>* cast_mesh_pt =
     new RefineableRectangularQuadMesh<ELEMENT>(n_x, n_y, l_x, l_y);
 
   // Set the problem's mesh pointer
@@ -234,7 +234,7 @@ RefineableConvectionProblem<ELEMENT>::RefineableConvectionProblem() :
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the Peclet number
     el_pt->pe_pt() = &Global_Physical_Variables::Peclet;
@@ -276,7 +276,7 @@ void RefineableConvectionProblem<ELEMENT>::actions_before_newton_solve()
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Get pointer to node
-      Node *nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
+      Node* nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
 
       // Set the number of velocity components
       unsigned vel_max = 2;

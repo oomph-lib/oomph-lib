@@ -57,12 +57,12 @@ namespace oomph
     /// closed curves, specified by TetMeshFacetedSurfaces.
     /// Also specify target volume for uniform element size.
     RefineableTetgenMesh(
-      TetMeshFacetedClosedSurface *const &outer_boundary_pt,
-      Vector<TetMeshFacetedSurface *> &internal_closed_surface_pt,
-      const double &element_volume,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper,
-      const bool &use_attributes = false,
-      const bool &split_corner_elements = false) :
+      TetMeshFacetedClosedSurface* const& outer_boundary_pt,
+      Vector<TetMeshFacetedSurface*>& internal_closed_surface_pt,
+      const double& element_volume,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
+      const bool& use_attributes = false,
+      const bool& split_corner_elements = false) :
       TetgenMesh<ELEMENT>(outer_boundary_pt,
                           internal_closed_surface_pt,
                           element_volume,
@@ -81,12 +81,12 @@ namespace oomph
     /// from previous mesh (is then modified to build new mesh)
     /// Ditto with use_attributes, which comes from the previous mesh
     RefineableTetgenMesh(
-      const Vector<double> &target_volume,
-      tetgenio *const &tetgen_io_pt,
-      TetMeshFacetedClosedSurface *const &outer_boundary_pt,
-      Vector<TetMeshFacetedSurface *> &internal_surface_pt,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper,
-      const bool &use_attributes = false)
+      const Vector<double>& target_volume,
+      tetgenio* const& tetgen_io_pt,
+      TetMeshFacetedClosedSurface* const& outer_boundary_pt,
+      Vector<TetMeshFacetedSurface*>& internal_surface_pt,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
+      const bool& use_attributes = false)
     {
       // NOTE THERE IS A CERTAIN AMOUNT OF DUPLICATION BETWEEN THE
       // CODE IN HERE AND THE ONE IN THE CONSTRUCTOR OF THE TetgenMesh
@@ -114,7 +114,7 @@ namespace oomph
       // anyway.
 
       // Create a local copy
-      tetgenio *tetgen_input_pt = new tetgenio;
+      tetgenio* tetgen_input_pt = new tetgenio;
       ;
       this->deep_copy_of_tetgenio(tetgen_io_pt, tetgen_input_pt);
 
@@ -226,7 +226,7 @@ namespace oomph
     virtual ~RefineableTetgenMesh() {}
 
     /// Refine mesh uniformly and doc process
-    void refine_uniformly(DocInfo &doc_info)
+    void refine_uniformly(DocInfo& doc_info)
     {
       // hierher do it
       throw OomphLibError("refine_uniformly() not implemented yet",
@@ -248,7 +248,7 @@ namespace oomph
     }
 
     /// Adapt mesh, based on elemental error provided
-    void adapt(const Vector<double> &elem_error);
+    void adapt(const Vector<double>& elem_error);
 
     /// Is projection of old solution onto new mesh disabled?
     bool projection_is_disabled()

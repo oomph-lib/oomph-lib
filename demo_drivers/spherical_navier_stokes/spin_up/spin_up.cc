@@ -61,7 +61,7 @@ namespace Global_Physical_Variables
 namespace Boundary_Items
 {
   // Provide a scalar value for the azimuthal velocity
-  void boundary_velocity(double &time, const Vector<double> &x, double &u)
+  void boundary_velocity(double& time, const Vector<double>& x, double& u)
   {
     // Spin-up with a "fast" exponential forcing
     u = x[0] * sin(x[1]) * (1.0 - std::exp(-100 * time));
@@ -87,12 +87,12 @@ public:
   ~SphericalSpinUpProblem();
 
   /// Fix pressure in element e at pressure dof pdof and set to pvalue
-  void fix_pressure(const unsigned &e,
-                    const unsigned &pdof,
-                    const double &pvalue)
+  void fix_pressure(const unsigned& e,
+                    const unsigned& pdof,
+                    const double& pvalue)
   {
     // Cast to full element type and fix the pressure at that element
-    dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e))
+    dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))
       ->fix_pressure(pdof, pvalue);
   } // end of fix_pressure
 
@@ -107,21 +107,21 @@ public:
   void actions_before_implicit_timestep();
 
   // Access function for the specific mesh
-  SimpleRectangularQuadMesh<ELEMENT> *mesh_pt()
+  SimpleRectangularQuadMesh<ELEMENT>* mesh_pt()
   {
     // Upcast from pointer to the Mesh base class to the specific
     // element type that we're using here.
-    return dynamic_cast<SimpleRectangularQuadMesh<ELEMENT> *>(
+    return dynamic_cast<SimpleRectangularQuadMesh<ELEMENT>*>(
       Problem::mesh_pt());
   }
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info, std::ofstream &);
+  void doc_solution(DocInfo& doc_info, std::ofstream&);
 
   /// Perform a timestepping study
-  void timestep(const double &dt,
-                const unsigned &nstep,
-                const string &output_dir);
+  void timestep(const double& dt,
+                const unsigned& nstep,
+                const string& output_dir);
 
 }; // end_of_problem_class
 
@@ -225,7 +225,7 @@ SphericalSpinUpProblem<ELEMENT>::SphericalSpinUpProblem()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -262,7 +262,7 @@ void SphericalSpinUpProblem<ELEMENT>::actions_before_implicit_timestep()
   unsigned num_nod = mesh_pt()->nboundary_node(ibound);
   for (unsigned inod = 0; inod < num_nod; inod++)
   {
-    Node *nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
+    Node* nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
     nod_pt->set_value(1, 0);
     nod_pt->set_value(2, 0);
   }
@@ -274,7 +274,7 @@ void SphericalSpinUpProblem<ELEMENT>::actions_before_implicit_timestep()
   num_nod = mesh_pt()->nboundary_node(ibound);
   for (unsigned inod = 0; inod < num_nod; inod++)
   {
-    Node *nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
+    Node* nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
     double u;
 
     Vector<double> x(2);
@@ -295,7 +295,7 @@ void SphericalSpinUpProblem<ELEMENT>::actions_before_implicit_timestep()
   num_nod = mesh_pt()->nboundary_node(ibound);
   for (unsigned inod = 0; inod < num_nod; inod++)
   {
-    Node *nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
+    Node* nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
 
     nod_pt->set_value(1, 0);
     nod_pt->set_value(2, 0);
@@ -308,7 +308,7 @@ void SphericalSpinUpProblem<ELEMENT>::actions_before_implicit_timestep()
   num_nod = mesh_pt()->nboundary_node(ibound);
   for (unsigned inod = 0; inod < num_nod; inod++)
   {
-    Node *nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
+    Node* nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
 
     nod_pt->set_value(0, 0);
     nod_pt->set_value(1, 0);
@@ -331,8 +331,8 @@ SphericalSpinUpProblem<ELEMENT>::~SphericalSpinUpProblem()
 /// Document the solution
 //========================================================================
 template<class ELEMENT>
-void SphericalSpinUpProblem<ELEMENT>::doc_solution(DocInfo &doc_info,
-                                                   std::ofstream &)
+void SphericalSpinUpProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
+                                                   std::ofstream&)
 {
   ofstream some_file;
   char filename[100];
@@ -361,9 +361,9 @@ void SphericalSpinUpProblem<ELEMENT>::doc_solution(DocInfo &doc_info,
 
 /// Timestep the problem with a given (fixed) timestep dt for nstep steps
 template<class ELEMENT>
-void SphericalSpinUpProblem<ELEMENT>::timestep(const double &dt,
-                                               const unsigned &nstep,
-                                               const string &output_dir)
+void SphericalSpinUpProblem<ELEMENT>::timestep(const double& dt,
+                                               const unsigned& nstep,
+                                               const string& output_dir)
 {
   // Set up doc info
   // ---------------
@@ -404,9 +404,9 @@ void SphericalSpinUpProblem<ELEMENT>::timestep(const double &dt,
   doc_info.number()++;
 
   // Store nodes for output
-  Node *nod_pt = this->mesh_pt()->finite_element_pt(205)->node_pt(0);
-  Node *nod2_pt = this->mesh_pt()->finite_element_pt(210)->node_pt(0);
-  Node *nod3_pt = this->mesh_pt()->finite_element_pt(215)->node_pt(0);
+  Node* nod_pt = this->mesh_pt()->finite_element_pt(205)->node_pt(0);
+  Node* nod2_pt = this->mesh_pt()->finite_element_pt(210)->node_pt(0);
+  Node* nod3_pt = this->mesh_pt()->finite_element_pt(215)->node_pt(0);
 
   // Timestepping loop
   for (unsigned istep = 0; istep < nstep; istep++)

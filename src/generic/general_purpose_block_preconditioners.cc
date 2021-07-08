@@ -85,7 +85,7 @@ namespace oomph
       // Get the blocks. We have to use new because you can't have containers
       // of matrices because the copy constructor is buggy (so we create a
       // container of pointers instead). ??ds
-      Vector<CRDoubleMatrix *> block_diagonal_matrix_pt(nblock_types, 0);
+      Vector<CRDoubleMatrix*> block_diagonal_matrix_pt(nblock_types, 0);
       for (unsigned i = 0; i < nblock_types; i++)
       {
         block_diagonal_matrix_pt[i] = new CRDoubleMatrix;
@@ -138,7 +138,7 @@ namespace oomph
   //=============================================================================
   template<typename MATRIX>
   void BlockDiagonalPreconditioner<MATRIX>::preconditioner_solve(
-    const DoubleVector &r, DoubleVector &z)
+    const DoubleVector& r, DoubleVector& z)
   {
     // Cache umber of block types
     unsigned n_block = this->nblock_types();
@@ -266,7 +266,7 @@ namespace oomph
   //=============================================================================
   template<typename MATRIX>
   void BlockTriangularPreconditioner<MATRIX>::preconditioner_solve(
-    const DoubleVector &r, DoubleVector &z)
+    const DoubleVector& r, DoubleVector& z)
   {
     // Cache number of block types
     unsigned n_block = this->nblock_types();
@@ -299,7 +299,7 @@ namespace oomph
     for (int i = start; i != end; i += step)
     {
       // ??ds ugly, fix this?
-      if (dynamic_cast<BlockPreconditioner<CRDoubleMatrix> *>(
+      if (dynamic_cast<BlockPreconditioner<CRDoubleMatrix>*>(
             this->Subsidiary_preconditioner_pt[i]) == 0)
       {
         // solve on the block
@@ -400,7 +400,7 @@ namespace oomph
   //=============================================================================
   template<typename MATRIX>
   void ExactBlockPreconditioner<MATRIX>::preconditioner_solve(
-    const DoubleVector &r, DoubleVector &z)
+    const DoubleVector& r, DoubleVector& z)
   {
     // get  the block ordered components of the r vector for this preconditioner
     DoubleVector block_order_r;

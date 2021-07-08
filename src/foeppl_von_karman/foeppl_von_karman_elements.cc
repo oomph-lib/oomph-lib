@@ -52,7 +52,7 @@ namespace oomph
   /// Pure version without hanging nodes
   //======================================================================
   void FoepplvonKarmanEquations::fill_in_contribution_to_residuals(
-    Vector<double> &residuals)
+    Vector<double>& residuals)
   {
     // Find out how many nodes there are
     const unsigned n_node = nnode();
@@ -372,10 +372,10 @@ namespace oomph
   //======================================================================
   /// Compute in-plane stresses
   //======================================================================
-  void FoepplvonKarmanEquations::interpolated_stress(const Vector<double> &s,
-                                                     double &sigma_xx,
-                                                     double &sigma_yy,
-                                                     double &sigma_xy)
+  void FoepplvonKarmanEquations::interpolated_stress(const Vector<double>& s,
+                                                     double& sigma_xx,
+                                                     double& sigma_yy,
+                                                     double& sigma_xy)
   {
     // No in plane stresses if linear bending
     if (Linear_bending_model)
@@ -423,8 +423,8 @@ namespace oomph
   ///
   /// nplot points in each coordinate direction
   //======================================================================
-  void FoepplvonKarmanEquations::output(std::ostream &outfile,
-                                        const unsigned &nplot)
+  void FoepplvonKarmanEquations::output(std::ostream& outfile,
+                                        const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(2);
@@ -457,7 +457,7 @@ namespace oomph
   ///
   /// nplot points in each coordinate direction
   //======================================================================
-  void FoepplvonKarmanEquations::output(FILE *file_pt, const unsigned &nplot)
+  void FoepplvonKarmanEquations::output(FILE* file_pt, const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(2);
@@ -492,8 +492,8 @@ namespace oomph
   ///   x,y,w_exact
   //======================================================================
   void FoepplvonKarmanEquations::output_fct(
-    std::ostream &outfile,
-    const unsigned &nplot,
+    std::ostream& outfile,
+    const unsigned& nplot,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
   {
     // Vector of local coordinates
@@ -542,10 +542,10 @@ namespace oomph
   ///
   //======================================================================
   void FoepplvonKarmanEquations::compute_error(
-    std::ostream &outfile,
+    std::ostream& outfile,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-    double &error,
-    double &norm)
+    double& error,
+    double& norm)
   {
     // Initialise
     error = 0.0;

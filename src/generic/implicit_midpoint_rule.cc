@@ -40,7 +40,7 @@ namespace oomph
 {
   /// \short This function advances the Data's time history so that
   /// we can move on to the next timestep
-  void IMRBase::shift_time_values(Data *const &data_pt)
+  void IMRBase::shift_time_values(Data* const& data_pt)
   {
     // Loop over the values, set previous values to the previous value, if
     // not a copy.
@@ -58,7 +58,7 @@ namespace oomph
 
   ///\short This function advances the time history of the positions
   /// at a node. ??ds Untested: I have no problems with moving nodes.
-  void IMRBase::shift_time_positions(Node *const &node_pt)
+  void IMRBase::shift_time_positions(Node* const& node_pt)
   {
     // Find the number of coordinates
     unsigned n_dim = node_pt->ndim();
@@ -111,7 +111,7 @@ namespace oomph
 
   /// Dummy - just check that the values that
   /// problem::calculate_predicted_values() has been called right.
-  void IMRBase::calculate_predicted_values(Data *const &data_pt)
+  void IMRBase::calculate_predicted_values(Data* const& data_pt)
   {
     if (adaptive_flag())
     {
@@ -121,8 +121,8 @@ namespace oomph
     }
   }
 
-  double IMRBase::temporal_error_in_value(Data *const &data_pt,
-                                          const unsigned &i)
+  double IMRBase::temporal_error_in_value(Data* const& data_pt,
+                                          const unsigned& i)
   {
     if (adaptive_flag())
     {
@@ -139,7 +139,7 @@ namespace oomph
   }
 
   /// Half the timestep before starting solve
-  void IMRByBDF::actions_before_timestep(Problem *problem_pt)
+  void IMRByBDF::actions_before_timestep(Problem* problem_pt)
   {
     // Check that this is the only time stepper
 #ifdef PARANOID
@@ -184,7 +184,7 @@ namespace oomph
 
   /// Local (not exported in header) helper function to handle midpoint
   /// update on a data object.
-  void post_midpoint_update(Data *dat_pt, const bool &update_pinned)
+  void post_midpoint_update(Data* dat_pt, const bool& update_pinned)
   {
     if (!dat_pt->is_a_copy())
     {
@@ -202,7 +202,7 @@ namespace oomph
 
   /// Take problem from t={n+1/2} to t=n+1 by algebraic update and restore
   /// time step.
-  void IMRByBDF::actions_after_timestep(Problem *problem_pt)
+  void IMRByBDF::actions_after_timestep(Problem* problem_pt)
   {
 #ifdef PARANOID
     // Do it as dofs too to compare
@@ -226,7 +226,7 @@ namespace oomph
     // Next element internal data
     for (unsigned i = 0, ni = problem_pt->mesh_pt()->nelement(); i < ni; i++)
     {
-      GeneralisedElement *ele_pt = problem_pt->mesh_pt()->element_pt(i);
+      GeneralisedElement* ele_pt = problem_pt->mesh_pt()->element_pt(i);
       for (unsigned j = 0, nj = ele_pt->ninternal_data(); j < nj; j++)
       {
         post_midpoint_update(ele_pt->internal_data_pt(j), Update_pinned);

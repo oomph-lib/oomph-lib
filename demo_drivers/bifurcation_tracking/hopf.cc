@@ -51,15 +51,15 @@ using namespace oomph;
 //========================================================================
 namespace Global_Physical_Variables
 {
-  double *Lambda_pt;
-  double *Mu_pt;
+  double* Lambda_pt;
+  double* Mu_pt;
 } // namespace Global_Physical_Variables
 
 class PredatorPreyElement : public GeneralisedElement
 {
-  double *Lambda_pt;
+  double* Lambda_pt;
 
-  double *Mu_pt;
+  double* Mu_pt;
 
   unsigned Internal_index;
 
@@ -70,29 +70,29 @@ public:
   }
 
   // Interface to the parameter
-  const double &lambda() const
+  const double& lambda() const
   {
     return *Lambda_pt;
   }
 
-  const double &mu() const
+  const double& mu() const
   {
     return *Mu_pt;
   }
 
   // Set the pointer
-  double *&lambda_pt()
+  double*& lambda_pt()
   {
     return Lambda_pt;
   }
 
-  double *&mu_pt()
+  double*& mu_pt()
   {
     return Mu_pt;
   }
 
   /// Add the element's contribution to its residual vector (wrapper)
-  void fill_in_contribution_to_residuals(Vector<double> &residuals)
+  void fill_in_contribution_to_residuals(Vector<double>& residuals)
   {
     // Call the generic residuals function with flag set to 0
     // using a dummy matrix arguments
@@ -104,8 +104,8 @@ public:
 
   /// Add the element's contribution to its residual vector and
   /// element Jacobian matrix (wrapper)
-  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                        DenseMatrix<double> &jacobian)
+  void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                        DenseMatrix<double>& jacobian)
   {
     // Call the generic routine with the flag set to 1
     fill_in_generic_residual_contribution(
@@ -115,9 +115,9 @@ public:
   /// Add the element's contribution to its residuals vector,
   /// jacobian matrix and mass matrix
   void fill_in_contribution_to_jacobian_and_mass_matrix(
-    Vector<double> &residuals,
-    DenseMatrix<double> &jacobian,
-    DenseMatrix<double> &mass_matrix)
+    Vector<double>& residuals,
+    DenseMatrix<double>& jacobian,
+    DenseMatrix<double>& mass_matrix)
   {
     // Call the generic routine with the flag set to 2
     fill_in_generic_residual_contribution(residuals, jacobian, mass_matrix, 2);
@@ -125,9 +125,9 @@ public:
 
   /// \short Calculate the elemental contributions to the global
   /// residual vector for the weak form of the Poisson equation
-  void fill_in_generic_residual_contribution(Vector<double> &residuals,
-                                             DenseMatrix<double> &jacobian,
-                                             DenseMatrix<double> &mass_matrix,
+  void fill_in_generic_residual_contribution(Vector<double>& residuals,
+                                             DenseMatrix<double>& jacobian,
+                                             DenseMatrix<double>& mass_matrix,
                                              unsigned flag)
   {
     // Set the mass matrix
@@ -194,7 +194,7 @@ public:
   } // End of function
 
   // Define an output function for the element
-  void output(ostream &output)
+  void output(ostream& output)
   {
     for (unsigned n = 0; n < 3; n++)
     {
@@ -233,7 +233,7 @@ PredPreyProblem<ELEMENT>::PredPreyProblem()
   Problem::mesh_pt() = new Mesh;
 
   // Single element
-  ELEMENT *elem_pt = new ELEMENT;
+  ELEMENT* elem_pt = new ELEMENT;
   mesh_pt()->add_element_pt(elem_pt);
 
   // Assign the physical parameters

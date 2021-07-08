@@ -126,10 +126,10 @@ namespace oomph
     extern void spawn_errors_from_uncaught_errors();
 
     /// Stream to output error messages
-    extern std::ostream *Error_message_stream_pt;
+    extern std::ostream* Error_message_stream_pt;
 
     /// String stream that records the error message
-    extern std::stringstream *Exception_stringstream_pt;
+    extern std::stringstream* Exception_stringstream_pt;
 
   } // namespace TerminateHelper
 
@@ -185,22 +185,22 @@ namespace oomph
     /// will be the string "WARNING" or "ERROR" and the message is written to
     /// the exception_stream, with a specified output_width. Optionally
     /// provide a traceback of the function calls.
-    OomphLibException(const std::string &error_description,
-                      const std::string &function_name,
-                      const char *location,
-                      const std::string &exception_type,
-                      std::ostream &exception_stream,
-                      const unsigned &output_width,
+    OomphLibException(const std::string& error_description,
+                      const std::string& function_name,
+                      const char* location,
+                      const std::string& exception_type,
+                      std::ostream& exception_stream,
+                      const unsigned& output_width,
                       bool list_trace_back);
 
     /// The destructor cannot throw an exception (C++ STL standard)
     ~OomphLibException() throw();
 
     /// Exception stream to which we write message in destructor
-    std::ostream *Exception_stream_pt;
+    std::ostream* Exception_stream_pt;
 
     /// String stream that records the error message
-    std::stringstream *Exception_stringstream_pt;
+    std::stringstream* Exception_stringstream_pt;
 
     /// \short Boolean to suppress issuing of the error message in destructor
     /// (useful if error is caught successfully!)
@@ -215,7 +215,7 @@ namespace oomph
   class OomphLibError : public OomphLibException
   {
     /// Output stream that is used to write the errors
-    static std::ostream *Stream_pt;
+    static std::ostream* Stream_pt;
 
     /// Width in characters of the output report
     static unsigned Output_width;
@@ -224,9 +224,9 @@ namespace oomph
     ///\short Constructor requires the error description and the function
     /// in which the error occured and the location provided by the
     /// OOMPH_EXCEPTION_LOCATION macro
-    OomphLibError(const std::string &error_description,
-                  const std::string &function_name,
-                  const char *location) :
+    OomphLibError(const std::string& error_description,
+                  const std::string& function_name,
+                  const char* location) :
       OomphLibException(error_description,
                         function_name,
                         location,
@@ -239,14 +239,14 @@ namespace oomph
 
     /// \short Static member function used to specify the error stream,
     /// which must be passed as a pointer because streams cannot be copied.
-    static inline void set_stream_pt(std::ostream *const &stream_pt)
+    static inline void set_stream_pt(std::ostream* const& stream_pt)
     {
       Stream_pt = stream_pt;
     }
 
     /// \short Static member function used to specify the width (in characters)
     /// of the error stream
-    static inline void set_output_width(const unsigned &output_width)
+    static inline void set_output_width(const unsigned& output_width)
     {
       Output_width = output_width;
     }
@@ -260,7 +260,7 @@ namespace oomph
   class OomphLibWarning : public OomphLibException
   {
     /// Output stream that is used to write the errors
-    static std::ostream *Stream_pt;
+    static std::ostream* Stream_pt;
 
     /// Width of output
     static unsigned Output_width;
@@ -268,9 +268,9 @@ namespace oomph
   public:
     ///\short Constructor requires the warning description and the function
     /// in which the warning occurred.
-    OomphLibWarning(const std::string &warning_description,
-                    const std::string &function_name,
-                    const char *location) :
+    OomphLibWarning(const std::string& warning_description,
+                    const std::string& function_name,
+                    const char* location) :
       OomphLibException(warning_description,
                         function_name,
                         location,
@@ -283,14 +283,14 @@ namespace oomph
 
     /// \short Static member function used to specify the error stream,
     /// which must be passed as a pointer because streams cannot be copied.
-    static inline void set_stream_pt(std::ostream *const &stream_pt)
+    static inline void set_stream_pt(std::ostream* const& stream_pt)
     {
       Stream_pt = stream_pt;
     }
 
     /// \short Static member function used to specify the width (in characters)
     /// of the error stream
-    static inline void set_output_width(const unsigned &output_width)
+    static inline void set_output_width(const unsigned& output_width)
     {
       Output_width = output_width;
     }
@@ -336,7 +336,7 @@ namespace oomph
     /// \short Function that will be called before output from an
     /// OomphOutput object. It returns a bool (true in this default
     /// implementation) to indicate that output should be continued.
-    virtual bool operator()(std::ostream &stream)
+    virtual bool operator()(std::ostream& stream)
     {
       return true;
     }
@@ -358,7 +358,7 @@ namespace oomph
   namespace Global_output_stream
   {
     /// Output stream
-    extern std::ofstream *Outfile;
+    extern std::ofstream* Outfile;
 
   } // namespace Global_output_stream
 
@@ -390,7 +390,7 @@ namespace oomph
   {
     /// \short Return the i-th string or "" if the relevant string hasn't
     /// been defined
-    extern std::string string(const unsigned &i);
+    extern std::string string(const unsigned& i);
 
     /// \short Storage for strings that may be used for global annotations.
     /// This is global data and you use it at your own risk!
@@ -410,10 +410,10 @@ namespace oomph
   {
   private:
     /// Pointer to the output stream -- defaults to std::cout
-    std::ostream *Stream_pt;
+    std::ostream* Stream_pt;
 
     /// Pointer to the output modifier object -- defaults to no modification
-    OutputModifier *Output_modifier_pt;
+    OutputModifier* Output_modifier_pt;
 
   public:
     ///\short Set default values for the output stream (cout)
@@ -427,7 +427,7 @@ namespace oomph
     /// by Stream_pt and calling the function defined by the object addressed by
     /// Output_modifier_pt
     template<class _Tp>
-    std::ostream &operator<<(_Tp argument)
+    std::ostream& operator<<(_Tp argument)
     {
       // If the Output_modifer function returns true
       // echo the argument to the stream and return the (vanilla) stream
@@ -441,19 +441,19 @@ namespace oomph
     }
 
     /// Access function for the stream pointer
-    std::ostream *&stream_pt()
+    std::ostream*& stream_pt()
     {
       return Stream_pt;
     }
 
     /// Overload insertor to handle stream modifiers
-    std::ostream &operator<<(std::ostream &(*f)(std::ostream &))
+    std::ostream& operator<<(std::ostream& (*f)(std::ostream&))
     {
       return f(*Stream_pt);
     }
 
     /// Access function for the output modifier pointer
-    OutputModifier *&output_modifier_pt()
+    OutputModifier*& output_modifier_pt()
     {
       return Output_modifier_pt;
     }

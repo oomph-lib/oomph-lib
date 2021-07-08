@@ -60,13 +60,13 @@ class MyIntegral : public Integral
 public:
   /// \short Constructor: Specify number of uniformly spaced sample points in
   /// unit interval
-  MyIntegral(const unsigned &n_knot)
+  MyIntegral(const unsigned& n_knot)
   {
     N_knot = n_knot;
   }
 
   /// Broken copy constructor
-  MyIntegral(const MyIntegral &dummy)
+  MyIntegral(const MyIntegral& dummy)
   {
     BrokenCopy::broken_copy("MyIntegral");
   }
@@ -78,14 +78,14 @@ public:
   }
 
   /// \short Return coordinate s[j] (j=0) of integration point i --
-  double knot(const unsigned &i, const unsigned &j) const
+  double knot(const unsigned& i, const unsigned& j) const
   {
     double dx = 1.0 / double(N_knot);
     return ((0.5 + double(i))) * dx;
   }
 
   /// Return weight of integration point i
-  double weight(const unsigned &i) const
+  double weight(const unsigned& i) const
   {
     // return 2.0/double(N_knot);
     return 1.0 / double(N_knot);
@@ -151,7 +151,7 @@ namespace GlobalParameters
   double S1 = 1.0;
 
   /// Source function
-  void get_source(const double &time, const Vector<double> &x, double &source)
+  void get_source(const double& time, const Vector<double>& x, double& source)
   {
     double r = sqrt(x[0] * x[0] + x[1] * x[1]);
     if (r > 0.5 * (Radius_inner + Radius_innermost))
@@ -165,9 +165,9 @@ namespace GlobalParameters
   }
 
   /// Exact solution as a Vector
-  void get_exact_u(const double &time,
-                   const Vector<double> &x,
-                   Vector<double> &u)
+  void get_exact_u(const double& time,
+                   const Vector<double>& x,
+                   Vector<double>& u)
   {
     double r = sqrt(x[0] * x[0] + x[1] * x[1]);
 
@@ -364,14 +364,14 @@ public:
 
   /// \short Doc the solution. DocInfo object stores flags/labels for where the
   /// output gets written to
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 private:
   /// Pointer to the "bulk" mesh
-  TriangleMesh<ELEMENT> *Bulk_mesh_pt;
+  TriangleMesh<ELEMENT>* Bulk_mesh_pt;
 
   /// Pointer to mesh of radiative flux elements
-  Mesh *Unsteady_heat_flux_mesh_pt;
+  Mesh* Unsteady_heat_flux_mesh_pt;
 
   /// Trace file
   ofstream Trace_file;
@@ -401,23 +401,23 @@ StefanBoltzmannProblem<ELEMENT>::StefanBoltzmannProblem()
   double a = GlobalParameters::Radius_outer;
   double x_c = 0.0;
   double y_c = 0.0;
-  Circle *outer_circle_pt = new Circle(x_c, y_c, a);
+  Circle* outer_circle_pt = new Circle(x_c, y_c, a);
 
   // Create circle representing inner boundary
   a = GlobalParameters::Radius_inner;
   x_c = 0.0;
   y_c = 0.0;
-  Circle *inner_circle_pt = new Circle(x_c, y_c, a);
+  Circle* inner_circle_pt = new Circle(x_c, y_c, a);
 
   // Create circle representing boundary of central region
   a = GlobalParameters::Radius_innermost;
-  Circle *central_circle_pt = new Circle(x_c, y_c, a);
+  Circle* central_circle_pt = new Circle(x_c, y_c, a);
 
   // Outer boundary
   //---------------
 
   // Provide storage for pointers to the two parts of the curvilinear boundary
-  Vector<TriangleMeshCurveSection *> outer_curvilinear_boundary_pt(2);
+  Vector<TriangleMeshCurveSection*> outer_curvilinear_boundary_pt(2);
 
   // First bit
   double zeta_start = 0.0;
@@ -435,12 +435,12 @@ StefanBoltzmannProblem<ELEMENT>::StefanBoltzmannProblem()
 
   // Combine to curvilinear boundary and define the
   // outer boundary
-  TriangleMeshClosedCurve *outer_boundary_pt =
+  TriangleMeshClosedCurve* outer_boundary_pt =
     new TriangleMeshClosedCurve(outer_curvilinear_boundary_pt);
 
   // Inner circular boundaries
   //--------------------------
-  Vector<TriangleMeshCurveSection *> inner_boundary_line_pt(2);
+  Vector<TriangleMeshCurveSection*> inner_boundary_line_pt(2);
 
   // The intrinsic coordinates for the beginning and end of the curve
   double s_start = 0.0;
@@ -460,7 +460,7 @@ StefanBoltzmannProblem<ELEMENT>::StefanBoltzmannProblem()
     inner_circle_pt, s_start, s_end, n_inner, boundary_id);
 
   // Combine to hole
-  Vector<TriangleMeshClosedCurve *> internal_closed_curve_pt;
+  Vector<TriangleMeshClosedCurve*> internal_closed_curve_pt;
   Vector<double> hole_coords(2);
   hole_coords[0] =
     0.5 * (GlobalParameters::Radius_inner + GlobalParameters::Radius_innermost);
@@ -470,7 +470,7 @@ StefanBoltzmannProblem<ELEMENT>::StefanBoltzmannProblem()
 
   // Boundary of innermost region
   //------------------------------
-  Vector<TriangleMeshCurveSection *> central_boundary_line_pt(2);
+  Vector<TriangleMeshCurveSection*> central_boundary_line_pt(2);
 
   // The intrinsic coordinates for the beginning and end of the curve
   s_start = 0.0;
@@ -526,8 +526,8 @@ StefanBoltzmannProblem<ELEMENT>::StefanBoltzmannProblem()
   unsigned nel = Bulk_mesh_pt->nregion_element(r);
   for (unsigned e = 0; e < nel; e++)
   {
-    ELEMENT *el_pt =
-      dynamic_cast<ELEMENT *>(Bulk_mesh_pt->region_element_pt(r, e));
+    ELEMENT* el_pt =
+      dynamic_cast<ELEMENT*>(Bulk_mesh_pt->region_element_pt(r, e));
 
     // Thermal inertia
     el_pt->alpha_pt() = &GlobalParameters::Alpha0;
@@ -544,8 +544,8 @@ StefanBoltzmannProblem<ELEMENT>::StefanBoltzmannProblem()
   nel = Bulk_mesh_pt->nregion_element(r);
   for (unsigned e = 0; e < nel; e++)
   {
-    ELEMENT *el_pt =
-      dynamic_cast<ELEMENT *>(Bulk_mesh_pt->region_element_pt(r, e));
+    ELEMENT* el_pt =
+      dynamic_cast<ELEMENT*>(Bulk_mesh_pt->region_element_pt(r, e));
 
     // Thermal inertia
     el_pt->alpha_pt() = &GlobalParameters::Alpha1;
@@ -573,7 +573,7 @@ StefanBoltzmannProblem<ELEMENT>::StefanBoltzmannProblem()
   Unsteady_heat_flux_mesh_pt = new Mesh;
 
   // Face elements on potentially sun-exposed boundaries
-  Vector<FiniteElement *> shielding_face_element_pt;
+  Vector<FiniteElement*> shielding_face_element_pt;
 
   // Boundaries that participate in radiative heat exchange
   std::set<unsigned> bc_set;
@@ -593,14 +593,14 @@ StefanBoltzmannProblem<ELEMENT>::StefanBoltzmannProblem()
     for (unsigned e = 0; e < n_element; e++)
     {
       // Get pointer to the bulk element that is adjacent to boundary b
-      ELEMENT *bulk_elem_pt =
-        dynamic_cast<ELEMENT *>(Bulk_mesh_pt->boundary_element_pt(b, e));
+      ELEMENT* bulk_elem_pt =
+        dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(b, e));
 
       // Find the index of the face of element e along boundary b
       int face_index = Bulk_mesh_pt->face_index_at_boundary(b, e);
 
       // Create flux element
-      StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT> *el_pt =
+      StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT>* el_pt =
         new StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT>(bulk_elem_pt,
                                                             face_index);
 
@@ -655,7 +655,7 @@ StefanBoltzmannProblem<ELEMENT>::StefanBoltzmannProblem()
   unsigned nnod = Bulk_mesh_pt->nnode();
   for (unsigned j = 0; j < nnod; j++)
   {
-    Node *nod_pt = Bulk_mesh_pt->node_pt(j);
+    Node* nod_pt = Bulk_mesh_pt->node_pt(j);
     Vector<double> x(2);
     x[0] = nod_pt->x(0);
     x[1] = nod_pt->x(1);
@@ -671,7 +671,7 @@ StefanBoltzmannProblem<ELEMENT>::StefanBoltzmannProblem()
     unsigned n_node = Bulk_mesh_pt->nboundary_node(b);
     for (unsigned n = 0; n < n_node; n++)
     {
-      Node *nod_pt = Bulk_mesh_pt->boundary_node_pt(b, n);
+      Node* nod_pt = Bulk_mesh_pt->boundary_node_pt(b, n);
       nod_pt->pin(0);
       // oomph_info << "Pinning at r="
       //            << sqrt(pow(nod_pt->x(0),2)+pow(nod_pt->x(1),2))
@@ -688,7 +688,7 @@ StefanBoltzmannProblem<ELEMENT>::StefanBoltzmannProblem()
 /// Doc the solution: doc_info contains labels/output directory etc.
 //========================================================================
 template<class ELEMENT>
-void StefanBoltzmannProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void StefanBoltzmannProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file, some_file2;
   char filename[100];
@@ -726,7 +726,7 @@ void StefanBoltzmannProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
   unsigned nel = Unsteady_heat_flux_mesh_pt->nelement();
   for (unsigned e = 0; e < nel; e++)
   {
-    dynamic_cast<StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT> *>(
+    dynamic_cast<StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT>*>(
       Unsteady_heat_flux_mesh_pt->element_pt(e))
       ->output_stefan_boltzmann_radiation_rays(some_file);
   }
@@ -747,8 +747,8 @@ void StefanBoltzmannProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
               doc_info.number(),
               count);
       some_file.open(filename);
-      StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT> *el_pt =
-        dynamic_cast<StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT> *>(
+      StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT>* el_pt =
+        dynamic_cast<StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT>*>(
           Unsteady_heat_flux_mesh_pt->element_pt(e));
       unsigned nintpt = el_pt->integral_pt()->nweight();
       for (unsigned ipt = 0; ipt < nintpt; ipt++)
@@ -805,7 +805,7 @@ void StefanBoltzmannProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
 //==========start_of_main=================================================
 /// Solve 2D problem
 //========================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

@@ -65,13 +65,13 @@ namespace TanhSolnForMultiPoisson
   double Beta = 1.0;
 
   /// Scalar solution
-  double scalar_soln(const Vector<double> &x)
+  double scalar_soln(const Vector<double>& x)
   {
     return tanh(1.0 - Alpha * (TanPhi * x[0] - x[1]));
   }
 
   /// Scalar source
-  double scalar_source(const Vector<double> &x)
+  double scalar_source(const Vector<double>& x)
   {
     return 2.0 * tanh(-1.0 + Alpha * (TanPhi * x[0] - x[1])) *
              (1.0 - pow(tanh(-1.0 + Alpha * (TanPhi * x[0] - x[1])), 2.0)) *
@@ -82,7 +82,7 @@ namespace TanhSolnForMultiPoisson
   }
 
   /// Exact solution as a Vector
-  void get_exact_u(const Vector<double> &x, Vector<double> &u)
+  void get_exact_u(const Vector<double>& x, Vector<double>& u)
   {
     double u_scalar = scalar_soln(x);
     for (unsigned i = 0; i < N_FIELD; i++)
@@ -92,7 +92,7 @@ namespace TanhSolnForMultiPoisson
   }
 
   /// Source function required to make the solution above an exact solution
-  void source_function(const Vector<double> &x, Vector<double> &source)
+  void source_function(const Vector<double>& x, Vector<double>& source)
   {
     double scalar_f = scalar_source(x);
     double scalar_u = scalar_soln(x);
@@ -133,7 +133,7 @@ public:
 
   /// \short Doc the solution. DocInfo object stores flags/labels for where the
   /// output gets written to
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 }; // end of problem class
 
@@ -186,7 +186,7 @@ MultiPoissonProblem<ELEMENT>::MultiPoissonProblem()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the source function pointer
     el_pt->source_fct_pt() = &TanhSolnForMultiPoisson::source_function;
@@ -196,7 +196,7 @@ MultiPoissonProblem<ELEMENT>::MultiPoissonProblem()
   }
 
   // Create a Trilinos Solver
-  TrilinosAztecOOSolver *solver_pt = new TrilinosAztecOOSolver;
+  TrilinosAztecOOSolver* solver_pt = new TrilinosAztecOOSolver;
   // // Create oomph-lib iterative linear solver
   // GMRES<CRDoubleMatrix>* solver_pt=new GMRES<CRDoubleMatrix>;
 
@@ -211,7 +211,7 @@ MultiPoissonProblem<ELEMENT>::MultiPoissonProblem()
     oomph_info << "Using simple block triangular preconditioner\n";
 
     // Create preconditioner
-    Diagonal<CRDoubleMatrix> *block_prec_pt = new Diagonal<CRDoubleMatrix>;
+    Diagonal<CRDoubleMatrix>* block_prec_pt = new Diagonal<CRDoubleMatrix>;
 
     // Set mesh
     block_prec_pt->set_multi_poisson_mesh(mesh_pt());
@@ -225,7 +225,7 @@ MultiPoissonProblem<ELEMENT>::MultiPoissonProblem()
     oomph_info << "Using upper triangular preconditioner\n";
 
     // Create preconditioner
-    UpperTriangular<CRDoubleMatrix> *block_prec_pt =
+    UpperTriangular<CRDoubleMatrix>* block_prec_pt =
       new UpperTriangular<CRDoubleMatrix>;
 
     // Set mesh
@@ -239,7 +239,7 @@ MultiPoissonProblem<ELEMENT>::MultiPoissonProblem()
     oomph_info << "Using 2+3 block diagonal preconditioner\n";
 
     // Create preconditioner
-    TwoPlusThree<CRDoubleMatrix> *block_prec_pt =
+    TwoPlusThree<CRDoubleMatrix>* block_prec_pt =
       new TwoPlusThree<CRDoubleMatrix>;
 
     // Set mesh
@@ -254,7 +254,7 @@ MultiPoissonProblem<ELEMENT>::MultiPoissonProblem()
     oomph_info << "Using 2+3 upper triangular preconditioner\n";
 
     // Create preconditioner
-    TwoPlusThreeUpperTriangular<CRDoubleMatrix> *block_prec_pt =
+    TwoPlusThreeUpperTriangular<CRDoubleMatrix>* block_prec_pt =
       new TwoPlusThreeUpperTriangular<CRDoubleMatrix>;
 
     // Set mesh
@@ -270,8 +270,8 @@ MultiPoissonProblem<ELEMENT>::MultiPoissonProblem()
                << " preconditioner\n";
 
     // Create preconditioner
-    TwoPlusThreeUpperTriangularWithOneLevelSubsidiary<CRDoubleMatrix>
-      *block_prec_pt =
+    TwoPlusThreeUpperTriangularWithOneLevelSubsidiary<CRDoubleMatrix>*
+      block_prec_pt =
         new TwoPlusThreeUpperTriangularWithOneLevelSubsidiary<CRDoubleMatrix>;
 
     // Set mesh
@@ -287,8 +287,8 @@ MultiPoissonProblem<ELEMENT>::MultiPoissonProblem()
                << " subsidiaries.\n";
 
     // Create preconditioner
-    TwoPlusThreeUpperTriangularWithTwoLevelSubsidiary<CRDoubleMatrix>
-      *block_prec_pt =
+    TwoPlusThreeUpperTriangularWithTwoLevelSubsidiary<CRDoubleMatrix>*
+      block_prec_pt =
         new TwoPlusThreeUpperTriangularWithTwoLevelSubsidiary<CRDoubleMatrix>;
 
     // Set mesh
@@ -303,7 +303,7 @@ MultiPoissonProblem<ELEMENT>::MultiPoissonProblem()
     oomph_info << "Using 2+3 block diagonal preconditioner with replacement\n";
 
     // Create preconditioner
-    TwoPlusThreeUpperTriangularWithReplace<CRDoubleMatrix> *block_prec_pt =
+    TwoPlusThreeUpperTriangularWithReplace<CRDoubleMatrix>* block_prec_pt =
       new TwoPlusThreeUpperTriangularWithReplace<CRDoubleMatrix>;
 
     // Set mesh
@@ -319,7 +319,7 @@ MultiPoissonProblem<ELEMENT>::MultiPoissonProblem()
       << "Using 2+2+1 block diagonal preconditioner with coarsening.\n";
 
     // Create preconditioner
-    CoarseTwoPlusTwoPlusOne<CRDoubleMatrix> *block_prec_pt =
+    CoarseTwoPlusTwoPlusOne<CRDoubleMatrix>* block_prec_pt =
       new CoarseTwoPlusTwoPlusOne<CRDoubleMatrix>;
 
     // Set mesh
@@ -335,7 +335,7 @@ MultiPoissonProblem<ELEMENT>::MultiPoissonProblem()
                << "two level coarsening.\n";
 
     // Create preconditioner
-    OnePlusFourWithTwoCoarse<CRDoubleMatrix> *block_prec_pt =
+    OnePlusFourWithTwoCoarse<CRDoubleMatrix>* block_prec_pt =
       new OnePlusFourWithTwoCoarse<CRDoubleMatrix>;
 
     // Set mesh
@@ -347,7 +347,7 @@ MultiPoissonProblem<ELEMENT>::MultiPoissonProblem()
   else
   {
     // Create preconditioner
-    MatrixBasedDiagPreconditioner *prec_pt = new MatrixBasedDiagPreconditioner;
+    MatrixBasedDiagPreconditioner* prec_pt = new MatrixBasedDiagPreconditioner;
 
     // Set preconditioner
     solver_pt->preconditioner_pt() = prec_pt;
@@ -381,7 +381,7 @@ void MultiPoissonProblem<ELEMENT>::actions_before_newton_solve()
     for (unsigned n = 0; n < n_node; n++)
     {
       // Get pointer to node
-      Node *nod_pt = mesh_pt()->boundary_node_pt(i, n);
+      Node* nod_pt = mesh_pt()->boundary_node_pt(i, n);
 
       // Extract nodal coordinates from node:
       Vector<double> x(2);
@@ -405,7 +405,7 @@ void MultiPoissonProblem<ELEMENT>::actions_before_newton_solve()
 /// Doc the solution: doc_info contains labels/output directory etc.
 //========================================================================
 template<class ELEMENT>
-void MultiPoissonProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void MultiPoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -424,7 +424,7 @@ void MultiPoissonProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
   some_file.open(filename);
   some_file
     << "Number of linear solver iterations: "
-    << dynamic_cast<TrilinosAztecOOSolver *>(linear_solver_pt())->iterations()
+    << dynamic_cast<TrilinosAztecOOSolver*>(linear_solver_pt())->iterations()
     << std::endl;
   some_file.close();
 
@@ -472,7 +472,7 @@ void MultiPoissonProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
 //===== start_of_main=====================================================
 /// Driver code for 2D MultiPoisson problem
 //========================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // feenableexcept(FE_INVALID|FE_DIVBYZERO|FE_OVERFLOW|FE_UNDERFLOW);
 

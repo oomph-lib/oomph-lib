@@ -56,7 +56,7 @@ namespace oomph
     /// \short Helper function to create a SuperLu preconditioner (for use as
     /// the default subsididary preconditioner creator in
     /// GeneralPurposeBlockPreconditioners).
-    inline Preconditioner *create_super_lu_preconditioner()
+    inline Preconditioner* create_super_lu_preconditioner()
     {
       return new SuperLUPreconditioner;
     }
@@ -82,7 +82,7 @@ namespace oomph
     /// The function should return a pointer to the required subsidiary
     /// preconditioner generated using new. This preconditioner is responsible
     /// for the destruction of the subsidiary preconditioners.
-    typedef Preconditioner *(*SubsidiaryPreconditionerFctPt)();
+    typedef Preconditioner* (*SubsidiaryPreconditionerFctPt)();
 
     /// constructor
     GeneralPurposeBlockPreconditioner() :
@@ -127,13 +127,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    GeneralPurposeBlockPreconditioner(const GeneralPurposeBlockPreconditioner &)
+    GeneralPurposeBlockPreconditioner(const GeneralPurposeBlockPreconditioner&)
     {
       BrokenCopy::broken_copy("GeneralPurposeBlockPreconditioner");
     }
 
     /// Broken assignment operator
-    void operator=(const GeneralPurposeBlockPreconditioner &)
+    void operator=(const GeneralPurposeBlockPreconditioner&)
     {
       BrokenCopy::broken_assign("GeneralPurposeBlockPreconditioner");
     }
@@ -157,8 +157,8 @@ namespace oomph
     /// the general purpose block preconditioner will use the
     /// Subsidiary_preconditioner_creation_function_pt to create the
     /// preconditioner during setup().
-    void set_subsidiary_preconditioner_pt(Preconditioner *prec,
-                                          const unsigned &i)
+    void set_subsidiary_preconditioner_pt(Preconditioner* prec,
+                                          const unsigned& i)
     {
       // If the vector is currently too small to hold that many
       // preconditioners then expand it and fill with nulls.
@@ -179,13 +179,13 @@ namespace oomph
 
     /// \short Get the subsidiary precondtioner pointer in block i (is
     /// allowed to be null if not yet set).
-    Preconditioner *subsidiary_preconditioner_pt(const unsigned &i) const
+    Preconditioner* subsidiary_preconditioner_pt(const unsigned& i) const
     {
       return Subsidiary_preconditioner_pt[i];
     }
 
     /// \short Specify a DOF to block map
-    void set_dof_to_block_map(Vector<unsigned> &dof_to_block_map)
+    void set_dof_to_block_map(Vector<unsigned>& dof_to_block_map)
     {
       Dof_to_block_map = dof_to_block_map;
     }
@@ -194,8 +194,8 @@ namespace oomph
     /// block preconditioning framework for classifying DOF types. Optional
     /// boolean argument (default: false) allows the mesh to contain multiple
     /// element types.
-    void add_mesh(const Mesh *mesh_pt,
-                  const bool &allow_multiple_element_type_in_mesh = false)
+    void add_mesh(const Mesh* mesh_pt,
+                  const bool& allow_multiple_element_type_in_mesh = false)
     {
 #ifdef PARANOID
       // Check that the mesh pointer is not null.
@@ -259,7 +259,7 @@ namespace oomph
     /// \short Create any subsidiary preconditioners needed. Usually
     /// nprec_needed = nblock_types, except for the ExactBlockPreconditioner
     /// which only requires one preconditioner.
-    void fill_in_subsidiary_preconditioners(const unsigned &nprec_needed)
+    void fill_in_subsidiary_preconditioners(const unsigned& nprec_needed)
     {
       // If it's empty then fill it in with null pointers.
       if (Subsidiary_preconditioner_pt.empty())
@@ -296,7 +296,7 @@ namespace oomph
     }
 
     /// List of preconditioners to use for the blocks to be solved.
-    Vector<Preconditioner *> Subsidiary_preconditioner_pt;
+    Vector<Preconditioner*> Subsidiary_preconditioner_pt;
 
     /// Function to create any subsidiary preconditioners not set in
     /// Subsidiary_preconditioner_pt.
@@ -309,7 +309,7 @@ namespace oomph
 
     /// Vector of mesh pointers and a boolean indicating if we allow multiple
     /// element types in the same mesh.
-    Vector<std::pair<const Mesh *, bool>> Gp_mesh_pt;
+    Vector<std::pair<const Mesh*, bool>> Gp_mesh_pt;
   };
 
   //=============================================================================
@@ -357,19 +357,19 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    BlockDiagonalPreconditioner(const BlockDiagonalPreconditioner &)
+    BlockDiagonalPreconditioner(const BlockDiagonalPreconditioner&)
     {
       BrokenCopy::broken_copy("BlockDiagonalPreconditioner");
     }
 
     /// Broken assignment operator
-    void operator=(const BlockDiagonalPreconditioner &)
+    void operator=(const BlockDiagonalPreconditioner&)
     {
       BrokenCopy::broken_assign("BlockDiagonalPreconditioner");
     }
 
     /// Apply preconditioner to r
-    void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+    void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
     /// \short Setup the preconditioner
     virtual void setup();
@@ -403,7 +403,7 @@ namespace oomph
       Doc_time_during_preconditioner_solve = false;
     }
 
-    void fill_in_subsidiary_preconditioners(const unsigned &nprec_needed)
+    void fill_in_subsidiary_preconditioners(const unsigned& nprec_needed)
     {
 #ifdef PARANOID
       if ((Use_two_level_parallelisation) &&
@@ -430,15 +430,15 @@ namespace oomph
     /// for block number i. Obviously for a diagonal preconditioner we want
     /// the blocks (i,i), (for anti diagonal we will want blocks (i, nblock -
     /// i), see that class).
-    virtual unsigned get_other_diag_ds(const unsigned &i,
-                                       const unsigned &nblock) const
+    virtual unsigned get_other_diag_ds(const unsigned& i,
+                                       const unsigned& nblock) const
     {
       return i;
     }
 
   private:
     /// pointer for the PreconditionerArray
-    PreconditionerArray *Preconditioner_array_pt;
+    PreconditionerArray* Preconditioner_array_pt;
 
     /// Use two level parallelism using the PreconditionerArray
     bool Use_two_level_parallelisation;
@@ -501,19 +501,19 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    BlockTriangularPreconditioner(const BlockTriangularPreconditioner &)
+    BlockTriangularPreconditioner(const BlockTriangularPreconditioner&)
     {
       BrokenCopy::broken_copy("BlockTriangularPreconditioner");
     }
 
     /// Broken assignment operator
-    void operator=(const BlockTriangularPreconditioner &)
+    void operator=(const BlockTriangularPreconditioner&)
     {
       BrokenCopy::broken_assign("BlockTriangularPreconditioner");
     }
 
     /// Apply preconditioner to r
-    void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+    void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
     /// \short Setup the preconditioner
     void setup();
@@ -532,7 +532,7 @@ namespace oomph
 
   private:
     /// Matrix of matrix vector product operators for the off diagonals
-    DenseMatrix<MatrixVectorProduct *> Off_diagonal_matrix_vector_products;
+    DenseMatrix<MatrixVectorProduct*> Off_diagonal_matrix_vector_products;
 
     /// Boolean indicating upper or lower triangular
     bool Upper_triangular;
@@ -558,26 +558,26 @@ namespace oomph
     virtual ~ExactBlockPreconditioner() {}
 
     /// Broken copy constructor
-    ExactBlockPreconditioner(const ExactBlockPreconditioner &)
+    ExactBlockPreconditioner(const ExactBlockPreconditioner&)
     {
       BrokenCopy::broken_copy("ExactBlockPreconditioner");
     }
 
     /// Broken assignment operator
-    void operator=(const ExactBlockPreconditioner &)
+    void operator=(const ExactBlockPreconditioner&)
     {
       BrokenCopy::broken_assign("ExactBlockPreconditioner");
     }
 
     /// Apply preconditioner to r
-    void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+    void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
     /// \short Setup the preconditioner
     void setup();
 
     /// \short Access for the preconditioner pointer used to solve the
     /// system (stored in the vector of pointers in the base class);
-    Preconditioner *&preconditioner_pt()
+    Preconditioner*& preconditioner_pt()
     {
       return this->Subsidiary_preconditioner_pt[0];
     }
@@ -598,7 +598,7 @@ namespace oomph
     /// function. Get the second index for block number i. Obviously for a
     /// diagonal preconditioner we want the blocks (i,i). For anti diagonal
     /// we will want blocks (i, nblock - i - 1).
-    unsigned get_other_diag_ds(const unsigned &i, const unsigned &nblock) const
+    unsigned get_other_diag_ds(const unsigned& i, const unsigned& nblock) const
     {
       return nblock - i - 1;
     }
@@ -620,19 +620,19 @@ namespace oomph
     ~DummyBlockPreconditioner() {}
 
     /// Broken copy constructor
-    DummyBlockPreconditioner(const DummyBlockPreconditioner &)
+    DummyBlockPreconditioner(const DummyBlockPreconditioner&)
     {
       BrokenCopy::broken_copy("DummyBlockPreconditioner");
     }
 
     /// Broken assignment operator
-    void operator=(const DummyBlockPreconditioner &)
+    void operator=(const DummyBlockPreconditioner&)
     {
       BrokenCopy::broken_assign("DummyBlockPreconditioner");
     }
 
     /// Apply preconditioner to r (just copy r to z).
-    void preconditioner_solve(const DoubleVector &r, DoubleVector &z)
+    void preconditioner_solve(const DoubleVector& r, DoubleVector& z)
     {
       z.build(r);
     }

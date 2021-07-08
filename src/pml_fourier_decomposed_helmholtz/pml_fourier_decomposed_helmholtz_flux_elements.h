@@ -61,12 +61,12 @@ namespace oomph
     /// x is a Vector and  the flux is a complex
 
     typedef void (*PMLFourierDecomposedHelmholtzPrescribedFluxFctPt)(
-      const Vector<double> &x, std::complex<double> &flux);
+      const Vector<double>& x, std::complex<double>& flux);
 
     /// \short Constructor, takes the pointer to the "bulk" element and the
     /// index of the face to which the element is attached.
-    PMLFourierDecomposedHelmholtzFluxElement(FiniteElement *const &bulk_el_pt,
-                                             const int &face_index);
+    PMLFourierDecomposedHelmholtzFluxElement(FiniteElement* const& bulk_el_pt,
+                                             const int& face_index);
 
     ///\short  Broken empty constructor
     PMLFourierDecomposedHelmholtzFluxElement()
@@ -79,7 +79,7 @@ namespace oomph
 
     /// Broken copy constructor
     PMLFourierDecomposedHelmholtzFluxElement(
-      const PMLFourierDecomposedHelmholtzFluxElement &dummy)
+      const PMLFourierDecomposedHelmholtzFluxElement& dummy)
     {
       BrokenCopy::broken_copy("PMLFourierDecomposedHelmholtzFluxElement");
     }
@@ -97,13 +97,13 @@ namespace oomph
        }*/
 
     /// Access function for the prescribed-flux function pointer
-    PMLFourierDecomposedHelmholtzPrescribedFluxFctPt &flux_fct_pt()
+    PMLFourierDecomposedHelmholtzPrescribedFluxFctPt& flux_fct_pt()
     {
       return Flux_fct_pt;
     }
 
     /// Add the element's contribution to its residual vector
-    inline void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    inline void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Call the generic residuals function with flag set to 0
       // using a dummy matrix argument
@@ -113,8 +113,8 @@ namespace oomph
 
     /// \short Add the element's contribution to its residual vector and its
     /// Jacobian matrix
-    inline void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                                 DenseMatrix<double> &jacobian)
+    inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                                 DenseMatrix<double>& jacobian)
     {
       // Call the generic routine with the flag set to 1
       fill_in_generic_residual_contribution_pml_fourier_decomposed_helmholtz_flux(
@@ -123,21 +123,21 @@ namespace oomph
 
     /// Output function -- forward to broken version in FiniteElement
     /// until somebody decides what exactly they want to plot here...
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       FiniteElement::output(outfile);
     }
 
     /// \short Output function -- forward to broken version in FiniteElement
     /// until somebody decides what exactly they want to plot here...
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       FiniteElement::output(outfile, n_plot);
     }
 
     /// C-style output function -- forward to broken version in FiniteElement
     /// until somebody decides what exactly they want to plot here...
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
@@ -145,7 +145,7 @@ namespace oomph
     /// \short C-style output function -- forward to broken version in
     /// FiniteElement until somebody decides what exactly they want to plot
     /// here...
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       FiniteElement::output(file_pt, n_plot);
     }
@@ -164,9 +164,9 @@ namespace oomph
     /// \short Function to compute the shape and test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
-    inline double shape_and_test(const Vector<double> &s,
-                                 Shape &psi,
-                                 Shape &test) const
+    inline double shape_and_test(const Vector<double>& s,
+                                 Shape& psi,
+                                 Shape& test) const
     {
       // Find number of nodes
       unsigned n_node = nnode();
@@ -187,9 +187,9 @@ namespace oomph
     /// \short Function to compute the shape and test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
-    inline double shape_and_test_at_knot(const unsigned &ipt,
-                                         Shape &psi,
-                                         Shape &test) const
+    inline double shape_and_test_at_knot(const unsigned& ipt,
+                                         Shape& psi,
+                                         Shape& test) const
     {
       // Find number of nodes
       unsigned n_node = nnode();
@@ -209,7 +209,7 @@ namespace oomph
 
     /// Function to calculate the prescribed flux at a given spatial
     /// position
-    void get_flux(const Vector<double> &x, std::complex<double> &flux)
+    void get_flux(const Vector<double>& x, std::complex<double>& flux)
     {
       // If the function pointer is zero return zero
       if (Flux_fct_pt == 0)
@@ -231,9 +231,9 @@ namespace oomph
     /// flag=1(or 0): do (or don't) compute the contribution to the
     /// Jacobian as well.
     virtual void fill_in_generic_residual_contribution_pml_fourier_decomposed_helmholtz_flux(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      const unsigned &flag);
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag);
 
     /// Function pointer to the (global) prescribed-flux function
     PMLFourierDecomposedHelmholtzPrescribedFluxFctPt Flux_fct_pt;
@@ -252,8 +252,8 @@ namespace oomph
   //===========================================================================
   template<class ELEMENT>
   PMLFourierDecomposedHelmholtzFluxElement<ELEMENT>::
-    PMLFourierDecomposedHelmholtzFluxElement(FiniteElement *const &bulk_el_pt,
-                                             const int &face_index) :
+    PMLFourierDecomposedHelmholtzFluxElement(FiniteElement* const& bulk_el_pt,
+                                             const int& face_index) :
     FaceGeometry<ELEMENT>(), FaceElement()
   {
     // Let the bulk element build the FaceElement, i.e. setup the pointers
@@ -268,8 +268,8 @@ namespace oomph
     U_index_pml_fourier_decomposed_helmholtz = std::complex<unsigned>(0, 1);
 
     // Now read out indices from bulk element
-    PMLFourierDecomposedHelmholtzEquations *eqn_pt =
-      dynamic_cast<PMLFourierDecomposedHelmholtzEquations *>(bulk_el_pt);
+    PMLFourierDecomposedHelmholtzEquations* eqn_pt =
+      dynamic_cast<PMLFourierDecomposedHelmholtzEquations*>(bulk_el_pt);
     // If the cast has failed die
     if (eqn_pt == 0)
     {
@@ -292,9 +292,9 @@ namespace oomph
   template<class ELEMENT>
   void PMLFourierDecomposedHelmholtzFluxElement<ELEMENT>::
     fill_in_generic_residual_contribution_pml_fourier_decomposed_helmholtz_flux(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      const unsigned &flag)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag)
   {
     // Find out how many nodes there are3
     const unsigned n_node = nnode();
@@ -405,7 +405,7 @@ namespace oomph
     /// \short Constructor, takes the pointer to the "bulk" element and the
     /// index of the face to which the element is attached.
     PMLFourierDecomposedHelmholtzPowerMonitorElement(
-      FiniteElement *const &bulk_el_pt, const int &face_index);
+      FiniteElement* const& bulk_el_pt, const int& face_index);
 
     ///\short Broken empty constructor
     PMLFourierDecomposedHelmholtzPowerMonitorElement()
@@ -418,7 +418,7 @@ namespace oomph
 
     /// Broken copy constructor
     PMLFourierDecomposedHelmholtzPowerMonitorElement(
-      const PMLFourierDecomposedHelmholtzPowerMonitorElement &dummy)
+      const PMLFourierDecomposedHelmholtzPowerMonitorElement& dummy)
     {
       BrokenCopy::broken_copy(
         "PMLFourierDecomposedHelmholtzPowerMonitorElement");
@@ -436,30 +436,30 @@ namespace oomph
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default (needed to break
     /// indeterminacy if bulk element is SolidElement)
-    double zeta_nodal(const unsigned &n,
-                      const unsigned &k,
-                      const unsigned &i) const
+    double zeta_nodal(const unsigned& n,
+                      const unsigned& k,
+                      const unsigned& i) const
     {
       return FaceElement::zeta_nodal(n, k, i);
     }
 
     /// Output function -- forward to broken version in FiniteElement
     /// until somebody decides what exactly they want to plot here...
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       FiniteElement::output(outfile);
     }
 
     /// \short Output function -- forward to broken version in FiniteElement
     /// until somebody decides what exactly they want to plot here...
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       FiniteElement::output(outfile, n_plot);
     }
 
     /// C-style output function -- forward to broken version in FiniteElement
     /// until somebody decides what exactly they want to plot here...
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
@@ -467,7 +467,7 @@ namespace oomph
     /// \short C-style output function -- forward to broken version in
     /// FiniteElement until somebody decides what exactly they want to plot
     /// here...
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       FiniteElement::output(file_pt, n_plot);
     }
@@ -498,10 +498,10 @@ namespace oomph
     /// power density as a fct of the zenith angle in the specified
     /// output file if it's open. NOTE: This may give the wrong result
     /// if the constitutive parameters genuinely vary!
-    double global_power_contribution(std::ofstream &outfile)
+    double global_power_contribution(std::ofstream& outfile)
     {
       // pointer to the corresponding bulk element
-      ELEMENT *bulk_elem_pt = dynamic_cast<ELEMENT *>(this->bulk_element_pt());
+      ELEMENT* bulk_elem_pt = dynamic_cast<ELEMENT*>(this->bulk_element_pt());
 
       // Number of nodes in bulk element
       unsigned nnode_bulk = bulk_elem_pt->nnode();
@@ -631,9 +631,9 @@ namespace oomph
     /// \short Function to compute the test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
-    inline double shape_and_test(const Vector<double> &s,
-                                 Shape &psi,
-                                 Shape &test) const
+    inline double shape_and_test(const Vector<double>& s,
+                                 Shape& psi,
+                                 Shape& test) const
     {
       // Get the shape functions
       shape(s, test);
@@ -652,11 +652,11 @@ namespace oomph
     /// and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
-    inline double d_shape_and_test_local(const Vector<double> &s,
-                                         Shape &psi,
-                                         Shape &test,
-                                         DShape &dpsi_ds,
-                                         DShape &dtest_ds) const
+    inline double d_shape_and_test_local(const Vector<double>& s,
+                                         Shape& psi,
+                                         Shape& test,
+                                         DShape& dpsi_ds,
+                                         DShape& dtest_ds) const
     {
       // Find number of nodes
       unsigned n_node = nnode();
@@ -692,7 +692,7 @@ namespace oomph
   template<class ELEMENT>
   PMLFourierDecomposedHelmholtzPowerMonitorElement<ELEMENT>::
     PMLFourierDecomposedHelmholtzPowerMonitorElement(
-      FiniteElement *const &bulk_el_pt, const int &face_index) :
+      FiniteElement* const& bulk_el_pt, const int& face_index) :
     FaceGeometry<ELEMENT>(), FaceElement()
   {
     // Let the bulk element build the FaceElement, i.e. setup the pointers
@@ -708,8 +708,8 @@ namespace oomph
     // We assume that the dimension of the full problem is the same
     // as the dimension of the node, if this is not the case you will have
     // to write custom elements, sorry
-    PMLFourierDecomposedHelmholtzEquations *eqn_pt =
-      dynamic_cast<PMLFourierDecomposedHelmholtzEquations *>(bulk_el_pt);
+    PMLFourierDecomposedHelmholtzEquations* eqn_pt =
+      dynamic_cast<PMLFourierDecomposedHelmholtzEquations*>(bulk_el_pt);
     if (eqn_pt == 0)
     {
       std::string error_string = "Bulk element must inherit from "

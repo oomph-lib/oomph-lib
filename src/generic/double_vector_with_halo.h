@@ -88,15 +88,15 @@ namespace oomph
     Vector<int> Halo_displacement;
 
     /// \short Store the distribution that was used to setup the halo scheme
-    LinearAlgebraDistribution *Distribution_pt;
+    LinearAlgebraDistribution* Distribution_pt;
 
   public:
     ///\short Constructor that sets up the required information communicating
     /// between all processors. Requires two "all to all" communications.
     /// Arguments are the distribution of the DoubleVector and a
     /// Vector of global unknowns required on this processor.
-    DoubleVectorHaloScheme(LinearAlgebraDistribution *const &dist_pt,
-                           const Vector<unsigned> &required_global_eqn);
+    DoubleVectorHaloScheme(LinearAlgebraDistribution* const& dist_pt,
+                           const Vector<unsigned>& required_global_eqn);
 
     ///\short Return the number of halo values
     inline unsigned n_halo_values() const
@@ -106,18 +106,18 @@ namespace oomph
 
     ///\short Return the pointer to the distirbution used to setup
     /// the halo information
-    inline LinearAlgebraDistribution *&distribution_pt()
+    inline LinearAlgebraDistribution*& distribution_pt()
     {
       return Distribution_pt;
     }
 
     ///\short Function that sets up a vector of pointers to halo
     /// data, index using the scheme in Local_index
-    void setup_halo_dofs(const std::map<unsigned, double *> &halo_data_pt,
-                         Vector<double *> &halo_dof_pt);
+    void setup_halo_dofs(const std::map<unsigned, double*>& halo_data_pt,
+                         Vector<double*>& halo_dof_pt);
 
     ///\short Return the local index associated with the global equation
-    inline unsigned local_index(const unsigned &global_eqn)
+    inline unsigned local_index(const unsigned& global_eqn)
     {
       // Does the entry exist in the map
       std::map<unsigned, unsigned>::iterator it = Local_index.find(global_eqn);
@@ -151,7 +151,7 @@ namespace oomph
   {
     /// \short Pointer to the lookup scheme that stores information about
     /// on which processor the required information is haloed
-    DoubleVectorHaloScheme *Halo_scheme_pt;
+    DoubleVectorHaloScheme* Halo_scheme_pt;
 
     /// \short Vector of the halo values
     Vector<double> Halo_value;
@@ -165,9 +165,9 @@ namespace oomph
     /// distribution. Additionally every entry can be set (with argument v -
     /// defaults to 0).
     DoubleVectorWithHaloEntries(
-      const LinearAlgebraDistribution *const &dist_pt,
-      DoubleVectorHaloScheme *const &halo_scheme_pt = 0,
-      const double &v = 0.0) :
+      const LinearAlgebraDistribution* const& dist_pt,
+      DoubleVectorHaloScheme* const& halo_scheme_pt = 0,
+      const double& v = 0.0) :
       DoubleVector(dist_pt, v)
     {
       // construct the halo scheme
@@ -179,9 +179,9 @@ namespace oomph
     /// distribution. Additionally every entry can be set (with argument v -
     /// defaults to 0).
     DoubleVectorWithHaloEntries(
-      const LinearAlgebraDistribution &dist,
-      DoubleVectorHaloScheme *const &halo_scheme_pt = 0,
-      const double &v = 0.0) :
+      const LinearAlgebraDistribution& dist,
+      DoubleVectorHaloScheme* const& halo_scheme_pt = 0,
+      const double& v = 0.0) :
       DoubleVector(dist, v)
     {
       // construct the halo scheme
@@ -192,7 +192,7 @@ namespace oomph
     ~DoubleVectorWithHaloEntries() {}
 
     /// Copy constructor from any DoubleVector
-    DoubleVectorWithHaloEntries(const DoubleVectorWithHaloEntries &new_vector) :
+    DoubleVectorWithHaloEntries(const DoubleVectorWithHaloEntries& new_vector) :
       DoubleVector(new_vector)
     {
       // Build the appropriate halo scheme
@@ -201,8 +201,8 @@ namespace oomph
 
     /// Copy constructor from any DoubleVector
     DoubleVectorWithHaloEntries(
-      const DoubleVector &new_vector,
-      DoubleVectorHaloScheme *const &halo_scheme_pt = 0) :
+      const DoubleVector& new_vector,
+      DoubleVectorHaloScheme* const& halo_scheme_pt = 0) :
       DoubleVector(new_vector)
     {
       // Construct the halo scheme
@@ -210,7 +210,7 @@ namespace oomph
     }
 
     /// assignment operator
-    void operator=(const DoubleVectorWithHaloEntries &old_vector)
+    void operator=(const DoubleVectorWithHaloEntries& old_vector)
     {
       this->build(old_vector);
       // Do some other stuff
@@ -218,7 +218,7 @@ namespace oomph
     }
 
     /// Direct access to global entry
-    inline double &global_value(const unsigned &i)
+    inline double& global_value(const unsigned& i)
     {
       // Only need to worry about the distributed case if
       // we have compiled with MPI
@@ -265,7 +265,7 @@ namespace oomph
     }
 
     /// Direct access to the global entry (const version)
-    const double &global_value(const unsigned &i) const
+    const double& global_value(const unsigned& i) const
     {
       // Only need to worry about the distributed case if
       // we have compiled with MPI
@@ -319,20 +319,20 @@ namespace oomph
     void sum_all_halo_and_haloed_values();
 
     /// Access function for halo scheme
-    DoubleVectorHaloScheme *&halo_scheme_pt()
+    DoubleVectorHaloScheme*& halo_scheme_pt()
     {
       return Halo_scheme_pt;
     }
 
     /// Access function for halo scheme (const version)
-    DoubleVectorHaloScheme *const &halo_scheme_pt() const
+    DoubleVectorHaloScheme* const& halo_scheme_pt() const
     {
       return Halo_scheme_pt;
     }
 
     ///\short Construct the halo scheme and storage for the halo
     /// data
-    void build_halo_scheme(DoubleVectorHaloScheme *const &halo_scheme_pt);
+    void build_halo_scheme(DoubleVectorHaloScheme* const& halo_scheme_pt);
   };
 
 } // namespace oomph

@@ -42,17 +42,17 @@ namespace oomph
   {
   protected:
     // Storage for pointers to my traction elements
-    Vector<PolarStreamfunctionTractionElement<
-      RefineablePolarStreamfunctionElement> *>
+    Vector<
+      PolarStreamfunctionTractionElement<RefineablePolarStreamfunctionElement>*>
       Inlet_traction_elt_pt;
-    Vector<PolarStreamfunctionTractionElement<
-      RefineablePolarStreamfunctionElement> *>
+    Vector<
+      PolarStreamfunctionTractionElement<RefineablePolarStreamfunctionElement>*>
       Outlet_traction_elt_pt;
 
   public:
     /// Return  pointer to inlet traction element e
-    PolarStreamfunctionTractionElement<RefineablePolarStreamfunctionElement>
-      *inlet_traction_elt_pt(unsigned e)
+    PolarStreamfunctionTractionElement<RefineablePolarStreamfunctionElement>* inlet_traction_elt_pt(
+      unsigned e)
     {
       return Inlet_traction_elt_pt[e];
     }
@@ -62,8 +62,8 @@ namespace oomph
       return Inlet_traction_elt_pt.size();
     }
     /// Return  pointer to outlet traction element e
-    PolarStreamfunctionTractionElement<RefineablePolarStreamfunctionElement>
-      *outlet_traction_elt_pt(unsigned e)
+    PolarStreamfunctionTractionElement<RefineablePolarStreamfunctionElement>* outlet_traction_elt_pt(
+      unsigned e)
     {
       return Outlet_traction_elt_pt[e];
     }
@@ -75,7 +75,7 @@ namespace oomph
 
     /// \short Constructor, which "builds" the mesh. The arguments are the
     /// number of elements in each direction.
-    streamfunction_mesh(const unsigned int &nx, const unsigned int &ny) :
+    streamfunction_mesh(const unsigned int& nx, const unsigned int& ny) :
       Refineable_r_mesh<RefineablePolarStreamfunctionElement>(nx, ny)
     {
       // Now bolt on traction stuff
@@ -89,7 +89,7 @@ namespace oomph
     }
 
     // Function to add the traction boundary elements
-    void make_traction_elements(const bool &outlet)
+    void make_traction_elements(const bool& outlet)
     {
       // Specify inlet/outlet specific quantities
       unsigned ibound;
@@ -110,8 +110,9 @@ namespace oomph
       // Loop over the number of elements on the boundary
       for (unsigned ielt = 0; ielt < num_elt; ielt++)
       {
-        PolarStreamfunctionTractionElement<RefineablePolarStreamfunctionElement>
-          *surface_element_pt = new PolarStreamfunctionTractionElement<
+        PolarStreamfunctionTractionElement<
+          RefineablePolarStreamfunctionElement>* surface_element_pt =
+          new PolarStreamfunctionTractionElement<
             RefineablePolarStreamfunctionElement>(
             this->boundary_element_pt(ibound, ielt), index);
         // Push it back onto the Element_pt Vector
@@ -210,7 +211,7 @@ namespace oomph
 
   public:
     /// Constructor: Pass pointer to source function
-    StreamfunctionProblem(const bool &eigen);
+    StreamfunctionProblem(const bool& eigen);
 
     /// Destructor (empty -- all the cleanup is done in base class)
     ~StreamfunctionProblem(){};
@@ -248,11 +249,11 @@ namespace oomph
     }
 
     // Access function for the specific mesh
-    streamfunction_mesh *mesh_pt()
+    streamfunction_mesh* mesh_pt()
     {
       // Upcast from pointer to the Mesh base class to the specific
       // element type that we're using here.
-      return dynamic_cast<streamfunction_mesh *>(Problem::mesh_pt());
+      return dynamic_cast<streamfunction_mesh*>(Problem::mesh_pt());
     }
 
     /// Pin boundaries
@@ -265,7 +266,7 @@ namespace oomph
     void assign_velocities();
 
     /// Return the value of the streamfunction at given global coordinates
-    void get_vels(const Vector<double> &x_to_get, double &stream);
+    void get_vels(const Vector<double>& x_to_get, double& stream);
 
     /// Output the streamfunction on a regular grid
     void my_output(const int radial,
@@ -275,17 +276,17 @@ namespace oomph
 
     /// \short Doc the solution. DocInfo object stores flags/labels for where
     /// the output gets written to
-    void doc_solution(DocInfo &doc_info);
+    void doc_solution(DocInfo& doc_info);
 
     // Header for doc_solution
-    void header(ofstream &some_file);
+    void header(ofstream& some_file);
 
   }; // end of problem class
 
   //=====start_of_constructor===============================================
   /// Constructor for Streamfunction problem: Pass pointer to source function.
   //========================================================================
-  StreamfunctionProblem::StreamfunctionProblem(const bool &eigen)
+  StreamfunctionProblem::StreamfunctionProblem(const bool& eigen)
   {
     // Are we solving for an eigenfunction?
     this->eigenfunction = eigen;
@@ -302,7 +303,7 @@ namespace oomph
     Problem::mesh_pt() = new streamfunction_mesh(n_x, n_y);
 
     // Set error estimator
-    Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+    Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
     mesh_pt()->spatial_error_estimator_pt() = error_estimator_pt;
 
     // Pin the relevant boundaries
@@ -318,8 +319,8 @@ namespace oomph
     for (unsigned i = 0; i < n_fluid; i++)
     {
       // Upcast from GeneralsedElement to the present element
-      RefineablePolarStreamfunctionElement *el_pt =
-        dynamic_cast<RefineablePolarStreamfunctionElement *>(
+      RefineablePolarStreamfunctionElement* el_pt =
+        dynamic_cast<RefineablePolarStreamfunctionElement*>(
           mesh_pt()->element_pt(i));
 
       // Set the pointer to the angle Alpha
@@ -352,7 +353,7 @@ namespace oomph
       for (unsigned n = 0; n < n_node; n++)
       {
         // Get pointer to node
-        Node *nod_pt = mesh_pt()->boundary_node_pt(i, n);
+        Node* nod_pt = mesh_pt()->boundary_node_pt(i, n);
 
         // Extract nodal coordinates from node:
         Vector<double> x(2);
@@ -436,8 +437,8 @@ namespace oomph
   // coordinates and returning u,v there
   // Note that this function currently fails at r and theta max
   //========================================================================
-  void StreamfunctionProblem::get_vels(const Vector<double> &x_to_get,
-                                       double &stream)
+  void StreamfunctionProblem::get_vels(const Vector<double>& x_to_get,
+                                       double& stream)
   {
     // local coord
     Vector<double> s(2, 0.0);
@@ -457,8 +458,8 @@ namespace oomph
       // Cast to the particular element type, this is necessary because
       // the base elements don't have the member functions that we're about
       // to call!
-      RefineablePolarStreamfunctionElement *elt_pt =
-        dynamic_cast<RefineablePolarStreamfunctionElement *>(
+      RefineablePolarStreamfunctionElement* elt_pt =
+        dynamic_cast<RefineablePolarStreamfunctionElement*>(
           mesh_pt()->element_pt(e));
 
       s[0] = -1.0;
@@ -642,7 +643,7 @@ namespace oomph
   //===============start_of_doc=============================================
   /// Doc the solution: doc_info contains labels/output directory etc.
   //========================================================================
-  void StreamfunctionProblem::doc_solution(DocInfo &doc_info)
+  void StreamfunctionProblem::doc_solution(DocInfo& doc_info)
   {
     ofstream some_file;
     char filename[100];
@@ -663,7 +664,7 @@ namespace oomph
 
   } // end of doc
 
-  void StreamfunctionProblem::header(ofstream &some_file)
+  void StreamfunctionProblem::header(ofstream& some_file)
   {
     some_file << "# Refineable streamfunction mesh"
               << "\n";

@@ -43,10 +43,10 @@ namespace oomph
   /// identifies the entire volume.
   //====================================================================
   template<class ELEMENT>
-  FullCircleMesh<ELEMENT>::FullCircleMesh(GeomObject *area_pt,
-                                          const Vector<double> &theta_positions,
-                                          const Vector<double> &radius_box,
-                                          TimeStepper *time_stepper_pt) :
+  FullCircleMesh<ELEMENT>::FullCircleMesh(GeomObject* area_pt,
+                                          const Vector<double>& theta_positions,
+                                          const Vector<double>& radius_box,
+                                          TimeStepper* time_stepper_pt) :
     Area_pt(area_pt)
   {
 // Check that the vectors are the correct sizes.
@@ -79,7 +79,7 @@ namespace oomph
     Element_pt.resize(nelem);
 
     // Create  dummy element so we can determine the number of nodes
-    ELEMENT *dummy_el_pt = new ELEMENT;
+    ELEMENT* dummy_el_pt = new ELEMENT;
 
     // Read out the number of linear points in the element
     unsigned n_p = dummy_el_pt->nnode_1d();
@@ -113,7 +113,7 @@ namespace oomph
           unsigned jnod_local = i0 + i1 * n_p;
 
           // Create the node
-          Node *node_pt = finite_element_pt(ielem)->construct_node(
+          Node* node_pt = finite_element_pt(ielem)->construct_node(
             jnod_local, time_stepper_pt);
 
           // Set the position of the node from macro element mapping

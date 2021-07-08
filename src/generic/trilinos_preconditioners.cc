@@ -71,7 +71,7 @@ namespace oomph
 #endif
 
     // get a pointer to the cr double matrix
-    CRDoubleMatrix *cr_matrix_pt = dynamic_cast<CRDoubleMatrix *>(matrix_pt());
+    CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt());
 
 #ifdef PARANOID
     if (cr_matrix_pt == 0)
@@ -98,13 +98,13 @@ namespace oomph
   /// by the oomph-lib oomph_matrix_pt and Epetra epetra_matrix_pt matrices.
   /// This method is called by Trilinos solvers.
   //===========================================================================
-  void TrilinosPreconditionerBase::setup(Epetra_CrsMatrix *epetra_matrix_pt)
+  void TrilinosPreconditionerBase::setup(Epetra_CrsMatrix* epetra_matrix_pt)
   {
     // clean up old data
     clean_up_memory();
 
     // first try CRDoubleMatrix
-    CRDoubleMatrix *cr_matrix_pt = dynamic_cast<CRDoubleMatrix *>(matrix_pt());
+    CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt());
     if (cr_matrix_pt == 0)
     {
       std::ostringstream error_message;
@@ -123,8 +123,8 @@ namespace oomph
   /// taking distributed oomph-lib vectors (DistributedVector<double>) as
   /// arguments.
   //=============================================================================
-  void TrilinosPreconditionerBase::preconditioner_solve(const DoubleVector &r,
-                                                        DoubleVector &z)
+  void TrilinosPreconditionerBase::preconditioner_solve(const DoubleVector& r,
+                                                        DoubleVector& z)
   {
     // Get ready to do cumulative timings
     double t_start = TimingHelpers::timer();
@@ -151,11 +151,11 @@ namespace oomph
 #endif
 
     // create Epetra version of r
-    Epetra_Vector *epetra_r_pt =
+    Epetra_Vector* epetra_r_pt =
       TrilinosEpetraHelpers::create_distributed_epetra_vector(r);
 
     // create an empty Epetra vector for z
-    Epetra_Vector *epetra_z_pt =
+    Epetra_Vector* epetra_z_pt =
       TrilinosEpetraHelpers::create_distributed_epetra_vector(
         this->distribution_pt());
 
@@ -191,7 +191,7 @@ namespace oomph
   // Function to set up the ML preconditioner.
   //=============================================================================
   void TrilinosMLPreconditioner::setup_trilinos_preconditioner(
-    Epetra_CrsMatrix *epetra_matrix_pt)
+    Epetra_CrsMatrix* epetra_matrix_pt)
   {
     // doc setup time
     oomph_info << "Setting up TrilinosML, ";
@@ -229,7 +229,7 @@ namespace oomph
   // Function to set up the IFPACK preconditioner.
   //=============================================================================
   void TrilinosIFPACKPreconditioner::setup_trilinos_preconditioner(
-    Epetra_CrsMatrix *epetra_matrix_pt)
+    Epetra_CrsMatrix* epetra_matrix_pt)
   {
     // set up a parameter list
     Teuchos::ParameterList ifpack_parameters;
@@ -240,7 +240,7 @@ namespace oomph
 
     // create the preconditioner
     Ifpack ifpack_factory;
-    Ifpack_Preconditioner *tmp_pt =
+    Ifpack_Preconditioner* tmp_pt =
       ifpack_factory.Create(Preconditioner_type, epetra_matrix_pt, Overlap);
 
     tmp_pt->SetParameters(ifpack_parameters);

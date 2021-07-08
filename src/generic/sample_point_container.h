@@ -57,21 +57,21 @@ class SamplePoint
 public:
   /// \short Construct SamplePoint object from number of finite element
   /// in its mesh, and index of sample point within that element
-  SamplePoint(const unsigned &element_index_in_mesh,
-              const unsigned &sample_point_index_in_element) :
+  SamplePoint(const unsigned& element_index_in_mesh,
+              const unsigned& sample_point_index_in_element) :
     Element_index_in_mesh(element_index_in_mesh),
     Sample_point_index_in_element(sample_point_index_in_element)
   {
   }
 
   /// \short Broken copy constructor.
-  SamplePoint(const SamplePoint &data)
+  SamplePoint(const SamplePoint& data)
   {
     BrokenCopy::broken_copy("SamplePoint");
   }
 
   /// Broken assignment operator.
-  void operator=(const SamplePoint &)
+  void operator=(const SamplePoint&)
   {
     BrokenCopy::broken_assign("SamplePoint");
   }
@@ -114,8 +114,8 @@ public:
   /// \short Constructor. Pass pointer to bin array that
   /// contains this bin and the index of the newly created bin in that
   /// RefineableBinArray
-  RefineableBin(RefineableBinArray *bin_array_pt,
-                const unsigned &bin_index_in_bin_array) :
+  RefineableBin(RefineableBinArray* bin_array_pt,
+                const unsigned& bin_index_in_bin_array) :
     Sample_point_pt(0),
     Sub_bin_array_pt(0),
     Bin_array_pt(bin_array_pt),
@@ -124,13 +124,13 @@ public:
   }
 
   /// \short Broken copy constructor.
-  RefineableBin(const RefineableBin &data)
+  RefineableBin(const RefineableBin& data)
   {
     BrokenCopy::broken_copy("RefineableBin");
   }
 
   /// Broken assignment operator.
-  void operator=(const RefineableBin &)
+  void operator=(const RefineableBin&)
   {
     BrokenCopy::broken_assign("RefineableBin");
   }
@@ -142,24 +142,24 @@ public:
   unsigned total_number_of_sample_points_computed_recursively() const;
 
   /// Add a new sample point to RefineableBin
-  void add_sample_point(SamplePoint *new_sample_point_pt,
-                        const Vector<double> &zeta_coordinates);
+  void add_sample_point(SamplePoint* new_sample_point_pt,
+                        const Vector<double>& zeta_coordinates);
 
   /// \short Find sub-GeomObject (finite element) and the local coordinate
   /// s within it that contains point with global coordinate zeta.
   /// sub_geom_object_pt=0 if point can't be found.
-  void locate_zeta(const Vector<double> &zeta,
-                   GeomObject *&sub_geom_object_pt,
-                   Vector<double> &s);
+  void locate_zeta(const Vector<double>& zeta,
+                   GeomObject*& sub_geom_object_pt,
+                   Vector<double>& s);
 
   /// \short Output bin; x,[y,[z]],n_sample_points
-  void output(std::ofstream &outfile, const bool &don_t_recurse = false);
+  void output(std::ofstream& outfile, const bool& don_t_recurse = false);
 
   /// \short Output bin vertices (allowing display of bins as zones).
-  void output_bins(std::ofstream &outfile);
+  void output_bins(std::ofstream& outfile);
 
   /// \short Output bin vertices (allowing display of bins as zones).
-  void output_bin_vertices(std::ofstream &outfile);
+  void output_bin_vertices(std::ofstream& outfile);
 
   /// Number of sample points stored in bin
   unsigned nsample_points_in_bin()
@@ -178,13 +178,13 @@ protected:
   /// \short Container of SamplePoints. Pointer to vector because it's shorter
   /// than an empty vector! (Not all RefineableBins have sample
   /// points -- the ones that are subdivided don't!)
-  Vector<SamplePoint *> *Sample_point_pt;
+  Vector<SamplePoint*>* Sample_point_pt;
 
   /// \short Pointer to a possible sub-BinArray. Null by default
-  RefineableBinArray *Sub_bin_array_pt;
+  RefineableBinArray* Sub_bin_array_pt;
 
   /// Pointer to the bin array which "owns" this RefineableBin.
-  RefineableBinArray *Bin_array_pt;
+  RefineableBinArray* Bin_array_pt;
 
   /// Index of bin in its bin array
   unsigned Bin_index_in_bin_array;
@@ -196,12 +196,12 @@ protected:
   /// newly made sub-bin-array and empties its own storage. Pass
   /// Max./min. coordinates of new bin array for efficiency.
   void make_sub_bin_array(
-    const Vector<std::pair<double, double>> &min_and_max_coordinates);
+    const Vector<std::pair<double, double>>& min_and_max_coordinates);
 
   /// \short Boundaries of bin in each coordinate direction.
   /// *.first = min; *.second = max
   void get_bin_boundaries(
-    Vector<std::pair<double, double>> &min_and_max_coordinates);
+    Vector<std::pair<double, double>>& min_and_max_coordinates);
 };
 
 ////////////////////////////////////////////////////////////////////////
@@ -216,11 +216,11 @@ class SamplePointContainer
 public:
   /// Constructor
   SamplePointContainer(
-    Mesh *mesh_pt,
-    const Vector<std::pair<double, double>> &min_and_max_coordinates,
-    const bool &use_eulerian_coordinates_during_setup,
-    const bool &ignore_halo_elements_during_locate_zeta_search,
-    const unsigned &nsample_points_generated_per_element) :
+    Mesh* mesh_pt,
+    const Vector<std::pair<double, double>>& min_and_max_coordinates,
+    const bool& use_eulerian_coordinates_during_setup,
+    const bool& ignore_halo_elements_during_locate_zeta_search,
+    const unsigned& nsample_points_generated_per_element) :
     Mesh_pt(mesh_pt),
     Min_and_max_coordinates(min_and_max_coordinates),
     Use_eulerian_coordinates_during_setup(
@@ -247,13 +247,13 @@ public:
   }
 
   /// \short Broken copy constructor.
-  SamplePointContainer(const SamplePointContainer &data)
+  SamplePointContainer(const SamplePointContainer& data)
   {
     BrokenCopy::broken_copy("SamplePointContainer");
   }
 
   /// Broken assignment operator.
-  void operator=(const SamplePointContainer &)
+  void operator=(const SamplePointContainer&)
   {
     BrokenCopy::broken_assign("SamplePointContainer");
   }
@@ -264,14 +264,14 @@ public:
   /// \short Find sub-GeomObject (finite element) and the local coordinate
   /// s within it that contains point with global coordinate zeta.
   /// sub_geom_object_pt=0 if point can't be found.
-  virtual void locate_zeta(const Vector<double> &zeta,
-                           GeomObject *&sub_geom_object_pt,
-                           Vector<double> &s) = 0;
+  virtual void locate_zeta(const Vector<double>& zeta,
+                           GeomObject*& sub_geom_object_pt,
+                           Vector<double>& s) = 0;
 
   /// \short Counter to keep track of how many sample points we've
   /// visited during top level call to locate_zeta. Virtual so it can be
   /// overloaded for different versions.
-  virtual unsigned &total_number_of_sample_points_visited_during_locate_zeta_from_top_level()
+  virtual unsigned& total_number_of_sample_points_visited_during_locate_zeta_from_top_level()
   {
     return Total_number_of_sample_points_visited_during_locate_zeta_from_top_level;
   }
@@ -285,22 +285,22 @@ public:
   virtual unsigned ndim_zeta() const = 0;
 
   /// Pointer to mesh from whose FiniteElements sample points are created
-  Mesh *mesh_pt() const
+  Mesh* mesh_pt() const
   {
     return Mesh_pt;
   }
 
   /// \short Pair of doubles for min and maximum coordinates in i-th direction:
   /// min (first) and max. (second) coordinates
-  const std::pair<double, double> &min_and_max_coordinates(
-    const unsigned &i) const
+  const std::pair<double, double>& min_and_max_coordinates(
+    const unsigned& i) const
   {
     return Min_and_max_coordinates[i];
   }
 
   /// \short Vector of pair of doubles for min and maximum coordinates.
   /// min (first) and max. (second) coordinates
-  const Vector<std::pair<double, double>> &min_and_max_coordinates() const
+  const Vector<std::pair<double, double>>& min_and_max_coordinates() const
   {
     return Min_and_max_coordinates;
   }
@@ -323,7 +323,7 @@ public:
   }
 
   /// "Measure of" number of sample points generated in each element
-  unsigned &nsample_points_generated_per_element()
+  unsigned& nsample_points_generated_per_element()
   {
     return Nsample_points_generated_per_element;
   }
@@ -336,7 +336,7 @@ public:
   /// no chance in hell to find the required point in
   /// a bin whose closest vertex is further than the specified
   /// max search radius.
-  double &max_search_radius()
+  double& max_search_radius()
   {
     return Max_search_radius;
   }
@@ -365,7 +365,7 @@ protected:
   void setup_min_and_max_coordinates();
 
   /// Pointer to mesh from whose FiniteElements sample points are created
-  Mesh *Mesh_pt;
+  Mesh* Mesh_pt;
 
   /// Vector of pairs of doubles for min and maximum coordinates.
   /// Call: Min_and_max_coordinates[j] gives me the
@@ -411,12 +411,12 @@ class BinArray : public virtual SamplePointContainer
 {
 public:
   /// Constructor
-  BinArray(Mesh *mesh_pt,
-           const Vector<std::pair<double, double>> &min_and_max_coordinates,
-           const Vector<unsigned> &dimensions_of_bin_array,
-           const bool &use_eulerian_coordinates_during_setup,
-           const bool &ignore_halo_elements_during_locate_zeta_search,
-           const unsigned &nsample_points_generated_per_element) :
+  BinArray(Mesh* mesh_pt,
+           const Vector<std::pair<double, double>>& min_and_max_coordinates,
+           const Vector<unsigned>& dimensions_of_bin_array,
+           const bool& use_eulerian_coordinates_during_setup,
+           const bool& ignore_halo_elements_during_locate_zeta_search,
+           const unsigned& nsample_points_generated_per_element) :
     SamplePointContainer(mesh_pt,
                          min_and_max_coordinates,
                          use_eulerian_coordinates_during_setup,
@@ -440,13 +440,13 @@ public:
   }
 
   /// \short Broken copy constructor.
-  BinArray(const BinArray &data)
+  BinArray(const BinArray& data)
   {
     BrokenCopy::broken_copy("BinArray");
   }
 
   /// Broken assignment operator.
-  void operator=(const BinArray &)
+  void operator=(const BinArray&)
   {
     BrokenCopy::broken_assign("BinArray");
   }
@@ -459,10 +459,10 @@ public:
   /// (default: true) chooses to use the old version which appears to be
   /// faster than Louis' new one after all (in the few cases where this
   /// functionality is still used -- not all if we have cgal!)
-  void get_neighbouring_bins_helper(const unsigned &bin_index,
-                                    const unsigned &radius,
-                                    Vector<unsigned> &neighbouring_bin_index,
-                                    const bool &use_old_version = true);
+  void get_neighbouring_bins_helper(const unsigned& bin_index,
+                                    const unsigned& radius,
+                                    Vector<unsigned>& neighbouring_bin_index,
+                                    const bool& use_old_version = true);
 
   /// \short Profiling function to compare performance of two different
   /// versions of the get_neighbouring_bins_helper(...) function
@@ -470,17 +470,17 @@ public:
 
   /// \short Get (linearly enumerated) bin index of bin that
   /// contains specified zeta
-  unsigned coords_to_bin_index(const Vector<double> &zeta);
+  unsigned coords_to_bin_index(const Vector<double>& zeta);
 
   /// \short  Get "coordinates" of bin that contains specified zeta
-  void coords_to_vectorial_bin_index(const Vector<double> &zeta,
-                                     Vector<unsigned> &bin_index);
+  void coords_to_vectorial_bin_index(const Vector<double>& zeta,
+                                     Vector<unsigned>& bin_index);
 
   /// Output bins (boundaries and number of sample points in them)
-  virtual void output_bins(std::ofstream &outfile) = 0;
+  virtual void output_bins(std::ofstream& outfile) = 0;
 
   /// \short Output bin vertices (allowing display of bin boundaries as zones).
-  virtual void output_bin_vertices(std::ofstream &outfile) = 0;
+  virtual void output_bin_vertices(std::ofstream& outfile) = 0;
 
   /// Number of bins (not taking recursion into account for refineable
   /// versions)
@@ -496,7 +496,7 @@ public:
   }
 
   /// \short Number of bins in coordinate direction i
-  unsigned dimension_of_bin_array(const unsigned &i) const
+  unsigned dimension_of_bin_array(const unsigned& i) const
   {
     return Dimensions_of_bin_array[i];
   }
@@ -509,7 +509,7 @@ public:
   }
 
   /// \short Number of bins in specified coordinate direction
-  unsigned dimensions_of_bin_array(const unsigned &i) const
+  unsigned dimensions_of_bin_array(const unsigned& i) const
   {
     return Dimensions_of_bin_array[i];
   }
@@ -530,16 +530,16 @@ class RefineableBinArray : public virtual BinArray
 {
 public:
   /// Constructor
-  RefineableBinArray(SamplePointContainerParameters *bin_array_parameters_pt);
+  RefineableBinArray(SamplePointContainerParameters* bin_array_parameters_pt);
 
   /// \short Broken copy constructor.
-  RefineableBinArray(const RefineableBinArray &data)
+  RefineableBinArray(const RefineableBinArray& data)
   {
     BrokenCopy::broken_copy("RefineableBinArray");
   }
 
   /// Broken assignment operator.
-  void operator=(const RefineableBinArray &)
+  void operator=(const RefineableBinArray&)
   {
     BrokenCopy::broken_assign("RefineableBinArray");
   }
@@ -559,13 +559,13 @@ public:
   }
 
   /// Root bin array
-  RefineableBinArray *root_bin_array_pt() const
+  RefineableBinArray* root_bin_array_pt() const
   {
     return Root_bin_array_pt;
   }
 
   /// Pointer to i-th bin; can be null if bin is empty
-  RefineableBin *bin_pt(const unsigned &i) const
+  RefineableBin* bin_pt(const unsigned& i) const
   {
     return Bin_pt[i];
   }
@@ -586,7 +586,7 @@ public:
   unsigned total_number_of_sample_points_computed_recursively() const;
 
   /// Fill the bin array with specified SamplePoints
-  void fill_bin_array(const Vector<SamplePoint *> &sample_point_pt)
+  void fill_bin_array(const Vector<SamplePoint*>& sample_point_pt)
   {
     unsigned n_dim = ndim_zeta();
 
@@ -598,7 +598,7 @@ public:
 
       // Which element is the point in?
       unsigned e = sample_point_pt[i]->element_index_in_mesh();
-      FiniteElement *el_pt = Mesh_pt->finite_element_pt(e);
+      FiniteElement* el_pt = Mesh_pt->finite_element_pt(e);
 
       // Which sample point is it at?
       unsigned j = sample_point_pt[i]->sample_point_index_in_element();
@@ -624,8 +624,8 @@ public:
   }
 
   /// Add specified SamplePoint to RefineableBinArray
-  void add_sample_point(SamplePoint *new_sample_point_pt,
-                        const Vector<double> &zeta)
+  void add_sample_point(SamplePoint* new_sample_point_pt,
+                        const Vector<double>& zeta)
   {
     // Find the correct bin
     unsigned bin_index = coords_to_bin_index(zeta);
@@ -642,15 +642,15 @@ public:
   /// \short Find sub-GeomObject (finite element) and the local coordinate
   /// s within it that contains point with global coordinate zeta.
   /// sub_geom_object_pt=0 if point can't be found.
-  void locate_zeta(const Vector<double> &zeta,
-                   GeomObject *&sub_geom_object_pt,
-                   Vector<double> &s);
+  void locate_zeta(const Vector<double>& zeta,
+                   GeomObject*& sub_geom_object_pt,
+                   Vector<double>& s);
 
   /// \short Boundaries of specified bin in each coordinate direction.
   /// *.first = min; *.second = max.
   void get_bin_boundaries(
-    const unsigned &bin_index,
-    Vector<std::pair<double, double>> &min_and_max_coordinates);
+    const unsigned& bin_index,
+    Vector<std::pair<double, double>>& min_and_max_coordinates);
 
   /// \short Depth of the hierarchical bin_array.
   unsigned depth() const
@@ -665,7 +665,7 @@ public:
   }
 
   /// \short Max depth of the hierarchical bin_array
-  unsigned &max_depth()
+  unsigned& max_depth()
   {
     return Max_depth;
   }
@@ -684,7 +684,7 @@ public:
   }
 
   /// Output bins
-  void output_bins(std::ofstream &outfile)
+  void output_bins(std::ofstream& outfile)
   {
     /// Loop over bins
     unsigned n_bin = Bin_pt.size();
@@ -698,16 +698,16 @@ public:
   }
 
   /// \short Output bin vertices (allowing display of bins as zones).
-  void output_bin_vertices(std::ofstream &outfile);
+  void output_bin_vertices(std::ofstream& outfile);
 
   /// Output neighbouring bins at given "radius" of the specified bin
-  void output_neighbouring_bins(const unsigned &bin_index,
-                                const unsigned &radius,
-                                std::ofstream &outfile);
+  void output_neighbouring_bins(const unsigned& bin_index,
+                                const unsigned& radius,
+                                std::ofstream& outfile);
 
   /// \short Counter to keep track of how many sample points we've
   /// visited during top level call to locate_zeta
-  unsigned &total_number_of_sample_points_visited_during_locate_zeta_from_top_level()
+  unsigned& total_number_of_sample_points_visited_during_locate_zeta_from_top_level()
   {
     if (Depth == 0)
     {
@@ -723,7 +723,7 @@ public:
   /// \short When searching through sample points recursively from the top
   /// level RefineableBinArray (in deterministic order!) only actually do the
   /// locate_zeta calls when when the counter exceeds this value.
-  unsigned &first_sample_point_to_actually_lookup_during_locate_zeta()
+  unsigned& first_sample_point_to_actually_lookup_during_locate_zeta()
   {
     return First_sample_point_to_actually_lookup_during_locate_zeta;
   }
@@ -731,7 +731,7 @@ public:
   /// \short When searching through sample points recursively from the top
   /// level RefineableBinArray (in deterministic order!) only actually do the
   /// locate_zeta calls when when the counter is less than this value.
-  unsigned &last_sample_point_to_actually_lookup_during_locate_zeta()
+  unsigned& last_sample_point_to_actually_lookup_during_locate_zeta()
   {
     return Last_sample_point_to_actually_lookup_during_locate_zeta;
   }
@@ -743,7 +743,7 @@ public:
   /// the amount of (more and more unlikely to yield anything!) work
   /// done locally before doing another costly mpi round trip
   /// when we're already far from the point we're trying to find.
-  unsigned &multiplier_for_max_sample_point_to_actually_lookup_during_locate_zeta()
+  unsigned& multiplier_for_max_sample_point_to_actually_lookup_during_locate_zeta()
   {
     return Multiplier_for_max_sample_point_to_actually_lookup_during_locate_zeta;
   }
@@ -752,7 +752,7 @@ public:
   /// level RefineableBinArray (in deterministic order!) only actually do the
   /// locate_zeta calls when when the counter exceeds this value.
   /// This is the initial value when starting the spiral based search.
-  unsigned &initial_last_sample_point_to_actually_lookup_during_locate_zeta()
+  unsigned& initial_last_sample_point_to_actually_lookup_during_locate_zeta()
   {
     return Initial_last_sample_point_to_actually_lookup_during_locate_zeta;
   }
@@ -764,11 +764,11 @@ private:
   /// \short Loop over all sample points in the element specified via the
   /// pointer and create a SamplePoint for each. Also specify the index of the
   /// element in its mesh.
-  void create_sample_points_from_element(FiniteElement *const element_pt,
-                                         const unsigned &n_element);
+  void create_sample_points_from_element(FiniteElement* const element_pt,
+                                         const unsigned& n_element);
 
   /// Vector of pointers to constituent RefineableBins.
-  Vector<RefineableBin *> Bin_pt;
+  Vector<RefineableBin*> Bin_pt;
 
   /// \short Variable which stores if the RefineableBinArray is
   /// recursive or not.
@@ -787,7 +787,7 @@ private:
   unsigned Max_number_of_sample_point_per_bin;
 
   /// Pointer to root bin array
-  RefineableBinArray *Root_bin_array_pt;
+  RefineableBinArray* Root_bin_array_pt;
 
   // hierher only used in root
 
@@ -830,7 +830,7 @@ class NonRefineableBinArray : public virtual BinArray
 public:
   /// Constructor
   NonRefineableBinArray(
-    SamplePointContainerParameters *bin_array_parameters_pt);
+    SamplePointContainerParameters* bin_array_parameters_pt);
 
   /// Destructor:
   ~NonRefineableBinArray()
@@ -839,13 +839,13 @@ public:
   }
 
   /// \short Broken copy constructor.
-  NonRefineableBinArray(const NonRefineableBinArray &data)
+  NonRefineableBinArray(const NonRefineableBinArray& data)
   {
     BrokenCopy::broken_copy("NonRefineableBinArray");
   }
 
   /// Broken assignment operator.
-  void operator=(const NonRefineableBinArray &)
+  void operator=(const NonRefineableBinArray&)
   {
     BrokenCopy::broken_assign("NonRefineableBinArray");
   }
@@ -853,9 +853,9 @@ public:
   /// \short Find sub-GeomObject (finite element) and the local coordinate
   /// s within it that contains point with global coordinate zeta.
   /// sub_geom_object_pt=0 if point can't be found.
-  void locate_zeta(const Vector<double> &zeta,
-                   GeomObject *&sub_geom_object_pt,
-                   Vector<double> &s);
+  void locate_zeta(const Vector<double>& zeta,
+                   GeomObject*& sub_geom_object_pt,
+                   Vector<double>& s);
 
   /// Total number of bins (empty or not)
   unsigned nbin() const
@@ -885,74 +885,74 @@ public:
   }
 
   /// Number of spirals to be searched in one go
-  unsigned &n_spiral_chunk()
+  unsigned& n_spiral_chunk()
   {
     return Nspiral_chunk;
   }
 
   /// \short Access function to max. spiral level during straight locate_zeta
   /// search (for efficiency; similar to max_search_radius())
-  unsigned &max_spiral_level()
+  unsigned& max_spiral_level()
   {
     return Max_spiral_level;
   }
 
   /// Access function to current min. spiral level
-  unsigned &current_min_spiral_level()
+  unsigned& current_min_spiral_level()
   {
     return Current_min_spiral_level;
   }
 
   /// Access function to current max. spiral level
-  unsigned &current_max_spiral_level()
+  unsigned& current_max_spiral_level()
   {
     return Current_max_spiral_level;
   }
 
   /// Provide some stats on the fill level of the associated bin
-  void get_fill_stats(unsigned &n_bin,
-                      unsigned &max_n_entry,
-                      unsigned &min_n_entry,
-                      unsigned &tot_n_entry,
-                      unsigned &n_empty) const;
+  void get_fill_stats(unsigned& n_bin,
+                      unsigned& max_n_entry,
+                      unsigned& min_n_entry,
+                      unsigned& tot_n_entry,
+                      unsigned& n_empty) const;
 
   /// \short Compute the minimum distance of any vertex in the specified bin
   /// from the specified Lagrangian coordinate zeta
-  double min_distance(const unsigned &i_bin, const Vector<double> &zeta);
+  double min_distance(const unsigned& i_bin, const Vector<double>& zeta);
 
   /// \short Output bin vertices (allowing display of bins as zones).
-  void output_bin_vertices(std::ofstream &outfile);
+  void output_bin_vertices(std::ofstream& outfile);
 
   /// \short Get vector of vectors containing the coordinates of the
   /// vertices of the i_bin-th bin: bin_vertex[j][i] contains the
   /// i-th coordinate of the j-th vertex.
-  void get_bin_vertices(const unsigned &i_bin,
-                        Vector<Vector<double>> &bin_vertex);
+  void get_bin_vertices(const unsigned& i_bin,
+                        Vector<Vector<double>>& bin_vertex);
 
   /// \short Get the number of the bin containing the specified coordinate.
   /// Bin number is negative if the coordinate is outside
   /// the bin structure.
-  void get_bin(const Vector<double> &zeta, int &bin_number);
+  void get_bin(const Vector<double>& zeta, int& bin_number);
 
   /// \short Get the number of the bin containing the specified coordinate; also
   /// return the contents of that bin. Bin number is negative if the
   /// coordinate is outside the bin structure.
   void get_bin(
-    const Vector<double> &zeta,
-    int &bin_number,
-    Vector<std::pair<FiniteElement *, Vector<double>>> &sample_point_pairs);
+    const Vector<double>& zeta,
+    int& bin_number,
+    Vector<std::pair<FiniteElement*, Vector<double>>>& sample_point_pairs);
 
   /// Get the contents of all bins in vector
-  Vector<Vector<std::pair<FiniteElement *, Vector<double>>>> bin_content() const
+  Vector<Vector<std::pair<FiniteElement*, Vector<double>>>> bin_content() const
   {
-    Vector<Vector<std::pair<FiniteElement *, Vector<double>>>> all_vals;
+    Vector<Vector<std::pair<FiniteElement*, Vector<double>>>> all_vals;
     Bin_object_coord_pairs.get_all_values(all_vals);
     return all_vals;
   }
 
   /// Get the contents of all bins in vector
-  const std::map<unsigned, Vector<std::pair<FiniteElement *, Vector<double>>>>
-    *get_all_bins_content() const
+  const std::map<unsigned, Vector<std::pair<FiniteElement*, Vector<double>>>>* get_all_bins_content()
+    const
   {
     // Return the content of the bins
     return Bin_object_coord_pairs.map_pt();
@@ -961,13 +961,13 @@ public:
   /// \short Fill bin by diffusion, populating each empty bin with the
   /// same content as the first non-empty bin found during a spiral-based search
   /// up to the specified "radius" (default 1)
-  void fill_bin_by_diffusion(const unsigned &bin_diffusion_radius = 1);
+  void fill_bin_by_diffusion(const unsigned& bin_diffusion_radius = 1);
 
   /// Output bins
-  void output_bins(std::ofstream &outfile);
+  void output_bins(std::ofstream& outfile);
 
   /// Output bins
-  void output_bins(std::string &filename)
+  void output_bins(std::string& filename)
   {
     std::ofstream outfile;
     outfile.open(filename.c_str());
@@ -1023,7 +1023,7 @@ private:
   }
 
   /// Storage for paired objects and coords in each bin
-  SparseVector<Vector<std::pair<FiniteElement *, Vector<double>>>>
+  SparseVector<Vector<std::pair<FiniteElement*, Vector<double>>>>
     Bin_object_coord_pairs;
 
   /// \short Max. spiralling level (for efficiency; effect similar to
@@ -1054,16 +1054,16 @@ class CGALSamplePointContainer : public virtual SamplePointContainer
 public:
   /// Constructor
   CGALSamplePointContainer(
-    SamplePointContainerParameters *sample_point_container_parameters_pt);
+    SamplePointContainerParameters* sample_point_container_parameters_pt);
 
   /// \short Broken copy constructor.
-  CGALSamplePointContainer(const CGALSamplePointContainer &data)
+  CGALSamplePointContainer(const CGALSamplePointContainer& data)
   {
     BrokenCopy::broken_copy("CGALSamplePointContainer");
   }
 
   /// Broken assignment operator.
-  void operator=(const CGALSamplePointContainer &)
+  void operator=(const CGALSamplePointContainer&)
   {
     BrokenCopy::broken_assign("CGALSamplePointContainer");
   }
@@ -1083,14 +1083,14 @@ public:
 
   /// \short When searching through sample points only actually do the
   /// locate_zeta calls when when the counter exceeds this value.
-  unsigned &first_sample_point_to_actually_lookup_during_locate_zeta()
+  unsigned& first_sample_point_to_actually_lookup_during_locate_zeta()
   {
     return First_sample_point_to_actually_lookup_during_locate_zeta;
   }
 
   /// \short When searching through sample points  only actually do the
   /// locate_zeta calls when when the counter is less than this value.
-  unsigned &last_sample_point_to_actually_lookup_during_locate_zeta()
+  unsigned& last_sample_point_to_actually_lookup_during_locate_zeta()
   {
     return Last_sample_point_to_actually_lookup_during_locate_zeta;
   }
@@ -1102,7 +1102,7 @@ public:
   /// the amount of (more and more unlikely to yield anything!) work
   /// done locally before doing another costly mpi round trip
   /// when we're already far from the point we're trying to find.
-  unsigned &multiplier_for_max_sample_point_to_actually_lookup_during_locate_zeta()
+  unsigned& multiplier_for_max_sample_point_to_actually_lookup_during_locate_zeta()
   {
     return Multiplier_for_max_sample_point_to_actually_lookup_during_locate_zeta;
   }
@@ -1110,7 +1110,7 @@ public:
   /// \short When searching through sample points only actually do the
   /// locate_zeta calls when when the counter exceeds this value.
   /// This is the initial value when starting the spiral based search.
-  unsigned &initial_last_sample_point_to_actually_lookup_during_locate_zeta()
+  unsigned& initial_last_sample_point_to_actually_lookup_during_locate_zeta()
   {
     return Initial_last_sample_point_to_actually_lookup_during_locate_zeta;
   }
@@ -1118,19 +1118,19 @@ public:
   /// \short Find sub-GeomObject (finite element) and the local coordinate
   /// s within it that contains point with global coordinate zeta.
   /// sub_geom_object_pt=0 if point can't be found.
-  void locate_zeta(const Vector<double> &zeta,
-                   GeomObject *&sub_geom_object_pt,
-                   Vector<double> &s);
+  void locate_zeta(const Vector<double>& zeta,
+                   GeomObject*& sub_geom_object_pt,
+                   Vector<double>& s);
 
   /// \short Find the sub geometric object and local coordinate therein that
   /// corresponds to the intrinsic coordinate zeta, using up to the specified
   /// number of sample points as initial guess for the Newton-based search.
   /// If this fails, return the nearest sample point.
   void limited_locate_zeta(
-    const Vector<double> &zeta,
-    const unsigned &max_sample_points_for_newton_based_search,
-    GeomObject *&sub_geom_object_pt,
-    Vector<double> &s);
+    const Vector<double>& zeta,
+    const unsigned& max_sample_points_for_newton_based_search,
+    GeomObject*& sub_geom_object_pt,
+    Vector<double>& s);
 
   /// Dimension of the zeta ( =  dim of local coordinate of elements)
   unsigned ndim_zeta() const
@@ -1151,7 +1151,7 @@ private:
   /// typedefs for cgal stuff
   typedef CGAL::Cartesian_d<double> Kernel_d;
   typedef Kernel_d::Point_d Point_d;
-  typedef boost::tuple<Point_d, SamplePoint *> Point_d_and_pointer;
+  typedef boost::tuple<Point_d, SamplePoint*> Point_d_and_pointer;
   typedef CGAL::Search_traits_d<Kernel_d> Traits_base_d;
   typedef CGAL::Search_traits_adapter<
     Point_d_and_pointer,
@@ -1164,12 +1164,12 @@ private:
   Vector<Point_d> CGAL_sample_point_zeta_d;
 
   /// Pointer to tree-based representation of sample points
-  K_neighbor_search_d::Tree *CGAL_tree_d_pt;
+  K_neighbor_search_d::Tree* CGAL_tree_d_pt;
 
   /// Vector storing pointers to sample point objects (which represent
   /// sample point in terms of number of element
   /// in its mesh and number of sample point)
-  Vector<SamplePoint *> Sample_point_pt;
+  Vector<SamplePoint*> Sample_point_pt;
 
   /// \short When searching through sample points only actually do the
   /// locate_zeta calls when when the counter exceeds this value.

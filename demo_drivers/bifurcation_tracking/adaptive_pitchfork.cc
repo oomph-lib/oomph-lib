@@ -67,7 +67,7 @@ class CompareNodes
 {
 public:
   /// Define the comparison operator using the round brackets
-  int operator()(Node *const &node1_pt, Node *const &node2_pt)
+  int operator()(Node* const& node1_pt, Node* const& node2_pt)
   {
     // Find the dimension of the node
     unsigned n_dim = node1_pt->ndim();
@@ -123,7 +123,7 @@ class RefineablePorousChannelProblem : public Problem
 {
 public:
   /// Make a copy of the problem for using in adaptive bifurcation tracking
-  Problem *make_copy()
+  Problem* make_copy()
   {
     // Make a copy based on the current parameters
     return (new RefineablePorousChannelProblem<ELEMENT>());
@@ -158,7 +158,7 @@ public:
     // Find the number of nodes
     const unsigned n_node = this->mesh_pt()->nnode();
     // Allocate storage for the nodes
-    Vector<Node *> local_nodes_pt(n_node);
+    Vector<Node*> local_nodes_pt(n_node);
     // Load the nodes into the local copy
     for (unsigned n = 0; n < n_node; n++)
     {
@@ -228,8 +228,8 @@ public:
             for (unsigned n = 0; n < n_half; n++)
             {
               // Get the values of the node
-              Node *node1_pt = local_nodes_pt[column_start + n];
-              Node *node2_pt = local_nodes_pt[column_end - n];
+              Node* node1_pt = local_nodes_pt[column_start + n];
+              Node* node2_pt = local_nodes_pt[column_end - n];
               double val1 = node1_pt->value(i);
               double val2 = node2_pt->value(i);
 
@@ -273,8 +273,8 @@ public:
             for (unsigned n = 0; n < n_half; n++)
             {
               // Get the values stored at the node
-              Node *node1_pt = local_nodes_pt[column_start + n];
-              Node *node2_pt = local_nodes_pt[column_end - n];
+              Node* node1_pt = local_nodes_pt[column_start + n];
+              Node* node2_pt = local_nodes_pt[column_end - n];
               double val1 = node1_pt->value(i);
               double val2 = node2_pt->value(i);
               // Find the average of the two values
@@ -314,11 +314,11 @@ public:
   }
 
   // Access function for the specific mesh
-  RefineableRectangularQuadMesh<ELEMENT> *mesh_pt()
+  RefineableRectangularQuadMesh<ELEMENT>* mesh_pt()
   {
     // Upcast from pointer to the Mesh base class to the specific
     // element type that we're using here.
-    return dynamic_cast<RefineableRectangularQuadMesh<ELEMENT> *>(
+    return dynamic_cast<RefineableRectangularQuadMesh<ELEMENT>*>(
       Problem::mesh_pt());
   }
 
@@ -356,7 +356,7 @@ RefineablePorousChannelProblem<ELEMENT>::RefineablePorousChannelProblem()
     n_x, n_y, 0.0, l_x, -1.0, 1.0, time_stepper_pt());
 
   // Set error estimator
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   mesh_pt()->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Let this problem be conventional form by setting gamma to zero
@@ -406,7 +406,7 @@ RefineablePorousChannelProblem<ELEMENT>::RefineablePorousChannelProblem()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Physical_Variables::Re;

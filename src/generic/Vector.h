@@ -64,10 +64,10 @@ namespace oomph
     typedef _Tp value_type;
 
     /// Typedef to make the constructors look a bit cleaner
-    typedef value_type &reference;
+    typedef value_type& reference;
 
     /// Typedef to make the constructors look a bit cleaner
-    typedef const value_type &const_reference;
+    typedef const value_type& const_reference;
 
     /// Typedef to make the constructors look a bit cleaner
     typedef size_t size_type;
@@ -149,18 +149,18 @@ namespace oomph
 
     /// \short A constructor that creates a vector of size __n and
     /// initialises every entry to __value
-    Vector(size_type __n, const _Tp &__value) : std::vector<_Tp>(__n, __value)
+    Vector(size_type __n, const _Tp& __value) : std::vector<_Tp>(__n, __value)
     {
     }
 
     /// Copy constructor
-    Vector(const Vector<_Tp> &__x) : std::vector<_Tp>(__x) {}
+    Vector(const Vector<_Tp>& __x) : std::vector<_Tp>(__x) {}
 
     // No explicit destructor is required because the base class destructor
     // handles all memory issues ~Vector() {}
 
     /// Iterate over all values and set to the desired value
-    void initialise(const _Tp &__value)
+    void initialise(const _Tp& __value)
     {
       for (typename std::vector<_Tp>::iterator it = std::vector<_Tp>::begin();
            it != std::vector<_Tp>::end();
@@ -200,17 +200,17 @@ namespace oomph
     typedef bool value_type;
 
     /// Typedef to make the constructors look a bit cleaner
-    typedef value_type &reference;
+    typedef value_type& reference;
 
     /// Typedef to make the constructors look a bit cleaner
-    typedef const value_type &const_reference;
+    typedef const value_type& const_reference;
 
     /// Typedef to make the constructors look a bit cleaner
     typedef size_t size_type;
 
     /// \short Dummy constructor to avoid compiler from warning about
     /// only-private constructors
-    Vector(const double &dont_call_this_constructor)
+    Vector(const double& dont_call_this_constructor)
     {
       // Throw an Oomph-lib error
       throw OomphLibError("Please use vector<bool> instead of Vector<bool>",
@@ -230,15 +230,15 @@ namespace oomph
 
     /// \short A constructor that creates a vector of size __n and
     /// initialises every entry to __value
-    Vector(size_type __n, const bool &__value) : std::vector<bool>(__n, __value)
+    Vector(size_type __n, const bool& __value) : std::vector<bool>(__n, __value)
     {
     }
 
     /// Copy constructor
-    Vector(const Vector<bool> &__x) : std::vector<bool>(__x) {}
+    Vector(const Vector<bool>& __x) : std::vector<bool>(__x) {}
 
     /// Iterate over all values and set to the desired value
-    void initialise(const bool &__value)
+    void initialise(const bool& __value)
     {
       for (std::vector<bool>::iterator it = std::vector<bool>::begin();
            it != std::vector<bool>::end();
@@ -255,8 +255,8 @@ namespace oomph
   namespace VectorHelpers
   {
     /// \short Check the lengths if two Vectors are the same length
-    inline void check_lengths_match(const Vector<double> &a,
-                                    const Vector<double> &b)
+    inline void check_lengths_match(const Vector<double>& a,
+                                    const Vector<double>& b)
     {
 #ifdef PARANOID
       if (a.size() != b.size())
@@ -274,7 +274,7 @@ namespace oomph
 
     /// \short Probably not always best/fastest because not optimised for
     /// dimension but useful...
-    inline double dot(const Vector<double> &a, const Vector<double> &b)
+    inline double dot(const Vector<double>& a, const Vector<double>& b)
     {
       check_lengths_match(a, b);
       double temp = 0;
@@ -286,13 +286,13 @@ namespace oomph
     }
 
     /// \short Get the magnitude of a vector.
-    inline double magnitude(const Vector<double> &a)
+    inline double magnitude(const Vector<double>& a)
     {
       return (std::sqrt(dot(a, a)));
     }
 
     /// \short Get the angle between two vector.
-    inline double angle(const Vector<double> &a, const Vector<double> &b)
+    inline double angle(const Vector<double>& a, const Vector<double>& b)
     {
       // Notice that we use one square root operation by avoiding the
       // call to magnitude(...)
@@ -301,9 +301,9 @@ namespace oomph
 
     /// \short Cross product using "proper" output (move semantics means this is
     /// ok nowadays).
-    inline void cross(const Vector<double> &A,
-                      const Vector<double> &B,
-                      Vector<double> &C)
+    inline void cross(const Vector<double>& A,
+                      const Vector<double>& B,
+                      Vector<double>& C)
     {
 #ifdef PARANOID
       if ((A.size() != 3) || (B.size() != 3) || (C.size() != 3))
@@ -326,8 +326,8 @@ namespace oomph
 
     /// \short Cross product using "proper" output (move semantics means this is
     /// ok This calls the other cross(...) function.
-    inline Vector<double> cross(const Vector<double> &A,
-                                const Vector<double> &B)
+    inline Vector<double> cross(const Vector<double>& A,
+                                const Vector<double>& B)
     {
       Vector<double> output(3, 0.0);
       cross(A, B, output);

@@ -53,19 +53,19 @@ class MyStraightLine : public GeomObject
 {
 public:
   /// Constructor:  Pass start and end points
-  MyStraightLine(const Vector<double> &r_start, const Vector<double> &r_end) :
+  MyStraightLine(const Vector<double>& r_start, const Vector<double>& r_end) :
     GeomObject(1, 2), R_start(r_start), R_end(r_end)
   {
   }
 
   /// Broken copy constructor
-  MyStraightLine(const MyStraightLine &dummy)
+  MyStraightLine(const MyStraightLine& dummy)
   {
     BrokenCopy::broken_copy("MyStraightLine");
   }
 
   /// Broken assignment operator
-  void operator=(const MyStraightLine &)
+  void operator=(const MyStraightLine&)
   {
     BrokenCopy::broken_assign("MyStraightLine");
   }
@@ -74,7 +74,7 @@ public:
   ~MyStraightLine() {}
 
   /// \short Position Vector at Lagrangian coordinate zeta
-  void position(const Vector<double> &zeta, Vector<double> &r) const
+  void position(const Vector<double>& zeta, Vector<double>& r) const
   {
     // Position Vector
     r[0] = R_start[0] + (R_end[0] - R_start[0]) * zeta[0];
@@ -108,7 +108,7 @@ namespace Global_Parameters
   Vector<double> Omega_sq_region(2, Omega_sq);
 
   /// The elasticity tensors for the two regions
-  Vector<TimeHarmonicIsotropicElasticityTensor *> E_pt;
+  Vector<TimeHarmonicIsotropicElasticityTensor*> E_pt;
 
   /// Thickness of annulus
   double H_annulus = 0.1;
@@ -120,9 +120,9 @@ namespace Global_Parameters
   double Alpha = 200.0;
 
   /// Constant pressure load (real and imag part)
-  void pressure_load(const Vector<double> &x,
-                     const Vector<double> &n,
-                     Vector<std::complex<double>> &traction)
+  void pressure_load(const Vector<double>& x,
+                     const Vector<double>& n,
+                     Vector<std::complex<double>>& traction)
   {
     double phi = atan2(x[1], x[0]);
     double magnitude =
@@ -179,17 +179,17 @@ private:
 #ifdef ADAPTIVE
 
   /// Pointer to refineable solid mesh
-  RefineableTriangleMesh<ELASTICITY_ELEMENT> *Solid_mesh_pt;
+  RefineableTriangleMesh<ELASTICITY_ELEMENT>* Solid_mesh_pt;
 
 #else
 
   /// Pointer to solid mesh
-  TriangleMesh<ELASTICITY_ELEMENT> *Solid_mesh_pt;
+  TriangleMesh<ELASTICITY_ELEMENT>* Solid_mesh_pt;
 
 #endif
 
   /// Pointer to mesh of traction elements
-  Mesh *Traction_mesh_pt;
+  Mesh* Traction_mesh_pt;
 
   /// DocInfo object for output
   DocInfo Doc_info;
@@ -239,14 +239,14 @@ RingWithTRibProblem<ELASTICITY_ELEMENT>::RingWithTRibProblem()
   double half_phi_rib = asin(0.5 * rib_thick / r_inner);
 
   // Pointer to the closed curve that defines the outer boundary
-  TriangleMeshClosedCurve *closed_curve_pt = 0;
+  TriangleMeshClosedCurve* closed_curve_pt = 0;
 
   // Provide storage for pointers to the parts of the curvilinear boundary
-  Vector<TriangleMeshCurveSection *> curvilinear_boundary_pt;
+  Vector<TriangleMeshCurveSection*> curvilinear_boundary_pt;
 
   // Outer boundary
   //---------------
-  Ellipse *outer_boundary_circle_pt = new Ellipse(r_outer, r_outer);
+  Ellipse* outer_boundary_circle_pt = new Ellipse(r_outer, r_outer);
   double zeta_start = -0.5 * MathematicalConstants::Pi;
   double zeta_end = 0.5 * MathematicalConstants::Pi;
   unsigned nsegment = 50;
@@ -263,7 +263,7 @@ RingWithTRibProblem<ELASTICITY_ELEMENT>::RingWithTRibProblem()
   r_start[1] = r_outer;
   r_end[0] = 0.0;
   r_end[1] = r_inner;
-  MyStraightLine *upper_sym_pt = new MyStraightLine(r_start, r_end);
+  MyStraightLine* upper_sym_pt = new MyStraightLine(r_start, r_end);
   zeta_start = 0.0;
   zeta_end = 1.0;
   nsegment = 1;
@@ -276,7 +276,7 @@ RingWithTRibProblem<ELASTICITY_ELEMENT>::RingWithTRibProblem()
 
   // Upper part of inner boundary
   //-----------------------------
-  Ellipse *upper_inner_boundary_pt = new Ellipse(r_inner, r_inner);
+  Ellipse* upper_inner_boundary_pt = new Ellipse(r_inner, r_inner);
   zeta_start = 0.5 * MathematicalConstants::Pi;
   zeta_end = half_phi_rib;
   nsegment = 20;
@@ -290,12 +290,12 @@ RingWithTRibProblem<ELASTICITY_ELEMENT>::RingWithTRibProblem()
   r_start[1] = r_inner * sin(half_phi_rib);
   r_end[0] = r_start[0] - rib_depth;
   r_end[1] = r_start[1];
-  MyStraightLine *upper_inward_rib_pt = new MyStraightLine(r_start, r_end);
+  MyStraightLine* upper_inward_rib_pt = new MyStraightLine(r_start, r_end);
   zeta_start = 0.0;
   zeta_end = 1.0;
   nsegment = 1;
   boundary_id = curvilinear_boundary_pt.size();
-  TriangleMeshCurviLine *upper_inward_rib_curviline_pt =
+  TriangleMeshCurviLine* upper_inward_rib_curviline_pt =
     new TriangleMeshCurviLine(
       upper_inward_rib_pt, zeta_start, zeta_end, nsegment, boundary_id);
   curvilinear_boundary_pt.push_back(upper_inward_rib_curviline_pt);
@@ -306,7 +306,7 @@ RingWithTRibProblem<ELASTICITY_ELEMENT>::RingWithTRibProblem()
   r_start[1] = r_end[1];
   r_end[0] = r_start[0];
   r_end[1] = r_start[1] + 0.5 * (t_width - rib_thick);
-  MyStraightLine *vertical_upper_t_rib_pt = new MyStraightLine(r_start, r_end);
+  MyStraightLine* vertical_upper_t_rib_pt = new MyStraightLine(r_start, r_end);
   zeta_start = 0.0;
   zeta_end = 1.0;
   nsegment = 1;
@@ -320,7 +320,7 @@ RingWithTRibProblem<ELASTICITY_ELEMENT>::RingWithTRibProblem()
   r_start[1] = r_end[1];
   r_end[0] = r_start[0] - t_thick;
   r_end[1] = r_start[1];
-  MyStraightLine *horizontal_upper_t_rib_pt =
+  MyStraightLine* horizontal_upper_t_rib_pt =
     new MyStraightLine(r_start, r_end);
   zeta_start = 0.0;
   zeta_end = 1.0;
@@ -335,7 +335,7 @@ RingWithTRibProblem<ELASTICITY_ELEMENT>::RingWithTRibProblem()
   r_start[1] = r_end[1];
   r_end[0] = r_start[0];
   r_end[1] = -r_start[1];
-  MyStraightLine *inner_vertical_rib_pt = new MyStraightLine(r_start, r_end);
+  MyStraightLine* inner_vertical_rib_pt = new MyStraightLine(r_start, r_end);
   zeta_start = 0.0;
   zeta_end = 1.0;
   nsegment = 1;
@@ -349,7 +349,7 @@ RingWithTRibProblem<ELASTICITY_ELEMENT>::RingWithTRibProblem()
   r_start[1] = r_end[1];
   r_end[0] = r_start[0] + t_thick;
   r_end[1] = r_start[1];
-  MyStraightLine *horizontal_lower_t_rib_pt =
+  MyStraightLine* horizontal_lower_t_rib_pt =
     new MyStraightLine(r_start, r_end);
   zeta_start = 0.0;
   zeta_end = 1.0;
@@ -364,7 +364,7 @@ RingWithTRibProblem<ELASTICITY_ELEMENT>::RingWithTRibProblem()
   r_start[1] = r_end[1];
   r_end[0] = r_start[0];
   r_end[1] = r_start[1] + 0.5 * (t_width - rib_thick);
-  MyStraightLine *vertical_lower_t_rib_pt = new MyStraightLine(r_start, r_end);
+  MyStraightLine* vertical_lower_t_rib_pt = new MyStraightLine(r_start, r_end);
   zeta_start = 0.0;
   zeta_end = 1.0;
   nsegment = 1;
@@ -378,19 +378,19 @@ RingWithTRibProblem<ELASTICITY_ELEMENT>::RingWithTRibProblem()
   r_end[1] = -r_inner * sin(half_phi_rib);
   r_start[0] = r_end[0] - rib_depth;
   r_start[1] = r_end[1];
-  MyStraightLine *lower_inward_rib_pt = new MyStraightLine(r_start, r_end);
+  MyStraightLine* lower_inward_rib_pt = new MyStraightLine(r_start, r_end);
   zeta_start = 0.0;
   zeta_end = 1.0;
   nsegment = 1;
   boundary_id = curvilinear_boundary_pt.size();
-  TriangleMeshCurviLine *lower_inward_rib_curviline_pt =
+  TriangleMeshCurviLine* lower_inward_rib_curviline_pt =
     new TriangleMeshCurviLine(
       lower_inward_rib_pt, zeta_start, zeta_end, nsegment, boundary_id);
   curvilinear_boundary_pt.push_back(lower_inward_rib_curviline_pt);
 
   // Lower part of inner boundary
   //-----------------------------
-  Ellipse *lower_inner_boundary_circle_pt = new Ellipse(r_inner, r_inner);
+  Ellipse* lower_inner_boundary_circle_pt = new Ellipse(r_inner, r_inner);
   zeta_start = -half_phi_rib;
   zeta_end = -0.5 * MathematicalConstants::Pi;
   nsegment = 20;
@@ -408,7 +408,7 @@ RingWithTRibProblem<ELASTICITY_ELEMENT>::RingWithTRibProblem()
   r_start[1] = -r_inner;
   r_end[0] = 0.0;
   r_end[1] = -r_outer;
-  MyStraightLine *lower_sym_pt = new MyStraightLine(r_start, r_end);
+  MyStraightLine* lower_sym_pt = new MyStraightLine(r_start, r_end);
   zeta_start = 0.0;
   zeta_end = 1.0;
   nsegment = 1;
@@ -425,7 +425,7 @@ RingWithTRibProblem<ELASTICITY_ELEMENT>::RingWithTRibProblem()
 
   // Vertical dividing line across base of T-rib
   //--------------------------------------------
-  Vector<TriangleMeshCurveSection *> internal_polyline_pt(1);
+  Vector<TriangleMeshCurveSection*> internal_polyline_pt(1);
   r_start[0] = r_inner * cos(half_phi_rib);
   r_start[1] = r_inner * sin(half_phi_rib);
   r_end[0] = r_inner * cos(half_phi_rib);
@@ -435,7 +435,7 @@ RingWithTRibProblem<ELASTICITY_ELEMENT>::RingWithTRibProblem()
   boundary_vertices[0] = r_start;
   boundary_vertices[1] = r_end;
   boundary_id = 100;
-  TriangleMeshPolyLine *rib_divider_pt =
+  TriangleMeshPolyLine* rib_divider_pt =
     new TriangleMeshPolyLine(boundary_vertices, boundary_id);
   internal_polyline_pt[0] = rib_divider_pt;
 
@@ -450,7 +450,7 @@ RingWithTRibProblem<ELASTICITY_ELEMENT>::RingWithTRibProblem()
     lower_inward_rib_curviline_pt, s_connect);
 
   // Create open curve that defines internal bondary
-  Vector<TriangleMeshOpenCurve *> inner_boundary_pt;
+  Vector<TriangleMeshOpenCurve*> inner_boundary_pt;
   inner_boundary_pt.push_back(new TriangleMeshOpenCurve(internal_polyline_pt));
 
   // Define coordinates of a point inside the rib
@@ -552,7 +552,7 @@ void RingWithTRibProblem<ELASTICITY_ELEMENT>::complete_problem_setup()
     for (unsigned e = 0; e < nel; e++)
     {
       // Cast to a solid element
-      ELASTICITY_ELEMENT *el_pt = dynamic_cast<ELASTICITY_ELEMENT *>(
+      ELASTICITY_ELEMENT* el_pt = dynamic_cast<ELASTICITY_ELEMENT*>(
         Solid_mesh_pt->region_element_pt(r, e));
 
       // Set the constitutive law
@@ -575,7 +575,7 @@ void RingWithTRibProblem<ELASTICITY_ELEMENT>::complete_problem_setup()
     unsigned n_node = Solid_mesh_pt->nboundary_node(Upper_symmetry_boundary_id);
     for (unsigned i = 0; i < n_node; i++)
     {
-      Node *nod_pt =
+      Node* nod_pt =
         Solid_mesh_pt->boundary_node_pt(Upper_symmetry_boundary_id, i);
 
       // Real part of x-displacement
@@ -593,7 +593,7 @@ void RingWithTRibProblem<ELASTICITY_ELEMENT>::complete_problem_setup()
     unsigned n_node = Solid_mesh_pt->nboundary_node(Lower_symmetry_boundary_id);
     for (unsigned i = 0; i < n_node; i++)
     {
-      Node *nod_pt =
+      Node* nod_pt =
         Solid_mesh_pt->boundary_node_pt(Lower_symmetry_boundary_id, i);
 
       // Real part of x-displacement
@@ -654,14 +654,14 @@ void RingWithTRibProblem<ELASTICITY_ELEMENT>::create_traction_elements()
     for (unsigned e = 0; e < n_element; e++)
     {
       // Get pointer to the bulk element that is adjacent to boundary b
-      ELASTICITY_ELEMENT *bulk_elem_pt = dynamic_cast<ELASTICITY_ELEMENT *>(
+      ELASTICITY_ELEMENT* bulk_elem_pt = dynamic_cast<ELASTICITY_ELEMENT*>(
         Solid_mesh_pt->boundary_element_pt(b, e));
 
       // Find the index of the face of element e along boundary b
       int face_index = Solid_mesh_pt->face_index_at_boundary(b, e);
 
       // Create element
-      TimeHarmonicLinearElasticityTractionElement<ELASTICITY_ELEMENT> *el_pt =
+      TimeHarmonicLinearElasticityTractionElement<ELASTICITY_ELEMENT>* el_pt =
         new TimeHarmonicLinearElasticityTractionElement<ELASTICITY_ELEMENT>(
           bulk_elem_pt, face_index);
 
@@ -746,7 +746,7 @@ void RingWithTRibProblem<ELASTICITY_ELEMENT>::doc_solution()
     unsigned nel = Solid_mesh_pt->nregion_element(r);
     for (unsigned e = 0; e < nel; e++)
     {
-      FiniteElement *el_pt = Solid_mesh_pt->region_element_pt(r, e);
+      FiniteElement* el_pt = Solid_mesh_pt->region_element_pt(r, e);
       el_pt->output(some_file, n_plot);
     }
     some_file.close();
@@ -775,7 +775,7 @@ void RingWithTRibProblem<ELASTICITY_ELEMENT>::doc_solution()
 //=======start_of_main==================================================
 /// Driver for annular disk loaded by pressure
 //======================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

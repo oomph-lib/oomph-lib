@@ -78,7 +78,7 @@ namespace Global_Parameters
 namespace StokesFlowExactWind
 {
   /// Wind that represents a constantly translating sphere
-  void get_wind(const Vector<double> &x, Vector<double> &wind)
+  void get_wind(const Vector<double>& x, Vector<double>& wind)
   {
     double x_sc = x[0] - 0.0;
     double z_sc = x[1] - Global_Parameters::Sphere_centre_z;
@@ -114,8 +114,8 @@ class DragNusseltCalculationElement :
 public:
   /// Constructor, which takes a "bulk" element and the value of the index
   /// and its limit
-  DragNusseltCalculationElement(FiniteElement *const &element_pt,
-                                const int &face_index) :
+  DragNusseltCalculationElement(FiniteElement* const& element_pt,
+                                const int& face_index) :
     FaceGeometry<ELEMENT>(), FaceElement()
   {
     // Attach the geometrical information to the element. N.B. This function
@@ -127,9 +127,9 @@ public:
   ~DragNusseltCalculationElement() {}
 
   /// Return the torque calculation
-  void calculate_drag_nusselt(Vector<double> &drag,
-                              double &nusselt,
-                              double &area)
+  void calculate_drag_nusselt(Vector<double>& drag,
+                              double& nusselt,
+                              double& area)
   {
     // Set the value of n_intpt
     const unsigned n_intpt = integral_pt()->nweight();
@@ -157,8 +157,8 @@ public:
 
     double sum[4] = {0.0, 0.0, 0.0, 0.0};
 
-    ELEMENT *const bulk_elem_pt =
-      dynamic_cast<ELEMENT *>(this->bulk_element_pt());
+    ELEMENT* const bulk_elem_pt =
+      dynamic_cast<ELEMENT*>(this->bulk_element_pt());
 
     // Loop over the integration points
     for (unsigned ipt = 0; ipt < n_intpt; ipt++)
@@ -225,9 +225,9 @@ class FlowAroundHalfCylinderProblem : public Problem
 public:
   /// Constructor: Pass geometric object that represents
   /// central cylinder, and length and height of domain.
-  FlowAroundHalfCylinderProblem(GeomObject *cylinder_pt,
-                                const double &radius,
-                                const double &length);
+  FlowAroundHalfCylinderProblem(GeomObject* cylinder_pt,
+                                const double& radius,
+                                const double& length);
 
   /// Update the problem specs after solve (empty)
   void actions_after_newton_solve() {}
@@ -311,13 +311,13 @@ public:
   } // end_of_actions_after_adapt
 
   /// Access function for the specific mesh
-  RefineableHalfRectangleWithHoleMesh<ELEMENT> *mesh_pt()
+  RefineableHalfRectangleWithHoleMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<RefineableHalfRectangleWithHoleMesh<ELEMENT> *>(
+    return dynamic_cast<RefineableHalfRectangleWithHoleMesh<ELEMENT>*>(
       Problem::mesh_pt());
   }
 
-  void compute_drag_nusselt(Vector<double> &drag, double &nusselt, double &area)
+  void compute_drag_nusselt(Vector<double>& drag, double& nusselt, double& area)
   {
     unsigned bound = 4;
     // Loop over the elements adjacent to the boundary 4 and make face elements
@@ -331,14 +331,14 @@ public:
     for (unsigned e = 0; e < n_bound_element; e++)
     {
       // Get pointer to the bulk element
-      ELEMENT *bulk_elem_pt =
-        dynamic_cast<ELEMENT *>(this->mesh_pt()->boundary_element_pt(bound, e));
+      ELEMENT* bulk_elem_pt =
+        dynamic_cast<ELEMENT*>(this->mesh_pt()->boundary_element_pt(bound, e));
 
       // FInd the face index
       int face_index = this->mesh_pt()->face_index_at_boundary(bound, e);
 
       // Build the flux element
-      DragNusseltCalculationElement<ELEMENT> *drag_element_pt =
+      DragNusseltCalculationElement<ELEMENT>* drag_element_pt =
         new DragNusseltCalculationElement<ELEMENT>(bulk_elem_pt, face_index);
 
       // Now calculate the torque
@@ -377,7 +377,7 @@ private:
 //========================================================================
 template<class ELEMENT>
 FlowAroundHalfCylinderProblem<ELEMENT>::FlowAroundHalfCylinderProblem(
-  GeomObject *cylinder_pt, const double &radius, const double &length)
+  GeomObject* cylinder_pt, const double& radius, const double& length)
 {
   Domain_radius = radius;
   Domain_length = length;
@@ -387,7 +387,7 @@ FlowAroundHalfCylinderProblem<ELEMENT>::FlowAroundHalfCylinderProblem(
     cylinder_pt, radius, length, 49.0, 2, 49.0, 2, 1.0, 2);
 
   // Set error estimator
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   mesh_pt()->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Allow a fair amount of refinement
@@ -440,7 +440,7 @@ FlowAroundHalfCylinderProblem<ELEMENT>::FlowAroundHalfCylinderProblem(
   unsigned nelem = mesh_pt()->nelement();
   for (unsigned e = 0; e < nelem; e++)
   {
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
     // Set the Peclet number
     el_pt->pe_pt() = &Global_Parameters::Pe;
@@ -558,7 +558,7 @@ int main()
   Global_Parameters::Sphere_centre_z = 50.0;
 
   // Create a new ellipse object as the central cylinder
-  HalfEllipse *cylinder_pt =
+  HalfEllipse* cylinder_pt =
     new HalfEllipse(Global_Parameters::Sphere_centre_z, 0.5, 0.5);
 
   // Create Problem

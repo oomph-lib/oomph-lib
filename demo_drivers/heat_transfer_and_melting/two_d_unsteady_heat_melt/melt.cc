@@ -68,7 +68,7 @@ namespace ProblemParameters
   double Nu = 0.3;
 
   /// Pointer to constitutive law
-  ConstitutiveLaw *Constitutive_law_pt = 0;
+  ConstitutiveLaw* Constitutive_law_pt = 0;
 
 } // namespace ProblemParameters
 
@@ -92,9 +92,9 @@ namespace ExactSolution
   double Omega_cos = 0.0;
 
   /// Exact solution as a Vector
-  void get_exact_u_for_unsteady_heat_validation(const double &t,
-                                                const Vector<double> &x,
-                                                Vector<double> &u)
+  void get_exact_u_for_unsteady_heat_validation(const double& t,
+                                                const Vector<double>& x,
+                                                Vector<double>& u)
   {
     double X = x[0];
     double Y = x[1];
@@ -106,9 +106,9 @@ namespace ExactSolution
   }
 
   /// Exact solution as a scalar
-  void get_exact_u_for_unsteady_heat_validation(const double &t,
-                                                const Vector<double> &x,
-                                                double &u)
+  void get_exact_u_for_unsteady_heat_validation(const double& t,
+                                                const Vector<double>& x,
+                                                double& u)
   {
     Vector<double> u_vect(1);
     get_exact_u_for_unsteady_heat_validation(t, x, u_vect);
@@ -116,9 +116,9 @@ namespace ExactSolution
   }
 
   /// Source function to make it an exact solution
-  void get_source_for_unsteady_heat_validation(const double &t,
-                                               const Vector<double> &x,
-                                               double &source)
+  void get_source_for_unsteady_heat_validation(const double& t,
+                                               const Vector<double>& x,
+                                               double& source)
   {
     double X = x[0];
     double Y = x[1];
@@ -150,11 +150,11 @@ namespace ExactSolution
 
   /// \short Flux required by the exact solution on a boundary with outer unit
   /// normal n. No dependence on temperature u.
-  void prescribed_flux_for_unsteady_heat_validation(const double &t,
-                                                    const Vector<double> &x,
-                                                    const Vector<double> &n,
-                                                    const double &u,
-                                                    double &flux)
+  void prescribed_flux_for_unsteady_heat_validation(const double& t,
+                                                    const Vector<double>& x,
+                                                    const Vector<double>& n,
+                                                    const double& u,
+                                                    double& flux)
   {
     double X = x[0];
     double Y = x[1];
@@ -190,7 +190,7 @@ namespace ExactSolution
   }
 
   /// Height of melting surface
-  double melting_surface_height(const double &t, const double &x)
+  double melting_surface_height(const double& t, const double& x)
   {
     return 1.0 -
            Growth_rate * t * t * (1.0 - cos(2.0 * x * 0.3141592653589793E1));
@@ -258,8 +258,8 @@ public:
     unsigned n_element = Surface_melt_mesh_pt->nelement();
     for (unsigned e = 0; e < n_element; e++)
     {
-      SurfaceMeltElement<ELEMENT> *el_pt =
-        dynamic_cast<SurfaceMeltElement<ELEMENT> *>(
+      SurfaceMeltElement<ELEMENT>* el_pt =
+        dynamic_cast<SurfaceMeltElement<ELEMENT>*>(
           Surface_melt_mesh_pt->element_pt(e));
       el_pt->set_lagrange_multiplier_pressure_to_zero();
     }
@@ -290,14 +290,14 @@ private:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Get pointer to the bulk element that is adjacent to boundary b
-      ELEMENT *bulk_elem_pt =
-        dynamic_cast<ELEMENT *>(Bulk_mesh_pt->boundary_element_pt(b, e));
+      ELEMENT* bulk_elem_pt =
+        dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(b, e));
 
       // What is the face index of element e along boundary b
       int face_index = Bulk_mesh_pt->face_index_at_boundary(b, e);
 
       // Build the corresponding prescribed-flux element
-      SurfaceMeltElement<ELEMENT> *flux_element_pt =
+      SurfaceMeltElement<ELEMENT>* flux_element_pt =
         new SurfaceMeltElement<ELEMENT>(bulk_elem_pt, face_index);
 
       // Add the prescribed-flux element to the surface mesh
@@ -333,7 +333,7 @@ private:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Cast to a solid element
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
       // Set the constitutive law
       el_pt->constitutive_law_pt() = ProblemParameters::Constitutive_law_pt;
@@ -357,7 +357,7 @@ private:
     unsigned nnod = Bulk_mesh_pt->nboundary_node(b);
     for (unsigned j = 0; j < nnod; j++)
     {
-      SolidNode *nod_pt = Bulk_mesh_pt->boundary_node_pt(b, j);
+      SolidNode* nod_pt = Bulk_mesh_pt->boundary_node_pt(b, j);
       nod_pt->pin_position(0);
       nod_pt->pin_position(1);
     }
@@ -367,14 +367,14 @@ private:
     nnod = Bulk_mesh_pt->nboundary_node(b);
     for (unsigned j = 0; j < nnod; j++)
     {
-      SolidNode *nod_pt = Bulk_mesh_pt->boundary_node_pt(b, j);
+      SolidNode* nod_pt = Bulk_mesh_pt->boundary_node_pt(b, j);
       nod_pt->pin_position(0);
     }
     b = Right_boundary_id;
     nnod = Bulk_mesh_pt->nboundary_node(b);
     for (unsigned j = 0; j < nnod; j++)
     {
-      SolidNode *nod_pt = Bulk_mesh_pt->boundary_node_pt(b, j);
+      SolidNode* nod_pt = Bulk_mesh_pt->boundary_node_pt(b, j);
       nod_pt->pin_position(0);
     }
 
@@ -384,7 +384,7 @@ private:
       unsigned nnod = Bulk_mesh_pt->nnode();
       for (unsigned j = 0; j < nnod; j++)
       {
-        SolidNode *nod_pt = Bulk_mesh_pt->node_pt(j);
+        SolidNode* nod_pt = Bulk_mesh_pt->node_pt(j);
         nod_pt->pin_position(0);
         nod_pt->pin_position(1);
         unsigned nval = nod_pt->nvalue();
@@ -402,8 +402,8 @@ private:
     n_element = Surface_melt_mesh_pt->nelement();
     for (unsigned e = 0; e < n_element; e++)
     {
-      SurfaceMeltElement<ELEMENT> *el_pt =
-        dynamic_cast<SurfaceMeltElement<ELEMENT> *>(
+      SurfaceMeltElement<ELEMENT>* el_pt =
+        dynamic_cast<SurfaceMeltElement<ELEMENT>*>(
           Surface_melt_mesh_pt->element_pt(e));
       el_pt->set_lagrange_multiplier_pressure_to_zero();
     }
@@ -414,8 +414,8 @@ private:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Upcast from GeneralisedElement to SurfaceMeltElement flux element
-      SurfaceMeltElement<ELEMENT> *el_pt =
-        dynamic_cast<SurfaceMeltElement<ELEMENT> *>(
+      SurfaceMeltElement<ELEMENT>* el_pt =
+        dynamic_cast<SurfaceMeltElement<ELEMENT>*>(
           Surface_melt_mesh_pt->element_pt(e));
 
       // Pass validation flux
@@ -435,10 +435,10 @@ private:
   }
 
   /// Pointers to specific mesh
-  RefineableSolidTriangleMesh<ELEMENT> *Bulk_mesh_pt;
+  RefineableSolidTriangleMesh<ELEMENT>* Bulk_mesh_pt;
 
   /// Pointer to the "surface" mesh
-  Mesh *Surface_melt_mesh_pt;
+  Mesh* Surface_melt_mesh_pt;
 
   /// ID of melt boundary
   unsigned Melt_boundary_id;
@@ -460,7 +460,7 @@ private:
 
   /// \short Backup of Surface_melt_mesh_pt so the Lagrange multipliers
   /// and melt rate can be projected across
-  BackupMeshForProjection<TElement<1, 3>> *Backed_up_surface_melt_mesh_pt;
+  BackupMeshForProjection<TElement<1, 3>>* Backed_up_surface_melt_mesh_pt;
 
 }; // end of problem class
 
@@ -489,13 +489,13 @@ UnsteadyHeatMeltProblem<ELEMENT>::UnsteadyHeatMeltProblem()
   add_time_stepper_pt(new BDF<2>);
 
   // Pointer to the closed curve that defines the outer boundary
-  TriangleMeshClosedCurve *closed_curve_pt = 0;
+  TriangleMeshClosedCurve* closed_curve_pt = 0;
 
   // Build outer boundary as Polygon
 
   // The boundary is bounded by five distinct boundaries, each
   // represented by its own polyline
-  Vector<TriangleMeshCurveSection *> boundary_polyline_pt(4);
+  Vector<TriangleMeshCurveSection*> boundary_polyline_pt(4);
 
   // Vertex coordinates on boundary
   Vector<Vector<double>> bound_coords(2);
@@ -558,7 +558,7 @@ UnsteadyHeatMeltProblem<ELEMENT>::UnsteadyHeatMeltProblem()
 
   // Create the triangle mesh polygon for outer boundary
   //----------------------------------------------------
-  TriangleMeshPolygon *outer_polygon =
+  TriangleMeshPolygon* outer_polygon =
     new TriangleMeshPolygon(boundary_polyline_pt);
 
   // Set the pointer
@@ -580,7 +580,7 @@ UnsteadyHeatMeltProblem<ELEMENT>::UnsteadyHeatMeltProblem()
     triangle_mesh_parameters, time_stepper_pt());
 
   // Set error estimator for bulk mesh
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   Bulk_mesh_pt->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Set element size limits
@@ -659,7 +659,7 @@ void UnsteadyHeatMeltProblem<ELEMENT>::doc_solution()
   unsigned nel = Surface_melt_mesh_pt->nelement();
   for (unsigned e = 0; e < nel; e++)
   {
-    dynamic_cast<SurfaceMeltElement<ELEMENT> *>(
+    dynamic_cast<SurfaceMeltElement<ELEMENT>*>(
       Surface_melt_mesh_pt->element_pt(e))
       ->output_melt(some_file);
   }
@@ -721,7 +721,7 @@ void UnsteadyHeatMeltProblem<ELEMENT>::doc_solution()
 //=======start_of_main====================================================
 /// \short Driver code for unsteady heat equation
 //========================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   FiniteElement::Accept_negative_jacobian = true;
 

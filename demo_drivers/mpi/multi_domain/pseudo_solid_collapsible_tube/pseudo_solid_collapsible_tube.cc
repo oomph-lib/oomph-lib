@@ -77,7 +77,7 @@ namespace oomph
     /// 5 - y displacement (with lagr mult traction)\n
     /// 6 - z displacement (with lagr mult traction)\n
     void get_dof_numbers_for_unknowns(
-      std::list<std::pair<unsigned long, unsigned>> &dof_lookup_list) const
+      std::list<std::pair<unsigned long, unsigned>>& dof_lookup_list) const
     {
       // temporary pair (used to store dof lookup prior to being added to list
       std::pair<unsigned, unsigned> dof_lookup;
@@ -145,9 +145,9 @@ namespace oomph
 //=========================================================================
 namespace LSC_Preconditioner_Helper
 {
-  Preconditioner *set_hypre_preconditioner()
+  Preconditioner* set_hypre_preconditioner()
   {
-    HyprePreconditioner *hypre_preconditioner_pt = new HyprePreconditioner;
+    HyprePreconditioner* hypre_preconditioner_pt = new HyprePreconditioner;
     hypre_preconditioner_pt->set_amg_iterations(2);
     hypre_preconditioner_pt->amg_using_simple_smoothing();
     hypre_preconditioner_pt->amg_simple_smoother() = 0;
@@ -165,9 +165,9 @@ namespace LSC_Preconditioner_Helper
 //=========================================================================
 namespace Real_Solid_Preconditioner_Helper
 {
-  Preconditioner *get_preconditioner()
+  Preconditioner* get_preconditioner()
   {
-    HyprePreconditioner *hypre_preconditioner_pt = new HyprePreconditioner;
+    HyprePreconditioner* hypre_preconditioner_pt = new HyprePreconditioner;
     hypre_preconditioner_pt->set_amg_iterations(2);
     hypre_preconditioner_pt->amg_using_simple_smoothing();
     hypre_preconditioner_pt->amg_simple_smoother() = 3;
@@ -195,13 +195,13 @@ class WallMesh :
 {
 public:
   /// Constructor:
-  WallMesh(const double &r_min,
-           const double &r_max,
-           const double &lz,
-           const int &nr,
-           const int &nphi,
-           const int &nz,
-           TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+  WallMesh(const double& r_min,
+           const double& r_max,
+           const double& lz,
+           const int& nr,
+           const int& nphi,
+           const int& nz,
+           TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
     SimpleCubicMesh<ELEMENT>(nr, nphi, nz, 1.0, 1.0, lz, time_stepper_pt),
     RefineableSimpleCubicMesh<ELEMENT>(
       nr, nphi, nz, 1.0, 1.0, lz, time_stepper_pt)
@@ -221,7 +221,7 @@ public:
     for (unsigned n = 0; n < n_node; n++)
     {
       // Pointer to node
-      Node *nod_pt = node_pt(n);
+      Node* nod_pt = node_pt(n);
 
       // Get the x/y coordinates
       double x_old = nod_pt->x(0);
@@ -259,7 +259,7 @@ public:
     unsigned n_node = nnode();
     for (unsigned n = 0; n < n_node; n++)
     {
-      Node *nod_pt = node_pt(n);
+      Node* nod_pt = node_pt(n);
       if (nod_pt->is_on_boundary(1))
       {
         xmin = min(xmin, nod_pt->x(0));
@@ -276,7 +276,7 @@ public:
     unsigned n_node = nnode();
     for (unsigned n = 0; n < n_node; n++)
     {
-      Node *nod_pt = node_pt(n);
+      Node* nod_pt = node_pt(n);
       if (nod_pt->is_on_boundary(3) && nod_pt->is_on_boundary(4))
       {
         ymax = max(ymax, nod_pt->x(1));
@@ -300,12 +300,12 @@ class FluidMesh :
 {
 public:
   /// \short Constructor:
-  FluidMesh(GeomObject *wall_pt,
-            const Vector<double> &xi_lo,
-            const double &fract_mid,
-            const Vector<double> &xi_hi,
-            const unsigned &nlayer,
-            TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+  FluidMesh(GeomObject* wall_pt,
+            const Vector<double>& xi_lo,
+            const double& fract_mid,
+            const Vector<double>& xi_hi,
+            const unsigned& nlayer,
+            TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
     QuarterTubeMesh<ELEMENT>(
       wall_pt, xi_lo, fract_mid, xi_hi, nlayer, time_stepper_pt),
     RefineableQuarterTubeMesh<ELEMENT>(
@@ -349,10 +349,10 @@ namespace Global_Parameters
   double Q = 1e-5;
 
   /// Pointer to constitutive law for the wall
-  ConstitutiveLaw *Constitutive_law_wall_pt = 0;
+  ConstitutiveLaw* Constitutive_law_wall_pt = 0;
 
   /// Pointer to constitutive law for the pseudo elastic node update elements
-  ConstitutiveLaw *Constitutive_law_pseudo_elastic_pt = 0;
+  ConstitutiveLaw* Constitutive_law_pseudo_elastic_pt = 0;
 
   /// Poisson's ratio for generalised Hookean constitutive equation for the
   /// wall
@@ -375,10 +375,10 @@ namespace Global_Parameters
   //  double Pmax=1.4;
 
   /// Load function for wall
-  void press_load(const Vector<double> &xi,
-                  const Vector<double> &x,
-                  const Vector<double> &N,
-                  Vector<double> &load)
+  void press_load(const Vector<double>& xi,
+                  const Vector<double>& x,
+                  const Vector<double>& N,
+                  Vector<double>& load)
   {
     // Get polar angle
     double phi = atan2(xi[1], xi[0]);
@@ -439,13 +439,13 @@ public:
   }
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// Do steady run
-  void steady_run(DocInfo &doc_info);
+  void steady_run(DocInfo& doc_info);
 
   /// Do unsteady run
-  void unsteady_run(DocInfo &doc_info);
+  void unsteady_run(DocInfo& doc_info);
 
   /// Create FSI traction elements
   void create_fsi_traction_elements();
@@ -488,7 +488,7 @@ public:
   void actions_after_distribute();
 
   /// Helper function to delete elements from a mesh
-  void empty_mesh(Mesh *const &surface_mesh_pt);
+  void empty_mesh(Mesh* const& surface_mesh_pt);
 
   /// Switch to GMRES preconditioned with the pseudo-elastic
   /// FSI preconditioner
@@ -513,19 +513,19 @@ public:
   }
 
   /// Bulk solid mesh
-  WallMesh<SOLID_ELEMENT> *wall_mesh_pt()
+  WallMesh<SOLID_ELEMENT>* wall_mesh_pt()
   {
     return Solid_mesh_pt;
   }
 
   /// Bulk fluid mesh
-  FluidMesh<FLUID_ELEMENT> *fluid_mesh_pt()
+  FluidMesh<FLUID_ELEMENT>* fluid_mesh_pt()
   {
     return Fluid_mesh_pt;
   }
 
   /// Meshes of Lagrange multiplier elements
-  SolidMesh *&lagrange_multiplier_mesh_pt()
+  SolidMesh*& lagrange_multiplier_mesh_pt()
   {
     return Lagrange_multiplier_mesh_pt;
   }
@@ -538,29 +538,29 @@ private:
   void doc_solid_boundary_coordinates();
 
   /// Bulk solid mesh
-  WallMesh<SOLID_ELEMENT> *Solid_mesh_pt;
+  WallMesh<SOLID_ELEMENT>* Solid_mesh_pt;
 
   /// Meshes of FSI traction elements (fluid traction onto solid)
-  SolidMesh *Solid_fsi_traction_mesh_pt;
+  SolidMesh* Solid_fsi_traction_mesh_pt;
 
   /// Bulk fluid mesh
-  FluidMesh<FLUID_ELEMENT> *Fluid_mesh_pt;
+  FluidMesh<FLUID_ELEMENT>* Fluid_mesh_pt;
 
   /// Mesh of Lagrange multiplier elements
-  SolidMesh *Lagrange_multiplier_mesh_pt;
+  SolidMesh* Lagrange_multiplier_mesh_pt;
 
   /// Solid traction elements (prescibed external pressure on solid wall)
-  SolidMesh *Solid_traction_mesh_pt;
+  SolidMesh* Solid_traction_mesh_pt;
 
   /// \short Geometric Object defining the undeformed boundary of the
   /// fluid mesh
-  GeomObject *Wall_pt;
+  GeomObject* Wall_pt;
 
   /// Timestepper for the Navier-Stokes equations
-  BDF<2> *Fluid_time_stepper_pt;
+  BDF<2>* Fluid_time_stepper_pt;
 
   /// Steady timestepper that stores two history values
-  Steady<2> *Wall_time_stepper_pt;
+  Steady<2>* Wall_time_stepper_pt;
 };
 
 //==========start_of_constructor==========================================
@@ -647,7 +647,7 @@ PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
   // in the axial direction
   double r_min = 1.0;
   double r_max = 1.0 + Global_Parameters::H;
-  double &lz = Global_Parameters::L;
+  double& lz = Global_Parameters::L;
   unsigned nr = 2;
   unsigned nphi = 2;
   unsigned nz = Global_Parameters::N_slice;
@@ -754,8 +754,8 @@ PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
       }
 
       // Pseudo solid BCs
-      SolidNode *solid_node_pt =
-        dynamic_cast<SolidNode *>(Fluid_mesh_pt->boundary_node_pt(b, i));
+      SolidNode* solid_node_pt =
+        dynamic_cast<SolidNode*>(Fluid_mesh_pt->boundary_node_pt(b, i));
 
       // Inflow, vertical symmetry BC (y=const), outflow: Suppress x-displ
       if ((b == 0) || (b == 1) || (b == 4))
@@ -784,8 +784,8 @@ PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    FLUID_ELEMENT *el_pt =
-      dynamic_cast<FLUID_ELEMENT *>(Fluid_mesh_pt->element_pt(e));
+    FLUID_ELEMENT* el_pt =
+      dynamic_cast<FLUID_ELEMENT*>(Fluid_mesh_pt->element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Parameters::Re;
@@ -813,8 +813,8 @@ PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
     unsigned nnode = Solid_mesh_pt->nboundary_node(b);
     for (unsigned i = 0; i < nnode; i++)
     {
-      SolidNode *solid_node_pt =
-        dynamic_cast<SolidNode *>(Solid_mesh_pt->boundary_node_pt(b, i));
+      SolidNode* solid_node_pt =
+        dynamic_cast<SolidNode*>(Solid_mesh_pt->boundary_node_pt(b, i));
 
       // Inflow, vertical symmetry (y=const) and outflow: Pin x-displ
       if ((b == 0) || (b == 3) || (b == 5))
@@ -853,8 +853,8 @@ PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
   for (unsigned i = 0; i < n_element; i++)
   {
     // Cast to a solid element
-    SOLID_ELEMENT *el_pt =
-      dynamic_cast<SOLID_ELEMENT *>(Solid_mesh_pt->element_pt(i));
+    SOLID_ELEMENT* el_pt =
+      dynamic_cast<SOLID_ELEMENT*>(Solid_mesh_pt->element_pt(i));
 
     // Set the constitutive law
     el_pt->constitutive_law_pt() = Global_Parameters::Constitutive_law_wall_pt;
@@ -946,14 +946,14 @@ void PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    SOLID_ELEMENT *bulk_elem_pt =
-      dynamic_cast<SOLID_ELEMENT *>(Solid_mesh_pt->boundary_element_pt(b, e));
+    SOLID_ELEMENT* bulk_elem_pt =
+      dynamic_cast<SOLID_ELEMENT*>(Solid_mesh_pt->boundary_element_pt(b, e));
 
     // What is the index of the face of the element e along boundary b
     int face_index = Solid_mesh_pt->face_index_at_boundary(b, e);
 
     // Create new element
-    RefineableFSISolidTractionElement<SOLID_ELEMENT, 3> *el_pt =
+    RefineableFSISolidTractionElement<SOLID_ELEMENT, 3>* el_pt =
       new RefineableFSISolidTractionElement<SOLID_ELEMENT, 3>(bulk_elem_pt,
                                                               face_index);
 
@@ -987,15 +987,15 @@ void PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk fluid element that is adjacent to boundary b
-    FLUID_ELEMENT *bulk_elem_pt =
-      dynamic_cast<FLUID_ELEMENT *>(Fluid_mesh_pt->boundary_element_pt(b, e));
+    FLUID_ELEMENT* bulk_elem_pt =
+      dynamic_cast<FLUID_ELEMENT*>(Fluid_mesh_pt->boundary_element_pt(b, e));
 
     // Find the index of the face of element e along boundary b
     int face_index = Fluid_mesh_pt->face_index_at_boundary(b, e);
 
     // Create new element
-    RefineableFSIImposeDisplacementByLagrangeMultiplierElement<FLUID_ELEMENT>
-      *el_pt = new RefineableFSIImposeDisplacementByLagrangeMultiplierElement<
+    RefineableFSIImposeDisplacementByLagrangeMultiplierElement<FLUID_ELEMENT>*
+      el_pt = new RefineableFSIImposeDisplacementByLagrangeMultiplierElement<
         FLUID_ELEMENT>(bulk_elem_pt, face_index);
 
     // Add it to the mesh
@@ -1018,10 +1018,10 @@ void PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get element
-    RefineableFSIImposeDisplacementByLagrangeMultiplierElement<FLUID_ELEMENT>
-      *el_pt =
+    RefineableFSIImposeDisplacementByLagrangeMultiplierElement<FLUID_ELEMENT>*
+      el_pt =
         dynamic_cast<RefineableFSIImposeDisplacementByLagrangeMultiplierElement<
-          FLUID_ELEMENT> *>(Lagrange_multiplier_mesh_pt->finite_element_pt(e));
+          FLUID_ELEMENT>*>(Lagrange_multiplier_mesh_pt->finite_element_pt(e));
 
     // Loop over the nodes
     unsigned nnod = el_pt->nnode();
@@ -1030,7 +1030,7 @@ void PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
       // How many nodal values were used by the "bulk" element
       // that originally created this node?
       unsigned n_bulk_value = el_pt->nbulk_value(i);
-      Node *node_pt = el_pt->node_pt(i);
+      Node* node_pt = el_pt->node_pt(i);
 
       // The remaining ones are Lagrange multipliers and we pin them.
       unsigned nval = node_pt->nvalue();
@@ -1087,14 +1087,14 @@ void PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    SOLID_ELEMENT *bulk_elem_pt =
-      dynamic_cast<SOLID_ELEMENT *>(Solid_mesh_pt->boundary_element_pt(b, e));
+    SOLID_ELEMENT* bulk_elem_pt =
+      dynamic_cast<SOLID_ELEMENT*>(Solid_mesh_pt->boundary_element_pt(b, e));
 
     // Find the index of the face of element e along boundary b
     int face_index = Solid_mesh_pt->face_index_at_boundary(b, e);
 
     // Create new element
-    RefineableSolidTractionElement<SOLID_ELEMENT> *el_pt =
+    RefineableSolidTractionElement<SOLID_ELEMENT>* el_pt =
       new RefineableSolidTractionElement<SOLID_ELEMENT>(bulk_elem_pt,
                                                         face_index);
 
@@ -1175,8 +1175,8 @@ void PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
     unsigned nnode = Solid_mesh_pt->nboundary_node(b);
     for (unsigned i = 0; i < nnode; i++)
     {
-      SolidNode *solid_node_pt =
-        dynamic_cast<SolidNode *>(Solid_mesh_pt->boundary_node_pt(b, i));
+      SolidNode* solid_node_pt =
+        dynamic_cast<SolidNode*>(Solid_mesh_pt->boundary_node_pt(b, i));
 
       // Inflow, vertical symmetry (y=const) and outflow: Pin x-displ
       if ((b == 0) || (b == 3) || (b == 5))
@@ -1296,7 +1296,7 @@ void PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
 //=======================================================================
 template<class FLUID_ELEMENT, class SOLID_ELEMENT>
 void PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
-  empty_mesh(Mesh *const &surface_mesh_pt)
+  empty_mesh(Mesh* const& surface_mesh_pt)
 {
   // How many surface elements are in the surface mesh
   unsigned n_element = surface_mesh_pt->nelement();
@@ -1357,8 +1357,8 @@ void PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
   for (unsigned e = 0; e < n_face_element; e++)
   {
     // Cast the element pointer
-    RefineableFSISolidTractionElement<SOLID_ELEMENT, 3> *el_pt =
-      dynamic_cast<RefineableFSISolidTractionElement<SOLID_ELEMENT, 3> *>(
+    RefineableFSISolidTractionElement<SOLID_ELEMENT, 3>* el_pt =
+      dynamic_cast<RefineableFSISolidTractionElement<SOLID_ELEMENT, 3>*>(
         Solid_fsi_traction_mesh_pt->element_pt(e));
 
     // Doc boundary coordinate
@@ -1400,7 +1400,7 @@ void PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
 //========================================================================
 template<class FLUID_ELEMENT, class SOLID_ELEMENT>
 void PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
-  doc_solution(DocInfo &doc_info)
+  doc_solution(DocInfo& doc_info)
 {
   std::ofstream some_file;
   std::ostringstream filename;
@@ -1478,7 +1478,7 @@ void PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
 //=========================================================================
 template<class FLUID_ELEMENT, class SOLID_ELEMENT>
 void PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
-  steady_run(DocInfo &doc_info)
+  steady_run(DocInfo& doc_info)
 {
   // Output initial configuration
   this->doc_solution(doc_info);
@@ -1520,7 +1520,7 @@ void PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
 //=========================================================================
 template<class FLUID_ELEMENT, class SOLID_ELEMENT>
 void PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
-  unsteady_run(DocInfo &doc_info)
+  unsteady_run(DocInfo& doc_info)
 {
   // Set number of timesteps
   unsigned nstep =
@@ -1553,12 +1553,12 @@ void PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
 // setup the solver
 #ifdef OOMPH_HAS_TRILINOS
 
-  TrilinosAztecOOSolver *solver_pt = new TrilinosAztecOOSolver;
+  TrilinosAztecOOSolver* solver_pt = new TrilinosAztecOOSolver;
   solver_pt->solver_type() = TrilinosAztecOOSolver::GMRES;
 
 #else
 
-  GMRES<CRDoubleMatrix> *solver_pt = new GMRES<CRDoubleMatrix>;
+  GMRES<CRDoubleMatrix>* solver_pt = new GMRES<CRDoubleMatrix>;
 
 #endif
 
@@ -1569,7 +1569,7 @@ void PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
   solver_pt->max_iter() = 200;
 
   // preconditioner
-  PseudoElasticFSIPreconditioner *prec_pt =
+  PseudoElasticFSIPreconditioner* prec_pt =
     new PseudoElasticFSIPreconditioner(3, this);
 
   // meshes
@@ -1600,7 +1600,7 @@ void PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
 #endif
 
   // inexact "real" solid preconditioning
-  BlockTriangularPreconditioner<CRDoubleMatrix> *solid_prec_pt =
+  BlockTriangularPreconditioner<CRDoubleMatrix>* solid_prec_pt =
     new BlockTriangularPreconditioner<CRDoubleMatrix>;
   prec_pt->set_solid_preconditioner(solid_prec_pt);
 
@@ -1612,12 +1612,12 @@ void PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
 #endif
 
   // inexact navier stokes preconditioning
-  NavierStokesSchurComplementPreconditioner *ns_prec_pt =
+  NavierStokesSchurComplementPreconditioner* ns_prec_pt =
     prec_pt->navier_stokes_schur_complement_preconditioner_pt();
   prec_pt->enable_navier_stokes_schur_complement_preconditioner();
 
   // ns momentum
-  BlockDiagonalPreconditioner<CRDoubleMatrix> *f_prec_pt =
+  BlockDiagonalPreconditioner<CRDoubleMatrix>* f_prec_pt =
     new BlockDiagonalPreconditioner<CRDoubleMatrix>;
 
 #ifdef OOMPH_HAS_HYPRE
@@ -1632,7 +1632,7 @@ void PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
 #ifdef OOMPH_HAS_HYPRE
 
   // ns pressure poisson
-  HyprePreconditioner *p_prec_pt = new HyprePreconditioner;
+  HyprePreconditioner* p_prec_pt = new HyprePreconditioner;
   p_prec_pt->set_amg_iterations(2);
   p_prec_pt->amg_using_simple_smoothing();
   p_prec_pt->amg_simple_smoother() = 3;
@@ -1658,7 +1658,7 @@ void PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
 /// Demonstrate how to solve a 3D FSI problem with pseudo-solid
 /// node update for the fluid mesh.
 //========================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
 #ifdef OOMPH_HAS_MPI
   MPI_Helpers::init(argc, argv);

@@ -51,16 +51,16 @@ namespace oomph
   //===================================================================
   template<class ELEMENT>
   ChannelWithLeafletMesh<ELEMENT>::ChannelWithLeafletMesh(
-    GeomObject *leaflet_pt,
-    const double &lleft,
-    const double &lright,
-    const double &hleaflet,
-    const double &htot,
-    const unsigned &nleft,
-    const unsigned &nright,
-    const unsigned &ny1,
-    const unsigned &ny2,
-    TimeStepper *time_stepper_pt) :
+    GeomObject* leaflet_pt,
+    const double& lleft,
+    const double& lright,
+    const double& hleaflet,
+    const double& htot,
+    const unsigned& nleft,
+    const unsigned& nright,
+    const unsigned& ny1,
+    const unsigned& ny2,
+    TimeStepper* time_stepper_pt) :
     SimpleRectangularQuadMesh<ELEMENT>(
       nright + nleft, ny1 + ny2, lright + lleft, htot, time_stepper_pt)
   {
@@ -82,7 +82,7 @@ namespace oomph
     for (unsigned e = 0; e < nmacro; e++)
     {
       // Get pointer to finite element
-      FiniteElement *el_pt = this->finite_element_pt(e);
+      FiniteElement* el_pt = this->finite_element_pt(e);
 
       // Set pointer to macro element
       el_pt->set_macro_elem_pt(this->Domain_pt->macro_element_pt(e));
@@ -106,7 +106,7 @@ namespace oomph
     {
       for (unsigned i = 0; i < nnode_1d; i++)
       {
-        Node *nod_pt = this->finite_element_pt(e)->node_pt(i);
+        Node* nod_pt = this->finite_element_pt(e)->node_pt(i);
         // do not add the last node : it will go to boundary 6
         if (e != nleft - 1 || i != 2)
         {
@@ -119,7 +119,7 @@ namespace oomph
     {
       for (unsigned i = 0; i < nnode_1d; i++)
       {
-        Node *nod_pt = this->finite_element_pt(e)->node_pt(i);
+        Node* nod_pt = this->finite_element_pt(e)->node_pt(i);
         this->add_boundary_node(6, nod_pt);
       }
     }
@@ -133,7 +133,7 @@ namespace oomph
       unsigned e = (nleft + nright) * k + nleft - 1;
       for (unsigned i = 0; i < nnode_1d; i++)
       {
-        Node *nod_pt =
+        Node* nod_pt =
           this->finite_element_pt(e)->node_pt((i + 1) * nnode_1d - 1);
         this->convert_to_boundary_node(nod_pt);
         this->add_boundary_node(4, nod_pt);
@@ -161,7 +161,7 @@ namespace oomph
 
     // Allocate storage for newly created node outside
     // so we can refer to the most recently created one below.
-    Node *nod_pt = 0;
+    Node* nod_pt = 0;
 
     // duplicate the east nodes and add them to the 6th boundary
     // Add the first node to the 0th boundary (horizontal)
@@ -252,7 +252,7 @@ namespace oomph
     for (unsigned j = 0; j < nnod; j++)
     {
       // Get pointer to node
-      AlgebraicNode *nod_pt = node_pt(j);
+      AlgebraicNode* nod_pt = node_pt(j);
 
       // Get coordinates
       double x = nod_pt->x(0);
@@ -291,12 +291,12 @@ namespace oomph
         ref_value[3] = zeta[0];
 
         // Sub-geomobject corresponding to the zeta coordinate on the wall
-        GeomObject *geom_obj_pt;
+        GeomObject* geom_obj_pt;
         Vector<double> s(1);
         this->Leaflet_pt->locate_zeta(zeta, geom_obj_pt, s);
 
         // Create vector of geomobject for add_node_update_info()
-        Vector<GeomObject *> geom_object_pt(1);
+        Vector<GeomObject*> geom_object_pt(1);
         geom_object_pt[0] = geom_obj_pt;
 
         // Second  reference value: Reference local coordinate
@@ -327,12 +327,12 @@ namespace oomph
         ref_value[3] = zeta[0];
 
         // Sub-geomobject corresponding to the zeta coordinate on the wall
-        GeomObject *geom_obj_pt;
+        GeomObject* geom_obj_pt;
         Vector<double> s(1);
         this->Leaflet_pt->locate_zeta(zeta, geom_obj_pt, s);
 
         // Create vector of geomobject for add_node_update_info()
-        Vector<GeomObject *> geom_object_pt(1);
+        Vector<GeomObject*> geom_object_pt(1);
         geom_object_pt[0] = geom_obj_pt;
 
         // Second  reference value: Reference local coordinate
@@ -364,7 +364,7 @@ namespace oomph
         ref_value[2] = (lleft + x - X_0) / lleft;
 
         // geomobject
-        Vector<GeomObject *> geom_object_pt(1);
+        Vector<GeomObject*> geom_object_pt(1);
         geom_object_pt[0] = this->Leaflet_pt;
 
         // Setup algebraic update for node: Pass update information
@@ -388,7 +388,7 @@ namespace oomph
         ref_value[2] = (x - X_0) / lright;
 
         // geomobject
-        Vector<GeomObject *> geom_object_pt(1);
+        Vector<GeomObject*> geom_object_pt(1);
         geom_object_pt[0] = this->Leaflet_pt;
 
         // Setup algebraic update for node: Pass update information
@@ -407,7 +407,7 @@ namespace oomph
   //=================================================================
   template<class ELEMENT>
   void AlgebraicChannelWithLeafletMesh<ELEMENT>::algebraic_node_update(
-    const unsigned &t, AlgebraicNode *&node_pt)
+    const unsigned& t, AlgebraicNode*& node_pt)
   {
     unsigned id = node_pt->node_update_fct_id();
 
@@ -449,7 +449,7 @@ namespace oomph
   //=================================================================
   template<class ELEMENT>
   void AlgebraicChannelWithLeafletMesh<ELEMENT>::node_update_I(
-    const unsigned &t, AlgebraicNode *&node_pt)
+    const unsigned& t, AlgebraicNode*& node_pt)
   {
     // relevant data of the domain for part I
     double lleft = this->domain_pt()->lleft();
@@ -458,10 +458,10 @@ namespace oomph
     Vector<double> ref_value(node_pt->vector_ref_value());
 
     // Extract geometric objects for update by copy construction
-    Vector<GeomObject *> geom_object_pt(node_pt->vector_geom_object_pt());
+    Vector<GeomObject*> geom_object_pt(node_pt->vector_geom_object_pt());
 
     // Pointer to wall geom object
-    GeomObject *leaflet_pt = geom_object_pt[0];
+    GeomObject* leaflet_pt = geom_object_pt[0];
 
     // Coordinates of the steady node on the left boundary
     // corresponding to the current node
@@ -490,7 +490,7 @@ namespace oomph
   //=================================================================
   template<class ELEMENT>
   void AlgebraicChannelWithLeafletMesh<ELEMENT>::node_update_II(
-    const unsigned &t, AlgebraicNode *&node_pt)
+    const unsigned& t, AlgebraicNode*& node_pt)
   {
     // relevant data of the domain for part II
     double lright = this->domain_pt()->lright();
@@ -499,10 +499,10 @@ namespace oomph
     Vector<double> ref_value(node_pt->vector_ref_value());
 
     // Extract geometric objects for update by copy construction
-    Vector<GeomObject *> geom_object_pt(node_pt->vector_geom_object_pt());
+    Vector<GeomObject*> geom_object_pt(node_pt->vector_geom_object_pt());
 
     // Pointer to wall geom object
-    GeomObject *leaflet_pt = geom_object_pt[0];
+    GeomObject* leaflet_pt = geom_object_pt[0];
 
     // Coordinates of the steady node on the right boundary
     // corresponding to the current node
@@ -531,7 +531,7 @@ namespace oomph
   //=================================================================
   template<class ELEMENT>
   void AlgebraicChannelWithLeafletMesh<ELEMENT>::slanted_bound_up(
-    const unsigned &t, const Vector<double> &zeta, Vector<double> &r)
+    const unsigned& t, const Vector<double>& zeta, Vector<double>& r)
   {
     ///\short Coordinates of the point on the boundary beetween the upper
     /// and the lower part, in the same column, at the east.
@@ -553,7 +553,7 @@ namespace oomph
   //=================================================================
   template<class ELEMENT>
   void AlgebraicChannelWithLeafletMesh<ELEMENT>::node_update_III(
-    const unsigned &t, AlgebraicNode *&node_pt)
+    const unsigned& t, AlgebraicNode*& node_pt)
   {
     // relevant data of the domain for part I
     double lleft = this->domain_pt()->lleft();
@@ -587,7 +587,7 @@ namespace oomph
   //=================================================================
   template<class ELEMENT>
   void AlgebraicChannelWithLeafletMesh<ELEMENT>::node_update_IV(
-    const unsigned &t, AlgebraicNode *&node_pt)
+    const unsigned& t, AlgebraicNode*& node_pt)
   {
     // relevant data of the domain for part I
     double lright = this->domain_pt()->lright();
@@ -626,7 +626,7 @@ namespace oomph
   //===================================================================
   template<class ELEMENT>
   void RefineableAlgebraicChannelWithLeafletMesh<ELEMENT>::update_node_update(
-    AlgebraicNode *&node_pt)
+    AlgebraicNode*& node_pt)
   {
     // Extract ID
     unsigned id = node_pt->node_update_fct_id();
@@ -642,11 +642,11 @@ namespace oomph
 
       // Get the sub-geomobject and the local coordinate
       Vector<double> s(1);
-      GeomObject *geom_obj_pt;
+      GeomObject* geom_obj_pt;
       this->Leaflet_pt->locate_zeta(zeta_wall, geom_obj_pt, s);
 
       // Extract geometric objects for update by copy construction
-      Vector<GeomObject *> geom_object_pt(node_pt->vector_geom_object_pt());
+      Vector<GeomObject*> geom_object_pt(node_pt->vector_geom_object_pt());
 
       // Update the pointer to the (sub-)GeomObject within which the
       // reference point is located. (If the wall is simple GeomObject

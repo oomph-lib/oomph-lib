@@ -55,7 +55,7 @@ namespace GlobalVariables
   double A = -0.1;
 
   // Simple reaction kinetics
-  void activator_inhibitor_reaction(const Vector<double> &C, Vector<double> &R)
+  void activator_inhibitor_reaction(const Vector<double>& C, Vector<double>& R)
   {
     // Inhibitor loss is linearly proportional to concentrations of activator
     // and inhibitor
@@ -66,8 +66,8 @@ namespace GlobalVariables
   }
 
   /// Derivative of simple reaction kinetics above
-  void activator_inhibitor_reaction_derivative(const Vector<double> &C,
-                                               DenseMatrix<double> &dRdC)
+  void activator_inhibitor_reaction_derivative(const Vector<double>& C,
+                                               DenseMatrix<double>& dRdC)
   {
     dRdC(0, 0) = 1.0;
     dRdC(0, 1) = 1.0;
@@ -97,14 +97,14 @@ public:
   void set_initial_condition();
 
   /// Perform nstep timesteps of size dt
-  void timestep(const double &dt, const unsigned &nstep);
+  void timestep(const double& dt, const unsigned& nstep);
 
   /// \short Overloaded Problem's access function to the mesh.
   /// Recasts the pointer to the base Mesh object to the actual mesh type.
   /// This is required so that we can call specific RefineableMesh functions
-  RefineableOneDMesh<ELEMENT> *mesh_pt()
+  RefineableOneDMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<RefineableOneDMesh<ELEMENT> *>(Problem::mesh_pt());
+    return dynamic_cast<RefineableOneDMesh<ELEMENT>*>(Problem::mesh_pt());
   }
 
 private:
@@ -152,7 +152,7 @@ RefineableOneDAdvectionDiffusionReactionProblem<
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *elem_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* elem_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the timescales
     elem_pt->tau_pt() = &GlobalVariables::Tau;
@@ -192,7 +192,7 @@ void RefineableOneDAdvectionDiffusionReactionProblem<
   for (unsigned n = 0; n < n_node; n++)
   {
     // Local pointer to the node
-    Node *nod_pt = mesh_pt()->node_pt(n);
+    Node* nod_pt = mesh_pt()->node_pt(n);
     // This is |A|^{1/3}
     double a13 = pow(std::abs(GlobalVariables::A), (1.0 / 3.0));
 
@@ -237,7 +237,7 @@ void RefineableOneDAdvectionDiffusionReactionProblem<
 //===================================================================
 template<class ELEMENT>
 void RefineableOneDAdvectionDiffusionReactionProblem<ELEMENT>::timestep(
-  const double &dt, const unsigned &nstep)
+  const double& dt, const unsigned& nstep)
 {
   // Set the problem's Dt to use in the inital condition
   Dt = dt;

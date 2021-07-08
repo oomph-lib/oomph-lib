@@ -55,19 +55,19 @@ namespace TanhSolnForPoisson
   double Beta;
 
   /// Exact solution as a Vector
-  void get_exact_u(const Vector<double> &x, Vector<double> &u)
+  void get_exact_u(const Vector<double>& x, Vector<double>& u)
   {
     u[0] = tanh(1.0 - Alpha * (Beta * x[0] - x[1]));
   }
 
   /// Exact solution as a scalar
-  void get_exact_u(const Vector<double> &x, double &u)
+  void get_exact_u(const Vector<double>& x, double& u)
   {
     u = tanh(1.0 - Alpha * (Beta * x[0] - x[1]));
   }
 
   /// Source function to make it an exact solution
-  void get_source(const Vector<double> &x, double &source)
+  void get_source(const Vector<double>& x, double& source)
   {
     source = 2.0 * tanh(-1.0 + Alpha * (Beta * x[0] - x[1])) *
                (1.0 - pow(tanh(-1.0 + Alpha * (Beta * x[0] - x[1])), 2.0)) *
@@ -111,19 +111,19 @@ public:
   }
 
   /// Access function for the specific mesh
-  RefineableTriangleMesh<ELEMENT> *mesh_pt()
+  RefineableTriangleMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<RefineableTriangleMesh<ELEMENT> *>(Problem::mesh_pt());
+    return dynamic_cast<RefineableTriangleMesh<ELEMENT>*>(Problem::mesh_pt());
   }
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info, ofstream &trace_file);
+  void doc_solution(DocInfo& doc_info, ofstream& trace_file);
 
   /// Error estimator
-  Z2ErrorEstimator *error_estimator_pt;
+  Z2ErrorEstimator* error_estimator_pt;
 
 private:
-  RefineableTriangleMesh<ELEMENT> *My_mesh_pt;
+  RefineableTriangleMesh<ELEMENT>* My_mesh_pt;
 
   void apply_boundary_conditions();
 
@@ -151,13 +151,13 @@ PoissonProblem<ELEMENT>::PoissonProblem(
   // Outer boundary
   // ************************************************************************
 
-  Vector<TriangleMeshClosedCurve *> outer_boundaries_pt(2);
+  Vector<TriangleMeshClosedCurve*> outer_boundaries_pt(2);
 
   // ************************************************************************
   // First outer boundary
   // ************************************************************************
 
-  Vector<TriangleMeshCurveSection *> curve_section_pt1(4);
+  Vector<TriangleMeshCurveSection*> curve_section_pt1(4);
 
   // ------------------------------------------------------------------------
   Vector<Vector<double>> verticesb1(4);
@@ -180,7 +180,7 @@ PoissonProblem<ELEMENT>::PoissonProblem(
 
   boundary_id = 1;
 
-  TriangleMeshPolyLine *boundaryp1 =
+  TriangleMeshPolyLine* boundaryp1 =
     new TriangleMeshPolyLine(verticesb1, boundary_id);
 
   curve_section_pt1[0] = boundaryp1;
@@ -201,7 +201,7 @@ PoissonProblem<ELEMENT>::PoissonProblem(
 
   boundary_id = 2;
 
-  TriangleMeshPolyLine *boundaryp2 =
+  TriangleMeshPolyLine* boundaryp2 =
     new TriangleMeshPolyLine(verticesb2, boundary_id);
 
   curve_section_pt1[1] = boundaryp2;
@@ -228,7 +228,7 @@ PoissonProblem<ELEMENT>::PoissonProblem(
 
   boundary_id = 3;
 
-  TriangleMeshPolyLine *boundaryp3 =
+  TriangleMeshPolyLine* boundaryp3 =
     new TriangleMeshPolyLine(verticesb3, boundary_id);
 
   curve_section_pt1[2] = boundaryp3;
@@ -249,7 +249,7 @@ PoissonProblem<ELEMENT>::PoissonProblem(
 
   boundary_id = 4;
 
-  TriangleMeshPolyLine *boundaryp4 =
+  TriangleMeshPolyLine* boundaryp4 =
     new TriangleMeshPolyLine(verticesb4, boundary_id);
 
   curve_section_pt1[3] = boundaryp4;
@@ -262,7 +262,7 @@ PoissonProblem<ELEMENT>::PoissonProblem(
   // Second outer boundary
   // ************************************************************************
 
-  Vector<TriangleMeshCurveSection *> curve_section_pt2(3);
+  Vector<TriangleMeshCurveSection*> curve_section_pt2(3);
 
   // ------------------------------------------------------------------------
   Vector<Vector<double>> verticesb5(3);
@@ -282,7 +282,7 @@ PoissonProblem<ELEMENT>::PoissonProblem(
 
   boundary_id = 5;
 
-  TriangleMeshPolyLine *boundaryp5 =
+  TriangleMeshPolyLine* boundaryp5 =
     new TriangleMeshPolyLine(verticesb5, boundary_id);
 
   curve_section_pt2[0] = boundaryp5;
@@ -306,7 +306,7 @@ PoissonProblem<ELEMENT>::PoissonProblem(
 
   boundary_id = 6;
 
-  TriangleMeshPolyLine *boundaryp6 =
+  TriangleMeshPolyLine* boundaryp6 =
     new TriangleMeshPolyLine(verticesb6, boundary_id);
 
   curve_section_pt2[1] = boundaryp6;
@@ -330,7 +330,7 @@ PoissonProblem<ELEMENT>::PoissonProblem(
 
   boundary_id = 7;
 
-  TriangleMeshPolyLine *boundaryp7 =
+  TriangleMeshPolyLine* boundaryp7 =
     new TriangleMeshPolyLine(verticesb7, boundary_id);
 
   curve_section_pt2[2] = boundaryp7;
@@ -345,26 +345,26 @@ PoissonProblem<ELEMENT>::PoissonProblem(
   // Internal closed boundary
   // ************************************************************************
 
-  Vector<TriangleMeshClosedCurve *> internal_boundaries_pt(2);
+  Vector<TriangleMeshClosedCurve*> internal_boundaries_pt(2);
 
   // ************************************************************************
   // First internal boundary
   // ************************************************************************
 
-  Vector<TriangleMeshCurveSection *> curve_section_pt3(2);
+  Vector<TriangleMeshCurveSection*> curve_section_pt3(2);
   // ------------------------------------------------------------------------
 
   double x_centre = 0.5;
   double y_centre = 1.5;
   double r_circle = 0.25;
-  Circle *circle1_pt = new Circle(x_centre, y_centre, r_circle);
+  Circle* circle1_pt = new Circle(x_centre, y_centre, r_circle);
 
   unsigned n_seg1 = 10;
   double z_start = 0.0;
   double z_end = MathematicalConstants::Pi;
 
   boundary_id = 8;
-  TriangleMeshCurviLine *boundaryc8 =
+  TriangleMeshCurviLine* boundaryc8 =
     new TriangleMeshCurviLine(circle1_pt, z_start, z_end, n_seg1, boundary_id);
 
   curve_section_pt3[0] = boundaryc8;
@@ -375,7 +375,7 @@ PoissonProblem<ELEMENT>::PoissonProblem(
   z_end = 2.0 * MathematicalConstants::Pi;
 
   boundary_id = 9;
-  TriangleMeshCurviLine *boundaryc9 =
+  TriangleMeshCurviLine* boundaryc9 =
     new TriangleMeshCurviLine(circle1_pt, z_start, z_end, n_seg2, boundary_id);
 
   curve_section_pt3[1] = boundaryc9;
@@ -392,20 +392,20 @@ PoissonProblem<ELEMENT>::PoissonProblem(
   // Second internal boundary
   // ************************************************************************
 
-  Vector<TriangleMeshCurveSection *> curve_section_pt4(2);
+  Vector<TriangleMeshCurveSection*> curve_section_pt4(2);
   // ------------------------------------------------------------------------
 
   x_centre = 2.5;
   y_centre = 1.3;
   r_circle = 0.2;
-  Circle *circle2_pt = new Circle(x_centre, y_centre, r_circle);
+  Circle* circle2_pt = new Circle(x_centre, y_centre, r_circle);
 
   unsigned n_seg3 = 10;
   z_start = 0.0;
   z_end = MathematicalConstants::Pi;
 
   boundary_id = 10;
-  TriangleMeshCurviLine *boundaryc10 =
+  TriangleMeshCurviLine* boundaryc10 =
     new TriangleMeshCurviLine(circle2_pt, z_start, z_end, n_seg3, boundary_id);
 
   curve_section_pt4[0] = boundaryc10;
@@ -416,7 +416,7 @@ PoissonProblem<ELEMENT>::PoissonProblem(
   z_end = 2.0 * MathematicalConstants::Pi;
 
   boundary_id = 11;
-  TriangleMeshCurviLine *boundaryc11 =
+  TriangleMeshCurviLine* boundaryc11 =
     new TriangleMeshCurviLine(circle2_pt, z_start, z_end, n_seg4, boundary_id);
 
   curve_section_pt4[1] = boundaryc11;
@@ -434,7 +434,7 @@ PoissonProblem<ELEMENT>::PoissonProblem(
   // ************************************************************************
 
   // ------------------------------------------------------------------------
-  Vector<TriangleMeshOpenCurve *> internal_open_boundaries_pt(4);
+  Vector<TriangleMeshOpenCurve*> internal_open_boundaries_pt(4);
   // ------------------------------------------------------------------------
 
   // ************************************************************************
@@ -442,7 +442,7 @@ PoissonProblem<ELEMENT>::PoissonProblem(
   // ************************************************************************
 
   // ------------------------------------------------------------------------
-  Vector<TriangleMeshCurveSection *> internal_open_boundaries1_pt(2);
+  Vector<TriangleMeshCurveSection*> internal_open_boundaries1_pt(2);
   // ------------------------------------------------------------------------
 
   Vector<Vector<double>> verticesb12(2);
@@ -458,7 +458,7 @@ PoissonProblem<ELEMENT>::PoissonProblem(
   verticesb12[1][1] = 2.5;
 
   boundary_id = 12;
-  TriangleMeshPolyLine *boundaryp12 =
+  TriangleMeshPolyLine* boundaryp12 =
     new TriangleMeshPolyLine(verticesb12, boundary_id);
 
   unsigned vertex_to_connect = 2;
@@ -482,7 +482,7 @@ PoissonProblem<ELEMENT>::PoissonProblem(
   verticesb13[1][1] = 2.5;
 
   boundary_id = 13;
-  TriangleMeshPolyLine *boundaryp13 =
+  TriangleMeshPolyLine* boundaryp13 =
     new TriangleMeshPolyLine(verticesb13, boundary_id);
 
   vertex_to_connect = 1;
@@ -498,7 +498,7 @@ PoissonProblem<ELEMENT>::PoissonProblem(
   // ************************************************************************
 
   // ------------------------------------------------------------------------
-  Vector<TriangleMeshCurveSection *> internal_open_boundaries2_pt(1);
+  Vector<TriangleMeshCurveSection*> internal_open_boundaries2_pt(1);
   // ------------------------------------------------------------------------
 
   Vector<Vector<double>> verticesb14(2);
@@ -514,7 +514,7 @@ PoissonProblem<ELEMENT>::PoissonProblem(
   verticesb14[1][1] = 1.0;
 
   boundary_id = 14;
-  TriangleMeshPolyLine *boundaryp14 =
+  TriangleMeshPolyLine* boundaryp14 =
     new TriangleMeshPolyLine(verticesb14, boundary_id);
 
   vertex_to_connect = 1;
@@ -534,7 +534,7 @@ PoissonProblem<ELEMENT>::PoissonProblem(
   // ************************************************************************
 
   // ------------------------------------------------------------------------
-  Vector<TriangleMeshCurveSection *> internal_open_boundaries3_pt(1);
+  Vector<TriangleMeshCurveSection*> internal_open_boundaries3_pt(1);
   // ------------------------------------------------------------------------
 
   Vector<Vector<double>> verticesb15(2);
@@ -550,7 +550,7 @@ PoissonProblem<ELEMENT>::PoissonProblem(
   verticesb15[1][1] = 0.5;
 
   boundary_id = 15;
-  TriangleMeshPolyLine *boundaryp15 =
+  TriangleMeshPolyLine* boundaryp15 =
     new TriangleMeshPolyLine(verticesb15, boundary_id);
 
   vertex_to_connect = 1;
@@ -568,7 +568,7 @@ PoissonProblem<ELEMENT>::PoissonProblem(
   // ************************************************************************
   // Internal open boundary 4
   // ************************************************************************
-  Vector<TriangleMeshCurveSection *> internal_open_boundaries4_pt(1);
+  Vector<TriangleMeshCurveSection*> internal_open_boundaries4_pt(1);
 
   Vector<Vector<double>> verticesb16(2);
   for (unsigned i = 0; i < 2; i++)
@@ -583,7 +583,7 @@ PoissonProblem<ELEMENT>::PoissonProblem(
   verticesb16[1][1] = 0.5;
 
   boundary_id = 16;
-  TriangleMeshPolyLine *boundaryp16 =
+  TriangleMeshPolyLine* boundaryp16 =
     new TriangleMeshPolyLine(verticesb16, boundary_id);
 
   vertex_to_connect = 1;
@@ -697,7 +697,7 @@ void PoissonProblem<ELEMENT>::complete_problem_setup()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the source function pointer
     el_pt->source_fct_pt() = Source_fct_pt;
@@ -720,7 +720,7 @@ void PoissonProblem<ELEMENT>::apply_boundary_conditions()
     unsigned num_nod = mesh_pt()->nboundary_node(ibound);
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
-      Node *nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
+      Node* nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
       double u;
       Vector<double> x(2);
       x[0] = nod_pt->x(0);
@@ -736,8 +736,8 @@ void PoissonProblem<ELEMENT>::apply_boundary_conditions()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void PoissonProblem<ELEMENT>::doc_solution(DocInfo &doc_info,
-                                           ofstream &trace_file)
+void PoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
+                                           ofstream& trace_file)
 {
   ofstream some_file;
   char filename[100];
@@ -767,7 +767,7 @@ void PoissonProblem<ELEMENT>::doc_solution(DocInfo &doc_info,
 
     for (unsigned e = 0; e < nel; e++)
     {
-      FiniteElement *el_pt = mesh_pt()->region_element_pt(region_id, e);
+      FiniteElement* el_pt = mesh_pt()->region_element_pt(region_id, e);
       el_pt->output(some_file, npts);
     }
     some_file.close();
@@ -780,8 +780,8 @@ void PoissonProblem<ELEMENT>::doc_solution(DocInfo &doc_info,
     unsigned nnod = mesh_pt()->nboundary_node(b);
     for (unsigned j = 0; j < nnod; j++)
     {
-      Node *nod_pt = mesh_pt()->boundary_node_pt(b, j);
-      BoundaryNodeBase *bnod_pt = dynamic_cast<BoundaryNodeBase *>(nod_pt);
+      Node* nod_pt = mesh_pt()->boundary_node_pt(b, j);
+      BoundaryNodeBase* bnod_pt = dynamic_cast<BoundaryNodeBase*>(nod_pt);
       if (bnod_pt == 0)
       {
         oomph_info << "Cast failed\n";
@@ -839,7 +839,7 @@ void PoissonProblem<ELEMENT>::doc_solution(DocInfo &doc_info,
 //========================================================================
 /// Demonstrate how to solve Poisson problem
 //========================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // initialise MPI
 #ifdef OOMPH_HAS_MPI

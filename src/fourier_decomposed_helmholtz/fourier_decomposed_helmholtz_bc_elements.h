@@ -65,8 +65,8 @@ namespace oomph
   public:
     /// \short Constructor, takes the pointer to the "bulk" element and the
     /// index of the face to which the element is attached.
-    FourierDecomposedHelmholtzBCElementBase(FiniteElement *const &bulk_el_pt,
-                                            const int &face_index);
+    FourierDecomposedHelmholtzBCElementBase(FiniteElement* const& bulk_el_pt,
+                                            const int& face_index);
 
     ///\short Broken empty constructor
     FourierDecomposedHelmholtzBCElementBase()
@@ -79,7 +79,7 @@ namespace oomph
 
     /// Broken copy constructor
     FourierDecomposedHelmholtzBCElementBase(
-      const FourierDecomposedHelmholtzBCElementBase &dummy)
+      const FourierDecomposedHelmholtzBCElementBase& dummy)
     {
       BrokenCopy::broken_copy("FourierDecomposedHelmholtzBCElementBase");
     }
@@ -100,30 +100,30 @@ namespace oomph
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default (needed to break
     /// indeterminacy if bulk element is SolidElement)
-    double zeta_nodal(const unsigned &n,
-                      const unsigned &k,
-                      const unsigned &i) const
+    double zeta_nodal(const unsigned& n,
+                      const unsigned& k,
+                      const unsigned& i) const
     {
       return FaceElement::zeta_nodal(n, k, i);
     }
 
     /// Output function -- forward to broken version in FiniteElement
     /// until somebody decides what exactly they want to plot here...
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       FiniteElement::output(outfile);
     }
 
     /// \short Output function -- forward to broken version in FiniteElement
     /// until somebody decides what exactly they want to plot here...
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       FiniteElement::output(outfile, n_plot);
     }
 
     /// C-style output function -- forward to broken version in FiniteElement
     /// until somebody decides what exactly they want to plot here...
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
@@ -131,7 +131,7 @@ namespace oomph
     /// \short C-style output function -- forward to broken version in
     /// FiniteElement until somebody decides what exactly they want to plot
     /// here...
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       FiniteElement::output(file_pt, n_plot);
     }
@@ -159,10 +159,10 @@ namespace oomph
     /// radiated power over the artificial boundary. Also output the
     /// power density as a fct of the zenith angle in the specified
     /// output file if it's open.
-    double global_power_contribution(std::ofstream &outfile)
+    double global_power_contribution(std::ofstream& outfile)
     {
       // pointer to the corresponding bulk element
-      ELEMENT *bulk_elem_pt = dynamic_cast<ELEMENT *>(this->bulk_element_pt());
+      ELEMENT* bulk_elem_pt = dynamic_cast<ELEMENT*>(this->bulk_element_pt());
 
       // Number of nodes in bulk element
       unsigned nnode_bulk = bulk_elem_pt->nnode();
@@ -290,9 +290,9 @@ namespace oomph
     /// \short Function to compute the test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
-    inline double shape_and_test(const Vector<double> &s,
-                                 Shape &psi,
-                                 Shape &test) const
+    inline double shape_and_test(const Vector<double>& s,
+                                 Shape& psi,
+                                 Shape& test) const
     {
       // Get the shape functions
       shape(s, test);
@@ -311,11 +311,11 @@ namespace oomph
     /// and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
-    inline double d_shape_and_test_local(const Vector<double> &s,
-                                         Shape &psi,
-                                         Shape &test,
-                                         DShape &dpsi_ds,
-                                         DShape &dtest_ds) const
+    inline double d_shape_and_test_local(const Vector<double>& s,
+                                         Shape& psi,
+                                         Shape& test,
+                                         DShape& dpsi_ds,
+                                         DShape& dtest_ds) const
     {
       // Find number of nodes
       unsigned n_node = nnode();
@@ -356,8 +356,8 @@ namespace oomph
   public:
     /// Constructor: Specify radius of outer boundary and number of
     /// terms used in the computation of the gamma integral
-    FourierDecomposedHelmholtzDtNMesh(const double &outer_radius,
-                                      const unsigned &n_terms) :
+    FourierDecomposedHelmholtzDtNMesh(const double& outer_radius,
+                                      const unsigned& n_terms) :
       Outer_radius(outer_radius), N_terms(n_terms)
     {
     }
@@ -368,28 +368,28 @@ namespace oomph
 
     /// \short Gamma integral evaluated at Gauss points
     /// for specified element
-    Vector<std::complex<double>> &gamma_at_gauss_point(FiniteElement *el_pt)
+    Vector<std::complex<double>>& gamma_at_gauss_point(FiniteElement* el_pt)
     {
       return Gamma_at_gauss_point[el_pt];
     }
 
     /// \short Derivative of Gamma integral w.r.t global unknown, evaluated
     /// at Gauss points for specified element
-    Vector<std::map<unsigned, std::complex<double>>> &d_gamma_at_gauss_point(
-      FiniteElement *el_pt)
+    Vector<std::map<unsigned, std::complex<double>>>& d_gamma_at_gauss_point(
+      FiniteElement* el_pt)
     {
       return D_Gamma_at_gauss_point[el_pt];
     }
 
     /// \short The outer radius
-    double &outer_radius()
+    double& outer_radius()
     {
       return Outer_radius;
     }
 
     /// \short Number of terms used in the computation of the
     /// gamma integral
-    unsigned &n_terms()
+    unsigned& n_terms()
     {
       return N_terms;
     }
@@ -403,12 +403,11 @@ namespace oomph
 
     /// \short Container to store the gamma integral for given Gauss point
     /// and element
-    std::map<FiniteElement *, Vector<std::complex<double>>>
-      Gamma_at_gauss_point;
+    std::map<FiniteElement*, Vector<std::complex<double>>> Gamma_at_gauss_point;
 
     /// \short Container to store the derivate of Gamma integral w.r.t
     /// global unknown evaluated at Gauss points for specified element
-    std::map<FiniteElement *, Vector<std::map<unsigned, std::complex<double>>>>
+    std::map<FiniteElement*, Vector<std::map<unsigned, std::complex<double>>>>
       D_Gamma_at_gauss_point;
   };
 
@@ -427,13 +426,13 @@ namespace oomph
     /// \short Construct element from specification of bulk element and
     /// face index.
     FourierDecomposedHelmholtzDtNBoundaryElement(
-      FiniteElement *const &bulk_el_pt, const int &face_index) :
+      FiniteElement* const& bulk_el_pt, const int& face_index) :
       FourierDecomposedHelmholtzBCElementBase<ELEMENT>(bulk_el_pt, face_index)
     {
     }
 
     /// Add the element's contribution to its residual vector
-    inline void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    inline void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Call the generic residuals function with flag set to 0
       // using a dummy matrix argument
@@ -443,8 +442,8 @@ namespace oomph
 
     /// \short Add the element's contribution to its residual vector and its
     /// Jacobian matrix
-    inline void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                                 DenseMatrix<double> &jacobian)
+    inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                                 DenseMatrix<double>& jacobian)
     {
       // Call the generic routine with the flag set to 1
       fill_in_generic_residual_contribution_fourier_decomposed_helmholtz_DtN_bc(
@@ -457,21 +456,21 @@ namespace oomph
     /// integral, not the one from the Fourier decomposition of the Helmholtz
     /// equations!) and the polar angle theta as input.
     void compute_gamma_contribution(
-      const double &theta,
-      const unsigned &n,
-      std::complex<double> &gamma_con,
-      std::map<unsigned, std::complex<double>> &d_gamma_con);
+      const double& theta,
+      const unsigned& n,
+      std::complex<double>& gamma_con,
+      std::map<unsigned, std::complex<double>>& d_gamma_con);
 
     /// \short Access function to mesh of all DtN boundary condition elements
     /// (needed to get access to gamma values)
-    FourierDecomposedHelmholtzDtNMesh<ELEMENT> *outer_boundary_mesh_pt() const
+    FourierDecomposedHelmholtzDtNMesh<ELEMENT>* outer_boundary_mesh_pt() const
     {
       return Outer_boundary_mesh_pt;
     }
 
     /// \short Set mesh of all DtN boundary condition elements
     void set_outer_boundary_mesh_pt(
-      FourierDecomposedHelmholtzDtNMesh<ELEMENT> *mesh_pt)
+      FourierDecomposedHelmholtzDtNMesh<ELEMENT>* mesh_pt)
     {
       Outer_boundary_mesh_pt = mesh_pt;
     }
@@ -482,15 +481,15 @@ namespace oomph
     void complete_setup_of_dependencies()
     {
       // Create a set of all nodes
-      std::set<Node *> node_set;
+      std::set<Node*> node_set;
       unsigned nel = Outer_boundary_mesh_pt->nelement();
       for (unsigned e = 0; e < nel; e++)
       {
-        FiniteElement *el_pt = Outer_boundary_mesh_pt->finite_element_pt(e);
+        FiniteElement* el_pt = Outer_boundary_mesh_pt->finite_element_pt(e);
         unsigned nnod = el_pt->nnode();
         for (unsigned j = 0; j < nnod; j++)
         {
-          Node *nod_pt = el_pt->node_pt(j);
+          Node* nod_pt = el_pt->node_pt(j);
 
           // Don't add copied nodes
           if (!(nod_pt->is_a_copy()))
@@ -503,7 +502,7 @@ namespace oomph
       unsigned nnod = this->nnode();
       for (unsigned j = 0; j < nnod; j++)
       {
-        Node *nod_pt = this->node_pt(j);
+        Node* nod_pt = this->node_pt(j);
         node_set.erase(nod_pt);
 
         // If the element's node is a copy then its "master" will
@@ -516,7 +515,7 @@ namespace oomph
       }
 
       // Now declare these nodes to be the element's external Data
-      for (std::set<Node *>::iterator it = node_set.begin();
+      for (std::set<Node*>::iterator it = node_set.begin();
            it != node_set.end();
            it++)
       {
@@ -529,9 +528,9 @@ namespace oomph
     /// Jacobian matrix.
     /// Overloaded version, using the gamma computed in the mesh
     void fill_in_generic_residual_contribution_fourier_decomposed_helmholtz_DtN_bc(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      const unsigned &flag)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag)
     {
       // Find out how many nodes there are
       const unsigned n_node = this->nnode();
@@ -747,7 +746,7 @@ namespace oomph
 
     /// \short Pointer to mesh of all DtN boundary condition elements
     /// (needed to get access to gamma values)
-    FourierDecomposedHelmholtzDtNMesh<ELEMENT> *Outer_boundary_mesh_pt;
+    FourierDecomposedHelmholtzDtNMesh<ELEMENT>* Outer_boundary_mesh_pt;
   };
 
   ////////////////////////////////////////////////////////////////
@@ -765,14 +764,14 @@ namespace oomph
   template<class ELEMENT>
   void FourierDecomposedHelmholtzDtNBoundaryElement<ELEMENT>::
     compute_gamma_contribution(
-      const double &theta,
-      const unsigned &n,
-      std::complex<double> &gamma_con,
-      std::map<unsigned, std::complex<double>> &d_gamma_con)
+      const double& theta,
+      const unsigned& n,
+      std::complex<double>& gamma_con,
+      std::map<unsigned, std::complex<double>>& d_gamma_con)
   {
     // Parameters
     int n_fourier_helmholtz =
-      dynamic_cast<ELEMENT *>(this->bulk_element_pt())->fourier_wavenumber();
+      dynamic_cast<ELEMENT*>(this->bulk_element_pt())->fourier_wavenumber();
 
     // define the imaginary number
     const std::complex<double> I(0.0, 1.0);
@@ -931,11 +930,11 @@ namespace oomph
       unsigned nel = this->nelement();
       for (unsigned e = 0; e < nel; e++)
       {
-        FiniteElement *fe_pt = finite_element_pt(e);
+        FiniteElement* fe_pt = finite_element_pt(e);
         unsigned nnod = fe_pt->nnode();
         for (unsigned j = 0; j < nnod; j++)
         {
-          Node *nod_pt = fe_pt->node_pt(j);
+          Node* nod_pt = fe_pt->node_pt(j);
 
           // Extract nodal coordinates from node:
           Vector<double> x(2);
@@ -976,13 +975,13 @@ namespace oomph
 #endif
 
     // Get parameters from first element
-    FourierDecomposedHelmholtzDtNBoundaryElement<ELEMENT> *el_pt =
-      dynamic_cast<FourierDecomposedHelmholtzDtNBoundaryElement<ELEMENT> *>(
+    FourierDecomposedHelmholtzDtNBoundaryElement<ELEMENT>* el_pt =
+      dynamic_cast<FourierDecomposedHelmholtzDtNBoundaryElement<ELEMENT>*>(
         this->element_pt(0));
     double k =
-      sqrt(dynamic_cast<ELEMENT *>(el_pt->bulk_element_pt())->k_squared());
+      sqrt(dynamic_cast<ELEMENT*>(el_pt->bulk_element_pt())->k_squared());
     int n_fourier_decomposed =
-      dynamic_cast<ELEMENT *>(el_pt->bulk_element_pt())->fourier_wavenumber();
+      dynamic_cast<ELEMENT*>(el_pt->bulk_element_pt())->fourier_wavenumber();
     double n_hankel_order_max = double(N_terms) + 0.5;
     double n_hankel_order_tmp = 0.0;
 
@@ -1032,8 +1031,8 @@ namespace oomph
     for (unsigned e = 0; e < nel; e++)
     {
       // Get a pointer to element
-      FourierDecomposedHelmholtzDtNBoundaryElement<ELEMENT> *el_pt =
-        dynamic_cast<FourierDecomposedHelmholtzDtNBoundaryElement<ELEMENT> *>(
+      FourierDecomposedHelmholtzDtNBoundaryElement<ELEMENT>* el_pt =
+        dynamic_cast<FourierDecomposedHelmholtzDtNBoundaryElement<ELEMENT>*>(
           this->element_pt(e));
 
       // Set the value of n_intpt
@@ -1074,9 +1073,9 @@ namespace oomph
           // to evaluate the complete integral
           for (unsigned ee = 0; ee < nel; ee++)
           {
-            FourierDecomposedHelmholtzDtNBoundaryElement<ELEMENT> *eel_pt =
+            FourierDecomposedHelmholtzDtNBoundaryElement<ELEMENT>* eel_pt =
               dynamic_cast<
-                FourierDecomposedHelmholtzDtNBoundaryElement<ELEMENT> *>(
+                FourierDecomposedHelmholtzDtNBoundaryElement<ELEMENT>*>(
                 this->element_pt(ee));
 
             // contribution of the positive term in the sum
@@ -1126,8 +1125,8 @@ namespace oomph
   //===========================================================================
   template<class ELEMENT>
   FourierDecomposedHelmholtzBCElementBase<ELEMENT>::
-    FourierDecomposedHelmholtzBCElementBase(FiniteElement *const &bulk_el_pt,
-                                            const int &face_index) :
+    FourierDecomposedHelmholtzBCElementBase(FiniteElement* const& bulk_el_pt,
+                                            const int& face_index) :
     FaceGeometry<ELEMENT>(), FaceElement()
   {
     // Let the bulk element build the FaceElement, i.e. setup the pointers
@@ -1143,8 +1142,8 @@ namespace oomph
     // We assume that the dimension of the full problem is the same
     // as the dimension of the node, if this is not the case you will have
     // to write custom elements, sorry
-    FourierDecomposedHelmholtzEquations *eqn_pt =
-      dynamic_cast<FourierDecomposedHelmholtzEquations *>(bulk_el_pt);
+    FourierDecomposedHelmholtzEquations* eqn_pt =
+      dynamic_cast<FourierDecomposedHelmholtzEquations*>(bulk_el_pt);
     if (eqn_pt == 0)
     {
       std::string error_string =

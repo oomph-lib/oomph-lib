@@ -70,23 +70,23 @@ public:
 
   /// \short Doc the solution. DocInfo object stores flags/labels for where the
   /// output gets written to and the trace file
-  void doc_solution(DocInfo &doc_info, ofstream &trace_file);
+  void doc_solution(DocInfo& doc_info, ofstream& trace_file);
 
 private:
   /// Pointer to GeomObject that specifies the domain bondary
-  GeomObject *Boundary_pt;
+  GeomObject* Boundary_pt;
 
   /// Pointer to the "bulk" mesh
-  RefineableQuarterCircleSectorMesh<ELEMENT> *Bulk_mesh_pt;
+  RefineableQuarterCircleSectorMesh<ELEMENT>* Bulk_mesh_pt;
 
   /// Pointer to mesh containing the height control element
-  Mesh *Height_control_mesh_pt;
+  Mesh* Height_control_mesh_pt;
 
   /// Pointer to height control element
-  HeightControlElement *Height_control_element_pt;
+  HeightControlElement* Height_control_element_pt;
 
   /// Node at which the height (displacement along spine) is controlled/doced
-  Node *Control_node_pt;
+  Node* Control_node_pt;
 
 }; // end of problem class
 
@@ -136,14 +136,14 @@ RefineableYoungLaplaceProblem<ELEMENT>::RefineableYoungLaplaceProblem()
   GlobalParameters::Control_element = 0;
 
   //  Choose the prescribed height element
-  ELEMENT *prescribed_height_element_pt = dynamic_cast<ELEMENT *>(
+  ELEMENT* prescribed_height_element_pt = dynamic_cast<ELEMENT*>(
     Bulk_mesh_pt->element_pt(GlobalParameters::Control_element));
 
   // ...and the associated control node (node 0 in that element)
   // (we're storing this node even if there's no height-control, for
   // output purposes...)
   Control_node_pt =
-    static_cast<Node *>(prescribed_height_element_pt->node_pt(0));
+    static_cast<Node*>(prescribed_height_element_pt->node_pt(0));
 
   cout << "Controlling height at (x,y) : (" << Control_node_pt->x(0) << ","
        << Control_node_pt->x(1) << ")" << endl;
@@ -199,7 +199,7 @@ RefineableYoungLaplaceProblem<ELEMENT>::RefineableYoungLaplaceProblem()
   for (unsigned i = 0; i < n_bulk; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(i));
 
     if (GlobalParameters::Use_spines)
     {
@@ -235,8 +235,8 @@ void RefineableYoungLaplaceProblem<ELEMENT>::increment_parameters()
 /// Doc the solution: doc_info contains labels/output directory etc.
 //========================================================================
 template<class ELEMENT>
-void RefineableYoungLaplaceProblem<ELEMENT>::doc_solution(DocInfo &doc_info,
-                                                          ofstream &trace_file)
+void RefineableYoungLaplaceProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
+                                                          ofstream& trace_file)
 {
   // Output kappa vs height
   //-----------------------
@@ -263,7 +263,7 @@ void RefineableYoungLaplaceProblem<ELEMENT>::doc_solution(DocInfo &doc_info,
 /// Driver code for 2D RefineableYoungLaplace problem. Input arguments: none
 /// (for validation) or number of steps.
 //========================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

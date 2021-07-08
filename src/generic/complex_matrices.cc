@@ -35,7 +35,7 @@ namespace oomph
   /// Complete LU solve (overwrites RHS with solution). This is the
   /// generic version which should not need to be over-written.
   //============================================================================
-  void ComplexMatrixBase::solve(Vector<std::complex<double>> &rhs)
+  void ComplexMatrixBase::solve(Vector<std::complex<double>>& rhs)
   {
 #ifdef PARANOID
     // Check Matrix is square
@@ -71,8 +71,8 @@ namespace oomph
   /// Complete LU solve (Nothing gets overwritten!). This generic
   /// version should never need to be overwritten
   //============================================================================
-  void ComplexMatrixBase::solve(const Vector<std::complex<double>> &rhs,
-                                Vector<std::complex<double>> &soln)
+  void ComplexMatrixBase::solve(const Vector<std::complex<double>>& rhs,
+                                Vector<std::complex<double>>& soln)
   {
     // Set the solution vector equal to the rhs
     // N.B. This won't work if we change to another vector format
@@ -371,7 +371,7 @@ namespace oomph
   //============================================================================
   ///  Back substitute an LU decomposed matrix.
   //============================================================================
-  void DenseComplexMatrix::lubksub(Vector<std::complex<double>> &rhs)
+  void DenseComplexMatrix::lubksub(Vector<std::complex<double>>& rhs)
   {
 #ifdef PARANOID
     // Check Matrix is square
@@ -447,9 +447,9 @@ namespace oomph
   //============================================================================
   ///  Find the residual of Ax=b, i.e. r=b-Ax
   //============================================================================
-  void DenseComplexMatrix::residual(const Vector<std::complex<double>> &x,
-                                    const Vector<std::complex<double>> &rhs,
-                                    Vector<std::complex<double>> &residual)
+  void DenseComplexMatrix::residual(const Vector<std::complex<double>>& x,
+                                    const Vector<std::complex<double>>& rhs,
+                                    Vector<std::complex<double>>& residual)
   {
 #ifdef PARANOID
     // Check Matrix is square
@@ -503,8 +503,8 @@ namespace oomph
   //============================================================================
   ///  Multiply the matrix by the vector x: soln=Ax
   //============================================================================
-  void DenseComplexMatrix::multiply(const Vector<std::complex<double>> &x,
-                                    Vector<std::complex<double>> &soln)
+  void DenseComplexMatrix::multiply(const Vector<std::complex<double>>& x,
+                                    Vector<std::complex<double>>& soln)
   {
 #ifdef PARANOID
     // Check to see if x.size() = ncol().
@@ -541,7 +541,7 @@ namespace oomph
   /// Multiply the  transposed matrix by the vector x: soln=A^T x
   //=================================================================
   void DenseComplexMatrix::multiply_transpose(
-    const Vector<std::complex<double>> &x, Vector<std::complex<double>> &soln)
+    const Vector<std::complex<double>>& x, Vector<std::complex<double>>& soln)
   {
 #ifdef PARANOID
     // Check to see x.size() = nrow()
@@ -588,19 +588,19 @@ namespace oomph
   //===================================================================
   extern "C"
   {
-    int superlu_complex(int *,
-                        int *,
-                        int *,
-                        int *,
-                        std::complex<double> *,
-                        int *,
-                        int *,
-                        std::complex<double> *,
-                        int *,
-                        int *,
-                        int *,
-                        void *,
-                        int *);
+    int superlu_complex(int*,
+                        int*,
+                        int*,
+                        int*,
+                        std::complex<double>*,
+                        int*,
+                        int*,
+                        std::complex<double>*,
+                        int*,
+                        int*,
+                        int*,
+                        void*,
+                        int*);
   }
 
   //===================================================================
@@ -659,7 +659,7 @@ namespace oomph
   //===================================================================
   /// Do the backsubstitution
   //===================================================================
-  void CCComplexMatrix::lubksub(Vector<std::complex<double>> &rhs)
+  void CCComplexMatrix::lubksub(Vector<std::complex<double>>& rhs)
   {
 #ifdef PARANOID
     if (N != rhs.size())
@@ -686,7 +686,7 @@ namespace oomph
 #endif
 
     /// RHS vector
-    std::complex<double> *b = new std::complex<double>[N];
+    std::complex<double>* b = new std::complex<double>[N];
 
     // Copy across
     for (unsigned long i = 0; i < N; i++)
@@ -778,9 +778,9 @@ namespace oomph
   //===================================================================
   /// Work out residual vector r = b-Ax for candidate solution x
   //===================================================================
-  void CCComplexMatrix::residual(const Vector<std::complex<double>> &x,
-                                 const Vector<std::complex<double>> &rhs,
-                                 Vector<std::complex<double>> &residual)
+  void CCComplexMatrix::residual(const Vector<std::complex<double>>& x,
+                                 const Vector<std::complex<double>>& rhs,
+                                 Vector<std::complex<double>>& residual)
   {
 #ifdef PARANOID
     // Check Matrix is square
@@ -841,8 +841,8 @@ namespace oomph
   //===================================================================
   ///  Multiply the matrix by the vector x
   //===================================================================
-  void CCComplexMatrix::multiply(const Vector<std::complex<double>> &x,
-                                 Vector<std::complex<double>> &soln)
+  void CCComplexMatrix::multiply(const Vector<std::complex<double>>& x,
+                                 Vector<std::complex<double>>& soln)
   {
 #ifdef PARANOID
     // Check to see if x.size() = ncol()
@@ -883,7 +883,7 @@ namespace oomph
   /// Multiply the  transposed matrix by the vector x: soln=A^T x
   //=================================================================
   void CCComplexMatrix::multiply_transpose(
-    const Vector<std::complex<double>> &x, Vector<std::complex<double>> &soln)
+    const Vector<std::complex<double>>& x, Vector<std::complex<double>>& soln)
   {
 #ifdef PARANOID
     // Check to see x.size() = nrow()
@@ -982,7 +982,7 @@ namespace oomph
   //===================================================================
   /// Do back-substitution
   //===================================================================
-  void CRComplexMatrix::lubksub(Vector<std::complex<double>> &rhs)
+  void CRComplexMatrix::lubksub(Vector<std::complex<double>>& rhs)
   {
 #ifdef PARANOID
     if (N != rhs.size())
@@ -1009,7 +1009,7 @@ namespace oomph
 #endif
 
     /// RHS vector
-    std::complex<double> *b = new std::complex<double>[N];
+    std::complex<double>* b = new std::complex<double>[N];
 
     // Copy across
     for (unsigned long i = 0; i < N; i++)
@@ -1101,9 +1101,9 @@ namespace oomph
   //=================================================================
   ///  Find the residulal to x of Ax=b, ie r=b-Ax
   //=================================================================
-  void CRComplexMatrix::residual(const Vector<std::complex<double>> &x,
-                                 const Vector<std::complex<double>> &rhs,
-                                 Vector<std::complex<double>> &residual)
+  void CRComplexMatrix::residual(const Vector<std::complex<double>>& x,
+                                 const Vector<std::complex<double>>& rhs,
+                                 Vector<std::complex<double>>& residual)
   {
 #ifdef PARANOID
     // Check that size of rhs = nrow()
@@ -1150,8 +1150,8 @@ namespace oomph
   //=================================================================
   ///  Multiply the matrix by the vector x
   //=================================================================
-  void CRComplexMatrix::multiply(const Vector<std::complex<double>> &x,
-                                 Vector<std::complex<double>> &soln)
+  void CRComplexMatrix::multiply(const Vector<std::complex<double>>& x,
+                                 Vector<std::complex<double>>& soln)
   {
 #ifdef PARANOID
     // Check to see x.size() = ncol()
@@ -1188,7 +1188,7 @@ namespace oomph
   /// Multiply the  transposed matrix by the vector x: soln=A^T x
   //=================================================================
   void CRComplexMatrix::multiply_transpose(
-    const Vector<std::complex<double>> &x, Vector<std::complex<double>> &soln)
+    const Vector<std::complex<double>>& x, Vector<std::complex<double>>& soln)
   {
 #ifdef PARANOID
     // Check to see x.size() = nrow()

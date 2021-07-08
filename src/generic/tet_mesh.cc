@@ -46,7 +46,7 @@ namespace oomph
   /// Setup lookup schemes which establish which elements are located
   /// next to which boundaries (Doc to outfile if it's open).
   //================================================================
-  void TetMeshBase::setup_boundary_element_info(std::ostream &outfile)
+  void TetMeshBase::setup_boundary_element_info(std::ostream& outfile)
   {
     // Should we document the output here
     bool doc = false;
@@ -65,11 +65,11 @@ namespace oomph
 
     // Temporary vector of vectors of pointers to elements on the boundaries:
     // This is a vector to ensure UNIQUE ordering in all processors
-    Vector<Vector<FiniteElement *>> vector_of_boundary_element_pt;
+    Vector<Vector<FiniteElement*>> vector_of_boundary_element_pt;
     vector_of_boundary_element_pt.resize(nbound);
 
     // Matrix map for working out the fixed face for elements on boundary
-    MapMatrixMixed<unsigned, FiniteElement *, int> face_identifier;
+    MapMatrixMixed<unsigned, FiniteElement*, int> face_identifier;
 
     // Loop over elements
     //-------------------
@@ -77,12 +77,12 @@ namespace oomph
 
     // Get pointer to vector of boundaries that the
     // node lives on
-    Vector<std::set<unsigned> *> boundaries_pt(4, 0);
+    Vector<std::set<unsigned>*> boundaries_pt(4, 0);
 
     for (unsigned e = 0; e < nel; e++)
     {
       // Get pointer to element
-      FiniteElement *fe_pt = finite_element_pt(e);
+      FiniteElement* fe_pt = finite_element_pt(e);
 
       if (doc) outfile << "Element: " << e << " " << fe_pt << std::endl;
 
@@ -223,7 +223,7 @@ namespace oomph
           if (boundary >= 0)
           {
             // Does the pointer already exits in the vector
-            Vector<FiniteElement *>::iterator b_el_it = std::find(
+            Vector<FiniteElement*>::iterator b_el_it = std::find(
               vector_of_boundary_element_pt[static_cast<unsigned>(boundary)]
                 .begin(),
               vector_of_boundary_element_pt[static_cast<unsigned>(boundary)]
@@ -266,13 +266,13 @@ namespace oomph
       Face_index_at_boundary[i].resize(nel);
 
       unsigned e_count = 0;
-      typedef Vector<FiniteElement *>::iterator IT;
+      typedef Vector<FiniteElement*>::iterator IT;
       for (IT it = vector_of_boundary_element_pt[i].begin();
            it != vector_of_boundary_element_pt[i].end();
            it++)
       {
         // Recover pointer to element
-        FiniteElement *fe_pt = *it;
+        FiniteElement* fe_pt = *it;
 
         // Add to permanent storage
         Boundary_element_pt[i].push_back(fe_pt);
@@ -298,7 +298,7 @@ namespace oomph
         // Loop over elements on given boundary
         for (unsigned e = 0; e < nel; e++)
         {
-          FiniteElement *fe_pt = Boundary_element_pt[i][e];
+          FiniteElement* fe_pt = Boundary_element_pt[i][e];
           outfile << "Boundary element:" << fe_pt
                   << " Face index of boundary is "
                   << Face_index_at_boundary[i][e] << std::endl;
@@ -314,7 +314,7 @@ namespace oomph
   /// Assess mesh quality: Ratio of max. edge length to min. height,
   /// so if it's very large it's BAAAAAD.
   //======================================================================
-  void TetMeshBase::assess_mesh_quality(std::ofstream &some_file)
+  void TetMeshBase::assess_mesh_quality(std::ofstream& some_file)
   {
     Vector<Vector<double>> edge(6);
     for (unsigned e = 0; e < 6; e++)
@@ -324,7 +324,7 @@ namespace oomph
     unsigned nel = this->nelement();
     for (unsigned e = 0; e < nel; e++)
     {
-      FiniteElement *fe_pt = this->finite_element_pt(e);
+      FiniteElement* fe_pt = this->finite_element_pt(e);
       for (unsigned i = 0; i < 3; i++)
       {
         edge[0][i] = fe_pt->node_pt(2)->x(i) - fe_pt->node_pt(1)->x(i);
@@ -425,12 +425,12 @@ namespace oomph
   void TetMeshBase::snap_nodes_onto_geometric_objects()
   {
     // Backup in case elements get inverted
-    std::map<Node *, Vector<double>> old_nodal_posn;
-    std::map<Node *, Vector<double>> new_nodal_posn;
+    std::map<Node*, Vector<double>> old_nodal_posn;
+    std::map<Node*, Vector<double>> new_nodal_posn;
     unsigned nnod = nnode();
     for (unsigned j = 0; j < nnod; j++)
     {
-      Node *nod_pt = node_pt(j);
+      Node* nod_pt = node_pt(j);
       Vector<double> x(3);
       nod_pt->position(x);
       old_nodal_posn[nod_pt] = x;
@@ -447,8 +447,8 @@ namespace oomph
       reason << "Can't snap nodes on boundary " << b
              << " onto geom object because: \n";
 
-      TetMeshFacetedSurface *faceted_surface_pt = 0;
-      std::map<unsigned, TetMeshFacetedSurface *>::iterator it =
+      TetMeshFacetedSurface* faceted_surface_pt = 0;
+      std::map<unsigned, TetMeshFacetedSurface*>::iterator it =
         Tet_mesh_faceted_surface_pt.find(b);
       if (it != Tet_mesh_faceted_surface_pt.end())
       {
@@ -463,7 +463,7 @@ namespace oomph
       }
 
       // Get geom object associated with facet
-      GeomObject *geom_obj_pt = 0;
+      GeomObject* geom_obj_pt = 0;
       if (do_it)
       {
         geom_obj_pt = faceted_surface_pt->geom_object_with_boundaries_pt();
@@ -491,7 +491,7 @@ namespace oomph
 
       // Which facet is associated with this boundary?
       unsigned facet_id_of_boundary = 0;
-      TetMeshFacet *f_pt = 0;
+      TetMeshFacet* f_pt = 0;
       if (do_it)
       {
         unsigned nf = faceted_surface_pt->nfacet();
@@ -555,7 +555,7 @@ namespace oomph
         for (unsigned n = 0; n < n_boundary_node; ++n)
         {
           // Get the boundary node and coordinates
-          Node *const nod_pt = this->boundary_node_pt(b, n);
+          Node* const nod_pt = this->boundary_node_pt(b, n);
           nod_pt->get_coordinates_on_boundary(b, zeta);
 
           // Now we have zeta, the cartesian boundary coordinates
@@ -713,7 +713,7 @@ namespace oomph
     unsigned nel = nelement();
     for (unsigned e = 0; e < nel; e++)
     {
-      FiniteElement *el_pt = finite_element_pt(e);
+      FiniteElement* el_pt = finite_element_pt(e);
       bool passed = true;
       el_pt->check_J_eulerian_at_knots(passed);
       if (!passed)
@@ -731,7 +731,7 @@ namespace oomph
         unsigned nnod = el_pt->nnode();
         for (unsigned j = 0; j < nnod; j++)
         {
-          Node *nod_pt = el_pt->node_pt(j);
+          Node* nod_pt = el_pt->node_pt(j);
           Vector<double> x_current(3);
           nod_pt->position(x_current);
           new_nodal_posn[nod_pt] = x_current;
@@ -751,7 +751,7 @@ namespace oomph
         // Reset
         for (unsigned j = 0; j < nnod; j++)
         {
-          Node *nod_pt = el_pt->node_pt(j);
+          Node* nod_pt = el_pt->node_pt(j);
           for (unsigned i = 0; i < 3; i++)
           {
             nod_pt->x(i) = new_nodal_posn[nod_pt][i];

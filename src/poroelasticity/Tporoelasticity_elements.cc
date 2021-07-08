@@ -64,8 +64,8 @@ namespace oomph
 
   /// Returns the local form of the q basis at local coordinate s
   template<>
-  void TPoroelasticityElement<0>::get_q_basis_local(const Vector<double> &s,
-                                                    Shape &q_basis) const
+  void TPoroelasticityElement<0>::get_q_basis_local(const Vector<double>& s,
+                                                    Shape& q_basis) const
   {
     // RT_0 basis functions
     q_basis(0, 0) = Sign_edge[0] * std::sqrt(2) * s[0];
@@ -81,7 +81,7 @@ namespace oomph
   /// Returns the local form of the q basis and dbasis/ds at local coordinate s
   template<>
   void TPoroelasticityElement<0>::get_div_q_basis_local(
-    const Vector<double> &s, Shape &div_q_basis_ds) const
+    const Vector<double>& s, Shape& div_q_basis_ds) const
   {
     div_q_basis_ds(0) = Sign_edge[0] * 2 * std::sqrt(2);
     div_q_basis_ds(1) = Sign_edge[1] * 2;
@@ -108,8 +108,8 @@ namespace oomph
 
   /// Return the pressure basis
   template<>
-  void TPoroelasticityElement<0>::get_p_basis(const Vector<double> &s,
-                                              Shape &p_basis) const
+  void TPoroelasticityElement<0>::get_p_basis(const Vector<double>& s,
+                                              Shape& p_basis) const
   {
     p_basis(0) = 1.0;
   }
@@ -164,8 +164,8 @@ namespace oomph
 
   /// Returns the local form of the q basis at local coordinate s
   template<>
-  void TPoroelasticityElement<1>::get_q_basis_local(const Vector<double> &s,
-                                                    Shape &q_basis) const
+  void TPoroelasticityElement<1>::get_q_basis_local(const Vector<double>& s,
+                                                    Shape& q_basis) const
   {
     // RT_1 basis functions
 
@@ -209,7 +209,7 @@ namespace oomph
   /// Returns the local form of the q basis and dbasis/ds at local coordinate s
   template<>
   void TPoroelasticityElement<1>::get_div_q_basis_local(
-    const Vector<double> &s, Shape &div_q_basis_ds) const
+    const Vector<double>& s, Shape& div_q_basis_ds) const
   {
     double g1, g2;
 
@@ -254,8 +254,8 @@ namespace oomph
 
   /// Return the pressure basis
   template<>
-  void TPoroelasticityElement<1>::get_p_basis(const Vector<double> &s,
-                                              Shape &p_basis) const
+  void TPoroelasticityElement<1>::get_p_basis(const Vector<double>& s,
+                                              Shape& p_basis) const
   {
     p_basis(0) = 1.0;
     p_basis(1) = s[0];

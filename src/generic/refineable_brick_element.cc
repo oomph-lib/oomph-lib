@@ -40,8 +40,8 @@ namespace oomph
   ///  Print corner nodes, use colour (default "BLACK")
   ///  in right order so that tecplot can draw a cube without crossed lines
   //========================================================================
-  void RefineableQElement<3>::output_corners(std::ostream &outfile,
-                                             const std::string &colour) const
+  void RefineableQElement<3>::output_corners(std::ostream& outfile,
+                                             const std::string& colour) const
   {
     Vector<double> s(3);
     Vector<double> corner(3);
@@ -234,7 +234,7 @@ namespace oomph
   ///   - bound_cons[ival]=0 if value ival on this boundary is free
   ///   - bound_cons[ival]=1 if value ival on this boundary is pinned
   //==================================================================
-  void RefineableQElement<3>::get_bcs(int bound, Vector<int> &bound_cons) const
+  void RefineableQElement<3>::get_bcs(int bound, Vector<int>& bound_cons) const
   {
     using namespace OcTreeNames;
 
@@ -332,8 +332,8 @@ namespace oomph
   ///   - bound_cons[ival]=0 if value ival on this boundary is free
   ///   - bound_cons[ival]=1 if value ival on this boundary is pinned
   //==================================================================
-  void RefineableQElement<3>::get_face_bcs(const int &face,
-                                           Vector<int> &bound_cons) const
+  void RefineableQElement<3>::get_face_bcs(const int& face,
+                                           Vector<int>& bound_cons) const
   {
     using namespace OcTreeNames;
 
@@ -418,8 +418,8 @@ namespace oomph
   /// both vertex nodes). For vertex nodes, we just return their
   /// boundaries.
   //==================================================================
-  void RefineableQElement<3>::get_boundaries(const int &element,
-                                             std::set<unsigned> &boundary) const
+  void RefineableQElement<3>::get_boundaries(const int& element,
+                                             std::set<unsigned>& boundary) const
   {
     using namespace OcTreeNames;
 
@@ -534,7 +534,7 @@ namespace oomph
     boundary.clear();
 
     // Storage for the boundaries at the four nodes
-    Vector<std::set<unsigned> *> node_boundaries_pt(4, 0);
+    Vector<std::set<unsigned>*> node_boundaries_pt(4, 0);
 
     // Loop over the four nodes and get the boundary information
     for (unsigned i = 0; i < 4; i++)
@@ -574,10 +574,10 @@ namespace oomph
   /// along the face
   //===================================================================
   void RefineableQElement<3>::interpolated_zeta_on_face(
-    const unsigned &boundary,
-    const int &face,
-    const Vector<double> &s,
-    Vector<double> &zeta)
+    const unsigned& boundary,
+    const int& face,
+    const Vector<double>& s,
+    Vector<double>& zeta)
   {
     using namespace OcTreeNames;
 
@@ -983,8 +983,8 @@ namespace oomph
   /// present element, s_fraction, return
   /// a pointer to that node. If not, return NULL (0).
   //===================================================================
-  Node *RefineableQElement<3>::node_created_by_neighbour(
-    const Vector<double> &s_fraction)
+  Node* RefineableQElement<3>::node_created_by_neighbour(
+    const Vector<double>& s_fraction)
   {
     using namespace OcTreeNames;
 
@@ -1088,7 +1088,7 @@ namespace oomph
     for (unsigned j = 0; j < n_face; j++)
     {
       // Find pointer to neighbouring element along face
-      OcTree *neigh_pt;
+      OcTree* neigh_pt;
       neigh_pt = octree_pt()->gteq_face_neighbour(
         faces[j], translate_s, s_lo_neigh, s_hi_neigh, neigh_face, diff_level);
 
@@ -1113,7 +1113,7 @@ namespace oomph
           }
 
           // Find the node in the neighbour
-          Node *neighbour_node_pt =
+          Node* neighbour_node_pt =
             neigh_pt->object_pt()->get_node_at_local_coordinate(s);
 
           // If there is a node, return it
@@ -1152,7 +1152,7 @@ namespace oomph
       while (keep_searching)
       {
         // Find pointer to neighbouring element along edge
-        OcTree *neigh_pt;
+        OcTree* neigh_pt;
         neigh_pt = octree_pt()->gteq_true_edge_neighbour(edges[j],
                                                          i_root_edge_neighbour,
                                                          nroot_edge_neighbour,
@@ -1183,7 +1183,7 @@ namespace oomph
             }
 
             // Find the node in the neighbour
-            Node *neighbour_node_pt =
+            Node* neighbour_node_pt =
               neigh_pt->object_pt()->get_node_at_local_coordinate(s);
 
             // If there is a node, return it
@@ -1240,10 +1240,10 @@ namespace oomph
   ///   pressure values in manner consistent with the pressure
   ///   distribution in the father element.
   //==================================================================
-  void RefineableQElement<3>::build(Mesh *&mesh_pt,
-                                    Vector<Node *> &new_node_pt,
-                                    bool &was_already_built,
-                                    std::ofstream &new_nodes_file)
+  void RefineableQElement<3>::build(Mesh*& mesh_pt,
+                                    Vector<Node*>& new_node_pt,
+                                    bool& was_already_built,
+                                    std::ofstream& new_nodes_file)
   {
     using namespace OcTreeNames;
 
@@ -1257,7 +1257,7 @@ namespace oomph
     }
 
     // Pointer to my father (in octree impersonation)
-    OcTree *father_pt = dynamic_cast<OcTree *>(octree_pt()->father_pt());
+    OcTree* father_pt = dynamic_cast<OcTree*>(octree_pt()->father_pt());
 
     // What type of son am I? Ask my octree representation...
     int son_type = octree_pt()->son_type();
@@ -1281,12 +1281,12 @@ namespace oomph
       was_already_built = false;
 
       // Return pointer to father element
-      RefineableQElement<3> *father_el_pt =
-        dynamic_cast<RefineableQElement<3> *>(father_pt->object_pt());
+      RefineableQElement<3>* father_el_pt =
+        dynamic_cast<RefineableQElement<3>*>(father_pt->object_pt());
 
       // Timestepper should be the same for all nodes in father
       // element -- use it create timesteppers for new nodes
-      TimeStepper *time_stepper_pt =
+      TimeStepper* time_stepper_pt =
         father_el_pt->node_pt(0)->time_stepper_pt();
 
       // Number of history values (incl. present)
@@ -1388,7 +1388,7 @@ namespace oomph
 
               // Check whether the father's node is periodic if so, complain
               {
-                Node *father_node_pt = father_el_pt->node_pt(jnod);
+                Node* father_node_pt = father_el_pt->node_pt(jnod);
                 if ((father_node_pt->is_a_copy()) ||
                     (father_node_pt->position_is_a_copy()))
                 {
@@ -1404,7 +1404,7 @@ namespace oomph
 
               // Get the pointer to the node in the father; returns NULL
               // if there is not a node
-              Node *created_node_pt =
+              Node* created_node_pt =
                 father_el_pt->get_node_at_local_coordinate(s);
 
               // Does this node already exist in father element?
@@ -1549,15 +1549,15 @@ namespace oomph
 
                   // Solid node? If so, deal with the positional boundary
                   // conditions:
-                  SolidNode *solid_node_pt =
-                    dynamic_cast<SolidNode *>(created_node_pt);
+                  SolidNode* solid_node_pt =
+                    dynamic_cast<SolidNode*>(created_node_pt);
                   if (solid_node_pt != 0)
                   {
                     // Get the positional boundary conditions from the father:
                     unsigned n_dim = created_node_pt->ndim();
                     Vector<int> solid_bound_cons(n_dim);
-                    RefineableSolidQElement<3> *father_solid_el_pt =
-                      dynamic_cast<RefineableSolidQElement<3> *>(father_el_pt);
+                    RefineableSolidQElement<3>* father_solid_el_pt =
+                      dynamic_cast<RefineableSolidQElement<3>*>(father_el_pt);
 #ifdef PARANOID
                     if (father_solid_el_pt == 0)
                     {
@@ -1680,8 +1680,8 @@ namespace oomph
                 // everything above gets bypassed.
 
               // Check if the element is an algebraic element
-              AlgebraicElementBase *alg_el_pt =
-                dynamic_cast<AlgebraicElementBase *>(this);
+              AlgebraicElementBase* alg_el_pt =
+                dynamic_cast<AlgebraicElementBase*>(this);
 
               // If the element is an algebraic element, setup
               // node position (past and present) from algebraic update
@@ -1719,17 +1719,17 @@ namespace oomph
         // all this needs is the vector of (pointers to the)
         // geometric objects that affect the MacroElement-based
         // node update -- this is the same as that in the father element
-        MacroElementNodeUpdateElementBase *father_m_el_pt =
-          dynamic_cast<MacroElementNodeUpdateElementBase *>(father_el_pt);
+        MacroElementNodeUpdateElementBase* father_m_el_pt =
+          dynamic_cast<MacroElementNodeUpdateElementBase*>(father_el_pt);
         if (father_m_el_pt != 0)
         {
           // Get vector of geometric objects from father (construct vector
           // via copy operation)
-          Vector<GeomObject *> geom_object_pt(father_m_el_pt->geom_object_pt());
+          Vector<GeomObject*> geom_object_pt(father_m_el_pt->geom_object_pt());
 
           // Cast current element to MacroElementNodeUpdateElement:
-          MacroElementNodeUpdateElementBase *m_el_pt =
-            dynamic_cast<MacroElementNodeUpdateElementBase *>(this);
+          MacroElementNodeUpdateElementBase* m_el_pt =
+            dynamic_cast<MacroElementNodeUpdateElementBase*>(this);
 
 #ifdef PARANOID
           if (m_el_pt == 0)
@@ -1765,15 +1765,15 @@ namespace oomph
 #endif
 
         // Is it an ElementWithMovingNodes?
-        ElementWithMovingNodes *aux_el_pt =
-          dynamic_cast<ElementWithMovingNodes *>(this);
+        ElementWithMovingNodes* aux_el_pt =
+          dynamic_cast<ElementWithMovingNodes*>(this);
 
         // Pass down the information re the method for the evaluation
         // of the shape derivatives
         if (aux_el_pt != 0)
         {
-          ElementWithMovingNodes *aux_father_el_pt =
-            dynamic_cast<ElementWithMovingNodes *>(father_el_pt);
+          ElementWithMovingNodes* aux_father_el_pt =
+            dynamic_cast<ElementWithMovingNodes*>(father_el_pt);
 
 #ifdef PARANOID
           if (aux_father_el_pt == 0)
@@ -1828,7 +1828,7 @@ namespace oomph
   /// (Wrapper to avoid specification of the unwanted output file).
   //====================================================================
   void RefineableQElement<3>::setup_hanging_nodes(
-    Vector<std::ofstream *> &output_stream)
+    Vector<std::ofstream*>& output_stream)
   {
 #ifdef PARANOID
     if (output_stream.size() != 6)
@@ -1854,7 +1854,7 @@ namespace oomph
   /// Internal function that sets up the hanging node scheme for a
   /// particular value
   //=================================================================
-  void RefineableQElement<3>::setup_hang_for_value(const int &value_id)
+  void RefineableQElement<3>::setup_hang_for_value(const int& value_id)
   {
     using namespace OcTreeNames;
 
@@ -1872,9 +1872,9 @@ namespace oomph
   /// Internal function to set up the hanging nodes on a particular
   /// face of the element
   //=================================================================
-  void RefineableQElement<3>::oc_hang_helper(const int &value_id,
-                                             const int &my_face,
-                                             std::ofstream &output_hangfile)
+  void RefineableQElement<3>::oc_hang_helper(const int& value_id,
+                                             const int& my_face,
+                                             std::ofstream& output_hangfile)
   {
     using namespace OcTreeNames;
 
@@ -1884,7 +1884,7 @@ namespace oomph
     int neigh_face, diff_level;
 
     // Find pointer to neighbour in this direction
-    OcTree *neigh_pt;
+    OcTree* neigh_pt;
     neigh_pt = octree_pt()->gteq_face_neighbour(
       my_face, translate_s, s_lo_neigh, s_hi_neigh, neigh_face, diff_level);
 
@@ -1897,7 +1897,7 @@ namespace oomph
         // Number of nodes in one dimension
         unsigned n_p = ninterpolating_node_1d(value_id);
         // Storage for the local nodes along the face of the element
-        Node *local_node_pt = 0;
+        Node* local_node_pt = 0;
 
         // Loop over nodes along the face
         for (unsigned i0 = 0; i0 < n_p; i0++)
@@ -1985,7 +1985,7 @@ namespace oomph
             }
 
             // Find the Node in the neighbouring element
-            Node *neighbouring_node_pt =
+            Node* neighbouring_node_pt =
               neigh_pt->object_pt()->get_interpolating_node_at_local_coordinate(
                 s_in_neighb, value_id);
 
@@ -2016,7 +2016,7 @@ namespace oomph
               if (make_hanging_node == true)
               {
                 // Cache refineable element used here
-                RefineableElement *const obj_pt = neigh_pt->object_pt();
+                RefineableElement* const obj_pt = neigh_pt->object_pt();
 
                 // Get shape functions in neighbour element
                 Shape psi(obj_pt->ninterpolating_node(value_id));
@@ -2024,7 +2024,7 @@ namespace oomph
 
                 // Allocate the storage for the Hang pointer
                 // We know that it will hold n_p*n_p nodes
-                HangInfo *hang_pt = new HangInfo(n_p * n_p);
+                HangInfo* hang_pt = new HangInfo(n_p * n_p);
 
                 // Loop over nodes on edge in neighbour and mark them as nodes
                 // that this node depends on
@@ -2145,7 +2145,7 @@ namespace oomph
   /// - nodal positions
   /// - (nodally) interpolated function values
   //====================================================================
-  void RefineableQElement<3>::check_integrity(double &max_error)
+  void RefineableQElement<3>::check_integrity(double& max_error)
   {
     using namespace OcTreeNames;
 
@@ -2184,7 +2184,7 @@ namespace oomph
       my_face = faces[face_counter];
 
       // Find pointer to neighbour in this direction
-      OcTree *neigh_pt;
+      OcTree* neigh_pt;
       neigh_pt = octree_pt()->gteq_face_neighbour(
         my_face, translate_s, s_lo_neigh, s_hi_neigh, neigh_face, diff_level);
 
@@ -2377,7 +2377,7 @@ namespace oomph
   ///   - solid_bound_cons[i]=1 if it's pinned.
   //==================================================================
   void RefineableSolidQElement<3>::get_solid_bcs(
-    int bound, Vector<int> &solid_bound_cons) const
+    int bound, Vector<int>& solid_bound_cons) const
   {
     using namespace OcTreeNames;
 
@@ -2478,7 +2478,7 @@ namespace oomph
   ///   - solid_bound_cons[i]=1 if it's pinned
   //==================================================================
   void RefineableSolidQElement<3>::get_face_solid_bcs(
-    const int &face, Vector<int> &solid_bound_cons) const
+    const int& face, Vector<int>& solid_bound_cons) const
   {
     using namespace OcTreeNames;
 
@@ -2541,10 +2541,10 @@ namespace oomph
     }
 
     // Cast to solid nodes
-    SolidNode *solid_node1_pt = dynamic_cast<SolidNode *>(node_pt(node1));
-    SolidNode *solid_node2_pt = dynamic_cast<SolidNode *>(node_pt(node2));
-    SolidNode *solid_node3_pt = dynamic_cast<SolidNode *>(node_pt(node3));
-    SolidNode *solid_node4_pt = dynamic_cast<SolidNode *>(node_pt(node4));
+    SolidNode* solid_node1_pt = dynamic_cast<SolidNode*>(node_pt(node1));
+    SolidNode* solid_node2_pt = dynamic_cast<SolidNode*>(node_pt(node2));
+    SolidNode* solid_node3_pt = dynamic_cast<SolidNode*>(node_pt(node3));
+    SolidNode* solid_node4_pt = dynamic_cast<SolidNode*>(node_pt(node4));
 
     //#ifdef PARANOID
     if (solid_node1_pt == 0)

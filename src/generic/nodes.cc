@@ -47,7 +47,7 @@ namespace oomph
   /// \short Private function to check that the arguments are within
   /// the range of the stored data values and timesteps.
   //=================================================================
-  void Data::range_check(const unsigned &t, const unsigned &i) const
+  void Data::range_check(const unsigned& t, const unsigned& i) const
   {
     // If either the value or the time history value are out of range
     if ((i >= Nvalue) || (t >= ntstorage()))
@@ -75,12 +75,12 @@ namespace oomph
   /// Add the pointer data_pt to the internal storage used to keep track
   /// of copies of the Data object.
   //====================================================================
-  void Data::add_copy(Data *const &data_pt)
+  void Data::add_copy(Data* const& data_pt)
   {
     // Find the current number of copies
     const unsigned n_copies = Ncopies;
     // Allocate storage for the pointers to the new number of copies
-    Data **new_copy_of_data_pt = new Data *[n_copies + 1];
+    Data** new_copy_of_data_pt = new Data*[n_copies + 1];
     // Copy over the exisiting pointers
     for (unsigned i = 0; i < n_copies; i++)
     {
@@ -101,7 +101,7 @@ namespace oomph
   /// Remove the pointer data_pt from the internal storage used to keep
   /// track of copies
   //=====================================================================
-  void Data::remove_copy(Data *const &data_pt)
+  void Data::remove_copy(Data* const& data_pt)
   {
     // Find the current number of copies
     const unsigned n_copies = Ncopies;
@@ -130,7 +130,7 @@ namespace oomph
 
     // If we still here remove the data
     // Allocate storage for the pointers to the new number of copies
-    Data **new_copy_of_data_pt = new Data *[n_copies - 1];
+    Data** new_copy_of_data_pt = new Data*[n_copies - 1];
 
     unsigned index = 0;
     // Copy over the exisiting pointers
@@ -207,7 +207,7 @@ namespace oomph
   //================================================================
   /// Default (steady) timestepper for steady Data
   //================================================================
-  TimeStepper *Data::Default_static_time_stepper_pt = new Steady<0>();
+  TimeStepper* Data::Default_static_time_stepper_pt = new Steady<0>();
 
   //================================================================
   /// Static "Magic number" to indicate pinned values
@@ -254,7 +254,7 @@ namespace oomph
   /// Default constructor for steady problems. Memory is assigned for a given
   /// number of values, which are assumed to be free (not pinned)
   //================================================================
-  Data::Data(const unsigned &initial_n_value) :
+  Data::Data(const unsigned& initial_n_value) :
     Value(0),
     Eqn_number(0),
     Time_stepper_pt(Data::Default_static_time_stepper_pt),
@@ -271,12 +271,12 @@ namespace oomph
     {
       // Allocate initial_n_value values in the value and equation number
       // storage schemes.
-      Value = new double *[initial_n_value];
+      Value = new double*[initial_n_value];
       Eqn_number = new long[initial_n_value];
 
       // Allocate contiguous arrays of doubles and longs to
       // hold the data values.
-      double *values = new double[initial_n_value];
+      double* values = new double[initial_n_value];
 
       // Set the pointers to the data values and equation numbers
       // and initialise the actual values.
@@ -297,9 +297,9 @@ namespace oomph
   /// number of values; and the additional storage required by the Timestepper.
   /// The values are assumed to be free (not pinned).
   //================================================================
-  Data::Data(TimeStepper *const &time_stepper_pt_,
-             const unsigned &initial_n_value,
-             const bool &allocate_storage) :
+  Data::Data(TimeStepper* const& time_stepper_pt_,
+             const unsigned& initial_n_value,
+             const bool& allocate_storage) :
     Value(0),
     Eqn_number(0),
     Time_stepper_pt(time_stepper_pt_),
@@ -323,10 +323,10 @@ namespace oomph
 
       // There will be initial_n_value pointers each addressing and array
       // of n_tstorage doubles.
-      Value = new double *[initial_n_value];
+      Value = new double*[initial_n_value];
 
       // Allocate all the data values in one big array for data locality.
-      double *values = new double[initial_n_value * n_tstorage];
+      double* values = new double[initial_n_value * n_tstorage];
 
       // Set the pointers to the data values and equation numbers
       for (unsigned i = 0; i < initial_n_value; i++)
@@ -347,7 +347,7 @@ namespace oomph
 
   /// Data output operator: output equation numbers and values at all times,
   /// along with any extra information stored for the timestepper.
-  std::ostream &operator<<(std::ostream &out, const Data &d)
+  std::ostream& operator<<(std::ostream& out, const Data& d)
   {
     const unsigned nvalue = d.nvalue();
     const unsigned nt = d.ntstorage();
@@ -370,7 +370,7 @@ namespace oomph
 
   /// Node output operator: output equation numbers and values at all times,
   /// along with any extra information stored for the timestepper.
-  std::ostream &operator<<(std::ostream &out, const Node &nd)
+  std::ostream& operator<<(std::ostream& out, const Node& nd)
   {
     const unsigned nt = nd.ntstorage();
     const unsigned dim = nd.ndim();
@@ -392,7 +392,7 @@ namespace oomph
     // Use the function for data to output the data (we can't use overloading
     // here because operator<< is not a class function, so instead we
     // typecast the node to a data).
-    out << dynamic_cast<const Data &>(nd);
+    out << dynamic_cast<const Data&>(nd);
     return out;
   }
 
@@ -402,8 +402,8 @@ namespace oomph
   /// The current (zero) values will be unaffected, but all other entries
   /// will be set to zero.
   //================================================================
-  void Data::set_time_stepper(TimeStepper *const &time_stepper_pt,
-                              const bool &preserve_existing_data)
+  void Data::set_time_stepper(TimeStepper* const& time_stepper_pt,
+                              const bool& preserve_existing_data)
   {
     // If the timestepper is unchanged do nothing
     if (Time_stepper_pt == time_stepper_pt)
@@ -438,7 +438,7 @@ namespace oomph
       const unsigned n_tstorage = time_stepper_pt->ntstorage();
 
       // Allocate all the data values in one big array for data locality.
-      double *values = new double[n_value * n_tstorage];
+      double* values = new double[n_value * n_tstorage];
 
       // Copy the old "preserved" values into the new storage scheme
       // Make sure that we limit the values to the level of storage
@@ -498,7 +498,7 @@ namespace oomph
   //==================================================================
   /// Compute Vector of values (dofs or pinned) at this Data object
   //==================================================================
-  void Data::value(Vector<double> &values) const
+  void Data::value(Vector<double>& values) const
   {
     // Loop over all the values and set the appropriate value
     const unsigned n_value = nvalue();
@@ -512,7 +512,7 @@ namespace oomph
   /// Compute Vector of values (dofs or pinned) at this node
   /// at time level t (t=0: present; t>0: previous)
   //==================================================================
-  void Data::value(const unsigned &t, Vector<double> &values) const
+  void Data::value(const unsigned& t, Vector<double>& values) const
   {
     // Loop over all the values and set the value at time level t
     const unsigned n_value = nvalue();
@@ -528,8 +528,8 @@ namespace oomph
   /// and if so shouts and then sets it to Is_constrained. Then drops
   /// down to Data version which does the actual work
   //================================================================
-  void Node::assign_eqn_numbers(unsigned long &global_number,
-                                Vector<double *> &dof_pt)
+  void Node::assign_eqn_numbers(unsigned long& global_number,
+                                Vector<double*>& dof_pt)
   {
     // Loop over the number of values
     const unsigned eqn_number_range = nvalue();
@@ -561,7 +561,7 @@ namespace oomph
   /// If pointer parameter_pt addresses internal data values then return
   /// return true, otherwise return false
   //======================================================================
-  bool Data::does_pointer_correspond_to_value(double *const &parameter_pt)
+  bool Data::does_pointer_correspond_to_value(double* const& parameter_pt)
   {
     // If there is no value data then return false
     if (Value == 0)
@@ -575,7 +575,7 @@ namespace oomph
     const unsigned n_storage = n_value * n_time;
 
     // Pointer to the local data
-    double *local_value_pt = Value[0];
+    double* local_value_pt = Value[0];
 
     // Loop over data and if we find the pointer then return true
     for (unsigned i = 0; i < n_storage; ++i)
@@ -593,7 +593,7 @@ namespace oomph
   //================================================================
   /// Copy Data values from specified Data object
   //================================================================
-  void Data::copy(Data *orig_data_pt)
+  void Data::copy(Data* orig_data_pt)
   {
     // Find the amount of data stored
     const unsigned n_value = nvalue();
@@ -636,7 +636,7 @@ namespace oomph
   //================================================================
   /// Dump data object to a file
   //================================================================
-  void Data::dump(std::ostream &dump_file) const
+  void Data::dump(std::ostream& dump_file) const
   {
     // Find the amount of storage used
     const unsigned value_pt_range = nvalue();
@@ -663,7 +663,7 @@ namespace oomph
   //================================================================
   /// Read data object from file
   //================================================================
-  void Data::read(std::ifstream &restart_file)
+  void Data::read(std::ifstream& restart_file)
   {
     std::string input_string;
     std::ostringstream error_stream;
@@ -692,7 +692,7 @@ namespace oomph
           error_stream << " [ignoring extra entries]";
         }
         error_stream << std::endl;
-        Node *nod_pt = dynamic_cast<Node *>(this);
+        Node* nod_pt = dynamic_cast<Node*>(this);
         if (nod_pt != 0)
         {
           unsigned n_dim = nod_pt->ndim();
@@ -886,8 +886,8 @@ namespace oomph
   /// - the Vector of pointers to global dofs (to which new dofs
   ///   get added)
   //================================================================
-  void Data::assign_eqn_numbers(unsigned long &global_number,
-                                Vector<double *> &dof_pt)
+  void Data::assign_eqn_numbers(unsigned long& global_number,
+                                Vector<double*>& dof_pt)
   {
     // Loop over the number of variables
     // Set temporary to hold range
@@ -929,8 +929,8 @@ namespace oomph
   /// call hierarchy of this function when called from
   /// Problem::describe_dofs(...)
   //================================================================
-  void Data::describe_dofs(std::ostream &out,
-                           const std::string &current_string) const
+  void Data::describe_dofs(std::ostream& out,
+                           const std::string& current_string) const
   {
     // Loop over the number of variables
     const unsigned eqn_number_range = Nvalue;
@@ -991,7 +991,7 @@ namespace oomph
   /// Note if any of the unresized data is copied, then we assume all the
   /// resized data is copied from the same node as the unresized data.
   //================================================================
-  void Data::resize(const unsigned &n_value)
+  void Data::resize(const unsigned& n_value)
   {
     // Find current number of values
     const unsigned n_value_old = nvalue();
@@ -1021,11 +1021,11 @@ namespace oomph
     const unsigned t_storage = ntstorage();
 
     // Create new sets of pointers of the appropriate (new) size
-    double **value_new_pt = new double *[n_value_new];
-    long *eqn_number_new = new long[n_value_new];
+    double** value_new_pt = new double*[n_value_new];
+    long* eqn_number_new = new long[n_value_new];
 
     // Create new array of values that is contiguous in memory
-    double *values = new double[n_value_new * t_storage];
+    double* values = new double[n_value_new * t_storage];
 
     // Copy the old values over into the new storage scheme
     for (unsigned i = 0; i < n_value_old; i++)
@@ -1078,7 +1078,7 @@ namespace oomph
   /// Add pointers to all unpinned and unconstrained data to a map
   /// indexed by (global) equation number
   //=======================================================================
-  void Data::add_value_pt_to_map(std::map<unsigned, double *> &map_of_value_pt)
+  void Data::add_value_pt_to_map(std::map<unsigned, double*>& map_of_value_pt)
   {
     // How many values does it have
     const unsigned n_value = this->nvalue();
@@ -1101,7 +1101,7 @@ namespace oomph
   /// virtual so that it can be overloaded by Nodes and SolidNodes to
   /// add the additional data present in those objects.
   //==================================================================
-  void Data::add_values_to_vector(Vector<double> &vector_of_values)
+  void Data::add_values_to_vector(Vector<double>& vector_of_values)
   {
     // Find the number of stored values
     const unsigned n_value = this->nvalue();
@@ -1144,7 +1144,7 @@ namespace oomph
 #endif
 
     // Pointer to the first entry in the data array
-    double *data_pt = Value[0];
+    double* data_pt = Value[0];
 
     // Loop over values
     for (unsigned i = 0; i < n_value; i++)
@@ -1171,8 +1171,8 @@ namespace oomph
   /// the vector and will be set the end of the data that has been
   /// read in on return.
   //==================================================================
-  void Data::read_values_from_vector(const Vector<double> &vector_of_values,
-                                     unsigned &index)
+  void Data::read_values_from_vector(const Vector<double>& vector_of_values,
+                                     unsigned& index)
   {
     // Find the number of stored values
     unsigned n_value = this->nvalue();
@@ -1203,7 +1203,7 @@ namespace oomph
     }
 
     // Pointer to the first entry in the data array
-    double *data_pt = Value[0];
+    double* data_pt = Value[0];
 
     // Loop over values
     for (unsigned i = 0; i < n_value; i++)
@@ -1225,7 +1225,7 @@ namespace oomph
   /// so that it can be overloaded by SolidNodes to add the additional
   /// equation numbers associated with the solid dofs in those objects.
   //==================================================================
-  void Data::add_eqn_numbers_to_vector(Vector<long> &vector_of_eqn_numbers)
+  void Data::add_eqn_numbers_to_vector(Vector<long>& vector_of_eqn_numbers)
   {
     // Find the number of stored values
     const unsigned n_value = this->nvalue();
@@ -1242,7 +1242,7 @@ namespace oomph
     // Now add the data to the vector
     unsigned index = n_current_value;
     // Pointer to the first entry in the equation number array
-    long *eqn_number_pt = Eqn_number;
+    long* eqn_number_pt = Eqn_number;
     // Loop over values
     for (unsigned i = 0; i < n_value; i++)
     {
@@ -1264,7 +1264,7 @@ namespace oomph
   /// read in on return.
   //==================================================================
   void Data::read_eqn_numbers_from_vector(
-    const Vector<long> &vector_of_eqn_numbers, unsigned &index)
+    const Vector<long>& vector_of_eqn_numbers, unsigned& index)
   {
     // Find the number of stored values
     const unsigned n_value = this->nvalue();
@@ -1275,7 +1275,7 @@ namespace oomph
     }
 
     // Pointer to the first entry in the equation number array
-    long *eqn_number_pt = Eqn_number;
+    long* eqn_number_pt = Eqn_number;
     // Loop over values
     for (unsigned i = 0; i < n_value; i++)
     {
@@ -1319,8 +1319,8 @@ namespace oomph
   /// distinguish this case from that of copying all data values, except one
   /// independent value.
   //================================================================
-  HijackedData::HijackedData(const unsigned &copied_index,
-                             Data *const &data_pt) :
+  HijackedData::HijackedData(const unsigned& copied_index,
+                             Data* const& data_pt) :
     Data(data_pt->time_stepper_pt(), 1, false),
     Copied_data_pt(data_pt),
     Copied_index(copied_index)
@@ -1351,7 +1351,7 @@ namespace oomph
   //=================================================================
   /// We do not allow Hijacked Data to be resized
   //=================================================================
-  void HijackedData::resize(const unsigned &n_value)
+  void HijackedData::resize(const unsigned& n_value)
   {
     throw OomphLibError("HijackedData cannot be resized",
                         OOMPH_CURRENT_FUNCTION,
@@ -1394,7 +1394,7 @@ namespace oomph
   /// Constructor, creates a CopiedData object with all values
   /// copied from another Data object.
   //================================================================
-  CopiedData::CopiedData(Data *const &data_pt) :
+  CopiedData::CopiedData(Data* const& data_pt) :
     Data(data_pt->time_stepper_pt(), data_pt->nvalue(), false),
     Copied_data_pt(data_pt)
   {
@@ -1423,7 +1423,7 @@ namespace oomph
   //=================================================================
   /// We do not allow Copied Data to be resized
   //=================================================================
-  void CopiedData::resize(const unsigned &n_value)
+  void CopiedData::resize(const unsigned& n_value)
   {
     throw OomphLibError("CopiedData cannot be resized",
                         OOMPH_CURRENT_FUNCTION,
@@ -1440,7 +1440,7 @@ namespace oomph
   /// Check that the argument is within the range of
   /// stored master nodes
   //=================================================================
-  void HangInfo::range_check(const unsigned &i) const
+  void HangInfo::range_check(const unsigned& i) const
   {
     // If the argument is negative or greater than the number of stored
     // values die
@@ -1457,9 +1457,9 @@ namespace oomph
   //=====================================================================
   /// Set the pointer to the i-th master node and its weight
   //=====================================================================
-  void HangInfo::set_master_node_pt(const unsigned &i,
-                                    Node *const &master_node_pt_,
-                                    const double &weight)
+  void HangInfo::set_master_node_pt(const unsigned& i,
+                                    Node* const& master_node_pt_,
+                                    const double& weight)
   {
 #ifdef RANGE_CHECKING
     range_check(i);
@@ -1472,14 +1472,14 @@ namespace oomph
   /// Add (pointer to) master node and corresponding weight to
   /// the internally stored  (pointers to) master nodes and weights.
   //====================================================================
-  void HangInfo::add_master_node_pt(Node *const &master_node_pt_,
-                                    const double &weight)
+  void HangInfo::add_master_node_pt(Node* const& master_node_pt_,
+                                    const double& weight)
   {
     // Find the present number of master nodes
     const unsigned n_master = Nmaster;
     // Make new data
-    Node **new_master_nodes_pt = new Node *[n_master + 1];
-    double *new_master_weights = new double[n_master + 1];
+    Node** new_master_nodes_pt = new Node*[n_master + 1];
+    double* new_master_weights = new double[n_master + 1];
 
     // Copy the old values over to the new data
     for (unsigned i = 0; i < n_master; i++)
@@ -1511,9 +1511,9 @@ namespace oomph
   /// the range of the stored coordinates, position types and time history
   /// values.
   //=================================================================
-  void Node::x_gen_range_check(const unsigned &t,
-                               const unsigned &k,
-                               const unsigned &i) const
+  void Node::x_gen_range_check(const unsigned& t,
+                               const unsigned& k,
+                               const unsigned& i) const
   {
     // Number of stored history values
     const unsigned position_ntstorage = Position_time_stepper_pt->ntstorage();
@@ -1578,10 +1578,10 @@ namespace oomph
   /// (e.g. 1 for Lagrange-type elements; 2 for 1D Hermite elements; 4 for
   /// 2D Hermite elements, etc).
   //========================================================================
-  Node::Node(const unsigned &n_dim,
-             const unsigned &n_position_type,
-             const unsigned &initial_n_value,
-             const bool &allocate_x_position) :
+  Node::Node(const unsigned& n_dim,
+             const unsigned& n_position_type,
+             const unsigned& initial_n_value,
+             const bool& allocate_x_position) :
     Data(initial_n_value),
     X_position(0),
     Position_time_stepper_pt(Data::Default_static_time_stepper_pt),
@@ -1603,10 +1603,10 @@ namespace oomph
     if (allocate_x_position)
     {
       // Allocate the pointers to each coordinate and coordinate type
-      X_position = new double *[n_storage];
+      X_position = new double*[n_storage];
 
       // Create one big array of positions
-      double *x_positions = new double[n_storage];
+      double* x_positions = new double[n_storage];
 
       // Set pointers from the contiguous array
       for (unsigned j = 0; j < n_storage; j++)
@@ -1627,11 +1627,11 @@ namespace oomph
   /// (e.g. 1 for Lagrange-type elements; 2 for 1D Hermite elements; 4 for
   /// 2D Hermite elements)
   //========================================================================
-  Node::Node(TimeStepper *const &time_stepper_pt_,
-             const unsigned &n_dim,
-             const unsigned &n_position_type,
-             const unsigned &initial_n_value,
-             const bool &allocate_x_position) :
+  Node::Node(TimeStepper* const& time_stepper_pt_,
+             const unsigned& n_dim,
+             const unsigned& n_position_type,
+             const unsigned& initial_n_value,
+             const bool& allocate_x_position) :
     Data(time_stepper_pt_, initial_n_value),
     X_position(0),
     Position_time_stepper_pt(time_stepper_pt_),
@@ -1655,10 +1655,10 @@ namespace oomph
       const unsigned n_tstorage = Position_time_stepper_pt->ntstorage();
 
       // Allocate the pointers to each coordinate and coordinate type
-      X_position = new double *[n_storage];
+      X_position = new double*[n_storage];
 
       // Allocate the positions in one big array
-      double *x_positions = new double[n_storage * n_tstorage];
+      double* x_positions = new double[n_storage * n_tstorage];
 
       // Set the pointers to the contiguous memory
       for (unsigned j = 0; j < n_storage; j++)
@@ -1735,8 +1735,8 @@ namespace oomph
   /// will be set to zero.
   //================================================================
   void Node::set_position_time_stepper(
-    TimeStepper *const &position_time_stepper_pt,
-    const bool &preserve_existing_data)
+    TimeStepper* const& position_time_stepper_pt,
+    const bool& preserve_existing_data)
   {
     // If the timestepper is unchanged do nothing
     if (Position_time_stepper_pt == position_time_stepper_pt)
@@ -1761,7 +1761,7 @@ namespace oomph
     const unsigned n_tstorage = Position_time_stepper_pt->ntstorage();
 
     // Allocate all position data in one big array
-    double *x_positions = new double[n_storage * n_tstorage];
+    double* x_positions = new double[n_storage * n_tstorage];
 
     // If we have reduced the storage, reduce the size of preserved storage
     // to that of the new storage
@@ -1798,7 +1798,7 @@ namespace oomph
   //================================================================
   ///  Return the i-th component of nodal velocity: dx/dt
   //================================================================
-  double Node::dx_dt(const unsigned &i) const
+  double Node::dx_dt(const unsigned& i) const
   {
     // Number of timsteps (past & present)
     const unsigned n_time = Position_time_stepper_pt->ntstorage();
@@ -1822,7 +1822,7 @@ namespace oomph
   /// Return the i-th component of j-th derivative of nodal position:
   /// d^jx/dt^j.
   //================================================================
-  double Node::dx_dt(const unsigned &j, const unsigned &i) const
+  double Node::dx_dt(const unsigned& j, const unsigned& i) const
   {
     // Number of timsteps (past & present)
     const unsigned n_time = Position_time_stepper_pt->ntstorage();
@@ -1846,7 +1846,7 @@ namespace oomph
   /// \short  i-th component of time derivative (velocity) of the
   /// generalised position, dx(k,i)/dt. `Type': k; Coordinate direction: i.
   //================================================================
-  double Node::dx_gen_dt(const unsigned &k, const unsigned &i) const
+  double Node::dx_gen_dt(const unsigned& k, const unsigned& i) const
   {
     // Number of timsteps (past & present)
     const unsigned n_time = Position_time_stepper_pt->ntstorage();
@@ -1871,9 +1871,9 @@ namespace oomph
   /// \short  i-th component of j-th time derivative (velocity) of the
   /// generalised position, d^jx(k,i)/dt^j. `Type': k; Coordinate direction: i.
   //================================================================
-  double Node::dx_gen_dt(const unsigned &j,
-                         const unsigned &k,
-                         const unsigned &i) const
+  double Node::dx_gen_dt(const unsigned& j,
+                         const unsigned& k,
+                         const unsigned& i) const
   {
     // Number of timsteps (past & present)
     const unsigned n_time = Position_time_stepper_pt->ntstorage();
@@ -1896,7 +1896,7 @@ namespace oomph
   //================================================================
   /// Copy all nodal data from specified Node object
   //================================================================
-  void Node::copy(Node *orig_node_pt)
+  void Node::copy(Node* orig_node_pt)
   {
     // Number of positional values
     const unsigned npos_storage = Ndim * Nposition_type;
@@ -1948,7 +1948,7 @@ namespace oomph
   //================================================================
   /// Dump nodal positions and associated data to file for restart
   //================================================================
-  void Node::dump(std::ostream &dump_file) const
+  void Node::dump(std::ostream& dump_file) const
   {
     // Number of positional values
     const unsigned npos_storage = Ndim * Nposition_type;
@@ -1975,7 +1975,7 @@ namespace oomph
   //================================================================
   /// Read nodal positions and associated data from file for restart
   //================================================================
-  void Node::read(std::ifstream &restart_file)
+  void Node::read(std::ifstream& restart_file)
   {
     std::string input_string;
 
@@ -2047,7 +2047,7 @@ namespace oomph
   /// Use Node::set_nonhanging() to unhang everything and clear up
   /// storage.
   //=====================================================================
-  void Node::set_hanging_pt(HangInfo *const &hang_pt, const int &i)
+  void Node::set_hanging_pt(HangInfo* const& hang_pt, const int& i)
   {
     // The number of hanging values is the number of stored values plus
     // one (geometry)
@@ -2057,7 +2057,7 @@ namespace oomph
     // If not create it
     if (Hanging_pt == 0)
     {
-      Hanging_pt = new HangInfo *[n_hang];
+      Hanging_pt = new HangInfo*[n_hang];
       // Initialise all entries to zero
       for (unsigned n = 0; n < n_hang; n++)
       {
@@ -2146,17 +2146,17 @@ namespace oomph
   //=====================================================================
   /// Resize the node to allow it to store n_value unknowns
   //=====================================================================
-  void Node::resize(const unsigned &n_value)
+  void Node::resize(const unsigned& n_value)
   {
     // Old number of values
     unsigned old_nvalue = nvalue();
 
     // Now deal with the hanging Data (if any)
-    HangInfo **backup_hanging_pt = 0;
+    HangInfo** backup_hanging_pt = 0;
     if (Hanging_pt != 0)
     {
       // Backup
-      backup_hanging_pt = new HangInfo *[old_nvalue + 1];
+      backup_hanging_pt = new HangInfo*[old_nvalue + 1];
 
       // Copy across existing ones
       for (unsigned i = 0; i < old_nvalue + 1; i++)
@@ -2177,7 +2177,7 @@ namespace oomph
     {
       // The size of the new hanging point is the number of new values plus one.
       const unsigned n_hang = n_value + 1;
-      Hanging_pt = new HangInfo *[n_hang];
+      Hanging_pt = new HangInfo*[n_hang];
       // Initialise all entries to zero
       for (unsigned i = 0; i < n_hang; i++)
       {
@@ -2234,7 +2234,7 @@ namespace oomph
   /// Make the node periodic by copying values from node_pt.
   /// Broken virtual (only implemented in BoundaryNodes)
   //=====================================================================
-  void Node::make_periodic(Node *const &node_pt)
+  void Node::make_periodic(Node* const& node_pt)
   {
     throw OomphLibError("Only BoundaryNodes can be made periodic",
                         OOMPH_CURRENT_FUNCTION,
@@ -2247,7 +2247,7 @@ namespace oomph
   /// to be independent.
   /// Broken virtual (only implemented in BoundaryNodes)
   //=====================================================================
-  void Node::make_periodic_nodes(const Vector<Node *> &periodic_nodes_pt)
+  void Node::make_periodic_nodes(const Vector<Node*>& periodic_nodes_pt)
   {
     throw OomphLibError("Only BoundaryNodes can make periodic nodes",
                         OOMPH_CURRENT_FUNCTION,
@@ -2311,7 +2311,7 @@ namespace oomph
   /// Broken here in order to report run-time errors. Must be overloaded
   /// by all boundary nodes
   //=======================================================================
-  void Node::add_to_boundary(const unsigned &b)
+  void Node::add_to_boundary(const unsigned& b)
   {
     std::stringstream ss;
     ss << "Cannot add non BoundaryNode<NODE> to boundary " << b << "\n";
@@ -2324,7 +2324,7 @@ namespace oomph
   /// Broken here in order to report run-time erorrs. Must be overloaded
   /// by all boundary nodes
   //=======================================================================
-  void Node::remove_from_boundary(const unsigned &b)
+  void Node::remove_from_boundary(const unsigned& b)
   {
     throw OomphLibError("Cannot remove non BoundaryNode<NODE> to boundary",
                         OOMPH_CURRENT_FUNCTION,
@@ -2336,7 +2336,7 @@ namespace oomph
   /// Broken here in order to provide run-time error reporting. Must
   /// be overloaded by all boundary nodes.
   //=========================================================================
-  unsigned Node::ncoordinates_on_boundary(const unsigned &b)
+  unsigned Node::ncoordinates_on_boundary(const unsigned& b)
   {
     throw OomphLibError("Non-boundary Node cannot have boundary coordinates",
                         OOMPH_CURRENT_FUNCTION,
@@ -2351,9 +2351,9 @@ namespace oomph
   /// provide run-time error reporting. Must be overloaded by all boundary
   /// nodes.
   //=========================================================================
-  void Node::get_coordinates_on_boundary(const unsigned &b,
-                                         const unsigned &k,
-                                         Vector<double> &boundary_zeta)
+  void Node::get_coordinates_on_boundary(const unsigned& b,
+                                         const unsigned& k,
+                                         Vector<double>& boundary_zeta)
   {
     throw OomphLibError("Non-boundary Node cannot have boundary coordinates",
                         OOMPH_CURRENT_FUNCTION,
@@ -2365,9 +2365,9 @@ namespace oomph
   ///  of the node on boundary b. Broken here to provide
   /// run-time error reports. Must be overloaded by all boundary nodes.
   //=========================================================================
-  void Node::set_coordinates_on_boundary(const unsigned &b,
-                                         const unsigned &k,
-                                         const Vector<double> &boundary_zeta)
+  void Node::set_coordinates_on_boundary(const unsigned& b,
+                                         const unsigned& k,
+                                         const Vector<double>& boundary_zeta)
   {
     throw OomphLibError("Non-boundary Node cannot have boundary coordinates",
                         OOMPH_CURRENT_FUNCTION,
@@ -2378,7 +2378,7 @@ namespace oomph
   /// Return i-th value (free or pinned) at this node
   /// either directly or via hanging node representation.
   //================================================================
-  double Node::value(const unsigned &i) const
+  double Node::value(const unsigned& i) const
   {
     // If value is not hanging, just return the underlying value
     if (!is_hanging(i))
@@ -2407,7 +2407,7 @@ namespace oomph
   /// Return i-th value (free or pinned) at this node at time level t
   /// either directly or via hanging node representation.
   //================================================================
-  double Node::value(const unsigned &t, const unsigned &i) const
+  double Node::value(const unsigned& t, const unsigned& i) const
   {
     // If value is not hanging, just return the raw value
     if (!is_hanging(i))
@@ -2436,7 +2436,7 @@ namespace oomph
   /// Compute Vector of values (dofs or pinned) at this Data object
   /// either directly or via hanging node representation.
   //==================================================================
-  void Node::value(Vector<double> &values) const
+  void Node::value(Vector<double>& values) const
   {
     // Loop over all the values
     const unsigned n_value = nvalue();
@@ -2452,7 +2452,7 @@ namespace oomph
   /// at time level t (t=0: present; t>0: previous)
   /// either directly or via hanging node representation.
   //==================================================================
-  void Node::value(const unsigned &t, Vector<double> &values) const
+  void Node::value(const unsigned& t, Vector<double>& values) const
   {
     // Loop over all the values
     const unsigned n_value = nvalue();
@@ -2468,7 +2468,7 @@ namespace oomph
   /// Compute Vector of nodal positions
   /// either directly or via hanging node representation
   //===========================================================
-  void Node::position(Vector<double> &pos) const
+  void Node::position(Vector<double>& pos) const
   {
     // Assign all positions using hanging node representation where necessary
     const unsigned n_dim = ndim();
@@ -2483,7 +2483,7 @@ namespace oomph
   /// (t=0: current; t>0: previous timestep),
   /// either directly or via hanging node representation.
   //==============================================================
-  void Node::position(const unsigned &t, Vector<double> &pos) const
+  void Node::position(const unsigned& t, Vector<double>& pos) const
   {
     // Assign all positions, using hanging node representation where necessary
     const unsigned n_dim = ndim();
@@ -2497,7 +2497,7 @@ namespace oomph
   /// Return i-th nodal coordinate
   /// either directly or via hanging node representation.
   //======================================================================
-  double Node::position(const unsigned &i) const
+  double Node::position(const unsigned& i) const
   {
     double posn = 0.0;
 
@@ -2529,7 +2529,7 @@ namespace oomph
   /// (t=0: current; t>0: previous time level),
   /// either directly or via hanging node representation.
   //================================================================
-  double Node::position(const unsigned &t, const unsigned &i) const
+  double Node::position(const unsigned& t, const unsigned& i) const
   {
     double posn = 0.0;
 
@@ -2561,7 +2561,7 @@ namespace oomph
   /// Return generalised nodal coordinate
   /// either directly or via hanging node representation.
   //======================================================================
-  double Node::position_gen(const unsigned &k, const unsigned &i) const
+  double Node::position_gen(const unsigned& k, const unsigned& i) const
   {
     double posn = 0.0;
 
@@ -2593,9 +2593,9 @@ namespace oomph
   /// (t=0: current; t>0: previous time level),
   /// either directly or via hanging node representation.
   //================================================================
-  double Node::position_gen(const unsigned &t,
-                            const unsigned &k,
-                            const unsigned &i) const
+  double Node::position_gen(const unsigned& t,
+                            const unsigned& k,
+                            const unsigned& i) const
   {
     double posn = 0.0;
 
@@ -2628,7 +2628,7 @@ namespace oomph
   ///  Return the i-th component of nodal velocity: dx/dt
   //// Use the hanging node representation if required.
   //================================================================
-  double Node::dposition_dt(const unsigned &i) const
+  double Node::dposition_dt(const unsigned& i) const
   {
     // Number of timsteps (past & present)
     const unsigned n_time = Position_time_stepper_pt->ntstorage();
@@ -2652,7 +2652,7 @@ namespace oomph
   /// Return the i-th component of j-th derivative of nodal position:
   /// d^jx/dt^j. Use the hanging node representation.
   //================================================================
-  double Node::dposition_dt(const unsigned &j, const unsigned &i) const
+  double Node::dposition_dt(const unsigned& j, const unsigned& i) const
   {
     // Number of timsteps (past & present)
     const unsigned n_time = Position_time_stepper_pt->ntstorage();
@@ -2677,7 +2677,7 @@ namespace oomph
   /// generalised position, dx(k,i)/dt. `Type': k; Coordinate direction: i.
   /// Use the hanging node representation
   //================================================================
-  double Node::dposition_gen_dt(const unsigned &k, const unsigned &i) const
+  double Node::dposition_gen_dt(const unsigned& k, const unsigned& i) const
   {
     // Number of timsteps (past & present)
     const unsigned n_time = Position_time_stepper_pt->ntstorage();
@@ -2703,9 +2703,9 @@ namespace oomph
   /// generalised position, d^jx(k,i)/dt^j. `Type': k; Coordinate direction: i.
   /// Use the hanging node representation.
   //================================================================
-  double Node::dposition_gen_dt(const unsigned &j,
-                                const unsigned &k,
-                                const unsigned &i) const
+  double Node::dposition_gen_dt(const unsigned& j,
+                                const unsigned& k,
+                                const unsigned& i) const
   {
     // Number of timsteps (past & present)
     const unsigned n_time = Position_time_stepper_pt->ntstorage();
@@ -2728,7 +2728,7 @@ namespace oomph
   //========================================================================
   /// Output nodal coordinates
   //========================================================================
-  void Node::output(std::ostream &outfile)
+  void Node::output(std::ostream& outfile)
   {
     // Loop over the number of dimensions of the node
     const unsigned n_dim = this->ndim();
@@ -2744,7 +2744,7 @@ namespace oomph
   /// Add position data and time-history values to the vector after the
   /// addition of the "standard" data stored at the node
   //==================================================================
-  void Node::add_values_to_vector(Vector<double> &vector_of_values)
+  void Node::add_values_to_vector(Vector<double>& vector_of_values)
   {
     // Firstly add the value data to the vector
     Data::add_values_to_vector(vector_of_values);
@@ -2777,7 +2777,7 @@ namespace oomph
 #endif
 
     // Pointer to the first entry in the data array
-    double *data_pt = X_position[0];
+    double* data_pt = X_position[0];
 
     // Loop over values
     for (unsigned i = 0; i < n_storage; i++)
@@ -2798,8 +2798,8 @@ namespace oomph
   /// Read the position data and its time histories from the vector
   /// after reading the "standard" data.
   //==================================================================
-  void Node::read_values_from_vector(const Vector<double> &vector_of_values,
-                                     unsigned &index)
+  void Node::read_values_from_vector(const Vector<double>& vector_of_values,
+                                     unsigned& index)
   {
     // Read the standard nodal data
     Data::read_values_from_vector(vector_of_values, index);
@@ -2829,7 +2829,7 @@ namespace oomph
 #endif
 
     // Pointer to the first entry in the data array
-    double *data_pt = X_position[0];
+    double* data_pt = X_position[0];
 
     // Loop over values
     for (unsigned i = 0; i < n_storage; i++)
@@ -2862,7 +2862,7 @@ namespace oomph
   /// periodic sets of nodes.
   //==================================================================
   void BoundaryNodeBase::make_nodes_periodic(
-    Node *const &copied_node_pt, Vector<Node *> const &periodic_copies_pt)
+    Node* const& copied_node_pt, Vector<Node*> const& periodic_copies_pt)
   {
     // Don't allow copying if the original or periodic nodes are already
     // periodic
@@ -2891,7 +2891,7 @@ namespace oomph
     for (unsigned n = 0; n < n_periodic; n++)
     {
       // Local cache of the node
-      Node *const nod_pt = periodic_copies_pt[n];
+      Node* const nod_pt = periodic_copies_pt[n];
       // Miss out the node itself if it's in the list
       if (nod_pt != copied_node_pt)
       {
@@ -2902,8 +2902,7 @@ namespace oomph
         nod_pt->Eqn_number = copied_node_pt->Eqn_number;
 
         // Set the copied node pointer in the copy
-        BoundaryNodeBase *cast_nod_pt =
-          dynamic_cast<BoundaryNodeBase *>(nod_pt);
+        BoundaryNodeBase* cast_nod_pt = dynamic_cast<BoundaryNodeBase*>(nod_pt);
         cast_nod_pt->Copied_node_pt = copied_node_pt;
         // Inform the node that it has been copied
         copied_node_pt->add_copy(nod_pt);
@@ -2916,8 +2915,8 @@ namespace oomph
   /// peridic boundary nodes by setting the data values of
   /// copy_of_node_pt to those of copied_node_pt.
   //=====================================================================
-  void BoundaryNodeBase::make_node_periodic(Node *const &node_pt,
-                                            Node *const &copied_node_pt)
+  void BoundaryNodeBase::make_node_periodic(Node* const& node_pt,
+                                            Node* const& copied_node_pt)
   {
     // Don't allow this node to already be a copy (you should clear it's
     // copied status first).
@@ -2968,7 +2967,7 @@ namespace oomph
     if (Boundary_coordinates_pt != 0)
     {
       // Loop over the boundary coordinate entries and delete them
-      for (std::map<unsigned, DenseMatrix<double> *>::iterator it =
+      for (std::map<unsigned, DenseMatrix<double>*>::iterator it =
              Boundary_coordinates_pt->begin();
            it != Boundary_coordinates_pt->end();
            ++it)
@@ -2992,7 +2991,7 @@ namespace oomph
   //=======================================================================
   /// Add the node to the mesh boundary b
   //=======================================================================
-  void BoundaryNodeBase::add_to_boundary(const unsigned &b)
+  void BoundaryNodeBase::add_to_boundary(const unsigned& b)
   {
     // If there is not storage then create storage and set the entry
     // to be the boundary b
@@ -3025,7 +3024,7 @@ namespace oomph
   //=======================================================================
   /// Remove the node from the mesh boundary b
   //=======================================================================
-  void BoundaryNodeBase::remove_from_boundary(const unsigned &b)
+  void BoundaryNodeBase::remove_from_boundary(const unsigned& b)
   {
 #ifdef PARANOID
     if (is_on_boundary(b) == false)
@@ -3062,7 +3061,7 @@ namespace oomph
   //========================================================================
   /// Test whether the node lies on the mesh boundary b
   //========================================================================
-  bool BoundaryNodeBase::is_on_boundary(const unsigned &b) const
+  bool BoundaryNodeBase::is_on_boundary(const unsigned& b) const
   {
     // If the node lies on any boundary
     if (Boundaries_pt != 0)
@@ -3081,7 +3080,7 @@ namespace oomph
   //=========================================================================
   /// Get the number of boundary coordinates on mesh boundary b
   //=========================================================================
-  unsigned BoundaryNodeBase::ncoordinates_on_boundary(const unsigned &b)
+  unsigned BoundaryNodeBase::ncoordinates_on_boundary(const unsigned& b)
   {
     // Check that the node lies on a boundary
 #ifdef PARANOID
@@ -3126,7 +3125,7 @@ namespace oomph
   /// coordinates of the node in the vector boundary_zeta
   //=========================================================================
   void BoundaryNodeBase::get_coordinates_on_boundary(
-    const unsigned &b, const unsigned &k, Vector<double> &boundary_zeta)
+    const unsigned& b, const unsigned& k, Vector<double>& boundary_zeta)
   {
     // Check that the node lies on a boundary
 #ifdef PARANOID
@@ -3194,7 +3193,7 @@ namespace oomph
   /// coordinates of the node from the vector boundary_zeta
   //=========================================================================
   void BoundaryNodeBase::set_coordinates_on_boundary(
-    const unsigned &b, const unsigned &k, const Vector<double> &boundary_zeta)
+    const unsigned& b, const unsigned& k, const Vector<double>& boundary_zeta)
   {
     // Check that the node lies on a boundary
 #ifdef PARANOID
@@ -3219,7 +3218,7 @@ namespace oomph
     // If the storage has not been assigned, then assign it
     if (Boundary_coordinates_pt == 0)
     {
-      Boundary_coordinates_pt = new std::map<unsigned, DenseMatrix<double> *>;
+      Boundary_coordinates_pt = new std::map<unsigned, DenseMatrix<double>*>;
     }
 
     // Find the number of boundary coordinates
@@ -3266,7 +3265,7 @@ namespace oomph
   /// Private function to check that the argument is within the
   /// range of stored Lagrangain coordinates and position types.
   //=================================================================
-  void SolidNode::xi_gen_range_check(const unsigned &k, const unsigned &i) const
+  void SolidNode::xi_gen_range_check(const unsigned& k, const unsigned& i) const
   {
     // If either the coordinate or type are out of range
     if ((i >= Nlagrangian) || (k >= Nlagrangian_type))
@@ -3301,11 +3300,11 @@ namespace oomph
   /// this node and NAdditional_solid additional values associated with the
   /// solid equations are stored in a separate Data object at the node.
   //========================================================================
-  SolidNode::SolidNode(const unsigned &n_lagrangian,
-                       const unsigned &n_lagrangian_type,
-                       const unsigned &n_dim,
-                       const unsigned &n_position_type,
-                       const unsigned &initial_n_value) :
+  SolidNode::SolidNode(const unsigned& n_lagrangian,
+                       const unsigned& n_lagrangian_type,
+                       const unsigned& n_dim,
+                       const unsigned& n_position_type,
+                       const unsigned& initial_n_value) :
     Node(n_dim, n_position_type, initial_n_value, false),
     Nlagrangian(n_lagrangian),
     Nlagrangian_type(n_lagrangian_type)
@@ -3337,12 +3336,12 @@ namespace oomph
   /// The Eulerian dimension of the Node is n_dim and we have n_position_type
   /// generalised Eulerian coordinates.
   //========================================================================
-  SolidNode::SolidNode(TimeStepper *const &time_stepper_pt_,
-                       const unsigned &n_lagrangian,
-                       const unsigned &n_lagrangian_type,
-                       const unsigned &n_dim,
-                       const unsigned &n_position_type,
-                       const unsigned &initial_n_value) :
+  SolidNode::SolidNode(TimeStepper* const& time_stepper_pt_,
+                       const unsigned& n_lagrangian,
+                       const unsigned& n_lagrangian_type,
+                       const unsigned& n_dim,
+                       const unsigned& n_position_type,
+                       const unsigned& initial_n_value) :
     Node(time_stepper_pt_, n_dim, n_position_type, initial_n_value, false),
     Nlagrangian(n_lagrangian),
     Nlagrangian_type(n_lagrangian_type)
@@ -3385,7 +3384,7 @@ namespace oomph
   /// Copy nodal positions and associated data from specified
   /// node object
   //================================================================
-  void SolidNode::copy(SolidNode *orig_node_pt)
+  void SolidNode::copy(SolidNode* orig_node_pt)
   {
     // Eulerian positions are stored as Data, so copy the data values
     // from one data to another
@@ -3421,7 +3420,7 @@ namespace oomph
   //================================================================
   /// Dump nodal positions and associated data to file for restart
   //================================================================
-  void SolidNode::dump(std::ostream &dump_file) const
+  void SolidNode::dump(std::ostream& dump_file) const
   {
     // Dump out the Lagrangian coordinates
     // Number of lagrangian values
@@ -3441,7 +3440,7 @@ namespace oomph
   //================================================================
   /// Read nodal positions and associated data to file for restart
   //================================================================
-  void SolidNode::read(std::ifstream &restart_file)
+  void SolidNode::read(std::ifstream& restart_file)
   {
     std::string input_string;
 
@@ -3483,7 +3482,7 @@ namespace oomph
   /// Set the variable position data from an external source.
   /// This is mainly used when setting periodic solid problems.
   //==================================================================
-  void SolidNode::set_external_variable_position_pt(Data *const &data_pt)
+  void SolidNode::set_external_variable_position_pt(Data* const& data_pt)
   {
     // Wipe the existing value
     delete Variable_position_pt;
@@ -3499,8 +3498,8 @@ namespace oomph
   /// will be set to zero.
   //================================================================
   void SolidNode::set_position_time_stepper(
-    TimeStepper *const &position_time_stepper_pt,
-    const bool &preserve_existing_data)
+    TimeStepper* const& position_time_stepper_pt,
+    const bool& preserve_existing_data)
   {
     // If the timestepper is unchanged do nothing
     if (Position_time_stepper_pt == position_time_stepper_pt)
@@ -3523,7 +3522,7 @@ namespace oomph
   /// Check whether the pointer parameter_pt refers to positional data
   //====================================================================
   bool SolidNode::does_pointer_correspond_to_position_data(
-    double *const &parameter_pt)
+    double* const& parameter_pt)
   {
     // Simply pass the test through to the data of the Variabl position pointer
     return (this->Variable_position_pt->does_pointer_correspond_to_value(
@@ -3534,7 +3533,7 @@ namespace oomph
   /// Return lagrangian coordinate
   /// either directly or via hanging node representation.
   //======================================================================
-  double SolidNode::lagrangian_position(const unsigned &i) const
+  double SolidNode::lagrangian_position(const unsigned& i) const
   {
     double posn = 0.0;
 
@@ -3554,7 +3553,7 @@ namespace oomph
       for (unsigned imaster = 0; imaster < nmaster; imaster++)
       {
         lagn_position +=
-          static_cast<SolidNode *>(hanging_pt()->master_node_pt(imaster))
+          static_cast<SolidNode*>(hanging_pt()->master_node_pt(imaster))
             ->xi(i) *
           hanging_pt()->master_weight(imaster);
       }
@@ -3567,8 +3566,8 @@ namespace oomph
   /// Return generalised lagrangian coordinate
   /// either directly or via hanging node representation.
   //======================================================================
-  double SolidNode::lagrangian_position_gen(const unsigned &k,
-                                            const unsigned &i) const
+  double SolidNode::lagrangian_position_gen(const unsigned& k,
+                                            const unsigned& i) const
   {
     double posn = 0.0;
 
@@ -3588,7 +3587,7 @@ namespace oomph
       for (unsigned imaster = 0; imaster < nmaster; imaster++)
       {
         lagn_position +=
-          static_cast<SolidNode *>(hanging_pt()->master_node_pt(imaster))
+          static_cast<SolidNode*>(hanging_pt()->master_node_pt(imaster))
             ->xi_gen(k, i) *
           hanging_pt()->master_weight(imaster);
       }
@@ -3600,8 +3599,8 @@ namespace oomph
   //================================================================
   /// Assign (global) equation number, for SolidNodes
   //================================================================
-  void SolidNode::assign_eqn_numbers(unsigned long &global_number,
-                                     Vector<double *> &dof_pt)
+  void SolidNode::assign_eqn_numbers(unsigned long& global_number,
+                                     Vector<double*>& dof_pt)
   {
     // Let's call position equations first
     Variable_position_pt->assign_eqn_numbers(global_number, dof_pt);
@@ -3619,8 +3618,8 @@ namespace oomph
   /// call hierarchy of this function when called from
   /// Problem::describe_dofs(...)
   //================================================================
-  void SolidNode::describe_dofs(std::ostream &out,
-                                const std::string &current_string) const
+  void SolidNode::describe_dofs(std::ostream& out,
+                                const std::string& current_string) const
   {
     // Let's call position equations first
     {
@@ -3642,7 +3641,7 @@ namespace oomph
   /// to a map
   //================================================================
   void SolidNode::add_value_pt_to_map(
-    std::map<unsigned, double *> &map_of_value_pt)
+    std::map<unsigned, double*>& map_of_value_pt)
   {
     // Add the position values first
     Variable_position_pt->add_value_pt_to_map(map_of_value_pt);
@@ -3655,7 +3654,7 @@ namespace oomph
   /// Add Lagrangian coordinates to the vector after positional data
   /// and "standard" data
   //==================================================================
-  void SolidNode::add_values_to_vector(Vector<double> &vector_of_values)
+  void SolidNode::add_values_to_vector(Vector<double>& vector_of_values)
   {
     // Firstly add the position and value data to the vector
     Node::add_values_to_vector(vector_of_values);
@@ -3685,7 +3684,7 @@ namespace oomph
 #endif
 
     // Pointer to the first entry in the data array
-    double *data_pt = Xi_position;
+    double* data_pt = Xi_position;
 
     // Loop over values
     for (unsigned i = 0; i < n_lagrangian_storage; i++)
@@ -3703,7 +3702,7 @@ namespace oomph
   /// reading in the positional and "standard" data.
   //==================================================================
   void SolidNode::read_values_from_vector(
-    const Vector<double> &vector_of_values, unsigned &index)
+    const Vector<double>& vector_of_values, unsigned& index)
   {
     // Read the standard nodal data and positions
     Node::read_values_from_vector(vector_of_values, index);
@@ -3729,7 +3728,7 @@ namespace oomph
 #endif
 
     // Pointer to the first entry in the data array
-    double *data_pt = Xi_position;
+    double* data_pt = Xi_position;
 
     // Loop over values
     for (unsigned i = 0; i < n_lagrangian_storage; i++)
@@ -3746,7 +3745,7 @@ namespace oomph
   /// Add equations numbers associated with the node position
   /// to the vector after the standard nodal equation numbers
   //==================================================================
-  void SolidNode::add_eqn_numbers_to_vector(Vector<long> &vector_of_eqn_numbers)
+  void SolidNode::add_eqn_numbers_to_vector(Vector<long>& vector_of_eqn_numbers)
   {
     // Firstly add the standard equation numbers
     Data::add_eqn_numbers_to_vector(vector_of_eqn_numbers);
@@ -3759,7 +3758,7 @@ namespace oomph
   /// from the vector after reading in the standard nodal equaiton numbers
   //=======================================================================
   void SolidNode::read_eqn_numbers_from_vector(
-    const Vector<long> &vector_of_eqn_numbers, unsigned &index)
+    const Vector<long>& vector_of_eqn_numbers, unsigned& index)
   {
     // Read the standard nodal data and positions
     Data::read_eqn_numbers_from_vector(vector_of_eqn_numbers, index);

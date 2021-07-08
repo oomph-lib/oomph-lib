@@ -55,7 +55,7 @@ namespace oomph
     MySolidElement() : ELEMENT(){};
 
     /// Overload output function:
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       // Element dimension
       unsigned el_dim = this->dim();
@@ -139,7 +139,7 @@ namespace Global_Physical_Variables
   double L = 10.0;
 
   /// Pointer to constitutive law
-  ConstitutiveLaw *Constitutive_law_pt;
+  ConstitutiveLaw* Constitutive_law_pt;
 
   /// Elastic modulus
   double E = 1.0;
@@ -155,10 +155,10 @@ namespace Global_Physical_Variables
   /// depend on the Lagrangian and Eulerian coordinates x and xi, and on the
   /// outer unit normal to the surface. Here we only need the outer unit
   /// normal.
-  void constant_pressure(const Vector<double> &xi,
-                         const Vector<double> &x,
-                         const Vector<double> &n,
-                         Vector<double> &traction)
+  void constant_pressure(const Vector<double>& xi,
+                         const Vector<double>& x,
+                         const Vector<double>& n,
+                         Vector<double>& traction)
   {
     unsigned dim = traction.size();
     for (unsigned i = 0; i < dim; i++)
@@ -171,7 +171,7 @@ namespace Global_Physical_Variables
   double Gravity = 0.0;
 
   /// Non-dimensional gravity as body force
-  void gravity(const double &time, const Vector<double> &xi, Vector<double> &b)
+  void gravity(const double& time, const Vector<double>& xi, Vector<double>& b)
   {
     b[0] = 0.0;
     b[1] = -Gravity;
@@ -196,13 +196,13 @@ public:
   void actions_before_newton_solve() {}
 
   /// Access function for the solid mesh
-  ElasticRefineableRectangularQuadMesh<ELEMENT> *&solid_mesh_pt()
+  ElasticRefineableRectangularQuadMesh<ELEMENT>*& solid_mesh_pt()
   {
     return Solid_mesh_pt;
   }
 
   /// Access function to the mesh of surface traction elements
-  SolidMesh *&traction_mesh_pt()
+  SolidMesh*& traction_mesh_pt()
   {
     return Traction_mesh_pt;
   }
@@ -231,13 +231,13 @@ private:
   ofstream Trace_file;
 
   /// Pointers to node whose position we're tracing
-  Node *Trace_node_pt;
+  Node* Trace_node_pt;
 
   /// Pointer to solid mesh
-  ElasticRefineableRectangularQuadMesh<ELEMENT> *Solid_mesh_pt;
+  ElasticRefineableRectangularQuadMesh<ELEMENT>* Solid_mesh_pt;
 
   /// Pointer to mesh of traction elements
-  SolidMesh *Traction_mesh_pt;
+  SolidMesh* Traction_mesh_pt;
 
   /// DocInfo object for output
   DocInfo Doc_info;
@@ -281,7 +281,7 @@ CantileverProblem<ELEMENT>::CantileverProblem()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Cast to a solid element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(solid_mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(solid_mesh_pt()->element_pt(i));
 
     // Set the constitutive law
     el_pt->constitutive_law_pt() =
@@ -391,8 +391,8 @@ void CantileverProblem<ELEMENT>::set_traction_pt()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Cast to a solid traction element
-    SolidTractionElement<ELEMENT> *el_pt =
-      dynamic_cast<SolidTractionElement<ELEMENT> *>(
+    SolidTractionElement<ELEMENT>* el_pt =
+      dynamic_cast<SolidTractionElement<ELEMENT>*>(
         traction_mesh_pt()->element_pt(i));
 
     // Set the traction function
@@ -417,8 +417,8 @@ void CantileverProblem<ELEMENT>::create_traction_elements()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    ELEMENT *bulk_elem_pt =
-      dynamic_cast<ELEMENT *>(solid_mesh_pt()->boundary_element_pt(b, e));
+    ELEMENT* bulk_elem_pt =
+      dynamic_cast<ELEMENT*>(solid_mesh_pt()->boundary_element_pt(b, e));
 
     // Find the index of the face of element e along boundary b
     int face_index = solid_mesh_pt()->face_index_at_boundary(b, e);
@@ -504,8 +504,8 @@ void CantileverProblem<ELEMENT>::doc_solution()
   for (unsigned e = 0; e < nel; e++)
   {
     // Get pointer to element
-    SolidFiniteElement *el_pt =
-      dynamic_cast<SolidFiniteElement *>(solid_mesh_pt()->element_pt(e));
+    SolidFiniteElement* el_pt =
+      dynamic_cast<SolidFiniteElement*>(solid_mesh_pt()->element_pt(e));
 
     // Tecplot header info
     some_file << "ZONE I=" << n_plot << ", J=" << n_plot << std::endl;

@@ -43,7 +43,7 @@ namespace oomph
   /// Get the number of elemental degrees of freedom. Direct call
   /// to the function in the element.
   //===================================================================
-  unsigned AssemblyHandler::ndof(GeneralisedElement *const &elem_pt)
+  unsigned AssemblyHandler::ndof(GeneralisedElement* const& elem_pt)
   {
     return elem_pt->ndof();
   }
@@ -52,9 +52,9 @@ namespace oomph
   /// Get the vector of dofs in the element elem_pt at time level t
   /// Direct call to the function in the element.
   //===================================================================
-  void AssemblyHandler::dof_vector(GeneralisedElement *const &elem_pt,
-                                   const unsigned &t,
-                                   Vector<double> &dof)
+  void AssemblyHandler::dof_vector(GeneralisedElement* const& elem_pt,
+                                   const unsigned& t,
+                                   Vector<double>& dof)
   {
     return elem_pt->dof_vector(t, dof);
   }
@@ -63,17 +63,17 @@ namespace oomph
   /// Get the vector of pointers to dofs in the element elem_pt
   /// Direct call to the function in the element.
   //===================================================================
-  void AssemblyHandler::dof_pt_vector(GeneralisedElement *const &elem_pt,
-                                      Vector<double *> &dof_pt)
+  void AssemblyHandler::dof_pt_vector(GeneralisedElement* const& elem_pt,
+                                      Vector<double*>& dof_pt)
   {
     return elem_pt->dof_pt_vector(dof_pt);
   }
 
   /// \short Return the t-th level of storage associated with the i-th
   /// (local) dof stored in the problem
-  double &AssemblyHandler::local_problem_dof(Problem *const &problem_pt,
-                                             const unsigned &t,
-                                             const unsigned &i)
+  double& AssemblyHandler::local_problem_dof(Problem* const& problem_pt,
+                                             const unsigned& t,
+                                             const unsigned& i)
   {
     return *(problem_pt->dof_pt(i) + t);
   }
@@ -82,8 +82,8 @@ namespace oomph
   /// Get the global equation number of the local unknown. Direct call
   /// to the function in the element.
   //==================================================================
-  unsigned long AssemblyHandler::eqn_number(GeneralisedElement *const &elem_pt,
-                                            const unsigned &ieqn_local)
+  unsigned long AssemblyHandler::eqn_number(GeneralisedElement* const& elem_pt,
+                                            const unsigned& ieqn_local)
   {
     return elem_pt->eqn_number(ieqn_local);
   }
@@ -92,8 +92,8 @@ namespace oomph
   /// Get the residuals by calling the underlying element's residuals
   /// directly.
   //=================================================================
-  void AssemblyHandler::get_residuals(GeneralisedElement *const &elem_pt,
-                                      Vector<double> &residuals)
+  void AssemblyHandler::get_residuals(GeneralisedElement* const& elem_pt,
+                                      Vector<double>& residuals)
   {
     elem_pt->get_residuals(residuals);
   }
@@ -102,9 +102,9 @@ namespace oomph
   /// Calculate the elemental Jacobian matrix "d equation / d variable" by
   /// calling the element's get_jacobian function.
   //======================================================================
-  void AssemblyHandler::get_jacobian(GeneralisedElement *const &elem_pt,
-                                     Vector<double> &residuals,
-                                     DenseMatrix<double> &jacobian)
+  void AssemblyHandler::get_jacobian(GeneralisedElement* const& elem_pt,
+                                     Vector<double>& residuals,
+                                     DenseMatrix<double>& jacobian)
   {
     elem_pt->get_jacobian(residuals, jacobian);
   }
@@ -114,9 +114,9 @@ namespace oomph
   /// the element by calling the get_jacobian function
   //=======================================================================
   void AssemblyHandler::get_all_vectors_and_matrices(
-    GeneralisedElement *const &elem_pt,
-    Vector<Vector<double>> &vec,
-    Vector<DenseMatrix<double>> &matrix)
+    GeneralisedElement* const& elem_pt,
+    Vector<Vector<double>>& vec,
+    Vector<DenseMatrix<double>>& matrix)
   {
     get_jacobian(elem_pt, vec[0], matrix[0]);
   }
@@ -126,9 +126,9 @@ namespace oomph
   /// a parameter, by calling the elemental function
   //======================================================================
   void AssemblyHandler::get_dresiduals_dparameter(
-    GeneralisedElement *const &elem_pt,
-    double *const &parameter_pt,
-    Vector<double> &dres_dparam)
+    GeneralisedElement* const& elem_pt,
+    double* const& parameter_pt,
+    Vector<double>& dres_dparam)
   {
     elem_pt->get_dresiduals_dparameter(parameter_pt, dres_dparam);
   }
@@ -138,10 +138,10 @@ namespace oomph
   /// with respect to a parameter by calling the elemental function
   //========================================================================
   void AssemblyHandler::get_djacobian_dparameter(
-    GeneralisedElement *const &elem_pt,
-    double *const &parameter_pt,
-    Vector<double> &dres_dparam,
-    DenseMatrix<double> &djac_dparam)
+    GeneralisedElement* const& elem_pt,
+    double* const& parameter_pt,
+    Vector<double>& dres_dparam,
+    DenseMatrix<double>& djac_dparam)
   {
     elem_pt->get_djacobian_dparameter(parameter_pt, dres_dparam, djac_dparam);
   }
@@ -153,10 +153,10 @@ namespace oomph
   /// At the moment the dof pointer is passed in to enable
   /// easy calculation of finite difference default
   void AssemblyHandler::get_hessian_vector_products(
-    GeneralisedElement *const &elem_pt,
-    Vector<double> const &Y,
-    DenseMatrix<double> const &C,
-    DenseMatrix<double> &product)
+    GeneralisedElement* const& elem_pt,
+    Vector<double> const& Y,
+    DenseMatrix<double> const& C,
+    DenseMatrix<double>& product)
   {
     elem_pt->get_hessian_vector_products(Y, C, product);
   }
@@ -166,7 +166,7 @@ namespace oomph
   /// has been detected in bifurcation tracking problems. Default
   /// Broken implementation
   //=======================================================================
-  double *AssemblyHandler::bifurcation_parameter_pt() const
+  double* AssemblyHandler::bifurcation_parameter_pt() const
   {
     std::ostringstream error_stream;
     error_stream << "There is no bifurcation parameter associated with the "
@@ -185,7 +185,7 @@ namespace oomph
   /// has been detected in bifurcation tracking problems. Default
   /// Broken implementation
   //=======================================================================
-  void AssemblyHandler::get_eigenfunction(Vector<DoubleVector> &eigenfunction)
+  void AssemblyHandler::get_eigenfunction(Vector<DoubleVector>& eigenfunction)
   {
     std::ostringstream error_stream;
     error_stream << "There is no eigenfunction associated with the current "
@@ -204,9 +204,9 @@ namespace oomph
   /// may be the same.
   //===========================================================================
   void AssemblyHandler::get_inner_products(
-    GeneralisedElement *const &elem_pt,
-    Vector<std::pair<unsigned, unsigned>> const &history_index,
-    Vector<double> &inner_product)
+    GeneralisedElement* const& elem_pt,
+    Vector<std::pair<unsigned, unsigned>> const& history_index,
+    Vector<double>& inner_product)
   {
     elem_pt->get_inner_products(history_index, inner_product);
   }
@@ -219,9 +219,9 @@ namespace oomph
   /// product of current dofs with themselves.
   //==========================================================================
   void AssemblyHandler::get_inner_product_vectors(
-    GeneralisedElement *const &elem_pt,
-    Vector<unsigned> const &history_index,
-    Vector<Vector<double>> &inner_product_vector)
+    GeneralisedElement* const& elem_pt,
+    Vector<unsigned> const& history_index,
+    Vector<Vector<double>>& inner_product_vector)
   {
     elem_pt->get_inner_product_vectors(history_index, inner_product_vector);
   }
@@ -234,7 +234,7 @@ namespace oomph
   /// Get the number of elemental degrees of freedom. Direct call
   /// to the function in the element.
   //===================================================================
-  unsigned ExplicitTimeStepHandler::ndof(GeneralisedElement *const &elem_pt)
+  unsigned ExplicitTimeStepHandler::ndof(GeneralisedElement* const& elem_pt)
   {
     return elem_pt->ndof();
   }
@@ -244,7 +244,7 @@ namespace oomph
   /// to the function in the element.
   //==================================================================
   unsigned long ExplicitTimeStepHandler::eqn_number(
-    GeneralisedElement *const &elem_pt, const unsigned &ieqn_local)
+    GeneralisedElement* const& elem_pt, const unsigned& ieqn_local)
   {
     return elem_pt->eqn_number(ieqn_local);
   }
@@ -253,7 +253,7 @@ namespace oomph
   /// Call the element's residuals
   //=================================================================
   void ExplicitTimeStepHandler::get_residuals(
-    GeneralisedElement *const &elem_pt, Vector<double> &residuals)
+    GeneralisedElement* const& elem_pt, Vector<double>& residuals)
   {
     elem_pt->get_residuals(residuals);
   }
@@ -261,9 +261,9 @@ namespace oomph
   //=======================================================================
   /// Replace get jacobian with the call to get the mass matrix
   //======================================================================
-  void ExplicitTimeStepHandler::get_jacobian(GeneralisedElement *const &elem_pt,
-                                             Vector<double> &residuals,
-                                             DenseMatrix<double> &jacobian)
+  void ExplicitTimeStepHandler::get_jacobian(GeneralisedElement* const& elem_pt,
+                                             Vector<double>& residuals,
+                                             DenseMatrix<double>& jacobian)
   {
     elem_pt->get_mass_matrix(residuals, jacobian);
   }
@@ -273,9 +273,9 @@ namespace oomph
   /// the problem  by calling those of the underlying element.
   //=======================================================================
   void ExplicitTimeStepHandler::get_all_vectors_and_matrices(
-    GeneralisedElement *const &elem_pt,
-    Vector<Vector<double>> &vec,
-    Vector<DenseMatrix<double>> &matrix)
+    GeneralisedElement* const& elem_pt,
+    Vector<Vector<double>>& vec,
+    Vector<DenseMatrix<double>>& matrix)
   {
 #ifdef PARANOID
     // Check dimension
@@ -298,7 +298,7 @@ namespace oomph
   /// Get the number of elemental degrees of freedom. Direct call
   /// to the function in the element.
   //===================================================================
-  unsigned EigenProblemHandler::ndof(GeneralisedElement *const &elem_pt)
+  unsigned EigenProblemHandler::ndof(GeneralisedElement* const& elem_pt)
   {
     return elem_pt->ndof();
   }
@@ -308,7 +308,7 @@ namespace oomph
   /// to the function in the element.
   //==================================================================
   unsigned long EigenProblemHandler::eqn_number(
-    GeneralisedElement *const &elem_pt, const unsigned &ieqn_local)
+    GeneralisedElement* const& elem_pt, const unsigned& ieqn_local)
   {
     return elem_pt->eqn_number(ieqn_local);
   }
@@ -316,8 +316,8 @@ namespace oomph
   //==================================================================
   /// Cannot call get_residuals for an eigenproblem, so throw an error
   //=================================================================
-  void EigenProblemHandler::get_residuals(GeneralisedElement *const &elem_pt,
-                                          Vector<double> &residuals)
+  void EigenProblemHandler::get_residuals(GeneralisedElement* const& elem_pt,
+                                          Vector<double>& residuals)
   {
     throw OomphLibError(
       "An eigenproblem does not have a get_residuals function",
@@ -328,9 +328,9 @@ namespace oomph
   //=======================================================================
   /// Cannot call get_jacobian for an eigenproblem, so throw an error
   //======================================================================
-  void EigenProblemHandler::get_jacobian(GeneralisedElement *const &elem_pt,
-                                         Vector<double> &residuals,
-                                         DenseMatrix<double> &jacobian)
+  void EigenProblemHandler::get_jacobian(GeneralisedElement* const& elem_pt,
+                                         Vector<double>& residuals,
+                                         DenseMatrix<double>& jacobian)
   {
     throw OomphLibError("An eigenproblem does not have a get_jacobian function",
                         OOMPH_CURRENT_FUNCTION,
@@ -342,9 +342,9 @@ namespace oomph
   /// the problem  by calling those of the underlying element.
   //=======================================================================
   void EigenProblemHandler::get_all_vectors_and_matrices(
-    GeneralisedElement *const &elem_pt,
-    Vector<Vector<double>> &vec,
-    Vector<DenseMatrix<double>> &matrix)
+    GeneralisedElement* const& elem_pt,
+    Vector<Vector<double>>& vec,
+    Vector<DenseMatrix<double>>& matrix)
   {
 #ifdef PARANOID
     // Check dimension
@@ -395,8 +395,8 @@ namespace oomph
   /// Use a block factorisation to solve the augmented system
   /// associated with a PitchFork bifurcation.
   //===================================================================
-  void AugmentedBlockFoldLinearSolver::solve(Problem *const &problem_pt,
-                                             DoubleVector &result)
+  void AugmentedBlockFoldLinearSolver::solve(Problem* const& problem_pt,
+                                             DoubleVector& result)
   {
     // if the result is setup then it should not be distributed
 #ifdef PARANOID
@@ -412,8 +412,8 @@ namespace oomph
 #endif
 
     // Locally cache the pointer to the handler.
-    FoldHandler *handler_pt =
-      static_cast<FoldHandler *>(problem_pt->assembly_handler_pt());
+    FoldHandler* handler_pt =
+      static_cast<FoldHandler*>(problem_pt->assembly_handler_pt());
 
     // Switch the handler to "block solver" mode
     handler_pt->solve_augmented_block_system();
@@ -469,7 +469,7 @@ namespace oomph
     unsigned long n_element = problem_pt->mesh_pt()->nelement();
     for (unsigned long e = 0; e < n_element; e++)
     {
-      GeneralisedElement *elem_pt = problem_pt->mesh_pt()->element_pt(e);
+      GeneralisedElement* elem_pt = problem_pt->mesh_pt()->element_pt(e);
       // Loop over the ndofs in each element
       unsigned n_var = elem_pt->ndof();
       // Get the jacobian matrix
@@ -536,7 +536,7 @@ namespace oomph
     // Calculate the product of the jacobian matrices, etc
     for (unsigned long e = 0; e < n_element; e++)
     {
-      GeneralisedElement *elem_pt = problem_pt->mesh_pt()->element_pt(e);
+      GeneralisedElement* elem_pt = problem_pt->mesh_pt()->element_pt(e);
       // Loop over the ndofs in each element
       unsigned n_var = handler_pt->ndof(elem_pt);
       // Get the jacobian matrices
@@ -666,8 +666,8 @@ namespace oomph
   //======================================================================
   // Hack the re-solve to use the block factorisation
   //======================================================================
-  void AugmentedBlockFoldLinearSolver::resolve(const DoubleVector &rhs,
-                                               DoubleVector &result)
+  void AugmentedBlockFoldLinearSolver::resolve(const DoubleVector& rhs,
+                                               DoubleVector& result)
   {
     // Check that the factors have been stored
     if (Alpha_pt == 0)
@@ -678,10 +678,10 @@ namespace oomph
     }
 
     // Get the pointer to the problem
-    Problem *const problem_pt = Problem_pt;
+    Problem* const problem_pt = Problem_pt;
 
-    FoldHandler *handler_pt =
-      static_cast<FoldHandler *>(problem_pt->assembly_handler_pt());
+    FoldHandler* handler_pt =
+      static_cast<FoldHandler*>(problem_pt->assembly_handler_pt());
 
     // Switch things to our block solver
     handler_pt->solve_augmented_block_system();
@@ -761,7 +761,7 @@ namespace oomph
     unsigned long n_element = problem_pt->mesh_pt()->nelement();
     for (unsigned long e = 0; e < n_element; e++)
     {
-      GeneralisedElement *elem_pt = problem_pt->mesh_pt()->element_pt(e);
+      GeneralisedElement* elem_pt = problem_pt->mesh_pt()->element_pt(e);
       // Loop over the ndofs in each element
       unsigned n_var = handler_pt->ndof(elem_pt);
       // Get some jacobian matrices
@@ -851,8 +851,8 @@ namespace oomph
   /// by setting initial guesses for Y, Phi and calculating Count.
   /// If the system changes, a new  handler must be constructed.
   //========================================================================
-  FoldHandler::FoldHandler(Problem *const &problem_pt,
-                           double *const &parameter_pt) :
+  FoldHandler::FoldHandler(Problem* const& problem_pt,
+                           double* const& parameter_pt) :
     Solve_which_system(Full_augmented), Parameter_pt(parameter_pt)
   {
     // Set the problem pointer
@@ -862,7 +862,7 @@ namespace oomph
 
     // create the linear algebra distribution for this solver
     // currently only global (non-distributed) distributions are allowed
-    LinearAlgebraDistribution *dist_pt =
+    LinearAlgebraDistribution* dist_pt =
       new LinearAlgebraDistribution(problem_pt->communicator_pt(), Ndof, false);
 
     // Resize the vectors of additional dofs and constants
@@ -874,7 +874,7 @@ namespace oomph
     unsigned n_element = problem_pt->mesh_pt()->nelement();
     for (unsigned e = 0; e < n_element; e++)
     {
-      GeneralisedElement *elem_pt = problem_pt->mesh_pt()->element_pt(e);
+      GeneralisedElement* elem_pt = problem_pt->mesh_pt()->element_pt(e);
       // Loop over the local freedoms in the element
       unsigned n_var = elem_pt->ndof();
       for (unsigned n = 0; n < n_var; n++)
@@ -888,7 +888,7 @@ namespace oomph
     // solving the system JPhi = dF/dlambda
 
     // Locally cache the linear solver
-    LinearSolver *const linear_solver_pt = problem_pt->linear_solver_pt();
+    LinearSolver* const linear_solver_pt = problem_pt->linear_solver_pt();
 
     // Save the status before entry to this routine
     bool enable_resolve = linear_solver_pt->is_resolve_enabled();
@@ -955,9 +955,9 @@ namespace oomph
 
   /// Constructor in which the eigenvector is passed as an initial
   /// guess
-  FoldHandler::FoldHandler(Problem *const &problem_pt,
-                           double *const &parameter_pt,
-                           const DoubleVector &eigenvector) :
+  FoldHandler::FoldHandler(Problem* const& problem_pt,
+                           double* const& parameter_pt,
+                           const DoubleVector& eigenvector) :
     Solve_which_system(Full_augmented), Parameter_pt(parameter_pt)
   {
     // Set the problem pointer
@@ -967,7 +967,7 @@ namespace oomph
 
     // create the linear algebra distribution for this solver
     // currently only global (non-distributed) distributions are allowed
-    LinearAlgebraDistribution *dist_pt =
+    LinearAlgebraDistribution* dist_pt =
       new LinearAlgebraDistribution(problem_pt->communicator_pt(), Ndof, false);
 
     // Resize the vectors of additional dofs and constants
@@ -979,7 +979,7 @@ namespace oomph
     unsigned n_element = problem_pt->mesh_pt()->nelement();
     for (unsigned e = 0; e < n_element; e++)
     {
-      GeneralisedElement *elem_pt = problem_pt->mesh_pt()->element_pt(e);
+      GeneralisedElement* elem_pt = problem_pt->mesh_pt()->element_pt(e);
       // Loop over the local freedoms in the element
       unsigned n_var = elem_pt->ndof();
       for (unsigned n = 0; n < n_var; n++)
@@ -1019,10 +1019,10 @@ namespace oomph
 
   /// Constructor in which the eigenvector and normalisation
   /// vector are  passed as an initial guess
-  FoldHandler::FoldHandler(Problem *const &problem_pt,
-                           double *const &parameter_pt,
-                           const DoubleVector &eigenvector,
-                           const DoubleVector &normalisation) :
+  FoldHandler::FoldHandler(Problem* const& problem_pt,
+                           double* const& parameter_pt,
+                           const DoubleVector& eigenvector,
+                           const DoubleVector& normalisation) :
     Solve_which_system(Full_augmented), Parameter_pt(parameter_pt)
   {
     // Set the problem pointer
@@ -1032,7 +1032,7 @@ namespace oomph
 
     // create the linear algebra distribution for this solver
     // currently only global (non-distributed) distributions are allowed
-    LinearAlgebraDistribution *dist_pt =
+    LinearAlgebraDistribution* dist_pt =
       new LinearAlgebraDistribution(problem_pt->communicator_pt(), Ndof, false);
 
     // Resize the vectors of additional dofs and constants
@@ -1044,7 +1044,7 @@ namespace oomph
     unsigned n_element = problem_pt->mesh_pt()->nelement();
     for (unsigned e = 0; e < n_element; e++)
     {
-      GeneralisedElement *elem_pt = problem_pt->mesh_pt()->element_pt(e);
+      GeneralisedElement* elem_pt = problem_pt->mesh_pt()->element_pt(e);
       // Loop over the local freedoms in the element
       unsigned n_var = elem_pt->ndof();
       for (unsigned n = 0; n < n_var; n++)
@@ -1086,7 +1086,7 @@ namespace oomph
   //=================================================================
   /// The number of unknowns is 2n+1
   //================================================================
-  unsigned FoldHandler::ndof(GeneralisedElement *const &elem_pt)
+  unsigned FoldHandler::ndof(GeneralisedElement* const& elem_pt)
   {
     unsigned raw_ndof = elem_pt->ndof();
     // Return different values depending on the type of block decomposition
@@ -1119,8 +1119,8 @@ namespace oomph
   /// number ieqn_local. We choose to number the unknowns according
   /// to the augmented system.
   //=======================================================================
-  unsigned long FoldHandler::eqn_number(GeneralisedElement *const &elem_pt,
-                                        const unsigned &ieqn_local)
+  unsigned long FoldHandler::eqn_number(GeneralisedElement* const& elem_pt,
+                                        const unsigned& ieqn_local)
   {
     // Find the number of non-augmented dofs in the element
     unsigned raw_ndof = elem_pt->ndof();
@@ -1152,8 +1152,8 @@ namespace oomph
   //====================================================================
   /// Formulate the augmented system
   //====================================================================
-  void FoldHandler::get_residuals(GeneralisedElement *const &elem_pt,
-                                  Vector<double> &residuals)
+  void FoldHandler::get_residuals(GeneralisedElement* const& elem_pt,
+                                  Vector<double>& residuals)
   {
     // Need to get raw residuals and jacobian
     unsigned raw_ndof = elem_pt->ndof();
@@ -1224,9 +1224,9 @@ namespace oomph
   /// Calculate the elemental Jacobian matrix "d equation
   /// / d variable" for the augmented system
   //=================================================================
-  void FoldHandler::get_jacobian(GeneralisedElement *const &elem_pt,
-                                 Vector<double> &residuals,
-                                 DenseMatrix<double> &jacobian)
+  void FoldHandler::get_jacobian(GeneralisedElement* const& elem_pt,
+                                 Vector<double>& residuals,
+                                 DenseMatrix<double>& jacobian)
   {
     // Find the number of augmented dofs
     unsigned augmented_ndof = ndof(elem_pt);
@@ -1259,7 +1259,7 @@ namespace oomph
         // Fill in the first lot of finite differences
         {
           // increase the global parameter
-          double *unknown_pt = Problem_pt->Dof_pt[Ndof];
+          double* unknown_pt = Problem_pt->Dof_pt[Ndof];
           double init = *unknown_pt;
           *unknown_pt += FD_step;
 
@@ -1318,7 +1318,7 @@ namespace oomph
         // Fill in the first lot of finite differences
         {
           // increase the global parameter
-          double *unknown_pt = Problem_pt->Dof_pt[Ndof];
+          double* unknown_pt = Problem_pt->Dof_pt[Ndof];
           double init = *unknown_pt;
           *unknown_pt += FD_step;
           // Need to update the function
@@ -1354,7 +1354,7 @@ namespace oomph
           {
             unsigned long global_eqn = eqn_number(elem_pt, n);
             // Increase the first lot
-            double *unknown_pt = Problem_pt->Dof_pt[global_eqn];
+            double* unknown_pt = Problem_pt->Dof_pt[global_eqn];
             double init = *unknown_pt;
             *unknown_pt += FD_step;
             Problem_pt->actions_before_newton_convergence_check(); /// ALICE
@@ -1422,9 +1422,9 @@ namespace oomph
   /// to a parameter
   //====================================================================
   void FoldHandler::get_dresiduals_dparameter(
-    GeneralisedElement *const &elem_pt,
-    double *const &parameter_pt,
-    Vector<double> &dres_dparam)
+    GeneralisedElement* const& elem_pt,
+    double* const& parameter_pt,
+    Vector<double>& dres_dparam)
   {
     // Need to get raw residuals and jacobian
     unsigned raw_ndof = elem_pt->ndof();
@@ -1490,10 +1490,10 @@ namespace oomph
   /// with respect to a parameter so that it breaks because it should not
   /// be required
   //========================================================================
-  void FoldHandler::get_djacobian_dparameter(GeneralisedElement *const &elem_pt,
-                                             double *const &parameter_pt,
-                                             Vector<double> &dres_dparam,
-                                             DenseMatrix<double> &djac_dparam)
+  void FoldHandler::get_djacobian_dparameter(GeneralisedElement* const& elem_pt,
+                                             double* const& parameter_pt,
+                                             Vector<double>& dres_dparam,
+                                             DenseMatrix<double>& djac_dparam)
   {
     std::ostringstream error_stream;
     error_stream
@@ -1511,10 +1511,10 @@ namespace oomph
   /// it breaks because it should not be required
   //========================================================================
   void FoldHandler::get_hessian_vector_products(
-    GeneralisedElement *const &elem_pt,
-    Vector<double> const &Y,
-    DenseMatrix<double> const &C,
-    DenseMatrix<double> &product)
+    GeneralisedElement* const& elem_pt,
+    Vector<double> const& Y,
+    DenseMatrix<double> const& C,
+    DenseMatrix<double>& product)
   {
     std::ostringstream error_stream;
     error_stream
@@ -1531,7 +1531,7 @@ namespace oomph
   /// Return the eigenfunction(s) associated with the bifurcation that
   /// has been detected in bifurcation tracking problems
   //==========================================================================
-  void FoldHandler::get_eigenfunction(Vector<DoubleVector> &eigenfunction)
+  void FoldHandler::get_eigenfunction(Vector<DoubleVector>& eigenfunction)
   {
     // There is only one (real) null vector
     eigenfunction.resize(1);
@@ -1552,8 +1552,8 @@ namespace oomph
   {
     // If we are using the block solver reset the problem's linear solver
     // to the original one
-    AugmentedBlockFoldLinearSolver *block_fold_solver_pt =
-      dynamic_cast<AugmentedBlockFoldLinearSolver *>(
+    AugmentedBlockFoldLinearSolver* block_fold_solver_pt =
+      dynamic_cast<AugmentedBlockFoldLinearSolver*>(
         Problem_pt->linear_solver_pt());
 
     if (block_fold_solver_pt)
@@ -1678,13 +1678,13 @@ namespace oomph
   /// Use a block factorisation to solve the augmented system
   /// associated with a PitchFork bifurcation.
   //===================================================================
-  void BlockPitchForkLinearSolver::solve(Problem *const &problem_pt,
-                                         DoubleVector &result)
+  void BlockPitchForkLinearSolver::solve(Problem* const& problem_pt,
+                                         DoubleVector& result)
   {
     std::cout << "Block pitchfork solve" << std::endl;
     // Locally cache the pointer to the handler.
-    PitchForkHandler *handler_pt =
-      static_cast<PitchForkHandler *>(problem_pt->assembly_handler_pt());
+    PitchForkHandler* handler_pt =
+      static_cast<PitchForkHandler*>(problem_pt->assembly_handler_pt());
 
     // Get the augmented distribution from the handler and use it as
     // the distribution of the linear solver
@@ -1705,7 +1705,7 @@ namespace oomph
     LinearAlgebraDistribution result_dist(result.distribution_pt());
 
     // Locally cache a pointer to the parameter
-    double *const parameter_pt = handler_pt->Parameter_pt;
+    double* const parameter_pt = handler_pt->Parameter_pt;
 
     // Firstly get the derivatives of the full augmented system with
     // respect to the parameter
@@ -1976,8 +1976,8 @@ namespace oomph
   //==============================================================
   // Hack the re-solve to use the block factorisation
   //==============================================================
-  void BlockPitchForkLinearSolver::resolve(const DoubleVector &rhs,
-                                           DoubleVector &result)
+  void BlockPitchForkLinearSolver::resolve(const DoubleVector& rhs,
+                                           DoubleVector& result)
   {
     std::cout << "Block pitchfork resolve" << std::endl;
     // Check that the factors have been stored
@@ -1989,11 +1989,11 @@ namespace oomph
     }
 
     // Cache pointer to the problem
-    Problem *const problem_pt = Problem_pt;
+    Problem* const problem_pt = Problem_pt;
 
     // Locally cache pointer to the handler
-    PitchForkHandler *handler_pt =
-      static_cast<PitchForkHandler *>(problem_pt->assembly_handler_pt());
+    PitchForkHandler* handler_pt =
+      static_cast<PitchForkHandler*>(problem_pt->assembly_handler_pt());
 
     // Get the augmented distribution from the handler
     LinearAlgebraDistribution aug_dist =
@@ -2239,8 +2239,8 @@ namespace oomph
   /// Use a block factorisation to solve the augmented system
   /// associated with a PitchFork bifurcation.
   //===================================================================
-  void AugmentedBlockPitchForkLinearSolver::solve(Problem *const &problem_pt,
-                                                  DoubleVector &result)
+  void AugmentedBlockPitchForkLinearSolver::solve(Problem* const& problem_pt,
+                                                  DoubleVector& result)
   {
     std::cout << "Augmented pitchfork solve" << std::endl;
     // if the result is setup then it should not be distributed
@@ -2257,8 +2257,8 @@ namespace oomph
 #endif
 
     // Locally cache the pointer to the handler.
-    PitchForkHandler *handler_pt =
-      static_cast<PitchForkHandler *>(problem_pt->assembly_handler_pt());
+    PitchForkHandler* handler_pt =
+      static_cast<PitchForkHandler*>(problem_pt->assembly_handler_pt());
 
     // Switch the handler to "block solver" mode
     handler_pt->solve_augmented_block_system();
@@ -2340,7 +2340,7 @@ namespace oomph
     unsigned long n_element = problem_pt->mesh_pt()->nelement();
     for (unsigned long e = 0; e < n_element; e++)
     {
-      GeneralisedElement *elem_pt = problem_pt->mesh_pt()->element_pt(e);
+      GeneralisedElement* elem_pt = problem_pt->mesh_pt()->element_pt(e);
       // Loop over the ndofs in each element
       unsigned n_var = handler_pt->ndof(elem_pt);
       // Get the jacobian matrices
@@ -2470,8 +2470,8 @@ namespace oomph
   //==============================================================
   // Hack the re-solve to use the block factorisation
   //==============================================================
-  void AugmentedBlockPitchForkLinearSolver::resolve(const DoubleVector &rhs,
-                                                    DoubleVector &result)
+  void AugmentedBlockPitchForkLinearSolver::resolve(const DoubleVector& rhs,
+                                                    DoubleVector& result)
   {
     std::cout << "Augmented pitchfork resolve" << std::endl;
     // Check that the factors have been stored
@@ -2483,10 +2483,10 @@ namespace oomph
     }
 
     // Get the pointer to the problem
-    Problem *const problem_pt = Problem_pt;
+    Problem* const problem_pt = Problem_pt;
 
-    PitchForkHandler *handler_pt =
-      static_cast<PitchForkHandler *>(problem_pt->assembly_handler_pt());
+    PitchForkHandler* handler_pt =
+      static_cast<PitchForkHandler*>(problem_pt->assembly_handler_pt());
 
     // Switch things to our block solver
     handler_pt->solve_augmented_block_system();
@@ -2548,7 +2548,7 @@ namespace oomph
     unsigned long n_element = problem_pt->mesh_pt()->nelement();
     for (unsigned long e = 0; e < n_element; e++)
     {
-      GeneralisedElement *elem_pt = problem_pt->mesh_pt()->element_pt(e);
+      GeneralisedElement* elem_pt = problem_pt->mesh_pt()->element_pt(e);
       // Loop over the ndofs in each element
       unsigned n_var = handler_pt->ndof(elem_pt);
       // Get some jacobian matrices
@@ -2637,10 +2637,10 @@ namespace oomph
   /// guesses for Sigma, Y, specifying C and Psi and calculating count.
   //==================================================================
   PitchForkHandler::PitchForkHandler(
-    Problem *const &problem_pt,
-    AssemblyHandler *const &assembly_handler_pt,
-    double *const &parameter_pt,
-    const DoubleVector &symmetry_vector) :
+    Problem* const& problem_pt,
+    AssemblyHandler* const& assembly_handler_pt,
+    double* const& parameter_pt,
+    const DoubleVector& symmetry_vector) :
     Solve_which_system(Full_augmented), Sigma(0.0), Parameter_pt(parameter_pt)
   {
     // Set the problem pointer
@@ -2681,7 +2681,7 @@ namespace oomph
     unsigned n_non_halo_element_local = 0;
     for (unsigned e = 0; e < n_element; e++)
     {
-      GeneralisedElement *elem_pt = Problem_pt->mesh_pt()->element_pt(e);
+      GeneralisedElement* elem_pt = Problem_pt->mesh_pt()->element_pt(e);
 #ifdef OOMPH_HAS_MPI
       // Ignore halo elements
       if (!elem_pt->is_halo())
@@ -2857,9 +2857,8 @@ namespace oomph
   {
     // If we are using the block solver reset the problem's linear solver
     // to the original one
-    BlockPitchForkLinearSolver *block_pitchfork_solver_pt =
-      dynamic_cast<BlockPitchForkLinearSolver *>(
-        Problem_pt->linear_solver_pt());
+    BlockPitchForkLinearSolver* block_pitchfork_solver_pt =
+      dynamic_cast<BlockPitchForkLinearSolver*>(Problem_pt->linear_solver_pt());
 
     if (block_pitchfork_solver_pt)
     {
@@ -2873,8 +2872,8 @@ namespace oomph
     // If we are using the augmented
     // block solver reset the problem's linear solver
     // to the original one
-    AugmentedBlockPitchForkLinearSolver *augmented_block_pitchfork_solver_pt =
-      dynamic_cast<AugmentedBlockPitchForkLinearSolver *>(
+    AugmentedBlockPitchForkLinearSolver* augmented_block_pitchfork_solver_pt =
+      dynamic_cast<AugmentedBlockPitchForkLinearSolver*>(
         Problem_pt->linear_solver_pt());
 
     if (augmented_block_pitchfork_solver_pt)
@@ -2901,7 +2900,7 @@ namespace oomph
   //================================================================
   /// Get the number of elemental degrees of freedom
   //================================================================
-  unsigned PitchForkHandler::ndof(GeneralisedElement *const &elem_pt)
+  unsigned PitchForkHandler::ndof(GeneralisedElement* const& elem_pt)
   {
     unsigned raw_ndof = elem_pt->ndof();
 
@@ -2931,8 +2930,8 @@ namespace oomph
   }
 
   /// Get the global equation number of the local unknown
-  unsigned long PitchForkHandler::eqn_number(GeneralisedElement *const &elem_pt,
-                                             const unsigned &ieqn_local)
+  unsigned long PitchForkHandler::eqn_number(GeneralisedElement* const& elem_pt,
+                                             const unsigned& ieqn_local)
   {
     // Get the raw value
     unsigned raw_ndof = elem_pt->ndof();
@@ -2991,8 +2990,8 @@ namespace oomph
   //==============================================================
   /// Get the residuals
   //==============================================================
-  void PitchForkHandler::get_residuals(GeneralisedElement *const &elem_pt,
-                                       Vector<double> &residuals)
+  void PitchForkHandler::get_residuals(GeneralisedElement* const& elem_pt,
+                                       Vector<double>& residuals)
   {
     // Need to get raw residuals and jacobian
     unsigned raw_ndof = elem_pt->ndof();
@@ -3094,9 +3093,9 @@ namespace oomph
   /// \short Calculate the elemental Jacobian matrix "d equation
   /// / d variable".
   //======================================================================
-  void PitchForkHandler::get_jacobian(GeneralisedElement *const &elem_pt,
-                                      Vector<double> &residuals,
-                                      DenseMatrix<double> &jacobian)
+  void PitchForkHandler::get_jacobian(GeneralisedElement* const& elem_pt,
+                                      Vector<double>& residuals,
+                                      DenseMatrix<double>& jacobian)
   {
     unsigned augmented_ndof = ndof(elem_pt);
     unsigned raw_ndof = elem_pt->ndof();
@@ -3136,7 +3135,7 @@ namespace oomph
         // Fill in the first lot of finite differences
         {
           // increase the global parameter
-          double *unknown_pt = Parameter_pt;
+          double* unknown_pt = Parameter_pt;
           double init = *unknown_pt;
           *unknown_pt += FD_step;
 
@@ -3210,7 +3209,7 @@ namespace oomph
           // Get the original (unaugmented) global equation number
           unsigned long global_eqn =
             Assembly_handler_pt->eqn_number(elem_pt, n);
-          double *unknown_pt = Problem_pt->global_dof_pt(global_eqn);
+          double* unknown_pt = Problem_pt->global_dof_pt(global_eqn);
           double init = *unknown_pt;
           *unknown_pt += FD_step;
           Problem_pt->actions_before_newton_convergence_check();
@@ -3231,7 +3230,7 @@ namespace oomph
 
         {
           // Now increase the global parameter
-          double *unknown_pt = Parameter_pt;
+          double* unknown_pt = Parameter_pt;
           double init = *unknown_pt;
           *unknown_pt += FD_step;
 
@@ -3273,9 +3272,9 @@ namespace oomph
   /// Get the derivatives of the residuals with respect to a parameter
   //==============================================================
   void PitchForkHandler::get_dresiduals_dparameter(
-    GeneralisedElement *const &elem_pt,
-    double *const &parameter_pt,
-    Vector<double> &dres_dparam)
+    GeneralisedElement* const& elem_pt,
+    double* const& parameter_pt,
+    Vector<double>& dres_dparam)
   {
     // Need to get raw residuals and jacobian
     unsigned raw_ndof = elem_pt->ndof();
@@ -3350,10 +3349,10 @@ namespace oomph
   /// be required
   //========================================================================
   void PitchForkHandler::get_djacobian_dparameter(
-    GeneralisedElement *const &elem_pt,
-    double *const &parameter_pt,
-    Vector<double> &dres_dparam,
-    DenseMatrix<double> &djac_dparam)
+    GeneralisedElement* const& elem_pt,
+    double* const& parameter_pt,
+    Vector<double>& dres_dparam,
+    DenseMatrix<double>& djac_dparam)
   {
     std::ostringstream error_stream;
     error_stream
@@ -3371,10 +3370,10 @@ namespace oomph
   /// it calls the underlying element's hessian function.
   //========================================================================
   void PitchForkHandler::get_hessian_vector_products(
-    GeneralisedElement *const &elem_pt,
-    Vector<double> const &Y,
-    DenseMatrix<double> const &C,
-    DenseMatrix<double> &product)
+    GeneralisedElement* const& elem_pt,
+    Vector<double> const& Y,
+    DenseMatrix<double> const& C,
+    DenseMatrix<double>& product)
   {
     elem_pt->get_hessian_vector_products(Y, C, product);
   }
@@ -3383,7 +3382,7 @@ namespace oomph
   /// Return the eigenfunction(s) associated with the bifurcation that
   /// has been detected in bifurcation tracking problems
   //==========================================================================
-  void PitchForkHandler::get_eigenfunction(Vector<DoubleVector> &eigenfunction)
+  void PitchForkHandler::get_eigenfunction(Vector<DoubleVector>& eigenfunction)
   {
     // There is only one (real) null vector
     eigenfunction.resize(1);
@@ -3569,8 +3568,8 @@ namespace oomph
   /// Use a block factorisation to solve the augmented system
   /// associated with a Hopf bifurcation.
   //===================================================================
-  void BlockHopfLinearSolver::solve(Problem *const &problem_pt,
-                                    DoubleVector &result)
+  void BlockHopfLinearSolver::solve(Problem* const& problem_pt,
+                                    DoubleVector& result)
   {
     // if the result is setup then it should not be distributed
 #ifdef PARANOID
@@ -3586,8 +3585,8 @@ namespace oomph
 #endif
 
     // Locally cache the pointer to the handler.
-    HopfHandler *handler_pt =
-      static_cast<HopfHandler *>(problem_pt->assembly_handler_pt());
+    HopfHandler* handler_pt =
+      static_cast<HopfHandler*>(problem_pt->assembly_handler_pt());
 
     // Find the number of dofs in the augmented problem
     unsigned n_dof = problem_pt->ndof();
@@ -3604,7 +3603,7 @@ namespace oomph
     const double FD_step = 1.0e-8;
     {
       // Cache pointer to the parameter (second last entry in the vector
-      double *param_pt = &problem_pt->dof(n_dof - 2);
+      double* param_pt = &problem_pt->dof(n_dof - 2);
       // Backup the parameter
       double old_var = *param_pt;
       ;
@@ -3725,7 +3724,7 @@ namespace oomph
     // Calculate the product of the jacobian matrices, etc
     for (unsigned long e = 0; e < n_element; e++)
     {
-      GeneralisedElement *elem_pt = problem_pt->mesh_pt()->element_pt(e);
+      GeneralisedElement* elem_pt = problem_pt->mesh_pt()->element_pt(e);
       // Loop over the ndofs in each element
       unsigned n_var = elem_pt->ndof();
       // Get the jacobian matrices
@@ -3914,10 +3913,10 @@ namespace oomph
   /// because otherwise we have to store the inverse of the jacobian
   /// and the complex equivalent ... nasty.
   //=====================================================================
-  void BlockHopfLinearSolver::solve_for_two_rhs(Problem *const &problem_pt,
-                                                DoubleVector &result,
-                                                const DoubleVector &rhs2,
-                                                DoubleVector &result2)
+  void BlockHopfLinearSolver::solve_for_two_rhs(Problem* const& problem_pt,
+                                                DoubleVector& result,
+                                                const DoubleVector& rhs2,
+                                                DoubleVector& result2)
   {
     // if the result is setup then it should not be distributed
 #ifdef PARANOID
@@ -3942,8 +3941,8 @@ namespace oomph
 #endif
 
     // Locally cache the pointer to the handler.
-    HopfHandler *handler_pt =
-      static_cast<HopfHandler *>(problem_pt->assembly_handler_pt());
+    HopfHandler* handler_pt =
+      static_cast<HopfHandler*>(problem_pt->assembly_handler_pt());
 
     // Find the number of dofs in the augmented problem
     unsigned n_dof = problem_pt->ndof();
@@ -3970,7 +3969,7 @@ namespace oomph
     const double FD_step = 1.0e-8;
     {
       // Cache pointer to the parameter (second last entry in the vector
-      double *param_pt = &problem_pt->dof(n_dof - 2);
+      double* param_pt = &problem_pt->dof(n_dof - 2);
       // Backup the parameter
       double old_var = *param_pt;
       ;
@@ -4110,7 +4109,7 @@ namespace oomph
     // Calculate the product of the jacobian matrices, etc
     for (unsigned long e = 0; e < n_element; e++)
     {
-      GeneralisedElement *elem_pt = problem_pt->mesh_pt()->element_pt(e);
+      GeneralisedElement* elem_pt = problem_pt->mesh_pt()->element_pt(e);
       // Loop over the ndofs in each element
       unsigned n_var = elem_pt->ndof();
       // Get the jacobian matrices
@@ -4360,8 +4359,8 @@ namespace oomph
   //======================================================================
   // Hack the re-solve to use the block factorisation
   //======================================================================
-  void BlockHopfLinearSolver::resolve(const DoubleVector &rhs,
-                                      DoubleVector &result)
+  void BlockHopfLinearSolver::resolve(const DoubleVector& rhs,
+                                      DoubleVector& result)
   {
     throw OomphLibError("resolve() is not implemented for this solver",
                         OOMPH_CURRENT_FUNCTION,
@@ -4377,8 +4376,8 @@ namespace oomph
   /// by setting initial guesses for Phi, Psi  and calculating Count.
   /// If the system changes, a new  handler must be constructed.
   //===================================================================
-  HopfHandler::HopfHandler(Problem *const &problem_pt,
-                           double *const &parameter_pt) :
+  HopfHandler::HopfHandler(Problem* const& problem_pt,
+                           double* const& parameter_pt) :
     Solve_which_system(0), Parameter_pt(parameter_pt), Omega(0.0)
   {
     // Set the problem pointer
@@ -4388,7 +4387,7 @@ namespace oomph
 
     // create the linear algebra distribution for this solver
     // currently only global (non-distributed) distributions are allowed
-    LinearAlgebraDistribution *dist_pt =
+    LinearAlgebraDistribution* dist_pt =
       new LinearAlgebraDistribution(problem_pt->communicator_pt(), Ndof, false);
 
     // Resize the vectors of additional dofs
@@ -4401,7 +4400,7 @@ namespace oomph
     unsigned n_element = problem_pt->mesh_pt()->nelement();
     for (unsigned e = 0; e < n_element; e++)
     {
-      GeneralisedElement *elem_pt = problem_pt->mesh_pt()->element_pt(e);
+      GeneralisedElement* elem_pt = problem_pt->mesh_pt()->element_pt(e);
       // Loop over the local freedoms in an element
       unsigned n_var = elem_pt->ndof();
       for (unsigned n = 0; n < n_var; n++)
@@ -4415,7 +4414,7 @@ namespace oomph
     // solving the system JPhi = dF/dlambda
 
     // Locally cache the linear solver
-    LinearSolver *const linear_solver_pt = problem_pt->linear_solver_pt();
+    LinearSolver* const linear_solver_pt = problem_pt->linear_solver_pt();
 
     // Save the status before entry to this routine
     bool enable_resolve = linear_solver_pt->is_resolve_enabled();
@@ -4511,11 +4510,11 @@ namespace oomph
   /// by setting initial guesses for Phi, Psi, Omega  and calculating Count.
   /// If the system changes, a new  handler must be constructed.
   //===================================================================
-  HopfHandler::HopfHandler(Problem *const &problem_pt,
-                           double *const &parameter_pt,
-                           const double &omega,
-                           const DoubleVector &phi,
-                           const DoubleVector &psi) :
+  HopfHandler::HopfHandler(Problem* const& problem_pt,
+                           double* const& parameter_pt,
+                           const double& omega,
+                           const DoubleVector& phi,
+                           const DoubleVector& psi) :
     Solve_which_system(0), Parameter_pt(parameter_pt), Omega(omega)
   {
     // Set the problem pointer
@@ -4533,7 +4532,7 @@ namespace oomph
     unsigned n_element = problem_pt->mesh_pt()->nelement();
     for (unsigned e = 0; e < n_element; e++)
     {
-      GeneralisedElement *elem_pt = problem_pt->mesh_pt()->element_pt(e);
+      GeneralisedElement* elem_pt = problem_pt->mesh_pt()->element_pt(e);
       // Loop over the local freedoms in an element
       unsigned n_var = elem_pt->ndof();
       for (unsigned n = 0; n < n_var; n++)
@@ -4585,8 +4584,8 @@ namespace oomph
   {
     // If we are using the block solver reset the problem's linear solver
     // to the original one
-    BlockHopfLinearSolver *block_hopf_solver_pt =
-      dynamic_cast<BlockHopfLinearSolver *>(Problem_pt->linear_solver_pt());
+    BlockHopfLinearSolver* block_hopf_solver_pt =
+      dynamic_cast<BlockHopfLinearSolver*>(Problem_pt->linear_solver_pt());
     if (block_hopf_solver_pt)
     {
       // Reset the problem's linear solver
@@ -4605,7 +4604,7 @@ namespace oomph
   //=============================================================
   /// Get the number of elemental degrees of freedom
   //=============================================================
-  unsigned HopfHandler::ndof(GeneralisedElement *const &elem_pt)
+  unsigned HopfHandler::ndof(GeneralisedElement* const& elem_pt)
   {
     unsigned raw_ndof = elem_pt->ndof();
     switch (Solve_which_system)
@@ -4633,8 +4632,8 @@ namespace oomph
   //=============================================================
   /// Get the global equation number of the local unknown
   //============================================================
-  unsigned long HopfHandler::eqn_number(GeneralisedElement *const &elem_pt,
-                                        const unsigned &ieqn_local)
+  unsigned long HopfHandler::eqn_number(GeneralisedElement* const& elem_pt,
+                                        const unsigned& ieqn_local)
   {
     // Get the raw value
     unsigned raw_ndof = elem_pt->ndof();
@@ -4665,8 +4664,8 @@ namespace oomph
   //==================================================================
   /// Get the residuals
   //=================================================================
-  void HopfHandler::get_residuals(GeneralisedElement *const &elem_pt,
-                                  Vector<double> &residuals)
+  void HopfHandler::get_residuals(GeneralisedElement* const& elem_pt,
+                                  Vector<double>& residuals)
   {
     // Should only call get residuals for the full system
     if (Solve_which_system == 0)
@@ -4721,9 +4720,9 @@ namespace oomph
   /// \short Calculate the elemental Jacobian matrix "d equation
   /// / d variable".
   //==================================================================
-  void HopfHandler::get_jacobian(GeneralisedElement *const &elem_pt,
-                                 Vector<double> &residuals,
-                                 DenseMatrix<double> &jacobian)
+  void HopfHandler::get_jacobian(GeneralisedElement* const& elem_pt,
+                                 Vector<double>& residuals,
+                                 DenseMatrix<double>& jacobian)
   {
     // The standard case
     if (Solve_which_system == 0)
@@ -4767,7 +4766,7 @@ namespace oomph
       {
         // Just do the x's
         unsigned long global_eqn = eqn_number(elem_pt, n);
-        double *unknown_pt = Problem_pt->Dof_pt[global_eqn];
+        double* unknown_pt = Problem_pt->Dof_pt[global_eqn];
         double init = *unknown_pt;
         *unknown_pt += FD_step;
 
@@ -4795,7 +4794,7 @@ namespace oomph
 
       {
         // Now do the global parameter
-        double *unknown_pt = Problem_pt->Dof_pt[3 * Ndof];
+        double* unknown_pt = Problem_pt->Dof_pt[3 * Ndof];
         double init = *unknown_pt;
         *unknown_pt += FD_step;
 
@@ -4876,9 +4875,9 @@ namespace oomph
   /// a parameter
   //=================================================================
   void HopfHandler::get_dresiduals_dparameter(
-    GeneralisedElement *const &elem_pt,
-    double *const &parameter_pt,
-    Vector<double> &dres_dparam)
+    GeneralisedElement* const& elem_pt,
+    double* const& parameter_pt,
+    Vector<double>& dres_dparam)
   {
     // Should only call get residuals for the full system
     if (Solve_which_system == 0)
@@ -4928,10 +4927,10 @@ namespace oomph
   /// with respect to a parameter so that it breaks because it should not
   /// be required
   //========================================================================
-  void HopfHandler::get_djacobian_dparameter(GeneralisedElement *const &elem_pt,
-                                             double *const &parameter_pt,
-                                             Vector<double> &dres_dparam,
-                                             DenseMatrix<double> &djac_dparam)
+  void HopfHandler::get_djacobian_dparameter(GeneralisedElement* const& elem_pt,
+                                             double* const& parameter_pt,
+                                             Vector<double>& dres_dparam,
+                                             DenseMatrix<double>& djac_dparam)
   {
     std::ostringstream error_stream;
     error_stream
@@ -4949,10 +4948,10 @@ namespace oomph
   /// it breaks because it should not be required
   //========================================================================
   void HopfHandler::get_hessian_vector_products(
-    GeneralisedElement *const &elem_pt,
-    Vector<double> const &Y,
-    DenseMatrix<double> const &C,
-    DenseMatrix<double> &product)
+    GeneralisedElement* const& elem_pt,
+    Vector<double> const& Y,
+    DenseMatrix<double> const& C,
+    DenseMatrix<double>& product)
   {
     std::ostringstream error_stream;
     error_stream
@@ -4969,7 +4968,7 @@ namespace oomph
   /// Return the eigenfunction(s) associated with the bifurcation that
   /// has been detected in bifurcation tracking problems
   //==========================================================================
-  void HopfHandler::get_eigenfunction(Vector<DoubleVector> &eigenfunction)
+  void HopfHandler::get_eigenfunction(Vector<DoubleVector>& eigenfunction)
   {
     // There is a real and imaginary part of the null vector
     eigenfunction.resize(2);

@@ -61,24 +61,24 @@ namespace oomph
   public:
     /// \short Function pointer to source function fct(x,f(x)) --
     /// x is a Vector!
-    typedef void (*PoissonSourceFctPt)(const Vector<double> &x, double &f);
+    typedef void (*PoissonSourceFctPt)(const Vector<double>& x, double& f);
 
     /// \short Function pointer to gradient of source function  fct(x,g(x)) --
     /// x is a Vector!
-    typedef void (*PoissonSourceFctGradientPt)(const Vector<double> &x,
-                                               Vector<double> &gradient);
+    typedef void (*PoissonSourceFctGradientPt)(const Vector<double>& x,
+                                               Vector<double>& gradient);
 
     /// Constructor (must initialise the Source_fct_pt to null)
     PoissonEquations() : Source_fct_pt(0), Source_fct_gradient_pt(0) {}
 
     /// Broken copy constructor
-    PoissonEquations(const PoissonEquations &dummy)
+    PoissonEquations(const PoissonEquations& dummy)
     {
       BrokenCopy::broken_copy("PoissonEquations");
     }
 
     /// Broken assignment operator
-    void operator=(const PoissonEquations &)
+    void operator=(const PoissonEquations&)
     {
       BrokenCopy::broken_assign("PoissonEquations");
     }
@@ -97,7 +97,7 @@ namespace oomph
 
     /// \short Output solution in data vector at local cordinates s:
     /// x,y [,z], u
-    void point_output_data(const Vector<double> &s, Vector<double> &data)
+    void point_output_data(const Vector<double>& s, Vector<double>& data)
     {
       // Dimension
       unsigned dim = s.size();
@@ -122,9 +122,9 @@ namespace oomph
 
     /// \short Write values of the i-th scalar field at the plot points. Needs
     /// to be implemented for each new specific element type.
-    void scalar_value_paraview(std::ofstream &file_out,
-                               const unsigned &i,
-                               const unsigned &nplot) const
+    void scalar_value_paraview(std::ofstream& file_out,
+                               const unsigned& i,
+                               const unsigned& nplot) const
     {
 #ifdef PARANOID
       if (i != 0)
@@ -152,7 +152,7 @@ namespace oomph
     /// \short Name of the i-th scalar field. Default implementation
     /// returns V1 for the first one, V2 for the second etc. Can (should!) be
     /// overloaded with more meaningful names in specific elements.
-    std::string scalar_name_paraview(const unsigned &i) const
+    std::string scalar_name_paraview(const unsigned& i) const
     {
 #ifdef PARANOID
       if (i != 0)
@@ -172,9 +172,9 @@ namespace oomph
     /// \short Write values of the i-th scalar field at the plot points. Needs
     /// to be implemented for each new specific element type.
     void scalar_value_fct_paraview(
-      std::ofstream &file_out,
-      const unsigned &i,
-      const unsigned &nplot,
+      std::ofstream& file_out,
+      const unsigned& i,
+      const unsigned& nplot,
       FiniteElement::SteadyExactSolutionFctPt exact_soln_pt) const
     {
 #ifdef PARANOID
@@ -216,7 +216,7 @@ namespace oomph
     }
 
     /// Output with default number of plot points
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       const unsigned n_plot = 5;
       output(outfile, n_plot);
@@ -224,10 +224,10 @@ namespace oomph
 
     /// \short Output FE representation of soln: x,y,u or x,y,z,u at
     /// n_plot^DIM plot points
-    void output(std::ostream &outfile, const unsigned &n_plot);
+    void output(std::ostream& outfile, const unsigned& n_plot);
 
     /// C_style output with default number of plot points
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       const unsigned n_plot = 5;
       output(file_pt, n_plot);
@@ -235,21 +235,21 @@ namespace oomph
 
     /// \short C-style output FE representation of soln: x,y,u or x,y,z,u at
     /// n_plot^DIM plot points
-    void output(FILE *file_pt, const unsigned &n_plot);
+    void output(FILE* file_pt, const unsigned& n_plot);
 
     /// Output exact soln: x,y,u_exact or x,y,z,u_exact at n_plot^DIM plot
     /// points
-    void output_fct(std::ostream &outfile,
-                    const unsigned &n_plot,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& n_plot,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
 
     /// \short Output exact soln: x,y,u_exact or x,y,z,u_exact at
     /// n_plot^DIM plot points (dummy time-dependent version to
     /// keep intel compiler happy)
     virtual void output_fct(
-      std::ostream &outfile,
-      const unsigned &n_plot,
-      const double &time,
+      std::ostream& outfile,
+      const unsigned& n_plot,
+      const double& time,
       FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
     {
       throw OomphLibError(
@@ -259,20 +259,20 @@ namespace oomph
     }
 
     /// \short Compute norm of solution: square of the L2 norm
-    void compute_norm(double &norm);
+    void compute_norm(double& norm);
 
     /// Get error against and norm of exact solution
-    void compute_error(std::ostream &outfile,
+    void compute_error(std::ostream& outfile,
                        FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-                       double &error,
-                       double &norm);
+                       double& error,
+                       double& norm);
 
     /// Dummy, time dependent error checker
-    void compute_error(std::ostream &outfile,
+    void compute_error(std::ostream& outfile,
                        FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
-                       const double &time,
-                       double &error,
-                       double &norm)
+                       const double& time,
+                       double& error,
+                       double& norm)
     {
       throw OomphLibError(
         "There is no time-dependent compute_error() for Poisson elements",
@@ -281,7 +281,7 @@ namespace oomph
     }
 
     /// Access function: Pointer to source function
-    PoissonSourceFctPt &source_fct_pt()
+    PoissonSourceFctPt& source_fct_pt()
     {
       return Source_fct_pt;
     }
@@ -293,7 +293,7 @@ namespace oomph
     }
 
     /// Access function: Pointer to gradient of source function
-    PoissonSourceFctGradientPt &source_fct_gradient_pt()
+    PoissonSourceFctGradientPt& source_fct_gradient_pt()
     {
       return Source_fct_gradient_pt;
     }
@@ -308,9 +308,9 @@ namespace oomph
     /// virtual to allow overloading in multi-physics problems where
     /// the strength of the source function might be determined by
     /// another system of equations.
-    inline virtual void get_source_poisson(const unsigned &ipt,
-                                           const Vector<double> &x,
-                                           double &source) const
+    inline virtual void get_source_poisson(const unsigned& ipt,
+                                           const Vector<double>& x,
+                                           double& source) const
     {
       // If no source function has been set, return zero
       if (Source_fct_pt == 0)
@@ -330,9 +330,9 @@ namespace oomph
     /// another system of equations. Computed via function pointer
     /// (if set) or by finite differencing (default)
     inline virtual void get_source_gradient_poisson(
-      const unsigned &ipt,
-      const Vector<double> &x,
-      Vector<double> &gradient) const
+      const unsigned& ipt,
+      const Vector<double>& x,
+      Vector<double>& gradient) const
     {
       // If no gradient function has been set, FD it
       if (Source_fct_gradient_pt == 0)
@@ -361,7 +361,7 @@ namespace oomph
     }
 
     /// Get flux: flux[i] = du/dx_i
-    void get_flux(const Vector<double> &s, Vector<double> &flux) const
+    void get_flux(const Vector<double>& s, Vector<double>& flux) const
     {
       // Find out how many nodes there are in the element
       const unsigned n_node = nnode();
@@ -395,8 +395,8 @@ namespace oomph
 
     /// Get derivative of flux w.r.t. to nodal values:
     /// dflux_dnodal_u[i][j] = d ( du/dx_i ) / dU_j
-    void get_dflux_dnodal_u(const Vector<double> &s,
-                            Vector<Vector<double>> &dflux_dnodal_u) const
+    void get_dflux_dnodal_u(const Vector<double>& s,
+                            Vector<Vector<double>>& dflux_dnodal_u) const
     {
       // Find out how many nodes there are in the element
       const unsigned n_node = nnode();
@@ -419,7 +419,7 @@ namespace oomph
     }
 
     /// Add the element's contribution to its residual vector (wrapper)
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Call the generic residuals function with flag set to 0
       // using a dummy matrix argument
@@ -429,8 +429,8 @@ namespace oomph
 
     /// Add the element's contribution to its residual vector and
     /// element Jacobian matrix (wrapper)
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       // Call the generic routine with the flag set to 1
       fill_in_generic_residual_contribution_poisson(residuals, jacobian, 1);
@@ -438,7 +438,7 @@ namespace oomph
 
     /// \short Return FE representation of function value u_poisson(s)
     /// at local coordinate s
-    virtual inline double interpolated_u_poisson(const Vector<double> &s) const
+    virtual inline double interpolated_u_poisson(const Vector<double>& s) const
     {
       // Find number of nodes
       const unsigned n_node = nnode();
@@ -469,7 +469,7 @@ namespace oomph
     /// FiniteElement base class.
     /// dresidual_dnodal_coordinates(l,i,j) = d res(l) / dX_{ij}
     virtual void get_dresidual_dnodal_coordinates(
-      RankThreeTensor<double> &dresidual_dnodal_coordinates);
+      RankThreeTensor<double>& dresidual_dnodal_coordinates);
 
     /// \short Self-test: Return 0 for OK
     unsigned self_test();
@@ -477,40 +477,40 @@ namespace oomph
   protected:
     /// \short Shape/test functions and derivs w.r.t. to global coords at
     /// local coord. s; return  Jacobian of mapping
-    virtual double dshape_and_dtest_eulerian_poisson(const Vector<double> &s,
-                                                     Shape &psi,
-                                                     DShape &dpsidx,
-                                                     Shape &test,
-                                                     DShape &dtestdx) const = 0;
+    virtual double dshape_and_dtest_eulerian_poisson(const Vector<double>& s,
+                                                     Shape& psi,
+                                                     DShape& dpsidx,
+                                                     Shape& test,
+                                                     DShape& dtestdx) const = 0;
 
     /// \short Shape/test functions and derivs w.r.t. to global coords at
     /// integration point ipt; return  Jacobian of mapping
     virtual double dshape_and_dtest_eulerian_at_knot_poisson(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidx,
-      Shape &test,
-      DShape &dtestdx) const = 0;
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const = 0;
 
     /// \short Shape/test functions and derivs w.r.t. to global coords at
     /// integration point ipt; return Jacobian of mapping (J). Also compute
     /// derivatives of dpsidx, dtestdx and J w.r.t. nodal coordinates.
     virtual double dshape_and_dtest_eulerian_at_knot_poisson(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidx,
-      RankFourTensor<double> &d_dpsidx_dX,
-      Shape &test,
-      DShape &dtestdx,
-      RankFourTensor<double> &d_dtestdx_dX,
-      DenseMatrix<double> &djacobian_dX) const = 0;
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      RankFourTensor<double>& d_dpsidx_dX,
+      Shape& test,
+      DShape& dtestdx,
+      RankFourTensor<double>& d_dtestdx_dX,
+      DenseMatrix<double>& djacobian_dX) const = 0;
 
     /// \short Compute element residual Vector only (if flag=and/or element
     /// Jacobian matrix
     virtual void fill_in_generic_residual_contribution_poisson(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      const unsigned &flag);
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag);
 
     /// Pointer to source function:
     PoissonSourceFctPt Source_fct_pt;
@@ -543,56 +543,56 @@ namespace oomph
     QPoissonElement() : QElement<DIM, NNODE_1D>(), PoissonEquations<DIM>() {}
 
     /// Broken copy constructor
-    QPoissonElement(const QPoissonElement<DIM, NNODE_1D> &dummy)
+    QPoissonElement(const QPoissonElement<DIM, NNODE_1D>& dummy)
     {
       BrokenCopy::broken_copy("QPoissonElement");
     }
 
     /// Broken assignment operator
-    void operator=(const QPoissonElement<DIM, NNODE_1D> &)
+    void operator=(const QPoissonElement<DIM, NNODE_1D>&)
     {
       BrokenCopy::broken_assign("QPoissonElement");
     }
 
     /// \short  Required  # of `values' (pinned or dofs)
     /// at node n
-    inline unsigned required_nvalue(const unsigned &n) const
+    inline unsigned required_nvalue(const unsigned& n) const
     {
       return Initial_Nvalue;
     }
 
     /// \short Output function:
     ///  x,y,u   or    x,y,z,u
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       PoissonEquations<DIM>::output(outfile);
     }
 
     ///  \short Output function:
     ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       PoissonEquations<DIM>::output(outfile, n_plot);
     }
 
     /// \short C-style output function:
     ///  x,y,u   or    x,y,z,u
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       PoissonEquations<DIM>::output(file_pt);
     }
 
     ///  \short C-style output function:
     ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       PoissonEquations<DIM>::output(file_pt, n_plot);
     }
 
     /// \short Output function for an exact solution:
     ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
-    void output_fct(std::ostream &outfile,
-                    const unsigned &n_plot,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& n_plot,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
     {
       PoissonEquations<DIM>::output_fct(outfile, n_plot, exact_soln_pt);
@@ -601,9 +601,9 @@ namespace oomph
     /// \short Output function for a time-dependent exact solution.
     ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
     /// (Calls the steady version)
-    void output_fct(std::ostream &outfile,
-                    const unsigned &n_plot,
-                    const double &time,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& n_plot,
+                    const double& time,
                     FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
     {
       PoissonEquations<DIM>::output_fct(outfile, n_plot, time, exact_soln_pt);
@@ -612,33 +612,33 @@ namespace oomph
   protected:
     /// Shape, test functions & derivs. w.r.t. to global coords. Return
     /// Jacobian.
-    inline double dshape_and_dtest_eulerian_poisson(const Vector<double> &s,
-                                                    Shape &psi,
-                                                    DShape &dpsidx,
-                                                    Shape &test,
-                                                    DShape &dtestdx) const;
+    inline double dshape_and_dtest_eulerian_poisson(const Vector<double>& s,
+                                                    Shape& psi,
+                                                    DShape& dpsidx,
+                                                    Shape& test,
+                                                    DShape& dtestdx) const;
 
     /// \short Shape, test functions & derivs. w.r.t. to global coords. at
     /// integration point ipt. Return Jacobian.
     inline double dshape_and_dtest_eulerian_at_knot_poisson(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidx,
-      Shape &test,
-      DShape &dtestdx) const;
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const;
 
     /// \short Shape/test functions and derivs w.r.t. to global coords at
     /// integration point ipt; return Jacobian of mapping (J). Also compute
     /// derivatives of dpsidx, dtestdx and J w.r.t. nodal coordinates.
     inline double dshape_and_dtest_eulerian_at_knot_poisson(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidx,
-      RankFourTensor<double> &d_dpsidx_dX,
-      Shape &test,
-      DShape &dtestdx,
-      RankFourTensor<double> &d_dtestdx_dX,
-      DenseMatrix<double> &djacobian_dX) const;
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      RankFourTensor<double>& d_dpsidx_dX,
+      Shape& test,
+      DShape& dtestdx,
+      RankFourTensor<double>& d_dtestdx_dX,
+      DenseMatrix<double>& djacobian_dX) const;
   };
 
   // Inline functions:
@@ -651,11 +651,11 @@ namespace oomph
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
   double QPoissonElement<DIM, NNODE_1D>::dshape_and_dtest_eulerian_poisson(
-    const Vector<double> &s,
-    Shape &psi,
-    DShape &dpsidx,
-    Shape &test,
-    DShape &dtestdx) const
+    const Vector<double>& s,
+    Shape& psi,
+    DShape& dpsidx,
+    Shape& test,
+    DShape& dtestdx) const
   {
     // Call the geometrical shape functions and derivatives
     const double J = this->dshape_eulerian(s, psi, dpsidx);
@@ -676,11 +676,11 @@ namespace oomph
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
   double QPoissonElement<DIM, NNODE_1D>::
-    dshape_and_dtest_eulerian_at_knot_poisson(const unsigned &ipt,
-                                              Shape &psi,
-                                              DShape &dpsidx,
-                                              Shape &test,
-                                              DShape &dtestdx) const
+    dshape_and_dtest_eulerian_at_knot_poisson(const unsigned& ipt,
+                                              Shape& psi,
+                                              DShape& dpsidx,
+                                              Shape& test,
+                                              DShape& dtestdx) const
   {
     // Call the geometrical shape functions and derivatives
     const double J = this->dshape_eulerian_at_knot(ipt, psi, dpsidx);
@@ -704,14 +704,14 @@ namespace oomph
   template<unsigned DIM, unsigned NNODE_1D>
   double QPoissonElement<DIM, NNODE_1D>::
     dshape_and_dtest_eulerian_at_knot_poisson(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidx,
-      RankFourTensor<double> &d_dpsidx_dX,
-      Shape &test,
-      DShape &dtestdx,
-      RankFourTensor<double> &d_dtestdx_dX,
-      DenseMatrix<double> &djacobian_dX) const
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      RankFourTensor<double>& d_dpsidx_dX,
+      Shape& test,
+      DShape& dtestdx,
+      RankFourTensor<double>& d_dtestdx_dX,
+      DenseMatrix<double>& djacobian_dX) const
   {
     // Call the geometrical shape functions and derivatives
     const double J = this->dshape_eulerian_at_knot(
@@ -777,8 +777,7 @@ namespace oomph
     /// \short Specify the values associated with field fld.
     /// The information is returned in a vector of pairs which comprise
     /// the Data object and the value within it, that correspond to field fld.
-    Vector<std::pair<Data *, unsigned>> data_values_of_field(
-      const unsigned &fld)
+    Vector<std::pair<Data*, unsigned>> data_values_of_field(const unsigned& fld)
     {
 #ifdef PARANOID
       if (fld != 0)
@@ -794,7 +793,7 @@ namespace oomph
 
       // Create the vector
       unsigned nnod = this->nnode();
-      Vector<std::pair<Data *, unsigned>> data_values(nnod);
+      Vector<std::pair<Data*, unsigned>> data_values(nnod);
 
       // Loop over all nodes
       for (unsigned j = 0; j < nnod; j++)
@@ -815,7 +814,7 @@ namespace oomph
 
     /// \short Number of history values to be stored for fld-th field
     /// (includes current value!)
-    unsigned nhistory_values_for_projection(const unsigned &fld)
+    unsigned nhistory_values_for_projection(const unsigned& fld)
     {
 #ifdef PARANOID
       if (fld != 0)
@@ -840,9 +839,9 @@ namespace oomph
 
     /// \short Return Jacobian of mapping and shape functions of field fld
     /// at local coordinate s
-    double jacobian_and_shape_of_field(const unsigned &fld,
-                                       const Vector<double> &s,
-                                       Shape &psi)
+    double jacobian_and_shape_of_field(const unsigned& fld,
+                                       const Vector<double>& s,
+                                       Shape& psi)
     {
 #ifdef PARANOID
       if (fld != 0)
@@ -866,9 +865,9 @@ namespace oomph
 
     /// \short Return interpolated field fld at local coordinate s, at time
     /// level t (t=0: present; t>0: history values)
-    double get_field(const unsigned &t,
-                     const unsigned &fld,
-                     const Vector<double> &s)
+    double get_field(const unsigned& t,
+                     const unsigned& fld,
+                     const Vector<double>& s)
     {
 #ifdef PARANOID
       if (fld != 0)
@@ -903,7 +902,7 @@ namespace oomph
     }
 
     /// Return number of values in field fld: One per node
-    unsigned nvalue_of_field(const unsigned &fld)
+    unsigned nvalue_of_field(const unsigned& fld)
     {
 #ifdef PARANOID
       if (fld != 0)
@@ -920,7 +919,7 @@ namespace oomph
     }
 
     /// Return local equation number of value j in field fld.
-    int local_equation(const unsigned &fld, const unsigned &j)
+    int local_equation(const unsigned& fld, const unsigned& j)
     {
 #ifdef PARANOID
       if (fld != 0)

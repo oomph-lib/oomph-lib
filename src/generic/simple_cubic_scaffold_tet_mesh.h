@@ -42,13 +42,13 @@ namespace oomph
   public:
     /// Constructor: Pass number of elements and dimensions of cube
     SimpleCubicScaffoldTetMesh(
-      const unsigned &n_x,
-      const unsigned &n_y,
-      const unsigned &n_z,
-      const double &l_x,
-      const double &l_y,
-      const double &l_z,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper);
+      const unsigned& n_x,
+      const unsigned& n_y,
+      const unsigned& n_z,
+      const double& l_x,
+      const double& l_y,
+      const double& l_z,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
   };
 
 } // namespace oomph

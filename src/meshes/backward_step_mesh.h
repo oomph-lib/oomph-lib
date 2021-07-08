@@ -56,13 +56,13 @@ namespace oomph
     /// (reversed) backward step geometry. Timestepper defaults
     /// to Steady.
     BackwardStepQuadMesh(
-      const unsigned &nx,
-      const unsigned &ny,
-      const unsigned &nx_cut_out,
-      const unsigned &ny_cut_out,
-      const double &lx,
-      const double &ly,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      const unsigned& nx,
+      const unsigned& ny,
+      const unsigned& nx_cut_out,
+      const unsigned& ny_cut_out,
+      const double& lx,
+      const double& ly,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       RectangularQuadMesh<ELEMENT>(nx, ny, lx, ly, time_stepper_pt)
     {
       // Do the actual build
@@ -74,12 +74,12 @@ namespace oomph
 
   private:
     /// Actual build function
-    void build_mesh(const unsigned &nx,
-                    const unsigned &ny,
-                    const unsigned &nx_cut_out,
-                    const unsigned &ny_cut_out,
-                    const double &lx,
-                    const double &ly);
+    void build_mesh(const unsigned& nx,
+                    const unsigned& ny,
+                    const unsigned& nx_cut_out,
+                    const unsigned& ny_cut_out,
+                    const double& lx,
+                    const double& ly);
 
   }; // end of mesh
 
@@ -103,13 +103,13 @@ namespace oomph
     /// (reversed) backward step geometry. Timestepper defaults
     /// to Steady.
     RefineableBackwardStepQuadMesh(
-      const unsigned &nx,
-      const unsigned &ny,
-      const unsigned &nx_cut_out,
-      const unsigned &ny_cut_out,
-      const double &lx,
-      const double &ly,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      const unsigned& nx,
+      const unsigned& ny,
+      const unsigned& nx_cut_out,
+      const unsigned& ny_cut_out,
+      const double& lx,
+      const double& ly,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       RectangularQuadMesh<ELEMENT>(nx, ny, lx, ly, time_stepper_pt),
       BackwardStepQuadMesh<ELEMENT>(
         nx, ny, nx_cut_out, ny_cut_out, lx, ly, time_stepper_pt)

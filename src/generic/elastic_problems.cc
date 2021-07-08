@@ -56,7 +56,7 @@ namespace oomph
     for (unsigned n = 0; n < n_node; n++)
     {
       // Cast to an elastic node
-      SolidNode *node_pt = dynamic_cast<SolidNode *>(mesh_pt()->node_pt(n));
+      SolidNode* node_pt = dynamic_cast<SolidNode*>(mesh_pt()->node_pt(n));
 
 #ifdef PARANOID
       if (node_pt == 0)
@@ -71,8 +71,8 @@ namespace oomph
       unsigned ndim = node_pt->ndim();
 
       // Find out how many positional dofs there are
-      SolidFiniteElement *elem_pt =
-        dynamic_cast<SolidFiniteElement *>(mesh_pt()->element_pt(0));
+      SolidFiniteElement* elem_pt =
+        dynamic_cast<SolidFiniteElement*>(mesh_pt()->element_pt(0));
 
 #ifdef PARANOID
       if (elem_pt == 0)
@@ -110,8 +110,8 @@ namespace oomph
     for (unsigned i = 0; i < Nelement; i++)
     {
       // Cast to proper element type
-      SolidFiniteElement *elem_pt =
-        dynamic_cast<SolidFiniteElement *>(mesh_pt()->element_pt(i));
+      SolidFiniteElement* elem_pt =
+        dynamic_cast<SolidFiniteElement*>(mesh_pt()->element_pt(i));
 
 #ifdef PARANOID
       if (elem_pt == 0)
@@ -129,7 +129,7 @@ namespace oomph
       elem_pt->flush_external_data();
 
       // IF it's an FSI wall element then kill external stuff
-      if (FSIWallElement *fsi_elem_pt = dynamic_cast<FSIWallElement *>(elem_pt))
+      if (FSIWallElement* fsi_elem_pt = dynamic_cast<FSIWallElement*>(elem_pt))
       {
         fsi_elem_pt->exclude_external_load_data();
       }
@@ -140,7 +140,7 @@ namespace oomph
       // Loop over internal data
       for (unsigned j = 0; j < nint; j++)
       {
-        Data *data_pt = elem_pt->internal_data_pt(j);
+        Data* data_pt = elem_pt->internal_data_pt(j);
 
         // Loop over internal values
         unsigned nval = data_pt->nvalue();
@@ -203,7 +203,7 @@ namespace oomph
     for (unsigned n = 0; n < n_node; n++)
     {
       // Cast to an elastic node
-      SolidNode *node_pt = dynamic_cast<SolidNode *>(mesh_pt()->node_pt(n));
+      SolidNode* node_pt = dynamic_cast<SolidNode*>(mesh_pt()->node_pt(n));
 
 #ifdef PARANOID
       if (node_pt == 0)
@@ -218,8 +218,8 @@ namespace oomph
       unsigned ndim = node_pt->ndim();
 
       // Find out how many positional dofs there are
-      SolidFiniteElement *elem_pt =
-        dynamic_cast<SolidFiniteElement *>(mesh_pt()->element_pt(0));
+      SolidFiniteElement* elem_pt =
+        dynamic_cast<SolidFiniteElement*>(mesh_pt()->element_pt(0));
 
 #ifdef PARANOID
       if (elem_pt == 0)
@@ -258,8 +258,8 @@ namespace oomph
     for (unsigned i = 0; i < Nelement; i++)
     {
       // Cast to proper element type
-      SolidFiniteElement *elem_pt =
-        dynamic_cast<SolidFiniteElement *>(mesh_pt()->element_pt(i));
+      SolidFiniteElement* elem_pt =
+        dynamic_cast<SolidFiniteElement*>(mesh_pt()->element_pt(i));
 
 #ifdef PARANOID
       if (elem_pt == 0)
@@ -277,7 +277,7 @@ namespace oomph
       // Loop over external data
       for (unsigned j = 0; j < next; j++)
       {
-        Data *data_pt = elem_pt->external_data_pt(j);
+        Data* data_pt = elem_pt->external_data_pt(j);
 
         // Backup the pointer to external data
         Backup_ext_data[i][j] = data_pt;
@@ -289,7 +289,7 @@ namespace oomph
       // Loop over internal data
       for (unsigned j = 0; j < nint; j++)
       {
-        Data *data_pt = elem_pt->internal_data_pt(j);
+        Data* data_pt = elem_pt->internal_data_pt(j);
 
         // Loop over internal values
         unsigned nval = data_pt->nvalue();
@@ -348,7 +348,7 @@ namespace oomph
     for (unsigned n = 0; n < n_node; n++)
     {
       // Cast to an elastic node
-      SolidNode *node_pt = dynamic_cast<SolidNode *>(mesh_pt()->node_pt(n));
+      SolidNode* node_pt = dynamic_cast<SolidNode*>(mesh_pt()->node_pt(n));
 
 #ifdef PARANOID
       if (node_pt == 0)
@@ -363,8 +363,8 @@ namespace oomph
       unsigned ndim = node_pt->ndim();
 
       // Find out how many positional dofs there are
-      SolidFiniteElement *elem_pt =
-        dynamic_cast<SolidFiniteElement *>(mesh_pt()->element_pt(0));
+      SolidFiniteElement* elem_pt =
+        dynamic_cast<SolidFiniteElement*>(mesh_pt()->element_pt(0));
 
 #ifdef PARANOID
       if (elem_pt == 0)
@@ -409,8 +409,8 @@ namespace oomph
     for (unsigned i = 0; i < Nelement; i++)
     {
       // Cast to proper element type
-      SolidFiniteElement *elem_pt =
-        dynamic_cast<SolidFiniteElement *>(mesh_pt()->element_pt(i));
+      SolidFiniteElement* elem_pt =
+        dynamic_cast<SolidFiniteElement*>(mesh_pt()->element_pt(i));
 
 #ifdef PARANOID
       if (elem_pt == 0)
@@ -422,14 +422,14 @@ namespace oomph
 #endif
 
       // Switch back to normal Jacobian
-      dynamic_cast<SolidFiniteElement *>(elem_pt)
+      dynamic_cast<SolidFiniteElement*>(elem_pt)
         ->disable_solve_for_consistent_newmark_accel();
 
       // Switch off flag for setting initial condition
-      dynamic_cast<SolidFiniteElement *>(elem_pt)->solid_ic_pt() = 0;
+      dynamic_cast<SolidFiniteElement*>(elem_pt)->solid_ic_pt() = 0;
 
       // IF it's an FSI wall element then turn on external stuff again
-      if (FSIWallElement *fsi_elem_pt = dynamic_cast<FSIWallElement *>(elem_pt))
+      if (FSIWallElement* fsi_elem_pt = dynamic_cast<FSIWallElement*>(elem_pt))
       {
         fsi_elem_pt->include_external_load_data();
       }
@@ -441,7 +441,7 @@ namespace oomph
       for (unsigned j = 0; j < next; j++)
       {
         // Backed up external data
-        Data *data_pt = Backup_ext_data[i][j];
+        Data* data_pt = Backup_ext_data[i][j];
 
         // Add external data
         elem_pt->add_external_data(data_pt);
@@ -453,7 +453,7 @@ namespace oomph
       // Loop over internal data
       for (unsigned j = 0; j < nint; j++)
       {
-        Data *data_pt = elem_pt->internal_data_pt(j);
+        Data* data_pt = elem_pt->internal_data_pt(j);
 
         // Loop over internal values
         unsigned nval = data_pt->nvalue();
@@ -513,10 +513,10 @@ namespace oomph
   /// described by the IC object at given time.
   //======================================================================
   void SolidICProblem::set_static_initial_condition(
-    Problem *problem_pt,
-    Mesh *wall_mesh_pt,
-    SolidInitialCondition *ic_pt,
-    const double &time)
+    Problem* problem_pt,
+    Mesh* wall_mesh_pt,
+    SolidInitialCondition* ic_pt,
+    const double& time)
   {
     // Tell this sub-problem it is distributed if the main problem is
     // distributed
@@ -535,7 +535,7 @@ namespace oomph
 
     // Set value of time for IC object (needs to be backed up and
     // restored since it might be pointed to by other objects)
-    TimeStepper *timestepper_pt = ic_pt->geom_object_pt()->time_stepper_pt();
+    TimeStepper* timestepper_pt = ic_pt->geom_object_pt()->time_stepper_pt();
     if (timestepper_pt != 0)
     {
       backup_time = timestepper_pt->time_pt()->time();

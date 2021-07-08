@@ -68,7 +68,7 @@ namespace oomph
 
     /// \short Function adds to the external data the Data object whose
     /// single value is the pressure applied by the element
-    void add_pressure_data(Data *pressure_data_pt)
+    void add_pressure_data(Data* pressure_data_pt)
     {
       Pressure_data_id = add_external_data(pressure_data_pt);
     }
@@ -76,7 +76,7 @@ namespace oomph
   protected:
     /// \short Access function gives id of external Data object whose
     /// single value is the pressure applied by the element
-    unsigned &pressure_data_id()
+    unsigned& pressure_data_id()
     {
       return Pressure_data_id;
     }
@@ -108,8 +108,8 @@ namespace oomph
     /// TemplateFreeNavierStokesFluxControlElementBase elements
     /// that impose the pressure to control the flux, plus a pointer to
     /// the double which contains the desired flux value
-    NetFluxControlElement(Mesh *flux_control_mesh_pt,
-                          double *prescribed_flux_value_pt) :
+    NetFluxControlElement(Mesh* flux_control_mesh_pt,
+                          double* prescribed_flux_value_pt) :
       Flux_control_mesh_pt(flux_control_mesh_pt),
       Prescribed_flux_value_pt(prescribed_flux_value_pt)
     {
@@ -129,12 +129,12 @@ namespace oomph
       for (unsigned e = 0; e < n_el; e++)
       {
         // Get pointer to the element
-        GeneralisedElement *el_pt = Flux_control_mesh_pt->element_pt(e);
+        GeneralisedElement* el_pt = Flux_control_mesh_pt->element_pt(e);
 
         // Perform cast to TemplateFreeNavierStokesFluxControlElementBase
         // pointer
-        TemplateFreeNavierStokesFluxControlElementBase *flux_el_pt =
-          dynamic_cast<TemplateFreeNavierStokesFluxControlElementBase *>(el_pt);
+        TemplateFreeNavierStokesFluxControlElementBase* flux_el_pt =
+          dynamic_cast<TemplateFreeNavierStokesFluxControlElementBase*>(el_pt);
 
         flux_el_pt->add_pressure_data(Pressure_data_pt);
       }
@@ -148,7 +148,7 @@ namespace oomph
     ~NetFluxControlElement() {}
 
     /// Broken copy constructor
-    NetFluxControlElement(const NetFluxControlElement &dummy)
+    NetFluxControlElement(const NetFluxControlElement& dummy)
     {
       BrokenCopy::broken_copy("NetFluxControlElement");
     }
@@ -173,14 +173,14 @@ namespace oomph
     /// \short Function to return a pointer to the Data object whose
     /// single value is the pressure applied by the
     /// NavierStokesFluxControlElement elements
-    Data *pressure_data_pt() const
+    Data* pressure_data_pt() const
     {
       return Pressure_data_pt;
     }
 
     /// \short Add the element's contribution to its residual vector:
     /// i.e. the flux constraint.
-    inline void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    inline void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Call the generic routine
       fill_in_generic_residual_contribution_flux_control(residuals);
@@ -190,8 +190,8 @@ namespace oomph
     /// Jacobian as this element's Jacobian contributions are calculated by
     /// the NavierStokesFluxControlElements which impose the traction
     /// used to control the flux.
-    inline void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                                 DenseMatrix<double> &jacobian)
+    inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                                 DenseMatrix<double>& jacobian)
     {
       // Call the generic routine
       fill_in_generic_residual_contribution_flux_control(residuals);
@@ -230,7 +230,7 @@ namespace oomph
     /// particularly, this should not simply be set to the dimension of the
     /// problem if there is further splitting of the velocity DOF types) if this
     /// element is added to a fluid mesh containing Navier-Stokes elements.
-    unsigned &dof_number_for_unknown()
+    unsigned& dof_number_for_unknown()
     {
       return Dof_number_for_unknown;
     }
@@ -246,7 +246,7 @@ namespace oomph
     /// assumed that the user has set the Dof_number_for_unknown variable to
     /// the velocity DOF type using the function dof_number_for_unknown()).
     void get_dof_numbers_for_unknowns(
-      std::list<std::pair<unsigned long, unsigned>> &dof_lookup_list) const
+      std::list<std::pair<unsigned long, unsigned>>& dof_lookup_list) const
     {
 #ifdef PARANOID
       if (Dof_number_for_unknown == UINT_MAX)
@@ -275,7 +275,7 @@ namespace oomph
     ///\short This function returns the residuals for the
     /// flux control master element.
     void fill_in_generic_residual_contribution_flux_control(
-      Vector<double> &residuals)
+      Vector<double>& residuals)
     {
       // Initialise volume flux
       double volume_flux = 0.0;
@@ -285,12 +285,12 @@ namespace oomph
       for (unsigned e = 0; e < n_el; e++)
       {
         // Get a pointer to the element
-        GeneralisedElement *el_pt = Flux_control_mesh_pt->element_pt(e);
+        GeneralisedElement* el_pt = Flux_control_mesh_pt->element_pt(e);
 
         // Cast to NavierStokesFluxControlElement
-        TemplateFreeNavierStokesFluxControlElementBase *flux_control_el_pt = 0;
+        TemplateFreeNavierStokesFluxControlElementBase* flux_control_el_pt = 0;
         flux_control_el_pt =
-          dynamic_cast<TemplateFreeNavierStokesFluxControlElementBase *>(el_pt);
+          dynamic_cast<TemplateFreeNavierStokesFluxControlElementBase*>(el_pt);
 
 #ifdef PARANOID
         if (flux_control_el_pt == 0)
@@ -312,14 +312,14 @@ namespace oomph
   private:
     /// \short Data object whose single value is the pressure
     /// applied by the elements in the Flux_control_mesh_pt
-    Data *Pressure_data_pt;
+    Data* Pressure_data_pt;
 
     /// \short Mesh of elements which impose the pressure which controls
     /// the net flux
-    Mesh *Flux_control_mesh_pt;
+    Mesh* Flux_control_mesh_pt;
 
     /// \short Pointer to the value that stores the prescribed flux
-    double *Prescribed_flux_value_pt;
+    double* Prescribed_flux_value_pt;
 
     /// \short The id number of the "DOF type" to which the degree
     /// of freedom in this element is added to. This should be set to the
@@ -353,9 +353,9 @@ namespace oomph
   public:
     /// Constructor, which takes a "bulk" element and face index
     NavierStokesFluxControlElement(
-      FiniteElement *const &element_pt,
-      const int &face_index,
-      const bool &called_from_refineable_constructor = false) :
+      FiniteElement* const& element_pt,
+      const int& face_index,
+      const bool& called_from_refineable_constructor = false) :
       NavierStokesSurfacePowerElement<ELEMENT>(element_pt, face_index)
     {
 #ifdef PARANOID
@@ -363,12 +363,12 @@ namespace oomph
         // Check that the element is not a refineable 3d element
         if (!called_from_refineable_constructor)
         {
-          ELEMENT *elem_pt = new ELEMENT;
+          ELEMENT* elem_pt = new ELEMENT;
           // If it's three-d
           if (elem_pt->dim() == 3)
           {
             // Is it refineable
-            if (dynamic_cast<RefineableElement *>(elem_pt))
+            if (dynamic_cast<RefineableElement*>(elem_pt))
             {
               // Throw Error
               std::ostringstream error_message;
@@ -394,7 +394,7 @@ namespace oomph
     ~NavierStokesFluxControlElement() {}
 
     /// This function returns just the residuals
-    inline void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    inline void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Call the generic residuals function using a dummy matrix argument
       fill_in_generic_residual_contribution_fluid_traction(
@@ -405,8 +405,8 @@ namespace oomph
     /// including the Jacobian contribution from the flux control
     /// master element with respect to dof in this
     /// element
-    inline void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                                 DenseMatrix<double> &jacobian)
+    inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                                 DenseMatrix<double>& jacobian)
     {
       // Call the generic routine
       fill_in_generic_residual_contribution_fluid_traction(
@@ -425,16 +425,16 @@ namespace oomph
     /// u_local_eqn(n,i) = local equation number or < 0 if pinned.
     /// The default is to asssume that n is the local node number
     /// and the i-th velocity component is the i-th unknown stored at the node.
-    virtual inline int u_local_eqn(const unsigned &n, const unsigned &i)
+    virtual inline int u_local_eqn(const unsigned& n, const unsigned& i)
     {
       return this->nodal_local_eqn(n, i);
     }
 
     ///\short Function to compute the shape and test functions and to return
     /// the Jacobian of mapping
-    inline double shape_and_test_at_knot(const unsigned &ipt,
-                                         Shape &psi,
-                                         Shape &test) const
+    inline double shape_and_test_at_knot(const unsigned& ipt,
+                                         Shape& psi,
+                                         Shape& test) const
     {
       // Find number of nodes
       unsigned n_node = this->nnode();
@@ -454,7 +454,7 @@ namespace oomph
     /// This function also calculates the Jacobian contribution for the
     /// NetFluxControlElement
     void fill_in_generic_residual_contribution_fluid_traction(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag)
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag)
     {
       // Find out how many nodes there are
       unsigned n_node = this->nnode();
@@ -564,8 +564,8 @@ namespace oomph
   {
   public:
     /// Constructor, which takes a "bulk" element and the face index
-    RefineableNavierStokesFluxControlElement(FiniteElement *const &element_pt,
-                                             const int &face_index) :
+    RefineableNavierStokesFluxControlElement(FiniteElement* const& element_pt,
+                                             const int& face_index) :
       NavierStokesSurfacePowerElement<ELEMENT>(element_pt, face_index),
       // we're calling this from the constructor of the refineable version.
       NavierStokesFluxControlElement<ELEMENT>(element_pt, face_index, true)
@@ -579,12 +579,12 @@ namespace oomph
     /// same as those in the bulk element.
     unsigned ncont_interpolated_values() const
     {
-      return dynamic_cast<ELEMENT *>(this->bulk_element_pt())
+      return dynamic_cast<ELEMENT*>(this->bulk_element_pt())
         ->ncont_interpolated_values();
     }
 
     /// This function returns just the residuals
-    inline void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    inline void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Call the generic residuals function using a dummy matrix argument
       refineable_fill_in_generic_residual_contribution_fluid_traction(
@@ -595,8 +595,8 @@ namespace oomph
     /// including the Jacobian contribution from the flux control
     /// master element with respect to dof in this
     /// element
-    inline void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                                 DenseMatrix<double> &jacobian)
+    inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                                 DenseMatrix<double>& jacobian)
     {
       // Call the generic routine
       refineable_fill_in_generic_residual_contribution_fluid_traction(
@@ -609,18 +609,18 @@ namespace oomph
     /// This function also calculates the Jacobian contribution for the
     /// NetFluxControlElement
     void refineable_fill_in_generic_residual_contribution_fluid_traction(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag)
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag)
     {
       // Get the indices at which the velocity components are stored
       unsigned u_nodal_index[this->Dim];
       for (unsigned i = 0; i < this->Dim; i++)
       {
         u_nodal_index[i] =
-          dynamic_cast<ELEMENT *>(this->bulk_element_pt())->u_index_nst(i);
+          dynamic_cast<ELEMENT*>(this->bulk_element_pt())->u_index_nst(i);
       }
 
       // Pointer to hang info object
-      HangInfo *hang_info_pt = 0;
+      HangInfo* hang_info_pt = 0;
 
       // Find out how many nodes there are
       unsigned n_node = this->nnode();

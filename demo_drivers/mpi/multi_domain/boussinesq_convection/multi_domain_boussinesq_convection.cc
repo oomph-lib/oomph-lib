@@ -109,12 +109,12 @@ public:
   }
 
   /// Fix pressure in element e at pressure dof pdof and set to pvalue
-  void fix_pressure(const unsigned &e,
-                    const unsigned &pdof,
-                    const double &pvalue)
+  void fix_pressure(const unsigned& e,
+                    const unsigned& pdof,
+                    const double& pvalue)
   {
     // Cast to specific element and fix pressure
-    dynamic_cast<NST_ELEMENT *>(nst_mesh_pt()->element_pt(e))
+    dynamic_cast<NST_ELEMENT*>(nst_mesh_pt()->element_pt(e))
       ->fix_pressure(pdof, pvalue);
   } // end_of_fix_pressure
 
@@ -122,18 +122,18 @@ public:
   void doc_solution();
 
   /// \short Set the boundary conditions
-  void set_boundary_conditions(const double &time);
+  void set_boundary_conditions(const double& time);
 
   /// \short Access function to the Navier-Stokes mesh
-  RectangularQuadMesh<NST_ELEMENT> *nst_mesh_pt()
+  RectangularQuadMesh<NST_ELEMENT>* nst_mesh_pt()
   {
-    return dynamic_cast<RectangularQuadMesh<NST_ELEMENT> *>(Nst_mesh_pt);
+    return dynamic_cast<RectangularQuadMesh<NST_ELEMENT>*>(Nst_mesh_pt);
   }
 
   /// \short Access function to the Advection-Diffusion mesh
-  RectangularQuadMesh<AD_ELEMENT> *adv_diff_mesh_pt()
+  RectangularQuadMesh<AD_ELEMENT>* adv_diff_mesh_pt()
   {
-    return dynamic_cast<RectangularQuadMesh<AD_ELEMENT> *>(Adv_diff_mesh_pt);
+    return dynamic_cast<RectangularQuadMesh<AD_ELEMENT>*>(Adv_diff_mesh_pt);
   }
 
 private:
@@ -142,10 +142,10 @@ private:
 
 protected:
   /// Mesh of Navier Stokes elements
-  RectangularQuadMesh<NST_ELEMENT> *Nst_mesh_pt;
+  RectangularQuadMesh<NST_ELEMENT>* Nst_mesh_pt;
 
   /// Mesh of advection diffusion elements
-  RectangularQuadMesh<AD_ELEMENT> *Adv_diff_mesh_pt;
+  RectangularQuadMesh<AD_ELEMENT>* Adv_diff_mesh_pt;
 
 }; // end of problem class
 
@@ -261,8 +261,8 @@ ConvectionProblem<NST_ELEMENT, AD_ELEMENT>::ConvectionProblem()
   for (unsigned i = 0; i < n_nst_element; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    NST_ELEMENT *el_pt =
-      dynamic_cast<NST_ELEMENT *>(nst_mesh_pt()->element_pt(i));
+    NST_ELEMENT* el_pt =
+      dynamic_cast<NST_ELEMENT*>(nst_mesh_pt()->element_pt(i));
 
     // Set the Reynolds number (1/Pr in our non-dimensionalisation)
     el_pt->re_pt() = &Global_Physical_Variables::Inverse_Prandtl;
@@ -290,8 +290,8 @@ ConvectionProblem<NST_ELEMENT, AD_ELEMENT>::ConvectionProblem()
   for (unsigned i = 0; i < n_ad_element; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    AD_ELEMENT *el_pt =
-      dynamic_cast<AD_ELEMENT *>(adv_diff_mesh_pt()->element_pt(i));
+    AD_ELEMENT* el_pt =
+      dynamic_cast<AD_ELEMENT*>(adv_diff_mesh_pt()->element_pt(i));
 
     // Set the Peclet number
     el_pt->pe_pt() = &Global_Physical_Variables::Peclet;
@@ -330,7 +330,7 @@ ConvectionProblem<NST_ELEMENT, AD_ELEMENT>::ConvectionProblem()
 //===========================================================
 template<class NST_ELEMENT, class AD_ELEMENT>
 void ConvectionProblem<NST_ELEMENT, AD_ELEMENT>::set_boundary_conditions(
-  const double &time)
+  const double& time)
 {
   // Loop over all the boundaries on the NST mesh
   unsigned num_bound = nst_mesh_pt()->nboundary();
@@ -341,7 +341,7 @@ void ConvectionProblem<NST_ELEMENT, AD_ELEMENT>::set_boundary_conditions(
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Get pointer to node
-      Node *nod_pt = nst_mesh_pt()->boundary_node_pt(ibound, inod);
+      Node* nod_pt = nst_mesh_pt()->boundary_node_pt(ibound, inod);
 
       // Set the number of velocity components
       unsigned vel_max = 2;
@@ -385,7 +385,7 @@ void ConvectionProblem<NST_ELEMENT, AD_ELEMENT>::set_boundary_conditions(
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Get pointer to node
-      Node *nod_pt = adv_diff_mesh_pt()->boundary_node_pt(ibound, inod);
+      Node* nod_pt = adv_diff_mesh_pt()->boundary_node_pt(ibound, inod);
 
       // If we are on the top boundary, set the temperature
       // to -0.5 (cooled)
@@ -445,7 +445,7 @@ void ConvectionProblem<NST_ELEMENT, AD_ELEMENT>::doc_solution()
 //=======start_of_main================================================
 /// Driver code for 2D Boussinesq convection problem
 //====================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
 #ifdef OOMPH_HAS_MPI
   MPI_Helpers::init(argc, argv);

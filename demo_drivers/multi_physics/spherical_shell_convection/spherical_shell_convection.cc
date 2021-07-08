@@ -78,17 +78,17 @@ public:
   ~RefineableSphereConvectionProblem();
 
   /// Fix pressure in element e at pressure dof pdof and set to pvalue
-  void fix_pressure(const unsigned &e,
-                    const unsigned &pdof,
-                    const double &pvalue)
+  void fix_pressure(const unsigned& e,
+                    const unsigned& pdof,
+                    const double& pvalue)
   {
     // Cast to full element type and fix the pressure at that element
-    dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e))
+    dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))
       ->fix_pressure(pdof, pvalue);
   } // end of fix_pressure
 
   /// \short Set the boundary conditions
-  void set_boundary_conditions(const double &time);
+  void set_boundary_conditions(const double& time);
 
   void actions_before_implicit_timestep()
   {
@@ -115,16 +115,16 @@ public:
   }
 
   // Access function for the specific mesh
-  RefineableRectangularQuadMesh<ELEMENT> *mesh_pt()
+  RefineableRectangularQuadMesh<ELEMENT>* mesh_pt()
   {
     // Upcast from pointer to the Mesh base class to the specific
     // element type that we're using here.
-    return dynamic_cast<RefineableRectangularQuadMesh<ELEMENT> *>(
+    return dynamic_cast<RefineableRectangularQuadMesh<ELEMENT>*>(
       Problem::mesh_pt());
   }
 
   /// Document the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 }; // end_of_problem_class
 
@@ -158,7 +158,7 @@ RefineableSphereConvectionProblem<ELEMENT>::RefineableSphereConvectionProblem()
     n_r, n_theta, R_inner, R_outer, 0.0, pi, this->time_stepper_pt());
 
   // Set error estimator
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   mesh_pt()->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Set the boundary conditions for this problem: All nodes are
@@ -206,7 +206,7 @@ RefineableSphereConvectionProblem<ELEMENT>::RefineableSphereConvectionProblem()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
     // Set the Peclet number
     el_pt->pe_pt() = &Global_Physical_Variables::Pe;
@@ -241,7 +241,7 @@ RefineableSphereConvectionProblem<ELEMENT>::RefineableSphereConvectionProblem()
 //========================================================================
 template<class ELEMENT>
 void RefineableSphereConvectionProblem<ELEMENT>::set_boundary_conditions(
-  const double &time)
+  const double& time)
 {
   // Set velocity and temperature for boundary 1 - outer wall (zero)
   unsigned ibound = 1;
@@ -250,7 +250,7 @@ void RefineableSphereConvectionProblem<ELEMENT>::set_boundary_conditions(
   unsigned num_nod = mesh_pt()->nboundary_node(ibound);
   for (unsigned inod = 0; inod < num_nod; inod++)
   {
-    Node *nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
+    Node* nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
     for (unsigned i = 0; i < 4; ++i)
     {
       nod_pt->set_value(i, 0.0);
@@ -269,7 +269,7 @@ void RefineableSphereConvectionProblem<ELEMENT>::set_boundary_conditions(
   num_nod = mesh_pt()->nboundary_node(ibound);
   for (unsigned inod = 0; inod < num_nod; inod++)
   {
-    Node *nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
+    Node* nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
     for (unsigned i = 0; i < 3; ++i)
     {
       nod_pt->set_value(i, 0.0);
@@ -297,7 +297,7 @@ RefineableSphereConvectionProblem<ELEMENT>::~RefineableSphereConvectionProblem()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void RefineableSphereConvectionProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void RefineableSphereConvectionProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -333,7 +333,7 @@ void RefineableSphereConvectionProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
 /// Driver for RefineableSphereConvection test problem using a
 //  Crouzeix-Raviart interpolation.
 //=====================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Set gravity
   Global_Physical_Variables::G.resize(3, 0.0);

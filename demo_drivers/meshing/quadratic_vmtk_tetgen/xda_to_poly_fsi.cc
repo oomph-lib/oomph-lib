@@ -639,7 +639,7 @@ int main()
     {
       // Get pointer to the Vector storing the three vertex nodes defining
       // the facet
-      Vector<unsigned> *face_node = &(fluid_faces[i][iface]);
+      Vector<unsigned>* face_node = &(fluid_faces[i][iface]);
 
       // Loop over the facet's nodes
       for (unsigned ii = 0; ii < 3; ii++)
@@ -688,7 +688,7 @@ int main()
   for (unsigned iface = 0; iface < nface; iface++)
   {
     // Get pointer to the Vector storing the three nodes
-    Vector<unsigned> *face_node = &(fluid_faces[0][iface]);
+    Vector<unsigned>* face_node = &(fluid_faces[0][iface]);
 
     // Loop over the facet's nodes
     for (unsigned ii = 0; ii < 3; ii++)
@@ -776,7 +776,7 @@ int main()
       fluid_output_stream << 3 << ' ';
 
       // Get pointer to the Vector storing the three nodes
-      Vector<unsigned> *face_node = &(fluid_faces[i][iface]);
+      Vector<unsigned>* face_node = &(fluid_faces[i][iface]);
 
       // This vector stores the nodes that are on boundaries 1 AND
       // another one (2,3 or 4). We only store these nodes if a
@@ -881,7 +881,7 @@ int main()
     for (unsigned iface = 0; iface < nface; iface++)
     {
       // Get pointer to the Vector storing the three vertex/simplex nodes
-      Vector<unsigned> *face_node;
+      Vector<unsigned>* face_node;
       if (i == 0 || i == 4)
       {
         face_node = &(fluid_faces[0][iface]);

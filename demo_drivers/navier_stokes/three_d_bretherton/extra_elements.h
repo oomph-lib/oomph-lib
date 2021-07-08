@@ -52,25 +52,25 @@ class FixSpineHeightElement : public virtual SpineElement<PointElement>
 {
 private:
   /// Pointer to the desired value of the spine height
-  double *Height_pt;
+  double* Height_pt;
 
   /// \short The local eqn number for the pressure that has been traded for
   /// the volume constraint
   int Ptraded_local_eqn;
 
   /// \short The Data that contains the traded pressure
-  Data *Ptraded_data_pt;
+  Data* Ptraded_data_pt;
 
 protected:
   /// Calculate the geometric shape functions at local coordinate s.
-  void shape(const Vector<double> &s, Shape &psi) const
+  void shape(const Vector<double>& s, Shape& psi) const
   {
     psi[0] = 1.0;
   }
 
   /// \short Calculate the geometric shape functions and
   /// derivatives w.r.t. local coordinates at local coordinate s
-  void dshape_local(const Vector<double> &s, Shape &psi, DShape &dpsids) const
+  void dshape_local(const Vector<double>& s, Shape& psi, DShape& dpsids) const
   {
     psi[0] = 1.0;
     dpsids(0, 0) = 0.0;
@@ -79,7 +79,7 @@ protected:
 public:
   /// Constructor, there are no internal values. The pointer to the
   /// element's (single) spine is set on construction
-  FixSpineHeightElement(SpineNode *const &spine_node_pt) :
+  FixSpineHeightElement(SpineNode* const& spine_node_pt) :
     SpineElement<PointElement>()
   {
     // Initialise pointer to prescribed spine height
@@ -93,7 +93,7 @@ public:
   }
 
   /// Access function to the prescribed spine height
-  double *&height_pt()
+  double*& height_pt()
   {
     return Height_pt;
   }
@@ -117,11 +117,11 @@ public:
   }
 
   /// Calculate the residuals
-  void fill_in_contribution_to_residuals(Vector<double> &residuals);
+  void fill_in_contribution_to_residuals(Vector<double>& residuals);
 
   /// Calculate the residuals and the jacobian
-  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                        DenseMatrix<double> &jacobian);
+  void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                        DenseMatrix<double>& jacobian);
 
   /// \short Assign the local equation numbers and their coincidence with
   /// the global values
@@ -130,7 +130,7 @@ public:
   /// \short Set the Data that contains the single pressure value
   /// that is "traded" for the volume constraint.
   /// The Data item must only contain a single value!
-  void set_traded_pressure_data(Data *traded_pressure_data_pt)
+  void set_traded_pressure_data(Data* traded_pressure_data_pt)
   {
 #ifdef PARANOID
     if (traded_pressure_data_pt->nvalue() != 1)
@@ -152,10 +152,10 @@ public:
   }
 
   /// Overload the output function
-  void output(std::ostream &outfile) {}
+  void output(std::ostream& outfile) {}
 
   /// Output function: x,y,[z],u,v,[w],p in tecplot format
-  void output(std::ostream &outfile, const unsigned &Np) {}
+  void output(std::ostream& outfile, const unsigned& Np) {}
 
   /// Overload the self test
   // unsigned self_test() {return GeneralisedElement::self_test();}
@@ -165,7 +165,7 @@ public:
 /// Residuals for the spine-based volumetric constraint (point) element
 //==========================================================================
 void FixSpineHeightElement::fill_in_contribution_to_residuals(
-  Vector<double> &residuals)
+  Vector<double>& residuals)
 {
 #ifdef PARANOID
   if (Height_pt == 0)
@@ -184,7 +184,7 @@ void FixSpineHeightElement::fill_in_contribution_to_residuals(
   if (local_eqn >= 0)
   {
     residuals[local_eqn] =
-      static_cast<SpineNode *>(node_pt(0))->spine_pt()->height() - *Height_pt;
+      static_cast<SpineNode*>(node_pt(0))->spine_pt()->height() - *Height_pt;
   }
 }
 
@@ -193,7 +193,7 @@ void FixSpineHeightElement::fill_in_contribution_to_residuals(
 /// for the spine-based volumetric constraint element
 //=========================================================================
 void FixSpineHeightElement::fill_in_contribution_to_jacobian(
-  Vector<double> &residuals, DenseMatrix<double> &jacobian)
+  Vector<double>& residuals, DenseMatrix<double>& jacobian)
 {
   // Get the residuals
   fill_in_contribution_to_residuals(residuals);
@@ -253,18 +253,18 @@ class SpineGravityTractionElement :
   unsigned Dim;
 
   /// Pointer to the global Reynold number divided by the Froude number
-  double *ReInvFr_pt;
+  double* ReInvFr_pt;
 
   /// Pointer to global gravity Vector
-  Vector<double> *G_pt;
+  Vector<double>* G_pt;
 
   /// \short Pointer to the viscosity ratio (relative to the
   /// viscosity used in the definition of the Reynolds number)
-  double *Viscosity_Ratio_pt;
+  double* Viscosity_Ratio_pt;
 
   /// \short Pointer to the density ratio (relative to the density used in the
   /// definition of the Reynolds number)
-  double *Density_Ratio_pt;
+  double* Density_Ratio_pt;
 
 protected:
   ///\short Array to hold local eqn number information for veloc:
@@ -286,11 +286,11 @@ protected:
   unsigned External_data_number_of_invca;
 
   /// \short Pointer to the Data item that stores the capillary number
-  Data *invca_data_pt;
+  Data* invca_data_pt;
 
   // Pointer to the BOnd number. This is neccesary because in the equations
   // the bond number always appears as ReSt
-  double *bond_pt;
+  double* bond_pt;
 
   // Return the equation number corresponding to 1ovCa (which is the fixing of
   // the flow rate)
@@ -303,7 +303,7 @@ protected:
 public:
   /// Constructor, which takes a "bulk" element and the value of the index
   /// and its limit
-  SpineGravityTractionElement(FiniteElement *element_pt, int face_index) :
+  SpineGravityTractionElement(FiniteElement* element_pt, int face_index) :
     SpineElement<FaceGeometry<ELEMENT>>(), FaceElement()
   {
     // Attach the geometrical information to the element. N.B. This function
@@ -316,7 +316,7 @@ public:
     invca_data_pt = 0;
 
     // Set the Physical values from the bulk elemenet
-    ELEMENT *cast_element_pt = dynamic_cast<ELEMENT *>(element_pt);
+    ELEMENT* cast_element_pt = dynamic_cast<ELEMENT*>(element_pt);
     this->ReInvFr_pt = cast_element_pt->re_invfr_pt();
     this->G_pt = cast_element_pt->g_pt();
     this->Viscosity_Ratio_pt = cast_element_pt->viscosity_ratio_pt();
@@ -360,16 +360,16 @@ public:
 
     // Set of unique geometric data that is used to update the bulk,
     // but is not used to update the face
-    std::set<Data *> unique_additional_geom_data;
+    std::set<Data*> unique_additional_geom_data;
     // Get all the geometric data for this (bulk) element
     cast_element_pt->assemble_set_of_all_geometric_data(
       unique_additional_geom_data);
 
     // Now assemble the set of geometric data for the face element
-    std::set<Data *> unique_face_geom_data_pt;
+    std::set<Data*> unique_face_geom_data_pt;
     this->assemble_set_of_all_geometric_data(unique_face_geom_data_pt);
     // Erase the face geometric data from the additional data
-    for (std::set<Data *>::iterator it = unique_face_geom_data_pt.begin();
+    for (std::set<Data*>::iterator it = unique_face_geom_data_pt.begin();
          it != unique_face_geom_data_pt.end();
          ++it)
     {
@@ -400,50 +400,50 @@ public:
 
   /// \short Viscosity ratio for element: Element's viscosity relative to the
   /// viscosity used in the definition of the Reynolds number
-  const double &viscosity_ratio() const
+  const double& viscosity_ratio() const
   {
     return *Viscosity_Ratio_pt;
   }
 
   /// Pointer to Viscosity Ratio
-  double *&viscosity_ratio_pt()
+  double*& viscosity_ratio_pt()
   {
     return Viscosity_Ratio_pt;
   }
 
   /// \short Density ratio for element: Element's density relative to the
   ///  viscosity used in the definition of the Reynolds number
-  const double &density_ratio() const
+  const double& density_ratio() const
   {
     return *Density_Ratio_pt;
   }
 
   /// Pointer to Density ratio
-  double *&density_ratio_pt()
+  double*& density_ratio_pt()
   {
     return Density_Ratio_pt;
   }
 
   /// Pointer to Reynolds number divided by Froude number
-  double *&re_invfr_pt()
+  double*& re_invfr_pt()
   {
     return ReInvFr_pt;
   }
 
   /// Return the value of the Re/Fr number
-  const double &re_invfr() const
+  const double& re_invfr() const
   {
     return *ReInvFr_pt;
   }
 
   /// Vector of gravitational components
-  const Vector<double> &g() const
+  const Vector<double>& g() const
   {
     return *G_pt;
   }
 
   /// Pointer to Vector of gravitational components
-  Vector<double> *&g_pt()
+  Vector<double>*& g_pt()
   {
     return G_pt;
   }
@@ -464,7 +464,7 @@ public:
     Vector<double> s_parent(Dim);
 
     // Get a pointer to the parent element
-    ELEMENT *bulk_el_pt = dynamic_cast<ELEMENT *>(bulk_element_pt());
+    ELEMENT* bulk_el_pt = dynamic_cast<ELEMENT*>(bulk_element_pt());
 
     // Loop over the integration points
     for (unsigned ipt = 0; ipt < n_intpt; ipt++)
@@ -511,23 +511,23 @@ public:
   }
 
   /// Access function for the velocity. N. B. HEAVY ASSUMPTIONS HERE
-  double u(const unsigned &l, const unsigned &i)
+  double u(const unsigned& l, const unsigned& i)
   {
     return this->nodal_value(l, i);
   }
 
   ////// \short Velocity i at local node l at timestep t (t=0: present;
   /// t>0: previous). SIMILAR HEAVY ASSUMPTIONS
-  double u(const unsigned &t, const unsigned &l, const unsigned &i) const
+  double u(const unsigned& t, const unsigned& l, const unsigned& i) const
   {
     return this->nodal_value(t, l, i);
   }
 
   /// \short i-th component of du/dt at local node l.
-  double du_dt(const unsigned &l, const unsigned &i) const
+  double du_dt(const unsigned& l, const unsigned& i) const
   {
     // Get the data's timestepper
-    TimeStepper *time_stepper_pt =
+    TimeStepper* time_stepper_pt =
       node_pt(l)->time_stepper_pt(); // cgj: previously Node_pt[l] -- but
                                      // (interpreting as FiniteElement::Node_pt
                                      // as clang does) this is private!
@@ -550,7 +550,7 @@ public:
   }
 
   /// Add the contribution to the residuals
-  inline void fill_in_contribution_to_residuals(Vector<double> &residuals)
+  inline void fill_in_contribution_to_residuals(Vector<double>& residuals)
   {
     // Create a dummy matrix
     DenseMatrix<double> dummy(1);
@@ -559,8 +559,8 @@ public:
   }
 
   /// This function returns the residuals and the jacobian
-  inline void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                               DenseMatrix<double> &jacobian)
+  inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                               DenseMatrix<double>& jacobian)
   {
     // Call the generic routine with the flag set to 1
     add_generic_residual_contribution(residuals, jacobian, 1);
@@ -574,8 +574,8 @@ public:
   /// This function returns the residuals for the Navier--Stokes equations;
   /// flag=1(or 0): do (or don't) compute the Jacobian as well.
   //----------------------------------------------------------------------
-  void add_generic_residual_contribution(Vector<double> &residuals,
-                                         DenseMatrix<double> &jacobian,
+  void add_generic_residual_contribution(Vector<double>& residuals,
+                                         DenseMatrix<double>& jacobian,
                                          unsigned flag)
   {
     // Find out how many nodes there are
@@ -591,7 +591,7 @@ public:
     Vector<double> s_parent(Dim);
 
     // Get a pointer to the parent element
-    ELEMENT *bulk_el_pt = dynamic_cast<ELEMENT *>(bulk_element_pt());
+    ELEMENT* bulk_el_pt = dynamic_cast<ELEMENT*>(bulk_element_pt());
 
     // Find the number of nodes in the parent element
     unsigned n_node_parent = bulk_el_pt->nnode();
@@ -911,10 +911,10 @@ public:
   }
 
   /// Overload the output function
-  void output(std::ostream &outfile) {}
+  void output(std::ostream& outfile) {}
 
   /// Output function: x,y,[z],u,v,[w],p in tecplot format
-  void output(std::ostream &outfile, const unsigned &Np)
+  void output(std::ostream& outfile, const unsigned& Np)
   {
     SpineElement<FaceGeometry<ELEMENT>>::output(outfile, Np);
   }

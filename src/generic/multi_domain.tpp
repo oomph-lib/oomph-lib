@@ -80,11 +80,11 @@ namespace oomph
   //============================================================================
   template<class BULK_ELEMENT, unsigned DIM>
   void Multi_domain_functions::setup_bulk_elements_adjacent_to_face_mesh(
-    Problem *problem_pt,
-    Vector<unsigned> &boundary_in_bulk_mesh,
-    Mesh *const &bulk_mesh_pt,
-    Vector<Mesh *> &face_mesh_pt,
-    const unsigned &interaction)
+    Problem* problem_pt,
+    Vector<unsigned>& boundary_in_bulk_mesh,
+    Mesh* const& bulk_mesh_pt,
+    Vector<Mesh*>& face_mesh_pt,
+    const unsigned& interaction)
   {
     unsigned n_mesh = boundary_in_bulk_mesh.size();
 
@@ -106,7 +106,7 @@ namespace oomph
     // Create face meshes adjacent to the bulk mesh's b-th boundary.
     // Each face mesh consists of FaceElements that may also be
     // interpreted as GeomObjects
-    Vector<Mesh *> bulk_face_mesh_pt(n_mesh);
+    Vector<Mesh*> bulk_face_mesh_pt(n_mesh);
 
     // Loop over all meshes
     for (unsigned i_mesh = 0; i_mesh < n_mesh; i_mesh++)
@@ -123,8 +123,8 @@ namespace oomph
       for (unsigned e = 0; e < n_face_element; e++)
       {
         // Cast the element pointer to the correct thing!
-        FaceElementAsGeomObject<BULK_ELEMENT> *el_pt =
-          dynamic_cast<FaceElementAsGeomObject<BULK_ELEMENT> *>(
+        FaceElementAsGeomObject<BULK_ELEMENT>* el_pt =
+          dynamic_cast<FaceElementAsGeomObject<BULK_ELEMENT>*>(
             bulk_face_mesh_pt[i_mesh]->element_pt(e));
 
         // Set bulk boundary number
@@ -212,16 +212,16 @@ namespace oomph
   //========================================================================
   template<class BULK_ELEMENT, unsigned DIM>
   void Multi_domain_functions::setup_bulk_elements_adjacent_to_face_mesh(
-    Problem *problem_pt,
-    const unsigned &boundary_in_bulk_mesh,
-    Mesh *const &bulk_mesh_pt,
-    Mesh *const &face_mesh_pt,
-    const unsigned &interaction)
+    Problem* problem_pt,
+    const unsigned& boundary_in_bulk_mesh,
+    Mesh* const& bulk_mesh_pt,
+    Mesh* const& face_mesh_pt,
+    const unsigned& interaction)
   {
     // Convert to vector-based storage
     Vector<unsigned> boundary_in_bulk_mesh_vect(1);
     boundary_in_bulk_mesh_vect[0] = boundary_in_bulk_mesh;
-    Vector<Mesh *> face_mesh_pt_vect(1);
+    Vector<Mesh*> face_mesh_pt_vect(1);
     face_mesh_pt_vect[0] = face_mesh_pt;
 
     // Call vector-based version
@@ -248,11 +248,11 @@ namespace oomph
   //========================================================================
   template<class ELEMENT_0, class ELEMENT_1>
   void Multi_domain_functions::setup_multi_domain_interactions(
-    Problem *problem_pt,
-    Mesh *const &first_mesh_pt,
-    Mesh *const &second_mesh_pt,
-    const unsigned &first_interaction,
-    const unsigned &second_interaction)
+    Problem* problem_pt,
+    Mesh* const& first_mesh_pt,
+    Mesh* const& second_mesh_pt,
+    const unsigned& first_interaction,
+    const unsigned& second_interaction)
   {
     // Delete all the current external halo(ed) element and node storage
     first_mesh_pt->delete_all_external_storage();
@@ -283,10 +283,10 @@ namespace oomph
   //========================================================================
   template<class EXT_ELEMENT>
   void Multi_domain_functions::setup_multi_domain_interaction(
-    Problem *problem_pt,
-    Mesh *const &mesh_pt,
-    Mesh *const &external_mesh_pt,
-    const unsigned &interaction_index)
+    Problem* problem_pt,
+    Mesh* const& mesh_pt,
+    Mesh* const& external_mesh_pt,
+    const unsigned& interaction_index)
   {
     // Bulk elements must not be external elements in this case
     Use_bulk_element_as_external = false;
@@ -338,11 +338,11 @@ namespace oomph
   //========================================================================
   template<class EXT_ELEMENT, class FACE_ELEMENT_GEOM_OBJECT>
   void Multi_domain_functions::setup_multi_domain_interaction(
-    Problem *problem_pt,
-    Mesh *const &mesh_pt,
-    Mesh *const &external_mesh_pt,
-    Mesh *const &external_face_mesh_pt,
-    const unsigned &interaction_index)
+    Problem* problem_pt,
+    Mesh* const& mesh_pt,
+    Mesh* const& external_mesh_pt,
+    Mesh* const& external_face_mesh_pt,
+    const unsigned& interaction_index)
   {
     // Bulk elements must be external elements in this case
     Use_bulk_element_as_external = true;
@@ -401,11 +401,11 @@ namespace oomph
   //========================================================================
   template<class EXT_ELEMENT, class FACE_ELEMENT_GEOM_OBJECT>
   void Multi_domain_functions::setup_multi_domain_interaction(
-    Problem *problem_pt,
-    const Vector<Mesh *> &mesh_pt,
-    Mesh *const &external_mesh_pt,
-    const Vector<Mesh *> &external_face_mesh_pt,
-    const unsigned &interaction_index)
+    Problem* problem_pt,
+    const Vector<Mesh*>& mesh_pt,
+    Mesh* const& external_mesh_pt,
+    const Vector<Mesh*>& external_face_mesh_pt,
+    const unsigned& interaction_index)
   {
     // How many meshes do we have?
     unsigned n_mesh = mesh_pt.size();
@@ -484,16 +484,16 @@ namespace oomph
   //========================================================================
   template<class EXT_ELEMENT, class GEOM_OBJECT>
   void Multi_domain_functions::aux_setup_multi_domain_interaction(
-    Problem *problem_pt,
-    Mesh *const &mesh_pt,
-    Mesh *const &external_mesh_pt,
-    const unsigned &interaction_index,
-    Mesh *const &external_face_mesh_pt)
+    Problem* problem_pt,
+    Mesh* const& mesh_pt,
+    Mesh* const& external_mesh_pt,
+    const unsigned& interaction_index,
+    Mesh* const& external_face_mesh_pt)
   {
     // Convert to vector-based storage
-    Vector<Mesh *> mesh_pt_vector(1);
+    Vector<Mesh*> mesh_pt_vector(1);
     mesh_pt_vector[0] = mesh_pt;
-    Vector<Mesh *> external_face_mesh_pt_vector(1);
+    Vector<Mesh*> external_face_mesh_pt_vector(1);
     external_face_mesh_pt_vector[0] = external_face_mesh_pt;
 
     // Call vector-based version
@@ -522,11 +522,11 @@ namespace oomph
   //========================================================================
   template<class EXT_ELEMENT, class GEOM_OBJECT>
   void Multi_domain_functions::aux_setup_multi_domain_interaction(
-    Problem *problem_pt,
-    const Vector<Mesh *> &mesh_pt,
-    Mesh *const &external_mesh_pt,
-    const unsigned &interaction_index,
-    const Vector<Mesh *> &external_face_mesh_pt)
+    Problem* problem_pt,
+    const Vector<Mesh*>& mesh_pt,
+    Mesh* const& external_mesh_pt,
+    const unsigned& interaction_index,
+    const Vector<Mesh*>& external_face_mesh_pt)
   {
     // How many meshes do we have?
     unsigned n_mesh = mesh_pt.size();
@@ -554,7 +554,7 @@ namespace oomph
 #ifdef PARANOID
 
     // Pointer to first element in external mesh
-    GeneralisedElement *ext_el_pt_0 = 0;
+    GeneralisedElement* ext_el_pt_0 = 0;
     if (external_mesh_pt->nelement() != 0)
     {
       ext_el_pt_0 = external_mesh_pt->element_pt(0);
@@ -564,15 +564,15 @@ namespace oomph
     for (unsigned i_mesh = 0; i_mesh < n_mesh; i_mesh++)
     {
       // Get pointer to first element in each mesh
-      GeneralisedElement *el_pt_0 = 0;
+      GeneralisedElement* el_pt_0 = 0;
       if (mesh_pt[i_mesh]->nelement() != 0)
       {
         el_pt_0 = mesh_pt[i_mesh]->element_pt(0);
       }
 
       // Check they are not spectral elements
-      if (dynamic_cast<SpectralElement *>(el_pt_0) != 0 ||
-          dynamic_cast<SpectralElement *>(ext_el_pt_0) != 0)
+      if (dynamic_cast<SpectralElement*>(el_pt_0) != 0 ||
+          dynamic_cast<SpectralElement*>(ext_el_pt_0) != 0)
       {
         throw OomphLibError(
           "Multi-domain setup does not work with spectral elements.",
@@ -581,8 +581,8 @@ namespace oomph
       }
 
       // Check they are not hp-refineable elements
-      if (dynamic_cast<PRefineableElement *>(el_pt_0) != 0 ||
-          dynamic_cast<PRefineableElement *>(ext_el_pt_0) != 0)
+      if (dynamic_cast<PRefineableElement*>(el_pt_0) != 0 ||
+          dynamic_cast<PRefineableElement*>(ext_el_pt_0) != 0)
       {
         throw OomphLibError(
           "Multi-domain setup does not work with hp-refineable elements.",
@@ -623,7 +623,7 @@ namespace oomph
     unsigned n_zeta_not_found = 0;
 
     // Geometric objects used to represent the external (face) meshes
-    Vector<MeshAsGeomObject *> mesh_geom_obj_pt(n_mesh, 0);
+    Vector<MeshAsGeomObject*> mesh_geom_obj_pt(n_mesh, 0);
 
 #ifdef PARANOID
 
@@ -722,8 +722,8 @@ namespace oomph
       {
         // Zero-sized vector means its a halo
         External_element_located[e_count].resize(0);
-        ElementWithExternalElement *el_pt =
-          dynamic_cast<ElementWithExternalElement *>(
+        ElementWithExternalElement* el_pt =
+          dynamic_cast<ElementWithExternalElement*>(
             mesh_pt[i_mesh]->element_pt(e));
 
 #ifdef OOMPH_HAS_MPI
@@ -783,7 +783,7 @@ namespace oomph
       if (mesh_geom_obj_pt[i_mesh]->sample_point_container_version() ==
           UseRefineableBinArray)
       {
-        RefineableBinArray *bin_array_pt = dynamic_cast<RefineableBinArray *>(
+        RefineableBinArray* bin_array_pt = dynamic_cast<RefineableBinArray*>(
           mesh_geom_obj_pt[i_mesh]->sample_point_container_pt());
 
         bin_array_pt
@@ -821,8 +821,8 @@ namespace oomph
       else if (mesh_geom_obj_pt[i_mesh]->sample_point_container_version() ==
                UseNonRefineableBinArray)
       {
-        NonRefineableBinArray *bin_array_pt =
-          dynamic_cast<NonRefineableBinArray *>(
+        NonRefineableBinArray* bin_array_pt =
+          dynamic_cast<NonRefineableBinArray*>(
             mesh_geom_obj_pt[i_mesh]->sample_point_container_pt());
 
         // Initialise spiral levels
@@ -844,8 +844,8 @@ namespace oomph
       else if (mesh_geom_obj_pt[i_mesh]->sample_point_container_version() ==
                UseCGALSamplePointContainer)
       {
-        CGALSamplePointContainer *bin_array_pt =
-          dynamic_cast<CGALSamplePointContainer *>(
+        CGALSamplePointContainer* bin_array_pt =
+          dynamic_cast<CGALSamplePointContainer*>(
             mesh_geom_obj_pt[i_mesh]->sample_point_container_pt());
         bin_array_pt
           ->last_sample_point_to_actually_lookup_during_locate_zeta() =
@@ -1205,7 +1205,7 @@ namespace oomph
         if (mesh_geom_obj_pt[i_mesh]->sample_point_container_version() ==
             UseRefineableBinArray)
         {
-          RefineableBinArray *bin_array_pt = dynamic_cast<RefineableBinArray *>(
+          RefineableBinArray* bin_array_pt = dynamic_cast<RefineableBinArray*>(
             mesh_geom_obj_pt[i_mesh]->sample_point_container_pt());
           bin_array_pt
             ->first_sample_point_to_actually_lookup_during_locate_zeta() =
@@ -1219,8 +1219,8 @@ namespace oomph
         else if (mesh_geom_obj_pt[i_mesh]->sample_point_container_version() ==
                  UseNonRefineableBinArray)
         {
-          NonRefineableBinArray *bin_array_pt =
-            dynamic_cast<NonRefineableBinArray *>(
+          NonRefineableBinArray* bin_array_pt =
+            dynamic_cast<NonRefineableBinArray*>(
               mesh_geom_obj_pt[i_mesh]->sample_point_container_pt());
 
           bin_array_pt->current_min_spiral_level() +=
@@ -1232,8 +1232,8 @@ namespace oomph
         else if (mesh_geom_obj_pt[i_mesh]->sample_point_container_version() ==
                  UseCGALSamplePointContainer)
         {
-          CGALSamplePointContainer *bin_array_pt =
-            dynamic_cast<CGALSamplePointContainer *>(
+          CGALSamplePointContainer* bin_array_pt =
+            dynamic_cast<CGALSamplePointContainer*>(
               mesh_geom_obj_pt[i_mesh]->sample_point_container_pt());
           bin_array_pt
             ->first_sample_point_to_actually_lookup_during_locate_zeta() =
@@ -1251,7 +1251,7 @@ namespace oomph
       if (mesh_geom_obj_pt[0]->sample_point_container_version() ==
           UseRefineableBinArray)
       {
-        RefineableBinArray *bin_array_pt = dynamic_cast<RefineableBinArray *>(
+        RefineableBinArray* bin_array_pt = dynamic_cast<RefineableBinArray*>(
           mesh_geom_obj_pt[0]->sample_point_container_pt());
 
         if (bin_array_pt
@@ -1268,8 +1268,8 @@ namespace oomph
       else if (mesh_geom_obj_pt[0]->sample_point_container_version() ==
                UseNonRefineableBinArray)
       {
-        NonRefineableBinArray *bin_array_pt =
-          dynamic_cast<NonRefineableBinArray *>(
+        NonRefineableBinArray* bin_array_pt =
+          dynamic_cast<NonRefineableBinArray*>(
             mesh_geom_obj_pt[0]->sample_point_container_pt());
 
         if (bin_array_pt->current_max_spiral_level() < n_max_level)
@@ -1285,8 +1285,8 @@ namespace oomph
       else if (mesh_geom_obj_pt[0]->sample_point_container_version() ==
                UseCGALSamplePointContainer)
       {
-        CGALSamplePointContainer *bin_array_pt =
-          dynamic_cast<CGALSamplePointContainer *>(
+        CGALSamplePointContainer* bin_array_pt =
+          dynamic_cast<CGALSamplePointContainer*>(
             mesh_geom_obj_pt[0]->sample_point_container_pt());
 
         if (bin_array_pt
@@ -1387,7 +1387,7 @@ namespace oomph
           }
           outfile.close();
 
-          BinArray *bin_array_pt = dynamic_cast<BinArray *>(
+          BinArray* bin_array_pt = dynamic_cast<BinArray*>(
             mesh_geom_obj_pt[i_mesh]->sample_point_container_pt());
           if (bin_array_pt != 0)
           {
@@ -1418,8 +1418,8 @@ namespace oomph
                              << std::endl;
 
                 // Cast
-                ElementWithExternalElement *el_pt =
-                  dynamic_cast<ElementWithExternalElement *>(
+                ElementWithExternalElement* el_pt =
+                  dynamic_cast<ElementWithExternalElement*>(
                     mesh_pt[i_mesh]->element_pt(e));
 
                 unsigned n_dim_el = el_pt->dim();
@@ -1660,13 +1660,13 @@ namespace oomph
   //=====================================================================
   template<class EXT_ELEMENT>
   void Multi_domain_functions::create_external_halo_elements(
-    int &iproc,
-    const Vector<Mesh *> &mesh_pt,
-    Mesh *const &external_mesh_pt,
-    Problem *problem_pt,
-    const unsigned &interaction_index)
+    int& iproc,
+    const Vector<Mesh*>& mesh_pt,
+    Mesh* const& external_mesh_pt,
+    Problem* problem_pt,
+    const unsigned& interaction_index)
   {
-    OomphCommunicator *comm_pt = problem_pt->communicator_pt();
+    OomphCommunicator* comm_pt = problem_pt->communicator_pt();
     int my_rank = comm_pt->my_rank();
 
     // Reset counters for flat packed unsigneds (namespace data because
@@ -1695,8 +1695,8 @@ namespace oomph
       {
         // Cast to ElementWithExternalElement to set external element
         // (if located)
-        ElementWithExternalElement *el_pt =
-          dynamic_cast<ElementWithExternalElement *>(
+        ElementWithExternalElement* el_pt =
+          dynamic_cast<ElementWithExternalElement*>(
             mesh_pt[i_mesh]->element_pt(e));
 
         // We're not setting up external elements for halo elements
@@ -1733,28 +1733,28 @@ namespace oomph
                 // element.
 
                 // FiniteElement stored at this integration point
-                FiniteElement *f_el_pt = 0;
+                FiniteElement* f_el_pt = 0;
 
                 // Is it a new element?
                 if (Located_element_status[zeta_counter] == New)
                 {
                   // Create a new element from the communicated values
                   // and coords from the process that located zeta
-                  GeneralisedElement *new_el_pt = new EXT_ELEMENT;
+                  GeneralisedElement* new_el_pt = new EXT_ELEMENT;
 
                   // Add external halo element to this mesh
                   external_mesh_pt->add_external_halo_element_pt(loc_p,
                                                                  new_el_pt);
 
                   // Cast to the FE pointer
-                  f_el_pt = dynamic_cast<FiniteElement *>(new_el_pt);
+                  f_el_pt = dynamic_cast<FiniteElement*>(new_el_pt);
 
                   // We need the number of interpolated values if Refineable
                   int n_cont_inter_values = -1;
-                  if (dynamic_cast<RefineableElement *>(new_el_pt) != 0)
+                  if (dynamic_cast<RefineableElement*>(new_el_pt) != 0)
                   {
                     n_cont_inter_values =
-                      dynamic_cast<RefineableElement *>(new_el_pt)
+                      dynamic_cast<RefineableElement*>(new_el_pt)
                         ->ncont_interpolated_values();
                   }
 
@@ -1770,8 +1770,8 @@ namespace oomph
                         [Counter_for_flat_packed_unsigneds++] == 1)
                   {
                     // Set the macro element
-                    MacroElementNodeUpdateMesh *macro_mesh_pt =
-                      dynamic_cast<MacroElementNodeUpdateMesh *>(
+                    MacroElementNodeUpdateMesh* macro_mesh_pt =
+                      dynamic_cast<MacroElementNodeUpdateMesh*>(
                         external_mesh_pt);
 
 #ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
@@ -1789,8 +1789,8 @@ namespace oomph
 
                     // We need to receive the lower left
                     // and upper right coordinates of the macro element
-                    QElementBase *q_el_pt =
-                      dynamic_cast<QElementBase *>(new_el_pt);
+                    QElementBase* q_el_pt =
+                      dynamic_cast<QElementBase*>(new_el_pt);
                     if (q_el_pt != 0)
                     {
                       unsigned el_dim = q_el_pt->dim();
@@ -1818,7 +1818,7 @@ namespace oomph
                   unsigned n_node = f_el_pt->nnode();
                   for (unsigned j = 0; j < n_node; j++)
                   {
-                    Node *new_nod_pt = 0;
+                    Node* new_nod_pt = 0;
 
                     // Call the add external halo node helper function
                     add_external_halo_node_to_storage<EXT_ELEMENT>(
@@ -1845,7 +1845,7 @@ namespace oomph
                     Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++];
 
                   // Use this index to get the element
-                  f_el_pt = dynamic_cast<FiniteElement *>(
+                  f_el_pt = dynamic_cast<FiniteElement*>(
                     external_mesh_pt->external_halo_element_pt(
                       loc_p, external_halo_el_index));
 
@@ -1905,13 +1905,13 @@ namespace oomph
   //=========================================================================
   template<class EXT_ELEMENT>
   void Multi_domain_functions::add_external_halo_node_to_storage(
-    Node *&new_nod_pt,
-    Mesh *const &external_mesh_pt,
-    unsigned &loc_p,
-    unsigned &node_index,
-    FiniteElement *const &new_el_pt,
-    int &n_cont_inter_values,
-    Problem *problem_pt)
+    Node*& new_nod_pt,
+    Mesh* const& external_mesh_pt,
+    unsigned& loc_p,
+    unsigned& node_index,
+    FiniteElement* const& new_el_pt,
+    int& n_cont_inter_values,
+    Problem* problem_pt)
   {
     // Add the external halo node if required
     add_external_halo_node_helper(new_nod_pt,
@@ -1940,13 +1940,13 @@ namespace oomph
   template<class EXT_ELEMENT>
   void Multi_domain_functions::
     recursively_add_masters_of_external_halo_node_to_storage(
-      Node *&new_nod_pt,
-      Mesh *const &external_mesh_pt,
-      unsigned &loc_p,
-      unsigned &node_index,
-      FiniteElement *const &new_el_pt,
-      int &n_cont_inter_values,
-      Problem *problem_pt)
+      Node*& new_nod_pt,
+      Mesh* const& external_mesh_pt,
+      unsigned& loc_p,
+      unsigned& node_index,
+      FiniteElement* const& new_el_pt,
+      int& n_cont_inter_values,
+      Problem* problem_pt)
   {
     for (int i_cont = -1; i_cont < n_cont_inter_values; i_cont++)
     {
@@ -1970,10 +1970,10 @@ namespace oomph
           Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++];
 
         // Setup new HangInfo
-        HangInfo *hang_pt = new HangInfo(n_master);
+        HangInfo* hang_pt = new HangInfo(n_master);
         for (unsigned m = 0; m < n_master; m++)
         {
-          Node *master_nod_pt = 0;
+          Node* master_nod_pt = 0;
           // Get the master node (creating and adding it if required)
           add_external_halo_master_node_helper<EXT_ELEMENT>(master_nod_pt,
                                                             new_nod_pt,
@@ -2007,12 +2007,12 @@ namespace oomph
   //========================================================================
   template<class EXT_ELEMENT>
   void Multi_domain_functions::add_external_halo_master_node_helper(
-    Node *&new_master_nod_pt,
-    Node *&new_nod_pt,
-    Mesh *const &external_mesh_pt,
-    unsigned &loc_p,
-    int &ncont_inter_values,
-    Problem *problem_pt)
+    Node*& new_master_nod_pt,
+    Node*& new_nod_pt,
+    Mesh* const& external_mesh_pt,
+    unsigned& loc_p,
+    int& ncont_inter_values,
+    Problem* problem_pt)
   {
     // Given the node and the external mesh, and received information
     // about them from process loc_p, construct them on the current process
@@ -2048,11 +2048,11 @@ namespace oomph
   //========================================================================
   template<class EXT_ELEMENT>
   void Multi_domain_functions::construct_new_external_halo_master_node_helper(
-    Node *&new_master_nod_pt,
-    Node *&nod_pt,
-    unsigned &loc_p,
-    Mesh *const &external_mesh_pt,
-    Problem *problem_pt)
+    Node*& new_master_nod_pt,
+    Node*& nod_pt,
+    unsigned& loc_p,
+    Mesh* const& external_mesh_pt,
+    Problem* problem_pt)
   {
     // First three sent numbers are dimension, position type and nvalue
     // (to be used in Node constructors)
@@ -2081,7 +2081,7 @@ namespace oomph
       Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++];
 
     // If it's a solid node also receive the lagrangian dimension and pos type
-    SolidNode *solid_nod_pt = dynamic_cast<SolidNode *>(nod_pt);
+    SolidNode* solid_nod_pt = dynamic_cast<SolidNode*>(nod_pt);
     unsigned n_lag_dim;
     unsigned n_lag_type;
     if (solid_nod_pt != 0)
@@ -2103,7 +2103,7 @@ namespace oomph
     }
 
     // Null TimeStepper for now
-    TimeStepper *time_stepper_pt = 0;
+    TimeStepper* time_stepper_pt = 0;
     // Default number of previous values to 1
     unsigned n_prev = 1;
 
@@ -2132,9 +2132,9 @@ namespace oomph
     }
 
     // Is the node for which the master is required Algebraic, Macro or Solid?
-    AlgebraicNode *alg_nod_pt = dynamic_cast<AlgebraicNode *>(nod_pt);
-    MacroElementNodeUpdateNode *macro_nod_pt =
-      dynamic_cast<MacroElementNodeUpdateNode *>(nod_pt);
+    AlgebraicNode* alg_nod_pt = dynamic_cast<AlgebraicNode*>(nod_pt);
+    MacroElementNodeUpdateNode* macro_nod_pt =
+      dynamic_cast<MacroElementNodeUpdateNode*>(nod_pt);
 
     // What type of node was the node for which we are constructing a master?
     if (alg_nod_pt != 0)
@@ -2200,8 +2200,8 @@ namespace oomph
           // Create storage, if it doesn't already exist, for the map
           // that will contain the position of the first entry of
           // this face element's additional values,
-          BoundaryNodeBase *bnew_master_nod_pt =
-            dynamic_cast<BoundaryNodeBase *>(new_master_nod_pt);
+          BoundaryNodeBase* bnew_master_nod_pt =
+            dynamic_cast<BoundaryNodeBase*>(new_master_nod_pt);
 #ifdef PARANOID
           if (bnew_master_nod_pt == 0)
           {
@@ -2220,7 +2220,7 @@ namespace oomph
 
           // Get pointer to the map of indices associated with
           // additional values created by face elements
-          std::map<unsigned, unsigned> *map_pt =
+          std::map<unsigned, unsigned>* map_pt =
             bnew_master_nod_pt
               ->index_of_first_value_assigned_by_face_element_pt();
 
@@ -2273,8 +2273,8 @@ namespace oomph
       external_mesh_pt->add_external_halo_node_pt(loc_p, new_master_nod_pt);
 
       // The external mesh is itself Algebraic...
-      AlgebraicMesh *alg_mesh_pt =
-        dynamic_cast<AlgebraicMesh *>(external_mesh_pt);
+      AlgebraicMesh* alg_mesh_pt =
+        dynamic_cast<AlgebraicMesh*>(external_mesh_pt);
 
 #ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
       oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds
@@ -2308,7 +2308,7 @@ namespace oomph
       }
 
       // Also require a Vector of geometric objects
-      Vector<GeomObject *> geom_object_pt;
+      Vector<GeomObject*> geom_object_pt;
 
 #ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
       oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds
@@ -2341,8 +2341,8 @@ namespace oomph
         geom_object_pt[i_geom] = alg_mesh_pt->geom_object_list_pt(geom_index);
       }
 
-      AlgebraicNode *alg_master_nod_pt =
-        dynamic_cast<AlgebraicNode *>(new_master_nod_pt);
+      AlgebraicNode* alg_master_nod_pt =
+        dynamic_cast<AlgebraicNode*>(new_master_nod_pt);
 
       /// ... so for the specified update_id, call
       /// add_node_update_info
@@ -2416,8 +2416,8 @@ namespace oomph
           // Create storage, if it doesn't already exist, for the map
           // that will contain the position of the first entry of
           // this face element's additional values,
-          BoundaryNodeBase *bnew_master_nod_pt =
-            dynamic_cast<BoundaryNodeBase *>(new_master_nod_pt);
+          BoundaryNodeBase* bnew_master_nod_pt =
+            dynamic_cast<BoundaryNodeBase*>(new_master_nod_pt);
 #ifdef PARANOID
           if (bnew_master_nod_pt == 0)
           {
@@ -2436,7 +2436,7 @@ namespace oomph
 
           // Get pointer to the map of indices associated with
           // additional values created by face elements
-          std::map<unsigned, unsigned> *map_pt =
+          std::map<unsigned, unsigned>* map_pt =
             bnew_master_nod_pt
               ->index_of_first_value_assigned_by_face_element_pt();
 
@@ -2489,7 +2489,7 @@ namespace oomph
       external_mesh_pt->add_external_halo_node_pt(loc_p, new_master_nod_pt);
 
       // Create a new node update element for this master node if required
-      FiniteElement *new_node_update_f_el_pt = 0;
+      FiniteElement* new_node_update_f_el_pt = 0;
 #ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
       oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds
                  << "  Bool: need new external halo element "
@@ -2498,7 +2498,7 @@ namespace oomph
 #endif
       if (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++] == 1)
       {
-        GeneralisedElement *new_node_update_el_pt = new EXT_ELEMENT;
+        GeneralisedElement* new_node_update_el_pt = new EXT_ELEMENT;
 
         // Add external hal element to this mesh
         external_mesh_pt->add_external_halo_element_pt(loc_p,
@@ -2506,14 +2506,14 @@ namespace oomph
 
         // Cast to finite element
         new_node_update_f_el_pt =
-          dynamic_cast<FiniteElement *>(new_node_update_el_pt);
+          dynamic_cast<FiniteElement*>(new_node_update_el_pt);
 
         // Need number of interpolated values if Refineable
         int n_cont_inter_values;
-        if (dynamic_cast<RefineableElement *>(new_node_update_f_el_pt) != 0)
+        if (dynamic_cast<RefineableElement*>(new_node_update_f_el_pt) != 0)
         {
           n_cont_inter_values =
-            dynamic_cast<RefineableElement *>(new_node_update_f_el_pt)
+            dynamic_cast<RefineableElement*>(new_node_update_f_el_pt)
               ->ncont_interpolated_values();
         }
         else
@@ -2530,8 +2530,8 @@ namespace oomph
         if (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++] == 1)
         {
           // Set the macro element
-          MacroElementNodeUpdateMesh *macro_mesh_pt =
-            dynamic_cast<MacroElementNodeUpdateMesh *>(external_mesh_pt);
+          MacroElementNodeUpdateMesh* macro_mesh_pt =
+            dynamic_cast<MacroElementNodeUpdateMesh*>(external_mesh_pt);
 
 #ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
           oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds
@@ -2546,8 +2546,8 @@ namespace oomph
 
           // we need to receive
           // the lower left and upper right coordinates of the macro
-          QElementBase *q_el_pt =
-            dynamic_cast<QElementBase *>(new_node_update_f_el_pt);
+          QElementBase* q_el_pt =
+            dynamic_cast<QElementBase*>(new_node_update_f_el_pt);
           if (q_el_pt != 0)
           {
             unsigned el_dim = q_el_pt->dim();
@@ -2574,7 +2574,7 @@ namespace oomph
         unsigned n_node = new_node_update_f_el_pt->nnode();
         for (unsigned j = 0; j < n_node; j++)
         {
-          Node *new_nod_pt = 0;
+          Node* new_nod_pt = 0;
           add_external_halo_node_to_storage<EXT_ELEMENT>(
             new_nod_pt,
             external_mesh_pt,
@@ -2593,7 +2593,7 @@ namespace oomph
                    << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
                    << std::endl;
 #endif
-        new_node_update_f_el_pt = dynamic_cast<FiniteElement *>(
+        new_node_update_f_el_pt = dynamic_cast<FiniteElement*>(
           external_mesh_pt->external_halo_element_pt(
             loc_p, Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++]));
       }
@@ -2603,14 +2603,14 @@ namespace oomph
 
       // Get the required geom objects for the node update
       // from the mesh
-      Vector<GeomObject *> geom_object_vector_pt;
-      MacroElementNodeUpdateMesh *macro_mesh_pt =
-        dynamic_cast<MacroElementNodeUpdateMesh *>(external_mesh_pt);
+      Vector<GeomObject*> geom_object_vector_pt;
+      MacroElementNodeUpdateMesh* macro_mesh_pt =
+        dynamic_cast<MacroElementNodeUpdateMesh*>(external_mesh_pt);
       geom_object_vector_pt = macro_mesh_pt->geom_object_vector_pt();
 
       // Cast to MacroElementNodeUpdateNode
-      MacroElementNodeUpdateNode *macro_master_nod_pt =
-        dynamic_cast<MacroElementNodeUpdateNode *>(new_master_nod_pt);
+      MacroElementNodeUpdateNode* macro_master_nod_pt =
+        dynamic_cast<MacroElementNodeUpdateNode*>(new_master_nod_pt);
 
       // Set all required information - node update element,
       // local coordinate in this element, and then set node update info
@@ -2703,8 +2703,8 @@ namespace oomph
           // Create storage, if it doesn't already exist, for the map
           // that will contain the position of the first entry of
           // this face element's additional values,
-          BoundaryNodeBase *bnew_master_nod_pt =
-            dynamic_cast<BoundaryNodeBase *>(new_master_nod_pt);
+          BoundaryNodeBase* bnew_master_nod_pt =
+            dynamic_cast<BoundaryNodeBase*>(new_master_nod_pt);
 #ifdef PARANOID
           if (bnew_master_nod_pt == 0)
           {
@@ -2723,7 +2723,7 @@ namespace oomph
 
           // Get pointer to the map of indices associated with
           // additional values created by face elements
-          std::map<unsigned, unsigned> *map_pt =
+          std::map<unsigned, unsigned>* map_pt =
             bnew_master_nod_pt
               ->index_of_first_value_assigned_by_face_element_pt();
 
@@ -2781,8 +2781,8 @@ namespace oomph
 
       // Copy across particular info required for SolidNode
       // NOTE: Are there any problems with additional values for SolidNodes?
-      SolidNode *solid_master_nod_pt =
-        dynamic_cast<SolidNode *>(new_master_nod_pt);
+      SolidNode* solid_master_nod_pt =
+        dynamic_cast<SolidNode*>(new_master_nod_pt);
       unsigned n_solid_val =
         solid_master_nod_pt->variable_position_pt()->nvalue();
       for (unsigned i_val = 0; i_val < n_solid_val; i_val++)
@@ -2857,8 +2857,8 @@ namespace oomph
           // Create storage, if it doesn't already exist, for the map
           // that will contain the position of the first entry of
           // this face element's additional values,
-          BoundaryNodeBase *bnew_master_nod_pt =
-            dynamic_cast<BoundaryNodeBase *>(new_master_nod_pt);
+          BoundaryNodeBase* bnew_master_nod_pt =
+            dynamic_cast<BoundaryNodeBase*>(new_master_nod_pt);
 #ifdef PARANOID
           if (bnew_master_nod_pt == 0)
           {
@@ -2877,7 +2877,7 @@ namespace oomph
 
           // Get pointer to the map of indices associated with
           // additional values created by face elements
-          std::map<unsigned, unsigned> *map_pt =
+          std::map<unsigned, unsigned>* map_pt =
             bnew_master_nod_pt
               ->index_of_first_value_assigned_by_face_element_pt();
 

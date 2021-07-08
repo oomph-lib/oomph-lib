@@ -63,12 +63,12 @@ public:
   // SimpleRectangularQuadMesh; then deforms the mesh so that it fits
   // into the annular region bounded by the radii r_min and r_max
   // and angles (in degree) of phi_min and phi_max.
-  AnnularQuadMesh(const unsigned &n_r,
-                  const unsigned &n_phi,
-                  const double &r_min,
-                  const double &r_max,
-                  const double &phi_min,
-                  const double &phi_max) :
+  AnnularQuadMesh(const unsigned& n_r,
+                  const unsigned& n_phi,
+                  const double& r_min,
+                  const double& r_max,
+                  const double& phi_min,
+                  const double& phi_max) :
     SimpleRectangularQuadMesh<ELEMENT>(n_r, n_phi, 1.0, 1.0)
   {
     // The constructor for the  SimpleRectangularQuadMesh has
@@ -83,7 +83,7 @@ public:
     for (unsigned n = 0; n < n_node; n++)
     {
       // Pointer to node:
-      Node *nod_pt = this->node_pt(n);
+      Node* nod_pt = this->node_pt(n);
 
       // Get the x/y coordinates
       double x_old = nod_pt->x(0);
@@ -117,7 +117,7 @@ namespace PlanarWave
   std::complex<double> I(0.0, 1.0);
 
   /// Exact solution as a Vector of size 2, containing real and imag parts
-  void get_exact_u(const Vector<double> &x, Vector<double> &u)
+  void get_exact_u(const Vector<double>& x, Vector<double>& u)
   {
     // Switch to spherical coordinates
     double R = sqrt(x[0] * x[0] + x[1] * x[1]);
@@ -232,7 +232,7 @@ namespace ProblemParameters
   std::complex<double> I(0.0, 1.0);
 
   /// Exact solution as a Vector of size 2, containing real and imag parts
-  void get_exact_u(const Vector<double> &x, Vector<double> &u)
+  void get_exact_u(const Vector<double>& x, Vector<double>& u)
   {
     // Switch to spherical coordinates
     double R = sqrt(x[0] * x[0] + x[1] * x[1]);
@@ -286,7 +286,7 @@ namespace ProblemParameters
 
   /// \short Get -du/dr (spherical r) for exact solution. Equal to prescribed
   /// flux on inner boundary.
-  void exact_minus_dudr(const Vector<double> &x, std::complex<double> &flux)
+  void exact_minus_dudr(const Vector<double>& x, std::complex<double>& flux)
   {
     // Initialise flux
     flux = std::complex<double>(0.0, 0.0);
@@ -370,7 +370,7 @@ public:
 
   /// \short Doc the solution. DocInfo object stores flags/labels for where the
   /// output gets written to
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// Recompute gamma integral before checking Newton residuals
   void actions_before_newton_convergence_check()
@@ -379,7 +379,7 @@ public:
   }
 
   /// Check gamma computation
-  void check_gamma(DocInfo &doc_info);
+  void check_gamma(DocInfo& doc_info);
 
 private:
   /// \short Create BC elements on outer boundary
@@ -389,15 +389,15 @@ private:
   void create_flux_elements_on_inner_boundary();
 
   /// Pointer to bulk mesh
-  AnnularQuadMesh<ELEMENT> *Bulk_mesh_pt;
+  AnnularQuadMesh<ELEMENT>* Bulk_mesh_pt;
 
   /// \short Pointer to mesh containing the DtN boundary
   /// condition elements
-  FourierDecomposedHelmholtzDtNMesh<ELEMENT> *Helmholtz_outer_boundary_mesh_pt;
+  FourierDecomposedHelmholtzDtNMesh<ELEMENT>* Helmholtz_outer_boundary_mesh_pt;
 
   /// \short Mesh of face elements that apply the prescribed flux
   /// on the inner boundary
-  Mesh *Helmholtz_inner_boundary_mesh_pt;
+  Mesh* Helmholtz_inner_boundary_mesh_pt;
 
 }; // end of problem class
 
@@ -452,7 +452,7 @@ FourierDecomposedHelmholtzProblem<ELEMENT>::FourierDecomposedHelmholtzProblem()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(i));
 
     // Set the k_squared pointer
     el_pt->k_squared_pt() = &ProblemParameters::K_squared;
@@ -470,7 +470,7 @@ FourierDecomposedHelmholtzProblem<ELEMENT>::FourierDecomposedHelmholtzProblem()
 /// Check gamma computation: \f$ \gamma = -du/dn \f$
 //========================================================================
 template<class ELEMENT>
-void FourierDecomposedHelmholtzProblem<ELEMENT>::check_gamma(DocInfo &doc_info)
+void FourierDecomposedHelmholtzProblem<ELEMENT>::check_gamma(DocInfo& doc_info)
 {
   // Compute gamma stuff
   Helmholtz_outer_boundary_mesh_pt->setup_gamma();
@@ -489,8 +489,8 @@ void FourierDecomposedHelmholtzProblem<ELEMENT>::check_gamma(DocInfo &doc_info)
   for (unsigned e = 0; e < nel; e++)
   {
     // Get a pointer to element
-    FourierDecomposedHelmholtzDtNBoundaryElement<ELEMENT> *el_pt =
-      dynamic_cast<FourierDecomposedHelmholtzDtNBoundaryElement<ELEMENT> *>(
+    FourierDecomposedHelmholtzDtNBoundaryElement<ELEMENT>* el_pt =
+      dynamic_cast<FourierDecomposedHelmholtzDtNBoundaryElement<ELEMENT>*>(
         Helmholtz_outer_boundary_mesh_pt->element_pt(e));
 
     // Set the value of n_intpt
@@ -535,7 +535,7 @@ void FourierDecomposedHelmholtzProblem<ELEMENT>::check_gamma(DocInfo &doc_info)
 /// Doc the solution: doc_info contains labels/output directory etc.
 //========================================================================
 template<class ELEMENT>
-void FourierDecomposedHelmholtzProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void FourierDecomposedHelmholtzProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -597,8 +597,8 @@ void FourierDecomposedHelmholtzProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
   unsigned nn_element = Helmholtz_outer_boundary_mesh_pt->nelement();
   for (unsigned e = 0; e < nn_element; e++)
   {
-    FourierDecomposedHelmholtzBCElementBase<ELEMENT> *el_pt =
-      dynamic_cast<FourierDecomposedHelmholtzBCElementBase<ELEMENT> *>(
+    FourierDecomposedHelmholtzBCElementBase<ELEMENT>* el_pt =
+      dynamic_cast<FourierDecomposedHelmholtzBCElementBase<ELEMENT>*>(
         Helmholtz_outer_boundary_mesh_pt->element_pt(e));
     power += el_pt->global_power_contribution(some_file);
   }
@@ -628,14 +628,14 @@ void FourierDecomposedHelmholtzProblem<ELEMENT>::create_outer_bc_elements()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    ELEMENT *bulk_elem_pt =
-      dynamic_cast<ELEMENT *>(Bulk_mesh_pt->boundary_element_pt(b, e));
+    ELEMENT* bulk_elem_pt =
+      dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(b, e));
 
     // Find the index of the face of element e along boundary b
     int face_index = Bulk_mesh_pt->face_index_at_boundary(b, e);
 
     // Build the corresponding DtN element
-    FourierDecomposedHelmholtzDtNBoundaryElement<ELEMENT> *flux_element_pt =
+    FourierDecomposedHelmholtzDtNBoundaryElement<ELEMENT>* flux_element_pt =
       new FourierDecomposedHelmholtzDtNBoundaryElement<ELEMENT>(bulk_elem_pt,
                                                                 face_index);
 
@@ -665,14 +665,14 @@ void FourierDecomposedHelmholtzProblem<
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    ELEMENT *bulk_elem_pt =
-      dynamic_cast<ELEMENT *>(Bulk_mesh_pt->boundary_element_pt(b, e));
+    ELEMENT* bulk_elem_pt =
+      dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(b, e));
 
     // Find the index of the face of element e along boundary b
     int face_index = Bulk_mesh_pt->face_index_at_boundary(b, e);
 
     // Build the corresponding prescribed incoming-flux element
-    FourierDecomposedHelmholtzFluxElement<ELEMENT> *flux_element_pt =
+    FourierDecomposedHelmholtzFluxElement<ELEMENT>* flux_element_pt =
       new FourierDecomposedHelmholtzFluxElement<ELEMENT>(bulk_elem_pt,
                                                          face_index);
 
@@ -689,7 +689,7 @@ void FourierDecomposedHelmholtzProblem<
 //===== start_of_main=====================================================
 /// Driver code for Fourier decomposed Helmholtz problem
 //========================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

@@ -77,29 +77,29 @@ namespace oomph
     /// The optional identifier can be used
     /// to distinguish the additional nodal values created by
     /// this element from thos created by other FaceElements.
-    LinearisedAxisymPoroelasticBJS_FSIElement(FiniteElement *const &bulk_el_pt,
-                                              const int &face_index,
-                                              const unsigned &id = 0);
+    LinearisedAxisymPoroelasticBJS_FSIElement(FiniteElement* const& bulk_el_pt,
+                                              const int& face_index,
+                                              const unsigned& id = 0);
 
     /// \short Default constructor
     LinearisedAxisymPoroelasticBJS_FSIElement() {}
 
     /// Broken copy constructor
     LinearisedAxisymPoroelasticBJS_FSIElement(
-      const LinearisedAxisymPoroelasticBJS_FSIElement &dummy)
+      const LinearisedAxisymPoroelasticBJS_FSIElement& dummy)
     {
       BrokenCopy::broken_copy("LinearisedAxisymPoroelasticBJS_FSIElement");
     }
 
     /// Broken assignment operator
-    void operator=(const LinearisedAxisymPoroelasticBJS_FSIElement &)
+    void operator=(const LinearisedAxisymPoroelasticBJS_FSIElement&)
     {
       BrokenCopy::broken_assign("LinearisedAxisymPoroelasticBJS_FSIElement");
     }
 
     /// \short Access function for the pointer to the fluid Strouhal number
     /// (if not set, St defaults to 1)
-    double *&st_pt()
+    double*& st_pt()
     {
       return St_pt;
     }
@@ -117,13 +117,13 @@ namespace oomph
     }
 
     /// Pointer to inverse slip rate coefficient
-    double *&inverse_slip_rate_coefficient_pt()
+    double*& inverse_slip_rate_coefficient_pt()
     {
       return Inverse_slip_rate_coeff_pt;
     }
 
     /// Add the element's contribution to its residual vector
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Call the generic residuals function with flag set to 0
       // using a dummy matrix argument
@@ -222,7 +222,7 @@ namespace oomph
     }
 
     /// Output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       // Dummy
       unsigned nplot = 0;
@@ -230,7 +230,7 @@ namespace oomph
     }
 
     /// Output function: Output at Gauss points; n_plot is ignored.
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       // Find out how many nodes there are
       unsigned n_node = nnode();
@@ -273,8 +273,8 @@ namespace oomph
         interpolated_tangent[1] = interpolated_normal[0];
 
         // Get solid velocity and porous flux from adjacent solid
-        POROELASTICITY_BULK_ELEMENT *ext_el_pt =
-          dynamic_cast<POROELASTICITY_BULK_ELEMENT *>(
+        POROELASTICITY_BULK_ELEMENT* ext_el_pt =
+          dynamic_cast<POROELASTICITY_BULK_ELEMENT*>(
             external_element_pt(0, ipt));
         Vector<double> s_ext(external_element_local_coord(0, ipt));
         Vector<double> du_dt(3);
@@ -318,16 +318,16 @@ namespace oomph
 
         // Get the fluid traction from the NSt bulk element
         Vector<double> traction_nst(3);
-        dynamic_cast<FLUID_BULK_ELEMENT *>(bulk_element_pt())
+        dynamic_cast<FLUID_BULK_ELEMENT*>(bulk_element_pt())
           ->traction(s_bulk, interpolated_normal, traction_nst);
 
         // Get fluid velocity from bulk element
         Vector<double> fluid_veloc(Dim + 1, 0.0);
-        dynamic_cast<FLUID_BULK_ELEMENT *>(bulk_element_pt())
+        dynamic_cast<FLUID_BULK_ELEMENT*>(bulk_element_pt())
           ->interpolated_u_axi_nst(s_bulk, fluid_veloc);
 
         // Get fluid pressure from bulk element
-        double p_fluid = dynamic_cast<FLUID_BULK_ELEMENT *>(bulk_element_pt())
+        double p_fluid = dynamic_cast<FLUID_BULK_ELEMENT*>(bulk_element_pt())
                            ->interpolated_p_axi_nst(s_bulk);
 
         // Calculate the normal components
@@ -393,10 +393,10 @@ namespace oomph
         // from (if set up)
         FSILinearisedAxisymPoroelasticTractionElement<
           POROELASTICITY_BULK_ELEMENT,
-          FLUID_BULK_ELEMENT> *ext_face_el_pt =
+          FLUID_BULK_ELEMENT>* ext_face_el_pt =
           dynamic_cast<FSILinearisedAxisymPoroelasticTractionElement<
             POROELASTICITY_BULK_ELEMENT,
-            FLUID_BULK_ELEMENT> *>(external_element_pt(1, ipt));
+            FLUID_BULK_ELEMENT>*>(external_element_pt(1, ipt));
 
         // Update geometry
         if (ext_face_el_pt != 0)
@@ -442,9 +442,9 @@ namespace oomph
     /// q_skeleton = \int \partial u_displ / \partial t \cdot n ds
     /// q_seepage  = \int k q \cdot n ds
     /// q_nst      = \int u \cdot n ds
-    void contribution_to_total_porous_flux(double &skeleton_flux_contrib,
-                                           double &seepage_flux_contrib,
-                                           double &nst_flux_contrib)
+    void contribution_to_total_porous_flux(double& skeleton_flux_contrib,
+                                           double& seepage_flux_contrib,
+                                           double& nst_flux_contrib)
     {
       // Get the value of Nintpt
       const unsigned n_intpt = integral_pt()->nweight();
@@ -503,8 +503,8 @@ namespace oomph
         double J = sqrt(tlength) * interpolated_x[0];
 
         // Get solid velocity and porous flux from adjacent solid
-        POROELASTICITY_BULK_ELEMENT *ext_el_pt =
-          dynamic_cast<POROELASTICITY_BULK_ELEMENT *>(
+        POROELASTICITY_BULK_ELEMENT* ext_el_pt =
+          dynamic_cast<POROELASTICITY_BULK_ELEMENT*>(
             external_element_pt(0, ipt));
         Vector<double> s_ext(external_element_local_coord(0, ipt));
         Vector<double> du_dt(3);
@@ -549,10 +549,10 @@ namespace oomph
         // from (if set up)
         FSILinearisedAxisymPoroelasticTractionElement<
           POROELASTICITY_BULK_ELEMENT,
-          FLUID_BULK_ELEMENT> *ext_face_el_pt =
+          FLUID_BULK_ELEMENT>* ext_face_el_pt =
           dynamic_cast<FSILinearisedAxisymPoroelasticTractionElement<
             POROELASTICITY_BULK_ELEMENT,
-            FLUID_BULK_ELEMENT> *>(external_element_pt(1, ipt));
+            FLUID_BULK_ELEMENT>*>(external_element_pt(1, ipt));
 
         // Update geometry
         if (ext_face_el_pt != 0)
@@ -600,7 +600,7 @@ namespace oomph
 
         // Get fluid velocity from bulk element
         Vector<double> fluid_veloc(Dim + 1, 0.0);
-        dynamic_cast<FLUID_BULK_ELEMENT *>(bulk_element_pt())
+        dynamic_cast<FLUID_BULK_ELEMENT*>(bulk_element_pt())
           ->interpolated_u_axi_nst(s_bulk, fluid_veloc);
 
         // Get net flux through boundary
@@ -624,13 +624,13 @@ namespace oomph
     }
 
     /// C-style output function
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FaceGeometry<FLUID_BULK_ELEMENT>::output(file_pt);
     }
 
     /// C-style output function
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       FaceGeometry<FLUID_BULK_ELEMENT>::output(file_pt, n_plot);
     }
@@ -639,9 +639,9 @@ namespace oomph
     /// \short Function to compute the shape and test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
-    double shape_and_test(const Vector<double> &s,
-                          Shape &psi,
-                          Shape &test) const
+    double shape_and_test(const Vector<double>& s,
+                          Shape& psi,
+                          Shape& test) const
     {
       // Find number of nodes
       unsigned n_node = nnode();
@@ -662,9 +662,9 @@ namespace oomph
     /// \short Function to compute the shape and test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
-    double shape_and_test_at_knot(const unsigned &ipt,
-                                  Shape &psi,
-                                  Shape &test) const
+    double shape_and_test_at_knot(const unsigned& ipt,
+                                  Shape& psi,
+                                  Shape& test) const
     {
       // Find number of nodes
       unsigned n_node = nnode();
@@ -687,9 +687,9 @@ namespace oomph
     /// flag=1(or 0): do (or don't) compute the contribution to the
     /// Jacobian as well.
     void fill_in_generic_residual_contribution_axisym_poroelastic_fsi(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      const unsigned &flag);
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag);
 
     /// The spatial dimension of the problem
     unsigned Dim;
@@ -701,10 +701,10 @@ namespace oomph
     unsigned Id;
 
     /// Pointer to fluid Strouhal number
-    double *St_pt;
+    double* St_pt;
 
     /// Pointer to inverse slip rate coefficient
-    double *Inverse_slip_rate_coeff_pt;
+    double* Inverse_slip_rate_coeff_pt;
   };
 
   //////////////////////////////////////////////////////////////////////
@@ -722,9 +722,9 @@ namespace oomph
   template<class FLUID_BULK_ELEMENT, class POROELASTICITY_BULK_ELEMENT>
   LinearisedAxisymPoroelasticBJS_FSIElement<FLUID_BULK_ELEMENT,
                                             POROELASTICITY_BULK_ELEMENT>::
-    LinearisedAxisymPoroelasticBJS_FSIElement(FiniteElement *const &bulk_el_pt,
-                                              const int &face_index,
-                                              const unsigned &id) :
+    LinearisedAxisymPoroelasticBJS_FSIElement(FiniteElement* const& bulk_el_pt,
+                                              const int& face_index,
+                                              const unsigned& id) :
     FaceGeometry<FLUID_BULK_ELEMENT>(), FaceElement()
   {
     // Set source element storage: one interaction with an external element
@@ -755,8 +755,8 @@ namespace oomph
     Dim = this->node_pt(0)->ndim();
 
     // Upcast pointer to bulk element
-    FLUID_BULK_ELEMENT *cast_bulk_el_pt =
-      dynamic_cast<FLUID_BULK_ELEMENT *>(bulk_el_pt);
+    FLUID_BULK_ELEMENT* cast_bulk_el_pt =
+      dynamic_cast<FLUID_BULK_ELEMENT*>(bulk_el_pt);
 
     // Read the index from the (cast) bulk element.
     U_index_axisym_poroelastic_fsi.resize(3);
@@ -770,7 +770,7 @@ namespace oomph
     unsigned n = cast_bulk_el_pt->nnode();
     for (unsigned j = 0; j < n; j++)
     {
-      Node *nod_pt = cast_bulk_el_pt->node_pt(j);
+      Node* nod_pt = cast_bulk_el_pt->node_pt(j);
       bool do_it = true;
       unsigned nn = nnode();
       for (unsigned jj = 0; jj < nn; jj++)
@@ -801,9 +801,9 @@ namespace oomph
   void LinearisedAxisymPoroelasticBJS_FSIElement<FLUID_BULK_ELEMENT,
                                                  POROELASTICITY_BULK_ELEMENT>::
     fill_in_generic_residual_contribution_axisym_poroelastic_fsi(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      const unsigned &flag)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag)
   {
     // Find out how many nodes there are
     const unsigned n_node = nnode();
@@ -857,11 +857,10 @@ namespace oomph
       // Loop over nodes
       for (unsigned j = 0; j < n_node; j++)
       {
-        Node *nod_pt = node_pt(j);
+        Node* nod_pt = node_pt(j);
 
         // Cast to a boundary node
-        BoundaryNodeBase *bnod_pt =
-          dynamic_cast<BoundaryNodeBase *>(node_pt(j));
+        BoundaryNodeBase* bnod_pt = dynamic_cast<BoundaryNodeBase*>(node_pt(j));
 
         // Get the index of the first nodal value associated with
         // this FaceElement
@@ -888,7 +887,7 @@ namespace oomph
       {
         // Get fluid velocity from bulk element
         Vector<double> fluid_veloc_from_bulk(Dim + 1, 0.0);
-        dynamic_cast<FLUID_BULK_ELEMENT *>(bulk_element_pt())
+        dynamic_cast<FLUID_BULK_ELEMENT*>(bulk_element_pt())
           ->interpolated_u_axi_nst(s_bulk, fluid_veloc_from_bulk);
 
         double error = 0.0;
@@ -915,9 +914,8 @@ namespace oomph
 #endif
 
       // Get solid velocity from adjacent solid
-      POROELASTICITY_BULK_ELEMENT *ext_el_pt =
-        dynamic_cast<POROELASTICITY_BULK_ELEMENT *>(
-          external_element_pt(0, ipt));
+      POROELASTICITY_BULK_ELEMENT* ext_el_pt =
+        dynamic_cast<POROELASTICITY_BULK_ELEMENT*>(external_element_pt(0, ipt));
       Vector<double> s_ext(external_element_local_coord(0, ipt));
       Vector<double> du_dt(2), q(2);
       ext_el_pt->interpolated_du_dt(s_ext, du_dt);
@@ -941,11 +939,11 @@ namespace oomph
       // Get pointer to associated face element to get geometric information
       // from (if set up)
       FSILinearisedAxisymPoroelasticTractionElement<POROELASTICITY_BULK_ELEMENT,
-                                                    FLUID_BULK_ELEMENT>
-        *ext_face_el_pt =
+                                                    FLUID_BULK_ELEMENT>*
+        ext_face_el_pt =
           dynamic_cast<FSILinearisedAxisymPoroelasticTractionElement<
             POROELASTICITY_BULK_ELEMENT,
-            FLUID_BULK_ELEMENT> *>(external_element_pt(1, ipt));
+            FLUID_BULK_ELEMENT>*>(external_element_pt(1, ipt));
 
       // Update geometry
       if (ext_face_el_pt != 0)
@@ -1003,7 +1001,7 @@ namespace oomph
 
       // Get the fluid traction from the NSt bulk element
       Vector<double> traction_nst(3);
-      dynamic_cast<FLUID_BULK_ELEMENT *>(bulk_element_pt())
+      dynamic_cast<FLUID_BULK_ELEMENT*>(bulk_element_pt())
         ->traction(s_bulk, interpolated_normal, traction_nst);
 
       // Calculate the normal and tangential components
@@ -1070,8 +1068,8 @@ namespace oomph
               for (unsigned l2 = 0; l2 < n_node; l2++)
               {
                 // Cast to a boundary node
-                BoundaryNodeBase *bnod_pt =
-                  dynamic_cast<BoundaryNodeBase *>(node_pt(l2));
+                BoundaryNodeBase* bnod_pt =
+                  dynamic_cast<BoundaryNodeBase*>(node_pt(l2));
 
                 // Local unknown
                 int local_unknown = nodal_local_eqn(
@@ -1092,8 +1090,8 @@ namespace oomph
           // Now do the Lagrange multiplier equations
           //-----------------------------------------
           // Cast to a boundary node
-          BoundaryNodeBase *bnod_pt =
-            dynamic_cast<BoundaryNodeBase *>(node_pt(l));
+          BoundaryNodeBase* bnod_pt =
+            dynamic_cast<BoundaryNodeBase*>(node_pt(l));
 
           // Local eqn number:
           int local_eqn = nodal_local_eqn(

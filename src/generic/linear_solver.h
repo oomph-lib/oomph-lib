@@ -101,13 +101,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    LinearSolver(const LinearSolver &dummy)
+    LinearSolver(const LinearSolver& dummy)
     {
       BrokenCopy::broken_copy("LinearSolver");
     }
 
     /// Broken assignment operator
-    void operator=(const LinearSolver &)
+    void operator=(const LinearSolver&)
     {
       BrokenCopy::broken_assign("LinearSolver");
     }
@@ -158,13 +158,13 @@ namespace oomph
     /// \short Solver: Takes pointer to problem and returns the results vector
     /// which contains the solution of the linear system defined by
     /// the problem's fully assembled Jacobian and residual vector.
-    virtual void solve(Problem *const &problem_pt, DoubleVector &result) = 0;
+    virtual void solve(Problem* const& problem_pt, DoubleVector& result) = 0;
 
     /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs
     /// vector and returns the solution of the linear system.
-    virtual void solve(DoubleMatrixBase *const &matrix_pt,
-                       const DoubleVector &rhs,
-                       DoubleVector &result)
+    virtual void solve(DoubleMatrixBase* const& matrix_pt,
+                       const DoubleVector& rhs,
+                       DoubleVector& result)
     {
       throw OomphLibError(
         "DoubleVector based solve function not implemented for this solver",
@@ -174,9 +174,9 @@ namespace oomph
 
     /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs
     /// vector and returns the solution of the linear system.
-    virtual void solve(DoubleMatrixBase *const &matrix_pt,
-                       const Vector<double> &rhs,
-                       Vector<double> &result)
+    virtual void solve(DoubleMatrixBase* const& matrix_pt,
+                       const Vector<double>& rhs,
+                       Vector<double>& result)
     {
       throw OomphLibError(
         "Vector<double> based solve function not implemented for this solver",
@@ -187,7 +187,7 @@ namespace oomph
     /// \short Resolve the system defined by the last assembled jacobian
     /// and the rhs vector. Solution is returned in the vector result.
     /// (broken virtual)
-    virtual void resolve(const DoubleVector &rhs, DoubleVector &result)
+    virtual void resolve(const DoubleVector& rhs, DoubleVector& result)
     {
       throw OomphLibError(
         "Resolve function not implemented for this linear solver",
@@ -248,7 +248,7 @@ namespace oomph
     }
 
     /// \short function to access the gradient, provided it has been computed
-    void get_gradient(DoubleVector &gradient)
+    void get_gradient(DoubleVector& gradient)
     {
 #ifdef PARANOID
       if (Gradient_has_been_computed)
@@ -294,13 +294,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    DenseLU(const DenseLU &dummy)
+    DenseLU(const DenseLU& dummy)
     {
       BrokenCopy::broken_copy("DenseLU");
     }
 
     /// Broken assignment operator
-    void operator=(const DenseLU &)
+    void operator=(const DenseLU&)
     {
       BrokenCopy::broken_assign("DenseLU");
     }
@@ -314,19 +314,19 @@ namespace oomph
     /// \short Solver: Takes pointer to problem and returns the results Vector
     /// which contains the solution of the linear system defined by
     /// the problem's fully assembled Jacobian and residual Vector.
-    void solve(Problem *const &problem_pt, DoubleVector &result);
+    void solve(Problem* const& problem_pt, DoubleVector& result);
 
     /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs
     /// vector and returns the solution of the linear system.
-    void solve(DoubleMatrixBase *const &matrix_pt,
-               const DoubleVector &rhs,
-               DoubleVector &result);
+    void solve(DoubleMatrixBase* const& matrix_pt,
+               const DoubleVector& rhs,
+               DoubleVector& result);
 
     /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs
     /// vector and returns the solution of the linear system.
-    void solve(DoubleMatrixBase *const &matrix_pt,
-               const Vector<double> &rhs,
-               Vector<double> &result);
+    void solve(DoubleMatrixBase* const& matrix_pt,
+               const Vector<double>& rhs,
+               Vector<double>& result);
 
     ///  \short returns the time taken to assemble the jacobian matrix and
     /// residual vector
@@ -344,13 +344,13 @@ namespace oomph
 
   protected:
     /// Perform the LU decomposition of the matrix
-    void factorise(DoubleMatrixBase *const &matrix_pt);
+    void factorise(DoubleMatrixBase* const& matrix_pt);
 
     /// Do the backsubstitution step to solve the system LU result = rhs
-    void backsub(const DoubleVector &rhs, DoubleVector &result);
+    void backsub(const DoubleVector& rhs, DoubleVector& result);
 
     /// perform back substitution using Vector<double>
-    void backsub(const Vector<double> &rhs, Vector<double> &result);
+    void backsub(const Vector<double>& rhs, Vector<double>& result);
 
     /// Clean up the stored LU factors
     void clean_up_memory();
@@ -367,10 +367,10 @@ namespace oomph
 
   private:
     /// Pointer to storage for the index of permutations in the LU solve
-    long *Index;
+    long* Index;
 
     /// Pointer to storage for the LU decomposition
-    double *LU_factors;
+    double* LU_factors;
   };
 
   //====================================================================
@@ -385,13 +385,13 @@ namespace oomph
     FD_LU() : DenseLU() {}
 
     /// Broken copy constructor
-    FD_LU(const FD_LU &dummy)
+    FD_LU(const FD_LU& dummy)
     {
       BrokenCopy::broken_copy("FD_LU");
     }
 
     /// Broken assignment operator
-    void operator=(const FD_LU &)
+    void operator=(const FD_LU&)
     {
       BrokenCopy::broken_assign("FD_LU");
     }
@@ -399,13 +399,13 @@ namespace oomph
     /// \short Solver: Takes pointer to problem and returns the results Vector
     /// which contains the solution of the linear system defined by
     /// the problem's residual Vector (Jacobian computed by FD approx.)
-    void solve(Problem *const &problem_pt, DoubleVector &result);
+    void solve(Problem* const& problem_pt, DoubleVector& result);
 
     /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs
     /// vector and returns the solution of the linear system.
-    void solve(DoubleMatrixBase *const &matrix_pt,
-               const DoubleVector &rhs,
-               DoubleVector &result)
+    void solve(DoubleMatrixBase* const& matrix_pt,
+               const DoubleVector& rhs,
+               DoubleVector& result)
     {
       DenseLU::solve(matrix_pt, rhs, result);
     }
@@ -414,9 +414,9 @@ namespace oomph
     /// and rhs vector and returns the solution of the linear system
     /// Call the broken base-class version. If you want this, please
     /// implement it
-    void solve(DoubleMatrixBase *const &matrix_pt,
-               const Vector<double> &rhs,
-               Vector<double> &result)
+    void solve(DoubleMatrixBase* const& matrix_pt,
+               const Vector<double>& rhs,
+               Vector<double>& result)
     {
       LinearSolver::solve(matrix_pt, rhs, result);
     }
@@ -479,13 +479,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    SuperLUSolver(const SuperLUSolver &dummy)
+    SuperLUSolver(const SuperLUSolver& dummy)
     {
       BrokenCopy::broken_copy("SuperLUSolver");
     }
 
     /// Broken assignment operator
-    void operator=(const SuperLUSolver &)
+    void operator=(const SuperLUSolver&)
     {
       BrokenCopy::broken_assign("SuperLUSolver");
     }
@@ -515,16 +515,16 @@ namespace oomph
     /// \short Solver: Takes pointer to problem and returns the results Vector
     /// which contains the solution of the linear system defined by
     /// the problem's fully assembled Jacobian and residual Vector.
-    void solve(Problem *const &problem_pt, DoubleVector &result);
+    void solve(Problem* const& problem_pt, DoubleVector& result);
 
     /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs
     /// vector and returns the solution of the linear system.
     /// The function returns the global result Vector.
     /// Note: if Delete_matrix_data is true the function
     /// matrix_pt->clean_up_memory() will be used to wipe the matrix data.
-    void solve(DoubleMatrixBase *const &matrix_pt,
-               const DoubleVector &rhs,
-               DoubleVector &result);
+    void solve(DoubleMatrixBase* const& matrix_pt,
+               const DoubleVector& rhs,
+               DoubleVector& result);
 
     /*  /// \short Linear-algebra-type solver: Takes pointer to a matrix */
     /*  /// and rhs vector and returns the solution of the linear system */
@@ -538,7 +538,7 @@ namespace oomph
     /// \short Resolve the system defined by the last assembled jacobian
     /// and the specified rhs vector if resolve has been enabled.
     /// Note: returns the global result Vector.
-    void resolve(const DoubleVector &rhs, DoubleVector &result);
+    void resolve(const DoubleVector& rhs, DoubleVector& result);
 
     /// Enable documentation of solver statistics
     void enable_doc_stats()
@@ -569,18 +569,18 @@ namespace oomph
     /// \short Do the factorisation stage
     /// Note: if Delete_matrix_data is true the function
     /// matrix_pt->clean_up_memory() will be used to wipe the matrix data.
-    void factorise(DoubleMatrixBase *const &matrix_pt);
+    void factorise(DoubleMatrixBase* const& matrix_pt);
 
     /// \short Do the backsubstitution for SuperLU solver
     /// Note: returns the global result Vector.
-    void backsub(const DoubleVector &rhs, DoubleVector &result);
+    void backsub(const DoubleVector& rhs, DoubleVector& result);
 
     /// Clean up the memory allocated by the solver
     void clean_up_memory();
 
     /// \short Specify the solve type. Either default, serial or distributed.
     /// See enum SuperLU_solver_type for more details.
-    void set_solver_type(const Type &t)
+    void set_solver_type(const Type& t)
     {
       this->clean_up_memory();
       Solver_type = t;
@@ -670,17 +670,17 @@ namespace oomph
 
   private:
     /// factorise method for SuperLU (serial)
-    void factorise_serial(DoubleMatrixBase *const &matrix_pt);
+    void factorise_serial(DoubleMatrixBase* const& matrix_pt);
 
     /// backsub method for SuperLU (serial)
-    void backsub_serial(const DoubleVector &rhs, DoubleVector &result);
+    void backsub_serial(const DoubleVector& rhs, DoubleVector& result);
 
 #ifdef OOMPH_HAS_MPI
     /// factorise method for SuperLU Dist
-    void factorise_distributed(DoubleMatrixBase *const &matrix_pt);
+    void factorise_distributed(DoubleMatrixBase* const& matrix_pt);
 
     /// backsub method for SuperLU Dist
-    void backsub_distributed(const DoubleVector &rhs, DoubleVector &result);
+    void backsub_distributed(const DoubleVector& rhs, DoubleVector& result);
 #endif
 
     // SuperLUSolver member data
@@ -708,7 +708,7 @@ namespace oomph
     ///////////////////////////////
 
     /// Storage for the LU factors as required by SuperLU
-    void *Serial_f_factors;
+    void* Serial_f_factors;
 
     /// Info flag for the SuperLU solver
     int Serial_info;
@@ -744,7 +744,7 @@ namespace oomph
     bool Dist_distributed_solve_data_allocated;
 
     /// Storage for the LU factors and other data required by SuperLU
-    void *Dist_solver_data_pt;
+    void* Dist_solver_data_pt;
 
     /// Number of rows for the process grid
     int Dist_nprow;
@@ -770,15 +770,15 @@ namespace oomph
     bool Dist_delete_matrix_data;
 
     /// Pointer for storage of the matrix values required by SuperLU_DIST
-    double *Dist_value_pt;
+    double* Dist_value_pt;
 
     /// \short Pointer for storage of matrix rows or column indices required
     /// by SuperLU_DIST
-    int *Dist_index_pt;
+    int* Dist_index_pt;
 
     /// \short Pointers for storage of matrix column or row starts
     // required by SuperLU_DIST
-    int *Dist_start_pt;
+    int* Dist_start_pt;
 
 #endif
   }; // end of SuperLUSolver

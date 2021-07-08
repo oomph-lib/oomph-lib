@@ -66,13 +66,13 @@ class MyStraightLine : public GeomObject
 {
 public:
   /// Constructor:  Pass start and end points
-  MyStraightLine(const Vector<double> &r_start, const Vector<double> &r_end) :
+  MyStraightLine(const Vector<double>& r_start, const Vector<double>& r_end) :
     GeomObject(1, 2), R_start(r_start), R_end(r_end)
   {
   }
 
   /// Broken copy constructor
-  MyStraightLine(const MyStraightLine &dummy)
+  MyStraightLine(const MyStraightLine& dummy)
   {
     BrokenCopy::broken_copy("MyStraightLine");
   }
@@ -81,7 +81,7 @@ public:
   ~MyStraightLine() {}
 
   /// \short Position Vector at Lagrangian coordinate zeta
-  void position(const Vector<double> &zeta, Vector<double> &r) const
+  void position(const Vector<double>& zeta, Vector<double>& r) const
   {
     // Position Vector
     r[0] = R_start[0] + (R_end[0] - R_start[0]) * zeta[0];
@@ -146,9 +146,9 @@ namespace Global_Parameters
   double Alpha = 0.0;
 
   /// Pressure load (real and imag part)
-  void pressure_load(const Vector<double> &x,
-                     const Vector<double> &n,
-                     Vector<std::complex<double>> &traction)
+  void pressure_load(const Vector<double>& x,
+                     const Vector<double>& n,
+                     Vector<std::complex<double>>& traction)
   {
     double phi = atan2(x[1], x[0]);
     double magnitude =
@@ -196,7 +196,7 @@ public:
   }
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 private:
   /// \short Create FSI traction elements
@@ -215,7 +215,7 @@ private:
   void create_solid_traction_elements();
 
   /// Delete (face) elements in specified mesh
-  void delete_face_elements(Mesh *const &boundary_mesh_pt);
+  void delete_face_elements(Mesh* const& boundary_mesh_pt);
 
   // Complete problem setup
   void complete_problem_setup();
@@ -253,38 +253,38 @@ private:
 #ifdef ADAPTIVE
 
   /// Pointer to solid mesh
-  RefineableTriangleMesh<ELASTICITY_ELEMENT> *Solid_mesh_pt;
+  RefineableTriangleMesh<ELASTICITY_ELEMENT>* Solid_mesh_pt;
 
 #else
 
   /// Pointer to solid mesh
-  TriangleMesh<ELASTICITY_ELEMENT> *Solid_mesh_pt;
+  TriangleMesh<ELASTICITY_ELEMENT>* Solid_mesh_pt;
 
 #endif
 
   /// Pointer to mesh of solid traction elements
-  Mesh *Solid_traction_mesh_pt;
+  Mesh* Solid_traction_mesh_pt;
 
   /// Pointer to mesh of FSI traction elements
-  Mesh *FSI_traction_mesh_pt;
+  Mesh* FSI_traction_mesh_pt;
 
 #ifdef ADAPTIVE
 
   /// Pointer to Helmholtz mesh
-  RefineableTriangleMesh<HELMHOLTZ_ELEMENT> *Helmholtz_mesh_pt;
+  RefineableTriangleMesh<HELMHOLTZ_ELEMENT>* Helmholtz_mesh_pt;
 
 #else
 
   /// Pointer to Helmholtz mesh
-  TriangleMesh<HELMHOLTZ_ELEMENT> *Helmholtz_mesh_pt;
+  TriangleMesh<HELMHOLTZ_ELEMENT>* Helmholtz_mesh_pt;
 
 #endif
 
   /// Pointer to mesh of Helmholtz FSI flux elements
-  Mesh *Helmholtz_fsi_flux_mesh_pt;
+  Mesh* Helmholtz_fsi_flux_mesh_pt;
 
   /// \short Pointer to mesh containing the DtN elements
-  FourierDecomposedHelmholtzDtNMesh<HELMHOLTZ_ELEMENT> *Helmholtz_DtN_mesh_pt;
+  FourierDecomposedHelmholtzDtNMesh<HELMHOLTZ_ELEMENT>* Helmholtz_DtN_mesh_pt;
 
   /// Trace file
   ofstream Trace_file;
@@ -327,14 +327,14 @@ CoatedSphereProblem<ELASTICITY_ELEMENT,
     double half_phi_rib = asin(0.5 * rib_thick / r_inner);
 
     // Pointer to the closed curve that defines the outer boundary
-    TriangleMeshClosedCurve *closed_curve_pt = 0;
+    TriangleMeshClosedCurve* closed_curve_pt = 0;
 
     // Provide storage for pointers to the parts of the curvilinear boundary
-    Vector<TriangleMeshCurveSection *> curvilinear_boundary_pt;
+    Vector<TriangleMeshCurveSection*> curvilinear_boundary_pt;
 
     // Outer boundary
     //---------------
-    Ellipse *outer_boundary_circle_pt = new Ellipse(r_outer, r_outer);
+    Ellipse* outer_boundary_circle_pt = new Ellipse(r_outer, r_outer);
     double zeta_start = -0.5 * MathematicalConstants::Pi;
     double zeta_end = 0.5 * MathematicalConstants::Pi;
     unsigned nsegment = 50;
@@ -351,7 +351,7 @@ CoatedSphereProblem<ELASTICITY_ELEMENT,
     r_start[1] = r_outer;
     r_end[0] = 0.0;
     r_end[1] = r_inner;
-    MyStraightLine *upper_sym_pt = new MyStraightLine(r_start, r_end);
+    MyStraightLine* upper_sym_pt = new MyStraightLine(r_start, r_end);
     zeta_start = 0.0;
     zeta_end = 1.0;
     nsegment = 1;
@@ -364,7 +364,7 @@ CoatedSphereProblem<ELASTICITY_ELEMENT,
 
     // Upper part of inner boundary
     //-----------------------------
-    Ellipse *upper_inner_boundary_pt = new Ellipse(r_inner, r_inner);
+    Ellipse* upper_inner_boundary_pt = new Ellipse(r_inner, r_inner);
     zeta_start = 0.5 * MathematicalConstants::Pi;
     zeta_end = half_phi_rib;
     nsegment = 20;
@@ -376,11 +376,11 @@ CoatedSphereProblem<ELASTICITY_ELEMENT,
     Upper_inner_boundary_id = boundary_id;
 
     // Data associated with rib
-    MyStraightLine *upper_inward_rib_pt = 0;
-    MyStraightLine *lower_inward_rib_pt = 0;
-    TriangleMeshCurviLine *upper_inward_rib_curviline_pt = 0;
-    Vector<TriangleMeshOpenCurve *> inner_boundary_pt;
-    TriangleMeshCurviLine *lower_inward_rib_curviline_pt = 0;
+    MyStraightLine* upper_inward_rib_pt = 0;
+    MyStraightLine* lower_inward_rib_pt = 0;
+    TriangleMeshCurviLine* upper_inward_rib_curviline_pt = 0;
+    Vector<TriangleMeshOpenCurve*> inner_boundary_pt;
+    TriangleMeshCurviLine* lower_inward_rib_curviline_pt = 0;
     Vector<double> rib_center(2);
 
     // Upper half of inward rib
@@ -404,7 +404,7 @@ CoatedSphereProblem<ELASTICITY_ELEMENT,
     r_start[1] = r_end[1];
     r_end[0] = r_start[0];
     r_end[1] = r_start[1] + 0.5 * (t_width - rib_thick);
-    MyStraightLine *vertical_upper_t_rib_pt =
+    MyStraightLine* vertical_upper_t_rib_pt =
       new MyStraightLine(r_start, r_end);
     zeta_start = 0.0;
     zeta_end = 1.0;
@@ -419,7 +419,7 @@ CoatedSphereProblem<ELASTICITY_ELEMENT,
     r_start[1] = r_end[1];
     r_end[0] = r_start[0] - t_thick;
     r_end[1] = r_start[1];
-    MyStraightLine *horizontal_upper_t_rib_pt =
+    MyStraightLine* horizontal_upper_t_rib_pt =
       new MyStraightLine(r_start, r_end);
     zeta_start = 0.0;
     zeta_end = 1.0;
@@ -434,7 +434,7 @@ CoatedSphereProblem<ELASTICITY_ELEMENT,
     r_start[1] = r_end[1];
     r_end[0] = r_start[0];
     r_end[1] = -r_start[1];
-    MyStraightLine *inner_vertical_rib_pt = new MyStraightLine(r_start, r_end);
+    MyStraightLine* inner_vertical_rib_pt = new MyStraightLine(r_start, r_end);
     zeta_start = 0.0;
     zeta_end = 1.0;
     nsegment = 1;
@@ -448,7 +448,7 @@ CoatedSphereProblem<ELASTICITY_ELEMENT,
     r_start[1] = r_end[1];
     r_end[0] = r_start[0] + t_thick;
     r_end[1] = r_start[1];
-    MyStraightLine *horizontal_lower_t_rib_pt =
+    MyStraightLine* horizontal_lower_t_rib_pt =
       new MyStraightLine(r_start, r_end);
     zeta_start = 0.0;
     zeta_end = 1.0;
@@ -463,7 +463,7 @@ CoatedSphereProblem<ELASTICITY_ELEMENT,
     r_start[1] = r_end[1];
     r_end[0] = r_start[0];
     r_end[1] = r_start[1] + 0.5 * (t_width - rib_thick);
-    MyStraightLine *vertical_lower_t_rib_pt =
+    MyStraightLine* vertical_lower_t_rib_pt =
       new MyStraightLine(r_start, r_end);
     zeta_start = 0.0;
     zeta_end = 1.0;
@@ -489,7 +489,7 @@ CoatedSphereProblem<ELASTICITY_ELEMENT,
 
     // Lower part of inner boundary
     //-----------------------------
-    Ellipse *lower_inner_boundary_circle_pt = new Ellipse(r_inner, r_inner);
+    Ellipse* lower_inner_boundary_circle_pt = new Ellipse(r_inner, r_inner);
     zeta_start = -half_phi_rib;
     zeta_end = -0.5 * MathematicalConstants::Pi;
     nsegment = 20;
@@ -510,7 +510,7 @@ CoatedSphereProblem<ELASTICITY_ELEMENT,
     r_start[1] = -r_inner;
     r_end[0] = 0.0;
     r_end[1] = -r_outer;
-    MyStraightLine *lower_sym_pt = new MyStraightLine(r_start, r_end);
+    MyStraightLine* lower_sym_pt = new MyStraightLine(r_start, r_end);
     zeta_start = 0.0;
     zeta_end = 1.0;
     nsegment = 1;
@@ -527,7 +527,7 @@ CoatedSphereProblem<ELASTICITY_ELEMENT,
 
     // Vertical dividing line across base of T-rib
     //--------------------------------------------
-    Vector<TriangleMeshCurveSection *> internal_polyline_pt(1);
+    Vector<TriangleMeshCurveSection*> internal_polyline_pt(1);
     r_start[0] = r_inner * cos(half_phi_rib);
     r_start[1] = r_inner * sin(half_phi_rib);
     r_end[0] = r_inner * cos(half_phi_rib);
@@ -537,7 +537,7 @@ CoatedSphereProblem<ELASTICITY_ELEMENT,
     boundary_vertices[0] = r_start;
     boundary_vertices[1] = r_end;
     boundary_id = 100;
-    TriangleMeshPolyLine *rib_divider_pt =
+    TriangleMeshPolyLine* rib_divider_pt =
       new TriangleMeshPolyLine(boundary_vertices, boundary_id);
     internal_polyline_pt[0] = rib_divider_pt;
 
@@ -608,14 +608,14 @@ CoatedSphereProblem<ELASTICITY_ELEMENT,
     double r_outer = Global_Parameters::Outer_radius;
 
     // Pointer to the closed curve that defines the outer boundary
-    TriangleMeshClosedCurve *closed_curve_pt = 0;
+    TriangleMeshClosedCurve* closed_curve_pt = 0;
 
     // Provide storage for pointers to the parts of the curvilinear boundary
-    Vector<TriangleMeshCurveSection *> curvilinear_boundary_pt;
+    Vector<TriangleMeshCurveSection*> curvilinear_boundary_pt;
 
     // Outer boundary
     //---------------
-    Ellipse *outer_boundary_circle_pt = new Ellipse(r_outer, r_outer);
+    Ellipse* outer_boundary_circle_pt = new Ellipse(r_outer, r_outer);
     double zeta_start = -0.5 * MathematicalConstants::Pi;
     double zeta_end = 0.5 * MathematicalConstants::Pi;
     unsigned nsegment = 50;
@@ -632,7 +632,7 @@ CoatedSphereProblem<ELASTICITY_ELEMENT,
     r_start[1] = r_outer;
     r_end[0] = 0.0;
     r_end[1] = r_inner;
-    MyStraightLine *upper_sym_pt = new MyStraightLine(r_start, r_end);
+    MyStraightLine* upper_sym_pt = new MyStraightLine(r_start, r_end);
     zeta_start = 0.0;
     zeta_end = 1.0;
     nsegment = 1;
@@ -645,7 +645,7 @@ CoatedSphereProblem<ELASTICITY_ELEMENT,
 
     // Inner boundary
     //---------------
-    Ellipse *upper_inner_boundary_pt = new Ellipse(r_inner, r_inner);
+    Ellipse* upper_inner_boundary_pt = new Ellipse(r_inner, r_inner);
     zeta_start = 0.5 * MathematicalConstants::Pi;
     zeta_end = -0.5 * MathematicalConstants::Pi;
     nsegment = 40;
@@ -662,7 +662,7 @@ CoatedSphereProblem<ELASTICITY_ELEMENT,
     r_start[1] = -r_inner;
     r_end[0] = 0.0;
     r_end[1] = -r_outer;
-    MyStraightLine *lower_sym_pt = new MyStraightLine(r_start, r_end);
+    MyStraightLine* lower_sym_pt = new MyStraightLine(r_start, r_end);
     zeta_start = 0.0;
     zeta_end = 1.0;
     nsegment = 1;
@@ -847,7 +847,7 @@ void CoatedSphereProblem<ELASTICITY_ELEMENT,
     unsigned n_node = Solid_mesh_pt->nboundary_node(Upper_symmetry_boundary_id);
     for (unsigned i = 0; i < n_node; i++)
     {
-      Node *nod_pt =
+      Node* nod_pt =
         Solid_mesh_pt->boundary_node_pt(Upper_symmetry_boundary_id, i);
 
       // Real part of r-displacement
@@ -873,7 +873,7 @@ void CoatedSphereProblem<ELASTICITY_ELEMENT,
     unsigned n_node = Solid_mesh_pt->nboundary_node(Lower_symmetry_boundary_id);
     for (unsigned i = 0; i < n_node; i++)
     {
-      Node *nod_pt =
+      Node* nod_pt =
         Solid_mesh_pt->boundary_node_pt(Lower_symmetry_boundary_id, i);
 
       // Real part of r-displacement
@@ -903,7 +903,7 @@ void CoatedSphereProblem<ELASTICITY_ELEMENT,
     for (unsigned e = 0; e < nel; e++)
     {
       // Cast to a solid element
-      ELASTICITY_ELEMENT *el_pt = dynamic_cast<ELASTICITY_ELEMENT *>(
+      ELASTICITY_ELEMENT* el_pt = dynamic_cast<ELASTICITY_ELEMENT*>(
         Solid_mesh_pt->region_element_pt(r, e));
 
       // Set the pointer to Fourier wavenumber
@@ -925,8 +925,8 @@ void CoatedSphereProblem<ELASTICITY_ELEMENT,
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    HELMHOLTZ_ELEMENT *el_pt =
-      dynamic_cast<HELMHOLTZ_ELEMENT *>(Helmholtz_mesh_pt->element_pt(i));
+    HELMHOLTZ_ELEMENT* el_pt =
+      dynamic_cast<HELMHOLTZ_ELEMENT*>(Helmholtz_mesh_pt->element_pt(i));
 
     // Set the k_squared pointer
     el_pt->k_squared_pt() = &Global_Parameters::K_squared;
@@ -941,7 +941,7 @@ void CoatedSphereProblem<ELASTICITY_ELEMENT,
 //==========================================================
 template<class ELASTICITY_ELEMENT, class HELMHOLTZ_ELEMENT>
 void CoatedSphereProblem<ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT>::
-  delete_face_elements(Mesh *const &boundary_mesh_pt)
+  delete_face_elements(Mesh* const& boundary_mesh_pt)
 {
   // How many surface elements are in the surface mesh
   unsigned n_element = boundary_mesh_pt->nelement();
@@ -973,15 +973,15 @@ void CoatedSphereProblem<ELASTICITY_ELEMENT,
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    HELMHOLTZ_ELEMENT *bulk_elem_pt = dynamic_cast<HELMHOLTZ_ELEMENT *>(
+    HELMHOLTZ_ELEMENT* bulk_elem_pt = dynamic_cast<HELMHOLTZ_ELEMENT*>(
       Helmholtz_mesh_pt->boundary_element_pt(b, e));
 
     // Find the index of the face of element e along boundary b
     int face_index = Helmholtz_mesh_pt->face_index_at_boundary(b, e);
 
     // Build the corresponding DtN element
-    FourierDecomposedHelmholtzDtNBoundaryElement<HELMHOLTZ_ELEMENT>
-      *flux_element_pt =
+    FourierDecomposedHelmholtzDtNBoundaryElement<HELMHOLTZ_ELEMENT>*
+      flux_element_pt =
         new FourierDecomposedHelmholtzDtNBoundaryElement<HELMHOLTZ_ELEMENT>(
           bulk_elem_pt, face_index);
 
@@ -1051,7 +1051,7 @@ void CoatedSphereProblem<ELASTICITY_ELEMENT,
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    ELASTICITY_ELEMENT *bulk_elem_pt = dynamic_cast<ELASTICITY_ELEMENT *>(
+    ELASTICITY_ELEMENT* bulk_elem_pt = dynamic_cast<ELASTICITY_ELEMENT*>(
       Solid_mesh_pt->boundary_element_pt(b, e));
 
     // Find the index of the face of element e along boundary b
@@ -1060,7 +1060,7 @@ void CoatedSphereProblem<ELASTICITY_ELEMENT,
     // Create element
     FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement<
       ELASTICITY_ELEMENT,
-      HELMHOLTZ_ELEMENT> *el_pt =
+      HELMHOLTZ_ELEMENT>* el_pt =
       new FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement<
         ELASTICITY_ELEMENT,
         HELMHOLTZ_ELEMENT>(bulk_elem_pt, face_index);
@@ -1094,7 +1094,7 @@ void CoatedSphereProblem<ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT>::
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    HELMHOLTZ_ELEMENT *bulk_elem_pt = dynamic_cast<HELMHOLTZ_ELEMENT *>(
+    HELMHOLTZ_ELEMENT* bulk_elem_pt = dynamic_cast<HELMHOLTZ_ELEMENT*>(
       Helmholtz_mesh_pt->boundary_element_pt(b, e));
 
     // Find the index of the face of element e along boundary b
@@ -1103,7 +1103,7 @@ void CoatedSphereProblem<ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT>::
     // Create element
     FourierDecomposedHelmholtzFluxFromNormalDisplacementBCElement<
       HELMHOLTZ_ELEMENT,
-      ELASTICITY_ELEMENT> *el_pt =
+      ELASTICITY_ELEMENT>* el_pt =
       new FourierDecomposedHelmholtzFluxFromNormalDisplacementBCElement<
         HELMHOLTZ_ELEMENT,
         ELASTICITY_ELEMENT>(bulk_elem_pt, face_index);
@@ -1155,7 +1155,7 @@ void CoatedSphereProblem<ELASTICITY_ELEMENT,
     for (unsigned e = 0; e < n_element; e++)
     {
       // Get pointer to the bulk element that is adjacent to boundary b
-      ELASTICITY_ELEMENT *bulk_elem_pt = dynamic_cast<ELASTICITY_ELEMENT *>(
+      ELASTICITY_ELEMENT* bulk_elem_pt = dynamic_cast<ELASTICITY_ELEMENT*>(
         Solid_mesh_pt->boundary_element_in_region_pt(b, r, e));
 
       // Find the index of the face of element e along boundary b
@@ -1163,7 +1163,7 @@ void CoatedSphereProblem<ELASTICITY_ELEMENT,
 
       // Create element
       TimeHarmonicFourierDecomposedLinearElasticityTractionElement<
-        ELASTICITY_ELEMENT> *el_pt =
+        ELASTICITY_ELEMENT>* el_pt =
         new TimeHarmonicFourierDecomposedLinearElasticityTractionElement<
           ELASTICITY_ELEMENT>(bulk_elem_pt, face_index);
 
@@ -1185,7 +1185,7 @@ void CoatedSphereProblem<ELASTICITY_ELEMENT,
 //==================================================================
 template<class ELASTICITY_ELEMENT, class HELMHOLTZ_ELEMENT>
 void CoatedSphereProblem<ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT>::doc_solution(
-  DocInfo &doc_info)
+  DocInfo& doc_info)
 {
   // Doc parameters
   oomph_info << "Writing result for step " << doc_info.number()
@@ -1222,9 +1222,8 @@ void CoatedSphereProblem<ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT>::doc_solution(
   unsigned nn_element = Helmholtz_DtN_mesh_pt->nelement();
   for (unsigned e = 0; e < nn_element; e++)
   {
-    FourierDecomposedHelmholtzBCElementBase<HELMHOLTZ_ELEMENT> *el_pt =
-      dynamic_cast<
-        FourierDecomposedHelmholtzBCElementBase<HELMHOLTZ_ELEMENT> *>(
+    FourierDecomposedHelmholtzBCElementBase<HELMHOLTZ_ELEMENT>* el_pt =
+      dynamic_cast<FourierDecomposedHelmholtzBCElementBase<HELMHOLTZ_ELEMENT>*>(
         Helmholtz_DtN_mesh_pt->element_pt(e));
     power += el_pt->global_power_contribution(some_file);
   }
@@ -1287,7 +1286,7 @@ void CoatedSphereProblem<ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT>::doc_solution(
 //=======start_of_main==================================================
 /// Driver for coated sphere loaded by lineared fluid loading
 //======================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

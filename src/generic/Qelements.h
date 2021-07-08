@@ -69,7 +69,7 @@ namespace oomph
     QElementGeometricBase() {}
 
     /// Broken copy constructor
-    QElementGeometricBase(const QElementGeometricBase &)
+    QElementGeometricBase(const QElementGeometricBase&)
     {
       BrokenCopy::broken_copy("QElementGeometricBase");
     }
@@ -100,7 +100,7 @@ namespace oomph
     QElementBase() : S_macro_ll_pt(0), S_macro_ur_pt(0) {}
 
     /// Broken copy constructor
-    QElementBase(const QElementBase &)
+    QElementBase(const QElementBase&)
     {
       BrokenCopy::broken_copy("QElementBase");
     }
@@ -122,7 +122,7 @@ namespace oomph
     }
 
     /// Check whether the local coordinate are valid or not
-    bool local_coord_is_valid(const Vector<double> &s)
+    bool local_coord_is_valid(const Vector<double>& s)
     {
       unsigned ncoord = dim();
       for (unsigned i = 0; i < ncoord; i++)
@@ -138,7 +138,7 @@ namespace oomph
 
     /// \short Adjust local coordinates so that they're located inside
     /// the element
-    void move_local_coord_back_into_element(Vector<double> &s) const
+    void move_local_coord_back_into_element(Vector<double>& s) const
     {
       unsigned ncoord = dim();
       for (unsigned i = 0; i < ncoord; i++)
@@ -151,7 +151,7 @@ namespace oomph
 
     /// \short Set pointer to macro element also sets up storage for the
     /// reference coordinates and initialises them
-    virtual void set_macro_elem_pt(MacroElement *macro_elem_pt)
+    virtual void set_macro_elem_pt(MacroElement* macro_elem_pt)
     {
       // Get the spatial dimension (= number of local and macro element coords)
       unsigned n_dim = dim();
@@ -193,7 +193,7 @@ namespace oomph
 
     /// \short Access fct to the i-th coordinate of the element's
     /// "lower left" vertex in the associated MacroElement
-    double &s_macro_ll(const unsigned &i)
+    double& s_macro_ll(const unsigned& i)
     {
 #ifdef PARANOID
       if (S_macro_ll_pt == 0)
@@ -208,7 +208,7 @@ namespace oomph
 
     /// \short Access fct to the i-th coordinate of the element's
     /// "upper right" vertex in the associated MacroElement
-    double &s_macro_ur(const unsigned &i)
+    double& s_macro_ur(const unsigned& i)
     {
 #ifdef PARANOID
       if (S_macro_ur_pt == 0)
@@ -223,7 +223,7 @@ namespace oomph
 
     /// \short Access fct to the i-th coordinate of the element's
     /// "lower left" vertex in the associated MacroElement. (const version)
-    double s_macro_ll(const unsigned &i) const
+    double s_macro_ll(const unsigned& i) const
     {
 #ifdef PARANOID
       if (S_macro_ll_pt == 0)
@@ -238,7 +238,7 @@ namespace oomph
 
     /// \short Access fct to the i-th coordinate of the element's
     /// "upper right" vertex in the associated MacroElement. (const version)
-    double s_macro_ur(const unsigned &i) const
+    double s_macro_ur(const unsigned& i) const
     {
 #ifdef PARANOID
       if (S_macro_ur_pt == 0)
@@ -253,8 +253,8 @@ namespace oomph
 
     /// \short Global coordinates as function of local coordinates.
     /// using the macro element representation
-    void get_x_from_macro_element(const Vector<double> &s,
-                                  Vector<double> &x) const
+    void get_x_from_macro_element(const Vector<double>& s,
+                                  Vector<double>& x) const
     {
       // Check that there is a macro element
       if (Macro_elem_pt == 0)
@@ -278,9 +278,9 @@ namespace oomph
     /// \short Global coordinates as function of local coordinates
     /// at previous time "level" t (t=0: present; t>0: previous)
     /// using the macro element representation
-    void get_x_from_macro_element(const unsigned &t,
-                                  const Vector<double> &s,
-                                  Vector<double> &x)
+    void get_x_from_macro_element(const unsigned& t,
+                                  const Vector<double>& s,
+                                  Vector<double>& x)
     {
       // Check that there is a macro element
       if (Macro_elem_pt == 0)
@@ -318,10 +318,10 @@ namespace oomph
 
   private:
     /// Pointer to vector of lower left vertex coords. in macro element
-    Vector<double> *S_macro_ll_pt;
+    Vector<double>* S_macro_ll_pt;
 
     /// Pointer to vector of upper right vertex coords. in macro element
-    Vector<double> *S_macro_ur_pt;
+    Vector<double>* S_macro_ur_pt;
   };
 
   //////////////////////////////////////////////////////////////////////////
@@ -340,7 +340,7 @@ namespace oomph
     QSolidElementBase(){};
 
     /// Broken copy constructor
-    QSolidElementBase(const QSolidElementBase &)
+    QSolidElementBase(const QSolidElementBase&)
     {
       BrokenCopy::broken_copy("QSolidElementBase");
     }
@@ -358,7 +358,7 @@ namespace oomph
     /// set_undeformed_macro_elem_pt(...) if the deformation of
     /// the solid body is driven by a deformation of the
     /// "current" Domain/MacroElement representation of it's boundary.
-    virtual void set_macro_elem_pt(MacroElement *macro_elem_pt)
+    virtual void set_macro_elem_pt(MacroElement* macro_elem_pt)
     {
       // Call the general Q version which sets up the storage
       // for the reference coordinates
@@ -369,8 +369,8 @@ namespace oomph
     }
 
     /// \short Set pointers to "current" and "undeformed" MacroElements.
-    virtual void set_macro_elem_pt(MacroElement *macro_elem_pt,
-                                   MacroElement *undeformed_macro_elem_pt)
+    virtual void set_macro_elem_pt(MacroElement* macro_elem_pt,
+                                   MacroElement* undeformed_macro_elem_pt)
     {
       // Call the general Q version which sets up the storage
       // for the reference coordinates
@@ -388,11 +388,11 @@ namespace oomph
     /// based representation to be used to apply displacement boundary
     /// conditions exactly. Ditto for the Lagrangian coordinates returned
     /// in xi_fe and xi.
-    void get_x_and_xi(const Vector<double> &s,
-                      Vector<double> &x_fe,
-                      Vector<double> &x,
-                      Vector<double> &xi_fe,
-                      Vector<double> &xi) const
+    void get_x_and_xi(const Vector<double>& s,
+                      Vector<double>& x_fe,
+                      Vector<double>& x,
+                      Vector<double>& xi_fe,
+                      Vector<double>& xi) const
     {
       // Lagrangian coordinate: Directly from
       // underlying FE representation
@@ -481,7 +481,7 @@ namespace oomph
     virtual unsigned nvertex_node() const = 0;
 
     /// \short Pointer to the j-th vertex node in the element
-    virtual Node *vertex_node_pt(const unsigned &j) const = 0;
+    virtual Node* vertex_node_pt(const unsigned& j) const = 0;
   };
 
   //=======================================================================
@@ -511,7 +511,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    QElement(const QElement &)
+    QElement(const QElement&)
     {
       BrokenCopy::broken_copy("QElement");
     }
@@ -523,27 +523,27 @@ namespace oomph
       }*/
 
     /// Calculate the geometric shape functions at local coordinate s
-    void shape(const Vector<double> &s, Shape &psi) const;
+    void shape(const Vector<double>& s, Shape& psi) const;
 
     /// \short Compute the  geometric shape functions and
     /// derivatives w.r.t. local coordinates at local coordinate s
-    void dshape_local(const Vector<double> &s,
-                      Shape &psi,
-                      DShape &dpsids) const;
+    void dshape_local(const Vector<double>& s,
+                      Shape& psi,
+                      DShape& dpsids) const;
 
     /// \short Compute the geometric shape functions, derivatives and
     /// second derivatives w.r.t. local coordinates at local coordinate s
     /// d2psids(i,0) = \f$ d^2 \psi_j / d s^2 \f$
-    void d2shape_local(const Vector<double> &s,
-                       Shape &psi,
-                       DShape &dpsids,
-                       DShape &d2psids) const;
+    void d2shape_local(const Vector<double>& s,
+                       Shape& psi,
+                       DShape& dpsids,
+                       DShape& d2psids) const;
 
     /// \short Overload the template-free interface for the calculation of
     /// inverse jacobian matrix. This is a one-dimensional element, so
     /// use the 1D version.
-    double invert_jacobian_mapping(const DenseMatrix<double> &jacobian,
-                                   DenseMatrix<double> &inverse_jacobian) const
+    double invert_jacobian_mapping(const DenseMatrix<double>& jacobian,
+                                   DenseMatrix<double>& inverse_jacobian) const
     {
       return FiniteElement::invert_jacobian<1>(jacobian, inverse_jacobian);
     }
@@ -567,10 +567,10 @@ namespace oomph
     }
 
     /// \short Pointer to the j-th vertex node in the element
-    Node *vertex_node_pt(const unsigned &j) const
+    Node* vertex_node_pt(const unsigned& j) const
     {
       unsigned n_node_1d = nnode_1d();
-      Node *nod_pt;
+      Node* nod_pt;
       switch (j)
       {
         case 0:
@@ -592,7 +592,7 @@ namespace oomph
     }
 
     /// Get local coordinates of node j in the element; vector sets its own size
-    void local_coordinate_of_node(const unsigned &j, Vector<double> &s) const
+    void local_coordinate_of_node(const unsigned& j, Vector<double>& s) const
     {
       s.resize(1);
       s[0] = this->s_min() +
@@ -600,7 +600,7 @@ namespace oomph
     }
 
     /// Get the local fraction of node j in the element
-    void local_fraction_of_node(const unsigned &j, Vector<double> &s_fraction)
+    void local_fraction_of_node(const unsigned& j, Vector<double>& s_fraction)
     {
       s_fraction.resize(1);
       s_fraction[0] = double(j) / double(NNODE_1D - 1);
@@ -608,15 +608,15 @@ namespace oomph
 
     /// This function returns the local fraction of all nodes at the n-th
     /// position in a one dimensional expansion along the i-th local coordinate
-    inline double local_one_d_fraction_of_node(const unsigned &n1d,
-                                               const unsigned &i)
+    inline double local_one_d_fraction_of_node(const unsigned& n1d,
+                                               const unsigned& i)
     {
       // It's just the value of the node divided by the number of 1-D nodes
       return double(n1d) / double(NNODE_1D - 1);
     }
 
     /// Get the node at the specified local coordinate
-    Node *get_node_at_local_coordinate(const Vector<double> &s) const;
+    Node* get_node_at_local_coordinate(const Vector<double>& s) const;
 
     /// Number of nodes along each element edge
     unsigned nnode_1d() const
@@ -626,14 +626,14 @@ namespace oomph
 
     /// \short Return the number of actual plot points for paraview
     /// plot with parameter nplot.
-    unsigned nplot_points_paraview(const unsigned &nplot) const
+    unsigned nplot_points_paraview(const unsigned& nplot) const
     {
       return nplot;
     }
 
     /// \short Return the number of local sub-elements for paraview plot with
     /// parameter nplot.
-    unsigned nsub_elements_paraview(const unsigned &nplot) const
+    unsigned nsub_elements_paraview(const unsigned& nplot) const
     {
       return (nplot - 1);
     }
@@ -641,9 +641,9 @@ namespace oomph
     /// \short Fill in the offset information for paraview plot.
     /// Needs to be implemented for each new geometric element type; see
     /// http://www.vtk.org/VTK/img/file-formats.pdf
-    void write_paraview_output_offset_information(std::ofstream &file_out,
-                                                  const unsigned &nplot,
-                                                  unsigned &counter) const
+    void write_paraview_output_offset_information(std::ofstream& file_out,
+                                                  const unsigned& nplot,
+                                                  unsigned& counter) const
     {
       // Number of local elements we want to plot over
       unsigned plot = nsub_elements_paraview(nplot);
@@ -660,8 +660,8 @@ namespace oomph
     /// Needs to be implemented for each new geometric element type; see
     /// http://www.vtk.org/VTK/img/file-formats.pdf
     /// Use type "VTK_LINE" (== 3) for 2D quad elements
-    void write_paraview_type(std::ofstream &file_out,
-                             const unsigned &nplot) const
+    void write_paraview_type(std::ofstream& file_out,
+                             const unsigned& nplot) const
     {
       unsigned local_loop = nsub_elements_paraview(nplot);
       for (unsigned i = 0; i < local_loop; i++)
@@ -673,9 +673,9 @@ namespace oomph
     /// \short Return the offsets for the paraview sub-elements. Needs
     /// to be implemented for each new geometric element type; see
     /// http://www.vtk.org/VTK/img/file-formats.pdf
-    void write_paraview_offsets(std::ofstream &file_out,
-                                const unsigned &nplot,
-                                unsigned &offset_sum) const
+    void write_paraview_offsets(std::ofstream& file_out,
+                                const unsigned& nplot,
+                                unsigned& offset_sum) const
     {
       // Loop over all local elements and add its offset to the overall
       // offset_sum
@@ -688,24 +688,24 @@ namespace oomph
     }
 
     /// Output
-    void output(std::ostream &outfile);
+    void output(std::ostream& outfile);
 
     /// Output at n_plot points
-    void output(std::ostream &outfile, const unsigned &n_plot);
+    void output(std::ostream& outfile, const unsigned& n_plot);
 
     /// C-style output
-    void output(FILE *file_pt);
+    void output(FILE* file_pt);
 
     /// C_style output at n_plot points
-    void output(FILE *file_pt, const unsigned &n_plot);
+    void output(FILE* file_pt, const unsigned& n_plot);
 
     /// \short  Get cector of local coordinates of plot point i (when plotting
     /// nplot points in each "coordinate direction).
     void get_s_plot(
-      const unsigned &i,
-      const unsigned &nplot,
-      Vector<double> &s,
-      const bool &use_equally_spaced_interior_sample_points = false) const
+      const unsigned& i,
+      const unsigned& nplot,
+      Vector<double>& s,
+      const bool& use_equally_spaced_interior_sample_points = false) const
     {
       if (nplot > 1)
       {
@@ -726,7 +726,7 @@ namespace oomph
 
     /// \short Return string for tecplot zone header (when plotting
     /// nplot points in each "coordinate direction)
-    std::string tecplot_zone_string(const unsigned &nplot) const
+    std::string tecplot_zone_string(const unsigned& nplot) const
     {
       std::ostringstream header;
       header << "ZONE I=" << nplot << "\n";
@@ -735,7 +735,7 @@ namespace oomph
 
     /// \short Return total number of plot points (when plotting
     /// nplot points in each "coordinate direction)
-    unsigned nplot_points(const unsigned &nplot) const
+    unsigned nplot_points(const unsigned& nplot) const
     {
       unsigned DIM = 1;
       unsigned np = 1;
@@ -748,8 +748,8 @@ namespace oomph
 
     /// Get the number of the ith node on face face_index in the bulk node
     /// vector.
-    unsigned get_bulk_node_number(const int &face_index,
-                                  const unsigned &i) const
+    unsigned get_bulk_node_number(const int& face_index,
+                                  const unsigned& i) const
     {
       face_node_number_error_check(i);
 
@@ -770,7 +770,7 @@ namespace oomph
     }
 
     /// Get the sign of the outer unit normal on the face given by face_index.
-    int face_outer_unit_normal_sign(const int &face_index) const
+    int face_outer_unit_normal_sign(const int& face_index) const
     {
 #ifdef PARANOID
       if (std::abs(face_index) != 1)
@@ -786,7 +786,7 @@ namespace oomph
     /// Get a pointer to the function mapping face coordinates to bulk
     /// coordinates
     CoordinateMappingFctPt face_to_bulk_coordinate_fct_pt(
-      const int &face_index) const
+      const int& face_index) const
     {
       if (face_index == 1)
       {
@@ -807,7 +807,7 @@ namespace oomph
     /// Get a pointer to the derivative of the mapping from face to bulk
     /// coordinates.
     BulkCoordinateDerivativesFctPt bulk_coordinate_derivatives_fct_pt(
-      const int &face_index) const
+      const int& face_index) const
     {
       if (face_index == 1)
       {
@@ -839,7 +839,7 @@ namespace oomph
     virtual unsigned nvertex_node() const = 0;
 
     /// \short Pointer to the j-th vertex node in the element
-    virtual Node *vertex_node_pt(const unsigned &j) const = 0;
+    virtual Node* vertex_node_pt(const unsigned& j) const = 0;
   };
 
   //=======================================================================
@@ -869,7 +869,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    QElement(const QElement &)
+    QElement(const QElement&)
     {
       BrokenCopy::broken_copy("QElement");
     }
@@ -881,29 +881,29 @@ namespace oomph
       }*/
 
     /// Calculate the geometric shape functions at local coordinate s
-    void shape(const Vector<double> &s, Shape &psi) const;
+    void shape(const Vector<double>& s, Shape& psi) const;
 
     /// \short Compute the  geometric shape functions and
     /// derivatives w.r.t. local coordinates at local coordinate s
-    void dshape_local(const Vector<double> &s,
-                      Shape &psi,
-                      DShape &dpsids) const;
+    void dshape_local(const Vector<double>& s,
+                      Shape& psi,
+                      DShape& dpsids) const;
 
     /// \short Compute the geometric shape functions, derivatives and
     /// second derivatives w.r.t. local coordinates at local coordinate s
     /// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$
     /// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$
     /// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$
-    void d2shape_local(const Vector<double> &s,
-                       Shape &psi,
-                       DShape &dpsids,
-                       DShape &d2psids) const;
+    void d2shape_local(const Vector<double>& s,
+                       Shape& psi,
+                       DShape& dpsids,
+                       DShape& d2psids) const;
 
     /// \short Overload the template-free interface for the calculation of
     /// inverse jacobian matrix. This is a two-dimensional element, so use
     /// the two-d version.
-    double invert_jacobian_mapping(const DenseMatrix<double> &jacobian,
-                                   DenseMatrix<double> &inverse_jacobian) const
+    double invert_jacobian_mapping(const DenseMatrix<double>& jacobian,
+                                   DenseMatrix<double>& inverse_jacobian) const
     {
       return FiniteElement::invert_jacobian<2>(jacobian, inverse_jacobian);
     }
@@ -927,10 +927,10 @@ namespace oomph
     }
 
     /// \short Pointer to the j-th vertex node in the element
-    Node *vertex_node_pt(const unsigned &j) const
+    Node* vertex_node_pt(const unsigned& j) const
     {
       unsigned n_node_1d = nnode_1d();
-      Node *nod_pt;
+      Node* nod_pt;
       switch (j)
       {
         case 0:
@@ -958,7 +958,7 @@ namespace oomph
     }
 
     /// Get local coordinates of node j in the element; vector sets its own size
-    void local_coordinate_of_node(const unsigned &j, Vector<double> &s) const
+    void local_coordinate_of_node(const unsigned& j, Vector<double>& s) const
     {
       s.resize(2);
       unsigned j0 = j % NNODE_1D;
@@ -970,7 +970,7 @@ namespace oomph
     }
 
     /// Get the local fraction of node j in the element
-    void local_fraction_of_node(const unsigned &j, Vector<double> &s_fraction)
+    void local_fraction_of_node(const unsigned& j, Vector<double>& s_fraction)
     {
       s_fraction.resize(2);
       unsigned j0 = j % NNODE_1D;
@@ -981,15 +981,15 @@ namespace oomph
 
     /// This function returns the local fraction of ant nodes in the n-th
     /// positoin in a one dimensional expansion along the i-th local coordinate
-    inline double local_one_d_fraction_of_node(const unsigned &n1d,
-                                               const unsigned &i)
+    inline double local_one_d_fraction_of_node(const unsigned& n1d,
+                                               const unsigned& i)
     {
       // It's just the value of the node divided by the number of 1-D nodes
       return double(n1d) / double(NNODE_1D - 1);
     }
 
     /// Get the node at the specified local coordinate
-    Node *get_node_at_local_coordinate(const Vector<double> &s) const;
+    Node* get_node_at_local_coordinate(const Vector<double>& s) const;
 
     /// Number of nodes along each element edge
     unsigned nnode_1d() const
@@ -999,14 +999,14 @@ namespace oomph
 
     /// \short Return the number of actual plot points for paraview
     /// plot with parameter nplot.
-    unsigned nplot_points_paraview(const unsigned &nplot) const
+    unsigned nplot_points_paraview(const unsigned& nplot) const
     {
       return nplot * nplot;
     }
 
     /// \short Return the number of local sub-elements for paraview plot with
     /// parameter nplot.
-    unsigned nsub_elements_paraview(const unsigned &nplot) const
+    unsigned nsub_elements_paraview(const unsigned& nplot) const
     {
       return (nplot - 1) * (nplot - 1);
     }
@@ -1014,9 +1014,9 @@ namespace oomph
     /// \short Fill in the offset information for paraview plot.
     /// Needs to be implemented for each new geometric element type; see
     /// http://www.vtk.org/VTK/img/file-formats.pdf
-    void write_paraview_output_offset_information(std::ofstream &file_out,
-                                                  const unsigned &nplot,
-                                                  unsigned &counter) const
+    void write_paraview_output_offset_information(std::ofstream& file_out,
+                                                  const unsigned& nplot,
+                                                  unsigned& counter) const
     {
       // Number of local elements we want to plot over
       unsigned plot = nsub_elements_paraview(nplot);
@@ -1038,8 +1038,8 @@ namespace oomph
     /// Needs to be implemented for each new geometric element type; see
     /// http://www.vtk.org/VTK/img/file-formats.pdf
     /// Use type "VTK_QUAD" (== 9) for 2D quad elements
-    void write_paraview_type(std::ofstream &file_out,
-                             const unsigned &nplot) const
+    void write_paraview_type(std::ofstream& file_out,
+                             const unsigned& nplot) const
     {
       unsigned local_loop = nsub_elements_paraview(nplot);
       for (unsigned i = 0; i < local_loop; i++)
@@ -1051,9 +1051,9 @@ namespace oomph
     /// \short Return the offsets for the paraview sub-elements. Needs
     /// to be implemented for each new geometric element type; see
     /// http://www.vtk.org/VTK/img/file-formats.pdf
-    void write_paraview_offsets(std::ofstream &file_out,
-                                const unsigned &nplot,
-                                unsigned &offset_sum) const
+    void write_paraview_offsets(std::ofstream& file_out,
+                                const unsigned& nplot,
+                                unsigned& offset_sum) const
     {
       // Loop over all local elements and add its offset to the overall
       // offset_sum
@@ -1066,24 +1066,24 @@ namespace oomph
     }
 
     /// Output
-    void output(std::ostream &outfile);
+    void output(std::ostream& outfile);
 
     /// Output at n_plot points
-    void output(std::ostream &outfile, const unsigned &n_plot);
+    void output(std::ostream& outfile, const unsigned& n_plot);
 
     /// C-style output
-    void output(FILE *file_pt);
+    void output(FILE* file_pt);
 
     /// C_style output at n_plot points
-    void output(FILE *file_pt, const unsigned &n_plot);
+    void output(FILE* file_pt, const unsigned& n_plot);
 
     /// \short  Get cector of local coordinates of plot point i (when plotting
     /// nplot points in each "coordinate direction).
     void get_s_plot(
-      const unsigned &i,
-      const unsigned &nplot,
-      Vector<double> &s,
-      const bool &use_equally_spaced_interior_sample_points = false) const
+      const unsigned& i,
+      const unsigned& nplot,
+      Vector<double>& s,
+      const bool& use_equally_spaced_interior_sample_points = false) const
     {
       if (nplot > 1)
       {
@@ -1110,7 +1110,7 @@ namespace oomph
 
     /// \short Return string for tecplot zone header (when plotting
     /// nplot points in each "coordinate direction)
-    std::string tecplot_zone_string(const unsigned &nplot) const
+    std::string tecplot_zone_string(const unsigned& nplot) const
     {
       std::ostringstream header;
       header << "ZONE I=" << nplot << ", J=" << nplot << "\n";
@@ -1119,7 +1119,7 @@ namespace oomph
 
     /// Return total number of plot points (when plotting
     /// nplot points in each "coordinate direction)
-    unsigned nplot_points(const unsigned &nplot) const
+    unsigned nplot_points(const unsigned& nplot) const
     {
       unsigned DIM = 2;
       unsigned np = 1;
@@ -1132,8 +1132,8 @@ namespace oomph
 
     /// Get the number of the ith node on face face_index (in the bulk node
     /// vector).
-    unsigned get_bulk_node_number(const int &face_index,
-                                  const unsigned &i) const
+    unsigned get_bulk_node_number(const int& face_index,
+                                  const unsigned& i) const
     {
       face_node_number_error_check(i);
 
@@ -1164,7 +1164,7 @@ namespace oomph
     }
 
     /// Get the sign of the outer unit normal on the face given by face_index.
-    int face_outer_unit_normal_sign(const int &face_index) const
+    int face_outer_unit_normal_sign(const int& face_index) const
     {
       if (face_index < 0)
       {
@@ -1185,7 +1185,7 @@ namespace oomph
     /// Get a pointer to the function mapping face coordinates to bulk
     /// coordinates
     CoordinateMappingFctPt face_to_bulk_coordinate_fct_pt(
-      const int &face_index) const
+      const int& face_index) const
     {
       if (face_index == 1)
       {
@@ -1214,7 +1214,7 @@ namespace oomph
     /// Get a pointer to the derivative of the mapping from face to bulk
     /// coordinates.
     BulkCoordinateDerivativesFctPt bulk_coordinate_derivatives_fct_pt(
-      const int &face_index) const
+      const int& face_index) const
     {
       if (face_index == 1)
       {
@@ -1254,7 +1254,7 @@ namespace oomph
     virtual unsigned nvertex_node() const = 0;
 
     /// \short Pointer to the j-th vertex node in the element
-    virtual Node *vertex_node_pt(const unsigned &j) const = 0;
+    virtual Node* vertex_node_pt(const unsigned& j) const = 0;
   };
 
   //=======================================================================
@@ -1284,7 +1284,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    QElement(const QElement &)
+    QElement(const QElement&)
     {
       BrokenCopy::broken_copy("QElement");
     }
@@ -1296,13 +1296,13 @@ namespace oomph
       }*/
 
     /// Calculate the geometric shape functions at local coordinate s
-    void shape(const Vector<double> &s, Shape &psi) const;
+    void shape(const Vector<double>& s, Shape& psi) const;
 
     /// \short Compute the  geometric shape functions and
     /// derivatives w.r.t. local coordinates at local coordinate s
-    void dshape_local(const Vector<double> &s,
-                      Shape &psi,
-                      DShape &dpsids) const;
+    void dshape_local(const Vector<double>& s,
+                      Shape& psi,
+                      DShape& dpsids) const;
 
     /// \short Compute the geometric shape functions, derivatives and
     /// second derivatives w.r.t. local coordinates at local coordinate s.
@@ -1312,16 +1312,16 @@ namespace oomph
     /// d2psids(i,3) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$
     /// d2psids(i,4) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_2 \f$
     /// d2psids(i,5) = \f$ \partial^2 \psi_j / \partial s_1 \partial s_2 \f$
-    void d2shape_local(const Vector<double> &s,
-                       Shape &psi,
-                       DShape &dpsids,
-                       DShape &d2psids) const;
+    void d2shape_local(const Vector<double>& s,
+                       Shape& psi,
+                       DShape& dpsids,
+                       DShape& d2psids) const;
 
     /// \short Overload the template-free interface for the calculation of
     /// the inverse jacobian mapping. This is a three-dimensional element,
     /// so use the 3d version
-    double invert_jacobian_mapping(const DenseMatrix<double> &jacobian,
-                                   DenseMatrix<double> &inverse_jacobian) const
+    double invert_jacobian_mapping(const DenseMatrix<double>& jacobian,
+                                   DenseMatrix<double>& inverse_jacobian) const
     {
       return FiniteElement::invert_jacobian<3>(jacobian, inverse_jacobian);
     }
@@ -1345,10 +1345,10 @@ namespace oomph
     }
 
     /// \short Pointer to the j-th vertex node in the element
-    Node *vertex_node_pt(const unsigned &j) const
+    Node* vertex_node_pt(const unsigned& j) const
     {
       unsigned N = nnode_1d();
-      Node *nod_pt;
+      Node* nod_pt;
       switch (j)
       {
         case 0:
@@ -1388,7 +1388,7 @@ namespace oomph
     }
 
     /// Get local coordinates of node j in the element; vector sets its own size
-    void local_coordinate_of_node(const unsigned &j, Vector<double> &s) const
+    void local_coordinate_of_node(const unsigned& j, Vector<double>& s) const
     {
       s.resize(3);
       unsigned j0 = j % NNODE_1D;
@@ -1403,7 +1403,7 @@ namespace oomph
     }
 
     /// Get the local fraction of node j in the element
-    void local_fraction_of_node(const unsigned &j, Vector<double> &s_fraction)
+    void local_fraction_of_node(const unsigned& j, Vector<double>& s_fraction)
     {
       s_fraction.resize(3);
       unsigned j0 = j % NNODE_1D;
@@ -1416,15 +1416,15 @@ namespace oomph
 
     /// This function returns the local fraction of any nodes in the n-th
     /// positoin in a one dimensional expansion along the i-th local coordinate
-    inline double local_one_d_fraction_of_node(const unsigned &n1d,
-                                               const unsigned &i)
+    inline double local_one_d_fraction_of_node(const unsigned& n1d,
+                                               const unsigned& i)
     {
       // It's just the value of the node divided by the number of 1-D nodes
       return double(n1d) / double(NNODE_1D - 1);
     }
 
     /// Get the node at the specified local coordinate
-    Node *get_node_at_local_coordinate(const Vector<double> &s) const;
+    Node* get_node_at_local_coordinate(const Vector<double>& s) const;
 
     /// Number of nodes along each element edge
     unsigned nnode_1d() const
@@ -1434,14 +1434,14 @@ namespace oomph
 
     /// \short Return the number of actual plot points for paraview
     /// plot with parameter nplot.
-    unsigned nplot_points_paraview(const unsigned &nplot) const
+    unsigned nplot_points_paraview(const unsigned& nplot) const
     {
       return nplot * nplot * nplot;
     }
 
     /// \short Return the number of local sub-elements for paraview plot with
     /// parameter nplot.
-    unsigned nsub_elements_paraview(const unsigned &nplot) const
+    unsigned nsub_elements_paraview(const unsigned& nplot) const
     {
       return (nplot - 1) * (nplot - 1) * (nplot - 1);
     }
@@ -1449,9 +1449,9 @@ namespace oomph
     /// \short Fill in the offset information for paraview plot.
     /// Needs to be implemented for each new geometric element type; see
     /// http://www.vtk.org/VTK/img/file-formats.pdf
-    void write_paraview_output_offset_information(std::ofstream &file_out,
-                                                  const unsigned &nplot,
-                                                  unsigned &counter) const
+    void write_paraview_output_offset_information(std::ofstream& file_out,
+                                                  const unsigned& nplot,
+                                                  unsigned& counter) const
     {
       // Number of local elements we want to plot over
       unsigned plot = nsub_elements_paraview(nplot);
@@ -1502,8 +1502,8 @@ namespace oomph
     /// Needs to be implemented for each new geometric element type; see
     /// http://www.vtk.org/VTK/img/file-formats.pdf
     /// Use type "VTK_HEXAHEDRON" (== 12) for 2D quad elements
-    void write_paraview_type(std::ofstream &file_out,
-                             const unsigned &nplot) const
+    void write_paraview_type(std::ofstream& file_out,
+                             const unsigned& nplot) const
     {
       unsigned local_loop = nsub_elements_paraview(nplot);
       for (unsigned i = 0; i < local_loop; i++)
@@ -1515,9 +1515,9 @@ namespace oomph
     /// \short Return the offsets for the paraview sub-elements. Needs
     /// to be implemented for each new geometric element type; see
     /// http://www.vtk.org/VTK/img/file-formats.pdf
-    void write_paraview_offsets(std::ofstream &file_out,
-                                const unsigned &nplot,
-                                unsigned &offset_sum) const
+    void write_paraview_offsets(std::ofstream& file_out,
+                                const unsigned& nplot,
+                                unsigned& offset_sum) const
     {
       unsigned local_loop = nsub_elements_paraview(nplot);
       for (unsigned i = 0; i < local_loop; i++)
@@ -1528,24 +1528,24 @@ namespace oomph
     }
 
     /// Output
-    void output(std::ostream &outfile);
+    void output(std::ostream& outfile);
 
     /// Output at n_plot points
-    void output(std::ostream &outfile, const unsigned &n_plot);
+    void output(std::ostream& outfile, const unsigned& n_plot);
 
     /// C-style output
-    void output(FILE *file_pt);
+    void output(FILE* file_pt);
 
     /// C_style output at n_plot points
-    void output(FILE *file_pt, const unsigned &n_plot);
+    void output(FILE* file_pt, const unsigned& n_plot);
 
     /// \short  Get cector of local coordinates of plot point i (when plotting
     /// nplot points in each "coordinate direction).
     void get_s_plot(
-      const unsigned &i,
-      const unsigned &nplot,
-      Vector<double> &s,
-      const bool &use_equally_spaced_interior_sample_points = false) const
+      const unsigned& i,
+      const unsigned& nplot,
+      Vector<double>& s,
+      const bool& use_equally_spaced_interior_sample_points = false) const
     {
       if (nplot > 1)
       {
@@ -1577,7 +1577,7 @@ namespace oomph
 
     /// \short Return string for tecplot zone header (when plotting
     /// nplot points in each "coordinate direction)
-    std::string tecplot_zone_string(const unsigned &nplot) const
+    std::string tecplot_zone_string(const unsigned& nplot) const
     {
       std::ostringstream header;
       header << "ZONE I=" << nplot << ", J=" << nplot << ", K=" << nplot
@@ -1587,7 +1587,7 @@ namespace oomph
 
     /// Return total number of plot points (when plotting
     /// nplot points in each "coordinate direction)
-    unsigned nplot_points(const unsigned &nplot) const
+    unsigned nplot_points(const unsigned& nplot) const
     {
       unsigned DIM = 3;
       unsigned np = 1;
@@ -1600,8 +1600,8 @@ namespace oomph
 
     /// Get the number of the ith node on face face_index in the bulk node
     /// vector.
-    unsigned get_bulk_node_number(const int &face_index,
-                                  const unsigned &i) const
+    unsigned get_bulk_node_number(const int& face_index,
+                                  const unsigned& i) const
     {
       face_node_number_error_check(i);
 
@@ -1640,7 +1640,7 @@ namespace oomph
     }
 
     /// Get the sign of the outer unit normal on the face given by face_index.
-    int face_outer_unit_normal_sign(const int &face_index) const
+    int face_outer_unit_normal_sign(const int& face_index) const
     {
       if (face_index == -3)
       {
@@ -1677,7 +1677,7 @@ namespace oomph
     /// Get a pointer to the function mapping face coordinates to bulk
     /// coordinates
     CoordinateMappingFctPt face_to_bulk_coordinate_fct_pt(
-      const int &face_index) const
+      const int& face_index) const
     {
       if (face_index == 1)
       {
@@ -1714,7 +1714,7 @@ namespace oomph
     /// Get a pointer to the derivative of the mapping from face to bulk
     /// coordinates.
     BulkCoordinateDerivativesFctPt bulk_coordinate_derivatives_fct_pt(
-      const int &face_index) const
+      const int& face_index) const
     {
       if (face_index == 1)
       {
@@ -1777,7 +1777,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    SolidQElement(const SolidQElement &)
+    SolidQElement(const SolidQElement&)
     {
       BrokenCopy::broken_copy("SolidQElement");
     }
@@ -1789,22 +1789,22 @@ namespace oomph
       }*/
 
     /// Overload the output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       FiniteElement::output(outfile);
     }
 
     /// Output at n_plot points
-    inline void output(std::ostream &outfile, const unsigned &n_plot);
+    inline void output(std::ostream& outfile, const unsigned& n_plot);
 
     /// C-style output
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
 
     /// C_style output at n_plot points
-    inline void output(FILE *file_pt, const unsigned &n_plot);
+    inline void output(FILE* file_pt, const unsigned& n_plot);
 
     /// \short Build the lower-dimensional FaceElement (an element of type
     /// SolidQElement<0,NNODE_1D>).
@@ -1812,8 +1812,8 @@ namespace oomph
     /// to the two possible faces:
     /// -1 (Left)  s[0] = -1.0
     /// +1 (Right) s[0] =  1.0
-    inline void build_face_element(const int &face_index,
-                                   FaceElement *face_element_pt);
+    inline void build_face_element(const int& face_index,
+                                   FaceElement* face_element_pt);
   };
 
   // For the dumb Intel 9.0 compiler, these need to live in here
@@ -1833,8 +1833,8 @@ namespace oomph
   /// for the 1D element
   //=======================================================================
   template<unsigned NNODE_1D>
-  void SolidQElement<1, NNODE_1D>::output(std::ostream &outfile,
-                                          const unsigned &n_plot)
+  void SolidQElement<1, NNODE_1D>::output(std::ostream& outfile,
+                                          const unsigned& n_plot)
   {
     // Local variables
     Vector<double> s(1);
@@ -1846,7 +1846,7 @@ namespace oomph
     unsigned n_dim = this->nodal_dimension();
 
     // Find the Lagrangian dimension of the first node
-    unsigned n_lagr = static_cast<SolidNode *>(node_pt(0))->nlagrangian();
+    unsigned n_lagr = static_cast<SolidNode*>(node_pt(0))->nlagrangian();
 
     // Loop over element nodes
     for (unsigned l = 0; l < n_plot; l++)
@@ -1873,7 +1873,7 @@ namespace oomph
   /// for the 1D element
   //=======================================================================
   template<unsigned NNODE_1D>
-  void SolidQElement<1, NNODE_1D>::output(FILE *file_pt, const unsigned &n_plot)
+  void SolidQElement<1, NNODE_1D>::output(FILE* file_pt, const unsigned& n_plot)
   {
     // Local variables
     Vector<double> s(1);
@@ -1885,7 +1885,7 @@ namespace oomph
     unsigned n_dim = this->nodal_dimension();
 
     // Find the Lagrangian dimension of the first node
-    unsigned n_lagr = static_cast<SolidNode *>(node_pt(0))->nlagrangian();
+    unsigned n_lagr = static_cast<SolidNode*>(node_pt(0))->nlagrangian();
 
     // Loop over element nodes
     for (unsigned l = 0; l < n_plot; l++)
@@ -1914,15 +1914,15 @@ namespace oomph
   //===========================================================
   template<unsigned NNODE_1D>
   void SolidQElement<1, NNODE_1D>::build_face_element(
-    const int &face_index, FaceElement *face_element_pt)
+    const int& face_index, FaceElement* face_element_pt)
   {
     // Build the standard non-solid FaceElement
     QElement<1, NNODE_1D>::build_face_element(face_index, face_element_pt);
 
     // Set the Lagrangian dimension from the first node of the present element
-    dynamic_cast<SolidFiniteElement *>(face_element_pt)
+    dynamic_cast<SolidFiniteElement*>(face_element_pt)
       ->set_lagrangian_dimension(
-        static_cast<SolidNode *>(node_pt(0))->nlagrangian());
+        static_cast<SolidNode*>(node_pt(0))->nlagrangian());
   }
 
   //=======================================================================
@@ -1946,7 +1946,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    SolidQElement(const SolidQElement &)
+    SolidQElement(const SolidQElement&)
     {
       BrokenCopy::broken_copy("SolidQElement");
     }
@@ -1958,22 +1958,22 @@ namespace oomph
       }*/
 
     /// Overload the output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       FiniteElement::output(outfile);
     }
 
     /// Output at n_plot^2 points
-    inline void output(std::ostream &outfile, const unsigned &n_plot);
+    inline void output(std::ostream& outfile, const unsigned& n_plot);
 
     /// C-style output
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
 
     /// C_style output at n_plot points
-    inline void output(FILE *file_pt, const unsigned &n_plot);
+    inline void output(FILE* file_pt, const unsigned& n_plot);
 
     /// \short Build the lower-dimensional FaceElement (an element of type
     /// SolidQElement<1,NNODE_1D>).The face index takes one of four values
@@ -1982,8 +1982,8 @@ namespace oomph
     /// +1 (East)  s[0] =  1.0
     /// -2 (South) s[1] = -1.0
     /// +2 (North) s[1] =  1.0
-    inline void build_face_element(const int &face_index,
-                                   FaceElement *face_element_pt);
+    inline void build_face_element(const int& face_index,
+                                   FaceElement* face_element_pt);
   };
 
   ///////////////////////////////////////////////////////////////////////////
@@ -1994,8 +1994,8 @@ namespace oomph
   /// The output function for any number of points per element
   //===========================================================
   template<unsigned NNODE_1D>
-  void SolidQElement<2, NNODE_1D>::output(std::ostream &outfile,
-                                          const unsigned &n_plot)
+  void SolidQElement<2, NNODE_1D>::output(std::ostream& outfile,
+                                          const unsigned& n_plot)
   {
     // Local variables
     Vector<double> s(2);
@@ -2007,7 +2007,7 @@ namespace oomph
     unsigned n_dim = this->nodal_dimension();
 
     // Find the Lagrangian dimension of the first node
-    unsigned n_lagr = static_cast<SolidNode *>(node_pt(0))->nlagrangian();
+    unsigned n_lagr = static_cast<SolidNode*>(node_pt(0))->nlagrangian();
 
     // Loop over plot points
     for (unsigned l2 = 0; l2 < n_plot; l2++)
@@ -2037,7 +2037,7 @@ namespace oomph
   /// C-style output function for any number of points per element
   //====================================================================
   template<unsigned NNODE_1D>
-  void SolidQElement<2, NNODE_1D>::output(FILE *file_pt, const unsigned &n_plot)
+  void SolidQElement<2, NNODE_1D>::output(FILE* file_pt, const unsigned& n_plot)
   {
     // Local variables
     Vector<double> s(2);
@@ -2049,7 +2049,7 @@ namespace oomph
     unsigned n_dim = this->nodal_dimension();
 
     // Find the Lagrangian dimension of the first node
-    unsigned n_lagr = static_cast<SolidNode *>(node_pt(0))->nlagrangian();
+    unsigned n_lagr = static_cast<SolidNode*>(node_pt(0))->nlagrangian();
 
     // Loop over plot points
     for (unsigned l2 = 0; l2 < n_plot; l2++)
@@ -2082,15 +2082,15 @@ namespace oomph
   //===========================================================
   template<unsigned NNODE_1D>
   void SolidQElement<2, NNODE_1D>::build_face_element(
-    const int &face_index, FaceElement *face_element_pt)
+    const int& face_index, FaceElement* face_element_pt)
   {
     // Build the standard non-solid FaceElement
     QElement<2, NNODE_1D>::build_face_element(face_index, face_element_pt);
 
     // Set the Lagrangian dimension from the first node of the present element
-    dynamic_cast<SolidFiniteElement *>(face_element_pt)
+    dynamic_cast<SolidFiniteElement*>(face_element_pt)
       ->set_lagrangian_dimension(
-        static_cast<SolidNode *>(node_pt(0))->nlagrangian());
+        static_cast<SolidNode*>(node_pt(0))->nlagrangian());
   }
 
   //=======================================================================
@@ -2114,7 +2114,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    SolidQElement(const SolidQElement &)
+    SolidQElement(const SolidQElement&)
     {
       BrokenCopy::broken_copy("SolidQElement");
     }
@@ -2126,22 +2126,22 @@ namespace oomph
       }*/
 
     /// Overload the output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       FiniteElement::output(outfile);
     }
 
     /// Output at n_plot^2 points
-    inline void output(std::ostream &outfile, const unsigned &n_plot);
+    inline void output(std::ostream& outfile, const unsigned& n_plot);
 
     /// C-style output
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
 
     /// C_style output at n_plot points
-    inline void output(FILE *file_pt, const unsigned &n_plot);
+    inline void output(FILE* file_pt, const unsigned& n_plot);
 
     /// \short Build the lower-dimensional FaceElement (an element of type
     /// SolidQElement<2,NNODE_1D>). The face index takes of one
@@ -2153,8 +2153,8 @@ namespace oomph
     /// +2 (Up)     s[1] =  1.0
     /// -3 (Back)   s[2] = -1.0
     /// +3 (Front)  s[2] =  1.0
-    inline void build_face_element(const int &face_index,
-                                   FaceElement *face_element_pt);
+    inline void build_face_element(const int& face_index,
+                                   FaceElement* face_element_pt);
   };
 
   ///////////////////////////////////////////////////////////////////////////
@@ -2165,8 +2165,8 @@ namespace oomph
   /// The output function for any number of points per element
   //===========================================================
   template<unsigned NNODE_1D>
-  void SolidQElement<3, NNODE_1D>::output(std::ostream &outfile,
-                                          const unsigned &n_plot)
+  void SolidQElement<3, NNODE_1D>::output(std::ostream& outfile,
+                                          const unsigned& n_plot)
   {
     // Local variables
     Vector<double> s(3);
@@ -2179,7 +2179,7 @@ namespace oomph
     unsigned n_dim = this->nodal_dimension();
 
     // Find the Lagrangian dimension of the first node
-    unsigned n_lagr = static_cast<SolidNode *>(node_pt(0))->nlagrangian();
+    unsigned n_lagr = static_cast<SolidNode*>(node_pt(0))->nlagrangian();
 
     // Loop over plot points
     for (unsigned l3 = 0; l3 < n_plot; l3++)
@@ -2213,7 +2213,7 @@ namespace oomph
   /// C-style output function for any number of points per element
   //====================================================================
   template<unsigned NNODE_1D>
-  void SolidQElement<3, NNODE_1D>::output(FILE *file_pt, const unsigned &n_plot)
+  void SolidQElement<3, NNODE_1D>::output(FILE* file_pt, const unsigned& n_plot)
   {
     // Local variables
     Vector<double> s(3);
@@ -2225,7 +2225,7 @@ namespace oomph
     unsigned n_dim = this->nodal_dimension();
 
     // Find the Lagrangian dimension of the first node
-    unsigned n_lagr = static_cast<SolidNode *>(node_pt(0))->nlagrangian();
+    unsigned n_lagr = static_cast<SolidNode*>(node_pt(0))->nlagrangian();
 
     // Loop over plot points
     for (unsigned l3 = 0; l3 < n_plot; l3++)
@@ -2264,15 +2264,15 @@ namespace oomph
   //===========================================================
   template<unsigned NNODE_1D>
   void SolidQElement<3, NNODE_1D>::build_face_element(
-    const int &face_index, FaceElement *face_element_pt)
+    const int& face_index, FaceElement* face_element_pt)
   {
     // Build the standard non-solid FaceElement
     QElement<3, NNODE_1D>::build_face_element(face_index, face_element_pt);
 
     // Set the Lagrangian dimension from the first node of the present element
-    dynamic_cast<SolidFiniteElement *>(face_element_pt)
+    dynamic_cast<SolidFiniteElement*>(face_element_pt)
       ->set_lagrangian_dimension(
-        static_cast<SolidNode *>(node_pt(0))->nlagrangian());
+        static_cast<SolidNode*>(node_pt(0))->nlagrangian());
   }
 
   //==============================================================

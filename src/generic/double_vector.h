@@ -66,8 +66,8 @@ namespace oomph
     /// \short Constructor. Assembles a DoubleVector with a prescribed
     /// distribution. Additionally every entry can be set (with argument v -
     /// defaults to 0).
-    DoubleVector(const LinearAlgebraDistribution *const &dist_pt,
-                 const double &v = 0.0) :
+    DoubleVector(const LinearAlgebraDistribution* const& dist_pt,
+                 const double& v = 0.0) :
       Values_pt(0), Internal_values(true), Built(false)
     {
       this->build(dist_pt, v);
@@ -76,7 +76,7 @@ namespace oomph
     /// \short Constructor. Assembles a DoubleVector with a prescribed
     /// distribution. Additionally every entry can be set (with argument v -
     /// defaults to 0).
-    DoubleVector(const LinearAlgebraDistribution &dist, const double &v = 0.0) :
+    DoubleVector(const LinearAlgebraDistribution& dist, const double& v = 0.0) :
       Values_pt(0), Internal_values(true), Built(false)
     {
       this->build(dist, v);
@@ -90,7 +90,7 @@ namespace oomph
     }
 
     /// Copy constructor
-    DoubleVector(const DoubleVector &new_vector) :
+    DoubleVector(const DoubleVector& new_vector) :
       DistributableLinearAlgebraObject(),
       Values_pt(0),
       Internal_values(true),
@@ -100,30 +100,30 @@ namespace oomph
     }
 
     /// assignment operator
-    void operator=(const DoubleVector &old_vector)
+    void operator=(const DoubleVector& old_vector)
     {
       this->build(old_vector);
     }
 
     /// \short Just copys the argument DoubleVector
-    void build(const DoubleVector &old_vector);
+    void build(const DoubleVector& old_vector);
 
     /// \short Assembles a DoubleVector with distribution dist, if v is
     /// specified each element is set to v, otherwise each element is set to 0.0
-    void build(const LinearAlgebraDistribution &dist, const double &v)
+    void build(const LinearAlgebraDistribution& dist, const double& v)
     {
       this->build(&dist, v);
     }
 
     /// \short Assembles a DoubleVector with distribution dist, if v is
     /// specified each element is set to v, otherwise each element is set to 0.0
-    void build(const LinearAlgebraDistribution *const &dist_pt,
-               const double &v);
+    void build(const LinearAlgebraDistribution* const& dist_pt,
+               const double& v);
 
     /// \short Assembles a DoubleVector with a distribution dist and
     /// coefficients taken from the vector v. Note. The vector v MUST be of
     /// length nrow()
-    void build(const LinearAlgebraDistribution &dist, const Vector<double> &v)
+    void build(const LinearAlgebraDistribution& dist, const Vector<double>& v)
     {
       this->build(&dist, v);
     }
@@ -131,11 +131,11 @@ namespace oomph
     /// \short Assembles a DoubleVector with a distribution dist and
     /// coefficients taken from the vector v. Note. The vector v MUST be of
     /// length nrow()
-    void build(const LinearAlgebraDistribution *const &dist_pt,
-               const Vector<double> &v);
+    void build(const LinearAlgebraDistribution* const& dist_pt,
+               const Vector<double>& v);
 
     /// \short initialise the whole vector with value v
-    void initialise(const double &v);
+    void initialise(const double& v);
 
     /// \short initialise the vector with coefficient from the vector v.
     /// Note: The vector v must be of length
@@ -167,8 +167,8 @@ namespace oomph
     /// values .
     /// 3. External values are only deleted by this vector if
     /// delete_external_values = true.
-    void set_external_values(const LinearAlgebraDistribution *const &dist_pt,
-                             double *external_values,
+    void set_external_values(const LinearAlgebraDistribution* const& dist_pt,
+                             double* external_values,
                              bool delete_external_values)
     {
       // clean the memory
@@ -191,7 +191,7 @@ namespace oomph
     /// values .
     /// 3. External values are only deleted by this vector if
     /// delete_external_values = true.
-    void set_external_values(double *external_values,
+    void set_external_values(double* external_values,
                              bool delete_external_values)
     {
 #ifdef PARANOID
@@ -224,52 +224,52 @@ namespace oomph
     /// the same number of global rows.
     /// \b NOTE 2: The current distribution and the new distribution must have
     /// the same Communicator.
-    void redistribute(const LinearAlgebraDistribution *const &dist_pt);
+    void redistribute(const LinearAlgebraDistribution* const& dist_pt);
 
     /// \short [] access function to the (local) values of this vector
-    double &operator[](int i);
+    double& operator[](int i);
 
     /// \short == operator
-    bool operator==(const DoubleVector &v);
+    bool operator==(const DoubleVector& v);
 
     /// \short += operator with another vector
-    void operator+=(const DoubleVector &v);
+    void operator+=(const DoubleVector& v);
 
     /// \short -= operator with another vector
-    void operator-=(const DoubleVector &v);
+    void operator-=(const DoubleVector& v);
 
     /// \short multiply by a double
-    void operator*=(const double &d);
+    void operator*=(const double& d);
 
     /// \short divide by a double
-    void operator/=(const double &d);
+    void operator/=(const double& d);
 
     /// \short [] access function to the (local) values of this vector
-    const double &operator[](int i) const;
+    const double& operator[](int i) const;
 
     /// \short Ouput operator for DoubleVector
-    friend std::ostream &operator<<(std::ostream &out, const DoubleVector &v);
+    friend std::ostream& operator<<(std::ostream& out, const DoubleVector& v);
 
     /// \short returns the maximum coefficient
     double max() const;
 
     /// access function to the underlying values
-    double *values_pt()
+    double* values_pt()
     {
       return Values_pt;
     }
 
     /// \short access function to the underlying values (const version)
-    double *values_pt() const
+    double* values_pt() const
     {
       return Values_pt;
     }
 
     /// output the global contents of the vector
-    void output(std::ostream &outfile, const int &output_precision = -1) const;
+    void output(std::ostream& outfile, const int& output_precision = -1) const;
 
     /// output the global contents of the vector
-    void output(std::string filename, const int &output_precision = -1) const
+    void output(std::string filename, const int& output_precision = -1) const
     {
       // Open file
       std::ofstream some_file;
@@ -279,12 +279,12 @@ namespace oomph
     }
 
     /// output the local contents of the vector
-    void output_local_values(std::ostream &outfile,
-                             const int &output_precision = -1) const;
+    void output_local_values(std::ostream& outfile,
+                             const int& output_precision = -1) const;
 
     /// output the local contents of the vector
     void output_local_values(std::string filename,
-                             const int &output_precision = -1) const
+                             const int& output_precision = -1) const
     {
       // Open file
       std::ofstream some_file;
@@ -295,11 +295,11 @@ namespace oomph
 
     /// output the local contents of the vector
     void output_local_values_with_offset(
-      std::ostream &outfile, const int &output_precision = -1) const;
+      std::ostream& outfile, const int& output_precision = -1) const;
 
     /// output the local contents of the vector
     void output_local_values_with_offset(std::string filename,
-                                         const int &output_precision = -1) const
+                                         const int& output_precision = -1) const
     {
       // Open file
       std::ofstream some_file;
@@ -309,17 +309,17 @@ namespace oomph
     }
 
     /// compute the dot product of this vector with the vector vec.
-    double dot(const DoubleVector &vec) const;
+    double dot(const DoubleVector& vec) const;
 
     /// compute the 2 norm of this vector
     double norm() const;
 
     /// compute the A-norm using the matrix at matrix_pt
-    double norm(const CRDoubleMatrix *matrix_pt) const;
+    double norm(const CRDoubleMatrix* matrix_pt) const;
 
   private:
     /// the local vector
-    double *Values_pt;
+    double* Values_pt;
 
     /// \short Boolean flag to indicate whether the vector's data (values_pt)
     /// is owned by this vector.
@@ -358,8 +358,8 @@ namespace oomph
     /// in the out vector. This condition must be met if one is to supply an out
     /// vector with a distribution, otherwise we can let the function generate
     /// the out vector distribution itself.
-    void concatenate(const Vector<DoubleVector *> &in_vector_pt,
-                     DoubleVector &out_vector);
+    void concatenate(const Vector<DoubleVector*>& in_vector_pt,
+                     DoubleVector& out_vector);
 
     /// \short Wrapper around the other concatenate(...) function.
     /// Be careful with Vector of vectors. If the DoubleVectors are resized,
@@ -373,7 +373,7 @@ namespace oomph
     /// If we had C++ 11, this would be so much nicer since we can use smart
     /// pointers which will delete themselves, so we do not have to remember
     /// to delete!
-    void concatenate(Vector<DoubleVector> &in_vector, DoubleVector &out_vector);
+    void concatenate(Vector<DoubleVector>& in_vector, DoubleVector& out_vector);
 
     /// \short Split a DoubleVector into the out DoubleVectors.
     /// Let vec_A be the in Vector, and let vec_B and vec_C be the out vectors.
@@ -391,8 +391,8 @@ namespace oomph
     /// already been built with the correct distribution; the sum of the number
     /// of global row of the out vectors must be the same the the number of
     /// global rows of the in vector.
-    void split(const DoubleVector &in_vector,
-               Vector<DoubleVector *> &out_vector_pt);
+    void split(const DoubleVector& in_vector,
+               Vector<DoubleVector*>& out_vector_pt);
 
     /// \short Wrapper around the other split(...) function.
     /// Be careful with Vector of vectors. If the DoubleVectors are resized,
@@ -406,7 +406,7 @@ namespace oomph
     /// If we had C++ 11, this would be so much nicer since we can use smart
     /// pointers which will delete themselves, so we do not have to remember
     /// to delete!
-    void split(const DoubleVector &in_vector, Vector<DoubleVector> &out_vector);
+    void split(const DoubleVector& in_vector, Vector<DoubleVector>& out_vector);
 
     /// \short Concatenate DoubleVectors.
     /// Takes a Vector of DoubleVectors. If the out vector is built, we will not
@@ -445,7 +445,7 @@ namespace oomph
     /// There are no MPI send and receive, the data stays on the processor
     /// as defined by the distributions from the in vectors.
     void concatenate_without_communication(
-      const Vector<DoubleVector *> &in_vector_pt, DoubleVector &out_vector);
+      const Vector<DoubleVector*>& in_vector_pt, DoubleVector& out_vector);
 
     /// \short Wrapper around the other concatenate_without_communication(...)
     /// function.
@@ -460,8 +460,8 @@ namespace oomph
     /// If we had C++ 11, this would be so much nicer since we can use smart
     /// pointers which will delete themselves, so we do not have to remember
     /// to delete!
-    void concatenate_without_communication(Vector<DoubleVector> &in_vector,
-                                           DoubleVector &out_vector);
+    void concatenate_without_communication(Vector<DoubleVector>& in_vector,
+                                           DoubleVector& out_vector);
 
     /// \short Split a DoubleVector into the out DoubleVectors.
     /// Data stays on its current processor, no data is sent between processors.
@@ -481,8 +481,8 @@ namespace oomph
     /// concatenation of the out vector distributions, refer to
     /// LinearAlgebraDistributionHelpers::concatenate(...) to concatenate
     /// distributions.
-    void split_without_communication(const DoubleVector &in_vector,
-                                     Vector<DoubleVector *> &out_vector_pt);
+    void split_without_communication(const DoubleVector& in_vector,
+                                     Vector<DoubleVector*>& out_vector_pt);
 
     /// \short Wrapper around the other split_without_communication(...)
     /// function.
@@ -497,8 +497,8 @@ namespace oomph
     /// If we had C++ 11, this would be so much nicer since we can use smart
     /// pointers which will delete themselves, so we do not have to remember
     /// to delete!
-    void split_without_communication(const DoubleVector &in_vector,
-                                     Vector<DoubleVector> &out_vector);
+    void split_without_communication(const DoubleVector& in_vector,
+                                     Vector<DoubleVector>& out_vector);
 
   } // namespace DoubleVectorHelpers
 

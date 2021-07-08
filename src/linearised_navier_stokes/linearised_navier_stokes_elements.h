@@ -73,27 +73,27 @@ namespace oomph
 
     /// \short Pointer to the viscosity ratio (relative to the
     /// viscosity used in the definition of the Reynolds number)
-    double *Viscosity_Ratio_pt;
+    double* Viscosity_Ratio_pt;
 
     /// \short Pointer to the density ratio (relative to the
     /// density used in the definition of the Reynolds number)
-    double *Density_Ratio_pt;
+    double* Density_Ratio_pt;
 
     /// Pointer to global Reynolds number
-    double *Re_pt;
+    double* Re_pt;
 
     /// Pointer to global Reynolds number x Strouhal number (=Womersley)
-    double *ReSt_pt;
+    double* ReSt_pt;
 
     /// Pointer to eigenvalue
-    double *Lambda_pt;
+    double* Lambda_pt;
 
     /// Pointer to frequency
-    double *Omega_pt;
+    double* Omega_pt;
 
     /// Pointer to the normalisation element
-    LinearisedNavierStokesEigenfunctionNormalisationElement
-      *Normalisation_element_pt;
+    LinearisedNavierStokesEigenfunctionNormalisationElement*
+      Normalisation_element_pt;
 
     /// Index of datum where eigenvalue is stored
     unsigned Data_number_of_eigenvalue;
@@ -101,15 +101,15 @@ namespace oomph
     unsigned Index_of_eigenvalue;
 
     /// Pointer to base flow solution (velocity components) function
-    void (*Base_flow_u_fct_pt)(const double &time,
-                               const Vector<double> &x,
-                               Vector<double> &result);
+    void (*Base_flow_u_fct_pt)(const double& time,
+                               const Vector<double>& x,
+                               Vector<double>& result);
 
     /// \short Pointer to derivatives of base flow solution velocity
     /// components w.r.t. global coordinates (r and z) function
-    void (*Base_flow_dudx_fct_pt)(const double &time,
-                                  const Vector<double> &x,
-                                  DenseMatrix<double> &result);
+    void (*Base_flow_dudx_fct_pt)(const double& time,
+                                  const Vector<double>& x,
+                                  DenseMatrix<double>& result);
 
     /// \short Boolean flag to indicate if ALE formulation is disabled when
     /// the time-derivatives are computed. Only set to true if you're sure
@@ -119,43 +119,43 @@ namespace oomph
     /// \short Access function for the local equation number
     /// information for the i-th component of the pressure.
     /// p_local_eqn[n,i] = local equation number or < 0 if pinned.
-    virtual int p_local_eqn(const unsigned &n, const unsigned &i) = 0;
+    virtual int p_local_eqn(const unsigned& n, const unsigned& i) = 0;
 
     /// \short Compute the shape functions and their derivatives
     /// w.r.t. global coordinates at local coordinate s.
     /// Return Jacobian of mapping between local and global coordinates.
     virtual double dshape_and_dtest_eulerian_linearised_nst(
-      const Vector<double> &s,
-      Shape &psi,
-      DShape &dpsidx,
-      Shape &test,
-      DShape &dtestdx) const = 0;
+      const Vector<double>& s,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const = 0;
 
     /// \short Compute the shape functions and their derivatives
     /// w.r.t. global coordinates at the ipt-th integration point.
     /// Return Jacobian of mapping between local and global coordinates.
     virtual double dshape_and_dtest_eulerian_at_knot_linearised_nst(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidx,
-      Shape &test,
-      DShape &dtestdx) const = 0;
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const = 0;
 
     /// Compute the pressure shape functions at local coordinate s
-    virtual void pshape_linearised_nst(const Vector<double> &s,
-                                       Shape &psi) const = 0;
+    virtual void pshape_linearised_nst(const Vector<double>& s,
+                                       Shape& psi) const = 0;
 
     /// Compute the pressure shape and test functions at local coordinate s
-    virtual void pshape_linearised_nst(const Vector<double> &s,
-                                       Shape &psi,
-                                       Shape &test) const = 0;
+    virtual void pshape_linearised_nst(const Vector<double>& s,
+                                       Shape& psi,
+                                       Shape& test) const = 0;
 
     /// \short Calculate the velocity components of the base flow solution
     /// at a given time and Eulerian position
-    virtual void get_base_flow_u(const double &time,
-                                 const unsigned &ipt,
-                                 const Vector<double> &x,
-                                 Vector<double> &result) const
+    virtual void get_base_flow_u(const double& time,
+                                 const unsigned& ipt,
+                                 const Vector<double>& x,
+                                 Vector<double>& result) const
     {
       // If the function pointer is zero return zero
       if (Base_flow_u_fct_pt == 0)
@@ -176,10 +176,10 @@ namespace oomph
     /// \short Calculate the derivatives of the velocity components of the
     /// base flow solution w.r.t. global coordinates (r and z) at a given
     /// time and Eulerian position
-    virtual void get_base_flow_dudx(const double &time,
-                                    const unsigned &ipt,
-                                    const Vector<double> &x,
-                                    DenseMatrix<double> &result) const
+    virtual void get_base_flow_dudx(const double& time,
+                                    const unsigned& ipt,
+                                    const Vector<double>& x,
+                                    DenseMatrix<double>& result) const
     {
       // If the function pointer is zero return zero
       if (Base_flow_dudx_fct_pt == 0)
@@ -201,7 +201,7 @@ namespace oomph
       }
     }
 
-    inline int eigenvalue_local_eqn(const unsigned &i)
+    inline int eigenvalue_local_eqn(const unsigned& i)
     {
       return this->external_local_eqn(this->Data_number_of_eigenvalue,
                                       this->Index_of_eigenvalue + i);
@@ -210,9 +210,9 @@ namespace oomph
     /// \short Compute the residuals for the Navier-Stokes equations;
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     virtual void fill_in_generic_residual_contribution_linearised_nst(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix,
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
       unsigned flag);
 
   public:
@@ -250,61 +250,61 @@ namespace oomph
     // -------------------------------------------
 
     /// Reynolds number
-    const double &re() const
+    const double& re() const
     {
       return *Re_pt;
     }
 
     /// Product of Reynolds and Strouhal number (=Womersley number)
-    const double &re_st() const
+    const double& re_st() const
     {
       return *ReSt_pt;
     }
 
-    const double &lambda() const
+    const double& lambda() const
     {
       return *Lambda_pt;
     }
 
-    const double &omega() const
+    const double& omega() const
     {
       return *Omega_pt;
     }
 
     /// Pointer to Reynolds number
-    double *&re_pt()
+    double*& re_pt()
     {
       return Re_pt;
     }
 
     /// Pointer to product of Reynolds and Strouhal number (=Womersley number)
-    double *&re_st_pt()
+    double*& re_st_pt()
     {
       return ReSt_pt;
     }
 
     /// Pointer to lambda
-    double *&lambda_pt()
+    double*& lambda_pt()
     {
       return Lambda_pt;
     }
 
     /// Pointer to frequency
-    double *&omega_pt()
+    double*& omega_pt()
     {
       return Omega_pt;
     }
 
     /// Pointer to normalisation element
-    LinearisedNavierStokesEigenfunctionNormalisationElement *normalisation_element_pt()
+    LinearisedNavierStokesEigenfunctionNormalisationElement* normalisation_element_pt()
     {
       return Normalisation_element_pt;
     }
 
     /// the boolean flag check_nodal_data is set to false.
     void set_eigenfunction_normalisation_element(
-      LinearisedNavierStokesEigenfunctionNormalisationElement *const
-        &normalisation_el_pt)
+      LinearisedNavierStokesEigenfunctionNormalisationElement* const&
+        normalisation_el_pt)
     {
       // Set the normalisation element
       Normalisation_element_pt = normalisation_el_pt;
@@ -325,43 +325,43 @@ namespace oomph
 
     /// \short Viscosity ratio for element: element's viscosity relative
     /// to the viscosity used in the definition of the Reynolds number
-    const double &viscosity_ratio() const
+    const double& viscosity_ratio() const
     {
       return *Viscosity_Ratio_pt;
     }
 
     /// Pointer to the viscosity ratio
-    double *&viscosity_ratio_pt()
+    double*& viscosity_ratio_pt()
     {
       return Viscosity_Ratio_pt;
     }
 
     /// \short Density ratio for element: element's density relative
     /// to the viscosity used in the definition of the Reynolds number
-    const double &density_ratio() const
+    const double& density_ratio() const
     {
       return *Density_Ratio_pt;
     }
 
     /// Pointer to the density ratio
-    double *&density_ratio_pt()
+    double*& density_ratio_pt()
     {
       return Density_Ratio_pt;
     }
 
     /// Access function for the base flow solution pointer
-    void (*&base_flow_u_fct_pt())(const double &time,
-                                  const Vector<double> &x,
-                                  Vector<double> &f)
+    void (*&base_flow_u_fct_pt())(const double& time,
+                                  const Vector<double>& x,
+                                  Vector<double>& f)
     {
       return Base_flow_u_fct_pt;
     }
 
     /// \short Access function for the derivatives of the base flow
     /// w.r.t. global coordinates solution pointer
-    void (*&base_flow_dudx_fct_pt())(const double &time,
-                                     const Vector<double> &x,
-                                     DenseMatrix<double> &f)
+    void (*&base_flow_dudx_fct_pt())(const double& time,
+                                     const Vector<double>& x,
+                                     DenseMatrix<double>& f)
     {
       return Base_flow_dudx_fct_pt;
     }
@@ -376,17 +376,17 @@ namespace oomph
     /// function should be overloaded to reflect the chosen storage scheme.
     /// Note that these equations require that the unknowns are always
     /// stored at the same indices at each node.
-    virtual inline unsigned u_index_linearised_nst(const unsigned &i) const
+    virtual inline unsigned u_index_linearised_nst(const unsigned& i) const
     {
       return i;
     }
 
     /// \short Return the i-th component of du/dt at local node n.
     /// Uses suitably interpolated value for hanging nodes.
-    double du_dt_linearised_nst(const unsigned &n, const unsigned &i) const
+    double du_dt_linearised_nst(const unsigned& n, const unsigned& i) const
     {
       // Get the data's timestepper
-      TimeStepper *time_stepper_pt = this->node_pt(n)->time_stepper_pt();
+      TimeStepper* time_stepper_pt = this->node_pt(n)->time_stepper_pt();
 
       // Initialise dudt
       double dudt = 0.0;
@@ -429,13 +429,13 @@ namespace oomph
 
     /// \short Return the i-th pressure value at local pressure "node" n_p.
     /// Uses suitably interpolated value for hanging nodes.
-    virtual double p_linearised_nst(const unsigned &n_p,
-                                    const unsigned &i) const = 0;
+    virtual double p_linearised_nst(const unsigned& n_p,
+                                    const unsigned& i) const = 0;
 
     /// \short Pin the real or imaginary part of the problem
     /// Input integer 0 for real 1 for imaginary
-    virtual void pin_real_or_imag(const unsigned &real) = 0;
-    virtual void unpin_real_or_imag(const unsigned &real) = 0;
+    virtual void pin_real_or_imag(const unsigned& real) = 0;
+    virtual void unpin_real_or_imag(const unsigned& real) = 0;
 
     /// Pin the normalisation dofs
     virtual void pin_pressure_normalisation_dofs() = 0;
@@ -444,20 +444,20 @@ namespace oomph
     //  N.B. This function has return type "int" (rather than "unsigned"
     //  as in the u_index case) so that we can return the "magic" number
     //  "Pressure_not_stored_at_node" ( = -100 )
-    virtual inline int p_index_linearised_nst(const unsigned &i) const
+    virtual inline int p_index_linearised_nst(const unsigned& i) const
     {
       return Pressure_not_stored_at_node;
     }
 
     /// \short Strain-rate tensor: \f$ e_{ij} \f$
     /// where \f$ i,j = r,z,\theta \f$ (in that order)
-    void strain_rate(const Vector<double> &s,
-                     DenseMatrix<double> &strain_rate,
-                     const unsigned &real) const;
+    void strain_rate(const Vector<double>& s,
+                     DenseMatrix<double>& strain_rate,
+                     const unsigned& real) const;
 
     /// \short Output function: r, z, U^C, U^S, V^C, V^S, W^C, W^S, P^C, P^S
     /// in tecplot format. Default number of plot points
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       const unsigned nplot = 5;
       output(outfile, nplot);
@@ -465,11 +465,11 @@ namespace oomph
 
     /// \short Output function: r, z, U^C, U^S, V^C, V^S, W^C, W^S, P^C, P^S
     /// in tecplot format. nplot points in each coordinate direction
-    void output(std::ostream &outfile, const unsigned &nplot);
+    void output(std::ostream& outfile, const unsigned& nplot);
 
     /// \short Output function: r, z, U^C, U^S, V^C, V^S, W^C, W^S, P^C, P^S
     /// in tecplot format. Default number of plot points
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       const unsigned nplot = 5;
       output(file_pt, nplot);
@@ -477,17 +477,17 @@ namespace oomph
 
     /// \short Output function: r, z, U^C, U^S, V^C, V^S, W^C, W^S, P^C, P^S
     /// in tecplot format. nplot points in each coordinate direction
-    void output(FILE *file_pt, const unsigned &nplot);
+    void output(FILE* file_pt, const unsigned& nplot);
 
     /// \short Output function: r, z, U^C, U^S, V^C, V^S, W^C, W^S,
     /// in tecplot format. nplot points in each coordinate direction
     /// at timestep t (t=0: present; t>0: previous timestep)
-    void output_veloc(std::ostream &outfile,
-                      const unsigned &nplot,
-                      const unsigned &t);
+    void output_veloc(std::ostream& outfile,
+                      const unsigned& nplot,
+                      const unsigned& t);
 
     /// Compute the element's residual Vector
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Call the generic residuals function with flag set to 0
       // and using a dummy matrix argument
@@ -521,8 +521,8 @@ namespace oomph
 
     /// \short Return the i-th component of the FE interpolated velocity
     /// u[i] at local coordinate s
-    double interpolated_u_linearised_nst(const Vector<double> &s,
-                                         const unsigned &i) const
+    double interpolated_u_linearised_nst(const Vector<double>& s,
+                                         const unsigned& i) const
     {
       // Determine number of nodes in the element
       const unsigned n_node = nnode();
@@ -550,8 +550,8 @@ namespace oomph
 
     /// \short Return the i-th component of the FE interpolated pressure
     /// p[i] at local coordinate s
-    double interpolated_p_linearised_nst(const Vector<double> &s,
-                                         const unsigned &i) const
+    double interpolated_p_linearised_nst(const Vector<double>& s,
+                                         const unsigned& i) const
     {
       // Determine number of pressure nodes in the element
       const unsigned n_pressure_nodes = npres_linearised_nst();
@@ -607,31 +607,31 @@ namespace oomph
     /// w.r.t. global coordinates at local coordinate s (taken from geometry).
     /// Return Jacobian of mapping between local and global coordinates.
     inline double dshape_and_dtest_eulerian_linearised_nst(
-      const Vector<double> &s,
-      Shape &psi,
-      DShape &dpsidx,
-      Shape &test,
-      DShape &dtestdx) const;
+      const Vector<double>& s,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const;
 
     /// \short Velocity shape and test functions and their derivatives
     /// w.r.t. global coordinates at the ipt-th integation point
     /// (taken from geometry).
     /// Return Jacobian of mapping between local and global coordinates.
     inline double dshape_and_dtest_eulerian_at_knot_linearised_nst(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidx,
-      Shape &test,
-      DShape &dtestdx) const;
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const;
 
     /// Compute the pressure shape functions at local coordinate s
-    inline void pshape_linearised_nst(const Vector<double> &s,
-                                      Shape &psi) const;
+    inline void pshape_linearised_nst(const Vector<double>& s,
+                                      Shape& psi) const;
 
     /// Compute the pressure shape and test functions at local coordinate s
-    inline void pshape_linearised_nst(const Vector<double> &s,
-                                      Shape &psi,
-                                      Shape &test) const;
+    inline void pshape_linearised_nst(const Vector<double>& s,
+                                      Shape& psi,
+                                      Shape& test) const;
 
   public:
     /// \short Constructor: there are three internal values for each
@@ -653,12 +653,12 @@ namespace oomph
     }
 
     /// Return number of values (pinned or dofs) required at local node n
-    virtual unsigned required_nvalue(const unsigned &n) const;
+    virtual unsigned required_nvalue(const unsigned& n) const;
 
     /// \short Return the pressure value i at internal dof i_internal
     /// (Discontinous pressure interpolation -- no need to cater for
     /// hanging nodes)
-    double p_linearised_nst(const unsigned &i_internal, const unsigned &i) const
+    double p_linearised_nst(const unsigned& i_internal, const unsigned& i) const
     {
       return internal_data_pt(P_linearised_nst_internal_index[i])
         ->value(i_internal);
@@ -673,12 +673,12 @@ namespace oomph
       }
     }
 
-    void pin_real_or_imag(const unsigned &real_index)
+    void pin_real_or_imag(const unsigned& real_index)
     {
       unsigned n_node = this->nnode();
       for (unsigned n = 0; n < n_node; n++)
       {
-        Node *nod_pt = this->node_pt(n);
+        Node* nod_pt = this->node_pt(n);
 
         for (unsigned i = 0; i < DIM; ++i)
         {
@@ -695,12 +695,12 @@ namespace oomph
         ->pin_all();
     }
 
-    void unpin_real_or_imag(const unsigned &real_index)
+    void unpin_real_or_imag(const unsigned& real_index)
     {
       unsigned n_node = this->nnode();
       for (unsigned n = 0; n < n_node; n++)
       {
-        Node *nod_pt = this->node_pt(n);
+        Node* nod_pt = this->node_pt(n);
 
         for (unsigned i = 0; i < DIM; ++i)
         {
@@ -722,7 +722,7 @@ namespace oomph
       unsigned n_node = this->nnode();
       for (unsigned n = 0; n < n_node; n++)
       {
-        Node *nod_pt = this->node_pt(n);
+        Node* nod_pt = this->node_pt(n);
 
         // Transfer the eigenfunctions to the normalisation constraints
         for (unsigned i = 0; i < DIM; ++i)
@@ -737,9 +737,9 @@ namespace oomph
       // Similarly for the pressure
       for (unsigned i = 0; i < 2; ++i)
       {
-        Data *local_data_pt =
+        Data* local_data_pt =
           this->internal_data_pt(P_linearised_nst_internal_index[i]);
-        Data *norm_local_data_pt =
+        Data* norm_local_data_pt =
           this->internal_data_pt(P_linearised_nst_internal_index[2 + i]);
         for (unsigned j = 0; j < 3; j++)
         {
@@ -757,7 +757,7 @@ namespace oomph
 
     /// \short Fix both components of the internal pressure degrees
     /// of freedom p_dof to pvalue
-    void fix_pressure(const unsigned &p_dof, const double &pvalue)
+    void fix_pressure(const unsigned& p_dof, const double& pvalue)
     {
       // Loop over the two pressure components
       for (unsigned i = 0; i < 2; i++)
@@ -770,31 +770,31 @@ namespace oomph
 
     /// \short Overload the access function for the i-th component of the
     /// pressure's local equation numbers
-    inline int p_local_eqn(const unsigned &n, const unsigned &i)
+    inline int p_local_eqn(const unsigned& n, const unsigned& i)
     {
       return internal_local_eqn(P_linearised_nst_internal_index[i], n);
     }
 
     /// Redirect output to NavierStokesEquations output
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       LinearisedNavierStokesEquations::output(outfile);
     }
 
     /// Redirect output to NavierStokesEquations output
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       LinearisedNavierStokesEquations::output(outfile, n_plot);
     }
 
     /// Redirect output to NavierStokesEquations output
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       LinearisedNavierStokesEquations::output(file_pt);
     }
 
     /// Redirect output to NavierStokesEquations output
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       LinearisedNavierStokesEquations::output(file_pt, n_plot);
     }
@@ -817,11 +817,11 @@ namespace oomph
   /// Return Jacobian of mapping between local and global coordinates.
   //=======================================================================
   inline double LinearisedQCrouzeixRaviartElement::
-    dshape_and_dtest_eulerian_linearised_nst(const Vector<double> &s,
-                                             Shape &psi,
-                                             DShape &dpsidx,
-                                             Shape &test,
-                                             DShape &dtestdx) const
+    dshape_and_dtest_eulerian_linearised_nst(const Vector<double>& s,
+                                             Shape& psi,
+                                             DShape& dpsidx,
+                                             Shape& test,
+                                             DShape& dtestdx) const
   {
     // Call the geometrical shape functions and derivatives
     const double J = this->dshape_eulerian(s, psi, dpsidx);
@@ -838,11 +838,11 @@ namespace oomph
   /// Return Jacobian of mapping between local and global coordinates.
   //=======================================================================
   inline double LinearisedQCrouzeixRaviartElement::
-    dshape_and_dtest_eulerian_at_knot_linearised_nst(const unsigned &ipt,
-                                                     Shape &psi,
-                                                     DShape &dpsidx,
-                                                     Shape &test,
-                                                     DShape &dtestdx) const
+    dshape_and_dtest_eulerian_at_knot_linearised_nst(const unsigned& ipt,
+                                                     Shape& psi,
+                                                     DShape& dpsidx,
+                                                     Shape& test,
+                                                     DShape& dtestdx) const
   {
     // Call the geometrical shape functions and derivatives
     const double J = this->dshape_eulerian_at_knot(ipt, psi, dpsidx);
@@ -859,7 +859,7 @@ namespace oomph
   /// Pressure shape functions
   //=======================================================================
   inline void LinearisedQCrouzeixRaviartElement::pshape_linearised_nst(
-    const Vector<double> &s, Shape &psi) const
+    const Vector<double>& s, Shape& psi) const
   {
     psi[0] = 1.0;
     psi[1] = s[0];
@@ -870,7 +870,7 @@ namespace oomph
   /// Define the pressure shape and test functions
   //=======================================================================
   inline void LinearisedQCrouzeixRaviartElement::pshape_linearised_nst(
-    const Vector<double> &s, Shape &psi, Shape &test) const
+    const Vector<double>& s, Shape& psi, Shape& test) const
   {
     // Call the pressure shape functions
     pshape_linearised_nst(s, psi);
@@ -931,31 +931,31 @@ namespace oomph
     /// w.r.t. global coordinates  at local coordinate s (taken from geometry).
     /// Return Jacobian of mapping between local and global coordinates.
     inline double dshape_and_dtest_eulerian_linearised_nst(
-      const Vector<double> &s,
-      Shape &psi,
-      DShape &dpsidx,
-      Shape &test,
-      DShape &dtestdx) const;
+      const Vector<double>& s,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const;
 
     /// \short Velocity shape and test functions and their derivatives
     /// w.r.t. global coordinates the ipt-th integation point
     /// (taken from geometry).
     /// Return Jacobian of mapping between local and global coordinates.
     inline double dshape_and_dtest_eulerian_at_knot_linearised_nst(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidx,
-      Shape &test,
-      DShape &dtestdx) const;
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const;
 
     /// Compute the pressure shape functions at local coordinate s
-    inline void pshape_linearised_nst(const Vector<double> &s,
-                                      Shape &psi) const;
+    inline void pshape_linearised_nst(const Vector<double>& s,
+                                      Shape& psi) const;
 
     /// Compute the pressure shape and test functions at local coordinte s
-    inline void pshape_linearised_nst(const Vector<double> &s,
-                                      Shape &psi,
-                                      Shape &test) const;
+    inline void pshape_linearised_nst(const Vector<double>& s,
+                                      Shape& psi,
+                                      Shape& test) const;
 
   public:
     /// Constructor, no internal data points
@@ -966,21 +966,21 @@ namespace oomph
 
     /// \short Number of values (pinned or dofs) required at node n. Can
     /// be overwritten for hanging node version
-    inline virtual unsigned required_nvalue(const unsigned &n) const
+    inline virtual unsigned required_nvalue(const unsigned& n) const
     {
       return Initial_Nvalue[n];
     }
 
     /// \short Which nodal value represents the pressure? Overload version
     /// in base class which returns static int "Pressure_not_stored_at_node"
-    virtual int p_index_linearised_nst(const unsigned &i) const
+    virtual int p_index_linearised_nst(const unsigned& i) const
     {
       return (2 * DIM + i);
     }
 
     /// \short Access function for the i-th component of pressure
     /// at local pressure node n_p (const version).
-    double p_linearised_nst(const unsigned &n_p, const unsigned &i) const
+    double p_linearised_nst(const unsigned& n_p, const unsigned& i) const
     {
       return nodal_value(Pconv[n_p], p_index_linearised_nst(i));
     }
@@ -993,14 +993,14 @@ namespace oomph
                           OOMPH_EXCEPTION_LOCATION);
     }
 
-    virtual void pin_real_or_imag(const unsigned &real)
+    virtual void pin_real_or_imag(const unsigned& real)
     {
       throw OomphLibError("This is not implemented yet\n",
                           OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
     }
 
-    virtual void unpin_real_or_imag(const unsigned &real)
+    virtual void unpin_real_or_imag(const unsigned& real)
     {
       throw OomphLibError("This is not implemented yet\n",
                           OOMPH_CURRENT_FUNCTION,
@@ -1016,7 +1016,7 @@ namespace oomph
 
     /// \short Fix both components of the pressure at local pressure
     /// node n_p to pvalue
-    void fix_pressure(const unsigned &n_p, const double &pvalue)
+    void fix_pressure(const unsigned& n_p, const double& pvalue)
     {
       // Loop over the two pressure components
       for (unsigned i = 0; i < 2; i++)
@@ -1028,31 +1028,31 @@ namespace oomph
 
     /// \short Overload the access function for the i-th component of the
     /// pressure's local equation numbers
-    inline int p_local_eqn(const unsigned &n, const unsigned &i)
+    inline int p_local_eqn(const unsigned& n, const unsigned& i)
     {
       return nodal_local_eqn(Pconv[n], p_index_linearised_nst(i));
     }
 
     /// Redirect output to NavierStokesEquations output
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       LinearisedNavierStokesEquations::output(outfile);
     }
 
     /// Redirect output to NavierStokesEquations output
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       LinearisedNavierStokesEquations::output(outfile, n_plot);
     }
 
     /// Redirect output to NavierStokesEquations output
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       LinearisedNavierStokesEquations::output(file_pt);
     }
 
     /// Redirect output to NavierStokesEquations output
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       LinearisedNavierStokesEquations::output(file_pt, n_plot);
     }
@@ -1075,11 +1075,11 @@ namespace oomph
   /// Return Jacobian of mapping between local and global coordinates.
   //=======================================================================
   inline double LinearisedQTaylorHoodElement::
-    dshape_and_dtest_eulerian_linearised_nst(const Vector<double> &s,
-                                             Shape &psi,
-                                             DShape &dpsidx,
-                                             Shape &test,
-                                             DShape &dtestdx) const
+    dshape_and_dtest_eulerian_linearised_nst(const Vector<double>& s,
+                                             Shape& psi,
+                                             DShape& dpsidx,
+                                             Shape& test,
+                                             DShape& dtestdx) const
   {
     // Call the geometrical shape functions and derivatives
     const double J = this->dshape_eulerian(s, psi, dpsidx);
@@ -1097,11 +1097,11 @@ namespace oomph
   /// Return Jacobian of mapping between local and global coordinates.
   //=======================================================================
   inline double LinearisedQTaylorHoodElement::
-    dshape_and_dtest_eulerian_at_knot_linearised_nst(const unsigned &ipt,
-                                                     Shape &psi,
-                                                     DShape &dpsidx,
-                                                     Shape &test,
-                                                     DShape &dtestdx) const
+    dshape_and_dtest_eulerian_at_knot_linearised_nst(const unsigned& ipt,
+                                                     Shape& psi,
+                                                     DShape& dpsidx,
+                                                     Shape& test,
+                                                     DShape& dtestdx) const
   {
     // Call the geometrical shape functions and derivatives
     const double J = this->dshape_eulerian_at_knot(ipt, psi, dpsidx);
@@ -1117,7 +1117,7 @@ namespace oomph
   /// Pressure shape functions
   //=======================================================================
   inline void LinearisedQTaylorHoodElement::pshape_linearised_nst(
-    const Vector<double> &s, Shape &psi) const
+    const Vector<double>& s, Shape& psi) const
   {
     // Allocate local storage for the pressure shape functions
     double psi1[2], psi2[2];
@@ -1142,7 +1142,7 @@ namespace oomph
   /// Pressure shape and test functions
   //=======================================================================
   inline void LinearisedQTaylorHoodElement::pshape_linearised_nst(
-    const Vector<double> &s, Shape &psi, Shape &test) const
+    const Vector<double>& s, Shape& psi, Shape& test) const
   {
     // Call the pressure shape functions
     pshape_linearised_nst(s, psi);

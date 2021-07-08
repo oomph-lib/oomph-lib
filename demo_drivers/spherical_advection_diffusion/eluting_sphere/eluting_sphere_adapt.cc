@@ -52,7 +52,7 @@ namespace Global_Physical_Variables
 namespace Wind_Function
 {
   /// Wind
-  void get_wind(const Vector<double> &x, Vector<double> &wind)
+  void get_wind(const Vector<double>& x, Vector<double>& wind)
   {
     wind[0] = (-1.0 + 1.5 / x[0] - 0.5 / (x[0] * x[0] * x[0])) * cos(x[1]);
     wind[1] = (1.0 - 0.75 / x[0] - 0.25 / (x[0] * x[0] * x[0])) * sin(x[1]);
@@ -77,16 +77,16 @@ public:
   void set_boundary_conditions();
 
   // Access function for the specific mesh
-  RefineableRectangularQuadMesh<ELEMENT> *mesh_pt()
+  RefineableRectangularQuadMesh<ELEMENT>* mesh_pt()
   {
     // Upcast from pointer to the Mesh base class to the specific
     // element type that we're using here.
-    return dynamic_cast<RefineableRectangularQuadMesh<ELEMENT> *>(
+    return dynamic_cast<RefineableRectangularQuadMesh<ELEMENT>*>(
       Problem::mesh_pt());
   }
 
   /// Document the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 }; // end_of_problem_class
 
@@ -119,7 +119,7 @@ RefineableElutingSphereProblem<ELEMENT>::RefineableElutingSphereProblem()
     n_r, n_theta, R_inner, R_outer, 0.0, pi);
 
   // Set error estimator
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   mesh_pt()->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Set the boundary conditions for this problem: All nodes are
@@ -150,7 +150,7 @@ RefineableElutingSphereProblem<ELEMENT>::RefineableElutingSphereProblem()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
     // Set the Reynolds number
     el_pt->pe_pt() = &Global_Physical_Variables::Pe;
@@ -177,7 +177,7 @@ void RefineableElutingSphereProblem<ELEMENT>::set_boundary_conditions()
   unsigned num_nod = mesh_pt()->nboundary_node(ibound);
   for (unsigned inod = 0; inod < num_nod; inod++)
   {
-    Node *nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
+    Node* nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
     nod_pt->set_value(0, 0.0);
   }
 
@@ -188,7 +188,7 @@ void RefineableElutingSphereProblem<ELEMENT>::set_boundary_conditions()
   num_nod = mesh_pt()->nboundary_node(ibound);
   for (unsigned inod = 0; inod < num_nod; inod++)
   {
-    Node *nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
+    Node* nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
     nod_pt->set_value(0, 1.0);
   }
 
@@ -212,7 +212,7 @@ RefineableElutingSphereProblem<ELEMENT>::~RefineableElutingSphereProblem()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void RefineableElutingSphereProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void RefineableElutingSphereProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];

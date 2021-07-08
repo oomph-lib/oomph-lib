@@ -60,17 +60,17 @@ namespace oomph
   public:
     /// \short Function pointer to the prescribed-flux function fct(x,f(x)) --
     /// x is a Vector!
-    typedef void (*UnsteadyHeatPrescribedFluxFctPt)(const double &time,
-                                                    const Vector<double> &x,
-                                                    double &flux);
+    typedef void (*UnsteadyHeatPrescribedFluxFctPt)(const double& time,
+                                                    const Vector<double>& x,
+                                                    double& flux);
 
     /// \short Constructor, takes the pointer to the "bulk" element and the
     /// index of the face to be created
-    UnsteadyHeatFluxElement(FiniteElement *const &bulk_el_pt,
-                            const int &face_index);
+    UnsteadyHeatFluxElement(FiniteElement* const& bulk_el_pt,
+                            const int& face_index);
 
     /// Broken copy constructor
-    UnsteadyHeatFluxElement(const UnsteadyHeatFluxElement &dummy)
+    UnsteadyHeatFluxElement(const UnsteadyHeatFluxElement& dummy)
     {
       BrokenCopy::broken_copy("UnsteadyHeatFluxElement");
     }
@@ -87,13 +87,13 @@ namespace oomph
       }*/
 
     /// Access function for the prescribed-flux function pointer
-    UnsteadyHeatPrescribedFluxFctPt &flux_fct_pt()
+    UnsteadyHeatPrescribedFluxFctPt& flux_fct_pt()
     {
       return Flux_fct_pt;
     }
 
     /// Compute the element residual vector
-    inline void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    inline void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Call the generic residuals function with flag set to 0
       // using a dummy matrix argument
@@ -102,8 +102,8 @@ namespace oomph
     }
 
     /// Compute the element's residual vector and its Jacobian matrix
-    inline void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                                 DenseMatrix<double> &jacobian)
+    inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                                 DenseMatrix<double>& jacobian)
     {
       // Call the generic routine with the flag set to 1
       fill_in_generic_residual_contribution_ust_heat_flux(
@@ -115,30 +115,30 @@ namespace oomph
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default (needed to break
     /// indeterminacy if bulk element is SolidElement)
-    double zeta_nodal(const unsigned &n,
-                      const unsigned &k,
-                      const unsigned &i) const
+    double zeta_nodal(const unsigned& n,
+                      const unsigned& k,
+                      const unsigned& i) const
     {
       return FaceElement::zeta_nodal(n, k, i);
     }
 
     /// Output function -- forward to broken version in FiniteElement
     /// until somebody decides what exactly they want to plot here...
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       FaceGeometry<ELEMENT>::output(outfile);
     }
 
     /// \short Output function -- forward to broken version in FiniteElement
     /// until somebody decides what exactly they want to plot here...
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       FaceGeometry<ELEMENT>::output(outfile, n_plot);
     }
 
     /// C-style output function -- forward to broken version in FiniteElement
     /// until somebody decides what exactly they want to plot here...
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FaceGeometry<ELEMENT>::output(file_pt);
     }
@@ -146,7 +146,7 @@ namespace oomph
     /// \short C-style output function -- forward to broken version in
     /// FiniteElement until somebody decides what exactly they want to plot
     /// here...
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       FaceGeometry<ELEMENT>::output(file_pt, n_plot);
     }
@@ -155,9 +155,9 @@ namespace oomph
     /// \short Function to compute the shape and test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
-    inline double shape_and_test(const Vector<double> &s,
-                                 Shape &psi,
-                                 Shape &test) const
+    inline double shape_and_test(const Vector<double>& s,
+                                 Shape& psi,
+                                 Shape& test) const
     {
       // Find number of nodes
       unsigned n_node = nnode();
@@ -177,7 +177,7 @@ namespace oomph
 
     /// Function to calculate the prescribed flux at a given spatial
     /// position and at a gien time
-    void get_flux(const double &time, const Vector<double> &x, double &flux)
+    void get_flux(const double& time, const Vector<double>& x, double& flux)
     {
       // If the function pointer is zero return zero
       if (Flux_fct_pt == 0)
@@ -195,7 +195,7 @@ namespace oomph
     /// \short Compute the element residual vector.
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void fill_in_generic_residual_contribution_ust_heat_flux(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag);
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
 
     /// Function pointer to the (global) prescribed-flux function
     UnsteadyHeatPrescribedFluxFctPt Flux_fct_pt;
@@ -217,7 +217,7 @@ namespace oomph
   //===========================================================================
   template<class ELEMENT>
   UnsteadyHeatFluxElement<ELEMENT>::UnsteadyHeatFluxElement(
-    FiniteElement *const &bulk_el_pt, const int &face_index) :
+    FiniteElement* const& bulk_el_pt, const int& face_index) :
     FaceGeometry<ELEMENT>(), FaceElement()
   {
     // Let the bulk element build the FaceElement, i.e. setup the pointers
@@ -228,14 +228,14 @@ namespace oomph
 #ifdef PARANOID
     {
       // Check that the element is not a refineable 3d element
-      ELEMENT *elem_pt = dynamic_cast<ELEMENT *>(bulk_el_pt);
+      ELEMENT* elem_pt = dynamic_cast<ELEMENT*>(bulk_el_pt);
 
       // If it's three-d
       if (elem_pt->dim() == 3)
       {
         // Is it refineable
-        RefineableElement *ref_el_pt =
-          dynamic_cast<RefineableElement *>(elem_pt);
+        RefineableElement* ref_el_pt =
+          dynamic_cast<RefineableElement*>(elem_pt);
         if (ref_el_pt != 0)
         {
           if (this->has_hanging_nodes())
@@ -271,8 +271,8 @@ namespace oomph
         // One dimensional problem
       case 1:
       {
-        UnsteadyHeatEquations<1> *eqn_pt =
-          dynamic_cast<UnsteadyHeatEquations<1> *>(bulk_el_pt);
+        UnsteadyHeatEquations<1>* eqn_pt =
+          dynamic_cast<UnsteadyHeatEquations<1>*>(bulk_el_pt);
         // If the cast has failed die
         if (eqn_pt == 0)
         {
@@ -299,8 +299,8 @@ namespace oomph
       // Two dimensional problem
       case 2:
       {
-        UnsteadyHeatEquations<2> *eqn_pt =
-          dynamic_cast<UnsteadyHeatEquations<2> *>(bulk_el_pt);
+        UnsteadyHeatEquations<2>* eqn_pt =
+          dynamic_cast<UnsteadyHeatEquations<2>*>(bulk_el_pt);
         // If the cast has failed die
         if (eqn_pt == 0)
         {
@@ -326,8 +326,8 @@ namespace oomph
       // Three dimensional problem
       case 3:
       {
-        UnsteadyHeatEquations<3> *eqn_pt =
-          dynamic_cast<UnsteadyHeatEquations<3> *>(bulk_el_pt);
+        UnsteadyHeatEquations<3>* eqn_pt =
+          dynamic_cast<UnsteadyHeatEquations<3>*>(bulk_el_pt);
         // If the cast has failed die
         if (eqn_pt == 0)
         {
@@ -368,7 +368,7 @@ namespace oomph
   template<class ELEMENT>
   void UnsteadyHeatFluxElement<ELEMENT>::
     fill_in_generic_residual_contribution_ust_heat_flux(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag)
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag)
   {
     // Find out how many nodes there are
     const unsigned n_node = nnode();

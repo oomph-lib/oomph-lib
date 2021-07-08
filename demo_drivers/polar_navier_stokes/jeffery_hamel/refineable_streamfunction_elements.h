@@ -64,7 +64,7 @@ namespace oomph
 
     /// Broken copy constructor
     RefineablePolarStreamfunctionEquations(
-      const RefineablePolarStreamfunctionEquations &dummy)
+      const RefineablePolarStreamfunctionEquations& dummy)
     {
       BrokenCopy::broken_copy("RefineablePolarStreamfunctionEquations");
     }
@@ -77,7 +77,7 @@ namespace oomph
 
     /// Get 'flux' for Z2 error recovery:  Standard flux.from Streamfunction
     /// equations
-    void get_Z2_flux(const Vector<double> &s, Vector<double> &flux)
+    void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
       this->get_flux(s, flux);
     }
@@ -86,8 +86,8 @@ namespace oomph
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines), the values Vector sets its own size in here.
-    void get_interpolated_values(const Vector<double> &s,
-                                 Vector<double> &values)
+    void get_interpolated_values(const Vector<double>& s,
+                                 Vector<double>& values)
     {
       // Set size of Vector: streamfunction, u and v
       values.resize(3);
@@ -128,9 +128,9 @@ namespace oomph
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines), the values Vector sets its own size in here.
-    void get_interpolated_values(const unsigned &t,
-                                 const Vector<double> &s,
-                                 Vector<double> &values)
+    void get_interpolated_values(const unsigned& t,
+                                 const Vector<double>& s,
+                                 Vector<double>& values)
     {
       if (t != 0)
       {
@@ -155,8 +155,8 @@ namespace oomph
     void further_build()
     {
       // Find the father element
-      RefineablePolarStreamfunctionEquations *cast_father_element_pt =
-        dynamic_cast<RefineablePolarStreamfunctionEquations *>(
+      RefineablePolarStreamfunctionEquations* cast_father_element_pt =
+        dynamic_cast<RefineablePolarStreamfunctionEquations*>(
           this->father_element_pt());
 
       // Set pointer to alpha
@@ -168,8 +168,8 @@ namespace oomph
     /// Jacobian matrix
     /// flag=1: compute both
     /// flag=0: compute only residual vector
-    void fill_in_generic_residual_contribution(Vector<double> &residuals,
-                                               DenseMatrix<double> &jacobian,
+    void fill_in_generic_residual_contribution(Vector<double>& residuals,
+                                               DenseMatrix<double>& jacobian,
                                                unsigned flag);
   };
 
@@ -195,7 +195,7 @@ namespace oomph
 
     /// Broken copy constructor
     RefineablePolarStreamfunctionElement(
-      const RefineablePolarStreamfunctionElement &dummy)
+      const RefineablePolarStreamfunctionElement& dummy)
     {
       BrokenCopy::broken_copy("RefineableQuadStreamfunctionElement");
     }
@@ -213,13 +213,13 @@ namespace oomph
     }
 
     /// \short Pointer to the j-th vertex node in the element
-    Node *vertex_node_pt(const unsigned &j) const
+    Node* vertex_node_pt(const unsigned& j) const
     {
       return PolarStreamfunctionElement::vertex_node_pt(j);
     }
 
     /// Rebuild from sons: empty
-    void rebuild_from_sons(Mesh *&mesh_pt) {}
+    void rebuild_from_sons(Mesh*& mesh_pt) {}
 
     /// \short Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.
@@ -261,8 +261,8 @@ namespace oomph
   /// flag=0: compute only residual vector
   //========================================================================
   void RefineablePolarStreamfunctionEquations::
-    fill_in_generic_residual_contribution(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian,
+    fill_in_generic_residual_contribution(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian,
                                           unsigned flag)
   {
     // Find out how many nodes there are

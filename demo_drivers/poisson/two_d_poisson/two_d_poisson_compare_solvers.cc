@@ -54,13 +54,13 @@ namespace TanhSolnForPoisson
   double TanPhi = 0.0;
 
   /// Exact solution as a Vector
-  void get_exact_u(const Vector<double> &x, Vector<double> &u)
+  void get_exact_u(const Vector<double>& x, Vector<double>& u)
   {
     u[0] = tanh(1.0 - Alpha * (TanPhi * x[0] - x[1]));
   }
 
   /// Source function required to make the solution above an exact solution
-  void get_source(const Vector<double> &x, double &source)
+  void get_source(const Vector<double>& x, double& source)
   {
     source = 2.0 * tanh(-1.0 + Alpha * (TanPhi * x[0] - x[1])) *
                (1.0 - pow(tanh(-1.0 + Alpha * (TanPhi * x[0] - x[1])), 2.0)) *
@@ -86,8 +86,8 @@ public:
   /// elements along the 1d mesh edges -- total number of elements is
   /// nel_1d x nel_1d.
   PoissonProblem(PoissonEquations<2>::PoissonSourceFctPt source_fct_pt,
-                 const unsigned &nel_1d,
-                 const bool &mess_up_order);
+                 const unsigned& nel_1d,
+                 const bool& mess_up_order);
 
   /// Destructor (empty)
   ~PoissonProblem() {}
@@ -101,7 +101,7 @@ public:
 
   /// \short Doc the solution. DocInfo object stores flags/labels for where the
   /// output gets written to
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 private:
   /// Pointer to source function
@@ -118,8 +118,8 @@ private:
 template<class ELEMENT>
 PoissonProblem<ELEMENT>::PoissonProblem(
   PoissonEquations<2>::PoissonSourceFctPt source_fct_pt,
-  const unsigned &nel_1d,
-  const bool &mess_up_order) :
+  const unsigned& nel_1d,
+  const bool& mess_up_order) :
   Source_fct_pt(source_fct_pt)
 {
   // Setup mesh
@@ -147,10 +147,10 @@ PoissonProblem<ELEMENT>::PoissonProblem(
     unsigned n_element = mesh_pt()->nelement();
 
     // Make copy
-    Vector<ELEMENT *> tmp_element_pt(n_element);
+    Vector<ELEMENT*> tmp_element_pt(n_element);
     for (unsigned e = 0; e < n_element; e++)
     {
-      tmp_element_pt[e] = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+      tmp_element_pt[e] = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
     }
 
     // Reorder
@@ -194,7 +194,7 @@ PoissonProblem<ELEMENT>::PoissonProblem(
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the source function pointer
     el_pt->source_fct_pt() = Source_fct_pt;
@@ -225,7 +225,7 @@ void PoissonProblem<ELEMENT>::actions_before_newton_solve()
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Get pointer to node
-      Node *nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
+      Node* nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
 
       // Extract nodal coordinates from node:
       Vector<double> x(2);
@@ -246,7 +246,7 @@ void PoissonProblem<ELEMENT>::actions_before_newton_solve()
 /// Doc the solution: doc_info contains labels/output directory etc.
 //========================================================================
 template<class ELEMENT>
-void PoissonProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void PoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -296,8 +296,8 @@ void PoissonProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
 /// nel_1d is the number of elements along the 1D mesh edge.
 /// Total number of elements is nel_1d x nel_1d.
 //========================================================================
-void run(const string &dir_name,
-         LinearSolver *linear_solver_pt,
+void run(const string& dir_name,
+         LinearSolver* linear_solver_pt,
          const unsigned nel_1d,
          bool mess_up_order)
 {
@@ -357,7 +357,7 @@ void run(const string &dir_name,
 int main()
 {
   // Pointer to linear solver
-  LinearSolver *linear_solver_pt;
+  LinearSolver* linear_solver_pt;
 
   // Result directory
   string dir_name;
@@ -408,11 +408,11 @@ int main()
     linear_solver_pt = new SuperLUSolver;
 
     /// Use compressed row storage
-    static_cast<SuperLUSolver *>(linear_solver_pt)
+    static_cast<SuperLUSolver*>(linear_solver_pt)
       ->use_compressed_row_for_superlu_serial();
 
     /// Switch on full doc
-    static_cast<SuperLUSolver *>(linear_solver_pt)->enable_doc_stats();
+    static_cast<SuperLUSolver*>(linear_solver_pt)->enable_doc_stats();
 
     // Choose result directory
     dir_name = "RESLT_cr";
@@ -448,11 +448,11 @@ int main()
     linear_solver_pt = new SuperLUSolver;
 
     /// Use compressed row storage
-    static_cast<SuperLUSolver *>(linear_solver_pt)
+    static_cast<SuperLUSolver*>(linear_solver_pt)
       ->use_compressed_column_for_superlu_serial();
 
     /// Switch on full doc
-    static_cast<SuperLUSolver *>(linear_solver_pt)->enable_doc_stats();
+    static_cast<SuperLUSolver*>(linear_solver_pt)->enable_doc_stats();
 
     // Choose result directory
     dir_name = "RESLT_cc";
@@ -492,7 +492,7 @@ int main()
     linear_solver_pt = new HSL_MA42;
 
     /// Switch on full doc
-    static_cast<HSL_MA42 *>(linear_solver_pt)->enable_doc_stats();
+    static_cast<HSL_MA42*>(linear_solver_pt)->enable_doc_stats();
 
     // Choose result directory
     dir_name = "RESLT_frontal";
@@ -530,10 +530,10 @@ int main()
     linear_solver_pt = new HSL_MA42;
 
     /// Switch on full doc
-    static_cast<HSL_MA42 *>(linear_solver_pt)->enable_doc_stats();
+    static_cast<HSL_MA42*>(linear_solver_pt)->enable_doc_stats();
 
     /// Switch on re-ordering
-    static_cast<HSL_MA42 *>(linear_solver_pt)->enable_reordering();
+    static_cast<HSL_MA42*>(linear_solver_pt)->enable_reordering();
 
     // Choose result directory
     dir_name = "RESLT_frontal_reordered";

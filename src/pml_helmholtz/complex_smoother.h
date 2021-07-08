@@ -30,19 +30,19 @@ namespace oomph
     /// on the system A*result=rhs. The number of (smoothing) iterations is
     /// the same as the max. number of iterations in the underlying
     /// IterativeLinearSolver class.
-    virtual void complex_smoother_solve(const Vector<DoubleVector> &rhs,
-                                        Vector<DoubleVector> &result) = 0;
+    virtual void complex_smoother_solve(const Vector<DoubleVector>& rhs,
+                                        Vector<DoubleVector>& result) = 0;
 
     /// Setup the smoother for the matrix specified by the pointer
-    virtual void complex_smoother_setup(Vector<CRDoubleMatrix *> matrix_pt) = 0;
+    virtual void complex_smoother_setup(Vector<CRDoubleMatrix*> matrix_pt) = 0;
 
     /// \short Helper function to calculate a complex matrix-vector product.
     /// Assumes the matrix has been provided as a Vector of length two; the
     /// first entry containing the real part of the system matrix and the
     /// second entry containing the imaginary part
-    void complex_matrix_multiplication(Vector<CRDoubleMatrix *> matrices_pt,
-                                       const Vector<DoubleVector> &x,
-                                       Vector<DoubleVector> &soln)
+    void complex_matrix_multiplication(Vector<CRDoubleMatrix*> matrices_pt,
+                                       const Vector<DoubleVector>& x,
+                                       Vector<DoubleVector>& soln)
     {
 #ifdef PARANOID
       // PARANOID check - Make sure the input matrix has the right size
@@ -136,11 +136,11 @@ namespace oomph
     /// solve helper are consistent and everything that needs to be built, is.
     template<typename MATRIX>
     void check_validity_of_solve_helper_inputs(
-      CRDoubleMatrix *const &real_matrix_pt,
-      CRDoubleMatrix *const &imag_matrix_pt,
-      const Vector<DoubleVector> &rhs,
-      Vector<DoubleVector> &solution,
-      const double &n_dof);
+      CRDoubleMatrix* const& real_matrix_pt,
+      CRDoubleMatrix* const& imag_matrix_pt,
+      const Vector<DoubleVector>& rhs,
+      Vector<DoubleVector>& solution,
+      const double& n_dof);
 
   protected:
     /// \short When a derived class object is being used as a smoother in
@@ -157,17 +157,17 @@ namespace oomph
   //==================================================================
   template<typename MATRIX>
   void HelmholtzSmoother::check_validity_of_solve_helper_inputs(
-    CRDoubleMatrix *const &real_matrix_pt,
-    CRDoubleMatrix *const &imag_matrix_pt,
-    const Vector<DoubleVector> &rhs,
-    Vector<DoubleVector> &solution,
-    const double &n_dof)
+    CRDoubleMatrix* const& real_matrix_pt,
+    CRDoubleMatrix* const& imag_matrix_pt,
+    const Vector<DoubleVector>& rhs,
+    Vector<DoubleVector>& solution,
+    const double& n_dof)
   {
     // Number of dof types should be 2 (real & imaginary)
     unsigned n_dof_types = 2;
 
     // Create a vector to hold the matrices
-    Vector<CRDoubleMatrix *> matrix_storage_pt(2, 0);
+    Vector<CRDoubleMatrix*> matrix_storage_pt(2, 0);
 
     // Assign the first entry in matrix_storage_pt
     matrix_storage_pt[0] = real_matrix_pt;
@@ -180,10 +180,10 @@ namespace oomph
     {
       // Check if the matrix is distributable. If it is then it should
       // not be distributed
-      if (dynamic_cast<DistributableLinearAlgebraObject *>(
+      if (dynamic_cast<DistributableLinearAlgebraObject*>(
             matrix_storage_pt[dof_type]) != 0)
       {
-        if (dynamic_cast<DistributableLinearAlgebraObject *>(
+        if (dynamic_cast<DistributableLinearAlgebraObject*>(
               matrix_storage_pt[dof_type])
               ->distributed())
         {
@@ -254,7 +254,7 @@ namespace oomph
   {
   public:
     /// Constructor (empty)
-    ComplexDampedJacobi(const double &omega = 0.5) :
+    ComplexDampedJacobi(const double& omega = 0.5) :
       Matrix_can_be_deleted(true),
       Matrix_real_pt(0),
       Matrix_imag_pt(0),
@@ -294,13 +294,13 @@ namespace oomph
     } // End of clean_up_memory
 
     /// \short Broken copy constructor
-    ComplexDampedJacobi(const ComplexDampedJacobi &)
+    ComplexDampedJacobi(const ComplexDampedJacobi&)
     {
       BrokenCopy::broken_copy("ComplexDampedJacobi");
     }
 
     /// \short Broken assignment operator
-    void operator=(const ComplexDampedJacobi &)
+    void operator=(const ComplexDampedJacobi&)
     {
       BrokenCopy::broken_assign("ComplexDampedJacobi");
     }
@@ -308,7 +308,7 @@ namespace oomph
     /// \short Function to calculate the value of Omega by passing in the
     /// value of k and h [see Elman et al. "A multigrid method enhanced by
     /// Krylov subspace iteration for discrete Helmholtz equations", p.1303]
-    void calculate_omega(const double &k, const double &h)
+    void calculate_omega(const double& k, const double& h)
     {
       // Create storage for the parameter kh
       double kh = k * h;
@@ -366,14 +366,14 @@ namespace oomph
     } // End of calculate_omega
 
     /// Get access to the value of Omega (lvalue)
-    double &omega()
+    double& omega()
     {
       // Return the value of Omega
       return Omega;
     } // End of omega
 
     /// Setup: Pass pointer to the matrix and store in cast form
-    void complex_smoother_setup(Vector<CRDoubleMatrix *> helmholtz_matrix_pt)
+    void complex_smoother_setup(Vector<CRDoubleMatrix*> helmholtz_matrix_pt)
     {
       // Assume the matrices have been passed in from the outside so we must
       // not delete it. This is needed to avoid pre- and post-smoothers
@@ -447,8 +447,8 @@ namespace oomph
     /// on the system A*result=rhs. The number of (smoothing) iterations is
     /// the same as the max. number of iterations in the underlying
     /// IterativeLinearSolver class.
-    void complex_smoother_solve(const Vector<DoubleVector> &rhs,
-                                Vector<DoubleVector> &solution)
+    void complex_smoother_solve(const Vector<DoubleVector>& rhs,
+                                Vector<DoubleVector>& solution)
     {
       // If you use a smoother but you don't want to calculate the residual
       Use_as_smoother = true;
@@ -461,7 +461,7 @@ namespace oomph
     /// This obtains the Jacobian matrix J and the residual vector r
     /// (needed for the Newton method) from the problem's get_jacobian
     /// function and returns the result of Jx=r.
-    void solve(Problem *const &problem_pt, DoubleVector &result)
+    void solve(Problem* const& problem_pt, DoubleVector& result)
     {
       BrokenCopy::broken_assign("ComplexDampedJacobi");
     }
@@ -474,18 +474,18 @@ namespace oomph
 
   private:
     /// \short This is where the actual work is done
-    void complex_solve_helper(const Vector<DoubleVector> &rhs,
-                              Vector<DoubleVector> &solution);
+    void complex_solve_helper(const Vector<DoubleVector>& rhs,
+                              Vector<DoubleVector>& solution);
 
     /// \short Boolean flag to indicate if the matrices pointed to by
     /// Matrix_real_pt and Matrix_imag_pt can be deleted.
     bool Matrix_can_be_deleted;
 
     /// Pointer to the real part of the system matrix
-    CRDoubleMatrix *Matrix_real_pt;
+    CRDoubleMatrix* Matrix_real_pt;
 
     /// Pointer to the real part of the system matrix
-    CRDoubleMatrix *Matrix_imag_pt;
+    CRDoubleMatrix* Matrix_imag_pt;
 
     /// Vector containing the diagonal entries of A_r (real(A))
     Vector<double> Matrix_diagonal_real;
@@ -508,19 +508,19 @@ namespace oomph
   //======================================================================
   template<typename MATRIX>
   void ComplexDampedJacobi<MATRIX>::complex_solve_helper(
-    const Vector<DoubleVector> &rhs, Vector<DoubleVector> &solution)
+    const Vector<DoubleVector>& rhs, Vector<DoubleVector>& solution)
   {
     // Get number of dofs
     unsigned n_dof = Matrix_real_pt->nrow();
 
 #ifdef PARANOID
     // Upcast the matrix to the appropriate type
-    CRDoubleMatrix *tmp_rmatrix_pt =
-      dynamic_cast<CRDoubleMatrix *>(Matrix_real_pt);
+    CRDoubleMatrix* tmp_rmatrix_pt =
+      dynamic_cast<CRDoubleMatrix*>(Matrix_real_pt);
 
     // Upcast the matrix to the appropriate type
-    CRDoubleMatrix *tmp_imatrix_pt =
-      dynamic_cast<CRDoubleMatrix *>(Matrix_imag_pt);
+    CRDoubleMatrix* tmp_imatrix_pt =
+      dynamic_cast<CRDoubleMatrix*>(Matrix_imag_pt);
 
     // PARANOID Run the self-tests to check the inputs are correct
     this->check_validity_of_solve_helper_inputs<MATRIX>(
@@ -853,13 +853,13 @@ namespace oomph
     } // End of ~ComplexGMRES
 
     /// Broken copy constructor
-    ComplexGMRES(const ComplexGMRES &)
+    ComplexGMRES(const ComplexGMRES&)
     {
       BrokenCopy::broken_copy("ComplexGMRES");
     } // End of ComplexGMRES (copy constructor)
 
     /// Broken assignment operator
-    void operator=(const ComplexGMRES &)
+    void operator=(const ComplexGMRES&)
     {
       BrokenCopy::broken_assign("ComplexGMRES");
     } // End of operator= (assignment operator)
@@ -877,7 +877,7 @@ namespace oomph
     /// \short Solver: Takes pointer to problem and returns the results vector
     /// which contains the solution of the linear system defined by
     /// the problem's fully assembled Jacobian and residual vector.
-    void solve(Problem *const &problem_pt, DoubleVector &result)
+    void solve(Problem* const& problem_pt, DoubleVector& result)
     {
       // Write the error message into a string
       std::string error_message = "Solve function for class\n\n";
@@ -895,9 +895,9 @@ namespace oomph
     /// and rhs vector and returns the solution of the linear system
     /// Call the broken base-class version. If you want this, please
     /// implement it
-    void solve(DoubleMatrixBase *const &matrix_pt,
-               const Vector<double> &rhs,
-               Vector<double> &result)
+    void solve(DoubleMatrixBase* const& matrix_pt,
+               const Vector<double>& rhs,
+               Vector<double>& result)
     {
       LinearSolver::solve(matrix_pt, rhs, result);
     } // End of solve
@@ -910,7 +910,7 @@ namespace oomph
     } // End of iterations
 
     /// Setup: Pass pointer to the matrix and store in cast form
-    void complex_smoother_setup(Vector<CRDoubleMatrix *> helmholtz_matrix_pt)
+    void complex_smoother_setup(Vector<CRDoubleMatrix*> helmholtz_matrix_pt)
     {
       // Assume the matrices have been passed in from the outside so we must
       // not delete it. This is needed to avoid pre- and post-smoothers
@@ -972,8 +972,8 @@ namespace oomph
     /// on the system A*result=rhs. The number of (smoothing) iterations is
     /// the same as the max. number of iterations in the underlying
     /// IterativeLinearSolver class.
-    void complex_smoother_solve(const Vector<DoubleVector> &rhs,
-                                Vector<DoubleVector> &solution)
+    void complex_smoother_solve(const Vector<DoubleVector>& rhs,
+                                Vector<DoubleVector>& solution)
     {
       // If you use a smoother but you don't want to calculate the residual
       Use_as_smoother = true;
@@ -1010,15 +1010,15 @@ namespace oomph
     } // End of clean_up_memory
 
     /// This is where the actual work is done
-    void complex_solve_helper(const Vector<DoubleVector> &rhs,
-                              Vector<DoubleVector> &solution);
+    void complex_solve_helper(const Vector<DoubleVector>& rhs,
+                              Vector<DoubleVector>& solution);
 
     /// Helper function to update the result vector
-    void update(const unsigned &k,
-                const Vector<Vector<std::complex<double>>> &hessenberg,
-                const Vector<std::complex<double>> &s,
-                const Vector<Vector<DoubleVector>> &v,
-                Vector<DoubleVector> &x)
+    void update(const unsigned& k,
+                const Vector<Vector<std::complex<double>>>& hessenberg,
+                const Vector<std::complex<double>>& s,
+                const Vector<Vector<DoubleVector>>& v,
+                Vector<DoubleVector>& x)
     {
       // Make a local copy of s
       Vector<std::complex<double>> y(s);
@@ -1061,10 +1061,10 @@ namespace oomph
       for (unsigned j = 0; j <= k; j++)
       {
         // For fast access (real part)
-        const double *vj_r_pt = v[j][0].values_pt();
+        const double* vj_r_pt = v[j][0].values_pt();
 
         // For fast access (imaginary part)
-        const double *vj_c_pt = v[j][1].values_pt();
+        const double* vj_c_pt = v[j][1].values_pt();
 
         // Loop over the entries in x and update them
         for (unsigned i = 0; i < n_row; i++)
@@ -1109,10 +1109,10 @@ namespace oomph
     /// Taken from: Saad Y."Iterative methods for sparse linear systems", p.193.
     /// We also check to see that sn is always a real (nonnegative) number. See
     /// pp.193-194 for an explanation.
-    void generate_plane_rotation(std::complex<double> &dx,
-                                 std::complex<double> &dy,
-                                 std::complex<double> &cs,
-                                 std::complex<double> &sn)
+    void generate_plane_rotation(std::complex<double>& dx,
+                                 std::complex<double>& dy,
+                                 std::complex<double>& cs,
+                                 std::complex<double>& sn)
     {
       // If dy=0 then we do not need to apply a rotation
       if (dy == 0.0)
@@ -1202,10 +1202,10 @@ namespace oomph
     /// \end{bmatrix}.
     /// \f]
     /// Taken from: Saad Y."Iterative methods for sparse linear systems", p.193.
-    void apply_plane_rotation(std::complex<double> &dx,
-                              std::complex<double> &dy,
-                              std::complex<double> &cs,
-                              std::complex<double> &sn)
+    void apply_plane_rotation(std::complex<double>& dx,
+                              std::complex<double>& dy,
+                              std::complex<double>& cs,
+                              std::complex<double>& sn)
     {
       // Calculate the value of dx but don't update it yet
       std::complex<double> temp = std::conj(cs) * dx + std::conj(sn) * dy;
@@ -1221,7 +1221,7 @@ namespace oomph
     unsigned Iterations;
 
     /// Vector of pointers to the real and imaginary part of the system matrix
-    Vector<CRDoubleMatrix *> Matrices_storage_pt;
+    Vector<CRDoubleMatrix*> Matrices_storage_pt;
 
     /// \short Boolean flag to indicate if the solve is done in re-solve mode,
     /// bypassing setup of matrix and preconditioner
@@ -1237,7 +1237,7 @@ namespace oomph
   //======================================================================
   template<typename MATRIX>
   void ComplexGMRES<MATRIX>::complex_solve_helper(
-    const Vector<DoubleVector> &rhs, Vector<DoubleVector> &solution)
+    const Vector<DoubleVector>& rhs, Vector<DoubleVector>& solution)
   {
     // Set the number of dof types (real and imaginary for this solver)
     unsigned n_dof_types = 2;
@@ -1272,10 +1272,10 @@ namespace oomph
 #ifdef PARANOID
       // PARANOID check that if the matrix is distributable then it should not
       // be then it should not be distributed
-      if (dynamic_cast<DistributableLinearAlgebraObject *>(
+      if (dynamic_cast<DistributableLinearAlgebraObject*>(
             Matrices_storage_pt[dof_type]) != 0)
       {
-        if (dynamic_cast<DistributableLinearAlgebraObject *>(
+        if (dynamic_cast<DistributableLinearAlgebraObject*>(
               Matrices_storage_pt[dof_type])
               ->distributed())
         {
@@ -1486,10 +1486,10 @@ namespace oomph
     for (unsigned dof_type = 0; dof_type < n_dof_types; dof_type++)
     {
       // For fast access
-      double *v0_pt = v[0][dof_type].values_pt();
+      double* v0_pt = v[0][dof_type].values_pt();
 
       // For fast access
-      const double *r_pt = r[dof_type].values_pt();
+      const double* r_pt = r[dof_type].values_pt();
 
       // Set the zeroth basis vector v[0] to r/beta
       for (unsigned i = 0; i < n_row; i++)
@@ -1515,10 +1515,10 @@ namespace oomph
       complex_matrix_multiplication(Matrices_storage_pt, v[j], w);
 
       // For fast access
-      double *w_r_pt = w[0].values_pt();
+      double* w_r_pt = w[0].values_pt();
 
       // For fast access
-      double *w_c_pt = w[1].values_pt();
+      double* w_c_pt = w[1].values_pt();
 
       // Loop over all of the entries on and above the principal subdiagonal of
       // the Hessenberg matrix in the j-th column (remembering that
@@ -1527,10 +1527,10 @@ namespace oomph
       for (unsigned i = 0; i < j + 1; i++)
       {
         // For fast access
-        const double *vi_r_pt = v[i][0].values_pt();
+        const double* vi_r_pt = v[i][0].values_pt();
 
         // For fast access
-        const double *vi_c_pt = v[i][1].values_pt();
+        const double* vi_c_pt = v[i][1].values_pt();
 
         // Loop over the entries of v and w
         for (unsigned k = 0; k < n_row; k++)
@@ -1581,16 +1581,16 @@ namespace oomph
       if (hessenberg[j][j + 1] != 0.0)
       {
         // For fast access
-        double *v_r_pt = v[j + 1][0].values_pt();
+        double* v_r_pt = v[j + 1][0].values_pt();
 
         // For fast access
-        double *v_c_pt = v[j + 1][1].values_pt();
+        double* v_c_pt = v[j + 1][1].values_pt();
 
         // For fast access
-        const double *w_r_pt = w[0].values_pt();
+        const double* w_r_pt = w[0].values_pt();
 
         // For fast access
-        const double *w_c_pt = w[1].values_pt();
+        const double* w_c_pt = w[1].values_pt();
 
         // Notice, the value of H(j,j+1), as calculated above, is clearly a real
         // number. As such, calculating the division
@@ -1771,13 +1771,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    HelmholtzGMRESMG(const HelmholtzGMRESMG &)
+    HelmholtzGMRESMG(const HelmholtzGMRESMG&)
     {
       BrokenCopy::broken_copy("HelmholtzGMRESMG");
     }
 
     /// Broken assignment operator
-    void operator=(const HelmholtzGMRESMG &)
+    void operator=(const HelmholtzGMRESMG&)
     {
       BrokenCopy::broken_assign("HelmholtzGMRESMG");
     }
@@ -1792,7 +1792,7 @@ namespace oomph
     /// \short Implementation of the pure virtual base class function. The
     /// function has been broken because this is meant to be used as a linear
     /// solver
-    void preconditioner_solve(const DoubleVector &r, DoubleVector &z)
+    void preconditioner_solve(const DoubleVector& r, DoubleVector& z)
     {
       // Open an output stream
       std::ostringstream error_message_stream;
@@ -1828,7 +1828,7 @@ namespace oomph
     /// \short Solver: Takes pointer to problem and returns the results vector
     /// which contains the solution of the linear system defined by
     /// the problem's fully assembled Jacobian and residual vector.
-    void solve(Problem *const &problem_pt, DoubleVector &result)
+    void solve(Problem* const& problem_pt, DoubleVector& result)
     {
 #ifdef OOMPH_HAS_MPI
       // Make sure that this is running in serial. Can't guarantee it'll
@@ -1868,13 +1868,13 @@ namespace oomph
 
       // Get Jacobian matrix in format specified by template parameter
       // and nonlinear residual vector
-      MATRIX *matrix_pt = new MATRIX;
+      MATRIX* matrix_pt = new MATRIX;
       DoubleVector f;
-      if (dynamic_cast<DistributableLinearAlgebraObject *>(matrix_pt) != 0)
+      if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt) != 0)
       {
-        if (dynamic_cast<CRDoubleMatrix *>(matrix_pt) != 0)
+        if (dynamic_cast<CRDoubleMatrix*>(matrix_pt) != 0)
         {
-          dynamic_cast<CRDoubleMatrix *>(matrix_pt)->build(
+          dynamic_cast<CRDoubleMatrix*>(matrix_pt)->build(
             IterativeLinearSolver::distribution_pt());
           f.build(IterativeLinearSolver::distribution_pt(), 0.0);
         }
@@ -1985,9 +1985,9 @@ namespace oomph
 
     /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs
     /// vector and returns the solution of the linear system.
-    void solve(DoubleMatrixBase *const &matrix_pt,
-               const DoubleVector &rhs,
-               DoubleVector &solution)
+    void solve(DoubleMatrixBase* const& matrix_pt,
+               const DoubleVector& rhs,
+               DoubleVector& solution)
     {
       // Open an output stream
       std::ostringstream error_message_stream;
@@ -2007,9 +2007,9 @@ namespace oomph
     /// and rhs vector and returns the solution of the linear system
     /// Call the broken base-class version. If you want this, please
     /// implement it
-    void solve(DoubleMatrixBase *const &matrix_pt,
-               const Vector<double> &rhs,
-               Vector<double> &result)
+    void solve(DoubleMatrixBase* const& matrix_pt,
+               const Vector<double>& rhs,
+               Vector<double>& result)
     {
       LinearSolver::solve(matrix_pt, rhs, result);
     }
@@ -2017,7 +2017,7 @@ namespace oomph
     /// \short Re-solve the system defined by the last assembled Jacobian
     /// and the rhs vector specified here. Solution is returned in the
     /// vector result.
-    void resolve(const DoubleVector &rhs, DoubleVector &result)
+    void resolve(const DoubleVector& rhs, DoubleVector& result)
     {
       // We are re-solving
       Resolving = true;
@@ -2034,7 +2034,7 @@ namespace oomph
       // Set up a dummy matrix. As we're resolving this won't be used in
       // solve_helper but we need to pass a matrix in to fill the input.
       // The matrices used in the calculations have already been stored
-      CRDoubleMatrix *matrix_pt = new CRDoubleMatrix;
+      CRDoubleMatrix* matrix_pt = new CRDoubleMatrix;
 
       // Call the helper function
       solve_helper(matrix_pt, rhs, result);
@@ -2069,9 +2069,9 @@ namespace oomph
 
   protected:
     /// General interface to solve function
-    void solve_helper(DoubleMatrixBase *const &matrix_pt,
-                      const DoubleVector &rhs,
-                      DoubleVector &solution);
+    void solve_helper(DoubleMatrixBase* const& matrix_pt,
+                      const DoubleVector& rhs,
+                      DoubleVector& solution);
 
     /// Cleanup data that's stored for resolve (if any has been stored)
     void clean_up_memory()
@@ -2108,9 +2108,9 @@ namespace oomph
     /// first entry containing the real part of the system matrix and the
     /// second entry containing the imaginary part
     void complex_matrix_multiplication(
-      Vector<CRDoubleMatrix *> const matrices_pt,
-      const Vector<DoubleVector> &x,
-      Vector<DoubleVector> &soln)
+      Vector<CRDoubleMatrix*> const matrices_pt,
+      const Vector<DoubleVector>& x,
+      Vector<DoubleVector>& soln)
     {
 #ifdef PARANOID
       // PARANOID check - Make sure the input matrix has the right size
@@ -2205,11 +2205,11 @@ namespace oomph
     } // End of complex_matrix_multiplication
 
     /// Helper function to update the result vector
-    void update(const unsigned &k,
-                const Vector<Vector<std::complex<double>>> &hessenberg,
-                const Vector<std::complex<double>> &s,
-                const Vector<Vector<DoubleVector>> &v,
-                Vector<DoubleVector> &x)
+    void update(const unsigned& k,
+                const Vector<Vector<std::complex<double>>>& hessenberg,
+                const Vector<std::complex<double>>& s,
+                const Vector<Vector<DoubleVector>>& v,
+                Vector<DoubleVector>& x)
     {
       // Make a local copy of s
       Vector<std::complex<double>> y(s);
@@ -2264,19 +2264,19 @@ namespace oomph
       }
 
       // Get access to the underlying values
-      double *block_temp_r_pt = block_temp[0].values_pt();
+      double* block_temp_r_pt = block_temp[0].values_pt();
 
       // Get access to the underlying values
-      double *block_temp_c_pt = block_temp[1].values_pt();
+      double* block_temp_c_pt = block_temp[1].values_pt();
 
       // Calculate x=Vy
       for (unsigned j = 0; j <= k; j++)
       {
         // Get access to j-th column of Z_m
-        const double *vj_r_pt = v[j][0].values_pt();
+        const double* vj_r_pt = v[j][0].values_pt();
 
         // Get access to j-th column of Z_m
-        const double *vj_c_pt = v[j][1].values_pt();
+        const double* vj_c_pt = v[j][1].values_pt();
 
         // Loop over the entries in x and update them
         for (unsigned i = 0; i < n_row; i++)
@@ -2366,10 +2366,10 @@ namespace oomph
     /// Taken from: Saad Y."Iterative methods for sparse linear systems", p.193.
     /// We also check to see that sn is always a real (nonnegative) number. See
     /// pp.193-194 for an explanation.
-    void generate_plane_rotation(std::complex<double> &dx,
-                                 std::complex<double> &dy,
-                                 std::complex<double> &cs,
-                                 std::complex<double> &sn)
+    void generate_plane_rotation(std::complex<double>& dx,
+                                 std::complex<double>& dy,
+                                 std::complex<double>& cs,
+                                 std::complex<double>& sn)
     {
       // If dy=0 then we do not need to apply a rotation
       if (dy == 0.0)
@@ -2459,10 +2459,10 @@ namespace oomph
     /// \end{bmatrix}.
     /// \f]
     /// Taken from: Saad Y."Iterative methods for sparse linear systems", p.193.
-    void apply_plane_rotation(std::complex<double> &dx,
-                              std::complex<double> &dy,
-                              std::complex<double> &cs,
-                              std::complex<double> &sn)
+    void apply_plane_rotation(std::complex<double>& dx,
+                              std::complex<double>& dy,
+                              std::complex<double>& cs,
+                              std::complex<double>& sn)
     {
       // Calculate the value of dx but don't update it yet
       std::complex<double> temp = std::conj(cs) * dx + std::conj(sn) * dy;
@@ -2478,7 +2478,7 @@ namespace oomph
     unsigned Iterations;
 
     /// Vector of pointers to the real and imaginary part of the system matrix
-    Vector<CRDoubleMatrix *> Matrices_storage_pt;
+    Vector<CRDoubleMatrix*> Matrices_storage_pt;
 
     /// \short Boolean flag to indicate if the solve is done in re-solve mode,
     /// bypassing setup of matrix and preconditioner
@@ -2507,9 +2507,9 @@ namespace oomph
   //=============================================================================
   template<typename MATRIX>
   void HelmholtzGMRESMG<MATRIX>::solve_helper(
-    DoubleMatrixBase *const &matrix_pt,
-    const DoubleVector &rhs,
-    DoubleVector &solution)
+    DoubleMatrixBase* const& matrix_pt,
+    const DoubleVector& rhs,
+    DoubleVector& solution)
   {
     // Set the number of dof types (real and imaginary for this solver)
     unsigned n_dof_types = this->ndof_types();
@@ -2562,10 +2562,10 @@ namespace oomph
     {
       // PARANOID check that if the matrix is distributable then it should not
       // be then it should not be distributed
-      if (dynamic_cast<DistributableLinearAlgebraObject *>(
+      if (dynamic_cast<DistributableLinearAlgebraObject*>(
             Matrices_storage_pt[dof_type]) != 0)
       {
-        if (dynamic_cast<DistributableLinearAlgebraObject *>(
+        if (dynamic_cast<DistributableLinearAlgebraObject*>(
               Matrices_storage_pt[dof_type])
               ->distributed())
         {
@@ -2700,7 +2700,7 @@ namespace oomph
         double t_start_prec = TimingHelpers::timer();
 
         // Use the setup function in the Preconditioner class
-        preconditioner_pt()->setup(dynamic_cast<MATRIX *>(matrix_pt));
+        preconditioner_pt()->setup(dynamic_cast<MATRIX*>(matrix_pt));
 
         // Doc time for setup of preconditioner
         double t_end_prec = TimingHelpers::timer();
@@ -2856,10 +2856,10 @@ namespace oomph
     for (unsigned dof_type = 0; dof_type < n_dof_types; dof_type++)
     {
       // For fast access
-      double *v0_pt = block_v[0][dof_type].values_pt();
+      double* v0_pt = block_v[0][dof_type].values_pt();
 
       // For fast access
-      const double *block_r_pt = block_r[dof_type].values_pt();
+      const double* block_r_pt = block_r[dof_type].values_pt();
 
       // Set the zeroth basis vector v[0] to r/beta
       for (unsigned i = 0; i < n_row; i++)
@@ -2941,10 +2941,10 @@ namespace oomph
       } // Calculate w=M^{-1}(Jv[j]) (LHS prec.) or w=JM^{-1}v (RHS prec.)
 
       // For fast access
-      double *block_w_r_pt = block_w[0].values_pt();
+      double* block_w_r_pt = block_w[0].values_pt();
 
       // For fast access
-      double *block_w_c_pt = block_w[1].values_pt();
+      double* block_w_c_pt = block_w[1].values_pt();
 
       // Loop over all of the entries on and above the principal subdiagonal of
       // the Hessenberg matrix in the j-th column (remembering that
@@ -2953,10 +2953,10 @@ namespace oomph
       for (unsigned i = 0; i < j + 1; i++)
       {
         // For fast access
-        const double *vi_r_pt = block_v[i][0].values_pt();
+        const double* vi_r_pt = block_v[i][0].values_pt();
 
         // For fast access
-        const double *vi_c_pt = block_v[i][1].values_pt();
+        const double* vi_c_pt = block_v[i][1].values_pt();
 
         // Loop over the entries of v and w
         for (unsigned k = 0; k < n_row; k++)
@@ -3010,16 +3010,16 @@ namespace oomph
       if (hessenberg[j][j + 1] != 0.0)
       {
         // For fast access
-        double *v_r_pt = block_v[j + 1][0].values_pt();
+        double* v_r_pt = block_v[j + 1][0].values_pt();
 
         // For fast access
-        double *v_c_pt = block_v[j + 1][1].values_pt();
+        double* v_c_pt = block_v[j + 1][1].values_pt();
 
         // For fast access
-        const double *block_w_r_pt = block_w[0].values_pt();
+        const double* block_w_r_pt = block_w[0].values_pt();
 
         // For fast access
-        const double *block_w_c_pt = block_w[1].values_pt();
+        const double* block_w_c_pt = block_w[1].values_pt();
 
         // Notice, the value of H(j,j+1), as calculated above, is clearly a real
         // number. As such, calculating the division
@@ -3175,16 +3175,16 @@ namespace oomph
         Matrices_storage_pt, block_solution, block_temp);
 
       // Get the values pointer of the vector (real)
-      double *block_temp_r_pt = block_temp[0].values_pt();
+      double* block_temp_r_pt = block_temp[0].values_pt();
 
       // Get the values pointer of the vector (imaginary)
-      double *block_temp_c_pt = block_temp[1].values_pt();
+      double* block_temp_c_pt = block_temp[1].values_pt();
 
       // Get the values pointer of the RHS vector (real)
-      const double *block_rhs_r_pt = block_rhs[0].values_pt();
+      const double* block_rhs_r_pt = block_rhs[0].values_pt();
 
       // Get the values pointer of the RHS vector (imaginary)
-      const double *block_rhs_c_pt = block_rhs[1].values_pt();
+      const double* block_rhs_c_pt = block_rhs[1].values_pt();
 
       // Loop over the dofs
       for (unsigned i = 0; i < n_row; i++)
@@ -3309,13 +3309,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    HelmholtzFGMRESMG(const HelmholtzFGMRESMG &)
+    HelmholtzFGMRESMG(const HelmholtzFGMRESMG&)
     {
       BrokenCopy::broken_copy("HelmholtzFGMRESMG");
     }
 
     /// Broken assignment operator
-    void operator=(const HelmholtzFGMRESMG &)
+    void operator=(const HelmholtzFGMRESMG&)
     {
       BrokenCopy::broken_assign("HelmholtzFGMRESMG");
     }
@@ -3341,7 +3341,7 @@ namespace oomph
     /// \short Solver: Takes pointer to problem and returns the results vector
     /// which contains the solution of the linear system defined by
     /// the problem's fully assembled Jacobian and residual vector.
-    void solve(Problem *const &problem_pt, DoubleVector &result)
+    void solve(Problem* const& problem_pt, DoubleVector& result)
     {
 #ifdef OOMPH_HAS_MPI
       // Make sure that this is running in serial. Can't guarantee it'll
@@ -3381,13 +3381,13 @@ namespace oomph
 
       // Get Jacobian matrix in format specified by template parameter
       // and nonlinear residual vector
-      MATRIX *matrix_pt = new MATRIX;
+      MATRIX* matrix_pt = new MATRIX;
       DoubleVector f;
-      if (dynamic_cast<DistributableLinearAlgebraObject *>(matrix_pt) != 0)
+      if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt) != 0)
       {
-        if (dynamic_cast<CRDoubleMatrix *>(matrix_pt) != 0)
+        if (dynamic_cast<CRDoubleMatrix*>(matrix_pt) != 0)
         {
-          dynamic_cast<CRDoubleMatrix *>(matrix_pt)->build(
+          dynamic_cast<CRDoubleMatrix*>(matrix_pt)->build(
             IterativeLinearSolver::distribution_pt());
           f.build(IterativeLinearSolver::distribution_pt(), 0.0);
         }
@@ -3498,16 +3498,16 @@ namespace oomph
 
   private:
     /// General interface to solve function
-    void solve_helper(DoubleMatrixBase *const &matrix_pt,
-                      const DoubleVector &rhs,
-                      DoubleVector &solution);
+    void solve_helper(DoubleMatrixBase* const& matrix_pt,
+                      const DoubleVector& rhs,
+                      DoubleVector& solution);
 
     /// Helper function to update the result vector
-    void update(const unsigned &k,
-                const Vector<Vector<std::complex<double>>> &hessenberg,
-                const Vector<std::complex<double>> &s,
-                const Vector<Vector<DoubleVector>> &z_m,
-                Vector<DoubleVector> &x)
+    void update(const unsigned& k,
+                const Vector<Vector<std::complex<double>>>& hessenberg,
+                const Vector<std::complex<double>>& s,
+                const Vector<Vector<DoubleVector>>& z_m,
+                Vector<DoubleVector>& x)
     {
       // Make a local copy of s
       Vector<std::complex<double>> y(s);
@@ -3556,19 +3556,19 @@ namespace oomph
       }
 
       // Get access to the underlying values
-      double *block_update_r_pt = block_update[0].values_pt();
+      double* block_update_r_pt = block_update[0].values_pt();
 
       // Get access to the underlying values
-      double *block_update_c_pt = block_update[1].values_pt();
+      double* block_update_c_pt = block_update[1].values_pt();
 
       // Calculate x=Vy
       for (unsigned j = 0; j <= k; j++)
       {
         // Get access to j-th column of Z_m
-        const double *z_mj_r_pt = z_m[j][0].values_pt();
+        const double* z_mj_r_pt = z_m[j][0].values_pt();
 
         // Get access to j-th column of Z_m
-        const double *z_mj_c_pt = z_m[j][1].values_pt();
+        const double* z_mj_c_pt = z_m[j][1].values_pt();
 
         // Loop over the entries in x and update them
         for (unsigned i = 0; i < n_row; i++)
@@ -3607,9 +3607,9 @@ namespace oomph
   //=============================================================================
   template<typename MATRIX>
   void HelmholtzFGMRESMG<MATRIX>::solve_helper(
-    DoubleMatrixBase *const &matrix_pt,
-    const DoubleVector &rhs,
-    DoubleVector &solution)
+    DoubleMatrixBase* const& matrix_pt,
+    const DoubleVector& rhs,
+    DoubleVector& solution)
   {
     // Set the number of dof types (real and imaginary for this solver)
     unsigned n_dof_types = this->ndof_types();
@@ -3663,10 +3663,10 @@ namespace oomph
     {
       // PARANOID check that if the matrix is distributable then it should not
       // be then it should not be distributed
-      if (dynamic_cast<DistributableLinearAlgebraObject *>(
+      if (dynamic_cast<DistributableLinearAlgebraObject*>(
             this->Matrices_storage_pt[dof_type]) != 0)
       {
-        if (dynamic_cast<DistributableLinearAlgebraObject *>(
+        if (dynamic_cast<DistributableLinearAlgebraObject*>(
               this->Matrices_storage_pt[dof_type])
               ->distributed())
         {
@@ -3801,7 +3801,7 @@ namespace oomph
         double t_start_prec = TimingHelpers::timer();
 
         // Use the setup function in the Preconditioner class
-        this->preconditioner_pt()->setup(dynamic_cast<MATRIX *>(matrix_pt));
+        this->preconditioner_pt()->setup(dynamic_cast<MATRIX*>(matrix_pt));
 
         // Doc time for setup of preconditioner
         double t_end_prec = TimingHelpers::timer();
@@ -3947,10 +3947,10 @@ namespace oomph
     for (unsigned dof_type = 0; dof_type < n_dof_types; dof_type++)
     {
       // For fast access
-      double *block_v0_pt = block_v[0][dof_type].values_pt();
+      double* block_v0_pt = block_v[0][dof_type].values_pt();
 
       // For fast access
-      const double *block_r_pt = block_r[dof_type].values_pt();
+      const double* block_r_pt = block_r[dof_type].values_pt();
 
       // Set the zeroth basis vector v[0] to r/beta
       for (unsigned i = 0; i < n_row; i++)
@@ -4006,10 +4006,10 @@ namespace oomph
       } // Calculate w=JM^{-1}v (RHS prec.)
 
       // For fast access
-      double *block_w_r_pt = block_w[0].values_pt();
+      double* block_w_r_pt = block_w[0].values_pt();
 
       // For fast access
-      double *block_w_c_pt = block_w[1].values_pt();
+      double* block_w_c_pt = block_w[1].values_pt();
 
       // Loop over all of the entries on and above the principal subdiagonal of
       // the Hessenberg matrix in the j-th column (remembering that
@@ -4018,10 +4018,10 @@ namespace oomph
       for (unsigned i = 0; i < j + 1; i++)
       {
         // For fast access
-        const double *block_vi_r_pt = block_v[i][0].values_pt();
+        const double* block_vi_r_pt = block_v[i][0].values_pt();
 
         // For fast access
-        const double *block_vi_c_pt = block_v[i][1].values_pt();
+        const double* block_vi_c_pt = block_v[i][1].values_pt();
 
         // Loop over the entries of v and w
         for (unsigned k = 0; k < n_row; k++)
@@ -4075,16 +4075,16 @@ namespace oomph
       if (hessenberg[j][j + 1] != 0.0)
       {
         // For fast access
-        double *block_v_r_pt = block_v[j + 1][0].values_pt();
+        double* block_v_r_pt = block_v[j + 1][0].values_pt();
 
         // For fast access
-        double *block_v_c_pt = block_v[j + 1][1].values_pt();
+        double* block_v_c_pt = block_v[j + 1][1].values_pt();
 
         // For fast access
-        const double *block_w_r_pt = block_w[0].values_pt();
+        const double* block_w_r_pt = block_w[0].values_pt();
 
         // For fast access
-        const double *block_w_c_pt = block_w[1].values_pt();
+        const double* block_w_c_pt = block_w[1].values_pt();
 
         // Notice, the value of H(j,j+1), as calculated above, is clearly a real
         // number. As such, calculating the division

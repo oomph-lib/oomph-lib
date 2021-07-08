@@ -92,18 +92,18 @@ public:
   /// \short Access function to the NST mesh.
   /// Casts the pointer to the base Mesh object to
   /// the actual mesh type.
-  RefineableRectangularQuadMesh<NST_ELEMENT> *nst_mesh_pt()
+  RefineableRectangularQuadMesh<NST_ELEMENT>* nst_mesh_pt()
   {
-    return dynamic_cast<RefineableRectangularQuadMesh<NST_ELEMENT> *>(
+    return dynamic_cast<RefineableRectangularQuadMesh<NST_ELEMENT>*>(
       Nst_mesh_pt);
   } // end_of_nst_mesh
 
   /// \short Access function to the AD mesh.
   /// Casts the pointer to the base Mesh object to
   /// the actual mesh type.
-  RefineableRectangularQuadMesh<AD_ELEMENT> *adv_diff_mesh_pt()
+  RefineableRectangularQuadMesh<AD_ELEMENT>* adv_diff_mesh_pt()
   {
-    return dynamic_cast<RefineableRectangularQuadMesh<AD_ELEMENT> *>(
+    return dynamic_cast<RefineableRectangularQuadMesh<AD_ELEMENT>*>(
       Adv_diff_mesh_pt);
   } // end_of_ad_mesh
 
@@ -130,14 +130,14 @@ public:
   } // end_of_actions_after_adapt
 
   /// Fix pressure in element e at pressure dof pdof and set to pvalue
-  void fix_pressure(const unsigned &e,
-                    const unsigned &pdof,
-                    const double &pvalue)
+  void fix_pressure(const unsigned& e,
+                    const unsigned& pdof,
+                    const double& pvalue)
   {
     // Cast to specific element and fix pressure in NST element
     if (nst_mesh_pt()->nelement() > 0)
     {
-      dynamic_cast<NST_ELEMENT *>(nst_mesh_pt()->element_pt(e))
+      dynamic_cast<NST_ELEMENT*>(nst_mesh_pt()->element_pt(e))
         ->fix_pressure(pdof, pvalue);
     }
   } // end_of_fix_pressure
@@ -169,10 +169,10 @@ private:
 
 protected:
   /// Navier Stokes mesh
-  RefineableRectangularQuadMesh<NST_ELEMENT> *Nst_mesh_pt;
+  RefineableRectangularQuadMesh<NST_ELEMENT>* Nst_mesh_pt;
 
   /// Advection diffusion mesh
-  RefineableRectangularQuadMesh<AD_ELEMENT> *Adv_diff_mesh_pt;
+  RefineableRectangularQuadMesh<AD_ELEMENT>* Adv_diff_mesh_pt;
 
 }; // end of problem class
 
@@ -292,8 +292,8 @@ RefineableConvectionProblem<NST_ELEMENT,
   for (unsigned i = 0; i < n_nst_element; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    NST_ELEMENT *el_pt =
-      dynamic_cast<NST_ELEMENT *>(nst_mesh_pt()->element_pt(i));
+    NST_ELEMENT* el_pt =
+      dynamic_cast<NST_ELEMENT*>(nst_mesh_pt()->element_pt(i));
 
     // Set the Reynolds number (1/Pr in our non-dimensionalisation)
     el_pt->re_pt() = &Global_Physical_Variables::Inverse_Prandtl;
@@ -318,8 +318,8 @@ RefineableConvectionProblem<NST_ELEMENT,
   for (unsigned i = 0; i < n_ad_element; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    AD_ELEMENT *el_pt =
-      dynamic_cast<AD_ELEMENT *>(adv_diff_mesh_pt()->element_pt(i));
+    AD_ELEMENT* el_pt =
+      dynamic_cast<AD_ELEMENT*>(adv_diff_mesh_pt()->element_pt(i));
 
     // Set the Peclet number
     el_pt->pe_pt() = &Global_Physical_Variables::Peclet;
@@ -367,7 +367,7 @@ void RefineableConvectionProblem<NST_ELEMENT,
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Get pointer to node
-      Node *nod_pt = nst_mesh_pt()->boundary_node_pt(ibound, inod);
+      Node* nod_pt = nst_mesh_pt()->boundary_node_pt(ibound, inod);
 
       // Set the number of velocity components
       unsigned vel_max = 2;
@@ -408,7 +408,7 @@ void RefineableConvectionProblem<NST_ELEMENT,
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Get pointer to node
-      Node *nod_pt = adv_diff_mesh_pt()->boundary_node_pt(ibound, inod);
+      Node* nod_pt = adv_diff_mesh_pt()->boundary_node_pt(ibound, inod);
 
       // If we are on the top boundary, set the temperature
       // to -0.5 (cooled)

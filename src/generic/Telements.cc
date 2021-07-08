@@ -52,7 +52,7 @@ namespace oomph
   /// The output function for general 1D TElements
   //=======================================================================
   template<unsigned NNODE_1D>
-  void TElement<1, NNODE_1D>::output(std::ostream &outfile)
+  void TElement<1, NNODE_1D>::output(std::ostream& outfile)
   {
     output(outfile, NNODE_1D);
   }
@@ -61,8 +61,8 @@ namespace oomph
   /// The output function for n_plot points in each coordinate direction
   //=======================================================================
   template<unsigned NNODE_1D>
-  void TElement<1, NNODE_1D>::output(std::ostream &outfile,
-                                     const unsigned &n_plot)
+  void TElement<1, NNODE_1D>::output(std::ostream& outfile,
+                                     const unsigned& n_plot)
   {
     // Local variables
     Vector<double> s(1);
@@ -91,7 +91,7 @@ namespace oomph
   /// C style output function for general 1D TElements
   //=======================================================================
   template<unsigned NNODE_1D>
-  void TElement<1, NNODE_1D>::output(FILE *file_pt)
+  void TElement<1, NNODE_1D>::output(FILE* file_pt)
   {
     output(file_pt, NNODE_1D);
   }
@@ -100,7 +100,7 @@ namespace oomph
   /// C style output function for n_plot points in each coordinate direction
   //=======================================================================
   template<unsigned NNODE_1D>
-  void TElement<1, NNODE_1D>::output(FILE *file_pt, const unsigned &n_plot)
+  void TElement<1, NNODE_1D>::output(FILE* file_pt, const unsigned& n_plot)
   {
     // Local variables
     Vector<double> s(1);
@@ -137,13 +137,13 @@ namespace oomph
   namespace TElement1FaceToBulkCoordinates
   {
     /// The translation scheme for the face s0 = 0.0
-    void face0(const Vector<double> &s, Vector<double> &s_bulk)
+    void face0(const Vector<double>& s, Vector<double>& s_bulk)
     {
       s_bulk[0] = 0.0;
     }
 
     /// The translation scheme for the face s0 = 1.0
-    void face1(const Vector<double> &s, Vector<double> &s_bulk)
+    void face1(const Vector<double>& s, Vector<double>& s_bulk)
     {
       s_bulk[0] = 1.0;
     }
@@ -157,9 +157,9 @@ namespace oomph
   namespace TElement1BulkCoordinateDerivatives
   {
     /// Function for both faces -- the bulk coordinate is fixed on both
-    void faces0(const Vector<double> &s,
-                DenseMatrix<double> &dsbulk_dsface,
-                unsigned &interior_direction)
+    void faces0(const Vector<double>& s,
+                DenseMatrix<double>& dsbulk_dsface,
+                unsigned& interior_direction)
     {
       // Bulk coordinate s[0] does not vary along the face
       dsbulk_dsface(0, 0) = 0.0;
@@ -174,8 +174,8 @@ namespace oomph
   /// FaceElements (which are Point Elements).
   //===========================================================
   template<unsigned NNODE_1D>
-  void TElement<1, NNODE_1D>::build_face_element(const int &face_index,
-                                                 FaceElement *face_element_pt)
+  void TElement<1, NNODE_1D>::build_face_element(const int& face_index,
+                                                 FaceElement* face_element_pt)
   {
     // Overload the nodal dimension
     face_element_pt->set_nodal_dimension(nodal_dimension());
@@ -284,21 +284,21 @@ namespace oomph
   namespace TElement2FaceToBulkCoordinates
   {
     /// The translation scheme for the face s0 = 0
-    void face0(const Vector<double> &s, Vector<double> &s_bulk)
+    void face0(const Vector<double>& s, Vector<double>& s_bulk)
     {
       s_bulk[0] = 0.0;
       s_bulk[1] = s[0];
     }
 
     /// The translation scheme for the face s1 = 0
-    void face1(const Vector<double> &s, Vector<double> &s_bulk)
+    void face1(const Vector<double>& s, Vector<double>& s_bulk)
     {
       s_bulk[0] = s[0];
       s_bulk[1] = 0.0;
     }
 
     /// The translation scheme for the face s2 = 0
-    void face2(const Vector<double> &s, Vector<double> &s_bulk)
+    void face2(const Vector<double>& s, Vector<double>& s_bulk)
     {
       s_bulk[0] = 1.0 - s[0];
       s_bulk[1] = s[0];
@@ -313,9 +313,9 @@ namespace oomph
   namespace TElement2BulkCoordinateDerivatives
   {
     /// Function for the "left" face along which s0 is fixed
-    void face0(const Vector<double> &s,
-               DenseMatrix<double> &dsbulk_dsface,
-               unsigned &interior_direction)
+    void face0(const Vector<double>& s,
+               DenseMatrix<double>& dsbulk_dsface,
+               unsigned& interior_direction)
     {
       // Bulk coordinate s[0] does not vary along the face
       dsbulk_dsface(0, 0) = 0.0;
@@ -327,9 +327,9 @@ namespace oomph
     }
 
     /// Function for the "bottom" face along which s1 is fixed
-    void face1(const Vector<double> &s,
-               DenseMatrix<double> &dsbulk_dsface,
-               unsigned &interior_direction)
+    void face1(const Vector<double>& s,
+               DenseMatrix<double>& dsbulk_dsface,
+               unsigned& interior_direction)
     {
       // Bulk coordinate s[0] is the face coordinate
       dsbulk_dsface(0, 0) = 1.0;
@@ -341,9 +341,9 @@ namespace oomph
     }
 
     /// Function for the sloping face
-    void face2(const Vector<double> &s,
-               DenseMatrix<double> &dsbulk_dsface,
-               unsigned &interior_direction)
+    void face2(const Vector<double>& s,
+               DenseMatrix<double>& dsbulk_dsface,
+               unsigned& interior_direction)
     {
       // Bulk coordinate s[0] decreases along the face
       dsbulk_dsface(0, 0) = -1.0;
@@ -361,8 +361,8 @@ namespace oomph
   /// FaceElements (which are of type TElement<2,NNODE_1D>).
   //=======================================================================
   template<unsigned NNODE_1D>
-  void TElement<2, NNODE_1D>::build_face_element(const int &face_index,
-                                                 FaceElement *face_element_pt)
+  void TElement<2, NNODE_1D>::build_face_element(const int& face_index,
+                                                 FaceElement* face_element_pt)
   {
     // Set the nodal dimension from the first node
     face_element_pt->set_nodal_dimension(nodal_dimension());
@@ -483,7 +483,7 @@ namespace oomph
   /// The output function for TElement<2,NNODE_1D>
   //=======================================================================
   template<unsigned NNODE_1D>
-  void TElement<2, NNODE_1D>::output(std::ostream &outfile)
+  void TElement<2, NNODE_1D>::output(std::ostream& outfile)
   {
     // QUEHACERES want to perform same output, but at each node
     output(outfile, NNODE_1D);
@@ -493,8 +493,8 @@ namespace oomph
   /// The output function for TElement<2,NNODE_1D>
   //=======================================================================
   template<unsigned NNODE_1D>
-  void TElement<2, NNODE_1D>::output(std::ostream &outfile,
-                                     const unsigned &nplot)
+  void TElement<2, NNODE_1D>::output(std::ostream& outfile,
+                                     const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(2);
@@ -527,7 +527,7 @@ namespace oomph
   /// The C-style output function for TElement<2,NNODE_1D>
   //=======================================================================
   template<unsigned NNODE_1D>
-  void TElement<2, NNODE_1D>::output(FILE *file_pt)
+  void TElement<2, NNODE_1D>::output(FILE* file_pt)
   {
     output(file_pt, NNODE_1D);
   }
@@ -536,7 +536,7 @@ namespace oomph
   /// The C-style output function for TElement<2,NNODE_1D>
   //=======================================================================
   template<unsigned NNODE_1D>
-  void TElement<2, NNODE_1D>::output(FILE *file_pt, const unsigned &nplot)
+  void TElement<2, NNODE_1D>::output(FILE* file_pt, const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(2);
@@ -575,7 +575,7 @@ namespace oomph
   /// The output function for TElement<3,NNODE_1D>
   //=======================================================================
   template<unsigned NNODE_1D>
-  void TElement<3, NNODE_1D>::output(std::ostream &outfile)
+  void TElement<3, NNODE_1D>::output(std::ostream& outfile)
   {
     output(outfile, NNODE_1D);
   }
@@ -584,8 +584,8 @@ namespace oomph
   /// The output function for TElement<3,NNODE_1D>
   //=======================================================================
   template<unsigned NNODE_1D>
-  void TElement<3, NNODE_1D>::output(std::ostream &outfile,
-                                     const unsigned &nplot)
+  void TElement<3, NNODE_1D>::output(std::ostream& outfile,
+                                     const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(3);
@@ -618,7 +618,7 @@ namespace oomph
   /// The C-style output function for TElement<3,NNODE_1D>
   //=======================================================================
   template<unsigned NNODE_1D>
-  void TElement<3, NNODE_1D>::output(FILE *file_pt)
+  void TElement<3, NNODE_1D>::output(FILE* file_pt)
   {
     output(file_pt, NNODE_1D);
   }
@@ -627,7 +627,7 @@ namespace oomph
   /// The C-style output function for TElement<3,NNODE_1D>
   //=======================================================================
   template<unsigned NNODE_1D>
-  void TElement<3, NNODE_1D>::output(FILE *file_pt, const unsigned &nplot)
+  void TElement<3, NNODE_1D>::output(FILE* file_pt, const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(3);
@@ -665,7 +665,7 @@ namespace oomph
   namespace TElement3FaceToBulkCoordinates
   {
     /// The translation scheme for the face s0 = 0
-    void face0(const Vector<double> &s, Vector<double> &s_bulk)
+    void face0(const Vector<double>& s, Vector<double>& s_bulk)
     {
       s_bulk[0] = 0.0;
       s_bulk[1] = s[0];
@@ -673,7 +673,7 @@ namespace oomph
     }
 
     /// The translation scheme for the face s1 = 0
-    void face1(const Vector<double> &s, Vector<double> &s_bulk)
+    void face1(const Vector<double>& s, Vector<double>& s_bulk)
     {
       s_bulk[0] = s[0];
       s_bulk[1] = 0.0;
@@ -681,7 +681,7 @@ namespace oomph
     }
 
     /// The translation scheme for the face s2 = 0
-    void face2(const Vector<double> &s, Vector<double> &s_bulk)
+    void face2(const Vector<double>& s, Vector<double>& s_bulk)
     {
       s_bulk[0] = s[0];
       s_bulk[1] = s[1];
@@ -689,7 +689,7 @@ namespace oomph
     }
 
     /// The translation scheme for the sloping face
-    void face3(const Vector<double> &s, Vector<double> &s_bulk)
+    void face3(const Vector<double>& s, Vector<double>& s_bulk)
     {
       s_bulk[0] = 1 - s[0] - s[1];
       s_bulk[1] = s[0];
@@ -715,8 +715,8 @@ namespace oomph
   /// FaceElements (which are of type TElement<2,NNODE_1D>).
   //=======================================================================
   template<unsigned NNODE_1D>
-  void TElement<3, NNODE_1D>::build_face_element(const int &face_index,
-                                                 FaceElement *face_element_pt)
+  void TElement<3, NNODE_1D>::build_face_element(const int& face_index,
+                                                 FaceElement* face_element_pt)
   {
     // Set the nodal dimension
     face_element_pt->set_nodal_dimension(nodal_dimension());
@@ -853,7 +853,7 @@ namespace oomph
   //================================================================
   template<>
   void TBubbleEnrichedElement<2, 3>::build_face_element(
-    const int &face_index, FaceElement *face_element_pt)
+    const int& face_index, FaceElement* face_element_pt)
   {
     TElement<2, 3>::build_face_element(face_index, face_element_pt);
   }
@@ -871,7 +871,7 @@ namespace oomph
   //=======================================================================
   template<>
   void TBubbleEnrichedElement<3, 3>::build_face_element(
-    const int &face_index, FaceElement *face_element_pt)
+    const int& face_index, FaceElement* face_element_pt)
   {
     // Call the standard unenriched build function
     TElement<3, 3>::build_face_element(face_index, face_element_pt);
@@ -913,16 +913,16 @@ namespace oomph
   //===========================================================
   template<>
   void SolidTBubbleEnrichedElement<2, 3>::build_face_element(
-    const int &face_index, FaceElement *face_element_pt)
+    const int& face_index, FaceElement* face_element_pt)
   {
     // Build the standard non-solid FaceElement
     TBubbleEnrichedElement<2, 3>::build_face_element(face_index,
                                                      face_element_pt);
 
     // Set the Lagrangian dimension from the first node of the present element
-    dynamic_cast<SolidFiniteElement *>(face_element_pt)
+    dynamic_cast<SolidFiniteElement*>(face_element_pt)
       ->set_lagrangian_dimension(
-        static_cast<SolidNode *>(node_pt(0))->nlagrangian());
+        static_cast<SolidNode*>(node_pt(0))->nlagrangian());
   }
 
   //===========================================================
@@ -932,16 +932,16 @@ namespace oomph
   //===========================================================
   template<>
   void SolidTBubbleEnrichedElement<3, 3>::build_face_element(
-    const int &face_index, FaceElement *face_element_pt)
+    const int& face_index, FaceElement* face_element_pt)
   {
     // Build the standard non-solid FaceElement
     TBubbleEnrichedElement<3, 3>::build_face_element(face_index,
                                                      face_element_pt);
 
     // Set the Lagrangian dimension from the first node of the present element
-    dynamic_cast<SolidFiniteElement *>(face_element_pt)
+    dynamic_cast<SolidFiniteElement*>(face_element_pt)
       ->set_lagrangian_dimension(
-        static_cast<SolidNode *>(node_pt(0))->nlagrangian());
+        static_cast<SolidNode*>(node_pt(0))->nlagrangian());
   }
 
   //===================================================================

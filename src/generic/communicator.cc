@@ -45,7 +45,7 @@ namespace oomph
   //=============================================================================
   /// A broadcast function for DenseMatrix<double>
   //=============================================================================
-  void OomphCommunicator::broadcast(const int &source, DenseMatrix<double> &x)
+  void OomphCommunicator::broadcast(const int& source, DenseMatrix<double>& x)
   {
     // Get number of entries on processor source (where the matrix exists)
     unsigned nrow, ncol;
@@ -69,7 +69,7 @@ namespace oomph
     if (ncol != 0 && nrow != 0)
     {
       // convert into a C-style array
-      double *x_bcast = new double[nrow * ncol];
+      double* x_bcast = new double[nrow * ncol];
 
       if (this->my_rank() == source)
         for (unsigned long i = 0; i < nrow; i++)

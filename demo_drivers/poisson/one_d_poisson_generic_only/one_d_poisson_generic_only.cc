@@ -82,7 +82,7 @@ public:
   }
 
   /// Define the shape functions for interpolation across the element.
-  void shape(const Vector<double> &s, Shape &psi) const
+  void shape(const Vector<double>& s, Shape& psi) const
   {
     // There are two shape functions (one per node)
     // In terms of the local coordinate, s[0]:
@@ -97,7 +97,7 @@ public:
   }
 
   /// Define the derivatives of the shape functions w.r.t. the local coordinate
-  void dshape_local(const Vector<double> &s, Shape &psi, DShape &dpsids) const
+  void dshape_local(const Vector<double>& s, Shape& psi, DShape& dpsids) const
   {
     // Call the shape functions
     shape(s, psi);
@@ -145,13 +145,13 @@ public:
   /// \short Define a specific source function. For greater generality, and
   /// inclusion in a library, this could be defined as a source function
   /// pointer, that would then be set externally.
-  double f(const double &x) const
+  double f(const double& x) const
   {
     return double(Sign) * 30.0 * sin(sqrt(30.0) * x);
   }
 
   /// \short Access function to the sign in the source function
-  int &sign()
+  int& sign()
   {
     return Sign;
   }
@@ -160,20 +160,20 @@ public:
   /// at each node. In a more general "Equation" element, such abstraction
   /// is essential, because different Elements will store the same variables
   /// in different locations.
-  double u(const unsigned &n)
+  double u(const unsigned& n)
   {
     return node_pt(n)->value(0);
   }
 
   /// For the Poisson equation, only one value is stored at each node
-  unsigned required_nvalue(const unsigned &n) const
+  unsigned required_nvalue(const unsigned& n) const
   {
     return 1;
   }
 
   /// \short Calculate the elemental contributions to the global
   /// residual vector for the weak form of the Poisson equation
-  void get_residuals(Vector<double> &residuals)
+  void get_residuals(Vector<double>& residuals)
   {
     // Find the number of degrees of freedom (unpinned values) in the element
     unsigned n_dof = ndof();
@@ -266,7 +266,7 @@ public:
 
   /// \short Calculate the elemental contribution to the global residual
   /// vector and to the Jacobian matrix dR_{i}/du_{j} used in the Newton method
-  void get_jacobian(Vector<double> &residuals, DenseMatrix<double> &jacobian)
+  void get_jacobian(Vector<double>& residuals, DenseMatrix<double>& jacobian)
   {
     // First, calculate the residuals
     get_residuals(residuals);
@@ -349,7 +349,7 @@ public:
   } // End of function
 
   // Define an output function for the element
-  void output(ostream &output)
+  void output(ostream& output)
   {
     // Read out the number of nodes in the element
     unsigned n_node = nnode();
@@ -405,7 +405,7 @@ class OneDimMesh : public Mesh
 {
 public:
   /// Mesh Constructor. The argument is the desired number of elements
-  OneDimMesh(const unsigned &n_element)
+  OneDimMesh(const unsigned& n_element)
   {
     // Resize the vector of pointers to elements: there are n_element elements
     Element_pt.resize(n_element);
@@ -534,7 +534,7 @@ class DemoPoissonProblem : public Problem
 public:
   /// Problem constructor: Pass the sign of the source function (default
   /// is +1)
-  DemoPoissonProblem(const int &sign = 1) : Sign(sign)
+  DemoPoissonProblem(const int& sign = 1) : Sign(sign)
   {
     // Create a OneDimMesh Mesh object and set it to be the problem's mesh.
     // The element type, TwoNodePoissonElement, is passed  as a template
@@ -575,8 +575,8 @@ public:
       // In order to use it, we must
       // upcast from GeneralisedElement to the specific element type,
       // which is achieved by a C++ dynamic_cast.
-      TwoNodePoissonElement *specific_element_pt =
-        dynamic_cast<TwoNodePoissonElement *>(mesh_pt()->element_pt(i));
+      TwoNodePoissonElement* specific_element_pt =
+        dynamic_cast<TwoNodePoissonElement*>(mesh_pt()->element_pt(i));
 
       // Set the sign of the source function
       specific_element_pt->sign() = Sign;

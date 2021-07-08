@@ -58,10 +58,10 @@ class QCrouzeixRaviartElementWithTwoExternalElement :
 {
 private:
   /// Pointer to a private data member, the thermal Rayleigh number
-  double *Ra_T_pt;
+  double* Ra_T_pt;
 
   /// Pointer to the private data member, the solutal Rayleigh number
-  double *Ra_S_pt;
+  double* Ra_S_pt;
 
   /// The static default value of the Rayleigh number
   static double Default_Physical_Constant_Value;
@@ -87,48 +87,48 @@ public:
   }
 
   /// Access function for the thermal Rayleigh number (const version)
-  const double &ra_t() const
+  const double& ra_t() const
   {
     return *Ra_T_pt;
   }
 
   /// Access function for the pointer to the thermal Rayleigh number
-  double *&ra_t_pt()
+  double*& ra_t_pt()
   {
     return Ra_T_pt;
   }
 
   /// Access function for the solutal Rayleigh number (const version)
-  const double &ra_s() const
+  const double& ra_s() const
   {
     return *Ra_S_pt;
   }
 
   /// Access function for the pointer to the solutal Rayleigh number
-  double *&ra_s_pt()
+  double*& ra_s_pt()
   {
     return Ra_S_pt;
   }
 
   // Overload get_body_force_nst to get the temperature "body force"
   // from the "source" AdvectionDiffusion element via current integration point
-  void get_body_force_nst(const double &time,
-                          const unsigned &ipt,
-                          const Vector<double> &s,
-                          const Vector<double> &x,
-                          Vector<double> &result);
+  void get_body_force_nst(const double& time,
+                          const unsigned& ipt,
+                          const Vector<double>& s,
+                          const Vector<double>& x,
+                          Vector<double>& result);
 
   /// Fill in the derivatives of the body force with respect to the
   /// external unknowns
   void get_dbody_force_nst_dexternal_element_data(
-    const unsigned &ipt,
-    DenseMatrix<double> &result,
-    Vector<unsigned> &global_eqn_number);
+    const unsigned& ipt,
+    DenseMatrix<double>& result,
+    Vector<unsigned>& global_eqn_number);
 
   ///\short Compute the element's residual vector and the Jacobian matrix.
   /// Jacobian is computed by finite-differencing or analytically
-  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                        DenseMatrix<double> &jacobian)
+  void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                        DenseMatrix<double>& jacobian)
   {
 #ifdef USE_FD_JACOBIAN_FOR_MY_NAVIER_STOKES_ELEMENT
     // This function computes the Jacobian by finite-differencing
@@ -146,9 +146,9 @@ public:
   /// Add the element's contribution to its residuals vector,
   /// jacobian matrix and mass matrix
   void fill_in_contribution_to_jacobian_and_mass_matrix(
-    Vector<double> &residuals,
-    DenseMatrix<double> &jacobian,
-    DenseMatrix<double> &mass_matrix)
+    Vector<double>& residuals,
+    DenseMatrix<double>& jacobian,
+    DenseMatrix<double>& mass_matrix)
   {
     // Call the standard (Broken) function
     // which will prevent these elements from being used
@@ -159,8 +159,8 @@ public:
 
   /// \short Compute the contribution of the external
   /// degrees of freedom (temperatures) on the Navier-Stokes equations
-  void fill_in_off_diagonal_block_analytic(Vector<double> &residuals,
-                                           DenseMatrix<double> &jacobian)
+  void fill_in_off_diagonal_block_analytic(Vector<double>& residuals,
+                                           DenseMatrix<double>& jacobian)
   {
     // Local storage for the index in the nodes at which the
     // Navier-Stokes velocities are stored (we know that this should be 0,1,2)
@@ -276,23 +276,23 @@ public:
   /// This provides the coupling from the Navier--Stokes equations to the
   /// advection-diffusion equations because the wind is the fluid velocity,
   /// obtained from the source element in the other mesh
-  void get_wind_adv_diff(const unsigned &ipt,
-                         const Vector<double> &s,
-                         const Vector<double> &x,
-                         Vector<double> &wind) const;
+  void get_wind_adv_diff(const unsigned& ipt,
+                         const Vector<double>& s,
+                         const Vector<double>& x,
+                         Vector<double>& wind) const;
 
   /// Fill in the derivatives of the wind with respect to the
   /// external unknowns
   void get_dwind_adv_diff_dexternal_element_data(
-    const unsigned &ipt,
-    const unsigned &i,
-    Vector<double> &result,
-    Vector<unsigned> &global_eqn_number);
+    const unsigned& ipt,
+    const unsigned& i,
+    Vector<double>& result,
+    Vector<unsigned>& global_eqn_number);
 
   ///\short Compute the element's residual vector and the Jacobian matrix.
   /// Jacobian is computed by finite-differencing.
-  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                        DenseMatrix<double> &jacobian)
+  void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                        DenseMatrix<double>& jacobian)
   {
 #ifdef USE_FD_JACOBIAN_FOR_MY_ADVECTION_DIFFUSION_ELEMENT
     // This function computes the Jacobian by finite-differencing
@@ -310,9 +310,9 @@ public:
   /// Add the element's contribution to its residuals vector,
   /// jacobian matrix and mass matrix
   void fill_in_contribution_to_jacobian_and_mass_matrix(
-    Vector<double> &residuals,
-    DenseMatrix<double> &jacobian,
-    DenseMatrix<double> &mass_matrix)
+    Vector<double>& residuals,
+    DenseMatrix<double>& jacobian,
+    DenseMatrix<double>& mass_matrix)
   {
     // Call the standard (Broken) function
     // which will prevent these elements from being used
@@ -323,8 +323,8 @@ public:
 
   /// \short Compute the contribution of the external
   /// degrees of freedom (velocities) on the AdvectionDiffusion equations
-  void fill_in_off_diagonal_block_analytic(Vector<double> &residuals,
-                                           DenseMatrix<double> &jacobian)
+  void fill_in_off_diagonal_block_analytic(Vector<double>& residuals,
+                                           DenseMatrix<double>& jacobian)
   {
     // Local storage for the  index at which the temperature is stored
     const unsigned u_nodal_adv_diff = this->u_index_adv_diff();
@@ -431,11 +431,11 @@ public:
 //========================================================
 template<unsigned DIM>
 void QCrouzeixRaviartElementWithTwoExternalElement<DIM>::get_body_force_nst(
-  const double &time,
-  const unsigned &ipt,
-  const Vector<double> &s,
-  const Vector<double> &x,
-  Vector<double> &result)
+  const double& time,
+  const unsigned& ipt,
+  const Vector<double>& s,
+  const Vector<double>& x,
+  Vector<double>& result)
 {
   // Let's choose the thermal interaction to be interaction zeo
   const unsigned t_interaction = 0;
@@ -444,14 +444,14 @@ void QCrouzeixRaviartElementWithTwoExternalElement<DIM>::get_body_force_nst(
 
   // Get the temperature field from the external element
   const double interpolated_t =
-    dynamic_cast<AdvectionDiffusionEquations<DIM> *>(
+    dynamic_cast<AdvectionDiffusionEquations<DIM>*>(
       external_element_pt(t_interaction, ipt))
       ->interpolated_u_adv_diff(
         external_element_local_coord(t_interaction, ipt));
 
   // Get the interpolated concentration field from the external element
   const double interpolated_c =
-    dynamic_cast<AdvectionDiffusionEquations<DIM> *>(
+    dynamic_cast<AdvectionDiffusionEquations<DIM>*>(
       external_element_pt(c_interaction, ipt))
       ->interpolated_u_adv_diff(
         external_element_local_coord(c_interaction, ipt));
@@ -476,10 +476,10 @@ void QCrouzeixRaviartElementWithTwoExternalElement<DIM>::get_body_force_nst(
 //=========================================================================
 template<unsigned DIM>
 void QCrouzeixRaviartElementWithTwoExternalElement<
-  DIM>::get_dbody_force_nst_dexternal_element_data(const unsigned &ipt,
-                                                   DenseMatrix<double> &result,
-                                                   Vector<unsigned>
-                                                     &global_eqn_number)
+  DIM>::get_dbody_force_nst_dexternal_element_data(const unsigned& ipt,
+                                                   DenseMatrix<double>& result,
+                                                   Vector<unsigned>&
+                                                     global_eqn_number)
 {
   // The temperature interaction index is 0 in this case
   unsigned t_interaction = 0;
@@ -491,7 +491,7 @@ void QCrouzeixRaviartElementWithTwoExternalElement<
   Vector<unsigned> global_eqn_number_temp;
 
   // Get the interation data from the temperature element
-  dynamic_cast<AdvectionDiffusionEquations<DIM> *>(
+  dynamic_cast<AdvectionDiffusionEquations<DIM>*>(
     external_element_pt(t_interaction, ipt))
     ->dinterpolated_u_adv_diff_ddata(
       external_element_local_coord(t_interaction, ipt),
@@ -503,7 +503,7 @@ void QCrouzeixRaviartElementWithTwoExternalElement<
   Vector<unsigned> global_eqn_number_conc;
 
   // Get the interation data from the temperature element
-  dynamic_cast<AdvectionDiffusionEquations<DIM> *>(
+  dynamic_cast<AdvectionDiffusionEquations<DIM>*>(
     external_element_pt(c_interaction, ipt))
     ->dinterpolated_u_adv_diff_ddata(
       external_element_local_coord(c_interaction, ipt),
@@ -563,17 +563,17 @@ void QCrouzeixRaviartElementWithTwoExternalElement<
 //==========================================================================
 template<unsigned DIM>
 void QAdvectionDiffusionElementWithExternalElement<DIM>::get_wind_adv_diff(
-  const unsigned &ipt,
-  const Vector<double> &s,
-  const Vector<double> &x,
-  Vector<double> &wind) const
+  const unsigned& ipt,
+  const Vector<double>& s,
+  const Vector<double>& x,
+  Vector<double>& wind) const
 {
   // The interaction index is 0 in this case
   unsigned interaction = 0;
 
   // Dynamic cast "other" element to correct type
-  NavierStokesEquations<DIM> *source_el_pt =
-    dynamic_cast<NavierStokesEquations<DIM> *>(
+  NavierStokesEquations<DIM>* source_el_pt =
+    dynamic_cast<NavierStokesEquations<DIM>*>(
       external_element_pt(interaction, ipt));
 
   // The wind function is simply the velocity at the points of the "other" el
@@ -587,17 +587,17 @@ void QAdvectionDiffusionElementWithExternalElement<DIM>::get_wind_adv_diff(
 //=========================================================================
 template<unsigned DIM>
 void QAdvectionDiffusionElementWithExternalElement<DIM>::
-  get_dwind_adv_diff_dexternal_element_data(const unsigned &ipt,
-                                            const unsigned &i,
-                                            Vector<double> &result,
-                                            Vector<unsigned> &global_eqn_number)
+  get_dwind_adv_diff_dexternal_element_data(const unsigned& ipt,
+                                            const unsigned& i,
+                                            Vector<double>& result,
+                                            Vector<unsigned>& global_eqn_number)
 {
   // The interaction index is 0 in this case
   unsigned interaction = 0;
 
   // Dynamic cast "other" element to correct type
-  NavierStokesEquations<DIM> *source_el_pt =
-    dynamic_cast<NavierStokesEquations<DIM> *>(
+  NavierStokesEquations<DIM>* source_el_pt =
+    dynamic_cast<NavierStokesEquations<DIM>*>(
       external_element_pt(interaction, ipt));
 
   // Get the external element's derivatives of the velocity with respect
@@ -692,12 +692,12 @@ public:
   }
 
   /// Fix pressure in element e at pressure dof pdof and set to pvalue
-  void fix_pressure(const unsigned &e,
-                    const unsigned &pdof,
-                    const double &pvalue)
+  void fix_pressure(const unsigned& e,
+                    const unsigned& pdof,
+                    const double& pvalue)
   {
     // Cast to specific element and fix pressure (only for NST element...?)
-    dynamic_cast<NST_ELEMENT *>(nst_mesh_pt()->element_pt(e))
+    dynamic_cast<NST_ELEMENT*>(nst_mesh_pt()->element_pt(e))
       ->fix_pressure(pdof, pvalue);
   } // end_of_fix_pressure
 
@@ -705,28 +705,28 @@ public:
   void doc_solution();
 
   /// \short Set the boundary conditions
-  void set_boundary_conditions(const double &time);
+  void set_boundary_conditions(const double& time);
 
   /// \short Access function to the Navier-Stokes mesh
-  RectangularQuadMesh<NST_ELEMENT> *nst_mesh_pt()
+  RectangularQuadMesh<NST_ELEMENT>* nst_mesh_pt()
   {
-    return dynamic_cast<RectangularQuadMesh<NST_ELEMENT> *>(Nst_mesh_pt);
+    return dynamic_cast<RectangularQuadMesh<NST_ELEMENT>*>(Nst_mesh_pt);
   }
 
   /// \short Access function to the Advection-Diffusion mesh
-  RectangularQuadMesh<AD_ELEMENT> *temp_mesh_pt()
+  RectangularQuadMesh<AD_ELEMENT>* temp_mesh_pt()
   {
-    return dynamic_cast<RectangularQuadMesh<AD_ELEMENT> *>(Temp_mesh_pt);
+    return dynamic_cast<RectangularQuadMesh<AD_ELEMENT>*>(Temp_mesh_pt);
   }
 
   /// \short Access function to the Advection-Diffusion concentration mesh
-  RectangularQuadMesh<AD_ELEMENT> *conc_mesh_pt()
+  RectangularQuadMesh<AD_ELEMENT>* conc_mesh_pt()
   {
-    return dynamic_cast<RectangularQuadMesh<AD_ELEMENT> *>(Conc_mesh_pt);
+    return dynamic_cast<RectangularQuadMesh<AD_ELEMENT>*>(Conc_mesh_pt);
   }
 
   /// Get kinetic energy and kinetic energy flux
-  void get_kinetic_energy(double &E, double &Edot)
+  void get_kinetic_energy(double& E, double& Edot)
   {
     // Reset values to zero
     E = 0.0;
@@ -736,8 +736,8 @@ public:
     unsigned n_element = nst_mesh_pt()->nelement();
     for (unsigned e = 0; e < n_element; e++)
     {
-      NST_ELEMENT *elem_pt =
-        dynamic_cast<NST_ELEMENT *>(nst_mesh_pt()->element_pt(e));
+      NST_ELEMENT* elem_pt =
+        dynamic_cast<NST_ELEMENT*>(nst_mesh_pt()->element_pt(e));
 
       E += elem_pt->kin_energy();
       Edot += elem_pt->d_kin_energy_dt();
@@ -749,9 +749,9 @@ private:
   DocInfo Doc_info;
 
 protected:
-  RectangularQuadMesh<NST_ELEMENT> *Nst_mesh_pt;
-  RectangularQuadMesh<AD_ELEMENT> *Temp_mesh_pt;
-  RectangularQuadMesh<AD_ELEMENT> *Conc_mesh_pt;
+  RectangularQuadMesh<NST_ELEMENT>* Nst_mesh_pt;
+  RectangularQuadMesh<AD_ELEMENT>* Temp_mesh_pt;
+  RectangularQuadMesh<AD_ELEMENT>* Conc_mesh_pt;
 
 }; // end of problem class
 
@@ -873,8 +873,8 @@ DDConvectionProblem<NST_ELEMENT, AD_ELEMENT>::DDConvectionProblem()
   for (unsigned i = 0; i < n_nst_element; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    NST_ELEMENT *el_pt =
-      dynamic_cast<NST_ELEMENT *>(nst_mesh_pt()->element_pt(i));
+    NST_ELEMENT* el_pt =
+      dynamic_cast<NST_ELEMENT*>(nst_mesh_pt()->element_pt(i));
 
     // Set the Reynolds number (1/Pr in our non-dimensionalisation)
     el_pt->re_pt() = &Global_Physical_Variables::Inverse_Prandtl;
@@ -899,8 +899,8 @@ DDConvectionProblem<NST_ELEMENT, AD_ELEMENT>::DDConvectionProblem()
   for (unsigned i = 0; i < n_temp_element; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    AD_ELEMENT *el_pt =
-      dynamic_cast<AD_ELEMENT *>(temp_mesh_pt()->element_pt(i));
+    AD_ELEMENT* el_pt =
+      dynamic_cast<AD_ELEMENT*>(temp_mesh_pt()->element_pt(i));
 
     // Set the Peclet number
     el_pt->pe_pt() = &Global_Physical_Variables::Peclet;
@@ -917,8 +917,8 @@ DDConvectionProblem<NST_ELEMENT, AD_ELEMENT>::DDConvectionProblem()
   for (unsigned i = 0; i < n_conc_element; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    AD_ELEMENT *el_pt =
-      dynamic_cast<AD_ELEMENT *>(conc_mesh_pt()->element_pt(i));
+    AD_ELEMENT* el_pt =
+      dynamic_cast<AD_ELEMENT*>(conc_mesh_pt()->element_pt(i));
 
     // Set the Peclet number
     el_pt->pe_pt() = &Global_Physical_Variables::Lewis;
@@ -957,7 +957,7 @@ DDConvectionProblem<NST_ELEMENT, AD_ELEMENT>::DDConvectionProblem()
 //===========================================================
 template<class NST_ELEMENT, class AD_ELEMENT>
 void DDConvectionProblem<NST_ELEMENT, AD_ELEMENT>::set_boundary_conditions(
-  const double &time)
+  const double& time)
 {
   // Loop over all the boundaries on the NST mesh
   unsigned num_bound = nst_mesh_pt()->nboundary();
@@ -968,7 +968,7 @@ void DDConvectionProblem<NST_ELEMENT, AD_ELEMENT>::set_boundary_conditions(
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Get pointer to node
-      Node *nod_pt = nst_mesh_pt()->boundary_node_pt(ibound, inod);
+      Node* nod_pt = nst_mesh_pt()->boundary_node_pt(ibound, inod);
 
       // Set the number of velocity components
       unsigned vel_max = 2;
@@ -996,7 +996,7 @@ void DDConvectionProblem<NST_ELEMENT, AD_ELEMENT>::set_boundary_conditions(
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Get pointer to node
-      Node *nod_pt = temp_mesh_pt()->boundary_node_pt(ibound, inod);
+      Node* nod_pt = temp_mesh_pt()->boundary_node_pt(ibound, inod);
 
       // If we are on the top boundary, set the temperature
       // to -0.5 (cooled)
@@ -1023,7 +1023,7 @@ void DDConvectionProblem<NST_ELEMENT, AD_ELEMENT>::set_boundary_conditions(
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Get pointer to node
-      Node *nod_pt = conc_mesh_pt()->boundary_node_pt(ibound, inod);
+      Node* nod_pt = conc_mesh_pt()->boundary_node_pt(ibound, inod);
 
       // If we are on the top boundary, set the concentration to be low
       // to -0.5 (cooled)
@@ -1081,7 +1081,7 @@ void DDConvectionProblem<NST_ELEMENT, AD_ELEMENT>::doc_solution()
 //=======start_of_main================================================
 /// Driver code for 2D Boussinesq convection problem
 //====================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Set the direction of gravity
   Global_Physical_Variables::Direction_of_gravity[0] = 0.0;

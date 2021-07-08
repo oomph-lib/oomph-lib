@@ -87,14 +87,14 @@ namespace oomph
     }
 
     /// \short Constructor - constructs an n by m matrix with value val.
-    VectorMatrix(const unsigned &n, const unsigned &m, const VALUE_TYPE &val)
+    VectorMatrix(const unsigned& n, const unsigned& m, const VALUE_TYPE& val)
     {
       this->build_vectors_and_value(n, m, val);
     }
 
     /// \short Constructor - constructs an n by m matrix, the value is defined
     /// by the default initialisation of VALUE_TYPE.
-    VectorMatrix(const unsigned &n, const unsigned &m)
+    VectorMatrix(const unsigned& n, const unsigned& m)
     {
       this->build_vectors(n, m);
     }
@@ -186,13 +186,13 @@ namespace oomph
     }
 
     /// \short [] access function to the i-th inner vector.
-    Vector<VALUE_TYPE> &operator[](const size_t i)
+    Vector<VALUE_TYPE>& operator[](const size_t i)
     {
       return Vector_matrix[i];
     }
 
     /// \short [] access function to the i-th inner vector const version
-    const Vector<VALUE_TYPE> &operator[](const size_t i) const
+    const Vector<VALUE_TYPE>& operator[](const size_t i) const
     {
       return Vector_matrix[i];
     }
@@ -209,7 +209,7 @@ namespace oomph
     /// new values are assigned, old values as kept.
     /// e.g. if vec = [2,2,2], then vec.resize(5,3) gives
     /// vec = [2, 2, 2, 3, 3].
-    void resize(const size_t &n, const size_t &m, VALUE_TYPE val = VALUE_TYPE())
+    void resize(const size_t& n, const size_t& m, VALUE_TYPE val = VALUE_TYPE())
     {
       Vector_matrix.resize(n);
       for (unsigned i = 0; i < n; i++)
@@ -224,22 +224,22 @@ namespace oomph
     /// This causes an automatic reallocation of the allocated storage space if
     /// -and only if- the new vector size surpasses the current vector capacity.
     /// This invokes std::assign on both the outer vector and the inner vectors.
-    void assign(const size_t &n, const size_t &m, const VALUE_TYPE &val)
+    void assign(const size_t& n, const size_t& m, const VALUE_TYPE& val)
     {
       Vector_matrix.assign(n, Vector<VALUE_TYPE>(m, val));
     }
 
   protected:
     /// \short Builds an n by m VectorMatrix with default VALUE_TYPE.
-    void build_vectors(const unsigned &n, const unsigned &m)
+    void build_vectors(const unsigned& n, const unsigned& m)
     {
       Vector_matrix.resize(n, Vector<VALUE_TYPE>(m));
     }
 
     /// \short Build an m by n VectorMatrix with VALUE_TYPE val.
-    void build_vectors_and_value(const unsigned &n,
-                                 const unsigned &m,
-                                 const VALUE_TYPE &val)
+    void build_vectors_and_value(const unsigned& n,
+                                 const unsigned& m,
+                                 const VALUE_TYPE& val)
     {
       Vector_matrix.resize(n, Vector<VALUE_TYPE>(m, val));
     }

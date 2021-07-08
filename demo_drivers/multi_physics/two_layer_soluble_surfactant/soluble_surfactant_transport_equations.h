@@ -46,16 +46,16 @@ namespace oomph
   {
   private:
     /// Pointer to a Biot number
-    double *Bi_pt;
+    double* Bi_pt;
 
     /// Pointer to a Marangoni number
-    double *Ma_pt;
+    double* Ma_pt;
 
     /// Pointer to the reaction ratios
-    double *K_pt;
+    double* K_pt;
 
     /// Pointer to beta
-    double *Beta_b_pt;
+    double* Beta_b_pt;
 
     /// Index at which the bulk concentration is stored at the nodes
     unsigned C_bulk_index;
@@ -65,7 +65,7 @@ namespace oomph
 
   protected:
     /// Get the micelle concentration
-    double interpolated_M(const Vector<double> &s)
+    double interpolated_M(const Vector<double>& s)
     {
       // Find number of nodes
       unsigned n_node = this->nnode();
@@ -92,7 +92,7 @@ namespace oomph
     }
 
     /// Get the bulk concentration
-    double interpolated_C_bulk(const Vector<double> &s)
+    double interpolated_C_bulk(const Vector<double>& s)
     {
       // Find number of nodes
       unsigned n_node = this->nnode();
@@ -121,7 +121,7 @@ namespace oomph
     /// The surface tension function is linear in the
     /// temperature with constant of proportionality equal
     /// to the Marangoni number.
-    double sigma(const Vector<double> &s)
+    double sigma(const Vector<double>& s)
     {
       // Get the value of the concentration
       const double C = this->interpolated_C(s);
@@ -132,7 +132,7 @@ namespace oomph
     }
 
     // Overload the derivative function
-    double dsigma_dC(const Vector<double> &s)
+    double dsigma_dC(const Vector<double>& s)
     {
       const double C = this->interpolated_C(s);
       const double Beta = this->beta();
@@ -152,7 +152,7 @@ namespace oomph
      }*/
 
     /// Specify the flux from the bulk to the interface
-    double flux_from_bulk(const double &C, const double &C_bulk)
+    double flux_from_bulk(const double& C, const double& C_bulk)
     {
       const double Bi = this->bi();
       const double K = this->k();
@@ -161,7 +161,7 @@ namespace oomph
 
     /// Specify the derivative of the flux from the bulk
     /// to the interface with respect to the bulk concentration
-    double dflux_from_bulk_dC_bulk(const double &C, const double &C_bulk)
+    double dflux_from_bulk_dC_bulk(const double& C, const double& C_bulk)
     {
       const double Bi = this->bi();
       const double K = this->k();
@@ -170,7 +170,7 @@ namespace oomph
 
     /// Specify the derivative of the flux from the bulk
     /// to the interface with respect to the surface concentration
-    double dflux_from_bulk_dC(const double &C, const double &C_bulk)
+    double dflux_from_bulk_dC(const double& C, const double& C_bulk)
     {
       const double Bi = this->bi();
       const double K = this->k();
@@ -181,18 +181,18 @@ namespace oomph
     /// jacobian entries. This particular function ensures that the
     /// additional entries are calculated inside the integration loop
     void add_additional_residual_contributions_interface(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      const unsigned &flag,
-      const Shape &psif,
-      const DShape &dpsifds,
-      const DShape &dpsifdS,
-      const DShape &dpsifdS_div,
-      const Vector<double> &s,
-      const Vector<double> &interpolated_x,
-      const Vector<double> &interpolated_n,
-      const double &W,
-      const double &J)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag,
+      const Shape& psif,
+      const DShape& dpsifds,
+      const DShape& dpsifdS,
+      const DShape& dpsifdS_div,
+      const Vector<double>& s,
+      const Vector<double>& interpolated_x,
+      const Vector<double>& interpolated_n,
+      const double& W,
+      const double& J)
     {
       // Call the underlying version from the Surfactant Transport equation
       SurfactantTransportInterfaceElement::
@@ -325,9 +325,9 @@ namespace oomph
     /// Add the element's contribution to its residuals vector,
     /// jacobian matrix and mass matrix
     void fill_in_contribution_to_jacobian_and_mass_matrix(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix)
     {
       // Add the contribution to the jacobian
       this->fill_in_contribution_to_jacobian(residuals, jacobian);
@@ -351,7 +351,7 @@ namespace oomph
     }
 
     // set the C bulk index
-    inline void set_c_bulk_index(const unsigned &c_bulk_index)
+    inline void set_c_bulk_index(const unsigned& c_bulk_index)
     {
       C_bulk_index = c_bulk_index;
     }
@@ -381,32 +381,32 @@ namespace oomph
     }
 
     /// Access function for pointer to the Marangoni number
-    double *&ma_pt()
+    double*& ma_pt()
     {
       return Ma_pt;
     }
 
     /// Access function for pointer to the Biot number
-    double *&bi_pt()
+    double*& bi_pt()
     {
       return Bi_pt;
     }
 
     /// Access function for pointer to the reaction ratios
-    double *&k_pt()
+    double*& k_pt()
     {
       return K_pt;
     }
 
     /// Access function for pointer
-    double *&beta_b_pt()
+    double*& beta_b_pt()
     {
       return Beta_b_pt;
     }
 
     // Calculate the mean square deviation from the
     // uniform state
-    double l2_norm_of_height(const double &h0)
+    double l2_norm_of_height(const double& h0)
     {
       // Find the number of nodes
       const unsigned n_node = this->nnode();
@@ -530,7 +530,7 @@ namespace oomph
       return integral;
     }
 
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       // Set output Vector
       Vector<double> s(1);
@@ -563,19 +563,19 @@ namespace oomph
     }
 
     /// Overload the output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       FiniteElement::output(outfile);
     }
 
     /// Overload the C-style output function
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
 
     /// C-style Output function
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       FiniteElement::output(file_pt, n_plot);
     }
@@ -594,27 +594,27 @@ namespace oomph
     {
     }
 
-    inline unsigned nadditional_values(const unsigned &n)
+    inline unsigned nadditional_values(const unsigned& n)
     {
       return 1;
     }
 
     inline void setup_equation_indices(
-      SolubleSurfactantTransportInterfaceElement *const &element_pt,
-      const unsigned &id)
+      SolubleSurfactantTransportInterfaceElement* const& element_pt,
+      const unsigned& id)
     {
       const unsigned n_node = element_pt->nnode();
       Vector<unsigned> c_index(n_node);
       for (unsigned n = 0; n < n_node; n++)
       {
-        c_index[n] = dynamic_cast<BoundaryNodeBase *>(element_pt->node_pt(n))
+        c_index[n] = dynamic_cast<BoundaryNodeBase*>(element_pt->node_pt(n))
                        ->index_of_first_value_assigned_by_face_element(id);
       }
 
       element_pt->set_c_index(c_index);
       // This is a hack
       const unsigned C_bulk_index =
-        dynamic_cast<AdvectionDiffusionReactionEquations<2, 2> *>(
+        dynamic_cast<AdvectionDiffusionReactionEquations<2, 2>*>(
           element_pt->bulk_element_pt())
           ->c_index_adv_diff_react(0);
       element_pt->set_c_bulk_index(C_bulk_index);
@@ -633,7 +633,7 @@ namespace oomph
   {
   public:
     SpineLineSolubleSurfactantTransportInterfaceElement(
-      FiniteElement *const &element_pt, const int &face_index) :
+      FiniteElement* const& element_pt, const int& face_index) :
       SpineUpdateFluidInterfaceElement<
         SolubleSurfactantTransportInterfaceElement,
         LineDerivatives,
@@ -671,7 +671,7 @@ namespace oomph
   {
   public:
     ElasticLineSolubleSurfactantTransportInterfaceElement(
-      FiniteElement *const &element_pt, const int &face_index) :
+      FiniteElement* const& element_pt, const int& face_index) :
       ElasticUpdateFluidInterfaceElement<
         SolubleSurfactantTransportInterfaceElement,
         LineDerivatives,
@@ -715,8 +715,8 @@ namespace oomph
     }
 
     /// Calculate the elemental residual vector and the Jacobian
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       SpinePointFluidInterfaceBoundingElement<
         ELEMENT>::fill_in_contribution_to_jacobian(residuals, jacobian);
@@ -749,7 +749,7 @@ namespace oomph
           if (local_unknown >= 0)
           {
             // Store a pointer to the nodal data value
-            double *value_pt = this->node_pt(n)->value_pt(c_index);
+            double* value_pt = this->node_pt(n)->value_pt(c_index);
 
             // Save the old value of the Nodal data
             double old_var = *value_pt;
@@ -776,7 +776,7 @@ namespace oomph
     }
 
     // Allow the concentration index to be set
-    unsigned &c_index_interface_boundary()
+    unsigned& c_index_interface_boundary()
     {
       return C_index;
     }

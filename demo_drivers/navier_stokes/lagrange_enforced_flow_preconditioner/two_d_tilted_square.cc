@@ -102,7 +102,7 @@ namespace Global_Variables
   unsigned Soln_num = 0;
 
   /// Convert degrees to radians
-  inline double degtorad(const double &ang_deg)
+  inline double degtorad(const double& ang_deg)
   {
     return ang_deg * (MathematicalConstants::Pi / 180.0);
   }
@@ -129,11 +129,11 @@ namespace oomph
   {
   public:
     /// Constructor.
-    SlopingQuadMesh(const unsigned &nx,
-                    const unsigned &ny,
-                    const double &lx,
-                    const double &ly,
-                    const double &phi) :
+    SlopingQuadMesh(const unsigned& nx,
+                    const unsigned& ny,
+                    const double& lx,
+                    const double& ly,
+                    const double& phi) :
       RectangularQuadMesh<ELEMENT>(nx, ny, lx, ly)
     {
       // Find out how many nodes there are
@@ -143,7 +143,7 @@ namespace oomph
       for (unsigned n = 0; n < n_node; n++)
       {
         // Pointer to node:
-        Node *nod_pt = this->node_pt(n);
+        Node* nod_pt = this->node_pt(n);
 
         // Get the x/y coordinates
         const double x = nod_pt->x(0);
@@ -182,7 +182,7 @@ public:
     unsigned num_nod = mesh_pt()->nboundary_node(in_bound);
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
-      Node *nod_pt = mesh_pt()->boundary_node_pt(in_bound, inod);
+      Node* nod_pt = mesh_pt()->boundary_node_pt(in_bound, inod);
 
       // Pin both velocity components
       nod_pt->pin(0);
@@ -220,8 +220,8 @@ public:
     unsigned iters = 0;
     // Get the iteration counts
 #ifdef PARANOID
-    IterativeLinearSolver *iterative_solver_pt =
-      dynamic_cast<IterativeLinearSolver *>(this->linear_solver_pt());
+    IterativeLinearSolver* iterative_solver_pt =
+      dynamic_cast<IterativeLinearSolver*>(this->linear_solver_pt());
     if (iterative_solver_pt == 0)
     {
       std::ostringstream error_message;
@@ -236,7 +236,7 @@ public:
       GV::Iterations.push_back(iters);
     }
 #else
-    iters = static_cast<IterativeLinearSolver *>(this->linear_solver_pt())
+    iters = static_cast<IterativeLinearSolver*>(this->linear_solver_pt())
               ->iterations();
     GV::Iterations.push_back(iters);
 #endif
@@ -248,31 +248,31 @@ public:
   /// \short Create lagrange elements on boundary b of the Mesh pointed
   /// to by bulk_mesh_pt and add them to the Mesh object pointed to by
   /// surface_mesh_pt
-  void create_parall_outflow_lagrange_elements(const unsigned &b,
-                                               Mesh *const &bulk_mesh_pt,
-                                               Mesh *const &surface_mesh_pt);
+  void create_parall_outflow_lagrange_elements(const unsigned& b,
+                                               Mesh* const& bulk_mesh_pt,
+                                               Mesh* const& surface_mesh_pt);
 
 private:
   /// Pointer to the "bulk" mesh
-  Mesh *Bulk_mesh_pt;
+  Mesh* Bulk_mesh_pt;
 
   /// Pointer to the "surface" mesh
-  Mesh *Surface_mesh_P_pt;
+  Mesh* Surface_mesh_P_pt;
 
   /// Preconditioner
-  Preconditioner *Prec_pt;
+  Preconditioner* Prec_pt;
 
   /// Preconditioner for the Navier-Stokes block
-  Preconditioner *Navier_stokes_prec_pt;
+  Preconditioner* Navier_stokes_prec_pt;
 
   /// Preconditioner for the momentum block
-  Preconditioner *F_preconditioner_pt;
+  Preconditioner* F_preconditioner_pt;
 
   /// Preconditioner for the pressure block
-  Preconditioner *P_preconditioner_pt;
+  Preconditioner* P_preconditioner_pt;
 
   /// Iterative linear solver
-  IterativeLinearSolver *Solver_pt;
+  IterativeLinearSolver* Solver_pt;
 
   // Enumeration for the boundaries of the rectangular domain
   //         2
@@ -359,7 +359,7 @@ TiltedCavityProblem<ELEMENT>::TiltedCavityProblem()
       for (unsigned inod = 0; inod < num_nod; inod++)
       {
         // Get node
-        Node *nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
+        Node* nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
 
         nod_pt->pin(0);
         nod_pt->pin(1);
@@ -377,7 +377,7 @@ TiltedCavityProblem<ELEMENT>::TiltedCavityProblem()
   for (unsigned e = 0; e < n_el; e++)
   {
     // Cast to a fluid element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
     // Set the Reynolds number, etc
     el_pt->re_pt() = &GV::Re;
@@ -391,7 +391,7 @@ TiltedCavityProblem<ELEMENT>::TiltedCavityProblem()
   {
 #ifdef OOMPH_HAS_TRILINOS
     // Create the trilinos solver.
-    TrilinosAztecOOSolver *trilinos_solver_pt = new TrilinosAztecOOSolver;
+    TrilinosAztecOOSolver* trilinos_solver_pt = new TrilinosAztecOOSolver;
     trilinos_solver_pt->solver_type() = TrilinosAztecOOSolver::GMRES;
 
     // Store the solver pointer.
@@ -401,11 +401,11 @@ TiltedCavityProblem<ELEMENT>::TiltedCavityProblem()
   else
   {
     // Create oomph-lib iterative linear solver.
-    IterativeLinearSolver *solver_pt = new GMRES<CRDoubleMatrix>;
+    IterativeLinearSolver* solver_pt = new GMRES<CRDoubleMatrix>;
 
     // We use RHS preconditioning. Note that by default,
     // left hand preconditioning is used.
-    static_cast<GMRES<CRDoubleMatrix> *>(solver_pt)->set_preconditioner_RHS();
+    static_cast<GMRES<CRDoubleMatrix>*>(solver_pt)->set_preconditioner_RHS();
 
     // Store the solver pointer.
     Solver_pt = solver_pt;
@@ -442,18 +442,18 @@ TiltedCavityProblem<ELEMENT>::TiltedCavityProblem()
   // For the (1,1) block, we can use SuperLU or the LSC preconditioner.
 
   // Create the preconditioner
-  LagrangeEnforcedFlowPreconditioner *lgr_prec_pt =
+  LagrangeEnforcedFlowPreconditioner* lgr_prec_pt =
     new LagrangeEnforcedFlowPreconditioner;
 
   // Create the vector of mesh pointers!
-  Vector<Mesh *> mesh_pt;
+  Vector<Mesh*> mesh_pt;
   mesh_pt.resize(2, 0);
   mesh_pt[0] = Bulk_mesh_pt;
   mesh_pt[1] = Surface_mesh_P_pt;
 
   lgr_prec_pt->set_meshes(mesh_pt);
 
-  NavierStokesSchurComplementPreconditioner *lsc_prec_pt = 0;
+  NavierStokesSchurComplementPreconditioner* lsc_prec_pt = 0;
   if (GV::Use_lsc)
   {
     // Create the NS LSC preconditioner.
@@ -537,7 +537,7 @@ void TiltedCavityProblem<ELEMENT>::doc_solution()
 //=======================================================================
 template<class ELEMENT>
 void TiltedCavityProblem<ELEMENT>::create_parall_outflow_lagrange_elements(
-  const unsigned &b, Mesh *const &bulk_mesh_pt, Mesh *const &surface_mesh_pt)
+  const unsigned& b, Mesh* const& bulk_mesh_pt, Mesh* const& surface_mesh_pt)
 {
   // How many bulk elements are adjacent to boundary b?
   unsigned n_element = bulk_mesh_pt->nboundary_element(b);
@@ -546,14 +546,14 @@ void TiltedCavityProblem<ELEMENT>::create_parall_outflow_lagrange_elements(
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    ELEMENT *bulk_elem_pt =
-      dynamic_cast<ELEMENT *>(bulk_mesh_pt->boundary_element_pt(b, e));
+    ELEMENT* bulk_elem_pt =
+      dynamic_cast<ELEMENT*>(bulk_mesh_pt->boundary_element_pt(b, e));
 
     // What is the index of the face of element e along boundary b?
     int face_index = bulk_mesh_pt->face_index_at_boundary(b, e);
 
     // Build the corresponding impose_impenetrability_element
-    ImposeParallelOutflowElement<ELEMENT> *flux_element_pt =
+    ImposeParallelOutflowElement<ELEMENT>* flux_element_pt =
       new ImposeParallelOutflowElement<ELEMENT>(bulk_elem_pt, face_index, 0);
 
     // Add the prescribed-flux element to the surface mesh
@@ -563,7 +563,7 @@ void TiltedCavityProblem<ELEMENT>::create_parall_outflow_lagrange_elements(
     unsigned nnod = flux_element_pt->nnode();
     for (unsigned j = 0; j < nnod; j++)
     {
-      Node *nod_pt = flux_element_pt->node_pt(j);
+      Node* nod_pt = flux_element_pt->node_pt(j);
 
       // Is the node also on boundary 0 or 2?
       if ((nod_pt->is_on_boundary(0)) || (nod_pt->is_on_boundary(2)))
@@ -590,7 +590,7 @@ void TiltedCavityProblem<ELEMENT>::create_parall_outflow_lagrange_elements(
 //==start_of_main======================================================
 /// Driver for Lagrange enforced flow preconditioner
 //=====================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
 #ifdef OOMPH_HAS_MPI
   MPI_Helpers::init(argc, argv);

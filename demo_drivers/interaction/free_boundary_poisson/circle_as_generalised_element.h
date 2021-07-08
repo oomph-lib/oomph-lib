@@ -61,9 +61,9 @@ namespace oomph
     /// \short Constructor: Build  ring from doubles that describe
     /// the geometry: x and y positions of centre and the radius.
     /// Initialise stiffness to 1.0. By default, no load is set.
-    ElasticallySupportedRingElement(const double &x_c,
-                                    const double &y_c,
-                                    const double &r) :
+    ElasticallySupportedRingElement(const double& x_c,
+                                    const double& y_c,
+                                    const double& r) :
       GeneralCircle(x_c, y_c, r), K_stiff(1.0), Load_data_has_been_set(false)
     {
       // The geometric data is internal to the element -- we copy the pointers
@@ -94,7 +94,7 @@ namespace oomph
 
     /// \short Set pointer to Data object that specifies the "load"
     /// on the ElasticallySupportedRingElement
-    void set_load_pt(Data *load_pt)
+    void set_load_pt(Data* load_pt)
     {
 #ifdef PARANOID
       if (load_pt->nvalue() != 1)
@@ -137,7 +137,7 @@ namespace oomph
     } // end of load()
 
     /// Access function for the spring stiffness
-    double &k_stiff()
+    double& k_stiff()
     {
       return K_stiff;
     }
@@ -160,7 +160,7 @@ namespace oomph
     } // end of unpin_yc()
 
     /// Compute element residual vector (wrapper)
-    void get_residuals(Vector<double> &residuals)
+    void get_residuals(Vector<double>& residuals)
     {
       // Initialise residuals to zero
       residuals.initialise(0.0);
@@ -171,7 +171,7 @@ namespace oomph
     }
 
     /// Compute element residual Vector and element Jacobian matrix (wrapper)
-    void get_jacobian(Vector<double> &residuals, DenseMatrix<double> &jacobian)
+    void get_jacobian(Vector<double>& residuals, DenseMatrix<double>& jacobian)
     {
       // Initialise residuals to zero
       residuals.initialise(0.0);
@@ -185,8 +185,8 @@ namespace oomph
   protected:
     /// \short Compute element residual Vector (only if flag=0) and also
     /// the element Jacobian matrix (if flag=1)
-    void fill_in_generic_residual_contribution(Vector<double> &residuals,
-                                               DenseMatrix<double> &jacobian,
+    void fill_in_generic_residual_contribution(Vector<double>& residuals,
+                                               DenseMatrix<double>& jacobian,
                                                unsigned flag)
     {
       // Find out how may dofs there are in the element

@@ -40,7 +40,7 @@ namespace oomph
     //========================================================================
     // Factorial
     //========================================================================
-    double factorial(const unsigned &l)
+    double factorial(const unsigned& l)
     {
       if (l == 0) return 1.0;
       return double(l * factorial(l - 1));
@@ -49,7 +49,7 @@ namespace oomph
     //========================================================================
     /// Legendre polynomials depending on one parameter
     //========================================================================
-    double plgndr1(const unsigned &n, const double &x)
+    double plgndr1(const unsigned& n, const double& x)
     {
       unsigned i;
       double pmm, pmm1;
@@ -95,7 +95,7 @@ namespace oomph
     //========================================================================
     // Legendre polynomials depending on two parameters
     //========================================================================
-    double plgndr2(const unsigned &l, const unsigned &m, const double &x)
+    double plgndr2(const unsigned& l, const unsigned& m, const double& x)
     {
       unsigned i, ll;
       double fact, pmm, pmmp1, somx2;
@@ -179,9 +179,9 @@ namespace oomph
   //======================================================================
   void FourierDecomposedHelmholtzEquations::
     fill_in_generic_residual_contribution_fourier_decomposed_helmholtz(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      const unsigned &flag)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag)
   {
     // Find out how many nodes there are
     const unsigned n_node = nnode();
@@ -395,8 +395,8 @@ namespace oomph
   ///
   /// nplot points in each coordinate direction
   //======================================================================
-  void FourierDecomposedHelmholtzEquations::output(std::ostream &outfile,
-                                                   const unsigned &nplot)
+  void FourierDecomposedHelmholtzEquations::output(std::ostream& outfile,
+                                                   const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(2);
@@ -433,9 +433,9 @@ namespace oomph
   ///
   /// Output at nplot points in each coordinate direction
   //======================================================================
-  void FourierDecomposedHelmholtzEquations::output_real(std::ostream &outfile,
-                                                        const double &phi,
-                                                        const unsigned &nplot)
+  void FourierDecomposedHelmholtzEquations::output_real(std::ostream& outfile,
+                                                        const double& phi,
+                                                        const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(2);
@@ -468,8 +468,8 @@ namespace oomph
   ///
   /// nplot points in each coordinate direction
   //======================================================================
-  void FourierDecomposedHelmholtzEquations::output(FILE *file_pt,
-                                                   const unsigned &nplot)
+  void FourierDecomposedHelmholtzEquations::output(FILE* file_pt,
+                                                   const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(2);
@@ -511,8 +511,8 @@ namespace oomph
   ///   r,z,u_exact
   //======================================================================
   void FourierDecomposedHelmholtzEquations::output_fct(
-    std::ostream &outfile,
-    const unsigned &nplot,
+    std::ostream& outfile,
+    const unsigned& nplot,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
   {
     // Vector of local coordinates
@@ -564,9 +564,9 @@ namespace oomph
   /// Output at nplot points in each coordinate direction
   //======================================================================
   void FourierDecomposedHelmholtzEquations::output_real_fct(
-    std::ostream &outfile,
-    const double &phi,
-    const unsigned &nplot,
+    std::ostream& outfile,
+    const double& phi,
+    const unsigned& nplot,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
   {
     // Vector of local coordinates
@@ -615,10 +615,10 @@ namespace oomph
   ///
   //======================================================================
   void FourierDecomposedHelmholtzEquations::compute_error(
-    std::ostream &outfile,
+    std::ostream& outfile,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-    double &error,
-    double &norm)
+    double& error,
+    double& norm)
   {
     // Initialise
     error = 0.0;
@@ -693,7 +693,7 @@ namespace oomph
   //======================================================================
   /// Compute norm of fe solution
   //======================================================================
-  void FourierDecomposedHelmholtzEquations::compute_norm(double &norm)
+  void FourierDecomposedHelmholtzEquations::compute_norm(double& norm)
   {
     // Initialise
     norm = 0.0;

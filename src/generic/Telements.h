@@ -59,7 +59,7 @@ namespace oomph
   {
   public:
     /// Constructor: Pass in the three vertex nodes
-    TFace(Node *node1_pt, Node *node2_pt, Node *node3_pt)
+    TFace(Node* node1_pt, Node* node2_pt, Node* node3_pt)
     {
       if ((node1_pt == node2_pt) || (node2_pt == node3_pt) ||
           (node1_pt == node3_pt))
@@ -73,11 +73,11 @@ namespace oomph
       }
 
       // Sort lexicographically based on pointer address of nodes
-      std::set<Node *> nodes;
+      std::set<Node*> nodes;
       nodes.insert(node1_pt);
       nodes.insert(node2_pt);
       nodes.insert(node3_pt);
-      std::set<Node *>::iterator it = nodes.begin();
+      std::set<Node*>::iterator it = nodes.begin();
       Node1_pt = (*it);
       it++;
       Node2_pt = (*it);
@@ -87,25 +87,25 @@ namespace oomph
     }
 
     /// Access to the first vertex node
-    Node *node1_pt() const
+    Node* node1_pt() const
     {
       return Node1_pt;
     }
 
     /// Access to the second vertex node
-    Node *node2_pt() const
+    Node* node2_pt() const
     {
       return Node2_pt;
     }
 
     /// Access to the third vertex node
-    Node *node3_pt() const
+    Node* node3_pt() const
     {
       return Node3_pt;
     }
 
     /// Comparison operator
-    bool operator==(const TFace &other) const
+    bool operator==(const TFace& other) const
     {
       if ((Node1_pt == other.node1_pt()) && (Node2_pt == other.node2_pt()) &&
           (Node3_pt == other.node3_pt()))
@@ -119,7 +119,7 @@ namespace oomph
     }
 
     /// Less-than operator
-    bool operator<(const TFace &other) const
+    bool operator<(const TFace& other) const
     {
       if (Node1_pt < other.node1_pt())
       {
@@ -165,25 +165,25 @@ namespace oomph
     /// connnect three boundary nodes?
     bool is_boundary_face() const
     {
-      return ((dynamic_cast<BoundaryNodeBase *>(Node1_pt) != 0) &&
-              (dynamic_cast<BoundaryNodeBase *>(Node2_pt) != 0) &&
-              (dynamic_cast<BoundaryNodeBase *>(Node3_pt) != 0));
+      return ((dynamic_cast<BoundaryNodeBase*>(Node1_pt) != 0) &&
+              (dynamic_cast<BoundaryNodeBase*>(Node2_pt) != 0) &&
+              (dynamic_cast<BoundaryNodeBase*>(Node3_pt) != 0));
     }
 
     /// \short Access to pointer to set of mesh boundaries that this
     /// face occupies; NULL if the node is not on any boundary.
     /// Construct via set intersection of the boundary sets for the
     /// associated vertex nodes
-    void get_boundaries_pt(std::set<unsigned> *&boundaries_pt)
+    void get_boundaries_pt(std::set<unsigned>*& boundaries_pt)
     {
       std::set<unsigned> set1;
-      std::set<unsigned> *set1_pt = &set1;
+      std::set<unsigned>* set1_pt = &set1;
       Node1_pt->get_boundaries_pt(set1_pt);
       std::set<unsigned> set2;
-      std::set<unsigned> *set2_pt = &set2;
+      std::set<unsigned>* set2_pt = &set2;
       Node2_pt->get_boundaries_pt(set2_pt);
       std::set<unsigned> set3;
-      std::set<unsigned> *set3_pt = &set3;
+      std::set<unsigned>* set3_pt = &set3;
       Node3_pt->get_boundaries_pt(set3_pt);
       std::set<unsigned> aux_set;
       set_intersection((*set1_pt).begin(),
@@ -200,13 +200,13 @@ namespace oomph
 
   private:
     /// First vertex node
-    Node *Node1_pt;
+    Node* Node1_pt;
 
     /// Second vertex node
-    Node *Node2_pt;
+    Node* Node2_pt;
 
     /// Third vertex node
-    Node *Node3_pt;
+    Node* Node3_pt;
   };
 
   ///////////////////////////////////////////////////////////////////////
@@ -235,7 +235,7 @@ namespace oomph
     //=======================================================================
     /// Return local coordinates of node j
     //=======================================================================
-    void local_coordinate_of_node(const unsigned &j, Vector<double> &s) const
+    void local_coordinate_of_node(const unsigned& j, Vector<double>& s) const
     {
       s.resize(1);
       switch (j)
@@ -263,7 +263,7 @@ namespace oomph
     //=======================================================================
     /// Shape function for specific TElement<1,2>
     //=======================================================================
-    void shape(const Vector<double> &s, Shape &psi) const
+    void shape(const Vector<double>& s, Shape& psi) const
     {
       psi[0] = 1.0 - s[0];
       psi[1] = s[0];
@@ -272,7 +272,7 @@ namespace oomph
     //=======================================================================
     /// Derivatives of shape functions for specific TElement<2,2>
     //=======================================================================
-    void dshape_local(const Vector<double> &s, Shape &psi, DShape &dpsids) const
+    void dshape_local(const Vector<double>& s, Shape& psi, DShape& dpsids) const
     {
       this->shape(s, psi);
 
@@ -285,10 +285,10 @@ namespace oomph
     /// Second derivatives of shape functions for specific TElement<1,2>:
     /// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$
     //=======================================================================
-    void d2shape_local(const Vector<double> &s,
-                       Shape &psi,
-                       DShape &dpsids,
-                       DShape &d2psids) const
+    void d2shape_local(const Vector<double>& s,
+                       Shape& psi,
+                       DShape& dpsids,
+                       DShape& d2psids) const
     {
       this->dshape_local(s, psi, dpsids);
 
@@ -304,7 +304,7 @@ namespace oomph
     //=======================================================================
     /// Return local coordinates of node j
     //=======================================================================
-    void local_coordinate_of_node(const unsigned &j, Vector<double> &s) const
+    void local_coordinate_of_node(const unsigned& j, Vector<double>& s) const
     {
       s.resize(1);
       switch (j)
@@ -336,7 +336,7 @@ namespace oomph
     //=======================================================================
     /// Shape function for specific TElement<1,3>
     //=======================================================================
-    void shape(const Vector<double> &s, Shape &psi) const
+    void shape(const Vector<double>& s, Shape& psi) const
     {
       psi[0] = 2.0 * (s[0] - 1.0) * (s[0] - 0.5);
       psi[1] = 4.0 * (1.0 - s[0]) * s[0];
@@ -346,7 +346,7 @@ namespace oomph
     //=======================================================================
     /// Derivatives of shape functions for specific TElement<1,3>
     //=======================================================================
-    void dshape_local(const Vector<double> &s, Shape &psi, DShape &dpsids) const
+    void dshape_local(const Vector<double>& s, Shape& psi, DShape& dpsids) const
     {
       // ALH: Don't know why object qualifier is needed
       this->shape(s, psi);
@@ -360,10 +360,10 @@ namespace oomph
     /// Second derivatives of shape functions for specific TElement<1,3>:
     /// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$
     //=======================================================================
-    void d2shape_local(const Vector<double> &s,
-                       Shape &psi,
-                       DShape &dpsids,
-                       DShape &d2psids) const
+    void d2shape_local(const Vector<double>& s,
+                       Shape& psi,
+                       DShape& dpsids,
+                       DShape& d2psids) const
     {
       // ALH: Don't know why object qualifier is needed
       this->dshape_local(s, psi, dpsids);
@@ -381,7 +381,7 @@ namespace oomph
     //=======================================================================
     /// Return local coordinates of node j
     //=======================================================================
-    void local_coordinate_of_node(const unsigned &j, Vector<double> &s) const
+    void local_coordinate_of_node(const unsigned& j, Vector<double>& s) const
     {
       s.resize(1);
       switch (j)
@@ -417,7 +417,7 @@ namespace oomph
     //=======================================================================
     /// Shape function for specific TElement<1,4>
     //=======================================================================
-    void shape(const Vector<double> &s, Shape &psi) const
+    void shape(const Vector<double>& s, Shape& psi) const
     {
       psi[0] = 0.5 * (1.0 - s[0]) * (3.0 * s[0] - 2.0) * (3.0 * s[0] - 1.0);
       psi[1] = -4.5 * s[0] * (1.0 - s[0]) * (3.0 * s[0] - 2.0);
@@ -428,7 +428,7 @@ namespace oomph
     //=======================================================================
     /// Derivatives of shape functions for specific TElement<1,4>
     //=======================================================================
-    void dshape_local(const Vector<double> &s, Shape &psi, DShape &dpsids) const
+    void dshape_local(const Vector<double>& s, Shape& psi, DShape& dpsids) const
     {
       // ALH: Don't know why object qualifier is needed
       this->shape(s, psi);
@@ -443,10 +443,10 @@ namespace oomph
     /// Second derivatives of shape functions for specific TElement<2,4>:
     /// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$
     //=======================================================================
-    void d2shape_local(const Vector<double> &s,
-                       Shape &psi,
-                       DShape &dpsids,
-                       DShape &d2psids) const
+    void d2shape_local(const Vector<double>& s,
+                       Shape& psi,
+                       DShape& dpsids,
+                       DShape& d2psids) const
     {
       throw OomphLibError(
         "Not checked yet", OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
@@ -468,7 +468,7 @@ namespace oomph
     //=======================================================================
     /// Return local coordinates of node j
     //=======================================================================
-    void local_coordinate_of_node(const unsigned &j, Vector<double> &s) const
+    void local_coordinate_of_node(const unsigned& j, Vector<double>& s) const
     {
       s.resize(2);
 
@@ -504,7 +504,7 @@ namespace oomph
     //=======================================================================
     /// Shape function for specific TElement<2,2>
     //=======================================================================
-    void shape(const Vector<double> &s, Shape &psi) const
+    void shape(const Vector<double>& s, Shape& psi) const
     {
       psi[0] = s[0];
       psi[1] = s[1];
@@ -514,7 +514,7 @@ namespace oomph
     //=======================================================================
     /// Derivatives of shape functions for specific TElement<2,2>
     //=======================================================================
-    void dshape_local(const Vector<double> &s, Shape &psi, DShape &dpsids) const
+    void dshape_local(const Vector<double>& s, Shape& psi, DShape& dpsids) const
     {
       this->shape(s, psi);
 
@@ -533,10 +533,10 @@ namespace oomph
     /// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$
     /// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$
     //=======================================================================
-    void d2shape_local(const Vector<double> &s,
-                       Shape &psi,
-                       DShape &dpsids,
-                       DShape &d2psids) const
+    void d2shape_local(const Vector<double>& s,
+                       Shape& psi,
+                       DShape& dpsids,
+                       DShape& d2psids) const
     {
       this->dshape_local(s, psi, dpsids);
 
@@ -556,7 +556,7 @@ namespace oomph
     //=======================================================================
     /// Return local coordinates of node j
     //=======================================================================
-    void local_coordinate_of_node(const unsigned &j, Vector<double> &s) const
+    void local_coordinate_of_node(const unsigned& j, Vector<double>& s) const
     {
       s.resize(2);
 
@@ -607,7 +607,7 @@ namespace oomph
     //=======================================================================
     /// Shape function for specific TElement<2,3>
     //=======================================================================
-    void shape(const Vector<double> &s, Shape &psi) const
+    void shape(const Vector<double>& s, Shape& psi) const
     {
       // Reconstruct the third area coordinate
       double s_2 = 1.0 - s[0] - s[1];
@@ -626,7 +626,7 @@ namespace oomph
     //=======================================================================
     /// Derivatives of shape functions for specific TElement<2,3>
     //=======================================================================
-    void dshape_local(const Vector<double> &s, Shape &psi, DShape &dpsids) const
+    void dshape_local(const Vector<double>& s, Shape& psi, DShape& dpsids) const
     {
       // ALH: Don't know why object qualifier is needed
       this->shape(s, psi);
@@ -651,10 +651,10 @@ namespace oomph
     /// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$
     /// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$
     //=======================================================================
-    void d2shape_local(const Vector<double> &s,
-                       Shape &psi,
-                       DShape &dpsids,
-                       DShape &d2psids) const
+    void d2shape_local(const Vector<double>& s,
+                       Shape& psi,
+                       DShape& dpsids,
+                       DShape& d2psids) const
     {
       // ALH: Don't know why object qualifier is needed
       this->dshape_local(s, psi, dpsids);
@@ -692,7 +692,7 @@ namespace oomph
     //=======================================================================
     /// Return local coordinates of node j
     //=======================================================================
-    void local_coordinate_of_node(const unsigned &j, Vector<double> &s) const
+    void local_coordinate_of_node(const unsigned& j, Vector<double>& s) const
     {
       s.resize(2);
 
@@ -763,7 +763,7 @@ namespace oomph
     //=======================================================================
     /// Shape function for specific TElement<2,4>
     //=======================================================================
-    void shape(const Vector<double> &s, Shape &psi) const
+    void shape(const Vector<double>& s, Shape& psi) const
     {
       psi[0] = 0.5 * s[0] * (3.0 * s[0] - 2.0) * (3.0 * s[0] - 1.0);
       psi[1] = 0.5 * s[1] * (3.0 * s[1] - 2.0) * (3.0 * s[1] - 1.0);
@@ -782,7 +782,7 @@ namespace oomph
     //=======================================================================
     /// Derivatives of shape functions for specific TElement<2,4>
     //=======================================================================
-    void dshape_local(const Vector<double> &s, Shape &psi, DShape &dpsids) const
+    void dshape_local(const Vector<double>& s, Shape& psi, DShape& dpsids) const
     {
       // ALH: Don't know why object qualifier is needed
       this->shape(s, psi);
@@ -823,10 +823,10 @@ namespace oomph
     /// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$
     /// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$
     //=======================================================================
-    void d2shape_local(const Vector<double> &s,
-                       Shape &psi,
-                       DShape &dpsids,
-                       DShape &d2psids) const
+    void d2shape_local(const Vector<double>& s,
+                       Shape& psi,
+                       DShape& dpsids,
+                       DShape& d2psids) const
     {
       throw OomphLibError(
         "Not checked yet", OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
@@ -904,7 +904,7 @@ namespace oomph
     //=======================================================================
     /// Return local coordinates of node j
     //=======================================================================
-    void local_coordinate_of_node(const unsigned &j, Vector<double> &s) const
+    void local_coordinate_of_node(const unsigned& j, Vector<double>& s) const
     {
       s.resize(2);
 
@@ -961,7 +961,7 @@ namespace oomph
     //=======================================================================
     /// Shape function for specific TBubbleEnrichedElement<2,3>
     //=======================================================================
-    void shape(const Vector<double> &s, Shape &psi) const
+    void shape(const Vector<double>& s, Shape& psi) const
     {
       // Reconstruct the third area coordinate
       const double s_2 = 1.0 - s[0] - s[1];
@@ -988,7 +988,7 @@ namespace oomph
     //=======================================================================
     /// Derivatives of shape functions for specific TBubbleElement<2,3>
     //=======================================================================
-    void dshape_local(const Vector<double> &s, Shape &psi, DShape &dpsids) const
+    void dshape_local(const Vector<double>& s, Shape& psi, DShape& dpsids) const
     {
       // ALH: Don't know why object qualifier is needed
       this->shape(s, psi);
@@ -1021,10 +1021,10 @@ namespace oomph
     /// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$
     /// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$
     //=======================================================================
-    void d2shape_local(const Vector<double> &s,
-                       Shape &psi,
-                       DShape &dpsids,
-                       DShape &d2psids) const
+    void d2shape_local(const Vector<double>& s,
+                       Shape& psi,
+                       DShape& dpsids,
+                       DShape& d2psids) const
     {
       // ALH: Don't know why object qualifier is needed
       this->dshape_local(s, psi, dpsids);
@@ -1080,7 +1080,7 @@ namespace oomph
     TElementGeometricBase() {}
 
     /// Broken copy constructor
-    TElementGeometricBase(const TElementGeometricBase &)
+    TElementGeometricBase(const TElementGeometricBase&)
     {
       BrokenCopy::broken_copy("TElementGeometricBase");
     }
@@ -1113,7 +1113,7 @@ namespace oomph
     TElementBase() {}
 
     /// Broken copy constructor
-    TElementBase(const TElementBase &)
+    TElementBase(const TElementBase&)
     {
       BrokenCopy::broken_copy("TElementBase");
     }
@@ -1131,7 +1131,7 @@ namespace oomph
     }
 
     /// Check whether the local coordinates are valid or not
-    bool local_coord_is_valid(const Vector<double> &s)
+    bool local_coord_is_valid(const Vector<double>& s)
     {
       // Check coordinates
       unsigned ncoord = dim();
@@ -1158,7 +1158,7 @@ namespace oomph
 
     /// \short Adjust local coordinates so that they're located inside
     /// the element
-    void move_local_coord_back_into_element(Vector<double> &s) const
+    void move_local_coord_back_into_element(Vector<double>& s) const
     {
       // Check coordinates
       unsigned ncoord = dim();
@@ -1246,7 +1246,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    TElement(const TElement &)
+    TElement(const TElement&)
     {
       BrokenCopy::broken_copy("TElement");
     }
@@ -1274,7 +1274,7 @@ namespace oomph
     }
 
     /// \short Pointer to the j-th vertex node in the element
-    Node *vertex_node_pt(const unsigned &j) const
+    Node* vertex_node_pt(const unsigned& j) const
     {
       switch (j)
       {
@@ -1301,16 +1301,16 @@ namespace oomph
     }
 
     /// Calculate the geometric shape functions at local coordinate s
-    inline void shape(const Vector<double> &s, Shape &psi) const
+    inline void shape(const Vector<double>& s, Shape& psi) const
     {
       TElementShape<1, NNODE_1D>::shape(s, psi);
     }
 
     /// \short Compute the  geometric shape functions and
     /// derivatives w.r.t. local coordinates at local coordinate s
-    inline void dshape_local(const Vector<double> &s,
-                             Shape &psi,
-                             DShape &dpsids) const
+    inline void dshape_local(const Vector<double>& s,
+                             Shape& psi,
+                             DShape& dpsids) const
     {
       TElementShape<1, NNODE_1D>::dshape_local(s, psi, dpsids);
     }
@@ -1320,10 +1320,10 @@ namespace oomph
     /// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$
     /// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$
     /// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$
-    inline void d2shape_local(const Vector<double> &s,
-                              Shape &psi,
-                              DShape &dpsids,
-                              DShape &d2psids) const
+    inline void d2shape_local(const Vector<double>& s,
+                              Shape& psi,
+                              DShape& dpsids,
+                              DShape& d2psids) const
     {
       TElementShape<1, NNODE_1D>::d2shape_local(s, psi, dpsids, d2psids);
     }
@@ -1331,8 +1331,8 @@ namespace oomph
     /// \short Overload the template-free interface for the calculation of
     /// inverse jacobian matrix. This is a one dimensional element, so use
     /// the 1D version.
-    double invert_jacobian_mapping(const DenseMatrix<double> &jacobian,
-                                   DenseMatrix<double> &inverse_jacobian) const
+    double invert_jacobian_mapping(const DenseMatrix<double>& jacobian,
+                                   DenseMatrix<double>& inverse_jacobian) const
     {
       return FiniteElement::invert_jacobian<1>(jacobian, inverse_jacobian);
     }
@@ -1350,22 +1350,22 @@ namespace oomph
     }
 
     /// Return local coordinates of node j
-    inline void local_coordinate_of_node(const unsigned &j,
-                                         Vector<double> &s) const
+    inline void local_coordinate_of_node(const unsigned& j,
+                                         Vector<double>& s) const
     {
       TElementShape<1, NNODE_1D>::local_coordinate_of_node(j, s);
     }
 
     /// \short Return the number of actual plot points for paraview
     /// plot with parameter nplot.
-    unsigned nplot_points_paraview(const unsigned &nplot) const
+    unsigned nplot_points_paraview(const unsigned& nplot) const
     {
       return nplot;
     }
 
     /// \short Return the number of local sub-elements for paraview plot with
     /// parameter nplot.
-    unsigned nsub_elements_paraview(const unsigned &nplot) const
+    unsigned nsub_elements_paraview(const unsigned& nplot) const
     {
       return (nplot - 1);
     }
@@ -1373,9 +1373,9 @@ namespace oomph
     /// \short Fill in the offset information for paraview plot.
     /// Needs to be implemented for each new geometric element type; see
     /// http://www.vtk.org/VTK/img/file-formats.pdf
-    void write_paraview_output_offset_information(std::ofstream &file_out,
-                                                  const unsigned &nplot,
-                                                  unsigned &counter) const
+    void write_paraview_output_offset_information(std::ofstream& file_out,
+                                                  const unsigned& nplot,
+                                                  unsigned& counter) const
     {
       // Number of local elements we want to plot over
       unsigned plot = nsub_elements_paraview(nplot);
@@ -1391,8 +1391,8 @@ namespace oomph
     /// \short Return the paraview element type.
     /// Needs to be implemented for each new geometric element type; see
     /// http://www.vtk.org/VTK/img/file-formats.pdf
-    void write_paraview_type(std::ofstream &file_out,
-                             const unsigned &nplot) const
+    void write_paraview_type(std::ofstream& file_out,
+                             const unsigned& nplot) const
     {
       unsigned local_loop = nsub_elements_paraview(nplot);
       for (unsigned i = 0; i < local_loop; i++)
@@ -1404,9 +1404,9 @@ namespace oomph
     /// \short Return the offsets for the paraview sub-elements. Needs
     /// to be implemented for each new geometric element type; see
     /// http://www.vtk.org/VTK/img/file-formats.pdf
-    void write_paraview_offsets(std::ofstream &file_out,
-                                const unsigned &nplot,
-                                unsigned &offset_sum) const
+    void write_paraview_offsets(std::ofstream& file_out,
+                                const unsigned& nplot,
+                                unsigned& offset_sum) const
     {
       // Loop over all local elements and add its offset to the overall
       // offset_sum
@@ -1419,24 +1419,24 @@ namespace oomph
     }
 
     /// Output
-    void output(std::ostream &output);
+    void output(std::ostream& output);
 
     /// Output at specified number of plot points
-    void output(std::ostream &outfile, const unsigned &nplot);
+    void output(std::ostream& outfile, const unsigned& nplot);
 
     /// C-style output
-    void output(FILE *file_pt);
+    void output(FILE* file_pt);
 
     /// C_style output at n_plot points
-    void output(FILE *file_pt, const unsigned &n_plot);
+    void output(FILE* file_pt, const unsigned& n_plot);
 
     /// \short  Get vector of local coordinates of plot point i (when plotting
     /// nplot points in each "coordinate direction").
     void get_s_plot(
-      const unsigned &i,
-      const unsigned &nplot,
-      Vector<double> &s,
-      const bool &use_equally_spaced_interior_sample_points = false) const
+      const unsigned& i,
+      const unsigned& nplot,
+      Vector<double>& s,
+      const bool& use_equally_spaced_interior_sample_points = false) const
     {
       if (nplot > 1)
       {
@@ -1458,7 +1458,7 @@ namespace oomph
 
     /// \short Return string for tecplot zone header (when plotting
     /// nplot points in each "coordinate direction)
-    std::string tecplot_zone_string(const unsigned &nplot) const
+    std::string tecplot_zone_string(const unsigned& nplot) const
     {
       std::ostringstream header;
       header << "ZONE I=" << nplot << "\n";
@@ -1467,7 +1467,7 @@ namespace oomph
 
     /// Return total number of plot points (when plotting
     /// nplot points in each "coordinate direction)
-    unsigned nplot_points(const unsigned &nplot) const
+    unsigned nplot_points(const unsigned& nplot) const
     {
       return nplot;
     }
@@ -1477,8 +1477,8 @@ namespace oomph
     /// corresponding to the two possible faces:
     /// -1 (Left)  s[0] = -1.0
     /// +1 (Right) s[0] =  1.0
-    void build_face_element(const int &face_index,
-                            FaceElement *face_element_pt);
+    void build_face_element(const int& face_index,
+                            FaceElement* face_element_pt);
   };
 
   //=======================================================================
@@ -1536,7 +1536,7 @@ namespace oomph
     }
 
     /// Alternative constructor
-    TElement(const bool &allow_high_order)
+    TElement(const bool& allow_high_order)
     {
       // Check if we are overriding the restriction on NNODE_1D
       if (!allow_high_order)
@@ -1559,7 +1559,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    TElement(const TElement &)
+    TElement(const TElement&)
     {
       BrokenCopy::broken_copy("TElement");
     }
@@ -1587,14 +1587,14 @@ namespace oomph
     }
 
     /// \short Public access function for Node_on_face.
-    unsigned get_bulk_node_number(const int &face_index,
-                                  const unsigned &i) const
+    unsigned get_bulk_node_number(const int& face_index,
+                                  const unsigned& i) const
     {
       return Node_on_face[face_index][i];
     }
 
     /// \short Pointer to the j-th vertex node in the element
-    Node *vertex_node_pt(const unsigned &j) const
+    Node* vertex_node_pt(const unsigned& j) const
     {
       // Vertex nodes come first:
 #ifdef PARANOID
@@ -1613,16 +1613,16 @@ namespace oomph
     }
 
     /// Calculate the geometric shape functions at local coordinate s
-    inline void shape(const Vector<double> &s, Shape &psi) const
+    inline void shape(const Vector<double>& s, Shape& psi) const
     {
       TElementShape<2, NNODE_1D>::shape(s, psi);
     }
 
     /// \short Compute the  geometric shape functions and
     /// derivatives w.r.t. local coordinates at local coordinate s
-    inline void dshape_local(const Vector<double> &s,
-                             Shape &psi,
-                             DShape &dpsids) const
+    inline void dshape_local(const Vector<double>& s,
+                             Shape& psi,
+                             DShape& dpsids) const
     {
       TElementShape<2, NNODE_1D>::dshape_local(s, psi, dpsids);
     }
@@ -1632,10 +1632,10 @@ namespace oomph
     /// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$
     /// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$
     /// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$
-    inline void d2shape_local(const Vector<double> &s,
-                              Shape &psi,
-                              DShape &dpsids,
-                              DShape &d2psids) const
+    inline void d2shape_local(const Vector<double>& s,
+                              Shape& psi,
+                              DShape& dpsids,
+                              DShape& d2psids) const
     {
       TElementShape<2, NNODE_1D>::d2shape_local(s, psi, dpsids, d2psids);
     }
@@ -1643,8 +1643,8 @@ namespace oomph
     /// \short Overload the template-free interface for the calculation of
     /// inverse jacobian matrix. This is a two dimensional element, so use
     /// the 2D version.
-    double invert_jacobian_mapping(const DenseMatrix<double> &jacobian,
-                                   DenseMatrix<double> &inverse_jacobian) const
+    double invert_jacobian_mapping(const DenseMatrix<double>& jacobian,
+                                   DenseMatrix<double>& inverse_jacobian) const
     {
       return FiniteElement::invert_jacobian<2>(jacobian, inverse_jacobian);
     }
@@ -1662,15 +1662,15 @@ namespace oomph
     }
 
     /// Return local coordinates of node j
-    inline void local_coordinate_of_node(const unsigned &j,
-                                         Vector<double> &s) const
+    inline void local_coordinate_of_node(const unsigned& j,
+                                         Vector<double>& s) const
     {
       TElementShape<2, NNODE_1D>::local_coordinate_of_node(j, s);
     }
 
     /// \short Return the number of actual plot points for paraview
     /// plot with parameter nplot.
-    unsigned nplot_points_paraview(const unsigned &nplot) const
+    unsigned nplot_points_paraview(const unsigned& nplot) const
     {
       unsigned node_sum = 0;
       for (unsigned i = 1; i <= nplot; i++)
@@ -1682,7 +1682,7 @@ namespace oomph
 
     /// \short Return the number of local sub-elements for paraview plot with
     /// parameter nplot.
-    unsigned nsub_elements_paraview(const unsigned &nplot) const
+    unsigned nsub_elements_paraview(const unsigned& nplot) const
     {
       unsigned local_sum = 0;
       for (unsigned i = 1; i < nplot; i++)
@@ -1695,9 +1695,9 @@ namespace oomph
     /// \short Fill in the offset information for paraview plot.
     /// Needs to be implemented for each new geometric element type; see
     /// http://www.vtk.org/VTK/img/file-formats.pdf
-    void write_paraview_output_offset_information(std::ofstream &file_out,
-                                                  const unsigned &nplot,
-                                                  unsigned &counter) const
+    void write_paraview_output_offset_information(std::ofstream& file_out,
+                                                  const unsigned& nplot,
+                                                  unsigned& counter) const
     {
       // Outputs list of connectivity of Paraview elements,
       // whilst remembering the overall ordering
@@ -1726,8 +1726,8 @@ namespace oomph
     /// \short Return the paraview element type.
     /// Needs to be implemented for each new geometric element type; see
     /// http://www.vtk.org/VTK/img/file-formats.pdf
-    void write_paraview_type(std::ofstream &file_out,
-                             const unsigned &nplot) const
+    void write_paraview_type(std::ofstream& file_out,
+                             const unsigned& nplot) const
     {
       unsigned local_loop = nsub_elements_paraview(nplot);
 
@@ -1741,9 +1741,9 @@ namespace oomph
     /// \short Return the offsets for the paraview sub-elements. Needs
     /// to be implemented for each new geometric element type; see
     /// http://www.vtk.org/VTK/img/file-formats.pdf
-    void write_paraview_offsets(std::ofstream &file_out,
-                                const unsigned &nplot,
-                                unsigned &offset_sum) const
+    void write_paraview_offsets(std::ofstream& file_out,
+                                const unsigned& nplot,
+                                unsigned& offset_sum) const
     {
       unsigned local_loop = nsub_elements_paraview(nplot);
 
@@ -1757,24 +1757,24 @@ namespace oomph
     }
 
     /// Output
-    void output(std::ostream &output);
+    void output(std::ostream& output);
 
     /// Output at specified number of plot points
-    void output(std::ostream &outfile, const unsigned &nplot);
+    void output(std::ostream& outfile, const unsigned& nplot);
 
     /// C-style output
-    void output(FILE *file_pt);
+    void output(FILE* file_pt);
 
     /// C_style output at n_plot points
-    void output(FILE *file_pt, const unsigned &n_plot);
+    void output(FILE* file_pt, const unsigned& n_plot);
 
     /// \short  Get vector of local coordinates of plot point i (when plotting
     /// nplot points in each "coordinate direction").
     void get_s_plot(
-      const unsigned &iplot,
-      const unsigned &nplot,
-      Vector<double> &s,
-      const bool &use_equally_spaced_interior_sample_points = false) const
+      const unsigned& iplot,
+      const unsigned& nplot,
+      Vector<double>& s,
+      const bool& use_equally_spaced_interior_sample_points = false) const
     {
       if (nplot > 1)
       {
@@ -1810,7 +1810,7 @@ namespace oomph
 
     /// \short Return string for tecplot zone header (when plotting
     /// nplot points in each "coordinate direction)
-    std::string tecplot_zone_string(const unsigned &nplot) const
+    std::string tecplot_zone_string(const unsigned& nplot) const
     {
       std::ostringstream header;
       unsigned nel = 0;
@@ -1827,8 +1827,8 @@ namespace oomph
     /// nplot points in each "coordinate direction).
     /// Empty by default -- can be used, e.g., to add FE connectivity
     /// lists to elements that need it.
-    void write_tecplot_zone_footer(std::ostream &outfile,
-                                   const unsigned &nplot) const
+    void write_tecplot_zone_footer(std::ostream& outfile,
+                                   const unsigned& nplot) const
     {
       // Output node lists for sub elements for Tecplot (node index
       // must start at 1)
@@ -1856,7 +1856,7 @@ namespace oomph
     /// nplot points in each "coordinate direction).
     /// Empty by default -- can be used, e.g., to add FE connectivity
     /// lists to elements that need it.
-    void write_tecplot_zone_footer(FILE *file_pt, const unsigned &nplot) const
+    void write_tecplot_zone_footer(FILE* file_pt, const unsigned& nplot) const
     {
       // Output node lists for sub elements for Tecplot (node index
       // must start at 1)
@@ -1888,7 +1888,7 @@ namespace oomph
 
     /// Return total number of plot points (when plotting
     /// nplot points in each "coordinate direction)
-    unsigned nplot_points(const unsigned &nplot) const
+    unsigned nplot_points(const unsigned& nplot) const
     {
       unsigned np = 0;
       for (unsigned i = 1; i <= nplot; i++)
@@ -1903,8 +1903,8 @@ namespace oomph
     /// 0 (Left)         s[0] = 0.0
     /// 1 (Bottom)       s[1] = 0.0
     /// 2 (Sloping face) s[0] = 1.0 - s[1]
-    void build_face_element(const int &face_index,
-                            FaceElement *face_element_pt);
+    void build_face_element(const int& face_index,
+                            FaceElement* face_element_pt);
   };
 
   ///////////////////////////////////////////////////////////////////////
@@ -1918,7 +1918,7 @@ namespace oomph
   class TElementShape<3, 2>
   {
   public:
-    void local_coordinate_of_node(const unsigned &j, Vector<double> &s) const
+    void local_coordinate_of_node(const unsigned& j, Vector<double>& s) const
     {
       s.resize(3);
 
@@ -1963,7 +1963,7 @@ namespace oomph
     //=======================================================================
     /// Shape function for specific TElement<3,2>
     //=======================================================================
-    void shape(const Vector<double> &s, Shape &psi) const
+    void shape(const Vector<double>& s, Shape& psi) const
     {
       psi[0] = s[0];
       psi[1] = s[1];
@@ -1974,7 +1974,7 @@ namespace oomph
     //=======================================================================
     /// Derivatives of shape functions for specific TElement<3,2>
     //=======================================================================
-    void dshape_local(const Vector<double> &s, Shape &psi, DShape &dpsids) const
+    void dshape_local(const Vector<double>& s, Shape& psi, DShape& dpsids) const
     {
       // ALH: Don't know why object qualifier is needed
       this->shape(s, psi);
@@ -2006,10 +2006,10 @@ namespace oomph
     /// d2psids(i,4) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_2 \f$
     /// d2psids(i,5) = \f$ \partial^2 \psi_j / \partial s_1 \partial s_2 \f$
     //=======================================================================
-    void d2shape_local(const Vector<double> &s,
-                       Shape &psi,
-                       DShape &dpsids,
-                       DShape &d2psids) const
+    void d2shape_local(const Vector<double>& s,
+                       Shape& psi,
+                       DShape& dpsids,
+                       DShape& d2psids) const
     {
       // ALH: Don't know why object qualifier is needed
       this->dshape_local(s, psi, dpsids);
@@ -2033,7 +2033,7 @@ namespace oomph
   class TElementShape<3, 3>
   {
   public:
-    void local_coordinate_of_node(const unsigned &j, Vector<double> &s) const
+    void local_coordinate_of_node(const unsigned& j, Vector<double>& s) const
     {
       s.resize(3);
 
@@ -2114,7 +2114,7 @@ namespace oomph
     //=======================================================================
     /// Shape function for specific TElement<3,3>
     //=======================================================================
-    void shape(const Vector<double> &s, Shape &psi) const
+    void shape(const Vector<double>& s, Shape& psi) const
     {
       double s3 = 1.0 - s[0] - s[1] - s[2];
       psi[0] = (2.0 * s[0] - 1.0) * s[0];
@@ -2132,7 +2132,7 @@ namespace oomph
     //=======================================================================
     /// Derivatives of shape functions for specific TElement<3,3>
     //=======================================================================
-    void dshape_local(const Vector<double> &s, Shape &psi, DShape &dpsids) const
+    void dshape_local(const Vector<double>& s, Shape& psi, DShape& dpsids) const
     {
       // ALH: Don't know why object qualifier is needed
       this->shape(s, psi);
@@ -2190,10 +2190,10 @@ namespace oomph
     /// d2psids(i,4) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_2 \f$
     /// d2psids(i,5) = \f$ \partial^2 \psi_j / \partial s_1 \partial s_2 \f$
     //=======================================================================
-    void d2shape_local(const Vector<double> &s,
-                       Shape &psi,
-                       DShape &dpsids,
-                       DShape &d2psids) const
+    void d2shape_local(const Vector<double>& s,
+                       Shape& psi,
+                       DShape& dpsids,
+                       DShape& d2psids) const
     {
       // ALH: Don't know why object qualifier is needed
       this->dshape_local(s, psi, dpsids);
@@ -2298,7 +2298,7 @@ namespace oomph
       return 5;
     }
 
-    void local_coordinate_of_node(const unsigned &j, Vector<double> &s) const
+    void local_coordinate_of_node(const unsigned& j, Vector<double>& s) const
     {
       s.resize(3);
 
@@ -2414,7 +2414,7 @@ namespace oomph
     //=======================================================================
     /// Shape function for specific TBubbleEnrichedElement<3,3>
     //=======================================================================
-    void shape(const Vector<double> &s, Shape &psi) const
+    void shape(const Vector<double>& s, Shape& psi) const
     {
       // Constructe the fourth volume coordinate
       const double s3 = 1.0 - s[0] - s[1] - s[2];
@@ -2469,7 +2469,7 @@ namespace oomph
     //=======================================================================
     /// Derivatives of shape functions for specific TElement<3,3>
     //=======================================================================
-    void dshape_local(const Vector<double> &s, Shape &psi, DShape &dpsids) const
+    void dshape_local(const Vector<double>& s, Shape& psi, DShape& dpsids) const
     {
       // ALH: Don't know why object qualifier is needed
       this->shape(s, psi);
@@ -2662,10 +2662,10 @@ namespace oomph
     /// d2psids(i,4) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_2 \f$
     /// d2psids(i,5) = \f$ \partial^2 \psi_j / \partial s_1 \partial s_2 \f$
     //=======================================================================
-    void d2shape_local(const Vector<double> &s,
-                       Shape &psi,
-                       DShape &dpsids,
-                       DShape &d2psids) const
+    void d2shape_local(const Vector<double>& s,
+                       Shape& psi,
+                       DShape& dpsids,
+                       DShape& d2psids) const
     {
       // ALH: Don't know why object qualifier is needed
       this->dshape_local(s, psi, dpsids);
@@ -3055,7 +3055,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    TElement(const TElement &)
+    TElement(const TElement&)
     {
       BrokenCopy::broken_copy("TElement");
     }
@@ -3083,14 +3083,14 @@ namespace oomph
     }
 
     /// \short Public access function for Node_on_face.
-    unsigned get_bulk_node_number(const int &face_index,
-                                  const unsigned &i) const
+    unsigned get_bulk_node_number(const int& face_index,
+                                  const unsigned& i) const
     {
       return Node_on_face[face_index][i];
     }
 
     /// \short Pointer to the j-th vertex node in the element
-    Node *vertex_node_pt(const unsigned &j) const
+    Node* vertex_node_pt(const unsigned& j) const
     {
       // Vertex nodes come first:
 #ifdef PARANOID
@@ -3109,16 +3109,16 @@ namespace oomph
     }
 
     /// Calculate the geometric shape functions at local coordinate s
-    inline void shape(const Vector<double> &s, Shape &psi) const
+    inline void shape(const Vector<double>& s, Shape& psi) const
     {
       TElementShape<3, NNODE_1D>::shape(s, psi);
     }
 
     /// \short Compute the  geometric shape functions and
     /// derivatives w.r.t. local coordinates at local coordinate s
-    inline void dshape_local(const Vector<double> &s,
-                             Shape &psi,
-                             DShape &dpsids) const
+    inline void dshape_local(const Vector<double>& s,
+                             Shape& psi,
+                             DShape& dpsids) const
     {
       TElementShape<3, NNODE_1D>::dshape_local(s, psi, dpsids);
     }
@@ -3131,10 +3131,10 @@ namespace oomph
     /// d2psids(i,3) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$
     /// d2psids(i,4) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_2 \f$
     /// d2psids(i,5) = \f$ \partial^2 \psi_j / \partial s_1 \partial s_2 \f$
-    inline void d2shape_local(const Vector<double> &s,
-                              Shape &psi,
-                              DShape &dpsids,
-                              DShape &d2psids) const
+    inline void d2shape_local(const Vector<double>& s,
+                              Shape& psi,
+                              DShape& dpsids,
+                              DShape& d2psids) const
     {
       TElementShape<3, NNODE_1D>::d2shape_local(s, psi, dpsids, d2psids);
     }
@@ -3142,8 +3142,8 @@ namespace oomph
     /// \short Overload the template-free interface for the calculation of
     /// inverse jacobian matrix. This is a three dimensional element, so use
     /// the 3D version.
-    double invert_jacobian_mapping(const DenseMatrix<double> &jacobian,
-                                   DenseMatrix<double> &inverse_jacobian) const
+    double invert_jacobian_mapping(const DenseMatrix<double>& jacobian,
+                                   DenseMatrix<double>& inverse_jacobian) const
     {
       return FiniteElement::invert_jacobian<3>(jacobian, inverse_jacobian);
     }
@@ -3161,15 +3161,15 @@ namespace oomph
     }
 
     /// Return local coordinates of node j
-    inline void local_coordinate_of_node(const unsigned &j,
-                                         Vector<double> &s) const
+    inline void local_coordinate_of_node(const unsigned& j,
+                                         Vector<double>& s) const
     {
       TElementShape<3, NNODE_1D>::local_coordinate_of_node(j, s);
     }
 
     /// \short Return the number of actual plot points for paraview
     /// plot with parameter nplot.
-    unsigned nplot_points_paraview(const unsigned &nplot) const
+    unsigned nplot_points_paraview(const unsigned& nplot) const
     {
       unsigned node_sum = 0;
       for (unsigned j = 1; j <= nplot; j++)
@@ -3184,7 +3184,7 @@ namespace oomph
 
     /// \short Return the number of local sub-elements for paraview plot with
     /// parameter nplot.
-    unsigned nsub_elements_paraview(const unsigned &nplot) const
+    unsigned nsub_elements_paraview(const unsigned& nplot) const
     {
       return (nplot - 1) * (nplot - 1) * (nplot - 1);
     }
@@ -3192,9 +3192,9 @@ namespace oomph
     /// \short Fill in the offset information for paraview plot.
     /// Needs to be implemented for each new geometric element type; see
     /// http://www.vtk.org/VTK/img/file-formats.pdf
-    void write_paraview_output_offset_information(std::ofstream &file_out,
-                                                  const unsigned &nplot,
-                                                  unsigned &counter) const
+    void write_paraview_output_offset_information(std::ofstream& file_out,
+                                                  const unsigned& nplot,
+                                                  unsigned& counter) const
     {
       // Output node lists for sub elements for Paraview (node index
       // must start at 0, fixed with magical counter-1)
@@ -3282,8 +3282,8 @@ namespace oomph
     /// \short Return the paraview element type.
     /// Needs to be implemented for each new geometric element type; see
     /// http://www.vtk.org/VTK/img/file-formats.pdf
-    void write_paraview_type(std::ofstream &file_out,
-                             const unsigned &nplot) const
+    void write_paraview_type(std::ofstream& file_out,
+                             const unsigned& nplot) const
     {
       unsigned local_loop = nsub_elements_paraview(nplot);
       for (unsigned i = 0; i < local_loop; i++)
@@ -3295,9 +3295,9 @@ namespace oomph
     /// \short Return the offsets for the paraview sub-elements. Needs
     /// to be implemented for each new geometric element type; see
     /// http://www.vtk.org/VTK/img/file-formats.pdf
-    void write_paraview_offsets(std::ofstream &file_out,
-                                const unsigned &nplot,
-                                unsigned &offset_sum) const
+    void write_paraview_offsets(std::ofstream& file_out,
+                                const unsigned& nplot,
+                                unsigned& offset_sum) const
     {
       unsigned local_loop = nsub_elements_paraview(nplot);
       for (unsigned i = 0; i < local_loop; i++)
@@ -3308,24 +3308,24 @@ namespace oomph
     }
 
     /// Output
-    void output(std::ostream &output);
+    void output(std::ostream& output);
 
     /// Output at specified number of plot points
-    void output(std::ostream &outfile, const unsigned &nplot);
+    void output(std::ostream& outfile, const unsigned& nplot);
 
     /// C-style output
-    void output(FILE *file_pt);
+    void output(FILE* file_pt);
 
     /// C_style output at n_plot points
-    void output(FILE *file_pt, const unsigned &n_plot);
+    void output(FILE* file_pt, const unsigned& n_plot);
 
     /// \short  Get vector of local coordinates of plot point i (when plotting
     /// nplot points in each "coordinate direction).
     void get_s_plot(
-      const unsigned &iplot,
-      const unsigned &nplot,
-      Vector<double> &s,
-      const bool &use_equally_spaced_interior_sample_points = false) const
+      const unsigned& iplot,
+      const unsigned& nplot,
+      Vector<double>& s,
+      const bool& use_equally_spaced_interior_sample_points = false) const
     {
       if (nplot > 1)
       {
@@ -3369,7 +3369,7 @@ namespace oomph
 
     /// \short Return string for tecplot zone header (when plotting
     /// nplot points in each "coordinate direction)
-    std::string tecplot_zone_string(const unsigned &nplot) const
+    std::string tecplot_zone_string(const unsigned& nplot) const
     {
       std::ostringstream header;
       unsigned nel = 0;
@@ -3383,8 +3383,8 @@ namespace oomph
     /// nplot points in each "coordinate direction).
     /// Empty by default -- can be used, e.g., to add FE connectivity
     /// lists to elements that need it.
-    void write_tecplot_zone_footer(std::ostream &outfile,
-                                   const unsigned &nplot) const
+    void write_tecplot_zone_footer(std::ostream& outfile,
+                                   const unsigned& nplot) const
     {
       // Output node lists for sub elements for Tecplot (node index
       // must start at 1)
@@ -3460,7 +3460,7 @@ namespace oomph
     /// nplot points in each "coordinate direction).
     /// Empty by default -- can be used, e.g., to add FE connectivity
     /// lists to elements that need it.
-    void write_tecplot_zone_footer(FILE *file_pt, const unsigned &nplot) const
+    void write_tecplot_zone_footer(FILE* file_pt, const unsigned& nplot) const
     {
       // Output node lists for sub elements for Tecplot (node index
       // must start at 1)
@@ -3495,7 +3495,7 @@ namespace oomph
 
     /// \short Return total number of plot points (when plotting
     /// nplot points in each "coordinate direction)
-    unsigned nplot_points(const unsigned &nplot) const
+    unsigned nplot_points(const unsigned& nplot) const
     {
       unsigned res = 0;
       if (nplot > 1)
@@ -3518,8 +3518,8 @@ namespace oomph
     /// 1: (bottom)         s[1] = 0.0
     /// 2: (back)           s[2] = 0.0
     /// 3: (sloping face)   s[0] + s[1] + s[2] = 1
-    void build_face_element(const int &face_index,
-                            FaceElement *face_element_pt);
+    void build_face_element(const int& face_index,
+                            FaceElement* face_element_pt);
   };
 
   ///////////////////////////////////////////////////////////////////////
@@ -3609,7 +3609,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    TBubbleEnrichedElement(const TBubbleEnrichedElement &)
+    TBubbleEnrichedElement(const TBubbleEnrichedElement&)
     {
       BrokenCopy::broken_copy("TBubbleEnrichedElement");
     }
@@ -3624,16 +3624,16 @@ namespace oomph
     ~TBubbleEnrichedElement() {}
 
     /// Calculate the geometric shape functions at local coordinate s
-    inline void shape(const Vector<double> &s, Shape &psi) const
+    inline void shape(const Vector<double>& s, Shape& psi) const
     {
       TBubbleEnrichedElementShape<DIM, 3>::shape(s, psi);
     }
 
     /// \short Compute the  geometric shape functions and
     /// derivatives w.r.t. local coordinates at local coordinate s
-    inline void dshape_local(const Vector<double> &s,
-                             Shape &psi,
-                             DShape &dpsids) const
+    inline void dshape_local(const Vector<double>& s,
+                             Shape& psi,
+                             DShape& dpsids) const
     {
       TBubbleEnrichedElementShape<DIM, 3>::dshape_local(s, psi, dpsids);
     }
@@ -3643,25 +3643,25 @@ namespace oomph
     /// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$
     /// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$
     /// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$
-    inline void d2shape_local(const Vector<double> &s,
-                              Shape &psi,
-                              DShape &dpsids,
-                              DShape &d2psids) const
+    inline void d2shape_local(const Vector<double>& s,
+                              Shape& psi,
+                              DShape& dpsids,
+                              DShape& d2psids) const
     {
       TBubbleEnrichedElementShape<DIM, 3>::d2shape_local(
         s, psi, dpsids, d2psids);
     }
 
     /// Return local coordinates of node j
-    inline void local_coordinate_of_node(const unsigned &j,
-                                         Vector<double> &s) const
+    inline void local_coordinate_of_node(const unsigned& j,
+                                         Vector<double>& s) const
     {
       TBubbleEnrichedElementShape<DIM, 3>::local_coordinate_of_node(j, s);
     }
 
     /// \short Build the lower-dimensional FaceElement
-    void build_face_element(const int &face_index,
-                            FaceElement *face_element_pt);
+    void build_face_element(const int& face_index,
+                            FaceElement* face_element_pt);
   };
 
   //========================================================================
@@ -3676,7 +3676,7 @@ namespace oomph
     TSolidElementBase(){};
 
     /// Broken copy constructor
-    TSolidElementBase(const TSolidElementBase &)
+    TSolidElementBase(const TSolidElementBase&)
     {
       BrokenCopy::broken_copy("TSolidElementBase");
     }
@@ -3720,7 +3720,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    SolidTElement(const SolidTElement &)
+    SolidTElement(const SolidTElement&)
     {
       BrokenCopy::broken_copy("SolidTElement");
     }
@@ -3736,8 +3736,8 @@ namespace oomph
     /// corresponding to the two possible faces:
     /// -1 (Left)  s[0] = -1.0
     /// +1 (Right) s[0] =  1.0
-    inline void build_face_element(const int &face_index,
-                                   FaceElement *face_element_pt);
+    inline void build_face_element(const int& face_index,
+                                   FaceElement* face_element_pt);
   };
 
   ///////////////////////////////////////////////////////////////////////////
@@ -3756,15 +3756,15 @@ namespace oomph
   //===========================================================
   template<unsigned NNODE_1D>
   void SolidTElement<1, NNODE_1D>::build_face_element(
-    const int &face_index, FaceElement *face_element_pt)
+    const int& face_index, FaceElement* face_element_pt)
   {
     // Build the standard non-solid FaceElement
     TElement<1, NNODE_1D>::build_face_element(face_index, face_element_pt);
 
     // Set the Lagrangian dimension from the first node of the present element
-    dynamic_cast<SolidFiniteElement *>(face_element_pt)
+    dynamic_cast<SolidFiniteElement*>(face_element_pt)
       ->set_lagrangian_dimension(
-        static_cast<SolidNode *>(node_pt(0))->nlagrangian());
+        static_cast<SolidNode*>(node_pt(0))->nlagrangian());
   }
 
   //=======================================================================
@@ -3788,7 +3788,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    SolidTElement(const SolidTElement &)
+    SolidTElement(const SolidTElement&)
     {
       BrokenCopy::broken_copy("SolidTElement");
     }
@@ -3804,8 +3804,8 @@ namespace oomph
     /// 0 (Left)         s[0] = 0.0
     /// 1 (Bottom)       s[1] = 0.0
     /// 2 (Sloping face) s[0] = 1.0 - s[1]
-    inline void build_face_element(const int &face_index,
-                                   FaceElement *face_element_pt);
+    inline void build_face_element(const int& face_index,
+                                   FaceElement* face_element_pt);
   };
 
   ///////////////////////////////////////////////////////////////////////////
@@ -3820,15 +3820,15 @@ namespace oomph
   //===========================================================
   template<unsigned NNODE_1D>
   void SolidTElement<2, NNODE_1D>::build_face_element(
-    const int &face_index, FaceElement *face_element_pt)
+    const int& face_index, FaceElement* face_element_pt)
   {
     // Build the standard non-solid FaceElement
     TElement<2, NNODE_1D>::build_face_element(face_index, face_element_pt);
 
     // Set the Lagrangian dimension from the first node of the present element
-    dynamic_cast<SolidFiniteElement *>(face_element_pt)
+    dynamic_cast<SolidFiniteElement*>(face_element_pt)
       ->set_lagrangian_dimension(
-        static_cast<SolidNode *>(node_pt(0))->nlagrangian());
+        static_cast<SolidNode*>(node_pt(0))->nlagrangian());
   }
 
   //=======================================================================
@@ -3852,7 +3852,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    SolidTElement(const SolidTElement &)
+    SolidTElement(const SolidTElement&)
     {
       BrokenCopy::broken_copy("SolidTElement");
     }
@@ -3870,8 +3870,8 @@ namespace oomph
     /// 1: (bottom)         s[1] = 0.0
     /// 2: (back)           s[2] = 0.0
     /// 3: (sloping face)   s[0] + s[1] + s[2] = 1
-    inline void build_face_element(const int &face_index,
-                                   FaceElement *face_element_pt);
+    inline void build_face_element(const int& face_index,
+                                   FaceElement* face_element_pt);
   };
 
   ///////////////////////////////////////////////////////////////////////////
@@ -3884,15 +3884,15 @@ namespace oomph
   //===========================================================
   template<unsigned NNODE_1D>
   void SolidTElement<3, NNODE_1D>::build_face_element(
-    const int &face_index, FaceElement *face_element_pt)
+    const int& face_index, FaceElement* face_element_pt)
   {
     // Build the standard non-solid FaceElement
     TElement<3, NNODE_1D>::build_face_element(face_index, face_element_pt);
 
     // Set the Lagrangian dimension from the first node of the present element
-    dynamic_cast<SolidFiniteElement *>(face_element_pt)
+    dynamic_cast<SolidFiniteElement*>(face_element_pt)
       ->set_lagrangian_dimension(
-        static_cast<SolidNode *>(node_pt(0))->nlagrangian());
+        static_cast<SolidNode*>(node_pt(0))->nlagrangian());
   }
 
   ///////////////////////////////////////////////////////////////////////
@@ -3927,7 +3927,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    SolidTBubbleEnrichedElement(const SolidTBubbleEnrichedElement &)
+    SolidTBubbleEnrichedElement(const SolidTBubbleEnrichedElement&)
     {
       BrokenCopy::broken_copy("SolidTBubbleEnrichedElement");
     }
@@ -3943,8 +3943,8 @@ namespace oomph
 
     /// \short Build the lower-dimensional FaceElement
     /// Need to put in a final override here
-    void build_face_element(const int &face_index,
-                            FaceElement *face_element_pt);
+    void build_face_element(const int& face_index,
+                            FaceElement* face_element_pt);
   };
 
   //=======================================================================

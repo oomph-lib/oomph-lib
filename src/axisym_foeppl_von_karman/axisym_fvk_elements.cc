@@ -50,7 +50,7 @@ namespace oomph
   /// Pure version without hanging nodes
   //======================================================================
   void AxisymFoepplvonKarmanEquations::fill_in_contribution_to_residuals(
-    Vector<double> &residuals)
+    Vector<double>& residuals)
   {
     // Find out how many nodes there are
     const unsigned n_node = nnode();
@@ -273,7 +273,7 @@ namespace oomph
   /// (false if attempt to evaluate stresses at zero radius)
   //======================================================================
   bool AxisymFoepplvonKarmanEquations::interpolated_stress(
-    const Vector<double> &s, double &sigma_r_r, double &sigma_phi_phi)
+    const Vector<double>& s, double& sigma_r_r, double& sigma_phi_phi)
 
   {
     // No in plane stresses if linear bending
@@ -343,8 +343,8 @@ namespace oomph
   ///   r, w, sigma_r_r, sigma_phi_phi
   /// nplot points
   //======================================================================
-  void AxisymFoepplvonKarmanEquations::output(std::ostream &outfile,
-                                              const unsigned &nplot)
+  void AxisymFoepplvonKarmanEquations::output(std::ostream& outfile,
+                                              const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(1);
@@ -376,8 +376,8 @@ namespace oomph
   ///   r,w
   /// nplot points
   //======================================================================
-  void AxisymFoepplvonKarmanEquations::output(FILE *file_pt,
-                                              const unsigned &nplot)
+  void AxisymFoepplvonKarmanEquations::output(FILE* file_pt,
+                                              const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(1);
@@ -409,8 +409,8 @@ namespace oomph
   ///   r,w_exact
   //======================================================================
   void AxisymFoepplvonKarmanEquations::output_fct(
-    std::ostream &outfile,
-    const unsigned &nplot,
+    std::ostream& outfile,
+    const unsigned& nplot,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
   {
     // Vector of local coordinates
@@ -456,10 +456,10 @@ namespace oomph
   ///
   //======================================================================
   void AxisymFoepplvonKarmanEquations::compute_error(
-    std::ostream &outfile,
+    std::ostream& outfile,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-    double &error,
-    double &norm)
+    double& error,
+    double& norm)
   {
     // Initialise
     error = 0.0;

@@ -63,13 +63,13 @@ namespace oomph
     ComplexMatrixBase() {}
 
     /// Broken copy constructor
-    ComplexMatrixBase(const ComplexMatrixBase &matrix)
+    ComplexMatrixBase(const ComplexMatrixBase& matrix)
     {
       BrokenCopy::broken_copy("ComplexMatrixBase");
     }
 
     /// Broken assignment operator
-    void operator=(const ComplexMatrixBase &)
+    void operator=(const ComplexMatrixBase&)
     {
       BrokenCopy::broken_assign("ComplexMatrixBase");
     }
@@ -86,8 +86,8 @@ namespace oomph
     /// \short Round brackets to give access as a(i,j) for read only
     /// (we're not providing a general interface for component-wise write
     /// access since not all matrix formats allow efficient direct access!)
-    virtual std::complex<double> operator()(const unsigned long &i,
-                                            const unsigned long &j) const = 0;
+    virtual std::complex<double> operator()(const unsigned long& i,
+                                            const unsigned long& j) const = 0;
 
     /// \short LU decomposition of the matrix using the appropriate
     /// linear solver. Return the sign of the determinant
@@ -104,7 +104,7 @@ namespace oomph
 
     /// \short LU backsubstitue a previously LU-decomposed matrix;
     /// The passed rhs will be over-written with the solution vector
-    virtual void lubksub(Vector<std::complex<double>> &rhs)
+    virtual void lubksub(Vector<std::complex<double>>& rhs)
     {
       throw OomphLibError(
         "lubksub() has not been written for this matrix class\n",
@@ -115,23 +115,23 @@ namespace oomph
     /// \short Complete LU solve (replaces matrix by its LU decomposition
     /// and overwrites RHS with solution). The default should not need
     /// to be over-written
-    virtual void solve(Vector<std::complex<double>> &rhs);
+    virtual void solve(Vector<std::complex<double>>& rhs);
 
     /// \short Complete LU solve (Nothing gets overwritten!). The default should
     /// not need to be overwritten
-    virtual void solve(const Vector<std::complex<double>> &rhs,
-                       Vector<std::complex<double>> &soln);
+    virtual void solve(const Vector<std::complex<double>>& rhs,
+                       Vector<std::complex<double>>& soln);
 
     /// \short Find the residual, i.e. r=b-Ax the residual
-    virtual void residual(const Vector<std::complex<double>> &x,
-                          const Vector<std::complex<double>> &b,
-                          Vector<std::complex<double>> &residual) = 0;
+    virtual void residual(const Vector<std::complex<double>>& x,
+                          const Vector<std::complex<double>>& b,
+                          Vector<std::complex<double>>& residual) = 0;
 
     /// \short Find the maximum residual r=b-Ax -- generic version, can be
     /// overloaded for specific derived classes where the
     /// max. can be determined "on the fly"
-    virtual double max_residual(const Vector<std::complex<double>> &x,
-                                const Vector<std::complex<double>> &rhs)
+    virtual double max_residual(const Vector<std::complex<double>>& x,
+                                const Vector<std::complex<double>>& rhs)
     {
       unsigned long n = rhs.size();
       Vector<std::complex<double>> res(n);
@@ -145,12 +145,12 @@ namespace oomph
     }
 
     /// \short Multiply the matrix by the vector x: soln=Ax.
-    virtual void multiply(const Vector<std::complex<double>> &x,
-                          Vector<std::complex<double>> &soln) = 0;
+    virtual void multiply(const Vector<std::complex<double>>& x,
+                          Vector<std::complex<double>>& soln) = 0;
 
     /// \short Multiply the  transposed matrix by the vector x: soln=A^T x
-    virtual void multiply_transpose(const Vector<std::complex<double>> &x,
-                                    Vector<std::complex<double>> &soln) = 0;
+    virtual void multiply_transpose(const Vector<std::complex<double>>& x,
+                                    Vector<std::complex<double>>& soln) = 0;
   };
 
   //=================================================================
@@ -164,10 +164,10 @@ namespace oomph
   {
   private:
     /// Pointer to storage for the index of permutations in the LU solve
-    Vector<long> *Index;
+    Vector<long>* Index;
 
     /// Pointer to storage for the LU decomposition
-    std::complex<double> *LU_factors;
+    std::complex<double>* LU_factors;
 
     /// Boolean flag used to decided whether the LU decomposition is stored
     /// separately, or not
@@ -188,7 +188,7 @@ namespace oomph
     }
 
     /// Constructor to build a square n by n matrix.
-    DenseComplexMatrix(const unsigned long &n) :
+    DenseComplexMatrix(const unsigned long& n) :
       DenseMatrix<std::complex<double>>(n),
       Index(0),
       LU_factors(0),
@@ -197,7 +197,7 @@ namespace oomph
     }
 
     /// Constructor to build a matrix with n rows and m columns.
-    DenseComplexMatrix(const unsigned long &n, const unsigned long &m) :
+    DenseComplexMatrix(const unsigned long& n, const unsigned long& m) :
       DenseMatrix<std::complex<double>>(n, m),
       Index(0),
       LU_factors(0),
@@ -207,9 +207,9 @@ namespace oomph
 
     /// \short Constructor to build a matrix with n rows and m columns,
     /// with initial value initial_val
-    DenseComplexMatrix(const unsigned long &n,
-                       const unsigned long &m,
-                       const std::complex<double> &initial_val) :
+    DenseComplexMatrix(const unsigned long& n,
+                       const unsigned long& m,
+                       const std::complex<double>& initial_val) :
       DenseMatrix<std::complex<double>>(n, m, initial_val),
       Index(0),
       LU_factors(0),
@@ -218,13 +218,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    DenseComplexMatrix(const DenseComplexMatrix &matrix)
+    DenseComplexMatrix(const DenseComplexMatrix& matrix)
     {
       BrokenCopy::broken_copy("DenseComplexMatrix");
     }
 
     /// Broken assignment operator
-    void operator=(const DenseComplexMatrix &)
+    void operator=(const DenseComplexMatrix&)
     {
       BrokenCopy::broken_assign("DenseComplexMatrix");
     }
@@ -243,16 +243,16 @@ namespace oomph
 
     /// \short Overload the const version of the round-bracket access operator
     /// for read-only access.
-    inline std::complex<double> operator()(const unsigned long &i,
-                                           const unsigned long &j) const
+    inline std::complex<double> operator()(const unsigned long& i,
+                                           const unsigned long& j) const
     {
       return DenseMatrix<std::complex<double>>::get_entry(i, j);
     }
 
     /// \short Overload the non-const version of the round-bracket access
     /// operator for read-write access
-    inline std::complex<double> &operator()(const unsigned long &i,
-                                            const unsigned long &j)
+    inline std::complex<double>& operator()(const unsigned long& i,
+                                            const unsigned long& j)
     {
       return DenseMatrix<std::complex<double>>::entry(i, j);
     }
@@ -267,21 +267,21 @@ namespace oomph
 
     /// \short Overload the LU back substitution. Note that the rhs will be
     /// overwritten with the solution vector
-    void lubksub(Vector<std::complex<double>> &rhs);
+    void lubksub(Vector<std::complex<double>>& rhs);
 
     /// \short Find the residual of Ax=b, ie r=b-Ax for the
     /// "solution" x.
-    void residual(const Vector<std::complex<double>> &x,
-                  const Vector<std::complex<double>> &rhs,
-                  Vector<std::complex<double>> &residual);
+    void residual(const Vector<std::complex<double>>& x,
+                  const Vector<std::complex<double>>& rhs,
+                  Vector<std::complex<double>>& residual);
 
     /// \short Multiply the matrix by the vector x: soln=Ax
-    void multiply(const Vector<std::complex<double>> &x,
-                  Vector<std::complex<double>> &soln);
+    void multiply(const Vector<std::complex<double>>& x,
+                  Vector<std::complex<double>>& soln);
 
     /// \short Multiply the  transposed matrix by the vector x: soln=A^T x
-    void multiply_transpose(const Vector<std::complex<double>> &x,
-                            Vector<std::complex<double>> &soln);
+    void multiply_transpose(const Vector<std::complex<double>>& x,
+                            Vector<std::complex<double>>& soln);
   };
 
   //=================================================================
@@ -293,7 +293,7 @@ namespace oomph
   {
   private:
     /// \short Storage for the LU factors as required by SuperLU
-    void *F_factors;
+    void* F_factors;
 
     /// \short  Info flag for the SuperLU solver
     int Info;
@@ -309,11 +309,11 @@ namespace oomph
     /// \short Constructor: Pass vector of values, vector of column indices,
     /// vector of row starts and number of columns (can be suppressed
     /// for square matrices)
-    CRComplexMatrix(const Vector<std::complex<double>> &value,
-                    const Vector<int> &column_index,
-                    const Vector<int> &row_start,
-                    const unsigned long &n,
-                    const unsigned long &m) :
+    CRComplexMatrix(const Vector<std::complex<double>>& value,
+                    const Vector<int>& column_index,
+                    const Vector<int>& row_start,
+                    const unsigned long& n,
+                    const unsigned long& m) :
       CRMatrix<std::complex<double>>(value, column_index, row_start, n, m),
       F_factors(0),
       Info(0)
@@ -323,13 +323,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    CRComplexMatrix(const CRComplexMatrix &matrix)
+    CRComplexMatrix(const CRComplexMatrix& matrix)
     {
       BrokenCopy::broken_copy("CRComplexMatrix");
     }
 
     /// Broken assignment operator
-    void operator=(const CRComplexMatrix &)
+    void operator=(const CRComplexMatrix&)
     {
       BrokenCopy::broken_assign("CRComplexMatrix");
     }
@@ -367,8 +367,8 @@ namespace oomph
     }
 
     /// Overload the round-bracket access operator for read-only access
-    inline std::complex<double> operator()(const unsigned long &i,
-                                           const unsigned long &j) const
+    inline std::complex<double> operator()(const unsigned long& i,
+                                           const unsigned long& j) const
     {
       return CRMatrix<std::complex<double>>::get_entry(i, j);
     }
@@ -377,23 +377,23 @@ namespace oomph
     int ludecompose();
 
     /// \short LU back solve for given RHS
-    void lubksub(Vector<std::complex<double>> &rhs);
+    void lubksub(Vector<std::complex<double>>& rhs);
 
     /// \short LU clean up (perhaps this should happen in the destructor)
     void clean_up_memory();
 
     /// \short Find the residual to x of Ax=b, i.e. r=b-Ax
-    void residual(const Vector<std::complex<double>> &x,
-                  const Vector<std::complex<double>> &b,
-                  Vector<std::complex<double>> &residual);
+    void residual(const Vector<std::complex<double>>& x,
+                  const Vector<std::complex<double>>& b,
+                  Vector<std::complex<double>>& residual);
 
     /// \short Multiply the matrix by the vector x: soln=Ax
-    void multiply(const Vector<std::complex<double>> &x,
-                  Vector<std::complex<double>> &soln);
+    void multiply(const Vector<std::complex<double>>& x,
+                  Vector<std::complex<double>>& soln);
 
     /// \short Multiply the  transposed matrix by the vector x: soln=A^T x
-    void multiply_transpose(const Vector<std::complex<double>> &x,
-                            Vector<std::complex<double>> &soln);
+    void multiply_transpose(const Vector<std::complex<double>>& x,
+                            Vector<std::complex<double>>& soln);
 
   protected:
     /// \short Flag to indicate if stats are to be displayed during
@@ -410,7 +410,7 @@ namespace oomph
   {
   private:
     /// \short Storage for the LU factors as required by SuperLU
-    void *F_factors;
+    void* F_factors;
 
     /// \short Info flag for the SuperLU solver
     int Info;
@@ -433,11 +433,11 @@ namespace oomph
     /// for square matrices). Number of nonzero entries is read
     /// off from value, so make sure the vector has been shrunk
     /// to its correct length.
-    CCComplexMatrix(const Vector<std::complex<double>> &value,
-                    const Vector<int> &row_index,
-                    const Vector<int> &column_start,
-                    const unsigned long &n,
-                    const unsigned long &m) :
+    CCComplexMatrix(const Vector<std::complex<double>>& value,
+                    const Vector<int>& row_index,
+                    const Vector<int>& column_start,
+                    const unsigned long& n,
+                    const unsigned long& m) :
       CCMatrix<std::complex<double>>(value, row_index, column_start, n, m),
       F_factors(0),
       Info(0)
@@ -447,13 +447,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    CCComplexMatrix(const CCComplexMatrix &matrix)
+    CCComplexMatrix(const CCComplexMatrix& matrix)
     {
       BrokenCopy::broken_copy("CCComplexMatrix");
     }
 
     /// Broken assignment operator
-    void operator=(const CCComplexMatrix &)
+    void operator=(const CCComplexMatrix&)
     {
       BrokenCopy::broken_assign("CCComplexMatrix");
     }
@@ -492,8 +492,8 @@ namespace oomph
 
     /// \short Overload the round-bracket access operator to provide
     /// read-only (const) access to the data
-    inline std::complex<double> operator()(const unsigned long &i,
-                                           const unsigned long &j) const
+    inline std::complex<double> operator()(const unsigned long& i,
+                                           const unsigned long& j) const
     {
       return CCMatrix<std::complex<double>>::get_entry(i, j);
     }
@@ -502,23 +502,23 @@ namespace oomph
     int ludecompose();
 
     /// \short LU back solve for given RHS
-    void lubksub(Vector<std::complex<double>> &rhs);
+    void lubksub(Vector<std::complex<double>>& rhs);
 
     /// \short LU clean up (perhaps this should happen in the destructor)
     void clean_up_memory();
 
     /// \short Find the residulal to x of Ax=b, ie r=b-Ax
-    void residual(const Vector<std::complex<double>> &x,
-                  const Vector<std::complex<double>> &b,
-                  Vector<std::complex<double>> &residual);
+    void residual(const Vector<std::complex<double>>& x,
+                  const Vector<std::complex<double>>& b,
+                  Vector<std::complex<double>>& residual);
 
     /// \short Multiply the matrix by the vector x: soln=Ax
-    void multiply(const Vector<std::complex<double>> &x,
-                  Vector<std::complex<double>> &soln);
+    void multiply(const Vector<std::complex<double>>& x,
+                  Vector<std::complex<double>>& soln);
 
     /// \short Multiply the  transposed matrix by the vector x: soln=A^T x
-    void multiply_transpose(const Vector<std::complex<double>> &x,
-                            Vector<std::complex<double>> &soln);
+    void multiply_transpose(const Vector<std::complex<double>>& x,
+                            Vector<std::complex<double>>& soln);
   };
 } // namespace oomph
 

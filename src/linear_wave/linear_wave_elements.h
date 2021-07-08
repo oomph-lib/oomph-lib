@@ -60,21 +60,21 @@ namespace oomph
   public:
     /// \short Function pointer to source function fct(x,f(x)) --
     /// x is a Vector!
-    typedef void (*LinearWaveSourceFctPt)(const double &time,
-                                          const Vector<double> &x,
-                                          double &u);
+    typedef void (*LinearWaveSourceFctPt)(const double& time,
+                                          const Vector<double>& x,
+                                          double& u);
 
     /// Constructor (must initialise the Source_fct_pt to null)
     LinearWaveEquations() : Source_fct_pt(0) {}
 
     /// Broken copy constructor
-    LinearWaveEquations(const LinearWaveEquations &dummy)
+    LinearWaveEquations(const LinearWaveEquations& dummy)
     {
       BrokenCopy::broken_copy("LinearWaveEquations");
     }
 
     /// Broken assignment operator
-    void operator=(const LinearWaveEquations &)
+    void operator=(const LinearWaveEquations&)
     {
       BrokenCopy::broken_assign("LinearWaveEquations");
     }
@@ -93,10 +93,10 @@ namespace oomph
 
     /// \short du/dt at local node n.
     /// Uses suitably interpolated value for hanging nodes.
-    double du_dt_lin_wave(const unsigned &n) const
+    double du_dt_lin_wave(const unsigned& n) const
     {
       // Get the data's timestepper
-      TimeStepper *time_stepper_pt = node_pt(n)->time_stepper_pt();
+      TimeStepper* time_stepper_pt = node_pt(n)->time_stepper_pt();
 
       // Initialise d^2u/dt^2
       double dudt = 0.0;
@@ -121,10 +121,10 @@ namespace oomph
 
     /// \short d^2u/dt^2 at local node n.
     /// Uses suitably interpolated value for hanging nodes.
-    double d2u_dt2_lin_wave(const unsigned &n) const
+    double d2u_dt2_lin_wave(const unsigned& n) const
     {
       // Get the data's timestepper
-      TimeStepper *time_stepper_pt = node_pt(n)->time_stepper_pt();
+      TimeStepper* time_stepper_pt = node_pt(n)->time_stepper_pt();
 
       // Initialise d^2u/dt^2
       double ddudt = 0.0;
@@ -148,7 +148,7 @@ namespace oomph
     }
 
     /// Output with default number of plot points
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       unsigned nplot = 5;
       output(outfile, nplot);
@@ -156,10 +156,10 @@ namespace oomph
 
     /// \short Output FE representation of soln: x,y,u or x,y,z,u at
     /// n_plot^DIM plot points
-    void output(std::ostream &outfile, const unsigned &nplot);
+    void output(std::ostream& outfile, const unsigned& nplot);
 
     /// Output with default number of plot points
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       unsigned nplot = 5;
       output(file_pt, nplot);
@@ -167,36 +167,36 @@ namespace oomph
 
     /// \short Output FE representation of soln: x,y,u or x,y,z,u at
     /// n_plot^DIM plot points
-    void output(FILE *file_pt, const unsigned &nplot);
+    void output(FILE* file_pt, const unsigned& nplot);
 
     /// Output exact soln: x,y,u_exact or x,y,z,u_exact at nplot^DIM plot points
-    void output_fct(std::ostream &outfile,
-                    const unsigned &nplot,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& nplot,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
 
     /// \short Output exact soln: x,y,u_exact or x,y,z,u_exact at
     /// nplot^DIM plot points (time-dependent version)
     virtual void output_fct(
-      std::ostream &outfile,
-      const unsigned &nplot,
-      const double &time,
+      std::ostream& outfile,
+      const unsigned& nplot,
+      const double& time,
       FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt);
 
     /// Get error against and norm of exact solution
-    void compute_error(std::ostream &outfile,
+    void compute_error(std::ostream& outfile,
                        FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-                       double &error,
-                       double &norm);
+                       double& error,
+                       double& norm);
 
     /// Get error against and norm of exact solution
-    void compute_error(std::ostream &outfile,
+    void compute_error(std::ostream& outfile,
                        FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
-                       const double &time,
-                       double &error,
-                       double &norm);
+                       const double& time,
+                       double& error,
+                       double& norm);
 
     /// Access function: Pointer to source function
-    LinearWaveSourceFctPt &source_fct_pt()
+    LinearWaveSourceFctPt& source_fct_pt()
     {
       return Source_fct_pt;
     }
@@ -209,10 +209,10 @@ namespace oomph
 
     /// \short Get source term at continous time t and (Eulerian) position x.
     /// Virtual so it can be overloaded in derived multiphysics elements.
-    inline void get_source_lin_wave(const double &t,
-                                    const unsigned &ipt,
-                                    const Vector<double> &x,
-                                    double &source) const
+    inline void get_source_lin_wave(const double& t,
+                                    const unsigned& ipt,
+                                    const Vector<double>& x,
+                                    double& source) const
     {
       // If no source function has been set, return zero
       if (Source_fct_pt == 0)
@@ -227,7 +227,7 @@ namespace oomph
     }
 
     /// Get flux: flux[i] = du/dx_i
-    void get_flux(const Vector<double> &s, Vector<double> &flux) const
+    void get_flux(const Vector<double>& s, Vector<double>& flux) const
     {
       // Find out how many nodes there are in the element
       unsigned n_node = nnode();
@@ -260,7 +260,7 @@ namespace oomph
     }
 
     /// Compute element residual Vector (wrapper)
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Call the generic residuals function with flag set to 0
       // using the dummy matrix argument
@@ -269,15 +269,15 @@ namespace oomph
     }
 
     /// Compute element residual Vector and element Jacobian matrix (wrapper)
-    virtual void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                                  DenseMatrix<double> &jacobian)
+    virtual void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                                  DenseMatrix<double>& jacobian)
     {
       // Call the generic routine with the flag set to 1
       fill_in_generic_residual_contribution_lin_wave(residuals, jacobian, 1);
     }
 
     /// Return FE representation of function value u(s) at local coordinate s
-    inline double interpolated_u_lin_wave(const Vector<double> &s) const
+    inline double interpolated_u_lin_wave(const Vector<double>& s) const
     {
       // Find number of nodes
       unsigned n_node = nnode();
@@ -304,7 +304,7 @@ namespace oomph
     }
 
     /// Return FE representation of function value u(s) at local coordinate s
-    inline double interpolated_du_dt_lin_wave(const Vector<double> &s) const
+    inline double interpolated_du_dt_lin_wave(const Vector<double>& s) const
     {
       // Find number of nodes
       unsigned n_node = nnode();
@@ -328,7 +328,7 @@ namespace oomph
     }
 
     /// Return FE representation of function value u(s) at local coordinate s
-    inline double interpolated_d2u_dt2_lin_wave(const Vector<double> &s) const
+    inline double interpolated_d2u_dt2_lin_wave(const Vector<double>& s) const
     {
       // Find number of nodes
       unsigned n_node = nnode();
@@ -358,25 +358,25 @@ namespace oomph
     /// \short Shape/test functions and derivs w.r.t. to global coords at
     /// local coord. s; return  Jacobian of mapping
     virtual double dshape_and_dtest_eulerian_lin_wave(
-      const Vector<double> &s,
-      Shape &psi,
-      DShape &dpsidx,
-      Shape &test,
-      DShape &dtestdx) const = 0;
+      const Vector<double>& s,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const = 0;
 
     /// \short Shape/test functions and derivs w.r.t. to global coords at
     /// integration point ipt; return  Jacobian of mapping
     virtual double dshape_and_dtest_eulerian_at_knot_lin_wave(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidx,
-      Shape &test,
-      DShape &dtestdx) const = 0;
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const = 0;
 
     /// \short Compute element residual Vector only (if flag=and/or element
     /// Jacobian matrix
     virtual void fill_in_generic_residual_contribution_lin_wave(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag);
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
 
     /// Pointer to source function:
     LinearWaveSourceFctPt Source_fct_pt;
@@ -412,56 +412,56 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    QLinearWaveElement(const QLinearWaveElement<DIM, NNODE_1D> &dummy)
+    QLinearWaveElement(const QLinearWaveElement<DIM, NNODE_1D>& dummy)
     {
       BrokenCopy::broken_copy("QLinearWaveElement");
     }
 
     /// Broken assignment operator
-    void operator=(const QLinearWaveElement<DIM, NNODE_1D> &)
+    void operator=(const QLinearWaveElement<DIM, NNODE_1D>&)
     {
       BrokenCopy::broken_assign("QLinearWaveElement");
     }
 
     /// \short  Required  # of `values' (pinned or dofs)
     /// at node n
-    inline unsigned required_nvalue(const unsigned &n) const
+    inline unsigned required_nvalue(const unsigned& n) const
     {
       return Initial_Nvalue[n];
     }
 
     /// \short Output function:
     ///  x,y,u   or    x,y,z,u
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       LinearWaveEquations<DIM>::output(outfile);
     }
 
     ///  \short Output function:
     ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       LinearWaveEquations<DIM>::output(outfile, n_plot);
     }
 
     /// \short Output function:
     ///  x,y,u   or    x,y,z,u
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       LinearWaveEquations<DIM>::output(file_pt);
     }
 
     ///  \short Output function:
     ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       LinearWaveEquations<DIM>::output(file_pt, n_plot);
     }
 
     /// \short Output function for an exact solution:
     ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
-    void output_fct(std::ostream &outfile,
-                    const unsigned &n_plot,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& n_plot,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
     {
       LinearWaveEquations<DIM>::output_fct(outfile, n_plot, exact_soln_pt);
@@ -470,9 +470,9 @@ namespace oomph
     /// \short Output function for a time-dependent exact solution.
     ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
     /// (Calls the steady version)
-    void output_fct(std::ostream &outfile,
-                    const unsigned &n_plot,
-                    const double &time,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& n_plot,
+                    const double& time,
                     FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
     {
       LinearWaveEquations<DIM>::output_fct(
@@ -482,20 +482,20 @@ namespace oomph
   protected:
     /// Shape, test functions & derivs. w.r.t. to global coords. Return
     /// Jacobian.
-    inline double dshape_and_dtest_eulerian_lin_wave(const Vector<double> &s,
-                                                     Shape &psi,
-                                                     DShape &dpsidx,
-                                                     Shape &test,
-                                                     DShape &dtestdx) const;
+    inline double dshape_and_dtest_eulerian_lin_wave(const Vector<double>& s,
+                                                     Shape& psi,
+                                                     DShape& dpsidx,
+                                                     Shape& test,
+                                                     DShape& dtestdx) const;
 
     /// \short Shape, test functions & derivs. w.r.t. to global coords. at
     /// integration point ipt. Return Jacobian.
     inline double dshape_and_dtest_eulerian_at_knot_lin_wave(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidx,
-      Shape &test,
-      DShape &dtestdx) const;
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const;
   };
 
   // Inline functions:
@@ -508,11 +508,11 @@ namespace oomph
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
   double QLinearWaveElement<DIM, NNODE_1D>::dshape_and_dtest_eulerian_lin_wave(
-    const Vector<double> &s,
-    Shape &psi,
-    DShape &dpsidx,
-    Shape &test,
-    DShape &dtestdx) const
+    const Vector<double>& s,
+    Shape& psi,
+    DShape& dpsidx,
+    Shape& test,
+    DShape& dtestdx) const
   {
     // Call the geometrical shape functions and derivatives
     double J = this->dshape_eulerian(s, psi, dpsidx);
@@ -540,11 +540,11 @@ namespace oomph
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
   double QLinearWaveElement<DIM, NNODE_1D>::
-    dshape_and_dtest_eulerian_at_knot_lin_wave(const unsigned &ipt,
-                                               Shape &psi,
-                                               DShape &dpsidx,
-                                               Shape &test,
-                                               DShape &dtestdx) const
+    dshape_and_dtest_eulerian_at_knot_lin_wave(const unsigned& ipt,
+                                               Shape& psi,
+                                               DShape& dpsidx,
+                                               Shape& test,
+                                               DShape& dtestdx) const
   {
     // Call the geometrical shape functions and derivatives
     double J = this->dshape_eulerian_at_knot(ipt, psi, dpsidx);

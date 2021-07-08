@@ -47,13 +47,13 @@ namespace oomph
     ErrorEstimator() {}
 
     /// Broken copy constructor
-    ErrorEstimator(const ErrorEstimator &)
+    ErrorEstimator(const ErrorEstimator&)
     {
       BrokenCopy::broken_copy("ErrorEstimator");
     }
 
     /// Broken assignment operator
-    void operator=(const ErrorEstimator &)
+    void operator=(const ErrorEstimator&)
     {
       BrokenCopy::broken_assign("ErrorEstimator");
     }
@@ -63,7 +63,7 @@ namespace oomph
 
     /// \short Compute the elemental error-measures for a given mesh
     /// and store them in a vector.
-    void get_element_errors(Mesh *&mesh_pt, Vector<double> &elemental_error)
+    void get_element_errors(Mesh*& mesh_pt, Vector<double>& elemental_error)
     {
       // Create dummy doc info object and switch off output
       DocInfo doc_info;
@@ -74,9 +74,9 @@ namespace oomph
 
     /// \short Compute the elemental error measures for a given mesh
     /// and store them in a vector. Doc errors etc.
-    virtual void get_element_errors(Mesh *&mesh_pt,
-                                    Vector<double> &elemental_error,
-                                    DocInfo &doc_info) = 0;
+    virtual void get_element_errors(Mesh*& mesh_pt,
+                                    Vector<double>& elemental_error,
+                                    DocInfo& doc_info) = 0;
   };
 
   //========================================================================
@@ -90,13 +90,13 @@ namespace oomph
     ElementWithZ2ErrorEstimator() {}
 
     /// Broken copy constructor
-    ElementWithZ2ErrorEstimator(const ElementWithZ2ErrorEstimator &)
+    ElementWithZ2ErrorEstimator(const ElementWithZ2ErrorEstimator&)
     {
       BrokenCopy::broken_copy("ElementWithZ2ErrorEstimator");
     }
 
     /// Broken assignment operator
-    void operator=(const ElementWithZ2ErrorEstimator &)
+    void operator=(const ElementWithZ2ErrorEstimator&)
     {
       BrokenCopy::broken_assign("ElementWithZ2ErrorEstimator");
     }
@@ -117,15 +117,15 @@ namespace oomph
     }
 
     /// \short Z2 'flux' terms for Z2 error estimation
-    virtual void get_Z2_flux(const Vector<double> &s, Vector<double> &flux) = 0;
+    virtual void get_Z2_flux(const Vector<double>& s, Vector<double>& flux) = 0;
 
     /// \short Plot the error when compared against a given exact flux.
     /// Also calculates the norm of the error and that of the exact flux.
     virtual void compute_exact_Z2_error(
-      std::ostream &outfile,
+      std::ostream& outfile,
       FiniteElement::SteadyExactSolutionFctPt exact_flux_pt,
-      double &error,
-      double &norm)
+      double& error,
+      double& norm)
     {
       std::string error_message =
         "compute_exact_Z2_error undefined for this element \n";
@@ -138,14 +138,14 @@ namespace oomph
     /// \short Return the compound flux index of each flux component
     /// The default (do nothing behaviour) will mean that all indices
     /// remain at the default value zero.
-    virtual void get_Z2_compound_flux_indices(Vector<unsigned> &flux_index) {}
+    virtual void get_Z2_compound_flux_indices(Vector<unsigned>& flux_index) {}
 
     /// \short Number of vertex nodes in the element
     virtual unsigned nvertex_node() const = 0;
 
     /// \short Pointer to the j-th vertex node in the element. Needed for
     /// efficient patch assmbly
-    virtual Node *vertex_node_pt(const unsigned &j) const = 0;
+    virtual Node* vertex_node_pt(const unsigned& j) const = 0;
 
     /// \short Order of recovery shape functions
     virtual unsigned nrecovery_order() = 0;
@@ -153,7 +153,7 @@ namespace oomph
     /// \short Return the geometric jacobian (should be overloaded in
     /// cylindrical and spherical geometries).
     /// Default value one is suitable for Cartesian coordinates
-    virtual double geometric_jacobian(const Vector<double> &x)
+    virtual double geometric_jacobian(const Vector<double>& x)
     {
       return 1.0;
     }
@@ -299,10 +299,10 @@ namespace oomph
   {
   public:
     /// \short Function pointer to combined error estimator function
-    typedef double (*CombinedErrorEstimateFctPt)(const Vector<double> &errors);
+    typedef double (*CombinedErrorEstimateFctPt)(const Vector<double>& errors);
 
     /// Constructor: Set order of recovery shape functions
-    Z2ErrorEstimator(const unsigned &recovery_order) :
+    Z2ErrorEstimator(const unsigned& recovery_order) :
       Recovery_order(recovery_order),
       Recovery_order_from_first_element(false),
       Reference_flux_norm(0.0),
@@ -322,13 +322,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    Z2ErrorEstimator(const Z2ErrorEstimator &)
+    Z2ErrorEstimator(const Z2ErrorEstimator&)
     {
       BrokenCopy::broken_copy("Z2ErrorEstimator");
     }
 
     /// Broken assignment operator
-    void operator=(const Z2ErrorEstimator &)
+    void operator=(const Z2ErrorEstimator&)
     {
       BrokenCopy::broken_assign("Z2ErrorEstimator");
     }
@@ -338,7 +338,7 @@ namespace oomph
 
     /// \short Compute the elemental error measures for a given mesh
     /// and store them in a vector.
-    void get_element_errors(Mesh *&mesh_pt, Vector<double> &elemental_error)
+    void get_element_errors(Mesh*& mesh_pt, Vector<double>& elemental_error)
     {
       // Create dummy doc info object and switch off output
       DocInfo doc_info;
@@ -352,12 +352,12 @@ namespace oomph
     /// If doc_info.enable_doc(), doc FE and recovered fluxes in
     /// - flux_fe*.dat
     /// - flux_rec*.dat
-    void get_element_errors(Mesh *&mesh_pt,
-                            Vector<double> &elemental_error,
-                            DocInfo &doc_info);
+    void get_element_errors(Mesh*& mesh_pt,
+                            Vector<double>& elemental_error,
+                            DocInfo& doc_info);
 
     /// Access function for order of recovery polynomials
-    unsigned &recovery_order()
+    unsigned& recovery_order()
     {
       return Recovery_order;
     }
@@ -369,7 +369,7 @@ namespace oomph
     }
 
     /// Access function: Pointer to combined error estimate function
-    CombinedErrorEstimateFctPt &combined_error_fct_pt()
+    CombinedErrorEstimateFctPt& combined_error_fct_pt()
     {
       return Combined_error_fct_pt;
     }
@@ -384,13 +384,13 @@ namespace oomph
     /// \short Setup patches: For each vertex node pointed to by nod_pt,
     /// adjacent_elements_pt[nod_pt] contains the pointer to the vector that
     /// contains the pointers to the elements that the node is part of.
-    void setup_patches(Mesh *&mesh_pt,
-                       std::map<Node *, Vector<ElementWithZ2ErrorEstimator *> *>
-                         &adjacent_elements_pt,
-                       Vector<Node *> &vertex_node_pt);
+    void setup_patches(Mesh*& mesh_pt,
+                       std::map<Node*, Vector<ElementWithZ2ErrorEstimator*>*>&
+                         adjacent_elements_pt,
+                       Vector<Node*>& vertex_node_pt);
 
     /// Access function for prescribed reference flux norm
-    double &reference_flux_norm()
+    double& reference_flux_norm()
     {
       return Reference_flux_norm;
     }
@@ -402,7 +402,7 @@ namespace oomph
     }
 
     /// Return a combined error estimate from all compound errors
-    double get_combined_error_estimate(const Vector<double> &compound_error);
+    double get_combined_error_estimate(const Vector<double>& compound_error);
 
   private:
     /// \short Given the vector of elements that make up a patch,
@@ -411,29 +411,29 @@ namespace oomph
     /// the matrix of recovered flux coefficients and return
     /// a pointer to it.
     void get_recovered_flux_in_patch(
-      const Vector<ElementWithZ2ErrorEstimator *> &patch_el_pt,
-      const unsigned &num_recovery_terms,
-      const unsigned &num_flux_terms,
-      const unsigned &dim,
-      DenseMatrix<double> *&recovered_flux_coefficient_pt);
+      const Vector<ElementWithZ2ErrorEstimator*>& patch_el_pt,
+      const unsigned& num_recovery_terms,
+      const unsigned& num_flux_terms,
+      const unsigned& dim,
+      DenseMatrix<double>*& recovered_flux_coefficient_pt);
 
     /// \short Return number of coefficients for expansion of recovered fluxes
     /// for given spatial dimension of elements.
     /// (We use complete polynomials of the specified given order.)
-    unsigned nrecovery_terms(const unsigned &dim);
+    unsigned nrecovery_terms(const unsigned& dim);
 
     /// \short Recovery shape functions as functions of the global, Eulerian
     /// coordinate x of dimension dim.
     /// The recovery shape functions are  complete polynomials of
     /// the order specified by Recovery_order.
-    void shape_rec(const Vector<double> &x,
-                   const unsigned &dim,
-                   Vector<double> &psi_r);
+    void shape_rec(const Vector<double>& x,
+                   const unsigned& dim,
+                   Vector<double>& psi_r);
 
     /// \short Integation scheme associated with the recovery shape functions
     /// must be of sufficiently high order to integrate the mass matrix
     /// associated with the recovery shape functions
-    Integral *integral_rec(const unsigned &dim, const bool &is_q_mesh);
+    Integral* integral_rec(const unsigned& dim, const bool& is_q_mesh);
 
     /// Order of recovery polynomials
     unsigned Recovery_order;
@@ -443,11 +443,11 @@ namespace oomph
     bool Recovery_order_from_first_element;
 
     /// Doc flux and recovered flux
-    void doc_flux(Mesh *mesh_pt,
-                  const unsigned &num_flux_terms,
-                  MapMatrixMixed<Node *, int, double> &rec_flux_map,
-                  const Vector<double> &elemental_error,
-                  DocInfo &doc_info);
+    void doc_flux(Mesh* mesh_pt,
+                  const unsigned& num_flux_terms,
+                  MapMatrixMixed<Node*, int, double>& rec_flux_map,
+                  const Vector<double>& elemental_error,
+                  DocInfo& doc_info);
 
     /// Prescribed reference flux norm
     double Reference_flux_norm;
@@ -476,10 +476,10 @@ namespace oomph
     /// Optional boolean flag (defaulting to false) indicates that
     /// refinement decision is based on Lagrangian coordinates -- only
     /// applicable to solid meshes.
-    DummyErrorEstimator(Mesh *mesh_pt,
-                        const Vector<unsigned> &elements_to_refine,
-                        const unsigned &central_node_number,
-                        const bool &use_lagrangian_coordinates = false) :
+    DummyErrorEstimator(Mesh* mesh_pt,
+                        const Vector<unsigned>& elements_to_refine,
+                        const unsigned& central_node_number,
+                        const bool& use_lagrangian_coordinates = false) :
       Use_lagrangian_coordinates(use_lagrangian_coordinates),
       Central_node_number(central_node_number)
     {
@@ -508,8 +508,8 @@ namespace oomph
       unsigned dim = mesh_pt->finite_element_pt(0)->node_pt(0)->ndim();
       if (use_lagrangian_coordinates)
       {
-        SolidNode *solid_nod_pt =
-          dynamic_cast<SolidNode *>(mesh_pt->finite_element_pt(0)->node_pt(0));
+        SolidNode* solid_nod_pt =
+          dynamic_cast<SolidNode*>(mesh_pt->finite_element_pt(0)->node_pt(0));
         if (solid_nod_pt != 0)
         {
           dim = solid_nod_pt->nlagrangian();
@@ -522,18 +522,18 @@ namespace oomph
       {
         Region_low_bound[e].resize(dim, 1.0e20);
         Region_upp_bound[e].resize(dim, -1.0e20);
-        FiniteElement *el_pt =
+        FiniteElement* el_pt =
           mesh_pt->finite_element_pt(elements_to_refine[e]);
         unsigned nnod = el_pt->nnode();
         for (unsigned j = 0; j < nnod; j++)
         {
-          Node *nod_pt = el_pt->node_pt(j);
+          Node* nod_pt = el_pt->node_pt(j);
           for (unsigned i = 0; i < dim; i++)
           {
             double x = nod_pt->x(i);
             if (use_lagrangian_coordinates)
             {
-              SolidNode *solid_nod_pt = dynamic_cast<SolidNode *>(nod_pt);
+              SolidNode* solid_nod_pt = dynamic_cast<SolidNode*>(nod_pt);
               if (solid_nod_pt != 0)
               {
                 x = solid_nod_pt->xi(i);
@@ -560,11 +560,11 @@ namespace oomph
     /// Optional boolean flag (defaulting to false) indicates that
     /// refinement decision is based on Lagrangian coordinates -- only
     /// applicable to solid meshes.
-    DummyErrorEstimator(Mesh *mesh_pt,
-                        const Vector<double> &lower_left,
-                        const Vector<double> &upper_right,
-                        const unsigned &central_node_number,
-                        const bool &use_lagrangian_coordinates = false) :
+    DummyErrorEstimator(Mesh* mesh_pt,
+                        const Vector<double>& lower_left,
+                        const Vector<double>& upper_right,
+                        const unsigned& central_node_number,
+                        const bool& use_lagrangian_coordinates = false) :
       Use_lagrangian_coordinates(use_lagrangian_coordinates),
       Central_node_number(central_node_number)
     {
@@ -586,13 +586,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    DummyErrorEstimator(const DummyErrorEstimator &)
+    DummyErrorEstimator(const DummyErrorEstimator&)
     {
       BrokenCopy::broken_copy("DummyErrorEstimator");
     }
 
     /// Broken assignment operator
-    void operator=(const DummyErrorEstimator &)
+    void operator=(const DummyErrorEstimator&)
     {
       BrokenCopy::broken_assign("DummyErrorEstimator");
     }
@@ -602,9 +602,9 @@ namespace oomph
 
     /// \short Compute the elemental error measures for a given mesh
     /// and store them in a vector. Doc errors etc.
-    virtual void get_element_errors(Mesh *&mesh_pt,
-                                    Vector<double> &elemental_error,
-                                    DocInfo &doc_info)
+    virtual void get_element_errors(Mesh*& mesh_pt,
+                                    Vector<double>& elemental_error,
+                                    DocInfo& doc_info)
     {
 #ifdef PARANOID
       if (doc_info.is_doc_enabled())
@@ -626,7 +626,7 @@ namespace oomph
 
         // Check if element is in the regions to be refined
         // (based on coords of its central node)
-        Node *nod_pt =
+        Node* nod_pt =
           mesh_pt->finite_element_pt(e)->node_pt(Central_node_number);
         for (unsigned r = 0; r < nregion; r++)
         {
@@ -637,7 +637,7 @@ namespace oomph
             double x = nod_pt->x(i);
             if (Use_lagrangian_coordinates)
             {
-              SolidNode *solid_nod_pt = dynamic_cast<SolidNode *>(nod_pt);
+              SolidNode* solid_nod_pt = dynamic_cast<SolidNode*>(nod_pt);
               if (solid_nod_pt != 0)
               {
                 x = solid_nod_pt->xi(i);

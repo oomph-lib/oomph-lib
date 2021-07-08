@@ -41,13 +41,13 @@ namespace oomph
   /// the inner and outer radius and the length of the tube
   //====================================================================
   template<class ELEMENT>
-  QuarterPipeMesh<ELEMENT>::QuarterPipeMesh(const unsigned &ntheta,
-                                            const unsigned &nr,
-                                            const unsigned &nz,
-                                            const double &rmin,
-                                            const double &rmax,
-                                            const double &length,
-                                            TimeStepper *time_stepper_pt) :
+  QuarterPipeMesh<ELEMENT>::QuarterPipeMesh(const unsigned& ntheta,
+                                            const unsigned& nr,
+                                            const unsigned& nz,
+                                            const double& rmin,
+                                            const double& rmax,
+                                            const double& length,
+                                            TimeStepper* time_stepper_pt) :
     SimpleCubicMesh<ELEMENT>(ntheta, nr, nz, 1.0, 1.0, length, time_stepper_pt)
   {
     // Mesh can only be built with 3D Qelements.
@@ -69,7 +69,7 @@ namespace oomph
     for (unsigned e = 0; e < nel; e++)
     {
       // Try to cast to FiniteElement
-      FiniteElement *el_pt = dynamic_cast<FiniteElement *>(this->element_pt(e));
+      FiniteElement* el_pt = dynamic_cast<FiniteElement*>(this->element_pt(e));
 
       // Set macro element pointer
       el_pt->set_macro_elem_pt(Domain_pt->macro_element_pt(e));
@@ -85,7 +85,7 @@ namespace oomph
     for (unsigned j = 0; j < nnod; j++)
     {
       // Pointer to node
-      Node *nod_pt = this->boundary_node_pt(b, j);
+      Node* nod_pt = this->boundary_node_pt(b, j);
 
       // Get the Eulerian coordinates
       double x = nod_pt->x(0);

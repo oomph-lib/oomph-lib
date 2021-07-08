@@ -64,8 +64,8 @@ namespace oomph
   public:
     /// \short Function pointer to pressure function fct(x,f(x)) --
     /// x is a Vector!
-    typedef void (*FoepplvonKarmanPressureFctPt)(const Vector<double> &x,
-                                                 double &f);
+    typedef void (*FoepplvonKarmanPressureFctPt)(const Vector<double>& x,
+                                                 double& f);
 
     /// \short Constructor (must initialise the Pressure_fct_pt and
     /// Airy_forcing_fct_pt to null). Also set physical parameters to their
@@ -81,13 +81,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    FoepplvonKarmanEquations(const FoepplvonKarmanEquations &dummy)
+    FoepplvonKarmanEquations(const FoepplvonKarmanEquations& dummy)
     {
       BrokenCopy::broken_copy("FoepplvonKarmanEquations");
     }
 
     /// Broken assignment operator
-    void operator=(const FoepplvonKarmanEquations &)
+    void operator=(const FoepplvonKarmanEquations&)
     {
       BrokenCopy::broken_assign("FoepplvonKarmanEquations");
     }
@@ -95,13 +95,13 @@ namespace oomph
     // Access functions for the physical constants
 
     /// Eta
-    const double &eta() const
+    const double& eta() const
     {
       return *Eta_pt;
     }
 
     /// Pointer to eta
-    double *&eta_pt()
+    double*& eta_pt()
     {
       return Eta_pt;
     }
@@ -110,7 +110,7 @@ namespace oomph
     /// volume control pressure as external data for this element.
     /// Only used for volume controlled problems in conjunction with
     /// FoepplvonKarmanVolumeConstraintElement.
-    void set_volume_constraint_pressure_data_as_external_data(Data *data_pt)
+    void set_volume_constraint_pressure_data_as_external_data(Data* data_pt)
     {
 #ifdef PARANOID
       if (data_pt->nvalue() != 1)
@@ -139,13 +139,13 @@ namespace oomph
     /// In derived multi-physics elements, this function should be overloaded
     /// to reflect the chosen storage scheme. Note that these equations require
     /// that the unknown is always stored at the same index at each node.
-    virtual inline unsigned nodal_index_fvk(const unsigned &i = 0) const
+    virtual inline unsigned nodal_index_fvk(const unsigned& i = 0) const
     {
       return i;
     }
 
     /// Output with default number of plot points
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       const unsigned n_plot = 5;
       output(outfile, n_plot);
@@ -153,10 +153,10 @@ namespace oomph
 
     /// \short Output FE representation of soln: x,y,w at
     /// n_plot^DIM plot points
-    void output(std::ostream &outfile, const unsigned &n_plot);
+    void output(std::ostream& outfile, const unsigned& n_plot);
 
     /// C_style output with default number of plot points
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       const unsigned n_plot = 5;
       output(file_pt, n_plot);
@@ -164,20 +164,20 @@ namespace oomph
 
     /// \short C-style output FE representation of soln: x,y,w at
     /// n_plot^DIM plot points
-    void output(FILE *file_pt, const unsigned &n_plot);
+    void output(FILE* file_pt, const unsigned& n_plot);
 
     /// Output exact soln: x,y,w_exact at n_plot^DIM plot points
-    void output_fct(std::ostream &outfile,
-                    const unsigned &n_plot,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& n_plot,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
 
     /// \short Output exact soln: x,y,w_exact at
     /// n_plot^DIM plot points (dummy time-dependent version to
     /// keep intel compiler happy)
     virtual void output_fct(
-      std::ostream &outfile,
-      const unsigned &n_plot,
-      const double &time,
+      std::ostream& outfile,
+      const unsigned& n_plot,
+      const double& time,
       FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
     {
       throw OomphLibError(
@@ -188,17 +188,17 @@ namespace oomph
     }
 
     /// Get error against and norm of exact solution
-    void compute_error(std::ostream &outfile,
+    void compute_error(std::ostream& outfile,
                        FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-                       double &error,
-                       double &norm);
+                       double& error,
+                       double& norm);
 
     /// Dummy, time dependent error checker
-    void compute_error(std::ostream &outfile,
+    void compute_error(std::ostream& outfile,
                        FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
-                       const double &time,
-                       double &error,
-                       double &norm)
+                       const double& time,
+                       double& error,
+                       double& norm)
     {
       throw OomphLibError(
         "There is no time-dependent compute_error() for Foeppl von Karman"
@@ -208,7 +208,7 @@ namespace oomph
     }
 
     /// Access function: Pointer to pressure function
-    FoepplvonKarmanPressureFctPt &pressure_fct_pt()
+    FoepplvonKarmanPressureFctPt& pressure_fct_pt()
     {
       return Pressure_fct_pt;
     }
@@ -220,7 +220,7 @@ namespace oomph
     }
 
     /// Access function: Pointer to Airy forcing function
-    FoepplvonKarmanPressureFctPt &airy_forcing_fct_pt()
+    FoepplvonKarmanPressureFctPt& airy_forcing_fct_pt()
     {
       return Airy_forcing_fct_pt;
     }
@@ -235,9 +235,9 @@ namespace oomph
     /// virtual to allow overloading in multi-physics problems where
     /// the strength of the pressure function might be determined by
     /// another system of equations.
-    inline virtual void get_pressure_fvk(const unsigned &ipt,
-                                         const Vector<double> &x,
-                                         double &pressure) const
+    inline virtual void get_pressure_fvk(const unsigned& ipt,
+                                         const Vector<double>& x,
+                                         double& pressure) const
     {
       // If no pressure function has been set, return zero
       if (Pressure_fct_pt == 0)
@@ -255,9 +255,9 @@ namespace oomph
     /// virtual to allow overloading in multi-physics problems where
     /// the strength of the pressure function might be determined by
     /// another system of equations.
-    inline virtual void get_airy_forcing_fvk(const unsigned &ipt,
-                                             const Vector<double> &x,
-                                             double &airy_forcing) const
+    inline virtual void get_airy_forcing_fvk(const unsigned& ipt,
+                                             const Vector<double>& x,
+                                             double& airy_forcing) const
     {
       // If no pressure function has been set, return zero
       if (Airy_forcing_fct_pt == 0)
@@ -272,8 +272,8 @@ namespace oomph
     }
 
     /// Get gradient of deflection: gradient[i] = dw/dx_i
-    void get_gradient_of_deflection(const Vector<double> &s,
-                                    Vector<double> &gradient) const
+    void get_gradient_of_deflection(const Vector<double>& s,
+                                    Vector<double>& gradient) const
     {
       // Find out how many nodes there are in the element
       const unsigned n_node = nnode();
@@ -306,7 +306,7 @@ namespace oomph
     }
 
     /// Fill in the residuals with this element's contribution
-    void fill_in_contribution_to_residuals(Vector<double> &residuals);
+    void fill_in_contribution_to_residuals(Vector<double>& residuals);
 
     // void fill_in_contribution_to_jacobian(Vector<double> &residuals,
     //                                      DenseMatrix<double> &jacobian);
@@ -314,7 +314,7 @@ namespace oomph
     /// \short Return FE representation of function value w_fvk(s)
     /// at local coordinate s (by default - if index > 0, returns
     /// FE representation of valued stored at index^th nodal index
-    inline double interpolated_w_fvk(const Vector<double> &s,
+    inline double interpolated_w_fvk(const Vector<double>& s,
                                      unsigned index = 0) const
     {
       // Find number of nodes
@@ -342,10 +342,10 @@ namespace oomph
     }
 
     /// Compute in-plane stresses
-    void interpolated_stress(const Vector<double> &s,
-                             double &sigma_xx,
-                             double &sigma_yy,
-                             double &sigma_xy);
+    void interpolated_stress(const Vector<double>& s,
+                             double& sigma_xx,
+                             double& sigma_yy,
+                             double& sigma_xy);
 
     /// \short Return the integral of the displacement over the current
     /// element, effectively calculating its contribution to the volume under
@@ -438,25 +438,25 @@ namespace oomph
   protected:
     /// \short Shape/test functions and derivs w.r.t. to global coords at
     /// local coord. s; return  Jacobian of mapping
-    virtual double dshape_and_dtest_eulerian_fvk(const Vector<double> &s,
-                                                 Shape &psi,
-                                                 DShape &dpsidx,
-                                                 Shape &test,
-                                                 DShape &dtestdx) const = 0;
+    virtual double dshape_and_dtest_eulerian_fvk(const Vector<double>& s,
+                                                 Shape& psi,
+                                                 DShape& dpsidx,
+                                                 Shape& test,
+                                                 DShape& dtestdx) const = 0;
 
     /// \short Shape/test functions and derivs w.r.t. to global coords at
     /// integration point ipt; return  Jacobian of mapping
     virtual double dshape_and_dtest_eulerian_at_knot_fvk(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidx,
-      Shape &test,
-      DShape &dtestdx) const = 0;
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const = 0;
 
     // Pointers to global physical constants
 
     /// Pointer to global eta
-    double *Eta_pt;
+    double* Eta_pt;
 
     /// Pointer to pressure function:
     FoepplvonKarmanPressureFctPt Pressure_fct_pt;
@@ -510,56 +510,56 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    QFoepplvonKarmanElement(const QFoepplvonKarmanElement<NNODE_1D> &dummy)
+    QFoepplvonKarmanElement(const QFoepplvonKarmanElement<NNODE_1D>& dummy)
     {
       BrokenCopy::broken_copy("QFoepplvonKarmanElement");
     }
 
     /// Broken assignment operator
-    void operator=(const QFoepplvonKarmanElement<NNODE_1D> &)
+    void operator=(const QFoepplvonKarmanElement<NNODE_1D>&)
     {
       BrokenCopy::broken_assign("QFoepplvonKarmanElement");
     }
 
     /// \short  Required  # of `values' (pinned or dofs)
     /// at node n
-    inline unsigned required_nvalue(const unsigned &n) const
+    inline unsigned required_nvalue(const unsigned& n) const
     {
       return Initial_Nvalue;
     }
 
     /// \short Output function:
     ///  x,y,w
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       FoepplvonKarmanEquations::output(outfile);
     }
 
     ///  \short Output function:
     ///   x,y,w at n_plot^DIM plot points
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       FoepplvonKarmanEquations::output(outfile, n_plot);
     }
 
     /// \short C-style output function:
     ///  x,y,w
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FoepplvonKarmanEquations::output(file_pt);
     }
 
     ///  \short C-style output function:
     ///   x,y,w at n_plot^DIM plot points
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       FoepplvonKarmanEquations::output(file_pt, n_plot);
     }
 
     /// \short Output function for an exact solution:
     ///  x,y,w_exact at n_plot^DIM plot points
-    void output_fct(std::ostream &outfile,
-                    const unsigned &n_plot,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& n_plot,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
     {
       FoepplvonKarmanEquations::output_fct(outfile, n_plot, exact_soln_pt);
@@ -568,9 +568,9 @@ namespace oomph
     /// \short Output function for a time-dependent exact solution.
     ///  x,y,w_exact at n_plot^DIM plot points
     /// (Calls the steady version)
-    void output_fct(std::ostream &outfile,
-                    const unsigned &n_plot,
-                    const double &time,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& n_plot,
+                    const double& time,
                     FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
     {
       FoepplvonKarmanEquations::output_fct(
@@ -580,19 +580,19 @@ namespace oomph
   protected:
     /// Shape, test functions & derivs. w.r.t. to global coords. Return
     /// Jacobian.
-    inline double dshape_and_dtest_eulerian_fvk(const Vector<double> &s,
-                                                Shape &psi,
-                                                DShape &dpsidx,
-                                                Shape &test,
-                                                DShape &dtestdx) const;
+    inline double dshape_and_dtest_eulerian_fvk(const Vector<double>& s,
+                                                Shape& psi,
+                                                DShape& dpsidx,
+                                                Shape& test,
+                                                DShape& dtestdx) const;
 
     /// \short Shape, test functions & derivs. w.r.t. to global coords. at
     /// integration point ipt. Return Jacobian.
-    inline double dshape_and_dtest_eulerian_at_knot_fvk(const unsigned &ipt,
-                                                        Shape &psi,
-                                                        DShape &dpsidx,
-                                                        Shape &test,
-                                                        DShape &dtestdx) const;
+    inline double dshape_and_dtest_eulerian_at_knot_fvk(const unsigned& ipt,
+                                                        Shape& psi,
+                                                        DShape& dpsidx,
+                                                        Shape& test,
+                                                        DShape& dtestdx) const;
   };
 
   // Inline functions:
@@ -605,11 +605,11 @@ namespace oomph
   //======================================================================
   template<unsigned NNODE_1D>
   double QFoepplvonKarmanElement<NNODE_1D>::dshape_and_dtest_eulerian_fvk(
-    const Vector<double> &s,
-    Shape &psi,
-    DShape &dpsidx,
-    Shape &test,
-    DShape &dtestdx) const
+    const Vector<double>& s,
+    Shape& psi,
+    DShape& dpsidx,
+    Shape& test,
+    DShape& dtestdx) const
   {
     // Call the geometrical shape functions and derivatives
     const double J = this->dshape_eulerian(s, psi, dpsidx);
@@ -630,11 +630,11 @@ namespace oomph
   //======================================================================
   template<unsigned NNODE_1D>
   double QFoepplvonKarmanElement<
-    NNODE_1D>::dshape_and_dtest_eulerian_at_knot_fvk(const unsigned &ipt,
-                                                     Shape &psi,
-                                                     DShape &dpsidx,
-                                                     Shape &test,
-                                                     DShape &dtestdx) const
+    NNODE_1D>::dshape_and_dtest_eulerian_at_knot_fvk(const unsigned& ipt,
+                                                     Shape& psi,
+                                                     DShape& dpsidx,
+                                                     Shape& test,
+                                                     DShape& dtestdx) const
   {
     // Call the geometrical shape functions and derivatives
     const double J = this->dshape_eulerian_at_knot(ipt, psi, dpsidx);
@@ -682,8 +682,7 @@ namespace oomph
     /// \short Specify the values associated with field fld.
     /// The information is returned in a vector of pairs which comprise
     /// the Data object and the value within it, that correspond to field fld.
-    Vector<std::pair<Data *, unsigned>> data_values_of_field(
-      const unsigned &fld)
+    Vector<std::pair<Data*, unsigned>> data_values_of_field(const unsigned& fld)
     {
 #ifdef PARANOID
       if (fld > 7)
@@ -699,7 +698,7 @@ namespace oomph
 
       // Create the vector
       unsigned nnod = this->nnode();
-      Vector<std::pair<Data *, unsigned>> data_values(nnod);
+      Vector<std::pair<Data*, unsigned>> data_values(nnod);
 
       // Loop over all nodes
       for (unsigned j = 0; j < nnod; j++)
@@ -720,7 +719,7 @@ namespace oomph
 
     /// \short Number of history values to be stored for fld-th field.
     /// (Note: count includes current value!)
-    unsigned nhistory_values_for_projection(const unsigned &fld)
+    unsigned nhistory_values_for_projection(const unsigned& fld)
     {
 #ifdef PARANOID
       if (fld > 7)
@@ -745,9 +744,9 @@ namespace oomph
 
     /// \short Return Jacobian of mapping and shape functions of field fld
     /// at local coordinate s
-    double jacobian_and_shape_of_field(const unsigned &fld,
-                                       const Vector<double> &s,
-                                       Shape &psi)
+    double jacobian_and_shape_of_field(const unsigned& fld,
+                                       const Vector<double>& s,
+                                       Shape& psi)
     {
 #ifdef PARANOID
       if (fld > 7)
@@ -771,9 +770,9 @@ namespace oomph
 
     /// \short Return interpolated field fld at local coordinate s, at time
     /// level t (t=0: present; t>0: history values)
-    double get_field(const unsigned &t,
-                     const unsigned &fld,
-                     const Vector<double> &s)
+    double get_field(const unsigned& t,
+                     const unsigned& fld,
+                     const Vector<double>& s)
     {
 #ifdef PARANOID
       if (fld > 7)
@@ -808,7 +807,7 @@ namespace oomph
     }
 
     /// Return number of values in field fld: One per node
-    unsigned nvalue_of_field(const unsigned &fld)
+    unsigned nvalue_of_field(const unsigned& fld)
     {
 #ifdef PARANOID
       if (fld > 7)
@@ -825,7 +824,7 @@ namespace oomph
     }
 
     /// Return local equation number of field fld of node j.
-    int local_equation(const unsigned &fld, const unsigned &j)
+    int local_equation(const unsigned& fld, const unsigned& j)
     {
 #ifdef PARANOID
       if (fld > 7)

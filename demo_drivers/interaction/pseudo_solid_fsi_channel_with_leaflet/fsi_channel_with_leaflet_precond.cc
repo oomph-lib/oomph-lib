@@ -81,7 +81,7 @@ namespace oomph
     /// 5 - y displacement (with lagr mult traction)\n
     /// 6 - z displacement (with lagr mult traction)\n
     void get_dof_numbers_for_unknowns(
-      std::list<std::pair<unsigned long, unsigned>> &dof_lookup_list) const
+      std::list<std::pair<unsigned long, unsigned>>& dof_lookup_list) const
     {
       // temporary pair (used to store dof lookup prior to being added to list
       std::pair<unsigned, unsigned> dof_lookup;
@@ -155,9 +155,9 @@ namespace LSC_Preconditioner_Helper
 {
   /// \short Create instance of Hypre preconditioner with settings that are
   /// appropriate for serial solution of Navier-Stokes momentum block
-  Preconditioner *set_hypre_preconditioner()
+  Preconditioner* set_hypre_preconditioner()
   {
-    HyprePreconditioner *hypre_preconditioner_pt = new HyprePreconditioner;
+    HyprePreconditioner* hypre_preconditioner_pt = new HyprePreconditioner;
     hypre_preconditioner_pt->set_amg_iterations(2);
     hypre_preconditioner_pt->amg_using_simple_smoothing();
     hypre_preconditioner_pt->amg_simple_smoother() = 0;
@@ -230,7 +230,7 @@ namespace Global_Parameters
   double U_perturbation = 0.5;
 
   /// \short Flux: Pulsatile flow
-  double flux(const double &t)
+  double flux(const double& t)
   {
     return U_base +
            U_perturbation * cos(2.0 * MathematicalConstants::Pi * t / T);
@@ -261,13 +261,13 @@ class UndeformedLeaflet : public GeomObject
 {
 public:
   /// Constructor: argument is the x-coordinate of the leaflet
-  UndeformedLeaflet(const double &x0) : GeomObject(1, 2)
+  UndeformedLeaflet(const double& x0) : GeomObject(1, 2)
   {
     X0 = x0;
   }
 
   /// \short Position vector at Lagrangian coordinate zeta
-  void position(const Vector<double> &zeta, Vector<double> &r) const
+  void position(const Vector<double>& zeta, Vector<double>& r) const
   {
     // Position Vector
     r[0] = X0;
@@ -277,9 +277,9 @@ public:
   /// \short Parametrised position on object: r(zeta). Evaluated at
   /// previous timestep. t=0: current time; t>0: previous
   /// timestep. Calls steady version.
-  void position(const unsigned &t,
-                const Vector<double> &zeta,
-                Vector<double> &r) const
+  void position(const unsigned& t,
+                const Vector<double>& zeta,
+                Vector<double>& r) const
   {
     // Use the steady version
     position(zeta, r);
@@ -290,10 +290,10 @@ public:
   /// \f$ \frac{dR_i}{d \zeta_\alpha}\f$ = drdzeta(alpha,i).
   /// \f$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}\f$ =
   /// ddrdzeta(alpha,beta,i). Evaluated at current time.
-  void d2position(const Vector<double> &zeta,
-                  Vector<double> &r,
-                  DenseMatrix<double> &drdzeta,
-                  RankThreeTensor<double> &ddrdzeta) const
+  void d2position(const Vector<double>& zeta,
+                  Vector<double>& r,
+                  DenseMatrix<double>& drdzeta,
+                  RankThreeTensor<double>& ddrdzeta) const
   {
     // Position vector
     r[0] = X0;
@@ -333,7 +333,7 @@ class FSIChannelWithLeafletProblem : public Problem
 {
 public:
   /// \short Constructor: Pass multiplier for uniform mesh refinement
-  FSIChannelWithLeafletProblem(const unsigned &mesh_multiplier);
+  FSIChannelWithLeafletProblem(const unsigned& mesh_multiplier);
 
   /// Destructor empty
   ~FSIChannelWithLeafletProblem()
@@ -396,7 +396,7 @@ public:
   void set_iterative_solver();
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// \short Create elements that enforce prescribed boundary motion
   /// by Lagrange multipliers
@@ -426,35 +426,35 @@ public:
 
 private:
   /// Helper fct; returns the node at the tip of the wall mesh
-  Node *tip_node_pt()
+  Node* tip_node_pt()
   {
     unsigned n_el_wall = Wall_mesh_pt->nelement();
     return Wall_mesh_pt->finite_element_pt(n_el_wall - 1)->node_pt(1);
   }
 
   /// Pointer to the fluid mesh
-  PseudoElasticChannelWithLeafletMesh<ELEMENT> *Bulk_mesh_pt;
+  PseudoElasticChannelWithLeafletMesh<ELEMENT>* Bulk_mesh_pt;
 
   /// Pointer to the "wall" mesh
-  OneDLagrangianMesh<FSIHermiteBeamElement> *Wall_mesh_pt;
+  OneDLagrangianMesh<FSIHermiteBeamElement>* Wall_mesh_pt;
 
   /// Bulk timestepper
-  BDF<2> *Bulk_time_stepper_pt;
+  BDF<2>* Bulk_time_stepper_pt;
 
   /// Wall time stepper pt
-  Newmark<2> *Wall_time_stepper_pt;
+  Newmark<2>* Wall_time_stepper_pt;
 
   /// Pointers to mesh of Lagrange multiplier elements
-  SolidMesh *Lagrange_multiplier_mesh_pt;
+  SolidMesh* Lagrange_multiplier_mesh_pt;
 
   /// Constitutive law used to determine the mesh deformation
-  ConstitutiveLaw *Constitutive_law_pt;
+  ConstitutiveLaw* Constitutive_law_pt;
 
   /// Geometric object for the leaflet (to apply lagrange mult)
-  MeshAsGeomObject *Wall_geom_object_pt;
+  MeshAsGeomObject* Wall_geom_object_pt;
 
   /// Geom object for the leaflet
-  UndeformedLeaflet *Undeformed_wall_pt;
+  UndeformedLeaflet* Undeformed_wall_pt;
 };
 
 //==========================================================================
@@ -462,7 +462,7 @@ private:
 //==========================================================================
 template<class ELEMENT>
 FSIChannelWithLeafletProblem<ELEMENT>::FSIChannelWithLeafletProblem(
-  const unsigned &mesh_multiplier)
+  const unsigned& mesh_multiplier)
 {
   // Allocate the timesteppers
   Bulk_time_stepper_pt = new BDF<2>;
@@ -550,7 +550,7 @@ FSIChannelWithLeafletProblem<ELEMENT>::FSIChannelWithLeafletProblem(
         {
           if (!((ibound == 2) && (i == 0)))
           {
-            dynamic_cast<SolidNode *>(
+            dynamic_cast<SolidNode*>(
               Bulk_mesh_pt->boundary_node_pt(ibound, inod))
               ->pin_position(i);
           }
@@ -598,7 +598,7 @@ FSIChannelWithLeafletProblem<ELEMENT>::FSIChannelWithLeafletProblem(
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Parameters::Re;
@@ -620,8 +620,8 @@ FSIChannelWithLeafletProblem<ELEMENT>::FSIChannelWithLeafletProblem(
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast to the specific element type
-    FSIHermiteBeamElement *elem_pt =
-      dynamic_cast<FSIHermiteBeamElement *>(Wall_mesh_pt->element_pt(e));
+    FSIHermiteBeamElement* elem_pt =
+      dynamic_cast<FSIHermiteBeamElement*>(Wall_mesh_pt->element_pt(e));
 
     // Set physical parameters for each element:
     elem_pt->h_pt() = &Global_Parameters::H;
@@ -693,7 +693,7 @@ template<class ELEMENT>
 void FSIChannelWithLeafletProblem<ELEMENT>::set_iterative_solver()
 {
   // Create the linear solver
-  IterativeLinearSolver *solver_pt = 0;
+  IterativeLinearSolver* solver_pt = 0;
 
   // If we have trilinos, use it
 #ifdef OOMPH_HAS_TRILINOS
@@ -702,7 +702,7 @@ void FSIChannelWithLeafletProblem<ELEMENT>::set_iterative_solver()
   solver_pt = new TrilinosAztecOOSolver;
 
   // Use GMRES
-  dynamic_cast<TrilinosAztecOOSolver *>(solver_pt)->solver_type() =
+  dynamic_cast<TrilinosAztecOOSolver*>(solver_pt)->solver_type() =
     TrilinosAztecOOSolver::GMRES;
 
 #else
@@ -717,7 +717,7 @@ void FSIChannelWithLeafletProblem<ELEMENT>::set_iterative_solver()
 
   // Create preconditioner for 2D problem
   unsigned dim = 2;
-  PseudoElasticFSIPreconditioner *prec_pt =
+  PseudoElasticFSIPreconditioner* prec_pt =
     new PseudoElasticFSIPreconditioner(dim, this);
 
   // Set preconditioner
@@ -753,14 +753,14 @@ void FSIChannelWithLeafletProblem<ELEMENT>::set_iterative_solver()
     oomph_info << "Use optimal block solves\n";
 
     // Get pointer to Navier-Stokes Schur complement preconditioner
-    NavierStokesSchurComplementPreconditioner *ns_prec_pt =
+    NavierStokesSchurComplementPreconditioner* ns_prec_pt =
       prec_pt->navier_stokes_schur_complement_preconditioner_pt();
 
     // Navier Stokes momentum block
     //-----------------------------
 
     // Block triangular for momentum block in LSC precond
-    BlockTriangularPreconditioner<CRDoubleMatrix> *f_prec_pt =
+    BlockTriangularPreconditioner<CRDoubleMatrix>* f_prec_pt =
       new BlockTriangularPreconditioner<CRDoubleMatrix>;
 
     // Set it
@@ -776,7 +776,7 @@ void FSIChannelWithLeafletProblem<ELEMENT>::set_iterative_solver()
     //----------------------------------------------
 
     // Build/set Hypre for Schur complement (pressure) block
-    HyprePreconditioner *p_prec_pt = new HyprePreconditioner;
+    HyprePreconditioner* p_prec_pt = new HyprePreconditioner;
     p_prec_pt->disable_doc_time();
     Hypre_default_settings::set_defaults_for_2D_poisson_problem(p_prec_pt);
     ns_prec_pt->set_p_preconditioner(p_prec_pt);
@@ -832,14 +832,14 @@ void FSIChannelWithLeafletProblem<
     for (unsigned e = 0; e < n_bulk_element; e++)
     {
       // Get pointer to the bulk element that is adjacent to boundary b
-      ELEMENT *bulk_elem_pt =
-        dynamic_cast<ELEMENT *>(Bulk_mesh_pt->boundary_element_pt(b, e));
+      ELEMENT* bulk_elem_pt =
+        dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(b, e));
 
       // Find the index of the face of element e along boundary b
       int face_index = Bulk_mesh_pt->face_index_at_boundary(b, e);
 
       // Create new element
-      ImposeDisplacementByLagrangeMultiplierElement<ELEMENT> *el_pt =
+      ImposeDisplacementByLagrangeMultiplierElement<ELEMENT>* el_pt =
         new ImposeDisplacementByLagrangeMultiplierElement<ELEMENT>(bulk_elem_pt,
                                                                    face_index);
 
@@ -859,15 +859,15 @@ void FSIChannelWithLeafletProblem<
   for (unsigned i = 0; i < n_element; i++)
   {
     // Cast to a Lagrange multiplier element
-    ImposeDisplacementByLagrangeMultiplierElement<ELEMENT> *el_pt =
-      dynamic_cast<ImposeDisplacementByLagrangeMultiplierElement<ELEMENT> *>(
+    ImposeDisplacementByLagrangeMultiplierElement<ELEMENT>* el_pt =
+      dynamic_cast<ImposeDisplacementByLagrangeMultiplierElement<ELEMENT>*>(
         Lagrange_multiplier_mesh_pt->element_pt(i));
 
     // Loop over the nodes
     unsigned nnod = el_pt->nnode();
     for (unsigned j = 0; j < nnod; j++)
     {
-      Node *nod_pt = el_pt->node_pt(j);
+      Node* nod_pt = el_pt->node_pt(j);
 
       // Is the node also on boundary 0 or 6 (i.e. on bottom wall)>
       if ((nod_pt->is_on_boundary(0)) || (nod_pt->is_on_boundary(6)))
@@ -914,7 +914,7 @@ void FSIChannelWithLeafletProblem<
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void FSIChannelWithLeafletProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void FSIChannelWithLeafletProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -953,7 +953,7 @@ void FSIChannelWithLeafletProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
   unsigned nel = Bulk_mesh_pt->nboundary_element(bound);
   for (unsigned e = 0; e < nel; e++)
   {
-    dynamic_cast<ELEMENT *>(Bulk_mesh_pt->boundary_element_pt(bound, e))
+    dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(bound, e))
       ->output(some_file, npts);
   }
   some_file.close();
@@ -969,7 +969,7 @@ void FSIChannelWithLeafletProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
   nel = Bulk_mesh_pt->nboundary_element(bound);
   for (unsigned e = 0; e < nel; e++)
   {
-    dynamic_cast<ELEMENT *>(Bulk_mesh_pt->boundary_element_pt(bound, e))
+    dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(bound, e))
       ->output(some_file, npts);
   }
   some_file.close();
@@ -988,8 +988,8 @@ void FSIChannelWithLeafletProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
   for (unsigned e = 0; e < nel; e++)
   {
     // Get pointer to element
-    FSIHermiteBeamElement *el_pt =
-      dynamic_cast<FSIHermiteBeamElement *>(Wall_mesh_pt->element_pt(e));
+    FSIHermiteBeamElement* el_pt =
+      dynamic_cast<FSIHermiteBeamElement*>(Wall_mesh_pt->element_pt(e));
 
     // Loop over plot points
     for (unsigned i = 0; i < npts; i++)
@@ -1016,7 +1016,7 @@ void FSIChannelWithLeafletProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
 //=======start_of_main=====================================================
 /// Driver code
 //=========================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
 #ifdef OOMPH_HAS_MPI
   MPI_Helpers::init(argc, argv);
@@ -1055,8 +1055,8 @@ int main(int argc, char **argv)
   // Set up the problem
   FSIChannelWithLeafletProblem<
     PseudoSolidNodeUpdateElement<QTaylorHoodElement<2>,
-                                 PseudoElasticBulkElement<QPVDElement<2, 3>>>>
-    *problem_pt = new FSIChannelWithLeafletProblem<PseudoSolidNodeUpdateElement<
+                                 PseudoElasticBulkElement<QPVDElement<2, 3>>>>*
+    problem_pt = new FSIChannelWithLeafletProblem<PseudoSolidNodeUpdateElement<
       QTaylorHoodElement<2>,
       PseudoElasticBulkElement<QPVDElement<2, 3>>>>(mesh_multiplier);
 

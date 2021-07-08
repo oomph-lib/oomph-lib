@@ -134,11 +134,11 @@ namespace oomph
     /// Flux is allowed to depend on the spatial
     /// position, x, the outer unit normal, n, and the continuous time.
     /// We also allow a dependendence on actual local "temperature", u.
-    typedef void (*UnsteadyHeatPrescribedFluxFctPt)(const double &time,
-                                                    const Vector<double> &x,
-                                                    const Vector<double> &n,
-                                                    const double &u,
-                                                    double &flux);
+    typedef void (*UnsteadyHeatPrescribedFluxFctPt)(const double& time,
+                                                    const Vector<double>& x,
+                                                    const Vector<double>& n,
+                                                    const double& u,
+                                                    double& flux);
 
     /// Constructor
     TemplateFreeUnsteadyHeatBaseFaceElement() :
@@ -150,7 +150,7 @@ namespace oomph
     virtual ~TemplateFreeUnsteadyHeatBaseFaceElement() {}
 
     /// Access function for the prescribed-flux function pointer
-    UnsteadyHeatPrescribedFluxFctPt &flux_fct_pt()
+    UnsteadyHeatPrescribedFluxFctPt& flux_fct_pt()
     {
       return Flux_fct_pt;
     }
@@ -164,12 +164,12 @@ namespace oomph
     /// Note that the potential dependence on u makes the problem
     /// potentially nonlinear -- Jacobian is currently worked out
     /// by finite differencing.
-    virtual void get_flux(const unsigned &ipt,
-                          const double &time,
-                          const Vector<double> &x,
-                          const Vector<double> &n,
-                          const double &u,
-                          double &flux)
+    virtual void get_flux(const unsigned& ipt,
+                          const double& time,
+                          const Vector<double>& x,
+                          const Vector<double>& n,
+                          const double& u,
+                          double& flux)
     {
       // If the function pointer is zero return zero
       if (Flux_fct_pt == 0)
@@ -1534,8 +1534,8 @@ namespace oomph
   {
   public:
     /// Constructor
-    UnsteadyHeatBaseFaceElement(FiniteElement *const &bulk_el_pt,
-                                const int &face_index)
+    UnsteadyHeatBaseFaceElement(FiniteElement* const& bulk_el_pt,
+                                const int& face_index)
     {
 #ifdef PARANOID
       {
@@ -1543,7 +1543,7 @@ namespace oomph
         if (bulk_el_pt->dim() == 3)
         {
           // Is it refineable
-          if (dynamic_cast<RefineableElement *>(bulk_el_pt))
+          if (dynamic_cast<RefineableElement*>(bulk_el_pt))
           {
             // Issue a warning
             std::string error_string = "This face element will not work "
@@ -1574,8 +1574,8 @@ namespace oomph
           // One dimensional problem
         case 1:
         {
-          UnsteadyHeatEquations<1> *eqn_pt =
-            dynamic_cast<UnsteadyHeatEquations<1> *>(bulk_el_pt);
+          UnsteadyHeatEquations<1>* eqn_pt =
+            dynamic_cast<UnsteadyHeatEquations<1>*>(bulk_el_pt);
           // If the cast has failed die
           if (eqn_pt == 0)
           {
@@ -1602,8 +1602,8 @@ namespace oomph
         // Two dimensional problem
         case 2:
         {
-          UnsteadyHeatEquations<2> *eqn_pt =
-            dynamic_cast<UnsteadyHeatEquations<2> *>(bulk_el_pt);
+          UnsteadyHeatEquations<2>* eqn_pt =
+            dynamic_cast<UnsteadyHeatEquations<2>*>(bulk_el_pt);
           // If the cast has failed die
           if (eqn_pt == 0)
           {
@@ -1629,8 +1629,8 @@ namespace oomph
         // Three dimensional problem
         case 3:
         {
-          UnsteadyHeatEquations<3> *eqn_pt =
-            dynamic_cast<UnsteadyHeatEquations<3> *>(bulk_el_pt);
+          UnsteadyHeatEquations<3>* eqn_pt =
+            dynamic_cast<UnsteadyHeatEquations<3>*>(bulk_el_pt);
           // If the cast has failed die
           if (eqn_pt == 0)
           {
@@ -1670,7 +1670,7 @@ namespace oomph
     virtual ~UnsteadyHeatBaseFaceElement() {}
 
     /// Temperature at local coordinate s
-    void interpolated_u(const Vector<double> &s, double &u)
+    void interpolated_u(const Vector<double>& s, double& u)
     {
       u = 0.0;
 
@@ -1697,15 +1697,15 @@ namespace oomph
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default (needed to break
     /// indeterminacy if bulk element is SolidElement)
-    double zeta_nodal(const unsigned &n,
-                      const unsigned &k,
-                      const unsigned &i) const
+    double zeta_nodal(const unsigned& n,
+                      const unsigned& k,
+                      const unsigned& i) const
     {
       return FaceElement::zeta_nodal(n, k, i);
     }
 
     /// Compute the element residual vector
-    inline void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    inline void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Call the generic residuals function
       fill_in_generic_residual_contribution_ust_heat_flux(residuals);
@@ -1725,7 +1725,7 @@ namespace oomph
     /* } */
 
     /// Output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       unsigned nplot = 5;
       output(outfile, nplot);
@@ -1734,7 +1734,7 @@ namespace oomph
     /// \short Output function. Output "temperature", "incoming" heat flux,
     /// and outer unit normal. n_plot is ignored because flux function may
     /// depend explicitly on integration point!
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       unsigned n_dim = this->nodal_dimension();
       Vector<double> x(n_dim);
@@ -1795,13 +1795,13 @@ namespace oomph
     }
 
     /// \short C_style output function
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
 
     /// \short C-style output function
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       FiniteElement::output(file_pt, n_plot);
     }
@@ -1810,9 +1810,9 @@ namespace oomph
     /// \short Function to compute the shape and test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
-    inline double shape_and_test(const Vector<double> &s,
-                                 Shape &psi,
-                                 Shape &test) const
+    inline double shape_and_test(const Vector<double>& s,
+                                 Shape& psi,
+                                 Shape& test) const
     {
       // Find number of nodes
       unsigned n_node = nnode();
@@ -1833,7 +1833,7 @@ namespace oomph
   private:
     /// Generic residuals function
     void fill_in_generic_residual_contribution_ust_heat_flux(
-      Vector<double> &residuals);
+      Vector<double>& residuals);
   };
 
   //===========================================================================
@@ -1842,9 +1842,9 @@ namespace oomph
   /// potential nonlinearity -- currently handled by fd-ing.
   //===========================================================================
   template<class ELEMENT>
-  void UnsteadyHeatBaseFaceElement<
-    ELEMENT>::fill_in_generic_residual_contribution_ust_heat_flux(Vector<double>
-                                                                    &residuals)
+  void UnsteadyHeatBaseFaceElement<ELEMENT>::
+    fill_in_generic_residual_contribution_ust_heat_flux(
+      Vector<double>& residuals)
   {
     // Find out how many nodes there are
     const unsigned n_node = nnode();
@@ -2252,10 +2252,10 @@ namespace oomph
   public:
     /// \short Constructor, which takes a "bulk" element and the
     /// value of the index and its limit
-    SurfaceMeltElement(FiniteElement *const &bulk_el_pt,
-                       const int &face_index,
-                       const unsigned &id = 0,
-                       const bool &called_from_refineable_constructor = false) :
+    SurfaceMeltElement(FiniteElement* const& bulk_el_pt,
+                       const int& face_index,
+                       const unsigned& id = 0,
+                       const bool& called_from_refineable_constructor = false) :
       UnsteadyHeatBaseFaceElement<ELEMENT>(bulk_el_pt, face_index)
     {
 #ifdef PARANOID
@@ -2266,7 +2266,7 @@ namespace oomph
           if (bulk_el_pt->dim() == 3)
           {
             // Is it refineable
-            if (dynamic_cast<RefineableElement *>(bulk_el_pt))
+            if (dynamic_cast<RefineableElement*>(bulk_el_pt))
             {
               // Issue a warning
               std::string error_string = "This face element will not work "
@@ -2341,7 +2341,7 @@ namespace oomph
 
     /// \short Get interpolated pressure (essentially a Lagrange multiplier
     /// that enforces the imposed boundary motion)
-    double get_interpolated_lagrange_p(const Vector<double> &s)
+    double get_interpolated_lagrange_p(const Vector<double>& s)
     {
       // Initialise pressure
       double p = 0;
@@ -2359,8 +2359,7 @@ namespace oomph
       for (unsigned j = 0; j < n_node; j++)
       {
         // Cast to a boundary node
-        BoundaryNodeBase *bnod_pt =
-          dynamic_cast<BoundaryNodeBase *>(node_pt(j));
+        BoundaryNodeBase* bnod_pt = dynamic_cast<BoundaryNodeBase*>(node_pt(j));
 
         // Get the index of the first nodal value associated with
         // this FaceElement
@@ -2375,7 +2374,7 @@ namespace oomph
     }
 
     /// Return the residuals
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       fill_in_contribution_to_residuals_surface_melt(residuals);
     }
@@ -2394,7 +2393,7 @@ namespace oomph
     }
 
     /// Pointer to (non-default) melt temperature
-    double *&melt_temperature_pt()
+    double*& melt_temperature_pt()
     {
       return Melt_temperature_pt;
     }
@@ -2406,10 +2405,10 @@ namespace oomph
       for (unsigned l = 0; l < n_node; l++)
       {
         // get the node pt
-        Node *nod_pt = node_pt(l);
+        Node* nod_pt = node_pt(l);
 
         // Cast to a boundary node
-        BoundaryNodeBase *bnod_pt = dynamic_cast<BoundaryNodeBase *>(nod_pt);
+        BoundaryNodeBase* bnod_pt = dynamic_cast<BoundaryNodeBase*>(nod_pt);
 
         // Get the index of the first nodal value associated with
         // this FaceElement
@@ -2429,10 +2428,10 @@ namespace oomph
       for (unsigned l = 0; l < n_node; l++)
       {
         // get the node pt
-        Node *nod_pt = node_pt(l);
+        Node* nod_pt = node_pt(l);
 
         // Cast to a boundary node
-        BoundaryNodeBase *bnod_pt = dynamic_cast<BoundaryNodeBase *>(nod_pt);
+        BoundaryNodeBase* bnod_pt = dynamic_cast<BoundaryNodeBase*>(nod_pt);
 
         // Get the index of the first nodal value associated with
         // this FaceElement
@@ -2450,9 +2449,9 @@ namespace oomph
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default (needed to break
     /// indeterminacy if bulk element is SolidElement)
-    double zeta_nodal(const unsigned &n,
-                      const unsigned &k,
-                      const unsigned &i) const
+    double zeta_nodal(const unsigned& n,
+                      const unsigned& k,
+                      const unsigned& i) const
     {
       return FaceElement::zeta_nodal(n, k, i);
     }
@@ -2462,7 +2461,7 @@ namespace oomph
     //                                       DenseMatrix<double> &jacobian);
 
     /// Melt rate at local coordinate s
-    void interpolated_melt_rate(const Vector<double> &s, double &melt_flux)
+    void interpolated_melt_rate(const Vector<double>& s, double& melt_flux)
     {
       // Iinitialise
       melt_flux = 0.0;
@@ -2480,10 +2479,10 @@ namespace oomph
       for (unsigned l = 0; l < n_node; l++)
       {
         // get the node pt
-        Node *nod_pt = node_pt(l);
+        Node* nod_pt = node_pt(l);
 
         // Cast to a boundary node
-        BoundaryNodeBase *bnod_pt = dynamic_cast<BoundaryNodeBase *>(nod_pt);
+        BoundaryNodeBase* bnod_pt = dynamic_cast<BoundaryNodeBase*>(nod_pt);
 
         // Get the index of the first nodal value associated with
         // this FaceElement
@@ -2497,7 +2496,7 @@ namespace oomph
 
     /// \short Generalised output function to include melt information:
     /// temperature, incoming flux, melt rate, outer unit normal
-    void output_melt(std::ostream &outfile)
+    void output_melt(std::ostream& outfile)
     {
       unsigned n_dim = this->nodal_dimension();
       Vector<double> x(n_dim);
@@ -2572,14 +2571,14 @@ namespace oomph
   protected:
     /// \short Helper function that actually calculates the residuals
     void fill_in_contribution_to_residuals_surface_melt(
-      Vector<double> &residuals);
+      Vector<double>& residuals);
 
     /// Id of additional unknowns (Lagrange multiplier ("pressure") and melt
     /// rate)
     unsigned Melt_id;
 
     /// Pointer to non-default melt temperature
-    double *Melt_temperature_pt;
+    double* Melt_temperature_pt;
   };
 
   ///////////////////////////////////////////////////////////////////////
@@ -2701,7 +2700,7 @@ namespace oomph
   //=====================================================================
   template<class ELEMENT>
   void SurfaceMeltElement<ELEMENT>::
-    fill_in_contribution_to_residuals_surface_melt(Vector<double> &residuals)
+    fill_in_contribution_to_residuals_surface_melt(Vector<double>& residuals)
   {
     // hierher kill oomph_info << "hierher: Number of dofs: " << ndof() <<
     // std::endl;
@@ -2785,8 +2784,7 @@ namespace oomph
       for (unsigned l = 0; l < n_node; l++)
       {
         // Cast to a boundary node
-        BoundaryNodeBase *bnod_pt =
-          dynamic_cast<BoundaryNodeBase *>(node_pt(l));
+        BoundaryNodeBase* bnod_pt = dynamic_cast<BoundaryNodeBase*>(node_pt(l));
 
         // Get the index of the first nodal value associated with
         // this FaceElement
@@ -2950,8 +2948,7 @@ namespace oomph
         //------------------------------------
 
         // Cast to a boundary node
-        BoundaryNodeBase *bnod_pt =
-          dynamic_cast<BoundaryNodeBase *>(node_pt(l));
+        BoundaryNodeBase* bnod_pt = dynamic_cast<BoundaryNodeBase*>(node_pt(l));
 
         // Get the index of the first nodal value associated with
         // this FaceElement
@@ -2982,10 +2979,10 @@ namespace oomph
     for (unsigned l = 0; l < n_node; l++)
     {
       // get the node pt
-      Node *nod_pt = node_pt(l);
+      Node* nod_pt = node_pt(l);
 
       // Cast to a boundary node
-      BoundaryNodeBase *bnod_pt = dynamic_cast<BoundaryNodeBase *>(nod_pt);
+      BoundaryNodeBase* bnod_pt = dynamic_cast<BoundaryNodeBase*>(nod_pt);
 
       // Get the index of the first nodal value associated with
       // this FaceElement

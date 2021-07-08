@@ -63,9 +63,9 @@ namespace oomph
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines), the values Vector sets its own size in here.
-    void get_interpolated_values(const unsigned &t,
-                                 const Vector<double> &s,
-                                 Vector<double> &values)
+    void get_interpolated_values(const unsigned& t,
+                                 const Vector<double>& s,
+                                 Vector<double>& values)
     {
       // Create enough initialised storage
       values.resize(2 * DIM, 0.0);
@@ -96,8 +96,8 @@ namespace oomph
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines) ,the values Vector sets its own size in here.
-    void get_interpolated_values(const Vector<double> &s,
-                                 Vector<double> &values)
+    void get_interpolated_values(const Vector<double>& s,
+                                 Vector<double>& values)
     {
       this->get_interpolated_values(0, s, values);
     }
@@ -111,7 +111,7 @@ namespace oomph
 
     /// \short Get 'flux' for Z2 error recovery:   Upper triangular entries
     /// in strain tensor.
-    void get_Z2_flux(const Vector<double> &s, Vector<double> &flux)
+    void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
 #ifdef PARANOID
       unsigned num_entries = 2 * (DIM + ((DIM * DIM) - DIM) / 2);
@@ -165,9 +165,9 @@ namespace oomph
     /// Further build function, pass the pointers down to the sons
     void further_build()
     {
-      RefineableTimeHarmonicLinearElasticityEquations<DIM>
-        *cast_father_element_pt =
-          dynamic_cast<RefineableTimeHarmonicLinearElasticityEquations<DIM> *>(
+      RefineableTimeHarmonicLinearElasticityEquations<DIM>*
+        cast_father_element_pt =
+          dynamic_cast<RefineableTimeHarmonicLinearElasticityEquations<DIM>*>(
             this->father_element_pt());
 
       // Set pointer to body force function
@@ -184,7 +184,7 @@ namespace oomph
   private:
     /// Overloaded helper function to take hanging nodes into account
     void fill_in_generic_contribution_to_residuals_time_harmonic_linear_elasticity(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag);
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
   };
 
   //////////////////////////////////////////////////////////////////////
@@ -211,7 +211,7 @@ namespace oomph
     }
 
     /// Empty rebuild from sons, no need to reconstruct anything here
-    void rebuild_from_sons(Mesh *&mesh_pt) {}
+    void rebuild_from_sons(Mesh*& mesh_pt) {}
 
     /// \short Number of vertex nodes in the element
     unsigned nvertex_node() const
@@ -221,7 +221,7 @@ namespace oomph
     }
 
     /// \short Pointer to the j-th vertex node in the element
-    Node *vertex_node_pt(const unsigned &j) const
+    Node* vertex_node_pt(const unsigned& j) const
     {
       return QTimeHarmonicLinearElasticityElement<DIM,
                                                   NNODE_1D>::vertex_node_pt(j);

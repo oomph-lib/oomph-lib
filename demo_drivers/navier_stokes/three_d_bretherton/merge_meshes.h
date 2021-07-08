@@ -33,10 +33,10 @@ namespace oomph
   namespace MeshHelper
   {
     template<class MESH1, class MESH2>
-    void merge_spine_meshes(MESH1 *mesh_pt,
+    void merge_spine_meshes(MESH1* mesh_pt,
                             unsigned bound1,
-                            MESH2 *addmesh_pt,
-                            int *addmesh_map_boundary,
+                            MESH2* addmesh_pt,
+                            int* addmesh_map_boundary,
                             int total_boundaries,
                             unsigned spine_flag)
     {
@@ -44,9 +44,9 @@ namespace oomph
       // Map of the commom nodes from the nodes in the added mesh to the old
       // mesh (It is needed for the added elements to point to the old nodes and
       // not duplicate this nodes)
-      std::map<Node *, Node *> map_bound_node;
+      std::map<Node*, Node*> map_bound_node;
 
-      std::map<Spine *, Spine *> map_spines;
+      std::map<Spine*, Spine*> map_spines;
 
       // We have to look for the shared boundary of the second mwsh. We identify
       // it giving a value of -1 in the mappring of the old to the new boundary
@@ -136,9 +136,9 @@ namespace oomph
           map_bound_node[addmesh_pt->boundary_node_pt(bound2, i)] =
             mesh_pt->boundary_node_pt(bound1, nodecounter - 1);
           // Once we have indentified the corresponding nodes we map the spines
-          SpineNode *add_spinenode =
-            dynamic_cast<SpineNode *>(addmesh_pt->boundary_node_pt(bound2, i));
-          SpineNode *org_spinenode = dynamic_cast<SpineNode *>(
+          SpineNode* add_spinenode =
+            dynamic_cast<SpineNode*>(addmesh_pt->boundary_node_pt(bound2, i));
+          SpineNode* org_spinenode = dynamic_cast<SpineNode*>(
             mesh_pt->boundary_node_pt(bound1, nodecounter - 1));
 
 #ifdef PARANOID
@@ -159,8 +159,8 @@ namespace oomph
           } // mesh3_pt
 #endif
 
-          Spine *add_spine = add_spinenode->spine_pt();
-          Spine *org_spine = org_spinenode->spine_pt();
+          Spine* add_spine = add_spinenode->spine_pt();
+          Spine* org_spine = org_spinenode->spine_pt();
 
           // we check the map from this  spine has not been before asigned  (one
           // spine is pointed by many nodes)
@@ -197,7 +197,7 @@ namespace oomph
       for (unsigned int i = 0; i < addmesh_pt->nbulk(); i++)
       {
         // Pointer to the element
-        FiniteElement *el_pt = addmesh_pt->bulk_element_pt(i);
+        FiniteElement* el_pt = addmesh_pt->bulk_element_pt(i);
 
         // Loop over the nodes in the element
         for (unsigned j = 0; j < el_pt->nnode(); j++)
@@ -216,7 +216,7 @@ namespace oomph
       for (unsigned int i = 0; i < addmesh_pt->ninterface_element(); i++)
       {
         // Pointer to the element
-        FiniteElement *surfel_pt = addmesh_pt->interface_element_pt(i);
+        FiniteElement* surfel_pt = addmesh_pt->interface_element_pt(i);
 
         // Loop over the nodes in the element
         for (unsigned j = 0; j < surfel_pt->nnode(); j++)
@@ -303,7 +303,7 @@ namespace oomph
           if (i != bound2)
           {
             // Create a pointer to the node
-            Node *node_pt = addmesh_pt->boundary_node_pt(i, j);
+            Node* node_pt = addmesh_pt->boundary_node_pt(i, j);
 
             // We remove the old boundaries in case it is not yet included in a
             // new boundary
@@ -323,7 +323,7 @@ namespace oomph
             // were not included before)the maped nodes
             else
             {
-              Node *map_node_pt = map_bound_node[node_pt];
+              Node* map_node_pt = map_bound_node[node_pt];
               if (!map_node_pt->is_on_boundary(addmesh_map_boundary[i]))
                 mesh_pt->add_boundary_node(addmesh_map_boundary[i],
                                            map_node_pt);

@@ -62,11 +62,11 @@ namespace oomph
     }
 
     /// \short Constructor with the input files
-    TetgenMesh(const std::string &node_file_name,
-               const std::string &element_file_name,
-               const std::string &face_file_name,
-               TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper,
-               const bool &use_attributes = false) :
+    TetgenMesh(const std::string& node_file_name,
+               const std::string& element_file_name,
+               const std::string& face_file_name,
+               TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
+               const bool& use_attributes = false) :
       Tetgenio_exists(false), Tetgenio_pt(0)
     {
       // Mesh can only be built with 3D Telements.
@@ -99,9 +99,9 @@ namespace oomph
     }
 
     /// \short Constructor with tetgenio data structure
-    TetgenMesh(tetgenio &tetgen_data,
-               TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper,
-               const bool &use_attributes = false)
+    TetgenMesh(tetgenio& tetgen_data,
+               TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
+               const bool& use_attributes = false)
 
     {
       // Mesh can only be built with 3D Telements.
@@ -145,12 +145,12 @@ namespace oomph
     /// problems in fluids problems where the application of
     /// boundary conditions at such "corner" elements can
     /// overconstrain the solution.
-    TetgenMesh(const std::string &node_file_name,
-               const std::string &element_file_name,
-               const std::string &face_file_name,
-               const bool &split_corner_elements,
-               TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper,
-               const bool &use_attributes = false)
+    TetgenMesh(const std::string& node_file_name,
+               const std::string& element_file_name,
+               const std::string& face_file_name,
+               const bool& split_corner_elements,
+               TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
+               const bool& use_attributes = false)
 
     {
       // Mesh can only be built with 3D Telements.
@@ -201,10 +201,10 @@ namespace oomph
     /// problems in fluids problems where the application of
     /// boundary conditions at such "corner" elements can
     /// overconstrain the solution.
-    TetgenMesh(tetgenio &tetgen_data,
-               const bool &split_corner_elements,
-               TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper,
-               const bool &use_attributes = false)
+    TetgenMesh(tetgenio& tetgen_data,
+               const bool& split_corner_elements,
+               TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
+               const bool& use_attributes = false)
 
     {
       // Mesh can only be built with 3D Telements.
@@ -250,12 +250,12 @@ namespace oomph
     /// specifies the outer boundary of the domain and any number of internal
     /// boundaries, specified by TetMeshFacetedSurfaces.
     /// Also specify target size for uniform element size.
-    TetgenMesh(TetMeshFacetedClosedSurface *const &outer_boundary_pt,
-               Vector<TetMeshFacetedSurface *> &internal_surface_pt,
-               const double &element_volume,
-               TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper,
-               const bool &use_attributes = false,
-               const bool &split_corner_elements = false)
+    TetgenMesh(TetMeshFacetedClosedSurface* const& outer_boundary_pt,
+               Vector<TetMeshFacetedSurface*>& internal_surface_pt,
+               const double& element_volume,
+               TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
+               const bool& use_attributes = false,
+               const bool& split_corner_elements = false)
     {
       // Mesh can only be built with 3D Telements.
       MeshChecker::assert_geometric_element<TElementGeometricBase, ELEMENT>(3);
@@ -371,8 +371,8 @@ namespace oomph
         unsigned n_internal = internal_surface_pt.size();
         for (unsigned i = 0; i < n_internal; i++)
         {
-          TetMeshFacetedClosedSurface *srf_pt =
-            dynamic_cast<TetMeshFacetedClosedSurface *>(internal_surface_pt[i]);
+          TetMeshFacetedClosedSurface* srf_pt =
+            dynamic_cast<TetMeshFacetedClosedSurface*>(internal_surface_pt[i]);
           if (srf_pt != 0)
           {
             unsigned n_int_pts = srf_pt->ninternal_point_for_tetgen();
@@ -418,14 +418,14 @@ namespace oomph
     }
 
     ///\short Build tetgenio object from the TetMeshFacetedSurfaces
-    void build_tetgenio(TetMeshFacetedSurface *const &outer_boundary_pt,
-                        Vector<TetMeshFacetedSurface *> &internal_surface_pt,
-                        tetgenio &tetgen_io)
+    void build_tetgenio(TetMeshFacetedSurface* const& outer_boundary_pt,
+                        Vector<TetMeshFacetedSurface*>& internal_surface_pt,
+                        tetgenio& tetgen_io)
     {
       // Pointer to Tetgen facet
-      tetgenio::facet *f;
+      tetgenio::facet* f;
       // Pointer to Tetgen polygon
-      tetgenio::polygon *p;
+      tetgenio::polygon* p;
 
       // Start all indices from 1 (it's a choice and we've made it
       tetgen_io.firstnumber = 1;
@@ -571,8 +571,8 @@ namespace oomph
         }
 
         // If it's a hole/region add it
-        TetMeshFacetedClosedSurface *srf_pt =
-          dynamic_cast<TetMeshFacetedClosedSurface *>(internal_surface_pt[h]);
+        TetMeshFacetedClosedSurface* srf_pt =
+          dynamic_cast<TetMeshFacetedClosedSurface*>(internal_surface_pt[h]);
         if (srf_pt != 0)
         {
           unsigned n_int_pts = srf_pt->ninternal_point_for_tetgen();
@@ -601,8 +601,8 @@ namespace oomph
       counter = 0;
       for (unsigned h = 0; h < n_internal; ++h)
       {
-        TetMeshFacetedClosedSurface *srf_pt =
-          dynamic_cast<TetMeshFacetedClosedSurface *>(internal_surface_pt[h]);
+        TetMeshFacetedClosedSurface* srf_pt =
+          dynamic_cast<TetMeshFacetedClosedSurface*>(internal_surface_pt[h]);
         if (srf_pt != 0)
         {
           unsigned n_int_pts = srf_pt->ninternal_point_for_tetgen();
@@ -627,8 +627,8 @@ namespace oomph
       counter = 0;
       for (unsigned h = 0; h < n_internal; ++h)
       {
-        TetMeshFacetedClosedSurface *srf_pt =
-          dynamic_cast<TetMeshFacetedClosedSurface *>(internal_surface_pt[h]);
+        TetMeshFacetedClosedSurface* srf_pt =
+          dynamic_cast<TetMeshFacetedClosedSurface*>(internal_surface_pt[h]);
         if (srf_pt != 0)
         {
           unsigned n_int_pts = srf_pt->ninternal_point_for_tetgen();
@@ -665,8 +665,8 @@ namespace oomph
 
     /// \short Overload set_mesh_level_time_stepper so that the stored
     /// time stepper now corresponds to the new timestepper
-    void set_mesh_level_time_stepper(TimeStepper *const &time_stepper_pt,
-                                     const bool &preserve_existing_data)
+    void set_mesh_level_time_stepper(TimeStepper* const& time_stepper_pt,
+                                     const bool& preserve_existing_data)
     {
       this->Time_stepper_pt = time_stepper_pt;
     }
@@ -678,13 +678,13 @@ namespace oomph
     }
 
     /// Access to the triangulateio representation of the mesh
-    tetgenio *&tetgenio_pt()
+    tetgenio*& tetgenio_pt()
     {
       return Tetgenio_pt;
     }
 
     /// Set the tetgen pointer by a deep copy
-    void set_deep_copy_tetgenio_pt(tetgenio *const &tetgenio_pt)
+    void set_deep_copy_tetgenio_pt(tetgenio* const& tetgenio_pt)
     {
       // Delete the existing data
       if (Tetgenio_exists)
@@ -699,22 +699,22 @@ namespace oomph
 
     /// Transfer tetgenio data from the input to the output
     /// The output is assumed to have been constructed and "empty"
-    void deep_copy_of_tetgenio(tetgenio *const &input_pt, tetgenio *&output_pt);
+    void deep_copy_of_tetgenio(tetgenio* const& input_pt, tetgenio*& output_pt);
 
   protected:
     /// Build mesh from scaffold
-    void build_from_scaffold(TimeStepper *time_stepper_pt,
-                             const bool &use_attributes);
+    void build_from_scaffold(TimeStepper* time_stepper_pt,
+                             const bool& use_attributes);
 
     /// Temporary scaffold mesh
-    TetgenScaffoldMesh *Tmp_mesh_pt;
+    TetgenScaffoldMesh* Tmp_mesh_pt;
 
     /// \short Boolean to indicate whether a tetgenio representation of the
     /// mesh exists
     bool Tetgenio_exists;
 
     /// \short Tetgen representation of mesh
-    tetgenio *Tetgenio_pt;
+    tetgenio* Tetgenio_pt;
 
     /// \short Boolean flag to indicate whether to use attributes or not
     /// (required for multidomain meshes)
@@ -738,12 +738,12 @@ namespace oomph
   public:
     /// \short Constructor. Boundary coordinates are setup
     /// automatically.
-    SolidTetgenMesh(const std::string &node_file_name,
-                    const std::string &element_file_name,
-                    const std::string &face_file_name,
-                    const bool &split_corner_elements,
-                    TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper,
-                    const bool &use_attributes = false) :
+    SolidTetgenMesh(const std::string& node_file_name,
+                    const std::string& element_file_name,
+                    const std::string& face_file_name,
+                    const bool& split_corner_elements,
+                    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
+                    const bool& use_attributes = false) :
       TetgenMesh<ELEMENT>(node_file_name,
                           element_file_name,
                           face_file_name,
@@ -758,13 +758,13 @@ namespace oomph
     /// \short Constructor. Boundary coordinates are re-setup
     /// automatically, with the orientation of the outer unit
     /// normal determined by switch_normal.
-    SolidTetgenMesh(const std::string &node_file_name,
-                    const std::string &element_file_name,
-                    const std::string &face_file_name,
-                    const bool &split_corner_elements,
-                    const bool &switch_normal,
-                    TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper,
-                    const bool &use_attributes = false) :
+    SolidTetgenMesh(const std::string& node_file_name,
+                    const std::string& element_file_name,
+                    const std::string& face_file_name,
+                    const bool& split_corner_elements,
+                    const bool& switch_normal,
+                    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
+                    const bool& use_attributes = false) :
       TetgenMesh<ELEMENT>(node_file_name,
                           element_file_name,
                           face_file_name,

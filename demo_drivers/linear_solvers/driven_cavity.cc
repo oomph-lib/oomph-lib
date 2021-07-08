@@ -59,7 +59,7 @@ namespace Global_Physical_Variables
 //=============================================================================
 namespace Hypre_Subsidiary_Preconditioner_Helper
 {
-  Preconditioner *set_hypre_preconditioner()
+  Preconditioner* set_hypre_preconditioner()
   {
     return new HyprePreconditioner;
   }
@@ -75,11 +75,11 @@ class RectangularDrivenCavityProblem : public Problem
 public:
   /// \short Constructor: Specify multiplier for number of element
   /// rows/columns and solver flag.
-  RectangularDrivenCavityProblem(const unsigned &element_multiplier,
-                                 const bool &use_iterative_solver,
-                                 const bool &use_hypre_for_pressure,
-                                 const bool &use_hypre_for_momentum,
-                                 const bool &use_block_diagonal_for_momentum);
+  RectangularDrivenCavityProblem(const unsigned& element_multiplier,
+                                 const bool& use_iterative_solver,
+                                 const bool& use_hypre_for_pressure,
+                                 const bool& use_hypre_for_momentum,
+                                 const bool& use_block_diagonal_for_momentum);
 
   /// Destructor
   ~RectangularDrivenCavityProblem()
@@ -101,12 +101,12 @@ public:
   };
 
   /// Fix pressure in element e at pressure dof pdof and set to pvalue
-  void fix_pressure(const unsigned &e,
-                    const unsigned &pdof,
-                    const double &pvalue)
+  void fix_pressure(const unsigned& e,
+                    const unsigned& pdof,
+                    const double& pvalue)
   {
     // Cast to full element type and fix the pressure at that element
-    dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e))
+    dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))
       ->fix_pressure(pdof, pvalue);
   } // end of fix_pressure
 
@@ -146,29 +146,29 @@ public:
   } // end_of_actions_before_newton_solve
 
   // Access function for the specific mesh
-  SimpleRectangularQuadMesh<ELEMENT> *mesh_pt()
+  SimpleRectangularQuadMesh<ELEMENT>* mesh_pt()
   {
     // Upcast from pointer to the Mesh base class to the specific
     // element type that we're using here.
-    return dynamic_cast<SimpleRectangularQuadMesh<ELEMENT> *>(
+    return dynamic_cast<SimpleRectangularQuadMesh<ELEMENT>*>(
       Problem::mesh_pt());
   }
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 private:
   /// oomph-lib iterative linear solver
-  IterativeLinearSolver *Solver_pt;
+  IterativeLinearSolver* Solver_pt;
 
   /// Preconditioner
-  NavierStokesSchurComplementPreconditioner *Prec_pt;
+  NavierStokesSchurComplementPreconditioner* Prec_pt;
 
   /// Inexact solver for P block
-  Preconditioner *P_matrix_preconditioner_pt;
+  Preconditioner* P_matrix_preconditioner_pt;
 
   /// Inexact solver for F block
-  Preconditioner *F_matrix_preconditioner_pt;
+  Preconditioner* F_matrix_preconditioner_pt;
 
 }; // end_of_problem_class
 
@@ -178,11 +178,11 @@ private:
 //========================================================================
 template<class ELEMENT>
 RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem(
-  const unsigned &element_multiplier,
-  const bool &use_iterative_solver,
-  const bool &use_hypre_for_pressure,
-  const bool &use_hypre_for_momentum,
-  const bool &use_block_diagonal_for_momentum)
+  const unsigned& element_multiplier,
+  const bool& use_iterative_solver,
+  const bool& use_hypre_for_pressure,
+  const bool& use_hypre_for_momentum,
+  const bool& use_block_diagonal_for_momentum)
 {
   // Initialise pointer to oomph-lib iterative linear solver
   Solver_pt = 0;
@@ -241,7 +241,7 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem(
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -284,13 +284,13 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem(
 
       // Set parameters for use as preconditioner on Poisson-type problem
       Hypre_default_settings::set_defaults_for_2D_poisson_problem(
-        static_cast<HyprePreconditioner *>(P_matrix_preconditioner_pt));
+        static_cast<HyprePreconditioner*>(P_matrix_preconditioner_pt));
 
       // Use Hypre for the Schur complement block
       Prec_pt->set_p_preconditioner(P_matrix_preconditioner_pt);
 
       // Shut up!
-      static_cast<HyprePreconditioner *>(P_matrix_preconditioner_pt)
+      static_cast<HyprePreconditioner*>(P_matrix_preconditioner_pt)
         ->disable_doc_time();
     }
 #endif
@@ -308,7 +308,7 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem(
 #ifndef OOMPH_HAS_MPI
       if (use_hypre_for_momentum)
       {
-        dynamic_cast<BlockDiagonalPreconditioner<CRDoubleMatrix> *>(
+        dynamic_cast<BlockDiagonalPreconditioner<CRDoubleMatrix>*>(
           F_matrix_preconditioner_pt)
           ->set_subsidiary_preconditioner_function(
             Hypre_Subsidiary_Preconditioner_Helper::set_hypre_preconditioner);
@@ -329,13 +329,13 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem(
         F_matrix_preconditioner_pt = new HyprePreconditioner;
 
         // Shut up!
-        static_cast<HyprePreconditioner *>(F_matrix_preconditioner_pt)
+        static_cast<HyprePreconditioner*>(F_matrix_preconditioner_pt)
           ->disable_doc_time();
 
         // Set parameters for use as preconditioner in for momentum
         // block in Navier-Stokes problem
         Hypre_default_settings::set_defaults_for_navier_stokes_momentum_block(
-          static_cast<HyprePreconditioner *>(F_matrix_preconditioner_pt));
+          static_cast<HyprePreconditioner*>(F_matrix_preconditioner_pt));
 
         // Use Hypre for momentum block
         Prec_pt->set_f_preconditioner(F_matrix_preconditioner_pt);
@@ -354,7 +354,7 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem(
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void RectangularDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void RectangularDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -382,7 +382,7 @@ void RectangularDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
 /// and flag to indicate if iterative solver is used.
 /// Multiplier and flag both default to 1.
 //=====================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

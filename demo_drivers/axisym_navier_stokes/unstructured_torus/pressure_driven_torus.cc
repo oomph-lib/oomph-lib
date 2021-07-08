@@ -66,16 +66,16 @@ namespace Global_Physical_Variables
   double Lambda_sq = 0.0;
 
   /// Constitutive law used to determine the mesh deformation
-  ConstitutiveLaw *Constitutive_law_pt = new GeneralisedHookean(&Nu);
+  ConstitutiveLaw* Constitutive_law_pt = new GeneralisedHookean(&Nu);
 
   /// Parameter that switches between circle (1.0) and square (0.0)
   /// cross section
   double Mu = 0.0;
 
   /// A function to specify a constant axial body force
-  void axial_pressure_gradient(const double &time,
-                               const Vector<double> &x,
-                               Vector<double> &result)
+  void axial_pressure_gradient(const double& time,
+                               const Vector<double>& x,
+                               Vector<double>& result)
   {
     using namespace Global_Physical_Variables;
 
@@ -102,7 +102,7 @@ namespace oomph
     MyTaylorHoodElement() {}
 
     /// Overload output function
-    void output(std::ostream &outfile, const unsigned &nplot)
+    void output(std::ostream& outfile, const unsigned& nplot)
     {
       // Assign dimension
       unsigned el_dim = 2;
@@ -209,7 +209,7 @@ class GeneralCircle : public GeomObject
 public:
   /// Constructor that takes the centre position and radius of the circle
   /// as its arguments
-  GeneralCircle(const double &centre_y, const double &radius) :
+  GeneralCircle(const double& centre_y, const double& radius) :
     GeomObject(1, 2), Centre_y(centre_y), Radius(radius)
   {
   }
@@ -218,7 +218,7 @@ public:
   virtual ~GeneralCircle() {}
 
   /// Lagrangian coordinate xi
-  void position(const Vector<double> &xi, Vector<double> &r) const
+  void position(const Vector<double>& xi, Vector<double>& r) const
   {
     Vector<double> r_circle(2);
 
@@ -260,7 +260,7 @@ public:
 
   // Do not interpolated history values (Really this is only true when
   // continuing) This is going to be a total pain in general....
-  bool interpolated_history(const unsigned &t)
+  bool interpolated_history(const unsigned& t)
   {
     if (t == 0)
     {
@@ -274,9 +274,9 @@ public:
 
   /// Return the position of the circle as a function of time
   /// (doesn't move as a function of time)
-  void position(const unsigned &t,
-                const Vector<double> &xi,
-                Vector<double> &r) const
+  void position(const unsigned& t,
+                const Vector<double>& xi,
+                Vector<double>& r) const
   {
     position(xi, r);
   }
@@ -288,7 +288,7 @@ public:
 
   /// \short Return pointer to the j-th (only) Data item that the object's
   /// shape depends on.
-  Data *geom_data_pt(const unsigned &j)
+  Data* geom_data_pt(const unsigned& j)
   {
     return 0;
   }
@@ -310,8 +310,8 @@ class UnstructuredTorusProblem : public Problem
 public:
   /// \short Constructor taking the maximum refinement level and
   /// the minimum and maximum error targets.
-  UnstructuredTorusProblem(const double &min_error_target,
-                           const double &max_error_target);
+  UnstructuredTorusProblem(const double& min_error_target,
+                           const double& max_error_target);
 
   /// \short Calculate the square of the l2 norm
   double calculate_square_of_l2_norm()
@@ -324,7 +324,7 @@ public:
     const unsigned n_element = this->Fluid_mesh_pt->nelement();
     for (unsigned e = 0; e < n_element; e++)
     {
-      sum += dynamic_cast<ELEMENT *>(this->Fluid_mesh_pt->element_pt(e))
+      sum += dynamic_cast<ELEMENT*>(this->Fluid_mesh_pt->element_pt(e))
                ->square_of_l2_norm();
     }
     return sum;
@@ -360,12 +360,12 @@ public:
   }
 
   /// Set boundary conditions on the walls
-  void set_boundary_conditions(const double &time);
+  void set_boundary_conditions(const double& time);
 
   /// Function that is used to run the parameter study
-  void solve_system(const double &dt,
-                    const unsigned &nstep,
-                    const std::string &directory);
+  void solve_system(const double& dt,
+                    const unsigned& nstep,
+                    const std::string& directory);
 
   /// \short Update the problem specs before next timestep:
   void actions_before_implicit_timestep()
@@ -427,7 +427,7 @@ public:
       // Cast to the particular element type, this is necessary because
       // the base elements don't have the member functions that we're about
       // to call!
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Fluid_mesh_pt->element_pt(e));
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Fluid_mesh_pt->element_pt(e));
 
       // There is no need for ALE
       el_pt->disable_ALE();
@@ -453,7 +453,7 @@ public:
       unsigned n_boundary_node = Fluid_mesh_pt->nboundary_node(b);
       for (unsigned n = 0; n < n_boundary_node; ++n)
       {
-        Node *nod_pt = Fluid_mesh_pt->boundary_node_pt(b, n);
+        Node* nod_pt = Fluid_mesh_pt->boundary_node_pt(b, n);
         // Repin all the nodes
         for (unsigned i = 0; i < 3; i++)
         {
@@ -466,7 +466,7 @@ public:
     this->set_boundary_conditions(this->time());
 
     // Pin a single pressure value
-    dynamic_cast<ELEMENT *>(Fluid_mesh_pt->element_pt(0))->fix_pressure(0, 0.0);
+    dynamic_cast<ELEMENT*>(Fluid_mesh_pt->element_pt(0))->fix_pressure(0, 0.0);
 
     // Kill the backed up mesh
     for (unsigned b = 0; b < n_boundary; ++b)
@@ -484,13 +484,13 @@ public:
   }
 
   /// Pointer to the Backedup Surface mesh
-  Vector<BackupMeshForProjection<TElement<1, 3>> *> Backed_up_surface_mesh_pt;
+  Vector<BackupMeshForProjection<TElement<1, 3>>*> Backed_up_surface_mesh_pt;
 
   /// Pointers to mesh of Lagrange multiplier elements
-  Vector<SolidMesh *> Lagrange_multiplier_mesh_pt;
+  Vector<SolidMesh*> Lagrange_multiplier_mesh_pt;
 
   /// Pointer to Fluid_mesh
-  RefineableSolidTriangleMesh<ELEMENT> *Fluid_mesh_pt;
+  RefineableSolidTriangleMesh<ELEMENT>* Fluid_mesh_pt;
 
   //============start_of_create_lagrange_multiplier_elements===============
   /// Create elements that impose the prescribed boundary displacement
@@ -508,7 +508,7 @@ public:
     for (unsigned b = 0; b < n_boundary; b++)
     {
       // Get the geometric object associated with the boundary
-      GeomObject *boundary_geom_obj_pt =
+      GeomObject* boundary_geom_obj_pt =
         Fluid_mesh_pt->boundary_geom_object_pt(b);
 
       // Only bother to do anything if there is a geometric object
@@ -522,8 +522,8 @@ public:
         {
           // Get pointer to the bulk fluid element that is
           // adjacent to boundary b
-          ELEMENT *bulk_elem_pt =
-            dynamic_cast<ELEMENT *>(Fluid_mesh_pt->boundary_element_pt(b, e));
+          ELEMENT* bulk_elem_pt =
+            dynamic_cast<ELEMENT*>(Fluid_mesh_pt->boundary_element_pt(b, e));
 
           // Find the index of the face of element e along boundary b
           int face_index = Fluid_mesh_pt->face_index_at_boundary(b, e);
@@ -531,7 +531,7 @@ public:
           // Create new element. Note that we use different Lagrange
           // multiplier fields for each distinct boundary (here indicated
           // by b.
-          ImposeDisplacementByLagrangeMultiplierElement<ELEMENT> *el_pt =
+          ImposeDisplacementByLagrangeMultiplierElement<ELEMENT>* el_pt =
             new ImposeDisplacementByLagrangeMultiplierElement<ELEMENT>(
               bulk_elem_pt, face_index, b);
 
@@ -547,7 +547,7 @@ public:
           unsigned nnod = el_pt->nnode();
           for (unsigned j = 0; j < nnod; j++)
           {
-            Node *nod_pt = el_pt->node_pt(j);
+            Node* nod_pt = el_pt->node_pt(j);
 
             // How many nodal values were used by the "bulk" element
             // that originally created this node?
@@ -603,7 +603,7 @@ public:
 //============================================================================
 template<class ELEMENT>
 UnstructuredTorusProblem<ELEMENT>::UnstructuredTorusProblem(
-  const double &min_error_target, const double &max_error_target)
+  const double& min_error_target, const double& max_error_target)
 {
   Use_continuation_timestepper = true;
 
@@ -616,16 +616,16 @@ UnstructuredTorusProblem<ELEMENT>::UnstructuredTorusProblem(
 
   // Create the domain for the mesh, which consists of a circle of
   // radius Radius and centred at y=0
-  GeomObject *area_pt = new GeneralCircle(0.0, Radius);
+  GeomObject* area_pt = new GeneralCircle(0.0, Radius);
 
   // No holes
-  Vector<TriangleMeshClosedCurve *> Inner_hole_pt;
+  Vector<TriangleMeshClosedCurve*> Inner_hole_pt;
 
   // Now create the mesh
   double uniform_element_area = 0.2;
 
   // Build the two parts of the curvilinear boundary
-  Vector<TriangleMeshCurveSection *> curvilinear_boundary_pt(2);
+  Vector<TriangleMeshCurveSection*> curvilinear_boundary_pt(2);
 
   double zeta_start = 0.0;
   double zeta_end = MathematicalConstants::Pi;
@@ -645,7 +645,7 @@ UnstructuredTorusProblem<ELEMENT>::UnstructuredTorusProblem(
   Vector<double> hole_coords(2);
   hole_coords[0] = 0.0;
   hole_coords[1] = 0.0;
-  TriangleMeshClosedCurve *curvilinear_outer_boundary_pt =
+  TriangleMeshClosedCurve* curvilinear_outer_boundary_pt =
     new TriangleMeshClosedCurve(curvilinear_boundary_pt);
 
   // Use the TriangleMeshParameters object for gathering all
@@ -664,7 +664,7 @@ UnstructuredTorusProblem<ELEMENT>::UnstructuredTorusProblem(
     triangle_mesh_parameters, this->time_stepper_pt());
 
   // Set error estimator
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   Fluid_mesh_pt->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Error targets for adaptive refinement
@@ -678,7 +678,7 @@ UnstructuredTorusProblem<ELEMENT>::UnstructuredTorusProblem(
     // Cast to the particular element type, this is necessary because
     // the base elements don't have the member functions that we're about
     // to call!
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Fluid_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Fluid_mesh_pt->element_pt(e));
 
     // There is no need for ALE
     el_pt->disable_ALE();
@@ -720,7 +720,7 @@ UnstructuredTorusProblem<ELEMENT>::UnstructuredTorusProblem(
   }
 
   // Pin a single pressure value
-  dynamic_cast<ELEMENT *>(Fluid_mesh_pt->element_pt(0))->fix_pressure(0, 0.0);
+  dynamic_cast<ELEMENT*>(Fluid_mesh_pt->element_pt(0))->fix_pressure(0, 0.0);
 
   // Create Lagrange multiplier mesh for boundary motion
   //----------------------------------------------------
@@ -759,7 +759,7 @@ UnstructuredTorusProblem<ELEMENT>::UnstructuredTorusProblem(
 //========================================================================
 template<class ELEMENT>
 void UnstructuredTorusProblem<ELEMENT>::set_boundary_conditions(
-  const double &time)
+  const double& time)
 {
   // NOTE: The default value of all parameters is zero, so we need only
   // set the values that are non-zero on the boundary, i.e. the swirl
@@ -789,7 +789,7 @@ void UnstructuredTorusProblem<ELEMENT>::set_boundary_conditions(
 //==========================================================================
 template<class ELEMENT>
 void UnstructuredTorusProblem<ELEMENT>::solve_system(
-  const double &dt, const unsigned &nstep, const std::string &directory)
+  const double& dt, const unsigned& nstep, const std::string& directory)
 {
   using namespace Global_Physical_Variables;
 

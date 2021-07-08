@@ -56,19 +56,19 @@ namespace TanhSolnForPoisson
   double Beta;
 
   /// Exact solution as a Vector
-  void get_exact_u(const Vector<double> &x, Vector<double> &u)
+  void get_exact_u(const Vector<double>& x, Vector<double>& u)
   {
     u[0] = tanh(1.0 - Alpha * (Beta * x[0] - x[1]));
   }
 
   /// Exact solution as a scalar
-  void get_exact_u(const Vector<double> &x, double &u)
+  void get_exact_u(const Vector<double>& x, double& u)
   {
     u = tanh(1.0 - Alpha * (Beta * x[0] - x[1]));
   }
 
   /// Source function to make it an exact solution
-  void get_source(const Vector<double> &x, double &source)
+  void get_source(const Vector<double>& x, double& source)
   {
     source = 2.0 * tanh(-1.0 + Alpha * (Beta * x[0] - x[1])) *
                (1.0 - pow(tanh(-1.0 + Alpha * (Beta * x[0] - x[1])), 2.0)) *
@@ -92,9 +92,9 @@ public:
   /// \short Constructor: Pass pointer to source function and names of
   /// two triangle input files
   PoissonProblem(PoissonEquations<2>::PoissonSourceFctPt source_fct_pt,
-                 const string &node_file_name,
-                 const string &element_file_name,
-                 const string &poly_file_name);
+                 const string& node_file_name,
+                 const string& element_file_name,
+                 const string& poly_file_name);
 
   /// Destructor (empty)
   ~PoissonProblem() {}
@@ -110,7 +110,7 @@ public:
       unsigned num_nod = mesh_pt()->nboundary_node(ibound);
       for (unsigned inod = 0; inod < num_nod; inod++)
       {
-        Node *nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
+        Node* nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
         double u;
         Vector<double> x(2);
         x[0] = nod_pt->x(0);
@@ -131,20 +131,20 @@ public:
 
 #ifdef ADAPT
   /// Access function for the specific mesh
-  RefineableTriangleMesh<ELEMENT> *mesh_pt()
+  RefineableTriangleMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<RefineableTriangleMesh<ELEMENT> *>(Problem::mesh_pt());
+    return dynamic_cast<RefineableTriangleMesh<ELEMENT>*>(Problem::mesh_pt());
   }
 #else
   /// Access function for the specific mesh
-  TriangleMesh<ELEMENT> *mesh_pt()
+  TriangleMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<TriangleMesh<ELEMENT> *>(Problem::mesh_pt());
+    return dynamic_cast<TriangleMesh<ELEMENT>*>(Problem::mesh_pt());
   }
 #endif
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 private:
   /// Pointer to source function
@@ -152,10 +152,10 @@ private:
 
 #ifdef ADAPT
   /// Pointer to the bulk mesh
-  RefineableTriangleMesh<ELEMENT> *Bulk_mesh_pt;
+  RefineableTriangleMesh<ELEMENT>* Bulk_mesh_pt;
 
   /// Error estimator
-  Z2ErrorEstimator *error_estimator_pt;
+  Z2ErrorEstimator* error_estimator_pt;
 #endif
 };
 
@@ -165,9 +165,9 @@ private:
 template<class ELEMENT>
 PoissonProblem<ELEMENT>::PoissonProblem(
   PoissonEquations<2>::PoissonSourceFctPt source_fct_pt,
-  const string &node_file_name,
-  const string &element_file_name,
-  const string &poly_file_name) :
+  const string& node_file_name,
+  const string& element_file_name,
+  const string& poly_file_name) :
   Source_fct_pt(source_fct_pt)
 {
   // Setup parameters for exact tanh solution
@@ -184,7 +184,7 @@ PoissonProblem<ELEMENT>::PoissonProblem(
     node_file_name, element_file_name, poly_file_name);
 
   // Set error estimator for bulk mesh
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   Bulk_mesh_pt->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Set the problem mesh pointer to the bulk mesh
@@ -219,7 +219,7 @@ PoissonProblem<ELEMENT>::PoissonProblem(
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the source function pointer
     el_pt->source_fct_pt() = Source_fct_pt;
@@ -263,7 +263,7 @@ void PoissonProblem<ELEMENT>::actions_after_adapt()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the source function pointer
     el_pt->source_fct_pt() = Source_fct_pt;
@@ -278,7 +278,7 @@ void PoissonProblem<ELEMENT>::actions_after_adapt()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void PoissonProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void PoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -340,7 +340,7 @@ void PoissonProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
 //========================================================================
 /// Demonstrate how to solve Poisson problem
 //========================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

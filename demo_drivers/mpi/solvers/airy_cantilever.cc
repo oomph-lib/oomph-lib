@@ -51,7 +51,7 @@ namespace oomph
   //==============================================================================
   namespace Hypre_Subsidiary_Preconditioner_Helper
   {
-    Preconditioner *get_hypre_preconditioner()
+    Preconditioner* get_hypre_preconditioner()
     {
       return new HyprePreconditioner;
     }
@@ -70,7 +70,7 @@ namespace oomph
     MySolidElement() : ELEMENT(){};
 
     /// Overload output function:
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       // Element dimension
       unsigned el_dim = this->dim();
@@ -154,7 +154,7 @@ namespace Global_Physical_Variables
   double L = 10.0;
 
   /// Pointer to constitutive law
-  ConstitutiveLaw *Constitutive_law_pt;
+  ConstitutiveLaw* Constitutive_law_pt;
 
   /// Elastic modulus
   double E = 1.0;
@@ -170,10 +170,10 @@ namespace Global_Physical_Variables
   /// depend on the Lagrangian and Eulerian coordinates x and xi, and on the
   /// outer unit normal to the surface. Here we only need the outer unit
   /// normal.
-  void constant_pressure(const Vector<double> &xi,
-                         const Vector<double> &x,
-                         const Vector<double> &n,
-                         Vector<double> &traction)
+  void constant_pressure(const Vector<double>& xi,
+                         const Vector<double>& x,
+                         const Vector<double>& n,
+                         Vector<double>& traction)
   {
     unsigned dim = traction.size();
     for (unsigned i = 0; i < dim; i++)
@@ -186,7 +186,7 @@ namespace Global_Physical_Variables
   double Gravity = 0.0;
 
   /// Non-dimensional gravity as body force
-  void gravity(const double &time, const Vector<double> &xi, Vector<double> &b)
+  void gravity(const double& time, const Vector<double>& xi, Vector<double>& b)
   {
     b[0] = 0.0;
     b[1] = -Gravity;
@@ -211,13 +211,13 @@ public:
   void actions_before_newton_solve() {}
 
   /// Access function for the solid mesh
-  ElasticRefineableRectangularQuadMesh<ELEMENT> *&solid_mesh_pt()
+  ElasticRefineableRectangularQuadMesh<ELEMENT>*& solid_mesh_pt()
   {
     return Solid_mesh_pt;
   }
 
   /// Access function to the mesh of surface traction elements
-  SolidMesh *&traction_mesh_pt()
+  SolidMesh*& traction_mesh_pt()
   {
     return Traction_mesh_pt;
   }
@@ -229,7 +229,7 @@ public:
   void actions_after_adapt();
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 private:
   /// \short Pass pointer to traction function to the
@@ -246,13 +246,13 @@ private:
   ofstream Trace_file;
 
   /// Pointers to node whose position we're tracing
-  Node *Trace_node_pt;
+  Node* Trace_node_pt;
 
   /// Pointer to solid mesh
-  ElasticRefineableRectangularQuadMesh<ELEMENT> *Solid_mesh_pt;
+  ElasticRefineableRectangularQuadMesh<ELEMENT>* Solid_mesh_pt;
 
   /// Pointers to meshes of traction elements
-  SolidMesh *Traction_mesh_pt;
+  SolidMesh* Traction_mesh_pt;
 
   /// DocInfo object for output
   DocInfo Doc_info;
@@ -296,7 +296,7 @@ CantileverProblem<ELEMENT>::CantileverProblem()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Cast to a solid element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(solid_mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(solid_mesh_pt()->element_pt(i));
 
     // Set the constitutive law
     el_pt->constitutive_law_pt() =
@@ -403,8 +403,8 @@ void CantileverProblem<ELEMENT>::set_traction_pt()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Cast to a solid traction element
-    SolidTractionElement<ELEMENT> *el_pt =
-      dynamic_cast<SolidTractionElement<ELEMENT> *>(
+    SolidTractionElement<ELEMENT>* el_pt =
+      dynamic_cast<SolidTractionElement<ELEMENT>*>(
         traction_mesh_pt()->element_pt(i));
 
     // Set the traction function
@@ -429,8 +429,8 @@ void CantileverProblem<ELEMENT>::create_traction_elements()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    ELEMENT *bulk_elem_pt =
-      dynamic_cast<ELEMENT *>(solid_mesh_pt()->boundary_element_pt(b, e));
+    ELEMENT* bulk_elem_pt =
+      dynamic_cast<ELEMENT*>(solid_mesh_pt()->boundary_element_pt(b, e));
 
     // Find the index of the face of element e along boundary b
     int face_index = solid_mesh_pt()->face_index_at_boundary(b, e);
@@ -470,7 +470,7 @@ void CantileverProblem<ELEMENT>::delete_traction_elements()
 /// Doc the solution
 //==================================================================
 template<class ELEMENT>
-void CantileverProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void CantileverProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -518,8 +518,8 @@ void CantileverProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
   for (unsigned e = 0; e < nel; e++)
   {
     // Get pointer to element
-    SolidFiniteElement *el_pt =
-      dynamic_cast<SolidFiniteElement *>(solid_mesh_pt()->element_pt(e));
+    SolidFiniteElement* el_pt =
+      dynamic_cast<SolidFiniteElement*>(solid_mesh_pt()->element_pt(e));
 
     // Tecplot header info
     some_file << "ZONE I=" << n_plot << ", J=" << n_plot << std::endl;
@@ -571,7 +571,7 @@ void CantileverProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
 /// Driver for cantilever beam loaded by surface traction and/or
 /// gravity
 //======================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
 #ifdef OOMPH_HAS_MPI
   MPI_Helpers::init(argc, argv);
@@ -643,17 +643,17 @@ int main(int argc, char *argv[])
 
   // use trilinos gmres if available
 #ifdef OOMPH_HAS_TRILINOS
-  TrilinosAztecOOSolver *solver_pt = new TrilinosAztecOOSolver;
+  TrilinosAztecOOSolver* solver_pt = new TrilinosAztecOOSolver;
   solver_pt->solver_type() = TrilinosAztecOOSolver::GMRES;
 #else
-  GMRES<CRDoubleMatrix> *solver_pt = new GMRES<CRDoubleMatrix>;
+  GMRES<CRDoubleMatrix>* solver_pt = new GMRES<CRDoubleMatrix>;
 #endif
   problem.linear_solver_pt() = solver_pt;
   solver_pt->tolerance() = 10e-5;
   solver_pt->enable_doc_convergence_history();
 
   // Pointer to general purpose block preconditioner base class
-  GeneralPurposeBlockPreconditioner<CRDoubleMatrix> *prec_pt = 0;
+  GeneralPurposeBlockPreconditioner<CRDoubleMatrix>* prec_pt = 0;
 
   // Choose the preconditioner type
   switch (prec)
@@ -667,21 +667,21 @@ int main(int argc, char *argv[])
 
       // Two Level Block Diagonal
       prec_pt = new BlockDiagonalPreconditioner<CRDoubleMatrix>;
-      dynamic_cast<BlockDiagonalPreconditioner<CRDoubleMatrix> *>(prec_pt)
+      dynamic_cast<BlockDiagonalPreconditioner<CRDoubleMatrix>*>(prec_pt)
         ->enable_two_level_parallelisation();
       break;
     case 2:
 
       // Block Upper Triangular
       prec_pt = new BlockTriangularPreconditioner<CRDoubleMatrix>;
-      dynamic_cast<BlockTriangularPreconditioner<CRDoubleMatrix> *>(prec_pt)
+      dynamic_cast<BlockTriangularPreconditioner<CRDoubleMatrix>*>(prec_pt)
         ->upper_triangular();
       break;
     case 3:
 
       // Block Lower Triangular
       prec_pt = new BlockTriangularPreconditioner<CRDoubleMatrix>;
-      dynamic_cast<BlockTriangularPreconditioner<CRDoubleMatrix> *>(prec_pt)
+      dynamic_cast<BlockTriangularPreconditioner<CRDoubleMatrix>*>(prec_pt)
         ->lower_triangular();
       break;
   }

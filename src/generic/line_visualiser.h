@@ -60,9 +60,9 @@ namespace oomph
     /// limiting this to the order of the size of a typical element
     /// in the mesh in parallel computations with fine meshes, otherwise
     /// the setup can take forever.
-    LineVisualiser(Mesh *mesh_pt,
-                   const Vector<Vector<double>> &coord_vec,
-                   const double &max_search_radius = DBL_MAX) :
+    LineVisualiser(Mesh* mesh_pt,
+                   const Vector<Vector<double>>& coord_vec,
+                   const double& max_search_radius = DBL_MAX) :
       Max_search_radius(max_search_radius), Comm_pt(mesh_pt->communicator_pt())
     {
       // Do the actual work
@@ -73,9 +73,9 @@ namespace oomph
     /// - Open "file_name" and extract 3 first doubles of each line
     /// - Skip lines which does not begin with a number. Scaling
     /// factor allows points defined in input file to be scaled.
-    LineVisualiser(Mesh *mesh_pt,
+    LineVisualiser(Mesh* mesh_pt,
                    const std::string file_name,
-                   const double &scale = 1.0) :
+                   const double& scale = 1.0) :
       Max_search_radius(DBL_MAX), Comm_pt(mesh_pt->communicator_pt())
     {
       setup_from_file(mesh_pt, file_name, scale);
@@ -90,10 +90,10 @@ namespace oomph
     /// setting this to the order of the size of a typical element
     /// in the mesh in parallel computations with fine meshes, otherwise
     /// the setup can take forever.
-    LineVisualiser(Mesh *mesh_pt,
-                   const double &max_search_radius,
+    LineVisualiser(Mesh* mesh_pt,
+                   const double& max_search_radius,
                    const std::string file_name,
-                   const double &scale = 1.0) :
+                   const double& scale = 1.0) :
       Max_search_radius(max_search_radius), Comm_pt(mesh_pt->communicator_pt())
     {
       setup_from_file(mesh_pt, file_name, scale);
@@ -102,7 +102,7 @@ namespace oomph
     /// \short Output function: output each plot point.
     /// NOTE: in a distributed problem, output is only done
     /// on processor 0.
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       // Get data in array
       Vector<Vector<double>> data(Nplot_points);
@@ -128,7 +128,7 @@ namespace oomph
 
     /// \short Output data function: store data associated with each
     /// plot point in data array
-    void get_output_data(Vector<Vector<double>> &data)
+    void get_output_data(Vector<Vector<double>>& data)
     {
       // Resize output data array
       data.resize(Nplot_points);
@@ -360,7 +360,7 @@ namespace oomph
 
     /// \short Update plot points coordinates (in preparation of remesh,
     /// say).
-    void update_plot_points_coordinates(Vector<Vector<double>> &coord_vec)
+    void update_plot_points_coordinates(Vector<Vector<double>>& coord_vec)
     {
       // Resize coord_vec
       coord_vec.resize(Nplot_points);
@@ -587,12 +587,12 @@ namespace oomph
 
     /// \short Pointer to communicator -- allows us to collect data on
     /// processor 0 if the mesh is distributed.
-    OomphCommunicator *Comm_pt;
+    OomphCommunicator* Comm_pt;
 
     /// Helper function to setup from file
-    void setup_from_file(Mesh *mesh_pt,
+    void setup_from_file(Mesh* mesh_pt,
                          const std::string file_name,
-                         const double &scale)
+                         const double& scale)
     {
       // Open file use ifstream
       std::ifstream file_input(file_name.c_str(), std::ios_base::in);
@@ -654,7 +654,7 @@ namespace oomph
     }
 
     /// \short Helper function to setup the output structures
-    void setup(Mesh *mesh_pt, const Vector<Vector<double>> &coord_vec)
+    void setup(Mesh* mesh_pt, const Vector<Vector<double>>& coord_vec)
     {
       // Read out number of plot points
       Nplot_points = coord_vec.size();
@@ -685,13 +685,13 @@ namespace oomph
         Vector<double> s(dim, 0.0);
 
         // Pointer to GeomObject that contains the plot point
-        GeomObject *geom_pt = 0;
+        GeomObject* geom_pt = 0;
 
         // Locate zeta
         mesh_geom_tmp.locate_zeta(coord_vec[i], geom_pt, s);
 
         // Upcast GeomElement as a FiniteElement
-        FiniteElement *fe_pt = dynamic_cast<FiniteElement *>(geom_pt);
+        FiniteElement* fe_pt = dynamic_cast<FiniteElement*>(geom_pt);
 
         // Another one not found locally...
         if (fe_pt == 0)
@@ -709,7 +709,7 @@ namespace oomph
         }
 
         // Save result in a pair
-        Plot_point[i] = std::pair<FiniteElement *, Vector<double>>(fe_pt, s);
+        Plot_point[i] = std::pair<FiniteElement*, Vector<double>>(fe_pt, s);
       }
 
       oomph_info << "Number of points not found locally: "
@@ -786,7 +786,7 @@ namespace oomph
     }
 
     // Get coordinates of found points
-    void get_local_plot_points_coordinates(Vector<Vector<double>> &data)
+    void get_local_plot_points_coordinates(Vector<Vector<double>>& data)
     {
       data.resize(Nplot_points);
       for (unsigned i = 0; i < Nplot_points; i++)
@@ -808,7 +808,7 @@ namespace oomph
 
     /// \short Vector of pairs containing points to finite elements and
     /// local coordinates
-    Vector<std::pair<FiniteElement *, Vector<double>>> Plot_point;
+    Vector<std::pair<FiniteElement*, Vector<double>>> Plot_point;
 
     /// Number of plot points
     unsigned Nplot_points;

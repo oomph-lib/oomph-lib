@@ -62,7 +62,7 @@ namespace Global_Physical_Variables
   Vector<double> Wall_normal;
 
   /// \short Function that specifies the wall unit normal
-  void wall_unit_normal_fct(const Vector<double> &x, Vector<double> &normal)
+  void wall_unit_normal_fct(const Vector<double>& x, Vector<double>& normal)
   {
     normal = Wall_normal;
   }
@@ -79,14 +79,14 @@ class CapProblem : public Problem
 public:
   // Constructor: Boolean flag indicates if volume constraint is
   // applied by hijacking internal or external pressure
-  CapProblem(const bool &hijack_internal);
+  CapProblem(const bool& hijack_internal);
 
   // Destructor: clean up all allocated memory
   ~CapProblem();
 
   /// Perform a parameter study: Solve problem for a range of contact angles
   /// Pass name of output directory as a string
-  void parameter_study(const string &dir_name);
+  void parameter_study(const string& dir_name);
 
   /// Update the spine mesh after every Newton step
   void actions_before_newton_convergence_check()
@@ -98,7 +98,7 @@ public:
   void create_volume_constraint_elements();
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 private:
   /// The Capillary number
@@ -114,25 +114,25 @@ private:
   double Angle;
 
   /// The bulk mesh of fluid elements
-  SingleLayerSpineMesh<SpineElement<ELEMENT>> *Bulk_mesh_pt;
+  SingleLayerSpineMesh<SpineElement<ELEMENT>>* Bulk_mesh_pt;
 
   /// The mesh for the interface elements
-  Mesh *Surface_mesh_pt;
+  Mesh* Surface_mesh_pt;
 
   /// The mesh for the element at the contact point
-  Mesh *Point_mesh_pt;
+  Mesh* Point_mesh_pt;
 
   /// The volume constraint mesh
-  Mesh *Volume_constraint_mesh_pt;
+  Mesh* Volume_constraint_mesh_pt;
 
   /// Trace file
   ofstream Trace_file;
 
   /// Data object whose single value stores the external pressure
-  Data *External_pressure_data_pt;
+  Data* External_pressure_data_pt;
 
   /// Data that is traded for the volume constraint
-  Data *Traded_pressure_data_pt;
+  Data* Traded_pressure_data_pt;
 };
 
 //======================================================================
@@ -141,7 +141,7 @@ private:
 /// or the external pressure
 //======================================================================
 template<class ELEMENT>
-CapProblem<ELEMENT>::CapProblem(const bool &hijack_internal) :
+CapProblem<ELEMENT>::CapProblem(const bool& hijack_internal) :
   Ca(2.1), // Initialise value of Ca to some random value
   Volume(0.5), // Initialise the value of the volume
   Pext(1.23), // Initialise the external pressure to some random value
@@ -178,7 +178,7 @@ CapProblem<ELEMENT>::CapProblem(const bool &hijack_internal) :
   for (unsigned e = 0; e < n_boundary_element; e++)
   {
     // Construct a new 1D line element adjacent to boundary 2
-    FiniteElement *interface_element_pt =
+    FiniteElement* interface_element_pt =
       new SpineLineFluidInterfaceElement<SpineElement<ELEMENT>>(
         Bulk_mesh_pt->boundary_element_pt(2, e),
         Bulk_mesh_pt->face_index_at_boundary(2, e));
@@ -193,8 +193,8 @@ CapProblem<ELEMENT>::CapProblem(const bool &hijack_internal) :
     if (interface_element_pt->node_pt(n_node - 1)->is_on_boundary(1))
     {
       // Make the point (contact) element from right-hand edge of the element
-      FiniteElement *point_element_pt =
-        dynamic_cast<SpineLineFluidInterfaceElement<SpineElement<ELEMENT>> *>(
+      FiniteElement* point_element_pt =
+        dynamic_cast<SpineLineFluidInterfaceElement<SpineElement<ELEMENT>>*>(
           interface_element_pt)
           ->make_bounding_element(1);
 
@@ -224,7 +224,7 @@ CapProblem<ELEMENT>::CapProblem(const bool &hijack_internal) :
     //(Its value will affect the residual of that element but it will not
     // be determined by it, i.e. it's hijacked).
     Traded_pressure_data_pt =
-      dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(0))
+      dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(0))
         ->hijack_internal_value(0, 0);
   }
   else
@@ -244,7 +244,7 @@ CapProblem<ELEMENT>::CapProblem(const bool &hijack_internal) :
     // can add an arbitrary constant to all pressures. To make
     // the solution unique, we pin a single pressure value in the bulk:
     // We arbitrarily set the pressure dof 0 in element 0 to zero.
-    dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(0))->fix_pressure(0, 0.0);
+    dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(0))->fix_pressure(0, 0.0);
   }
 
   // Loop over the elements on the interface to pass pointer to Ca and
@@ -255,8 +255,8 @@ CapProblem<ELEMENT>::CapProblem(const bool &hijack_internal) :
   for (unsigned e = 0; e < n_interface; e++)
   {
     // Cast to a 1D element
-    SpineLineFluidInterfaceElement<SpineElement<ELEMENT>> *el_pt =
-      dynamic_cast<SpineLineFluidInterfaceElement<SpineElement<ELEMENT>> *>(
+    SpineLineFluidInterfaceElement<SpineElement<ELEMENT>>* el_pt =
+      dynamic_cast<SpineLineFluidInterfaceElement<SpineElement<ELEMENT>>*>(
         Surface_mesh_pt->element_pt(e));
 
     // Set the Capillary number
@@ -292,8 +292,8 @@ CapProblem<ELEMENT>::CapProblem(const bool &hijack_internal) :
 
   // Set the contact angle boundary condition for the rightmost element
   // (pass pointer to double that specifies the contact angle)
-  FluidInterfaceBoundingElement *contact_angle_element_pt =
-    dynamic_cast<FluidInterfaceBoundingElement *>(Point_mesh_pt->element_pt(0));
+  FluidInterfaceBoundingElement* contact_angle_element_pt =
+    dynamic_cast<FluidInterfaceBoundingElement*>(Point_mesh_pt->element_pt(0));
 
   contact_angle_element_pt->set_contact_angle(&Angle);
   contact_angle_element_pt->ca_pt() = &Ca;
@@ -374,7 +374,7 @@ void CapProblem<ELEMENT>::create_volume_constraint_elements()
 {
   // The single volume constraint element
   Volume_constraint_mesh_pt = new Mesh;
-  VolumeConstraintElement *vol_constraint_element =
+  VolumeConstraintElement* vol_constraint_element =
     new VolumeConstraintElement(&Volume, Traded_pressure_data_pt, 0);
   Volume_constraint_mesh_pt->add_element_pt(vol_constraint_element);
 
@@ -389,14 +389,14 @@ void CapProblem<ELEMENT>::create_volume_constraint_elements()
     {
       // Get pointer to the bulk fluid element that is
       // adjacent to boundary b
-      ELEMENT *bulk_elem_pt =
-        dynamic_cast<ELEMENT *>(Bulk_mesh_pt->boundary_element_pt(b, e));
+      ELEMENT* bulk_elem_pt =
+        dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(b, e));
 
       // Find the index of the face of element e along boundary b
       int face_index = Bulk_mesh_pt->face_index_at_boundary(b, e);
 
       // Create new element
-      SpineLineVolumeConstraintBoundingElement<ELEMENT> *el_pt =
+      SpineLineVolumeConstraintBoundingElement<ELEMENT>* el_pt =
         new SpineLineVolumeConstraintBoundingElement<ELEMENT>(bulk_elem_pt,
                                                               face_index);
 
@@ -414,7 +414,7 @@ void CapProblem<ELEMENT>::create_volume_constraint_elements()
 /// a string
 //======================================================================
 template<class ELEMENT>
-void CapProblem<ELEMENT>::parameter_study(const string &dir_name)
+void CapProblem<ELEMENT>::parameter_study(const string& dir_name)
 {
   // Create DocInfo object (allows checking if output directory exists)
   DocInfo doc_info;
@@ -452,7 +452,7 @@ void CapProblem<ELEMENT>::parameter_study(const string &dir_name)
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void CapProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void CapProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -477,7 +477,7 @@ void CapProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
   Trace_file << " " << Bulk_mesh_pt->spine_pt(0)->height();
   Trace_file << " " << Bulk_mesh_pt->spine_pt(nspine - 1)->height();
   Trace_file << " "
-             << dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(0))->p_nst(0) -
+             << dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(0))->p_nst(0) -
                   External_pressure_data_pt->value(0);
   Trace_file << " " << -2.0 * cos(Angle) / Ca;
   Trace_file << std::endl;
@@ -494,17 +494,17 @@ class PseudoSolidCapProblem : public Problem
 public:
   /// Constructor: Boolean flag indicates if volume constraint is
   /// applied by hijacking internal or external pressure
-  PseudoSolidCapProblem(const bool &hijack_internal);
+  PseudoSolidCapProblem(const bool& hijack_internal);
 
   /// Destructor: clean up memory allocated by the object
   ~PseudoSolidCapProblem();
 
   /// Peform a parameter study: Solve problem for a range of contact angles
   /// Pass name of output directory as a string
-  void parameter_study(const string &dir_name);
+  void parameter_study(const string& dir_name);
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 private:
   /// Create the free surface elements
@@ -529,33 +529,33 @@ private:
   double Angle;
 
   /// Constitutive law used to determine the mesh deformation
-  ConstitutiveLaw *Constitutive_law_pt;
+  ConstitutiveLaw* Constitutive_law_pt;
 
   /// Data object whose single value stores the external pressure
-  Data *External_pressure_data_pt;
+  Data* External_pressure_data_pt;
 
   // Pointer to the (single valued) Data item that
   // will contain the pressure value that we're
   // trading for the volume constraint
-  Data *Traded_pressure_data_pt;
+  Data* Traded_pressure_data_pt;
 
   /// Trace file
   ofstream Trace_file;
 
   /// Storage for the bulk mesh
-  Mesh *Bulk_mesh_pt;
+  Mesh* Bulk_mesh_pt;
 
   /// Storage for the free surface mesh
-  Mesh *Free_surface_mesh_pt;
+  Mesh* Free_surface_mesh_pt;
 
   /// Storage for the element bounding the free surface
-  Mesh *Free_surface_bounding_mesh_pt;
+  Mesh* Free_surface_bounding_mesh_pt;
 
   /// Storage for the elements that compute the enclosed volume
-  Mesh *Volume_computation_mesh_pt;
+  Mesh* Volume_computation_mesh_pt;
 
   /// Storage for the volume constraint
-  Mesh *Volume_constraint_mesh_pt;
+  Mesh* Volume_constraint_mesh_pt;
 
 }; // end_of_pseudo_solid_problem_class
 
@@ -566,7 +566,7 @@ private:
 //======================================================================
 template<class ELEMENT>
 PseudoSolidCapProblem<ELEMENT>::PseudoSolidCapProblem(
-  const bool &hijack_internal) :
+  const bool& hijack_internal) :
   Ca(2.1), // Initialise value of Ca to some random value
   Volume(0.5), // Initialise the value of the volume
   Pext(1.23), // Initialise the external pressure to some random value
@@ -611,7 +611,7 @@ PseudoSolidCapProblem<ELEMENT>::PseudoSolidCapProblem(
     //(Its value will affect the residual of that element but it will not
     // be determined by it, i.e. it's hijacked).
     Traded_pressure_data_pt =
-      dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(0))
+      dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(0))
         ->hijack_internal_value(0, 0);
   }
   else
@@ -631,7 +631,7 @@ PseudoSolidCapProblem<ELEMENT>::PseudoSolidCapProblem(
     // can add an arbitrary constant to all pressures. To make
     // the solution unique, we pin a single pressure value in the bulk:
     // We arbitrarily set the pressure dof 0 in element 0 to zero.
-    dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(0))->fix_pressure(0, 0.0);
+    dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(0))->fix_pressure(0, 0.0);
   }
 
   // Set the constituive law
@@ -641,7 +641,7 @@ PseudoSolidCapProblem<ELEMENT>::PseudoSolidCapProblem(
   unsigned n_bulk = Bulk_mesh_pt->nelement();
   for (unsigned e = 0; e < n_bulk; e++)
   {
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
     el_pt->constitutive_law_pt() = Constitutive_law_pt;
   }
@@ -684,13 +684,13 @@ PseudoSolidCapProblem<ELEMENT>::PseudoSolidCapProblem(
         // Pin vertical displacement on the bottom
         if (b == 0)
         {
-          static_cast<SolidNode *>(Bulk_mesh_pt->boundary_node_pt(b, n))
+          static_cast<SolidNode*>(Bulk_mesh_pt->boundary_node_pt(b, n))
             ->pin_position(1);
         }
         if ((b == 1) || (b == 3))
         {
           // Pin horizontal displacement on the sizes
-          static_cast<SolidNode *>(Bulk_mesh_pt->boundary_node_pt(b, n))
+          static_cast<SolidNode*>(Bulk_mesh_pt->boundary_node_pt(b, n))
             ->pin_position(0);
         }
       }
@@ -702,7 +702,7 @@ PseudoSolidCapProblem<ELEMENT>::PseudoSolidCapProblem(
     unsigned n_node = Bulk_mesh_pt->nnode();
     for (unsigned n = 0; n < n_node; n++)
     {
-      static_cast<SolidNode *>(Bulk_mesh_pt->node_pt(n))->pin_position(0);
+      static_cast<SolidNode*>(Bulk_mesh_pt->node_pt(n))->pin_position(0);
     }
   } // end_of_constraint
 
@@ -798,14 +798,14 @@ void PseudoSolidCapProblem<ELEMENT>::create_free_surface_elements()
   {
     // Get pointer to the bulk fluid element that is
     // adjacent to boundary b
-    ELEMENT *bulk_elem_pt =
-      dynamic_cast<ELEMENT *>(Bulk_mesh_pt->boundary_element_pt(b, e));
+    ELEMENT* bulk_elem_pt =
+      dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(b, e));
 
     // Find the index of the face of element e along boundary b
     int face_index = Bulk_mesh_pt->face_index_at_boundary(b, e);
 
     // Create new element
-    ElasticLineFluidInterfaceElement<ELEMENT> *el_pt =
+    ElasticLineFluidInterfaceElement<ELEMENT>* el_pt =
       new ElasticLineFluidInterfaceElement<ELEMENT>(bulk_elem_pt, face_index);
 
     // Add it to the mesh
@@ -830,7 +830,7 @@ void PseudoSolidCapProblem<ELEMENT>::create_volume_constraint_elements()
 {
   // Build the single volume constraint element
   Volume_constraint_mesh_pt = new Mesh;
-  VolumeConstraintElement *vol_constraint_element =
+  VolumeConstraintElement* vol_constraint_element =
     new VolumeConstraintElement(&Volume, Traded_pressure_data_pt, 0);
   Volume_constraint_mesh_pt->add_element_pt(vol_constraint_element);
 
@@ -848,14 +848,14 @@ void PseudoSolidCapProblem<ELEMENT>::create_volume_constraint_elements()
     {
       // Get pointer to the bulk fluid element that is
       // adjacent to boundary b
-      ELEMENT *bulk_elem_pt =
-        dynamic_cast<ELEMENT *>(Bulk_mesh_pt->boundary_element_pt(b, e));
+      ELEMENT* bulk_elem_pt =
+        dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(b, e));
 
       // Find the index of the face of element e along boundary b
       int face_index = Bulk_mesh_pt->face_index_at_boundary(b, e);
 
       // Create new element
-      ElasticLineVolumeConstraintBoundingElement<ELEMENT> *el_pt =
+      ElasticLineVolumeConstraintBoundingElement<ELEMENT>* el_pt =
         new ElasticLineVolumeConstraintBoundingElement<ELEMENT>(bulk_elem_pt,
                                                                 face_index);
 
@@ -882,8 +882,8 @@ void PseudoSolidCapProblem<ELEMENT>::create_contact_angle_element()
 
   // Make the bounding element for the contact angle constraint
   // which works because the order of elements in the mesh is known
-  FluidInterfaceBoundingElement *el_pt =
-    dynamic_cast<ElasticLineFluidInterfaceElement<ELEMENT> *>(
+  FluidInterfaceBoundingElement* el_pt =
+    dynamic_cast<ElasticLineFluidInterfaceElement<ELEMENT>*>(
       Free_surface_mesh_pt->element_pt(n_free_surface - 1))
       ->make_bounding_element(1);
 
@@ -907,7 +907,7 @@ void PseudoSolidCapProblem<ELEMENT>::create_contact_angle_element()
 /// a string
 //======================================================================
 template<class ELEMENT>
-void PseudoSolidCapProblem<ELEMENT>::parameter_study(const string &dir_name)
+void PseudoSolidCapProblem<ELEMENT>::parameter_study(const string& dir_name)
 {
   // Create DocInfo object (allows checking if output directory exists)
   DocInfo doc_info;
@@ -945,7 +945,7 @@ void PseudoSolidCapProblem<ELEMENT>::parameter_study(const string &dir_name)
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void PseudoSolidCapProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void PseudoSolidCapProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   // Output stream
   ofstream some_file;
@@ -978,7 +978,7 @@ void PseudoSolidCapProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
                   ->node_pt(np - 1)
                   ->x(1);
   Trace_file << " "
-             << dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(0))->p_nst(0) -
+             << dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(0))->p_nst(0) -
                   External_pressure_data_pt->value(0);
   Trace_file << " " << -2.0 * cos(Angle) / Ca;
   Trace_file << std::endl;

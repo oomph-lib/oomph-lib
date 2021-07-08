@@ -39,9 +39,9 @@ namespace oomph
   //=========================================================================
   void RefineableAxisymAdvectionDiffusionEquations::
     fill_in_generic_residual_contribution_axi_adv_diff(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix,
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
       unsigned flag)
   {
     // Find out how many nodes there are in the element

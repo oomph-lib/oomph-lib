@@ -69,9 +69,9 @@ namespace oomph
     /// n_vector vectors, each with a prescribed distribution.
     /// Additionally every entry can be set (with argument v -
     /// defaults to 0).
-    DoubleMultiVector(const unsigned &n_vector,
-                      const LinearAlgebraDistribution *const &dist_pt,
-                      const double &v = 0.0) :
+    DoubleMultiVector(const unsigned& n_vector,
+                      const LinearAlgebraDistribution* const& dist_pt,
+                      const double& v = 0.0) :
       Values(0), Nvector(n_vector), Internal_values(true), Built(false)
     {
       this->build(n_vector, dist_pt, v);
@@ -82,9 +82,9 @@ namespace oomph
     /// n_vector vectors, each with a prescribed distribution.
     /// Additionally every entry can be set (with argument v -
     /// defaults to 0).
-    DoubleMultiVector(const unsigned &n_vector,
-                      const LinearAlgebraDistribution &dist,
-                      const double &v = 0.0) :
+    DoubleMultiVector(const unsigned& n_vector,
+                      const LinearAlgebraDistribution& dist,
+                      const double& v = 0.0) :
       Values(0), Nvector(n_vector), Internal_values(true), Built(false)
     {
       this->build(n_vector, dist, v);
@@ -94,9 +94,9 @@ namespace oomph
     /// \short Constructor. Build a multivector using the same distribution
     /// of the input vector with n_vector columns and initialised to the value
     /// v
-    DoubleMultiVector(const unsigned &n_vector,
-                      const DoubleMultiVector &old_vector,
-                      const double &initial_value = 0.0) :
+    DoubleMultiVector(const unsigned& n_vector,
+                      const DoubleMultiVector& old_vector,
+                      const double& initial_value = 0.0) :
       Values(0), Nvector(n_vector), Internal_values(true), Built(false)
     {
       this->build(n_vector, old_vector.distribution_pt(), initial_value);
@@ -106,9 +106,9 @@ namespace oomph
     /// \short Constructor that builds a multivector from selected columns
     /// of the input multivector. The boolean controls whether it is a
     /// shallow or deep copy (default deep)
-    DoubleMultiVector(const DoubleMultiVector &old_vector,
-                      const std::vector<int> &index,
-                      const bool &deep_copy = true) :
+    DoubleMultiVector(const DoubleMultiVector& old_vector,
+                      const std::vector<int>& index,
+                      const bool& deep_copy = true) :
       Values(0), Nvector(0), Internal_values(deep_copy), Built(false)
     {
       // Build the storage based on the size of index
@@ -145,9 +145,9 @@ namespace oomph
     /// of the input multivector and the provided range. The optional
     /// boolean specifies whether it is a shallow or deep copy. The default
     /// is that it is a deep copy.
-    DoubleMultiVector(const DoubleMultiVector &old_vector,
-                      const Teuchos::Range1D &index,
-                      const bool &deep_copy = true) :
+    DoubleMultiVector(const DoubleMultiVector& old_vector,
+                      const Teuchos::Range1D& index,
+                      const bool& deep_copy = true) :
       Values(0), Nvector(0), Internal_values(deep_copy), Built(false)
     {
       // Build the storage based on the size of index
@@ -185,7 +185,7 @@ namespace oomph
 #endif
 
     /// Copy constructor
-    DoubleMultiVector(const DoubleMultiVector &new_vector) :
+    DoubleMultiVector(const DoubleMultiVector& new_vector) :
       DistributableLinearAlgebraObject(),
       Values(0),
       Nvector(0),
@@ -204,7 +204,7 @@ namespace oomph
     }
 
     /// assignment operator (deep copy)
-    void operator=(const DoubleMultiVector &old_vector)
+    void operator=(const DoubleMultiVector& old_vector)
     {
       this->build(old_vector);
       this->setup_doublevector_representation();
@@ -217,7 +217,7 @@ namespace oomph
     }
 
     /// \short Provide a (shallow) copy of the old vector
-    void shallow_build(const DoubleMultiVector &old_vector)
+    void shallow_build(const DoubleMultiVector& old_vector)
     {
       // Only bother if the old_vector is not the same as current vector
       if (!(*this == old_vector))
@@ -243,16 +243,16 @@ namespace oomph
 
     /// \short Build the storage for pointers to vectors with a given
     /// distribution, but do not populate the pointers
-    void shallow_build(const unsigned &n_vector,
-                       const LinearAlgebraDistribution &dist)
+    void shallow_build(const unsigned& n_vector,
+                       const LinearAlgebraDistribution& dist)
     {
       this->shallow_build(n_vector, &dist);
     }
 
     /// \short Build the storage for pointers to vectors with a given
     /// distribution, but do not populate the pointers
-    void shallow_build(const unsigned &n_vector,
-                       const LinearAlgebraDistribution *const &dist_pt)
+    void shallow_build(const unsigned& n_vector,
+                       const LinearAlgebraDistribution* const& dist_pt)
     {
       // clean the memory
       this->clear();
@@ -269,7 +269,7 @@ namespace oomph
         // Set the number of vectors
         Nvector = n_vector;
         // Build the array of pointers to each vector's data
-        Values = new double *[n_vector];
+        Values = new double*[n_vector];
         Built = true;
       }
       else
@@ -279,7 +279,7 @@ namespace oomph
     }
 
     /// \short Provides a (deep) copy of the old_vector
-    void build(const DoubleMultiVector &old_vector)
+    void build(const DoubleMultiVector& old_vector)
     {
       // Only bother if the old_vector is not the same as current vector
       if (!(*this == old_vector))
@@ -296,7 +296,7 @@ namespace oomph
         if (this->distribution_built())
         {
           unsigned n_row_local = this->nrow_local();
-          double **const old_vector_values = old_vector.values();
+          double** const old_vector_values = old_vector.values();
           for (unsigned i = 0; i < n_row_local; i++)
           {
             for (unsigned v = 0; v < Nvector; v++)
@@ -311,9 +311,9 @@ namespace oomph
     /// \short Assembles a DoubleMultiVector
     /// with n_vector vectors, a distribution dist, if v is specified
     /// each element is set to v, otherwise each element is set to 0.0
-    void build(const unsigned &n_vector,
-               const LinearAlgebraDistribution &dist,
-               const double &initial_value = 0.0)
+    void build(const unsigned& n_vector,
+               const LinearAlgebraDistribution& dist,
+               const double& initial_value = 0.0)
     {
       this->build(n_vector, &dist, initial_value);
     }
@@ -321,9 +321,9 @@ namespace oomph
     /// \short Assembles a DoubleMultiVector with n_vector vectors, each with a
     /// distribution dist, if v is specified
     /// each element is set to v, otherwise each element is set to 0.0
-    void build(const unsigned &n_vector,
-               const LinearAlgebraDistribution *const &dist_pt,
-               const double &initial_value = 0.0)
+    void build(const unsigned& n_vector,
+               const LinearAlgebraDistribution* const& dist_pt,
+               const double& initial_value = 0.0)
     {
       // clean the memory
       this->clear();
@@ -340,10 +340,10 @@ namespace oomph
         // Set the number of vectors
         Nvector = n_vector;
         // Build the array of pointers to each vector's data
-        Values = new double *[n_vector];
+        Values = new double*[n_vector];
         // Now build the contiguous array of real data
         const unsigned n_row_local = this->nrow_local();
-        double *values = new double[n_row_local * n_vector];
+        double* values = new double[n_row_local * n_vector];
         // set the data
         for (unsigned v = 0; v < n_vector; v++)
         {
@@ -362,7 +362,7 @@ namespace oomph
     }
 
     /// \short initialise the whole vector with value v
-    void initialise(const double &initial_value)
+    void initialise(const double& initial_value)
     {
       if (Built)
       {
@@ -479,10 +479,10 @@ namespace oomph
     /// the same number of global rows.
     /// \b NOTE 2: The current distribution and the new distribution must have
     /// the same Communicator.
-    void redistribute(const LinearAlgebraDistribution *const &dist_pt);
+    void redistribute(const LinearAlgebraDistribution* const& dist_pt);
 
     /// \short [] access function to the (local) values of the v-th vector
-    double &operator()(int v, int i) const
+    double& operator()(int v, int i) const
     {
 #ifdef RANGE_CHECKING
       std::ostringstream error_message;
@@ -512,7 +512,7 @@ namespace oomph
     }
 
     /// \short == operator
-    bool operator==(const DoubleMultiVector &vec)
+    bool operator==(const DoubleMultiVector& vec)
     {
       // if vec is not setup return false
       if (vec.built() && !this->built())
@@ -529,7 +529,7 @@ namespace oomph
       }
       else
       {
-        double **const v_values = vec.values();
+        double** const v_values = vec.values();
         const unsigned n_row_local = this->nrow_local();
         const unsigned n_vector = this->nvector();
         for (unsigned v = 0; v < n_vector; ++v)
@@ -580,7 +580,7 @@ namespace oomph
       }
 #endif //
 
-      double **v_values = vec.values();
+      double** v_values = vec.values();
       const unsigned n_vector = this->nvector();
       const unsigned n_row_local = this->nrow_local();
       for (unsigned v = 0; v < n_vector; ++v)
@@ -626,7 +626,7 @@ namespace oomph
       }
 #endif
 
-      double **v_values = vec.values();
+      double** v_values = vec.values();
       const unsigned n_vector = this->nvector();
       const unsigned n_row_local = this->nrow_local();
       for (unsigned v = 0; v < n_vector; ++v)
@@ -639,7 +639,7 @@ namespace oomph
     }
 
     /// Multiply by a scalar
-    void operator*=(const double &scalar_value)
+    void operator*=(const double& scalar_value)
     {
 #ifdef PARANOID
       // PARANOID check that this vector is setup
@@ -664,46 +664,46 @@ namespace oomph
     }
 
     /// access function to the underlying values
-    double **values()
+    double** values()
     {
       return Values;
     }
 
     /// \short access function to the underlying values (const version)
-    double **values() const
+    double** values() const
     {
       return Values;
     }
 
     /// access function to the i-th vector's data
-    double *values(const unsigned &i)
+    double* values(const unsigned& i)
     {
       return Values[i];
     }
 
     /// access function to the i-th vector's data (const version)
-    double *values(const unsigned &i) const
+    double* values(const unsigned& i) const
     {
       return Values[i];
     }
 
     /// access to the DoubleVector representatoin
-    DoubleVector &doublevector(const unsigned &i)
+    DoubleVector& doublevector(const unsigned& i)
     {
       return Internal_doublevector[i];
     }
 
     /// access to the DoubleVector representation (const version)
-    const DoubleVector &doublevector(const unsigned &i) const
+    const DoubleVector& doublevector(const unsigned& i) const
     {
       return Internal_doublevector[i];
     }
 
     /// output the contents of the vector
-    void output(std::ostream &outfile) const
+    void output(std::ostream& outfile) const
     {
       // temp pointer to values
-      double **temp;
+      double** temp;
 
       // Number of vectors
       unsigned n_vector = this->nvector();
@@ -727,8 +727,8 @@ namespace oomph
         unsigned nrow = this->nrow();
 
         // get the vector of first_row s and nrow_local s
-        int *dist_first_row = new int[nproc];
-        int *dist_nrow_local = new int[nproc];
+        int* dist_first_row = new int[nproc];
+        int* dist_nrow_local = new int[nproc];
         for (int p = 0; p < nproc; p++)
         {
           dist_first_row[p] = this->first_row(p);
@@ -736,8 +736,8 @@ namespace oomph
         }
 
         // gather
-        temp = new double *[n_vector];
-        double *temp_value = new double[nrow * n_vector];
+        temp = new double*[n_vector];
+        double* temp_value = new double[nrow * n_vector];
         for (unsigned v = 0; v < n_vector; v++)
         {
           temp[v] = &temp_value[v * nrow];
@@ -804,7 +804,7 @@ namespace oomph
     }
 
     /// compute the 2 norm of this vector
-    void dot(const DoubleMultiVector &vec, std::vector<double> &result) const
+    void dot(const DoubleMultiVector& vec, std::vector<double>& result) const
     {
 #ifdef PARANOID
       // paranoid check that the vector is setup
@@ -845,7 +845,7 @@ namespace oomph
       {
         // Initialise
         n[v] = 0.0;
-        const double *vec_values_pt = vec.values(v);
+        const double* vec_values_pt = vec.values(v);
         for (unsigned i = 0; i < nrow_local; i++)
         {
           n[v] += Values[v][i] * vec_values_pt[i];
@@ -884,7 +884,7 @@ namespace oomph
     }
 
     /// compute the 2 norm of this vector
-    void norm(std::vector<double> &result) const
+    void norm(std::vector<double>& result) const
     {
 #ifdef PARANOID
       // paranoid check that the vector is setup
@@ -997,7 +997,7 @@ namespace oomph
 
     /// the local data, need a pointer to a pointer so that the
     /// individual vectors can be extracted
-    double **Values;
+    double** Values;
 
     /// The number of vectors
     unsigned Nvector;

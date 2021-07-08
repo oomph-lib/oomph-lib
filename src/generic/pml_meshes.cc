@@ -40,25 +40,25 @@ namespace oomph
   namespace TwoDimensionalPMLHelper
   {
     /// helper function for sorting the right boundary nodes
-    bool sorter_right_boundary(Node *nod_i_pt, Node *nod_j_pt)
+    bool sorter_right_boundary(Node* nod_i_pt, Node* nod_j_pt)
     {
       return (nod_i_pt->x(1) < nod_j_pt->x(1));
     }
 
     /// helper function for sorting the top boundary nodes
-    bool sorter_top_boundary(Node *nod_i_pt, Node *nod_j_pt)
+    bool sorter_top_boundary(Node* nod_i_pt, Node* nod_j_pt)
     {
       return (nod_i_pt->x(0) < nod_j_pt->x(0));
     }
 
     /// helper function for sorting the left boundary nodes
-    bool sorter_left_boundary(Node *nod_i_pt, Node *nod_j_pt)
+    bool sorter_left_boundary(Node* nod_i_pt, Node* nod_j_pt)
     {
       return (nod_i_pt->x(1) > nod_j_pt->x(1));
     }
 
     /// helper function for sorting the bottom boundary nodes
-    bool sorter_bottom_boundary(Node *nod_i_pt, Node *nod_j_pt)
+    bool sorter_bottom_boundary(Node* nod_i_pt, Node* nod_j_pt)
     {
       return (nod_i_pt->x(0) > nod_j_pt->x(0));
     }

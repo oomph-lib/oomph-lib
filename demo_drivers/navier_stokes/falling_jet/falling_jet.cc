@@ -51,17 +51,17 @@ class ElasticQuarterTubeMesh :
   public SolidMesh
 {
   /// Vector of pointers to element in the fluid layer
-  Vector<GeneralisedElement *> Bulk_element_pt;
+  Vector<GeneralisedElement*> Bulk_element_pt;
 
   /// Vector of pointers to interface elements
-  Vector<FiniteElement *> Interface_element_pt;
+  Vector<FiniteElement*> Interface_element_pt;
 
   /// Vector of pointers to interface elements
-  Vector<FiniteElement *> Interface_edge_element_pt;
+  Vector<FiniteElement*> Interface_edge_element_pt;
 
 public:
   /// Access functions for pointers to interface elements
-  FiniteElement *&interface_element_pt(const unsigned long &i)
+  FiniteElement*& interface_element_pt(const unsigned long& i)
   {
     return Interface_element_pt[i];
   }
@@ -73,7 +73,7 @@ public:
   }
 
   /// Access functions for pointers to interface elements
-  FiniteElement *&interface_edge_element_pt(const unsigned long &i)
+  FiniteElement*& interface_edge_element_pt(const unsigned long& i)
   {
     return Interface_edge_element_pt[i];
   }
@@ -84,13 +84,13 @@ public:
     return Interface_edge_element_pt.size();
   }
 
-  Vector<GeneralisedElement *> &bulk_element_pt()
+  Vector<GeneralisedElement*>& bulk_element_pt()
   {
     return Bulk_element_pt;
   }
 
   /// Access functions for pointers to elements in bulk
-  GeneralisedElement *&bulk_element_pt(const unsigned long &i)
+  GeneralisedElement*& bulk_element_pt(const unsigned long& i)
   {
     return Bulk_element_pt[i];
   }
@@ -103,12 +103,12 @@ public:
 
   /// Constructor
   ElasticQuarterTubeMesh(
-    GeomObject *wall_pt,
-    const Vector<double> &xi_lo,
-    const double &fract_mid,
-    const Vector<double> &xi_hi,
-    const unsigned &nlayer,
-    TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+    GeomObject* wall_pt,
+    const Vector<double>& xi_lo,
+    const double& fract_mid,
+    const Vector<double>& xi_hi,
+    const unsigned& nlayer,
+    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
     QuarterTubeMesh<ELEMENT>(
       wall_pt, xi_lo, fract_mid, xi_hi, nlayer, time_stepper_pt),
 
@@ -132,7 +132,7 @@ public:
     unsigned np = this->boundary_element_pt(b, 0)->nnode_1d();
     for (unsigned e = 0; e < n_element; e++)
     {
-      INTERFACE_ELEMENT *interface_element_pt = new INTERFACE_ELEMENT(
+      INTERFACE_ELEMENT* interface_element_pt = new INTERFACE_ELEMENT(
         this->boundary_element_pt(b, e), this->face_index_at_boundary(b, e));
 
       // Push it back onto the stack
@@ -188,7 +188,7 @@ public:
     }
 
     // Add all the edge elements to the standard element list
-    for (Vector<FiniteElement *>::iterator it =
+    for (Vector<FiniteElement*>::iterator it =
            Interface_edge_element_pt.begin();
          it != Interface_edge_element_pt.end();
          ++it)
@@ -252,16 +252,16 @@ template<class ELEMENT>
 class EntryFlowProblem : public Problem
 {
   // Constitutive law used to determine the mesh deformation
-  ConstitutiveLaw *Constitutive_law_pt;
+  ConstitutiveLaw* Constitutive_law_pt;
 
   // Pointer to external pressure data
-  Data *Pext_pt;
+  Data* Pext_pt;
 
 public:
   /// Constructor: Pass DocInfo object and target errors
-  EntryFlowProblem(DocInfo &doc_info,
-                   const double &min_error_target,
-                   const double &max_error_target);
+  EntryFlowProblem(DocInfo& doc_info,
+                   const double& min_error_target,
+                   const double& max_error_target);
 
   /// Destructor (empty)
   ~EntryFlowProblem() {}
@@ -291,12 +291,11 @@ public:
 
   /// \short Overload generic access function by one that returns
   /// a pointer to the specific  mesh
-  ElasticQuarterTubeMesh<ELEMENT, ElasticSurfaceFluidInterfaceElement<ELEMENT>>
-    *mesh_pt()
+  ElasticQuarterTubeMesh<ELEMENT, ElasticSurfaceFluidInterfaceElement<ELEMENT>>* mesh_pt()
   {
     return dynamic_cast<
       ElasticQuarterTubeMesh<ELEMENT,
-                             ElasticSurfaceFluidInterfaceElement<ELEMENT>> *>(
+                             ElasticSurfaceFluidInterfaceElement<ELEMENT>>*>(
       Problem::mesh_pt());
   }
 
@@ -313,9 +312,9 @@ private:
 /// Constructor: Pass DocInfo object and error targets
 //========================================================================
 template<class ELEMENT>
-EntryFlowProblem<ELEMENT>::EntryFlowProblem(DocInfo &doc_info,
-                                            const double &min_error_target,
-                                            const double &max_error_target) :
+EntryFlowProblem<ELEMENT>::EntryFlowProblem(DocInfo& doc_info,
+                                            const double& min_error_target,
+                                            const double& max_error_target) :
   Doc_info(doc_info)
 {
   // Set the external pressure
@@ -329,7 +328,7 @@ EntryFlowProblem<ELEMENT>::EntryFlowProblem(DocInfo &doc_info,
 
   // Create geometric objects: Elliptical tube with half axes = radius = 1.0
   double radius = 1.0;
-  GeomObject *Wall_pt = new EllipticalTube(radius, radius);
+  GeomObject* Wall_pt = new EllipticalTube(radius, radius);
 
   // Boundaries on object
   Vector<double> xi_lo(2);
@@ -357,7 +356,7 @@ EntryFlowProblem<ELEMENT>::EntryFlowProblem(DocInfo &doc_info,
       Wall_pt, xi_lo, frac_mid, xi_hi, nlayer);
 
   // Set error estimator
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   mesh_pt()->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Error targets for adaptive refinement
@@ -381,7 +380,7 @@ EntryFlowProblem<ELEMENT>::EntryFlowProblem(DocInfo &doc_info,
   // If it is not the Lagrange index is 3
   unsigned lagrange_index = 3;
   // If the pressure is stored at a node, the lagrangian index is 4
-  if (dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(0))->p_nodal_index_nst() >=
+  if (dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(0))->p_nodal_index_nst() >=
       0)
   {
     lagrange_index = 4;
@@ -455,7 +454,7 @@ EntryFlowProblem<ELEMENT>::EntryFlowProblem(DocInfo &doc_info,
   for (unsigned e = 0; e < n_bulk; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
     // Set the constitutive law
     el_pt->constitutive_law_pt() = Constitutive_law_pt;
@@ -470,8 +469,8 @@ EntryFlowProblem<ELEMENT>::EntryFlowProblem(DocInfo &doc_info,
   unsigned n_interface = mesh_pt()->ninterface_element();
   for (unsigned e = 0; e < n_interface; e++)
   {
-    ElasticSurfaceFluidInterfaceElement<ELEMENT> *el_pt =
-      dynamic_cast<ElasticSurfaceFluidInterfaceElement<ELEMENT> *>(
+    ElasticSurfaceFluidInterfaceElement<ELEMENT>* el_pt =
+      dynamic_cast<ElasticSurfaceFluidInterfaceElement<ELEMENT>*>(
         mesh_pt()->interface_element_pt(e));
 
     // set the capillary number
@@ -484,8 +483,8 @@ EntryFlowProblem<ELEMENT>::EntryFlowProblem(DocInfo &doc_info,
   unsigned n_interface_edge = mesh_pt()->ninterface_edge_element();
   for (unsigned e = 0; e < n_interface_edge; e++)
   {
-    ElasticLineFluidInterfaceBoundingElement<ELEMENT> *el_pt =
-      dynamic_cast<ElasticLineFluidInterfaceBoundingElement<ELEMENT> *>(
+    ElasticLineFluidInterfaceBoundingElement<ELEMENT>* el_pt =
+      dynamic_cast<ElasticLineFluidInterfaceBoundingElement<ELEMENT>*>(
         mesh_pt()->interface_edge_element_pt(e));
 
     // Set the capillary number
@@ -501,7 +500,7 @@ EntryFlowProblem<ELEMENT>::EntryFlowProblem(DocInfo &doc_info,
   unsigned n_nod = mesh_pt()->nnode();
   for (unsigned j = 0; j < n_nod; j++)
   {
-    SolidNode *node_pt = mesh_pt()->node_pt(j);
+    SolidNode* node_pt = mesh_pt()->node_pt(j);
     // Recover coordinates
     // double x=node_pt->x(0);
     // double y=node_pt->x(1);
@@ -573,7 +572,7 @@ void EntryFlowProblem<ELEMENT>::doc_solution()
   unsigned n_bulk = mesh_pt()->nbulk();
   for (unsigned e = 0; e < n_bulk; e++)
   {
-    dynamic_cast<FiniteElement *>(mesh_pt()->bulk_element_pt(e))
+    dynamic_cast<FiniteElement*>(mesh_pt()->bulk_element_pt(e))
       ->output(some_file, npts);
   }
   some_file.close();
@@ -589,7 +588,7 @@ void EntryFlowProblem<ELEMENT>::doc_solution()
 /// any command line arguments, we regard this as a validation run
 /// and perform only a single adaptation
 //=====================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Set the gravity direction
   Global_Physical_Variables::G[0] = 0.0;

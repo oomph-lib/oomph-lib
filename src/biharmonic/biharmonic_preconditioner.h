@@ -78,7 +78,7 @@ namespace oomph
     extern unsigned AMG_smoother_iterations;
 
     /// set the defaults
-    extern void set_defaults(HyprePreconditioner *hypre_prec_pt);
+    extern void set_defaults(HyprePreconditioner* hypre_prec_pt);
 
   } // namespace Biharmonic_schur_complement_Hypre_defaults
 #endif
@@ -126,13 +126,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    BiharmonicPreconditioner(const BiharmonicPreconditioner &)
+    BiharmonicPreconditioner(const BiharmonicPreconditioner&)
     {
       BrokenCopy::broken_copy("BiharmonicPreconditioner");
     }
 
     /// Broken assignment operator
-    void operator=(const BiharmonicPreconditioner &)
+    void operator=(const BiharmonicPreconditioner&)
     {
       BrokenCopy::broken_assign("BiharmonicPreconditioner");
     }
@@ -141,14 +141,14 @@ namespace oomph
     void setup();
 
     /// Apply preconditioner to r
-    void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+    void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
     /// \short Access function to the preconditioner type \n
     /// + 0 : exact BBD \n
     /// + 1 : inexact BBD w/ SuperLU \n
     /// + 2 : inexact BBD w/ AMG (Hypre Boomer AMG)
     /// + 3 : block diagonal (3x3)+(1x1)
-    unsigned &preconditioner_type()
+    unsigned& preconditioner_type()
     {
       return Preconditioner_type;
     }
@@ -156,7 +156,7 @@ namespace oomph
     /// \short Access function to the mesh pt for the bulk elements. The mesh
     /// should only contain BiharmonicElement<2> and
     /// Hijacked<BiharmonicElement<2> > elements
-    Mesh *&bulk_element_mesh_pt()
+    Mesh*& bulk_element_mesh_pt()
     {
       return Bulk_element_mesh_pt;
     }
@@ -170,16 +170,16 @@ namespace oomph
     unsigned Preconditioner_type;
 
     /// Exact Preconditioner Pointer
-    Preconditioner *Sub_preconditioner_1_pt;
+    Preconditioner* Sub_preconditioner_1_pt;
 
     /// Inexact Preconditioner Pointer
-    Preconditioner *Sub_preconditioner_2_pt;
+    Preconditioner* Sub_preconditioner_2_pt;
 
     /// Preconditioner the diagonal block associated with hijacked elements
-    Preconditioner *Hijacked_sub_block_preconditioner_pt;
+    Preconditioner* Hijacked_sub_block_preconditioner_pt;
 
     /// the bulk element mesh pt
-    Mesh *Bulk_element_mesh_pt;
+    Mesh* Bulk_element_mesh_pt;
   };
 
   //=============================================================================
@@ -195,8 +195,8 @@ namespace oomph
   {
   public:
     /// \short Constructor - for a preconditioner acting as a sub preconditioner
-    ExactSubBiharmonicPreconditioner(BiharmonicPreconditioner *master_prec_pt,
-                                     const bool &retain_all_blocks = false) :
+    ExactSubBiharmonicPreconditioner(BiharmonicPreconditioner* master_prec_pt,
+                                     const bool& retain_all_blocks = false) :
       Retain_all_blocks(retain_all_blocks)
     {
       // Block mapping for ExactSubBiharmonicPreconditioner
@@ -227,13 +227,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    ExactSubBiharmonicPreconditioner(const ExactSubBiharmonicPreconditioner &)
+    ExactSubBiharmonicPreconditioner(const ExactSubBiharmonicPreconditioner&)
     {
       BrokenCopy::broken_copy("ExactSubBiharmonicPreconditioner");
     }
 
     /// Broken assignment operator
-    void operator=(const ExactSubBiharmonicPreconditioner &)
+    void operator=(const ExactSubBiharmonicPreconditioner&)
     {
       BrokenCopy::broken_assign("ExactSubBiharmonicPreconditioner");
     }
@@ -242,12 +242,12 @@ namespace oomph
     void setup();
 
     /// Apply preconditioner to r
-    void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+    void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
     //   private:
 
     // Pointer to the sub preconditioner
-    Preconditioner *Sub_preconditioner_pt;
+    Preconditioner* Sub_preconditioner_pt;
 
     /// Boolean indicating that all blocks are to be retained (defaults to
     /// false)
@@ -267,7 +267,7 @@ namespace oomph
     /// This a helper class for BiharmonicPreconditioner and cannot be used
     /// as a standalone preconditioner. \n
     /// master_prec_pt is the pointer to the master BiharmonicPreconditioner.
-    InexactSubBiharmonicPreconditioner(BiharmonicPreconditioner *master_prec_pt,
+    InexactSubBiharmonicPreconditioner(BiharmonicPreconditioner* master_prec_pt,
                                        const bool use_amg)
     {
       // Block mapping for ExactSubBiharmonicPreconditioner
@@ -327,13 +327,13 @@ namespace oomph
 
     /// Broken copy constructor
     InexactSubBiharmonicPreconditioner(
-      const InexactSubBiharmonicPreconditioner &)
+      const InexactSubBiharmonicPreconditioner&)
     {
       BrokenCopy::broken_copy("InexactSubBiharmonicPreconditioner");
     }
 
     /// Broken assignment operator
-    void operator=(const InexactSubBiharmonicPreconditioner &)
+    void operator=(const InexactSubBiharmonicPreconditioner&)
     {
       BrokenCopy::broken_assign("InexactSubBiharmonicPreconditioner");
     }
@@ -342,7 +342,7 @@ namespace oomph
     void setup();
 
     /// Apply preconditioner to r
-    void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+    void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
     //    private:
 
@@ -352,21 +352,21 @@ namespace oomph
     void compute_inexact_schur_complement();
 
     /// \short Pointer to the S00 Schur Complement preconditioner
-    Preconditioner *S_00_preconditioner_pt;
+    Preconditioner* S_00_preconditioner_pt;
 
     /// \short Preconditioner for storing the lumped J_11 matrix
-    MatrixBasedLumpedPreconditioner<CRDoubleMatrix>
-      *Lumped_J_11_preconditioner_pt;
+    MatrixBasedLumpedPreconditioner<CRDoubleMatrix>*
+      Lumped_J_11_preconditioner_pt;
 
     /// \short Preconditioner for storing the lumped J_22 matrix
-    MatrixBasedLumpedPreconditioner<CRDoubleMatrix>
-      *Lumped_J_22_preconditioner_pt;
+    MatrixBasedLumpedPreconditioner<CRDoubleMatrix>*
+      Lumped_J_22_preconditioner_pt;
 
     ///
-    DenseMatrix<CRDoubleMatrix *> Matrix_of_block_pointers;
+    DenseMatrix<CRDoubleMatrix*> Matrix_of_block_pointers;
 
     ///
-    CRDoubleMatrix *S_00_pt;
+    CRDoubleMatrix* S_00_pt;
 
     /// \short booean indicating whether (Hypre BoomerAMG) AMG should be used
     /// to solve the S00 subsidiary linear system.

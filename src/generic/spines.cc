@@ -44,7 +44,7 @@ namespace oomph
   //===================================================================
   /// Update function, call the update function in the Node's SpineMesh.
   //===================================================================
-  void SpineNode::node_update(const bool &update_all_time_levels_for_new_node)
+  void SpineNode::node_update(const bool& update_all_time_levels_for_new_node)
   {
     Spine_mesh_pt->spine_node_update(this);
 
@@ -82,7 +82,7 @@ namespace oomph
   /// so we buffer the case if update_all_solid_nodes (which defaults
   /// to false) is set to true.]
   //============================================================
-  void SpineMesh::node_update(const bool &update_all_solid_nodes)
+  void SpineMesh::node_update(const bool& update_all_solid_nodes)
   {
 #ifdef PARANOID
     if (update_all_solid_nodes)
@@ -103,7 +103,7 @@ namespace oomph
     for (unsigned long l = 0; l < Node_pt_range; l++)
     {
 #ifdef PARANOID
-      if (!dynamic_cast<SpineNode *>(Node_pt[l]))
+      if (!dynamic_cast<SpineNode*>(Node_pt[l]))
       {
         std::ostringstream error_stream;
         error_stream << "Error: Node " << l << "is a "
@@ -115,7 +115,7 @@ namespace oomph
 #endif
 
       // Need to cast to spine node to get to update function
-      dynamic_cast<SpineNode *>(Node_pt[l])->node_update();
+      dynamic_cast<SpineNode*>(Node_pt[l])->node_update();
     }
   }
 
@@ -123,7 +123,7 @@ namespace oomph
   /// Assign (global) equation numbers to spines, nodes and elements
   //====================================================================
   unsigned long SpineMesh::assign_global_spine_eqn_numbers(
-    Vector<double *> &Dof_pt)
+    Vector<double*>& Dof_pt)
   {
     // Find the current number of dofs
     unsigned long equation_number = Dof_pt.size();
@@ -152,8 +152,8 @@ namespace oomph
   /// call hierarchy of this function when called from
   /// Problem::describe_dofs(...)
   //====================================================================
-  void SpineMesh::describe_spine_dofs(std::ostream &out,
-                                      const std::string &current_string) const
+  void SpineMesh::describe_spine_dofs(std::ostream& out,
+                                      const std::string& current_string) const
   {
     // Describe spine heights.
     unsigned long Spine_pt_range = Spine_pt.size();
@@ -169,8 +169,8 @@ namespace oomph
   //====================================================================
   /// Assign time stepper to spines data
   //====================================================================
-  void SpineMesh::set_spine_time_stepper(TimeStepper *const &time_stepper_pt,
-                                         const bool &preserve_existing_data)
+  void SpineMesh::set_spine_time_stepper(TimeStepper* const& time_stepper_pt,
+                                         const bool& preserve_existing_data)
   {
     // Loop over spines and set the time stepper for the spine heights
     // (they are the only Data that are additional to the standard nodal and
@@ -188,7 +188,7 @@ namespace oomph
   /// for continuation when using the continuation storage scheme
   //====================================================================
   void SpineMesh::set_consistent_pinned_spine_values_for_continuation(
-    ContinuationStorageScheme *const &continuation_stepper_pt)
+    ContinuationStorageScheme* const& continuation_stepper_pt)
   {
     // Loop over spines and set consistent values by using the function
     // provided by the continuation storage scheme
@@ -205,7 +205,7 @@ namespace oomph
   /// false if not.
   //=====================================================================
   bool SpineMesh::does_pointer_correspond_to_spine_data(
-    double *const &parameter_pt)
+    double* const& parameter_pt)
   {
     // Loop over spines and check their data
     const unsigned long n_spine = this->nspine();
@@ -226,7 +226,7 @@ namespace oomph
   //=======================================================================
   /// Overload the dump function so that the spine data is also dumped
   //=======================================================================
-  void SpineMesh::dump(std::ofstream &dump_file) const
+  void SpineMesh::dump(std::ofstream& dump_file) const
   {
     // Call the standard mesh dump function
     Mesh::dump(dump_file);
@@ -250,7 +250,7 @@ namespace oomph
   //========================================================================
   /// Overload the read function so that the spine data is also read
   //========================================================================
-  void SpineMesh::read(std::ifstream &restart_file)
+  void SpineMesh::read(std::ifstream& restart_file)
   {
     // Call the standard mesh read function
     Mesh::read(restart_file);

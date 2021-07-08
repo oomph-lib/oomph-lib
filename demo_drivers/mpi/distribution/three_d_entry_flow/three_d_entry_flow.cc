@@ -57,9 +57,9 @@ class EntryFlowProblem : public Problem
 {
 public:
   /// Constructor: Pass DocInfo object and target errors
-  EntryFlowProblem(DocInfo &doc_info,
-                   const double &min_error_target,
-                   const double &max_error_target);
+  EntryFlowProblem(DocInfo& doc_info,
+                   const double& min_error_target,
+                   const double& max_error_target);
 
   /// Destructor to clean up memory (empty)
   ~EntryFlowProblem() {}
@@ -90,9 +90,9 @@ public:
 
   /// \short Overload generic access function by one that returns
   /// a pointer to the specific  mesh
-  RefineableQuarterTubeMesh<ELEMENT> *mesh_pt()
+  RefineableQuarterTubeMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<RefineableQuarterTubeMesh<ELEMENT> *>(
+    return dynamic_cast<RefineableQuarterTubeMesh<ELEMENT>*>(
       Problem::mesh_pt());
   }
 
@@ -109,9 +109,9 @@ private:
 /// Constructor: Pass DocInfo object and error targets
 //========================================================================
 template<class ELEMENT>
-EntryFlowProblem<ELEMENT>::EntryFlowProblem(DocInfo &doc_info,
-                                            const double &min_error_target,
-                                            const double &max_error_target) :
+EntryFlowProblem<ELEMENT>::EntryFlowProblem(DocInfo& doc_info,
+                                            const double& min_error_target,
+                                            const double& max_error_target) :
   Doc_info(doc_info)
 {
   // Setup mesh:
@@ -119,7 +119,7 @@ EntryFlowProblem<ELEMENT>::EntryFlowProblem(DocInfo &doc_info,
 
   // Create geometric objects: Elliptical tube with half axes = radius = 1.0
   double radius = 1.0;
-  GeomObject *Wall_pt = new EllipticalTube(radius, radius);
+  GeomObject* Wall_pt = new EllipticalTube(radius, radius);
 
   // Boundaries on object
   Vector<double> xi_lo(2);
@@ -145,7 +145,7 @@ EntryFlowProblem<ELEMENT>::EntryFlowProblem(DocInfo &doc_info,
     Wall_pt, xi_lo, frac_mid, xi_hi, nlayer);
 
   // Set error estimator
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   mesh_pt()->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Error targets for adaptive refinement
@@ -193,7 +193,7 @@ EntryFlowProblem<ELEMENT>::EntryFlowProblem(DocInfo &doc_info,
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the Reynolds number, etc
     el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -208,7 +208,7 @@ EntryFlowProblem<ELEMENT>::EntryFlowProblem(DocInfo &doc_info,
   unsigned n_nod = mesh_pt()->nnode();
   for (unsigned j = 0; j < n_nod; j++)
   {
-    Node *node_pt = mesh_pt()->node_pt(j);
+    Node* node_pt = mesh_pt()->node_pt(j);
     // Recover coordinates
     double x = node_pt->x(0);
     double y = node_pt->x(1);
@@ -290,7 +290,7 @@ void EntryFlowProblem<ELEMENT>::doc_solution()
 /// any command line arguments, we regard this as a validation run
 /// and perform only a single adaptation
 //=====================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
 #ifdef OOMPH_HAS_MPI
   MPI_Helpers::init(argc, argv);

@@ -64,9 +64,9 @@ namespace ExactSolnForUnsteadyHeat
   double Phi = 1.0;
 
   /// Exact solution as a Vector
-  void get_exact_u(const double &time,
-                   const Vector<double> &x,
-                   Vector<double> &u)
+  void get_exact_u(const double& time,
+                   const Vector<double>& x,
+                   Vector<double>& u)
   {
     double zeta = cos(Phi) * x[0] + sin(Phi) * x[1];
     u[0] = sin(K * zeta) * 0.5 *
@@ -74,7 +74,7 @@ namespace ExactSolnForUnsteadyHeat
   }
 
   /// Exact solution as a scalar
-  void get_exact_u(const double &time, const Vector<double> &x, double &u)
+  void get_exact_u(const double& time, const Vector<double>& x, double& u)
   {
     double zeta = cos(Phi) * x[0] + sin(Phi) * x[1];
     u = sin(K * zeta) * 0.5 *
@@ -82,7 +82,7 @@ namespace ExactSolnForUnsteadyHeat
   }
 
   /// Source function to make it an exact solution
-  void get_source(const double &time, const Vector<double> &x, double &source)
+  void get_source(const double& time, const Vector<double>& x, double& source)
   {
     source =
       -0.5 * sin(K * (cos(Phi) * x[0] + sin(Phi) * x[1])) * K * K *
@@ -135,13 +135,13 @@ public:
   void set_initial_condition();
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info, ofstream &trace_file);
+  void doc_solution(DocInfo& doc_info, ofstream& trace_file);
 
   /// \short Dump problem to disk to allow for restart.
-  void dump_it(ofstream &dump_file);
+  void dump_it(ofstream& dump_file);
 
   /// \short Read problem for restart from specified restart file.
-  void restart(ifstream &restart_file);
+  void restart(ifstream& restart_file);
 
   /// Global error norm for adaptive time-stepping
   double global_temporal_error_norm();
@@ -151,7 +151,7 @@ private:
   UnsteadyHeatEquations<2>::UnsteadyHeatSourceFctPt Source_fct_pt;
 
   /// Pointer to control node at which the solution is documented
-  Node *Control_node_pt;
+  Node* Control_node_pt;
 
 }; // end of problem class
 
@@ -231,7 +231,7 @@ UnsteadyHeatProblem<ELEMENT>::UnsteadyHeatProblem(
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from FiniteElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the source function pointer
     el_pt->source_fct_pt() = Source_fct_pt;
@@ -261,7 +261,7 @@ void UnsteadyHeatProblem<ELEMENT>::actions_before_implicit_timestep()
     unsigned num_nod = mesh_pt()->nboundary_node(ibound);
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
-      Node *nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
+      Node* nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
       double u;
       Vector<double> x(2);
       x[0] = nod_pt->x(0);
@@ -282,7 +282,7 @@ template<class ELEMENT>
 void UnsteadyHeatProblem<ELEMENT>::set_initial_condition()
 {
   // Pointer to restart file
-  ifstream *restart_file_pt = 0;
+  ifstream* restart_file_pt = 0;
 
   // Restart?
   //---------
@@ -404,8 +404,8 @@ void UnsteadyHeatProblem<ELEMENT>::set_initial_condition()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void UnsteadyHeatProblem<ELEMENT>::doc_solution(DocInfo &doc_info,
-                                                ofstream &trace_file)
+void UnsteadyHeatProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
+                                                ofstream& trace_file)
 {
   ofstream some_file;
   char filename[100];
@@ -519,7 +519,7 @@ void UnsteadyHeatProblem<ELEMENT>::doc_solution(DocInfo &doc_info,
 /// Dump the solution to disk to allow for restart
 //========================================================================
 template<class ELEMENT>
-void UnsteadyHeatProblem<ELEMENT>::dump_it(ofstream &dump_file)
+void UnsteadyHeatProblem<ELEMENT>::dump_it(ofstream& dump_file)
 {
   // Call generic dump()
   Problem::dump(dump_file);
@@ -530,7 +530,7 @@ void UnsteadyHeatProblem<ELEMENT>::dump_it(ofstream &dump_file)
 /// Read solution from disk for restart
 //========================================================================
 template<class ELEMENT>
-void UnsteadyHeatProblem<ELEMENT>::restart(ifstream &restart_file)
+void UnsteadyHeatProblem<ELEMENT>::restart(ifstream& restart_file)
 {
   // Read the generic problem data from restart file
   Problem::read(restart_file);
@@ -580,7 +580,7 @@ double UnsteadyHeatProblem<ELEMENT>::global_temporal_error_norm()
 /// Only a single command line argument is allowed.
 /// If specified it is interpreted as the name of the restart file.
 //========================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

@@ -61,14 +61,14 @@ namespace oomph
     ///   - pointer to the base mesh (where we compute the base flow)
     ///   - pointer to timestepper (defaults to Steady timestepper)
     TwoLayerPerturbedSpineMesh(
-      const unsigned &nx,
-      const unsigned &ny1,
-      const unsigned &ny2,
-      const double &lx,
-      const double &h1,
-      const double &h2,
-      SpineMesh *&base_mesh_pt,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper);
+      const unsigned& nx,
+      const unsigned& ny1,
+      const unsigned& ny2,
+      const double& lx,
+      const double& h1,
+      const double& h2,
+      SpineMesh*& base_mesh_pt,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
     /// \short Constructor: Pass in:
     ///   - number of elements in x-direction
@@ -81,15 +81,15 @@ namespace oomph
     ///   - pointer to the base mesh (where we compute the base flow)
     ///   - pointer to timestepper (defaults to Steady timestepper)
     TwoLayerPerturbedSpineMesh(
-      const unsigned &nx,
-      const unsigned &ny1,
-      const unsigned &ny2,
-      const double &lx,
-      const double &h1,
-      const double &h2,
-      const bool &periodic_in_x,
-      SpineMesh *&base_mesh_pt,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper);
+      const unsigned& nx,
+      const unsigned& ny1,
+      const unsigned& ny2,
+      const double& lx,
+      const double& h1,
+      const double& h2,
+      const bool& periodic_in_x,
+      SpineMesh*& base_mesh_pt,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
     /// \short Constructor: Pass in:
     ///   - number of elements in x-direction
@@ -104,29 +104,29 @@ namespace oomph
     ///   - pointer to the base mesh (where we compute the base flow)
     ///   - pointer to timestepper (defaults to Steady timestepper)
     TwoLayerPerturbedSpineMesh(
-      const unsigned &nx,
-      const unsigned &ny1,
-      const unsigned &ny2,
-      const double &lx,
-      const double &h1,
-      const double &h2,
-      const bool &periodic_in_x,
-      const bool &build_mesh,
-      SpineMesh *&base_mesh_pt,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper);
+      const unsigned& nx,
+      const unsigned& ny1,
+      const unsigned& ny2,
+      const double& lx,
+      const double& h1,
+      const double& h2,
+      const bool& periodic_in_x,
+      const bool& build_mesh,
+      SpineMesh*& base_mesh_pt,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
     /// \short Reorder the elements so we loop over them vertically first
     /// (advantageous in "wide" domains if a frontal solver is used).
     void element_reorder();
 
     /// Access functions for pointers to elements in upper layer
-    FiniteElement *&upper_layer_element_pt(const unsigned long &i)
+    FiniteElement*& upper_layer_element_pt(const unsigned long& i)
     {
       return Upper_layer_element_pt[i];
     }
 
     /// Access functions for pointers to elements in lower layer
-    FiniteElement *&lower_layer_element_pt(const unsigned long &i)
+    FiniteElement*& lower_layer_element_pt(const unsigned long& i)
     {
       return Lower_layer_element_pt[i];
     }
@@ -151,7 +151,7 @@ namespace oomph
     /// corresponding base spine. Additionally this function updates the
     /// perturbations to the nodal positions, which are stored as (pinned)
     /// values at the nodes.
-    void perturbed_spine_node_update(PerturbedSpineNode *spine_node_pt)
+    void perturbed_spine_node_update(PerturbedSpineNode* spine_node_pt)
     {
       unsigned id = spine_node_pt->node_update_fct_id();
       switch (id)
@@ -176,13 +176,13 @@ namespace oomph
     }
 
     /// Access function for number of elements in lower layer
-    const unsigned &ny1() const
+    const unsigned& ny1() const
     {
       return Ny1;
     }
 
     /// Access function for number of elements in upper layer
-    const unsigned &ny2() const
+    const unsigned& ny2() const
     {
       return Ny2;
     }
@@ -191,7 +191,7 @@ namespace oomph
     /// store the indices at which the perturbations to the nodal
     /// y-position are stored in the bulk element
     const void set_perturbation_to_nodal_positions_indices(
-      const unsigned &cosine_index, const unsigned &sine_index)
+      const unsigned& cosine_index, const unsigned& sine_index)
     {
       YC_index = cosine_index;
       YS_index = sine_index;
@@ -215,7 +215,7 @@ namespace oomph
     //  base class. We store this so that the build_two_layer_mesh function
     //  can pass pointers to the corresponding base spines to each of the
     //  perturbed spines as it builds them
-    SpineMesh *Base_mesh_pt;
+    SpineMesh* Base_mesh_pt;
 
     /// \short Index at which the cosine part of the perturbation to the
     /// nodal y-position is stored in the bulk element. The mesh needs to
@@ -230,10 +230,10 @@ namespace oomph
     int YS_index;
 
     /// Vector of pointers to element in the lower layer
-    Vector<FiniteElement *> Lower_layer_element_pt;
+    Vector<FiniteElement*> Lower_layer_element_pt;
 
     /// Vector of pointers to element in the upper layer
-    Vector<FiniteElement *> Upper_layer_element_pt;
+    Vector<FiniteElement*> Upper_layer_element_pt;
 
     /// \short The spacing function for the x co-ordinates with two
     /// regions.
@@ -250,7 +250,7 @@ namespace oomph
                               unsigned ynode);
 
     /// Update function for the lower part of the domain
-    void spine_node_update_lower(PerturbedSpineNode *spine_node_pt)
+    void spine_node_update_lower(PerturbedSpineNode* spine_node_pt)
     {
       // Get fraction along the spine
       const double w = spine_node_pt->fraction();
@@ -301,7 +301,7 @@ namespace oomph
     }
 
     /// Update function for the upper part of the domain
-    void spine_node_update_upper(PerturbedSpineNode *spine_node_pt)
+    void spine_node_update_upper(PerturbedSpineNode* spine_node_pt)
     {
       // Get fraction along the spine
       const double w = spine_node_pt->fraction();
@@ -358,7 +358,7 @@ namespace oomph
 
     /// \short Helper function to actually build the two-layer spine mesh
     /// (called from various constructors)
-    virtual void build_two_layer_mesh(TimeStepper *time_stepper_pt);
+    virtual void build_two_layer_mesh(TimeStepper* time_stepper_pt);
 
   private:
     /// \short Static "magic" number that indicates that the indices at

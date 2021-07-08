@@ -48,15 +48,15 @@ namespace oomph
     /// the domain lengths in the x- and y-direction
     /// and the pointer to the geometric object that specifies
     /// the shape of the "collapsible" segment.
-    CollapsibleChannelDomain(const unsigned &nup,
-                             const unsigned &ncollapsible,
-                             const unsigned &ndown,
-                             const unsigned &ny,
-                             const double &lup,
-                             const double &lcollapsible,
-                             const double &ldown,
-                             const double &ly,
-                             GeomObject *wall_pt) :
+    CollapsibleChannelDomain(const unsigned& nup,
+                             const unsigned& ncollapsible,
+                             const unsigned& ndown,
+                             const unsigned& ny,
+                             const double& lup,
+                             const double& lcollapsible,
+                             const double& ldown,
+                             const double& ly,
+                             GeomObject* wall_pt) :
       BL_squash_fct_pt(&default_BL_squash_fct),
       Axial_spacing_fct_pt(&default_axial_spacing_fct)
     {
@@ -139,14 +139,14 @@ namespace oomph
 
     /// \short Access to pointer to the geometric object that parametrises
     /// the collapsible wall
-    GeomObject *&wall_pt()
+    GeomObject*& wall_pt()
     {
       return Wall_pt;
     }
 
     /// \short Access to pointer to the geometric object that parametrises
     /// the collapsible wall (const version)
-    GeomObject *wall_pt() const
+    GeomObject* wall_pt() const
     {
       return Wall_pt;
     }
@@ -154,11 +154,11 @@ namespace oomph
     /// \short Typedef for function pointer for function that squashes
     /// the macro elements near the wall to help resolution of any
     /// wall boundary layers.
-    typedef double (*BLSquashFctPt)(const double &s);
+    typedef double (*BLSquashFctPt)(const double& s);
 
     /// \short Default for function that squashes
     /// the macro elements near the walls. Identity.
-    static double default_BL_squash_fct(const double &s)
+    static double default_BL_squash_fct(const double& s)
     {
       return s;
     }
@@ -166,7 +166,7 @@ namespace oomph
     /// \short Function pointer for function that squashes
     /// the macro elements near wall. Default mapping (identity)
     /// leaves the y-coordinate of the nodal points unchanged.
-    BLSquashFctPt &bl_squash_fct_pt()
+    BLSquashFctPt& bl_squash_fct_pt()
     {
       return BL_squash_fct_pt;
     }
@@ -176,25 +176,25 @@ namespace oomph
     /// stretched/squashed coordinate in the same range. Default implementation
     /// is the identity; can be overloaded by specifying a different
     /// function pointer with bl_squash_fct_pt().
-    double s_squash(const double &s)
+    double s_squash(const double& s)
     {
       return BL_squash_fct_pt(s);
     }
 
     /// \short Typedef for function pointer for function that implements
     /// axial spacing of macro elements
-    typedef double (*AxialSpacingFctPt)(const double &xi);
+    typedef double (*AxialSpacingFctPt)(const double& xi);
 
     /// \short Function pointer for function that  implements
     /// axial spacing of macro elements
-    AxialSpacingFctPt &axial_spacing_fct_pt()
+    AxialSpacingFctPt& axial_spacing_fct_pt()
     {
       return Axial_spacing_fct_pt;
     }
 
     /// \short Function that implements
     /// axial spacing of macro elements
-    double axial_spacing_fct(const double &xi)
+    double axial_spacing_fct(const double& xi)
     {
       return Axial_spacing_fct_pt(xi);
     }
@@ -206,68 +206,68 @@ namespace oomph
     /// Vector rather than a scalar -- this is unavoidable because
     /// this function implements the pure virtual function in the
     /// Domain base class.
-    void macro_element_boundary(const unsigned &t,
-                                const unsigned &imacro,
-                                const unsigned &idirect,
-                                const Vector<double> &zeta,
-                                Vector<double> &r);
+    void macro_element_boundary(const unsigned& t,
+                                const unsigned& imacro,
+                                const unsigned& idirect,
+                                const Vector<double>& zeta,
+                                Vector<double>& r);
 
   private:
     /// \short Northern boundary of the macro element imacro in the
     /// upstream (part=0) or downstream (part=1) sections
-    void r_N_straight(const Vector<double> &zeta,
-                      Vector<double> &r,
-                      const unsigned &imacro,
-                      const unsigned &part);
+    void r_N_straight(const Vector<double>& zeta,
+                      Vector<double>& r,
+                      const unsigned& imacro,
+                      const unsigned& part);
 
     /// \short Western boundary of the macro element imacro in the
     /// upstream (part=0) or downstream (part=1) sections
-    void r_W_straight(const Vector<double> &zeta,
-                      Vector<double> &r,
-                      const unsigned &imacro,
-                      const unsigned &part);
+    void r_W_straight(const Vector<double>& zeta,
+                      Vector<double>& r,
+                      const unsigned& imacro,
+                      const unsigned& part);
 
     /// \short Southern boundary of the macro element imacro in the
     ///  upstream (part=0) or downstream (part=1) sections
-    void r_S_straight(const Vector<double> &zeta,
-                      Vector<double> &r,
-                      const unsigned &imacro,
-                      const unsigned &part);
+    void r_S_straight(const Vector<double>& zeta,
+                      Vector<double>& r,
+                      const unsigned& imacro,
+                      const unsigned& part);
 
     /// \short Eastern boundary of the macro element imacro in the
     /// upstream (part=0) or downstream (part=1) sections
-    void r_E_straight(const Vector<double> &zeta,
-                      Vector<double> &r,
-                      const unsigned &imacro,
-                      const unsigned &part);
+    void r_E_straight(const Vector<double>& zeta,
+                      Vector<double>& r,
+                      const unsigned& imacro,
+                      const unsigned& part);
 
     /// \short Northern boundary of the macro element imacro in the collapsible
     /// section
-    void r_N_collapsible(const unsigned &t,
-                         const Vector<double> &zeta,
-                         Vector<double> &r,
-                         const unsigned &imacro);
+    void r_N_collapsible(const unsigned& t,
+                         const Vector<double>& zeta,
+                         Vector<double>& r,
+                         const unsigned& imacro);
 
     /// \short Western boundary of the macro element imacro in the collapsible
     /// section
-    void r_W_collapsible(const unsigned &t,
-                         const Vector<double> &zeta,
-                         Vector<double> &r,
-                         const unsigned &imacro);
+    void r_W_collapsible(const unsigned& t,
+                         const Vector<double>& zeta,
+                         Vector<double>& r,
+                         const unsigned& imacro);
 
     /// \short Southern boundary of the macro element imacro in the collapsible
     /// section
-    void r_S_collapsible(const unsigned &t,
-                         const Vector<double> &zeta,
-                         Vector<double> &r,
-                         const unsigned &imacro);
+    void r_S_collapsible(const unsigned& t,
+                         const Vector<double>& zeta,
+                         Vector<double>& r,
+                         const unsigned& imacro);
 
     /// \short Eastern boundary of the macro element imacro in the collapsible
     /// section
-    void r_E_collapsible(const unsigned &t,
-                         const Vector<double> &zeta,
-                         Vector<double> &r,
-                         const unsigned &imacro);
+    void r_E_collapsible(const unsigned& t,
+                         const Vector<double>& zeta,
+                         Vector<double>& r,
+                         const unsigned& imacro);
 
     /// \short Function pointer for function that squashes
     /// the macro elements near the walls
@@ -279,7 +279,7 @@ namespace oomph
 
     /// \short Default for function that  implements
     /// axial spacing of macro elements
-    static double default_axial_spacing_fct(const double &xi)
+    static double default_axial_spacing_fct(const double& xi)
     {
       return xi;
     }
@@ -309,7 +309,7 @@ namespace oomph
     double Ly;
 
     /// Pointer to the geometric object that parametrises the collapsible wall
-    GeomObject *Wall_pt;
+    GeomObject* Wall_pt;
   };
 
   /////////////////////////////////////////////////////////////////////////
@@ -326,11 +326,11 @@ namespace oomph
   /// Domain base class.
   //=================================================================
   void CollapsibleChannelDomain::macro_element_boundary(
-    const unsigned &t,
-    const unsigned &imacro,
-    const unsigned &idirect,
-    const Vector<double> &zeta,
-    Vector<double> &r)
+    const unsigned& t,
+    const unsigned& imacro,
+    const unsigned& idirect,
+    const Vector<double>& zeta,
+    Vector<double>& r)
   {
     using namespace QuadTreeNames;
 
@@ -461,10 +461,10 @@ namespace oomph
   /// \short Western edge of the  macro element in the upstream (part=0)
   /// or downstream (part=1) parts of the channel; \f$ \zeta \in [-1,1] \f$
   //===========================================================================
-  void CollapsibleChannelDomain::r_W_straight(const Vector<double> &zeta,
-                                              Vector<double> &r,
-                                              const unsigned &imacro,
-                                              const unsigned &part)
+  void CollapsibleChannelDomain::r_W_straight(const Vector<double>& zeta,
+                                              Vector<double>& r,
+                                              const unsigned& imacro,
+                                              const unsigned& part)
   {
     // Determines the "coordinates" of the macro-element
     unsigned x = unsigned(imacro % (Nup + Ncollapsible + Ndown));
@@ -512,10 +512,10 @@ namespace oomph
   /// of the channel; \f$ \zeta \in [-1,1] \f$
   /// part=0 in the upstream part, part=1 in the downstream part
   //===========================================================================
-  void CollapsibleChannelDomain::r_E_straight(const Vector<double> &zeta,
-                                              Vector<double> &r,
-                                              const unsigned &imacro,
-                                              const unsigned &part)
+  void CollapsibleChannelDomain::r_E_straight(const Vector<double>& zeta,
+                                              Vector<double>& r,
+                                              const unsigned& imacro,
+                                              const unsigned& part)
   {
     // Determines the "coordinates" of the macro-element
     unsigned x = unsigned(imacro % (Nup + Ncollapsible + Ndown));
@@ -563,10 +563,10 @@ namespace oomph
   /// the channel; \f$ \zeta \in [-1,1] \f$
   /// part=0 in the left part, part=1 in the right part
   //==========================================================================
-  void CollapsibleChannelDomain::r_N_straight(const Vector<double> &zeta,
-                                              Vector<double> &r,
-                                              const unsigned &imacro,
-                                              const unsigned &part)
+  void CollapsibleChannelDomain::r_N_straight(const Vector<double>& zeta,
+                                              Vector<double>& r,
+                                              const unsigned& imacro,
+                                              const unsigned& part)
   {
     // Determines the "coordinates" of the macro-element
     unsigned x = unsigned(imacro % (Nup + Ncollapsible + Ndown));
@@ -616,10 +616,10 @@ namespace oomph
   /// the channel; \f$ \zeta \in [-1,1] \f$
   /// part=0 in the left part, part=1 in the right part
   //=========================================================================
-  void CollapsibleChannelDomain::r_S_straight(const Vector<double> &zeta,
-                                              Vector<double> &r,
-                                              const unsigned &imacro,
-                                              const unsigned &part)
+  void CollapsibleChannelDomain::r_S_straight(const Vector<double>& zeta,
+                                              Vector<double>& r,
+                                              const unsigned& imacro,
+                                              const unsigned& part)
   {
     // Determines the "coordinates" of the macro-element
     unsigned x = unsigned(imacro % (Nup + Ncollapsible + Ndown));
@@ -668,10 +668,10 @@ namespace oomph
   /// Western edge of the  macro element in the collapsible part of the
   /// channel; \f$ \zeta \in [-1,1] \f$.
   //========================================================================
-  void CollapsibleChannelDomain::r_W_collapsible(const unsigned &t,
-                                                 const Vector<double> &zeta,
-                                                 Vector<double> &r,
-                                                 const unsigned &imacro)
+  void CollapsibleChannelDomain::r_W_collapsible(const unsigned& t,
+                                                 const Vector<double>& zeta,
+                                                 Vector<double>& r,
+                                                 const unsigned& imacro)
   {
     // Determines the "coordinates" of the macro-element
     unsigned x = unsigned(imacro % (Nup + Ncollapsible + Ndown));
@@ -703,10 +703,10 @@ namespace oomph
   /// Eastern  edge of the  macro element in the collapsible part of the
   /// channel; \f$ \zeta \in [-1,1] \f$
   //=========================================================================
-  void CollapsibleChannelDomain::r_E_collapsible(const unsigned &t,
-                                                 const Vector<double> &zeta,
-                                                 Vector<double> &r,
-                                                 const unsigned &imacro)
+  void CollapsibleChannelDomain::r_E_collapsible(const unsigned& t,
+                                                 const Vector<double>& zeta,
+                                                 Vector<double>& r,
+                                                 const unsigned& imacro)
   {
     // Determines the "coordinates" of the macro-element
     unsigned x = unsigned(imacro % (Nup + Ncollapsible + Ndown));
@@ -738,10 +738,10 @@ namespace oomph
   /// Northern edge of the  macro element in the collapsible part of the
   /// channel; \f$ \zeta \in [-1,1] \f$
   //==========================================================================
-  void CollapsibleChannelDomain::r_N_collapsible(const unsigned &t,
-                                                 const Vector<double> &zeta,
-                                                 Vector<double> &r,
-                                                 const unsigned &imacro)
+  void CollapsibleChannelDomain::r_N_collapsible(const unsigned& t,
+                                                 const Vector<double>& zeta,
+                                                 Vector<double>& r,
+                                                 const unsigned& imacro)
   {
     // Determines the "coordinates" of the macro-element
     unsigned x = unsigned(imacro % (Nup + Ncollapsible + Ndown));
@@ -774,10 +774,10 @@ namespace oomph
   /// Southern  edge of the  macro element in the collapsible part of the
   /// channel; \f$ \zeta \in [-1,1] \f$
   //========================================================================
-  void CollapsibleChannelDomain::r_S_collapsible(const unsigned &t,
-                                                 const Vector<double> &zeta,
-                                                 Vector<double> &r,
-                                                 const unsigned &imacro)
+  void CollapsibleChannelDomain::r_S_collapsible(const unsigned& t,
+                                                 const Vector<double>& zeta,
+                                                 Vector<double>& r,
+                                                 const unsigned& imacro)
   {
     // Determines the "coordinates" of the macro-element
     unsigned x = unsigned(imacro % (Nup + Ncollapsible + Ndown));

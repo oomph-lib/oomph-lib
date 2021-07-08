@@ -8,13 +8,13 @@ namespace PerturbationSolution
   using namespace Global_Physical_Variables;
 
   /// function to compute radial distance of this point
-  double get_radial_distance(const Vector<double> &x)
+  double get_radial_distance(const Vector<double>& x)
   {
     return sqrt(x[0] * x[0] + x[1] * x[1]);
   }
 
   /// function to return angle of radial line from positive x-axis
-  double get_azimuthal_angle(const Vector<double> &x)
+  double get_azimuthal_angle(const Vector<double>& x)
   {
     return atan2(x[1], x[0]);
   }
@@ -22,7 +22,7 @@ namespace PerturbationSolution
   /// function to convert velocity vectors from polar to Cartesian coords
   void polar_to_cartesian_velocity(const Vector<double> u_polar,
                                    const double phi,
-                                   Vector<double> &u_cart)
+                                   Vector<double>& u_cart)
   {
     u_cart[0] = u_polar[0] * cos(phi) - u_polar[1] * sin(phi);
     u_cart[1] = u_polar[0] * sin(phi) + u_polar[1] * cos(phi);
@@ -31,8 +31,8 @@ namespace PerturbationSolution
   /// Leading order solution (u and p are in polar coordinates)
   void leading_order_veloc_and_pressure(const double r,
                                         const double phi,
-                                        Vector<double> &u_0,
-                                        double &p_0)
+                                        Vector<double>& u_0,
+                                        double& p_0)
   {
     // leading order velocity term, r component
     u_0[0] = (((4 + 2 * phi * Pi - pow(Pi, 2)) * cos(phi) +
@@ -50,8 +50,8 @@ namespace PerturbationSolution
   /// First order correction (u and p are in polar coordinates)
   void first_order_veloc_and_pressure(const double r,
                                       const double phi,
-                                      Vector<double> &u_1,
-                                      double &p_1)
+                                      Vector<double>& u_1,
+                                      double& p_1)
   {
     // first order velocity term, r component
     u_1[0] = (r * (-2 * pow(Pi, 2) * (8 + pow(Pi, 2)) +
@@ -86,8 +86,8 @@ namespace PerturbationSolution
   /// Second order correction (u and p are in polar coordinates)
   void second_order_veloc_and_pressure(const double r,
                                        const double phi,
-                                       Vector<double> &u_2,
-                                       double &p_2)
+                                       Vector<double>& u_2,
+                                       double& p_2)
   {
     // second order velocity term, r component
     u_2[0] =
@@ -174,8 +174,8 @@ namespace PerturbationSolution
   /// array of function pointers for each term in expansion
   void (*veloc_and_pressure_term_pt[3])(const double,
                                         const double,
-                                        Vector<double> &,
-                                        double &) = {
+                                        Vector<double>&,
+                                        double&) = {
     &leading_order_veloc_and_pressure,
     &first_order_veloc_and_pressure,
     &second_order_veloc_and_pressure};
@@ -183,10 +183,10 @@ namespace PerturbationSolution
   /// Full solution. Final optional argument specifies
   /// number of terms in expansion (Stokes or Stokes plus
   /// leading order correction in Re)
-  void full_soln(const Vector<double> &x,
-                 Vector<double> &u,
-                 double &p,
-                 const unsigned &nterms = 2)
+  void full_soln(const Vector<double>& x,
+                 Vector<double>& u,
+                 double& p,
+                 const unsigned& nterms = 2)
   {
     // get radial distance to this point from origin
     double r = get_radial_distance(x);
@@ -229,7 +229,7 @@ namespace PerturbationSolution
   unsigned N_terms_for_plot = 2;
 
   /// Combined solution (u,v,p) for plotting
-  void perturbation_soln_for_plot(const Vector<double> &x, Vector<double> &soln)
+  void perturbation_soln_for_plot(const Vector<double>& x, Vector<double>& soln)
   {
     soln.resize(3);
     double p = 0.0;
@@ -240,8 +240,8 @@ namespace PerturbationSolution
   }
 
   /// First order-perturbation for plotting
-  void first_order_perturbation_for_plot(const Vector<double> &x,
-                                         Vector<double> &soln)
+  void first_order_perturbation_for_plot(const Vector<double>& x,
+                                         Vector<double>& soln)
   {
     soln.resize(3);
 
@@ -279,8 +279,8 @@ namespace PerturbationSolution
   }
 
   /// Second order-perturbation for plotting
-  void second_order_perturbation_for_plot(const Vector<double> &x,
-                                          Vector<double> &soln)
+  void second_order_perturbation_for_plot(const Vector<double>& x,
+                                          Vector<double>& soln)
   {
     soln.resize(3);
 

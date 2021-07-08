@@ -87,10 +87,10 @@ namespace Flag_definition
   double Amplitude = 0.33;
 
   /// Pointer to the global time object
-  Time *Time_pt = 0;
+  Time* Time_pt = 0;
 
   /// Time-dependent vector to upper tip of the "flag"
-  Vector<double> upper_tip(const double &t)
+  Vector<double> upper_tip(const double& t)
   {
     double tmp_ampl = Amplitude;
     if (t <= 0.0) tmp_ampl = 0.0;
@@ -103,7 +103,7 @@ namespace Flag_definition
   }
 
   /// Time-dependent vector to bottom tip of the "flag"
-  Vector<double> lower_tip(const double &t)
+  Vector<double> lower_tip(const double& t)
   {
     double tmp_ampl = Amplitude;
     if (t <= 0.0) tmp_ampl = 0.0;
@@ -129,9 +129,9 @@ namespace Flag_definition
 
     /// \short Return the position along the top of the flag (xi[0] varies
     /// between 0 and Lx)
-    void position(const unsigned &t,
-                  const Vector<double> &xi,
-                  Vector<double> &r) const
+    void position(const unsigned& t,
+                  const Vector<double>& xi,
+                  Vector<double>& r) const
     {
       // Compute position of fixed point on the cylinder
       Vector<double> point_on_circle(2);
@@ -152,7 +152,7 @@ namespace Flag_definition
     }
 
     /// Current position
-    void position(const Vector<double> &xi, Vector<double> &r) const
+    void position(const Vector<double>& xi, Vector<double>& r) const
     {
       return position(0, xi, r);
     }
@@ -178,9 +178,9 @@ namespace Flag_definition
 
     /// \short Return the position along the bottom of the flag (xi[0] varies
     /// between 0 and Lx)
-    void position(const unsigned &t,
-                  const Vector<double> &xi,
-                  Vector<double> &r) const
+    void position(const unsigned& t,
+                  const Vector<double>& xi,
+                  Vector<double>& r) const
     {
       // Compute position of fixed point on the cylinder
       Vector<double> point_on_circle(2);
@@ -201,7 +201,7 @@ namespace Flag_definition
     }
 
     /// Current position
-    void position(const Vector<double> &xi, Vector<double> &r) const
+    void position(const Vector<double>& xi, Vector<double>& r) const
     {
       return position(0, xi, r);
     }
@@ -228,9 +228,9 @@ namespace Flag_definition
     /// \short Return the position
     /// This object links the tips of the top and bottom by a straight line
     /// whilst xi[0] goes from -H/2 to H/2.
-    void position(const unsigned &t,
-                  const Vector<double> &xi,
-                  Vector<double> &r) const
+    void position(const unsigned& t,
+                  const Vector<double>& xi,
+                  Vector<double>& r) const
     {
       Vector<double> point_top(upper_tip(Time_pt->time(t)));
       Vector<double> point_bottom(lower_tip(Time_pt->time(t)));
@@ -242,7 +242,7 @@ namespace Flag_definition
     }
 
     /// Current position.
-    void position(const Vector<double> &xi, Vector<double> &r) const
+    void position(const Vector<double>& xi, Vector<double>& r) const
     {
       return position(0, xi, r);
     }
@@ -255,20 +255,20 @@ namespace Flag_definition
   };
 
   /// Pointer to GeomObject that bounds the upper edge of the flag
-  TopOfFlag *Top_flag_pt = 0;
+  TopOfFlag* Top_flag_pt = 0;
 
   /// Pointer to GeomObject that bounds the bottom edge of the flag
-  BottomOfFlag *Bottom_flag_pt = 0;
+  BottomOfFlag* Bottom_flag_pt = 0;
 
   /// Pointer to GeomObject that bounds the tip edge of the flag
-  TipOfFlag *Tip_flag_pt = 0;
+  TipOfFlag* Tip_flag_pt = 0;
 
   /// \short Pointer to GeomObject of type Circle that defines the
   /// central cylinder.
-  Circle *Cylinder_pt = 0;
+  Circle* Cylinder_pt = 0;
 
   /// Create all GeomObjects needed to define the cylinder and the flag
-  void setup(Time *time_pt)
+  void setup(Time* time_pt)
   {
     // Assign pointer to global time object
     Time_pt = time_pt;
@@ -301,7 +301,7 @@ class TurekNonFSIProblem : public Problem
 {
 public:
   /// \short Constructor: Pass length and height of domain.
-  TurekNonFSIProblem(const double &length, const double &height);
+  TurekNonFSIProblem(const double& length, const double& height);
 
   /// Update the problem specs after solve (empty)
   void actions_after_newton_solve() {}
@@ -318,25 +318,25 @@ public:
 #ifdef USE_MACRO_ELEMENTS
 
   /// Access function for the specific mesh
-  RefineableCylinderWithFlagMesh<ELEMENT> *mesh_pt()
+  RefineableCylinderWithFlagMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<RefineableCylinderWithFlagMesh<ELEMENT> *>(
+    return dynamic_cast<RefineableCylinderWithFlagMesh<ELEMENT>*>(
       Problem::mesh_pt());
   }
 
 #else
 
   /// Access function for the specific mesh
-  RefineableAlgebraicCylinderWithFlagMesh<ELEMENT> *mesh_pt()
+  RefineableAlgebraicCylinderWithFlagMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<RefineableAlgebraicCylinderWithFlagMesh<ELEMENT> *>(
+    return dynamic_cast<RefineableAlgebraicCylinderWithFlagMesh<ELEMENT>*>(
       Problem::mesh_pt());
   }
 
 #endif
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 private:
   /// Height of channel
@@ -348,8 +348,8 @@ private:
 /// Constructor: Pass length and height of domain.
 //========================================================================
 template<class ELEMENT>
-TurekNonFSIProblem<ELEMENT>::TurekNonFSIProblem(const double &length,
-                                                const double &height) :
+TurekNonFSIProblem<ELEMENT>::TurekNonFSIProblem(const double& length,
+                                                const double& height) :
   Height(height)
 {
   // Bump up Newton solver parameters to allow for crappy initial guesses
@@ -408,7 +408,7 @@ TurekNonFSIProblem<ELEMENT>::TurekNonFSIProblem(const double &length,
   mesh_pt()->refine_uniformly();
 
   // Set error estimator
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   mesh_pt()->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Set the boundary conditions for this problem: All nodes are
@@ -440,7 +440,7 @@ TurekNonFSIProblem<ELEMENT>::TurekNonFSIProblem(const double &length,
   for (unsigned e = 0; e < nelem; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Parameters::Re;
@@ -505,7 +505,7 @@ void TurekNonFSIProblem<ELEMENT>::actions_before_implicit_timestep()
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Which node are we dealing with?
-      Node *node_pt = mesh_pt()->boundary_node_pt(ibound, inod);
+      Node* node_pt = mesh_pt()->boundary_node_pt(ibound, inod);
 
       // Apply no slip
       FSI_functions::apply_no_slip_on_moving_wall(node_pt);
@@ -517,7 +517,7 @@ void TurekNonFSIProblem<ELEMENT>::actions_before_implicit_timestep()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void TurekNonFSIProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void TurekNonFSIProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -543,7 +543,7 @@ void TurekNonFSIProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
 /// Driver code -- pass a command line argument if you want to run
 /// the code in validation mode where it only performs a few steps
 //=====================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

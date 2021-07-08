@@ -57,19 +57,19 @@ namespace oomph
     ~MatrixBasedDiagPreconditioner(){};
 
     /// Broken copy constructor
-    MatrixBasedDiagPreconditioner(const MatrixBasedDiagPreconditioner &)
+    MatrixBasedDiagPreconditioner(const MatrixBasedDiagPreconditioner&)
     {
       BrokenCopy::broken_copy("MatrixBasedDiagPreconditioner");
     }
 
     /// Broken assignment operator
-    void operator=(const MatrixBasedDiagPreconditioner &)
+    void operator=(const MatrixBasedDiagPreconditioner&)
     {
       BrokenCopy::broken_assign("MatrixBasedDiagPreconditioner");
     }
 
     /// Apply preconditioner to z, i.e. z=D^-1
-    void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+    void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
     /// \short Setup the preconditioner (store diagonal) from the fully
     /// assembled matrix.
@@ -104,19 +104,19 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    MatrixBasedLumpedPreconditioner(const MatrixBasedDiagPreconditioner &)
+    MatrixBasedLumpedPreconditioner(const MatrixBasedDiagPreconditioner&)
     {
       BrokenCopy::broken_copy("MatrixBasedDiagPreconditioner");
     }
 
     /// Broken assignment operator
-    void operator=(const MatrixBasedLumpedPreconditioner &)
+    void operator=(const MatrixBasedLumpedPreconditioner&)
     {
       BrokenCopy::broken_assign("MatrixBasedDiagPreconditioner");
     }
 
     /// Apply preconditioner to z, i.e. z=D^-1
-    void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+    void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
     /// \short Setup the preconditioner (store diagonal) from the fully
     /// assembled matrix. Problem pointer is ignored.
@@ -144,7 +144,7 @@ namespace oomph
 
     /// \short Access function to the inverse of the lumped vector assembled in
     /// the preconditioner setup routine
-    double *inverse_lumped_vector_pt()
+    double* inverse_lumped_vector_pt()
     {
       /// paranoid check that vector has been created
 #ifdef PARANOID
@@ -160,7 +160,7 @@ namespace oomph
     }
 
     /// \short Access function to number of rows for this preconditioner
-    unsigned &nrow()
+    unsigned& nrow()
     {
       return Nrow;
     }
@@ -173,7 +173,7 @@ namespace oomph
 
   private:
     /// Vector of inverse diagonal entries
-    double *Inv_lumped_diag_pt;
+    double* Inv_lumped_diag_pt;
 
     // boolean to indicate whether the lumped matrix was positive
     bool Positive_matrix;
@@ -197,7 +197,7 @@ namespace oomph
     CompressedMatrixCoefficient() {}
 
     /// Constructor (takes the index and value as arguments)
-    CompressedMatrixCoefficient(const unsigned &index, const double &value)
+    CompressedMatrixCoefficient(const unsigned& index, const double& value)
     {
       // store the index and value
       Index = index;
@@ -208,33 +208,33 @@ namespace oomph
     ~CompressedMatrixCoefficient() {}
 
     /// Copy Constructor. Not Broken. Required for STL sort function.
-    CompressedMatrixCoefficient(const CompressedMatrixCoefficient &a)
+    CompressedMatrixCoefficient(const CompressedMatrixCoefficient& a)
     {
       Index = a.index();
       Value = a.value();
     }
 
     /// Assignment Operator. Not Broken. Required for STL sort function.
-    void operator=(const CompressedMatrixCoefficient &a)
+    void operator=(const CompressedMatrixCoefficient& a)
     {
       Index = a.index();
       Value = a.value();
     }
 
     /// Less Than Operator (for the STL sort function)
-    bool operator<(const CompressedMatrixCoefficient &a) const
+    bool operator<(const CompressedMatrixCoefficient& a) const
     {
       return Index < a.index();
     }
 
     /// access function for the coefficient's (row or column) index
-    unsigned &index()
+    unsigned& index()
     {
       return Index;
     }
 
     /// access function for the coefficient value
-    double &value()
+    double& value()
     {
       return Value;
     }
@@ -282,19 +282,19 @@ namespace oomph
     ~ILUZeroPreconditioner(){};
 
     /// Broken copy constructor
-    ILUZeroPreconditioner(const ILUZeroPreconditioner &)
+    ILUZeroPreconditioner(const ILUZeroPreconditioner&)
     {
       BrokenCopy::broken_copy("ILUZeroPreconditioner");
     }
 
     /// Broken assignment operator
-    void operator=(const ILUZeroPreconditioner &)
+    void operator=(const ILUZeroPreconditioner&)
     {
       BrokenCopy::broken_assign("ILUZeroPreconditioner");
     }
 
     /// Apply preconditioner to r
-    void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+    void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
     /// \short Setup the preconditioner (store diagonal) from the fully
     /// assembled matrix. Problem pointer is ignored.
@@ -327,13 +327,13 @@ namespace oomph
     ILUZeroPreconditioner(){};
 
     /// Broken copy constructor
-    ILUZeroPreconditioner(const ILUZeroPreconditioner &)
+    ILUZeroPreconditioner(const ILUZeroPreconditioner&)
     {
       BrokenCopy::broken_copy("ILUZeroPreconditioner");
     }
 
     /// Broken assignment operator
-    void operator=(const ILUZeroPreconditioner &)
+    void operator=(const ILUZeroPreconditioner&)
     {
       BrokenCopy::broken_assign("ILUZeroPreconditioner");
     }
@@ -342,7 +342,7 @@ namespace oomph
     ~ILUZeroPreconditioner(){};
 
     /// Apply preconditioner to r
-    void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+    void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
     /// \short Setup the preconditioner (store diagonal) from the fully
     /// assembled matrix. Problem pointer is ignored.
@@ -388,14 +388,14 @@ namespace oomph
 #ifdef PARANOID
       // paranoid check that the solver is an iterative solver and
       // the preconditioner is a preconditioner
-      if (dynamic_cast<IterativeLinearSolver *>(Solver_pt) == 0)
+      if (dynamic_cast<IterativeLinearSolver*>(Solver_pt) == 0)
       {
         throw OomphLibError(
           "The template argument SOLVER must be of type IterativeLinearSolver",
           OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION);
       }
-      if (dynamic_cast<Preconditioner *>(Preconditioner_pt) == 0)
+      if (dynamic_cast<Preconditioner*>(Preconditioner_pt) == 0)
       {
         throw OomphLibError(
           "The template argument PRECONDITIONER must be of type Preconditioner",
@@ -430,8 +430,8 @@ namespace oomph
     void setup()
     {
       // set the distribution
-      DistributableLinearAlgebraObject *dist_pt =
-        dynamic_cast<DistributableLinearAlgebraObject *>(matrix_pt());
+      DistributableLinearAlgebraObject* dist_pt =
+        dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt());
       if (dist_pt != 0)
       {
         this->build_distribution(dist_pt->distribution_pt());
@@ -459,41 +459,41 @@ namespace oomph
 
     /// \short Preconditioner solve method. Performs the specified number
     /// of Krylov iterations preconditioned with the specified preconditioner
-    void preconditioner_solve(const DoubleVector &r, DoubleVector &z)
+    void preconditioner_solve(const DoubleVector& r, DoubleVector& z)
     {
       Solver_pt->resolve(r, z);
     }
 
     /// Access to convergence tolerance of the inner iteration solver
-    double &tolerance()
+    double& tolerance()
     {
       return Solver_pt->tolerance();
     }
 
     /// Access to max. number of iterations of the inner iteration solver
-    unsigned &max_iter()
+    unsigned& max_iter()
     {
       return Solver_pt->max_iter();
     }
 
     ///
-    SOLVER *solver_pt()
+    SOLVER* solver_pt()
     {
       return Solver_pt;
     }
 
     ///
-    PRECONDITIONER *preconditioner_pt()
+    PRECONDITIONER* preconditioner_pt()
     {
       return Preconditioner_pt;
     }
 
   private:
     /// pointer to the underlying solver
-    SOLVER *Solver_pt;
+    SOLVER* Solver_pt;
 
     /// pointer to the underlying preconditioner
-    PRECONDITIONER *Preconditioner_pt;
+    PRECONDITIONER* Preconditioner_pt;
   };
 } // namespace oomph
 #endif

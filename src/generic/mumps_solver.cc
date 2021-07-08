@@ -166,14 +166,14 @@ namespace oomph
   /// Note: if Delete_matrix_data is true the function
   /// matrix_pt->clean_up_memory() will be used to wipe the matrix data.
   //=============================================================================
-  void MumpsSolver::factorise(DoubleMatrixBase *const &matrix_pt)
+  void MumpsSolver::factorise(DoubleMatrixBase* const& matrix_pt)
   {
     // Initialise timer
     double t_start = TimingHelpers::timer();
 
     // set the distribution
-    DistributableLinearAlgebraObject *dist_matrix_pt =
-      dynamic_cast<DistributableLinearAlgebraObject *>(matrix_pt);
+    DistributableLinearAlgebraObject* dist_matrix_pt =
+      dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt);
     if (dist_matrix_pt)
     {
       // the solver has the same distribution as the matrix if possible
@@ -251,7 +251,7 @@ namespace oomph
     }
 
     // Is it a CRDoubleMatrix?
-    CRDoubleMatrix *cr_matrix_pt = dynamic_cast<CRDoubleMatrix *>(matrix_pt);
+    CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
     if (cr_matrix_pt != 0)
     {
 #ifdef PARANOID
@@ -289,9 +289,9 @@ namespace oomph
         int first_row = cr_matrix_pt->first_row();
 
         // Copy into coordinate storage scheme using pointer arithmetic
-        double *matrix_value_pt = cr_matrix_pt->value();
-        int *matrix_index_pt = cr_matrix_pt->column_index();
-        int *matrix_start_pt = cr_matrix_pt->row_start();
+        double* matrix_value_pt = cr_matrix_pt->value();
+        int* matrix_index_pt = cr_matrix_pt->column_index();
+        int* matrix_start_pt = cr_matrix_pt->row_start();
         int i_row = 0;
         for (int count = 0; count < nnz_loc; count++)
         {
@@ -461,7 +461,7 @@ namespace oomph
   /// This does not make any assumption about the distribution of the
   /// vectors
   //=============================================================================
-  void MumpsSolver::backsub(const DoubleVector &rhs, DoubleVector &result)
+  void MumpsSolver::backsub(const DoubleVector& rhs, DoubleVector& result)
   {
     double t_start = TimingHelpers::timer();
 
@@ -654,14 +654,14 @@ namespace oomph
   /// Note: if Delete_matrix_data is true the function
   /// matrix_pt->clean_up_memory() will be used to wipe the matrix data.
   //=========================================================================
-  void MumpsSolver::solve(DoubleMatrixBase *const &matrix_pt,
-                          const DoubleVector &rhs,
-                          DoubleVector &result)
+  void MumpsSolver::solve(DoubleMatrixBase* const& matrix_pt,
+                          const DoubleVector& rhs,
+                          DoubleVector& result)
   {
 #ifdef PARANOID
     if (!Suppress_warning_about_MPI_COMM_WORLD)
     {
-      if (dynamic_cast<DistributableLinearAlgebraObject *>(matrix_pt)
+      if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt)
             ->distribution_pt()
             ->communicator_pt()
             ->mpi_comm() != MPI_COMM_WORLD)
@@ -725,8 +725,8 @@ namespace oomph
 
     // if the matrix is distributable then should have the same distribution
     // as the rhs vector
-    DistributableLinearAlgebraObject *ddist_matrix_pt =
-      dynamic_cast<DistributableLinearAlgebraObject *>(matrix_pt);
+    DistributableLinearAlgebraObject* ddist_matrix_pt =
+      dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt);
     if (ddist_matrix_pt != 0)
     {
       if (!(*ddist_matrix_pt->distribution_pt() == *rhs.distribution_pt()))
@@ -774,8 +774,8 @@ namespace oomph
 #endif
 
     // set the distribution
-    DistributableLinearAlgebraObject *dist_matrix_pt =
-      dynamic_cast<DistributableLinearAlgebraObject *>(matrix_pt);
+    DistributableLinearAlgebraObject* dist_matrix_pt =
+      dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt);
     if (dist_matrix_pt)
     {
       // the solver has the same distribution as the matrix if possible
@@ -820,7 +820,7 @@ namespace oomph
   /// which contains the solution of the linear system defined by
   /// the problem's fully assembled Jacobian and residual Vector.
   //==================================================================
-  void MumpsSolver::solve(Problem *const &problem_pt, DoubleVector &result)
+  void MumpsSolver::solve(Problem* const& problem_pt, DoubleVector& result)
   {
 #ifdef PARANOID
     if (!Suppress_warning_about_MPI_COMM_WORLD)
@@ -925,7 +925,7 @@ namespace oomph
   /// and the specified rhs vector if resolve has been enabled.
   /// Note: returns the global result Vector.
   //===============================================================
-  void MumpsSolver::resolve(const DoubleVector &rhs, DoubleVector &result)
+  void MumpsSolver::resolve(const DoubleVector& rhs, DoubleVector& result)
   {
 #ifdef PARANOID
     if (!Suppress_warning_about_MPI_COMM_WORLD)

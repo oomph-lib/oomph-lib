@@ -39,7 +39,7 @@ namespace oomph
   //====================================================================
   void LinearisedNavierStokesEigenfunctionNormalisationElement::
     fill_in_generic_contribution_to_residuals_normalisation(
-      Vector<double> &residuals)
+      Vector<double>& residuals)
   {
     // Note that this element can only be used with our linearised navier
     // stokes elements
@@ -74,7 +74,7 @@ namespace oomph
   //===========================================================================
   LinearisedNavierStokesEigenfunctionNormalisationElement::
     LinearisedNavierStokesEigenfunctionNormalisationElement(
-      std::complex<double> *const &normalisation_pt)
+      std::complex<double>* const& normalisation_pt)
   {
     // Store pointer to normalisation
     Normalisation_pt = normalisation_pt;

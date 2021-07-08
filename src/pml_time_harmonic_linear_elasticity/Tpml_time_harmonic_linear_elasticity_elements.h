@@ -76,38 +76,38 @@ namespace oomph
 
     /// Broken copy constructor
     TPMLTimeHarmonicLinearElasticityElement(
-      const TPMLTimeHarmonicLinearElasticityElement<DIM, NNODE_1D> &dummy)
+      const TPMLTimeHarmonicLinearElasticityElement<DIM, NNODE_1D>& dummy)
     {
       BrokenCopy::broken_copy("TPMLTimeHarmonicLinearElasticityElement");
     }
 
     /// Broken assignment operator
     void operator=(
-      const TPMLTimeHarmonicLinearElasticityElement<DIM, NNODE_1D> &)
+      const TPMLTimeHarmonicLinearElasticityElement<DIM, NNODE_1D>&)
     {
       BrokenCopy::broken_assign("TPMLTimeHarmonicLinearElasticityElement");
     }
 
     /// \short Output function:
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       PMLTimeHarmonicLinearElasticityEquations<DIM>::output(outfile);
     }
 
     ///  \short Output function:
-    void output(std::ostream &outfile, const unsigned &nplot)
+    void output(std::ostream& outfile, const unsigned& nplot)
     {
       PMLTimeHarmonicLinearElasticityEquations<DIM>::output(outfile, nplot);
     }
 
     /// \short C-style output function:
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       PMLTimeHarmonicLinearElasticityEquations<DIM>::output(file_pt);
     }
 
     ///  \short C-style output function:
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       PMLTimeHarmonicLinearElasticityEquations<DIM>::output(file_pt, n_plot);
     }
@@ -119,7 +119,7 @@ namespace oomph
     }
 
     /// \short Pointer to the j-th vertex node in the element
-    Node *vertex_node_pt(const unsigned &j) const
+    Node* vertex_node_pt(const unsigned& j) const
     {
       return TElement<DIM, NNODE_1D>::vertex_node_pt(j);
     }
@@ -140,7 +140,7 @@ namespace oomph
 
     /// \short Get 'flux' for Z2 error recovery:   Upper triangular entries
     /// in strain tensor.
-    void get_Z2_flux(const Vector<double> &s, Vector<double> &flux)
+    void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
 #ifdef PARANOID
       unsigned num_entries = 2 * (DIM + ((DIM * DIM) - DIM) / 2);

@@ -85,15 +85,15 @@ namespace Global_Physical_Variables
   Vector<double> Wall_normal;
 
   /// \short Function that specifies the wall unit normal at the inlet
-  void wall_unit_normal_inlet_fct(const Vector<double> &x,
-                                  Vector<double> &normal)
+  void wall_unit_normal_inlet_fct(const Vector<double>& x,
+                                  Vector<double>& normal)
   {
     normal = Wall_normal;
   }
 
   /// \short Function that specified the wall unit normal at the outlet
-  void wall_unit_normal_outlet_fct(const Vector<double> &x,
-                                   Vector<double> &normal)
+  void wall_unit_normal_outlet_fct(const Vector<double>& x,
+                                   Vector<double>& normal)
   {
     // Set the normal
     normal = Wall_normal;
@@ -109,20 +109,20 @@ namespace Global_Physical_Variables
   double Inlet_Angle = 2.0 * atan(1.0);
 
   /// Function that prescribes the hydrostatic pressure field at the outlet
-  void hydrostatic_pressure_outlet(const double &time,
-                                   const Vector<double> &x,
-                                   const Vector<double> &n,
-                                   Vector<double> &traction)
+  void hydrostatic_pressure_outlet(const double& time,
+                                   const Vector<double>& x,
+                                   const Vector<double>& n,
+                                   Vector<double>& traction)
   {
     traction[0] = ReInvFr * G[1] * (1.0 - x[1]);
     traction[1] = 0.0;
   }
 
   /// Function that prescribes hydrostatic pressure field at the inlet
-  void hydrostatic_pressure_inlet(const double &time,
-                                  const Vector<double> &x,
-                                  const Vector<double> &n,
-                                  Vector<double> &traction)
+  void hydrostatic_pressure_inlet(const double& time,
+                                  const Vector<double>& x,
+                                  const Vector<double>& n,
+                                  Vector<double>& traction)
   {
     traction[0] = -ReInvFr * G[1] * (1.0 - x[1]);
     traction[1] = 0.0;
@@ -130,7 +130,7 @@ namespace Global_Physical_Variables
   // end of traction functions
 
   /// Constitutive law used to determine the mesh deformation
-  ConstitutiveLaw *Constitutive_law_pt;
+  ConstitutiveLaw* Constitutive_law_pt;
 
   /// Pseudo-solid Poisson ratio
   double Nu = 0.1;
@@ -147,25 +147,25 @@ class InclinedPlaneProblem : public Problem
 {
 protected:
   /// Bulk fluid mesh
-  Mesh *Bulk_mesh_pt;
+  Mesh* Bulk_mesh_pt;
 
   /// Mesh for the traction elements that are added at inlet and outlet
-  Mesh *Traction_mesh_pt;
+  Mesh* Traction_mesh_pt;
 
   /// Mesh for the free surface elements
-  Mesh *Surface_mesh_pt;
+  Mesh* Surface_mesh_pt;
 
   /// Mesh for the point elements at each end of the free surface
-  Mesh *Point_mesh_pt;
+  Mesh* Point_mesh_pt;
 
   /// Prefix for output files
   std::string Output_prefix;
 
 public:
   /// Generic Constructor (empty)
-  InclinedPlaneProblem(const unsigned &nx,
-                       const unsigned &ny,
-                       const double &length) :
+  InclinedPlaneProblem(const unsigned& nx,
+                       const unsigned& ny,
+                       const double& length) :
     Output_prefix("Unset")
   {
   }
@@ -174,7 +174,7 @@ public:
   void solve_steady();
 
   /// Take n_tsteps timesteps of size dt
-  void timestep(const double &dt, const unsigned &n_tsteps);
+  void timestep(const double& dt, const unsigned& n_tsteps);
 
   /// \short Actions before the timestep
   /// (update the time-dependent boundary conditions)
@@ -189,7 +189,7 @@ public:
     unsigned n_node = this->Bulk_mesh_pt->nboundary_node(0);
     for (unsigned n = 0; n < n_node; n++)
     {
-      Node *nod_pt = this->Bulk_mesh_pt->boundary_node_pt(0, n);
+      Node* nod_pt = this->Bulk_mesh_pt->boundary_node_pt(0, n);
       double arg = Global_Physical_Variables::K * nod_pt->x(0);
       double value = sin(arg) * epsilon * time * exp(-time);
       nod_pt->set_value(1, value);
@@ -210,7 +210,7 @@ public:
       // Loop over these elements and create the traction elements
       for (unsigned e = 0; e < n_boundary_element; e++)
       {
-        NavierStokesTractionElement<ELEMENT> *surface_element_pt =
+        NavierStokesTractionElement<ELEMENT>* surface_element_pt =
           new NavierStokesTractionElement<ELEMENT>(
             Bulk_mesh_pt->boundary_element_pt(b, e),
             Bulk_mesh_pt->face_index_at_boundary(b, e));
@@ -230,7 +230,7 @@ public:
       // Loop over these elements and create the traction elements
       for (unsigned e = 0; e < n_boundary_element; e++)
       {
-        NavierStokesTractionElement<ELEMENT> *surface_element_pt =
+        NavierStokesTractionElement<ELEMENT>* surface_element_pt =
           new NavierStokesTractionElement<ELEMENT>(
             Bulk_mesh_pt->boundary_element_pt(b, e),
             Bulk_mesh_pt->face_index_at_boundary(b, e));
@@ -256,7 +256,7 @@ public:
     // Loop over the elements and create the appropriate interface elements
     for (unsigned e = 0; e < n_boundary_element; e++)
     {
-      INTERFACE_ELEMENT *surface_element_pt =
+      INTERFACE_ELEMENT* surface_element_pt =
         new INTERFACE_ELEMENT(Bulk_mesh_pt->boundary_element_pt(b, e),
                               Bulk_mesh_pt->face_index_at_boundary(b, e));
       // Add elements to the mesh
@@ -269,7 +269,7 @@ public:
       // the element order within the mesh)
       if (e == 0)
       {
-        FluidInterfaceBoundingElement *point_element_pt =
+        FluidInterfaceBoundingElement* point_element_pt =
           surface_element_pt->make_bounding_element(-1);
         // Add element to the point mesh
         Point_mesh_pt->add_element_pt(point_element_pt);
@@ -288,7 +288,7 @@ public:
       // the element order within the mesh)
       if (e == n_boundary_element - 1)
       {
-        FluidInterfaceBoundingElement *point_element_pt =
+        FluidInterfaceBoundingElement* point_element_pt =
           surface_element_pt->make_bounding_element(1);
         // Add element to the mesh
         Point_mesh_pt->add_element_pt(point_element_pt);
@@ -314,7 +314,7 @@ public:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Cast to a fluid element
-      ELEMENT *temp_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+      ELEMENT* temp_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
       // Set the Reynolds number
       temp_pt->re_pt() = &Re;
@@ -331,7 +331,7 @@ public:
     {
       // Determine whether we are solving an elastic problem or not
       bool elastic = false;
-      if (dynamic_cast<SolidNode *>(Bulk_mesh_pt->node_pt(0)))
+      if (dynamic_cast<SolidNode*>(Bulk_mesh_pt->node_pt(0)))
       {
         elastic = true;
       }
@@ -348,9 +348,9 @@ public:
         // of nodes
         if (elastic)
         {
-          static_cast<SolidNode *>(Bulk_mesh_pt->boundary_node_pt(0, j))
+          static_cast<SolidNode*>(Bulk_mesh_pt->boundary_node_pt(0, j))
             ->pin_position(0);
-          static_cast<SolidNode *>(Bulk_mesh_pt->boundary_node_pt(0, j))
+          static_cast<SolidNode*>(Bulk_mesh_pt->boundary_node_pt(0, j))
             ->pin_position(1);
         }
       }
@@ -365,7 +365,7 @@ public:
         // If elastic pin horizontal position of nodes
         if (elastic)
         {
-          static_cast<SolidNode *>(Bulk_mesh_pt->boundary_node_pt(3, j))
+          static_cast<SolidNode*>(Bulk_mesh_pt->boundary_node_pt(3, j))
             ->pin_position(0);
         }
       }
@@ -380,7 +380,7 @@ public:
         // If elastic pin horizontal position
         if (elastic)
         {
-          static_cast<SolidNode *>(Bulk_mesh_pt->boundary_node_pt(1, j))
+          static_cast<SolidNode*>(Bulk_mesh_pt->boundary_node_pt(1, j))
             ->pin_position(0);
         }
       }
@@ -449,7 +449,7 @@ void InclinedPlaneProblem<ELEMENT, INTERFACE_ELEMENT>::solve_steady()
 //----------------------------------------------------------------------
 template<class ELEMENT, class INTERFACE_ELEMENT>
 void InclinedPlaneProblem<ELEMENT, INTERFACE_ELEMENT>::timestep(
-  const double &dt, const unsigned &n_tsteps)
+  const double& dt, const unsigned& n_tsteps)
 {
   // Need to use the Global variables here
   using namespace Global_Physical_Variables;
@@ -530,21 +530,21 @@ class SpineInclinedPlaneMesh :
   public SpineMesh
 {
 public:
-  SpineInclinedPlaneMesh(const unsigned &nx,
-                         const unsigned &ny,
-                         const double &lx,
-                         const double &ly,
-                         TimeStepper *time_stepper_pt) :
+  SpineInclinedPlaneMesh(const unsigned& nx,
+                         const unsigned& ny,
+                         const double& lx,
+                         const double& ly,
+                         TimeStepper* time_stepper_pt) :
     SimpleRectangularQuadMesh<ELEMENT>(nx, ny, lx, ly, time_stepper_pt),
     SpineMesh()
   {
     // Find the number of linear points in the element
-    unsigned n_p = dynamic_cast<ELEMENT *>(finite_element_pt(0))->nnode_1d();
+    unsigned n_p = dynamic_cast<ELEMENT*>(finite_element_pt(0))->nnode_1d();
     // Reserve storage for the number of spines
     Spine_pt.reserve((n_p - 1) * nx + 1);
 
     // Create single pointer to a spine
-    Spine *new_spine_pt = 0;
+    Spine* new_spine_pt = 0;
 
     // Now loop over the elements horizontally
     for (unsigned long j = 0; j < nx; j++)
@@ -566,7 +566,7 @@ public:
         Spine_pt.push_back(new_spine_pt);
 
         // Get the node
-        SpineNode *nod_pt = element_node_pt(j, l2);
+        SpineNode* nod_pt = element_node_pt(j, l2);
         // Set the pointer to spine
         nod_pt->spine_pt() = new_spine_pt;
         // Set the fraction
@@ -582,7 +582,7 @@ public:
           for (unsigned l1 = 1; l1 < n_p; l1++)
           {
             // Get the node
-            SpineNode *nod_pt = element_node_pt(i * nx + j, l1 * n_p + l2);
+            SpineNode* nod_pt = element_node_pt(i * nx + j, l1 * n_p + l2);
             // Set the pointer to the spine
             nod_pt->spine_pt() = new_spine_pt;
             // Set the fraction
@@ -599,7 +599,7 @@ public:
   /// \short General node update function implements pure virtual function
   /// defined in SpineMesh base class and performs specific node update
   /// actions:  along vertical spines
-  virtual void spine_node_update(SpineNode *spine_node_pt)
+  virtual void spine_node_update(SpineNode* spine_node_pt)
   {
     // Get fraction along the spine
     double W = spine_node_pt->fraction();
@@ -619,9 +619,9 @@ class SpineInclinedPlaneProblem :
 {
 public:
   // Constructor
-  SpineInclinedPlaneProblem(const unsigned &nx,
-                            const unsigned &ny,
-                            const double &length) :
+  SpineInclinedPlaneProblem(const unsigned& nx,
+                            const unsigned& ny,
+                            const double& length) :
     InclinedPlaneProblem<ELEMENT, SpineLineFluidInterfaceElement<ELEMENT>>(
       nx, ny, length)
   {
@@ -676,11 +676,11 @@ class ElasticInclinedPlaneMesh :
 {
   // Public functions
 public:
-  ElasticInclinedPlaneMesh(const unsigned &nx,
-                           const unsigned &ny,
-                           const double &lx,
-                           const double &ly,
-                           TimeStepper *time_stepper_pt) :
+  ElasticInclinedPlaneMesh(const unsigned& nx,
+                           const unsigned& ny,
+                           const double& lx,
+                           const double& ly,
+                           TimeStepper* time_stepper_pt) :
     SimpleRectangularQuadMesh<ELEMENT>(nx, ny, lx, ly, time_stepper_pt),
     SolidMesh()
   {
@@ -699,9 +699,9 @@ class ElasticInclinedPlaneProblem :
 {
 public:
   // Constructor
-  ElasticInclinedPlaneProblem(const unsigned &nx,
-                              const unsigned &ny,
-                              const double &length) :
+  ElasticInclinedPlaneProblem(const unsigned& nx,
+                              const unsigned& ny,
+                              const double& length) :
     InclinedPlaneProblem<ELEMENT, ElasticLineFluidInterfaceElement<ELEMENT>>(
       nx, ny, length)
   {
@@ -721,8 +721,8 @@ public:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Cast to a fluid element
-      ELEMENT *temp_pt =
-        dynamic_cast<ELEMENT *>(this->Bulk_mesh_pt->element_pt(e));
+      ELEMENT* temp_pt =
+        dynamic_cast<ELEMENT*>(this->Bulk_mesh_pt->element_pt(e));
       // Set the constitutive law
       temp_pt->constitutive_law_pt() =
         Global_Physical_Variables::Constitutive_law_pt;
@@ -754,8 +754,8 @@ public:
     for (unsigned n = 0; n < n_node; n++)
     {
       // Cast node to an elastic node
-      SolidNode *temp_pt =
-        static_cast<SolidNode *>(this->Bulk_mesh_pt->node_pt(n));
+      SolidNode* temp_pt =
+        static_cast<SolidNode*>(this->Bulk_mesh_pt->node_pt(n));
       for (unsigned j = 0; j < 2; j++)
       {
         temp_pt->xi(j) = temp_pt->x(j);
@@ -765,7 +765,7 @@ public:
 };
 
 // start of main
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   using namespace Global_Physical_Variables;
 

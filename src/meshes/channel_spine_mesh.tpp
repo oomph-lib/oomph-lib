@@ -51,16 +51,16 @@ namespace oomph
   /// problems.
   //===========================================================================
   template<class ELEMENT>
-  ChannelSpineMesh<ELEMENT>::ChannelSpineMesh(const unsigned &nx0,
-                                              const unsigned &nx1,
-                                              const unsigned &nx2,
-                                              const unsigned &ny,
-                                              const double &lx0,
-                                              const double &lx1,
-                                              const double &lx2,
-                                              const double &h,
-                                              GeomObject *wall_pt,
-                                              TimeStepper *time_stepper_pt) :
+  ChannelSpineMesh<ELEMENT>::ChannelSpineMesh(const unsigned& nx0,
+                                              const unsigned& nx1,
+                                              const unsigned& nx2,
+                                              const unsigned& ny,
+                                              const double& lx0,
+                                              const double& lx1,
+                                              const double& lx2,
+                                              const double& h,
+                                              GeomObject* wall_pt,
+                                              TimeStepper* time_stepper_pt) :
     RectangularQuadMesh<ELEMENT>(nx0 + nx1 + nx2,
                                  ny,
                                  0.0,
@@ -105,17 +105,17 @@ namespace oomph
   /// SpineLineFluidInterfaceElement<ELEMENT>).
   //===========================================================================
   template<class ELEMENT>
-  ChannelSpineMesh<ELEMENT>::ChannelSpineMesh(const unsigned &nx0,
-                                              const unsigned &nx1,
-                                              const unsigned &nx2,
-                                              const unsigned &ny,
-                                              const double &lx0,
-                                              const double &lx1,
-                                              const double &lx2,
-                                              const double &h,
-                                              GeomObject *wall_pt,
-                                              const bool &periodic_in_x,
-                                              TimeStepper *time_stepper_pt) :
+  ChannelSpineMesh<ELEMENT>::ChannelSpineMesh(const unsigned& nx0,
+                                              const unsigned& nx1,
+                                              const unsigned& nx2,
+                                              const unsigned& ny,
+                                              const double& lx0,
+                                              const double& lx1,
+                                              const double& lx2,
+                                              const double& h,
+                                              GeomObject* wall_pt,
+                                              const bool& periodic_in_x,
+                                              TimeStepper* time_stepper_pt) :
     RectangularQuadMesh<ELEMENT>(nx0 + nx1 + nx2,
                                  ny,
                                  0.0,
@@ -155,7 +155,7 @@ namespace oomph
   //===========================================================================
   template<class ELEMENT>
   void ChannelSpineMesh<ELEMENT>::build_channel_spine_mesh(
-    TimeStepper *time_stepper_pt)
+    TimeStepper* time_stepper_pt)
   {
     // Build the underlying quad mesh:
     RectangularQuadMesh<ELEMENT>::build_mesh(time_stepper_pt);
@@ -210,7 +210,7 @@ namespace oomph
     //---------------------------------------------------------
 
     // Read out number of linear points in the element
-    unsigned n_p = dynamic_cast<ELEMENT *>(finite_element_pt(0))->nnode_1d();
+    unsigned n_p = dynamic_cast<ELEMENT*>(finite_element_pt(0))->nnode_1d();
 
     unsigned nspine;
     // Allocate store for the spines:
@@ -239,7 +239,7 @@ namespace oomph
 
     // set up the vectors of geometric data & objects for building spines
     Vector<double> r_wall(2), zeta(1), s_wall(1);
-    GeomObject *geometric_object_pt = 0;
+    GeomObject* geometric_object_pt = 0;
 
     // LEFT REGION
     // ===========
@@ -260,12 +260,12 @@ namespace oomph
     // Element 0
     // Node 0
     // Assign the new spine with unit length
-    Spine *new_spine_pt = new Spine(1.0);
+    Spine* new_spine_pt = new Spine(1.0);
     new_spine_pt->spine_height_pt()->pin(0);
     Spine_pt.push_back(new_spine_pt);
 
     // Get pointer to node
-    SpineNode *nod_pt = element_node_pt(0, 0);
+    SpineNode* nod_pt = element_node_pt(0, 0);
     // Set the pointer to the spine
     nod_pt->spine_pt() = new_spine_pt;
     // Set the fraction
@@ -298,7 +298,7 @@ namespace oomph
 
       // The sub geom object is one (and only) geom object
       // for spine:
-      Vector<GeomObject *> geom_object_pt(1);
+      Vector<GeomObject*> geom_object_pt(1);
       geom_object_pt[0] = geometric_object_pt;
 
       // Pass geom object(s) to spine
@@ -313,7 +313,7 @@ namespace oomph
       for (unsigned l1 = 1; l1 < n_p; l1++)
       {
         // Get pointer to node
-        SpineNode *nod_pt = element_node_pt(i * n_x, l1 * n_p);
+        SpineNode* nod_pt = element_node_pt(i * n_x, l1 * n_p);
         // Set the pointer to the spine
         nod_pt->spine_pt() = new_spine_pt;
         // Set the fraction
@@ -343,7 +343,7 @@ namespace oomph
         Spine_pt.push_back(new_spine_pt);
 
         // Get the node
-        SpineNode *nod_pt = element_node_pt(j, l2);
+        SpineNode* nod_pt = element_node_pt(j, l2);
         // Set the pointer to spine
         nod_pt->spine_pt() = new_spine_pt;
         // Set the fraction
@@ -377,7 +377,7 @@ namespace oomph
 
           // The sub geom object is one (and only) geom object
           // for spine:
-          Vector<GeomObject *> geom_object_pt(1);
+          Vector<GeomObject*> geom_object_pt(1);
           geom_object_pt[0] = geometric_object_pt;
 
           // Pass geom object(s) to spine
@@ -392,7 +392,7 @@ namespace oomph
           for (unsigned l1 = 1; l1 < n_p; l1++)
           {
             // Get the node
-            SpineNode *nod_pt = element_node_pt(i * n_x + j, l1 * n_p + l2);
+            SpineNode* nod_pt = element_node_pt(i * n_x + j, l1 * n_p + l2);
             // Set the pointer to the spine
             nod_pt->spine_pt() = new_spine_pt;
             // Set the fraction
@@ -436,7 +436,7 @@ namespace oomph
         Spine_pt.push_back(new_spine_pt);
 
         // Get the node
-        SpineNode *nod_pt = element_node_pt(j, l2);
+        SpineNode* nod_pt = element_node_pt(j, l2);
         // Set the pointer to spine
         nod_pt->spine_pt() = new_spine_pt;
         // Set the fraction
@@ -470,7 +470,7 @@ namespace oomph
 
           // The sub geom object is one (and only) geom object
           // for spine:
-          Vector<GeomObject *> geom_object_pt(1);
+          Vector<GeomObject*> geom_object_pt(1);
           geom_object_pt[0] = geometric_object_pt;
 
           // Pass geom object(s) to spine
@@ -485,7 +485,7 @@ namespace oomph
           for (unsigned l1 = 1; l1 < n_p; l1++)
           {
             // Get the node
-            SpineNode *nod_pt = element_node_pt(i * n_x + j, l1 * n_p + l2);
+            SpineNode* nod_pt = element_node_pt(i * n_x + j, l1 * n_p + l2);
             // Set the pointer to the spine
             nod_pt->spine_pt() = new_spine_pt;
             // Set the fraction
@@ -527,7 +527,7 @@ namespace oomph
         // we treat it as part of the right region.
         if (j == n_x0 + n_x1)
         {
-          SpineNode *nod_pt = element_node_pt(j, 0);
+          SpineNode* nod_pt = element_node_pt(j, 0);
           // Set update fct id
           nod_pt->node_update_fct_id() = 2;
           {
@@ -553,7 +553,7 @@ namespace oomph
 
             // The sub geom object is one (and only) geom object
             // for spine:
-            Vector<GeomObject *> geom_object_pt(1);
+            Vector<GeomObject*> geom_object_pt(1);
             geom_object_pt[0] = geometric_object_pt;
 
             // Pass geom object(s) to spine
@@ -576,7 +576,7 @@ namespace oomph
         Spine_pt.push_back(new_spine_pt);
 
         // Get the node
-        SpineNode *nod_pt = element_node_pt(j, l2);
+        SpineNode* nod_pt = element_node_pt(j, l2);
         // Set the pointer to spine
         nod_pt->spine_pt() = new_spine_pt;
         // Set the fraction
@@ -610,7 +610,7 @@ namespace oomph
 
           // The sub geom object is one (and only) geom object
           // for spine:
-          Vector<GeomObject *> geom_object_pt(1);
+          Vector<GeomObject*> geom_object_pt(1);
           geom_object_pt[0] = geometric_object_pt;
 
           // Pass geom object(s) to spine
@@ -625,7 +625,7 @@ namespace oomph
           for (unsigned l1 = 1; l1 < n_p; l1++)
           {
             // Get the node
-            SpineNode *nod_pt = element_node_pt(i * n_x + j, l1 * n_p + l2);
+            SpineNode* nod_pt = element_node_pt(i * n_x + j, l1 * n_p + l2);
             // Set the pointer to the spine
             nod_pt->spine_pt() = new_spine_pt;
             // Set the fraction
@@ -648,10 +648,10 @@ namespace oomph
     if (this->Xperiodic)
     {
       // Last spine is the same as first one...
-      Spine *final_spine_pt = Spine_pt[0];
+      Spine* final_spine_pt = Spine_pt[0];
 
       // Get the node
-      SpineNode *nod_pt = element_node_pt((n_x - 1), (n_p - 1));
+      SpineNode* nod_pt = element_node_pt((n_x - 1), (n_p - 1));
 
       // Set the pointer for the first node
       nod_pt->spine_pt() = final_spine_pt;
@@ -667,7 +667,7 @@ namespace oomph
         for (unsigned l1 = 1; l1 < n_p; l1++)
         {
           // Get the node
-          SpineNode *nod_pt =
+          SpineNode* nod_pt =
             element_node_pt(i * n_x + (n_x - 1), l1 * n_p + (n_p - 1));
 
           // Set the pointer to the spine
@@ -697,7 +697,7 @@ namespace oomph
     // Find out how many fluid elements there are
     unsigned long Nfluid = n_x * n_y;
     // Create a dummy array of elements
-    Vector<FiniteElement *> dummy;
+    Vector<FiniteElement*> dummy;
 
     // Loop over the elements in horizontal order
     for (unsigned long j = 0; j < n_x; j++)

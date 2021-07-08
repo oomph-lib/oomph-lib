@@ -54,15 +54,15 @@ namespace oomph
 
     /// Constructor: Pass time stepper and a solution function pointer, then
     /// build the element.
-    ODEElement(TimeStepper *time_stepper_pt,
-               SolutionFunctorBase *exact_solution_pt)
+    ODEElement(TimeStepper* time_stepper_pt,
+               SolutionFunctorBase* exact_solution_pt)
     {
       build(time_stepper_pt, exact_solution_pt);
     }
 
     /// Store pointers, create internal data.
-    void build(TimeStepper *time_stepper_pt,
-               SolutionFunctorBase *exact_solution_pt)
+    void build(TimeStepper* time_stepper_pt,
+               SolutionFunctorBase* exact_solution_pt)
     {
       Exact_solution_pt = exact_solution_pt;
 
@@ -82,17 +82,17 @@ namespace oomph
     }
 
     /// Get residuals
-    virtual void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    virtual void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Get pointer to one-and-only internal data object
-      Data *dat_pt = internal_data_pt(0);
+      Data* dat_pt = internal_data_pt(0);
 
       // Get it's values
       Vector<double> u(nvalue(), 0.0);
       dat_pt->value(u);
 
       // Get time stepper
-      TimeStepper *time_stepper_pt = dat_pt->time_stepper_pt();
+      TimeStepper* time_stepper_pt = dat_pt->time_stepper_pt();
 
       // Get continuous time
       double t = time_stepper_pt->time();
@@ -109,8 +109,8 @@ namespace oomph
       }
     }
 
-    virtual void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                                  DenseMatrix<double> &jacobian)
+    virtual void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                                  DenseMatrix<double>& jacobian)
     {
       // Get residuals
       fill_in_contribution_to_residuals(residuals);
@@ -140,8 +140,8 @@ namespace oomph
       }
     }
 
-    virtual void fill_in_contribution_to_mass_matrix(Vector<double> &residuals,
-                                                     DenseMatrix<double> &mm)
+    virtual void fill_in_contribution_to_mass_matrix(Vector<double>& residuals,
+                                                     DenseMatrix<double>& mm)
     {
       fill_in_contribution_to_residuals(residuals);
       for (unsigned j = 0, nj = nvalue(); j < nj; j++)
@@ -151,7 +151,7 @@ namespace oomph
     }
 
     /// Exact solution
-    Vector<double> exact_solution(const double &t) const
+    Vector<double> exact_solution(const double& t) const
     {
 #ifdef PARANOID
       if (Exact_solution_pt == 0)
@@ -166,7 +166,7 @@ namespace oomph
     }
 
     /// Exact solution
-    Vector<double> derivative_function(const double &t, const Vector<double> &u)
+    Vector<double> derivative_function(const double& t, const Vector<double>& u)
     {
 #ifdef PARANOID
       if (Exact_solution_pt == 0)
@@ -180,7 +180,7 @@ namespace oomph
       return Exact_solution_pt->derivative(t, dummy_x, u);
     }
 
-    SolutionFunctorBase *Exact_solution_pt;
+    SolutionFunctorBase* Exact_solution_pt;
 
     bool Use_fd_jacobian;
   };

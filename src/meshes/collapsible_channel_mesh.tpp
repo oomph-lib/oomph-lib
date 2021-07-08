@@ -47,16 +47,16 @@ namespace oomph
   //========================================================================
   template<class ELEMENT>
   CollapsibleChannelMesh<ELEMENT>::CollapsibleChannelMesh(
-    const unsigned &nup,
-    const unsigned &ncollapsible,
-    const unsigned &ndown,
-    const unsigned &ny,
-    const double &lup,
-    const double &lcollapsible,
-    const double &ldown,
-    const double &ly,
-    GeomObject *wall_pt,
-    TimeStepper *time_stepper_pt) :
+    const unsigned& nup,
+    const unsigned& ncollapsible,
+    const unsigned& ndown,
+    const unsigned& ny,
+    const double& lup,
+    const double& lcollapsible,
+    const double& ldown,
+    const double& ly,
+    GeomObject* wall_pt,
+    TimeStepper* time_stepper_pt) :
     SimpleRectangularQuadMesh<ELEMENT>(nup + ncollapsible + ndown,
                                        ny,
                                        lup + lcollapsible + ldown,
@@ -83,7 +83,7 @@ namespace oomph
     for (unsigned e = 0; e < nmacro; e++)
     {
       // Get pointer to finite element
-      FiniteElement *el_pt = this->finite_element_pt(e);
+      FiniteElement* el_pt = this->finite_element_pt(e);
 
       // Set pointer to macro element so the curvlinear boundaries
       // of the mesh/domain can get picked up during adaptive
@@ -244,7 +244,7 @@ namespace oomph
   //=================================================================
   template<class ELEMENT>
   void AlgebraicCollapsibleChannelMesh<ELEMENT>::algebraic_node_update(
-    const unsigned &t, AlgebraicNode *&node_pt)
+    const unsigned& t, AlgebraicNode*& node_pt)
   {
 #ifdef PARANOID
     // We're updating the nodal positions (!) at time level t
@@ -304,11 +304,11 @@ namespace oomph
     // double zeta=ref_value[3]; // not needed here
 
     // Extract geometric objects for update by copy construction
-    Vector<GeomObject *> geom_object_pt(node_pt->vector_geom_object_pt());
+    Vector<GeomObject*> geom_object_pt(node_pt->vector_geom_object_pt());
 
     // Pointer to actual wall geom object (either the same as the wall object
     // or the pointer to the actual finite element)
-    GeomObject *geom_obj_pt = geom_object_pt[0];
+    GeomObject* geom_obj_pt = geom_object_pt[0];
 
     // Get position vector to wall at previous timestep t!
     Vector<double> r_wall(2);
@@ -337,7 +337,7 @@ namespace oomph
       // Get pointer to node -- recall that that Mesh::node_pt(...) has been
       // overloaded in the AlgebraicMesh class to return a pointer to
       // an AlgebraicNode.
-      AlgebraicNode *nod_pt = node_pt(j);
+      AlgebraicNode* nod_pt = node_pt(j);
 
       // Get coordinates
       double x = nod_pt->x(0);
@@ -358,7 +358,7 @@ namespace oomph
         // then we'll obtain the pointer to the finite element
         // (in its incarnation as a GeomObject) and the
         // local coordinate in that element.
-        GeomObject *geom_obj_pt;
+        GeomObject* geom_obj_pt;
         Vector<double> s(1);
         this->Wall_pt->locate_zeta(zeta, geom_obj_pt, s);
 
@@ -386,7 +386,7 @@ namespace oomph
 #endif
 
         // One geometric object is involved in update operation
-        Vector<GeomObject *> geom_object_pt(1);
+        Vector<GeomObject*> geom_object_pt(1);
 
         // The actual geometric object (If the wall is simple GeomObject
         // this is the same as Wall_pt; if it's a compound GeomObject
@@ -435,7 +435,7 @@ namespace oomph
   //=================================================================
   template<class ELEMENT>
   void RefineableAlgebraicCollapsibleChannelMesh<ELEMENT>::update_node_update(
-    AlgebraicNode *&node_pt)
+    AlgebraicNode*& node_pt)
   {
     // Extract reference values for node update by copy construction
     Vector<double> ref_value(node_pt->vector_ref_value());
@@ -459,7 +459,7 @@ namespace oomph
     double zeta = ref_value[3];
 
     // Extract geometric objects for update by copy construction
-    Vector<GeomObject *> geom_object_pt(node_pt->vector_geom_object_pt());
+    Vector<GeomObject*> geom_object_pt(node_pt->vector_geom_object_pt());
 
     // Pointer to actual wall geom object (either the same as wall object
     // or the pointer to the actual finite element)
@@ -479,7 +479,7 @@ namespace oomph
     // (in its incarnation as a GeomObject) and the
     // local coordinate in that element.
     Vector<double> s(1);
-    GeomObject *geom_obj_pt;
+    GeomObject* geom_obj_pt;
     this->Wall_pt->locate_zeta(zeta_wall, geom_obj_pt, s);
 
     // Update the pointer to the (sub-)GeomObject within which the

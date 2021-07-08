@@ -57,7 +57,7 @@ public:
 
   /// \short Position vector, r, to the point on the circle identified by
   /// its 1D Lagrangian coordinate, xi (passed as a 1D Vector):
-  void position(const Vector<double> &xi, Vector<double> &r) const
+  void position(const Vector<double>& xi, Vector<double>& r) const
   {
     // Eulerian position vector
     r[0] = cos(xi[0]);
@@ -69,9 +69,9 @@ public:
   /// level t (t=0: present; t>0: previous). The shape of the object
   /// is not time-dependent, therefore we forward this call to the
   /// steady version.
-  void position(const unsigned &t,
-                const Vector<double> &xi,
-                Vector<double> &r) const
+  void position(const unsigned& t,
+                const Vector<double>& xi,
+                Vector<double>& r) const
   {
     position(xi, r);
   }
@@ -124,14 +124,14 @@ int main()
   double x_c = 0.5;
   double y_c = 0.0;
   double r_back = 1.0;
-  GeomObject *back_pt = new Circle(x_c, y_c, r_back);
+  GeomObject* back_pt = new Circle(x_c, y_c, r_back);
 
   // Start and end coordinates of the fish back
   double s_nose = 2.6;
   double s_tail = 0.4;
 
   // Create the domain
-  Domain *domain_pt = new FishDomain(back_pt, s_nose, s_tail);
+  Domain* domain_pt = new FishDomain(back_pt, s_nose, s_tail);
 
   // Plot the domain
 

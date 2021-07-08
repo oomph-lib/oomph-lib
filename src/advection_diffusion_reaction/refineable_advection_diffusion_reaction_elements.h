@@ -71,14 +71,14 @@ namespace oomph
 
     /// Broken copy constructor
     RefineableAdvectionDiffusionReactionEquations(
-      const RefineableAdvectionDiffusionReactionEquations<NREAGENT, DIM> &dummy)
+      const RefineableAdvectionDiffusionReactionEquations<NREAGENT, DIM>& dummy)
     {
       BrokenCopy::broken_copy("RefineableAdvectionDiffusionReactionEquations");
     }
 
     /// Broken assignment operator
     void operator=(
-      const RefineableAdvectionDiffusionReactionEquations<NREAGENT, DIM> &)
+      const RefineableAdvectionDiffusionReactionEquations<NREAGENT, DIM>&)
     {
       BrokenCopy::broken_assign(
         "RefineableAdvectionDiffusionReactionEquations");
@@ -92,7 +92,7 @@ namespace oomph
 
     /// \short Get 'flux' for Z2 error recovery:
     /// Standard flux.from AdvectionDiffusionReaction equations
-    void get_Z2_flux(const Vector<double> &s, Vector<double> &flux)
+    void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
       this->get_flux(s, flux);
     }
@@ -101,8 +101,8 @@ namespace oomph
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines), the values Vector sets its own size in here.
-    void get_interpolated_values(const Vector<double> &s,
-                                 Vector<double> &values)
+    void get_interpolated_values(const Vector<double>& s,
+                                 Vector<double>& values)
     {
       // Set size of Vector: c
       values.resize(NREAGENT);
@@ -136,9 +136,9 @@ namespace oomph
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines), the values Vector sets its own size in here.
-    void get_interpolated_values(const unsigned &t,
-                                 const Vector<double> &s,
-                                 Vector<double> &values)
+    void get_interpolated_values(const unsigned& t,
+                                 const Vector<double>& s,
+                                 Vector<double>& values)
     {
       // Set size of Vector:
       values.resize(NREAGENT);
@@ -171,9 +171,9 @@ namespace oomph
     /// element
     void further_build()
     {
-      RefineableAdvectionDiffusionReactionEquations<NREAGENT, DIM>
-        *cast_father_element_pt = dynamic_cast<
-          RefineableAdvectionDiffusionReactionEquations<NREAGENT, DIM> *>(
+      RefineableAdvectionDiffusionReactionEquations<NREAGENT, DIM>*
+        cast_father_element_pt = dynamic_cast<
+          RefineableAdvectionDiffusionReactionEquations<NREAGENT, DIM>*>(
           this->father_element_pt());
 
       // Set the values of the pointers from the father
@@ -196,9 +196,9 @@ namespace oomph
     /// flag=1: compute both
     /// flag=0: compute only residual vector
     void fill_in_generic_residual_contribution_adv_diff_react(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix,
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
       unsigned flag);
   };
 
@@ -227,7 +227,7 @@ namespace oomph
     RefineableQAdvectionDiffusionReactionElement(
       const RefineableQAdvectionDiffusionReactionElement<NREAGENT,
                                                          DIM,
-                                                         NNODE_1D> &dummy)
+                                                         NNODE_1D>& dummy)
     {
       BrokenCopy::broken_copy(
         "RefineableQuadAdvectionDiffusionReactionElement");
@@ -237,7 +237,7 @@ namespace oomph
     void operator=(
       const RefineableQAdvectionDiffusionReactionElement<NREAGENT,
                                                          DIM,
-                                                         NNODE_1D> &)
+                                                         NNODE_1D>&)
     {
       BrokenCopy::broken_assign(
         "RefineableQuadAdvectionDiffusionReactionElement");
@@ -257,14 +257,14 @@ namespace oomph
     }
 
     /// \short Pointer to the j-th vertex node in the element
-    Node *vertex_node_pt(const unsigned &j) const
+    Node* vertex_node_pt(const unsigned& j) const
     {
       return QAdvectionDiffusionReactionElement<NREAGENT, DIM, NNODE_1D>::
         vertex_node_pt(j);
     }
 
     /// Rebuild from sons: empty
-    void rebuild_from_sons(Mesh *&mesh_pt) {}
+    void rebuild_from_sons(Mesh*& mesh_pt) {}
 
     /// \short Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.

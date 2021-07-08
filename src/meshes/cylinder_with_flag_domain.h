@@ -47,17 +47,17 @@ namespace oomph
     /// the cylinder, the three edges of the flag, the length and height of the
     /// domain, the length and height of the flag, the coordinates of the
     /// centre of the cylinder and its radius.
-    CylinderWithFlagDomain(Circle *cylinder_pt,
-                           GeomObject *top_flag_pt,
-                           GeomObject *bottom_flag_pt,
-                           GeomObject *tip_flag_pt,
-                           const double &length,
-                           const double &height,
-                           const double &flag_length,
-                           const double &flag_height,
-                           const double &centre_x,
-                           const double &centre_y,
-                           const double &a);
+    CylinderWithFlagDomain(Circle* cylinder_pt,
+                           GeomObject* top_flag_pt,
+                           GeomObject* bottom_flag_pt,
+                           GeomObject* tip_flag_pt,
+                           const double& length,
+                           const double& height,
+                           const double& flag_length,
+                           const double& flag_height,
+                           const double& centre_x,
+                           const double& centre_y,
+                           const double& a);
 
     /// \short Destructor: Kill macro elements
     ~CylinderWithFlagDomain()
@@ -72,29 +72,29 @@ namespace oomph
     /// vector to macro-element m's boundary in the specified direction
     /// [N/S/E/W] at the specfied discrete time level (time=0: present; time>0:
     /// previous)
-    void macro_element_boundary(const unsigned &time,
-                                const unsigned &m,
-                                const unsigned &direction,
-                                const Vector<double> &s,
-                                Vector<double> &f);
+    void macro_element_boundary(const unsigned& time,
+                                const unsigned& m,
+                                const unsigned& direction,
+                                const Vector<double>& s,
+                                Vector<double>& f);
 
     /// \short Access fct to GeomObject (of type Circle)
     /// that represents the cylinder
-    Circle *cylinder_pt()
+    Circle* cylinder_pt()
     {
       return Cylinder_pt;
     }
 
     /// \short Access fct to GeomObjects for top, bottom and tip
-    GeomObject *&bottom_flag_pt()
+    GeomObject*& bottom_flag_pt()
     {
       return Bottom_flag_pt;
     }
-    GeomObject *&top_flag_pt()
+    GeomObject*& top_flag_pt()
     {
       return Top_flag_pt;
     }
-    GeomObject *&tip_flag_pt()
+    GeomObject*& tip_flag_pt()
     {
       return Tip_flag_pt;
     }
@@ -102,10 +102,10 @@ namespace oomph
   private:
     /// \short Helper function to interpolate linearly between the
     /// "right" and "left" points; \f$ s \in [-1,1] \f$
-    void linear_interpolate(const Vector<double> &left,
-                            const Vector<double> &right,
-                            const double &s,
-                            Vector<double> &f)
+    void linear_interpolate(const Vector<double>& left,
+                            const Vector<double>& right,
+                            const double& s,
+                            Vector<double>& f)
     {
       for (unsigned i = 0; i < 2; i++)
       {
@@ -166,16 +166,16 @@ namespace oomph
     Vector<double> p50;
 
     /// Pointer to geometric object that represents the central cylinder
-    Circle *Cylinder_pt;
+    Circle* Cylinder_pt;
 
     /// Pointer to geometric object that represents the top of the flag
-    GeomObject *Top_flag_pt;
+    GeomObject* Top_flag_pt;
 
     /// Pointer to geometric object that represents the bottom of the flag
-    GeomObject *Bottom_flag_pt;
+    GeomObject* Bottom_flag_pt;
 
     /// Pointer to geometric object that represents the tip of the flag
-    GeomObject *Tip_flag_pt;
+    GeomObject* Tip_flag_pt;
 
     // Length of the flag
     double Lx;
@@ -200,17 +200,17 @@ namespace oomph
   ///  domain, the length and height of the flag, the coordinates of the
   /// centre of the cylinder and its radius.
   //=======================================================================
-  CylinderWithFlagDomain::CylinderWithFlagDomain(Circle *cylinder_pt,
-                                                 GeomObject *top_flag_pt,
-                                                 GeomObject *bottom_flag_pt,
-                                                 GeomObject *tip_flag_pt,
-                                                 const double &length,
-                                                 const double &height,
-                                                 const double &flag_length,
-                                                 const double &flag_height,
-                                                 const double &centre_x,
-                                                 const double &centre_y,
-                                                 const double &a) :
+  CylinderWithFlagDomain::CylinderWithFlagDomain(Circle* cylinder_pt,
+                                                 GeomObject* top_flag_pt,
+                                                 GeomObject* bottom_flag_pt,
+                                                 GeomObject* tip_flag_pt,
+                                                 const double& length,
+                                                 const double& height,
+                                                 const double& flag_length,
+                                                 const double& flag_height,
+                                                 const double& centre_x,
+                                                 const double& centre_y,
+                                                 const double& a) :
     Cylinder_pt(cylinder_pt),
     Top_flag_pt(top_flag_pt),
     Bottom_flag_pt(bottom_flag_pt),
@@ -388,11 +388,11 @@ namespace oomph
   /// vector to macro-element m's boundary in the specified direction [N/S/E/W]
   /// at the specfied discrete time level (time=0: present; time>0: previous)
   //============================================================================
-  void CylinderWithFlagDomain::macro_element_boundary(const unsigned &time,
-                                                      const unsigned &m,
-                                                      const unsigned &direction,
-                                                      const Vector<double> &s,
-                                                      Vector<double> &f)
+  void CylinderWithFlagDomain::macro_element_boundary(const unsigned& time,
+                                                      const unsigned& m,
+                                                      const unsigned& direction,
+                                                      const Vector<double>& s,
+                                                      Vector<double>& f)
   {
     // Use Quadtree names for directions
     using namespace QuadTreeNames;

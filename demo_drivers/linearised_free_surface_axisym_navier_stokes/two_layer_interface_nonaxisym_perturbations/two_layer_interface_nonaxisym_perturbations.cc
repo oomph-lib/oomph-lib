@@ -108,11 +108,11 @@ class ElementCmp
 {
 public:
   /// Comparison. Are the values identical or not?
-  bool operator()(GeneralisedElement *const &x,
-                  GeneralisedElement *const &y) const
+  bool operator()(GeneralisedElement* const& x,
+                  GeneralisedElement* const& y) const
   {
-    FiniteElement *cast_x = dynamic_cast<FiniteElement *>(x);
-    FiniteElement *cast_y = dynamic_cast<FiniteElement *>(y);
+    FiniteElement* cast_x = dynamic_cast<FiniteElement*>(x);
+    FiniteElement* cast_y = dynamic_cast<FiniteElement*>(y);
 
     // Orders elements vertically, starting from the bottom of each spine
     if ((cast_x == 0) || (cast_y == 0))
@@ -145,11 +145,11 @@ public:
   /// r direction and the number of elements in all three vertical regions
   /// in the z direction, along with the fractions which determine the
   /// spacings of those regions.
-  BaseStateProblem(const unsigned &n_r,
-                   const unsigned &n_z1,
-                   const unsigned &n_z2,
-                   const double &h1,
-                   const double &h2);
+  BaseStateProblem(const unsigned& n_r,
+                   const unsigned& n_z1,
+                   const unsigned& n_z2,
+                   const double& h1,
+                   const double& h2);
 
   /// Destructor (empty)
   ~BaseStateProblem() {}
@@ -161,25 +161,25 @@ public:
   void set_boundary_conditions();
 
   /// Access function for the specific timestepper
-  TIMESTEPPER *time_stepper_pt()
+  TIMESTEPPER* time_stepper_pt()
   {
-    return dynamic_cast<TIMESTEPPER *>(Problem::time_stepper_pt());
+    return dynamic_cast<TIMESTEPPER*>(Problem::time_stepper_pt());
   }
 
   /// Doc the solution
-  void doc_solution(DocInfo *&doc_info_pt);
+  void doc_solution(DocInfo*& doc_info_pt);
 
   /// Create interface elements at boundary between upper and lower layers
   void create_interface_elements();
 
   /// Access function for bulk mesh
-  TwoLayerSpineMesh<BASE_ELEMENT> *bulk_mesh_pt()
+  TwoLayerSpineMesh<BASE_ELEMENT>* bulk_mesh_pt()
   {
     return Bulk_mesh_pt;
   }
 
   /// Access function for surface mesh
-  Mesh *surface_mesh_pt()
+  Mesh* surface_mesh_pt()
   {
     return Surface_mesh_pt;
   }
@@ -205,19 +205,19 @@ private:
   void actions_before_implicit_timestep() {}
 
   /// Fix pressure in element e at pressure dof pdof and set to pvalue
-  void fix_pressure(const unsigned &e,
-                    const unsigned &pdof,
-                    const double &pvalue)
+  void fix_pressure(const unsigned& e,
+                    const unsigned& pdof,
+                    const double& pvalue)
   {
-    dynamic_cast<BASE_ELEMENT *>(mesh_pt()->element_pt(e))
+    dynamic_cast<BASE_ELEMENT*>(mesh_pt()->element_pt(e))
       ->fix_pressure(pdof, pvalue);
   }
 
   /// Pointer to the (specific) "bulk" mesh
-  TwoLayerSpineMesh<BASE_ELEMENT> *Bulk_mesh_pt;
+  TwoLayerSpineMesh<BASE_ELEMENT>* Bulk_mesh_pt;
 
   /// Pointer to the "surface" mesh
-  Mesh *Surface_mesh_pt;
+  Mesh* Surface_mesh_pt;
 
   /// Index at which the i-th velocity component is stored
   Vector<unsigned> U_nodal_index;
@@ -229,11 +229,11 @@ private:
 //=======================================================================
 template<class BASE_ELEMENT, class TIMESTEPPER>
 BaseStateProblem<BASE_ELEMENT, TIMESTEPPER>::BaseStateProblem(
-  const unsigned &n_r,
-  const unsigned &n_z1,
-  const unsigned &n_z2,
-  const double &h1,
-  const double &h2)
+  const unsigned& n_r,
+  const unsigned& n_z1,
+  const unsigned& n_z2,
+  const double& h1,
+  const double& h2)
 {
   // Always take one newton step even if the initial residuals are
   // below the required tolerance
@@ -264,8 +264,8 @@ BaseStateProblem<BASE_ELEMENT, TIMESTEPPER>::BaseStateProblem(
 
   // Get a pointer to the first element in the mesh -- note that we
   // are assuming that the indices will be the same in each element
-  BASE_ELEMENT *el_pt =
-    dynamic_cast<BASE_ELEMENT *>(Bulk_mesh_pt->element_pt(0));
+  BASE_ELEMENT* el_pt =
+    dynamic_cast<BASE_ELEMENT*>(Bulk_mesh_pt->element_pt(0));
 
   // Determine indices at which velocities are stored
   this->U_nodal_index.resize(3);
@@ -316,8 +316,8 @@ BaseStateProblem<BASE_ELEMENT, TIMESTEPPER>::BaseStateProblem(
   for (unsigned e = 0; e < n_lower; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    BASE_ELEMENT *el_pt =
-      dynamic_cast<BASE_ELEMENT *>(Bulk_mesh_pt->lower_layer_element_pt(e));
+    BASE_ELEMENT* el_pt =
+      dynamic_cast<BASE_ELEMENT*>(Bulk_mesh_pt->lower_layer_element_pt(e));
 
     // In these 9-node elements, the 4-th node is always positioned at s1=0,s2=0
     // where s1, s2 are the local coordinates (and the "first" node is the 0-th)
@@ -340,8 +340,8 @@ BaseStateProblem<BASE_ELEMENT, TIMESTEPPER>::BaseStateProblem(
   for (unsigned e = 0; e < n_upper; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    BASE_ELEMENT *el_pt =
-      dynamic_cast<BASE_ELEMENT *>(Bulk_mesh_pt->upper_layer_element_pt(e));
+    BASE_ELEMENT* el_pt =
+      dynamic_cast<BASE_ELEMENT*>(Bulk_mesh_pt->upper_layer_element_pt(e));
 
     // In these elements, the 4-th node is always positioned at s1=0,s2=0
     // where s1, s2 are the local coordinates (and the "first" node is the 0-th)
@@ -390,8 +390,8 @@ BaseStateProblem<BASE_ELEMENT, TIMESTEPPER>::BaseStateProblem(
   for (unsigned e = 0; e < n_lower; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    BASE_ELEMENT *el_pt =
-      dynamic_cast<BASE_ELEMENT *>(Bulk_mesh_pt->lower_layer_element_pt(e));
+    BASE_ELEMENT* el_pt =
+      dynamic_cast<BASE_ELEMENT*>(Bulk_mesh_pt->lower_layer_element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &GlobalPhysicalVariables::Re;
@@ -411,8 +411,8 @@ BaseStateProblem<BASE_ELEMENT, TIMESTEPPER>::BaseStateProblem(
   for (unsigned e = 0; e < n_upper; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    BASE_ELEMENT *el_pt =
-      dynamic_cast<BASE_ELEMENT *>(Bulk_mesh_pt->upper_layer_element_pt(e));
+    BASE_ELEMENT* el_pt =
+      dynamic_cast<BASE_ELEMENT*>(Bulk_mesh_pt->upper_layer_element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &GlobalPhysicalVariables::Re;
@@ -479,7 +479,7 @@ void BaseStateProblem<BASE_ELEMENT, TIMESTEPPER>::set_initial_condition()
 //=======================================================================
 template<class BASE_ELEMENT, class TIMESTEPPER>
 void BaseStateProblem<BASE_ELEMENT, TIMESTEPPER>::doc_solution(
-  DocInfo *&doc_info_pt)
+  DocInfo*& doc_info_pt)
 {
   ofstream some_file;
   char filename[256];
@@ -520,12 +520,12 @@ public:
   /// r direction and the number of elements in all three vertical regions
   /// in the z direction, along with the fractions which determine the
   /// spacings of those regions. Also pass a pointer to the base state mesh.
-  PerturbedStateProblem(const unsigned &n_r,
-                        const unsigned &n_z1,
-                        const unsigned &n_z2,
-                        const double &h1,
-                        const double &h2,
-                        SpineMesh *external_bulk_mesh_pt,
+  PerturbedStateProblem(const unsigned& n_r,
+                        const unsigned& n_z1,
+                        const unsigned& n_z2,
+                        const double& h1,
+                        const double& h2,
+                        SpineMesh* external_bulk_mesh_pt,
                         int azimuthal_mode_number);
 
   /// Destructor (empty)
@@ -538,23 +538,23 @@ public:
   void set_boundary_conditions();
 
   /// Access function for the base state mesh
-  TwoLayerSpineMesh<BASE_ELEMENT> *base_state_bulk_mesh_pt()
+  TwoLayerSpineMesh<BASE_ELEMENT>* base_state_bulk_mesh_pt()
   {
-    return dynamic_cast<TwoLayerSpineMesh<BASE_ELEMENT> *>(
+    return dynamic_cast<TwoLayerSpineMesh<BASE_ELEMENT>*>(
       Base_state_bulk_mesh_pt);
   }
 
   /// Access function for the specific timestepper
-  TIMESTEPPER *time_stepper_pt()
+  TIMESTEPPER* time_stepper_pt()
   {
-    return dynamic_cast<TIMESTEPPER *>(Problem::time_stepper_pt());
+    return dynamic_cast<TIMESTEPPER*>(Problem::time_stepper_pt());
   }
 
   /// Doc the solution
-  void doc_solution(DocInfo *&doc_info_pt, const bool &output_soln = true);
+  void doc_solution(DocInfo*& doc_info_pt, const bool& output_soln = true);
 
   /// Create and initialise a trace file
-  void create_trace_file(DocInfo *&doc_info_pt)
+  void create_trace_file(DocInfo*& doc_info_pt)
   {
     // Open trace file
     char filename[256];
@@ -578,7 +578,7 @@ public:
   }
 
   /// Access function for trace file
-  ofstream &trace_file()
+  ofstream& trace_file()
   {
     return Trace_file;
   }
@@ -587,13 +587,13 @@ public:
   void create_interface_elements();
 
   /// Access function for bulk mesh
-  TwoLayerPerturbedSpineMesh<PERTURBED_ELEMENT> *bulk_mesh_pt()
+  TwoLayerPerturbedSpineMesh<PERTURBED_ELEMENT>* bulk_mesh_pt()
   {
     return Bulk_mesh_pt;
   }
 
   /// Access function for surface mesh
-  Mesh *surface_mesh_pt()
+  Mesh* surface_mesh_pt()
   {
     return Surface_mesh_pt;
   }
@@ -632,22 +632,22 @@ private:
   void actions_after_implicit_timestep() {}
 
   /// Fix pressure in element e at pressure dof pdof and set to pvalue
-  void fix_pressure(const unsigned &e,
-                    const unsigned &pdof,
-                    const double &pvalue)
+  void fix_pressure(const unsigned& e,
+                    const unsigned& pdof,
+                    const double& pvalue)
   {
-    dynamic_cast<PERTURBED_ELEMENT *>(mesh_pt()->element_pt(e))
+    dynamic_cast<PERTURBED_ELEMENT*>(mesh_pt()->element_pt(e))
       ->fix_pressure(pdof, pvalue);
   }
 
   /// Pointer to the base state mesh
-  SpineMesh *Base_state_bulk_mesh_pt;
+  SpineMesh* Base_state_bulk_mesh_pt;
 
   /// Pointer to the (specific) "bulk" mesh
-  TwoLayerPerturbedSpineMesh<PERTURBED_ELEMENT> *Bulk_mesh_pt;
+  TwoLayerPerturbedSpineMesh<PERTURBED_ELEMENT>* Bulk_mesh_pt;
 
   /// Pointer to the "surface" mesh
-  Mesh *Surface_mesh_pt;
+  Mesh* Surface_mesh_pt;
 
   /// Trace file
   ofstream Trace_file;
@@ -670,12 +670,12 @@ private:
 //=======================================================================
 template<class BASE_ELEMENT, class PERTURBED_ELEMENT, class TIMESTEPPER>
 PerturbedStateProblem<BASE_ELEMENT, PERTURBED_ELEMENT, TIMESTEPPER>::
-  PerturbedStateProblem(const unsigned &n_r,
-                        const unsigned &n_z1,
-                        const unsigned &n_z2,
-                        const double &h1,
-                        const double &h2,
-                        SpineMesh *external_bulk_mesh_pt,
+  PerturbedStateProblem(const unsigned& n_r,
+                        const unsigned& n_z1,
+                        const unsigned& n_z2,
+                        const double& h1,
+                        const double& h2,
+                        SpineMesh* external_bulk_mesh_pt,
                         int azimuthal_mode_number) :
   Base_state_bulk_mesh_pt(external_bulk_mesh_pt),
   Azimuthal_mode_number(azimuthal_mode_number)
@@ -709,8 +709,8 @@ PerturbedStateProblem<BASE_ELEMENT, PERTURBED_ELEMENT, TIMESTEPPER>::
 
   // Get a pointer to the first element in the mesh -- note that we
   // are assuming that the indices will be the same in each element
-  PERTURBED_ELEMENT *el_pt =
-    dynamic_cast<PERTURBED_ELEMENT *>(Bulk_mesh_pt->element_pt(0));
+  PERTURBED_ELEMENT* el_pt =
+    dynamic_cast<PERTURBED_ELEMENT*>(Bulk_mesh_pt->element_pt(0));
 
   // Determine indices at which the perturbations to the nodal positions
   // are stored
@@ -835,7 +835,7 @@ PerturbedStateProblem<BASE_ELEMENT, PERTURBED_ELEMENT, TIMESTEPPER>::
       for (unsigned i = 0; i < 3; i++)
       {
         // Pin the values and set them equal to zero
-        dynamic_cast<PERTURBED_ELEMENT *>(mesh_pt()->element_pt(e))
+        dynamic_cast<PERTURBED_ELEMENT*>(mesh_pt()->element_pt(e))
           ->fix_sine_component_of_pressure(i, 0.0);
       }
     }
@@ -873,8 +873,8 @@ PerturbedStateProblem<BASE_ELEMENT, PERTURBED_ELEMENT, TIMESTEPPER>::
   for (unsigned e = 0; e < n_lower; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    PERTURBED_ELEMENT *el_pt = dynamic_cast<PERTURBED_ELEMENT *>(
-      Bulk_mesh_pt->lower_layer_element_pt(e));
+    PERTURBED_ELEMENT* el_pt =
+      dynamic_cast<PERTURBED_ELEMENT*>(Bulk_mesh_pt->lower_layer_element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &GlobalPhysicalVariables::Re;
@@ -901,8 +901,8 @@ PerturbedStateProblem<BASE_ELEMENT, PERTURBED_ELEMENT, TIMESTEPPER>::
   for (unsigned e = 0; e < n_upper; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    PERTURBED_ELEMENT *el_pt = dynamic_cast<PERTURBED_ELEMENT *>(
-      Bulk_mesh_pt->upper_layer_element_pt(e));
+    PERTURBED_ELEMENT* el_pt =
+      dynamic_cast<PERTURBED_ELEMENT*>(Bulk_mesh_pt->upper_layer_element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &GlobalPhysicalVariables::Re;
@@ -1076,7 +1076,7 @@ void PerturbedStateProblem<BASE_ELEMENT, PERTURBED_ELEMENT, TIMESTEPPER>::
   {
     // Construct a new 1D line element on the face on which the local
     // coordinate 1 is fixed at its max. value (1) -- Face 2
-    FiniteElement *interface_element_element_pt =
+    FiniteElement* interface_element_element_pt =
       new PerturbedSpineLinearisedAxisymmetricFluidInterfaceElement<
         PERTURBED_ELEMENT>(
         this->Bulk_mesh_pt->finite_element_pt(n_r * (n_z1 - 1) + e), 2);
@@ -1096,10 +1096,10 @@ void PerturbedStateProblem<BASE_ELEMENT, PERTURBED_ELEMENT, TIMESTEPPER>::
   for (unsigned e = 0; e < n_interface_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    PerturbedSpineLinearisedAxisymmetricFluidInterfaceElement<PERTURBED_ELEMENT>
-      *el_pt =
-        dynamic_cast<PerturbedSpineLinearisedAxisymmetricFluidInterfaceElement<
-          PERTURBED_ELEMENT> *>(this->Surface_mesh_pt->element_pt(e));
+    PerturbedSpineLinearisedAxisymmetricFluidInterfaceElement<
+      PERTURBED_ELEMENT>* el_pt =
+      dynamic_cast<PerturbedSpineLinearisedAxisymmetricFluidInterfaceElement<
+        PERTURBED_ELEMENT>*>(this->Surface_mesh_pt->element_pt(e));
 
     // Set the Strouhal number
     el_pt->st_pt() = &GlobalPhysicalVariables::St;
@@ -1204,7 +1204,7 @@ void PerturbedStateProblem<BASE_ELEMENT, PERTURBED_ELEMENT, TIMESTEPPER>::
 //=======================================================================
 template<class BASE_ELEMENT, class PERTURBED_ELEMENT, class TIMESTEPPER>
 void PerturbedStateProblem<BASE_ELEMENT, PERTURBED_ELEMENT, TIMESTEPPER>::
-  doc_solution(DocInfo *&doc_info_pt, const bool &output_soln)
+  doc_solution(DocInfo*& doc_info_pt, const bool& output_soln)
 {
   // Decide which spine to use for documenting heights in trace file
   // ---------------------------------------------------------------
@@ -1237,8 +1237,8 @@ void PerturbedStateProblem<BASE_ELEMENT, PERTURBED_ELEMENT, TIMESTEPPER>::
   for (unsigned e = 0; e < n_lower; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    PERTURBED_ELEMENT *el_pt = dynamic_cast<PERTURBED_ELEMENT *>(
-      Bulk_mesh_pt->lower_layer_element_pt(e));
+    PERTURBED_ELEMENT* el_pt =
+      dynamic_cast<PERTURBED_ELEMENT*>(Bulk_mesh_pt->lower_layer_element_pt(e));
 
     // Initialise element's contributions to kinetic energy and its deriv
     double el_kinetic_energy = 0.0;
@@ -1259,8 +1259,8 @@ void PerturbedStateProblem<BASE_ELEMENT, PERTURBED_ELEMENT, TIMESTEPPER>::
   for (unsigned e = 0; e < n_upper; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    PERTURBED_ELEMENT *el_pt = dynamic_cast<PERTURBED_ELEMENT *>(
-      Bulk_mesh_pt->upper_layer_element_pt(e));
+    PERTURBED_ELEMENT* el_pt =
+      dynamic_cast<PERTURBED_ELEMENT*>(Bulk_mesh_pt->upper_layer_element_pt(e));
 
     // Initialise element's contributions to kinetic energy and its deriv
     double el_kinetic_energy = 0.0;
@@ -1329,9 +1329,9 @@ void PerturbedStateProblem<BASE_ELEMENT, PERTURBED_ELEMENT, TIMESTEPPER>::
     {
       // Upcast from GeneralisedElement to the present element
       PerturbedSpineLinearisedAxisymmetricFluidInterfaceElement<
-        PERTURBED_ELEMENT> *el_pt =
+        PERTURBED_ELEMENT>* el_pt =
         dynamic_cast<PerturbedSpineLinearisedAxisymmetricFluidInterfaceElement<
-          PERTURBED_ELEMENT> *>(Surface_mesh_pt->element_pt(e));
+          PERTURBED_ELEMENT>*>(Surface_mesh_pt->element_pt(e));
 
       // Output solution to file
       el_pt->output_perturbation_to_interface(some_file, npts_surface);
@@ -1353,9 +1353,9 @@ void PerturbedStateProblem<BASE_ELEMENT, PERTURBED_ELEMENT, TIMESTEPPER>::
     {
       // Upcast from GeneralisedElement to the present element
       PerturbedSpineLinearisedAxisymmetricFluidInterfaceElement<
-        PERTURBED_ELEMENT> *el_pt =
+        PERTURBED_ELEMENT>* el_pt =
         dynamic_cast<PerturbedSpineLinearisedAxisymmetricFluidInterfaceElement<
-          PERTURBED_ELEMENT> *>(Surface_mesh_pt->element_pt(e));
+          PERTURBED_ELEMENT>*>(Surface_mesh_pt->element_pt(e));
 
       // Output solution to file
       el_pt->output_interface_position(some_file, npts_surface);
@@ -1377,7 +1377,7 @@ void PerturbedStateProblem<BASE_ELEMENT, PERTURBED_ELEMENT, TIMESTEPPER>::
 /// problems together and watching to see whether the perturbation
 /// grows or decays.
 //=======================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);
@@ -1440,7 +1440,7 @@ int main(int argc, char *argv[])
     SpineElement<AxisymmetricQCrouzeixRaviartElement>,
     PerturbedSpineElement<
       LinearisedAxisymmetricQCrouzeixRaviartMultiDomainElement>,
-    BDF<2>> *>
+    BDF<2>>*>
     perturbed_problem_pt(n_perturbed_problems);
 
   // Build perturbed state problems
@@ -1510,7 +1510,7 @@ int main(int argc, char *argv[])
   }
 
   // Initialise doc_info object
-  DocInfo *doc_info_pt = new DocInfo();
+  DocInfo* doc_info_pt = new DocInfo();
 
   // Set output directory for solutions
   doc_info_pt->set_directory("RESLT");

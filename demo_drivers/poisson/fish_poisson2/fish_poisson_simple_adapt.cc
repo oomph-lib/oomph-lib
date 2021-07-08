@@ -55,7 +55,7 @@ public:
   /// \short Constructor: Pass pointer to timestepper
   /// (defaults to (Steady) default timestepper defined in Mesh)
   SimpleRefineableFishMesh(
-    TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
     FishMesh<ELEMENT>(time_stepper_pt)
   {
     // Setup quadtree forest
@@ -66,7 +66,7 @@ public:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Get pointer to element
-      FiniteElement *el_pt = this->finite_element_pt(e);
+      FiniteElement* el_pt = this->finite_element_pt(e);
 
       // Null out the pointer to macro elements to disable them
       el_pt->set_macro_elem_pt(0);
@@ -86,7 +86,7 @@ namespace ConstSourceForPoisson
   double Strength = -1.0;
 
   /// Const source function
-  void get_source(const Vector<double> &x, double &source)
+  void get_source(const Vector<double>& x, double& source)
   {
     source = Strength;
   }
@@ -116,15 +116,14 @@ public:
   /// \short Overloaded version of the problem's access function to
   /// the mesh. Recasts the pointer to the base Mesh object to
   /// the actual mesh type.
-  SimpleRefineableFishMesh<ELEMENT> *mesh_pt()
+  SimpleRefineableFishMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<SimpleRefineableFishMesh<ELEMENT> *>(
-      Problem::mesh_pt());
+    return dynamic_cast<SimpleRefineableFishMesh<ELEMENT>*>(Problem::mesh_pt());
   }
 
   /// \short Doc the solution. Output directory and labels are specified
   /// by DocInfo object
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 }; // end of problem class
 
@@ -167,7 +166,7 @@ SimpleRefineableFishPoissonProblem<
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from FiniteElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the source function pointer
     el_pt->source_fct_pt() = &ConstSourceForPoisson::get_source;
@@ -183,7 +182,7 @@ SimpleRefineableFishPoissonProblem<
 //========================================================================
 template<class ELEMENT>
 void SimpleRefineableFishPoissonProblem<ELEMENT>::doc_solution(
-  DocInfo &doc_info)
+  DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];

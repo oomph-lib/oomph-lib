@@ -41,8 +41,8 @@ namespace oomph
   /// defaults to static default timestepper.
   //======================================================================
   template<class ELEMENT>
-  EighthSphereMesh<ELEMENT>::EighthSphereMesh(const double &radius,
-                                              TimeStepper *time_stepper_pt) :
+  EighthSphereMesh<ELEMENT>::EighthSphereMesh(const double& radius,
+                                              TimeStepper* time_stepper_pt) :
     Radius(radius)
   {
     // Mesh can only be built with 3D Qelements.

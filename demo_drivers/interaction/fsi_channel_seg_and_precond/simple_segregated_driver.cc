@@ -88,16 +88,16 @@ public:
   /// \short Constructor: The arguments are the same as the original
   /// (non-segregated) problem, namely, numbers of elements and lengths
   /// of different sections of the domain.
-  SegregatedFSICollapsibleChannelProblem(const unsigned &nup,
-                                         const unsigned &ncollapsible,
-                                         const unsigned &ndown,
-                                         const unsigned &ny,
-                                         const double &lup,
-                                         const double &lcollapsible,
-                                         const double &ldown,
-                                         const double &ly,
-                                         const bool &displ_control,
-                                         const bool &steady_flag);
+  SegregatedFSICollapsibleChannelProblem(const unsigned& nup,
+                                         const unsigned& ncollapsible,
+                                         const unsigned& ndown,
+                                         const unsigned& ny,
+                                         const double& lup,
+                                         const double& lcollapsible,
+                                         const double& ldown,
+                                         const double& ly,
+                                         const bool& displ_control,
+                                         const bool& steady_flag);
 
   /// Empty Destructor
   ~SegregatedFSICollapsibleChannelProblem() {}
@@ -106,10 +106,10 @@ public:
   /// contain only elements involved in the respective sub-problems.
   /// This is a specific implementation of a pure virtual function in the
   /// SegregatableFSIProblem base class.
-  void identify_fluid_and_solid_dofs(Vector<Data *> &fluid_data_pt,
-                                     Vector<Data *> &solid_data_pt,
-                                     Mesh *&fluid_mesh_pt,
-                                     Mesh *&solid_mesh_pt);
+  void identify_fluid_and_solid_dofs(Vector<Data*>& fluid_data_pt,
+                                     Vector<Data*>& solid_data_pt,
+                                     Mesh*& fluid_mesh_pt,
+                                     Mesh*& solid_mesh_pt);
 
   // start_of_convergence_checks
 
@@ -148,7 +148,7 @@ public:
   // end_of_convergence_checks
 
   /// Document the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// Perform a steady run
   void steady_run();
@@ -159,16 +159,16 @@ public:
 //===============================================================
 template<class ELEMENT>
 SegregatedFSICollapsibleChannelProblem<
-  ELEMENT>::SegregatedFSICollapsibleChannelProblem(const unsigned &nup,
-                                                   const unsigned &ncollapsible,
-                                                   const unsigned &ndown,
-                                                   const unsigned &ny,
-                                                   const double &lup,
-                                                   const double &lcollapsible,
-                                                   const double &ldown,
-                                                   const double &ly,
-                                                   const bool &displ_control,
-                                                   const bool &steady_flag) :
+  ELEMENT>::SegregatedFSICollapsibleChannelProblem(const unsigned& nup,
+                                                   const unsigned& ncollapsible,
+                                                   const unsigned& ndown,
+                                                   const unsigned& ny,
+                                                   const double& lup,
+                                                   const double& lcollapsible,
+                                                   const double& ldown,
+                                                   const double& ly,
+                                                   const bool& displ_control,
+                                                   const bool& steady_flag) :
   FSICollapsibleChannelProblem<ELEMENT>(nup,
                                         ncollapsible,
                                         ndown,
@@ -233,10 +233,10 @@ SegregatedFSICollapsibleChannelProblem<
 //============================================================================
 template<class ELEMENT>
 void SegregatedFSICollapsibleChannelProblem<
-  ELEMENT>::identify_fluid_and_solid_dofs(Vector<Data *> &fluid_data_pt,
-                                          Vector<Data *> &solid_data_pt,
-                                          Mesh *&fluid_mesh_pt,
-                                          Mesh *&solid_mesh_pt)
+  ELEMENT>::identify_fluid_and_solid_dofs(Vector<Data*>& fluid_data_pt,
+                                          Vector<Data*>& solid_data_pt,
+                                          Mesh*& fluid_mesh_pt,
+                                          Mesh*& solid_mesh_pt)
 {
   // FLUID DATA:
   // All fluid elements are stored in the Mesh addressed by bulk_mesh_pt()
@@ -249,7 +249,7 @@ void SegregatedFSICollapsibleChannelProblem<
   // Loop over fluid elements and add internal data to fluid_data_ptt
   for (unsigned e = 0; e < n_fluid_elem; e++)
   {
-    GeneralisedElement *el_pt = this->bulk_mesh_pt()->element_pt(e);
+    GeneralisedElement* el_pt = this->bulk_mesh_pt()->element_pt(e);
     unsigned n_internal = el_pt->ninternal_data();
     for (unsigned i = 0; i < n_internal; i++)
     {
@@ -288,7 +288,7 @@ void SegregatedFSICollapsibleChannelProblem<
   // of the solid problem
 
   // We will assemble a single solid mesh from a vector of pointers to meshes
-  Vector<Mesh *> s_mesh_pt(1);
+  Vector<Mesh*> s_mesh_pt(1);
   // The wall_mesh_pt() contains all solid elements and is the first
   // entry in our vector
   s_mesh_pt[0] = this->wall_mesh_pt();
@@ -313,7 +313,7 @@ void SegregatedFSICollapsibleChannelProblem<
 //============================================================================
 template<class ELEMENT>
 void SegregatedFSICollapsibleChannelProblem<ELEMENT>::doc_solution(
-  DocInfo &doc_info)
+  DocInfo& doc_info)
 {
   // Output stream filenames
   ofstream some_file;

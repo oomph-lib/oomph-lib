@@ -66,28 +66,28 @@ namespace BiharmonicTestFunctions1
 {
   // DIRICHLET BOUNDARY CONDITIONS
 
-  void u_NE(const double &s, double &u)
+  void u_NE(const double& s, double& u)
   {
     double x = (s + 1) / 2;
     u = x * x * x;
   }
-  void dudn_NE(const double &s, double &dudn)
+  void dudn_NE(const double& s, double& dudn)
   {
     double x = (s + 1) / 2;
     dudn = 3 * x * x * x;
   }
-  void u_SW(const double &s, double &u)
+  void u_SW(const double& s, double& u)
   {
     u = 0;
   }
-  void dudn_SW(const double &s, double &dudn)
+  void dudn_SW(const double& s, double& dudn)
   {
     dudn = 0;
   }
 
   // SURFACE LOAD FUNCTION
 
-  void surface_load(const Vector<double> &x, double &f)
+  void surface_load(const Vector<double>& x, double& f)
   {
     // f = 1.0;
     f = 72 * x[0] * x[1];
@@ -95,12 +95,12 @@ namespace BiharmonicTestFunctions1
 
   // NEUMANN BOUNDARY CONDITIONS
 
-  void flux1_NE(const double &s, double &flux1)
+  void flux1_NE(const double& s, double& flux1)
   {
     double x = (s + 1) / 2;
     flux1 = 6 * x * x * x + 18 * x;
   }
-  void flux0_NE(const double &s, double &flux0)
+  void flux0_NE(const double& s, double& flux0)
   {
     double x = (s + 1) / 2;
     flux0 = 6 * (x * x * x + x);
@@ -108,7 +108,7 @@ namespace BiharmonicTestFunctions1
 
   // SOLUTION
 
-  void solution(const Vector<double> &x, Vector<double> &u)
+  void solution(const Vector<double>& x, Vector<double>& u)
   {
     u[0] = x[0] * x[0] * x[0] * x[1] * x[1] * x[1];
   }
@@ -122,7 +122,7 @@ class BiharmonicTestProblem1 : public BiharmonicProblem<2>
 {
 private:
   // Domain pointer
-  TopologicallyRectangularDomain *Domain_pt;
+  TopologicallyRectangularDomain* Domain_pt;
 
 public:
   // constructor
@@ -198,7 +198,7 @@ public:
     Domain_pt = 0;
   };
 
-  void dump_jacobian(std::string &jac_str)
+  void dump_jacobian(std::string& jac_str)
   {
     DoubleVector res;
     CRDoubleMatrix jac;
@@ -229,22 +229,22 @@ namespace BiharmonicTestFunctions2
 
   // BOUNDARIES
 
-  void boundary_N(const double &s, Vector<double> &r)
+  void boundary_N(const double& s, Vector<double>& r)
   {
     r[0] = (r_min + (0.5 * (s + 1) * (r_max - r_min))) * cos(theta);
     r[1] = (r_min + (0.5 * (s + 1) * (r_max - r_min))) * sin(theta);
   }
-  void boundary_E(const double &s, Vector<double> &r)
+  void boundary_E(const double& s, Vector<double>& r)
   {
     r[0] = r_max * cos((s + 1) * theta / 2);
     r[1] = r_max * sin((s + 1) * theta / 2);
   }
-  void boundary_S(const double &s, Vector<double> &r)
+  void boundary_S(const double& s, Vector<double>& r)
   {
     r[0] = r_min + (0.5 * (s + 1) * (r_max - r_min));
     r[1] = 0.0;
   }
-  void boundary_W(const double &s, Vector<double> &r)
+  void boundary_W(const double& s, Vector<double>& r)
   {
     r[0] = r_min * cos((s + 1) * theta / 2);
     r[1] = r_min * sin((s + 1) * theta / 2);
@@ -252,23 +252,23 @@ namespace BiharmonicTestFunctions2
 
   // NORMALS
 
-  void normal_N(const double &s, Vector<double> &n)
+  void normal_N(const double& s, Vector<double>& n)
   {
     n[0] = -sin(theta);
     n[1] = cos(theta);
   }
-  void normal_E(const double &s, Vector<double> &n)
+  void normal_E(const double& s, Vector<double>& n)
   {
     double t = (s + 1) * theta / 2;
     n[0] = cos(t);
     n[1] = sin(t);
   }
-  void normal_S(const double &s, Vector<double> &n)
+  void normal_S(const double& s, Vector<double>& n)
   {
     n[0] = 0.0;
     n[1] = -1.0;
   }
-  void normal_W(const double &s, Vector<double> &n)
+  void normal_W(const double& s, Vector<double>& n)
   {
     double t = (s + 1) * theta / 2;
     n[0] = -cos(t);
@@ -277,21 +277,21 @@ namespace BiharmonicTestFunctions2
 
   // DIRICHLET BCs
 
-  void u_N(const double &s, double &u)
+  void u_N(const double& s, double& u)
   {
     double r = r_min + 0.5 * (s + 1) * (r_max - r_min);
     u = sin(r * r) * tan(theta);
   }
-  void u_E(const double &s, double &u)
+  void u_E(const double& s, double& u)
   {
     double t = (s + 1) * theta / 2;
     u = sin(r_max * r_max) * tan(t);
   }
-  void u_S(const double &s, double &u)
+  void u_S(const double& s, double& u)
   {
     u = 0;
   }
-  void u_W(const double &s, double &u)
+  void u_W(const double& s, double& u)
   {
     double t = (s + 1) * theta / 2;
     u = sin(r_min * r_min) * tan(t);
@@ -306,7 +306,7 @@ namespace BiharmonicTestFunctions2
     return (2 * cos(x[0] * x[0] + x[1] * x[1]) * x[1] * x[1] / x[0] +
             sin(x[0] * x[0] + x[1] * x[1]) / x[0]);
   }
-  void dudn_N(const double &s, double &dudn)
+  void dudn_N(const double& s, double& dudn)
   {
     Vector<double> x(2);
     boundary_N(s, x);
@@ -314,7 +314,7 @@ namespace BiharmonicTestFunctions2
     normal_N(s, n);
     dudn = dudx_0(x) * n[0] + dudx_1(x) * n[1];
   }
-  void dudn_E(const double &s, double &dudn)
+  void dudn_E(const double& s, double& dudn)
   {
     Vector<double> x(2);
     boundary_E(s, x);
@@ -322,12 +322,12 @@ namespace BiharmonicTestFunctions2
     normal_E(s, n);
     dudn = dudx_0(x) * n[0] + dudx_1(x) * n[1];
   }
-  void dudn_S(const double &s, double &dudn)
+  void dudn_S(const double& s, double& dudn)
   {
     double x = r_min + 0.5 * (s + 1) * (r_max - r_min);
     dudn = -sin(x * x) / x;
   }
-  void dudn_W(const double &s, double &dudn)
+  void dudn_W(const double& s, double& dudn)
   {
     Vector<double> x(2);
     boundary_W(s, x);
@@ -338,7 +338,7 @@ namespace BiharmonicTestFunctions2
 
   // SURFACE LOAD FUNCTION
 
-  void surface_load(const Vector<double> &x, double &f)
+  void surface_load(const Vector<double>& x, double& f)
   {
     double sinr2 = sin(x[0] * x[0] + x[1] * x[1]);
     double cosr2 = cos(x[0] * x[0] + x[1] * x[1]);
@@ -353,7 +353,7 @@ namespace BiharmonicTestFunctions2
 
   // SOLUTION
 
-  void solution(const Vector<double> &x, Vector<double> &u)
+  void solution(const Vector<double>& x, Vector<double>& u)
   {
     u[0] = sin(x[0] * x[0] + x[1] * x[1]) * x[1] / x[0];
   }
@@ -367,7 +367,7 @@ class BiharmonicTestProblem2 : public BiharmonicProblem<2>
 {
 private:
   // Domain pointer
-  TopologicallyRectangularDomain *Domain_pt;
+  TopologicallyRectangularDomain* Domain_pt;
 
 public:
   // constructor
@@ -408,13 +408,13 @@ public:
   };
 };
 
-void print_elemental_jacobian(const unsigned &element_number,
-                              const Problem *const problem_pt)
+void print_elemental_jacobian(const unsigned& element_number,
+                              const Problem* const problem_pt)
 {
-  AssemblyHandler *const assembly_handler_pt =
+  AssemblyHandler* const assembly_handler_pt =
     problem_pt->assembly_handler_pt();
 
-  const Mesh *const mesh_pt = problem_pt->mesh_pt();
+  const Mesh* const mesh_pt = problem_pt->mesh_pt();
 
   const unsigned n_element = mesh_pt->nelement();
   const unsigned n_ele_1d = sqrt(n_element);
@@ -434,7 +434,7 @@ void print_elemental_jacobian(const unsigned &element_number,
 #endif
 
   // Get pointer to the element
-  GeneralisedElement *elem_pt = mesh_pt->element_pt(element_number);
+  GeneralisedElement* elem_pt = mesh_pt->element_pt(element_number);
 
   // Find number of dofs in the element
   const unsigned n_element_dofs = assembly_handler_pt->ndof(elem_pt);
@@ -469,9 +469,9 @@ void print_elemental_jacobian(const unsigned &element_number,
   //  }
 }
 
-void print_connectivity_matrix(const Problem *const problem_pt)
+void print_connectivity_matrix(const Problem* const problem_pt)
 {
-  const Mesh *const mesh_pt = problem_pt->mesh_pt();
+  const Mesh* const mesh_pt = problem_pt->mesh_pt();
 
   const unsigned n_element = mesh_pt->nelement();
   //  const unsigned n_ele_1d = sqrt(n_element);
@@ -489,7 +489,7 @@ void print_connectivity_matrix(const Problem *const problem_pt)
     outfile << "Element number: " << ele_i << std::endl;
 
     // Get pointer to the element
-    FiniteElement *elem_pt = mesh_pt->finite_element_pt(ele_i);
+    FiniteElement* elem_pt = mesh_pt->finite_element_pt(ele_i);
 
     unsigned nnod = elem_pt->nnode();
 
@@ -498,7 +498,7 @@ void print_connectivity_matrix(const Problem *const problem_pt)
       outfile << "Node number: " << nod_i << std::endl;
 
       // Get the node
-      Node *nod_pt = elem_pt->node_pt(nod_i);
+      Node* nod_pt = elem_pt->node_pt(nod_i);
       const unsigned nval = nod_pt->nvalue();
 
       outfile << "x: " << nod_pt->x(0) << ", y: " << nod_pt->x(1) << std::endl;
@@ -523,7 +523,7 @@ void print_connectivity_matrix(const Problem *const problem_pt)
 //=============================================================================
 /// main
 //=============================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // number of element
   unsigned n_element = 20;
@@ -668,7 +668,7 @@ int main(int argc, char *argv[])
     my_prec.bulk_element_mesh_pt() = problem.bulk_element_mesh_pt();
     my_prec.preconditioner_type() = 0;
 
-    IterativeLinearSolver *solver_pt = new CG<CRDoubleMatrix>;
+    IterativeLinearSolver* solver_pt = new CG<CRDoubleMatrix>;
     solver_pt->preconditioner_pt() = &my_prec;
 
     // Apply the solver
@@ -727,12 +727,12 @@ int main(int argc, char *argv[])
       BiharmonicTestProblem1 problem(n_element);
 
       // setup the preconditioner
-      BiharmonicPreconditioner *prec_pt = new BiharmonicPreconditioner;
+      BiharmonicPreconditioner* prec_pt = new BiharmonicPreconditioner;
       prec_pt->bulk_element_mesh_pt() = problem.bulk_element_mesh_pt();
       prec_pt->preconditioner_type() = 0;
 
       // setup the solver
-      IterativeLinearSolver *solver_pt = new CG<CRDoubleMatrix>;
+      IterativeLinearSolver* solver_pt = new CG<CRDoubleMatrix>;
       solver_pt->preconditioner_pt() = prec_pt;
 
       // apply the solver
@@ -764,12 +764,12 @@ int main(int argc, char *argv[])
       BiharmonicTestProblem2 problem(n_element);
 
       // setup the preconditioner
-      BiharmonicPreconditioner *prec_pt = new BiharmonicPreconditioner;
+      BiharmonicPreconditioner* prec_pt = new BiharmonicPreconditioner;
       prec_pt->bulk_element_mesh_pt() = problem.bulk_element_mesh_pt();
       prec_pt->preconditioner_type() = 1;
 
       // setup the solver
-      IterativeLinearSolver *solver_pt = new CG<CRDoubleMatrix>;
+      IterativeLinearSolver* solver_pt = new CG<CRDoubleMatrix>;
       solver_pt->preconditioner_pt() = prec_pt;
 
       // apply the solver

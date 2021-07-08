@@ -50,7 +50,7 @@ namespace oomph
   /// Setup lookup schemes which establish which elements are located
   /// next to which boundaries (Doc to outfile if it's open).
   //================================================================
-  void BrickMeshBase::setup_boundary_element_info(std::ostream &outfile)
+  void BrickMeshBase::setup_boundary_element_info(std::ostream& outfile)
   {
     // Martina's fixed and commented version of the code.
 
@@ -89,19 +89,18 @@ namespace oomph
     // Then vector_of_boundary_element_pt[0] is a vector of pointers to elements
     // with nodes on boundary 0 and vector_of_boundary_element_pt[0][0] is the
     // first element with nodes on boundary 0.
-    Vector<Vector<FiniteElement *>> vector_of_boundary_element_pt;
+    Vector<Vector<FiniteElement*>> vector_of_boundary_element_pt;
     vector_of_boundary_element_pt.resize(nbound);
 
     // Matrix map for working out the fixed local coord for elements on boundary
     // Calling pointer to FiniteElement and pointer to  Vector<int> defining
     // the matrix to identify each element on boundary
-    MapMatrixMixed<unsigned, FiniteElement *, Vector<int> *>
-      boundary_identifier;
+    MapMatrixMixed<unsigned, FiniteElement*, Vector<int>*> boundary_identifier;
 
     // Temporary container to store pointers to temporary vectors
     // so they can be deleted. Creating storage to store these
     // temporary vectors of vectors of pointers previously defined
-    Vector<Vector<int> *> tmp_vect_pt;
+    Vector<Vector<int>*> tmp_vect_pt;
 
     // Loop over elements
     //-------------------
@@ -110,7 +109,7 @@ namespace oomph
     {
       // Get pointer to element
       // and put it in local storage fe_pt.
-      FiniteElement *fe_pt = finite_element_pt(e);
+      FiniteElement* fe_pt = finite_element_pt(e);
 
       // print out values of all elements to doc
       if (doc) outfile << "Element: " << e << " " << fe_pt << std::endl;
@@ -136,7 +135,7 @@ namespace oomph
             // for each node reset boundaries_pt to 0,
             // create pointer to each node in each element
             // and give boundaries_pt a value
-            std::set<unsigned> *boundaries_pt = 0;
+            std::set<unsigned>* boundaries_pt = 0;
             fe_pt->node_pt(j)->get_boundaries_pt(boundaries_pt);
 
             // If the node lives on some boundaries....
@@ -159,7 +158,7 @@ namespace oomph
                 // boundary
 
                 // Does the pointer already exist in the vector
-                Vector<FiniteElement *>::iterator b_el_it =
+                Vector<FiniteElement*>::iterator b_el_it =
                   std::find(vector_of_boundary_element_pt[*it].begin(),
                             vector_of_boundary_element_pt[*it].end(),
                             fe_pt);
@@ -184,7 +183,7 @@ namespace oomph
                   // Here we make our vector of integers and keep track of the
                   // pointer to it The vector stores information about local
                   // node position for each boundary element
-                  Vector<int> *tmp_pt = new Vector<int>;
+                  Vector<int>* tmp_pt = new Vector<int>;
 
                   // Add to the local scheme that will allow us to delete it
                   // later at the very end of the function
@@ -230,13 +229,13 @@ namespace oomph
     for (unsigned i = 0; i < nbound; i++)
     {
       // Loop over elements on given boundary
-      typedef Vector<FiniteElement *>::iterator IT;
+      typedef Vector<FiniteElement*>::iterator IT;
       for (IT it = vector_of_boundary_element_pt[i].begin();
            it != vector_of_boundary_element_pt[i].end();
            it++)
       {
         // Recover pointer to element for each element
-        FiniteElement *fe_pt = (*it);
+        FiniteElement* fe_pt = (*it);
 
         // Initialise count for boundary identities (-3,-2,-1,1,2,3)
         std::map<int, unsigned> count;
@@ -306,7 +305,7 @@ namespace oomph
         // Loop over elements on given boundary
         for (unsigned e = 0; e < nel; e++)
         {
-          FiniteElement *fe_pt = Boundary_element_pt[i][e];
+          FiniteElement* fe_pt = Boundary_element_pt[i][e];
           outfile << "Boundary element:" << fe_pt
                   << " Face index along boundary is "
                   << Face_index_at_boundary[i][e] << std::endl;

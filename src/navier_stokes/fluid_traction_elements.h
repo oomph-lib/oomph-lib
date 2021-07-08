@@ -59,18 +59,18 @@ namespace oomph
   {
   private:
     /// Pointer to an imposed traction function
-    void (*Traction_fct_pt)(const double &time,
-                            const Vector<double> &x,
-                            const Vector<double> &n,
-                            Vector<double> &result);
+    void (*Traction_fct_pt)(const double& time,
+                            const Vector<double>& x,
+                            const Vector<double>& n,
+                            Vector<double>& result);
 
   protected:
     /// \short The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default
-    double zeta_nodal(const unsigned &n,
-                      const unsigned &k,
-                      const unsigned &i) const
+    double zeta_nodal(const unsigned& n,
+                      const unsigned& k,
+                      const unsigned& i) const
     {
       return FaceElement::zeta_nodal(n, k, i);
     }
@@ -80,16 +80,16 @@ namespace oomph
     /// u_local_eqn(n,i) = local equation number or < 0 if pinned.
     /// The default is to asssume that n is the local node number
     /// and the i-th velocity component is the i-th unknown stored at the node.
-    virtual inline int u_local_eqn(const unsigned &n, const unsigned &i)
+    virtual inline int u_local_eqn(const unsigned& n, const unsigned& i)
     {
       return nodal_local_eqn(n, i);
     }
 
     ///\short Function to compute the shape and test functions and to return
     /// the Jacobian of mapping
-    inline double shape_and_test_at_knot(const unsigned &ipt,
-                                         Shape &psi,
-                                         Shape &test) const
+    inline double shape_and_test_at_knot(const unsigned& ipt,
+                                         Shape& psi,
+                                         Shape& test) const
     {
       // Find number of nodes
       unsigned n_node = nnode();
@@ -105,10 +105,10 @@ namespace oomph
     }
 
     /// Function to calculate the traction applied to the fluid
-    void get_traction(const double &time,
-                      const Vector<double> &x,
-                      const Vector<double> &n,
-                      Vector<double> &result)
+    void get_traction(const double& time,
+                      const Vector<double>& x,
+                      const Vector<double>& n,
+                      Vector<double>& result)
     {
       // If the function pointer is zero return zero
       if (Traction_fct_pt == 0)
@@ -130,7 +130,7 @@ namespace oomph
     /// traction function.
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void fill_in_generic_residual_contribution_fluid_traction(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag);
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
 
     /// The highest dimension of the problem
     unsigned Dim;
@@ -139,9 +139,9 @@ namespace oomph
     /// Constructor, which takes a "bulk" element and the value of the index
     /// and its limit
     NavierStokesTractionElement(
-      FiniteElement *const &element_pt,
-      const int &face_index,
-      const bool &called_from_refineable_constructor = false) :
+      FiniteElement* const& element_pt,
+      const int& face_index,
+      const bool& called_from_refineable_constructor = false) :
       FaceGeometry<ELEMENT>(), FaceElement()
     {
       // Attach the geometrical information to the element. N.B. This function
@@ -157,8 +157,8 @@ namespace oomph
           if (element_pt->dim() == 3)
           {
             // Is it refineable
-            RefineableElement *ref_el_pt =
-              dynamic_cast<RefineableElement *>(element_pt);
+            RefineableElement* ref_el_pt =
+              dynamic_cast<RefineableElement*>(element_pt);
             if (ref_el_pt != 0)
             {
               if (this->has_hanging_nodes())
@@ -185,16 +185,16 @@ namespace oomph
     ~NavierStokesTractionElement() {}
 
     // Access function for the imposed traction pointer
-    void (*&traction_fct_pt())(const double &t,
-                               const Vector<double> &x,
-                               const Vector<double> &n,
-                               Vector<double> &result)
+    void (*&traction_fct_pt())(const double& t,
+                               const Vector<double>& x,
+                               const Vector<double>& n,
+                               Vector<double>& result)
     {
       return Traction_fct_pt;
     }
 
     /// This function returns just the residuals
-    inline void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    inline void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Call the generic residuals function with flag set to 0
       // using a dummy matrix argument
@@ -203,8 +203,8 @@ namespace oomph
     }
 
     /// This function returns the residuals and the jacobian
-    inline void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                                 DenseMatrix<double> &jacobian)
+    inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                                 DenseMatrix<double>& jacobian)
     {
       // Call the generic routine with the flag set to 1
       fill_in_generic_residual_contribution_fluid_traction(
@@ -212,13 +212,13 @@ namespace oomph
     }
 
     /// Overload the output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       FiniteElement::output(outfile);
     }
 
     /// Output function: x,y,[z],u,v,[w],p in tecplot format
-    void output(std::ostream &outfile, const unsigned &nplot)
+    void output(std::ostream& outfile, const unsigned& nplot)
     {
       FiniteElement::output(outfile, nplot);
     }
@@ -235,7 +235,7 @@ namespace oomph
   template<class ELEMENT>
   void NavierStokesTractionElement<ELEMENT>::
     fill_in_generic_residual_contribution_fluid_traction(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag)
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag)
   {
     // Find out how many nodes there are
     unsigned n_node = nnode();
@@ -336,8 +336,8 @@ namespace oomph
   {
   public:
     /// Constructor, which takes a "bulk" element and the face index
-    RefineableNavierStokesTractionElement(FiniteElement *const &element_pt,
-                                          const int &face_index) :
+    RefineableNavierStokesTractionElement(FiniteElement* const& element_pt,
+                                          const int& face_index) :
       // we're calling this from the constructor of the refineable version.
       NavierStokesTractionElement<ELEMENT>(element_pt, face_index, true)
     {
@@ -350,12 +350,12 @@ namespace oomph
     /// same as those in the bulk element.
     unsigned ncont_interpolated_values() const
     {
-      return dynamic_cast<ELEMENT *>(this->bulk_element_pt())
+      return dynamic_cast<ELEMENT*>(this->bulk_element_pt())
         ->ncont_interpolated_values();
     }
 
     /// This function returns just the residuals
-    inline void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    inline void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Call the generic residuals function using a dummy matrix argument
       refineable_fill_in_generic_residual_contribution_fluid_traction(
@@ -363,8 +363,8 @@ namespace oomph
     }
 
     ///\short This function returns the residuals and the Jacobian
-    inline void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                                 DenseMatrix<double> &jacobian)
+    inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                                 DenseMatrix<double>& jacobian)
     {
       // Call the generic routine
       refineable_fill_in_generic_residual_contribution_fluid_traction(
@@ -376,7 +376,7 @@ namespace oomph
     /// traction function.
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void refineable_fill_in_generic_residual_contribution_fluid_traction(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag);
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
   };
 
   ///////////////////////////////////////////////////////////////////////
@@ -390,14 +390,14 @@ namespace oomph
   template<class ELEMENT>
   void RefineableNavierStokesTractionElement<ELEMENT>::
     refineable_fill_in_generic_residual_contribution_fluid_traction(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag)
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag)
   {
     // Get the indices at which the velocity components are stored
     unsigned u_nodal_index[this->Dim];
     for (unsigned i = 0; i < this->Dim; i++)
     {
       u_nodal_index[i] =
-        dynamic_cast<ELEMENT *>(this->bulk_element_pt())->u_index_nst(i);
+        dynamic_cast<ELEMENT*>(this->bulk_element_pt())->u_index_nst(i);
     }
 
     // Find out how many nodes there are
@@ -462,7 +462,7 @@ namespace oomph
       double hang_weight = 1.0;
 
       // Pointer to hang info object
-      HangInfo *hang_info_pt = 0;
+      HangInfo* hang_info_pt = 0;
 
       // Loop over the nodes for the test functions/equations
       //----------------------------------------------------

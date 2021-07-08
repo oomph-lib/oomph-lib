@@ -39,9 +39,9 @@ namespace oomph
   //=======================================================================
   void RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations::
     fill_in_generic_residual_contribution_axi_nst(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix,
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
       unsigned flag)
   {
     // The dimension is actually two
@@ -1549,7 +1549,7 @@ namespace oomph
   //======================================================================
   void RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations::
     get_dresidual_dnodal_coordinates(
-      RankThreeTensor<double> &dresidual_dnodal_coordinates)
+      RankThreeTensor<double>& dresidual_dnodal_coordinates)
   {
     // Create an Oomph Lib warning
     std::string warning_message = "This function has not been tested.\n";
@@ -1664,17 +1664,17 @@ namespace oomph
     // X_ij only affects U_ij.
     bool element_has_node_with_aux_node_update_fct = false;
 
-    std::map<Node *, unsigned> local_shape_controlling_node_lookup =
+    std::map<Node*, unsigned> local_shape_controlling_node_lookup =
       shape_controlling_node_lookup();
 
     // FD loop over shape-controlling nodes
-    for (std::map<Node *, unsigned>::iterator it =
+    for (std::map<Node*, unsigned>::iterator it =
            local_shape_controlling_node_lookup.begin();
          it != local_shape_controlling_node_lookup.end();
          it++)
     {
       // Get pointer to q-th local shape-controlling node
-      Node *nod_pt = it->first;
+      Node* nod_pt = it->first;
 
       // Get its number
       unsigned q = it->second;
@@ -1740,7 +1740,7 @@ namespace oomph
     int local_eqn = 0;
 
     // Pointers to hang info object
-    HangInfo *hang_info_pt = 0;
+    HangInfo* hang_info_pt = 0;
 
     // Loop over the integration points
     for (unsigned ipt = 0; ipt < n_intpt; ipt++)
@@ -2106,12 +2106,12 @@ namespace oomph
                 // the shape function
                 unsigned n_master2 = 1;
                 double hang_weight2 = 1.0;
-                HangInfo *hang_info2_pt = 0;
+                HangInfo* hang_info2_pt = 0;
 
                 // Local boolean to indicate whether the node is hanging
                 bool is_node_hanging2 = node_pt(q_local)->is_hanging();
 
-                Node *actual_shape_controlling_node_pt = node_pt(q_local);
+                Node* actual_shape_controlling_node_pt = node_pt(q_local);
 
                 // If the node is hanging
                 if (is_node_hanging2)
@@ -2365,12 +2365,12 @@ namespace oomph
                 // the shape function
                 unsigned n_master2 = 1;
                 double hang_weight2 = 1.0;
-                HangInfo *hang_info2_pt = 0;
+                HangInfo* hang_info2_pt = 0;
 
                 // Local boolean to indicate whether the node is hanging
                 bool is_node_hanging2 = node_pt(q_local)->is_hanging();
 
-                Node *actual_shape_controlling_node_pt = node_pt(q_local);
+                Node* actual_shape_controlling_node_pt = node_pt(q_local);
 
                 // If the node is hanging
                 if (is_node_hanging2)
@@ -2618,12 +2618,12 @@ namespace oomph
                 // the shape function
                 unsigned n_master2 = 1;
                 double hang_weight2 = 1.0;
-                HangInfo *hang_info2_pt = 0;
+                HangInfo* hang_info2_pt = 0;
 
                 // Local boolean to indicate whether the node is hanging
                 bool is_node_hanging2 = node_pt(q_local)->is_hanging();
 
-                Node *actual_shape_controlling_node_pt = node_pt(q_local);
+                Node* actual_shape_controlling_node_pt = node_pt(q_local);
 
                 // If the node is hanging
                 if (is_node_hanging2)
@@ -2813,12 +2813,12 @@ namespace oomph
                 // the shape function
                 unsigned n_master2 = 1;
                 double hang_weight2 = 1.0;
-                HangInfo *hang_info2_pt = 0;
+                HangInfo* hang_info2_pt = 0;
 
                 // Local boolean to indicate whether the node is hanging
                 bool is_node_hanging2 = node_pt(q_local)->is_hanging();
 
-                Node *actual_shape_controlling_node_pt = node_pt(q_local);
+                Node* actual_shape_controlling_node_pt = node_pt(q_local);
 
                 // If the node is hanging
                 if (is_node_hanging2)

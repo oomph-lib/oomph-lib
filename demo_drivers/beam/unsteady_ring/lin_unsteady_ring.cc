@@ -73,12 +73,12 @@ class ElasticRingProblem : public Problem
 public:
   /// \short Constructor: Number of elements, length of domain, flag for
   /// setting Newmark IC directly or consistently
-  ElasticRingProblem(const unsigned &N, const double &L);
+  ElasticRingProblem(const unsigned& N, const double& L);
 
   /// Access function for the mesh
-  OneDLagrangianMesh<ELEMENT> *mesh_pt()
+  OneDLagrangianMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<OneDLagrangianMesh<ELEMENT> *>(Problem::mesh_pt());
+    return dynamic_cast<OneDLagrangianMesh<ELEMENT>*>(Problem::mesh_pt());
   }
 
   /// Update function is empty
@@ -88,7 +88,7 @@ public:
   void actions_before_newton_solve() {}
 
   /// Doc solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// Do unsteady run
   void unsteady_run();
@@ -99,16 +99,16 @@ private:
 
   /// \short In which element are we applying displacement control?
   /// (here only used for doc of radius)
-  ELEMENT *Displ_control_elem_pt;
+  ELEMENT* Displ_control_elem_pt;
 
   /// At what local coordinate are we applying displacement control?
   Vector<double> S_displ_control;
 
   /// Pointer to geometric object that represents the undeformed shape
-  GeomObject *Undef_geom_pt;
+  GeomObject* Undef_geom_pt;
 
   /// \short Pointer to object that specifies the initial condition
-  SolidInitialCondition *IC_pt;
+  SolidInitialCondition* IC_pt;
 
   /// Trace file for recording control data
   ofstream Trace_file;
@@ -118,8 +118,8 @@ private:
 /// Constructor for elastic ring problem
 //======================================================================
 template<class ELEMENT, class TIMESTEPPER>
-ElasticRingProblem<ELEMENT, TIMESTEPPER>::ElasticRingProblem(const unsigned &N,
-                                                             const double &L) :
+ElasticRingProblem<ELEMENT, TIMESTEPPER>::ElasticRingProblem(const unsigned& N,
+                                                             const double& L) :
   Length(L)
 {
   // Allocate the timestepper -- This constructs the time object as well
@@ -163,7 +163,7 @@ ElasticRingProblem<ELEMENT, TIMESTEPPER>::ElasticRingProblem(const unsigned &N,
   for (unsigned i = 0; i < Nelement; i++)
   {
     // Cast to proper element type
-    ELEMENT *elem_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* elem_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Assign the undeformed surface
     elem_pt->undeformed_beam_pt() = Undef_geom_pt;
@@ -174,7 +174,7 @@ ElasticRingProblem<ELEMENT, TIMESTEPPER>::ElasticRingProblem(const unsigned &N,
 
   // Choose element: (This is the last one)
   Displ_control_elem_pt =
-    dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(Nelement - 1));
+    dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(Nelement - 1));
 
   // Fix/doc the displacement in the vertical (1) direction at right end of
   // the control element
@@ -185,10 +185,10 @@ ElasticRingProblem<ELEMENT, TIMESTEPPER>::ElasticRingProblem(const unsigned &N,
 
   // Geometric object that specifies the initial conditions
   double eps_buckl = 1.0e-2;
-  double HoR = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(0))->h();
+  double HoR = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(0))->h();
   unsigned n_buckl = 2;
   unsigned imode = 2;
-  GeomObject *ic_geom_object_pt = new PseudoBucklingRing(
+  GeomObject* ic_geom_object_pt = new PseudoBucklingRing(
     eps_buckl, HoR, n_buckl, imode, Problem::time_stepper_pt());
 
   // Setup object that specifies the initial conditions:
@@ -200,7 +200,7 @@ ElasticRingProblem<ELEMENT, TIMESTEPPER>::ElasticRingProblem(const unsigned &N,
 /// Document solution
 //========================================================================
 template<class ELEMENT, class TIMESTEPPER>
-void ElasticRingProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo &doc_info)
+void ElasticRingProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo& doc_info)
 {
   cout << "Doc-ing step " << doc_info.number() << " for time "
        << time_stepper_pt()->time_pt()->time() << std::endl;
@@ -212,7 +212,7 @@ void ElasticRingProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo &doc_info)
   double pot, kin;
   for (unsigned ielem = 0; ielem < Nelem; ielem++)
   {
-    dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(ielem))->get_energy(pot, kin);
+    dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(ielem))->get_energy(pot, kin);
     global_kin += kin;
     global_pot += pot;
   }
@@ -259,7 +259,7 @@ void ElasticRingProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo &doc_info)
     unsigned Nelem = mesh_pt()->nelement();
     for (unsigned ielem = 0; ielem < Nelem; ielem++)
     {
-      dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(ielem))
+      dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(ielem))
         ->output(t, some_file, npts);
     }
     some_file.close();
@@ -362,20 +362,12 @@ void ElasticRingProblem<ELEMENT, TIMESTEPPER>::unsteady_run()
     // we don't need to specify a multiplier for the inertia
     // terms (the default assignment of 1.0 is OK)
     SolidMesh::Solid_IC_problem.set_newmark_initial_condition_consistently(
-      this,
-      mesh_pt(),
-      static_cast<TIMESTEPPER *>(time_stepper_pt()),
-      IC_pt,
-      dt);
+      this, mesh_pt(), static_cast<TIMESTEPPER*>(time_stepper_pt()), IC_pt, dt);
   }
   else
   {
     SolidMesh::Solid_IC_problem.set_newmark_initial_condition_directly(
-      this,
-      mesh_pt(),
-      static_cast<TIMESTEPPER *>(time_stepper_pt()),
-      IC_pt,
-      dt);
+      this, mesh_pt(), static_cast<TIMESTEPPER*>(time_stepper_pt()), IC_pt, dt);
   }
 
   // Output initial data
@@ -403,7 +395,7 @@ void ElasticRingProblem<ELEMENT, TIMESTEPPER>::unsteady_run()
 //===start_of_main=====================================================
 /// Driver for ring that performs small-amplitude oscillations
 //=====================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

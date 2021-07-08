@@ -63,7 +63,7 @@ int main()
 
   // The circle's shape is determine by a single Data object whose
   // three values specify x_c, y_c and R:
-  Data *circle_data_pt = new Data(3);
+  Data* circle_data_pt = new Data(3);
 
   // Set the values
   circle_data_pt->set_value(0, x_c);

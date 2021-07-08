@@ -69,7 +69,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    TriangleMeshBase(const TriangleMeshBase &node)
+    TriangleMeshBase(const TriangleMeshBase& node)
     {
       BrokenCopy::broken_copy("TriangleMeshBase");
     }
@@ -104,7 +104,7 @@ namespace oomph
 
     /// \short Setup lookup schemes which establish which elements are located
     /// next to mesh's boundaries. Doc in outfile (if it's open).
-    void setup_boundary_element_info(std::ostream &outfile);
+    void setup_boundary_element_info(std::ostream& outfile);
 
 #ifdef OOMPH_HAS_TRIANGLE_LIB
     /// \short const access for Use_triangulateio_restart.
@@ -126,7 +126,7 @@ namespace oomph
     }
 
     /// Access to the triangulateio representation of the mesh
-    TriangulateIO &triangulateio_representation()
+    TriangulateIO& triangulateio_representation()
     {
       return Triangulateio;
     }
@@ -134,7 +134,7 @@ namespace oomph
     /// \short Helper function. Write a TriangulateIO object file with all the
     /// triangulateio fields. String s is add to assign a different value for
     /// the input and/or output structure
-    void write_triangulateio(TriangulateIO &triangulate_io, std::string &s);
+    void write_triangulateio(TriangulateIO& triangulate_io, std::string& s);
 
     /// \short Helper function. Clean up the memory associated with the
     /// TriangulateIO object. This should really only be used to save
@@ -146,12 +146,12 @@ namespace oomph
 
     /// \short Dump the triangulateio structure to a dump file and
     /// record boundary coordinates of boundary nodes
-    void dump_triangulateio(std::ostream &dump_file);
+    void dump_triangulateio(std::ostream& dump_file);
 
 #ifdef OOMPH_HAS_MPI
     /// Virtual function that is used to dump info. related with
     /// distributed triangle meshes
-    virtual void dump_distributed_info_for_restart(std::ostream &dump_file)
+    virtual void dump_distributed_info_for_restart(std::ostream& dump_file)
     {
       std::ostringstream error_stream;
       error_stream << "Empty default dump disributed info. method called.\n";
@@ -164,7 +164,7 @@ namespace oomph
 
     /// Virtual function that is used to dump info. related with
     /// distributed triangle meshes
-    virtual void dump_info_to_reset_halo_haloed_scheme(std::ostream &dump_file)
+    virtual void dump_info_to_reset_halo_haloed_scheme(std::ostream& dump_file)
     {
       std::ostringstream error_stream;
       error_stream << "Empty default dump info. to reset halo haloed scheme.\n";
@@ -177,7 +177,7 @@ namespace oomph
 
     /// Virtual function that is used to read info. related with
     /// distributed triangle meshes
-    virtual void read_distributed_info_for_restart(std::istream &restart_file)
+    virtual void read_distributed_info_for_restart(std::istream& restart_file)
     {
       std::ostringstream error_stream;
       error_stream << "Empty default read disributed info. method called.\n";
@@ -191,7 +191,7 @@ namespace oomph
     /// Virtual function used to re-establish any additional info. related with
     /// the distribution after a re-starting for triangle meshes
     virtual void reestablish_distribution_info_for_restart(
-      OomphCommunicator *comm_pt, std::istream &restart_file)
+      OomphCommunicator* comm_pt, std::istream& restart_file)
     {
       std::ostringstream error_stream;
       error_stream << "Empty default reestablish disributed info method "
@@ -222,7 +222,7 @@ namespace oomph
 
     /// \short Regenerate the mesh from a dumped triangulateio file
     /// and dumped boundary coordinates of boundary nodes
-    void remesh_from_triangulateio(std::istream &restart_file);
+    void remesh_from_triangulateio(std::istream& restart_file);
 
     /// Virtual function that is used for specific remeshing from the
     /// triangulateio
@@ -239,7 +239,7 @@ namespace oomph
 
     /// Virtual function to perform the load balance rutines
     virtual void load_balance(
-      const Vector<unsigned> &target_domain_for_local_non_halo_element)
+      const Vector<unsigned>& target_domain_for_local_non_halo_element)
     {
       std::ostringstream error_stream;
       error_stream << "Empty default load balancing function called.\n";
@@ -251,9 +251,9 @@ namespace oomph
 
     /// Virtual function to perform the reset boundary elements info rutines
     virtual void reset_boundary_element_info(
-      Vector<unsigned> &ntmp_boundary_elements,
-      Vector<Vector<unsigned>> &ntmp_boundary_elements_in_region,
-      Vector<FiniteElement *> &deleted_elements)
+      Vector<unsigned>& ntmp_boundary_elements,
+      Vector<Vector<unsigned>>& ntmp_boundary_elements_in_region,
+      Vector<FiniteElement*>& deleted_elements)
     {
       std::ostringstream error_stream;
       error_stream << "Empty default reset boundary element info function"

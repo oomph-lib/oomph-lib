@@ -46,8 +46,8 @@ namespace oomph
   /// Compute the strain tensor at local coordinate s
   //======================================================================
   template<unsigned DIM>
-  void PVDEquationsBase<DIM>::get_strain(const Vector<double> &s,
-                                         DenseMatrix<double> &strain) const
+  void PVDEquationsBase<DIM>::get_strain(const Vector<double>& s,
+                                         DenseMatrix<double>& strain) const
   {
 #ifdef PARANOID
     if ((strain.ncol() != DIM) || (strain.nrow() != DIM))
@@ -178,9 +178,9 @@ namespace oomph
   //=======================================================================
   template<unsigned DIM>
   void PVDEquations<DIM>::fill_in_generic_contribution_to_residuals_pvd(
-    Vector<double> &residuals,
-    DenseMatrix<double> &jacobian,
-    const unsigned &flag)
+    Vector<double>& residuals,
+    DenseMatrix<double>& jacobian,
+    const unsigned& flag)
   {
 #ifdef PARANOID
     // Check if the constitutive equation requires the explicit imposition of an
@@ -571,7 +571,7 @@ namespace oomph
   /// Output: x,y,[z],xi0,xi1,[xi2],gamma
   //=======================================================================
   template<unsigned DIM>
-  void PVDEquations<DIM>::output(std::ostream &outfile, const unsigned &n_plot)
+  void PVDEquations<DIM>::output(std::ostream& outfile, const unsigned& n_plot)
   {
     Vector<double> x(DIM);
     Vector<double> xi(DIM);
@@ -623,7 +623,7 @@ namespace oomph
   /// C-style output: x,y,[z],xi0,xi1,[xi2],gamma
   //=======================================================================
   template<unsigned DIM>
-  void PVDEquations<DIM>::output(FILE *file_pt, const unsigned &n_plot)
+  void PVDEquations<DIM>::output(FILE* file_pt, const unsigned& n_plot)
   {
     // Set output Vector
     Vector<double> s(DIM);
@@ -744,8 +744,8 @@ namespace oomph
   /// Output: x,y,[z],xi0,xi1,[xi2],gamma strain and stress components
   //=======================================================================
   template<unsigned DIM>
-  void PVDEquations<DIM>::extended_output(std::ostream &outfile,
-                                          const unsigned &n_plot)
+  void PVDEquations<DIM>::extended_output(std::ostream& outfile,
+                                          const unsigned& n_plot)
   {
     Vector<double> x(DIM);
     Vector<double> xi(DIM);
@@ -819,7 +819,7 @@ namespace oomph
   /// Get potential (strain) and kinetic energy
   //=======================================================================
   template<unsigned DIM>
-  void PVDEquationsBase<DIM>::get_energy(double &pot_en, double &kin_en)
+  void PVDEquationsBase<DIM>::get_energy(double& pot_en, double& kin_en)
   {
     // Initialise
     pot_en = 0;
@@ -940,8 +940,8 @@ namespace oomph
   /// unavoidable.
   //=======================================================================
   template<unsigned DIM>
-  void PVDEquations<DIM>::get_stress(const Vector<double> &s,
-                                     DenseMatrix<double> &sigma)
+  void PVDEquations<DIM>::get_stress(const Vector<double>& s,
+                                     DenseMatrix<double>& sigma)
   {
     // Find out how many nodes there are
     unsigned n_node = this->nnode();
@@ -1058,9 +1058,9 @@ namespace oomph
   //=======================================================================
   template<unsigned DIM>
   void PVDEquationsBase<DIM>::get_principal_stress(
-    const Vector<double> &s,
-    DenseMatrix<double> &principal_stress_vector,
-    Vector<double> &principal_stress)
+    const Vector<double>& s,
+    DenseMatrix<double>& principal_stress_vector,
+    Vector<double>& principal_stress)
   {
     // Compute contravariant ("upper") 2nd Piola Kirchhoff stress
     DenseDoubleMatrix sigma(DIM, DIM);
@@ -1182,7 +1182,7 @@ namespace oomph
   //=======================================================================
   template<unsigned DIM>
   void PVDEquationsBase<DIM>::get_deformed_covariant_basis_vectors(
-    const Vector<double> &s, DenseMatrix<double> &def_covariant_basis)
+    const Vector<double>& s, DenseMatrix<double>& def_covariant_basis)
   {
     // Find out how many nodes there are
     unsigned n_node = nnode();
@@ -1252,10 +1252,10 @@ namespace oomph
   template<unsigned DIM>
   void PVDEquationsWithPressure<DIM>::
     fill_in_generic_residual_contribution_pvd_with_pressure(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix,
-      const unsigned &flag)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
+      const unsigned& flag)
   {
 #ifdef PARANOID
     // Check if the constitutive equation requires the explicit imposition of an
@@ -1909,8 +1909,8 @@ namespace oomph
   /// Output: x,y,[z],xi0,xi1,[xi2],p,gamma
   //=======================================================================
   template<unsigned DIM>
-  void PVDEquationsWithPressure<DIM>::output(std::ostream &outfile,
-                                             const unsigned &n_plot)
+  void PVDEquationsWithPressure<DIM>::output(std::ostream& outfile,
+                                             const unsigned& n_plot)
   {
     // Set output Vector
     Vector<double> s(DIM);
@@ -1964,8 +1964,8 @@ namespace oomph
   /// C-stsyle output: x,y,[z],xi0,xi1,[xi2],p,gamma
   //=======================================================================
   template<unsigned DIM>
-  void PVDEquationsWithPressure<DIM>::output(FILE *file_pt,
-                                             const unsigned &n_plot)
+  void PVDEquationsWithPressure<DIM>::output(FILE* file_pt,
+                                             const unsigned& n_plot)
   {
     // Set output Vector
     Vector<double> s(DIM);
@@ -2089,8 +2089,8 @@ namespace oomph
   /// Output: x,y,[z],xi0,xi1,[xi2],gamma strain and stress components
   //=======================================================================
   template<unsigned DIM>
-  void PVDEquationsWithPressure<DIM>::extended_output(std::ostream &outfile,
-                                                      const unsigned &n_plot)
+  void PVDEquationsWithPressure<DIM>::extended_output(std::ostream& outfile,
+                                                      const unsigned& n_plot)
   {
     Vector<double> x(DIM);
     Vector<double> xi(DIM);
@@ -2169,7 +2169,7 @@ namespace oomph
   //=======================================================================
   template<unsigned DIM>
   void PVDEquationsWithPressure<DIM>::get_mass_matrix_diagonal(
-    Vector<double> &mass_diag)
+    Vector<double>& mass_diag)
   {
     // Resize and initialise
     mass_diag.assign(this->ndof(), 0.0);
@@ -2236,8 +2236,8 @@ namespace oomph
   /// unavoidable.
   //=======================================================================
   template<unsigned DIM>
-  void PVDEquationsWithPressure<DIM>::get_stress(const Vector<double> &s,
-                                                 DenseMatrix<double> &sigma)
+  void PVDEquationsWithPressure<DIM>::get_stress(const Vector<double>& s,
+                                                 DenseMatrix<double>& sigma)
   {
     // Find out how many nodes there are
     unsigned n_node = this->nnode();

@@ -35,7 +35,7 @@ namespace oomph
   /// \short Constructor: Pass the filename of the mesh files
   //=====================================================================
   GeompackQuadScaffoldMesh::GeompackQuadScaffoldMesh(
-    const std::string &mesh_file_name, const std::string &curve_file_name)
+    const std::string& mesh_file_name, const std::string& curve_file_name)
   {
     // Read the output mesh file to find informations about the nodes
     // and elements of the mesh

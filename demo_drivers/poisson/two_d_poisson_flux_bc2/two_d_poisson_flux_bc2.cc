@@ -55,13 +55,13 @@ namespace TanhSolnForPoisson
   double TanPhi = 0.0;
 
   /// Exact solution as a Vector
-  void get_exact_u(const Vector<double> &x, Vector<double> &u)
+  void get_exact_u(const Vector<double>& x, Vector<double>& u)
   {
     u[0] = tanh(1.0 - Alpha * (TanPhi * x[0] - x[1]));
   }
 
   /// Source function required to make the solution above an exact solution
-  void source_function(const Vector<double> &x, double &source)
+  void source_function(const Vector<double>& x, double& source)
   {
     source = 2.0 * tanh(-1.0 + Alpha * (TanPhi * x[0] - x[1])) *
                (1.0 - pow(tanh(-1.0 + Alpha * (TanPhi * x[0] - x[1])), 2.0)) *
@@ -72,8 +72,8 @@ namespace TanhSolnForPoisson
   }
 
   /// Flux required by the exact solution on a boundary on which x is fixed
-  void prescribed_flux_on_fixed_x_boundary(const Vector<double> &x,
-                                           double &flux)
+  void prescribed_flux_on_fixed_x_boundary(const Vector<double>& x,
+                                           double& flux)
   {
     // The outer unit normal to the boundary is (1,0)
     double N[2] = {1.0, 0.0};
@@ -105,7 +105,7 @@ public:
 
   /// Doc the solution. DocInfo object stores flags/labels for where the
   /// output gets written to
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 private:
   /// \short Update the problem specs before solve: Reset boundary conditions
@@ -118,15 +118,15 @@ private:
   /// \short Create Poisson flux elements on boundary b of the Mesh pointed
   /// to by bulk_mesh_pt and add them to the Mesh object pointed to by
   /// surface_mesh_pt
-  void create_flux_elements(const unsigned &b,
-                            Mesh *const &bulk_mesh_pt,
-                            Mesh *const &surface_mesh_pt);
+  void create_flux_elements(const unsigned& b,
+                            Mesh* const& bulk_mesh_pt,
+                            Mesh* const& surface_mesh_pt);
 
   /// Pointer to the "bulk" mesh
-  SimpleRectangularQuadMesh<ELEMENT> *Bulk_mesh_pt;
+  SimpleRectangularQuadMesh<ELEMENT>* Bulk_mesh_pt;
 
   /// Pointer to the "surface" mesh
-  Mesh *Surface_mesh_pt;
+  Mesh* Surface_mesh_pt;
 
   /// Pointer to source function
   PoissonEquations<2>::PoissonSourceFctPt Source_fct_pt;
@@ -202,7 +202,7 @@ TwoMeshFluxPoissonProblem<ELEMENT>::TwoMeshFluxPoissonProblem(
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to Poisson bulk element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
     // Set the source function pointer
     el_pt->source_fct_pt() = Source_fct_pt;
@@ -213,8 +213,8 @@ TwoMeshFluxPoissonProblem<ELEMENT>::TwoMeshFluxPoissonProblem(
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to Poisson flux element
-    PoissonFluxElement<ELEMENT> *el_pt =
-      dynamic_cast<PoissonFluxElement<ELEMENT> *>(
+    PoissonFluxElement<ELEMENT>* el_pt =
+      dynamic_cast<PoissonFluxElement<ELEMENT>*>(
         Surface_mesh_pt->element_pt(e));
 
     // Set the pointer to the prescribed flux function
@@ -250,7 +250,7 @@ void TwoMeshFluxPoissonProblem<ELEMENT>::actions_before_newton_solve()
       for (unsigned n = 0; n < n_node; n++)
       {
         // Get pointer to node
-        Node *nod_pt = Bulk_mesh_pt->boundary_node_pt(i, n);
+        Node* nod_pt = Bulk_mesh_pt->boundary_node_pt(i, n);
 
         // Extract nodal coordinates from node:
         Vector<double> x(2);
@@ -272,7 +272,7 @@ void TwoMeshFluxPoissonProblem<ELEMENT>::actions_before_newton_solve()
 /// Doc the solution: doc_info contains labels/output directory etc.
 //========================================================================
 template<class ELEMENT>
-void TwoMeshFluxPoissonProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void TwoMeshFluxPoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -324,7 +324,7 @@ void TwoMeshFluxPoissonProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
 //=======================================================================
 template<class ELEMENT>
 void TwoMeshFluxPoissonProblem<ELEMENT>::create_flux_elements(
-  const unsigned &b, Mesh *const &bulk_mesh_pt, Mesh *const &surface_mesh_pt)
+  const unsigned& b, Mesh* const& bulk_mesh_pt, Mesh* const& surface_mesh_pt)
 {
   // How many bulk elements are adjacent to boundary b?
   unsigned n_element = bulk_mesh_pt->nboundary_element(b);
@@ -333,14 +333,14 @@ void TwoMeshFluxPoissonProblem<ELEMENT>::create_flux_elements(
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    ELEMENT *bulk_elem_pt =
-      dynamic_cast<ELEMENT *>(bulk_mesh_pt->boundary_element_pt(b, e));
+    ELEMENT* bulk_elem_pt =
+      dynamic_cast<ELEMENT*>(bulk_mesh_pt->boundary_element_pt(b, e));
 
     // What is the index of the face of the bulk element e on bondary b
     int face_index = bulk_mesh_pt->face_index_at_boundary(b, e);
 
     // Build the corresponding prescribed-flux element
-    PoissonFluxElement<ELEMENT> *flux_element_pt =
+    PoissonFluxElement<ELEMENT>* flux_element_pt =
       new PoissonFluxElement<ELEMENT>(bulk_elem_pt, face_index);
 
     // Add the prescribed-flux element to the surface mesh

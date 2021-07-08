@@ -52,11 +52,11 @@ class MyTaylorHoodElement : public virtual QTaylorHoodElement<2>
 {
 public:
   /// Overloaded compute error function; uses FE+singular parts
-  void compute_error(std::ostream &outfile,
+  void compute_error(std::ostream& outfile,
                      FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-                     const bool &include_pressure,
-                     double &error,
-                     double &norm)
+                     const bool& include_pressure,
+                     double& error,
+                     double& norm)
   {
     unsigned cached_dim = this->dim();
 
@@ -186,7 +186,7 @@ namespace Global_Parameters
   double R_blend_outer = 0.8; // 0.2;
 
   /// Blend function, centred at x_c
-  double blend(const Vector<double> &x, const Vector<double> &x_c)
+  double blend(const Vector<double>& x, const Vector<double>& x_c)
   {
     // shifted origin
     double dx = x[0] - x_c[0];
@@ -207,7 +207,7 @@ namespace Global_Parameters
   }
 
   /// Gradient of blend function, centred at x_c
-  Vector<double> grad_blend(const Vector<double> &x, const Vector<double> &x_c)
+  Vector<double> grad_blend(const Vector<double>& x, const Vector<double>& x_c)
   {
     // shifted origin
     double dx = x[0] - x_c[0];
@@ -244,7 +244,7 @@ namespace Global_Parameters
   double B_couette = 1.0;
 
   /// Couette flow
-  Vector<double> velocity_couette(const Vector<double> &x)
+  Vector<double> velocity_couette(const Vector<double>& x)
   {
     // Initialise velocity vector to return
     Vector<double> u(2, 0.0);
@@ -265,7 +265,7 @@ namespace Global_Parameters
   }
 
   /// Couette Pressure
-  double pressure_couette(const Vector<double> &x)
+  double pressure_couette(const Vector<double>& x)
   {
     // Shifted origin
     double x_shifted = 1.0 + x[0];
@@ -284,7 +284,7 @@ namespace Global_Parameters
   }
 
   /// Combined exact solution (u,v,p)
-  void exact_couette(const Vector<double> &x, Vector<double> &soln)
+  void exact_couette(const Vector<double>& x, Vector<double>& soln)
   {
     soln = velocity_couette(x);
     soln.resize(3);
@@ -293,7 +293,7 @@ namespace Global_Parameters
 
   /// Pseudo_singularity for computation of Couette flow
   Vector<double> velocity_pseudo_singularity_for_couette(
-    const Vector<double> &x)
+    const Vector<double>& x)
   {
     // Initialise velocity vector to return
     Vector<double> u(2, 0.0);
@@ -307,7 +307,7 @@ namespace Global_Parameters
 
   /// Pseudo_singularity for computation of Couette flow: grad[i][j] = du_i/dx_j
   Vector<Vector<double>> grad_velocity_pseudo_singularity_for_couette(
-    const Vector<double> &x)
+    const Vector<double>& x)
   {
     // Initialise grad matrix
     Vector<Vector<double>> grad_u(2);
@@ -336,7 +336,7 @@ namespace Global_Parameters
   }
 
   /// Pseudo_singularity for computation of Couette flow
-  double pressure_pseudo_singularity_for_couette(const Vector<double> &x)
+  double pressure_pseudo_singularity_for_couette(const Vector<double>& x)
   {
     return -2.0 * x[1]; //-2.0*x[0];
   }
@@ -348,7 +348,7 @@ namespace Global_Parameters
 
   /// Blended Pseudo_singularity for computation of Couette flow
   Vector<double> blended_velocity_pseudo_singularity_for_couette(
-    const Vector<double> &x)
+    const Vector<double>& x)
   {
     // Initialise velocity vector to return
     Vector<double> u = velocity_pseudo_singularity_for_couette(x);
@@ -365,7 +365,7 @@ namespace Global_Parameters
   /// \short Blended Pseudo_singularity for computation of Couette flow:
   /// grad[i][j] = du_i/dx_j
   Vector<Vector<double>> blended_grad_velocity_pseudo_singularity_for_couette(
-    const Vector<double> &x)
+    const Vector<double>& x)
   {
     // unblended velocity
     Vector<double> u = velocity_pseudo_singularity_for_couette(x);
@@ -394,7 +394,7 @@ namespace Global_Parameters
 
   /// Blended Pseudo_singularity for computation of Couette flow
   double blended_pressure_pseudo_singularity_for_couette(
-    const Vector<double> &x)
+    const Vector<double>& x)
   {
     double p = pressure_pseudo_singularity_for_couette(x);
 
@@ -411,7 +411,7 @@ namespace Global_Parameters
   //------------------------------------
 
   /// Function that computes the fitting velocity solution near the corner (0,0)
-  Vector<double> velocity_singularity1(const Vector<double> &x)
+  Vector<double> velocity_singularity1(const Vector<double>& x)
   {
     using namespace MathematicalConstants;
 
@@ -444,7 +444,7 @@ namespace Global_Parameters
   }
 
   /// Function that computes the fitting velocity solution near the corner (1,0)
-  Vector<double> velocity_singularity2(const Vector<double> &x)
+  Vector<double> velocity_singularity2(const Vector<double>& x)
   {
     using namespace MathematicalConstants;
 
@@ -486,7 +486,7 @@ namespace Global_Parameters
 
   /// \short Function that computes the gradient of the fitting velocity
   /// solution near the corner (0,0): grad[i][j] = du_i/dx_j
-  Vector<Vector<double>> grad_velocity_singularity1(const Vector<double> &coord)
+  Vector<Vector<double>> grad_velocity_singularity1(const Vector<double>& coord)
   {
     using namespace MathematicalConstants;
 
@@ -681,7 +681,7 @@ namespace Global_Parameters
 
   /// \short Function that computes the gradient of the fitting velocity
   /// solution near the corner (1,0): grad[i][j] = du_i/dx_j
-  Vector<Vector<double>> grad_velocity_singularity2(const Vector<double> &coord)
+  Vector<Vector<double>> grad_velocity_singularity2(const Vector<double>& coord)
   {
     using namespace MathematicalConstants;
 
@@ -909,7 +909,7 @@ namespace Global_Parameters
   }
 
   /// Function that computes the fitting pressure solution near the corner (0,0)
-  double pressure_singularity1(const Vector<double> &x)
+  double pressure_singularity1(const Vector<double>& x)
   {
     using namespace MathematicalConstants;
 
@@ -931,7 +931,7 @@ namespace Global_Parameters
   }
 
   /// Function that computes the fitting pressure solution near the corner (1,0)
-  double pressure_singularity2(const Vector<double> &x)
+  double pressure_singularity2(const Vector<double>& x)
   {
     using namespace MathematicalConstants;
 
@@ -959,7 +959,7 @@ namespace Global_Parameters
 
   /// Function that computes the gradient of the fitting pressure solution near
   /// the corner (0,0)
-  Vector<double> grad_pressure_singularity1(const Vector<double> &coord)
+  Vector<double> grad_pressure_singularity1(const Vector<double>& coord)
   {
     using namespace MathematicalConstants;
 
@@ -1010,7 +1010,7 @@ namespace Global_Parameters
   } // End of function
 
   /// Function that computes the fitting solutions near the corner (0,0)
-  void analytic_solution1(const Vector<double> &x, Vector<double> &solution)
+  void analytic_solution1(const Vector<double>& x, Vector<double>& solution)
   {
     using namespace MathematicalConstants;
 
@@ -1053,7 +1053,7 @@ namespace Global_Parameters
   }
 
   /// Function that computes the fitting solutions near the corner (1,0)
-  void analytic_solution2(const Vector<double> &x, Vector<double> &solution)
+  void analytic_solution2(const Vector<double>& x, Vector<double>& solution)
   {
     using namespace MathematicalConstants;
 
@@ -1137,12 +1137,12 @@ public:
   ~RectangularDrivenCavityProblem() {}
 
   /// Fix pressure in element e at pressure dof pdof and set to pvalue
-  void fix_pressure(const unsigned &e,
-                    const unsigned &pdof,
-                    const double &pvalue)
+  void fix_pressure(const unsigned& e,
+                    const unsigned& pdof,
+                    const double& pvalue)
   {
     // Cast to full element type and fix the pressure at that element
-    dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e))
+    dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))
       ->fix_pressure(pdof, pvalue);
   } // end of fix_pressure
 
@@ -1153,7 +1153,7 @@ public:
   void actions_before_newton_solve() {}
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   // What it says...
   void actions_before_newton_step()
@@ -1185,7 +1185,7 @@ public:
     double r_max = 0.1;
     Vector<double> zeta(2);
     Vector<double> s(2);
-    GeomObject *geom_object_pt = 0;
+    GeomObject* geom_object_pt = 0;
     for (unsigned i = 0; i < n_phi; i++)
     {
       Line_plot_point[i].resize(npt);
@@ -1212,26 +1212,26 @@ public:
 private:
   /// Pointer to the element defining the unknown C1 (Note: eqn element is
   /// templated by the wrapped element!)
-  SingularNavierStokesSolutionElement<ELEMENT>
-    *Singular_navier_stokes_solution1_element_pt;
+  SingularNavierStokesSolutionElement<ELEMENT>*
+    Singular_navier_stokes_solution1_element_pt;
 
   /// Pointer to the element defining the unknown C2 (Note: eqn element is
   /// templated by the wrapped element!)
-  SingularNavierStokesSolutionElement<ELEMENT>
-    *Singular_navier_stokes_solution2_element_pt;
+  SingularNavierStokesSolutionElement<ELEMENT>*
+    Singular_navier_stokes_solution2_element_pt;
 
   /// Pointer to the C mesh associated with the elements defining the
   /// unknowns C1 and C2
-  Mesh *Singular_navier_stokes_solution_mesh_pt;
+  Mesh* Singular_navier_stokes_solution_mesh_pt;
 
   /// Pointer to mesh with Poisson elements
-  Mesh *Navier_stokes_mesh_pt;
+  Mesh* Navier_stokes_mesh_pt;
 
   /// Mesh as geom object representation of mesh
-  MeshAsGeomObject *Mesh_as_geom_object_pt;
+  MeshAsGeomObject* Mesh_as_geom_object_pt;
 
   /// Line_plot_point[i_phi][i_rho]
-  Vector<Vector<std::pair<GeomObject *, Vector<double>>>> Line_plot_point;
+  Vector<Vector<std::pair<GeomObject*, Vector<double>>>> Line_plot_point;
 
 }; // end_of_problem_class
 
@@ -1340,8 +1340,8 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem()
 
   // Find number of nodes on one side of an element
   // Upcast from GeneralsedElement to the present element
-  ELEMENT *spec_el_pt =
-    dynamic_cast<ELEMENT *>(Navier_stokes_mesh_pt->element_pt(0));
+  ELEMENT* spec_el_pt =
+    dynamic_cast<ELEMENT*>(Navier_stokes_mesh_pt->element_pt(0));
   unsigned Nnode_1d = sqrt(spec_el_pt->nnode());
 
   // Boundary conditions
@@ -1357,8 +1357,8 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem()
     double e = i * n_x;
 
     // Upcast from GeneralsedElement to the present element
-    ELEMENT *el_pt =
-      dynamic_cast<ELEMENT *>(Navier_stokes_mesh_pt->element_pt(e));
+    ELEMENT* el_pt =
+      dynamic_cast<ELEMENT*>(Navier_stokes_mesh_pt->element_pt(e));
 
     // Loop over the boundary nodes
     for (unsigned k = 0; k < Nnode_1d; k++)
@@ -1408,8 +1408,8 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem()
     double e = i * n_x + n_x - 1;
 
     // Upcast from GeneralsedElement to the present element
-    ELEMENT *el_pt =
-      dynamic_cast<ELEMENT *>(Navier_stokes_mesh_pt->element_pt(e));
+    ELEMENT* el_pt =
+      dynamic_cast<ELEMENT*>(Navier_stokes_mesh_pt->element_pt(e));
 
     // Loop over the boundary nodes
     for (unsigned k = 0; k < Nnode_1d; k++)
@@ -1459,8 +1459,8 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem()
     double e = (n_y - 1) * n_x + i;
 
     // Upcast from GeneralsedElement to the present element
-    ELEMENT *el_pt =
-      dynamic_cast<ELEMENT *>(Navier_stokes_mesh_pt->element_pt(e));
+    ELEMENT* el_pt =
+      dynamic_cast<ELEMENT*>(Navier_stokes_mesh_pt->element_pt(e));
 
     // Loop over the boundary nodes
     for (unsigned k = 0; k < Nnode_1d; k++)
@@ -1507,8 +1507,8 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem()
   for (unsigned e = 0; e < n_x; e++)
   {
     // Upcast from GeneralsedElement to the present element
-    ELEMENT *el_pt =
-      dynamic_cast<ELEMENT *>(Navier_stokes_mesh_pt->element_pt(e));
+    ELEMENT* el_pt =
+      dynamic_cast<ELEMENT*>(Navier_stokes_mesh_pt->element_pt(e));
 
     // Loop over the boundary nodes
     for (unsigned j = 0; j < Nnode_1d; j++)
@@ -1560,8 +1560,7 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem()
 #ifdef COUETTE
 
   // Upcast from GeneralsedElement to the present element
-  ELEMENT *el_pt =
-    dynamic_cast<ELEMENT *>(Navier_stokes_mesh_pt->element_pt(0));
+  ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Navier_stokes_mesh_pt->element_pt(0));
 
   // The pressure at (0.0,0.0) is subject to Dirichlet BC
   // Its imposed value is 0.0 which is already the value by default
@@ -1577,8 +1576,8 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem()
 
   // Upcast from GeneralsedElement to the present element
   unsigned nel = Navier_stokes_mesh_pt->nelement();
-  ELEMENT *el_pt =
-    dynamic_cast<ELEMENT *>(Navier_stokes_mesh_pt->element_pt(nel - 1));
+  ELEMENT* el_pt =
+    dynamic_cast<ELEMENT*>(Navier_stokes_mesh_pt->element_pt(nel - 1));
 
   // The pressure at (0.0,0.0) is subject to Dirichlet BC
   // Its imposed value is 0.0 which is already the value by default
@@ -1653,8 +1652,8 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem()
   Vector<double> s1_pt(2);
   s1_pt[0] = -1.0;
   s1_pt[1] = -1.0;
-  ELEMENT *el1_pt =
-    dynamic_cast<ELEMENT *>(Navier_stokes_mesh_pt->element_pt(0));
+  ELEMENT* el1_pt =
+    dynamic_cast<ELEMENT*>(Navier_stokes_mesh_pt->element_pt(0));
   Singular_navier_stokes_solution1_element_pt
     ->set_wrapped_navier_stokes_element_pt(
       el1_pt, s1_pt, &Global_Parameters::Direction);
@@ -1695,8 +1694,8 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem()
   Vector<double> s1_pt(2);
   s1_pt[0] = -1.0;
   s1_pt[1] = -1.0;
-  ELEMENT *el1_pt =
-    dynamic_cast<ELEMENT *>(Navier_stokes_mesh_pt->element_pt(0));
+  ELEMENT* el1_pt =
+    dynamic_cast<ELEMENT*>(Navier_stokes_mesh_pt->element_pt(0));
   Singular_navier_stokes_solution1_element_pt
     ->set_wrapped_navier_stokes_element_pt(
       el1_pt, s1_pt, &Global_Parameters::Direction);
@@ -1739,8 +1738,8 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem()
   Vector<double> s2_pt(2);
   s2_pt[0] = 1.0;
   s2_pt[1] = -1.0;
-  ELEMENT *el2_pt =
-    dynamic_cast<ELEMENT *>(Navier_stokes_mesh_pt->element_pt(n_x - 1));
+  ELEMENT* el2_pt =
+    dynamic_cast<ELEMENT*>(Navier_stokes_mesh_pt->element_pt(n_x - 1));
   Singular_navier_stokes_solution2_element_pt
     ->set_wrapped_navier_stokes_element_pt(
       el2_pt, s2_pt, &Global_Parameters::Direction);
@@ -1765,7 +1764,7 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem()
 
   // Make better integration scheme
   const unsigned NPTS_1D = 20;
-  GaussLegendre<2, NPTS_1D> *gauss_legendre_pt = new GaussLegendre<2, NPTS_1D>;
+  GaussLegendre<2, NPTS_1D>* gauss_legendre_pt = new GaussLegendre<2, NPTS_1D>;
 
   // Complete the build of all elements so they are fully functional
 
@@ -1777,8 +1776,8 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt =
-      dynamic_cast<ELEMENT *>(Navier_stokes_mesh_pt->element_pt(e));
+    ELEMENT* el_pt =
+      dynamic_cast<ELEMENT*>(Navier_stokes_mesh_pt->element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -1841,7 +1840,7 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem()
   linear_solver_pt() = new MumpsSolver;
 
   // Shut up
-  dynamic_cast<MumpsSolver *>(linear_solver_pt())
+  dynamic_cast<MumpsSolver*>(linear_solver_pt())
     ->enable_suppress_warning_about_MPI_COMM_WORLD();
 
 #endif
@@ -1855,7 +1854,7 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void RectangularDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void RectangularDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file, some_file2;
   char filename[100];
@@ -1953,7 +1952,7 @@ void RectangularDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
                << std::endl;
     for (unsigned j = 0; j < nr; j++)
     {
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Line_plot_point[i][j].first);
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Line_plot_point[i][j].first);
       s = Line_plot_point[i][j].second;
       el_pt->interpolated_x(s, x);
 #ifdef DONT_USE_SINGULARITY
@@ -2034,7 +2033,7 @@ void RectangularDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
   {
     double el_error = 0.0;
     double el_norm = 0.0;
-    dynamic_cast<ELEMENT *>(Navier_stokes_mesh_pt->element_pt(e))
+    dynamic_cast<ELEMENT*>(Navier_stokes_mesh_pt->element_pt(e))
       ->compute_error(some_file,
                       Global_Parameters::exact_couette,
                       include_pressure,
@@ -2059,7 +2058,7 @@ void RectangularDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
   {
     double el_error = 0.0;
     double el_norm = 0.0;
-    dynamic_cast<ELEMENT *>(Navier_stokes_mesh_pt->element_pt(e))
+    dynamic_cast<ELEMENT*>(Navier_stokes_mesh_pt->element_pt(e))
       ->compute_error(some_file,
                       Global_Parameters::exact_couette,
                       include_pressure,
@@ -2086,7 +2085,7 @@ void RectangularDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
 /// Driver for RectangularDrivenCavity test problem -- test drive
 /// with two different types of element.
 //=====================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
 #ifdef OOMPH_HAS_MPI
 

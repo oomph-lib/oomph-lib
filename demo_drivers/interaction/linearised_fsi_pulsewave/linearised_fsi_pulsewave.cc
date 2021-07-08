@@ -95,10 +95,10 @@ namespace Global_Physical_Variables
   double Q = 1.0e-6;
 
   /// Traction applied to the outside of the solid mesh
-  void outside_solid_boundary_traction(const double &time,
-                                       const Vector<double> &x,
-                                       const Vector<double> &n,
-                                       Vector<double> &result)
+  void outside_solid_boundary_traction(const double& time,
+                                       const Vector<double>& x,
+                                       const Vector<double>& n,
+                                       Vector<double>& result)
   {
     result[0] = -P_outside_scale * time * time * n[0];
     result[1] = -P_outside_scale * time * time * n[1];
@@ -106,10 +106,10 @@ namespace Global_Physical_Variables
   }
 
   /// Inflow traction applied to the fluid mesh
-  void fluid_inflow_boundary_traction(const double &time,
-                                      const Vector<double> &x,
-                                      const Vector<double> &n,
-                                      Vector<double> &result)
+  void fluid_inflow_boundary_traction(const double& time,
+                                      const Vector<double>& x,
+                                      const Vector<double>& n,
+                                      Vector<double>& result)
   {
     double ramp_factor = 1.0;
     if (T_cos != 0.0)
@@ -130,10 +130,10 @@ namespace Global_Physical_Variables
   double P_wall = 1.0;
 
   /// Traction applied to the solid mesh at fsi interface (for validation only)
-  void validation_solid_fsi_boundary_traction(const double &time,
-                                              const Vector<double> &x,
-                                              const Vector<double> &n,
-                                              Vector<double> &result)
+  void validation_solid_fsi_boundary_traction(const double& time,
+                                              const Vector<double>& x,
+                                              const Vector<double>& n,
+                                              Vector<double>& result)
   {
     result[0] = -P_wall * n[0];
     result[1] = -P_wall * n[1];
@@ -146,10 +146,10 @@ namespace Global_Physical_Variables
   /// "fsi" traction applied to the fluid mesh (for validation case
   /// in which fluid is driven by prescribed traction on fsi boundary
   /// rather than "lagrange multiplier traction" that enforces no slip
-  void validation_fluid_fsi_boundary_traction(const double &time,
-                                              const Vector<double> &x,
-                                              const Vector<double> &n,
-                                              Vector<double> &result)
+  void validation_fluid_fsi_boundary_traction(const double& time,
+                                              const Vector<double>& x,
+                                              const Vector<double>& n,
+                                              Vector<double>& result)
   {
     // Pressure increases linearly
     result[0] = -P_inlet_const * x[1] / Length;
@@ -168,9 +168,9 @@ namespace Global_Physical_Variables
   double Pressure_wavespeed = 0.0;
 
   /// "Exact" solution for propagating pulse wave
-  void pulse_wave_solution(const double &time,
-                           const Vector<double> &x,
-                           Vector<double> &soln)
+  void pulse_wave_solution(const double& time,
+                           const Vector<double>& x,
+                           Vector<double>& soln)
   {
     // Three velocities and pressure
     soln.resize(4, 0.0);
@@ -258,43 +258,42 @@ public:
   void actions_before_implicit_timestep() {}
 
   /// Doc solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 private:
   /// setup fsi
   void setup_fsi();
 
   /// Solid mesh
-  TriangleMesh<FLUID_ELEMENT> *Fluid_mesh_pt;
+  TriangleMesh<FLUID_ELEMENT>* Fluid_mesh_pt;
 
   /// Fluid mesh
-  TriangleMesh<SOLID_ELEMENT> *Solid_mesh_pt;
+  TriangleMesh<SOLID_ELEMENT>* Solid_mesh_pt;
 
   /// Solid surface mesh on outside
-  Mesh *Solid_surface_mesh_pt;
+  Mesh* Solid_surface_mesh_pt;
 
   /// Solid surface mesh at FSI interface
-  Mesh *FSI_solid_surface_mesh_pt;
+  Mesh* FSI_solid_surface_mesh_pt;
 
   /// Inflow fluid surface mesh
-  Mesh *Inflow_fluid_surface_mesh_pt;
+  Mesh* Inflow_fluid_surface_mesh_pt;
 
   /// FSI fluid surface mesh
-  Mesh *FSI_fluid_surface_mesh_pt;
+  Mesh* FSI_fluid_surface_mesh_pt;
 
   /// Pointer to wall timestepper
-  TimeStepper *Solid_time_stepper_pt;
+  TimeStepper* Solid_time_stepper_pt;
 
   /// Pointer to fluid timestepper
-  TimeStepper *Fluid_time_stepper_pt;
+  TimeStepper* Fluid_time_stepper_pt;
 
   /// \short Mesh as geom object representation of fluid mesh
-  MeshAsGeomObject *Fluid_mesh_geom_obj_pt;
+  MeshAsGeomObject* Fluid_mesh_geom_obj_pt;
 
   /// \short Vector of pairs containing pointers to elements and
   /// local coordinates within them for regularly spaced plot points
-  Vector<std::pair<FLUID_ELEMENT *, Vector<double>>>
-    Regularly_spaced_plot_point;
+  Vector<std::pair<FLUID_ELEMENT*, Vector<double>>> Regularly_spaced_plot_point;
 
   /// Id for Lagrange multiplier constraint
   unsigned Lagrange_id;
@@ -339,7 +338,7 @@ PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::PressureWaveFSIProblem()
   fluid_vertex_coords[4][1] = 0.0;
 
   // Loop over the vertices and create a polyline between each consecutive pair
-  Vector<TriangleMeshCurveSection *> fluid_outer_polyline_boundary_pt(4);
+  Vector<TriangleMeshCurveSection*> fluid_outer_polyline_boundary_pt(4);
   for (unsigned i = 0; i < 4; i++)
   {
     temp_coord[0][0] = fluid_vertex_coords[i][0];
@@ -351,7 +350,7 @@ PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::PressureWaveFSIProblem()
   }
 
   // Create the outer boundary closed curve
-  TriangleMeshClosedCurve *fluid_outer_boundary_pt =
+  TriangleMeshClosedCurve* fluid_outer_boundary_pt =
     new TriangleMeshClosedCurve(fluid_outer_polyline_boundary_pt);
 
   // Target element area for Triangle
@@ -391,14 +390,14 @@ PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::PressureWaveFSIProblem()
         double(iz) / double(nplot_z - 1) * Global_Physical_Variables::Length;
 
       // Pointer to GeomObject that contains this point
-      GeomObject *geom_obj_pt = 0;
+      GeomObject* geom_obj_pt = 0;
 
       // Get it
       Fluid_mesh_geom_obj_pt->locate_zeta(x, geom_obj_pt, s);
 
       // Store it
       Regularly_spaced_plot_point[count].first =
-        dynamic_cast<FLUID_ELEMENT *>(geom_obj_pt);
+        dynamic_cast<FLUID_ELEMENT*>(geom_obj_pt);
       Regularly_spaced_plot_point[count].second = s;
 
       count++;
@@ -428,7 +427,7 @@ PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::PressureWaveFSIProblem()
   solid_vertex_coords[4][1] = 0.0;
 
   // Loop over the vertices and create a polyline between each consecutive pair
-  Vector<TriangleMeshCurveSection *> solid_outer_polyline_boundary_pt(4);
+  Vector<TriangleMeshCurveSection*> solid_outer_polyline_boundary_pt(4);
   for (unsigned i = 0; i < 4; i++)
   {
     temp_coord[0][0] = solid_vertex_coords[i][0];
@@ -440,7 +439,7 @@ PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::PressureWaveFSIProblem()
   }
 
   // Create the outer boundary closed curve
-  TriangleMeshClosedCurve *solid_outer_boundary_pt =
+  TriangleMeshClosedCurve* solid_outer_boundary_pt =
     new TriangleMeshClosedCurve(solid_outer_polyline_boundary_pt);
 
   // Target element area for Triangle
@@ -480,8 +479,8 @@ PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::PressureWaveFSIProblem()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Cast to the particular element type
-    FLUID_ELEMENT *el_pt =
-      dynamic_cast<FLUID_ELEMENT *>(Fluid_mesh_pt->element_pt(e));
+    FLUID_ELEMENT* el_pt =
+      dynamic_cast<FLUID_ELEMENT*>(Fluid_mesh_pt->element_pt(e));
 
     // There is no need for ALE
     el_pt->disable_ALE();
@@ -496,7 +495,7 @@ PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::PressureWaveFSIProblem()
     unsigned n_node = el_pt->nnode();
     for (unsigned n = 0; n < n_node; n++)
     {
-      Node *nod_pt = el_pt->node_pt(n);
+      Node* nod_pt = el_pt->node_pt(n);
       nod_pt->pin(2);
     }
   }
@@ -506,8 +505,8 @@ PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::PressureWaveFSIProblem()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Cast to a bulk element
-    SOLID_ELEMENT *el_pt =
-      dynamic_cast<SOLID_ELEMENT *>(Solid_mesh_pt->element_pt(e));
+    SOLID_ELEMENT* el_pt =
+      dynamic_cast<SOLID_ELEMENT*>(Solid_mesh_pt->element_pt(e));
 
     // Set the pointer to Poisson's ratio
     el_pt->nu_pt() = &Global_Physical_Variables::Nu;
@@ -522,7 +521,7 @@ PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::PressureWaveFSIProblem()
     unsigned n_node = el_pt->nnode();
     for (unsigned i_node = 0; i_node < n_node; i_node++)
     {
-      Node *nod_pt = el_pt->node_pt(i_node);
+      Node* nod_pt = el_pt->node_pt(i_node);
       nod_pt->pin(2);
     }
   } // end_loop_over_elements
@@ -544,7 +543,7 @@ PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::PressureWaveFSIProblem()
       unsigned n_boundary_node = Fluid_mesh_pt->nboundary_node(b);
       for (unsigned n = 0; n < n_boundary_node; ++n)
       {
-        Node *nod_pt = Fluid_mesh_pt->boundary_node_pt(b, n);
+        Node* nod_pt = Fluid_mesh_pt->boundary_node_pt(b, n);
         nod_pt->pin(0);
 
         // If node is also on FSI boundary it must be on in/outflow:
@@ -561,7 +560,7 @@ PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::PressureWaveFSIProblem()
       unsigned n_boundary_node = Fluid_mesh_pt->nboundary_node(b);
       for (unsigned n = 0; n < n_boundary_node; ++n)
       {
-        Node *nod_pt = Fluid_mesh_pt->boundary_node_pt(b, n);
+        Node* nod_pt = Fluid_mesh_pt->boundary_node_pt(b, n);
         nod_pt->pin(0);
         nod_pt->pin(1);
       }
@@ -594,20 +593,20 @@ PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::PressureWaveFSIProblem()
   {
     // Get face element
     LinearisedFSIAxisymmetricNStNoSlipBCElementElement<FLUID_ELEMENT,
-                                                       SOLID_ELEMENT>
-      *traction_element_pt = dynamic_cast<
+                                                       SOLID_ELEMENT>*
+      traction_element_pt = dynamic_cast<
         LinearisedFSIAxisymmetricNStNoSlipBCElementElement<FLUID_ELEMENT,
-                                                           SOLID_ELEMENT> *>(
+                                                           SOLID_ELEMENT>*>(
         FSI_fluid_surface_mesh_pt->element_pt(e));
 
     // Loop over nodes
     unsigned n_node = traction_element_pt->nnode();
     for (unsigned n = 0; n < n_node; n++)
     {
-      Node *nod_pt = traction_element_pt->node_pt(n);
+      Node* nod_pt = traction_element_pt->node_pt(n);
 
       // Cast to a boundary node
-      BoundaryNodeBase *bnod_pt = dynamic_cast<BoundaryNodeBase *>(nod_pt);
+      BoundaryNodeBase* bnod_pt = dynamic_cast<BoundaryNodeBase*>(nod_pt);
 
       // Get the index of the first nodal value associated with
       // this FaceElement
@@ -673,8 +672,9 @@ void PressureWaveFSIProblem<FLUID_ELEMENT,
 #ifdef DO_FSI
 
     // Create the face element
-    FSIAxisymmetricLinearElasticityTractionElement<SOLID_ELEMENT, FLUID_ELEMENT>
-      *traction_element_pt =
+    FSIAxisymmetricLinearElasticityTractionElement<SOLID_ELEMENT,
+                                                   FLUID_ELEMENT>*
+      traction_element_pt =
         new FSIAxisymmetricLinearElasticityTractionElement<SOLID_ELEMENT,
                                                            FLUID_ELEMENT>(
           Solid_mesh_pt->boundary_element_pt(bound, n),
@@ -693,8 +693,8 @@ void PressureWaveFSIProblem<FLUID_ELEMENT,
 #else
 
     // Create the face element
-    AxisymmetricLinearElasticityTractionElement<SOLID_ELEMENT>
-      *traction_element_pt =
+    AxisymmetricLinearElasticityTractionElement<SOLID_ELEMENT>*
+      traction_element_pt =
         new AxisymmetricLinearElasticityTractionElement<SOLID_ELEMENT>(
           Solid_mesh_pt->boundary_element_pt(bound, n),
           Solid_mesh_pt->face_index_at_boundary(bound, n));
@@ -717,8 +717,8 @@ void PressureWaveFSIProblem<FLUID_ELEMENT,
   for (unsigned n = 0; n < nel; n++)
   {
     // Create the face element
-    AxisymmetricLinearElasticityTractionElement<SOLID_ELEMENT>
-      *traction_element_pt =
+    AxisymmetricLinearElasticityTractionElement<SOLID_ELEMENT>*
+      traction_element_pt =
         new AxisymmetricLinearElasticityTractionElement<SOLID_ELEMENT>(
           Solid_mesh_pt->boundary_element_pt(bound, n),
           Solid_mesh_pt->face_index_at_boundary(bound, n));
@@ -747,8 +747,8 @@ void PressureWaveFSIProblem<FLUID_ELEMENT,
   for (unsigned e = 0; e < nel; e++)
   {
     // Create the face element
-    AxisymmetricNavierStokesTractionElement<FLUID_ELEMENT>
-      *traction_element_pt =
+    AxisymmetricNavierStokesTractionElement<FLUID_ELEMENT>*
+      traction_element_pt =
         new AxisymmetricNavierStokesTractionElement<FLUID_ELEMENT>(
           Fluid_mesh_pt->boundary_element_pt(bound, e),
           Fluid_mesh_pt->face_index_at_boundary(bound, e));
@@ -772,8 +772,8 @@ void PressureWaveFSIProblem<FLUID_ELEMENT,
 
     // Create the face element
     LinearisedFSIAxisymmetricNStNoSlipBCElementElement<FLUID_ELEMENT,
-                                                       SOLID_ELEMENT>
-      *traction_element_pt =
+                                                       SOLID_ELEMENT>*
+      traction_element_pt =
         new LinearisedFSIAxisymmetricNStNoSlipBCElementElement<FLUID_ELEMENT,
                                                                SOLID_ELEMENT>(
           Fluid_mesh_pt->boundary_element_pt(bound, e),
@@ -793,8 +793,8 @@ void PressureWaveFSIProblem<FLUID_ELEMENT,
 #else
 
     // Create the face element
-    AxisymmetricNavierStokesTractionElement<FLUID_ELEMENT>
-      *traction_element_pt =
+    AxisymmetricNavierStokesTractionElement<FLUID_ELEMENT>*
+      traction_element_pt =
         new AxisymmetricNavierStokesTractionElement<FLUID_ELEMENT>(
           Fluid_mesh_pt->boundary_element_pt(bound, e),
           Fluid_mesh_pt->face_index_at_boundary(bound, e));
@@ -838,7 +838,7 @@ void PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::setup_fsi()
 //==========================================================================
 template<class FLUID_ELEMENT, class SOLID_ELEMENT>
 void PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::doc_solution(
-  DocInfo &doc_info)
+  DocInfo& doc_info)
 {
   // Define a string that we can set to be the name of the output file
   char filename[100];
@@ -921,7 +921,7 @@ void PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::doc_solution(
   for (unsigned i = 0; i < npts; i++)
   {
     // Pointer to element
-    FLUID_ELEMENT *el_pt = Regularly_spaced_plot_point[i].first;
+    FLUID_ELEMENT* el_pt = Regularly_spaced_plot_point[i].first;
 
     // Coordinates in it
     s = Regularly_spaced_plot_point[i].second;
@@ -955,7 +955,7 @@ void PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::doc_solution(
 //================================================================
 // Driver code
 //================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

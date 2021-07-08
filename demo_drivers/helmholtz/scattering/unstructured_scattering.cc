@@ -80,7 +80,7 @@ namespace GlobalParameters
 
   /// \short Exact solution for scattered field
   /// (vector returns real and impaginary parts).
-  void get_exact_u(const Vector<double> &x, Vector<double> &u)
+  void get_exact_u(const Vector<double>& x, Vector<double>& u)
   {
     // Switch to polar coordinates
     double r;
@@ -153,7 +153,7 @@ namespace GlobalParameters
 
   /// \short Flux (normal derivative) on the unit disk
   /// for a planar incoming wave
-  void prescribed_incoming_flux(const Vector<double> &x, complex<double> &flux)
+  void prescribed_incoming_flux(const Vector<double>& x, complex<double>& flux)
   {
     // Switch to polar coordinates
     double r;
@@ -221,7 +221,7 @@ public:
 
   /// \short Doc the solution. DocInfo object stores flags/labels for where the
   /// output gets written to
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// \short Update the problem specs before solve (empty)
   void actions_before_newton_solve() {}
@@ -246,18 +246,18 @@ public:
 
   /// \short Create BC elements on boundary b of the Mesh pointed
   /// to by bulk_mesh_pt and add them to the specified survace Mesh
-  void create_outer_bc_elements(const unsigned &b,
-                                Mesh *const &bulk_mesh_pt,
-                                Mesh *const &helmholtz_outer_boundary_mesh_pt);
+  void create_outer_bc_elements(const unsigned& b,
+                                Mesh* const& bulk_mesh_pt,
+                                Mesh* const& helmholtz_outer_boundary_mesh_pt);
 
   /// \short Create Helmholtz flux elements on boundary b of the Mesh pointed
   /// to by bulk_mesh_pt and add them to the specified surface Mesh
-  void create_flux_elements(const unsigned &b,
-                            Mesh *const &bulk_mesh_pt,
-                            Mesh *const &helmholtz_inner_boundary_mesh_pt);
+  void create_flux_elements(const unsigned& b,
+                            Mesh* const& bulk_mesh_pt,
+                            Mesh* const& helmholtz_inner_boundary_mesh_pt);
 
   /// \short Delete boundary face elements and wipe the surface mesh
-  void delete_face_elements(Mesh *const &boundary_mesh_pt);
+  void delete_face_elements(Mesh* const& boundary_mesh_pt);
 
   /// \short Set pointer to prescribed-flux function for all
   /// elements in the surface mesh on the surface of the unit disk
@@ -269,22 +269,22 @@ public:
 #ifdef ADAPTIVE
 
   /// Pointer to the "bulk" mesh
-  RefineableTriangleMesh<ELEMENT> *Bulk_mesh_pt;
+  RefineableTriangleMesh<ELEMENT>* Bulk_mesh_pt;
 
 #else
 
   /// Pointer to the "bulk" mesh
-  TriangleMesh<ELEMENT> *Bulk_mesh_pt;
+  TriangleMesh<ELEMENT>* Bulk_mesh_pt;
 
 #endif
 
   /// \short Pointer to mesh containing the DtN (or ABC) boundary
   /// condition elements
-  HelmholtzDtNMesh<ELEMENT> *Helmholtz_outer_boundary_mesh_pt;
+  HelmholtzDtNMesh<ELEMENT>* Helmholtz_outer_boundary_mesh_pt;
 
   /// \short Pointer to the mesh containing
   /// the Helmholtz inner boundary condition elements
-  Mesh *Helmholtz_inner_boundary_mesh_pt;
+  Mesh* Helmholtz_inner_boundary_mesh_pt;
 
   /// Trace file
   ofstream Trace_file;
@@ -314,16 +314,16 @@ ScatteringProblem<ELEMENT>::ScatteringProblem()
   // Create circles representing inner and outer boundary
   double x_c = 0.0;
   double y_c = 0.0;
-  Circle *inner_circle_pt = new Circle(x_c, y_c, a);
-  Circle *outer_circle_pt =
+  Circle* inner_circle_pt = new Circle(x_c, y_c, a);
+  Circle* outer_circle_pt =
     new Circle(x_c, y_c, GlobalParameters::Outer_radius);
 
   // Outer boundary
   //---------------
-  TriangleMeshClosedCurve *outer_boundary_pt = 0;
+  TriangleMeshClosedCurve* outer_boundary_pt = 0;
 
   unsigned n_segments = 40;
-  Vector<TriangleMeshCurveSection *> outer_boundary_line_pt(2);
+  Vector<TriangleMeshCurveSection*> outer_boundary_line_pt(2);
 
   // The intrinsic coordinates for the beginning and end of the curve
   double s_start = 0.0;
@@ -344,7 +344,7 @@ ScatteringProblem<ELEMENT>::ScatteringProblem()
 
   // Inner circular boundary
   //------------------------
-  Vector<TriangleMeshCurveSection *> inner_boundary_line_pt(2);
+  Vector<TriangleMeshCurveSection*> inner_boundary_line_pt(2);
 
   // The intrinsic coordinates for the beginning and end of the curve
   s_start = 0.0;
@@ -362,7 +362,7 @@ ScatteringProblem<ELEMENT>::ScatteringProblem()
 
   // Combine to hole
   //----------------
-  Vector<TriangleMeshClosedCurve *> hole_pt(1);
+  Vector<TriangleMeshClosedCurve*> hole_pt(1);
   Vector<double> hole_coords(2);
   hole_coords[0] = 0.0;
   hole_coords[1] = 0.0;
@@ -432,7 +432,7 @@ ScatteringProblem<ELEMENT>::ScatteringProblem()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to Helmholtz bulk element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
     // Set the k_squared  pointer
     el_pt->k_squared_pt() = &GlobalParameters::K_squared;
@@ -479,7 +479,7 @@ void ScatteringProblem<ELEMENT>::actions_after_adapt()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to Helmholtz bulk element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
     // Set the k_squared  pointer
     el_pt->k_squared_pt() = &GlobalParameters::K_squared;
@@ -517,8 +517,8 @@ void ScatteringProblem<ELEMENT>::setup_outer_boundary()
     if (GlobalParameters::DtN_BC)
     {
       // Upcast from GeneralisedElement to Helmholtz flux element
-      HelmholtzDtNBoundaryElement<ELEMENT> *el_pt =
-        dynamic_cast<HelmholtzDtNBoundaryElement<ELEMENT> *>(
+      HelmholtzDtNBoundaryElement<ELEMENT>* el_pt =
+        dynamic_cast<HelmholtzDtNBoundaryElement<ELEMENT>*>(
           Helmholtz_outer_boundary_mesh_pt->element_pt(e));
 
       // Set pointer to the mesh that contains all the boundary condition
@@ -529,8 +529,8 @@ void ScatteringProblem<ELEMENT>::setup_outer_boundary()
     else
     {
       // Upcast from GeneralisedElement to appropriate type
-      HelmholtzAbsorbingBCElement<ELEMENT> *el_pt =
-        dynamic_cast<HelmholtzAbsorbingBCElement<ELEMENT> *>(
+      HelmholtzAbsorbingBCElement<ELEMENT>* el_pt =
+        dynamic_cast<HelmholtzAbsorbingBCElement<ELEMENT>*>(
           Helmholtz_outer_boundary_mesh_pt->element_pt(e));
 
       // Set pointer to outer radius of artificial boundary
@@ -555,8 +555,8 @@ void ScatteringProblem<ELEMENT>::set_prescribed_incoming_flux_pt()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to Helmholtz flux element
-    HelmholtzFluxElement<ELEMENT> *el_pt =
-      dynamic_cast<HelmholtzFluxElement<ELEMENT> *>(
+    HelmholtzFluxElement<ELEMENT>* el_pt =
+      dynamic_cast<HelmholtzFluxElement<ELEMENT>*>(
         Helmholtz_inner_boundary_mesh_pt->element_pt(e));
 
     // Set the pointer to the prescribed flux function
@@ -569,7 +569,7 @@ void ScatteringProblem<ELEMENT>::set_prescribed_incoming_flux_pt()
 /// Doc the solution: doc_info contains labels/output directory etc.
 //========================================================================
 template<class ELEMENT>
-void ScatteringProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void ScatteringProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file, some_file2;
   char filename[100];
@@ -593,8 +593,8 @@ void ScatteringProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
   unsigned nn_element = Helmholtz_outer_boundary_mesh_pt->nelement();
   for (unsigned e = 0; e < nn_element; e++)
   {
-    HelmholtzBCElementBase<ELEMENT> *el_pt =
-      dynamic_cast<HelmholtzBCElementBase<ELEMENT> *>(
+    HelmholtzBCElementBase<ELEMENT>* el_pt =
+      dynamic_cast<HelmholtzBCElementBase<ELEMENT>*>(
         Helmholtz_outer_boundary_mesh_pt->element_pt(e));
     power += el_pt->global_power_contribution(some_file);
   }
@@ -658,7 +658,7 @@ void ScatteringProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
     unsigned nelem = Bulk_mesh_pt->nelement();
     for (unsigned e = 0; e < nelem; e++)
     {
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
       el_pt->output_real(some_file, phi, npts);
       el_pt->output_real_fct(
         some_file2, phi, npts, GlobalParameters::get_exact_u);
@@ -676,23 +676,23 @@ void ScatteringProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
 //============================================================================
 template<class ELEMENT>
 void ScatteringProblem<ELEMENT>::create_flux_elements(
-  const unsigned &b,
-  Mesh *const &bulk_mesh_pt,
-  Mesh *const &helmholtz_inner_boundary_mesh_pt)
+  const unsigned& b,
+  Mesh* const& bulk_mesh_pt,
+  Mesh* const& helmholtz_inner_boundary_mesh_pt)
 {
   // Loop over the bulk elements adjacent to boundary b
   unsigned n_element = bulk_mesh_pt->nboundary_element(b);
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    ELEMENT *bulk_elem_pt =
-      dynamic_cast<ELEMENT *>(bulk_mesh_pt->boundary_element_pt(b, e));
+    ELEMENT* bulk_elem_pt =
+      dynamic_cast<ELEMENT*>(bulk_mesh_pt->boundary_element_pt(b, e));
 
     // Find the index of the face of element e along boundary b
     int face_index = bulk_mesh_pt->face_index_at_boundary(b, e);
 
     // Build the corresponding prescribed incoming-flux element
-    HelmholtzFluxElement<ELEMENT> *flux_element_pt =
+    HelmholtzFluxElement<ELEMENT>* flux_element_pt =
       new HelmholtzFluxElement<ELEMENT>(bulk_elem_pt, face_index);
 
     // Add the prescribed incoming-flux element to the surface mesh
@@ -709,17 +709,17 @@ void ScatteringProblem<ELEMENT>::create_flux_elements(
 //===========================================================================
 template<class ELEMENT>
 void ScatteringProblem<ELEMENT>::create_outer_bc_elements(
-  const unsigned &b,
-  Mesh *const &bulk_mesh_pt,
-  Mesh *const &helmholtz_outer_boundary_mesh_pt)
+  const unsigned& b,
+  Mesh* const& bulk_mesh_pt,
+  Mesh* const& helmholtz_outer_boundary_mesh_pt)
 {
   // Loop over the bulk elements adjacent to boundary b?
   unsigned n_element = bulk_mesh_pt->nboundary_element(b);
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    ELEMENT *bulk_elem_pt =
-      dynamic_cast<ELEMENT *>(bulk_mesh_pt->boundary_element_pt(b, e));
+    ELEMENT* bulk_elem_pt =
+      dynamic_cast<ELEMENT*>(bulk_mesh_pt->boundary_element_pt(b, e));
 
     // Find the index of the face of element e along boundary b
     int face_index = bulk_mesh_pt->face_index_at_boundary(b, e);
@@ -729,7 +729,7 @@ void ScatteringProblem<ELEMENT>::create_outer_bc_elements(
     // Dirichlet to Neumann boundary conditon
     if (GlobalParameters::DtN_BC)
     {
-      HelmholtzDtNBoundaryElement<ELEMENT> *flux_element_pt =
+      HelmholtzDtNBoundaryElement<ELEMENT>* flux_element_pt =
         new HelmholtzDtNBoundaryElement<ELEMENT>(bulk_elem_pt, face_index);
 
       // Add the flux boundary element to the  helmholtz_outer_boundary_mesh
@@ -738,7 +738,7 @@ void ScatteringProblem<ELEMENT>::create_outer_bc_elements(
     //  ABCs BC
     else
     {
-      HelmholtzAbsorbingBCElement<ELEMENT> *flux_element_pt =
+      HelmholtzAbsorbingBCElement<ELEMENT>* flux_element_pt =
         new HelmholtzAbsorbingBCElement<ELEMENT>(bulk_elem_pt, face_index);
 
       // Add the flux boundary element to the  helmholtz_outer_boundary_mesh
@@ -752,7 +752,7 @@ void ScatteringProblem<ELEMENT>::create_outer_bc_elements(
 //==========================================================
 template<class ELEMENT>
 void ScatteringProblem<ELEMENT>::delete_face_elements(
-  Mesh *const &boundary_mesh_pt)
+  Mesh* const& boundary_mesh_pt)
 {
   // Loop over the surface elements
   unsigned n_element = boundary_mesh_pt->nelement();
@@ -771,7 +771,7 @@ void ScatteringProblem<ELEMENT>::delete_face_elements(
 /// Solve 2D Helmholtz problem for scattering of a planar wave from a
 /// unit disk
 //========================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

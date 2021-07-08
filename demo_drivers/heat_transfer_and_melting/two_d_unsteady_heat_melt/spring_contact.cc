@@ -54,7 +54,7 @@ namespace GlobalFct
   unsigned N_primary = 1;
 
   /// Reset unknowns to some nontrivial garbage
-  void reset(Vector<double> &unknowns)
+  void reset(Vector<double>& unknowns)
   {
     unsigned n = N_primary * 2;
     unknowns.resize(n);
@@ -65,9 +65,9 @@ namespace GlobalFct
   }
 
   /// Global residual fct
-  void get_residuals(const Vector<double> &param,
-                     const Vector<double> &unknowns,
-                     Vector<double> &residuals)
+  void get_residuals(const Vector<double>& param,
+                     const Vector<double>& unknowns,
+                     Vector<double>& residuals)
   {
     // Loop over primary unknowns
     for (unsigned j = 0; j < N_primary; j++)
@@ -188,7 +188,7 @@ namespace GlobalFct
   }
 
   /// Set unknowns to spurious solution
-  void set_spurious_solution(Vector<double> &unknowns)
+  void set_spurious_solution(Vector<double>& unknowns)
   {
     Force = 100.0;
     N_primary = 1;
@@ -251,7 +251,7 @@ namespace GlobalFct
 //==start_of_main======================================================
 ///
 //=====================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

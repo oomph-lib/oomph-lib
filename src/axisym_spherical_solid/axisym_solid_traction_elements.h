@@ -58,17 +58,17 @@ namespace oomph
   {
   private:
     /// Pointer to an imposed traction function
-    void (*Traction_fct_pt)(const double &time,
-                            const Vector<double> &x,
-                            const Vector<double> &n,
-                            Vector<double> &result);
+    void (*Traction_fct_pt)(const double& time,
+                            const Vector<double>& x,
+                            const Vector<double>& n,
+                            Vector<double>& result);
 
   protected:
     /// Return the surface traction force
-    void get_traction(const double &time,
-                      const Vector<double> &x,
-                      const Vector<double> &n,
-                      Vector<double> &result) const
+    void get_traction(const double& time,
+                      const Vector<double>& x,
+                      const Vector<double>& n,
+                      Vector<double>& result) const
     {
       // If the function pointer is zero return zero
       if (Traction_fct_pt == 0)
@@ -90,8 +90,8 @@ namespace oomph
   public:
     /// \short Constructor, which takes a "bulk" element and
     /// the value of the index and its limit
-    AxisymmetricSolidTractionElement(FiniteElement *const &element_pt,
-                                     const int &face_index) :
+    AxisymmetricSolidTractionElement(FiniteElement* const& element_pt,
+                                     const int& face_index) :
       FaceGeometry<ELEMENT>(), FaceElement()
     {
       // Attach the geometrical information to the element. N.B. This function
@@ -103,20 +103,20 @@ namespace oomph
     }
 
     /// Return the imposed traction pointer
-    void (*&traction_fct_pt())(const double &,
-                               const Vector<double> &,
-                               const Vector<double> &,
-                               Vector<double> &)
+    void (*&traction_fct_pt())(const double&,
+                               const Vector<double>&,
+                               const Vector<double>&,
+                               Vector<double>&)
     {
       return Traction_fct_pt;
     }
 
     /// Return the residuals
-    void fill_in_contribution_to_residuals(Vector<double> &residuals);
+    void fill_in_contribution_to_residuals(Vector<double>& residuals);
 
     /// Return the jacobian
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       fill_in_contribution_to_residuals(residuals);
       // Call the generic FD jacobian calculation
@@ -125,25 +125,25 @@ namespace oomph
     }
 
     /// Overload the output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       FiniteElement::output(outfile);
     }
 
     /// Output function: x,y,[z],u,v,[w],p in tecplot format
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       FiniteElement::output(outfile, n_plot);
     }
 
     /// Overload the output function
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
 
     /// Output function: x,y,[z],u,v,[w],p in tecplot format
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       FiniteElement::output(file_pt, n_plot);
     }
@@ -158,7 +158,7 @@ namespace oomph
   //=======================================================================
   template<class ELEMENT>
   void AxisymmetricSolidTractionElement<
-    ELEMENT>::fill_in_contribution_to_residuals(Vector<double> &residuals)
+    ELEMENT>::fill_in_contribution_to_residuals(Vector<double>& residuals)
   {
     // Find out how many nodes there are
     unsigned n_node = nnode();

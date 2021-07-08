@@ -107,9 +107,9 @@ namespace GlobalParameters
 
   /// \short Value of the solution on the boundary of the obstacle (here
   /// we assume the solution is a plane wave incident at angle alpha)
-  void get_exact_u(const Vector<double> &x,
-                   Vector<double> &u,
-                   const double &alpha = 0.25 * MathematicalConstants::Pi)
+  void get_exact_u(const Vector<double>& x,
+                   Vector<double>& u,
+                   const double& alpha = 0.25 * MathematicalConstants::Pi)
   {
     // Set the first entry
     u[0] = -cos(Wavenumber * (x[0] * cos(alpha) + x[1] * sin(alpha)));
@@ -125,7 +125,7 @@ namespace GlobalParameters
   // or equivalently, G=(1/4)*Y_0(kr)-(i/4)*J_0(kr), where
   // J_0 is the Bessel function of the first kind and Y_0 is the
   // Bessel function of the second kind
-  void get_exact_u_bessel(const Vector<double> &x, Vector<double> &u)
+  void get_exact_u_bessel(const Vector<double>& x, Vector<double>& u)
   {
     // The radius in polar coordinates
     double r;
@@ -176,7 +176,7 @@ namespace GlobalParameters
 
   /// \short Default value of the solution on the boundary of the obstacle.
   /// This represents a Bessel solution
-  void default_get_exact_u(const Vector<double> &x, Vector<double> &u)
+  void default_get_exact_u(const Vector<double>& x, Vector<double>& u)
   {
     // Set the first entry
     u[0] = 0.1;
@@ -241,7 +241,7 @@ namespace GlobalParameters
   DocInfo Doc_info;
 
   // Pointer to the output stream -- defaults to std::cout
-  std::ostream *Stream_pt;
+  std::ostream* Stream_pt;
 
   /// \short New mapping function that makes the mapping independent of the
   /// PML thickness
@@ -253,10 +253,10 @@ namespace GlobalParameters
 
     /// \short Overwrite the pure PML mapping coefficient function to return the
     /// coeffcients proposed by Bermudez et al
-    std::complex<double> gamma(const double &nu_i,
-                               const double &pml_width_i,
-                               const double &k_squared_local,
-                               const double &alpha_shift)
+    std::complex<double> gamma(const double& nu_i,
+                               const double& pml_width_i,
+                               const double& k_squared_local,
+                               const double& alpha_shift)
     {
       // If we're disabling PMLs
       if (!Disable_pml_flag)
@@ -279,7 +279,7 @@ namespace GlobalParameters
   }; // End of TestPMLMapping
 
   /// Set the new PML mapping
-  TestPMLMapping *Test_pml_mapping_pt = new TestPMLMapping;
+  TestPMLMapping* Test_pml_mapping_pt = new TestPMLMapping;
 } // namespace GlobalParameters
 
 //////////////////////////////////////////////////////////////////////////
@@ -296,7 +296,7 @@ namespace Smoother_Factory_Function_Helper
 
   /// \short Returns a pointer to a Smoother object which is to be used as
   /// the pre-smoother
-  HelmholtzSmoother *set_pre_smoother()
+  HelmholtzSmoother* set_pre_smoother()
   {
     // Create a new DampedJacobi object
     return new ComplexDampedJacobi<CRDoubleMatrix>(Omega);
@@ -304,7 +304,7 @@ namespace Smoother_Factory_Function_Helper
 
   /// \short Returns a pointer to a Smoother object which is to be used as
   /// the post-smoother
-  HelmholtzSmoother *set_post_smoother()
+  HelmholtzSmoother* set_post_smoother()
   {
     // Create a new DampedJacobi object
     return new ComplexDampedJacobi<CRDoubleMatrix>(Omega);
@@ -360,10 +360,10 @@ public:
 
 private:
   /// Pointer to the refineable "bulk" mesh
-  RefineableQuadFromTriangleMesh<ELEMENT> *Bulk_mesh_pt;
+  RefineableQuadFromTriangleMesh<ELEMENT>* Bulk_mesh_pt;
 
   /// Overload the make_new_problem function to return an object of this class
-  HelmholtzMGProblem *make_new_problem()
+  HelmholtzMGProblem* make_new_problem()
   {
     // Return a new problem pointer
     return new PMLHelmholtzMGProblem<ELEMENT>;
@@ -371,35 +371,35 @@ private:
 
   /// \short Overload the mg_bulk_mesh_pt function to return a pointer to the
   /// "refineable" portion of the mesh
-  TreeBasedRefineableMeshBase *mg_bulk_mesh_pt()
+  TreeBasedRefineableMeshBase* mg_bulk_mesh_pt()
   {
     // Return the pointer to the bulk mesh
     return Bulk_mesh_pt;
   }
 
   /// Pointer to the right PML mesh
-  Mesh *PML_right_mesh_pt;
+  Mesh* PML_right_mesh_pt;
 
   /// Pointer to the top PML mesh
-  Mesh *PML_top_mesh_pt;
+  Mesh* PML_top_mesh_pt;
 
   /// Pointer to the left PML mesh
-  Mesh *PML_left_mesh_pt;
+  Mesh* PML_left_mesh_pt;
 
   /// Pointer to the bottom PML mesh
-  Mesh *PML_bottom_mesh_pt;
+  Mesh* PML_bottom_mesh_pt;
 
   /// Pointer to the top right corner PML mesh
-  Mesh *PML_top_right_mesh_pt;
+  Mesh* PML_top_right_mesh_pt;
 
   /// Pointer to the top left corner PML mesh
-  Mesh *PML_top_left_mesh_pt;
+  Mesh* PML_top_left_mesh_pt;
 
   /// Pointer to the bottom right corner PML mesh
-  Mesh *PML_bottom_right_mesh_pt;
+  Mesh* PML_bottom_right_mesh_pt;
 
   /// Pointer to the bottom left corner PML mesh
-  Mesh *PML_bottom_left_mesh_pt;
+  Mesh* PML_bottom_left_mesh_pt;
 
   /// Trace file
   ofstream Trace_file;
@@ -414,9 +414,9 @@ PMLHelmholtzMGProblem<ELEMENT>::PMLHelmholtzMGProblem()
 {
   // Create boundary information: Outer boundary
   //--------------------------------------------
-  TriangleMeshClosedCurve *outer_boundary_pt = 0;
+  TriangleMeshClosedCurve* outer_boundary_pt = 0;
 
-  Vector<TriangleMeshCurveSection *> outer_boundary_line_pt(4);
+  Vector<TriangleMeshCurveSection*> outer_boundary_line_pt(4);
 
   // Each polyline only has three vertices, provide storage for their
   // coordinates
@@ -483,10 +483,10 @@ PMLHelmholtzMGProblem<ELEMENT>::PMLHelmholtzMGProblem()
   double a = 0.1128;
   double x_c = GlobalParameters::Centre;
   double y_c = GlobalParameters::Centre;
-  Circle *inner_circle_pt = new Circle(x_c, y_c, a);
+  Circle* inner_circle_pt = new Circle(x_c, y_c, a);
 
   // Create storage for curves which will represent the obstacle
-  Vector<TriangleMeshCurveSection *> inner_boundary_line_pt(2);
+  Vector<TriangleMeshCurveSection*> inner_boundary_line_pt(2);
 
   // # of segments for each curve (defining the obstacle in the coarsest mesh)
   unsigned n_segments = GlobalParameters::N_boundary_segment;
@@ -507,7 +507,7 @@ PMLHelmholtzMGProblem<ELEMENT>::PMLHelmholtzMGProblem()
 
   // Combine to hole
   //----------------
-  Vector<TriangleMeshClosedCurve *> hole_pt(1);
+  Vector<TriangleMeshClosedCurve*> hole_pt(1);
   Vector<double> hole_coords(2);
   hole_coords[0] = GlobalParameters::Centre;
   hole_coords[1] = GlobalParameters::Centre;
@@ -562,8 +562,8 @@ PMLHelmholtzMGProblem<ELEMENT>::PMLHelmholtzMGProblem()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to Helmholtz bulk element
-    PMLHelmholtzEquations<2> *el_pt =
-      dynamic_cast<PMLHelmholtzEquations<2> *>(mesh_pt()->element_pt(e));
+    PMLHelmholtzEquations<2>* el_pt =
+      dynamic_cast<PMLHelmholtzEquations<2>*>(mesh_pt()->element_pt(e));
 
     // Set the k_squared double pointer
     el_pt->k_squared_pt() = &GlobalParameters::K_squared;
@@ -579,7 +579,7 @@ PMLHelmholtzMGProblem<ELEMENT>::PMLHelmholtzMGProblem()
     if (GlobalParameters::Disable_pml_flag)
     {
       // Disable the PML-ification in these layers
-      dynamic_cast<PMLHelmholtzEquations<2> *>(mesh_pt()->element_pt(e))
+      dynamic_cast<PMLHelmholtzEquations<2>*>(mesh_pt()->element_pt(e))
         ->disable_pml();
     }
   } // for(unsigned e=0;e<n_element;e++)
@@ -620,11 +620,11 @@ PMLHelmholtzMGProblem<ELEMENT>::~PMLHelmholtzMGProblem()
   if (GlobalParameters::Linear_solver_flag == 1)
   {
     // Delete the MG solver pointers
-    delete dynamic_cast<HelmholtzGMRESMG<CRDoubleMatrix> *>(linear_solver_pt())
+    delete dynamic_cast<HelmholtzGMRESMG<CRDoubleMatrix>*>(linear_solver_pt())
       ->preconditioner_pt();
 
     // Set the pointer to null
-    dynamic_cast<HelmholtzGMRESMG<CRDoubleMatrix> *>(linear_solver_pt())
+    dynamic_cast<HelmholtzGMRESMG<CRDoubleMatrix>*>(linear_solver_pt())
       ->preconditioner_pt() = 0;
 
     // Delete the MG solver pointers
@@ -655,7 +655,7 @@ template<class ELEMENT>
 void PMLHelmholtzMGProblem<ELEMENT>::set_gmres_multigrid_solver()
 {
   // Create linear solver
-  HelmholtzGMRESMG<CRDoubleMatrix> *solver_pt =
+  HelmholtzGMRESMG<CRDoubleMatrix>* solver_pt =
     new HelmholtzGMRESMG<CRDoubleMatrix>;
 
   // Use RHS preconditioning
@@ -679,7 +679,7 @@ void PMLHelmholtzMGProblem<ELEMENT>::set_gmres_multigrid_solver()
 
   // This preconditioner uses multigrid on the block version of the full
   // matrix. 2 V-cycles will be used here per preconditioning step
-  HelmholtzMGPreconditioner<2> *prec_pt =
+  HelmholtzMGPreconditioner<2>* prec_pt =
     new HelmholtzMGPreconditioner<2>(this);
 
   // Set preconditioner
@@ -791,8 +791,8 @@ void PMLHelmholtzMGProblem<ELEMENT>::actions_after_adapt()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to PMLHelmholtz bulk element
-    PMLHelmholtzEquations<2> *el_pt =
-      dynamic_cast<PMLHelmholtzEquations<2> *>(mesh_pt()->element_pt(e));
+    PMLHelmholtzEquations<2>* el_pt =
+      dynamic_cast<PMLHelmholtzEquations<2>*>(mesh_pt()->element_pt(e));
 
     // Set the frequency function pointer
     el_pt->k_squared_pt() = &GlobalParameters::K_squared;
@@ -808,7 +808,7 @@ void PMLHelmholtzMGProblem<ELEMENT>::actions_after_adapt()
     if (GlobalParameters::Disable_pml_flag)
     {
       // Disable the PML-ification in these layers
-      dynamic_cast<PMLHelmholtzEquations<2> *>(mesh_pt()->element_pt(e))
+      dynamic_cast<PMLHelmholtzEquations<2>*>(mesh_pt()->element_pt(e))
         ->disable_pml();
     }
   } // for(unsigned e=0;e<n_element;e++)
@@ -847,7 +847,7 @@ void PMLHelmholtzMGProblem<ELEMENT>::apply_boundary_conditions()
       // the circle has been broken up into two semi-circle boundaries)
       if ((0 == b) || (1 == b))
       {
-        Node *nod_pt = Bulk_mesh_pt->boundary_node_pt(b, n);
+        Node* nod_pt = Bulk_mesh_pt->boundary_node_pt(b, n);
         nod_pt->pin(0);
         nod_pt->pin(1);
 
@@ -881,7 +881,7 @@ void PMLHelmholtzMGProblem<ELEMENT>::apply_boundary_conditions()
       for (unsigned n = 0; n < n_node; n++)
       {
         // Grab the n-th node on the b-th boundary
-        Node *nod_pt = Bulk_mesh_pt->boundary_node_pt(b, n);
+        Node* nod_pt = Bulk_mesh_pt->boundary_node_pt(b, n);
 
         // Pin the first dof at this node
         nod_pt->pin(0);
@@ -1100,7 +1100,7 @@ void PMLHelmholtzMGProblem<ELEMENT>::create_pml_meshes()
 //==========start_of_main=================================================
 /// Solve 2D Helmholtz problem
 //========================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   //------------------------
   // Command line arguments
@@ -1203,7 +1203,7 @@ int main(int argc, char **argv)
   // Set up the problem
   //-------------------
   // Initialise a null pointer to the class Problem
-  Problem *problem_pt = 0;
+  Problem* problem_pt = 0;
 
   // Set the problem pointer depending on the input (defaulted to nnode_1d=2)
   if (GlobalParameters::Nnode_1d == 2)

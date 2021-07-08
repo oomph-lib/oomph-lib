@@ -78,7 +78,7 @@ namespace GlobalParameters
 
   /// \short Exact solution for scattered field
   /// (vector returns real and impaginary parts).
-  void get_exact_u(const Vector<double> &x, Vector<double> &u)
+  void get_exact_u(const Vector<double>& x, Vector<double>& u)
   {
     // Switch to polar coordinates
     double r;
@@ -151,7 +151,7 @@ namespace GlobalParameters
 
   /// \short Flux (normal derivative) on the unit disk
   /// for a planar incoming wave
-  void prescribed_incoming_flux(const Vector<double> &x, complex<double> &flux)
+  void prescribed_incoming_flux(const Vector<double>& x, complex<double>& flux)
   {
     // Switch to polar coordinates
     double r;
@@ -206,10 +206,10 @@ namespace GlobalParameters
 
     /// \short Overwrite the pure PML mapping coefficient function to return the
     /// coeffcients proposed by Bermudez et al
-    std::complex<double> gamma(const double &nu_i,
-                               const double &pml_width_i,
-                               const double &k_squared_local,
-                               const double &alpha_shift = 0.0)
+    std::complex<double> gamma(const double& nu_i,
+                               const double& pml_width_i,
+                               const double& k_squared_local,
+                               const double& alpha_shift = 0.0)
     {
       // (return) gamma = 1 + (1/k) * (i/|outer_boundary - x|)
       /*return 1.0 + (1.0 / std::complex<double> (sqrt(k_squared_local), 0))
@@ -221,7 +221,7 @@ namespace GlobalParameters
     }
   };
 
-  TestPMLMapping *Test_pml_mapping_pt = new TestPMLMapping;
+  TestPMLMapping* Test_pml_mapping_pt = new TestPMLMapping;
 
 } // namespace GlobalParameters
 
@@ -251,22 +251,22 @@ public:
 
   /// \short Doc the solution. DocInfo object stores flags/labels for where the
   /// output gets written to
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// Create PML meshes
   void create_pml_meshes();
 
   /// \short Create Helmholtz flux elements on boundary b of the Mesh pointed
   /// to by bulk_mesh_pt and add them to the specified surface Mesh
-  void create_flux_elements(const unsigned &b,
-                            Mesh *const &bulk_mesh_pt,
-                            Mesh *const &helmholtz_inner_boundary_mesh_pt);
+  void create_flux_elements(const unsigned& b,
+                            Mesh* const& bulk_mesh_pt,
+                            Mesh* const& helmholtz_inner_boundary_mesh_pt);
 
   /// \short Create Helmholtz power elements on boundary b of the Mesh pointed
   /// to by bulk_mesh_pt and add them to the specified surface Mesh
-  void create_power_elements(const unsigned &b,
-                             Mesh *const &bulk_mesh_pt,
-                             Mesh *const &helmholtz_power_boundary_mesh_pt);
+  void create_power_elements(const unsigned& b,
+                             Mesh* const& bulk_mesh_pt,
+                             Mesh* const& helmholtz_power_boundary_mesh_pt);
 
 #ifdef ADAPTIVE
 
@@ -282,46 +282,46 @@ public:
 
 private:
   /// Pointer to the refineable "bulk" mesh
-  RefineableTriangleMesh<ELEMENT> *Bulk_mesh_pt;
+  RefineableTriangleMesh<ELEMENT>* Bulk_mesh_pt;
 
 #else
 
 private:
   /// Pointer to the "bulk" mesh
-  TriangleMesh<ELEMENT> *Bulk_mesh_pt;
+  TriangleMesh<ELEMENT>* Bulk_mesh_pt;
 
 #endif
 
   /// Pointer to the right PML mesh
-  Mesh *PML_right_mesh_pt;
+  Mesh* PML_right_mesh_pt;
 
   /// Pointer to the top PML mesh
-  Mesh *PML_top_mesh_pt;
+  Mesh* PML_top_mesh_pt;
 
   /// Pointer to the left PML mesh
-  Mesh *PML_left_mesh_pt;
+  Mesh* PML_left_mesh_pt;
 
   /// Pointer to the bottom PML mesh
-  Mesh *PML_bottom_mesh_pt;
+  Mesh* PML_bottom_mesh_pt;
 
   /// Pointer to the top right corner PML mesh
-  Mesh *PML_top_right_mesh_pt;
+  Mesh* PML_top_right_mesh_pt;
 
   /// Pointer to the top left corner PML mesh
-  Mesh *PML_top_left_mesh_pt;
+  Mesh* PML_top_left_mesh_pt;
 
   /// Pointer to the bottom right corner PML mesh
-  Mesh *PML_bottom_right_mesh_pt;
+  Mesh* PML_bottom_right_mesh_pt;
 
   /// Pointer to the bottom left corner PML mesh
-  Mesh *PML_bottom_left_mesh_pt;
+  Mesh* PML_bottom_left_mesh_pt;
 
   /// \short Pointer to the mesh containing
   /// the Helmholtz inner boundary condition elements
-  Mesh *Helmholtz_inner_boundary_mesh_pt;
+  Mesh* Helmholtz_inner_boundary_mesh_pt;
 
   /// Pointer to mesh of elements that compute the radiated power
-  Mesh *Helmholtz_power_boundary_mesh_pt;
+  Mesh* Helmholtz_power_boundary_mesh_pt;
 
   /// Trace file
   ofstream Trace_file;
@@ -341,14 +341,14 @@ PMLProblem<ELEMENT>::PMLProblem()
   double a = 1.0;
   double x_c = 0.0;
   double y_c = 0.0;
-  Circle *inner_circle_pt = new Circle(x_c, y_c, a);
+  Circle* inner_circle_pt = new Circle(x_c, y_c, a);
 
   // Outer boundary
   //---------------
-  TriangleMeshClosedCurve *outer_boundary_pt = 0;
+  TriangleMeshClosedCurve* outer_boundary_pt = 0;
 
   unsigned n_segments = 20;
-  Vector<TriangleMeshCurveSection *> outer_boundary_line_pt(4);
+  Vector<TriangleMeshCurveSection*> outer_boundary_line_pt(4);
 
   // Each polyline only has three vertices, provide storage for their
   // coordinates
@@ -407,7 +407,7 @@ PMLProblem<ELEMENT>::PMLProblem()
 
   // Inner circular boundary
   //------------------------
-  Vector<TriangleMeshCurveSection *> inner_boundary_line_pt(2);
+  Vector<TriangleMeshCurveSection*> inner_boundary_line_pt(2);
 
   // The intrinsic coordinates for the beginning and end of the curve
   double s_start = 0.0;
@@ -425,7 +425,7 @@ PMLProblem<ELEMENT>::PMLProblem()
 
   // Combine to hole
   //----------------
-  Vector<TriangleMeshClosedCurve *> hole_pt(1);
+  Vector<TriangleMeshClosedCurve*> hole_pt(1);
   Vector<double> hole_coords(2);
   hole_coords[0] = 0.0;
   hole_coords[1] = 0.0;
@@ -496,8 +496,8 @@ PMLProblem<ELEMENT>::PMLProblem()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to Pml Helmholtz bulk element
-    PMLHelmholtzEquations<2> *el_pt =
-      dynamic_cast<PMLHelmholtzEquations<2> *>(mesh_pt()->element_pt(e));
+    PMLHelmholtzEquations<2>* el_pt =
+      dynamic_cast<PMLHelmholtzEquations<2>*>(mesh_pt()->element_pt(e));
 
     if (el_pt != 0)
     {
@@ -574,8 +574,8 @@ void PMLProblem<ELEMENT>::actions_after_adapt()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to PMLHelmholtz bulk element
-    PMLHelmholtzEquations<2> *el_pt =
-      dynamic_cast<PMLHelmholtzEquations<2> *>(mesh_pt()->element_pt(e));
+    PMLHelmholtzEquations<2>* el_pt =
+      dynamic_cast<PMLHelmholtzEquations<2>*>(mesh_pt()->element_pt(e));
 
     if (el_pt != 0)
     {
@@ -609,7 +609,7 @@ void PMLProblem<ELEMENT>::actions_after_adapt()
 /// Doc the solution: doc_info contains labels/output directory etc.
 //========================================================================
 template<class ELEMENT>
-void PMLProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void PMLProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file, some_file2;
   char filename[100];
@@ -631,8 +631,8 @@ void PMLProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
   unsigned nn_element = Helmholtz_power_boundary_mesh_pt->nelement();
   for (unsigned e = 0; e < nn_element; e++)
   {
-    PMLHelmholtzPowerElement<ELEMENT> *el_pt =
-      dynamic_cast<PMLHelmholtzPowerElement<ELEMENT> *>(
+    PMLHelmholtzPowerElement<ELEMENT>* el_pt =
+      dynamic_cast<PMLHelmholtzPowerElement<ELEMENT>*>(
         Helmholtz_power_boundary_mesh_pt->element_pt(e));
     power += el_pt->global_power_contribution(some_file);
   }
@@ -722,23 +722,23 @@ void PMLProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
 //============================================================================
 template<class ELEMENT>
 void PMLProblem<ELEMENT>::create_flux_elements(
-  const unsigned &b,
-  Mesh *const &bulk_mesh_pt,
-  Mesh *const &helmholtz_inner_boundary_mesh_pt)
+  const unsigned& b,
+  Mesh* const& bulk_mesh_pt,
+  Mesh* const& helmholtz_inner_boundary_mesh_pt)
 {
   // Loop over the bulk elements adjacent to boundary b
   unsigned n_element = bulk_mesh_pt->nboundary_element(b);
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    ELEMENT *bulk_elem_pt =
-      dynamic_cast<ELEMENT *>(bulk_mesh_pt->boundary_element_pt(b, e));
+    ELEMENT* bulk_elem_pt =
+      dynamic_cast<ELEMENT*>(bulk_mesh_pt->boundary_element_pt(b, e));
 
     // Find the index of the face of element e along boundary b
     int face_index = bulk_mesh_pt->face_index_at_boundary(b, e);
 
     // Build the corresponding prescribed incoming-flux element
-    PMLHelmholtzFluxElement<ELEMENT> *flux_element_pt =
+    PMLHelmholtzFluxElement<ELEMENT>* flux_element_pt =
       new PMLHelmholtzFluxElement<ELEMENT>(bulk_elem_pt, face_index);
 
     // Add the prescribed incoming-flux element to the surface mesh
@@ -759,23 +759,23 @@ void PMLProblem<ELEMENT>::create_flux_elements(
 //============================================================================
 template<class ELEMENT>
 void PMLProblem<ELEMENT>::create_power_elements(
-  const unsigned &b,
-  Mesh *const &bulk_mesh_pt,
-  Mesh *const &helmholtz_power_boundary_mesh_pt)
+  const unsigned& b,
+  Mesh* const& bulk_mesh_pt,
+  Mesh* const& helmholtz_power_boundary_mesh_pt)
 {
   // Loop over the bulk elements adjacent to boundary b
   unsigned n_element = bulk_mesh_pt->nboundary_element(b);
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    ELEMENT *bulk_elem_pt =
-      dynamic_cast<ELEMENT *>(bulk_mesh_pt->boundary_element_pt(b, e));
+    ELEMENT* bulk_elem_pt =
+      dynamic_cast<ELEMENT*>(bulk_mesh_pt->boundary_element_pt(b, e));
 
     // Find the index of the face of element e along boundary b
     int face_index = bulk_mesh_pt->face_index_at_boundary(b, e);
 
     // Build the corresponding prescribed power element
-    PMLHelmholtzPowerElement<ELEMENT> *power_element_pt =
+    PMLHelmholtzPowerElement<ELEMENT>* power_element_pt =
       new PMLHelmholtzPowerElement<ELEMENT>(bulk_elem_pt, face_index);
 
     // Add the prescribed power element to the surface mesh
@@ -873,7 +873,7 @@ void PMLProblem<ELEMENT>::create_pml_meshes()
 //==========start_of_main=================================================
 /// Solve 2D Helmholtz problem
 //========================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Set up the problem
   //------------------

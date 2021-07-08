@@ -48,27 +48,27 @@ namespace oomph
   /// to Steady.
   //=================================================================
   template<class ELEMENT>
-  void BackwardStepQuadMesh<ELEMENT>::build_mesh(const unsigned &nx,
-                                                 const unsigned &ny,
-                                                 const unsigned &nx_cut_out,
-                                                 const unsigned &ny_cut_out,
-                                                 const double &lx,
-                                                 const double &ly)
+  void BackwardStepQuadMesh<ELEMENT>::build_mesh(const unsigned& nx,
+                                                 const unsigned& ny,
+                                                 const unsigned& nx_cut_out,
+                                                 const unsigned& ny_cut_out,
+                                                 const double& lx,
+                                                 const double& ly)
   {
     // Mesh can only be built with 2D Qelements.
     MeshChecker::assert_geometric_element<QElementGeometricBase, ELEMENT>(2);
 
     // By default nobody's claiming any nodes
-    std::map<Node *, bool> keep;
+    std::map<Node*, bool> keep;
 
     // Get elements outside lower right block
-    Vector<FiniteElement *> el_retained_pt;
-    Vector<FiniteElement *> el_killed_pt;
+    Vector<FiniteElement*> el_retained_pt;
+    Vector<FiniteElement*> el_killed_pt;
     for (unsigned i = 0; i < nx; i++)
     {
       for (unsigned j = 0; j < ny; j++)
       {
-        FiniteElement *el_pt = this->finite_element_pt(i + nx * j);
+        FiniteElement* el_pt = this->finite_element_pt(i + nx * j);
         if ((i > (nx_cut_out - 1)) && (j < ny_cut_out))
         {
           el_killed_pt.push_back(el_pt);
@@ -87,11 +87,11 @@ namespace oomph
 
     // By default nobody's claiming the nodes; also store old
     // boundary ids
-    std::map<Node *, std::set<unsigned>> boundaries;
+    std::map<Node*, std::set<unsigned>> boundaries;
     unsigned nnod = this->nnode();
     for (unsigned j = 0; j < nnod; j++)
     {
-      std::set<unsigned> *aux_pt = 0;
+      std::set<unsigned>* aux_pt = 0;
       this->node_pt(j)->get_boundaries_pt(aux_pt);
       if (aux_pt != 0)
       {
@@ -106,11 +106,11 @@ namespace oomph
     this->set_nboundary(6);
 
     // Kill superfluous nodes
-    Vector<Node *> node_backup_pt(this->Node_pt);
+    Vector<Node*> node_backup_pt(this->Node_pt);
     this->Node_pt.clear();
     for (unsigned j = 0; j < nnod; j++)
     {
-      Node *nod_pt = node_backup_pt[j];
+      Node* nod_pt = node_backup_pt[j];
       if (keep[nod_pt])
       {
         this->Node_pt.push_back(nod_pt);
@@ -134,14 +134,14 @@ namespace oomph
     unsigned i = nx_cut_out - 1;
     for (unsigned j = 0; j < ny_cut_out; j++)
     {
-      FiniteElement *el_pt = this->finite_element_pt(i + nx * j);
+      FiniteElement* el_pt = this->finite_element_pt(i + nx * j);
       unsigned nnod_1d = el_pt->nnode_1d();
       for (unsigned jj = 0; jj < nnod_1d; jj++)
       {
         unsigned jnod = (nnod_1d - 1) + jj * nnod_1d;
         if (!(el_pt->node_pt(jnod)->is_on_boundary()))
         {
-          Node *nod_pt = el_pt->node_pt(jnod);
+          Node* nod_pt = el_pt->node_pt(jnod);
           this->convert_to_boundary_node(nod_pt);
         }
         this->add_boundary_node(1, el_pt->node_pt(jnod));
@@ -152,14 +152,14 @@ namespace oomph
     unsigned j = ny_cut_out;
     for (unsigned i = nx_cut_out; i < nx; i++)
     {
-      FiniteElement *el_pt = this->finite_element_pt(i + nx * j);
+      FiniteElement* el_pt = this->finite_element_pt(i + nx * j);
       unsigned nnod_1d = el_pt->nnode_1d();
       for (unsigned jj = 0; jj < nnod_1d; jj++)
       {
         unsigned jnod = jj;
         if (!(el_pt->node_pt(jnod)->is_on_boundary()))
         {
-          Node *nod_pt = el_pt->node_pt(jnod);
+          Node* nod_pt = el_pt->node_pt(jnod);
           this->convert_to_boundary_node(nod_pt);
         }
         this->add_boundary_node(2, el_pt->node_pt(jnod));

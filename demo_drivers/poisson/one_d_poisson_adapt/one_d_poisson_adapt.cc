@@ -51,13 +51,13 @@ namespace ArcTanSolnForPoisson
   double Alpha = 100.0;
 
   /// Exact solution as a Vector
-  void get_exact_u(const Vector<double> &x, Vector<double> &u)
+  void get_exact_u(const Vector<double>& x, Vector<double>& u)
   {
     u[0] = atan(Alpha * (x[0] - 0.5));
   }
 
   /// Source function required to make the solution above an exact solution
-  void get_source(const Vector<double> &x, double &source)
+  void get_source(const Vector<double>& x, double& source)
   {
     // Cache tan( atan(Alpha*(x[0]-0.5)) ) term
     double tan_term = tan(atan(Alpha * (x[0] - 0.5)));
@@ -93,13 +93,13 @@ public:
 
   /// \short Doc the solution. DocInfo object stores flags/labels for where
   /// the output gets written to.
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// \short Overloaded version of the Problem's access function to the mesh.
   /// Recasts the pointer to the base Mesh object to the actual mesh type.
-  RefineableOneDMesh<ELEMENT> *mesh_pt()
+  RefineableOneDMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<RefineableOneDMesh<ELEMENT> *>(Problem::mesh_pt());
+    return dynamic_cast<RefineableOneDMesh<ELEMENT>*>(Problem::mesh_pt());
   }
 
 private:
@@ -152,7 +152,7 @@ RefineableOneDPoissonProblem<ELEMENT>::RefineableOneDPoissonProblem(
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the source function pointer
     el_pt->source_fct_pt() = Source_fct_pt;
@@ -183,7 +183,7 @@ void RefineableOneDPoissonProblem<ELEMENT>::actions_before_newton_solve()
     for (unsigned n = 0; n < n_boundary_node; n++)
     {
       // Get pointer to node
-      Node *nod_pt = mesh_pt()->boundary_node_pt(b, n);
+      Node* nod_pt = mesh_pt()->boundary_node_pt(b, n);
 
       // Extract nodal coordinates from node:
       Vector<double> x(1);
@@ -203,7 +203,7 @@ void RefineableOneDPoissonProblem<ELEMENT>::actions_before_newton_solve()
 /// Doc the solution: doc_info contains labels/output directory etc.
 //========================================================================
 template<class ELEMENT>
-void RefineableOneDPoissonProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void RefineableOneDPoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   // Declare output stream and filename
   ofstream some_file;

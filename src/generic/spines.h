@@ -77,7 +77,7 @@ namespace oomph
 
     /// \short Constructor: Create the Spine and initialise its
     /// height to the specified value
-    Spine(const double &height)
+    Spine(const double& height)
     {
       Geom_data_pt.resize(1);
       // Create Data for height. By default it's free
@@ -90,7 +90,7 @@ namespace oomph
     /// height to the specified value. Store the vector of (pointers to)
     /// the additional geometric Data that is required during
     /// the node update operation for this Spine.
-    Spine(const double &height, const Vector<Data *> &geom_data_pt)
+    Spine(const double& height, const Vector<Data*>& geom_data_pt)
     {
       // Find the number of geometric data passed
       const unsigned n_geom_data = geom_data_pt.size();
@@ -115,9 +115,9 @@ namespace oomph
     /// the node update operation; also store vector of (pointers to)
     /// GeomObjects that is required during the node update operation
     /// for this Spine
-    Spine(const double &height,
-          const Vector<Data *> &geom_data_pt,
-          const Vector<GeomObject *> &geom_object_pt) :
+    Spine(const double& height,
+          const Vector<Data*>& geom_data_pt,
+          const Vector<GeomObject*>& geom_object_pt) :
       Geom_object_pt(geom_object_pt)
     {
       // Find the number of geometric data passed
@@ -148,20 +148,20 @@ namespace oomph
     }
 
     /// Access function to spine height
-    double &height()
+    double& height()
     {
       return *(Geom_data_pt[0]->value_pt(0));
     }
 
     /// Access function to Data object that stores the spine height
-    Data *&spine_height_pt()
+    Data*& spine_height_pt()
     {
       return Geom_data_pt[0];
     }
 
     /// \short Access function to Data object that stores the spine height
     /// (const version)
-    Data *spine_height_pt() const
+    Data* spine_height_pt() const
     {
       return Geom_data_pt[0];
     }
@@ -176,7 +176,7 @@ namespace oomph
     /// \short Set vector of (pointers to) geometric Data that is
     /// involved in the node update operations for this Spine.
     /// Wipes any previously existing geometric Data.
-    void set_geom_data_pt(const Vector<Data *> &geom_data_pt)
+    void set_geom_data_pt(const Vector<Data*>& geom_data_pt)
     {
       unsigned n_geom_data = geom_data_pt.size();
       Geom_data_pt.resize(n_geom_data + 1);
@@ -188,27 +188,27 @@ namespace oomph
 
     /// \short Add (pointer to) geometric Data that is
     /// involved in the node update operations for this Spine
-    void add_geom_data_pt(Data *geom_data_pt)
+    void add_geom_data_pt(Data* geom_data_pt)
     {
       Geom_data_pt.push_back(geom_data_pt);
     }
 
     /// \short Return i-th geometric Data that is involved in the
     /// node update operations for this Spine
-    Data *&geom_data_pt(const unsigned &i)
+    Data*& geom_data_pt(const unsigned& i)
     {
       return Geom_data_pt[i];
     }
 
     /// \short Return i-th geometric Data that is involved in the
     /// node update operations for this Spine. Const version
-    Data *geom_data_pt(const unsigned &i) const
+    Data* geom_data_pt(const unsigned& i) const
     {
       return Geom_data_pt[i];
     }
 
     /// \short Return the vector of geometric data
-    Vector<Data *> &vector_geom_data_pt()
+    Vector<Data*>& vector_geom_data_pt()
     {
       return Geom_data_pt;
     }
@@ -222,7 +222,7 @@ namespace oomph
 
     /// \short Set vector of (pointers to) geometric objects that is
     /// involved in the node update operations for this Spine
-    void set_geom_object_pt(const Vector<GeomObject *> &geom_object_pt)
+    void set_geom_object_pt(const Vector<GeomObject*>& geom_object_pt)
     {
       unsigned n_geom_object = geom_object_pt.size();
       Geom_object_pt.resize(n_geom_object);
@@ -234,28 +234,28 @@ namespace oomph
 
     /// \short Add (pointer to) geometric object that is
     /// involved in the node update  operations for this Spine
-    void add_geom_object_pt(GeomObject *geom_object_pt)
+    void add_geom_object_pt(GeomObject* geom_object_pt)
     {
       Geom_object_pt.push_back(geom_object_pt);
     }
 
     /// \short Return i-th geometric object that is involved in the
     /// node update operations for this Spine
-    GeomObject *&geom_object_pt(const unsigned &i)
+    GeomObject*& geom_object_pt(const unsigned& i)
     {
       return Geom_object_pt[i];
     }
 
     /// \short Return i-th geometric object that is involved in the
     /// node update operations for this Spine. Const version
-    GeomObject *geom_object_pt(const unsigned &i) const
+    GeomObject* geom_object_pt(const unsigned& i) const
     {
       return Geom_object_pt[i];
     }
 
     /// \short Return the vector of all geometric objects that affect this
     /// spine
-    Vector<GeomObject *> &vector_geom_object_pt()
+    Vector<GeomObject*>& vector_geom_object_pt()
     {
       return Geom_object_pt;
     }
@@ -270,28 +270,28 @@ namespace oomph
     /// \short Set vector of geometric parameters that are
     /// involved in the node update operations for this Spine.
     /// Wipes any previously existing geometric parameters
-    void set_geom_parameter(const Vector<double> &geom_parameter)
+    void set_geom_parameter(const Vector<double>& geom_parameter)
     {
       Geom_parameter = geom_parameter;
     }
 
     /// \short Add geometric parameter
     /// involved in the node update operations for this Spine
-    void add_geom_parameter(const double &geom_parameter)
+    void add_geom_parameter(const double& geom_parameter)
     {
       Geom_parameter.push_back(geom_parameter);
     }
 
     /// \short Return i-th geometric parameter that is involved in the
     /// node update operations for this Spine
-    double &geom_parameter(const unsigned &i)
+    double& geom_parameter(const unsigned& i)
     {
       return Geom_parameter[i];
     }
 
     /// \short Return i-th geometric parameter that is involved in the
     /// node update operations for this Spine. Const version
-    const double &geom_parameter(const unsigned &i) const
+    const double& geom_parameter(const unsigned& i) const
     {
       return Geom_parameter[i];
     }
@@ -301,11 +301,11 @@ namespace oomph
     // Data* Spine_height_pt;
 
     /// Vector that stores the pointers to additional geometric Data
-    Vector<Data *> Geom_data_pt;
+    Vector<Data*> Geom_data_pt;
 
     /// \short Vector that stores the pointers to geometric objects that is
     /// involved in the node update operation
-    Vector<GeomObject *> Geom_object_pt;
+    Vector<GeomObject*> Geom_object_pt;
 
     /// \short Vector that stores doubles that are used in the geometric updates
     Vector<double> Geom_parameter;
@@ -325,14 +325,14 @@ namespace oomph
   {
   private:
     /// Private internal data pointer to a spine
-    Spine *Spine_pt;
+    Spine* Spine_pt;
 
     /// Private double that represents the fixed fraction along the spine
     double Fraction;
 
     /// \short Pointer to SpineMesh that this node is a part of.
     /// (The mesh implements the node update function(s))
-    SpineMesh *Spine_mesh_pt;
+    SpineMesh* Spine_mesh_pt;
 
     /// ID of node update function (within specific mesh -- useful if there
     /// are multiple node update functions, e.g. in two-layer problems.
@@ -340,9 +340,9 @@ namespace oomph
 
   public:
     /// Steady Constructor, initialise pointers to zero
-    SpineNode(const unsigned &n_dim,
-              const unsigned &n_position_type,
-              const unsigned &initial_nvalue) :
+    SpineNode(const unsigned& n_dim,
+              const unsigned& n_position_type,
+              const unsigned& initial_nvalue) :
       Node(n_dim, n_position_type, initial_nvalue),
       Spine_pt(0),
       Fraction(0),
@@ -352,10 +352,10 @@ namespace oomph
     }
 
     /// Unsteady Constructor, initialise pointers to zero
-    SpineNode(TimeStepper *const &time_stepper_pt,
-              const unsigned &n_dim,
-              const unsigned &n_position_type,
-              const unsigned &initial_nvalue) :
+    SpineNode(TimeStepper* const& time_stepper_pt,
+              const unsigned& n_dim,
+              const unsigned& n_position_type,
+              const unsigned& initial_nvalue) :
       Node(time_stepper_pt, n_dim, n_position_type, initial_nvalue),
       Spine_pt(0),
       Fraction(0),
@@ -365,39 +365,39 @@ namespace oomph
     }
 
     /// Access function to spine
-    Spine *&spine_pt()
+    Spine*& spine_pt()
     {
       return Spine_pt;
     }
 
     /// Set reference to fraction along spine
-    double &fraction()
+    double& fraction()
     {
       return Fraction;
     }
 
     /// Access function to ID of node update function (within specific mesh)
-    unsigned &node_update_fct_id()
+    unsigned& node_update_fct_id()
     {
       return Node_update_fct_id;
     }
 
     /// \short Access function to Pointer to SpineMesh that this node is a part
     /// of and which implements the node update function(s)
-    SpineMesh *&spine_mesh_pt()
+    SpineMesh*& spine_mesh_pt()
     {
       return Spine_mesh_pt;
     }
 
     /// Access function to  spine height
-    double &h()
+    double& h()
     {
       return Spine_pt->height();
     }
 
     /// Overload thet node update function, call
     /// the update function in the Node's SpineMesh
-    void node_update(const bool &update_all_time_levels_for_new_node = false);
+    void node_update(const bool& update_all_time_levels_for_new_node = false);
 
     /// \short Return the number of geometric data, zero if no spine.
     unsigned ngeom_data() const
@@ -426,13 +426,13 @@ namespace oomph
     }
 
     /// Return the vector of all geometric data
-    Data **all_geom_data_pt()
+    Data** all_geom_data_pt()
     {
       return &(Spine_pt->geom_data_pt(0));
     }
 
     /// Return the vector of all geometric objects
-    GeomObject **all_geom_object_pt()
+    GeomObject** all_geom_object_pt()
     {
       return &(Spine_pt->geom_object_pt(0));
     }
@@ -471,7 +471,7 @@ namespace oomph
   private:
     /// \short Array to hold the index of the geometric data associated with
     /// the spine height of the spine that affects the n-th node
-    unsigned *Spine_geometric_index;
+    unsigned* Spine_geometric_index;
 
     /// \short Complete the setup of additional dependencies. Overloads
     /// empty virtual function in GeneralisedElement to determine the "geometric
@@ -491,7 +491,7 @@ namespace oomph
     }
 
     /// Constructor used for spine face elements
-    SpineElement(FiniteElement *const &element_pt, const int &face_index) :
+    SpineElement(FiniteElement* const& element_pt, const int& face_index) :
       ElementWithSpecificMovingNodes<ELEMENT, SpineNode>(element_pt,
                                                          face_index),
       SpineFiniteElement(),
@@ -510,7 +510,7 @@ namespace oomph
 
     /// \short Return the local equation number corresponding to the height
     /// of the spine at the n-th node
-    inline int spine_local_eqn(const unsigned &n)
+    inline int spine_local_eqn(const unsigned& n)
     {
 #ifdef RANGE_CHECKING
       const unsigned n_node = this->nnode();
@@ -603,20 +603,20 @@ namespace oomph
   {
   protected:
     /// A Spine mesh contains a Vector of pointers to spines
-    Vector<Spine *> Spine_pt;
+    Vector<Spine*> Spine_pt;
 
   public:
     /// Destructor to clean up the memory allocated to the spines
     virtual ~SpineMesh();
 
     /// Return the i-th spine in the mesh
-    Spine *&spine_pt(const unsigned long &i)
+    Spine*& spine_pt(const unsigned long& i)
     {
       return Spine_pt[i];
     }
 
     /// Return the i-th spine in the mesh (const version)
-    const Spine *spine_pt(const unsigned long &i) const
+    const Spine* spine_pt(const unsigned long& i) const
     {
       return Spine_pt[i];
     }
@@ -628,17 +628,17 @@ namespace oomph
     }
 
     /// Add a spine to the mesh
-    void add_spine_pt(Spine *const &spine_pt)
+    void add_spine_pt(Spine* const& spine_pt)
     {
       Spine_pt.push_back(spine_pt);
     }
 
     /// Return a pointer to the n-th global SpineNode
     // Can safely cast the nodes to SpineNodes
-    SpineNode *node_pt(const unsigned long &n)
+    SpineNode* node_pt(const unsigned long& n)
     {
 #ifdef PARANOID
-      if (!dynamic_cast<SpineNode *>(Node_pt[n]))
+      if (!dynamic_cast<SpineNode*>(Node_pt[n]))
       {
         std::ostringstream error_message;
         error_message << "Node " << n << "is a " << typeid(Node_pt[n]).name()
@@ -650,17 +650,17 @@ namespace oomph
       }
 #endif
       // Return a cast to the pointer to the node
-      return (dynamic_cast<SpineNode *>(Node_pt[n]));
+      return (dynamic_cast<SpineNode*>(Node_pt[n]));
     }
 
     /// \short Return the n-th local SpineNode in element e.
     /// This is required to cast the nodes in a spine mesh to be
     /// SpineNodes and therefore allow access to the extra SpineNode data
-    SpineNode *element_node_pt(const unsigned long &e, const unsigned &n)
+    SpineNode* element_node_pt(const unsigned long& e, const unsigned& n)
     {
 #ifdef PARANOID
       // Try to cast to FiniteElement
-      FiniteElement *el_pt = dynamic_cast<FiniteElement *>(Element_pt[e]);
+      FiniteElement* el_pt = dynamic_cast<FiniteElement*>(Element_pt[e]);
       if (el_pt == 0)
       {
         throw OomphLibError(
@@ -668,7 +668,7 @@ namespace oomph
           OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION);
       }
-      if (!dynamic_cast<SpineNode *>(el_pt->node_pt(n)))
+      if (!dynamic_cast<SpineNode*>(el_pt->node_pt(n)))
       {
         std::ostringstream error_message;
         error_message << "Node " << n << "is a "
@@ -681,8 +681,8 @@ namespace oomph
       }
 #endif
       // Return a cast to the node pointer
-      return (dynamic_cast<SpineNode *>(
-        dynamic_cast<FiniteElement *>(Element_pt[e])->node_pt(n)));
+      return (dynamic_cast<SpineNode*>(
+        dynamic_cast<FiniteElement*>(Element_pt[e])->node_pt(n)));
     }
 
     /// Assign spines to Spine_pt vector of element
@@ -693,7 +693,7 @@ namespace oomph
     // {dynamic_cast<ELEMENT*>(Element_pt[e])->add_spine(spine);}
 
     /// Assign equation numbers for spines
-    unsigned long assign_global_spine_eqn_numbers(Vector<double *> &Dof_pt);
+    unsigned long assign_global_spine_eqn_numbers(Vector<double*>& Dof_pt);
 
     /// \short Function to describe the dofs of the Spine. The ostream
     /// specifies the output stream to which the description
@@ -703,40 +703,40 @@ namespace oomph
     /// built up incrementally as we descend through the
     /// call hierarchy of this function when called from
     /// Problem::describe_dofs(...)
-    void describe_spine_dofs(std::ostream &out,
-                             const std::string &current_string) const;
+    void describe_spine_dofs(std::ostream& out,
+                             const std::string& current_string) const;
 
     /// \short Overload the mesh_level timestepper function to set the
     /// timestepper data for the spines
-    void set_mesh_level_time_stepper(TimeStepper *const &time_stepper_pt,
-                                     const bool &preserve_existing_data)
+    void set_mesh_level_time_stepper(TimeStepper* const& time_stepper_pt,
+                                     const bool& preserve_existing_data)
     {
       this->set_spine_time_stepper(time_stepper_pt, preserve_existing_data);
     }
 
     /// \short Set the time stepper forthe spine data that is stored in
     /// the mesh.
-    void set_spine_time_stepper(TimeStepper *const &time_stepper_pt,
-                                const bool &preserve_existing_data);
+    void set_spine_time_stepper(TimeStepper* const& time_stepper_pt,
+                                const bool& preserve_existing_data);
 
     /// \short Set any pinned spine "history" values to be consistent for
     /// continuation problems
     void set_consistent_pinned_spine_values_for_continuation(
-      ContinuationStorageScheme *const &continuation_stepper_pt);
+      ContinuationStorageScheme* const& continuation_stepper_pt);
 
     /// \short Check whether the pointer parameter_pt addresses data stored
     /// in the spines
-    bool does_pointer_correspond_to_spine_data(double *const &parameter_pt);
+    bool does_pointer_correspond_to_spine_data(double* const& parameter_pt);
 
     /// \short Update function to update all nodes of mesh
     /// [Doesn't make sense to use this mesh with SolidElements anyway,
     /// so we buffer the case if update_all_solid_nodes is set to
     /// true.]
-    void node_update(const bool &update_all_solid_nodes = false);
+    void node_update(const bool& update_all_solid_nodes = false);
 
     /// \short Update function for given spine node -- this must be implemented
     /// by all specific SpineMeshes.
-    virtual void spine_node_update(SpineNode *spine_node_pt) = 0;
+    virtual void spine_node_update(SpineNode* spine_node_pt) = 0;
 
 #ifdef __clang__
 #pragma clang diagnostic push
@@ -744,7 +744,7 @@ namespace oomph
 #endif
 
     /// \short Overload the dump function so that the spine data is dumped
-    void dump(std::ofstream &dump_file) const;
+    void dump(std::ofstream& dump_file) const;
 
 #ifdef __clang__
 #pragma clang diagnostic pop
@@ -752,7 +752,7 @@ namespace oomph
 
     /// \short Overload the read function so that the spine data is read
     /// from the restart file
-    void read(std::ifstream &restart_file);
+    void read(std::ifstream& restart_file);
   };
 
   ///////////////////////////////////////////////////////////////////
@@ -786,14 +786,14 @@ namespace oomph
       for (unsigned n = 0; n < n_node; n++)
       {
         // Find pointer to the spine
-        Spine *const spine_pt =
-          static_cast<SpineNode *>(this->node_pt(n))->spine_pt();
+        Spine* const spine_pt =
+          static_cast<SpineNode*>(this->node_pt(n))->spine_pt();
 
         // If there is a spine then find the pointer to the data
         if (spine_pt)
         {
           // Find the pointer to the data
-          Data *spine_height_data_pt = spine_pt->spine_height_pt();
+          Data* spine_height_data_pt = spine_pt->spine_height_pt();
 
           // Now find the index of the corresponding spine
           const unsigned n_node_update_data = this->ngeom_data();

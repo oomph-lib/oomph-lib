@@ -40,7 +40,7 @@ namespace oomph
   template<unsigned DIM>
   void RefineableLinearWaveEquations<DIM>::
     fill_in_generic_residual_contribution_lin_wave(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag)
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag)
   {
     // Find out how many nodes there are in the element
     unsigned n_node = nnode();

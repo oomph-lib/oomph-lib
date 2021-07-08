@@ -76,8 +76,8 @@ namespace oomph
   ///
   /// nplot points in each coordinate direction
   //======================================================================
-  void DisplacementBasedFoepplvonKarmanEquations::output(std::ostream &outfile,
-                                                         const unsigned &nplot)
+  void DisplacementBasedFoepplvonKarmanEquations::output(std::ostream& outfile,
+                                                         const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(2);
@@ -139,8 +139,8 @@ namespace oomph
   ///
   /// nplot points in each coordinate direction
   //======================================================================
-  void DisplacementBasedFoepplvonKarmanEquations::output(FILE *file_pt,
-                                                         const unsigned &nplot)
+  void DisplacementBasedFoepplvonKarmanEquations::output(FILE* file_pt,
+                                                         const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(2);
@@ -175,8 +175,8 @@ namespace oomph
   ///   x,y,w_exact
   //======================================================================
   void DisplacementBasedFoepplvonKarmanEquations::output_fct(
-    std::ostream &outfile,
-    const unsigned &nplot,
+    std::ostream& outfile,
+    const unsigned& nplot,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
   {
     // Vector of local coordinates
@@ -227,10 +227,10 @@ namespace oomph
   ///
   //======================================================================
   void DisplacementBasedFoepplvonKarmanEquations::compute_error(
-    std::ostream &outfile,
+    std::ostream& outfile,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-    double &error,
-    double &norm)
+    double& error,
+    double& norm)
   {
     // Initialise
     error = 0.0;

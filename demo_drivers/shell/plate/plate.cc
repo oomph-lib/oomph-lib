@@ -54,19 +54,19 @@ public:
   FlatPlate() : GeomObject(2, 3) {}
 
   /// Broken copy constructor
-  FlatPlate(const FlatPlate &node)
+  FlatPlate(const FlatPlate& node)
   {
     BrokenCopy::broken_copy("FlatPlate");
   }
 
   /// Broken assignment operator
-  void operator=(const FlatPlate &)
+  void operator=(const FlatPlate&)
   {
     BrokenCopy::broken_assign("FlatPlate");
   }
 
   /// Position vector
-  void position(const Vector<double> &zeta, Vector<double> &r) const
+  void position(const Vector<double>& zeta, Vector<double>& r) const
   {
     r[0] = zeta[0];
     r[1] = zeta[1];
@@ -74,9 +74,9 @@ public:
   }
 
   /// Position vector (dummy unsteady version returns steady version)
-  void position(const unsigned &t,
-                const Vector<double> &zeta,
-                Vector<double> &r) const
+  void position(const unsigned& t,
+                const Vector<double>& zeta,
+                Vector<double>& r) const
   {
     position(zeta, r);
   }
@@ -88,10 +88,10 @@ public:
   }
 
   /// \short Position Vector and 1st and 2nd derivs w.r.t. zeta.
-  void d2position(const Vector<double> &zeta,
-                  Vector<double> &r,
-                  DenseMatrix<double> &drdzeta,
-                  RankThreeTensor<double> &ddrdzeta) const
+  void d2position(const Vector<double>& zeta,
+                  Vector<double>& r,
+                  DenseMatrix<double>& drdzeta,
+                  RankThreeTensor<double>& ddrdzeta) const
   {
     // Flat plate
     r[0] = zeta[0];
@@ -141,17 +141,17 @@ class FlatPlateMesh :
 {
 public:
   /// Constructor for the mesh
-  FlatPlateMesh(const unsigned &nx,
-                const unsigned &ny,
-                const double &lx,
-                const double &ly,
-                TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper);
+  FlatPlateMesh(const unsigned& nx,
+                const unsigned& ny,
+                const double& lx,
+                const double& ly,
+                TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
   /// \short In all elastic problems, the nodes must be assigned an undeformed,
   /// or reference, position, corresponding to the stress-free state
   /// of the elastic body. This function assigns the undeformed position
   /// for the nodes on the flat plate
-  void assign_undeformed_positions(GeomObject *const &undeformed_midplane_pt);
+  void assign_undeformed_positions(GeomObject* const& undeformed_midplane_pt);
 };
 
 //=======================================================================
@@ -163,11 +163,11 @@ public:
 /// ly  : length in the y direction
 //=======================================================================
 template<class ELEMENT>
-FlatPlateMesh<ELEMENT>::FlatPlateMesh(const unsigned &nx,
-                                      const unsigned &ny,
-                                      const double &lx,
-                                      const double &ly,
-                                      TimeStepper *time_stepper_pt) :
+FlatPlateMesh<ELEMENT>::FlatPlateMesh(const unsigned& nx,
+                                      const unsigned& ny,
+                                      const double& lx,
+                                      const double& ly,
+                                      TimeStepper* time_stepper_pt) :
   RectangularQuadMesh<ELEMENT>(nx, ny, lx, ly, time_stepper_pt)
 {
   // Find out how many nodes there are
@@ -208,7 +208,7 @@ FlatPlateMesh<ELEMENT>::FlatPlateMesh(const unsigned &nx,
 //=======================================================================
 template<class ELEMENT>
 void FlatPlateMesh<ELEMENT>::assign_undeformed_positions(
-  GeomObject *const &undeformed_midplane_pt)
+  GeomObject* const& undeformed_midplane_pt)
 {
   // Find out how many nodes there are
   unsigned n_node = nnode();
@@ -263,7 +263,7 @@ namespace Global_Physical_Variables
 
   /// \short Pointer to pressure load (stored in Data so it can
   /// become an unknown in the problem when displacement control is used
-  Data *Pext_data_pt;
+  Data* Pext_data_pt;
 
   /// 2nd Piola Kirchhoff pre-stress
   double Sigma0 = 0.1;
@@ -282,10 +282,10 @@ namespace Global_Physical_Variables
   } // *pow(0.05,3)/12.0;}
 
   /// Load function, normal pressure loading
-  void press_load(const Vector<double> &xi,
-                  const Vector<double> &x,
-                  const Vector<double> &N,
-                  Vector<double> &load)
+  void press_load(const Vector<double>& xi,
+                  const Vector<double>& x,
+                  const Vector<double>& N,
+                  Vector<double>& load)
   {
     for (unsigned i = 0; i < 3; i++)
     {
@@ -303,15 +303,15 @@ class PlateProblem : public Problem
 {
 public:
   /// Constructor
-  PlateProblem(const unsigned &nx,
-               const unsigned &ny,
-               const double &lx,
-               const double &ly);
+  PlateProblem(const unsigned& nx,
+               const unsigned& ny,
+               const double& lx,
+               const double& ly);
 
   /// Overload Access function for the mesh
-  FlatPlateMesh<ELEMENT> *mesh_pt()
+  FlatPlateMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<FlatPlateMesh<ELEMENT> *>(Problem::mesh_pt());
+    return dynamic_cast<FlatPlateMesh<ELEMENT>*>(Problem::mesh_pt());
   }
 
   /// Actions after solve empty
@@ -322,13 +322,13 @@ public:
 
 private:
   /// Pointer to GeomObject that specifies the undeformed midplane
-  GeomObject *Undeformed_midplane_pt;
+  GeomObject* Undeformed_midplane_pt;
 
   /// First trace node
-  Node *Trace_node_pt;
+  Node* Trace_node_pt;
 
   /// Second trace node
-  Node *Trace_node2_pt;
+  Node* Trace_node2_pt;
 
   /// Number of shell elements
   unsigned Nshell;
@@ -338,10 +338,10 @@ private:
 /// Constructor
 //======================================================================
 template<class ELEMENT>
-PlateProblem<ELEMENT>::PlateProblem(const unsigned &nx,
-                                    const unsigned &ny,
-                                    const double &lx,
-                                    const double &ly)
+PlateProblem<ELEMENT>::PlateProblem(const unsigned& nx,
+                                    const unsigned& ny,
+                                    const double& lx,
+                                    const double& ly)
 {
   // Create the undeformed midplane object
   Undeformed_midplane_pt = new FlatPlate;
@@ -363,7 +363,7 @@ PlateProblem<ELEMENT>::PlateProblem(const unsigned &nx,
   unsigned n_node = mesh_pt()->nnode();
   for (unsigned j = 0; j < n_node; j++)
   {
-    SolidNode *nod_pt = mesh_pt()->node_pt(j);
+    SolidNode* nod_pt = mesh_pt()->node_pt(j);
 
     // pin y-displacement
     nod_pt->pin_position(1);
@@ -423,14 +423,14 @@ PlateProblem<ELEMENT>::PlateProblem(const unsigned &nx,
   }
 
   // Controlled element
-  SolidFiniteElement *controlled_element_pt =
-    dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(nel_ctrl));
+  SolidFiniteElement* controlled_element_pt =
+    dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(nel_ctrl));
 
   // Fix the displacement in the z (2) direction...
   unsigned controlled_direction = 2;
 
   // Pointer to displacement control element
-  DisplacementControlElement *displ_control_el_pt;
+  DisplacementControlElement* displ_control_el_pt;
 
   // Build displacement control element
   displ_control_el_pt =
@@ -467,13 +467,13 @@ PlateProblem<ELEMENT>::PlateProblem(const unsigned &nx,
   unsigned n_element = nx * ny;
 
   // Explicit pointer to first element in the mesh
-  ELEMENT *first_el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(0));
+  ELEMENT* first_el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(0));
 
   // Loop over the elements
   for (unsigned e = 0; e < n_element; e++)
   {
     // Cast to a shell element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
     // Set the load function
     el_pt->load_vector_fct_pt() = &Global_Physical_Variables::press_load;
@@ -521,7 +521,7 @@ PlateProblem<ELEMENT>::PlateProblem(const unsigned &nx,
 //====================================================================
 /// Driver
 //====================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

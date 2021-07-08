@@ -146,7 +146,7 @@ namespace oomph
   ///   - bound_cons[ival]=0 if value ival on this boundary is free
   ///   - bound_cons[ival]=1 if value ival on this boundary is pinned
   //==================================================================
-  void RefineableQElement<2>::get_bcs(int bound, Vector<int> &bound_cons) const
+  void RefineableQElement<2>::get_bcs(int bound, Vector<int>& bound_cons) const
   {
     using namespace QuadTreeNames;
 
@@ -225,8 +225,8 @@ namespace oomph
   ///   - bound_cons[ival]=0 if value ival on this boundary is free
   ///   - bound_cons[ival]=1 if value ival on this boundary is pinned
   //==================================================================
-  void RefineableQElement<2>::get_edge_bcs(const int &edge,
-                                           Vector<int> &bound_cons) const
+  void RefineableQElement<2>::get_edge_bcs(const int& edge,
+                                           Vector<int>& bound_cons) const
   {
     using namespace QuadTreeNames;
 
@@ -289,8 +289,8 @@ namespace oomph
   /// both vertex nodes). For vertex nodes, we just return their
   /// boundaries.
   //==================================================================
-  void RefineableQElement<2>::get_boundaries(const int &edge,
-                                             std::set<unsigned> &boundary) const
+  void RefineableQElement<2>::get_boundaries(const int& edge,
+                                             std::set<unsigned>& boundary) const
   {
     using namespace QuadTreeNames;
 
@@ -351,7 +351,7 @@ namespace oomph
     boundary.clear();
 
     // Storage for the nodes that the right node lives on
-    std::set<unsigned> *right_boundaries_pt = 0;
+    std::set<unsigned>* right_boundaries_pt = 0;
     // Get the boundaries that the right node lives on
     node_pt(right_node)->get_boundaries_pt(right_boundaries_pt);
 
@@ -369,7 +369,7 @@ namespace oomph
       // Otherwise only add if the boundary also exists at the left hand node
       else
       {
-        std::set<unsigned> *left_boundaries_pt = 0;
+        std::set<unsigned>* left_boundaries_pt = 0;
         node_pt(left_node)->get_boundaries_pt(left_boundaries_pt);
         // If the left node is on some boundaries
         if (left_boundaries_pt != 0)
@@ -391,10 +391,10 @@ namespace oomph
   /// along the edge (S/W/N/E)
   //===================================================================
   void RefineableQElement<2>::interpolated_zeta_on_edge(
-    const unsigned &boundary,
-    const int &edge,
-    const Vector<double> &s,
-    Vector<double> &zeta)
+    const unsigned& boundary,
+    const int& edge,
+    const Vector<double>& s,
+    Vector<double>& zeta)
   {
     using namespace QuadTreeNames;
 
@@ -514,8 +514,8 @@ namespace oomph
   /// a pointer to that node. If not, return NULL (0). If the node is
   /// periodic the flag is_periodic will be true
   //===================================================================
-  Node *RefineableQElement<2>::node_created_by_neighbour(
-    const Vector<double> &s_fraction, bool &is_periodic)
+  Node* RefineableQElement<2>::node_created_by_neighbour(
+    const Vector<double>& s_fraction, bool& is_periodic)
   {
     using namespace QuadTreeNames;
 
@@ -558,7 +558,7 @@ namespace oomph
     for (unsigned j = 0; j < n_size; j++)
     {
       // Find pointer to neighbouring element along edge
-      QuadTree *neigh_pt;
+      QuadTree* neigh_pt;
       neigh_pt = quadtree_pt()->gteq_edge_neighbour(edges[j],
                                                     translate_s,
                                                     s_lo_neigh,
@@ -588,7 +588,7 @@ namespace oomph
           }
 
           // Find the node in the neighbour
-          Node *neighbour_node_pt =
+          Node* neighbour_node_pt =
             neigh_pt->object_pt()->get_node_at_local_coordinate(s);
 
           // If there is a node, return it
@@ -640,10 +640,10 @@ namespace oomph
   ///   pressure values in manner consistent with the pressure
   ///   distribution in the father element.
   //==================================================================
-  void RefineableQElement<2>::build(Mesh *&mesh_pt,
-                                    Vector<Node *> &new_node_pt,
-                                    bool &was_already_built,
-                                    std::ofstream &new_nodes_file)
+  void RefineableQElement<2>::build(Mesh*& mesh_pt,
+                                    Vector<Node*>& new_node_pt,
+                                    bool& was_already_built,
+                                    std::ofstream& new_nodes_file)
   {
     using namespace QuadTreeNames;
 
@@ -657,7 +657,7 @@ namespace oomph
     }
 
     // Pointer to my father (in quadtree impersonation)
-    QuadTree *father_pt = dynamic_cast<QuadTree *>(quadtree_pt()->father_pt());
+    QuadTree* father_pt = dynamic_cast<QuadTree*>(quadtree_pt()->father_pt());
 
     // What type of son am I? Ask my quadtree representation...
     int son_type = Tree_pt->son_type();
@@ -681,12 +681,12 @@ namespace oomph
       was_already_built = false;
 
       // Return pointer to father element
-      RefineableQElement<2> *father_el_pt =
-        dynamic_cast<RefineableQElement<2> *>(father_pt->object_pt());
+      RefineableQElement<2>* father_el_pt =
+        dynamic_cast<RefineableQElement<2>*>(father_pt->object_pt());
 
       // Timestepper should be the same for all nodes in father
       // element -- use it create timesteppers for new nodes
-      TimeStepper *time_stepper_pt =
+      TimeStepper* time_stepper_pt =
         father_el_pt->node_pt(0)->time_stepper_pt();
 
       // Number of history values (incl. present)
@@ -811,7 +811,7 @@ namespace oomph
 
             // Get the pointer to the node in the father, returns NULL
             // if there is not node
-            Node *created_node_pt =
+            Node* created_node_pt =
               father_el_pt->get_node_at_local_coordinate(s);
 
             // Does this node already exist in father element?
@@ -876,7 +876,7 @@ namespace oomph
                   // one
                   // The returned created_node_pt is actually the neighbouring
                   // periodic node
-                  Node *neighbour_node_pt = created_node_pt;
+                  Node* neighbour_node_pt = created_node_pt;
 
                   // Determine the edge on which the new node will live
                   int father_bound = Father_bound[n_p](jnod, son_type);
@@ -1002,7 +1002,7 @@ namespace oomph
                     // Now the node must be on a boundary, but we don't know
                     // which one The returned created_node_pt is actually the
                     // neighbouring periodic node
-                    Node *neighbour_node_pt = created_node_pt;
+                    Node* neighbour_node_pt = created_node_pt;
 
                     // Determine the edge on which the new node will live
                     int father_bound = Father_bound[n_p](jnod, son_type);
@@ -1177,15 +1177,15 @@ namespace oomph
 
                 // Solid node? If so, deal with the positional boundary
                 // conditions:
-                SolidNode *solid_node_pt =
-                  dynamic_cast<SolidNode *>(created_node_pt);
+                SolidNode* solid_node_pt =
+                  dynamic_cast<SolidNode*>(created_node_pt);
                 if (solid_node_pt != 0)
                 {
                   // Get the positional boundary conditions from the father:
                   unsigned n_dim = created_node_pt->ndim();
                   Vector<int> solid_bound_cons(n_dim);
-                  RefineableSolidQElement<2> *father_solid_el_pt =
-                    dynamic_cast<RefineableSolidQElement<2> *>(father_el_pt);
+                  RefineableSolidQElement<2>* father_solid_el_pt =
+                    dynamic_cast<RefineableSolidQElement<2>*>(father_el_pt);
 #ifdef PARANOID
                   if (father_solid_el_pt == 0)
                   {
@@ -1296,8 +1296,8 @@ namespace oomph
             } // End of case when we build the node ourselves
 
             // Check if the element is an algebraic element
-            AlgebraicElementBase *alg_el_pt =
-              dynamic_cast<AlgebraicElementBase *>(this);
+            AlgebraicElementBase* alg_el_pt =
+              dynamic_cast<AlgebraicElementBase*>(this);
 
             // If the element is an algebraic element, setup
             // node position (past and present) from algebraic node update
@@ -1334,17 +1334,17 @@ namespace oomph
         // all this needs is the vector of (pointers to the)
         // geometric objects that affect the MacroElement-based
         // node update -- this is the same as that in the father element
-        MacroElementNodeUpdateElementBase *father_m_el_pt =
-          dynamic_cast<MacroElementNodeUpdateElementBase *>(father_el_pt);
+        MacroElementNodeUpdateElementBase* father_m_el_pt =
+          dynamic_cast<MacroElementNodeUpdateElementBase*>(father_el_pt);
         if (father_m_el_pt != 0)
         {
           // Get vector of geometric objects from father (construct vector
           // via copy operation)
-          Vector<GeomObject *> geom_object_pt(father_m_el_pt->geom_object_pt());
+          Vector<GeomObject*> geom_object_pt(father_m_el_pt->geom_object_pt());
 
           // Cast current element to MacroElementNodeUpdateElement:
-          MacroElementNodeUpdateElementBase *m_el_pt =
-            dynamic_cast<MacroElementNodeUpdateElementBase *>(this);
+          MacroElementNodeUpdateElementBase* m_el_pt =
+            dynamic_cast<MacroElementNodeUpdateElementBase*>(this);
 
 #ifdef PARANOID
           if (m_el_pt == 0)
@@ -1377,15 +1377,15 @@ namespace oomph
 #endif
 
         // Is it an ElementWithMovingNodes?
-        ElementWithMovingNodes *aux_el_pt =
-          dynamic_cast<ElementWithMovingNodes *>(this);
+        ElementWithMovingNodes* aux_el_pt =
+          dynamic_cast<ElementWithMovingNodes*>(this);
 
         // Pass down the information re the method for the evaluation
         // of the shape derivatives
         if (aux_el_pt != 0)
         {
-          ElementWithMovingNodes *aux_father_el_pt =
-            dynamic_cast<ElementWithMovingNodes *>(father_el_pt);
+          ElementWithMovingNodes* aux_father_el_pt =
+            dynamic_cast<ElementWithMovingNodes*>(father_el_pt);
 
 #ifdef PARANOID
           if (aux_father_el_pt == 0)
@@ -1437,8 +1437,8 @@ namespace oomph
   //====================================================================
   ///  Print corner nodes, use colour (default "BLACK")
   //====================================================================
-  void RefineableQElement<2>::output_corners(std::ostream &outfile,
-                                             const std::string &colour) const
+  void RefineableQElement<2>::output_corners(std::ostream& outfile,
+                                             const std::string& colour) const
   {
     Vector<double> s(2);
     Vector<double> corner(2);
@@ -1475,7 +1475,7 @@ namespace oomph
   /// open the output files and pass the open files to the helper function
   //====================================================================
   void RefineableQElement<2>::setup_hanging_nodes(
-    Vector<std::ofstream *> &output_stream)
+    Vector<std::ofstream*>& output_stream)
   {
 #ifdef PARANOID
     if (output_stream.size() != 4)
@@ -1499,7 +1499,7 @@ namespace oomph
   /// Internal function that sets up the hanging node scheme for
   /// a particular continuously interpolated value
   //===============================================================
-  void RefineableQElement<2>::setup_hang_for_value(const int &value_id)
+  void RefineableQElement<2>::setup_hang_for_value(const int& value_id)
   {
     using namespace QuadTreeNames;
 
@@ -1514,9 +1514,9 @@ namespace oomph
   /// Internal function to set up the hanging nodes on a particular
   /// edge of the element
   //=================================================================
-  void RefineableQElement<2>::quad_hang_helper(const int &value_id,
-                                               const int &my_edge,
-                                               std::ofstream &output_hangfile)
+  void RefineableQElement<2>::quad_hang_helper(const int& value_id,
+                                               const int& my_edge,
+                                               std::ofstream& output_hangfile)
   {
     using namespace QuadTreeNames;
 
@@ -1527,7 +1527,7 @@ namespace oomph
     bool in_neighbouring_tree;
 
     // Find pointer to neighbour in this direction
-    QuadTree *neigh_pt;
+    QuadTree* neigh_pt;
     neigh_pt = quadtree_pt()->gteq_edge_neighbour(my_edge,
                                                   translate_s,
                                                   s_lo_neigh,
@@ -1567,7 +1567,7 @@ namespace oomph
 
           // Find pointer to neighbour of the neighbour on the edge
           // that we are currently considering
-          QuadTree *neigh_of_neigh_pt;
+          QuadTree* neigh_of_neigh_pt;
           neigh_of_neigh_pt =
             neigh_pt->gteq_edge_neighbour(neigh_edge,
                                           translate_s_in_neigh,
@@ -1627,7 +1627,7 @@ namespace oomph
         // Number of nodes in one dimension
         unsigned n_p = ninterpolating_node_1d(value_id);
         // Storage for the local nodes along the edge of the quadtree
-        Node *local_node_pt = 0;
+        Node* local_node_pt = 0;
         // Loop over nodes along the edge
         for (unsigned i0 = 0; i0 < n_p; i0++)
         {
@@ -1683,7 +1683,7 @@ namespace oomph
           }
 
           // Find the Node in the neighbouring element
-          Node *neighbouring_node_pt =
+          Node* neighbouring_node_pt =
             neigh_pt->object_pt()->get_interpolating_node_at_local_coordinate(
               s_in_neighb, value_id);
 
@@ -1715,7 +1715,7 @@ namespace oomph
             if (make_hanging_node == true)
             {
               // Cache refineable element used here
-              RefineableElement *const obj_pt = neigh_pt->object_pt();
+              RefineableElement* const obj_pt = neigh_pt->object_pt();
 
               // Get shape functions in neighbour element
               Shape psi(obj_pt->ninterpolating_node(value_id));
@@ -1723,7 +1723,7 @@ namespace oomph
 
               // Allocate the storage for the Hang pointer
               // which contains n_p nodes
-              HangInfo *hang_pt = new HangInfo(n_p);
+              HangInfo* hang_pt = new HangInfo(n_p);
 
               // Loop over nodes on edge in neighbour and mark them as nodes
               // that this node depends on
@@ -1828,7 +1828,7 @@ namespace oomph
   /// - (nodally) interpolated function values
   //====================================================================
   // template<unsigned NNODE_1D>
-  void RefineableQElement<2>::check_integrity(double &max_error)
+  void RefineableQElement<2>::check_integrity(double& max_error)
   {
     using namespace QuadTreeNames;
 
@@ -1859,7 +1859,7 @@ namespace oomph
       bool in_neighbouring_tree;
 
       // Find pointer to neighbour in this direction
-      QuadTree *neigh_pt;
+      QuadTree* neigh_pt;
       neigh_pt = quadtree_pt()->gteq_edge_neighbour(edges[edge_counter],
                                                     translate_s,
                                                     s_lo_neigh,
@@ -1885,7 +1885,7 @@ namespace oomph
         for (unsigned i0 = 0; i0 < n_p; i0++)
         {
           // Storage for pointer to the local node
-          Node *local_node_pt = 0;
+          Node* local_node_pt = 0;
 
           switch (edge_counter)
           {
@@ -2053,7 +2053,7 @@ namespace oomph
   ///   - solid_bound_cons[i]=1 if it's pinned.
   //==================================================================
   void RefineableSolidQElement<2>::get_solid_bcs(
-    int bound, Vector<int> &solid_bound_cons) const
+    int bound, Vector<int>& solid_bound_cons) const
   {
     using namespace QuadTreeNames;
 
@@ -2135,7 +2135,7 @@ namespace oomph
   ///   - solid_bound_cons[i]=1 if it's pinned
   //==================================================================
   void RefineableSolidQElement<2>::get_edge_solid_bcs(
-    const int &edge, Vector<int> &solid_bound_cons) const
+    const int& edge, Vector<int>& solid_bound_cons) const
   {
     using namespace QuadTreeNames;
 
@@ -2178,8 +2178,8 @@ namespace oomph
     }
 
     // Cast to SolidNodes
-    SolidNode *left_node_pt = dynamic_cast<SolidNode *>(node_pt(left_node));
-    SolidNode *right_node_pt = dynamic_cast<SolidNode *>(node_pt(right_node));
+    SolidNode* left_node_pt = dynamic_cast<SolidNode*>(node_pt(left_node));
+    SolidNode* right_node_pt = dynamic_cast<SolidNode*>(node_pt(right_node));
 #ifdef PARANOID
     if (left_node_pt == 0)
     {

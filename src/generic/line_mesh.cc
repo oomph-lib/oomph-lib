@@ -37,7 +37,7 @@ namespace oomph
   /// Set up lookup schemes which establish which elements are located
   /// next to which boundaries (doc to outfile if it's open)
   //=======================================================================
-  void LineMeshBase::setup_boundary_element_info(std::ostream &outfile)
+  void LineMeshBase::setup_boundary_element_info(std::ostream& outfile)
   {
     // Initialise documentation flag
     bool doc = false;
@@ -58,8 +58,7 @@ namespace oomph
     Face_index_at_boundary.resize(n_bound);
 
     // Matrix map for working out the fixed local coord for elements on boundary
-    MapMatrixMixed<unsigned, FiniteElement *, Vector<int> *>
-      boundary_identifier;
+    MapMatrixMixed<unsigned, FiniteElement*, Vector<int>*> boundary_identifier;
 
     // Determine number of elements in the mesh
     const unsigned n_element = nelement();
@@ -68,7 +67,7 @@ namespace oomph
     for (unsigned e = 0; e < n_element; e++)
     {
       // Get pointer to element
-      FiniteElement *fe_pt = finite_element_pt(e);
+      FiniteElement* fe_pt = finite_element_pt(e);
 
       // Output information to output file
       if (doc)
@@ -91,7 +90,7 @@ namespace oomph
         {
           // Allocate storage for pointer to set of boundaries that node lives
           // on
-          std::set<unsigned> *boundaries_pt = 0;
+          std::set<unsigned>* boundaries_pt = 0;
 
           // Get pointer to vector of boundaries that this node lives on
           fe_pt->node_pt(n)->get_boundaries_pt(boundaries_pt);
@@ -232,7 +231,7 @@ namespace oomph
         // Loop over elements on given boundary
         for (unsigned e = 0; e < n_element; e++)
         {
-          FiniteElement *fe_pt = Boundary_element_pt[b][e];
+          FiniteElement* fe_pt = Boundary_element_pt[b][e];
           outfile << "Boundary element:" << fe_pt
                   << " Face index on boundary is "
                   << Face_index_at_boundary[b][e] << std::endl;

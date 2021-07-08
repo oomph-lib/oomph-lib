@@ -80,11 +80,11 @@ namespace oomph
     /// \f$\pi\f$; the corresponding fractions of the
     /// radius at which the central box is to be placed; and the number of
     /// layers in the domain
-    TubeDomain(GeomObject *volume_geom_object_pt,
-               const Vector<double> &centreline_limits,
-               const Vector<double> &theta_positions,
-               const Vector<double> &radius_box,
-               const unsigned &nlayer) :
+    TubeDomain(GeomObject* volume_geom_object_pt,
+               const Vector<double>& centreline_limits,
+               const Vector<double>& theta_positions,
+               const Vector<double>& radius_box,
+               const unsigned& nlayer) :
       Centreline_limits(centreline_limits),
       Theta_positions(theta_positions),
       Radius_box(radius_box),
@@ -103,13 +103,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    TubeDomain(const TubeDomain &)
+    TubeDomain(const TubeDomain&)
     {
       BrokenCopy::broken_copy("TubeDomain");
     }
 
     /// Broken assignment operator
-    void operator=(const TubeDomain &)
+    void operator=(const TubeDomain&)
     {
       BrokenCopy::broken_assign("TubeDomain");
     }
@@ -127,11 +127,11 @@ namespace oomph
     /// boundary i_direct (L/R/D/U/B/F) at time level t
     /// (t=0: present; t>0: previous):
     /// f(s).
-    void macro_element_boundary(const unsigned &t,
-                                const unsigned &i_macro,
-                                const unsigned &i_direct,
-                                const Vector<double> &s,
-                                Vector<double> &f);
+    void macro_element_boundary(const unsigned& t,
+                                const unsigned& i_macro,
+                                const unsigned& i_direct,
+                                const Vector<double>& s,
+                                Vector<double>& f);
 
   private:
     /// Storage for the limits of the centreline coordinate
@@ -150,16 +150,16 @@ namespace oomph
     unsigned Nlayer;
 
     /// Pointer to geometric object that represents the domain
-    GeomObject *Volume_pt;
+    GeomObject* Volume_pt;
 
     /// \short  A very little linear interpolation helper.
     /// Interpolate from the low
     /// point to the high point using the coordinate s which is
     /// assumed to run from -1 to 1.
-    void lin_interpolate(const Vector<double> &low,
-                         const Vector<double> &high,
-                         const double &s,
-                         Vector<double> &f)
+    void lin_interpolate(const Vector<double>& low,
+                         const Vector<double>& high,
+                         const double& s,
+                         Vector<double>& f)
     {
       // Loop over all coordinates
       for (unsigned i = 0; i < 3; i++)
@@ -178,11 +178,11 @@ namespace oomph
   /// boundary idirect (L/R/D/U/B/F) at time level t
   /// (t=0: present; t>0: previous): f(s)
   //=================================================================
-  void TubeDomain::macro_element_boundary(const unsigned &t,
-                                          const unsigned &imacro,
-                                          const unsigned &idirect,
-                                          const Vector<double> &s,
-                                          Vector<double> &f)
+  void TubeDomain::macro_element_boundary(const unsigned& t,
+                                          const unsigned& imacro,
+                                          const unsigned& idirect,
+                                          const Vector<double>& s,
+                                          Vector<double>& f)
   {
     using namespace OcTreeNames;
 

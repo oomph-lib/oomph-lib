@@ -123,10 +123,10 @@ namespace Global_Physical_Variables
 
   /// Non-FSI load function, a constant external pressure plus
   /// a (small) sinusoidal perturbation of wavenumber two.
-  void pcos_load(const Vector<double> &xi,
-                 const Vector<double> &x,
-                 const Vector<double> &N,
-                 Vector<double> &load)
+  void pcos_load(const Vector<double>& xi,
+                 const Vector<double>& x,
+                 const Vector<double>& N,
+                 Vector<double>& load)
   {
     for (unsigned i = 0; i < 2; i++)
     {
@@ -155,11 +155,11 @@ class FSIRingProblem : public Problem
 public:
   /// Constructor: Number of elements in wall mesh, amplitude of the
   /// initial wall deformation, amplitude of pcos perturbation and its duration.
-  FSIRingProblem(const unsigned &nelement_wall,
-                 const double &eps_ampl,
-                 const double &pcos_initial,
-                 const double &pcos_duration,
-                 const unsigned &i_case);
+  FSIRingProblem(const unsigned& nelement_wall,
+                 const double& eps_ampl,
+                 const double& pcos_initial,
+                 const double& pcos_duration,
+                 const unsigned& i_case);
 
   /// Update after solve (empty)
   void actions_after_newton_solve() {}
@@ -213,13 +213,13 @@ public:
   /// \short Doc solution: Pass number of timestep, i (we append to tracefile
   /// after every timestep but do a full doc only at certain intervals),
   /// DocInfo object and tracefile
-  void doc_solution(const unsigned &i,
-                    DocInfo &doc_info,
-                    ofstream &trace_file,
-                    const unsigned &i_case);
+  void doc_solution(const unsigned& i,
+                    DocInfo& doc_info,
+                    ofstream& trace_file,
+                    const unsigned& i_case);
 
   /// Do dynamic run
-  void dynamic_run(const unsigned &i_case);
+  void dynamic_run(const unsigned& i_case);
 
 private:
   /// Setup initial condition for both domains
@@ -232,25 +232,25 @@ private:
   void set_fluid_initial_condition();
 
   /// \short Element used for documenting displacement
-  SOLID_ELEMENT *Doc_displacement_elem_pt;
+  SOLID_ELEMENT* Doc_displacement_elem_pt;
 
   /// Pointer to wall mesh
-  OneDLagrangianMesh<SOLID_ELEMENT> *Wall_mesh_pt;
+  OneDLagrangianMesh<SOLID_ELEMENT>* Wall_mesh_pt;
 
   /// Pointer to fluid mesh
-  AlgebraicRefineableQuarterCircleSectorMesh<FLUID_ELEMENT> *Fluid_mesh_pt;
+  AlgebraicRefineableQuarterCircleSectorMesh<FLUID_ELEMENT>* Fluid_mesh_pt;
 
   /// Pointer to geometric object that represents the undeformed wall shape
-  GeomObject *Undef_geom_pt;
+  GeomObject* Undef_geom_pt;
 
   /// Pointer to wall timestepper
-  Newmark<2> *Wall_time_stepper_pt;
+  Newmark<2>* Wall_time_stepper_pt;
 
   /// Pointer to fluid timestepper
-  BDF<2> *Fluid_time_stepper_pt;
+  BDF<2>* Fluid_time_stepper_pt;
 
   /// Pointer to node on coarsest mesh on which velocity is traced
-  Node *Veloc_trace_node_pt;
+  Node* Veloc_trace_node_pt;
 
   /// Amplitude of initial deformation
   double Eps_ampl;
@@ -318,20 +318,20 @@ void FSIRingProblem::set_wall_initial_condition()
 {
   // Geometric object that specifies the initial conditions:
   // A ring that is bucked in a 2-lobed mode
-  GeomObject *ic_geom_object_pt = new PseudoBucklingRing(
+  GeomObject* ic_geom_object_pt = new PseudoBucklingRing(
     Eps_ampl, Global_Physical_Variables::H, 2, 2, Wall_time_stepper_pt);
 
   // Assign period of oscillation of the geometric object
-  static_cast<PseudoBucklingRing *>(ic_geom_object_pt)->set_T(1.0);
+  static_cast<PseudoBucklingRing*>(ic_geom_object_pt)->set_T(1.0);
 
   // Set initial time (to deform wall into max. amplitude)
   double time = 0.25;
 
   // Assign initial radius of the object
-  static_cast<PseudoBucklingRing *>(ic_geom_object_pt)->set_R_0(1.00);
+  static_cast<PseudoBucklingRing*>(ic_geom_object_pt)->set_R_0(1.00);
 
   // Setup object that specifies the initial conditions:
-  SolidInitialCondition *IC_pt = new SolidInitialCondition(ic_geom_object_pt);
+  SolidInitialCondition* IC_pt = new SolidInitialCondition(ic_geom_object_pt);
 
   // Assign values of positional data of all elements on wall mesh
   // so that the wall deforms into the shape specified by IC object.
@@ -344,10 +344,10 @@ void FSIRingProblem::set_wall_initial_condition()
 /// at every timestep and do a full doc only after a certain number
 /// of steps.
 //========================================================================
-void FSIRingProblem::doc_solution(const unsigned &i,
-                                  DocInfo &doc_info,
-                                  ofstream &trace_file,
-                                  const unsigned &i_case)
+void FSIRingProblem::doc_solution(const unsigned& i,
+                                  DocInfo& doc_info,
+                                  ofstream& trace_file,
+                                  const unsigned& i_case)
 {
   // Full doc every nskip steps
   unsigned nskip = 1; // ADJUST
@@ -431,11 +431,11 @@ void FSIRingProblem::doc_solution(const unsigned &i,
 /// and length of wall (in Lagrangian coordinates)  amplitude of
 /// initial deformation, pcos perturbation and duration.
 //======================================================================
-FSIRingProblem::FSIRingProblem(const unsigned &N,
-                               const double &eps_ampl,
-                               const double &pcos_initial,
-                               const double &pcos_duration,
-                               const unsigned &i_case) :
+FSIRingProblem::FSIRingProblem(const unsigned& N,
+                               const double& eps_ampl,
+                               const double& pcos_initial,
+                               const double& pcos_duration,
+                               const unsigned& i_case) :
   Eps_ampl(eps_ampl), Pcos_initial(pcos_initial), Pcos_duration(pcos_duration)
 {
   //-----------------------------------------------------------
@@ -496,7 +496,7 @@ FSIRingProblem::FSIRingProblem(const unsigned &N,
 
   // Create a geometric object that represents the wall geometry from the
   // wall mesh (one Lagrangian, two Eulerian coordinates).
-  MeshAsGeomObject *wall_mesh_as_geometric_object_pt =
+  MeshAsGeomObject* wall_mesh_as_geometric_object_pt =
     new MeshAsGeomObject(Wall_mesh_pt);
 
   // Build fluid mesh using the wall mesh as a geometric object
@@ -508,7 +508,7 @@ FSIRingProblem::FSIRingProblem(const unsigned &N,
     Fluid_time_stepper_pt);
 
   // Set the error estimator
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   Fluid_mesh_pt->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Extract pointer to node at center of mesh
@@ -543,7 +543,7 @@ FSIRingProblem::FSIRingProblem(const unsigned &N,
     for (unsigned n = 0; n < n_node; n++)
     {
       // Which node are we dealing with?
-      Node *node_pt = Fluid_mesh_pt->boundary_node_pt(1, n);
+      Node* node_pt = Fluid_mesh_pt->boundary_node_pt(1, n);
 
       // Set auxiliary update function pointer
       node_pt->set_auxiliary_node_update_fct_pt(
@@ -594,8 +594,8 @@ FSIRingProblem::FSIRingProblem(const unsigned &N,
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from FiniteElement to the present element
-    FLUID_ELEMENT *el_pt =
-      dynamic_cast<FLUID_ELEMENT *>(Fluid_mesh_pt->element_pt(e));
+    FLUID_ELEMENT* el_pt =
+      dynamic_cast<FLUID_ELEMENT*>(Fluid_mesh_pt->element_pt(e));
 
     // Set the Reynolds number, etc
     el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -656,8 +656,8 @@ FSIRingProblem::FSIRingProblem(const unsigned &N,
   for (unsigned e = 0; e < n_wall_element; e++)
   {
     // Cast to proper element type
-    SOLID_ELEMENT *el_pt =
-      dynamic_cast<SOLID_ELEMENT *>(Wall_mesh_pt->element_pt(e));
+    SOLID_ELEMENT* el_pt =
+      dynamic_cast<SOLID_ELEMENT*>(Wall_mesh_pt->element_pt(e));
 
     // Set physical parameters for each element:
     el_pt->h_pt() = &Global_Physical_Variables::H;
@@ -678,7 +678,7 @@ FSIRingProblem::FSIRingProblem(const unsigned &N,
 
   // Choose element: (This is the last one)
   Doc_displacement_elem_pt =
-    dynamic_cast<SOLID_ELEMENT *>(Wall_mesh_pt->element_pt(n_wall_element - 1));
+    dynamic_cast<SOLID_ELEMENT*>(Wall_mesh_pt->element_pt(n_wall_element - 1));
 
   // Setup fsi: Work out which fluid dofs affect the wall elements
   // the correspondance between wall dofs and fluid elements is handled
@@ -697,7 +697,7 @@ FSIRingProblem::FSIRingProblem(const unsigned &N,
 //=========================================================================
 /// Solver loop to perform unsteady run
 //=========================================================================
-void FSIRingProblem::dynamic_run(const unsigned &i_case)
+void FSIRingProblem::dynamic_run(const unsigned& i_case)
 {
   // Setup documentation
   //---------------------------------------------------------------
@@ -852,7 +852,7 @@ void FSIRingProblem::dynamic_run(const unsigned &i_case)
 //=====================================================================
 /// Driver for fsi ring test problem
 //=====================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

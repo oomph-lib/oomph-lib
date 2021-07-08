@@ -97,9 +97,9 @@ public:
   /// index_of_contact_pressure-th value represents the Lagrange multiplier
   /// (the discrete contact pressure) that has been traded for the
   /// vertical displacement/weight constraint.
-  CircularPenetratorElement(SolidNode *control_node_pt,
-                            const unsigned &index_of_contact_pressure,
-                            double *r_pt)
+  CircularPenetratorElement(SolidNode* control_node_pt,
+                            const unsigned& index_of_contact_pressure,
+                            double* r_pt)
   {
     // Create internal data, representing the angle of rotation about
     // contact point. Determined either directly via insisting
@@ -143,16 +143,16 @@ public:
   /// \short Vector of pairs identifying values (via a pair of pointer to
   /// Data object and index within it) that correspond to the Data values
   /// that are determined by the horizontal/vertical/... equilibrium equations.
-  Vector<std::pair<Data *, unsigned>> equilibrium_data()
+  Vector<std::pair<Data*, unsigned>> equilibrium_data()
   {
     // We're in 2D
-    Vector<std::pair<Data *, unsigned>> thingy(2);
+    Vector<std::pair<Data*, unsigned>> thingy(2);
 
     // Horizontal equilibrium determines the rotation angle
     // which is stored as the zero-th internal data
     if (Target_horizontal_force_pt == 0)
     {
-      thingy[0] = std::make_pair(static_cast<Data *>(0), 0);
+      thingy[0] = std::make_pair(static_cast<Data*>(0), 0);
     }
     else
     {
@@ -163,7 +163,7 @@ public:
     // (Lagrange multiplier) at control node
     if (Target_weight_pt == 0)
     {
-      thingy[1] = std::make_pair(static_cast<Data *>(0), 0);
+      thingy[1] = std::make_pair(static_cast<Data*>(0), 0);
     }
     else
     {
@@ -182,14 +182,14 @@ public:
   }
 
   /// Set angle of rotation around contact point
-  void set_angle(const double &angle)
+  void set_angle(const double& angle)
   {
     internal_data_pt(0)->set_value(0, angle);
   }
 
   /// \short Access to pointer to mesh of contact elements that contribute to
   /// force on penetrator
-  Mesh *contact_element_mesh_pt() const
+  Mesh* contact_element_mesh_pt() const
   {
     return Contact_element_mesh_pt;
   }
@@ -199,7 +199,7 @@ public:
   /// element. Also set the node pointed to by Control_node_pt
   /// as external Data for the elements in the contact mesh
   /// (unless they contain this node already).
-  void set_contact_element_mesh_pt(Mesh *contact_element_mesh_pt)
+  void set_contact_element_mesh_pt(Mesh* contact_element_mesh_pt)
   {
     Contact_element_mesh_pt = contact_element_mesh_pt;
     flush_external_data();
@@ -219,11 +219,11 @@ public:
     for (unsigned e = 0; e < nel; e++)
     {
       bool el_contains_control_node = false;
-      FiniteElement *el_pt = Contact_element_mesh_pt->finite_element_pt(e);
+      FiniteElement* el_pt = Contact_element_mesh_pt->finite_element_pt(e);
       unsigned nnod = el_pt->nnode();
       for (unsigned j = 0; j < nnod; j++)
       {
-        SolidNode *nod_pt = dynamic_cast<SolidNode *>(el_pt->node_pt(j));
+        SolidNode* nod_pt = dynamic_cast<SolidNode*>(el_pt->node_pt(j));
         if (nod_pt == Control_node_pt)
         {
           el_contains_control_node = true;
@@ -330,7 +330,7 @@ public:
 
   /// \short Impose weight (rather than imposed displacement). Target
   /// weight specified via pointer.
-  void impose_weight(double *target_weight_pt)
+  void impose_weight(double* target_weight_pt)
   {
     Target_weight_pt = target_weight_pt;
     Target_yc_pt = 0;
@@ -338,7 +338,7 @@ public:
 
   /// \short Impose vertical position of control node (rather than weight).
   /// Target vertical position of control node specified via pointer.
-  void impose_yc(double *target_yc_pt)
+  void impose_yc(double* target_yc_pt)
   {
     Target_weight_pt = 0;
     Target_yc_pt = target_yc_pt;
@@ -353,7 +353,7 @@ public:
 
   /// \short Impose horizontal force (rather than rotation about contact node).
   /// Target force specified via pointer.
-  void impose_horizontal_force(double *target_horizontal_force_pt)
+  void impose_horizontal_force(double* target_horizontal_force_pt)
   {
     Target_horizontal_force_pt = target_horizontal_force_pt;
     Target_rotation_angle_pt = 0;
@@ -361,14 +361,14 @@ public:
 
   /// \short Impose rotation about contact node (rather than horizontal force)
   /// Target angle specified via pointer.
-  void impose_rotation_angle(double *target_rotation_angle_pt)
+  void impose_rotation_angle(double* target_rotation_angle_pt)
   {
     Target_horizontal_force_pt = 0;
     Target_rotation_angle_pt = target_rotation_angle_pt;
   }
 
   /// Fill in contribution to residuals
-  void fill_in_contribution_to_residuals(Vector<double> &residuals)
+  void fill_in_contribution_to_residuals(Vector<double>& residuals)
   {
     // Get resulting force from all associated PseudoContactElements
     // onto the elastic body
@@ -453,7 +453,7 @@ public:
   }
 
   /// Get centre of penetrator
-  double centre(const unsigned &i) const
+  double centre(const unsigned& i) const
   {
     switch (i)
     {
@@ -474,10 +474,10 @@ public:
   }
 
   /// \short Get penetration for given point x.
-  void penetration(const Vector<double> &x,
-                   const Vector<double> &n,
-                   double &d,
-                   bool &intersection) const
+  void penetration(const Vector<double>& x,
+                   const Vector<double>& n,
+                   double& d,
+                   bool& intersection) const
   {
     // Vector from potential contact point to centre of penetrator
     Vector<double> l(2);
@@ -511,7 +511,7 @@ public:
   }
 
   /// Output coordinates of penetrator at nplot plot points
-  void output(std::ostream &outfile, const unsigned &nplot) const
+  void output(std::ostream& outfile, const unsigned& nplot) const
   {
     for (unsigned j = 0; j < nplot; j++)
     {
@@ -530,7 +530,7 @@ public:
     unsigned nel = Contact_element_mesh_pt->nelement();
     for (unsigned e = 0; e < nel; e++)
     {
-      dynamic_cast<TemplateFreeContactElementBase *>(
+      dynamic_cast<TemplateFreeContactElementBase*>(
         Contact_element_mesh_pt->element_pt(e))
         ->resulting_contact_force(el_contact_force);
       for (unsigned i = 0; i < 2; i++)
@@ -549,10 +549,10 @@ public:
 
 private:
   /// Pointer to radius of penetrator
-  double *Radius_pt;
+  double* Radius_pt;
 
   /// Control node
-  SolidNode *Control_node_pt;
+  SolidNode* Control_node_pt;
 
   /// \short Index at which contact pressure (Lagr mult) is stored in nodal
   /// data associated with control node
@@ -564,22 +564,22 @@ private:
 
   /// \short Pointer to target weight (null if vertical displacement of control
   /// node is imposed)
-  double *Target_weight_pt;
+  double* Target_weight_pt;
 
   /// \short Pointer to target horizontal force (null if rotation angle angle
   /// about control node is imposed)
-  double *Target_horizontal_force_pt;
+  double* Target_horizontal_force_pt;
 
   /// \short Pointer to  target vertical displacement of control node (null if
   /// weight is imposed)
-  double *Target_yc_pt;
+  double* Target_yc_pt;
 
   /// \short Pointer to target rotation angle about control node (null
   /// if horizontal force is imposed)
-  double *Target_rotation_angle_pt;
+  double* Target_rotation_angle_pt;
 
   /// Mesh of contact elements that contribute to weight/horizontal force
-  Mesh *Contact_element_mesh_pt;
+  Mesh* Contact_element_mesh_pt;
 };
 
 ///////////////////////////////////////////////////////////////////////
@@ -602,7 +602,7 @@ namespace ProblemParameters
   double Nu = 0.3;
 
   /// Pointer to constitutive law
-  ConstitutiveLaw *Constitutive_law_pt = 0;
+  ConstitutiveLaw* Constitutive_law_pt = 0;
 
   /// Radius of penetrator
   double Radius = 0.5;
@@ -611,7 +611,7 @@ namespace ProblemParameters
   double Radius_of_elastic_body = 2.0;
 
   /// Penetrator
-  Penetrator *Penetrator_pt = 0;
+  Penetrator* Penetrator_pt = 0;
 
   /// NOTE: WE IMPOSE EITHER THESE ...
 
@@ -647,9 +647,9 @@ namespace ProblemParameters
   double Body_force_alpha = 1.0e4;
 
   /// The body force function
-  void body_force(const double &time,
-                  const Vector<double> &x,
-                  Vector<double> &result)
+  void body_force(const double& time,
+                  const Vector<double>& x,
+                  Vector<double>& result)
   {
     result[0] = 0.0;
     result[1] = -Body_force_amplitude * (1.0 - x[0]) * x[0] *
@@ -767,9 +767,9 @@ public:
   /// Switch to displ control
   void switch_to_displ_control()
   {
-    dynamic_cast<CircularPenetratorElement *>(ProblemParameters::Penetrator_pt)
+    dynamic_cast<CircularPenetratorElement*>(ProblemParameters::Penetrator_pt)
       ->impose_yc(&ProblemParameters::Y_c);
-    dynamic_cast<CircularPenetratorElement *>(ProblemParameters::Penetrator_pt)
+    dynamic_cast<CircularPenetratorElement*>(ProblemParameters::Penetrator_pt)
       ->impose_rotation_angle(&ProblemParameters::Rotation_angle);
     ProblemParameters::Y_c = Control_node_pt->x(1);
   }
@@ -777,17 +777,17 @@ public:
   /// Switch to force control
   void switch_to_force_control()
   {
-    dynamic_cast<CircularPenetratorElement *>(ProblemParameters::Penetrator_pt)
+    dynamic_cast<CircularPenetratorElement*>(ProblemParameters::Penetrator_pt)
       ->impose_weight(&ProblemParameters::Weight);
-    dynamic_cast<CircularPenetratorElement *>(ProblemParameters::Penetrator_pt)
+    dynamic_cast<CircularPenetratorElement*>(ProblemParameters::Penetrator_pt)
       ->impose_horizontal_force(&ProblemParameters::Horizontal_force);
-    dynamic_cast<CircularPenetratorElement *>(ProblemParameters::Penetrator_pt)
+    dynamic_cast<CircularPenetratorElement*>(ProblemParameters::Penetrator_pt)
       ->set_equilibrium_target_forces();
 
     // Re-set contact mesh -- we now need to treat the positions
     // and penalty pressures of all nodes as external data of the
     // penetrator element!
-    dynamic_cast<CircularPenetratorElement *>(ProblemParameters::Penetrator_pt)
+    dynamic_cast<CircularPenetratorElement*>(ProblemParameters::Penetrator_pt)
       ->set_contact_element_mesh_pt(Surface_contact_mesh_pt);
 
     // Reset penetrator because its equilibrium data (which is external
@@ -796,8 +796,8 @@ public:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Upcast from GeneralisedElement
-      NonlinearSurfaceContactElement<ELEMENT> *el_pt =
-        dynamic_cast<NonlinearSurfaceContactElement<ELEMENT> *>(
+      NonlinearSurfaceContactElement<ELEMENT>* el_pt =
+        dynamic_cast<NonlinearSurfaceContactElement<ELEMENT>*>(
           Surface_contact_mesh_pt->element_pt(e));
 
       // Set pointer to penetrator
@@ -822,14 +822,14 @@ private:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Get pointer to the bulk element that is adjacent to boundary b
-      ELEMENT *bulk_elem_pt =
-        dynamic_cast<ELEMENT *>(Bulk_mesh_pt->boundary_element_pt(b, e));
+      ELEMENT* bulk_elem_pt =
+        dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(b, e));
 
       // What is the face index of element e along boundary b
       int face_index = Bulk_mesh_pt->face_index_at_boundary(b, e);
 
       // Build the corresponding contact element
-      NonlinearSurfaceContactElement<ELEMENT> *contact_element_pt =
+      NonlinearSurfaceContactElement<ELEMENT>* contact_element_pt =
         new NonlinearSurfaceContactElement<ELEMENT>(
           bulk_elem_pt, face_index, Contact_id);
 
@@ -866,7 +866,7 @@ private:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Cast to a solid element
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
       // Set the constitutive law
       el_pt->constitutive_law_pt() = ProblemParameters::Constitutive_law_pt;
@@ -889,7 +889,7 @@ private:
     unsigned nnod = Bulk_mesh_pt->nboundary_node(b);
     for (unsigned j = 0; j < nnod; j++)
     {
-      SolidNode *nod_pt = Bulk_mesh_pt->boundary_node_pt(b, j);
+      SolidNode* nod_pt = Bulk_mesh_pt->boundary_node_pt(b, j);
       nod_pt->pin_position(0);
       nod_pt->pin_position(1);
     }
@@ -899,14 +899,14 @@ private:
     nnod = Bulk_mesh_pt->nboundary_node(b);
     for (unsigned j = 0; j < nnod; j++)
     {
-      SolidNode *nod_pt = Bulk_mesh_pt->boundary_node_pt(b, j);
+      SolidNode* nod_pt = Bulk_mesh_pt->boundary_node_pt(b, j);
       nod_pt->pin_position(0);
     }
     b = Right_boundary_id;
     nnod = Bulk_mesh_pt->nboundary_node(b);
     for (unsigned j = 0; j < nnod; j++)
     {
-      SolidNode *nod_pt = Bulk_mesh_pt->boundary_node_pt(b, j);
+      SolidNode* nod_pt = Bulk_mesh_pt->boundary_node_pt(b, j);
       nod_pt->pin_position(0);
     }
 
@@ -916,8 +916,8 @@ private:
       // Update angle?
       bool update_angle = false;
       double phi_old = 0.0;
-      CircularPenetratorElement *pen_el_pt =
-        dynamic_cast<CircularPenetratorElement *>(
+      CircularPenetratorElement* pen_el_pt =
+        dynamic_cast<CircularPenetratorElement*>(
           ProblemParameters::Penetrator_pt);
       if (pen_el_pt != 0)
       {
@@ -927,15 +927,15 @@ private:
 
       double x_c = 0.5;
       Control_node_pt = 0;
-      SolidNode *most_central_node_pt = 0;
-      SolidNode *most_loaded_node_pt = 0;
+      SolidNode* most_central_node_pt = 0;
+      SolidNode* most_loaded_node_pt = 0;
       double dist_min = DBL_MAX;
       double load_max = 0.0;
       unsigned b = Contact_boundary_id;
       unsigned nnod = Bulk_mesh_pt->nboundary_node(b);
       for (unsigned j = 0; j < nnod; j++)
       {
-        SolidNode *nod_pt = Bulk_mesh_pt->boundary_node_pt(b, j);
+        SolidNode* nod_pt = Bulk_mesh_pt->boundary_node_pt(b, j);
 
         // Find closest node
         double dist = std::fabs(nod_pt->x(0) - x_c);
@@ -946,7 +946,7 @@ private:
         }
 
         // Find most loaded node
-        BoundaryNodeBase *bnod_pt = dynamic_cast<BoundaryNodeBase *>(nod_pt);
+        BoundaryNodeBase* bnod_pt = dynamic_cast<BoundaryNodeBase*>(nod_pt);
         unsigned index_of_contact_pressure =
           bnod_pt->index_of_first_value_assigned_by_face_element(Contact_id);
         if (nod_pt->value(index_of_contact_pressure) > load_max)
@@ -976,7 +976,7 @@ private:
         double phi_new =
           asin((Xc_old - Control_node_pt->x(0)) / ProblemParameters::Radius +
                sin(phi_old));
-        dynamic_cast<CircularPenetratorElement *>(
+        dynamic_cast<CircularPenetratorElement*>(
           ProblemParameters::Penetrator_pt)
           ->set_angle(phi_new);
         oomph_info << "Old/new angle: " << phi_old << " " << phi_new
@@ -1018,14 +1018,14 @@ private:
         bool found = false;
         for (unsigned e = 0; e < nel; e++)
         {
-          NonlinearSurfaceContactElement<ELEMENT> *el_pt =
-            dynamic_cast<NonlinearSurfaceContactElement<ELEMENT> *>(
+          NonlinearSurfaceContactElement<ELEMENT>* el_pt =
+            dynamic_cast<NonlinearSurfaceContactElement<ELEMENT>*>(
               Surface_contact_mesh_pt->element_pt(e));
           unsigned nnod = el_pt->nnode();
           for (unsigned j = 0; j < nnod; j++)
           {
-            SolidNode *solid_nod_pt =
-              dynamic_cast<SolidNode *>(el_pt->node_pt(j));
+            SolidNode* solid_nod_pt =
+              dynamic_cast<SolidNode*>(el_pt->node_pt(j));
             if (solid_nod_pt == Control_node_pt)
             {
               // Got it!
@@ -1033,8 +1033,8 @@ private:
 
               // Find index at which contact pressure/Lagrange multiplier
               // is stored
-              BoundaryNodeBase *bnod_pt =
-                dynamic_cast<BoundaryNodeBase *>(solid_nod_pt);
+              BoundaryNodeBase* bnod_pt =
+                dynamic_cast<BoundaryNodeBase*>(solid_nod_pt);
 
               // Get the index of the first nodal value associated with
               // this FaceElement
@@ -1074,8 +1074,8 @@ private:
         }
 
         // Back up old penetrator (if it existed)
-        CircularPenetratorElement *old_penetrator_pt =
-          dynamic_cast<CircularPenetratorElement *>(
+        CircularPenetratorElement* old_penetrator_pt =
+          dynamic_cast<CircularPenetratorElement*>(
             ProblemParameters::Penetrator_pt);
 
         // Make new one
@@ -1095,13 +1095,13 @@ private:
         }
         if (impose_displ)
         {
-          dynamic_cast<CircularPenetratorElement *>(
+          dynamic_cast<CircularPenetratorElement*>(
             ProblemParameters::Penetrator_pt)
             ->impose_yc(&ProblemParameters::Y_c);
         }
         else
         {
-          dynamic_cast<CircularPenetratorElement *>(
+          dynamic_cast<CircularPenetratorElement*>(
             ProblemParameters::Penetrator_pt)
             ->impose_weight(&ProblemParameters::Weight);
         }
@@ -1117,16 +1117,16 @@ private:
         }
         if (impose_angle)
         {
-          dynamic_cast<CircularPenetratorElement *>(
+          dynamic_cast<CircularPenetratorElement*>(
             ProblemParameters::Penetrator_pt)
             ->impose_rotation_angle(&ProblemParameters::Rotation_angle);
         }
         else
         {
-          dynamic_cast<CircularPenetratorElement *>(
+          dynamic_cast<CircularPenetratorElement*>(
             ProblemParameters::Penetrator_pt)
             ->impose_horizontal_force(&ProblemParameters::Horizontal_force);
-          dynamic_cast<CircularPenetratorElement *>(
+          dynamic_cast<CircularPenetratorElement*>(
             ProblemParameters::Penetrator_pt)
             ->set_angle(old_penetrator_pt->angle());
         }
@@ -1136,15 +1136,15 @@ private:
 
         // Add to mesh
         Penetrator_mesh_pt->add_element_pt(
-          dynamic_cast<CircularPenetratorElement *>(
+          dynamic_cast<CircularPenetratorElement*>(
             ProblemParameters::Penetrator_pt));
       }
 
       // Pass contact elements to penetrator element and declare their
       // positions and Lagrange multiplier (contact pressure) values
       // to be external data.
-      CircularPenetratorElement *el_pt =
-        dynamic_cast<CircularPenetratorElement *>(
+      CircularPenetratorElement* el_pt =
+        dynamic_cast<CircularPenetratorElement*>(
           ProblemParameters::Penetrator_pt);
       if (el_pt != 0)
       {
@@ -1160,8 +1160,8 @@ private:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Upcast from GeneralisedElement
-      NonlinearSurfaceContactElement<ELEMENT> *el_pt =
-        dynamic_cast<NonlinearSurfaceContactElement<ELEMENT> *>(
+      NonlinearSurfaceContactElement<ELEMENT>* el_pt =
+        dynamic_cast<NonlinearSurfaceContactElement<ELEMENT>*>(
           Surface_contact_mesh_pt->element_pt(e));
 
       // Set pointer to penetrator
@@ -1172,20 +1172,20 @@ private:
 #ifdef STRUCTURED_MESH
 
   /// Pointer to bulk mesh
-  ElasticRefineableRectangularQuadMesh<ELEMENT> *Bulk_mesh_pt;
+  ElasticRefineableRectangularQuadMesh<ELEMENT>* Bulk_mesh_pt;
 
 #else
 
   /// Pointer to bulk mesh
-  RefineableSolidTriangleMesh<ELEMENT> *Bulk_mesh_pt;
+  RefineableSolidTriangleMesh<ELEMENT>* Bulk_mesh_pt;
 
 #endif
 
   /// Pointer to the "surface" mesh
-  Mesh *Surface_contact_mesh_pt;
+  Mesh* Surface_contact_mesh_pt;
 
   /// Penetrator mesh
-  Mesh *Penetrator_mesh_pt;
+  Mesh* Penetrator_mesh_pt;
 
   /// ID of contact boundary
   unsigned Contact_boundary_id;
@@ -1215,20 +1215,20 @@ private:
 
   /// \short Backup of Surface_contact_mesh_pt so the Lagrange multipliers
   /// can be projected across
-  BackupMeshForProjection<QElement<1, 3>> *Backed_up_surface_contact_mesh_pt;
+  BackupMeshForProjection<QElement<1, 3>>* Backed_up_surface_contact_mesh_pt;
 
 #else
 
   /// \short Backup of Surface_contact_mesh_pt so the Lagrange multipliers
   /// can be projected across
-  BackupMeshForProjection<TElement<1, 3>> *Backed_up_surface_contact_mesh_pt;
+  BackupMeshForProjection<TElement<1, 3>>* Backed_up_surface_contact_mesh_pt;
 
 #endif
 
   /// \short Pointer to control node where Lagrange multiplier (contact
   /// pressure) is "pseudo-hijacked" to impose either displacement or weight
   /// constraint.
-  SolidNode *Control_node_pt;
+  SolidNode* Control_node_pt;
 
   /// x coordinate of old control node
   double Xc_old;
@@ -1250,7 +1250,7 @@ private:
   double Y_ur;
 
   /// Contact boundary in its poly line representation
-  TriangleMeshPolyLine *Contact_boundary_pt;
+  TriangleMeshPolyLine* Contact_boundary_pt;
 
   /// Max. element length on contact boundary
   double Maximum_element_length_on_contact_boundary;
@@ -1353,7 +1353,7 @@ ContactProblem<ELEMENT>::ContactProblem()
     unsigned nnod = Bulk_mesh_pt->nnode();
     for (unsigned j = 0; j < nnod; j++)
     {
-      SolidNode *nod_pt = Bulk_mesh_pt->node_pt(j);
+      SolidNode* nod_pt = Bulk_mesh_pt->node_pt(j);
       double x = nod_pt->x(0);
       double y_fract = nod_pt->x(1) / Y_ur;
       double y_b = y_c - sqrt(radius * radius - (x - 0.5 * (X_ll + X_ur)) *
@@ -1366,13 +1366,13 @@ ContactProblem<ELEMENT>::ContactProblem()
 #else
 
   // Pointer to the closed curve that defines the outer boundary
-  TriangleMeshClosedCurve *closed_curve_pt = 0;
+  TriangleMeshClosedCurve* closed_curve_pt = 0;
 
   // Build outer boundary as Polygon
 
   // The boundary is bounded by five distinct boundaries, each
   // represented by its own polyline
-  Vector<TriangleMeshCurveSection *> boundary_polyline_pt(6);
+  Vector<TriangleMeshCurveSection*> boundary_polyline_pt(6);
 
   // Vertex coordinates on boundary
   Vector<Vector<double>> bound_coords(2);
@@ -1444,7 +1444,7 @@ ContactProblem<ELEMENT>::ContactProblem()
 
   // Build boundary poly line
   Right_top_boundary_id = 3;
-  TriangleMeshPolyLine *right_top_boundary_pt =
+  TriangleMeshPolyLine* right_top_boundary_pt =
     new TriangleMeshPolyLine(right_top_bound_coords, Right_top_boundary_id);
   boundary_polyline_pt[3] = right_top_boundary_pt;
 
@@ -1508,13 +1508,13 @@ ContactProblem<ELEMENT>::ContactProblem()
 
   // Build boundary poly line
   Left_top_boundary_id = 5;
-  TriangleMeshPolyLine *top_left_boundary_pt =
+  TriangleMeshPolyLine* top_left_boundary_pt =
     new TriangleMeshPolyLine(top_left_bound_coords, Left_top_boundary_id);
   boundary_polyline_pt[5] = top_left_boundary_pt;
 
   // Create the triangle mesh polygon for outer boundary
   //----------------------------------------------------
-  TriangleMeshPolygon *outer_polygon =
+  TriangleMeshPolygon* outer_polygon =
     new TriangleMeshPolygon(boundary_polyline_pt);
 
   // Set the pointer
@@ -1543,7 +1543,7 @@ ContactProblem<ELEMENT>::ContactProblem()
     unsigned nnod = Bulk_mesh_pt->nboundary_node(b);
     for (unsigned j = 0; j < nnod; j++)
     {
-      SolidNode *nod_pt = Bulk_mesh_pt->boundary_node_pt(b, j);
+      SolidNode* nod_pt = Bulk_mesh_pt->boundary_node_pt(b, j);
       double x = nod_pt->x(0);
       double y = y_c - sqrt(radius * radius - (x - 0.5 * (X_ll + X_ur)) *
                                                 (x - 0.5 * (X_ll + X_ur)));
@@ -1594,7 +1594,7 @@ ContactProblem<ELEMENT>::ContactProblem()
   Bulk_mesh_pt->disable_iterative_solver_for_projection();
 
   // Set error estimator for bulk mesh
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   Bulk_mesh_pt->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Set element size limits
@@ -1671,7 +1671,7 @@ void ContactProblem<ELEMENT>::doc_solution()
   unsigned nel = Surface_contact_mesh_pt->nelement();
   for (unsigned e = 0; e < nel; e++)
   {
-    dynamic_cast<NonlinearSurfaceContactElement<ELEMENT> *>(
+    dynamic_cast<NonlinearSurfaceContactElement<ELEMENT>*>(
       Surface_contact_mesh_pt->element_pt(e))
       ->output(some_file, 20);
   }
@@ -1688,8 +1688,8 @@ void ContactProblem<ELEMENT>::doc_solution()
   nel = Surface_contact_mesh_pt->nelement();
   for (unsigned e = 0; e < nel; e++)
   {
-    NonlinearSurfaceContactElement<ELEMENT> *el_pt =
-      dynamic_cast<NonlinearSurfaceContactElement<ELEMENT> *>(
+    NonlinearSurfaceContactElement<ELEMENT>* el_pt =
+      dynamic_cast<NonlinearSurfaceContactElement<ELEMENT>*>(
         Surface_contact_mesh_pt->element_pt(e));
     unsigned nint = el_pt->integral_pt()->nweight();
     for (unsigned j = 0; j < nint; j++)
@@ -1724,8 +1724,8 @@ void ContactProblem<ELEMENT>::doc_solution()
   nel = Surface_contact_mesh_pt->nelement();
   for (unsigned e = 0; e < nel; e++)
   {
-    NonlinearSurfaceContactElement<ELEMENT> *el_pt =
-      dynamic_cast<NonlinearSurfaceContactElement<ELEMENT> *>(
+    NonlinearSurfaceContactElement<ELEMENT>* el_pt =
+      dynamic_cast<NonlinearSurfaceContactElement<ELEMENT>*>(
         Surface_contact_mesh_pt->element_pt(e));
     el_pt->output(some_file, 3);
     el_pt->resulting_contact_force(contact_force);
@@ -1757,8 +1757,8 @@ void ContactProblem<ELEMENT>::doc_solution()
           Doc_info.number());
   some_file.open(filename);
   unsigned n = 500;
-  CircularPenetratorElement *pen_el_pt =
-    dynamic_cast<CircularPenetratorElement *>(ProblemParameters::Penetrator_pt);
+  CircularPenetratorElement* pen_el_pt =
+    dynamic_cast<CircularPenetratorElement*>(ProblemParameters::Penetrator_pt);
   Vector<double> centre(2);
   if (pen_el_pt != 0)
   {
@@ -1818,7 +1818,7 @@ void ContactProblem<ELEMENT>::doc_solution()
 //=======start_of_main====================================================
 /// \short Driver code
 //========================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   FiniteElement::Accept_negative_jacobian = true;
 
@@ -1944,11 +1944,11 @@ int main(int argc, char *argv[])
   ProblemParameters::Horizontal_force = 0.0;
 
   oomph_info << "RE-solving for weight="
-             << dynamic_cast<CircularPenetratorElement *>(
+             << dynamic_cast<CircularPenetratorElement*>(
                   ProblemParameters::Penetrator_pt)
                   ->target_weight()
              << " and horizontal force: "
-             << dynamic_cast<CircularPenetratorElement *>(
+             << dynamic_cast<CircularPenetratorElement*>(
                   ProblemParameters::Penetrator_pt)
                   ->target_horizontal_force()
              << std::endl;
@@ -1966,11 +1966,11 @@ int main(int argc, char *argv[])
   for (unsigned i = 0; i < nstep; i++)
   {
     oomph_info << "Re-solving for weight="
-               << dynamic_cast<CircularPenetratorElement *>(
+               << dynamic_cast<CircularPenetratorElement*>(
                     ProblemParameters::Penetrator_pt)
                     ->target_weight()
                << " and horizontal force: "
-               << dynamic_cast<CircularPenetratorElement *>(
+               << dynamic_cast<CircularPenetratorElement*>(
                     ProblemParameters::Penetrator_pt)
                     ->target_horizontal_force()
                << std::endl;
@@ -1994,11 +1994,11 @@ int main(int argc, char *argv[])
     ProblemParameters::Body_force_amplitude += 1.0;
 
     oomph_info << "Re-solving for weight="
-               << dynamic_cast<CircularPenetratorElement *>(
+               << dynamic_cast<CircularPenetratorElement*>(
                     ProblemParameters::Penetrator_pt)
                     ->target_weight()
                << " and horizontal force: "
-               << dynamic_cast<CircularPenetratorElement *>(
+               << dynamic_cast<CircularPenetratorElement*>(
                     ProblemParameters::Penetrator_pt)
                     ->target_horizontal_force()
                << " and body force ampl: "
@@ -2019,11 +2019,11 @@ int main(int argc, char *argv[])
   for (unsigned i = 0; i < nstep; i++)
   {
     oomph_info << "Re-solving for weight="
-               << dynamic_cast<CircularPenetratorElement *>(
+               << dynamic_cast<CircularPenetratorElement*>(
                     ProblemParameters::Penetrator_pt)
                     ->target_weight()
                << " and horizontal force: "
-               << dynamic_cast<CircularPenetratorElement *>(
+               << dynamic_cast<CircularPenetratorElement*>(
                     ProblemParameters::Penetrator_pt)
                     ->target_horizontal_force()
                << " and body force ampl: "

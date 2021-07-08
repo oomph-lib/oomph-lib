@@ -58,37 +58,37 @@ public:
   /// The composed mesh is too complicated for giving xmin,xmax etc..
   /// Nevertheless we keep nx, ny, nz making reference
   //   to the elements in each direction of each cubic mesh
-  CombCanSpineMesh(const unsigned int &nel_xz,
-                   const unsigned int &nel_y,
-                   const double &alpha,
-                   const double &length,
-                   const double &height,
-                   const double &radius,
-                   const unsigned int &flag,
-                   TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper);
+  CombCanSpineMesh(const unsigned int& nel_xz,
+                   const unsigned int& nel_y,
+                   const double& alpha,
+                   const double& length,
+                   const double& height,
+                   const double& radius,
+                   const unsigned int& flag,
+                   TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
   /// Access functions for pointers to interface elements
-  FiniteElement *&interface_element_pt(const unsigned long &i)
+  FiniteElement*& interface_element_pt(const unsigned long& i)
   {
     return Interface_element_pt[i];
   }
 
   /// Access functions for pointers to elements in bulk
-  FiniteElement *&bulk_element_pt(const unsigned long &i)
+  FiniteElement*& bulk_element_pt(const unsigned long& i)
   {
     return Bulk_element_pt[i];
   }
 
   // /Access functions for pointers to elements in the outlet (here identified
   // as boundary 3)
-  FiniteElement *&bulk_outlet_element_pt(const unsigned long &i)
+  FiniteElement*& bulk_outlet_element_pt(const unsigned long& i)
   {
     return Bulk_outlet_element_pt[i];
   }
 
   // /Access functions for pointers to interface elements in the outlet (here
   // identified as boundary 3)
-  FiniteElement *&interface_line_element_pt(const unsigned long &i)
+  FiniteElement*& interface_line_element_pt(const unsigned long& i)
   {
     return Interface_line_element_pt[i];
   }
@@ -135,7 +135,7 @@ public:
     Spine_pt.clear();
   }
 
-  virtual void spine_node_update(SpineNode *spine_node_pt)
+  virtual void spine_node_update(SpineNode* spine_node_pt)
   {
     // Get fraction along the spine
     double W = spine_node_pt->fraction();
@@ -179,24 +179,24 @@ protected:
   int Face_index_outlet;
 
   /// Vector of pointers to element in the fluid layer
-  Vector<FiniteElement *> Bulk_element_pt;
+  Vector<FiniteElement*> Bulk_element_pt;
 
   /// Vector of pointers to interface elements
-  Vector<FiniteElement *> Interface_element_pt;
+  Vector<FiniteElement*> Interface_element_pt;
 
   /// Vector of pointers to the bulk outlet elements in the fluid layer
-  Vector<FiniteElement *> Bulk_outlet_element_pt;
+  Vector<FiniteElement*> Bulk_outlet_element_pt;
 
   // Vector of pointers to the surface elements which will generate the
   // LinContElement
-  Vector<FiniteElement *> Interface_line_element_pt;
+  Vector<FiniteElement*> Interface_line_element_pt;
 
-  void rotate_90(SpineMesh *rot_mesh_pt)
+  void rotate_90(SpineMesh* rot_mesh_pt)
   {
     unsigned long nnode = rot_mesh_pt->nnode();
     for (unsigned long i = 0; i < nnode; i++)
     {
-      Node *node_pt = rot_mesh_pt->node_pt(i);
+      Node* node_pt = rot_mesh_pt->node_pt(i);
       double x_node = node_pt->x(0);
       double z_node = node_pt->x(2);
       node_pt->x(0) = 1.0 - z_node;
@@ -207,7 +207,7 @@ protected:
     unsigned long nspines = rot_mesh_pt->nspine();
     for (unsigned long i = 0; i < nspines; i++)
     {
-      Spine *spine_pt = rot_mesh_pt->spine_pt(i);
+      Spine* spine_pt = rot_mesh_pt->spine_pt(i);
       double x_spine = spine_pt->geom_parameter(0);
       double z_spine = spine_pt->geom_parameter(2);
       spine_pt->geom_parameter(0) = 1.0 - z_spine;
@@ -219,7 +219,7 @@ protected:
   }
 
   // Add the outlet elements from a quadratic mesh
-  void add_outlet_bulk_elements(SimpleCubicMesh<ELEMENT> *add_mesh_pt)
+  void add_outlet_bulk_elements(SimpleCubicMesh<ELEMENT>* add_mesh_pt)
   {
     int nx = add_mesh_pt->nx();
     int ny = add_mesh_pt->ny();
@@ -229,7 +229,7 @@ protected:
     {
       for (int i = 0; i < nx; i++)
       {
-        ELEMENT *el_pt = dynamic_cast<ELEMENT *>(
+        ELEMENT* el_pt = dynamic_cast<ELEMENT*>(
           add_mesh_pt->element_pt(i + j * nx + k * nx * ny));
         Bulk_outlet_element_pt.push_back(el_pt);
       }
@@ -238,14 +238,14 @@ protected:
 
   // Add the Interface Elements which will generate the LineCont Elements
   void add_line_interface_elements(
-    MyCanyonMesh<ELEMENT, INTERFACE_ELEMENT> *add_mesh_pt)
+    MyCanyonMesh<ELEMENT, INTERFACE_ELEMENT>* add_mesh_pt)
   {
     int nx = add_mesh_pt->nx();
     int ny = add_mesh_pt->ny();
     int j = ny - 1;
     for (int i = 0; i < nx; i++)
     {
-      INTERFACE_ELEMENT *el_pt = dynamic_cast<INTERFACE_ELEMENT *>(
+      INTERFACE_ELEMENT* el_pt = dynamic_cast<INTERFACE_ELEMENT*>(
         add_mesh_pt->interface_element_pt(i + j * nx));
       Interface_line_element_pt.push_back(el_pt);
     }
@@ -253,12 +253,12 @@ protected:
 
   /// \short Helper function to actually build the single-layer spine mesh
   /// (called from various constructors)
-  virtual void build_single_layer_mesh(TimeStepper *time_stepper_pt);
+  virtual void build_single_layer_mesh(TimeStepper* time_stepper_pt);
 
   // add side_mesh to the problem mesh
   void add_side_spinemesh(unsigned int bound1,
-                          MyCanyonMesh<ELEMENT, INTERFACE_ELEMENT> *addmesh_pt,
-                          int *addmesh_map_boundary,
+                          MyCanyonMesh<ELEMENT, INTERFACE_ELEMENT>* addmesh_pt,
+                          int* addmesh_map_boundary,
                           int total_boundaries,
                           unsigned flag);
 };
@@ -272,14 +272,14 @@ protected:
 //===========================================================================
 template<class ELEMENT, class INTERFACE_ELEMENT>
 CombCanSpineMesh<ELEMENT, INTERFACE_ELEMENT>::CombCanSpineMesh(
-  const unsigned int &nel_xz,
-  const unsigned int &nel_y,
-  const double &alpha,
-  const double &length,
-  const double &height,
-  const double &radius,
-  const unsigned int &flag,
-  TimeStepper *time_stepper_pt) :
+  const unsigned int& nel_xz,
+  const unsigned int& nel_y,
+  const double& alpha,
+  const double& length,
+  const double& height,
+  const double& radius,
+  const unsigned int& flag,
+  TimeStepper* time_stepper_pt) :
   Nel_xz(nel_xz),
   Nel_y(nel_y),
   Alpha(alpha),
@@ -307,7 +307,7 @@ CombCanSpineMesh<ELEMENT, INTERFACE_ELEMENT>::CombCanSpineMesh(
 //===========================================================================
 template<class ELEMENT, class INTERFACE_ELEMENT>
 void CombCanSpineMesh<ELEMENT, INTERFACE_ELEMENT>::build_single_layer_mesh(
-  TimeStepper *time_stepper_pt)
+  TimeStepper* time_stepper_pt)
 {
   // Axis pf simmetry
   Xsim = 0.0;
@@ -322,7 +322,7 @@ void CombCanSpineMesh<ELEMENT, INTERFACE_ELEMENT>::build_single_layer_mesh(
   unsigned n_z = Nel_xz;
 
   // Build the first canion mesh:
-  MyCanyonMesh<ELEMENT, INTERFACE_ELEMENT> *mesh1_pt =
+  MyCanyonMesh<ELEMENT, INTERFACE_ELEMENT>* mesh1_pt =
     new MyCanyonMesh<ELEMENT, INTERFACE_ELEMENT>(
       n_x, n_y, n_z, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, Radius, 0, time_stepper_pt);
 
@@ -373,7 +373,7 @@ void CombCanSpineMesh<ELEMENT, INTERFACE_ELEMENT>::build_single_layer_mesh(
     {
       // We remove the node from the old boundary mesh ( This is not necessary
       // and it is mainly wrotten for avoiding the warning message)
-      Node *node_pt = mesh1_pt->boundary_node_pt(b, i);
+      Node* node_pt = mesh1_pt->boundary_node_pt(b, i);
       node_pt->remove_from_boundary(b);
       this->add_boundary_node(b, node_pt);
     }
@@ -384,7 +384,7 @@ void CombCanSpineMesh<ELEMENT, INTERFACE_ELEMENT>::build_single_layer_mesh(
   add_line_interface_elements(mesh1_pt);
 
   // We create a second mesh
-  MyCanyonMesh<ELEMENT, INTERFACE_ELEMENT> *mesh2_pt =
+  MyCanyonMesh<ELEMENT, INTERFACE_ELEMENT>* mesh2_pt =
     new MyCanyonMesh<ELEMENT, INTERFACE_ELEMENT>(
       n_x, n_y, n_z, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, Radius, 1, time_stepper_pt);
 
@@ -409,7 +409,7 @@ void CombCanSpineMesh<ELEMENT, INTERFACE_ELEMENT>::build_single_layer_mesh(
   add_side_spinemesh(2, mesh2_pt, addmesh_map_boundary, 7, Flag);
 
   // We create a third mesh
-  MyCanyonMesh<ELEMENT, INTERFACE_ELEMENT> *mesh3_pt =
+  MyCanyonMesh<ELEMENT, INTERFACE_ELEMENT>* mesh3_pt =
     new MyCanyonMesh<ELEMENT, INTERFACE_ELEMENT>(
       n_x, n_y, n_z, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, Radius, 0, time_stepper_pt);
 
@@ -436,7 +436,7 @@ void CombCanSpineMesh<ELEMENT, INTERFACE_ELEMENT>::build_single_layer_mesh(
   add_line_interface_elements(mesh3_pt);
 
   // We create a fourth mesh
-  MyCanyonMesh<ELEMENT, INTERFACE_ELEMENT> *mesh4_pt =
+  MyCanyonMesh<ELEMENT, INTERFACE_ELEMENT>* mesh4_pt =
     new MyCanyonMesh<ELEMENT, INTERFACE_ELEMENT>(
       n_x, n_y, n_z, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, Radius, 1, time_stepper_pt);
 
@@ -490,7 +490,7 @@ void CombCanSpineMesh<ELEMENT, INTERFACE_ELEMENT>::build_single_layer_mesh(
   ncount = this->nnode();
   for (int i = 0; i < ncount; i++)
   {
-    Node *node_pt = this->node_pt(i);
+    Node* node_pt = this->node_pt(i);
     node_pt->x(0) = node_pt->x(0) * Alpha / 2;
     node_pt->x(1) = node_pt->x(1) * Length;
     node_pt->x(2) = node_pt->x(2) * Height / 2;
@@ -500,7 +500,7 @@ void CombCanSpineMesh<ELEMENT, INTERFACE_ELEMENT>::build_single_layer_mesh(
   unsigned long nspines = this->nspine();
   for (unsigned long i = 0; i < nspines; i++)
   {
-    Spine *spine_pt = this->spine_pt(i);
+    Spine* spine_pt = this->spine_pt(i);
     double x_spine = spine_pt->geom_parameter(0);
     double y_spine = spine_pt->geom_parameter(1);
     double z_spine = spine_pt->geom_parameter(2);
@@ -516,9 +516,9 @@ void CombCanSpineMesh<ELEMENT, INTERFACE_ELEMENT>::build_single_layer_mesh(
 
   for (int i = 0; i < ncount; i++)
   {
-    SpineNode *spine_node_pt =
-      dynamic_cast<SpineNode *>(this->boundary_node_pt(5, i));
-    Spine *spine_pt = spine_node_pt->spine_pt();
+    SpineNode* spine_node_pt =
+      dynamic_cast<SpineNode*>(this->boundary_node_pt(5, i));
+    Spine* spine_pt = spine_node_pt->spine_pt();
     double x_spine = spine_pt->geom_parameter(0);
     double z_spine = spine_pt->geom_parameter(2);
 
@@ -548,8 +548,8 @@ void CombCanSpineMesh<ELEMENT, INTERFACE_ELEMENT>::build_single_layer_mesh(
 template<class ELEMENT, class INTERFACE_ELEMENT>
 void CombCanSpineMesh<ELEMENT, INTERFACE_ELEMENT>::add_side_spinemesh(
   unsigned int bound1,
-  MyCanyonMesh<ELEMENT, INTERFACE_ELEMENT> *addmesh_pt,
-  int *addmesh_map_boundary,
+  MyCanyonMesh<ELEMENT, INTERFACE_ELEMENT>* addmesh_pt,
+  int* addmesh_map_boundary,
   int total_boundaries,
   unsigned spine_flag)
 {

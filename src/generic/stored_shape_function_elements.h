@@ -64,16 +64,16 @@ namespace oomph
     // If this proves to be a problem, one can use the the function
     // set_local_shape_stored_from_element(), which sets this pointer to
     // point to the pointer allocated by another element.
-    Vector<Shape *> *Shape_stored_pt;
+    Vector<Shape*>* Shape_stored_pt;
 
     /// \short Pointer to storage for the pointers to the derivatives of the
     /// nodal shape functions w.r.t. the local coordinates at integration points
-    Vector<DShape *> *DShape_local_stored_pt;
+    Vector<DShape*>* DShape_local_stored_pt;
 
     /// \short Pointer to storage for the pointers to the second derivatives of
     /// the nodal shape functions w.r.t. the local coordinates at integration
     /// points
-    Vector<DShape *> *D2Shape_local_stored_pt;
+    Vector<DShape*>* D2Shape_local_stored_pt;
 
     /// \short Boolean to determine whether the element can delete the stored
     /// local shape functions
@@ -81,15 +81,15 @@ namespace oomph
 
     /// \short Pointer to storage for the derivatives of the
     /// shape functions w.r.t. global coordinates at integration points
-    Vector<DShape *> *DShape_eulerian_stored_pt;
+    Vector<DShape*>* DShape_eulerian_stored_pt;
 
     /// \short Pointer to storage for the second derivatives of the
     /// shape functions w.r.t. global coordinates at integration points
-    Vector<DShape *> *D2Shape_eulerian_stored_pt;
+    Vector<DShape*>* D2Shape_eulerian_stored_pt;
 
     /// \short Pointer to storage for the Jacobian of the element w.r.t
     /// global coordinates
-    Vector<double> *Jacobian_eulerian_stored_pt;
+    Vector<double>* Jacobian_eulerian_stored_pt;
 
     /// \short Boolean to determine whether the element can delete the stored
     /// derivatives of shape functions w.r.t. global coordinates
@@ -118,13 +118,13 @@ namespace oomph
     virtual ~StorableShapeElementBase();
 
     /// Broken copy constructor
-    StorableShapeElementBase(const StorableShapeElementBase &)
+    StorableShapeElementBase(const StorableShapeElementBase&)
     {
       BrokenCopy::broken_copy("StorableShapeElementBase");
     }
 
     /// Broken assignment operator
-    void operator=(const StorableShapeElementBase &)
+    void operator=(const StorableShapeElementBase&)
     {
       BrokenCopy::broken_assign("StorableShapeElementBase");
     }
@@ -163,39 +163,39 @@ namespace oomph
     /// \short Set the spatial integration scheme -- overloaded from the
     /// finite element base class since a change in the integration scheme
     /// forces a recomputation of the shape fcts at the integration points.
-    virtual void set_integration_scheme(Integral *const &integral_pt);
+    virtual void set_integration_scheme(Integral* const& integral_pt);
 
     /// \short Return a pointer to the vector of pointers to the
     /// stored shape functions
-    inline Vector<Shape *> *&shape_stored_pt()
+    inline Vector<Shape*>*& shape_stored_pt()
     {
       return Shape_stored_pt;
     }
 
     /// \short Return a pointer to the vector of pointers to the
     /// stored shape functions (const version)
-    inline Vector<Shape *> *const &shape_stored_pt() const
+    inline Vector<Shape*>* const& shape_stored_pt() const
     {
       return Shape_stored_pt;
     }
 
     /// \short Return a pointer to the stored shape function at the ipt-th
     /// integration point
-    inline Shape *&shape_stored_pt(const unsigned &ipt)
+    inline Shape*& shape_stored_pt(const unsigned& ipt)
     {
       return (*Shape_stored_pt)[ipt];
     }
 
     /// \short Return a pointer to the stored shape function at the ipt-th
     /// integration point (const version)
-    inline Shape *const &shape_stored_pt(const unsigned &ipt) const
+    inline Shape* const& shape_stored_pt(const unsigned& ipt) const
     {
       return (*Shape_stored_pt)[ipt];
     }
 
     /// \short Return a pointer to the vector of pointers to the stored first
     /// derivatives of the shape functions w.r.t the local coordinates
-    inline Vector<DShape *> *&dshape_local_stored_pt()
+    inline Vector<DShape*>*& dshape_local_stored_pt()
     {
       return DShape_local_stored_pt;
     }
@@ -203,14 +203,14 @@ namespace oomph
     /// \short Return a pointer to the vector of pointers to the stored first
     /// derivatives of the shape functions w.r.t the local coordinates
     /// (const version)
-    inline Vector<DShape *> *const &dshape_local_stored_pt() const
+    inline Vector<DShape*>* const& dshape_local_stored_pt() const
     {
       return DShape_local_stored_pt;
     }
 
     /// \short Return a pointer to the vector of pointers to the stored second
     /// derivatives of the shape functions w.r.t the local coordinates
-    inline Vector<DShape *> *&d2shape_local_stored_pt()
+    inline Vector<DShape*>*& d2shape_local_stored_pt()
     {
       return D2Shape_local_stored_pt;
     }
@@ -218,7 +218,7 @@ namespace oomph
     /// \short Return a pointer to the vector of pointers to the stored second
     /// derivatives of the shape functions w.r.t the local coordinates
     /// (const version)
-    inline Vector<DShape *> *const &d2shape_local_stored_pt() const
+    inline Vector<DShape*>* const& d2shape_local_stored_pt() const
     {
       return D2Shape_local_stored_pt;
     }
@@ -226,7 +226,7 @@ namespace oomph
     /// \short Return a pointer to the vector of pointers to the stored first
     /// derivatives of the shape functions w.r.t the global (eulerian)
     /// coordinates
-    inline Vector<DShape *> *&dshape_eulerian_stored_pt()
+    inline Vector<DShape*>*& dshape_eulerian_stored_pt()
     {
       return DShape_eulerian_stored_pt;
     }
@@ -234,7 +234,7 @@ namespace oomph
     /// \short Return a pointer to the vector of pointers to the stored first
     /// derivatives of the shape functions w.r.t the global (eulerian)
     /// coordinates (const version)
-    inline Vector<DShape *> *const &dshape_eulerian_stored_pt() const
+    inline Vector<DShape*>* const& dshape_eulerian_stored_pt() const
     {
       return DShape_eulerian_stored_pt;
     }
@@ -242,7 +242,7 @@ namespace oomph
     /// \short Return a pointer to the vector of pointers to the stored second
     /// derivatives of the shape functions w.r.t the global (eulerian)
     /// coordinates
-    inline Vector<DShape *> *&d2shape_eulerian_stored_pt()
+    inline Vector<DShape*>*& d2shape_eulerian_stored_pt()
     {
       return D2Shape_eulerian_stored_pt;
     }
@@ -250,14 +250,14 @@ namespace oomph
     /// \short Return a pointer to the vector of pointers to the stored second
     /// derivatives of the shape functions w.r.t the global (eulerian)
     /// coordinates (const version)
-    inline Vector<DShape *> *const &d2shape_eulerian_stored_pt() const
+    inline Vector<DShape*>* const& d2shape_eulerian_stored_pt() const
     {
       return D2Shape_eulerian_stored_pt;
     }
 
     /// \short Return a pointer to the vector of Jacobians of
     /// the mapping between the local and global (eulerian) coordinates
-    inline Vector<double> *&jacobian_eulerian_stored_pt()
+    inline Vector<double>*& jacobian_eulerian_stored_pt()
     {
       return Jacobian_eulerian_stored_pt;
     }
@@ -265,7 +265,7 @@ namespace oomph
     /// \short Return a pointer to the vector of Jacobians of
     /// the mapping between the local and global (eulerian) coordinates
     /// (const version)
-    inline Vector<double> *const &jacobian_eulerian_stored_pt() const
+    inline Vector<double>* const& jacobian_eulerian_stored_pt() const
     {
       return Jacobian_eulerian_stored_pt;
     }
@@ -279,7 +279,7 @@ namespace oomph
     /// created storage and re-directs the pointers to the stored
     /// shape function of the specified element.
     void set_shape_local_stored_from_element(
-      StorableShapeElementBase *const &element_pt);
+      StorableShapeElementBase* const& element_pt);
 
     /// \short Set the derivatives of stored shape functions with respect
     /// to the global coordinates to be the same as
@@ -289,7 +289,7 @@ namespace oomph
     /// Calling this function only makes sense for uniformly-spaced meshes with
     /// elements of equal sizes.
     void set_dshape_eulerian_stored_from_element(
-      StorableShapeElementBase *const &element_pt);
+      StorableShapeElementBase* const& element_pt);
 
     /// \short Calculate the shape functions at the integration points
     /// and store the results internally
@@ -297,7 +297,7 @@ namespace oomph
 
     /// \short Return the geometric shape function at the ipt-th integration
     /// point
-    void shape_at_knot(const unsigned &ipt, Shape &psi) const;
+    void shape_at_knot(const unsigned& ipt, Shape& psi) const;
 
     /// \short Calculate the shape functions and first derivatives w.r.t. local
     /// coordinatess at the integration points and store the results internally
@@ -306,9 +306,9 @@ namespace oomph
     /// \short Return the geometric shape function and its derivative w.r.t.
     /// the local coordinates at the ipt-th integration point. If pre-computed
     /// values have been stored, they will be used.
-    void dshape_local_at_knot(const unsigned &ipt,
-                              Shape &psi,
-                              DShape &dpsids) const;
+    void dshape_local_at_knot(const unsigned& ipt,
+                              Shape& psi,
+                              DShape& dpsids) const;
 
     /// \short Calculate the second derivatives of the shape functions
     /// w.r.t. local coordinates at the integration points and store the
@@ -319,10 +319,10 @@ namespace oomph
     /// second derivatives w.r.t.
     /// the local coordinates at the ipt-th integration point. If pre-computed
     /// values have been stored, they will be used.
-    void d2shape_local_at_knot(const unsigned &ipt,
-                               Shape &psi,
-                               DShape &dpsids,
-                               DShape &d2psids) const;
+    void d2shape_local_at_knot(const unsigned& ipt,
+                               Shape& psi,
+                               DShape& dpsids,
+                               DShape& d2psids) const;
 
     /// \short Calculate the Jacobian of the mapping from local to global
     /// coordinates at the integration points and store the results
@@ -331,7 +331,7 @@ namespace oomph
 
     /// \short Return the Jacobian of the mapping from local to global
     /// coordinates at the ipt-th integration point
-    double J_eulerian_at_knot(const unsigned &ipt) const;
+    double J_eulerian_at_knot(const unsigned& ipt) const;
 
     /// \short Calculate the first derivatives of the shape functions
     /// w.r.t the global coordinates at the integration points and store
@@ -342,9 +342,9 @@ namespace oomph
     /// derivatives w.r.t. global coordinates at the ipt-th integration point.
     /// If the values of the shape functions and derivatives have been
     /// pre-computed, these will be used
-    double dshape_eulerian_at_knot(const unsigned &ipt,
-                                   Shape &psi,
-                                   DShape &dpsidx) const;
+    double dshape_eulerian_at_knot(const unsigned& ipt,
+                                   Shape& psi,
+                                   DShape& dpsidx) const;
 
     /// \short Calculate the first and second derivatives of the shape
     /// functions w.r.t global coordinates at the integration points and
@@ -355,10 +355,10 @@ namespace oomph
     /// and second derivatives w.r.t. global coordinates at ipt-th integration
     /// point. If the values of the shape functions and derivatives have been
     /// pre-computred, these will be used
-    double d2shape_eulerian_at_knot(const unsigned &ipt,
-                                    Shape &psi,
-                                    DShape &dpsidx,
-                                    DShape &d2psidx) const;
+    double d2shape_eulerian_at_knot(const unsigned& ipt,
+                                    Shape& psi,
+                                    DShape& dpsidx,
+                                    DShape& d2psidx) const;
 
     /*  /// Diagnostic */
     /*  void tell_me() */
@@ -385,15 +385,15 @@ namespace oomph
   private:
     /// \short Pointer to storage for the pointers to the derivatives of the
     /// shape functions w.r.t. Lagrangian coordinates at integration points
-    Vector<DShape *> *DShape_lagrangian_stored_pt;
+    Vector<DShape*>* DShape_lagrangian_stored_pt;
 
     /// \short Pointer to storage for the pointers to the second derivatives of
     /// the shape functions w.r.t. Lagrangian coordinates at integration points
-    Vector<DShape *> *D2Shape_lagrangian_stored_pt;
+    Vector<DShape*>* D2Shape_lagrangian_stored_pt;
 
     /// \short Pointer to storage for the Jacobian of the mapping between
     /// the local and the global Lagrangian coordinates
-    Vector<double> *Jacobian_lagrangian_stored_pt;
+    Vector<double>* Jacobian_lagrangian_stored_pt;
 
     /// \short Boolean to determine whether the element can delete the stored
     /// shape function derivatives w.r.t. the Lagrangian coordinate
@@ -418,13 +418,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    StorableShapeSolidElementBase(const StorableShapeSolidElementBase &)
+    StorableShapeSolidElementBase(const StorableShapeSolidElementBase&)
     {
       BrokenCopy::broken_copy("StorableShapeSolidElementBase");
     }
 
     /// Broken assignment operator
-    void operator=(const StorableShapeSolidElementBase &)
+    void operator=(const StorableShapeSolidElementBase&)
     {
       BrokenCopy::broken_assign("StorableShapeSolidElementBase");
     }
@@ -447,7 +447,7 @@ namespace oomph
 
     /// \short Overload the set_integration_scheme to recompute any stored
     /// derivatives w.r.t. Lagrangian coordinates
-    void set_integration_scheme(Integral *const &integral_pt)
+    void set_integration_scheme(Integral* const& integral_pt)
     {
       StorableShapeElementBase::set_integration_scheme(integral_pt);
 
@@ -467,7 +467,7 @@ namespace oomph
     /// \short Return a pointer to the vector of pointers to the stored first
     /// derivatives of the shape functions w.r.t the global (eulerian)
     /// coordinates
-    inline Vector<DShape *> *&dshape_lagrangian_stored_pt()
+    inline Vector<DShape*>*& dshape_lagrangian_stored_pt()
     {
       return DShape_lagrangian_stored_pt;
     }
@@ -475,7 +475,7 @@ namespace oomph
     /// \short Return a pointer to the vector of pointers to the stored first
     /// derivatives of the shape functions w.r.t the global (eulerian)
     /// coordinates (const version)
-    inline Vector<DShape *> *const &dshape_lagrangian_stored_pt() const
+    inline Vector<DShape*>* const& dshape_lagrangian_stored_pt() const
     {
       return DShape_lagrangian_stored_pt;
     }
@@ -483,7 +483,7 @@ namespace oomph
     /// \short Return a pointer to the vector of pointers to the stored second
     /// derivatives of the shape functions w.r.t the global (eulerian)
     /// coordinates
-    inline Vector<DShape *> *&d2shape_lagrangian_stored_pt()
+    inline Vector<DShape*>*& d2shape_lagrangian_stored_pt()
     {
       return D2Shape_lagrangian_stored_pt;
     }
@@ -491,14 +491,14 @@ namespace oomph
     /// \short Return a pointer to the vector of pointers to the stored second
     /// derivatives of the shape functions w.r.t the global (eulerian)
     /// coordinates (const version)
-    inline Vector<DShape *> *const &d2shape_lagrangian_stored_pt() const
+    inline Vector<DShape*>* const& d2shape_lagrangian_stored_pt() const
     {
       return D2Shape_lagrangian_stored_pt;
     }
 
     /// \short Return a pointer to the vector of Jacobians of
     /// the mapping between the local and global (eulerian) coordinates
-    inline Vector<double> *&jacobian_lagrangian_stored_pt()
+    inline Vector<double>*& jacobian_lagrangian_stored_pt()
     {
       return Jacobian_lagrangian_stored_pt;
     }
@@ -506,7 +506,7 @@ namespace oomph
     /// \short Return a pointer to the vector of Jacobians of
     /// the mapping between the local and global (eulerian) coordinates
     /// (const version)
-    inline Vector<double> *const &jacobian_lagrangian_stored_pt() const
+    inline Vector<double>* const& jacobian_lagrangian_stored_pt() const
     {
       return Jacobian_lagrangian_stored_pt;
     }
@@ -520,9 +520,9 @@ namespace oomph
     /// derivatives w.r.t. Lagrangian coordinates at ipt-th integration point.
     /// If the values of the shape function and derivatives have been
     /// pre-computed, they will be used.
-    double dshape_lagrangian_at_knot(const unsigned &ipt,
-                                     Shape &psi,
-                                     DShape &dpsidxi) const;
+    double dshape_lagrangian_at_knot(const unsigned& ipt,
+                                     Shape& psi,
+                                     DShape& dpsidxi) const;
 
     /// \short Calculate the first and second derivatives of the
     /// shape functions w.r.t
@@ -535,10 +535,10 @@ namespace oomph
     /// the ipt-th integration point. If the values have been pre-computed,
     /// they will be used.
     /// Returns Jacobian of mapping from Lagrangian to local coordinates.
-    double d2shape_lagrangian_at_knot(const unsigned &ipt,
-                                      Shape &psi,
-                                      DShape &dpsidxi,
-                                      DShape &d2psidxi) const;
+    double d2shape_lagrangian_at_knot(const unsigned& ipt,
+                                      Shape& psi,
+                                      DShape& dpsidxi,
+                                      DShape& d2psidxi) const;
 
     /// \short Set the derivatives of stored shape functions with respect
     /// to the lagrangian coordinates to be the same as
@@ -548,7 +548,7 @@ namespace oomph
     /// Calling this function only makes sense for uniformly-spaced meshes with
     /// elements of equal sizes.
     void set_dshape_lagrangian_stored_from_element(
-      StorableShapeSolidElementBase *const &element_pt);
+      StorableShapeSolidElementBase* const& element_pt);
   };
 
   //========================================================================
@@ -577,13 +577,13 @@ namespace oomph
     virtual ~StorableShapeElement() {}
 
     /// Broken copy constructor
-    StorableShapeElement(const StorableShapeElement &)
+    StorableShapeElement(const StorableShapeElement&)
     {
       BrokenCopy::broken_copy("StorableShapeElement");
     }
 
     /// Broken assignment operator
-    void operator=(const StorableShapeElement &)
+    void operator=(const StorableShapeElement&)
     {
       BrokenCopy::broken_assign("StorableShapeElement");
     }
@@ -618,13 +618,13 @@ namespace oomph
     virtual ~StorableShapeSolidElement() {}
 
     /// Broken copy constructor
-    StorableShapeSolidElement(const StorableShapeSolidElement &)
+    StorableShapeSolidElement(const StorableShapeSolidElement&)
     {
       BrokenCopy::broken_copy("StorableShapeSolidElement");
     }
 
     /// Broken assignment operator
-    void operator=(const StorableShapeSolidElement &)
+    void operator=(const StorableShapeSolidElement&)
     {
       BrokenCopy::broken_assign("StorableShapeSolidElement");
     }

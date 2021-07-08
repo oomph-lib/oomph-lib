@@ -61,27 +61,27 @@ class Mesh1D : public virtual Mesh
 
 public:
   // Constructor, which is where all the work takes place
-  Mesh1D(const unsigned &N1,
-         const unsigned &N2,
-         TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper);
+  Mesh1D(const unsigned& N1,
+         const unsigned& N2,
+         TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
   // Access functions for private data
-  const unsigned &n1() const
+  const unsigned& n1() const
   {
     return N1;
   }
-  const unsigned &n2() const
+  const unsigned& n2() const
   {
     return N2;
   }
-  const unsigned &nx() const
+  const unsigned& nx() const
   {
     return N1 + N2;
   }
 
   /// Return pointer to FiniteElement
-  FiniteElement *finite_element_pt(const unsigned &ielem)
+  FiniteElement* finite_element_pt(const unsigned& ielem)
   {
-    return dynamic_cast<FiniteElement *>(Element_pt[ielem]);
+    return dynamic_cast<FiniteElement*>(Element_pt[ielem]);
   }
 };
 
@@ -91,9 +91,9 @@ public:
 // N2 : number of elements in the x direction, upper region (0 -> 1)
 // Ntime : number of time data that need to be stored
 template<class ELEMENT>
-Mesh1D<ELEMENT>::Mesh1D(const unsigned &n1,
-                        const unsigned &n2,
-                        TimeStepper *time_stepper_pt)
+Mesh1D<ELEMENT>::Mesh1D(const unsigned& n1,
+                        const unsigned& n2,
+                        TimeStepper* time_stepper_pt)
 {
   // Set the internal values
   N1 = n1;
@@ -109,7 +109,7 @@ Mesh1D<ELEMENT>::Mesh1D(const unsigned &n1,
   // Allocate the memory for the first element
   Element_pt[0] = new ELEMENT;
   // Read out the number of linear points in the element
-  unsigned Np = dynamic_cast<ELEMENT *>(finite_element_pt(0))->nnode_1d();
+  unsigned Np = dynamic_cast<ELEMENT*>(finite_element_pt(0))->nnode_1d();
 
   // Can now allocate the store for the nodes
   Node_pt.resize(1 + (Np - 1) * Nx);
@@ -221,47 +221,47 @@ class SSPorousChannelEquations : public virtual FiniteElement
 {
 private:
   // Pointer to Global Reynolds number
-  double *Re_pt;
+  double* Re_pt;
 
 protected:
   /// Function to compute the shape functions and derivatives w.r.t.
   /// global coords at local coordinates.
-  virtual double dshape_and_dtest_eulerian_at_knot(const unsigned &ipt,
-                                                   Shape &psi,
-                                                   DShape &dpsidx,
-                                                   Shape &test,
-                                                   DShape &dtestdx) = 0;
+  virtual double dshape_and_dtest_eulerian_at_knot(const unsigned& ipt,
+                                                   Shape& psi,
+                                                   DShape& dpsidx,
+                                                   Shape& test,
+                                                   DShape& dtestdx) = 0;
 
 public:
   /// Empty Constructor, set boolean flags to be false
   SSPorousChannelEquations() {}
 
   /// Access functions for the Reynolds number
-  const double &re() const
+  const double& re() const
   {
     return *Re_pt;
   }
 
   /// Access function for a pointer to the Reynolds number
-  double *&re_pt()
+  double*& re_pt()
   {
     return Re_pt;
   }
 
   /// Return the i-th ODE variable stored at the n-th local node
-  virtual double f(const unsigned &b, const unsigned &i) const = 0;
+  virtual double f(const unsigned& b, const unsigned& i) const = 0;
 
   /// Return the i-th ODE variable stored at the n-th local node at time t.
-  virtual double f(const unsigned &t,
-                   const unsigned &n,
-                   const unsigned &i) const = 0;
+  virtual double f(const unsigned& t,
+                   const unsigned& n,
+                   const unsigned& i) const = 0;
 
   ///// \short i-th component of df/dt at local node n.
   /// Uses suitably interpolated value for hanging nodes.
-  double df_dt(const unsigned &n, const unsigned &i) const
+  double df_dt(const unsigned& n, const unsigned& i) const
   {
     // Get the data's timestepper
-    TimeStepper *time_stepper_pt = node_pt(n)->time_stepper_pt();
+    TimeStepper* time_stepper_pt = node_pt(n)->time_stepper_pt();
 
     // Number of timsteps (past & present)
     unsigned n_time = time_stepper_pt->ntstorage();
@@ -281,7 +281,7 @@ public:
   }
 
   /// This function returns just the residuals
-  inline void fill_in_contribution_to_residuals(Vector<double> &residuals)
+  inline void fill_in_contribution_to_residuals(Vector<double>& residuals)
   {
     // Create a dummy matrix
     DenseMatrix<double> dummy(1);
@@ -290,8 +290,8 @@ public:
   }
 
   /// This function returns the residuals and the jacobian
-  inline void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                               DenseMatrix<double> &jacobian)
+  inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                               DenseMatrix<double>& jacobian)
   {
     // Call the generic routine with the flag set to 1
     add_generic_residual_contribution(residuals, jacobian, 1);
@@ -301,8 +301,8 @@ public:
   /// This function returns the residuals for the ODE; J
   /// FLAG=1(or 0): do (or don't) compute the Jacobian as well.
   //----------------------------------------------------------------------
-  void add_generic_residual_contribution(Vector<double> &residuals,
-                                         DenseMatrix<double> &jacobian,
+  void add_generic_residual_contribution(Vector<double>& residuals,
+                                         DenseMatrix<double>& jacobian,
                                          unsigned flag)
   {
     // Find out how many nodes there are
@@ -458,7 +458,7 @@ public:
   }
 
   /// FE interpolated values of the arguments
-  double interpolated_f(const Vector<double> &s, const unsigned &i)
+  double interpolated_f(const Vector<double>& s, const unsigned& i)
   {
     // Find number of nodes
     unsigned n_node = nnode();
@@ -479,13 +479,13 @@ public:
   }
 
   /// Overload the output function
-  void output(ostream &outfile)
+  void output(ostream& outfile)
   {
     FiniteElement::output(outfile);
   }
 
   /// Output function: x,y,[z],u,v,[w],p in tecplot format
-  void output(ostream &outfile, const unsigned &Np)
+  void output(ostream& outfile, const unsigned& Np)
   {
     FiniteElement::output(outfile, Np);
   }
@@ -503,11 +503,11 @@ private:
 
 protected:
   // Function to do the whole derivatives and Jacobian thing
-  double dshape_and_dtest_eulerian_at_knot(const unsigned &ipt,
-                                           Shape &psi,
-                                           DShape &dpsidx,
-                                           Shape &test,
-                                           DShape &dtestdx)
+  double dshape_and_dtest_eulerian_at_knot(const unsigned& ipt,
+                                           Shape& psi,
+                                           DShape& dpsidx,
+                                           Shape& test,
+                                           DShape& dtestdx)
   {
     // Call the geometrical shape functions and derivatives
     double J = QElement<1, 3>::dshape_eulerian_at_knot(ipt, psi, dpsidx);
@@ -528,37 +528,37 @@ public:
   SSPorousChannelElement() : QElement<1, 3>(), SSPorousChannelEquations() {}
 
   /// Required number of values at node n
-  inline unsigned required_nvalue(const unsigned &n) const
+  inline unsigned required_nvalue(const unsigned& n) const
   {
     return Initial_Nvalue[n];
   }
 
   // Access function for the additionally stored ODEs
-  double f(const unsigned &l, const unsigned &i) const
+  double f(const unsigned& l, const unsigned& i) const
   {
     return *node_pt(l)->value_pt(i);
   }
 
   // Access function for the ODE variables at previous times
-  double f(const unsigned &t, const unsigned &l, const unsigned &i) const
+  double f(const unsigned& t, const unsigned& l, const unsigned& i) const
   {
     return *node_pt(l)->value_pt(t, i);
   }
 
   // Access function for the projected derivative function
-  double df0dx(const unsigned &l) const
+  double df0dx(const unsigned& l) const
   {
     return *node_pt(l)->value_pt(2);
   }
 
   /// Overload the output function
-  void output(ostream &outfile)
+  void output(ostream& outfile)
   {
     FiniteElement::output(outfile);
   }
 
   /// Output function: x,y[,z],u,v[,w],p at Nplot^DIM points
-  void output(ostream &outfile, const unsigned &Nplot)
+  void output(ostream& outfile, const unsigned& Nplot)
   {
     // Set output Vector
     Vector<double> s(1);
@@ -607,12 +607,12 @@ private:
 
 public:
   // Constructor
-  UniformTranspiration(const unsigned &N1, const unsigned &N2);
+  UniformTranspiration(const unsigned& N1, const unsigned& N2);
 
   // Access function for the mesh
-  Mesh1D<ELEMENT> *mesh_pt()
+  Mesh1D<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<Mesh1D<ELEMENT> *>(Problem::mesh_pt());
+    return dynamic_cast<Mesh1D<ELEMENT>*>(Problem::mesh_pt());
   }
 
   // Update function does nothing
@@ -624,8 +624,8 @@ public:
 
 // Constructor
 template<class ELEMENT>
-UniformTranspiration<ELEMENT>::UniformTranspiration(const unsigned &N1,
-                                                    const unsigned &N2) :
+UniformTranspiration<ELEMENT>::UniformTranspiration(const unsigned& N1,
+                                                    const unsigned& N2) :
   NX1(N1), NX2(N2)
 {
   // Now create the mesh
@@ -639,7 +639,7 @@ UniformTranspiration<ELEMENT>::UniformTranspiration(const unsigned &N1,
   for (unsigned long e = 0; e < Nelement; e++)
   {
     // Cast to an ODE element
-    ELEMENT *temp_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* temp_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
     // Set the Reynolds number
     temp_pt->re_pt() = &Re;
@@ -671,8 +671,8 @@ int main()
 
   // Track the node in the middle
   // The element Nx1 contains this node
-  SSPorousChannelElement *Test_pt =
-    dynamic_cast<SSPorousChannelElement *>(problem.mesh_pt()->element_pt(Nx1));
+  SSPorousChannelElement* Test_pt =
+    dynamic_cast<SSPorousChannelElement*>(problem.mesh_pt()->element_pt(Nx1));
   // Set the position of the node within the element
   Vector<double> s(1);
   s[0] = 1.0;
@@ -699,7 +699,7 @@ int main()
   unsigned n_node = problem.mesh_pt()->nnode();
   for (unsigned n = 0; n < n_node; n++)
   {
-    Node *nod_pt = problem.mesh_pt()->node_pt(n);
+    Node* nod_pt = problem.mesh_pt()->node_pt(n);
     double x = nod_pt->x(0);
     if (!nod_pt->is_pinned(1))
     {

@@ -38,8 +38,8 @@ namespace oomph
   /// father element. 2D case.
   //=========================================================================
   template<>
-  void MGSolver<2>::level_up_local_coord_of_node(const int &son_type,
-                                                 Vector<double> &s)
+  void MGSolver<2>::level_up_local_coord_of_node(const int& son_type,
+                                                 Vector<double>& s)
   {
     // If the element is unrefined between the levels the local coordinate
     // of the node in one element is the same as that in the other element
@@ -92,8 +92,8 @@ namespace oomph
   /// father element. 3D case.
   //=========================================================================
   template<>
-  void MGSolver<3>::level_up_local_coord_of_node(const int &son_type,
-                                                 Vector<double> &s)
+  void MGSolver<3>::level_up_local_coord_of_node(const int& son_type,
+                                                 Vector<double>& s)
   {
     // If the element is unrefined between the levels the local coordinate
     // of the node in one element is the same as that in the other element

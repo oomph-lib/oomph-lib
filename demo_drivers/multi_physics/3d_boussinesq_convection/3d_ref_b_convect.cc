@@ -51,11 +51,11 @@ class ElementCmp
 {
 public:
   /// Comparison. Are the values identical or not?
-  bool operator()(GeneralisedElement *const &x,
-                  GeneralisedElement *const &y) const
+  bool operator()(GeneralisedElement* const& x,
+                  GeneralisedElement* const& y) const
   {
-    FiniteElement *cast_x = dynamic_cast<FiniteElement *>(x);
-    FiniteElement *cast_y = dynamic_cast<FiniteElement *>(y);
+    FiniteElement* cast_x = dynamic_cast<FiniteElement*>(x);
+    FiniteElement* cast_y = dynamic_cast<FiniteElement*>(y);
 
     if ((cast_x == 0) || (cast_y == 0))
     {
@@ -85,7 +85,7 @@ public:
   /// \short Constructor: By default use block triangular form with retained
   /// fluid on temperature terms. Requires a non-constant problem pointer
   /// because of the underlying NavierStokesSchurComplementPreconditioner.
-  BoussinesqPreconditioner(Problem *problem_pt)
+  BoussinesqPreconditioner(Problem* problem_pt)
   {
     // Default setting: Fluid onto temperature
     Retain_temperature_onto_fluid_terms = false;
@@ -115,7 +115,7 @@ public:
 
       // Set parameters for use as preconditioner on Poisson-type problem
       Hypre_default_settings::set_defaults_for_3D_poisson_problem(
-        static_cast<HyprePreconditioner *>(P_preconditioner_pt));
+        static_cast<HyprePreconditioner*>(P_preconditioner_pt));
 
       // Use Hypre for the Schur complement block
       Navier_stokes_preconditioner_pt->set_p_preconditioner(
@@ -126,7 +126,7 @@ public:
       // Set parameters for use as preconditioner in for momentum
       // block in Navier-Stokes problem
       Hypre_default_settings::set_defaults_for_navier_stokes_momentum_block(
-        static_cast<HyprePreconditioner *>(F_preconditioner_pt));
+        static_cast<HyprePreconditioner*>(F_preconditioner_pt));
 
       // Use Hypre for momentum block
       Navier_stokes_preconditioner_pt->set_f_preconditioner(
@@ -138,7 +138,7 @@ public:
 
       Temperature_preconditioner_pt = new HyprePreconditioner;
       Hypre_default_settings::set_defaults_for_navier_stokes_momentum_block(
-        static_cast<HyprePreconditioner *>(Temperature_preconditioner_pt));
+        static_cast<HyprePreconditioner*>(Temperature_preconditioner_pt));
     }
 #endif
 
@@ -187,7 +187,7 @@ public:
   }
 
   /// Broken copy constructor
-  BoussinesqPreconditioner(const BoussinesqPreconditioner &)
+  BoussinesqPreconditioner(const BoussinesqPreconditioner&)
   {
     BrokenCopy::broken_copy("BoussinesqPreconditioner");
   }
@@ -219,10 +219,10 @@ public:
   void setup();
 
   /// \short Apply preconditioner to r
-  void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+  void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
   /// Access function to the Navier Stokes preconditioner (inexact solver)
-  NavierStokesSchurComplementPreconditioner *navier_stokes_preconditioner_pt()
+  NavierStokesSchurComplementPreconditioner* navier_stokes_preconditioner_pt()
     const
   {
     return Navier_stokes_preconditioner_pt;
@@ -260,23 +260,23 @@ private:
   }
 
   /// Pointer the Navier Stokes preconditioner (inexact solver)
-  NavierStokesSchurComplementPreconditioner *Navier_stokes_preconditioner_pt;
+  NavierStokesSchurComplementPreconditioner* Navier_stokes_preconditioner_pt;
 
   /// Pointer to the temperature preconditioner  (inexact solver)
-  Preconditioner *Temperature_preconditioner_pt;
+  Preconditioner* Temperature_preconditioner_pt;
 
   /// Inexact solver for P block
-  Preconditioner *P_preconditioner_pt;
+  Preconditioner* P_preconditioner_pt;
 
   /// Inexact solver for F block
-  Preconditioner *F_preconditioner_pt;
+  Preconditioner* F_preconditioner_pt;
 
   /// Pointer to fluid/temperature interaction matrix
-  CRDoubleMatrix *Block_matrix_0_1_pt;
+  CRDoubleMatrix* Block_matrix_0_1_pt;
   // MatrixVectorProduct* Mat_vec_operator_0_1_pt;
 
   /// Pointer to temperature/fluid interaction matrix
-  CRDoubleMatrix *Block_matrix_1_0_pt;
+  CRDoubleMatrix* Block_matrix_1_0_pt;
   // MatrixVectorProduct* Mat_vec_operator_1_0_pt;
 
   /// Boolean indicating the preconditioner has been set up
@@ -345,7 +345,7 @@ void BoussinesqPreconditioner::setup()
   // Extract the additional blocks we need for Boussinesq:
 
   // Temperature matrix
-  CRDoubleMatrix *block_matrix_1_1_pt = new CRDoubleMatrix;
+  CRDoubleMatrix* block_matrix_1_1_pt = new CRDoubleMatrix;
   this->get_block(1, 1, *block_matrix_1_1_pt);
 
   // Temperature on fluid terms (if needed)
@@ -411,8 +411,8 @@ void BoussinesqPreconditioner::setup()
 //======================================================================
 /// Apply preconditioner to Vector r
 //======================================================================
-void BoussinesqPreconditioner::preconditioner_solve(const DoubleVector &r,
-                                                    DoubleVector &z)
+void BoussinesqPreconditioner::preconditioner_solve(const DoubleVector& r,
+                                                    DoubleVector& z)
 {
   // if z is not setup then give it the same distribution
   if (!z.built())
@@ -529,7 +529,7 @@ class RefineableBuoyantQCrouzeixRaviartElement :
 {
 private:
   /// Pointer to a new physical variable, the Rayleigh number
-  double *Ra_pt;
+  double* Ra_pt;
 
   /// The static default value of the Rayleigh number
   static double Default_Physical_Constant_Value;
@@ -548,20 +548,20 @@ public:
   ///\short The required number of values stored at the nodes is
   /// the sum of the required values of the two single-physics elements. This
   /// step is generic for any composed element of this type.
-  inline unsigned required_nvalue(const unsigned &n) const
+  inline unsigned required_nvalue(const unsigned& n) const
   {
     return (RefineableQAdvectionDiffusionElement<DIM, 3>::required_nvalue(n) +
             RefineableQCrouzeixRaviartElement<DIM>::required_nvalue(n));
   }
 
   /// Access function for the Rayleigh number (const version)
-  const double &ra() const
+  const double& ra() const
   {
     return *Ra_pt;
   }
 
   /// Access function for the pointer to the Rayleigh number
-  double *&ra_pt()
+  double*& ra_pt()
   {
     return Ra_pt;
   }
@@ -599,9 +599,9 @@ public:
   /// \short Write values of the i-th scalar field at the plot points. Broken
   /// virtual. Needs to be implemented for each new specific element type.
   /// Temporary dummy
-  void scalar_value_paraview(std::ofstream &file_out,
-                             const unsigned &i,
-                             const unsigned &nplot) const
+  void scalar_value_paraview(std::ofstream& file_out,
+                             const unsigned& i,
+                             const unsigned& nplot) const
   {
     throw OomphLibError(
       "This function hasn't been implemented for this element",
@@ -612,20 +612,20 @@ public:
   /// \short Name of the i-th scalar field. Default implementation
   /// returns V1 for the first one, V2 for the second etc. Can (should!) be
   /// overloaded with more meaningful names.
-  std::string scalar_name_paraview(const unsigned &i) const
+  std::string scalar_name_paraview(const unsigned& i) const
   {
     return "V" + StringConversion::to_string(i);
   }
 
   ///  Overload the standard output function with the broken default
-  void output(ostream &outfile)
+  void output(ostream& outfile)
   {
     FiniteElement::output(outfile);
   }
 
   /// \short Output function:
   ///  x,y,u   or    x,y,z,u at Nplot^DIM plot points
-  void output(ostream &outfile, const unsigned &nplot)
+  void output(ostream& outfile, const unsigned& nplot)
   {
     // vector of local coordinates
     Vector<double> s(DIM);
@@ -665,20 +665,20 @@ public:
   }
 
   /// \short C-style output function:  Broken default
-  void output(FILE *file_pt)
+  void output(FILE* file_pt)
   {
     FiniteElement::output(file_pt);
   }
 
   ///  \short C-style output function: Broken default
-  void output(FILE *file_pt, const unsigned &n_plot)
+  void output(FILE* file_pt, const unsigned& n_plot)
   {
     FiniteElement::output(file_pt, n_plot);
   }
 
   /// \short Output function for an exact solution: Broken default
-  void output_fct(ostream &outfile,
-                  const unsigned &Nplot,
+  void output_fct(ostream& outfile,
+                  const unsigned& Nplot,
                   FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
   {
     FiniteElement::output_fct(outfile, Nplot, exact_soln_pt);
@@ -686,9 +686,9 @@ public:
 
   /// \short Output function for a time-dependent exact solution.
   /// Broken default
-  void output_fct(ostream &outfile,
-                  const unsigned &Nplot,
-                  const double &time,
+  void output_fct(ostream& outfile,
+                  const unsigned& Nplot,
+                  const double& time,
                   FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
   {
     FiniteElement::output_fct(outfile, Nplot, time, exact_soln_pt);
@@ -710,7 +710,7 @@ public:
 
   /// \short Pointer to the j-th vertex node in the element,
   /// Call the geometric element's function.
-  Node *vertex_node_pt(const unsigned &j) const
+  Node* vertex_node_pt(const unsigned& j) const
   {
     return QElement<DIM, 3>::vertex_node_pt(j);
   }
@@ -725,7 +725,7 @@ public:
   /// \short Get the continuously interpolated values at the local coordinate s.
   /// We choose to put the fluid velocities first, followed by the
   /// temperature.
-  void get_interpolated_values(const Vector<double> &s, Vector<double> &values)
+  void get_interpolated_values(const Vector<double>& s, Vector<double>& values)
   {
     // Storage for the fluid velocities
     Vector<double> nst_values;
@@ -755,9 +755,9 @@ public:
   /// coordinate s at time level t (t=0: present; t>0: previous).
   /// We choose to put the fluid velocities first, followed by the
   /// temperature
-  void get_interpolated_values(const unsigned &t,
-                               const Vector<double> &s,
-                               Vector<double> &values)
+  void get_interpolated_values(const unsigned& t,
+                               const Vector<double>& s,
+                               Vector<double>& values)
   {
     // Storage for the fluid velocities
     Vector<double> nst_values;
@@ -794,7 +794,7 @@ public:
 
   /// \short Call the rebuild_from_sons functions for each of the
   /// constituent multi-physics elements.
-  void rebuild_from_sons(Mesh *&mesh_pt)
+  void rebuild_from_sons(Mesh*& mesh_pt)
   {
     RefineableQAdvectionDiffusionElement<DIM, 3>::rebuild_from_sons(mesh_pt);
     RefineableQCrouzeixRaviartElement<DIM>::rebuild_from_sons(mesh_pt);
@@ -810,8 +810,8 @@ public:
 
     // Cast the pointer to the father element to the specific
     // element type
-    RefineableBuoyantQCrouzeixRaviartElement<DIM> *cast_father_element_pt =
-      dynamic_cast<RefineableBuoyantQCrouzeixRaviartElement<DIM> *>(
+    RefineableBuoyantQCrouzeixRaviartElement<DIM>* cast_father_element_pt =
+      dynamic_cast<RefineableBuoyantQCrouzeixRaviartElement<DIM>*>(
         this->father_element_pt());
 
     // Set the pointer to the Rayleigh number to be the same as that in
@@ -841,7 +841,7 @@ public:
   }
 
   /// Get the Z2 flux from the fluid element
-  void get_Z2_flux(const Vector<double> &s, Vector<double> &flux)
+  void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
   {
     // Find the number of fluid fluxes
     unsigned n_fluid_flux =
@@ -865,7 +865,7 @@ public:
 
   /// \short Fill in which flux components are associated with the fluid
   /// measure and which are associated with the temperature measure
-  void get_Z2_compound_flux_indices(Vector<unsigned> &flux_index)
+  void get_Z2_compound_flux_indices(Vector<unsigned>& flux_index)
   {
     // Find the number of fluid fluxes
     unsigned n_fluid_flux =
@@ -893,11 +893,11 @@ public:
   /// Plot at a given number of plot points and compute L2 error
   /// and L2 norm of velocity solution over element
   /// Overload to broken default
-  void compute_error(ostream &outfile,
+  void compute_error(ostream& outfile,
                      FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
-                     const double &time,
-                     double &error,
-                     double &norm)
+                     const double& time,
+                     double& error,
+                     double& norm)
   {
     FiniteElement::compute_error(outfile, exact_soln_pt, time, error, norm);
   }
@@ -907,10 +907,10 @@ public:
   /// Plot at a given number of plot points and compute L2 error
   /// and L2 norm of velocity solution over element
   /// Overload to broken default.
-  void compute_error(ostream &outfile,
+  void compute_error(ostream& outfile,
                      FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-                     double &error,
-                     double &norm)
+                     double& error,
+                     double& norm)
   {
     FiniteElement::compute_error(outfile, exact_soln_pt, error, norm);
   }
@@ -918,10 +918,10 @@ public:
   /// \short Overload the wind function in the advection-diffusion equations.
   /// This provides the coupling from the Navier--Stokes equations to the
   /// advection-diffusion equations because the wind is the fluid velocity.
-  void get_wind_adv_diff(const unsigned &ipt,
-                         const Vector<double> &s,
-                         const Vector<double> &x,
-                         Vector<double> &wind) const
+  void get_wind_adv_diff(const unsigned& ipt,
+                         const Vector<double>& s,
+                         const Vector<double>& x,
+                         Vector<double>& wind) const
   {
     // The wind function is simply the velocity at the points
     this->interpolated_u_nst(s, wind);
@@ -932,11 +932,11 @@ public:
   /// to the Navier--Stokes equations, the body force is the
   /// temperature multiplied by the Rayleigh number acting in the
   /// direction opposite to gravity.
-  void get_body_force_nst(const double &time,
-                          const unsigned &ipt,
-                          const Vector<double> &s,
-                          const Vector<double> &x,
-                          Vector<double> &result)
+  void get_body_force_nst(const double& time,
+                          const unsigned& ipt,
+                          const Vector<double>& s,
+                          const Vector<double>& x,
+                          Vector<double>& result)
   {
     // Get vector that indicates the direction of gravity from
     // the Navier-Stokes equations
@@ -950,7 +950,7 @@ public:
   }
 
   /// Fill in the constituent elements' contribution to the residual vector.
-  void fill_in_contribution_to_residuals(Vector<double> &residuals)
+  void fill_in_contribution_to_residuals(Vector<double>& residuals)
   {
     // Call the residuals of the Navier-Stokes equations
     RefineableNavierStokesEquations<DIM>::fill_in_contribution_to_residuals(
@@ -963,8 +963,8 @@ public:
 
   ///\short Compute the element's residual Vector and the jacobian matrix
   /// using full finite differences, the default implementation
-  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                        DenseMatrix<double> &jacobian)
+  void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                        DenseMatrix<double>& jacobian)
   {
 #ifdef USE_FD_JACOBIAN_FOR_REFINEABLE_BUOYANT_Q_ELEMENT
     FiniteElement::fill_in_contribution_to_jacobian(residuals, jacobian);
@@ -986,9 +986,9 @@ public:
   /// Add the element's contribution to its residuals vector,
   /// jacobian matrix and mass matrix
   void fill_in_contribution_to_jacobian_and_mass_matrix(
-    Vector<double> &residuals,
-    DenseMatrix<double> &jacobian,
-    DenseMatrix<double> &mass_matrix)
+    Vector<double>& residuals,
+    DenseMatrix<double>& jacobian,
+    DenseMatrix<double>& mass_matrix)
   {
     // Call the (broken) version in the base class
     FiniteElement::fill_in_contribution_to_jacobian_and_mass_matrix(
@@ -998,7 +998,7 @@ public:
   /// \short Compute the contribution of the off-diagonal blocks
   /// analytically.
   void fill_in_off_diagonal_jacobian_blocks_analytic(
-    Vector<double> &residuals, DenseMatrix<double> &jacobian)
+    Vector<double>& residuals, DenseMatrix<double>& jacobian)
   {
     // Perform another loop over the integration loops using the information
     // from the original elements' residual assembly loops to determine
@@ -1289,7 +1289,7 @@ public:
   /// (Function can obviously only be called if the equation numbering
   /// scheme has been set up.)
   void get_dof_numbers_for_unknowns(
-    std::list<std::pair<unsigned long, unsigned>> &dof_lookup_list) const
+    std::list<std::pair<unsigned long, unsigned>>& dof_lookup_list) const
   {
     // number of nodes
     unsigned n_node = this->nnode();
@@ -1426,8 +1426,8 @@ public:
     delete Problem::mesh_pt();
 
     // Can we cast the solver to an iterative linear solver
-    GMRES<CRDoubleMatrix> *iterative_linear_solver_pt =
-      dynamic_cast<GMRES<CRDoubleMatrix> *>(this->linear_solver_pt());
+    GMRES<CRDoubleMatrix>* iterative_linear_solver_pt =
+      dynamic_cast<GMRES<CRDoubleMatrix>*>(this->linear_solver_pt());
     // If so delete the preconditioner and the solver
     if (iterative_linear_solver_pt)
     {
@@ -1445,9 +1445,9 @@ public:
   /// \short Overloaded version of the problem's access function to
   /// the mesh. Recasts the pointer to the base Mesh object to
   /// the actual mesh type.
-  RefineableSimpleCubicMesh<ELEMENT> *mesh_pt()
+  RefineableSimpleCubicMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<RefineableSimpleCubicMesh<ELEMENT> *>(
+    return dynamic_cast<RefineableSimpleCubicMesh<ELEMENT>*>(
       Problem::mesh_pt());
   } // end of access function to specic mesh
 
@@ -1500,14 +1500,14 @@ RefineableConvectionProblem<ELEMENT>::RefineableConvectionProblem()
   Lz = l_z;
 
   // Build the mesh
-  RefineableSimpleCubicMesh<ELEMENT> *cast_mesh_pt =
+  RefineableSimpleCubicMesh<ELEMENT>* cast_mesh_pt =
     new RefineableSimpleCubicMesh<ELEMENT>(n_x, n_y, n_z, l_x, l_y, l_z);
 
   // Set the problem's mesh pointer
   Problem::mesh_pt() = cast_mesh_pt;
 
   // Build iterative linear solver
-  GMRES<CRDoubleMatrix> *iterative_linear_solver_pt = new GMRES<CRDoubleMatrix>;
+  GMRES<CRDoubleMatrix>* iterative_linear_solver_pt = new GMRES<CRDoubleMatrix>;
 
   // Set maximum number of iterations
   iterative_linear_solver_pt->max_iter() = 100;
@@ -1515,7 +1515,7 @@ RefineableConvectionProblem<ELEMENT>::RefineableConvectionProblem()
   // Set tolerance
   iterative_linear_solver_pt->tolerance() = 1.0e-8;
 
-  BoussinesqPreconditioner *prec_pt = new BoussinesqPreconditioner(this);
+  BoussinesqPreconditioner* prec_pt = new BoussinesqPreconditioner(this);
 
   // Set the preconditioner
   iterative_linear_solver_pt->preconditioner_pt() = prec_pt;
@@ -1575,7 +1575,7 @@ RefineableConvectionProblem<ELEMENT>::RefineableConvectionProblem()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the Peclet number
     el_pt->pe_pt() = &Global_Physical_Variables::Peclet;
@@ -1624,7 +1624,7 @@ void RefineableConvectionProblem<ELEMENT>::actions_before_newton_solve()
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Get pointer to node
-      Node *nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
+      Node* nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
 
       // If we are on the inlet
       if (ibound == 0)
@@ -1724,7 +1724,7 @@ void RefineableConvectionProblem<ELEMENT>::doc_solution()
 /// Driver code for 3D Boussinesq convection problem with
 /// adaptivity.
 //====================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Uncomment for a parallel version
   //#ifdef OOMPH_HAS_MPI

@@ -48,13 +48,13 @@ class MyCylinder : public GeomObject
 {
 public:
   /// Constructor that takes the radius of the tube as its argument
-  MyCylinder(const double &radius) : GeomObject(3, 3), Radius(radius) {}
+  MyCylinder(const double& radius) : GeomObject(3, 3), Radius(radius) {}
 
   /// Destructor
   virtual ~MyCylinder() {}
 
   /// Lagrangian coordinate xi
-  void position(const Vector<double> &xi, Vector<double> &r) const
+  void position(const Vector<double>& xi, Vector<double>& r) const
   {
     r[0] = xi[2] * Radius * cos(xi[1]);
     r[1] = xi[0];
@@ -63,9 +63,9 @@ public:
 
   /// Return the position of the tube as a function of time
   /// (doesn't move as a function of time)
-  void position(const unsigned &t,
-                const Vector<double> &xi,
-                Vector<double> &r) const
+  void position(const unsigned& t,
+                const Vector<double>& xi,
+                Vector<double>& r) const
   {
     position(xi, r);
   }
@@ -93,9 +93,9 @@ class SteadyTubeProblem : public Problem
 {
 public:
   /// Constructor: Pass DocInfo object and target errors
-  SteadyTubeProblem(DocInfo &doc_info,
-                    const double &min_error_target,
-                    const double &max_error_target);
+  SteadyTubeProblem(DocInfo& doc_info,
+                    const double& min_error_target,
+                    const double& max_error_target);
 
   /// Destructor (empty)
   ~SteadyTubeProblem() {}
@@ -116,9 +116,9 @@ public:
 
   /// \short Overload generic access function by one that returns
   /// a pointer to the specific  mesh
-  RefineableTubeMesh<ELEMENT> *mesh_pt()
+  RefineableTubeMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<RefineableTubeMesh<ELEMENT> *>(Problem::mesh_pt());
+    return dynamic_cast<RefineableTubeMesh<ELEMENT>*>(Problem::mesh_pt());
   }
 
 private:
@@ -126,7 +126,7 @@ private:
   DocInfo Doc_info;
 
   /// Pointer to GeomObject that specifies the domain volume
-  GeomObject *Volume_pt;
+  GeomObject* Volume_pt;
 
 }; // end_of_problem_class
 
@@ -134,9 +134,9 @@ private:
 /// Constructor: Pass DocInfo object and error targets
 //========================================================================
 template<class ELEMENT>
-SteadyTubeProblem<ELEMENT>::SteadyTubeProblem(DocInfo &doc_info,
-                                              const double &min_error_target,
-                                              const double &max_error_target) :
+SteadyTubeProblem<ELEMENT>::SteadyTubeProblem(DocInfo& doc_info,
+                                              const double& min_error_target,
+                                              const double& max_error_target) :
   Doc_info(doc_info)
 {
   // Setup mesh:
@@ -176,7 +176,7 @@ SteadyTubeProblem<ELEMENT>::SteadyTubeProblem(DocInfo &doc_info,
     Volume_pt, centreline_limits, theta_positions, radial_frac, nlayer);
 
   // Set error estimator
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   mesh_pt()->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Error targets for adaptive refinement
@@ -217,7 +217,7 @@ SteadyTubeProblem<ELEMENT>::SteadyTubeProblem(DocInfo &doc_info,
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the Reynolds number, etc
     el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -292,7 +292,7 @@ void SteadyTubeProblem<ELEMENT>::doc_solution()
 //=start_of_main=======================================================
 /// Driver for 3D entry flow into a straight tube.
 //=====================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // The purpose of this code is to test that the position of nodes on
   // curvilinear boundaries are correctly updated after nodes that were

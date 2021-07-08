@@ -60,12 +60,12 @@ class RefineableElasticQuarterTubeMesh :
 public:
   /// \short Constructor:
   RefineableElasticQuarterTubeMesh(
-    GeomObject *wall_pt,
-    const Vector<double> &xi_lo,
-    const double &fract_mid,
-    const Vector<double> &xi_hi,
-    const unsigned &nlayer,
-    TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+    GeomObject* wall_pt,
+    const Vector<double>& xi_lo,
+    const double& fract_mid,
+    const Vector<double>& xi_hi,
+    const unsigned& nlayer,
+    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
     QuarterTubeMesh<ELEMENT>(
       wall_pt, xi_lo, fract_mid, xi_hi, nlayer, time_stepper_pt),
     RefineableQuarterTubeMesh<ELEMENT>(
@@ -94,12 +94,12 @@ class ElasticQuarterTubeMesh :
 public:
   /// \short Constructor:
   ElasticQuarterTubeMesh(
-    GeomObject *wall_pt,
-    const Vector<double> &xi_lo,
-    const double &fract_mid,
-    const Vector<double> &xi_hi,
-    const unsigned &nlayer,
-    TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+    GeomObject* wall_pt,
+    const Vector<double>& xi_lo,
+    const double& fract_mid,
+    const Vector<double>& xi_hi,
+    const unsigned& nlayer,
+    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
     QuarterTubeMesh<ELEMENT>(
       wall_pt, xi_lo, fract_mid, xi_hi, nlayer, time_stepper_pt)
   {
@@ -124,7 +124,7 @@ namespace Global_Physical_Variables
   double L = 10.0;
 
   /// Pointer to strain energy function
-  StrainEnergyFunction *Strain_energy_function_pt = 0;
+  StrainEnergyFunction* Strain_energy_function_pt = 0;
 
   /// First "Mooney Rivlin" coefficient
   double C1 = 1.3;
@@ -133,13 +133,13 @@ namespace Global_Physical_Variables
   double C2 = 1.3;
 
   /// Pointer to constitutive law
-  ConstitutiveLaw *Constitutive_law_pt = 0;
+  ConstitutiveLaw* Constitutive_law_pt = 0;
 
   /// Non-dim gravity
   double Gravity = 0.0;
 
   /// Non-dimensional gravity as body force
-  void gravity(const double &time, const Vector<double> &xi, Vector<double> &b)
+  void gravity(const double& time, const Vector<double>& xi, Vector<double>& b)
   {
     b[0] = 0.0;
     b[1] = -Gravity;
@@ -194,26 +194,26 @@ public:
 #ifdef REFINE
 
   /// Access function for the mesh
-  RefineableElasticQuarterTubeMesh<ELEMENT> *mesh_pt()
+  RefineableElasticQuarterTubeMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<RefineableElasticQuarterTubeMesh<ELEMENT> *>(
+    return dynamic_cast<RefineableElasticQuarterTubeMesh<ELEMENT>*>(
       Problem::mesh_pt());
   }
 
 #else
 
   /// Access function for the mesh
-  ElasticQuarterTubeMesh<ELEMENT> *mesh_pt()
+  ElasticQuarterTubeMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<ElasticQuarterTubeMesh<ELEMENT> *>(Problem::mesh_pt());
+    return dynamic_cast<ElasticQuarterTubeMesh<ELEMENT>*>(Problem::mesh_pt());
   }
 
 #endif
 
   /// Run extended tests -- doc in RESLTi_case
-  void run_tests(const unsigned &i_case,
-                 const bool &incompress,
-                 const bool &use_fd);
+  void run_tests(const unsigned& i_case,
+                 const bool& incompress,
+                 const bool& use_fd);
 
 private:
   /// DocInfo object for output
@@ -229,7 +229,7 @@ CantileverProblem<ELEMENT>::CantileverProblem()
   // Create geometric object that defines curvilinear boundary of
   // beam: Elliptical tube with half axes = radius = 1.0
   double radius = 1.0;
-  GeomObject *wall_pt = new EllipticalTube(radius, radius);
+  GeomObject* wall_pt = new EllipticalTube(radius, radius);
 
   // Bounding Lagrangian coordinates
   Vector<double> xi_lo(2);
@@ -253,7 +253,7 @@ CantileverProblem<ELEMENT>::CantileverProblem()
     wall_pt, xi_lo, frac_mid, xi_hi, nlayer);
 
   // Set error estimator
-  dynamic_cast<RefineableElasticQuarterTubeMesh<ELEMENT> *>(mesh_pt())
+  dynamic_cast<RefineableElasticQuarterTubeMesh<ELEMENT>*>(mesh_pt())
     ->spatial_error_estimator_pt() = new Z2ErrorEstimator;
 
   // Error targets for adaptive refinement
@@ -279,7 +279,7 @@ CantileverProblem<ELEMENT>::CantileverProblem()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Cast to a solid element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the constitutive law
     el_pt->constitutive_law_pt() =
@@ -290,8 +290,8 @@ CantileverProblem<ELEMENT>::CantileverProblem()
 
     // Material is incompressble: Use incompressible displacement/pressure
     // formulation (if the element is pressure based, that is!)
-    PVDEquationsWithPressure<3> *cast_el_pt =
-      dynamic_cast<PVDEquationsWithPressure<3> *>(mesh_pt()->element_pt(i));
+    PVDEquationsWithPressure<3>* cast_el_pt =
+      dynamic_cast<PVDEquationsWithPressure<3>*>(mesh_pt()->element_pt(i));
     if (cast_el_pt != 0)
     {
       cast_el_pt->set_incompressible();
@@ -351,9 +351,9 @@ void CantileverProblem<ELEMENT>::doc_solution()
 /// Run tests
 //==================================================================
 template<class ELEMENT>
-void CantileverProblem<ELEMENT>::run_tests(const unsigned &i_case,
-                                           const bool &incompress,
-                                           const bool &use_fd)
+void CantileverProblem<ELEMENT>::run_tests(const unsigned& i_case,
+                                           const bool& incompress,
+                                           const bool& use_fd)
 {
   // Set output directory
   char dirname[100];
@@ -373,7 +373,7 @@ void CantileverProblem<ELEMENT>::run_tests(const unsigned &i_case,
   for (unsigned i = 0; i < n_element; i++)
   {
     // Cast to a solid element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Get Jacobian by FD?
     if (use_fd)
@@ -388,8 +388,8 @@ void CantileverProblem<ELEMENT>::run_tests(const unsigned &i_case,
     // Is the material actually not incompressible?
     if (!incompress)
     {
-      PVDEquationsWithPressure<3> *cast_el_pt =
-        dynamic_cast<PVDEquationsWithPressure<3> *>(mesh_pt()->element_pt(i));
+      PVDEquationsWithPressure<3>* cast_el_pt =
+        dynamic_cast<PVDEquationsWithPressure<3>*>(mesh_pt()->element_pt(i));
       if (cast_el_pt != 0)
       {
         cast_el_pt->set_compressible();
@@ -434,7 +434,7 @@ void CantileverProblem<ELEMENT>::run_tests(const unsigned &i_case,
 //=======start_of_main==================================================
 /// Driver for 3D cantilever beam loaded by gravity
 //======================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Run main demo code if no command line arguments are specified
   if (argc == 1)

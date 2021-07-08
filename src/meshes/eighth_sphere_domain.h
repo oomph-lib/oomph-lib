@@ -46,7 +46,7 @@ namespace oomph
   {
   public:
     /// \short Constructor: Pass the radius of the sphere.
-    EighthSphereDomain(const double &radius) : Radius(radius)
+    EighthSphereDomain(const double& radius) : Radius(radius)
     {
       // There are four macro elements
       unsigned nmacro = 4;
@@ -62,13 +62,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    EighthSphereDomain(const EighthSphereDomain &)
+    EighthSphereDomain(const EighthSphereDomain&)
     {
       BrokenCopy::broken_copy("EighthSphereDomain");
     }
 
     /// Broken assignment operator
-    void operator=(const EighthSphereDomain &)
+    void operator=(const EighthSphereDomain&)
     {
       BrokenCopy::broken_assign("EighthSphereDomain");
     }
@@ -86,11 +86,11 @@ namespace oomph
     /// boundary idirect (L/R/D/U/B/F) at time level t
     /// (t=0: present; t>0: previous):
     /// f(s).
-    void macro_element_boundary(const unsigned &t,
-                                const unsigned &imacro,
-                                const unsigned &idirect,
-                                const Vector<double> &s,
-                                Vector<double> &f)
+    void macro_element_boundary(const unsigned& t,
+                                const unsigned& imacro,
+                                const unsigned& idirect,
+                                const Vector<double>& s,
+                                Vector<double>& f)
     {
       using namespace OcTreeNames;
 
@@ -286,147 +286,147 @@ namespace oomph
 
     /// \short Boundary of central box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_centr_L(const unsigned &t,
-                   const Vector<double> &zeta,
-                   Vector<double> &f);
+    void r_centr_L(const unsigned& t,
+                   const Vector<double>& zeta,
+                   Vector<double>& f);
 
     /// \short Boundary of central box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_centr_R(const unsigned &t,
-                   const Vector<double> &zeta,
-                   Vector<double> &f);
+    void r_centr_R(const unsigned& t,
+                   const Vector<double>& zeta,
+                   Vector<double>& f);
 
     /// \short Boundary of central box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_centr_D(const unsigned &t,
-                   const Vector<double> &zeta,
-                   Vector<double> &f);
+    void r_centr_D(const unsigned& t,
+                   const Vector<double>& zeta,
+                   Vector<double>& f);
 
     /// \short Boundary of central box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_centr_U(const unsigned &t,
-                   const Vector<double> &zeta,
-                   Vector<double> &f);
+    void r_centr_U(const unsigned& t,
+                   const Vector<double>& zeta,
+                   Vector<double>& f);
 
     /// \short Boundary of central box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_centr_B(const unsigned &t,
-                   const Vector<double> &zeta,
-                   Vector<double> &f);
+    void r_centr_B(const unsigned& t,
+                   const Vector<double>& zeta,
+                   Vector<double>& f);
 
     /// \short Boundary of central box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_centr_F(const unsigned &t,
-                   const Vector<double> &zeta,
-                   Vector<double> &f);
+    void r_centr_F(const unsigned& t,
+                   const Vector<double>& zeta,
+                   Vector<double>& f);
 
     /// \short Boundary of right box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_right_L(const unsigned &t,
-                   const Vector<double> &zeta,
-                   Vector<double> &f);
+    void r_right_L(const unsigned& t,
+                   const Vector<double>& zeta,
+                   Vector<double>& f);
 
     /// \short Boundary of right box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_right_R(const unsigned &t,
-                   const Vector<double> &zeta,
-                   Vector<double> &f);
+    void r_right_R(const unsigned& t,
+                   const Vector<double>& zeta,
+                   Vector<double>& f);
 
     /// \short Boundary of  right box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_right_D(const unsigned &t,
-                   const Vector<double> &zeta,
-                   Vector<double> &f);
+    void r_right_D(const unsigned& t,
+                   const Vector<double>& zeta,
+                   Vector<double>& f);
 
     /// \short Boundary of right box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_right_U(const unsigned &t,
-                   const Vector<double> &zeta,
-                   Vector<double> &f);
+    void r_right_U(const unsigned& t,
+                   const Vector<double>& zeta,
+                   Vector<double>& f);
 
     /// \short Boundary of  right box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_right_B(const unsigned &t,
-                   const Vector<double> &zeta,
-                   Vector<double> &f);
+    void r_right_B(const unsigned& t,
+                   const Vector<double>& zeta,
+                   Vector<double>& f);
 
     /// \short Boundary of  right box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_right_F(const unsigned &t,
-                   const Vector<double> &zeta,
-                   Vector<double> &f);
+    void r_right_F(const unsigned& t,
+                   const Vector<double>& zeta,
+                   Vector<double>& f);
 
     /// \short Boundary of top left box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_up_L(const unsigned &t,
-                const Vector<double> &zeta,
-                Vector<double> &f);
+    void r_up_L(const unsigned& t,
+                const Vector<double>& zeta,
+                Vector<double>& f);
 
     /// \short Boundary of top left box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_up_R(const unsigned &t,
-                const Vector<double> &zeta,
-                Vector<double> &f);
+    void r_up_R(const unsigned& t,
+                const Vector<double>& zeta,
+                Vector<double>& f);
 
     /// \short Boundary of top left box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_up_D(const unsigned &t,
-                const Vector<double> &zeta,
-                Vector<double> &f);
+    void r_up_D(const unsigned& t,
+                const Vector<double>& zeta,
+                Vector<double>& f);
 
     /// \short Boundary of top left box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_up_U(const unsigned &t,
-                const Vector<double> &zeta,
-                Vector<double> &f);
+    void r_up_U(const unsigned& t,
+                const Vector<double>& zeta,
+                Vector<double>& f);
 
     /// \short Boundary of top left box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_up_B(const unsigned &t,
-                const Vector<double> &zeta,
-                Vector<double> &f);
+    void r_up_B(const unsigned& t,
+                const Vector<double>& zeta,
+                Vector<double>& f);
 
     /// \short Boundary of top left box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_up_F(const unsigned &t,
-                const Vector<double> &zeta,
-                Vector<double> &f);
+    void r_up_F(const unsigned& t,
+                const Vector<double>& zeta,
+                Vector<double>& f);
 
     /// \short Boundary of top left box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_front_L(const unsigned &t,
-                   const Vector<double> &zeta,
-                   Vector<double> &f);
+    void r_front_L(const unsigned& t,
+                   const Vector<double>& zeta,
+                   Vector<double>& f);
 
     /// \short Boundary of top left box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_front_R(const unsigned &t,
-                   const Vector<double> &zeta,
-                   Vector<double> &f);
+    void r_front_R(const unsigned& t,
+                   const Vector<double>& zeta,
+                   Vector<double>& f);
 
     /// \short Boundary of top left box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_front_D(const unsigned &t,
-                   const Vector<double> &zeta,
-                   Vector<double> &f);
+    void r_front_D(const unsigned& t,
+                   const Vector<double>& zeta,
+                   Vector<double>& f);
 
     /// \short Boundary of top left box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_front_U(const unsigned &t,
-                   const Vector<double> &zeta,
-                   Vector<double> &f);
+    void r_front_U(const unsigned& t,
+                   const Vector<double>& zeta,
+                   Vector<double>& f);
 
     /// \short Boundary of top left box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_front_B(const unsigned &t,
-                   const Vector<double> &zeta,
-                   Vector<double> &f);
+    void r_front_B(const unsigned& t,
+                   const Vector<double>& zeta,
+                   Vector<double>& f);
 
     /// \short Boundary of top left box macro element
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_front_F(const unsigned &t,
-                   const Vector<double> &zeta,
-                   Vector<double> &f);
+    void r_front_F(const unsigned& t,
+                   const Vector<double>& zeta,
+                   Vector<double>& f);
   };
 
   ////////////////////////////////////////////////////////////////////////
@@ -437,9 +437,9 @@ namespace oomph
   /// Boundary of central box macro element
   /// zeta \f$ \in [-1,1]^2 \f$
   //=================================================================
-  void EighthSphereDomain::r_centr_L(const unsigned &t,
-                                     const Vector<double> &zeta,
-                                     Vector<double> &f)
+  void EighthSphereDomain::r_centr_L(const unsigned& t,
+                                     const Vector<double>& zeta,
+                                     Vector<double>& f)
   {
     f[0] = 0;
     f[1] = Radius * 0.25 * (1.0 + zeta[0]);
@@ -450,9 +450,9 @@ namespace oomph
   ///  Boundary of central box macro element
   /// zeta \f$ \in [-1,1]^2 \f$
   //=================================================================
-  void EighthSphereDomain::r_centr_R(const unsigned &t,
-                                     const Vector<double> &zeta,
-                                     Vector<double> &f)
+  void EighthSphereDomain::r_centr_R(const unsigned& t,
+                                     const Vector<double>& zeta,
+                                     Vector<double>& f)
   {
     f[0] = Radius * 0.5;
     f[1] = Radius * 0.25 * (1.0 + zeta[0]);
@@ -463,9 +463,9 @@ namespace oomph
   ///  Boundary of central box macro element
   /// zeta \f$ \in [-1,1]^2 \f$
   //=================================================================
-  void EighthSphereDomain::r_centr_D(const unsigned &t,
-                                     const Vector<double> &zeta,
-                                     Vector<double> &f)
+  void EighthSphereDomain::r_centr_D(const unsigned& t,
+                                     const Vector<double>& zeta,
+                                     Vector<double>& f)
   {
     f[0] = Radius * 0.25 * (1.0 + zeta[0]);
     f[1] = 0;
@@ -476,9 +476,9 @@ namespace oomph
   ///  Boundary of central box macro element
   /// zeta \f$ \in [-1,1]^2 \f$
   //=================================================================
-  void EighthSphereDomain::r_centr_U(const unsigned &t,
-                                     const Vector<double> &zeta,
-                                     Vector<double> &f)
+  void EighthSphereDomain::r_centr_U(const unsigned& t,
+                                     const Vector<double>& zeta,
+                                     Vector<double>& f)
   {
     f[0] = Radius * 0.25 * (1.0 + zeta[0]);
     f[1] = Radius * 0.5;
@@ -489,9 +489,9 @@ namespace oomph
   ///  Boundary of central box macro element
   /// zeta \f$ \in [-1,1]^2 \f$
   //=================================================================
-  void EighthSphereDomain::r_centr_B(const unsigned &t,
-                                     const Vector<double> &zeta,
-                                     Vector<double> &f)
+  void EighthSphereDomain::r_centr_B(const unsigned& t,
+                                     const Vector<double>& zeta,
+                                     Vector<double>& f)
   {
     f[0] = Radius * 0.25 * (1.0 + zeta[0]);
     f[1] = Radius * 0.25 * (1.0 + zeta[1]);
@@ -502,9 +502,9 @@ namespace oomph
   ///  Boundary of central box macro element
   /// zeta \f$ \in [-1,1]^2 \f$
   //=================================================================
-  void EighthSphereDomain::r_centr_F(const unsigned &t,
-                                     const Vector<double> &zeta,
-                                     Vector<double> &f)
+  void EighthSphereDomain::r_centr_F(const unsigned& t,
+                                     const Vector<double>& zeta,
+                                     Vector<double>& f)
   {
     f[0] = Radius * 0.25 * (1.0 + zeta[0]);
     f[1] = Radius * 0.25 * (1.0 + zeta[1]);
@@ -515,9 +515,9 @@ namespace oomph
   ///  Boundary of right box macro element
   /// zeta \f$ \in [-1,1]^2 \f$
   //=================================================================
-  void EighthSphereDomain::r_right_L(const unsigned &t,
-                                     const Vector<double> &zeta,
-                                     Vector<double> &f)
+  void EighthSphereDomain::r_right_L(const unsigned& t,
+                                     const Vector<double>& zeta,
+                                     Vector<double>& f)
   {
     r_centr_R(t, zeta, f);
   }
@@ -526,9 +526,9 @@ namespace oomph
   ///  Boundary of right box macro element
   /// zeta \f$ \in [-1,1]^2 \f$
   //=================================================================
-  void EighthSphereDomain::r_right_R(const unsigned &t,
-                                     const Vector<double> &zeta,
-                                     Vector<double> &f)
+  void EighthSphereDomain::r_right_R(const unsigned& t,
+                                     const Vector<double>& zeta,
+                                     Vector<double>& f)
   {
     double k0 = 0.5 * (1.0 + zeta[0]);
     double k1 = 0.5 * (1.0 + zeta[1]);
@@ -559,9 +559,9 @@ namespace oomph
   ///  Boundary of  right box macro element
   /// zeta \f$ \in [-1,1]^2 \f$
   //=================================================================
-  void EighthSphereDomain::r_right_D(const unsigned &t,
-                                     const Vector<double> &zeta,
-                                     Vector<double> &f)
+  void EighthSphereDomain::r_right_D(const unsigned& t,
+                                     const Vector<double>& zeta,
+                                     Vector<double>& f)
   {
     // position vector on sphere
     Vector<double> on_sphere(3);
@@ -587,9 +587,9 @@ namespace oomph
   ///  Boundary of right box macro element
   /// zeta \f$ \in [-1,1]^2 \f$
   //=================================================================
-  void EighthSphereDomain::r_right_U(const unsigned &t,
-                                     const Vector<double> &zeta,
-                                     Vector<double> &f)
+  void EighthSphereDomain::r_right_U(const unsigned& t,
+                                     const Vector<double>& zeta,
+                                     Vector<double>& f)
   {
     // position vector on sphere
     Vector<double> on_sphere(3);
@@ -615,9 +615,9 @@ namespace oomph
   ///  Boundary of  right box macro element
   /// zeta \f$ \in [-1,1]^2 \f$
   //=================================================================
-  void EighthSphereDomain::r_right_B(const unsigned &t,
-                                     const Vector<double> &zeta,
-                                     Vector<double> &f)
+  void EighthSphereDomain::r_right_B(const unsigned& t,
+                                     const Vector<double>& zeta,
+                                     Vector<double>& f)
   {
     // position vector on sphere
     Vector<double> on_sphere(3);
@@ -643,9 +643,9 @@ namespace oomph
   ///  Boundary of  right box macro element
   /// zeta \f$ \in [-1,1]^2 \f$
   //=================================================================
-  void EighthSphereDomain::r_right_F(const unsigned &t,
-                                     const Vector<double> &zeta,
-                                     Vector<double> &f)
+  void EighthSphereDomain::r_right_F(const unsigned& t,
+                                     const Vector<double>& zeta,
+                                     Vector<double>& f)
   {
     // position vector on sphere
     Vector<double> on_sphere(3);
@@ -671,9 +671,9 @@ namespace oomph
   ///  Boundary of top left box macro element
   /// zeta \f$ \in [-1,1]^2 \f$
   //=================================================================
-  void EighthSphereDomain::r_up_L(const unsigned &t,
-                                  const Vector<double> &zeta,
-                                  Vector<double> &f)
+  void EighthSphereDomain::r_up_L(const unsigned& t,
+                                  const Vector<double>& zeta,
+                                  Vector<double>& f)
   {
     // position vector on sphere
     Vector<double> on_sphere(3);
@@ -699,9 +699,9 @@ namespace oomph
   ///  Boundary of top left box macro element
   /// zeta \f$ \in [-1,1]^2 \f$
   //=================================================================
-  void EighthSphereDomain::r_up_R(const unsigned &t,
-                                  const Vector<double> &zeta,
-                                  Vector<double> &f)
+  void EighthSphereDomain::r_up_R(const unsigned& t,
+                                  const Vector<double>& zeta,
+                                  Vector<double>& f)
   {
     r_right_U(t, zeta, f);
   }
@@ -710,9 +710,9 @@ namespace oomph
   ///  Boundary of top left box macro element
   /// zeta \f$ \in [-1,1]^2 \f$
   //=================================================================
-  void EighthSphereDomain::r_up_D(const unsigned &t,
-                                  const Vector<double> &zeta,
-                                  Vector<double> &f)
+  void EighthSphereDomain::r_up_D(const unsigned& t,
+                                  const Vector<double>& zeta,
+                                  Vector<double>& f)
   {
     r_centr_U(t, zeta, f);
   }
@@ -721,9 +721,9 @@ namespace oomph
   ///  Boundary of top left box macro element
   /// zeta \f$ \in [-1,1]^2 \f$
   //=================================================================
-  void EighthSphereDomain::r_up_U(const unsigned &t,
-                                  const Vector<double> &zeta,
-                                  Vector<double> &f)
+  void EighthSphereDomain::r_up_U(const unsigned& t,
+                                  const Vector<double>& zeta,
+                                  Vector<double>& f)
   {
     double k0 = 0.5 * (1.0 + zeta[0]);
     double k1 = 0.5 * (1.0 + zeta[1]);
@@ -754,9 +754,9 @@ namespace oomph
   ///  Boundary of top left box macro element
   /// zeta \f$ \in [-1,1]^2 \f$
   //=================================================================
-  void EighthSphereDomain::r_up_B(const unsigned &t,
-                                  const Vector<double> &zeta,
-                                  Vector<double> &f)
+  void EighthSphereDomain::r_up_B(const unsigned& t,
+                                  const Vector<double>& zeta,
+                                  Vector<double>& f)
   {
     // position vector on sphere
     Vector<double> on_sphere(3);
@@ -782,9 +782,9 @@ namespace oomph
   ///  Boundary of top left box macro element
   /// zeta \f$ \in [-1,1]^2 \f$
   //=================================================================
-  void EighthSphereDomain::r_up_F(const unsigned &t,
-                                  const Vector<double> &zeta,
-                                  Vector<double> &f)
+  void EighthSphereDomain::r_up_F(const unsigned& t,
+                                  const Vector<double>& zeta,
+                                  Vector<double>& f)
   {
     // position vector on sphere
     Vector<double> on_sphere(3);
@@ -810,9 +810,9 @@ namespace oomph
   ///  Boundary of top left box macro element
   /// zeta \f$ \in [-1,1]^2 \f$
   //=================================================================
-  void EighthSphereDomain::r_front_L(const unsigned &t,
-                                     const Vector<double> &zeta,
-                                     Vector<double> &f)
+  void EighthSphereDomain::r_front_L(const unsigned& t,
+                                     const Vector<double>& zeta,
+                                     Vector<double>& f)
   {
     // position vector on sphere
     Vector<double> on_sphere(3);
@@ -838,9 +838,9 @@ namespace oomph
   ///  Boundary of top left box macro element
   /// zeta \f$ \in [-1,1]^2 \f$
   //=================================================================
-  void EighthSphereDomain::r_front_R(const unsigned &t,
-                                     const Vector<double> &zeta,
-                                     Vector<double> &f)
+  void EighthSphereDomain::r_front_R(const unsigned& t,
+                                     const Vector<double>& zeta,
+                                     Vector<double>& f)
   {
     Vector<double> zeta2(2);
     zeta2[0] = zeta[1];
@@ -852,9 +852,9 @@ namespace oomph
   ///  Boundary of top left box macro element
   /// zeta \f$ \in [-1,1]^2 \f$
   //=================================================================
-  void EighthSphereDomain::r_front_D(const unsigned &t,
-                                     const Vector<double> &zeta,
-                                     Vector<double> &f)
+  void EighthSphereDomain::r_front_D(const unsigned& t,
+                                     const Vector<double>& zeta,
+                                     Vector<double>& f)
   {
     // position vector on sphere
     Vector<double> on_sphere(3);
@@ -880,9 +880,9 @@ namespace oomph
   ///  Boundary of top left box macro element
   /// zeta \f$ \in [-1,1]^2 \f$
   //=================================================================
-  void EighthSphereDomain::r_front_U(const unsigned &t,
-                                     const Vector<double> &zeta,
-                                     Vector<double> &f)
+  void EighthSphereDomain::r_front_U(const unsigned& t,
+                                     const Vector<double>& zeta,
+                                     Vector<double>& f)
   {
     r_up_F(t, zeta, f);
   }
@@ -891,9 +891,9 @@ namespace oomph
   ///  Boundary of top left box macro element
   /// zeta \f$ \in [-1,1]^2 \f$
   //=================================================================
-  void EighthSphereDomain::r_front_B(const unsigned &t,
-                                     const Vector<double> &zeta,
-                                     Vector<double> &f)
+  void EighthSphereDomain::r_front_B(const unsigned& t,
+                                     const Vector<double>& zeta,
+                                     Vector<double>& f)
   {
     r_centr_F(t, zeta, f);
   }
@@ -902,9 +902,9 @@ namespace oomph
   /// Boundary of top left box macro element
   /// zeta \f$ \in [-1,1]^2 \f$
   //=================================================================
-  void EighthSphereDomain::r_front_F(const unsigned &t,
-                                     const Vector<double> &zeta,
-                                     Vector<double> &f)
+  void EighthSphereDomain::r_front_F(const unsigned& t,
+                                     const Vector<double>& zeta,
+                                     Vector<double>& f)
   {
     double k0 = 0.5 * (1.0 + zeta[0]);
     double k1 = 0.5 * (1.0 + zeta[1]);

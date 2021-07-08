@@ -49,7 +49,7 @@ namespace oomph
   /// Shape function for specific QHermiteElement<1>
   //=======================================================================
   template<>
-  void QHermiteElement<1>::shape(const Vector<double> &s, Shape &psi) const
+  void QHermiteElement<1>::shape(const Vector<double>& s, Shape& psi) const
   {
     // Local storage
     double Psi[2][2];
@@ -71,9 +71,9 @@ namespace oomph
   /// Derivatives of shape functions for specific  QHermiteElement<1>
   //=======================================================================
   template<>
-  void QHermiteElement<1>::dshape_local(const Vector<double> &s,
-                                        Shape &psi,
-                                        DShape &dpsids) const
+  void QHermiteElement<1>::dshape_local(const Vector<double>& s,
+                                        Shape& psi,
+                                        DShape& dpsids) const
   {
     // Local storage
     double Psi[2][2], DPsi[2][2];
@@ -99,10 +99,10 @@ namespace oomph
   /// d2psids(i,0) = \f$ d^2 \psi_j / d s^2 \f$
   //=======================================================================
   template<>
-  void QHermiteElement<1>::d2shape_local(const Vector<double> &s,
-                                         Shape &psi,
-                                         DShape &dpsids,
-                                         DShape &d2psids) const
+  void QHermiteElement<1>::d2shape_local(const Vector<double>& s,
+                                         Shape& psi,
+                                         DShape& dpsids,
+                                         DShape& d2psids) const
   {
     // Local storage
     double Psi[2][2], DPsi[2][2], D2Psi[2][2];
@@ -128,7 +128,7 @@ namespace oomph
   /// The output function for general 1D QHermiteElements
   //=======================================================================
   template<>
-  void QHermiteElement<1>::output(std::ostream &outfile)
+  void QHermiteElement<1>::output(std::ostream& outfile)
   {
     // Tecplot header info
     outfile << "ZONE I=" << 2 << std::endl;
@@ -172,7 +172,7 @@ namespace oomph
   /// The output function for n_plot points in each coordinate direction
   //=======================================================================
   template<>
-  void QHermiteElement<1>::output(std::ostream &outfile, const unsigned &n_plot)
+  void QHermiteElement<1>::output(std::ostream& outfile, const unsigned& n_plot)
   {
     // Local variables
     Vector<double> s(1);
@@ -202,7 +202,7 @@ namespace oomph
   /// The C-style output function for general 1D QHermiteElements
   //=======================================================================
   template<>
-  void QHermiteElement<1>::output(FILE *file_pt)
+  void QHermiteElement<1>::output(FILE* file_pt)
   {
     // Tecplot header info
     fprintf(file_pt, "ZONE I=2\n");
@@ -246,7 +246,7 @@ namespace oomph
   /// The C-style output function for n_plot points in each coordinate direction
   //=======================================================================
   template<>
-  void QHermiteElement<1>::output(FILE *file_pt, const unsigned &n_plot)
+  void QHermiteElement<1>::output(FILE* file_pt, const unsigned& n_plot)
   {
     // Local variables
     Vector<double> s(1);
@@ -275,8 +275,8 @@ namespace oomph
   /// FaceElements (single node elements)
   //===========================================================
   template<>
-  void QHermiteElement<1>::build_face_element(const int &face_index,
-                                              FaceElement *face_element_pt)
+  void QHermiteElement<1>::build_face_element(const int& face_index,
+                                              FaceElement* face_element_pt)
   {
     // Set the nodal dimension from the "bulk"
     face_element_pt->set_nodal_dimension(node_pt(0)->ndim());
@@ -367,7 +367,7 @@ namespace oomph
   /// Shape function for specific QHermiteElement<2>
   //=======================================================================
   template<>
-  void QHermiteElement<2>::shape(const Vector<double> &s, Shape &psi) const
+  void QHermiteElement<2>::shape(const Vector<double>& s, Shape& psi) const
   {
     // Local storage
     double Psi[2][2][2];
@@ -422,9 +422,9 @@ namespace oomph
   /// Derivatives of shape functions for specific QHermiteElement<2>
   //=======================================================================
   template<>
-  void QHermiteElement<2>::dshape_local(const Vector<double> &s,
-                                        Shape &psi,
-                                        DShape &dpsids) const
+  void QHermiteElement<2>::dshape_local(const Vector<double>& s,
+                                        Shape& psi,
+                                        DShape& dpsids) const
   {
     // Local storage
     double Psi[2][2][2];
@@ -538,10 +538,10 @@ namespace oomph
   /// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$
   //======================================================================
   template<>
-  void QHermiteElement<2>::d2shape_local(const Vector<double> &s,
-                                         Shape &psi,
-                                         DShape &dpsids,
-                                         DShape &d2psids) const
+  void QHermiteElement<2>::d2shape_local(const Vector<double>& s,
+                                         Shape& psi,
+                                         DShape& dpsids,
+                                         DShape& d2psids) const
   {
     // Local storage
     double Psi[2][2][2];
@@ -739,7 +739,7 @@ namespace oomph
   /// The output function for QHermiteElement<2,ORDER>
   //===========================================================
   template<>
-  void QHermiteElement<2>::output(std::ostream &outfile)
+  void QHermiteElement<2>::output(std::ostream& outfile)
   {
     // Tecplot header info
     outfile << "ZONE I=" << 2 << ", J=" << 2 << std::endl;
@@ -788,7 +788,7 @@ namespace oomph
   /// The output function for n_plot points in each coordinate direction
   //=======================================================================
   template<>
-  void QHermiteElement<2>::output(std::ostream &outfile, const unsigned &n_plot)
+  void QHermiteElement<2>::output(std::ostream& outfile, const unsigned& n_plot)
   {
     // Local variables
     Vector<double> s(2);
@@ -822,7 +822,7 @@ namespace oomph
   /// The C-style output function for QHermiteElement<2,ORDER>
   //===========================================================
   template<>
-  void QHermiteElement<2>::output(FILE *file_pt)
+  void QHermiteElement<2>::output(FILE* file_pt)
   {
     // Tecplot header info
     fprintf(file_pt, "ZONE I=2, J=2");
@@ -871,7 +871,7 @@ namespace oomph
   /// The C-style output function for n_plot points in each coordinate direction
   //=======================================================================
   template<>
-  void QHermiteElement<2>::output(FILE *file_pt, const unsigned &n_plot)
+  void QHermiteElement<2>::output(FILE* file_pt, const unsigned& n_plot)
   {
     // Local variables
     Vector<double> s(2);
@@ -905,8 +905,8 @@ namespace oomph
   /// FaceElements (of type QHermiteElement<1>).
   //=======================================================================
   template<>
-  void QHermiteElement<2>::build_face_element(const int &face_index,
-                                              FaceElement *face_element_pt)
+  void QHermiteElement<2>::build_face_element(const int& face_index,
+                                              FaceElement* face_element_pt)
   {
     // Set the nodal dimension from the "bulk"
     face_element_pt->set_nodal_dimension(node_pt(0)->ndim());
@@ -1063,7 +1063,7 @@ namespace oomph
   /// Overload the output function
   //====================================================================
   template<unsigned DIM>
-  void SolidQHermiteElement<DIM>::output(std::ostream &outfile)
+  void SolidQHermiteElement<DIM>::output(std::ostream& outfile)
   {
     QHermiteElement<DIM>::output(outfile);
   }
@@ -1073,8 +1073,8 @@ namespace oomph
   /// for the 1D element
   //=======================================================================
   template<>
-  void SolidQHermiteElement<1>::output(std::ostream &outfile,
-                                       const unsigned &n_plot)
+  void SolidQHermiteElement<1>::output(std::ostream& outfile,
+                                       const unsigned& n_plot)
   {
     // Local variables
     Vector<double> s(1);
@@ -1086,7 +1086,7 @@ namespace oomph
     unsigned n_dim = this->nodal_dimension();
 
     // Find the Lagrangian dimension of the first node
-    unsigned n_lagr = static_cast<SolidNode *>(node_pt(0))->nlagrangian();
+    unsigned n_lagr = static_cast<SolidNode*>(node_pt(0))->nlagrangian();
 
     // Loop over plot points
     for (unsigned l = 0; l < n_plot; l++)
@@ -1112,7 +1112,7 @@ namespace oomph
   /// Overload the C-style output function
   //====================================================================
   template<unsigned DIM>
-  void SolidQHermiteElement<DIM>::output(FILE *file_pt)
+  void SolidQHermiteElement<DIM>::output(FILE* file_pt)
   {
     QHermiteElement<DIM>::output(file_pt);
   }
@@ -1122,7 +1122,7 @@ namespace oomph
   /// for the 1D element
   //=======================================================================
   template<>
-  void SolidQHermiteElement<1>::output(FILE *file_pt, const unsigned &n_plot)
+  void SolidQHermiteElement<1>::output(FILE* file_pt, const unsigned& n_plot)
   {
     // Local variables
     Vector<double> s(1);
@@ -1134,7 +1134,7 @@ namespace oomph
     unsigned n_dim = this->nodal_dimension();
 
     // Find the Lagrangian dimension of the first node
-    unsigned n_lagr = static_cast<SolidNode *>(node_pt(0))->nlagrangian();
+    unsigned n_lagr = static_cast<SolidNode*>(node_pt(0))->nlagrangian();
 
     // Loop over plot points
     for (unsigned l = 0; l < n_plot; l++)
@@ -1164,8 +1164,8 @@ namespace oomph
   /// The output function for any number of points per element
   //=====================================================================
   template<>
-  void SolidQHermiteElement<2>::output(std::ostream &outfile,
-                                       const unsigned &n_p)
+  void SolidQHermiteElement<2>::output(std::ostream& outfile,
+                                       const unsigned& n_p)
   {
     // Local variables
     Vector<double> s(2);
@@ -1177,7 +1177,7 @@ namespace oomph
     unsigned n_dim = this->nodal_dimension();
 
     // Find the Lagrangian dimension of the first node
-    unsigned n_lagr = static_cast<SolidNode *>(node_pt(0))->nlagrangian();
+    unsigned n_lagr = static_cast<SolidNode*>(node_pt(0))->nlagrangian();
 
     // Loop over element nodes
     for (unsigned l2 = 0; l2 < n_p; l2++)
@@ -1208,7 +1208,7 @@ namespace oomph
   /// The C-style output function for any number of points per element
   //=====================================================================
   template<>
-  void SolidQHermiteElement<2>::output(FILE *file_pt, const unsigned &n_plot)
+  void SolidQHermiteElement<2>::output(FILE* file_pt, const unsigned& n_plot)
   {
     // Local variables
     Vector<double> s(2);
@@ -1220,7 +1220,7 @@ namespace oomph
     unsigned n_dim = this->nodal_dimension();
 
     // Find the Lagrangian dimension of the first node
-    unsigned n_lagr = static_cast<SolidNode *>(node_pt(0))->nlagrangian();
+    unsigned n_lagr = static_cast<SolidNode*>(node_pt(0))->nlagrangian();
 
     // Loop over element nodes
     for (unsigned l2 = 0; l2 < n_plot; l2++)
@@ -1255,15 +1255,15 @@ namespace oomph
   //=======================================================================
   template<unsigned DIM>
   void SolidQHermiteElement<DIM>::build_face_element(
-    const int &face_index, FaceElement *face_element_pt)
+    const int& face_index, FaceElement* face_element_pt)
   {
     // Build the standard non-solid FaceElement
     QHermiteElement<DIM>::build_face_element(face_index, face_element_pt);
 
     // Set the Lagrangian dimension from the first node of the present element
-    dynamic_cast<SolidFiniteElement *>(face_element_pt)
+    dynamic_cast<SolidFiniteElement*>(face_element_pt)
       ->set_lagrangian_dimension(
-        static_cast<SolidNode *>(node_pt(0))->nlagrangian());
+        static_cast<SolidNode*>(node_pt(0))->nlagrangian());
   }
 
   //==================================================================

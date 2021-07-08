@@ -58,10 +58,10 @@ namespace oomph
     /// are to be placed, fractions of the radius for the central box
     /// at the dividing lines and the timestepper.
     /// Timestepper defaults to Steady dummy timestepper.
-    FullCircleMesh(GeomObject *wall_pt,
-                   const Vector<double> &theta_positions,
-                   const Vector<double> &radius_box,
-                   TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper);
+    FullCircleMesh(GeomObject* wall_pt,
+                   const Vector<double>& theta_positions,
+                   const Vector<double>& radius_box,
+                   TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
     /// \short Destructor: empty
     virtual ~FullCircleMesh()
@@ -70,29 +70,29 @@ namespace oomph
     }
 
     /// Access function to GeomObject representing wall
-    GeomObject *&area_pt()
+    GeomObject*& area_pt()
     {
       return Area_pt;
     }
 
     /// Access function to domain
-    FullCircleDomain *domain_pt()
+    FullCircleDomain* domain_pt()
     {
       return Domain_pt;
     }
 
     /// Access function to underlying domain
-    FullCircleDomain *domain_pt() const
+    FullCircleDomain* domain_pt() const
     {
       return Domain_pt;
     }
 
   protected:
     /// Pointer to domain
-    FullCircleDomain *Domain_pt;
+    FullCircleDomain* Domain_pt;
 
     /// Pointer to the geometric object that represents the entire domain
-    GeomObject *Area_pt;
+    GeomObject* Area_pt;
   };
 
   ////////////////////////////////////////////////////////////////////
@@ -125,10 +125,10 @@ namespace oomph
     /// and the timestepper.
     /// Timestepper defaults to Steady dummy timestepper.
     RefineableFullCircleMesh(
-      GeomObject *wall_pt,
-      const Vector<double> &theta_positions,
-      const Vector<double> &radius_box,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      GeomObject* wall_pt,
+      const Vector<double>& theta_positions,
+      const Vector<double>& radius_box,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       FullCircleMesh<ELEMENT>(
         wall_pt, theta_positions, radius_box, time_stepper_pt)
     {
@@ -136,19 +136,19 @@ namespace oomph
       for (unsigned ielem = 0; ielem < FullCircleMesh<ELEMENT>::nelement();
            ielem++)
       {
-        dynamic_cast<RefineableQElement<2> *>(
+        dynamic_cast<RefineableQElement<2>*>(
           FullCircleMesh<ELEMENT>::element_pt(ielem))
           ->set_macro_elem_pt(this->Domain_pt->macro_element_pt(ielem));
       }
 
       // Setup Quadtree forest: Turn elements into individual octrees
       // and plant in forest
-      Vector<TreeRoot *> trees_pt;
+      Vector<TreeRoot*> trees_pt;
       for (unsigned iel = 0; iel < FullCircleMesh<ELEMENT>::nelement(); iel++)
       {
-        FiniteElement *el_pt = FullCircleMesh<ELEMENT>::finite_element_pt(iel);
-        ELEMENT *ref_el_pt = dynamic_cast<ELEMENT *>(el_pt);
-        QuadTreeRoot *quadtree_root_pt = new QuadTreeRoot(ref_el_pt);
+        FiniteElement* el_pt = FullCircleMesh<ELEMENT>::finite_element_pt(iel);
+        ELEMENT* ref_el_pt = dynamic_cast<ELEMENT*>(el_pt);
+        QuadTreeRoot* quadtree_root_pt = new QuadTreeRoot(ref_el_pt);
         trees_pt.push_back(quadtree_root_pt);
       }
 
@@ -157,7 +157,7 @@ namespace oomph
 #ifdef PARANOID
       // Run self test
       unsigned success_flag =
-        dynamic_cast<QuadTreeForest *>(this->Forest_pt)->self_test();
+        dynamic_cast<QuadTreeForest*>(this->Forest_pt)->self_test();
       if (success_flag == 0)
       {
         oomph_info << "Successfully built quadtree forest " << std::endl;

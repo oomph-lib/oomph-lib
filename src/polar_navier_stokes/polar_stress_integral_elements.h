@@ -57,9 +57,9 @@ namespace oomph
   {
   private:
     /// Pointer to an imposed traction function
-    void (*Traction_fct_pt)(const double &time,
-                            const Vector<double> &x,
-                            Vector<double> &result);
+    void (*Traction_fct_pt)(const double& time,
+                            const Vector<double>& x,
+                            Vector<double>& result);
 
     /// The highest dimension of the problem
     unsigned Dim;
@@ -70,16 +70,16 @@ namespace oomph
     /// u_local_eqn(n,i) = local equation number or < 0 if pinned.
     /// The default is to asssume that n is the local node number
     /// and the i-th velocity component is the i-th unknown stored at the node.
-    virtual inline int u_local_eqn(const unsigned &n, const unsigned &i)
+    virtual inline int u_local_eqn(const unsigned& n, const unsigned& i)
     {
       return nodal_local_eqn(n, i);
     }
 
     ///\short Function to compute the shape and test functions and to return
     /// the Jacobian of mapping
-    inline double shape_and_test_at_knot(const unsigned &ipt,
-                                         Shape &psi,
-                                         Shape &test) const
+    inline double shape_and_test_at_knot(const unsigned& ipt,
+                                         Shape& psi,
+                                         Shape& test) const
     {
       // Find number of nodes
       unsigned n_node = nnode();
@@ -95,7 +95,7 @@ namespace oomph
     }
 
     /// Pointer to the angle alpha
-    double *Alpha_pt;
+    double* Alpha_pt;
 
     // Traction elements need to know whether they're at the inlet or outlet
     // as the unit outward normal has a differing sign dependent on
@@ -105,13 +105,13 @@ namespace oomph
 
   public:
     /// Alpha
-    const double &alpha() const
+    const double& alpha() const
     {
       return *Alpha_pt;
     }
 
     /// Pointer to Alpha
-    double *&alpha_pt()
+    double*& alpha_pt()
     {
       return Alpha_pt;
     }
@@ -133,8 +133,8 @@ namespace oomph
 
     /// Constructor, which takes a "bulk" element and the value of the index
     /// and its limit
-    PolarStressIntegralElement(FiniteElement *const &element_pt,
-                               const int &face_index) :
+    PolarStressIntegralElement(FiniteElement* const& element_pt,
+                               const int& face_index) :
       FaceGeometry<ELEMENT>(), FaceElement()
     {
       // Attach the geometrical information to the element. N.B. This function
@@ -144,14 +144,14 @@ namespace oomph
 #ifdef PARANOID
       {
         // Check that the element is not a refineable 3d element
-        ELEMENT *elem_pt = dynamic_cast<ELEMENT *>(element_pt);
+        ELEMENT* elem_pt = dynamic_cast<ELEMENT*>(element_pt);
 
         // If it's three-d
         if (elem_pt->dim() == 3)
         {
           // Is it refineable
-          RefineableElement *ref_el_pt =
-            dynamic_cast<RefineableElement *>(elem_pt);
+          RefineableElement* ref_el_pt =
+            dynamic_cast<RefineableElement*>(elem_pt);
           if (ref_el_pt != 0)
           {
             if (this->has_hanging_nodes())
@@ -174,14 +174,14 @@ namespace oomph
     ~PolarStressIntegralElement() {}
 
     /// This function returns just the residuals
-    inline void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    inline void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Do nothing
     }
 
     /// This function returns the residuals and the jacobian
-    inline void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                                 DenseMatrix<double> &jacobian)
+    inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                                 DenseMatrix<double>& jacobian)
     {
       // Do nothing
     }
@@ -189,33 +189,33 @@ namespace oomph
     ///\short Compute the element's residual Vector and the jacobian matrix
     /// Plus the mass matrix especially for eigenvalue problems
     void fill_in_contribution_to_jacobian_and_mass_matrix(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix)
     {
       // Do nothing
     }
 
     /// Overload the output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       FiniteElement::output(outfile);
     }
 
     /// Output function: x,y,[z],u,v,[w],p in tecplot format
-    void output(std::ostream &outfile, const unsigned &nplot)
+    void output(std::ostream& outfile, const unsigned& nplot)
     {
       FiniteElement::output(outfile, nplot);
     }
 
     /// local velocities
-    double u(const unsigned &l, const unsigned &i)
+    double u(const unsigned& l, const unsigned& i)
     {
       return nodal_value(l, i);
     }
 
     /// local position
-    double x(const unsigned &l, const unsigned &i)
+    double x(const unsigned& l, const unsigned& i)
     {
       return nodal_position(l, i);
     }
@@ -283,7 +283,7 @@ namespace oomph
       s_bulk = this->local_coordinate_in_bulk(s_local);
 
       // Upcast from GeneralisedElement to the present element
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(this->Bulk_element_pt);
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->Bulk_element_pt);
 
       // Get du_dphi from bulk element
       dudphi = el_pt->interpolated_dudx_pnst(s_bulk, 0, 1);

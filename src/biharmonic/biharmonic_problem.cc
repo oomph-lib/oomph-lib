@@ -43,7 +43,7 @@ namespace oomph
   //=============================================================================
   template<unsigned DIM>
   void BiharmonicProblem<DIM>::set_dirichlet_boundary_condition(
-    const unsigned &b, DirichletBCFctPt u_fn, DirichletBCFctPt dudn_fn)
+    const unsigned& b, DirichletBCFctPt u_fn, DirichletBCFctPt dudn_fn)
   {
     // number of nodes on boundary b
     unsigned n_node = Bulk_element_mesh_pt->nboundary_node(b);
@@ -294,7 +294,7 @@ namespace oomph
   //=============================================================================
   template<unsigned DIM>
   void BiharmonicProblem<DIM>::set_neumann_boundary_condition(
-    const unsigned &b,
+    const unsigned& b,
     BiharmonicFluxElement<2>::FluxFctPt flux0_fct_pt,
     BiharmonicFluxElement<2>::FluxFctPt flux1_fct_pt)
   {
@@ -311,14 +311,14 @@ namespace oomph
     for (unsigned e = 0; e < n_element; e++)
     {
       // Get pointer to the bulk element that is adjacent to boundary b
-      FiniteElement *bulk_elem_pt = dynamic_cast<FiniteElement *>(
+      FiniteElement* bulk_elem_pt = dynamic_cast<FiniteElement*>(
         Bulk_element_mesh_pt->boundary_element_pt(b, e));
 
       // What is the face index along the boundary
       int face_index = Bulk_element_mesh_pt->face_index_at_boundary(b, e);
 
       // Build the corresponding prescribed-flux element
-      BiharmonicFluxElement<2> *flux_element_pt =
+      BiharmonicFluxElement<2>* flux_element_pt =
         new BiharmonicFluxElement<2>(bulk_elem_pt, face_index, b);
 
       // pass the flux BC pointers to the flux elements
@@ -339,7 +339,7 @@ namespace oomph
   //=============================================================================
   template<unsigned DIM>
   void BiharmonicProblem<DIM>::doc_solution(
-    DocInfo &doc_info, FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
+    DocInfo& doc_info, FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
   {
     std::ofstream some_file;
     std::ostringstream filename;
@@ -388,7 +388,7 @@ namespace oomph
   //=============================================================================
   void BiharmonicFluidBoundaryElement::
     fill_in_generic_residual_contribution_biharmonic_boundary(
-      Vector<double> &residual, DenseMatrix<double> &jacobian, unsigned JFLAG)
+      Vector<double>& residual, DenseMatrix<double>& jacobian, unsigned JFLAG)
   {
     // dof # corresponding to d/ds_n
     unsigned k_normal = 1 + S_fixed_index;
@@ -453,7 +453,7 @@ namespace oomph
   //=============================================================================
   template<unsigned DIM>
   void BiharmonicFluidProblem<DIM>::impose_solid_boundary_on_edge(
-    const unsigned &b, const double &psi)
+    const unsigned& b, const double& psi)
   {
     // number of nodes on boundary b
     unsigned n_node = mesh_pt()->nboundary_node(b);
@@ -483,7 +483,7 @@ namespace oomph
   /// BiharmonicFluidBoundaryElement
   //=============================================================================
   template<unsigned DIM>
-  void BiharmonicFluidProblem<DIM>::impose_traction_free_edge(const unsigned &b)
+  void BiharmonicFluidProblem<DIM>::impose_traction_free_edge(const unsigned& b)
   {
     // fixed faced index for boundary
     int face_index = mesh_pt()->face_index_at_boundary(b, 0);
@@ -509,7 +509,7 @@ namespace oomph
     }
 
     // create a point to a hijacked biharmonic element
-    Hijacked<BiharmonicElement<2>> *hijacked_element_pt;
+    Hijacked<BiharmonicElement<2>>* hijacked_element_pt;
 
     // vectors for dx_i/ds_n and dx_i/ds_t
     Vector<double> dxds_n(2);
@@ -555,18 +555,16 @@ namespace oomph
           // hijack DOFs in left element
           if (n > 0)
           {
-            hijacked_element_pt =
-              dynamic_cast<Hijacked<BiharmonicElement<2>> *>(
-                mesh_pt()->boundary_element_pt(b, n - 1));
+            hijacked_element_pt = dynamic_cast<Hijacked<BiharmonicElement<2>>*>(
+              mesh_pt()->boundary_element_pt(b, n - 1));
             delete hijacked_element_pt->hijack_nodal_value(1,
                                                            1 + s_fixed_index);
           }
           // hijack DOFs in right element
           if (n < (n_node - 1))
           {
-            hijacked_element_pt =
-              dynamic_cast<Hijacked<BiharmonicElement<2>> *>(
-                mesh_pt()->boundary_element_pt(b, n));
+            hijacked_element_pt = dynamic_cast<Hijacked<BiharmonicElement<2>>*>(
+              mesh_pt()->boundary_element_pt(b, n));
             delete hijacked_element_pt->hijack_nodal_value(0,
                                                            1 + s_fixed_index);
           }
@@ -577,18 +575,16 @@ namespace oomph
           // hijack DOFs in left element
           if (n > 0)
           {
-            hijacked_element_pt =
-              dynamic_cast<Hijacked<BiharmonicElement<2>> *>(
-                mesh_pt()->boundary_element_pt(b, n - 1));
+            hijacked_element_pt = dynamic_cast<Hijacked<BiharmonicElement<2>>*>(
+              mesh_pt()->boundary_element_pt(b, n - 1));
             delete hijacked_element_pt->hijack_nodal_value(3,
                                                            1 + s_fixed_index);
           }
           // hijack DOFs in right element
           if (n < n_node - 1)
           {
-            hijacked_element_pt =
-              dynamic_cast<Hijacked<BiharmonicElement<2>> *>(
-                mesh_pt()->boundary_element_pt(b, n));
+            hijacked_element_pt = dynamic_cast<Hijacked<BiharmonicElement<2>>*>(
+              mesh_pt()->boundary_element_pt(b, n));
             delete hijacked_element_pt->hijack_nodal_value(1,
                                                            1 + s_fixed_index);
           }
@@ -600,18 +596,16 @@ namespace oomph
           // hijack DOFs in left element
           if (n > 0)
           {
-            hijacked_element_pt =
-              dynamic_cast<Hijacked<BiharmonicElement<2>> *>(
-                mesh_pt()->boundary_element_pt(b, n - 1));
+            hijacked_element_pt = dynamic_cast<Hijacked<BiharmonicElement<2>>*>(
+              mesh_pt()->boundary_element_pt(b, n - 1));
             delete hijacked_element_pt->hijack_nodal_value(3,
                                                            1 + s_fixed_index);
           }
           if (n < n_node - 1)
           {
             // hijack DOFs in right element
-            hijacked_element_pt =
-              dynamic_cast<Hijacked<BiharmonicElement<2>> *>(
-                mesh_pt()->boundary_element_pt(b, n));
+            hijacked_element_pt = dynamic_cast<Hijacked<BiharmonicElement<2>>*>(
+              mesh_pt()->boundary_element_pt(b, n));
             delete hijacked_element_pt->hijack_nodal_value(2,
                                                            1 + s_fixed_index);
           }
@@ -622,25 +616,23 @@ namespace oomph
           // hijack DOFs in left element
           if (n > 0)
           {
-            hijacked_element_pt =
-              dynamic_cast<Hijacked<BiharmonicElement<2>> *>(
-                mesh_pt()->boundary_element_pt(b, n - 1));
+            hijacked_element_pt = dynamic_cast<Hijacked<BiharmonicElement<2>>*>(
+              mesh_pt()->boundary_element_pt(b, n - 1));
             delete hijacked_element_pt->hijack_nodal_value(2,
                                                            1 + s_fixed_index);
           }
           if (n < n_node - 1)
           {
             // hijack DOFs in right element
-            hijacked_element_pt =
-              dynamic_cast<Hijacked<BiharmonicElement<2>> *>(
-                mesh_pt()->boundary_element_pt(b, n));
+            hijacked_element_pt = dynamic_cast<Hijacked<BiharmonicElement<2>>*>(
+              mesh_pt()->boundary_element_pt(b, n));
             delete hijacked_element_pt->hijack_nodal_value(0,
                                                            1 + s_fixed_index);
           }
         }
 
         // create the boundary point element
-        BiharmonicFluidBoundaryElement *boundary_point_element_pt =
+        BiharmonicFluidBoundaryElement* boundary_point_element_pt =
           new BiharmonicFluidBoundaryElement(mesh_pt()->boundary_node_pt(b, n),
                                              s_fixed_index);
 
@@ -660,7 +652,7 @@ namespace oomph
   //=============================================================================
   template<unsigned DIM>
   void BiharmonicFluidProblem<DIM>::impose_fluid_flow_on_edge(
-    const unsigned &b, FluidBCFctPt u_imposed_fn)
+    const unsigned& b, FluidBCFctPt u_imposed_fn)
   {
     // number of nodes on boundary b
     unsigned n_node = mesh_pt()->nboundary_node(b);
@@ -810,7 +802,7 @@ namespace oomph
   //=============================================================================
   template<unsigned DIM>
   void BiharmonicFluidProblem<DIM>::doc_solution(
-    DocInfo &doc_info, FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
+    DocInfo& doc_info, FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
   {
     // create an output stream
     std::ofstream some_file;
@@ -833,8 +825,8 @@ namespace oomph
     unsigned n_element = mesh_pt()->nelement();
     for (unsigned i = 0; i < n_element - Npoint_element; i++)
     {
-      BiharmonicElement<2> *biharmonic_element_pt =
-        dynamic_cast<BiharmonicElement<2> *>(mesh_pt()->element_pt(i));
+      BiharmonicElement<2>* biharmonic_element_pt =
+        dynamic_cast<BiharmonicElement<2>*>(mesh_pt()->element_pt(i));
       biharmonic_element_pt->output_fluid_velocity(some_file, npts);
     }
     some_file.close();

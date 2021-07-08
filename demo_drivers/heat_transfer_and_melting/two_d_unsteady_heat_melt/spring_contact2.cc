@@ -55,7 +55,7 @@ namespace GlobalFct
   unsigned N_primary = 1;
 
   /// Reset unknowns to some nontrivial garbage
-  void reset(Vector<double> &unknowns)
+  void reset(Vector<double>& unknowns)
   {
     unsigned n = N_primary * 2;
     unknowns.resize(n);
@@ -66,9 +66,9 @@ namespace GlobalFct
   }
 
   /// Global residual fct
-  void get_residuals(const Vector<double> &param,
-                     const Vector<double> &unknowns,
-                     Vector<double> &residuals)
+  void get_residuals(const Vector<double>& param,
+                     const Vector<double>& unknowns,
+                     Vector<double>& residuals)
   {
     residuals[0] = Stiffness * (U_max - unknowns[0] * unknowns[0]) +
                    unknowns[1] * unknowns[1] - Force;
@@ -118,7 +118,7 @@ namespace GlobalFct
 //==start_of_main======================================================
 ///
 //=====================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // feenableexcept(FE_INVALID | FE_DIVBYZERO | FE_OVERFLOW | FE_UNDERFLOW);
 

@@ -35,7 +35,7 @@ namespace oomph
   /// Compute element residual vector taking hanging nodes into account
   //======================================================================
   void RefineableYoungLaplaceEquations::fill_in_contribution_to_residuals(
-    Vector<double> &residuals)
+    Vector<double>& residuals)
   {
     // Find out how many nodes there are
     unsigned n_node = nnode();

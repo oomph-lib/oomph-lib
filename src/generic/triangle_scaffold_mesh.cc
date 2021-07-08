@@ -38,7 +38,7 @@ namespace oomph
   void TriangleScaffoldMesh::check_mesh_integrity()
   {
     // Check that all nodes are attached to elements
-    std::map<Node *, bool> done;
+    std::map<Node*, bool> done;
 
     // Number of nodes per element
     unsigned nnod_el = finite_element_pt(0)->nnode();
@@ -51,7 +51,7 @@ namespace oomph
       for (unsigned j = 0; j < nnod_el; j++)
       {
         // Pointer to node in the scaffold mesh
-        Node *node_pt = finite_element_pt(e)->node_pt(j);
+        Node* node_pt = finite_element_pt(e)->node_pt(j);
 
         done[node_pt] = true;
       }
@@ -84,9 +84,9 @@ namespace oomph
   /// BoundaryNodes are indeed constructed when necessary. Additional
   /// boundary information is added from the segment boundaries.
   //=====================================================================
-  TriangleScaffoldMesh::TriangleScaffoldMesh(const std::string &node_file_name,
-                                             const std::string &ele_file_name,
-                                             const std::string &poly_file_name)
+  TriangleScaffoldMesh::TriangleScaffoldMesh(const std::string& node_file_name,
+                                             const std::string& ele_file_name,
+                                             const std::string& poly_file_name)
   {
     // Process element file
     //---------------------
@@ -650,7 +650,7 @@ namespace oomph
   /// \short Constructor: Pass a data structure obtained from the triangulate
   /// function
   //=====================================================================
-  TriangleScaffoldMesh::TriangleScaffoldMesh(TriangulateIO &triangle_data)
+  TriangleScaffoldMesh::TriangleScaffoldMesh(TriangulateIO& triangle_data)
   {
     // Number of elements
     unsigned n_element = static_cast<unsigned>(triangle_data.numberoftriangles);

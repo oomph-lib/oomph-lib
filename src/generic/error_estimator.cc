@@ -44,9 +44,9 @@ namespace oomph
   /// The recovery shape functions are  complete polynomials of
   /// the order specified by Recovery_order.
   //====================================================================
-  void Z2ErrorEstimator::shape_rec(const Vector<double> &x,
-                                   const unsigned &dim,
-                                   Vector<double> &psi_r)
+  void Z2ErrorEstimator::shape_rec(const Vector<double>& x,
+                                   const unsigned& dim,
+                                   Vector<double>& psi_r)
   {
     std::ostringstream error_stream;
 
@@ -244,8 +244,8 @@ namespace oomph
   /// true if elements in the patch are QElements and false if they are
   /// TElements (will need change if we ever have other element types)
   //====================================================================
-  Integral *Z2ErrorEstimator::integral_rec(const unsigned &dim,
-                                           const bool &is_q_mesh)
+  Integral* Z2ErrorEstimator::integral_rec(const unsigned& dim,
+                                           const bool& is_q_mesh)
   {
     std::ostringstream error_stream;
 
@@ -458,7 +458,7 @@ namespace oomph
   /// pointer.
   //==========================================================================
   double Z2ErrorEstimator::get_combined_error_estimate(
-    const Vector<double> &compound_error)
+    const Vector<double>& compound_error)
   {
     // If the function pointer has been set, call that function
     if (Combined_error_fct_pt != 0)
@@ -502,10 +502,10 @@ namespace oomph
   /// Also returns a Vector of vertex nodes for use in get_element_errors.
   //======================================================================
   void Z2ErrorEstimator::setup_patches(
-    Mesh *&mesh_pt,
-    std::map<Node *, Vector<ElementWithZ2ErrorEstimator *> *>
-      &adjacent_elements_pt,
-    Vector<Node *> &vertex_node_pt)
+    Mesh*& mesh_pt,
+    std::map<Node*, Vector<ElementWithZ2ErrorEstimator*>*>&
+      adjacent_elements_pt,
+    Vector<Node*>& vertex_node_pt)
   {
     // (see also note at the end of get_element_errors below)
     // NOTE FOR FUTURE REFERENCE - revisit in case of adaptivity problems in
@@ -544,7 +544,7 @@ namespace oomph
     // Andrew.Gait@manchester.ac.uk
 
     // Auxiliary map that contains element-adjacency for ALL nodes
-    std::map<Node *, Vector<ElementWithZ2ErrorEstimator *> *>
+    std::map<Node*, Vector<ElementWithZ2ErrorEstimator*>*>
       aux_adjacent_elements_pt;
 
 #ifdef PARANOID
@@ -559,8 +559,8 @@ namespace oomph
     unsigned nelem = mesh_pt->nelement();
     for (unsigned e = 0; e < nelem; e++)
     {
-      ElementWithZ2ErrorEstimator *el_pt =
-        dynamic_cast<ElementWithZ2ErrorEstimator *>(mesh_pt->element_pt(e));
+      ElementWithZ2ErrorEstimator* el_pt =
+        dynamic_cast<ElementWithZ2ErrorEstimator*>(mesh_pt->element_pt(e));
 
 #ifdef PARANOID
       // Check if all elements request the same recovery order
@@ -574,14 +574,14 @@ namespace oomph
       unsigned nnod = el_pt->nnode();
       for (unsigned n = 0; n < nnod; n++)
       {
-        Node *nod_pt = el_pt->node_pt(n);
+        Node* nod_pt = el_pt->node_pt(n);
 
         // Has this node been considered before?
         if (aux_adjacent_elements_pt[nod_pt] == 0)
         {
           // Create Vector of pointers to its adjacent elements
           aux_adjacent_elements_pt[nod_pt] =
-            new Vector<ElementWithZ2ErrorEstimator *>;
+            new Vector<ElementWithZ2ErrorEstimator*>;
         }
 
         // Add pointer to adjacent element
@@ -612,14 +612,14 @@ namespace oomph
     nelem = mesh_pt->nelement();
     for (unsigned e = 0; e < nelem; e++)
     {
-      ElementWithZ2ErrorEstimator *el_pt =
-        dynamic_cast<ElementWithZ2ErrorEstimator *>(mesh_pt->element_pt(e));
+      ElementWithZ2ErrorEstimator* el_pt =
+        dynamic_cast<ElementWithZ2ErrorEstimator*>(mesh_pt->element_pt(e));
 
       // Loop over corner nodes
       unsigned n_node = el_pt->nvertex_node();
       for (unsigned n = 0; n < n_node; n++)
       {
-        Node *nod_pt = el_pt->vertex_node_pt(n);
+        Node* nod_pt = el_pt->vertex_node_pt(n);
 
         // Has this node been considered before?
         if (adjacent_elements_pt[nod_pt] == 0)
@@ -629,7 +629,7 @@ namespace oomph
 
           // Create Vector of pointers to its adjacent elements
           adjacent_elements_pt[nod_pt] =
-            new Vector<ElementWithZ2ErrorEstimator *>;
+            new Vector<ElementWithZ2ErrorEstimator*>;
 
           // Copy across:
           unsigned nel = (*aux_adjacent_elements_pt[nod_pt]).size();
@@ -644,7 +644,7 @@ namespace oomph
     } // end of loop over elements
 
     // Cleanup
-    typedef std::map<Node *, Vector<ElementWithZ2ErrorEstimator *> *>::iterator
+    typedef std::map<Node*, Vector<ElementWithZ2ErrorEstimator*>*>::iterator
       ITT;
     for (ITT it = aux_adjacent_elements_pt.begin();
          it != aux_adjacent_elements_pt.end();
@@ -662,11 +662,11 @@ namespace oomph
   /// a pointer to it.
   //======================================================================
   void Z2ErrorEstimator::get_recovered_flux_in_patch(
-    const Vector<ElementWithZ2ErrorEstimator *> &patch_el_pt,
-    const unsigned &num_recovery_terms,
-    const unsigned &num_flux_terms,
-    const unsigned &dim,
-    DenseMatrix<double> *&recovered_flux_coefficient_pt)
+    const Vector<ElementWithZ2ErrorEstimator*>& patch_el_pt,
+    const unsigned& num_recovery_terms,
+    const unsigned& num_flux_terms,
+    const unsigned& dim,
+    DenseMatrix<double>*& recovered_flux_coefficient_pt)
   {
     // Create/initialise matrix for linear system
     DenseDoubleMatrix recovery_mat(num_recovery_terms, num_recovery_terms, 0.0);
@@ -689,19 +689,19 @@ namespace oomph
     // If we can dynamic cast to the TElementBase, then it's a triangle/tet
     // Note that I'm assuming that all elements are of the same geometry, but
     // if they weren't we could adapt...
-    if (dynamic_cast<TElementBase *>(patch_el_pt[0]))
+    if (dynamic_cast<TElementBase*>(patch_el_pt[0]))
     {
       is_q_mesh = false;
     }
 
-    Integral *const integ_pt = this->integral_rec(dim, is_q_mesh);
+    Integral* const integ_pt = this->integral_rec(dim, is_q_mesh);
 
     // Loop over all elements in patch to assemble linear system
     unsigned nelem = patch_el_pt.size();
     for (unsigned e = 0; e < nelem; e++)
     {
       // Get pointer to element
-      ElementWithZ2ErrorEstimator *const el_pt = patch_el_pt[e];
+      ElementWithZ2ErrorEstimator* const el_pt = patch_el_pt[e];
 
       // Create storage for the recovery shape function values
       Vector<double> psi_r(num_recovery_terms);
@@ -803,7 +803,7 @@ namespace oomph
   /// for given spatial dimension of elements.
   /// Use complete polynomial of given order for recovery
   //==================================================================
-  unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned &dim)
+  unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
   {
     unsigned num_recovery_terms;
 
@@ -934,9 +934,9 @@ namespace oomph
   /// - flux_fe*.dat
   /// - flux_rec*.dat
   //======================================================================
-  void Z2ErrorEstimator::get_element_errors(Mesh *&mesh_pt,
-                                            Vector<double> &elemental_error,
-                                            DocInfo &doc_info)
+  void Z2ErrorEstimator::get_element_errors(Mesh*& mesh_pt,
+                                            Vector<double>& elemental_error,
+                                            DocInfo& doc_info)
   {
 #ifdef OOMPH_HAS_MPI
     // Storage for number of processors and current processor
@@ -974,8 +974,8 @@ namespace oomph
     if (mesh_pt->nelement() > 0)
     {
       // Extract a few vital parameters from first element in mesh:
-      ElementWithZ2ErrorEstimator *el_pt =
-        dynamic_cast<ElementWithZ2ErrorEstimator *>(mesh_pt->element_pt(0));
+      ElementWithZ2ErrorEstimator* el_pt =
+        dynamic_cast<ElementWithZ2ErrorEstimator*>(mesh_pt->element_pt(0));
 #ifdef PARANOID
       if (el_pt == 0)
       {
@@ -1008,7 +1008,7 @@ namespace oomph
     if (mesh_pt->is_mesh_distributed())
     {
       // Get communicator from mesh
-      OomphCommunicator *comm_pt = mesh_pt->communicator_pt();
+      OomphCommunicator* comm_pt = mesh_pt->communicator_pt();
 
       MPI_Allreduce(&num_flux_terms_local,
                     &num_flux_terms,
@@ -1040,8 +1040,8 @@ namespace oomph
 #else // !OOMPH_HAS_MPI
 
     // Extract a few vital parameters from first element in mesh:
-    ElementWithZ2ErrorEstimator *el_pt =
-      dynamic_cast<ElementWithZ2ErrorEstimator *>(mesh_pt->element_pt(0));
+    ElementWithZ2ErrorEstimator* el_pt =
+      dynamic_cast<ElementWithZ2ErrorEstimator*>(mesh_pt->element_pt(0));
 #ifdef PARANOID
     if (el_pt == 0)
     {
@@ -1072,9 +1072,8 @@ namespace oomph
 
     // Setup patches (also returns Vector of vertex nodes)
     //====================================================
-    std::map<Node *, Vector<ElementWithZ2ErrorEstimator *> *>
-      adjacent_elements_pt;
-    Vector<Node *> vertex_node_pt;
+    std::map<Node*, Vector<ElementWithZ2ErrorEstimator*>*> adjacent_elements_pt;
+    Vector<Node*> vertex_node_pt;
     setup_patches(mesh_pt, adjacent_elements_pt, vertex_node_pt);
 
     // Loop over all patches to get recovered flux value coefficients
@@ -1082,25 +1081,24 @@ namespace oomph
 
     // Map to store sets of pointers to the recovered flux coefficient matrices
     // for each node.
-    std::map<Node *, std::set<DenseMatrix<double> *>> flux_coeff_pt;
+    std::map<Node*, std::set<DenseMatrix<double>*>> flux_coeff_pt;
 
     // We store the pointers to the recovered flux coefficient matrices for
     // various patches in a vector so we can delete them later
-    Vector<DenseMatrix<double> *> vector_of_recovered_flux_coefficient_pt;
+    Vector<DenseMatrix<double>*> vector_of_recovered_flux_coefficient_pt;
 
-    typedef std::map<Node *, Vector<ElementWithZ2ErrorEstimator *> *>::iterator
-      IT;
+    typedef std::map<Node*, Vector<ElementWithZ2ErrorEstimator*>*>::iterator IT;
 
     // Need to translate ElementWithZ2ErrorEstimator pointer to element number
     // in order to give each processor elements to work on if the problem
     // has not yet been distributed.  In order to reduce the use of #ifdef this
     // is also done for the serial problem and the code is amended accordingly.
 
-    std::map<ElementWithZ2ErrorEstimator *, int> elem_num;
+    std::map<ElementWithZ2ErrorEstimator*, int> elem_num;
     unsigned nelem = mesh_pt->nelement();
     for (unsigned e = 0; e < nelem; e++)
     {
-      elem_num[dynamic_cast<ElementWithZ2ErrorEstimator *>(
+      elem_num[dynamic_cast<ElementWithZ2ErrorEstimator*>(
         mesh_pt->element_pt(e))] = e;
     }
 
@@ -1134,7 +1132,7 @@ namespace oomph
 
     // Set up matrices and vectors which will be sent later
     // - full matrix of all recovered coefficients
-    Vector<DenseMatrix<double> *>
+    Vector<DenseMatrix<double>*>
       vector_of_recovered_flux_coefficient_pt_to_send;
     // - vectors containing element numbers in each patch
     Vector<Vector<int>> vector_of_elements_in_patch_to_send;
@@ -1143,11 +1141,11 @@ namespace oomph
     for (int i = itbegin; i < itend; i++)
     {
       // Which vertex node are we at?
-      Node *nod_pt = vertex_node_pt[i];
+      Node* nod_pt = vertex_node_pt[i];
 
       // Pointer to vector of pointers to elements that make up
       // the patch.
-      Vector<ElementWithZ2ErrorEstimator *> *el_vec_pt =
+      Vector<ElementWithZ2ErrorEstimator*>* el_vec_pt =
         adjacent_elements_pt[nod_pt];
 
       // Is the corner node that is central to the patch surrounded by
@@ -1171,7 +1169,7 @@ namespace oomph
         // dimension of the problem,  compute
         // the matrix of recovered flux coefficients and return
         // a pointer to it.
-        DenseMatrix<double> *recovered_flux_coefficient_pt = 0;
+        DenseMatrix<double>* recovered_flux_coefficient_pt = 0;
         get_recovered_flux_in_patch(*el_vec_pt,
                                     num_recovery_terms,
                                     num_flux_terms,
@@ -1195,7 +1193,7 @@ namespace oomph
         MPI_Helpers::mpi_has_been_initialised())
     {
       // Get communicator from namespace
-      OomphCommunicator *comm_pt = MPI_Helpers::communicator_pt();
+      OomphCommunicator* comm_pt = MPI_Helpers::communicator_pt();
 
       // All local recovered fluxes have been calculated, so now share result
       for (int iproc = 0; iproc < n_proc; iproc++)
@@ -1222,7 +1220,7 @@ namespace oomph
           comm_pt->broadcast(iproc, elements);
 
           // Now get recovered flux coefficients
-          DenseMatrix<double> *recovered_flux_coefficient_pt;
+          DenseMatrix<double>* recovered_flux_coefficient_pt;
 
           // Which processor are we on?
           if (my_rank == iproc)
@@ -1252,8 +1250,8 @@ namespace oomph
           for (unsigned e = 0; e < nelements; e++)
           {
             // Get pointer to element
-            ElementWithZ2ErrorEstimator *el_pt =
-              dynamic_cast<ElementWithZ2ErrorEstimator *>(
+            ElementWithZ2ErrorEstimator* el_pt =
+              dynamic_cast<ElementWithZ2ErrorEstimator*>(
                 mesh_pt->element_pt(elements[e]));
 
             // Loop over all nodes in element
@@ -1261,7 +1259,7 @@ namespace oomph
             for (unsigned n = 0; n < num_nod; n++)
             {
               // Get the node
-              Node *nod_pt = el_pt->node_pt(n);
+              Node* nod_pt = el_pt->node_pt(n);
               // Add the pointer to the current flux coefficient matrix
               // to the set for the node
               // Mesh not distributed here so nod_pt cannot be halo
@@ -1292,7 +1290,7 @@ namespace oomph
         nelements = elements.size();
 
         // Now get recovered flux coefficients
-        DenseMatrix<double> *recovered_flux_coefficient_pt;
+        DenseMatrix<double>* recovered_flux_coefficient_pt;
         recovered_flux_coefficient_pt =
           vector_of_recovered_flux_coefficient_pt_to_send[ipatch];
 
@@ -1302,8 +1300,8 @@ namespace oomph
         for (int e = 0; e < nelements; e++)
         {
           // Get pointer to element
-          ElementWithZ2ErrorEstimator *el_pt =
-            dynamic_cast<ElementWithZ2ErrorEstimator *>(
+          ElementWithZ2ErrorEstimator* el_pt =
+            dynamic_cast<ElementWithZ2ErrorEstimator*>(
               mesh_pt->element_pt(elements[e]));
 
           // Loop over all nodes in element
@@ -1311,7 +1309,7 @@ namespace oomph
           for (unsigned n = 0; n < num_nod; n++)
           {
             // Get the node
-            Node *nod_pt = el_pt->node_pt(n);
+            Node* nod_pt = el_pt->node_pt(n);
             // Add the pointer to the current flux coefficient matrix
             // to the set for this node
             flux_coeff_pt[nod_pt].insert(recovered_flux_coefficient_pt);
@@ -1338,13 +1336,13 @@ namespace oomph
     //-------------------------------------
 
     // Map of (averaged) recoverd flux values at nodes
-    MapMatrixMixed<Node *, int, double> rec_flux_map;
+    MapMatrixMixed<Node*, int, double> rec_flux_map;
 
     // Loop over all nodes
     unsigned n_node = mesh_pt->nnode();
     for (unsigned n = 0; n < n_node; n++)
     {
-      Node *nod_pt = mesh_pt->node_pt(n);
+      Node* nod_pt = mesh_pt->node_pt(n);
 
       // How many patches is this node a member of?
       unsigned npatches = flux_coeff_pt[nod_pt].size();
@@ -1354,7 +1352,7 @@ namespace oomph
         num_recovery_terms, num_flux_terms, 0.0);
 
       // Loop over matrices for different patches and add contributions
-      typedef std::set<DenseMatrix<double> *>::iterator IT;
+      typedef std::set<DenseMatrix<double>*>::iterator IT;
       for (IT it = flux_coeff_pt[nod_pt].begin();
            it != flux_coeff_pt[nod_pt].end();
            it++)
@@ -1436,8 +1434,8 @@ namespace oomph
     int n_compound_flux = 1;
     for (unsigned e = 0; e < nelem; e++)
     {
-      ElementWithZ2ErrorEstimator *el_pt =
-        dynamic_cast<ElementWithZ2ErrorEstimator *>(mesh_pt->element_pt(e));
+      ElementWithZ2ErrorEstimator* el_pt =
+        dynamic_cast<ElementWithZ2ErrorEstimator*>(mesh_pt->element_pt(e));
 
 #ifdef OOMPH_HAS_MPI
       // Ignore halo elements
@@ -1469,8 +1467,8 @@ namespace oomph
     // Loop over all (non-halo) elements again
     for (unsigned e = 0; e < nelem; e++)
     {
-      ElementWithZ2ErrorEstimator *el_pt =
-        dynamic_cast<ElementWithZ2ErrorEstimator *>(mesh_pt->element_pt(e));
+      ElementWithZ2ErrorEstimator* el_pt =
+        dynamic_cast<ElementWithZ2ErrorEstimator*>(mesh_pt->element_pt(e));
 
 #ifdef OOMPH_HAS_MPI
       // Ignore halo elements
@@ -1484,7 +1482,7 @@ namespace oomph
         const unsigned n_compound_flux_el = el_pt->ncompound_fluxes();
         Vector<double> error(n_compound_flux_el, 0.0);
 
-        Integral *integ_pt = el_pt->integral_pt();
+        Integral* integ_pt = el_pt->integral_pt();
 
         // Set the value of Nintpt
         const unsigned n_intpt = integ_pt->nweight();
@@ -1528,7 +1526,7 @@ namespace oomph
           // Loop over all nodes (incl. halo nodes) to assemble contribution
           for (unsigned n = 0; n < n_node; n++)
           {
-            Node *nod_pt = el_pt->node_pt(n);
+            Node* nod_pt = el_pt->node_pt(n);
 
             // Loop over components
             for (unsigned i = 0; i < num_flux_terms; i++)
@@ -1591,14 +1589,14 @@ namespace oomph
     if (mesh_pt->is_mesh_distributed())
     {
       // Get communicator from mesh
-      OomphCommunicator *comm_pt = mesh_pt->communicator_pt();
+      OomphCommunicator* comm_pt = mesh_pt->communicator_pt();
 
       for (int iproc = 0; iproc < n_proc; iproc++)
       {
         if (iproc != my_rank) // Not current process, so send
         {
           // Get the haloed elements
-          Vector<GeneralisedElement *> haloed_elem_pt =
+          Vector<GeneralisedElement*> haloed_elem_pt =
             mesh_pt->haloed_element_pt(iproc);
           // Find the number of haloed elements
           int nelem_haloed = haloed_elem_pt.size();
@@ -1618,7 +1616,7 @@ namespace oomph
             {
               // Find element number
               int element_num =
-                elem_num[dynamic_cast<ElementWithZ2ErrorEstimator *>(
+                elem_num[dynamic_cast<ElementWithZ2ErrorEstimator*>(
                   haloed_elem_pt[e])];
               // Put the error in a vector to send
               for (int i = 0; i < n_compound_flux; i++)
@@ -1643,7 +1641,7 @@ namespace oomph
           {
             if (iproc != send_rank) // iproc=my_rank already!
             {
-              Vector<GeneralisedElement *> halo_elem_pt =
+              Vector<GeneralisedElement*> halo_elem_pt =
                 mesh_pt->halo_element_pt(send_rank);
               // Find number of halo elements
               int nelem_halo = halo_elem_pt.size();
@@ -1672,7 +1670,7 @@ namespace oomph
                 {
                   // Find element number
                   int element_num =
-                    elem_num[dynamic_cast<ElementWithZ2ErrorEstimator *>(
+                    elem_num[dynamic_cast<ElementWithZ2ErrorEstimator*>(
                       halo_elem_pt[e])];
                   // Put the error in the correct location
                   for (int i = 0; i < n_compound_flux; i++)
@@ -1719,7 +1717,7 @@ namespace oomph
       if (mesh_pt->is_mesh_distributed())
       {
         // Get communicator from mesh
-        OomphCommunicator *comm_pt = mesh_pt->communicator_pt();
+        OomphCommunicator* comm_pt = mesh_pt->communicator_pt();
 
         Vector<double> total_flux_norm(n_compound_flux);
         // every process needs to know the sum
@@ -1789,21 +1787,21 @@ namespace oomph
   /// Doc FE and recovered flux
   //==================================================================
   void Z2ErrorEstimator::doc_flux(
-    Mesh *mesh_pt,
-    const unsigned &num_flux_terms,
-    MapMatrixMixed<Node *, int, double> &rec_flux_map,
-    const Vector<double> &elemental_error,
-    DocInfo &doc_info)
+    Mesh* mesh_pt,
+    const unsigned& num_flux_terms,
+    MapMatrixMixed<Node*, int, double>& rec_flux_map,
+    const Vector<double>& elemental_error,
+    DocInfo& doc_info)
   {
 #ifdef OOMPH_HAS_MPI
 
     // Get communicator from mesh
-    OomphCommunicator *comm_pt = mesh_pt->communicator_pt();
+    OomphCommunicator* comm_pt = mesh_pt->communicator_pt();
 
 #else
 
     // Dummy communicator
-    OomphCommunicator *comm_pt = MPI_Helpers::communicator_pt();
+    OomphCommunicator* comm_pt = MPI_Helpers::communicator_pt();
 
 #endif
 
@@ -1822,7 +1820,7 @@ namespace oomph
     if (nel > 0)
     {
       // Extract first element to determine spatial dimension
-      FiniteElement *el_pt = mesh_pt->finite_element_pt(0);
+      FiniteElement* el_pt = mesh_pt->finite_element_pt(0);
       unsigned dim = el_pt->dim();
       Vector<double> s(dim);
 
@@ -1832,8 +1830,8 @@ namespace oomph
       // Loop over all elements
       for (unsigned e = 0; e < nel; e++)
       {
-        ElementWithZ2ErrorEstimator *el_pt =
-          dynamic_cast<ElementWithZ2ErrorEstimator *>(mesh_pt->element_pt(e));
+        ElementWithZ2ErrorEstimator* el_pt =
+          dynamic_cast<ElementWithZ2ErrorEstimator*>(mesh_pt->element_pt(e));
 
         // Write tecplot header
         feflux_file << el_pt->tecplot_zone_string(nplot);
@@ -1864,7 +1862,7 @@ namespace oomph
           // Loop over nodes to assemble contribution
           for (unsigned n = 0; n < n_node; n++)
           {
-            Node *nod_pt = el_pt->node_pt(n);
+            Node* nod_pt = el_pt->node_pt(n);
 
             // Loop over components
             for (unsigned i = 0; i < num_flux_terms; i++)
@@ -1901,7 +1899,7 @@ namespace oomph
 
       // Write tecplot footer (e.g. FE connectivity lists)
       // using the first element's output info.
-      FiniteElement *first_el_pt = mesh_pt->finite_element_pt(0);
+      FiniteElement* first_el_pt = mesh_pt->finite_element_pt(0);
       first_el_pt->write_tecplot_zone_footer(some_file, nplot);
       first_el_pt->write_tecplot_zone_footer(feflux_file, nplot);
     }

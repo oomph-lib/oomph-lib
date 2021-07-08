@@ -90,10 +90,10 @@ namespace oomph
   /// Pass the vector of min and max coordinates of the NEW bin array.
   //==============================================================================
   void RefineableBin::make_sub_bin_array(
-    const Vector<std::pair<double, double>> &min_and_max_coordinates)
+    const Vector<std::pair<double, double>>& min_and_max_coordinates)
   {
     // Setup parameters for sub-bin
-    RefineableBinArrayParameters *ref_bin_array_parameters_pt =
+    RefineableBinArrayParameters* ref_bin_array_parameters_pt =
       new RefineableBinArrayParameters(Bin_array_pt->mesh_pt());
 
     // Pass coordinates and dimensions
@@ -160,7 +160,7 @@ namespace oomph
       Bin_array_pt->root_bin_array_pt();
 
     // We first construct a new bin array, providing the right parameters
-    BinArrayParameters *bin_array_parameters_pt = ref_bin_array_parameters_pt;
+    BinArrayParameters* bin_array_parameters_pt = ref_bin_array_parameters_pt;
     Sub_bin_array_pt = new RefineableBinArray(bin_array_parameters_pt);
     delete ref_bin_array_parameters_pt;
 
@@ -176,7 +176,7 @@ namespace oomph
   //============================================================================
   /// Output bin; x,[y,[z]],n_sample_points.
   //============================================================================
-  void RefineableBin::output(std::ofstream &outfile, const bool &don_t_recurse)
+  void RefineableBin::output(std::ofstream& outfile, const bool& don_t_recurse)
   {
     // Recurse?
     if ((Sub_bin_array_pt != 0) && (!don_t_recurse))
@@ -284,7 +284,7 @@ namespace oomph
   //============================================================================
   /// Output bin; x,[y,[z]]
   //============================================================================
-  void RefineableBin::output_bin_vertices(std::ofstream &outfile)
+  void RefineableBin::output_bin_vertices(std::ofstream& outfile)
   {
     // Recurse?
     if (Sub_bin_array_pt != 0)
@@ -383,8 +383,8 @@ namespace oomph
   //==============================================================================
   /// Add a SamplePoint* to a RefineableBin object.
   //==============================================================================
-  void RefineableBin::add_sample_point(SamplePoint *new_sample_point_pt,
-                                       const Vector<double> &zeta_coordinates)
+  void RefineableBin::add_sample_point(SamplePoint* new_sample_point_pt,
+                                       const Vector<double>& zeta_coordinates)
   {
     // If the bin is a "leaf" (ie no sub bin array)
     if (Sub_bin_array_pt == 0)
@@ -392,7 +392,7 @@ namespace oomph
       // if there is no Sample_point_pt create it
       if (Sample_point_pt == 0)
       {
-        Sample_point_pt = new Vector<SamplePoint *>;
+        Sample_point_pt = new Vector<SamplePoint*>;
       }
       this->Sample_point_pt->push_back(new_sample_point_pt);
 
@@ -428,9 +428,9 @@ namespace oomph
   /// s within it that contains point with global coordinate zeta.
   /// sub_geom_object_pt=0 if point can't be found.
   //==============================================================================
-  void RefineableBin::locate_zeta(const Vector<double> &zeta,
-                                  GeomObject *&sub_geom_object_pt,
-                                  Vector<double> &s)
+  void RefineableBin::locate_zeta(const Vector<double>& zeta,
+                                  GeomObject*& sub_geom_object_pt,
+                                  Vector<double>& s)
   {
     // Haven't found zeta yet!
     sub_geom_object_pt = 0;
@@ -511,7 +511,7 @@ namespace oomph
       while ((i < n_sample_point) && (sub_geom_object_pt == 0))
       {
         // Get the corresponding finite element
-        FiniteElement *el_pt = Bin_array_pt->mesh_pt()->finite_element_pt(
+        FiniteElement* el_pt = Bin_array_pt->mesh_pt()->finite_element_pt(
           (*Sample_point_pt)[i]->element_index_in_mesh());
 
 #ifdef OOMPH_HAS_MPI
@@ -591,7 +591,7 @@ namespace oomph
   /// *.second = max.
   //==============================================================================
   void RefineableBin::get_bin_boundaries(
-    Vector<std::pair<double, double>> &min_and_max_coordinates)
+    Vector<std::pair<double, double>>& min_and_max_coordinates)
   {
     unsigned n_bin = Bin_index_in_bin_array;
 
@@ -687,7 +687,7 @@ namespace oomph
     unsigned n_el = Mesh_pt->nelement();
     for (unsigned e = 0; e < n_el; e++)
     {
-      FiniteElement *el_pt = Mesh_pt->finite_element_pt(e);
+      FiniteElement* el_pt = Mesh_pt->finite_element_pt(e);
 
       // Get the number of vertices (nplot=2 does the trick)
       unsigned n_plot = 2;
@@ -825,7 +825,7 @@ namespace oomph
   /// Constructor
   //==============================================================================
   RefineableBinArray::RefineableBinArray(
-    SamplePointContainerParameters *sample_point_container_parameters_pt) :
+    SamplePointContainerParameters* sample_point_container_parameters_pt) :
     SamplePointContainer(
       sample_point_container_parameters_pt->mesh_pt(),
       sample_point_container_parameters_pt->min_and_max_coordinates(),
@@ -838,7 +838,7 @@ namespace oomph
     BinArray(
       sample_point_container_parameters_pt->mesh_pt(),
       sample_point_container_parameters_pt->min_and_max_coordinates(),
-      dynamic_cast<BinArrayParameters *>(sample_point_container_parameters_pt)
+      dynamic_cast<BinArrayParameters*>(sample_point_container_parameters_pt)
         ->dimensions_of_bin_array(),
       sample_point_container_parameters_pt
         ->use_eulerian_coordinates_during_setup(),
@@ -847,8 +847,8 @@ namespace oomph
       sample_point_container_parameters_pt
         ->nsample_points_generated_per_element())
   {
-    RefineableBinArrayParameters *ref_bin_array_parameters_pt =
-      dynamic_cast<RefineableBinArrayParameters *>(
+    RefineableBinArrayParameters* ref_bin_array_parameters_pt =
+      dynamic_cast<RefineableBinArrayParameters*>(
         sample_point_container_parameters_pt);
 
 #ifdef PARANOID
@@ -978,8 +978,8 @@ namespace oomph
   /// *.first = min; *.second = max.
   //==============================================================================
   void RefineableBinArray::get_bin_boundaries(
-    const unsigned &bin_index,
-    Vector<std::pair<double, double>> &min_and_max_coordinates_of_bin)
+    const unsigned& bin_index,
+    Vector<std::pair<double, double>>& min_and_max_coordinates_of_bin)
   {
     unsigned bin_index_local = bin_index;
 
@@ -1008,7 +1008,7 @@ namespace oomph
   //==============================================================================
   /// Output neighbouring bins up to given "radius" of the specified bin
   //==============================================================================
-  void RefineableBinArray::output_bin_vertices(std::ofstream &outfile)
+  void RefineableBinArray::output_bin_vertices(std::ofstream& outfile)
   {
     // Loop over bins
     unsigned n_bin = Bin_pt.size();
@@ -1024,9 +1024,9 @@ namespace oomph
   //==============================================================================
   /// Output neighbouring bins up to given "radius" of the specified bin
   //==============================================================================
-  void RefineableBinArray::output_neighbouring_bins(const unsigned &bin_index,
-                                                    const unsigned &radius,
-                                                    std::ofstream &outfile)
+  void RefineableBinArray::output_neighbouring_bins(const unsigned& bin_index,
+                                                    const unsigned& radius,
+                                                    std::ofstream& outfile)
   {
     unsigned n_lagr = ndim_zeta();
 
@@ -1328,10 +1328,10 @@ namespace oomph
   /// at a given "radius" of the specified bin
   //==============================================================================
   void BinArray::get_neighbouring_bins_helper(
-    const unsigned &bin_index,
-    const unsigned &radius,
-    Vector<unsigned> &neighbouring_bin_index,
-    const bool &use_old_version)
+    const unsigned& bin_index,
+    const unsigned& radius,
+    Vector<unsigned>& neighbouring_bin_index,
+    const bool& use_old_version)
   {
     // OLD VERSION
     if (use_old_version)
@@ -1814,7 +1814,7 @@ namespace oomph
   /// Get (linearly enumerated) bin index of bin that
   /// contains specified zeta
   //============================================================
-  unsigned BinArray::coords_to_bin_index(const Vector<double> &zeta)
+  unsigned BinArray::coords_to_bin_index(const Vector<double>& zeta)
   {
     unsigned coef = 1;
     unsigned n_bin = 0;
@@ -1862,7 +1862,7 @@ namespace oomph
     unsigned nel = Mesh_pt->nelement();
     for (unsigned e = 0; e < nel; e++)
     {
-      FiniteElement *el_pt = Mesh_pt->finite_element_pt(e);
+      FiniteElement* el_pt = Mesh_pt->finite_element_pt(e);
 
       // Total number of sample point we will create
       unsigned nplot =
@@ -1873,7 +1873,7 @@ namespace oomph
       {
         // ... create it: Pass element index in mesh (vector
         // of elements and index of sample point within element
-        SamplePoint *new_sample_point_pt = new SamplePoint(e, j);
+        SamplePoint* new_sample_point_pt = new SamplePoint(e, j);
 
         // Coordinates of this point
         Vector<double> zeta(ndim_zeta());
@@ -1941,8 +1941,8 @@ namespace oomph
   //==================================================================
   /// Get "coordinates" of bin that contains specified zeta
   //==================================================================
-  void BinArray::coords_to_vectorial_bin_index(const Vector<double> &zeta,
-                                               Vector<unsigned> &bin_index)
+  void BinArray::coords_to_vectorial_bin_index(const Vector<double>& zeta,
+                                               Vector<unsigned>& bin_index)
   {
     unsigned dim = ndim_zeta();
     bin_index.resize(dim);
@@ -1973,9 +1973,9 @@ namespace oomph
   /// s within it that contains point with global coordinate zeta.
   /// sub_geom_object_pt=0 if point can't be found.
   //==============================================================================
-  void RefineableBinArray::locate_zeta(const Vector<double> &zeta,
-                                       GeomObject *&sub_geom_object_pt,
-                                       Vector<double> &s)
+  void RefineableBinArray::locate_zeta(const Vector<double>& zeta,
+                                       GeomObject*& sub_geom_object_pt,
+                                       Vector<double>& s)
   {
     // Default: we've failed miserably
     sub_geom_object_pt = 0;
@@ -2138,7 +2138,7 @@ namespace oomph
   /// Constructor
   //======================================================================
   NonRefineableBinArray::NonRefineableBinArray(
-    SamplePointContainerParameters *sample_point_container_parameters_pt) :
+    SamplePointContainerParameters* sample_point_container_parameters_pt) :
     SamplePointContainer(
       sample_point_container_parameters_pt->mesh_pt(),
       sample_point_container_parameters_pt->min_and_max_coordinates(),
@@ -2151,7 +2151,7 @@ namespace oomph
     BinArray(
       sample_point_container_parameters_pt->mesh_pt(),
       sample_point_container_parameters_pt->min_and_max_coordinates(),
-      dynamic_cast<BinArrayParameters *>(sample_point_container_parameters_pt)
+      dynamic_cast<BinArrayParameters*>(sample_point_container_parameters_pt)
         ->dimensions_of_bin_array(),
       sample_point_container_parameters_pt
         ->use_eulerian_coordinates_during_setup(),
@@ -2208,8 +2208,8 @@ namespace oomph
     Max_spiral_level = UINT_MAX;
     Current_min_spiral_level = 0;
 
-    NonRefineableBinArrayParameters *non_ref_bin_array_parameters_pt =
-      dynamic_cast<NonRefineableBinArrayParameters *>(
+    NonRefineableBinArrayParameters* non_ref_bin_array_parameters_pt =
+      dynamic_cast<NonRefineableBinArrayParameters*>(
         sample_point_container_parameters_pt);
 
 #ifdef PARANOID
@@ -2253,8 +2253,8 @@ namespace oomph
     total_number_of_sample_points_computed_recursively() const
   {
     // Get pointer to map-based representation
-    const std::map<unsigned, Vector<std::pair<FiniteElement *, Vector<double>>>>
-      *map_pt = Bin_object_coord_pairs.map_pt();
+    const std::map<unsigned, Vector<std::pair<FiniteElement*, Vector<double>>>>*
+      map_pt = Bin_object_coord_pairs.map_pt();
 
     // Initialise
     unsigned count = 0;
@@ -2262,7 +2262,7 @@ namespace oomph
     // loop...
     typedef std::map<
       unsigned,
-      Vector<std::pair<FiniteElement *, Vector<double>>>>::const_iterator IT;
+      Vector<std::pair<FiniteElement*, Vector<double>>>>::const_iterator IT;
     for (IT it = map_pt->begin(); it != map_pt->end(); it++)
     {
       count += (*it).second.size();
@@ -2273,7 +2273,7 @@ namespace oomph
   //========================================================================
   /// Output bins
   //========================================================================
-  void NonRefineableBinArray::output_bins(std::ofstream &outfile)
+  void NonRefineableBinArray::output_bins(std::ofstream& outfile)
   {
     // Spatial dimension of bin
     const unsigned n_lagrangian = this->ndim_zeta();
@@ -2294,7 +2294,7 @@ namespace oomph
           unsigned nentry = Bin_object_coord_pairs[b].size();
           for (unsigned e = 0; e < nentry; e++)
           {
-            FiniteElement *el_pt = Bin_object_coord_pairs[b][e].first;
+            FiniteElement* el_pt = Bin_object_coord_pairs[b][e].first;
             Vector<double> s(Bin_object_coord_pairs[b][e].second);
             Vector<double> zeta(n_lagrangian);
             if (Use_eulerian_coordinates_during_setup)
@@ -2321,7 +2321,7 @@ namespace oomph
   //========================================================================
   /// Output bin vertices (allowing display of bins as zones).
   //========================================================================
-  void NonRefineableBinArray::output_bin_vertices(std::ofstream &outfile)
+  void NonRefineableBinArray::output_bin_vertices(std::ofstream& outfile)
   {
     // Store the lagrangian dimension
     const unsigned n_lagrangian = this->ndim_zeta();
@@ -2374,7 +2374,7 @@ namespace oomph
     flush_bins_of_objects();
 
     // Temporary storage in bin
-    std::map<unsigned, Vector<std::pair<FiniteElement *, Vector<double>>>>
+    std::map<unsigned, Vector<std::pair<FiniteElement*, Vector<double>>>>
       tmp_bin_object_coord_pairs;
 
     // Total number of bins
@@ -2479,8 +2479,8 @@ namespace oomph
     for (unsigned e = 0; e < n_sub; e++)
     {
       // Cast to the element (sub-object) first
-      FiniteElement *el_pt =
-        dynamic_cast<FiniteElement *>(Mesh_pt->finite_element_pt(e));
+      FiniteElement* el_pt =
+        dynamic_cast<FiniteElement*>(Mesh_pt->finite_element_pt(e));
 
       // Get specified number of points within the element
       unsigned n_plot_points =
@@ -2574,7 +2574,7 @@ namespace oomph
     // filled the SparseVector's internal map within that class.
     typedef std::map<
       unsigned,
-      Vector<std::pair<FiniteElement *, Vector<double>>>>::iterator IT;
+      Vector<std::pair<FiniteElement*, Vector<double>>>>::iterator IT;
     for (IT it = tmp_bin_object_coord_pairs.begin();
          it != tmp_bin_object_coord_pairs.end();
          it++)
@@ -2588,19 +2588,19 @@ namespace oomph
   //========================================================================
   /// Provide some stats on the fill level of the associated bin
   //========================================================================
-  void NonRefineableBinArray::get_fill_stats(unsigned &n_bin,
-                                             unsigned &max_n_entry,
-                                             unsigned &min_n_entry,
-                                             unsigned &tot_n_entry,
-                                             unsigned &n_empty) const
+  void NonRefineableBinArray::get_fill_stats(unsigned& n_bin,
+                                             unsigned& max_n_entry,
+                                             unsigned& min_n_entry,
+                                             unsigned& tot_n_entry,
+                                             unsigned& n_empty) const
   {
     // Total number of bins
     n_bin = nbin();
     n_empty = n_bin - Bin_object_coord_pairs.nnz();
 
     // Get pointer to map-based representation
-    const std::map<unsigned, Vector<std::pair<FiniteElement *, Vector<double>>>>
-      *map_pt = Bin_object_coord_pairs.map_pt();
+    const std::map<unsigned, Vector<std::pair<FiniteElement*, Vector<double>>>>*
+      map_pt = Bin_object_coord_pairs.map_pt();
 
     // Initialise
     max_n_entry = 0;
@@ -2610,7 +2610,7 @@ namespace oomph
     // Do stats
     typedef std::map<
       unsigned,
-      Vector<std::pair<FiniteElement *, Vector<double>>>>::const_iterator IT;
+      Vector<std::pair<FiniteElement*, Vector<double>>>>::const_iterator IT;
     for (IT it = map_pt->begin(); it != map_pt->end(); it++)
     {
       unsigned nentry = (*it).second.size();
@@ -2626,7 +2626,7 @@ namespace oomph
   /// up to the specified "radius" (default 1)
   //========================================================================
   void NonRefineableBinArray::fill_bin_by_diffusion(
-    const unsigned &bin_diffusion_radius)
+    const unsigned& bin_diffusion_radius)
   {
     // oomph_info << "PROFILING GET_NEIGHBOURING_BINS_HELPER():" << std::endl;
     // profile_get_neighbouring_bins_helper();
@@ -2665,7 +2665,7 @@ namespace oomph
 
         // Find closest pair
         double min_dist = DBL_MAX;
-        std::pair<FiniteElement *, Vector<double>> closest_pair;
+        std::pair<FiniteElement*, Vector<double>> closest_pair;
         for (unsigned i = 0; i < n_neigh; i++)
         {
           unsigned neigh_bin = neighbour_bin[i];
@@ -2677,7 +2677,7 @@ namespace oomph
             unsigned nbin_content = Bin_object_coord_pairs[neigh_bin].size();
             for (unsigned j = 0; j < nbin_content; j++)
             {
-              FiniteElement *el_pt = Bin_object_coord_pairs[neigh_bin][j].first;
+              FiniteElement* el_pt = Bin_object_coord_pairs[neigh_bin][j].first;
               Vector<double> s(Bin_object_coord_pairs[neigh_bin][j].second);
               Vector<double> x(2);
               el_pt->interpolated_x(s, x);
@@ -2701,7 +2701,7 @@ namespace oomph
         // Have we filled the bin?
         if (min_dist != DBL_MAX)
         {
-          Vector<std::pair<FiniteElement *, Vector<double>>> new_entry;
+          Vector<std::pair<FiniteElement*, Vector<double>>> new_entry;
           new_entry.push_back(closest_pair);
           Bin_object_coord_pairs.set_value(bin, new_entry);
 
@@ -2750,8 +2750,8 @@ namespace oomph
   /// Bin number is negative if the coordinate is outside
   /// the bin structure.
   //=================================================================
-  void NonRefineableBinArray::get_bin(const Vector<double> &zeta,
-                                      int &bin_number)
+  void NonRefineableBinArray::get_bin(const Vector<double>& zeta,
+                                      int& bin_number)
   {
     // Default for point not found
     bin_number = -1;
@@ -2867,7 +2867,7 @@ namespace oomph
   /// i-th coordinate of the j-th vertex.
   //========================================================================
   void NonRefineableBinArray::get_bin_vertices(
-    const unsigned &i_bin, Vector<Vector<double>> &bin_vertex)
+    const unsigned& i_bin, Vector<Vector<double>>& bin_vertex)
   {
     // Spatial dimension of bin
     const unsigned n_lagrangian = this->ndim_zeta();
@@ -3010,8 +3010,8 @@ namespace oomph
   /// Compute the minimum distance of any vertex in the specified bin
   /// from the specified Lagrangian coordinate zeta.
   //========================================================================
-  double NonRefineableBinArray::min_distance(const unsigned &i_bin,
-                                             const Vector<double> &zeta)
+  double NonRefineableBinArray::min_distance(const unsigned& i_bin,
+                                             const Vector<double>& zeta)
   {
     // Spatial dimension of bin
     const unsigned n_lagrangian = this->ndim_zeta();
@@ -3040,9 +3040,9 @@ namespace oomph
   /// on return from this function, none of the constituent sub-objects
   /// contain the required coordinate.
   //==============================================================================
-  void NonRefineableBinArray::locate_zeta(const Vector<double> &zeta,
-                                          GeomObject *&sub_geom_object_pt,
-                                          Vector<double> &s)
+  void NonRefineableBinArray::locate_zeta(const Vector<double>& zeta,
+                                          GeomObject*& sub_geom_object_pt,
+                                          Vector<double>& s)
   {
     // Reset counter for number of sample points visited only if we're
     // starting from the beginning
@@ -3201,7 +3201,7 @@ namespace oomph
             for (unsigned i_sam = 0; i_sam < n_sample; i_sam++)
             {
               // Get the element
-              FiniteElement *el_pt =
+              FiniteElement* el_pt =
                 Bin_object_coord_pairs[neighbour_bin[i_nbr]][i_sam].first;
 
               // Get the local coordinate
@@ -3254,8 +3254,8 @@ namespace oomph
               if (Ignore_halo_elements_during_locate_zeta_search)
               {
                 // Dynamic cast the result to a FiniteElement
-                FiniteElement *test_el_pt =
-                  dynamic_cast<FiniteElement *>(sub_geom_object_pt);
+                FiniteElement* test_el_pt =
+                  dynamic_cast<FiniteElement*>(sub_geom_object_pt);
                 if (test_el_pt != 0)
                 {
                   // We only want to exit if this is a non-halo element
@@ -3336,7 +3336,7 @@ namespace oomph
   /// Constructor
   //====================================================================
   CGALSamplePointContainer::CGALSamplePointContainer(
-    SamplePointContainerParameters *sample_point_container_parameters_pt) :
+    SamplePointContainerParameters* sample_point_container_parameters_pt) :
     SamplePointContainer(
       sample_point_container_parameters_pt->mesh_pt(),
       sample_point_container_parameters_pt->min_and_max_coordinates(),
@@ -3433,7 +3433,7 @@ namespace oomph
     unsigned n_sample_estimate = 0;
     if (nel > 0)
     {
-      FiniteElement *el_pt = Mesh_pt->finite_element_pt(0);
+      FiniteElement* el_pt = Mesh_pt->finite_element_pt(0);
       if (el_pt != 0)
       {
         // Total number of sample point we will create
@@ -3447,7 +3447,7 @@ namespace oomph
     // Fill 'em in:
     for (unsigned e = 0; e < nel; e++)
     {
-      FiniteElement *el_pt = Mesh_pt->finite_element_pt(e);
+      FiniteElement* el_pt = Mesh_pt->finite_element_pt(e);
 
       // Total number of sample point we will create
       unsigned nplot =
@@ -3458,7 +3458,7 @@ namespace oomph
       {
         // ... create it: Pass element index in mesh (vector
         // of elements and index of sample point within element
-        SamplePoint *new_sample_point_pt = new SamplePoint(e, j);
+        SamplePoint* new_sample_point_pt = new SamplePoint(e, j);
 
         // Coordinates of this point
         Vector<double> zeta(ndim_zeta());
@@ -3548,9 +3548,9 @@ namespace oomph
   /// on return from this function, none of the constituent sub-objects
   /// contain the required coordinate.
   //==============================================================================
-  void CGALSamplePointContainer::locate_zeta(const Vector<double> &zeta,
-                                             GeomObject *&sub_geom_object_pt,
-                                             Vector<double> &s)
+  void CGALSamplePointContainer::locate_zeta(const Vector<double>& zeta,
+                                             GeomObject*& sub_geom_object_pt,
+                                             Vector<double>& s)
   {
     // Top level book keeping and sanity checking
     if (first_sample_point_to_actually_lookup_during_locate_zeta() == 0)
@@ -3626,10 +3626,10 @@ namespace oomph
              first_sample_point_to_actually_lookup_during_locate_zeta()))
         {
           // Recover the sample point
-          SamplePoint *sample_point_pt = boost::get<1>(it->first);
+          SamplePoint* sample_point_pt = boost::get<1>(it->first);
 
           // Get the element
-          FiniteElement *el_pt = Mesh_pt->finite_element_pt(
+          FiniteElement* el_pt = Mesh_pt->finite_element_pt(
             sample_point_pt->element_index_in_mesh());
 
 #ifdef OOMPH_HAS_MPI
@@ -3762,10 +3762,10 @@ namespace oomph
   /// If this fails, return the nearest sample point.
   //==============================================================================
   void CGALSamplePointContainer::limited_locate_zeta(
-    const Vector<double> &zeta,
-    const unsigned &max_sample_points_for_newton_based_search,
-    GeomObject *&sub_geom_object_pt,
-    Vector<double> &s)
+    const Vector<double>& zeta,
+    const unsigned& max_sample_points_for_newton_based_search,
+    GeomObject*& sub_geom_object_pt,
+    Vector<double>& s)
   {
     // Reset counter for number of sample points visited.
     Total_number_of_sample_points_visited_during_locate_zeta_from_top_level = 0;
@@ -3793,10 +3793,10 @@ namespace oomph
          it++)
     {
       // Recover the sample point
-      SamplePoint *sample_point_pt = boost::get<1>(it->first);
+      SamplePoint* sample_point_pt = boost::get<1>(it->first);
 
       // Get the element
-      FiniteElement *el_pt =
+      FiniteElement* el_pt =
         Mesh_pt->finite_element_pt(sample_point_pt->element_index_in_mesh());
 
 #ifdef OOMPH_HAS_MPI
@@ -3905,10 +3905,10 @@ namespace oomph
     K_neighbor_search_d::iterator it = search.begin();
 
     // Recover the sample point
-    SamplePoint *sample_point_pt = boost::get<1>(it->first);
+    SamplePoint* sample_point_pt = boost::get<1>(it->first);
 
     // Get the element
-    FiniteElement *el_pt =
+    FiniteElement* el_pt =
       Mesh_pt->finite_element_pt(sample_point_pt->element_index_in_mesh());
 
     // Get local coordinate of sample point in element

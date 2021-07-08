@@ -38,10 +38,10 @@ namespace oomph
   //========================================================================
   template<unsigned DIM>
   void RefineablePoissonEquations<DIM>::compute_exact_Z2_error(
-    std::ostream &outfile,
+    std::ostream& outfile,
     FiniteElement::SteadyExactSolutionFctPt exact_flux_pt,
-    double &error,
-    double &norm)
+    double& error,
+    double& norm)
   {
     // Initialise
     error = 0.0;
@@ -139,9 +139,9 @@ namespace oomph
   //========================================================================
   template<unsigned DIM>
   void RefineablePoissonEquations<DIM>::
-    fill_in_generic_residual_contribution_poisson(Vector<double> &residuals,
-                                                  DenseMatrix<double> &jacobian,
-                                                  const unsigned &flag)
+    fill_in_generic_residual_contribution_poisson(Vector<double>& residuals,
+                                                  DenseMatrix<double>& jacobian,
+                                                  const unsigned& flag)
   {
     // Find out how many nodes there are in the element
     unsigned n_node = nnode();
@@ -343,7 +343,7 @@ namespace oomph
   //======================================================================
   template<unsigned DIM>
   void RefineablePoissonEquations<DIM>::get_dresidual_dnodal_coordinates(
-    RankThreeTensor<double> &dresidual_dnodal_coordinates)
+    RankThreeTensor<double>& dresidual_dnodal_coordinates)
   {
     // Determine number of nodes in element
     const unsigned n_node = nnode();
@@ -381,7 +381,7 @@ namespace oomph
     int local_eqn = 0;
 
     // Local storage for pointers to hang_info object
-    HangInfo *hang_info_pt = 0;
+    HangInfo* hang_info_pt = 0;
 
     // Loop over the integration points
     for (unsigned ipt = 0; ipt < n_intpt; ipt++)
@@ -527,10 +527,10 @@ namespace oomph
   /// Get error against and norm of exact solution
   template<unsigned DIM>
   void PRefineableQPoissonElement<DIM>::compute_energy_error(
-    std::ostream &outfile,
+    std::ostream& outfile,
     FiniteElement::SteadyExactSolutionFctPt exact_grad_pt,
-    double &error,
-    double &norm)
+    double& error,
+    double& norm)
   {
     // Initialise
     error = 0.0;

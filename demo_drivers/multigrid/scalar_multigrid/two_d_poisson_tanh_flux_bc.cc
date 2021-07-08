@@ -54,14 +54,14 @@ namespace TanhSolnForPoisson
   double TanPhi = 1.0;
 
   /// Exact solution as a Vector
-  void get_exact_u(const Vector<double> &x, Vector<double> &u)
+  void get_exact_u(const Vector<double>& x, Vector<double>& u)
   {
     // Assign the solution value
     u[0] = tanh(1.0 - Alpha * (TanPhi * x[0] - x[1]));
   } // End of get_exact_u
 
   /// Source function required to make the solution above an exact solution
-  void source_function(const Vector<double> &x, double &source)
+  void source_function(const Vector<double>& x, double& source)
   {
     // Return the value of the source function at x, i.e. f(x)
     source = 2.0 * tanh(-1.0 + Alpha * (TanPhi * x[0] - x[1])) *
@@ -73,8 +73,8 @@ namespace TanhSolnForPoisson
   } // End of source_function
 
   /// Flux required by the exact solution on a boundary on which x is fixed
-  void prescribed_flux_on_fixed_x_boundary(const Vector<double> &x,
-                                           double &flux)
+  void prescribed_flux_on_fixed_x_boundary(const Vector<double>& x,
+                                           double& flux)
   {
     // The outer unit normal to the boundary is (1,0)
     double N[2] = {1.0, 0.0};
@@ -98,7 +98,7 @@ namespace Smoother_Factory_Function_Helper
 {
   /// \short Returns a pointer to a Gauss-Seidel Smoother object which can
   /// be used as a pre- or post-smoother
-  Smoother *set_smoother()
+  Smoother* set_smoother()
   {
     // Create a new GS object
     return new GS<CRDoubleMatrix>;
@@ -140,12 +140,12 @@ public:
 
   /// \short Doc the solution. DocInfo object stores flags/labels for where
   /// the output gets written to
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 private:
   /// \short Create Poisson flux elements on the b-th boundary of the
   /// problem's mesh
-  void create_flux_elements(const unsigned &b);
+  void create_flux_elements(const unsigned& b);
 
   /// Delete Poisson flux elements and wipe the surface mesh
   void delete_flux_elements();
@@ -156,14 +156,14 @@ private:
   /// \short Pointer to the bulk mesh. Overloads the pure virtual function in
   /// the abstract base class, MGProblem. Must be refineable to allow the
   /// use of refine_base_mesh_as_in_reference_mesh_minus_one() in make_copy()
-  TreeBasedRefineableMeshBase *mg_bulk_mesh_pt()
+  TreeBasedRefineableMeshBase* mg_bulk_mesh_pt()
   {
     // Return the pointer to the bulk mesh
     return Bulk_mesh_pt;
   } // End of mg_bulk_mesh_pt
 
   /// \short Return a pointer to a new instance of the same problem.
-  MGProblem *make_new_problem()
+  MGProblem* make_new_problem()
   {
     // Make new problem of the FluxPoissonMGProblem class whose template
     // parameters are specified by the template parameters of the current
@@ -173,10 +173,10 @@ private:
   } // End of make_new_problem
 
   /// Pointer to the "bulk" mesh
-  MESH *Bulk_mesh_pt;
+  MESH* Bulk_mesh_pt;
 
   /// Pointer to the "surface" mesh
-  Mesh *Surface_mesh_pt;
+  Mesh* Surface_mesh_pt;
 
   /// Pointer to source function
   PoissonEquations<2>::PoissonSourceFctPt Source_fct_pt;
@@ -264,7 +264,7 @@ FluxPoissonMGProblem<ELEMENT, MESH>::FluxPoissonMGProblem(
   {
     // Upcast from GeneralisedElement to the element type specified by the
     // template argument
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
     // Set the source function pointer
     el_pt->source_fct_pt() = Source_fct_pt;
@@ -364,7 +364,7 @@ void FluxPoissonMGProblem<ELEMENT, MESH>::actions_before_newton_solve()
       for (unsigned n = 0; n < n_node; n++)
       {
         // Get pointer to node
-        Node *nod_pt = Bulk_mesh_pt->boundary_node_pt(i, n);
+        Node* nod_pt = Bulk_mesh_pt->boundary_node_pt(i, n);
 
         // Extract nodal coordinates from node:
         Vector<double> x(2);
@@ -389,7 +389,7 @@ void FluxPoissonMGProblem<ELEMENT, MESH>::actions_before_newton_solve()
 //========================================================================
 template<class ELEMENT, class MESH>
 void FluxPoissonMGProblem<ELEMENT, MESH>::create_flux_elements(
-  const unsigned &b)
+  const unsigned& b)
 {
   // How many bulk elements are adjacent to boundary b?
   unsigned n_belement = Bulk_mesh_pt->nboundary_element(b);
@@ -398,14 +398,14 @@ void FluxPoissonMGProblem<ELEMENT, MESH>::create_flux_elements(
   for (unsigned e = 0; e < n_belement; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    ELEMENT *bulk_elem_pt =
-      dynamic_cast<ELEMENT *>(Bulk_mesh_pt->boundary_element_pt(b, e));
+    ELEMENT* bulk_elem_pt =
+      dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(b, e));
 
     // Find the index of the face of the bulk element at the boundary
     int face_index = Bulk_mesh_pt->face_index_at_boundary(b, e);
 
     // Build the corresponding prescribed-flux element
-    PoissonFluxElement<ELEMENT> *flux_element_pt =
+    PoissonFluxElement<ELEMENT>* flux_element_pt =
       new PoissonFluxElement<ELEMENT>(bulk_elem_pt, face_index);
 
     // Add the prescribed flux element to the mesh
@@ -419,8 +419,8 @@ void FluxPoissonMGProblem<ELEMENT, MESH>::create_flux_elements(
   for (unsigned e = 0; e < n_selement; e++)
   {
     // Upcast from GeneralisedElement to Poisson flux element
-    PoissonFluxElement<ELEMENT> *el_pt =
-      dynamic_cast<PoissonFluxElement<ELEMENT> *>(
+    PoissonFluxElement<ELEMENT>* el_pt =
+      dynamic_cast<PoissonFluxElement<ELEMENT>*>(
         Surface_mesh_pt->element_pt(e));
 
     // Set the pointer to the prescribed flux function
@@ -456,7 +456,7 @@ template<class ELEMENT, class MESH>
 void FluxPoissonMGProblem<ELEMENT, MESH>::set_multigrid_solver()
 {
   // Make an object of the MGSolver class and get the pointer to it
-  MGSolver<2> *mg_solver_pt = new MGSolver<2>(this);
+  MGSolver<2>* mg_solver_pt = new MGSolver<2>(this);
 
   // Switch solver to MG
   linear_solver_pt() = mg_solver_pt;
@@ -477,7 +477,7 @@ void FluxPoissonMGProblem<ELEMENT, MESH>::set_multigrid_solver()
 /// Document the solution: doc_info contains labels/output directory, etc.
 //========================================================================
 template<class ELEMENT, class MESH>
-void FluxPoissonMGProblem<ELEMENT, MESH>::doc_solution(DocInfo &doc_info)
+void FluxPoissonMGProblem<ELEMENT, MESH>::doc_solution(DocInfo& doc_info)
 {
   // Output file stream
   ofstream some_file;
@@ -565,7 +565,7 @@ void FluxPoissonMGProblem<ELEMENT, MESH>::doc_solution(DocInfo &doc_info)
 /// \short Demonstrate how to solve 2D Poisson problem with flux boundary
 /// conditions.
 //========================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   //------------------------------------
   // Sort out documentation information:

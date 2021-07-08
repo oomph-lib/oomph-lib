@@ -55,7 +55,7 @@ namespace oomph
     /// \short Constructor: By default use block triangular form with retained
     /// fluid on solid terms. A problem pointer is required for the underlying
     /// NavierStokesSchurComplementPreconditioner.
-    FSIPreconditioner(Problem *problem_pt)
+    FSIPreconditioner(Problem* problem_pt)
     {
       // set the mesh pointers
       this->set_nmesh(2);
@@ -105,7 +105,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    FSIPreconditioner(const FSIPreconditioner &)
+    FSIPreconditioner(const FSIPreconditioner&)
     {
       BrokenCopy::broken_copy("FSIPreconditioner");
     }
@@ -122,7 +122,7 @@ namespace oomph
       }*/
 
     /// Set solid preconditioner (deletes existing one)
-    void set_solid_preconditioner_pt(Preconditioner *solid_preconditioner_pt)
+    void set_solid_preconditioner_pt(Preconditioner* solid_preconditioner_pt)
     {
       // Kill existing one
       if (Solid_preconditioner_pt != 0)
@@ -133,7 +133,7 @@ namespace oomph
     }
 
     /// Read-only access to solid preconditoner (use set_... to set it)
-    Preconditioner *solid_preconditioner_pt() const
+    Preconditioner* solid_preconditioner_pt() const
     {
       return Solid_preconditioner_pt;
     }
@@ -165,8 +165,8 @@ namespace oomph
     /// block-preconditionable Navier-Stokes elements. The optional argument
     /// indicates if there are more than one type of elements in same mesh.
     void set_navier_stokes_mesh(
-      Mesh *mesh_pt,
-      const bool &allow_multiple_element_type_in_navier_stokes_mesh = false)
+      Mesh* mesh_pt,
+      const bool& allow_multiple_element_type_in_navier_stokes_mesh = false)
     {
       // Store the mesh pointer.
       Navier_stokes_mesh_pt = mesh_pt;
@@ -180,8 +180,8 @@ namespace oomph
     /// block-preconditionable FSI solid elements. The optional argument
     /// indicates if there are more than one type of elements in the same mesh.
     void set_wall_mesh(
-      Mesh *mesh_pt,
-      const bool &allow_multiple_element_type_in_wall_mesh = false)
+      Mesh* mesh_pt,
+      const bool& allow_multiple_element_type_in_wall_mesh = false)
     {
       // Store the mesh pointer
       Wall_mesh_pt = mesh_pt;
@@ -195,10 +195,10 @@ namespace oomph
     void setup();
 
     /// \short Apply preconditioner to r
-    void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+    void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
     /// Access function to the Navier Stokes preconditioner (inexact solver)
-    NavierStokesSchurComplementPreconditioner *navier_stokes_preconditioner_pt()
+    NavierStokesSchurComplementPreconditioner* navier_stokes_preconditioner_pt()
       const
     {
       return Navier_stokes_preconditioner_pt;
@@ -218,16 +218,16 @@ namespace oomph
 
   private:
     /// Pointer the Navier Stokes preconditioner (inexact solver)
-    NavierStokesSchurComplementPreconditioner *Navier_stokes_preconditioner_pt;
+    NavierStokesSchurComplementPreconditioner* Navier_stokes_preconditioner_pt;
 
     /// Pointer to the solid preconditioner  (inexact solver)
-    Preconditioner *Solid_preconditioner_pt;
+    Preconditioner* Solid_preconditioner_pt;
 
     /// Pointer to fluid/solid interaction matrix
-    MatrixVectorProduct *Matrix_vector_product_0_1_pt;
+    MatrixVectorProduct* Matrix_vector_product_0_1_pt;
 
     /// Pointer to solid/fluid solid interaction matrix
-    MatrixVectorProduct *Matrix_vector_product_1_0_pt;
+    MatrixVectorProduct* Matrix_vector_product_1_0_pt;
 
     /// Boolean indicating the preconditioner has been set up
     bool Preconditioner_has_been_setup;
@@ -244,10 +244,10 @@ namespace oomph
     bool Doc_time;
 
     /// Pointer to the navier stokes mesh
-    Mesh *Navier_stokes_mesh_pt;
+    Mesh* Navier_stokes_mesh_pt;
 
     /// pointer to the solid mesh
-    Mesh *Wall_mesh_pt;
+    Mesh* Wall_mesh_pt;
 
     /// Flag to indicate if there are multiple element types in the
     /// Navier-Stokes mesh.
@@ -369,8 +369,8 @@ namespace oomph
   //======================================================================
   /// Apply preconditioner to Vector r
   //======================================================================
-  void FSIPreconditioner::preconditioner_solve(const DoubleVector &r,
-                                               DoubleVector &z)
+  void FSIPreconditioner::preconditioner_solve(const DoubleVector& r,
+                                               DoubleVector& z)
   {
     // if z is not setup then give it the same distribution
     if (!z.built())
@@ -513,7 +513,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    SimpleFSIPreconditioner(const SimpleFSIPreconditioner &)
+    SimpleFSIPreconditioner(const SimpleFSIPreconditioner&)
     {
       BrokenCopy::broken_copy("SimpleFSIPreconditioner");
     }
@@ -527,8 +527,8 @@ namespace oomph
     /// \short Setter function for the mesh containing the
     /// block-preconditionable Navier-Stokes elements.
     void set_navier_stokes_mesh(
-      Mesh *mesh_pt,
-      const bool &allow_multiple_element_type_in_navier_stokes_mesh = false)
+      Mesh* mesh_pt,
+      const bool& allow_multiple_element_type_in_navier_stokes_mesh = false)
     {
       // Store the mesh pointer.
       Navier_stokes_mesh_pt = mesh_pt;
@@ -541,8 +541,8 @@ namespace oomph
     /// \short Setter function for the mesh containing the
     /// block-preconditionable FSI solid elements.
     void set_wall_mesh(
-      Mesh *mesh_pt,
-      const bool &allow_multiple_element_type_in_wall_mesh = false)
+      Mesh* mesh_pt,
+      const bool& allow_multiple_element_type_in_wall_mesh = false)
     {
       // Store the mesh pointer
       Wall_mesh_pt = mesh_pt;
@@ -556,7 +556,7 @@ namespace oomph
     void setup();
 
     /// \short Apply preconditioner to r
-    void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+    void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
     /// Switch to block-diagonal preconditioner
     void use_block_diagonal_version()
@@ -583,7 +583,7 @@ namespace oomph
 
   private:
     /// \short Preconditioner (inexact solver)
-    Preconditioner *Preconditioner_pt;
+    Preconditioner* Preconditioner_pt;
 
     /// \short Boolean flag used to indicate that the solid onto fluid
     /// interaction terms are to be retained
@@ -597,13 +597,13 @@ namespace oomph
     /// the momentum, gradient and divergence blocks of the
     /// 2x2 block-structured fluid matrix, the 1x1 solid block
     /// and the selected FSI-off diagonals.
-    virtual void identify_required_blocks(DenseMatrix<bool> &required_blocks);
+    virtual void identify_required_blocks(DenseMatrix<bool>& required_blocks);
 
     /// Pointer to the navier stokes mesh
-    Mesh *Navier_stokes_mesh_pt;
+    Mesh* Navier_stokes_mesh_pt;
 
     /// pointer to the solid mesh
-    Mesh *Wall_mesh_pt;
+    Mesh* Wall_mesh_pt;
 
     /// Flag for multiple element types in the Navier-Stokes mesh.
     bool Allow_multiple_element_type_in_navier_stokes_mesh;
@@ -626,7 +626,7 @@ namespace oomph
   //===========================================================================
   template<typename MATRIX>
   void SimpleFSIPreconditioner<MATRIX>::identify_required_blocks(
-    DenseMatrix<bool> &required_blocks)
+    DenseMatrix<bool>& required_blocks)
   {
     // find number of block types
     unsigned n_dof = this->nblock_types();
@@ -757,7 +757,7 @@ namespace oomph
   //======================================================================
   template<typename MATRIX>
   void SimpleFSIPreconditioner<MATRIX>::preconditioner_solve(
-    const DoubleVector &r, DoubleVector &z)
+    const DoubleVector& r, DoubleVector& z)
   {
     // create a temporary vector to hold the result of preconditioning
     DoubleVector temp_vec;

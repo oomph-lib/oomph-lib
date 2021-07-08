@@ -54,13 +54,13 @@ namespace oomph
     ~SuperLUPreconditioner() {}
 
     /// Broken copy constructor.
-    SuperLUPreconditioner(const SuperLUPreconditioner &)
+    SuperLUPreconditioner(const SuperLUPreconditioner&)
     {
       BrokenCopy::broken_copy("SuperLUPreconditioner");
     }
 
     /// Broken assignment operator.
-    void operator=(const SuperLUPreconditioner &)
+    void operator=(const SuperLUPreconditioner&)
     {
       BrokenCopy::broken_assign("SuperLUPreconditioner");
     }
@@ -73,10 +73,10 @@ namespace oomph
     void setup()
     {
       oomph_info << "Setting up SuperLU (exact) preconditioner" << std::endl;
-      if (dynamic_cast<DistributableLinearAlgebraObject *>(matrix_pt()) != 0)
+      if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt()) != 0)
       {
         LinearAlgebraDistribution dist(
-          (dynamic_cast<DistributableLinearAlgebraObject *>(matrix_pt()))
+          (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt()))
             ->distribution_pt());
         this->build_distribution(dist);
         Solver.factorise(matrix_pt());
@@ -97,7 +97,7 @@ namespace oomph
 
     /// \short Function applies SuperLU to vector r for (exact) preconditioning,
     /// this requires a call to setup(...) first.
-    void preconditioner_solve(const DoubleVector &r, DoubleVector &z)
+    void preconditioner_solve(const DoubleVector& r, DoubleVector& z)
     {
       Solver.resolve(r, z);
     }

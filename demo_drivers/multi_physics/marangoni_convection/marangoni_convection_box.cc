@@ -53,7 +53,7 @@ class ComplexGreater
 {
 public:
   /// Comparison. Are the values identical or not?
-  bool operator()(const std::complex<T> &x, const std::complex<T> &y) const
+  bool operator()(const std::complex<T>& x, const std::complex<T>& y) const
   {
     return x.real() > y.real();
   }
@@ -86,11 +86,11 @@ namespace oomph
   {
   private:
     /// Pointer to the desired value of the volume
-    double *Volume_pt;
+    double* Volume_pt;
 
     /// \short Pointer to the Data item that stores the pressure that has been
     /// "traded" for the volume constraint in its single value.
-    Data *Ptraded_data_pt;
+    Data* Ptraded_data_pt;
 
     /// \short The Data that contains the traded pressure is stored
     /// as external Data for the element. Which external Data item is it?
@@ -124,20 +124,20 @@ namespace oomph
     }
 
     /// Access function to the prescribed volume fluid
-    double *&volume_pt()
+    double*& volume_pt()
     {
       return Volume_pt;
     }
 
     /// Custom overload the additional volume constraint
     void add_additional_residual_contributions_interface_boundary(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      const unsigned &flag,
-      const Shape &psif,
-      const DShape &dpsifds,
-      const Vector<double> &interpolated_n,
-      const double &W)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag,
+      const Shape& psif,
+      const DShape& dpsifds,
+      const Vector<double>& interpolated_n,
+      const double& W)
     {
       // If we have an external pressure, add the final term
       // to the volumetric constraint equation
@@ -155,7 +155,7 @@ namespace oomph
     /// \short Set the Data that contains the single pressure value
     /// that is "traded" for the volume constraint.
     /// The Data item must only contain a single value!
-    void set_traded_pressure_data(Data *traded_pressure_data_pt)
+    void set_traded_pressure_data(Data* traded_pressure_data_pt)
     {
 #ifdef PARANOID
       if (traded_pressure_data_pt->nvalue() != 1)
@@ -204,7 +204,7 @@ namespace oomph
 
     /// \short Pointer to the Data item that stores the pressure that has been
     /// "traded" for the volume constraint in its single value.
-    Data *Ptraded_data_pt;
+    Data* Ptraded_data_pt;
 
     /// \short The local eqn number for the traded pressure, which is
     /// the variable that corresponds to this equation
@@ -222,10 +222,10 @@ namespace oomph
     }
 
     /// Pointer to a Biot number
-    double *Bi_pt;
+    double* Bi_pt;
 
     /// Pointer to a Marangoni number
-    double *Ma_pt;
+    double* Ma_pt;
 
     /// Index at which the temperature is stored at the nodes
     unsigned T_index;
@@ -235,7 +235,7 @@ namespace oomph
 
   protected:
     /// Overload the surface tension function
-    double sigma(const Vector<double> &s)
+    double sigma(const Vector<double>& s)
     {
       // Find the number of shape functions
       const unsigned n_node = this->nnode();
@@ -259,8 +259,8 @@ namespace oomph
 
     /// \short Fill in the contribution to the residuals
     /// Calculate the contribution to the jacobian
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       // Call the generic routine with the flag set to 1
       this->fill_in_generic_residual_contribution_interface(
@@ -291,7 +291,7 @@ namespace oomph
           if (local_unknown >= 0)
           {
             // Store a pointer to the nodal data value
-            double *value_pt = this->node_pt(n)->value_pt(t_index);
+            double* value_pt = this->node_pt(n)->value_pt(t_index);
 
             // Save the old value of the Nodal data
             double old_var = *value_pt;
@@ -327,18 +327,18 @@ namespace oomph
     /// jacobian entries. This particular function ensures that the
     /// additional entries are calculated inside the integration loop
     void add_additional_residual_contributions_interface(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      const unsigned &flag,
-      const Shape &psif,
-      const DShape &dpsifds,
-      const DShape &dpsifdS,
-      const DShape &dpsifdS_div,
-      const Vector<double> &s,
-      const Vector<double> &interpolated_x,
-      const Vector<double> &interpolated_n,
-      const double &W,
-      const double &J)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag,
+      const Shape& psif,
+      const DShape& dpsifds,
+      const DShape& dpsifdS,
+      const DShape& dpsifdS_div,
+      const Vector<double>& s,
+      const Vector<double>& interpolated_x,
+      const Vector<double>& interpolated_n,
+      const double& W,
+      const double& J)
     {
       // Find the index at which the temperature is stored
       unsigned t_index = this->T_index;
@@ -420,7 +420,7 @@ namespace oomph
     /// Constructor that passes the bulk element and the face index
     /// down to the underlying
     FixedVolumeSpineLineMarangoniFluidInterfaceElement(
-      FiniteElement *const &element_pt, const int &face_index) :
+      FiniteElement* const& element_pt, const int& face_index) :
       SpineLineFluidInterfaceElement<ELEMENT>(element_pt, face_index)
     {
       // Initialise the values
@@ -430,7 +430,7 @@ namespace oomph
       Ptraded_data_pt = 0;
 
       // Cast the bulk element
-      ELEMENT *cast_element_pt = dynamic_cast<ELEMENT *>(element_pt);
+      ELEMENT* cast_element_pt = dynamic_cast<ELEMENT*>(element_pt);
       // Now find the index at which the temperature is stored from the
       // advection-diffusion part of the bulk element
       T_index = cast_element_pt->u_index_adv_diff();
@@ -446,12 +446,12 @@ namespace oomph
       return *Ma_pt;
     }
 
-    double *&ma_pt()
+    double*& ma_pt()
     {
       return Ma_pt;
     }
 
-    double *&bi_pt()
+    double*& bi_pt()
     {
       return Bi_pt;
     }
@@ -459,7 +459,7 @@ namespace oomph
     /// \short Set the Data that contains the single pressure value
     /// that is "traded" for the volume constraint.
     /// The Data item must only contain a single value!
-    void set_traded_pressure_data(Data *traded_pressure_data_pt)
+    void set_traded_pressure_data(Data* traded_pressure_data_pt)
     {
 #ifdef PARANOID
       if (traded_pressure_data_pt->nvalue() != 1)
@@ -488,10 +488,10 @@ namespace oomph
 
     //// \short Overload the making of the edge element to create out
     /// volume constraint edge element
-    FluidInterfaceBoundingElement *make_bounding_element(const int &face_index)
+    FluidInterfaceBoundingElement* make_bounding_element(const int& face_index)
     {
       // Create a temporary pointer to the appropriate FaceElement
-      SpineVolumeConstraintPointElement<ELEMENT> *Temp_pt =
+      SpineVolumeConstraintPointElement<ELEMENT>* Temp_pt =
         new SpineVolumeConstraintPointElement<ELEMENT>;
 
       // Attach the geometrical information to the new element
@@ -506,15 +506,15 @@ namespace oomph
 
       // Set of unique geometric data that is used to update the bulk,
       // but is not used to update the face
-      std::set<Data *> unique_additional_geom_data;
+      std::set<Data*> unique_additional_geom_data;
       // Get all the geometric data for this (bulk) element
       this->assemble_set_of_all_geometric_data(unique_additional_geom_data);
 
       // Now assemble the set of geometric data for the face element
-      std::set<Data *> unique_face_geom_data_pt;
+      std::set<Data*> unique_face_geom_data_pt;
       Temp_pt->assemble_set_of_all_geometric_data(unique_face_geom_data_pt);
       // Erase the face geometric data from the additional data
-      for (std::set<Data *>::iterator it = unique_face_geom_data_pt.begin();
+      for (std::set<Data*>::iterator it = unique_face_geom_data_pt.begin();
            it != unique_face_geom_data_pt.end();
            ++it)
       {
@@ -522,7 +522,7 @@ namespace oomph
       }
 
       // Finally add all unique additional data as external data
-      for (std::set<Data *>::iterator it = unique_additional_geom_data.begin();
+      for (std::set<Data*>::iterator it = unique_additional_geom_data.begin();
            it != unique_additional_geom_data.end();
            ++it)
       {
@@ -586,16 +586,16 @@ namespace Global_Physical_Variables
   double Pext = 0.0;
 
   /// \short Function that specifies the wall unit normal
-  void wall_unit_normal_left_fct(const Vector<double> &x,
-                                 Vector<double> &normal)
+  void wall_unit_normal_left_fct(const Vector<double>& x,
+                                 Vector<double>& normal)
   {
     normal[0] = -1.0;
     normal[1] = 0.0;
   }
 
   /// \short Function that specifies the wall unit normal
-  void wall_unit_normal_right_fct(const Vector<double> &x,
-                                  Vector<double> &normal)
+  void wall_unit_normal_right_fct(const Vector<double>& x,
+                                  Vector<double>& normal)
   {
     normal[0] = 1.0;
     normal[1] = 0.0;
@@ -654,8 +654,8 @@ public:
     const unsigned n_element = Bulk_mesh_pt->nelement();
     for (unsigned e = 0; e < n_element; e++)
     {
-      ElementWithMovingNodes *el_pt =
-        dynamic_cast<ElementWithMovingNodes *>(Bulk_mesh_pt->element_pt(e));
+      ElementWithMovingNodes* el_pt =
+        dynamic_cast<ElementWithMovingNodes*>(Bulk_mesh_pt->element_pt(e));
       el_pt->evaluate_shape_derivs_by_direct_fd();
     }
   }
@@ -671,43 +671,43 @@ public:
   }
 
   /// Fix pressure in element e at pressure dof pdof and set to pvalue
-  void fix_pressure(const unsigned &e,
-                    const unsigned &pdof,
-                    const double &pvalue)
+  void fix_pressure(const unsigned& e,
+                    const unsigned& pdof,
+                    const double& pvalue)
   {
     // Cast to specific element and fix pressure
-    dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e))
+    dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e))
       ->fix_pressure(pdof, pvalue);
   } // end_of_fix_pressure
 
   /// UnFix pressure in element e at pressure dof pdof and set to pvalue
-  void unfix_pressure(const unsigned &e, const unsigned &pdof)
+  void unfix_pressure(const unsigned& e, const unsigned& pdof)
   {
     // Cast to specific element and fix pressure
-    dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e))->unfix_pressure(pdof);
+    dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e))->unfix_pressure(pdof);
   } // end_of_unfix_pressure
 
   /// \short Doc the solution.
   void doc_solution();
 
   /// \short Set the boundary conditions
-  void set_boundary_conditions(const double &time);
+  void set_boundary_conditions(const double& time);
 
   /// \short Mesh for the bulk fluid elements
-  SingleLayerSpineMesh<ELEMENT> *Bulk_mesh_pt;
+  SingleLayerSpineMesh<ELEMENT>* Bulk_mesh_pt;
 
   /// The mesh for the interface elements
-  Mesh *Surface_mesh_pt;
+  Mesh* Surface_mesh_pt;
 
   /// The mesh for the element at the contact points
-  Mesh *Point_mesh_pt;
+  Mesh* Point_mesh_pt;
 
 private:
   /// DocInfo object
   DocInfo Doc_info;
 
   /// Pointer to the external data point
-  Data *External_pressure_data_pt;
+  Data* External_pressure_data_pt;
 
 }; // end of problem class
 
@@ -747,7 +747,7 @@ ConvectionProblem<ELEMENT, INTERFACE_ELEMENT>::ConvectionProblem()
   {
     // Construct a new 1D line element on the face on which the local
     // coordinate 1 is fixed at its max. value (1) --- This is face 2
-    FiniteElement *interface_element_pt = new INTERFACE_ELEMENT(
+    FiniteElement* interface_element_pt = new INTERFACE_ELEMENT(
       Bulk_mesh_pt->finite_element_pt(n_x * (n_y - 1) + i), 2);
 
     // Push it back onto the stack
@@ -759,8 +759,8 @@ ConvectionProblem<ELEMENT, INTERFACE_ELEMENT>::ConvectionProblem()
   Point_mesh_pt = new Mesh;
   {
     // Make the point (contact) element from the first surface element
-    FiniteElement *point_element_pt =
-      dynamic_cast<INTERFACE_ELEMENT *>(Surface_mesh_pt->element_pt(0))
+    FiniteElement* point_element_pt =
+      dynamic_cast<INTERFACE_ELEMENT*>(Surface_mesh_pt->element_pt(0))
         ->make_bounding_element(-1);
 
     // Add it to the mesh
@@ -768,7 +768,7 @@ ConvectionProblem<ELEMENT, INTERFACE_ELEMENT>::ConvectionProblem()
 
     // Make the point (contact) elemnet from the last surface element
     point_element_pt =
-      dynamic_cast<INTERFACE_ELEMENT *>(Surface_mesh_pt->element_pt(n_x - 1))
+      dynamic_cast<INTERFACE_ELEMENT*>(Surface_mesh_pt->element_pt(n_x - 1))
         ->make_bounding_element(1);
 
     // Add it to the mesh
@@ -785,7 +785,7 @@ ConvectionProblem<ELEMENT, INTERFACE_ELEMENT>::ConvectionProblem()
   // Create a pointer to the (single value) Data item that
   // will contain the pressure value that we're
   // trading for the volume constraint
-  Data *traded_pressure_data_pt;
+  Data* traded_pressure_data_pt;
 
   // Regard the external pressure as an unknown and add
   // it to the problem's global data so it gets included
@@ -855,7 +855,7 @@ ConvectionProblem<ELEMENT, INTERFACE_ELEMENT>::ConvectionProblem()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(i));
 
     // Set the Peclet number
     el_pt->pe_pt() = &Global_Physical_Variables::Peclet;
@@ -886,8 +886,8 @@ ConvectionProblem<ELEMENT, INTERFACE_ELEMENT>::ConvectionProblem()
   for (unsigned i = 0; i < n_interface; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    INTERFACE_ELEMENT *el_pt =
-      dynamic_cast<INTERFACE_ELEMENT *>(Surface_mesh_pt->element_pt(i));
+    INTERFACE_ELEMENT* el_pt =
+      dynamic_cast<INTERFACE_ELEMENT*>(Surface_mesh_pt->element_pt(i));
 
     // Set the Biot number
     el_pt->bi_pt() = &Global_Physical_Variables::Biot;
@@ -914,8 +914,8 @@ ConvectionProblem<ELEMENT, INTERFACE_ELEMENT>::ConvectionProblem()
   // to the volume constraint element. This is the point on the right
   //-----------------------------------------------------------------
   {
-    SpineVolumeConstraintPointElement<ELEMENT> *el_pt =
-      dynamic_cast<SpineVolumeConstraintPointElement<ELEMENT> *>(
+    SpineVolumeConstraintPointElement<ELEMENT>* el_pt =
+      dynamic_cast<SpineVolumeConstraintPointElement<ELEMENT>*>(
         Point_mesh_pt->element_pt(1));
 
     el_pt->volume_pt() = &Global_Physical_Variables::Volume;
@@ -925,8 +925,8 @@ ConvectionProblem<ELEMENT, INTERFACE_ELEMENT>::ConvectionProblem()
   // Set the contact angle boundary condition for the leftmost element
   // (pass pointer to double that specifies the contact angle)
   {
-    FluidInterfaceBoundingElement *left_element_pt =
-      dynamic_cast<FluidInterfaceBoundingElement *>(
+    FluidInterfaceBoundingElement* left_element_pt =
+      dynamic_cast<FluidInterfaceBoundingElement*>(
         Point_mesh_pt->element_pt(0));
 
     left_element_pt->set_contact_angle(&Global_Physical_Variables::Angle);
@@ -938,8 +938,8 @@ ConvectionProblem<ELEMENT, INTERFACE_ELEMENT>::ConvectionProblem()
 
     // Set the contact angle boundary condition for the rightmost element
     // (pass pointer to double that specifies the contact angle)
-    FluidInterfaceBoundingElement *right_element_pt =
-      dynamic_cast<FluidInterfaceBoundingElement *>(
+    FluidInterfaceBoundingElement* right_element_pt =
+      dynamic_cast<FluidInterfaceBoundingElement*>(
         Point_mesh_pt->element_pt(1));
 
     right_element_pt->set_contact_angle(&Global_Physical_Variables::Angle);
@@ -967,7 +967,7 @@ ConvectionProblem<ELEMENT, INTERFACE_ELEMENT>::ConvectionProblem()
 //===========================================================
 template<class ELEMENT, class INTERFACE_ELEMENT>
 void ConvectionProblem<ELEMENT, INTERFACE_ELEMENT>::set_boundary_conditions(
-  const double &time)
+  const double& time)
 {
   // Loop over the boundaries
   unsigned num_bound = Bulk_mesh_pt->nboundary();
@@ -978,7 +978,7 @@ void ConvectionProblem<ELEMENT, INTERFACE_ELEMENT>::set_boundary_conditions(
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Get pointer to node
-      Node *nod_pt = Bulk_mesh_pt->boundary_node_pt(ibound, inod);
+      Node* nod_pt = Bulk_mesh_pt->boundary_node_pt(ibound, inod);
 
       // Set the number of velocity components
       unsigned vel_max = 2;
@@ -1063,7 +1063,7 @@ void ConvectionProblem<ELEMENT, INTERFACE_ELEMENT>::doc_solution()
 //=======start_of_main================================================
 /// Driver code for 2D Boussinesq convection problem
 //====================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Set the direction of gravity
   Global_Physical_Variables::Direction_of_gravity[0] = 0.0;

@@ -111,11 +111,11 @@ class BaseStateProblem : public Problem
 {
 public:
   /// Constructor
-  BaseStateProblem(const unsigned &n_r,
-                   const unsigned &n_z,
-                   const double &radius_inner_cylinder,
-                   const double &radius_outer_cylinder,
-                   const double &l_z);
+  BaseStateProblem(const unsigned& n_r,
+                   const unsigned& n_z,
+                   const double& radius_inner_cylinder,
+                   const double& radius_outer_cylinder,
+                   const double& l_z);
 
   /// Destructor (empty)
   ~BaseStateProblem() {}
@@ -140,26 +140,25 @@ public:
   void set_initial_condition();
 
   /// Set the boundary conditions
-  void set_boundary_conditions(const double &time);
+  void set_boundary_conditions(const double& time);
 
   /// Access function for the specific mesh
-  RectangularQuadMesh<BASE_ELEMENT> *mesh_pt()
+  RectangularQuadMesh<BASE_ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<RectangularQuadMesh<BASE_ELEMENT> *>(
-      Problem::mesh_pt());
+    return dynamic_cast<RectangularQuadMesh<BASE_ELEMENT>*>(Problem::mesh_pt());
   }
 
   /// Access function for the specific timestepper
-  SelfStartingBDF2 *time_stepper_pt()
+  SelfStartingBDF2* time_stepper_pt()
   {
-    return dynamic_cast<SelfStartingBDF2 *>(Problem::time_stepper_pt());
+    return dynamic_cast<SelfStartingBDF2*>(Problem::time_stepper_pt());
   }
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info, const bool &output_soln);
+  void doc_solution(DocInfo& doc_info, const bool& output_soln);
 
   /// Create a trace file
-  void create_trace_file(DocInfo &doc_info)
+  void create_trace_file(DocInfo& doc_info)
   {
     // Open trace file
     char filename1[256];
@@ -185,18 +184,18 @@ public:
   }
 
   /// Access function for trace file
-  ofstream &trace_file()
+  ofstream& trace_file()
   {
     return Trace_file;
   }
 
 private:
   /// Fix pressure in element e at pressure dof pdof and set to pvalue
-  void fix_pressure(const unsigned &e,
-                    const unsigned &pdof,
-                    const double &pvalue)
+  void fix_pressure(const unsigned& e,
+                    const unsigned& pdof,
+                    const double& pvalue)
   {
-    dynamic_cast<BASE_ELEMENT *>(mesh_pt()->element_pt(e))
+    dynamic_cast<BASE_ELEMENT*>(mesh_pt()->element_pt(e))
       ->fix_pressure(pdof, pvalue);
   }
 
@@ -210,11 +209,11 @@ private:
 //=======================================================================
 template<class BASE_ELEMENT>
 BaseStateProblem<BASE_ELEMENT>::BaseStateProblem(
-  const unsigned &n_r,
-  const unsigned &n_z,
-  const double &radius_inner_cylinder,
-  const double &radius_outer_cylinder,
-  const double &l_z)
+  const unsigned& n_r,
+  const unsigned& n_z,
+  const double& radius_inner_cylinder,
+  const double& radius_outer_cylinder,
+  const double& l_z)
 {
   // Be less verbose during newton solve
   Problem::disable_info_in_newton_solve();
@@ -291,8 +290,7 @@ BaseStateProblem<BASE_ELEMENT>::BaseStateProblem(
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    BASE_ELEMENT *el_pt =
-      dynamic_cast<BASE_ELEMENT *>(mesh_pt()->element_pt(e));
+    BASE_ELEMENT* el_pt = dynamic_cast<BASE_ELEMENT*>(mesh_pt()->element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &GlobalPhysicalVariables::Re;
@@ -350,7 +348,7 @@ void BaseStateProblem<BASE_ELEMENT>::set_initial_condition()
 /// Reset the boundary conditions for the current time
 //=======================================================================
 template<class BASE_ELEMENT>
-void BaseStateProblem<BASE_ELEMENT>::set_boundary_conditions(const double &time)
+void BaseStateProblem<BASE_ELEMENT>::set_boundary_conditions(const double& time)
 {
   // Cache radius ratio
   const double eta = GlobalPhysicalVariables::Eta;
@@ -435,8 +433,8 @@ void BaseStateProblem<BASE_ELEMENT>::set_boundary_conditions(const double &time)
 /// Document the base state solution
 //=======================================================================
 template<class BASE_ELEMENT>
-void BaseStateProblem<BASE_ELEMENT>::doc_solution(DocInfo &doc_info,
-                                                  const bool &output_soln)
+void BaseStateProblem<BASE_ELEMENT>::doc_solution(DocInfo& doc_info,
+                                                  const bool& output_soln)
 {
   // Create vector of dofs
   DoubleVector dofs;
@@ -490,12 +488,12 @@ class PerturbedStateProblem : public Problem
 {
 public:
   /// Constructor
-  PerturbedStateProblem(const unsigned &n_r,
-                        const unsigned &n_z,
-                        const double &radius_inner_cylinder,
-                        const double &radius_outer_cylinder,
-                        const double &l_z,
-                        Mesh *external_mesh_pt);
+  PerturbedStateProblem(const unsigned& n_r,
+                        const unsigned& n_z,
+                        const double& radius_inner_cylinder,
+                        const double& radius_outer_cylinder,
+                        const double& l_z,
+                        Mesh* external_mesh_pt);
 
   /// Destructor (empty)
   ~PerturbedStateProblem() {}
@@ -519,30 +517,29 @@ public:
   void set_boundary_conditions();
 
   /// Access function for the specific mesh
-  RectangularQuadMesh<PERTURBED_ELEMENT> *mesh_pt()
+  RectangularQuadMesh<PERTURBED_ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<RectangularQuadMesh<PERTURBED_ELEMENT> *>(
+    return dynamic_cast<RectangularQuadMesh<PERTURBED_ELEMENT>*>(
       Problem::mesh_pt());
   }
 
   /// Access function for the base state mesh
-  RectangularQuadMesh<BASE_ELEMENT> *base_state_mesh_pt()
+  RectangularQuadMesh<BASE_ELEMENT>* base_state_mesh_pt()
   {
-    return dynamic_cast<RectangularQuadMesh<BASE_ELEMENT> *>(
-      Base_state_mesh_pt);
+    return dynamic_cast<RectangularQuadMesh<BASE_ELEMENT>*>(Base_state_mesh_pt);
   }
 
   /// Access function for the specific timestepper
-  SelfStartingBDF2 *time_stepper_pt()
+  SelfStartingBDF2* time_stepper_pt()
   {
-    return dynamic_cast<SelfStartingBDF2 *>(Problem::time_stepper_pt());
+    return dynamic_cast<SelfStartingBDF2*>(Problem::time_stepper_pt());
   }
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info, const bool &output_soln = true);
+  void doc_solution(DocInfo& doc_info, const bool& output_soln = true);
 
   /// Create a trace file
-  void create_trace_file(DocInfo &doc_info)
+  void create_trace_file(DocInfo& doc_info)
   {
     // Open trace file
     char filename[256];
@@ -568,21 +565,21 @@ public:
   }
 
   /// Access function for trace file
-  ofstream &trace_file()
+  ofstream& trace_file()
   {
     return Trace_file;
   }
 
 private:
   /// Pointer to the base state mesh
-  Mesh *Base_state_mesh_pt;
+  Mesh* Base_state_mesh_pt;
 
   /// Fix pressure in element e at pressure dof pdof and set to pvalue
-  void fix_pressure(const unsigned &e,
-                    const unsigned &pdof,
-                    const double &pvalue)
+  void fix_pressure(const unsigned& e,
+                    const unsigned& pdof,
+                    const double& pvalue)
   {
-    dynamic_cast<PERTURBED_ELEMENT *>(mesh_pt()->element_pt(e))
+    dynamic_cast<PERTURBED_ELEMENT*>(mesh_pt()->element_pt(e))
       ->fix_pressure(pdof, pvalue);
   }
 
@@ -603,12 +600,12 @@ private:
 //=======================================================================
 template<class BASE_ELEMENT, class PERTURBED_ELEMENT>
 PerturbedStateProblem<BASE_ELEMENT, PERTURBED_ELEMENT>::PerturbedStateProblem(
-  const unsigned &n_r,
-  const unsigned &n_z,
-  const double &radius_inner_cylinder,
-  const double &radius_outer_cylinder,
-  const double &l_z,
-  Mesh *external_mesh_pt) :
+  const unsigned& n_r,
+  const unsigned& n_z,
+  const double& radius_inner_cylinder,
+  const double& radius_outer_cylinder,
+  const double& l_z,
+  Mesh* external_mesh_pt) :
   Base_state_mesh_pt(external_mesh_pt),
   Inner_cylinder_radius(radius_inner_cylinder),
   Outer_cylinder_radius(radius_outer_cylinder),
@@ -679,8 +676,8 @@ PerturbedStateProblem<BASE_ELEMENT, PERTURBED_ELEMENT>::PerturbedStateProblem(
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    PERTURBED_ELEMENT *el_pt =
-      dynamic_cast<PERTURBED_ELEMENT *>(mesh_pt()->element_pt(e));
+    PERTURBED_ELEMENT* el_pt =
+      dynamic_cast<PERTURBED_ELEMENT*>(mesh_pt()->element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &GlobalPhysicalVariables::Re;
@@ -799,7 +796,7 @@ void PerturbedStateProblem<BASE_ELEMENT,
 //=======================================================================
 template<class BASE_ELEMENT, class PERTURBED_ELEMENT>
 void PerturbedStateProblem<BASE_ELEMENT, PERTURBED_ELEMENT>::doc_solution(
-  DocInfo &doc_info, const bool &output_soln)
+  DocInfo& doc_info, const bool& output_soln)
 {
   // Create vector of dofs
   DoubleVector dofs;
@@ -853,13 +850,13 @@ class StabilityProblem
 {
 public:
   /// Constructor: Build base and perturbed state problems
-  StabilityProblem(const unsigned &base_n_r,
-                   const unsigned &base_n_z,
-                   const unsigned &perturbed_n_r,
-                   const unsigned &perturbed_n_z,
-                   const double &radius_inner_cylinder,
-                   const double &radius_outer_cylinder,
-                   const double &l_z)
+  StabilityProblem(const unsigned& base_n_r,
+                   const unsigned& base_n_z,
+                   const unsigned& perturbed_n_r,
+                   const unsigned& perturbed_n_z,
+                   const double& radius_inner_cylinder,
+                   const double& radius_outer_cylinder,
+                   const double& l_z)
   {
     // Build base state problem
     Base_state_problem_pt = new BaseStateProblem<BASE_ELEMENT>(
@@ -880,7 +877,7 @@ public:
   ~StabilityProblem() {}
 
   /// Create trace files
-  void create_trace_files(DocInfo &doc_info)
+  void create_trace_files(DocInfo& doc_info)
   {
     // Set up base and perturbed state trace files
     Base_state_problem_pt->create_trace_file(doc_info);
@@ -931,14 +928,14 @@ public:
   }
 
   /// Initialise timestep (single dt version)
-  void initialise_dt(const double &dt)
+  void initialise_dt(const double& dt)
   {
     Base_state_problem_pt->initialise_dt(dt);
     Perturbed_state_problem_pt->initialise_dt(dt);
   }
 
   /// Initialise timestep (vector of dts version)
-  void initialise_dt(const Vector<double> &dt)
+  void initialise_dt(const Vector<double>& dt)
   {
     Base_state_problem_pt->initialise_dt(dt);
     Perturbed_state_problem_pt->initialise_dt(dt);
@@ -952,9 +949,9 @@ public:
   }
 
   /// Document base and perturbed state solutions
-  void doc_solution(DocInfo &doc_info,
-                    const bool &output_base_soln,
-                    const bool &output_perturbed_soln)
+  void doc_solution(DocInfo& doc_info,
+                    const bool& output_base_soln,
+                    const bool& output_perturbed_soln)
   {
     Base_state_problem_pt->doc_solution(doc_info, output_base_soln);
     Perturbed_state_problem_pt->doc_solution(doc_info, output_perturbed_soln);
@@ -963,26 +960,26 @@ public:
   /// Integrate forwards in time with timestep dt for n_timesteps
   /// Record an entire period's worth of the perturbed state problem
   /// solution in perturbed_state_dofs_over_period
-  void unsteady_run(const double &dt,
-                    const unsigned &n_timesteps,
-                    DocInfo &doc_info,
-                    const bool &output_base_soln,
-                    Vector<DoubleVector> &perturbed_state_dofs_over_period,
-                    Vector<DoubleVector> &base_state_dofs_over_period);
+  void unsteady_run(const double& dt,
+                    const unsigned& n_timesteps,
+                    DocInfo& doc_info,
+                    const bool& output_base_soln,
+                    Vector<DoubleVector>& perturbed_state_dofs_over_period,
+                    Vector<DoubleVector>& base_state_dofs_over_period);
 
   /// Integrate forwards in time with timestep dt for n_timesteps.
   /// Re-set the initial conditions for the perturbed state problem to
   /// be input_perturbed_state_dofs and, at the end of the timestepping
   /// loop, return the perturbed state problem's dofs
   void unsteady_run_for_power_method(
-    const double &dt,
-    const unsigned &n_timesteps,
-    DocInfo &doc_info,
-    const DoubleVector &input_perturbed_state_dofs,
-    DoubleVector &output_perturbed_state_dofs,
-    const bool &output_base_soln,
-    Vector<DoubleVector> &perturbed_state_dofs_over_period,
-    Vector<DoubleVector> &base_state_dofs_over_period)
+    const double& dt,
+    const unsigned& n_timesteps,
+    DocInfo& doc_info,
+    const DoubleVector& input_perturbed_state_dofs,
+    DoubleVector& output_perturbed_state_dofs,
+    const bool& output_base_soln,
+    Vector<DoubleVector>& perturbed_state_dofs_over_period,
+    Vector<DoubleVector>& base_state_dofs_over_period)
   {
     // Re-set the starting dof vector for the perturbed state problem
     Perturbed_state_problem_pt->set_dofs(input_perturbed_state_dofs);
@@ -1005,10 +1002,10 @@ public:
   /// state problem's global time and begin solving the perturbed state
   /// problem also. This function returns the number of periods taken to
   /// satisfy the "periodic state" exit criteria.
-  unsigned set_up_periodic_base_flow(const double &dt,
-                                     const unsigned &n_timesteps,
-                                     DocInfo &doc_info,
-                                     const double &tolerance);
+  unsigned set_up_periodic_base_flow(const double& dt,
+                                     const unsigned& n_timesteps,
+                                     DocInfo& doc_info,
+                                     const double& tolerance);
 
   /// Perform a power method with a maximum of max_iter iterations. This
   /// function requires an initial guess for the dominant eigenvector
@@ -1019,17 +1016,17 @@ public:
   /// function is the number of power method iterations which were
   /// performed.
   unsigned perform_power_method(
-    const double &dt,
-    const unsigned &n_timesteps,
-    DocInfo &doc_info,
-    const double &tolerance,
-    const unsigned &max_iter,
-    double &calc_eigenvalue,
-    DoubleVector &input,
-    Vector<DoubleVector> &base_state_dofs_over_period);
+    const double& dt,
+    const unsigned& n_timesteps,
+    DocInfo& doc_info,
+    const double& tolerance,
+    const unsigned& max_iter,
+    double& calc_eigenvalue,
+    DoubleVector& input,
+    Vector<DoubleVector>& base_state_dofs_over_period);
 
   /// Get perturbed state dofs
-  void get_perturbed_state_problem_dofs(DoubleVector &d)
+  void get_perturbed_state_problem_dofs(DoubleVector& d)
   {
     Perturbed_state_problem_pt->get_dofs(d);
   }
@@ -1044,14 +1041,13 @@ public:
   }
 
   /// Access function for base state problem
-  const BaseStateProblem<BASE_ELEMENT> *base_state_problem_pt()
+  const BaseStateProblem<BASE_ELEMENT>* base_state_problem_pt()
   {
     return Base_state_problem_pt;
   }
 
   /// Access function for perturbed state problem
-  const PerturbedStateProblem<BASE_ELEMENT, PERTURBED_ELEMENT>
-    *perturbed_state_problem_pt()
+  const PerturbedStateProblem<BASE_ELEMENT, PERTURBED_ELEMENT>* perturbed_state_problem_pt()
   {
     return Perturbed_state_problem_pt;
   }
@@ -1091,11 +1087,11 @@ private:
   ofstream Trace_file_power_method;
 
   /// Pointer to base state problem class
-  BaseStateProblem<BASE_ELEMENT> *Base_state_problem_pt;
+  BaseStateProblem<BASE_ELEMENT>* Base_state_problem_pt;
 
   /// Pointer to perturbed state problem class
-  PerturbedStateProblem<BASE_ELEMENT, PERTURBED_ELEMENT>
-    *Perturbed_state_problem_pt;
+  PerturbedStateProblem<BASE_ELEMENT, PERTURBED_ELEMENT>*
+    Perturbed_state_problem_pt;
 
   /// Flag to indicate whether or not we are doing the first iteration
   /// of the power method
@@ -1108,12 +1104,12 @@ private:
 //=======================================================================
 template<class BASE_ELEMENT, class PERTURBED_ELEMENT>
 void StabilityProblem<BASE_ELEMENT, PERTURBED_ELEMENT>::unsteady_run(
-  const double &dt,
-  const unsigned &n_timesteps,
-  DocInfo &doc_info,
-  const bool &output_base_soln,
-  Vector<DoubleVector> &perturbed_state_dofs_over_period,
-  Vector<DoubleVector> &base_state_dofs_over_period)
+  const double& dt,
+  const unsigned& n_timesteps,
+  DocInfo& doc_info,
+  const bool& output_base_soln,
+  Vector<DoubleVector>& perturbed_state_dofs_over_period,
+  Vector<DoubleVector>& base_state_dofs_over_period)
 {
   // "Outer" timestepping loop
   for (unsigned i = 0; i < n_timesteps; i++)
@@ -1367,10 +1363,10 @@ void StabilityProblem<BASE_ELEMENT, PERTURBED_ELEMENT>::unsteady_run(
 //=======================================================================
 template<class BASE_ELEMENT, class PERTURBED_ELEMENT>
 unsigned StabilityProblem<BASE_ELEMENT, PERTURBED_ELEMENT>::
-  set_up_periodic_base_flow(const double &dt,
-                            const unsigned &n_timesteps,
-                            DocInfo &doc_info,
-                            const double &tolerance)
+  set_up_periodic_base_flow(const double& dt,
+                            const unsigned& n_timesteps,
+                            DocInfo& doc_info,
+                            const double& tolerance)
 {
   // Check that base state timestepper is working in BDF2 mode
   if (Base_state_problem_pt->time_stepper_pt()->bdf1_mode())
@@ -1496,14 +1492,14 @@ unsigned StabilityProblem<BASE_ELEMENT, PERTURBED_ELEMENT>::
 //=======================================================================
 template<class BASE_ELEMENT, class PERTURBED_ELEMENT>
 unsigned StabilityProblem<BASE_ELEMENT, PERTURBED_ELEMENT>::
-  perform_power_method(const double &dt,
-                       const unsigned &n_timesteps,
-                       DocInfo &doc_info,
-                       const double &tolerance,
-                       const unsigned &max_iter,
-                       double &calc_eigenvalue,
-                       DoubleVector &input,
-                       Vector<DoubleVector> &base_state_dofs_over_period)
+  perform_power_method(const double& dt,
+                       const unsigned& n_timesteps,
+                       DocInfo& doc_info,
+                       const double& tolerance,
+                       const unsigned& max_iter,
+                       double& calc_eigenvalue,
+                       DoubleVector& input,
+                       Vector<DoubleVector>& base_state_dofs_over_period)
 {
   // Initialise output_base_state_solution flag to true
   bool output_base_state_solution = true;
@@ -1645,7 +1641,7 @@ unsigned StabilityProblem<BASE_ELEMENT, PERTURBED_ELEMENT>::
 //==start_of_main========================================================
 /// Driver for time-periodic Taylor--Couette problem
 //=======================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

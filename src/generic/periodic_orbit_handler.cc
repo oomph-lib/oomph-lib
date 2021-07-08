@@ -31,9 +31,9 @@
 
 namespace oomph
 {
-  void PeriodicOrbitEquations::orbit_output(GeneralisedElement *const &elem_pt,
-                                            std::ostream &outfile,
-                                            const unsigned &n_plot)
+  void PeriodicOrbitEquations::orbit_output(GeneralisedElement* const& elem_pt,
+                                            std::ostream& outfile,
+                                            const unsigned& n_plot)
   {
     // Find out how many nodes there are
     const unsigned n_node = nnode();
@@ -45,8 +45,8 @@ namespace oomph
     Vector<double> s(1);
 
     // Cast the element
-    PeriodicOrbitBaseElement *const base_el_pt =
-      dynamic_cast<PeriodicOrbitBaseElement *>(elem_pt);
+    PeriodicOrbitBaseElement* const base_el_pt =
+      dynamic_cast<PeriodicOrbitBaseElement*>(elem_pt);
 
     const double inverse_timescale = this->omega();
 
@@ -78,11 +78,11 @@ namespace oomph
   }
 
   void PeriodicOrbitEquations::fill_in_generic_residual_contribution_orbit(
-    PeriodicOrbitAssemblyHandlerBase *const &assembly_handler_pt,
-    GeneralisedElement *const &elem_pt,
-    Vector<double> &residuals,
-    DenseMatrix<double> &jacobian,
-    const unsigned &flag)
+    PeriodicOrbitAssemblyHandlerBase* const& assembly_handler_pt,
+    GeneralisedElement* const& elem_pt,
+    Vector<double>& residuals,
+    DenseMatrix<double>& jacobian,
+    const unsigned& flag)
   {
     // A simple integration loop
     // Find out how many nodes there are
@@ -119,8 +119,8 @@ namespace oomph
     // Storage for the inner product matrix
     DenseMatrix<double> inner_product(n_elem_dof);
     // Cast the element
-    PeriodicOrbitBaseElement *const base_el_pt =
-      dynamic_cast<PeriodicOrbitBaseElement *>(elem_pt);
+    PeriodicOrbitBaseElement* const base_el_pt =
+      dynamic_cast<PeriodicOrbitBaseElement*>(elem_pt);
     // Get the inner product matrix
     base_el_pt->get_inner_product_matrix(inner_product);
 

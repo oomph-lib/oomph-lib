@@ -55,16 +55,16 @@ namespace oomph
     /// elements in y-direction, axial length, height of layer, and pointer
     /// to timestepper (defaults to Steady timestepper)
     HorizontalSingleLayerSpineMesh(
-      const unsigned &nx,
-      const unsigned &ny,
-      const double &lx,
-      const double &h,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper);
+      const unsigned& nx,
+      const unsigned& ny,
+      const double& lx,
+      const double& h,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
     /// \short General node update function implements pure virtual function
     /// defined in SpineMesh base class and performs specific node update
     /// actions:  along vertical spines
-    virtual void spine_node_update(SpineNode *spine_node_pt)
+    virtual void spine_node_update(SpineNode* spine_node_pt)
     {
       // Get fraction along the spine
       double W = spine_node_pt->fraction();
@@ -79,7 +79,7 @@ namespace oomph
     /// \short Helper function to actually build the single-layer spine mesh
     /// (called from various constructors)
     virtual void build_horizontal_single_layer_mesh(
-      TimeStepper *time_stepper_pt);
+      TimeStepper* time_stepper_pt);
   };
 
 } // namespace oomph

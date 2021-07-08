@@ -55,14 +55,14 @@ class MyEllipse : public GeomObject
 {
 public:
   /// \short Constructor:  Pass half axes
-  MyEllipse(const double &a, const double &b) : GeomObject(1, 2), A(a), B(b) {}
+  MyEllipse(const double& a, const double& b) : GeomObject(1, 2), A(a), B(b) {}
 
   /// Destructor: Empty
   virtual ~MyEllipse() {}
 
   /// \short Current position vector to material point at
   /// Lagrangian coordinate xi
-  void position(const Vector<double> &xi, Vector<double> &r) const
+  void position(const Vector<double>& xi, Vector<double>& r) const
   {
     // Position vector
     r[0] = A * cos(xi[0]);
@@ -73,9 +73,9 @@ public:
   /// \short Parametrised position on object: r(xi). Evaluated at
   /// previous time level. t=0: current time; t>0: previous
   /// time level.
-  void position(const unsigned &t,
-                const Vector<double> &xi,
-                Vector<double> &r) const
+  void position(const unsigned& t,
+                const Vector<double>& xi,
+                Vector<double>& r) const
   {
     // Call steady version
     position(xi, r);
@@ -120,16 +120,16 @@ class RayleighProblem : public Problem
 public:
   /// Constructor: Pass number of elements in x and y directions and
   /// lengths and ALE flag
-  RayleighProblem(const unsigned &nx,
-                  const unsigned &ny,
-                  const double &lx,
-                  const double &ly,
-                  const bool &use_ale);
+  RayleighProblem(const unsigned& nx,
+                  const unsigned& ny,
+                  const double& lx,
+                  const double& ly,
+                  const bool& use_ale);
 
   /// Cast to specific mesh
-  RefineableQuarterCircleSectorMesh<ELEMENT> *mesh_pt()
+  RefineableQuarterCircleSectorMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<RefineableQuarterCircleSectorMesh<ELEMENT> *>(
+    return dynamic_cast<RefineableQuarterCircleSectorMesh<ELEMENT>*>(
       Problem::mesh_pt());
   }
 
@@ -160,10 +160,10 @@ public:
   } // end of actions_before_implicit_timestep
 
   /// Run an unsteady simulation
-  void unsteady_run(DocInfo &doc_info);
+  void unsteady_run(DocInfo& doc_info);
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// \short Set initial condition (incl previous timesteps) according
   /// to specified function.
@@ -206,7 +206,7 @@ public:
     for (unsigned i = 0; i < n_element; i++)
     {
       // Upcast from FiniteElement to the present element
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
       // Disable/enable ALE  (just to make sure both versions of the
       // code to the same amount of setup work...)
@@ -223,12 +223,12 @@ public:
 
 private:
   /// Fix pressure in element e at pressure dof pdof and set to pvalue
-  void fix_pressure(const unsigned &e,
-                    const unsigned &pdof,
-                    const double &pvalue)
+  void fix_pressure(const unsigned& e,
+                    const unsigned& pdof,
+                    const double& pvalue)
   {
     // Cast to proper element and fix pressure
-    dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e))
+    dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))
       ->fix_pressure(pdof, pvalue);
   }
 
@@ -244,11 +244,11 @@ private:
 /// Problem constructor
 //====================================================================
 template<class ELEMENT, class TIMESTEPPER>
-RayleighProblem<ELEMENT, TIMESTEPPER>::RayleighProblem(const unsigned &nx,
-                                                       const unsigned &ny,
-                                                       const double &lx,
-                                                       const double &ly,
-                                                       const bool &use_ale) :
+RayleighProblem<ELEMENT, TIMESTEPPER>::RayleighProblem(const unsigned& nx,
+                                                       const unsigned& ny,
+                                                       const double& lx,
+                                                       const double& ly,
+                                                       const bool& use_ale) :
   Use_ALE(use_ale)
 {
   // Allocate the timestepper
@@ -262,7 +262,7 @@ RayleighProblem<ELEMENT, TIMESTEPPER>::RayleighProblem(const unsigned &nx,
   double b_ellipse = 1.0;
 
   // Setup elliptical ring
-  GeomObject *Wall_pt = new MyEllipse(a_ellipse, b_ellipse);
+  GeomObject* Wall_pt = new MyEllipse(a_ellipse, b_ellipse);
 
   // End points for wall
   double xi_lo = 0.0;
@@ -274,8 +274,8 @@ RayleighProblem<ELEMENT, TIMESTEPPER>::RayleighProblem(const unsigned &nx,
     Wall_pt, xi_lo, fract_mid, xi_hi, time_stepper_pt());
 
   // Set error estimator
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
-  dynamic_cast<RefineableQuarterCircleSectorMesh<ELEMENT> *>(mesh_pt())
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
+  dynamic_cast<RefineableQuarterCircleSectorMesh<ELEMENT>*>(mesh_pt())
     ->spatial_error_estimator_pt() = error_estimator_pt;
 
   mesh_pt()->refine_uniformly();
@@ -308,7 +308,7 @@ RayleighProblem<ELEMENT, TIMESTEPPER>::RayleighProblem(const unsigned &nx,
   for (unsigned e = 0; e < n_el; e++)
   {
     // Cast to a fluid element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
     // Set the Reynolds number, etc
     el_pt->re_pt() = &Global_Parameters::Re;
@@ -408,7 +408,7 @@ void RayleighProblem<ELEMENT, TIMESTEPPER>::set_initial_condition()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT, class TIMESTEPPER>
-void RayleighProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo &doc_info)
+void RayleighProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -491,7 +491,7 @@ void RayleighProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo &doc_info)
 /// Unsteady run...
 //=============================================================================
 template<class ELEMENT, class TIMESTEPPER>
-void RayleighProblem<ELEMENT, TIMESTEPPER>::unsteady_run(DocInfo &doc_info)
+void RayleighProblem<ELEMENT, TIMESTEPPER>::unsteady_run(DocInfo& doc_info)
 {
   //  // Open trace file
   //  char filename[100];
@@ -573,7 +573,7 @@ void RayleighProblem<ELEMENT, TIMESTEPPER>::unsteady_run(DocInfo &doc_info)
 //===start_of_main======================================================
 /// Driver code for Rayleigh channel problem
 //======================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   /// Convert command line arguments (if any) into flags:
   if (argc == 1)

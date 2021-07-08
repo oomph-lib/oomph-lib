@@ -53,10 +53,10 @@ namespace oomph
     //=======================================================================
     /// Default load function (zero traction)
     //=======================================================================
-    void Zero_traction_fct(const Vector<double> &xi,
-                           const Vector<double> &x,
-                           const Vector<double> &N,
-                           Vector<double> &load)
+    void Zero_traction_fct(const Vector<double>& xi,
+                           const Vector<double>& x,
+                           const Vector<double>& N,
+                           Vector<double>& load)
     {
       unsigned n_dim = load.size();
       for (unsigned i = 0; i < n_dim; i++)
@@ -85,10 +85,10 @@ namespace oomph
     /// applied traction. (Not all of the input arguments will be
     /// required for all specific load functions but the list should
     /// cover all cases)
-    void (*Traction_fct_pt)(const Vector<double> &xi,
-                            const Vector<double> &x,
-                            const Vector<double> &n,
-                            Vector<double> &result);
+    void (*Traction_fct_pt)(const Vector<double>& xi,
+                            const Vector<double>& x,
+                            const Vector<double>& n,
+                            Vector<double>& result);
 
     /// \short Get the traction vector: Pass number of integration point
     /// (dummy), Lagr. coordinate and normal vector and return the load vector
@@ -96,11 +96,11 @@ namespace oomph
     /// required for all specific load functions but the list should
     /// cover all cases). This function is virtual so it can be
     /// overloaded for FSI.
-    virtual void get_traction(const unsigned &intpt,
-                              const Vector<double> &xi,
-                              const Vector<double> &x,
-                              const Vector<double> &n,
-                              Vector<double> &traction)
+    virtual void get_traction(const unsigned& intpt,
+                              const Vector<double>& xi,
+                              const Vector<double>& x,
+                              const Vector<double>& n,
+                              Vector<double>& traction)
     {
       Traction_fct_pt(xi, x, n, traction);
     }
@@ -110,15 +110,15 @@ namespace oomph
     // fill_in_contribution_to_residuals in fill_in_contribution_to_jacobian
     // which causes all kinds of pain if overloading later on
     void fill_in_contribution_to_residuals_solid_traction(
-      Vector<double> &residuals);
+      Vector<double>& residuals);
 
   public:
     /// \short Constructor, which takes a "bulk" element and the
     /// value of the index and its limit
     SolidTractionElement(
-      FiniteElement *const &element_pt,
-      const int &face_index,
-      const bool &called_from_refineable_constructor = false) :
+      FiniteElement* const& element_pt,
+      const int& face_index,
+      const bool& called_from_refineable_constructor = false) :
       FaceGeometry<ELEMENT>(), FaceElement()
     {
       // Attach the geometrical information to the element. N.B. This function
@@ -136,8 +136,8 @@ namespace oomph
           if (element_pt->dim() == 3)
           {
             // Is it refineable
-            RefineableElement *ref_el_pt =
-              dynamic_cast<RefineableElement *>(element_pt);
+            RefineableElement* ref_el_pt =
+              dynamic_cast<RefineableElement*>(element_pt);
             if (ref_el_pt != 0)
             {
               if (this->has_hanging_nodes())
@@ -156,23 +156,23 @@ namespace oomph
     }
 
     /// Reference to the traction function pointer
-    void (*&traction_fct_pt())(const Vector<double> &xi,
-                               const Vector<double> &x,
-                               const Vector<double> &n,
-                               Vector<double> &traction)
+    void (*&traction_fct_pt())(const Vector<double>& xi,
+                               const Vector<double>& x,
+                               const Vector<double>& n,
+                               Vector<double>& traction)
     {
       return Traction_fct_pt;
     }
 
     /// Return the residuals
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       fill_in_contribution_to_residuals_solid_traction(residuals);
     }
 
     /// Fill in contribution from Jacobian
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       // Call the residuals
       fill_in_contribution_to_residuals_solid_traction(residuals);
@@ -186,14 +186,14 @@ namespace oomph
     }
 
     /// \short Output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       unsigned n_plot = 5;
       output(outfile, n_plot);
     }
 
     /// \short Output function
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       unsigned n_dim = this->nodal_dimension();
 
@@ -252,13 +252,13 @@ namespace oomph
     }
 
     /// \short C_style output function
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
 
     /// \short C-style output function
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       FiniteElement::output(file_pt, n_plot);
     }
@@ -266,7 +266,7 @@ namespace oomph
     /// \short Compute traction vector at specified local coordinate
     /// Should only be used for post-processing; ignores dependence
     /// on integration point!
-    void traction(const Vector<double> &s, Vector<double> &traction);
+    void traction(const Vector<double>& s, Vector<double>& traction);
   };
 
   ///////////////////////////////////////////////////////////////////////
@@ -279,8 +279,8 @@ namespace oomph
   /// on integration point!
   //=====================================================================
   template<class ELEMENT>
-  void SolidTractionElement<ELEMENT>::traction(const Vector<double> &s,
-                                               Vector<double> &traction)
+  void SolidTractionElement<ELEMENT>::traction(const Vector<double>& s,
+                                               Vector<double>& traction)
   {
     unsigned n_dim = this->nodal_dimension();
 
@@ -308,7 +308,7 @@ namespace oomph
   //=====================================================================
   template<class ELEMENT>
   void SolidTractionElement<ELEMENT>::
-    fill_in_contribution_to_residuals_solid_traction(Vector<double> &residuals)
+    fill_in_contribution_to_residuals_solid_traction(Vector<double>& residuals)
   {
     // Find out how many nodes there are
     unsigned n_node = nnode();
@@ -466,8 +466,8 @@ namespace oomph
   {
   public:
     /// Constructor, which takes a "bulk" element and the face index
-    RefineableSolidTractionElement(FiniteElement *const &element_pt,
-                                   const int &face_index) :
+    RefineableSolidTractionElement(FiniteElement* const& element_pt,
+                                   const int& face_index) :
       // we're calling this from the constructor of the refineable version.
       SolidTractionElement<ELEMENT>(element_pt, face_index, true)
     {
@@ -480,20 +480,20 @@ namespace oomph
     /// same as those in the bulk element.
     unsigned ncont_interpolated_values() const
     {
-      return dynamic_cast<ELEMENT *>(this->bulk_element_pt())
+      return dynamic_cast<ELEMENT*>(this->bulk_element_pt())
         ->ncont_interpolated_values();
     }
 
     /// This function returns just the residuals
-    inline void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    inline void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Call the generic residuals function
       refineable_fill_in_contribution_to_residuals_solid_traction(residuals);
     }
 
     ///\short This function returns the residuals and the Jacobian
-    inline void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                                 DenseMatrix<double> &jacobian)
+    inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                                 DenseMatrix<double>& jacobian)
     {
       // Get the residuals
       refineable_fill_in_contribution_to_residuals_solid_traction(residuals);
@@ -511,7 +511,7 @@ namespace oomph
     /// \short This function returns the residuals for the
     /// traction function.
     void refineable_fill_in_contribution_to_residuals_solid_traction(
-      Vector<double> &residuals);
+      Vector<double>& residuals);
   };
 
   ///////////////////////////////////////////////////////////////////////
@@ -525,7 +525,7 @@ namespace oomph
   template<class ELEMENT>
   void RefineableSolidTractionElement<ELEMENT>::
     refineable_fill_in_contribution_to_residuals_solid_traction(
-      Vector<double> &residuals)
+      Vector<double>& residuals)
   {
     // Find out how many nodes there are
     unsigned n_node = nnode();
@@ -659,7 +659,7 @@ namespace oomph
       for (unsigned l = 0; l < n_node; l++)
       {
         // Get pointer to local node l
-        Node *local_node_pt = node_pt(l);
+        Node* local_node_pt = node_pt(l);
 
         // Cache hang status
         bool is_hanging = local_node_pt->is_hanging();
@@ -776,9 +776,9 @@ namespace oomph
     /// Constructor for GeomObject is called explicitly because
     /// of virtual inheritance!
     FSISolidTractionElement(
-      FiniteElement *const &element_pt,
-      const int &face_index,
-      const bool &called_from_refineable_constructor = false) :
+      FiniteElement* const& element_pt,
+      const int& face_index,
+      const bool& called_from_refineable_constructor = false) :
       SolidTractionElement<ELEMENT>(
         element_pt, face_index, called_from_refineable_constructor),
       Normal_points_into_fluid(true)
@@ -808,7 +808,7 @@ namespace oomph
     /// \short Derivative of position vector w.r.t. the SolidFiniteElement's
     /// Lagrangian coordinates; evaluated at current time.
     void dposition_dlagrangian_at_local_coordinate(
-      const Vector<double> &s, DenseMatrix<double> &drdxi) const
+      const Vector<double>& s, DenseMatrix<double>& drdxi) const
     {
       throw OomphLibError("Broken -- who calls this? \n",
                           OOMPH_CURRENT_FUNCTION,
@@ -816,8 +816,8 @@ namespace oomph
     }
 
     /// \short Final overload... Forwards to the version in the FSIWallElement
-    virtual void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                                  DenseMatrix<double> &jacobian)
+    virtual void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                                  DenseMatrix<double>& jacobian)
     {
       // Call the underlying element's jacobian function
       SolidTractionElement<ELEMENT>::fill_in_contribution_to_jacobian(residuals,
@@ -831,11 +831,11 @@ namespace oomph
     /// are used in the FSI implementation of this function!) and normal vector
     /// and return the load vector, taking
     /// the sign of the normal into account.
-    virtual void get_traction(const unsigned &intpt,
-                              const Vector<double> &xi,
-                              const Vector<double> &x,
-                              const Vector<double> &n,
-                              Vector<double> &traction)
+    virtual void get_traction(const unsigned& intpt,
+                              const Vector<double>& xi,
+                              const Vector<double>& x,
+                              const Vector<double>& n,
+                              Vector<double>& traction)
     {
       // Get the fluid load on the wall stress scale, i.e. this
       // includes the ratio of stresses represented by Q.
@@ -854,7 +854,7 @@ namespace oomph
 
     /// \short Output function: Note we can only output the traction
     /// at Gauss points so n_plot is actually ignored.
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       // Tecplot header info
       outfile << "ZONE" << std::endl;
@@ -919,10 +919,10 @@ namespace oomph
     /// \short Broken overloaded reference to the traction function pointer.
     /// It doesn't make sense to specify an external
     /// traction.
-    virtual void (*&traction_fct_pt())(const Vector<double> &xi,
-                                       const Vector<double> &x,
-                                       const Vector<double> &n,
-                                       Vector<double> &traction)
+    virtual void (*&traction_fct_pt())(const Vector<double>& xi,
+                                       const Vector<double>& x,
+                                       const Vector<double>& n,
+                                       Vector<double>& traction)
     {
       throw OomphLibError("It doesn't make sense to specify an external "
                           "traction in an FSI context",
@@ -947,7 +947,7 @@ namespace oomph
     /// (Function can obviously only be called if the equation numbering
     /// scheme has been set up.)
     void get_dof_numbers_for_unknowns(
-      std::list<std::pair<unsigned long, unsigned>> &dof_lookup_list) const;
+      std::list<std::pair<unsigned long, unsigned>>& dof_lookup_list) const;
   };
 
   //=============================================================================
@@ -960,7 +960,7 @@ namespace oomph
   //=============================================================================
   template<class ELEMENT, unsigned DIM>
   void FSISolidTractionElement<ELEMENT, DIM>::get_dof_numbers_for_unknowns(
-    std::list<std::pair<unsigned long, unsigned>> &dof_lookup_list) const
+    std::list<std::pair<unsigned long, unsigned>>& dof_lookup_list) const
   {
     // temporary pair (used to store dof lookup prior to being added to list)
     std::pair<unsigned, unsigned> dof_lookup;
@@ -1029,8 +1029,8 @@ namespace oomph
     /// FSISolidTractionElement::set_normal_pointing_out_of_fluid()
     /// Constructor for GeomObject is called explicitly because
     /// of virtual inheritance!
-    RefineableFSISolidTractionElement(FiniteElement *const &element_pt,
-                                      const int &face_index) :
+    RefineableFSISolidTractionElement(FiniteElement* const& element_pt,
+                                      const int& face_index) :
       SolidTractionElement<ELEMENT>(element_pt, face_index, true),
       RefineableSolidTractionElement<ELEMENT>(element_pt, face_index),
       FSISolidTractionElement<ELEMENT, DIM>(element_pt, face_index, true)
@@ -1042,8 +1042,8 @@ namespace oomph
 
     /// \short Final overload. Get contributions from refineable solid
     /// traction element and derivatives from external data
-    virtual void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                                  DenseMatrix<double> &jacobian)
+    virtual void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                                  DenseMatrix<double>& jacobian)
     {
       // Call the underlying element's jacobian function
       RefineableSolidTractionElement<ELEMENT>::fill_in_contribution_to_jacobian(
@@ -1084,10 +1084,10 @@ namespace oomph
     /// to distinguish the additional nodal values created by
     /// this element from thos created by other FaceElements.
     ImposeDisplacementByLagrangeMultiplierElement(
-      FiniteElement *const &element_pt,
-      const int &face_index,
-      const unsigned &id = 0,
-      const bool &called_from_refineable_constructor = false) :
+      FiniteElement* const& element_pt,
+      const int& face_index,
+      const unsigned& id = 0,
+      const bool& called_from_refineable_constructor = false) :
       FaceGeometry<ELEMENT>(), FaceElement(), Boundary_shape_geom_object_pt(0)
     {
       //  Store the ID of the FaceElement -- this is used to distinguish
@@ -1114,8 +1114,8 @@ namespace oomph
           if (element_pt->dim() == 3)
           {
             // Is it refineable
-            RefineableElement *ref_el_pt =
-              dynamic_cast<RefineableElement *>(element_pt);
+            RefineableElement* ref_el_pt =
+              dynamic_cast<RefineableElement*>(element_pt);
             if (ref_el_pt != 0)
             {
               if (this->has_hanging_nodes())
@@ -1163,7 +1163,7 @@ namespace oomph
     /// parametrised by the same coordinate that is used as
     /// the boundary coordinate in the bulk solid mesh to which
     /// this element is attached.
-    GeomObject *boundary_shape_geom_object_pt() const
+    GeomObject* boundary_shape_geom_object_pt() const
     {
       return Boundary_shape_geom_object_pt;
     }
@@ -1177,8 +1177,8 @@ namespace oomph
     /// the boundary number in the bulk mesh to which this element is
     /// attached.
     void set_boundary_shape_geom_object_pt(
-      GeomObject *boundary_shape_geom_object_pt,
-      const unsigned &boundary_number_in_bulk_mesh)
+      GeomObject* boundary_shape_geom_object_pt,
+      const unsigned& boundary_number_in_bulk_mesh)
     {
       // Record boundary number
 #ifdef PARANOID
@@ -1319,7 +1319,7 @@ namespace oomph
     }
 
     /// Fill in the residuals
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Call the generic routine with the flag set to 0
       fill_in_generic_contribution_to_residuals_displ_lagr_multiplier(
@@ -1327,8 +1327,8 @@ namespace oomph
     }
 
     /// Fill in contribution from Jacobian
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       // Call the generic routine with the flag set to 1
       fill_in_generic_contribution_to_residuals_displ_lagr_multiplier(
@@ -1345,9 +1345,9 @@ namespace oomph
     /// Note that the Jacobian is multiplied by minus one to
     /// ensure that the mass matrix is positive semi-definite.
     void fill_in_contribution_to_jacobian_and_mass_matrix(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix)
     {
       // Just call the jacobian calculation
       fill_in_contribution_to_jacobian(residuals, jacobian);
@@ -1365,7 +1365,7 @@ namespace oomph
     }
 
     /// \short Output function
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       // Elemental dimension
       unsigned dim_el = dim();
@@ -1411,11 +1411,11 @@ namespace oomph
         for (unsigned j = 0; j < n_node; j++)
         {
           // Cast to a boundary node
-          BoundaryNodeBase *bnod_pt =
-            dynamic_cast<BoundaryNodeBase *>(node_pt(j));
+          BoundaryNodeBase* bnod_pt =
+            dynamic_cast<BoundaryNodeBase*>(node_pt(j));
 
           // get the node pt
-          Node *nod_pt = node_pt(j);
+          Node* nod_pt = node_pt(j);
 
           // Get the index of the first nodal value associated with
           // this FaceElement
@@ -1467,7 +1467,7 @@ namespace oomph
     }
 
     /// \short Output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       unsigned n_plot = 5;
       output(outfile, n_plot);
@@ -1525,11 +1525,11 @@ namespace oomph
         // Loop over nodes
         for (unsigned j = 0; j < n_node; j++)
         {
-          Node *nod_pt = node_pt(j);
+          Node* nod_pt = node_pt(j);
 
           // Cast to a boundary node
-          BoundaryNodeBase *bnod_pt =
-            dynamic_cast<BoundaryNodeBase *>(node_pt(j));
+          BoundaryNodeBase* bnod_pt =
+            dynamic_cast<BoundaryNodeBase*>(node_pt(j));
 
           // Get the index of the first nodal value associated with
           // this FaceElement
@@ -1631,9 +1631,9 @@ namespace oomph
     /// \short Helper function to compute the residuals and, if flag==1, the
     /// Jacobian
     void fill_in_generic_contribution_to_residuals_displ_lagr_multiplier(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      const unsigned &flag)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag)
     {
       // Find out how many positional dofs there are
       unsigned n_position_type = this->nnodal_position_type();
@@ -1680,11 +1680,11 @@ namespace oomph
         // Loop over nodes
         for (unsigned j = 0; j < n_node; j++)
         {
-          Node *nod_pt = node_pt(j);
+          Node* nod_pt = node_pt(j);
 
           // Cast to a boundary node
-          BoundaryNodeBase *bnod_pt =
-            dynamic_cast<BoundaryNodeBase *>(node_pt(j));
+          BoundaryNodeBase* bnod_pt =
+            dynamic_cast<BoundaryNodeBase*>(node_pt(j));
 
           // Get the index of the first nodal value associated with
           // this FaceElement
@@ -1780,8 +1780,8 @@ namespace oomph
             // Assemble residual for Lagrange multiplier:
 
             // Cast to a boundary node
-            BoundaryNodeBase *bnod_pt =
-              dynamic_cast<BoundaryNodeBase *>(node_pt(j));
+            BoundaryNodeBase* bnod_pt =
+              dynamic_cast<BoundaryNodeBase*>(node_pt(j));
 
             // Local eqn number:
             int local_eqn = nodal_local_eqn(
@@ -1825,8 +1825,8 @@ namespace oomph
                 for (unsigned jj = 0; jj < n_node; jj++)
                 {
                   // Cast to a boundary node
-                  BoundaryNodeBase *bnode_pt =
-                    dynamic_cast<BoundaryNodeBase *>(node_pt(jj));
+                  BoundaryNodeBase* bnode_pt =
+                    dynamic_cast<BoundaryNodeBase*>(node_pt(jj));
 
                   int local_unknown = nodal_local_eqn(
                     jj,
@@ -1861,7 +1861,7 @@ namespace oomph
     /// (Function can obviously only be called if the equation numbering
     /// scheme has been set up.)
     void get_dof_numbers_for_unknowns(
-      std::list<std::pair<unsigned long, unsigned>> &dof_lookup_list) const
+      std::list<std::pair<unsigned long, unsigned>>& dof_lookup_list) const
     {
       // temporary pair (used to store dof lookup prior to being added to list)
       std::pair<unsigned, unsigned> dof_lookup;
@@ -1877,8 +1877,8 @@ namespace oomph
         for (unsigned j = 0; j < n_node; j++)
         {
           // Cast to a boundary node
-          BoundaryNodeBase *bnod_pt =
-            dynamic_cast<BoundaryNodeBase *>(node_pt(j));
+          BoundaryNodeBase* bnod_pt =
+            dynamic_cast<BoundaryNodeBase*>(node_pt(j));
 
           // Local eqn number:
           int local_eqn = nodal_local_eqn(
@@ -1915,10 +1915,10 @@ namespace oomph
     /// parametrised by the same coordinate the is used as
     /// the boundary coordinate in the bulk solid mesh to which
     /// this element is attached.
-    GeomObject *Boundary_shape_geom_object_pt;
+    GeomObject* Boundary_shape_geom_object_pt;
 
     /// \short Storage for sub-GeomObject at the integration points
-    Vector<GeomObject *> Sub_geom_object_pt;
+    Vector<GeomObject*> Sub_geom_object_pt;
 
     /// \short Storage for local coordinates in sub-GeomObjects at integration
     /// points
@@ -1964,9 +1964,9 @@ namespace oomph
     /// to distinguish the additional nodal values created by
     /// this element from thos created by other FaceElements.
     RefineableImposeDisplacementByLagrangeMultiplierElement(
-      FiniteElement *const &element_pt,
-      const int &face_index,
-      const unsigned &id = 0) :
+      FiniteElement* const& element_pt,
+      const int& face_index,
+      const unsigned& id = 0) :
       ImposeDisplacementByLagrangeMultiplierElement<ELEMENT>(
         element_pt, face_index, id, true)
     {
@@ -1980,7 +1980,7 @@ namespace oomph
     }
 
     /// Fill in the residuals
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Call the generic routine with the flag set to 0
       refineable_fill_in_generic_contribution_to_residuals_displ_lagr_multiplier(
@@ -1988,8 +1988,8 @@ namespace oomph
     }
 
     /// Fill in contribution from Jacobian
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       // Call the generic routine with the flag set to 1
       refineable_fill_in_generic_contribution_to_residuals_displ_lagr_multiplier(
@@ -2004,9 +2004,9 @@ namespace oomph
     /// \short Helper function to compute the residuals and, if flag==1, the
     /// Jacobian
     void refineable_fill_in_generic_contribution_to_residuals_displ_lagr_multiplier(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      const unsigned &flag)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag)
     {
       // Find out how many positional dofs there are
       unsigned n_position_type = this->nnodal_position_type();
@@ -2063,10 +2063,10 @@ namespace oomph
         // etc
         for (unsigned j = 0; j < n_node; j++)
         {
-          Node *nod_pt = this->node_pt(j);
+          Node* nod_pt = this->node_pt(j);
 
           // Cast to a boundary node
-          BoundaryNodeBase *bnod_pt = dynamic_cast<BoundaryNodeBase *>(nod_pt);
+          BoundaryNodeBase* bnod_pt = dynamic_cast<BoundaryNodeBase*>(nod_pt);
 
           // Get the index of the first nodal value associated with
           // this FaceElement
@@ -2163,14 +2163,14 @@ namespace oomph
         double hang_weight2 = 1.0;
 
         // Pointer to hang info object
-        HangInfo *hang_info_pt = 0;
-        HangInfo *hang_info2_pt = 0;
+        HangInfo* hang_info_pt = 0;
+        HangInfo* hang_info2_pt = 0;
 
         // Loop over nodes
         for (unsigned j = 0; j < n_node; j++)
         {
           // Local node itself (hanging or not)
-          Node *local_node_pt = this->node_pt(j);
+          Node* local_node_pt = this->node_pt(j);
 
           // Local boolean to indicate whether the node is hanging
           bool is_node_hanging = local_node_pt->is_hanging();
@@ -2201,7 +2201,7 @@ namespace oomph
               if (is_node_hanging)
               {
                 // Cast to a boundary node
-                BoundaryNodeBase *bnod_pt = dynamic_cast<BoundaryNodeBase *>(
+                BoundaryNodeBase* bnod_pt = dynamic_cast<BoundaryNodeBase*>(
                   hang_info_pt->master_node_pt(m));
 
                 // Get the equation number from the master node
@@ -2218,8 +2218,8 @@ namespace oomph
               else
               {
                 // Cast to a boundary node
-                BoundaryNodeBase *bnod_pt =
-                  dynamic_cast<BoundaryNodeBase *>(local_node_pt);
+                BoundaryNodeBase* bnod_pt =
+                  dynamic_cast<BoundaryNodeBase*>(local_node_pt);
 
                 // Local equation number
                 local_eqn = this->nodal_local_eqn(
@@ -2246,7 +2246,7 @@ namespace oomph
                   for (unsigned jj = 0; jj < n_node; jj++)
                   {
                     // Local node itself (hanging or not)
-                    Node *local_node2_pt = this->node_pt(jj);
+                    Node* local_node2_pt = this->node_pt(jj);
 
                     // Local boolean to indicate whether the node is hanging
                     bool is_node_hanging2 = local_node2_pt->is_hanging();
@@ -2363,7 +2363,7 @@ namespace oomph
                     for (unsigned jj = 0; jj < n_node; jj++)
                     {
                       // Local node itself (hanging or not)
-                      Node *local_node2_pt = this->node_pt(jj);
+                      Node* local_node2_pt = this->node_pt(jj);
 
                       // Local boolean to indicate whether the node is hanging
                       bool is_node_hanging2 = local_node2_pt->is_hanging();
@@ -2391,8 +2391,8 @@ namespace oomph
                         if (is_node_hanging2)
                         {
                           // Cast to a boundary node
-                          BoundaryNodeBase *bnod2_pt =
-                            dynamic_cast<BoundaryNodeBase *>(
+                          BoundaryNodeBase* bnod2_pt =
+                            dynamic_cast<BoundaryNodeBase*>(
                               hang_info2_pt->master_node_pt(m2));
 
                           // Get the equation number from the master node
@@ -2410,8 +2410,8 @@ namespace oomph
                         else
                         {
                           // Cast to a boundary node
-                          BoundaryNodeBase *bnod2_pt =
-                            dynamic_cast<BoundaryNodeBase *>(local_node2_pt);
+                          BoundaryNodeBase* bnod2_pt =
+                            dynamic_cast<BoundaryNodeBase*>(local_node2_pt);
 
                           // Local equation number
                           local_unknown = this->nodal_local_eqn(
@@ -2479,8 +2479,8 @@ namespace oomph
     /// built up incrementally as we descend through the
     /// call hierarchy of this function when called from
     /// Problem::describe_dofs(...)
-    void describe_local_dofs(std::ostream &out,
-                             const std::string &current_string) const
+    void describe_local_dofs(std::ostream& out,
+                             const std::string& current_string) const
     {
       ElementWithExternalElement::describe_local_dofs(out, current_string);
       describe_nodal_local_dofs(out, current_string);
@@ -2492,10 +2492,10 @@ namespace oomph
     /// to distinguish the additional nodal values created by
     /// this element from thos created by other FaceElements.
     FSIImposeDisplacementByLagrangeMultiplierElement(
-      FiniteElement *const &element_pt,
-      const int &face_index,
-      const unsigned &id = 0,
-      const bool &called_from_refineable_constructor = false) :
+      FiniteElement* const& element_pt,
+      const int& face_index,
+      const unsigned& id = 0,
+      const bool& called_from_refineable_constructor = false) :
       FaceGeometry<ELEMENT>(), FaceElement(), ElementWithExternalElement()
     {
       // Set external element storage - one interaction
@@ -2516,8 +2516,8 @@ namespace oomph
           if (element_pt->dim() == 3)
           {
             // Is it refineable
-            RefineableElement *ref_el_pt =
-              dynamic_cast<RefineableElement *>(element_pt);
+            RefineableElement* ref_el_pt =
+              dynamic_cast<RefineableElement*>(element_pt);
             if (ref_el_pt != 0)
             {
               if (this->has_hanging_nodes())
@@ -2561,7 +2561,7 @@ namespace oomph
     }
 
     /// Fill in the residuals
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Call the generic routine with the flag set to 0
       fill_in_generic_contribution_to_residuals_fsi_displ_lagr_multiplier(
@@ -2569,8 +2569,8 @@ namespace oomph
     }
 
     /// Fill in contribution from Jacobian
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       // Call the generic routine with the flag set to 1
       fill_in_generic_contribution_to_residuals_fsi_displ_lagr_multiplier(
@@ -2586,9 +2586,9 @@ namespace oomph
     /// Note that the Jacobian is multiplied by minus one to
     /// ensure that the mass matrix is positive semi-definite.
     void fill_in_contribution_to_jacobian_and_mass_matrix(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix)
     {
       // Just call the jacobian calculation
       fill_in_contribution_to_jacobian(residuals, jacobian);
@@ -2606,7 +2606,7 @@ namespace oomph
     }
 
     /// \short Output function
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       // Elemental dimension
       unsigned dim_el = dim();
@@ -2652,11 +2652,11 @@ namespace oomph
         for (unsigned j = 0; j < n_node; j++)
         {
           // Cast to a boundary node
-          BoundaryNodeBase *bnod_pt =
-            dynamic_cast<BoundaryNodeBase *>(node_pt(j));
+          BoundaryNodeBase* bnod_pt =
+            dynamic_cast<BoundaryNodeBase*>(node_pt(j));
 
           // get the node pt
-          Node *nod_pt = node_pt(j);
+          Node* nod_pt = node_pt(j);
 
           // Get the index of the first nodal value associated with
           // this FaceElement
@@ -2696,7 +2696,7 @@ namespace oomph
     }
 
     /// \short Output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       unsigned n_plot = 5;
       output(outfile, n_plot);
@@ -2706,9 +2706,9 @@ namespace oomph
     /// \short Helper function to compute the residuals and, if flag==1, the
     /// Jacobian
     void fill_in_generic_contribution_to_residuals_fsi_displ_lagr_multiplier(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      const unsigned &flag)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag)
     {
 #ifdef PARANOID
       // Find out how many positional dofs there are
@@ -2755,11 +2755,11 @@ namespace oomph
         // Loop over nodes
         for (unsigned j = 0; j < n_node; j++)
         {
-          Node *nod_pt = node_pt(j);
+          Node* nod_pt = node_pt(j);
 
           // Cast to a boundary node
-          BoundaryNodeBase *bnod_pt =
-            dynamic_cast<BoundaryNodeBase *>(node_pt(j));
+          BoundaryNodeBase* bnod_pt =
+            dynamic_cast<BoundaryNodeBase*>(node_pt(j));
 
           // Get the index of the first nodal value associated with
           // this FaceElement
@@ -2824,7 +2824,7 @@ namespace oomph
         Vector<double> s_adjacent(external_element_local_coord(0, ipt));
 
         // Get the position in the adjacent element
-        FiniteElement *bulk_el_pt = external_element_pt(0, ipt);
+        FiniteElement* bulk_el_pt = external_element_pt(0, ipt);
         bulk_el_pt->interpolated_x(s_adjacent, r_prescribed);
 
         // Premultiply the weights and the square-root of the determinant of
@@ -2842,8 +2842,8 @@ namespace oomph
             // Assemble residual for Lagrange multiplier:
 
             // Cast to a boundary node
-            BoundaryNodeBase *bnod_pt =
-              dynamic_cast<BoundaryNodeBase *>(node_pt(j));
+            BoundaryNodeBase* bnod_pt =
+              dynamic_cast<BoundaryNodeBase*>(node_pt(j));
 
             // Local eqn number:
             int local_eqn = nodal_local_eqn(
@@ -2887,8 +2887,8 @@ namespace oomph
                 for (unsigned jj = 0; jj < n_node; jj++)
                 {
                   // Cast to a boundary node
-                  BoundaryNodeBase *bnode_pt =
-                    dynamic_cast<BoundaryNodeBase *>(node_pt(jj));
+                  BoundaryNodeBase* bnode_pt =
+                    dynamic_cast<BoundaryNodeBase*>(node_pt(jj));
 
                   int local_unknown = nodal_local_eqn(
                     jj,
@@ -2922,7 +2922,7 @@ namespace oomph
     /// (Function can obviously only be called if the equation numbering
     /// scheme has been set up.)
     void get_dof_numbers_for_unknowns(
-      std::list<std::pair<unsigned long, unsigned>> &dof_lookup_list) const
+      std::list<std::pair<unsigned long, unsigned>>& dof_lookup_list) const
     {
       // temporary pair (used to store dof lookup prior to being added to list)
       std::pair<unsigned, unsigned> dof_lookup;
@@ -2938,8 +2938,8 @@ namespace oomph
         for (unsigned j = 0; j < n_node; j++)
         {
           // Cast to a boundary node
-          BoundaryNodeBase *bnod_pt =
-            dynamic_cast<BoundaryNodeBase *>(node_pt(j));
+          BoundaryNodeBase* bnod_pt =
+            dynamic_cast<BoundaryNodeBase*>(node_pt(j));
 
           // Local eqn number:
           int local_eqn = nodal_local_eqn(
@@ -3009,9 +3009,9 @@ namespace oomph
     /// to distinguish the additional nodal values created by
     /// this element from thos created by other FaceElements.
     RefineableFSIImposeDisplacementByLagrangeMultiplierElement(
-      FiniteElement *const &element_pt,
-      const int &face_index,
-      const unsigned &id = 0) :
+      FiniteElement* const& element_pt,
+      const int& face_index,
+      const unsigned& id = 0) :
       FSIImposeDisplacementByLagrangeMultiplierElement<ELEMENT>(
         element_pt, face_index, id, true)
     {
@@ -3025,7 +3025,7 @@ namespace oomph
     }
 
     /// Fill in the residuals
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Call the generic routine with the flag set to 0
       refineable_fill_in_generic_contribution_to_residuals_fsi_displ_lagr_multiplier(
@@ -3033,8 +3033,8 @@ namespace oomph
     }
 
     /// Fill in contribution from Jacobian
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       // Call the generic routine with the flag set to 1
       refineable_fill_in_generic_contribution_to_residuals_fsi_displ_lagr_multiplier(
@@ -3048,9 +3048,9 @@ namespace oomph
     /// \short Helper function to compute the residuals and, if flag==1, the
     /// Jacobian
     void refineable_fill_in_generic_contribution_to_residuals_fsi_displ_lagr_multiplier(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      const unsigned &flag)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag)
     {
       // Find out how many positional dofs there are
       unsigned n_position_type = this->nnodal_position_type();
@@ -3107,10 +3107,10 @@ namespace oomph
         // etc
         for (unsigned j = 0; j < n_node; j++)
         {
-          Node *nod_pt = this->node_pt(j);
+          Node* nod_pt = this->node_pt(j);
 
           // Cast to a boundary node
-          BoundaryNodeBase *bnod_pt = dynamic_cast<BoundaryNodeBase *>(nod_pt);
+          BoundaryNodeBase* bnod_pt = dynamic_cast<BoundaryNodeBase*>(nod_pt);
 
           // Get the index of the first nodal value associated with
           // this FaceElement
@@ -3177,7 +3177,7 @@ namespace oomph
         Vector<double> s_adjacent(this->external_element_local_coord(0, ipt));
 
         // Get the position in the adjacent element
-        FiniteElement *bulk_el_pt = this->external_element_pt(0, ipt);
+        FiniteElement* bulk_el_pt = this->external_element_pt(0, ipt);
         bulk_el_pt->interpolated_x(s_adjacent, r_prescribed);
 
         // Premultiply the weights and the square-root of the determinant of
@@ -3194,14 +3194,14 @@ namespace oomph
         double hang_weight2 = 1.0;
 
         // Pointer to hang info object
-        HangInfo *hang_info_pt = 0;
-        HangInfo *hang_info2_pt = 0;
+        HangInfo* hang_info_pt = 0;
+        HangInfo* hang_info2_pt = 0;
 
         // Loop over nodes
         for (unsigned j = 0; j < n_node; j++)
         {
           // Local node itself (hanging or not)
-          Node *local_node_pt = this->node_pt(j);
+          Node* local_node_pt = this->node_pt(j);
 
           // Local boolean to indicate whether the node is hanging
           bool is_node_hanging = local_node_pt->is_hanging();
@@ -3232,7 +3232,7 @@ namespace oomph
               if (is_node_hanging)
               {
                 // Cast to a boundary node
-                BoundaryNodeBase *bnod_pt = dynamic_cast<BoundaryNodeBase *>(
+                BoundaryNodeBase* bnod_pt = dynamic_cast<BoundaryNodeBase*>(
                   hang_info_pt->master_node_pt(m));
 
                 // Get the equation number from the master node
@@ -3249,8 +3249,8 @@ namespace oomph
               else
               {
                 // Cast to a boundary node
-                BoundaryNodeBase *bnod_pt =
-                  dynamic_cast<BoundaryNodeBase *>(local_node_pt);
+                BoundaryNodeBase* bnod_pt =
+                  dynamic_cast<BoundaryNodeBase*>(local_node_pt);
 
                 // Local equation number
                 local_eqn = this->nodal_local_eqn(
@@ -3277,7 +3277,7 @@ namespace oomph
                   for (unsigned jj = 0; jj < n_node; jj++)
                   {
                     // Local node itself (hanging or not)
-                    Node *local_node2_pt = this->node_pt(jj);
+                    Node* local_node2_pt = this->node_pt(jj);
 
                     // Local boolean to indicate whether the node is hanging
                     bool is_node_hanging2 = local_node2_pt->is_hanging();
@@ -3394,7 +3394,7 @@ namespace oomph
                     for (unsigned jj = 0; jj < n_node; jj++)
                     {
                       // Local node itself (hanging or not)
-                      Node *local_node2_pt = this->node_pt(jj);
+                      Node* local_node2_pt = this->node_pt(jj);
 
                       // Local boolean to indicate whether the node is hanging
                       bool is_node_hanging2 = local_node2_pt->is_hanging();
@@ -3422,8 +3422,8 @@ namespace oomph
                         if (is_node_hanging2)
                         {
                           // Cast to a boundary node
-                          BoundaryNodeBase *bnod2_pt =
-                            dynamic_cast<BoundaryNodeBase *>(
+                          BoundaryNodeBase* bnod2_pt =
+                            dynamic_cast<BoundaryNodeBase*>(
                               hang_info2_pt->master_node_pt(m2));
 
                           // Get the equation number from the master node
@@ -3441,8 +3441,8 @@ namespace oomph
                         else
                         {
                           // Cast to a boundary node
-                          BoundaryNodeBase *bnod2_pt =
-                            dynamic_cast<BoundaryNodeBase *>(local_node2_pt);
+                          BoundaryNodeBase* bnod2_pt =
+                            dynamic_cast<BoundaryNodeBase*>(local_node2_pt);
 
                           // Local equation number
                           local_unknown = this->nodal_local_eqn(

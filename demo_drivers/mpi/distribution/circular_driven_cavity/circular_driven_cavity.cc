@@ -58,18 +58,18 @@ namespace Global_Physical_Variables
   Vector<double> Gravity(2);
 
   /// Functional body force
-  void body_force(const double &time,
-                  const Vector<double> &x,
-                  Vector<double> &result)
+  void body_force(const double& time,
+                  const Vector<double>& x,
+                  Vector<double>& result)
   {
     result[0] = 0.0;
     result[1] = -Re_invFr;
   }
 
   /// Zero functional body force
-  void zero_body_force(const double &time,
-                       const Vector<double> &x,
-                       Vector<double> &result)
+  void zero_body_force(const double& time,
+                       const Vector<double>& x,
+                       Vector<double>& result)
   {
     result[0] = 0.0;
     result[1] = 0.0;
@@ -164,19 +164,19 @@ public:
   } // end_of_actions_after_adapt
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 private:
   /// Pointer to body force function
   NavierStokesEquations<2>::NavierStokesBodyForceFctPt Body_force_fct_pt;
 
   /// Fix pressure in element e at pressure dof pdof and set to pvalue
-  void fix_pressure(const unsigned &e,
-                    const unsigned &pdof,
-                    const double &pvalue)
+  void fix_pressure(const unsigned& e,
+                    const unsigned& pdof,
+                    const double& pvalue)
   {
     // Cast to proper element and fix pressure
-    dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e))
+    dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))
       ->fix_pressure(pdof, pvalue);
   } // end_of_fix_pressure
 
@@ -198,7 +198,7 @@ QuarterCircleDrivenCavityProblem<ELEMENT>::QuarterCircleDrivenCavityProblem(
   double b_ellipse = 1.0;
 
   // Setup elliptical ring
-  GeomObject *Wall_pt = new Ellipse(a_ellipse, b_ellipse);
+  GeomObject* Wall_pt = new Ellipse(a_ellipse, b_ellipse);
 
   // End points for wall
   double xi_lo = 0.0;
@@ -210,8 +210,8 @@ QuarterCircleDrivenCavityProblem<ELEMENT>::QuarterCircleDrivenCavityProblem(
     Wall_pt, xi_lo, fract_mid, xi_hi);
 
   // Set error estimator
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
-  dynamic_cast<RefineableQuarterCircleSectorMesh<ELEMENT> *>(mesh_pt())
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
+  dynamic_cast<RefineableQuarterCircleSectorMesh<ELEMENT>*>(mesh_pt())
     ->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Set the boundary conditions for this problem: All nodes are
@@ -240,7 +240,7 @@ QuarterCircleDrivenCavityProblem<ELEMENT>::QuarterCircleDrivenCavityProblem(
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
     // Set the Reynolds number, etc
     el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -273,7 +273,7 @@ QuarterCircleDrivenCavityProblem<ELEMENT>::QuarterCircleDrivenCavityProblem(
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void QuarterCircleDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void QuarterCircleDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -296,7 +296,7 @@ void QuarterCircleDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
 //==start_of_main======================================================
 /// Driver for QuarterCircleDrivenCavityProblem test problem
 //=====================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
 #ifdef OOMPH_HAS_MPI
   MPI_Helpers::init(argc, argv);
@@ -338,8 +338,8 @@ int main(int argc, char **argv)
     // output error estimates during solver
     error_doc_info.number() = 0;
 
-    RefineableMeshBase *mmesh_pt =
-      dynamic_cast<RefineableMeshBase *>(problem.mesh_pt(0));
+    RefineableMeshBase* mmesh_pt =
+      dynamic_cast<RefineableMeshBase*>(problem.mesh_pt(0));
 
     mmesh_pt->doc_info_pt() = &error_doc_info;
 

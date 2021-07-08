@@ -53,7 +53,7 @@ namespace oomph
     /// within the vectors passed to the oomph-lib
     /// preconditioner. If this is true none of the vector rebuild methods can
     /// be called.
-    OomphLibPreconditionerEpetraOperator(Preconditioner *preconditioner_pt,
+    OomphLibPreconditionerEpetraOperator(Preconditioner* preconditioner_pt,
                                          bool use_epetra_values = false)
 #ifdef OOMPH_HAS_MPI
       :
@@ -86,7 +86,7 @@ namespace oomph
 
     /// Broken copy constructor
     OomphLibPreconditionerEpetraOperator(
-      const OomphLibPreconditionerEpetraOperator &)
+      const OomphLibPreconditionerEpetraOperator&)
 #ifdef OOMPH_HAS_MPI
       :
       Operator_comm(MPI_Helpers::communicator_pt()->mpi_comm())
@@ -99,7 +99,7 @@ namespace oomph
     }
 
     /// Broken assignment operator.
-    void operator=(const OomphLibPreconditionerEpetraOperator &)
+    void operator=(const OomphLibPreconditionerEpetraOperator&)
     {
       BrokenCopy::broken_assign("OomphLibPreconditionerEpetraOperator");
     }
@@ -116,7 +116,7 @@ namespace oomph
     }
 
     /// Broken Epetra_Operator member - Apply
-    int Apply(const Epetra_MultiVector &X, Epetra_MultiVector &Y) const
+    int Apply(const Epetra_MultiVector& X, Epetra_MultiVector& Y) const
     {
       std::ostringstream error_message;
       error_message << "Apply() is a pure virtual Epetra_Operator member"
@@ -130,14 +130,14 @@ namespace oomph
     /// preconditioner_solve functionality.
     /// NOTE : the oomph-lib preconditioner is setup prior to being passed to
     /// this class
-    int ApplyInverse(const Epetra_MultiVector &epetra_r,
-                     Epetra_MultiVector &epetra_z) const
+    int ApplyInverse(const Epetra_MultiVector& epetra_r,
+                     Epetra_MultiVector& epetra_z) const
     {
       // the oomph-lib vector for r
       DoubleVector oomph_r;
 
       // copy the Epetra_MultiVector r into an oomph-lib vector
-      double **r_pt;
+      double** r_pt;
       epetra_r.ExtractView(&r_pt);
       if (Use_epetra_values)
       {
@@ -159,7 +159,7 @@ namespace oomph
       DoubleVector oomph_z;
       if (Use_epetra_values)
       {
-        double **z_pt;
+        double** z_pt;
         epetra_z.ExtractView(&z_pt);
         DoubleVector oomph_z;
         oomph_z.set_external_values(
@@ -199,7 +199,7 @@ namespace oomph
     }
 
     /// Epetra_Operator::Label - returns a string describing the operator
-    const char *Label() const
+    const char* Label() const
     {
       return Preconditioner_label.c_str();
     }
@@ -226,26 +226,26 @@ namespace oomph
     }
 
     /// Returns the Epetra MPI_Comm object
-    const Epetra_Comm &Comm() const
+    const Epetra_Comm& Comm() const
     {
       return Operator_comm;
     }
 
     /// Epetra_Operator member - OperatorDomainMap
-    const Epetra_Map &OperatorDomainMap() const
+    const Epetra_Map& OperatorDomainMap() const
     {
       return *Operator_map_pt;
     }
 
     /// Epetra_Operator member - OperatorRangeMap
-    const Epetra_Map &OperatorRangeMap() const
+    const Epetra_Map& OperatorRangeMap() const
     {
       return *Operator_map_pt;
     }
 
   private:
     /// A pointer to the oomph-lib preconditioner
-    Preconditioner *Oomph_lib_preconditioner_pt;
+    Preconditioner* Oomph_lib_preconditioner_pt;
 
 #ifdef OOMPH_HAS_MPI
     /// An Epetra MPI Comm object
@@ -264,7 +264,7 @@ namespace oomph
     /// preconditioner, in this instance it is primarily used to prescribe the
     /// distribution
     /// of the residual and solution vector
-    Epetra_Map *Operator_map_pt;
+    Epetra_Map* Operator_map_pt;
 
     /// a label for the preconditioner ( for Epetra_Operator::Label() )
     std::string Preconditioner_label;
@@ -332,13 +332,13 @@ namespace oomph
     }
 
     /// Broken copy constructor.
-    TrilinosAztecOOSolver(const TrilinosAztecOOSolver &)
+    TrilinosAztecOOSolver(const TrilinosAztecOOSolver&)
     {
       BrokenCopy::broken_copy("TrilinosAztecOOSolver");
     }
 
     /// Broken assignment operator.
-    void operator=(const TrilinosAztecOOSolver &)
+    void operator=(const TrilinosAztecOOSolver&)
     {
       BrokenCopy::broken_assign("TrilinosAztecOOSolver");
     }
@@ -379,7 +379,7 @@ namespace oomph
       // preconditioner is deleted
       if (Epetra_preconditioner_pt != 0)
       {
-        if (dynamic_cast<OomphLibPreconditionerEpetraOperator *>(
+        if (dynamic_cast<OomphLibPreconditionerEpetraOperator*>(
               Epetra_preconditioner_pt) != 0)
         {
           delete Epetra_preconditioner_pt;
@@ -404,22 +404,22 @@ namespace oomph
     /// \short Function which uses problem_pt's get_jacobian(...) function to
     /// generate a linear system which is then solved. This function deletes
     /// any existing internal data and then generates a new AztecOO solver.
-    void solve(Problem *const &problem_pt, DoubleVector &solution);
+    void solve(Problem* const& problem_pt, DoubleVector& solution);
 
     /// \short Function to solve the linear system defined by matrix_pt and rhs.
     /// \b NOTE 1. The matrix has to be of type CRDoubleMatrix or
     /// DistributedCRDoubleMatrix.
     /// \b NOTE 2. This function will delete any existing internal data and
     /// generate a new AztecOO solver.
-    void solve(DoubleMatrixBase *const &matrix_pt,
-               const DoubleVector &rhs,
-               DoubleVector &solution);
+    void solve(DoubleMatrixBase* const& matrix_pt,
+               const DoubleVector& rhs,
+               DoubleVector& solution);
 
     /// \short Function to resolve a linear system using the existing solver
     /// data, allowing a solve with a new right hand side vector. This
     /// function must be used after a call to solve(...) with
     /// enable_resolve set to true.
-    void resolve(const DoubleVector &rhs, DoubleVector &solution);
+    void resolve(const DoubleVector& rhs, DoubleVector& solution);
 
     /// \short Disable resolve function (overloads the LinearSolver
     /// disable_resolve function).
@@ -442,7 +442,7 @@ namespace oomph
     }
 
     /// Access function to Max_iter
-    unsigned &max_iter()
+    unsigned& max_iter()
     {
       return Max_iter;
     }
@@ -454,13 +454,13 @@ namespace oomph
     }
 
     /// Access function to Tolerance
-    double &tolerance()
+    double& tolerance()
     {
       return Tolerance;
     }
 
     /// Access function to Solver_type
-    unsigned &solver_type()
+    unsigned& solver_type()
     {
       return Solver_type;
     }
@@ -511,13 +511,13 @@ namespace oomph
   protected:
     /// \short Helper function performs the actual solve once the AztecOO
     /// solver is set up
-    void solve_using_AztecOO(Epetra_Vector *&rhs_pt, Epetra_Vector *&soln_pt);
+    void solve_using_AztecOO(Epetra_Vector*& rhs_pt, Epetra_Vector*& soln_pt);
 
     /// \short Helper function for setting up the solver. Converts the oomph-lib
     /// matrices to Epetra matrices, sets up the preconditioner, creates the
     /// Trilinos Aztec00 solver and passes in the matrix, preconditioner and
     /// parameters.
-    void solver_setup(DoubleMatrixBase *const &matrix_pt);
+    void solver_setup(DoubleMatrixBase* const& matrix_pt);
 
     /// \short Use workaround for creating of epetra matrix that respects
     /// aztecoo's ordering requirements
@@ -527,7 +527,7 @@ namespace oomph
     unsigned Iterations;
 
     /// Pointer to the AztecOO solver
-    AztecOO *AztecOO_solver_pt;
+    AztecOO* AztecOO_solver_pt;
 
     /// Stores set up time for Jacobian
     double Jacobian_setup_time;
@@ -556,19 +556,19 @@ namespace oomph
     bool Using_problem_based_solve;
 
     /// \short A pointer for the linear system matrix in Epetra_CrsMatrix format
-    Epetra_CrsMatrix *Epetra_matrix_pt;
+    Epetra_CrsMatrix* Epetra_matrix_pt;
 
     /// \short A pointer to the Epetra_Operator for the preconditioner. This is
     /// only used if the preconditioner NOT a Trilinos preconditioner.
-    Epetra_Operator *Epetra_preconditioner_pt;
+    Epetra_Operator* Epetra_preconditioner_pt;
 
     /// Oomph lib matrix pointer
-    DoubleMatrixBase *Oomph_matrix_pt;
+    DoubleMatrixBase* Oomph_matrix_pt;
 
     /// \short A pointer to the underlying problem (NULL if MATRIX based solve)
     /// The problem_pt is stored here in a problem based solve for the
     /// preconditioner
-    Problem *Problem_pt;
+    Problem* Problem_pt;
 
     /// if this solver is using an oomph-lib preconditioner then the vectors
     /// passed to preconditioner_solve(...) should be using the values in the

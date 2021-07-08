@@ -63,7 +63,7 @@ namespace oomph
   /// Protected because Trees can only be created internally,
   /// during the split operation.
   //=================================================================
-  Tree::Tree(RefineableElement *const &object_pt) : Object_pt(object_pt)
+  Tree::Tree(RefineableElement* const& object_pt) : Object_pt(object_pt)
   {
     // No father node:
     Father_pt = 0;
@@ -91,9 +91,9 @@ namespace oomph
   /// Protected because Trees can only be created internally,
   /// during the split operation.
   //=================================================================
-  Tree::Tree(RefineableElement *const &object_pt,
-             Tree *const &father_pt,
-             const int &son_type) :
+  Tree::Tree(RefineableElement* const& object_pt,
+             Tree* const& father_pt,
+             const int& son_type) :
     Object_pt(object_pt)
   {
     // Set the father node
@@ -163,7 +163,7 @@ namespace oomph
   /// that takes one argument at all nodes.
   //=================================================================
   void Tree::traverse_all(Tree::VoidMeshPtArgumentMemberFctPt member_function,
-                          Mesh *&mesh_pt)
+                          Mesh*& mesh_pt)
   {
     // Process the object contained in (well, pointed to) by current
     // Tree
@@ -228,7 +228,7 @@ namespace oomph
   /// (ignore "grey" = non-leaf nodes)
   //=================================================================
   void Tree::traverse_leaves(
-    Tree::VoidMeshPtArgumentMemberFctPt member_function, Mesh *&mesh_pt)
+    Tree::VoidMeshPtArgumentMemberFctPt member_function, Mesh*& mesh_pt)
   {
     // If the Tree has sons
     unsigned numsons = Son_pt.size();
@@ -251,7 +251,7 @@ namespace oomph
   /// Traverse Tree: Preorder traverse and stick pointers to leaf
   /// nodes (only) into Vector
   //=================================================================
-  void Tree::stick_leaves_into_vector(Vector<Tree *> &tree_nodes)
+  void Tree::stick_leaves_into_vector(Vector<Tree*>& tree_nodes)
   {
     // If the Tree has sons
     unsigned numsons = Son_pt.size();
@@ -273,7 +273,7 @@ namespace oomph
   /// Traverse Tree: Preorder traverse and stick pointer to all
   /// nodes (incl. "grey"=non-leaf ones) into Vector
   //=================================================================
-  void Tree::stick_all_tree_nodes_into_vector(Vector<Tree *> &all_tree_nodes)
+  void Tree::stick_all_tree_nodes_into_vector(Vector<Tree*>& all_tree_nodes)
   {
     all_tree_nodes.push_back(this);
 
@@ -298,7 +298,7 @@ namespace oomph
   ///
   /// returns true.
   //=================================================================
-  void Tree::merge_sons_if_required(Mesh *&mesh_pt)
+  void Tree::merge_sons_if_required(Mesh*& mesh_pt)
   {
     // Check if unrefinement is required
     if (Object_pt->sons_to_be_unrefined())
@@ -354,7 +354,7 @@ namespace oomph
   /// been allocated before the constructor is called, otherwise the
   /// relative rotation scheme will not be constructed correctly.
   //=================================================================
-  TreeForest::TreeForest(Vector<TreeRoot *> &trees_pt) : Trees_pt(trees_pt) {}
+  TreeForest::TreeForest(Vector<TreeRoot*>& trees_pt) : Trees_pt(trees_pt) {}
 
   //================================================================
   /// Kill tree forest: Delete the constituent trees
@@ -374,7 +374,7 @@ namespace oomph
   /// Traverse TreeForest: Preorder traverse and stick
   /// pointers to leaf nodes (only) into Vector
   //=================================================================
-  void TreeForest::stick_leaves_into_vector(Vector<Tree *> &forest_nodes)
+  void TreeForest::stick_leaves_into_vector(Vector<Tree*>& forest_nodes)
   {
     unsigned numtrees = ntree();
     for (unsigned itree = 0; itree < numtrees; itree++)
@@ -400,7 +400,7 @@ namespace oomph
   /// pointers to all nodes into Vector
   //=================================================================
   void TreeForest::stick_all_tree_nodes_into_vector(
-    Vector<Tree *> &all_forest_nodes)
+    Vector<Tree*>& all_forest_nodes)
   {
     unsigned numtrees = ntree();
     for (unsigned itree = 0; itree < numtrees; itree++)
@@ -426,7 +426,7 @@ namespace oomph
   /// the pointers. This can be done generically at the base level
   //====================================================================
   void TreeForest::close_hanging_node_files(
-    DocInfo &doc_info, Vector<std::ofstream *> &output_stream)
+    DocInfo& doc_info, Vector<std::ofstream*>& output_stream)
   {
     // Find the number of files
     unsigned n_file = output_stream.size();

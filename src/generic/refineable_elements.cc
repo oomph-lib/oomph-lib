@@ -55,7 +55,7 @@ namespace oomph
   /// and the value_id must be passed as arguments.
   //========================================================================
   void RefineableElement::check_value_id(
-    const int &n_continuously_interpolated_values, const int &value_id)
+    const int& n_continuously_interpolated_values, const int& value_id)
   {
     // If the value_id is more than the number of continuously interpolated
     // values or less than -1 (for the position), we have a problem
@@ -79,7 +79,7 @@ namespace oomph
   /// derivatives of the shape functions.
   //=========================================================================
   void RefineableElement::assemble_local_to_eulerian_jacobian(
-    const DShape &dpsids, DenseMatrix<double> &jacobian) const
+    const DShape& dpsids, DenseMatrix<double>& jacobian) const
   {
     // Locally cache the elemental dimension
     const unsigned el_dim = dim();
@@ -135,7 +135,7 @@ namespace oomph
   /// shape functions.
   //=========================================================================
   void RefineableElement::assemble_local_to_eulerian_jacobian2(
-    const DShape &d2psids, DenseMatrix<double> &jacobian2) const
+    const DShape& d2psids, DenseMatrix<double>& jacobian2) const
   {
     // Find the the dimension of the element
     const unsigned el_dim = dim();
@@ -179,7 +179,7 @@ namespace oomph
   /// before calling this function
   //=====================================================================
   void RefineableElement::assemble_eulerian_base_vectors(
-    const DShape &dpsids, DenseMatrix<double> &interpolated_G) const
+    const DShape& dpsids, DenseMatrix<double>& interpolated_G) const
   {
     // Find the number of nodes and position types
     const unsigned n_node = nnode();
@@ -216,9 +216,9 @@ namespace oomph
   /// inverse jacobian are returned.
   //==========================================================================
   double RefineableElement::local_to_eulerian_mapping_diagonal(
-    const DShape &dpsids,
-    DenseMatrix<double> &jacobian,
-    DenseMatrix<double> &inverse_jacobian) const
+    const DShape& dpsids,
+    DenseMatrix<double>& jacobian,
+    DenseMatrix<double>& inverse_jacobian) const
   {
     // Find the dimension of the element
     const unsigned el_dim = dim();
@@ -313,7 +313,7 @@ namespace oomph
   /// Assign the local hang eqn.
   //=======================================================================
   void RefineableElement::assign_hanging_local_eqn_numbers(
-    const bool &store_local_dof_pt)
+    const bool& store_local_dof_pt)
   {
     // Find the number of nodes
     const unsigned n_node = nnode();
@@ -327,14 +327,14 @@ namespace oomph
       // Delete the storage associated with the local hanging equation schemes
       delete[] Local_hang_eqn;
       // Allocate new storage
-      Local_hang_eqn = new std::map<Node *, int>[n_cont_values];
+      Local_hang_eqn = new std::map<Node*, int>[n_cont_values];
 
       // Boolean that is set to true if there are hanging equation numbers
       bool hanging_eqn_numbers = false;
 
       // Maps that store whether the node's local equation number for a
       // particular value has already been assigned
-      Vector<std::map<Node *, bool>> local_eqn_number_done(n_cont_values);
+      Vector<std::map<Node*, bool>> local_eqn_number_done(n_cont_values);
 
       // Get number of dofs assigned thus far
       unsigned local_eqn_number = ndof();
@@ -353,14 +353,14 @@ namespace oomph
           if (node_pt(n)->is_hanging(j))
           {
             // Get the pointer to the appropriate hanging info object
-            HangInfo *hang_info_pt = node_pt(n)->hanging_pt(j);
+            HangInfo* hang_info_pt = node_pt(n)->hanging_pt(j);
             // Find the number of master nodes
             unsigned n_master = hang_info_pt->nmaster();
             // Loop over the master nodes
             for (unsigned m = 0; m < n_master; m++)
             {
               // Get the m-th master node
-              Node *Master_node_pt = hang_info_pt->master_node_pt(m);
+              Node* Master_node_pt = hang_info_pt->master_node_pt(m);
 
               // If the master node's value has not been considered already,
               // give it a local equation number
@@ -456,7 +456,7 @@ namespace oomph
       // Clear the memory used in the deque
       if (store_local_dof_pt)
       {
-        std::deque<double *>().swap(GeneralisedElement::Dof_pt_deque);
+        std::deque<double*>().swap(GeneralisedElement::Dof_pt_deque);
       }
 
       // If there are no hanging_eqn_numbers delete the (empty) stored maps
@@ -471,23 +471,23 @@ namespace oomph
       // either non-hanging nodes of this element or master nodes
       // of hanging nodes.
       unsigned count = 0;
-      std::set<Node *> all_nodes;
+      std::set<Node*> all_nodes;
       Shape_controlling_node_lookup.clear();
       for (unsigned j = 0; j < n_node; j++)
       {
         // Get node
-        Node *nod_pt = node_pt(j);
+        Node* nod_pt = node_pt(j);
 
         // If the node is hanging, consider master nodes
         if (nod_pt->is_hanging())
         {
-          HangInfo *hang_info_pt = node_pt(j)->hanging_pt();
+          HangInfo* hang_info_pt = node_pt(j)->hanging_pt();
           unsigned n_master = hang_info_pt->nmaster();
 
           // Loop over the master nodes
           for (unsigned m = 0; m < n_master; m++)
           {
-            Node *master_node_pt = hang_info_pt->master_node_pt(m);
+            Node* master_node_pt = hang_info_pt->master_node_pt(m);
             // Do we have this one already?
             unsigned old_size = all_nodes.size();
             all_nodes.insert(master_node_pt);
@@ -522,14 +522,14 @@ namespace oomph
   /// correctly
   //=======================================================================
   void RefineableElement::identify_field_data_for_interactions(
-    std::set<std::pair<Data *, unsigned>> &paired_field_data)
+    std::set<std::pair<Data*, unsigned>>& paired_field_data)
   {
     // Loop over all internal data
     const unsigned n_internal = this->ninternal_data();
     for (unsigned n = 0; n < n_internal; n++)
     {
       // Cache the data pointer
-      Data *const dat_pt = this->internal_data_pt(n);
+      Data* const dat_pt = this->internal_data_pt(n);
       // Find the number of data values stored in the data object
       const unsigned n_value = dat_pt->nvalue();
       // Add the index of each data value and the pointer to the set
@@ -545,7 +545,7 @@ namespace oomph
     for (unsigned n = 0; n < n_node; n++)
     {
       // Cache the node pointer
-      Node *const nod_pt = this->node_pt(n);
+      Node* const nod_pt = this->node_pt(n);
       // Find the number of values stored at the node
       const unsigned n_value = nod_pt->nvalue();
 
@@ -556,7 +556,7 @@ namespace oomph
         if (nod_pt->is_hanging(i))
         {
           // Cache the pointer to the HangInfo object for this variable
-          HangInfo *const hang_pt = nod_pt->hanging_pt(i);
+          HangInfo* const hang_pt = nod_pt->hanging_pt(i);
           // Get number of master nodes
           const unsigned nmaster = hang_pt->nmaster();
 
@@ -564,7 +564,7 @@ namespace oomph
           for (unsigned m = 0; m < nmaster; m++)
           {
             // Cache the pointer to the master node
-            Node *const master_nod_pt = hang_pt->master_node_pt(m);
+            Node* const master_nod_pt = hang_pt->master_node_pt(m);
 
             // Under the assumption that the same data value is interpolated
             // by the hanging nodes, which it really must be
@@ -595,7 +595,7 @@ namespace oomph
   /// hanging nodes in this element).
   //==========================================================================
   void RefineableElement::get_dresidual_dnodal_coordinates(
-    RankThreeTensor<double> &dresidual_dnodal_coordinates)
+    RankThreeTensor<double>& dresidual_dnodal_coordinates)
   {
     // Number of nodes
     unsigned n_nod = nnode();
@@ -618,13 +618,13 @@ namespace oomph
     double eps_fd = GeneralisedElement::Default_fd_jacobian_step;
 
     // Do FD loop over all active nodes
-    for (std::map<Node *, unsigned>::iterator it =
+    for (std::map<Node*, unsigned>::iterator it =
            Shape_controlling_node_lookup.begin();
          it != Shape_controlling_node_lookup.end();
          it++)
     {
       // Get node
-      Node *nod_pt = it->first;
+      Node* nod_pt = it->first;
 
       // Get its number
       unsigned node_number = it->second;
@@ -672,7 +672,7 @@ namespace oomph
   /// Overload the standard case to include hanging node case
   //==========================================================================
   void RefineableElement::fill_in_jacobian_from_nodal_by_fd(
-    Vector<double> &residuals, DenseMatrix<double> &jacobian)
+    Vector<double>& residuals, DenseMatrix<double>& jacobian)
   {
     // Find the number of nodes
     const unsigned n_node = nnode();
@@ -708,7 +708,7 @@ namespace oomph
       const unsigned n_value = node_pt(n)->nvalue();
 
       // Get a pointer to the local node
-      Node *const local_node_pt = node_pt(n);
+      Node* const local_node_pt = node_pt(n);
 
       // Loop over the number of values stored at the node
       for (unsigned i = 0; i < n_value; i++)
@@ -722,7 +722,7 @@ namespace oomph
           if (local_unknown >= 0)
           {
             // Get a pointer to the nodal value
-            double *const value_pt = local_node_pt->value_pt(i);
+            double* const value_pt = local_node_pt->value_pt(i);
 
             // Save the old value of nodal value
             const double old_var = *value_pt;
@@ -774,13 +774,13 @@ namespace oomph
         else
         {
           // Get the local hanging infor
-          HangInfo *hang_info_pt = local_node_pt->hanging_pt(i);
+          HangInfo* hang_info_pt = local_node_pt->hanging_pt(i);
           // Loop over the master nodes
           const unsigned n_master = hang_info_pt->nmaster();
           for (unsigned m = 0; m < n_master; m++)
           {
             // Get the pointer to the master node
-            Node *const master_node_pt = hang_info_pt->master_node_pt(m);
+            Node* const master_node_pt = hang_info_pt->master_node_pt(m);
 
             // Get the number of the unknown
             local_unknown = local_hang_eqn(master_node_pt, i);
@@ -788,7 +788,7 @@ namespace oomph
             if (local_unknown >= 0)
             {
               // Get a pointer to the nodal value stored at the master node
-              double *const value_pt = master_node_pt->value_pt(i);
+              double* const value_pt = master_node_pt->value_pt(i);
 
               // Save the old value of the nodal value stored at the master node
               const double old_var = *value_pt;
@@ -851,7 +851,7 @@ namespace oomph
   /// derivatives of the shape functions.
   //=========================================================================
   void RefineableSolidElement::assemble_local_to_lagrangian_jacobian(
-    const DShape &dpsids, DenseMatrix<double> &jacobian) const
+    const DShape& dpsids, DenseMatrix<double>& jacobian) const
   {
     // Find the the dimension of the element
     const unsigned el_dim = dim();
@@ -890,7 +890,7 @@ namespace oomph
   /// shape functions.
   //=========================================================================
   void RefineableSolidElement::assemble_local_to_lagrangian_jacobian2(
-    const DShape &d2psids, DenseMatrix<double> &jacobian2) const
+    const DShape& d2psids, DenseMatrix<double>& jacobian2) const
   {
     // Find the the dimension of the element
     const unsigned el_dim = dim();
@@ -934,9 +934,9 @@ namespace oomph
   /// inverse jacobian are returned.
   //==========================================================================
   double RefineableSolidElement::local_to_lagrangian_mapping_diagonal(
-    const DShape &dpsids,
-    DenseMatrix<double> &jacobian,
-    DenseMatrix<double> &inverse_jacobian) const
+    const DShape& dpsids,
+    DenseMatrix<double>& jacobian,
+    DenseMatrix<double>& inverse_jacobian) const
   {
     // Find the dimension of the element
     const unsigned el_dim = dim();
@@ -1003,7 +1003,7 @@ namespace oomph
     const unsigned n_node = nnode();
 
     // Temporary storage for unique position data
-    std::set<Data *> all_position_data_pt;
+    std::set<Data*> all_position_data_pt;
 
     // Now loop over all the nodes again to find the master nodes
     // of any hanging nodes that have not yet been assigned
@@ -1013,7 +1013,7 @@ namespace oomph
       if (node_pt(n)->is_hanging())
       {
         // Find the local hang info object
-        HangInfo *hang_info_pt = node_pt(n)->hanging_pt();
+        HangInfo* hang_info_pt = node_pt(n)->hanging_pt();
 
         // Find the number of master nodes
         unsigned n_master = hang_info_pt->nmaster();
@@ -1022,11 +1022,11 @@ namespace oomph
         for (unsigned m = 0; m < n_master; m++)
         {
           // Get the m-th master node
-          Node *Master_node_pt = hang_info_pt->master_node_pt(m);
+          Node* Master_node_pt = hang_info_pt->master_node_pt(m);
 
           // Add to set
           all_position_data_pt.insert(
-            dynamic_cast<SolidNode *>(Master_node_pt)->variable_position_pt());
+            dynamic_cast<SolidNode*>(Master_node_pt)->variable_position_pt());
         }
       }
       // Not hanging
@@ -1034,7 +1034,7 @@ namespace oomph
       {
         // Add node itself to set
         all_position_data_pt.insert(
-          dynamic_cast<SolidNode *>(node_pt(n))->variable_position_pt());
+          dynamic_cast<SolidNode*>(node_pt(n))->variable_position_pt());
       }
 
     } // End of loop over nodes
@@ -1048,7 +1048,7 @@ namespace oomph
   /// shape depends on: Positional data of non-hanging nodes and
   /// positional data of master nodes. Recomputed on the fly.
   //========================================================================
-  Data *RefineableSolidElement::geom_data_pt(const unsigned &j)
+  Data* RefineableSolidElement::geom_data_pt(const unsigned& j)
   {
     // Find the number of nodes
     const unsigned n_node = nnode();
@@ -1056,8 +1056,8 @@ namespace oomph
     // Temporary storage for unique position data. Set and vector are
     // required to ensure uniqueness in enumeration on different processors.
     // Set checks uniqueness; Vector stores entries in predictable order.
-    std::set<Data *> all_position_data_pt;
-    Vector<Data *> all_position_data_vector_pt;
+    std::set<Data*> all_position_data_pt;
+    Vector<Data*> all_position_data_vector_pt;
 
     // Number of entries in set before possibly adding new entry
     unsigned n_old = 0;
@@ -1070,7 +1070,7 @@ namespace oomph
       if (node_pt(n)->is_hanging())
       {
         // Find the local hang info object
-        HangInfo *hang_info_pt = node_pt(n)->hanging_pt();
+        HangInfo* hang_info_pt = node_pt(n)->hanging_pt();
 
         // Find the number of master nodes
         unsigned n_master = hang_info_pt->nmaster();
@@ -1079,11 +1079,11 @@ namespace oomph
         for (unsigned m = 0; m < n_master; m++)
         {
           // Get the m-th master node
-          Node *Master_node_pt = hang_info_pt->master_node_pt(m);
+          Node* Master_node_pt = hang_info_pt->master_node_pt(m);
 
           // Positional data
-          Data *pos_data_pt =
-            dynamic_cast<SolidNode *>(Master_node_pt)->variable_position_pt();
+          Data* pos_data_pt =
+            dynamic_cast<SolidNode*>(Master_node_pt)->variable_position_pt();
 
           // Add to set
           n_old = all_position_data_pt.size();
@@ -1102,8 +1102,8 @@ namespace oomph
         // Add node itself to set
 
         // Positional data
-        Data *pos_data_pt =
-          dynamic_cast<SolidNode *>(node_pt(n))->variable_position_pt();
+        Data* pos_data_pt =
+          dynamic_cast<SolidNode*>(node_pt(n))->variable_position_pt();
 
         // Add to set
         n_old = all_position_data_pt.size();
@@ -1129,7 +1129,7 @@ namespace oomph
   /// avoid double counting). Refineable version includes hanging nodes
   //========================================================================
   void RefineableSolidElement::identify_geometric_data(
-    std::set<Data *> &geometric_data_pt)
+    std::set<Data*>& geometric_data_pt)
   {
     // Loop over the node update data and add to the set
     const unsigned n_node = this->nnode();
@@ -1139,7 +1139,7 @@ namespace oomph
       if (node_pt(j)->is_hanging())
       {
         // Find the local hang info object
-        HangInfo *hang_info_pt = node_pt(j)->hanging_pt();
+        HangInfo* hang_info_pt = node_pt(j)->hanging_pt();
 
         // Find the number of master nodes
         unsigned n_master = hang_info_pt->nmaster();
@@ -1148,11 +1148,11 @@ namespace oomph
         for (unsigned m = 0; m < n_master; m++)
         {
           // Get the m-th master node
-          Node *Master_node_pt = hang_info_pt->master_node_pt(m);
+          Node* Master_node_pt = hang_info_pt->master_node_pt(m);
 
           // Add to set
           geometric_data_pt.insert(
-            dynamic_cast<SolidNode *>(Master_node_pt)->variable_position_pt());
+            dynamic_cast<SolidNode*>(Master_node_pt)->variable_position_pt());
         }
       }
       // Not hanging
@@ -1160,7 +1160,7 @@ namespace oomph
       {
         // Add node itself to set
         geometric_data_pt.insert(
-          dynamic_cast<SolidNode *>(node_pt(j))->variable_position_pt());
+          dynamic_cast<SolidNode*>(node_pt(j))->variable_position_pt());
       }
     }
   }
@@ -1170,7 +1170,7 @@ namespace oomph
   /// so that hanging Node information is included.
   //========================================================================
   void RefineableSolidElement::assign_solid_hanging_local_eqn_numbers(
-    const bool &store_local_dof_pt)
+    const bool& store_local_dof_pt)
   {
     // Find the number of nodes
     const unsigned n_node = nnode();
@@ -1190,7 +1190,7 @@ namespace oomph
 
       // Map that store whether the node's equation numbers have already been
       // added to the local arrays
-      std::map<Node *, bool> local_eqn_number_done;
+      std::map<Node*, bool> local_eqn_number_done;
 
       // Get number of dofs so far
       unsigned local_eqn_number = ndof();
@@ -1207,14 +1207,14 @@ namespace oomph
         if (node_pt(n)->is_hanging())
         {
           // Find the local hang info object
-          HangInfo *hang_info_pt = node_pt(n)->hanging_pt();
+          HangInfo* hang_info_pt = node_pt(n)->hanging_pt();
           // Find the number of master nodes
           unsigned n_master = hang_info_pt->nmaster();
           // Loop over the master nodes
           for (unsigned m = 0; m < n_master; m++)
           {
             // Get the m-th master node
-            Node *Master_node_pt = hang_info_pt->master_node_pt(m);
+            Node* Master_node_pt = hang_info_pt->master_node_pt(m);
 
             // If the local equation numbers associated with this master node
             // have not already been assigned, assign them
@@ -1268,7 +1268,7 @@ namespace oomph
                   {
                     // Get equation number (position_eqn_number)
                     // Note eqn_number is long !
-                    long eqn_number = static_cast<SolidNode *>(Master_node_pt)
+                    long eqn_number = static_cast<SolidNode*>(Master_node_pt)
                                         ->position_eqn_number(j, k);
                     // If equation_number positive add to array
                     if (eqn_number >= 0)
@@ -1312,7 +1312,7 @@ namespace oomph
       // Clear the memory used in the deque
       if (store_local_dof_pt)
       {
-        std::deque<double *>().swap(GeneralisedElement::Dof_pt_deque);
+        std::deque<double*>().swap(GeneralisedElement::Dof_pt_deque);
       }
 
     } // End of if nodes
@@ -1326,7 +1326,7 @@ namespace oomph
   /// Overload the standard case to include hanging node case
   //==========================================================================
   void RefineableSolidElement::fill_in_jacobian_from_solid_position_by_fd(
-    Vector<double> &residuals, DenseMatrix<double> &jacobian)
+    Vector<double>& residuals, DenseMatrix<double>& jacobian)
   {
     // Find the number of nodes
     const unsigned n_node = nnode();
@@ -1363,7 +1363,7 @@ namespace oomph
     for (unsigned l = 0; l < n_node; l++)
     {
       // Get the pointer to the node
-      Node *const local_node_pt = node_pt(l);
+      Node* const local_node_pt = node_pt(l);
 
       // If the node is not a hanging node
       if (local_node_pt->is_hanging() == false)
@@ -1379,7 +1379,7 @@ namespace oomph
             if (local_unknown >= 0)
             {
               // Store a pointer to the (generalised) Eulerian nodal position
-              double *const value_pt = &(local_node_pt->x_gen(k, i));
+              double* const value_pt = &(local_node_pt->x_gen(k, i));
 
               // Save the old value of the (generalised) Eulerian nodal position
               const double old_var = *value_pt;
@@ -1441,13 +1441,13 @@ namespace oomph
       else
       {
         // Find the local hanging object
-        HangInfo *hang_info_pt = local_node_pt->hanging_pt();
+        HangInfo* hang_info_pt = local_node_pt->hanging_pt();
         // Loop over the master nodes
         const unsigned n_master = hang_info_pt->nmaster();
         for (unsigned m = 0; m < n_master; m++)
         {
           // Get the pointer to the master node
-          Node *const master_node_pt = hang_info_pt->master_node_pt(m);
+          Node* const master_node_pt = hang_info_pt->master_node_pt(m);
 
           // Get the local equation numbers for the master node
           DenseMatrix<int> Position_local_eqn_at_node =
@@ -1464,7 +1464,7 @@ namespace oomph
               if (local_unknown >= 0)
               {
                 // Store a pointer to the (generalised) Eulerian nodal position
-                double *const value_pt = &(master_node_pt->x_gen(k, i));
+                double* const value_pt = &(master_node_pt->x_gen(k, i));
 
                 // Save the old value of the (generalised) Eulerian nodal
                 // position

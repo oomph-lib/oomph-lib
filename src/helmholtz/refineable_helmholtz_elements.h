@@ -71,7 +71,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    RefineableHelmholtzEquations(const RefineableHelmholtzEquations<DIM> &dummy)
+    RefineableHelmholtzEquations(const RefineableHelmholtzEquations<DIM>& dummy)
     {
       BrokenCopy::broken_copy("RefineableHelmholtzEquations");
     }
@@ -95,7 +95,7 @@ namespace oomph
 
     /// Get 'flux' for Z2 error recovery:  Standard flux.from Helmholtz
     /// equations
-    void get_Z2_flux(const Vector<double> &s, Vector<double> &flux)
+    void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
       Vector<std::complex<double>> actual_flux(DIM);
       this->get_flux(s, actual_flux);
@@ -112,8 +112,8 @@ namespace oomph
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines), the values Vector sets its own size in here.
-    void get_interpolated_values(const Vector<double> &s,
-                                 Vector<double> &values)
+    void get_interpolated_values(const Vector<double>& s,
+                                 Vector<double>& values)
     {
       // Resize nitialise
       values.resize(2, 0.0);
@@ -141,9 +141,9 @@ namespace oomph
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines), the values Vector sets its own size in here.
-    void get_interpolated_values(const unsigned &t,
-                                 const Vector<double> &s,
-                                 Vector<double> &values)
+    void get_interpolated_values(const unsigned& t,
+                                 const Vector<double>& s,
+                                 Vector<double>& values)
     {
       if (t != 0)
       {
@@ -166,11 +166,11 @@ namespace oomph
     ///  Further build: Copy source function pointer from father element
     void further_build()
     {
-      this->Source_fct_pt = dynamic_cast<RefineableHelmholtzEquations<DIM> *>(
+      this->Source_fct_pt = dynamic_cast<RefineableHelmholtzEquations<DIM>*>(
                               this->father_element_pt())
                               ->source_fct_pt();
 
-      this->K_squared_pt = dynamic_cast<RefineableHelmholtzEquations<DIM> *>(
+      this->K_squared_pt = dynamic_cast<RefineableHelmholtzEquations<DIM>*>(
                              this->father_element_pt())
                              ->k_squared_pt();
     }
@@ -181,9 +181,9 @@ namespace oomph
     /// flag=1: compute both
     /// flag=0: compute only residual vector
     void fill_in_generic_residual_contribution_helmholtz(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      const unsigned &flag);
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag);
   };
 
   //======================================================================
@@ -209,7 +209,7 @@ namespace oomph
 
     /// Broken copy constructor
     RefineableQHelmholtzElement(
-      const RefineableQHelmholtzElement<DIM, NNODE_1D> &dummy)
+      const RefineableQHelmholtzElement<DIM, NNODE_1D>& dummy)
     {
       BrokenCopy::broken_copy("RefineableQuadHelmholtzElement");
     }
@@ -233,13 +233,13 @@ namespace oomph
     }
 
     /// \short Pointer to the j-th vertex node in the element
-    Node *vertex_node_pt(const unsigned &j) const
+    Node* vertex_node_pt(const unsigned& j) const
     {
       return QHelmholtzElement<DIM, NNODE_1D>::vertex_node_pt(j);
     }
 
     /// Rebuild from sons: empty
-    void rebuild_from_sons(Mesh *&mesh_pt) {}
+    void rebuild_from_sons(Mesh*& mesh_pt) {}
 
     /// \short Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.

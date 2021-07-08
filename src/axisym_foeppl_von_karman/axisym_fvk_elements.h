@@ -55,8 +55,8 @@ namespace oomph
   public:
     /// \short Function pointer to pressure function fct(r,f(r)) --
     /// r is a Vector!
-    typedef void (*AxisymFoepplvonKarmanPressureFctPt)(const double &r,
-                                                       double &f);
+    typedef void (*AxisymFoepplvonKarmanPressureFctPt)(const double& r,
+                                                       double& f);
 
     /// \short Constructor (must initialise the Pressure_fct_pt and
     /// Airy_forcing_fct_pt to null). Also set physical parameters to their
@@ -70,25 +70,25 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    AxisymFoepplvonKarmanEquations(const AxisymFoepplvonKarmanEquations &dummy)
+    AxisymFoepplvonKarmanEquations(const AxisymFoepplvonKarmanEquations& dummy)
     {
       BrokenCopy::broken_copy("AxisymFoepplvonKarmanEquations");
     }
 
     /// Broken assignment operator
-    void operator=(const AxisymFoepplvonKarmanEquations &)
+    void operator=(const AxisymFoepplvonKarmanEquations&)
     {
       BrokenCopy::broken_assign("AxisymFoepplvonKarmanEquations");
     }
 
     /// FvK parameter
-    const double &eta() const
+    const double& eta() const
     {
       return *Eta_pt;
     }
 
     /// Pointer to FvK parameter
-    double *&eta_pt()
+    double*& eta_pt()
     {
       return Eta_pt;
     }
@@ -104,13 +104,13 @@ namespace oomph
     /// In derived multi-physics elements, this function should be overloaded
     /// to reflect the chosen storage scheme. Note that these equations require
     /// that the unknown is always stored at the same index at each node.
-    virtual inline unsigned nodal_index_fvk(const unsigned &i = 0) const
+    virtual inline unsigned nodal_index_fvk(const unsigned& i = 0) const
     {
       return i;
     }
 
     /// Output with default number of plot points
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       const unsigned n_plot = 5;
       output(outfile, n_plot);
@@ -118,10 +118,10 @@ namespace oomph
 
     /// \short Output FE representation of soln: r,w,sigma_r_r,sigma_phi_phi
     /// at n_plot plot points
-    void output(std::ostream &outfile, const unsigned &n_plot);
+    void output(std::ostream& outfile, const unsigned& n_plot);
 
     /// C_style output with default number of plot points
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       const unsigned n_plot = 5;
       output(file_pt, n_plot);
@@ -129,20 +129,20 @@ namespace oomph
 
     /// \short C-style output FE representation of soln: r,w at
     /// n_plot plot points
-    void output(FILE *file_pt, const unsigned &n_plot);
+    void output(FILE* file_pt, const unsigned& n_plot);
 
     /// Output exact soln: r,w_exact at n_plot plot points
-    void output_fct(std::ostream &outfile,
-                    const unsigned &n_plot,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& n_plot,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
 
     /// \short Output exact soln: r,w_exact at
     /// n_plot plot points (dummy time-dependent version to
     /// keep intel compiler happy)
     virtual void output_fct(
-      std::ostream &outfile,
-      const unsigned &n_plot,
-      const double &time,
+      std::ostream& outfile,
+      const unsigned& n_plot,
+      const double& time,
       FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
     {
       throw OomphLibError(
@@ -153,17 +153,17 @@ namespace oomph
     }
 
     /// Get error against and norm of exact solution
-    void compute_error(std::ostream &outfile,
+    void compute_error(std::ostream& outfile,
                        FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-                       double &error,
-                       double &norm);
+                       double& error,
+                       double& norm);
 
     /// Dummy, time dependent error checker
-    void compute_error(std::ostream &outfile,
+    void compute_error(std::ostream& outfile,
                        FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
-                       const double &time,
-                       double &error,
-                       double &norm)
+                       const double& time,
+                       double& error,
+                       double& norm)
     {
       throw OomphLibError(
         "There is no time-dependent compute_error() for Foeppl von Karman"
@@ -173,7 +173,7 @@ namespace oomph
     }
 
     /// Access function: Pointer to pressure function
-    AxisymFoepplvonKarmanPressureFctPt &pressure_fct_pt()
+    AxisymFoepplvonKarmanPressureFctPt& pressure_fct_pt()
     {
       return Pressure_fct_pt;
     }
@@ -185,7 +185,7 @@ namespace oomph
     }
 
     /// Access function: Pointer to Airy forcing function
-    AxisymFoepplvonKarmanPressureFctPt &airy_forcing_fct_pt()
+    AxisymFoepplvonKarmanPressureFctPt& airy_forcing_fct_pt()
     {
       return Airy_forcing_fct_pt;
     }
@@ -200,9 +200,9 @@ namespace oomph
     /// virtual to allow overloading in multi-physics problems where
     /// the strength of the pressure function might be determined by
     /// another system of equations.
-    inline virtual void get_pressure_fvk(const unsigned &ipt,
-                                         const double &r,
-                                         double &pressure) const
+    inline virtual void get_pressure_fvk(const unsigned& ipt,
+                                         const double& r,
+                                         double& pressure) const
     {
       // If no pressure function has been set, return zero
       if (Pressure_fct_pt == 0)
@@ -220,9 +220,9 @@ namespace oomph
     /// virtual to allow overloading in multi-physics problems where
     /// the strength of the pressure function might be determined by
     /// another system of equations.
-    inline virtual void get_airy_forcing_fvk(const unsigned &ipt,
-                                             const double &r,
-                                             double &airy_forcing) const
+    inline virtual void get_airy_forcing_fvk(const unsigned& ipt,
+                                             const double& r,
+                                             double& airy_forcing) const
     {
       // If no Airy forcing function has been set, return zero
       if (Airy_forcing_fct_pt == 0)
@@ -237,8 +237,8 @@ namespace oomph
     }
 
     /// Get gradient of deflection: gradient[i] = dw/dr_i */
-    void get_gradient_of_deflection(const Vector<double> &s,
-                                    Vector<double> &gradient) const
+    void get_gradient_of_deflection(const Vector<double>& s,
+                                    Vector<double>& gradient) const
     {
       // Find out how many nodes there are in the element
       const unsigned n_node = nnode();
@@ -264,7 +264,7 @@ namespace oomph
     }
 
     /// Fill in the residuals with this element's contribution
-    void fill_in_contribution_to_residuals(Vector<double> &residuals);
+    void fill_in_contribution_to_residuals(Vector<double>& residuals);
 
     // hierher Jacobian not yet implemented
     // void fill_in_contribution_to_jacobian(Vector<double> &residuals,
@@ -272,7 +272,7 @@ namespace oomph
 
     /// \short Return FE representation of vertical displacement, w_fvk(s)
     /// at local coordinate s
-    inline double interpolated_w_fvk(const Vector<double> &s) const
+    inline double interpolated_w_fvk(const Vector<double>& s) const
     {
       // Find number of nodes
       const unsigned n_node = nnode();
@@ -300,9 +300,9 @@ namespace oomph
 
     /// \short Compute in-plane stresses. Return boolean to indicate success
     /// (false if attempt to evaluate stresses at zero radius)
-    bool interpolated_stress(const Vector<double> &s,
-                             double &sigma_r_r,
-                             double &sigma_phi_phi);
+    bool interpolated_stress(const Vector<double>& s,
+                             double& sigma_r_r,
+                             double& sigma_phi_phi);
 
     /// \short Self-test: Return 0 for OK
     unsigned self_test();
@@ -343,23 +343,23 @@ namespace oomph
     /// \short Shape/test functions and derivs w.r.t. to global coords at
     /// local coord. s; return  Jacobian of mapping
     virtual double dshape_and_dtest_eulerian_axisym_fvk(
-      const Vector<double> &s,
-      Shape &psi,
-      DShape &dpsidr,
-      Shape &test,
-      DShape &dtestdr) const = 0;
+      const Vector<double>& s,
+      Shape& psi,
+      DShape& dpsidr,
+      Shape& test,
+      DShape& dtestdr) const = 0;
 
     /// \short Shape/test functions and derivs w.r.t. to global coords at
     /// integration point ipt; return  Jacobian of mapping
     virtual double dshape_and_dtest_eulerian_at_knot_axisym_fvk(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidr,
-      Shape &test,
-      DShape &dtestdr) const = 0;
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidr,
+      Shape& test,
+      DShape& dtestdr) const = 0;
 
     /// Pointer to FvK parameter
-    double *Eta_pt;
+    double* Eta_pt;
 
     /// Pointer to pressure function:
     AxisymFoepplvonKarmanPressureFctPt Pressure_fct_pt;
@@ -404,56 +404,56 @@ namespace oomph
 
     /// Broken copy constructor
     AxisymFoepplvonKarmanElement(
-      const AxisymFoepplvonKarmanElement<NNODE_1D> &dummy)
+      const AxisymFoepplvonKarmanElement<NNODE_1D>& dummy)
     {
       BrokenCopy::broken_copy("AxisymFoepplvonKarmanElement");
     }
 
     /// Broken assignment operator
-    void operator=(const AxisymFoepplvonKarmanElement<NNODE_1D> &)
+    void operator=(const AxisymFoepplvonKarmanElement<NNODE_1D>&)
     {
       BrokenCopy::broken_assign("AxisymFoepplvonKarmanElement");
     }
 
     /// \short  Required  # of `values' (pinned or dofs)
     /// at node n
-    inline unsigned required_nvalue(const unsigned &n) const
+    inline unsigned required_nvalue(const unsigned& n) const
     {
       return Initial_Nvalue;
     }
 
     /// \short Output function:
     ///  r,w,sigma_r_r,sigma_phi_phi
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       AxisymFoepplvonKarmanEquations::output(outfile);
     }
 
     ///  \short Output function:
     ///   r,w,sigma_r_r,sigma_phi_phi at n_plot plot points
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       AxisymFoepplvonKarmanEquations::output(outfile, n_plot);
     }
 
     /// \short C-style output function:
     ///  r,w
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       AxisymFoepplvonKarmanEquations::output(file_pt);
     }
 
     ///  \short C-style output function:
     ///   r,w at n_plot plot points
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       AxisymFoepplvonKarmanEquations::output(file_pt, n_plot);
     }
 
     /// \short Output function for an exact solution:
     ///  r,w_exact at n_plot plot points
-    void output_fct(std::ostream &outfile,
-                    const unsigned &n_plot,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& n_plot,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
     {
       AxisymFoepplvonKarmanEquations::output_fct(
@@ -463,9 +463,9 @@ namespace oomph
     /// \short Output function for a time-dependent exact solution.
     ///  r,w_exact at n_plot plot points
     /// (Calls the steady version)
-    void output_fct(std::ostream &outfile,
-                    const unsigned &n_plot,
-                    const double &time,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& n_plot,
+                    const double& time,
                     FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
     {
       AxisymFoepplvonKarmanEquations::output_fct(
@@ -475,20 +475,20 @@ namespace oomph
   protected:
     /// \short Shape, test functions & derivs. w.r.t. to global coords.
     /// Return Jacobian.
-    inline double dshape_and_dtest_eulerian_axisym_fvk(const Vector<double> &s,
-                                                       Shape &psi,
-                                                       DShape &dpsidr,
-                                                       Shape &test,
-                                                       DShape &dtestdr) const;
+    inline double dshape_and_dtest_eulerian_axisym_fvk(const Vector<double>& s,
+                                                       Shape& psi,
+                                                       DShape& dpsidr,
+                                                       Shape& test,
+                                                       DShape& dtestdr) const;
 
     /// \short Shape, test functions & derivs. w.r.t. to global coords. at
     /// integration point ipt. Return Jacobian.
     inline double dshape_and_dtest_eulerian_at_knot_axisym_fvk(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidr,
-      Shape &test,
-      DShape &dtestdr) const;
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidr,
+      Shape& test,
+      DShape& dtestdr) const;
   };
 
   // Inline functions:
@@ -501,11 +501,11 @@ namespace oomph
   //======================================================================
   template<unsigned NNODE_1D>
   double AxisymFoepplvonKarmanElement<
-    NNODE_1D>::dshape_and_dtest_eulerian_axisym_fvk(const Vector<double> &s,
-                                                    Shape &psi,
-                                                    DShape &dpsidr,
-                                                    Shape &test,
-                                                    DShape &dtestdr) const
+    NNODE_1D>::dshape_and_dtest_eulerian_axisym_fvk(const Vector<double>& s,
+                                                    Shape& psi,
+                                                    DShape& dpsidr,
+                                                    Shape& test,
+                                                    DShape& dtestdr) const
 
   {
     // Call the geometrical shape functions and derivatives
@@ -527,11 +527,11 @@ namespace oomph
   //======================================================================
   template<unsigned NNODE_1D>
   double AxisymFoepplvonKarmanElement<NNODE_1D>::
-    dshape_and_dtest_eulerian_at_knot_axisym_fvk(const unsigned &ipt,
-                                                 Shape &psi,
-                                                 DShape &dpsidr,
-                                                 Shape &test,
-                                                 DShape &dtestdr) const
+    dshape_and_dtest_eulerian_at_knot_axisym_fvk(const unsigned& ipt,
+                                                 Shape& psi,
+                                                 DShape& dpsidr,
+                                                 Shape& test,
+                                                 DShape& dtestdr) const
   {
     // Call the geometrical shape functions and derivatives
     const double J = this->dshape_eulerian_at_knot(ipt, psi, dpsidr);
@@ -574,14 +574,14 @@ namespace oomph
 
     /// \short Return the ratio of the stress scales used to non-dimensionalise
     /// the fluid and elasticity equations.
-    const double &q() const
+    const double& q() const
     {
       return *Q_pt;
     }
 
     /// \short Return a pointer the ratio of stress scales used to
     /// non-dimensionalise the fluid and solid equations.
-    double *&q_pt()
+    double*& q_pt()
     {
       return Q_pt;
     }
@@ -595,7 +595,7 @@ namespace oomph
 
     /// \short Return pointer to the j-th Data item that the object's
     /// shape depends on.
-    virtual Data *geom_data_pt(const unsigned &j)
+    virtual Data* geom_data_pt(const unsigned& j)
     {
       return this->node_pt(j);
     }
@@ -603,7 +603,7 @@ namespace oomph
     /// \short Overloaded position function: Return 2D position vector:
     /// (r(zeta),z(zeta)) of material point whose "Lagrangian coordinate"
     /// is given by zeta. Here r=zeta!
-    void position(const Vector<double> &zeta, Vector<double> &r) const
+    void position(const Vector<double>& zeta, Vector<double>& r) const
     {
       const unsigned t = 0;
       this->position(t, zeta, r);
@@ -612,9 +612,9 @@ namespace oomph
     /// \short Overloaded position function: Return 2D position vector:
     /// (r(zeta),z(zeta)) of material point whose "Lagrangian coordinate"
     /// is given by zeta.
-    void position(const unsigned &t,
-                  const Vector<double> &zeta,
-                  Vector<double> &r) const
+    void position(const unsigned& t,
+                  const Vector<double>& zeta,
+                  Vector<double>& r) const
     {
       // Find number of nodes
       const unsigned n_node = this->nnode();
@@ -646,9 +646,9 @@ namespace oomph
 
     /// \short j-th time-derivative on object at current time:
     /// \f$ \frac{d^{j} r(\zeta)}{dt^j} \f$.
-    void dposition_dt(const Vector<double> &zeta,
-                      const unsigned &j,
-                      Vector<double> &drdt)
+    void dposition_dt(const Vector<double>& zeta,
+                      const unsigned& j,
+                      Vector<double>& drdt)
     {
       // Find number of nodes
       const unsigned n_node = this->nnode();
@@ -670,7 +670,7 @@ namespace oomph
       for (unsigned l = 0; l < n_node; l++)
       {
         // Get the timestepper
-        const TimeStepper *time_stepper_pt = node_pt(l)->time_stepper_pt();
+        const TimeStepper* time_stepper_pt = node_pt(l)->time_stepper_pt();
 
         // If we are doing an unsteady solve then calculate the derivative
         if (!time_stepper_pt->is_steady())
@@ -698,9 +698,9 @@ namespace oomph
     /// Adds fluid traction to pressure imposed by "pressure fct pointer"
     /// (which can be regarded as applying an external (i.e.
     /// "on the other side" of the fluid) pressure
-    inline virtual void get_pressure_fvk(const unsigned &ipt,
-                                         const double &r,
-                                         double &pressure) const
+    inline virtual void get_pressure_fvk(const unsigned& ipt,
+                                         const double& r,
+                                         double& pressure) const
     {
       pressure = 0.0;
 
@@ -711,8 +711,8 @@ namespace oomph
       const double q_value = q();
 
       // Get fluid element
-      FLUID_ELEMENT *ext_el_pt =
-        dynamic_cast<FLUID_ELEMENT *>(external_element_pt(0, ipt));
+      FLUID_ELEMENT* ext_el_pt =
+        dynamic_cast<FLUID_ELEMENT*>(external_element_pt(0, ipt));
       Vector<double> s_ext(external_element_local_coord(0, ipt));
 
       // Outer unit normal is vertically upward (in z direction)
@@ -730,7 +730,7 @@ namespace oomph
     }
 
     /// Output integration points (for checking of fsi setup)
-    void output_integration_points(std::ostream &outfile)
+    void output_integration_points(std::ostream& outfile)
     {
       // How many nodes do we have?
       unsigned nnod = this->nnode();
@@ -761,8 +761,8 @@ namespace oomph
         }
 
         // Get fluid element
-        FLUID_ELEMENT *ext_el_pt =
-          dynamic_cast<FLUID_ELEMENT *>(external_element_pt(0, ipt));
+        FLUID_ELEMENT* ext_el_pt =
+          dynamic_cast<FLUID_ELEMENT*>(external_element_pt(0, ipt));
         Vector<double> s_ext(external_element_local_coord(0, ipt));
 
         // Get veloc
@@ -778,16 +778,16 @@ namespace oomph
     }
 
     /// Output adjacent fluid elements (for checking of fsi setup)
-    void output_adjacent_fluid_elements(std::ostream &outfile,
-                                        const unsigned &nplot)
+    void output_adjacent_fluid_elements(std::ostream& outfile,
+                                        const unsigned& nplot)
     {
       // Loop over the integration points
       const unsigned n_intpt = this->integral_pt()->nweight();
       for (unsigned ipt = 0; ipt < n_intpt; ipt++)
       {
         // Get fluid element
-        FLUID_ELEMENT *ext_el_pt =
-          dynamic_cast<FLUID_ELEMENT *>(external_element_pt(0, ipt));
+        FLUID_ELEMENT* ext_el_pt =
+          dynamic_cast<FLUID_ELEMENT*>(external_element_pt(0, ipt));
 
         // Dump it
         ext_el_pt->output(outfile, nplot);
@@ -810,14 +810,14 @@ namespace oomph
 
     /// \short Perform any auxiliary node update fcts of the adjacent
     /// fluid elements
-    void update_in_external_interaction_geometric_fd(const unsigned &i)
+    void update_in_external_interaction_geometric_fd(const unsigned& i)
     {
       node_update_adjacent_fluid_elements();
     }
 
     /// \short Perform any auxiliary node update fcts of the adjacent
     /// fluid elements
-    void reset_in_external_interaction_geometric_fd(const unsigned &i)
+    void reset_in_external_interaction_geometric_fd(const unsigned& i)
     {
       node_update_adjacent_fluid_elements();
     }
@@ -827,7 +827,7 @@ namespace oomph
     void node_update_adjacent_fluid_elements()
     {
       // Don't update elements repeatedly
-      std::map<FLUID_ELEMENT *, bool> done;
+      std::map<FLUID_ELEMENT*, bool> done;
 
       // Number of integration points
       unsigned n_intpt = integral_pt()->nweight();
@@ -836,8 +836,8 @@ namespace oomph
       for (unsigned iint = 0; iint < n_intpt; iint++)
       {
         // Get fluid element that affects this integration point
-        FLUID_ELEMENT *el_f_pt =
-          dynamic_cast<FLUID_ELEMENT *>(external_element_pt(0, iint));
+        FLUID_ELEMENT* el_f_pt =
+          dynamic_cast<FLUID_ELEMENT*>(external_element_pt(0, iint));
 
         // Is there an adjacent fluid element?
         if (el_f_pt != 0)
@@ -855,7 +855,7 @@ namespace oomph
 
     /// \short Output FE representation of soln:
     /// r,w,dwdt,sigma_r_r,sigma_phi_phi at n_plot plot points
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       // Vector of local coordinates
       Vector<double> s(1);
@@ -892,7 +892,7 @@ namespace oomph
     /// \short Pointer to the ratio, \f$ Q \f$ , of the stress used to
     /// non-dimensionalise the fluid stresses to the stress used to
     /// non-dimensionalise the solid stresses.
-    double *Q_pt;
+    double* Q_pt;
   };
 
 } // namespace oomph

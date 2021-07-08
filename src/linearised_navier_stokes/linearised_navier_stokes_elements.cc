@@ -56,9 +56,9 @@ namespace oomph
   /// at specified previous timestep (t=0 present; t>0 previous timestep).
   /// Specified number of plot points in each coordinate direction.
   //=======================================================================
-  void LinearisedNavierStokesEquations::output_veloc(std::ostream &outfile,
-                                                     const unsigned &nplot,
-                                                     const unsigned &t)
+  void LinearisedNavierStokesEquations::output_veloc(std::ostream& outfile,
+                                                     const unsigned& nplot,
+                                                     const unsigned& t)
   {
     // Determine number of nodes in element
     const unsigned n_node = nnode();
@@ -142,8 +142,8 @@ namespace oomph
   /// in tecplot format. Specified number of plot points in each
   /// coordinate direction.
   //=======================================================================
-  void LinearisedNavierStokesEquations::output(std::ostream &outfile,
-                                               const unsigned &nplot)
+  void LinearisedNavierStokesEquations::output(std::ostream& outfile,
+                                               const unsigned& nplot)
   {
     // Provide storage for vector of local coordinates
     Vector<double> s(DIM);
@@ -192,8 +192,8 @@ namespace oomph
   /// r, z, U^C, U^S, V^C, V^S, W^C, W^S, P^C, P^S
   /// Specified number of plot points in each coordinate direction.
   //=======================================================================
-  void LinearisedNavierStokesEquations::output(FILE *file_pt,
-                                               const unsigned &nplot)
+  void LinearisedNavierStokesEquations::output(FILE* file_pt,
+                                               const unsigned& nplot)
   {
     // Provide storage for vector of local coordinates
     Vector<double> s(2);
@@ -246,9 +246,9 @@ namespace oomph
   /// \f$ \cos(k \theta) = \sin(k \theta) = 1/\sqrt{2} \f$.
   //=======================================================================
   void LinearisedNavierStokesEquations::strain_rate(
-    const Vector<double> &s,
-    DenseMatrix<double> &strainrate,
-    const unsigned &real) const
+    const Vector<double>& s,
+    DenseMatrix<double>& strainrate,
+    const unsigned& real) const
   {
 #ifdef PARANOID
     if ((strainrate.ncol() != DIM) || (strainrate.nrow() != DIM))
@@ -362,9 +362,9 @@ namespace oomph
   //=======================================================================
   void LinearisedNavierStokesEquations::
     fill_in_generic_residual_contribution_linearised_nst(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix,
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
       unsigned flag)
   {
     // Get the time from the first node in the element
@@ -781,7 +781,7 @@ namespace oomph
   /// Number of values (pinned or dofs) required at node n
   //========================================================================
   unsigned LinearisedQCrouzeixRaviartElement::required_nvalue(
-    const unsigned &n) const
+    const unsigned& n) const
   {
     return Initial_Nvalue[n];
   }

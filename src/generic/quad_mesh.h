@@ -63,13 +63,13 @@ namespace oomph
     QuadMeshBase() {}
 
     /// Broken copy constructor
-    QuadMeshBase(const QuadMeshBase &node)
+    QuadMeshBase(const QuadMeshBase& node)
     {
       BrokenCopy::broken_copy("QuadMeshBase");
     }
 
     /// Broken assignment operator
-    void operator=(const QuadMeshBase &)
+    void operator=(const QuadMeshBase&)
     {
       BrokenCopy::broken_assign("QuadMeshBase");
     }
@@ -87,7 +87,7 @@ namespace oomph
 
     /// \short Setup lookup schemes which establish whic elements are located
     /// next to mesh's boundaries. Doc in outfile (if it's open).
-    void setup_boundary_element_info(std::ostream &outfile);
+    void setup_boundary_element_info(std::ostream& outfile);
   };
 
 } // namespace oomph

@@ -67,13 +67,13 @@ public:
   void doc_solution();
 
   /// Return value of the "load" on the elastically supported ring
-  double &load()
+  double& load()
   {
     return *Load_pt->value_pt(0);
   }
 
   /// Access to DocInfo object
-  DocInfo &doc_info()
+  DocInfo& doc_info()
   {
     return Doc_info;
   }
@@ -83,7 +83,7 @@ private:
   ofstream Trace_file;
 
   /// \short Pointer to data item that stores the "load" on the ring
-  Data *Load_pt;
+  Data* Load_pt;
 
   /// Doc info object
   DocInfo Doc_info;
@@ -101,7 +101,7 @@ GeomObjectAsGeneralisedElementProblem::GeomObjectAsGeneralisedElementProblem()
 
   // Build GeomObject that's been upgraded to a GeneralisedElement
   // GeneralisedElement*
-  ElasticallySupportedRingElement *geom_object_element_pt =
+  ElasticallySupportedRingElement* geom_object_element_pt =
     new ElasticallySupportedRingElement(x_c, y_c, R);
 
   // Set the stiffness of the elastic support
@@ -160,7 +160,7 @@ void GeomObjectAsGeneralisedElementProblem::doc_solution()
   for (unsigned i = 0; i < npts; i++)
   {
     zeta[0] = 2.0 * MathematicalConstants::Pi * double(i) / double(npts - 1);
-    static_cast<ElasticallySupportedRingElement *>(mesh_pt()->element_pt(0))
+    static_cast<ElasticallySupportedRingElement*>(mesh_pt()->element_pt(0))
       ->position(zeta, r);
     some_file << r[0] << " " << r[1] << std::endl;
   }
@@ -168,10 +168,10 @@ void GeomObjectAsGeneralisedElementProblem::doc_solution()
 
   // Write "load" and vertical position of the ring's centre
   Trace_file
-    << static_cast<ElasticallySupportedRingElement *>(mesh_pt()->element_pt(0))
+    << static_cast<ElasticallySupportedRingElement*>(mesh_pt()->element_pt(0))
          ->load()
     << " "
-    << static_cast<ElasticallySupportedRingElement *>(mesh_pt()->element_pt(0))
+    << static_cast<ElasticallySupportedRingElement*>(mesh_pt()->element_pt(0))
          ->y_c()
     << " " << std::endl;
 

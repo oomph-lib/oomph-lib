@@ -48,8 +48,8 @@ namespace oomph
   /// Return the node at the specified local coordinate
   //==================================================================
   template<unsigned NNODE_1D>
-  Node *QElement<1, NNODE_1D>::get_node_at_local_coordinate(
-    const Vector<double> &s) const
+  Node* QElement<1, NNODE_1D>::get_node_at_local_coordinate(
+    const Vector<double>& s) const
   {
     // Load the tolerance into a local variable
     double tol = FiniteElement::Node_location_tolerance;
@@ -101,7 +101,7 @@ namespace oomph
   /// Shape function for specific QElement<1,..>
   //=======================================================================
   template<unsigned NNODE_1D>
-  void QElement<1, NNODE_1D>::shape(const Vector<double> &s, Shape &psi) const
+  void QElement<1, NNODE_1D>::shape(const Vector<double>& s, Shape& psi) const
   {
     // Local storage for the shape functions
     double Psi[NNODE_1D];
@@ -120,9 +120,9 @@ namespace oomph
   /// Derivatives of shape functions for specific  QElement<1,..>
   //=======================================================================
   template<unsigned NNODE_1D>
-  void QElement<1, NNODE_1D>::dshape_local(const Vector<double> &s,
-                                           Shape &psi,
-                                           DShape &dpsids) const
+  void QElement<1, NNODE_1D>::dshape_local(const Vector<double>& s,
+                                           Shape& psi,
+                                           DShape& dpsids) const
   {
     // Local storage
     double Psi[NNODE_1D];
@@ -144,10 +144,10 @@ namespace oomph
   /// d2psids(i,0) = \f$ d^2 \psi_j / d s^2 \f$
   //=======================================================================
   template<unsigned NNODE_1D>
-  void QElement<1, NNODE_1D>::d2shape_local(const Vector<double> &s,
-                                            Shape &psi,
-                                            DShape &dpsids,
-                                            DShape &d2psids) const
+  void QElement<1, NNODE_1D>::d2shape_local(const Vector<double>& s,
+                                            Shape& psi,
+                                            DShape& dpsids,
+                                            DShape& d2psids) const
   {
     // Local storage for the shape functions
     double Psi[NNODE_1D];
@@ -171,7 +171,7 @@ namespace oomph
   /// The output function for general 1D QElements
   //=======================================================================
   template<unsigned NNODE_1D>
-  void QElement<1, NNODE_1D>::output(std::ostream &outfile)
+  void QElement<1, NNODE_1D>::output(std::ostream& outfile)
   {
     output(outfile, NNODE_1D);
   }
@@ -180,8 +180,8 @@ namespace oomph
   /// The output function for n_plot points in each coordinate direction
   //=======================================================================
   template<unsigned NNODE_1D>
-  void QElement<1, NNODE_1D>::output(std::ostream &outfile,
-                                     const unsigned &n_plot)
+  void QElement<1, NNODE_1D>::output(std::ostream& outfile,
+                                     const unsigned& n_plot)
   {
     // Local variables
     Vector<double> s(1);
@@ -210,7 +210,7 @@ namespace oomph
   /// C style output function for general 1D QElements
   //=======================================================================
   template<unsigned NNODE_1D>
-  void QElement<1, NNODE_1D>::output(FILE *file_pt)
+  void QElement<1, NNODE_1D>::output(FILE* file_pt)
   {
     output(file_pt, NNODE_1D);
   }
@@ -219,7 +219,7 @@ namespace oomph
   /// C style output function for n_plot points in each coordinate direction
   //=======================================================================
   template<unsigned NNODE_1D>
-  void QElement<1, NNODE_1D>::output(FILE *file_pt, const unsigned &n_plot)
+  void QElement<1, NNODE_1D>::output(FILE* file_pt, const unsigned& n_plot)
   {
     // Local variables
     Vector<double> s(1);
@@ -261,8 +261,8 @@ namespace oomph
   /// Return the node at the specified local coordinate
   //==================================================================
   template<unsigned NNODE_1D>
-  Node *QElement<2, NNODE_1D>::get_node_at_local_coordinate(
-    const Vector<double> &s) const
+  Node* QElement<2, NNODE_1D>::get_node_at_local_coordinate(
+    const Vector<double>& s) const
   {
     // Load the tolerance into a local variable
     double tol = FiniteElement::Node_location_tolerance;
@@ -315,7 +315,7 @@ namespace oomph
   ///
   //=======================================================================
   template<unsigned NNODE_1D>
-  void QElement<2, NNODE_1D>::shape(const Vector<double> &s, Shape &psi) const
+  void QElement<2, NNODE_1D>::shape(const Vector<double>& s, Shape& psi) const
   {
     // Local storage
     double Psi[2][NNODE_1D];
@@ -343,9 +343,9 @@ namespace oomph
   /// Derivatives of shape functions for specific  QElement<2,..>
   //=======================================================================
   template<unsigned NNODE_1D>
-  void QElement<2, NNODE_1D>::dshape_local(const Vector<double> &s,
-                                           Shape &psi,
-                                           DShape &dpsids) const
+  void QElement<2, NNODE_1D>::dshape_local(const Vector<double>& s,
+                                           Shape& psi,
+                                           DShape& dpsids) const
   {
     // Local storage
     double Psi[2][NNODE_1D];
@@ -380,10 +380,10 @@ namespace oomph
   /// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$
   //=======================================================================
   template<unsigned NNODE_1D>
-  void QElement<2, NNODE_1D>::d2shape_local(const Vector<double> &s,
-                                            Shape &psi,
-                                            DShape &dpsids,
-                                            DShape &d2psids) const
+  void QElement<2, NNODE_1D>::d2shape_local(const Vector<double>& s,
+                                            Shape& psi,
+                                            DShape& dpsids,
+                                            DShape& d2psids) const
   {
     // Local storage
     double Psi[2][NNODE_1D];
@@ -425,7 +425,7 @@ namespace oomph
   /// The output function for QElement<2,NNODE_1D>
   //===========================================================
   template<unsigned NNODE_1D>
-  void QElement<2, NNODE_1D>::output(std::ostream &outfile)
+  void QElement<2, NNODE_1D>::output(std::ostream& outfile)
   {
     output(outfile, NNODE_1D);
   }
@@ -434,8 +434,8 @@ namespace oomph
   /// The output function for n_plot points in each coordinate direction
   //=======================================================================
   template<unsigned NNODE_1D>
-  void QElement<2, NNODE_1D>::output(std::ostream &outfile,
-                                     const unsigned &n_plot)
+  void QElement<2, NNODE_1D>::output(std::ostream& outfile,
+                                     const unsigned& n_plot)
   {
     // Local variables
     Vector<double> s(2);
@@ -469,7 +469,7 @@ namespace oomph
   /// C-style output function for QElement<2,NNODE_1D>
   //===========================================================
   template<unsigned NNODE_1D>
-  void QElement<2, NNODE_1D>::output(FILE *file_pt)
+  void QElement<2, NNODE_1D>::output(FILE* file_pt)
   {
     output(file_pt, NNODE_1D);
   }
@@ -478,7 +478,7 @@ namespace oomph
   /// C-style  output function for n_plot points in each coordinate direction
   //=======================================================================
   template<unsigned NNODE_1D>
-  void QElement<2, NNODE_1D>::output(FILE *file_pt, const unsigned &n_plot)
+  void QElement<2, NNODE_1D>::output(FILE* file_pt, const unsigned& n_plot)
   {
     // Local variables
     Vector<double> s(2);
@@ -524,8 +524,8 @@ namespace oomph
   /// Return the node at the specified local coordinate
   //==================================================================
   template<unsigned NNODE_1D>
-  Node *QElement<3, NNODE_1D>::get_node_at_local_coordinate(
-    const Vector<double> &s) const
+  Node* QElement<3, NNODE_1D>::get_node_at_local_coordinate(
+    const Vector<double>& s) const
   {
     // Load the tolerance into a local variable
     double tol = FiniteElement::Node_location_tolerance;
@@ -577,7 +577,7 @@ namespace oomph
   /// Shape function for specific QElement<3,..>
   //=======================================================================
   template<unsigned NNODE_1D>
-  void QElement<3, NNODE_1D>::shape(const Vector<double> &s, Shape &psi) const
+  void QElement<3, NNODE_1D>::shape(const Vector<double>& s, Shape& psi) const
   {
     // Local storage
     double Psi[3][NNODE_1D];
@@ -611,9 +611,9 @@ namespace oomph
   /// Derivatives of shape functions for specific  QElement<3,..>
   //=======================================================================
   template<unsigned NNODE_1D>
-  void QElement<3, NNODE_1D>::dshape_local(const Vector<double> &s,
-                                           Shape &psi,
-                                           DShape &dpsids) const
+  void QElement<3, NNODE_1D>::dshape_local(const Vector<double>& s,
+                                           Shape& psi,
+                                           DShape& dpsids) const
   {
     // Local storage
     double Psi[3][NNODE_1D];
@@ -659,10 +659,10 @@ namespace oomph
   /// d2psids(i,5) = \f$ \partial^2 \psi_j / \partial s_1 \partial s_2 \f$
   //=======================================================================
   template<unsigned NNODE_1D>
-  void QElement<3, NNODE_1D>::d2shape_local(const Vector<double> &s,
-                                            Shape &psi,
-                                            DShape &dpsids,
-                                            DShape &d2psids) const
+  void QElement<3, NNODE_1D>::d2shape_local(const Vector<double>& s,
+                                            Shape& psi,
+                                            DShape& dpsids,
+                                            DShape& d2psids) const
   {
     // Local storage
     double Psi[3][NNODE_1D];
@@ -716,7 +716,7 @@ namespace oomph
   /// The output function for QElement<3,NNODE_1D>
   //===========================================================
   template<unsigned NNODE_1D>
-  void QElement<3, NNODE_1D>::output(std::ostream &outfile)
+  void QElement<3, NNODE_1D>::output(std::ostream& outfile)
   {
     output(outfile, NNODE_1D);
   }
@@ -725,8 +725,8 @@ namespace oomph
   /// The output function for n_plot points in each coordinate direction
   //=======================================================================
   template<unsigned NNODE_1D>
-  void QElement<3, NNODE_1D>::output(std::ostream &outfile,
-                                     const unsigned &n_plot)
+  void QElement<3, NNODE_1D>::output(std::ostream& outfile,
+                                     const unsigned& n_plot)
   {
     // Local variables
     Vector<double> s(3);
@@ -765,7 +765,7 @@ namespace oomph
   /// C-style output function for QElement<3,NNODE_1D>
   //===========================================================
   template<unsigned NNODE_1D>
-  void QElement<3, NNODE_1D>::output(FILE *file_pt)
+  void QElement<3, NNODE_1D>::output(FILE* file_pt)
   {
     output(file_pt, NNODE_1D);
   }
@@ -774,7 +774,7 @@ namespace oomph
   /// C-style output function for n_plot points in each coordinate direction
   //=======================================================================
   template<unsigned NNODE_1D>
-  void QElement<3, NNODE_1D>::output(FILE *file_pt, const unsigned &n_plot)
+  void QElement<3, NNODE_1D>::output(FILE* file_pt, const unsigned& n_plot)
   {
     // Local variables
     Vector<double> s(3);

@@ -104,7 +104,7 @@ namespace GlobalParameters
   DocInfo Doc_info;
 
   // Pointer to the output stream -- defaults to oomph_info
-  std::ostream *Stream_pt;
+  std::ostream* Stream_pt;
 
   /// \short Problem specific parameters:
   ///------------------------------------
@@ -148,7 +148,7 @@ namespace GlobalParameters
   double Centre = Lx / 2.0;
 
   /// Get the exact solution, u, at the spatial position, x
-  void get_simple_exact_u(const Vector<double> &x, Vector<double> &u)
+  void get_simple_exact_u(const Vector<double>& x, Vector<double>& u)
   {
     // Initialise a variable to store the radial distance
     double r = std::sqrt((x[0] - Centre) * (x[0] - Centre) +
@@ -192,10 +192,10 @@ namespace GlobalParameters
 
     /// \short Overwrite the pure PML mapping coefficient function to return the
     /// coeffcients proposed by Bermudez et al
-    std::complex<double> gamma(const double &nu_i,
-                               const double &pml_width_i,
-                               const double &k_squared_local,
-                               const double &alpha_shift)
+    std::complex<double> gamma(const double& nu_i,
+                               const double& pml_width_i,
+                               const double& k_squared_local,
+                               const double& alpha_shift)
     {
       // The "effective k^2" is shifted, so we shift the k used in the
       // transformation too
@@ -209,7 +209,7 @@ namespace GlobalParameters
   }; // End of TestPMLMapping
 
   /// Set the new PML mapping
-  TestPMLMapping *Test_pml_mapping_pt = new TestPMLMapping;
+  TestPMLMapping* Test_pml_mapping_pt = new TestPMLMapping;
 
   /// \short The choice of whether or not to enable the new test mapping
   ///    1 = Enable test mapping
@@ -221,7 +221,7 @@ namespace GlobalParameters
 
   /// \short Function to determine whether or not a point lies in the centre
   /// of the mesh (in the pinned region)
-  bool is_in_pinned_region(const Vector<double> &x)
+  bool is_in_pinned_region(const Vector<double>& x)
   {
     // Check if the element lies in the central cube region
     return (abs(x[0] - GlobalParameters::Centre) <
@@ -247,7 +247,7 @@ namespace Smoother_Factory_Function_Helper
 
   /// \short Returns a pointer to a Smoother object which is to be used as
   /// the pre-smoother
-  HelmholtzSmoother *set_pre_smoother()
+  HelmholtzSmoother* set_pre_smoother()
   {
     // Create a new DampedJacobi object
     return new ComplexDampedJacobi<CRDoubleMatrix>(Omega);
@@ -255,7 +255,7 @@ namespace Smoother_Factory_Function_Helper
 
   /// \short Returns a pointer to a Smoother object which is to be used as
   /// the post-smoother
-  HelmholtzSmoother *set_post_smoother()
+  HelmholtzSmoother* set_post_smoother()
   {
     // Create a new DampedJacobi object
     return new ComplexDampedJacobi<CRDoubleMatrix>(Omega);
@@ -309,10 +309,10 @@ public:
 
 private:
   /// Pointer to the "bulk" mesh
-  RefineableSimpleCubicMesh<ELEMENT> *Bulk_mesh_pt;
+  RefineableSimpleCubicMesh<ELEMENT>* Bulk_mesh_pt;
 
   /// Overload the make_new_problem function to return an object of this class
-  HelmholtzMGProblem *make_new_problem()
+  HelmholtzMGProblem* make_new_problem()
   {
     // Return a new problem pointer
     return new PMLStructuredCubicHelmholtz<ELEMENT>;
@@ -320,7 +320,7 @@ private:
 
   /// \short Overload the mg_bulk_mesh_pt function to return a pointer to the
   /// "refineable" portion of the mesh
-  TreeBasedRefineableMeshBase *mg_bulk_mesh_pt()
+  TreeBasedRefineableMeshBase* mg_bulk_mesh_pt()
   {
     // Return the pointer to the bulk mesh
     return Bulk_mesh_pt;
@@ -387,7 +387,7 @@ PMLStructuredCubicHelmholtz<ELEMENT>::PMLStructuredCubicHelmholtz()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to Helmholtz bulk element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
     // If the upcast was successful
     if (el_pt != 0)
@@ -425,11 +425,11 @@ PMLStructuredCubicHelmholtz<ELEMENT>::~PMLStructuredCubicHelmholtz()
   if (GlobalParameters::Linear_solver_flag == 1)
   {
     // Delete the MG solver pointers
-    delete dynamic_cast<HelmholtzFGMRESMG<CRDoubleMatrix> *>(linear_solver_pt())
+    delete dynamic_cast<HelmholtzFGMRESMG<CRDoubleMatrix>*>(linear_solver_pt())
       ->preconditioner_pt();
 
     // Set the pointer to null
-    dynamic_cast<HelmholtzFGMRESMG<CRDoubleMatrix> *>(linear_solver_pt())
+    dynamic_cast<HelmholtzFGMRESMG<CRDoubleMatrix>*>(linear_solver_pt())
       ->preconditioner_pt() = 0;
 
     // Delete the MG solver pointers
@@ -460,7 +460,7 @@ template<class ELEMENT>
 void PMLStructuredCubicHelmholtz<ELEMENT>::set_gmres_multigrid_solver()
 {
   // Create linear solver
-  HelmholtzFGMRESMG<CRDoubleMatrix> *solver_pt =
+  HelmholtzFGMRESMG<CRDoubleMatrix>* solver_pt =
     new HelmholtzFGMRESMG<CRDoubleMatrix>;
 
   // Set the number of iterations
@@ -481,7 +481,7 @@ void PMLStructuredCubicHelmholtz<ELEMENT>::set_gmres_multigrid_solver()
 
   // This preconditioner uses multigrid on the block version of the full
   // matrix. 2 V-cycles will be used here per preconditioning step
-  HelmholtzMGPreconditioner<3> *prec_pt =
+  HelmholtzMGPreconditioner<3>* prec_pt =
     new HelmholtzMGPreconditioner<3>(this);
 
   // Set preconditioner
@@ -554,7 +554,7 @@ void PMLStructuredCubicHelmholtz<ELEMENT>::apply_boundary_conditions()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to Helmholtz bulk element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
     // If the upcast was successful
     if (el_pt != 0)
@@ -572,7 +572,7 @@ void PMLStructuredCubicHelmholtz<ELEMENT>::apply_boundary_conditions()
         for (unsigned i = 0; i < nnode; i++)
         {
           // Create a node pointer to store the i-th node in the element
-          Node *node_pt = el_pt->node_pt(i);
+          Node* node_pt = el_pt->node_pt(i);
 
           // Get the spatial position of this node
           for (unsigned k = 0; k < 3; k++)
@@ -617,7 +617,7 @@ void PMLStructuredCubicHelmholtz<ELEMENT>::apply_boundary_conditions()
     for (unsigned n = 0; n < n_node; n++)
     {
       // All of these nodes sides are PMLs so pin to 0
-      Node *boundary_node_pt = Bulk_mesh_pt->boundary_node_pt(b, n);
+      Node* boundary_node_pt = Bulk_mesh_pt->boundary_node_pt(b, n);
 
       // Pin the (real) dof at this node
       boundary_node_pt->pin(0);
@@ -668,7 +668,7 @@ void PMLStructuredCubicHelmholtz<ELEMENT>::enable_pmls()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to Helmholtz bulk element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
     // If the upcast was successful
     if (el_pt != 0)
@@ -722,7 +722,7 @@ void PMLStructuredCubicHelmholtz<ELEMENT>::actions_after_adapt()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to Helmholtz bulk element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
     // If the upcast was successful
     if (el_pt != 0)
@@ -846,7 +846,7 @@ void PMLStructuredCubicHelmholtz<ELEMENT>::doc_solution()
     double el_norm = 0.0;
 
     // Upcast from GeneralisedElement to Helmholtz bulk element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
     // If the upcast was successful
     if (el_pt != 0)
@@ -902,7 +902,7 @@ void PMLStructuredCubicHelmholtz<ELEMENT>::doc_solution()
 //=====================================================start_of_main======
 /// Solve 3D Helmholtz problem for a point source in a unit cube
 //========================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   //------------------------
   // Command line arguments
@@ -989,7 +989,7 @@ int main(int argc, char **argv)
   // Set up the problem
   //-------------------
   // Initialise a null pointer to the class Problem
-  Problem *problem_pt = 0;
+  Problem* problem_pt = 0;
 
   // Set the problem pointer depending on the input (defaulted to nnode_1d=2)
   if (GlobalParameters::Nnode_1d == 2)

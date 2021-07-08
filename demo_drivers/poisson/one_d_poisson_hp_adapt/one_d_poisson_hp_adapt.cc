@@ -51,19 +51,19 @@ namespace ArcTanSolnForPoisson
   double Alpha = 100.0;
 
   /// Exact solution as a Vector
-  void get_exact_u(const Vector<double> &x, Vector<double> &u)
+  void get_exact_u(const Vector<double>& x, Vector<double>& u)
   {
     u[0] = atan(Alpha * (x[0] - 0.5));
   }
 
   /// Exact gradient as a Vector
-  void get_exact_gradient(const Vector<double> &x, Vector<double> &dudx)
+  void get_exact_gradient(const Vector<double>& x, Vector<double>& dudx)
   {
     dudx[0] = Alpha / (1.0 + (Alpha * (x[0] - 0.5)) * (Alpha * (x[0] - 0.5)));
   }
 
   /// Source function required to make the solution above an exact solution
-  void get_source(const Vector<double> &x, double &source)
+  void get_source(const Vector<double>& x, double& source)
   {
     // Cache tan( atan(Alpha*(x[0]-0.5)) ) term
     double tan_term = tan(atan(Alpha * (x[0] - 0.5)));
@@ -89,25 +89,25 @@ class ModalPoissonEquations : public virtual FiniteElement
 public:
   /// \short Function pointer to source function fct(x,f(x)) --
   /// x is a Vector!
-  typedef void (*PoissonSourceFctPt)(const Vector<double> &x, double &f);
+  typedef void (*PoissonSourceFctPt)(const Vector<double>& x, double& f);
 
   /// \short Function pointer to a diffusion function fxt(x,f(x))
-  typedef void (*PoissonDiffFctPt)(const Vector<double> &x, double &f);
+  typedef void (*PoissonDiffFctPt)(const Vector<double>& x, double& f);
 
   /// Constructor (must initialise the Source_fct_pt to null)
   ModalPoissonEquations() : Source_fct_pt(0), Diff_fct_pt(0) {}
 
   /// Access function: Nodal function value at local node n
   /// Uses suitably interpolated value for hanging nodes.
-  virtual double u(const unsigned &n) const = 0;
+  virtual double u(const unsigned& n) const = 0;
 
   /// Number of basis functions
   virtual unsigned nbasis() const = 0;
 
-  virtual void basis(const Vector<double> &s, Shape &basis) const = 0;
+  virtual void basis(const Vector<double>& s, Shape& basis) const = 0;
 
   /// Output with default number of plot points
-  void output(ostream &outfile)
+  void output(ostream& outfile)
   {
     unsigned nplot = 5;
     output(outfile, nplot);
@@ -115,7 +115,7 @@ public:
 
   /// \short Output FE representation of soln: x,y,u or x,y,z,u at
   /// Nplot^DIM plot points
-  void output(ostream &outfile, const unsigned &nplot)
+  void output(ostream& outfile, const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(DIM);
@@ -153,8 +153,8 @@ public:
   }
 
   /// Output exact soln: x,y,u_exact or x,y,z,u_exact at nplot^DIM plot points
-  void output_fct(ostream &outfile,
-                  const unsigned &nplot,
+  void output_fct(ostream& outfile,
+                  const unsigned& nplot,
                   FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
   {
     // Vector of local coordinates
@@ -195,9 +195,9 @@ public:
   /// nplot^DIM plot points (dummy time-dependent version to
   /// keep intel compiler happy)
   virtual void output_fct(
-    ostream &outfile,
-    const unsigned &nplot,
-    const double &time,
+    ostream& outfile,
+    const unsigned& nplot,
+    const double& time,
     FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
   {
     oomph_info << "No time-dep. output_fct() for Poisson elements "
@@ -206,10 +206,10 @@ public:
   }
 
   /// Get error against and norm of exact solution
-  void compute_error(ostream &outfile,
+  void compute_error(ostream& outfile,
                      FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-                     double &error,
-                     double &norm)
+                     double& error,
+                     double& norm)
   {
     // Initialise
     error = 0.0;
@@ -360,11 +360,11 @@ public:
    }*/
 
   /// Dummy, time dependent error checker
-  void compute_error(ostream &outfile,
+  void compute_error(ostream& outfile,
                      FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
-                     const double &time,
-                     double &error,
-                     double &norm)
+                     const double& time,
+                     double& error,
+                     double& norm)
   {
     oomph_info << "No time-dep. compute_error() for Poisson elements "
                << std::endl;
@@ -372,7 +372,7 @@ public:
   }
 
   /// Access function: Pointer to source function
-  PoissonSourceFctPt &source_fct_pt()
+  PoissonSourceFctPt& source_fct_pt()
   {
     return Source_fct_pt;
   }
@@ -387,8 +387,8 @@ public:
   /// virtual to allow overloading in multi-physics problems where
   /// the strength of the source function might be determined by
   /// another system of equations
-  inline virtual void get_source_poisson(const Vector<double> &x,
-                                         double &source) const
+  inline virtual void get_source_poisson(const Vector<double>& x,
+                                         double& source) const
   {
     // If no source function has been set, return zero
     if (Source_fct_pt == 0)
@@ -403,7 +403,7 @@ public:
   }
 
   /// Access function: Pointer to diffusivity function
-  PoissonDiffFctPt &diff_fct_pt()
+  PoissonDiffFctPt& diff_fct_pt()
   {
     return Diff_fct_pt;
   }
@@ -418,7 +418,7 @@ public:
   /// virtual to allow overloading in multi-physics problems where
   /// the strength of the diffusivity function might be determined by
   /// another system of equations
-  inline virtual void get_diff(const Vector<double> &x, double &diff) const
+  inline virtual void get_diff(const Vector<double>& x, double& diff) const
   {
     // If no source function has been set, return one
     if (Diff_fct_pt == 0)
@@ -434,8 +434,8 @@ public:
 
   /// Get flux: flux[i] = du/dx_i
   // Needs to know the p_order of the element to use the basis functions
-  void get_flux(const Vector<double> &s,
-                Vector<double> &flux,
+  void get_flux(const Vector<double>& s,
+                Vector<double>& flux,
                 unsigned p_order) const
   {
     // Find out how many nodes there are
@@ -471,7 +471,7 @@ public:
   }
 
   /// Add the element's contribution to its residual vector (wrapper)
-  void fill_in_contribution_to_residuals(Vector<double> &residuals)
+  void fill_in_contribution_to_residuals(Vector<double>& residuals)
   {
     // Create a dummy matrix
     DenseMatrix<double> dummy(1);
@@ -482,15 +482,15 @@ public:
 
   /// Add the element's contribution to its residual vector and
   /// element Jacobian matrix (wrapper)
-  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                        DenseMatrix<double> &jacobian)
+  void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                        DenseMatrix<double>& jacobian)
   {
     // Call the generic routine with the flag set to 1
     add_generic_residual_contribution(residuals, jacobian, 1);
   }
 
   /// Return FE representation of function value u(s) at local coordinate s
-  inline double interpolated_u(const Vector<double> &s) const
+  inline double interpolated_u(const Vector<double>& s) const
   {
     // Find number of basis functions
     unsigned n_basis = nbasis();
@@ -522,29 +522,29 @@ public:
 protected:
   /// \short Shape/test functions and derivs w.r.t. to global coords at
   /// local coord. s; return  Jacobian of mapping
-  virtual double dshape_dbasis_and_dtest_eulerian(const Vector<double> &s,
-                                                  Shape &psi,
-                                                  DShape &dpsidx,
-                                                  Shape &basis,
-                                                  DShape &dbasisdx,
-                                                  Shape &test,
-                                                  DShape &dtestdx) const = 0;
+  virtual double dshape_dbasis_and_dtest_eulerian(const Vector<double>& s,
+                                                  Shape& psi,
+                                                  DShape& dpsidx,
+                                                  Shape& basis,
+                                                  DShape& dbasisdx,
+                                                  Shape& test,
+                                                  DShape& dtestdx) const = 0;
 
   /// \short Shape/test functions and derivs w.r.t. to global coords at
   /// integration point ipt; return  Jacobian of mapping
   virtual double dshape_dbasis_and_dtest_eulerian_at_knot(
-    const unsigned &ipt,
-    Shape &psi,
-    DShape &dpsidx,
-    Shape &basis,
-    DShape &dbasisdx,
-    Shape &test,
-    DShape &dtestdx) const = 0;
+    const unsigned& ipt,
+    Shape& psi,
+    DShape& dpsidx,
+    Shape& basis,
+    DShape& dbasisdx,
+    Shape& test,
+    DShape& dtestdx) const = 0;
 
   /// \short Compute element residual Vector only (if flag=and/or element
   /// Jacobian matrix
-  virtual void add_generic_residual_contribution(Vector<double> &residuals,
-                                                 DenseMatrix<double> &jacobian,
+  virtual void add_generic_residual_contribution(Vector<double>& residuals,
+                                                 DenseMatrix<double>& jacobian,
                                                  unsigned flag)
   {
     // Find out how many nodes there are
@@ -696,7 +696,7 @@ public:
 
   /// Broken copy constructor
   RefineableModalPoissonEquations(
-    const RefineableModalPoissonEquations<DIM> &dummy)
+    const RefineableModalPoissonEquations<DIM>& dummy)
   {
     BrokenCopy::broken_copy("RefineableModalPoissonEquations");
   }
@@ -713,7 +713,7 @@ public:
   }
 
   /// Get 'flux' for Z2 error recovery:  Standard flux.from Poisson equations
-  void get_Z2_flux(const Vector<double> &s, Vector<double> &flux)
+  void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
   {
     this->get_flux(s, flux, 2);
   }
@@ -728,7 +728,7 @@ public:
   /// Note: Given the generality of the interface (this function
   /// is usually called from black-box documentation or interpolation routines),
   /// the values Vector sets its own size in here.
-  void get_interpolated_values(const Vector<double> &s, Vector<double> &values)
+  void get_interpolated_values(const Vector<double>& s, Vector<double>& values)
   {
     // Set size of Vector: u
     values.resize(1);
@@ -759,9 +759,9 @@ public:
   /// Note: Given the generality of the interface (this function
   /// is usually called from black-box documentation or interpolation routines),
   /// the values Vector sets its own size in here.
-  void get_interpolated_values(const unsigned &t,
-                               const Vector<double> &s,
-                               Vector<double> &values)
+  void get_interpolated_values(const unsigned& t,
+                               const Vector<double>& s,
+                               Vector<double>& values)
   {
     if (t != 0)
     {
@@ -784,7 +784,7 @@ public:
   ///  Further build: Copy source function pointer from father element
   void further_build()
   {
-    this->Source_fct_pt = dynamic_cast<RefineableModalPoissonEquations<DIM> *>(
+    this->Source_fct_pt = dynamic_cast<RefineableModalPoissonEquations<DIM>*>(
                             this->father_element_pt())
                             ->source_fct_pt();
   }
@@ -794,20 +794,20 @@ private:
   /// Jacobian matrix
   /// flag=1: compute both
   /// flag=0: compute only residual vector
-  void fill_in_generic_residual_contribution(Vector<double> &residuals,
-                                             DenseMatrix<double> &jacobian,
-                                             const unsigned &flag);
+  void fill_in_generic_residual_contribution(Vector<double>& residuals,
+                                             DenseMatrix<double>& jacobian,
+                                             const unsigned& flag);
 
   /// \short Compute derivatives of elemental residual vector with respect
   /// to nodal coordinates. Overwrites default implementation in
   /// FiniteElement base class.
   /// dresidual_dnodal_coordinates(l,i,j) = d res(l) / dX_{ij}
   virtual void get_dresidual_dnodal_coordinates(
-    RankThreeTensor<double> &dresidual_dnodal_coordinates);
+    RankThreeTensor<double>& dresidual_dnodal_coordinates);
 
-  void get_source_gradient(unsigned int &,
-                           oomph::Vector<double> &,
-                           oomph::Vector<double> &)
+  void get_source_gradient(unsigned int&,
+                           oomph::Vector<double>&,
+                           oomph::Vector<double>&)
   {
     std::string error_message = "get_source_gradient() is ";
     error_message += "not implemented for this element \n";
@@ -825,7 +825,7 @@ private:
 //======================================================================
 template<unsigned DIM>
 void RefineableModalPoissonEquations<DIM>::get_dresidual_dnodal_coordinates(
-  RankThreeTensor<double> &dresidual_dnodal_coordinates)
+  RankThreeTensor<double>& dresidual_dnodal_coordinates)
 {
   // Find out how many nodes there are
   unsigned n_node = nnode();
@@ -866,7 +866,7 @@ void RefineableModalPoissonEquations<DIM>::get_dresidual_dnodal_coordinates(
   int local_eqn = 0;
 
   // Local storage for pointers to hang_info object
-  HangInfo *hang_info_pt = 0;
+  HangInfo* hang_info_pt = 0;
 
   // Loop over the integration points
   for (unsigned ipt = 0; ipt < n_intpt; ipt++)
@@ -907,17 +907,17 @@ void RefineableModalPoissonEquations<DIM>::get_dresidual_dnodal_coordinates(
     // FD step
     double eps_fd = GeneralisedElement::Default_fd_jacobian_step;
 
-    std::map<Node *, unsigned> local_shape_controlling_node_lookup =
+    std::map<Node*, unsigned> local_shape_controlling_node_lookup =
       shape_controlling_node_lookup();
 
     // FD loop over shape-controlling nodes
-    for (std::map<Node *, unsigned>::iterator it =
+    for (std::map<Node*, unsigned>::iterator it =
            local_shape_controlling_node_lookup.begin();
          it != local_shape_controlling_node_lookup.end();
          it++)
     {
       // Get node
-      Node *nod_pt = it->first;
+      Node* nod_pt = it->first;
 
       // Get its number
       unsigned jj = it->second;
@@ -1057,39 +1057,39 @@ class ModalPRefineableQElement : public PRefineableQElement<DIM, 2>
 public:
   ModalPRefineableQElement() : PRefineableQElement<DIM, 2>() {}
 
-  void initial_setup(Tree *const &adopted_father_pt = 0,
-                     const unsigned &initial_p_order = 0);
-  void pre_build(Mesh *&, Vector<Node *> &);
+  void initial_setup(Tree* const& adopted_father_pt = 0,
+                     const unsigned& initial_p_order = 0);
+  void pre_build(Mesh*&, Vector<Node*>&);
   void further_build()
   {
     PRefineableQElement<DIM, 2>::further_build(); //(Empty)
   }
 
   // p-refine the element
-  void p_refine(const int &inc,
-                Mesh *const &mesh_pt,
-                GeneralisedElement *const &clone_pt);
+  void p_refine(const int& inc,
+                Mesh* const& mesh_pt,
+                GeneralisedElement* const& clone_pt);
 
   // Overload the shape and basis functions
-  void shape(const Vector<double> &s, Shape &psi) const;
-  void basis(const Vector<double> &s, Shape &basis) const;
-  void dshape_local(const Vector<double> &s, Shape &psi, DShape &dpsi) const;
-  void dbasis_local(const Vector<double> &s,
-                    Shape &basis,
-                    DShape &dbasis) const;
-  void d2shape_local(const Vector<double> &s,
-                     Shape &psi,
-                     DShape &dpsids,
-                     DShape &d2psids) const;
-  void d2basis_local(const Vector<double> &s,
-                     Shape &basis,
-                     DShape &dbasisds,
-                     DShape &d2basisds) const;
+  void shape(const Vector<double>& s, Shape& psi) const;
+  void basis(const Vector<double>& s, Shape& basis) const;
+  void dshape_local(const Vector<double>& s, Shape& psi, DShape& dpsi) const;
+  void dbasis_local(const Vector<double>& s,
+                    Shape& basis,
+                    DShape& dbasis) const;
+  void d2shape_local(const Vector<double>& s,
+                     Shape& psi,
+                     DShape& dpsids,
+                     DShape& d2psids) const;
+  void d2basis_local(const Vector<double>& s,
+                     Shape& basis,
+                     DShape& dbasisds,
+                     DShape& d2basisds) const;
 };
 
 template<>
-void ModalPRefineableQElement<1>::initial_setup(Tree *const &adopted_father_pt,
-                                                const unsigned &initial_p_order)
+void ModalPRefineableQElement<1>::initial_setup(Tree* const& adopted_father_pt,
+                                                const unsigned& initial_p_order)
 {
   // Create storage for internal data
   if (this->ninternal_data() == 0)
@@ -1098,19 +1098,19 @@ void ModalPRefineableQElement<1>::initial_setup(Tree *const &adopted_father_pt,
   }
 
   // Storage for pointer to my father (in binarytree impersonation)
-  BinaryTree *father_pt;
+  BinaryTree* father_pt;
 
   // Check if an adopted father has been specified
   if (adopted_father_pt != 0)
   {
     // Get pointer to my father (in binarytree impersonation)
-    father_pt = dynamic_cast<BinaryTree *>(adopted_father_pt);
+    father_pt = dynamic_cast<BinaryTree*>(adopted_father_pt);
   }
   // Check if element is in a tree
   else if (Tree_pt != 0)
   {
     // Get pointer to my father (in binarytree impersonation)
-    father_pt = dynamic_cast<BinaryTree *>(binary_tree_pt()->father_pt());
+    father_pt = dynamic_cast<BinaryTree*>(binary_tree_pt()->father_pt());
   }
   else
   {
@@ -1123,8 +1123,8 @@ void ModalPRefineableQElement<1>::initial_setup(Tree *const &adopted_father_pt,
   // Check if element has father
   if (father_pt != 0)
   {
-    if (PRefineableQElement<1, 2> *father_el_pt =
-          dynamic_cast<PRefineableQElement<1, 2> *>(father_pt->object_pt()))
+    if (PRefineableQElement<1, 2>* father_el_pt =
+          dynamic_cast<PRefineableQElement<1, 2>*>(father_pt->object_pt()))
     {
       unsigned father_p_order = father_el_pt->p_order();
       // Set the correct p-order of the element
@@ -1168,7 +1168,7 @@ void ModalPRefineableQElement<1>::initial_setup(Tree *const &adopted_father_pt,
       }
       else
       {
-        Data *new_data_pt = new Data(this->p_order() - this->nnode());
+        Data* new_data_pt = new Data(this->p_order() - this->nnode());
         delete internal_data_pt(0);
         internal_data_pt(0) = new_data_pt;
       }
@@ -1189,14 +1189,14 @@ void ModalPRefineableQElement<1>::initial_setup(Tree *const &adopted_father_pt,
 }
 
 template<>
-void ModalPRefineableQElement<1>::pre_build(Mesh *&, Vector<Node *> &)
+void ModalPRefineableQElement<1>::pre_build(Mesh*&, Vector<Node*>&)
 {
 }
 
 template<>
-void ModalPRefineableQElement<1>::p_refine(const int &inc,
-                                           Mesh *const &mesh_pt,
-                                           GeneralisedElement *const &clone_pt)
+void ModalPRefineableQElement<1>::p_refine(const int& inc,
+                                           Mesh* const& mesh_pt,
+                                           GeneralisedElement* const& clone_pt)
 {
   // BENFLAG: In this case we do not need the pointer to a clone of the
   //          element, or to the mesh, but they are required in the
@@ -1247,7 +1247,7 @@ void ModalPRefineableQElement<1>::p_refine(const int &inc,
   }
   else
   {
-    Data *new_data_pt = new Data(this->p_order() - this->nnode());
+    Data* new_data_pt = new Data(this->p_order() - this->nnode());
     delete internal_data_pt(0);
     internal_data_pt(0) = new_data_pt;
   }
@@ -1255,8 +1255,8 @@ void ModalPRefineableQElement<1>::p_refine(const int &inc,
 }
 
 template<unsigned DIM>
-void ModalPRefineableQElement<DIM>::shape(const Vector<double> &s,
-                                          Shape &psi) const
+void ModalPRefineableQElement<DIM>::shape(const Vector<double>& s,
+                                          Shape& psi) const
 {
   // Shape functions
   psi(0) = 0.5 * (1.0 - s[0]);
@@ -1264,8 +1264,8 @@ void ModalPRefineableQElement<DIM>::shape(const Vector<double> &s,
 }
 
 template<unsigned DIM>
-void ModalPRefineableQElement<DIM>::basis(const Vector<double> &s,
-                                          Shape &basis) const
+void ModalPRefineableQElement<DIM>::basis(const Vector<double>& s,
+                                          Shape& basis) const
 {
   // Get nnode-1d and p-order
   unsigned p_order = this->p_order();
@@ -1281,9 +1281,9 @@ void ModalPRefineableQElement<DIM>::basis(const Vector<double> &s,
 }
 
 template<unsigned DIM>
-void ModalPRefineableQElement<DIM>::dshape_local(const Vector<double> &s,
-                                                 Shape &psi,
-                                                 DShape &dpsi) const
+void ModalPRefineableQElement<DIM>::dshape_local(const Vector<double>& s,
+                                                 Shape& psi,
+                                                 DShape& dpsi) const
 {
   // Shape functions
   psi(0) = 0.5 * (1.0 - s[0]);
@@ -1295,9 +1295,9 @@ void ModalPRefineableQElement<DIM>::dshape_local(const Vector<double> &s,
 }
 
 template<unsigned DIM>
-void ModalPRefineableQElement<DIM>::dbasis_local(const Vector<double> &s,
-                                                 Shape &basis,
-                                                 DShape &dbasis) const
+void ModalPRefineableQElement<DIM>::dbasis_local(const Vector<double>& s,
+                                                 Shape& basis,
+                                                 DShape& dbasis) const
 {
   // Get nnode-1d and p-order
   unsigned p_order = this->p_order();
@@ -1315,10 +1315,10 @@ void ModalPRefineableQElement<DIM>::dbasis_local(const Vector<double> &s,
 }
 
 template<unsigned DIM>
-void ModalPRefineableQElement<DIM>::d2shape_local(const Vector<double> &s,
-                                                  Shape &psi,
-                                                  DShape &dpsids,
-                                                  DShape &d2psids) const
+void ModalPRefineableQElement<DIM>::d2shape_local(const Vector<double>& s,
+                                                  Shape& psi,
+                                                  DShape& dpsids,
+                                                  DShape& d2psids) const
 {
   std::ostringstream error_message;
   error_message
@@ -1328,10 +1328,10 @@ void ModalPRefineableQElement<DIM>::d2shape_local(const Vector<double> &s,
 }
 
 template<unsigned DIM>
-void ModalPRefineableQElement<DIM>::d2basis_local(const Vector<double> &s,
-                                                  Shape &basis,
-                                                  DShape &dbasisds,
-                                                  DShape &d2basisds) const
+void ModalPRefineableQElement<DIM>::d2basis_local(const Vector<double>& s,
+                                                  Shape& basis,
+                                                  DShape& dbasisds,
+                                                  DShape& d2basisds) const
 {
   std::ostringstream error_message;
   error_message
@@ -1362,7 +1362,7 @@ public:
 
   /// Broken copy constructor
   ModalPRefineableQPoissonElement(
-    const ModalPRefineableQPoissonElement<DIM> &dummy)
+    const ModalPRefineableQPoissonElement<DIM>& dummy)
   {
     BrokenCopy::broken_copy("ModalPRefineableQPoissonElement");
   }
@@ -1388,7 +1388,7 @@ public:
   }
 
   /// \short Pointer to the j-th vertex node in the element
-  Node *vertex_node_pt(const unsigned &j) const
+  Node* vertex_node_pt(const unsigned& j) const
   {
     return QPoissonElement<DIM, 2>::vertex_node_pt(j);
   }
@@ -1407,20 +1407,20 @@ public:
     return 3;
   }
 
-  void basis(const Vector<double> &s, Shape &basis) const
+  void basis(const Vector<double>& s, Shape& basis) const
   {
     ModalPRefineableQElement<DIM>::basis(s, basis);
   }
 
-  void dbasis_local(const Vector<double> &s, Shape &basis, DShape &dbasis) const
+  void dbasis_local(const Vector<double>& s, Shape& basis, DShape& dbasis) const
   {
     ModalPRefineableQElement<DIM>::dbasis_local(s, basis, dbasis);
   }
 
-  void d2basis_local(const Vector<double> &s,
-                     Shape &basis,
-                     DShape &dbasisds,
-                     DShape &d2basisds) const
+  void d2basis_local(const Vector<double>& s,
+                     Shape& basis,
+                     DShape& dbasisds,
+                     DShape& d2basisds) const
   {
     ModalPRefineableQElement<DIM>::d2basis_local(s, basis, dbasisds, d2basisds);
   }
@@ -1429,9 +1429,9 @@ public:
 
   /// \short Function pointer to source function fct(x,f(x)) --
   /// x is a Vector!
-  typedef void (*PoissonSourceFctPt)(const Vector<double> &x, double &f);
+  typedef void (*PoissonSourceFctPt)(const Vector<double>& x, double& f);
 
-  inline double u(const unsigned &n) const
+  inline double u(const unsigned& n) const
   {
     if (n < this->nnode())
     {
@@ -1448,37 +1448,37 @@ public:
     return this->p_order();
   }
 
-  void output(ostream &outfile)
+  void output(ostream& outfile)
   {
     RefineableModalPoissonEquations<DIM>::output(outfile);
   }
 
-  void output(ostream &outfile, const unsigned &nplot)
+  void output(ostream& outfile, const unsigned& nplot)
   {
     RefineableModalPoissonEquations<DIM>::output(outfile, nplot);
   }
 
-  void output_fct(ostream &outfile,
-                  const unsigned &nplot,
+  void output_fct(ostream& outfile,
+                  const unsigned& nplot,
                   FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
   {
     RefineableModalPoissonEquations<DIM>::output_fct(
       outfile, nplot, exact_soln_pt);
   }
 
-  void output_fct(ostream &outfile,
-                  const unsigned &nplot,
-                  const double &time,
+  void output_fct(ostream& outfile,
+                  const unsigned& nplot,
+                  const double& time,
                   FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
   {
     RefineableModalPoissonEquations<DIM>::output_fct(
       outfile, nplot, time, exact_soln_pt);
   }
 
-  void compute_error(ostream &outfile,
+  void compute_error(ostream& outfile,
                      FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-                     double &error,
-                     double &norm)
+                     double& error,
+                     double& norm)
   {
     RefineableModalPoissonEquations<DIM>::compute_error(
       outfile, exact_soln_pt, error, norm);
@@ -1486,10 +1486,10 @@ public:
 
   /// Get error against and norm of exact solution
   void compute_energy_error(
-    ostream &outfile,
+    ostream& outfile,
     FiniteElement::SteadyExactSolutionFctPt exact_grad_pt,
-    double &error,
-    double &norm)
+    double& error,
+    double& norm)
   {
     // Initialise
     error = 0.0;
@@ -1563,17 +1563,17 @@ public:
     }
   }
 
-  void compute_error(ostream &outfile,
+  void compute_error(ostream& outfile,
                      FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
-                     const double &time,
-                     double &error,
-                     double &norm)
+                     const double& time,
+                     double& error,
+                     double& norm)
   {
     RefineableModalPoissonEquations<DIM>::compute_error(
       outfile, exact_soln_pt, time, error, norm);
   }
 
-  PoissonSourceFctPt &source_fct_pt()
+  PoissonSourceFctPt& source_fct_pt()
   {
     return RefineableModalPoissonEquations<DIM>::source_fct_pt();
   }
@@ -1594,26 +1594,26 @@ public:
   /// Returns Jacobian of mapping from global to local coordinates.
   /// Most general form of the function, but may be over-loaded, if desired
   //=========================================================================
-  virtual double dbasis_eulerian(const Vector<double> &s,
-                                 Shape &basis,
-                                 DShape &dbasis) const;
+  virtual double dbasis_eulerian(const Vector<double>& s,
+                                 Shape& basis,
+                                 DShape& dbasis) const;
 
   //========================================================================
   /// \short Compute the geometric shape functions and also first
   /// derivatives w.r.t. global coordinates at integration point ipt.
   /// Most general form of function, but may be over-loaded if desired
   //========================================================================
-  virtual double dbasis_eulerian_at_knot(const unsigned &ipt,
-                                         Shape &basis,
-                                         DShape &dbasis) const;
+  virtual double dbasis_eulerian_at_knot(const unsigned& ipt,
+                                         Shape& basis,
+                                         DShape& dbasis) const;
 
   //=========================================================================
   /// \short Return the shape function and its derivatives w.r.t. the local
   /// coordinates at the ipt-th integration point.
   //=========================================================================
-  virtual void dbasis_local_at_knot(const unsigned &ipt,
-                                    Shape &basis,
-                                    DShape &dbasisds) const
+  virtual void dbasis_local_at_knot(const unsigned& ipt,
+                                    Shape& basis,
+                                    DShape& dbasisds) const
   {
     // Find the dimension of the element
     const unsigned el_dim = this->dim();
@@ -1628,13 +1628,13 @@ public:
     this->dbasis_local(s, basis, dbasisds);
   }
 
-  virtual double dshape_dbasis_and_dtest_eulerian(const Vector<double> &s,
-                                                  Shape &psi,
-                                                  DShape &dpsidx,
-                                                  Shape &basis,
-                                                  DShape &dbasisdx,
-                                                  Shape &test,
-                                                  DShape &dtestdx) const
+  virtual double dshape_dbasis_and_dtest_eulerian(const Vector<double>& s,
+                                                  Shape& psi,
+                                                  DShape& dpsidx,
+                                                  Shape& basis,
+                                                  DShape& dbasisdx,
+                                                  Shape& test,
+                                                  DShape& dtestdx) const
   {
     // Call the geometrical basis functions and derivatives
     double J = dbasis_eulerian(s, basis, dbasisdx);
@@ -1659,13 +1659,13 @@ public:
     return J;
   }
 
-  virtual double dshape_dbasis_and_dtest_eulerian_at_knot(const unsigned &ipt,
-                                                          Shape &psi,
-                                                          DShape &dpsidx,
-                                                          Shape &basis,
-                                                          DShape &dbasisdx,
-                                                          Shape &test,
-                                                          DShape &dtestdx) const
+  virtual double dshape_dbasis_and_dtest_eulerian_at_knot(const unsigned& ipt,
+                                                          Shape& psi,
+                                                          DShape& dpsidx,
+                                                          Shape& basis,
+                                                          DShape& dbasisdx,
+                                                          Shape& test,
+                                                          DShape& dtestdx) const
   {
     // Call the geometrical shape functions and derivatives
     double J = dbasis_eulerian_at_knot(ipt, basis, dbasisdx);
@@ -1693,29 +1693,29 @@ public:
     return J;
   }
 
-  void fill_in_contribution_to_residuals(Vector<double> &residuals)
+  void fill_in_contribution_to_residuals(Vector<double>& residuals)
   {
     RefineableModalPoissonEquations<DIM>::fill_in_contribution_to_residuals(
       residuals);
   }
 
-  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                        DenseMatrix<double> &jacobian)
+  void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                        DenseMatrix<double>& jacobian)
   {
     RefineableModalPoissonEquations<DIM>::fill_in_contribution_to_jacobian(
       residuals, jacobian);
   }
 
-  void fill_in_generic_residual_contribution(Vector<double> &residuals,
-                                             DenseMatrix<double> &jacobian,
-                                             const unsigned &flag)
+  void fill_in_generic_residual_contribution(Vector<double>& residuals,
+                                             DenseMatrix<double>& jacobian,
+                                             const unsigned& flag)
   {
     RefineableModalPoissonEquations<DIM>::fill_in_generic_residual_contribution(
       residuals, jacobian, flag);
   }
 
   virtual void get_dresidual_dnodal_coordinates(
-    RankThreeTensor<double> &dresidual_dnodal_coordinates)
+    RankThreeTensor<double>& dresidual_dnodal_coordinates)
   {
     ModalPoissonEquations<DIM>::get_dresidual_dnodal_coordinates(
       dresidual_dnodal_coordinates);
@@ -1732,7 +1732,7 @@ public:
 //=========================================================================
 template<unsigned DIM>
 double ModalPRefineableQPoissonElement<DIM>::dbasis_eulerian(
-  const Vector<double> &s, Shape &basis, DShape &dbasis) const
+  const Vector<double>& s, Shape& basis, DShape& dbasis) const
 {
   // Find the element dimension
   const unsigned el_dim = this->dim();
@@ -1760,7 +1760,7 @@ double ModalPRefineableQPoissonElement<DIM>::dbasis_eulerian(
 //========================================================================
 template<unsigned DIM>
 double ModalPRefineableQPoissonElement<DIM>::dbasis_eulerian_at_knot(
-  const unsigned &ipt, Shape &basis, DShape &dbasis) const
+  const unsigned& ipt, Shape& basis, DShape& dbasis) const
 {
   // Find the element dimension
   const unsigned el_dim = this->dim();
@@ -1847,13 +1847,13 @@ public:
 
   /// \short Doc the solution. DocInfo object stores flags/labels for where
   /// the output gets written to.
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// \short Overloaded version of the Problem's access function to the mesh.
   /// Recasts the pointer to the base Mesh object to the actual mesh type.
-  RefineableOneDMesh<ELEMENT> *mesh_pt()
+  RefineableOneDMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<RefineableOneDMesh<ELEMENT> *>(Problem::mesh_pt());
+    return dynamic_cast<RefineableOneDMesh<ELEMENT>*>(Problem::mesh_pt());
   }
 
 private:
@@ -1906,7 +1906,7 @@ PRefineableOneDPoissonProblem<ELEMENT>::PRefineableOneDPoissonProblem(
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the source function pointer
     el_pt->source_fct_pt() = Source_fct_pt;
@@ -1937,7 +1937,7 @@ void PRefineableOneDPoissonProblem<ELEMENT>::actions_before_newton_solve()
     for (unsigned n = 0; n < n_boundary_node; n++)
     {
       // Get pointer to node
-      Node *nod_pt = mesh_pt()->boundary_node_pt(b, n);
+      Node* nod_pt = mesh_pt()->boundary_node_pt(b, n);
 
       // Extract nodal coordinates from node:
       Vector<double> x(1);
@@ -1957,7 +1957,7 @@ void PRefineableOneDPoissonProblem<ELEMENT>::actions_before_newton_solve()
 /// Doc the solution: doc_info contains labels/output directory etc.
 //========================================================================
 template<class ELEMENT>
-void PRefineableOneDPoissonProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void PRefineableOneDPoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   // Declare output stream and filename
   ofstream some_file;

@@ -51,10 +51,10 @@ namespace oomph
   //=======================================================================
   template<class ELEMENT>
   OneDLagrangianMesh<ELEMENT>::OneDLagrangianMesh(
-    const unsigned &n_element,
-    const double &length,
-    GeomObject *undef_eulerian_posn_pt,
-    TimeStepper *time_stepper_pt) :
+    const unsigned& n_element,
+    const double& length,
+    GeomObject* undef_eulerian_posn_pt,
+    TimeStepper* time_stepper_pt) :
     OneDMesh<ELEMENT>(n_element, length, time_stepper_pt),
     Undef_eulerian_posn_pt(undef_eulerian_posn_pt)
   {
@@ -82,11 +82,11 @@ namespace oomph
   //==================================================
   template<class ELEMENT>
   OneDLagrangianMesh<ELEMENT>::OneDLagrangianMesh(
-    const unsigned &n_element,
-    const double &xmin,
-    const double &xmax,
-    GeomObject *undef_eulerian_posn_pt,
-    TimeStepper *time_stepper_pt) :
+    const unsigned& n_element,
+    const double& xmin,
+    const double& xmax,
+    GeomObject* undef_eulerian_posn_pt,
+    TimeStepper* time_stepper_pt) :
     OneDMesh<ELEMENT>(n_element, xmin, xmax, time_stepper_pt),
     Undef_eulerian_posn_pt(undef_eulerian_posn_pt)
   {
@@ -113,7 +113,7 @@ namespace oomph
   void OneDLagrangianMesh<ELEMENT>::assign_default_element_gradients()
   {
     // Find cast pointer to first element
-    ELEMENT *cast_element_pt = dynamic_cast<ELEMENT *>(finite_element_pt(0));
+    ELEMENT* cast_element_pt = dynamic_cast<ELEMENT*>(finite_element_pt(0));
     // Do we need to worry about the slopes
     // Read out number of position dofs
     unsigned n_lagrangian_type = cast_element_pt->nnodal_lagrangian_type();
@@ -149,7 +149,7 @@ namespace oomph
     unsigned n_dim = node_pt(0)->ndim();
 
     // Find cast pointer to first element
-    ELEMENT *cast_element_pt = dynamic_cast<ELEMENT *>(finite_element_pt(0));
+    ELEMENT* cast_element_pt = dynamic_cast<ELEMENT*>(finite_element_pt(0));
 
     // Do we need to worry about the slopes
     // Read out number of position dofs

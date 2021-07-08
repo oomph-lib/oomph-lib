@@ -78,9 +78,9 @@ namespace oomph
     /// upper left in order, theta should be in the range \f$-\pi\f$ to
     /// \f$\pi\f$; and  the corresponding fractions of the
     /// radius at which the central box is to be placed.
-    FullCircleDomain(GeomObject *area_geom_object_pt,
-                     const Vector<double> &theta_positions,
-                     const Vector<double> &radius_box) :
+    FullCircleDomain(GeomObject* area_geom_object_pt,
+                     const Vector<double>& theta_positions,
+                     const Vector<double>& radius_box) :
       Theta_positions(theta_positions),
       Radius_box(radius_box),
       Area_pt(area_geom_object_pt)
@@ -97,13 +97,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    FullCircleDomain(const FullCircleDomain &)
+    FullCircleDomain(const FullCircleDomain&)
     {
       BrokenCopy::broken_copy("FullCircleDomain");
     }
 
     /// Broken assignment operator
-    void operator=(const FullCircleDomain &)
+    void operator=(const FullCircleDomain&)
     {
       BrokenCopy::broken_assign("FullCircleDomain");
     }
@@ -121,11 +121,11 @@ namespace oomph
     /// boundary i_direct (N/S/W/E) at time level t
     /// (t=0: present; t>0: previous):
     /// f(s).
-    void macro_element_boundary(const unsigned &t,
-                                const unsigned &i_macro,
-                                const unsigned &i_direct,
-                                const Vector<double> &s,
-                                Vector<double> &f);
+    void macro_element_boundary(const unsigned& t,
+                                const unsigned& i_macro,
+                                const unsigned& i_direct,
+                                const Vector<double>& s,
+                                Vector<double>& f);
 
   private:
     /// \short Storage for the dividing lines on the boundary
@@ -138,16 +138,16 @@ namespace oomph
     Vector<double> Radius_box;
 
     /// Pointer to geometric object that represents the domain
-    GeomObject *Area_pt;
+    GeomObject* Area_pt;
 
     /// \short  A very little linear interpolation helper.
     /// Interpolate from the low
     /// point to the high point using the coordinate s, which is
     /// assumed to run from -1 to 1.
-    void lin_interpolate(const Vector<double> &low,
-                         const Vector<double> &high,
-                         const double &s,
-                         Vector<double> &f)
+    void lin_interpolate(const Vector<double>& low,
+                         const Vector<double>& high,
+                         const double& s,
+                         Vector<double>& f)
     {
       // Loop over all coordinates (we are working in 2D)
       for (unsigned i = 0; i < 2; i++)
@@ -166,11 +166,11 @@ namespace oomph
   /// boundary idirect (N/S/W/E) at time level t
   /// (t=0: present; t>0: previous): f(s)
   //=================================================================
-  void FullCircleDomain::macro_element_boundary(const unsigned &t,
-                                                const unsigned &imacro,
-                                                const unsigned &idirect,
-                                                const Vector<double> &s,
-                                                Vector<double> &f)
+  void FullCircleDomain::macro_element_boundary(const unsigned& t,
+                                                const unsigned& imacro,
+                                                const unsigned& idirect,
+                                                const Vector<double>& s,
+                                                Vector<double>& f)
   {
     using namespace QuadTreeNames;
 

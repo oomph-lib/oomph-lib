@@ -63,12 +63,12 @@ namespace oomph
   /// Mark the global equation, addressed by global_eqn_pt,
   /// as hijacked by this element.
   //======================================================================
-  void HijackedElementBase::hijack_global_eqn(long *const &global_eqn_pt)
+  void HijackedElementBase::hijack_global_eqn(long* const& global_eqn_pt)
   {
     // If the storage has not been allocated, allocate it
     if (Hijacked_global_eqn_number_pt == 0)
     {
-      Hijacked_global_eqn_number_pt = new std::set<long *>;
+      Hijacked_global_eqn_number_pt = new std::set<long*>;
     }
 
     // Now insert the value, note that this prevents multiple inclusions,
@@ -80,7 +80,7 @@ namespace oomph
   /// The global equation, addressed by global_eqn_pt,
   /// is no longer hijacked by this element.
   //====================================================================
-  void HijackedElementBase::unhijack_global_eqn(long *const &global_eqn_pt)
+  void HijackedElementBase::unhijack_global_eqn(long* const& global_eqn_pt)
   {
     // Check that the storage has been allocated
     if (Hijacked_global_eqn_number_pt != 0)

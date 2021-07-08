@@ -40,17 +40,17 @@ namespace oomph
   {
   protected:
     /// Pointer to the angle alpha
-    double *Alpha_pt;
+    double* Alpha_pt;
 
   public:
     /// Alpha
-    const double &alpha() const
+    const double& alpha() const
     {
       return *Alpha_pt;
     }
 
     /// Pointer to Alpha
-    double *&alpha_pt()
+    double*& alpha_pt()
     {
       return Alpha_pt;
     }
@@ -59,7 +59,7 @@ namespace oomph
     PolarStreamfunctionEquations() {}
 
     /// Broken copy constructor
-    PolarStreamfunctionEquations(const PolarStreamfunctionEquations &dummy)
+    PolarStreamfunctionEquations(const PolarStreamfunctionEquations& dummy)
     {
       BrokenCopy::broken_copy("PolarStreamfunctionEquations");
     }
@@ -71,13 +71,13 @@ namespace oomph
     }
 
     /// Return the indicies at which the (known) velocities are stored.
-    virtual inline unsigned u_index_velocity(const unsigned &i) const
+    virtual inline unsigned u_index_velocity(const unsigned& i) const
     {
       return i + 1;
     }
 
     /// Output with default number of plot points
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       const unsigned n_plot = 5;
       output(outfile, n_plot);
@@ -85,10 +85,10 @@ namespace oomph
 
     /// \short Output FE representation of soln: x,y,u or x,y,z,u at
     /// n_plot^DIM plot points
-    void output(std::ostream &outfile, const unsigned &n_plot);
+    void output(std::ostream& outfile, const unsigned& n_plot);
 
     /// C_style output with default number of plot points
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       const unsigned n_plot = 5;
       output(file_pt, n_plot);
@@ -96,11 +96,11 @@ namespace oomph
 
     /// \short C-style output FE representation of soln: x,y,u or x,y,z,u at
     /// n_plot^DIM plot points
-    void output(FILE *file_pt, const unsigned &n_plot);
+    void output(FILE* file_pt, const unsigned& n_plot);
 
     /// Get flux: Necessary for Z2 error estimator in refineable version
     /// Doesn't matter what it is though as we're NEVER? going to refine
-    void get_flux(const Vector<double> &s, Vector<double> &flux) const
+    void get_flux(const Vector<double>& s, Vector<double>& flux) const
     {
       // Find out how many nodes there are in the element
       const unsigned n_node = nnode();
@@ -133,7 +133,7 @@ namespace oomph
     }
 
     /// Add the element's contribution to its residual vector (wrapper)
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Call the generic residuals function with flag set to 0
       // using a dummy matrix argument
@@ -143,8 +143,8 @@ namespace oomph
 
     /// Add the element's contribution to its residual vector and
     /// element Jacobian matrix (wrapper)
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       // Call the generic routine with the flag set to 1
       fill_in_generic_residual_contribution(residuals, jacobian, 1);
@@ -152,7 +152,7 @@ namespace oomph
 
     /// \short Return FE representation of streamfunction
     /// at local coordinate s
-    inline double interpolated_streamfunction(const Vector<double> &s) const
+    inline double interpolated_streamfunction(const Vector<double>& s) const
     {
       // Find number of nodes
       const unsigned n_node = nnode();
@@ -179,8 +179,8 @@ namespace oomph
     }
 
     /// Return FE interpolated velocity u[i] at local coordinate s
-    double interpolated_velocity(const Vector<double> &s,
-                                 const unsigned &i) const
+    double interpolated_velocity(const Vector<double>& s,
+                                 const unsigned& i) const
     {
       // Find number of nodes
       unsigned n_node = nnode();
@@ -206,9 +206,9 @@ namespace oomph
 
     /// Return FE interpolated velocity derivative du[i]/dx[j]
     /// at local coordinate s
-    double interpolated_dudx(const Vector<double> &s,
-                             const unsigned &i,
-                             const unsigned &j) const
+    double interpolated_dudx(const Vector<double>& s,
+                             const unsigned& i,
+                             const unsigned& j) const
     {
       // Find number of nodes
       unsigned n_node = nnode();
@@ -239,7 +239,7 @@ namespace oomph
 
     /// \short Construct and Return FE representation of vorticity
     /// at local coordinate s
-    inline double interpolated_vorticity(const Vector<double> &s) const
+    inline double interpolated_vorticity(const Vector<double>& s) const
     {
       // Find number of nodes
       unsigned n_node = nnode();
@@ -274,25 +274,25 @@ namespace oomph
   protected:
     /// \short Shape/test functions and derivs w.r.t. to global coords at
     /// local coord. s; return  Jacobian of mapping
-    virtual double dshape_and_dtest_eulerian_poisson(const Vector<double> &s,
-                                                     Shape &psi,
-                                                     DShape &dpsidx,
-                                                     Shape &test,
-                                                     DShape &dtestdx) const = 0;
+    virtual double dshape_and_dtest_eulerian_poisson(const Vector<double>& s,
+                                                     Shape& psi,
+                                                     DShape& dpsidx,
+                                                     Shape& test,
+                                                     DShape& dtestdx) const = 0;
 
     /// \short Shape/test functions and derivs w.r.t. to global coords at
     /// integration point ipt; return  Jacobian of mapping
     virtual double dshape_and_dtest_eulerian_at_knot_poisson(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidx,
-      Shape &test,
-      DShape &dtestdx) const = 0;
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const = 0;
 
     /// \short Compute element residual Vector only (if flag=and/or element
     /// Jacobian matrix
     virtual void fill_in_generic_residual_contribution(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag);
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
   };
 
   ///////////////////////////////////////////////////////////////////////////
@@ -321,50 +321,50 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    PolarStreamfunctionElement(const PolarStreamfunctionElement &dummy)
+    PolarStreamfunctionElement(const PolarStreamfunctionElement& dummy)
     {
       BrokenCopy::broken_copy("PolarStreamfunctionElement");
     }
 
     /// \short  Required  # of `values' (pinned or dofs)
     /// at node n
-    inline unsigned required_nvalue(const unsigned &n) const
+    inline unsigned required_nvalue(const unsigned& n) const
     {
       return Initial_Nvalue;
     }
 
     /// \short Output function:
     ///  x,y,u   or    x,y,z,u
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       PolarStreamfunctionEquations::output(outfile);
     }
 
     ///  \short Output function:
     ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       PolarStreamfunctionEquations::output(outfile, n_plot);
     }
 
     /// \short C-style output function:
     ///  x,y,u   or    x,y,z,u
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       PolarStreamfunctionEquations::output(file_pt);
     }
 
     ///  \short C-style output function:
     ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       PolarStreamfunctionEquations::output(file_pt, n_plot);
     }
 
     /// \short Output function for an exact solution:
     ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
-    void output_fct(std::ostream &outfile,
-                    const unsigned &n_plot,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& n_plot,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
     {
       PolarStreamfunctionEquations::output_fct(outfile, n_plot, exact_soln_pt);
@@ -373,9 +373,9 @@ namespace oomph
     /// \short Output function for a time-dependent exact solution.
     ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
     /// (Calls the steady version)
-    void output_fct(std::ostream &outfile,
-                    const unsigned &n_plot,
-                    const double &time,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& n_plot,
+                    const double& time,
                     FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
     {
       PolarStreamfunctionEquations::output_fct(
@@ -385,20 +385,20 @@ namespace oomph
   protected:
     /// Shape, test functions & derivs. w.r.t. to global coords. Return
     /// Jacobian.
-    inline double dshape_and_dtest_eulerian_poisson(const Vector<double> &s,
-                                                    Shape &psi,
-                                                    DShape &dpsidx,
-                                                    Shape &test,
-                                                    DShape &dtestdx) const;
+    inline double dshape_and_dtest_eulerian_poisson(const Vector<double>& s,
+                                                    Shape& psi,
+                                                    DShape& dpsidx,
+                                                    Shape& test,
+                                                    DShape& dtestdx) const;
 
     /// \short Shape, test functions & derivs. w.r.t. to global coords. at
     /// integration point ipt. Return Jacobian.
     inline double dshape_and_dtest_eulerian_at_knot_poisson(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidx,
-      Shape &test,
-      DShape &dtestdx) const;
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const;
   };
 
   // Inline functions:
@@ -410,11 +410,11 @@ namespace oomph
   /// Galerkin: Test functions = shape functions
   //======================================================================
   double PolarStreamfunctionElement::dshape_and_dtest_eulerian_poisson(
-    const Vector<double> &s,
-    Shape &psi,
-    DShape &dpsidx,
-    Shape &test,
-    DShape &dtestdx) const
+    const Vector<double>& s,
+    Shape& psi,
+    DShape& dpsidx,
+    Shape& test,
+    DShape& dtestdx) const
   {
     // Call the geometrical shape functions and derivatives
     const double J = this->dshape_eulerian(s, psi, dpsidx);
@@ -434,11 +434,11 @@ namespace oomph
   /// Galerkin: Test functions = shape functions
   //======================================================================
   double PolarStreamfunctionElement::dshape_and_dtest_eulerian_at_knot_poisson(
-    const unsigned &ipt,
-    Shape &psi,
-    DShape &dpsidx,
-    Shape &test,
-    DShape &dtestdx) const
+    const unsigned& ipt,
+    Shape& psi,
+    DShape& dpsidx,
+    Shape& test,
+    DShape& dtestdx) const
   {
     // Call the geometrical shape functions and derivatives
     const double J = this->dshape_eulerian_at_knot(ipt, psi, dpsidx);
@@ -489,7 +489,7 @@ namespace oomph
   /// Pure version without hanging nodes
   //======================================================================
   void PolarStreamfunctionEquations::fill_in_generic_residual_contribution(
-    Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag)
+    Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag)
   {
     // Find out how many nodes there are
     const unsigned n_node = nnode();
@@ -623,8 +623,8 @@ namespace oomph
   ///
   /// nplot points in each coordinate direction
   //======================================================================
-  void PolarStreamfunctionEquations::output(std::ostream &outfile,
-                                            const unsigned &nplot)
+  void PolarStreamfunctionEquations::output(std::ostream& outfile,
+                                            const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(2);
@@ -659,8 +659,8 @@ namespace oomph
   ///
   /// nplot points in each coordinate direction
   //======================================================================
-  void PolarStreamfunctionEquations::output(FILE *file_pt,
-                                            const unsigned &nplot)
+  void PolarStreamfunctionEquations::output(FILE* file_pt,
+                                            const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(2);

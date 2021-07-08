@@ -70,7 +70,7 @@ namespace Global_Physical_Variables
 
   /// \short Flux: Pulsatile flow fluctuating between Min_flux and Max_flux
   /// with period Period
-  double flux(const double &t)
+  double flux(const double& t)
   {
     return Min_flux +
            (Max_flux - Min_flux) * 0.5 *
@@ -90,13 +90,13 @@ class UndeformedLeaflet : public GeomObject
 {
 public:
   /// Constructor: argument is the x-coordinate of the leaflet
-  UndeformedLeaflet(const double &x0) : GeomObject(1, 2)
+  UndeformedLeaflet(const double& x0) : GeomObject(1, 2)
   {
     X0 = x0;
   }
 
   /// \short Position vector at Lagrangian coordinate zeta
-  void position(const Vector<double> &zeta, Vector<double> &r) const
+  void position(const Vector<double>& zeta, Vector<double>& r) const
   {
     // Position Vector
     r[0] = X0;
@@ -106,9 +106,9 @@ public:
   /// \short Parametrised position on object: r(zeta). Evaluated at
   /// previous timestep. t=0: current time; t>0: previous
   /// timestep. Calls steady version.
-  void position(const unsigned &t,
-                const Vector<double> &zeta,
-                Vector<double> &r) const
+  void position(const unsigned& t,
+                const Vector<double>& zeta,
+                Vector<double>& r) const
   {
     // Use the steady version
     position(zeta, r);
@@ -119,10 +119,10 @@ public:
   /// \f$ \frac{dR_i}{d \zeta_\alpha}\f$ = drdzeta(alpha,i).
   /// \f$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}\f$ =
   /// ddrdzeta(alpha,beta,i). Evaluated at current time.
-  void d2position(const Vector<double> &zeta,
-                  Vector<double> &r,
-                  DenseMatrix<double> &drdzeta,
-                  RankThreeTensor<double> &ddrdzeta) const
+  void d2position(const Vector<double>& zeta,
+                  Vector<double>& r,
+                  DenseMatrix<double>& drdzeta,
+                  RankThreeTensor<double>& ddrdzeta) const
   {
     // Position vector
     r[0] = X0;
@@ -168,15 +168,15 @@ public:
   /// leaflet nright, the number of macro-elements under hleaflet ny1,
   /// the number of macro-elements above hleaflet ny2, the abscissa
   /// of the origin of the leaflet x_0.
-  FSIChannelWithLeafletProblem(const double &lleft,
-                               const double &lright,
-                               const double &hleaflet,
-                               const double &htot,
-                               const unsigned &nleft,
-                               const unsigned &nright,
-                               const unsigned &ny1,
-                               const unsigned &ny2,
-                               const double &x_0);
+  FSIChannelWithLeafletProblem(const double& lleft,
+                               const double& lright,
+                               const double& hleaflet,
+                               const double& htot,
+                               const unsigned& nleft,
+                               const unsigned& nright,
+                               const unsigned& ny1,
+                               const unsigned& ny2,
+                               const double& x_0);
 
   /// Destructor empty
   ~FSIChannelWithLeafletProblem() {}
@@ -191,19 +191,19 @@ public:
   void actions_after_adapt();
 
   /// Access function to the wall mesh
-  OneDLagrangianMesh<FSIHermiteBeamElement> *solid_mesh_pt()
+  OneDLagrangianMesh<FSIHermiteBeamElement>* solid_mesh_pt()
   {
     return Solid_mesh_pt;
   }
 
   /// Access function to fluid mesh
-  RefineableAlgebraicChannelWithLeafletMesh<ELEMENT> *fluid_mesh_pt()
+  RefineableAlgebraicChannelWithLeafletMesh<ELEMENT>* fluid_mesh_pt()
   {
     return Fluid_mesh_pt;
   }
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// Update the inflow velocity
   void actions_before_implicit_timestep()
@@ -236,13 +236,13 @@ public:
 
 private:
   /// Pointer to the fluid mesh
-  RefineableAlgebraicChannelWithLeafletMesh<ELEMENT> *Fluid_mesh_pt;
+  RefineableAlgebraicChannelWithLeafletMesh<ELEMENT>* Fluid_mesh_pt;
 
   /// Pointer to the "wall" mesh
-  OneDLagrangianMesh<FSIHermiteBeamElement> *Solid_mesh_pt;
+  OneDLagrangianMesh<FSIHermiteBeamElement>* Solid_mesh_pt;
 
   /// Pointer to the GeomObject that represents the wall
-  GeomObject *Leaflet_pt;
+  GeomObject* Leaflet_pt;
 
   /// Total height of the domain
   double Htot;
@@ -253,33 +253,33 @@ private:
 //=======================================================================
 template<class ELEMENT>
 FSIChannelWithLeafletProblem<ELEMENT>::FSIChannelWithLeafletProblem(
-  const double &lleft,
-  const double &lright,
-  const double &hleaflet,
-  const double &htot,
-  const unsigned &nleft,
-  const unsigned &nright,
-  const unsigned &ny1,
-  const unsigned &ny2,
-  const double &x_0) :
+  const double& lleft,
+  const double& lright,
+  const double& hleaflet,
+  const double& htot,
+  const unsigned& nleft,
+  const unsigned& nright,
+  const unsigned& ny1,
+  const unsigned& ny2,
+  const double& x_0) :
   Htot(htot)
 {
   // Timesteppers:
   //--------------
 
   // Allocate the timestepper
-  BDF<2> *fluid_time_stepper_pt = new BDF<2>;
+  BDF<2>* fluid_time_stepper_pt = new BDF<2>;
   add_time_stepper_pt(fluid_time_stepper_pt);
 
   // Allocate the wall timestepper
-  Steady<2> *wall_time_stepper_pt = new Steady<2>;
+  Steady<2>* wall_time_stepper_pt = new Steady<2>;
   add_time_stepper_pt(wall_time_stepper_pt);
 
   // Discretise leaflet
   //-------------------
 
   // Geometric object that represents the undeformed leaflet
-  UndeformedLeaflet *undeformed_wall_pt = new UndeformedLeaflet(x_0);
+  UndeformedLeaflet* undeformed_wall_pt = new UndeformedLeaflet(x_0);
 
   // Create the "wall" mesh with FSI Hermite beam elements
   unsigned n_wall_el = 5;
@@ -291,7 +291,7 @@ FSIChannelWithLeafletProblem<ELEMENT>::FSIChannelWithLeafletProblem(
 
   // Build a geometric object (one Lagrangian, two Eulerian coordinates)
   // from the wall mesh
-  MeshAsGeomObject *wall_geom_object_pt = new MeshAsGeomObject(Solid_mesh_pt);
+  MeshAsGeomObject* wall_geom_object_pt = new MeshAsGeomObject(Solid_mesh_pt);
 
   // Build the mesh
   Fluid_mesh_pt = new RefineableAlgebraicChannelWithLeafletMesh<ELEMENT>(
@@ -307,7 +307,7 @@ FSIChannelWithLeafletProblem<ELEMENT>::FSIChannelWithLeafletProblem(
     fluid_time_stepper_pt);
 
   // Set error estimator
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   Fluid_mesh_pt->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Build global mesh
@@ -378,7 +378,7 @@ FSIChannelWithLeafletProblem<ELEMENT>::FSIChannelWithLeafletProblem(
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Fluid_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Fluid_mesh_pt->element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -398,8 +398,8 @@ FSIChannelWithLeafletProblem<ELEMENT>::FSIChannelWithLeafletProblem(
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast to the specific element type
-    FSIHermiteBeamElement *elem_pt =
-      dynamic_cast<FSIHermiteBeamElement *>(solid_mesh_pt()->element_pt(e));
+    FSIHermiteBeamElement* elem_pt =
+      dynamic_cast<FSIHermiteBeamElement*>(solid_mesh_pt()->element_pt(e));
 
     // Set physical parameters for each element:
     elem_pt->h_pt() = &Global_Physical_Variables::H;
@@ -518,7 +518,7 @@ void FSIChannelWithLeafletProblem<ELEMENT>::actions_after_adapt()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void FSIChannelWithLeafletProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void FSIChannelWithLeafletProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -559,7 +559,7 @@ void FSIChannelWithLeafletProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
   unsigned nel = Fluid_mesh_pt->nboundary_element(bound);
   for (unsigned e = 0; e < nel; e++)
   {
-    dynamic_cast<ELEMENT *>(Fluid_mesh_pt->boundary_element_pt(bound, e))
+    dynamic_cast<ELEMENT*>(Fluid_mesh_pt->boundary_element_pt(bound, e))
       ->output(some_file, npts);
   }
   some_file.close();
@@ -575,7 +575,7 @@ void FSIChannelWithLeafletProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
   nel = Fluid_mesh_pt->nboundary_element(bound);
   for (unsigned e = 0; e < nel; e++)
   {
-    dynamic_cast<ELEMENT *>(Fluid_mesh_pt->boundary_element_pt(bound, e))
+    dynamic_cast<ELEMENT*>(Fluid_mesh_pt->boundary_element_pt(bound, e))
       ->output(some_file, npts);
   }
   some_file.close();
@@ -594,8 +594,8 @@ void FSIChannelWithLeafletProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
   for (unsigned e = 0; e < nel; e++)
   {
     // Get pointer to element
-    FSIHermiteBeamElement *el_pt =
-      dynamic_cast<FSIHermiteBeamElement *>(Solid_mesh_pt->element_pt(e));
+    FSIHermiteBeamElement* el_pt =
+      dynamic_cast<FSIHermiteBeamElement*>(Solid_mesh_pt->element_pt(e));
 
     // Loop over plot points
     for (unsigned i = 0; i < npts; i++)
@@ -630,7 +630,7 @@ class SimpleFSIPreconditioner : public virtual BlockPreconditioner<MATRIX>
 {
 public:
   /// \short Constructor for SimpleFSIPreconditioner
-  SimpleFSIPreconditioner(Problem *problem_pt) :
+  SimpleFSIPreconditioner(Problem* problem_pt) :
     BlockPreconditioner<MATRIX>(),
     Navier_stokes_preconditioner_pt(0),
     Solid_preconditioner_pt(0),
@@ -667,21 +667,21 @@ public:
   }
 
   /// Broken copy constructor
-  SimpleFSIPreconditioner(const SimpleFSIPreconditioner &)
+  SimpleFSIPreconditioner(const SimpleFSIPreconditioner&)
   {
     BrokenCopy::broken_copy("SimpleFSIPreconditioner");
   }
 
   /// \short Access function to mesh containing the block-preconditionable
   /// Navier-Stokes elements.
-  void set_navier_stokes_mesh(Mesh *mesh_pt)
+  void set_navier_stokes_mesh(Mesh* mesh_pt)
   {
     Navier_stokes_mesh_pt = mesh_pt;
   }
 
   /// \short Access function to mesh containing the block-preconditionable
   /// FSI solid elements.
-  void set_solid_mesh(Mesh *mesh_pt)
+  void set_solid_mesh(Mesh* mesh_pt)
   {
     Solid_mesh_pt = mesh_pt;
   }
@@ -690,23 +690,23 @@ public:
   void setup();
 
   /// \short Apply preconditioner to r
-  void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+  void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
 private:
   /// Pointer the Navier Stokes preconditioner.
-  NavierStokesSchurComplementPreconditioner *Navier_stokes_preconditioner_pt;
+  NavierStokesSchurComplementPreconditioner* Navier_stokes_preconditioner_pt;
 
   /// Pointer to the solid preconditioner.
-  Preconditioner *Solid_preconditioner_pt;
+  Preconditioner* Solid_preconditioner_pt;
 
   /// Pointer to the fluid onto solid matrix vector product.
-  MatrixVectorProduct *Fluid_solid_coupling_matvec_pt;
+  MatrixVectorProduct* Fluid_solid_coupling_matvec_pt;
 
   /// Pointer to the navier stokes mesh.
-  Mesh *Navier_stokes_mesh_pt;
+  Mesh* Navier_stokes_mesh_pt;
 
   /// Pointer to the solid mesh.
-  Mesh *Solid_mesh_pt;
+  Mesh* Solid_mesh_pt;
 };
 
 //////////////////////////////////////////////////////////////////////////////
@@ -751,7 +751,7 @@ void SimpleFSIPreconditioner<MATRIX>::setup()
   //===============================
 
   // get the solid block matrix (1,1)
-  CRDoubleMatrix *solid_matrix_pt = new CRDoubleMatrix;
+  CRDoubleMatrix* solid_matrix_pt = new CRDoubleMatrix;
   this->get_block(1, 1, *solid_matrix_pt);
 
   // setup the solid preconditioner
@@ -790,7 +790,7 @@ void SimpleFSIPreconditioner<MATRIX>::setup()
   //============================================================
 
   // Similar to the solid preconditioner get the matrix
-  CRDoubleMatrix *fluid_onto_solid_matrix_pt = new CRDoubleMatrix;
+  CRDoubleMatrix* fluid_onto_solid_matrix_pt = new CRDoubleMatrix;
   this->get_block(1, 0, *fluid_onto_solid_matrix_pt);
 
   // And setup the matrix vector product operator
@@ -806,7 +806,7 @@ void SimpleFSIPreconditioner<MATRIX>::setup()
 //==============================================================================
 template<typename MATRIX>
 void SimpleFSIPreconditioner<MATRIX>::preconditioner_solve(
-  const DoubleVector &y, DoubleVector &z)
+  const DoubleVector& y, DoubleVector& z)
 {
   // Fluid Subsidiary Preconditioner
   //=================================
@@ -855,7 +855,7 @@ void SimpleFSIPreconditioner<MATRIX>::preconditioner_solve(
 /// Driver code  -- pass a command line argument if you want to run
 /// the code in validation mode where it only performs a few steps
 //=====================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
 #ifdef OOMPH_HAS_MPI
   MPI_Helpers::init(argc, argv);
@@ -884,17 +884,17 @@ int main(int argc, char *argv[])
 
   // Create the solver.
 #ifdef OOMPH_HAS_TRILINOS
-  TrilinosAztecOOSolver *solver_pt = new TrilinosAztecOOSolver;
+  TrilinosAztecOOSolver* solver_pt = new TrilinosAztecOOSolver;
   solver_pt->solver_type() = TrilinosAztecOOSolver::GMRES;
 #else
-  GMRES<CRDoubleMatrix> *solver_pt = new GMRES<CRDoubleMatrix>;
+  GMRES<CRDoubleMatrix>* solver_pt = new GMRES<CRDoubleMatrix>;
 #endif
 
   // Pass the solver to the problem.
   problem.linear_solver_pt() = solver_pt;
 
   // Create the preconditioner
-  SimpleFSIPreconditioner<CRDoubleMatrix> *preconditioner_pt =
+  SimpleFSIPreconditioner<CRDoubleMatrix>* preconditioner_pt =
     new SimpleFSIPreconditioner<CRDoubleMatrix>(&problem);
 
   // Pass the meshes to the preconditioner.

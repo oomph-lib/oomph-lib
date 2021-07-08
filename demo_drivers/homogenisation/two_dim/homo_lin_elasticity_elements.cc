@@ -49,7 +49,7 @@ namespace oomph
   template<unsigned DIM>
   void HomogenisedLinearElasticityEquations<DIM>::
     fill_in_generic_contribution_to_residuals_linear_elasticity(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag)
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag)
   {
     // Find out how many nodes there are
     unsigned n_node = this->nnode();
@@ -66,7 +66,7 @@ namespace oomph
     }
 
     // Create pointer for the elasticity tensor
-    ElasticityTensor *E_pt;
+    ElasticityTensor* E_pt;
 
     // Find the indices at which the local velocities are stored
     // Even in "2" dimensions, there are always three displacement components
@@ -216,7 +216,7 @@ namespace oomph
   //=======================================================================
   template<unsigned DIM>
   void HomogenisedLinearElasticityEquations<DIM>::calculate_effective_modulus(
-    DenseMatrix<double> &H)
+    DenseMatrix<double>& H)
   {
     // Find out how many nodes there are
     unsigned n_node = this->nnode();
@@ -233,7 +233,7 @@ namespace oomph
     }
 
     // Create pointer for the elasticity tensor
-    ElasticityTensor *E_pt;
+    ElasticityTensor* E_pt;
 
     // Find the indices at which the local velocities are stored
     // Even in "2" dimensions, there are always three displacement components
@@ -335,8 +335,8 @@ namespace oomph
   /// Output: x,y,[z],xi0,xi1,[xi2],gamma
   //=======================================================================
   template<unsigned DIM>
-  void HomogenisedLinearElasticityEquations<DIM>::output(std::ostream &outfile,
-                                                         const unsigned &n_plot)
+  void HomogenisedLinearElasticityEquations<DIM>::output(std::ostream& outfile,
+                                                         const unsigned& n_plot)
   {
     // Set output Vector
     Vector<double> s(DIM);
@@ -378,8 +378,8 @@ namespace oomph
   /// C-style output: x,y,[z],xi0,xi1,[xi2],gamma
   //=======================================================================
   template<unsigned DIM>
-  void HomogenisedLinearElasticityEquations<DIM>::output(FILE *file_pt,
-                                                         const unsigned &n_plot)
+  void HomogenisedLinearElasticityEquations<DIM>::output(FILE* file_pt,
+                                                         const unsigned& n_plot)
   {
     // Set output Vector
     Vector<double> s(DIM);

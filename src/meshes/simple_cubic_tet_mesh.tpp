@@ -49,7 +49,7 @@ namespace oomph
   //====================================================================
   template<class ELEMENT>
   void SimpleCubicTetMesh<ELEMENT>::build_from_scaffold(
-    TimeStepper *time_stepper_pt)
+    TimeStepper* time_stepper_pt)
   {
     // Mesh can only be built with 3D Telements.
     MeshChecker::assert_geometric_element<TElementGeometricBase, ELEMENT>(3);
@@ -89,7 +89,7 @@ namespace oomph
     // Setup map to check the (pseudo-)global node number
     // Nodes whose number is zero haven't been copied across
     // into the mesh yet.
-    std::map<Node *, unsigned> global_number;
+    std::map<Node*, unsigned> global_number;
     unsigned global_count = 0;
     // Loop over elements in scaffold mesh, visit their nodes
     for (unsigned e = 0; e < nelem; e++)
@@ -98,7 +98,7 @@ namespace oomph
       for (unsigned j = 0; j < nnod_el; j++)
       {
         // Pointer to node in the scaffold mesh
-        Node *scaffold_node_pt = Tmp_mesh_pt->finite_element_pt(e)->node_pt(j);
+        Node* scaffold_node_pt = Tmp_mesh_pt->finite_element_pt(e)->node_pt(j);
 
         // Get the (pseudo-)global node number in scaffold mesh
         // (It's zero [=default] if not visited this one yet)
@@ -126,7 +126,7 @@ namespace oomph
 
           // Get pointer to set of mesh boundaries that this
           // scaffold node occupies; NULL if the node is not on any boundary
-          std::set<unsigned> *boundaries_pt;
+          std::set<unsigned>* boundaries_pt;
           scaffold_node_pt->get_boundaries_pt(boundaries_pt);
 
           // Loop over the mesh boundaries that the node in the scaffold mesh
@@ -196,7 +196,7 @@ namespace oomph
       for (unsigned j = 4; j < nnode; j++)
       {
         // Create new node
-        Node *new_node_pt =
+        Node* new_node_pt =
           finite_element_pt(e)->construct_node(j, time_stepper_pt);
 
         // What are the node's local coordinates?
@@ -216,9 +216,9 @@ namespace oomph
     // when we're done
     {
       // Storage for pointer to mid-edge node
-      MapMatrix<Node *, Node *> central_edge_node_pt;
-      Node *edge_node1_pt = 0;
-      Node *edge_node2_pt = 0;
+      MapMatrix<Node*, Node*> central_edge_node_pt;
+      Node* edge_node1_pt = 0;
+      Node* edge_node2_pt = 0;
 
       // Loop over elements
       for (unsigned e = 0; e < nelem; e++)
@@ -227,7 +227,7 @@ namespace oomph
         for (unsigned j = 4; j < nnode; j++)
         {
           // Pointer to the element's local node
-          Node *node_pt = finite_element_pt(e)->node_pt(j);
+          Node* node_pt = finite_element_pt(e)->node_pt(j);
 
           // By default, we assume the node is not new
           bool is_new = false;
@@ -345,11 +345,11 @@ namespace oomph
     // Matrix map to check if a node has already been added to
     // the boundary number b (NOTE: Enumerated by pointer to ORIGINAL
     // node before transfer to boundary node)
-    MapMatrixMixed<Node *, unsigned, bool> bound_node_done;
+    MapMatrixMixed<Node*, unsigned, bool> bound_node_done;
 
     // Create lookup scheme for pointers to original local nodes
     // in elements
-    Vector<Vector<Node *>> orig_node_pt(nelem);
+    Vector<Vector<Node*>> orig_node_pt(nelem);
 
     // Loop over elements
     for (unsigned e = 0; e < nelem; e++)
@@ -374,10 +374,10 @@ namespace oomph
         for (unsigned bo = 0; bo < nbound; bo++)
         {
           // Pointer to the element's local node
-          Node *loc_node_pt = finite_element_pt(e)->node_pt(j);
+          Node* loc_node_pt = finite_element_pt(e)->node_pt(j);
 
           // Pointer to original node
-          Node *orig_loc_node_pt = orig_node_pt[e][j];
+          Node* orig_loc_node_pt = orig_node_pt[e][j];
 
           // value of the map for the node and boundary specified
           bool bound_test = bound_node_done(orig_loc_node_pt, bo);

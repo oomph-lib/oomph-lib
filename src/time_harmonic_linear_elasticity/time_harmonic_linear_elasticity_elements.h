@@ -76,7 +76,7 @@ namespace oomph
 
     /// Compute vector of FE interpolated displacement u at local coordinate s
     void interpolated_u_time_harmonic_linear_elasticity(
-      const Vector<double> &s, Vector<std::complex<double>> &disp) const
+      const Vector<double>& s, Vector<std::complex<double>>& disp) const
     {
       // Find number of nodes
       unsigned n_node = nnode();
@@ -110,7 +110,7 @@ namespace oomph
 
     /// Return FE interpolated displacement u[i] at local coordinate s
     std::complex<double> interpolated_u_time_harmonic_linear_elasticity(
-      const Vector<double> &s, const unsigned &i) const
+      const Vector<double>& s, const unsigned& i) const
     {
       // Find number of nodes
       unsigned n_node = nnode();
@@ -144,9 +144,9 @@ namespace oomph
     /// \short Function pointer to function that specifies the body force
     /// as a function of the Cartesian coordinates and time FCT(t,x,b) --
     /// x and b are  Vectors!
-    typedef void (*BodyForceFctPt)(const double &t,
-                                   const Vector<double> &x,
-                                   Vector<std::complex<double>> &b);
+    typedef void (*BodyForceFctPt)(const double& t,
+                                   const Vector<double>& x,
+                                   Vector<std::complex<double>>& b);
 
     /// \short Constructor: Set null pointers for constitutive law and for
     /// isotropic growth function. Set physical parameter values to
@@ -159,34 +159,34 @@ namespace oomph
     }
 
     /// Return the pointer to the elasticity_tensor
-    TimeHarmonicElasticityTensor *&elasticity_tensor_pt()
+    TimeHarmonicElasticityTensor*& elasticity_tensor_pt()
     {
       return Elasticity_tensor_pt;
     }
 
     /// Access function to the entries in the elasticity tensor
-    inline double E(const unsigned &i,
-                    const unsigned &j,
-                    const unsigned &k,
-                    const unsigned &l) const
+    inline double E(const unsigned& i,
+                    const unsigned& j,
+                    const unsigned& k,
+                    const unsigned& l) const
     {
       return (*Elasticity_tensor_pt)(i, j, k, l);
     }
 
     /// Access function for square of non-dim frequency
-    const double &omega_sq() const
+    const double& omega_sq() const
     {
       return *Omega_sq_pt;
     }
 
     /// Access function for square of non-dim frequency
-    double *&omega_sq_pt()
+    double*& omega_sq_pt()
     {
       return Omega_sq_pt;
     }
 
     /// Access function: Pointer to body force function
-    BodyForceFctPt &body_force_fct_pt()
+    BodyForceFctPt& body_force_fct_pt()
     {
       return Body_force_fct_pt;
     }
@@ -201,17 +201,17 @@ namespace oomph
     /// from the elasticity tensor at specified local coordinate
     /// Virtual so separaete versions can (and must!) be provided
     /// for displacement and pressure-displacement formulations.
-    virtual void get_stress(const Vector<double> &s,
-                            DenseMatrix<std::complex<double>> &sigma) const = 0;
+    virtual void get_stress(const Vector<double>& s,
+                            DenseMatrix<std::complex<double>>& sigma) const = 0;
 
     /// \short Return the strain tensor
-    void get_strain(const Vector<double> &s,
-                    DenseMatrix<std::complex<double>> &strain) const;
+    void get_strain(const Vector<double>& s,
+                    DenseMatrix<std::complex<double>>& strain) const;
 
     /// \short Evaluate body force at Eulerian coordinate x at present time
     /// (returns zero vector if no body force function pointer has been set)
-    inline void body_force(const Vector<double> &x,
-                           Vector<std::complex<double>> &b) const
+    inline void body_force(const Vector<double>& x,
+                           Vector<std::complex<double>>& b) const
     {
       // If no function has been set, return zero vector
       if (Body_force_fct_pt == 0)
@@ -250,7 +250,7 @@ namespace oomph
     /// (Function can obviously only be called if the equation numbering
     /// scheme has been set up.)
     void get_dof_numbers_for_unknowns(
-      std::list<std::pair<unsigned long, unsigned>> &dof_lookup_list) const
+      std::list<std::pair<unsigned long, unsigned>>& dof_lookup_list) const
     {
       // temporary pair (used to store DOF lookup prior to being added
       // to list)
@@ -288,10 +288,10 @@ namespace oomph
 
   protected:
     /// Pointer to the elasticity tensor
-    TimeHarmonicElasticityTensor *Elasticity_tensor_pt;
+    TimeHarmonicElasticityTensor* Elasticity_tensor_pt;
 
     /// Square of nondim frequency
-    double *Omega_sq_pt;
+    double* Omega_sq_pt;
 
     /// Pointer to body force function
     BodyForceFctPt Body_force_fct_pt;
@@ -317,14 +317,14 @@ namespace oomph
     TimeHarmonicLinearElasticityEquations() {}
 
     /// Number of values required at node n.
-    unsigned required_nvalue(const unsigned &n) const
+    unsigned required_nvalue(const unsigned& n) const
     {
       return 2 * DIM;
     }
 
     /// \short Return the residuals for the solid equations (the discretised
     /// principle of virtual displacements)
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       fill_in_generic_contribution_to_residuals_time_harmonic_linear_elasticity(
         residuals, GeneralisedElement::Dummy_matrix, 0);
@@ -333,8 +333,8 @@ namespace oomph
     /// The jacobian is calculated by finite differences by default,
     /// We need only to take finite differences w.r.t. positional variables
     /// For this element
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       // Add the contribution to the residuals
       this
@@ -344,42 +344,42 @@ namespace oomph
 
     /// \short Return the Cauchy stress tensor, as calculated
     /// from the elasticity tensor at specified local coordinate
-    void get_stress(const Vector<double> &s,
-                    DenseMatrix<std::complex<double>> &sigma) const;
+    void get_stress(const Vector<double>& s,
+                    DenseMatrix<std::complex<double>>& sigma) const;
 
     /// Output exact solution x,y,[z],u_r,v_r,[w_r],u_i,v_i,[w_i]
-    void output_fct(std::ostream &outfile,
-                    const unsigned &nplot,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& nplot,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
 
     /// Output: x,y,[z],u_r,v_r,[w_r],u_i,v_i,[w_i]
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       unsigned n_plot = 5;
       output(outfile, n_plot);
     }
 
     /// Output: x,y,[z],u_r,v_r,[w_r],u_i,v_i,[w_i]
-    void output(std::ostream &outfile, const unsigned &n_plot);
+    void output(std::ostream& outfile, const unsigned& n_plot);
 
     /// C-style output: x,y,[z],u_r,v_r,[w_r],u_i,v_i,[w_i]
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       unsigned n_plot = 5;
       output(file_pt, n_plot);
     }
 
     /// Output: x,y,[z],u_r,v_r,[w_r],u_i,v_i,[w_i]
-    void output(FILE *file_pt, const unsigned &n_plot);
+    void output(FILE* file_pt, const unsigned& n_plot);
 
     /// \short Compute norm of solution: square of the L2 norm
-    void compute_norm(double &norm);
+    void compute_norm(double& norm);
 
   private:
     /// \short Private helper function to compute residuals and (if requested
     /// via flag) also the Jacobian matrix.
     virtual void fill_in_generic_contribution_to_residuals_time_harmonic_linear_elasticity(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag);
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
   };
 
   ////////////////////////////////////////////////////////////////////////
@@ -403,25 +403,25 @@ namespace oomph
     }
 
     /// Output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       TimeHarmonicLinearElasticityEquations<DIM>::output(outfile);
     }
 
     /// Output function
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       TimeHarmonicLinearElasticityEquations<DIM>::output(outfile, n_plot);
     }
 
     /// C-style output function
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       TimeHarmonicLinearElasticityEquations<DIM>::output(file_pt);
     }
 
     /// C-style output function
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       TimeHarmonicLinearElasticityEquations<DIM>::output(file_pt, n_plot);
     }
@@ -523,11 +523,10 @@ namespace oomph
     /// In the underlying time-harmonic linear elasticity elements the
     /// real and complex parts of the displacements are stored
     /// at the nodal values
-    Vector<std::pair<Data *, unsigned>> data_values_of_field(
-      const unsigned &fld)
+    Vector<std::pair<Data*, unsigned>> data_values_of_field(const unsigned& fld)
     {
       // Create the vector
-      Vector<std::pair<Data *, unsigned>> data_values;
+      Vector<std::pair<Data*, unsigned>> data_values;
 
       // Loop over all nodes and extract the fld-th nodal value
       unsigned nnod = this->nnode();
@@ -550,7 +549,7 @@ namespace oomph
 
     /// \short Number of history values to be stored for fld-th field.
     /// (includes present value!)
-    unsigned nhistory_values_for_projection(const unsigned &fld)
+    unsigned nhistory_values_for_projection(const unsigned& fld)
     {
 #ifdef PARANOID
       if (fld > 3)
@@ -575,9 +574,9 @@ namespace oomph
 
     /// \short Return Jacobian of mapping and shape functions of field fld
     /// at local coordinate s
-    double jacobian_and_shape_of_field(const unsigned &fld,
-                                       const Vector<double> &s,
-                                       Shape &psi)
+    double jacobian_and_shape_of_field(const unsigned& fld,
+                                       const Vector<double>& s,
+                                       Shape& psi)
     {
       unsigned n_dim = this->dim();
       unsigned n_node = this->nnode();
@@ -590,9 +589,9 @@ namespace oomph
 
     /// \short Return interpolated field fld at local coordinate s, at time
     /// level t (t=0: present; t>0: history values)
-    double get_field(const unsigned &t,
-                     const unsigned &fld,
-                     const Vector<double> &s)
+    double get_field(const unsigned& t,
+                     const unsigned& fld,
+                     const Vector<double>& s)
     {
       unsigned n_node = this->nnode();
 
@@ -632,13 +631,13 @@ namespace oomph
     }
 
     /// Return number of values in field fld
-    unsigned nvalue_of_field(const unsigned &fld)
+    unsigned nvalue_of_field(const unsigned& fld)
     {
       return this->nnode();
     }
 
     /// Return local equation number of value j in field fld.
-    int local_equation(const unsigned &fld, const unsigned &j)
+    int local_equation(const unsigned& fld, const unsigned& j)
     {
 #ifdef PARANOID
       unsigned n_dim = this->node_pt(0)->ndim();

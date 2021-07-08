@@ -49,7 +49,7 @@ namespace oomph
   //======================================================================
   template<unsigned DIM>
   void PMLTimeHarmonicLinearElasticityEquationsBase<DIM>::get_strain(
-    const Vector<double> &s, DenseMatrix<std::complex<double>> &strain) const
+    const Vector<double>& s, DenseMatrix<std::complex<double>>& strain) const
   {
 #ifdef PARANOID
     if ((strain.ncol() != DIM) || (strain.nrow() != DIM))
@@ -150,7 +150,7 @@ namespace oomph
   //======================================================================
   template<unsigned DIM>
   void PMLTimeHarmonicLinearElasticityEquations<DIM>::get_stress(
-    const Vector<double> &s, DenseMatrix<std::complex<double>> &stress) const
+    const Vector<double>& s, DenseMatrix<std::complex<double>>& stress) const
   {
 #ifdef PARANOID
     if ((stress.ncol() != DIM) || (stress.nrow() != DIM))
@@ -194,7 +194,7 @@ namespace oomph
   template<unsigned DIM>
   void PMLTimeHarmonicLinearElasticityEquations<DIM>::
     fill_in_generic_contribution_to_residuals_time_harmonic_linear_elasticity(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag)
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag)
   {
     // Find out how many nodes there are
     unsigned n_node = this->nnode();
@@ -531,8 +531,8 @@ namespace oomph
   //=======================================================================
   template<unsigned DIM>
   void PMLTimeHarmonicLinearElasticityEquations<DIM>::output_fct(
-    std::ostream &outfile,
-    const unsigned &nplot,
+    std::ostream& outfile,
+    const unsigned& nplot,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
   {
     // Vector of local coordinates
@@ -581,7 +581,7 @@ namespace oomph
   //=======================================================================
   template<unsigned DIM>
   void PMLTimeHarmonicLinearElasticityEquations<DIM>::output(
-    std::ostream &outfile, const unsigned &nplot)
+    std::ostream& outfile, const unsigned& nplot)
   {
     // Initialise local coord, global coord and solution vectors
     Vector<double> s(DIM);
@@ -642,10 +642,10 @@ namespace oomph
   //======================================================================
   template<unsigned DIM>
   void PMLTimeHarmonicLinearElasticityEquations<DIM>::output_total_real(
-    std::ostream &outfile,
+    std::ostream& outfile,
     FiniteElement::SteadyExactSolutionFctPt incoming_wave_fct_pt,
-    const double &phi,
-    const unsigned &nplot)
+    const double& phi,
+    const unsigned& nplot)
   {
     // Initialise local coord, global coord and solution vectors
     Vector<double> s(DIM);
@@ -706,7 +706,7 @@ namespace oomph
   //======================================================================
   template<unsigned DIM>
   void PMLTimeHarmonicLinearElasticityEquations<DIM>::output_real(
-    std::ostream &outfile, const double &phi, const unsigned &nplot)
+    std::ostream& outfile, const double& phi, const unsigned& nplot)
   {
     // Initialise local coord, global coord and solution vectors
     Vector<double> s(DIM);
@@ -759,7 +759,7 @@ namespace oomph
   //======================================================================
   template<unsigned DIM>
   void PMLTimeHarmonicLinearElasticityEquations<DIM>::output_imag(
-    std::ostream &outfile, const double &phi, const unsigned &nplot)
+    std::ostream& outfile, const double& phi, const unsigned& nplot)
   {
     // Initialise local coord, global coord and solution vectors
     Vector<double> s(DIM);
@@ -804,7 +804,7 @@ namespace oomph
   //=======================================================================
   template<unsigned DIM>
   void PMLTimeHarmonicLinearElasticityEquations<DIM>::output(
-    FILE *file_pt, const unsigned &nplot)
+    FILE* file_pt, const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(DIM);
@@ -851,7 +851,7 @@ namespace oomph
   /// Compute norm of the solution
   //=======================================================================
   template<unsigned DIM>
-  void PMLTimeHarmonicLinearElasticityEquations<DIM>::compute_norm(double &norm)
+  void PMLTimeHarmonicLinearElasticityEquations<DIM>::compute_norm(double& norm)
   {
     // Initialise
     norm = 0.0;
@@ -912,10 +912,10 @@ namespace oomph
   //======================================================================
   template<unsigned DIM>
   void PMLTimeHarmonicLinearElasticityEquations<DIM>::compute_error(
-    std::ostream &outfile,
+    std::ostream& outfile,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-    double &error,
-    double &norm)
+    double& error,
+    double& norm)
   {
     // Initialise
     error = 0.0;

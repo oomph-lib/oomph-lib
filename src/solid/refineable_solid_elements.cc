@@ -39,9 +39,9 @@ namespace oomph
   //====================================================================
   template<unsigned DIM>
   void RefineablePVDEquations<DIM>::
-    fill_in_generic_contribution_to_residuals_pvd(Vector<double> &residuals,
-                                                  DenseMatrix<double> &jacobian,
-                                                  const unsigned &flag)
+    fill_in_generic_contribution_to_residuals_pvd(Vector<double>& residuals,
+                                                  DenseMatrix<double>& jacobian,
+                                                  const unsigned& flag)
   {
 #ifdef PARANOID
     // Check if the constitutive equation requires the explicit imposition of an
@@ -269,7 +269,7 @@ namespace oomph
       for (unsigned l = 0; l < n_node; l++)
       {
         // Get pointer to local node l
-        Node *local_node_pt = node_pt(l);
+        Node* local_node_pt = node_pt(l);
 
         // Cache hang status
         bool is_hanging = local_node_pt->is_hanging();
@@ -365,7 +365,7 @@ namespace oomph
                   for (unsigned ll = 0; ll < n_node; ll++)
                   {
                     // Get pointer to local node ll
-                    Node *llocal_node_pt = node_pt(ll);
+                    Node* llocal_node_pt = node_pt(ll);
 
                     // Cache hang status
                     bool iis_hanging = llocal_node_pt->is_hanging();
@@ -544,7 +544,7 @@ namespace oomph
   //=======================================================================
   template<unsigned DIM>
   void RefineablePVDEquationsWithPressure<DIM>::get_mass_matrix_diagonal(
-    Vector<double> &mass_diag)
+    Vector<double>& mass_diag)
   {
     // Resize and initialise
     mass_diag.assign(this->ndof(), 0.0);
@@ -584,7 +584,7 @@ namespace oomph
       for (unsigned l = 0; l < n_node; l++)
       {
         // Get pointer to local node l
-        Node *local_node_pt = node_pt(l);
+        Node* local_node_pt = node_pt(l);
 
         // Cache hang status
         bool is_hanging = local_node_pt->is_hanging();
@@ -668,10 +668,10 @@ namespace oomph
   template<unsigned DIM>
   void RefineablePVDEquationsWithPressure<DIM>::
     fill_in_generic_residual_contribution_pvd_with_pressure(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix,
-      const unsigned &flag)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
+      const unsigned& flag)
   {
 #ifdef PARANOID
     // Check if the constitutive equation requires the explicit imposition of an
@@ -1003,7 +1003,7 @@ namespace oomph
       for (unsigned l = 0; l < n_node; l++)
       {
         // Get pointer to local node l
-        Node *local_node_pt = node_pt(l);
+        Node* local_node_pt = node_pt(l);
 
         // Cache hang status
         bool is_hanging = local_node_pt->is_hanging();
@@ -1101,7 +1101,7 @@ namespace oomph
                   for (unsigned ll = 0; ll < n_node; ll++)
                   {
                     // Get pointer to local node ll
-                    Node *llocal_node_pt = node_pt(ll);
+                    Node* llocal_node_pt = node_pt(ll);
 
                     // Cache hang status
                     bool iis_hanging = llocal_node_pt->is_hanging();
@@ -1184,7 +1184,7 @@ namespace oomph
                   for (unsigned ll = 0; ll < n_node; ll++)
                   {
                     // Get pointer to local node ll
-                    Node *llocal_node_pt = node_pt(ll);
+                    Node* llocal_node_pt = node_pt(ll);
 
                     // Cache hang status
                     bool iis_hanging = llocal_node_pt->is_hanging();
@@ -1356,7 +1356,7 @@ namespace oomph
                   {
                     unsigned n_master2 = 1;
                     double hang_weight2 = 1.0;
-                    HangInfo *hang_info2_pt = 0;
+                    HangInfo* hang_info2_pt = 0;
 
                     bool is_hanging2 = solid_pressure_dof_is_hanging[l2];
                     if (is_hanging2)
@@ -1425,7 +1425,7 @@ namespace oomph
 
         unsigned n_master = 1;
         double hang_weight = 1.0;
-        HangInfo *hang_info_pt = 0;
+        HangInfo* hang_info_pt = 0;
 
         // If the node is a hanging node
         if (is_hanging)
@@ -1484,7 +1484,7 @@ namespace oomph
                 for (unsigned ll = 0; ll < n_node; ll++)
                 {
                   // Get pointer to local node ll
-                  Node *llocal_node_pt = node_pt(ll);
+                  Node* llocal_node_pt = node_pt(ll);
 
                   // Cache hang status
                   bool iis_hanging = llocal_node_pt->is_hanging();
@@ -1598,7 +1598,7 @@ namespace oomph
                 for (unsigned ll = 0; ll < n_node; ll++)
                 {
                   // Get pointer to local node ll
-                  Node *llocal_node_pt = node_pt(ll);
+                  Node* llocal_node_pt = node_pt(ll);
 
                   // Cache hang status
                   bool iis_hanging = llocal_node_pt->is_hanging();
@@ -1700,7 +1700,7 @@ namespace oomph
 
                   unsigned n_master2 = 1;
                   double hang_weight2 = 1.0;
-                  HangInfo *hang_info2_pt = 0;
+                  HangInfo* hang_info2_pt = 0;
 
                   if (is_hanging2)
                   {

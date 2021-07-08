@@ -58,9 +58,9 @@ namespace oomph
     /// in anticlockwise direction. Timestepper defaults to Steady
     /// default timestepper.
     RectangleWithHoleMesh(
-      GeomObject *cylinder_pt,
-      const double &length,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper)
+      GeomObject* cylinder_pt,
+      const double& length,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
     {
       // Create the domain
       Domain_pt = new RectangleWithHoleDomain(cylinder_pt, length);
@@ -72,7 +72,7 @@ namespace oomph
       Vector<double> s(2), r(2);
 
       // Setup temporary storage for the Node
-      Vector<Node *> Tmp_node_pt;
+      Vector<Node*> Tmp_node_pt;
 
       // Now blindly loop over the macro elements and associate and finite
       // element with each
@@ -83,7 +83,7 @@ namespace oomph
         Element_pt.push_back(new ELEMENT);
 
         // Read out the number of linear points in the element
-        unsigned np = dynamic_cast<ELEMENT *>(finite_element_pt(e))->nnode_1d();
+        unsigned np = dynamic_cast<ELEMENT*>(finite_element_pt(e))->nnode_1d();
 
         // Loop over nodes in the column
         for (unsigned l1 = 0; l1 < np; l1++)
@@ -115,7 +115,7 @@ namespace oomph
       // pointers and the deleting excess nodes
 
       // Read out the number of linear points in the element
-      unsigned np = dynamic_cast<ELEMENT *>(finite_element_pt(0))->nnode_1d();
+      unsigned np = dynamic_cast<ELEMENT*>(finite_element_pt(0))->nnode_1d();
 
       // Edge between Elements 0 and 1
       for (unsigned n = 0; n < np; n++)
@@ -180,7 +180,7 @@ namespace oomph
       for (unsigned n = 0; n < np; n++)
       {
         // Left hand side
-        Node *nod_pt = finite_element_pt(0)->node_pt(n * np);
+        Node* nod_pt = finite_element_pt(0)->node_pt(n * np);
         convert_to_boundary_node(nod_pt);
         add_boundary_node(3, nod_pt);
 
@@ -208,7 +208,7 @@ namespace oomph
       for (unsigned n = 1; n < np; n++)
       {
         // Next part of hole
-        Node *nod_pt = finite_element_pt(2)->node_pt(n * np);
+        Node* nod_pt = finite_element_pt(2)->node_pt(n * np);
         convert_to_boundary_node(nod_pt);
         add_boundary_node(4, nod_pt);
       }
@@ -216,7 +216,7 @@ namespace oomph
       for (unsigned n = 1; n < np; n++)
       {
         // Next part of hole
-        Node *nod_pt = finite_element_pt(1)->node_pt(np - n - 1);
+        Node* nod_pt = finite_element_pt(1)->node_pt(np - n - 1);
         convert_to_boundary_node(nod_pt);
         add_boundary_node(4, nod_pt);
       }
@@ -224,7 +224,7 @@ namespace oomph
       for (unsigned n = 1; n < np - 1; n++)
       {
         // Final part of hole
-        Node *nod_pt =
+        Node* nod_pt =
           finite_element_pt(0)->node_pt(np * (np - n - 1) + np - 1);
         convert_to_boundary_node(nod_pt);
         add_boundary_node(4, nod_pt);
@@ -232,14 +232,14 @@ namespace oomph
     }
 
     /// Access function to the domain
-    RectangleWithHoleDomain *domain_pt()
+    RectangleWithHoleDomain* domain_pt()
     {
       return Domain_pt;
     }
 
   protected:
     /// Pointer to the domain
-    RectangleWithHoleDomain *Domain_pt;
+    RectangleWithHoleDomain* Domain_pt;
   };
 
   //////////////////////////////////////////////////////////////////////////
@@ -263,9 +263,9 @@ namespace oomph
     /// in anticlockwise direction. Timestepper defaults to Steady
     /// default timestepper.
     RefineableRectangleWithHoleMesh(
-      GeomObject *cylinder_pt,
-      const double &length,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      GeomObject* cylinder_pt,
+      const double& length,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       RectangleWithHoleMesh<ELEMENT>(cylinder_pt, length, time_stepper_pt)
     {
       // Nodal positions etc. were created in constructor for
@@ -274,7 +274,7 @@ namespace oomph
       // Loop over all elements and set macro element pointer
       for (unsigned e = 0; e < 4; e++)
       {
-        dynamic_cast<ELEMENT *>(this->element_pt(e))
+        dynamic_cast<ELEMENT*>(this->element_pt(e))
           ->set_macro_elem_pt(this->Domain_pt->macro_element_pt(e));
       }
 

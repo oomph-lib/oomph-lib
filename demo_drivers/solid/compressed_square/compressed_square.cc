@@ -53,7 +53,7 @@ namespace oomph
     MySolidElement() : ELEMENT() {}
 
     /// Overload output function
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       Vector<double> s(2);
       Vector<double> x(2);
@@ -109,13 +109,13 @@ namespace oomph
 namespace Global_Physical_Variables
 {
   /// Pointer to constitutive law
-  ConstitutiveLaw *Constitutive_law_pt = 0;
+  ConstitutiveLaw* Constitutive_law_pt = 0;
 
   /// Poisson's ratio for Hooke's law
   double Nu = 0.45;
 
   /// Pointer to strain energy function
-  StrainEnergyFunction *Strain_energy_function_pt = 0;
+  StrainEnergyFunction* Strain_energy_function_pt = 0;
 
   /// First "Mooney Rivlin" coefficient for generalised Mooney Rivlin law
   double C1 = 1.3;
@@ -127,7 +127,7 @@ namespace Global_Physical_Variables
   double Gravity = 0.0;
 
   /// Non-dimensional gravity as body force
-  void gravity(const double &time, const Vector<double> &xi, Vector<double> &b)
+  void gravity(const double& time, const Vector<double>& xi, Vector<double>& b)
   {
     b[0] = 0.0;
     b[1] = -Gravity;
@@ -144,7 +144,7 @@ class CompressedSquareProblem : public Problem
 public:
   /// \short Constructor: Pass flag that determines if we want to use
   /// a true incompressible formulation
-  CompressedSquareProblem(const bool &incompress);
+  CompressedSquareProblem(const bool& incompress);
 
   /// Update function (empty)
   void actions_after_newton_solve() {}
@@ -154,17 +154,17 @@ public:
 
   /// \short Doc the solution & exact (linear) solution for compressible
   /// or incompressible materials
-  void doc_solution(const bool &incompress);
+  void doc_solution(const bool& incompress);
 
   /// Run the job -- doc in RESLTi_case
-  void run_it(const int &i_case, const bool &incompress);
+  void run_it(const int& i_case, const bool& incompress);
 
 private:
   /// Trace file
   ofstream Trace_file;
 
   /// Pointers to node whose position we're tracing
-  Node *Trace_node_pt;
+  Node* Trace_node_pt;
 
   /// DocInfo object for output
   DocInfo Doc_info;
@@ -176,7 +176,7 @@ private:
 //======================================================================
 template<class ELEMENT>
 CompressedSquareProblem<ELEMENT>::CompressedSquareProblem(
-  const bool &incompress)
+  const bool& incompress)
 {
   // Create the mesh
 
@@ -200,7 +200,7 @@ CompressedSquareProblem<ELEMENT>::CompressedSquareProblem(
   for (unsigned i = 0; i < n_element; i++)
   {
     // Cast to a solid element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the constitutive law
     el_pt->constitutive_law_pt() =
@@ -210,8 +210,8 @@ CompressedSquareProblem<ELEMENT>::CompressedSquareProblem(
     el_pt->body_force_fct_pt() = Global_Physical_Variables::gravity;
 
     // Is the element based on the pressure/displacement formulation?
-    PVDEquationsWithPressure<2> *test_pt =
-      dynamic_cast<PVDEquationsWithPressure<2> *>(mesh_pt()->element_pt(i));
+    PVDEquationsWithPressure<2>* test_pt =
+      dynamic_cast<PVDEquationsWithPressure<2>*>(mesh_pt()->element_pt(i));
     if (test_pt != 0)
     {
       // Do we want true incompressibility (formulation III in the
@@ -239,7 +239,7 @@ CompressedSquareProblem<ELEMENT>::CompressedSquareProblem(
     unsigned nnod = mesh_pt()->nboundary_node(b);
     for (unsigned i = 0; i < nnod; i++)
     {
-      dynamic_cast<SolidNode *>(mesh_pt()->boundary_node_pt(b, i))
+      dynamic_cast<SolidNode*>(mesh_pt()->boundary_node_pt(b, i))
         ->pin_position(0);
     }
   }
@@ -250,7 +250,7 @@ CompressedSquareProblem<ELEMENT>::CompressedSquareProblem(
     unsigned nnod = mesh_pt()->nboundary_node(b);
     for (unsigned i = 0; i < nnod; i++)
     {
-      dynamic_cast<SolidNode *>(mesh_pt()->boundary_node_pt(b, i))
+      dynamic_cast<SolidNode*>(mesh_pt()->boundary_node_pt(b, i))
         ->pin_position(1);
     }
   }
@@ -264,7 +264,7 @@ CompressedSquareProblem<ELEMENT>::CompressedSquareProblem(
 /// Doc the solution
 //==================================================================
 template<class ELEMENT>
-void CompressedSquareProblem<ELEMENT>::doc_solution(const bool &incompress)
+void CompressedSquareProblem<ELEMENT>::doc_solution(const bool& incompress)
 {
   ofstream some_file;
   char filename[100];
@@ -303,7 +303,7 @@ void CompressedSquareProblem<ELEMENT>::doc_solution(const bool &incompress)
   for (unsigned e = 0; e < nelem; e++)
   {
     // Cast to a solid element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
     // Tecplot header info
     some_file << "ZONE I=" << n_plot << ", J=" << n_plot << std::endl;
@@ -356,8 +356,8 @@ void CompressedSquareProblem<ELEMENT>::doc_solution(const bool &incompress)
 /// Run it
 //==================================================================
 template<class ELEMENT>
-void CompressedSquareProblem<ELEMENT>::run_it(const int &i_case,
-                                              const bool &incompress)
+void CompressedSquareProblem<ELEMENT>::run_it(const int& i_case,
+                                              const bool& incompress)
 {
   // Set output directory
   char dirname[100];

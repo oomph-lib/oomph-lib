@@ -57,7 +57,7 @@ namespace oomph
     friend class TetMeshFacet;
 
     /// Constructor: Pass coordinates (length 3!)
-    TetMeshVertex(const Vector<double> &x) : X(x)
+    TetMeshVertex(const Vector<double>& x) : X(x)
     {
 #ifdef PARANOID
       if (X.size() != 3)
@@ -73,7 +73,7 @@ namespace oomph
     }
 
     /// \short Set intrinisic coordinates in GeomObject
-    void set_zeta_in_geom_object(const Vector<double> &zeta)
+    void set_zeta_in_geom_object(const Vector<double>& zeta)
     {
 #ifdef PARANOID
       if (zeta.size() != 2)
@@ -100,7 +100,7 @@ namespace oomph
     }
 
     /// i-th coordinate
-    double x(const unsigned &i) const
+    double x(const unsigned& i) const
     {
       return X[i];
     }
@@ -117,7 +117,7 @@ namespace oomph
 
   private:
     /// Set of (one-based!) boundary IDs this vertex lives on
-    void set_one_based_boundary_id(const unsigned &id)
+    void set_one_based_boundary_id(const unsigned& id)
     {
       One_based_boundary_id.insert(id);
     }
@@ -146,7 +146,7 @@ namespace oomph
   {
   public:
     /// Constructor: Specify number of vertices
-    TetMeshFacet(const unsigned &nvertex) :
+    TetMeshFacet(const unsigned& nvertex) :
       One_based_boundary_id(0), // Initialision implies not on any boundary
       One_based_region_id_that_facet_is_embedded_in(0) // Initialisation implies
     // not embedded in any region
@@ -161,19 +161,19 @@ namespace oomph
     }
 
     /// Pointer to j-th vertex (const)
-    TetMeshVertex *vertex_pt(const unsigned &j) const
+    TetMeshVertex* vertex_pt(const unsigned& j) const
     {
       return Vertex_pt[j];
     }
 
     /// Set pointer to j-th vertex and pass one-based boundary id that
     /// may already have been set for this facet.
-    void set_vertex_pt(const unsigned &j, TetMeshVertex *vertex_pt)
+    void set_vertex_pt(const unsigned& j, TetMeshVertex* vertex_pt)
     {
       Vertex_pt[j] = vertex_pt;
       // If not set yet, this is harmless since it simply over-writes
       // the dummy value in vertex
-      TetMeshVertex *v_pt = Vertex_pt[j];
+      TetMeshVertex* v_pt = Vertex_pt[j];
       if (v_pt != 0)
       {
         v_pt->set_one_based_boundary_id(One_based_boundary_id);
@@ -188,13 +188,13 @@ namespace oomph
 
     /// \short Set (one-based!) boundary IDs this facet lives on. Passed to any
     /// existing vertices and to any future ones
-    void set_one_based_boundary_id(const unsigned &one_based_id)
+    void set_one_based_boundary_id(const unsigned& one_based_id)
     {
       One_based_boundary_id = one_based_id;
       unsigned nv = Vertex_pt.size();
       for (unsigned j = 0; j < nv; j++)
       {
-        TetMeshVertex *v_pt = Vertex_pt[j];
+        TetMeshVertex* v_pt = Vertex_pt[j];
         if (v_pt != 0)
         {
           v_pt->set_one_based_boundary_id(one_based_id);
@@ -205,7 +205,7 @@ namespace oomph
     /// \short Set (one-based!) region ID this facet is adjacent to.
     /// Specification of zero argument is harmless as it indicates that
     /// that facet is not adjacent to any region.
-    void set_one_based_adjacent_region_id(const unsigned &one_based_id)
+    void set_one_based_adjacent_region_id(const unsigned& one_based_id)
     {
       One_based_adjacent_region_id.insert(one_based_id);
     }
@@ -224,7 +224,7 @@ namespace oomph
 
     /// Facet is to be embedded in specified one-based region
     void set_one_based_region_that_facet_is_embedded_in(
-      const unsigned &one_based_region_id)
+      const unsigned& one_based_region_id)
     {
       One_based_region_id_that_facet_is_embedded_in = one_based_region_id;
     }
@@ -237,7 +237,7 @@ namespace oomph
     }
 
     /// Output
-    void output(std::ostream &outfile) const
+    void output(std::ostream& outfile) const
     {
       unsigned n = Vertex_pt.size();
       outfile << "ZONE I=" << n + 1 << std::endl;
@@ -254,7 +254,7 @@ namespace oomph
 
   private:
     /// Pointer to vertices
-    Vector<TetMeshVertex *> Vertex_pt;
+    Vector<TetMeshVertex*> Vertex_pt;
 
     /// (One-based!) boundary IDs this facet lives on
     unsigned One_based_boundary_id;
@@ -301,25 +301,25 @@ namespace oomph
     }
 
     /// One-based boundary id of j-th facet
-    unsigned one_based_facet_boundary_id(const unsigned &j) const
+    unsigned one_based_facet_boundary_id(const unsigned& j) const
     {
       return Facet_pt[j]->one_based_boundary_id();
     }
 
     /// First (of possibly multiple) one-based boundary id of j-th vertex
-    unsigned one_based_vertex_boundary_id(const unsigned &j) const
+    unsigned one_based_vertex_boundary_id(const unsigned& j) const
     {
       return Vertex_pt[j]->one_based_boundary_id();
     }
 
     /// i-th coordinate of j-th vertex
-    double vertex_coordinate(const unsigned &j, const unsigned &i) const
+    double vertex_coordinate(const unsigned& j, const unsigned& i) const
     {
       return Vertex_pt[j]->x(i);
     }
 
     /// Number of vertices defining the j-th facet
-    unsigned nvertex_on_facet(const unsigned &j) const
+    unsigned nvertex_on_facet(const unsigned& j) const
     {
       return Facet_pt[j]->nvertex();
     }
@@ -343,26 +343,26 @@ namespace oomph
     }
 
     /// Pointer to j-th facet
-    TetMeshFacet *facet_pt(const unsigned &j) const
+    TetMeshFacet* facet_pt(const unsigned& j) const
     {
       return Facet_pt[j];
     }
 
     /// Pointer to j-th vertex
-    TetMeshVertex *vertex_pt(const unsigned &j) const
+    TetMeshVertex* vertex_pt(const unsigned& j) const
     {
       return Vertex_pt[j];
     }
 
     /// \short Access to GeomObject with boundaries associated with this
     /// surface (Null if there isn't one!)
-    DiskLikeGeomObjectWithBoundaries *geom_object_with_boundaries_pt()
+    DiskLikeGeomObjectWithBoundaries* geom_object_with_boundaries_pt()
     {
       return Geom_object_with_boundaries_pt;
     }
 
     /// Output
-    void output(std::ostream &outfile) const
+    void output(std::ostream& outfile) const
     {
       unsigned n = Facet_pt.size();
       for (unsigned j = 0; j < n; j++)
@@ -372,7 +372,7 @@ namespace oomph
     }
 
     /// Output
-    void output(const std::string &filename) const
+    void output(const std::string& filename) const
     {
       std::ofstream outfile;
       outfile.open(filename.c_str());
@@ -386,9 +386,9 @@ namespace oomph
     /// facet facet_id. Default implementation: Linear interpolation
     /// between edges. zeta_boundary=0.0: we're on vertex 0;
     /// zeta_boundary=1.0: we're on vertex 1.
-    virtual void boundary_zeta01(const unsigned &facet_id,
-                                 const double &zeta_boundary,
-                                 Vector<double> &zeta)
+    virtual void boundary_zeta01(const unsigned& facet_id,
+                                 const double& zeta_boundary,
+                                 Vector<double>& zeta)
     {
       Vector<Vector<double>> zeta_vertex(2);
       zeta_vertex[0] = Facet_pt[facet_id]->vertex_pt(0)->zeta_in_geom_object();
@@ -405,9 +405,9 @@ namespace oomph
     /// facet facet_id. Default implementation: Linear interpolation
     /// between edges. zeta_boundary=0.0: we're on vertex 1;
     /// zeta_boundary=1.0: we're on vertex 2.
-    virtual void boundary_zeta12(const unsigned &facet_id,
-                                 const double &zeta_boundary,
-                                 Vector<double> &zeta)
+    virtual void boundary_zeta12(const unsigned& facet_id,
+                                 const double& zeta_boundary,
+                                 Vector<double>& zeta)
     {
       Vector<Vector<double>> zeta_vertex(2);
       zeta_vertex[0] = Facet_pt[facet_id]->vertex_pt(1)->zeta_in_geom_object();
@@ -424,9 +424,9 @@ namespace oomph
     /// facet facet_id. Default implementation: Linear interpolation
     /// between edges. zeta_boundary=0.0: we're on vertex 2;
     /// zeta_boundary=1.0: we're on vertex 0.
-    virtual void boundary_zeta20(const unsigned &facet_id,
-                                 const double &zeta_boundary,
-                                 Vector<double> &zeta)
+    virtual void boundary_zeta20(const unsigned& facet_id,
+                                 const double& zeta_boundary,
+                                 Vector<double>& zeta)
     {
       Vector<Vector<double>> zeta_vertex(2);
       zeta_vertex[0] = Facet_pt[facet_id]->vertex_pt(2)->zeta_in_geom_object();
@@ -440,7 +440,7 @@ namespace oomph
     /// \short Facet connectivity: vertex_index[j] is the index of the
     /// j-th vertex (in the Vertex_pt vector) in facet f. Bit of an obscure
     /// functionality that's only needed for setup tetgen_io.
-    Vector<unsigned> vertex_index_in_tetgen(const unsigned &f)
+    Vector<unsigned> vertex_index_in_tetgen(const unsigned& f)
     {
       if (Facet_vertex_index_in_tetgen.size() != nfacet())
       {
@@ -451,10 +451,10 @@ namespace oomph
 
   protected:
     /// Vector pointers to vertices
-    Vector<TetMeshVertex *> Vertex_pt;
+    Vector<TetMeshVertex*> Vertex_pt;
 
     /// Vector of pointers to facets
-    Vector<TetMeshFacet *> Facet_pt;
+    Vector<TetMeshFacet*> Facet_pt;
 
     /// \short Boolean to indicate whether extra vertices can be added
     /// on the boundary in tetgen
@@ -465,7 +465,7 @@ namespace oomph
     Vector<Vector<unsigned>> Facet_vertex_index_in_tetgen;
 
     /// \short GeomObject with boundaries associated with this surface
-    DiskLikeGeomObjectWithBoundaries *Geom_object_with_boundaries_pt;
+    DiskLikeGeomObjectWithBoundaries* Geom_object_with_boundaries_pt;
 
   private:
     /// Setup facet connectivity for tetgen
@@ -480,7 +480,7 @@ namespace oomph
         Facet_vertex_index_in_tetgen[f].resize(nv);
         for (unsigned v = 0; v < nv; v++)
         {
-          TetMeshVertex *my_vertex_pt = Facet_pt[f]->vertex_pt(v);
+          TetMeshVertex* my_vertex_pt = Facet_pt[f]->vertex_pt(v);
           for (unsigned j = 0; j < nv_overall; j++)
           {
             if (my_vertex_pt == Vertex_pt[j])
@@ -533,22 +533,22 @@ namespace oomph
     }
 
     /// i=th coordinate of the j-th internal point for tetgen
-    const double &internal_point_for_tetgen(const unsigned &j,
-                                            const unsigned &i) const
+    const double& internal_point_for_tetgen(const unsigned& j,
+                                            const unsigned& i) const
     {
       return (Internal_point_for_tetgen[j].first)[i];
     }
 
     /// Specify coordinate of hole for tetgen
-    void set_hole_for_tetgen(const Vector<double> &hole_point)
+    void set_hole_for_tetgen(const Vector<double>& hole_point)
     {
       Internal_point_for_tetgen.push_back(std::make_pair(hole_point, -1));
     }
 
     /// \short Specify a region; pass (zero-based) region ID and coordinate
     /// of point in region for tetgen
-    void set_region_for_tetgen(const unsigned &region_id,
-                               const Vector<double> &region_point)
+    void set_region_for_tetgen(const unsigned& region_id,
+                               const Vector<double>& region_point)
     {
       Internal_point_for_tetgen.push_back(
         std::make_pair(region_point, region_id));
@@ -563,19 +563,19 @@ namespace oomph
 
     /// \short Return the (zero-based) region ID of j-th internal point for
     /// tetgen. Negative if it's actually a hole.
-    const int &region_id_for_tetgen(const unsigned &j) const
+    const int& region_id_for_tetgen(const unsigned& j) const
     {
       return Internal_point_for_tetgen[j].second;
     }
 
     /// Is j-th internal point for tetgen associated with a hole?
-    bool internal_point_identifies_hole_for_tetgen(const unsigned &j)
+    bool internal_point_identifies_hole_for_tetgen(const unsigned& j)
     {
       return (Internal_point_for_tetgen[j].second < 0);
     }
 
     /// Is j-th internal point for tetgen associated with a region?
-    bool internal_point_identifies_region_for_tetgen(const unsigned &j)
+    bool internal_point_identifies_region_for_tetgen(const unsigned& j)
     {
       return (Internal_point_for_tetgen[j].second >= 0);
     }
@@ -612,13 +612,13 @@ namespace oomph
     TetMeshBase() : Outer_boundary_pt(0) {}
 
     /// Broken copy constructor
-    TetMeshBase(const TetMeshBase &node)
+    TetMeshBase(const TetMeshBase& node)
     {
       BrokenCopy::broken_copy("TetMeshBase");
     }
 
     /// Broken assignment operator
-    void operator=(const TetMeshBase &)
+    void operator=(const TetMeshBase&)
     {
       BrokenCopy::broken_assign("TetMeshBase");
     }
@@ -632,7 +632,7 @@ namespace oomph
 
     /// \short Assess mesh quality: Ratio of max. edge length to min. height,
     /// so if it's very large it's BAAAAAD.
-    void assess_mesh_quality(std::ofstream &some_file);
+    void assess_mesh_quality(std::ofstream& some_file);
 
     /// \short Setup boundary coordinate on boundary b which is
     /// assumed to be planar. Boundary coordinates are the
@@ -653,7 +653,7 @@ namespace oomph
     ///          to interpolated intrinsic coordinates of an associated
     ///          GeomObject (if any) into the interior.
     template<class ELEMENT>
-    void setup_boundary_coordinates(const unsigned &b)
+    void setup_boundary_coordinates(const unsigned& b)
     {
       // Dummy file
       std::ofstream some_file;
@@ -684,8 +684,8 @@ namespace oomph
     /// Final boolean argument allows switching of the direction of the outer
     /// unit normal.
     template<class ELEMENT>
-    void setup_boundary_coordinates(const unsigned &b,
-                                    const bool &switch_normal)
+    void setup_boundary_coordinates(const unsigned& b,
+                                    const bool& switch_normal)
     {
       // Dummy file
       std::ofstream some_file;
@@ -714,9 +714,9 @@ namespace oomph
     /// Boolean argument allows switching of the direction of the outer
     /// unit normal.  Output file for doc.
     template<class ELEMENT>
-    void setup_boundary_coordinates(const unsigned &b,
-                                    const bool &switch_normal,
-                                    std::ofstream &outfile);
+    void setup_boundary_coordinates(const unsigned& b,
+                                    const bool& switch_normal,
+                                    std::ofstream& outfile);
 
     /// \short Setup boundary coordinate on boundary b which is
     /// assumed to be planar. Boundary coordinates are the
@@ -738,7 +738,7 @@ namespace oomph
     ///          GeomObject (if any) into the interior.
     /// Output file for doc.
     template<class ELEMENT>
-    void setup_boundary_coordinates(const unsigned &b, std::ofstream &outfile)
+    void setup_boundary_coordinates(const unsigned& b, std::ofstream& outfile)
     {
       // Don't switch the normal
       bool switch_normal = false;
@@ -746,12 +746,12 @@ namespace oomph
     }
 
     /// Return the number of elements adjacent to boundary b in region r
-    inline unsigned nboundary_element_in_region(const unsigned &b,
-                                                const unsigned &r) const
+    inline unsigned nboundary_element_in_region(const unsigned& b,
+                                                const unsigned& r) const
     {
       // Need to use a constant iterator here to keep the function "const"
       // Return an iterator to the appropriate entry, if we find it
-      std::map<unsigned, Vector<FiniteElement *>>::const_iterator it =
+      std::map<unsigned, Vector<FiniteElement*>>::const_iterator it =
         Boundary_region_element_pt[b].find(r);
       if (it != Boundary_region_element_pt[b].end())
       {
@@ -765,12 +765,12 @@ namespace oomph
     }
 
     /// Return pointer to the e-th element adjacent to boundary b in region r
-    FiniteElement *boundary_element_in_region_pt(const unsigned &b,
-                                                 const unsigned &r,
-                                                 const unsigned &e) const
+    FiniteElement* boundary_element_in_region_pt(const unsigned& b,
+                                                 const unsigned& r,
+                                                 const unsigned& e) const
     {
       // Use a constant iterator here to keep function "const" overall
-      std::map<unsigned, Vector<FiniteElement *>>::const_iterator it =
+      std::map<unsigned, Vector<FiniteElement*>>::const_iterator it =
         Boundary_region_element_pt[b].find(r);
       if (it != Boundary_region_element_pt[b].end())
       {
@@ -783,9 +783,9 @@ namespace oomph
     }
 
     /// Return face index of the e-th element adjacent to boundary b in region r
-    int face_index_at_boundary_in_region(const unsigned &b,
-                                         const unsigned &r,
-                                         const unsigned &e) const
+    int face_index_at_boundary_in_region(const unsigned& b,
+                                         const unsigned& r,
+                                         const unsigned& e) const
     {
       // Use a constant iterator here to keep function "const" overall
       std::map<unsigned, Vector<int>>::const_iterator it =
@@ -814,7 +814,7 @@ namespace oomph
     }
 
     /// Return the number of elements in region r
-    unsigned nregion_element(const unsigned &r)
+    unsigned nregion_element(const unsigned& r)
     {
       unsigned entry = 0;
       bool found = false;
@@ -854,13 +854,13 @@ namespace oomph
 
     /// \short Return the i-th region attribute (here only used as the
     /// (assumed to be unsigned) region id
-    double region_attribute(const unsigned &i)
+    double region_attribute(const unsigned& i)
     {
       return Region_attribute[i];
     }
 
     /// Return the e-th element in the r-th region
-    FiniteElement *region_element_pt(const unsigned &r, const unsigned &e)
+    FiniteElement* region_element_pt(const unsigned& r, const unsigned& e)
     {
       unsigned entry = 0;
       bool found = false;
@@ -911,10 +911,10 @@ namespace oomph
     /// optional output files. (Uses directory and label).
     template<class ELEMENT>
     void snap_to_quadratic_surface(
-      const Vector<unsigned> &boundary_id,
-      const std::string &quadratic_surface_file_name,
-      const bool &switch_normal,
-      DocInfo &doc_info);
+      const Vector<unsigned>& boundary_id,
+      const std::string& quadratic_surface_file_name,
+      const bool& switch_normal,
+      DocInfo& doc_info);
 
     /// \short Snap boundaries specified by the IDs listed in boundary_id to
     /// a quadratric surface, specified in the file
@@ -928,9 +928,9 @@ namespace oomph
     /// outer boundary of the solid.
     template<class ELEMENT>
     void snap_to_quadratic_surface(
-      const Vector<unsigned> &boundary_id,
-      const std::string &quadratic_surface_file_name,
-      const bool &switch_normal)
+      const Vector<unsigned>& boundary_id,
+      const std::string& quadratic_surface_file_name,
+      const bool& switch_normal)
     {
       // Dummy doc info
       DocInfo doc_info;
@@ -949,7 +949,7 @@ namespace oomph
     /// to to steady timestepper.
     template<class ELEMENT>
     void split_elements_in_corners(
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper);
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
     /// Setup lookup schemes which establish which elements are located
     /// next to mesh's boundaries (wrapper to suppress doc).
@@ -961,12 +961,12 @@ namespace oomph
 
     /// \short Setup lookup schemes which establish which elements are located
     /// next to mesh's boundaries. Doc in outfile (if it's open).
-    void setup_boundary_element_info(std::ostream &outfile);
+    void setup_boundary_element_info(std::ostream& outfile);
 
   protected:
     /// \short Vectors of vectors of elements in each region (note: this just
     /// stores them; the region IDs are contained in Region_attribute!)
-    Vector<Vector<FiniteElement *>> Region_element_pt;
+    Vector<Vector<FiniteElement*>> Region_element_pt;
 
     /// \short Vector of attributes associated with the elements in each region
     /// NOTE: double is enforced on us by tetgen. We use it as an unsigned
@@ -974,7 +974,7 @@ namespace oomph
     Vector<double> Region_attribute;
 
     /// Storage for elements adjacent to a boundary in a particular region
-    Vector<std::map<unsigned, Vector<FiniteElement *>>>
+    Vector<std::map<unsigned, Vector<FiniteElement*>>>
       Boundary_region_element_pt;
 
     /// \short Storage for the face index adjacent to a boundary in a particular
@@ -982,18 +982,18 @@ namespace oomph
     Vector<std::map<unsigned, Vector<int>>> Face_index_region_at_boundary;
 
     /// Faceted surface that defines outer boundaries
-    TetMeshFacetedClosedSurface *Outer_boundary_pt;
+    TetMeshFacetedClosedSurface* Outer_boundary_pt;
 
     /// Vector to faceted surfaces that define internal boundaries
-    Vector<TetMeshFacetedSurface *> Internal_surface_pt;
+    Vector<TetMeshFacetedSurface*> Internal_surface_pt;
 
     /// \short Reverse lookup scheme: Pointer to faceted surface (if any!)
     /// associated with boundary b
-    std::map<unsigned, TetMeshFacetedSurface *> Tet_mesh_faceted_surface_pt;
+    std::map<unsigned, TetMeshFacetedSurface*> Tet_mesh_faceted_surface_pt;
 
     /// \short Reverse lookup scheme: Pointer to facet (if any!)
     /// associated with boundary b
-    std::map<unsigned, TetMeshFacet *> Tet_mesh_facet_pt;
+    std::map<unsigned, TetMeshFacet*> Tet_mesh_facet_pt;
 
     /// \short Boundary coordinates of vertices in triangular facets
     /// associated with given boundary. Is only set up for triangular facets!
@@ -1001,7 +1001,7 @@ namespace oomph
       Triangular_facet_vertex_boundary_coordinate;
 
     /// Timestepper used to build nodes
-    TimeStepper *Time_stepper_pt;
+    TimeStepper* Time_stepper_pt;
   };
 
   //////////////////////////////////////////////////////////////////////////////
@@ -1033,12 +1033,12 @@ namespace oomph
   ///          (if any) into the interior.
   //======================================================================
   template<class ELEMENT>
-  void TetMeshBase::setup_boundary_coordinates(const unsigned &b,
-                                               const bool &switch_normal,
-                                               std::ofstream &outfile)
+  void TetMeshBase::setup_boundary_coordinates(const unsigned& b,
+                                               const bool& switch_normal,
+                                               std::ofstream& outfile)
   {
-    Node *lower_left_node_pt = 0;
-    Node *upper_right_node_pt = 0;
+    Node* lower_left_node_pt = 0;
+    Node* upper_right_node_pt = 0;
 
     // Unit vector connecting lower left and upper right nodes
     Vector<double> b0(3);
@@ -1047,8 +1047,8 @@ namespace oomph
     Vector<double> b1(3);
 
     // Facet?
-    TetMeshFacet *f_pt = 0;
-    std::map<unsigned, TetMeshFacet *>::iterator it = Tet_mesh_facet_pt.find(b);
+    TetMeshFacet* f_pt = 0;
+    std::map<unsigned, TetMeshFacet*>::iterator it = Tet_mesh_facet_pt.find(b);
     if (it != Tet_mesh_facet_pt.end())
     {
       f_pt = (*it).second;
@@ -1066,7 +1066,7 @@ namespace oomph
     for (unsigned do_for_real = 0; do_for_real < 2; do_for_real++)
     {
       // Temporary storage for face elements
-      Vector<FiniteElement *> face_el_pt;
+      Vector<FiniteElement*> face_el_pt;
 
       // Loop over all elements on boundaries
       unsigned nel = this->nboundary_element(b);
@@ -1077,7 +1077,7 @@ namespace oomph
         for (unsigned e = 0; e < nel; e++)
         {
           // Get pointer to the bulk element that is adjacent to boundary b
-          FiniteElement *bulk_elem_pt = this->boundary_element_pt(b, e);
+          FiniteElement* bulk_elem_pt = this->boundary_element_pt(b, e);
 
           // Find the index of the face of element e along boundary b
           int face_index = this->face_index_at_boundary(b, e);
@@ -1102,7 +1102,7 @@ namespace oomph
         for (unsigned j = 0; j < nnod; j++)
         {
           // Get node
-          Node *nod_pt = this->boundary_node_pt(b, j);
+          Node* nod_pt = this->boundary_node_pt(b, j);
 
           // Primary criterion for lower left: Does it have a lower
           // z-coordinate?
@@ -1175,7 +1175,7 @@ namespace oomph
         Vector<double> s(2, 0.0);
         if (nv != 3)
         {
-          dynamic_cast<DummyFaceElement<ELEMENT> *>(face_el_pt[0])
+          dynamic_cast<DummyFaceElement<ELEMENT>*>(face_el_pt[0])
             ->outer_unit_normal(s, normal);
         }
         else
@@ -1215,7 +1215,7 @@ namespace oomph
         {
           // Get (outer) unit normal to face element
           Vector<double> my_normal(3);
-          dynamic_cast<DummyFaceElement<ELEMENT> *>(face_el_pt[e])
+          dynamic_cast<DummyFaceElement<ELEMENT>*>(face_el_pt[e])
             ->outer_unit_normal(s, my_normal);
 
           // Dot product should be one!
@@ -1241,7 +1241,7 @@ namespace oomph
           for (unsigned j = 0; j < nnod; j++)
           {
             // Get node
-            Node *nod_pt = this->boundary_node_pt(b, j);
+            Node* nod_pt = this->boundary_node_pt(b, j);
 
             // Difference vector to lower left corner
             Vector<double> delta(3);
@@ -1282,7 +1282,7 @@ namespace oomph
               for (unsigned j = 0; j < nnod; j++)
               {
                 // Get node
-                Node *nod_pt = this->boundary_node_pt(b, j);
+                Node* nod_pt = this->boundary_node_pt(b, j);
                 error_message << nod_pt->x(0) << " " << nod_pt->x(1) << " "
                               << nod_pt->x(2) << " " << std::endl;
               }
@@ -1370,10 +1370,10 @@ namespace oomph
   //======================================================================
   template<class ELEMENT>
   void TetMeshBase::snap_to_quadratic_surface(
-    const Vector<unsigned> &boundary_id,
-    const std::string &quadratic_surface_file_name,
-    const bool &switch_normal,
-    DocInfo &doc_info)
+    const Vector<unsigned>& boundary_id,
+    const std::string& quadratic_surface_file_name,
+    const bool& switch_normal,
+    DocInfo& doc_info)
   {
     // Aux storage for processing input
     char dummy[101];
@@ -1413,7 +1413,7 @@ namespace oomph
     }
 
     // Temporary storage for face elements
-    Vector<FreeStandingFaceElement<ELEMENT> *> face_el_pt;
+    Vector<FreeStandingFaceElement<ELEMENT>*> face_el_pt;
 
     // Loop over quadratic face elements -- one for each facet
     for (unsigned e = 0; e < nel; e++)
@@ -1425,7 +1425,7 @@ namespace oomph
     unsigned n_dim = 3;
     unsigned n_position_type = 1;
     unsigned initial_n_value = 0;
-    Vector<Node *> nod_pt(n_node);
+    Vector<Node*> nod_pt(n_node);
     unsigned node_nmbr;
     std::map<unsigned, unsigned> node_number;
     std::ofstream node_file;
@@ -1467,14 +1467,14 @@ namespace oomph
       Vector<Vector<double>> vertex_boundary_coord(3);
 
       // Loop over all nodes to find the lower left and upper right ones
-      Node *lower_left_node_pt = face_el_pt[e]->node_pt(0);
-      Node *upper_right_node_pt = face_el_pt[e]->node_pt(0);
+      Node* lower_left_node_pt = face_el_pt[e]->node_pt(0);
+      Node* upper_right_node_pt = face_el_pt[e]->node_pt(0);
 
       // Loop over all vertex nodes
       for (unsigned j = 0; j < 3; j++)
       {
         // Get node
-        Node *nod_pt = face_el_pt[e]->node_pt(j);
+        Node* nod_pt = face_el_pt[e]->node_pt(j);
 
         // Primary criterion for lower left: Does it have a lower z-coordinate?
         if (nod_pt->x(2) < lower_left_node_pt->x(2))
@@ -1590,7 +1590,7 @@ namespace oomph
       for (unsigned j = 0; j < 3; j++)
       {
         // Get node
-        Node *nod_pt = face_el_pt[e]->node_pt(j);
+        Node* nod_pt = face_el_pt[e]->node_pt(j);
 
         // Difference vector to lower left corner
         Vector<double> delta(3);
@@ -1696,7 +1696,7 @@ namespace oomph
       }
 
       // Cast the element pointer
-      FreeStandingFaceElement<ELEMENT> *el_pt = face_el_pt[b];
+      FreeStandingFaceElement<ELEMENT>* el_pt = face_el_pt[b];
 
       // Doc boundary coordinate on quadratic facet representation
       if (doc_info.is_doc_enabled())
@@ -1737,20 +1737,20 @@ namespace oomph
       // Loop over bulk elements that are adjacent to quadratic boundary
       Vector<double> boundary_zeta(2);
       Vector<double> quadratic_coordinates(3);
-      GeomObject *geom_obj_pt = 0;
+      GeomObject* geom_obj_pt = 0;
       Vector<double> s_geom_obj(2);
       unsigned nel = this->nboundary_element(boundary_id[b]);
       for (unsigned e = 0; e < nel; e++)
       {
         // Get pointer to the bulk element that is adjacent to boundary
-        FiniteElement *bulk_elem_pt =
+        FiniteElement* bulk_elem_pt =
           this->boundary_element_pt(boundary_id[b], e);
 
         // Loop over nodes
         unsigned nnod = bulk_elem_pt->nnode();
         for (unsigned j = 0; j < nnod; j++)
         {
-          Node *nod_pt = bulk_elem_pt->node_pt(j);
+          Node* nod_pt = bulk_elem_pt->node_pt(j);
           if (nod_pt->is_on_boundary(boundary_id[b]))
           {
             nod_pt->get_coordinates_on_boundary(boundary_id[b], boundary_zeta);
@@ -1854,7 +1854,7 @@ namespace oomph
   /// into sons.
   //========================================================================
   template<class ELEMENT>
-  void TetMeshBase::split_elements_in_corners(TimeStepper *time_stepper_pt)
+  void TetMeshBase::split_elements_in_corners(TimeStepper* time_stepper_pt)
   {
     // Setup boundary lookup scheme if required
     if (!Lookup_for_elements_next_boundary_is_setup)
@@ -1880,7 +1880,7 @@ namespace oomph
     }
 
     // Map to store how many boundaries elements are located on
-    std::map<FiniteElement *, unsigned> count;
+    std::map<FiniteElement*, unsigned> count;
 
     // Loop over all boundaries
     unsigned nb = this->nboundary();
@@ -1891,7 +1891,7 @@ namespace oomph
       for (unsigned e = 0; e < nel; e++)
       {
         // Get pointer to element
-        FiniteElement *el_pt = boundary_element_pt(b, e);
+        FiniteElement* el_pt = boundary_element_pt(b, e);
 
         // Bump up counter
         count[el_pt]++;
@@ -1901,13 +1901,13 @@ namespace oomph
     // To avoid having to check the map for all elements (which will
     // inflate it to the size of all elements!), move offending elements
     // into set
-    std::set<FiniteElement *> elements_to_be_split;
-    for (std::map<FiniteElement *, unsigned>::iterator it = count.begin();
+    std::set<FiniteElement*> elements_to_be_split;
+    for (std::map<FiniteElement*, unsigned>::iterator it = count.begin();
          it != count.end();
          it++)
     {
       // Get pointer to element: Key
-      FiniteElement *el_pt = it->first;
+      FiniteElement* el_pt = it->first;
 
       // Does it have to be split?
       if (it->second > 2)
@@ -1918,22 +1918,22 @@ namespace oomph
 
     // Vector for retained or newly built elements
     unsigned nel = this->nelement();
-    Vector<FiniteElement *> new_or_retained_el_pt;
+    Vector<FiniteElement*> new_or_retained_el_pt;
     new_or_retained_el_pt.reserve(nel);
 
     // Map which returns the 4 newly created elements for each old corner
     // element
-    std::map<FiniteElement *, Vector<FiniteElement *>>
+    std::map<FiniteElement*, Vector<FiniteElement*>>
       old_to_new_corner_element_map;
 
     // Now loop over all elements
     for (unsigned e = 0; e < nel; e++)
     {
       // Get pointer to element
-      FiniteElement *el_pt = this->finite_element_pt(e);
+      FiniteElement* el_pt = this->finite_element_pt(e);
 
       // Does it have to be split? I.e. is it in the set?
-      std::set<FiniteElement *>::iterator it = std::find(
+      std::set<FiniteElement*>::iterator it = std::find(
         elements_to_be_split.begin(), elements_to_be_split.end(), el_pt);
 
       // It's not in the set, so iterator has reached end
@@ -1947,20 +1947,20 @@ namespace oomph
       {
         // Storage for new nodes -- Note: All new nodes are interior and
         // therefore cannot be boundary nodes!
-        Node *node0_pt = 0;
-        Node *node1_pt = 0;
-        Node *node2_pt = 0;
-        Node *node3_pt = 0;
-        Node *node4_pt = 0;
-        Node *node5_pt = 0;
-        Node *node6_pt = 0;
-        Node *node7_pt = 0;
-        Node *node8_pt = 0;
-        Node *node9_pt = 0;
-        Node *node10_pt = 0;
+        Node* node0_pt = 0;
+        Node* node1_pt = 0;
+        Node* node2_pt = 0;
+        Node* node3_pt = 0;
+        Node* node4_pt = 0;
+        Node* node5_pt = 0;
+        Node* node6_pt = 0;
+        Node* node7_pt = 0;
+        Node* node8_pt = 0;
+        Node* node9_pt = 0;
+        Node* node10_pt = 0;
 
         // Create first new element
-        FiniteElement *el1_pt = new ELEMENT;
+        FiniteElement* el1_pt = new ELEMENT;
 
         // Copy existing nodes
         el1_pt->node_pt(0) = el_pt->node_pt(0);
@@ -2000,7 +2000,7 @@ namespace oomph
         }
 
         // Create second new element
-        FiniteElement *el2_pt = new ELEMENT;
+        FiniteElement* el2_pt = new ELEMENT;
 
         // Copy existing nodes
         el2_pt->node_pt(0) = el_pt->node_pt(0);
@@ -2037,7 +2037,7 @@ namespace oomph
         }
 
         // Create third new element
-        FiniteElement *el3_pt = new ELEMENT;
+        FiniteElement* el3_pt = new ELEMENT;
 
         // Copy existing nodes
         el3_pt->node_pt(1) = el_pt->node_pt(1);
@@ -2069,7 +2069,7 @@ namespace oomph
         }
 
         // Create fourth new element
-        FiniteElement *el4_pt = new ELEMENT;
+        FiniteElement* el4_pt = new ELEMENT;
 
         // Copy existing nodes
         el4_pt->node_pt(0) = el_pt->node_pt(0);
@@ -2108,7 +2108,7 @@ namespace oomph
         new_or_retained_el_pt.push_back(el4_pt);
 
         // create a vector of the newly created elements
-        Vector<FiniteElement *> temp_vec(4);
+        Vector<FiniteElement*> temp_vec(4);
         temp_vec[0] = el1_pt;
         temp_vec[1] = el2_pt;
         temp_vec[2] = el3_pt;
@@ -2116,7 +2116,7 @@ namespace oomph
 
         // add the vector to the map
         old_to_new_corner_element_map.insert(
-          std::pair<FiniteElement *, Vector<FiniteElement *>>(el_pt, temp_vec));
+          std::pair<FiniteElement*, Vector<FiniteElement*>>(el_pt, temp_vec));
 
         if (nnode != 15)
         {
@@ -2217,7 +2217,7 @@ namespace oomph
           // Now create the new centroid nodes
 
           // First element
-          Node *temp_nod_pt = el1_pt->construct_node(14, time_stepper_pt);
+          Node* temp_nod_pt = el1_pt->construct_node(14, time_stepper_pt);
           for (unsigned i = 0; i < 3; ++i)
           {
             double av_pos = 0.0;
@@ -2323,14 +2323,14 @@ namespace oomph
     // Step 1: update the region element lookup
 
     // loop over the map of old corner elements which have been split
-    for (std::map<FiniteElement *, Vector<FiniteElement *>>::iterator map_it =
+    for (std::map<FiniteElement*, Vector<FiniteElement*>>::iterator map_it =
            old_to_new_corner_element_map.begin();
          map_it != old_to_new_corner_element_map.end();
          map_it++)
     {
       // extract the old and new elements from the map
-      FiniteElement *original_el_pt = map_it->first;
-      Vector<FiniteElement *> new_el_pt = map_it->second;
+      FiniteElement* original_el_pt = map_it->first;
+      Vector<FiniteElement*> new_el_pt = map_it->second;
 
       unsigned original_region_index = 0;
 
@@ -2340,7 +2340,7 @@ namespace oomph
       bool found = false;
 #endif
 
-      Vector<FiniteElement *>::iterator region_element_it;
+      Vector<FiniteElement*>::iterator region_element_it;
 
       // loop over the regions and look for this original corner element to find
       // out which region it used to be in, so we can add the new elements to
@@ -2408,14 +2408,14 @@ namespace oomph
       unsigned nel = this->nboundary_element(b);
       for (unsigned e = 0; e < nel; e++)
       {
-        FiniteElement *el_pt = boundary_element_pt(b, e);
+        FiniteElement* el_pt = boundary_element_pt(b, e);
 
         // now search for it in each region
         for (unsigned r_index = 0; r_index < Region_attribute.size(); r_index++)
         {
           unsigned region_id = static_cast<unsigned>(Region_attribute[r_index]);
 
-          Vector<FiniteElement *>::iterator it =
+          Vector<FiniteElement*>::iterator it =
             std::find(Region_element_pt[r_index].begin(),
                       Region_element_pt[r_index].end(),
                       el_pt);

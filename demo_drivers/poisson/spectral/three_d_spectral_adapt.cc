@@ -80,7 +80,7 @@ namespace TanhSolnForPoisson
   double Z_0 = 0.0;
 
   // Exact solution as a Vector
-  void get_exact_u(const Vector<double> &x, Vector<double> &u)
+  void get_exact_u(const Vector<double>& x, Vector<double>& u)
   {
     u[0] = tanh(Alpha *
                 ((x[0] - X_0) * N_x / sqrt(N_x * N_x + N_y * N_y + N_z * N_z) +
@@ -89,7 +89,7 @@ namespace TanhSolnForPoisson
   }
 
   /// Exact solution as a scalar
-  void get_exact_u(const Vector<double> &x, double &u)
+  void get_exact_u(const Vector<double>& x, double& u)
   {
     u = tanh(Alpha *
              ((x[0] - X_0) * N_x / sqrt(N_x * N_x + N_y * N_y + N_z * N_z) +
@@ -98,7 +98,7 @@ namespace TanhSolnForPoisson
   }
 
   /// Source function to make it an exact solution
-  void get_source(const Vector<double> &x, double &source)
+  void get_source(const Vector<double>& x, double& source)
   {
     double s1, s2, s3, s4;
 
@@ -167,9 +167,9 @@ public:
 
   /// \short Overload generic access function by one that returns
   /// a pointer to the specific  mesh
-  RefineableEighthSphereMesh<ELEMENT> *mesh_pt()
+  RefineableEighthSphereMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<RefineableEighthSphereMesh<ELEMENT> *>(
+    return dynamic_cast<RefineableEighthSphereMesh<ELEMENT>*>(
       Problem::mesh_pt());
   }
 
@@ -188,7 +188,7 @@ public:
       unsigned num_nod = mesh_pt()->nboundary_node(ibound);
       for (unsigned inod = 0; inod < num_nod; inod++)
       {
-        Node *nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
+        Node* nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
         double u;
         Vector<double> x(3);
         x[0] = nod_pt->x(0);
@@ -201,7 +201,7 @@ public:
   }
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 private:
   /// Pointer to source function
@@ -226,7 +226,7 @@ EighthSpherePoissonProblem<ELEMENT>::EighthSpherePoissonProblem(
   Problem::mesh_pt() = new RefineableEighthSphereMesh<ELEMENT>(radius);
 
   // Set error estimator
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   mesh_pt()->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Adjust error targets for adaptive refinement
@@ -270,7 +270,7 @@ EighthSpherePoissonProblem<ELEMENT>::EighthSpherePoissonProblem(
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from FiniteElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the source function pointer
     el_pt->source_fct_pt() = Source_fct_pt;
@@ -285,7 +285,7 @@ EighthSpherePoissonProblem<ELEMENT>::EighthSpherePoissonProblem(
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void EighthSpherePoissonProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void EighthSpherePoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -338,7 +338,7 @@ void EighthSpherePoissonProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
 /// any command line arguments, we regard this as a validation run
 /// and perform only a single adaptation.
 //===================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

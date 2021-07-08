@@ -57,13 +57,13 @@ namespace TanhSolnForPoisson
   double TanPhi = 0.0;
 
   /// Exact solution as a Vector
-  void get_exact_u(const Vector<double> &x, Vector<double> &u)
+  void get_exact_u(const Vector<double>& x, Vector<double>& u)
   {
     u[0] = tanh(1.0 - Alpha * (TanPhi * x[0] - x[1]));
   }
 
   /// Source function required to make the solution above an exact solution
-  void source_function(const Vector<double> &x, double &source)
+  void source_function(const Vector<double>& x, double& source)
   {
     source = 2.0 * tanh(-1.0 + Alpha * (TanPhi * x[0] - x[1])) *
                (1.0 - pow(tanh(-1.0 + Alpha * (TanPhi * x[0] - x[1])), 2.0)) *
@@ -103,14 +103,14 @@ public:
 
   /// \short Doc the solution. DocInfo object stores flags/labels for where the
   /// output gets written to
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// \short Overloaded version of the problem's access function to
   /// the mesh. Recasts the pointer to the base Mesh object to
   /// the actual mesh type.
-  RefineableRectangularQuadMesh<ELEMENT> *mesh_pt()
+  RefineableRectangularQuadMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<RefineableRectangularQuadMesh<ELEMENT> *>(
+    return dynamic_cast<RefineableRectangularQuadMesh<ELEMENT>*>(
       Problem::mesh_pt());
   }
 
@@ -189,7 +189,7 @@ PoissonProblem<ELEMENT>::PoissonProblem(
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the source function pointer
     el_pt->source_fct_pt() = Source_fct_pt;
@@ -214,7 +214,7 @@ void PoissonProblem<ELEMENT>::actions_before_newton_solve()
   unsigned n_node = mesh_pt()->nnode();
   for (unsigned j = 0; j < n_node; j++)
   {
-    Node *node_pt = mesh_pt()->node_pt(j);
+    Node* node_pt = mesh_pt()->node_pt(j);
     node_pt->set_value(0, 0.0);
   }
 
@@ -231,7 +231,7 @@ void PoissonProblem<ELEMENT>::actions_before_newton_solve()
     for (unsigned n = 0; n < n_node; n++)
     {
       // Get pointer to node
-      Node *nod_pt = mesh_pt()->boundary_node_pt(i, n);
+      Node* nod_pt = mesh_pt()->boundary_node_pt(i, n);
 
       // Extract nodal coordinates from node:
       Vector<double> x(2);
@@ -252,7 +252,7 @@ void PoissonProblem<ELEMENT>::actions_before_newton_solve()
 /// Doc the solution: doc_info contains labels/output directory etc.
 //========================================================================
 template<class ELEMENT>
-void PoissonProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void PoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -301,7 +301,7 @@ void PoissonProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
 //===== start_of_main=====================================================
 /// Driver code for 2D Poisson problem
 //========================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
 #ifdef OOMPH_HAS_MPI
   MPI_Helpers::init(argc, argv);
@@ -350,10 +350,10 @@ int main(int argc, char **argv)
          << "=============================" << endl;
 
     // Create a Trilinos Solver
-    TrilinosAztecOOSolver *linear_solver_pt = new TrilinosAztecOOSolver;
+    TrilinosAztecOOSolver* linear_solver_pt = new TrilinosAztecOOSolver;
 
     // Create the Trilinos ML preconditioner
-    TrilinosMLPreconditioner *preconditioner_pt = new TrilinosMLPreconditioner;
+    TrilinosMLPreconditioner* preconditioner_pt = new TrilinosMLPreconditioner;
 
     // Set the preconditioner pointer
     linear_solver_pt->preconditioner_pt() = preconditioner_pt;
@@ -396,12 +396,12 @@ int main(int argc, char **argv)
       doc_info.number()++;
       oomph_info
         << "Number of linear solver iterations: "
-        << dynamic_cast<TrilinosAztecOOSolver *>(linear_solver_pt)->iterations()
+        << dynamic_cast<TrilinosAztecOOSolver*>(linear_solver_pt)->iterations()
         << std::endl
         << std::endl;
       conv_file
         << "Number of linear solver iterations: "
-        << dynamic_cast<TrilinosAztecOOSolver *>(linear_solver_pt)->iterations()
+        << dynamic_cast<TrilinosAztecOOSolver*>(linear_solver_pt)->iterations()
         << std::endl;
 
     } // end of loop over preconditioner
@@ -422,10 +422,10 @@ int main(int argc, char **argv)
          << "=============================" << endl;
 
     // Create a Trilinos Solver
-    TrilinosAztecOOSolver *linear_solver_pt = new TrilinosAztecOOSolver;
+    TrilinosAztecOOSolver* linear_solver_pt = new TrilinosAztecOOSolver;
 
     // create the Trilinos IFPACK preconditioner
-    TrilinosIFPACKPreconditioner *preconditioner_pt =
+    TrilinosIFPACKPreconditioner* preconditioner_pt =
       new TrilinosIFPACKPreconditioner;
 
     // set the preconditioner pointer
@@ -469,12 +469,12 @@ int main(int argc, char **argv)
       doc_info.number()++;
       oomph_info
         << "Number of linear solver iterations: "
-        << dynamic_cast<TrilinosAztecOOSolver *>(linear_solver_pt)->iterations()
+        << dynamic_cast<TrilinosAztecOOSolver*>(linear_solver_pt)->iterations()
         << std::endl
         << std::endl;
       conv_file
         << "Number of linear solver iterations: "
-        << dynamic_cast<TrilinosAztecOOSolver *>(linear_solver_pt)->iterations()
+        << dynamic_cast<TrilinosAztecOOSolver*>(linear_solver_pt)->iterations()
         << std::endl;
 
     } // end of loop over preconditioner
@@ -497,13 +497,13 @@ int main(int argc, char **argv)
        << endl;
 
   // Pointer to linear solver
-  LinearSolver *linear_solver_pt = 0;
+  LinearSolver* linear_solver_pt = 0;
 
   // Loop over two Trilonos preconditioners
   for (unsigned i_prec = 0; i_prec < 2; i_prec++)
   {
     // Pointer to preconditioner
-    Preconditioner *preconditioner_pt = 0;
+    Preconditioner* preconditioner_pt = 0;
 
     if (i_prec == 0)
     {
@@ -525,13 +525,13 @@ int main(int argc, char **argv)
     cout << "CG iterative solver" << endl;
     cout << "-------------------" << endl;
     linear_solver_pt = new CG<CRDoubleMatrix>;
-    static_cast<IterativeLinearSolver *>(linear_solver_pt)->tolerance() =
+    static_cast<IterativeLinearSolver*>(linear_solver_pt)->tolerance() =
       1.0e-10;
     problem.linear_solver_pt() = linear_solver_pt;
 
     // set the preconditioner in the iterative solver
-    static_cast<IterativeLinearSolver *>(linear_solver_pt)
-      ->preconditioner_pt() = preconditioner_pt;
+    static_cast<IterativeLinearSolver*>(linear_solver_pt)->preconditioner_pt() =
+      preconditioner_pt;
 
     // Solve the problem
     problem.newton_solve();
@@ -541,12 +541,12 @@ int main(int argc, char **argv)
     doc_info.number()++;
     oomph_info
       << "Number of linear solver iterations: "
-      << dynamic_cast<CG<CRDoubleMatrix> *>(linear_solver_pt)->iterations()
+      << dynamic_cast<CG<CRDoubleMatrix>*>(linear_solver_pt)->iterations()
       << std::endl
       << std::endl;
     conv_file
       << "Number of linear solver iterations: "
-      << dynamic_cast<CG<CRDoubleMatrix> *>(linear_solver_pt)->iterations()
+      << dynamic_cast<CG<CRDoubleMatrix>*>(linear_solver_pt)->iterations()
       << std::endl;
 
     delete linear_solver_pt;
@@ -556,44 +556,13 @@ int main(int argc, char **argv)
     cout << "BiCGStab iterative solver" << endl;
     cout << "-------------------------" << endl;
     linear_solver_pt = new BiCGStab<CRDoubleMatrix>;
-    static_cast<IterativeLinearSolver *>(linear_solver_pt)->tolerance() =
+    static_cast<IterativeLinearSolver*>(linear_solver_pt)->tolerance() =
       1.0e-10;
     problem.linear_solver_pt() = linear_solver_pt;
 
     // set the preconditioner in the iterative solver
-    static_cast<IterativeLinearSolver *>(linear_solver_pt)
-      ->preconditioner_pt() = preconditioner_pt;
-
-    // Solve the problem
-    problem.newton_solve();
-
-    // Doc
-    problem.doc_solution(doc_info);
-    doc_info.number()++;
-    oomph_info << "Number of linear solver iterations: "
-               << dynamic_cast<BiCGStab<CRDoubleMatrix> *>(linear_solver_pt)
-                    ->iterations()
-               << std::endl
-               << std::endl;
-    conv_file << "Number of linear solver iterations: "
-              << dynamic_cast<BiCGStab<CRDoubleMatrix> *>(linear_solver_pt)
-                   ->iterations()
-              << std::endl;
-
-    delete linear_solver_pt;
-
-    // Test GMRES
-    //-----------
-    cout << "GMRES iterative solver" << endl;
-    cout << "----------------------" << endl;
-    linear_solver_pt = new GMRES<CRDoubleMatrix>;
-    static_cast<IterativeLinearSolver *>(linear_solver_pt)->tolerance() =
-      1.0e-10;
-    problem.linear_solver_pt() = linear_solver_pt;
-
-    // set the preconditioner in the iterative solver
-    static_cast<IterativeLinearSolver *>(linear_solver_pt)
-      ->preconditioner_pt() = preconditioner_pt;
+    static_cast<IterativeLinearSolver*>(linear_solver_pt)->preconditioner_pt() =
+      preconditioner_pt;
 
     // Solve the problem
     problem.newton_solve();
@@ -603,12 +572,43 @@ int main(int argc, char **argv)
     doc_info.number()++;
     oomph_info
       << "Number of linear solver iterations: "
-      << dynamic_cast<GMRES<CRDoubleMatrix> *>(linear_solver_pt)->iterations()
+      << dynamic_cast<BiCGStab<CRDoubleMatrix>*>(linear_solver_pt)->iterations()
       << std::endl
       << std::endl;
     conv_file
       << "Number of linear solver iterations: "
-      << dynamic_cast<GMRES<CRDoubleMatrix> *>(linear_solver_pt)->iterations()
+      << dynamic_cast<BiCGStab<CRDoubleMatrix>*>(linear_solver_pt)->iterations()
+      << std::endl;
+
+    delete linear_solver_pt;
+
+    // Test GMRES
+    //-----------
+    cout << "GMRES iterative solver" << endl;
+    cout << "----------------------" << endl;
+    linear_solver_pt = new GMRES<CRDoubleMatrix>;
+    static_cast<IterativeLinearSolver*>(linear_solver_pt)->tolerance() =
+      1.0e-10;
+    problem.linear_solver_pt() = linear_solver_pt;
+
+    // set the preconditioner in the iterative solver
+    static_cast<IterativeLinearSolver*>(linear_solver_pt)->preconditioner_pt() =
+      preconditioner_pt;
+
+    // Solve the problem
+    problem.newton_solve();
+
+    // Doc
+    problem.doc_solution(doc_info);
+    doc_info.number()++;
+    oomph_info
+      << "Number of linear solver iterations: "
+      << dynamic_cast<GMRES<CRDoubleMatrix>*>(linear_solver_pt)->iterations()
+      << std::endl
+      << std::endl;
+    conv_file
+      << "Number of linear solver iterations: "
+      << dynamic_cast<GMRES<CRDoubleMatrix>*>(linear_solver_pt)->iterations()
       << std::endl;
 
     delete linear_solver_pt;
@@ -630,10 +630,10 @@ int main(int argc, char **argv)
          << "==================================" << endl;
 
     // Create a Trilinos Solver
-    TrilinosAztecOOSolver *linear_solver_pt = new TrilinosAztecOOSolver;
+    TrilinosAztecOOSolver* linear_solver_pt = new TrilinosAztecOOSolver;
 
     // create the oomphlib diagonal preconditioner
-    Preconditioner *preconditioner_pt = new MatrixBasedDiagPreconditioner;
+    Preconditioner* preconditioner_pt = new MatrixBasedDiagPreconditioner;
 
     // set the preconditioner pointer
     linear_solver_pt->preconditioner_pt() = preconditioner_pt;
@@ -676,12 +676,12 @@ int main(int argc, char **argv)
       doc_info.number()++;
       oomph_info
         << "Number of linear solver iterations: "
-        << dynamic_cast<TrilinosAztecOOSolver *>(linear_solver_pt)->iterations()
+        << dynamic_cast<TrilinosAztecOOSolver*>(linear_solver_pt)->iterations()
         << std::endl
         << std::endl;
       conv_file
         << "Number of linear solver iterations: "
-        << dynamic_cast<TrilinosAztecOOSolver *>(linear_solver_pt)->iterations()
+        << dynamic_cast<TrilinosAztecOOSolver*>(linear_solver_pt)->iterations()
         << std::endl;
 
     } // end of loop over preconditioner
@@ -701,10 +701,10 @@ int main(int argc, char **argv)
   if (!never_get_here)
   {
     // Create oomph-lib linear solver
-    IterativeLinearSolver *linear_solver_pt = new GMRES<CRDoubleMatrix>;
+    IterativeLinearSolver* linear_solver_pt = new GMRES<CRDoubleMatrix>;
 
     // Create Trilinos IFPACK preconditioner as oomph-lib Preconditioner
-    Preconditioner *preconditioner_pt = new TrilinosIFPACKPreconditioner;
+    Preconditioner* preconditioner_pt = new TrilinosIFPACKPreconditioner;
 
     // Pass pointer to preconditioner to oomph-lib IterativeLinearSolver
     linear_solver_pt->preconditioner_pt() = preconditioner_pt;

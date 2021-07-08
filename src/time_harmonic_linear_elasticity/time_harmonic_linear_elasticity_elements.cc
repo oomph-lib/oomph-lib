@@ -49,7 +49,7 @@ namespace oomph
   //======================================================================
   template<unsigned DIM>
   void TimeHarmonicLinearElasticityEquationsBase<DIM>::get_strain(
-    const Vector<double> &s, DenseMatrix<std::complex<double>> &strain) const
+    const Vector<double>& s, DenseMatrix<std::complex<double>>& strain) const
   {
 #ifdef PARANOID
     if ((strain.ncol() != DIM) || (strain.nrow() != DIM))
@@ -148,7 +148,7 @@ namespace oomph
   //======================================================================
   template<unsigned DIM>
   void TimeHarmonicLinearElasticityEquations<DIM>::get_stress(
-    const Vector<double> &s, DenseMatrix<std::complex<double>> &stress) const
+    const Vector<double>& s, DenseMatrix<std::complex<double>>& stress) const
   {
 #ifdef PARANOID
     if ((stress.ncol() != DIM) || (stress.nrow() != DIM))
@@ -192,7 +192,7 @@ namespace oomph
   template<unsigned DIM>
   void TimeHarmonicLinearElasticityEquations<DIM>::
     fill_in_generic_contribution_to_residuals_time_harmonic_linear_elasticity(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag)
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag)
   {
     // Find out how many nodes there are
     unsigned n_node = this->nnode();
@@ -447,8 +447,8 @@ namespace oomph
   //=======================================================================
   template<unsigned DIM>
   void TimeHarmonicLinearElasticityEquations<DIM>::output_fct(
-    std::ostream &outfile,
-    const unsigned &nplot,
+    std::ostream& outfile,
+    const unsigned& nplot,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
   {
     // Vector of local coordinates
@@ -496,8 +496,8 @@ namespace oomph
   /// Output: x,y,[z],u,v,[w]
   //=======================================================================
   template<unsigned DIM>
-  void TimeHarmonicLinearElasticityEquations<DIM>::output(std::ostream &outfile,
-                                                          const unsigned &nplot)
+  void TimeHarmonicLinearElasticityEquations<DIM>::output(std::ostream& outfile,
+                                                          const unsigned& nplot)
   {
     // Set output Vector
     Vector<double> s(DIM);
@@ -547,8 +547,8 @@ namespace oomph
   /// C-style output: x,y,[z],u,v,[w]
   //=======================================================================
   template<unsigned DIM>
-  void TimeHarmonicLinearElasticityEquations<DIM>::output(FILE *file_pt,
-                                                          const unsigned &nplot)
+  void TimeHarmonicLinearElasticityEquations<DIM>::output(FILE* file_pt,
+                                                          const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(DIM);
@@ -595,7 +595,7 @@ namespace oomph
   /// Compute norm of the solution
   //=======================================================================
   template<unsigned DIM>
-  void TimeHarmonicLinearElasticityEquations<DIM>::compute_norm(double &norm)
+  void TimeHarmonicLinearElasticityEquations<DIM>::compute_norm(double& norm)
   {
     // Initialise
     norm = 0.0;

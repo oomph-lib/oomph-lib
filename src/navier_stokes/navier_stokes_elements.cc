@@ -70,9 +70,9 @@ namespace oomph
   template<unsigned DIM>
   void NavierStokesEquations<DIM>::
     get_pressure_and_velocity_mass_matrix_diagonal(
-      Vector<double> &press_mass_diag,
-      Vector<double> &veloc_mass_diag,
-      const unsigned &which_one)
+      Vector<double>& press_mass_diag,
+      Vector<double>& veloc_mass_diag,
+      const unsigned& which_one)
   {
     // Resize and initialise
     unsigned n_dof = ndof();
@@ -182,7 +182,7 @@ namespace oomph
   /// Compute norm of the solution
   //=======================================================================
   template<unsigned DIM>
-  void NavierStokesEquations<DIM>::compute_norm(double &norm)
+  void NavierStokesEquations<DIM>::compute_norm(double& norm)
   {
     // Initialise
     norm = 0.0;
@@ -238,11 +238,11 @@ namespace oomph
   //=======================================================================
   template<unsigned DIM>
   void NavierStokesEquations<DIM>::compute_error(
-    std::ostream &outfile,
+    std::ostream& outfile,
     FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
-    const double &time,
-    double &error,
-    double &norm)
+    const double& time,
+    double& error,
+    double& norm)
   {
     error = 0.0;
     norm = 0.0;
@@ -317,10 +317,10 @@ namespace oomph
   //=======================================================================
   template<unsigned DIM>
   void NavierStokesEquations<DIM>::compute_error(
-    std::ostream &outfile,
+    std::ostream& outfile,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-    double &error,
-    double &norm)
+    double& error,
+    double& norm)
   {
     error = 0.0;
     norm = 0.0;
@@ -394,8 +394,8 @@ namespace oomph
   //=======================================================================
   template<unsigned DIM>
   void NavierStokesEquations<DIM>::output_fct(
-    std::ostream &outfile,
-    const unsigned &nplot,
+    std::ostream& outfile,
+    const unsigned& nplot,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
   {
     // Vector of local coordinates
@@ -450,9 +450,9 @@ namespace oomph
   //=======================================================================
   template<unsigned DIM>
   void NavierStokesEquations<DIM>::output_fct(
-    std::ostream &outfile,
-    const unsigned &nplot,
-    const double &time,
+    std::ostream& outfile,
+    const unsigned& nplot,
+    const double& time,
     FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
   {
     // Vector of local coordinates
@@ -507,9 +507,9 @@ namespace oomph
   /// coordinate direction.
   //==============================================================
   template<unsigned DIM>
-  void NavierStokesEquations<DIM>::output_veloc(std::ostream &outfile,
-                                                const unsigned &nplot,
-                                                const unsigned &t)
+  void NavierStokesEquations<DIM>::output_veloc(std::ostream& outfile,
+                                                const unsigned& nplot,
+                                                const unsigned& t)
   {
     // Find number of nodes
     unsigned n_node = nnode();
@@ -576,8 +576,8 @@ namespace oomph
   /// coordinate direction.
   //==============================================================
   template<unsigned DIM>
-  void NavierStokesEquations<DIM>::output(std::ostream &outfile,
-                                          const unsigned &nplot)
+  void NavierStokesEquations<DIM>::output(std::ostream& outfile,
+                                          const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(DIM);
@@ -622,7 +622,7 @@ namespace oomph
   /// coordinate direction.
   //==============================================================
   template<unsigned DIM>
-  void NavierStokesEquations<DIM>::output(FILE *file_pt, const unsigned &nplot)
+  void NavierStokesEquations<DIM>::output(FILE* file_pt, const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(DIM);
@@ -665,8 +665,8 @@ namespace oomph
   /// coordinate direction
   //==============================================================
   template<unsigned DIM>
-  void NavierStokesEquations<DIM>::full_output(std::ostream &outfile,
-                                               const unsigned &nplot)
+  void NavierStokesEquations<DIM>::full_output(std::ostream& outfile,
+                                               const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(DIM);
@@ -791,8 +791,8 @@ namespace oomph
   /// coordinate direction.
   //==============================================================
   template<unsigned DIM>
-  void NavierStokesEquations<DIM>::output_vorticity(std::ostream &outfile,
-                                                    const unsigned &nplot)
+  void NavierStokesEquations<DIM>::output_vorticity(std::ostream& outfile,
+                                                    const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(DIM);
@@ -910,9 +910,9 @@ namespace oomph
   /// to the fluid.
   //==============================================================
   template<unsigned DIM>
-  void NavierStokesEquations<DIM>::get_traction(const Vector<double> &s,
-                                                const Vector<double> &N,
-                                                Vector<double> &traction)
+  void NavierStokesEquations<DIM>::get_traction(const Vector<double>& s,
+                                                const Vector<double>& N,
+                                                Vector<double>& traction)
   {
     // Get velocity gradients
     DenseMatrix<double> strainrate(DIM, DIM);
@@ -939,11 +939,11 @@ namespace oomph
   /// N has to be outer unit normal to the fluid.
   //==============================================================
   template<unsigned DIM>
-  void NavierStokesEquations<DIM>::get_traction(const Vector<double> &s,
-                                                const Vector<double> &N,
-                                                Vector<double> &traction_p,
-                                                Vector<double> &traction_visc_n,
-                                                Vector<double> &traction_visc_t)
+  void NavierStokesEquations<DIM>::get_traction(const Vector<double>& s,
+                                                const Vector<double>& N,
+                                                Vector<double>& traction_p,
+                                                Vector<double>& traction_visc_n,
+                                                Vector<double>& traction_visc_t)
   {
     Vector<double> traction_visc(DIM);
 
@@ -974,7 +974,7 @@ namespace oomph
   /// Return dissipation at local coordinate s
   //==============================================================
   template<unsigned DIM>
-  double NavierStokesEquations<DIM>::dissipation(const Vector<double> &s) const
+  double NavierStokesEquations<DIM>::dissipation(const Vector<double>& s) const
   {
     // Get strain rate matrix
     DenseMatrix<double> strainrate(DIM, DIM);
@@ -998,7 +998,7 @@ namespace oomph
   //==============================================================
   template<unsigned DIM>
   void NavierStokesEquations<DIM>::strain_rate(
-    const Vector<double> &s, DenseMatrix<double> &strainrate) const
+    const Vector<double>& s, DenseMatrix<double>& strainrate) const
   {
 #ifdef PARANOID
     if ((strainrate.ncol() != DIM) || (strainrate.nrow() != DIM))
@@ -1067,8 +1067,8 @@ namespace oomph
   /// one and only component of vorticity vector
   //==============================================================
   template<>
-  void NavierStokesEquations<2>::get_vorticity(const Vector<double> &s,
-                                               Vector<double> &vorticity) const
+  void NavierStokesEquations<2>::get_vorticity(const Vector<double>& s,
+                                               Vector<double>& vorticity) const
   {
 #ifdef PARANOID
     if (vorticity.size() != 1)
@@ -1133,8 +1133,8 @@ namespace oomph
   /// Compute 3D vorticity vector at local coordinate s
   //==============================================================
   template<>
-  void NavierStokesEquations<3>::get_vorticity(const Vector<double> &s,
-                                               Vector<double> &vorticity) const
+  void NavierStokesEquations<3>::get_vorticity(const Vector<double>& s,
+                                               Vector<double>& vorticity) const
   {
 #ifdef PARANOID
     if (vorticity.size() != 3)
@@ -1391,7 +1391,7 @@ namespace oomph
   template<unsigned DIM>
   void NavierStokesEquations<DIM>::
     fill_in_generic_pressure_advection_diffusion_contribution_nst(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag)
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag)
   {
     // Return immediately if there are no dofs
     if (ndof() == 0) return;
@@ -1559,9 +1559,9 @@ namespace oomph
   //==============================================================
   template<unsigned DIM>
   void NavierStokesEquations<DIM>::fill_in_generic_residual_contribution_nst(
-    Vector<double> &residuals,
-    DenseMatrix<double> &jacobian,
-    DenseMatrix<double> &mass_matrix,
+    Vector<double>& residuals,
+    DenseMatrix<double>& jacobian,
+    DenseMatrix<double>& mass_matrix,
     unsigned flag)
   {
     // Return immediately if there are no dofs
@@ -1869,10 +1869,10 @@ namespace oomph
   //==============================================================
   template<unsigned DIM>
   void NavierStokesEquations<DIM>::fill_in_generic_dresidual_contribution_nst(
-    double *const &parameter_pt,
-    Vector<double> &dres_dparam,
-    DenseMatrix<double> &djac_dparam,
-    DenseMatrix<double> &dmass_matrix_dparam,
+    double* const& parameter_pt,
+    Vector<double>& dres_dparam,
+    DenseMatrix<double>& djac_dparam,
+    DenseMatrix<double>& dmass_matrix_dparam,
     unsigned flag)
   {
     throw OomphLibError("Not yet implemented\n",
@@ -1887,9 +1887,9 @@ namespace oomph
   template<unsigned DIM>
   void NavierStokesEquations<DIM>::
     fill_in_contribution_to_hessian_vector_products(
-      Vector<double> const &Y,
-      DenseMatrix<double> const &C,
-      DenseMatrix<double> &product)
+      Vector<double> const& Y,
+      DenseMatrix<double> const& C,
+      DenseMatrix<double>& product)
   {
     throw OomphLibError("Not yet implemented\n",
                         OOMPH_CURRENT_FUNCTION,
@@ -1904,7 +1904,7 @@ namespace oomph
   //======================================================================
   template<unsigned DIM>
   void NavierStokesEquations<DIM>::get_dresidual_dnodal_coordinates(
-    RankThreeTensor<double> &dresidual_dnodal_coordinates)
+    RankThreeTensor<double>& dresidual_dnodal_coordinates)
   {
     // Return immediately if there are no dofs
     if (ndof() == 0)
@@ -1973,7 +1973,7 @@ namespace oomph
     bool element_has_node_with_aux_node_update_fct = false;
     for (unsigned q = 0; q < n_node; q++)
     {
-      Node *nod_pt = node_pt(q);
+      Node* nod_pt = node_pt(q);
 
       // Only compute if there's a node-update fct involved
       if (nod_pt->has_auxiliary_node_update_fct_pt())
@@ -2358,7 +2358,7 @@ namespace oomph
   //========================================================================
   template<unsigned DIM>
   unsigned QCrouzeixRaviartElement<DIM>::required_nvalue(
-    const unsigned &n) const
+    const unsigned& n) const
   {
     return Initial_Nvalue[n];
   }
@@ -2374,7 +2374,7 @@ namespace oomph
   //=========================================================================
   template<unsigned DIM>
   void QCrouzeixRaviartElement<DIM>::identify_load_data(
-    std::set<std::pair<Data *, unsigned>> &paired_load_data)
+    std::set<std::pair<Data*, unsigned>>& paired_load_data)
   {
     // Find the index at which the velocity is stored
     unsigned u_index[DIM];
@@ -2410,7 +2410,7 @@ namespace oomph
   //=========================================================================
   template<unsigned DIM>
   void QCrouzeixRaviartElement<DIM>::identify_pressure_data(
-    std::set<std::pair<Data *, unsigned>> &paired_pressure_data)
+    std::set<std::pair<Data*, unsigned>>& paired_pressure_data)
   {
     // Loop over the internal data
     unsigned n_internal = this->ninternal_data();
@@ -2436,7 +2436,7 @@ namespace oomph
   //=============================================================================
   template<unsigned DIM>
   void QCrouzeixRaviartElement<DIM>::get_dof_numbers_for_unknowns(
-    std::list<std::pair<unsigned long, unsigned>> &dof_lookup_list) const
+    std::list<std::pair<unsigned long, unsigned>>& dof_lookup_list) const
   {
     // number of nodes
     unsigned n_node = this->nnode();
@@ -2534,7 +2534,7 @@ namespace oomph
   //=========================================================================
   template<unsigned DIM>
   void QTaylorHoodElement<DIM>::identify_load_data(
-    std::set<std::pair<Data *, unsigned>> &paired_load_data)
+    std::set<std::pair<Data*, unsigned>>& paired_load_data)
   {
     // Find the index at which the velocity is stored
     unsigned u_index[DIM];
@@ -2570,7 +2570,7 @@ namespace oomph
   //=========================================================================
   template<unsigned DIM>
   void QTaylorHoodElement<DIM>::identify_pressure_data(
-    std::set<std::pair<Data *, unsigned>> &paired_pressure_data)
+    std::set<std::pair<Data*, unsigned>>& paired_pressure_data)
   {
     // Find the index at which the pressure is stored
     unsigned p_index = static_cast<unsigned>(this->p_nodal_index_nst());
@@ -2596,7 +2596,7 @@ namespace oomph
   //============================================================================
   template<unsigned DIM>
   void QTaylorHoodElement<DIM>::get_dof_numbers_for_unknowns(
-    std::list<std::pair<unsigned long, unsigned>> &dof_lookup_list) const
+    std::list<std::pair<unsigned long, unsigned>>& dof_lookup_list) const
   {
     // number of nodes
     unsigned n_node = this->nnode();

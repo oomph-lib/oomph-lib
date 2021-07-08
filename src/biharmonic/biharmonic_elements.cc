@@ -42,7 +42,7 @@ namespace oomph
   template<unsigned DIM>
   void BiharmonicEquations<DIM>::
     fill_in_generic_residual_contribution_biharmonic(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned JFLAG)
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned JFLAG)
   {
     // Find out how many nodes there are
     unsigned n_node = this->nnode();

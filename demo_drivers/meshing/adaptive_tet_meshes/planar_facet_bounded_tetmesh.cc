@@ -120,7 +120,7 @@ public:
   void actions_after_newton_solve() {}
 
   /// Doc the solution
-  void doc_solution(const unsigned &nplot, DocInfo &doc_info);
+  void doc_solution(const unsigned& nplot, DocInfo& doc_info);
 
 private:
   /// Apply BCs and make elements functional
@@ -132,20 +132,20 @@ private:
 #ifdef DO_TETGEN
 
   /// Bulk mesh
-  RefineableTetgenMesh<ELEMENT> *Bulk_mesh_pt;
+  RefineableTetgenMesh<ELEMENT>* Bulk_mesh_pt;
 
 #else
 
   /// Bulk mesh
-  RefineableGmshTetMesh<ELEMENT> *Bulk_mesh_pt;
+  RefineableGmshTetMesh<ELEMENT>* Bulk_mesh_pt;
 
 #endif
 
   /// Storage for the outer boundary object
-  TetMeshFacetedClosedSurface *Outer_boundary_pt;
+  TetMeshFacetedClosedSurface* Outer_boundary_pt;
 
   /// Inner boundary
-  Vector<TetMeshFacetedSurface *> Inner_boundary_pt;
+  Vector<TetMeshFacetedSurface*> Inner_boundary_pt;
 
   /// First boundary ID for outer boundary
   unsigned First_boundary_id_for_outer_boundary;
@@ -220,7 +220,7 @@ TetmeshPoissonProblem<ELEMENT>::TetmeshPoissonProblem()
   unsigned inner_cube_boundary_id_offset = 1453;
 
   // Create the faceted surface
-  CubicTetMeshFacetedSurface *hollow_cube_pt = new CubicTetMeshFacetedSurface(
+  CubicTetMeshFacetedSurface* hollow_cube_pt = new CubicTetMeshFacetedSurface(
     cube_half_width, cube_half_width, inner_cube_boundary_id_offset);
 
   // Add it
@@ -257,7 +257,7 @@ TetmeshPoissonProblem<ELEMENT>::TetmeshPoissonProblem()
   Cube_region_id = one_based_region_id - 1;
 
   // Create the faceted surface
-  CubicTetMeshFacetedSurface *region_cube_pt =
+  CubicTetMeshFacetedSurface* region_cube_pt =
     new CubicTetMeshFacetedSurface(one_based_region_id,
                                    cube_region_half_width,
                                    cube_region_half_width,
@@ -298,7 +298,7 @@ TetmeshPoissonProblem<ELEMENT>::TetmeshPoissonProblem()
   Internal_rectangle_boundary_id = one_based_boundary_id - 1;
 
   // Build it
-  RectangularTetMeshFacetedSurface *rectanglar_facet_pt =
+  RectangularTetMeshFacetedSurface* rectanglar_facet_pt =
     new RectangularTetMeshFacetedSurface(
       half_x_width, half_y_length, offset, one_based_boundary_id);
 
@@ -322,7 +322,7 @@ TetmeshPoissonProblem<ELEMENT>::TetmeshPoissonProblem()
   Internal_embedded_rectangle_boundary_id = one_based_boundary_id - 1;
 
   // Build it
-  RectangularTetMeshFacetedSurface *embedded_rectanglar_facet_pt =
+  RectangularTetMeshFacetedSurface* embedded_rectanglar_facet_pt =
     new RectangularTetMeshFacetedSurface(embedded_half_x_width,
                                          embedded_half_y_length,
                                          region_offset,
@@ -339,7 +339,7 @@ TetmeshPoissonProblem<ELEMENT>::TetmeshPoissonProblem()
   //---------------
 
   // Setup parameters for gmsh
-  GmshParameters *gmsh_parameters_pt = new GmshParameters(
+  GmshParameters* gmsh_parameters_pt = new GmshParameters(
     Outer_boundary_pt, Global_Parameters::Gmsh_command_line_invocation);
 
   // Element volume
@@ -407,7 +407,7 @@ TetmeshPoissonProblem<ELEMENT>::TetmeshPoissonProblem()
              << std::endl;
 
   // Set error estimator for bulk mesh
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   Bulk_mesh_pt->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Set targets for spatial adaptivity
@@ -420,7 +420,7 @@ TetmeshPoissonProblem<ELEMENT>::TetmeshPoissonProblem()
 #ifdef OOMPH_HAS_HYPRE
 
   // Create a new Hypre linear solver
-  HypreSolver *hypre_linear_solver_pt = new HypreSolver;
+  HypreSolver* hypre_linear_solver_pt = new HypreSolver;
 
   // Set the linear solver for problem
   linear_solver_pt() = hypre_linear_solver_pt;
@@ -530,8 +530,8 @@ void TetmeshPoissonProblem<ELEMENT>::apply_boundary_conditions()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned &nplot,
-                                                  DocInfo &doc_info)
+void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
+                                                  DocInfo& doc_info)
 {
   // Output can take a long time; don't do it if we're just running
   // the self-test (which analyses different data)
@@ -741,7 +741,7 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned &nplot,
 //========================================================================
 /// Driver
 //========================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   MPI_Helpers::init(argc, argv);
 

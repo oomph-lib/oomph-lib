@@ -78,9 +78,9 @@ namespace Global_Parameters
   const std::complex<double> I(0.0, 1.0);
 
   /// The traction function at r=rmin: (t_r, t_z, t_theta)
-  void boundary_traction(const Vector<double> &x,
-                         const Vector<double> &n,
-                         Vector<std::complex<double>> &result)
+  void boundary_traction(const Vector<double>& x,
+                         const Vector<double>& n,
+                         Vector<std::complex<double>>& result)
   {
     result[0] =
       -6.0 * pow(x[0], 2) * mu * cos(x[1]) -
@@ -93,7 +93,7 @@ namespace Global_Parameters
 
   /// \short The body force function; returns vector of complex doubles
   /// in the order (b_r, b_z, b_theta)
-  void body_force(const Vector<double> &x, Vector<std::complex<double>> &result)
+  void body_force(const Vector<double>& x, Vector<std::complex<double>>& result)
   {
     result[0] =
       x[0] * (-2.0 * I * lambda * double(Fourier_wavenumber) * pow(x[1], 3) -
@@ -118,7 +118,7 @@ namespace Global_Parameters
 
   /// The exact solution in a flat-packed vector:
   // 0: u_r[real], 1: u_z[real],..., 5: u_theta[imag]
-  void exact_solution(const Vector<double> &x, Vector<double> &u)
+  void exact_solution(const Vector<double>& x, Vector<double>& u)
   {
     u[0] = pow(x[0], 3) * cos(x[1]);
     u[1] = pow(x[0], 3) * sin(x[1]);
@@ -139,10 +139,10 @@ class FourierDecomposedTimeHarmonicLinearElasticityProblem : public Problem
 {
 public:
   /// \short Constructor: Pass boundary locations
-  FourierDecomposedTimeHarmonicLinearElasticityProblem(const double &rmin,
-                                                       const double &rmax,
-                                                       const double &zmin,
-                                                       const double &zmax);
+  FourierDecomposedTimeHarmonicLinearElasticityProblem(const double& rmin,
+                                                       const double& rmax,
+                                                       const double& zmin,
+                                                       const double& zmax);
 
   /// Update before solve is empty
   void actions_before_newton_solve() {}
@@ -175,7 +175,7 @@ public:
   }
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 private:
   /// Allocate traction elements on the bottom surface
@@ -190,17 +190,17 @@ private:
 #ifdef ADAPTIVE
 
   /// Pointer to the bulk mesh
-  RefineableTriangleMesh<ELEMENT> *Bulk_mesh_pt;
+  RefineableTriangleMesh<ELEMENT>* Bulk_mesh_pt;
 
 #else
 
   /// Pointer to the bulk mesh
-  Mesh *Bulk_mesh_pt;
+  Mesh* Bulk_mesh_pt;
 
 #endif
 
   /// Pointer to the mesh of traction elements
-  Mesh *Surface_mesh_pt;
+  Mesh* Surface_mesh_pt;
 
 }; // end_of_problem_class
 
@@ -209,14 +209,14 @@ private:
 //====================================================================
 template<class ELEMENT>
 FourierDecomposedTimeHarmonicLinearElasticityProblem<ELEMENT>::
-  FourierDecomposedTimeHarmonicLinearElasticityProblem(const double &rmin,
-                                                       const double &rmax,
-                                                       const double &zmin,
-                                                       const double &zmax)
+  FourierDecomposedTimeHarmonicLinearElasticityProblem(const double& rmin,
+                                                       const double& rmax,
+                                                       const double& zmin,
+                                                       const double& zmax)
 {
   // The boundary is bounded by four distinct boundaries, each
   // represented by its own polyline
-  Vector<TriangleMeshCurveSection *> boundary_polyline_pt(4);
+  Vector<TriangleMeshCurveSection*> boundary_polyline_pt(4);
 
   // Vertex coordinates on boundary
   Vector<Vector<double>> bound_coords(2);
@@ -264,7 +264,7 @@ FourierDecomposedTimeHarmonicLinearElasticityProblem<ELEMENT>::
   boundary_polyline_pt[3] = new TriangleMeshPolyLine(bound_coords, boundary_id);
 
   // Pointer to the closed curve that defines the outer boundary
-  TriangleMeshClosedCurve *closed_curve_pt =
+  TriangleMeshClosedCurve* closed_curve_pt =
     new TriangleMeshPolygon(boundary_polyline_pt);
 
   // Use the TriangleMeshParameters object for helping on the manage of the
@@ -336,7 +336,7 @@ void FourierDecomposedTimeHarmonicLinearElasticityProblem<
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Get pointer to node
-      Node *nod_pt = Bulk_mesh_pt->boundary_node_pt(ibound, inod);
+      Node* nod_pt = Bulk_mesh_pt->boundary_node_pt(ibound, inod);
 
       // get r and z coordinates
       x[0] = nod_pt->x(0);
@@ -371,7 +371,7 @@ void FourierDecomposedTimeHarmonicLinearElasticityProblem<
   for (unsigned e = 0; e < n_el; e++)
   {
     // Cast to a bulk element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
     // Set the body force
     el_pt->body_force_fct_pt() = &Global_Parameters::body_force;
@@ -395,10 +395,10 @@ void FourierDecomposedTimeHarmonicLinearElasticityProblem<
   for (unsigned e = 0; e < n_traction; e++)
   {
     // Cast to a surface element
-    TimeHarmonicFourierDecomposedLinearElasticityTractionElement<
-      ELEMENT> *el_pt =
-      dynamic_cast<TimeHarmonicFourierDecomposedLinearElasticityTractionElement<
-        ELEMENT> *>(Surface_mesh_pt->element_pt(e));
+    TimeHarmonicFourierDecomposedLinearElasticityTractionElement<ELEMENT>*
+      el_pt = dynamic_cast<
+        TimeHarmonicFourierDecomposedLinearElasticityTractionElement<ELEMENT>*>(
+        Surface_mesh_pt->element_pt(e));
 
     // Set the applied traction
     el_pt->traction_fct_pt() = &Global_Parameters::boundary_traction;
@@ -423,7 +423,7 @@ void FourierDecomposedTimeHarmonicLinearElasticityProblem<
   for (unsigned n = 0; n < n_neigh; n++)
   {
     // Create the face element
-    FiniteElement *traction_element_pt =
+    FiniteElement* traction_element_pt =
       new TimeHarmonicFourierDecomposedLinearElasticityTractionElement<ELEMENT>(
         Bulk_mesh_pt->boundary_element_pt(bound, n),
         Bulk_mesh_pt->face_index_at_boundary(bound, n));
@@ -461,7 +461,7 @@ void FourierDecomposedTimeHarmonicLinearElasticityProblem<
 //========================================================================
 template<class ELEMENT>
 void FourierDecomposedTimeHarmonicLinearElasticityProblem<
-  ELEMENT>::doc_solution(DocInfo &doc_info)
+  ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -507,7 +507,7 @@ void FourierDecomposedTimeHarmonicLinearElasticityProblem<
 //===start_of_main======================================================
 /// Driver code
 //======================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Set up doc info
   DocInfo doc_info;

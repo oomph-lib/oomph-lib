@@ -52,7 +52,7 @@ namespace AxisymFvKParameters
   double Pressure = 0.0;
 
   /// Function that computes the pressure at radius r
-  void pressure_function(const double &r, double &pressure)
+  void pressure_function(const double& r, double& pressure)
   {
     pressure = Pressure;
   }
@@ -61,7 +61,7 @@ namespace AxisymFvKParameters
   double Eta = 2.39e6;
 
   /// Function to get the exact solution for the pure bending model
-  void get_exact_u(const Vector<double> &r, Vector<double> &u)
+  void get_exact_u(const Vector<double>& r, Vector<double>& u)
   {
     u[0] = AxisymFvKParameters::Pressure * (r[0] * r[0] - 1.0) *
            (r[0] * r[0] - 1.0) / 64.0;
@@ -79,7 +79,7 @@ class AxisymFvKProblem : public Problem
 {
 public:
   /// Constructor: Pass number of elements
-  AxisymFvKProblem(const unsigned &n_element);
+  AxisymFvKProblem(const unsigned& n_element);
 
   /// Destructor
   ~AxisymFvKProblem()
@@ -106,7 +106,7 @@ private:
 /// \short Constructor
 //========================================================================
 template<class ELEMENT>
-AxisymFvKProblem<ELEMENT>::AxisymFvKProblem(const unsigned &n_element)
+AxisymFvKProblem<ELEMENT>::AxisymFvKProblem(const unsigned& n_element)
 
 {
   // Set domain length
@@ -131,7 +131,7 @@ AxisymFvKProblem<ELEMENT>::AxisymFvKProblem(const unsigned &n_element)
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *elem_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* elem_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the pressure function pointer
     elem_pt->pressure_fct_pt() = &AxisymFvKParameters::pressure_function;
@@ -199,7 +199,7 @@ void AxisymFvKProblem<ELEMENT>::doc_solution()
 //======start_of_main==================================================
 /// Driver
 //=====================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

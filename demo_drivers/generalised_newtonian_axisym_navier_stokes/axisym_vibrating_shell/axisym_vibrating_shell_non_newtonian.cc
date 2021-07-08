@@ -105,9 +105,9 @@ namespace oomph
     double Dt_min = 1.0e-6;
 
     /// Function describing the oscillation
-    void oscillation(const double &time,
-                     const Vector<double> &x,
-                     Vector<double> &force)
+    void oscillation(const double& time,
+                     const Vector<double>& x,
+                     Vector<double>& force)
     {
       force[0] = 0.0;
 
@@ -146,7 +146,7 @@ namespace oomph
     double Shell_radius = 1.0;
 
     /// Constitutive law used to determine the mesh deformation
-    ConstitutiveLaw *Constitutive_law_pt = 0;
+    ConstitutiveLaw* Constitutive_law_pt = 0;
 
     /// have a generic yield stress, required for the output function
     double Yield_stress = 2.861e-1;
@@ -213,7 +213,7 @@ namespace oomph
     double Critical_strain_rate = 1.4e-14;
 
     /// Fluid constitutive equation
-    GeneralisedNewtonianConstitutiveEquation<3> *Const_eqn_pt = 0;
+    GeneralisedNewtonianConstitutiveEquation<3>* Const_eqn_pt = 0;
 
     /// Trace file
     ofstream Trace_file;
@@ -326,7 +326,7 @@ public:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Upcast from GeneralisedElement to the present element
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Fluid_mesh_pt->element_pt(e));
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Fluid_mesh_pt->element_pt(e));
 
       // accept negative jacobian in solution process
       el_pt->Accept_negative_jacobian = true;
@@ -340,7 +340,7 @@ public:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Upcast from GeneralisedElement to the present element
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Fluid_mesh_pt->element_pt(e));
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Fluid_mesh_pt->element_pt(e));
 
       el_pt->Accept_negative_jacobian = false;
     }
@@ -350,16 +350,16 @@ public:
   void complete_problem_setup();
 
   /// Doc the solution
-  void doc_solution(const std::string &comment = "");
+  void doc_solution(const std::string& comment = "");
 
   /// Compute the error estimates and assign to elements for plotting
-  void compute_error_estimate(double &max_err, double &min_err);
+  void compute_error_estimate(double& max_err, double& min_err);
 
   /// Error norm to determine the next time step
   double global_temporal_error_norm();
 
   /// Access the next suggested timestep
-  double &next_dt()
+  double& next_dt()
   {
     return Next_dt;
   }
@@ -377,7 +377,7 @@ public:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Upcast from GeneralisedElement to the present element
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Fluid_mesh_pt->element_pt(e));
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Fluid_mesh_pt->element_pt(e));
       el_pt->update_latest_fixed_point_iteration_guess_for_strain_rate();
     }
   }
@@ -390,7 +390,7 @@ public:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Upcast from GeneralisedElement to the present element
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Fluid_mesh_pt->element_pt(e));
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Fluid_mesh_pt->element_pt(e));
       el_pt->enable_fixed_point_iteration_for_strain_rate();
     }
   }
@@ -402,7 +402,7 @@ public:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Upcast from GeneralisedElement to the present element
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Fluid_mesh_pt->element_pt(e));
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Fluid_mesh_pt->element_pt(e));
       el_pt->disable_fixed_point_iteration_for_strain_rate();
     }
   }
@@ -414,7 +414,7 @@ public:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Upcast from GeneralisedElement to the present element
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Fluid_mesh_pt->element_pt(e));
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Fluid_mesh_pt->element_pt(e));
       el_pt->enable_aitken_extrapolation();
     }
   }
@@ -426,20 +426,20 @@ public:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Upcast from GeneralisedElement to the present element
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Fluid_mesh_pt->element_pt(e));
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Fluid_mesh_pt->element_pt(e));
       el_pt->disable_aitken_extrapolation();
     }
   }
 
   // Set up extrapolation stuff
   void set_nprev_for_extrapolation_of_strain_rate_for_all_elements(
-    const unsigned &nprev)
+    const unsigned& nprev)
   {
     unsigned n_element = Fluid_mesh_pt->nelement();
     for (unsigned e = 0; e < n_element; e++)
     {
       // Upcast from GeneralisedElement to the present element
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Fluid_mesh_pt->element_pt(e));
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Fluid_mesh_pt->element_pt(e));
 
       // Use extrapolated strain rate when determining viscosity?
       if (!CommandLineArgs::command_line_flag_has_been_set(
@@ -469,7 +469,7 @@ public:
     for (unsigned e = 0; e < nel; e++)
     {
       // Get element
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Fluid_mesh_pt->element_pt(e));
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Fluid_mesh_pt->element_pt(e));
 
       // Get norms of invariant
       double el_norm_squared = 0.0;
@@ -520,7 +520,7 @@ public:
     for (unsigned e = 0; e < nel; e++)
     {
       // Get element
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Fluid_mesh_pt->element_pt(e));
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Fluid_mesh_pt->element_pt(e));
 
       // Get norms of invariant
       double el_norm_squared = 0.0;
@@ -540,7 +540,7 @@ public:
   }
 
   /// Dump problem data to allow for later restart
-  void dump_it(ofstream &dump_file)
+  void dump_it(ofstream& dump_file)
   {
     // Write doc numbers
     dump_file << Problem_Parameter::Doc_info_trace.number()
@@ -560,7 +560,7 @@ public:
   void restart()
   {
     // Pointer to restart file
-    ifstream *restart_file_pt = 0;
+    ifstream* restart_file_pt = 0;
 
     // Open restart file from stem
     restart_file_pt =
@@ -629,7 +629,7 @@ public:
 
 private:
   /// Pointer to free surface node on symmetry line
-  Node *Central_node_on_free_surface_pt;
+  Node* Central_node_on_free_surface_pt;
 
   /// Suggestion for the next timestep (allows it to be written to
   /// or read from a restart file)
@@ -657,18 +657,18 @@ private:
   } // end of delete_free_surface_elements
 
   /// Pointers to mesh of free surface elements
-  Mesh *Free_surface_mesh_pt;
+  Mesh* Free_surface_mesh_pt;
 
   /// Pointer to Fluid_mesh
-  RefineableSolidTriangleMesh<ELEMENT> *Fluid_mesh_pt;
+  RefineableSolidTriangleMesh<ELEMENT>* Fluid_mesh_pt;
 
   /// Pointer to a global external pressure datum
-  Data *External_pressure_data_pt;
+  Data* External_pressure_data_pt;
 
   /// Triangle mesh polygon for outer boundary
-  TriangleMeshClosedCurve *Outer_boundary_polyline_pt;
+  TriangleMeshClosedCurve* Outer_boundary_polyline_pt;
 
-  Vector<TriangleMeshOpenCurve *> Internal_open_boundary_pt;
+  Vector<TriangleMeshOpenCurve*> Internal_open_boundary_pt;
 
   /// Enumeration of boundaries
   enum
@@ -728,14 +728,14 @@ AxisymmetricVibratingShellProblem<ELEMENT>::AxisymmetricVibratingShellProblem()
   // 2 separate polylines
   //------------------------
 
-  Vector<TriangleMeshCurveSection *> boundary_curve_section_pt(3);
-  Vector<TriangleMeshPolyLine *> internal_polyline_pt(2);
+  Vector<TriangleMeshCurveSection*> boundary_curve_section_pt(3);
+  Vector<TriangleMeshPolyLine*> internal_polyline_pt(2);
 
   // Each polyline only has two vertices -- provide storage for their
   // coordinates
   Vector<Vector<double>> vertex_coord;
 
-  Ellipse *Shell_wall_pt = new Ellipse(Problem_Parameter::Shell_radius,
+  Ellipse* Shell_wall_pt = new Ellipse(Problem_Parameter::Shell_radius,
                                        Problem_Parameter::Shell_radius);
 
   double zeta_start = 0.0;
@@ -890,7 +890,7 @@ AxisymmetricVibratingShellProblem<ELEMENT>::AxisymmetricVibratingShellProblem()
   for (unsigned n = 0; n < n_boundary_node; n++)
   {
     /// Get pointer to the free surface node
-    Node *nod_pt = Fluid_mesh_pt->boundary_node_pt(Shell_wall_boundary_id, n);
+    Node* nod_pt = Fluid_mesh_pt->boundary_node_pt(Shell_wall_boundary_id, n);
 
     /// Get the node's boundary coordinate
     Vector<double> zeta(1);
@@ -910,7 +910,7 @@ AxisymmetricVibratingShellProblem<ELEMENT>::AxisymmetricVibratingShellProblem()
   for (unsigned n = 0; n < n_boundary_node; n++)
   {
     /// Get pointer to the free surface node
-    Node *nod_pt = Fluid_mesh_pt->boundary_node_pt(Free_surface_boundary_id, n);
+    Node* nod_pt = Fluid_mesh_pt->boundary_node_pt(Free_surface_boundary_id, n);
 
     if (nod_pt->is_on_boundary(Shell_wall_boundary_id) ||
         nod_pt->is_on_boundary(Symmetry_line_id))
@@ -937,7 +937,7 @@ AxisymmetricVibratingShellProblem<ELEMENT>::AxisymmetricVibratingShellProblem()
     (Problem_Parameter::Directory + "/boundaries.dat").c_str());
 
   // Set error estimator for bulk mesh
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   Fluid_mesh_pt->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Set targets for spatial adaptivity
@@ -1044,7 +1044,7 @@ void AxisymmetricVibratingShellProblem<ELEMENT>::complete_problem_setup()
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Get node
-      Node *nod_pt = Fluid_mesh_pt->boundary_node_pt(ibound, inod);
+      Node* nod_pt = Fluid_mesh_pt->boundary_node_pt(ibound, inod);
 
       // Pin both velocities at the shell wall boundary
       if (ibound == Shell_wall_boundary_id)
@@ -1080,7 +1080,7 @@ void AxisymmetricVibratingShellProblem<ELEMENT>::complete_problem_setup()
 
       // Pin pseudo-solid positions apart from free surface boundary which
       // we allow to move
-      SolidNode *solid_node_pt = dynamic_cast<SolidNode *>(nod_pt);
+      SolidNode* solid_node_pt = dynamic_cast<SolidNode*>(nod_pt);
       if (ibound == Shell_wall_boundary_id)
       {
         solid_node_pt->pin_position(0);
@@ -1103,7 +1103,7 @@ void AxisymmetricVibratingShellProblem<ELEMENT>::complete_problem_setup()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Fluid_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Fluid_mesh_pt->element_pt(e));
 
     // Modify the tolerance for when the mapping is considered singular
     el_pt->Tolerance_for_singular_jacobian = 1.0e-26;
@@ -1161,7 +1161,7 @@ void AxisymmetricVibratingShellProblem<ELEMENT>::complete_problem_setup()
       for (unsigned inod = 0; inod < num_nod; inod++)
       {
         // Get node
-        Node *nod_pt = this->Fluid_mesh_pt->boundary_node_pt(ibound, inod);
+        Node* nod_pt = this->Fluid_mesh_pt->boundary_node_pt(ibound, inod);
 
         // Get number of previous (history) values
         unsigned n_prev = nod_pt->time_stepper_pt()->nprev_values();
@@ -1197,7 +1197,7 @@ void AxisymmetricVibratingShellProblem<ELEMENT>::complete_problem_setup()
   for (unsigned n = 0; n < n_boundary_node; n++)
   {
     /// Get pointer to the free surface node
-    Node *nod_pt = Fluid_mesh_pt->boundary_node_pt(Free_surface_boundary_id, n);
+    Node* nod_pt = Fluid_mesh_pt->boundary_node_pt(Free_surface_boundary_id, n);
 
     // Is this the one?
     if (nod_pt->is_on_boundary(Symmetry_line_id))
@@ -1242,7 +1242,7 @@ void AxisymmetricVibratingShellProblem<ELEMENT>::create_free_surface_elements()
   {
     // Get pointer to the bulk fluid element that is
     // adjacent to boundary b
-    ELEMENT *bulk_elem_pt = dynamic_cast<ELEMENT *>(
+    ELEMENT* bulk_elem_pt = dynamic_cast<ELEMENT*>(
       Fluid_mesh_pt->boundary_element_pt(Free_surface_boundary_id, e));
 
     // Find the index of the face of element e along boundary b
@@ -1250,7 +1250,7 @@ void AxisymmetricVibratingShellProblem<ELEMENT>::create_free_surface_elements()
       Fluid_mesh_pt->face_index_at_boundary(Free_surface_boundary_id, e);
 
     // Create new element
-    ElasticAxisymmetricFluidInterfaceElement<ELEMENT> *el_pt =
+    ElasticAxisymmetricFluidInterfaceElement<ELEMENT>* el_pt =
       new ElasticAxisymmetricFluidInterfaceElement<ELEMENT>(bulk_elem_pt,
                                                             face_index);
 
@@ -1332,7 +1332,7 @@ double AxisymmetricVibratingShellProblem<ELEMENT>::global_temporal_error_norm()
 //========================================================================
 template<class ELEMENT>
 void AxisymmetricVibratingShellProblem<ELEMENT>::doc_solution(
-  const std::string &comment)
+  const std::string& comment)
 {
   ofstream some_file;
   char filename[1000];
@@ -1381,7 +1381,7 @@ void AxisymmetricVibratingShellProblem<ELEMENT>::doc_solution(
             Problem_Parameter::Doc_info_soln.directory().c_str(),
             Problem_Parameter::Doc_info_soln.number());
     some_file.open(filename);
-    some_file << dynamic_cast<ELEMENT *>(this->Fluid_mesh_pt->element_pt(0))
+    some_file << dynamic_cast<ELEMENT*>(this->Fluid_mesh_pt->element_pt(0))
                    ->variable_identifier();
     this->Fluid_mesh_pt->output(some_file, npts);
     some_file.close();
@@ -1395,7 +1395,7 @@ void AxisymmetricVibratingShellProblem<ELEMENT>::doc_solution(
     unsigned nel = Free_surface_mesh_pt->nelement();
     for (unsigned e = 0; e < nel; e++)
     {
-      dynamic_cast<ElasticAxisymmetricFluidInterfaceElement<ELEMENT> *>(
+      dynamic_cast<ElasticAxisymmetricFluidInterfaceElement<ELEMENT>*>(
         Free_surface_mesh_pt->element_pt(e))
         ->output(some_file, npts);
     }
@@ -1425,7 +1425,7 @@ void AxisymmetricVibratingShellProblem<ELEMENT>::doc_solution(
             Problem_Parameter::Doc_info_soln.directory().c_str(),
             Problem_Parameter::Doc_info_soln.number());
     some_file.open(filename);
-    some_file << dynamic_cast<ELEMENT *>(this->Fluid_mesh_pt->element_pt(0))
+    some_file << dynamic_cast<ELEMENT*>(this->Fluid_mesh_pt->element_pt(0))
                    ->variable_identifier();
     this->Fluid_mesh_pt->output(some_file, npts_coarse);
     some_file.close();
@@ -1450,7 +1450,7 @@ void AxisymmetricVibratingShellProblem<ELEMENT>::doc_solution(
   for (unsigned e = 0; e < nel; e++)
   {
     square_of_l2_norm +=
-      dynamic_cast<ELEMENT *>(this->Fluid_mesh_pt->element_pt(e))
+      dynamic_cast<ELEMENT*>(this->Fluid_mesh_pt->element_pt(e))
         ->square_of_l2_norm();
   }
   Problem_Parameter::Norm_file << sqrt(square_of_l2_norm) << std::endl;
@@ -1482,7 +1482,7 @@ void AxisymmetricVibratingShellProblem<ELEMENT>::doc_solution(
   for (unsigned e = 0; e < nel; e++)
   {
     // Get element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Fluid_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Fluid_mesh_pt->element_pt(e));
 
     // Add to physical size (actual volume)
     current_vol += el_pt->compute_physical_size();
@@ -1583,10 +1583,10 @@ void AxisymmetricVibratingShellProblem<ELEMENT>::doc_solution(
 //========================================================================
 template<class ELEMENT>
 void AxisymmetricVibratingShellProblem<ELEMENT>::compute_error_estimate(
-  double &max_err, double &min_err)
+  double& max_err, double& min_err)
 {
   // Get error estimator
-  ErrorEstimator *err_est_pt = Fluid_mesh_pt->spatial_error_estimator_pt();
+  ErrorEstimator* err_est_pt = Fluid_mesh_pt->spatial_error_estimator_pt();
 
   // Get/output error estimates
   unsigned nel = Fluid_mesh_pt->nelement();
@@ -1595,7 +1595,7 @@ void AxisymmetricVibratingShellProblem<ELEMENT>::compute_error_estimate(
   // We need a dynamic cast, get_element_errors from the Fluid_mesh_pt
   // Dynamic cast is used because get_element_errors require a Mesh* ans
   // not a SolidMesh*
-  Mesh *fluid_mesh_pt = dynamic_cast<Mesh *>(Fluid_mesh_pt);
+  Mesh* fluid_mesh_pt = dynamic_cast<Mesh*>(Fluid_mesh_pt);
   err_est_pt->get_element_errors(fluid_mesh_pt, elemental_error);
 
   // Set errors for post-processing and find extrema
@@ -1603,7 +1603,7 @@ void AxisymmetricVibratingShellProblem<ELEMENT>::compute_error_estimate(
   min_err = DBL_MAX;
   for (unsigned e = 0; e < nel; e++)
   {
-    dynamic_cast<MyTaylorHoodElement *>(Fluid_mesh_pt->element_pt(e))
+    dynamic_cast<MyTaylorHoodElement*>(Fluid_mesh_pt->element_pt(e))
       ->set_error(elemental_error[e]);
 
     max_err = std::max(max_err, elemental_error[e]);
@@ -1614,7 +1614,7 @@ void AxisymmetricVibratingShellProblem<ELEMENT>::compute_error_estimate(
 //====start_of_main===========================================
 /// Driver code for vibrating drop problem
 //============================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   ToleranceForVertexMismatchInPolygons::Tolerable_error = 1e-3;
 

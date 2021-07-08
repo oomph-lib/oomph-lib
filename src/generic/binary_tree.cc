@@ -173,11 +173,11 @@ namespace oomph
   ///   different root, even if that root is actually the same (as it can
   ///   be in periodic problems).
   //========================================================================
-  BinaryTree *BinaryTree::gteq_edge_neighbour(const int &direction,
-                                              Vector<double> &s_in_neighbour,
-                                              int &edge,
-                                              int &diff_level,
-                                              bool &in_neighbouring_tree) const
+  BinaryTree* BinaryTree::gteq_edge_neighbour(const int& direction,
+                                              Vector<double>& s_in_neighbour,
+                                              int& edge,
+                                              int& diff_level,
+                                              bool& in_neighbouring_tree) const
   {
     using namespace BinaryTreeNames;
 
@@ -202,7 +202,7 @@ namespace oomph
     int max_level = Level;
 
     // Current element has the following root:
-    BinaryTreeRoot *orig_root_pt = dynamic_cast<BinaryTreeRoot *>(Root_pt);
+    BinaryTreeRoot* orig_root_pt = dynamic_cast<BinaryTreeRoot*>(Root_pt);
 
     // Initialise offset in local coordinate
     double s_diff = 0;
@@ -211,14 +211,14 @@ namespace oomph
     diff_level = 0;
 
     // Find neighbour
-    BinaryTree *return_pt = gteq_edge_neighbour(direction,
+    BinaryTree* return_pt = gteq_edge_neighbour(direction,
                                                 s_diff,
                                                 diff_level,
                                                 in_neighbouring_tree,
                                                 max_level,
                                                 orig_root_pt);
 
-    BinaryTree *neighb_pt = return_pt;
+    BinaryTree* neighb_pt = return_pt;
 
     // If neighbour exists...
     if (neighb_pt != 0)
@@ -258,13 +258,13 @@ namespace oomph
   /// - orig_root_pt identifies the root node of the element whose
   ///   neighbour we're really trying to find by all these recursive calls.
   //========================================================================
-  BinaryTree *BinaryTree::gteq_edge_neighbour(
-    const int &direction,
-    double &s_diff,
-    int &diff_level,
-    bool &in_neighbouring_tree,
+  BinaryTree* BinaryTree::gteq_edge_neighbour(
+    const int& direction,
+    double& s_diff,
+    int& diff_level,
+    bool& in_neighbouring_tree,
     int max_level,
-    BinaryTreeRoot *const &orig_root_pt) const
+    BinaryTreeRoot* const& orig_root_pt) const
   {
     using namespace BinaryTreeNames;
 
@@ -280,8 +280,8 @@ namespace oomph
     }
 #endif
 
-    BinaryTree *next_el_pt;
-    BinaryTree *return_el_pt;
+    BinaryTree* next_el_pt;
+    BinaryTree* return_el_pt;
 
     // STEP 1: Find the neighbour's father
     // -------
@@ -298,7 +298,7 @@ namespace oomph
       // top of the tree, when the element does NOT have a father.
       if (Is_adjacent(direction, Son_type))
       {
-        next_el_pt = dynamic_cast<BinaryTree *>(Father_pt)->gteq_edge_neighbour(
+        next_el_pt = dynamic_cast<BinaryTree*>(Father_pt)->gteq_edge_neighbour(
           direction,
           s_diff,
           diff_level,
@@ -312,7 +312,7 @@ namespace oomph
       // This will only be called if we have not left the original tree.
       else
       {
-        next_el_pt = dynamic_cast<BinaryTree *>(Father_pt);
+        next_el_pt = dynamic_cast<BinaryTree*>(Father_pt);
       }
 
       // We're about to ascend one level
@@ -348,7 +348,7 @@ namespace oomph
           // The next element in the tree is the appropriate son of the
           // neighbour's father
           return_el_pt =
-            dynamic_cast<BinaryTree *>(next_el_pt->Son_pt[son_segment]);
+            dynamic_cast<BinaryTree*>(next_el_pt->Son_pt[son_segment]);
 
           // Work out position of left corner of present edge in next
           // higher element
@@ -375,7 +375,7 @@ namespace oomph
         // In this case we have moved to a neighbour, so set the flag
         in_neighbouring_tree = true;
         return_el_pt =
-          dynamic_cast<BinaryTreeRoot *>(Root_pt->neighbour_pt(direction));
+          dynamic_cast<BinaryTreeRoot*>(Root_pt->neighbour_pt(direction));
       }
       // No neighbouring tree, so there really is no neighbour --> return NULL
       else
@@ -398,7 +398,7 @@ namespace oomph
   {
     // Stick pointers to all nodes into Vector and number elements
     // in the process
-    Vector<Tree *> all_nodes_pt;
+    Vector<Tree*> all_nodes_pt;
     stick_all_tree_nodes_into_vector(all_nodes_pt);
     long int count = 0;
     unsigned long num_nodes = all_nodes_pt.size();
@@ -438,7 +438,7 @@ namespace oomph
   ///  - trees_pt[], the Vector of pointers to the constituent trees
   ///    (BinaryTreeRoot objects)
   //========================================================================
-  BinaryTreeForest::BinaryTreeForest(Vector<TreeRoot *> &trees_pt) :
+  BinaryTreeForest::BinaryTreeForest(Vector<TreeRoot*>& trees_pt) :
     TreeForest(trees_pt)
   {
 #ifdef LEAK_CHECK
@@ -477,7 +477,7 @@ namespace oomph
 
     // Find connected trees by identifying those whose associated elements
     // share a common vertex node
-    std::map<Node *, std::set<unsigned>> tree_assoc_with_vertex_node;
+    std::map<Node*, std::set<unsigned>> tree_assoc_with_vertex_node;
 
     // Loop over all trees
     for (unsigned i = 0; i < numtrees; i++)
@@ -485,7 +485,7 @@ namespace oomph
       // Loop over the vertex nodes of the associated element
       for (unsigned j = 0; j < n_vertex_node; j++)
       {
-        Node *nod_pt = dynamic_cast<LineElementBase *>(Trees_pt[i]->object_pt())
+        Node* nod_pt = dynamic_cast<LineElementBase*>(Trees_pt[i]->object_pt())
                          ->vertex_node_pt(j);
         tree_assoc_with_vertex_node[nod_pt].insert(i);
       }
@@ -496,7 +496,7 @@ namespace oomph
     Vector<std::set<unsigned>> neighb_tree(numtrees);
 
     // Loop over vertex nodes
-    for (std::map<Node *, std::set<unsigned>>::iterator it =
+    for (std::map<Node*, std::set<unsigned>>::iterator it =
            tree_assoc_with_vertex_node.begin();
          it != tree_assoc_with_vertex_node.end();
          it++)
@@ -548,10 +548,10 @@ namespace oomph
   //========================================================================
   /// Document and check all the neighbours in all the nodes in the forest.
   //========================================================================
-  void BinaryTreeForest::check_all_neighbours(DocInfo &doc_info)
+  void BinaryTreeForest::check_all_neighbours(DocInfo& doc_info)
   {
     // Create Vector of elements
-    Vector<Tree *> all_tree_nodes_pt;
+    Vector<Tree*> all_tree_nodes_pt;
     this->stick_all_tree_nodes_into_vector(all_tree_nodes_pt);
 
     // Create storage for information files
@@ -628,7 +628,7 @@ namespace oomph
   {
     // Stick pointers to all nodes into Vector and number elements
     // in the process
-    Vector<Tree *> all_forest_nodes_pt;
+    Vector<Tree*> all_forest_nodes_pt;
     stick_all_tree_nodes_into_vector(all_forest_nodes_pt);
     long int count = 0;
     unsigned long num_nodes = all_forest_nodes_pt.size();
@@ -668,10 +668,10 @@ namespace oomph
   /// error between vertices when viewed from neighbouring element. Output
   /// is suppressed if the output streams are closed.
   //========================================================================
-  void BinaryTree::doc_neighbours(Vector<Tree *> forest_nodes_pt,
-                                  std::ofstream &neighbours_file,
-                                  std::ofstream &neighbours_txt_file,
-                                  double &max_error)
+  void BinaryTree::doc_neighbours(Vector<Tree*> forest_nodes_pt,
+                                  std::ofstream& neighbours_file,
+                                  std::ofstream& neighbours_txt_file,
+                                  double& max_error)
   {
     using namespace BinaryTreeNames;
 
@@ -706,7 +706,7 @@ namespace oomph
     for (unsigned long i = 0; i < num_nodes; i++)
     {
       // Doc the element itself
-      BinaryTree *el_pt = dynamic_cast<BinaryTree *>(forest_nodes_pt[i]);
+      BinaryTree* el_pt = dynamic_cast<BinaryTree*>(forest_nodes_pt[i]);
 
       // If the object is incomplete, complain
       if (el_pt->object_pt()->nodes_built())
@@ -714,7 +714,7 @@ namespace oomph
         // Print it
         if (neighbours_file.is_open())
         {
-          dynamic_cast<RefineableQElement<1> *>(el_pt->object_pt())
+          dynamic_cast<RefineableQElement<1>*>(el_pt->object_pt())
             ->output_corners(neighbours_file, "BLACK");
         }
 
@@ -727,7 +727,7 @@ namespace oomph
           s_diff = 0.0;
 
           // Find greater-or-equal-sized neighbour...
-          BinaryTree *neighb_pt = el_pt->gteq_edge_neighbour(
+          BinaryTree* neighb_pt = el_pt->gteq_edge_neighbour(
             direction, s_in_neighbour, edge, diff_level, in_neighbouring_tree);
 
           // If neighbour exist and nodes are created: Doc it
@@ -749,7 +749,7 @@ namespace oomph
             // Plot neighbour in the appropriate colour
             if (neighbours_file.is_open())
             {
-              dynamic_cast<RefineableQElement<1> *>(neighb_pt->object_pt())
+              dynamic_cast<RefineableQElement<1>*>(neighb_pt->object_pt())
                 ->output_corners(neighbours_file, Colour[direction]);
             }
 

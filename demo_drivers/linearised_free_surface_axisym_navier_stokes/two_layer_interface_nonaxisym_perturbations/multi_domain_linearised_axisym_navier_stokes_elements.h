@@ -75,18 +75,18 @@ public:
 
   /// \short Overload get_base_flow_u(...) to return the external
   /// element's velocity components at the integration point
-  virtual void get_base_flow_u(const double &time,
-                               const unsigned &ipt,
-                               const Vector<double> &x,
-                               Vector<double> &result) const
+  virtual void get_base_flow_u(const double& time,
+                               const unsigned& ipt,
+                               const Vector<double>& x,
+                               Vector<double>& result) const
   {
     // Set interaction index to 0
     const unsigned interaction = 0;
 
     // Get a pointer to the external element that computes the base flow.
     // We know that it's an axisymmetric Navier-Stokes element.
-    const AxisymmetricQCrouzeixRaviartElement *base_flow_el_pt =
-      dynamic_cast<AxisymmetricQCrouzeixRaviartElement *>(
+    const AxisymmetricQCrouzeixRaviartElement* base_flow_el_pt =
+      dynamic_cast<AxisymmetricQCrouzeixRaviartElement*>(
         external_element_pt(interaction, ipt));
 
     // Provide storage for local coordinates in the external element
@@ -108,18 +108,18 @@ public:
   /// \short Overload get_base_flow_dudx(...) to return the derivatives of
   /// the external element's velocity components w.r.t. global coordinates
   /// at the integration point
-  virtual void get_base_flow_dudx(const double &time,
-                                  const unsigned &ipt,
-                                  const Vector<double> &x,
-                                  DenseMatrix<double> &result) const
+  virtual void get_base_flow_dudx(const double& time,
+                                  const unsigned& ipt,
+                                  const Vector<double>& x,
+                                  DenseMatrix<double>& result) const
   {
     // Set interaction index to 1
     const unsigned interaction = 1;
 
     // Get a pointer to the external element that computes the base flow.
     // We know that it's an axisymmetric Navier-Stokes element.
-    const AxisymmetricQCrouzeixRaviartElement *base_flow_el_pt =
-      dynamic_cast<AxisymmetricQCrouzeixRaviartElement *>(
+    const AxisymmetricQCrouzeixRaviartElement* base_flow_el_pt =
+      dynamic_cast<AxisymmetricQCrouzeixRaviartElement*>(
         external_element_pt(interaction, ipt));
 
     // Provide storage for local coordinates in the external element
@@ -146,18 +146,18 @@ public:
 
   /// \short Overload get_base_flow_p(...) to return the external
   /// element's pressure at the integration point
-  virtual void get_base_flow_p(const double &time,
-                               const unsigned &ipt,
-                               const Vector<double> &x,
-                               double &result) const
+  virtual void get_base_flow_p(const double& time,
+                               const unsigned& ipt,
+                               const Vector<double>& x,
+                               double& result) const
   {
     // Set interaction index to 2
     const unsigned interaction = 2;
 
     // Get a pointer to the external element that computes the base flow.
     // We know that it's an axisymmetric Navier-Stokes element.
-    const AxisymmetricQCrouzeixRaviartElement *base_flow_el_pt =
-      dynamic_cast<AxisymmetricQCrouzeixRaviartElement *>(
+    const AxisymmetricQCrouzeixRaviartElement* base_flow_el_pt =
+      dynamic_cast<AxisymmetricQCrouzeixRaviartElement*>(
         external_element_pt(interaction, ipt));
 
     // Provide storage for local coordinates in the external element
@@ -176,18 +176,18 @@ public:
   /// \short Overload get_base_flow_dudt(...) to return the derivatives of
   /// the external element's velocity components w.r.t. time
   /// at the integration point
-  virtual void get_base_flow_dudt(const double &time,
-                                  const unsigned &ipt,
-                                  const Vector<double> &x,
-                                  Vector<double> &result) const
+  virtual void get_base_flow_dudt(const double& time,
+                                  const unsigned& ipt,
+                                  const Vector<double>& x,
+                                  Vector<double>& result) const
   {
     // Set interaction index to 3
     const unsigned interaction = 3;
 
     // Get a pointer to the external element that computes the base flow.
     // We know that it's an axisymmetric Navier-Stokes element.
-    const AxisymmetricQCrouzeixRaviartElement *base_flow_el_pt =
-      dynamic_cast<AxisymmetricQCrouzeixRaviartElement *>(
+    const AxisymmetricQCrouzeixRaviartElement* base_flow_el_pt =
+      dynamic_cast<AxisymmetricQCrouzeixRaviartElement*>(
         external_element_pt(interaction, ipt));
 
     // Provide storage for local coordinates in the external element
@@ -210,18 +210,18 @@ public:
   /// \short Overload get_base_flow_duds(...) to return the derivatives of
   /// the external element's velocity components w.r.t. local coordinates
   /// at the integration point
-  virtual void get_base_flow_duds(const double &time,
-                                  const unsigned &ipt,
-                                  const Vector<double> &x,
-                                  DenseMatrix<double> &result) const
+  virtual void get_base_flow_duds(const double& time,
+                                  const unsigned& ipt,
+                                  const Vector<double>& x,
+                                  DenseMatrix<double>& result) const
   {
     // Set interaction index to 4
     const unsigned interaction = 4;
 
     // Get a pointer to the external element that computes the base flow.
     // We know that it's an axisymmetric Navier-Stokes element.
-    const AxisymmetricQCrouzeixRaviartElement *base_flow_el_pt =
-      dynamic_cast<AxisymmetricQCrouzeixRaviartElement *>(
+    const AxisymmetricQCrouzeixRaviartElement* base_flow_el_pt =
+      dynamic_cast<AxisymmetricQCrouzeixRaviartElement*>(
         external_element_pt(interaction, ipt));
 
     // Provide storage for local coordinates in the external element
@@ -247,8 +247,8 @@ public:
   } // End of overloaded get_base_flow_duds function
 
   /// \short Compute the element's residual vector and the Jacobian matrix
-  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                        DenseMatrix<double> &jacobian)
+  void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                        DenseMatrix<double>& jacobian)
   {
     // Get the analytical contribution from the basic patricklinearised element
     LinearisedAxisymmetricQCrouzeixRaviartElement::

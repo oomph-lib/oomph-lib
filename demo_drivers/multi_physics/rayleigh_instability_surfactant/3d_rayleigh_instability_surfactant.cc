@@ -95,11 +95,11 @@ class ElementCmp
 {
 public:
   /// Comparison. Are the values identical or not?
-  bool operator()(GeneralisedElement *const &x,
-                  GeneralisedElement *const &y) const
+  bool operator()(GeneralisedElement* const& x,
+                  GeneralisedElement* const& y) const
   {
-    FiniteElement *cast_x = dynamic_cast<FiniteElement *>(x);
-    FiniteElement *cast_y = dynamic_cast<FiniteElement *>(y);
+    FiniteElement* cast_x = dynamic_cast<FiniteElement*>(x);
+    FiniteElement* cast_y = dynamic_cast<FiniteElement*>(y);
 
     if ((cast_x == 0) || (cast_y == 0))
     {
@@ -124,15 +124,15 @@ namespace oomph
   {
   public:
     AnnularSpineMesh(
-      const unsigned &n_r,
-      const unsigned &n_y,
-      const unsigned &n_theta,
-      const double &r_min,
-      const double &r_max,
-      const double &l_y,
-      const double &theta_min,
-      const double &theta_max,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      const unsigned& n_r,
+      const unsigned& n_y,
+      const unsigned& n_theta,
+      const double& r_min,
+      const double& r_max,
+      const double& l_y,
+      const double& theta_min,
+      const double& theta_max,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       // This will make a cubic mesh with n_r in the x-direction
       // n_y in the y-direction and n_theta in the z-direction
       // The coordinates will run from 0 to r_max, 0 to l_y and 0 to theta_max
@@ -146,8 +146,8 @@ namespace oomph
       for (unsigned n = 0; n < n_node; n++)
       {
         // pointer to node
-        Node *nod_pt = this->node_pt(n);
-        SpineNode *spine_node_pt = dynamic_cast<SpineNode *>(nod_pt);
+        Node* nod_pt = this->node_pt(n);
+        SpineNode* spine_node_pt = dynamic_cast<SpineNode*>(nod_pt);
         // Get x/y/z coordinates
         double x_old = nod_pt->x(0);
         double y_old = nod_pt->x(1);
@@ -174,7 +174,7 @@ namespace oomph
       }
     }
 
-    virtual void spine_node_update(SpineNode *spine_node_pt)
+    virtual void spine_node_update(SpineNode* spine_node_pt)
     {
       // Get fraction along the spine
       double W = spine_node_pt->fraction();
@@ -200,13 +200,13 @@ public:
   /// Constructor: Pass number of elements in x and y directions. Also lengths
   /// of the domain in x- and y-directions and the height of the layer
 
-  InterfaceProblem(const unsigned &n_r,
-                   const unsigned &n_y,
-                   const unsigned &n_theta,
-                   const double &r_min,
-                   const double &r_max,
-                   const double &l_y,
-                   const double &theta_max);
+  InterfaceProblem(const unsigned& n_r,
+                   const unsigned& n_y,
+                   const unsigned& n_theta,
+                   const double& r_min,
+                   const double& r_max,
+                   const double& l_y,
+                   const double& theta_max);
 
   /// Spine heights/lengths are unknowns in the problem so their
   /// values get corrected during each Newton step. However,
@@ -218,10 +218,10 @@ public:
   }
 
   /// Run an unsteady simulation with specified number of steps
-  void unsteady_run(const unsigned &nstep);
+  void unsteady_run(const unsigned& nstep);
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// Compute the total mass
   double compute_total_mass()
@@ -235,9 +235,8 @@ public:
     for (unsigned e = 0; e < n_interface_element; e++)
     {
       // Upcast from GeneralisedElement to the present element
-      SpineSurfaceSurfactantTransportInterfaceElement<ELEMENT> *el_pt =
-        dynamic_cast<
-          SpineSurfaceSurfactantTransportInterfaceElement<ELEMENT> *>(
+      SpineSurfaceSurfactantTransportInterfaceElement<ELEMENT>* el_pt =
+        dynamic_cast<SpineSurfaceSurfactantTransportInterfaceElement<ELEMENT>*>(
           Surface_mesh_pt->element_pt(e));
 
       mass += el_pt->integrate_c();
@@ -255,13 +254,13 @@ private:
   double L_y;
 
   /// Pointer to bulk mesh
-  AnnularSpineMesh<ELEMENT> *Bulk_mesh_pt;
+  AnnularSpineMesh<ELEMENT>* Bulk_mesh_pt;
 
   /// Pointer to the surface mes
-  Mesh *Surface_mesh_pt;
+  Mesh* Surface_mesh_pt;
 
   /// Pointer to a node for documentation purposes
-  Node *Document_node_pt;
+  Node* Document_node_pt;
 };
 
 //====================================================================
@@ -269,13 +268,13 @@ private:
 //====================================================================
 template<class ELEMENT, class TIMESTEPPER>
 InterfaceProblem<ELEMENT, TIMESTEPPER>::InterfaceProblem(
-  const unsigned &n_r,
-  const unsigned &n_y,
-  const unsigned &n_theta,
-  const double &r_min,
-  const double &r_max,
-  const double &l_y,
-  const double &theta_max) :
+  const unsigned& n_r,
+  const unsigned& n_y,
+  const unsigned& n_theta,
+  const double& r_min,
+  const double& r_max,
+  const double& l_y,
+  const double& theta_max) :
   R_max(r_max), L_y(l_y)
 {
   // this->linear_solver_pt() = new HSL_MA42;
@@ -306,11 +305,11 @@ InterfaceProblem<ELEMENT, TIMESTEPPER>::InterfaceProblem(
     {
       // Set a pointer to the bulk element we wish to our interface
       // element to
-      FiniteElement *bulk_element_pt = Bulk_mesh_pt->finite_element_pt(
+      FiniteElement* bulk_element_pt = Bulk_mesh_pt->finite_element_pt(
         n_theta * n_y * (n_r - 1) + e2 + e1 * n_theta);
 
       // Create the interface element (on face 3 of the bulk element)
-      FiniteElement *interface_element_pt =
+      FiniteElement* interface_element_pt =
         new SpineSurfaceSurfactantTransportInterfaceElement<ELEMENT>(
           bulk_element_pt, 3);
 
@@ -379,7 +378,7 @@ InterfaceProblem<ELEMENT, TIMESTEPPER>::InterfaceProblem(
 
   // Create a Data object whose single value stores the
   // external pressure
-  Data *external_pressure_data_pt = new Data(1);
+  Data* external_pressure_data_pt = new Data(1);
 
   // Set and pin the external pressure to some random value
   external_pressure_data_pt->set_value(0, 1.31);
@@ -392,7 +391,7 @@ InterfaceProblem<ELEMENT, TIMESTEPPER>::InterfaceProblem(
   for (unsigned e = 0; e < n_bulk; e++)
   {
     // Cast to a fluid element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
     // Set the Reynolds number, etc
     el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -407,8 +406,8 @@ InterfaceProblem<ELEMENT, TIMESTEPPER>::InterfaceProblem(
   for (unsigned e = 0; e < interface_element_pt_range; e++)
   {
     // Cast to a interface element
-    SpineSurfaceSurfactantTransportInterfaceElement<ELEMENT> *el_pt =
-      dynamic_cast<SpineSurfaceSurfactantTransportInterfaceElement<ELEMENT> *>(
+    SpineSurfaceSurfactantTransportInterfaceElement<ELEMENT>* el_pt =
+      dynamic_cast<SpineSurfaceSurfactantTransportInterfaceElement<ELEMENT>*>(
         Surface_mesh_pt->element_pt(e));
 
     // Set the Capillary number
@@ -440,7 +439,7 @@ InterfaceProblem<ELEMENT, TIMESTEPPER>::InterfaceProblem(
 /// Doc the solution
 //========================================================================
 template<class ELEMENT, class TIMESTEPPER>
-void InterfaceProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo &doc_info)
+void InterfaceProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -476,7 +475,7 @@ void InterfaceProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo &doc_info)
 /// Unsteady run with specified number of steps
 //=============================================================================
 template<class ELEMENT, class TIMESTEPPER>
-void InterfaceProblem<ELEMENT, TIMESTEPPER>::unsteady_run(const unsigned &nstep)
+void InterfaceProblem<ELEMENT, TIMESTEPPER>::unsteady_run(const unsigned& nstep)
 {
   // Increase maximum residual
   Problem::Max_residuals = 500.0;
@@ -542,7 +541,7 @@ void InterfaceProblem<ELEMENT, TIMESTEPPER>::unsteady_run(const unsigned &nstep)
 
 // In my version we will change nsteps in the programs
 //======================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Set physical parameters:
 

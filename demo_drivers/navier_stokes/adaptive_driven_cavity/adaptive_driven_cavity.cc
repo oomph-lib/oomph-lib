@@ -117,16 +117,16 @@ public:
   } // end_of_actions_after_adapt
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 private:
   /// Fix pressure in element e at pressure dof pdof and set to pvalue
-  void fix_pressure(const unsigned &e,
-                    const unsigned &pdof,
-                    const double &pvalue)
+  void fix_pressure(const unsigned& e,
+                    const unsigned& pdof,
+                    const double& pvalue)
   {
     // Cast to proper element and fix pressure
-    dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e))
+    dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))
       ->fix_pressure(pdof, pvalue);
   } // end_of_fix_pressure
 
@@ -158,8 +158,8 @@ RefineableDrivenCavityProblem<ELEMENT>::RefineableDrivenCavityProblem()
     new RefineableRectangularQuadMesh<ELEMENT>(n_x, n_y, l_x, l_y);
 
   // Set error estimator
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
-  dynamic_cast<RefineableRectangularQuadMesh<ELEMENT> *>(mesh_pt())
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
+  dynamic_cast<RefineableRectangularQuadMesh<ELEMENT>*>(mesh_pt())
     ->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Set the boundary conditions for this problem: All nodes are
@@ -188,7 +188,7 @@ RefineableDrivenCavityProblem<ELEMENT>::RefineableDrivenCavityProblem()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
     // Set the Reynolds number, etc
     el_pt->re_pt() = &Global_Physical_Variables::Re;
   } // end loop over elements
@@ -209,7 +209,7 @@ RefineableDrivenCavityProblem<ELEMENT>::RefineableDrivenCavityProblem()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void RefineableDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void RefineableDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];

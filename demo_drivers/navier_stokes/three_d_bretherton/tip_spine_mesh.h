@@ -57,21 +57,21 @@ public:
   /// \short Constructor: Pass number of elements in x-direction, number of
   /// elements in y-direction, axial length, height of layer, and pointer
   /// to timestepper (defaults to Steady timestepper)
-  MyTipMesh(const unsigned &nx,
-            const unsigned &ny,
-            const unsigned &nz,
-            const double &x_min,
-            const double &x_max,
-            const double &y_min,
-            const double &y_max,
-            const double &z_min,
-            const double &z_max,
-            const double &R,
-            const unsigned &rotation_flag,
-            TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper);
+  MyTipMesh(const unsigned& nx,
+            const unsigned& ny,
+            const unsigned& nz,
+            const double& x_min,
+            const double& x_max,
+            const double& y_min,
+            const double& y_max,
+            const double& z_min,
+            const double& z_max,
+            const double& R,
+            const unsigned& rotation_flag,
+            TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
   /// Access functions for pointers to interface elements
-  FiniteElement *&interface_element_pt(const unsigned long &i)
+  FiniteElement*& interface_element_pt(const unsigned long& i)
   {
     return Interface_element_pt[i];
   }
@@ -83,7 +83,7 @@ public:
   }
 
   /// Access functions for pointers to elements in bulk
-  FiniteElement *&bulk_element_pt(const unsigned long &i)
+  FiniteElement*& bulk_element_pt(const unsigned long& i)
   {
     return Bulk_element_pt[i];
   }
@@ -122,7 +122,7 @@ public:
   /// defined in SpineMesh base class and performs specific node update
   /// actions:  along vertical spines
 
-  virtual void spine_node_update(SpineNode *spine_node_pt)
+  virtual void spine_node_update(SpineNode* spine_node_pt)
   {
     // Get fraction along the spine
     double W = spine_node_pt->fraction();
@@ -154,7 +154,7 @@ public:
   // This function wull be called only at the begining for setting the initial
   // spine appropiated for makeing the canyon shape We will send the node wich
   // is in the inmovile face (origin of the spines)
-  double init_spine_height(SpineNode *spine_node_pt)
+  double init_spine_height(SpineNode* spine_node_pt)
   {
     // set distance to the axis
     double daxis = sqrt(
@@ -189,17 +189,17 @@ public:
 
 protected:
   /// Vector of pointers to element in the fluid layer
-  Vector<FiniteElement *> Bulk_element_pt;
+  Vector<FiniteElement*> Bulk_element_pt;
 
   /// Vector of pointers to interface elements
-  Vector<FiniteElement *> Interface_element_pt;
+  Vector<FiniteElement*> Interface_element_pt;
 
   /// Sacled radius of the canyon (must be between 0 and one
   double Radius;
 
   /// \short Helper function to actually build the single-layer spine mesh
   /// (called from various constructors)
-  virtual void build_single_layer_mesh(TimeStepper *time_stepper_pt);
+  virtual void build_single_layer_mesh(TimeStepper* time_stepper_pt);
 
   // Point where the spines point to
   double Xax;
@@ -231,18 +231,18 @@ protected:
 /// problems.
 //===========================================================================
 template<class ELEMENT, class INTERFACE_ELEMENT>
-MyTipMesh<ELEMENT, INTERFACE_ELEMENT>::MyTipMesh(const unsigned &nx,
-                                                 const unsigned &ny,
-                                                 const unsigned &nz,
-                                                 const double &x_min,
-                                                 const double &x_max,
-                                                 const double &y_min,
-                                                 const double &y_max,
-                                                 const double &z_min,
-                                                 const double &z_max,
-                                                 const double &R,
-                                                 const unsigned &rotation_flag,
-                                                 TimeStepper *time_stepper_pt) :
+MyTipMesh<ELEMENT, INTERFACE_ELEMENT>::MyTipMesh(const unsigned& nx,
+                                                 const unsigned& ny,
+                                                 const unsigned& nz,
+                                                 const double& x_min,
+                                                 const double& x_max,
+                                                 const double& y_min,
+                                                 const double& y_max,
+                                                 const double& z_min,
+                                                 const double& z_max,
+                                                 const double& R,
+                                                 const unsigned& rotation_flag,
+                                                 TimeStepper* time_stepper_pt) :
   SimpleCubicMesh<ELEMENT>(
     nx, ny, nz, x_min, x_max, y_min, y_max, z_min, z_max, time_stepper_pt)
 {
@@ -270,7 +270,7 @@ MyTipMesh<ELEMENT, INTERFACE_ELEMENT>::MyTipMesh(const unsigned &nx,
 //===========================================================================
 template<class ELEMENT, class INTERFACE_ELEMENT>
 void MyTipMesh<ELEMENT, INTERFACE_ELEMENT>::build_single_layer_mesh(
-  TimeStepper *time_stepper_pt)
+  TimeStepper* time_stepper_pt)
 {
   // Set rotation
   if (Rotation_flag == 1) // rotation around y--axis
@@ -308,7 +308,7 @@ void MyTipMesh<ELEMENT, INTERFACE_ELEMENT>::build_single_layer_mesh(
   //---------------------------------------------------------
 
   // Read out number of linear points in the element
-  unsigned n_p = dynamic_cast<ELEMENT *>(finite_element_pt(0))->nnode_1d();
+  unsigned n_p = dynamic_cast<ELEMENT*>(finite_element_pt(0))->nnode_1d();
 
   // Allocate store for the spines: (different in the case of periodic meshes
   // !!)
@@ -334,12 +334,12 @@ void MyTipMesh<ELEMENT, INTERFACE_ELEMENT>::build_single_layer_mesh(
       double hinit = init_spine_height(element_node_pt(0, l2 + l1 * n_p));
       // Assign the new spine within the cilinder
       //   Spine* new_spine_pt=new Spine( hinit,origin_node );
-      Spine *new_spine_pt = new Spine(hinit);
+      Spine* new_spine_pt = new Spine(hinit);
       new_spine_pt->set_geom_parameter(origin_node);
       Spine_pt.push_back(new_spine_pt);
 
       // Get pointer to node
-      SpineNode *nod_pt =
+      SpineNode* nod_pt =
         element_node_pt(0, l2 + l1 * n_p); // Element 0; node j + i*n_p
       // Set the pointer to the spine
       nod_pt->spine_pt() = new_spine_pt;
@@ -360,7 +360,7 @@ void MyTipMesh<ELEMENT, INTERFACE_ELEMENT>::build_single_layer_mesh(
         for (unsigned l3 = 1; l3 < n_p; l3++)
         {
           // Get pointer to node
-          SpineNode *nod_pt =
+          SpineNode* nod_pt =
             element_node_pt(k * n_x * n_y, l3 * n_p * n_p + l2 + l1 * n_p);
           // Set the pointer to the spine
           nod_pt->spine_pt() = new_spine_pt;
@@ -405,13 +405,13 @@ void MyTipMesh<ELEMENT, INTERFACE_ELEMENT>::build_single_layer_mesh(
 
         double hinit = init_spine_height(element_node_pt(j, l2 + l1 * n_p));
         // Assign the new spine
-        Spine *new_spine_pt = new Spine(hinit);
+        Spine* new_spine_pt = new Spine(hinit);
         new_spine_pt->set_geom_parameter(origin_node);
 
         Spine_pt.push_back(new_spine_pt);
 
         // Get pointer to node
-        SpineNode *nod_pt =
+        SpineNode* nod_pt =
           element_node_pt(j, l2 + l1 * n_p); // Element j; node l2 + l1*n_p
         // Set the pointer to the spine
         nod_pt->spine_pt() = new_spine_pt;
@@ -431,7 +431,7 @@ void MyTipMesh<ELEMENT, INTERFACE_ELEMENT>::build_single_layer_mesh(
           for (unsigned l3 = 1; l3 < n_p; l3++)
           {
             // Get pointer to node
-            SpineNode *nod_pt = element_node_pt(j + k * n_x * n_y,
+            SpineNode* nod_pt = element_node_pt(j + k * n_x * n_y,
                                                 l3 * n_p * n_p + l2 + l1 * n_p);
             // Set the pointer to the spine
             nod_pt->spine_pt() = new_spine_pt;
@@ -483,13 +483,13 @@ void MyTipMesh<ELEMENT, INTERFACE_ELEMENT>::build_single_layer_mesh(
         double hinit =
           init_spine_height(element_node_pt(i * n_x, l2 + l1 * n_p));
         // Assign the new spine
-        Spine *new_spine_pt = new Spine(hinit);
+        Spine* new_spine_pt = new Spine(hinit);
         new_spine_pt->set_geom_parameter(origin_node);
 
         Spine_pt.push_back(new_spine_pt);
 
         // Get pointer to node
-        SpineNode *nod_pt = element_node_pt(
+        SpineNode* nod_pt = element_node_pt(
           i * n_x, l2 + l1 * n_p); // Element i*n_x; node l2 + l1*n_p
         // Set the pointer to the spine
         nod_pt->spine_pt() = new_spine_pt;
@@ -509,7 +509,7 @@ void MyTipMesh<ELEMENT, INTERFACE_ELEMENT>::build_single_layer_mesh(
           for (unsigned l3 = 1; l3 < n_p; l3++)
           {
             // Get pointer to node
-            SpineNode *nod_pt = element_node_pt(i * n_x + k * n_x * n_y,
+            SpineNode* nod_pt = element_node_pt(i * n_x + k * n_x * n_y,
                                                 l3 * n_p * n_p + l2 + l1 * n_p);
             // Set the pointer to the spine
             nod_pt->spine_pt() = new_spine_pt;
@@ -565,13 +565,13 @@ void MyTipMesh<ELEMENT, INTERFACE_ELEMENT>::build_single_layer_mesh(
             init_spine_height(element_node_pt(j + i * n_x, l2 + l1 * n_p));
 
           // Assign the new spine with radius as unit length
-          Spine *new_spine_pt = new Spine(hinit);
+          Spine* new_spine_pt = new Spine(hinit);
           new_spine_pt->set_geom_parameter(origin_node);
 
           Spine_pt.push_back(new_spine_pt);
 
           // Get pointer to node
-          SpineNode *nod_pt = element_node_pt(
+          SpineNode* nod_pt = element_node_pt(
             j + i * n_x, l2 + l1 * n_p); // Element j + i*n_x; node l2 + l1*n_p
           // Set the pointer to the spine
           nod_pt->spine_pt() = new_spine_pt;
@@ -591,7 +591,7 @@ void MyTipMesh<ELEMENT, INTERFACE_ELEMENT>::build_single_layer_mesh(
             for (unsigned l3 = 1; l3 < n_p; l3++)
             {
               // Get pointer to node
-              SpineNode *nod_pt = element_node_pt(
+              SpineNode* nod_pt = element_node_pt(
                 j + i * n_x + k * n_x * n_y, l3 * n_p * n_p + l2 + l1 * n_p);
               // Set the pointer to the spine
               nod_pt->spine_pt() = new_spine_pt;
@@ -620,7 +620,7 @@ void MyTipMesh<ELEMENT, INTERFACE_ELEMENT>::build_single_layer_mesh(
       {
         // Construct a new 2D surface element on the face on which the local
         // coordinate 2 is fixed at its max. value (1)
-        FiniteElement *interface_element_element_pt = new INTERFACE_ELEMENT(
+        FiniteElement* interface_element_element_pt = new INTERFACE_ELEMENT(
           finite_element_pt(n_x * n_y * (n_z - 1) + l2 + l1 * n_x), 3);
 
         // Push it back onto the stack

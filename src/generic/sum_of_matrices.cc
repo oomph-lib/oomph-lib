@@ -39,7 +39,7 @@ namespace oomph
   /// delegate each multiplication to the appropriate class then add up the
   /// results.
   // =================================================================
-  void SumOfMatrices::multiply(const DoubleVector &x, DoubleVector &soln) const
+  void SumOfMatrices::multiply(const DoubleVector& x, DoubleVector& soln) const
   {
     // We assume that appropriate checks and initialisation on x and soln are
     // carried out within the individual matrix multiplys.

@@ -49,7 +49,7 @@ namespace oomph
   /// node constraints after updating the position of its master nodes.
   //========================================================================
   void MacroElementNodeUpdateNode::node_update(
-    const bool &update_all_time_levels_for_new_node)
+    const bool& update_all_time_levels_for_new_node)
   {
     // Number of time levels that need to be updated
     unsigned ntime;
@@ -78,7 +78,7 @@ namespace oomph
       unsigned nmaster = hanging_pt()->nmaster();
       for (unsigned imaster = 0; imaster < nmaster; imaster++)
       {
-        dynamic_cast<MacroElementNodeUpdateNode *>(
+        dynamic_cast<MacroElementNodeUpdateNode*>(
           hanging_pt()->master_node_pt(imaster))
           ->node_update(update_all_time_levels_for_new_node);
       }

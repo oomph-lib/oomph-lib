@@ -83,7 +83,7 @@ namespace Problem_Parameter
   double Lambda_sq = 0.0;
 
   /// Constitutive law used to determine the mesh deformation
-  ConstitutiveLaw *Constitutive_law_pt =
+  ConstitutiveLaw* Constitutive_law_pt =
     new GeneralisedHookean(&Problem_Parameter::Nu);
 
 } // namespace Problem_Parameter
@@ -95,13 +95,13 @@ namespace Problem_Parameter
 namespace Jeffery_Solution
 {
   /// Null function
-  double null(const double &t)
+  double null(const double& t)
   {
     return 0.0;
   }
 
   /// Angular position as a function of time t
-  double angle(const double &t)
+  double angle(const double& t)
   {
     const double a = Problem_Parameter::A;
     const double b = Problem_Parameter::B;
@@ -110,7 +110,7 @@ namespace Jeffery_Solution
   }
 
   /// Angular velocity as function of time t
-  double velocity(const double &t)
+  double velocity(const double& t)
   {
     const double a = Problem_Parameter::A;
     const double b = Problem_Parameter::B;
@@ -124,7 +124,7 @@ namespace Jeffery_Solution
   }
 
   /// Angular acceleration as a function of time t (should always be zero)
-  double acceleration(const double &t)
+  double acceleration(const double& t)
   {
     const double a = Problem_Parameter::A;
     const double b = Problem_Parameter::A;
@@ -158,10 +158,10 @@ private:
 public:
   /// \short Simple Constructor that transfers appropriate geometric
   /// parameters into internal data
-  GeneralEllipse(const double &centre_x,
-                 const double &centre_y,
-                 const double &a,
-                 const double &b) :
+  GeneralEllipse(const double& centre_x,
+                 const double& centre_y,
+                 const double& a,
+                 const double& b) :
     GeomObject(1, 2), Centre_x(centre_x), Centre_y(centre_y), A(a), B(b)
   {
   }
@@ -171,16 +171,16 @@ public:
 
   /// Return the position of the ellipse boundary as a function of
   /// the angle xi[0]
-  void position(const Vector<double> &xi, Vector<double> &r) const
+  void position(const Vector<double>& xi, Vector<double>& r) const
   {
     r[0] = Centre_x + A * cos(xi[0]);
     r[1] = Centre_y + B * sin(xi[0]);
   }
 
   // Return the position which is always fixed
-  void position(const unsigned &t,
-                const Vector<double> &xi,
-                Vector<double> &r) const
+  void position(const unsigned& t,
+                const Vector<double>& xi,
+                Vector<double>& r) const
   {
     return position(xi, r);
   }
@@ -239,10 +239,10 @@ public:
   void solve_for_consistent_nodal_positions();
 
   /// Doc the solution
-  void doc_solution(const bool &project = false);
+  void doc_solution(const bool& project = false);
 
   /// Output the exact solution
-  void output_exact_solution(std::ofstream &output_file);
+  void output_exact_solution(std::ofstream& output_file);
 
 private:
   /// \short Create elements that enforce prescribed boundary motion
@@ -268,22 +268,22 @@ private:
   void unpin_rigid_body();
 
   /// Pointers to mesh of Lagrange multiplier elements
-  SolidMesh *Lagrange_multiplier_mesh_pt;
+  SolidMesh* Lagrange_multiplier_mesh_pt;
 
   /// Pointer to Fluid_mesh
-  RefineableSolidTriangleMesh<ELEMENT> *Fluid_mesh_pt;
+  RefineableSolidTriangleMesh<ELEMENT>* Fluid_mesh_pt;
 
   /// Triangle mesh polygon for outer boundary
-  TriangleMeshPolygon *Outer_boundary_polygon_pt;
+  TriangleMeshPolygon* Outer_boundary_polygon_pt;
 
   /// Mesh of drag elements
-  Vector<Mesh *> Drag_mesh_pt;
+  Vector<Mesh*> Drag_mesh_pt;
 
   /// Mesh of the generalised elements for the rigid bodies
-  Mesh *Rigid_body_mesh_pt;
+  Mesh* Rigid_body_mesh_pt;
 
   /// Storage for the geom object
-  Vector<GeomObject *> Rigid_body_pt;
+  Vector<GeomObject*> Rigid_body_pt;
 
   /// Internal DocInfo object
   DocInfo Doc_info;
@@ -334,7 +334,7 @@ UnstructuredImmersedEllipseProblem<
   //--------------------------------------------------------------
   // four separate polyline segments
   //---------------------------------
-  Vector<TriangleMeshCurveSection *> boundary_segment_pt(4);
+  Vector<TriangleMeshCurveSection*> boundary_segment_pt(4);
 
   // Set the length of the channel
   double half_length = 5.0;
@@ -403,7 +403,7 @@ UnstructuredImmersedEllipseProblem<
 
   // We have one rigid body
   Rigid_body_pt.resize(1);
-  Vector<TriangleMeshClosedCurve *> hole_pt(1);
+  Vector<TriangleMeshClosedCurve*> hole_pt(1);
 
   // Build Rigid Body
   //-----------------
@@ -411,12 +411,12 @@ UnstructuredImmersedEllipseProblem<
   double y_center = 0.0;
   double A = Problem_Parameter::A;
   double B = Problem_Parameter::B;
-  GeomObject *temp_hole_pt = new GeneralEllipse(x_center, y_center, A, B);
+  GeomObject* temp_hole_pt = new GeneralEllipse(x_center, y_center, A, B);
   Rigid_body_pt[0] =
     new ImmersedRigidBodyElement(temp_hole_pt, this->time_stepper_pt(1));
 
   // Build the two parts of the curvilinear boundary from the rigid body
-  Vector<TriangleMeshCurveSection *> curvilinear_boundary_pt(2);
+  Vector<TriangleMeshCurveSection*> curvilinear_boundary_pt(2);
 
   // First section (boundary 4)
   double zeta_start = 0.0;
@@ -438,7 +438,7 @@ UnstructuredImmersedEllipseProblem<
   Vector<double> hole_coords(2);
   hole_coords[0] = 0.0;
   hole_coords[1] = 0.0;
-  Vector<TriangleMeshClosedCurve *> curvilinear_hole_pt(1);
+  Vector<TriangleMeshClosedCurve*> curvilinear_hole_pt(1);
   hole_pt[0] =
     new TriangleMeshClosedCurve(curvilinear_boundary_pt, hole_coords);
 
@@ -447,7 +447,7 @@ UnstructuredImmersedEllipseProblem<
   // polygons just created
   //----------------------
 
-  TriangleMeshClosedCurve *closed_curve_pt = Outer_boundary_polygon_pt;
+  TriangleMeshClosedCurve* closed_curve_pt = Outer_boundary_polygon_pt;
 
   double uniform_element_area = 1.0;
 
@@ -466,7 +466,7 @@ UnstructuredImmersedEllipseProblem<
     triangle_mesh_parameters, this->time_stepper_pt());
 
   // Set error estimator for bulk mesh
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   Fluid_mesh_pt->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Set targets for spatial adaptivity
@@ -487,8 +487,8 @@ UnstructuredImmersedEllipseProblem<
   complete_problem_setup();
 
   // Set the parameters of the rigid body elements
-  ImmersedRigidBodyElement *rigid_element1_pt =
-    dynamic_cast<ImmersedRigidBodyElement *>(Rigid_body_pt[0]);
+  ImmersedRigidBodyElement* rigid_element1_pt =
+    dynamic_cast<ImmersedRigidBodyElement*>(Rigid_body_pt[0]);
   rigid_element1_pt->initial_centre_of_mass(0) = x_center;
   rigid_element1_pt->initial_centre_of_mass(1) = y_center;
   rigid_element1_pt->mass_shape() = MathematicalConstants::Pi * A * B;
@@ -565,7 +565,7 @@ UnstructuredImmersedEllipseProblem<
   delete Outer_boundary_polygon_pt;
 
   // Flush the drag mesh from the rigid body
-  dynamic_cast<ImmersedRigidBodyElement *>(Rigid_body_pt[0])->flush_drag_mesh();
+  dynamic_cast<ImmersedRigidBodyElement*>(Rigid_body_pt[0])->flush_drag_mesh();
 
   // Flush Lagrange multiplier mesh
   delete_lagrange_multiplier_elements();
@@ -593,7 +593,7 @@ template<class ELEMENT>
 void UnstructuredImmersedEllipseProblem<ELEMENT>::actions_before_adapt()
 {
   // Flush the drag mesh from the rigid body
-  dynamic_cast<ImmersedRigidBodyElement *>(Rigid_body_pt[0])->flush_drag_mesh();
+  dynamic_cast<ImmersedRigidBodyElement*>(Rigid_body_pt[0])->flush_drag_mesh();
 
   // Kill the drag element
   delete_drag_elements();
@@ -622,7 +622,7 @@ void UnstructuredImmersedEllipseProblem<ELEMENT>::actions_after_adapt()
   create_drag_elements();
 
   // Add the drag elements to the rigid body
-  dynamic_cast<ImmersedRigidBodyElement *>(Rigid_body_pt[0])
+  dynamic_cast<ImmersedRigidBodyElement*>(Rigid_body_pt[0])
     ->set_drag_mesh(this->Drag_mesh_pt[0]);
 
   // Rebuild the Problem's global mesh from its various sub-meshes
@@ -656,7 +656,7 @@ void UnstructuredImmersedEllipseProblem<ELEMENT>::complete_problem_setup()
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Cache pointer to node
-      Node *const nod_pt = Fluid_mesh_pt->boundary_node_pt(ibound, inod);
+      Node* const nod_pt = Fluid_mesh_pt->boundary_node_pt(ibound, inod);
 
       // Pin x-velocity unless on inlet (0) and outlet (2) boundaries
       // of the external rectangular box
@@ -670,7 +670,7 @@ void UnstructuredImmersedEllipseProblem<ELEMENT>::complete_problem_setup()
       // Pin pseudo-solid positions apart from on the
       // ellipse boundary that is allowed to move
       // Cache cast pointer to solid node
-      SolidNode *const solid_node_pt = dynamic_cast<SolidNode *>(nod_pt);
+      SolidNode* const solid_node_pt = dynamic_cast<SolidNode*>(nod_pt);
 
       // Pin the solid positions on all external boundaries
       if (ibound < 4)
@@ -703,7 +703,7 @@ void UnstructuredImmersedEllipseProblem<ELEMENT>::complete_problem_setup()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Fluid_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Fluid_mesh_pt->element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &Problem_Parameter::Re;
@@ -741,7 +741,7 @@ void UnstructuredImmersedEllipseProblem<ELEMENT>::set_boundary_velocity()
       for (unsigned inod = 0; inod < num_nod; inod++)
       {
         // Get node
-        Node *const nod_pt =
+        Node* const nod_pt =
           this->Fluid_mesh_pt->boundary_node_pt(ibound, inod);
 
         // Get number of previous (history) values
@@ -762,7 +762,7 @@ void UnstructuredImmersedEllipseProblem<ELEMENT>::set_boundary_velocity()
       for (unsigned inod = 0; inod < num_nod; inod++)
       {
         // Get node
-        Node *nod_pt = this->Fluid_mesh_pt->boundary_node_pt(ibound, inod);
+        Node* nod_pt = this->Fluid_mesh_pt->boundary_node_pt(ibound, inod);
 
         // Get number of previous (history) values
         unsigned n_prev = nod_pt->time_stepper_pt()->nprev_values();
@@ -866,8 +866,8 @@ void UnstructuredImmersedEllipseProblem<
   this->unpin_rigid_body();
 
   //...and then repin the position of the centre of mass
-  ImmersedRigidBodyElement *rigid_element1_pt =
-    dynamic_cast<ImmersedRigidBodyElement *>(Rigid_body_pt[0]);
+  ImmersedRigidBodyElement* rigid_element1_pt =
+    dynamic_cast<ImmersedRigidBodyElement*>(Rigid_body_pt[0]);
   rigid_element1_pt->pin_centre_of_mass_coordinate(0);
   rigid_element1_pt->pin_centre_of_mass_coordinate(1);
 
@@ -894,7 +894,7 @@ void UnstructuredImmersedEllipseProblem<
   for (unsigned b = 0; b < n_boundary; b++)
   {
     // Get the geometric object associated with the boundary
-    GeomObject *boundary_geom_obj_pt =
+    GeomObject* boundary_geom_obj_pt =
       Fluid_mesh_pt->boundary_geom_object_pt(b);
 
     // Only bother to do anything if there is a geometric object
@@ -908,8 +908,8 @@ void UnstructuredImmersedEllipseProblem<
       {
         // Get pointer to the bulk fluid element that is
         // adjacent to boundary b
-        ELEMENT *bulk_elem_pt =
-          dynamic_cast<ELEMENT *>(Fluid_mesh_pt->boundary_element_pt(b, e));
+        ELEMENT* bulk_elem_pt =
+          dynamic_cast<ELEMENT*>(Fluid_mesh_pt->boundary_element_pt(b, e));
 
         // Find the index of the face of element e along boundary b
         int face_index = Fluid_mesh_pt->face_index_at_boundary(b, e);
@@ -917,7 +917,7 @@ void UnstructuredImmersedEllipseProblem<
         // Create new element. Note that we use different Lagrange
         // multiplier fields for each distinct boundary (here indicated
         // by b.
-        ImposeDisplacementByLagrangeMultiplierElement<ELEMENT> *el_pt =
+        ImposeDisplacementByLagrangeMultiplierElement<ELEMENT>* el_pt =
           new ImposeDisplacementByLagrangeMultiplierElement<ELEMENT>(
             bulk_elem_pt, face_index, b);
 
@@ -933,7 +933,7 @@ void UnstructuredImmersedEllipseProblem<
         unsigned nnod = el_pt->nnode();
         for (unsigned j = 0; j < nnod; j++)
         {
-          Node *nod_pt = el_pt->node_pt(j);
+          Node* nod_pt = el_pt->node_pt(j);
 
           // How many nodal values were used by the "bulk" element
           // that originally created this node?
@@ -1001,14 +1001,14 @@ void UnstructuredImmersedEllipseProblem<ELEMENT>::create_drag_elements()
   for (unsigned r = 0; r < n_rigid; r++)
   {
     // Get the rigid boundary geometric object
-    ImmersedRigidBodyElement *rigid_el_pt =
-      dynamic_cast<ImmersedRigidBodyElement *>(this->Rigid_body_pt[r]);
+    ImmersedRigidBodyElement* rigid_el_pt =
+      dynamic_cast<ImmersedRigidBodyElement*>(this->Rigid_body_pt[r]);
 
     // Loop over all boundaries
     for (unsigned b = 0; b < n_boundary; b++)
     {
       // Does the boundary correspond to the current rigid body
-      if (dynamic_cast<ImmersedRigidBodyElement *>(
+      if (dynamic_cast<ImmersedRigidBodyElement*>(
             Fluid_mesh_pt->boundary_geom_object_pt(b)) == rigid_el_pt)
       {
         // How many bulk fluid elements are adjacent to boundary b?
@@ -1019,8 +1019,8 @@ void UnstructuredImmersedEllipseProblem<ELEMENT>::create_drag_elements()
         {
           // Get pointer to the bulk fluid element that is
           // adjacent to boundary b
-          ELEMENT *bulk_elem_pt =
-            dynamic_cast<ELEMENT *>(Fluid_mesh_pt->boundary_element_pt(b, e));
+          ELEMENT* bulk_elem_pt =
+            dynamic_cast<ELEMENT*>(Fluid_mesh_pt->boundary_element_pt(b, e));
 
           // Find the index of the face of element e along boundary b
           int face_index = Fluid_mesh_pt->face_index_at_boundary(b, e);
@@ -1028,7 +1028,7 @@ void UnstructuredImmersedEllipseProblem<ELEMENT>::create_drag_elements()
           // Create new element. Note that we use different Lagrange
           // multiplier fields for each distinct boundary (here indicated
           // by b.
-          NavierStokesSurfaceDragTorqueElement<ELEMENT> *el_pt =
+          NavierStokesSurfaceDragTorqueElement<ELEMENT>* el_pt =
             new NavierStokesSurfaceDragTorqueElement<ELEMENT>(bulk_elem_pt,
                                                               face_index);
 
@@ -1084,7 +1084,7 @@ void UnstructuredImmersedEllipseProblem<ELEMENT>::delete_drag_elements()
 //========================================================================
 template<class ELEMENT>
 void UnstructuredImmersedEllipseProblem<ELEMENT>::doc_solution(
-  const bool &project)
+  const bool& project)
 {
   oomph_info << "Docing step: " << this->Doc_info.number() << std::endl;
 
@@ -1117,7 +1117,7 @@ void UnstructuredImmersedEllipseProblem<ELEMENT>::doc_solution(
   for (unsigned e = 0; e < nel; e++)
   {
     square_of_l2_norm +=
-      dynamic_cast<ELEMENT *>(this->Fluid_mesh_pt->element_pt(e))
+      dynamic_cast<ELEMENT*>(this->Fluid_mesh_pt->element_pt(e))
         ->square_of_l2_norm();
   }
 
@@ -1125,7 +1125,7 @@ void UnstructuredImmersedEllipseProblem<ELEMENT>::doc_solution(
   this->Norm_file << sqrt(square_of_l2_norm) << "\n";
 
   some_file.open(filename);
-  some_file << dynamic_cast<ELEMENT *>(this->Fluid_mesh_pt->element_pt(0))
+  some_file << dynamic_cast<ELEMENT*>(this->Fluid_mesh_pt->element_pt(0))
                  ->variable_identifier();
   this->Fluid_mesh_pt->output(some_file, npts);
   some_file.close();
@@ -1146,7 +1146,7 @@ void UnstructuredImmersedEllipseProblem<ELEMENT>::doc_solution(
   this->Doc_info.number()++;
 
   // Output the motion of the centre of gravity
-  dynamic_cast<ImmersedRigidBodyElement *>(this->Rigid_body_pt[0])
+  dynamic_cast<ImmersedRigidBodyElement*>(this->Rigid_body_pt[0])
     ->output_centre_of_gravity(this->Cog_file);
 
   // Output the exact solution
@@ -1158,7 +1158,7 @@ void UnstructuredImmersedEllipseProblem<ELEMENT>::doc_solution(
 //=====================================================================
 template<class ELEMENT>
 void UnstructuredImmersedEllipseProblem<ELEMENT>::output_exact_solution(
-  std::ofstream &output_file)
+  std::ofstream& output_file)
 {
   // Get the current time
   double time = this->time();
@@ -1171,7 +1171,7 @@ void UnstructuredImmersedEllipseProblem<ELEMENT>::output_exact_solution(
 //==========start_of_main======================================
 /// Driver code for immersed ellipse problem
 //============================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

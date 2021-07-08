@@ -56,7 +56,7 @@ namespace oomph
 
     // Initialise the bin (only called by the create_bins_of_objects()
     // method)
-    void initialise(const unsigned &size)
+    void initialise(const unsigned& size)
     {
       // Create a "large" bool vector indicating all entries are empty
       Has_entry.resize(size, false);
@@ -73,7 +73,7 @@ namespace oomph
     }
 
     /// Square bracket access (const version)
-    const T &operator[](const unsigned &i) const
+    const T& operator[](const unsigned& i) const
     {
       typedef typename std::map<unsigned, T>::const_iterator IT;
       IT it = Data.find(i);
@@ -85,7 +85,7 @@ namespace oomph
     }
 
     /// Set value of i-th entry
-    void set_value(const unsigned &i, const T &value)
+    void set_value(const unsigned& i, const T& value)
     {
       Data[i] = value;
       // Mark as having entry
@@ -102,19 +102,19 @@ namespace oomph
     }
 
     /// Read-only access to underlying map
-    const std::map<unsigned, T> *map_pt() const
+    const std::map<unsigned, T>* map_pt() const
     {
       return &Data;
     }
 
     /// Read/write access to underlying map -- dangerous!
-    std::map<unsigned, T> *map_pt()
+    std::map<unsigned, T>* map_pt()
     {
       return &Data;
     }
 
     /// \short Check if the bin has entries
-    bool has_entry(const unsigned &nbin)
+    bool has_entry(const unsigned& nbin)
     {
       return Has_entry[nbin];
     }
@@ -122,7 +122,7 @@ namespace oomph
     /// \short Return vector containing all values
     /// (without reference to their specific indices)
     /// for fast direct access
-    void get_all_values(Vector<T> &all_values) const
+    void get_all_values(Vector<T>& all_values) const
     {
       all_values.clear();
       all_values.resize(nnz());
@@ -139,7 +139,7 @@ namespace oomph
     std::map<unsigned, T> Data;
 
     /// Empty instance
-    const T *Empty_pt;
+    const T* Empty_pt;
 
     /// Keep track of the filled and empty bins
     std::vector<bool> Has_entry;

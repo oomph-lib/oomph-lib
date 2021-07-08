@@ -69,13 +69,13 @@ namespace oomph
     /// axial length and height of top and bottom layers and pointer
     /// to timestepper (defaults to Steady timestepper)
     TwoLayerSpineMesh(
-      const unsigned &nx,
-      const unsigned &ny1,
-      const unsigned &ny2,
-      const double &lx,
-      const double &h1,
-      const double &h2,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper);
+      const unsigned& nx,
+      const unsigned& ny1,
+      const unsigned& ny2,
+      const double& lx,
+      const double& h1,
+      const double& h2,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
     /// \short Constructor: Pass number of elements in x-direction, number of
     /// elements in y-direction in bottom and top layer, respectively,
@@ -83,14 +83,14 @@ namespace oomph
     /// flag to make the mesh periodic in the x-direction, and pointer
     /// to timestepper (defaults to Steady timestepper)
     TwoLayerSpineMesh(
-      const unsigned &nx,
-      const unsigned &ny1,
-      const unsigned &ny2,
-      const double &lx,
-      const double &h1,
-      const double &h2,
-      const bool &periodic_in_x,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper);
+      const unsigned& nx,
+      const unsigned& ny1,
+      const unsigned& ny2,
+      const double& lx,
+      const double& h1,
+      const double& h2,
+      const bool& periodic_in_x,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
     /// \short Constructor: Pass number of elements in x-direction, number of
     /// elements in y-direction in bottom and top layer, respectively,
@@ -99,24 +99,24 @@ namespace oomph
     /// specify whether or not to call the "build_two_layer_mesh" function,
     /// and pointer to timestepper (defaults to Steady timestepper)
     TwoLayerSpineMesh(
-      const unsigned &nx,
-      const unsigned &ny1,
-      const unsigned &ny2,
-      const double &lx,
-      const double &h1,
-      const double &h2,
-      const bool &periodic_in_x,
-      const bool &build_mesh,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper);
+      const unsigned& nx,
+      const unsigned& ny1,
+      const unsigned& ny2,
+      const double& lx,
+      const double& h1,
+      const double& h2,
+      const bool& periodic_in_x,
+      const bool& build_mesh,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
     /// Access functions for pointers to elements in upper layer
-    FiniteElement *&upper_layer_element_pt(const unsigned long &i)
+    FiniteElement*& upper_layer_element_pt(const unsigned long& i)
     {
       return Upper_layer_element_pt[i];
     }
 
     /// Access functions for pointers to elements in bottom layer
-    FiniteElement *&lower_layer_element_pt(const unsigned long &i)
+    FiniteElement*& lower_layer_element_pt(const unsigned long& i)
     {
       return Lower_layer_element_pt[i];
     }
@@ -134,13 +134,13 @@ namespace oomph
     }
 
     /// Access functions for pointers to elements in upper layer
-    FiniteElement *&interface_upper_boundary_element_pt(const unsigned long &i)
+    FiniteElement*& interface_upper_boundary_element_pt(const unsigned long& i)
     {
       return Interface_upper_boundary_element_pt[i];
     }
 
     /// Access functions for pointers to elements in bottom layer
-    FiniteElement *&interface_lower_boundary_element_pt(const unsigned long &i)
+    FiniteElement*& interface_lower_boundary_element_pt(const unsigned long& i)
     {
       return Interface_lower_boundary_element_pt[i];
     }
@@ -159,14 +159,14 @@ namespace oomph
 
     ///\short Index of the face of the elements next to the interface
     /// in the upper region (always -2)
-    int interface_upper_face_index_at_boundary(const unsigned &e)
+    int interface_upper_face_index_at_boundary(const unsigned& e)
     {
       return -2;
     }
 
     ///\short Index of the face of the elements next to the interface in
     /// the lower region (always 2)
-    int interface_lower_face_index_at_boundary(const unsigned &e)
+    int interface_lower_face_index_at_boundary(const unsigned& e)
     {
       return 2;
     }
@@ -174,7 +174,7 @@ namespace oomph
     /// \short General node update function implements pure virtual function
     /// defined in SpineMesh base class and performs specific update
     /// actions, depending on the node update fct id stored for each node.
-    void spine_node_update(SpineNode *spine_node_pt)
+    void spine_node_update(SpineNode* spine_node_pt)
     {
       unsigned id = spine_node_pt->node_update_fct_id();
       switch (id)
@@ -211,18 +211,18 @@ namespace oomph
     double H2;
 
     /// Vector of pointers to element in the upper layer
-    Vector<FiniteElement *> Lower_layer_element_pt;
+    Vector<FiniteElement*> Lower_layer_element_pt;
 
     /// Vector of pointers to element in the lower layer
-    Vector<FiniteElement *> Upper_layer_element_pt;
+    Vector<FiniteElement*> Upper_layer_element_pt;
 
     /// \short Vector of pointers to the elements adjacent to the interface
     /// on the lower layer
-    Vector<FiniteElement *> Interface_lower_boundary_element_pt;
+    Vector<FiniteElement*> Interface_lower_boundary_element_pt;
 
     /// \short Vector of pointers to the element adjacent to the interface
     /// on the upper layer
-    Vector<FiniteElement *> Interface_upper_boundary_element_pt;
+    Vector<FiniteElement*> Interface_upper_boundary_element_pt;
 
     /// \short The spacing function for the x co-ordinates with two
     /// regions.
@@ -239,7 +239,7 @@ namespace oomph
                               unsigned ynode);
 
     /// \short Update function for the lower part of the domain
-    void spine_node_update_lower(SpineNode *spine_node_pt)
+    void spine_node_update_lower(SpineNode* spine_node_pt)
     {
       // Get fraction along the spine
       double W = spine_node_pt->fraction();
@@ -250,7 +250,7 @@ namespace oomph
     }
 
     /// \short Update function for the upper part of the domain
-    void spine_node_update_upper(SpineNode *spine_node_pt)
+    void spine_node_update_upper(SpineNode* spine_node_pt)
     {
       // Get fraction alon the spine
       double W = spine_node_pt->fraction();
@@ -265,7 +265,7 @@ namespace oomph
 
     /// \short Helper function to actually build the two-layer spine mesh
     /// (called from various constructors)
-    virtual void build_two_layer_mesh(TimeStepper *time_stepper_pt);
+    virtual void build_two_layer_mesh(TimeStepper* time_stepper_pt);
   };
 
 } // namespace oomph

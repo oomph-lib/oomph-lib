@@ -88,20 +88,20 @@ public:
 
   /// To be killed
   void sparse_assemble_row_or_column_compressed_test(
-    Vector<Vector<int>> &column_or_row_index,
-    Vector<Vector<int>> &row_or_column_start,
-    Vector<Vector<double>> &value,
-    Vector<Vector<double> *> &residuals,
+    Vector<Vector<int>>& column_or_row_index,
+    Vector<Vector<int>>& row_or_column_start,
+    Vector<Vector<double>>& value,
+    Vector<Vector<double>*>& residuals,
     bool compressed_row_flag,
     unsigned method = 1);
 
   /// Fix pressure in element e at pressure dof pdof and set to pvalue
-  void fix_pressure(const unsigned &e,
-                    const unsigned &pdof,
-                    const double &pvalue)
+  void fix_pressure(const unsigned& e,
+                    const unsigned& pdof,
+                    const double& pvalue)
   {
     // Cast to full element type and fix the pressure at that element
-    dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e))
+    dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))
       ->fix_pressure(pdof, pvalue);
   } // end of fix_pressure
 
@@ -141,19 +141,19 @@ public:
   } // end_of_actions_before_newton_solve
 
   // Access function for the specific mesh
-  SimpleRectangularQuadMesh<ELEMENT> *mesh_pt()
+  SimpleRectangularQuadMesh<ELEMENT>* mesh_pt()
   {
     // Upcast from pointer to the Mesh base class to the specific
     // element type that we're using here.
-    return dynamic_cast<SimpleRectangularQuadMesh<ELEMENT> *>(
+    return dynamic_cast<SimpleRectangularQuadMesh<ELEMENT>*>(
       Problem::mesh_pt());
   }
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// Do what it says...
-  void compare_assembly_strategies(const unsigned &method);
+  void compare_assembly_strategies(const unsigned& method);
 
 }; // end_of_problem_class
 
@@ -207,7 +207,7 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Variables::Re;
@@ -224,7 +224,7 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void RectangularDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void RectangularDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -246,7 +246,7 @@ void RectangularDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
 //========================================================================
 template<class ELEMENT>
 void RectangularDrivenCavityProblem<ELEMENT>::compare_assembly_strategies(
-  const unsigned &method)
+  const unsigned& method)
 {
   // Halt code execution?
   Problem::Pause_at_end_of_sparse_assembly = Global_Variables::Halt_code;
@@ -254,11 +254,11 @@ void RectangularDrivenCavityProblem<ELEMENT>::compare_assembly_strategies(
   DoubleVector residual;
   CRDoubleMatrix matrix;
 
-  Vector<int *> col_index(1);
-  Vector<int *> row_start(1);
-  Vector<double *> value(1);
+  Vector<int*> col_index(1);
+  Vector<int*> row_start(1);
+  Vector<double*> value(1);
   Vector<unsigned> nnz(1);
-  Vector<double *> residuals(1);
+  Vector<double*> residuals(1);
   bool compressed_row = true;
 
   clock_t clock1 = clock();
@@ -356,7 +356,7 @@ void RectangularDrivenCavityProblem<ELEMENT>::compare_assembly_strategies(
 //==start_of_main======================================================
 /// Driver to compare different assembly strategies
 //=====================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

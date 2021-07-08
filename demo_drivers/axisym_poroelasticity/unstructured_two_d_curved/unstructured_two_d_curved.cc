@@ -110,13 +110,13 @@ namespace ProblemParameters
 
   /// \short Function that returns zero (for assigment of initial conditions/
   /// history values)
-  double zero_fct(const double &time, const Vector<double> &x)
+  double zero_fct(const double& time, const Vector<double>& x)
   {
     return 0.0;
   }
 
   /// Imposed boundary displacement in r-direction
-  double boundary_displ_0(const double &time, const Vector<double> &x)
+  double boundary_displ_0(const double& time, const Vector<double>& x)
   {
     if (CommandLineArgs::command_line_flag_has_been_set("--validation"))
     {
@@ -130,7 +130,7 @@ namespace ProblemParameters
   }
 
   /// Imposed boundary displacement in z-direction
-  double boundary_displ_1(const double &time, const Vector<double> &x)
+  double boundary_displ_1(const double& time, const Vector<double>& x)
   {
     if (CommandLineArgs::command_line_flag_has_been_set("--validation"))
     {
@@ -143,7 +143,7 @@ namespace ProblemParameters
     }
   }
   /// Imposed boundary velocity in r-direction
-  double boundary_veloc_0(const double &time, const Vector<double> &x)
+  double boundary_veloc_0(const double& time, const Vector<double>& x)
   {
     if (CommandLineArgs::command_line_flag_has_been_set("--validation"))
     {
@@ -157,7 +157,7 @@ namespace ProblemParameters
   }
 
   /// Imposed boundary velocity in z-direction
-  double boundary_veloc_1(const double &time, const Vector<double> &x)
+  double boundary_veloc_1(const double& time, const Vector<double>& x)
   {
     if (CommandLineArgs::command_line_flag_has_been_set("--validation"))
     {
@@ -171,7 +171,7 @@ namespace ProblemParameters
   }
 
   /// Imposed boundary accel in r-direction
-  double boundary_accel_0(const double &time, const Vector<double> &x)
+  double boundary_accel_0(const double& time, const Vector<double>& x)
   {
     if (CommandLineArgs::command_line_flag_has_been_set("--validation"))
     {
@@ -185,7 +185,7 @@ namespace ProblemParameters
   }
 
   /// Imposed boundary accel in z-direction
-  double boundary_accel_1(const double &time, const Vector<double> &x)
+  double boundary_accel_1(const double& time, const Vector<double>& x)
   {
     if (CommandLineArgs::command_line_flag_has_been_set("--validation"))
     {
@@ -199,7 +199,7 @@ namespace ProblemParameters
   }
 
   /// Imposed boundary flux in r-direction
-  double boundary_flux_0(const double &time, const Vector<double> &x)
+  double boundary_flux_0(const double& time, const Vector<double>& x)
   {
     if (CommandLineArgs::command_line_flag_has_been_set("--validation"))
     {
@@ -213,7 +213,7 @@ namespace ProblemParameters
   }
 
   /// Imposed boundary flux in z-direction
-  double boundary_flux_1(const double &time, const Vector<double> &x)
+  double boundary_flux_1(const double& time, const Vector<double>& x)
   {
     if (CommandLineArgs::command_line_flag_has_been_set("--validation"))
     {
@@ -228,7 +228,7 @@ namespace ProblemParameters
   }
 
   /// Imposed boundary d/dt flux in r-direction
-  double boundary_dfluxdt_0(const double &time, const Vector<double> &x)
+  double boundary_dfluxdt_0(const double& time, const Vector<double>& x)
   {
     if (CommandLineArgs::command_line_flag_has_been_set("--validation"))
     {
@@ -242,7 +242,7 @@ namespace ProblemParameters
   }
 
   /// Imposed boundary d/dt flux in z-direction
-  double boundary_dfluxdt_1(const double &time, const Vector<double> &x)
+  double boundary_dfluxdt_1(const double& time, const Vector<double>& x)
   {
     if (CommandLineArgs::command_line_flag_has_been_set("--validation"))
     {
@@ -257,7 +257,7 @@ namespace ProblemParameters
   }
 
   /// Imposed boundary d2/dt2 flux in r-direction
-  double boundary_d2fluxdt2_0(const double &time, const Vector<double> &x)
+  double boundary_d2fluxdt2_0(const double& time, const Vector<double>& x)
   {
     if (CommandLineArgs::command_line_flag_has_been_set("--validation"))
     {
@@ -271,7 +271,7 @@ namespace ProblemParameters
   }
 
   /// Imposed boundary d2/dt2 flux in z-direction
-  double boundary_d2fluxdt2_1(const double &time, const Vector<double> &x)
+  double boundary_d2fluxdt2_1(const double& time, const Vector<double>& x)
   {
     if (CommandLineArgs::command_line_flag_has_been_set("--validation"))
     {
@@ -286,9 +286,9 @@ namespace ProblemParameters
   }
 
   // Exact solution: u1,u2,q1,q2,div_q,p
-  void exact_soln(const double &time,
-                  const Vector<double> &x,
-                  Vector<double> &soln)
+  void exact_soln(const double& time,
+                  const Vector<double>& x,
+                  Vector<double>& soln)
   {
     if (CommandLineArgs::command_line_flag_has_been_set("--validation"))
     {
@@ -346,9 +346,9 @@ namespace ProblemParameters
   }
 
   /// Solid body force
-  void Solid_body_force(const double &time,
-                        const Vector<double> &x,
-                        Vector<double> &b)
+  void Solid_body_force(const double& time,
+                        const Vector<double>& x,
+                        Vector<double>& b)
   {
     if (CommandLineArgs::command_line_flag_has_been_set("--validation"))
     {
@@ -375,9 +375,9 @@ namespace ProblemParameters
   }
 
   /// Fluid body force
-  void Fluid_body_force(const double &time,
-                        const Vector<double> &x,
-                        Vector<double> &f)
+  void Fluid_body_force(const double& time,
+                        const Vector<double>& x,
+                        Vector<double>& f)
   {
     if (CommandLineArgs::command_line_flag_has_been_set("--validation"))
     {
@@ -406,22 +406,22 @@ namespace ProblemParameters
   }
 
   /// Source term for continuity
-  void Mass_source(const double &time, const Vector<double> &x, double &f)
+  void Mass_source(const double& time, const Vector<double>& x, double& f)
   {
     f = 0;
   }
 
   /// Get time-dep pressure magnitude
-  double pressure_magnitude(const double &time)
+  double pressure_magnitude(const double& time)
   {
     return P * 0.5 * (1.0 + tanh(Alpha_tanh * (time - T_tanh)));
   }
 
   /// Pressure around the boundary of the domain
-  void boundary_pressure(const double &time,
-                         const Vector<double> &x,
-                         const Vector<double> &n,
-                         double &result)
+  void boundary_pressure(const double& time,
+                         const Vector<double>& x,
+                         const Vector<double>& n,
+                         double& result)
   {
     if (CommandLineArgs::command_line_flag_has_been_set("--validation"))
     {
@@ -436,10 +436,10 @@ namespace ProblemParameters
   }
 
   /// Boundary traction
-  void boundary_traction(const double &time,
-                         const Vector<double> &x,
-                         const Vector<double> &n,
-                         Vector<double> &traction)
+  void boundary_traction(const double& time,
+                         const Vector<double>& x,
+                         const Vector<double>& n,
+                         Vector<double>& traction)
   {
     if (CommandLineArgs::command_line_flag_has_been_set("--validation"))
     {
@@ -473,13 +473,13 @@ namespace ProblemParameters
   std::string Directory("RESLT");
 
   /// Pointer to timestepper for internal dofs
-  TimeStepper *Internal_time_stepper_pt = 0;
+  TimeStepper* Internal_time_stepper_pt = 0;
 
   /// \short Global function that completes the edge sign setup --
   /// has to be called before projection in unstructured
   /// adaptation
   template<class ELEMENT>
-  void edge_sign_setup(Mesh *mesh_pt)
+  void edge_sign_setup(Mesh* mesh_pt)
   {
     // The dictionary keeping track of edge signs
     std::map<Edge, unsigned> assignments;
@@ -488,7 +488,7 @@ namespace ProblemParameters
     unsigned n_element = mesh_pt->nelement();
     for (unsigned e = 0; e < n_element; e++)
     {
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt->element_pt(e));
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt->element_pt(e));
 
       // Assign edge signs: Loop over the vertex nodes (always
       // first 3 nodes for triangles)
@@ -565,13 +565,13 @@ public:
       initial_accel_fct[0] = &ProblemParameters::boundary_accel_0;
       initial_accel_fct[1] = &ProblemParameters::boundary_accel_1;
 
-      TIMESTEPPER *timestepper_pt =
-        dynamic_cast<TIMESTEPPER *>(time_stepper_pt());
+      TIMESTEPPER* timestepper_pt =
+        dynamic_cast<TIMESTEPPER*>(time_stepper_pt());
 
       unsigned n_node = Bulk_mesh_pt->nnode();
       for (unsigned n = 0; n < n_node; n++)
       {
-        Node *nod_pt = Bulk_mesh_pt->node_pt(n);
+        Node* nod_pt = Bulk_mesh_pt->node_pt(n);
         timestepper_pt->assign_initial_data_values(
           nod_pt, initial_value_fct, initial_veloc_fct, initial_accel_fct);
       }
@@ -579,7 +579,7 @@ public:
   }
 
   /// Doc the solution
-  void doc_solution(const unsigned &label);
+  void doc_solution(const unsigned& label);
 
   /// Actions before newton solve (empty)
   void actions_before_newton_solve() {}
@@ -632,7 +632,7 @@ public:
 #endif
 
   /// Access to timestepper
-  TIMESTEPPER *my_time_stepper_pt()
+  TIMESTEPPER* my_time_stepper_pt()
   {
     return My_time_stepper_pt;
   }
@@ -644,23 +644,23 @@ private:
 #ifdef ADAPTIVE
 
   /// Pointer to the refineable "bulk" mesh
-  RefineableTriangleMesh<ELEMENT> *Bulk_mesh_pt;
+  RefineableTriangleMesh<ELEMENT>* Bulk_mesh_pt;
 
 #else
 
   /// Pointer to the "bulk" mesh
-  TriangleMesh<ELEMENT> *Bulk_mesh_pt;
+  TriangleMesh<ELEMENT>* Bulk_mesh_pt;
 
 #endif
 
   /// Mesh for traction/pressure elements
-  Mesh *Surface_mesh_pt;
+  Mesh* Surface_mesh_pt;
 
   /// Trace file
   std::ofstream Trace_file;
 
   // Remember timestepper
-  TIMESTEPPER *My_time_stepper_pt;
+  TIMESTEPPER* My_time_stepper_pt;
 };
 
 //==============================================================================
@@ -685,34 +685,34 @@ AxiPoroProblem<ELEMENT, TIMESTEPPER>::AxiPoroProblem()
   // Solid mesh
   //-----------
 
-  TriangleMeshClosedCurve *outer_boundary_pt = 0;
+  TriangleMeshClosedCurve* outer_boundary_pt = 0;
 
   // Internal boundary to prevent problem with flux B.C.s
-  Vector<TriangleMeshOpenCurve *> inner_open_boundary_pt;
+  Vector<TriangleMeshOpenCurve*> inner_open_boundary_pt;
 
   // Temporary storage for coords in required format
   Vector<Vector<double>> temp_coord(2, Vector<double>(2));
 
   // Bottom small arc
-  Circle *outer_boundary_lower_circle_pt =
+  Circle* outer_boundary_lower_circle_pt =
     new Circle(ProblemParameters::Inner_radius,
                -2.0 * ProblemParameters::Domain_radius,
                ProblemParameters::Domain_radius);
 
   // Large arc
-  Circle *outer_boundary_right_circle_pt =
+  Circle* outer_boundary_right_circle_pt =
     new Circle(ProblemParameters::Inner_radius,
                0.0,
                sqrt(5) * ProblemParameters::Domain_radius);
 
   // Top small arc
-  Circle *outer_boundary_upper_circle_pt =
+  Circle* outer_boundary_upper_circle_pt =
     new Circle(ProblemParameters::Inner_radius,
                2.0 * ProblemParameters::Domain_radius,
                ProblemParameters::Domain_radius);
 
   // Storage for the individual boundary sections
-  Vector<TriangleMeshCurveSection *> outer_curvilinear_boundary_pt(4);
+  Vector<TriangleMeshCurveSection*> outer_curvilinear_boundary_pt(4);
 
   // First bit
   double zeta_start = MathematicalConstants::Pi / 2.0;
@@ -768,12 +768,12 @@ AxiPoroProblem<ELEMENT, TIMESTEPPER>::AxiPoroProblem()
     ProblemParameters::Inner_radius + 0.25 * ProblemParameters::Domain_radius;
   temp_coord[1][1] = -0.75 * ProblemParameters::Domain_radius;
 
-  Vector<TriangleMeshCurveSection *> inner_open_polyline1_curve_section_pt(1);
+  Vector<TriangleMeshCurveSection*> inner_open_polyline1_curve_section_pt(1);
   inner_open_polyline1_curve_section_pt[0] =
     new TriangleMeshPolyLine(temp_coord, 4);
 
   inner_open_polyline1_curve_section_pt[0]->connect_initial_vertex_to_curviline(
-    dynamic_cast<TriangleMeshCurviLine *>(outer_curvilinear_boundary_pt[0]),
+    dynamic_cast<TriangleMeshCurviLine*>(outer_curvilinear_boundary_pt[0]),
     MathematicalConstants::Pi / 2.0);
 
   inner_open_boundary_pt[0] =
@@ -787,14 +787,14 @@ AxiPoroProblem<ELEMENT, TIMESTEPPER>::AxiPoroProblem()
     ProblemParameters::Inner_radius + 1.3 * ProblemParameters::Domain_radius;
   temp_coord[1][1] = -1.5 * ProblemParameters::Domain_radius;
 
-  TriangleMeshPolyLine *inner_open_polyline2_pt =
+  TriangleMeshPolyLine* inner_open_polyline2_pt =
     new TriangleMeshPolyLine(temp_coord, 5);
 
   inner_open_polyline2_pt->connect_initial_vertex_to_curviline(
-    dynamic_cast<TriangleMeshCurviLine *>(outer_curvilinear_boundary_pt[1]),
+    dynamic_cast<TriangleMeshCurviLine*>(outer_curvilinear_boundary_pt[1]),
     -atan(2.0));
 
-  Vector<TriangleMeshCurveSection *> inner_open_polyline2_curve_section_pt(1);
+  Vector<TriangleMeshCurveSection*> inner_open_polyline2_curve_section_pt(1);
   inner_open_polyline2_curve_section_pt[0] = inner_open_polyline2_pt;
 
   inner_open_boundary_pt[1] =
@@ -808,14 +808,14 @@ AxiPoroProblem<ELEMENT, TIMESTEPPER>::AxiPoroProblem()
     ProblemParameters::Inner_radius + 1.3 * ProblemParameters::Domain_radius;
   temp_coord[1][1] = 1.5 * ProblemParameters::Domain_radius;
 
-  TriangleMeshPolyLine *inner_open_polyline3_pt =
+  TriangleMeshPolyLine* inner_open_polyline3_pt =
     new TriangleMeshPolyLine(temp_coord, 6);
 
   inner_open_polyline3_pt->connect_initial_vertex_to_curviline(
-    dynamic_cast<TriangleMeshCurviLine *>(outer_curvilinear_boundary_pt[1]),
+    dynamic_cast<TriangleMeshCurviLine*>(outer_curvilinear_boundary_pt[1]),
     atan(2.0));
 
-  Vector<TriangleMeshCurveSection *> inner_open_polyline3_curve_section_pt(1);
+  Vector<TriangleMeshCurveSection*> inner_open_polyline3_curve_section_pt(1);
   inner_open_polyline3_curve_section_pt[0] = inner_open_polyline3_pt;
 
   inner_open_boundary_pt[2] =
@@ -828,12 +828,12 @@ AxiPoroProblem<ELEMENT, TIMESTEPPER>::AxiPoroProblem()
     ProblemParameters::Inner_radius + 0.25 * ProblemParameters::Domain_radius;
   temp_coord[1][1] = 0.75 * ProblemParameters::Domain_radius;
 
-  Vector<TriangleMeshCurveSection *> inner_open_polyline4_curve_section_pt(1);
+  Vector<TriangleMeshCurveSection*> inner_open_polyline4_curve_section_pt(1);
   inner_open_polyline4_curve_section_pt[0] =
     new TriangleMeshPolyLine(temp_coord, 7);
 
   inner_open_polyline4_curve_section_pt[0]->connect_initial_vertex_to_polyline(
-    dynamic_cast<TriangleMeshPolyLine *>(outer_curvilinear_boundary_pt[3]), 0);
+    dynamic_cast<TriangleMeshPolyLine*>(outer_curvilinear_boundary_pt[3]), 0);
 
   inner_open_boundary_pt[3] =
     new TriangleMeshOpenCurve(inner_open_polyline4_curve_section_pt);
@@ -920,7 +920,7 @@ void AxiPoroProblem<ELEMENT, TIMESTEPPER>::complete_problem_setup()
   unsigned n_element = Bulk_mesh_pt->nelement();
   for (unsigned e = 0; e < n_element; e++)
   {
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
     el_pt->nu_pt() = &ProblemParameters::Nu;
     el_pt->solid_body_force_fct_pt() = ProblemParameters::Solid_body_force;
@@ -955,7 +955,7 @@ void AxiPoroProblem<ELEMENT, TIMESTEPPER>::complete_problem_setup()
     unsigned n_node = Bulk_mesh_pt->nboundary_node(pinned_boundaries[ibound]);
     for (unsigned i = 0; i < n_node; i++)
     {
-      Node *nod_pt =
+      Node* nod_pt =
         Bulk_mesh_pt->boundary_node_pt(pinned_boundaries[ibound], i);
 
       // Pin all of them: i=0: u_r; i=1: u_z. Subsequent entries
@@ -984,7 +984,7 @@ void AxiPoroProblem<ELEMENT, TIMESTEPPER>::create_pressure_elements()
   for (unsigned n = 0; n < n_neigh; n++)
   {
     // Create the face element
-    AxisymmetricPoroelasticityTractionElement<ELEMENT> *pressure_element_pt =
+    AxisymmetricPoroelasticityTractionElement<ELEMENT>* pressure_element_pt =
       new AxisymmetricPoroelasticityTractionElement<ELEMENT>(
         Bulk_mesh_pt->boundary_element_pt(ibound, n),
         Bulk_mesh_pt->face_index_at_boundary(ibound, n));
@@ -1025,7 +1025,7 @@ void AxiPoroProblem<ELEMENT, TIMESTEPPER>::set_boundary_values()
 
   // Get the nodal index at which values representing edge fluxes
   // at flux interpolation points are stored
-  ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(0));
+  ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(0));
 
   // How many flux interpolation points do we have?
   unsigned n = el_pt->nedge_flux_interpolation_point();
@@ -1047,7 +1047,7 @@ void AxiPoroProblem<ELEMENT, TIMESTEPPER>::set_boundary_values()
     flux_d2dt2_fct[q_index[j]] = &ProblemParameters::zero_fct;
   }
 
-  TIMESTEPPER *timestepper_pt = dynamic_cast<TIMESTEPPER *>(time_stepper_pt());
+  TIMESTEPPER* timestepper_pt = dynamic_cast<TIMESTEPPER*>(time_stepper_pt());
 
   // Assign current (and history) values for solid displacements as well as
   // ----------------------------------------------------------------------
@@ -1073,7 +1073,7 @@ void AxiPoroProblem<ELEMENT, TIMESTEPPER>::set_boundary_values()
     unsigned n_node = Bulk_mesh_pt->nboundary_node(pinned_boundaries[ibound]);
     for (unsigned i = 0; i < n_node; i++)
     {
-      Node *nod_pt =
+      Node* nod_pt =
         Bulk_mesh_pt->boundary_node_pt(pinned_boundaries[ibound], i);
       timestepper_pt->assign_initial_data_values(
         nod_pt, value_fct, veloc_fct, accel_fct);
@@ -1093,14 +1093,14 @@ void AxiPoroProblem<ELEMENT, TIMESTEPPER>::set_boundary_values()
     for (unsigned e = 0; e < n_boundary_element; e++)
     {
       // Upcast the current element to the actual type
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(
         Bulk_mesh_pt->boundary_element_pt(pinned_boundaries[ibound], e));
 
       // Loop over the edges
       for (unsigned edge = 0; edge < 3; edge++)
       {
         // Get pointer to node that stores the edge flux dofs for this edge
-        Node *nod_pt = el_pt->edge_flux_node_pt(edge);
+        Node* nod_pt = el_pt->edge_flux_node_pt(edge);
 
         // Set values for the flux degrees of freedom
         if (nod_pt->is_on_boundary(pinned_boundaries[ibound]))
@@ -1110,7 +1110,7 @@ void AxiPoroProblem<ELEMENT, TIMESTEPPER>::set_boundary_values()
 
           // Build a temporary face element from which we'll extract
           // the outer unit normal
-          AxisymmetricPoroelasticityTractionElement<ELEMENT> *face_el_pt =
+          AxisymmetricPoroelasticityTractionElement<ELEMENT>* face_el_pt =
             new AxisymmetricPoroelasticityTractionElement<ELEMENT>(el_pt, f);
 
           // Loop over the flux interpolation points
@@ -1183,7 +1183,7 @@ void AxiPoroProblem<ELEMENT, TIMESTEPPER>::set_boundary_values()
 /// Write the solution and exact solution to file, and calculate the error
 //===================================================================
 template<class ELEMENT, class TIMESTEPPER>
-void AxiPoroProblem<ELEMENT, TIMESTEPPER>::doc_solution(const unsigned &label)
+void AxiPoroProblem<ELEMENT, TIMESTEPPER>::doc_solution(const unsigned& label)
 {
   oomph_info << "Outputting solution " << label << " for time "
              << time_pt()->time() << std::endl;
@@ -1272,7 +1272,7 @@ void AxiPoroProblem<ELEMENT, TIMESTEPPER>::doc_solution(const unsigned &label)
 //===================================================================
 /// Main function
 //===================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

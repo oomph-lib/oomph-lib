@@ -53,7 +53,7 @@ namespace oomph
   class DGFaceElement : public virtual FaceElement
   {
     /// Vector of neighbouring face elements at the integration points
-    Vector<FaceElement *> Neighbour_face_pt;
+    Vector<FaceElement*> Neighbour_face_pt;
 
     /// Vector of neighbouring local coordinates at the integration points
     Vector<Vector<double>> Neighbour_local_coordinate;
@@ -69,7 +69,7 @@ namespace oomph
   protected:
     /// \short Return the index at which the i-th unknown flux is stored.
     // The default return is suitable for single-physics problem
-    virtual inline unsigned flux_index(const unsigned &i) const
+    virtual inline unsigned flux_index(const unsigned& i) const
     {
       return i;
     }
@@ -88,7 +88,7 @@ namespace oomph
     virtual ~DGFaceElement() {}
 
     /// Access function for neighbouring face information
-    FaceElement *neighbour_face_pt(const unsigned &i)
+    FaceElement* neighbour_face_pt(const unsigned& i)
     {
       return Neighbour_face_pt[i];
     }
@@ -98,33 +98,33 @@ namespace oomph
     /// is used to determine whether the data in the neighbour are
     /// added as external data to the bulk element --- required when
     /// computing the jacobian of the system
-    void setup_neighbour_info(const bool &add_neighbour_data_to_bulk);
+    void setup_neighbour_info(const bool& add_neighbour_data_to_bulk);
 
     /// Output information about the present element and its neighbour
     void report_info();
 
     // Get the value of the unknowns
-    virtual void interpolated_u(const Vector<double> &s, Vector<double> &f);
+    virtual void interpolated_u(const Vector<double>& s, Vector<double>& f);
 
     ///\short Get the data that are used to interpolate the unkowns
     /// in the element. These must be returned in order.
-    virtual void get_interpolation_data(Vector<Data *> &interpolation_data);
+    virtual void get_interpolation_data(Vector<Data*>& interpolation_data);
 
     ///\short Calculate the normal numerical flux at the integration point.
     /// This is the most general interface that can be overloaded if desired
-    virtual void numerical_flux_at_knot(const unsigned &ipt,
-                                        const Shape &psi,
-                                        Vector<double> &flux,
-                                        DenseMatrix<double> &dflux_du_int,
-                                        DenseMatrix<double> &dflux_du_ext,
+    virtual void numerical_flux_at_knot(const unsigned& ipt,
+                                        const Shape& psi,
+                                        Vector<double>& flux,
+                                        DenseMatrix<double>& dflux_du_int,
+                                        DenseMatrix<double>& dflux_du_ext,
                                         unsigned flag);
 
     ///\short Calculate the normal flux, which is the dot product of our
     /// approximation to the flux with the outer unit normal
-    virtual void numerical_flux(const Vector<double> &n_out,
-                                const Vector<double> &u_int,
-                                const Vector<double> &u_ext,
-                                Vector<double> &flux)
+    virtual void numerical_flux(const Vector<double>& n_out,
+                                const Vector<double>& u_int,
+                                const Vector<double>& u_ext,
+                                Vector<double>& flux)
     {
       std::ostringstream error_stream;
       error_stream
@@ -140,16 +140,16 @@ namespace oomph
     /// approximation to the flux with the outer unit normal,
     /// with respect to the interior and exterior variables
     /// Default is to use finite differences
-    virtual void dnumerical_flux_du(const Vector<double> &n_out,
-                                    const Vector<double> &u_int,
-                                    const Vector<double> &u_ext,
-                                    DenseMatrix<double> &dflux_du_int,
-                                    DenseMatrix<double> &dflux_du_ext);
+    virtual void dnumerical_flux_du(const Vector<double>& n_out,
+                                    const Vector<double>& u_int,
+                                    const Vector<double>& u_ext,
+                                    DenseMatrix<double>& dflux_du_int,
+                                    DenseMatrix<double>& dflux_du_ext);
 
     ///\short Add the contribution from integrating the numerical flux
     // over the face to the residuals
-    void add_flux_contributions(Vector<double> &residuals,
-                                DenseMatrix<double> &jacobian,
+    void add_flux_contributions(Vector<double>& residuals,
+                                DenseMatrix<double>& jacobian,
                                 unsigned flag);
   };
 
@@ -167,18 +167,18 @@ namespace oomph
     friend class DGFaceElement;
 
     ///\short Vector of pointers to faces of the element
-    Vector<FaceElement *> Face_element_pt;
+    Vector<FaceElement*> Face_element_pt;
 
     /// Pointer to Mesh, which will be responsible for the neighbour finding
-    DGMesh *DG_mesh_pt;
+    DGMesh* DG_mesh_pt;
 
     ///\short Pointer to storage for a mass matrix that can be recycled if
     /// desired
-    DenseDoubleMatrix *M_pt;
+    DenseDoubleMatrix* M_pt;
 
     /// \short Pointer to storage for the average values of the of the
     /// variables over the element
-    double *Average_value;
+    double* Average_value;
 
     ///\short Boolean flag to indicate whether to reuse the mass matrix
     bool Mass_matrix_reuse_is_enabled;
@@ -254,7 +254,7 @@ namespace oomph
     }
 
     /// Set the mass matrix to point to one in another element
-    virtual void set_mass_matrix_from_element(DGElement *const &element_pt)
+    virtual void set_mass_matrix_from_element(DGElement* const& element_pt)
     {
       // If the element's mass matrix has not been computed, compute it!
       if (!element_pt->mass_matrix_has_been_computed())
@@ -283,15 +283,15 @@ namespace oomph
     /// multiplied by the inverse mass matrix (virtual so that it can be
     /// overloaded specific elements in which time saving tricks can be applied)
     virtual void get_inverse_mass_matrix_times_residuals(
-      Vector<double> &minv_res);
+      Vector<double>& minv_res);
 
     ///\short Construct all nodes and faces of the element.
     /// The vector of booleans boundary should be the same size
     /// as the number of nodes and if any entries are true
     /// that node will be constructed as a boundary node.
-    void construct_boundary_nodes_and_faces(DGMesh *const &mesh_pt,
-                                            std::vector<bool> &boundary_flag,
-                                            TimeStepper *const &time_stepper_pt)
+    void construct_boundary_nodes_and_faces(DGMesh* const& mesh_pt,
+                                            std::vector<bool>& boundary_flag,
+                                            TimeStepper* const& time_stepper_pt)
     {
       // Construct the nodes (This should not be used in a base class)
       const unsigned n_node = this->nnode();
@@ -332,8 +332,8 @@ namespace oomph
     }
 
     /// Construct the nodes and faces of the element
-    void construct_nodes_and_faces(DGMesh *const &mesh_pt,
-                                   TimeStepper *const &time_stepper_pt)
+    void construct_nodes_and_faces(DGMesh* const& mesh_pt,
+                                   TimeStepper* const& time_stepper_pt)
     {
       // Loop over the nodes
       const unsigned n_node = this->nnode();
@@ -351,7 +351,7 @@ namespace oomph
     }
 
     // Set the mesh pointer of the element
-    void set_mesh_pt(DGMesh *&mesh_pt)
+    void set_mesh_pt(DGMesh*& mesh_pt)
     {
       DG_mesh_pt = mesh_pt;
     }
@@ -363,13 +363,13 @@ namespace oomph
     }
 
     /// Access function for the faces
-    DGFaceElement *face_element_pt(const unsigned &i)
+    DGFaceElement* face_element_pt(const unsigned& i)
     {
-      return dynamic_cast<DGFaceElement *>(Face_element_pt[i]);
+      return dynamic_cast<DGFaceElement*>(Face_element_pt[i]);
     }
 
     /// Output the faces of the element
-    void output_faces(std::ostream &outfile)
+    void output_faces(std::ostream& outfile)
     {
       // Loop over the faces
       unsigned n_face = nface();
@@ -381,16 +381,16 @@ namespace oomph
 
     /// Return the neighbour info
     void get_neighbouring_face_and_local_coordinate(
-      const int &face_index,
-      const Vector<double> &s,
-      FaceElement *&face_element_pt,
-      Vector<double> &s_face);
+      const int& face_index,
+      const Vector<double>& s,
+      FaceElement*& face_element_pt,
+      Vector<double>& s_face);
 
     // Setup the face information
     /// The boolean flag determines whether the data from the neighbouring
     /// elements is added as external data to the element (required for
     /// correct computation of the jacobian)
-    void setup_face_neighbour_info(const bool &add_face_data_as_external)
+    void setup_face_neighbour_info(const bool& add_face_data_as_external)
     {
       unsigned n_face = this->nface();
       for (unsigned f = 0; f < n_face; f++)
@@ -402,8 +402,8 @@ namespace oomph
 
     /// Loop over all faces and add their integrated numerical fluxes
     /// to the residuals
-    void add_flux_contributions_to_residuals(Vector<double> &residuals,
-                                             DenseMatrix<double> &jacobian,
+    void add_flux_contributions_to_residuals(Vector<double>& residuals,
+                                             DenseMatrix<double>& jacobian,
                                              unsigned flag)
     {
       // Add up the contributions from each face
@@ -415,10 +415,10 @@ namespace oomph
     }
 
     /// Limit the slope within the element
-    void slope_limit(SlopeLimiter *const &slope_limiter_pt);
+    void slope_limit(SlopeLimiter* const& slope_limiter_pt);
 
     /// Calculate the averages in the element
-    virtual void calculate_element_averages(double *&average_values)
+    virtual void calculate_element_averages(double*& average_values)
     {
       throw OomphLibError("Default (empty) version called",
                           OOMPH_CURRENT_FUNCTION,
@@ -432,7 +432,7 @@ namespace oomph
     }
 
     /// \short Return the average values
-    double &average_value(const unsigned &i)
+    double& average_value(const unsigned& i)
     {
       if (Average_value == 0)
       {
@@ -444,7 +444,7 @@ namespace oomph
     }
 
     /// \short Return the average values
-    const double &average_value(const unsigned &i) const
+    const double& average_value(const unsigned& i) const
     {
       if (Average_value == 0)
       {
@@ -465,11 +465,11 @@ namespace oomph
 
     virtual ~DGMesh() {}
 
-    virtual void neighbour_finder(FiniteElement *const &bulk_element_pt,
-                                  const int &face_index,
-                                  const Vector<double> &s_bulk,
-                                  FaceElement *&face_element_pt,
-                                  Vector<double> &s_face)
+    virtual void neighbour_finder(FiniteElement* const& bulk_element_pt,
+                                  const int& face_index,
+                                  const Vector<double>& s_bulk,
+                                  FaceElement*& face_element_pt,
+                                  Vector<double>& s_face)
     {
       std::string error_message = "Empty neighbour_finder() has been called.\n";
       error_message +=
@@ -484,31 +484,31 @@ namespace oomph
     /// If the boolean flag is set to true then the data from neighbouring
     /// faces will be added as external data to the bulk element.
     void setup_face_neighbour_info(
-      const bool &add_face_data_as_external = false)
+      const bool& add_face_data_as_external = false)
     {
       // Loop over all the elements and setup their face neighbour information
       const unsigned n_element = this->nelement();
       for (unsigned e = 0; e < n_element; e++)
       {
-        dynamic_cast<DGElement *>(this->element_pt(e))
+        dynamic_cast<DGElement*>(this->element_pt(e))
           ->setup_face_neighbour_info(add_face_data_as_external);
       }
     }
 
     // Limit the slopes on the entire mesh
-    void limit_slopes(SlopeLimiter *const &slope_limiter_pt)
+    void limit_slopes(SlopeLimiter* const& slope_limiter_pt)
     {
       // Loop over all the elements and calculate the averages
       const unsigned n_element = this->nelement();
       for (unsigned e = 0; e < n_element; e++)
       {
-        dynamic_cast<DGElement *>(this->element_pt(e))->calculate_averages();
+        dynamic_cast<DGElement*>(this->element_pt(e))->calculate_averages();
       }
 
       // Now loop over again and limit the values
       for (unsigned e = 0; e < n_element; e++)
       {
-        dynamic_cast<DGElement *>(this->element_pt(e))
+        dynamic_cast<DGElement*>(this->element_pt(e))
           ->slope_limit(slope_limiter_pt);
       }
     }
@@ -527,8 +527,8 @@ namespace oomph
     virtual ~SlopeLimiter() {}
 
     /// Basic function
-    virtual void limit(const unsigned &i,
-                       const Vector<DGElement *> &required_element_pt)
+    virtual void limit(const unsigned& i,
+                       const Vector<DGElement*>& required_element_pt)
     {
       throw OomphLibError("Calling default empty limiter\n",
                           OOMPH_CURRENT_FUNCTION,
@@ -549,7 +549,7 @@ namespace oomph
     ///\short Constructor takes a value for the modification parameter M
     ///(default to zero --- classic min mod) and a flag to indicate whether
     /// we use MUSCL limiting or not --- default false
-    MinModLimiter(const double &m = 0.0, const bool &muscl = false) :
+    MinModLimiter(const double& m = 0.0, const bool& muscl = false) :
       SlopeLimiter(), M(m), MUSCL(muscl)
     {
     }
@@ -558,14 +558,14 @@ namespace oomph
     virtual ~MinModLimiter() {}
 
     /// The basic minmod function
-    double minmod(Vector<double> &args);
+    double minmod(Vector<double>& args);
 
     /// The modified  minmod function
-    double minmodB(Vector<double> &args, const double &h);
+    double minmodB(Vector<double>& args, const double& h);
 
     /// The limit function
-    void limit(const unsigned &i,
-               const Vector<DGElement *> &required_element_pt);
+    void limit(const unsigned& i,
+               const Vector<DGElement*>& required_element_pt);
   };
 
 } // namespace oomph

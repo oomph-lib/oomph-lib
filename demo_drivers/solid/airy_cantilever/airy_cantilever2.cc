@@ -57,7 +57,7 @@ namespace oomph
     MySolidElement() : ELEMENT(){};
 
     /// Overload output function:
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       // Element dimension
       unsigned el_dim = this->dim();
@@ -135,7 +135,7 @@ namespace oomph
 namespace Global_Physical_Variables
 {
   /// Pointer to strain energy function
-  StrainEnergyFunction *Strain_energy_function_pt;
+  StrainEnergyFunction* Strain_energy_function_pt;
 
   /// "Mooney Rivlin" coefficient for generalised Mooney Rivlin law
   double C1 = 1.3;
@@ -150,7 +150,7 @@ namespace Global_Physical_Variables
   double L = 10.0;
 
   /// Pointer to constitutive law
-  ConstitutiveLaw *Constitutive_law_pt;
+  ConstitutiveLaw* Constitutive_law_pt;
 
   /// Elastic modulus
   double E = 1.0;
@@ -166,10 +166,10 @@ namespace Global_Physical_Variables
   /// depend on the Lagrangian and Eulerian coordinates x and xi, and on the
   /// outer unit normal to the surface. Here we only need the outer unit
   /// normal.
-  void constant_pressure(const Vector<double> &xi,
-                         const Vector<double> &x,
-                         const Vector<double> &n,
-                         Vector<double> &traction)
+  void constant_pressure(const Vector<double>& xi,
+                         const Vector<double>& x,
+                         const Vector<double>& n,
+                         Vector<double>& traction)
   {
     unsigned dim = traction.size();
     for (unsigned i = 0; i < dim; i++)
@@ -182,7 +182,7 @@ namespace Global_Physical_Variables
   double Gravity = 0.0;
 
   /// Non-dimensional gravity as body force
-  void gravity(const double &time, const Vector<double> &xi, Vector<double> &b)
+  void gravity(const double& time, const Vector<double>& xi, Vector<double>& b)
   {
     b[0] = 0.0;
     b[1] = -Gravity;
@@ -198,7 +198,7 @@ class CantileverProblem : public Problem
 {
 public:
   /// Constructor:
-  CantileverProblem(const bool &incompress, const bool &use_fd);
+  CantileverProblem(const bool& incompress, const bool& use_fd);
 
   /// Update function (empty)
   void actions_after_newton_solve() {}
@@ -209,7 +209,7 @@ public:
 #ifdef REFINE
 
   /// Access function for the solid mesh
-  ElasticRefineableRectangularQuadMesh<ELEMENT> *&solid_mesh_pt()
+  ElasticRefineableRectangularQuadMesh<ELEMENT>*& solid_mesh_pt()
   {
     return Solid_mesh_pt;
   }
@@ -217,7 +217,7 @@ public:
 #else
 
   /// Access function for the solid mesh
-  ElasticRectangularQuadMesh<ELEMENT> *&solid_mesh_pt()
+  ElasticRectangularQuadMesh<ELEMENT>*& solid_mesh_pt()
   {
     return Solid_mesh_pt;
   }
@@ -225,7 +225,7 @@ public:
 #endif
 
   /// Access function to the mesh of surface traction elements
-  SolidMesh *&traction_mesh_pt()
+  SolidMesh*& traction_mesh_pt()
   {
     return Traction_mesh_pt;
   }
@@ -240,7 +240,7 @@ public:
   void doc_solution();
 
   /// Run the job -- doc in RESLTi_case
-  void run_it(const unsigned &i_case);
+  void run_it(const unsigned& i_case);
 
 private:
   /// \short Pass pointer to traction function to the
@@ -257,22 +257,22 @@ private:
   ofstream Trace_file;
 
   /// Pointers to node whose position we're tracing
-  Node *Trace_node_pt;
+  Node* Trace_node_pt;
 
 #ifdef REFINE
 
   /// Pointer to solid mesh
-  ElasticRefineableRectangularQuadMesh<ELEMENT> *Solid_mesh_pt;
+  ElasticRefineableRectangularQuadMesh<ELEMENT>* Solid_mesh_pt;
 
 #else
 
   /// Pointer to solid mesh
-  ElasticRectangularQuadMesh<ELEMENT> *Solid_mesh_pt;
+  ElasticRectangularQuadMesh<ELEMENT>* Solid_mesh_pt;
 
 #endif
 
   /// Pointers to meshes of traction elements
-  SolidMesh *Traction_mesh_pt;
+  SolidMesh* Traction_mesh_pt;
 
   /// DocInfo object for output
   DocInfo Doc_info;
@@ -282,8 +282,8 @@ private:
 /// Constructor:
 //======================================================================
 template<class ELEMENT>
-CantileverProblem<ELEMENT>::CantileverProblem(const bool &incompress,
-                                              const bool &use_fd)
+CantileverProblem<ELEMENT>::CantileverProblem(const bool& incompress,
+                                              const bool& use_fd)
 {
   // Create the mesh
 
@@ -311,7 +311,7 @@ CantileverProblem<ELEMENT>::CantileverProblem(const bool &incompress,
     n_x, n_y, l_x, l_y, origin);
 
   // Set error estimator
-  dynamic_cast<ElasticRefineableRectangularQuadMesh<ELEMENT> *>(solid_mesh_pt())
+  dynamic_cast<ElasticRefineableRectangularQuadMesh<ELEMENT>*>(solid_mesh_pt())
     ->spatial_error_estimator_pt() = new Z2ErrorEstimator;
 
 #else
@@ -328,7 +328,7 @@ CantileverProblem<ELEMENT>::CantileverProblem(const bool &incompress,
   for (unsigned i = 0; i < n_element; i++)
   {
     // Cast to a solid element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(solid_mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(solid_mesh_pt()->element_pt(i));
 
     // Set the constitutive law
     el_pt->constitutive_law_pt() =
@@ -350,8 +350,8 @@ CantileverProblem<ELEMENT>::CantileverProblem(const bool &incompress,
     // Is it incompressible
     if (incompress)
     {
-      PVDEquationsWithPressure<2> *test_pt =
-        dynamic_cast<PVDEquationsWithPressure<2> *>(
+      PVDEquationsWithPressure<2>* test_pt =
+        dynamic_cast<PVDEquationsWithPressure<2>*>(
           solid_mesh_pt()->element_pt(i));
       if (test_pt != 0)
       {
@@ -367,7 +367,7 @@ CantileverProblem<ELEMENT>::CantileverProblem(const bool &incompress,
 #ifdef REFINE
 
   // Refine the mesh uniformly
-  dynamic_cast<ElasticRefineableRectangularQuadMesh<ELEMENT> *>(solid_mesh_pt())
+  dynamic_cast<ElasticRefineableRectangularQuadMesh<ELEMENT>*>(solid_mesh_pt())
     ->refine_uniformly();
 
 #endif
@@ -457,8 +457,8 @@ void CantileverProblem<ELEMENT>::set_traction_pt()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Cast to a solid traction element
-    SolidTractionElement<ELEMENT> *el_pt =
-      dynamic_cast<SolidTractionElement<ELEMENT> *>(
+    SolidTractionElement<ELEMENT>* el_pt =
+      dynamic_cast<SolidTractionElement<ELEMENT>*>(
         traction_mesh_pt()->element_pt(i));
 
     // Set the traction function
@@ -483,8 +483,8 @@ void CantileverProblem<ELEMENT>::create_traction_elements()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    ELEMENT *bulk_elem_pt =
-      dynamic_cast<ELEMENT *>(solid_mesh_pt()->boundary_element_pt(b, e));
+    ELEMENT* bulk_elem_pt =
+      dynamic_cast<ELEMENT*>(solid_mesh_pt()->boundary_element_pt(b, e));
 
     // Find the index of the face of element e along boundary b
     int face_index = solid_mesh_pt()->face_index_at_boundary(b, e);
@@ -570,7 +570,7 @@ void CantileverProblem<ELEMENT>::doc_solution()
   for (unsigned e = 0; e < nel; e++)
   {
     // Get pointer to element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(solid_mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(solid_mesh_pt()->element_pt(e));
 
     // Tecplot header info
     some_file << "ZONE I=" << n_plot << ", J=" << n_plot << std::endl;
@@ -626,7 +626,7 @@ void CantileverProblem<ELEMENT>::doc_solution()
 /// Run it
 //==================================================================
 template<class ELEMENT>
-void CantileverProblem<ELEMENT>::run_it(const unsigned &i_case)
+void CantileverProblem<ELEMENT>::run_it(const unsigned& i_case)
 {
 #ifdef TIME_SOLID_JAC
   PVDEquationsBase<2>::Solid_timer.reset();

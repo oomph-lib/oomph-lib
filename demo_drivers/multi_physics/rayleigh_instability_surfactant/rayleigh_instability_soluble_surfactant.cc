@@ -145,9 +145,9 @@ class ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement :
 {
 private:
   /// Pointer to adsorption number
-  double *Alpha_pt;
+  double* Alpha_pt;
   /// Pointer to solubility number
-  double *K_pt;
+  double* K_pt;
 
   /// Storage for the index at
   /// which the bulk concentration is stored
@@ -155,7 +155,7 @@ private:
 
 protected:
   /// Get the bulk surfactant concentration
-  double interpolated_C_bulk(const Vector<double> &s)
+  double interpolated_C_bulk(const Vector<double>& s)
   {
     // Find number of nodes
     unsigned n_node = this->nnode();
@@ -182,10 +182,10 @@ protected:
   }
 
   /// The time derivative of the bulk surface concentration
-  double dc_bulk_dt_surface(const unsigned &l) const
+  double dc_bulk_dt_surface(const unsigned& l) const
   {
     // Get the data's timestepper
-    TimeStepper *time_stepper_pt = this->node_pt(l)->time_stepper_pt();
+    TimeStepper* time_stepper_pt = this->node_pt(l)->time_stepper_pt();
 
     // Initialise dudt
     double dcdt = 0.0;
@@ -211,18 +211,18 @@ protected:
   /// jacobian entries. This particular function ensures that the
   /// additional entries are calculated inside the integration loop
   void add_additional_residual_contributions_interface(
-    Vector<double> &residuals,
-    DenseMatrix<double> &jacobian,
-    const unsigned &flag,
-    const Shape &psif,
-    const DShape &dpsifds,
-    const DShape &dpsifdS,
-    const DShape &dpsifdS_div,
-    const Vector<double> &s,
-    const Vector<double> &interpolated_x,
-    const Vector<double> &interpolated_n,
-    const double &W,
-    const double &J)
+    Vector<double>& residuals,
+    DenseMatrix<double>& jacobian,
+    const unsigned& flag,
+    const Shape& psif,
+    const DShape& dpsifds,
+    const DShape& dpsifdS,
+    const DShape& dpsifdS_div,
+    const Vector<double>& s,
+    const Vector<double>& interpolated_x,
+    const Vector<double>& interpolated_n,
+    const double& W,
+    const double& J)
   {
     // Call the standard transport equations
     ElasticAxisymmetricSurfactantTransportInterfaceElement<
@@ -343,7 +343,7 @@ public:
   /// Constructor that passes the bulk element and face index down
   /// to the underlying
   ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement(
-    FiniteElement *const &element_pt, const int &face_index) :
+    FiniteElement* const& element_pt, const int& face_index) :
     ElasticAxisymmetricSurfactantTransportInterfaceElement<ELEMENT>(element_pt,
                                                                     face_index)
   {
@@ -368,19 +368,19 @@ public:
   }
 
   /// Access function for pointer to adsorption number
-  double *&alpha_pt()
+  double*& alpha_pt()
   {
     return Alpha_pt;
   }
 
   /// Access function for pointer to solubility number
-  double *&k_pt()
+  double*& k_pt()
   {
     return K_pt;
   }
 
   /// Overload the output function
-  void output(std::ostream &outfile, const unsigned &n_plot)
+  void output(std::ostream& outfile, const unsigned& n_plot)
   {
     outfile.precision(16);
 
@@ -445,7 +445,7 @@ class InterfaceProblem : public Problem
 public:
   /// Constructor: Pass the number of elements in radial and axial directions
   /// and the length of the domain in the z direction)
-  InterfaceProblem(const unsigned &n_r, const unsigned &n_z, const double &l_z);
+  InterfaceProblem(const unsigned& n_r, const unsigned& n_z, const double& l_z);
 
   /// Destructor (empty)
   ~InterfaceProblem() {}
@@ -522,22 +522,22 @@ public:
   }
 
   /// \short Access function for the specific mesh
-  ElasticRectangularQuadMesh<ELEMENT> *Bulk_mesh_pt;
+  ElasticRectangularQuadMesh<ELEMENT>* Bulk_mesh_pt;
 
   /// \short Mesh for the free surface (interface) elements
-  Mesh *Interface_mesh_pt;
+  Mesh* Interface_mesh_pt;
 
   /// \short Pointer to the constitutive law
-  ConstitutiveLaw *Constitutive_law_pt;
+  ConstitutiveLaw* Constitutive_law_pt;
 
   /// \short Node for documentatin
-  Node *Document_node_pt;
+  Node* Document_node_pt;
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// Do unsteady run up to maximum time t_max with given timestep dt
-  void unsteady_run(const double &t_max, const double &dt);
+  void unsteady_run(const double& t_max, const double& dt);
 
   /// Compute the total mass of the insoluble surfactant
   double compute_total_mass()
@@ -552,9 +552,9 @@ public:
     for (unsigned e = 0; e < n_interface_element; e++)
     {
       // Upcast from GeneralisedElement to the present element
-      ElasticAxisymmetricSurfactantTransportInterfaceElement<ELEMENT> *el_pt =
+      ElasticAxisymmetricSurfactantTransportInterfaceElement<ELEMENT>* el_pt =
         dynamic_cast<
-          ElasticAxisymmetricSurfactantTransportInterfaceElement<ELEMENT> *>(
+          ElasticAxisymmetricSurfactantTransportInterfaceElement<ELEMENT>*>(
           Interface_mesh_pt->element_pt(e));
       // Add contribution from each element
       mass += el_pt->integrate_c();
@@ -564,7 +564,7 @@ public:
 
 private:
   /// Deform the mesh/free surface to a prescribed function
-  void deform_free_surface(const double &epsilon)
+  void deform_free_surface(const double& epsilon)
   {
     // Loop over all nodes in the mesh
     const unsigned n_node = Bulk_mesh_pt->nnode();
@@ -597,9 +597,9 @@ private:
 /// Constructor for single fluid interface problem
 //========================================================================
 template<class ELEMENT, class TIMESTEPPER>
-InterfaceProblem<ELEMENT, TIMESTEPPER>::InterfaceProblem(const unsigned &n_r,
-                                                         const unsigned &n_z,
-                                                         const double &l_z)
+InterfaceProblem<ELEMENT, TIMESTEPPER>::InterfaceProblem(const unsigned& n_r,
+                                                         const unsigned& n_z,
+                                                         const double& l_z)
 
 {
   // Allocate the timestepper (this constructs the time object as well)
@@ -626,15 +626,15 @@ InterfaceProblem<ELEMENT, TIMESTEPPER>::InterfaceProblem(const unsigned &n_r,
     for (unsigned e = 0; e < n_element; e++)
     {
       // Get pointer to the bulk element that is adjacent to boundary b
-      ELEMENT *bulk_elem_pt =
-        dynamic_cast<ELEMENT *>(Bulk_mesh_pt->boundary_element_pt(3, e));
+      ELEMENT* bulk_elem_pt =
+        dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(3, e));
 
       // Find the index of the face of element e along boundary b
       int face_index = Bulk_mesh_pt->face_index_at_boundary(3, e);
 
       // Build the corresponding free surface element
-      ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement<ELEMENT>
-        *interface_element_pt =
+      ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement<ELEMENT>*
+        interface_element_pt =
           new ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement<
             ELEMENT>(bulk_elem_pt, face_index);
 
@@ -721,7 +721,7 @@ InterfaceProblem<ELEMENT, TIMESTEPPER>::InterfaceProblem(const unsigned &n_r,
   for (unsigned e = 0; e < n_bulk; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -748,7 +748,7 @@ InterfaceProblem<ELEMENT, TIMESTEPPER>::InterfaceProblem(const unsigned &n_r,
   } // End of loop over bulk elements
 
   // Create a Data object whose single value stores the external pressure
-  Data *external_pressure_data_pt = new Data(1);
+  Data* external_pressure_data_pt = new Data(1);
 
   // Pin and set the external pressure to some arbitrary value
   double p_ext = Global_Physical_Variables::P_ext;
@@ -763,10 +763,10 @@ InterfaceProblem<ELEMENT, TIMESTEPPER>::InterfaceProblem(const unsigned &n_r,
   for (unsigned e = 0; e < n_interface_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement<ELEMENT>
-      *el_pt = dynamic_cast<
-        ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement<ELEMENT>
-          *>(Interface_mesh_pt->element_pt(e));
+    ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement<ELEMENT>*
+      el_pt = dynamic_cast<
+        ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement<
+          ELEMENT>*>(Interface_mesh_pt->element_pt(e));
 
     // Set the Capillary number
     el_pt->ca_pt() = &Global_Physical_Variables::Ca;
@@ -800,7 +800,7 @@ InterfaceProblem<ELEMENT, TIMESTEPPER>::InterfaceProblem(const unsigned &n_r,
 /// Doc the solution
 //========================================================================
 template<class ELEMENT, class TIMESTEPPER>
-void InterfaceProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo &doc_info)
+void InterfaceProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo& doc_info)
 {
   // Output the time
   double t = time_pt()->time();
@@ -864,8 +864,8 @@ void InterfaceProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo &doc_info)
 /// Perform run up to specified time t_max with given timestep dt
 //========================================================================
 template<class ELEMENT, class TIMESTEPPER>
-void InterfaceProblem<ELEMENT, TIMESTEPPER>::unsteady_run(const double &t_max,
-                                                          const double &dt)
+void InterfaceProblem<ELEMENT, TIMESTEPPER>::unsteady_run(const double& t_max,
+                                                          const double& dt)
 {
   // Set value of epsilon
   double epsilon = Global_Physical_Variables::Epsilon;
@@ -956,7 +956,7 @@ void InterfaceProblem<ELEMENT, TIMESTEPPER>::unsteady_run(const double &t_max,
 //==start_of_main=========================================================
 /// Driver code for single fluid axisymmetric horizontal interface problem
 //========================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

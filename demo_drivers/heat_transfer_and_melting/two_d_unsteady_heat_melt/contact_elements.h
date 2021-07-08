@@ -60,7 +60,7 @@ namespace oomph
   public:
     /// \short Constructor: Pass in lower and upper limits of 1D coordinate
     /// over which we're integrating
-    PiecewiseGauss(const double &lower, const double &upper) :
+    PiecewiseGauss(const double& lower, const double& upper) :
       Lower(lower), Upper(upper)
     {
       // Set the range of integration
@@ -68,7 +68,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    PiecewiseGauss(const PiecewiseGauss &dummy)
+    PiecewiseGauss(const PiecewiseGauss& dummy)
     {
       BrokenCopy::broken_copy("PiecewiseGauss");
     }
@@ -80,7 +80,7 @@ namespace oomph
     }
 
     /// Return the rescaled knot values s[j] at integration point i
-    double knot(const unsigned &i, const unsigned &j) const
+    double knot(const unsigned& i, const unsigned& j) const
     {
       if (i < Gauss<DIM, NPTS_1D>::nweight())
       {
@@ -112,7 +112,7 @@ namespace oomph
     }
 
     /// Return the rescaled weight at integration point i
-    double weight(const unsigned &i) const
+    double weight(const unsigned& i) const
     {
       if (i < Gauss<DIM, NPTS_1D>::nweight())
       {
@@ -165,13 +165,13 @@ namespace oomph
     /// In this case, d can be set to anything, as it should be ignored anway.
     /// Returning a bool moves the problem of deciding what to do with
     /// non-intersection to each individual method
-    virtual void penetration(const Vector<double> &x,
-                             const Vector<double> &n,
-                             double &d,
-                             bool &intersection) const = 0;
+    virtual void penetration(const Vector<double>& x,
+                             const Vector<double>& n,
+                             double& d,
+                             bool& intersection) const = 0;
 
     /// Output coordinates of penetrator at nplot plot points
-    virtual void output(std::ostream &outfile, const unsigned &nplot) const = 0;
+    virtual void output(std::ostream& outfile, const unsigned& nplot) const = 0;
 
     /// \short Get rigid body displacement of reference point in penetrator.
     /// Broken virtual, so you don't really have to imlement this...
@@ -189,9 +189,9 @@ namespace oomph
     /// equations. Empty by default, indicating that the penetrator is in a
     /// prescribed position (i.e. a position that is not determined as part
     /// of the solution!)
-    virtual Vector<std::pair<Data *, unsigned>> equilibrium_data()
+    virtual Vector<std::pair<Data*, unsigned>> equilibrium_data()
     {
-      Vector<std::pair<Data *, unsigned>> dummy;
+      Vector<std::pair<Data*, unsigned>> dummy;
       return dummy;
     }
 
@@ -199,8 +199,8 @@ namespace oomph
     /// implies some sort of "projection"-type relation between
     /// point x and the parametrisation of the surface (e.g. polar
     /// angle).
-    virtual void surface_coordinate(const Vector<double> &x,
-                                    Vector<double> &zeta) const
+    virtual void surface_coordinate(const Vector<double>& x,
+                                    Vector<double>& zeta) const
     {
       throw OomphLibError(
         "This is a broken virtual function. Please implement/overload. ",
@@ -224,7 +224,7 @@ namespace oomph
     /// \short Get penetrator temperature at surface for given point x. Specific
     /// implementation of penetetrator has do decide how to relate
     /// these two points.
-    virtual double temperature(const Vector<double> &x) const = 0;
+    virtual double temperature(const Vector<double>& x) const = 0;
   };
 
   ////////////////////////////////////////////////////////////////////////
@@ -238,7 +238,7 @@ namespace oomph
   {
   public:
     /// Constructor: Pass pointer to centre and radius
-    CircularPenetrator(Vector<double> *r_c_pt, const double &r)
+    CircularPenetrator(Vector<double>* r_c_pt, const double& r)
     {
       Centre_pt = r_c_pt;
       Radius = r;
@@ -256,10 +256,10 @@ namespace oomph
     virtual ~CircularPenetrator() {}
 
     /// \short Get penetration for given point x
-    void penetration(const Vector<double> &x,
-                     const Vector<double> &n,
-                     double &d,
-                     bool &intersection) const
+    void penetration(const Vector<double>& x,
+                     const Vector<double>& n,
+                     double& d,
+                     bool& intersection) const
     {
       // Vector from potential contact point to centre of penetrator
       Vector<double> l(2);
@@ -293,7 +293,7 @@ namespace oomph
     }
 
     /// Output coordinates of penetrator at nplot plot points
-    void output(std::ostream &outfile, const unsigned &nplot) const
+    void output(std::ostream& outfile, const unsigned& nplot) const
     {
       for (unsigned j = 0; j < nplot; j++)
       {
@@ -305,7 +305,7 @@ namespace oomph
     }
 
     /// \short Get position to surface, r, in terms of surface coordinate zeta.
-    void position_from_zeta(const Vector<double> &zeta, Vector<double> &r) const
+    void position_from_zeta(const Vector<double>& zeta, Vector<double>& r) const
     {
       double phi = zeta[0];
       r[0] = (*Centre_pt)[0] + Radius * cos(phi);
@@ -315,7 +315,7 @@ namespace oomph
     /// \short Get surface coordinate along penetrator for given point x.
     /// We assume that point on the surface and given point share the
     /// same polar angle and return that polar angle
-    void surface_coordinate(const Vector<double> &x, Vector<double> &zeta) const
+    void surface_coordinate(const Vector<double>& x, Vector<double>& zeta) const
     {
       zeta[0] = atan2(x[1] - (*Centre_pt)[1], x[0] - (*Centre_pt)[0]);
     }
@@ -334,7 +334,7 @@ namespace oomph
 
     /// \short Set original centre of penetrator (for computation of rigid body
     /// displacement
-    void set_original_centre(const Vector<double> &orig_centre)
+    void set_original_centre(const Vector<double>& orig_centre)
     {
       Orig_centre = orig_centre;
     }
@@ -342,7 +342,7 @@ namespace oomph
   protected:
     /// \short Pointer to centre of penetrator (origin for cylindrical polar
     /// coordinate system)
-    Vector<double> *Centre_pt;
+    Vector<double>* Centre_pt;
 
     /// \short Original centre of penetrator (origin for cylindrical polar
     /// coordinate system)
@@ -365,7 +365,7 @@ namespace oomph
   {
   public:
     /// Constructor: Pass pointer to centre and radius
-    HeatedCircularPenetrator(Vector<double> *r_c_pt, const double &r) :
+    HeatedCircularPenetrator(Vector<double>* r_c_pt, const double& r) :
       CircularPenetrator(r_c_pt, r)
     {
     }
@@ -377,7 +377,7 @@ namespace oomph
     /// point x using the same logic as for the position function). Here
     /// we assume that both points shrare the same polar angle relative
     /// to the centre of (circular!) penetrator
-    double temperature(const Vector<double> &x) const
+    double temperature(const Vector<double>& x) const
     {
       double phi = atan2(x[1] - (*Centre_pt)[1], x[0] - (*Centre_pt)[0]);
       return cos(phi - 0.5 * MathematicalConstants::Pi);
@@ -395,8 +395,8 @@ namespace oomph
   {
     /// \short Check if point in inside polygon.
     /// Reference: http://paulbourke.net/geometry/insidepoly/
-    bool point_is_in_polygon(const Vector<double> &point,
-                             const Vector<Vector<double>> &polygon_vertex)
+    bool point_is_in_polygon(const Vector<double>& point,
+                             const Vector<Vector<double>>& polygon_vertex)
     {
       // Total number of vertices
       unsigned nvertex = polygon_vertex.size();
@@ -488,16 +488,16 @@ namespace oomph
     virtual ~TemplateFreeContactElementBase() {}
 
     /// Resulting contact force
-    virtual void resulting_contact_force(Vector<double> &contact_force) = 0;
+    virtual void resulting_contact_force(Vector<double>& contact_force) = 0;
 
     // typedef for traction function pointer, passed in from driver code
-    typedef void (*TractionFctPt)(const double &t,
-                                  const Vector<double> &x,
-                                  Vector<double> &p);
+    typedef void (*TractionFctPt)(const double& t,
+                                  const Vector<double>& x,
+                                  Vector<double>& p);
 
     // Refer to this in the residuals, instead of worrying about pointers
     // and nullity
-    void traction_fct(const Vector<double> &x, Vector<double> &p)
+    void traction_fct(const Vector<double>& x, Vector<double>& p)
     {
       // p will be same size as x as tractions are same dim
       unsigned n = x.size();
@@ -557,7 +557,7 @@ namespace oomph
     }
 
     /// Access function: Pointer to body force function
-    TractionFctPt &traction_fct_pt()
+    TractionFctPt& traction_fct_pt()
     {
       return Traction_fct_pt;
     }
@@ -568,37 +568,37 @@ namespace oomph
     }
 
     /// Access function: Pointer to flag to use isoparametric
-    bool *&use_isoparametric_flag_pt()
+    bool*& use_isoparametric_flag_pt()
     {
       return Use_isoparametric_flag_pt;
     }
     /// Access function: Pointer to flag to use isoparametric
     ///(const version)
-    bool *use_isoparametric_flag_pt() const
+    bool* use_isoparametric_flag_pt() const
     {
       return Use_isoparametric_flag_pt;
     }
 
     /// Access function: Pointer to flag to use collocated penetration
-    bool *&use_collocated_penetration_flag_pt()
+    bool*& use_collocated_penetration_flag_pt()
     {
       return Use_collocated_penetration_flag_pt;
     }
     /// Access function: Pointer to flag to use collocated penetration
     ///(const version)
-    bool *use_collocated_penetration_flag_pt() const
+    bool* use_collocated_penetration_flag_pt() const
     {
       return Use_collocated_penetration_flag_pt;
     }
 
     /// Access function: Pointer to flag to use collocated contact pressure
-    bool *&use_collocated_contact_pressure_flag_pt()
+    bool*& use_collocated_contact_pressure_flag_pt()
     {
       return Use_collocated_contact_pressure_flag_pt;
     }
     /// Access function: Pointer to flag to use collocated contact pressure
     ///(const version)
-    bool *use_collocated_contact_pressure_flag_pt() const
+    bool* use_collocated_contact_pressure_flag_pt() const
     {
       return Use_collocated_contact_pressure_flag_pt;
     }
@@ -616,13 +616,13 @@ namespace oomph
     TractionFctPt Traction_fct_pt;
 
     /// Set whether or not to use isoparametric basis function for pressure
-    bool *Use_isoparametric_flag_pt;
+    bool* Use_isoparametric_flag_pt;
 
     /// Set options for basis/test functions for penetration and pressure
-    bool *Use_collocated_penetration_flag_pt;
+    bool* Use_collocated_penetration_flag_pt;
 
     /// Set options for basis/test functions for penetration and pressure
-    bool *Use_collocated_contact_pressure_flag_pt;
+    bool* Use_collocated_contact_pressure_flag_pt;
   };
 
   ////////////////////////////////////////////////////////////////////////
@@ -649,10 +649,10 @@ namespace oomph
     /// \short Constructor, which takes a "bulk" element and the
     /// value of the index and its limit
     SurfaceContactElementBase(
-      FiniteElement *const &element_pt,
-      const int &face_index,
-      const unsigned &id = 0,
-      const bool &called_from_refineable_constructor = false) :
+      FiniteElement* const& element_pt,
+      const int& face_index,
+      const unsigned& id = 0,
+      const bool& called_from_refineable_constructor = false) :
       FaceGeometry<ELEMENT>(), FaceElement()
     {
       // By default we only to proper non-penetration (without "stick", i.e.
@@ -674,8 +674,8 @@ namespace oomph
           if (element_pt->dim() == 3)
           {
             // Is it refineable
-            RefineableElement *ref_el_pt =
-              dynamic_cast<RefineableElement *>(element_pt);
+            RefineableElement* ref_el_pt =
+              dynamic_cast<RefineableElement*>(element_pt);
             if (ref_el_pt != 0)
             {
               if (this->has_hanging_nodes())
@@ -750,9 +750,9 @@ namespace oomph
     }
 
     // final overrider
-    double zeta_nodal(const unsigned &n,
-                      const unsigned &k,
-                      const unsigned &i) const
+    double zeta_nodal(const unsigned& n,
+                      const unsigned& k,
+                      const unsigned& i) const
     {
       return oomph::FiniteElement::zeta_nodal(n, k, i);
     }
@@ -783,7 +783,7 @@ namespace oomph
     }
 
     /// Return the residuals
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       fill_in_contribution_to_residuals_surface_contact(residuals);
     }
@@ -806,16 +806,16 @@ namespace oomph
     //   }
 
     /// \short Pointer to penetrator
-    Penetrator *penetrator_pt() const
+    Penetrator* penetrator_pt() const
     {
       return Penetrator_pt;
     }
 
     /// \short Set pointer to penetrator
-    void set_penetrator_pt(Penetrator *penetrator_pt)
+    void set_penetrator_pt(Penetrator* penetrator_pt)
     {
       Penetrator_pt = penetrator_pt;
-      Vector<std::pair<Data *, unsigned>> eq_data(
+      Vector<std::pair<Data*, unsigned>> eq_data(
         Penetrator_pt->equilibrium_data());
       unsigned n = eq_data.size();
       Penetrator_eq_data_data_index.resize(n, -1);
@@ -838,7 +838,7 @@ namespace oomph
               break;
             }
             if (eq_data[i].first ==
-                dynamic_cast<SolidNode *>(node_pt(j))->variable_position_pt())
+                dynamic_cast<SolidNode*>(node_pt(j))->variable_position_pt())
             {
               Penetrator_eq_data_type[i] = Nodal_position_data;
               Penetrator_eq_data_data_index[i] = j;
@@ -860,32 +860,32 @@ namespace oomph
     }
 
     /// \short C_style output function
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
 
     /// \short C-style output function
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       FiniteElement::output(file_pt, n_plot);
     }
 
     /// \short Output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       unsigned n_plot = 5;
       FiniteElement::output(outfile, n_plot);
     }
 
     /// \short Output function
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       FiniteElement::output(outfile, n_plot);
     }
 
     /// Shape fct for lagrange multiplier
-    void shape_p(const Vector<double> &s, Shape &psi) const
+    void shape_p(const Vector<double>& s, Shape& psi) const
     {
       if (this->use_isoparametric_flag())
       {
@@ -920,7 +920,7 @@ namespace oomph
 
     /// Top hat function used in discretising either penetration
     /// or the contact pressure
-    void shape_i(const Vector<double> &s, Shape &psi) const
+    void shape_i(const Vector<double>& s, Shape& psi) const
     {
       const double smin = this->s_min();
       const double smax = this->s_max();
@@ -950,7 +950,7 @@ namespace oomph
     /// \short Get interpolated pressure (essentially a Lagrange multiplier
     /// that enforces the imposed boundary motion to ensure
     /// non-penetration or contact)
-    double get_interpolated_lagrange_p(const Vector<double> &s)
+    double get_interpolated_lagrange_p(const Vector<double>& s)
     {
       // Initialise pressure
       double p = 0;
@@ -968,8 +968,7 @@ namespace oomph
       for (unsigned j = 0; j < n_node; j++)
       {
         // Cast to a boundary node
-        BoundaryNodeBase *bnod_pt =
-          dynamic_cast<BoundaryNodeBase *>(node_pt(j));
+        BoundaryNodeBase* bnod_pt = dynamic_cast<BoundaryNodeBase*>(node_pt(j));
 
         // Get the index of the first nodal value associated with
         // this FaceElement
@@ -988,19 +987,19 @@ namespace oomph
     /// fill_in_contribution_to_residuals in fill_in_contribution_to_jacobian
     /// which causes all kinds of pain if overloading later on
     virtual void fill_in_contribution_to_residuals_surface_contact(
-      Vector<double> &residuals) = 0;
+      Vector<double>& residuals) = 0;
 
     /// Work out penetration of point
-    void penetration(const Vector<double> &x,
-                     const Vector<double> &n,
-                     double &d,
-                     bool &intersection) const
+    void penetration(const Vector<double>& x,
+                     const Vector<double>& n,
+                     double& d,
+                     bool& intersection) const
     {
       Penetrator_pt->penetration(x, n, d, intersection);
     }
 
     /// Pointer to penetrator
-    Penetrator *Penetrator_pt;
+    Penetrator* Penetrator_pt;
 
     /// \short ID of the contact constraint (used for the identification of
     /// the nodal value that corresponds to the pressure-like
@@ -1056,10 +1055,10 @@ namespace oomph
     /// \short Constructor, which takes a "bulk" element and the
     /// value of the index and its limit
     NonlinearSurfaceContactElement(
-      FiniteElement *const &element_pt,
-      const int &face_index,
-      const unsigned &id = 0,
-      const bool &called_from_refineable_constructor = false) :
+      FiniteElement* const& element_pt,
+      const int& face_index,
+      const unsigned& id = 0,
+      const bool& called_from_refineable_constructor = false) :
       //   FaceGeometry<ELEMENT>(), FaceElement(),
       SurfaceContactElementBase<ELEMENT>(
         element_pt, face_index, id, called_from_refineable_constructor)
@@ -1068,17 +1067,17 @@ namespace oomph
 
     /// Return the residuals for the SurfaceContactElement equations
     void fill_in_contribution_to_residuals_surface_contact(
-      Vector<double> &residuals);
+      Vector<double>& residuals);
 
     /// \short Output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       unsigned n_plot = 5;
       this->output(outfile, n_plot);
     }
 
     /// \short Output function
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       unsigned n_dim = this->nodal_dimension();
 
@@ -1151,7 +1150,7 @@ namespace oomph
     }
 
     /// Resulting contact force
-    void resulting_contact_force(Vector<double> &contact_force);
+    void resulting_contact_force(Vector<double>& contact_force);
   };
 
   ////////////////////////////////////////////////////////////////////////
@@ -1163,7 +1162,7 @@ namespace oomph
   //=====================================================================
   template<class ELEMENT>
   void NonlinearSurfaceContactElement<ELEMENT>::
-    fill_in_contribution_to_residuals_surface_contact(Vector<double> &residuals)
+    fill_in_contribution_to_residuals_surface_contact(Vector<double>& residuals)
   {
     // Spatial dimension of problem
     unsigned n_dim = this->nodal_dimension();
@@ -1247,8 +1246,8 @@ namespace oomph
         for (unsigned l = 0; l < n_node; l++)
         {
           // Cast to a boundary node
-          BoundaryNodeBase *bnod_pt =
-            dynamic_cast<BoundaryNodeBase *>(this->node_pt(l));
+          BoundaryNodeBase* bnod_pt =
+            dynamic_cast<BoundaryNodeBase*>(this->node_pt(l));
 
           // Get the index of the nodal value associated with
           // this FaceElement
@@ -1407,10 +1406,10 @@ namespace oomph
       for (unsigned l = 0; l < n_node; l++)
       {
         // get the node pt
-        Node *nod_pt = this->node_pt(l);
+        Node* nod_pt = this->node_pt(l);
 
         // Cast to a boundary node
-        BoundaryNodeBase *bnod_pt = dynamic_cast<BoundaryNodeBase *>(nod_pt);
+        BoundaryNodeBase* bnod_pt = dynamic_cast<BoundaryNodeBase*>(nod_pt);
 
         // Get the index of the first nodal value associated with
         // this FaceElement
@@ -1560,7 +1559,7 @@ namespace oomph
   //=====================================================================
   template<class ELEMENT>
   void NonlinearSurfaceContactElement<ELEMENT>::resulting_contact_force(
-    Vector<double> &contact_force)
+    Vector<double>& contact_force)
   {
     // Find out how many nodes there are
     unsigned n_node = this->nnode();
@@ -1620,8 +1619,8 @@ namespace oomph
       for (unsigned l = 0; l < n_node; l++)
       {
         // Cast to a boundary node
-        BoundaryNodeBase *bnod_pt =
-          dynamic_cast<BoundaryNodeBase *>(this->node_pt(l));
+        BoundaryNodeBase* bnod_pt =
+          dynamic_cast<BoundaryNodeBase*>(this->node_pt(l));
 
         // Get the index of the nodal value associated with
         // this FaceElement
@@ -1734,10 +1733,10 @@ namespace oomph
     /// \short Constructor, which takes a "bulk" element and the
     /// value of the index and its limit
     LinearSurfaceContactElement(
-      FiniteElement *const &element_pt,
-      const int &face_index,
-      const unsigned &id = 0,
-      const bool &called_from_refineable_constructor = false) :
+      FiniteElement* const& element_pt,
+      const int& face_index,
+      const unsigned& id = 0,
+      const bool& called_from_refineable_constructor = false) :
       //   FaceGeometry<ELEMENT>(), FaceElement(),
       SurfaceContactElementBase<ELEMENT>(
         element_pt, face_index, id, called_from_refineable_constructor)
@@ -1746,7 +1745,7 @@ namespace oomph
       unsigned n_dim = element_pt->nodal_dimension();
 
       // Find the index at which the displacemenet unknowns are stored
-      ELEMENT *cast_element_pt = dynamic_cast<ELEMENT *>(element_pt);
+      ELEMENT* cast_element_pt = dynamic_cast<ELEMENT*>(element_pt);
       this->U_index_linear_elasticity_traction.resize(n_dim);
       for (unsigned i = 0; i < n_dim; i++)
       {
@@ -1760,17 +1759,17 @@ namespace oomph
 
     /// Return the residuals for the SurfaceContactElement equations
     void fill_in_contribution_to_residuals_surface_contact(
-      Vector<double> &residuals);
+      Vector<double>& residuals);
 
     /// \short Output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       unsigned n_plot = 5;
       this->output(outfile, n_plot);
     }
 
     /// \short Output function
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       unsigned n_dim = this->nodal_dimension();
 
@@ -1857,12 +1856,12 @@ namespace oomph
     }
 
     /// Resulting contact force
-    void resulting_contact_force(Vector<double> &contact_force);
+    void resulting_contact_force(Vector<double>& contact_force);
 
   protected:
     /// Compute vector of FE interpolated displacement u at local coordinate s
-    void interpolated_u_linear_elasticity(const Vector<double> &s,
-                                          Vector<double> &disp) const
+    void interpolated_u_linear_elasticity(const Vector<double>& s,
+                                          Vector<double>& disp) const
     {
       // Find the dimension of the problem
       unsigned n_dim = this->nodal_dimension();
@@ -1906,7 +1905,7 @@ namespace oomph
   //=====================================================================
   template<class ELEMENT>
   void LinearSurfaceContactElement<ELEMENT>::
-    fill_in_contribution_to_residuals_surface_contact(Vector<double> &residuals)
+    fill_in_contribution_to_residuals_surface_contact(Vector<double>& residuals)
   {
     // Spatial dimension of problem
     unsigned n_dim = this->nodal_dimension();
@@ -1991,8 +1990,8 @@ namespace oomph
         for (unsigned l = 0; l < n_node; l++)
         {
           // Cast to a boundary node
-          BoundaryNodeBase *bnod_pt =
-            dynamic_cast<BoundaryNodeBase *>(this->node_pt(l));
+          BoundaryNodeBase* bnod_pt =
+            dynamic_cast<BoundaryNodeBase*>(this->node_pt(l));
 
           // Get the index of the nodal value associated with
           // this FaceElement
@@ -2153,10 +2152,10 @@ namespace oomph
       for (unsigned l = 0; l < n_node; l++)
       {
         // get the node pt
-        Node *nod_pt = this->node_pt(l);
+        Node* nod_pt = this->node_pt(l);
 
         // Cast to a boundary node
-        BoundaryNodeBase *bnod_pt = dynamic_cast<BoundaryNodeBase *>(nod_pt);
+        BoundaryNodeBase* bnod_pt = dynamic_cast<BoundaryNodeBase*>(nod_pt);
 
         // Get the index of the first nodal value associated with
         // this FaceElement
@@ -2317,7 +2316,7 @@ namespace oomph
   //=====================================================================
   template<class ELEMENT>
   void LinearSurfaceContactElement<ELEMENT>::resulting_contact_force(
-    Vector<double> &contact_force)
+    Vector<double>& contact_force)
   {
     // Find out how many nodes there are
     unsigned n_node = this->nnode();
@@ -2375,8 +2374,8 @@ namespace oomph
       for (unsigned l = 0; l < n_node; l++)
       {
         // Cast to a boundary node
-        BoundaryNodeBase *bnod_pt =
-          dynamic_cast<BoundaryNodeBase *>(this->node_pt(l));
+        BoundaryNodeBase* bnod_pt =
+          dynamic_cast<BoundaryNodeBase*>(this->node_pt(l));
 
         // Get the index of the nodal value associated with
         // this FaceElement

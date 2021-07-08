@@ -226,8 +226,8 @@ namespace oomph
   /// this node in the local coordinates system.
   /// It also needs the value of nnode1d to work.
   //===================================================================
-  Vector<int> OcTree::vertex_node_to_vector(const unsigned &n,
-                                            const unsigned &nnode1d)
+  Vector<int> OcTree::vertex_node_to_vector(const unsigned& n,
+                                            const unsigned& nnode1d)
   {
 #ifdef PARANOID
     if ((n != 0) && (n != nnode1d - 1) && (n != (nnode1d - 1) * nnode1d) &&
@@ -263,8 +263,8 @@ namespace oomph
   /// Return the local node number of given vertex
   /// in an element with nnode1d nodes in each coordinate direction.
   //==================================================================
-  unsigned OcTree::vertex_to_node_number(const int &vertex,
-                                         const unsigned &nnode1d)
+  unsigned OcTree::vertex_to_node_number(const int& vertex,
+                                         const unsigned& nnode1d)
   {
     using namespace OcTreeNames;
 
@@ -335,7 +335,7 @@ namespace oomph
   /// \short Return the vertex of local (vertex) node n
   /// in an element with nnode1d nodes in each coordinate direction.
   //==================================================================
-  int OcTree::node_number_to_vertex(const unsigned &n, const unsigned &nnode1d)
+  int OcTree::node_number_to_vertex(const unsigned& n, const unsigned& nnode1d)
   {
     using namespace OcTreeNames;
 
@@ -408,10 +408,10 @@ namespace oomph
   /// it also need the value of nnode1d to work.
   /// (\c face is a direction in the set U,D,F,B,L,R).
   //==================================================================
-  int OcTree::get_the_other_face(const unsigned &n1,
-                                 const unsigned &n2,
-                                 const unsigned &nnode1d,
-                                 const int &face)
+  int OcTree::get_the_other_face(const unsigned& n1,
+                                 const unsigned& n2,
+                                 const unsigned& nnode1d,
+                                 const int& face)
   {
     Vector<int> vect_node1(3);
     Vector<int> vect_node2(3);
@@ -449,9 +449,9 @@ namespace oomph
   /// Build the rotation matrix for a rotation around the axis \c axis of
   /// an angle \c angle*90
   //====================================================================
-  void OcTree::construct_rotation_matrix(int &axis,
-                                         int &angle,
-                                         DenseMatrix<int> &mat)
+  void OcTree::construct_rotation_matrix(int& axis,
+                                         int& angle,
+                                         DenseMatrix<int>& mat)
   {
     using namespace OcTreeNames;
     int a = 0, b = 0, c = 0, i, j;
@@ -494,9 +494,9 @@ namespace oomph
   //===================================================================
   /// Helper: Performs the operation Mat3=Mat1*Mat2
   //===================================================================
-  void OcTree::mult_mat_mat(const DenseMatrix<int> &mat1,
-                            const DenseMatrix<int> &mat2,
-                            DenseMatrix<int> &mat3)
+  void OcTree::mult_mat_mat(const DenseMatrix<int>& mat1,
+                            const DenseMatrix<int>& mat2,
+                            DenseMatrix<int>& mat3)
   {
     int Sum, i, j, k;
     for (i = 0; i < 3; i++)
@@ -516,9 +516,9 @@ namespace oomph
   //===================================================================
   /// Helper: Performs the operation Vect2=Mat*Vect1
   //===================================================================
-  void OcTree::mult_mat_vect(const DenseMatrix<int> &mat,
-                             const Vector<int> &vect1,
-                             Vector<int> &vect2)
+  void OcTree::mult_mat_vect(const DenseMatrix<int>& mat,
+                             const Vector<int>& vect1,
+                             Vector<int>& vect2)
   {
     int i, k, sum;
     for (i = 0; i < 3; i++)
@@ -537,7 +537,7 @@ namespace oomph
   /// directions; so if Up becomes newUp and Right becomes newRight
   /// then dir becomes rotate(newUp,newRight,dir);
   //===================================================================
-  int OcTree::rotate(const int &new_up, const int &new_right, const int &dir)
+  int OcTree::rotate(const int& new_up, const int& new_right, const int& dir)
   {
     using namespace OcTreeNames;
 
@@ -577,9 +577,9 @@ namespace oomph
   /// This function rotates a vector according to a rotation of
   /// the axes that changes up to new_up and right to new_right.
   //==================================================================
-  Vector<int> OcTree::rotate(const int &new_up,
-                             const int &new_right,
-                             const Vector<int> &dir)
+  Vector<int> OcTree::rotate(const int& new_up,
+                             const int& new_right,
+                             const Vector<int>& dir)
   {
     using namespace OcTreeNames;
 
@@ -2539,8 +2539,8 @@ namespace oomph
   /// \short Is the edge neighbour (for edge "edge")  specified via the pointer
   /// also a face neighbour for one of the two adjacent faces?
   //================================================================
-  bool OcTree::edge_neighbour_is_face_neighbour(const int &edge,
-                                                OcTree *edge_neigh_pt) const
+  bool OcTree::edge_neighbour_is_face_neighbour(const int& edge,
+                                                OcTree* edge_neigh_pt) const
   {
 #ifdef PARANOID
     // No paranoid check needed -- the default for the switch statement
@@ -2563,7 +2563,7 @@ namespace oomph
     int reflected_face;
     int diff_level;
 
-    OcTree *face_neigh_pt = 0;
+    OcTree* face_neigh_pt = 0;
 
     switch (edge)
     {
@@ -2999,12 +2999,12 @@ namespace oomph
   ///   the two neighbours. If \c diff_level==0, the neighbour has the
   ///   same size as the current octree.
   //=================================================================
-  OcTree *OcTree::gteq_face_neighbour(const int &direction,
-                                      Vector<unsigned> &translate_s,
-                                      Vector<double> &s_sw,
-                                      Vector<double> &s_ne,
-                                      int &face,
-                                      int &diff_level) const
+  OcTree* OcTree::gteq_face_neighbour(const int& direction,
+                                      Vector<unsigned>& translate_s,
+                                      Vector<double>& s_sw,
+                                      Vector<double>& s_ne,
+                                      int& face,
+                                      int& diff_level) const
   {
     using namespace OcTreeNames;
 
@@ -3025,7 +3025,7 @@ namespace oomph
     int max_level = Level;
 
     // Current element has the following root:
-    OcTreeRoot *orig_root_pt = dynamic_cast<OcTreeRoot *>(Root_pt);
+    OcTreeRoot* orig_root_pt = dynamic_cast<OcTreeRoot*>(Root_pt);
 
     // Initialise offset in local coordinate
     double s_difflo = 0;
@@ -3035,10 +3035,10 @@ namespace oomph
     diff_level = 0;
 
     // Find neighbour
-    OcTree *return_pt = gteq_face_neighbour(
+    OcTree* return_pt = gteq_face_neighbour(
       direction, s_difflo, s_diffhi, diff_level, max_level, orig_root_pt);
 
-    OcTree *neighb_pt = return_pt;
+    OcTree* neighb_pt = return_pt;
 
     // Initialise the translation scheme
     for (unsigned i = 0; i < 3; i++)
@@ -3233,15 +3233,15 @@ namespace oomph
   /// in a certain direction is not a true edge neighbour, or if there
   /// is no neighbour, then this function returns NULL.
   //=================================================================
-  OcTree *OcTree::gteq_true_edge_neighbour(
-    const int &direction,
-    const unsigned &i_root_edge_neighbour,
-    unsigned &nroot_edge_neighbour,
-    Vector<unsigned> &translate_s,
-    Vector<double> &s_lo,
-    Vector<double> &s_hi,
-    int &edge,
-    int &diff_level) const
+  OcTree* OcTree::gteq_true_edge_neighbour(
+    const int& direction,
+    const unsigned& i_root_edge_neighbour,
+    unsigned& nroot_edge_neighbour,
+    Vector<unsigned>& translate_s,
+    Vector<double>& s_lo,
+    Vector<double>& s_hi,
+    int& edge,
+    int& diff_level) const
   {
     using namespace OcTreeNames;
 
@@ -3264,7 +3264,7 @@ namespace oomph
     int max_level = Level;
 
     // Current element has the following root:
-    OcTreeRoot *orig_root_pt = dynamic_cast<OcTreeRoot *>(Root_pt);
+    OcTreeRoot* orig_root_pt = dynamic_cast<OcTreeRoot*>(Root_pt);
 
     // Initialise offset in local coordinate along edge
     double s_diff = 0;
@@ -3273,7 +3273,7 @@ namespace oomph
     diff_level = 0;
 
     // Find edge neighbour
-    OcTree *return_pt = gteq_edge_neighbour(direction,
+    OcTree* return_pt = gteq_edge_neighbour(direction,
                                             i_root_edge_neighbour,
                                             nroot_edge_neighbour,
                                             s_diff,
@@ -3288,7 +3288,7 @@ namespace oomph
     }
 
     // By default, we return what was returned as the true edge neighbour.
-    OcTree *neighb_pt = return_pt;
+    OcTree* neighb_pt = return_pt;
 
     // Initialise the translation scheme
     for (unsigned i = 0; i < 3; i++)
@@ -3449,12 +3449,12 @@ namespace oomph
   /// - orig_root_pt identifies the root node of the element whose
   ///   neighbour we're really trying to find by all these recursive calls.
   //===========================================================================
-  OcTree *OcTree::gteq_face_neighbour(const int &direction,
-                                      double &s_difflo,
-                                      double &s_diffhi,
-                                      int &diff_level,
+  OcTree* OcTree::gteq_face_neighbour(const int& direction,
+                                      double& s_difflo,
+                                      double& s_diffhi,
+                                      int& diff_level,
                                       int max_level,
-                                      OcTreeRoot *orig_root_pt) const
+                                      OcTreeRoot* orig_root_pt) const
   {
     using namespace OcTreeNames;
 
@@ -3470,8 +3470,8 @@ namespace oomph
     }
 #endif
 
-    OcTree *next_el_pt;
-    OcTree *return_el_pt;
+    OcTree* next_el_pt;
+    OcTree* return_el_pt;
 
     // STEP 1: Find the neighbour's father
     //--------
@@ -3486,7 +3486,7 @@ namespace oomph
       // the father and find his neighbour in the required direction
       if (Is_adjacent(direction, Son_type))
       {
-        next_el_pt = dynamic_cast<OcTree *>(Father_pt)->gteq_face_neighbour(
+        next_el_pt = dynamic_cast<OcTree*>(Father_pt)->gteq_face_neighbour(
           direction, s_difflo, s_diffhi, diff_level, max_level, orig_root_pt);
       }
 
@@ -3496,7 +3496,7 @@ namespace oomph
       // by the appropriate reflection inside the father element
       else
       {
-        next_el_pt = dynamic_cast<OcTree *>(Father_pt);
+        next_el_pt = dynamic_cast<OcTree*>(Father_pt);
       }
 
       // We're about to ascend one level:
@@ -3537,17 +3537,16 @@ namespace oomph
           // If there is a rotation, we rotate the son octant
           if (orig_root_pt != next_el_pt->Root_pt)
           {
-            int my_up = dynamic_cast<OcTreeRoot *>(Root_pt)->up_equivalent(
+            int my_up = dynamic_cast<OcTreeRoot*>(Root_pt)->up_equivalent(
               next_el_pt->Root_pt);
 
-            int my_right =
-              dynamic_cast<OcTreeRoot *>(Root_pt)->right_equivalent(
-                next_el_pt->Root_pt);
+            int my_right = dynamic_cast<OcTreeRoot*>(Root_pt)->right_equivalent(
+              next_el_pt->Root_pt);
 
             son_octant = rotate(my_up, my_right, son_octant);
           }
 
-          return_el_pt = dynamic_cast<OcTree *>(next_el_pt->Son_pt[son_octant]);
+          return_el_pt = dynamic_cast<OcTree*>(next_el_pt->Son_pt[son_octant]);
 
           // Work out position of lower-left corner of present face
           // in next higher element
@@ -3573,7 +3572,7 @@ namespace oomph
       // Find  neighbouring root
       if (Root_pt->neighbour_pt(direction) != 0)
       {
-        return_el_pt = dynamic_cast<OcTree *>(Root_pt->neighbour_pt(direction));
+        return_el_pt = dynamic_cast<OcTree*>(Root_pt->neighbour_pt(direction));
       }
 
       // No neighbouring tree, so there really is no neighbour --> return NULL
@@ -3618,13 +3617,13 @@ namespace oomph
   /// - orig_root_pt identifies the root node of the element whose
   ///   neighbour we're really trying to find by all these recursive calls.
   //===========================================================================
-  OcTree *OcTree::gteq_edge_neighbour(const int &direction,
-                                      const unsigned &i_root_edge_neighbour,
-                                      unsigned &nroot_edge_neighbour,
-                                      double &s_diff,
-                                      int &diff_level,
+  OcTree* OcTree::gteq_edge_neighbour(const int& direction,
+                                      const unsigned& i_root_edge_neighbour,
+                                      unsigned& nroot_edge_neighbour,
+                                      double& s_diff,
+                                      int& diff_level,
                                       int max_level,
-                                      OcTreeRoot *orig_root_pt) const
+                                      OcTreeRoot* orig_root_pt) const
   {
     using namespace OcTreeNames;
 
@@ -3646,8 +3645,8 @@ namespace oomph
     // edges of octree roots
     nroot_edge_neighbour = 0;
 
-    OcTree *next_el_pt = 0;
-    OcTree *return_el_pt = 0;
+    OcTree* next_el_pt = 0;
+    OcTree* return_el_pt = 0;
 
     // STEP 1: Find the common ancestor
     //--------
@@ -3662,7 +3661,7 @@ namespace oomph
       // the father and find his neighbour in the required direction
       if (Is_adjacent(direction, Son_type))
       {
-        next_el_pt = dynamic_cast<OcTree *>(Father_pt)->gteq_edge_neighbour(
+        next_el_pt = dynamic_cast<OcTree*>(Father_pt)->gteq_edge_neighbour(
           direction,
           i_root_edge_neighbour,
           nroot_edge_neighbour,
@@ -3684,7 +3683,7 @@ namespace oomph
         double s_diffhi = 0.0;
         int diff_level_edge = 0;
 
-        next_el_pt = dynamic_cast<OcTree *>(Father_pt)->gteq_face_neighbour(
+        next_el_pt = dynamic_cast<OcTree*>(Father_pt)->gteq_face_neighbour(
           Common_face(direction, Son_type),
           s_difflo,
           s_diffhi,
@@ -3699,7 +3698,7 @@ namespace oomph
       // by the appropriate reflection inside the father element
       else
       {
-        next_el_pt = dynamic_cast<OcTree *>(Father_pt);
+        next_el_pt = dynamic_cast<OcTree*>(Father_pt);
       }
 
       // We're about to ascend one level:
@@ -3737,17 +3736,16 @@ namespace oomph
           // If there is a rotation, we rotate the son octant
           if (orig_root_pt != next_el_pt->Root_pt)
           {
-            int my_up = dynamic_cast<OcTreeRoot *>(Root_pt)->up_equivalent(
+            int my_up = dynamic_cast<OcTreeRoot*>(Root_pt)->up_equivalent(
               next_el_pt->Root_pt);
 
-            int my_right =
-              dynamic_cast<OcTreeRoot *>(Root_pt)->right_equivalent(
-                next_el_pt->Root_pt);
+            int my_right = dynamic_cast<OcTreeRoot*>(Root_pt)->right_equivalent(
+              next_el_pt->Root_pt);
 
             son_octant = rotate(my_up, my_right, son_octant);
           }
 
-          return_el_pt = dynamic_cast<OcTree *>(next_el_pt->Son_pt[son_octant]);
+          return_el_pt = dynamic_cast<OcTree*>(next_el_pt->Son_pt[son_octant]);
 
           // Work out position of "low" vertex of present edge
           // in next higher element
@@ -3772,16 +3770,16 @@ namespace oomph
       // Get total number of edge neighbours available across
       // edges of octree roots for return
       nroot_edge_neighbour =
-        dynamic_cast<OcTreeRoot *>(Root_pt)->nedge_neighbour(direction);
+        dynamic_cast<OcTreeRoot*>(Root_pt)->nedge_neighbour(direction);
 
       // Get vector of edge neighbours (if any) in appropriate direction
-      Vector<TreeRoot *> edge_neighbour_pt =
-        dynamic_cast<OcTreeRoot *>(Root_pt)->edge_neighbour_pt(direction);
+      Vector<TreeRoot*> edge_neighbour_pt =
+        dynamic_cast<OcTreeRoot*>(Root_pt)->edge_neighbour_pt(direction);
       unsigned n_neigh = edge_neighbour_pt.size();
       if (n_neigh > 0)
       {
         return_el_pt =
-          dynamic_cast<OcTree *>(edge_neighbour_pt[i_root_edge_neighbour]);
+          dynamic_cast<OcTree*>(edge_neighbour_pt[i_root_edge_neighbour]);
       }
       else
       {
@@ -3804,7 +3802,7 @@ namespace oomph
   {
     // Stick pointers to all nodes into Vector and number elements
     // in the process
-    Vector<Tree *> all_nodes_pt;
+    Vector<Tree*> all_nodes_pt;
     stick_all_tree_nodes_into_vector(all_nodes_pt);
 
     long int count = 0;
@@ -3875,10 +3873,10 @@ namespace oomph
   /// If the two filestreams are closed, output is suppressed.
   /// (Static function.)
   //=================================================================
-  void OcTree::doc_face_neighbours(Vector<Tree *> forest_nodes_pt,
-                                   std::ofstream &neighbours_file,
-                                   std::ofstream &neighbours_txt_file,
-                                   double &max_error)
+  void OcTree::doc_face_neighbours(Vector<Tree*> forest_nodes_pt,
+                                   std::ofstream& neighbours_file,
+                                   std::ofstream& neighbours_txt_file,
+                                   double& max_error)
   {
     using namespace OcTreeNames;
 
@@ -3905,7 +3903,7 @@ namespace oomph
     for (unsigned long i = 0; i < num_nodes; i++)
     {
       // Doc the element itself
-      OcTree *el_pt = dynamic_cast<OcTree *>(forest_nodes_pt[i]);
+      OcTree* el_pt = dynamic_cast<OcTree*>(forest_nodes_pt[i]);
 
       // If the object is incomplete omit
       if (el_pt->object_pt()->nodes_built())
@@ -3916,7 +3914,7 @@ namespace oomph
           neighbours_file << "#---------------------------------" << std::endl;
           neighbours_file << "#The element itself: " << i << std::endl;
           neighbours_file << "#---------------------------------" << std::endl;
-          dynamic_cast<RefineableQElement<3> *>(el_pt->object_pt())
+          dynamic_cast<RefineableQElement<3>*>(el_pt->object_pt())
             ->output_corners(neighbours_file, "BLACK");
         }
 
@@ -3928,7 +3926,7 @@ namespace oomph
           diff_level = 0;
 
           // Find greater-or-equal-sized neighbour...
-          OcTree *neighb_pt = el_pt->gteq_face_neighbour(
+          OcTree* neighb_pt = el_pt->gteq_face_neighbour(
             direction, translate_s, s_sw, s_ne, face, diff_level);
 
           // If neighbour exists and nodes are created
@@ -3955,7 +3953,7 @@ namespace oomph
                 << std::endl;
               neighbours_file << "#---------------------------------"
                               << std::endl;
-              dynamic_cast<RefineableQElement<3> *>(neighb_pt->object_pt())
+              dynamic_cast<RefineableQElement<3>*>(neighb_pt->object_pt())
                 ->output_corners(neighbours_file, Colour[direction]);
             }
 
@@ -4092,7 +4090,7 @@ namespace oomph
               neighbours_file << "#---------------------------------"
                               << std::endl;
 
-              dynamic_cast<RefineableQElement<3> *>(el_pt->object_pt())
+              dynamic_cast<RefineableQElement<3>*>(el_pt->object_pt())
                 ->output_corners(neighbours_file, "WHITE");
               neighbours_file << "ZONE I=2 \n";
               neighbours_file << "-0.05 -0.05 -0.05  0 \n";
@@ -4122,11 +4120,11 @@ namespace oomph
   /// If the two filestreams are closed, output is suppressed.
   /// (Static function).
   //=================================================================
-  void OcTree::doc_true_edge_neighbours(Vector<Tree *> forest_nodes_pt,
-                                        std::ofstream &neighbours_file,
-                                        std::ofstream &no_true_edge_file,
-                                        std::ofstream &neighbours_txt_file,
-                                        double &max_error)
+  void OcTree::doc_true_edge_neighbours(Vector<Tree*> forest_nodes_pt,
+                                        std::ofstream& neighbours_file,
+                                        std::ofstream& no_true_edge_file,
+                                        std::ofstream& neighbours_txt_file,
+                                        double& max_error)
   {
     using namespace OcTreeNames;
 
@@ -4153,7 +4151,7 @@ namespace oomph
     for (unsigned long i = 0; i < num_nodes; i++)
     {
       // Doc the element itself
-      OcTree *el_pt = dynamic_cast<OcTree *>(forest_nodes_pt[i]);
+      OcTree* el_pt = dynamic_cast<OcTree*>(forest_nodes_pt[i]);
 
       // If the object is incomplete omit
       if (el_pt->object_pt()->nodes_built())
@@ -4164,7 +4162,7 @@ namespace oomph
           neighbours_file << "#---------------------------------" << std::endl;
           neighbours_file << "#The element itself: " << i << std::endl;
           neighbours_file << "#---------------------------------" << std::endl;
-          dynamic_cast<RefineableQElement<3> *>(el_pt->object_pt())
+          dynamic_cast<RefineableQElement<3>*>(el_pt->object_pt())
             ->output_corners(neighbours_file, "BLACK");
         }
 
@@ -4180,7 +4178,7 @@ namespace oomph
           unsigned nroot_edge_neighbour = 0;
 
           // Find greater-or-equal-sized edge neighbour...
-          OcTree *neighb_pt =
+          OcTree* neighb_pt =
             el_pt->gteq_true_edge_neighbour(direction,
                                             i_root_edge_neighbour,
                                             nroot_edge_neighbour,
@@ -4214,7 +4212,7 @@ namespace oomph
                 << std::endl;
               neighbours_file << "#---------------------------------"
                               << std::endl;
-              dynamic_cast<RefineableQElement<3> *>(neighb_pt->object_pt())
+              dynamic_cast<RefineableQElement<3>*>(neighb_pt->object_pt())
                 ->output_corners(neighbours_file, Colour[direction]);
             }
 
@@ -4349,7 +4347,7 @@ namespace oomph
               neighbours_file << "#---------------------------------"
                               << std::endl;
 
-              dynamic_cast<RefineableQElement<3> *>(el_pt->object_pt())
+              dynamic_cast<RefineableQElement<3>*>(el_pt->object_pt())
                 ->output_corners(neighbours_file, "WHITE");
               neighbours_file << "ZONE I=2 \n";
               neighbours_file << "-0.05 -0.05 -0.05  0 \n";
@@ -4402,8 +4400,7 @@ namespace oomph
   ///    (OcTreeRoot objects)
   ///
   //=================================================================
-  OcTreeForest::OcTreeForest(Vector<TreeRoot *> &trees_pt) :
-    TreeForest(trees_pt)
+  OcTreeForest::OcTreeForest(Vector<TreeRoot*>& trees_pt) : TreeForest(trees_pt)
   {
 #ifdef LEAK_CHECK
     LeakCheckNames::OcTreeForest_build += 1;
@@ -4463,7 +4460,7 @@ namespace oomph
 
     // Find potentially connected trees by identifying
     // those whose associated elements share a common vertex node
-    std::map<Node *, std::set<unsigned>> tree_assoc_with_vertex_node;
+    std::map<Node*, std::set<unsigned>> tree_assoc_with_vertex_node;
 
     // Loop over all trees
     for (unsigned i = 0; i < numtrees; i++)
@@ -4471,9 +4468,8 @@ namespace oomph
       // Loop over the vertex nodes of the associated element
       for (unsigned j = 0; j < n_vertex_node; j++)
       {
-        Node *nod_pt =
-          dynamic_cast<BrickElementBase *>(Trees_pt[i]->object_pt())
-            ->vertex_node_pt(j);
+        Node* nod_pt = dynamic_cast<BrickElementBase*>(Trees_pt[i]->object_pt())
+                         ->vertex_node_pt(j);
         tree_assoc_with_vertex_node[nod_pt].insert(i);
       }
     }
@@ -4483,7 +4479,7 @@ namespace oomph
     Vector<std::set<unsigned>> potentially_neighb_tree(numtrees);
 
     // Loop over vertex nodes
-    for (std::map<Node *, std::set<unsigned>>::iterator it =
+    for (std::map<Node*, std::set<unsigned>>::iterator it =
            tree_assoc_with_vertex_node.begin();
          it != tree_assoc_with_vertex_node.end();
          it++)
@@ -4512,7 +4508,7 @@ namespace oomph
     for (unsigned i = 0; i < numtrees; i++)
     {
       // Cast to OcTreeRoot
-      OcTreeRoot *octree_root_i_pt = dynamic_cast<OcTreeRoot *>(Trees_pt[i]);
+      OcTreeRoot* octree_root_i_pt = dynamic_cast<OcTreeRoot*>(Trees_pt[i]);
 
       // Loop over their potential neighbours
       for (std::set<unsigned>::iterator it = potentially_neighb_tree[i].begin();
@@ -4777,7 +4773,7 @@ namespace oomph
     int nnode1d = 0;
     if (numtrees > 0) nnode1d = Trees_pt[0]->object_pt()->nnode_1d();
 
-    OcTreeRoot *neigh_pt = 0;
+    OcTreeRoot* neigh_pt = 0;
 
     // Loop over all the trees
     //------------------------
@@ -5115,7 +5111,7 @@ namespace oomph
       for (int edge = LB; edge <= UF; edge++)
       {
         // Get vector to pointers of edge neighbours
-        Vector<TreeRoot *> edge_neigh_pt = oc_edge_neigh_pt(i, edge);
+        Vector<TreeRoot*> edge_neigh_pt = oc_edge_neigh_pt(i, edge);
 
         // Loop over all edge neighbours
         unsigned n_neigh = edge_neigh_pt.size();
@@ -5182,7 +5178,7 @@ namespace oomph
   {
     // Stick pointers to all nodes into Vector and number elements
     // in the process
-    Vector<Tree *> all_nodes_pt;
+    Vector<Tree*> all_nodes_pt;
     stick_all_tree_nodes_into_vector(all_nodes_pt);
     long int count = 0;
     unsigned long num_nodes = all_nodes_pt.size();
@@ -5248,10 +5244,10 @@ namespace oomph
   /// \c doc_info.is_doc_enabled()=false
   /// no output is created.
   //================================================================
-  void OcTreeForest::check_all_neighbours(DocInfo &doc_info)
+  void OcTreeForest::check_all_neighbours(DocInfo& doc_info)
   {
     // Create vector of all elements in the tree
-    Vector<Tree *> all_tree_nodes_pt;
+    Vector<Tree*> all_tree_nodes_pt;
     this->stick_all_tree_nodes_into_vector(all_tree_nodes_pt);
 
     // Face neighbours
@@ -5392,7 +5388,7 @@ namespace oomph
   /// created in the mesh refinement process.
   ///===============================================================
   void OcTreeForest::open_hanging_node_files(
-    DocInfo &doc_info, Vector<std::ofstream *> &output_stream)
+    DocInfo& doc_info, Vector<std::ofstream*>& output_stream)
   {
     // In 3D, there will be six output files
     for (unsigned i = 0; i < 6; i++)

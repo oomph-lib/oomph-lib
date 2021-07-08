@@ -45,7 +45,7 @@ namespace oomph
   //========================================================================
   template<class ELEMENT>
   void GeompackQuadMesh<ELEMENT>::build_from_scaffold(
-    TimeStepper *time_stepper_pt)
+    TimeStepper* time_stepper_pt)
   {
     // Mesh can only be built with four-noded 2D Qelements.
     MeshChecker::assert_geometric_element<QElementGeometricBase, ELEMENT>(2, 2);
@@ -97,7 +97,7 @@ namespace oomph
       }
     }
 
-    std::map<Node *, unsigned> global_number;
+    std::map<Node*, unsigned> global_number;
     unsigned global_count = 0;
     // Loop over elements in scaffold mesh, visit their nodes
     for (unsigned e = 0; e < nelem; e++)
@@ -106,7 +106,7 @@ namespace oomph
       for (unsigned j = 0; j < nnod_el; j++)
       {
         // Pointer to node in the scaffold mesh
-        Node *scaffold_node_pt = Tmp_mesh_pt->finite_element_pt(e)->node_pt(j);
+        Node* scaffold_node_pt = Tmp_mesh_pt->finite_element_pt(e)->node_pt(j);
 
         // Get the (pseudo-)global node number in scaffold mesh
         // (It's zero [=default] if not visited this one yet)
@@ -133,7 +133,7 @@ namespace oomph
 
           // Get pointer to set of mesh boundaries that this
           // scaffold node occupies; NULL if the node is not on any boundary
-          std::set<unsigned> *boundaries_pt;
+          std::set<unsigned>* boundaries_pt;
           scaffold_node_pt->get_boundaries_pt(boundaries_pt);
 
           // Loop over the mesh boundaries that the node in the scaffold mesh

@@ -66,7 +66,7 @@ public:
 
   /// \short Current position vector to material point at
   /// Lagrangian coordinate xi
-  void position(const Vector<double> &xi, Vector<double> &r) const
+  void position(const Vector<double>& xi, Vector<double>& r) const
   {
     // Position vector
     r[0] = cos(xi[0]);
@@ -76,9 +76,9 @@ public:
   /// \short Parametrised position on object: r(xi). Evaluated at
   /// previous time level. t=0: current time; t>0: previous
   /// time level. Circle is fixed -- simply call the steady version.
-  void position(const unsigned &t,
-                const Vector<double> &xi,
-                Vector<double> &r) const
+  void position(const unsigned& t,
+                const Vector<double>& xi,
+                Vector<double>& r) const
   {
     // Call steady version
     position(xi, r);
@@ -109,15 +109,15 @@ namespace TanhSolnForUnsteadyHeat
   double TanPhi;
 
   /// Position of step (x-axis intercept)
-  double step_position(const double &time)
+  double step_position(const double& time)
   {
     return Beta * tanh(Gamma * cos(0.2E1 * MathematicalConstants::Pi * time));
   }
 
   /// Exact solution as a Vector
-  void get_exact_u(const double &time,
-                   const Vector<double> &x,
-                   Vector<double> &u)
+  void get_exact_u(const double& time,
+                   const Vector<double>& x,
+                   Vector<double>& u)
   {
     double X = x[0];
     double Y = x[1];
@@ -131,7 +131,7 @@ namespace TanhSolnForUnsteadyHeat
   }
 
   /// Exact solution as a scalar
-  void get_exact_u(const double &time, const Vector<double> &x, double &u)
+  void get_exact_u(const double& time, const Vector<double>& x, double& u)
   {
     double X = x[0];
     double Y = x[1];
@@ -145,7 +145,7 @@ namespace TanhSolnForUnsteadyHeat
   }
 
   /// Source function to make it an exact solution
-  void get_source(const double &time, const Vector<double> &x, double &source)
+  void get_source(const double& time, const Vector<double>& x, double& source)
   {
     double X = x[0];
     double Y = x[1];
@@ -202,9 +202,9 @@ namespace TanhSolnForUnsteadyHeat
   }
 
   /// Flux required by the exact solution on a boundary on which y is fixed
-  void prescribed_flux_on_fixed_y_boundary(const double &time,
-                                           const Vector<double> &x,
-                                           double &flux)
+  void prescribed_flux_on_fixed_y_boundary(const double& time,
+                                           const Vector<double>& x,
+                                           double& flux)
   {
     double X = x[0];
     double Y = x[1];
@@ -286,43 +286,43 @@ public:
   /// \short Create UnsteadyHeat flux elements on boundary b of the Mesh pointed
   /// to by bulk_mesh_pt and add them to the Mesh object pointed to by
   /// surface_mesh_pt
-  void create_flux_elements(const unsigned &b,
-                            Mesh *const &bulk_mesh_pt,
-                            Mesh *const &surface_mesh_pt);
+  void create_flux_elements(const unsigned& b,
+                            Mesh* const& bulk_mesh_pt,
+                            Mesh* const& surface_mesh_pt);
 
   /// \short Delete UnsteadyHeat flux elements and wipe the surface mesh
-  void delete_flux_elements(Mesh *const &surface_mesh_pt);
+  void delete_flux_elements(Mesh* const& surface_mesh_pt);
 
   /// Doc the solution
   void doc_solution();
 
   /// \short Dump problem data to allow for later restart
-  void dump_it(ofstream &dump_file);
+  void dump_it(ofstream& dump_file);
 
   /// \short Read problem data for restart
-  void restart(ifstream &restart_file);
+  void restart(ifstream& restart_file);
 
   /// Pointer to bulk mesh
-  RefineableQuarterCircleSectorMesh<ELEMENT> *bulk_mesh_pt()
+  RefineableQuarterCircleSectorMesh<ELEMENT>* bulk_mesh_pt()
   {
     return Bulk_mesh_pt;
   }
 
 private:
   /// Pointer to GeomObject that specifies the domain bondary
-  GeomObject *Boundary_pt;
+  GeomObject* Boundary_pt;
 
   /// Pointer to source function
   UnsteadyHeatEquations<2>::UnsteadyHeatSourceFctPt Source_fct_pt;
 
   /// Pointer to the "bulk" mesh
-  RefineableQuarterCircleSectorMesh<ELEMENT> *Bulk_mesh_pt;
+  RefineableQuarterCircleSectorMesh<ELEMENT>* Bulk_mesh_pt;
 
   /// Pointer to the "surface" mesh
-  Mesh *Surface_mesh_pt;
+  Mesh* Surface_mesh_pt;
 
   /// Pointer to central node (exists at all refinement levels) for doc
-  Node *Doc_node_pt;
+  Node* Doc_node_pt;
 
   /// Doc info object
   DocInfo Doc_info;
@@ -418,7 +418,7 @@ RefineableUnsteadyHeatProblem<ELEMENT>::RefineableUnsteadyHeatProblem(
   build_global_mesh();
 
   // Set error estimator for bulk mesh
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   Bulk_mesh_pt->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Set the boundary conditions for this problem: All nodes are
@@ -441,7 +441,7 @@ RefineableUnsteadyHeatProblem<ELEMENT>::RefineableUnsteadyHeatProblem(
 
   // Extract pointer to the central node (this exists at all refinement levels)
   // for doc of solution
-  FiniteElement *el0_pt = Bulk_mesh_pt->finite_element_pt(0);
+  FiniteElement* el0_pt = Bulk_mesh_pt->finite_element_pt(0);
   unsigned nnod = el0_pt->nnode();
   Doc_node_pt = el0_pt->node_pt(nnod - 1);
 
@@ -456,7 +456,7 @@ RefineableUnsteadyHeatProblem<ELEMENT>::RefineableUnsteadyHeatProblem(
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from FiniteElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(i));
 
     // Set the source function pointer
     el_pt->source_fct_pt() = Source_fct_pt;
@@ -467,8 +467,8 @@ RefineableUnsteadyHeatProblem<ELEMENT>::RefineableUnsteadyHeatProblem(
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to UnsteadyHeat flux element
-    UnsteadyHeatFluxElement<ELEMENT> *el_pt =
-      dynamic_cast<UnsteadyHeatFluxElement<ELEMENT> *>(
+    UnsteadyHeatFluxElement<ELEMENT>* el_pt =
+      dynamic_cast<UnsteadyHeatFluxElement<ELEMENT>*>(
         Surface_mesh_pt->element_pt(e));
 
     // Set the pointer to the prescribed flux function
@@ -513,7 +513,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::actions_before_implicit_timestep()
       unsigned num_nod = Bulk_mesh_pt->nboundary_node(b);
       for (unsigned j = 0; j < num_nod; j++)
       {
-        Node *nod_pt = Bulk_mesh_pt->boundary_node_pt(b, j);
+        Node* nod_pt = Bulk_mesh_pt->boundary_node_pt(b, j);
         double u;
         Vector<double> x(2);
         x[0] = nod_pt->x(0);
@@ -557,8 +557,8 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::actions_after_adapt()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to UnsteadyHeat flux element
-    UnsteadyHeatFluxElement<ELEMENT> *el_pt =
-      dynamic_cast<UnsteadyHeatFluxElement<ELEMENT> *>(
+    UnsteadyHeatFluxElement<ELEMENT>* el_pt =
+      dynamic_cast<UnsteadyHeatFluxElement<ELEMENT>*>(
         Surface_mesh_pt->element_pt(e));
 
     // Set the pointer to the prescribed flux function
@@ -575,7 +575,7 @@ template<class ELEMENT>
 void RefineableUnsteadyHeatProblem<ELEMENT>::set_initial_condition()
 {
   // Pointer to restart file
-  ifstream *restart_file_pt = 0;
+  ifstream* restart_file_pt = 0;
 
   // Restart?
   //---------
@@ -834,7 +834,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::doc_solution()
 //=======================================================================
 template<class ELEMENT>
 void RefineableUnsteadyHeatProblem<ELEMENT>::create_flux_elements(
-  const unsigned &b, Mesh *const &bulk_mesh_pt, Mesh *const &surface_mesh_pt)
+  const unsigned& b, Mesh* const& bulk_mesh_pt, Mesh* const& surface_mesh_pt)
 {
   // How many bulk elements are adjacent to boundary b?
   unsigned n_element = bulk_mesh_pt->nboundary_element(b);
@@ -843,14 +843,14 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::create_flux_elements(
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    ELEMENT *bulk_elem_pt =
-      dynamic_cast<ELEMENT *>(bulk_mesh_pt->boundary_element_pt(b, e));
+    ELEMENT* bulk_elem_pt =
+      dynamic_cast<ELEMENT*>(bulk_mesh_pt->boundary_element_pt(b, e));
 
     // Find the index of the face of element e along boundary b
     int face_index = bulk_mesh_pt->face_index_at_boundary(b, e);
 
     // Build the corresponding prescribed-flux element
-    UnsteadyHeatFluxElement<ELEMENT> *flux_element_pt =
+    UnsteadyHeatFluxElement<ELEMENT>* flux_element_pt =
       new UnsteadyHeatFluxElement<ELEMENT>(bulk_elem_pt, face_index);
 
     // Add the prescribed-flux element to the surface mesh
@@ -865,7 +865,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::create_flux_elements(
 //=======================================================================
 template<class ELEMENT>
 void RefineableUnsteadyHeatProblem<ELEMENT>::delete_flux_elements(
-  Mesh *const &surface_mesh_pt)
+  Mesh* const& surface_mesh_pt)
 {
   // How many surface elements are in the surface mesh
   unsigned n_element = surface_mesh_pt->nelement();
@@ -886,7 +886,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::delete_flux_elements(
 /// Dump the solution to disk
 //========================================================================
 template<class ELEMENT>
-void RefineableUnsteadyHeatProblem<ELEMENT>::dump_it(ofstream &dump_file)
+void RefineableUnsteadyHeatProblem<ELEMENT>::dump_it(ofstream& dump_file)
 {
   // Dump the refinement pattern and the generic problem data
   Problem::dump(dump_file);
@@ -897,7 +897,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::dump_it(ofstream &dump_file)
 /// Read solution from disk
 //========================================================================
 template<class ELEMENT>
-void RefineableUnsteadyHeatProblem<ELEMENT>::restart(ifstream &restart_file)
+void RefineableUnsteadyHeatProblem<ELEMENT>::restart(ifstream& restart_file)
 {
   // Refine the mesh and read in the generic problem data
   Problem::read(restart_file);
@@ -913,7 +913,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::restart(ifstream &restart_file)
 /// with mesh adaptation. Command line arguments specify
 /// the name of the restart file.
 //========================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

@@ -505,7 +505,7 @@ public:
     unsigned n_bound = mesh_pt()->nboundary_node(0);
     for (unsigned n = 0; n < n_bound; ++n)
     {
-      Node *nod_pt = mesh_pt()->boundary_node_pt(0, n);
+      Node* nod_pt = mesh_pt()->boundary_node_pt(0, n);
       double x = nod_pt->x(0);
       double y = nod_pt->x(1);
       double z = nod_pt->x(2);
@@ -567,7 +567,7 @@ public:
     for (unsigned i = 0; i < n_element; i++)
     {
       // Upcast from GeneralElement to the present element
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
       // Set the source function pointer
       el_pt->re_pt() = &Global_Parameters::Re;
@@ -592,7 +592,7 @@ public:
       unsigned num_nod = mesh_pt()->nboundary_node(ibound);
       for (unsigned inod = 0; inod < num_nod; inod++)
       {
-        Node *nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
+        Node* nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
         for (unsigned i = 0; i < final_index; ++i)
         {
           nod_pt->set_value(i, 0.0);
@@ -608,7 +608,7 @@ public:
       unsigned num_nod = mesh_pt()->nboundary_node(6);
       for (unsigned inod = 0; inod < num_nod; inod++)
       {
-        Node *nod_pt = mesh_pt()->boundary_node_pt(6, inod);
+        Node* nod_pt = mesh_pt()->boundary_node_pt(6, inod);
         double x = nod_pt->x(0);
         double y = nod_pt->x(1);
         double u =
@@ -623,13 +623,13 @@ public:
   void actions_after_newton_solve() {}
 
   // Access function for the specific mesh
-  RefineableTetgenMesh<ELEMENT> *mesh_pt()
+  RefineableTetgenMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<RefineableTetgenMesh<ELEMENT> *>(Problem::mesh_pt());
+    return dynamic_cast<RefineableTetgenMesh<ELEMENT>*>(Problem::mesh_pt());
   }
 
   /// Doc the solution
-  void doc_solution(const unsigned &nplot, DocInfo &doc_info);
+  void doc_solution(const unsigned& nplot, DocInfo& doc_info);
 
   /// Calculate the fluid dissipation
   double get_dissipation()
@@ -639,7 +639,7 @@ public:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Cast to a fluid element
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(this->mesh_pt()->element_pt(e));
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->mesh_pt()->element_pt(e));
       // Add to the dissipation
       dissipation += el_pt->dissipation();
     }
@@ -647,9 +647,9 @@ public:
   }
 
   /// Storage for the outer boundary object
-  TetMeshFacetedClosedSurface *Outer_boundary_pt;
+  TetMeshFacetedClosedSurface* Outer_boundary_pt;
 
-  Vector<TetMeshFacetedSurface *> Inner_boundary_pt;
+  Vector<TetMeshFacetedSurface*> Inner_boundary_pt;
 };
 
 //========================================================================
@@ -677,7 +677,7 @@ FallingBlockProblem<ELEMENT>::FallingBlockProblem()
     Outer_boundary_pt, Inner_boundary_pt, 2.0, this->time_stepper_pt(), true);
 
   // Set error estimator for bulk mesh
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   mesh_pt()->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Set targets for spatial adaptivity
@@ -724,7 +724,7 @@ FallingBlockProblem<ELEMENT>::FallingBlockProblem()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the source function pointer
     el_pt->re_pt() = &Global_Parameters::Re;
@@ -749,8 +749,8 @@ FallingBlockProblem<ELEMENT>::FallingBlockProblem()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void FallingBlockProblem<ELEMENT>::doc_solution(const unsigned &nplot,
-                                                DocInfo &doc_info)
+void FallingBlockProblem<ELEMENT>::doc_solution(const unsigned& nplot,
+                                                DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -762,7 +762,7 @@ void FallingBlockProblem<ELEMENT>::doc_solution(const unsigned &nplot,
           doc_info.directory().c_str(),
           doc_info.number());
   some_file.open(filename);
-  FiniteElement *el_pt = mesh_pt()->finite_element_pt(0);
+  FiniteElement* el_pt = mesh_pt()->finite_element_pt(0);
   unsigned nnode = el_pt->nnode();
   unsigned ndim = el_pt->node_pt(0)->ndim();
   for (unsigned j = 0; j < nnode; j++)
@@ -798,7 +798,7 @@ void FallingBlockProblem<ELEMENT>::doc_solution(const unsigned &nplot,
 //========================================================================
 /// Demonstrate how to solve Poisson problem
 //========================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Label for output
   DocInfo doc_info;

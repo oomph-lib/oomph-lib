@@ -68,13 +68,13 @@ namespace oomph
     FSIFluidElement() : FiniteElement() {}
 
     /// Broken copy constructor
-    FSIFluidElement(const FSIFluidElement &)
+    FSIFluidElement(const FSIFluidElement&)
     {
       BrokenCopy::broken_copy("FSIFluidElement");
     }
 
     /// Broken assignment operator
-    void operator=(const FSIFluidElement &)
+    void operator=(const FSIFluidElement&)
     {
       BrokenCopy::broken_assign("FSIFluidElement");
     }
@@ -82,9 +82,9 @@ namespace oomph
     /// \short Compute the load vector that is applied by current
     /// element (at its local coordinate s) onto the adjacent
     /// SolidElement. N is the outer unit normal on the FSIFluidElement.
-    virtual void get_load(const Vector<double> &s,
-                          const Vector<double> &N,
-                          Vector<double> &load) = 0;
+    virtual void get_load(const Vector<double>& s,
+                          const Vector<double>& N,
+                          Vector<double>& load) = 0;
 
     /// \short Add to the set \c paired_load_data pairs containing
     /// - the pointer to a Data object
@@ -94,7 +94,7 @@ namespace oomph
     /// for all values (pressures, velocities) that affect the
     /// load computed in the \c get_load(...) function.
     virtual void identify_load_data(
-      std::set<std::pair<Data *, unsigned>> &paired_load_data) = 0;
+      std::set<std::pair<Data*, unsigned>>& paired_load_data) = 0;
 
     /// \short Add to the set \c paired_pressure_data pairs containing
     /// - the pointer to a Data object
@@ -104,7 +104,7 @@ namespace oomph
     /// for all pressure values that affect the load
     /// computed in the \c get_load(...) function.
     virtual void identify_pressure_data(
-      std::set<std::pair<Data *, unsigned>> &paired_pressure_data) = 0;
+      std::set<std::pair<Data*, unsigned>>& paired_pressure_data) = 0;
   };
 
   /////////////////////////////////////////////////////////////////////////////
@@ -206,8 +206,8 @@ namespace oomph
     /// built up incrementally as we descend through the
     /// call hierarchy of this function when called from
     /// Problem::describe_dofs(...)
-    void describe_local_dofs(std::ostream &out,
-                             const std::string &current_string) const;
+    void describe_local_dofs(std::ostream& out,
+                             const std::string& current_string) const;
 
     /// Static flag that allows the suppression of warning messages
     static bool Dont_warn_about_missing_adjacent_fluid_elements;
@@ -222,13 +222,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    FSIWallElement(const FSIWallElement &)
+    FSIWallElement(const FSIWallElement&)
     {
       BrokenCopy::broken_copy("FSIWallElement");
     }
 
     /// Broken assignment operator
-    void operator=(const FSIWallElement &)
+    void operator=(const FSIWallElement&)
     {
       BrokenCopy::broken_assign("FSIWallElement");
     }
@@ -241,22 +241,22 @@ namespace oomph
     /// number of local coordinates required to parametrise
     /// the wall element. E.g. for a FSIKirchhoffLoveBeam,
     /// bounding a 2D fluid domain ndim_fluid=2 and nlagr_solid=1
-    void setup_fsi_wall_element(const unsigned &nlagr_solid,
-                                const unsigned &ndim_fluid);
+    void setup_fsi_wall_element(const unsigned& nlagr_solid,
+                                const unsigned& ndim_fluid);
 
     /// \short Return the ratio of the stress scales used to non-dimensionalise
     /// the fluid and solid equations. E.g. \f$ Q = \mu U/(LE) \f$
     /// if the fluid mechanics stresses (pressures) are scaled on the
     /// viscous scale \f$ \mu U / L\f$ and the solid mechanics stresses
     /// on the solid's Young's modulus \f$ E \f$.
-    const double &q() const
+    const double& q() const
     {
       return *Q_pt;
     }
 
     /// \short Return a pointer the ratio of stress scales used to
     /// non-dimensionalise the fluid and solid equations.
-    double *&q_pt()
+    double*& q_pt()
     {
       return Q_pt;
     }
@@ -326,8 +326,8 @@ namespace oomph
     /// Fill in the element's contribution to the Jacobian matrix
     /// and the residual vector: Done by finite differencing the
     /// residual vector w.r.t. all nodal, internal, external and load Data.
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       // Add the contribution to the residuals
       fill_in_contribution_to_residuals(residuals);
@@ -355,7 +355,7 @@ namespace oomph
 
   protected:
     /// \short After an internal data change, update the nodal positions
-    inline void update_in_internal_fd(const unsigned &i)
+    inline void update_in_internal_fd(const unsigned& i)
     {
       if (!Ignore_shear_stress_in_jacobian)
       {
@@ -364,7 +364,7 @@ namespace oomph
     }
 
     // Do nothing
-    inline void reset_in_internal_fd(const unsigned &i) {}
+    inline void reset_in_internal_fd(const unsigned& i) {}
 
     // After all internal stuff reset
     inline void reset_after_internal_fd()
@@ -376,7 +376,7 @@ namespace oomph
     }
 
     /// \short After an external data change, update the nodal positions
-    inline void update_in_external_fd(const unsigned &i)
+    inline void update_in_external_fd(const unsigned& i)
     {
       if (!Ignore_shear_stress_in_jacobian)
       {
@@ -385,7 +385,7 @@ namespace oomph
     }
 
     // Do nothing
-    inline void reset_in_external_fd(const unsigned &i) {}
+    inline void reset_in_external_fd(const unsigned& i) {}
 
     // After all external stuff reset
     inline void reset_after_external_fd()
@@ -397,7 +397,7 @@ namespace oomph
     }
 
     /// \short After a nodal data change, update the nodal positions
-    inline void update_in_nodal_fd(const unsigned &i)
+    inline void update_in_nodal_fd(const unsigned& i)
     {
       if (!Ignore_shear_stress_in_jacobian)
       {
@@ -406,7 +406,7 @@ namespace oomph
     }
 
     // Do nothing
-    inline void reset_in_nodal_fd(const unsigned &i) {}
+    inline void reset_in_nodal_fd(const unsigned& i) {}
 
     // After all nodal stuff reset
     inline void reset_after_nodal_fd()
@@ -418,7 +418,7 @@ namespace oomph
     }
 
     /// \short After an external field data change, update the nodal positions
-    inline void update_in_external_interaction_field_fd(const unsigned &i)
+    inline void update_in_external_interaction_field_fd(const unsigned& i)
     {
       if (!Ignore_shear_stress_in_jacobian)
       {
@@ -427,7 +427,7 @@ namespace oomph
     }
 
     // Do nothing
-    inline void reset_in_external_interaction_field_fd(const unsigned &i) {}
+    inline void reset_in_external_interaction_field_fd(const unsigned& i) {}
 
     // After all external field stuff reset
     inline void reset_after_external_interaction_field_fd()
@@ -440,7 +440,7 @@ namespace oomph
 
     /// \short After an external geometric data change, update the nodal
     /// positions
-    inline void update_in_external_interaction_geometric_fd(const unsigned &i)
+    inline void update_in_external_interaction_geometric_fd(const unsigned& i)
     {
       if (!Ignore_shear_stress_in_jacobian)
       {
@@ -449,7 +449,7 @@ namespace oomph
     }
 
     // Do nothing
-    inline void reset_in_external_interaction_geometric_fd(const unsigned &i) {}
+    inline void reset_in_external_interaction_geometric_fd(const unsigned& i) {}
 
     // After all external geometric stuff reset
     inline void reset_after_external_interaction_geometric_fd()
@@ -461,7 +461,7 @@ namespace oomph
     }
 
     /// \short After an internal data change, update the nodal positions
-    inline void update_in_solid_position_fd(const unsigned &i)
+    inline void update_in_solid_position_fd(const unsigned& i)
     {
       if (!Ignore_shear_stress_in_jacobian)
       {
@@ -470,7 +470,7 @@ namespace oomph
     }
 
     // Do nothing
-    inline void reset_in_solid_position_fd(const unsigned &i) {}
+    inline void reset_in_solid_position_fd(const unsigned& i) {}
 
     // After all internal stuff reset
     inline void reset_after_solid_position_fd()
@@ -503,9 +503,9 @@ namespace oomph
     /// i.e. it is obtained by computing the traction (on the fluid
     /// stress-scale) from the adjacent fluid element and then multiplying it by
     /// the stress-scale-ratio \f$ Q. \f$.
-    void fluid_load_vector(const unsigned &intpt,
-                           const Vector<double> &N,
-                           Vector<double> &load);
+    void fluid_load_vector(const unsigned& intpt,
+                           const Vector<double>& N,
+                           Vector<double>& load);
 
   private:
     /// \short Overload the function that must return all field data involved
@@ -513,14 +513,14 @@ namespace oomph
     /// the velocity degrees of freedom to be ignored if we want to
     /// ignore the shear stresses when computing the Jacobian.
     void identify_all_field_data_for_external_interaction(
-      Vector<std::set<FiniteElement *>> const &external_elements_pt,
-      std::set<std::pair<Data *, unsigned>> &paired_iteraction_data);
+      Vector<std::set<FiniteElement*>> const& external_elements_pt,
+      std::set<std::pair<Data*, unsigned>>& paired_iteraction_data);
 
     /// \short Function that must return all geometric data involved
     /// in the desired interactions from the external element
     void identify_all_geometric_data_for_external_interaction(
-      Vector<std::set<FiniteElement *>> const &external_elements_pt,
-      std::set<Data *> &external_geometric_data_pt);
+      Vector<std::set<FiniteElement*>> const& external_elements_pt,
+      std::set<Data*>& external_geometric_data_pt);
 
     /// \short Static default value for the ratio of stress scales
     /// used in the fluid and solid equations (default is 1.0)
@@ -536,7 +536,7 @@ namespace oomph
     /// \short Pointer to the ratio, \f$ Q \f$ , of the stress used to
     /// non-dimensionalise the fluid stresses to the stress used to
     /// non-dimensionalise the solid stresses.
-    double *Q_pt;
+    double* Q_pt;
 
     /// \short Set this flag to true to ignore shear stress component
     /// of load when calculating the Jacobian, i.e. to ignore
@@ -564,7 +564,7 @@ namespace oomph
     /// existing Navier-Stokes elements. If you use any others,
     /// use this function at your own risk.
     //============================================================================
-    extern void apply_no_slip_on_moving_wall(Node *node_pt);
+    extern void apply_no_slip_on_moving_wall(Node* node_pt);
 
     //============================================================================
     /// \short Strouhal number St = a/(UT) for application of no slip condition.
@@ -594,11 +594,11 @@ namespace oomph
     //============================================================================
     template<class FLUID_ELEMENT, unsigned DIM_FLUID>
     void setup_fluid_load_info_for_solid_elements(
-      Problem *problem_pt,
-      Vector<unsigned> &boundary_in_fluid_mesh,
-      Mesh *const &fluid_mesh_pt,
-      Vector<Mesh *> &solid_mesh_pt,
-      const unsigned &face = 0)
+      Problem* problem_pt,
+      Vector<unsigned>& boundary_in_fluid_mesh,
+      Mesh* const& fluid_mesh_pt,
+      Vector<Mesh*>& solid_mesh_pt,
+      const unsigned& face = 0)
     {
       // Thin wrapper to multi-domain function
       Multi_domain_functions::setup_bulk_elements_adjacent_to_face_mesh<
@@ -625,11 +625,11 @@ namespace oomph
     //============================================================================
     template<class FLUID_ELEMENT, unsigned DIM_FLUID>
     void setup_fluid_load_info_for_solid_elements(
-      Problem *problem_pt,
-      const unsigned &boundary_in_fluid_mesh,
-      Mesh *const &fluid_mesh_pt,
-      Mesh *const &solid_mesh_pt,
-      const unsigned &face = 0)
+      Problem* problem_pt,
+      const unsigned& boundary_in_fluid_mesh,
+      Mesh* const& fluid_mesh_pt,
+      Mesh* const& solid_mesh_pt,
+      const unsigned& face = 0)
     {
       // Thin wrapper to multi-domain function
       Multi_domain_functions::setup_bulk_elements_adjacent_to_face_mesh<
@@ -657,10 +657,10 @@ namespace oomph
     //============================================================================
     template<class SOLID_ELEMENT, unsigned DIM_SOLID>
     void setup_solid_elements_for_displacement_bc(
-      Problem *problem_pt,
-      const Vector<unsigned> &b_solid_fsi,
-      Mesh *const &solid_mesh_pt,
-      Vector<Mesh *> &lagrange_multiplier_mesh_pt)
+      Problem* problem_pt,
+      const Vector<unsigned>& b_solid_fsi,
+      Mesh* const& solid_mesh_pt,
+      Vector<Mesh*>& lagrange_multiplier_mesh_pt)
     {
       // Thin wrapper to multi-domain function
       Multi_domain_functions::setup_bulk_elements_adjacent_to_face_mesh<
@@ -683,10 +683,10 @@ namespace oomph
     //============================================================================
     template<class SOLID_ELEMENT, unsigned DIM_SOLID>
     void setup_solid_elements_for_displacement_bc(
-      Problem *problem_pt,
-      const unsigned &b_solid_fsi,
-      Mesh *const &solid_mesh_pt,
-      Mesh *const &lagrange_multiplier_mesh_pt)
+      Problem* problem_pt,
+      const unsigned& b_solid_fsi,
+      Mesh* const& solid_mesh_pt,
+      Mesh* const& lagrange_multiplier_mesh_pt)
     {
       // Thin wrapper to multi-domain function
       Multi_domain_functions::setup_bulk_elements_adjacent_to_face_mesh<
@@ -713,9 +713,9 @@ namespace oomph
     /// to implement the node update strategy.
     //============================================================================
     template<class NODE>
-    void doc_fsi(Mesh *fluid_mesh_pt,
-                 SolidMesh *wall_mesh_pt,
-                 DocInfo &doc_info)
+    void doc_fsi(Mesh* fluid_mesh_pt,
+                 SolidMesh* wall_mesh_pt,
+                 DocInfo& doc_info)
     {
       std::ofstream some_file;
       std::ostringstream filename;
@@ -745,7 +745,7 @@ namespace oomph
       //------------------------------------------------------------
       // the nodes
       //----------
-      std::map<Data *, Node *> solid_node_pt;
+      std::map<Data*, Node*> solid_node_pt;
       unsigned nnod = wall_mesh_pt->nnode();
       for (unsigned j = 0; j < nnod; j++)
       {
@@ -758,7 +758,7 @@ namespace oomph
       //-------------------------------------------------------------------------
       // those fluid elements
       //---------------------
-      std::map<Data *, FiniteElement *> internal_data_element_pt;
+      std::map<Data*, FiniteElement*> internal_data_element_pt;
       unsigned nelemf = fluid_mesh_pt->nelement();
       for (unsigned e = 0; e < nelemf; e++)
       {
@@ -787,7 +787,7 @@ namespace oomph
             internal_data_element_pt[fluid_mesh_pt
                                        ->external_halo_element_pt(d, e)
                                        ->internal_data_pt(k)] =
-              dynamic_cast<FiniteElement *>(
+              dynamic_cast<FiniteElement*>(
                 fluid_mesh_pt->external_halo_element_pt(d, e));
           }
         }
@@ -807,8 +807,8 @@ namespace oomph
         some_file.open(filename.str().c_str());
 
         // Get pointer to wall element
-        FSIWallElement *el_pt =
-          dynamic_cast<FSIWallElement *>(wall_mesh_pt->finite_element_pt(e));
+        FSIWallElement* el_pt =
+          dynamic_cast<FSIWallElement*>(wall_mesh_pt->finite_element_pt(e));
 
 #ifdef OOMPH_HAS_MPI
         // If it's a halo element then it will not have set an adjacent
@@ -825,8 +825,7 @@ namespace oomph
 
           // Map to indicate if the internal Data for a given
           // fluid element has been plotted already
-          std::map<FiniteElement *, bool>
-            element_internal_data_has_been_plotted;
+          std::map<FiniteElement*, bool> element_internal_data_has_been_plotted;
 
           // Loop over Gauss points and doc their position
           //-----------------------------------------------
@@ -862,7 +861,7 @@ namespace oomph
             for (unsigned i = 0; i < nint; i++)
             {
               // Get corresponding fluid element
-              FSIFluidElement *fluid_el_pt = dynamic_cast<FSIFluidElement *>(
+              FSIFluidElement* fluid_el_pt = dynamic_cast<FSIFluidElement*>(
                 el_pt->external_element_pt(face, i));
 
               // Get local coordinates in fluid element by copy operation
@@ -882,10 +881,10 @@ namespace oomph
           // Get the multiplicity of data that affects the load on this wall
           // element
           //------------------------------------------------------------------------
-          std::map<Data *, unsigned> data_count;
-          std::map<FiniteElement *, unsigned> internal_data_count;
+          std::map<Data*, unsigned> data_count;
+          std::map<FiniteElement*, unsigned> internal_data_count;
           {
-            Vector<Data *> external_interaction_field_data_pt(
+            Vector<Data*> external_interaction_field_data_pt(
               el_pt->external_interaction_field_data_pt());
             unsigned nexternal_interaction_field =
               external_interaction_field_data_pt.size();
@@ -903,7 +902,7 @@ namespace oomph
           }
 
           {
-            Vector<Data *> external_interaction_geometric_data_pt(
+            Vector<Data*> external_interaction_geometric_data_pt(
               el_pt->external_interaction_geometric_data_pt());
             unsigned nexternal_interaction_geom =
               external_interaction_geometric_data_pt.size();
@@ -922,15 +921,15 @@ namespace oomph
 
           // Loop over unique data entries
           //------------------------------
-          for (std::map<Data *, unsigned>::iterator it = data_count.begin();
+          for (std::map<Data*, unsigned>::iterator it = data_count.begin();
                it != data_count.end();
                it++)
           {
-            Data *unique_data_pt = it->first;
+            Data* unique_data_pt = it->first;
 
             // Try to cast to a Node
             //----------------------
-            Node *node_pt = dynamic_cast<Node *>(unique_data_pt);
+            Node* node_pt = dynamic_cast<Node*>(unique_data_pt);
             if (node_pt == 0)
             {
               // Is it a solid node? NOTE: This query makes sense as we're
@@ -961,7 +960,7 @@ namespace oomph
                 {
                   some_file << "TEXT ";
                   // Pointer to fluid element that contains this internal data
-                  FiniteElement *fluid_el_pt =
+                  FiniteElement* fluid_el_pt =
                     internal_data_element_pt[unique_data_pt];
 
                   // Get the plot coordinates in this element: centre + a bit of
@@ -1036,7 +1035,7 @@ namespace oomph
       for (unsigned j = 0; j < nnode_fluid; j++)
       {
         // Upcast node to appropriate type
-        NODE *node_pt = dynamic_cast<NODE *>(fluid_mesh_pt->node_pt(j));
+        NODE* node_pt = dynamic_cast<NODE*>(fluid_mesh_pt->node_pt(j));
 
         unsigned ndim_eulerian = node_pt->ndim();
 
@@ -1053,11 +1052,11 @@ namespace oomph
         some_file << std::endl;
 
         // Extract geom objects that affect the nodal position
-        Vector<GeomObject *> geom_obj_pt(node_pt->vector_geom_object_pt());
+        Vector<GeomObject*> geom_obj_pt(node_pt->vector_geom_object_pt());
 
         // Get the multiplicity of data that affects this node
         //----------------------------------------------------
-        std::map<Data *, unsigned> data_count;
+        std::map<Data*, unsigned> data_count;
         unsigned ngeom = geom_obj_pt.size();
         for (unsigned i = 0; i < ngeom; i++)
         {
@@ -1073,11 +1072,11 @@ namespace oomph
 
         // Loop over unique data entries
         //------------------------------
-        for (std::map<Data *, unsigned>::iterator it = data_count.begin();
+        for (std::map<Data*, unsigned>::iterator it = data_count.begin();
              it != data_count.end();
              it++)
         {
-          Data *unique_data_pt = it->first;
+          Data* unique_data_pt = it->first;
 
           // Is it a solid node?
           if (solid_node_pt[unique_data_pt] != 0)

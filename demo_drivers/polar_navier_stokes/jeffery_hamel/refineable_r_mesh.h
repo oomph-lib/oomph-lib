@@ -41,11 +41,11 @@ namespace oomph
   {
   protected:
     // Storage for pointers to fluid elements
-    Vector<GeneralisedElement *> Fluid_elt_pt;
+    Vector<GeneralisedElement*> Fluid_elt_pt;
 
   public:
     /// Return  pointer to fluid element e
-    ELEMENT *fluid_elt_pt(unsigned e)
+    ELEMENT* fluid_elt_pt(unsigned e)
     {
       return Fluid_elt_pt[e];
     }
@@ -55,14 +55,14 @@ namespace oomph
       return Fluid_elt_pt.size();
     }
     /// Return pointer to vector of all Fluid elements
-    Vector<GeneralisedElement *> fluid_elt_vector()
+    Vector<GeneralisedElement*> fluid_elt_vector()
     {
       return Fluid_elt_pt;
     }
 
     /// \short Constructor, which "builds" the mesh. The arguments are the
     /// number of elements in each direction.
-    Refineable_r_mesh(const unsigned int &nx, const unsigned int &ny) :
+    Refineable_r_mesh(const unsigned int& nx, const unsigned int& ny) :
       RectangularQuadMesh<ELEMENT>(nx,
                                    ny,
                                    Global_Physical_Variables::R_l,
@@ -150,17 +150,17 @@ namespace oomph
 
     } // End of stretch mesh
 
-    double log_spacing(const double &r,
-                       const double &a,
-                       const double &b,
+    double log_spacing(const double& r,
+                       const double& a,
+                       const double& b,
                        double R_min)
     {
       return R_min * exp(((r - R_min) / (a - R_min)) * log(b / R_min));
     }
 
-    double linear_spacing(const double &r,
-                          const double &a,
-                          const double &b,
+    double linear_spacing(const double& r,
+                          const double& a,
+                          const double& b,
                           double R_max)
     {
       if ((R_max - a) < 1.e-14)

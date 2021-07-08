@@ -58,19 +58,19 @@ public:
   /// Nevertheless we keep nx, ny, nz making reference
   //   to the elements in each direction of each cubic mesh
 
-  STSpineMesh(const unsigned int &nel_can,
-              const unsigned int &nel,
-              const unsigned int &nel_liq,
-              const double &alpha,
-              const double &length_can,
-              const double &length_tip,
-              const double &length_liq,
-              const double &height,
-              const double &radius,
-              TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper);
+  STSpineMesh(const unsigned int& nel_can,
+              const unsigned int& nel,
+              const unsigned int& nel_liq,
+              const double& alpha,
+              const double& length_can,
+              const double& length_tip,
+              const double& length_liq,
+              const double& height,
+              const double& radius,
+              TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
   /// Access functions for pointers to interface elements
-  FiniteElement *&interface_element_pt(const unsigned long &i)
+  FiniteElement*& interface_element_pt(const unsigned long& i)
   {
     return Interface_element_pt[i];
   }
@@ -82,7 +82,7 @@ public:
   }
 
   /// Access functions for pointers to interface line elements
-  FiniteElement *&interface_line_element_pt(const unsigned long &i)
+  FiniteElement*& interface_line_element_pt(const unsigned long& i)
   {
     return Interface_line_element_pt[i];
   }
@@ -94,7 +94,7 @@ public:
   }
 
   /// Access functions for pointers to elements in bulk
-  FiniteElement *&bulk_element_pt(const unsigned long &i)
+  FiniteElement*& bulk_element_pt(const unsigned long& i)
   {
     return Bulk_element_pt[i];
   }
@@ -107,7 +107,7 @@ public:
 
   // /Access functions for pointers to elements in the outlet (here identified
   // as boundary 3)
-  FiniteElement *&bulk_outlet_element_pt(const unsigned long &i)
+  FiniteElement*& bulk_outlet_element_pt(const unsigned long& i)
   {
     return Bulk_outlet_element_pt[i];
   }
@@ -120,7 +120,7 @@ public:
 
   // /Access functions for pointers to elements in the inlet (here identified as
   // boundary 1)
-  FiniteElement *&bulk_inlet_element_pt(const unsigned long &i)
+  FiniteElement*& bulk_inlet_element_pt(const unsigned long& i)
   {
     return Bulk_inlet_element_pt[i];
   }
@@ -161,7 +161,7 @@ public:
      spine_node_pt->x(2) = 0.0 + W*H;
      }*/
 
-  void full_output(std::ostream &outfile, const unsigned &n_plot)
+  void full_output(std::ostream& outfile, const unsigned& n_plot)
   {
     // Loop over the elements and call their output functions
     // Assign Element_pt_range
@@ -169,8 +169,8 @@ public:
     for (unsigned long e = 0; e < Element_pt_range; e++)
     {
       // Try to cast to Navier Stokes Element
-      NavierStokesEquations<3> *el_pt =
-        dynamic_cast<NavierStokesEquations<3> *>(Bulk_element_pt[e]);
+      NavierStokesEquations<3>* el_pt =
+        dynamic_cast<NavierStokesEquations<3>*>(Bulk_element_pt[e]);
       if (el_pt == 0)
       {
         oomph_info << "Can't execute output(...) for non Navier Stokes Elements"
@@ -183,7 +183,7 @@ public:
     }
   }
 
-  void surface_output(std::ostream &outfile, const unsigned &n_plot)
+  void surface_output(std::ostream& outfile, const unsigned& n_plot)
   {
     // Loop over the elements and call their output functions
     // Assign Element_pt_range
@@ -191,8 +191,8 @@ public:
     for (unsigned long e = 0; e < Element_pt_range; e++)
     {
       // Try to cast to Navier Stokes Element
-      FiniteElement *el_pt =
-        dynamic_cast<FiniteElement *>(Interface_element_pt[e]);
+      FiniteElement* el_pt =
+        dynamic_cast<FiniteElement*>(Interface_element_pt[e]);
       if (el_pt == 0)
       {
         oomph_info
@@ -206,7 +206,7 @@ public:
     }
   }
 
-  virtual void spine_node_update(SpineNode *spine_node_pt)
+  virtual void spine_node_update(SpineNode* spine_node_pt)
   {
     // Get de flag
     unsigned flag = spine_node_pt->node_update_fct_id();
@@ -289,36 +289,36 @@ protected:
   int Face_index_inlet;
 
   /// Vector of pointers to element in the fluid layer
-  Vector<FiniteElement *> Bulk_element_pt;
+  Vector<FiniteElement*> Bulk_element_pt;
 
   /// Vector of pointers to interface elements
-  Vector<FiniteElement *> Interface_element_pt;
+  Vector<FiniteElement*> Interface_element_pt;
 
   /// Vector of pointers to the bulk outlet elements in the fluid layer
-  Vector<FiniteElement *> Bulk_outlet_element_pt;
+  Vector<FiniteElement*> Bulk_outlet_element_pt;
 
   /// Vector of pointers to the bulk inlet elements in the fluid layer
-  Vector<FiniteElement *> Bulk_inlet_element_pt;
+  Vector<FiniteElement*> Bulk_inlet_element_pt;
 
   // Vector of pointers to the surface elements which will generate the
   // LinContElement
-  Vector<FiniteElement *> Interface_line_element_pt;
+  Vector<FiniteElement*> Interface_line_element_pt;
 
   /// \short Helper function to actually build the single-layer spine mesh
   /// (called from various constructors)
-  virtual void build_single_layer_mesh(TimeStepper *time_stepper_pt);
+  virtual void build_single_layer_mesh(TimeStepper* time_stepper_pt);
 
   // add side_mesh to the problem mesh
   void add_side_spinemesh(
     unsigned int bound1,
-    CombTipSpineMesh<ELEMENT, INTERFACE_ELEMENT> *addmesh_pt,
-    int *addmesh_map_boundary,
+    CombTipSpineMesh<ELEMENT, INTERFACE_ELEMENT>* addmesh_pt,
+    int* addmesh_map_boundary,
     int total_boundaries,
     unsigned flag);
 
   void add_mesh(unsigned int bound1,
-                Mesh *addmesh_pt,
-                int *addmesh_map_boundary,
+                Mesh* addmesh_pt,
+                int* addmesh_map_boundary,
                 int total_boundaries,
                 unsigned spine_flag);
 };
@@ -332,16 +332,16 @@ protected:
 //===========================================================================
 template<class ELEMENT, class INTERFACE_ELEMENT>
 STSpineMesh<ELEMENT, INTERFACE_ELEMENT>::STSpineMesh(
-  const unsigned int &nel_can,
-  const unsigned int &nel,
-  const unsigned int &nel_liq,
-  const double &alpha,
-  const double &length_can,
-  const double &length_tip,
-  const double &length_liq,
-  const double &height,
-  const double &radius,
-  TimeStepper *time_stepper_pt) :
+  const unsigned int& nel_can,
+  const unsigned int& nel,
+  const unsigned int& nel_liq,
+  const double& alpha,
+  const double& length_can,
+  const double& length_tip,
+  const double& length_liq,
+  const double& height,
+  const double& radius,
+  TimeStepper* time_stepper_pt) :
   Nel_can(nel_can),
   Nel(nel),
   Nel_liq(nel_liq),
@@ -368,7 +368,7 @@ STSpineMesh<ELEMENT, INTERFACE_ELEMENT>::STSpineMesh(
 //===========================================================================
 template<class ELEMENT, class INTERFACE_ELEMENT>
 void STSpineMesh<ELEMENT, INTERFACE_ELEMENT>::build_single_layer_mesh(
-  TimeStepper *time_stepper_pt)
+  TimeStepper* time_stepper_pt)
 {
   // Axis pf simmetry
   Xsim = 0.0;
@@ -376,7 +376,7 @@ void STSpineMesh<ELEMENT, INTERFACE_ELEMENT>::build_single_layer_mesh(
   Zsim = 1.0 * Height / 2;
 
   // Build first canion mesh with flag 0
-  CombCanSpineMesh<ELEMENT, INTERFACE_ELEMENT> *mesh1_pt =
+  CombCanSpineMesh<ELEMENT, INTERFACE_ELEMENT>* mesh1_pt =
     new CombCanSpineMesh<ELEMENT, INTERFACE_ELEMENT>(
       Nel, Nel_can, Alpha, Length_can, Height, Radius, 0, time_stepper_pt);
 
@@ -427,7 +427,7 @@ void STSpineMesh<ELEMENT, INTERFACE_ELEMENT>::build_single_layer_mesh(
     {
       // We remove the node from the old boundary mesh ( This is not necessary
       // and it is mainly wrotten for avoiding the warning message)
-      Node *node_pt = mesh1_pt->boundary_node_pt(b, i);
+      Node* node_pt = mesh1_pt->boundary_node_pt(b, i);
       node_pt->remove_from_boundary(b);
       this->add_boundary_node(b, node_pt);
     }
@@ -444,7 +444,7 @@ void STSpineMesh<ELEMENT, INTERFACE_ELEMENT>::build_single_layer_mesh(
     Interface_line_element_pt.push_back(mesh1_pt->interface_line_element_pt(e));
 
   // We create the tip mesh with flag 1
-  CombTipSpineMesh<ELEMENT, INTERFACE_ELEMENT> *mesh2_pt =
+  CombTipSpineMesh<ELEMENT, INTERFACE_ELEMENT>* mesh2_pt =
     new CombTipSpineMesh<ELEMENT, INTERFACE_ELEMENT>(
       Nel, Alpha, Length_tip, Height, Radius, 1, time_stepper_pt);
 
@@ -469,7 +469,7 @@ void STSpineMesh<ELEMENT, INTERFACE_ELEMENT>::build_single_layer_mesh(
   double heightcubic = Height;
   double alphacubic = Alpha / 2;
 
-  SimpleCubicMesh<ELEMENT> *mesh3_pt =
+  SimpleCubicMesh<ELEMENT>* mesh3_pt =
     new SimpleCubicMesh<ELEMENT>(Nel,
                                  Nel_liq,
                                  Nzcubic,
@@ -494,7 +494,7 @@ void STSpineMesh<ELEMENT, INTERFACE_ELEMENT>::build_single_layer_mesh(
   {
     for (int i = 0; i < nxin; i++)
     {
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(
         mesh3_pt->element_pt(i + jin * nxin + k * nxin * nyin));
       Bulk_inlet_element_pt.push_back(el_pt);
     }
@@ -551,8 +551,8 @@ void STSpineMesh<ELEMENT, INTERFACE_ELEMENT>::build_single_layer_mesh(
 template<class ELEMENT, class INTERFACE_ELEMENT>
 void STSpineMesh<ELEMENT, INTERFACE_ELEMENT>::add_side_spinemesh(
   unsigned int bound1,
-  CombTipSpineMesh<ELEMENT, INTERFACE_ELEMENT> *addmesh_pt,
-  int *addmesh_map_boundary,
+  CombTipSpineMesh<ELEMENT, INTERFACE_ELEMENT>* addmesh_pt,
+  int* addmesh_map_boundary,
   int total_boundaries,
   unsigned spine_flag)
 {
@@ -586,19 +586,19 @@ void STSpineMesh<ELEMENT, INTERFACE_ELEMENT>::add_side_spinemesh(
 template<class ELEMENT, class INTERFACE_ELEMENT>
 void STSpineMesh<ELEMENT, INTERFACE_ELEMENT>::add_mesh(
   unsigned int bound1,
-  Mesh *addmesh_pt,
-  int *addmesh_map_boundary,
+  Mesh* addmesh_pt,
+  int* addmesh_map_boundary,
   int total_boundaries,
   unsigned spine_flag)
 {
   int bound2 = -1;
 
-  Mesh *mesh_pt = this;
+  Mesh* mesh_pt = this;
 
   // Map of the commom nodes from the nodes in the added mesh to the old mesh
   // (It is needed for the added elements to point to the old nodes and not
   // duplicate this nodes)
-  std::map<Node *, Node *> map_bound_node;
+  std::map<Node*, Node*> map_bound_node;
 
   // We have to look for the shared boundary of the second mwsh. We identify it
   // giving a value of -1 in the mappring of the old to the new boundary
@@ -697,7 +697,7 @@ void STSpineMesh<ELEMENT, INTERFACE_ELEMENT>::add_mesh(
   for (unsigned int i = 0; i < addmesh_pt->nelement(); i++)
   {
     // Pointer to the element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(addmesh_pt->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(addmesh_pt->element_pt(i));
 
     // Loop over the nodes in the element
     for (unsigned j = 0; j < el_pt->nnode(); j++)
@@ -719,7 +719,7 @@ void STSpineMesh<ELEMENT, INTERFACE_ELEMENT>::add_mesh(
   {
     if (map_bound_node[addmesh_pt->node_pt(j)] == 0)
     {
-      SpineNode *nod_pt = dynamic_cast<SpineNode *>(addmesh_pt->node_pt(j));
+      SpineNode* nod_pt = dynamic_cast<SpineNode*>(addmesh_pt->node_pt(j));
       nod_pt->spine_mesh_pt() = this;
       nod_pt->node_update_fct_id() = spine_flag;
       mesh_pt->add_node_pt(addmesh_pt->node_pt(j));
@@ -752,7 +752,7 @@ void STSpineMesh<ELEMENT, INTERFACE_ELEMENT>::add_mesh(
 
   for (unsigned i = 0; i < addmesh_pt->nelement(); i++)
   {
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(addmesh_pt->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(addmesh_pt->element_pt(i));
     //  FiniteElement* el_pt =    addmesh_pt->finite_element_pt(i);
     Element_pt.push_back(el_pt);
     Bulk_element_pt.push_back(el_pt);
@@ -776,7 +776,7 @@ void STSpineMesh<ELEMENT, INTERFACE_ELEMENT>::add_mesh(
       if (i != bound2)
       {
         // Create a pointer to the node
-        Node *node_pt = addmesh_pt->boundary_node_pt(i, j);
+        Node* node_pt = addmesh_pt->boundary_node_pt(i, j);
 
         // We remove the old boundaries in case it is not yet included in a new
         // boundary
@@ -796,7 +796,7 @@ void STSpineMesh<ELEMENT, INTERFACE_ELEMENT>::add_mesh(
         // were not included before)the maped nodes
         else
         {
-          Node *map_node_pt = map_bound_node[node_pt];
+          Node* map_node_pt = map_bound_node[node_pt];
           if (!map_node_pt->is_on_boundary(addmesh_map_boundary[i]))
             mesh_pt->add_boundary_node(addmesh_map_boundary[i], map_node_pt);
         }

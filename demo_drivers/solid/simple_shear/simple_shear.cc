@@ -58,13 +58,13 @@ class ElasticCubicMesh :
 {
 public:
   /// \short Constructor:
-  ElasticCubicMesh(const unsigned &nx,
-                   const unsigned &ny,
-                   const unsigned &nz,
-                   const double &a,
-                   const double &b,
-                   const double &c,
-                   TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+  ElasticCubicMesh(const unsigned& nx,
+                   const unsigned& ny,
+                   const unsigned& nz,
+                   const double& a,
+                   const double& b,
+                   const double& c,
+                   TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
     SimpleCubicMesh<ELEMENT>(nx, ny, nz, -a, a, -b, b, -c, c, time_stepper_pt)
   {
     // Assign the initial lagrangian coordinates
@@ -85,10 +85,10 @@ public:
 namespace Global_Physical_Variables
 {
   /// Pointer to strain energy function
-  StrainEnergyFunction *Strain_energy_function_pt;
+  StrainEnergyFunction* Strain_energy_function_pt;
 
   /// Pointer to constitutive law
-  ConstitutiveLaw *Constitutive_law_pt;
+  ConstitutiveLaw* Constitutive_law_pt;
 
   /// Elastic modulus
   double E = 1.0;
@@ -103,7 +103,7 @@ namespace Global_Physical_Variables
   double Gravity = 0.0;
 
   /// Body force vector: Vertically downwards with magnitude Gravity
-  void body_force(const Vector<double> &xi, const double &t, Vector<double> &b)
+  void body_force(const Vector<double>& xi, const double& t, Vector<double>& b)
   {
     b[0] = 0.0;
     b[1] = -Gravity;
@@ -123,23 +123,23 @@ class SimpleShearProblem : public Problem
 {
   double Shear;
 
-  void set_incompressible(ELEMENT *el_pt, const bool &incompressible);
+  void set_incompressible(ELEMENT* el_pt, const bool& incompressible);
 
 public:
   /// Constructor:
-  SimpleShearProblem(const bool &incompressible);
+  SimpleShearProblem(const bool& incompressible);
 
   /// Run simulation.
-  void run(const std::string &dirname);
+  void run(const std::string& dirname);
 
   /// Access function for the mesh
-  ElasticCubicMesh<ELEMENT> *mesh_pt()
+  ElasticCubicMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<ElasticCubicMesh<ELEMENT> *>(Problem::mesh_pt());
+    return dynamic_cast<ElasticCubicMesh<ELEMENT>*>(Problem::mesh_pt());
   }
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// Update function (empty)
   void actions_after_newton_solve() {}
@@ -167,8 +167,8 @@ public:
     unsigned num_nod = mesh_pt()->nboundary_node(ibound);
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
-      SolidNode *solid_nod_pt =
-        static_cast<SolidNode *>(mesh_pt()->boundary_node_pt(ibound, inod));
+      SolidNode* solid_nod_pt =
+        static_cast<SolidNode*>(mesh_pt()->boundary_node_pt(ibound, inod));
 
       solid_nod_pt->x(0) = solid_nod_pt->xi(0) + Shear * solid_nod_pt->xi(2);
     }
@@ -179,7 +179,7 @@ public:
 /// Constructor:
 //======================================================================
 template<class ELEMENT>
-SimpleShearProblem<ELEMENT>::SimpleShearProblem(const bool &incompressible) :
+SimpleShearProblem<ELEMENT>::SimpleShearProblem(const bool& incompressible) :
   Shear(0.0)
 {
   double a = 1.0, b = 1.0, c = 1.0;
@@ -213,7 +213,7 @@ SimpleShearProblem<ELEMENT>::SimpleShearProblem(const bool &incompressible) :
   for (unsigned i = 0; i < n_element; i++)
   {
     // Cast to a solid element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the constitutive law
     el_pt->constitutive_law_pt() =
@@ -237,7 +237,7 @@ SimpleShearProblem<ELEMENT>::SimpleShearProblem(const bool &incompressible) :
 /// Doc the solution
 //==================================================================
 template<class ELEMENT>
-void SimpleShearProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void SimpleShearProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -265,7 +265,7 @@ void SimpleShearProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
   unsigned n_element = mesh_pt()->nelement();
   for (unsigned e = 0; e < n_element; e++)
   {
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
     el_pt->interpolated_x(s, x);
     el_pt->get_stress(s, sigma);
 
@@ -290,7 +290,7 @@ void SimpleShearProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
 /// Run the problem
 //==================================================================
 template<class ELEMENT>
-void SimpleShearProblem<ELEMENT>::run(const std::string &dirname)
+void SimpleShearProblem<ELEMENT>::run(const std::string& dirname)
 {
   // Output
   DocInfo doc_info;
@@ -324,14 +324,14 @@ void SimpleShearProblem<ELEMENT>::run(const std::string &dirname)
 
 template<>
 void SimpleShearProblem<QPVDElement<3, 3>>::set_incompressible(
-  QPVDElement<3, 3> *el_pt, const bool &incompressible)
+  QPVDElement<3, 3>* el_pt, const bool& incompressible)
 {
   // Does nothing
 }
 
 template<>
 void SimpleShearProblem<QPVDElementWithPressure<3>>::set_incompressible(
-  QPVDElementWithPressure<3> *el_pt, const bool &incompressible)
+  QPVDElementWithPressure<3>* el_pt, const bool& incompressible)
 {
   if (incompressible)
   {
@@ -345,8 +345,8 @@ void SimpleShearProblem<QPVDElementWithPressure<3>>::set_incompressible(
 
 template<>
 void SimpleShearProblem<QPVDElementWithContinuousPressure<3>>::
-  set_incompressible(QPVDElementWithContinuousPressure<3> *el_pt,
-                     const bool &incompressible)
+  set_incompressible(QPVDElementWithContinuousPressure<3>* el_pt,
+                     const bool& incompressible)
 {
   if (incompressible)
   {

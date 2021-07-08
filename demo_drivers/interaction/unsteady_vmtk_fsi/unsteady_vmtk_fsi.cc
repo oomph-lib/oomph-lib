@@ -56,7 +56,7 @@ namespace Global_Parameters
   double Q = 0.0;
 
   /// Pointer to constitutive law
-  ConstitutiveLaw *Constitutive_law_pt = 0;
+  ConstitutiveLaw* Constitutive_law_pt = 0;
 
   /// Poisson's ratio for generalised Hookean constitutive equation
   double Nu = 0.3;
@@ -87,7 +87,7 @@ namespace Global_Parameters
 
   /// \short Pointer to Data object whose one and only value stores the
   /// upstream pressure used to enforce flow rate
-  Data *P_in_data_pt = 0;
+  Data* P_in_data_pt = 0;
 
   /// \short IDs for the two types of Lagrange multipliers used
   /// in this problem
@@ -113,7 +113,7 @@ public:
   ~UnstructuredFSIProblem() {}
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// Create Lagrange multiplier elements that impose parallel flow
   void create_parallel_flow_lagrange_elements();
@@ -196,7 +196,7 @@ public:
 
 private:
   /// Sanity check: Doc boundary coordinates on i-th solid FSI interface
-  void doc_solid_boundary_coordinates(const unsigned &i);
+  void doc_solid_boundary_coordinates(const unsigned& i);
 
   /// \short Return total number of mesh boundaries that make up the inflow
   /// boundary
@@ -242,31 +242,31 @@ private:
   // end npinned_solid_boundary
 
   /// Bulk solid mesh
-  SolidTetgenMesh<SOLID_ELEMENT> *Solid_mesh_pt;
+  SolidTetgenMesh<SOLID_ELEMENT>* Solid_mesh_pt;
 
   /// Meshes of FSI traction elements
-  Vector<SolidMesh *> Solid_fsi_traction_mesh_pt;
+  Vector<SolidMesh*> Solid_fsi_traction_mesh_pt;
 
   /// Bulk fluid mesh
-  SolidTetgenMesh<FLUID_ELEMENT> *Fluid_mesh_pt;
+  SolidTetgenMesh<FLUID_ELEMENT>* Fluid_mesh_pt;
 
   /// Mesh containing the FaceElements that monitor the inflow
-  Mesh *Inflow_flux_monitor_mesh_pt;
+  Mesh* Inflow_flux_monitor_mesh_pt;
 
   /// Mesh of FaceElements that control the inflow
-  Mesh *Inflow_flux_control_mesh_pt;
+  Mesh* Inflow_flux_control_mesh_pt;
 
   /// Mesh containing the master flux control element
-  Mesh *Inflow_flux_control_master_mesh_pt;
+  Mesh* Inflow_flux_control_master_mesh_pt;
 
   /// Meshes of Lagrange multiplier elements that impose parallel flow
-  Vector<Mesh *> Parallel_flow_lagrange_multiplier_mesh_pt;
+  Vector<Mesh*> Parallel_flow_lagrange_multiplier_mesh_pt;
 
   /// Meshes of Lagrange multiplier elements
-  Vector<SolidMesh *> Lagrange_multiplier_mesh_pt;
+  Vector<SolidMesh*> Lagrange_multiplier_mesh_pt;
 
   /// GeomObject incarnations of the FSI boundary in the solid mesh
-  Vector<MeshAsGeomObject *> Solid_fsi_boundary_pt;
+  Vector<MeshAsGeomObject*> Solid_fsi_boundary_pt;
 
   /// IDs of solid mesh boundaries where displacements are pinned
   Vector<unsigned> Pinned_solid_boundary_id;
@@ -305,13 +305,13 @@ UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::UnstructuredFSIProblem()
   NonRefineableBinArray::Default_n_bin_1d = 1;
 
   // Allocate the timestepper for the Navier-Stokes equations
-  BDF<2> *fluid_time_stepper_pt = new BDF<2>;
+  BDF<2>* fluid_time_stepper_pt = new BDF<2>;
 
   // Add the fluid timestepper to the Problem's collection of timesteppers.
   add_time_stepper_pt(fluid_time_stepper_pt);
 
   // Create a Steady timestepper that stores two history values
-  Steady<2> *wall_time_stepper_pt = new Steady<2>;
+  Steady<2>* wall_time_stepper_pt = new Steady<2>;
 
   // Add the wall timestepper to the Problem's collection of timesteppers.
   add_time_stepper_pt(wall_time_stepper_pt);
@@ -320,7 +320,7 @@ UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::UnstructuredFSIProblem()
   string input_string;
 
   // Open input file
-  ifstream *input_file_pt = new ifstream("boundary_enumeration.dat");
+  ifstream* input_file_pt = new ifstream("boundary_enumeration.dat");
 
   // Check if it's been opened succesfully
   if (input_file_pt == 0)
@@ -393,7 +393,7 @@ UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::UnstructuredFSIProblem()
   unsigned nnod = Fluid_mesh_pt->nnode();
   for (unsigned j = 0; j < nnod; j++)
   {
-    Node *nod_pt = Fluid_mesh_pt->node_pt(j);
+    Node* nod_pt = Fluid_mesh_pt->node_pt(j);
     node_file >> nod_pt->x(0);
     node_file >> nod_pt->x(1);
     node_file >> nod_pt->x(2);
@@ -442,7 +442,7 @@ UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::UnstructuredFSIProblem()
   nnod = Solid_mesh_pt->nnode();
   for (unsigned j = 0; j < nnod; j++)
   {
-    Node *nod_pt = Solid_mesh_pt->node_pt(j);
+    Node* nod_pt = Solid_mesh_pt->node_pt(j);
     node_file >> nod_pt->x(0);
     node_file >> nod_pt->x(1);
     node_file >> nod_pt->x(2);
@@ -631,7 +631,7 @@ UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::UnstructuredFSIProblem()
       for (unsigned inod = 0; inod < num_nod; inod++)
       {
         // Get the node
-        SolidNode *nod_pt = Fluid_mesh_pt->boundary_node_pt(b, inod);
+        SolidNode* nod_pt = Fluid_mesh_pt->boundary_node_pt(b, inod);
 
         // Pin the nodal (pseudo-solid) displacements
         for (unsigned i = 0; i < 3; i++)
@@ -661,7 +661,7 @@ UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::UnstructuredFSIProblem()
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Get node
-      Node *nod_pt = Fluid_mesh_pt->boundary_node_pt(b, inod);
+      Node* nod_pt = Fluid_mesh_pt->boundary_node_pt(b, inod);
 
       // Pin all velocities
       nod_pt->pin(0);
@@ -697,8 +697,8 @@ UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::UnstructuredFSIProblem()
       if (is_in_or_outflow_node)
       {
         // Cast to a boundary node
-        BoundaryNode<SolidNode> *bnod_pt =
-          dynamic_cast<BoundaryNode<SolidNode> *>(
+        BoundaryNode<SolidNode>* bnod_pt =
+          dynamic_cast<BoundaryNode<SolidNode>*>(
             Fluid_mesh_pt->boundary_node_pt(b, inod));
 
         // Get the index of the first Lagrange multiplier
@@ -743,8 +743,8 @@ UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::UnstructuredFSIProblem()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    FLUID_ELEMENT *el_pt =
-      dynamic_cast<FLUID_ELEMENT *>(Fluid_mesh_pt->element_pt(e));
+    FLUID_ELEMENT* el_pt =
+      dynamic_cast<FLUID_ELEMENT*>(Fluid_mesh_pt->element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Parameters::Re;
@@ -771,7 +771,7 @@ UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::UnstructuredFSIProblem()
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Get node
-      SolidNode *nod_pt = Solid_mesh_pt->boundary_node_pt(b, inod);
+      SolidNode* nod_pt = Solid_mesh_pt->boundary_node_pt(b, inod);
 
       // Pin all directions
       for (unsigned i = 0; i < 3; i++)
@@ -793,8 +793,8 @@ UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::UnstructuredFSIProblem()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Cast to a solid element
-    SOLID_ELEMENT *el_pt =
-      dynamic_cast<SOLID_ELEMENT *>(Solid_mesh_pt->element_pt(i));
+    SOLID_ELEMENT* el_pt =
+      dynamic_cast<SOLID_ELEMENT*>(Solid_mesh_pt->element_pt(i));
 
     // Set the constitutive law
     el_pt->constitutive_law_pt() = Global_Parameters::Constitutive_law_pt;
@@ -879,14 +879,14 @@ void UnstructuredFSIProblem<FLUID_ELEMENT,
     for (unsigned e = 0; e < n_element; e++)
     {
       // Get pointer to the bulk element that is adjacent to boundary b
-      SOLID_ELEMENT *bulk_elem_pt =
-        dynamic_cast<SOLID_ELEMENT *>(Solid_mesh_pt->boundary_element_pt(b, e));
+      SOLID_ELEMENT* bulk_elem_pt =
+        dynamic_cast<SOLID_ELEMENT*>(Solid_mesh_pt->boundary_element_pt(b, e));
 
       // What is the index of the face of the element e along boundary b
       int face_index = Solid_mesh_pt->face_index_at_boundary(b, e);
 
       // Create new element
-      FSISolidTractionElement<SOLID_ELEMENT, 3> *el_pt =
+      FSISolidTractionElement<SOLID_ELEMENT, 3>* el_pt =
         new FSISolidTractionElement<SOLID_ELEMENT, 3>(bulk_elem_pt, face_index);
 
       // Add it to the mesh
@@ -931,14 +931,14 @@ void UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
     for (unsigned e = 0; e < n_element; e++)
     {
       // Get pointer to the bulk fluid element that is adjacent to boundary b
-      FLUID_ELEMENT *bulk_elem_pt =
-        dynamic_cast<FLUID_ELEMENT *>(Fluid_mesh_pt->boundary_element_pt(b, e));
+      FLUID_ELEMENT* bulk_elem_pt =
+        dynamic_cast<FLUID_ELEMENT*>(Fluid_mesh_pt->boundary_element_pt(b, e));
 
       // Find the index of the face of element e along boundary b
       int face_index = Fluid_mesh_pt->face_index_at_boundary(b, e);
 
       // Create new element
-      ImposeDisplacementByLagrangeMultiplierElement<FLUID_ELEMENT> *el_pt =
+      ImposeDisplacementByLagrangeMultiplierElement<FLUID_ELEMENT>* el_pt =
         new ImposeDisplacementByLagrangeMultiplierElement<FLUID_ELEMENT>(
           bulk_elem_pt,
           face_index,
@@ -992,14 +992,14 @@ void UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
       for (unsigned e = 0; e < n_element; e++)
       {
         // Get pointer to the bulk element that is adjacent to boundary b
-        FLUID_ELEMENT *bulk_elem_pt = dynamic_cast<FLUID_ELEMENT *>(
+        FLUID_ELEMENT* bulk_elem_pt = dynamic_cast<FLUID_ELEMENT*>(
           Fluid_mesh_pt->boundary_element_pt(b, e));
 
         // What is the index of the face of the element e along boundary b
         int face_index = Fluid_mesh_pt->face_index_at_boundary(b, e);
 
         // Build the corresponding Lagrange multiplier element
-        ImposeParallelOutflowElement<FLUID_ELEMENT> *el_pt =
+        ImposeParallelOutflowElement<FLUID_ELEMENT>* el_pt =
           new ImposeParallelOutflowElement<FLUID_ELEMENT>(
             bulk_elem_pt,
             face_index,
@@ -1012,7 +1012,7 @@ void UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
         if (in_out == 0)
         {
           // Attach elements that monitor volume flux (etc).
-          NavierStokesSurfacePowerElement<FLUID_ELEMENT> *power_element_pt =
+          NavierStokesSurfacePowerElement<FLUID_ELEMENT>* power_element_pt =
             new NavierStokesSurfacePowerElement<FLUID_ELEMENT>(bulk_elem_pt,
                                                                face_index);
 
@@ -1028,7 +1028,7 @@ void UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
           else
           {
             // Build the flux control element
-            NavierStokesFluxControlElement<FLUID_ELEMENT> *flux_element_pt =
+            NavierStokesFluxControlElement<FLUID_ELEMENT>* flux_element_pt =
               new NavierStokesFluxControlElement<FLUID_ELEMENT>(bulk_elem_pt,
                                                                 face_index);
 
@@ -1051,7 +1051,7 @@ void UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
   if (!Global_Parameters::Prescribe_pressure)
   {
     // Build master element
-    NetFluxControlElement *flux_control_el_pt = new NetFluxControlElement(
+    NetFluxControlElement* flux_control_el_pt = new NetFluxControlElement(
       Inflow_flux_control_mesh_pt, &Global_Parameters::Prescribed_flow_rate);
 
     // Add NetFluxControlElement to its own mesh
@@ -1066,10 +1066,10 @@ void UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
     for (unsigned e = 0; e < n_el; e++)
     {
       // Get pointer to the element
-      GeneralisedElement *el_pt = Inflow_flux_control_mesh_pt->element_pt(e);
+      GeneralisedElement* el_pt = Inflow_flux_control_mesh_pt->element_pt(e);
 
       // Dynamic cast
-      dynamic_cast<NavierStokesFluxControlElement<FLUID_ELEMENT> *>(el_pt)
+      dynamic_cast<NavierStokesFluxControlElement<FLUID_ELEMENT>*>(el_pt)
         ->add_pressure_data(Global_Parameters::P_in_data_pt);
     }
   }
@@ -1081,7 +1081,7 @@ void UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
 //=======================================================================
 template<class FLUID_ELEMENT, class SOLID_ELEMENT>
 void UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
-  doc_solid_boundary_coordinates(const unsigned &i)
+  doc_solid_boundary_coordinates(const unsigned& i)
 {
   // Doc boundary coordinates in fluid
   char filename[100];
@@ -1093,8 +1093,8 @@ void UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
   for (unsigned e = 0; e < n_face_element; e++)
   {
     // Cast the element pointer
-    FSISolidTractionElement<SOLID_ELEMENT, 3> *el_pt =
-      dynamic_cast<FSISolidTractionElement<SOLID_ELEMENT, 3> *>(
+    FSISolidTractionElement<SOLID_ELEMENT, 3>* el_pt =
+      dynamic_cast<FSISolidTractionElement<SOLID_ELEMENT, 3>*>(
         Solid_fsi_traction_mesh_pt[i]->element_pt(e));
 
     // Doc boundary coordinate
@@ -1136,7 +1136,7 @@ void UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
 //========================================================================
 template<class FLUID_ELEMENT, class SOLID_ELEMENT>
 void UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::doc_solution(
-  DocInfo &doc_info)
+  DocInfo& doc_info)
 {
   // Elements can still be inverted near boundary
   // even if they're non-inverted at the 3D Gauss points
@@ -1210,8 +1210,8 @@ void UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::doc_solution(
   unsigned nel = Inflow_flux_monitor_mesh_pt->nelement();
   for (unsigned e = 0; e < nel; e++)
   {
-    NavierStokesSurfacePowerElement<FLUID_ELEMENT> *el_pt =
-      dynamic_cast<NavierStokesSurfacePowerElement<FLUID_ELEMENT> *>(
+    NavierStokesSurfacePowerElement<FLUID_ELEMENT>* el_pt =
+      dynamic_cast<NavierStokesSurfacePowerElement<FLUID_ELEMENT>*>(
         Inflow_flux_monitor_mesh_pt->element_pt(e));
     inflow_volume_flux += el_pt->get_volume_flux();
   }
@@ -1222,7 +1222,7 @@ void UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::doc_solution(
 //========================= start_of_main=================================
 /// Demonstrate how to solve an unstructured 3D FSI problem
 //========================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

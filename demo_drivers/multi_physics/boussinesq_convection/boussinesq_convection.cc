@@ -101,12 +101,12 @@ public:
   }
 
   /// Fix pressure in element e at pressure dof pdof and set to pvalue
-  void fix_pressure(const unsigned &e,
-                    const unsigned &pdof,
-                    const double &pvalue)
+  void fix_pressure(const unsigned& e,
+                    const unsigned& pdof,
+                    const double& pvalue)
   {
     // Cast to specific element and fix pressure
-    dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e))
+    dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))
       ->fix_pressure(pdof, pvalue);
   } // end_of_fix_pressure
 
@@ -114,14 +114,14 @@ public:
   void doc_solution();
 
   /// \short Set the boundary conditions
-  void set_boundary_conditions(const double &time);
+  void set_boundary_conditions(const double& time);
 
   /// \short Overloaded version of the problem's access function to
   /// the mesh. Recasts the pointer to the base Mesh object to
   /// the actual mesh type.
-  RectangularQuadMesh<ELEMENT> *mesh_pt()
+  RectangularQuadMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<RectangularQuadMesh<ELEMENT> *>(Problem::mesh_pt());
+    return dynamic_cast<RectangularQuadMesh<ELEMENT>*>(Problem::mesh_pt());
   }
 
 private:
@@ -201,7 +201,7 @@ ConvectionProblem<ELEMENT>::ConvectionProblem()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the Peclet number
     el_pt->pe_pt() = &Global_Physical_Variables::Peclet;
@@ -235,7 +235,7 @@ ConvectionProblem<ELEMENT>::ConvectionProblem()
 /// time
 //===========================================================
 template<class ELEMENT>
-void ConvectionProblem<ELEMENT>::set_boundary_conditions(const double &time)
+void ConvectionProblem<ELEMENT>::set_boundary_conditions(const double& time)
 {
   // Loop over the boundaries
   unsigned num_bound = mesh_pt()->nboundary();
@@ -246,7 +246,7 @@ void ConvectionProblem<ELEMENT>::set_boundary_conditions(const double &time)
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Get pointer to node
-      Node *nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
+      Node* nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
 
       // Set the number of velocity components
       unsigned vel_max = 2;
@@ -319,7 +319,7 @@ void ConvectionProblem<ELEMENT>::doc_solution()
 //=======start_of_main================================================
 /// Driver code for 2D Boussinesq convection problem
 //====================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Set the direction of gravity
   Global_Physical_Variables::Direction_of_gravity[0] = 0.0;

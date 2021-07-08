@@ -65,20 +65,20 @@ namespace oomph
     /// and vertical directions, and the corresponding dimensions.
     /// Timestepper defaults to Steady.
     SimpleRectangularQuadMesh(
-      const unsigned &Nx,
-      const unsigned &Ny,
-      const double &Lx,
-      const double &Ly,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper);
+      const unsigned& Nx,
+      const unsigned& Ny,
+      const double& Lx,
+      const double& Ly,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
     /// Access function for number of elements in x directions
-    const unsigned &nx() const
+    const unsigned& nx() const
     {
       return NX;
     }
 
     /// Access function for number of elements in y directions
-    const unsigned &ny() const
+    const unsigned& ny() const
     {
       return NY;
     }

@@ -73,21 +73,21 @@ namespace oomph
 
     /// Broken copy constructor
     THomogenisedLinearElasticityElement(
-      const THomogenisedLinearElasticityElement<DIM, NNODE_1D> &dummy)
+      const THomogenisedLinearElasticityElement<DIM, NNODE_1D>& dummy)
     {
       BrokenCopy::broken_copy("THomogenisedLinearElasticityElement");
     }
 
     /// \short Output function:
     ///  x,y,u   or    x,y,z,u
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       HomogenisedLinearElasticityEquations<DIM>::output(outfile);
     }
 
     ///  \short Output function:
     ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
-    void output(std::ostream &outfile, const unsigned &nplot)
+    void output(std::ostream& outfile, const unsigned& nplot)
     {
       // Vector of local coordinates
       Vector<double> s(DIM);
@@ -124,14 +124,14 @@ namespace oomph
 
     /// \short C-style output function:
     ///  x,y,u   or    x,y,z,u
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       HomogenisedLinearElasticityEquations<DIM>::output(file_pt);
     }
 
     ///  \short C-style output function:
     ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       HomogenisedLinearElasticityEquations<DIM>::output(file_pt, n_plot);
     }

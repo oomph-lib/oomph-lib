@@ -52,13 +52,13 @@ namespace oomph
   {
   private:
     /// Pointer to an Elasticity number
-    double *Beta_pt;
+    double* Beta_pt;
 
     /// Pointer to Surface Peclet number
-    double *Peclet_S_pt;
+    double* Peclet_S_pt;
 
     /// Pointer to the surface Peclect Strouhal number
-    double *Peclet_Strouhal_S_pt;
+    double* Peclet_Strouhal_S_pt;
 
   protected:
     /// Index at which the surfactant concentration is stored at the
@@ -69,19 +69,19 @@ namespace oomph
     static double Default_Physical_Constant_Value;
 
     /// Get the surfactant concentration
-    double interpolated_C(const Vector<double> &s);
+    double interpolated_C(const Vector<double>& s);
 
     /// The time derivative of the surface concentration
-    double dcdt_surface(const unsigned &l) const;
+    double dcdt_surface(const unsigned& l) const;
 
     /// The surface tension function is linear in the
     /// concentration with constant of proportionality equal
     /// to the elasticity  number.
-    double sigma(const Vector<double> &s);
+    double sigma(const Vector<double>& s);
 
     /// Return the derivative of sigma with respect to C
     /// For use in computing the Jacobian
-    virtual double dsigma_dC(const Vector<double> &s)
+    virtual double dsigma_dC(const Vector<double>& s)
     {
       return -this->beta();
     }
@@ -90,25 +90,25 @@ namespace oomph
     /// jacobian entries. This particular function ensures that the
     /// additional entries are calculated inside the integration loop
     void add_additional_residual_contributions_interface(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      const unsigned &flag,
-      const Shape &psif,
-      const DShape &dpsifds,
-      const DShape &dpsifdS,
-      const DShape &dpsifdS_div,
-      const Vector<double> &s,
-      const Vector<double> &interpolated_x,
-      const Vector<double> &interpolated_n,
-      const double &W,
-      const double &J);
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag,
+      const Shape& psif,
+      const DShape& dpsifds,
+      const DShape& dpsifdS,
+      const DShape& dpsifdS_div,
+      const Vector<double>& s,
+      const Vector<double>& interpolated_x,
+      const Vector<double>& interpolated_n,
+      const double& W,
+      const double& J);
 
     /// Add the element's contribution to its residuals vector,
     /// jacobian matrix and mass matrix
     void fill_in_contribution_to_jacobian_and_mass_matrix(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix)
     {
       // Add the contribution to the jacobian
       this->fill_in_contribution_to_jacobian(residuals, jacobian);
@@ -127,7 +127,7 @@ namespace oomph
     }
 
     // Set the c_index
-    inline void set_c_index(const Vector<unsigned> &c_index)
+    inline void set_c_index(const Vector<unsigned>& c_index)
     {
       this->C_index = c_index;
     }
@@ -151,39 +151,39 @@ namespace oomph
     }
 
     /// Access function for pointer to the Elasticity number
-    double *&beta_pt()
+    double*& beta_pt()
     {
       return Beta_pt;
     }
 
     /// Access function for pointer to the surface Peclet number
-    double *&peclet_s_pt()
+    double*& peclet_s_pt()
     {
       return Peclet_S_pt;
     }
 
     /// Access function for pointer to the surface Peclet x Strouhal number
-    double *&peclet_strouhal_s_pt()
+    double*& peclet_strouhal_s_pt()
     {
       return Peclet_Strouhal_S_pt;
     }
 
     /// Overload the output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       FiniteElement::output(outfile);
     }
 
-    void output(std::ostream &outfile, const unsigned &n_plot);
+    void output(std::ostream& outfile, const unsigned& n_plot);
 
     /// Overload the C-style output function
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
 
     /// C-style Output function
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       FiniteElement::output(file_pt, n_plot);
     }
@@ -202,20 +202,20 @@ namespace oomph
   public:
     FluidInterfaceAdditionalValues<SurfactantTransportInterfaceElement>() {}
 
-    inline unsigned nadditional_values(const unsigned &n)
+    inline unsigned nadditional_values(const unsigned& n)
     {
       return 1;
     }
 
     inline void setup_equation_indices(
-      SurfactantTransportInterfaceElement *const &element_pt,
-      const unsigned &id)
+      SurfactantTransportInterfaceElement* const& element_pt,
+      const unsigned& id)
     {
       const unsigned n_node = element_pt->nnode();
       Vector<unsigned> c_index(n_node);
       for (unsigned n = 0; n < n_node; n++)
       {
-        c_index[n] = dynamic_cast<BoundaryNodeBase *>(element_pt->node_pt(n))
+        c_index[n] = dynamic_cast<BoundaryNodeBase*>(element_pt->node_pt(n))
                        ->index_of_first_value_assigned_by_face_element(id);
       }
 
@@ -234,7 +234,7 @@ namespace oomph
   {
   public:
     SpineLineSurfactantTransportInterfaceElement(
-      FiniteElement *const &element_pt, const int &face_index) :
+      FiniteElement* const& element_pt, const int& face_index) :
       SpineUpdateFluidInterfaceElement<SurfactantTransportInterfaceElement,
                                        LineDerivatives,
                                        ELEMENT>(element_pt, face_index)
@@ -269,7 +269,7 @@ namespace oomph
   {
   public:
     SpineAxisymmetricSurfactantTransportInterfaceElement(
-      FiniteElement *const &element_pt, const int &face_index) :
+      FiniteElement* const& element_pt, const int& face_index) :
       SpineUpdateFluidInterfaceElement<SurfactantTransportInterfaceElement,
                                        AxisymmetricDerivatives,
                                        ELEMENT>(element_pt, face_index)
@@ -305,7 +305,7 @@ namespace oomph
   {
   public:
     ElasticAxisymmetricSurfactantTransportInterfaceElement(
-      FiniteElement *const &element_pt, const int &face_index) :
+      FiniteElement* const& element_pt, const int& face_index) :
       ElasticUpdateFluidInterfaceElement<SurfactantTransportInterfaceElement,
                                          AxisymmetricDerivatives,
                                          ELEMENT>(element_pt, face_index)
@@ -340,7 +340,7 @@ namespace oomph
   {
   public:
     SpineSurfaceSurfactantTransportInterfaceElement(
-      FiniteElement *const &element_pt, const int &face_index) :
+      FiniteElement* const& element_pt, const int& face_index) :
       SpineUpdateFluidInterfaceElement<SurfactantTransportInterfaceElement,
                                        SurfaceDerivatives,
                                        ELEMENT>(element_pt, face_index)

@@ -59,8 +59,8 @@ namespace oomph
   public:
     /// \short Constructor: Pass radius and timestepper; defaults to
     /// static default timestepper
-    EighthSphereMesh(const double &radius,
-                     TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper);
+    EighthSphereMesh(const double& radius,
+                     TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
     /// Destructor
     ~EighthSphereMesh()
@@ -71,7 +71,7 @@ namespace oomph
 
   protected:
     /// Pointer to the domain
-    Domain *Domain_pt;
+    Domain* Domain_pt;
 
     /// Radius of the sphere
     double Radius;
@@ -96,26 +96,26 @@ namespace oomph
     /// \short Constructor: Pass radius and timestepper; defaults to
     /// static default timestepper
     RefineableEighthSphereMesh(
-      const double &radius,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      const double& radius,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       EighthSphereMesh<ELEMENT>(radius, time_stepper_pt)
     {
       // Loop over all elements and set macro element pointer
       unsigned nel = this->nelement();
       for (unsigned ielem = 0; ielem < nel; ielem++)
       {
-        dynamic_cast<RefineableQElement<3> *>(this->element_pt(ielem))
+        dynamic_cast<RefineableQElement<3>*>(this->element_pt(ielem))
           ->set_macro_elem_pt(this->Domain_pt->macro_element_pt(ielem));
       }
 
       // Associate the elements with octrees and plant in forest
-      Vector<TreeRoot *> tree_pt;
+      Vector<TreeRoot*> tree_pt;
       OcTreeRoot::setup_static_data();
       for (unsigned e = 0; e < nel; e++)
       {
-        FiniteElement *el_pt = this->finite_element_pt(e);
-        ELEMENT *ref_el_pt = dynamic_cast<ELEMENT *>(el_pt);
-        OcTreeRoot *octree_root_pt = new OcTreeRoot(ref_el_pt);
+        FiniteElement* el_pt = this->finite_element_pt(e);
+        ELEMENT* ref_el_pt = dynamic_cast<ELEMENT*>(el_pt);
+        OcTreeRoot* octree_root_pt = new OcTreeRoot(ref_el_pt);
         tree_pt.push_back(octree_root_pt);
       }
 
@@ -124,7 +124,7 @@ namespace oomph
 
 #ifdef PARANOID
       // Run self test on octree forest
-      dynamic_cast<OcTreeForest *>(this->Forest_pt)->self_test();
+      dynamic_cast<OcTreeForest*>(this->Forest_pt)->self_test();
 #endif
     }
   };

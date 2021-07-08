@@ -69,9 +69,9 @@ namespace GlobalParameters
   /// derivatives w.r.t. to these coordinates.
   /// dspine_B[i][j] = d spine_B[j] / dx_i
   /// Spines start in the (x_1,x_2) plane at (x_1,x_2).
-  void spine_base_function(const Vector<double> &x,
-                           Vector<double> &spine_B,
-                           Vector<Vector<double>> &dspine_B)
+  void spine_base_function(const Vector<double>& x,
+                           Vector<double>& spine_B,
+                           Vector<Vector<double>>& dspine_B)
   {
     // Bspines and derivatives
     spine_B[0] = x[0];
@@ -98,9 +98,9 @@ namespace GlobalParameters
   /// \short Spine: The spine vector field as a function of the two
   /// coordinates x_1 and x_2, and its derivatives w.r.t. to these coordinates:
   /// dspine[i][j] = d spine[j] / dx_i
-  void spine_function(const Vector<double> &x,
-                      Vector<double> &spine,
-                      Vector<Vector<double>> &dspine)
+  void spine_function(const Vector<double>& x,
+                      Vector<double>& spine,
+                      Vector<Vector<double>>& dspine)
   {
     /// Spines (and derivatives)  are independent of x[0] and rotate
     /// in the x[1]-direction
@@ -150,14 +150,14 @@ public:
 
   /// \short Doc the solution. DocInfo object stores flags/labels for where the
   /// output gets written to and the trace file
-  void doc_solution(DocInfo &doc_info, ofstream &trace_file);
+  void doc_solution(DocInfo& doc_info, ofstream& trace_file);
 
 private:
   /// Node at which the height (displacement along spine) is controlled/doced
-  Node *Control_node_pt;
+  Node* Control_node_pt;
 
   /// Pointer to Data object that stores the prescribed curvature
-  Data *Kappa_pt;
+  Data* Kappa_pt;
 
 }; // end of problem class
 
@@ -195,12 +195,12 @@ YoungLaplaceProblem<ELEMENT>::YoungLaplaceProblem()
   }
 
   //  This is the element that contains the central node:
-  ELEMENT *prescribed_height_element_pt =
-    dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(n_y * n_x / 2 + n_x / 2));
+  ELEMENT* prescribed_height_element_pt =
+    dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(n_y * n_x / 2 + n_x / 2));
 
   // The central node is node 0 in that element
   Control_node_pt =
-    static_cast<Node *>(prescribed_height_element_pt->node_pt(0));
+    static_cast<Node*>(prescribed_height_element_pt->node_pt(0));
 
   std::cout << "Controlling height at (x,y) : (" << Control_node_pt->x(0) << ","
             << Control_node_pt->x(1) << ")"
@@ -208,7 +208,7 @@ YoungLaplaceProblem<ELEMENT>::YoungLaplaceProblem()
             << endl;
 
   // Create a height control element
-  HeightControlElement *height_control_element_pt = new HeightControlElement(
+  HeightControlElement* height_control_element_pt = new HeightControlElement(
     Control_node_pt, &GlobalParameters::Controlled_height);
 
   // Store pointer to kappa data
@@ -248,7 +248,7 @@ YoungLaplaceProblem<ELEMENT>::YoungLaplaceProblem()
   for (unsigned i = 0; i < nelement; i++)
   {
     // Upcast from GeneralsedElement to YoungLaplace element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the spine function pointers
     el_pt->spine_base_fct_pt() = GlobalParameters::spine_base_function;
@@ -271,8 +271,8 @@ YoungLaplaceProblem<ELEMENT>::YoungLaplaceProblem()
 /// Doc the solution: doc_info contains labels/output directory etc.
 //========================================================================
 template<class ELEMENT>
-void YoungLaplaceProblem<ELEMENT>::doc_solution(DocInfo &doc_info,
-                                                ofstream &trace_file)
+void YoungLaplaceProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
+                                                ofstream& trace_file)
 {
   // Output kappa vs height of the apex
   //------------------------------------

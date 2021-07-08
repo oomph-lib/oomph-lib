@@ -50,10 +50,10 @@ namespace oomph
   //=======================================================================
   /// Default load function (zero traction)
   //=======================================================================
-  void KirchhoffLoveShellEquations::Zero_traction_fct(const Vector<double> &xi,
-                                                      const Vector<double> &x,
-                                                      const Vector<double> &N,
-                                                      Vector<double> &load)
+  void KirchhoffLoveShellEquations::Zero_traction_fct(const Vector<double>& xi,
+                                                      const Vector<double>& x,
+                                                      const Vector<double>& N,
+                                                      Vector<double>& load)
   {
     unsigned n_dim = load.size();
     for (unsigned i = 0; i < n_dim; i++)
@@ -70,8 +70,8 @@ namespace oomph
   //======================================================================
   /// Get normal to the shell
   //=====================================================================
-  void KirchhoffLoveShellEquations::get_normal(const Vector<double> &s,
-                                               Vector<double> &N)
+  void KirchhoffLoveShellEquations::get_normal(const Vector<double>& s,
+                                               Vector<double>& N)
   {
     // Set the dimension of the coordinates
     const unsigned n_dim = 3;
@@ -151,7 +151,7 @@ namespace oomph
   /// Get strain and bending tensors
   //=====================================================================
   std::pair<double, double> KirchhoffLoveShellEquations::get_strain_and_bend(
-    const Vector<double> &s, DenseDoubleMatrix &strain, DenseDoubleMatrix &bend)
+    const Vector<double>& s, DenseDoubleMatrix& strain, DenseDoubleMatrix& bend)
   {
     // Set the dimension of the coordinates
     const unsigned n_dim = 3;
@@ -351,7 +351,7 @@ namespace oomph
   /// Return the residuals for the equations of KL shell theory
   //====================================================================
   void KirchhoffLoveShellEquations::fill_in_contribution_to_residuals_shell(
-    Vector<double> &residuals)
+    Vector<double>& residuals)
   {
     // Set the dimension of the coordinates
     const unsigned n_dim = 3;
@@ -737,7 +737,7 @@ namespace oomph
   /// Return the jacobian is calculated by finite differences by default,
   //=========================================================================
   void KirchhoffLoveShellEquations::fill_in_contribution_to_jacobian(
-    Vector<double> &residuals, DenseMatrix<double> &jacobian)
+    Vector<double>& residuals, DenseMatrix<double>& jacobian)
   {
     // Call the element's residuals vector
     fill_in_contribution_to_residuals_shell(residuals);
@@ -769,7 +769,7 @@ namespace oomph
   /// Compute the potential (strain) and kinetic energy of the
   /// element.
   //=======================================================================
-  void KirchhoffLoveShellEquations::get_energy(double &pot_en, double &kin_en)
+  void KirchhoffLoveShellEquations::get_energy(double& pot_en, double& kin_en)
   {
     // Initialise
     pot_en = 0.0;
@@ -1223,7 +1223,7 @@ namespace oomph
   /// The output function: position, veloc and accel.
   //===================================================================
   void HermiteShellElement::output_with_time_dep_quantities(
-    std::ostream &outfile, const unsigned &n_plot)
+    std::ostream& outfile, const unsigned& n_plot)
   {
     // Local variables
     Vector<double> s(2);
@@ -1255,8 +1255,8 @@ namespace oomph
   //===================================================================
   /// The output function
   //===================================================================
-  void HermiteShellElement::output(std::ostream &outfile,
-                                   const unsigned &n_plot)
+  void HermiteShellElement::output(std::ostream& outfile,
+                                   const unsigned& n_plot)
   {
     // Local variables
     Vector<double> s(2);
@@ -1285,7 +1285,7 @@ namespace oomph
   //===================================================================
   /// The output function
   //===================================================================
-  void HermiteShellElement::output(FILE *file_pt, const unsigned &n_plot)
+  void HermiteShellElement::output(FILE* file_pt, const unsigned& n_plot)
   {
     // Local variables
     Vector<double> s(2);
@@ -1319,7 +1319,7 @@ namespace oomph
   /// conditions in some FSI problems.
   //=========================================================================
   void FSIDiagHermiteShellElement::dposition_dlagrangian_at_local_coordinate(
-    const Vector<double> &s, DenseMatrix<double> &drdxi) const
+    const Vector<double>& s, DenseMatrix<double>& drdxi) const
   {
 #ifdef PARANOID
     if (Undeformed_midplane_pt == 0)
@@ -1384,7 +1384,7 @@ namespace oomph
   /// This element is only in charge of the solid dofs.
   //=============================================================================
   void FSIDiagHermiteShellElement::get_dof_numbers_for_unknowns(
-    std::list<std::pair<unsigned long, unsigned>> &dof_lookup_list) const
+    std::list<std::pair<unsigned long, unsigned>>& dof_lookup_list) const
   {
     // temporary pair (used to store dof lookup prior to being added to list)
     std::pair<unsigned long, unsigned> dof_lookup;
@@ -1440,7 +1440,7 @@ namespace oomph
   //===========================================================================
   ClampedHermiteShellBoundaryConditionElement::
     ClampedHermiteShellBoundaryConditionElement(
-      FiniteElement *const &bulk_el_pt, const int &face_index) :
+      FiniteElement* const& bulk_el_pt, const int& face_index) :
     FaceGeometry<HermiteShellElement>(), FaceElement()
   {
     // Let the bulk element build the FaceElement, i.e. setup the pointers
@@ -1501,11 +1501,11 @@ namespace oomph
   /// Add the element's contribution to its residual vector
   //===========================================================================
   void ClampedHermiteShellBoundaryConditionElement::
-    fill_in_contribution_to_residuals(Vector<double> &residuals)
+    fill_in_contribution_to_residuals(Vector<double>& residuals)
   {
     // Get position vector to and normal vector on wall (from bulk element)
-    HermiteShellElement *bulk_el_pt =
-      dynamic_cast<HermiteShellElement *>(bulk_element_pt());
+    HermiteShellElement* bulk_el_pt =
+      dynamic_cast<HermiteShellElement*>(bulk_element_pt());
 
     // Local coordinates in bulk
     Vector<double> s_bulk(2);
@@ -1607,7 +1607,7 @@ namespace oomph
       // Loop over the number of nodes
       for (unsigned j = 0; j < n_node; j++)
       {
-        Node *nod_pt = node_pt(j);
+        Node* nod_pt = node_pt(j);
 
         // Loop over directions
         for (unsigned i = 0; i < 3; i++)
@@ -1657,11 +1657,11 @@ namespace oomph
   /// Output function
   //===========================================================================
   void ClampedHermiteShellBoundaryConditionElement::output(
-    std::ostream &outfile, const unsigned &n_plot)
+    std::ostream& outfile, const unsigned& n_plot)
   {
     // Get bulk element
-    HermiteShellElement *bulk_el_pt =
-      dynamic_cast<HermiteShellElement *>(bulk_element_pt());
+    HermiteShellElement* bulk_el_pt =
+      dynamic_cast<HermiteShellElement*>(bulk_element_pt());
 
     // Local coord
     Vector<double> s(1);
@@ -1767,7 +1767,7 @@ namespace oomph
   //=============================================================================
   void ClampedHermiteShellBoundaryConditionElement::
     get_dof_numbers_for_unknowns(
-      std::list<std::pair<unsigned long, unsigned>> &dof_lookup_list) const
+      std::list<std::pair<unsigned long, unsigned>>& dof_lookup_list) const
   {
     // temporary pair (used to store dof lookup prior to being added to list)
     std::pair<unsigned long, unsigned> dof_lookup;
@@ -1785,7 +1785,7 @@ namespace oomph
     // Loop over the nodes
     for (unsigned n = 0; n < n_node; n++)
     {
-      Node *nod_pt = this->node_pt(n);
+      Node* nod_pt = this->node_pt(n);
 
       // Loop over position dofs
       for (unsigned k = 0; k < n_position_type; k++)

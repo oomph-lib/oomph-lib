@@ -64,7 +64,7 @@ namespace oomph
   protected:
     /// Member function that returns the i-th independent component of the
     /// elasticity tensor
-    virtual inline double independent_component(const unsigned &i) const
+    virtual inline double independent_component(const unsigned& i) const
     {
       return 0.0;
     }
@@ -73,10 +73,10 @@ namespace oomph
     /// (Note that this only captures over-runs in 3D but
     /// errors are likely to be caught in evaluation of the
     /// stress and strain tensors anyway...)
-    void range_check(const unsigned &i,
-                     const unsigned &j,
-                     const unsigned &k,
-                     const unsigned &l) const
+    void range_check(const unsigned& i,
+                     const unsigned& j,
+                     const unsigned& k,
+                     const unsigned& l) const
     {
       if ((i > 2) || (j > 2) || (k > 2) || (l > 2))
       {
@@ -121,10 +121,10 @@ namespace oomph
   public:
     ///\short Return the appropriate independent component
     /// via the index translation scheme (const version).
-    double operator()(const unsigned &i,
-                      const unsigned &j,
-                      const unsigned &k,
-                      const unsigned &l) const
+    double operator()(const unsigned& i,
+                      const unsigned& j,
+                      const unsigned& k,
+                      const unsigned& l) const
     {
       // Range check
 #ifdef PARANOID
@@ -158,7 +158,7 @@ namespace oomph
     /// Young's modulus to the Young's modulus (or other reference stiffness)
     /// used to non-dimensionalise stresses and tractions in the governing
     /// equations).
-    IsotropicElasticityTensor(const double &nu, const double &E) :
+    IsotropicElasticityTensor(const double& nu, const double& E) :
       ElasticityTensor()
     {
       // Set the three independent components
@@ -171,7 +171,7 @@ namespace oomph
     /// \short Constructor. Passing in the value of the Poisson's ratio.
     /// Stresses and tractions in the governing equations are assumed
     /// to have been non-dimensionalised on Young's modulus.
-    IsotropicElasticityTensor(const double &nu) : ElasticityTensor()
+    IsotropicElasticityTensor(const double& nu) : ElasticityTensor()
     {
       // Set the three independent components
       C[0] = 0.0;
@@ -186,7 +186,7 @@ namespace oomph
     /// \short Constructur. Passing in the values of the two lame
     /// coefficients directly (interpreted as the ratios of these
     /// quantities to a reference stiffness used to non-dimensionalised
-    IsotropicElasticityTensor(const Vector<double> &lame)
+    IsotropicElasticityTensor(const Vector<double>& lame)
     {
       // Set the three independent components
       C[0] = 0.0;
@@ -194,14 +194,14 @@ namespace oomph
     }
 
     /// Overload the independent coefficient function
-    inline double independent_component(const unsigned &i) const
+    inline double independent_component(const unsigned& i) const
     {
       return C[StaticIndex[i]];
     }
 
   private:
     // Set the values of the lame coefficients
-    void set_lame_coefficients(const double &lambda, const double &mu)
+    void set_lame_coefficients(const double& lambda, const double& mu)
     {
       C[1] = lambda + 2.0 * mu;
       C[2] = lambda;
@@ -252,7 +252,7 @@ namespace oomph
     /// Young's modulus to the Young's modulus (or other reference stiffness)
     /// used to non-dimensionalise stresses and tractions in the governing
     /// equations).
-    DeviatoricIsotropicElasticityTensor(const double &nu, const double &E) :
+    DeviatoricIsotropicElasticityTensor(const double& nu, const double& E) :
       ElasticityTensor()
     {
       // Set the three independent components
@@ -265,7 +265,7 @@ namespace oomph
     /// \short Constructor. Passing in the value of the Poisson's ratio.
     /// Stresses and tractions in the governing equations are assumed
     /// to have been non-dimensionalised on Young's modulus.
-    DeviatoricIsotropicElasticityTensor(const double &nu) : ElasticityTensor()
+    DeviatoricIsotropicElasticityTensor(const double& nu) : ElasticityTensor()
     {
       // Set the three independent components
       C[0] = 0.0;
@@ -280,7 +280,7 @@ namespace oomph
     /// \short Constructur. Passing in the values of the two lame
     /// coefficients directly (interpreted as the ratios of these
     /// quantities to a reference stiffness used to non-dimensionalised
-    DeviatoricIsotropicElasticityTensor(const Vector<double> &lame)
+    DeviatoricIsotropicElasticityTensor(const Vector<double>& lame)
     {
       // Set the three independent components
       C[0] = 0.0;
@@ -288,26 +288,26 @@ namespace oomph
     }
 
     /// Overload the independent coefficient function
-    inline double independent_component(const unsigned &i) const
+    inline double independent_component(const unsigned& i) const
     {
       return C[StaticIndex[i]];
     }
 
     /// Accessor function for the first lame parameter
-    const double &lambda() const
+    const double& lambda() const
     {
       return Lambda;
     }
 
     /// Accessor function for the second lame parameter
-    const double &mu() const
+    const double& mu() const
     {
       return Mu;
     }
 
   private:
     // Set the values of the lame coefficients
-    void set_lame_coefficients(const double &lambda, const double &mu)
+    void set_lame_coefficients(const double& lambda, const double& mu)
     {
       C[1] = 2.0 * mu;
       C[2] = mu;

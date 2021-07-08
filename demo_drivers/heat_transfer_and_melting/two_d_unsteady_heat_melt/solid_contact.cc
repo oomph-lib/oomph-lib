@@ -71,7 +71,7 @@ namespace ProblemParameters
   double Nu = 0.3;
 
   /// Pointer to constitutive law
-  ConstitutiveLaw *Constitutive_law_pt = 0;
+  ConstitutiveLaw* Constitutive_law_pt = 0;
 
   /// Radius of penetrator
   double Radius = 0.1;
@@ -83,7 +83,7 @@ namespace ProblemParameters
   Vector<double> Centre;
 
   /// Penetrator
-  Penetrator *Penetrator_pt = 0;
+  Penetrator* Penetrator_pt = 0;
 
   /// Initial/max element area
   double El_area = 0.002;
@@ -219,14 +219,14 @@ private:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Get pointer to the bulk element that is adjacent to boundary b
-      ELEMENT *bulk_elem_pt =
-        dynamic_cast<ELEMENT *>(Bulk_mesh_pt->boundary_element_pt(b, e));
+      ELEMENT* bulk_elem_pt =
+        dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(b, e));
 
       // What is the face index of element e along boundary b
       int face_index = Bulk_mesh_pt->face_index_at_boundary(b, e);
 
       // Build the corresponding contact element
-      NonlinearSurfaceContactElement<ELEMENT> *contact_element_pt =
+      NonlinearSurfaceContactElement<ELEMENT>* contact_element_pt =
         new NonlinearSurfaceContactElement<ELEMENT>(bulk_elem_pt, face_index);
 
       // Add the contact element to the surface mesh
@@ -262,7 +262,7 @@ private:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Cast to a solid element
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
       // Set the constitutive law
       el_pt->constitutive_law_pt() = ProblemParameters::Constitutive_law_pt;
@@ -282,7 +282,7 @@ private:
     unsigned nnod = Bulk_mesh_pt->nboundary_node(b);
     for (unsigned j = 0; j < nnod; j++)
     {
-      SolidNode *nod_pt = Bulk_mesh_pt->boundary_node_pt(b, j);
+      SolidNode* nod_pt = Bulk_mesh_pt->boundary_node_pt(b, j);
       nod_pt->pin_position(0);
       nod_pt->pin_position(1);
     }
@@ -292,14 +292,14 @@ private:
     nnod = Bulk_mesh_pt->nboundary_node(b);
     for (unsigned j = 0; j < nnod; j++)
     {
-      SolidNode *nod_pt = Bulk_mesh_pt->boundary_node_pt(b, j);
+      SolidNode* nod_pt = Bulk_mesh_pt->boundary_node_pt(b, j);
       nod_pt->pin_position(0);
     }
     b = Right_boundary_id;
     nnod = Bulk_mesh_pt->nboundary_node(b);
     for (unsigned j = 0; j < nnod; j++)
     {
-      SolidNode *nod_pt = Bulk_mesh_pt->boundary_node_pt(b, j);
+      SolidNode* nod_pt = Bulk_mesh_pt->boundary_node_pt(b, j);
       nod_pt->pin_position(0);
     }
 
@@ -319,8 +319,8 @@ private:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Upcast from GeneralisedElement
-      NonlinearSurfaceContactElement<ELEMENT> *el_pt =
-        dynamic_cast<NonlinearSurfaceContactElement<ELEMENT> *>(
+      NonlinearSurfaceContactElement<ELEMENT>* el_pt =
+        dynamic_cast<NonlinearSurfaceContactElement<ELEMENT>*>(
           Surface_contact_mesh_pt->element_pt(e));
 
       // Set pointer to penetrator
@@ -329,10 +329,10 @@ private:
   }
 
   /// Pointer to bulk mesh
-  RefineableSolidTriangleMesh<ELEMENT> *Bulk_mesh_pt;
+  RefineableSolidTriangleMesh<ELEMENT>* Bulk_mesh_pt;
 
   /// Pointer to the "surface" mesh
-  Mesh *Surface_contact_mesh_pt;
+  Mesh* Surface_contact_mesh_pt;
 
   /// ID of contact boundary
   unsigned Contact_boundary_id;
@@ -354,7 +354,7 @@ private:
 
   /// \short Backup of Surface_contact_mesh_pt so the Lagrange multipliers
   /// can be projected across
-  BackupMeshForProjection<TElement<1, 3>> *Backed_up_surface_contact_mesh_pt;
+  BackupMeshForProjection<TElement<1, 3>>* Backed_up_surface_contact_mesh_pt;
 
 }; // end of problem class
 
@@ -390,13 +390,13 @@ ContactProblem<ELEMENT>::ContactProblem()
   double y_ur = 1.0;
 
   // Pointer to the closed curve that defines the outer boundary
-  TriangleMeshClosedCurve *closed_curve_pt = 0;
+  TriangleMeshClosedCurve* closed_curve_pt = 0;
 
   // Build outer boundary as Polygon
 
   // The boundary is bounded by five distinct boundaries, each
   // represented by its own polyline
-  Vector<TriangleMeshCurveSection *> boundary_polyline_pt(4);
+  Vector<TriangleMeshCurveSection*> boundary_polyline_pt(4);
 
   // Vertex coordinates on boundary
   Vector<Vector<double>> bound_coords(2);
@@ -462,13 +462,13 @@ ContactProblem<ELEMENT>::ContactProblem()
 
   // Build boundary poly line
   Contact_boundary_id = 3;
-  TriangleMeshPolyLine *contact_boundary_pt =
+  TriangleMeshPolyLine* contact_boundary_pt =
     new TriangleMeshPolyLine(contact_bound_coords, Contact_boundary_id);
   boundary_polyline_pt[3] = contact_boundary_pt;
 
   // Create the triangle mesh polygon for outer boundary
   //----------------------------------------------------
-  TriangleMeshPolygon *outer_polygon =
+  TriangleMeshPolygon* outer_polygon =
     new TriangleMeshPolygon(boundary_polyline_pt);
 
   // Set the pointer
@@ -490,7 +490,7 @@ ContactProblem<ELEMENT>::ContactProblem()
     triangle_mesh_parameters, time_stepper_pt());
 
   // Set error estimator for bulk mesh
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   Bulk_mesh_pt->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Create the surface mesh as an empty mesh
@@ -554,7 +554,7 @@ void ContactProblem<ELEMENT>::doc_solution()
   unsigned nel = Surface_contact_mesh_pt->nelement();
   for (unsigned e = 0; e < nel; e++)
   {
-    dynamic_cast<NonlinearSurfaceContactElement<ELEMENT> *>(
+    dynamic_cast<NonlinearSurfaceContactElement<ELEMENT>*>(
       Surface_contact_mesh_pt->element_pt(e))
       ->output(some_file, 20);
   }
@@ -586,7 +586,7 @@ void ContactProblem<ELEMENT>::doc_solution()
 //=======start_of_main====================================================
 /// \short Driver code
 //========================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   FiniteElement::Accept_negative_jacobian = true;
 

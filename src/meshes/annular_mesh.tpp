@@ -41,10 +41,10 @@ namespace oomph
   //==================================================================
   template<class ELEMENT>
   void TwoDAnnularMesh<ELEMENT>::wrap_into_annular_shape(
-    const double &a,
-    const double &h,
-    const double &azimuthal_fraction,
-    const double &phi)
+    const double& a,
+    const double& h,
+    const double& azimuthal_fraction,
+    const double& phi)
   {
     // Create the hole
     Ellipse ellipse(a, a);
@@ -57,7 +57,7 @@ namespace oomph
     for (unsigned n = 0; n < n_node; n++)
     {
       // Pointer to node
-      Node *nod_pt = this->node_pt(n);
+      Node* nod_pt = this->node_pt(n);
 
       // Get the angle of the node -- rotate such that jump in angle
       // appears at periodic boundary. Shrink domain slightly

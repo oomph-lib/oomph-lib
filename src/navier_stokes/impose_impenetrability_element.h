@@ -57,9 +57,9 @@ namespace oomph
     /// index that identifies which face the
     /// ImposeImpenetrabilityElement is supposed
     /// to be attached to, and the face element ID
-    ImposeImpenetrabilityElement(FiniteElement *const &element_pt,
-                                 const int &face_index,
-                                 const unsigned &id = 0) :
+    ImposeImpenetrabilityElement(FiniteElement* const& element_pt,
+                                 const int& face_index,
+                                 const unsigned& id = 0) :
       FaceGeometry<ELEMENT>(), FaceElement()
     {
       //  set the Id
@@ -78,7 +78,7 @@ namespace oomph
     }
 
     /// Fill in the residuals
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Call the generic routine with the flag set to 0
       fill_in_generic_contribution_to_residuals_parall_lagr_multiplier(
@@ -86,8 +86,8 @@ namespace oomph
     }
 
     /// Fill in contribution from Jacobian
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       // Call the generic routine with the flag set to 1
       fill_in_generic_contribution_to_residuals_parall_lagr_multiplier(
@@ -95,13 +95,13 @@ namespace oomph
     }
 
     /// Overload the output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       FiniteElement::output(outfile);
     }
 
     /// Output function: x,y,[z],u,v,[w],p in tecplot format
-    void output(std::ostream &outfile, const unsigned &nplot)
+    void output(std::ostream& outfile, const unsigned& nplot)
     {
       FiniteElement::output(outfile, nplot);
     }
@@ -111,9 +111,9 @@ namespace oomph
     /// the FaceElement representation, by default
     /// This final over-ride is required because both SolidFiniteElements
     /// and FaceElements overload zeta_nodal
-    double zeta_nodal(const unsigned &n,
-                      const unsigned &k,
-                      const unsigned &i) const
+    double zeta_nodal(const unsigned& n,
+                      const unsigned& k,
+                      const unsigned& i) const
     {
       return FaceElement::zeta_nodal(n, k, i);
     }
@@ -122,9 +122,9 @@ namespace oomph
     /// \short Helper function to compute the residuals and, if flag==1, the
     /// Jacobian
     void fill_in_generic_contribution_to_residuals_parall_lagr_multiplier(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      const unsigned &flag)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag)
     {
       // Find out how many nodes there are
       unsigned n_node = nnode();
@@ -147,7 +147,7 @@ namespace oomph
 
       // get the value at which the velocities are stored
       Vector<unsigned> u_index(dim_el + 1);
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(this->bulk_element_pt());
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->bulk_element_pt());
       for (unsigned i = 0; i < dim_el + 1; i++)
       {
         u_index[i] = el_pt->u_index_nst(i);
@@ -182,11 +182,11 @@ namespace oomph
           }
 
           // Cast to a boundary node
-          BoundaryNodeBase *bnod_pt =
-            dynamic_cast<BoundaryNodeBase *>(node_pt(j));
+          BoundaryNodeBase* bnod_pt =
+            dynamic_cast<BoundaryNodeBase*>(node_pt(j));
 
           // get the node
-          Node *nod_pt = node_pt(j);
+          Node* nod_pt = node_pt(j);
 
           // Get the index of the first nodal value associated with
           // this FaceElement
@@ -206,8 +206,8 @@ namespace oomph
         for (unsigned j = 0; j < n_node; j++)
         {
           // Cast to a boundary node
-          BoundaryNodeBase *bnod_pt =
-            dynamic_cast<BoundaryNodeBase *>(node_pt(j));
+          BoundaryNodeBase* bnod_pt =
+            dynamic_cast<BoundaryNodeBase*>(node_pt(j));
 
           // Get the index of the first nodal value associated with
           // this FaceElement
@@ -265,8 +265,8 @@ namespace oomph
                 for (unsigned jj = 0; jj < n_node; jj++)
                 {
                   // Cast to a boundary node
-                  BoundaryNodeBase *bnode_pt =
-                    dynamic_cast<BoundaryNodeBase *>(node_pt(jj));
+                  BoundaryNodeBase* bnode_pt =
+                    dynamic_cast<BoundaryNodeBase*>(node_pt(jj));
 
                   // Local eqn number for the l-th component of lamdba
                   // in the jj-th element
@@ -312,7 +312,7 @@ namespace oomph
     /// (Function can obviously only be called if the equation numbering
     /// scheme has been set up.)
     void get_dof_numbers_for_unknowns(
-      std::list<std::pair<unsigned long, unsigned>> &dof_lookup_list) const
+      std::list<std::pair<unsigned long, unsigned>>& dof_lookup_list) const
     {
       // temporary pair (used to store dof lookup prior to
       // being added to list)
@@ -330,8 +330,8 @@ namespace oomph
         for (unsigned j = 0; j < n_node; j++)
         {
           // Cast to a boundary node
-          BoundaryNodeBase *bnod_pt =
-            dynamic_cast<BoundaryNodeBase *>(node_pt(j));
+          BoundaryNodeBase* bnod_pt =
+            dynamic_cast<BoundaryNodeBase*>(node_pt(j));
 
           // Local eqn number:
           int local_eqn = nodal_local_eqn(

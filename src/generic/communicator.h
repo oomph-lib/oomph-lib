@@ -63,7 +63,7 @@ namespace oomph
     /// for the destruction of the mpi_communicator. The mpi comm will be freed
     /// when the destructor is called.
     OomphCommunicator(const MPI_Comm mpi_communicator,
-                      const bool &owns_mpi_comm = false) :
+                      const bool& owns_mpi_comm = false) :
       Serial_communicator(false)
     {
       // store a pointer to the communicator
@@ -84,7 +84,7 @@ namespace oomph
     }
 
     /// Copy constructor.
-    OomphCommunicator(const OomphCommunicator &communicator)
+    OomphCommunicator(const OomphCommunicator& communicator)
 #ifdef OOMPH_HAS_MPI
       :
       Owns_mpi_comm(false)
@@ -105,7 +105,7 @@ namespace oomph
 #endif
 
     /// Pointer (copy) constructor.
-    OomphCommunicator(const OomphCommunicator *communicator_pt)
+    OomphCommunicator(const OomphCommunicator* communicator_pt)
 #ifdef OOMPH_HAS_MPI
       :
       Owns_mpi_comm(false)
@@ -140,7 +140,7 @@ namespace oomph
     }
 
     /// assignment operator
-    void operator=(const OomphCommunicator &communicator)
+    void operator=(const OomphCommunicator& communicator)
     {
 #ifdef OOMPH_HAS_MPI
       if (Owns_mpi_comm)
@@ -200,7 +200,7 @@ namespace oomph
 
     /// \short == operator - only returns true if communicators are MPI_IDENT,
     /// i.e. if both group and context are the same
-    bool operator==(const OomphCommunicator &other_comm) const
+    bool operator==(const OomphCommunicator& other_comm) const
     {
 #ifdef OOMPH_HAS_MPI
       if (Serial_communicator != other_comm.serial_communicator())
@@ -228,7 +228,7 @@ namespace oomph
 
     /// \short != operator returns !(==operator) (see ==operator for more
     /// details)
-    bool operator!=(const OomphCommunicator &other_comm) const
+    bool operator!=(const OomphCommunicator& other_comm) const
     {
       return !(*this == other_comm);
     }
@@ -236,7 +236,7 @@ namespace oomph
 #ifdef OOMPH_HAS_MPI
     /// \short split the communicator: color is an integer label for the sub
     /// group of processors. key is the rank in this sub group
-    OomphCommunicator *split(const int &color, const int &key)
+    OomphCommunicator* split(const int& color, const int& key)
     {
 #ifdef PARANOID
       if (Serial_communicator)
@@ -250,10 +250,10 @@ namespace oomph
 #endif
 
       // pointer for the split oomph-lib communicator
-      OomphCommunicator *split_comm_pt;
+      OomphCommunicator* split_comm_pt;
 
       // the pointer for the new mpi communicator
-      MPI_Comm *mpi_comm_pt = new MPI_Comm;
+      MPI_Comm* mpi_comm_pt = new MPI_Comm;
 
       // get the split communicator
       MPI_Comm_split(Comm, color, key, mpi_comm_pt);
@@ -293,7 +293,7 @@ namespace oomph
     }
 
     /// broadcast function for Vector<int>
-    void broadcast(const int &source, Vector<int> &x)
+    void broadcast(const int& source, Vector<int>& x)
     {
       int n;
 
@@ -321,7 +321,7 @@ namespace oomph
     }
 
     /// broadcast function for Vector<double>
-    void broadcast(const int &source, Vector<double> &x)
+    void broadcast(const int& source, Vector<double>& x)
     {
       int n;
 
@@ -349,7 +349,7 @@ namespace oomph
     }
 
     /// broadcast function for DenseMatrix<double>
-    void broadcast(const int &source, DenseMatrix<double> &x);
+    void broadcast(const int& source, DenseMatrix<double>& x);
 
 #endif
 

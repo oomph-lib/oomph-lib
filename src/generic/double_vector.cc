@@ -35,7 +35,7 @@ namespace oomph
   //============================================================================
   /// Just copys the argument DoubleVector
   //============================================================================
-  void DoubleVector::build(const DoubleVector &old_vector)
+  void DoubleVector::build(const DoubleVector& old_vector)
   {
     if (!(*this == old_vector))
     {
@@ -49,7 +49,7 @@ namespace oomph
       if (this->distribution_built())
       {
         unsigned nrow_local = this->nrow_local();
-        const double *old_vector_values = old_vector.values_pt();
+        const double* old_vector_values = old_vector.values_pt();
         std::copy(old_vector_values, old_vector_values + nrow_local, Values_pt);
       }
     }
@@ -59,8 +59,8 @@ namespace oomph
   /// Assembles a DoubleVector with distribution dist, if v is specified
   /// each row is set to v
   //============================================================================
-  void DoubleVector::build(const LinearAlgebraDistribution *const &dist_pt,
-                           const double &v)
+  void DoubleVector::build(const LinearAlgebraDistribution* const& dist_pt,
+                           const double& v)
   {
     // clean the memory
     this->clear();
@@ -91,8 +91,8 @@ namespace oomph
   /// taken from the vector v.
   /// Note. The vector v MUST be of length nrow()
   //============================================================================
-  void DoubleVector::build(const LinearAlgebraDistribution *const &dist_pt,
-                           const Vector<double> &v)
+  void DoubleVector::build(const LinearAlgebraDistribution* const& dist_pt,
+                           const Vector<double>& v)
   {
     // clean the memory
     this->clear();
@@ -113,7 +113,7 @@ namespace oomph
   //============================================================================
   /// \short initialise the whole vector with value v
   //============================================================================
-  void DoubleVector::initialise(const double &v)
+  void DoubleVector::initialise(const double& v)
   {
     if (Built)
     {
@@ -155,7 +155,7 @@ namespace oomph
   /// the same Communicator.
   //============================================================================
   void DoubleVector::redistribute(
-    const LinearAlgebraDistribution *const &dist_pt)
+    const LinearAlgebraDistribution* const& dist_pt)
   {
 #ifdef OOMPH_HAS_MPI
 #ifdef PARANOID
@@ -263,7 +263,7 @@ namespace oomph
         }
 
         // temporary storage for the new data
-        double *temp_data = new double[new_nrow_local_data[my_rank]];
+        double* temp_data = new double[new_nrow_local_data[my_rank]];
 
         // "send to self" or copy Data that does not need to be sent else where
         // to temp_data
@@ -322,7 +322,7 @@ namespace oomph
       {
         // copy existing Values_pt to temp_data
         unsigned nrow_local = this->nrow_local();
-        double *temp_data = new double[nrow_local];
+        double* temp_data = new double[nrow_local];
         for (unsigned i = 0; i < nrow_local; i++)
         {
           temp_data[i] = Values_pt[i];
@@ -333,8 +333,8 @@ namespace oomph
         Values_pt = new double[this->nrow()];
 
         // create a int vector of first rows
-        int *dist_first_row = new int[nproc];
-        int *dist_nrow_local = new int[nproc];
+        int* dist_first_row = new int[nproc];
+        int* dist_nrow_local = new int[nproc];
         for (int p = 0; p < nproc; p++)
         {
           dist_first_row[p] = this->first_row(p);
@@ -373,7 +373,7 @@ namespace oomph
         unsigned first_row = dist_pt->first_row();
 
         // temp storage for the new data
-        double *temp_data = new double[nrow_local];
+        double* temp_data = new double[nrow_local];
 
         // copy the data
         for (unsigned i = 0; i < nrow_local; i++)
@@ -398,7 +398,7 @@ namespace oomph
   //============================================================================
   /// [] access function to the (local) values of this vector
   //============================================================================
-  double &DoubleVector::operator[](int i)
+  double& DoubleVector::operator[](int i)
   {
 #ifdef RANGE_CHECKING
     if (i >= int(this->nrow_local()))
@@ -416,7 +416,7 @@ namespace oomph
   //============================================================================
   /// \short == operator
   //============================================================================
-  bool DoubleVector::operator==(const DoubleVector &v)
+  bool DoubleVector::operator==(const DoubleVector& v)
   {
     // if v is not setup return false
     if (v.built() && !this->built())
@@ -433,7 +433,7 @@ namespace oomph
     }
     else
     {
-      const double *v_values_pt = v.values_pt();
+      const double* v_values_pt = v.values_pt();
       unsigned nrow_local = this->nrow_local();
       for (unsigned i = 0; i < nrow_local; i++)
       {
@@ -449,7 +449,7 @@ namespace oomph
   //============================================================================
   /// \short += operator
   //============================================================================
-  void DoubleVector::operator+=(const DoubleVector &v)
+  void DoubleVector::operator+=(const DoubleVector& v)
   {
 #ifdef PARANOID
     // PARANOID check that this vector is setup
@@ -480,7 +480,7 @@ namespace oomph
 #endif //
 
     // cache nrow_local
-    double *v_values_pt = v.values_pt();
+    double* v_values_pt = v.values_pt();
     unsigned nrow_local = this->nrow_local();
 
     // Decided to keep this as a loop rather than use std::transform, because
@@ -494,7 +494,7 @@ namespace oomph
   //============================================================================
   /// -= operator
   //============================================================================
-  void DoubleVector::operator-=(const DoubleVector &v)
+  void DoubleVector::operator-=(const DoubleVector& v)
   {
 #ifdef PARANOID
     // PARANOID check that this vector is setup
@@ -525,7 +525,7 @@ namespace oomph
 #endif
 
     // cache nrow_local
-    double *v_values_pt = v.values_pt();
+    double* v_values_pt = v.values_pt();
     unsigned nrow_local = this->nrow_local();
 
     // Decided to keep this as a loop rather than use std::transform, because
@@ -539,7 +539,7 @@ namespace oomph
   //============================================================================
   /// Multiply by double
   //============================================================================
-  void DoubleVector::operator*=(const double &d)
+  void DoubleVector::operator*=(const double& d)
   {
 #ifdef PARANOID
     if (!this->distribution_built())
@@ -562,7 +562,7 @@ namespace oomph
   //============================================================================
   /// Divide by double
   //============================================================================
-  void DoubleVector::operator/=(const double &d)
+  void DoubleVector::operator/=(const double& d)
   {
     // PARANOID checks are done inside operator *=
 
@@ -575,7 +575,7 @@ namespace oomph
   //============================================================================
   /// [] access function to the (local) values of this vector
   //============================================================================
-  const double &DoubleVector::operator[](int i) const
+  const double& DoubleVector::operator[](int i) const
   {
 #ifdef RANGE_CHECKING
     if (i >= int(this->nrow_local()))
@@ -642,11 +642,11 @@ namespace oomph
   //============================================================================
   /// output the contents of the vector
   //============================================================================
-  void DoubleVector::output(std::ostream &outfile,
-                            const int &output_precision) const
+  void DoubleVector::output(std::ostream& outfile,
+                            const int& output_precision) const
   {
     // temp pointer to values
-    double *temp;
+    double* temp;
 
     // number of global row
     unsigned nrow = this->nrow();
@@ -667,8 +667,8 @@ namespace oomph
       unsigned nrow = this->nrow();
 
       // get the vector of first_row s and nrow_local s
-      int *dist_first_row = new int[nproc];
-      int *dist_nrow_local = new int[nproc];
+      int* dist_first_row = new int[nproc];
+      int* dist_nrow_local = new int[nproc];
       for (int p = 0; p < nproc; p++)
       {
         dist_first_row[p] = this->first_row(p);
@@ -731,8 +731,8 @@ namespace oomph
   //============================================================================
   /// output the local contents of the vector
   //============================================================================
-  void DoubleVector::output_local_values(std::ostream &outfile,
-                                         const int &output_precision) const
+  void DoubleVector::output_local_values(std::ostream& outfile,
+                                         const int& output_precision) const
   {
     // Number of local rows.
     unsigned nrow_local = this->nrow_local();
@@ -762,7 +762,7 @@ namespace oomph
   /// output the local contents of the vector with the first row offset.
   //============================================================================
   void DoubleVector::output_local_values_with_offset(
-    std::ostream &outfile, const int &output_precision) const
+    std::ostream& outfile, const int& output_precision) const
   {
     // Number of local rows.
     unsigned nrow_local = this->nrow_local();
@@ -794,7 +794,7 @@ namespace oomph
   //============================================================================
   /// compute the dot product of this vector with the vector vec
   //============================================================================
-  double DoubleVector::dot(const DoubleVector &vec) const
+  double DoubleVector::dot(const DoubleVector& vec) const
   {
 #ifdef PARANOID
     // paranoid check that the vector is setup
@@ -827,7 +827,7 @@ namespace oomph
     // compute the local norm
     unsigned nrow_local = this->nrow_local();
     double n = 0.0;
-    const double *vec_values_pt = vec.values_pt();
+    const double* vec_values_pt = vec.values_pt();
     for (unsigned i = 0; i < nrow_local; i++)
     {
       n += Values_pt[i] * vec_values_pt[i];
@@ -903,7 +903,7 @@ namespace oomph
   //============================================================================
   /// compute the A-norm using the matrix at matrix_pt
   //============================================================================
-  double DoubleVector::norm(const CRDoubleMatrix *matrix_pt) const
+  double DoubleVector::norm(const CRDoubleMatrix* matrix_pt) const
   {
 #ifdef PARANOID
     // paranoid check that the vector is setup
@@ -938,7 +938,7 @@ namespace oomph
   }
 
   /// \short output operator
-  std::ostream &operator<<(std::ostream &out, const DoubleVector &v)
+  std::ostream& operator<<(std::ostream& out, const DoubleVector& v)
   {
     // Do the first value outside the loop to get the ", "s right.
     out << "[" << v[0];
@@ -982,8 +982,8 @@ namespace oomph
     /// vector with a distribution, otherwise we can let the function generate
     /// the out vector distribution itself.
     //===========================================================================
-    void concatenate(const Vector<DoubleVector *> &in_vector_pt,
-                     DoubleVector &out_vector)
+    void concatenate(const Vector<DoubleVector*>& in_vector_pt,
+                     DoubleVector& out_vector)
     {
       // How many in vectors to concatenate?
       unsigned nvectors = in_vector_pt.size();
@@ -1029,7 +1029,7 @@ namespace oomph
 #endif
 
       // The communicator pointer for the first in vector.
-      const OomphCommunicator *const comm_pt =
+      const OomphCommunicator* const comm_pt =
         in_vector_pt[0]->distribution_pt()->communicator_pt();
 
       // Check if the first in vector is distributed.
@@ -1126,7 +1126,7 @@ namespace oomph
         unsigned out_i = 0;
 
         // Out vector values.
-        double *out_value_pt = out_vector.values_pt();
+        double* out_value_pt = out_vector.values_pt();
 
         // Loop through the in vectors.
         for (unsigned vec_i = 0; vec_i < nvectors; vec_i++)
@@ -1135,7 +1135,7 @@ namespace oomph
           unsigned in_nrow = in_vector_pt[vec_i]->nrow();
 
           // In vector values.
-          double *in_value_pt = in_vector_pt[vec_i]->values_pt();
+          double* in_value_pt = in_vector_pt[vec_i]->values_pt();
 
           // Loop through the entries of this in vector.
           for (unsigned i = 0; i < in_nrow; i++)
@@ -1167,7 +1167,7 @@ namespace oomph
         //
         // Then put the value and out_local_eqn at out_p in values_to_send
 
-        LinearAlgebraDistribution *out_distribution_pt =
+        LinearAlgebraDistribution* out_distribution_pt =
           out_vector.distribution_pt();
         for (unsigned in_vec_i = 0; in_vec_i < nvectors; in_vec_i++)
         {
@@ -1369,11 +1369,11 @@ namespace oomph
     /// pointers which will delete themselves, so we do not have to remember
     /// to delete!
     //===========================================================================
-    void concatenate(Vector<DoubleVector> &in_vector, DoubleVector &out_vector)
+    void concatenate(Vector<DoubleVector>& in_vector, DoubleVector& out_vector)
     {
       const unsigned n_in_vector = in_vector.size();
 
-      Vector<DoubleVector *> in_vector_pt(n_in_vector, 0);
+      Vector<DoubleVector*> in_vector_pt(n_in_vector, 0);
 
       for (unsigned i = 0; i < n_in_vector; i++)
       {
@@ -1401,8 +1401,8 @@ namespace oomph
     /// of global row of the out vectors must be the same the number of global
     /// rows of the in vector.
     //===========================================================================
-    void split(const DoubleVector &in_vector,
-               Vector<DoubleVector *> &out_vector_pt)
+    void split(const DoubleVector& in_vector,
+               Vector<DoubleVector*>& out_vector_pt)
     {
       // How many out vectors do we have?
       unsigned nvec = out_vector_pt.size();
@@ -1495,7 +1495,7 @@ namespace oomph
 #endif
 
       // The communicator.
-      const OomphCommunicator *const comm_pt =
+      const OomphCommunicator* const comm_pt =
         in_vector.distribution_pt()->communicator_pt();
 
       // Is this distributed?
@@ -1509,14 +1509,14 @@ namespace oomph
 
         // index for in vector, and in vector values.
         unsigned in_vec_i = 0;
-        double *in_value_pt = in_vector.values_pt();
+        double* in_value_pt = in_vector.values_pt();
 
         // Fill in the out vectors.
         for (unsigned out_vec_i = 0; out_vec_i < nvec; out_vec_i++)
         {
           // out vector nrow and values.
           unsigned out_nrow = out_vector_pt[out_vec_i]->nrow();
-          double *out_value_pt = out_vector_pt[out_vec_i]->values_pt();
+          double* out_value_pt = out_vector_pt[out_vec_i]->values_pt();
 
           // Fill in the current out vector.
           for (unsigned out_val_i = 0; out_val_i < out_nrow; out_val_i++)
@@ -1791,10 +1791,10 @@ namespace oomph
     /// pointers which will delete themselves, so we do not have to remember
     /// to delete!
     //===========================================================================
-    void split(const DoubleVector &in_vector, Vector<DoubleVector> &out_vector)
+    void split(const DoubleVector& in_vector, Vector<DoubleVector>& out_vector)
     {
       const unsigned n_out_vector = out_vector.size();
-      Vector<DoubleVector *> out_vector_pt(n_out_vector, 0);
+      Vector<DoubleVector*> out_vector_pt(n_out_vector, 0);
 
       for (unsigned i = 0; i < n_out_vector; i++)
       {
@@ -1843,7 +1843,7 @@ namespace oomph
     /// as defined by the distributions from the in vectors.
     //===========================================================================
     void concatenate_without_communication(
-      const Vector<DoubleVector *> &in_vector_pt, DoubleVector &out_vector)
+      const Vector<DoubleVector*>& in_vector_pt, DoubleVector& out_vector)
     {
       // How many in vectors do we want to concatenate?
       unsigned nvectors = in_vector_pt.size();
@@ -1891,7 +1891,7 @@ namespace oomph
       // If the out vector is not built, build it with the correct distribution.
       if (!out_vector.built())
       {
-        Vector<LinearAlgebraDistribution *> in_distribution_pt(nvectors, 0);
+        Vector<LinearAlgebraDistribution*> in_distribution_pt(nvectors, 0);
         for (unsigned vec_i = 0; vec_i < nvectors; vec_i++)
         {
           in_distribution_pt[vec_i] = in_vector_pt[vec_i]->distribution_pt();
@@ -1954,7 +1954,7 @@ namespace oomph
 
       // Create tmp_distribution, a concatenation of all distributions from
       // the in vectors.
-      Vector<LinearAlgebraDistribution *> in_distribution_pt(nvectors, 0);
+      Vector<LinearAlgebraDistribution*> in_distribution_pt(nvectors, 0);
       for (unsigned vec_i = 0; vec_i < nvectors; vec_i++)
       {
         in_distribution_pt[vec_i] = in_vector_pt[vec_i]->distribution_pt();
@@ -1988,7 +1988,7 @@ namespace oomph
 
       unsigned out_value_offset = 0;
 
-      double *out_value_pt = out_vector.values_pt();
+      double* out_value_pt = out_vector.values_pt();
 
       // Loop through the vectors.
       for (unsigned vec_i = 0; vec_i < nvectors; vec_i++)
@@ -1996,7 +1996,7 @@ namespace oomph
         // Get the nrow_local and
         // pointer to the values for the current in vector.
         unsigned in_vector_nrow_local = in_vector_pt[vec_i]->nrow_local();
-        double *in_vector_value_pt = in_vector_pt[vec_i]->values_pt();
+        double* in_vector_value_pt = in_vector_pt[vec_i]->values_pt();
 
         // Loop through the local values and inset them into the out_vector.
         for (unsigned val_i = 0; val_i < in_vector_nrow_local; val_i++)
@@ -2024,12 +2024,12 @@ namespace oomph
     /// pointers which will delete themselves, so we do not have to remember
     /// to delete!
     //===========================================================================
-    void concatenate_without_communication(Vector<DoubleVector> &in_vector,
-                                           DoubleVector &out_vector)
+    void concatenate_without_communication(Vector<DoubleVector>& in_vector,
+                                           DoubleVector& out_vector)
     {
       const unsigned n_in_vector = in_vector.size();
 
-      Vector<DoubleVector *> in_vector_pt(n_in_vector, 0);
+      Vector<DoubleVector*> in_vector_pt(n_in_vector, 0);
 
       for (unsigned i = 0; i < n_in_vector; i++)
       {
@@ -2060,8 +2060,8 @@ namespace oomph
     /// LinearAlgebraDistributionHelpers::concatenate(...) to concatenate
     /// distributions.
     //===========================================================================
-    void split_without_communication(const DoubleVector &in_vector,
-                                     Vector<DoubleVector *> &out_vector_pt)
+    void split_without_communication(const DoubleVector& in_vector,
+                                     Vector<DoubleVector*>& out_vector_pt)
     {
       // How many out vectors do we need?
       unsigned nvec = out_vector_pt.size();
@@ -2097,7 +2097,7 @@ namespace oomph
       // the same as the distribution from in_vector.
 
       // Create the distribution from out_distribution.
-      Vector<LinearAlgebraDistribution *> tmp_out_distribution_pt(nvec, 0);
+      Vector<LinearAlgebraDistribution*> tmp_out_distribution_pt(nvec, 0);
       for (unsigned vec_i = 0; vec_i < nvec; vec_i++)
       {
         tmp_out_distribution_pt[vec_i] =
@@ -2167,13 +2167,13 @@ namespace oomph
 
       // Loop through the sub vectors and insert the values from the
       // in vector.
-      double *in_value_pt = in_vector.values_pt();
+      double* in_value_pt = in_vector.values_pt();
       unsigned in_value_offset = 0;
       for (unsigned vec_i = 0; vec_i < nvec; vec_i++)
       {
         // The nrow_local and values for the current out vector.
         unsigned out_nrow_local = out_vector_pt[vec_i]->nrow_local();
-        double *out_value_pt = out_vector_pt[vec_i]->values_pt();
+        double* out_value_pt = out_vector_pt[vec_i]->values_pt();
 
         // Loop through the local values of out vector.
         for (unsigned val_i = 0; val_i < out_nrow_local; val_i++)
@@ -2201,12 +2201,12 @@ namespace oomph
     /// pointers which will delete themselves, so we do not have to remember
     /// to delete!
     //===========================================================================
-    void split_without_communication(const DoubleVector &in_vector,
-                                     Vector<DoubleVector> &out_vector)
+    void split_without_communication(const DoubleVector& in_vector,
+                                     Vector<DoubleVector>& out_vector)
     {
       const unsigned n_out_vector = out_vector.size();
 
-      Vector<DoubleVector *> out_vector_pt(n_out_vector, 0);
+      Vector<DoubleVector*> out_vector_pt(n_out_vector, 0);
 
       for (unsigned i = 0; i < n_out_vector; i++)
       {

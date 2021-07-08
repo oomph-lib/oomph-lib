@@ -76,7 +76,7 @@ namespace oomph
 
     /// \short Helper function to check the Hypre error flag, return the
     /// message associated with any error, and reset the error flag to zero.
-    int check_HYPRE_error_flag(std::ostringstream &message);
+    int check_HYPRE_error_flag(std::ostringstream& message);
 
     /// \short Helper function to create a HYPRE_IJVector and HYPRE_ParVector.
     /// + If no MPI then serial vectors are created
@@ -84,10 +84,10 @@ namespace oomph
     ///   created
     /// + If MPI and distributed input vector the distributed output vectors
     ///   are created.
-    extern void create_HYPRE_Vector(const DoubleVector &oomph_vec,
-                                    const LinearAlgebraDistribution *dist_pt,
-                                    HYPRE_IJVector &hypre_ij_vector,
-                                    HYPRE_ParVector &hypre_par_vector);
+    extern void create_HYPRE_Vector(const DoubleVector& oomph_vec,
+                                    const LinearAlgebraDistribution* dist_pt,
+                                    HYPRE_IJVector& hypre_ij_vector,
+                                    HYPRE_ParVector& hypre_par_vector);
 
     /// \short Helper function to create an empty HYPRE_IJVector and
     /// HYPRE_ParVector.
@@ -96,26 +96,26 @@ namespace oomph
     ///   created
     /// + If MPI and distributed input distribution the distributed output
     ///   vectors are created.
-    void create_HYPRE_Vector(const LinearAlgebraDistribution *oomph_vec,
-                             HYPRE_IJVector &hypre_ij_vector,
-                             HYPRE_ParVector &hypre_par_vector);
+    void create_HYPRE_Vector(const LinearAlgebraDistribution* oomph_vec,
+                             HYPRE_IJVector& hypre_ij_vector,
+                             HYPRE_ParVector& hypre_par_vector);
 
     /// \short Helper function to create a serial HYPRE_IJMatrix and
     /// HYPRE_ParCSRMatrix from a CRDoubleMatrix
-    void create_HYPRE_Matrix(CRDoubleMatrix *oomph_matrix,
-                             HYPRE_IJMatrix &hypre_ij_matrix,
-                             HYPRE_ParCSRMatrix &hypre_par_matrix,
-                             LinearAlgebraDistribution *dist_pt);
+    void create_HYPRE_Matrix(CRDoubleMatrix* oomph_matrix,
+                             HYPRE_IJMatrix& hypre_ij_matrix,
+                             HYPRE_ParCSRMatrix& hypre_par_matrix,
+                             LinearAlgebraDistribution* dist_pt);
 
     /// \short Helper function to set Euclid options using a command line
     /// like array.
-    void euclid_settings_helper(const bool &use_block_jacobi,
-                                const bool &use_row_scaling,
-                                const bool &use_ilut,
-                                const int &level,
-                                const double &drop_tol,
-                                const int &print_level,
-                                HYPRE_Solver &euclid_object);
+    void euclid_settings_helper(const bool& use_block_jacobi,
+                                const bool& use_row_scaling,
+                                const bool& use_ilut,
+                                const int& level,
+                                const double& drop_tol,
+                                const int& print_level,
+                                HYPRE_Solver& euclid_object);
 
   } // namespace HypreHelpers
 
@@ -235,13 +235,13 @@ namespace oomph
     }
 
     /// Broken copy constructor.
-    HypreInterface(const HypreInterface &)
+    HypreInterface(const HypreInterface&)
     {
       BrokenCopy::broken_copy("HypreInterface");
     }
 
     /// Broken assignment operator.
-    void operator=(const HypreInterface &)
+    void operator=(const HypreInterface&)
     {
       BrokenCopy::broken_assign("HypreInterface");
     }
@@ -298,7 +298,7 @@ namespace oomph
     /// \short Function which sets values of First_global_row,
     /// Last_global_row and other partitioning data and creates the distributed
     /// Hypre matrix (stored in Matrix_ij/Matrix_par) from the CRDoubleMatrix.
-    void hypre_matrix_setup(CRDoubleMatrix *matrix_pt);
+    void hypre_matrix_setup(CRDoubleMatrix* matrix_pt);
 
     /// \short Sets up the data required for to use as an oomph-lib
     /// LinearSolver or Preconditioner. This must be called after
@@ -307,7 +307,7 @@ namespace oomph
 
     /// \short Helper function performs a solve if any solver
     /// exists.
-    void hypre_solve(const DoubleVector &rhs, DoubleVector &solution);
+    void hypre_solve(const DoubleVector& rhs, DoubleVector& solution);
 
     /// Flag is true to output info and results of timings
     bool Output_info;
@@ -495,7 +495,7 @@ namespace oomph
     unsigned Existing_preconditioner;
 
     /// the distribution for this helpers-
-    LinearAlgebraDistribution *Hypre_distribution_pt;
+    LinearAlgebraDistribution* Hypre_distribution_pt;
   };
 
   ////////////////////////////////////////////////////////////////////////
@@ -541,13 +541,13 @@ namespace oomph
     ~HypreSolver() {}
 
     /// Broken copy constructor.
-    HypreSolver(const HypreSolver &)
+    HypreSolver(const HypreSolver&)
     {
       BrokenCopy::broken_copy("HypreSolver");
     }
 
     /// Broken assignment operator.
-    void operator=(const HypreSolver &)
+    void operator=(const HypreSolver&)
     {
       BrokenCopy::broken_assign("HypreSolver");
     }
@@ -561,26 +561,26 @@ namespace oomph
     }
 
     /// Access function to Max_iter
-    unsigned &max_iter()
+    unsigned& max_iter()
     {
       return Max_iter;
     }
 
     /// Access function to Tolerance
-    double &tolerance()
+    double& tolerance()
     {
       return Tolerance;
     }
 
     /// Access function to Hypre_method flag -- specified via enumeration.
-    unsigned &hypre_method()
+    unsigned& hypre_method()
     {
       return Hypre_method;
     }
 
     /// \short Access function to Internal_preconditioner flag -- specified
     /// via enumeration.
-    unsigned &internal_preconditioner()
+    unsigned& internal_preconditioner()
     {
       return Internal_preconditioner;
     }
@@ -593,7 +593,7 @@ namespace oomph
     }
 
     /// Access function to AMG_simple_smoother flag
-    unsigned &amg_simple_smoother()
+    unsigned& amg_simple_smoother()
     {
       return AMG_simple_smoother;
     }
@@ -606,92 +606,92 @@ namespace oomph
     }
 
     /// Access function to AMG_complex_smoother flag
-    unsigned &amg_complex_smoother()
+    unsigned& amg_complex_smoother()
     {
       return AMG_complex_smoother;
     }
 
     /// Access function to AMG_print_level
-    unsigned &amg_print_level()
+    unsigned& amg_print_level()
     {
       return AMG_print_level;
     }
 
     /// Access function to AMG_smoother_iterations
-    unsigned &amg_smoother_iterations()
+    unsigned& amg_smoother_iterations()
     {
       return AMG_smoother_iterations;
     }
 
     /// Access function to AMG_coarsening flag
-    unsigned &amg_coarsening()
+    unsigned& amg_coarsening()
     {
       return AMG_coarsening;
     }
 
     /// Access function to AMG_max_levels
-    unsigned &amg_max_levels()
+    unsigned& amg_max_levels()
     {
       return AMG_max_levels;
     }
 
     /// Access function to AMG_damping parameter
-    double &amg_damping()
+    double& amg_damping()
     {
       return AMG_damping;
     }
 
     /// Access function to AMG_strength
-    double &amg_strength()
+    double& amg_strength()
     {
       return AMG_strength;
     }
 
     /// Access function to AMG_max_row_sum
-    double &amg_max_row_sum()
+    double& amg_max_row_sum()
     {
       return AMG_max_row_sum;
     }
 
     /// Access function to AMG_truncation
-    double &amg_truncation()
+    double& amg_truncation()
     {
       return AMG_truncation;
     }
 
     /// Access function to ParaSails symmetry flag
-    int &parasails_symmetry()
+    int& parasails_symmetry()
     {
       return ParaSails_symmetry;
     }
 
     /// Access function to ParaSails nlevel parameter
-    int &parasails_nlevel()
+    int& parasails_nlevel()
     {
       return ParaSails_nlevel;
     }
 
     /// Access function to ParaSails thresh parameter
-    double &parasails_thresh()
+    double& parasails_thresh()
     {
       return ParaSails_thresh;
     }
 
     /// Access function to ParaSails filter parameter
-    double &parasails_filter()
+    double& parasails_filter()
     {
       return ParaSails_filter;
     }
 
     /// Access function to Euclid drop tolerance parameter
-    double &euclid_droptol()
+    double& euclid_droptol()
     {
       return Euclid_droptol;
     }
 
     /// Access function to Euclid level parameter
     /// for ILU(k) factorization
-    int &euclid_level()
+    int& euclid_level()
     {
       return Euclid_level;
     }
@@ -741,13 +741,13 @@ namespace oomph
     /// 0: no printing (default)
     /// 1: prints summary of runtime settings and timings
     /// 2: as 1 plus prints memory usage
-    unsigned &euclid_print_level()
+    unsigned& euclid_print_level()
     {
       return Euclid_print_level;
     }
 
     /// Access function to Krylov_print_level
-    unsigned &krylov_print_level()
+    unsigned& krylov_print_level()
     {
       return Krylov_print_level;
     }
@@ -778,7 +778,7 @@ namespace oomph
     /// \short Function which uses problem_pt's get_jacobian(...) function to
     /// generate a linear system which is then solved. This function deletes
     /// any existing internal data and then generates a new Hypre solver.
-    void solve(Problem *const &problem_pt, DoubleVector &solution);
+    void solve(Problem* const& problem_pt, DoubleVector& solution);
 
     /// \short Function to solve the linear system defined by matrix_pt
     /// and rhs. This function will delete any existing internal data
@@ -793,15 +793,15 @@ namespace oomph
     /// However, this will not be the expected behaviour and therefore
     /// needs to be requested explicitly by the user by calling the
     /// enable_delete_matrix() function.
-    void solve(DoubleMatrixBase *const &matrix_pt,
-               const DoubleVector &rhs,
-               DoubleVector &solution);
+    void solve(DoubleMatrixBase* const& matrix_pt,
+               const DoubleVector& rhs,
+               DoubleVector& solution);
 
     /// \short Function to resolve a linear system using the existing solver
     /// data, allowing a solve with a new right hand side vector. This
     /// function must be used after a call to solve(...) with
     /// enable_resolve set to true.
-    void resolve(const DoubleVector &rhs, DoubleVector &solution);
+    void resolve(const DoubleVector& rhs, DoubleVector& solution);
 
     /// Function deletes all solver data.
     void clean_up_memory();
@@ -838,7 +838,7 @@ namespace oomph
   public:
     /// \short  Constructor. Provide optional string that is used
     /// in annotation of performance
-    HyprePreconditioner(const std::string &context_string = "")
+    HyprePreconditioner(const std::string& context_string = "")
     {
       Context_string = context_string;
 
@@ -881,13 +881,13 @@ namespace oomph
     }
 
     /// Broken copy constructor.
-    HyprePreconditioner(const HyprePreconditioner &)
+    HyprePreconditioner(const HyprePreconditioner&)
     {
       BrokenCopy::broken_copy("HyprePreconditioner");
     }
 
     /// Broken assignment operator.
-    void operator=(const HyprePreconditioner &)
+    void operator=(const HyprePreconditioner&)
     {
       BrokenCopy::broken_assign("HyprePreconditioner");
     }
@@ -958,14 +958,14 @@ namespace oomph
     }
 
     /// Access function to Hypre_method flag -- specified via enumeration.
-    unsigned &hypre_method()
+    unsigned& hypre_method()
     {
       return Hypre_method;
     }
 
     /// \short Access function to Internal_preconditioner flag -- specified
     /// via enumeration.
-    unsigned &internal_preconditioner()
+    unsigned& internal_preconditioner()
     {
       return Internal_preconditioner;
     }
@@ -977,13 +977,13 @@ namespace oomph
     }
 
     /// Function to set the number of times to apply BoomerAMG
-    void set_amg_iterations(const unsigned &amg_iterations)
+    void set_amg_iterations(const unsigned& amg_iterations)
     {
       Max_iter = amg_iterations;
     }
 
     /// Return function for Max_iter
-    unsigned &amg_iterations()
+    unsigned& amg_iterations()
     {
       return Max_iter;
     }
@@ -996,7 +996,7 @@ namespace oomph
     }
 
     /// Access function to AMG_simple_smoother flag
-    unsigned &amg_simple_smoother()
+    unsigned& amg_simple_smoother()
     {
       return AMG_simple_smoother;
     }
@@ -1009,61 +1009,61 @@ namespace oomph
     }
 
     /// Access function to AMG_complex_smoother flag
-    unsigned &amg_complex_smoother()
+    unsigned& amg_complex_smoother()
     {
       return AMG_complex_smoother;
     }
 
     /// \short Return function for the AMG_using_simple_smoothing_flag
-    bool &amg_using_simple_smoothing_flag()
+    bool& amg_using_simple_smoothing_flag()
     {
       return AMG_using_simple_smoothing;
     }
 
     /// Access function to AMG_print_level
-    unsigned &amg_print_level()
+    unsigned& amg_print_level()
     {
       return AMG_print_level;
     }
 
     /// Access function to AMG_smoother_iterations
-    unsigned &amg_smoother_iterations()
+    unsigned& amg_smoother_iterations()
     {
       return AMG_smoother_iterations;
     }
 
     /// Access function to AMG_coarsening flag
-    unsigned &amg_coarsening()
+    unsigned& amg_coarsening()
     {
       return AMG_coarsening;
     }
 
     /// Access function to AMG_max_levels
-    unsigned &amg_max_levels()
+    unsigned& amg_max_levels()
     {
       return AMG_max_levels;
     }
 
     /// Access function to AMG_damping parameter
-    double &amg_damping()
+    double& amg_damping()
     {
       return AMG_damping;
     }
 
     /// Access function to AMG_strength
-    double &amg_strength()
+    double& amg_strength()
     {
       return AMG_strength;
     }
 
     /// Access function to AMG_max_row_sum
-    double &amg_max_row_sum()
+    double& amg_max_row_sum()
     {
       return AMG_max_row_sum;
     }
 
     /// Access function to AMG_truncation
-    double &amg_truncation()
+    double& amg_truncation()
     {
       return AMG_truncation;
     }
@@ -1075,25 +1075,25 @@ namespace oomph
     }
 
     /// Access function to ParaSails symmetry flag
-    int &parasails_symmetry()
+    int& parasails_symmetry()
     {
       return ParaSails_symmetry;
     }
 
     /// Access function to ParaSails nlevel parameter
-    int &parasails_nlevel()
+    int& parasails_nlevel()
     {
       return ParaSails_nlevel;
     }
 
     /// Access function to ParaSails thresh parameter
-    double &parasails_thresh()
+    double& parasails_thresh()
     {
       return ParaSails_thresh;
     }
 
     /// Access function to ParaSails filter parameter
-    double &parasails_filter()
+    double& parasails_filter()
     {
       return ParaSails_filter;
     }
@@ -1105,13 +1105,13 @@ namespace oomph
     }
 
     /// Access function to Euclid drop tolerance parameter
-    double &euclid_droptol()
+    double& euclid_droptol()
     {
       return Euclid_droptol;
     }
 
     /// Access function to Euclid level parameter for ILU(k) factorization
-    int &euclid_level()
+    int& euclid_level()
     {
       return Euclid_level;
     }
@@ -1161,7 +1161,7 @@ namespace oomph
     /// 0: no printing (default)
     /// 1: prints summary of runtime settings and timings
     /// 2: as 1 plus prints memory usage
-    unsigned &euclid_print_level()
+    unsigned& euclid_print_level()
     {
       return Euclid_print_level;
     }
@@ -1217,7 +1217,7 @@ namespace oomph
     /// However, this will not be the expected behaviour and therefore
     /// needs to be requested explicitly by the user with the
     /// delete_matrix() function.
-    void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+    void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
     /// Function deletes all solver data.
     void clean_up_memory();
@@ -1262,17 +1262,17 @@ namespace oomph
     /// \short Set default parameters for use as preconditioner in
     /// for momentum block in Navier-Stokes problem
     extern void set_defaults_for_navier_stokes_momentum_block(
-      HyprePreconditioner *hypre_preconditioner_pt);
+      HyprePreconditioner* hypre_preconditioner_pt);
 
     /// \short Set default parameters for use as preconditioner in
     /// 2D Poisson-type problem.
     extern void set_defaults_for_2D_poisson_problem(
-      HyprePreconditioner *hypre_preconditioner_pt);
+      HyprePreconditioner* hypre_preconditioner_pt);
 
     /// \short Set default parameters for use as preconditioner in
     /// 3D Poisson-type problem.
     extern void set_defaults_for_3D_poisson_problem(
-      HyprePreconditioner *hypre_preconditioner_pt);
+      HyprePreconditioner* hypre_preconditioner_pt);
 
   } // namespace Hypre_default_settings
 } // namespace oomph

@@ -95,12 +95,12 @@ public:
   /// domain in the x direction. Also pass the number of elements in
   /// the y direction of the bottom (fluid 1) and top (fluid 2) layers,
   /// along with the heights of both layers.
-  InterfaceProblem(const unsigned &n_x,
-                   const unsigned &n_y1,
-                   const unsigned &n_y2,
-                   const double &l_x,
-                   const double &h1,
-                   const double &h2);
+  InterfaceProblem(const unsigned& n_x,
+                   const unsigned& n_y1,
+                   const unsigned& n_y2,
+                   const double& l_x,
+                   const double& h1,
+                   const double& h2);
 
   /// Destructor (empty)
   ~InterfaceProblem() {}
@@ -112,10 +112,10 @@ public:
   void set_boundary_conditions();
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// Do unsteady run up to maximum time t_max with given timestep dt
-  void unsteady_run(const double &t_max, const double &dt);
+  void unsteady_run(const double& t_max, const double& dt);
 
 private:
   /// \short Spine heights/lengths are unknowns in the problem so their
@@ -135,15 +135,15 @@ private:
   void actions_after_newton_solve() {}
 
   /// Deform the mesh/free surface to a prescribed function
-  void deform_free_surface(const double &epsilon, const unsigned &n_periods);
+  void deform_free_surface(const double& epsilon, const unsigned& n_periods);
 
   /// Fix pressure in element e at pressure dof pdof and set to pvalue
-  void fix_pressure(const unsigned &e,
-                    const unsigned &pdof,
-                    const double &pvalue)
+  void fix_pressure(const unsigned& e,
+                    const unsigned& pdof,
+                    const double& pvalue)
   {
     // Fix the pressure at that element
-    dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e))
+    dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e))
       ->fix_pressure(pdof, pvalue);
   }
 
@@ -154,10 +154,10 @@ private:
   ofstream Trace_file;
 
   /// \short Pointer to the specific bulk mesh
-  TwoLayerSpineMesh<ELEMENT> *Bulk_mesh_pt;
+  TwoLayerSpineMesh<ELEMENT>* Bulk_mesh_pt;
 
   /// \short Pointer to the surface mesh
-  Mesh *Surface_mesh_pt;
+  Mesh* Surface_mesh_pt;
 
 }; // End of problem class
 
@@ -165,12 +165,12 @@ private:
 /// Constructor for two fluid interface problem
 //========================================================================
 template<class ELEMENT, class TIMESTEPPER>
-InterfaceProblem<ELEMENT, TIMESTEPPER>::InterfaceProblem(const unsigned &n_x,
-                                                         const unsigned &n_y1,
-                                                         const unsigned &n_y2,
-                                                         const double &l_x,
-                                                         const double &h1,
-                                                         const double &h2) :
+InterfaceProblem<ELEMENT, TIMESTEPPER>::InterfaceProblem(const unsigned& n_x,
+                                                         const unsigned& n_y1,
+                                                         const unsigned& n_y2,
+                                                         const double& l_x,
+                                                         const double& h1,
+                                                         const double& h2) :
   Lx(l_x)
 {
   // Allocate the timestepper (this constructs the time object as well)
@@ -188,7 +188,7 @@ InterfaceProblem<ELEMENT, TIMESTEPPER>::InterfaceProblem(const unsigned &n_x,
   {
     // Construct a new 1D line element on the face on which the local
     // coordinate 1 is fixed at its max. value (1) -- Face 2
-    FiniteElement *interface_element_pt =
+    FiniteElement* interface_element_pt =
       new SpineLineFluidInterfaceElement<ELEMENT>(
         Bulk_mesh_pt->finite_element_pt(n_x * (n_y1 - 1) + i), 2);
 
@@ -234,8 +234,8 @@ InterfaceProblem<ELEMENT, TIMESTEPPER>::InterfaceProblem(const unsigned &n_x,
   for (unsigned e = 0; e < n_lower; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt =
-      dynamic_cast<ELEMENT *>(Bulk_mesh_pt->lower_layer_element_pt(e));
+    ELEMENT* el_pt =
+      dynamic_cast<ELEMENT*>(Bulk_mesh_pt->lower_layer_element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -256,8 +256,8 @@ InterfaceProblem<ELEMENT, TIMESTEPPER>::InterfaceProblem(const unsigned &n_x,
   for (unsigned e = 0; e < n_upper; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt =
-      dynamic_cast<ELEMENT *>(Bulk_mesh_pt->upper_layer_element_pt(e));
+    ELEMENT* el_pt =
+      dynamic_cast<ELEMENT*>(Bulk_mesh_pt->upper_layer_element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -290,8 +290,8 @@ InterfaceProblem<ELEMENT, TIMESTEPPER>::InterfaceProblem(const unsigned &n_x,
   for (unsigned e = 0; e < n_interface_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    SpineLineFluidInterfaceElement<ELEMENT> *el_pt =
-      dynamic_cast<SpineLineFluidInterfaceElement<ELEMENT> *>(
+    SpineLineFluidInterfaceElement<ELEMENT>* el_pt =
+      dynamic_cast<SpineLineFluidInterfaceElement<ELEMENT>*>(
         Surface_mesh_pt->element_pt(e));
 
     // Set the Strouhal number
@@ -379,7 +379,7 @@ void InterfaceProblem<ELEMENT, TIMESTEPPER>::set_boundary_conditions()
 //========================================================================
 template<class ELEMENT, class TIMESTEPPER>
 void InterfaceProblem<ELEMENT, TIMESTEPPER>::deform_free_surface(
-  const double &epsilon, const unsigned &n_periods)
+  const double& epsilon, const unsigned& n_periods)
 {
   // Determine number of spines in mesh
   const unsigned n_spine = Bulk_mesh_pt->nspine();
@@ -405,7 +405,7 @@ void InterfaceProblem<ELEMENT, TIMESTEPPER>::deform_free_surface(
 /// Doc the solution
 //========================================================================
 template<class ELEMENT, class TIMESTEPPER>
-void InterfaceProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo &doc_info)
+void InterfaceProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo& doc_info)
 {
   // Output the time
   cout << "Time is now " << time_pt()->time() << std::endl;
@@ -439,8 +439,8 @@ void InterfaceProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo &doc_info)
 /// Perform run up to specified time t_max with given timestep dt
 //========================================================================
 template<class ELEMENT, class TIMESTEPPER>
-void InterfaceProblem<ELEMENT, TIMESTEPPER>::unsteady_run(const double &t_max,
-                                                          const double &dt)
+void InterfaceProblem<ELEMENT, TIMESTEPPER>::unsteady_run(const double& t_max,
+                                                          const double& dt)
 {
   // Set value of epsilon
   const double epsilon = 0.1;
@@ -509,7 +509,7 @@ void InterfaceProblem<ELEMENT, TIMESTEPPER>::unsteady_run(const double &t_max,
 //==start_of_main======================================================
 /// Driver code for two-dimensional two fluid interface problem
 //=====================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

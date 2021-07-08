@@ -409,13 +409,13 @@ namespace oomph
   ///      to a different root, even if that root is actually the same
   ///      as it can be in periodic problems.
   //=================================================================
-  QuadTree *QuadTree::gteq_edge_neighbour(const int &direction,
-                                          Vector<unsigned> &translate_s,
-                                          Vector<double> &s_lo,
-                                          Vector<double> &s_hi,
-                                          int &edge,
-                                          int &diff_level,
-                                          bool &in_neighbouring_tree) const
+  QuadTree* QuadTree::gteq_edge_neighbour(const int& direction,
+                                          Vector<unsigned>& translate_s,
+                                          Vector<double>& s_lo,
+                                          Vector<double>& s_hi,
+                                          int& edge,
+                                          int& diff_level,
+                                          bool& in_neighbouring_tree) const
   {
     using namespace QuadTreeNames;
 
@@ -441,7 +441,7 @@ namespace oomph
     int max_level = Level;
 
     // Current element has the following root:
-    QuadTreeRoot *orig_root_pt = dynamic_cast<QuadTreeRoot *>(Root_pt);
+    QuadTreeRoot* orig_root_pt = dynamic_cast<QuadTreeRoot*>(Root_pt);
 
     // Initialise offset in local coordinate
     double s_diff = 0;
@@ -450,14 +450,14 @@ namespace oomph
     diff_level = 0;
 
     // Find neighbour
-    QuadTree *return_pt = gteq_edge_neighbour(direction,
+    QuadTree* return_pt = gteq_edge_neighbour(direction,
                                               s_diff,
                                               diff_level,
                                               in_neighbouring_tree,
                                               max_level,
                                               orig_root_pt);
 
-    QuadTree *neighb_pt = return_pt;
+    QuadTree* neighb_pt = return_pt;
 
     // If neighbour exists: What's the direction of the interfacial
     // edge when viewed from within the neighbour element?
@@ -597,13 +597,13 @@ namespace oomph
   ///   neighbour we're really trying to find by all these recursive calls.
   ///
   //=================================================================
-  QuadTree *QuadTree::gteq_edge_neighbour(
-    const int &direction,
-    double &s_diff,
-    int &diff_level,
-    bool &in_neighbouring_tree,
+  QuadTree* QuadTree::gteq_edge_neighbour(
+    const int& direction,
+    double& s_diff,
+    int& diff_level,
+    bool& in_neighbouring_tree,
     int max_level,
-    QuadTreeRoot *const &orig_root_pt) const
+    QuadTreeRoot* const& orig_root_pt) const
   {
     using namespace QuadTreeNames;
 
@@ -620,8 +620,8 @@ namespace oomph
     }
 #endif
 
-    QuadTree *next_el_pt;
-    QuadTree *return_el_pt;
+    QuadTree* next_el_pt;
+    QuadTree* return_el_pt;
 
     // STEP 1: Find the neighbour's father
     //--------
@@ -640,7 +640,7 @@ namespace oomph
       // have a father
       if (Is_adjacent(direction, Son_type))
       {
-        next_el_pt = dynamic_cast<QuadTree *>(Father_pt)->gteq_edge_neighbour(
+        next_el_pt = dynamic_cast<QuadTree*>(Father_pt)->gteq_edge_neighbour(
           direction,
           s_diff,
           diff_level,
@@ -655,7 +655,7 @@ namespace oomph
       // This will only be called if we have not left the original tree.
       else
       {
-        next_el_pt = dynamic_cast<QuadTree *>(Father_pt);
+        next_el_pt = dynamic_cast<QuadTree*>(Father_pt);
       }
 
       // We're about to ascend one level:
@@ -697,15 +697,14 @@ namespace oomph
           {
             // Get the north equivalent of the next element
             int my_north =
-              dynamic_cast<QuadTreeRoot *>(Root_pt)->north_equivalent(
-                direction);
+              dynamic_cast<QuadTreeRoot*>(Root_pt)->north_equivalent(direction);
             son_quadrant = Rotate(my_north, son_quadrant);
           }
 
           // The next element in the tree is the appropriate son of the
           // neighbour's father
           return_el_pt =
-            dynamic_cast<QuadTree *>(next_el_pt->Son_pt[son_quadrant]);
+            dynamic_cast<QuadTree*>(next_el_pt->Son_pt[son_quadrant]);
 
           // Work out position of lower (or left) corner of present edge
           // in next higher element
@@ -732,7 +731,7 @@ namespace oomph
         // In this case we have moved to a neighbour, so set the flag
         in_neighbouring_tree = true;
         return_el_pt =
-          dynamic_cast<QuadTreeRoot *>(Root_pt->neighbour_pt(direction));
+          dynamic_cast<QuadTreeRoot*>(Root_pt->neighbour_pt(direction));
       }
       // No neighbouring tree, so there really is no neighbour --> return NULL
       else
@@ -749,12 +748,12 @@ namespace oomph
   /// neighbouring leaf nodes (only) into Vector
   //=================================================================
   void QuadTree::stick_neighbouring_leaves_into_vector(
-    Vector<const QuadTree *> &tree_neighbouring_nodes,
-    Vector<Vector<double>> &tree_neighbouring_s_lo,
-    Vector<Vector<double>> &tree_neighbouring_s_hi,
-    Vector<int> &tree_neighbouring_diff_level,
-    const QuadTree *my_neigh_pt,
-    const int &direction) const
+    Vector<const QuadTree*>& tree_neighbouring_nodes,
+    Vector<Vector<double>>& tree_neighbouring_s_lo,
+    Vector<Vector<double>>& tree_neighbouring_s_hi,
+    Vector<int>& tree_neighbouring_diff_level,
+    const QuadTree* my_neigh_pt,
+    const int& direction) const
   {
     // If the tree has sons
     unsigned numsons = Son_pt.size();
@@ -763,7 +762,7 @@ namespace oomph
       // Now do the sons (if they exist)
       for (unsigned i = 0; i < numsons; i++)
       {
-        dynamic_cast<QuadTree *>(Son_pt[i])
+        dynamic_cast<QuadTree*>(Son_pt[i])
           ->stick_neighbouring_leaves_into_vector(tree_neighbouring_nodes,
                                                   tree_neighbouring_s_lo,
                                                   tree_neighbouring_s_hi,
@@ -779,7 +778,7 @@ namespace oomph
       Vector<double> s_lo(2), s_hi(2);
       int edge, diff_level;
       bool in_neighbouring_tree;
-      QuadTree *neigh_pt;
+      QuadTree* neigh_pt;
 
       // Get neighbouring tree
       neigh_pt = gteq_edge_neighbour(direction,
@@ -815,7 +814,7 @@ namespace oomph
   {
     // Stick pointers to all nodes into Vector and number elements
     // in the process
-    Vector<Tree *> all_nodes_pt;
+    Vector<Tree*> all_nodes_pt;
     stick_all_tree_nodes_into_vector(all_nodes_pt);
     long int count = 0;
     unsigned long num_nodes = all_nodes_pt.size();
@@ -859,7 +858,7 @@ namespace oomph
   /// been allocated before the constructor is called, otherwise the
   /// relative rotation scheme will not be constructed correctly.
   //=================================================================
-  QuadTreeForest::QuadTreeForest(Vector<TreeRoot *> &trees_pt) :
+  QuadTreeForest::QuadTreeForest(Vector<TreeRoot*>& trees_pt) :
     TreeForest(trees_pt)
   {
 #ifdef LEAK_CHECK
@@ -909,7 +908,7 @@ namespace oomph
 
     // Find potentially connected trees by identifying
     // those whose associated elements share a common vertex node
-    std::map<Node *, std::set<unsigned>> tree_assoc_with_vertex_node;
+    std::map<Node*, std::set<unsigned>> tree_assoc_with_vertex_node;
 
     // Loop over all trees
     for (unsigned i = 0; i < numtrees; i++)
@@ -917,7 +916,7 @@ namespace oomph
       // Loop over the vertex nodes of the associated element
       for (unsigned j = 0; j < n_vertex_node; j++)
       {
-        Node *nod_pt = dynamic_cast<QuadElementBase *>(Trees_pt[i]->object_pt())
+        Node* nod_pt = dynamic_cast<QuadElementBase*>(Trees_pt[i]->object_pt())
                          ->vertex_node_pt(j);
         tree_assoc_with_vertex_node[nod_pt].insert(i);
       }
@@ -928,7 +927,7 @@ namespace oomph
     Vector<std::set<unsigned>> potentially_neighb_tree(numtrees);
 
     // Loop over vertex nodes
-    for (std::map<Node *, std::set<unsigned>>::iterator it =
+    for (std::map<Node*, std::set<unsigned>>::iterator it =
            tree_assoc_with_vertex_node.begin();
          it != tree_assoc_with_vertex_node.end();
          it++)
@@ -1061,7 +1060,7 @@ namespace oomph
     for (unsigned i = 0; i < numtrees; i++)
     {
       // Find the pointer to the northern neighbour
-      QuadTreeRoot *neigh_pt = quad_neigh_pt(i, N);
+      QuadTreeRoot* neigh_pt = quad_neigh_pt(i, N);
       // If there is a neighbour
       if (neigh_pt != 0)
       {
@@ -1230,10 +1229,10 @@ namespace oomph
   /// Document and check all the neighbours in all the nodes in
   /// the forest
   //================================================================
-  void QuadTreeForest::check_all_neighbours(DocInfo &doc_info)
+  void QuadTreeForest::check_all_neighbours(DocInfo& doc_info)
   {
     // Create Vector of elements
-    Vector<Tree *> all_tree_nodes_pt;
+    Vector<Tree*> all_tree_nodes_pt;
     this->stick_all_tree_nodes_into_vector(all_tree_nodes_pt);
 
     // Create storage for information files
@@ -1304,7 +1303,7 @@ namespace oomph
   /// created in the mesh refinement process.
   ///===============================================================
   void QuadTreeForest::open_hanging_node_files(
-    DocInfo &doc_info, Vector<std::ofstream *> &output_stream)
+    DocInfo& doc_info, Vector<std::ofstream*>& output_stream)
   {
     // In 2D, there will be four output files
     for (unsigned i = 0; i < 4; i++)
@@ -1346,7 +1345,7 @@ namespace oomph
   {
     // Stick pointers to all nodes into Vector and number elements
     // in the process
-    Vector<Tree *> all_forest_nodes_pt;
+    Vector<Tree*> all_forest_nodes_pt;
     stick_all_tree_nodes_into_vector(all_forest_nodes_pt);
     long int count = 0;
     unsigned long num_nodes = all_forest_nodes_pt.size();
@@ -1387,10 +1386,10 @@ namespace oomph
   /// vertices when viewed from neighhbouring element.
   /// Output is suppressed if the output streams are closed.
   //=================================================================
-  void QuadTree::doc_neighbours(Vector<Tree *> forest_nodes_pt,
-                                std::ofstream &neighbours_file,
-                                std::ofstream &neighbours_txt_file,
-                                double &max_error)
+  void QuadTree::doc_neighbours(Vector<Tree*> forest_nodes_pt,
+                                std::ofstream& neighbours_file,
+                                std::ofstream& neighbours_txt_file,
+                                double& max_error)
   {
     using namespace QuadTreeNames;
 
@@ -1427,7 +1426,7 @@ namespace oomph
     for (unsigned long i = 0; i < num_nodes; i++)
     {
       // Doc the element itself
-      QuadTree *el_pt = dynamic_cast<QuadTree *>(forest_nodes_pt[i]);
+      QuadTree* el_pt = dynamic_cast<QuadTree*>(forest_nodes_pt[i]);
 
       // If the object is incomplete complain
       if (el_pt->object_pt()->nodes_built())
@@ -1435,7 +1434,7 @@ namespace oomph
         // Print it
         if (neighbours_file.is_open())
         {
-          dynamic_cast<RefineableQElement<2> *>(el_pt->object_pt())
+          dynamic_cast<RefineableQElement<2>*>(el_pt->object_pt())
             ->output_corners(neighbours_file, "BLACK");
         }
 
@@ -1448,7 +1447,7 @@ namespace oomph
           s_diff = 0.0;
 
           // Find greater-or-equal-sized neighbour...
-          QuadTree *neighb_pt =
+          QuadTree* neighb_pt =
             el_pt->gteq_edge_neighbour(direction,
                                        translate_s,
                                        s_lo,
@@ -1476,7 +1475,7 @@ namespace oomph
             // Plot neighbour in the appropriate Colour
             if (neighbours_file.is_open())
             {
-              dynamic_cast<RefineableQElement<2> *>(neighb_pt->object_pt())
+              dynamic_cast<RefineableQElement<2>*>(neighb_pt->object_pt())
                 ->output_corners(neighbours_file, Colour[direction]);
             }
 

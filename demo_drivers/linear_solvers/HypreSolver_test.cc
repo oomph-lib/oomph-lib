@@ -53,13 +53,13 @@ namespace TanhSolnForPoisson
   double TanPhi = 0.0;
 
   /// Exact solution as a Vector
-  void get_exact_u(const Vector<double> &x, Vector<double> &u)
+  void get_exact_u(const Vector<double>& x, Vector<double>& u)
   {
     u[0] = tanh(1.0 - Alpha * (TanPhi * x[0] - x[1]));
   }
 
   /// Source function required to make the solution above an exact solution
-  void source_function(const Vector<double> &x, double &source)
+  void source_function(const Vector<double>& x, double& source)
   {
     source = 2.0 * tanh(-1.0 + Alpha * (TanPhi * x[0] - x[1])) *
                (1.0 - pow(tanh(-1.0 + Alpha * (TanPhi * x[0] - x[1])), 2.0)) *
@@ -111,14 +111,14 @@ public:
 
   /// \short Doc the solution. DocInfo object stores flags/labels for where the
   /// output gets written to
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// \short Overloaded version of the problem's access function to
   /// the mesh. Recasts the pointer to the base Mesh object to
   /// the actual mesh type.
-  RefineableRectangularQuadMesh<ELEMENT> *mesh_pt()
+  RefineableRectangularQuadMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<RefineableRectangularQuadMesh<ELEMENT> *>(
+    return dynamic_cast<RefineableRectangularQuadMesh<ELEMENT>*>(
       Problem::mesh_pt());
   }
 
@@ -185,7 +185,7 @@ PoissonProblem<ELEMENT>::PoissonProblem(
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the source function pointer
     el_pt->source_fct_pt() = Source_fct_pt;
@@ -210,7 +210,7 @@ void PoissonProblem<ELEMENT>::actions_before_newton_solve()
   unsigned n_node = mesh_pt()->nnode();
   for (unsigned j = 0; j < n_node; j++)
   {
-    Node *node_pt = mesh_pt()->node_pt(j);
+    Node* node_pt = mesh_pt()->node_pt(j);
     node_pt->set_value(0, 0.0);
   }
 
@@ -227,7 +227,7 @@ void PoissonProblem<ELEMENT>::actions_before_newton_solve()
     for (unsigned n = 0; n < n_node; n++)
     {
       // Get pointer to node
-      Node *nod_pt = mesh_pt()->boundary_node_pt(i, n);
+      Node* nod_pt = mesh_pt()->boundary_node_pt(i, n);
 
       // Extract nodal coordinates from node:
       Vector<double> x(2);
@@ -248,7 +248,7 @@ void PoissonProblem<ELEMENT>::actions_before_newton_solve()
 /// Doc the solution: doc_info contains labels/output directory etc.
 //========================================================================
 template<class ELEMENT>
-void PoissonProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void PoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -295,7 +295,7 @@ void PoissonProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
 //===== start_of_main=====================================================
 /// Driver code for 2D Poisson problem
 //========================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Set the orientation of the "step" to 45 degrees
   TanhSolnForPoisson::TanPhi = 1.0;
@@ -323,7 +323,7 @@ int main(int argc, char **argv)
   cout << "=====================" << endl;
 
   // Create a new Hypre linear solver
-  HypreSolver *hypre_linear_solver_pt = new HypreSolver;
+  HypreSolver* hypre_linear_solver_pt = new HypreSolver;
 
   // Set the linear solver for problem
   problem.linear_solver_pt() = hypre_linear_solver_pt;
@@ -427,7 +427,7 @@ int main(int argc, char **argv)
     << endl;
 
   // Create a new Hypre preconditioner
-  HyprePreconditioner *hypre_preconditioner_pt = new HyprePreconditioner;
+  HyprePreconditioner* hypre_preconditioner_pt = new HyprePreconditioner;
 
   // Set preconditioner parameters
   hypre_preconditioner_pt->enable_hypre_error_messages();
@@ -438,7 +438,7 @@ int main(int argc, char **argv)
   cout << "CG iterative solver" << endl;
   cout << "-------------------" << endl;
 
-  IterativeLinearSolver *oomph_linear_solver_pt = new CG<CRDoubleMatrix>;
+  IterativeLinearSolver* oomph_linear_solver_pt = new CG<CRDoubleMatrix>;
   problem.linear_solver_pt() = oomph_linear_solver_pt;
   oomph_linear_solver_pt->tolerance() = 1.0e-10;
 

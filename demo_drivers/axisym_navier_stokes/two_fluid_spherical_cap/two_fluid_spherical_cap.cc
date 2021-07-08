@@ -56,7 +56,7 @@ namespace Global_Physical_Variables
   Vector<double> Wall_normal;
 
   /// \short Function that specifies the wall unit normal
-  void wall_unit_normal_fct(const Vector<double> &x, Vector<double> &normal)
+  void wall_unit_normal_fct(const Vector<double>& x, Vector<double>& normal)
   {
     normal = Wall_normal;
   }
@@ -86,10 +86,10 @@ public:
   // Nr: Number of elements in the r (radial) direction
   // Nz1: Number of elements in the z (axial) direction in the lower fluid
   // Nz2: Number of elements in the z (axial) direction in the upper fluid
-  CapProblem(const unsigned &Nr,
-             const unsigned &Nz1,
-             const unsigned &Nz2,
-             const double &width);
+  CapProblem(const unsigned& Nr,
+             const unsigned& Nz1,
+             const unsigned& Nz2,
+             const double& width);
 
   /// Set boundary conditions on the wall.
   void set_boundary_conditions();
@@ -101,19 +101,19 @@ public:
   void create_volume_constraint_elements();
 
   /// Pointer to the mesh
-  TwoLayerSpineMesh<SpineElement<ELEMENT>> *Bulk_mesh_pt;
+  TwoLayerSpineMesh<SpineElement<ELEMENT>>* Bulk_mesh_pt;
 
   /// Pointer to the volume constraint mesh
-  Mesh *Volume_constraint_mesh_pt;
+  Mesh* Volume_constraint_mesh_pt;
 
   /// Pointer to the surface mesh
-  Mesh *Surface_mesh_pt;
+  Mesh* Surface_mesh_pt;
 
   /// Pointer to the point mesh
-  Mesh *Point_mesh_pt;
+  Mesh* Point_mesh_pt;
 
   /// Data that is traded for the volume constraint
-  Data *Traded_pressure_data_pt;
+  Data* Traded_pressure_data_pt;
 
   /// Update the spine mesh after every Newton step
   void actions_before_newton_convergence_check()
@@ -124,10 +124,10 @@ public:
 
 /// Constructor
 template<class ELEMENT>
-CapProblem<ELEMENT>::CapProblem(const unsigned &Nr,
-                                const unsigned &Nz1,
-                                const unsigned &Nz2,
-                                const double &width) :
+CapProblem<ELEMENT>::CapProblem(const unsigned& Nr,
+                                const unsigned& Nz1,
+                                const unsigned& Nz2,
+                                const double& width) :
   Ca(1.0), // Initialise value of Ca to one
   Volume(0.125), // Initialise the value of the volume to 0.125
   Angle(1.57) // Initialise the value of the contact angle
@@ -148,7 +148,7 @@ CapProblem<ELEMENT>::CapProblem(const unsigned &Nr,
   for (unsigned i = 0; i < n_interface_lower; i++)
   {
     // Construct a new 1D line element adjacent to the interface
-    FiniteElement *interface_element_pt =
+    FiniteElement* interface_element_pt =
       new SpineAxisymmetricFluidInterfaceElement<SpineElement<ELEMENT>>(
         Bulk_mesh_pt->interface_lower_boundary_element_pt(i),
         Bulk_mesh_pt->interface_lower_face_index_at_boundary(i));
@@ -160,9 +160,9 @@ CapProblem<ELEMENT>::CapProblem(const unsigned &Nr,
   Point_mesh_pt = new Mesh;
   {
     // Make the point (contact) element from the last surface element
-    FiniteElement *point_element_pt =
+    FiniteElement* point_element_pt =
       dynamic_cast<
-        SpineAxisymmetricFluidInterfaceElement<SpineElement<ELEMENT>> *>(
+        SpineAxisymmetricFluidInterfaceElement<SpineElement<ELEMENT>>*>(
         Surface_mesh_pt->element_pt(n_interface_lower - 1))
         ->make_bounding_element(1);
 
@@ -179,7 +179,7 @@ CapProblem<ELEMENT>::CapProblem(const unsigned &Nr,
 
   // Hijack one of the pressure values in the upper fluid
   add_global_data(
-    dynamic_cast<ELEMENT *>(Bulk_mesh_pt->upper_layer_element_pt(0))
+    dynamic_cast<ELEMENT*>(Bulk_mesh_pt->upper_layer_element_pt(0))
       ->hijack_internal_value(0, 0));
 
   Traded_pressure_data_pt = this->global_data_pt(0);
@@ -189,9 +189,9 @@ CapProblem<ELEMENT>::CapProblem(const unsigned &Nr,
   for (unsigned e = 0; e < Ninterface; e++)
   {
     // Cast to a 1D element
-    SpineAxisymmetricFluidInterfaceElement<SpineElement<ELEMENT>> *el_pt =
+    SpineAxisymmetricFluidInterfaceElement<SpineElement<ELEMENT>>* el_pt =
       dynamic_cast<
-        SpineAxisymmetricFluidInterfaceElement<SpineElement<ELEMENT>> *>(
+        SpineAxisymmetricFluidInterfaceElement<SpineElement<ELEMENT>>*>(
         Surface_mesh_pt->element_pt(e));
     // Set the Capillary number
     el_pt->ca_pt() = &Ca;
@@ -227,19 +227,19 @@ CapProblem<ELEMENT>::CapProblem(const unsigned &Nr,
   }
 
   // Set the contact angle on the RHS
-  dynamic_cast<FluidInterfaceBoundingElement *>(Point_mesh_pt->element_pt(0))
+  dynamic_cast<FluidInterfaceBoundingElement*>(Point_mesh_pt->element_pt(0))
     ->set_contact_angle(&Angle);
 
-  dynamic_cast<FluidInterfaceBoundingElement *>(Point_mesh_pt->element_pt(0))
+  dynamic_cast<FluidInterfaceBoundingElement*>(Point_mesh_pt->element_pt(0))
     ->ca_pt() = &Ca;
 
   // Set the wall normal on the rhs
-  dynamic_cast<FluidInterfaceBoundingElement *>(Point_mesh_pt->element_pt(0))
+  dynamic_cast<FluidInterfaceBoundingElement*>(Point_mesh_pt->element_pt(0))
     ->wall_unit_normal_fct_pt() =
     &Global_Physical_Variables::wall_unit_normal_fct;
 
   // Pin a single pressure value
-  dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(0))->fix_pressure(0, 0.0);
+  dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(0))->fix_pressure(0, 0.0);
 
   this->create_volume_constraint_elements();
 
@@ -263,7 +263,7 @@ void CapProblem<ELEMENT>::create_volume_constraint_elements()
 {
   // The single volume constraint element
   Volume_constraint_mesh_pt = new Mesh;
-  VolumeConstraintElement *vol_constraint_element =
+  VolumeConstraintElement* vol_constraint_element =
     new VolumeConstraintElement(&Volume, Traded_pressure_data_pt, 0);
   Volume_constraint_mesh_pt->add_element_pt(vol_constraint_element);
 
@@ -282,14 +282,14 @@ void CapProblem<ELEMENT>::create_volume_constraint_elements()
     {
       // Get pointer to the bulk fluid element that is
       // adjacent to boundary b
-      ELEMENT *bulk_elem_pt =
-        dynamic_cast<ELEMENT *>(Bulk_mesh_pt->boundary_element_pt(b, e));
+      ELEMENT* bulk_elem_pt =
+        dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(b, e));
 
       // Find the index of the face of element e along boundary b
       int face_index = Bulk_mesh_pt->face_index_at_boundary(b, e);
 
       // Create new element
-      SpineAxisymmetricVolumeConstraintBoundingElement<ELEMENT> *el_pt =
+      SpineAxisymmetricVolumeConstraintBoundingElement<ELEMENT>* el_pt =
         new SpineAxisymmetricVolumeConstraintBoundingElement<ELEMENT>(
           bulk_elem_pt, face_index);
 
@@ -311,14 +311,14 @@ void CapProblem<ELEMENT>::create_volume_constraint_elements()
     {
       // Get pointer to the bulk fluid element that is
       // adjacent to boundary b
-      ELEMENT *bulk_elem_pt = dynamic_cast<ELEMENT *>(
+      ELEMENT* bulk_elem_pt = dynamic_cast<ELEMENT*>(
         Bulk_mesh_pt->interface_lower_boundary_element_pt(e));
 
       // Find the index of the face of element e along boundary b
       int face_index = Bulk_mesh_pt->interface_lower_face_index_at_boundary(e);
 
       // Create new element
-      SpineAxisymmetricVolumeConstraintBoundingElement<ELEMENT> *el_pt =
+      SpineAxisymmetricVolumeConstraintBoundingElement<ELEMENT>* el_pt =
         new SpineAxisymmetricVolumeConstraintBoundingElement<ELEMENT>(
           bulk_elem_pt, face_index);
 

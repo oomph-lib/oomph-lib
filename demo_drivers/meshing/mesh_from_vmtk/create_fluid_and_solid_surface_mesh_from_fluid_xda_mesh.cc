@@ -88,11 +88,11 @@
 #include <cstdlib>
 
 void create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh(
-  const std::string &file_name,
-  const std::string &fluid_surface_file,
-  const std::string &solid_surface_file,
-  const double &wall_tickness,
-  const bool &do_multi_boundary_ids = true)
+  const std::string& file_name,
+  const std::string& fluid_surface_file,
+  const std::string& solid_surface_file,
+  const double& wall_tickness,
+  const bool& do_multi_boundary_ids = true)
 {
   std::ifstream infile(file_name.c_str(), std::ios_base::in);
   unsigned n_node;
@@ -411,7 +411,7 @@ void create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh(
     for (unsigned iface = 0; iface < nface; iface++)
     {
       // get pointer to the vector storing the three nodes
-      std::vector<unsigned> *face_node = &(fluid_faces[i][iface]);
+      std::vector<unsigned>* face_node = &(fluid_faces[i][iface]);
       // loop over the face's nodes
       for (unsigned ii = 0; ii < 3; ii++)
       {
@@ -453,7 +453,7 @@ void create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh(
   for (unsigned iface = 0; iface < nface; iface++)
   {
     // get pointer to the vector storing the three nodes
-    std::vector<unsigned> *face_node = &(fluid_faces[0][iface]);
+    std::vector<unsigned>* face_node = &(fluid_faces[0][iface]);
     // loop over the face's nodes
     for (unsigned ii = 0; ii < 3; ii++)
     {
@@ -522,7 +522,7 @@ void create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh(
       fluid_output_stream << 3 << ' ';
 
       // get pointer to the vector storing the three nodes
-      std::vector<unsigned> *face_node = &(fluid_faces[i][iface]);
+      std::vector<unsigned>* face_node = &(fluid_faces[i][iface]);
 
       // This vector will store the nodes that are in both boundaries 1 and
       // another one (2,3 or 4). We only store this nodes if we have in the
@@ -614,7 +614,7 @@ void create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh(
     for (unsigned iface = 0; iface < nface; iface++)
     {
       // get pointer to the vector storing the three nodes
-      std::vector<unsigned> *face_node;
+      std::vector<unsigned>* face_node;
       if (i == 0 || i == 4) face_node = &(fluid_faces[0][iface]);
       // *[i-1] because *[k] stores informations for the (k+2)-th boundary
       else

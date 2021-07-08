@@ -52,10 +52,10 @@ class MySolidTetgenMesh :
 {
 public:
   /// Constructor:
-  MySolidTetgenMesh(const std::string &node_file_name,
-                    const std::string &element_file_name,
-                    const std::string &face_file_name,
-                    TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+  MySolidTetgenMesh(const std::string& node_file_name,
+                    const std::string& element_file_name,
+                    const std::string& face_file_name,
+                    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
     TetgenMesh<ELEMENT>(
       node_file_name, element_file_name, face_file_name, time_stepper_pt)
   {
@@ -96,11 +96,11 @@ class MyFluidTetMesh :
 {
 public:
   /// \short Constructor:
-  MyFluidTetMesh(const std::string &node_file_name,
-                 const std::string &element_file_name,
-                 const std::string &face_file_name,
-                 const bool &split_corner_elements,
-                 TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+  MyFluidTetMesh(const std::string& node_file_name,
+                 const std::string& element_file_name,
+                 const std::string& face_file_name,
+                 const bool& split_corner_elements,
+                 TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
     TetgenMesh<ELEMENT>(node_file_name,
                         element_file_name,
                         face_file_name,
@@ -154,7 +154,7 @@ namespace Global_Parameters
   double Q = 0.0;
 
   /// Pointer to constitutive law
-  ConstitutiveLaw *Constitutive_law_pt = 0;
+  ConstitutiveLaw* Constitutive_law_pt = 0;
 
   /// Poisson's ratio for generalised Hookean constitutive equation
   double Nu = 0.3;
@@ -189,7 +189,7 @@ public:
   ~UnstructuredFSIProblem() {}
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// Create Lagrange multiplier elements that impose parallel flow
   void create_parallel_flow_lagrange_elements();
@@ -203,7 +203,7 @@ public:
 
 private:
   /// Sanity check: Doc boundary coordinates on i-th solid FSI interface
-  void doc_solid_boundary_coordinates(const unsigned &i);
+  void doc_solid_boundary_coordinates(const unsigned& i);
 
   /// \short Return total number of mesh boundaries that make up the inflow
   /// boundary
@@ -249,22 +249,22 @@ private:
   // end npinned_solid_boundary
 
   /// Bulk solid mesh
-  MySolidTetgenMesh<SOLID_ELEMENT> *Solid_mesh_pt;
+  MySolidTetgenMesh<SOLID_ELEMENT>* Solid_mesh_pt;
 
   /// Meshes of FSI traction elements
-  Vector<SolidMesh *> Solid_fsi_traction_mesh_pt;
+  Vector<SolidMesh*> Solid_fsi_traction_mesh_pt;
 
   /// Bulk fluid mesh
-  MyFluidTetMesh<FLUID_ELEMENT> *Fluid_mesh_pt;
+  MyFluidTetMesh<FLUID_ELEMENT>* Fluid_mesh_pt;
 
   /// Meshes of Lagrange multiplier elements that impose parallel flow
-  Vector<Mesh *> Parallel_flow_lagrange_multiplier_mesh_pt;
+  Vector<Mesh*> Parallel_flow_lagrange_multiplier_mesh_pt;
 
   /// Meshes of Lagrange multiplier elements
-  Vector<SolidMesh *> Lagrange_multiplier_mesh_pt;
+  Vector<SolidMesh*> Lagrange_multiplier_mesh_pt;
 
   /// GeomObject incarnations of the FSI boundary in the solid mesh
-  Vector<MeshAsGeomObject *> Solid_fsi_boundary_pt;
+  Vector<MeshAsGeomObject*> Solid_fsi_boundary_pt;
 
   /// IDs of solid mesh boundaries where displacements are pinned
   Vector<unsigned> Pinned_solid_boundary_id;
@@ -465,7 +465,7 @@ UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::UnstructuredFSIProblem()
       for (unsigned inod = 0; inod < num_nod; inod++)
       {
         // Get the node
-        SolidNode *nod_pt = Fluid_mesh_pt->boundary_node_pt(b, inod);
+        SolidNode* nod_pt = Fluid_mesh_pt->boundary_node_pt(b, inod);
 
         // Pin the nodal (pseudo-solid) displacements
         for (unsigned i = 0; i < 3; i++)
@@ -495,7 +495,7 @@ UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::UnstructuredFSIProblem()
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Get node
-      Node *nod_pt = Fluid_mesh_pt->boundary_node_pt(b, inod);
+      Node* nod_pt = Fluid_mesh_pt->boundary_node_pt(b, inod);
 
       // Pin all velocities
       nod_pt->pin(0);
@@ -531,8 +531,8 @@ UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::UnstructuredFSIProblem()
       if (is_in_or_outflow_node)
       {
         // Cast to a boundary node
-        BoundaryNode<SolidNode> *bnod_pt =
-          dynamic_cast<BoundaryNode<SolidNode> *>(
+        BoundaryNode<SolidNode>* bnod_pt =
+          dynamic_cast<BoundaryNode<SolidNode>*>(
             Fluid_mesh_pt->boundary_node_pt(b, inod));
 
         // Get the index of the first Lagrange multiplier
@@ -577,8 +577,8 @@ UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::UnstructuredFSIProblem()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    FLUID_ELEMENT *el_pt =
-      dynamic_cast<FLUID_ELEMENT *>(Fluid_mesh_pt->element_pt(e));
+    FLUID_ELEMENT* el_pt =
+      dynamic_cast<FLUID_ELEMENT*>(Fluid_mesh_pt->element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Parameters::Re;
@@ -604,7 +604,7 @@ UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::UnstructuredFSIProblem()
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Get node
-      SolidNode *nod_pt = Solid_mesh_pt->boundary_node_pt(b, inod);
+      SolidNode* nod_pt = Solid_mesh_pt->boundary_node_pt(b, inod);
 
       // Pin all directions
       for (unsigned i = 0; i < 3; i++)
@@ -626,8 +626,8 @@ UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::UnstructuredFSIProblem()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Cast to a solid element
-    SOLID_ELEMENT *el_pt =
-      dynamic_cast<SOLID_ELEMENT *>(Solid_mesh_pt->element_pt(i));
+    SOLID_ELEMENT* el_pt =
+      dynamic_cast<SOLID_ELEMENT*>(Solid_mesh_pt->element_pt(i));
 
     // Set the constitutive law
     el_pt->constitutive_law_pt() = Global_Parameters::Constitutive_law_pt;
@@ -687,14 +687,14 @@ void UnstructuredFSIProblem<FLUID_ELEMENT,
     for (unsigned e = 0; e < n_element; e++)
     {
       // Get pointer to the bulk element that is adjacent to boundary b
-      SOLID_ELEMENT *bulk_elem_pt =
-        dynamic_cast<SOLID_ELEMENT *>(Solid_mesh_pt->boundary_element_pt(b, e));
+      SOLID_ELEMENT* bulk_elem_pt =
+        dynamic_cast<SOLID_ELEMENT*>(Solid_mesh_pt->boundary_element_pt(b, e));
 
       // What is the index of the face of the element e along boundary b
       int face_index = Solid_mesh_pt->face_index_at_boundary(b, e);
 
       // Create new element
-      FSISolidTractionElement<SOLID_ELEMENT, 3> *el_pt =
+      FSISolidTractionElement<SOLID_ELEMENT, 3>* el_pt =
         new FSISolidTractionElement<SOLID_ELEMENT, 3>(bulk_elem_pt, face_index);
 
       // Add it to the mesh
@@ -739,14 +739,14 @@ void UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
     for (unsigned e = 0; e < n_element; e++)
     {
       // Get pointer to the bulk fluid element that is adjacent to boundary b
-      FLUID_ELEMENT *bulk_elem_pt =
-        dynamic_cast<FLUID_ELEMENT *>(Fluid_mesh_pt->boundary_element_pt(b, e));
+      FLUID_ELEMENT* bulk_elem_pt =
+        dynamic_cast<FLUID_ELEMENT*>(Fluid_mesh_pt->boundary_element_pt(b, e));
 
       // Find the index of the face of element e along boundary b
       int face_index = Fluid_mesh_pt->face_index_at_boundary(b, e);
 
       // Create new element
-      ImposeDisplacementByLagrangeMultiplierElement<FLUID_ELEMENT> *el_pt =
+      ImposeDisplacementByLagrangeMultiplierElement<FLUID_ELEMENT>* el_pt =
         new ImposeDisplacementByLagrangeMultiplierElement<FLUID_ELEMENT>(
           bulk_elem_pt,
           face_index,
@@ -800,14 +800,14 @@ void UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
       for (unsigned e = 0; e < n_element; e++)
       {
         // Get pointer to the bulk element that is adjacent to boundary b
-        FLUID_ELEMENT *bulk_elem_pt = dynamic_cast<FLUID_ELEMENT *>(
+        FLUID_ELEMENT* bulk_elem_pt = dynamic_cast<FLUID_ELEMENT*>(
           Fluid_mesh_pt->boundary_element_pt(b, e));
 
         // What is the index of the face of the element e along boundary b
         int face_index = Fluid_mesh_pt->face_index_at_boundary(b, e);
 
         // Build the corresponding Lagrange multiplier element
-        ImposeParallelOutflowElement<FLUID_ELEMENT> *el_pt =
+        ImposeParallelOutflowElement<FLUID_ELEMENT>* el_pt =
           new ImposeParallelOutflowElement<FLUID_ELEMENT>(
             bulk_elem_pt,
             face_index,
@@ -839,7 +839,7 @@ void UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
 //=======================================================================
 template<class FLUID_ELEMENT, class SOLID_ELEMENT>
 void UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
-  doc_solid_boundary_coordinates(const unsigned &i)
+  doc_solid_boundary_coordinates(const unsigned& i)
 {
   // Doc boundary coordinates in fluid
   char filename[100];
@@ -851,8 +851,8 @@ void UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
   for (unsigned e = 0; e < n_face_element; e++)
   {
     // Cast the element pointer
-    FSISolidTractionElement<SOLID_ELEMENT, 3> *el_pt =
-      dynamic_cast<FSISolidTractionElement<SOLID_ELEMENT, 3> *>(
+    FSISolidTractionElement<SOLID_ELEMENT, 3>* el_pt =
+      dynamic_cast<FSISolidTractionElement<SOLID_ELEMENT, 3>*>(
         Solid_fsi_traction_mesh_pt[i]->element_pt(e));
 
     // Doc boundary coordinate
@@ -894,7 +894,7 @@ void UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
 //========================================================================
 template<class FLUID_ELEMENT, class SOLID_ELEMENT>
 void UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::doc_solution(
-  DocInfo &doc_info)
+  DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -962,7 +962,7 @@ void UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::doc_solution(
 //========================= start_of_main=================================
 /// Demonstrate how to solve an unstructured 3D FSI problem
 //========================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Label for output
   DocInfo doc_info;

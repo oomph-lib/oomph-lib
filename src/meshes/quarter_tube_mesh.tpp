@@ -46,12 +46,12 @@ namespace oomph
   /// Timestepper defaults to Static dummy timestepper.
   //====================================================================
   template<class ELEMENT>
-  QuarterTubeMesh<ELEMENT>::QuarterTubeMesh(GeomObject *wall_pt,
-                                            const Vector<double> &xi_lo,
-                                            const double &fract_mid,
-                                            const Vector<double> &xi_hi,
-                                            const unsigned &nlayer,
-                                            TimeStepper *time_stepper_pt) :
+  QuarterTubeMesh<ELEMENT>::QuarterTubeMesh(GeomObject* wall_pt,
+                                            const Vector<double>& xi_lo,
+                                            const double& fract_mid,
+                                            const Vector<double>& xi_hi,
+                                            const unsigned& nlayer,
+                                            TimeStepper* time_stepper_pt) :
     Wall_pt(wall_pt), Xi_lo(xi_lo), Fract_mid(fract_mid), Xi_hi(xi_hi)
   {
     // Mesh can only be built with 3D Qelements.
@@ -71,7 +71,7 @@ namespace oomph
     Element_pt.resize(nelem);
 
     // Create  dummy element so we can determine the number of nodes
-    ELEMENT *dummy_el_pt = new ELEMENT;
+    ELEMENT* dummy_el_pt = new ELEMENT;
 
     // Read out the number of linear points in the element
     unsigned n_p = dummy_el_pt->nnode_1d();
@@ -110,7 +110,7 @@ namespace oomph
             unsigned jnod_local = i0 + i1 * n_p + i2 * n_p * n_p;
 
             // Create the node
-            Node *node_pt = finite_element_pt(ielem)->construct_node(
+            Node* node_pt = finite_element_pt(ielem)->construct_node(
               jnod_local, time_stepper_pt);
 
             // Set the position of the node from macro element mapping
@@ -654,8 +654,8 @@ namespace oomph
   {
 #ifdef PARANOID
     /// Pointer to first algebraic element in central region
-    AlgebraicElementBase *algebraic_element_pt =
-      dynamic_cast<AlgebraicElementBase *>(Mesh::element_pt(0));
+    AlgebraicElementBase* algebraic_element_pt =
+      dynamic_cast<AlgebraicElementBase*>(Mesh::element_pt(0));
 
     if (algebraic_element_pt == 0)
     {
@@ -708,7 +708,7 @@ namespace oomph
     for (unsigned e = 0; e < nelements; e++)
     {
       // get pointer to element
-      FiniteElement *el_pt = Mesh::finite_element_pt(e);
+      FiniteElement* el_pt = Mesh::finite_element_pt(e);
 
       // set region id
       unsigned region_id = e % 3;
@@ -737,14 +737,14 @@ namespace oomph
         Vector<double> xi(2);
         xi[0] = z;
         xi[1] = QuarterTubeMesh<ELEMENT>::Xi_lo[1];
-        GeomObject *obj_br_pt;
+        GeomObject* obj_br_pt;
         Vector<double> s_br(2);
         this->Wall_pt->locate_zeta(xi, obj_br_pt, s_br);
 
         // Find wall GeomObject/local coordinate
         // at top-left edge of wall
         xi[1] = QuarterTubeMesh<ELEMENT>::Xi_hi[1];
-        GeomObject *obj_tl_pt;
+        GeomObject* obj_tl_pt;
         Vector<double> s_tl(2);
         this->Wall_pt->locate_zeta(xi, obj_tl_pt, s_tl);
 
@@ -757,7 +757,7 @@ namespace oomph
           double y = el_pt->node_pt(n)->x(1);
 
           // The update function requires two geometric objects
-          Vector<GeomObject *> geom_object_pt(2);
+          Vector<GeomObject*> geom_object_pt(2);
 
           // Wall GeomObject at bottom right end of wall mesh:
           geom_object_pt[0] = obj_br_pt;
@@ -792,7 +792,7 @@ namespace oomph
           ref_value[6] = s_tl[1];
 
           // Setup algebraic update for node: Pass update information
-          static_cast<AlgebraicNode *>(el_pt->node_pt(n))
+          static_cast<AlgebraicNode*>(el_pt->node_pt(n))
             ->add_node_update_info(Central_region, // enumerated ID
                                    this, // mesh
                                    geom_object_pt, // vector of geom objects
@@ -820,12 +820,12 @@ namespace oomph
 
           // Identify wall GeomObject and local coordinate of
           // reference point in GeomObject
-          GeomObject *obj_wall_pt;
+          GeomObject* obj_wall_pt;
           Vector<double> s_wall(2);
           this->Wall_pt->locate_zeta(xi, obj_wall_pt, s_wall);
 
           // The update function requires three geometric objects
-          Vector<GeomObject *> geom_object_pt(3);
+          Vector<GeomObject*> geom_object_pt(3);
 
           // Wall element at bottom-right end of wall mesh:
           geom_object_pt[0] = obj_br_pt;
@@ -864,7 +864,7 @@ namespace oomph
           ref_value[8] = s_wall[1];
 
           // Setup algebraic update for node: Pass update information
-          static_cast<AlgebraicNode *>(el_pt->node_pt(n))
+          static_cast<AlgebraicNode*>(el_pt->node_pt(n))
             ->add_node_update_info(Lower_right_region, // enumerated ID
                                    this, // mesh
                                    geom_object_pt, // vector of geom objects
@@ -892,12 +892,12 @@ namespace oomph
 
           // Identify GeomObject and local coordinate at
           // reference point on wall
-          GeomObject *obj_wall_pt;
+          GeomObject* obj_wall_pt;
           Vector<double> s_wall(2);
           this->Wall_pt->locate_zeta(xi, obj_wall_pt, s_wall);
 
           // The update function requires three geometric objects
-          Vector<GeomObject *> geom_object_pt(3);
+          Vector<GeomObject*> geom_object_pt(3);
 
           // Wall element at bottom-right of wall mesh:
           geom_object_pt[0] = obj_br_pt;
@@ -936,7 +936,7 @@ namespace oomph
           ref_value[8] = s_wall[1];
 
           // Setup algebraic update for node: Pass update information
-          static_cast<AlgebraicNode *>(el_pt->node_pt(n))
+          static_cast<AlgebraicNode*>(el_pt->node_pt(n))
             ->add_node_update_info(Upper_left_region, // Enumerated ID
                                    this, // mesh
                                    geom_object_pt, // vector of geom objects
@@ -952,7 +952,7 @@ namespace oomph
   //======================================================================
   template<class ELEMENT>
   void AlgebraicRefineableQuarterTubeMesh<ELEMENT>::node_update_central_region(
-    const unsigned &t, AlgebraicNode *&node_pt)
+    const unsigned& t, AlgebraicNode*& node_pt)
   {
 #ifdef PARANOID
     // We're updating the nodal positions (!) at time level t
@@ -990,7 +990,7 @@ namespace oomph
 
     // Extract geometric objects for update in central region by copy
     // construction
-    Vector<GeomObject *> geom_object_pt(
+    Vector<GeomObject*> geom_object_pt(
       node_pt->vector_geom_object_pt(Central_region));
 
     // First reference value: fractional x-position of node inside region
@@ -1002,7 +1002,7 @@ namespace oomph
     // Wall position in bottom right corner:
 
     // Pointer to GeomObject
-    GeomObject *obj_br_pt = geom_object_pt[0];
+    GeomObject* obj_br_pt = geom_object_pt[0];
 
     // Local coordinate at bottom-right reference point:
     Vector<double> s_br(2);
@@ -1017,7 +1017,7 @@ namespace oomph
     // Wall position in top left corner:
 
     // Pointer to GeomObject
-    GeomObject *obj_tl_pt = geom_object_pt[1];
+    GeomObject* obj_tl_pt = geom_object_pt[1];
 
     // Local coordinate:
     Vector<double> s_tl(2);
@@ -1040,8 +1040,8 @@ namespace oomph
   //====================================================================
   template<class ELEMENT>
   void AlgebraicRefineableQuarterTubeMesh<
-    ELEMENT>::node_update_lower_right_region(const unsigned &t,
-                                             AlgebraicNode *&node_pt)
+    ELEMENT>::node_update_lower_right_region(const unsigned& t,
+                                             AlgebraicNode*& node_pt)
   {
 #ifdef PARANOID
     // We're updating the nodal positions (!) at time level t
@@ -1079,7 +1079,7 @@ namespace oomph
 
     // Extract geometric objects for update in lower-right region
     // by copy construction
-    Vector<GeomObject *> geom_object_pt(
+    Vector<GeomObject*> geom_object_pt(
       node_pt->vector_geom_object_pt(Lower_right_region));
 
     // First reference value: fractional s0-position of node inside region
@@ -1094,7 +1094,7 @@ namespace oomph
     // Wall position in bottom right corner:
 
     // Pointer to GeomObject
-    GeomObject *obj_br_pt = geom_object_pt[0];
+    GeomObject* obj_br_pt = geom_object_pt[0];
 
     // Local coordinate
     Vector<double> s_br(2);
@@ -1111,7 +1111,7 @@ namespace oomph
     // Wall position in top left corner:
 
     // Pointer to GeomObject
-    GeomObject *obj_tl_pt = geom_object_pt[1];
+    GeomObject* obj_tl_pt = geom_object_pt[1];
 
     // Local coordinate
     Vector<double> s_tl(2);
@@ -1124,7 +1124,7 @@ namespace oomph
     // Wall position at reference point:
 
     // Pointer to GeomObject
-    GeomObject *obj_wall_pt = geom_object_pt[2];
+    GeomObject* obj_wall_pt = geom_object_pt[2];
 
     // Local coordinate
     Vector<double> s_wall(2);
@@ -1157,8 +1157,8 @@ namespace oomph
   //====================================================================
   template<class ELEMENT>
   void AlgebraicRefineableQuarterTubeMesh<
-    ELEMENT>::node_update_upper_left_region(const unsigned &t,
-                                            AlgebraicNode *&node_pt)
+    ELEMENT>::node_update_upper_left_region(const unsigned& t,
+                                            AlgebraicNode*& node_pt)
   {
 #ifdef PARANOID
     // We're updating the nodal positions (!) at time level t
@@ -1197,7 +1197,7 @@ namespace oomph
 
     // Extract geometric objects for update in upper-left region
     // by copy construction
-    Vector<GeomObject *> geom_object_pt(
+    Vector<GeomObject*> geom_object_pt(
       node_pt->vector_geom_object_pt(Upper_left_region));
 
     // First reference value: fractional s0-position of node inside region
@@ -1212,7 +1212,7 @@ namespace oomph
     // Wall position in bottom right corner:
 
     // Pointer to GeomObject
-    GeomObject *obj_br_pt = geom_object_pt[0];
+    GeomObject* obj_br_pt = geom_object_pt[0];
 
     // Eulerian dimension
     unsigned n_dim = obj_br_pt->ndim();
@@ -1229,7 +1229,7 @@ namespace oomph
     // Wall position in top left corner:
 
     // Pointer to GeomObject
-    GeomObject *obj_tl_pt = node_pt->geom_object_pt(1);
+    GeomObject* obj_tl_pt = node_pt->geom_object_pt(1);
 
     // Local coordinate
     Vector<double> s_tl(2);
@@ -1242,7 +1242,7 @@ namespace oomph
     // Wall position at reference point:
 
     // Pointer to GeomObject
-    GeomObject *obj_wall_pt = node_pt->geom_object_pt(2);
+    GeomObject* obj_wall_pt = node_pt->geom_object_pt(2);
 
     // Local coordinate
     Vector<double> s_wall(2);
@@ -1276,14 +1276,14 @@ namespace oomph
   //======================================================================
   template<class ELEMENT>
   void AlgebraicRefineableQuarterTubeMesh<
-    ELEMENT>::update_node_update_in_region(AlgebraicNode *&node_pt,
-                                           int &region_id)
+    ELEMENT>::update_node_update_in_region(AlgebraicNode*& node_pt,
+                                           int& region_id)
   {
     // Extract references by copy construction
     Vector<double> ref_value(node_pt->vector_ref_value(region_id));
 
     // Extract geometric objects for update by copy construction
-    Vector<GeomObject *> geom_object_pt(
+    Vector<GeomObject*> geom_object_pt(
       node_pt->vector_geom_object_pt(region_id));
 
     // Now remove the update info to allow overwriting below
@@ -1312,7 +1312,7 @@ namespace oomph
     xi[1] = xi_lo;
 
     // Find corresponding wall element/local coordinate
-    GeomObject *obj_br_pt;
+    GeomObject* obj_br_pt;
     Vector<double> s_br(2);
     this->Wall_pt->locate_zeta(xi, obj_br_pt, s_br);
 
@@ -1330,7 +1330,7 @@ namespace oomph
     xi[1] = xi_hi;
 
     // Find corresponding wall element/local coordinate
-    GeomObject *obj_tl_pt;
+    GeomObject* obj_tl_pt;
     Vector<double> s_tl(2);
     this->Wall_pt->locate_zeta(xi, obj_tl_pt, s_tl);
 
@@ -1366,7 +1366,7 @@ namespace oomph
 
       // Identify wall element number and local coordinate of
       // reference point on wall
-      GeomObject *obj_wall_pt;
+      GeomObject* obj_wall_pt;
       Vector<double> s_wall(2);
       this->Wall_pt->locate_zeta(xi, obj_wall_pt, s_wall);
 

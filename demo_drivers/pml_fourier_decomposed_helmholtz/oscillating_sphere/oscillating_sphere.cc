@@ -84,7 +84,7 @@ namespace ProblemParameters
   std::complex<double> I(0.0, 1.0);
 
   /// Exact solution as a Vector of size 2, containing real and imag parts
-  void get_exact_u(const Vector<double> &x, Vector<double> &u)
+  void get_exact_u(const Vector<double>& x, Vector<double>& u)
   {
     double K = sqrt(K_squared);
 
@@ -140,7 +140,7 @@ namespace ProblemParameters
 
   /// \short Get -du/dr (spherical r) for exact solution. Equal to prescribed
   /// flux on inner boundary.
-  void exact_minus_dudr(const Vector<double> &x, std::complex<double> &flux)
+  void exact_minus_dudr(const Vector<double>& x, std::complex<double>& flux)
   {
     double K = sqrt(K_squared);
 
@@ -227,15 +227,15 @@ namespace oomph
     ~PMLHelmholtzPointSourceElement() {}
 
     /// Set local coordinate and magnitude of point source
-    void setup(const Vector<double> &s_point_source,
-               const std::complex<double> &magnitude)
+    void setup(const Vector<double>& s_point_source,
+               const std::complex<double>& magnitude)
     {
       S_point_source = s_point_source;
       Point_source_magnitude = magnitude;
     }
 
     /// Add the element's contribution to its residual vector (wrapper)
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Call the generic residuals function with flag set to 0
       // using a dummy matrix argument
@@ -249,8 +249,8 @@ namespace oomph
 
     /// \short Add the element's contribution to its residual vector and
     /// element Jacobian matrix (wrapper)
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       // Call the generic routine with the flag set to 1
       ELEMENT::
@@ -264,7 +264,7 @@ namespace oomph
   private:
     /// Add the point source contribution to the residual vector
     void fill_in_point_source_contribution_to_residuals(
-      Vector<double> &residuals)
+      Vector<double>& residuals)
     {
       // No further action
       if (S_point_source.size() == 0) return;
@@ -406,7 +406,7 @@ public:
 
   /// \short Doc the solution. DocInfo object stores flags/labels for where the
   /// output gets written to
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// Create PML meshes
   void create_pml_meshes();
@@ -432,7 +432,7 @@ private:
   void create_flux_elements_on_inner_boundary();
 
   /// \short Delete boundary face elements and wipe the surface mesh
-  void delete_face_elements(Mesh *const &boundary_mesh_pt)
+  void delete_face_elements(Mesh* const& boundary_mesh_pt)
   {
     // Loop over the surface elements
     unsigned n_element = boundary_mesh_pt->nelement();
@@ -450,7 +450,7 @@ private:
   void apply_zero_dirichlet_boundary_conditions();
 
   /// Pointer to mesh that stores the power monitor elements
-  Mesh *Power_monitor_mesh_pt;
+  Mesh* Power_monitor_mesh_pt;
 
 #ifdef ADAPTIVE
 
@@ -458,35 +458,35 @@ private:
   void setup_point_source();
 
   /// Pointer to the refineable "bulk" mesh
-  RefineableTriangleMesh<ELEMENT> *Bulk_mesh_pt;
+  RefineableTriangleMesh<ELEMENT>* Bulk_mesh_pt;
 
   /// Mesh as geometric object representation of bulk mesh
-  MeshAsGeomObject *Mesh_as_geom_obj_pt;
+  MeshAsGeomObject* Mesh_as_geom_obj_pt;
 
 #else
 
   /// Pointer to the "bulk" mesh
-  TriangleMesh<ELEMENT> *Bulk_mesh_pt;
+  TriangleMesh<ELEMENT>* Bulk_mesh_pt;
 
 #endif
 
   /// Mesh of FaceElements that apply the flux bc on the inner boundary
-  Mesh *Helmholtz_inner_boundary_mesh_pt;
+  Mesh* Helmholtz_inner_boundary_mesh_pt;
 
   /// Pointer to the right PML mesh
-  Mesh *PML_right_mesh_pt;
+  Mesh* PML_right_mesh_pt;
 
   /// Pointer to the top PML mesh
-  Mesh *PML_top_mesh_pt;
+  Mesh* PML_top_mesh_pt;
 
   /// Pointer to the bottom PML mesh
-  Mesh *PML_bottom_mesh_pt;
+  Mesh* PML_bottom_mesh_pt;
 
   /// Pointer to the top right corner PML mesh
-  Mesh *PML_top_right_mesh_pt;
+  Mesh* PML_top_right_mesh_pt;
 
   /// Pointer to the bottom right corner PML mesh
-  Mesh *PML_bottom_right_mesh_pt;
+  Mesh* PML_bottom_right_mesh_pt;
 
   /// Trace file
   ofstream Trace_file;
@@ -507,15 +507,15 @@ void PMLFourierDecomposedHelmholtzProblem<ELEMENT>::create_power_monitor_mesh()
     for (unsigned e = 0; e < n_element; e++)
     {
       // Get pointer to the bulk element that is adjacent to boundary b
-      ELEMENT *bulk_elem_pt =
-        dynamic_cast<ELEMENT *>(Bulk_mesh_pt->boundary_element_pt(b, e));
+      ELEMENT* bulk_elem_pt =
+        dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(b, e));
 
       // Find the index of the face of element e along boundary b
       int face_index = Bulk_mesh_pt->face_index_at_boundary(b, e);
 
       // Build the corresponding element
-      PMLFourierDecomposedHelmholtzPowerMonitorElement<ELEMENT>
-        *flux_element_pt =
+      PMLFourierDecomposedHelmholtzPowerMonitorElement<ELEMENT>*
+        flux_element_pt =
           new PMLFourierDecomposedHelmholtzPowerMonitorElement<ELEMENT>(
             bulk_elem_pt, face_index);
 
@@ -599,8 +599,8 @@ void PMLFourierDecomposedHelmholtzProblem<ELEMENT>::complete_problem_setup()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    PMLFourierDecomposedHelmholtzEquations *el_pt =
-      dynamic_cast<PMLFourierDecomposedHelmholtzEquations *>(
+    PMLFourierDecomposedHelmholtzEquations* el_pt =
+      dynamic_cast<PMLFourierDecomposedHelmholtzEquations*>(
         mesh_pt()->element_pt(i));
 
     if (!(el_pt == 0))
@@ -643,7 +643,7 @@ void PMLFourierDecomposedHelmholtzProblem<ELEMENT>::setup_point_source()
   x_point_source[0] = ProblemParameters::R_source;
   x_point_source[1] = ProblemParameters::Z_source;
 
-  GeomObject *sub_geom_object_pt = 0;
+  GeomObject* sub_geom_object_pt = 0;
   Vector<double> s_point_source(2);
   Mesh_as_geom_obj_pt->locate_zeta(
     x_point_source, sub_geom_object_pt, s_point_source);
@@ -660,7 +660,7 @@ void PMLFourierDecomposedHelmholtzProblem<ELEMENT>::setup_point_source()
   }
 
   // Set point force
-  dynamic_cast<ELEMENT *>(sub_geom_object_pt)
+  dynamic_cast<ELEMENT*>(sub_geom_object_pt)
     ->setup(s_point_source, ProblemParameters::Magnitude);
 }
 
@@ -686,7 +686,7 @@ void PMLFourierDecomposedHelmholtzProblem<
     for (unsigned n = 0; n < n_node; n++)
     {
       // Get the node
-      Node *nod_pt = Bulk_mesh_pt->boundary_node_pt(b, n);
+      Node* nod_pt = Bulk_mesh_pt->boundary_node_pt(b, n);
 
       // Pin the node
       nod_pt->pin(0);
@@ -708,7 +708,7 @@ void PMLFourierDecomposedHelmholtzProblem<
     for (unsigned n = 0; n < n_node; n++)
     {
       // Get the node
-      Node *nod_pt = Bulk_mesh_pt->boundary_node_pt(b, n);
+      Node* nod_pt = Bulk_mesh_pt->boundary_node_pt(b, n);
 
       // Pin the node
       nod_pt->pin(0);
@@ -741,11 +741,11 @@ PMLFourierDecomposedHelmholtzProblem<
   double y_c = 0.0;
   double r_min = 1.0;
   double r_max = 3.0;
-  Circle *inner_circle_pt = new Circle(x_c, y_c, r_min);
+  Circle* inner_circle_pt = new Circle(x_c, y_c, r_min);
 
   // Edges/boundary segments making up outer boundary
   //-------------------------------------------------
-  Vector<TriangleMeshCurveSection *> outer_boundary_line_pt(6);
+  Vector<TriangleMeshCurveSection*> outer_boundary_line_pt(6);
 
   // All poly boundaries are defined by two vertices
   Vector<Vector<double>> boundary_vertices(2);
@@ -825,7 +825,7 @@ PMLFourierDecomposedHelmholtzProblem<
 
   // Create closed curve that defines outer boundary
   //------------------------------------------------
-  TriangleMeshClosedCurve *outer_boundary_pt =
+  TriangleMeshClosedCurve* outer_boundary_pt =
     new TriangleMeshClosedCurve(outer_boundary_line_pt);
 
   // Use the TriangleMeshParameters object for helping on the manage of the
@@ -898,7 +898,7 @@ PMLFourierDecomposedHelmholtzProblem<
 //========================================================================
 template<class ELEMENT>
 void PMLFourierDecomposedHelmholtzProblem<ELEMENT>::doc_solution(
-  DocInfo &doc_info)
+  DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -921,8 +921,8 @@ void PMLFourierDecomposedHelmholtzProblem<ELEMENT>::doc_solution(
   unsigned nn_element = Power_monitor_mesh_pt->nelement();
   for (unsigned e = 0; e < nn_element; e++)
   {
-    PMLFourierDecomposedHelmholtzPowerMonitorElement<ELEMENT> *el_pt =
-      dynamic_cast<PMLFourierDecomposedHelmholtzPowerMonitorElement<ELEMENT> *>(
+    PMLFourierDecomposedHelmholtzPowerMonitorElement<ELEMENT>* el_pt =
+      dynamic_cast<PMLFourierDecomposedHelmholtzPowerMonitorElement<ELEMENT>*>(
         Power_monitor_mesh_pt->element_pt(e));
     power += el_pt->global_power_contribution(some_file);
   }
@@ -1009,14 +1009,14 @@ void PMLFourierDecomposedHelmholtzProblem<
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    ELEMENT *bulk_elem_pt =
-      dynamic_cast<ELEMENT *>(Bulk_mesh_pt->boundary_element_pt(b, e));
+    ELEMENT* bulk_elem_pt =
+      dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(b, e));
 
     // Find the index of the face of element e along boundary b
     int face_index = Bulk_mesh_pt->face_index_at_boundary(b, e);
 
     // Build the corresponding prescribed incoming-flux element
-    PMLFourierDecomposedHelmholtzFluxElement<ELEMENT> *flux_element_pt =
+    PMLFourierDecomposedHelmholtzFluxElement<ELEMENT>* flux_element_pt =
       new PMLFourierDecomposedHelmholtzFluxElement<ELEMENT>(bulk_elem_pt,
                                                             face_index);
 
@@ -1095,7 +1095,7 @@ void PMLFourierDecomposedHelmholtzProblem<ELEMENT>::create_pml_meshes()
 //===== start_of_main=====================================================
 /// Driver code for Pml Fourier decomposed Helmholtz problem
 //========================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

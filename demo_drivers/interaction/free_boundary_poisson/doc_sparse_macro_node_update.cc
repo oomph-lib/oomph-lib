@@ -60,11 +60,11 @@ int main()
   double r_back = 1.0;
 
   // Build geometric object that will become the fish back
-  ElasticallySupportedRingElement *Fish_back_pt =
+  ElasticallySupportedRingElement* Fish_back_pt =
     new ElasticallySupportedRingElement(x_c, y_c, r_back);
 
   // Build fish mesh with geometric object that specifies the fish back
-  MacroElementNodeUpdateRefineableFishMesh<ELEMENT> *Fish_mesh_pt =
+  MacroElementNodeUpdateRefineableFishMesh<ELEMENT>* Fish_mesh_pt =
     new MacroElementNodeUpdateRefineableFishMesh<ELEMENT>(Fish_back_pt);
 
   // Number of plot points in each coordinate direction.

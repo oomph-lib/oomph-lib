@@ -48,8 +48,8 @@ namespace oomph
   /// from the triangle mesh generator Triangle.
   //======================================================================
   template<class ELEMENT>
-  void TriangleMesh<ELEMENT>::build_from_scaffold(TimeStepper *time_stepper_pt,
-                                                  const bool &use_attributes)
+  void TriangleMesh<ELEMENT>::build_from_scaffold(TimeStepper* time_stepper_pt,
+                                                  const bool& use_attributes)
   {
     // Mesh can only be built with 2D Telements.
     MeshChecker::assert_geometric_element<TElementGeometricBase, ELEMENT>(2);
@@ -63,12 +63,12 @@ namespace oomph
 
     // Create a map storing the node_id of the mesh used to update the
     // node position in the update_triangulateio function
-    std::map<Node *, unsigned> old_global_number;
+    std::map<Node*, unsigned> old_global_number;
 
     // Store the TriangulateIO node id
     for (unsigned inod = 0; inod < nnode_scaffold; inod++)
     {
-      Node *old_node_pt = Tmp_mesh_pt->node_pt(inod);
+      Node* old_node_pt = Tmp_mesh_pt->node_pt(inod);
       old_global_number[old_node_pt] = inod;
     }
 
@@ -106,11 +106,11 @@ namespace oomph
     // Setup map to check the (pseudo-)global node number
     // Nodes whose number is zero haven't been copied across
     // into the mesh yet.
-    std::map<Node *, unsigned> global_number;
+    std::map<Node*, unsigned> global_number;
     unsigned global_count = 0;
 
     // Map of Element attribute pairs
-    std::map<double, Vector<FiniteElement *>> element_attribute_map;
+    std::map<double, Vector<FiniteElement*>> element_attribute_map;
 
     // If we're using attributes
     if (use_attributes)
@@ -127,7 +127,7 @@ namespace oomph
       for (unsigned j = 0; j < nnod_el; j++)
       {
         // Pointer to node in the scaffold mesh
-        Node *scaffold_node_pt = Tmp_mesh_pt->finite_element_pt(e)->node_pt(j);
+        Node* scaffold_node_pt = Tmp_mesh_pt->finite_element_pt(e)->node_pt(j);
 
         // Get the (pseudo-)global node number in scaffold mesh
         // (It's zero [=default] if not visited this one yet)
@@ -142,11 +142,11 @@ namespace oomph
 
           // Get pointer to set of mesh boundaries that this
           // scaffold node occupies; NULL if the node is not on any boundary
-          std::set<unsigned> *boundaries_pt;
+          std::set<unsigned>* boundaries_pt;
           scaffold_node_pt->get_boundaries_pt(boundaries_pt);
 
           // Storage for the new node
-          Node *new_node_pt = 0;
+          Node* new_node_pt = 0;
 
           // Is it on boundaries
           if (boundaries_pt != 0)
@@ -215,7 +215,7 @@ namespace oomph
 
       // Copy the vectors in the map over to our internal storage
       unsigned count = 0;
-      for (std::map<double, Vector<FiniteElement *>>::iterator it =
+      for (std::map<double, Vector<FiniteElement*>>::iterator it =
              element_attribute_map.begin();
            it != element_attribute_map.end();
            ++it)
@@ -246,14 +246,14 @@ namespace oomph
 
     // Storage for each global edge of the mesh
     unsigned n_global_edge = Tmp_mesh_pt->nglobal_edge();
-    Vector<Vector<Node *>> nodes_on_global_edge(n_global_edge);
+    Vector<Vector<Node*>> nodes_on_global_edge(n_global_edge);
 
     // Loop over elements
     for (unsigned e = 0; e < nelem; e++)
     {
       // Cache pointers to the elements
-      FiniteElement *const elem_pt = finite_element_pt(e);
-      FiniteElement *const tmp_elem_pt = Tmp_mesh_pt->finite_element_pt(e);
+      FiniteElement* const elem_pt = finite_element_pt(e);
+      FiniteElement* const tmp_elem_pt = Tmp_mesh_pt->finite_element_pt(e);
 
       // The number of edge nodes is  3*(nnode_1d-1)
       unsigned n_edge_node = 3 * (n_node_1d - 1);
@@ -263,7 +263,7 @@ namespace oomph
       for (unsigned n = n_edge_node; n < n_node; ++n)
       {
         // Create new node (it can never be a boundary node)
-        Node *new_node_pt = elem_pt->construct_node(n, time_stepper_pt);
+        Node* new_node_pt = elem_pt->construct_node(n, time_stepper_pt);
 
         // What are the node's local coordinates?
         elem_pt->local_coordinate_of_node(n, s);
@@ -299,7 +299,7 @@ namespace oomph
           for (unsigned j2 = 0; j2 < n_node_1d - 2; ++j2)
           {
             // Storage for the new node
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
 
             // If the edge is on a boundary, construct a boundary node
             if (boundary_id > 0)
@@ -392,14 +392,14 @@ namespace oomph
   template<class ELEMENT>
   void TriangleMesh<ELEMENT>::
     identify_boundary_segments_and_assign_initial_zeta_values(
-      const unsigned &b, TriangleMesh<ELEMENT> *original_mesh_pt)
+      const unsigned& b, TriangleMesh<ELEMENT>* original_mesh_pt)
   {
     // ------------------------------------------------------------------
     // First: Get the face elements associated with the current boundary
     // (nonhalo elements only)
     // ------------------------------------------------------------------
     // Temporary storage for face elements
-    Vector<FiniteElement *> face_el_pt;
+    Vector<FiniteElement*> face_el_pt;
 
     // Temporary storage for number of elements adjacent to the boundary
     unsigned nele = 0;
@@ -412,10 +412,10 @@ namespace oomph
 
     // map to associate the face element to the bulk element, necessary
     // to attach halo face elements at both sides of each found segment
-    std::map<FiniteElement *, FiniteElement *> face_to_bulk_element_pt;
+    std::map<FiniteElement*, FiniteElement*> face_to_bulk_element_pt;
 
     // Temporary storage for already done nodes
-    Vector<std::pair<Node *, Node *>> done_nodes_pt;
+    Vector<std::pair<Node*, Node*>> done_nodes_pt;
 
     // If there is more than one region then only use boundary
     // coordinates from the bulk side (region 0)
@@ -444,7 +444,7 @@ namespace oomph
           for (unsigned e = 0; e < nel_in_region; e++)
           {
             // Get pointer to the bulk element that is adjacent to boundary b
-            FiniteElement *bulk_elem_pt =
+            FiniteElement* bulk_elem_pt =
               this->boundary_element_in_region_pt(b, region_id, e);
 
 #ifdef OOMPH_HAS_MPI
@@ -465,15 +465,15 @@ namespace oomph
             // Before adding the new element we need to be sure that
             // the edge that this element represent has not been
             // already added
-            FiniteElement *tmp_ele_pt =
+            FiniteElement* tmp_ele_pt =
               new DummyFaceElement<ELEMENT>(bulk_elem_pt, face_index);
 
             const unsigned n_nodes = tmp_ele_pt->nnode();
 
-            std::pair<Node *, Node *> tmp_pair = std::make_pair(
+            std::pair<Node*, Node*> tmp_pair = std::make_pair(
               tmp_ele_pt->node_pt(0), tmp_ele_pt->node_pt(n_nodes - 1));
 
-            std::pair<Node *, Node *> tmp_pair_inverse = std::make_pair(
+            std::pair<Node*, Node*> tmp_pair_inverse = std::make_pair(
               tmp_ele_pt->node_pt(n_nodes - 1), tmp_ele_pt->node_pt(0));
 
             // Search for repeated nodes
@@ -535,7 +535,7 @@ namespace oomph
         for (unsigned e = 0; e < nele; e++)
         {
           // Get pointer to the bulk element that is adjacent to boundary b
-          FiniteElement *bulk_elem_pt = this->boundary_element_pt(b, e);
+          FiniteElement* bulk_elem_pt = this->boundary_element_pt(b, e);
 
 #ifdef OOMPH_HAS_MPI
           // In a distributed mesh only work with nonhalo elements
@@ -554,15 +554,15 @@ namespace oomph
           // Before adding the new element we need to be sure that
           // the edge that this element represents has not been
           // already added (only applies for internal boundaries)
-          FiniteElement *tmp_ele_pt =
+          FiniteElement* tmp_ele_pt =
             new DummyFaceElement<ELEMENT>(bulk_elem_pt, face_index);
 
           const unsigned n_nodes = tmp_ele_pt->nnode();
 
-          std::pair<Node *, Node *> tmp_pair = std::make_pair(
+          std::pair<Node*, Node*> tmp_pair = std::make_pair(
             tmp_ele_pt->node_pt(0), tmp_ele_pt->node_pt(n_nodes - 1));
 
-          std::pair<Node *, Node *> tmp_pair_inverse = std::make_pair(
+          std::pair<Node*, Node*> tmp_pair_inverse = std::make_pair(
             tmp_ele_pt->node_pt(n_nodes - 1), tmp_ele_pt->node_pt(0));
 
           // Search for repeated nodes
@@ -642,9 +642,9 @@ namespace oomph
     for (unsigned ie = 0; ie < nele; ie++)
     {
       // Get the face element
-      FiniteElement *face_ele_pt = face_el_pt[ie];
+      FiniteElement* face_ele_pt = face_el_pt[ie];
       // Get the bulk element
-      FiniteElement *tmp_bulk_ele_pt = face_to_bulk_element_pt[face_ele_pt];
+      FiniteElement* tmp_bulk_ele_pt = face_to_bulk_element_pt[face_ele_pt];
       // Check if the bulk element is halo
       if (!tmp_bulk_ele_pt->is_halo())
       {
@@ -678,7 +678,7 @@ namespace oomph
 
     // The vector of list to store the "segments" that compound the
     // boundary (segments may appear only in a distributed mesh)
-    Vector<std::list<FiniteElement *>> segment_sorted_ele_pt;
+    Vector<std::list<FiniteElement*>> segment_sorted_ele_pt;
 
     // Number of already sorted face elements (only nonhalo elements for
     // a distributed mesh)
@@ -686,18 +686,18 @@ namespace oomph
 
     // Keep track of who's done (this apply to nonhalo only, remember we
     // are only working with nonhalo elements)
-    std::map<FiniteElement *, bool> done_el;
+    std::map<FiniteElement*, bool> done_el;
 
     // Keep track of which element is inverted (in distributed mesh the
     // elements may be inverted with respect to the segment they belong)
-    std::map<FiniteElement *, bool> is_inverted;
+    std::map<FiniteElement*, bool> is_inverted;
 
     // Iterate until all possible segments have been created
     while (nsorted_face_elements < nnon_halo_face_elements)
     {
       // The ordered list of face elements (in a distributed mesh a
       // collection of contiguous face elements define a segment)
-      std::list<FiniteElement *> sorted_el_pt;
+      std::list<FiniteElement*> sorted_el_pt;
       sorted_el_pt.clear();
 
 #ifdef PARANOID
@@ -705,7 +705,7 @@ namespace oomph
       bool found_initial_face_element = false;
 #endif
 
-      FiniteElement *ele_face_pt = 0;
+      FiniteElement* ele_face_pt = 0;
 
       unsigned iface = 0;
       for (iface = 0; iface < nele; iface++)
@@ -747,8 +747,8 @@ namespace oomph
 
       // Left and right most nodes (the left and right nodes of the
       // current face element)
-      Node *left_node_pt = ele_face_pt->node_pt(0);
-      Node *right_node_pt = ele_face_pt->node_pt(nnod - 1);
+      Node* left_node_pt = ele_face_pt->node_pt(0);
+      Node* right_node_pt = ele_face_pt->node_pt(nnod - 1);
 
       // Continue iterating if a new face element has been added to the
       // list
@@ -774,8 +774,8 @@ namespace oomph
           if (!(done_el[ele_face_pt] || is_halo_face_element[iiface]))
           {
             // Get the left and right nodes of the current element
-            Node *local_left_node_pt = ele_face_pt->node_pt(0);
-            Node *local_right_node_pt = ele_face_pt->node_pt(nnod - 1);
+            Node* local_left_node_pt = ele_face_pt->node_pt(0);
+            Node* local_right_node_pt = ele_face_pt->node_pt(nnod - 1);
             // New element fits at the left of segment and is not inverted
             if (left_node_pt == local_right_node_pt)
             {
@@ -843,7 +843,7 @@ namespace oomph
     // Vector of sets that stores the nodes of each segment based on a
     // lexicographically order starting from the bottom left node of
     // each segment
-    Vector<std::set<Node *>> segment_all_nodes_pt;
+    Vector<std::set<Node*>> segment_all_nodes_pt;
 
     // The arclength of each segment in the current processor
     Vector<double> segment_arclength(nsegments);
@@ -888,23 +888,23 @@ namespace oomph
 #endif
 
       // Get access to the first element on the segment
-      FiniteElement *first_ele_pt = segment_sorted_ele_pt[is].front();
+      FiniteElement* first_ele_pt = segment_sorted_ele_pt[is].front();
 
       // Number of nodes
       const unsigned nnod = first_ele_pt->nnode();
 
       // Get the first node of the current segment
-      Node *first_node_pt = first_ele_pt->node_pt(0);
+      Node* first_node_pt = first_ele_pt->node_pt(0);
       if (is_inverted[first_ele_pt])
       {
         first_node_pt = first_ele_pt->node_pt(nnod - 1);
       }
 
       // Get access to the last element on the segment
-      FiniteElement *last_ele_pt = segment_sorted_ele_pt[is].back();
+      FiniteElement* last_ele_pt = segment_sorted_ele_pt[is].back();
 
       // Get the last node of the current segment
-      Node *last_node_pt = last_ele_pt->node_pt(nnod - 1);
+      Node* last_node_pt = last_ele_pt->node_pt(nnod - 1);
       if (is_inverted[last_ele_pt])
       {
         last_node_pt = last_ele_pt->node_pt(0);
@@ -930,17 +930,17 @@ namespace oomph
       }
 
       // Lexicographically bottom left node
-      std::set<Node *> local_nodes_pt;
+      std::set<Node*> local_nodes_pt;
       local_nodes_pt.insert(first_node_pt);
 
       // Now loop over nodes in order
-      for (std::list<FiniteElement *>::iterator it =
+      for (std::list<FiniteElement*>::iterator it =
              segment_sorted_ele_pt[is].begin();
            it != segment_sorted_ele_pt[is].end();
            it++)
       {
         // Get element
-        FiniteElement *el_pt = *it;
+        FiniteElement* el_pt = *it;
 
         // Start node and increment
         unsigned k_nod = 1;
@@ -954,7 +954,7 @@ namespace oomph
         // Loop over nodes
         for (unsigned j = 1; j < nnod; j++)
         {
-          Node *nod_pt = el_pt->node_pt(k_nod);
+          Node* nod_pt = el_pt->node_pt(k_nod);
           k_nod += nod_diff;
 
           // Coordinates of right node
@@ -1139,14 +1139,14 @@ namespace oomph
         Vector<double> current_seg_final_coord(2);
 
         // Get access to the initial element on the segment
-        FiniteElement *current_seg_initial_ele_pt =
+        FiniteElement* current_seg_initial_ele_pt =
           segment_sorted_ele_pt[is].front();
 
         // Number of nodes
         const unsigned nnod = current_seg_initial_ele_pt->nnode();
 
         // Get the first node of the current segment
-        Node *current_seg_first_node_pt =
+        Node* current_seg_first_node_pt =
           current_seg_initial_ele_pt->node_pt(0);
         if (is_inverted[current_seg_initial_ele_pt])
         {
@@ -1155,11 +1155,11 @@ namespace oomph
         }
 
         // Get access to the last element on the segment
-        FiniteElement *current_seg_last_ele_pt =
+        FiniteElement* current_seg_last_ele_pt =
           segment_sorted_ele_pt[is].back();
 
         // Get the last node of the current segment
-        Node *current_seg_last_node_pt =
+        Node* current_seg_last_node_pt =
           current_seg_last_ele_pt->node_pt(nnod - 1);
         if (is_inverted[current_seg_last_ele_pt])
         {
@@ -1398,23 +1398,23 @@ namespace oomph
           // container has only nonhalo face elements
 
           // Get access to the first element on the segment
-          FiniteElement *first_ele_pt = segment_sorted_ele_pt[is].front();
+          FiniteElement* first_ele_pt = segment_sorted_ele_pt[is].front();
 
           // Number of nodes
           const unsigned nnod = first_ele_pt->nnode();
 
           // Get the first node of the current segment
-          Node *first_node_pt = first_ele_pt->node_pt(0);
+          Node* first_node_pt = first_ele_pt->node_pt(0);
           if (is_inverted[first_ele_pt])
           {
             first_node_pt = first_ele_pt->node_pt(nnod - 1);
           }
 
           // Get access to the last element on the segment
-          FiniteElement *last_ele_pt = segment_sorted_ele_pt[is].back();
+          FiniteElement* last_ele_pt = segment_sorted_ele_pt[is].back();
 
           // Get the last node of the current segment
-          Node *last_node_pt = last_ele_pt->node_pt(nnod - 1);
+          Node* last_node_pt = last_ele_pt->node_pt(nnod - 1);
           if (is_inverted[last_ele_pt])
           {
             last_node_pt = last_ele_pt->node_pt(0);
@@ -1555,17 +1555,17 @@ namespace oomph
             // new_z = s + z_old * (b - a)
 
             // Get the nodes associated to the segment
-            std::set<Node *> seg_nodes_pt = segment_all_nodes_pt[is];
+            std::set<Node*> seg_nodes_pt = segment_all_nodes_pt[is];
             // Go through all the nodes in the segment an change their
             // zeta values
-            for (std::set<Node *>::iterator it = seg_nodes_pt.begin();
+            for (std::set<Node*>::iterator it = seg_nodes_pt.begin();
                  it != seg_nodes_pt.end();
                  it++)
             {
               // Storing for the zeta value
               Vector<double> zeta(1);
               // Get each node
-              Node *nod_pt = (*it);
+              Node* nod_pt = (*it);
               // Get the zeta value of the current node
               nod_pt->get_coordinates_on_boundary(b, zeta);
               // ... and re-assign it
@@ -1603,17 +1603,17 @@ namespace oomph
             // new_z = s + (1.0 - z_old) * (b - a)
 
             // Get the nodes associated to the segment
-            std::set<Node *> seg_nodes_pt = segment_all_nodes_pt[is];
+            std::set<Node*> seg_nodes_pt = segment_all_nodes_pt[is];
             // Go through all the nodes in the segment an change their
             // zeta values
-            for (std::set<Node *>::iterator it = seg_nodes_pt.begin();
+            for (std::set<Node*>::iterator it = seg_nodes_pt.begin();
                  it != seg_nodes_pt.end();
                  it++)
             {
               // Storing for the zeta value
               Vector<double> zeta(1);
               // Get each node
-              Node *nod_pt = (*it);
+              Node* nod_pt = (*it);
               // Get the zeta value of the current node
               nod_pt->get_coordinates_on_boundary(b, zeta);
               // ... and re-assign it
@@ -1650,17 +1650,17 @@ namespace oomph
             // new_z = s + (1.0 - z_old) * |(b - a)|
 
             // Get the nodes associated to the segment
-            std::set<Node *> seg_nodes_pt = segment_all_nodes_pt[is];
+            std::set<Node*> seg_nodes_pt = segment_all_nodes_pt[is];
             // Go through all the nodes in the segment an change their
             // zeta values
-            for (std::set<Node *>::iterator it = seg_nodes_pt.begin();
+            for (std::set<Node*>::iterator it = seg_nodes_pt.begin();
                  it != seg_nodes_pt.end();
                  it++)
             {
               // Storing for the zeta value
               Vector<double> zeta(1);
               // Get each node
-              Node *nod_pt = (*it);
+              Node* nod_pt = (*it);
               // Get the zeta value of the current node
               nod_pt->get_coordinates_on_boundary(b, zeta);
               // ... and re-assign it
@@ -1697,17 +1697,17 @@ namespace oomph
             // new_z = s + z_old * |(b - a)|
 
             // Get the nodes associated to the segment
-            std::set<Node *> seg_nodes_pt = segment_all_nodes_pt[is];
+            std::set<Node*> seg_nodes_pt = segment_all_nodes_pt[is];
             // Go through all the nodes in the segment an change their
             // zeta values
-            for (std::set<Node *>::iterator it = seg_nodes_pt.begin();
+            for (std::set<Node*>::iterator it = seg_nodes_pt.begin();
                  it != seg_nodes_pt.end();
                  it++)
             {
               // Storing for the zeta value
               Vector<double> zeta(1);
               // Get each node
-              Node *nod_pt = (*it);
+              Node* nod_pt = (*it);
               // Get the zeta value of the current node
               nod_pt->get_coordinates_on_boundary(b, zeta);
               // ... and re-assign it
@@ -1732,7 +1732,7 @@ namespace oomph
 #ifdef PARANOID
           // Verify that the z values of the first and last node are not
           // out of the range [0,1]
-          for (std::list<FiniteElement *>::iterator it_list =
+          for (std::list<FiniteElement*>::iterator it_list =
                  segment_sorted_ele_pt[is].begin();
                it_list != segment_sorted_ele_pt[is].end();
                it_list++)
@@ -1741,14 +1741,14 @@ namespace oomph
             const unsigned nnod = (*it_list)->nnode();
 
             // Get the first node of the current segment
-            Node *first_node_pt = (*it_list)->node_pt(0);
+            Node* first_node_pt = (*it_list)->node_pt(0);
             if (is_inverted[(*it_list)])
             {
               first_node_pt = (*it_list)->node_pt(nnod - 1);
             }
 
             // Get the last node of the current segment
-            Node *last_node_pt = (*it_list)->node_pt(nnod - 1);
+            Node* last_node_pt = (*it_list)->node_pt(nnod - 1);
             if (is_inverted[(*it_list)])
             {
               last_node_pt = (*it_list)->node_pt(0);
@@ -1842,14 +1842,14 @@ namespace oomph
   template<class ELEMENT>
   void TriangleMesh<ELEMENT>::
     compute_boundary_segments_connectivity_and_initial_zeta_values(
-      const unsigned &b)
+      const unsigned& b)
   {
     // ------------------------------------------------------------------
     // First: Get the face elements associated with the current boundary
     // ------------------------------------------------------------------
 
     // Get the communicator of the mesh
-    OomphCommunicator *comm_pt = this->communicator_pt();
+    OomphCommunicator* comm_pt = this->communicator_pt();
 
     // Get the number of processors
     const unsigned nproc = comm_pt->nproc();
@@ -1857,7 +1857,7 @@ namespace oomph
     const unsigned my_rank = comm_pt->my_rank();
 
     // Temporary storage for face elements
-    Vector<FiniteElement *> all_face_ele_pt;
+    Vector<FiniteElement*> all_face_ele_pt;
 
     // Flag to know whether we are working with an internal open curve
     // and then re-assign the initial and final zeta coordinates for
@@ -1866,7 +1866,7 @@ namespace oomph
 
     // map to associate the face element to the bulk element, necessary
     // to attach halo face elements at both sides of each found segment
-    std::map<FiniteElement *, FiniteElement *> face_to_bulk_element_pt;
+    std::map<FiniteElement*, FiniteElement*> face_to_bulk_element_pt;
 
     // Select the boundary face elements, using the criteria of highest
     // processor in charge and bottom-left element
@@ -1891,9 +1891,9 @@ namespace oomph
     // distributed
     for (unsigned ie = 0; ie < n_all_face_ele; ie++)
     {
-      FiniteElement *face_ele_pt = all_face_ele_pt[ie];
+      FiniteElement* face_ele_pt = all_face_ele_pt[ie];
       // Get the bulk element
-      FiniteElement *tmp_bulk_ele_pt = face_to_bulk_element_pt[face_ele_pt];
+      FiniteElement* tmp_bulk_ele_pt = face_to_bulk_element_pt[face_ele_pt];
       // Check if the bulk element is halo
       if (!tmp_bulk_ele_pt->is_halo())
       {
@@ -1916,7 +1916,7 @@ namespace oomph
 
     // The vector of list to store the "segments" that compound the
     // boundary (segments may appear only in a distributed mesh)
-    Vector<std::list<FiniteElement *>> segment_sorted_ele_pt;
+    Vector<std::list<FiniteElement*>> segment_sorted_ele_pt;
 
     // Number of already sorted face elements (only nonhalo elements for
     // a distributed mesh)
@@ -1924,18 +1924,18 @@ namespace oomph
 
     // Keep track of who's done (this apply to nonhalo only, remember we
     // are only working with halo elements)
-    std::map<FiniteElement *, bool> done_el;
+    std::map<FiniteElement*, bool> done_el;
 
     // Keep track of which element is inverted (in distributed mesh the
     // elements may be inverted with respect to the segment they belong)
-    std::map<FiniteElement *, bool> is_inverted;
+    std::map<FiniteElement*, bool> is_inverted;
 
     // Iterate until all possible segments have been created
     while (nsorted_face_elements < nnon_halo_face_elements)
     {
       // The ordered list of face elements (in a distributed mesh a
       // collection of contiguous face elements define a segment)
-      std::list<FiniteElement *> sorted_el_pt;
+      std::list<FiniteElement*> sorted_el_pt;
       sorted_el_pt.clear();
 
 #ifdef PARANOID
@@ -1944,7 +1944,7 @@ namespace oomph
       bool found_initial_face_element = false;
 #endif
 
-      FiniteElement *ele_face_pt = 0;
+      FiniteElement* ele_face_pt = 0;
 
       unsigned iface = 0;
       for (iface = 0; iface < n_all_face_ele; iface++)
@@ -1986,8 +1986,8 @@ namespace oomph
 
       // Left and rightmost nodes (the left and right nodes of the
       // current face element)
-      Node *left_node_pt = ele_face_pt->node_pt(0);
-      Node *right_node_pt = ele_face_pt->node_pt(nnod - 1);
+      Node* left_node_pt = ele_face_pt->node_pt(0);
+      Node* right_node_pt = ele_face_pt->node_pt(nnod - 1);
 
       // Continue iterating if a new face element has been added to the
       // list
@@ -2013,8 +2013,8 @@ namespace oomph
           if (!(done_el[ele_face_pt] || is_halo_face_element[iiface]))
           {
             // Get the left and right nodes of the current element
-            Node *local_left_node_pt = ele_face_pt->node_pt(0);
-            Node *local_right_node_pt = ele_face_pt->node_pt(nnod - 1);
+            Node* local_left_node_pt = ele_face_pt->node_pt(0);
+            Node* local_right_node_pt = ele_face_pt->node_pt(nnod - 1);
 
             // New element fits at the left of segment and is not inverted
             if (left_node_pt == local_right_node_pt)
@@ -2076,7 +2076,7 @@ namespace oomph
     // Vector of sets that stores the nodes of each segment based on a
     // lexicographically order starting from the bottom left node of
     // each segment
-    Vector<std::set<Node *>> segment_all_nodes_pt;
+    Vector<std::set<Node*>> segment_all_nodes_pt;
 
     // The number of segments in this processor
     const unsigned nsegments = segment_sorted_ele_pt.size();
@@ -2123,13 +2123,13 @@ namespace oomph
 #endif
 
       // Get access to the first element on the segment
-      FiniteElement *first_ele_pt = segment_sorted_ele_pt[is].front();
+      FiniteElement* first_ele_pt = segment_sorted_ele_pt[is].front();
 
       // Number of nodes
       const unsigned nnod = first_ele_pt->nnode();
 
       // Get the first node of the current segment
-      Node *first_node_pt = first_ele_pt->node_pt(0);
+      Node* first_node_pt = first_ele_pt->node_pt(0);
       if (is_inverted[first_ele_pt])
       {
         first_node_pt = first_ele_pt->node_pt(nnod - 1);
@@ -2154,10 +2154,10 @@ namespace oomph
         initial_zeta_segment[is] = zeta[0];
 
         // Get access to the last element on the segment
-        FiniteElement *last_ele_pt = segment_sorted_ele_pt[is].back();
+        FiniteElement* last_ele_pt = segment_sorted_ele_pt[is].back();
 
         // Get the last node of the current segment
-        Node *last_node_pt = last_ele_pt->node_pt(nnod - 1);
+        Node* last_node_pt = last_ele_pt->node_pt(nnod - 1);
         if (is_inverted[last_ele_pt])
         {
           last_node_pt = last_ele_pt->node_pt(0);
@@ -2171,18 +2171,18 @@ namespace oomph
 
       // Sort the nodes in the segment (lexicographically bottom left
       // node)
-      std::set<Node *> local_nodes_pt;
+      std::set<Node*> local_nodes_pt;
       // Insert the first node
       local_nodes_pt.insert(first_node_pt);
 
       // Now loop over nodes in order and increase the ARCLENGTH
-      for (std::list<FiniteElement *>::iterator it =
+      for (std::list<FiniteElement*>::iterator it =
              segment_sorted_ele_pt[is].begin();
            it != segment_sorted_ele_pt[is].end();
            it++)
       {
         // Get the pointer to the element
-        FiniteElement *el_pt = (*it);
+        FiniteElement* el_pt = (*it);
 
         // Start node and increment
         unsigned k_nod = 1;
@@ -2197,7 +2197,7 @@ namespace oomph
         // Loop over nodes in the face element
         for (unsigned j = 1; j < nnod; j++)
         {
-          Node *nod_pt = el_pt->node_pt(k_nod);
+          Node* nod_pt = el_pt->node_pt(k_nod);
           k_nod += nod_diff;
 
           // Coordinates of right node
@@ -2276,10 +2276,10 @@ namespace oomph
 
     // Before attaching the halo elements create a copy of the data
     // structure without halo elements
-    Vector<std::list<FiniteElement *>> segment_sorted_nonhalo_ele_pt(nsegments);
+    Vector<std::list<FiniteElement*>> segment_sorted_nonhalo_ele_pt(nsegments);
     for (unsigned is = 0; is < nsegments; is++)
     {
-      for (std::list<FiniteElement *>::iterator it_seg =
+      for (std::list<FiniteElement*>::iterator it_seg =
              segment_sorted_ele_pt[is].begin();
            it_seg != segment_sorted_ele_pt[is].end();
            it_seg++)
@@ -2294,23 +2294,23 @@ namespace oomph
     for (unsigned is = 0; is < nsegments; is++)
     {
       // Get access to the first element on the segment
-      FiniteElement *first_ele_pt = segment_sorted_ele_pt[is].front();
+      FiniteElement* first_ele_pt = segment_sorted_ele_pt[is].front();
 
       // Number of nodes
       const unsigned nnod = first_ele_pt->nnode();
 
       // Get the first node of the current segment
-      Node *first_node_pt = first_ele_pt->node_pt(0);
+      Node* first_node_pt = first_ele_pt->node_pt(0);
       if (is_inverted[first_ele_pt])
       {
         first_node_pt = first_ele_pt->node_pt(nnod - 1);
       }
 
       // Get access to the last element on the segment
-      FiniteElement *last_ele_pt = segment_sorted_ele_pt[is].back();
+      FiniteElement* last_ele_pt = segment_sorted_ele_pt[is].back();
 
       // Get the last node of the current segment
-      Node *last_node_pt = last_ele_pt->node_pt(nnod - 1);
+      Node* last_node_pt = last_ele_pt->node_pt(nnod - 1);
       if (is_inverted[last_ele_pt])
       {
         last_node_pt = last_ele_pt->node_pt(0);
@@ -2327,7 +2327,7 @@ namespace oomph
         for (unsigned iiface = 0; iiface < n_all_face_ele; iiface++)
         {
           // Get the candidate element
-          FiniteElement *halo_face_ele_pt = all_face_ele_pt[iiface];
+          FiniteElement* halo_face_ele_pt = all_face_ele_pt[iiface];
 
           // Check that the element is a halo face element, we do not check
           // if the element has been already done since the halo elements
@@ -2343,8 +2343,8 @@ namespace oomph
           if (is_halo_face_element[iiface])
           {
             // Get its left and right nodes
-            Node *left_node_pt = halo_face_ele_pt->node_pt(0);
-            Node *right_node_pt = halo_face_ele_pt->node_pt(nnod - 1);
+            Node* left_node_pt = halo_face_ele_pt->node_pt(0);
+            Node* right_node_pt = halo_face_ele_pt->node_pt(nnod - 1);
             // The halo element fits to the left of segment
             if (!attached_left_halo && (first_node_pt == right_node_pt ||
                                         first_node_pt == left_node_pt))
@@ -2423,11 +2423,11 @@ namespace oomph
     for (unsigned is = 0; is < nsegments; is++)
     {
       // Get access to the left most face element on the segment
-      FiniteElement *left_face_ele_pt = segment_sorted_ele_pt[is].front();
+      FiniteElement* left_face_ele_pt = segment_sorted_ele_pt[is].front();
 
       // Get the corresponding bulk element and check whether it is a halo
       // element or not
-      FiniteElement *tmp_left_bulk_ele_pt =
+      FiniteElement* tmp_left_bulk_ele_pt =
         face_to_bulk_element_pt[left_face_ele_pt];
 
       // Check if the bulk element is halo
@@ -2453,10 +2453,10 @@ namespace oomph
         left_processor_plus_one[is] = left_processor + 1;
 
         // Now get the id of the halo element to the left
-        GeneralisedElement *left_element_pt = tmp_left_bulk_ele_pt;
+        GeneralisedElement* left_element_pt = tmp_left_bulk_ele_pt;
 
         // Get the halo elements with left processor
-        Vector<GeneralisedElement *> left_halo_element_pt =
+        Vector<GeneralisedElement*> left_halo_element_pt =
           this->halo_element_pt(left_processor);
 
 #ifdef PARANOID
@@ -2525,7 +2525,7 @@ namespace oomph
 
         // Now get the id for the haloed element to the left, get the
         // haloed elements from the processor to the left
-        Vector<GeneralisedElement *> left_haloed_element_pt =
+        Vector<GeneralisedElement*> left_haloed_element_pt =
           this->haloed_element_pt(left_processor);
 
         const unsigned nhaloed_left = left_haloed_element_pt.size();
@@ -2566,11 +2566,11 @@ namespace oomph
       }
 
       // Get access to the right most face element on the segment
-      FiniteElement *right_face_ele_pt = segment_sorted_ele_pt[is].back();
+      FiniteElement* right_face_ele_pt = segment_sorted_ele_pt[is].back();
 
       // Get the corresponding bulk element and check whether it is
       // a halo element or not
-      FiniteElement *tmp_right_bulk_ele_pt =
+      FiniteElement* tmp_right_bulk_ele_pt =
         face_to_bulk_element_pt[right_face_ele_pt];
 
       // Check if the bulk element is halo
@@ -2597,10 +2597,10 @@ namespace oomph
         right_processor_plus_one[is] = right_processor + 1;
 
         // Now get the id of the halo element to the right
-        GeneralisedElement *right_element_pt = tmp_right_bulk_ele_pt;
+        GeneralisedElement* right_element_pt = tmp_right_bulk_ele_pt;
 
         // Get the halo elements with right processor
-        Vector<GeneralisedElement *> right_halo_element_pt =
+        Vector<GeneralisedElement*> right_halo_element_pt =
           this->halo_element_pt(right_processor);
 
 #ifdef PARANOID
@@ -2668,7 +2668,7 @@ namespace oomph
 #endif
 
         // Now get the id for the haloed element to the right
-        Vector<GeneralisedElement *> right_haloed_element_pt =
+        Vector<GeneralisedElement*> right_haloed_element_pt =
           this->haloed_element_pt(right_processor);
 
         const unsigned nhaloed_right = right_haloed_element_pt.size();
@@ -3696,7 +3696,7 @@ namespace oomph
       // segment, and then get the first and last node of the segment
 
       // Get the first nonhalo face element on the segment
-      FiniteElement *first_seg_ele_pt =
+      FiniteElement* first_seg_ele_pt =
         segment_sorted_nonhalo_ele_pt[is].front();
 
 #ifdef PARANOID
@@ -3718,14 +3718,14 @@ namespace oomph
       const unsigned nnod = first_seg_ele_pt->nnode();
 
       // Get the first node of the current segment
-      Node *first_seg_node_pt = first_seg_ele_pt->node_pt(0);
+      Node* first_seg_node_pt = first_seg_ele_pt->node_pt(0);
       if (is_inverted[first_seg_ele_pt])
       {
         first_seg_node_pt = first_seg_ele_pt->node_pt(nnod - 1);
       }
 
       // Get the last nonhalo face element on the segment
-      FiniteElement *last_seg_ele_pt = segment_sorted_nonhalo_ele_pt[is].back();
+      FiniteElement* last_seg_ele_pt = segment_sorted_nonhalo_ele_pt[is].back();
 
 #ifdef PARANOID
       // Check if the face element is nonhalo, it shouldn't, but better
@@ -3743,7 +3743,7 @@ namespace oomph
 #endif
 
       // Get the last node of the current segment
-      Node *last_seg_node_pt = last_seg_ele_pt->node_pt(nnod - 1);
+      Node* last_seg_node_pt = last_seg_ele_pt->node_pt(nnod - 1);
       if (is_inverted[last_seg_ele_pt])
       {
         last_seg_node_pt = last_seg_ele_pt->node_pt(0);
@@ -3857,9 +3857,9 @@ namespace oomph
     if (my_rank == proc_with_initial_seg)
     {
       // Stores the firts element of the segment
-      FiniteElement *first_ele_pt = 0;
+      FiniteElement* first_ele_pt = 0;
       // Stores the first node of the boundary
-      Node *first_node_pt = 0;
+      Node* first_node_pt = 0;
       // Check if the segment is inverted
       if (!segment_inverted[initial_segment])
       {
@@ -3951,10 +3951,10 @@ namespace oomph
     if (my_rank == proc_with_final_seg)
     {
       // Get access to the last element on the segment
-      FiniteElement *last_ele_pt = 0;
+      FiniteElement* last_ele_pt = 0;
 
       // Get the last node of the current segment
-      Node *last_node_pt = 0;
+      Node* last_node_pt = 0;
 
       // Check if the segment is inverted
       if (!segment_inverted[final_segment])
@@ -4093,16 +4093,16 @@ namespace oomph
   template<class ELEMENT>
   void TriangleMesh<ELEMENT>::
     re_assign_initial_zeta_values_for_internal_boundary(
-      const unsigned &b,
-      Vector<std::list<FiniteElement *>> &old_segment_sorted_ele_pt,
-      std::map<FiniteElement *, bool> &old_is_inverted)
+      const unsigned& b,
+      Vector<std::list<FiniteElement*>>& old_segment_sorted_ele_pt,
+      std::map<FiniteElement*, bool>& old_is_inverted)
   {
     // ------------------------------------------------------------------
     // First: Get the face elements associated with the current boundary
     //        Only include nonhalo face elements
     // ------------------------------------------------------------------
     // Temporary storage for face elements
-    Vector<FiniteElement *> face_el_pt;
+    Vector<FiniteElement*> face_el_pt;
 
     // Temporary storage for the number of elements adjacent to the
     // boundary
@@ -4115,7 +4115,7 @@ namespace oomph
     const unsigned n_regions = this->nregion();
 
     // Temporary storage for already done nodes
-    Vector<std::pair<Node *, Node *>> done_nodes_pt;
+    Vector<std::pair<Node*, Node*>> done_nodes_pt;
 
     // If there is more than one region then only use boundary
     // coordinates from the bulk side (region 0)
@@ -4143,7 +4143,7 @@ namespace oomph
           {
             // Get pointer to the bulk element that is adjacent to
             // boundary b
-            FiniteElement *bulk_elem_pt =
+            FiniteElement* bulk_elem_pt =
               this->boundary_element_in_region_pt(b, region_id, e);
 
             // Remember only work with non halo elements
@@ -4160,15 +4160,15 @@ namespace oomph
             // Before adding the new element we need to be sure that the
             // edge that this element represent has not been already
             // added
-            FiniteElement *tmp_ele_pt =
+            FiniteElement* tmp_ele_pt =
               new DummyFaceElement<ELEMENT>(bulk_elem_pt, face_index);
 
             const unsigned n_nodes = tmp_ele_pt->nnode();
 
-            std::pair<Node *, Node *> tmp_pair = std::make_pair(
+            std::pair<Node*, Node*> tmp_pair = std::make_pair(
               tmp_ele_pt->node_pt(0), tmp_ele_pt->node_pt(n_nodes - 1));
 
-            std::pair<Node *, Node *> tmp_pair_inverse = std::make_pair(
+            std::pair<Node*, Node*> tmp_pair_inverse = std::make_pair(
               tmp_ele_pt->node_pt(n_nodes - 1), tmp_ele_pt->node_pt(0));
 
             // Search for repeated nodes
@@ -4228,7 +4228,7 @@ namespace oomph
         {
           // Get pointer to the bulk element that is adjacent to
           // boundary b
-          FiniteElement *bulk_elem_pt = this->boundary_element_pt(b, e);
+          FiniteElement* bulk_elem_pt = this->boundary_element_pt(b, e);
 
           // Skip the halo elements, they are not included
           if (bulk_elem_pt->is_halo())
@@ -4243,15 +4243,15 @@ namespace oomph
           // Before adding the new element we need to be sure that the
           // edge that this element represents has not been already
           // added (only applies for internal boundaries)
-          FiniteElement *tmp_ele_pt =
+          FiniteElement* tmp_ele_pt =
             new DummyFaceElement<ELEMENT>(bulk_elem_pt, face_index);
 
           const unsigned n_nodes = tmp_ele_pt->nnode();
 
-          std::pair<Node *, Node *> tmp_pair = std::make_pair(
+          std::pair<Node*, Node*> tmp_pair = std::make_pair(
             tmp_ele_pt->node_pt(0), tmp_ele_pt->node_pt(n_nodes - 1));
 
-          std::pair<Node *, Node *> tmp_pair_inverse = std::make_pair(
+          std::pair<Node*, Node*> tmp_pair_inverse = std::make_pair(
             tmp_ele_pt->node_pt(n_nodes - 1), tmp_ele_pt->node_pt(0));
 
           // Search for repeated nodes
@@ -4319,30 +4319,30 @@ namespace oomph
 
     // The vector of list to store the "segments" that compound the
     // boundary (segments may appear only in a distributed mesh)
-    Vector<std::list<FiniteElement *>> segment_sorted_ele_pt;
+    Vector<std::list<FiniteElement*>> segment_sorted_ele_pt;
 
     // Number of already sorted face elements
     unsigned nsorted_face_elements = 0;
 
     // Keep track of who's done
-    std::map<FiniteElement *, bool> done_el;
+    std::map<FiniteElement*, bool> done_el;
 
     // Keep track of which element is inverted
-    std::map<FiniteElement *, bool> is_inverted;
+    std::map<FiniteElement*, bool> is_inverted;
 
     // Iterate until all possible segments have been created
     while (nsorted_face_elements < nnon_halo_face_elements)
     {
       // The ordered list of face elements (in a distributed mesh a
       // collection of contiguous face elements define a segment)
-      std::list<FiniteElement *> sorted_el_pt;
+      std::list<FiniteElement*> sorted_el_pt;
 
 #ifdef PARANOID
       // Select an initial element for the segment
       bool found_initial_face_element = false;
 #endif
 
-      FiniteElement *ele_face_pt = 0;
+      FiniteElement* ele_face_pt = 0;
 
       unsigned iface = 0;
       for (iface = 0; iface < nele; iface++)
@@ -4386,8 +4386,8 @@ namespace oomph
 
       // Left and rightmost nodes (the left and right nodes of the
       // current face element)
-      Node *left_node_pt = ele_face_pt->node_pt(0);
-      Node *right_node_pt = ele_face_pt->node_pt(nnod - 1);
+      Node* left_node_pt = ele_face_pt->node_pt(0);
+      Node* right_node_pt = ele_face_pt->node_pt(nnod - 1);
 
       // Continue iterating if a new face element has been added to the
       // list
@@ -4413,8 +4413,8 @@ namespace oomph
           if (!(done_el[ele_face_pt]))
           {
             // Get the left and right nodes of the current element
-            Node *local_left_node_pt = ele_face_pt->node_pt(0);
-            Node *local_right_node_pt = ele_face_pt->node_pt(nnod - 1);
+            Node* local_left_node_pt = ele_face_pt->node_pt(0);
+            Node* local_right_node_pt = ele_face_pt->node_pt(nnod - 1);
 
             // New element fits at the left of segment and is not inverted
             if (left_node_pt == local_right_node_pt)
@@ -4492,11 +4492,11 @@ namespace oomph
     // Vector of sets that stores the nodes of each segment based on a
     // lexicographically order starting from the bottom left node of
     // each segment
-    Vector<std::set<Node *>> segment_all_nodes_pt(nsegments);
+    Vector<std::set<Node*>> segment_all_nodes_pt(nsegments);
 
     // Stores the nodes on each segment in the order they appear in the
     // face elements
-    Vector<Vector<Node *>> sorted_segment_all_nodes_pt(nsegments);
+    Vector<Vector<Node*>> sorted_segment_all_nodes_pt(nsegments);
 
     // Associate and arclength to each node on each segment of the
     // boundary, the nodes and therefore the arclength come in the same
@@ -4532,13 +4532,13 @@ namespace oomph
 #endif
 
       // Get access to the first element on the segment
-      FiniteElement *first_ele_pt = segment_sorted_ele_pt[is].front();
+      FiniteElement* first_ele_pt = segment_sorted_ele_pt[is].front();
 
       // Number of nodes
       const unsigned nnod = first_ele_pt->nnode();
 
       // Get the first node of the current segment
-      Node *first_node_pt = first_ele_pt->node_pt(0);
+      Node* first_node_pt = first_ele_pt->node_pt(0);
       if (is_inverted[first_ele_pt])
       {
         first_node_pt = first_ele_pt->node_pt(nnod - 1);
@@ -4561,10 +4561,10 @@ namespace oomph
         initial_zeta_segment[is] = zeta[0];
 
         // Get access to the last element on the segment
-        FiniteElement *last_ele_pt = segment_sorted_ele_pt[is].back();
+        FiniteElement* last_ele_pt = segment_sorted_ele_pt[is].back();
 
         // Get the last node of the current segment
-        Node *last_node_pt = last_ele_pt->node_pt(nnod - 1);
+        Node* last_node_pt = last_ele_pt->node_pt(nnod - 1);
         if (is_inverted[last_ele_pt])
         {
           last_node_pt = last_ele_pt->node_pt(0);
@@ -4576,7 +4576,7 @@ namespace oomph
 
       // Sort the nodes in the segment (lexicographically bottom left
       // node)
-      std::set<Node *> local_nodes_pt;
+      std::set<Node*> local_nodes_pt;
       local_nodes_pt.insert(first_node_pt);
 
       // Associate and arclength to the sorted nodes
@@ -4585,17 +4585,17 @@ namespace oomph
 
       // Sorts the nodes in the segments according their sorting in the
       // face elements
-      Vector<Node *> sorted_nodes_pt;
+      Vector<Node*> sorted_nodes_pt;
       sorted_nodes_pt.push_back(first_node_pt);
 
       // Now loop over nodes in order
-      for (std::list<FiniteElement *>::iterator it =
+      for (std::list<FiniteElement*>::iterator it =
              segment_sorted_ele_pt[is].begin();
            it != segment_sorted_ele_pt[is].end();
            it++)
       {
         // Get the face element
-        FiniteElement *el_pt = *it;
+        FiniteElement* el_pt = *it;
 
         // Start node and increment
         unsigned k_nod = 1;
@@ -4609,7 +4609,7 @@ namespace oomph
         // Loop over nodes
         for (unsigned j = 1; j < nnod; j++)
         {
-          Node *nod_pt = el_pt->node_pt(k_nod);
+          Node* nod_pt = el_pt->node_pt(k_nod);
           k_nod += nod_diff;
 
           // Coordinates of right node
@@ -4791,25 +4791,25 @@ namespace oomph
 
       // Now get the first and last node of the current segment
       // Get the first element
-      FiniteElement *first_old_seg_ele_pt =
+      FiniteElement* first_old_seg_ele_pt =
         old_segment_sorted_ele_pt[old_is].front();
 
       // Number of nodes
       const unsigned nnod = first_old_seg_ele_pt->nnode();
 
       // Get the first node of the current segment
-      Node *first_old_seg_node_pt = first_old_seg_ele_pt->node_pt(0);
+      Node* first_old_seg_node_pt = first_old_seg_ele_pt->node_pt(0);
       if (old_is_inverted[first_old_seg_ele_pt])
       {
         first_old_seg_node_pt = first_old_seg_ele_pt->node_pt(nnod - 1);
       }
 
       // Get access to the last element on the segment
-      FiniteElement *last_old_seg_ele_pt =
+      FiniteElement* last_old_seg_ele_pt =
         old_segment_sorted_ele_pt[old_is].back();
 
       // Get the last node of the current segment
-      Node *last_old_seg_node_pt = last_old_seg_ele_pt->node_pt(nnod - 1);
+      Node* last_old_seg_node_pt = last_old_seg_ele_pt->node_pt(nnod - 1);
       if (old_is_inverted[last_old_seg_ele_pt])
       {
         last_old_seg_node_pt = last_old_seg_ele_pt->node_pt(0);
@@ -4818,7 +4818,7 @@ namespace oomph
       // also invert the nodes
       if (old_inverted_segment)
       {
-        Node *temp_node_pt = first_old_seg_node_pt;
+        Node* temp_node_pt = first_old_seg_node_pt;
         first_old_seg_node_pt = last_old_seg_node_pt;
         last_old_seg_node_pt = temp_node_pt;
       }
@@ -4837,8 +4837,8 @@ namespace oomph
           bool same_order = false;
 
           // Get the first node of the current segment
-          FiniteElement *first_seg_ele_pt = segment_sorted_ele_pt[is].front();
-          Node *first_seg_node_pt = first_seg_ele_pt->node_pt(0);
+          FiniteElement* first_seg_ele_pt = segment_sorted_ele_pt[is].front();
+          Node* first_seg_node_pt = first_seg_ele_pt->node_pt(0);
           if (is_inverted[first_seg_ele_pt])
           {
             first_seg_node_pt = first_seg_ele_pt->node_pt(nnod - 1);
@@ -4856,8 +4856,8 @@ namespace oomph
           }
 
           // Get the last node of the current segment
-          FiniteElement *last_seg_ele_pt = segment_sorted_ele_pt[is].back();
-          Node *last_seg_node_pt = last_seg_ele_pt->node_pt(nnod - 1);
+          FiniteElement* last_seg_ele_pt = segment_sorted_ele_pt[is].back();
+          Node* last_seg_node_pt = last_seg_ele_pt->node_pt(nnod - 1);
           if (is_inverted[last_seg_ele_pt])
           {
             last_seg_node_pt = last_seg_ele_pt->node_pt(0);
@@ -4874,12 +4874,12 @@ namespace oomph
           }
 
           // Temporary storage for the nodes of the current segment
-          Vector<Node *> segment_node_pt = sorted_segment_all_nodes_pt[is];
+          Vector<Node*> segment_node_pt = sorted_segment_all_nodes_pt[is];
           // Get the number of nodes in the segment
           const unsigned nsegment_node = segment_node_pt.size();
           for (unsigned in = 0; in < nsegment_node; in++)
           {
-            Node *current_node_pt = segment_node_pt[in];
+            Node* current_node_pt = segment_node_pt[in];
             if (!found_first_old_seg_node &&
                 first_old_seg_node_pt == current_node_pt)
             {
@@ -5156,11 +5156,11 @@ namespace oomph
       if (!done_segment[is])
       {
         // Get the first node of the current segment
-        FiniteElement *first_seg_ele_pt = segment_sorted_ele_pt[is].front();
+        FiniteElement* first_seg_ele_pt = segment_sorted_ele_pt[is].front();
         // Number of nodes
         const unsigned nnod = first_seg_ele_pt->nnode();
 
-        Node *first_seg_node_pt = first_seg_ele_pt->node_pt(0);
+        Node* first_seg_node_pt = first_seg_ele_pt->node_pt(0);
         if (is_inverted[first_seg_ele_pt])
         {
           first_seg_node_pt = first_seg_ele_pt->node_pt(nnod - 1);
@@ -5178,8 +5178,8 @@ namespace oomph
         }
 
         // Get the last node of the current segment
-        FiniteElement *last_seg_ele_pt = segment_sorted_ele_pt[is].back();
-        Node *last_seg_node_pt = last_seg_ele_pt->node_pt(nnod - 1);
+        FiniteElement* last_seg_ele_pt = segment_sorted_ele_pt[is].back();
+        Node* last_seg_node_pt = last_seg_ele_pt->node_pt(nnod - 1);
         if (is_inverted[last_seg_ele_pt])
         {
           last_seg_node_pt = last_seg_ele_pt->node_pt(0);
@@ -5285,13 +5285,13 @@ namespace oomph
   /// =====================================================================
   template<class ELEMENT>
   void TriangleMesh<ELEMENT>::select_boundary_face_elements(
-    Vector<FiniteElement *> &face_ele_pt,
-    const unsigned &b,
-    bool &is_internal_boundary,
-    std::map<FiniteElement *, FiniteElement *> &face_to_bulk_element_pt)
+    Vector<FiniteElement*>& face_ele_pt,
+    const unsigned& b,
+    bool& is_internal_boundary,
+    std::map<FiniteElement*, FiniteElement*>& face_to_bulk_element_pt)
   {
     // Get the communicator of the mesh
-    OomphCommunicator *comm_pt = this->communicator_pt();
+    OomphCommunicator* comm_pt = this->communicator_pt();
 
     const unsigned my_rank = comm_pt->my_rank();
 
@@ -5301,7 +5301,7 @@ namespace oomph
 
     // Temporary storage for face elements (do not take care of
     // repeated face elements)
-    Vector<FiniteElement *> tmp_face_ele_pt;
+    Vector<FiniteElement*> tmp_face_ele_pt;
 
     const unsigned nregions = this->nregion();
 
@@ -5327,7 +5327,7 @@ namespace oomph
           {
             // Get pointer to the bulk element that is adjacent
             // to boundary b
-            FiniteElement *bulk_ele_pt =
+            FiniteElement* bulk_ele_pt =
               this->boundary_element_in_region_pt(b, region_id, e);
 
             // Get the index of the face of element e along
@@ -5336,7 +5336,7 @@ namespace oomph
               this->face_index_at_boundary_in_region(b, region_id, e);
 
             // Create the face element
-            FiniteElement *tmp_face_el_pt =
+            FiniteElement* tmp_face_el_pt =
               new DummyFaceElement<ELEMENT>(bulk_ele_pt, face_index);
 
             // Associated the face element with the bulk
@@ -5369,14 +5369,14 @@ namespace oomph
         {
           // Get pointer to the bulk element that is adjacent to
           // boundary b
-          FiniteElement *bulk_ele_pt = this->boundary_element_pt(b, e);
+          FiniteElement* bulk_ele_pt = this->boundary_element_pt(b, e);
 
           // Get the index of the face of element e along
           // boundary b
           int face_index = this->face_index_at_boundary(b, e);
 
           // Create the face element
-          FiniteElement *tmp_face_el_pt =
+          FiniteElement* tmp_face_el_pt =
             new DummyFaceElement<ELEMENT>(bulk_ele_pt, face_index);
 
           // Associated the face element with the bulk
@@ -5394,7 +5394,7 @@ namespace oomph
     } // else (n_regions > 1)
 
     // map to know which face element has been already done
-    std::map<FiniteElement *, bool> done_face;
+    std::map<FiniteElement*, bool> done_face;
 
     // Set the flag to indicate if we are working with an internal
     // boundary
@@ -5402,7 +5402,7 @@ namespace oomph
 
     // Free the memory of the elements in this container (only used
     // when working with internal boundaries)
-    Vector<FiniteElement *> free_memory_face_ele_pt;
+    Vector<FiniteElement*> free_memory_face_ele_pt;
 
     // Get the number of face elements in the boundary (including
     // repeated)
@@ -5410,7 +5410,7 @@ namespace oomph
     for (unsigned ie = 0; ie < n_tmp_face_ele; ie++)
     {
       // Get the possible main element
-      FiniteElement *main_face_ele_pt = tmp_face_ele_pt[ie];
+      FiniteElement* main_face_ele_pt = tmp_face_ele_pt[ie];
       if (!done_face[main_face_ele_pt])
       {
         // Mark the face element as done
@@ -5418,21 +5418,21 @@ namespace oomph
         // Get the number of nodes for the face element
         const unsigned nnodes = main_face_ele_pt->nnode();
         // Get the first and last node of the main face element
-        Node *main_first_node_pt = main_face_ele_pt->node_pt(0);
-        Node *main_last_node_pt = main_face_ele_pt->node_pt(nnodes - 1);
+        Node* main_first_node_pt = main_face_ele_pt->node_pt(0);
+        Node* main_last_node_pt = main_face_ele_pt->node_pt(nnodes - 1);
         // Look for the other side face element (we can start from
         // the next one, all previous face elements have been
         // already identified with its other side face)
         for (unsigned iie = ie + 1; iie < n_tmp_face_ele; iie++)
         {
           // Get the possible dependant element
-          FiniteElement *dependant_face_ele_pt = tmp_face_ele_pt[iie];
+          FiniteElement* dependant_face_ele_pt = tmp_face_ele_pt[iie];
           if (!done_face[dependant_face_ele_pt])
           {
             // Get the first and last node of the dependant
             // face element
-            Node *dependant_first_node_pt = dependant_face_ele_pt->node_pt(0);
-            Node *dependant_last_node_pt =
+            Node* dependant_first_node_pt = dependant_face_ele_pt->node_pt(0);
+            Node* dependant_last_node_pt =
               dependant_face_ele_pt->node_pt(nnodes - 1);
             // Check if the nodes at the ends of both face
             // elements match (also check the reversed case)
@@ -5456,9 +5456,9 @@ namespace oomph
 
               // Get the bulk element for each face element
               // (the main and the dependant face element)
-              FiniteElement *main_bulk_ele_pt =
+              FiniteElement* main_bulk_ele_pt =
                 face_to_bulk_element_pt[main_face_ele_pt];
-              FiniteElement *dependant_bulk_ele_pt =
+              FiniteElement* dependant_bulk_ele_pt =
                 face_to_bulk_element_pt[dependant_face_ele_pt];
 
               // Get the processor in charge for each bulk
@@ -5614,27 +5614,27 @@ namespace oomph
   ///========================================================================
   template<class ELEMENT>
   void TriangleMesh<ELEMENT>::synchronize_boundary_coordinates(
-    const unsigned &b)
+    const unsigned& b)
   {
     // ------------------------------------------------------------------
     // First: Get the face elements associated with the current boundary
     // ------------------------------------------------------------------
 
     // Get the communicator of the mesh
-    OomphCommunicator *comm_pt = this->communicator_pt();
+    OomphCommunicator* comm_pt = this->communicator_pt();
 
     const unsigned nproc = comm_pt->nproc();
     const unsigned my_rank = comm_pt->my_rank();
 
     // Temporary storage for face elements (do not take care of repeated
     // face elements)
-    Vector<FiniteElement *> tmp_face_ele_pt;
+    Vector<FiniteElement*> tmp_face_ele_pt;
 
     const unsigned nregions = this->nregion();
 
     // map to associate the face element to the bulk element, necessary
     // to get the processor in charge for the halo elements
-    std::map<FiniteElement *, FiniteElement *> face_to_bulk_element_pt;
+    std::map<FiniteElement*, FiniteElement*> face_to_bulk_element_pt;
 
     // If there is more than one region then only use boundary
     // coordinates from the bulk side (region 0)
@@ -5657,7 +5657,7 @@ namespace oomph
           for (unsigned e = 0; e < nele_in_region; e++)
           {
             // Get pointer to the bulk element that is adjacent to boundary b
-            FiniteElement *bulk_ele_pt =
+            FiniteElement* bulk_ele_pt =
               this->boundary_element_in_region_pt(b, region_id, e);
 
             // Get the index of the face of element e along boundary b
@@ -5665,7 +5665,7 @@ namespace oomph
               this->face_index_at_boundary_in_region(b, region_id, e);
 
             // Create the face element
-            FiniteElement *tmp_face_el_pt =
+            FiniteElement* tmp_face_el_pt =
               new DummyFaceElement<ELEMENT>(bulk_ele_pt, face_index);
 
             // ... and add it to the tmp storage for all the face
@@ -5696,13 +5696,13 @@ namespace oomph
         for (unsigned e = 0; e < nbound_ele; e++)
         {
           // Get pointer to the bulk element that is adjacent to boundary b
-          FiniteElement *bulk_ele_pt = this->boundary_element_pt(b, e);
+          FiniteElement* bulk_ele_pt = this->boundary_element_pt(b, e);
 
           // Get the index of the face of element e along boundary b
           int face_index = this->face_index_at_boundary(b, e);
 
           // Create the face element
-          FiniteElement *tmp_face_el_pt =
+          FiniteElement* tmp_face_el_pt =
             new DummyFaceElement<ELEMENT>(bulk_ele_pt, face_index);
 
           // ... and add it to the tmp storage for all the face
@@ -5720,10 +5720,10 @@ namespace oomph
     // Temporary storage for one side face elements. In case we are
     // working with an internal boundary here we store only one of the
     // face elements that are at each side of the boundary
-    Vector<FiniteElement *> face_ele_pt;
+    Vector<FiniteElement*> face_ele_pt;
 
     // map to know which face element has been already done
-    std::map<FiniteElement *, bool> done_face;
+    std::map<FiniteElement*, bool> done_face;
 
     // Flag to indicate if we are working with an internal boundary
     bool is_internal_boundary = false;
@@ -5742,7 +5742,7 @@ namespace oomph
     for (unsigned ie = 0; ie < nbound_ele; ie++)
     {
       // Get the possible main element
-      FiniteElement *main_face_ele_pt = tmp_face_ele_pt[ie];
+      FiniteElement* main_face_ele_pt = tmp_face_ele_pt[ie];
       if (!done_face[main_face_ele_pt])
       {
         // Mark the face element as done
@@ -5750,18 +5750,18 @@ namespace oomph
         // Get the number of nodes for the face element
         const unsigned nnodes = main_face_ele_pt->nnode();
         // Get the first and last node of the main face element
-        Node *main_first_node_pt = main_face_ele_pt->node_pt(0);
-        Node *main_last_node_pt = main_face_ele_pt->node_pt(nnodes - 1);
+        Node* main_first_node_pt = main_face_ele_pt->node_pt(0);
+        Node* main_last_node_pt = main_face_ele_pt->node_pt(nnodes - 1);
         // Look for the other side face element
         for (unsigned iie = ie + 1; iie < nbound_ele; iie++)
         {
           // Get the possible dependant element
-          FiniteElement *dependant_face_ele_pt = tmp_face_ele_pt[iie];
+          FiniteElement* dependant_face_ele_pt = tmp_face_ele_pt[iie];
           if (!done_face[dependant_face_ele_pt])
           {
             // Get the first and last node of the dependant face element
-            Node *dependant_first_node_pt = dependant_face_ele_pt->node_pt(0);
-            Node *dependant_last_node_pt =
+            Node* dependant_first_node_pt = dependant_face_ele_pt->node_pt(0);
+            Node* dependant_last_node_pt =
               dependant_face_ele_pt->node_pt(nnodes - 1);
             // Check if the nodes at the ends of both face elements
             // match (also check the reversed case)
@@ -5787,9 +5787,9 @@ namespace oomph
 
               // Get the bulk element for each face element (the main
               // and the dependant face element)
-              FiniteElement *main_bulk_ele_pt =
+              FiniteElement* main_bulk_ele_pt =
                 face_to_bulk_element_pt[main_face_ele_pt];
-              FiniteElement *dependant_bulk_ele_pt =
+              FiniteElement* dependant_bulk_ele_pt =
                 face_to_bulk_element_pt[dependant_face_ele_pt];
 
               // Get the processor in charge for each bulk element
@@ -5929,9 +5929,9 @@ namespace oomph
 
     for (unsigned ie = 0; ie < nface_ele; ie++)
     {
-      FiniteElement *face_el_pt = face_ele_pt[ie];
+      FiniteElement* face_el_pt = face_ele_pt[ie];
       // Get the bulk element
-      FiniteElement *tmp_bulk_ele_pt = face_to_bulk_element_pt[face_el_pt];
+      FiniteElement* tmp_bulk_ele_pt = face_to_bulk_element_pt[face_el_pt];
       // Check if the bulk element is halo
       if (!tmp_bulk_ele_pt->is_halo())
       {
@@ -5954,11 +5954,11 @@ namespace oomph
     // -----------------------------------------------------------------
 
     // A map to know which nodes are already done
-    std::map<Node *, bool> done_node;
+    std::map<Node*, bool> done_node;
 
     // The storage for the halo nodes on face elements in this processor
     // with other processors
-    Vector<Vector<Node *>> face_halo_node_pt(nproc);
+    Vector<Vector<Node*>> face_halo_node_pt(nproc);
 
     // The storage for the ids of the halo nodes on face elements in
     // this processor with other processors
@@ -5966,7 +5966,7 @@ namespace oomph
 
     // The storage for the haloed nodes on face elements in this
     // processor with other processors
-    Vector<Vector<Node *>> face_haloed_node_pt(nproc);
+    Vector<Vector<Node*>> face_haloed_node_pt(nproc);
 
     // The storage for the ids of the haloed nodes on face elements in
     // this processor with other processors
@@ -5974,7 +5974,7 @@ namespace oomph
 
     // A map to know which nodes are face nodes and the processor in
     // charge is the current one
-    std::map<Node *, bool> done_haloed_face_node;
+    std::map<Node*, bool> done_haloed_face_node;
 
     // Go through all the face elements
     for (unsigned iface = 0; iface < nface_ele; iface++)
@@ -5983,13 +5983,13 @@ namespace oomph
       if (!is_halo_face_element[iface])
       {
         // Get the face element
-        FiniteElement *ele_face_pt = face_ele_pt[iface];
+        FiniteElement* ele_face_pt = face_ele_pt[iface];
         // The number of nodes of the face elements
         const unsigned nnodes = ele_face_pt->nnode();
         // Go through all the nodes in the face element
         for (unsigned in = 0; in < nnodes; in++)
         {
-          Node *face_node_pt = ele_face_pt->node_pt(in);
+          Node* face_node_pt = ele_face_pt->node_pt(in);
           // Check if node is done
           if (!done_node[face_node_pt])
           {
@@ -6026,7 +6026,7 @@ namespace oomph
               const unsigned nhalo_iproc = this->nhalo_node(ip);
               for (unsigned ihn = 0; ihn < nhalo_iproc; ihn++)
               {
-                Node *compare_face_node_pt = this->halo_node_pt(ip, ihn);
+                Node* compare_face_node_pt = this->halo_node_pt(ip, ihn);
                 if (compare_face_node_pt == face_node_pt)
                 {
                   // Once found the id of the node with the processor
@@ -6076,7 +6076,7 @@ namespace oomph
                   const unsigned nhaloed_iproc = this->nhaloed_node(ip);
                   for (unsigned ihdn = 0; ihdn < nhaloed_iproc; ihdn++)
                   {
-                    Node *compare_face_node_pt = this->haloed_node_pt(ip, ihdn);
+                    Node* compare_face_node_pt = this->haloed_node_pt(ip, ihdn);
                     if (face_node_pt == compare_face_node_pt)
                     {
                       // Store the node on the haloed node vector for
@@ -6144,7 +6144,7 @@ namespace oomph
         for (unsigned ihfn = 0; ihfn < nhalo_face_nodes; ihfn++)
         {
           // Get the "ihfn"-th face node with the "ip" processor
-          Node *halo_face_node_pt = face_halo_node_pt[ip][ihfn];
+          Node* halo_face_node_pt = face_halo_node_pt[ip][ihfn];
           // Get the halo id with the "ip" processor
           const unsigned halo_id = face_halo_node_id[ip][ihfn];
           // Get the boundary coordinate of the node
@@ -6298,7 +6298,7 @@ namespace oomph
           zeta[0] = flat_double_receive_packed_data[iflat_packed];
 
           // Get the haloed node
-          Node *haloed_face_node_pt = this->haloed_node_pt(ip, haloed_id);
+          Node* haloed_face_node_pt = this->haloed_node_pt(ip, haloed_id);
 
           // If the node has already set the boundary coordinates then
           // do not establish it. This is the case for the nodes that
@@ -6327,7 +6327,7 @@ namespace oomph
                 const unsigned nhaloed_node_iiproc = this->nhaloed_node(iiproc);
                 for (unsigned ihdn = 0; ihdn < nhaloed_node_iiproc; ihdn++)
                 {
-                  Node *compare_haloed_node_pt =
+                  Node* compare_haloed_node_pt =
                     this->haloed_node_pt(iiproc, ihdn);
                   if (haloed_face_node_pt == compare_haloed_node_pt)
                   {
@@ -6374,7 +6374,7 @@ namespace oomph
         for (unsigned ihdfn = 0; ihdfn < nhaloed_face_nodes; ihdfn++)
         {
           // Get the "ihdfn"-th face node with the "ip" processor
-          Node *haloed_face_node_pt = face_haloed_node_pt[ip][ihdfn];
+          Node* haloed_face_node_pt = face_haloed_node_pt[ip][ihdfn];
           // Get the haloed id with the "ip" processor
           const unsigned haloed_id = face_haloed_node_id[ip][ihdfn];
           // Get the boundary coordinate of the node
@@ -6528,7 +6528,7 @@ namespace oomph
           zeta[0] = flat_double_receive_packed_data[iflat_packed];
 
           // Get the halo node
-          Node *halo_face_node_pt = this->halo_node_pt(ip, halo_id);
+          Node* halo_face_node_pt = this->halo_node_pt(ip, halo_id);
 
           // It could be possible that the node has been already
           // established boundary coordinates since it is a halo face
@@ -6568,14 +6568,14 @@ namespace oomph
   template<class ELEMENT>
   void TriangleMesh<ELEMENT>::
     re_scale_re_assigned_initial_zeta_values_for_internal_boundary(
-      const unsigned &b)
+      const unsigned& b)
   {
     // ------------------------------------------------------------------
     // First: Get the face elements associated with the current boundary
     //        Only include nonhalo face elements
     // ------------------------------------------------------------------
     // Temporary storage for face elements
-    Vector<FiniteElement *> face_el_pt;
+    Vector<FiniteElement*> face_el_pt;
 
     // Temporary storage for the number of elements adjacent to the
     // boundary
@@ -6588,7 +6588,7 @@ namespace oomph
     const unsigned n_regions = this->nregion();
 
     // Temporary storage for already done nodes
-    Vector<std::pair<Node *, Node *>> done_nodes_pt;
+    Vector<std::pair<Node*, Node*>> done_nodes_pt;
 
     // If there is more than one region then only use boundary
     // coordinates from the bulk side (region 0)
@@ -6616,7 +6616,7 @@ namespace oomph
           {
             // Get pointer to the bulk element that is adjacent to
             // boundary b
-            FiniteElement *bulk_elem_pt =
+            FiniteElement* bulk_elem_pt =
               this->boundary_element_in_region_pt(b, region_id, e);
 
             // Remember only to work with nonhalo elements
@@ -6633,15 +6633,15 @@ namespace oomph
             // Before adding the new element we need to be sure that the
             // edge that this element represent has not been already
             // added
-            FiniteElement *tmp_ele_pt =
+            FiniteElement* tmp_ele_pt =
               new DummyFaceElement<ELEMENT>(bulk_elem_pt, face_index);
 
             const unsigned n_nodes = tmp_ele_pt->nnode();
 
-            std::pair<Node *, Node *> tmp_pair = std::make_pair(
+            std::pair<Node*, Node*> tmp_pair = std::make_pair(
               tmp_ele_pt->node_pt(0), tmp_ele_pt->node_pt(n_nodes - 1));
 
-            std::pair<Node *, Node *> tmp_pair_inverse = std::make_pair(
+            std::pair<Node*, Node*> tmp_pair_inverse = std::make_pair(
               tmp_ele_pt->node_pt(n_nodes - 1), tmp_ele_pt->node_pt(0));
 
             // Search for repeated nodes
@@ -6701,7 +6701,7 @@ namespace oomph
         {
           // Get pointer to the bulk element that is adjacent to
           // boundary b
-          FiniteElement *bulk_elem_pt = this->boundary_element_pt(b, e);
+          FiniteElement* bulk_elem_pt = this->boundary_element_pt(b, e);
 
           // Remember only to work with nonhalo elements
           if (bulk_elem_pt->is_halo())
@@ -6717,15 +6717,15 @@ namespace oomph
           // Before adding the new element we need to be sure that the
           // edge that this element represents has not been already
           // added (only applies for internal boundaries)
-          FiniteElement *tmp_ele_pt =
+          FiniteElement* tmp_ele_pt =
             new DummyFaceElement<ELEMENT>(bulk_elem_pt, face_index);
 
           const unsigned n_nodes = tmp_ele_pt->nnode();
 
-          std::pair<Node *, Node *> tmp_pair = std::make_pair(
+          std::pair<Node*, Node*> tmp_pair = std::make_pair(
             tmp_ele_pt->node_pt(0), tmp_ele_pt->node_pt(n_nodes - 1));
 
-          std::pair<Node *, Node *> tmp_pair_inverse = std::make_pair(
+          std::pair<Node*, Node*> tmp_pair_inverse = std::make_pair(
             tmp_ele_pt->node_pt(n_nodes - 1), tmp_ele_pt->node_pt(0));
 
           // Search for repeated nodes
@@ -6796,30 +6796,30 @@ namespace oomph
 
     // The vector of list to store the "segments" that compound the
     // boundary (segments may appear only in a distributed mesh)
-    Vector<std::list<FiniteElement *>> segment_sorted_ele_pt;
+    Vector<std::list<FiniteElement*>> segment_sorted_ele_pt;
 
     // Number of already sorted face elements
     unsigned nsorted_face_elements = 0;
 
     // Keep track of who's done
-    std::map<FiniteElement *, bool> done_el;
+    std::map<FiniteElement*, bool> done_el;
 
     // Keep track of which element is inverted
-    std::map<FiniteElement *, bool> is_inverted;
+    std::map<FiniteElement*, bool> is_inverted;
 
     // Iterate until all possible segments have been created
     while (nsorted_face_elements < nnon_halo_face_elements)
     {
       // The ordered list of face elements (in a distributed mesh a
       // collection of contiguous face elements define a segment)
-      std::list<FiniteElement *> sorted_el_pt;
+      std::list<FiniteElement*> sorted_el_pt;
 
 #ifdef PARANOID
       // Select an initial element for the segment
       bool found_initial_face_element = false;
 #endif
 
-      FiniteElement *ele_face_pt = 0;
+      FiniteElement* ele_face_pt = 0;
 
       unsigned iface = 0;
       for (iface = 0; iface < nele; iface++)
@@ -6859,8 +6859,8 @@ namespace oomph
 
       // Left and rightmost nodes (the left and right nodes of the
       // current face element)
-      Node *left_node_pt = ele_face_pt->node_pt(0);
-      Node *right_node_pt = ele_face_pt->node_pt(nnod - 1);
+      Node* left_node_pt = ele_face_pt->node_pt(0);
+      Node* right_node_pt = ele_face_pt->node_pt(nnod - 1);
 
       // Continue iterating if a new face element has been added to the
       // list
@@ -6885,8 +6885,8 @@ namespace oomph
           if (!(done_el[ele_face_pt]))
           {
             // Get the left and right nodes of the current element
-            Node *local_left_node_pt = ele_face_pt->node_pt(0);
-            Node *local_right_node_pt = ele_face_pt->node_pt(nnod - 1);
+            Node* local_left_node_pt = ele_face_pt->node_pt(0);
+            Node* local_right_node_pt = ele_face_pt->node_pt(nnod - 1);
 
             // New element fits at the left of segment and is not inverted
             if (left_node_pt == local_right_node_pt)
@@ -6947,7 +6947,7 @@ namespace oomph
     // Vector of sets that stores the nodes of each segment based on a
     // lexicographically order starting from the bottom left node of
     // each segment
-    Vector<std::set<Node *>> segment_all_nodes_pt;
+    Vector<std::set<Node*>> segment_all_nodes_pt;
 
     // The number of segments in this processor
     const unsigned nsegments = segment_sorted_ele_pt.size();
@@ -6992,23 +6992,23 @@ namespace oomph
 #endif
 
       // Get access to the first element on the segment
-      FiniteElement *first_ele_pt = segment_sorted_ele_pt[is].front();
+      FiniteElement* first_ele_pt = segment_sorted_ele_pt[is].front();
 
       // Number of nodes
       const unsigned nnod = first_ele_pt->nnode();
 
       // Get the first node of the current segment
-      Node *first_node_pt = first_ele_pt->node_pt(0);
+      Node* first_node_pt = first_ele_pt->node_pt(0);
       if (is_inverted[first_ele_pt])
       {
         first_node_pt = first_ele_pt->node_pt(nnod - 1);
       }
 
       // Get access to the last element on the segment
-      FiniteElement *last_ele_pt = segment_sorted_ele_pt[is].back();
+      FiniteElement* last_ele_pt = segment_sorted_ele_pt[is].back();
 
       // Get the last node of the current segment
-      Node *last_node_pt = last_ele_pt->node_pt(nnod - 1);
+      Node* last_node_pt = last_ele_pt->node_pt(nnod - 1);
       if (is_inverted[last_ele_pt])
       {
         last_node_pt = last_ele_pt->node_pt(0);
@@ -7034,17 +7034,17 @@ namespace oomph
       }
 
       // Lexicographically bottom left node
-      std::set<Node *> local_nodes_pt;
+      std::set<Node*> local_nodes_pt;
       local_nodes_pt.insert(first_node_pt);
 
       // Now loop over nodes in order
-      for (std::list<FiniteElement *>::iterator it =
+      for (std::list<FiniteElement*>::iterator it =
              segment_sorted_ele_pt[is].begin();
            it != segment_sorted_ele_pt[is].end();
            it++)
       {
         // Get element
-        FiniteElement *el_pt = *it;
+        FiniteElement* el_pt = *it;
 
         // Start node and increment
         unsigned k_nod = 1;
@@ -7058,7 +7058,7 @@ namespace oomph
         // Loop over nodes
         for (unsigned j = 1; j < nnod; j++)
         {
-          Node *nod_pt = el_pt->node_pt(k_nod);
+          Node* nod_pt = el_pt->node_pt(k_nod);
           k_nod += nod_diff;
 
           // Coordinates of right node
@@ -7121,13 +7121,13 @@ namespace oomph
     for (unsigned is = 0; is < nsegments; is++)
     {
       // Get the first face element of the segment
-      FiniteElement *first_face_ele_pt = segment_sorted_ele_pt[is].front();
+      FiniteElement* first_face_ele_pt = segment_sorted_ele_pt[is].front();
 
       // The number of nodes
       const unsigned nnod = first_face_ele_pt->nnode();
 
       // ... and the first node of the segment
-      Node *first_node_pt = first_face_ele_pt->node_pt(0);
+      Node* first_node_pt = first_face_ele_pt->node_pt(0);
       if (is_inverted[first_face_ele_pt])
       {
         first_node_pt = first_face_ele_pt->node_pt(nnod - 1);
@@ -7138,10 +7138,10 @@ namespace oomph
       first_node_pt->get_coordinates_on_boundary(b, zeta_first);
 
       // Get the last face element of the segment
-      FiniteElement *last_face_ele_pt = segment_sorted_ele_pt[is].back();
+      FiniteElement* last_face_ele_pt = segment_sorted_ele_pt[is].back();
 
       // ... and the last node of the segment
-      Node *last_node_pt = last_face_ele_pt->node_pt(nnod - 1);
+      Node* last_node_pt = last_face_ele_pt->node_pt(nnod - 1);
       if (is_inverted[last_face_ele_pt])
       {
         last_node_pt = last_face_ele_pt->node_pt(0);
@@ -7200,9 +7200,9 @@ namespace oomph
   //========================================================================
   template<class ELEMENT>
   void TriangleMesh<ELEMENT>::build_triangulateio(
-    const std::string &poly_file_name,
-    TriangulateIO &triangulate_io,
-    bool &use_attributes)
+    const std::string& poly_file_name,
+    TriangulateIO& triangulate_io,
+    bool& use_attributes)
   {
     // Process poly file
     // -----------------
@@ -7227,7 +7227,7 @@ namespace oomph
 
     // Initialisation of the point list
     triangulate_io.pointlist =
-      (double *)malloc(triangulate_io.numberofpoints * 2 * sizeof(double));
+      (double*)malloc(triangulate_io.numberofpoints * 2 * sizeof(double));
 
     // Read and store spatial dimension of nodes
     unsigned mesh_dim;
@@ -7252,12 +7252,12 @@ namespace oomph
     poly_file >> nextras;
 
     triangulate_io.numberofpointattributes = 0;
-    triangulate_io.pointattributelist = (double *)NULL;
+    triangulate_io.pointattributelist = (double*)NULL;
 
     // Read and check the flag for boundary markers
     unsigned nodemarkers;
     poly_file >> nodemarkers;
-    triangulate_io.pointmarkerlist = (int *)NULL;
+    triangulate_io.pointmarkerlist = (int*)NULL;
 
 #ifdef PARANOID
     // Reading the .poly with the oomph.lib we need
@@ -7351,9 +7351,9 @@ namespace oomph
 
     triangulate_io.numberofsegments = inelements;
     triangulate_io.segmentlist =
-      (int *)malloc(triangulate_io.numberofsegments * 2 * sizeof(int));
+      (int*)malloc(triangulate_io.numberofsegments * 2 * sizeof(int));
     triangulate_io.segmentmarkerlist =
-      (int *)malloc(triangulate_io.numberofsegments * sizeof(int));
+      (int*)malloc(triangulate_io.numberofsegments * sizeof(int));
 
     // Read all the segments edges and markers
     for (unsigned i = 0; i < 2 * inelements; i += 2)
@@ -7382,7 +7382,7 @@ namespace oomph
 
       triangulate_io.numberofholes = nhole;
       triangulate_io.holelist =
-        (double *)malloc(triangulate_io.numberofholes * 2 * sizeof(double));
+        (double*)malloc(triangulate_io.numberofholes * 2 * sizeof(double));
 
       // Loop over the holes to get centre coords and store value onto the
       // TriangulateIO object
@@ -7408,7 +7408,7 @@ namespace oomph
 
       triangulate_io.numberofregions = nregion;
       triangulate_io.regionlist =
-        (double *)malloc(triangulate_io.numberofregions * 4 * sizeof(double));
+        (double*)malloc(triangulate_io.numberofregions * 4 * sizeof(double));
 
       // Check for using regions
       if (nregion > 0)
@@ -7439,7 +7439,7 @@ namespace oomph
   //======================================================================
   template<class ELEMENT>
   void TriangleMesh<ELEMENT>::dump_distributed_info_for_restart(
-    std::ostream &dump_file)
+    std::ostream& dump_file)
   {
     // First check that the mesh is distributed
     if (this->is_mesh_distributed())
@@ -7682,7 +7682,7 @@ namespace oomph
   //======================================================================
   template<class ELEMENT>
   void TriangleMesh<ELEMENT>::read_distributed_info_for_restart(
-    std::istream &restart_file)
+    std::istream& restart_file)
   {
     // First check that the mesh is distributed
     if (this->is_mesh_distributed())
@@ -8015,8 +8015,8 @@ namespace oomph
   // coordinates(into separate tecplot / zones)
   //===================================================================
   template<class ELEMENT>
-  void TriangleMesh<ELEMENT>::output_boundary_coordinates(const unsigned &b,
-                                                          std::ostream &outfile)
+  void TriangleMesh<ELEMENT>::output_boundary_coordinates(const unsigned& b,
+                                                          std::ostream& outfile)
   {
     // First get all the elements adjacent to the given boundary, then
     // the face elements and extract the nodes on the boundaries using
@@ -8025,12 +8025,12 @@ namespace oomph
     // without assigning the required boundary coordinate
 
     // Store the nodes in a set so we do not have repeated nodes
-    std::set<Node *> boundary_nodes_pt;
+    std::set<Node*> boundary_nodes_pt;
     const unsigned n_boundary_ele = this->nboundary_element(b);
     for (unsigned e = 0; e < n_boundary_ele; e++)
     {
       // Get the boundary bulk element
-      FiniteElement *bulk_ele_pt = this->boundary_element_pt(b, e);
+      FiniteElement* bulk_ele_pt = this->boundary_element_pt(b, e);
 #ifdef OOMPH_HAS_MPI
       // Only work with nonhalo elements if the mesh is distributed
       if (!bulk_ele_pt->is_halo())
@@ -8039,7 +8039,7 @@ namespace oomph
         // Get the face index
         int face_index = this->face_index_at_boundary(b, e);
         // Create the face element
-        FiniteElement *face_ele_pt =
+        FiniteElement* face_ele_pt =
           new DummyFaceElement<ELEMENT>(bulk_ele_pt, face_index);
 
         // Get the number of nodes on the face element
@@ -8047,7 +8047,7 @@ namespace oomph
         for (unsigned i = 0; i < n_nodes; i++)
         {
           // Get the nodes in the face elements
-          Node *tmp_node_pt = face_ele_pt->node_pt(i);
+          Node* tmp_node_pt = face_ele_pt->node_pt(i);
           // Add the nodes to the set of boundary nodes
           boundary_nodes_pt.insert(tmp_node_pt);
         } // for (i < n_nodes)
@@ -8065,11 +8065,11 @@ namespace oomph
     // Set to store the boundary nodes in order
     std::set<Vector<double>> set_node_coord;
     // Loop over the nodes on the boundary and store them in the set
-    for (std::set<Node *>::iterator it = boundary_nodes_pt.begin();
+    for (std::set<Node*>::iterator it = boundary_nodes_pt.begin();
          it != boundary_nodes_pt.end();
          it++)
     {
-      Node *inode_pt = (*it);
+      Node* inode_pt = (*it);
 
       // Get the node coordinates
       const unsigned n_dim = inode_pt->ndim();
@@ -8133,8 +8133,8 @@ namespace oomph
   //====================================================================
   template<class ELEMENT>
   void TriangleMesh<ELEMENT>::create_distributed_domain_representation(
-    Vector<TriangleMeshPolygon *> &polygons_pt,
-    Vector<TriangleMeshOpenCurve *> &open_curves_pt)
+    Vector<TriangleMeshPolygon*>& polygons_pt,
+    Vector<TriangleMeshOpenCurve*>& open_curves_pt)
   {
     // Get the outer polygons, internal polygons, internal open curves
     // and join them with the shared polylines to create the distributed
@@ -8156,12 +8156,12 @@ namespace oomph
     // *********************************************************************
 
     // Storage for new created polylines, non sorted
-    Vector<TriangleMeshPolyLine *> unsorted_outer_polyline_pt;
+    Vector<TriangleMeshPolyLine*> unsorted_outer_polyline_pt;
 
     // Storing for the polylines on the boundaries
     // The first index is for a set of connected polylines
     // The second index is for a polyline on a set of connected polylines
-    Vector<Vector<TriangleMeshPolyLine *>> sorted_outer_curves_pt;
+    Vector<Vector<TriangleMeshPolyLine*>> sorted_outer_curves_pt;
 
     // Copy the outer boundaries to the vector of polylines
     const unsigned nouter = this->Outer_boundary_pt.size();
@@ -8171,7 +8171,7 @@ namespace oomph
       for (unsigned p = 0; p < npolylines; p++)
       {
         // Pointer to the current polyline
-        TriangleMeshPolyLine *tmp_polyline_pt =
+        TriangleMeshPolyLine* tmp_polyline_pt =
           this->Outer_boundary_pt[i]->polyline_pt(p);
         const unsigned nvertex = tmp_polyline_pt->nvertex();
         if (nvertex > 0)
@@ -8187,7 +8187,7 @@ namespace oomph
           else
           {
             // Get the polylines that will represent this boundary
-            Vector<TriangleMeshPolyLine *> tmp_vector_polylines =
+            Vector<TriangleMeshPolyLine*> tmp_vector_polylines =
               boundary_subpolylines(bound_id);
             const unsigned nsub_poly = tmp_vector_polylines.size();
 #ifdef PARANOID
@@ -8244,12 +8244,12 @@ namespace oomph
     // *********************************************************************
 
     // Storage for new created polylines, non sorted
-    Vector<TriangleMeshPolyLine *> unsorted_internal_closed_polyline_pt;
+    Vector<TriangleMeshPolyLine*> unsorted_internal_closed_polyline_pt;
 
     // Storing for the polylines on the boundaries
     // The first index is for a set of connected polylines
     // The second index is for a polyline on a set of connected polylines
-    Vector<Vector<TriangleMeshPolyLine *>> sorted_internal_closed_curves_pt;
+    Vector<Vector<TriangleMeshPolyLine*>> sorted_internal_closed_curves_pt;
 
     // Copy the internal closed boundaries to the vector of polylines
     const unsigned ninternal_closed = this->Internal_polygon_pt.size();
@@ -8259,7 +8259,7 @@ namespace oomph
       for (unsigned p = 0; p < npolylines; p++)
       {
         // Pointer to the current polyline
-        TriangleMeshPolyLine *tmp_polyline_pt =
+        TriangleMeshPolyLine* tmp_polyline_pt =
           this->Internal_polygon_pt[i]->polyline_pt(p);
         const unsigned nvertex = tmp_polyline_pt->nvertex();
         if (nvertex > 0)
@@ -8275,7 +8275,7 @@ namespace oomph
           else
           {
             // Get the polylines that will represent this boundary
-            Vector<TriangleMeshPolyLine *> tmp_vector_polylines =
+            Vector<TriangleMeshPolyLine*> tmp_vector_polylines =
               boundary_subpolylines(bound_id);
             const unsigned nsub_poly = tmp_vector_polylines.size();
 #ifdef PARANOID
@@ -8334,12 +8334,12 @@ namespace oomph
     // *********************************************************************
 
     // Storage for new created polylines, non sorted
-    Vector<TriangleMeshPolyLine *> unsorted_internal_open_polyline_pt;
+    Vector<TriangleMeshPolyLine*> unsorted_internal_open_polyline_pt;
 
     // Storing for the polylines on the boundaries
     // The first index is for a set of connected polylines
     // The second index is for a polyline on a set of connected polylines
-    Vector<Vector<TriangleMeshPolyLine *>> sorted_internal_open_curves_pt;
+    Vector<Vector<TriangleMeshPolyLine*>> sorted_internal_open_curves_pt;
 
     // Copy the internal open boundaries to the vector of polylines
     const unsigned ninternal_open = this->Internal_open_curve_pt.size();
@@ -8350,7 +8350,7 @@ namespace oomph
       for (unsigned p = 0; p < ncurve_section; p++)
       {
         // Pointer to the current polyline
-        TriangleMeshPolyLine *tmp_polyline_pt =
+        TriangleMeshPolyLine* tmp_polyline_pt =
           this->Internal_open_curve_pt[i]->polyline_pt(p);
         const unsigned nvertex = tmp_polyline_pt->nvertex();
         if (nvertex > 0)
@@ -8371,7 +8371,7 @@ namespace oomph
           else
           {
             // Get the polylines that will represent this boundary
-            Vector<TriangleMeshPolyLine *> tmp_vector_polylines =
+            Vector<TriangleMeshPolyLine*> tmp_vector_polylines =
               boundary_subpolylines(bound_id);
             const unsigned nsub_poly = tmp_vector_polylines.size();
 #ifdef PARANOID
@@ -8433,16 +8433,16 @@ namespace oomph
     // ********************************************************************
 
     // Storage for new created polylines, non sorted
-    Vector<TriangleMeshPolyLine *> unsorted_shared_polyline_pt;
+    Vector<TriangleMeshPolyLine*> unsorted_shared_polyline_pt;
 
     // Special storage for the shared polylines that will be also used
     // to connect with the internal boundaries
-    Vector<TriangleMeshPolyLine *> unsorted_shared_to_internal_polyline_pt;
+    Vector<TriangleMeshPolyLine*> unsorted_shared_to_internal_polyline_pt;
 
     // Storing for the polylines on the shared boundaries
     // The first index is for a set of connected polylines
     // The second index is for a polyline on a set of connected polylines
-    Vector<Vector<TriangleMeshPolyLine *>> sorted_shared_curves_pt;
+    Vector<Vector<TriangleMeshPolyLine*>> sorted_shared_curves_pt;
 
     // Copy the shared boudaries to the vector of polylines
     const unsigned ncurves = nshared_boundary_curves(my_rank);
@@ -8455,7 +8455,7 @@ namespace oomph
           shared_boundary_polyline_pt(my_rank, i, p)->nvertex();
         if (nvertex > 0)
         {
-          TriangleMeshPolyLine *tmp_shared_poly_pt =
+          TriangleMeshPolyLine* tmp_shared_poly_pt =
             shared_boundary_polyline_pt(my_rank, i, p);
 
           // First check if there are shared boundaries overlapping
@@ -8506,7 +8506,7 @@ namespace oomph
 
     // Add all the polylines to a container
     unsigned counter = 0;
-    Vector<Vector<TriangleMeshPolyLine *>> all_curves_pt(ntotal_curves);
+    Vector<Vector<TriangleMeshPolyLine*>> all_curves_pt(ntotal_curves);
 
     // Add the shared curves first, this ensure the generation of
     // internal polygons defined by the shared boundaries
@@ -8633,8 +8633,8 @@ namespace oomph
   //======================================================================
   template<class ELEMENT>
   void TriangleMesh<ELEMENT>::create_tmp_polygons_helper(
-    Vector<Vector<TriangleMeshPolyLine *>> &polylines_pt,
-    Vector<TriangleMeshPolygon *> &polygons_pt)
+    Vector<Vector<TriangleMeshPolyLine*>>& polylines_pt,
+    Vector<TriangleMeshPolygon*>& polygons_pt)
   {
     // Each vector of polylines (curve) is already sorted, it means that
     // all the polylines on the vector polylines_pt[i] point to the same
@@ -8659,7 +8659,7 @@ namespace oomph
     do
     {
       // The list where to add the curves so that they be contiguous
-      std::list<Vector<TriangleMeshPolyLine *>> list_building_polygon_pt;
+      std::list<Vector<TriangleMeshPolyLine*>> list_building_polygon_pt;
 #ifdef PARANOID
       // Flag to indicate that a root curve was found
       bool root_curve_found = false;
@@ -8698,7 +8698,7 @@ namespace oomph
 #endif
 
       // Get the root curve
-      Vector<TriangleMeshPolyLine *> root_curve_pt =
+      Vector<TriangleMeshPolyLine*> root_curve_pt =
         polylines_pt[root_curve_idx];
 
       // Add the root curve to the list
@@ -8726,7 +8726,7 @@ namespace oomph
       {
         // The polyline already create a Polygon, then create it!!!
         // Create the curve section representation of the current root curve
-        Vector<TriangleMeshCurveSection *> curve_section_pt(
+        Vector<TriangleMeshCurveSection*> curve_section_pt(
           nroot_curve_polyline);
 
         // Copy the polylines into its curve section representation
@@ -8736,7 +8736,7 @@ namespace oomph
         }
 
         // ... and create the Polygon
-        TriangleMeshPolygon *new_polygon_pt =
+        TriangleMeshPolygon* new_polygon_pt =
           new TriangleMeshPolygon(curve_section_pt);
 
         // Mark the polygon for deletion (in the destructor)
@@ -8767,8 +8767,7 @@ namespace oomph
             if (!done_curve[ic])
             {
               // Get the current curve
-              Vector<TriangleMeshPolyLine *> current_curve_pt =
-                polylines_pt[ic];
+              Vector<TriangleMeshPolyLine*> current_curve_pt = polylines_pt[ic];
 
               // We need to get the number of polylines that compose the
               // current curve
@@ -8825,7 +8824,7 @@ namespace oomph
               // CURRENT curve to the LEFT of the ROOT curve but INVERTED
               if (diff < ToleranceForVertexMismatchInPolygons::Tolerable_error)
               {
-                Vector<TriangleMeshPolyLine *> tmp_curve_pt(
+                Vector<TriangleMeshPolyLine*> tmp_curve_pt(
                   ncurrent_curve_polyline);
                 // Reverse each polyline and back them up
                 for (unsigned it = 0; it < ncurrent_curve_polyline; it++)
@@ -8888,7 +8887,7 @@ namespace oomph
               // CURRENT curve to the RIGHT of the ROOT curve but INVERTED
               if (diff < ToleranceForVertexMismatchInPolygons::Tolerable_error)
               {
-                Vector<TriangleMeshPolyLine *> tmp_curve_pt(
+                Vector<TriangleMeshPolyLine*> tmp_curve_pt(
                   ncurrent_curve_polyline);
                 // Reverse each polyline and back them up
                 for (unsigned it = 0; it < ncurrent_curve_polyline; it++)
@@ -8954,7 +8953,7 @@ namespace oomph
           Vector<double> init_vertex(2);
           Vector<double> final_vertex(2);
           unsigned icurve = 0;
-          for (std::list<Vector<TriangleMeshPolyLine *>>::iterator it =
+          for (std::list<Vector<TriangleMeshPolyLine*>>::iterator it =
                  list_building_polygon_pt.begin();
                it != list_building_polygon_pt.end();
                it++, icurve++)
@@ -8986,7 +8985,7 @@ namespace oomph
         // Create the polygon after joining the curves
         unsigned ntotal_polylines = 0;
         // Get the total number of polylines
-        for (std::list<Vector<TriangleMeshPolyLine *>>::iterator it =
+        for (std::list<Vector<TriangleMeshPolyLine*>>::iterator it =
                list_building_polygon_pt.begin();
              it != list_building_polygon_pt.end();
              it++)
@@ -8995,11 +8994,11 @@ namespace oomph
         }
 
         // Create the curve section representation of the curves on the list
-        Vector<TriangleMeshCurveSection *> curve_section_pt(ntotal_polylines);
+        Vector<TriangleMeshCurveSection*> curve_section_pt(ntotal_polylines);
 
         // Copy the polylines into its curve section representation
         unsigned counter = 0;
-        for (std::list<Vector<TriangleMeshPolyLine *>>::iterator it =
+        for (std::list<Vector<TriangleMeshPolyLine*>>::iterator it =
                list_building_polygon_pt.begin();
              it != list_building_polygon_pt.end();
              it++)
@@ -9012,7 +9011,7 @@ namespace oomph
         } // Loop over the list of polylines
 
         // ... and create the Polygon
-        TriangleMeshPolygon *new_polygon_pt =
+        TriangleMeshPolygon* new_polygon_pt =
           new TriangleMeshPolygon(curve_section_pt);
 
         // Mark the polygon for deletion (in the destructor)
@@ -9034,9 +9033,9 @@ namespace oomph
   //======================================================================
   template<class ELEMENT>
   void TriangleMesh<ELEMENT>::create_tmp_open_curves_helper(
-    Vector<Vector<TriangleMeshPolyLine *>> &sorted_open_curves_pt,
-    Vector<TriangleMeshPolyLine *> &unsorted_shared_to_internal_poly_pt,
-    Vector<TriangleMeshOpenCurve *> &open_curves_pt)
+    Vector<Vector<TriangleMeshPolyLine*>>& sorted_open_curves_pt,
+    Vector<TriangleMeshPolyLine*>& unsorted_shared_to_internal_poly_pt,
+    Vector<TriangleMeshOpenCurve*>& open_curves_pt)
   {
     // Here search for the connections of the open curves remaining as
     // open curves with the shared boundaries markes as internal
@@ -9048,13 +9047,13 @@ namespace oomph
     {
       // Create the curve section representation of the polylines
       const unsigned npoly = sorted_open_curves_pt[i].size();
-      Vector<TriangleMeshCurveSection *> tmp_curve_section(npoly);
+      Vector<TriangleMeshCurveSection*> tmp_curve_section(npoly);
       for (unsigned j = 0; j < npoly; j++)
       {
         tmp_curve_section[j] = sorted_open_curves_pt[i][j];
       }
       // ... and create the Open Curve
-      TriangleMeshOpenCurve *new_open_curve_pt =
+      TriangleMeshOpenCurve* new_open_curve_pt =
         new TriangleMeshOpenCurve(tmp_curve_section);
 
       // Mark the open curve for deletion (in the destructor)
@@ -9074,15 +9073,15 @@ namespace oomph
   //======================================================================
   template<class ELEMENT>
   const int TriangleMesh<ELEMENT>::check_connections_of_polyline_nodes(
-    std::set<FiniteElement *> &element_in_processor_pt,
-    const int &root_edge_bnd_id,
-    std::map<std::pair<Node *, Node *>, bool> &overlapped_face,
-    std::map<unsigned, std::map<Node *, bool>>
-      &node_on_bnd_not_overlapped_by_shd_bnd,
-    std::list<Node *> &current_polyline_nodes,
-    std::map<unsigned, std::list<Node *>> &shared_bnd_id_to_sorted_list_node_pt,
-    const unsigned &node_degree,
-    Node *&new_node_pt,
+    std::set<FiniteElement*>& element_in_processor_pt,
+    const int& root_edge_bnd_id,
+    std::map<std::pair<Node*, Node*>, bool>& overlapped_face,
+    std::map<unsigned, std::map<Node*, bool>>&
+      node_on_bnd_not_overlapped_by_shd_bnd,
+    std::list<Node*>& current_polyline_nodes,
+    std::map<unsigned, std::list<Node*>>& shared_bnd_id_to_sorted_list_node_pt,
+    const unsigned& node_degree,
+    Node*& new_node_pt,
     const bool called_from_load_balance)
   {
     // Initialize the flag to return
@@ -9163,10 +9162,10 @@ namespace oomph
                 for (unsigned e = 0; e < n_bound_ele; e++)
                 {
                   // Get the boundary bulk element
-                  FiniteElement *bulk_ele_pt = this->boundary_element_pt(bb, e);
+                  FiniteElement* bulk_ele_pt = this->boundary_element_pt(bb, e);
                   // Check if the element will be retained, it means it
                   // is a nonhalo element
-                  std::set<FiniteElement *>::iterator it =
+                  std::set<FiniteElement*>::iterator it =
                     element_in_processor_pt.find(bulk_ele_pt);
                   // If found then check if the node live in the element
                   if (it != element_in_processor_pt.end())
@@ -9176,15 +9175,15 @@ namespace oomph
                     // Get the face index
                     int face_index = this->face_index_at_boundary(bb, e);
                     // Create the face element
-                    FiniteElement *face_ele_pt =
+                    FiniteElement* face_ele_pt =
                       new DummyFaceElement<ELEMENT>(bulk_ele_pt, face_index);
                     // Get the number of nodes in the face element
                     const unsigned n_node_face = face_ele_pt->nnode();
                     // Get the first and last node of the face element
-                    Node *first_node_pt = face_ele_pt->node_pt(0);
-                    Node *last_node_pt = face_ele_pt->node_pt(n_node_face - 1);
+                    Node* first_node_pt = face_ele_pt->node_pt(0);
+                    Node* last_node_pt = face_ele_pt->node_pt(n_node_face - 1);
                     // Create the edge with the pair of nodes
-                    std::pair<Node *, Node *> tmp_edge =
+                    std::pair<Node*, Node*> tmp_edge =
                       std::make_pair(first_node_pt, last_node_pt);
                     // Check if the face element edge is overlapped by a
                     // shared boundary
@@ -9248,10 +9247,10 @@ namespace oomph
               for (unsigned e = 0; e < n_bound_ele; e++)
               {
                 // Get the boundary bulk element
-                FiniteElement *bulk_ele_pt = this->boundary_element_pt(bb, e);
+                FiniteElement* bulk_ele_pt = this->boundary_element_pt(bb, e);
                 // Check if the element will be retained, it means it is
                 // a nonhalo element
-                std::set<FiniteElement *>::iterator it =
+                std::set<FiniteElement*>::iterator it =
                   element_in_processor_pt.find(bulk_ele_pt);
                 // If found then check if the node live in the element
                 if (it != element_in_processor_pt.end())
@@ -9261,15 +9260,15 @@ namespace oomph
                   // Get the face index
                   int face_index = this->face_index_at_boundary(bb, e);
                   // Create the face element
-                  FiniteElement *face_ele_pt =
+                  FiniteElement* face_ele_pt =
                     new DummyFaceElement<ELEMENT>(bulk_ele_pt, face_index);
                   // Get the number of nodes in the face element
                   const unsigned n_node_face = face_ele_pt->nnode();
                   // Get the first and last node of the face element
-                  Node *first_node_pt = face_ele_pt->node_pt(0);
-                  Node *last_node_pt = face_ele_pt->node_pt(n_node_face - 1);
+                  Node* first_node_pt = face_ele_pt->node_pt(0);
+                  Node* last_node_pt = face_ele_pt->node_pt(n_node_face - 1);
                   // Create the edge with the pair of nodes
-                  std::pair<Node *, Node *> tmp_edge =
+                  std::pair<Node*, Node*> tmp_edge =
                     std::make_pair(first_node_pt, last_node_pt);
                   // Check if the face element edge is overlapped by a
                   // shared boundary
@@ -9360,7 +9359,7 @@ namespace oomph
     // found is found to be connected
     Vector<unsigned> candidate_shared_bnd_to_connect;
     // Check for all the previous polylines except the current one
-    for (std::map<unsigned, std::list<Node *>>::iterator it =
+    for (std::map<unsigned, std::list<Node*>>::iterator it =
            shared_bnd_id_to_sorted_list_node_pt.begin();
          it != shared_bnd_id_to_sorted_list_node_pt.end();
          it++)
@@ -9371,7 +9370,7 @@ namespace oomph
       const unsigned i_bnd_id = (*it).first;
       // Get an iterator pointer to the list of nodes of the shared
       // polyline
-      std::list<Node *>::iterator it_list = (*it).second.begin();
+      std::list<Node*>::iterator it_list = (*it).second.begin();
       // Get the total number of nodes associated to the boundary
       const unsigned n_nodes = (*it).second.size();
       // Search for connections in the list of nodes
@@ -9472,7 +9471,7 @@ namespace oomph
     // checked at the end
     // ------------------------------------------------------------------
     unsigned nrepeated = 0;
-    for (std::list<Node *>::iterator it_list = current_polyline_nodes.begin();
+    for (std::list<Node*>::iterator it_list = current_polyline_nodes.begin();
          it_list != current_polyline_nodes.end();
          it_list++)
     {
@@ -9519,7 +9518,7 @@ namespace oomph
     const unsigned my_rank = this->communicator_pt()->my_rank();
 
     // Get the shared curves associated with this processor
-    Vector<Vector<TriangleMeshPolyLine *>> shared_curves_pt =
+    Vector<Vector<TriangleMeshPolyLine*>> shared_curves_pt =
       this->Shared_boundary_polyline_pt[my_rank];
 
     // Loop through the shared boundaries on the current processor and
@@ -9532,7 +9531,7 @@ namespace oomph
       for (unsigned ipoly = 0; ipoly < npoly; ipoly++)
       {
         // Get the polyline representation of the shared boundary
-        TriangleMeshPolyLine *shd_poly_pt = shared_curves_pt[icurve][ipoly];
+        TriangleMeshPolyLine* shd_poly_pt = shared_curves_pt[icurve][ipoly];
 
         // Get the boundary id of the current polyline
         const unsigned bound_id = shd_poly_pt->boundary_id();
@@ -9567,7 +9566,7 @@ namespace oomph
               shd_poly_pt->initial_vertex_connected_bnd_id();
 
             // The pointer to the boundary to connect
-            TriangleMeshPolyLine *poly_to_connect_pt = 0;
+            TriangleMeshPolyLine* poly_to_connect_pt = 0;
 
             // Flag to indicate we are trying to connect to an split
             // boundary
@@ -9880,7 +9879,7 @@ namespace oomph
               // vertex in the sub-polylines
 
               // Get the sub-polylines vector
-              Vector<TriangleMeshPolyLine *> tmp_vector_subpolylines =
+              Vector<TriangleMeshPolyLine*> tmp_vector_subpolylines =
                 boundary_subpolylines(uconnection_to_the_left);
 
               // Get the number of sub-polylines
@@ -10192,7 +10191,7 @@ namespace oomph
               shd_poly_pt->final_vertex_connected_bnd_id();
 
             // The pointer to the boundary to connect
-            TriangleMeshPolyLine *poly_to_connect_pt = 0;
+            TriangleMeshPolyLine* poly_to_connect_pt = 0;
 
             // Flag to indicate we are trying to connect to an split
             // boundary
@@ -10506,7 +10505,7 @@ namespace oomph
               // vertex in the sub-polylines
 
               // Get the sub-polylines vector
-              Vector<TriangleMeshPolyLine *> tmp_vector_subpolylines =
+              Vector<TriangleMeshPolyLine*> tmp_vector_subpolylines =
                 boundary_subpolylines(uconnection_to_the_right);
 
               // Get the number of sub-polylines
@@ -10822,7 +10821,7 @@ namespace oomph
   //=======================================================================
   template<class ELEMENT>
   void TriangleMesh<ELEMENT>::compute_holes_left_by_halo_elements_helper(
-    Vector<Vector<double>> &output_holes_coordinates)
+    Vector<Vector<double>>& output_holes_coordinates)
   {
     // Storage for number of processors and current processor
     const unsigned n_proc = this->communicator_pt()->nproc();
@@ -10830,7 +10829,7 @@ namespace oomph
 
     // Mark those done elements, so we do not repeat any coordinate left
     // by repeated halo elements
-    std::map<FiniteElement *, bool> done_ele;
+    std::map<FiniteElement*, bool> done_ele;
 
     // Loop over the processors and get the shared boundaries ids that
     // the current processor has with the other processors
@@ -10876,7 +10875,7 @@ namespace oomph
           for (unsigned e = 0; e < n_shd_bnd_ele; e++)
           {
             // Get the shared boundary element
-            FiniteElement *ele_pt = shared_boundary_element_pt(shd_bnd_id, e);
+            FiniteElement* ele_pt = shared_boundary_element_pt(shd_bnd_id, e);
 
             // Only work with halo elements
             if (ele_pt->is_halo())
@@ -10892,7 +10891,7 @@ namespace oomph
                 // Loop over the nodes
                 for (unsigned k = 0; k < n_nodes; k++)
                 {
-                  Node *tmp_node_pt = ele_pt->node_pt(k);
+                  Node* tmp_node_pt = ele_pt->node_pt(k);
                   // Loop over the dimension
                   for (unsigned d = 0; d < 2; d++)
                   {
@@ -10931,8 +10930,8 @@ namespace oomph
   //======================================================================
   template<class ELEMENT>
   void TriangleMesh<ELEMENT>::update_holes_information_helper(
-    Vector<TriangleMeshPolygon *> &polygons_pt,
-    Vector<Vector<double>> &output_holes_coordinates)
+    Vector<TriangleMeshPolygon*>& polygons_pt,
+    Vector<Vector<double>>& output_holes_coordinates)
   {
     // General strategy
 
@@ -10976,7 +10975,7 @@ namespace oomph
       for (unsigned pp = 0; pp < n_polylines; pp++)
       {
         // Get the polyline
-        const TriangleMeshPolyLine *tmp_poly_pt =
+        const TriangleMeshPolyLine* tmp_poly_pt =
           polygons_pt[p]->polyline_pt(pp);
         // Get the number of vertices in the polyline
         const unsigned n_vertices = tmp_poly_pt->nvertex();
@@ -11341,27 +11340,27 @@ namespace oomph
   //======================================================================
   template<class ELEMENT>
   void TriangleMesh<ELEMENT>::sort_polylines_helper(
-    Vector<TriangleMeshPolyLine *> &unsorted_polylines_pt,
-    Vector<Vector<TriangleMeshPolyLine *>> &sorted_polylines_pt)
+    Vector<TriangleMeshPolyLine*>& unsorted_polylines_pt,
+    Vector<Vector<TriangleMeshPolyLine*>>& sorted_polylines_pt)
   {
     unsigned n_unsorted_polylines = unsorted_polylines_pt.size();
     unsigned n_sorted_polylines = 0;
     unsigned curves_index = 0;
 
     // Map to know which polyline has been already sorted
-    std::map<TriangleMeshPolyLine *, bool> done_polyline;
+    std::map<TriangleMeshPolyLine*, bool> done_polyline;
 
     do
     {
       // Create the list that stores the polylines and allows to introduce
       // polylines to the left and to the right
-      std::list<TriangleMeshPolyLine *> sorted_polyline_list_pt;
+      std::list<TriangleMeshPolyLine*> sorted_polyline_list_pt;
       bool changes = false;
 
       // Create pointers to the left and right "side" of the sorted list of
       // new created TriangleMeshPolyLines
-      TriangleMeshPolyLine *left_pt = 0;
-      TriangleMeshPolyLine *right_pt = 0;
+      TriangleMeshPolyLine* left_pt = 0;
+      TriangleMeshPolyLine* right_pt = 0;
 
       // 1) Take the first non done polyline on the unsorted list of polylines
       unsigned pp = 0;
@@ -11403,7 +11402,7 @@ namespace oomph
 
           for (unsigned i = pp + 1; i < n_unsorted_polylines; i++)
           {
-            TriangleMeshPolyLine *current_polyline_pt =
+            TriangleMeshPolyLine* current_polyline_pt =
               unsorted_polylines_pt[i];
             if (!done_polyline[current_polyline_pt])
             {
@@ -11499,11 +11498,11 @@ namespace oomph
       unsigned n_sorted_polyline_on_list = sorted_polyline_list_pt.size();
 
       // Create the temporal vector that stores the sorted polylines
-      Vector<TriangleMeshPolyLine *> tmp_sorted_polylines(
+      Vector<TriangleMeshPolyLine*> tmp_sorted_polylines(
         n_sorted_polyline_on_list);
       unsigned counter = 0;
 
-      std::list<TriangleMeshPolyLine *>::iterator it_polyline;
+      std::list<TriangleMeshPolyLine*>::iterator it_polyline;
       for (it_polyline = sorted_polyline_list_pt.begin();
            it_polyline != sorted_polyline_list_pt.end();
            it_polyline++)
@@ -11541,12 +11540,12 @@ namespace oomph
   //======================================================================
   template<class ELEMENT>
   void TriangleMesh<ELEMENT>::create_shared_boundaries(
-    OomphCommunicator *comm_pt,
-    const Vector<unsigned> &element_domain,
-    const Vector<GeneralisedElement *> &backed_up_el_pt,
-    const Vector<FiniteElement *> &backed_up_f_el_pt,
-    std::map<Data *, std::set<unsigned>> &processors_associated_with_data,
-    const bool &overrule_keep_as_halo_element_status)
+    OomphCommunicator* comm_pt,
+    const Vector<unsigned>& element_domain,
+    const Vector<GeneralisedElement*>& backed_up_el_pt,
+    const Vector<FiniteElement*>& backed_up_f_el_pt,
+    std::map<Data*, std::set<unsigned>>& processors_associated_with_data,
+    const bool& overrule_keep_as_halo_element_status)
   {
     // Storage for number of processors and current processor
     const unsigned nproc = comm_pt->nproc();
@@ -11556,7 +11555,7 @@ namespace oomph
     // halo_element[iproc][jproc][ele_number]
     // Stores the "ele_number"-th halo element of processor "iproc" with
     // processor "jproc"
-    Vector<Vector<Vector<GeneralisedElement *>>> halo_element_pt(nproc);
+    Vector<Vector<Vector<GeneralisedElement*>>> halo_element_pt(nproc);
     // Create complete storage for the halo_element_pt container
     for (unsigned iproc = 0; iproc < nproc; iproc++)
     {
@@ -11566,7 +11565,7 @@ namespace oomph
     // Store the global index of the element, used to check for possible
     // misclassification of halo elements in the above container
     // (halo_element_pt)
-    std::map<GeneralisedElement *, unsigned> element_to_global_index;
+    std::map<GeneralisedElement*, unsigned> element_to_global_index;
 
     // Get the halo elements on all processors
     this->get_halo_elements_on_all_procs(nproc,
@@ -11585,7 +11584,7 @@ namespace oomph
     // the processor as nonhalo element, those whose element_domains is
     // equal to my_rank. This set is used when creating the shared
     // polylines and identify the connections to the original boundaries
-    std::set<FiniteElement *> element_in_processor_pt;
+    std::set<FiniteElement*> element_in_processor_pt;
     const unsigned n_ele = backed_up_f_el_pt.size();
     for (unsigned e = 0; e < n_ele; e++)
     {
@@ -11598,7 +11597,7 @@ namespace oomph
     // Look for elements edges that may lie on internal boundaries
     // If that is the case then relate the face with the boundary on
     // which it lies
-    std::map<std::pair<Node *, Node *>, unsigned> elements_edges_on_boundary;
+    std::map<std::pair<Node*, Node*>, unsigned> elements_edges_on_boundary;
     this->get_element_edges_on_boundary(elements_edges_on_boundary);
 
     // Now we have all the halo elements on all processors. Use the
@@ -11619,13 +11618,13 @@ namespace oomph
   //======================================================================
   template<class ELEMENT>
   void TriangleMesh<ELEMENT>::get_halo_elements_on_all_procs(
-    const unsigned &nproc,
-    const Vector<unsigned> &element_domain,
-    const Vector<GeneralisedElement *> &backed_up_el_pt,
-    std::map<Data *, std::set<unsigned>> &processors_associated_with_data,
-    const bool &overrule_keep_as_halo_element_status,
-    std::map<GeneralisedElement *, unsigned> &element_to_global_index,
-    Vector<Vector<Vector<GeneralisedElement *>>> &output_halo_elements_pt)
+    const unsigned& nproc,
+    const Vector<unsigned>& element_domain,
+    const Vector<GeneralisedElement*>& backed_up_el_pt,
+    std::map<Data*, std::set<unsigned>>& processors_associated_with_data,
+    const bool& overrule_keep_as_halo_element_status,
+    std::map<GeneralisedElement*, unsigned>& element_to_global_index,
+    Vector<Vector<Vector<GeneralisedElement*>>>& output_halo_elements_pt)
   {
     const unsigned n_ele = backed_up_el_pt.size();
 
@@ -11634,13 +11633,13 @@ namespace oomph
     {
       // Boolean to know which elements has been already added to the
       // halo scheme on "iproc" processor
-      Vector<std::map<GeneralisedElement *, bool>> already_added(nproc);
+      Vector<std::map<GeneralisedElement*, bool>> already_added(nproc);
 
       // Loop over all backed up elements
       for (unsigned e = 0; e < n_ele; e++)
       {
         // Get element and its domain
-        GeneralisedElement *el_pt = backed_up_el_pt[e];
+        GeneralisedElement* el_pt = backed_up_el_pt[e];
         unsigned el_domain = element_domain[e];
 
         // If element is NOT located on "iproc" processor then check if it is
@@ -11669,13 +11668,13 @@ namespace oomph
           else
           {
             // Can only have nodes if this is a finite element
-            FiniteElement *finite_el_pt = dynamic_cast<FiniteElement *>(el_pt);
+            FiniteElement* finite_el_pt = dynamic_cast<FiniteElement*>(el_pt);
             if (finite_el_pt != 0)
             {
               unsigned n_node = finite_el_pt->nnode();
               for (unsigned n = 0; n < n_node; n++)
               {
-                Node *nod_pt = finite_el_pt->node_pt(n);
+                Node* nod_pt = finite_el_pt->node_pt(n);
 
                 // Keep element?
                 std::set<unsigned>::iterator it =
@@ -11708,7 +11707,7 @@ namespace oomph
   //====================================================================
   template<class ELEMENT>
   void TriangleMesh<ELEMENT>::get_element_edges_on_boundary(
-    std::map<std::pair<Node *, Node *>, unsigned> &element_edges_on_boundary)
+    std::map<std::pair<Node*, Node*>, unsigned>& element_edges_on_boundary)
   {
     // The number of original boundaries
     const unsigned nbound = this->nboundary();
@@ -11716,26 +11715,26 @@ namespace oomph
     for (unsigned b = 0; b < nbound; b++)
     {
       // Keep track of the pair of nodes done
-      std::map<std::pair<Node *, Node *>, bool> edge_done;
+      std::map<std::pair<Node*, Node*>, bool> edge_done;
       // Get the number of elements on the boundary
       const unsigned nbound_ele = this->nboundary_element(b);
       for (unsigned e = 0; e < nbound_ele; e++)
       {
         // Get the boundary bulk element
-        FiniteElement *bulk_ele_pt = this->boundary_element_pt(b, e);
+        FiniteElement* bulk_ele_pt = this->boundary_element_pt(b, e);
         // Get the face index
         int face_index = this->face_index_at_boundary(b, e);
         // Create the face element
-        FiniteElement *face_ele_pt =
+        FiniteElement* face_ele_pt =
           new DummyFaceElement<ELEMENT>(bulk_ele_pt, face_index);
         // Get the number of nodes on the face element
         const unsigned nnodes = face_ele_pt->nnode();
         // Get the first and last node
-        Node *first_node_pt = face_ele_pt->node_pt(0);
-        Node *last_node_pt = face_ele_pt->node_pt(nnodes - 1);
+        Node* first_node_pt = face_ele_pt->node_pt(0);
+        Node* last_node_pt = face_ele_pt->node_pt(nnodes - 1);
 
         // Create the pair to store the nodes
-        std::pair<Node *, Node *> edge =
+        std::pair<Node*, Node*> edge =
           std::make_pair(first_node_pt, last_node_pt);
 
         // Has the edge been included
@@ -11745,7 +11744,7 @@ namespace oomph
           edge_done[edge] = true;
 
           // Create the reversed version and mark it as done too
-          std::pair<Node *, Node *> inv_edge =
+          std::pair<Node*, Node*> inv_edge =
             std::make_pair(last_node_pt, first_node_pt);
 
           // Mark the reversed edge as done
@@ -11773,12 +11772,12 @@ namespace oomph
   // ======================================================================
   template<class ELEMENT>
   void TriangleMesh<ELEMENT>::create_polylines_from_halo_elements_helper(
-    const Vector<unsigned> &element_domain,
-    std::map<GeneralisedElement *, unsigned> &element_to_global_index,
-    std::set<FiniteElement *> &element_in_processor_pt,
-    Vector<Vector<Vector<GeneralisedElement *>>> &input_halo_elements,
-    std::map<std::pair<Node *, Node *>, unsigned> &elements_edges_on_boundary,
-    Vector<Vector<Vector<TriangleMeshPolyLine *>>> &output_polylines_pt)
+    const Vector<unsigned>& element_domain,
+    std::map<GeneralisedElement*, unsigned>& element_to_global_index,
+    std::set<FiniteElement*>& element_in_processor_pt,
+    Vector<Vector<Vector<GeneralisedElement*>>>& input_halo_elements,
+    std::map<std::pair<Node*, Node*>, unsigned>& elements_edges_on_boundary,
+    Vector<Vector<Vector<TriangleMeshPolyLine*>>>& output_polylines_pt)
   {
     const unsigned nproc = this->communicator_pt()->nproc();
     const unsigned my_rank = this->communicator_pt()->my_rank();
@@ -11789,11 +11788,11 @@ namespace oomph
 
     // Storage for the edges (pair of nodes) shared between a pair of
     // processors
-    Vector<Vector<Vector<std::pair<Node *, Node *>>>> edges(nproc);
+    Vector<Vector<Vector<std::pair<Node*, Node*>>>> edges(nproc);
 
     // Each edge is associated to two elements, a haloi (halo element
     // in processors i) and a haloj (halo element in processors j)
-    Vector<Vector<Vector<Vector<FiniteElement *>>>> edge_element_pt(nproc);
+    Vector<Vector<Vector<Vector<FiniteElement*>>>> edge_element_pt(nproc);
 
     // Each edge is associated to two elements, a haloi and a haloj,
     // the edge was created from a given face from each element, the
@@ -11806,7 +11805,7 @@ namespace oomph
     Vector<Vector<Vector<int>>> edge_boundary(nproc);
 
     // Mark those edges (pair of nodes overlapped by a shared boundary)
-    std::map<std::pair<Node *, Node *>, bool> overlapped_edge;
+    std::map<std::pair<Node*, Node*>, bool> overlapped_edge;
 
     // Resize the containers, they store info. for each pair of
     // processors
@@ -11847,8 +11846,8 @@ namespace oomph
         // **************************************************************
 
         // Storage for halo elements
-        Vector<GeneralisedElement *> halo_elements_iproc_with_jproc;
-        Vector<GeneralisedElement *> halo_elements_jproc_with_iproc;
+        Vector<GeneralisedElement*> halo_elements_iproc_with_jproc;
+        Vector<GeneralisedElement*> halo_elements_jproc_with_iproc;
 
         // Get the halo elements of "iproc" with "jproc"
         halo_elements_iproc_with_jproc = input_halo_elements[iproc][jproc];
@@ -11891,27 +11890,27 @@ namespace oomph
           }
 #endif
           // The edges are defined as pair of nodes
-          Vector<Node *> halo_edges_iproc;
+          Vector<Node*> halo_edges_iproc;
           unsigned halo_edges_counter_iproc = 0;
-          Vector<Node *> halo_edges_jproc;
+          Vector<Node*> halo_edges_jproc;
           unsigned halo_edges_counter_jproc = 0;
 
           // Map to associate the edge with the element used to create it
-          std::map<std::pair<Node *, Node *>, FiniteElement *>
+          std::map<std::pair<Node*, Node*>, FiniteElement*>
             edgesi_to_element_pt;
 
           // Map to associated the edge with the face number of the
           // element that created it
-          std::map<std::pair<std::pair<Node *, Node *>, FiniteElement *>, int>
+          std::map<std::pair<std::pair<Node*, Node*>, FiniteElement*>, int>
             edgesi_element_pt_to_face_index;
 
           // Map to associate the edge with the element used to create it
-          std::map<std::pair<Node *, Node *>, FiniteElement *>
+          std::map<std::pair<Node*, Node*>, FiniteElement*>
             edgesj_to_element_pt;
 
           // Map to associated the edge with the face number of the
           // element that created it
-          std::map<std::pair<std::pair<Node *, Node *>, FiniteElement *>, int>
+          std::map<std::pair<std::pair<Node*, Node*>, FiniteElement*>, int>
             edgesj_element_pt_to_face_index;
 
           // **************************************************************
@@ -11940,8 +11939,8 @@ namespace oomph
             }
 #endif
 
-            FiniteElement *el_pt =
-              dynamic_cast<FiniteElement *>(halo_elements_iproc_with_jproc[ih]);
+            FiniteElement* el_pt =
+              dynamic_cast<FiniteElement*>(halo_elements_iproc_with_jproc[ih]);
 
             if (el_pt == 0)
             {
@@ -11977,9 +11976,9 @@ namespace oomph
 #endif
 
             // Get the corner nodes, the first three nodes
-            Node *first_node_pt = el_pt->node_pt(0);
-            Node *second_node_pt = el_pt->node_pt(1);
-            Node *third_node_pt = el_pt->node_pt(2);
+            Node* first_node_pt = el_pt->node_pt(0);
+            Node* second_node_pt = el_pt->node_pt(1);
+            Node* third_node_pt = el_pt->node_pt(2);
 
             // Store the edges
             halo_edges_iproc.push_back(first_node_pt);
@@ -11995,28 +11994,28 @@ namespace oomph
             halo_edges_counter_jproc++;
 
             // Store the info. of the element used to create these edges
-            std::pair<Node *, Node *> edge1 =
+            std::pair<Node*, Node*> edge1 =
               std::make_pair(first_node_pt, second_node_pt);
             edgesi_to_element_pt[edge1] = el_pt;
 
-            std::pair<Node *, Node *> edge2 =
+            std::pair<Node*, Node*> edge2 =
               std::make_pair(second_node_pt, third_node_pt);
             edgesi_to_element_pt[edge2] = el_pt;
 
-            std::pair<Node *, Node *> edge3 =
+            std::pair<Node*, Node*> edge3 =
               std::make_pair(third_node_pt, first_node_pt);
             edgesi_to_element_pt[edge3] = el_pt;
 
             // Store the face index of the edge in the element
-            std::pair<std::pair<Node *, Node *>, FiniteElement *> edge_ele1 =
+            std::pair<std::pair<Node*, Node*>, FiniteElement*> edge_ele1 =
               std::make_pair(edge1, el_pt);
             edgesi_element_pt_to_face_index[edge_ele1] = 2;
 
-            std::pair<std::pair<Node *, Node *>, FiniteElement *> edge_ele2 =
+            std::pair<std::pair<Node*, Node*>, FiniteElement*> edge_ele2 =
               std::make_pair(edge2, el_pt);
             edgesi_element_pt_to_face_index[edge_ele2] = 0;
 
-            std::pair<std::pair<Node *, Node *>, FiniteElement *> edge_ele3 =
+            std::pair<std::pair<Node*, Node*>, FiniteElement*> edge_ele3 =
               std::make_pair(edge3, el_pt);
             edgesi_element_pt_to_face_index[edge_ele3] = 1;
 
@@ -12048,8 +12047,8 @@ namespace oomph
             }
 #endif
 
-            FiniteElement *el_pt =
-              dynamic_cast<FiniteElement *>(halo_elements_jproc_with_iproc[jh]);
+            FiniteElement* el_pt =
+              dynamic_cast<FiniteElement*>(halo_elements_jproc_with_iproc[jh]);
             if (el_pt == 0)
             {
               std::stringstream err;
@@ -12084,9 +12083,9 @@ namespace oomph
 #endif
 
             // Get the nodes pointers
-            Node *first_node_pt = el_pt->node_pt(0);
-            Node *second_node_pt = el_pt->node_pt(1);
-            Node *third_node_pt = el_pt->node_pt(2);
+            Node* first_node_pt = el_pt->node_pt(0);
+            Node* second_node_pt = el_pt->node_pt(1);
+            Node* third_node_pt = el_pt->node_pt(2);
 
             // Store the edges
             halo_edges_jproc.push_back(first_node_pt);
@@ -12102,28 +12101,28 @@ namespace oomph
             halo_edges_counter_iproc++;
 
             // Store the info. of the element used to create these edges
-            std::pair<Node *, Node *> edge1 =
+            std::pair<Node*, Node*> edge1 =
               std::make_pair(first_node_pt, second_node_pt);
             edgesj_to_element_pt[edge1] = el_pt;
 
-            std::pair<Node *, Node *> edge2 =
+            std::pair<Node*, Node*> edge2 =
               std::make_pair(second_node_pt, third_node_pt);
             edgesj_to_element_pt[edge2] = el_pt;
 
-            std::pair<Node *, Node *> edge3 =
+            std::pair<Node*, Node*> edge3 =
               std::make_pair(third_node_pt, first_node_pt);
             edgesj_to_element_pt[edge3] = el_pt;
 
             // Store the face index of the edge in the element
-            std::pair<std::pair<Node *, Node *>, FiniteElement *> edge_ele1 =
+            std::pair<std::pair<Node*, Node*>, FiniteElement*> edge_ele1 =
               std::make_pair(edge1, el_pt);
             edgesj_element_pt_to_face_index[edge_ele1] = 2;
 
-            std::pair<std::pair<Node *, Node *>, FiniteElement *> edge_ele2 =
+            std::pair<std::pair<Node*, Node*>, FiniteElement*> edge_ele2 =
               std::make_pair(edge2, el_pt);
             edgesj_element_pt_to_face_index[edge_ele2] = 0;
 
-            std::pair<std::pair<Node *, Node *>, FiniteElement *> edge_ele3 =
+            std::pair<std::pair<Node*, Node*>, FiniteElement*> edge_ele3 =
               std::make_pair(edge3, el_pt);
             edgesj_element_pt_to_face_index[edge_ele3] = 1;
 
@@ -12146,19 +12145,19 @@ namespace oomph
           for (unsigned ihe = 0; ihe < nhalo_iedges; ihe += 2)
           {
             // Get the ihe-th edge (pair of nodes)
-            Vector<Node *> ihalo_edge(2);
+            Vector<Node*> ihalo_edge(2);
             ihalo_edge[0] = halo_edges_iproc[ihe];
             ihalo_edge[1] = halo_edges_iproc[ihe + 1];
 
             // Create the pair that defines the edge
-            std::pair<Node *, Node *> tmp_edge =
+            std::pair<Node*, Node*> tmp_edge =
               std::make_pair(ihalo_edge[0], ihalo_edge[1]);
 
             // Check if the edge lies on a boundary (default values is
             // -1 for no association with an internal boundary)
             int edge_boundary_id = -1;
             {
-              std::map<std::pair<Node *, Node *>, unsigned>::iterator it;
+              std::map<std::pair<Node*, Node*>, unsigned>::iterator it;
               it = elements_edges_on_boundary.find(tmp_edge);
               // If the edges lie on a boundary then get the boundary id
               // on which the edges lie
@@ -12172,7 +12171,7 @@ namespace oomph
               {
                 // Look for the reversed version of the edge (the nodes
                 // inverted)
-                std::pair<Node *, Node *> rtmp_edge =
+                std::pair<Node*, Node*> rtmp_edge =
                   std::make_pair(ihalo_edge[1], ihalo_edge[0]);
                 it = elements_edges_on_boundary.find(rtmp_edge);
                 if (it != elements_edges_on_boundary.end())
@@ -12189,7 +12188,7 @@ namespace oomph
             for (unsigned jhe = 0; jhe < nhalo_jedges; jhe += 2)
             {
               // Get the jhe-th edge (pair of nodes)
-              Vector<Node *> jhalo_edge(2);
+              Vector<Node*> jhalo_edge(2);
               jhalo_edge[0] = halo_edges_jproc[jhe];
               jhalo_edge[1] = halo_edges_jproc[jhe + 1];
 
@@ -12198,15 +12197,15 @@ namespace oomph
                   ihalo_edge[1] == jhalo_edge[1])
               {
                 // Create the edge (both nodes that make the edge)
-                std::pair<Node *, Node *> new_edge =
+                std::pair<Node*, Node*> new_edge =
                   std::make_pair(ihalo_edge[0], ihalo_edge[1]);
 
                 // Get the elements involved in the creation of the
                 // edge to check that there are elements associated to
                 // the edge
-                FiniteElement *haloi_ele_pt = 0;
+                FiniteElement* haloi_ele_pt = 0;
                 haloi_ele_pt = edgesi_to_element_pt[new_edge];
-                FiniteElement *haloj_ele_pt = 0;
+                FiniteElement* haloj_ele_pt = 0;
                 haloj_ele_pt = edgesj_to_element_pt[new_edge];
 
                 // Verify that there is an element associated with it
@@ -12242,7 +12241,7 @@ namespace oomph
                   overlapped_edge[new_edge] = true;
 
                   // Also mark the reversed edge
-                  std::pair<Node *, Node *> rev_new_edge =
+                  std::pair<Node*, Node*> rev_new_edge =
                     std::make_pair(ihalo_edge[1], ihalo_edge[0]);
 
                   // Mark the edge as overlapped
@@ -12255,7 +12254,7 @@ namespace oomph
                 edge_boundary[iproc][jproc].push_back(edge_boundary_id);
 
                 // Store the two elements associated with the edge
-                Vector<FiniteElement *> tmp_elements_pt;
+                Vector<FiniteElement*> tmp_elements_pt;
                 tmp_elements_pt.push_back(haloi_ele_pt);
                 tmp_elements_pt.push_back(haloj_ele_pt);
 
@@ -12266,10 +12265,10 @@ namespace oomph
                 // the edge
 
                 // .. first create the pair (edge, finite_element)
-                std::pair<std::pair<Node *, Node *>, FiniteElement *>
+                std::pair<std::pair<Node*, Node*>, FiniteElement*>
                   edge_elementi_pair = make_pair(new_edge, haloi_ele_pt);
 
-                std::pair<std::pair<Node *, Node *>, FiniteElement *>
+                std::pair<std::pair<Node*, Node*>, FiniteElement*>
                   edge_elementj_pair = make_pair(new_edge, haloj_ele_pt);
 
                 // Set default values to later check if values were
@@ -12321,18 +12320,18 @@ namespace oomph
                        ihalo_edge[1] == jhalo_edge[0])
               {
                 // Create the edge (both nodes that make the edge)
-                std::pair<Node *, Node *> new_edge =
+                std::pair<Node*, Node*> new_edge =
                   std::make_pair(ihalo_edge[0], ihalo_edge[1]);
 
                 // Get the elements involved in the creation of the
                 // edge
-                FiniteElement *haloi_ele_pt = 0;
+                FiniteElement* haloi_ele_pt = 0;
                 haloi_ele_pt = edgesi_to_element_pt[new_edge];
 
-                FiniteElement *haloj_ele_pt = 0;
+                FiniteElement* haloj_ele_pt = 0;
                 // Create the edge (reversed, that is how it was
                 // originally stored)
-                std::pair<Node *, Node *> new_edge_reversed =
+                std::pair<Node*, Node*> new_edge_reversed =
                   std::make_pair(jhalo_edge[0], jhalo_edge[1]);
                 haloj_ele_pt = edgesj_to_element_pt[new_edge_reversed];
 
@@ -12370,7 +12369,7 @@ namespace oomph
                   overlapped_edge[new_edge] = true;
 
                   // Also mark the reversed edge
-                  std::pair<Node *, Node *> rev_new_edge =
+                  std::pair<Node*, Node*> rev_new_edge =
                     std::make_pair(ihalo_edge[1], ihalo_edge[0]);
 
                   // Mark the edge as overlapped
@@ -12382,7 +12381,7 @@ namespace oomph
                 edge_boundary[iproc][jproc].push_back(edge_boundary_id);
 
                 // Store the two elements associated with the edge
-                Vector<FiniteElement *> tmp_elements_pt;
+                Vector<FiniteElement*> tmp_elements_pt;
                 tmp_elements_pt.push_back(haloi_ele_pt);
                 tmp_elements_pt.push_back(haloj_ele_pt);
 
@@ -12393,10 +12392,10 @@ namespace oomph
                 // the edge
 
                 // .. first create the pair (edge, finite_element)
-                std::pair<std::pair<Node *, Node *>, FiniteElement *>
+                std::pair<std::pair<Node*, Node*>, FiniteElement*>
                   edge_elementi_pair = make_pair(new_edge, haloi_ele_pt);
 
-                std::pair<std::pair<Node *, Node *>, FiniteElement *>
+                std::pair<std::pair<Node*, Node*>, FiniteElement*>
                   edge_elementj_pair =
                     make_pair(new_edge_reversed, haloj_ele_pt);
 
@@ -12462,14 +12461,14 @@ namespace oomph
     // visit the nodes of each edge and compute the degree of each node
 
     // Store the degree (valency) of each node
-    std::map<Node *, unsigned> global_shared_node_degree;
+    std::map<Node*, unsigned> global_shared_node_degree;
 
 #ifdef PARANOID
     // Map to check if an edge has been already visited
-    std::map<std::pair<Node *, Node *>, bool> edge_done;
+    std::map<std::pair<Node*, Node*>, bool> edge_done;
 #endif // #ifdef PARANOID
     // Map to check if a node has been already visited
-    std::map<Node *, bool> node_done;
+    std::map<Node*, bool> node_done;
 
     // Loop over the processors and get the shared edged between each
     // pair of processors
@@ -12554,7 +12553,7 @@ namespace oomph
         for (unsigned se = 0; se < nshd_edges; se++)
         {
           // Get the edge
-          std::pair<Node *, Node *> edge = edges[iproc][jproc][se];
+          std::pair<Node*, Node*> edge = edges[iproc][jproc][se];
 #ifdef PARANOID
           // Check that the edge has not been previously visited
           if (edge_done[edge])
@@ -12581,15 +12580,15 @@ namespace oomph
           // Mark the edge as done
           edge_done[edge] = true;
           // Create the reversed version and include it too
-          std::pair<Node *, Node *> rev_edge =
+          std::pair<Node*, Node*> rev_edge =
             std::make_pair(edge.second, edge.first);
           // Mark reversed edge as done
           edge_done[rev_edge] = true;
 #endif // #ifdef PARANOID
 
           // Get each of the nodes that conform the edge
-          Node *left_node_pt = edge.first;
-          Node *right_node_pt = edge.second;
+          Node* left_node_pt = edge.first;
+          Node* right_node_pt = edge.second;
 
           // Check if the left node has been already done
           if (!node_done[left_node_pt])
@@ -12630,17 +12629,17 @@ namespace oomph
 
     // Mark the nodes on original boundaries not overlapped by shared
     // boundaries
-    std::map<unsigned, std::map<Node *, bool>>
+    std::map<unsigned, std::map<Node*, bool>>
       node_on_bnd_not_overlapped_by_shd_bnd;
 
     // Loop over the edges of the original boundaries
-    for (std::map<std::pair<Node *, Node *>, unsigned>::iterator it_map =
+    for (std::map<std::pair<Node*, Node*>, unsigned>::iterator it_map =
            elements_edges_on_boundary.begin();
          it_map != elements_edges_on_boundary.end();
          it_map++)
     {
       // Get the edge
-      std::pair<Node *, Node *> edge_pair = (*it_map).first;
+      std::pair<Node*, Node*> edge_pair = (*it_map).first;
 
       // Is the edge overlaped by a shared boundary
       if (!overlapped_edge[edge_pair])
@@ -12650,11 +12649,11 @@ namespace oomph
         unsigned b = (*it_map).second;
 
         // Get the left node
-        Node *left_node_pt = edge_pair.first;
+        Node* left_node_pt = edge_pair.first;
         node_on_bnd_not_overlapped_by_shd_bnd[b][left_node_pt] = true;
 
         // Get the right node
-        Node *right_node_pt = edge_pair.second;
+        Node* right_node_pt = edge_pair.second;
         node_on_bnd_not_overlapped_by_shd_bnd[b][right_node_pt] = true;
 
       } // if (!overlapped_edge[edge_pair])
@@ -12670,12 +12669,12 @@ namespace oomph
 
     // Storage for new created polylines with "each processor", non
     // sorted (shared polylines of the current processor only)
-    Vector<Vector<TriangleMeshPolyLine *>> unsorted_polylines_pt(nproc);
+    Vector<Vector<TriangleMeshPolyLine*>> unsorted_polylines_pt(nproc);
 
     // Map that associates the shared boundary id with the list of
     // nodes that create it (shared boundary of the current processor
     // only)
-    std::map<unsigned, std::list<Node *>> shared_bnd_id_to_sorted_list_node_pt;
+    std::map<unsigned, std::list<Node*>> shared_bnd_id_to_sorted_list_node_pt;
 
     // Get maximum user boundary id and set the initial shared boundary
     // id
@@ -12711,7 +12710,7 @@ namespace oomph
         unsigned nsorted_edges = 0;
 
         // Keep track of the already done edges
-        std::map<std::pair<Node *, Node *>, bool> edge_done;
+        std::map<std::pair<Node*, Node*>, bool> edge_done;
 
         // Loop over all the edges to create all the polylines with
         // the current processors involved
@@ -12719,12 +12718,12 @@ namespace oomph
         {
           // Temporaly storage for the elements associated to the
           // sorted edges
-          std::list<FiniteElement *> tmp_boundary_element_pt;
+          std::list<FiniteElement*> tmp_boundary_element_pt;
           // Temporly storage for the face indexes on the element
           // that created the given edge
           std::list<int> tmp_face_index_element;
           // Get an initial pair of nodes to create an edge
-          std::pair<Node *, Node *> edge;
+          std::pair<Node*, Node*> edge;
 #ifdef PARANOID
           bool found_initial_edge = false;
 #endif
@@ -12766,12 +12765,12 @@ namespace oomph
 
           // Storing for the sorting nodes extracted from the
           // edges. The sorted nodes are used to create a polyline
-          std::list<Node *> sorted_nodes;
+          std::list<Node*> sorted_nodes;
           sorted_nodes.clear();
 
           // The initial and final nodes of the list
-          Node *first_node_pt = edge.first;
-          Node *last_node_pt = edge.second;
+          Node* first_node_pt = edge.first;
+          Node* last_node_pt = edge.second;
 
           // Push back on the list the new edge (nodes)
           sorted_nodes.push_back(first_node_pt);
@@ -12928,11 +12927,11 @@ namespace oomph
               if (!edge_done[edge] && (edge_bound_id == root_edge_bound_id))
               {
                 // Get each individual node
-                Node *left_node_pt = edge.first;
-                Node *right_node_pt = edge.second;
+                Node* left_node_pt = edge.first;
+                Node* right_node_pt = edge.second;
 
                 // Pointer to the new added node
-                Node *new_added_node_pt = 0;
+                Node* new_added_node_pt = 0;
 
                 // Is the node to be added to the left?
                 if (left_node_pt == first_node_pt && !connection_to_the_left)
@@ -13124,12 +13123,12 @@ namespace oomph
           const unsigned n_bnd_ele = tmp_boundary_element_pt.size();
 
           // Storage for the boundary elements and face indexes
-          Vector<FiniteElement *> tmp_bnd_ele_pt(n_bnd_ele);
+          Vector<FiniteElement*> tmp_bnd_ele_pt(n_bnd_ele);
           Vector<int> tmp_face_idx_ele(n_bnd_ele);
           // Helper counter
           unsigned help_counter = 0;
           // Fill the data structures
-          for (std::list<FiniteElement *>::iterator it_bnd_ele =
+          for (std::list<FiniteElement*>::iterator it_bnd_ele =
                  tmp_boundary_element_pt.begin();
                it_bnd_ele != tmp_boundary_element_pt.end();
                it_bnd_ele++)
@@ -13149,10 +13148,10 @@ namespace oomph
 
           // Store the nodes for the new shared polylines without
           // loops
-          Vector<std::list<Node *>> final_sorted_nodes_pt;
+          Vector<std::list<Node*>> final_sorted_nodes_pt;
           // Store the boundary elements of the shared polyline
           // without loops
-          Vector<Vector<FiniteElement *>> final_boundary_element_pt;
+          Vector<Vector<FiniteElement*>> final_boundary_element_pt;
           // Face indexes of the boundary elements without loops
           Vector<Vector<int>> final_face_index_element;
           // Connection flags (to the left) of the shared boundaries
@@ -13268,30 +13267,30 @@ namespace oomph
   // ======================================================================
   template<class ELEMENT>
   void TriangleMesh<ELEMENT>::break_loops_on_shared_polyline_helper(
-    const unsigned &initial_shd_bnd_id,
-    std::list<Node *> &input_nodes,
-    Vector<FiniteElement *> &input_boundary_element_pt,
-    Vector<int> &input_face_index_element,
-    const int &input_connect_to_the_left,
-    const int &input_connect_to_the_right,
-    Vector<std::list<Node *>> &output_sorted_nodes_pt,
-    Vector<Vector<FiniteElement *>> &output_boundary_element_pt,
-    Vector<Vector<int>> &output_face_index_element,
-    Vector<int> &output_connect_to_the_left,
-    Vector<int> &output_connect_to_the_right)
+    const unsigned& initial_shd_bnd_id,
+    std::list<Node*>& input_nodes,
+    Vector<FiniteElement*>& input_boundary_element_pt,
+    Vector<int>& input_face_index_element,
+    const int& input_connect_to_the_left,
+    const int& input_connect_to_the_right,
+    Vector<std::list<Node*>>& output_sorted_nodes_pt,
+    Vector<Vector<FiniteElement*>>& output_boundary_element_pt,
+    Vector<Vector<int>>& output_face_index_element,
+    Vector<int>& output_connect_to_the_left,
+    Vector<int>& output_connect_to_the_right)
   {
     // Get the left and right node of the current list of sorted nodes
-    Node *left_node_pt = input_nodes.front();
-    Node *right_node_pt = input_nodes.back();
+    Node* left_node_pt = input_nodes.front();
+    Node* right_node_pt = input_nodes.back();
 
     // Temporary storage for list of nodes, boundary elements and face
     // element's indexes
-    Vector<std::list<Node *>> tmp_sub_nodes;
-    Vector<Vector<FiniteElement *>> tmp_sub_bnd_ele_pt;
+    Vector<std::list<Node*>> tmp_sub_nodes;
+    Vector<Vector<FiniteElement*>> tmp_sub_bnd_ele_pt;
     Vector<Vector<int>> tmp_sub_face_idx_ele;
 
     // Iterator for the list of input nodes
-    std::list<Node *>::iterator it = input_nodes.begin();
+    std::list<Node*>::iterator it = input_nodes.begin();
 
     // Counter
     unsigned counter = 0;
@@ -13314,10 +13313,10 @@ namespace oomph
       }
 
       // Get a list of nonrepeated nodes
-      std::list<Node *> sub_nodes;
+      std::list<Node*> sub_nodes;
       // The temporary vector of boundary elements associated with the
       // nodes
-      Vector<FiniteElement *> sub_bnd_ele_pt;
+      Vector<FiniteElement*> sub_bnd_ele_pt;
       // The temporary vector of face indexes associated with the
       // boundary elements
       Vector<int> sub_face_idx_ele;
@@ -13462,8 +13461,8 @@ namespace oomph
 
     // -----------------------------------------------------------
     // Get the left and right node of the first sub-list of nodes
-    Node *left_sub_node_pt = tmp_sub_nodes[0].front();
-    Node *right_sub_node_pt = tmp_sub_nodes[0].back();
+    Node* left_sub_node_pt = tmp_sub_nodes[0].front();
+    Node* right_sub_node_pt = tmp_sub_nodes[0].back();
 
     // Check if the sub-list of nodes creates a loop (circle)
     if (left_sub_node_pt == right_sub_node_pt)
@@ -13472,11 +13471,11 @@ namespace oomph
       // the shared boundary id by two
 
       // The first and second half of nodes
-      std::list<Node *> first_half_node_pt;
-      std::list<Node *> second_half_node_pt;
+      std::list<Node*> first_half_node_pt;
+      std::list<Node*> second_half_node_pt;
       // The first and second half of boundary elements
-      Vector<FiniteElement *> first_half_ele_pt;
-      Vector<FiniteElement *> second_half_ele_pt;
+      Vector<FiniteElement*> first_half_ele_pt;
+      Vector<FiniteElement*> second_half_ele_pt;
       // The first and second half of face indexes
       Vector<int> first_half_face_idx;
       Vector<int> second_half_face_idx;
@@ -13492,7 +13491,7 @@ namespace oomph
       // Copy as many sub-nodes for the first half of the sub-polyline
 
       // Iterator to loop over the nodes
-      std::list<Node *>::iterator it_sub = tmp_sub_nodes[0].begin();
+      std::list<Node*>::iterator it_sub = tmp_sub_nodes[0].begin();
 
       // Add the first node
       first_half_node_pt.push_back(*it_sub);
@@ -13710,11 +13709,11 @@ namespace oomph
         // the shared boundary id by two
 
         // The first and second half of nodes
-        std::list<Node *> first_half_node_pt;
-        std::list<Node *> second_half_node_pt;
+        std::list<Node*> first_half_node_pt;
+        std::list<Node*> second_half_node_pt;
         // The first and second half of boundary elements
-        Vector<FiniteElement *> first_half_ele_pt;
-        Vector<FiniteElement *> second_half_ele_pt;
+        Vector<FiniteElement*> first_half_ele_pt;
+        Vector<FiniteElement*> second_half_ele_pt;
         // The first and second half of face indexes
         Vector<int> first_half_face_idx;
         Vector<int> second_half_face_idx;
@@ -13730,7 +13729,7 @@ namespace oomph
         // Copy as many sub-nodes for the first half of the sub-polyline
 
         // Iterator to loop over the nodes
-        std::list<Node *>::iterator it_sub = tmp_sub_nodes[1].begin();
+        std::list<Node*>::iterator it_sub = tmp_sub_nodes[1].begin();
 
         // Add the first node
         first_half_node_pt.push_back(*it_sub);
@@ -13967,11 +13966,11 @@ namespace oomph
         // the shared boundary id by two
 
         // The first and second half of nodes
-        std::list<Node *> first_half_node_pt;
-        std::list<Node *> second_half_node_pt;
+        std::list<Node*> first_half_node_pt;
+        std::list<Node*> second_half_node_pt;
         // The first and second half of boundary elements
-        Vector<FiniteElement *> first_half_ele_pt;
-        Vector<FiniteElement *> second_half_ele_pt;
+        Vector<FiniteElement*> first_half_ele_pt;
+        Vector<FiniteElement*> second_half_ele_pt;
         // The first and second half of face indexes
         Vector<int> first_half_face_idx;
         Vector<int> second_half_face_idx;
@@ -13987,7 +13986,7 @@ namespace oomph
         // Copy as many sub-nodes for the first half of the sub-polyline
 
         // Iterator to loop over the nodes
-        std::list<Node *>::iterator it_sub = tmp_sub_nodes[2].begin();
+        std::list<Node*>::iterator it_sub = tmp_sub_nodes[2].begin();
 
         // Add the first node
         first_half_node_pt.push_back(*it_sub);
@@ -14193,33 +14192,33 @@ namespace oomph
   template<class ELEMENT>
   void TriangleMesh<ELEMENT>::
     break_loops_on_shared_polyline_load_balance_helper(
-      const unsigned &initial_shd_bnd_id,
-      std::list<Node *> &input_nodes,
-      Vector<FiniteElement *> &input_boundary_element_pt,
-      Vector<FiniteElement *> &input_boundary_face_element_pt,
-      Vector<int> &input_face_index_element,
-      const int &input_connect_to_the_left,
-      const int &input_connect_to_the_right,
-      Vector<std::list<Node *>> &output_sorted_nodes_pt,
-      Vector<Vector<FiniteElement *>> &output_boundary_element_pt,
-      Vector<Vector<FiniteElement *>> &output_boundary_face_element_pt,
-      Vector<Vector<int>> &output_face_index_element,
-      Vector<int> &output_connect_to_the_left,
-      Vector<int> &output_connect_to_the_right)
+      const unsigned& initial_shd_bnd_id,
+      std::list<Node*>& input_nodes,
+      Vector<FiniteElement*>& input_boundary_element_pt,
+      Vector<FiniteElement*>& input_boundary_face_element_pt,
+      Vector<int>& input_face_index_element,
+      const int& input_connect_to_the_left,
+      const int& input_connect_to_the_right,
+      Vector<std::list<Node*>>& output_sorted_nodes_pt,
+      Vector<Vector<FiniteElement*>>& output_boundary_element_pt,
+      Vector<Vector<FiniteElement*>>& output_boundary_face_element_pt,
+      Vector<Vector<int>>& output_face_index_element,
+      Vector<int>& output_connect_to_the_left,
+      Vector<int>& output_connect_to_the_right)
   {
     // Get the left and right node of the current list of sorted nodes
-    Node *left_node_pt = input_nodes.front();
-    Node *right_node_pt = input_nodes.back();
+    Node* left_node_pt = input_nodes.front();
+    Node* right_node_pt = input_nodes.back();
 
     // Temporary storage for list of nodes, boundary elements, boundary
     // face elements and face element's indexes
-    Vector<std::list<Node *>> tmp_sub_nodes;
-    Vector<Vector<FiniteElement *>> tmp_sub_bnd_ele_pt;
-    Vector<Vector<FiniteElement *>> tmp_sub_bnd_face_ele_pt;
+    Vector<std::list<Node*>> tmp_sub_nodes;
+    Vector<Vector<FiniteElement*>> tmp_sub_bnd_ele_pt;
+    Vector<Vector<FiniteElement*>> tmp_sub_bnd_face_ele_pt;
     Vector<Vector<int>> tmp_sub_face_idx_ele;
 
     // Iterator for the list of input nodes
-    std::list<Node *>::iterator it = input_nodes.begin();
+    std::list<Node*>::iterator it = input_nodes.begin();
 
     // Counter
     unsigned counter = 0;
@@ -14242,13 +14241,13 @@ namespace oomph
       }
 
       // Get a list of nonrepeated nodes
-      std::list<Node *> sub_nodes;
+      std::list<Node*> sub_nodes;
       // The temporary vector of boundary elements associated with the
       // nodes
-      Vector<FiniteElement *> sub_bnd_ele_pt;
+      Vector<FiniteElement*> sub_bnd_ele_pt;
       // The temporary vector of boundary face elements associated with
       // the nodes
-      Vector<FiniteElement *> sub_bnd_face_ele_pt;
+      Vector<FiniteElement*> sub_bnd_face_ele_pt;
       // The temporary vector of face indexes associated with the
       // boundary elements
       Vector<int> sub_face_idx_ele;
@@ -14403,8 +14402,8 @@ namespace oomph
 
     // -----------------------------------------------------------
     // Get the left and right node of the first sub-list of nodes
-    Node *left_sub_node_pt = tmp_sub_nodes[0].front();
-    Node *right_sub_node_pt = tmp_sub_nodes[0].back();
+    Node* left_sub_node_pt = tmp_sub_nodes[0].front();
+    Node* right_sub_node_pt = tmp_sub_nodes[0].back();
 
     // Check if the sub-list of nodes creates a loop (circle)
     if (left_sub_node_pt == right_sub_node_pt)
@@ -14413,14 +14412,14 @@ namespace oomph
       // the shared boundary id by two
 
       // The first and second half of nodes
-      std::list<Node *> first_half_node_pt;
-      std::list<Node *> second_half_node_pt;
+      std::list<Node*> first_half_node_pt;
+      std::list<Node*> second_half_node_pt;
       // The first and second half of boundary elements
-      Vector<FiniteElement *> first_half_ele_pt;
-      Vector<FiniteElement *> second_half_ele_pt;
+      Vector<FiniteElement*> first_half_ele_pt;
+      Vector<FiniteElement*> second_half_ele_pt;
       // The first and second half of boundary face elements
-      Vector<FiniteElement *> first_half_ele_face_pt;
-      Vector<FiniteElement *> second_half_ele_face_pt;
+      Vector<FiniteElement*> first_half_ele_face_pt;
+      Vector<FiniteElement*> second_half_ele_face_pt;
       // The first and second half of face indexes
       Vector<int> first_half_face_idx;
       Vector<int> second_half_face_idx;
@@ -14436,7 +14435,7 @@ namespace oomph
       // Copy as many sub-nodes for the first half of the sub-polyline
 
       // Iterator to loop over the nodes
-      std::list<Node *>::iterator it_sub = tmp_sub_nodes[0].begin();
+      std::list<Node*>::iterator it_sub = tmp_sub_nodes[0].begin();
 
       // Add the first node
       first_half_node_pt.push_back(*it_sub);
@@ -14620,17 +14619,17 @@ namespace oomph
   // ======================================================================
   template<class ELEMENT>
   void TriangleMesh<ELEMENT>::create_shared_polyline(
-    const unsigned &my_rank,
-    const unsigned &shd_bnd_id,
-    const unsigned &iproc,
-    const unsigned &jproc,
-    std::list<Node *> &sorted_nodes,
-    const int &root_edge_bnd_id,
-    Vector<FiniteElement *> &bulk_bnd_ele_pt,
-    Vector<int> &face_index_ele,
-    Vector<Vector<TriangleMeshPolyLine *>> &unsorted_polylines_pt,
-    const int &connect_to_the_left_flag,
-    const int &connect_to_the_right_flag)
+    const unsigned& my_rank,
+    const unsigned& shd_bnd_id,
+    const unsigned& iproc,
+    const unsigned& jproc,
+    std::list<Node*>& sorted_nodes,
+    const int& root_edge_bnd_id,
+    Vector<FiniteElement*>& bulk_bnd_ele_pt,
+    Vector<int>& face_index_ele,
+    Vector<Vector<TriangleMeshPolyLine*>>& unsorted_polylines_pt,
+    const int& connect_to_the_left_flag,
+    const int& connect_to_the_right_flag)
   {
     // ----------------------------------------------------------------
     // Associate the shared boundary with the respective processors
@@ -14671,7 +14670,7 @@ namespace oomph
       // Copy the vertices from the nodes
       unsigned counter = 0;
 
-      for (std::list<Node *>::iterator it = sorted_nodes.begin();
+      for (std::list<Node*>::iterator it = sorted_nodes.begin();
            it != sorted_nodes.end();
            it++)
       {
@@ -14684,7 +14683,7 @@ namespace oomph
       // ---------------------------------------------
       // Create the polyline from the input vertices
       // ---------------------------------------------
-      TriangleMeshPolyLine *polyline_pt =
+      TriangleMeshPolyLine* polyline_pt =
         new TriangleMeshPolyLine(vertices, shd_bnd_id);
 
       // ---------------------------------------------
@@ -14736,7 +14735,7 @@ namespace oomph
       } // for (i < nshared_boundary_elements)
 
       // Store the shared boundary nodes
-      for (std::list<Node *>::iterator it = sorted_nodes.begin();
+      for (std::list<Node*>::iterator it = sorted_nodes.begin();
            it != sorted_nodes.end();
            it++)
       {
@@ -14863,9 +14862,9 @@ namespace oomph
   //======================================================================
   template<class ELEMENT>
   void TriangleMesh<ELEMENT>::reset_boundary_element_info(
-    Vector<unsigned> &ntmp_boundary_elements,
-    Vector<Vector<unsigned>> &ntmp_boundary_elements_in_region,
-    Vector<FiniteElement *> &deleted_elements)
+    Vector<unsigned>& ntmp_boundary_elements,
+    Vector<Vector<unsigned>>& ntmp_boundary_elements_in_region,
+    Vector<FiniteElement*>& deleted_elements)
   {
     // Get the number of boundaries
     const unsigned nbound = this->nboundary();
@@ -14881,7 +14880,7 @@ namespace oomph
       // Get the number of boundary elements (mixed with the old and new)
       const unsigned nbound_ele = this->nboundary_element(b);
       // Back-up the boundary elements
-      Vector<FiniteElement *> backed_up_boundary_element_pt(nbound_ele);
+      Vector<FiniteElement*> backed_up_boundary_element_pt(nbound_ele);
       Vector<int> backed_up_face_index_at_boundary(nbound_ele);
       for (unsigned e = 0; e < nbound_ele; e++)
       {
@@ -14893,7 +14892,7 @@ namespace oomph
       } // for (n < nold_boundary_elements)
 
       // Back up the elements in boundary for each region
-      Vector<Vector<FiniteElement *>> backed_up_boundary_region_element_pt(
+      Vector<Vector<FiniteElement*>> backed_up_boundary_region_element_pt(
         n_regions);
       Vector<Vector<int>> backed_up_face_index_at_boundary_region(n_regions);
 
@@ -14941,15 +14940,15 @@ namespace oomph
       // Loop over the boundary elements and check those still alive
       for (unsigned e = 0; e < nold_bnd_ele; e++)
       {
-        FiniteElement *tmp_ele_pt = backed_up_boundary_element_pt[e];
+        FiniteElement* tmp_ele_pt = backed_up_boundary_element_pt[e];
         // Include only those elements still alive
-        Vector<FiniteElement *>::iterator it = std::find(
+        Vector<FiniteElement*>::iterator it = std::find(
           deleted_elements.begin(), deleted_elements.end(), tmp_ele_pt);
         // Only copy thoes elements not found on the deleted elements
         // container
         if (it == deleted_elements.end())
         {
-          FiniteElement *add_ele_pt = backed_up_boundary_element_pt[e];
+          FiniteElement* add_ele_pt = backed_up_boundary_element_pt[e];
           this->Boundary_element_pt[b].push_back(add_ele_pt);
           const int face_index = backed_up_face_index_at_boundary[e];
           this->Face_index_at_boundary[b].push_back(face_index);
@@ -14975,16 +14974,16 @@ namespace oomph
         for (unsigned e = 0; e < nold_bnd_region_ele; e++)
         {
           // Get the element
-          FiniteElement *tmp_ele_pt =
+          FiniteElement* tmp_ele_pt =
             backed_up_boundary_region_element_pt[ir][e];
           // Include only those elements still alive
-          Vector<FiniteElement *>::iterator it = std::find(
+          Vector<FiniteElement*>::iterator it = std::find(
             deleted_elements.begin(), deleted_elements.end(), tmp_ele_pt);
           // Only copy those elements not found on the deleted elements
           // container
           if (it == deleted_elements.end())
           {
-            FiniteElement *add_ele_pt =
+            FiniteElement* add_ele_pt =
               backed_up_boundary_region_element_pt[ir][e];
             this->Boundary_region_element_pt[b][region_id].push_back(
               add_ele_pt);
@@ -15005,7 +15004,7 @@ namespace oomph
       // Loop over the boundary elements
       for (unsigned e = nold_bnd_ele; e < nbound_ele; e++)
       {
-        FiniteElement *add_ele_pt = backed_up_boundary_element_pt[e];
+        FiniteElement* add_ele_pt = backed_up_boundary_element_pt[e];
         this->Boundary_element_pt[b].push_back(add_ele_pt);
         const int face_index = backed_up_face_index_at_boundary[e];
         this->Face_index_at_boundary[b].push_back(face_index);
@@ -15032,7 +15031,7 @@ namespace oomph
         // alive
         for (unsigned e = nold_bnd_region_ele; e < nbnd_region_ele; e++)
         {
-          FiniteElement *add_ele_pt =
+          FiniteElement* add_ele_pt =
             backed_up_boundary_region_element_pt[ir][e];
           this->Boundary_region_element_pt[b][region_id].push_back(add_ele_pt);
           const int face_index = backed_up_face_index_at_boundary_region[ir][e];
@@ -15057,9 +15056,9 @@ namespace oomph
   //========================================================================
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::refine_triangulateio(
-    TriangulateIO &triangulate_io,
-    const Vector<double> &target_area,
-    struct TriangulateIO &triangle_refine)
+    TriangulateIO& triangulate_io,
+    const Vector<double>& target_area,
+    struct TriangulateIO& triangle_refine)
   {
     //  Initialize
     TriangleHelper::initialise_triangulateio(triangle_refine);
@@ -15074,13 +15073,13 @@ namespace oomph
 
     // Initialization of the TriangulateIO objects to store the values
     triangle_refine.pointlist =
-      (double *)malloc(triangulate_io.numberofpoints * 2 * sizeof(double));
+      (double*)malloc(triangulate_io.numberofpoints * 2 * sizeof(double));
     triangle_refine.pointmarkerlist =
-      (int *)malloc(triangulate_io.numberofpoints * sizeof(int));
+      (int*)malloc(triangulate_io.numberofpoints * sizeof(int));
     triangle_refine.segmentlist =
-      (int *)malloc(triangulate_io.numberofsegments * 2 * sizeof(int));
+      (int*)malloc(triangulate_io.numberofsegments * 2 * sizeof(int));
     triangle_refine.segmentmarkerlist =
-      (int *)malloc(triangulate_io.numberofsegments * sizeof(int));
+      (int*)malloc(triangulate_io.numberofsegments * sizeof(int));
 
     // Storing the point's coordinates in the list
     // and in two vectors with x and y coordinates
@@ -15131,7 +15130,7 @@ namespace oomph
     triangle_refine.numberofholes = n_holes;
 
     triangle_refine.holelist =
-      (double *)malloc(triangulate_io.numberofholes * 2 * sizeof(double));
+      (double*)malloc(triangulate_io.numberofholes * 2 * sizeof(double));
 
     // Loop over the holes to get centre coords
     for (unsigned count_hole = 0; count_hole < n_holes * 2; count_hole++)
@@ -15160,7 +15159,7 @@ namespace oomph
     triangle_refine.numberofcorners = n_corners;
 
     triangle_refine.trianglelist =
-      (int *)malloc(triangulate_io.numberoftriangles * 3 * sizeof(int));
+      (int*)malloc(triangulate_io.numberoftriangles * 3 * sizeof(int));
 
     // Store the triangle's corners in the list and get element sizes
     for (unsigned count_tri = 0; count_tri < n_triangles * 3; count_tri++)
@@ -15171,7 +15170,7 @@ namespace oomph
 
     // Store the triangle's area in the list
     triangle_refine.trianglearealist =
-      (double *)malloc(triangulate_io.numberoftriangles * sizeof(double));
+      (double*)malloc(triangulate_io.numberoftriangles * sizeof(double));
     for (unsigned count_area = 0; count_area < n_triangles; count_area++)
     {
       triangle_refine.trianglearealist[count_area] = target_area[count_area];
@@ -15181,7 +15180,7 @@ namespace oomph
     triangle_refine.numberoftriangleattributes =
       triangulate_io.numberoftriangleattributes;
 
-    triangle_refine.triangleattributelist = (double *)malloc(
+    triangle_refine.triangleattributelist = (double*)malloc(
       triangulate_io.numberoftriangles *
       triangulate_io.numberoftriangleattributes * sizeof(double));
     for (unsigned count_attribute = 0;
@@ -15206,8 +15205,8 @@ namespace oomph
     static double Tol;
 
     // Comparison operator for "lower left" ordering
-    bool operator()(const std::pair<double, double> &lhs,
-                    const std::pair<double, double> &rhs) const
+    bool operator()(const std::pair<double, double>& lhs,
+                    const std::pair<double, double>& rhs) const
     {
       double diff_y = lhs.second - rhs.second;
       if (diff_y < -Tol) // (lhs.second < rhs.second)
@@ -15305,7 +15304,7 @@ namespace oomph
       // A map is used to sort the nodes using their coordinates as the key
       // of the map
       // std::map<std::pair<double, double>, Node*> sorted_nodes_pt;
-      std::map<std::pair<double, double>, Node *, classcomp> sorted_nodes_pt;
+      std::map<std::pair<double, double>, Node*, classcomp> sorted_nodes_pt;
 
 #ifdef PARANOID
 
@@ -15325,7 +15324,7 @@ namespace oomph
       // them on the map container
       for (unsigned i_node = 0; i_node < nbnd_node; i_node++)
       {
-        Node *node_pt = this->shared_boundary_node_pt(b, i_node);
+        Node* node_pt = this->shared_boundary_node_pt(b, i_node);
         std::pair<double, double> vertex =
           std::make_pair(node_pt->x(0), node_pt->x(1));
         sorted_nodes_pt[vertex] = node_pt;
@@ -15337,7 +15336,7 @@ namespace oomph
         {
           if (i_node != j_node)
           {
-            Node *node2_pt = this->shared_boundary_node_pt(b, j_node);
+            Node* node2_pt = this->shared_boundary_node_pt(b, j_node);
 
             // Squared distance
             double squared_distance = 0.0;
@@ -15380,7 +15379,7 @@ namespace oomph
       // members on the Sorted_shared_boundary_node_pt container
       // The map has already sorted the nodes, now they keep the same sorting
       // on all processors
-      for (std::map<std::pair<double, double>, Node *>::iterator it_map =
+      for (std::map<std::pair<double, double>, Node*>::iterator it_map =
              sorted_nodes_pt.begin();
            it_map != sorted_nodes_pt.end();
            it_map++)
@@ -15455,7 +15454,7 @@ namespace oomph
           {
             // Get the boundary element and add it to the shared
             // boundary elements structure
-            FiniteElement *bnd_ele_pt = this->boundary_element_pt(b, e);
+            FiniteElement* bnd_ele_pt = this->boundary_element_pt(b, e);
             this->add_shared_boundary_element(b, bnd_ele_pt);
             // ... do the same with the face index information
             int face_index = this->face_index_at_boundary(b, e);
@@ -15468,7 +15467,7 @@ namespace oomph
           const unsigned nboundary_node = this->nboundary_node(b);
           for (unsigned n = 0; n < nboundary_node; n++)
           {
-            Node *bnd_node_pt = this->boundary_node_pt(b, n);
+            Node* bnd_node_pt = this->boundary_node_pt(b, n);
             this->add_shared_boundary_node(b, bnd_node_pt);
           } // for (n < nboundary_node)
         } // if (update_nodes)
@@ -15504,7 +15503,7 @@ namespace oomph
     // Container where to store the nodes on shared boundaries no
     // associated with the processor that receives the elements/nodes
     // other_proc_shd_bnd_node_pt[iproc][jproc][shd_bnd_id][index]
-    Vector<Vector<Vector<std::map<unsigned, Node *>>>>
+    Vector<Vector<Vector<std::map<unsigned, Node*>>>>
       other_proc_shd_bnd_node_pt(nproc);
     // Resize the container
     for (unsigned iproc = 0; iproc < nproc; iproc++)
@@ -15533,7 +15532,7 @@ namespace oomph
     std::map<Vector<unsigned>, unsigned> node_name_to_global_index;
 
     // Store the global shared nodes pointers
-    Vector<Node *> global_shared_node_pt;
+    Vector<Node*> global_shared_node_pt;
 
     // Get the time for computation of global nodes names and shared
     // nodes
@@ -15613,7 +15612,7 @@ namespace oomph
     // ele_with_node_on_shd_bnd_pt[ ][x][ ]: ishd boundary with iproc
     // ele_with_node_on_shd_bnd_pt[ ][ ][x]: element with node on shared
     //                                       boundary with iproc
-    Vector<Vector<Vector<FiniteElement *>>> ele_with_node_on_shd_bnd_pt(nproc);
+    Vector<Vector<Vector<FiniteElement*>>> ele_with_node_on_shd_bnd_pt(nproc);
     // Resize the container with the number of shared boundaries within
     // each processor
 
@@ -15631,7 +15630,7 @@ namespace oomph
     for (unsigned e = 0; e < n_ele; e++)
     {
       // Get the element
-      FiniteElement *ele_pt = this->finite_element_pt(e);
+      FiniteElement* ele_pt = this->finite_element_pt(e);
       // Get the number of nodes
       const unsigned n_nodes = ele_pt->nnode();
       // loop over the nodes and check whether any of them lies on a
@@ -15639,7 +15638,7 @@ namespace oomph
       for (unsigned n = 0; n < n_nodes; n++)
       {
         // Get the node
-        Node *node_pt = ele_pt->node_pt(n);
+        Node* node_pt = ele_pt->node_pt(n);
 
         // Now check whether the current node lies on a shared boundary
         // within any other processor
@@ -15715,7 +15714,7 @@ namespace oomph
     // Keep track of the currently created nodes within each
     // processor. We need to keep track of these nodes so they can be
     // referred at a second stage.
-    Vector<Vector<Node *>> iproc_currently_created_nodes_pt(nproc);
+    Vector<Vector<Node*>> iproc_currently_created_nodes_pt(nproc);
 
     // Get the time to re-generate halo(ed) elements/nodes (first stage)
     double t_start_regenerate_halo_ed_elements_nodes_first_stage =
@@ -15762,20 +15761,20 @@ namespace oomph
             //          DEBP(nel_bnd);
 
             // Container to store the elements marked as haloed
-            Vector<FiniteElement *> haloed_element;
+            Vector<FiniteElement*> haloed_element;
 
             // All the elements adjacent to the boundary should be
             // marked as haloed elements
             if (nel_bnd > 0)
             {
               // Map to know which element have been already added
-              std::map<FiniteElement *, bool> already_added;
+              std::map<FiniteElement*, bool> already_added;
 
               // Loop over the elements adjacent to boundary "bnd_id"
               for (unsigned e = 0; e < nel_bnd; e++)
               {
                 // Get pointer to the element adjacent to boundary bnd_id
-                FiniteElement *ele_pt =
+                FiniteElement* ele_pt =
                   this->shared_boundary_element_pt(bnd_id, e);
 
                 // Check if the element has been already added. Elemets
@@ -15804,7 +15803,7 @@ namespace oomph
               for (unsigned iele = 0; iele < n_ele_with_node_on_shd_bnd; iele++)
               {
                 // Get the element
-                FiniteElement *ele_pt =
+                FiniteElement* ele_pt =
                   ele_with_node_on_shd_bnd_pt[iproc][bs][iele];
                 // Check if it has not been already added
                 if (!already_added[ele_pt])
@@ -15838,13 +15837,13 @@ namespace oomph
             for (unsigned e = 0; e < nhaloed_ele; e++)
             {
               // Get pointer to the marked haloed element
-              FiniteElement *ele_pt = haloed_element[e];
+              FiniteElement* ele_pt = haloed_element[e];
               const unsigned nroot_haloed_ele =
                 this->nroot_haloed_element(iproc);
 
               // Check if the element has been already added to the
               // halo(ed) scheme
-              GeneralisedElement *gen_ele_pt = ele_pt;
+              GeneralisedElement* gen_ele_pt = ele_pt;
               const unsigned haloed_ele_index =
                 this->try_to_add_root_haloed_element_pt(iproc, gen_ele_pt);
 
@@ -15865,7 +15864,7 @@ namespace oomph
                 const unsigned nnodes = ele_pt->nnode();
                 for (unsigned j = 0; j < nnodes; j++)
                 {
-                  Node *node_pt = ele_pt->node_pt(j);
+                  Node* node_pt = ele_pt->node_pt(j);
 
                   // Package the info. of the nodes
                   // The destination processor goes in the arguments
@@ -16058,18 +16057,18 @@ namespace oomph
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::
     compute_global_node_names_and_shared_nodes(
-      Vector<Vector<Vector<std::map<unsigned, Node *>>>>
-        &other_proc_shd_bnd_node_pt,
-      Vector<Vector<Vector<unsigned>>> &global_node_names,
-      std::map<Vector<unsigned>, unsigned> &node_name_to_global_index,
-      Vector<Node *> &global_shared_node_pt)
+      Vector<Vector<Vector<std::map<unsigned, Node*>>>>&
+        other_proc_shd_bnd_node_pt,
+      Vector<Vector<Vector<unsigned>>>& global_node_names,
+      std::map<Vector<unsigned>, unsigned>& node_name_to_global_index,
+      Vector<Node*>& global_shared_node_pt)
   {
     // Get the number of processors
     const unsigned nproc = this->communicator_pt()->nproc();
     // Get the rank of the current processor
     const unsigned my_rank = this->communicator_pt()->my_rank();
     // Get the communicator of the mesh
-    OomphCommunicator *comm_pt = this->communicator_pt();
+    OomphCommunicator* comm_pt = this->communicator_pt();
 
     // ---------------------------------------------------------------
     // BEGIN: Get the elements adjacent to shared boundaries and give
@@ -16081,11 +16080,11 @@ namespace oomph
     // processor
     unsigned counter_nodes = 0;
     // Keep track of visited nodes
-    std::map<Node *, bool> done_node;
+    std::map<Node*, bool> done_node;
     // ... and its local node number
-    std::map<Node *, unsigned> local_node_number;
+    std::map<Node*, unsigned> local_node_number;
     // ... and the inverted relation from local node number to node_pt
-    Vector<Node *> local_node_pt;
+    Vector<Node*> local_node_pt;
 
     // Stores the j-th node name associated with the i-th local node
     // on shared boundaries in this processor (my_rank)
@@ -16121,7 +16120,7 @@ namespace oomph
         for (unsigned ishd = 0; ishd < n_shd_bnds_with_iproc; ishd++)
         {
           // Keep track of visited nodes with this shared boundary
-          std::map<Node *, bool> done_node_shd_bnd;
+          std::map<Node*, bool> done_node_shd_bnd;
           // The boundary id
           unsigned shd_bnd_id = bnd_shd_with_iproc[ishd];
           // Get the number of element on the shared boundary
@@ -16132,7 +16131,7 @@ namespace oomph
           for (unsigned e = 0; e < n_shd_bnd_ele; e++)
           {
             // Get the element
-            FiniteElement *ele_pt =
+            FiniteElement* ele_pt =
               this->shared_boundary_element_pt(shd_bnd_id, e);
 
             // Get the number of nodes on the element
@@ -16142,7 +16141,7 @@ namespace oomph
             for (unsigned n = 0; n < n_nodes; n++)
             {
               // Get the node
-              Node *node_pt = ele_pt->node_pt(n);
+              Node* node_pt = ele_pt->node_pt(n);
 
               // Has the node been visited with this shared boundary?
               // And, is this a node on the shd_bnd_id shared boundary
@@ -16171,7 +16170,7 @@ namespace oomph
                 for (unsigned k = 0; k < n_nodes_shd_bnd; k++)
                 {
                   // Get the k-th node on the shared boundary
-                  Node *shd_bnd_node_pt =
+                  Node* shd_bnd_node_pt =
                     sorted_shared_boundary_node_pt(shd_bnd_id, k);
 
                   // Is the same node?
@@ -17012,7 +17011,7 @@ namespace oomph
       // Get a pointer to the first name of the node found on this
       // processor (this ensures that the node lives on this
       // processor)
-      Node *node_pt = local_node_pt[i];
+      Node* node_pt = local_node_pt[i];
       // loop over the names of the i-th local node and add an entry
       // to the other_proc_shd_bnd_node_pt structure
       for (unsigned j = 0; j < n_names; j++)
@@ -17053,9 +17052,9 @@ namespace oomph
   // the info. is updated
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::send_boundary_node_info_of_shared_nodes(
-    Vector<Vector<Vector<unsigned>>> &global_node_names,
-    std::map<Vector<unsigned>, unsigned> &node_name_to_global_index,
-    Vector<Node *> &global_shared_node_pt)
+    Vector<Vector<Vector<unsigned>>>& global_node_names,
+    std::map<Vector<unsigned>, unsigned>& node_name_to_global_index,
+    Vector<Node*>& global_shared_node_pt)
   {
     // Get the rank and number of processors
     const unsigned nproc = this->communicator_pt()->nproc();
@@ -17069,11 +17068,11 @@ namespace oomph
 
     // Store the nodes on shared boundaries in this processor with other
     // processors
-    Vector<std::set<Node *>> node_on_shd_bnd_pt(nproc);
+    Vector<std::set<Node*>> node_on_shd_bnd_pt(nproc);
 
     // A map to get access to the global shared node number from the
     // node pointer
-    std::map<Node *, unsigned> node_pt_to_global_shd_bnd_index;
+    std::map<Node*, unsigned> node_pt_to_global_shd_bnd_index;
 
     // loop over the global nodes names and get only those in this
     // processor
@@ -17141,7 +17140,7 @@ namespace oomph
 #endif // #ifdef PARANOID
 
           // Get the node pointer
-          Node *node_pt = global_shared_node_pt[i];
+          Node* node_pt = global_shared_node_pt[i];
 
 #ifdef PARANOID
           if (node_pt == 0)
@@ -17213,7 +17212,7 @@ namespace oomph
 #endif // #ifdef PARANOID
 
           // Get the node pointer
-          Node *node_pt = global_shared_node_pt[i];
+          Node* node_pt = global_shared_node_pt[i];
 
 #ifdef PARANOID
           if (node_pt == 0)
@@ -17263,15 +17262,15 @@ namespace oomph
     for (unsigned iproc = 0; iproc < nproc; iproc++)
     {
       // Get the nodes added to be shared with the iproc processor
-      std::set<Node *> nodes_shared_pt = node_on_shd_bnd_pt[iproc];
+      std::set<Node*> nodes_shared_pt = node_on_shd_bnd_pt[iproc];
 
       // loop over the nodes
-      for (std::set<Node *>::iterator it = nodes_shared_pt.begin();
+      for (std::set<Node*>::iterator it = nodes_shared_pt.begin();
            it != nodes_shared_pt.end();
            it++)
       {
         // Get the node
-        Node *node_pt = (*it);
+        Node* node_pt = (*it);
         // Store the boundaries on which it is stored
         Vector<unsigned> on_original_boundaries;
         // For each boundary get the corresponding z value of the node
@@ -17301,7 +17300,7 @@ namespace oomph
         if (on_original_boundaries.size() > 0)
         {
           // Get the global shared node number
-          std::map<Node *, unsigned>::iterator it_index =
+          std::map<Node*, unsigned>::iterator it_index =
             node_pt_to_global_shd_bnd_index.find(node_pt);
 #ifdef PARANOID
           if (it_index == node_pt_to_global_shd_bnd_index.end())
@@ -17345,7 +17344,7 @@ namespace oomph
     // ---------------------------------------------------------
 
     // Get the communicator of the mesh
-    OomphCommunicator *comm_pt = this->communicator_pt();
+    OomphCommunicator* comm_pt = this->communicator_pt();
 
     // Set MPI info
     MPI_Status status;
@@ -17586,7 +17585,7 @@ namespace oomph
             flat_package_unsigned_receive[current_index_data++];
 
           // The pointer to the node
-          Node *node_pt = 0;
+          Node* node_pt = 0;
 
           // The number of original boundaries the node is associated
           // with
@@ -17652,12 +17651,12 @@ namespace oomph
   // ======================================================================
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::reset_halo_haloed_scheme_helper(
-    Vector<Vector<Vector<std::map<unsigned, Node *>>>>
-      &other_proc_shd_bnd_node_pt,
-    Vector<Vector<Node *>> &iproc_currently_created_nodes_pt,
-    Vector<Vector<Vector<unsigned>>> &global_node_names,
-    std::map<Vector<unsigned>, unsigned> &node_name_to_global_index,
-    Vector<Node *> &global_shared_node_pt)
+    Vector<Vector<Vector<std::map<unsigned, Node*>>>>&
+      other_proc_shd_bnd_node_pt,
+    Vector<Vector<Node*>>& iproc_currently_created_nodes_pt,
+    Vector<Vector<Vector<unsigned>>>& global_node_names,
+    std::map<Vector<unsigned>, unsigned>& node_name_to_global_index,
+    Vector<Node*>& global_shared_node_pt)
   {
     // Get the rank and number of processors
     const unsigned nproc = this->communicator_pt()->nproc();
@@ -17669,8 +17668,8 @@ namespace oomph
     //        shared node index (this index is the same as the global
     //        node name)
     // ---------------------------------------------------------------
-    std::map<Node *, bool> is_global_shared_node;
-    std::map<Node *, unsigned> global_shared_node_index;
+    std::map<Node*, bool> is_global_shared_node;
+    std::map<Node*, unsigned> global_shared_node_index;
 
     // Get the number of global shared nodes
     const unsigned n_global_shared_nodes = global_shared_node_pt.size();
@@ -17678,7 +17677,7 @@ namespace oomph
     for (unsigned i = 0; i < n_global_shared_nodes; i++)
     {
       // Get the node
-      Node *node_pt = global_shared_node_pt[i];
+      Node* node_pt = global_shared_node_pt[i];
       // Indicate this is a shared global node
       is_global_shared_node[node_pt] = true;
       // Set the map to obtain the index of the global shared node
@@ -17702,7 +17701,7 @@ namespace oomph
     // ---------------------------------------------------------------
 
     // Elements that may be sent to other processors
-    Vector<std::set<GeneralisedElement *>> additional_elements_pt(nproc);
+    Vector<std::set<GeneralisedElement*>> additional_elements_pt(nproc);
 
     // loop over the processors
     for (unsigned iproc = 0; iproc < nproc; iproc++)
@@ -17710,7 +17709,7 @@ namespace oomph
       if (iproc != my_rank)
       {
         // Get the haloed element with iproc
-        Vector<GeneralisedElement *> haloed_ele_pt =
+        Vector<GeneralisedElement*> haloed_ele_pt =
           this->root_haloed_element_pt(iproc);
 
         // Get the number of haloed elements
@@ -17720,16 +17719,16 @@ namespace oomph
         for (unsigned ihd = 0; ihd < n_haloed_ele; ihd++)
         {
           // A pointer to the generalised element
-          GeneralisedElement *gele_pt = haloed_ele_pt[ihd];
+          GeneralisedElement* gele_pt = haloed_ele_pt[ihd];
           // Get the finite element representation of the element
-          FiniteElement *ele_pt = dynamic_cast<FiniteElement *>(gele_pt);
+          FiniteElement* ele_pt = dynamic_cast<FiniteElement*>(gele_pt);
           // Get the number of nodes
           const unsigned n_nodes = ele_pt->nnode();
           // loop over the nodes of the element
           for (unsigned n = 0; n < n_nodes; n++)
           {
             // Get the node
-            Node *node_pt = ele_pt->node_pt(n);
+            Node* node_pt = ele_pt->node_pt(n);
             // Is the node a global shared node?
             if (is_global_shared_node[node_pt])
             {
@@ -17773,7 +17772,7 @@ namespace oomph
 
     // The elements from this (my_rank) processor that will be sent to
     // other processors
-    Vector<Vector<FiniteElement *>> send_haloed_ele_pt(nproc);
+    Vector<Vector<FiniteElement*>> send_haloed_ele_pt(nproc);
 
     // loop over the processors
     for (unsigned iproc = 0; iproc < nproc; iproc++)
@@ -17782,19 +17781,19 @@ namespace oomph
       {
         // Get the set of element that may be sent to the iproc
         // processor
-        std::set<GeneralisedElement *> iproc_ele_pt =
+        std::set<GeneralisedElement*> iproc_ele_pt =
           additional_elements_pt[iproc];
         // loop over the element that may be sent to the iproc
         // processor
-        for (std::set<GeneralisedElement *>::iterator it = iproc_ele_pt.begin();
+        for (std::set<GeneralisedElement*>::iterator it = iproc_ele_pt.begin();
              it != iproc_ele_pt.end();
              it++)
         {
           // Get a pointer to the element
-          GeneralisedElement *gele_pt = (*it);
+          GeneralisedElement* gele_pt = (*it);
 
           // Get the haloed element with iproc
-          Vector<GeneralisedElement *> haloed_ele_pt =
+          Vector<GeneralisedElement*> haloed_ele_pt =
             this->root_haloed_element_pt(iproc);
 
           // Get the number of haloed elements
@@ -17810,7 +17809,7 @@ namespace oomph
           for (unsigned ihd = 0; ihd < n_haloed_ele; ihd++)
           {
             // A pointer to the generalised element
-            GeneralisedElement *ghd_ele_pt = haloed_ele_pt[ihd];
+            GeneralisedElement* ghd_ele_pt = haloed_ele_pt[ihd];
             if (gele_pt == ghd_ele_pt)
             {
               // Mark the element as not required to be sent
@@ -17826,7 +17825,7 @@ namespace oomph
           if (send_ele_to_iproc_processor)
           {
             // Get the finite element representation of the element
-            FiniteElement *ele_pt = dynamic_cast<FiniteElement *>(gele_pt);
+            FiniteElement* ele_pt = dynamic_cast<FiniteElement*>(gele_pt);
             // Add the element to those that will be sent to the iproc
             // processor
             send_haloed_ele_pt[iproc].push_back(ele_pt);
@@ -17881,14 +17880,14 @@ namespace oomph
         for (unsigned e = 0; e < n_additional_haloed_ele; e++)
         {
           // Get pointer to the additional haloed element
-          FiniteElement *ele_pt = send_haloed_ele_pt[iproc][e];
+          FiniteElement* ele_pt = send_haloed_ele_pt[iproc][e];
           const unsigned nroot_haloed_ele = this->nroot_haloed_element(iproc);
 
           // Check if the element has been already added to the
           // halo(ed) scheme
 
           // Get the generalised version of the element
-          GeneralisedElement *gen_ele_pt = ele_pt;
+          GeneralisedElement* gen_ele_pt = ele_pt;
           // Try to add the haloed element
           const unsigned haloed_ele_index =
             this->try_to_add_root_haloed_element_pt(iproc, gen_ele_pt);
@@ -17910,7 +17909,7 @@ namespace oomph
             const unsigned nnodes = ele_pt->nnode();
             for (unsigned j = 0; j < nnodes; j++)
             {
-              Node *node_pt = ele_pt->node_pt(j);
+              Node* node_pt = ele_pt->node_pt(j);
 
               // Package the info. of the nodes
               // The destination processor goes in the arguments
@@ -17989,8 +17988,8 @@ namespace oomph
   //========================================================================
   template<class ELEMENT>
   void RefineableTriangleMesh<
-    ELEMENT>::get_required_elemental_information_helper(unsigned &iproc,
-                                                        FiniteElement *ele_pt)
+    ELEMENT>::get_required_elemental_information_helper(unsigned& iproc,
+                                                        FiniteElement* ele_pt)
   {
     // Check if the element is associated with the original boundaries
     const unsigned nbound = this->initial_shared_boundary_id();
@@ -18327,7 +18326,7 @@ namespace oomph
   //========================================================================
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::get_required_nodal_information_helper(
-    unsigned &iproc, Node *nod_pt)
+    unsigned& iproc, Node* nod_pt)
   {
     unsigned my_rank = this->communicator_pt()->my_rank();
     const unsigned nproc = this->communicator_pt()->nproc();
@@ -18490,7 +18489,7 @@ namespace oomph
       for (unsigned i = 0; i < n_nodes_on_shared_boundary; i++)
       {
         // Get the i-th node on the shared boundary
-        Node *shared_node_pt =
+        Node* shared_node_pt =
           sorted_shared_boundary_node_pt(shared_boundary_id, i);
         // Is the node we are looking for
         if (shared_node_pt == nod_pt)
@@ -18677,7 +18676,7 @@ namespace oomph
         for (unsigned i = 0; i < n_nodes_on_shd_bnd; i++)
         {
           // Get the i-th shared boundary node
-          Node *shared_node_pt = sorted_shared_boundary_node_pt(shd_bnd_id, i);
+          Node* shared_node_pt = sorted_shared_boundary_node_pt(shd_bnd_id, i);
           // Is the same node?
           if (shared_node_pt == nod_pt)
           {
@@ -18792,11 +18791,11 @@ namespace oomph
       // Is the Node algebraic?  If so, send its ref values and
       // an indication of its geometric objects if they are stored
       // in the algebraic mesh
-      AlgebraicNode *alg_nod_pt = dynamic_cast<AlgebraicNode *>(nod_pt);
+      AlgebraicNode* alg_nod_pt = dynamic_cast<AlgebraicNode*>(nod_pt);
       if (alg_nod_pt != 0)
       {
         // The external mesh should be algebraic
-        AlgebraicMesh *alg_mesh_pt = dynamic_cast<AlgebraicMesh *>(this);
+        AlgebraicMesh* alg_mesh_pt = dynamic_cast<AlgebraicMesh*>(this);
 
         // Get default node update function ID
         unsigned update_id = alg_nod_pt->node_update_fct_id();
@@ -18824,7 +18823,7 @@ namespace oomph
 #endif
         for (unsigned i_geom = 0; i_geom < n_geom_obj; i_geom++)
         {
-          GeomObject *geom_obj_pt = alg_nod_pt->geom_object_pt(i_geom);
+          GeomObject* geom_obj_pt = alg_nod_pt->geom_object_pt(i_geom);
 
           // Check this against the stored geometric objects in mesh
           unsigned n_geom_list = alg_mesh_pt->ngeom_object_list_pt();
@@ -18846,7 +18845,7 @@ namespace oomph
       } // (if alg_nod_pt!=0)
 
       // Is it a SolidNode?
-      SolidNode *solid_nod_pt = dynamic_cast<SolidNode *>(nod_pt);
+      SolidNode* solid_nod_pt = dynamic_cast<SolidNode*>(nod_pt);
       if (solid_nod_pt != 0)
       {
         unsigned n_solid_val = solid_nod_pt->variable_position_pt()->nvalue();
@@ -18899,8 +18898,8 @@ namespace oomph
   /// Helper to add external haloed node that is not a master
   //========================================================================
   template<class ELEMENT>
-  void RefineableTriangleMesh<ELEMENT>::add_haloed_node_helper(unsigned &iproc,
-                                                               Node *nod_pt)
+  void RefineableTriangleMesh<ELEMENT>::add_haloed_node_helper(unsigned& iproc,
+                                                               Node* nod_pt)
   {
     // Attempt to add this node as a haloed node
     const unsigned n_haloed_nod = this->nhaloed_node(iproc);
@@ -18952,10 +18951,10 @@ namespace oomph
   //======================================================================
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::send_and_receive_elements_nodes_info(
-    int &send_proc, int &recv_proc)
+    int& send_proc, int& recv_proc)
   {
     // Get the communicator of the mesh
-    OomphCommunicator *comm_pt = this->communicator_pt();
+    OomphCommunicator* comm_pt = this->communicator_pt();
 
     // Set MPI info
     MPI_Status status;
@@ -19108,13 +19107,13 @@ namespace oomph
   //=====================================================================
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::create_halo_element(
-    unsigned &iproc,
-    Vector<Node *> &new_nodes_on_domain,
-    Vector<Vector<Vector<std::map<unsigned, Node *>>>>
-      &other_proc_shd_bnd_node_pt,
-    Vector<Vector<Vector<unsigned>>> &global_node_names,
-    std::map<Vector<unsigned>, unsigned> &node_name_to_global_index,
-    Vector<Node *> &global_shared_node_pt)
+    unsigned& iproc,
+    Vector<Node*>& new_nodes_on_domain,
+    Vector<Vector<Vector<std::map<unsigned, Node*>>>>&
+      other_proc_shd_bnd_node_pt,
+    Vector<Vector<Vector<unsigned>>>& global_node_names,
+    std::map<Vector<unsigned>, unsigned>& node_name_to_global_index,
+    Vector<Node*>& global_shared_node_pt)
   {
 #ifdef ANNOTATE_REFINEABLE_TRIANGLE_MESH_COMMUNICATION
     oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds
@@ -19127,7 +19126,7 @@ namespace oomph
     {
       // Create a new element from the communicated values
       // and coords from the process that located zeta
-      GeneralisedElement *new_el_pt = new ELEMENT;
+      GeneralisedElement* new_el_pt = new ELEMENT;
 
       // Add the element, it is a new element in the mesh
       this->add_element_pt(new_el_pt);
@@ -19136,7 +19135,7 @@ namespace oomph
       this->add_root_halo_element_pt(iproc, new_el_pt);
 
       // Cast to the FE pointer
-      FiniteElement *f_el_pt = dynamic_cast<FiniteElement *>(new_el_pt);
+      FiniteElement* f_el_pt = dynamic_cast<FiniteElement*>(new_el_pt);
 
       // Check if new element is associated to any boundary
       this->add_halo_element_helper(iproc, f_el_pt);
@@ -19146,7 +19145,7 @@ namespace oomph
 
       for (unsigned j = 0; j < n_node; j++)
       {
-        Node *new_nod_pt = 0;
+        Node* new_nod_pt = 0;
 
         // Call the add halo node helper function
         add_halo_node_helper(new_nod_pt,
@@ -19174,7 +19173,7 @@ namespace oomph
         Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++];
 
       // Use this index to get the element
-      FiniteElement *f_el_pt = dynamic_cast<FiniteElement *>(
+      FiniteElement* f_el_pt = dynamic_cast<FiniteElement*>(
         this->root_halo_element_pt(iproc, halo_ele_index));
 
       // If it's not a finite element die
@@ -19196,7 +19195,7 @@ namespace oomph
   //======================================================================
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::add_halo_element_helper(
-    unsigned &iproc, FiniteElement *ele_pt)
+    unsigned& iproc, FiniteElement* ele_pt)
   {
 #ifdef ANNOTATE_REFINEABLE_TRIANGLE_MESH_COMMUNICATION
     oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds
@@ -19357,16 +19356,16 @@ namespace oomph
   //===============================================================
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::add_halo_node_helper(
-    Node *&new_nod_pt,
-    Vector<Node *> &new_nodes_on_domain,
-    Vector<Vector<Vector<std::map<unsigned, Node *>>>>
-      &other_proc_shd_bnd_node_pt,
-    unsigned &iproc,
-    unsigned &node_index,
-    FiniteElement *const &new_el_pt,
-    Vector<Vector<Vector<unsigned>>> &global_node_names,
-    std::map<Vector<unsigned>, unsigned> &node_name_to_global_index,
-    Vector<Node *> &global_shared_node_pt)
+    Node*& new_nod_pt,
+    Vector<Node*>& new_nodes_on_domain,
+    Vector<Vector<Vector<std::map<unsigned, Node*>>>>&
+      other_proc_shd_bnd_node_pt,
+    unsigned& iproc,
+    unsigned& node_index,
+    FiniteElement* const& new_el_pt,
+    Vector<Vector<Vector<unsigned>>>& global_node_names,
+    std::map<Vector<unsigned>, unsigned>& node_name_to_global_index,
+    Vector<Node*>& global_shared_node_pt)
   {
     // Given the node, received information about them from process
     // iproc, construct them on the current process
@@ -19413,16 +19412,16 @@ namespace oomph
   //========================================================================
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::construct_new_halo_node_helper(
-    Node *&new_nod_pt,
-    Vector<Node *> &new_nodes_on_domain,
-    Vector<Vector<Vector<std::map<unsigned, Node *>>>>
-      &other_proc_shd_bnd_node_pt,
-    unsigned &iproc,
-    unsigned &node_index,
-    FiniteElement *const &new_el_pt,
-    Vector<Vector<Vector<unsigned>>> &global_node_names,
-    std::map<Vector<unsigned>, unsigned> &node_name_to_global_index,
-    Vector<Node *> &global_shared_node_pt)
+    Node*& new_nod_pt,
+    Vector<Node*>& new_nodes_on_domain,
+    Vector<Vector<Vector<std::map<unsigned, Node*>>>>&
+      other_proc_shd_bnd_node_pt,
+    unsigned& iproc,
+    unsigned& node_index,
+    FiniteElement* const& new_el_pt,
+    Vector<Vector<Vector<unsigned>>>& global_node_names,
+    std::map<Vector<unsigned>, unsigned>& node_name_to_global_index,
+    Vector<Node*>& global_shared_node_pt)
   {
     // The first entry indicates the number of values at this new Node
     //(which may be different across the same element e.g. Lagrange
@@ -19436,7 +19435,7 @@ namespace oomph
     unsigned n_val = Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++];
 
     // Null TimeStepper for now
-    TimeStepper *time_stepper_pt = this->Time_stepper_pt;
+    TimeStepper* time_stepper_pt = this->Time_stepper_pt;
     // Default number of previous values to 1
     unsigned n_prev = time_stepper_pt->ntstorage();
 
@@ -19757,7 +19756,7 @@ namespace oomph
       const unsigned initial_shd_bnd_id = this->initial_shared_boundary_id();
 
       // Add the found nodes in the container
-      Vector<Node *> found_node_pt;
+      Vector<Node*> found_node_pt;
 
       // Now try to find the node in any of the other shared boundaries
       for (unsigned i = 0; i < n_shd_bnd_with_other_procs_have_node; i++)
@@ -19796,7 +19795,7 @@ namespace oomph
         {
           // Check if we can find the index of the node in that
           // other processor and shared boundary id
-          std::map<unsigned, Node *>::iterator it =
+          std::map<unsigned, Node*>::iterator it =
             other_proc_shd_bnd_node_pt[oproc1][oproc2][shd_bnd_id].find(index);
 
           // If the index exist then get the node pointer
@@ -19806,7 +19805,7 @@ namespace oomph
             // Mark the node as found
             found_node_in_other_shared_boundaries = true;
             // Get the node pointer
-            Node *tmp_node_pt = (*it).second;
+            Node* tmp_node_pt = (*it).second;
 
             // Push back the node pointer
             found_node_pt.push_back(tmp_node_pt);
@@ -19994,14 +19993,14 @@ namespace oomph
       } // if (!found_node_in_other_shared_boundaries)
 
       // Is the new constructed node Algebraic?
-      AlgebraicNode *new_alg_nod_pt = dynamic_cast<AlgebraicNode *>(new_nod_pt);
+      AlgebraicNode* new_alg_nod_pt = dynamic_cast<AlgebraicNode*>(new_nod_pt);
 
       // If it is algebraic, its node update functions will
       // not yet have been set up properly
       if (new_alg_nod_pt != 0)
       {
         // The AlgebraicMesh is the external mesh
-        AlgebraicMesh *alg_mesh_pt = dynamic_cast<AlgebraicMesh *>(this);
+        AlgebraicMesh* alg_mesh_pt = dynamic_cast<AlgebraicMesh*>(this);
 
         /// The first entry of All_alg_nodal_info contains
         /// the default node update id
@@ -20039,7 +20038,7 @@ namespace oomph
             Flat_packed_doubles[Counter_for_flat_packed_doubles++];
         }
 
-        Vector<GeomObject *> geom_object_pt;
+        Vector<GeomObject*> geom_object_pt;
         /// again we need the size of this vector as it varies
         /// between meshes; we also need some indication
         /// as to which geometric object should be used...
@@ -20098,19 +20097,19 @@ namespace oomph
       if (!found_node_in_other_shared_boundaries)
       {
         // Is the node a MacroElementNodeUpdateNode?
-        MacroElementNodeUpdateNode *macro_nod_pt =
-          dynamic_cast<MacroElementNodeUpdateNode *>(new_nod_pt);
+        MacroElementNodeUpdateNode* macro_nod_pt =
+          dynamic_cast<MacroElementNodeUpdateNode*>(new_nod_pt);
 
         if (macro_nod_pt != 0)
         {
           // Need to call set_node_update_info; this requires
           // a Vector<GeomObject*> (taken from the mesh)
-          Vector<GeomObject *> geom_object_vector_pt;
+          Vector<GeomObject*> geom_object_vector_pt;
 
           // Access the required geom objects from the
           // MacroElementNodeUpdateMesh
-          MacroElementNodeUpdateMesh *macro_mesh_pt =
-            dynamic_cast<MacroElementNodeUpdateMesh *>(this);
+          MacroElementNodeUpdateMesh* macro_mesh_pt =
+            dynamic_cast<MacroElementNodeUpdateMesh*>(this);
           geom_object_vector_pt = macro_mesh_pt->geom_object_vector_pt();
 
           // Get local coordinate of node in new element
@@ -20139,8 +20138,8 @@ namespace oomph
           // to set a map for these external values
 
           // Cast to a boundary node
-          BoundaryNodeBase *bnod_pt =
-            dynamic_cast<BoundaryNodeBase *>(new_nod_pt);
+          BoundaryNodeBase* bnod_pt =
+            dynamic_cast<BoundaryNodeBase*>(new_nod_pt);
 
           // Create storage, if it doesn't already exist, for the map
           // that will contain the position of the first entry of
@@ -20152,7 +20151,7 @@ namespace oomph
           }
 
           // Get pointer to the map
-          std::map<unsigned, unsigned> *map_pt =
+          std::map<unsigned, unsigned>* map_pt =
             bnod_pt->index_of_first_value_assigned_by_face_element_pt();
 
           // The id of the face to which this node belong in the bulk
@@ -20178,7 +20177,7 @@ namespace oomph
       } // if (!found_node_in_other_shared_boundaries)
 
       // Is the new node a SolidNode?
-      SolidNode *solid_nod_pt = dynamic_cast<SolidNode *>(new_nod_pt);
+      SolidNode* solid_nod_pt = dynamic_cast<SolidNode*>(new_nod_pt);
       if (solid_nod_pt != 0)
       {
         unsigned n_solid_val = solid_nod_pt->variable_position_pt()->nvalue();
@@ -20300,16 +20299,16 @@ namespace oomph
   //========================================================================
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::update_other_proc_shd_bnd_node_helper(
-    Node *&new_node_pt,
-    Vector<Vector<Vector<std::map<unsigned, Node *>>>>
-      &other_proc_shd_bnd_node_pt,
-    Vector<unsigned> &other_processor_1,
-    Vector<unsigned> &other_processor_2,
-    Vector<unsigned> &other_shared_boundaries,
-    Vector<unsigned> &other_indexes,
-    Vector<Vector<Vector<unsigned>>> &global_node_names,
-    std::map<Vector<unsigned>, unsigned> &node_name_to_global_index,
-    Vector<Node *> &global_shared_node_pt)
+    Node*& new_node_pt,
+    Vector<Vector<Vector<std::map<unsigned, Node*>>>>&
+      other_proc_shd_bnd_node_pt,
+    Vector<unsigned>& other_processor_1,
+    Vector<unsigned>& other_processor_2,
+    Vector<unsigned>& other_shared_boundaries,
+    Vector<unsigned>& other_indexes,
+    Vector<Vector<Vector<unsigned>>>& global_node_names,
+    std::map<Vector<unsigned>, unsigned>& node_name_to_global_index,
+    Vector<Node*>& global_shared_node_pt)
   {
     // Get the number of initial shared boundaries to correct the index
     // of the shared boundary
@@ -20449,7 +20448,7 @@ namespace oomph
   //======================================================================
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::load_balance(
-    const Vector<unsigned> &target_domain_for_local_non_halo_element)
+    const Vector<unsigned>& target_domain_for_local_non_halo_element)
   {
     oomph_info << "Load balance (unstructured mesh) [BEGIN]" << std::endl;
 
@@ -20520,7 +20519,7 @@ namespace oomph
 #endif
 
     // Backup pointers to elements in this mesh
-    Vector<FiniteElement *> backed_up_ele_pt(nelement_before_load_balance);
+    Vector<FiniteElement*> backed_up_ele_pt(nelement_before_load_balance);
     for (unsigned e = 0; e < nelement_before_load_balance; e++)
     {
       backed_up_ele_pt[e] = this->finite_element_pt(e);
@@ -20595,7 +20594,7 @@ namespace oomph
         for (unsigned ihd = 0; ihd < n_haloed_iproc; ihd++)
         {
           // Get the ihd-th haloed element with "iproc" processor
-          GeneralisedElement *haloed_ele_pt =
+          GeneralisedElement* haloed_ele_pt =
             this->root_haloed_element_pt(iproc, ihd);
 
           // The counter for the nonhalo elements
@@ -20604,7 +20603,7 @@ namespace oomph
           for (unsigned e = 0; e < nelement_before_load_balance; e++)
           {
             // Get the e-th element
-            GeneralisedElement *ele_pt = this->element_pt(e);
+            GeneralisedElement* ele_pt = this->element_pt(e);
             // Check if the element is a nonhalo element
             if (!ele_pt->is_halo())
             {
@@ -20831,9 +20830,9 @@ namespace oomph
     }
 
     // The finite element storage for the halo elements
-    Vector<Vector<FiniteElement *>> f_halo_element_pt(nproc);
+    Vector<Vector<FiniteElement*>> f_halo_element_pt(nproc);
     // The finite element storage for the haloed elements
-    Vector<Vector<FiniteElement *>> f_haloed_element_pt(nproc);
+    Vector<Vector<FiniteElement*>> f_haloed_element_pt(nproc);
     // Loop over the processors
     for (unsigned iproc = 0; iproc < nproc; iproc++)
     {
@@ -20843,7 +20842,7 @@ namespace oomph
         // Get the number of halo elements with the "iproc" processor
         const unsigned nhalo_ele_iproc = this->nroot_halo_element(iproc);
         // Get the halo elements with the "iproc" processor
-        Vector<GeneralisedElement *> halo_element_pt_iproc =
+        Vector<GeneralisedElement*> halo_element_pt_iproc =
           this->root_halo_element_pt(iproc);
         // Resize the finite element container
         f_halo_element_pt[iproc].resize(nhalo_ele_iproc);
@@ -20851,8 +20850,8 @@ namespace oomph
         for (unsigned ih = 0; ih < nhalo_ele_iproc; ih++)
         {
           // Get the finite element
-          FiniteElement *ele_pt =
-            dynamic_cast<FiniteElement *>(halo_element_pt_iproc[ih]);
+          FiniteElement* ele_pt =
+            dynamic_cast<FiniteElement*>(halo_element_pt_iproc[ih]);
           // Store the finite element version of the element
           f_halo_element_pt[iproc][ih] = ele_pt;
         } // for (ih < nhalo_ele_iproc)
@@ -20860,7 +20859,7 @@ namespace oomph
         // Get the number of haloed elements with the "iproc" processor
         const unsigned nhaloed_ele_iproc = this->nroot_haloed_element(iproc);
         // Get the haloed elements with the "iproc" processor
-        Vector<GeneralisedElement *> haloed_element_pt_iproc =
+        Vector<GeneralisedElement*> haloed_element_pt_iproc =
           this->root_haloed_element_pt(iproc);
         // Resize the finite element container
         f_haloed_element_pt[iproc].resize(nhaloed_ele_iproc);
@@ -20868,8 +20867,8 @@ namespace oomph
         for (unsigned ihd = 0; ihd < nhaloed_ele_iproc; ihd++)
         {
           // Get the finite element
-          FiniteElement *ele_pt =
-            dynamic_cast<FiniteElement *>(haloed_element_pt_iproc[ihd]);
+          FiniteElement* ele_pt =
+            dynamic_cast<FiniteElement*>(haloed_element_pt_iproc[ihd]);
           // Store the finite element version of the element
           f_haloed_element_pt[iproc][ihd] = ele_pt;
         } // for (ih < nhaloed_ele_iproc)
@@ -20909,11 +20908,11 @@ namespace oomph
     }
 
     // Store the elements that will be sent to other processors
-    Vector<Vector<FiniteElement *>> elements_to_send_pt(nproc);
+    Vector<Vector<FiniteElement*>> elements_to_send_pt(nproc);
 
     // Associate the nodes of each element with the processor the
     // element will live on
-    std::map<Data *, std::set<unsigned>>
+    std::map<Data*, std::set<unsigned>>
       processors_associated_with_data_before_load_balance;
 
     // Compute the elements that will be sent to other processor and
@@ -20922,7 +20921,7 @@ namespace oomph
     for (unsigned e = 0; e < nelement_before_load_balance; e++)
     {
       // Get the element
-      FiniteElement *ele_pt = this->finite_element_pt(e);
+      FiniteElement* ele_pt = this->finite_element_pt(e);
       // Only work with nonhalo elements
       if (!(ele_pt->is_halo()))
       {
@@ -20939,7 +20938,7 @@ namespace oomph
         for (unsigned j = 0; j < n_nodes; j++)
         {
           // Get each node of the element
-          Node *node_pt = ele_pt->node_pt(j);
+          Node* node_pt = ele_pt->node_pt(j);
           // ... and associate it with element domains
           processors_associated_with_data_before_load_balance[node_pt].insert(
             element_domain);
@@ -20962,7 +20961,7 @@ namespace oomph
         // Get the number of halo elements with the "iproc" processor
         const unsigned n_halo_ele_iproc = this->nroot_halo_element(iproc);
         // Get the halo elements with the "iproc" processor
-        Vector<GeneralisedElement *> halo_element_pt_iproc =
+        Vector<GeneralisedElement*> halo_element_pt_iproc =
           this->root_halo_element_pt(iproc);
         // Loop over the halo elements with iproc
         for (unsigned ih = 0; ih < n_halo_ele_iproc; ih++)
@@ -20971,8 +20970,8 @@ namespace oomph
           const unsigned element_domain = new_domains_halo_elements[iproc][ih];
 
           // Get the finite element
-          FiniteElement *ele_pt =
-            dynamic_cast<FiniteElement *>(halo_element_pt_iproc[ih]);
+          FiniteElement* ele_pt =
+            dynamic_cast<FiniteElement*>(halo_element_pt_iproc[ih]);
 
           // Get the number of nodes on the halo element
           const unsigned n_nodes = ele_pt->nnode();
@@ -20980,7 +20979,7 @@ namespace oomph
           for (unsigned j = 0; j < n_nodes; j++)
           {
             // Get each node of the halo element
-            Node *node_pt = ele_pt->node_pt(j);
+            Node* node_pt = ele_pt->node_pt(j);
 
             // ... and associate it with element domains
             processors_associated_with_data_before_load_balance[node_pt].insert(
@@ -21055,7 +21054,7 @@ namespace oomph
     // 5) If yes the element is a halo in the iproc processor whose
     // nonhalo counter part (haloed) lives in the domain assigned to the
     // element
-    Vector<Vector<Vector<FiniteElement *>>> new_local_halo_element_pt(nproc);
+    Vector<Vector<Vector<FiniteElement*>>> new_local_halo_element_pt(nproc);
 
     // Loop over the processors
     for (unsigned iproc = 0; iproc < nproc; iproc++)
@@ -21065,7 +21064,7 @@ namespace oomph
 
       // Boolean to know which elements have been already added to the
       // new local halo scheme in "iproc"
-      Vector<std::map<FiniteElement *, bool>> new_local_halo_already_added(
+      Vector<std::map<FiniteElement*, bool>> new_local_halo_already_added(
         nproc);
 
       // Go through all the elements and identify the new local halo
@@ -21074,7 +21073,7 @@ namespace oomph
       for (unsigned e = 0; e < nelement_before_load_balance; e++)
       {
         // Get the element
-        FiniteElement *ele_pt = this->finite_element_pt(e);
+        FiniteElement* ele_pt = this->finite_element_pt(e);
         // Only work with nonhalo elements
         if (!(ele_pt->is_halo()))
         {
@@ -21090,7 +21089,7 @@ namespace oomph
             // Loop over the nodes
             for (unsigned j = 0; j < nnodes; j++)
             {
-              Node *node_pt = ele_pt->node_pt(j);
+              Node* node_pt = ele_pt->node_pt(j);
               // Check if the node is associated with the current
               // "iproc" processor
               std::set<unsigned>::iterator it =
@@ -21159,7 +21158,7 @@ namespace oomph
           // Get the number of halo elements with the "jproc" processor
           const unsigned n_halo_ele_jproc = this->nroot_halo_element(jproc);
           // Get the halo elements with the "jproc" processor
-          Vector<GeneralisedElement *> halo_element_pt_jproc =
+          Vector<GeneralisedElement*> halo_element_pt_jproc =
             this->root_halo_element_pt(jproc);
           // ... and check if any of those elements is a new halo
           // element with the "iproc" processor
@@ -21200,15 +21199,15 @@ namespace oomph
             if (ele_domain != iproc)
             {
               // Get the finite element
-              FiniteElement *ele_pt =
-                dynamic_cast<FiniteElement *>(halo_element_pt_jproc[jh]);
+              FiniteElement* ele_pt =
+                dynamic_cast<FiniteElement*>(halo_element_pt_jproc[jh]);
               // Get the number of nodes on the halo element
               const unsigned nnodes = ele_pt->nnode();
               // Loop over the nodes
               for (unsigned j = 0; j < nnodes; j++)
               {
                 // Get each node of the halo element
-                Node *node_pt = ele_pt->node_pt(j);
+                Node* node_pt = ele_pt->node_pt(j);
 
                 // Check if the node is associated with the "iproc"
                 // processor
@@ -21291,7 +21290,7 @@ namespace oomph
 
     // Store the new local-shared boundary elements and the face indexes
     // The halo elements and halo face indexes
-    Vector<Vector<Vector<FiniteElement *>>>
+    Vector<Vector<Vector<FiniteElement*>>>
       new_local_halo_shared_boundary_element_pt(nproc);
     Vector<Vector<Vector<unsigned>>>
       new_local_halo_shared_boundary_element_face_index(nproc);
@@ -21363,14 +21362,14 @@ namespace oomph
     this->sort_nodes_on_shared_boundaries();
 
     // Store the received elements from each processor
-    Vector<Vector<FiniteElement *>> received_elements_pt(nproc);
+    Vector<Vector<FiniteElement*>> received_elements_pt(nproc);
 
     // The haloed elements and haloed face indexes, these store the
     // haloed elements received from "iproc" but that are haloed with
     // "jproc". The elements are received from "iproc" which was the
     // processor that computed the haloed relation of the "my_rank"
     // processor with "jproc"
-    Vector<Vector<Vector<FiniteElement *>>>
+    Vector<Vector<Vector<FiniteElement*>>>
       new_received_haloed_shared_boundary_element_pt(nproc);
     Vector<Vector<Vector<unsigned>>>
       new_received_haloed_shared_boundary_element_face_index(nproc);
@@ -21378,7 +21377,7 @@ namespace oomph
     // Container where to store the nodes on shared boundaries not
     // associated with the processor that receives the elements/nodes
     // other_proc_shd_bnd_node_pt[iproc][jproc][shd_bnd_id][index]
-    Vector<Vector<Vector<std::map<unsigned, Node *>>>>
+    Vector<Vector<Vector<std::map<unsigned, Node*>>>>
       other_proc_shd_bnd_node_pt(nproc);
     // Resize the container
     for (unsigned iproc = 0; iproc < nproc; iproc++)
@@ -21407,7 +21406,7 @@ namespace oomph
     std::map<Vector<unsigned>, unsigned> node_name_to_global_index;
 
     // Store the global shared nodes pointers
-    Vector<Node *> global_shared_node_pt;
+    Vector<Node*> global_shared_node_pt;
 
     // Compute all the names of the nodes and fill in the
     // "other_proc_shd_bnd_node_pt" structure with the nodes that live
@@ -21420,7 +21419,7 @@ namespace oomph
     // From the elements received from each processor, store the haloed
     // information of the element, it means, the processor with which it
     // is haloed and the haloed index with that processor
-    Vector<Vector<std::map<unsigned, FiniteElement *>>>
+    Vector<Vector<std::map<unsigned, FiniteElement*>>>
       received_old_haloed_element_pt(nproc);
     // [x][][] : The receiver processor (the original processor)
     // [][x][] : The processor with which the receiver processor has
@@ -21444,9 +21443,9 @@ namespace oomph
         // -----------------------------------------------------------
 
         // Keep track of the currently sent elements
-        Vector<FiniteElement *> currently_sent_elements;
+        Vector<FiniteElement*> currently_sent_elements;
         // Keep track of the currently sent nodes to the iproc processor
-        Vector<Node *> currently_sent_nodes;
+        Vector<Node*> currently_sent_nodes;
 
         // Clear send and receive buffers
         Flat_packed_unsigneds.clear();
@@ -21474,7 +21473,7 @@ namespace oomph
         for (unsigned e = 0; e < nelements_to_send; e++)
         {
           // Get the element to send
-          FiniteElement *send_ele_pt = elements_to_send_pt[iproc][e];
+          FiniteElement* send_ele_pt = elements_to_send_pt[iproc][e];
 
           // Get the current number of sent elements
           const unsigned ncurrently_sent_elements =
@@ -21503,7 +21502,7 @@ namespace oomph
             // Loop over the nodes in the element
             for (unsigned j = 0; j < nnodes; j++)
             {
-              Node *node_pt = send_ele_pt->node_pt(j);
+              Node* node_pt = send_ele_pt->node_pt(j);
 
               // Package the info. of the nodes
               add_node_load_balance_helper(iproc, // The destination process
@@ -21567,7 +21566,7 @@ namespace oomph
                e++)
           {
             // Get the shared boundary element
-            FiniteElement *shared_ele_pt =
+            FiniteElement* shared_ele_pt =
               new_local_halo_shared_boundary_element_pt[jproc][iproc][e];
 
             // Only consider the nonhalo elements since the halo
@@ -21584,7 +21583,7 @@ namespace oomph
               // Loop over the sent elements
               for (unsigned ics = 0; ics < ncurrently_sent_elements; ics++)
               {
-                FiniteElement *currently_sent_ele_pt =
+                FiniteElement* currently_sent_ele_pt =
                   currently_sent_elements[ics];
 
                 // Is this the element?
@@ -21655,7 +21654,7 @@ namespace oomph
                e++)
           {
             // Get the shared boundary element
-            FiniteElement *shared_ele_pt =
+            FiniteElement* shared_ele_pt =
               new_local_halo_shared_boundary_element_pt[jproc][iproc][e];
 
             // Only consider the nonhalo elements since the halo
@@ -21712,9 +21711,9 @@ namespace oomph
         // ----------------------------------------------------------
 
         // Keep track of the currently created elements
-        Vector<FiniteElement *> currently_created_elements;
+        Vector<FiniteElement*> currently_created_elements;
         // Keep track of the currently created nodes
-        Vector<Node *> currently_created_nodes;
+        Vector<Node*> currently_created_nodes;
 
         // Reset the counters
         Counter_for_flat_packed_doubles = 0;
@@ -21805,7 +21804,7 @@ namespace oomph
               Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++];
 
             // Get the element
-            FiniteElement *shared_ele_pt =
+            FiniteElement* shared_ele_pt =
               currently_created_elements[ele_index];
 
             // Add the element to the new received-haloed shared
@@ -21859,12 +21858,10 @@ namespace oomph
     // Store any additional elements that may create a shared boundary,
     // after sending elements from one to other processor check for any
     // new possible shared boundaries
-    Vector<Vector<FiniteElement *>> tmp_group1_shared_boundary_element_pt(
-      nproc);
+    Vector<Vector<FiniteElement*>> tmp_group1_shared_boundary_element_pt(nproc);
     Vector<Vector<unsigned>> tmp_group1_shared_boundary_element_face_index(
       nproc);
-    Vector<Vector<FiniteElement *>> tmp_group2_shared_boundary_element_pt(
-      nproc);
+    Vector<Vector<FiniteElement*>> tmp_group2_shared_boundary_element_pt(nproc);
     Vector<Vector<unsigned>> tmp_group2_shared_boundary_element_face_index(
       nproc);
 
@@ -21968,7 +21965,7 @@ namespace oomph
     // other processors)
     // 3) Shared boundary elements by intersection (already sorted)
 
-    Vector<Vector<FiniteElement *>> new_shared_boundary_element_pt(nproc);
+    Vector<Vector<FiniteElement*>> new_shared_boundary_element_pt(nproc);
     Vector<Vector<unsigned>> new_shared_boundary_element_face_index(nproc);
     for (unsigned iproc = 0; iproc < nproc; iproc++)
     {
@@ -21990,7 +21987,7 @@ namespace oomph
                  e++)
             {
               // Get the element
-              FiniteElement *ele_pt =
+              FiniteElement* ele_pt =
                 new_received_haloed_shared_boundary_element_pt[jproc][iproc][e];
               // Get the face index
               const unsigned face_index =
@@ -22017,7 +22014,7 @@ namespace oomph
              e++)
         {
           // Get the element
-          FiniteElement *ele_pt =
+          FiniteElement* ele_pt =
             new_local_halo_shared_boundary_element_pt[iproc][my_rank][e];
           // Get the face index
           const unsigned face_index =
@@ -22043,7 +22040,7 @@ namespace oomph
         for (unsigned e = 0; e < ntmp_group1_shared_bound_ele_iproc; e++)
         {
           // Get the element
-          FiniteElement *ele_pt =
+          FiniteElement* ele_pt =
             tmp_group1_shared_boundary_element_pt[iproc][e];
           // Get the face index
           const unsigned face_index =
@@ -22071,7 +22068,7 @@ namespace oomph
              e++)
         {
           // Get the element
-          FiniteElement *ele_pt =
+          FiniteElement* ele_pt =
             new_local_halo_shared_boundary_element_pt[iproc][my_rank][e];
           // Get the face index
           const unsigned face_index =
@@ -22104,7 +22101,7 @@ namespace oomph
                  e++)
             {
               // Get the element
-              FiniteElement *ele_pt =
+              FiniteElement* ele_pt =
                 new_received_haloed_shared_boundary_element_pt[jproc][iproc][e];
               // Get the face index
               const unsigned face_index =
@@ -22130,7 +22127,7 @@ namespace oomph
         for (unsigned e = 0; e < ntmp_group2_shared_bound_ele_iproc; e++)
         {
           // Get the element
-          FiniteElement *ele_pt =
+          FiniteElement* ele_pt =
             tmp_group2_shared_boundary_element_pt[iproc][e];
           // Get the face index
           const unsigned face_index =
@@ -22185,7 +22182,7 @@ namespace oomph
     // Try to use as much information as possible
 
     // Storage for the elements in the processor
-    std::set<FiniteElement *> element_in_processor_pt;
+    std::set<FiniteElement*> element_in_processor_pt;
 
     // Loop over the old elements, those before sending/received
     // elements to/from other processors
@@ -22193,7 +22190,7 @@ namespace oomph
     for (unsigned e = 0; e < nelement_before_load_balance; e++)
     {
       // Get the element
-      FiniteElement *ele_pt = backed_up_ele_pt[e];
+      FiniteElement* ele_pt = backed_up_ele_pt[e];
       // Only work with nonhalo elements
       if (!(ele_pt->is_halo()))
       {
@@ -22221,7 +22218,7 @@ namespace oomph
         for (unsigned ie = 0; ie < n_received_ele; ie++)
         {
           // Get the ie-th received element from processor iproc
-          FiniteElement *ele_pt = received_elements_pt[iproc][ie];
+          FiniteElement* ele_pt = received_elements_pt[iproc][ie];
 
           // Include it in the set of elements in the processor
           element_in_processor_pt.insert(ele_pt);
@@ -22305,13 +22302,13 @@ namespace oomph
     this->External_haloed_element_pt.clear();
 
     // Keep track of the deleted elements
-    Vector<FiniteElement *> deleted_elements;
+    Vector<FiniteElement*> deleted_elements;
 
     // Delete the elements that no longer belong to the processor
     unsigned nh_count7 = 0;
     for (unsigned e = 0; e < nelement_before_load_balance; e++)
     {
-      FiniteElement *ele_pt = backed_up_ele_pt[e];
+      FiniteElement* ele_pt = backed_up_ele_pt[e];
       // Only work with nonhalo elements
       if (!(ele_pt->is_halo()))
       {
@@ -22361,7 +22358,7 @@ namespace oomph
         for (unsigned ie = 0; ie < nreceived_ele; ie++)
         {
           // Get the element and add it to the mesh
-          FiniteElement *ele_pt = received_elements_pt[iproc][ie];
+          FiniteElement* ele_pt = received_elements_pt[iproc][ie];
           // Add the element to the mesh
           this->add_element_pt(ele_pt);
           // Get the number of nodes on the element
@@ -22499,7 +22496,7 @@ namespace oomph
         this->flush_boundary_segment_node(b);
 
         // Dummy vector of nodes on segments
-        Vector<Vector<Node *>> dummy_segment_node_pt;
+        Vector<Vector<Node*>> dummy_segment_node_pt;
 
         // Compute the new number of segments in the boundary
         get_boundary_segment_nodes_helper(b, dummy_segment_node_pt);
@@ -22550,12 +22547,12 @@ namespace oomph
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::
     get_shared_boundary_elements_and_face_indexes(
-      const Vector<FiniteElement *> &first_element_pt,
-      const Vector<FiniteElement *> &second_element_pt,
-      Vector<FiniteElement *> &first_shared_boundary_element_pt,
-      Vector<unsigned> &first_shared_boundary_element_face_index,
-      Vector<FiniteElement *> &second_shared_boundary_element_pt,
-      Vector<unsigned> &second_shared_boundary_element_face_index)
+      const Vector<FiniteElement*>& first_element_pt,
+      const Vector<FiniteElement*>& second_element_pt,
+      Vector<FiniteElement*>& first_shared_boundary_element_pt,
+      Vector<unsigned>& first_shared_boundary_element_face_index,
+      Vector<FiniteElement*>& second_shared_boundary_element_pt,
+      Vector<unsigned>& second_shared_boundary_element_face_index)
   {
     // 1) Compare their faces (nodes) and if they match then they are
     //    part of a shared boundary
@@ -22568,7 +22565,7 @@ namespace oomph
     for (unsigned ef = 0; ef < nfirst_element; ef++)
     {
       // Get the element
-      FiniteElement *fele_pt = first_element_pt[ef];
+      FiniteElement* fele_pt = first_element_pt[ef];
       // Check if the element is halo
       bool first_ele_is_halo = false;
       if (fele_pt->is_halo())
@@ -22578,7 +22575,7 @@ namespace oomph
       // Get each of the faces
       for (unsigned ifface = 0; ifface < 3; ifface++)
       {
-        Vector<Node *> first_face(2);
+        Vector<Node*> first_face(2);
         if (ifface == 0)
         {
           first_face[0] = fele_pt->node_pt(1);
@@ -22604,7 +22601,7 @@ namespace oomph
         for (unsigned es = 0; es < nsecond_element; es++)
         {
           // Get the element
-          FiniteElement *sele_pt = second_element_pt[es];
+          FiniteElement* sele_pt = second_element_pt[es];
           // Check if the element is halo
           bool second_ele_is_halo = false;
           if (sele_pt->is_halo())
@@ -22621,7 +22618,7 @@ namespace oomph
             // Get each of the faces
             for (unsigned isface = 0; isface < 3; isface++)
             {
-              Vector<Node *> second_face(2);
+              Vector<Node*> second_face(2);
               if (isface == 0)
               {
                 second_face[0] = sele_pt->node_pt(1);
@@ -22702,9 +22699,9 @@ namespace oomph
   //======================================================================
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::create_new_shared_boundaries(
-    std::set<FiniteElement *> &element_in_processor_pt,
-    Vector<Vector<FiniteElement *>> &new_shared_boundary_element_pt,
-    Vector<Vector<unsigned>> &new_shared_boundary_element_face_index)
+    std::set<FiniteElement*>& element_in_processor_pt,
+    Vector<Vector<FiniteElement*>>& new_shared_boundary_element_pt,
+    Vector<Vector<unsigned>>& new_shared_boundary_element_face_index)
   {
     // Get the number of processors
     const unsigned nproc = this->communicator_pt()->nproc();
@@ -22726,22 +22723,22 @@ namespace oomph
     }
 
     // Face elements that create the shared boundaries (unsorted)
-    Vector<Vector<FiniteElement *>> tmp_unsorted_face_ele_pt(nproc);
+    Vector<Vector<FiniteElement*>> tmp_unsorted_face_ele_pt(nproc);
     // The elements from where the face element was created
-    Vector<Vector<FiniteElement *>> tmp_unsorted_ele_pt(nproc);
+    Vector<Vector<FiniteElement*>> tmp_unsorted_ele_pt(nproc);
     // The face index of the bulk element from where was created the
     // face element
     Vector<Vector<int>> tmp_unsorted_face_index_ele(nproc);
 
     // Store the current edges lying on boundaries (this will help for
     // any edge of a shared boundary lying on an internal boundary)
-    std::map<std::pair<Node *, Node *>, unsigned> elements_edges_on_boundary;
+    std::map<std::pair<Node*, Node*>, unsigned> elements_edges_on_boundary;
 
     // Compute the edges on the other boundaries
     this->get_element_edges_on_boundary(elements_edges_on_boundary);
 
     // Mark those edges (pair of nodes overlapped by a shared boundary)
-    std::map<std::pair<Node *, Node *>, bool> overlapped_edge;
+    std::map<std::pair<Node*, Node*>, bool> overlapped_edge;
 
     // Associate every found edge (face element) on the shared boundary
     // with an original boundary only if the edge (face element) lies
@@ -22763,7 +22760,7 @@ namespace oomph
 
         // Avoid to create repeated face elements, compare the nodes on
         // the edges of the face elements
-        Vector<std::pair<Node *, Node *>> done_faces;
+        Vector<std::pair<Node*, Node*>> done_faces;
 
         // Count the number of repeated faces
         unsigned nrepeated_faces = 0;
@@ -22773,7 +22770,7 @@ namespace oomph
         for (unsigned iele = 0; iele < n_shared_bound_ele; iele++)
         {
           // Get the bulk element
-          FiniteElement *bulk_ele_pt =
+          FiniteElement* bulk_ele_pt =
             new_shared_boundary_element_pt[iproc][iele];
 
           // Get the face index
@@ -22781,7 +22778,7 @@ namespace oomph
             new_shared_boundary_element_face_index[iproc][iele]);
 
           // Create the face element
-          FiniteElement *tmp_ele_pt =
+          FiniteElement* tmp_ele_pt =
             new DummyFaceElement<ELEMENT>(bulk_ele_pt, face_index);
 
           // Before adding the face element to the vector check that is
@@ -22791,16 +22788,16 @@ namespace oomph
           // Get the number of nodes on the face element and get the first
           // and last node
           const unsigned nnode_face_ele = tmp_ele_pt->nnode();
-          Node *first_face_node_pt = tmp_ele_pt->node_pt(0);
-          Node *last_face_node_pt = tmp_ele_pt->node_pt(nnode_face_ele - 1);
+          Node* first_face_node_pt = tmp_ele_pt->node_pt(0);
+          Node* last_face_node_pt = tmp_ele_pt->node_pt(nnode_face_ele - 1);
 
           // Get the number of already done face elements
           const unsigned ndone_faces = done_faces.size();
           // Loop over the already visited face elements
           for (unsigned n = 0; n < ndone_faces; n++)
           {
-            Node *first_done_face_node_pt = done_faces[n].first;
-            Node *second_done_face_node_pt = done_faces[n].second;
+            Node* first_done_face_node_pt = done_faces[n].first;
+            Node* second_done_face_node_pt = done_faces[n].second;
             if (first_face_node_pt == first_done_face_node_pt &&
                 last_face_node_pt == second_done_face_node_pt)
             {
@@ -22829,7 +22826,7 @@ namespace oomph
             // Add the face index to the vector
             tmp_unsorted_face_index_ele[iproc].push_back(face_index);
             // Include the nodes in the done nodes vector
-            std::pair<Node *, Node *> tmp_edge =
+            std::pair<Node*, Node*> tmp_edge =
               std::make_pair(first_face_node_pt, last_face_node_pt);
             // Push the edge
             done_faces.push_back(tmp_edge);
@@ -22837,7 +22834,7 @@ namespace oomph
             // Associate the face element with a boundary (if that is
             // the case)
             int edge_boundary_id = -1;
-            std::map<std::pair<Node *, Node *>, unsigned>::iterator it;
+            std::map<std::pair<Node*, Node*>, unsigned>::iterator it;
             it = elements_edges_on_boundary.find(tmp_edge);
             // If the edges lie on a boundary then get the boundary id
             // on which the edges lie
@@ -22849,7 +22846,7 @@ namespace oomph
               // Mark the edge as overlapped
               overlapped_edge[tmp_edge] = true;
               // Also include the reversed version of the edge
-              std::pair<Node *, Node *> rev_tmp_edge =
+              std::pair<Node*, Node*> rev_tmp_edge =
                 std::make_pair(last_face_node_pt, first_face_node_pt);
               // Mark the reversed version of the edge as overlapped
               overlapped_edge[rev_tmp_edge] = true;
@@ -22857,7 +22854,7 @@ namespace oomph
             else
             {
               // Look for the reversed version
-              std::pair<Node *, Node *> rtmp_edge =
+              std::pair<Node*, Node*> rtmp_edge =
                 std::make_pair(last_face_node_pt, first_face_node_pt);
               it = elements_edges_on_boundary.find(rtmp_edge);
               if (it != elements_edges_on_boundary.end())
@@ -22927,9 +22924,9 @@ namespace oomph
     // from the face element with the bottom-left node coordinate
 
     // Face elements that create the shared boundaries (unsorted)
-    Vector<Vector<FiniteElement *>> unsorted_face_ele_pt(nproc);
+    Vector<Vector<FiniteElement*>> unsorted_face_ele_pt(nproc);
     // The elements from where the face element was created
-    Vector<Vector<FiniteElement *>> unsorted_ele_pt(nproc);
+    Vector<Vector<FiniteElement*>> unsorted_ele_pt(nproc);
     // The face index of the bulk element from where was created the
     // face element
     Vector<Vector<int>> unsorted_face_index_ele(nproc);
@@ -22971,13 +22968,13 @@ namespace oomph
         for (unsigned e = 0; e < n_face_ele; e++)
         {
           // Get the face element
-          FiniteElement *face_ele_pt = tmp_unsorted_face_ele_pt[iproc][e];
+          FiniteElement* face_ele_pt = tmp_unsorted_face_ele_pt[iproc][e];
           // Get the number of nodes of the face element
           const unsigned n_node = face_ele_pt->nnode();
           Vector<double> bottom_left(2);
           // Assign as the bottom-left node the first node
           // Get the node
-          Node *node_pt = face_ele_pt->node_pt(0);
+          Node* node_pt = face_ele_pt->node_pt(0);
           bottom_left[0] = node_pt->x(0);
           bottom_left[1] = node_pt->x(1);
           // Set as not treat as inverted element
@@ -22987,7 +22984,7 @@ namespace oomph
           for (unsigned n = 1; n < n_node; n++)
           {
             // Get the node
-            Node *node_pt = face_ele_pt->node_pt(n);
+            Node* node_pt = face_ele_pt->node_pt(n);
             if (node_pt->x(1) < bottom_left[1])
             {
               bottom_left[0] = node_pt->x(0);
@@ -23161,7 +23158,7 @@ namespace oomph
     }
 
     // Stores the global-degree of each node
-    std::map<Node *, unsigned> global_node_degree;
+    std::map<Node*, unsigned> global_node_degree;
 
     // Get the global degree (valency) of each node
     compute_shared_node_degree_helper(unsorted_face_ele_pt, global_node_degree);
@@ -23197,17 +23194,17 @@ namespace oomph
 
     // Mark the nodes on original boundaries not overlapped by shared
     // boundaries
-    std::map<unsigned, std::map<Node *, bool>>
+    std::map<unsigned, std::map<Node*, bool>>
       node_on_bnd_not_overlapped_by_shd_bnd;
 
     // Loop over the edges of the original boundaries
-    for (std::map<std::pair<Node *, Node *>, unsigned>::iterator it_map =
+    for (std::map<std::pair<Node*, Node*>, unsigned>::iterator it_map =
            elements_edges_on_boundary.begin();
          it_map != elements_edges_on_boundary.end();
          it_map++)
     {
       // Get the edge
-      std::pair<Node *, Node *> edge_pair = (*it_map).first;
+      std::pair<Node*, Node*> edge_pair = (*it_map).first;
       // Is the edge overlaped by a shared boundary
       if (!overlapped_edge[edge_pair])
       {
@@ -23216,11 +23213,11 @@ namespace oomph
         unsigned b = (*it_map).second;
 
         // Get the left node
-        Node *left_node_pt = edge_pair.first;
+        Node* left_node_pt = edge_pair.first;
         node_on_bnd_not_overlapped_by_shd_bnd[b][left_node_pt] = true;
 
         // Get the right node
-        Node *right_node_pt = edge_pair.second;
+        Node* right_node_pt = edge_pair.second;
         node_on_bnd_not_overlapped_by_shd_bnd[b][right_node_pt] = true;
 
       } // if (!overlapped_edge[edge_pair])
@@ -23264,10 +23261,10 @@ namespace oomph
     }
 
     // Face elements that create the shared boundaries (sorted)
-    Vector<Vector<Vector<FiniteElement *>>> sorted_face_ele_pt(nproc);
+    Vector<Vector<Vector<FiniteElement*>>> sorted_face_ele_pt(nproc);
 
     // Bulk elements that create the shared boundaries (sorted)
-    Vector<Vector<Vector<FiniteElement *>>> sorted_ele_pt(nproc);
+    Vector<Vector<Vector<FiniteElement*>>> sorted_ele_pt(nproc);
 
     // Face indexes of the bulk elements that create the shared
     // boundaries (sorted)
@@ -23290,7 +23287,7 @@ namespace oomph
 
     // Map that associates the local shared boundary id with the list of
     // nodes that create it
-    std::map<unsigned, std::list<Node *>>
+    std::map<unsigned, std::list<Node*>>
       local_shd_bnd_id_to_sorted_list_node_pt;
 
     // Local shared bouonday id (used to locally identify the lists of
@@ -23301,10 +23298,10 @@ namespace oomph
     // Sort the face elements, using the nodes at its ends
 
     // Mark the done elements
-    std::map<FiniteElement *, bool> done_ele;
+    std::map<FiniteElement*, bool> done_ele;
 
     // Mark the inverted elements
-    std::map<FiniteElement *, bool> is_inverted;
+    std::map<FiniteElement*, bool> is_inverted;
 
     // Sort the face elements to get the number of shared boundaries
     // with in each processor
@@ -23336,10 +23333,10 @@ namespace oomph
           unsigned root_index = 0;
 
           // List that contains the sorted face elements
-          std::list<FiniteElement *> tmp_sorted_face_ele_pt;
+          std::list<FiniteElement*> tmp_sorted_face_ele_pt;
 
           // List that contains the sorted elements
-          std::list<FiniteElement *> tmp_sorted_ele_pt;
+          std::list<FiniteElement*> tmp_sorted_ele_pt;
 
           // List that contains the sorted face indexes of the bulk
           // elements
@@ -23348,13 +23345,13 @@ namespace oomph
           // Storing for the sorting nodes extracted from the face
           // elements. The sorted nodes are used to identify connections
           // among new shared boundaries or original boundaries
-          std::list<Node *> tmp_sorted_nodes_pt;
+          std::list<Node*> tmp_sorted_nodes_pt;
           // Clear the storage (just in case)
           tmp_sorted_nodes_pt.clear();
 
           // The initial and final nodes
-          Node *initial_node_pt = 0;
-          Node *final_node_pt = 0;
+          Node* initial_node_pt = 0;
+          Node* final_node_pt = 0;
 
           // Store the original boundary id related with the root face
           // element (if there is one)
@@ -23365,7 +23362,7 @@ namespace oomph
           for (unsigned e = 0; e < nunsorted_face_ele; e++)
           {
             // Get a root element
-            FiniteElement *root_ele_pt = unsorted_face_ele_pt[iproc][e];
+            FiniteElement* root_ele_pt = unsorted_face_ele_pt[iproc][e];
             // Is the element already done?
             if (!done_ele[root_ele_pt])
             {
@@ -23564,7 +23561,7 @@ namespace oomph
               element_added_to_the_right = false;
 
               // Get the "e"-th element on the vector
-              FiniteElement *tmp_ele_pt = unsorted_face_ele_pt[iproc][e];
+              FiniteElement* tmp_ele_pt = unsorted_face_ele_pt[iproc][e];
               // Get the boundary id associated with the edge (if any)
               const int edge_bound_id = edge_boundary[iproc][e];
               // Check if the element has been already sorted and the
@@ -23577,8 +23574,8 @@ namespace oomph
                 const unsigned nnodes = tmp_ele_pt->nnode();
                 // Get the first and last node of the element
                 // Check if the face element should be treated as inverted
-                Node *first_node_pt = 0;
-                Node *last_node_pt = 0;
+                Node* first_node_pt = 0;
+                Node* last_node_pt = 0;
                 if (!treat_as_inverted[iproc][e])
                 {
                   first_node_pt = tmp_ele_pt->node_pt(0);
@@ -23593,7 +23590,7 @@ namespace oomph
                 // A pointer to the node at the left or right of the
                 // just added element, the most left or the most right
                 // node
-                Node *new_added_node_pt = 0;
+                Node* new_added_node_pt = 0;
 
                 // Check if the element goes to the left
                 if (initial_node_pt == last_node_pt && !connection_to_the_left)
@@ -23830,9 +23827,9 @@ namespace oomph
           // shared boundary may be creating
 
           // The vector of the elements
-          Vector<FiniteElement *> tmp_vector_sorted_ele_pt;
+          Vector<FiniteElement*> tmp_vector_sorted_ele_pt;
           // Store the list of elements on a vector of elements
-          for (std::list<FiniteElement *>::iterator it =
+          for (std::list<FiniteElement*>::iterator it =
                  tmp_sorted_ele_pt.begin();
                it != tmp_sorted_ele_pt.end();
                it++)
@@ -23841,10 +23838,10 @@ namespace oomph
           }
 
           // The vector of the face elements
-          Vector<FiniteElement *> tmp_vector_sorted_face_ele_pt;
+          Vector<FiniteElement*> tmp_vector_sorted_face_ele_pt;
           // Store the list of face elements on a vector of face
           // elements
-          for (std::list<FiniteElement *>::iterator it =
+          for (std::list<FiniteElement*>::iterator it =
                  tmp_sorted_face_ele_pt.begin();
                it != tmp_sorted_face_ele_pt.end();
                it++)
@@ -23863,13 +23860,13 @@ namespace oomph
           }
 
           // Store the nodes for the new shared polylines without loops
-          Vector<std::list<Node *>> final_sorted_nodes_pt;
+          Vector<std::list<Node*>> final_sorted_nodes_pt;
           // Store the boundary elements of the shared polyline without
           // loops
-          Vector<Vector<FiniteElement *>> final_boundary_element_pt;
+          Vector<Vector<FiniteElement*>> final_boundary_element_pt;
           // Store the boundary face elements of the shared polyline
           // without loops
-          Vector<Vector<FiniteElement *>> final_boundary_face_element_pt;
+          Vector<Vector<FiniteElement*>> final_boundary_face_element_pt;
           // Face indexes of the boundary elements without loops
           Vector<Vector<int>> final_face_index_element;
           // Connection flags (to the left) of the shared boundaries
@@ -24009,7 +24006,7 @@ namespace oomph
     const unsigned root_processor = 0;
 
     // Get the communicator of the mesh
-    OomphCommunicator *comm_pt = this->communicator_pt();
+    OomphCommunicator* comm_pt = this->communicator_pt();
 
     // Container where to store the info. received from other processor
     // in root. It receives from all processors the number of shared
@@ -24333,7 +24330,7 @@ namespace oomph
 
     // Storage for the new created polylines between the current
     // processor (my_rank) and the other processors, unsorted polylines
-    Vector<TriangleMeshPolyLine *> unsorted_polylines_pt;
+    Vector<TriangleMeshPolyLine*> unsorted_polylines_pt;
 
     // Map to get the global shared boundary id from the local shared
     // boundary id. Note that this is only used to get the global shared
@@ -24412,12 +24409,12 @@ namespace oomph
             // from the nodes on the face elements -- it is actually a
             // sub-set -- since the polyline is created from the first and
             // last nodes on the face elements)
-            Vector<Node *> node_pt_to_create_shared_polyline;
+            Vector<Node*> node_pt_to_create_shared_polyline;
 
             // Add the first node for the very first face element. In
             // the loop we will only add the last node of the face
             // element
-            FiniteElement *first_face_ele_pt =
+            FiniteElement* first_face_ele_pt =
               sorted_face_ele_pt[ref_proc][counter][0];
 
             // Get the number of nodes on the first face element
@@ -24425,7 +24422,7 @@ namespace oomph
             if (!is_inverted[first_face_ele_pt])
             {
               // Get the first node
-              Node *first_node_pt = first_face_ele_pt->node_pt(0);
+              Node* first_node_pt = first_face_ele_pt->node_pt(0);
               // Add the node to create the polyline
               node_pt_to_create_shared_polyline.push_back(first_node_pt);
               // Add the first node to the shared boundary
@@ -24434,7 +24431,7 @@ namespace oomph
             else
             {
               // Get the first node in the inverted face element
-              Node *first_node_pt =
+              Node* first_node_pt =
                 first_face_ele_pt->node_pt(first_face_ele_nnodes - 1);
               // Add the node to create the polyline
               node_pt_to_create_shared_polyline.push_back(first_node_pt);
@@ -24455,7 +24452,7 @@ namespace oomph
             for (unsigned ie = 0; ie < nshared_boundary_elements; ie++)
             {
               // Get the bulk element version of the face element
-              FiniteElement *bulk_ele_pt = sorted_ele_pt[ref_proc][counter][ie];
+              FiniteElement* bulk_ele_pt = sorted_ele_pt[ref_proc][counter][ie];
 
               // Add the shared boundary element and associate it to the
               // "shd_bnd_id"
@@ -24471,7 +24468,7 @@ namespace oomph
               this->add_face_index_at_shared_boundary(shd_bnd_id, face_index);
 
               // Get the face element to obtain the last node
-              FiniteElement *face_ele_pt =
+              FiniteElement* face_ele_pt =
                 sorted_face_ele_pt[ref_proc][counter][ie];
 
               // Get the number of nodes
@@ -24483,7 +24480,7 @@ namespace oomph
                 for (unsigned n = 1; n < nnodes; n++)
                 {
                   // Get the node to be added
-                  Node *node_pt = face_ele_pt->node_pt(n);
+                  Node* node_pt = face_ele_pt->node_pt(n);
                   // Add the node and associate it to the shared boundary
                   this->add_shared_boundary_node(shd_bnd_id, node_pt);
                 } // for (n < nnodes)
@@ -24491,7 +24488,7 @@ namespace oomph
                 // Add the last node of the face element to the vector of
                 // nodes to create the polyline
                 // Get the last node
-                Node *last_node_pt = face_ele_pt->node_pt(nnodes - 1);
+                Node* last_node_pt = face_ele_pt->node_pt(nnodes - 1);
                 node_pt_to_create_shared_polyline.push_back(last_node_pt);
               } // if (!is_inverted[face_ele_pt])
               else
@@ -24501,7 +24498,7 @@ namespace oomph
                 for (int n = nnodes - 2; n >= 0; n--)
                 {
                   // Get the node to be added
-                  Node *node_pt = face_ele_pt->node_pt(n);
+                  Node* node_pt = face_ele_pt->node_pt(n);
                   // Add the node and associate it to the shared boundary
                   this->add_shared_boundary_node(shd_bnd_id, node_pt);
                 } // for (n < nnodes)
@@ -24509,7 +24506,7 @@ namespace oomph
                 // Add the last node of the face element to the vector of
                 // nodes to create the polyline
                 // Get the last node
-                Node *last_node_pt = face_ele_pt->node_pt(0);
+                Node* last_node_pt = face_ele_pt->node_pt(0);
                 node_pt_to_create_shared_polyline.push_back(last_node_pt);
 
               } // else if (!is_inverted[face_ele_pt])
@@ -24526,14 +24523,14 @@ namespace oomph
             {
               vertices[n].resize(2);
               // Get the node
-              Node *tmp_node_pt = node_pt_to_create_shared_polyline[n];
+              Node* tmp_node_pt = node_pt_to_create_shared_polyline[n];
               // Get the vertices
               vertices[n][0] = tmp_node_pt->x(0);
               vertices[n][1] = tmp_node_pt->x(1);
             } // for (n < nnodes_to_create_shared_boundary)
 
             // Create the polyline
-            TriangleMeshPolyLine *polyline_pt =
+            TriangleMeshPolyLine* polyline_pt =
               new TriangleMeshPolyLine(vertices, shd_bnd_id);
 
             // Updates bnd_id<--->curve section map
@@ -24845,8 +24842,8 @@ namespace oomph
   //======================================================================
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::compute_shared_node_degree_helper(
-    Vector<Vector<FiniteElement *>> &unsorted_face_ele_pt,
-    std::map<Node *, unsigned> &global_node_degree)
+    Vector<Vector<FiniteElement*>>& unsorted_face_ele_pt,
+    std::map<Node*, unsigned>& global_node_degree)
   {
     // Get the rank and number of processors
     const unsigned nproc = this->communicator_pt()->nproc();
@@ -24854,14 +24851,14 @@ namespace oomph
 
     // Store a temporary sorting of the nodes, starting from the
     // lower-left position
-    Vector<Vector<Node *>> tmp_sorted_shared_node_pt(nproc);
+    Vector<Vector<Node*>> tmp_sorted_shared_node_pt(nproc);
 
     // Store the alias of the node, it may be shared by more than two
     // processors, they should know that the node is the same
     // [0] iproc, processor with which the current processor shared the node
     // [1] node #, number of node in the number of nodes shared with iproc
     //     processor
-    std::map<Node *, Vector<Vector<unsigned>>> node_alias;
+    std::map<Node*, Vector<Vector<unsigned>>> node_alias;
 
     // Stores the local adjacency matrix
     // (nproc*n_shared_nodes*n_shared_nodes)
@@ -24900,7 +24897,7 @@ namespace oomph
       for (unsigned ishd = 0; ishd < n_nodes; ishd++)
       {
         // Get the node
-        Node *shd_node_pt = tmp_sorted_shared_node_pt[iproc][ishd];
+        Node* shd_node_pt = tmp_sorted_shared_node_pt[iproc][ishd];
 
         // Get the alias info.
         Vector<Vector<unsigned>> alias_node_info = node_alias[shd_node_pt];
@@ -24944,7 +24941,7 @@ namespace oomph
     const unsigned root_processor = 0;
 
     // Get the communicator of the mesh
-    OomphCommunicator *comm_pt = this->communicator_pt();
+    OomphCommunicator* comm_pt = this->communicator_pt();
 
     // Number of data send. from this processor to root processor
     unsigned n_unsigned_data_send_to_root =
@@ -25741,7 +25738,7 @@ namespace oomph
     // Decode the info.
 
     // Keep track of the already nodes done
-    std::map<Node *, bool> node_done;
+    std::map<Node*, bool> node_done;
 
     // Read the global degree assigned to the shared nodes between the
     // current processors and the other processors
@@ -25769,7 +25766,7 @@ namespace oomph
             package_unsigned_data_received_from_root[decode_counter++];
 
           // Get the node
-          Node *shd_node_pt = tmp_sorted_shared_node_pt[iproc][ishd];
+          Node* shd_node_pt = tmp_sorted_shared_node_pt[iproc][ishd];
 
           // Has the node been assigned a global degree
           if (!node_done[shd_node_pt])
@@ -25845,10 +25842,10 @@ namespace oomph
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::
     create_adjacency_matrix_new_shared_edges_helper(
-      Vector<Vector<FiniteElement *>> &unsorted_face_ele_pt,
-      Vector<Vector<Node *>> &tmp_sorted_shared_node_pt,
-      std::map<Node *, Vector<Vector<unsigned>>> &node_alias,
-      Vector<Vector<Vector<unsigned>>> &adjacency_matrix)
+      Vector<Vector<FiniteElement*>>& unsorted_face_ele_pt,
+      Vector<Vector<Node*>>& tmp_sorted_shared_node_pt,
+      std::map<Node*, Vector<Vector<unsigned>>>& node_alias,
+      Vector<Vector<Vector<unsigned>>>& adjacency_matrix)
   {
     // Get the number of processors and the rank
     const unsigned nproc = this->communicator_pt()->nproc();
@@ -25864,7 +25861,7 @@ namespace oomph
     node_alias.clear();
 
     // Temporary storage for the index of the nodes
-    Vector<std::map<Node *, unsigned>> tmp_node_index(nproc);
+    Vector<std::map<Node*, unsigned>> tmp_node_index(nproc);
 
     // Loop over the processors
     for (unsigned iproc = 0; iproc < nproc; iproc++)
@@ -25873,12 +25870,12 @@ namespace oomph
       if (iproc != my_rank)
       {
         // Map to mark those nodes already visited
-        std::map<Node *, bool> done_node;
+        std::map<Node*, bool> done_node;
 
         // A map is used to sort the nodes using their coordinates as
         // the key of the map
         // std::map<std::pair<double, double>, Node*> sorted_nodes_pt;
-        std::map<std::pair<double, double>, Node *, classcomp> sorted_nodes_pt;
+        std::map<std::pair<double, double>, Node*, classcomp> sorted_nodes_pt;
 
         // Get the number of unsorted face elements
         const unsigned n_unsorted_face_ele = unsorted_face_ele_pt[iproc].size();
@@ -25887,9 +25884,9 @@ namespace oomph
         for (unsigned e = 0; e < n_unsorted_face_ele; e++)
         {
           // Get a root element
-          FiniteElement *face_ele_pt = unsorted_face_ele_pt[iproc][e];
+          FiniteElement* face_ele_pt = unsorted_face_ele_pt[iproc][e];
           // Get the left node of the face element
-          Node *left_node_pt = face_ele_pt->node_pt(0);
+          Node* left_node_pt = face_ele_pt->node_pt(0);
 
           // Check if the node has been already sorted in the
           // interaction between the current processor and iproc
@@ -25906,7 +25903,7 @@ namespace oomph
           // Get the number of nodes of the face element
           const unsigned n_nodes = face_ele_pt->nnode();
           // Get the right node of the face element
-          Node *right_node_pt = face_ele_pt->node_pt(n_nodes - 1);
+          Node* right_node_pt = face_ele_pt->node_pt(n_nodes - 1);
 
           // Check if the node has been already sorted in the
           // interaction between the current processor and iproc
@@ -25930,13 +25927,13 @@ namespace oomph
 
         // Go through the map container which already have the nodes
         // sorted they have the same sorting on all processors
-        for (std::map<std::pair<double, double>, Node *>::iterator it =
+        for (std::map<std::pair<double, double>, Node*>::iterator it =
                sorted_nodes_pt.begin();
              it != sorted_nodes_pt.end();
              it++)
         {
           // Get the node
-          Node *node_pt = (*it).second;
+          Node* node_pt = (*it).second;
           // Store the node at the corresponding index
           tmp_sorted_shared_node_pt[iproc].push_back(node_pt);
 
@@ -25997,14 +25994,14 @@ namespace oomph
         for (unsigned e = 0; e < n_unsorted_face_ele; e++)
         {
           // Get a root element
-          FiniteElement *face_ele_pt = unsorted_face_ele_pt[iproc][e];
+          FiniteElement* face_ele_pt = unsorted_face_ele_pt[iproc][e];
           // Get the left node of the face element
-          Node *left_node_pt = face_ele_pt->node_pt(0);
+          Node* left_node_pt = face_ele_pt->node_pt(0);
 
           // Get the number of nodes of the face element
           const unsigned n_nodes = face_ele_pt->nnode();
           // Get the right node of the face element
-          Node *right_node_pt = face_ele_pt->node_pt(n_nodes - 1);
+          Node* right_node_pt = face_ele_pt->node_pt(n_nodes - 1);
 
           // Get the index of each of the nodes
           const unsigned left_node_index = tmp_node_index[iproc][left_node_pt];
@@ -26031,7 +26028,7 @@ namespace oomph
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::
     get_shared_boundary_segment_nodes_helper(
-      const unsigned &shd_bnd_id, Vector<Vector<Node *>> &tmp_segment_nodes)
+      const unsigned& shd_bnd_id, Vector<Vector<Node*>>& tmp_segment_nodes)
   {
     // Clear the data structure were to return the nodes
     tmp_segment_nodes.clear();
@@ -26041,10 +26038,10 @@ namespace oomph
 
 #ifdef PARANOID
     // The temporary storage for the halo face elements
-    Vector<FiniteElement *> halo_shared_face_ele_pt;
+    Vector<FiniteElement*> halo_shared_face_ele_pt;
 #endif
     // The temporary storage for the nonhalo face elements
-    Vector<FiniteElement *> nonhalo_shared_face_ele_pt;
+    Vector<FiniteElement*> nonhalo_shared_face_ele_pt;
 
     // Get the number of shared boundary elements associated with the
     // current shared boundary
@@ -26056,7 +26053,7 @@ namespace oomph
     for (unsigned e = 0; e < nshared_bound_ele; e++)
     {
       // Get the shared boundary element
-      FiniteElement *bulk_ele_pt =
+      FiniteElement* bulk_ele_pt =
         this->shared_boundary_element_pt(shd_bnd_id, e);
 
       // Get the face index
@@ -26064,7 +26061,7 @@ namespace oomph
 
       // Before adding the new element we need to ensure that the edge
       // that this element represents has not been already added
-      FiniteElement *face_ele_pt =
+      FiniteElement* face_ele_pt =
         new DummyFaceElement<ELEMENT>(bulk_ele_pt, face_index);
 
       // Nonhalo element
@@ -26084,7 +26081,7 @@ namespace oomph
     } // for (e < nshared_bound_ele)
 
     // Mark the face elements already used
-    std::map<FiniteElement *, bool> shared_face_done;
+    std::map<FiniteElement*, bool> shared_face_done;
 
     // Get the number of nonhalo face elements
     const unsigned nnonhalo_face_shared_ele = nonhalo_shared_face_ele_pt.size();
@@ -26133,20 +26130,20 @@ namespace oomph
     for (unsigned inh = 0; inh < nnonhalo_face_shared_ele; inh++)
     {
       // Get the inh-th face element
-      FiniteElement *nonhalo_face_ele_pt = nonhalo_shared_face_ele_pt[inh];
+      FiniteElement* nonhalo_face_ele_pt = nonhalo_shared_face_ele_pt[inh];
 
       // Get the number of nodes on the face element
       const unsigned nnodes_nh = nonhalo_face_ele_pt->nnode();
       // Get the first and last node on the element
-      Node *nh_first_node_pt = nonhalo_face_ele_pt->node_pt(0);
-      Node *nh_last_node_pt = nonhalo_face_ele_pt->node_pt(nnodes_nh - 1);
+      Node* nh_first_node_pt = nonhalo_face_ele_pt->node_pt(0);
+      Node* nh_last_node_pt = nonhalo_face_ele_pt->node_pt(nnodes_nh - 1);
 
       // Now find the (halo) face element at the other side of the
       // shared boundary
       for (unsigned ih = 0; ih < nhalo_face_shared_ele; ih++)
       {
         // Get the ih-th face element
-        FiniteElement *halo_face_ele_pt = halo_shared_face_ele_pt[ih];
+        FiniteElement* halo_face_ele_pt = halo_shared_face_ele_pt[ih];
 
         // Check that the face element has not been done
         if (!shared_face_done[halo_face_ele_pt])
@@ -26154,8 +26151,8 @@ namespace oomph
           // Get the number of nodes on the face element
           const unsigned nnodes_h = halo_face_ele_pt->nnode();
           // Get the first and last node on the element
-          Node *h_first_node_pt = halo_face_ele_pt->node_pt(0);
-          Node *h_last_node_pt = halo_face_ele_pt->node_pt(nnodes_h - 1);
+          Node* h_first_node_pt = halo_face_ele_pt->node_pt(0);
+          Node* h_last_node_pt = halo_face_ele_pt->node_pt(nnodes_h - 1);
 
           // If the nodes are the same then we have found the (halo)
           // face element at the other side of the shared boundary
@@ -26223,10 +26220,10 @@ namespace oomph
     unsigned nsorted_face_ele = 0;
 
     // Storing for the sorting nodes extracted from the face elements
-    std::list<Node *> sorted_nodes;
+    std::list<Node*> sorted_nodes;
 
     // Get the root face element
-    FiniteElement *root_face_ele_pt = nonhalo_shared_face_ele_pt[0];
+    FiniteElement* root_face_ele_pt = nonhalo_shared_face_ele_pt[0];
     nsorted_face_ele++;
 
     // Mark face as done
@@ -26234,8 +26231,8 @@ namespace oomph
 
     // The initial and final node on the list
     const unsigned nnodes_root = root_face_ele_pt->nnode();
-    Node *first_node_pt = root_face_ele_pt->node_pt(0);
-    Node *last_node_pt = root_face_ele_pt->node_pt(nnodes_root - 1);
+    Node* first_node_pt = root_face_ele_pt->node_pt(0);
+    Node* last_node_pt = root_face_ele_pt->node_pt(nnodes_root - 1);
 
     // Push back on the list the new nodes
     sorted_nodes.push_back(first_node_pt);
@@ -26251,7 +26248,7 @@ namespace oomph
       // previous one as the initial face element
       for (unsigned iface = 1; iface < nnonhalo_face_shared_ele; iface++)
       {
-        FiniteElement *tmp_shared_face_ele_pt =
+        FiniteElement* tmp_shared_face_ele_pt =
           nonhalo_shared_face_ele_pt[iface];
 
         // If face has not been sorted
@@ -26261,8 +26258,8 @@ namespace oomph
           const unsigned tmp_nnodes = tmp_shared_face_ele_pt->nnode();
 
           // Get each individual node
-          Node *left_node_pt = tmp_shared_face_ele_pt->node_pt(0);
-          Node *right_node_pt = tmp_shared_face_ele_pt->node_pt(tmp_nnodes - 1);
+          Node* left_node_pt = tmp_shared_face_ele_pt->node_pt(0);
+          Node* right_node_pt = tmp_shared_face_ele_pt->node_pt(tmp_nnodes - 1);
 
           if (left_node_pt == first_node_pt)
           {
@@ -26343,7 +26340,7 @@ namespace oomph
     unsigned counter = 0;
 
     // Loop over the list of nodes and copy them in the output container
-    for (std::list<Node *>::iterator it = sorted_nodes.begin();
+    for (std::list<Node*>::iterator it = sorted_nodes.begin();
          it != sorted_nodes.end();
          it++)
     {
@@ -26361,9 +26358,9 @@ namespace oomph
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::
     get_required_elemental_information_load_balance_helper(
-      unsigned &iproc,
-      Vector<Vector<FiniteElement *>> &f_haloed_ele_pt,
-      FiniteElement *ele_pt)
+      unsigned& iproc,
+      Vector<Vector<FiniteElement*>>& f_haloed_ele_pt,
+      FiniteElement* ele_pt)
   {
     // Check if the element is associated with the original boundaries
     const unsigned nbound = this->initial_shared_boundary_id();
@@ -26752,10 +26749,10 @@ namespace oomph
   //======================================================================
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::add_node_load_balance_helper(
-    unsigned &iproc,
-    Vector<Vector<FiniteElement *>> &f_halo_ele_pt,
-    Vector<Node *> &new_nodes_on_domain,
-    Node *nod_pt)
+    unsigned& iproc,
+    Vector<Vector<FiniteElement*>>& f_halo_ele_pt,
+    Vector<Node*>& new_nodes_on_domain,
+    Node* nod_pt)
   {
     // Attempt to add this node to the new domain
     const unsigned nnew_nodes_on_domain = new_nodes_on_domain.size();
@@ -26810,9 +26807,9 @@ namespace oomph
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::
     get_required_nodal_information_load_balance_helper(
-      Vector<Vector<FiniteElement *>> &f_halo_ele_pt,
-      unsigned &iproc,
-      Node *nod_pt)
+      Vector<Vector<FiniteElement*>>& f_halo_ele_pt,
+      unsigned& iproc,
+      Node* nod_pt)
   {
     unsigned my_rank = this->communicator_pt()->my_rank();
     const unsigned nproc = this->communicator_pt()->nproc();
@@ -26975,7 +26972,7 @@ namespace oomph
       for (unsigned i = 0; i < n_nodes_on_shared_boundary; i++)
       {
         // Get the i-th node on the shared boundary
-        Node *shared_node_pt =
+        Node* shared_node_pt =
           sorted_shared_boundary_node_pt(shared_boundary_id, i);
         // Is the node we are looking for
         if (shared_node_pt == nod_pt)
@@ -27162,7 +27159,7 @@ namespace oomph
         for (unsigned i = 0; i < n_nodes_on_shd_bnd; i++)
         {
           // Get the i-th shared boundary node
-          Node *shared_node_pt = sorted_shared_boundary_node_pt(shd_bnd_id, i);
+          Node* shared_node_pt = sorted_shared_boundary_node_pt(shd_bnd_id, i);
           // Is the same node?
           if (shared_node_pt == nod_pt)
           {
@@ -27301,7 +27298,7 @@ namespace oomph
       // Loop over the halo elements
       for (unsigned jh = 0; jh < n_halo_jproc; jh++)
       {
-        FiniteElement *halo_ele_pt = f_halo_ele_pt[jproc][jh];
+        FiniteElement* halo_ele_pt = f_halo_ele_pt[jproc][jh];
         // Get the number of nodes of the halo element
         const unsigned n_node = halo_ele_pt->nnode();
         // Loop over the nodes
@@ -27390,11 +27387,11 @@ namespace oomph
       // Is the Node algebraic?  If so, send its ref values and
       // an indication of its geometric objects if they are stored
       // in the algebraic mesh
-      AlgebraicNode *alg_nod_pt = dynamic_cast<AlgebraicNode *>(nod_pt);
+      AlgebraicNode* alg_nod_pt = dynamic_cast<AlgebraicNode*>(nod_pt);
       if (alg_nod_pt != 0)
       {
         // The external mesh should be algebraic
-        AlgebraicMesh *alg_mesh_pt = dynamic_cast<AlgebraicMesh *>(this);
+        AlgebraicMesh* alg_mesh_pt = dynamic_cast<AlgebraicMesh*>(this);
 
         // Get default node update function ID
         unsigned update_id = alg_nod_pt->node_update_fct_id();
@@ -27422,7 +27419,7 @@ namespace oomph
 #endif
         for (unsigned i_geom = 0; i_geom < n_geom_obj; i_geom++)
         {
-          GeomObject *geom_obj_pt = alg_nod_pt->geom_object_pt(i_geom);
+          GeomObject* geom_obj_pt = alg_nod_pt->geom_object_pt(i_geom);
 
           // Check this against the stored geometric objects in mesh
           unsigned n_geom_list = alg_mesh_pt->ngeom_object_list_pt();
@@ -27444,7 +27441,7 @@ namespace oomph
       } // (if alg_nod_pt!=0)
 
       // Is it a SolidNode?
-      SolidNode *solid_nod_pt = dynamic_cast<SolidNode *>(nod_pt);
+      SolidNode* solid_nod_pt = dynamic_cast<SolidNode*>(nod_pt);
       if (solid_nod_pt != 0)
       {
         unsigned n_solid_val = solid_nod_pt->variable_position_pt()->nvalue();
@@ -27501,17 +27498,17 @@ namespace oomph
   //======================================================================
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::create_element_load_balance_helper(
-    unsigned &iproc,
-    Vector<Vector<FiniteElement *>> &f_haloed_ele_pt,
-    Vector<Vector<std::map<unsigned, FiniteElement *>>>
-      &received_old_haloed_element_pt,
-    Vector<FiniteElement *> &new_elements_on_domain,
-    Vector<Node *> &new_nodes_on_domain,
-    Vector<Vector<Vector<std::map<unsigned, Node *>>>>
-      &other_proc_shd_bnd_node_pt,
-    Vector<Vector<Vector<unsigned>>> &global_node_names,
-    std::map<Vector<unsigned>, unsigned> &node_name_to_global_index,
-    Vector<Node *> &global_shared_node_pt)
+    unsigned& iproc,
+    Vector<Vector<FiniteElement*>>& f_haloed_ele_pt,
+    Vector<Vector<std::map<unsigned, FiniteElement*>>>&
+      received_old_haloed_element_pt,
+    Vector<FiniteElement*>& new_elements_on_domain,
+    Vector<Node*>& new_nodes_on_domain,
+    Vector<Vector<Vector<std::map<unsigned, Node*>>>>&
+      other_proc_shd_bnd_node_pt,
+    Vector<Vector<Vector<unsigned>>>& global_node_names,
+    std::map<Vector<unsigned>, unsigned>& node_name_to_global_index,
+    Vector<Node*>& global_shared_node_pt)
   {
 #ifdef ANNOTATE_REFINEABLE_TRIANGLE_MESH_COMMUNICATION_LOAD_BALANCE
     oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds
@@ -27524,14 +27521,14 @@ namespace oomph
     {
       // Create a new element from the communicated values
       // and coords from the process that located zeta
-      GeneralisedElement *new_el_pt = new ELEMENT;
+      GeneralisedElement* new_el_pt = new ELEMENT;
 
       // Add the new element to the mesh - Do not add the element yet
       // since no retained elements still need to be deleted
       // this->add_element_pt(new_el_pt);
 
       // Cast to the FE pointer
-      FiniteElement *f_el_pt = dynamic_cast<FiniteElement *>(new_el_pt);
+      FiniteElement* f_el_pt = dynamic_cast<FiniteElement*>(new_el_pt);
 
       // Add the element to the new elements in the domain container
       new_elements_on_domain.push_back(f_el_pt);
@@ -27544,7 +27541,7 @@ namespace oomph
       unsigned n_node = f_el_pt->nnode();
       for (unsigned j = 0; j < n_node; j++)
       {
-        Node *new_nod_pt = 0;
+        Node* new_nod_pt = 0;
 
         // Call the add halo node helper function
         add_received_node_load_balance_helper(new_nod_pt,
@@ -27584,10 +27581,10 @@ namespace oomph
   //======================================================================
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::add_element_load_balance_helper(
-    const unsigned &iproc,
-    Vector<Vector<std::map<unsigned, FiniteElement *>>>
-      &received_old_haloed_element_pt,
-    FiniteElement *ele_pt)
+    const unsigned& iproc,
+    Vector<Vector<std::map<unsigned, FiniteElement*>>>&
+      received_old_haloed_element_pt,
+    FiniteElement* ele_pt)
   {
     // Get the number of processors
     const unsigned nproc = this->communicator_pt()->nproc();
@@ -27841,19 +27838,19 @@ namespace oomph
   //======================================================================
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::add_received_node_load_balance_helper(
-    Node *&new_nod_pt,
-    Vector<Vector<FiniteElement *>> &f_haloed_ele_pt,
-    Vector<Vector<std::map<unsigned, FiniteElement *>>>
-      &received_old_haloed_element_pt,
-    Vector<Node *> &new_nodes_on_domain,
-    Vector<Vector<Vector<std::map<unsigned, Node *>>>>
-      &other_proc_shd_bnd_node_pt,
-    unsigned &iproc,
-    unsigned &node_index,
-    FiniteElement *const &new_el_pt,
-    Vector<Vector<Vector<unsigned>>> &global_node_names,
-    std::map<Vector<unsigned>, unsigned> &node_name_to_global_index,
-    Vector<Node *> &global_shared_node_pt)
+    Node*& new_nod_pt,
+    Vector<Vector<FiniteElement*>>& f_haloed_ele_pt,
+    Vector<Vector<std::map<unsigned, FiniteElement*>>>&
+      received_old_haloed_element_pt,
+    Vector<Node*>& new_nodes_on_domain,
+    Vector<Vector<Vector<std::map<unsigned, Node*>>>>&
+      other_proc_shd_bnd_node_pt,
+    unsigned& iproc,
+    unsigned& node_index,
+    FiniteElement* const& new_el_pt,
+    Vector<Vector<Vector<unsigned>>>& global_node_names,
+    std::map<Vector<unsigned>, unsigned>& node_name_to_global_index,
+    Vector<Node*>& global_shared_node_pt)
   {
     // Given the node, received information about it from processor
     // iproc, construct it on the current process
@@ -27905,19 +27902,19 @@ namespace oomph
   //======================================================================
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::construct_new_node_load_balance_helper(
-    Node *&new_nod_pt,
-    Vector<Vector<FiniteElement *>> &f_haloed_ele_pt,
-    Vector<Vector<std::map<unsigned, FiniteElement *>>>
-      &received_old_haloed_element_pt,
-    Vector<Node *> &new_nodes_on_domain,
-    Vector<Vector<Vector<std::map<unsigned, Node *>>>>
-      &other_proc_shd_bnd_node_pt,
-    unsigned &iproc,
-    unsigned &node_index,
-    FiniteElement *const &new_el_pt,
-    Vector<Vector<Vector<unsigned>>> &global_node_names,
-    std::map<Vector<unsigned>, unsigned> &node_name_to_global_index,
-    Vector<Node *> &global_shared_node_pt)
+    Node*& new_nod_pt,
+    Vector<Vector<FiniteElement*>>& f_haloed_ele_pt,
+    Vector<Vector<std::map<unsigned, FiniteElement*>>>&
+      received_old_haloed_element_pt,
+    Vector<Node*>& new_nodes_on_domain,
+    Vector<Vector<Vector<std::map<unsigned, Node*>>>>&
+      other_proc_shd_bnd_node_pt,
+    unsigned& iproc,
+    unsigned& node_index,
+    FiniteElement* const& new_el_pt,
+    Vector<Vector<Vector<unsigned>>>& global_node_names,
+    std::map<Vector<unsigned>, unsigned>& node_name_to_global_index,
+    Vector<Node*>& global_shared_node_pt)
   {
     // Get the number of processors
     const unsigned nproc = this->communicator_pt()->nproc();
@@ -27936,7 +27933,7 @@ namespace oomph
     unsigned n_val = Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++];
 
     // Null TimeStepper for now
-    TimeStepper *time_stepper_pt = this->Time_stepper_pt;
+    TimeStepper* time_stepper_pt = this->Time_stepper_pt;
     // Default number of previous values to 1
     unsigned n_prev = time_stepper_pt->ntstorage();
 
@@ -28258,10 +28255,10 @@ namespace oomph
     // Store the node pointers obtained from the indicated halo elements
     // (use a set to check for the case when the node pointer is
     // different)
-    std::set<Node *> set_haloed_node_pt;
+    std::set<Node*> set_haloed_node_pt;
 
     // Store the node pointer obtained from the haloed elements
-    Node *haloed_node_pt = 0;
+    Node* haloed_node_pt = 0;
 
     // Flag to indicate if it is on a haloed element of the current
     // processor with the iproc processor. If this flag is true then
@@ -28288,9 +28285,9 @@ namespace oomph
           halo_node_number_in_halo_element[my_rank][i];
 
         // Get the haloed element (with iproc)
-        FiniteElement *tmp_haloed_ele_pt = f_haloed_ele_pt[iproc][haloed_index];
+        FiniteElement* tmp_haloed_ele_pt = f_haloed_ele_pt[iproc][haloed_index];
         // Get the node on the indicated node number
-        Node *tmp_haloed_node_pt =
+        Node* tmp_haloed_node_pt =
           tmp_haloed_ele_pt->node_pt(haloed_node_index);
 
         // Set the pointer for the obtained haloed node
@@ -28313,7 +28310,7 @@ namespace oomph
             << "The last entry is for the just added node with a different "
                "node\n"
             << "pointer\n";
-          for (std::set<Node *>::iterator it = set_haloed_node_pt.begin();
+          for (std::set<Node*>::iterator it = set_haloed_node_pt.begin();
                it != set_haloed_node_pt.end();
                it++)
           {
@@ -28357,7 +28354,7 @@ namespace oomph
 
           // Have we received the indicated element? (Get the haloed
           // element on jproc with the iproc processor)
-          std::map<unsigned, FiniteElement *>::iterator it_map =
+          std::map<unsigned, FiniteElement*>::iterator it_map =
             received_old_haloed_element_pt[jproc][iproc].find(haloed_index);
           // Have we received the indicated element?
           if (it_map != received_old_haloed_element_pt[jproc][iproc].end())
@@ -28368,9 +28365,9 @@ namespace oomph
             found_on_haloed_element_with_other_processor = true;
 
             // Get the element
-            FiniteElement *tmp_haloed_ele_pt = (*it_map).second;
+            FiniteElement* tmp_haloed_ele_pt = (*it_map).second;
             // Get the node on the indicated node number
-            Node *tmp_haloed_node_pt =
+            Node* tmp_haloed_node_pt =
               tmp_haloed_ele_pt->node_pt(haloed_node_index);
 
             // Set the pointer for the obtained haloed node
@@ -28396,7 +28393,7 @@ namespace oomph
                 << "The last entry is for the just added node with a "
                    "different\n"
                 << "node pointer\n";
-              for (std::set<Node *>::iterator it = set_haloed_node_pt.begin();
+              for (std::set<Node*>::iterator it = set_haloed_node_pt.begin();
                    it != set_haloed_node_pt.end();
                    it++)
               {
@@ -28500,7 +28497,7 @@ namespace oomph
 
       // Add the found nodes in the container, should be the same but
       // better check
-      Vector<Node *> found_node_pt;
+      Vector<Node*> found_node_pt;
 
       // Now try to find the node in any of the other shared boundaries
       for (unsigned i = 0; i < n_shd_bnd_with_other_procs_have_node; i++)
@@ -28532,7 +28529,7 @@ namespace oomph
         {
           // Check if we can find the index of the node in that other
           // processor and shared boundary id
-          std::map<unsigned, Node *>::iterator it =
+          std::map<unsigned, Node*>::iterator it =
             other_proc_shd_bnd_node_pt[oproc1][oproc2][shd_bnd_id].find(index);
 
           // If the index exist then get the node pointer
@@ -28542,7 +28539,7 @@ namespace oomph
             // Mark the node as found
             found_node_in_other_shared_boundaries = true;
             // Get the node pointer
-            Node *tmp_node_pt =
+            Node* tmp_node_pt =
               other_proc_shd_bnd_node_pt[oproc1][oproc2][shd_bnd_id][index];
             found_node_pt.push_back(tmp_node_pt);
           } // if (it!=
@@ -28737,14 +28734,14 @@ namespace oomph
         //     !found_on_haloed_element_with_other_processor)
 
       // Is the new constructed node Algebraic?
-      AlgebraicNode *new_alg_nod_pt = dynamic_cast<AlgebraicNode *>(new_nod_pt);
+      AlgebraicNode* new_alg_nod_pt = dynamic_cast<AlgebraicNode*>(new_nod_pt);
 
       // If it is algebraic, its node update functions will
       // not yet have been set up properly
       if (new_alg_nod_pt != 0)
       {
         // The AlgebraicMesh is the external mesh
-        AlgebraicMesh *alg_mesh_pt = dynamic_cast<AlgebraicMesh *>(this);
+        AlgebraicMesh* alg_mesh_pt = dynamic_cast<AlgebraicMesh*>(this);
 
         /// The first entry of All_alg_nodal_info contains
         /// the default node update id
@@ -28782,7 +28779,7 @@ namespace oomph
             Flat_packed_doubles[Counter_for_flat_packed_doubles++];
         }
 
-        Vector<GeomObject *> geom_object_pt;
+        Vector<GeomObject*> geom_object_pt;
         /// again we need the size of this vector as it varies
         /// between meshes; we also need some indication
         /// as to which geometric object should be used...
@@ -28848,19 +28845,19 @@ namespace oomph
           !found_on_haloed_element_with_other_processor)
       {
         // Is the node a MacroElementNodeUpdateNode?
-        MacroElementNodeUpdateNode *macro_nod_pt =
-          dynamic_cast<MacroElementNodeUpdateNode *>(new_nod_pt);
+        MacroElementNodeUpdateNode* macro_nod_pt =
+          dynamic_cast<MacroElementNodeUpdateNode*>(new_nod_pt);
 
         if (macro_nod_pt != 0)
         {
           // Need to call set_node_update_info; this requires
           // a Vector<GeomObject*> (taken from the mesh)
-          Vector<GeomObject *> geom_object_vector_pt;
+          Vector<GeomObject*> geom_object_vector_pt;
 
           // Access the required geom objects from the
           // MacroElementNodeUpdateMesh
-          MacroElementNodeUpdateMesh *macro_mesh_pt =
-            dynamic_cast<MacroElementNodeUpdateMesh *>(this);
+          MacroElementNodeUpdateMesh* macro_mesh_pt =
+            dynamic_cast<MacroElementNodeUpdateMesh*>(this);
           geom_object_vector_pt = macro_mesh_pt->geom_object_vector_pt();
 
           // Get local coordinate of node in new element
@@ -28893,8 +28890,8 @@ namespace oomph
           // to set a map for these external values
 
           // Cast to a boundary node
-          BoundaryNodeBase *bnod_pt =
-            dynamic_cast<BoundaryNodeBase *>(new_nod_pt);
+          BoundaryNodeBase* bnod_pt =
+            dynamic_cast<BoundaryNodeBase*>(new_nod_pt);
 
           // Create storage, if it doesn't already exist, for the map
           // that will contain the position of the first entry of
@@ -28906,7 +28903,7 @@ namespace oomph
           }
 
           // Get pointer to the map
-          std::map<unsigned, unsigned> *map_pt =
+          std::map<unsigned, unsigned>* map_pt =
             bnod_pt->index_of_first_value_assigned_by_face_element_pt();
 
           // The id of the face to which this node belong in the bulk
@@ -28933,7 +28930,7 @@ namespace oomph
         //     !found_on_haloed_element_with_other_processor)
 
       // Is the new node a SolidNode?
-      SolidNode *solid_nod_pt = dynamic_cast<SolidNode *>(new_nod_pt);
+      SolidNode* solid_nod_pt = dynamic_cast<SolidNode*>(new_nod_pt);
       if (solid_nod_pt != 0)
       {
         unsigned n_solid_val = solid_nod_pt->variable_position_pt()->nvalue();
@@ -29073,13 +29070,13 @@ namespace oomph
   //======================================================================
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::get_boundary_segment_nodes_helper(
-    const unsigned &b, Vector<Vector<Node *>> &tmp_segment_nodes)
+    const unsigned& b, Vector<Vector<Node*>>& tmp_segment_nodes)
   {
     // Clear the data structure were to return the nodes
     tmp_segment_nodes.clear();
 
     // Temporary storage for face elements
-    Vector<FiniteElement *> face_el_pt;
+    Vector<FiniteElement*> face_el_pt;
 
     // Temporary storage for number of elements adjacent to the boundary
     unsigned nel = 0;
@@ -29092,7 +29089,7 @@ namespace oomph
     const unsigned n_regions = this->nregion();
 
     // Temporary storage for already visited pair of nodes (edges)
-    Vector<std::pair<Node *, Node *>> done_nodes_pt;
+    Vector<std::pair<Node*, Node*>> done_nodes_pt;
 
     // Are there more than one region?
     if (n_regions > 1)
@@ -29121,7 +29118,7 @@ namespace oomph
           for (unsigned e = 0; e < nel_in_region; e++)
           {
             // Get pointer to the bulk element that is adjacent to boundary b
-            FiniteElement *bulk_elem_pt =
+            FiniteElement* bulk_elem_pt =
               this->boundary_element_in_region_pt(b, region_id, e);
 
 #ifdef OOMPH_HAS_MPI
@@ -29142,16 +29139,16 @@ namespace oomph
             // Before adding the new element we need to be sure that the
             // edge that this element represents has not been already
             // added
-            FiniteElement *tmp_ele_pt =
+            FiniteElement* tmp_ele_pt =
               new DummyFaceElement<ELEMENT>(bulk_elem_pt, face_index);
 
             // Number of nodes in the face element
             const unsigned n_nodes = tmp_ele_pt->nnode();
 
-            std::pair<Node *, Node *> tmp_pair = std::make_pair(
+            std::pair<Node*, Node*> tmp_pair = std::make_pair(
               tmp_ele_pt->node_pt(0), tmp_ele_pt->node_pt(n_nodes - 1));
 
-            std::pair<Node *, Node *> tmp_pair_inverse = std::make_pair(
+            std::pair<Node*, Node*> tmp_pair_inverse = std::make_pair(
               tmp_ele_pt->node_pt(n_nodes - 1), tmp_ele_pt->node_pt(0));
 
             // Search for repeated nodes
@@ -29217,7 +29214,7 @@ namespace oomph
         for (unsigned e = 0; e < nel; e++)
         {
           // Get pointer to the bulk element that is adjacent to boundary b
-          FiniteElement *bulk_elem_pt = this->boundary_element_pt(b, e);
+          FiniteElement* bulk_elem_pt = this->boundary_element_pt(b, e);
 
 #ifdef OOMPH_HAS_MPI
           // In a distributed mesh only work with nonhalo elements
@@ -29235,16 +29232,16 @@ namespace oomph
 
           // Before adding the new element we need to be sure that the
           // edge that this element represent has not been already added
-          FiniteElement *tmp_ele_pt =
+          FiniteElement* tmp_ele_pt =
             new DummyFaceElement<ELEMENT>(bulk_elem_pt, face_index);
 
           // Number of nodes in the face element
           const unsigned n_nodes = tmp_ele_pt->nnode();
 
-          std::pair<Node *, Node *> tmp_pair = std::make_pair(
+          std::pair<Node*, Node*> tmp_pair = std::make_pair(
             tmp_ele_pt->node_pt(0), tmp_ele_pt->node_pt(n_nodes - 1));
 
-          std::pair<Node *, Node *> tmp_pair_inverse = std::make_pair(
+          std::pair<Node*, Node*> tmp_pair_inverse = std::make_pair(
             tmp_ele_pt->node_pt(n_nodes - 1), tmp_ele_pt->node_pt(0));
 
           // Search for repeated nodes
@@ -29312,7 +29309,7 @@ namespace oomph
 
       // The vector of list to store the "segments" that compound the
       // boundary (segments may appear only in a distributed mesh)
-      Vector<std::list<FiniteElement *>> segment_sorted_ele_pt;
+      Vector<std::list<FiniteElement*>> segment_sorted_ele_pt;
 
       // Number of already sorted face elements (only nonhalo face
       // elements for a distributed mesh)
@@ -29320,12 +29317,12 @@ namespace oomph
 
       // Keep track of who's done (in a distributed mesh this apply to
       // nonhalo only)
-      std::map<FiniteElement *, bool> done_ele;
+      std::map<FiniteElement*, bool> done_ele;
 
       // Keep track of which element is inverted (in distributed mesh
       // the elements may be inverted with respect to the segment they
       // belong)
-      std::map<FiniteElement *, bool> is_inverted;
+      std::map<FiniteElement*, bool> is_inverted;
 
       // Iterate until all possible segments have been created. In a non
       // distributed mesh there is only one segment which defines the
@@ -29334,14 +29331,14 @@ namespace oomph
       {
         // The ordered list of face elements (in a distributed mesh a
         // collection of continuous face elements define a segment)
-        std::list<FiniteElement *> sorted_el_pt;
+        std::list<FiniteElement*> sorted_el_pt;
 
 #ifdef PARANOID
         // Select an initial element for the segment
         bool found_initial_face_element = false;
 #endif
 
-        FiniteElement *ele_face_pt = 0;
+        FiniteElement* ele_face_pt = 0;
 
         unsigned iface = 0;
 #ifdef OOMPH_HAS_MPI
@@ -29411,8 +29408,8 @@ namespace oomph
 
         // Left and rightmost nodes (the left and right nodes of the
         // current face element)
-        Node *left_node_pt = ele_face_pt->node_pt(0);
-        Node *right_node_pt = ele_face_pt->node_pt(nnod - 1);
+        Node* left_node_pt = ele_face_pt->node_pt(0);
+        Node* right_node_pt = ele_face_pt->node_pt(nnod - 1);
 
         // Continue iterating if a new face element has been added to
         // the list
@@ -29439,8 +29436,8 @@ namespace oomph
             if (!done_ele[ele_face_pt])
             {
               // Get the left and right nodes of the current element
-              Node *local_left_node_pt = ele_face_pt->node_pt(0);
-              Node *local_right_node_pt = ele_face_pt->node_pt(nnod - 1);
+              Node* local_left_node_pt = ele_face_pt->node_pt(0);
+              Node* local_right_node_pt = ele_face_pt->node_pt(nnod - 1);
 
               // New element fits at the left of segment and is not inverted
               if (left_node_pt == local_right_node_pt)
@@ -29534,13 +29531,13 @@ namespace oomph
 #endif
 
         // Get access to the first element on the segment
-        FiniteElement *first_ele_pt = segment_sorted_ele_pt[is].front();
+        FiniteElement* first_ele_pt = segment_sorted_ele_pt[is].front();
 
         // Number of nodes
         const unsigned nnod = first_ele_pt->nnode();
 
         // Get the first node of the current segment
-        Node *first_node_pt = first_ele_pt->node_pt(0);
+        Node* first_node_pt = first_ele_pt->node_pt(0);
         if (is_inverted[first_ele_pt])
         {
           first_node_pt = first_ele_pt->node_pt(nnod - 1);
@@ -29550,16 +29547,16 @@ namespace oomph
         tmp_segment_nodes[is].push_back(first_node_pt);
 
         // Now loop over face elements in order to get the nodes
-        for (std::list<FiniteElement *>::iterator it =
+        for (std::list<FiniteElement*>::iterator it =
                segment_sorted_ele_pt[is].begin();
              it != segment_sorted_ele_pt[is].end();
              it++)
         {
           // Get element
-          FiniteElement *ele_pt = *it;
+          FiniteElement* ele_pt = *it;
 
           // The last node pointer
-          Node *last_node_pt = 0;
+          Node* last_node_pt = 0;
 
           // Get the last node
           if (!is_inverted[ele_pt])
@@ -29595,7 +29592,7 @@ namespace oomph
   /// checking whether the mesh is distributed or not
   //======================================================================
   template<class ELEMENT>
-  void RefineableTriangleMesh<ELEMENT>::adapt(const Vector<double> &elem_error)
+  void RefineableTriangleMesh<ELEMENT>::adapt(const Vector<double>& elem_error)
   {
     double t_start_overall = TimingHelpers::timer();
 
@@ -29631,7 +29628,7 @@ namespace oomph
         for (unsigned e = 0; e < n; e++)
         {
           // Get the pointer to the element
-          FiniteElement *ele_pt = this->finite_element_pt(e);
+          FiniteElement* ele_pt = this->finite_element_pt(e);
           if (!ele_pt->is_halo())
           {
             sub_area += ele_pt->size();
@@ -29639,7 +29636,7 @@ namespace oomph
         } // for (e<n)
 
         // Get the communicator of the mesh
-        OomphCommunicator *comm_pt = this->communicator_pt();
+        OomphCommunicator* comm_pt = this->communicator_pt();
 
         // Get the total area
         MPI_Allreduce(
@@ -29792,7 +29789,7 @@ namespace oomph
       }
 
       // Get the communicator of the mesh
-      OomphCommunicator *comm_pt = this->communicator_pt();
+      OomphCommunicator* comm_pt = this->communicator_pt();
 
       // Verify if at least one processor needs mesh adaptation
       MPI_Allreduce(&adapt_this_processor,
@@ -30074,12 +30071,12 @@ namespace oomph
 
       // Storage for the new temporary polygons "closed" by the shared
       // boundaries
-      Vector<TriangleMeshPolygon *> tmp_outer_polygons_pt;
+      Vector<TriangleMeshPolygon*> tmp_outer_polygons_pt;
 
       // Storage for the new temporary open curves, could be the
       // original open curves or "chunks" of the original open curves
       // not overlapped by shared boundaries
-      Vector<TriangleMeshOpenCurve *> tmp_open_curves_pt;
+      Vector<TriangleMeshOpenCurve*> tmp_open_curves_pt;
 
       if (this->is_mesh_distributed())
       {
@@ -30104,8 +30101,8 @@ namespace oomph
       // Re-establish polylines' connections. The boundary
       // representation has changed (new polylines), therefore we need
       // to update the connection information
-      Vector<TriangleMeshPolyLine *> resume_initial_connection_polyline_pt;
-      Vector<TriangleMeshPolyLine *> resume_final_connection_polyline_pt;
+      Vector<TriangleMeshPolyLine*> resume_initial_connection_polyline_pt;
+      Vector<TriangleMeshPolyLine*> resume_final_connection_polyline_pt;
       restore_boundary_connections(resume_initial_connection_polyline_pt,
                                    resume_final_connection_polyline_pt);
 
@@ -30136,13 +30133,13 @@ namespace oomph
             if (n_region_element > 0)
             {
               // Cache pointer to the first element
-              FiniteElement *const elem_pt =
+              FiniteElement* const elem_pt =
                 this->region_element_pt(region_id, 0);
 
               // Loop over the corners of the triangle and average
               for (unsigned n = 0; n < 3; n++)
               {
-                Node *const nod_pt = elem_pt->node_pt(n);
+                Node* const nod_pt = elem_pt->node_pt(n);
                 for (unsigned i = 0; i < 2; i++)
                 {
                   centroid[i] += nod_pt->x(i);
@@ -30170,19 +30167,19 @@ namespace oomph
       // ==============================================================
 
       // Are we dealing with a solid mesh?
-      SolidMesh *solid_mesh_pt = dynamic_cast<SolidMesh *>(this);
+      SolidMesh* solid_mesh_pt = dynamic_cast<SolidMesh*>(this);
 
       // Build temporary uniform background mesh
       //----------------------------------------
       // with area set by maximum required area
       //---------------------------------------
-      RefineableTriangleMesh<ELEMENT> *tmp_new_mesh_pt = 0;
+      RefineableTriangleMesh<ELEMENT>* tmp_new_mesh_pt = 0;
 
       // The storage for the new temporary boundaries representation to
       // create the background mesh
-      Vector<TriangleMeshClosedCurve *> closed_curve_pt;
-      Vector<TriangleMeshClosedCurve *> hole_pt;
-      Vector<TriangleMeshOpenCurve *> open_curves_pt;
+      Vector<TriangleMeshClosedCurve*> closed_curve_pt;
+      Vector<TriangleMeshClosedCurve*> hole_pt;
+      Vector<TriangleMeshOpenCurve*> open_curves_pt;
 
 #ifdef OOMPH_HAS_MPI
       if (!this->is_mesh_distributed())
@@ -30456,7 +30453,7 @@ namespace oomph
       // Get the TriangulateIO object associated with that mesh
       TriangulateIO tmp_new_triangulateio =
         tmp_new_mesh_pt->triangulateio_representation();
-      RefineableTriangleMesh<ELEMENT> *new_mesh_pt = 0;
+      RefineableTriangleMesh<ELEMENT>* new_mesh_pt = 0;
 
       // If the mesh is a solid mesh then do the mapping based on the
       // Eulerian coordinates
@@ -30474,7 +30471,7 @@ namespace oomph
       {
         cgal_params.enable_use_eulerian_coordinates_during_setup();
       }
-      MeshAsGeomObject *mesh_geom_obj_pt = new MeshAsGeomObject(&cgal_params);
+      MeshAsGeomObject* mesh_geom_obj_pt = new MeshAsGeomObject(&cgal_params);
 
 #else
 
@@ -30488,13 +30485,13 @@ namespace oomph
       bin_dim[0] = Nbin_x_for_area_transfer;
       bin_dim[1] = Nbin_y_for_area_transfer;
       params.dimensions_of_bin_array() = bin_dim;
-      MeshAsGeomObject *mesh_geom_obj_pt = new MeshAsGeomObject(&params);
+      MeshAsGeomObject* mesh_geom_obj_pt = new MeshAsGeomObject(&params);
 
 #endif
 
       // Set up a map from pointer to element to its number
       // in the mesh
-      std::map<GeneralisedElement *, unsigned> element_number;
+      std::map<GeneralisedElement*, unsigned> element_number;
       unsigned nelem = this->nelement();
       for (unsigned e = 0; e < nelem; e++)
       {
@@ -30509,8 +30506,8 @@ namespace oomph
       Vector<double> bin_min_target_area;
 
       // Get pointer to sample point container
-      NonRefineableBinArray *bin_array_pt =
-        dynamic_cast<NonRefineableBinArray *>(
+      NonRefineableBinArray* bin_array_pt =
+        dynamic_cast<NonRefineableBinArray*>(
           mesh_geom_obj_pt->sample_point_container_pt());
       if (bin_array_pt == 0)
       {
@@ -30577,8 +30574,8 @@ namespace oomph
       // bins to compute the minimum of the target areas of the elements
       // in each bin)
       const std::map<unsigned,
-                     Vector<std::pair<FiniteElement *, Vector<double>>>>
-        *bins_pt = bin_array_pt->get_all_bins_content();
+                     Vector<std::pair<FiniteElement*, Vector<double>>>>*
+        bins_pt = bin_array_pt->get_all_bins_content();
 
       // Get the number of bins
       const unsigned n_bin = bins_pt->size();
@@ -30595,7 +30592,7 @@ namespace oomph
       // target area of all of them
       typedef std::map<
         unsigned,
-        Vector<std::pair<FiniteElement *, Vector<double>>>>::const_iterator IT;
+        Vector<std::pair<FiniteElement*, Vector<double>>>>::const_iterator IT;
       for (IT it = bins_pt->begin(); it != bins_pt->end(); it++)
       {
         // The bin number
@@ -30608,7 +30605,7 @@ namespace oomph
         for (unsigned ee = 0; ee < n_ele_bin; ee++)
         {
           // Get ee-th element (in currrent mesh) in ib-th bin
-          GeneralisedElement *ele_pt = (*it).second[ee].first;
+          GeneralisedElement* ele_pt = (*it).second[ee].first;
           double t_map = TimingHelpers::timer();
           const unsigned ele_number = element_number[ele_pt];
           t_total_map += TimingHelpers::timer() - t_map;
@@ -30696,8 +30693,8 @@ namespace oomph
         Vector<double> new_transferred_target_area(nelem, 0.0);
         for (unsigned e = 0; e < nelem; e++)
         { // start loop el
-          ELEMENT *el_pt =
-            dynamic_cast<ELEMENT *>(tmp_new_mesh_pt->element_pt(e));
+          ELEMENT* el_pt =
+            dynamic_cast<ELEMENT*>(tmp_new_mesh_pt->element_pt(e));
           unsigned nint = el_pt->integral_pt()->nweight();
           for (unsigned ipt = 0; ipt < nint; ipt++)
           {
@@ -30715,10 +30712,10 @@ namespace oomph
 
             // Try the five nearest sample points for Newton search
             // then just settle on the nearest one
-            GeomObject *geom_obj_pt = 0;
+            GeomObject* geom_obj_pt = 0;
             unsigned max_sample_points =
               Max_sample_points_for_limited_locate_zeta_during_target_area_transfer;
-            dynamic_cast<CGALSamplePointContainer *>(
+            dynamic_cast<CGALSamplePointContainer*>(
               mesh_geom_obj_pt->sample_point_container_pt())
               ->limited_locate_zeta(x, max_sample_points, geom_obj_pt, s);
 #ifdef PARANOID
@@ -30734,7 +30731,7 @@ namespace oomph
             else
             {
 #endif
-              FiniteElement *fe_pt = dynamic_cast<FiniteElement *>(geom_obj_pt);
+              FiniteElement* fe_pt = dynamic_cast<FiniteElement*>(geom_obj_pt);
 #ifdef PARANOID
               if (fe_pt == 0)
               {
@@ -30909,7 +30906,7 @@ namespace oomph
         for (unsigned e = 0; e < nel_new; e++)
         {
           // The finite element
-          FiniteElement *f_ele_pt = tmp_new_mesh_pt->finite_element_pt(e);
+          FiniteElement* f_ele_pt = tmp_new_mesh_pt->finite_element_pt(e);
 
           // Transferred target area
           const double new_area = new_transferred_target_area[e];
@@ -31167,7 +31164,7 @@ namespace oomph
         // any problem in which the timestepper is a "generalisedtimestepper",
         // which will have been set by the problem, then ensure
         // all data in the new mesh has the appropriate timestepper
-        if (dynamic_cast<GeneralisedTimeStepper *>(this->Time_stepper_pt))
+        if (dynamic_cast<GeneralisedTimeStepper*>(this->Time_stepper_pt))
         {
           new_mesh_pt->set_nodal_and_elemental_time_stepper(
             this->Time_stepper_pt, false);
@@ -31219,7 +31216,7 @@ namespace oomph
           }
           int nproc_not_done = this_processor_requires_another_iteration;
           // Get the communicator of the mesh
-          OomphCommunicator *comm_pt = this->communicator_pt();
+          OomphCommunicator* comm_pt = this->communicator_pt();
           // Communicate with all procesoors to check whether we need to
           // re-iterate
           MPI_Allreduce(&this_processor_requires_another_iteration,
@@ -31322,7 +31319,7 @@ namespace oomph
 
         // Project current solution onto new mesh
         //---------------------------------------
-        ProjectionProblem<ELEMENT> *project_problem_pt =
+        ProjectionProblem<ELEMENT>* project_problem_pt =
           new ProjectionProblem<ELEMENT>;
 
         // Projection requires to be enabled as distributed if working
@@ -31336,7 +31333,7 @@ namespace oomph
 
           // We need to back up the time stepper object since the
           // projection class creates a new one
-          Time *backed_up_time_pt = this->Time_stepper_pt->time_pt();
+          Time* backed_up_time_pt = this->Time_stepper_pt->time_pt();
 
           // Set the projection problem as distributed
           project_problem_pt->enable_problem_distributed();
@@ -31685,7 +31682,7 @@ namespace oomph
           const unsigned tmp_nnodes = this->nshared_boundary_node(shd_bnd_id);
           for (unsigned n = 0; n < tmp_nnodes; n++)
           {
-            Node *tmp_node_pt = this->boundary_node_pt(shd_bnd_id, n);
+            Node* tmp_node_pt = this->boundary_node_pt(shd_bnd_id, n);
             tmp_node_pt->remove_from_boundary(shd_bnd_id);
           } // for (n < nnodes)
 
@@ -31806,7 +31803,7 @@ namespace oomph
     if (this->is_mesh_distributed())
     {
       // Get the communicator
-      OomphCommunicator *comm_pt = this->communicator_pt();
+      OomphCommunicator* comm_pt = this->communicator_pt();
       // Get the total number of processors to compute the average
       const unsigned n_proc = comm_pt->nproc();
       if (Print_timings_level_adaptation > 1 && n_proc > 1)
@@ -31891,7 +31888,7 @@ namespace oomph
     for (unsigned i = 0; i < n_outer_boundaries; i++)
     {
       // Get a temporary polygon representation
-      TriangleMeshPolygon *tmp_polygon_pt = this->Outer_boundary_pt[i];
+      TriangleMeshPolygon* tmp_polygon_pt = this->Outer_boundary_pt[i];
       // Get the number of polylines associated to the current outer
       // boundary
       const unsigned n_polyline = tmp_polygon_pt->npolyline();
@@ -31899,7 +31896,7 @@ namespace oomph
       for (unsigned p = 0; p < n_polyline; p++)
       {
         // Get a temporary representation of the polyline
-        TriangleMeshPolyLine *tmp_polyline_pt = tmp_polygon_pt->polyline_pt(p);
+        TriangleMeshPolyLine* tmp_polyline_pt = tmp_polygon_pt->polyline_pt(p);
 
         // Is the initial vertex connected?
         if (tmp_polyline_pt->is_initial_vertex_connected())
@@ -31956,7 +31953,7 @@ namespace oomph
     for (unsigned i = 0; i < n_internal_boundaries; i++)
     {
       // Get a temporary polygon representation
-      TriangleMeshPolygon *tmp_polygon_pt = this->Internal_polygon_pt[i];
+      TriangleMeshPolygon* tmp_polygon_pt = this->Internal_polygon_pt[i];
       // Get the number of polylines associated to the current internal
       // boundary
       const unsigned n_polyline = tmp_polygon_pt->npolyline();
@@ -31964,7 +31961,7 @@ namespace oomph
       for (unsigned p = 0; p < n_polyline; p++)
       {
         // Get a temporary representation of the polyline
-        TriangleMeshPolyLine *tmp_polyline_pt = tmp_polygon_pt->polyline_pt(p);
+        TriangleMeshPolyLine* tmp_polyline_pt = tmp_polygon_pt->polyline_pt(p);
 
         // Is the initial vertex connected?
         if (tmp_polyline_pt->is_initial_vertex_connected())
@@ -32021,7 +32018,7 @@ namespace oomph
     for (unsigned i = 0; i < n_open_boundaries; i++)
     {
       // Get a temporary representation for the open curve
-      TriangleMeshOpenCurve *tmp_open_curve_pt =
+      TriangleMeshOpenCurve* tmp_open_curve_pt =
         this->Internal_open_curve_pt[i];
 
       // Get the number of curve sections associated to the current
@@ -32033,7 +32030,7 @@ namespace oomph
       {
         // Get a temporary representation of the curve section
         // (polyline)
-        TriangleMeshPolyLine *tmp_polyline_pt =
+        TriangleMeshPolyLine* tmp_polyline_pt =
           tmp_open_curve_pt->polyline_pt(p);
 
         // Is the initial vertex connected?
@@ -32107,7 +32104,7 @@ namespace oomph
         for (unsigned p = 0; p < n_polyline; p++)
         {
           // Get a temporary representation of the shared polyline
-          TriangleMeshPolyLine *tmp_polyline_pt =
+          TriangleMeshPolyLine* tmp_polyline_pt =
             this->shared_boundary_polyline_pt(my_rank, i, p);
 
           // Is the initial vertex connected?
@@ -32164,7 +32161,7 @@ namespace oomph
 
     // Store the sorted nodes by segments of the boundaries with
     // connections
-    std::map<unsigned, Vector<Vector<Node *>>> bnd_sorted_segment_node_pt;
+    std::map<unsigned, Vector<Vector<Node*>>> bnd_sorted_segment_node_pt;
 
     // Loop over the boundaries with connections
     for (std::set<unsigned>::iterator it = boundary_id_with_connections.begin();
@@ -32185,7 +32182,7 @@ namespace oomph
           // Is a shared boundary
 
           // Temporary storage for the nodes on the shared boundary
-          Vector<Vector<Node *>> tmp_shared_nodes_pt;
+          Vector<Vector<Node*>> tmp_shared_nodes_pt;
 
           // Get the nodes associated to the shared boundary
           get_shared_boundary_segment_nodes_helper(bnd_id, tmp_shared_nodes_pt);
@@ -32199,7 +32196,7 @@ namespace oomph
           // Is an original boundary
 
           // Temporary storage for the nodes on the original boundary
-          Vector<Vector<Node *>> tmp_boundary_nodes_pt;
+          Vector<Vector<Node*>> tmp_boundary_nodes_pt;
 
           // Get the nodes associated to the shared boundary
           get_boundary_segment_nodes_helper(bnd_id, tmp_boundary_nodes_pt);
@@ -32216,7 +32213,7 @@ namespace oomph
         // Is an original boundary
 
         // Temporary storage for the nodes on the original boundary
-        Vector<Vector<Node *>> tmp_boundary_nodes_pt;
+        Vector<Vector<Node*>> tmp_boundary_nodes_pt;
 
         // Get the nodes associated to the shared boundary
         get_boundary_segment_nodes_helper(bnd_id, tmp_boundary_nodes_pt);
@@ -32239,7 +32236,7 @@ namespace oomph
     for (unsigned i = 0; i < n_outer_boundaries; i++)
     {
       // Get a temporary polygon representation
-      TriangleMeshPolygon *tmp_polygon_pt = this->Outer_boundary_pt[i];
+      TriangleMeshPolygon* tmp_polygon_pt = this->Outer_boundary_pt[i];
       // Get the number of polylines associated to the current outer
       // boundary
       const unsigned n_polyline = tmp_polygon_pt->npolyline();
@@ -32247,7 +32244,7 @@ namespace oomph
       for (unsigned p = 0; p < n_polyline; p++)
       {
         // Get a temporary representation of the polyline
-        TriangleMeshPolyLine *tmp_polyline_pt = tmp_polygon_pt->polyline_pt(p);
+        TriangleMeshPolyLine* tmp_polyline_pt = tmp_polygon_pt->polyline_pt(p);
 
         // Is the initial vertex connected?
         if (tmp_polyline_pt->is_initial_vertex_connected())
@@ -32264,11 +32261,11 @@ namespace oomph
             tmp_polyline_pt->initial_vertex_connected_n_chunk();
 
           // Get the nodes representation of the current boundary
-          Vector<Vector<Node *>> src_bnd_node_pt =
+          Vector<Vector<Node*>> src_bnd_node_pt =
             bnd_sorted_segment_node_pt[bnd_id];
 
           // Get the nodes representation of the boundary to connect
-          Vector<Vector<Node *>> dst_bnd_node_pt =
+          Vector<Vector<Node*>> dst_bnd_node_pt =
             bnd_sorted_segment_node_pt[dst_bnd_id];
 
           // Add the repeated node to the list of non delete-able
@@ -32293,11 +32290,11 @@ namespace oomph
             tmp_polyline_pt->final_vertex_connected_n_chunk();
 
           // Get the nodes representation of the current boundary
-          Vector<Vector<Node *>> src_bnd_node_pt =
+          Vector<Vector<Node*>> src_bnd_node_pt =
             bnd_sorted_segment_node_pt[bnd_id];
 
           // Get the nodes representation of the boundary to connect
-          Vector<Vector<Node *>> dst_bnd_node_pt =
+          Vector<Vector<Node*>> dst_bnd_node_pt =
             bnd_sorted_segment_node_pt[dst_bnd_id];
 
           // Add the repeated node to the list of non delete-able
@@ -32318,7 +32315,7 @@ namespace oomph
     for (unsigned i = 0; i < n_internal_boundaries; i++)
     {
       // Get a temporary polygon representation
-      TriangleMeshPolygon *tmp_polygon_pt = this->Internal_polygon_pt[i];
+      TriangleMeshPolygon* tmp_polygon_pt = this->Internal_polygon_pt[i];
       // Get the number of polylines associated to the current internal
       // boundary
       const unsigned n_polyline = tmp_polygon_pt->npolyline();
@@ -32326,7 +32323,7 @@ namespace oomph
       for (unsigned p = 0; p < n_polyline; p++)
       {
         // Get a temporary representation of the polyline
-        TriangleMeshPolyLine *tmp_polyline_pt = tmp_polygon_pt->polyline_pt(p);
+        TriangleMeshPolyLine* tmp_polyline_pt = tmp_polygon_pt->polyline_pt(p);
 
         // Is the initial vertex connected?
         if (tmp_polyline_pt->is_initial_vertex_connected())
@@ -32343,11 +32340,11 @@ namespace oomph
             tmp_polyline_pt->initial_vertex_connected_n_chunk();
 
           // Get the nodes representation of the current boundary
-          Vector<Vector<Node *>> src_bnd_node_pt =
+          Vector<Vector<Node*>> src_bnd_node_pt =
             bnd_sorted_segment_node_pt[bnd_id];
 
           // Get the nodes representation of the boundary to connect
-          Vector<Vector<Node *>> dst_bnd_node_pt =
+          Vector<Vector<Node*>> dst_bnd_node_pt =
             bnd_sorted_segment_node_pt[dst_bnd_id];
 
           // Add the repeated node to the list of non delete-able
@@ -32372,11 +32369,11 @@ namespace oomph
             tmp_polyline_pt->final_vertex_connected_n_chunk();
 
           // Get the nodes representation of the current boundary
-          Vector<Vector<Node *>> src_bnd_node_pt =
+          Vector<Vector<Node*>> src_bnd_node_pt =
             bnd_sorted_segment_node_pt[bnd_id];
 
           // Get the nodes representation of the boundary to connect
-          Vector<Vector<Node *>> dst_bnd_node_pt =
+          Vector<Vector<Node*>> dst_bnd_node_pt =
             bnd_sorted_segment_node_pt[dst_bnd_id];
 
           // Add the repeated node to the list of non delete-able
@@ -32397,7 +32394,7 @@ namespace oomph
     for (unsigned i = 0; i < n_open_boundaries; i++)
     {
       // Get a temporary representation for the open curve
-      TriangleMeshOpenCurve *tmp_open_curve_pt =
+      TriangleMeshOpenCurve* tmp_open_curve_pt =
         this->Internal_open_curve_pt[i];
 
       // Get the number of curve sections associated to the current
@@ -32409,7 +32406,7 @@ namespace oomph
       {
         // Get a temporary representation of the curve section
         // (polyline)
-        TriangleMeshPolyLine *tmp_polyline_pt =
+        TriangleMeshPolyLine* tmp_polyline_pt =
           tmp_open_curve_pt->polyline_pt(p);
 
         // Is the initial vertex connected?
@@ -32427,11 +32424,11 @@ namespace oomph
             tmp_polyline_pt->initial_vertex_connected_n_chunk();
 
           // Get the nodes representation of the current boundary
-          Vector<Vector<Node *>> src_bnd_node_pt =
+          Vector<Vector<Node*>> src_bnd_node_pt =
             bnd_sorted_segment_node_pt[bnd_id];
 
           // Get the nodes representation of the boundary to connect
-          Vector<Vector<Node *>> dst_bnd_node_pt =
+          Vector<Vector<Node*>> dst_bnd_node_pt =
             bnd_sorted_segment_node_pt[dst_bnd_id];
 
           // Add the repeated node to the list of non delete-able
@@ -32456,11 +32453,11 @@ namespace oomph
             tmp_polyline_pt->final_vertex_connected_n_chunk();
 
           // Get the nodes representation of the current boundary
-          Vector<Vector<Node *>> src_bnd_node_pt =
+          Vector<Vector<Node*>> src_bnd_node_pt =
             bnd_sorted_segment_node_pt[bnd_id];
 
           // Get the nodes representation of the boundary to connect
-          Vector<Vector<Node *>> dst_bnd_node_pt =
+          Vector<Vector<Node*>> dst_bnd_node_pt =
             bnd_sorted_segment_node_pt[dst_bnd_id];
 
           // Add the repeated node to the list of non delete-able
@@ -32501,7 +32498,7 @@ namespace oomph
         for (unsigned p = 0; p < n_polyline; p++)
         {
           // Get a temporary representation of the shared polyline
-          TriangleMeshPolyLine *tmp_polyline_pt =
+          TriangleMeshPolyLine* tmp_polyline_pt =
             this->shared_boundary_polyline_pt(my_rank, i, p);
 
           // Is the initial vertex connected?
@@ -32519,11 +32516,11 @@ namespace oomph
               tmp_polyline_pt->initial_vertex_connected_n_chunk();
 
             // Get the nodes representation of the current boundary
-            Vector<Vector<Node *>> src_bnd_node_pt =
+            Vector<Vector<Node*>> src_bnd_node_pt =
               bnd_sorted_segment_node_pt[bnd_id];
 
             // Get the nodes representation of the boundary to connect
-            Vector<Vector<Node *>> dst_bnd_node_pt =
+            Vector<Vector<Node*>> dst_bnd_node_pt =
               bnd_sorted_segment_node_pt[dst_bnd_id];
 
             // Add the repeated node to the list of non delete-able
@@ -32548,11 +32545,11 @@ namespace oomph
               tmp_polyline_pt->final_vertex_connected_n_chunk();
 
             // Get the nodes representation of the current boundary
-            Vector<Vector<Node *>> src_bnd_node_pt =
+            Vector<Vector<Node*>> src_bnd_node_pt =
               bnd_sorted_segment_node_pt[bnd_id];
 
             // Get the nodes representation of the boundary to connect
-            Vector<Vector<Node *>> dst_bnd_node_pt =
+            Vector<Vector<Node*>> dst_bnd_node_pt =
               bnd_sorted_segment_node_pt[dst_bnd_id];
 
             // Add the repeated node to the list of non delete-able
@@ -32579,10 +32576,10 @@ namespace oomph
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::
     add_non_delete_vertices_from_boundary_helper(
-      Vector<Vector<Node *>> src_bound_segment_node_pt,
-      Vector<Vector<Node *>> dst_bound_segment_node_pt,
-      const unsigned &dst_bnd_id,
-      const unsigned &dst_bnd_chunk)
+      Vector<Vector<Node*>> src_bound_segment_node_pt,
+      Vector<Vector<Node*>> dst_bound_segment_node_pt,
+      const unsigned& dst_bnd_id,
+      const unsigned& dst_bnd_chunk)
   {
     // Get the number of segments in the source boundary
     const unsigned n_seg = src_bound_segment_node_pt.size();
@@ -32592,8 +32589,8 @@ namespace oomph
       // Get the number of nodes in the current segment
       const unsigned nnode = src_bound_segment_node_pt[iseg].size();
       // Get the left and right node of the current segment
-      Node *left_node_pt = src_bound_segment_node_pt[iseg][0];
-      Node *right_node_pt = src_bound_segment_node_pt[iseg][nnode - 1];
+      Node* left_node_pt = src_bound_segment_node_pt[iseg][0];
+      Node* right_node_pt = src_bound_segment_node_pt[iseg][nnode - 1];
 
       // Get the number of segments in the destination boundary
       const unsigned n_dst_seg = dst_bound_segment_node_pt.size();
@@ -32608,7 +32605,7 @@ namespace oomph
         {
           // Get a pointer to the jnode in the destination segment
           // boundary
-          Node *tmp_node_pt = dst_bound_segment_node_pt[jseg][jnode];
+          Node* tmp_node_pt = dst_bound_segment_node_pt[jseg][jnode];
           // Is the node the same as the left or right node if
           // the source segment boundary
           if (tmp_node_pt == left_node_pt)
@@ -32712,7 +32709,7 @@ namespace oomph
           // Get the shared boudary id
           const unsigned shd_bnd_id = shd_bnd_ids[ishd_bnd];
           // Get the associated polyline
-          TriangleMeshPolyLine *shd_polyline_pt =
+          TriangleMeshPolyLine* shd_polyline_pt =
             this->boundary_polyline_pt(shd_bnd_id);
           // Get the chunk number
           const unsigned chunk = shd_polyline_pt->boundary_chunk();
@@ -32766,7 +32763,7 @@ namespace oomph
         // ----------------------------------------------------------
         // ----------------------------------------------------------
         // Get the communicator of the mesh
-        OomphCommunicator *comm_pt = this->communicator_pt();
+        OomphCommunicator* comm_pt = this->communicator_pt();
 
         // Set MPI info
         MPI_Status status;
@@ -33041,12 +33038,12 @@ namespace oomph
   //=========================================================================
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::create_temporary_boundary_connections(
-    Vector<TriangleMeshPolygon *> &tmp_outer_polygons_pt,
-    Vector<TriangleMeshOpenCurve *> &tmp_open_curves_pt)
+    Vector<TriangleMeshPolygon*>& tmp_outer_polygons_pt,
+    Vector<TriangleMeshOpenCurve*>& tmp_open_curves_pt)
   {
     // Dummy storages
-    Vector<TriangleMeshPolyLine *> dummy_resume_initial_connection_polyline_pt;
-    Vector<TriangleMeshPolyLine *> dummy_resume_final_connection_polyline_pt;
+    Vector<TriangleMeshPolyLine*> dummy_resume_initial_connection_polyline_pt;
+    Vector<TriangleMeshPolyLine*> dummy_resume_final_connection_polyline_pt;
 
     // Clear the storage
     dummy_resume_initial_connection_polyline_pt.clear();
@@ -33078,7 +33075,7 @@ namespace oomph
     for (unsigned i = 0; i < n_outer_boundaries; i++)
     {
       // Get a temporary polygon representation
-      TriangleMeshPolygon *tmp_polygon_pt = tmp_outer_polygons_pt[i];
+      TriangleMeshPolygon* tmp_polygon_pt = tmp_outer_polygons_pt[i];
       // Get the number of polylines associated to the current outer
       // boundary
       const unsigned n_polyline = tmp_polygon_pt->npolyline();
@@ -33086,7 +33083,7 @@ namespace oomph
       for (unsigned p = 0; p < n_polyline; p++)
       {
         // Get a temporary representation of the polyline
-        TriangleMeshPolyLine *tmp_polyline_pt = tmp_polygon_pt->polyline_pt(p);
+        TriangleMeshPolyLine* tmp_polyline_pt = tmp_polygon_pt->polyline_pt(p);
 
         // Get the boundary id
         const unsigned bnd_id = tmp_polyline_pt->boundary_id();
@@ -33121,7 +33118,7 @@ namespace oomph
     for (unsigned i = 0; i < n_open_boundaries; i++)
     {
       // Get a temporary representation for the open curve
-      TriangleMeshOpenCurve *tmp_open_curve_pt = tmp_open_curves_pt[i];
+      TriangleMeshOpenCurve* tmp_open_curve_pt = tmp_open_curves_pt[i];
 
       // Get the number of curve sections associated to the current
       // internal open boundary
@@ -33132,7 +33129,7 @@ namespace oomph
       {
         // Get a temporary representation of the curve section
         // (polyline)
-        TriangleMeshPolyLine *tmp_polyline_pt =
+        TriangleMeshPolyLine* tmp_polyline_pt =
           tmp_open_curve_pt->polyline_pt(p);
 
         // Get the boundary id
@@ -33166,8 +33163,8 @@ namespace oomph
   //=========================================================================
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::restore_boundary_connections(
-    Vector<TriangleMeshPolyLine *> &resume_initial_connection_polyline_pt,
-    Vector<TriangleMeshPolyLine *> &resume_final_connection_polyline_pt)
+    Vector<TriangleMeshPolyLine*>& resume_initial_connection_polyline_pt,
+    Vector<TriangleMeshPolyLine*>& resume_final_connection_polyline_pt)
   {
     // Clear the storage
     resume_initial_connection_polyline_pt.clear();
@@ -33188,7 +33185,7 @@ namespace oomph
     for (unsigned i = 0; i < n_outer_boundaries; i++)
     {
       // Get a temporary polygon representation
-      TriangleMeshPolygon *tmp_polygon_pt = this->Outer_boundary_pt[i];
+      TriangleMeshPolygon* tmp_polygon_pt = this->Outer_boundary_pt[i];
       // Get the number of polylines associated to the current outer
       // boundary
       const unsigned n_polyline = tmp_polygon_pt->npolyline();
@@ -33196,7 +33193,7 @@ namespace oomph
       for (unsigned p = 0; p < n_polyline; p++)
       {
         // Get a temporary representation of the polyline
-        TriangleMeshPolyLine *tmp_polyline_pt = tmp_polygon_pt->polyline_pt(p);
+        TriangleMeshPolyLine* tmp_polyline_pt = tmp_polygon_pt->polyline_pt(p);
 
         // Restore the connections of the current polyline
         restore_polyline_connections_helper(
@@ -33219,7 +33216,7 @@ namespace oomph
     for (unsigned i = 0; i < n_internal_boundaries; i++)
     {
       // Get a temporary polygon representation
-      TriangleMeshPolygon *tmp_polygon_pt = this->Internal_polygon_pt[i];
+      TriangleMeshPolygon* tmp_polygon_pt = this->Internal_polygon_pt[i];
       // Get the number of polylines associated to the current internal
       // boundary
       const unsigned n_polyline = tmp_polygon_pt->npolyline();
@@ -33227,7 +33224,7 @@ namespace oomph
       for (unsigned p = 0; p < n_polyline; p++)
       {
         // Get a temporary representation of the polyline
-        TriangleMeshPolyLine *tmp_polyline_pt = tmp_polygon_pt->polyline_pt(p);
+        TriangleMeshPolyLine* tmp_polyline_pt = tmp_polygon_pt->polyline_pt(p);
 
         // Restore the connections of the current polyline
         restore_polyline_connections_helper(
@@ -33250,7 +33247,7 @@ namespace oomph
     for (unsigned i = 0; i < n_open_boundaries; i++)
     {
       // Get a temporary representation for the open curve
-      TriangleMeshOpenCurve *tmp_open_curve_pt =
+      TriangleMeshOpenCurve* tmp_open_curve_pt =
         this->Internal_open_curve_pt[i];
 
       // Get the number of curve sections associated to the current
@@ -33262,7 +33259,7 @@ namespace oomph
       {
         // Get a temporary representation of the curve section
         // (polyline)
-        TriangleMeshPolyLine *tmp_polyline_pt =
+        TriangleMeshPolyLine* tmp_polyline_pt =
           tmp_open_curve_pt->polyline_pt(p);
 
         // Restore the connections of the current polyline
@@ -33286,9 +33283,9 @@ namespace oomph
   //=========================================================================
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::restore_polyline_connections_helper(
-    TriangleMeshPolyLine *polyline_pt,
-    Vector<TriangleMeshPolyLine *> &resume_initial_connection_polyline_pt,
-    Vector<TriangleMeshPolyLine *> &resume_final_connection_polyline_pt)
+    TriangleMeshPolyLine* polyline_pt,
+    Vector<TriangleMeshPolyLine*>& resume_initial_connection_polyline_pt,
+    Vector<TriangleMeshPolyLine*>& resume_final_connection_polyline_pt)
   {
     // If the polyline is connected at any of its ends compute the new
     // vertex number on the destination boundary
@@ -33298,7 +33295,7 @@ namespace oomph
     if (polyline_pt->is_initial_vertex_connected())
     {
       // The pointer to the boundary to connect
-      TriangleMeshPolyLine *poly_to_connect_pt = 0;
+      TriangleMeshPolyLine* poly_to_connect_pt = 0;
 
       // Get the boundary id of the destination/connected boundary
       const unsigned dst_bnd_id_initial =
@@ -33336,7 +33333,7 @@ namespace oomph
                "boundary\n";
           // Get the pointer to the associated polyline by using the
           // boundary id
-          TriangleMeshPolyLine *dst_polyline =
+          TriangleMeshPolyLine* dst_polyline =
             this->boundary_polyline_pt(dst_bnd_id_initial);
           // The number of vertices on the destination boundary
           const unsigned n_vertex_dst_boundary = dst_polyline->nvertex();
@@ -33483,7 +33480,7 @@ namespace oomph
         // in the sub-polylines
 
         // Get the sub-polylines vector
-        Vector<TriangleMeshPolyLine *> tmp_vector_subpolylines =
+        Vector<TriangleMeshPolyLine*> tmp_vector_subpolylines =
           this->boundary_subpolylines(dst_bnd_id_initial);
 
         // Get the number of sub-polylines
@@ -33628,7 +33625,7 @@ namespace oomph
             << "This is the list of vertices on the destination boundary\n";
           // Get the pointer to the associated polyline by using the
           // boundary id
-          TriangleMeshPolyLine *dst_polyline =
+          TriangleMeshPolyLine* dst_polyline =
             this->boundary_polyline_pt(dst_bnd_id_initial);
           // The number of vertices on the destination boundary
           const unsigned n_vertex_dst_boundary = dst_polyline->nvertex();
@@ -33666,7 +33663,7 @@ namespace oomph
     if (polyline_pt->is_final_vertex_connected())
     {
       // The pointer to the boundary to connect
-      TriangleMeshPolyLine *poly_to_connect_pt = 0;
+      TriangleMeshPolyLine* poly_to_connect_pt = 0;
 
       // Get the boundary id of the destination/connected boundary
       const unsigned dst_bnd_id_final =
@@ -33704,7 +33701,7 @@ namespace oomph
             << "This is the list of vertices on the destination boundary\n";
           // Get the pointer to the associated polyline by using the
           // boundary id
-          TriangleMeshPolyLine *dst_polyline =
+          TriangleMeshPolyLine* dst_polyline =
             this->boundary_polyline_pt(dst_bnd_id_final);
           // The number of vertices on the destination boundary
           const unsigned n_vertex_dst_boundary = dst_polyline->nvertex();
@@ -33850,7 +33847,7 @@ namespace oomph
         // in the sub-polylines
 
         // Get the sub-polylines vector
-        Vector<TriangleMeshPolyLine *> tmp_vector_subpolylines =
+        Vector<TriangleMeshPolyLine*> tmp_vector_subpolylines =
           this->boundary_subpolylines(dst_bnd_id_final);
 
         // Get the number of sub-polylines
@@ -33995,7 +33992,7 @@ namespace oomph
             << "This is the list of vertices on the destination boundary\n";
           // Get the pointer to the associated polyline by using the
           // boundary id
-          TriangleMeshPolyLine *dst_polyline =
+          TriangleMeshPolyLine* dst_polyline =
             this->boundary_polyline_pt(dst_bnd_id_final);
           // The number of vertices on the destination boundary
           const unsigned n_vertex_dst_boundary = dst_polyline->nvertex();
@@ -34038,8 +34035,8 @@ namespace oomph
   //=========================================================================
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::resume_boundary_connections(
-    Vector<TriangleMeshPolyLine *> &resume_initial_connection_polyline_pt,
-    Vector<TriangleMeshPolyLine *> &resume_final_connection_polyline_pt)
+    Vector<TriangleMeshPolyLine*>& resume_initial_connection_polyline_pt,
+    Vector<TriangleMeshPolyLine*>& resume_final_connection_polyline_pt)
   {
     // Get the number of polylines that require to resume the connection
     // at the initial vertex
@@ -34050,7 +34047,7 @@ namespace oomph
     for (unsigned p = 0; p < n_initial_poly; p++)
     {
       // Get the polyline
-      TriangleMeshPolyLine *tmp_poly_pt =
+      TriangleMeshPolyLine* tmp_poly_pt =
         resume_initial_connection_polyline_pt[p];
       // Resume the connection with the initial vertex
       tmp_poly_pt->resume_initial_vertex_connected();
@@ -34064,7 +34061,7 @@ namespace oomph
     for (unsigned p = 0; p < n_final_poly; p++)
     {
       // Get the polyline
-      TriangleMeshPolyLine *tmp_poly_pt =
+      TriangleMeshPolyLine* tmp_poly_pt =
         resume_final_connection_polyline_pt[p];
       // Resume the connection with the final vertex
       tmp_poly_pt->resume_final_vertex_connected();
@@ -34082,14 +34079,14 @@ namespace oomph
   template<class ELEMENT>
   bool RefineableTriangleMesh<ELEMENT>::
     get_connected_vertex_number_on_dst_boundary(
-      Vector<double> &vertex_coordinates,
-      const unsigned &dst_bnd_id,
-      unsigned &vertex_number)
+      Vector<double>& vertex_coordinates,
+      const unsigned& dst_bnd_id,
+      unsigned& vertex_number)
   {
     bool found_associated_vertex_number = false;
 
     // Get the pointer to the associated polyline by using the boundary id
-    TriangleMeshPolyLine *dst_polyline = this->boundary_polyline_pt(dst_bnd_id);
+    TriangleMeshPolyLine* dst_polyline = this->boundary_polyline_pt(dst_bnd_id);
 
     const unsigned n_vertices = dst_polyline->nvertex();
 
@@ -34128,7 +34125,7 @@ namespace oomph
   //=========================================================================
   template<class ELEMENT>
   bool RefineableTriangleMesh<ELEMENT>::update_polygon_using_face_mesh(
-    TriangleMeshPolygon *polygon_pt, const bool &check_only)
+    TriangleMeshPolygon* polygon_pt, const bool& check_only)
   {
 #ifdef PARANOID
     // If the mesh is marked as distributed this method can not be
@@ -34164,7 +34161,7 @@ namespace oomph
     // Get face mesh representation of all polylines, possibly
     // with segments re-distributed to maintain an approximately
     // even sub-division of the polygon
-    Vector<Mesh *> face_mesh_pt;
+    Vector<Mesh*> face_mesh_pt;
     get_face_mesh_representation(polygon_pt, face_mesh_pt);
 
     // Create vertices for the polylines by using the vertices
@@ -34190,7 +34187,7 @@ namespace oomph
       unsigned n_face_element = face_mesh_pt[p]->nelement();
       for (unsigned e = 0; e < n_face_element; ++e)
       {
-        FiniteElement *el_pt = face_mesh_pt[p]->finite_element_pt(e);
+        FiniteElement* el_pt = face_mesh_pt[p]->finite_element_pt(e);
 
 #ifdef OOMPH_HAS_MPI
         // Only work with non-halo elements if the mesh is distributed
@@ -34533,12 +34530,12 @@ namespace oomph
       {
         // Now update the polyline according to the new vertices
         // The new one representation
-        TriangleMeshPolyLine *tmp_polyline_pt =
+        TriangleMeshPolyLine* tmp_polyline_pt =
           new TriangleMeshPolyLine(vector_vertex_node, bound);
 
         // Create a temporal "curve section" version of the recently created
         // polyline
-        TriangleMeshCurveSection *tmp_curve_section_pt = tmp_polyline_pt;
+        TriangleMeshCurveSection* tmp_curve_section_pt = tmp_polyline_pt;
 
         // Establish refinement and unrefinement tolerance
         tmp_polyline_pt->set_unrefinement_tolerance(unrefinement_tolerance);
@@ -34557,7 +34554,7 @@ namespace oomph
         // or if it should be done by other object
         bool delete_it_on_destructor = false;
 
-        std::set<TriangleMeshCurveSection *>::iterator it =
+        std::set<TriangleMeshCurveSection*>::iterator it =
           this->Free_curve_section_pt.find(polygon_pt->curve_section_pt(p));
 
         if (it != this->Free_curve_section_pt.end())
@@ -34619,7 +34616,7 @@ namespace oomph
   //=========================================================================
   template<class ELEMENT>
   bool RefineableTriangleMesh<ELEMENT>::update_open_curve_using_face_mesh(
-    TriangleMeshOpenCurve *open_polyline_pt, const bool &check_only)
+    TriangleMeshOpenCurve* open_polyline_pt, const bool& check_only)
   {
 #ifdef PARANOID
     // If the mesh is marked as distributed this method can not be
@@ -34655,7 +34652,7 @@ namespace oomph
     // Get face mesh representation of all polylines, possibly
     // with segments re-distributed to maintain an approximately
     // even sub-division of the polygon
-    Vector<Mesh *> face_mesh_pt;
+    Vector<Mesh*> face_mesh_pt;
     get_face_mesh_representation(open_polyline_pt, face_mesh_pt);
 
     // Create vertices for the polylines by using the vertices
@@ -34685,7 +34682,7 @@ namespace oomph
       // n_count = 0;
       for (unsigned e = 0; e < n_face_element; ++e)
       {
-        FiniteElement *el_pt = face_mesh_pt[p]->finite_element_pt(e);
+        FiniteElement* el_pt = face_mesh_pt[p]->finite_element_pt(e);
         unsigned n_node = el_pt->nnode();
 
         // Add the left-hand node to the set:
@@ -35018,12 +35015,12 @@ namespace oomph
       {
         // Now update the polyline according to the new vertices The new
         // one representation
-        TriangleMeshPolyLine *tmp_polyline =
+        TriangleMeshPolyLine* tmp_polyline =
           new TriangleMeshPolyLine(vector_vertex_node, bound);
 
         // Create a temporal "curve section" version of the recently
         // created polyline
-        TriangleMeshCurveSection *tmp_curve_section = tmp_polyline;
+        TriangleMeshCurveSection* tmp_curve_section = tmp_polyline;
 
         // Copy the unrefinement and refinement information
         tmp_polyline->set_unrefinement_tolerance(unrefinement_tolerance);
@@ -35037,7 +35034,7 @@ namespace oomph
         this->copy_connection_information(open_polyline_pt->polyline_pt(p),
                                           tmp_curve_section);
 
-        std::set<TriangleMeshCurveSection *>::iterator it =
+        std::set<TriangleMeshCurveSection*>::iterator it =
           this->Free_curve_section_pt.find(
             open_polyline_pt->curve_section_pt(p));
 
@@ -35103,11 +35100,11 @@ namespace oomph
   //=========================================================================
   template<class ELEMENT>
   bool RefineableTriangleMesh<ELEMENT>::unrefine_boundary(
-    const unsigned &b,
-    const unsigned &c,
-    Vector<Vector<double>> &vector_bnd_vertices,
-    double &unrefinement_tolerance,
-    const bool &check_only)
+    const unsigned& b,
+    const unsigned& c,
+    Vector<Vector<double>>& vector_bnd_vertices,
+    double& unrefinement_tolerance,
+    const bool& check_only)
   {
     // Store the vertices not allowed for deletion
     std::set<Vector<double>> no_delete_vertex;
@@ -35398,10 +35395,10 @@ namespace oomph
   //=========================================================================
   template<class ELEMENT>
   bool RefineableTriangleMesh<ELEMENT>::refine_boundary(
-    Mesh *face_mesh_pt,
-    Vector<Vector<double>> &vector_bnd_vertices,
-    double &refinement_tolerance,
-    const bool &check_only)
+    Mesh* face_mesh_pt,
+    Vector<Vector<double>>& vector_bnd_vertices,
+    double& refinement_tolerance,
+    const bool& check_only)
   {
     // Boolean that indicates whether an actual update of the vertex
     // coordinates was performed or not
@@ -35409,7 +35406,7 @@ namespace oomph
 
     // Create a geometric object from the mesh to represent
     // the curvilinear boundary
-    MeshAsGeomObject *mesh_geom_obj_pt = new MeshAsGeomObject(face_mesh_pt);
+    MeshAsGeomObject* mesh_geom_obj_pt = new MeshAsGeomObject(face_mesh_pt);
 
     // Get the total number of current vertices
     unsigned n_vertex = vector_bnd_vertices.size();
@@ -35544,9 +35541,9 @@ namespace oomph
   //=========================================================================
   template<class ELEMENT>
   bool RefineableTriangleMesh<ELEMENT>::apply_max_length_constraint(
-    Mesh *face_mesh_pt,
-    Vector<Vector<double>> &vector_bnd_vertices,
-    double &max_length_constraint)
+    Mesh* face_mesh_pt,
+    Vector<Vector<double>>& vector_bnd_vertices,
+    double& max_length_constraint)
   {
     // Boolean that indicates whether an actual update of the vertex
     // coordinates was performed or not
@@ -35554,7 +35551,7 @@ namespace oomph
 
     // Create a geometric object from the mesh to represent
     // the curvilinear boundary
-    MeshAsGeomObject *mesh_geom_obj_pt = new MeshAsGeomObject(face_mesh_pt);
+    MeshAsGeomObject* mesh_geom_obj_pt = new MeshAsGeomObject(face_mesh_pt);
 
     // Get the total number of current vertices
     unsigned n_vertex = vector_bnd_vertices.size();
@@ -35662,8 +35659,8 @@ namespace oomph
   //=========================================================================
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::
-    create_unsorted_face_mesh_representation(const unsigned &boundary_id,
-                                             Mesh *face_mesh_pt)
+    create_unsorted_face_mesh_representation(const unsigned& boundary_id,
+                                             Mesh* face_mesh_pt)
   {
     // Create a face mesh adjacent to specified boundary.
     // The face mesh consists of FaceElements that may also be
@@ -35679,8 +35676,8 @@ namespace oomph
     for (unsigned e = 0; e < n_element; e++)
     {
       // Cast the element pointer to the correct thing!
-      FaceElementAsGeomObject<ELEMENT> *el_pt =
-        dynamic_cast<FaceElementAsGeomObject<ELEMENT> *>(
+      FaceElementAsGeomObject<ELEMENT>* el_pt =
+        dynamic_cast<FaceElementAsGeomObject<ELEMENT>*>(
           face_mesh_pt->element_pt(e));
 
       // Set bulk boundary number
@@ -35695,12 +35692,12 @@ namespace oomph
   //=========================================================================
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::create_sorted_face_mesh_representation(
-    const unsigned &boundary_id,
-    Mesh *face_mesh_pt,
-    std::map<FiniteElement *, bool> &is_inverted,
-    bool &inverted_face_mesh)
+    const unsigned& boundary_id,
+    Mesh* face_mesh_pt,
+    std::map<FiniteElement*, bool>& is_inverted,
+    bool& inverted_face_mesh)
   {
-    Mesh *tmp_unsorted_face_mesh_pt = new Mesh();
+    Mesh* tmp_unsorted_face_mesh_pt = new Mesh();
 
     // First step we get the unsorted version of the face mesh
     create_unsorted_face_mesh_representation(boundary_id,
@@ -35714,8 +35711,8 @@ namespace oomph
 
     // Put first element into ordered list
     // Temporal list for sorting the elements
-    std::list<FiniteElement *> sorted_el_pt;
-    FiniteElement *el_pt = tmp_unsorted_face_mesh_pt->finite_element_pt(0);
+    std::list<FiniteElement*> sorted_el_pt;
+    FiniteElement* el_pt = tmp_unsorted_face_mesh_pt->finite_element_pt(0);
     sorted_el_pt.push_back(el_pt);
 
     // Number of nodes
@@ -35728,7 +35725,7 @@ namespace oomph
     unsigned n_face_element = tmp_unsorted_face_mesh_pt->nelement();
 
     // Keep track of who's done
-    std::map<FiniteElement *, bool> done_el;
+    std::map<FiniteElement*, bool> done_el;
 
     is_inverted.clear();
 
@@ -35746,18 +35743,18 @@ namespace oomph
         if (!done_el[el_pt])
         {
           // Left and rightmost elements
-          FiniteElement *first_el_pt = (*sorted_el_pt.begin());
-          std::list<FiniteElement *>::iterator it = sorted_el_pt.end();
+          FiniteElement* first_el_pt = (*sorted_el_pt.begin());
+          std::list<FiniteElement*>::iterator it = sorted_el_pt.end();
           it--;
-          FiniteElement *last_el_pt = *it;
+          FiniteElement* last_el_pt = *it;
 
           // Left and rightmost nodes
-          Node *left_node_pt = first_el_pt->node_pt(0);
+          Node* left_node_pt = first_el_pt->node_pt(0);
           if (is_inverted[first_el_pt])
           {
             left_node_pt = first_el_pt->node_pt(nnod - 1);
           }
-          Node *right_node_pt = last_el_pt->node_pt(nnod - 1);
+          Node* right_node_pt = last_el_pt->node_pt(nnod - 1);
           if (is_inverted[last_el_pt])
           {
             right_node_pt = last_el_pt->node_pt(0);
@@ -35824,12 +35821,12 @@ namespace oomph
     // Remember that we currently have a list, not a mesh of sorted elements
 
     // Fill it
-    for (std::list<FiniteElement *>::iterator it = sorted_el_pt.begin();
+    for (std::list<FiniteElement*>::iterator it = sorted_el_pt.begin();
          it != sorted_el_pt.end();
          it++)
     {
       // Get element
-      FiniteElement *el_pt = *it;
+      FiniteElement* el_pt = *it;
 
       // add this face element to the order original mesh
       face_mesh_pt->add_element_pt(el_pt);
@@ -35842,7 +35839,7 @@ namespace oomph
     // inverted
 
     // Get the associated polyline representation to the boundary
-    TriangleMeshPolyLine *bnd_polyline =
+    TriangleMeshPolyLine* bnd_polyline =
       this->Boundary_curve_section_pt[boundary_id];
 
     // Get the really first vertex
@@ -35850,13 +35847,13 @@ namespace oomph
 
     // Now get the first node based on the face mesh representation
     // First get access to the first element
-    FiniteElement *first_el_pt = face_mesh_pt->finite_element_pt(0);
+    FiniteElement* first_el_pt = face_mesh_pt->finite_element_pt(0);
 
     // Now get access to the first node
     unsigned n_node = first_el_pt->nnode();
     // Get the very first node (taking into account if it is
     // inverted or not!!)
-    Node *first_node_pt = first_el_pt->node_pt(0);
+    Node* first_node_pt = first_el_pt->node_pt(0);
     if (is_inverted[first_el_pt])
     {
       first_node_pt = first_el_pt->node_pt(n_node - 1);
@@ -35886,7 +35883,7 @@ namespace oomph
   //=========================================================================
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::get_face_mesh_representation(
-    TriangleMeshPolygon *polygon_pt, Vector<Mesh *> &face_mesh_pt)
+    TriangleMeshPolygon* polygon_pt, Vector<Mesh*>& face_mesh_pt)
   {
     // Number of polylines
     unsigned n_polyline = polygon_pt->npolyline();
@@ -35906,7 +35903,7 @@ namespace oomph
 
       // If the boundary has a geometric object representation then
       // we can't redistribute
-      GeomObject *const geom_object_pt = this->boundary_geom_object_pt(bound);
+      GeomObject* const geom_object_pt = this->boundary_geom_object_pt(bound);
       if (geom_object_pt != 0)
       {
         eligible_for_segment_redistribution = false;
@@ -35949,15 +35946,15 @@ namespace oomph
     }
 
     // Create a vector for ordered face mesh
-    Vector<Mesh *> ordered_face_mesh_pt(n_polyline);
+    Vector<Mesh*> ordered_face_mesh_pt(n_polyline);
 
     // Storage for the total arclength of polygon
     double s_total = 0.0;
 
     // Storage for first and last nodes on polylines so we can figure
     // out if they are inverted relative to each other
-    Vector<Node *> first_polyline_node_pt(n_polyline);
-    Vector<Node *> last_polyline_node_pt(n_polyline);
+    Vector<Node*> first_polyline_node_pt(n_polyline);
+    Vector<Node*> last_polyline_node_pt(n_polyline);
     std::vector<bool> is_reversed(n_polyline, false);
 
     // Loop over constituent polylines
@@ -35967,8 +35964,8 @@ namespace oomph
       //-------------------------------
 
       // Put first element into ordered list
-      std::list<FiniteElement *> ordered_el_pt;
-      FiniteElement *el_pt = face_mesh_pt[p]->finite_element_pt(0);
+      std::list<FiniteElement*> ordered_el_pt;
+      FiniteElement* el_pt = face_mesh_pt[p]->finite_element_pt(0);
       ordered_el_pt.push_back(el_pt);
 
       // Number of nodes
@@ -35988,10 +35985,10 @@ namespace oomph
       unsigned bound = polygon_pt->polyline_pt(p)->boundary_id();
 
       // Keep track of who's done
-      std::map<FiniteElement *, bool> done_el;
+      std::map<FiniteElement*, bool> done_el;
 
       // Keep track of which element is inverted
-      std::map<FiniteElement *, bool> is_inverted;
+      std::map<FiniteElement*, bool> is_inverted;
 
       // Fit in the other elements in at most nel^2 loops
       for (unsigned ee = 1; ee < n_face_element; ee++)
@@ -36007,18 +36004,18 @@ namespace oomph
           if (!done_el[el_pt])
           {
             // Left and rightmost elements
-            FiniteElement *first_el_pt = (*ordered_el_pt.begin());
-            std::list<FiniteElement *>::iterator it = ordered_el_pt.end();
+            FiniteElement* first_el_pt = (*ordered_el_pt.begin());
+            std::list<FiniteElement*>::iterator it = ordered_el_pt.end();
             it--;
-            FiniteElement *last_el_pt = *it;
+            FiniteElement* last_el_pt = *it;
 
             // Left and rightmost nodes
-            Node *left_node_pt = first_el_pt->node_pt(0);
+            Node* left_node_pt = first_el_pt->node_pt(0);
             if (is_inverted[first_el_pt])
             {
               left_node_pt = first_el_pt->node_pt(nnod - 1);
             }
-            Node *right_node_pt = last_el_pt->node_pt(nnod - 1);
+            Node* right_node_pt = last_el_pt->node_pt(nnod - 1);
             if (is_inverted[last_el_pt])
             {
               right_node_pt = last_el_pt->node_pt(0);
@@ -36090,12 +36087,12 @@ namespace oomph
       ordered_face_mesh_pt[p] = new Mesh;
 
       // Fill it
-      for (std::list<FiniteElement *>::iterator it = ordered_el_pt.begin();
+      for (std::list<FiniteElement*>::iterator it = ordered_el_pt.begin();
            it != ordered_el_pt.end();
            it++)
       {
         // Get element
-        FiniteElement *el_pt = *it;
+        FiniteElement* el_pt = *it;
 
         // add this face element to the order original mesh
         ordered_face_mesh_pt[p]->add_element_pt(el_pt);
@@ -36104,7 +36101,7 @@ namespace oomph
       // Get the arclength along the polygon
       for (unsigned e = 0; e < n_face_element; ++e)
       {
-        FiniteElement *el_pt = ordered_face_mesh_pt[p]->finite_element_pt(e);
+        FiniteElement* el_pt = ordered_face_mesh_pt[p]->finite_element_pt(e);
         unsigned n_node = el_pt->nnode();
         double element_length_squared = 0.0;
         for (unsigned i = 0; i < 2; i++)
@@ -36137,7 +36134,7 @@ namespace oomph
     }
 
     // Reorder the face meshes so that they are contiguous
-    Vector<Mesh *> tmp_face_mesh_pt(n_polyline);
+    Vector<Mesh*> tmp_face_mesh_pt(n_polyline);
     std::vector<bool> mesh_done(n_polyline, false);
     Vector<unsigned> old_polyline_number(n_polyline);
 
@@ -36150,7 +36147,7 @@ namespace oomph
     // Fill in the next entries
     for (unsigned p = 1; p < n_polyline; p++)
     {
-      Node *end_node_pt = last_polyline_node_pt[current];
+      Node* end_node_pt = last_polyline_node_pt[current];
       if (is_reversed[current])
       {
         end_node_pt = first_polyline_node_pt[current];
@@ -36240,7 +36237,7 @@ namespace oomph
 
     // Matrix map to indicate if node must not be removed from specified
     // boundary (!=0) or not (=0). Initialises itself to zero
-    std::map<Node *, std::map<unsigned, unsigned>>
+    std::map<Node*, std::map<unsigned, unsigned>>
       node_must_not_be_removed_from_boundary_flag;
 
     // Loop over the old face mesh
@@ -36256,7 +36253,7 @@ namespace oomph
           el_number = n_face_element - e - 1;
         }
 
-        FiniteElement *el_pt =
+        FiniteElement* el_pt =
           ordered_face_mesh_pt[p]->finite_element_pt(el_number);
         unsigned n_node = el_pt->nnode();
 
@@ -36289,7 +36286,7 @@ namespace oomph
           for (unsigned i = 0; i < n_node; i++)
           {
             // Get the pointer to the node
-            Node *nod_pt = el_pt->node_pt(i);
+            Node* nod_pt = el_pt->node_pt(i);
 
             // If the two boundary id's are different, the face element's nodes
             // have to be added to the new boundary
@@ -36341,13 +36338,13 @@ namespace oomph
     // Loop over all nodes on the boundaries of the polygon to remove
     // nodes from boundaries they are no longer on
     unsigned move_count = 0;
-    for (std::map<Node *, std::map<unsigned, unsigned>>::iterator it =
+    for (std::map<Node*, std::map<unsigned, unsigned>>::iterator it =
            node_must_not_be_removed_from_boundary_flag.begin();
          it != node_must_not_be_removed_from_boundary_flag.end();
          it++)
     {
       // Get the node
-      Node *nod_pt = (*it).first;
+      Node* nod_pt = (*it).first;
 
       // Now we loop over the boundaries that this node is on
       for (std::map<unsigned, unsigned>::iterator it_2 = (*it).second.begin();
@@ -36377,8 +36374,8 @@ namespace oomph
       for (unsigned e = 0; e < n_face_element; e++)
       {
         // Cast the element pointer to the correct thing!
-        FaceElementAsGeomObject<ELEMENT> *el_pt =
-          dynamic_cast<FaceElementAsGeomObject<ELEMENT> *>(
+        FaceElementAsGeomObject<ELEMENT>* el_pt =
+          dynamic_cast<FaceElementAsGeomObject<ELEMENT>*>(
             face_mesh_pt[p]->element_pt(e));
 
         // Set bulk boundary number
@@ -36415,7 +36412,7 @@ namespace oomph
   //=========================================================================
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::get_face_mesh_representation(
-    TriangleMeshOpenCurve *open_polyline_pt, Vector<Mesh *> &face_mesh_pt)
+    TriangleMeshOpenCurve* open_polyline_pt, Vector<Mesh*>& face_mesh_pt)
   {
     // Number of polylines
     unsigned n_polyline = open_polyline_pt->ncurve_section();
@@ -36441,9 +36438,9 @@ namespace oomph
   //======================================================================
   template<class ELEMENT>
   bool RefineableTriangleMesh<
-    ELEMENT>::surface_remesh_for_inner_hole_boundaries(Vector<Vector<double>>
-                                                         &internal_point_coord,
-                                                       const bool &check_only)
+    ELEMENT>::surface_remesh_for_inner_hole_boundaries(Vector<Vector<double>>&
+                                                         internal_point_coord,
+                                                       const bool& check_only)
   {
     // Boolean to indicate whether an actual update of the internal
     // holes was performed
@@ -36453,7 +36450,7 @@ namespace oomph
     for (unsigned ihole = 0; ihole < n_hole; ihole++)
     {
       // Cache the pointer to the polygon representation
-      TriangleMeshPolygon *const poly_pt = this->Internal_polygon_pt[ihole];
+      TriangleMeshPolygon* const poly_pt = this->Internal_polygon_pt[ihole];
 
       // Can the polygon update its own configuration, in which case this
       // is easy
@@ -36630,7 +36627,7 @@ namespace oomph
   //======================================================================
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::create_polylines_from_polyfiles(
-    const std::string &node_file_name, const std::string &poly_file_name)
+    const std::string& node_file_name, const std::string& poly_file_name)
   {
     // Get the nodes coordinates (the index of the nodes to build the
     // polylines is the one used in the node_file_name file)
@@ -37009,7 +37006,7 @@ namespace oomph
 
     // Now we have the sorted nodes, we can create the polylines by
     // getting the vertices of the nodes
-    Vector<TriangleMeshPolyLine *> polylines_pt(nboundary);
+    Vector<TriangleMeshPolyLine*> polylines_pt(nboundary);
     unsigned current_polyline = 0;
 
     // Go through the sorted boundaries using the sorted boundaries ids
@@ -37054,8 +37051,7 @@ namespace oomph
 
       // Updates bnd_id<--->curve section map
       this->Boundary_curve_section_pt[bnd_id] =
-        dynamic_cast<TriangleMeshCurveSection *>(
-          polylines_pt[current_polyline]);
+        dynamic_cast<TriangleMeshCurveSection*>(polylines_pt[current_polyline]);
 
       // Increase the index for the polyline storage
       current_polyline++;
@@ -37071,14 +37067,14 @@ namespace oomph
     unsigned npolygons = 0;
 
     // Storage for the polygons
-    Vector<TriangleMeshPolygon *> polygons_pt;
+    Vector<TriangleMeshPolygon*> polygons_pt;
 
     // Mark the already done polylines
     std::map<unsigned, bool> polyline_done;
     while (nsorted_polylines < nboundary)
     {
       // Storage for the curve sections that create a polygon
-      std::list<TriangleMeshCurveSection *> sorted_curve_sections_pt;
+      std::list<TriangleMeshCurveSection*> sorted_curve_sections_pt;
 
       unsigned init_poly = 0;
 #ifdef PARANOID
@@ -37221,14 +37217,14 @@ namespace oomph
           << "It was not possible to create a closed curve, these are the "
           << "vertices of the already sorted polylines\n\n";
         unsigned cpolyline = 0;
-        for (std::list<TriangleMeshCurveSection *>::iterator it_list =
+        for (std::list<TriangleMeshCurveSection*>::iterator it_list =
                sorted_curve_sections_pt.begin();
              it_list != sorted_curve_sections_pt.end();
              it_list++)
         {
           error_message << "Polyline (" << cpolyline << ")\n";
-          TriangleMeshPolyLine *tmp_poly_pt =
-            dynamic_cast<TriangleMeshPolyLine *>((*it_list));
+          TriangleMeshPolyLine* tmp_poly_pt =
+            dynamic_cast<TriangleMeshPolyLine*>((*it_list));
           const unsigned nvertex = tmp_poly_pt->nvertex();
           for (unsigned v = 0; v < nvertex; v++)
           {
@@ -37246,8 +37242,8 @@ namespace oomph
 
       // Create a vector version to create the polygon from the sorted
       // polyines
-      Vector<TriangleMeshCurveSection *> tmp_sorted_curve_sections_pt;
-      for (std::list<TriangleMeshCurveSection *>::iterator it_list =
+      Vector<TriangleMeshCurveSection*> tmp_sorted_curve_sections_pt;
+      for (std::list<TriangleMeshCurveSection*>::iterator it_list =
              sorted_curve_sections_pt.begin();
            it_list != sorted_curve_sections_pt.end();
            it_list++)
@@ -37256,7 +37252,7 @@ namespace oomph
       }
 
       // Create a new polygon by using the new created polylines
-      TriangleMeshPolygon *polygon_pt =
+      TriangleMeshPolygon* polygon_pt =
         new TriangleMeshPolygon(tmp_sorted_curve_sections_pt);
 
       // Keep track of new created polygons that need to be deleted!!!
@@ -37291,7 +37287,7 @@ namespace oomph
       const unsigned nouter_polylines = polygons_pt[idx_outer]->npolyline();
       for (unsigned p = 0; p < nouter_polylines; p++)
       {
-        TriangleMeshPolyLine *tmp_poly_pt =
+        TriangleMeshPolyLine* tmp_poly_pt =
           polygons_pt[idx_outer]->polyline_pt(p);
         const unsigned nvertex = tmp_poly_pt->nvertex();
         for (unsigned v = 0; v < nvertex; v++)
@@ -37319,7 +37315,7 @@ namespace oomph
           const unsigned ninner_polylines = polygons_pt[i]->npolyline();
           for (unsigned p = 0; p < ninner_polylines; p++)
           {
-            TriangleMeshPolyLine *tmp_poly_pt = polygons_pt[i]->polyline_pt(p);
+            TriangleMeshPolyLine* tmp_poly_pt = polygons_pt[i]->polyline_pt(p);
             const unsigned nvertex = tmp_poly_pt->nvertex();
             for (unsigned v = 0; v < nvertex; v++)
             {
@@ -37445,7 +37441,7 @@ namespace oomph
         this->Internal_polygon_pt[i]->npolyline();
       for (unsigned p = 0; p < ninner_polylines; p++)
       {
-        TriangleMeshPolyLine *tmp_poly_pt =
+        TriangleMeshPolyLine* tmp_poly_pt =
           this->Internal_polygon_pt[i]->polyline_pt(p);
         // Number of vertices of the current polyline in the current
         // internal closed polygon
@@ -37651,7 +37647,7 @@ namespace oomph
   //======================================================================
   template<class ELEMENT>
   bool RefineableTriangleMesh<ELEMENT>::update_polygon_using_elements_area(
-    TriangleMeshPolygon *&polygon_pt, const Vector<double> &target_area)
+    TriangleMeshPolygon*& polygon_pt, const Vector<double>& target_area)
   {
     // Verify that there was a change on the polygon representation
     unsigned update_was_performed = false;
@@ -37666,7 +37662,7 @@ namespace oomph
     //     it to get its associated target area
 
     // Get the face mesh representation
-    Vector<Mesh *> face_mesh_pt;
+    Vector<Mesh*> face_mesh_pt;
     get_face_mesh_representation(polygon_pt, face_mesh_pt);
 
     // Create vertices of the polylines by using the vertices of the
@@ -37686,7 +37682,7 @@ namespace oomph
       // here to ensure that all processors (in a distributed context)
       // get this representation just once, and because an AllToAll MPI
       // communication is used in this calling
-      MeshAsGeomObject *mesh_geom_obj_pt =
+      MeshAsGeomObject* mesh_geom_obj_pt =
         new MeshAsGeomObject(face_mesh_pt[p]);
 
       // Set of coordinates on the boundary
@@ -37738,14 +37734,14 @@ namespace oomph
 
       // Store the non halo face elements, the ones from which we will
       // get the vertices
-      Vector<FiniteElement *> non_halo_face_element_pt;
+      Vector<FiniteElement*> non_halo_face_element_pt;
 
       // Map to store the index of the face element on a boundary
-      std::map<FiniteElement *, unsigned> face_element_index_on_boundary;
+      std::map<FiniteElement*, unsigned> face_element_index_on_boundary;
 
       for (unsigned ef = 0; ef < nface_element; ++ef)
       {
-        FiniteElement *ele_face_pt = face_mesh_pt[p]->finite_element_pt(ef);
+        FiniteElement* ele_face_pt = face_mesh_pt[p]->finite_element_pt(ef);
 #ifdef OOMPH_HAS_MPI
         // Skip the halo elements if working with a distributed mesh
         if (this->is_mesh_distributed() && ele_face_pt->is_halo())
@@ -37762,7 +37758,7 @@ namespace oomph
       const unsigned nnon_halo_face_element = non_halo_face_element_pt.size();
 
       // Map to know the already sorted face elements
-      std::map<FiniteElement *, bool> face_element_done;
+      std::map<FiniteElement*, bool> face_element_done;
 
       // Number of done face elements
       unsigned nsorted_face_elements = 0;
@@ -37777,7 +37773,7 @@ namespace oomph
       while (nsorted_face_elements < nnon_halo_face_element)
       {
         // Get and initial face element
-        FiniteElement *ele_face_pt = 0;
+        FiniteElement* ele_face_pt = 0;
 #ifdef PARANOID
         bool found_initial_face_element = false;
 #endif
@@ -37860,8 +37856,8 @@ namespace oomph
         local_vertex_nodes.insert(vertex_coord);
 
         // The initial and final node on the set
-        Node *first_node_pt = ele_face_pt->node_pt(0);
-        Node *last_node_pt = ele_face_pt->node_pt(nnode - 1);
+        Node* first_node_pt = ele_face_pt->node_pt(0);
+        Node* last_node_pt = ele_face_pt->node_pt(nnode - 1);
 
         // Mark the current face element as done
         face_element_done[ele_face_pt] = true;
@@ -37881,7 +37877,7 @@ namespace oomph
         // Get the index of the face element on the current boundary
         unsigned ef = face_element_index_on_boundary[ele_face_pt];
         // Get the "ef"-th element on the boundary
-        FiniteElement *el_pt = this->boundary_element_pt(bound, ef);
+        FiniteElement* el_pt = this->boundary_element_pt(bound, ef);
 
 #ifdef PARANOID
         bool found_global_element_index = false;
@@ -37889,7 +37885,7 @@ namespace oomph
         for (unsigned eg = 0; eg < nele; eg++)
         {
           // Get the "eg-th" element
-          FiniteElement *el_compare_pt = this->finite_element_pt(eg);
+          FiniteElement* el_compare_pt = this->finite_element_pt(eg);
 
           // Compare with the element on the boundary, if equal then
           // store the target area
@@ -37943,8 +37939,8 @@ namespace oomph
             {
               // Get each individual node to check if they are contiguous
               nnode = ele_face_pt->nnode();
-              Node *left_node_pt = ele_face_pt->node_pt(0);
-              Node *right_node_pt = ele_face_pt->node_pt(nnode - 1);
+              Node* left_node_pt = ele_face_pt->node_pt(0);
+              Node* right_node_pt = ele_face_pt->node_pt(nnode - 1);
 
               if (left_node_pt == first_node_pt)
               {
@@ -38009,7 +38005,7 @@ namespace oomph
 
                 // Get the "ef"-th element on the boundary
                 ef = face_element_index_on_boundary[ele_face_pt];
-                FiniteElement *lel_pt = this->boundary_element_pt(bound, ef);
+                FiniteElement* lel_pt = this->boundary_element_pt(bound, ef);
 
 #ifdef PARANOID
                 found_global_element_index = false;
@@ -38017,7 +38013,7 @@ namespace oomph
                 for (unsigned eg = 0; eg < nele; eg++)
                 {
                   // Get the "eg-th" element
-                  FiniteElement *lel_compare_pt = this->finite_element_pt(eg);
+                  FiniteElement* lel_compare_pt = this->finite_element_pt(eg);
 
                   // Compare with the element on the boundary, if equal then
                   // store the target area
@@ -38483,12 +38479,12 @@ namespace oomph
       n_vertex = vector_vertex_node.size();
 
       // Now update the polyline according to the new vertices
-      TriangleMeshPolyLine *tmp_polyline_pt =
+      TriangleMeshPolyLine* tmp_polyline_pt =
         new TriangleMeshPolyLine(vector_vertex_node, bound);
 
       // Create a temporal "curve section" version of the recently
       // created polyline
-      TriangleMeshCurveSection *tmp_curve_section_pt = tmp_polyline_pt;
+      TriangleMeshCurveSection* tmp_curve_section_pt = tmp_polyline_pt;
 
       // Tolerance below which the middle point can be deleted (ratio of
       // deflection to element length)
@@ -38534,7 +38530,7 @@ namespace oomph
       // if it should be done by other object
       bool delete_it_on_destructor = false;
 
-      std::set<TriangleMeshCurveSection *>::iterator it =
+      std::set<TriangleMeshCurveSection*>::iterator it =
         this->Free_curve_section_pt.find(polygon_pt->curve_section_pt(p));
 
       if (it != this->Free_curve_section_pt.end())
@@ -38572,7 +38568,7 @@ namespace oomph
         for (unsigned isub = 0; isub < nsub_boundaries; isub++)
         {
           // Update the polyline according to the sub set of vertices,
-          TriangleMeshPolyLine *sub_tmp_polyline_pt =
+          TriangleMeshPolyLine* sub_tmp_polyline_pt =
             new TriangleMeshPolyLine(sub_vector_vertex_node[isub], bound, isub);
 
           // Add the sub-polyline to the container to represent the
@@ -38613,7 +38609,7 @@ namespace oomph
   //======================================================================
   template<class ELEMENT>
   bool RefineableTriangleMesh<ELEMENT>::update_open_curve_using_elements_area(
-    TriangleMeshOpenCurve *&open_curve_pt, const Vector<double> &target_area)
+    TriangleMeshOpenCurve*& open_curve_pt, const Vector<double>& target_area)
   {
     // Verify if there was a change on the open curve representation
     unsigned update_was_performed = false;
@@ -38628,7 +38624,7 @@ namespace oomph
     //     and use it to get its associated target area.
 
     // Get the face mesh representation
-    Vector<Mesh *> face_mesh_pt;
+    Vector<Mesh*> face_mesh_pt;
     get_face_mesh_representation(open_curve_pt, face_mesh_pt);
 
     // Create vertices of the polylines by using the vertices of the
@@ -38648,7 +38644,7 @@ namespace oomph
       // here to ensure that all processors (in a distributed context)
       // get this representation just once, and because an AllToAll MPI
       // communication is used in this calling
-      MeshAsGeomObject *mesh_geom_obj_pt =
+      MeshAsGeomObject* mesh_geom_obj_pt =
         new MeshAsGeomObject(face_mesh_pt[cs]);
 
       // Get the boundary id
@@ -38670,17 +38666,17 @@ namespace oomph
       // Store the non halo elements and the element at the other side of
       // the boundary (whatever it be halo or not), the first will be the
       // ones from which we will get the vertices (in even position)
-      Vector<FiniteElement *> non_halo_doubled_face_element_pt;
+      Vector<FiniteElement*> non_halo_doubled_face_element_pt;
 
       // Map to store the index of the face element on a boundary
-      std::map<FiniteElement *, unsigned> face_element_index_on_boundary;
+      std::map<FiniteElement*, unsigned> face_element_index_on_boundary;
 
       // Map to know the already sorted face elements
-      std::map<FiniteElement *, bool> face_element_done;
+      std::map<FiniteElement*, bool> face_element_done;
 
       for (unsigned ef = 0; ef < nface_element; ++ef)
       {
-        FiniteElement *ele_face_pt = face_mesh_pt[cs]->finite_element_pt(ef);
+        FiniteElement* ele_face_pt = face_mesh_pt[cs]->finite_element_pt(ef);
 
         // Skip the halo elements (not used as base elements, only
         // include those elements whose element at the other side of the
@@ -38711,8 +38707,8 @@ namespace oomph
           const unsigned nnodes = ele_face_pt->nnode();
           // Get the left and right node to look for the elements at the
           // other side of the boundary
-          Node *left_node_pt = ele_face_pt->node_pt(0);
-          Node *right_node_pt = ele_face_pt->node_pt(nnodes - 1);
+          Node* left_node_pt = ele_face_pt->node_pt(0);
+          Node* right_node_pt = ele_face_pt->node_pt(nnodes - 1);
 #ifdef PARANOID
           // Flag to know if the element at the other side of the
           // boundary was found
@@ -38721,13 +38717,13 @@ namespace oomph
           for (unsigned iface = 0; iface < nface_element; iface++)
           {
             // Get the candidate face element
-            FiniteElement *cele_face_pt =
+            FiniteElement* cele_face_pt =
               face_mesh_pt[cs]->finite_element_pt(iface);
             // Check if not already done
             if (!face_element_done[cele_face_pt])
             {
-              Node *cleft_node_pt = cele_face_pt->node_pt(0);
-              Node *cright_node_pt = cele_face_pt->node_pt(nnodes - 1);
+              Node* cleft_node_pt = cele_face_pt->node_pt(0);
+              Node* cright_node_pt = cele_face_pt->node_pt(nnodes - 1);
               // Check if the nodes are the same
               if ((left_node_pt == cleft_node_pt &&
                    right_node_pt == cright_node_pt) ||
@@ -38837,8 +38833,8 @@ namespace oomph
       while (nsorted_face_elements < nnon_halo_doubled_face_ele)
       {
         // Get and initial face element
-        FiniteElement *ele_face_pt = 0;
-        FiniteElement *repeated_ele_face_pt = 0;
+        FiniteElement* ele_face_pt = 0;
+        FiniteElement* repeated_ele_face_pt = 0;
 #ifdef PARANOID
         bool found_initial_face_element = false;
 #endif
@@ -38941,8 +38937,8 @@ namespace oomph
         local_vertex_nodes.insert(vertex_coord);
 
         // The initial and final node on the set
-        Node *first_node_pt = ele_face_pt->node_pt(0);
-        Node *last_node_pt = ele_face_pt->node_pt(nnode - 1);
+        Node* first_node_pt = ele_face_pt->node_pt(0);
+        Node* last_node_pt = ele_face_pt->node_pt(nnode - 1);
 
         // -----------------------------------------------------
         // Find the global index in the mesh of the face element
@@ -38959,7 +38955,7 @@ namespace oomph
         // Get the index of the face element on the current boundary
         const unsigned ef = face_element_index_on_boundary[ele_face_pt];
         // Get the "ef"-th element on the boundary
-        FiniteElement *el_pt = this->boundary_element_pt(bound, ef);
+        FiniteElement* el_pt = this->boundary_element_pt(bound, ef);
         double target_area_face_element = 0.0;
 
 #ifdef PARANOID
@@ -38968,7 +38964,7 @@ namespace oomph
         for (unsigned eg = 0; eg < nele; eg++)
         {
           // Get the "eg-th" element
-          FiniteElement *el_compare_pt = this->finite_element_pt(eg);
+          FiniteElement* el_compare_pt = this->finite_element_pt(eg);
 
           // Compare with the element on the boundary, if equal then
           // store the target area
@@ -38999,7 +38995,7 @@ namespace oomph
         // Get the index of the repeated face element on the current boundary
         const unsigned ref =
           face_element_index_on_boundary[repeated_ele_face_pt];
-        FiniteElement *rel_pt = this->boundary_element_pt(bound, ref);
+        FiniteElement* rel_pt = this->boundary_element_pt(bound, ref);
         double target_area_repeated_face_element = 0.0;
 
 #ifdef PARANOID
@@ -39008,7 +39004,7 @@ namespace oomph
         for (unsigned eg = 0; eg < nele; eg++)
         {
           // Get the "eg-th" element
-          FiniteElement *el_compare_pt = this->finite_element_pt(eg);
+          FiniteElement* el_compare_pt = this->finite_element_pt(eg);
 
           // Compare with the element on the boundary, if equal then
           // store the target area
@@ -39085,8 +39081,8 @@ namespace oomph
             {
               // Get each individual node to check if they are contiguous
               const unsigned nlnode = ele_face_pt->nnode();
-              Node *left_node_pt = ele_face_pt->node_pt(0);
-              Node *right_node_pt = ele_face_pt->node_pt(nlnode - 1);
+              Node* left_node_pt = ele_face_pt->node_pt(0);
+              Node* right_node_pt = ele_face_pt->node_pt(nlnode - 1);
 
               if (left_node_pt == first_node_pt)
               {
@@ -39158,7 +39154,7 @@ namespace oomph
                 // Get the "ef"-th element on the boundary
                 const unsigned lef =
                   face_element_index_on_boundary[ele_face_pt];
-                FiniteElement *lel_pt = this->boundary_element_pt(bound, lef);
+                FiniteElement* lel_pt = this->boundary_element_pt(bound, lef);
 
 #ifdef PARANOID
                 found_global_element_index = false;
@@ -39166,7 +39162,7 @@ namespace oomph
                 for (unsigned eg = 0; eg < nele; eg++)
                 {
                   // Get the "eg-th" element
-                  FiniteElement *lel_compare_pt = this->finite_element_pt(eg);
+                  FiniteElement* lel_compare_pt = this->finite_element_pt(eg);
 
                   // Compare with the element on the boundary, if equal then
                   // store the target area
@@ -39197,7 +39193,7 @@ namespace oomph
                 // Get the index of the repeated face element on the boundary
                 const unsigned rlef =
                   face_element_index_on_boundary[repeated_ele_face_pt];
-                FiniteElement *rlel_pt = this->boundary_element_pt(bound, rlef);
+                FiniteElement* rlel_pt = this->boundary_element_pt(bound, rlef);
 
 #ifdef PARANOID
                 found_global_repeated_element_index = false;
@@ -39205,7 +39201,7 @@ namespace oomph
                 for (unsigned eg = 0; eg < nele; eg++)
                 {
                   // Get the "eg-th" element
-                  FiniteElement *lel_compare_pt = this->finite_element_pt(eg);
+                  FiniteElement* lel_compare_pt = this->finite_element_pt(eg);
 
                   // Compare with the element on the boundary, if equal then
                   // store the target area
@@ -39729,12 +39725,12 @@ namespace oomph
       n_vertex = vector_vertex_node.size();
 
       // Update the polyline according to the new vertices
-      TriangleMeshPolyLine *tmp_polyline_pt =
+      TriangleMeshPolyLine* tmp_polyline_pt =
         new TriangleMeshPolyLine(vector_vertex_node, bound);
 
       // Create a temporal "curve section" version of the recently
       // created polyline
-      TriangleMeshCurveSection *tmp_curve_section_pt = tmp_polyline_pt;
+      TriangleMeshCurveSection* tmp_curve_section_pt = tmp_polyline_pt;
 
       // Tolerance below which the middle point can be deleted (ratio of
       // deflection to element length)
@@ -39780,7 +39776,7 @@ namespace oomph
       // if it should be done by other object
       bool delete_it_on_destructor = false;
 
-      std::set<TriangleMeshCurveSection *>::iterator it =
+      std::set<TriangleMeshCurveSection*>::iterator it =
         this->Free_curve_section_pt.find(open_curve_pt->curve_section_pt(cs));
 
       if (it != this->Free_curve_section_pt.end())
@@ -39836,7 +39832,7 @@ namespace oomph
         {
           // Now update the polyline according to the sub set of
           // vertices, set the chunk number of the polyline
-          TriangleMeshPolyLine *sub_tmp_polyline_pt =
+          TriangleMeshPolyLine* sub_tmp_polyline_pt =
             new TriangleMeshPolyLine(sub_vector_vertex_node[isub], bound, isub);
 
           // Add the sub-polyline to the container to represent the
@@ -39855,7 +39851,7 @@ namespace oomph
           // But we certanly we need to pass the connection information
           // to the sub-polylines
           // Get a curve section representation of the sub-polyline
-          TriangleMeshCurveSection *tmp_sub_curve_section_pt =
+          TriangleMeshCurveSection* tmp_sub_curve_section_pt =
             sub_tmp_polyline_pt;
           this->copy_connection_information_to_sub_polylines(
             tmp_curve_section_pt, tmp_sub_curve_section_pt);
@@ -39889,8 +39885,8 @@ namespace oomph
   //======================================================================
   template<class ELEMENT>
   bool RefineableTriangleMesh<ELEMENT>::update_shared_curve_using_elements_area(
-    Vector<TriangleMeshPolyLine *> &vector_polyline_pt,
-    const Vector<double> &target_areas)
+    Vector<TriangleMeshPolyLine*>& vector_polyline_pt,
+    const Vector<double>& target_areas)
   {
     // Flag to check if there were a change on the shared boundary
     // representation
@@ -39912,12 +39908,12 @@ namespace oomph
       // Compute the face elements from the shared boundary elements,
       // create an association from the face element with the "bulk"
       // elements
-      std::map<FiniteElement *, FiniteElement *> face_ele_pt_to_bulk_element_pt;
+      std::map<FiniteElement*, FiniteElement*> face_ele_pt_to_bulk_element_pt;
 
       // The temporary storage for the halo face elements
-      Vector<FiniteElement *> halo_shared_face_ele_pt;
+      Vector<FiniteElement*> halo_shared_face_ele_pt;
       // The temporary storage for the nonhalo face elements
-      Vector<FiniteElement *> nonhalo_shared_face_ele_pt;
+      Vector<FiniteElement*> nonhalo_shared_face_ele_pt;
 
       // Get the number of shared boundary elements associated with the
       // current shared boundary
@@ -39929,7 +39925,7 @@ namespace oomph
       for (unsigned e = 0; e < nshared_bound_ele; e++)
       {
         // Get the shared boundary element
-        FiniteElement *bulk_ele_pt =
+        FiniteElement* bulk_ele_pt =
           this->shared_boundary_element_pt(shd_bnd_id, e);
 
         // Get the face index
@@ -39937,7 +39933,7 @@ namespace oomph
 
         // Before adding the new element we need to ensure that the edge
         // that this element represents has not been already added
-        FiniteElement *face_ele_pt =
+        FiniteElement* face_ele_pt =
           new DummyFaceElement<ELEMENT>(bulk_ele_pt, face_index);
 
         // Establish the association between the bulk element and the
@@ -39960,10 +39956,10 @@ namespace oomph
 
       // Now we have the face elements, we need to ensure that the halo
       // and nonhalo bulk element are sorted one after the other
-      Vector<Vector<FiniteElement *>> unsorted_shared_bulk_ele_pt;
+      Vector<Vector<FiniteElement*>> unsorted_shared_bulk_ele_pt;
 
       // Mark the face elements already used
-      std::map<FiniteElement *, bool> shared_face_done;
+      std::map<FiniteElement*, bool> shared_face_done;
 
       // Get the number of nonhalo face elements
       const unsigned nnonhalo_face_shared_ele =
@@ -40010,20 +40006,20 @@ namespace oomph
       for (unsigned inh = 0; inh < nnonhalo_face_shared_ele; inh++)
       {
         // Get the inh-th face element
-        FiniteElement *nonhalo_face_ele_pt = nonhalo_shared_face_ele_pt[inh];
+        FiniteElement* nonhalo_face_ele_pt = nonhalo_shared_face_ele_pt[inh];
 
         // Get the number of nodes on the face element
         const unsigned nnodes_nh = nonhalo_face_ele_pt->nnode();
         // Get the first and last node on the element
-        Node *nh_first_node_pt = nonhalo_face_ele_pt->node_pt(0);
-        Node *nh_last_node_pt = nonhalo_face_ele_pt->node_pt(nnodes_nh - 1);
+        Node* nh_first_node_pt = nonhalo_face_ele_pt->node_pt(0);
+        Node* nh_last_node_pt = nonhalo_face_ele_pt->node_pt(nnodes_nh - 1);
 
         // Now find the (halo) face element at the other side of the
         // shared boundary
         for (unsigned ih = 0; ih < nhalo_face_shared_ele; ih++)
         {
           // Get the ih-th face element
-          FiniteElement *halo_face_ele_pt = halo_shared_face_ele_pt[ih];
+          FiniteElement* halo_face_ele_pt = halo_shared_face_ele_pt[ih];
 
           // Check that the face element has not been done
           if (!shared_face_done[halo_face_ele_pt])
@@ -40031,8 +40027,8 @@ namespace oomph
             // Get the number of nodes on the face element
             const unsigned nnodes_h = halo_face_ele_pt->nnode();
             // Get the first and last node on the element
-            Node *h_first_node_pt = halo_face_ele_pt->node_pt(0);
-            Node *h_last_node_pt = halo_face_ele_pt->node_pt(nnodes_h - 1);
+            Node* h_first_node_pt = halo_face_ele_pt->node_pt(0);
+            Node* h_last_node_pt = halo_face_ele_pt->node_pt(nnodes_h - 1);
 
             // If the nodes are the same then we have found the (halo)
             // face element at the other side of the shared boundary
@@ -40040,12 +40036,12 @@ namespace oomph
                 nh_last_node_pt == h_last_node_pt)
             {
               // Get the BULK elements associated with the face elements
-              Vector<FiniteElement *> tmp_bulk_element_pt;
+              Vector<FiniteElement*> tmp_bulk_element_pt;
               // Get the BULK elements associated to the face elements
               // (the nonhalo and the halo)
-              FiniteElement *nonhalo_bulk_ele_pt =
+              FiniteElement* nonhalo_bulk_ele_pt =
                 face_ele_pt_to_bulk_element_pt[nonhalo_face_ele_pt];
-              FiniteElement *halo_bulk_ele_pt =
+              FiniteElement* halo_bulk_ele_pt =
                 face_ele_pt_to_bulk_element_pt[halo_face_ele_pt];
 
               // Add the BULK elements to the temporal storage
@@ -40067,12 +40063,12 @@ namespace oomph
                      nh_last_node_pt == h_first_node_pt)
             {
               // Get the BULK elements associated with the face elements
-              Vector<FiniteElement *> tmp_bulk_element_pt;
+              Vector<FiniteElement*> tmp_bulk_element_pt;
               // Get the BULK elements associated to the face elements
               // (the nonhalo and the halo)
-              FiniteElement *nonhalo_bulk_ele_pt =
+              FiniteElement* nonhalo_bulk_ele_pt =
                 face_ele_pt_to_bulk_element_pt[nonhalo_face_ele_pt];
-              FiniteElement *halo_bulk_ele_pt =
+              FiniteElement* halo_bulk_ele_pt =
                 face_ele_pt_to_bulk_element_pt[halo_face_ele_pt];
 
               // Add the BULK elements to the temporal storage
@@ -40153,13 +40149,13 @@ namespace oomph
 
       // Storing for the sorting nodes extracted from the face
       // elements. This are also used to update the polyline
-      std::list<Node *> sorted_nodes;
+      std::list<Node*> sorted_nodes;
 
       // Storing for the sorted shared face elements
-      std::list<FiniteElement *> sorted_shared_bound_elements_pt;
+      std::list<FiniteElement*> sorted_shared_bound_elements_pt;
 
       // Get the root face element
-      FiniteElement *root_face_ele_pt = nonhalo_shared_face_ele_pt[0];
+      FiniteElement* root_face_ele_pt = nonhalo_shared_face_ele_pt[0];
       nsorted_face_ele++;
 
       // Mark face as done
@@ -40167,8 +40163,8 @@ namespace oomph
 
       // The initial and final node on the list
       const unsigned nnodes_root = root_face_ele_pt->nnode();
-      Node *first_node_pt = root_face_ele_pt->node_pt(0);
-      Node *last_node_pt = root_face_ele_pt->node_pt(nnodes_root - 1);
+      Node* first_node_pt = root_face_ele_pt->node_pt(0);
+      Node* last_node_pt = root_face_ele_pt->node_pt(nnodes_root - 1);
 
       // Push back on the list the new nodes
       sorted_nodes.push_back(first_node_pt);
@@ -40190,7 +40186,7 @@ namespace oomph
         // previous one as the initial face element
         for (unsigned iface = 1; iface < nnonhalo_face_shared_ele; iface++)
         {
-          FiniteElement *tmp_shared_face_ele_pt =
+          FiniteElement* tmp_shared_face_ele_pt =
             nonhalo_shared_face_ele_pt[iface];
 
           // If face has not been sorted
@@ -40200,8 +40196,8 @@ namespace oomph
             const unsigned tmp_nnodes = tmp_shared_face_ele_pt->nnode();
 
             // Get each individual node
-            Node *left_node_pt = tmp_shared_face_ele_pt->node_pt(0);
-            Node *right_node_pt =
+            Node* left_node_pt = tmp_shared_face_ele_pt->node_pt(0);
+            Node* right_node_pt =
               tmp_shared_face_ele_pt->node_pt(tmp_nnodes - 1);
 
             if (left_node_pt == first_node_pt)
@@ -40304,7 +40300,7 @@ namespace oomph
 
       // Copy the vertices from the nodes
       unsigned counter = 0;
-      for (std::list<Node *>::iterator it_nodes = sorted_nodes.begin();
+      for (std::list<Node*>::iterator it_nodes = sorted_nodes.begin();
            it_nodes != sorted_nodes.end();
            it_nodes++)
       {
@@ -40319,8 +40315,8 @@ namespace oomph
       // elements
 
       // Copy the sorted elements in a vector
-      Vector<FiniteElement *> sorted_shared_ele_pt;
-      for (std::list<FiniteElement *>::iterator it_ele =
+      Vector<FiniteElement*> sorted_shared_ele_pt;
+      for (std::list<FiniteElement*>::iterator it_ele =
              sorted_shared_bound_elements_pt.begin();
            it_ele != sorted_shared_bound_elements_pt.end();
            it_ele++)
@@ -40333,7 +40329,7 @@ namespace oomph
       Vector<double> sorted_shared_target_areas(n_shared_target_areas);
 
       // Mark those shared elements already found
-      std::map<std::pair<GeneralisedElement *, unsigned>, bool> shared_ele_done;
+      std::map<std::pair<GeneralisedElement*, unsigned>, bool> shared_ele_done;
 
       // Counter for the number of already done shared elements
       unsigned count_found_shared_element = 0;
@@ -40345,15 +40341,15 @@ namespace oomph
       // the shared boundary elements
       for (unsigned e = 0; e < nele; e++)
       {
-        GeneralisedElement *current_ele_pt = this->element_pt(e);
+        GeneralisedElement* current_ele_pt = this->element_pt(e);
         // Now compare the current element with those in the sorted
         // shared element array
         for (unsigned s = 0; s < n_shared_target_areas; s++)
         {
           // Get the element
-          GeneralisedElement *current_shared_ele_pt = sorted_shared_ele_pt[s];
+          GeneralisedElement* current_shared_ele_pt = sorted_shared_ele_pt[s];
           // Create the pair element-index to check if done
-          std::pair<GeneralisedElement *, unsigned> pair_gen_ele_idx =
+          std::pair<GeneralisedElement*, unsigned> pair_gen_ele_idx =
             std::make_pair(current_shared_ele_pt, s);
           if (!shared_ele_done[pair_gen_ele_idx])
           {
@@ -40499,11 +40495,11 @@ namespace oomph
       // Update the polyline representation of the shared boundary
 
       // The new shared polyline representation
-      TriangleMeshPolyLine *new_polyline_pt =
+      TriangleMeshPolyLine* new_polyline_pt =
         new TriangleMeshPolyLine(polyline_vertices, shd_bnd_id);
 
       // Get the curve section representation
-      TriangleMeshCurveSection *curve_section_pt = vector_polyline_pt[pp];
+      TriangleMeshCurveSection* curve_section_pt = vector_polyline_pt[pp];
 
       // Copy the connection information from the old shared polyline to
       // the new one
@@ -40516,7 +40512,7 @@ namespace oomph
 
       // Establish the element as being deleted by the destructor of the
       // class
-      std::set<TriangleMeshCurveSection *>::iterator it =
+      std::set<TriangleMeshCurveSection*>::iterator it =
         this->Free_curve_section_pt.find(curve_section_pt);
 
       if (it != this->Free_curve_section_pt.end())
@@ -40530,7 +40526,7 @@ namespace oomph
       vector_polyline_pt[pp] = new_polyline_pt;
 
       // Get the new curve section representation
-      TriangleMeshCurveSection *new_curve_section_pt = vector_polyline_pt[pp];
+      TriangleMeshCurveSection* new_curve_section_pt = vector_polyline_pt[pp];
 
       // Update the Boundary - Polyline map
       this->Boundary_curve_section_pt[shd_bnd_id] = new_curve_section_pt;
@@ -40554,11 +40550,11 @@ namespace oomph
   template<class ELEMENT>
   bool RefineableTriangleMesh<ELEMENT>::
     unrefine_boundary_constrained_by_target_area(
-      const unsigned &b,
-      const unsigned &c,
-      Vector<Vector<double>> &vector_bnd_vertices,
-      double &unrefinement_tolerance,
-      Vector<double> &area_constraint)
+      const unsigned& b,
+      const unsigned& c,
+      Vector<Vector<double>>& vector_bnd_vertices,
+      double& unrefinement_tolerance,
+      Vector<double>& area_constraint)
   {
     // Store the vertices not allowed for deletion
     std::set<Vector<double>> no_delete_vertex;
@@ -40810,10 +40806,10 @@ namespace oomph
   template<class ELEMENT>
   bool RefineableTriangleMesh<ELEMENT>::
     refine_boundary_constrained_by_target_area(
-      MeshAsGeomObject *mesh_geom_obj_pt,
-      Vector<Vector<double>> &vector_bnd_vertices,
-      double &refinement_tolerance,
-      Vector<double> &area_constraint)
+      MeshAsGeomObject* mesh_geom_obj_pt,
+      Vector<Vector<double>>& vector_bnd_vertices,
+      double& refinement_tolerance,
+      Vector<double>& area_constraint)
   {
     // Boolean that indicates whether an actual update of the vertex
     // coordinates was performed
@@ -40952,10 +40948,10 @@ namespace oomph
   template<class ELEMENT>
   bool RefineableTriangleMesh<ELEMENT>::
     unrefine_shared_boundary_constrained_by_target_area(
-      const unsigned &b,
-      const unsigned &c,
-      Vector<Vector<double>> &vector_bnd_vertices,
-      Vector<double> &area_constraint)
+      const unsigned& b,
+      const unsigned& c,
+      Vector<Vector<double>>& vector_bnd_vertices,
+      Vector<double>& area_constraint)
   {
     // Store the vertices not allowed for deletion
     std::set<Vector<double>> no_delete_vertex;
@@ -41161,8 +41157,8 @@ namespace oomph
   template<class ELEMENT>
   bool RefineableTriangleMesh<ELEMENT>::
     refine_shared_boundary_constrained_by_target_area(
-      Vector<Vector<double>> &vector_bnd_vertices,
-      Vector<double> &area_constraint)
+      Vector<Vector<double>>& vector_bnd_vertices,
+      Vector<double>& area_constraint)
   {
     // Boolean that indicates whether an actual update of the vertex
     // coordinates was performed
@@ -41263,7 +41259,7 @@ namespace oomph
   //======================================================================
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::update_polygon_after_restart(
-    TriangleMeshPolygon *&polygon_pt)
+    TriangleMeshPolygon*& polygon_pt)
   {
     // **********************************************************************
     // 1) Collect the elements adjacet to the polyline boundary id and
@@ -41271,7 +41267,7 @@ namespace oomph
     // **********************************************************************
 
     // (1.1) Get the face mesh representation
-    Vector<Mesh *> face_mesh_pt;
+    Vector<Mesh*> face_mesh_pt;
     get_face_mesh_representation(polygon_pt, face_mesh_pt);
 
     // (1.2) Create vertices of the polylines by using the vertices of the
@@ -41291,7 +41287,7 @@ namespace oomph
       // to ensure that all processors (in a distributed context) get this
       // representation just once, and because an AllToAll MPI communication
       // is used in this calling
-      MeshAsGeomObject *mesh_geom_obj_pt =
+      MeshAsGeomObject* mesh_geom_obj_pt =
         new MeshAsGeomObject(face_mesh_pt[p]);
 
       // Set of coordinates that are on the boundary
@@ -41340,13 +41336,13 @@ namespace oomph
 
       // Store the non halo face elements, the ones from which we will
       // get the vertices
-      Vector<FiniteElement *> non_halo_face_element_pt;
+      Vector<FiniteElement*> non_halo_face_element_pt;
       // Map to store the index of the face element on a boundary
-      std::map<FiniteElement *, unsigned> face_element_index_on_boundary;
+      std::map<FiniteElement*, unsigned> face_element_index_on_boundary;
 
       for (unsigned ef = 0; ef < nface_element; ++ef)
       {
-        FiniteElement *ele_face_pt = face_mesh_pt[p]->finite_element_pt(ef);
+        FiniteElement* ele_face_pt = face_mesh_pt[p]->finite_element_pt(ef);
         // Skip the halo elements
 #ifdef OOMPH_HAS_MPI
         if (this->is_mesh_distributed())
@@ -41367,7 +41363,7 @@ namespace oomph
       const unsigned nnon_halo_face_element = non_halo_face_element_pt.size();
 
       // Map to know the already sorted face elements
-      std::map<FiniteElement *, bool> face_element_done;
+      std::map<FiniteElement*, bool> face_element_done;
 
       // Number of done face elements
       unsigned nsorted_face_elements = 0;
@@ -41382,7 +41378,7 @@ namespace oomph
       while (nsorted_face_elements < nnon_halo_face_element)
       {
         // Get and initial face element
-        FiniteElement *ele_face_pt = 0;
+        FiniteElement* ele_face_pt = 0;
 #ifdef PARANOID
         bool found_initial_face_element = false;
 #endif
@@ -41459,8 +41455,8 @@ namespace oomph
         local_vertex_nodes.insert(vertex_coord);
 
         // The initial and final node on the set
-        Node *first_node_pt = ele_face_pt->node_pt(0);
-        Node *last_node_pt = ele_face_pt->node_pt(nnode - 1);
+        Node* first_node_pt = ele_face_pt->node_pt(0);
+        Node* last_node_pt = ele_face_pt->node_pt(nnode - 1);
 
         // Mark the current face element as done
         face_element_done[ele_face_pt] = true;
@@ -41489,8 +41485,8 @@ namespace oomph
             {
               // Get each individual node to check if they are contiguous
               nnode = ele_face_pt->nnode();
-              Node *left_node_pt = ele_face_pt->node_pt(0);
-              Node *right_node_pt = ele_face_pt->node_pt(nnode - 1);
+              Node* left_node_pt = ele_face_pt->node_pt(0);
+              Node* right_node_pt = ele_face_pt->node_pt(nnode - 1);
 
               if (left_node_pt == first_node_pt)
               {
@@ -41911,7 +41907,7 @@ namespace oomph
 
         // Now update the polyline according to the new vertices
         // The new one representation
-        TriangleMeshPolyLine *tmp_polyline_pt =
+        TriangleMeshPolyLine* tmp_polyline_pt =
           new TriangleMeshPolyLine(vector_vertex_node, bound);
 
         //    for (unsigned h = 0; h < vector_vertex_node.size(); h++)
@@ -41923,7 +41919,7 @@ namespace oomph
 
         // Create a temporal "curve section" version of the recently created
         // polyline
-        TriangleMeshCurveSection *tmp_curve_section_pt = tmp_polyline_pt;
+        TriangleMeshCurveSection* tmp_curve_section_pt = tmp_polyline_pt;
 
         // Tolerance below which the middle point can be deleted
         // (ratio of deflection to element length)
@@ -41955,7 +41951,7 @@ namespace oomph
         // or if it should be done by other object
         bool delete_it_on_destructor = false;
 
-        std::set<TriangleMeshCurveSection *>::iterator it =
+        std::set<TriangleMeshCurveSection*>::iterator it =
           this->Free_curve_section_pt.find(polygon_pt->curve_section_pt(p));
 
         if (it != this->Free_curve_section_pt.end())
@@ -41993,7 +41989,7 @@ namespace oomph
           {
             // Now update the polyline according to the sub set of
             // vertices, set the chunk number of the polyline
-            TriangleMeshPolyLine *sub_tmp_polyline_pt =
+            TriangleMeshPolyLine* sub_tmp_polyline_pt =
               new TriangleMeshPolyLine(
                 sub_vector_vertex_node[isub], bound, isub);
 
@@ -42035,7 +42031,7 @@ namespace oomph
   //======================================================================
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::update_open_curve_after_restart(
-    TriangleMeshOpenCurve *&open_curve_pt)
+    TriangleMeshOpenCurve*& open_curve_pt)
   {
     // **********************************************************************
     // 1) Get the vertices along the boundaries ids of the polylines and
@@ -42043,7 +42039,7 @@ namespace oomph
     // **********************************************************************
 
     // (1.1) Get the face mesh representation
-    Vector<Mesh *> face_mesh_pt;
+    Vector<Mesh*> face_mesh_pt;
     get_face_mesh_representation(open_curve_pt, face_mesh_pt);
 
     // (1.2) Create vertices of the polylines by using the vertices of the
@@ -42062,7 +42058,7 @@ namespace oomph
       // to ensure that all processors (in a distributed context) get this
       // representation just once, and because an AllToAll MPI communication
       // is used in this calling
-      MeshAsGeomObject *mesh_geom_obj_pt =
+      MeshAsGeomObject* mesh_geom_obj_pt =
         new MeshAsGeomObject(face_mesh_pt[cs]);
 
       // Get the boundary id
@@ -42079,17 +42075,17 @@ namespace oomph
       // Store the non halo elements and the element at the other side of
       // the boundary (whatever it be halo or not), the first will be the
       // ones from which we will get the vertices (in even position)
-      Vector<FiniteElement *> non_halo_doubled_face_element_pt;
+      Vector<FiniteElement*> non_halo_doubled_face_element_pt;
 
       // Map to store the index of the face element on a boundary
-      std::map<FiniteElement *, unsigned> face_element_index_on_boundary;
+      std::map<FiniteElement*, unsigned> face_element_index_on_boundary;
 
       // Map to know the already sorted face elements
-      std::map<FiniteElement *, bool> face_element_done;
+      std::map<FiniteElement*, bool> face_element_done;
 
       for (unsigned ef = 0; ef < nface_element; ++ef)
       {
-        FiniteElement *ele_face_pt = face_mesh_pt[cs]->finite_element_pt(ef);
+        FiniteElement* ele_face_pt = face_mesh_pt[cs]->finite_element_pt(ef);
 
         // Skip the halo elements (not used as base elements, only
         // include those elements which one of its counterparts -- at the
@@ -42120,8 +42116,8 @@ namespace oomph
           const unsigned nnodes = ele_face_pt->nnode();
           // Get the left and right node to look for the elements at the
           // other side of the boundary
-          Node *left_node_pt = ele_face_pt->node_pt(0);
-          Node *right_node_pt = ele_face_pt->node_pt(nnodes - 1);
+          Node* left_node_pt = ele_face_pt->node_pt(0);
+          Node* right_node_pt = ele_face_pt->node_pt(nnodes - 1);
 
 #ifdef PARANOID
           // Flag to know if the element at the other side of the
@@ -42131,13 +42127,13 @@ namespace oomph
           for (unsigned iface = 0; iface < nface_element; iface++)
           {
             // Get the candidate face element
-            FiniteElement *cele_face_pt =
+            FiniteElement* cele_face_pt =
               face_mesh_pt[cs]->finite_element_pt(iface);
             // Check if not already done
             if (!face_element_done[cele_face_pt])
             {
-              Node *cleft_node_pt = cele_face_pt->node_pt(0);
-              Node *cright_node_pt = cele_face_pt->node_pt(nnodes - 1);
+              Node* cleft_node_pt = cele_face_pt->node_pt(0);
+              Node* cright_node_pt = cele_face_pt->node_pt(nnodes - 1);
 
               // Check if the nodes are the same
               if ((left_node_pt == cleft_node_pt &&
@@ -42246,8 +42242,8 @@ namespace oomph
       while (nsorted_face_elements < nnon_halo_doubled_face_ele)
       {
         // Get and initial face element
-        FiniteElement *ele_face_pt = 0;
-        FiniteElement *repeated_ele_face_pt = 0;
+        FiniteElement* ele_face_pt = 0;
+        FiniteElement* repeated_ele_face_pt = 0;
 #ifdef PARANOID
         bool found_initial_face_element = false;
 #endif
@@ -42345,8 +42341,8 @@ namespace oomph
         local_vertex_nodes.insert(vertex_coord);
 
         // The initial and final node on the set
-        Node *first_node_pt = ele_face_pt->node_pt(0);
-        Node *last_node_pt = ele_face_pt->node_pt(nnode - 1);
+        Node* first_node_pt = ele_face_pt->node_pt(0);
+        Node* last_node_pt = ele_face_pt->node_pt(nnode - 1);
 
         // Continue iterating if a new face element has been added to the
         // list
@@ -42387,8 +42383,8 @@ namespace oomph
             {
               // Get each individual node to check if they are contiguous
               const unsigned nlnode = ele_face_pt->nnode();
-              Node *left_node_pt = ele_face_pt->node_pt(0);
-              Node *right_node_pt = ele_face_pt->node_pt(nlnode - 1);
+              Node* left_node_pt = ele_face_pt->node_pt(0);
+              Node* right_node_pt = ele_face_pt->node_pt(nlnode - 1);
 
               if (left_node_pt == first_node_pt)
               {
@@ -42873,12 +42869,12 @@ namespace oomph
 
         // Now update the polyline according to the new vertices
         // The new one representation
-        TriangleMeshPolyLine *tmp_polyline_pt =
+        TriangleMeshPolyLine* tmp_polyline_pt =
           new TriangleMeshPolyLine(vector_vertex_node, bound);
 
         // Create a temporal "curve section" version of the recently created
         // polyline
-        TriangleMeshCurveSection *tmp_curve_section_pt = tmp_polyline_pt;
+        TriangleMeshCurveSection* tmp_curve_section_pt = tmp_polyline_pt;
 
         // Tolerance below which the middle point can be deleted
         // (ratio of deflection to element length)
@@ -42911,7 +42907,7 @@ namespace oomph
         // if it should be done by other object
         bool delete_it_on_destructor = false;
 
-        std::set<TriangleMeshCurveSection *>::iterator it =
+        std::set<TriangleMeshCurveSection*>::iterator it =
           this->Free_curve_section_pt.find(open_curve_pt->curve_section_pt(cs));
 
         if (it != this->Free_curve_section_pt.end())
@@ -42969,7 +42965,7 @@ namespace oomph
           {
             // Now update the polyline according to the sub set of
             // vertices, set the chunk number of the polyline
-            TriangleMeshPolyLine *sub_tmp_polyline_pt =
+            TriangleMeshPolyLine* sub_tmp_polyline_pt =
               new TriangleMeshPolyLine(
                 sub_vector_vertex_node[isub], bound, isub);
 
@@ -43014,7 +43010,7 @@ namespace oomph
   //======================================================================
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::update_shared_curve_after_restart(
-    Vector<TriangleMeshPolyLine *> &vector_polyline_pt)
+    Vector<TriangleMeshPolyLine*>& vector_polyline_pt)
   {
     // Go through all the shared boundaries/polylines
     const unsigned npolylines = vector_polyline_pt.size();
@@ -43026,25 +43022,24 @@ namespace oomph
       // Get the edges of the shared boundary elements that create the
       // shared boundary and store the shared boundary elements from where
       // were created
-      std::map<std::pair<Node *, Node *>, FiniteElement *> halo_edge_element_pt;
-      std::map<std::pair<Node *, Node *>, FiniteElement *>
-        nonhalo_edge_element_pt;
+      std::map<std::pair<Node*, Node*>, FiniteElement*> halo_edge_element_pt;
+      std::map<std::pair<Node*, Node*>, FiniteElement*> nonhalo_edge_element_pt;
 
       // Store the nodes that define the edges
-      Vector<Node *> halo_edge_nodes_pt;
-      Vector<Node *> nonhalo_edge_nodes_pt;
+      Vector<Node*> halo_edge_nodes_pt;
+      Vector<Node*> nonhalo_edge_nodes_pt;
 
       // Go through the shared boundary elements and store their edges
       const unsigned nshared_bound_ele = this->nshared_boundary_element(b);
       for (unsigned e = 0; e < nshared_bound_ele; e++)
       {
         // Get the shared boundary element
-        FiniteElement *current_ele_pt = this->shared_boundary_element_pt(b, e);
+        FiniteElement* current_ele_pt = this->shared_boundary_element_pt(b, e);
 
         // Get the corner nodes, the first three nodes
-        Node *first_node_pt = current_ele_pt->node_pt(0);
-        Node *second_node_pt = current_ele_pt->node_pt(1);
-        Node *third_node_pt = current_ele_pt->node_pt(2);
+        Node* first_node_pt = current_ele_pt->node_pt(0);
+        Node* second_node_pt = current_ele_pt->node_pt(1);
+        Node* third_node_pt = current_ele_pt->node_pt(2);
 
         // Check if the elements is halo
         if (!current_ele_pt->is_halo())
@@ -43060,15 +43055,15 @@ namespace oomph
           nonhalo_edge_nodes_pt.push_back(first_node_pt);
 
           // Store the info. of the element used to create these edges
-          std::pair<Node *, Node *> edge1 =
+          std::pair<Node*, Node*> edge1 =
             std::make_pair(first_node_pt, second_node_pt);
           nonhalo_edge_element_pt[edge1] = current_ele_pt;
 
-          std::pair<Node *, Node *> edge2 =
+          std::pair<Node*, Node*> edge2 =
             std::make_pair(second_node_pt, third_node_pt);
           nonhalo_edge_element_pt[edge2] = current_ele_pt;
 
-          std::pair<Node *, Node *> edge3 =
+          std::pair<Node*, Node*> edge3 =
             std::make_pair(third_node_pt, first_node_pt);
           nonhalo_edge_element_pt[edge3] = current_ele_pt;
         }
@@ -43085,15 +43080,15 @@ namespace oomph
           halo_edge_nodes_pt.push_back(first_node_pt);
 
           // Store the info. of the element used to create these edges
-          std::pair<Node *, Node *> edge1 =
+          std::pair<Node*, Node*> edge1 =
             std::make_pair(first_node_pt, second_node_pt);
           halo_edge_element_pt[edge1] = current_ele_pt;
 
-          std::pair<Node *, Node *> edge2 =
+          std::pair<Node*, Node*> edge2 =
             std::make_pair(second_node_pt, third_node_pt);
           halo_edge_element_pt[edge2] = current_ele_pt;
 
-          std::pair<Node *, Node *> edge3 =
+          std::pair<Node*, Node*> edge3 =
             std::make_pair(third_node_pt, first_node_pt);
           halo_edge_element_pt[edge3] = current_ele_pt;
         }
@@ -43103,24 +43098,24 @@ namespace oomph
       // Filter the edges that give rise to a shared boundary
 
       // Mark the done edges
-      std::map<std::pair<Node *, Node *>, bool> edge_done;
+      std::map<std::pair<Node*, Node*>, bool> edge_done;
 
       // Storage for the edges shared by the elements
-      Vector<std::pair<Node *, Node *>> unsorted_edges;
+      Vector<std::pair<Node*, Node*>> unsorted_edges;
 
       // Storage for the elements that created the unsorted edges (two
       // elements, one at each side of the shared boundary)
-      Vector<Vector<FiniteElement *>> unsorted_edges_elements_pt;
+      Vector<Vector<FiniteElement*>> unsorted_edges_elements_pt;
 
       const unsigned nnonhalo_edge_nodes = nonhalo_edge_nodes_pt.size();
       for (unsigned i = 0; i < nnonhalo_edge_nodes; i += 2)
       {
-        Vector<Node *> currenti_edge(2);
+        Vector<Node*> currenti_edge(2);
         currenti_edge[0] = nonhalo_edge_nodes_pt[i];
         currenti_edge[1] = nonhalo_edge_nodes_pt[i + 1];
 
         // Create the edge (both nodes that make the edge)
-        std::pair<Node *, Node *> new_edge =
+        std::pair<Node*, Node*> new_edge =
           std::make_pair(currenti_edge[0], currenti_edge[1]);
 
         if (!edge_done[new_edge])
@@ -43128,7 +43123,7 @@ namespace oomph
           const unsigned nhalo_edge_nodes = halo_edge_nodes_pt.size();
           for (unsigned j = 0; j < nhalo_edge_nodes; j += 2)
           {
-            Vector<Node *> currentj_edge(2);
+            Vector<Node*> currentj_edge(2);
             currentj_edge[0] = halo_edge_nodes_pt[j];
             currentj_edge[1] = halo_edge_nodes_pt[j + 1];
 
@@ -43140,10 +43135,10 @@ namespace oomph
               unsorted_edges.push_back(new_edge);
 
               // Get the elements associated with the edges
-              Vector<FiniteElement *> tmp_edge_element_pt;
+              Vector<FiniteElement*> tmp_edge_element_pt;
 
-              FiniteElement *nonhalo_ele_pt = nonhalo_edge_element_pt[new_edge];
-              FiniteElement *halo_ele_pt = halo_edge_element_pt[new_edge];
+              FiniteElement* nonhalo_ele_pt = nonhalo_edge_element_pt[new_edge];
+              FiniteElement* halo_ele_pt = halo_edge_element_pt[new_edge];
 
               tmp_edge_element_pt.push_back(nonhalo_ele_pt);
               tmp_edge_element_pt.push_back(halo_ele_pt);
@@ -43164,21 +43159,21 @@ namespace oomph
                      currenti_edge[1] == currentj_edge[0])
             {
               // Create the edge (both nodes that make the edge)
-              std::pair<Node *, Node *> new_edge =
+              std::pair<Node*, Node*> new_edge =
                 std::make_pair(currenti_edge[0], currenti_edge[1]);
 
               // Store the edge in the proper container
               unsorted_edges.push_back(new_edge);
 
               // Create the (reversed) edge (both nodes that make the edge)
-              std::pair<Node *, Node *> rev_new_edge =
+              std::pair<Node*, Node*> rev_new_edge =
                 std::make_pair(currentj_edge[0], currentj_edge[1]);
 
               // Get the elements associated with the edge
-              Vector<FiniteElement *> tmp_edge_element_pt;
+              Vector<FiniteElement*> tmp_edge_element_pt;
 
-              FiniteElement *nonhalo_ele_pt = nonhalo_edge_element_pt[new_edge];
-              FiniteElement *halo_ele_pt = halo_edge_element_pt[rev_new_edge];
+              FiniteElement* nonhalo_ele_pt = nonhalo_edge_element_pt[new_edge];
+              FiniteElement* halo_ele_pt = halo_edge_element_pt[rev_new_edge];
 
               tmp_edge_element_pt.push_back(nonhalo_ele_pt);
               tmp_edge_element_pt.push_back(halo_ele_pt);
@@ -43205,7 +43200,7 @@ namespace oomph
       // Sort them to create a contiguous boundary
 
       // Mark the already sorted edges
-      std::map<std::pair<Node *, Node *>, bool> edge_sorted;
+      std::map<std::pair<Node*, Node*>, bool> edge_sorted;
 
       const unsigned nunsorted_edges = unsorted_edges.size();
 
@@ -43230,21 +43225,21 @@ namespace oomph
 
       // Storing for the sorting nodes extracted from the edges, and
       // then used to update the polyline
-      std::list<Node *> sorted_nodes;
+      std::list<Node*> sorted_nodes;
 
       // Storing for the edges elements
-      std::list<FiniteElement *> sorted_edges_elements_pt;
+      std::list<FiniteElement*> sorted_edges_elements_pt;
 
       // Get the root edge
-      std::pair<Node *, Node *> edge = unsorted_edges[0];
+      std::pair<Node*, Node*> edge = unsorted_edges[0];
       nsorted_edges++;
 
       // Mark edge as done
       edge_sorted[edge] = true;
 
       // The initial and final node on the list
-      Node *first_node_pt = edge.first;
-      Node *last_node_pt = edge.second;
+      Node* first_node_pt = edge.first;
+      Node* last_node_pt = edge.second;
 
       // Push back on the list the new edge (nodes)
       sorted_nodes.push_back(first_node_pt);
@@ -43271,8 +43266,8 @@ namespace oomph
           if (!edge_sorted[edge])
           {
             // Get each individual node
-            Node *left_node_pt = edge.first;
-            Node *right_node_pt = edge.second;
+            Node* left_node_pt = edge.first;
+            Node* right_node_pt = edge.second;
 
             if (left_node_pt == first_node_pt)
             {
@@ -43352,7 +43347,7 @@ namespace oomph
 
       // Copy the vertices of the nodes
       unsigned counter = 0;
-      for (std::list<Node *>::iterator it_nodes = sorted_nodes.begin();
+      for (std::list<Node*>::iterator it_nodes = sorted_nodes.begin();
            it_nodes != sorted_nodes.end();
            it_nodes++)
       {
@@ -43378,11 +43373,11 @@ namespace oomph
       }
 
       // Create the polyline associated with this edge
-      TriangleMeshPolyLine *new_polyline_pt =
+      TriangleMeshPolyLine* new_polyline_pt =
         new TriangleMeshPolyLine(polyline_vertices, b);
 
       // Get the curve section representation
-      TriangleMeshCurveSection *curve_section_pt = vector_polyline_pt[pp];
+      TriangleMeshCurveSection* curve_section_pt = vector_polyline_pt[pp];
 
       // Copy the connection information from the old shared polyline
       // to the new one
@@ -43395,7 +43390,7 @@ namespace oomph
 
       // Establish the element as being deleted by the destructor of
       // the class
-      std::set<TriangleMeshCurveSection *>::iterator it =
+      std::set<TriangleMeshCurveSection*>::iterator it =
         this->Free_curve_section_pt.find(curve_section_pt);
 
       if (it != this->Free_curve_section_pt.end())
@@ -43409,7 +43404,7 @@ namespace oomph
       vector_polyline_pt[pp] = new_polyline_pt;
 
       // Get the new curve section representation
-      TriangleMeshCurveSection *new_curve_section_pt = vector_polyline_pt[pp];
+      TriangleMeshCurveSection* new_curve_section_pt = vector_polyline_pt[pp];
 
       // Update the Boundary - Polyline map
       this->Boundary_curve_section_pt[b] = new_curve_section_pt;
@@ -43444,7 +43439,7 @@ namespace oomph
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::
     fill_boundary_elements_and_nodes_for_internal_boundaries(
-      std::ofstream &outfile)
+      std::ofstream& outfile)
   {
     // Get the number of processors
     const unsigned nproc = this->communicator_pt()->nproc();
@@ -43545,7 +43540,7 @@ namespace oomph
         for (unsigned in = 0; in < nbnd_node_shd_bnd; in++)
         {
           // Get the boundary node
-          Node *bnd_node_pt = this->boundary_node_pt(shd_bnd_id, in);
+          Node* bnd_node_pt = this->boundary_node_pt(shd_bnd_id, in);
           // Add the node to the internal boundary
           this->add_boundary_node(int_bnd_id, bnd_node_pt);
         }
@@ -43569,7 +43564,7 @@ namespace oomph
         for (unsigned ie = 0; ie < nbnd_ele_shd_bnd; ie++)
         {
           // Get the boundary element
-          FiniteElement *bnd_ele_pt = this->boundary_element_pt(shd_bnd_id, ie);
+          FiniteElement* bnd_ele_pt = this->boundary_element_pt(shd_bnd_id, ie);
           // Add the element to the boundary elements storage of the
           // internal boundary
           Boundary_element_pt[int_bnd_id].push_back(bnd_ele_pt);
@@ -43596,7 +43591,7 @@ namespace oomph
             for (unsigned ier = 0; ier < nele_ir; ier++)
             {
               // Get the boundary element in current region
-              FiniteElement *bnd_ele_pt =
+              FiniteElement* bnd_ele_pt =
                 this->boundary_element_in_region_pt(shd_bnd_id, region_id, ier);
               // Add the boundary element to the internal boundary in the
               // region
@@ -43659,7 +43654,7 @@ namespace oomph
   //======================================================================
   template<class ELEMENT>
   void RefineableTriangleMesh<ELEMENT>::snap_nodes_onto_boundary(
-    RefineableTriangleMesh<ELEMENT> *&new_mesh_pt, const unsigned &b)
+    RefineableTriangleMesh<ELEMENT>*& new_mesh_pt, const unsigned& b)
   {
     // Quick return
     if (!Boundary_coordinate_exists[b])
@@ -43679,12 +43674,12 @@ namespace oomph
     // elements since the "multi_domain" methods add nodes to the
     // "Boundary_node_pt" structure which have no boundary coordinates
     // assigned
-    std::set<Node *> tmp_boundary_node_pt;
+    std::set<Node*> tmp_boundary_node_pt;
     const unsigned nboundary_ele = this->nboundary_element(b);
     for (unsigned e = 0; e < nboundary_ele; e++)
     {
       // Get the boundary bulk element
-      FiniteElement *bulk_ele_pt = this->boundary_element_pt(b, e);
+      FiniteElement* bulk_ele_pt = this->boundary_element_pt(b, e);
 #ifdef OOMPH_HAS_MPI
       // Only work with nonhalo elements if the mesh is distributed
       if (!bulk_ele_pt->is_halo())
@@ -43693,7 +43688,7 @@ namespace oomph
         // Get the face index
         int face_index = this->face_index_at_boundary(b, e);
         // Create the face element
-        FiniteElement *face_ele_pt =
+        FiniteElement* face_ele_pt =
           new DummyFaceElement<ELEMENT>(bulk_ele_pt, face_index);
 
         // Get the number of nodes on the face element
@@ -43701,7 +43696,7 @@ namespace oomph
         for (unsigned i = 0; i < nnodes; i++)
         {
           // Get the nodes in the face elements
-          Node *tmp_node_pt = face_ele_pt->node_pt(i);
+          Node* tmp_node_pt = face_ele_pt->node_pt(i);
           // Add the nodes to the set of boundary nodes
           tmp_boundary_node_pt.insert(tmp_node_pt);
         } // for (i < nnodes)
@@ -43732,9 +43727,9 @@ namespace oomph
       else // The mesh is distributed !!!
       {
         // Do not forget to participate in the communication
-        Mesh *face_mesh_pt = new Mesh();
+        Mesh* face_mesh_pt = new Mesh();
         create_unsorted_face_mesh_representation(b, face_mesh_pt);
-        MeshAsGeomObject *mesh_geom_obj_pt = new MeshAsGeomObject(face_mesh_pt);
+        MeshAsGeomObject* mesh_geom_obj_pt = new MeshAsGeomObject(face_mesh_pt);
 
         // Delete the allocated memory for the geometric object and face mesh
         delete mesh_geom_obj_pt;
@@ -43755,11 +43750,11 @@ namespace oomph
 
     Vector<Vector<double>> old_boundary_node(n_boundary_node);
     unsigned tmp_counter = 0;
-    for (std::set<Node *>::iterator it_node = tmp_boundary_node_pt.begin();
+    for (std::set<Node*>::iterator it_node = tmp_boundary_node_pt.begin();
          it_node != tmp_boundary_node_pt.end();
          it_node++, tmp_counter++)
     {
-      Node *nod_pt = (*it_node);
+      Node* nod_pt = (*it_node);
       nod_pt->get_coordinates_on_boundary(b, b_coord);
       node_coord[0] = b_coord[0];
       node_coord[1] = nod_pt->x(0);
@@ -43777,7 +43772,7 @@ namespace oomph
     // coordinate has been assigned.
     // Get the nodes on the boundary but consider to which segment (which
     // may appear in a distributed mesh) they belong
-    Vector<Vector<Node *>> segment_nodes_pt;
+    Vector<Vector<Node*>> segment_nodes_pt;
 
 #ifdef OOMPH_HAS_MPI
     // Get the number of segments
@@ -43801,9 +43796,9 @@ namespace oomph
       if (n_new_boundary_node == 0)
       {
         // Do not forget to participate in the communication
-        Mesh *face_mesh_pt = new Mesh();
+        Mesh* face_mesh_pt = new Mesh();
         create_unsorted_face_mesh_representation(b, face_mesh_pt);
-        MeshAsGeomObject *mesh_geom_obj_pt = new MeshAsGeomObject(face_mesh_pt);
+        MeshAsGeomObject* mesh_geom_obj_pt = new MeshAsGeomObject(face_mesh_pt);
 
         // Delete the allocated memory for the geometric object and face mesh
         delete mesh_geom_obj_pt;
@@ -43837,9 +43832,9 @@ namespace oomph
       for (unsigned n = 0; n < n_new_boundary_segment_node; n++)
       {
 #ifdef OOMPH_HAS_MPI
-        Node *nod_pt = new_mesh_pt->boundary_segment_node_pt(b, is, n);
+        Node* nod_pt = new_mesh_pt->boundary_segment_node_pt(b, is, n);
 #else
-        Node *nod_pt = new_mesh_pt->boundary_node_pt(b, n);
+        Node* nod_pt = new_mesh_pt->boundary_node_pt(b, n);
 #endif // #ifdef OOMPH_HAS_MPI
         nod_pt->get_coordinates_on_boundary(b, b_coord);
         node_coord[0] = b_coord[0];
@@ -44006,11 +44001,11 @@ namespace oomph
 
     } // for (is < nsegments)
 
-    Mesh *face_mesh_pt = new Mesh();
+    Mesh* face_mesh_pt = new Mesh();
     create_unsorted_face_mesh_representation(b, face_mesh_pt);
 
     // Now that the coordinates have been set up we can do the snapping
-    MeshAsGeomObject *mesh_geom_obj_pt = new MeshAsGeomObject(face_mesh_pt);
+    MeshAsGeomObject* mesh_geom_obj_pt = new MeshAsGeomObject(face_mesh_pt);
 
     // Now assign the new nodes positions based on the old meshes
     // potentially curvilinear boundary (its geom object incarnation)
@@ -44027,10 +44022,10 @@ namespace oomph
         unsigned n = nodes_to_be_snapped[is][in];
 #ifdef OOMPH_HAS_MPI
         // Get the boundary coordinate of all new nodes
-        Node *const nod_pt = new_mesh_pt->boundary_segment_node_pt(b, is, n);
+        Node* const nod_pt = new_mesh_pt->boundary_segment_node_pt(b, is, n);
 #else
         // Get the boundary coordinate of all new nodes
-        Node *const nod_pt = new_mesh_pt->boundary_node_pt(b, n);
+        Node* const nod_pt = new_mesh_pt->boundary_node_pt(b, n);
 #endif // #ifdef OOMPH_HAS_MPI
 
         nod_pt->get_coordinates_on_boundary(b, b_coord);
@@ -44067,7 +44062,7 @@ namespace oomph
     unsigned n_bound_el = new_mesh_pt->nboundary_element(b);
     for (unsigned e = 0; e < n_bound_el; e++)
     {
-      FiniteElement *el_pt = new_mesh_pt->boundary_element_pt(b, e);
+      FiniteElement* el_pt = new_mesh_pt->boundary_element_pt(b, e);
 
       // Deal with different numbers of nodes separately
       unsigned nnod = el_pt->nnode();
@@ -44082,7 +44077,7 @@ namespace oomph
       {
 #ifdef PARANOID
         // Try to cast to a simplex element
-        TElement<2, 2> *t_el_pt = dynamic_cast<TElement<2, 2> *>(el_pt);
+        TElement<2, 2>* t_el_pt = dynamic_cast<TElement<2, 2>*>(el_pt);
         if (t_el_pt == 0)
         {
           throw OomphLibError(
@@ -44100,7 +44095,7 @@ namespace oomph
       {
 #ifdef PARANOID
         // Try to cast to a quadratic element
-        TElement<2, 3> *t_el_pt = dynamic_cast<TElement<2, 3> *>(el_pt);
+        TElement<2, 3>* t_el_pt = dynamic_cast<TElement<2, 3>*>(el_pt);
         if (t_el_pt == 0)
         {
           if (nnod == 6)
@@ -44213,8 +44208,8 @@ namespace oomph
         if (nnod == 7)
         {
           // Try to cast to an enriched quadratic element
-          TBubbleEnrichedElement<2, 3> *t_el_pt =
-            dynamic_cast<TBubbleEnrichedElement<2, 3> *>(el_pt);
+          TBubbleEnrichedElement<2, 3>* t_el_pt =
+            dynamic_cast<TBubbleEnrichedElement<2, 3>*>(el_pt);
           if (t_el_pt == 0)
           {
             throw OomphLibError("Have seven-noded element that's not a "

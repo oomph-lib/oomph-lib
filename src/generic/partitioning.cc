@@ -45,10 +45,10 @@ namespace oomph
     /// \short Default function that translates spatial
     /// error into weight for METIS partitioning (unit weight regardless
     /// of input).
-    void default_error_to_weight_fct(const double &spatial_error,
-                                     const double &max_error,
-                                     const double &min_error,
-                                     int &weight)
+    void default_error_to_weight_fct(const double& spatial_error,
+                                     const double& max_error,
+                                     const double& min_error,
+                                     int& weight)
     {
       weight = 1;
     }
@@ -67,9 +67,9 @@ namespace oomph
   /// of the domain [0,1,...,ndomain-1] to which
   /// element ielem has been assigned.
   //==================================================================
-  void METIS::uniform_partition_mesh(Problem *problem_pt,
-                                     const unsigned &ndomain,
-                                     Vector<unsigned> &element_domain)
+  void METIS::uniform_partition_mesh(Problem* problem_pt,
+                                     const unsigned& ndomain,
+                                     Vector<unsigned>& element_domain)
   {
     // Number of elements
     unsigned nelem = problem_pt->mesh_pt()->nelement();
@@ -105,13 +105,13 @@ namespace oomph
   /// .
   /// Partioning is based on dual graph of mesh.
   //==================================================================
-  void METIS::partition_mesh(Problem *problem_pt,
-                             const unsigned &ndomain,
-                             const unsigned &objective,
-                             Vector<unsigned> &element_domain)
+  void METIS::partition_mesh(Problem* problem_pt,
+                             const unsigned& ndomain,
+                             const unsigned& objective,
+                             Vector<unsigned>& element_domain)
   {
     // Global mesh
-    Mesh *mesh_pt = problem_pt->mesh_pt();
+    Mesh* mesh_pt = problem_pt->mesh_pt();
 
     // Number of elements
     unsigned nelem = mesh_pt->nelement();
@@ -143,7 +143,7 @@ namespace oomph
     // Loop over all elements
     for (unsigned e = 0; e < nelem; e++)
     {
-      GeneralisedElement *el_pt = mesh_pt->element_pt(e);
+      GeneralisedElement* el_pt = mesh_pt->element_pt(e);
 
       // Add all global eqn numbers
       unsigned ndof = el_pt->ndof();
@@ -190,7 +190,7 @@ namespace oomph
     }
 
     // Now convert into C-style packed array for interface with METIS
-    int *xadj = new int[nelem + 1];
+    int* xadj = new int[nelem + 1];
     Vector<int> adjacency_vector;
 
     // Reserve (too much) space
@@ -241,10 +241,10 @@ namespace oomph
     int nvertex = nelem;
 
     // No vertex weights
-    int *vwgt = 0;
+    int* vwgt = 0;
 
     // No edge weights
-    int *adjwgt = 0;
+    int* adjwgt = 0;
 
     // Flag indicating that graph isn't weighted: 0; vertex weights only: 2
     // Note that wgtflag==2 requires nodal weights to be stored in vwgt.
@@ -257,14 +257,14 @@ namespace oomph
     int nparts = ndomain;
 
     // Use default options
-    int *options = new int[10];
+    int* options = new int[10];
     options[0] = 0;
 
     // Number of cut edges in graph
-    int *edgecut = new int[nelem];
+    int* edgecut = new int[nelem];
 
     // Array containing the partition information
-    int *part = new int[nelem];
+    int* part = new int[nelem];
 
     // Can we get an error estimate?
 
@@ -272,8 +272,7 @@ namespace oomph
 
     if (n_mesh == 0)
     {
-      RefineableMeshBase *mmesh_pt =
-        dynamic_cast<RefineableMeshBase *>(mesh_pt);
+      RefineableMeshBase* mmesh_pt = dynamic_cast<RefineableMeshBase*>(mesh_pt);
       if (mmesh_pt != 0)
       {
         // Bias distribution?
@@ -323,8 +322,8 @@ namespace oomph
         loop_helper[i_mesh + 1] =
           problem_pt->mesh_pt(i_mesh)->nelement() + loop_helper[i_mesh];
 
-        RefineableMeshBase *mmesh_pt =
-          dynamic_cast<RefineableMeshBase *>(problem_pt->mesh_pt(i_mesh));
+        RefineableMeshBase* mmesh_pt =
+          dynamic_cast<RefineableMeshBase*>(problem_pt->mesh_pt(i_mesh));
         if (mmesh_pt != 0)
         {
           refineable_submesh_exists = true;
@@ -347,8 +346,8 @@ namespace oomph
           // Loop over submeshes
           for (unsigned i_mesh = 0; i_mesh < n_mesh; i_mesh++)
           {
-            RefineableMeshBase *mmesh_pt =
-              dynamic_cast<RefineableMeshBase *>(problem_pt->mesh_pt(i_mesh));
+            RefineableMeshBase* mmesh_pt =
+              dynamic_cast<RefineableMeshBase*>(problem_pt->mesh_pt(i_mesh));
             if (mmesh_pt != 0)
             {
               // Get error for all elements
@@ -510,23 +509,23 @@ namespace oomph
   /// gone into METIS in the file metis_input_for_validation.dat
   //==================================================================
   void METIS::partition_distributed_mesh(
-    Problem *problem_pt,
-    const unsigned &objective,
-    Vector<unsigned> &element_domain_on_this_proc,
-    const bool &bypass_metis)
+    Problem* problem_pt,
+    const unsigned& objective,
+    Vector<unsigned>& element_domain_on_this_proc,
+    const bool& bypass_metis)
   {
     // Start timer
     clock_t cpu_start = clock();
 
     // Communicator
-    OomphCommunicator *comm_pt = problem_pt->communicator_pt();
+    OomphCommunicator* comm_pt = problem_pt->communicator_pt();
 
     // Number of processors / domains
     unsigned n_proc = comm_pt->nproc();
     unsigned my_rank = comm_pt->my_rank();
 
     // Global mesh
-    Mesh *mesh_pt = problem_pt->mesh_pt();
+    Mesh* mesh_pt = problem_pt->mesh_pt();
 
     // Total number of elements (halo and nonhalo) on this proc
     unsigned n_elem = mesh_pt->nelement();
@@ -560,7 +559,7 @@ namespace oomph
 
     // Storage for pointers to root elements that are connected with given
     // eqn number -- assembled on local processor
-    std::map<unsigned, std::set<GeneralisedElement *>>
+    std::map<unsigned, std::set<GeneralisedElement*>>
       root_elements_connected_with_global_eqn_on_this_proc;
 
     // Storage for long sequence of equation numbers as encountered
@@ -589,7 +588,7 @@ namespace oomph
 
     // Map storing the number of the root elements on this processor
     // (offset by one to bypass the zero default).
-    std::map<GeneralisedElement *, unsigned> root_el_number_plus_one;
+    std::map<GeneralisedElement*, unsigned> root_el_number_plus_one;
 
     // Loop over non-halo elements on this processor
     int number_of_root_elements = 0;
@@ -597,7 +596,7 @@ namespace oomph
     for (unsigned e = 0; e < n_elem; e++)
     {
       double el_assembly_time = 0.0;
-      GeneralisedElement *el_pt = mesh_pt->element_pt(e);
+      GeneralisedElement* el_pt = mesh_pt->element_pt(e);
       if (!el_pt->is_halo())
       {
         if (can_load_balance_on_assembly_times)
@@ -606,8 +605,8 @@ namespace oomph
         }
 
         // Get the associated root element which is either...
-        GeneralisedElement *root_el_pt = 0;
-        RefineableElement *ref_el_pt = dynamic_cast<RefineableElement *>(el_pt);
+        GeneralisedElement* root_el_pt = 0;
+        RefineableElement* ref_el_pt = dynamic_cast<RefineableElement*>(el_pt);
         if (ref_el_pt != 0)
         {
           //...the actual root element
@@ -963,7 +962,7 @@ namespace oomph
 
       // Now convert into C-style packed array for interface with METIS
       cpu_start = clock();
-      int *xadj = new int[total_number_of_root_elements + 1];
+      int* xadj = new int[total_number_of_root_elements + 1];
       Vector<int> adjacency_vector;
 
       // Reserve (too much) space
@@ -1015,10 +1014,10 @@ namespace oomph
       int nvertex = total_number_of_root_elements;
 
       // No vertex weights
-      int *vwgt = 0;
+      int* vwgt = 0;
 
       // No edge weights
-      int *adjwgt = 0;
+      int* adjwgt = 0;
 
       // Flag indicating that graph isn't weighted: 0; vertex weights only: 2
       // Note that wgtflag==2 requires nodal weights to be stored in vwgt.
@@ -1031,14 +1030,14 @@ namespace oomph
       int nparts = ndomain;
 
       // Use default options
-      int *options = new int[10];
+      int* options = new int[10];
       options[0] = 0;
 
       // Number of cut edges in graph
-      int *edgecut = new int[total_number_of_root_elements];
+      int* edgecut = new int[total_number_of_root_elements];
 
       // Array containing the partition information
-      int *part = new int[total_number_of_root_elements];
+      int* part = new int[total_number_of_root_elements];
 
       // Now bias distribution by giving each root element
       // a weight equal to the number of elements associated with it
@@ -1228,12 +1227,12 @@ namespace oomph
     unsigned count_non_halo = 0;
     for (unsigned e = 0; e < n_elem; e++)
     {
-      GeneralisedElement *el_pt = mesh_pt->element_pt(e);
+      GeneralisedElement* el_pt = mesh_pt->element_pt(e);
       if (!el_pt->is_halo())
       {
         // Get the associated root element which is either...
-        GeneralisedElement *root_el_pt = 0;
-        RefineableElement *ref_el_pt = dynamic_cast<RefineableElement *>(el_pt);
+        GeneralisedElement* root_el_pt = 0;
+        RefineableElement* ref_el_pt = dynamic_cast<RefineableElement*>(el_pt);
         if (ref_el_pt != 0)
         {
           //...the actual root element

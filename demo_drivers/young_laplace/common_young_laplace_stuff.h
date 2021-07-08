@@ -65,7 +65,7 @@ namespace GlobalParameters
   double Cos_gamma = cos(Gamma);
 
   /// Pointer to Data object that stores the prescribed curvature
-  Data *Kappa_pt = 0;
+  Data* Kappa_pt = 0;
 
   /// Initial value for kappa
   double Kappa_initial = 0.0;
@@ -195,9 +195,9 @@ namespace GlobalParameters
   /// derivatives w.r.t. to these coordinates.
   /// dspine_B[i][j] = d spine_B[j] / dx_i
   /// Spines start in the (x_1,x_2) plane at (x_1,x_2).
-  void spine_base_function(const Vector<double> &x,
-                           Vector<double> &spine_B,
-                           Vector<Vector<double>> &dspine_B)
+  void spine_base_function(const Vector<double>& x,
+                           Vector<double>& spine_B,
+                           Vector<Vector<double>>& dspine_B)
   {
     // Bspines and derivatives
     spine_B[0] = x[0];
@@ -215,9 +215,9 @@ namespace GlobalParameters
   /// \short Spine: The spine vector field as a function of the two
   /// coordinates x_1 and x_2, and its derivatives w.r.t. to these coordinates:
   /// dspine[i][j] = d spine[j] / dx_i
-  void spine_function(const Vector<double> &xx,
-                      Vector<double> &spine,
-                      Vector<Vector<double>> &dspine)
+  void spine_function(const Vector<double>& xx,
+                      Vector<double>& spine,
+                      Vector<Vector<double>>& dspine)
   {
     // Scale lengths
     Vector<double> x(2, 0.0);

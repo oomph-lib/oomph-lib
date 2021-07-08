@@ -58,7 +58,7 @@ namespace Anasazi
     /// \brief Creates a new empty DoubleMultiVector containing numvecs columns.
     /// Return a reference-counted pointer to the new multivector
     static Teuchos::RCP<oomph::DoubleMultiVector> Clone(
-      const oomph::DoubleMultiVector &mv, const int numvecs)
+      const oomph::DoubleMultiVector& mv, const int numvecs)
     {
       return Teuchos::rcp(new oomph::DoubleMultiVector(numvecs, mv));
     }
@@ -66,7 +66,7 @@ namespace Anasazi
     /// \brief Creates a deep copy of the DoubleMultiVector mv
     /// return Reference-counted pointer to the new DoubleMultiVector
     static Teuchos::RCP<oomph::DoubleMultiVector> CloneCopy(
-      const oomph::DoubleMultiVector &mv)
+      const oomph::DoubleMultiVector& mv)
     {
       return Teuchos::rcp(new oomph::DoubleMultiVector(mv));
     }
@@ -76,7 +76,7 @@ namespace Anasazi
     /// the vectors in index into the new vector
     /// return Reference-counted pointer to the new oomph::DoubleMultiVector
     static Teuchos::RCP<oomph::DoubleMultiVector> CloneCopy(
-      const oomph::DoubleMultiVector &mv, const std::vector<int> &index)
+      const oomph::DoubleMultiVector& mv, const std::vector<int>& index)
     {
       return Teuchos::rcp(new oomph::DoubleMultiVector(mv, index));
     }
@@ -84,7 +84,7 @@ namespace Anasazi
     /// \brief Deep copy of specified columns of oomph::DoubleMultiVector
     /// return Reference-counted pointer to the new oomph::DoubleMultiVector
     static Teuchos::RCP<oomph::DoubleMultiVector> CloneCopy(
-      const oomph::DoubleMultiVector &mv, const Teuchos::Range1D &index)
+      const oomph::DoubleMultiVector& mv, const Teuchos::Range1D& index)
     {
       return Teuchos::rcp(new oomph::DoubleMultiVector(mv, index));
     }
@@ -94,7 +94,7 @@ namespace Anasazi
     /// of selected entries of the oomph::DoubleMultiVector mv
     /// return Reference-counted pointer to the new oomph::DoubleMultiVector
     static Teuchos::RCP<oomph::DoubleMultiVector> CloneViewNonConst(
-      oomph::DoubleMultiVector &mv, const std::vector<int> &index)
+      oomph::DoubleMultiVector& mv, const std::vector<int>& index)
     {
       return Teuchos::rcp(new oomph::DoubleMultiVector(mv, index, false));
     }
@@ -104,7 +104,7 @@ namespace Anasazi
     /// of selected entries of the oomph::DoubleMultiVector mv
     /// return Reference-counted pointer to the new oomph::DoubleMultiVector
     static Teuchos::RCP<oomph::DoubleMultiVector> CloneViewNonConst(
-      oomph::DoubleMultiVector &mv, const Teuchos::Range1D &index)
+      oomph::DoubleMultiVector& mv, const Teuchos::Range1D& index)
     {
       return Teuchos::rcp(new oomph::DoubleMultiVector(mv, index, false));
     }
@@ -115,7 +115,7 @@ namespace Anasazi
     /// return Reference-counted pointer to the new oomph::DoubleMultiVector
     /// (const version)
     static Teuchos::RCP<const oomph::DoubleMultiVector> CloneView(
-      const oomph::DoubleMultiVector &mv, const std::vector<int> &index)
+      const oomph::DoubleMultiVector& mv, const std::vector<int>& index)
     {
       return Teuchos::rcp(new oomph::DoubleMultiVector(mv, index, false));
     }
@@ -126,7 +126,7 @@ namespace Anasazi
     /// return Reference-counted pointer to the new oomph::DoubleMultiVector
     /// (Non-const version for Trilinos 9 interface)
     static Teuchos::RCP<oomph::DoubleMultiVector> CloneView(
-      oomph::DoubleMultiVector &mv, const std::vector<int> &index)
+      oomph::DoubleMultiVector& mv, const std::vector<int>& index)
     {
       return Teuchos::rcp(new oomph::DoubleMultiVector(mv, index, false));
     }
@@ -137,19 +137,19 @@ namespace Anasazi
     /// return Reference-counted pointer to the new oomph::DoubleMultiVector
     /// (const version)
     static Teuchos::RCP<oomph::DoubleMultiVector> CloneView(
-      oomph::DoubleMultiVector &mv, const Teuchos::Range1D &index)
+      oomph::DoubleMultiVector& mv, const Teuchos::Range1D& index)
     {
       return Teuchos::rcp(new oomph::DoubleMultiVector(mv, index, false));
     }
 
     /// Obtain the global length of the vector
-    static int GetVecLength(const oomph::DoubleMultiVector &mv)
+    static int GetVecLength(const oomph::DoubleMultiVector& mv)
     {
       return static_cast<int>(mv.nrow());
     }
 
     /// Obtain the number of vectors in the multivector
-    static int GetNumberVecs(const oomph::DoubleMultiVector &mv)
+    static int GetNumberVecs(const oomph::DoubleMultiVector& mv)
     {
       return static_cast<int>(mv.nvector());
     }
@@ -157,10 +157,10 @@ namespace Anasazi
     /// \brief Update \c mv with \f$ \alpha AB + \beta mv \f$.
     static void MvTimesMatAddMv(
       const double alpha,
-      const oomph::DoubleMultiVector &A,
-      const Teuchos::SerialDenseMatrix<int, double> &B,
+      const oomph::DoubleMultiVector& A,
+      const Teuchos::SerialDenseMatrix<int, double>& B,
       const double beta,
-      oomph::DoubleMultiVector &mv)
+      oomph::DoubleMultiVector& mv)
     {
       // For safety let's (deep) copy A
       oomph::DoubleMultiVector C(A);
@@ -191,10 +191,10 @@ namespace Anasazi
 
     /// \brief Replace \c mv with \f$\alpha A + \beta B\f$.
     static void MvAddMv(const double alpha,
-                        const oomph::DoubleMultiVector &A,
+                        const oomph::DoubleMultiVector& A,
                         const double beta,
-                        const oomph::DoubleMultiVector &B,
-                        oomph::DoubleMultiVector &mv)
+                        const oomph::DoubleMultiVector& B,
+                        oomph::DoubleMultiVector& mv)
     {
       const unsigned n_vector = A.nvector();
       const unsigned n_row_local = A.nrow_local();
@@ -209,7 +209,7 @@ namespace Anasazi
 
     /*! \brief Scale each element of the vectors in \c mv with \c alpha.
      */
-    static void MvScale(oomph::DoubleMultiVector &mv, const double alpha)
+    static void MvScale(oomph::DoubleMultiVector& mv, const double alpha)
     {
       mv *= alpha;
     }
@@ -217,8 +217,8 @@ namespace Anasazi
     /*! \brief Scale each element of the \c i-th vector in \c mv with \c
      * alpha[i].
      */
-    static void MvScale(oomph::DoubleMultiVector &mv,
-                        const std::vector<double> &alpha)
+    static void MvScale(oomph::DoubleMultiVector& mv,
+                        const std::vector<double>& alpha)
     {
       const unsigned n_vector = mv.nvector();
       const unsigned n_row_local = mv.nrow_local();
@@ -235,9 +235,9 @@ namespace Anasazi
      * \f$ \alpha A^Hmv \f$.
      */
     static void MvTransMv(const double alpha,
-                          const oomph::DoubleMultiVector &A,
-                          const oomph::DoubleMultiVector &mv,
-                          Teuchos::SerialDenseMatrix<int, double> &B)
+                          const oomph::DoubleMultiVector& A,
+                          const oomph::DoubleMultiVector& mv,
+                          Teuchos::SerialDenseMatrix<int, double>& B)
     {
       const unsigned A_nvec = A.nvector();
       const unsigned A_nrow_local = A.nrow_local();
@@ -301,9 +301,9 @@ namespace Anasazi
      * dot-products of the \c i-th columns of \c A and \c mv, i.e.\f$b[i] =
      * A[i]^Hmv[i]\f$.
      */
-    static void MvDot(const oomph::DoubleMultiVector &mv,
-                      const oomph::DoubleMultiVector &A,
-                      std::vector<double> &b)
+    static void MvDot(const oomph::DoubleMultiVector& mv,
+                      const oomph::DoubleMultiVector& A,
+                      std::vector<double>& b)
     {
       mv.dot(A, b);
     }
@@ -312,8 +312,8 @@ namespace Anasazi
       Upon return, \c normvec[i] holds the value of \f$||mv_i||_2\f$, the \c
       i-th column of \c mv.
     */
-    static void MvNorm(const oomph::DoubleMultiVector &mv,
-                       std::vector<double> &normvec)
+    static void MvNorm(const oomph::DoubleMultiVector& mv,
+                       std::vector<double>& normvec)
     {
       mv.norm(normvec);
     }
@@ -329,9 +329,9 @@ namespace Anasazi
     indicated by the indices given in \c index, i.e.<tt> mv[index[i]] =
     A[i]</tt>.
     */
-    static void SetBlock(const oomph::DoubleMultiVector &A,
-                         const std::vector<int> &index,
-                         oomph::DoubleMultiVector &mv)
+    static void SetBlock(const oomph::DoubleMultiVector& A,
+                         const std::vector<int>& index,
+                         oomph::DoubleMultiVector& mv)
     {
       // Check some stuff
       const unsigned n_index = index.size();
@@ -361,9 +361,9 @@ namespace Anasazi
     /// \param index [in] Inclusive index range of columns of mv;
     ///   index set of the target
     /// \param mv [out] Target multivector
-    static void SetBlock(const oomph::DoubleMultiVector &A,
-                         const Teuchos::Range1D &index,
-                         oomph::DoubleMultiVector &mv)
+    static void SetBlock(const oomph::DoubleMultiVector& A,
+                         const Teuchos::Range1D& index,
+                         oomph::DoubleMultiVector& mv)
     {
       // Check some stuff
       const unsigned n_index = index.size();
@@ -386,15 +386,15 @@ namespace Anasazi
     /// \brief mv := A
     ///
     /// Assign (deep copy) A into mv.
-    static void Assign(const oomph::DoubleMultiVector &A,
-                       oomph::DoubleMultiVector &mv)
+    static void Assign(const oomph::DoubleMultiVector& A,
+                       oomph::DoubleMultiVector& mv)
     {
       mv = A;
     }
 
     /*! \brief Replace the vectors in \c mv with random vectors.
      */
-    static void MvRandom(oomph::DoubleMultiVector &mv)
+    static void MvRandom(oomph::DoubleMultiVector& mv)
     {
       const unsigned n_vector = mv.nvector();
       const unsigned n_row_local = mv.nrow_local();
@@ -410,7 +410,7 @@ namespace Anasazi
     /*! \brief Replace each element of the vectors in \c mv with \c alpha.
      */
     static void MvInit(
-      oomph::DoubleMultiVector &mv,
+      oomph::DoubleMultiVector& mv,
       const double alpha = Teuchos::ScalarTraits<double>::zero())
     {
       mv.initialise(alpha);
@@ -423,7 +423,7 @@ namespace Anasazi
 
     /*! \brief Print the \c mv multi-vector to the \c os output stream.
      */
-    static void MvPrint(const oomph::DoubleMultiVector &mv, std::ostream &os)
+    static void MvPrint(const oomph::DoubleMultiVector& mv, std::ostream& os)
     {
       mv.output(os);
     }
@@ -449,8 +449,8 @@ namespace oomph
     virtual ~DoubleMultiVectorOperator() {}
 
     /// The apply interface
-    virtual void apply(const DoubleMultiVector &x,
-                       DoubleMultiVector &y) const = 0;
+    virtual void apply(const DoubleMultiVector& x,
+                       DoubleMultiVector& y) const = 0;
   };
 
 } // namespace oomph
@@ -468,9 +468,9 @@ namespace Anasazi
   {
   public:
     /// Matrix operator application method
-    static void Apply(const oomph::DoubleMultiVectorOperator &Op,
-                      const oomph::DoubleMultiVector &x,
-                      oomph::DoubleMultiVector &y)
+    static void Apply(const oomph::DoubleMultiVectorOperator& Op,
+                      const oomph::DoubleMultiVector& x,
+                      oomph::DoubleMultiVector& y)
     {
       Op.apply(x, y);
     }
@@ -488,10 +488,10 @@ namespace oomph
   {
   private:
     // Pointer to the problem
-    Problem *Problem_pt;
+    Problem* Problem_pt;
 
     // Pointer to the linear solver used
-    LinearSolver *Linear_solver_pt;
+    LinearSolver* Linear_solver_pt;
 
     // Storage for the shift
     double Sigma;
@@ -500,9 +500,9 @@ namespace oomph
     CRDoubleMatrix *M_pt, *AsigmaM_pt;
 
   public:
-    ProblemBasedShiftInvertOperator(Problem *const &problem_pt,
-                                    LinearSolver *const &linear_solver_pt,
-                                    const double &sigma = 0.0) :
+    ProblemBasedShiftInvertOperator(Problem* const& problem_pt,
+                                    LinearSolver* const& linear_solver_pt,
+                                    const double& sigma = 0.0) :
       Problem_pt(problem_pt), Linear_solver_pt(linear_solver_pt), Sigma(sigma)
     {
       // Before we get into the Arnoldi loop solve the shifted matrix problem
@@ -519,7 +519,7 @@ namespace oomph
     }
 
     // Now specify how to apply the operator
-    void apply(const DoubleMultiVector &x, DoubleMultiVector &y) const
+    void apply(const DoubleMultiVector& x, DoubleMultiVector& y) const
     {
       const unsigned n_vec = x.nvector();
       const unsigned n_row_local = x.nrow_local();
@@ -576,13 +576,13 @@ namespace oomph
     typedef Anasazi::OperatorTraits<ST, MV, OP> OPT;
 
     /// \short Pointer to output manager
-    Anasazi::OutputManager<ST> *Output_manager_pt;
+    Anasazi::OutputManager<ST>* Output_manager_pt;
 
     /// \short Pointer to a linear solver
-    LinearSolver *Linear_solver_pt;
+    LinearSolver* Linear_solver_pt;
 
     /// \short Pointer to a default linear solver
-    LinearSolver *Default_linear_solver_pt;
+    LinearSolver* Default_linear_solver_pt;
 
     /// \short Integer to set whether the real, imaginary or magnitude is
     /// required
@@ -625,19 +625,19 @@ namespace oomph
     }
 
     /// Empty copy constructor
-    ANASAZI(const ANASAZI &) : Sigma(0.0) {}
+    ANASAZI(const ANASAZI&) : Sigma(0.0) {}
 
     /// Destructor, delete the linear solver
     virtual ~ANASAZI() {}
 
     /// Access function for the number of Arnoldi vectors
-    int &narnoldi()
+    int& narnoldi()
     {
       return NArnoldi;
     }
 
     /// Access function for the number of Arnoldi vectors (const version)
-    const int &narnoldi() const
+    const int& narnoldi() const
     {
       return NArnoldi;
     }
@@ -655,10 +655,10 @@ namespace oomph
     }
 
     /// Solve the eigen problem
-    void solve_eigenproblem(Problem *const &problem_pt,
-                            const int &n_eval,
-                            Vector<std::complex<double>> &eigenvalue,
-                            Vector<DoubleVector> &eigenvector)
+    void solve_eigenproblem(Problem* const& problem_pt,
+                            const int& n_eval,
+                            Vector<std::complex<double>>& eigenvalue,
+                            Vector<DoubleVector>& eigenvector)
     {
       // No access to sigma, so set from sigma real
       Sigma = Sigma_real;
@@ -792,13 +792,13 @@ namespace oomph
     }
 
     /// Return a pointer to the linear solver object
-    LinearSolver *&linear_solver_pt()
+    LinearSolver*& linear_solver_pt()
     {
       return Linear_solver_pt;
     }
 
     /// Return a pointer to the linear solver object (const version)
-    LinearSolver *const &linear_solver_pt() const
+    LinearSolver* const& linear_solver_pt() const
     {
       return Linear_solver_pt;
     }

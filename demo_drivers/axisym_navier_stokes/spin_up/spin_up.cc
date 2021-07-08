@@ -73,10 +73,10 @@ class RotatingCylinderProblem : public Problem
 public:
   /// Constructor: Pass the number of elements and the lengths of the
   /// domain in the radial (r) and axial (z) directions
-  RotatingCylinderProblem(const unsigned &n_r,
-                          const unsigned &n_z,
-                          const double &l_r,
-                          const double &l_z);
+  RotatingCylinderProblem(const unsigned& n_r,
+                          const unsigned& n_z,
+                          const double& l_r,
+                          const double& l_z);
 
   /// Destructor (empty)
   ~RotatingCylinderProblem() {}
@@ -88,17 +88,17 @@ public:
   void set_boundary_conditions();
 
   /// Document the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// Do unsteady run up to maximum time t_max with given timestep dt
-  void unsteady_run(const double &t_max,
-                    const double &dt,
+  void unsteady_run(const double& t_max,
+                    const double& dt,
                     const string dir_name);
 
   /// Access function for the specific mesh
-  RefineableRectangularQuadMesh<ELEMENT> *mesh_pt()
+  RefineableRectangularQuadMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<RefineableRectangularQuadMesh<ELEMENT> *>(
+    return dynamic_cast<RefineableRectangularQuadMesh<ELEMENT>*>(
       Problem::mesh_pt());
   }
 
@@ -131,12 +131,12 @@ private:
   } // End of actions_after_adapt
 
   /// Fix pressure in element e at pressure dof pdof and set to pvalue
-  void fix_pressure(const unsigned &e,
-                    const unsigned &pdof,
-                    const double &pvalue)
+  void fix_pressure(const unsigned& e,
+                    const unsigned& pdof,
+                    const double& pvalue)
   {
     // Cast to actual element and fix pressure
-    dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e))
+    dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))
       ->fix_pressure(pdof, pvalue);
   }
 
@@ -147,10 +147,10 @@ private:
 //========================================================================
 template<class ELEMENT, class TIMESTEPPER>
 RotatingCylinderProblem<ELEMENT, TIMESTEPPER>::RotatingCylinderProblem(
-  const unsigned &n_r,
-  const unsigned &n_z,
-  const double &l_r,
-  const double &l_z)
+  const unsigned& n_r,
+  const unsigned& n_z,
+  const double& l_r,
+  const double& l_z)
 {
   // Allocate the timestepper (this constructs the time object as well)
   add_time_stepper_pt(new TIMESTEPPER);
@@ -214,7 +214,7 @@ RotatingCylinderProblem<ELEMENT, TIMESTEPPER>::RotatingCylinderProblem(
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -316,7 +316,7 @@ void RotatingCylinderProblem<ELEMENT, TIMESTEPPER>::set_boundary_conditions()
 //========================================================================
 template<class ELEMENT, class TIMESTEPPER>
 void RotatingCylinderProblem<ELEMENT, TIMESTEPPER>::doc_solution(
-  DocInfo &doc_info)
+  DocInfo& doc_info)
 {
   // Output the time
   cout << "Time is now " << time_pt()->time() << std::endl;
@@ -345,7 +345,7 @@ void RotatingCylinderProblem<ELEMENT, TIMESTEPPER>::doc_solution(
 //========================================================================
 template<class ELEMENT, class TIMESTEPPER>
 void RotatingCylinderProblem<ELEMENT, TIMESTEPPER>::unsteady_run(
-  const double &t_max, const double &dt, const string dir_name)
+  const double& t_max, const double& dt, const string dir_name)
 {
   // Initialise DocInfo object
   DocInfo doc_info;
@@ -384,8 +384,8 @@ void RotatingCylinderProblem<ELEMENT, TIMESTEPPER>::unsteady_run(
   bool first_timestep = true;
 
   // Specify normalising factor explicitly
-  Z2ErrorEstimator *error_pt =
-    dynamic_cast<Z2ErrorEstimator *>(mesh_pt()->spatial_error_estimator_pt());
+  Z2ErrorEstimator* error_pt =
+    dynamic_cast<Z2ErrorEstimator*>(mesh_pt()->spatial_error_estimator_pt());
   error_pt->reference_flux_norm() = 0.01;
 
   // Timestepping loop
@@ -420,7 +420,7 @@ void RotatingCylinderProblem<ELEMENT, TIMESTEPPER>::unsteady_run(
 //==start_of_main=========================================================
 /// Driver code for axisymmetric spin-up problem
 //========================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

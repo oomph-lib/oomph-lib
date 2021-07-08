@@ -100,24 +100,24 @@ namespace oomph
     virtual ~BinaryTree() {}
 
     /// Broken copy constructor
-    BinaryTree(const BinaryTree &dummy)
+    BinaryTree(const BinaryTree& dummy)
     {
       BrokenCopy::broken_copy("BinaryTree");
     }
 
     /// Broken assignment operator
-    void operator=(const BinaryTree &)
+    void operator=(const BinaryTree&)
     {
       BrokenCopy::broken_assign("BinaryTree");
     }
 
     /// \short Overload the function construct_son to ensure that the son
     /// is a specific BinaryTree and not a general Tree.
-    Tree *construct_son(RefineableElement *const &object_pt,
-                        Tree *const &father_pt,
-                        const int &son_type)
+    Tree* construct_son(RefineableElement* const& object_pt,
+                        Tree* const& father_pt,
+                        const int& son_type)
     {
-      BinaryTree *temp_binary_pt =
+      BinaryTree* temp_binary_pt =
         new BinaryTree(object_pt, father_pt, son_type);
       return temp_binary_pt;
     }
@@ -142,11 +142,11 @@ namespace oomph
     ///   in another tree in the forest. The introduction of this flag
     ///   was necessitated by periodic problems where a TreeRoot can be its
     ///   own neighbour.
-    BinaryTree *gteq_edge_neighbour(const int &direction,
-                                    Vector<double> &s_in_neighbour,
-                                    int &edge,
-                                    int &diff_level,
-                                    bool &in_neighbouring_tree) const;
+    BinaryTree* gteq_edge_neighbour(const int& direction,
+                                    Vector<double>& s_in_neighbour,
+                                    int& edge,
+                                    int& diff_level,
+                                    bool& in_neighbouring_tree) const;
 
     /// \short Self-test: Check all neighbours. Return success (0)
     /// if the maximum distance between corresponding points in the
@@ -163,10 +163,10 @@ namespace oomph
     /// are displayed on neighbours_txt_file. Finally, compute the maximum
     /// error between vertices when viewed from the neighbouring element.
     /// If the two filestreams are closed, output is suppressed.
-    static void doc_neighbours(Vector<Tree *> forest_nodes_pt,
-                               std::ofstream &neighbours_file,
-                               std::ofstream &neighbours_txt_file,
-                               double &max_error);
+    static void doc_neighbours(Vector<Tree*> forest_nodes_pt,
+                               std::ofstream& neighbours_file,
+                               std::ofstream& neighbours_txt_file,
+                               double& max_error);
 
     /// Translate (enumerated) directions into strings
     static Vector<std::string> Direct_string;
@@ -185,16 +185,16 @@ namespace oomph
     /// just pass a pointer to its object. Protected because BinaryTrees can
     /// only be created internally, during the split operation. Only
     /// BinaryTreeRoots can be created externally.
-    BinaryTree(RefineableElement *const &object_pt) : Tree(object_pt) {}
+    BinaryTree(RefineableElement* const& object_pt) : Tree(object_pt) {}
 
     /// \short Constructor for tree that has a father: Pass it the pointer
     /// to its object, the pointer to its father and tell it what type of son
     /// (L/R) it is. Protected because BinaryTrees can only be created
     /// internally, during the split operation. Only BinaryTreeRoots can be
     /// created externally.
-    BinaryTree(RefineableElement *const &object_pt,
-               Tree *const &father_pt,
-               const int &son_type) :
+    BinaryTree(RefineableElement* const& object_pt,
+               Tree* const& father_pt,
+               const int& son_type) :
       Tree(object_pt, father_pt, son_type)
     {
     }
@@ -205,12 +205,12 @@ namespace oomph
   private:
     /// \short Find greater or equal-sized edge neighbour in direction.
     /// Auxiliary internal routine which passes additional information around.
-    BinaryTree *gteq_edge_neighbour(const int &direction,
-                                    double &s_diff,
-                                    int &diff_level,
-                                    bool &in_neighbouring_tree,
+    BinaryTree* gteq_edge_neighbour(const int& direction,
+                                    double& s_diff,
+                                    int& diff_level,
+                                    bool& in_neighbouring_tree,
                                     int max_level,
-                                    BinaryTreeRoot *const &orig_root_pt) const;
+                                    BinaryTreeRoot* const& orig_root_pt) const;
 
     /// Colours for neighbours in various directions
     static Vector<std::string> Colour;
@@ -241,7 +241,7 @@ namespace oomph
   public:
     /// Constructor for the (empty) root binary tree: Pass pointer to
     /// associated object, a RefineableQElement<1>.
-    BinaryTreeRoot(RefineableElement *const &object_pt) :
+    BinaryTreeRoot(RefineableElement* const& object_pt) :
       Tree(object_pt), BinaryTree(object_pt), TreeRoot(object_pt)
     {
 #ifdef PARANOID
@@ -261,20 +261,20 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    BinaryTreeRoot(const BinaryTreeRoot &dummy) : TreeRoot(dummy)
+    BinaryTreeRoot(const BinaryTreeRoot& dummy) : TreeRoot(dummy)
     {
       BrokenCopy::broken_copy("BinaryTreeRoot");
     }
 
     /// Broken assignment operator
-    void operator=(const BinaryTreeRoot &)
+    void operator=(const BinaryTreeRoot&)
     {
       BrokenCopy::broken_assign("BinaryTreeRoot");
     }
 
     /// \short If binary_tree_root_pt is a neighbour, return the direction
     /// (L/R) in which it is found, otherwise return OMEGA
-    int direction_of_neighbour(BinaryTreeRoot *binary_tree_root_pt)
+    int direction_of_neighbour(BinaryTreeRoot* binary_tree_root_pt)
     {
       using namespace BinaryTreeNames;
 
@@ -311,16 +311,16 @@ namespace oomph
 
     /// \short Constructor: Pass vector of pointers to the roots of the
     /// constituent BinaryTrees
-    BinaryTreeForest(Vector<TreeRoot *> &trees_pt);
+    BinaryTreeForest(Vector<TreeRoot*>& trees_pt);
 
     /// Broken copy constructor
-    BinaryTreeForest(const BinaryTreeForest &dummy)
+    BinaryTreeForest(const BinaryTreeForest& dummy)
     {
       BrokenCopy::broken_copy("BinaryTreeForest");
     }
 
     /// Broken assignment operator
-    void operator=(const BinaryTreeForest &)
+    void operator=(const BinaryTreeForest&)
     {
       BrokenCopy::broken_assign("BinaryTreeForest");
     }
@@ -333,11 +333,11 @@ namespace oomph
     /// the forest. DocInfo object specifies the output directory and file
     /// numbers for the various files. If \c doc_info.disable_doc() has been
     /// called, no output is created.
-    void check_all_neighbours(DocInfo &doc_info);
+    void check_all_neighbours(DocInfo& doc_info);
 
     /// A line mesh cannot have hanging nodes so make this function empty
-    void open_hanging_node_files(DocInfo &doc_info,
-                                 Vector<std::ofstream *> &output_stream)
+    void open_hanging_node_files(DocInfo& doc_info,
+                                 Vector<std::ofstream*>& output_stream)
     {
     }
 
@@ -353,18 +353,18 @@ namespace oomph
 
     /// Return pointer to i-th root binary tree in this forest (performs
     /// a dynamic cast from the TreeRoot to a BinaryTreeRoot).
-    BinaryTreeRoot *binary_tree_pt(const unsigned &i)
+    BinaryTreeRoot* binary_tree_pt(const unsigned& i)
     {
-      return dynamic_cast<BinaryTreeRoot *>(Trees_pt[i]);
+      return dynamic_cast<BinaryTreeRoot*>(Trees_pt[i]);
     }
 
     /// \short Given the number i of the root binary tree in this forest,
     /// return a pointer to its neighbour in the specified direction.
     /// NULL if neighbour doesn't exist. (This does the dynamic cast
     /// from a TreeRoot to a BinaryTreeRoot internally).
-    BinaryTreeRoot *binary_neigh_pt(const unsigned &i, const int &direction)
+    BinaryTreeRoot* binary_neigh_pt(const unsigned& i, const int& direction)
     {
-      return dynamic_cast<BinaryTreeRoot *>(
+      return dynamic_cast<BinaryTreeRoot*>(
         Trees_pt[i]->neighbour_pt(direction));
     }
   };

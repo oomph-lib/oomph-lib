@@ -66,9 +66,9 @@ public:
   // called first! --> this is where we need to build the mesh;
   // the constructors of the derived meshes don't call the
   // base constructor again and simply add the extra functionality.
-  ElasticFishMesh(GeomObject *back_pt,
-                  GeomObject *undeformed_back_pt,
-                  TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+  ElasticFishMesh(GeomObject* back_pt,
+                  GeomObject* undeformed_back_pt,
+                  TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
     FishMesh<ELEMENT>(back_pt, time_stepper_pt),
     RefineableFishMesh<ELEMENT>(back_pt, time_stepper_pt)
   {
@@ -93,7 +93,7 @@ public:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Get pointer to full element type
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(this->element_pt(e));
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->element_pt(e));
 
       // Set pointer to macro element so the curvlinear boundaries
       // of the undeformed mesh/domain get picked up during adaptive
@@ -118,7 +118,7 @@ private:
   /// Pointer to "undeformed" Domain -- used to determine the
   /// Lagrangian coordinates of any newly created SolidNodes during
   /// Mesh refinement
-  Domain *Undeformed_domain_pt;
+  Domain* Undeformed_domain_pt;
 };
 
 ///////////////////////////////////////////////////////////////////////
@@ -131,10 +131,10 @@ private:
 namespace Global_Physical_Variables
 {
   /// Pointer to strain energy function
-  StrainEnergyFunction *Strain_energy_function_pt;
+  StrainEnergyFunction* Strain_energy_function_pt;
 
   /// Pointer to constitutive law
-  ConstitutiveLaw *Constitutive_law_pt;
+  ConstitutiveLaw* Constitutive_law_pt;
 
   /// Elastic modulus
   double E = 1.0;
@@ -149,7 +149,7 @@ namespace Global_Physical_Variables
   double Gravity = 0.0;
 
   /// Body force vector: Vertically downwards with magnitude Gravity
-  void body_force(const double &t, const Vector<double> &xi, Vector<double> &b)
+  void body_force(const double& t, const Vector<double>& xi, Vector<double>& b)
   {
     b[0] = 0.0;
     b[1] = -Gravity;
@@ -175,13 +175,13 @@ public:
   void run();
 
   /// Access function for the mesh
-  ElasticFishMesh<ELEMENT> *mesh_pt()
+  ElasticFishMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<ElasticFishMesh<ELEMENT> *>(Problem::mesh_pt());
+    return dynamic_cast<ElasticFishMesh<ELEMENT>*>(Problem::mesh_pt());
   }
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// Update function (empty)
   void actions_after_newton_solve() {}
@@ -211,7 +211,7 @@ public:
 
 private:
   // Geometric object that represents the deformable fish back
-  Circle *Fish_back_pt;
+  Circle* Fish_back_pt;
 };
 
 //======================================================================
@@ -231,7 +231,7 @@ ElasticFishProblem<ELEMENT>::ElasticFishProblem()
 
   // Build geometric object that specifies the fish back in the
   // undeformed configuration (basically a deep copy of the previous one)
-  GeomObject *undeformed_fish_back_pt = new Circle(x_c, y_c, r_back);
+  GeomObject* undeformed_fish_back_pt = new Circle(x_c, y_c, r_back);
 
   // Build fish mesh with geometric objects that specify the deformable
   // and undeformed fish back
@@ -239,7 +239,7 @@ ElasticFishProblem<ELEMENT>::ElasticFishProblem()
     new ElasticFishMesh<ELEMENT>(Fish_back_pt, undeformed_fish_back_pt);
 
   // Set error estimator
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   mesh_pt()->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Change/doc targets for mesh adaptation
@@ -269,7 +269,7 @@ ElasticFishProblem<ELEMENT>::ElasticFishProblem()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Cast to a solid element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the constitutive law
     el_pt->constitutive_law_pt() =
@@ -304,7 +304,7 @@ ElasticFishProblem<ELEMENT>::ElasticFishProblem()
 /// Doc the solution
 //==================================================================
 template<class ELEMENT>
-void ElasticFishProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void ElasticFishProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];

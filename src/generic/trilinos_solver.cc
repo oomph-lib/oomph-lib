@@ -42,8 +42,8 @@ namespace oomph
   /// generate a linear system which is then solved. This function deletes
   /// any existing internal data and then generates a new AztecOO solver.
   //=============================================================================
-  void TrilinosAztecOOSolver::solve(Problem *const &problem_pt,
-                                    DoubleVector &solution)
+  void TrilinosAztecOOSolver::solve(Problem* const& problem_pt,
+                                    DoubleVector& solution)
   {
     //   MemoryUsage::doc_memory_usage("start of TrilinosAztecOOSolver::solve");
     //   MemoryUsage::insert_comment_to_continous_top(
@@ -79,7 +79,7 @@ namespace oomph
     DoubleVector residual;
 
     // create the jacobian
-    CRDoubleMatrix *cr_matrix_pt = new CRDoubleMatrix;
+    CRDoubleMatrix* cr_matrix_pt = new CRDoubleMatrix;
     Oomph_matrix_pt = cr_matrix_pt;
     problem_pt->get_jacobian(residual, *cr_matrix_pt);
     this->build_distribution(residual.distribution_pt());
@@ -131,9 +131,9 @@ namespace oomph
   /// \b NOTE 2. This function will delete any existing internal data and
   /// generate a new AztecOO solver.
   //=============================================================================
-  void TrilinosAztecOOSolver::solve(DoubleMatrixBase *const &matrix_pt,
-                                    const DoubleVector &rhs,
-                                    DoubleVector &result)
+  void TrilinosAztecOOSolver::solve(DoubleMatrixBase* const& matrix_pt,
+                                    const DoubleVector& rhs,
+                                    DoubleVector& result)
   {
     // start the timer
     double start_t = TimingHelpers::timer();
@@ -161,7 +161,7 @@ namespace oomph
 
     // if the matrix is distributable then it too should have the same
     // communicator as the rhs vector and should not be distributed
-    CRDoubleMatrix *cr_matrix_pt = dynamic_cast<CRDoubleMatrix *>(matrix_pt);
+    CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
     if (cr_matrix_pt != 0)
     {
       OomphCommunicator temp_comm(*rhs.distribution_pt()->communicator_pt());
@@ -229,11 +229,11 @@ namespace oomph
     }
 
     // create Epetra version of r
-    Epetra_Vector *epetra_r_pt =
+    Epetra_Vector* epetra_r_pt =
       TrilinosEpetraHelpers::create_distributed_epetra_vector(rhs);
 
     // create an empty Epetra vector for z
-    Epetra_Vector *epetra_z_pt =
+    Epetra_Vector* epetra_z_pt =
       TrilinosEpetraHelpers::create_distributed_epetra_vector(result);
 
     double start_t_trilinos = TimingHelpers::timer();
@@ -278,7 +278,7 @@ namespace oomph
   /// Trilinos Aztec00 solver and passes in the matrix, preconditioner and
   /// parameters.
   //=============================================================================
-  void TrilinosAztecOOSolver::solver_setup(DoubleMatrixBase *const &matrix_pt)
+  void TrilinosAztecOOSolver::solver_setup(DoubleMatrixBase* const& matrix_pt)
   {
     // clean up the memory
     //  - delete all except Oomph_matrix_pt, which may have been set in the
@@ -287,7 +287,7 @@ namespace oomph
 
     // cast to CRDoubleMatrix
     // note cast check performed in matrix based solve(...) method
-    CRDoubleMatrix *cast_matrix_pt = dynamic_cast<CRDoubleMatrix *>(matrix_pt);
+    CRDoubleMatrix* cast_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
 
     // store the distribution
     // distribution of preconditioner is same as matrix
@@ -297,8 +297,8 @@ namespace oomph
     AztecOO_solver_pt = new AztecOO();
 
     // if the preconditioner is an oomph-lib preconditioner then we set it up
-    TrilinosPreconditionerBase *trilinos_prec_pt =
-      dynamic_cast<TrilinosPreconditionerBase *>(Preconditioner_pt);
+    TrilinosPreconditionerBase* trilinos_prec_pt =
+      dynamic_cast<TrilinosPreconditionerBase*>(Preconditioner_pt);
     if (trilinos_prec_pt == 0)
     {
       if (Setup_preconditioner_before_solve)
@@ -356,7 +356,7 @@ namespace oomph
     {
       if (Using_problem_based_solve)
       {
-        dynamic_cast<CRDoubleMatrix *>(Oomph_matrix_pt)->clear();
+        dynamic_cast<CRDoubleMatrix*>(Oomph_matrix_pt)->clear();
         delete Oomph_matrix_pt;
         Oomph_matrix_pt = NULL;
       }
@@ -364,7 +364,7 @@ namespace oomph
       // delete Oomph-lib matrix if requested
       else if (Delete_matrix)
       {
-        dynamic_cast<CRDoubleMatrix *>(matrix_pt)->clear();
+        dynamic_cast<CRDoubleMatrix*>(matrix_pt)->clear();
       }
     }
 
@@ -427,7 +427,7 @@ namespace oomph
       // delete the oomph-matrix if required
       if (Using_problem_based_solve)
       {
-        dynamic_cast<CRDoubleMatrix *>(Oomph_matrix_pt)->clear();
+        dynamic_cast<CRDoubleMatrix*>(Oomph_matrix_pt)->clear();
         delete Oomph_matrix_pt;
         Oomph_matrix_pt = NULL;
       }
@@ -435,7 +435,7 @@ namespace oomph
       // delete Oomph-lib matrix if requested
       else if (Delete_matrix)
       {
-        dynamic_cast<CRDoubleMatrix *>(matrix_pt)->clear();
+        dynamic_cast<CRDoubleMatrix*>(matrix_pt)->clear();
       }
     }
 
@@ -483,8 +483,8 @@ namespace oomph
   /// function must be used after a call to solve(...) with
   /// enable_resolve set to true.
   //=============================================================================
-  void TrilinosAztecOOSolver::resolve(const DoubleVector &rhs,
-                                      DoubleVector &solution)
+  void TrilinosAztecOOSolver::resolve(const DoubleVector& rhs,
+                                      DoubleVector& solution)
   {
     // start the timer
     double start_t = TimingHelpers::timer();
@@ -526,11 +526,11 @@ namespace oomph
     }
 
     // create Epetra version of r
-    Epetra_Vector *epetra_r_pt =
+    Epetra_Vector* epetra_r_pt =
       TrilinosEpetraHelpers::create_distributed_epetra_vector(rhs);
 
     // create an empty Epetra vector for z
-    Epetra_Vector *epetra_z_pt =
+    Epetra_Vector* epetra_z_pt =
       TrilinosEpetraHelpers::create_distributed_epetra_vector(solution);
 
     // solve the system
@@ -562,8 +562,8 @@ namespace oomph
   /// Helper function performs the actual solve once the AztecOO
   /// solver is set up (i.e. solver_setup() is called)
   //=============================================================================
-  void TrilinosAztecOOSolver::solve_using_AztecOO(Epetra_Vector *&rhs_pt,
-                                                  Epetra_Vector *&soln_pt)
+  void TrilinosAztecOOSolver::solve_using_AztecOO(Epetra_Vector*& rhs_pt,
+                                                  Epetra_Vector*& soln_pt)
   {
 #ifdef PARANOID
     // check the matrix and rhs are of consistent sizes

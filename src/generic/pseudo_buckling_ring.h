@@ -88,8 +88,8 @@ namespace oomph
     /// Geom_data_pt[0]->value(3) = R_0;
     /// Geom_data_pt[0]->value(4) = T;
     /// \endcode
-    PseudoBucklingRing(const Vector<Data *> &geom_data_pt,
-                       TimeStepper *time_stepper_pt) :
+    PseudoBucklingRing(const Vector<Data*>& geom_data_pt,
+                       TimeStepper* time_stepper_pt) :
       GeomObject(1, 2, time_stepper_pt)
     {
 #ifdef PARANOID
@@ -125,12 +125,12 @@ namespace oomph
     /// buckling amplitude, ratio of of buckling amplitudes, buckling
     /// wavenumber, undeformed ring radius, period of osc and pointer
     /// to global timestepper. All geometric data is pinned by default.
-    PseudoBucklingRing(const double &eps_buckl,
-                       const double &ampl_ratio,
+    PseudoBucklingRing(const double& eps_buckl,
+                       const double& ampl_ratio,
                        const unsigned n_buckl,
-                       const double &r_0,
-                       const double &T,
-                       TimeStepper *time_stepper_pt) :
+                       const double& r_0,
+                       const double& T,
+                       TimeStepper* time_stepper_pt) :
       GeomObject(1, 2, time_stepper_pt)
     {
       // Number of previous timesteps that need to be stored
@@ -173,11 +173,11 @@ namespace oomph
     /// to global timestepper. Other parameters get set up to represent
     /// oscillating ring with mode imode (1 or 2). All geometric data is
     /// pinned by  default.
-    PseudoBucklingRing(const double &eps_buckl,
-                       const double &HoR,
-                       const unsigned &n_buckl,
-                       const unsigned &imode,
-                       TimeStepper *time_stepper_pt) :
+    PseudoBucklingRing(const double& eps_buckl,
+                       const double& HoR,
+                       const unsigned& n_buckl,
+                       const unsigned& imode,
+                       TimeStepper* time_stepper_pt) :
       GeomObject(1, 2, time_stepper_pt)
     {
       // Constants in Soedel solution:
@@ -271,13 +271,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    PseudoBucklingRing(const PseudoBucklingRing &node)
+    PseudoBucklingRing(const PseudoBucklingRing& node)
     {
       BrokenCopy::broken_copy("PseudoBucklingRing");
     }
 
     /// Broken assignment operator
-    void operator=(const PseudoBucklingRing &)
+    void operator=(const PseudoBucklingRing&)
     {
       BrokenCopy::broken_assign("PseudoBucklingRing");
     }
@@ -324,39 +324,39 @@ namespace oomph
     }
 
     /// Set buckling amplitude
-    void set_eps_buckl(const double &eps_buckl)
+    void set_eps_buckl(const double& eps_buckl)
     {
       Geom_data_pt[0]->set_value(0, eps_buckl);
     }
 
     /// \short Set amplitude ratio between radial and azimuthal
     /// buckling displacements
-    void set_ampl_ratio(const double &ampl_ratio)
+    void set_ampl_ratio(const double& ampl_ratio)
     {
       Geom_data_pt[0]->set_value(1, ampl_ratio);
     }
 
     /// Set buckling wavenumber
-    void set_n_buckl(const unsigned &n_buckl)
+    void set_n_buckl(const unsigned& n_buckl)
     {
       Geom_data_pt[0]->set_value(2, double(n_buckl));
     }
 
     /// Set undeformed radius of ring
-    void set_R_0(const double &r_0)
+    void set_R_0(const double& r_0)
     {
       Geom_data_pt[0]->set_value(3, r_0);
     }
 
     /// Set period of oscillation
-    void set_T(const double &T)
+    void set_T(const double& T)
     {
       Geom_data_pt[0]->set_value(4, T);
     }
 
     /// \short Position Vector at Lagrangian coordinate zeta at present
     /// time
-    void position(const Vector<double> &zeta, Vector<double> &r) const
+    void position(const Vector<double>& zeta, Vector<double>& r) const
     {
 #ifdef PARANOID
       if (r.size() != Ndim)
@@ -391,7 +391,7 @@ namespace oomph
 
     ///\short Parametrised velocity on object at current time: veloc = d
     /// r(zeta)/dt.
-    void veloc(const Vector<double> &zeta, Vector<double> &veloc) // const
+    void veloc(const Vector<double>& zeta, Vector<double>& veloc) // const
     {
 #ifdef PARANOID
       if (veloc.size() != Ndim)
@@ -425,7 +425,7 @@ namespace oomph
 
     /// \short Parametrised acceleration on object at current time:
     /// accel = d^2 r(zeta)/dt^2.
-    void accel(const Vector<double> &zeta, Vector<double> &accel) // const
+    void accel(const Vector<double>& zeta, Vector<double>& accel) // const
     {
 #ifdef PARANOID
       if (accel.size() != Ndim)
@@ -460,9 +460,9 @@ namespace oomph
 
     /// \short Position Vector at Lagrangian coordinate zeta at discrete
     /// previous time (t=0: present time; t>0: previous time)
-    void position(const unsigned &t,
-                  const Vector<double> &zeta,
-                  Vector<double> &r) const
+    void position(const unsigned& t,
+                  const Vector<double>& zeta,
+                  Vector<double>& r) const
     {
 #ifdef PARANOID
       if (r.size() != Ndim)
@@ -512,9 +512,9 @@ namespace oomph
 
     /// \short j-th time-derivative on object at current time:
     /// \f$ \frac{d^{j} r(\zeta)}{dt^j} \f$.
-    void dposition_dt(const Vector<double> &zeta,
-                      const unsigned &j,
-                      Vector<double> &drdt)
+    void dposition_dt(const Vector<double>& zeta,
+                      const unsigned& j,
+                      Vector<double>& drdt)
     {
       switch (j)
       {
@@ -551,14 +551,14 @@ namespace oomph
 
     /// \short Return pointer to the j-th Data item that the object's
     /// shape depends on
-    Data *geom_data_pt(const unsigned &j)
+    Data* geom_data_pt(const unsigned& j)
     {
       return Geom_data_pt[j];
     }
 
   protected:
     /// \short Vector of pointers to Data items that affects the object's shape
-    Vector<Data *> Geom_data_pt;
+    Vector<Data*> Geom_data_pt;
 
     /// Do I need to clean up?
     bool Must_clean_up;
@@ -612,7 +612,7 @@ namespace oomph
 
     /// Pointer to the data object that represents the external reference
     /// pressure
-    Data *External_reference_pressure_pt;
+    Data* External_reference_pressure_pt;
 
     /// Return the local equation number of the internal geometric variable
     inline int geometric_local_eqn()
@@ -629,12 +629,12 @@ namespace oomph
   public:
     /// \short Constructor: Build  pseudo buckling ring
     /// from doubles that describe the geometry.
-    PseudoBucklingRingElement(const double &eps_buckl,
-                              const double &ampl_ratio,
+    PseudoBucklingRingElement(const double& eps_buckl,
+                              const double& ampl_ratio,
                               const unsigned n_buckl,
-                              const double &r_0,
-                              const double &T,
-                              TimeStepper *time_stepper_pt) :
+                              const double& r_0,
+                              const double& T,
+                              TimeStepper* time_stepper_pt) :
       PseudoBucklingRing(
         eps_buckl, ampl_ratio, n_buckl, r_0, T, time_stepper_pt),
       External_reference_pressure_pt(0)
@@ -662,11 +662,11 @@ namespace oomph
     /// to global timestepper. Other parameters get set up to represent
     /// oscillating ring with mode imode (1 or 2). All geometric data is
     /// pinned by  default.
-    PseudoBucklingRingElement(const double &eps_buckl,
-                              const double &HoR,
-                              const unsigned &n_buckl,
-                              const unsigned &imode,
-                              TimeStepper *time_stepper_pt) :
+    PseudoBucklingRingElement(const double& eps_buckl,
+                              const double& HoR,
+                              const unsigned& n_buckl,
+                              const unsigned& imode,
+                              TimeStepper* time_stepper_pt) :
       PseudoBucklingRing(eps_buckl, HoR, n_buckl, imode, time_stepper_pt),
       External_reference_pressure_pt(0)
     {
@@ -689,13 +689,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    PseudoBucklingRingElement(const PseudoBucklingRingElement &dummy)
+    PseudoBucklingRingElement(const PseudoBucklingRingElement& dummy)
     {
       BrokenCopy::broken_copy("PseudoBucklingRingElement");
     }
 
     /// Broken assignment operator
-    void operator=(const PseudoBucklingRingElement &)
+    void operator=(const PseudoBucklingRingElement&)
     {
       BrokenCopy::broken_assign("PseudoBucklingRingElement");
     }
@@ -711,7 +711,7 @@ namespace oomph
     }
 
     /// Compute element residual Vector (wrapper)
-    inline virtual void get_residuals(Vector<double> &residuals)
+    inline virtual void get_residuals(Vector<double>& residuals)
     {
       // Create a dummy matrix
       DenseMatrix<double> dummy(1);
@@ -721,15 +721,15 @@ namespace oomph
     }
 
     /// Compute element residual Vector and element Jacobian matrix (wrapper)
-    inline virtual void get_jacobian(Vector<double> &residuals,
-                                     DenseMatrix<double> &jacobian)
+    inline virtual void get_jacobian(Vector<double>& residuals,
+                                     DenseMatrix<double>& jacobian)
     {
       // Call the generic routine with the flag set to 1
       get_residuals_generic(residuals, jacobian, 1);
     }
 
     /// \short Pointer to pressure data that is used as reference pressure
-    Data *const &reference_pressure_pt() const
+    Data* const& reference_pressure_pt() const
     {
       return external_data_pt(0);
     }
@@ -749,7 +749,7 @@ namespace oomph
     }
 
     /// \short Set the pressure data that is used as reference pressure
-    void set_reference_pressure_pt(Data *const &data_pt)
+    void set_reference_pressure_pt(Data* const& data_pt)
     {
       // Clear the existing external data, if there is any
       flush_external_data(External_reference_pressure_pt);
@@ -762,8 +762,8 @@ namespace oomph
   protected:
     /// \short Compute element residual Vector (only if flag=0) and also
     /// element Jacobian matrix (if flag=1)
-    virtual void get_residuals_generic(Vector<double> &residuals,
-                                       DenseMatrix<double> &jacobian,
+    virtual void get_residuals_generic(Vector<double>& residuals,
+                                       DenseMatrix<double>& jacobian,
                                        unsigned flag)
     {
       // Initialise the residuals to zero

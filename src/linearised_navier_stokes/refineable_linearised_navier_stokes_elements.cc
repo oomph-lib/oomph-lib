@@ -42,9 +42,9 @@ namespace oomph
   //=======================================================================
   void RefineableLinearisedNavierStokesEquations::
     fill_in_generic_residual_contribution_linearised_nst(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix,
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
       unsigned flag)
   {
     // Get the time from the first node in the element
@@ -125,7 +125,7 @@ namespace oomph
     int local_eqn = 0;
 
     // Local storage for pointers to hang info objects
-    HangInfo *hang_info_pt = 0;
+    HangInfo* hang_info_pt = 0;
 
     // Loop over the integration points
     for (unsigned ipt = 0; ipt < n_intpt; ipt++)

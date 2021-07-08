@@ -56,12 +56,12 @@ namespace oomph
   //=====================================================================
   template<class ELEMENT>
   ThinLayerBrickOnTetMesh<ELEMENT>::ThinLayerBrickOnTetMesh(
-    Mesh *tet_mesh_pt,
-    const Vector<unsigned> &boundary_ids,
+    Mesh* tet_mesh_pt,
+    const Vector<unsigned>& boundary_ids,
     ThicknessFctPt thickness_fct_pt,
-    const unsigned &nlayer,
-    const Vector<Vector<unsigned>> &in_out_boundary_id,
-    TimeStepper *time_stepper_pt) :
+    const unsigned& nlayer,
+    const Vector<Vector<unsigned>>& in_out_boundary_id,
+    TimeStepper* time_stepper_pt) :
     Thickness_fct_pt(thickness_fct_pt)
   {
     // Mesh can only be built with 3D Qelements.
@@ -69,7 +69,7 @@ namespace oomph
 
     // Figure out if the tet mesh is a solid mesh
     bool tet_mesh_is_solid_mesh = false;
-    if (dynamic_cast<SolidFiniteElement *>(tet_mesh_pt->element_pt(0)) != 0)
+    if (dynamic_cast<SolidFiniteElement*>(tet_mesh_pt->element_pt(0)) != 0)
     {
       tet_mesh_is_solid_mesh = true;
     }
@@ -222,18 +222,18 @@ namespace oomph
 
     // Lookup scheme relating "fluid" nodes to newly created "solid" nodes
     // (terminology for fsi problem)
-    std::map<Node *, Node *> solid_node_pt;
+    std::map<Node*, Node*> solid_node_pt;
 
     // Look up scheme for quarter edge nodes
-    std::map<Edge, Node *> quarter_edge_node;
+    std::map<Edge, Node*> quarter_edge_node;
 
     // Map to store normal vectors for all surface nodes, labeled
     // by node on FSI surface
-    std::map<Node *, Vector<Vector<double>>> normals;
+    std::map<Node*, Vector<Vector<double>>> normals;
 
     // Map of nodes connected to node on the tet surface, labeled by
     // node on FSI surface
-    std::map<Node *, Vector<Node *>> connected_node_pt;
+    std::map<Node*, Vector<Node*>> connected_node_pt;
 
     // Number of elements in brick mesh
     Element_pt.reserve(3 * boundary_ids.size() * nlayer);
@@ -254,10 +254,10 @@ namespace oomph
       unsigned nnod = tet_mesh_pt->nboundary_node(b);
       for (unsigned j = 0; j < nnod; j++)
       {
-        Node *nod_pt = tet_mesh_pt->boundary_node_pt(b, j);
+        Node* nod_pt = tet_mesh_pt->boundary_node_pt(b, j);
 
         // Get pointer to set of boundaries this node is located on
-        std::set<unsigned> *bnd_pt;
+        std::set<unsigned>* bnd_pt;
         nod_pt->get_boundaries_pt(bnd_pt);
 
         // Add
@@ -328,17 +328,17 @@ namespace oomph
       for (unsigned e = 0; e < nel; e++)
       {
         // Get pointer to the bulk fluid element that is adjacent to boundary b
-        FiniteElement *bulk_elem_pt = tet_mesh_pt->boundary_element_pt(b, e);
+        FiniteElement* bulk_elem_pt = tet_mesh_pt->boundary_element_pt(b, e);
 
         // Find the index of the face of element e along boundary b
         int face_index = tet_mesh_pt->face_index_at_boundary(b, e);
 
         // Create new face element
-        FaceElement *face_el_pt = 0;
+        FaceElement* face_el_pt = 0;
         if (tet_mesh_is_solid_mesh)
         {
 #ifdef PARANOID
-          if (dynamic_cast<SolidTElement<3, 3> *>(bulk_elem_pt) == 0)
+          if (dynamic_cast<SolidTElement<3, 3>*>(bulk_elem_pt) == 0)
           {
             std::ostringstream error_stream;
             error_stream
@@ -356,7 +356,7 @@ namespace oomph
         else
         {
 #ifdef PARANOID
-          if (dynamic_cast<TElement<3, 3> *>(bulk_elem_pt) == 0)
+          if (dynamic_cast<TElement<3, 3>*>(bulk_elem_pt) == 0)
           {
             std::ostringstream error_stream;
             error_stream
@@ -377,7 +377,7 @@ namespace oomph
         face_el_pt->set_boundary_number_in_bulk_mesh(b);
 
         // Create storage for stack of brick elements
-        Vector<Vector<FiniteElement *>> new_el_pt(3);
+        Vector<Vector<FiniteElement*>> new_el_pt(3);
 
         // Sign of normal to detect inversion of FaceElement
         int normal_sign;
@@ -417,14 +417,14 @@ namespace oomph
           face_el_pt->outer_unit_normal(s, unit_normal);
 
           // Get node in the "fluid" mesh from face
-          Node *fluid_node_pt = face_el_pt->node_pt(translate(normal_sign, j));
+          Node* fluid_node_pt = face_el_pt->node_pt(translate(normal_sign, j));
 
           // Has the corresponding "solid" node already been created?
-          Node *existing_node_pt = solid_node_pt[fluid_node_pt];
+          Node* existing_node_pt = solid_node_pt[fluid_node_pt];
           if (existing_node_pt == 0)
           {
             // Create new node
-            Node *new_node_pt = new_el_pt[j][0]->construct_boundary_node(
+            Node* new_node_pt = new_el_pt[j][0]->construct_boundary_node(
               j_local, time_stepper_pt);
             Node_pt.push_back(new_node_pt);
 
@@ -438,7 +438,7 @@ namespace oomph
 
             // Set boundary stuff -- boundary IDs copied from fluid
             bool only_on_fsi = true;
-            std::set<unsigned> *bnd_pt;
+            std::set<unsigned>* bnd_pt;
             fluid_node_pt->get_boundaries_pt(bnd_pt);
             for (std::set<unsigned>::iterator it = (*bnd_pt).begin();
                  it != (*bnd_pt).end();
@@ -455,7 +455,7 @@ namespace oomph
             if (only_on_fsi)
             {
               // Create other nodes in bottom layer
-              Node *new_nod_pt =
+              Node* new_nod_pt =
                 new_el_pt[j][0]->construct_node(j_local + 9, time_stepper_pt);
               connected_node_pt[new_node_pt].push_back(new_nod_pt);
               Node_pt.push_back(new_nod_pt);
@@ -463,14 +463,14 @@ namespace oomph
               // One layer thick?
               if (nlayer == 1)
               {
-                Node *new_nod_pt = new_el_pt[j][0]->construct_boundary_node(
+                Node* new_nod_pt = new_el_pt[j][0]->construct_boundary_node(
                   j_local + 18, time_stepper_pt);
                 connected_node_pt[new_node_pt].push_back(new_nod_pt);
                 Node_pt.push_back(new_nod_pt);
               }
               else
               {
-                Node *new_nod_pt = new_el_pt[j][0]->construct_node(
+                Node* new_nod_pt = new_el_pt[j][0]->construct_node(
                   j_local + 18, time_stepper_pt);
                 connected_node_pt[new_node_pt].push_back(new_nod_pt);
                 Node_pt.push_back(new_nod_pt);
@@ -484,7 +484,7 @@ namespace oomph
                   connected_node_pt[new_node_pt][2 * ilayer - 1];
 
                 // Create new nodes
-                Node *new_nod_pt = new_el_pt[j][ilayer]->construct_node(
+                Node* new_nod_pt = new_el_pt[j][ilayer]->construct_node(
                   j_local + 9, time_stepper_pt);
                 connected_node_pt[new_node_pt].push_back(new_nod_pt);
                 Node_pt.push_back(new_nod_pt);
@@ -492,14 +492,14 @@ namespace oomph
                 // Last node is boundary node
                 if (ilayer != (nlayer - 1))
                 {
-                  Node *new_nod_pt = new_el_pt[j][ilayer]->construct_node(
+                  Node* new_nod_pt = new_el_pt[j][ilayer]->construct_node(
                     j_local + 18, time_stepper_pt);
                   connected_node_pt[new_node_pt].push_back(new_nod_pt);
                   Node_pt.push_back(new_nod_pt);
                 }
                 else
                 {
-                  Node *new_nod_pt =
+                  Node* new_nod_pt =
                     new_el_pt[j][ilayer]->construct_boundary_node(
                       j_local + 18, time_stepper_pt);
                   connected_node_pt[new_node_pt].push_back(new_nod_pt);
@@ -510,7 +510,7 @@ namespace oomph
             else
             {
               // Create other boundary nodes in bottom layer
-              Node *new_nod_pt = new_el_pt[j][0]->construct_boundary_node(
+              Node* new_nod_pt = new_el_pt[j][0]->construct_boundary_node(
                 j_local + 9, time_stepper_pt);
               connected_node_pt[new_node_pt].push_back(new_nod_pt);
               Node_pt.push_back(new_nod_pt);
@@ -528,7 +528,7 @@ namespace oomph
                   connected_node_pt[new_node_pt][2 * ilayer - 1];
 
                 // Create new boundary nodes
-                Node *new_nod_pt =
+                Node* new_nod_pt =
                   new_el_pt[j][ilayer]->construct_boundary_node(
                     j_local + 9, time_stepper_pt);
                 connected_node_pt[new_node_pt].push_back(new_nod_pt);
@@ -585,7 +585,7 @@ namespace oomph
           if (existing_node_pt == 0)
           {
             // Create new node
-            Node *new_node_pt = new_el_pt[j][0]->construct_boundary_node(
+            Node* new_node_pt = new_el_pt[j][0]->construct_boundary_node(
               j_local, time_stepper_pt);
             Node_pt.push_back(new_node_pt);
 
@@ -599,7 +599,7 @@ namespace oomph
 
             // Set boundary stuff -- boundary IDs copied from fluid
             bool only_on_fsi = true;
-            std::set<unsigned> *bnd_pt;
+            std::set<unsigned>* bnd_pt;
             fluid_node_pt->get_boundaries_pt(bnd_pt);
             for (std::set<unsigned>::iterator it = (*bnd_pt).begin();
                  it != (*bnd_pt).end();
@@ -616,7 +616,7 @@ namespace oomph
             if (only_on_fsi)
             {
               // Create other nodes in bottom layer
-              Node *new_nod_pt =
+              Node* new_nod_pt =
                 new_el_pt[j][0]->construct_node(j_local + 9, time_stepper_pt);
               connected_node_pt[new_node_pt].push_back(new_nod_pt);
               Node_pt.push_back(new_nod_pt);
@@ -624,14 +624,14 @@ namespace oomph
               // One layer thick?
               if (nlayer == 1)
               {
-                Node *new_nod_pt = new_el_pt[j][0]->construct_boundary_node(
+                Node* new_nod_pt = new_el_pt[j][0]->construct_boundary_node(
                   j_local + 18, time_stepper_pt);
                 connected_node_pt[new_node_pt].push_back(new_nod_pt);
                 Node_pt.push_back(new_nod_pt);
               }
               else
               {
-                Node *new_nod_pt = new_el_pt[j][0]->construct_node(
+                Node* new_nod_pt = new_el_pt[j][0]->construct_node(
                   j_local + 18, time_stepper_pt);
                 connected_node_pt[new_node_pt].push_back(new_nod_pt);
                 Node_pt.push_back(new_nod_pt);
@@ -645,7 +645,7 @@ namespace oomph
                   connected_node_pt[new_node_pt][2 * ilayer - 1];
 
                 // Create new nodes
-                Node *new_nod_pt = new_el_pt[j][ilayer]->construct_node(
+                Node* new_nod_pt = new_el_pt[j][ilayer]->construct_node(
                   j_local + 9, time_stepper_pt);
                 connected_node_pt[new_node_pt].push_back(new_nod_pt);
                 Node_pt.push_back(new_nod_pt);
@@ -653,14 +653,14 @@ namespace oomph
                 // Last node is boundary node
                 if (ilayer != (nlayer - 1))
                 {
-                  Node *new_nod_pt = new_el_pt[j][ilayer]->construct_node(
+                  Node* new_nod_pt = new_el_pt[j][ilayer]->construct_node(
                     j_local + 18, time_stepper_pt);
                   connected_node_pt[new_node_pt].push_back(new_nod_pt);
                   Node_pt.push_back(new_nod_pt);
                 }
                 else
                 {
-                  Node *new_nod_pt =
+                  Node* new_nod_pt =
                     new_el_pt[j][ilayer]->construct_boundary_node(
                       j_local + 18, time_stepper_pt);
                   connected_node_pt[new_node_pt].push_back(new_nod_pt);
@@ -671,7 +671,7 @@ namespace oomph
             else
             {
               // Create other boundary nodes in bottom layer
-              Node *new_nod_pt = new_el_pt[j][0]->construct_boundary_node(
+              Node* new_nod_pt = new_el_pt[j][0]->construct_boundary_node(
                 j_local + 9, time_stepper_pt);
               connected_node_pt[new_node_pt].push_back(new_nod_pt);
               Node_pt.push_back(new_nod_pt);
@@ -689,7 +689,7 @@ namespace oomph
                   connected_node_pt[new_node_pt][2 * ilayer - 1];
 
                 // Create new boundary nodes
-                Node *new_nod_pt =
+                Node* new_nod_pt =
                   new_el_pt[j][ilayer]->construct_boundary_node(
                     j_local + 9, time_stepper_pt);
                 connected_node_pt[new_node_pt].push_back(new_nod_pt);
@@ -747,7 +747,7 @@ namespace oomph
           if (existing_node_pt == 0)
           {
             // Create new node
-            Node *new_node_pt = new_el_pt[j][0]->construct_boundary_node(
+            Node* new_node_pt = new_el_pt[j][0]->construct_boundary_node(
               j_local, time_stepper_pt);
             Node_pt.push_back(new_node_pt);
 
@@ -760,9 +760,9 @@ namespace oomph
             new_node_pt->x(2) = x[2];
 
             // Set boundary stuff -- boundary IDs copied from fluid
-            std::set<unsigned> *bnd1_pt;
+            std::set<unsigned>* bnd1_pt;
             edge.node1_pt()->get_boundaries_pt(bnd1_pt);
-            std::set<unsigned> *bnd2_pt;
+            std::set<unsigned>* bnd2_pt;
             edge.node2_pt()->get_boundaries_pt(bnd2_pt);
             std::set<unsigned> bnd;
             set_intersection((*bnd1_pt).begin(),
@@ -785,7 +785,7 @@ namespace oomph
             if (only_on_fsi)
             {
               // Create other nodes in bottom layer
-              Node *new_nod_pt =
+              Node* new_nod_pt =
                 new_el_pt[j][0]->construct_node(j_local + 9, time_stepper_pt);
               connected_node_pt[new_node_pt].push_back(new_nod_pt);
               Node_pt.push_back(new_nod_pt);
@@ -793,14 +793,14 @@ namespace oomph
               // One layer thick?
               if (nlayer == 1)
               {
-                Node *new_nod_pt = new_el_pt[j][0]->construct_boundary_node(
+                Node* new_nod_pt = new_el_pt[j][0]->construct_boundary_node(
                   j_local + 18, time_stepper_pt);
                 connected_node_pt[new_node_pt].push_back(new_nod_pt);
                 Node_pt.push_back(new_nod_pt);
               }
               else
               {
-                Node *new_nod_pt = new_el_pt[j][0]->construct_node(
+                Node* new_nod_pt = new_el_pt[j][0]->construct_node(
                   j_local + 18, time_stepper_pt);
                 connected_node_pt[new_node_pt].push_back(new_nod_pt);
                 Node_pt.push_back(new_nod_pt);
@@ -814,7 +814,7 @@ namespace oomph
                   connected_node_pt[new_node_pt][2 * ilayer - 1];
 
                 // Create new nodes
-                Node *new_nod_pt = new_el_pt[j][ilayer]->construct_node(
+                Node* new_nod_pt = new_el_pt[j][ilayer]->construct_node(
                   j_local + 9, time_stepper_pt);
                 connected_node_pt[new_node_pt].push_back(new_nod_pt);
                 Node_pt.push_back(new_nod_pt);
@@ -822,14 +822,14 @@ namespace oomph
                 // Last node is boundary node
                 if (ilayer != (nlayer - 1))
                 {
-                  Node *new_nod_pt = new_el_pt[j][ilayer]->construct_node(
+                  Node* new_nod_pt = new_el_pt[j][ilayer]->construct_node(
                     j_local + 18, time_stepper_pt);
                   connected_node_pt[new_node_pt].push_back(new_nod_pt);
                   Node_pt.push_back(new_nod_pt);
                 }
                 else
                 {
-                  Node *new_nod_pt =
+                  Node* new_nod_pt =
                     new_el_pt[j][ilayer]->construct_boundary_node(
                       j_local + 18, time_stepper_pt);
                   connected_node_pt[new_node_pt].push_back(new_nod_pt);
@@ -840,7 +840,7 @@ namespace oomph
             else
             {
               // Create other boundary nodes in bottom layer
-              Node *new_nod_pt = new_el_pt[j][0]->construct_boundary_node(
+              Node* new_nod_pt = new_el_pt[j][0]->construct_boundary_node(
                 j_local + 9, time_stepper_pt);
               connected_node_pt[new_node_pt].push_back(new_nod_pt);
               Node_pt.push_back(new_nod_pt);
@@ -858,7 +858,7 @@ namespace oomph
                   connected_node_pt[new_node_pt][2 * ilayer - 1];
 
                 // Create new boundary nodes
-                Node *new_nod_pt =
+                Node* new_nod_pt =
                   new_el_pt[j][ilayer]->construct_boundary_node(
                     j_local + 9, time_stepper_pt);
                 connected_node_pt[new_node_pt].push_back(new_nod_pt);
@@ -932,7 +932,7 @@ namespace oomph
           if (existing_node_pt == 0)
           {
             // Create new node
-            Node *new_node_pt = new_el_pt[j][0]->construct_boundary_node(
+            Node* new_node_pt = new_el_pt[j][0]->construct_boundary_node(
               j_local, time_stepper_pt);
             Node_pt.push_back(new_node_pt);
 
@@ -945,9 +945,9 @@ namespace oomph
             new_node_pt->x(2) = x[2];
 
             // Set boundary stuff  -- boundary IDs copied from fluid
-            std::set<unsigned> *bnd1_pt;
+            std::set<unsigned>* bnd1_pt;
             edge2.node1_pt()->get_boundaries_pt(bnd1_pt);
-            std::set<unsigned> *bnd2_pt;
+            std::set<unsigned>* bnd2_pt;
             edge2.node2_pt()->get_boundaries_pt(bnd2_pt);
             std::set<unsigned> bnd;
             set_intersection((*bnd1_pt).begin(),
@@ -970,7 +970,7 @@ namespace oomph
             if (only_on_fsi)
             {
               // Create other nodes in bottom layer
-              Node *new_nod_pt =
+              Node* new_nod_pt =
                 new_el_pt[j][0]->construct_node(j_local + 9, time_stepper_pt);
               connected_node_pt[new_node_pt].push_back(new_nod_pt);
               Node_pt.push_back(new_nod_pt);
@@ -978,14 +978,14 @@ namespace oomph
               // One layer thick?
               if (nlayer == 1)
               {
-                Node *new_nod_pt = new_el_pt[j][0]->construct_boundary_node(
+                Node* new_nod_pt = new_el_pt[j][0]->construct_boundary_node(
                   j_local + 18, time_stepper_pt);
                 connected_node_pt[new_node_pt].push_back(new_nod_pt);
                 Node_pt.push_back(new_nod_pt);
               }
               else
               {
-                Node *new_nod_pt = new_el_pt[j][0]->construct_node(
+                Node* new_nod_pt = new_el_pt[j][0]->construct_node(
                   j_local + 18, time_stepper_pt);
                 connected_node_pt[new_node_pt].push_back(new_nod_pt);
                 Node_pt.push_back(new_nod_pt);
@@ -999,21 +999,21 @@ namespace oomph
                   connected_node_pt[new_node_pt][2 * ilayer - 1];
 
                 // Create new nodes
-                Node *new_nod_pt = new_el_pt[j][ilayer]->construct_node(
+                Node* new_nod_pt = new_el_pt[j][ilayer]->construct_node(
                   j_local + 9, time_stepper_pt);
                 connected_node_pt[new_node_pt].push_back(new_nod_pt);
                 Node_pt.push_back(new_nod_pt);
                 // Last node is boundary node
                 if (ilayer != (nlayer - 1))
                 {
-                  Node *new_nod_pt = new_el_pt[j][ilayer]->construct_node(
+                  Node* new_nod_pt = new_el_pt[j][ilayer]->construct_node(
                     j_local + 18, time_stepper_pt);
                   connected_node_pt[new_node_pt].push_back(new_nod_pt);
                   Node_pt.push_back(new_nod_pt);
                 }
                 else
                 {
-                  Node *new_nod_pt =
+                  Node* new_nod_pt =
                     new_el_pt[j][ilayer]->construct_boundary_node(
                       j_local + 18, time_stepper_pt);
                   connected_node_pt[new_node_pt].push_back(new_nod_pt);
@@ -1024,7 +1024,7 @@ namespace oomph
             else
             {
               // Create other boundary nodes in bottom layer
-              Node *new_nod_pt = new_el_pt[j][0]->construct_boundary_node(
+              Node* new_nod_pt = new_el_pt[j][0]->construct_boundary_node(
                 j_local + 9, time_stepper_pt);
               connected_node_pt[new_node_pt].push_back(new_nod_pt);
               Node_pt.push_back(new_nod_pt);
@@ -1042,7 +1042,7 @@ namespace oomph
                   connected_node_pt[new_node_pt][2 * ilayer - 1];
 
                 // Create new boundary nodes
-                Node *new_nod_pt =
+                Node* new_nod_pt =
                   new_el_pt[j][ilayer]->construct_boundary_node(
                     j_local + 9, time_stepper_pt);
                 connected_node_pt[new_node_pt].push_back(new_nod_pt);
@@ -1085,7 +1085,7 @@ namespace oomph
           j_local = 4;
 
           // Create new node
-          Node *new_node_pt =
+          Node* new_node_pt =
             new_el_pt[j][0]->construct_boundary_node(j_local, time_stepper_pt);
           Node_pt.push_back(new_node_pt);
 
@@ -1120,7 +1120,7 @@ namespace oomph
           normals[new_node_pt].push_back(unit_normal);
 
           // Create other nodes in bottom layer
-          Node *new_nod_pt =
+          Node* new_nod_pt =
             new_el_pt[j][0]->construct_node(j_local + 9, time_stepper_pt);
           connected_node_pt[new_node_pt].push_back(new_nod_pt);
           Node_pt.push_back(new_nod_pt);
@@ -1128,14 +1128,14 @@ namespace oomph
           // One layer thick?
           if (nlayer == 1)
           {
-            Node *new_nod_pt = new_el_pt[j][0]->construct_boundary_node(
+            Node* new_nod_pt = new_el_pt[j][0]->construct_boundary_node(
               j_local + 18, time_stepper_pt);
             connected_node_pt[new_node_pt].push_back(new_nod_pt);
             Node_pt.push_back(new_nod_pt);
           }
           else
           {
-            Node *new_nod_pt =
+            Node* new_nod_pt =
               new_el_pt[j][0]->construct_node(j_local + 18, time_stepper_pt);
             connected_node_pt[new_node_pt].push_back(new_nod_pt);
             Node_pt.push_back(new_nod_pt);
@@ -1149,21 +1149,21 @@ namespace oomph
               connected_node_pt[new_node_pt][2 * ilayer - 1];
 
             // Create new nodes
-            Node *new_nod_pt = new_el_pt[j][ilayer]->construct_node(
+            Node* new_nod_pt = new_el_pt[j][ilayer]->construct_node(
               j_local + 9, time_stepper_pt);
             connected_node_pt[new_node_pt].push_back(new_nod_pt);
             Node_pt.push_back(new_nod_pt);
             // Last node is boundary node
             if (ilayer != (nlayer - 1))
             {
-              Node *new_nod_pt = new_el_pt[j][ilayer]->construct_node(
+              Node* new_nod_pt = new_el_pt[j][ilayer]->construct_node(
                 j_local + 18, time_stepper_pt);
               connected_node_pt[new_node_pt].push_back(new_nod_pt);
               Node_pt.push_back(new_nod_pt);
             }
             else
             {
-              Node *new_nod_pt = new_el_pt[j][ilayer]->construct_boundary_node(
+              Node* new_nod_pt = new_el_pt[j][ilayer]->construct_boundary_node(
                 j_local + 18, time_stepper_pt);
               connected_node_pt[new_node_pt].push_back(new_nod_pt);
               Node_pt.push_back(new_nod_pt);
@@ -1222,14 +1222,14 @@ namespace oomph
           // One layer thick?
           if (nlayer == 1)
           {
-            Node *new_nod_pt = new_el_pt[j][0]->construct_boundary_node(
+            Node* new_nod_pt = new_el_pt[j][0]->construct_boundary_node(
               j_local + 18, time_stepper_pt);
             connected_node_pt[new_node_pt].push_back(new_nod_pt);
             Node_pt.push_back(new_nod_pt);
           }
           else
           {
-            Node *new_nod_pt =
+            Node* new_nod_pt =
               new_el_pt[j][0]->construct_node(j_local + 18, time_stepper_pt);
             connected_node_pt[new_node_pt].push_back(new_nod_pt);
             Node_pt.push_back(new_nod_pt);
@@ -1243,7 +1243,7 @@ namespace oomph
               connected_node_pt[new_node_pt][2 * ilayer - 1];
 
             // Create other nodes
-            Node *new_nod_pt = new_el_pt[j][ilayer]->construct_node(
+            Node* new_nod_pt = new_el_pt[j][ilayer]->construct_node(
               j_local + 9, time_stepper_pt);
             connected_node_pt[new_node_pt].push_back(new_nod_pt);
             Node_pt.push_back(new_nod_pt);
@@ -1251,14 +1251,14 @@ namespace oomph
             // Last node is boundary node
             if (ilayer != (nlayer - 1))
             {
-              Node *new_nod_pt = new_el_pt[j][ilayer]->construct_node(
+              Node* new_nod_pt = new_el_pt[j][ilayer]->construct_node(
                 j_local + 18, time_stepper_pt);
               connected_node_pt[new_node_pt].push_back(new_nod_pt);
               Node_pt.push_back(new_nod_pt);
             }
             else
             {
-              Node *new_nod_pt = new_el_pt[j][ilayer]->construct_boundary_node(
+              Node* new_nod_pt = new_el_pt[j][ilayer]->construct_boundary_node(
                 j_local + 18, time_stepper_pt);
               connected_node_pt[new_node_pt].push_back(new_nod_pt);
               Node_pt.push_back(new_nod_pt);
@@ -1273,7 +1273,7 @@ namespace oomph
         unsigned j_local = 8;
 
         // Create new node
-        Node *new_node_pt =
+        Node* new_node_pt =
           new_el_pt[2][0]->construct_boundary_node(j_local, time_stepper_pt);
         Node_pt.push_back(new_node_pt);
 
@@ -1298,7 +1298,7 @@ namespace oomph
         normals[new_node_pt].push_back(unit_normal);
 
         // Create other nodes in bottom layer
-        Node *new_nod_pt =
+        Node* new_nod_pt =
           new_el_pt[2][0]->construct_node(j_local + 9, time_stepper_pt);
         connected_node_pt[new_node_pt].push_back(new_nod_pt);
         Node_pt.push_back(new_nod_pt);
@@ -1306,14 +1306,14 @@ namespace oomph
         // One layer thick?
         if (nlayer == 1)
         {
-          Node *new_nod_pt = new_el_pt[2][0]->construct_boundary_node(
+          Node* new_nod_pt = new_el_pt[2][0]->construct_boundary_node(
             j_local + 18, time_stepper_pt);
           connected_node_pt[new_node_pt].push_back(new_nod_pt);
           Node_pt.push_back(new_nod_pt);
         }
         else
         {
-          Node *new_nod_pt =
+          Node* new_nod_pt =
             new_el_pt[2][0]->construct_node(j_local + 18, time_stepper_pt);
           connected_node_pt[new_node_pt].push_back(new_nod_pt);
           Node_pt.push_back(new_nod_pt);
@@ -1327,7 +1327,7 @@ namespace oomph
             connected_node_pt[new_node_pt][2 * ilayer - 1];
 
           // Create other nodes
-          Node *new_nod_pt =
+          Node* new_nod_pt =
             new_el_pt[2][ilayer]->construct_node(j_local + 9, time_stepper_pt);
           connected_node_pt[new_node_pt].push_back(new_nod_pt);
           Node_pt.push_back(new_nod_pt);
@@ -1335,14 +1335,14 @@ namespace oomph
           // Last node is boundary node
           if (ilayer != (nlayer - 1))
           {
-            Node *new_nod_pt = new_el_pt[2][ilayer]->construct_node(
+            Node* new_nod_pt = new_el_pt[2][ilayer]->construct_node(
               j_local + 18, time_stepper_pt);
             connected_node_pt[new_node_pt].push_back(new_nod_pt);
             Node_pt.push_back(new_nod_pt);
           }
           else
           {
-            Node *new_nod_pt = new_el_pt[2][ilayer]->construct_boundary_node(
+            Node* new_nod_pt = new_el_pt[2][ilayer]->construct_boundary_node(
               j_local + 18, time_stepper_pt);
             connected_node_pt[new_node_pt].push_back(new_nod_pt);
             Node_pt.push_back(new_nod_pt);
@@ -1425,18 +1425,18 @@ namespace oomph
         for (unsigned j_stack = 0; j_stack < 3; j_stack++)
         {
           // Bottom element
-          FiniteElement *el_pt = new_el_pt[j_stack][0];
+          FiniteElement* el_pt = new_el_pt[j_stack][0];
 
           // Loop over nodes in bottom layer
           for (unsigned j = 0; j < 9; j++)
           {
             // Get nodes above...
-            Node *nod_pt = el_pt->node_pt(j);
-            Vector<Node *> layer_node_pt = connected_node_pt[nod_pt];
+            Node* nod_pt = el_pt->node_pt(j);
+            Vector<Node*> layer_node_pt = connected_node_pt[nod_pt];
             unsigned n = layer_node_pt.size();
 
             // Get boundary affiliation
-            std::set<unsigned> *bnd_pt;
+            std::set<unsigned>* bnd_pt;
             nod_pt->get_boundaries_pt(bnd_pt);
 
             // Loop over boundaries
@@ -1528,7 +1528,7 @@ namespace oomph
     unsigned nel = Element_pt.size();
     for (unsigned e = 0; e < nel; e++)
     {
-      FiniteElement *el_pt = finite_element_pt(e);
+      FiniteElement* el_pt = finite_element_pt(e);
       for (unsigned j = 0; j < 27; j++)
       {
         if (el_pt->node_pt(j) == 0)
@@ -1549,8 +1549,7 @@ namespace oomph
     std::ofstream outfile;
     bool doc_normals = false; // keep alive for future debugging
     if (doc_normals) outfile.open("normals.dat");
-    for (std::map<Node *, Vector<Vector<double>>>::iterator it =
-           normals.begin();
+    for (std::map<Node*, Vector<Vector<double>>>::iterator it = normals.begin();
          it != normals.end();
          it++)
     {
@@ -1573,12 +1572,12 @@ namespace oomph
         unit_normal[i] /= sqrt(norm);
       }
 
-      Node *base_node_pt = (*it).first;
+      Node* base_node_pt = (*it).first;
       Vector<double> base_pos(3);
       base_node_pt->position(base_pos);
       double h_thick;
       Thickness_fct_pt(base_pos, h_thick);
-      Vector<Node *> layer_node_pt = connected_node_pt[base_node_pt];
+      Vector<Node*> layer_node_pt = connected_node_pt[base_node_pt];
       unsigned n = layer_node_pt.size();
       for (unsigned j = 0; j < n; j++)
       {

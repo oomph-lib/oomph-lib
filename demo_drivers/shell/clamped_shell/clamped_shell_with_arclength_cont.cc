@@ -58,7 +58,7 @@ namespace Global_Physical_Variables
 
   /// \short Pointer to pressure load (stored in Data so it can
   /// become an unknown in the problem when displacement control is used
-  Data *Pext_data_pt;
+  Data* Pext_data_pt;
 
   /// \short Return a reference to the external pressure
   /// load on the elastic tube.
@@ -68,10 +68,10 @@ namespace Global_Physical_Variables
   }
 
   /// Load function, normal pressure loading
-  void press_load(const Vector<double> &xi,
-                  const Vector<double> &x,
-                  const Vector<double> &N,
-                  Vector<double> &load)
+  void press_load(const Vector<double>& xi,
+                  const Vector<double>& x,
+                  const Vector<double>& N,
+                  Vector<double>& load)
   {
     for (unsigned i = 0; i < 3; i++)
     {
@@ -94,16 +94,16 @@ class ShellMesh :
 {
 public:
   /// Constructor for the mesh
-  ShellMesh(const unsigned &nx,
-            const unsigned &ny,
-            const double &lx,
-            const double &ly);
+  ShellMesh(const unsigned& nx,
+            const unsigned& ny,
+            const double& lx,
+            const double& ly);
 
   /// \short In all elastic problems, the nodes must be assigned an undeformed,
   /// or reference, position, corresponding to the stress-free state
   /// of the elastic body. This function assigns the undeformed position
   /// for the nodes on the elastic tube
-  void assign_undeformed_positions(GeomObject *const &undeformed_midplane_pt);
+  void assign_undeformed_positions(GeomObject* const& undeformed_midplane_pt);
 };
 
 //=======================================================================
@@ -115,10 +115,10 @@ public:
 /// ly  : length in theta direction
 //=======================================================================
 template<class ELEMENT>
-ShellMesh<ELEMENT>::ShellMesh(const unsigned &nx,
-                              const unsigned &ny,
-                              const double &lx,
-                              const double &ly) :
+ShellMesh<ELEMENT>::ShellMesh(const unsigned& nx,
+                              const unsigned& ny,
+                              const double& lx,
+                              const double& ly) :
   RectangularQuadMesh<ELEMENT>(nx, ny, lx, ly)
 {
   // Find out how many nodes there are
@@ -159,7 +159,7 @@ ShellMesh<ELEMENT>::ShellMesh(const unsigned &nx,
 //=======================================================================
 template<class ELEMENT>
 void ShellMesh<ELEMENT>::assign_undeformed_positions(
-  GeomObject *const &undeformed_midplane_pt)
+  GeomObject* const& undeformed_midplane_pt)
 {
   // Find out how many nodes there are
   unsigned n_node = nnode();
@@ -314,10 +314,10 @@ class ShellProblem : public Problem
 {
 public:
   /// Constructor
-  ShellProblem(const unsigned &nx,
-               const unsigned &ny,
-               const double &lx,
-               const double &ly);
+  ShellProblem(const unsigned& nx,
+               const unsigned& ny,
+               const double& lx,
+               const double& ly);
 
   /// Destructor: delete mesh, geometric object
   ~ShellProblem()
@@ -327,9 +327,9 @@ public:
   }
 
   /// Overload Access function for the mesh
-  ShellMesh<ELEMENT> *mesh_pt()
+  ShellMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<ShellMesh<ELEMENT> *>(Problem::mesh_pt());
+    return dynamic_cast<ShellMesh<ELEMENT>*>(Problem::mesh_pt());
   }
 
   /// Actions after solve empty
@@ -343,23 +343,23 @@ public:
 
 private:
   /// Pointer to GeomObject that specifies the undeformed midplane
-  GeomObject *Undeformed_midplane_pt;
+  GeomObject* Undeformed_midplane_pt;
 
   /// First trace node
-  Node *Trace_node_pt;
+  Node* Trace_node_pt;
 
   /// Second trace node
-  Node *Trace_node2_pt;
+  Node* Trace_node2_pt;
 };
 
 //======================================================================
 /// Constructor
 //======================================================================
 template<class ELEMENT>
-ShellProblem<ELEMENT>::ShellProblem(const unsigned &nx,
-                                    const unsigned &ny,
-                                    const double &lx,
-                                    const double &ly)
+ShellProblem<ELEMENT>::ShellProblem(const unsigned& nx,
+                                    const unsigned& ny,
+                                    const double& lx,
+                                    const double& ly)
 {
   // Suppress the warning about empty mesh_level_timestepper_stuff
   Mesh::Suppress_warning_about_empty_mesh_level_time_stepper_function = true;
@@ -474,8 +474,8 @@ ShellProblem<ELEMENT>::ShellProblem(const unsigned &nx,
 
   // Choose element in which displacement control is applied: This
   // one is located halfway along the tube)
-  SolidFiniteElement *controlled_element_pt =
-    dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(3 * ny - 1));
+  SolidFiniteElement* controlled_element_pt =
+    dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(3 * ny - 1));
 
   // Fix the displacement in the y (1) direction...
   unsigned controlled_direction = 1;
@@ -486,7 +486,7 @@ ShellProblem<ELEMENT>::ShellProblem(const unsigned &nx,
   s_displ_control[1] = 0.0;
 
   // Pointer to displacement control element
-  DisplacementControlElement *displ_control_el_pt;
+  DisplacementControlElement* displ_control_el_pt;
 
   // Build displacement control element
   displ_control_el_pt =
@@ -511,13 +511,13 @@ ShellProblem<ELEMENT>::ShellProblem(const unsigned &nx,
   unsigned n_element = nx * ny;
 
   // Explicit pointer to first element in the mesh
-  ELEMENT *first_el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(0));
+  ELEMENT* first_el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(0));
 
   // Loop over the elements
   for (unsigned e = 0; e < n_element; e++)
   {
     // Cast to a shell element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
     // Set the load function
     el_pt->load_vector_fct_pt() = &Global_Physical_Variables::press_load;

@@ -37,7 +37,7 @@ namespace oomph
   /// Setup lookup schemes which establish which elements are located
   /// next to which boundaries (Doc to outfile if it's open).
   //================================================================
-  void QuadMeshBase::setup_boundary_element_info(std::ostream &outfile)
+  void QuadMeshBase::setup_boundary_element_info(std::ostream& outfile)
   {
     bool doc = false;
     if (outfile) doc = true;
@@ -53,12 +53,11 @@ namespace oomph
 
     // Temporary vector of vectors to pointers to elements on the boundaries:
     // This is not a set to ensure UNIQUE ordering
-    Vector<Vector<FiniteElement *>> vector_of_boundary_element_pt;
+    Vector<Vector<FiniteElement*>> vector_of_boundary_element_pt;
     vector_of_boundary_element_pt.resize(nbound);
 
     // Matrix map for working out the fixed local coord for elements on boundary
-    MapMatrixMixed<unsigned, FiniteElement *, Vector<int> *>
-      boundary_identifier;
+    MapMatrixMixed<unsigned, FiniteElement*, Vector<int>*> boundary_identifier;
 
     // Loop over elements
     //-------------------
@@ -66,7 +65,7 @@ namespace oomph
     for (unsigned e = 0; e < nel; e++)
     {
       // Get pointer to element
-      FiniteElement *fe_pt = finite_element_pt(e);
+      FiniteElement* fe_pt = finite_element_pt(e);
 
       if (doc) outfile << "Element: " << e << " " << fe_pt << std::endl;
 
@@ -88,7 +87,7 @@ namespace oomph
 
             // Get pointer to vector of boundaries that this
             // node lives on
-            std::set<unsigned> *boundaries_pt = 0;
+            std::set<unsigned>* boundaries_pt = 0;
             fe_pt->node_pt(j)->get_boundaries_pt(boundaries_pt);
 
             // If the node lives on some boundaries....
@@ -104,7 +103,7 @@ namespace oomph
                 // boundary
 
                 // Does the pointer already exits in the vector
-                Vector<FiniteElement *>::iterator b_el_it =
+                Vector<FiniteElement*>::iterator b_el_it =
                   std::find(vector_of_boundary_element_pt[*it].begin(),
                             vector_of_boundary_element_pt[*it].end(),
                             fe_pt);
@@ -180,13 +179,13 @@ namespace oomph
       // Loop over elements that have at least one corner node on this boundary
       //-----------------------------------------------------------------------
       // unsigned e_count=0;
-      typedef Vector<FiniteElement *>::iterator IT;
+      typedef Vector<FiniteElement*>::iterator IT;
       for (IT it = vector_of_boundary_element_pt[i].begin();
            it != vector_of_boundary_element_pt[i].end();
            it++)
       {
         // Recover pointer to element
-        FiniteElement *fe_pt = *it;
+        FiniteElement* fe_pt = *it;
 
         // Initialise count for boundary identiers (-2,-1,1,2)
         std::map<int, unsigned> count;
@@ -318,7 +317,7 @@ namespace oomph
         // Loop over elements on given boundary
         for (unsigned e = 0; e < nel; e++)
         {
-          FiniteElement *fe_pt = Boundary_element_pt[i][e];
+          FiniteElement* fe_pt = Boundary_element_pt[i][e];
           outfile << "Boundary element:" << fe_pt
                   << " Face index on boundary is "
                   << Face_index_at_boundary[i][e] << std::endl;

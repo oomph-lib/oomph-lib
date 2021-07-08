@@ -70,25 +70,25 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    SimpleBlockDiagonalPreconditioner(const SimpleBlockDiagonalPreconditioner &)
+    SimpleBlockDiagonalPreconditioner(const SimpleBlockDiagonalPreconditioner&)
     {
       BrokenCopy::broken_copy("SimpleBlockDiagonalPreconditioner");
     }
 
     /// Broken assignment operator
-    void operator=(const SimpleBlockDiagonalPreconditioner &)
+    void operator=(const SimpleBlockDiagonalPreconditioner&)
     {
       BrokenCopy::broken_assign("SimpleBlockDiagonalPreconditioner");
     }
 
     /// Apply preconditioner to r
-    void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+    void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
     /// \short Setup the preconditioner
     virtual void setup();
 
     /// \short Add a mesh
-    void add_mesh(const Mesh *const mesh_pt)
+    void add_mesh(const Mesh* const mesh_pt)
     {
 #ifdef PARANOID
       // Check that the mesh pointer is not null.
@@ -108,12 +108,12 @@ namespace oomph
   private:
     /// \short Vector of preconditioner pointers for storing the
     /// preconditioners for each diagonal block
-    Vector<Preconditioner *> Diagonal_block_preconditioner_pt;
+    Vector<Preconditioner*> Diagonal_block_preconditioner_pt;
 
     /// \short Vector of Mesh pointers. We store it here since this
     /// preconditioner is responsible for the DOF ordering, which is
     /// determined by calls to BlockPreconditioner::set_mesh(...).
-    Vector<const Mesh *> My_mesh_pt;
+    Vector<const Mesh*> My_mesh_pt;
   };
 
   //==start_of_setup_for_SimpleBlockDiagonalPreconditioner======================
@@ -165,7 +165,7 @@ namespace oomph
     }
 
     // Get the diagonal matrix blocks
-    Vector<CRDoubleMatrix *> block_diagonal_matrices(nblock_types);
+    Vector<CRDoubleMatrix*> block_diagonal_matrices(nblock_types);
     for (unsigned i = 0; i < nblock_types; i++)
     {
       // Get block
@@ -185,7 +185,7 @@ namespace oomph
   //=============================================================================
   template<typename MATRIX>
   void SimpleBlockDiagonalPreconditioner<MATRIX>::preconditioner_solve(
-    const DoubleVector &r, DoubleVector &z)
+    const DoubleVector& r, DoubleVector& z)
   {
     // Get number of blocks
     unsigned n_block = this->nblock_types();

@@ -63,7 +63,7 @@ namespace RachelsAdvectionDiffusion
   const double pi = MathematicalConstants::Pi;
 
   /// The asymptotic solution
-  void get_exact_u(const Vector<double> &x, Vector<double> &u)
+  void get_exact_u(const Vector<double>& x, Vector<double>& u)
   {
     double gamma = U / D22;
     // Leading order term
@@ -110,21 +110,21 @@ namespace RachelsAdvectionDiffusion
   }
 
   /// Wind (the underlying velocity field)
-  void wind_function(const Vector<double> &x, Vector<double> &wind)
+  void wind_function(const Vector<double>& x, Vector<double>& wind)
   {
     wind[0] = pi * cos(pi * x[1]) * sin(pi * x[0]);
     wind[1] = -pi * sin(pi * x[1]) * cos(pi * x[0]);
   }
 
   /// Conserved bit (the swiming velocity)
-  void swimming(const Vector<double> &x, Vector<double> &swim)
+  void swimming(const Vector<double>& x, Vector<double>& swim)
   {
     swim[0] = 0.0;
     swim[1] = U;
   }
 
   /// Diffusivity tensor
-  void diff_function(const Vector<double> &x, DenseMatrix<double> &D)
+  void diff_function(const Vector<double>& x, DenseMatrix<double>& D)
   {
     D(0, 0) = D11;
     D(0, 1) = 0.0;
@@ -186,9 +186,9 @@ public:
   /// \short Overloaded version of the problem's access function to
   /// the mesh. Recasts the pointer to the base Mesh object to
   /// the actual mesh type.
-  RefineableRectangularQuadMesh<ELEMENT> *mesh_pt()
+  RefineableRectangularQuadMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<RefineableRectangularQuadMesh<ELEMENT> *>(
+    return dynamic_cast<RefineableRectangularQuadMesh<ELEMENT>*>(
       Problem::mesh_pt());
   }
 
@@ -271,7 +271,7 @@ RefineableAdvectionDiffusionProblem<ELEMENT>::
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the diffusivity function pointer
     el_pt->diff_fct_pt() = Diff_fct_pt;

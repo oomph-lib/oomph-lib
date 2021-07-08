@@ -80,7 +80,7 @@ namespace oomph
     DummyBrickElement() : QElement<3, 2>() {}
 
     /// Broken copy constructor
-    DummyBrickElement(const DummyBrickElement &dummy)
+    DummyBrickElement(const DummyBrickElement& dummy)
     {
       BrokenCopy::broken_copy("DummyElement");
     }
@@ -98,15 +98,15 @@ namespace oomph
 
     /// \short  Required  # of `values' (pinned or dofs)
     /// at node n
-    inline unsigned required_nvalue(const unsigned &n) const
+    inline unsigned required_nvalue(const unsigned& n) const
     {
       return 3;
     }
 
     /// \short Compute vector of FE interpolated local coordinate in tet,
     /// s_tet, evaluated at local coordinate s in current element.
-    void interpolated_s_tet(const Vector<double> &s,
-                            Vector<double> &s_tet) const
+    void interpolated_s_tet(const Vector<double>& s,
+                            Vector<double>& s_tet) const
     {
       // Find number of nodes
       unsigned n_node = nnode();
@@ -131,7 +131,7 @@ namespace oomph
     }
 
     /// Output interpolated tet local coordinates
-    void output(std::ostream &outfile, const unsigned &nplot = 5)
+    void output(std::ostream& outfile, const unsigned& nplot = 5)
     {
       // Vector of local coordinates
       Vector<double> s(3);
@@ -185,7 +185,7 @@ namespace oomph
     BrickMeshBase() {}
 
     /// Broken copy constructor
-    BrickMeshBase(const BrickMeshBase &)
+    BrickMeshBase(const BrickMeshBase&)
     {
       BrokenCopy::broken_copy("BrickMeshBase");
     }
@@ -209,7 +209,7 @@ namespace oomph
 
     /// \short Setup lookup schemes which establish whic elements are located
     /// next to mesh's boundaries. Doc in outfile (if it's open).
-    void setup_boundary_element_info(std::ostream &outfile);
+    void setup_boundary_element_info(std::ostream& outfile);
   };
 
 } // namespace oomph

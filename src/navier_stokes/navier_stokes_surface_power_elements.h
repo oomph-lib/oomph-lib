@@ -57,8 +57,8 @@ namespace oomph
   public:
     /// Constructor, which takes a "bulk" element and the value of the index
     /// and its limit
-    NavierStokesSurfacePowerElement(FiniteElement *const &element_pt,
-                                    const int &face_index) :
+    NavierStokesSurfacePowerElement(FiniteElement* const& element_pt,
+                                    const int& face_index) :
       FaceGeometry<ELEMENT>(), FaceElement()
     {
       // Attach the geometrical information to the element. N.B. This function
@@ -75,9 +75,9 @@ namespace oomph
     /// This final over-ride is required for cases where the
     /// FaceElement is a SolidFiniteElement because both SolidFiniteElements
     /// and FaceElements overload zeta_nodal.
-    double zeta_nodal(const unsigned &n,
-                      const unsigned &k,
-                      const unsigned &i) const
+    double zeta_nodal(const unsigned& n,
+                      const unsigned& k,
+                      const unsigned& i) const
     {
       return FaceElement::zeta_nodal(n, k, i);
     }
@@ -91,7 +91,7 @@ namespace oomph
 
     /// \short Get  drag force (traction acting on fluid)
     /// Doc in outfile.
-    Vector<double> drag_force(std::ofstream &outfile)
+    Vector<double> drag_force(std::ofstream& outfile)
     {
       // Spatial dimension of element
       unsigned ndim = dim();
@@ -112,7 +112,7 @@ namespace oomph
       unsigned n_intpt = integral_pt()->nweight();
 
       // Get pointer to assocated bulk element
-      ELEMENT *bulk_el_pt = dynamic_cast<ELEMENT *>(bulk_element_pt());
+      ELEMENT* bulk_el_pt = dynamic_cast<ELEMENT*>(bulk_element_pt());
 
       // Hacky: This is only appropriate for 3 point integration of
       // 1D line elements
@@ -221,7 +221,7 @@ namespace oomph
 
     /// \short Get integral of instantaneous rate of work done by
     /// the traction that's exerted onto the fluid. Doc in outfile.
-    double get_rate_of_traction_work(std::ofstream &outfile)
+    double get_rate_of_traction_work(std::ofstream& outfile)
     {
       // Initialise
       double rate_of_work_integral = 0.0;
@@ -242,7 +242,7 @@ namespace oomph
       unsigned n_intpt = integral_pt()->nweight();
 
       // Get pointer to assocated bulk element
-      ELEMENT *bulk_el_pt = dynamic_cast<ELEMENT *>(bulk_element_pt());
+      ELEMENT* bulk_el_pt = dynamic_cast<ELEMENT*>(bulk_element_pt());
 
       // Hacky: This is only appropriate for 3x3 integration of
       // 2D quad elements
@@ -361,9 +361,9 @@ namespace oomph
     /// \short Get integral of instantaneous rate of work done by
     /// the traction that's exerted onto the fluid, decomposed into pressure
     /// and normal and tangential viscous components.
-    void get_rate_of_traction_work_components(double &rate_of_work_integral_p,
-                                              double &rate_of_work_integral_n,
-                                              double &rate_of_work_integral_t)
+    void get_rate_of_traction_work_components(double& rate_of_work_integral_p,
+                                              double& rate_of_work_integral_n,
+                                              double& rate_of_work_integral_t)
     {
       std::ofstream dummy_file;
       get_rate_of_traction_work_components(dummy_file,
@@ -375,10 +375,10 @@ namespace oomph
     /// \short Get integral of instantaneous rate of work done by
     /// the traction that's exerted onto the fluid, decomposed into pressure
     /// and normal and tangential viscous components.  Doc in outfile.
-    void get_rate_of_traction_work_components(std::ofstream &outfile,
-                                              double &rate_of_work_integral_p,
-                                              double &rate_of_work_integral_n,
-                                              double &rate_of_work_integral_t)
+    void get_rate_of_traction_work_components(std::ofstream& outfile,
+                                              double& rate_of_work_integral_p,
+                                              double& rate_of_work_integral_n,
+                                              double& rate_of_work_integral_t)
     {
       // Initialise
       rate_of_work_integral_p = 0;
@@ -401,7 +401,7 @@ namespace oomph
       unsigned n_intpt = integral_pt()->nweight();
 
       // Get pointer to assocated bulk element
-      ELEMENT *bulk_el_pt = dynamic_cast<ELEMENT *>(bulk_element_pt());
+      ELEMENT* bulk_el_pt = dynamic_cast<ELEMENT*>(bulk_element_pt());
 
       // Hacky: This is only appropriate for 3x3 integration of
       // 2D quad elements
@@ -556,7 +556,7 @@ namespace oomph
     }
 
     /// \short Get integral of kinetic energy flux and doc
-    double get_kinetic_energy_flux(std::ofstream &outfile)
+    double get_kinetic_energy_flux(std::ofstream& outfile)
     {
       // Initialise
       double kinetic_energy_flux_integral = 0.0;
@@ -577,7 +577,7 @@ namespace oomph
       unsigned n_intpt = integral_pt()->nweight();
 
       // Get pointer to assocated bulk element
-      ELEMENT *bulk_el_pt = dynamic_cast<ELEMENT *>(bulk_element_pt());
+      ELEMENT* bulk_el_pt = dynamic_cast<ELEMENT*>(bulk_element_pt());
 
       // Hacky: This is only appropriate for 3x3 integration of
       // 2D quad elements
@@ -695,7 +695,7 @@ namespace oomph
     }
 
     /// \short Get integral of volume flux and doc
-    double get_volume_flux(std::ofstream &outfile)
+    double get_volume_flux(std::ofstream& outfile)
     {
       // Initialise
       double volume_flux_integral = 0.0;
@@ -716,7 +716,7 @@ namespace oomph
       unsigned n_intpt = integral_pt()->nweight();
 
       // Get pointer to assocated bulk element
-      ELEMENT *bulk_el_pt = dynamic_cast<ELEMENT *>(bulk_element_pt());
+      ELEMENT* bulk_el_pt = dynamic_cast<ELEMENT*>(bulk_element_pt());
 
       // Hacky: This is only appropriate for 3x3 integration of
       // 2D quad elements

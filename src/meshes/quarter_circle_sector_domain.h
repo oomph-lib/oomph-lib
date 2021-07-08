@@ -48,10 +48,10 @@ namespace oomph
   public:
     /// \short Constructor: Pass boundary object and start and end coordinates
     /// and fraction along boundary object where outer ring is divided.
-    QuarterCircleSectorDomain(GeomObject *boundary_geom_object_pt,
-                              const double &xi_lo,
-                              const double &fract_mid,
-                              const double &xi_hi) :
+    QuarterCircleSectorDomain(GeomObject* boundary_geom_object_pt,
+                              const double& xi_lo,
+                              const double& fract_mid,
+                              const double& xi_hi) :
       Xi_lo(xi_lo),
       Fract_mid(fract_mid),
       Xi_hi(xi_hi),
@@ -72,13 +72,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    QuarterCircleSectorDomain(const QuarterCircleSectorDomain &)
+    QuarterCircleSectorDomain(const QuarterCircleSectorDomain&)
     {
       BrokenCopy::broken_copy("QuarterCircleSectorDomain");
     }
 
     /// Broken assignment operator
-    void operator=(const QuarterCircleSectorDomain &)
+    void operator=(const QuarterCircleSectorDomain&)
     {
       BrokenCopy::broken_assign("QuarterCircleSectorDomain");
     }
@@ -96,13 +96,13 @@ namespace oomph
     /// the outer two macro elements towards
     /// the wall by mapping the input value of the "radial" macro element
     /// coordinate to the return value
-    typedef double (*BLSquashFctPt)(const double &s);
+    typedef double (*BLSquashFctPt)(const double& s);
 
     /// \short Function pointer for function that squashes
     /// the outer two macro elements towards
     /// the wall by mapping the input value of the "radial" macro element
     /// coordinate to the return value
-    BLSquashFctPt &bl_squash_fct_pt()
+    BLSquashFctPt& bl_squash_fct_pt()
     {
       return BL_squash_fct_pt;
     }
@@ -110,7 +110,7 @@ namespace oomph
     /// \short Function that squashes the outer two macro elements towards
     /// the wall by mapping the input value of the "radial" macro element
     /// coordinate to the return value
-    double s_squashed(const double &s)
+    double s_squashed(const double& s)
     {
       return BL_squash_fct_pt(s);
     }
@@ -122,11 +122,11 @@ namespace oomph
     /// Vector rather than a scalar -- this is unavoidable because
     /// this function implements the pure virtual function in the
     /// Domain base class.
-    void macro_element_boundary(const unsigned &t,
-                                const unsigned &i_macro,
-                                const unsigned &i_direct,
-                                const Vector<double> &s,
-                                Vector<double> &f);
+    void macro_element_boundary(const unsigned& t,
+                                const unsigned& i_macro,
+                                const unsigned& i_direct,
+                                const Vector<double>& s,
+                                Vector<double>& f);
 
   private:
     /// Lower limit for the (1D) coordinates along the wall
@@ -139,7 +139,7 @@ namespace oomph
     double Xi_hi;
 
     /// Pointer to geometric object that represents the curved wall
-    GeomObject *Wall_pt;
+    GeomObject* Wall_pt;
 
     /// \short Function pointer for function that squashes
     /// the outer two macro elements towards
@@ -151,70 +151,70 @@ namespace oomph
     /// the outer two macro elements towards
     /// the wall by mapping the input value of the "radial" macro element
     /// coordinate to the return value: Identity.
-    static double default_BL_squash_fct(const double &s)
+    static double default_BL_squash_fct(const double& s)
     {
       return s;
     }
 
     /// \short Boundary of top left macro element zeta \f$ \in [-1,1] \f$
-    void r_top_left_N(const unsigned &t,
-                      const Vector<double> &zeta,
-                      Vector<double> &f);
+    void r_top_left_N(const unsigned& t,
+                      const Vector<double>& zeta,
+                      Vector<double>& f);
 
     /// \short Boundary of top left macro element zeta \f$ \in [-1,1] \f$
-    void r_top_left_W(const unsigned &t,
-                      const Vector<double> &zeta,
-                      Vector<double> &f);
+    void r_top_left_W(const unsigned& t,
+                      const Vector<double>& zeta,
+                      Vector<double>& f);
 
     /// \short Boundary of top left macro element zeta \f$ \in [-1,1] \f$
-    void r_top_left_S(const unsigned &t,
-                      const Vector<double> &zeta,
-                      Vector<double> &f);
+    void r_top_left_S(const unsigned& t,
+                      const Vector<double>& zeta,
+                      Vector<double>& f);
 
     /// \short Boundary of top left macro element zeta \f$ \in [-1,1] \f$
-    void r_top_left_E(const unsigned &t,
-                      const Vector<double> &zeta,
-                      Vector<double> &f);
+    void r_top_left_E(const unsigned& t,
+                      const Vector<double>& zeta,
+                      Vector<double>& f);
 
     /// \short Boundary of bottom right macro element zeta \f$ \in [-1,1] \f$
-    void r_bot_right_N(const unsigned &t,
-                       const Vector<double> &zeta,
-                       Vector<double> &f);
+    void r_bot_right_N(const unsigned& t,
+                       const Vector<double>& zeta,
+                       Vector<double>& f);
 
     /// \short Boundary of bottom right macro element zeta \f$ \in [-1,1] \f$
-    void r_bot_right_W(const unsigned &t,
-                       const Vector<double> &zeta,
-                       Vector<double> &f);
+    void r_bot_right_W(const unsigned& t,
+                       const Vector<double>& zeta,
+                       Vector<double>& f);
 
     /// \short Boundary of bottom right macro element zeta \f$ \in [-1,1] \f$
-    void r_bot_right_S(const unsigned &t,
-                       const Vector<double> &zeta,
-                       Vector<double> &f);
+    void r_bot_right_S(const unsigned& t,
+                       const Vector<double>& zeta,
+                       Vector<double>& f);
 
     /// \short Boundary of bottom right macro element zeta \f$ \in [-1,1] \f$
-    void r_bot_right_E(const unsigned &t,
-                       const Vector<double> &zeta,
-                       Vector<double> &f);
+    void r_bot_right_E(const unsigned& t,
+                       const Vector<double>& zeta,
+                       Vector<double>& f);
 
     /// \short Boundary of central box macro element zeta \f$ \in [-1,1] \f$
-    void r_centr_N(const unsigned &t,
-                   const Vector<double> &zeta,
-                   Vector<double> &f);
+    void r_centr_N(const unsigned& t,
+                   const Vector<double>& zeta,
+                   Vector<double>& f);
 
     /// \short Boundary of central box macro element zeta \f$ \in [-1,1] \f$
-    void r_centr_E(const unsigned &t,
-                   const Vector<double> &zeta,
-                   Vector<double> &f);
+    void r_centr_E(const unsigned& t,
+                   const Vector<double>& zeta,
+                   Vector<double>& f);
 
     /// \short Boundary of central box macro element zeta \f$ \in [-1,1] \f$
-    void r_centr_S(const unsigned &t,
-                   const Vector<double> &zeta,
-                   Vector<double> &f);
+    void r_centr_S(const unsigned& t,
+                   const Vector<double>& zeta,
+                   Vector<double>& f);
 
     /// \short Boundary of central box macro element zeta \f$ \in [-1,1] \f$
-    void r_centr_W(const unsigned &t,
-                   const Vector<double> &zeta,
-                   Vector<double> &f);
+    void r_centr_W(const unsigned& t,
+                   const Vector<double>& zeta,
+                   Vector<double>& f);
   };
 
   /////////////////////////////////////////////////////////////////////////
@@ -227,11 +227,11 @@ namespace oomph
   /// f(s)
   //=================================================================
   void QuarterCircleSectorDomain::macro_element_boundary(
-    const unsigned &t,
-    const unsigned &imacro,
-    const unsigned &idirect,
-    const Vector<double> &s,
-    Vector<double> &f)
+    const unsigned& t,
+    const unsigned& imacro,
+    const unsigned& idirect,
+    const Vector<double>& s,
+    Vector<double>& f)
   {
 #ifdef WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES
     // Warn about time argument being moved to the front
@@ -360,9 +360,9 @@ namespace oomph
   //=================================================================
   /// Northern edge of top left macro element \f$ s \in [-1,1] \f$
   //=================================================================
-  void QuarterCircleSectorDomain::r_top_left_N(const unsigned &t,
-                                               const Vector<double> &s,
-                                               Vector<double> &f)
+  void QuarterCircleSectorDomain::r_top_left_N(const unsigned& t,
+                                               const Vector<double>& s,
+                                               Vector<double>& f)
   {
     Vector<double> x(1);
 
@@ -375,9 +375,9 @@ namespace oomph
   //=================================================================
   /// Western edge of top left macro element \f$s \in [-1,1] \f$
   //=================================================================
-  void QuarterCircleSectorDomain::r_top_left_W(const unsigned &t,
-                                               const Vector<double> &s,
-                                               Vector<double> &f)
+  void QuarterCircleSectorDomain::r_top_left_W(const unsigned& t,
+                                               const Vector<double>& s,
+                                               Vector<double>& f)
   {
     Vector<double> x(1);
 
@@ -394,9 +394,9 @@ namespace oomph
   //=================================================================
   /// Southern edge of top left macro element \f$ s \in [-1,1] \f$
   //=================================================================
-  void QuarterCircleSectorDomain::r_top_left_S(const unsigned &t,
-                                               const Vector<double> &s,
-                                               Vector<double> &f)
+  void QuarterCircleSectorDomain::r_top_left_S(const unsigned& t,
+                                               const Vector<double>& s,
+                                               Vector<double>& f)
   {
     Vector<double> x(1);
 
@@ -419,9 +419,9 @@ namespace oomph
   //=================================================================
   /// Eastern edge of top left macro element \f$ s \in [-1,1] \f$
   //=================================================================
-  void QuarterCircleSectorDomain::r_top_left_E(const unsigned &t,
-                                               const Vector<double> &s,
-                                               Vector<double> &f)
+  void QuarterCircleSectorDomain::r_top_left_E(const unsigned& t,
+                                               const Vector<double>& s,
+                                               Vector<double>& f)
   {
     Vector<double> x(1);
 
@@ -452,9 +452,9 @@ namespace oomph
   //=================================================================
   /// Northern edge of bottom right macro element
   //=================================================================
-  void QuarterCircleSectorDomain::r_bot_right_N(const unsigned &t,
-                                                const Vector<double> &s,
-                                                Vector<double> &f)
+  void QuarterCircleSectorDomain::r_bot_right_N(const unsigned& t,
+                                                const Vector<double>& s,
+                                                Vector<double>& f)
   {
     r_top_left_E(t, s, f);
   }
@@ -462,9 +462,9 @@ namespace oomph
   //=================================================================
   /// Western edge of bottom right macro element
   //=================================================================
-  void QuarterCircleSectorDomain::r_bot_right_W(const unsigned &t,
-                                                const Vector<double> &s,
-                                                Vector<double> &f)
+  void QuarterCircleSectorDomain::r_bot_right_W(const unsigned& t,
+                                                const Vector<double>& s,
+                                                Vector<double>& f)
   {
     Vector<double> x(1);
 
@@ -487,9 +487,9 @@ namespace oomph
   //=================================================================
   /// Southern edge of bottom right macro element
   //=================================================================
-  void QuarterCircleSectorDomain::r_bot_right_S(const unsigned &t,
-                                                const Vector<double> &s,
-                                                Vector<double> &f)
+  void QuarterCircleSectorDomain::r_bot_right_S(const unsigned& t,
+                                                const Vector<double>& s,
+                                                Vector<double>& f)
   {
     Vector<double> x(1);
 
@@ -505,9 +505,9 @@ namespace oomph
   //=================================================================
   /// Eastern edge of bottom right macro element
   //=================================================================
-  void QuarterCircleSectorDomain::r_bot_right_E(const unsigned &t,
-                                                const Vector<double> &s,
-                                                Vector<double> &f)
+  void QuarterCircleSectorDomain::r_bot_right_E(const unsigned& t,
+                                                const Vector<double>& s,
+                                                Vector<double>& f)
   {
     Vector<double> x(1);
 
@@ -520,9 +520,9 @@ namespace oomph
   //=================================================================
   /// Northern edge of central box
   //=================================================================
-  void QuarterCircleSectorDomain::r_centr_N(const unsigned &t,
-                                            const Vector<double> &s,
-                                            Vector<double> &f)
+  void QuarterCircleSectorDomain::r_centr_N(const unsigned& t,
+                                            const Vector<double>& s,
+                                            Vector<double>& f)
   {
     r_top_left_S(t, s, f);
   }
@@ -530,9 +530,9 @@ namespace oomph
   //=================================================================
   /// Eastern edge of central box
   //=================================================================
-  void QuarterCircleSectorDomain::r_centr_E(const unsigned &t,
-                                            const Vector<double> &s,
-                                            Vector<double> &f)
+  void QuarterCircleSectorDomain::r_centr_E(const unsigned& t,
+                                            const Vector<double>& s,
+                                            Vector<double>& f)
   {
     r_bot_right_W(t, s, f);
   }
@@ -540,9 +540,9 @@ namespace oomph
   //=================================================================
   /// Southern edge of central box
   //=================================================================
-  void QuarterCircleSectorDomain::r_centr_S(const unsigned &t,
-                                            const Vector<double> &s,
-                                            Vector<double> &f)
+  void QuarterCircleSectorDomain::r_centr_S(const unsigned& t,
+                                            const Vector<double>& s,
+                                            Vector<double>& f)
   {
     Vector<double> x(1);
 
@@ -558,9 +558,9 @@ namespace oomph
   //=================================================================
   /// Western  edge of central box
   //=================================================================
-  void QuarterCircleSectorDomain::r_centr_W(const unsigned &t,
-                                            const Vector<double> &s,
-                                            Vector<double> &f)
+  void QuarterCircleSectorDomain::r_centr_W(const unsigned& t,
+                                            const Vector<double>& s,
+                                            Vector<double>& f)
   {
     Vector<double> x(1);
 

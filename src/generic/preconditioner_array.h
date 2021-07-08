@@ -52,17 +52,17 @@ namespace oomph
   class PreconditionerArray
   {
   public:
-    void setup_preconditioners(Vector<CRDoubleMatrix *> matrix_pt,
-                               Vector<Preconditioner *> prec_pt,
-                               const OomphCommunicator *comm_pt)
+    void setup_preconditioners(Vector<CRDoubleMatrix*> matrix_pt,
+                               Vector<Preconditioner*> prec_pt,
+                               const OomphCommunicator* comm_pt)
     {
       throw OomphLibError("PreconditionerArray requires MPI",
                           OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
     }
 
-    void solve_preconditioners(const Vector<DoubleVector> &r,
-                               Vector<DoubleVector> &z)
+    void solve_preconditioners(const Vector<DoubleVector>& r,
+                               Vector<DoubleVector>& z)
     {
       throw OomphLibError("PreconditionerArray requires MPI",
                           OOMPH_CURRENT_FUNCTION,
@@ -112,13 +112,13 @@ namespace oomph
     };
 
     /// Broken copy constructor
-    PreconditionerArray(const PreconditionerArray &)
+    PreconditionerArray(const PreconditionerArray&)
     {
       BrokenCopy::broken_copy("PreconditionerArray");
     }
 
     /// Broken assignment operator
-    void operator=(const PreconditionerArray &)
+    void operator=(const PreconditionerArray&)
     {
       BrokenCopy::broken_assign("PreconditionerArray");
     }
@@ -134,14 +134,14 @@ namespace oomph
     /// The number of preconditioners in the array is taken to be the length of
     /// prec_pt
     /// The preconditioners that are not used on this processor are deleted.
-    void setup_preconditioners(Vector<CRDoubleMatrix *> matrix_pt,
-                               Vector<Preconditioner *> prec_pt,
-                               const OomphCommunicator *comm_pt);
+    void setup_preconditioners(Vector<CRDoubleMatrix*> matrix_pt,
+                               Vector<Preconditioner*> prec_pt,
+                               const OomphCommunicator* comm_pt);
 
     /// \short Applies each preconditioner to the corresponding vector in
     /// r and z
-    void solve_preconditioners(const Vector<DoubleVector> &r,
-                               Vector<DoubleVector> &z);
+    void solve_preconditioners(const Vector<DoubleVector>& r,
+                               Vector<DoubleVector>& z);
 
     /// \short Clean up memory.
     void clean_up_memory()
@@ -178,17 +178,17 @@ namespace oomph
     }
 
     // access function to Method
-    unsigned &method()
+    unsigned& method()
     {
       return Method;
     }
 
   private:
     /// \short helper method for computing the MPI_Isend and MPI_Irecv tags
-    int compute_tag(const int &nproc,
-                    const int &source,
-                    const int &dest,
-                    const int &type)
+    int compute_tag(const int& nproc,
+                    const int& source,
+                    const int& dest,
+                    const int& type)
     {
       return source + (nproc * dest) + (nproc * nproc * type);
     }
@@ -197,7 +197,7 @@ namespace oomph
     unsigned Nprec;
 
     /// The pointer to the local preconditioner on this processor
-    Preconditioner *Preconditioner_pt;
+    Preconditioner* Preconditioner_pt;
 
     /// \short The first_row component of the distribution of the processors
     /// over the preconditioners
@@ -227,14 +227,14 @@ namespace oomph
     unsigned Color;
 
     /// pointer to the global communicator for this preconditioner array
-    OomphCommunicator *Global_communicator_pt;
+    OomphCommunicator* Global_communicator_pt;
 
     /// Vector of communicators for the preconditioners
-    OomphCommunicator *Local_communicator_pt;
+    OomphCommunicator* Local_communicator_pt;
 
 #ifdef PARANOID
     // Vector of distribution of each preconditioner - for PARANOID checks only
-    Vector<LinearAlgebraDistribution *> Distribution_pt;
+    Vector<LinearAlgebraDistribution*> Distribution_pt;
 #endif
 
     /// \short the communication method in the setup_preconditioners(...) method

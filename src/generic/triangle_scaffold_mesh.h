@@ -56,25 +56,25 @@ namespace oomph
     TriangleScaffoldMesh() {}
 
     /// \short Constructor: Pass the filenames of the triangle files
-    TriangleScaffoldMesh(const std::string &node_file_name,
-                         const std::string &element_file_name,
-                         const std::string &poly_file_name);
+    TriangleScaffoldMesh(const std::string& node_file_name,
+                         const std::string& element_file_name,
+                         const std::string& poly_file_name);
 
 #ifdef OOMPH_HAS_TRIANGLE_LIB
 
     /// \short Constructor: Pass the TriangulateIO object
-    TriangleScaffoldMesh(TriangulateIO &triangle_data);
+    TriangleScaffoldMesh(TriangulateIO& triangle_data);
 
 #endif
 
     /// Broken copy constructor
-    TriangleScaffoldMesh(const TriangleScaffoldMesh &)
+    TriangleScaffoldMesh(const TriangleScaffoldMesh&)
     {
       BrokenCopy::broken_copy("TriangleScaffoldMesh");
     }
 
     /// Broken assignment operator
-    void operator=(const TriangleScaffoldMesh &)
+    void operator=(const TriangleScaffoldMesh&)
     {
       BrokenCopy::broken_assign("TriangleScaffoldMesh");
     }
@@ -85,7 +85,7 @@ namespace oomph
     /// \short Return the global node of each local node
     /// listed element-by-element e*n_local_node + n_local
     /// Note that the node numbers are indexed from 1
-    unsigned global_node_number(const unsigned &i)
+    unsigned global_node_number(const unsigned& i)
     {
       return Global_node[i];
     }
@@ -94,7 +94,7 @@ namespace oomph
     /// This is zero-based as in triangle. Zero means the edge is not
     /// on a boundary. Postive numbers identify the boundary.
     /// Will be reduced by one to identify the oomph-lib boundary.
-    unsigned edge_boundary(const unsigned &e, const unsigned &i) const
+    unsigned edge_boundary(const unsigned& e, const unsigned& i) const
     {
       return Edge_boundary[e][i];
     }
@@ -107,19 +107,19 @@ namespace oomph
 
     /// \short Return the global index of the i-th edge in the e-th element:
     /// The global index starts from zero
-    unsigned edge_index(const unsigned &e, const unsigned &i) const
+    unsigned edge_index(const unsigned& e, const unsigned& i) const
     {
       return Edge_index[e][i];
     }
 
     /// \short Return the attribute of the element e
-    double element_attribute(const unsigned &e) const
+    double element_attribute(const unsigned& e) const
     {
       return Element_attribute[e];
     }
 
     /// Vectors of hole centre coordinates
-    Vector<Vector<double>> &internal_point()
+    Vector<Vector<double>>& internal_point()
     {
       return Hole_centre;
     }

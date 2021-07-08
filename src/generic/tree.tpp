@@ -81,11 +81,11 @@ namespace oomph
       error_message
         << "No object defined in split_if_required. Father nodes:\n";
 
-      RefineableElement *el_pt = Father_pt->object_pt();
+      RefineableElement* el_pt = Father_pt->object_pt();
       unsigned nnod = el_pt->nnode();
       for (unsigned j = 0; j < nnod; j++)
       {
-        Node *nod_pt = el_pt->node_pt(j);
+        Node* nod_pt = el_pt->node_pt(j);
         unsigned n = nod_pt->ndim();
         for (unsigned i = 0; i < n; i++)
         {
@@ -104,7 +104,7 @@ namespace oomph
     {
       // Perform the split for the element in question and return Vector
       // of pointers to the newly created elements
-      Vector<ELEMENT *> new_elements_pt;
+      Vector<ELEMENT*> new_elements_pt;
       Object_pt->split(new_elements_pt);
 
       // Find the number of sons constructed by the element
@@ -113,7 +113,7 @@ namespace oomph
       // Turn the new elements into QuadTrees and assign
       // the pointers to the present element's sons
       Son_pt.resize(n_sons);
-      Tree *father_pt = this;
+      Tree* father_pt = this;
       for (unsigned i_son = 0; i_son < n_sons; i_son++)
       {
         Son_pt[i_son] = construct_son(new_elements_pt[i_son], father_pt, i_son);
@@ -148,7 +148,7 @@ namespace oomph
   ///
   //=================================================================
   template<class ELEMENT>
-  void Tree::p_refine_if_required(Mesh *&mesh_pt)
+  void Tree::p_refine_if_required(Mesh*& mesh_pt)
   {
 #ifdef PARANOID
     if (Son_pt.size() != 0)
@@ -168,11 +168,11 @@ namespace oomph
       error_message
         << "No object defined in p_refine_if_required. Father nodes:\n";
 
-      RefineableElement *el_pt = Father_pt->object_pt();
+      RefineableElement* el_pt = Father_pt->object_pt();
       unsigned nnod = el_pt->nnode();
       for (unsigned j = 0; j < nnod; j++)
       {
-        Node *nod_pt = el_pt->node_pt(j);
+        Node* nod_pt = el_pt->node_pt(j);
         unsigned n = nod_pt->ndim();
         for (unsigned i = 0; i < n; i++)
         {
@@ -187,8 +187,8 @@ namespace oomph
 #endif
 
     // Cast to p-refineable element
-    PRefineableElement *p_ref_obj_pt =
-      dynamic_cast<PRefineableElement *>(Object_pt);
+    PRefineableElement* p_ref_obj_pt =
+      dynamic_cast<PRefineableElement*>(Object_pt);
 
     // Check if we can p-refine the element
     if (p_ref_obj_pt == 0)
@@ -204,7 +204,7 @@ namespace oomph
     // required for the p-refinement is copied across.
 
     // Make new element (using ELEMENT's standard constructor)
-    ELEMENT *clone_pt = new ELEMENT();
+    ELEMENT* clone_pt = new ELEMENT();
 
     // Do initial setup with myself as the clone's adopted father
     clone_pt->initial_setup(this);

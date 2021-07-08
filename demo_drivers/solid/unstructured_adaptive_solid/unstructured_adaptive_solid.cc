@@ -55,7 +55,7 @@ namespace Global_Physical_Variables
   double Nu = 0.3;
 
   /// Pointer to constitutive law
-  ConstitutiveLaw *Constitutive_law_pt = 0;
+  ConstitutiveLaw* Constitutive_law_pt = 0;
 
   /// Uniform pressure
   double P = 0.0;
@@ -65,10 +65,10 @@ namespace Global_Physical_Variables
   /// depend on the Lagrangian and Eulerian coordinates x and xi, and on the
   /// outer unit normal to the surface. Here we only need the outer unit
   /// normal.
-  void constant_pressure(const Vector<double> &xi,
-                         const Vector<double> &x,
-                         const Vector<double> &n,
-                         Vector<double> &traction)
+  void constant_pressure(const Vector<double>& xi,
+                         const Vector<double>& x,
+                         const Vector<double>& n,
+                         Vector<double>& traction)
   {
     unsigned dim = traction.size();
     for (unsigned i = 0; i < dim; i++)
@@ -99,7 +99,7 @@ public:
   }
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// Calculate the strain energy
   double get_strain_energy();
@@ -112,13 +112,13 @@ public:
 
 private:
   /// Bulk mesh
-  RefineableSolidTriangleMesh<ELEMENT> *Solid_mesh_pt;
+  RefineableSolidTriangleMesh<ELEMENT>* Solid_mesh_pt;
 
   /// Pointer to mesh of traction elements
-  SolidMesh *Traction_mesh_pt;
+  SolidMesh* Traction_mesh_pt;
 
   /// Triangle mesh polygon for outer boundary
-  TriangleMeshPolygon *Outer_boundary_polyline_pt;
+  TriangleMeshPolygon* Outer_boundary_polyline_pt;
 
   /// Boolean flag used in an incompressible problem
   bool Incompressible;
@@ -135,7 +135,7 @@ UnstructuredSolidProblem<ELEMENT>::UnstructuredSolidProblem() :
   //--------------------------------------------------------------
   // four separeate polyline segments
   //---------------------------------
-  Vector<TriangleMeshCurveSection *> boundary_segment_pt(4);
+  Vector<TriangleMeshCurveSection*> boundary_segment_pt(4);
 
   // Initialize boundary segment
   Vector<Vector<double>> bound_seg(2);
@@ -204,7 +204,7 @@ UnstructuredSolidProblem<ELEMENT>::UnstructuredSolidProblem() :
   //----------------------
   double uniform_element_area = 0.2;
 
-  TriangleMeshClosedCurve *closed_curve_pt = Outer_boundary_polyline_pt;
+  TriangleMeshClosedCurve* closed_curve_pt = Outer_boundary_polyline_pt;
 
   // Use the TriangleMeshParameters object for gathering all
   // the necessary arguments for the TriangleMesh object
@@ -223,7 +223,7 @@ UnstructuredSolidProblem<ELEMENT>::UnstructuredSolidProblem() :
   Solid_mesh_pt->disable_iterative_solver_for_projection();
 
   // Set error estimator for bulk mesh
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   Solid_mesh_pt->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Set targets for spatial adaptivity
@@ -262,7 +262,7 @@ UnstructuredSolidProblem<ELEMENT>::UnstructuredSolidProblem() :
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void UnstructuredSolidProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void UnstructuredSolidProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -308,7 +308,7 @@ double UnstructuredSolidProblem<ELEMENT>::get_strain_energy()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Cast to a solid element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Solid_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Solid_mesh_pt->element_pt(e));
 
     double pot_en, kin_en;
     el_pt->get_energy(pot_en, kin_en);
@@ -353,14 +353,14 @@ void UnstructuredSolidProblem<ELEMENT>::actions_after_adapt()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    ELEMENT *bulk_elem_pt =
-      dynamic_cast<ELEMENT *>(Solid_mesh_pt->boundary_element_pt(b, e));
+    ELEMENT* bulk_elem_pt =
+      dynamic_cast<ELEMENT*>(Solid_mesh_pt->boundary_element_pt(b, e));
 
     // Find the index of the face of element e along boundary b
     int face_index = Solid_mesh_pt->face_index_at_boundary(b, e);
 
     // Create solid traction element
-    SolidTractionElement<ELEMENT> *el_pt =
+    SolidTractionElement<ELEMENT>* el_pt =
       new SolidTractionElement<ELEMENT>(bulk_elem_pt, face_index);
 
     // Add to mesh
@@ -380,7 +380,7 @@ void UnstructuredSolidProblem<ELEMENT>::actions_after_adapt()
   for (unsigned inod = 0; inod < num_nod; inod++)
   {
     // Get node
-    SolidNode *nod_pt = Solid_mesh_pt->boundary_node_pt(ibound, inod);
+    SolidNode* nod_pt = Solid_mesh_pt->boundary_node_pt(ibound, inod);
 
     // Pin both directions
     for (unsigned i = 0; i < 2; i++)
@@ -395,7 +395,7 @@ void UnstructuredSolidProblem<ELEMENT>::actions_after_adapt()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Cast to a solid element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Solid_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Solid_mesh_pt->element_pt(e));
 
     // Set the constitutive law
     el_pt->constitutive_law_pt() =
@@ -405,7 +405,7 @@ void UnstructuredSolidProblem<ELEMENT>::actions_after_adapt()
     if (Incompressible)
     {
       // Need another dynamic cast
-      dynamic_cast<TPVDElementWithContinuousPressure<2> *>(el_pt)
+      dynamic_cast<TPVDElementWithContinuousPressure<2>*>(el_pt)
         ->set_incompressible();
     }
   }
@@ -415,7 +415,7 @@ void UnstructuredSolidProblem<ELEMENT>::actions_after_adapt()
 //===========start_main===================================================
 /// Demonstrate how to solve an unstructured solid problem
 //========================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Doc info object
   DocInfo doc_info;
@@ -545,8 +545,8 @@ int main(int argc, char **argv)
       for (unsigned e = 0; e < n_element; e++)
       {
         // Cast the element to the equation base of our 2D elastiticy elements
-        PVDEquationsWithPressure<2> *cast_el_pt =
-          dynamic_cast<PVDEquationsWithPressure<2> *>(
+        PVDEquationsWithPressure<2>* cast_el_pt =
+          dynamic_cast<PVDEquationsWithPressure<2>*>(
             problem.mesh_pt()->element_pt(e));
 
         // If the cast was successful, it's a bulk element,

@@ -78,9 +78,9 @@ namespace oomph
 
     /// \short Compute 3D vector of Eulerian coordinates at 1D boundary
     /// coordinate zeta_bound on boundary b:
-    void position_on_boundary(const unsigned &b,
-                              const double &zeta_bound,
-                              Vector<double> &r) const
+    void position_on_boundary(const unsigned& b,
+                              const double& zeta_bound,
+                              Vector<double>& r) const
     {
       Vector<double> zeta(2);
       zeta_on_boundary(b, zeta_bound, zeta);
@@ -89,9 +89,9 @@ namespace oomph
 
     /// \short Compute 2D vector of intrinsic coordinates at 1D boundary
     /// coordinate zeta_bound on boundary b:
-    void zeta_on_boundary(const unsigned &b,
-                          const double &zeta_bound,
-                          Vector<double> &zeta) const
+    void zeta_on_boundary(const unsigned& b,
+                          const double& zeta_bound,
+                          Vector<double>& zeta) const
     {
 #ifdef PARANOID
       if (Boundary_parametrising_geom_object_pt[b] == 0)
@@ -135,33 +135,33 @@ namespace oomph
 
     /// \short Pointer to GeomObject<1,2> that parametrises intrinisc
     /// coordinates along boundary b
-    GeomObject *boundary_parametrising_geom_object_pt(const unsigned &b) const
+    GeomObject* boundary_parametrising_geom_object_pt(const unsigned& b) const
     {
       return Boundary_parametrising_geom_object_pt[b];
     }
 
     /// \short Initial value of 1D boundary coordinate
     /// zeta_bound on boundary b:
-    double zeta_boundary_start(const unsigned &b) const
+    double zeta_boundary_start(const unsigned& b) const
     {
       return Zeta_boundary_start[b];
     }
 
     /// \short Final value of 1D boundary coordinate
     /// zeta_bound on boundary b:
-    double zeta_boundary_end(const unsigned &b) const
+    double zeta_boundary_end(const unsigned& b) const
     {
       return Zeta_boundary_end[b];
     }
 
     /// \short Boundary triad on boundary b at boundary coordinate zeta_bound.
     /// Broken virtual.
-    virtual void boundary_triad(const unsigned &b,
-                                const double &zeta_bound,
-                                Vector<double> &r,
-                                Vector<double> &tangent,
-                                Vector<double> &normal,
-                                Vector<double> &binormal)
+    virtual void boundary_triad(const unsigned& b,
+                                const double& zeta_bound,
+                                Vector<double>& r,
+                                Vector<double>& tangent,
+                                Vector<double>& normal,
+                                Vector<double>& binormal)
     {
       std::ostringstream error_message;
       error_message << "Broken virtual function; please implement for your\n"
@@ -173,9 +173,9 @@ namespace oomph
     /// \short Output boundaries at nplot plot points. Streams:
     /// - two_d_boundaries_file: zeta_0, zeta_1, zeta_bound
     /// - three_d_boundaries_file : x, y, z, zeta_0, zeta_1, zeta_bound
-    void output_boundaries(const unsigned &nplot,
-                           std::ofstream &two_d_boundaries_file,
-                           std::ofstream &three_d_boundaries_file)
+    void output_boundaries(const unsigned& nplot,
+                           std::ofstream& two_d_boundaries_file,
+                           std::ofstream& three_d_boundaries_file)
     {
       std::ofstream boundaries_tangent_file;
       std::ofstream boundaries_normal_file;
@@ -194,12 +194,12 @@ namespace oomph
     /// - boundaries_tangent_file : x, y, z, t_x, t_y, t_z
     /// - boundaries_normal_file  : x, y, z, n_x, n_y, n_z
     /// - boundaries_binormal_file: x, y, z, N_x, N_y, N_z
-    void output_boundaries_and_triads(const unsigned &nplot,
-                                      std::ofstream &two_d_boundaries_file,
-                                      std::ofstream &three_d_boundaries_file,
-                                      std::ofstream &boundaries_tangent_file,
-                                      std::ofstream &boundaries_normal_file,
-                                      std::ofstream &boundaries_binormal_file)
+    void output_boundaries_and_triads(const unsigned& nplot,
+                                      std::ofstream& two_d_boundaries_file,
+                                      std::ofstream& three_d_boundaries_file,
+                                      std::ofstream& boundaries_tangent_file,
+                                      std::ofstream& boundaries_normal_file,
+                                      std::ofstream& boundaries_binormal_file)
     {
       Vector<double> r(3);
       Vector<double> zeta(2);
@@ -251,8 +251,8 @@ namespace oomph
 
     /// \short Specify intrinsic coordinates of a point within a specified
     /// region  -- region ID, r, should be positive.
-    void add_region_coordinates(const unsigned &r,
-                                Vector<double> &zeta_in_region)
+    void add_region_coordinates(const unsigned& r,
+                                Vector<double>& zeta_in_region)
     {
       // Verify if not using the default region number (zero)
       if (r == 0)
@@ -319,7 +319,7 @@ namespace oomph
     /// \short Pointer to GeomObject<1,2> that parametrises intrinisc
     /// coordinates along boundary b; essentially provides a wrapper to
     /// zeta_on_boundary(...)
-    Vector<GeomObject *> Boundary_parametrising_geom_object_pt;
+    Vector<GeomObject*> Boundary_parametrising_geom_object_pt;
 
     /// Map to store zeta coordinates of points that identify regions
     std::map<unsigned, Vector<double>> Zeta_in_region;
@@ -340,9 +340,9 @@ namespace oomph
     /// Constructor. Pass amplitude and azimuthal wavenumber of
     /// warping as arguments. Can specify vertical offset as final, optional
     /// argument.
-    WarpedCircularDisk(const double &epsilon,
-                       const unsigned &n,
-                       const double &z_offset = 0.0) :
+    WarpedCircularDisk(const double& epsilon,
+                       const unsigned& n,
+                       const double& z_offset = 0.0) :
       Epsilon(epsilon), N(n), Z_offset(z_offset)
     {
       // How many boundaries do we have?
@@ -371,13 +371,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    WarpedCircularDisk(const WarpedCircularDisk &dummy)
+    WarpedCircularDisk(const WarpedCircularDisk& dummy)
     {
       BrokenCopy::broken_copy("WarpedCircularDisk");
     }
 
     /// Broken assignment operator
-    void operator=(const WarpedCircularDisk &)
+    void operator=(const WarpedCircularDisk&)
     {
       BrokenCopy::broken_assign("WarpedCircularDisk");
     }
@@ -394,13 +394,13 @@ namespace oomph
     }
 
     /// Access fct to amplitude of disk warping
-    double &epsilon()
+    double& epsilon()
     {
       return Epsilon;
     }
 
     /// \short Position Vector at Lagrangian coordinate zeta
-    void position(const Vector<double> &zeta, Vector<double> &r) const
+    void position(const Vector<double>& zeta, Vector<double>& r) const
     {
       // Position Vector
       r[0] = zeta[0];
@@ -413,20 +413,20 @@ namespace oomph
     /// \short Parametrised position on object: r(zeta). Evaluated at
     /// previous timestep. t=0: current time; t>0: previous
     /// timestep. Object is steady so calls time-independent version
-    void position(const unsigned &t,
-                  const Vector<double> &zeta,
-                  Vector<double> &r) const
+    void position(const unsigned& t,
+                  const Vector<double>& zeta,
+                  Vector<double>& r) const
     {
       position(zeta, r);
     }
 
     /// Boundary triad on boundary b at boundary coordinate zeta_bound
-    void boundary_triad(const unsigned &b,
-                        const double &zeta_bound,
-                        Vector<double> &r,
-                        Vector<double> &tangent,
-                        Vector<double> &normal,
-                        Vector<double> &binormal)
+    void boundary_triad(const unsigned& b,
+                        const double& zeta_bound,
+                        Vector<double>& r,
+                        Vector<double>& tangent,
+                        Vector<double>& normal,
+                        Vector<double>& binormal)
     {
       double phi = zeta_bound;
 
@@ -465,19 +465,19 @@ namespace oomph
 
   private:
     /// Vertical deflection
-    double w(const double &r, const double &phi) const
+    double w(const double& r, const double& phi) const
     {
       return Epsilon * cos(double(N) * phi) * pow(r, 2);
     }
 
     /// Deriv of vertical deflection w.r.t. radius
-    double dwdr(const double &r, const double &phi) const
+    double dwdr(const double& r, const double& phi) const
     {
       return Epsilon * cos(double(N) * phi) * 2.0 * r;
     }
 
     /// Deriv of vertical deflection w.r.t. angle
-    double dwdphi(const double &r, const double &phi) const
+    double dwdphi(const double& r, const double& phi) const
     {
       return -Epsilon * double(N) * sin(double(N) * phi) * pow(r, 2);
     }
@@ -511,10 +511,10 @@ namespace oomph
     /// warping as arguments. Can specify vertical offset as final, optional
     /// argument.
     WarpedCircularDiskWithAnnularInternalBoundary(
-      const double &h_annulus,
-      const double &epsilon,
-      const unsigned &n,
-      const double &z_offset = 0.0) :
+      const double& h_annulus,
+      const double& epsilon,
+      const unsigned& n,
+      const double& z_offset = 0.0) :
       WarpedCircularDisk(epsilon, n, z_offset), H_annulus(h_annulus)
     {
       // We have two more boundaries!
@@ -548,13 +548,13 @@ namespace oomph
 
     /// Broken copy constructor
     WarpedCircularDiskWithAnnularInternalBoundary(
-      const WarpedCircularDiskWithAnnularInternalBoundary &dummy)
+      const WarpedCircularDiskWithAnnularInternalBoundary& dummy)
     {
       BrokenCopy::broken_copy("WarpedCircularDiskWithAnnularInternalBoundary");
     }
 
     /// Broken assignment operator
-    void operator=(const WarpedCircularDiskWithAnnularInternalBoundary &)
+    void operator=(const WarpedCircularDiskWithAnnularInternalBoundary&)
     {
       BrokenCopy::broken_assign(
         "WarpedCircularDiskWithAnnularInternalBoundary");

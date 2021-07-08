@@ -52,7 +52,7 @@ class CompareNodeCoordinatesX
 {
 public:
   /// The actual comparison operator
-  int operator()(Node *const &node1_pt, Node *const &node2_pt)
+  int operator()(Node* const& node1_pt, Node* const& node2_pt)
   {
     unsigned n_dim = node1_pt->ndim();
     if (n_dim != node2_pt->ndim())
@@ -72,7 +72,7 @@ class CompareNodeCoordinatesY
 {
 public:
   /// The actual comparison operator
-  int operator()(Node *const &node1_pt, Node *const &node2_pt)
+  int operator()(Node* const& node1_pt, Node* const& node2_pt)
   {
     unsigned n_dim = node1_pt->ndim();
     if (n_dim != node2_pt->ndim())
@@ -101,23 +101,23 @@ namespace Problem_Parameter
   double Mr = 30.0;
 
   // Pointer to the tensor for the bulk
-  ElasticityTensor *E_bulk_pt;
+  ElasticityTensor* E_bulk_pt;
 
   // Pointer to the tensor for the fibre
-  ElasticityTensor *E_fibre_pt;
+  ElasticityTensor* E_fibre_pt;
 
   /// Function that returns a pointer to the elasticity tensor
   /// associated with the bulk at position x
-  void bulk_elasticity_tensor_pt(const Vector<double> &x,
-                                 ElasticityTensor *&E_pt)
+  void bulk_elasticity_tensor_pt(const Vector<double>& x,
+                                 ElasticityTensor*& E_pt)
   {
     E_pt = E_bulk_pt;
   }
 
   ////Function that returns a pointer to the elasticity tensor
   /// associated with the fibre at position x
-  void fibre_elasticity_tensor_pt(const Vector<double> &x,
-                                  ElasticityTensor *&E_pt)
+  void fibre_elasticity_tensor_pt(const Vector<double>& x,
+                                  ElasticityTensor*& E_pt)
   {
     E_pt = E_fibre_pt;
   }
@@ -137,7 +137,7 @@ class HomogenisationProblem : public Problem
   Vector<Vector<DenseMatrix<double>>> C_eff;
 
   // Storage for the Internal Circular boundaries
-  Vector<GeomObject *> Internal_circle_pt;
+  Vector<GeomObject*> Internal_circle_pt;
 
 public:
   /// Constructor
@@ -186,8 +186,8 @@ public:
     unsigned n_element = this->Bulk_mesh_pt->nelement();
     for (unsigned e = 0; e < n_element; e++)
     {
-      ELEMENT *el_pt =
-        dynamic_cast<ELEMENT *>(this->Bulk_mesh_pt->element_pt(e));
+      ELEMENT* el_pt =
+        dynamic_cast<ELEMENT*>(this->Bulk_mesh_pt->element_pt(e));
 
       // Add the contribution to the effective modulus
       el_pt->calculate_effective_modulus(C_eff[P][M]);
@@ -196,10 +196,10 @@ public:
 
   /// Solve the sub-problems
   /// This will only solve the problem if the first_solve flag is true
-  void sub_solve(const unsigned &n_dofs,
-                 DoubleVector &dx,
-                 DoubleVector &res,
-                 const bool &first_solve)
+  void sub_solve(const unsigned& n_dofs,
+                 DoubleVector& dx,
+                 DoubleVector& res,
+                 const bool& first_solve)
   {
     // Update anything that needs updating
     actions_before_newton_solve();
@@ -296,13 +296,13 @@ public:
 
 private:
   /// Pointer to Bulk_mesh
-  TriangleMesh<ELEMENT> *Bulk_mesh_pt;
+  TriangleMesh<ELEMENT>* Bulk_mesh_pt;
 
   /// Vector storing pointer to the inclusion polygons
-  Vector<TriangleMeshPolygon *> Inclusion_polygon_pt;
+  Vector<TriangleMeshPolygon*> Inclusion_polygon_pt;
 
   /// Triangle mesh polygon for outer boundary
-  TriangleMeshPolygon *Outer_boundary_polyline_pt;
+  TriangleMeshPolygon* Outer_boundary_polyline_pt;
 
 }; // end_of_problem_class
 
@@ -331,7 +331,7 @@ HomogenisationProblem<ELEMENT>::HomogenisationProblem() : M(0), P(0)
   //--------------------------------------------------------------
   // six separate polylines
   //------------------------
-  Vector<TriangleMeshCurveSection *> boundary_polyline_pt(6);
+  Vector<TriangleMeshCurveSection*> boundary_polyline_pt(6);
 
   // Each polyline has n_element_on_side + 1 vertices
   unsigned n_vertex = n_element_on_side + 1;
@@ -455,7 +455,7 @@ HomogenisationProblem<ELEMENT>::HomogenisationProblem() : M(0), P(0)
   Outer_boundary_polyline_pt = new TriangleMeshPolygon(boundary_polyline_pt);
 
   // Storage for the outer boundary
-  TriangleMeshClosedCurve *outer_boundary_closed_curve_pt =
+  TriangleMeshClosedCurve* outer_boundary_closed_curve_pt =
     Outer_boundary_polyline_pt;
 
   // Now define initial shape of inclusion with a geometric object
@@ -465,7 +465,7 @@ HomogenisationProblem<ELEMENT>::HomogenisationProblem() : M(0), P(0)
   double rad = std::sqrt(volume_fraction / (4.0 * atan(1.0)));
   double Radius[2] = {0.5 * rad, rad};
 
-  Vector<TriangleMeshClosedCurve *> curvilinear_inclusion_pt(2);
+  Vector<TriangleMeshClosedCurve*> curvilinear_inclusion_pt(2);
 
   for (unsigned h = 0; h < 2; h++)
   {
@@ -475,7 +475,7 @@ HomogenisationProblem<ELEMENT>::HomogenisationProblem() : M(0), P(0)
     // Build the two parts of the curvilinear boundary
     // Note that there could well be a memory leak here owing to some stupid
     // choices
-    Vector<TriangleMeshCurveSection *> curvilinear_boundary_pt(2);
+    Vector<TriangleMeshCurveSection*> curvilinear_boundary_pt(2);
 
     // First part of curvilinear boundary
     //-----------------------------------
@@ -638,7 +638,7 @@ template<class ELEMENT>
 void HomogenisationProblem<ELEMENT>::complete_problem_setup()
 {
   // Collect vectors of the nodes on the mesh boundaries
-  Vector<Vector<Node *>> boundary_nodes_pt(6);
+  Vector<Vector<Node*>> boundary_nodes_pt(6);
 
   for (unsigned b = 0; b < 6; b++)
   {
@@ -712,7 +712,7 @@ void HomogenisationProblem<ELEMENT>::complete_problem_setup()
   }
 
   // Vector of corner nodes
-  Vector<Node *> corner_nodes_pt(3);
+  Vector<Node*> corner_nodes_pt(3);
   corner_nodes_pt[0] = boundary_nodes_pt[0][0];
   corner_nodes_pt[1] = boundary_nodes_pt[1][n_node - 1];
   corner_nodes_pt[2] = boundary_nodes_pt[3][0];
@@ -723,7 +723,7 @@ void HomogenisationProblem<ELEMENT>::complete_problem_setup()
   corner_nodes_pt[0]->make_periodic_nodes(corner_nodes_pt);
 
   // Vector of other corner nodes
-  Vector<Node *> corner_nodes1_pt(3);
+  Vector<Node*> corner_nodes1_pt(3);
   corner_nodes1_pt[0] = boundary_nodes_pt[0][n_node - 1];
   corner_nodes1_pt[1] = boundary_nodes_pt[4][0];
   corner_nodes1_pt[2] = boundary_nodes_pt[3][n_node - 1];
@@ -747,8 +747,8 @@ void HomogenisationProblem<ELEMENT>::complete_problem_setup()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt =
-      dynamic_cast<ELEMENT *>(Bulk_mesh_pt->region_element_pt(0, e));
+    ELEMENT* el_pt =
+      dynamic_cast<ELEMENT*>(Bulk_mesh_pt->region_element_pt(0, e));
 
     // Set pointer to the elasticity tensor function
     el_pt->elasticity_tensor_fct_pt() =
@@ -767,8 +767,8 @@ void HomogenisationProblem<ELEMENT>::complete_problem_setup()
     for (unsigned e = 0; e < n_element; e++)
     {
       // Upcast from GeneralisedElement to the present element
-      ELEMENT *el_pt =
-        dynamic_cast<ELEMENT *>(Bulk_mesh_pt->region_element_pt(r, e));
+      ELEMENT* el_pt =
+        dynamic_cast<ELEMENT*>(Bulk_mesh_pt->region_element_pt(r, e));
 
       el_pt->elasticity_tensor_fct_pt() =
         &Problem_Parameter::fibre_elasticity_tensor_pt;
@@ -792,7 +792,7 @@ void HomogenisationProblem<ELEMENT>::doc_solution()
 //============================================================
 /// Driver code for moving block problem
 //============================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

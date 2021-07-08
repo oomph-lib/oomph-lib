@@ -59,9 +59,9 @@ namespace oomph
     /// domain, length, and pointer to timestepper (defaults to a Steady
     /// timestepper so we don't need to specify one in problems without
     /// time-dependence).
-    OneDMesh(const unsigned &n_element,
-             const double &length,
-             TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+    OneDMesh(const unsigned& n_element,
+             const double& length,
+             TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       Xmin(0.0), Xmax(length), N(n_element)
     {
       check_1d();
@@ -72,10 +72,10 @@ namespace oomph
     /// \short Constructor: Pass number of elements, n_element, minimum
     /// coordinate, xmin, maximum coordinate, xmax, and a pointer to a
     /// timestepper.
-    OneDMesh(const unsigned &n_element,
-             const double &xmin,
-             const double &xmax,
-             TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+    OneDMesh(const unsigned& n_element,
+             const double& xmin,
+             const double& xmax,
+             TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       Xmin(xmin), Xmax(xmax), N(n_element)
     {
       check_1d();
@@ -89,7 +89,7 @@ namespace oomph
     void check_1d() const
     {
 #ifdef PARANOID
-      FiniteElement *el_pt = new ELEMENT;
+      FiniteElement* el_pt = new ELEMENT;
       if (el_pt->dim() != 1)
       {
         std::string err = "OneDMesh is only for 1D elements";
@@ -114,7 +114,7 @@ namespace oomph
     unsigned N;
 
     /// \short Generic mesh constuction routine, called by all constructors
-    void build_mesh(TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper);
+    void build_mesh(TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
   };
 
   //====================================================================
@@ -129,9 +129,9 @@ namespace oomph
     /// \short Constructor: Pass number of elements, n_element, length of
     /// domain, length, and pointer to timestepper (defaults to Steady)
     RefineableOneDMesh(
-      const unsigned &n_element,
-      const double &length,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      const unsigned& n_element,
+      const double& length,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       OneDMesh<ELEMENT>(n_element, length, time_stepper_pt)
     {
       // Nodal positions etc. were created in constructor for OneDMesh<...>
@@ -143,10 +143,10 @@ namespace oomph
     /// maximum values of x coordinates. Also pass pointer to timestepper
     /// (defaults to Steady).
     RefineableOneDMesh(
-      const unsigned &n_element,
-      const double &xmin,
-      const double &xmax,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      const unsigned& n_element,
+      const double& xmin,
+      const double& xmax,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       OneDMesh<ELEMENT>(n_element, xmin, xmax, time_stepper_pt)
     {
       // Nodal positions etc. were created in constructor for OneDMesh<...>

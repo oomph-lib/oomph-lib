@@ -65,13 +65,13 @@ namespace oomph
     MumpsSolver();
 
     /// Broken copy constructor
-    MumpsSolver(const MumpsSolver &dummy)
+    MumpsSolver(const MumpsSolver& dummy)
     {
       BrokenCopy::broken_copy("MumpsSolver");
     }
 
     /// Broken assignment operator
-    void operator=(const MumpsSolver &)
+    void operator=(const MumpsSolver&)
     {
       BrokenCopy::broken_assign("MumpsSolver");
     }
@@ -115,21 +115,21 @@ namespace oomph
     /// \short Solver: Takes pointer to problem and returns the results Vector
     /// which contains the solution of the linear system defined by
     /// the problem's fully assembled Jacobian and residual Vector.
-    void solve(Problem *const &problem_pt, DoubleVector &result);
+    void solve(Problem* const& problem_pt, DoubleVector& result);
 
     /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs
     /// vector and returns the solution of the linear system.
     /// The function returns the global result Vector.
     /// Note: if Delete_matrix_data is true the function
     /// matrix_pt->clean_up_memory() will be used to wipe the matrix data.
-    void solve(DoubleMatrixBase *const &matrix_pt,
-               const DoubleVector &rhs,
-               DoubleVector &result);
+    void solve(DoubleMatrixBase* const& matrix_pt,
+               const DoubleVector& rhs,
+               DoubleVector& result);
 
     /// \short Resolve the system defined by the last assembled Jacobian
     /// and the specified rhs vector if resolve has been enabled.
     /// Note: returns the global result Vector.
-    void resolve(const DoubleVector &rhs, DoubleVector &result);
+    void resolve(const DoubleVector& rhs, DoubleVector& result);
 
     /// Enable documentation of statistics
     void enable_doc_stats()
@@ -197,11 +197,11 @@ namespace oomph
     /// \short Do the factorisation stage
     /// Note: if Delete_matrix_data is true the function
     /// matrix_pt->clean_up_memory() will be used to wipe the matrix data.
-    void factorise(DoubleMatrixBase *const &matrix_pt);
+    void factorise(DoubleMatrixBase* const& matrix_pt);
 
     /// \short Do the backsubstitution for mumps solver
     /// Note: returns the global result Vector.
-    void backsub(const DoubleVector &rhs, DoubleVector &result);
+    void backsub(const DoubleVector& rhs, DoubleVector& result);
 
     /// Clean up the memory allocated by the mumps solver
     void clean_up_memory();
@@ -260,7 +260,7 @@ namespace oomph
     Vector<double> A_loc;
 
     /// Pointer to MUMPS struct that contains the solver data
-    DMUMPS_STRUC_C *Mumps_struc_pt;
+    DMUMPS_STRUC_C* Mumps_struc_pt;
   };
 
   ///////////////////////////////////////////////////////////////////////
@@ -280,13 +280,13 @@ namespace oomph
     ~NewMumpsPreconditioner() {}
 
     /// Broken copy constructor.
-    NewMumpsPreconditioner(const NewMumpsPreconditioner &)
+    NewMumpsPreconditioner(const NewMumpsPreconditioner&)
     {
       BrokenCopy::broken_copy("NewMumpsPreconditioner");
     }
 
     /// Broken assignment operator.
-    void operator=(const NewMumpsPreconditioner &)
+    void operator=(const NewMumpsPreconditioner&)
     {
       BrokenCopy::broken_assign("NewMumpsPreconditioner");
     }
@@ -300,8 +300,8 @@ namespace oomph
     {
       oomph_info << "Setting up Mumps (exact) preconditioner" << std::endl;
 
-      DistributableLinearAlgebraObject *dist_matrix_pt =
-        dynamic_cast<DistributableLinearAlgebraObject *>(matrix_pt());
+      DistributableLinearAlgebraObject* dist_matrix_pt =
+        dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt());
       if (dist_matrix_pt != 0)
       {
         LinearAlgebraDistribution dist(dist_matrix_pt->distribution_pt());
@@ -322,7 +322,7 @@ namespace oomph
 
     /// \short Function applies Mumps to vector r for (exact)
     /// preconditioning, this requires a call to setup(...) first.
-    void preconditioner_solve(const DoubleVector &r, DoubleVector &z)
+    void preconditioner_solve(const DoubleVector& r, DoubleVector& z)
     {
       Solver.resolve(r, z);
     }

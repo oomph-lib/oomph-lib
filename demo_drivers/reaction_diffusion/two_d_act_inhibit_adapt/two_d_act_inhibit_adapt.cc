@@ -55,7 +55,7 @@ namespace GlobalVariables
   double A = -0.1;
 
   // Simple reaction kinetics
-  void activator_inhibitor_reaction(const Vector<double> &C, Vector<double> &R)
+  void activator_inhibitor_reaction(const Vector<double>& C, Vector<double>& R)
   {
     // Inhibitor loss is linearly proportional to concentrations of activator
     // and inhibitor
@@ -66,8 +66,8 @@ namespace GlobalVariables
   }
 
   /// Derivative of simple reaction kinetics
-  void activator_inhibitor_reaction_derivative(const Vector<double> &C,
-                                               DenseMatrix<double> &dRdC)
+  void activator_inhibitor_reaction_derivative(const Vector<double>& C,
+                                               DenseMatrix<double>& dRdC)
   {
     dRdC(0, 0) = 1.0;
     dRdC(0, 1) = 1.0;
@@ -102,14 +102,14 @@ public:
   void set_initial_condition();
 
   // Set the timestep
-  void timestep(const double &dt, const unsigned &nstep);
+  void timestep(const double& dt, const unsigned& nstep);
 
   /// \short Overloaded version of the problem's access function to
   /// the mesh. Recasts the pointer to the base Mesh object to
   /// the actual mesh type.
-  RefineableRectangularQuadMesh<ELEMENT> *mesh_pt()
+  RefineableRectangularQuadMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<RefineableRectangularQuadMesh<ELEMENT> *>(
+    return dynamic_cast<RefineableRectangularQuadMesh<ELEMENT>*>(
       Problem::mesh_pt());
   }
 
@@ -162,7 +162,7 @@ RefineableActivatorInhibitorProblem<
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    ELEMENT *elem_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* elem_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the timescales
     elem_pt->tau_pt() = &GlobalVariables::Tau;
@@ -202,7 +202,7 @@ void RefineableActivatorInhibitorProblem<ELEMENT>::set_initial_condition()
   for (unsigned n = 0; n < n_node; n++)
   {
     // Local pointer to the node
-    Node *nod_pt = mesh_pt()->node_pt(n);
+    Node* nod_pt = mesh_pt()->node_pt(n);
     // Get the absolute value of A
     double a13 = pow(std::abs(GlobalVariables::A), (1.0 / 3.0));
 
@@ -244,7 +244,7 @@ void RefineableActivatorInhibitorProblem<ELEMENT>::set_initial_condition()
 //===================================================================
 template<class ELEMENT>
 void RefineableActivatorInhibitorProblem<ELEMENT>::timestep(
-  const double &dt, const unsigned &nstep)
+  const double& dt, const unsigned& nstep)
 {
   // Set the problem's Dt for the inital condition bit
   Dt = dt;

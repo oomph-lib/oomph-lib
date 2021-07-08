@@ -62,19 +62,19 @@ namespace oomph
   //======================================================================
   template<class ELEMENT, class INTERFACE_ELEMENT>
   BrethertonSpineMesh<ELEMENT, INTERFACE_ELEMENT>::BrethertonSpineMesh(
-    const unsigned &nx1,
-    const unsigned &nx2,
-    const unsigned &nx3,
-    const unsigned &nh,
-    const unsigned &nhalf,
-    const double &h,
-    GeomObject *lower_wall_pt,
-    GeomObject *upper_wall_pt,
-    const double &zeta_start,
-    const double &zeta_transition_start,
-    const double &zeta_transition_end,
-    const double &zeta_end,
-    TimeStepper *time_stepper_pt) :
+    const unsigned& nx1,
+    const unsigned& nx2,
+    const unsigned& nx3,
+    const unsigned& nh,
+    const unsigned& nhalf,
+    const double& h,
+    GeomObject* lower_wall_pt,
+    GeomObject* upper_wall_pt,
+    const double& zeta_start,
+    const double& zeta_transition_start,
+    const double& zeta_transition_end,
+    const double& zeta_end,
+    TimeStepper* time_stepper_pt) :
     SingleLayerSpineMesh<ELEMENT>(
       2 * (nx1 + nx2 + nhalf), nh, 1.0, h, time_stepper_pt),
     Nx1(nx1),
@@ -120,8 +120,8 @@ namespace oomph
     Vector<double> zeta(1), s_lo(1), s_up(1);
     GeomObject *lower_sub_geom_object_pt = 0, *upper_sub_geom_object_pt = 0;
 
-    GeomObject *lower_transition_geom_object_pt = 0;
-    GeomObject *upper_transition_geom_object_pt = 0;
+    GeomObject* lower_transition_geom_object_pt = 0;
+    GeomObject* upper_transition_geom_object_pt = 0;
     Vector<double> s_transition_lo(1), s_transition_up(1);
     Vector<double> spine_centre(2);
 
@@ -160,7 +160,7 @@ namespace oomph
       {
         // Construct a new 1D line element on the face on which the local
         // coordinate 1 is fixed at its max. value (1) --- This is face 2
-        FiniteElement *interface_element_element_pt = new INTERFACE_ELEMENT(
+        FiniteElement* interface_element_element_pt = new INTERFACE_ELEMENT(
           this->finite_element_pt(n_x * (n_y - 1) + i), 2);
 
         // Push it back onto the stack
@@ -179,11 +179,11 @@ namespace oomph
     initial_element_reorder();
 
     // Store pointer to control element
-    Control_element_pt = dynamic_cast<ELEMENT *>(
+    Control_element_pt = dynamic_cast<ELEMENT*>(
       this->element_pt((nx1 + nx2 + nhalf) * (nh + 1) - 2));
 
     // Temporary storage for boundary lookup scheme
-    Vector<std::set<Node *>> set_boundary_node_pt(6);
+    Vector<std::set<Node*>> set_boundary_node_pt(6);
 
     // Boundary 1 -> 3; 2 -> 4; 3 -> 5
     for (unsigned ibound = 1; ibound <= 3; ibound++)
@@ -229,7 +229,7 @@ namespace oomph
           unsigned e = n_prev_elements + i * (nh + 1) + j;
 
           // Get pointer to element
-          FiniteElement *el_pt = this->finite_element_pt(e);
+          FiniteElement* el_pt = this->finite_element_pt(e);
 
           // Loop over its nodes
           for (unsigned i0 = 0; i0 < np; i0++)
@@ -240,7 +240,7 @@ namespace oomph
               unsigned n = i0 * np + i1;
 
               // Get spine node
-              SpineNode *nod_pt = dynamic_cast<SpineNode *>(el_pt->node_pt(n));
+              SpineNode* nod_pt = dynamic_cast<SpineNode*>(el_pt->node_pt(n));
 
               // Set update fct id
               nod_pt->node_update_fct_id() = 0;
@@ -266,7 +266,7 @@ namespace oomph
 
                 // The sub geom object is one (and only) geom object
                 // for spine:
-                Vector<GeomObject *> geom_object_pt(1);
+                Vector<GeomObject*> geom_object_pt(1);
                 geom_object_pt[0] = lower_sub_geom_object_pt;
 
                 // Pass geom object(s) to spine
@@ -328,7 +328,7 @@ namespace oomph
           unsigned e = n_prev_elements + i * (nh + 1) + j;
 
           // Get pointer to element
-          FiniteElement *el_pt = this->finite_element_pt(e);
+          FiniteElement* el_pt = this->finite_element_pt(e);
 
           // Loop over its nodes
           for (unsigned i0 = 0; i0 < np; i0++)
@@ -339,7 +339,7 @@ namespace oomph
               unsigned n = i0 * np + i1;
 
               // Get spine node
-              SpineNode *nod_pt = dynamic_cast<SpineNode *>(el_pt->node_pt(n));
+              SpineNode* nod_pt = dynamic_cast<SpineNode*>(el_pt->node_pt(n));
 
               // Set update id
               nod_pt->node_update_fct_id() = 1;
@@ -372,7 +372,7 @@ namespace oomph
 
                 // Lower sub geom object is one (and only) geom object
                 // for spine:
-                Vector<GeomObject *> geom_object_pt(3);
+                Vector<GeomObject*> geom_object_pt(3);
                 geom_object_pt[0] = lower_sub_geom_object_pt;
                 geom_object_pt[1] = lower_transition_geom_object_pt;
                 geom_object_pt[2] = upper_transition_geom_object_pt;
@@ -404,7 +404,7 @@ namespace oomph
           unsigned e = n_prev_elements + i * (nh + 1) + j;
 
           // Get pointer to element
-          FiniteElement *el_pt = this->finite_element_pt(e);
+          FiniteElement* el_pt = this->finite_element_pt(e);
 
           // Loop over its nodes
           for (unsigned i0 = 0; i0 < np; i0++)
@@ -415,7 +415,7 @@ namespace oomph
               unsigned n = i0 * np + i1;
 
               // Get spine node
-              SpineNode *nod_pt = dynamic_cast<SpineNode *>(el_pt->node_pt(n));
+              SpineNode* nod_pt = dynamic_cast<SpineNode*>(el_pt->node_pt(n));
 
               // Set update id
               nod_pt->node_update_fct_id() = 2;
@@ -465,7 +465,7 @@ namespace oomph
                 nod_pt->spine_pt()->height() = length - radius;
 
                 // Lower and Upper wall sub geom objects affect  spine:
-                Vector<GeomObject *> geom_object_pt(4);
+                Vector<GeomObject*> geom_object_pt(4);
                 geom_object_pt[0] = lower_sub_geom_object_pt;
                 geom_object_pt[1] = upper_sub_geom_object_pt;
                 geom_object_pt[2] = lower_transition_geom_object_pt;
@@ -498,7 +498,7 @@ namespace oomph
           unsigned e = n_prev_elements + i * (nh + 1) + j;
 
           // Get pointer to element
-          FiniteElement *el_pt = this->finite_element_pt(e);
+          FiniteElement* el_pt = this->finite_element_pt(e);
 
           // Loop over its nodes
           for (unsigned i0 = 0; i0 < np; i0++)
@@ -509,7 +509,7 @@ namespace oomph
               unsigned n = i0 * np + i1;
 
               // Get spine node
-              SpineNode *nod_pt = dynamic_cast<SpineNode *>(el_pt->node_pt(n));
+              SpineNode* nod_pt = dynamic_cast<SpineNode*>(el_pt->node_pt(n));
 
               // Set update id
               nod_pt->node_update_fct_id() = 3;
@@ -559,7 +559,7 @@ namespace oomph
                 nod_pt->spine_pt()->height() = length - radius;
 
                 // Upper and Lower wall geom objects affect spine
-                Vector<GeomObject *> geom_object_pt(4);
+                Vector<GeomObject*> geom_object_pt(4);
                 geom_object_pt[0] = lower_sub_geom_object_pt;
                 geom_object_pt[1] = upper_sub_geom_object_pt;
                 geom_object_pt[2] = lower_transition_geom_object_pt;
@@ -599,7 +599,7 @@ namespace oomph
           unsigned e = n_prev_elements + i * (nh + 1) + j;
 
           // Get pointer to element
-          FiniteElement *el_pt = this->finite_element_pt(e);
+          FiniteElement* el_pt = this->finite_element_pt(e);
 
           // Loop over its nodes
           for (unsigned i0 = 0; i0 < np; i0++)
@@ -610,7 +610,7 @@ namespace oomph
               unsigned n = i0 * np + i1;
 
               // Get spine node
-              SpineNode *nod_pt = dynamic_cast<SpineNode *>(el_pt->node_pt(n));
+              SpineNode* nod_pt = dynamic_cast<SpineNode*>(el_pt->node_pt(n));
 
               // Set update id
               nod_pt->node_update_fct_id() = 4;
@@ -643,7 +643,7 @@ namespace oomph
 
                 // upper wall sub geom object is one (and only) geom object
                 // for spine:
-                Vector<GeomObject *> geom_object_pt(3);
+                Vector<GeomObject*> geom_object_pt(3);
                 geom_object_pt[0] = upper_sub_geom_object_pt;
                 geom_object_pt[1] = lower_transition_geom_object_pt;
                 geom_object_pt[2] = upper_transition_geom_object_pt;
@@ -683,7 +683,7 @@ namespace oomph
           unsigned e = n_prev_elements + i * (nh + 1) + j;
 
           // Get pointer to element
-          FiniteElement *el_pt = this->finite_element_pt(e);
+          FiniteElement* el_pt = this->finite_element_pt(e);
 
           // Loop over its nodes
           for (unsigned i0 = 0; i0 < np; i0++)
@@ -694,7 +694,7 @@ namespace oomph
               unsigned n = i0 * np + i1;
 
               // Get spine node
-              SpineNode *nod_pt = dynamic_cast<SpineNode *>(el_pt->node_pt(n));
+              SpineNode* nod_pt = dynamic_cast<SpineNode*>(el_pt->node_pt(n));
 
               // Set update id
               nod_pt->node_update_fct_id() = 5;
@@ -717,7 +717,7 @@ namespace oomph
 
                 // upper sub geom object is one (and only) geom object
                 // for spine:
-                Vector<GeomObject *> geom_object_pt(1);
+                Vector<GeomObject*> geom_object_pt(1);
                 geom_object_pt[0] = upper_sub_geom_object_pt;
 
                 // Pass geom object(s) to spine
@@ -739,7 +739,7 @@ namespace oomph
     // Copy from sets to vectors
     for (unsigned ibound = 0; ibound < 6; ibound++)
     {
-      typedef std::set<Node *>::iterator IT;
+      typedef std::set<Node*>::iterator IT;
       for (IT it = set_boundary_node_pt[ibound].begin();
            it != set_boundary_node_pt[ibound].end();
            it++)
@@ -765,7 +765,7 @@ namespace oomph
 
     // Build a temporary version of a SimpleRectangularQuadMesh as
     // a unit square
-    SimpleRectangularQuadMesh<ELEMENT> *aux_mesh_pt =
+    SimpleRectangularQuadMesh<ELEMENT>* aux_mesh_pt =
       new SimpleRectangularQuadMesh<ELEMENT>(
         Nx3, 2 * nhalf, 1.0, 1.0, time_stepper_pt);
 
@@ -775,7 +775,7 @@ namespace oomph
     // Copy all nodes in the auxiliary mesh into a set (from where they
     // can easily be removed)
     nnod = aux_mesh_pt->nnode();
-    std::set<Node *> aux_node_pt;
+    std::set<Node*> aux_node_pt;
     for (unsigned i = 0; i < nnod; i++)
     {
       aux_node_pt.insert(aux_mesh_pt->node_pt(i));
@@ -790,7 +790,7 @@ namespace oomph
     // Loop over elements
     for (unsigned e = 0; e < 2 * nhalf; e++)
     {
-      FiniteElement *el_pt = aux_mesh_pt->finite_element_pt(e * Nx3);
+      FiniteElement* el_pt = aux_mesh_pt->finite_element_pt(e * Nx3);
       // Loop over first column of nodes
       for (unsigned i = 0; i < np; i++)
       {
@@ -812,7 +812,7 @@ namespace oomph
 
     // Now add all the remaining nodes in the auxiliary mesh
     // to the actual one
-    typedef std::set<Node *>::iterator IT;
+    typedef std::set<Node*>::iterator IT;
     for (IT it = aux_node_pt.begin(); it != aux_node_pt.end(); it++)
     {
       this->Node_pt.push_back(*it);
@@ -840,12 +840,12 @@ namespace oomph
     // Element 0
     // Node 0
     // Assign the new spine with unit height (pinned dummy -- never used)
-    Spine *new_spine_pt = new Spine(1.0);
+    Spine* new_spine_pt = new Spine(1.0);
     this->Spine_pt.push_back(new_spine_pt);
     new_spine_pt->spine_height_pt()->pin(0);
 
     // Get pointer to node
-    SpineNode *nod_pt = this->element_node_pt(nelement_orig + 0, 0);
+    SpineNode* nod_pt = this->element_node_pt(nelement_orig + 0, 0);
     // Set the pointer to node
     nod_pt->spine_pt() = new_spine_pt;
     // Set the fraction
@@ -872,7 +872,7 @@ namespace oomph
 
     // Lower and upper wall sub geom objects affect update
     // for spine:
-    Vector<GeomObject *> geom_object_pt(2);
+    Vector<GeomObject*> geom_object_pt(2);
     geom_object_pt[0] = lower_sub_geom_object_pt;
     geom_object_pt[1] = upper_sub_geom_object_pt;
 
@@ -887,7 +887,7 @@ namespace oomph
       for (unsigned l1 = 1; l1 < np; l1++)
       {
         // Get pointer to node
-        SpineNode *nod_pt =
+        SpineNode* nod_pt =
           this->element_node_pt(nelement_orig + i * Nx3, l1 * np);
         // Set the pointer to the spine
         nod_pt->spine_pt() = new_spine_pt;
@@ -917,7 +917,7 @@ namespace oomph
         new_spine_pt->spine_height_pt()->pin(0);
 
         // Get the node
-        SpineNode *nod_pt = this->element_node_pt(nelement_orig + j, l2);
+        SpineNode* nod_pt = this->element_node_pt(nelement_orig + j, l2);
         // Set the pointer to the spine
         nod_pt->spine_pt() = new_spine_pt;
         // Set the fraction
@@ -956,7 +956,7 @@ namespace oomph
 
         // Lower and upper sub geom objects affect update
         // for spine:
-        Vector<GeomObject *> geom_object_pt(2);
+        Vector<GeomObject*> geom_object_pt(2);
         geom_object_pt[0] = lower_sub_geom_object_pt;
         geom_object_pt[1] = upper_sub_geom_object_pt;
 
@@ -971,7 +971,7 @@ namespace oomph
           for (unsigned l1 = 1; l1 < np; l1++)
           {
             // Get node
-            SpineNode *nod_pt =
+            SpineNode* nod_pt =
               this->element_node_pt(nelement_orig + i * Nx3 + j, l1 * np + l2);
             // Set the pointer to the spine
             nod_pt->spine_pt() = new_spine_pt;
@@ -1029,7 +1029,7 @@ namespace oomph
     // Find out how many fluid elements there are
     unsigned long Nfluid = Nx * Ny;
     // Create a dummy array of elements
-    Vector<FiniteElement *> dummy;
+    Vector<FiniteElement*> dummy;
 
     // Loop over the elements in horizontal order
     for (unsigned long j = 0; j < Nx; j++)
@@ -1058,10 +1058,10 @@ namespace oomph
   //=======================================================================
   template<class ELEMENT, class INTERFACE_ELEMENT>
   double BrethertonSpineMesh<ELEMENT, INTERFACE_ELEMENT>::
-    find_distance_to_free_surface(GeomObject *const &fs_geom_object_pt,
-                                  Vector<double> &initial_zeta,
-                                  const Vector<double> &spine_base,
-                                  const Vector<double> &spine_end)
+    find_distance_to_free_surface(GeomObject* const& fs_geom_object_pt,
+                                  Vector<double>& initial_zeta,
+                                  const Vector<double>& spine_base,
+                                  const Vector<double>& spine_end)
   {
     // Now we need to find the intersection points
     double lambda = 0.5;
@@ -1150,13 +1150,13 @@ namespace oomph
   //=======================================================================
   template<class ELEMENT, class INTERFACE_ELEMENT>
   void BrethertonSpineMesh<ELEMENT, INTERFACE_ELEMENT>::reposition_spines(
-    const double &zeta_lo_transition_start,
-    const double &zeta_lo_transition_end,
-    const double &zeta_up_transition_start,
-    const double &zeta_up_transition_end)
+    const double& zeta_lo_transition_start,
+    const double& zeta_lo_transition_end,
+    const double& zeta_up_transition_start,
+    const double& zeta_up_transition_end)
   {
     // Firstly create a geometric object of the free surface
-    Mesh *fs_mesh_pt = new Mesh;
+    Mesh* fs_mesh_pt = new Mesh;
     this->template build_face_mesh<ELEMENT, FaceElementAsGeomObject>(
       4, fs_mesh_pt);
 
@@ -1167,15 +1167,14 @@ namespace oomph
     for (unsigned e = 0; e < n_face_element; e++)
     {
       // Cast the element pointer to the correct thing!
-      dynamic_cast<FaceElementAsGeomObject<ELEMENT> *>(
-        fs_mesh_pt->element_pt(e))
+      dynamic_cast<FaceElementAsGeomObject<ELEMENT>*>(fs_mesh_pt->element_pt(e))
         ->set_boundary_number_in_bulk_mesh(4);
     }
 
     // Now make a single geometric object that represents the collection of
     // geometric objects that form the boundary of the bulk mesh. Two
     // Eulerian coordinates, one intrinsic coordinate.
-    MeshAsGeomObject *fs_geom_object_pt = new MeshAsGeomObject(fs_mesh_pt);
+    MeshAsGeomObject* fs_geom_object_pt = new MeshAsGeomObject(fs_mesh_pt);
 
     // Length of deposited film region
     double llayer_lower = zeta_lo_transition_start - Zeta_start;
@@ -1190,8 +1189,8 @@ namespace oomph
     Vector<double> zeta(1), s_lo(1), s_up(1);
     GeomObject *lower_sub_geom_object_pt = 0, *upper_sub_geom_object_pt = 0;
 
-    GeomObject *lower_transition_geom_object_pt = 0;
-    GeomObject *upper_transition_geom_object_pt = 0;
+    GeomObject* lower_transition_geom_object_pt = 0;
+    GeomObject* upper_transition_geom_object_pt = 0;
     Vector<double> s_transition_lo(1), s_transition_up(1);
     Vector<double> spine_centre(2);
 
@@ -1250,13 +1249,13 @@ namespace oomph
         unsigned e = n_prev_elements + i * (Nh + 1);
 
         // Get pointer to lower element
-        FiniteElement *el_pt = this->finite_element_pt(e);
+        FiniteElement* el_pt = this->finite_element_pt(e);
 
         // Loop over its nodes "horizontally"
         for (unsigned i1 = 0; i1 < (np - 1); i1++)
         {
           // Get spine node
-          SpineNode *nod_pt = dynamic_cast<SpineNode *>(el_pt->node_pt(i1));
+          SpineNode* nod_pt = dynamic_cast<SpineNode*>(el_pt->node_pt(i1));
 
           // Get the Lagrangian coordinate in the Lower Wall
           zeta[0] = zeta_lo + double(i1) * dzeta_node;
@@ -1273,7 +1272,7 @@ namespace oomph
 
           // The sub geom object is one (and only) geom object
           // for spine:
-          Vector<GeomObject *> geom_object_pt(1);
+          Vector<GeomObject*> geom_object_pt(1);
           geom_object_pt[0] = lower_sub_geom_object_pt;
 
           // Pass geom object(s) to spine
@@ -1311,13 +1310,13 @@ namespace oomph
         unsigned e = n_prev_elements + i * (Nh + 1);
 
         // Get pointer to element
-        FiniteElement *el_pt = this->finite_element_pt(e);
+        FiniteElement* el_pt = this->finite_element_pt(e);
 
         // Loop over its nodes
         for (unsigned i1 = 0; i1 < (np - 1); i1++)
         {
           // Get spine node
-          SpineNode *nod_pt = dynamic_cast<SpineNode *>(el_pt->node_pt(i1));
+          SpineNode* nod_pt = dynamic_cast<SpineNode*>(el_pt->node_pt(i1));
 
           // Get the Lagrangian coordinate in the Lower Wall
           zeta[0] = zeta_lo + double(i1) * dzeta_node;
@@ -1335,7 +1334,7 @@ namespace oomph
 
           // Lower sub geom object is one (and only) geom object
           // for spine:
-          Vector<GeomObject *> geom_object_pt(3);
+          Vector<GeomObject*> geom_object_pt(3);
           geom_object_pt[0] = lower_sub_geom_object_pt;
           geom_object_pt[1] = lower_transition_geom_object_pt;
           geom_object_pt[2] = upper_transition_geom_object_pt;
@@ -1365,7 +1364,7 @@ namespace oomph
         unsigned e = n_prev_elements + i * (Nh + 1);
 
         // Get pointer to element
-        FiniteElement *el_pt = this->finite_element_pt(e);
+        FiniteElement* el_pt = this->finite_element_pt(e);
 
         // Loop over its nodes
         for (unsigned i1 = 0; i1 < (np - 1); i1++)
@@ -1374,8 +1373,7 @@ namespace oomph
           // Note that I have to loop over the second row of nodes
           // because the first row are updated in region 6 and so
           // you get the wrong spines from them (doh!)
-          SpineNode *nod_pt =
-            dynamic_cast<SpineNode *>(el_pt->node_pt(np + i1));
+          SpineNode* nod_pt = dynamic_cast<SpineNode*>(el_pt->node_pt(np + i1));
 
           // Get position vectors to wall
           zeta[0] = zeta_lo_transition_end;
@@ -1408,7 +1406,7 @@ namespace oomph
             r_wall_lo[1] + vertical_fraction * (r_wall_up[1] - r_wall_lo[1]);
 
           // Lower and Upper wall sub geom objects affect  spine:
-          Vector<GeomObject *> geom_object_pt(4);
+          Vector<GeomObject*> geom_object_pt(4);
           geom_object_pt[0] = lower_sub_geom_object_pt;
           geom_object_pt[1] = upper_sub_geom_object_pt;
           geom_object_pt[2] = lower_transition_geom_object_pt;
@@ -1437,7 +1435,7 @@ namespace oomph
         unsigned e = n_prev_elements + i * (Nh + 1);
 
         // Get pointer to element
-        FiniteElement *el_pt = this->finite_element_pt(e);
+        FiniteElement* el_pt = this->finite_element_pt(e);
 
         // Loop over its nodes
         for (unsigned i1 = 0; i1 < (np - 1); i1++)
@@ -1446,8 +1444,7 @@ namespace oomph
           // Note that I have to loop over the second row of nodes
           // because the first row are updated in region 6 and so
           // you get the wrong spines from them (doh!)
-          SpineNode *nod_pt =
-            dynamic_cast<SpineNode *>(el_pt->node_pt(np + i1));
+          SpineNode* nod_pt = dynamic_cast<SpineNode*>(el_pt->node_pt(np + i1));
 
           // Get position vectors to wall
           zeta[0] = zeta_lo_transition_end;
@@ -1481,7 +1478,7 @@ namespace oomph
             r_wall_lo[1] + vertical_fraction * (r_wall_up[1] - r_wall_lo[1]);
 
           // Lower and Upper wall sub geom objects affect  spine:
-          Vector<GeomObject *> geom_object_pt(4);
+          Vector<GeomObject*> geom_object_pt(4);
           geom_object_pt[0] = lower_sub_geom_object_pt;
           geom_object_pt[1] = upper_sub_geom_object_pt;
           geom_object_pt[2] = lower_transition_geom_object_pt;
@@ -1518,14 +1515,13 @@ namespace oomph
         unsigned e = n_prev_elements + i * (Nh + 1);
 
         // Get pointer to element
-        FiniteElement *el_pt = this->finite_element_pt(e);
+        FiniteElement* el_pt = this->finite_element_pt(e);
 
         // Loop over its nodes
         for (unsigned i1 = 0; i1 < (np - 1); i1++)
         {
           // Get spine node (same comment)
-          SpineNode *nod_pt =
-            dynamic_cast<SpineNode *>(el_pt->node_pt(np + i1));
+          SpineNode* nod_pt = dynamic_cast<SpineNode*>(el_pt->node_pt(np + i1));
 
           // Get the Lagrangian coordinate in the Lower Wall
           zeta[0] = zeta_lo - double(i1) * dzeta_node;
@@ -1543,7 +1539,7 @@ namespace oomph
 
           // Lower sub geom object is one (and only) geom object
           // for spine:
-          Vector<GeomObject *> geom_object_pt(3);
+          Vector<GeomObject*> geom_object_pt(3);
           geom_object_pt[0] = upper_sub_geom_object_pt;
           geom_object_pt[1] = lower_transition_geom_object_pt;
           geom_object_pt[2] = upper_transition_geom_object_pt;
@@ -1581,13 +1577,13 @@ namespace oomph
         unsigned e = n_prev_elements + i * (Nh + 1);
 
         // Get pointer to element
-        FiniteElement *el_pt = this->finite_element_pt(e);
+        FiniteElement* el_pt = this->finite_element_pt(e);
 
         // Loop over its nodes "horizontally"
         for (unsigned i1 = 0; i1 < (np - 1); i1++)
         {
           // Get spine node
-          SpineNode *nod_pt = dynamic_cast<SpineNode *>(el_pt->node_pt(i1));
+          SpineNode* nod_pt = dynamic_cast<SpineNode*>(el_pt->node_pt(i1));
 
           // Get the Lagrangian coordinate in the Upper wall
           zeta[0] = zeta_lo - double(i1) * dzeta_node;
@@ -1602,7 +1598,7 @@ namespace oomph
 
           // upper sub geom object is one (and only) geom object
           // for spine:
-          Vector<GeomObject *> geom_object_pt(1);
+          Vector<GeomObject*> geom_object_pt(1);
           geom_object_pt[0] = upper_sub_geom_object_pt;
 
           // Pass geom object(s) to spine
@@ -1627,7 +1623,7 @@ namespace oomph
       unsigned e = n_prev_elements;
 
       // Get pointer to node
-      SpineNode *nod_pt = this->element_node_pt(e, 0);
+      SpineNode* nod_pt = this->element_node_pt(e, 0);
 
       // Need to get the local coordinates for the upper and lower wall
       zeta[0] = zeta_lo_transition_end;
@@ -1647,7 +1643,7 @@ namespace oomph
 
       // Lower and upper wall sub geom objects affect update
       // for spine:
-      Vector<GeomObject *> geom_object_pt(2);
+      Vector<GeomObject*> geom_object_pt(2);
       geom_object_pt[0] = lower_sub_geom_object_pt;
       geom_object_pt[1] = upper_sub_geom_object_pt;
 
@@ -1667,7 +1663,7 @@ namespace oomph
         for (unsigned l2 = 0; l2 < np; l2++)
         {
           // Get pointer to node at the base of the spine
-          SpineNode *nod_pt = this->element_node_pt(e, l2);
+          SpineNode* nod_pt = this->element_node_pt(e, l2);
 
           // Increment in wall coordinate
           double dzeta_el_lower =
@@ -1705,7 +1701,7 @@ namespace oomph
 
           // Lower and upper sub geom objects affect update
           // for spine:
-          Vector<GeomObject *> geom_object_pt(2);
+          Vector<GeomObject*> geom_object_pt(2);
           geom_object_pt[0] = lower_sub_geom_object_pt;
           geom_object_pt[1] = upper_sub_geom_object_pt;
 

@@ -43,8 +43,8 @@ namespace oomph
   {
   public:
     /// Constructor
-    IMRODEElement(TimeStepper *time_stepper_pt,
-                  SolutionFunctorBase *exact_solution_pt) :
+    IMRODEElement(TimeStepper* time_stepper_pt,
+                  SolutionFunctorBase* exact_solution_pt) :
       ODEElement(time_stepper_pt, exact_solution_pt)
     {
     }
@@ -58,10 +58,10 @@ namespace oomph
     Vector<double> time_interpolate_u() const
     {
       // Get pointer to one-and-only internal data object
-      Data *dat_pt = internal_data_pt(0);
+      Data* dat_pt = internal_data_pt(0);
 
       // Get time stepper
-      TimeStepper *ts_pt = dat_pt->time_stepper_pt();
+      TimeStepper* ts_pt = dat_pt->time_stepper_pt();
 
       // Number of history values to interpolate over for value/time calculation
       const unsigned nj = ts_pt->nprev_values_for_value_at_evaluation_time();
@@ -84,10 +84,10 @@ namespace oomph
     double time_interpolate_time() const
     {
       // Get pointer to one-and-only internal data object
-      Data *dat_pt = internal_data_pt(0);
+      Data* dat_pt = internal_data_pt(0);
 
       // Get time stepper
-      TimeStepper *ts_pt = dat_pt->time_stepper_pt();
+      TimeStepper* ts_pt = dat_pt->time_stepper_pt();
 
       // Number of history values to interpolate over for value/time calculation
       const unsigned nj = ts_pt->nprev_values_for_value_at_evaluation_time();
@@ -104,13 +104,13 @@ namespace oomph
     /// Modified get residuals: have to interpolate in time for IMR when
     /// using the IMR implementation so we can't use the normal
     /// ODE element implementation.
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Get pointer to one-and-only internal data object
-      Data *dat_pt = internal_data_pt(0);
+      Data* dat_pt = internal_data_pt(0);
 
       // Get time stepper
-      TimeStepper *ts_pt = dat_pt->time_stepper_pt();
+      TimeStepper* ts_pt = dat_pt->time_stepper_pt();
 
       // Get values **interpolated in time**
       Vector<double> u = time_interpolate_u();
@@ -137,8 +137,8 @@ namespace oomph
     /// 2) The interpolation in time within the residual calculation modifies
     /// the Jacobian (because the jacobian is the derivative w.r.t. the
     /// n+1-th values).
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       // Get residuals
       fill_in_contribution_to_residuals(residuals);
@@ -146,7 +146,7 @@ namespace oomph
       if (Exact_solution_pt->have_jacobian() && !Use_fd_jacobian)
       {
         const unsigned n = nvalue();
-        TimeStepper *ts_pt = internal_data_pt(0)->time_stepper_pt();
+        TimeStepper* ts_pt = internal_data_pt(0)->time_stepper_pt();
 
         // Get values **interpolated in time**
         Vector<double> u = time_interpolate_u();
@@ -191,7 +191,7 @@ namespace oomph
 
   private:
     /// Broken copy constructor
-    IMRODEElement(const IMRODEElement &dummy)
+    IMRODEElement(const IMRODEElement& dummy)
     {
       BrokenCopy::broken_copy("IMRODEElement");
     }

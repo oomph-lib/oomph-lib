@@ -209,7 +209,7 @@ namespace oomph
 
     /// Broken copy constructor
     PressureBasedSolidLSCPreconditioner(
-      const PressureBasedSolidLSCPreconditioner &)
+      const PressureBasedSolidLSCPreconditioner&)
     {
       BrokenCopy::broken_copy("PressureBasedSolidLSCPreconditioner");
     }
@@ -229,12 +229,12 @@ namespace oomph
     void setup();
 
     /// Apply preconditioner to Vector r
-    void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+    void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
     /// specify the mesh containing the mesh containing the
     /// block-preconditionable solid elements. The dimension of the
     /// problem must also be specified.
-    void set_solid_mesh(Mesh *mesh_pt)
+    void set_solid_mesh(Mesh* mesh_pt)
     {
       Solid_mesh_pt = mesh_pt;
     }
@@ -261,7 +261,7 @@ namespace oomph
     }
 
     /// Function to set a new pressure matrix preconditioner (inexact solver)
-    void set_p_preconditioner(Preconditioner *new_p_preconditioner_pt)
+    void set_p_preconditioner(Preconditioner* new_p_preconditioner_pt)
     {
       // If the default preconditioner has been used
       // clean it up now...
@@ -285,7 +285,7 @@ namespace oomph
     }
 
     /// Function to set a new momentum matrix preconditioner (inexact solver)
-    void set_f_preconditioner(Preconditioner *new_f_preconditioner_pt)
+    void set_f_preconditioner(Preconditioner* new_f_preconditioner_pt)
     {
       // If the default preconditioner has been used
       // clean it up now...
@@ -351,10 +351,10 @@ namespace oomph
     // Pointers to preconditioner (=inexact solver) objects
     // -----------------------------------------------------
     /// Pointer to the 'preconditioner' for the pressure matrix
-    Preconditioner *P_preconditioner_pt;
+    Preconditioner* P_preconditioner_pt;
 
     /// Pointer to the 'preconditioner' for the F matrix
-    Preconditioner *F_preconditioner_pt;
+    Preconditioner* F_preconditioner_pt;
 
     /// flag indicating whether the default F preconditioner is used
     bool Using_default_f_preconditioner;
@@ -374,7 +374,7 @@ namespace oomph
     /// Helper function to assemble the diagonal of the
     /// mass matrix from the elemental contributions defined in
     /// PressureBasedSolidEquations<DIM>::get_mass_matrix_diagonal(...).
-    CRDoubleMatrix *assemble_mass_matrix_diagonal();
+    CRDoubleMatrix* assemble_mass_matrix_diagonal();
 
     /// \short Boolean indicating whether the momentum system preconditioner
     /// is a block preconditioner
@@ -384,16 +384,16 @@ namespace oomph
     bool Doc_time;
 
     /// MatrixVectorProduct operator for F if BFBt is not to be formed.
-    MatrixVectorProduct *F_mat_vec_pt;
+    MatrixVectorProduct* F_mat_vec_pt;
 
     /// MatrixVectorProduct operator for QBt if BFBt is not to be formed.
-    MatrixVectorProduct *QBt_mat_vec_pt;
+    MatrixVectorProduct* QBt_mat_vec_pt;
 
     /// MatrixVectorProduct operator for Bt;
-    MatrixVectorProduct *Bt_mat_vec_pt;
+    MatrixVectorProduct* Bt_mat_vec_pt;
 
     /// MatrixVectorProduct operator for E (BFBt) if BFBt is to be formed.
-    MatrixVectorProduct *E_mat_vec_pt;
+    MatrixVectorProduct* E_mat_vec_pt;
 
     /// \short indicates whether BFBt should be formed or the component matrices
     /// should be retained.
@@ -411,7 +411,7 @@ namespace oomph
 
     /// \short the pointer to the mesh of block preconditionable solid
     /// elements.
-    Mesh *Solid_mesh_pt;
+    Mesh* Solid_mesh_pt;
   };
 
   ///////////////////////////////////////////////////////////////////////////////
@@ -439,7 +439,7 @@ namespace oomph
 
     /// Broken copy constructor
     PressureBasedSolidExactPreconditioner(
-      const PressureBasedSolidExactPreconditioner &)
+      const PressureBasedSolidExactPreconditioner&)
     {
       BrokenCopy::broken_copy("PressureBasedSolidExactPreconditioner");
     }
@@ -454,7 +454,7 @@ namespace oomph
     void setup();
 
     /// Apply preconditioner to r
-    void preconditioner_solve(const Vector<double> &r, Vector<double> &z);
+    void preconditioner_solve(const Vector<double>& r, Vector<double>& z);
 
   protected:
     /// Preconditioner matrix

@@ -60,7 +60,7 @@ class ABCElement :
   public virtual PeriodicOrbitBaseElement
 {
   // Pointer to vector of physical variables
-  Vector<double> *P_pt;
+  Vector<double>* P_pt;
 
   unsigned Internal_index;
 
@@ -73,19 +73,19 @@ public:
   // Switch for previous data
 
   // Contruct the internal data
-  void construct_internal_data(TimeStepper *const &time_stepper_pt)
+  void construct_internal_data(TimeStepper* const& time_stepper_pt)
   {
     Internal_index = this->add_internal_data(new Data(time_stepper_pt, 3));
   }
 
   // Interface to the parameter
-  inline const double &p(const unsigned &i) const
+  inline const double& p(const unsigned& i) const
   {
     return (*P_pt)[i];
   }
 
   // Set the pointer
-  Vector<double> *&p_pt()
+  Vector<double>*& p_pt()
   {
     return P_pt;
   }
@@ -93,7 +93,7 @@ public:
   /// Switch
 
   /// Interface to get the current value of all (internal and shared) unknowns
-  void get_non_external_dofs(Vector<double> &u)
+  void get_non_external_dofs(Vector<double>& u)
   {
     Vector<double> val(3);
     internal_data_pt(Internal_index)
@@ -109,7 +109,7 @@ public:
 
   /// Interface to get the current value of the time derivative of
   /// all (internal and shared) unknowns
-  void get_non_external_ddofs_dt(Vector<double> &du_dt)
+  void get_non_external_ddofs_dt(Vector<double>& du_dt)
   {
     Vector<double> dval_dt(3);
     internal_data_pt(Internal_index)
@@ -124,7 +124,7 @@ public:
   }
 
   /// Get the inner product matrix
-  void get_inner_product_matrix(DenseMatrix<double> &inner_product)
+  void get_inner_product_matrix(DenseMatrix<double>& inner_product)
   {
     inner_product.initialise(0.0);
     for (unsigned i = 0; i < 3; i++)
@@ -134,7 +134,7 @@ public:
   }
 
   /// Add the element's contribution to its residual vector (wrapper)
-  void fill_in_contribution_to_residuals(Vector<double> &residuals)
+  void fill_in_contribution_to_residuals(Vector<double>& residuals)
   {
     // Call the generic residuals function with flag set to 0
     // using a dummy matrix arguments
@@ -146,8 +146,8 @@ public:
 
   /// Add the element's contribution to its residual vector and
   /// element Jacobian matrix (wrapper)
-  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                        DenseMatrix<double> &jacobian)
+  void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                        DenseMatrix<double>& jacobian)
   {
     // Call the generic routine with the flag set to 1
     fill_in_generic_residual_contribution(
@@ -157,9 +157,9 @@ public:
   /// Add the element's contribution to its residuals vector,
   /// jacobian matrix and mass matrix
   void fill_in_contribution_to_jacobian_and_mass_matrix(
-    Vector<double> &residuals,
-    DenseMatrix<double> &jacobian,
-    DenseMatrix<double> &mass_matrix)
+    Vector<double>& residuals,
+    DenseMatrix<double>& jacobian,
+    DenseMatrix<double>& mass_matrix)
   {
     // Call the generic routine with the flag set to 2
     fill_in_generic_residual_contribution(residuals, jacobian, mass_matrix, 2);
@@ -167,9 +167,9 @@ public:
 
   /// \short Calculate the elemental contributions to the global
   /// residual vector for the weak form of the Poisson equation
-  void fill_in_generic_residual_contribution(Vector<double> &residuals,
-                                             DenseMatrix<double> &jacobian,
-                                             DenseMatrix<double> &mass_matrix,
+  void fill_in_generic_residual_contribution(Vector<double>& residuals,
+                                             DenseMatrix<double>& jacobian,
+                                             DenseMatrix<double>& mass_matrix,
                                              unsigned flag)
   {
     // Set the mass matrix
@@ -285,7 +285,7 @@ public:
   } // End of function
 
   // Define an output function for the element
-  void output(ostream &output)
+  void output(ostream& output)
   {
     for (unsigned n = 0; n < 3; n++)
     {
@@ -295,9 +295,9 @@ public:
   } // End of function
 
   // Ouput for spacetime problem
-  void spacetime_output(std::ostream &outfile,
-                        const unsigned &Nplot,
-                        const double &time = 0.0)
+  void spacetime_output(std::ostream& outfile,
+                        const unsigned& Nplot,
+                        const double& time = 0.0)
   {
     outfile << time << " ";
 
@@ -336,7 +336,7 @@ public:
   ABCProblem();
 
   /// Make a copy for using in bifurcation tracking
-  Problem *make_copy()
+  Problem* make_copy()
   {
     // Make a copy based on the current parameters
     return (new ABCProblem());
@@ -364,7 +364,7 @@ ABCProblem<ELEMENT, TIMESTEPPER>::ABCProblem()
   Problem::mesh_pt() = new Mesh;
 
   // Single element
-  ELEMENT *elem_pt = new ELEMENT;
+  ELEMENT* elem_pt = new ELEMENT;
   // Create the internal data
   elem_pt->construct_internal_data(this->time_stepper_pt());
   // Add the element to the mesh
@@ -451,7 +451,7 @@ void ABCProblem<ELEMENT, TIMESTEPPER>::solve()
   // Find out how many time points we'd want
   Vector<double> time_point;
   {
-    Mesh *temp_mesh_pt =
+    Mesh* temp_mesh_pt =
       new OneDMesh<QSpectralElement<1, 7>>(n_time_element, 1.0);
     const unsigned n_node = temp_mesh_pt->nnode();
     time_point.resize(n_node);
@@ -531,11 +531,11 @@ void ABCProblem<ELEMENT, TIMESTEPPER>::solve()
 
   // Output
   std::ofstream junk("first_orbit.dat");
-  dynamic_cast<PeriodicOrbitAssemblyHandler<7> *>(assembly_handler_pt())
+  dynamic_cast<PeriodicOrbitAssemblyHandler<7>*>(assembly_handler_pt())
     ->orbit_output(junk, 5);
   junk.close();
 
-  dynamic_cast<PeriodicOrbitAssemblyHandler<7> *>(assembly_handler_pt())
+  dynamic_cast<PeriodicOrbitAssemblyHandler<7>*>(assembly_handler_pt())
     ->set_previous_dofs_to_current_dofs();
 
   std::ofstream orbit_trace("orbit_trace.dat");
@@ -553,14 +553,14 @@ void ABCProblem<ELEMENT, TIMESTEPPER>::solve()
     std::cout << "Taking ds " << ds << "\n";
     ds = this->arc_length_step_solve(&Global_Physical_Variables::P[0], ds);
 
-    dynamic_cast<PeriodicOrbitAssemblyHandler<7> *>(assembly_handler_pt())
+    dynamic_cast<PeriodicOrbitAssemblyHandler<7>*>(assembly_handler_pt())
       ->set_previous_dofs_to_current_dofs();
     sprintf(filename,
             "orbit%g_%g.dat",
             Global_Physical_Variables::P[0],
             1.0 / this->dof(this->ndof() - 1));
     std::ofstream crap(filename);
-    dynamic_cast<PeriodicOrbitAssemblyHandler<7> *>(assembly_handler_pt())
+    dynamic_cast<PeriodicOrbitAssemblyHandler<7>*>(assembly_handler_pt())
       ->orbit_output(crap, 5);
     crap.close();
     orbit_trace

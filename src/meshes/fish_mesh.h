@@ -59,13 +59,13 @@ namespace oomph
   public:
     /// \short Constructor: Pass pointer to timestepper
     /// (defaults to the (Steady) default timestepper defined in Mesh)
-    FishMesh(TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper);
+    FishMesh(TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
     /// \short Constructor: Pass pointer GeomObject that defines
     /// the fish's back and pointer to timestepper
     /// (defaults to the (Steady) default timestepper defined in Mesh)
-    FishMesh(GeomObject *back_pt,
-             TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper);
+    FishMesh(GeomObject* back_pt,
+             TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
     /// \short Destructor: Kill the geom object that represents the fish's back
     /// (if necessary)
@@ -79,13 +79,13 @@ namespace oomph
     }
 
     /// Access function to geom object that represents the fish's back
-    GeomObject *&fish_back_pt()
+    GeomObject*& fish_back_pt()
     {
       return Back_pt;
     }
 
     /// Access function to FishDomain
-    FishDomain *&domain_pt()
+    FishDomain*& domain_pt()
     {
       return Domain_pt;
     }
@@ -101,13 +101,13 @@ namespace oomph
     };
 
     /// \short Build the mesh, using the geometric object identified by Back_pt
-    void build_mesh(TimeStepper *time_stepper_pt);
+    void build_mesh(TimeStepper* time_stepper_pt);
 
     /// Pointer to fish back
-    GeomObject *Back_pt;
+    GeomObject* Back_pt;
 
     /// Pointer to domain
-    FishDomain *Domain_pt;
+    FishDomain* Domain_pt;
 
     /// Do I need to kill the fish back geom object?
     bool Must_kill_fish_back;
@@ -132,7 +132,7 @@ namespace oomph
     /// \short Constructor: Pass pointer to timestepper -- defaults to (Steady)
     /// default timestepper defined in the Mesh base class
     RefineableFishMesh(
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       FishMesh<ELEMENT>(time_stepper_pt)
     {
       // Nodal positions etc. were created in constructor for
@@ -147,8 +147,8 @@ namespace oomph
     /// the fish's back and pointer to timestepper
     /// (defaults to (Steady) default timestepper defined in Mesh)
     RefineableFishMesh(
-      GeomObject *back_pt,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      GeomObject* back_pt,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       FishMesh<ELEMENT>(back_pt, time_stepper_pt)
     {
       // Nodal positions etc. were created in constructor for
@@ -200,14 +200,14 @@ namespace oomph
     /// the fish's back and pointer to timestepper
     /// (defaults to (Steady) default timestepper defined in Mesh).
     MacroElementNodeUpdateRefineableFishMesh(
-      GeomObject *back_pt,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      GeomObject* back_pt,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       FishMesh<ELEMENT>(back_pt, time_stepper_pt),
       RefineableFishMesh<ELEMENT>(time_stepper_pt)
     {
 #ifdef PARANOID
-      ELEMENT *el_pt = new ELEMENT;
-      if (dynamic_cast<MacroElementNodeUpdateElementBase *>(el_pt) == 0)
+      ELEMENT* el_pt = new ELEMENT;
+      if (dynamic_cast<MacroElementNodeUpdateElementBase*>(el_pt) == 0)
       {
         std::ostringstream error_message;
         error_message << "Base class for ELEMENT in "
@@ -234,12 +234,12 @@ namespace oomph
       for (unsigned i = 0; i < n_element; i++)
       {
         // Upcast from FiniteElement to the present element
-        ELEMENT *el_pt = dynamic_cast<ELEMENT *>(this->element_pt(i));
+        ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->element_pt(i));
 
 #ifdef PARANOID
         // Check if cast is successful
-        MacroElementNodeUpdateElementBase *m_el_pt =
-          dynamic_cast<MacroElementNodeUpdateElementBase *>(el_pt);
+        MacroElementNodeUpdateElementBase* m_el_pt =
+          dynamic_cast<MacroElementNodeUpdateElementBase*>(el_pt);
         if (m_el_pt == 0)
         {
           std::ostringstream error_message;
@@ -259,7 +259,7 @@ namespace oomph
         }
 #endif
         // There's just one GeomObject
-        Vector<GeomObject *> geom_object_pt(1);
+        Vector<GeomObject*> geom_object_pt(1);
         geom_object_pt[0] = this->Back_pt;
 
         // Tell the element which geom objects its macro-element-based
@@ -268,7 +268,7 @@ namespace oomph
       }
 
       // Add the geometric object(s) for the wall to the mesh's storage
-      Vector<GeomObject *> geom_object_pt(1);
+      Vector<GeomObject*> geom_object_pt(1);
       geom_object_pt[0] = this->Back_pt;
       MacroElementNodeUpdateMesh::set_geom_object_vector_pt(geom_object_pt);
 
@@ -284,7 +284,7 @@ namespace oomph
     /// [Doesn't make sense to use this mesh with SolidElements anyway,
     /// so we buffer the case if update_all_solid_nodes is set to
     /// true.]
-    void node_update(const bool &update_all_solid_nodes = false)
+    void node_update(const bool& update_all_solid_nodes = false)
     {
 #ifdef PARANOID
       if (update_all_solid_nodes)
@@ -325,7 +325,7 @@ namespace oomph
     /// \short Constructor: Pass pointer to timestepper.
     /// (defaults to (Steady) default timestepper defined in Mesh)
     AlgebraicFishMesh(
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       FishMesh<ELEMENT>(time_stepper_pt)
     {
       // Setup algebraic node update operations
@@ -336,8 +336,8 @@ namespace oomph
     /// the fish's back and pointer to timestepper
     /// (defaults to (Steady) default timestepper defined in Mesh).
     AlgebraicFishMesh(
-      GeomObject *back_pt,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      GeomObject* back_pt,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       FishMesh<ELEMENT>(back_pt, time_stepper_pt)
     {
       // Add the geometric object to the list associated with this AlgebraicMesh
@@ -352,7 +352,7 @@ namespace oomph
 
     /// \short Update nodal position at time level t (t=0: present;
     /// t>0: previous)
-    void algebraic_node_update(const unsigned &t, AlgebraicNode *&node_pt)
+    void algebraic_node_update(const unsigned& t, AlgebraicNode*& node_pt)
     {
       // Update with the update function for the node's first (default)
       // node update fct
@@ -389,7 +389,7 @@ namespace oomph
     /// RefineableQuadMesh base class but the AlgebraicElement one). [It doesn't
     /// make sense to use this mesh with SolidElements so we buffer the case if
     /// update_all_solid_nodes is set to true.]
-    virtual void node_update(const bool &update_all_solid_nodes = false)
+    virtual void node_update(const bool& update_all_solid_nodes = false)
     {
 #ifdef PARANOID
       if (update_all_solid_nodes)
@@ -418,7 +418,7 @@ namespace oomph
     /// paranoid-check that this is actually the case,
     /// by checking if locate_zeta() returns the
     /// original data.
-    void update_node_update(AlgebraicNode *&node_pt)
+    void update_node_update(AlgebraicNode*& node_pt)
     {
 #ifdef PARANOID
 
@@ -436,7 +436,7 @@ namespace oomph
       zeta[0] = 0.5 * (xi_nose + xi_tail);
 
       Vector<double> s(1);
-      GeomObject *geom_obj_pt = 0;
+      GeomObject* geom_obj_pt = 0;
       this->Back_pt->locate_zeta(zeta, geom_obj_pt, s);
 
       if ((geom_obj_pt != this->Back_pt) || (s[0] != zeta[0]))
@@ -459,10 +459,10 @@ namespace oomph
 
   protected:
     /// \short Algebraic update function for nodes in upper/lower body
-    void node_update_in_body(const unsigned &t, AlgebraicNode *&node_pt);
+    void node_update_in_body(const unsigned& t, AlgebraicNode*& node_pt);
 
     /// \short Algebraic update function for nodes in upper/lower fin
-    void node_update_in_fin(const unsigned &t, AlgebraicNode *&node_pt);
+    void node_update_in_fin(const unsigned& t, AlgebraicNode*& node_pt);
 
     /// \short Setup algebraic update operation for all nodes
     /// (separate function because this task needs to be performed by
@@ -492,7 +492,7 @@ namespace oomph
     // the constructors of the derived meshes don't call the
     // base constructor again and simply add the extra functionality.
     AlgebraicRefineableFishMesh(
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       FishMesh<ELEMENT>(time_stepper_pt),
       AlgebraicFishMesh<ELEMENT>(time_stepper_pt),
       RefineableFishMesh<ELEMENT>(time_stepper_pt)
@@ -507,8 +507,8 @@ namespace oomph
     // the constructors of the derived meshes don't call the
     // base constructor again and simply add the extra functionality.
     AlgebraicRefineableFishMesh(
-      GeomObject *back_pt,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      GeomObject* back_pt,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       FishMesh<ELEMENT>(back_pt, time_stepper_pt),
       AlgebraicFishMesh<ELEMENT>(back_pt, time_stepper_pt),
       RefineableFishMesh<ELEMENT>(back_pt, time_stepper_pt)
@@ -520,7 +520,7 @@ namespace oomph
 
     /// \short Resolve node update function: Use the one defined
     /// in the AlgebraicFishMesh (where the bool flag is explained)
-    void node_update(const bool &update_all_solid_nodes = false)
+    void node_update(const bool& update_all_solid_nodes = false)
     {
       AlgebraicFishMesh<ELEMENT>::node_update(update_all_solid_nodes);
     }

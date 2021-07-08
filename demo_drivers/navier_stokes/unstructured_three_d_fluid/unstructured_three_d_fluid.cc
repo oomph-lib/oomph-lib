@@ -58,10 +58,10 @@ namespace Global_Parameters
   double P_in = 0.5;
 
   /// Applied traction on fluid at the inflow boundary
-  void prescribed_inflow_traction(const double &t,
-                                  const Vector<double> &x,
-                                  const Vector<double> &n,
-                                  Vector<double> &traction)
+  void prescribed_inflow_traction(const double& t,
+                                  const Vector<double>& x,
+                                  const Vector<double>& n,
+                                  Vector<double>& traction)
   {
     traction[0] = 0.0;
     traction[1] = 0.0;
@@ -72,10 +72,10 @@ namespace Global_Parameters
   double P_out = -0.5;
 
   /// Applied traction on fluid at the inflow boundary
-  void prescribed_outflow_traction(const double &t,
-                                   const Vector<double> &x,
-                                   const Vector<double> &n,
-                                   Vector<double> &traction)
+  void prescribed_outflow_traction(const double& t,
+                                   const Vector<double>& x,
+                                   const Vector<double>& n,
+                                   Vector<double>& traction)
   {
     traction[0] = 0.0;
     traction[1] = 0.0;
@@ -98,7 +98,7 @@ public:
   ~UnstructuredFluidProblem() {}
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// Return total number of fluid inflow traction boundaries
   unsigned nfluid_inflow_traction_boundary()
@@ -124,10 +124,10 @@ public:
   void create_fluid_traction_elements();
 
   /// Bulk fluid mesh
-  TetgenMesh<ELEMENT> *Fluid_mesh_pt;
+  TetgenMesh<ELEMENT>* Fluid_mesh_pt;
 
   /// Meshes of fluid traction elements that apply pressure at in/outflow
-  Vector<Mesh *> Fluid_traction_mesh_pt;
+  Vector<Mesh*> Fluid_traction_mesh_pt;
 
   /// \short IDs of fluid mesh boundaries along which inflow boundary conditions
   /// are applied
@@ -197,7 +197,7 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
       for (unsigned inod = 0; inod < num_nod; inod++)
       {
         // Get the node
-        Node *nod_pt = Fluid_mesh_pt->boundary_node_pt(b, inod);
+        Node* nod_pt = Fluid_mesh_pt->boundary_node_pt(b, inod);
 
         // Pin transverse velocities
         nod_pt->pin(0);
@@ -222,7 +222,7 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
       for (unsigned inod = 0; inod < num_nod; inod++)
       {
         // Get node
-        Node *nod_pt = Fluid_mesh_pt->boundary_node_pt(b, inod);
+        Node* nod_pt = Fluid_mesh_pt->boundary_node_pt(b, inod);
 
         // Pin all velocities
         nod_pt->pin(0);
@@ -239,7 +239,7 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Fluid_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Fluid_mesh_pt->element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Parameters::Re;
@@ -317,14 +317,14 @@ void UnstructuredFluidProblem<ELEMENT>::create_fluid_traction_elements()
       for (unsigned e = 0; e < n_element; e++)
       {
         // Get pointer to the bulk element that is adjacent to boundary b
-        ELEMENT *bulk_elem_pt =
-          dynamic_cast<ELEMENT *>(Fluid_mesh_pt->boundary_element_pt(b, e));
+        ELEMENT* bulk_elem_pt =
+          dynamic_cast<ELEMENT*>(Fluid_mesh_pt->boundary_element_pt(b, e));
 
         // What is the index of the face of the element e along boundary b
         int face_index = Fluid_mesh_pt->face_index_at_boundary(b, e);
 
         // Create new element
-        NavierStokesTractionElement<ELEMENT> *el_pt =
+        NavierStokesTractionElement<ELEMENT>* el_pt =
           new NavierStokesTractionElement<ELEMENT>(bulk_elem_pt, face_index);
 
         // Add it to the mesh
@@ -353,7 +353,7 @@ void UnstructuredFluidProblem<ELEMENT>::create_fluid_traction_elements()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void UnstructuredFluidProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void UnstructuredFluidProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -375,7 +375,7 @@ void UnstructuredFluidProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
 //=============start_main=================================================
 /// Demonstrate how to solve an unstructured 3D fluids problem
 //========================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

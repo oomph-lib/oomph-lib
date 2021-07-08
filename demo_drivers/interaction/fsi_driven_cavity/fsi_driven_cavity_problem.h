@@ -55,14 +55,14 @@ class UndeformedWall : public GeomObject
 public:
   /// \short Constructor: arguments are the starting point and the height
   /// above y=0.
-  UndeformedWall(const double &x0, const double &h) : GeomObject(1, 2)
+  UndeformedWall(const double& x0, const double& h) : GeomObject(1, 2)
   {
     X0 = x0;
     H = h;
   }
 
   /// \short Position vector at Lagrangian coordinate zeta
-  void position(const Vector<double> &zeta, Vector<double> &r) const
+  void position(const Vector<double>& zeta, Vector<double>& r) const
   {
     // Position Vector
     r[0] = zeta[0] + X0;
@@ -72,9 +72,9 @@ public:
   /// \short Parametrised position on object: r(zeta). Evaluated at
   /// previous timestep. t=0: current time; t>0: previous
   /// timestep. Calls steady version.
-  void position(const unsigned &t,
-                const Vector<double> &zeta,
-                Vector<double> &r) const
+  void position(const unsigned& t,
+                const Vector<double>& zeta,
+                Vector<double>& r) const
   {
     // Use the steady version
     position(zeta, r);
@@ -86,10 +86,10 @@ public:
   /// \f$ \frac{dR_i}{d \zeta_\alpha}\f$ = drdzeta(alpha,i).
   /// \f$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}\f$ =
   /// ddrdzeta(alpha,beta,i). Evaluated at current time.
-  void d2position(const Vector<double> &zeta,
-                  Vector<double> &r,
-                  DenseMatrix<double> &drdzeta,
-                  RankThreeTensor<double> &ddrdzeta) const
+  void d2position(const Vector<double>& zeta,
+                  Vector<double>& r,
+                  DenseMatrix<double>& drdzeta,
+                  RankThreeTensor<double>& ddrdzeta) const
   {
     // Position vector
     r[0] = zeta[0] + X0;
@@ -148,12 +148,12 @@ public:
   /// \short Constructor: The arguments are the number of elements,
   /// the lengths of the domain, the fractional height of the gap
   /// next to the moving lid and the period of the lid's oscillation
-  FSIDrivenCavityProblem(const unsigned &nx,
-                         const unsigned &ny,
-                         const double &lx,
-                         const double &ly,
-                         const double &gap_fraction,
-                         const double &period);
+  FSIDrivenCavityProblem(const unsigned& nx,
+                         const unsigned& ny,
+                         const double& lx,
+                         const double& ly,
+                         const double& gap_fraction,
+                         const double& period);
 
   /// Destructor
   ~FSIDrivenCavityProblem()
@@ -162,15 +162,15 @@ public:
   }
 
   /// Access function for the specific bulk (fluid) mesh
-  AlgebraicFSIDrivenCavityMesh<ELEMENT> *bulk_mesh_pt()
+  AlgebraicFSIDrivenCavityMesh<ELEMENT>* bulk_mesh_pt()
   {
     // Upcast from pointer to the Mesh base class to the specific
     // element type that we're using here.
-    return dynamic_cast<AlgebraicFSIDrivenCavityMesh<ELEMENT> *>(Bulk_mesh_pt);
+    return dynamic_cast<AlgebraicFSIDrivenCavityMesh<ELEMENT>*>(Bulk_mesh_pt);
   }
 
   /// Access function for the wall mesh
-  OneDLagrangianMesh<FSIHermiteBeamElement> *wall_mesh_pt()
+  OneDLagrangianMesh<FSIHermiteBeamElement>* wall_mesh_pt()
   {
     return Wall_mesh_pt;
   } // end of access to wall mesh
@@ -190,7 +190,7 @@ public:
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Which node are we dealing with?
-      Node *node_pt = bulk_mesh_pt()->boundary_node_pt(ibound, inod);
+      Node* node_pt = bulk_mesh_pt()->boundary_node_pt(ibound, inod);
 
       // Set velocity
       double veloc =
@@ -210,7 +210,7 @@ public:
   }
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info, ofstream &trace_file);
+  void doc_solution(DocInfo& doc_info, ofstream& trace_file);
 
   /// Apply initial conditions
   void set_initial_condition();
@@ -232,23 +232,23 @@ protected:
   double T;
 
   /// Pointer to the "bulk" mesh
-  AlgebraicFSIDrivenCavityMesh<ELEMENT> *Bulk_mesh_pt;
+  AlgebraicFSIDrivenCavityMesh<ELEMENT>* Bulk_mesh_pt;
 
   /// Pointer to the "wall" mesh
-  OneDLagrangianMesh<FSIHermiteBeamElement> *Wall_mesh_pt;
+  OneDLagrangianMesh<FSIHermiteBeamElement>* Wall_mesh_pt;
 
   /// Pointer to the left control node
-  Node *Left_node_pt;
+  Node* Left_node_pt;
 
   /// Pointer to right control node
-  Node *Right_node_pt;
+  Node* Right_node_pt;
 
   /// Pointer to control node on the wall
-  Node *Wall_node_pt;
+  Node* Wall_node_pt;
 
   ///\short Pointer to geometric object (one Lagrangian, two Eulerian
   /// coordinates) that will be built from the wall mesh
-  MeshAsGeomObject *Wall_geom_object_pt;
+  MeshAsGeomObject* Wall_geom_object_pt;
 
 }; // end of problem class
 
@@ -257,12 +257,12 @@ protected:
 //===============================================================
 template<class ELEMENT>
 FSIDrivenCavityProblem<ELEMENT>::FSIDrivenCavityProblem(
-  const unsigned &nx,
-  const unsigned &ny,
-  const double &lx,
-  const double &ly,
-  const double &gap_fraction,
-  const double &period)
+  const unsigned& nx,
+  const unsigned& ny,
+  const double& lx,
+  const double& ly,
+  const double& gap_fraction,
+  const double& period)
 {
   // Store problem parameters
   Nx = nx;
@@ -280,17 +280,17 @@ FSIDrivenCavityProblem<ELEMENT>::FSIDrivenCavityProblem(
   // Allocate the timestepper -- this constructs the Problem's
   // time object with a sufficient amount of storage to store the
   // previous timsteps.
-  BDF<2> *fluid_time_stepper_pt = new BDF<2>;
+  BDF<2>* fluid_time_stepper_pt = new BDF<2>;
   add_time_stepper_pt(fluid_time_stepper_pt);
 
   // Create the timestepper for the solid
-  Newmark<2> *solid_time_stepper_pt = new Newmark<2>;
+  Newmark<2>* solid_time_stepper_pt = new Newmark<2>;
   // Steady<2>* solid_time_stepper_pt=new Steady<2>;
   add_time_stepper_pt(solid_time_stepper_pt);
 
   // Geometric object that represents the undeformed wall:
   // A straight line at height y=ly; starting at x=0.
-  UndeformedWall *undeformed_wall_pt = new UndeformedWall(0.0, ly);
+  UndeformedWall* undeformed_wall_pt = new UndeformedWall(0.0, ly);
 
   // Create the "wall" mesh with FSI Hermite elements
   Wall_mesh_pt = new OneDLagrangianMesh<FSIHermiteBeamElement>(
@@ -320,7 +320,7 @@ FSIDrivenCavityProblem<ELEMENT>::FSIDrivenCavityProblem(
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -358,8 +358,8 @@ FSIDrivenCavityProblem<ELEMENT>::FSIDrivenCavityProblem(
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast to the specific element type
-    FSIHermiteBeamElement *elem_pt =
-      dynamic_cast<FSIHermiteBeamElement *>(wall_mesh_pt()->element_pt(e));
+    FSIHermiteBeamElement* elem_pt =
+      dynamic_cast<FSIHermiteBeamElement*>(wall_mesh_pt()->element_pt(e));
 
     // Set physical parameters for each element:
     elem_pt->h_pt() = &Global_Physical_Variables::H;
@@ -423,7 +423,7 @@ FSIDrivenCavityProblem<ELEMENT>::FSIDrivenCavityProblem(
   num_nod = bulk_mesh_pt()->nboundary_node(ibound);
   for (unsigned inod = 0; inod < num_nod; inod++)
   {
-    static_cast<AlgebraicNode *>(bulk_mesh_pt()->boundary_node_pt(ibound, inod))
+    static_cast<AlgebraicNode*>(bulk_mesh_pt()->boundary_node_pt(ibound, inod))
       ->set_auxiliary_node_update_fct_pt(
         FSI_functions::apply_no_slip_on_moving_wall);
   }
@@ -444,8 +444,8 @@ FSIDrivenCavityProblem<ELEMENT>::FSIDrivenCavityProblem(
 /// Doc the solution
 //============================================================================
 template<class ELEMENT>
-void FSIDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo &doc_info,
-                                                   ofstream &trace_file)
+void FSIDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
+                                                   ofstream& trace_file)
 {
   // Doc fsi
   if (CommandLineArgs::Argc > 1)

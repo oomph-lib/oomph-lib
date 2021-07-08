@@ -62,9 +62,9 @@ namespace oomph
   //================================================================
   void SphericalNavierStokesEquations::
     get_pressure_and_velocity_mass_matrix_diagonal(
-      Vector<double> &press_mass_diag,
-      Vector<double> &veloc_mass_diag,
-      const unsigned &which_one)
+      Vector<double>& press_mass_diag,
+      Vector<double>& veloc_mass_diag,
+      const unsigned& which_one)
   {
 #ifdef PARANOID
     if ((which_one == 0) || (which_one == 1))
@@ -155,11 +155,11 @@ namespace oomph
   /// and L2 norm of velocity solution over element.
   //=======================================================================
   void SphericalNavierStokesEquations::compute_error(
-    std::ostream &outfile,
+    std::ostream& outfile,
     FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
-    const double &time,
-    double &error,
-    double &norm)
+    const double& time,
+    double& error,
+    double& norm)
   {
     error = 0.0;
     norm = 0.0;
@@ -233,10 +233,10 @@ namespace oomph
   /// and L2 norm of velocity solution over element.
   //=======================================================================
   void SphericalNavierStokesEquations::compute_error(
-    std::ostream &outfile,
+    std::ostream& outfile,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-    double &error,
-    double &norm)
+    double& error,
+    double& norm)
   {
     error = 0.0;
     norm = 0.0;
@@ -309,14 +309,14 @@ namespace oomph
   /// and energy norm of velocity solution over element.
   //=======================================================================
   void SphericalNavierStokesEquations::compute_error_e(
-    std::ostream &outfile,
+    std::ostream& outfile,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_dr_pt,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_dtheta_pt,
-    double &u_error,
-    double &u_norm,
-    double &p_error,
-    double &p_norm)
+    double& u_error,
+    double& u_norm,
+    double& p_error,
+    double& p_norm)
   {
     u_error = 0.0;
     p_error = 0.0;
@@ -485,7 +485,7 @@ namespace oomph
   // Output the shear stress at the outer wall of a rotating chamber.
   //======================================================================
   void SphericalNavierStokesEquations::compute_shear_stress(
-    std::ostream &outfile)
+    std::ostream& outfile)
   {
     // Vector of local coordinates
     Vector<double> s(2);
@@ -526,7 +526,7 @@ namespace oomph
   // Output given velocity values and shear stress along a specific
   // section of a rotating chamber.
   //======================================================================
-  void SphericalNavierStokesEquations::extract_velocity(std::ostream &outfile)
+  void SphericalNavierStokesEquations::extract_velocity(std::ostream& outfile)
   {
     // Vector of local coordinates
     Vector<double> s(2);
@@ -614,8 +614,8 @@ namespace oomph
   /// Function prints as many components as are returned in solution Vector.
   //=======================================================================
   void SphericalNavierStokesEquations::output_fct(
-    std::ostream &outfile,
-    const unsigned &nplot,
+    std::ostream& outfile,
+    const unsigned& nplot,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
   {
     // Vector of local coordinates
@@ -669,9 +669,9 @@ namespace oomph
   /// Function prints as many components as are returned in solution Vector.
   //=======================================================================
   void SphericalNavierStokesEquations::output_fct(
-    std::ostream &outfile,
-    const unsigned &nplot,
-    const double &time,
+    std::ostream& outfile,
+    const unsigned& nplot,
+    const double& time,
     FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
   {
     // Vector of local coordinates
@@ -725,9 +725,9 @@ namespace oomph
   /// t>0: previous timestep). Specified number of plot points in each
   /// coordinate direction.
   //==============================================================
-  void SphericalNavierStokesEquations::output_veloc(std::ostream &outfile,
-                                                    const unsigned &nplot,
-                                                    const unsigned &t)
+  void SphericalNavierStokesEquations::output_veloc(std::ostream& outfile,
+                                                    const unsigned& nplot,
+                                                    const unsigned& t)
   {
     // Find number of nodes
     unsigned n_node = nnode();
@@ -793,8 +793,8 @@ namespace oomph
   /// in tecplot format. Specified number of plot points in each
   /// coordinate direction.
   //==============================================================
-  void SphericalNavierStokesEquations::output(std::ostream &outfile,
-                                              const unsigned &nplot)
+  void SphericalNavierStokesEquations::output(std::ostream& outfile,
+                                              const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(2);
@@ -856,8 +856,8 @@ namespace oomph
   /// in tecplot format. Specified number of plot points in each
   /// coordinate direction.
   //==============================================================
-  void SphericalNavierStokesEquations::output(FILE *file_pt,
-                                              const unsigned &nplot)
+  void SphericalNavierStokesEquations::output(FILE* file_pt,
+                                              const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(2);
@@ -899,8 +899,8 @@ namespace oomph
   /// in tecplot format. Specified number of plot points in each
   /// coordinate direction
   //==============================================================
-  void SphericalNavierStokesEquations::full_output(std::ostream &outfile,
-                                                   const unsigned &nplot)
+  void SphericalNavierStokesEquations::full_output(std::ostream& outfile,
+                                                   const unsigned& nplot)
   {
     throw OomphLibError(
       "Probably Broken", OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
@@ -1021,8 +1021,8 @@ namespace oomph
   /// in tecplot format. Specified number of plot points in each
   /// coordinate direction.
   //==============================================================
-  void SphericalNavierStokesEquations::output_vorticity(std::ostream &outfile,
-                                                        const unsigned &nplot)
+  void SphericalNavierStokesEquations::output_vorticity(std::ostream& outfile,
+                                                        const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(2);
@@ -1111,9 +1111,9 @@ namespace oomph
   /// the fluid at local coordinate s. N has to be outer unit normal
   /// to the fluid.
   //==============================================================
-  void SphericalNavierStokesEquations::get_traction(const Vector<double> &s,
-                                                    const Vector<double> &N,
-                                                    Vector<double> &traction)
+  void SphericalNavierStokesEquations::get_traction(const Vector<double>& s,
+                                                    const Vector<double>& N,
+                                                    Vector<double>& traction)
   {
     // Get velocity gradients
     DenseMatrix<double> strainrate(3, 3);
@@ -1149,7 +1149,7 @@ namespace oomph
   /// Return dissipation at local coordinate s
   //==============================================================
   double SphericalNavierStokesEquations::dissipation(
-    const Vector<double> &s) const
+    const Vector<double>& s) const
   {
     // Get strain rate matrix
     DenseMatrix<double> strainrate(3, 3);
@@ -1172,7 +1172,7 @@ namespace oomph
   /// Get strain-rate tensor: 1/2 (du_i/dx_j + du_j/dx_i)
   //==============================================================
   void SphericalNavierStokesEquations::strain_rate(
-    const Vector<double> &s, DenseMatrix<double> &strainrate) const
+    const Vector<double>& s, DenseMatrix<double>& strainrate) const
   {
     // Velocity components
     Vector<double> interpolated_u(3, 0.0);
@@ -1271,7 +1271,7 @@ namespace oomph
   /// one and only component of vorticity vector
   //==============================================================
   void SphericalNavierStokesEquations::get_vorticity(
-    const Vector<double> &s, Vector<double> &vorticity) const
+    const Vector<double>& s, Vector<double>& vorticity) const
   {
     throw OomphLibError("Not tested for spherical Navier-Stokes elements",
                         OOMPH_CURRENT_FUNCTION,
@@ -1532,9 +1532,9 @@ namespace oomph
   //==============================================================
   void SphericalNavierStokesEquations::
     fill_in_generic_residual_contribution_spherical_nst(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix,
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
       unsigned flag)
   {
     // Return immediately if there are no dofs
@@ -2317,7 +2317,7 @@ namespace oomph
   /// load computed in the \c get_load(...) function.
   //=========================================================================
   void QSphericalCrouzeixRaviartElement::identify_load_data(
-    std::set<std::pair<Data *, unsigned>> &paired_load_data)
+    std::set<std::pair<Data*, unsigned>>& paired_load_data)
   {
     // Find the index at which the velocity is stored
     unsigned u_index[3];
@@ -2352,7 +2352,7 @@ namespace oomph
   /// load computed in the \c get_load(...) function.
   //=========================================================================
   void QSphericalCrouzeixRaviartElement::identify_pressure_data(
-    std::set<std::pair<Data *, unsigned>> &paired_pressure_data)
+    std::set<std::pair<Data*, unsigned>>& paired_pressure_data)
   {
     // Loop over the internal data
     unsigned n_internal = this->ninternal_data();
@@ -2377,7 +2377,7 @@ namespace oomph
   /// scheme has been set up.)
   //=============================================================================
   void QSphericalCrouzeixRaviartElement::get_dof_numbers_for_unknowns(
-    std::list<std::pair<unsigned long, unsigned>> &dof_lookup_list) const
+    std::list<std::pair<unsigned long, unsigned>>& dof_lookup_list) const
   {
     // number of nodes
     unsigned n_node = this->nnode();
@@ -2461,7 +2461,7 @@ namespace oomph
   /// load computed in the \c get_load(...) function.
   //=========================================================================
   void QSphericalTaylorHoodElement::identify_load_data(
-    std::set<std::pair<Data *, unsigned>> &paired_load_data)
+    std::set<std::pair<Data*, unsigned>>& paired_load_data)
   {
     // Find the index at which the velocity is stored
     unsigned u_index[3];
@@ -2496,7 +2496,7 @@ namespace oomph
   /// load computed in the \c get_load(...) function.
   //=========================================================================
   void QSphericalTaylorHoodElement::identify_pressure_data(
-    std::set<std::pair<Data *, unsigned>> &paired_pressure_data)
+    std::set<std::pair<Data*, unsigned>>& paired_pressure_data)
   {
     // Find the index at which the pressure is stored
     unsigned p_index =
@@ -2522,7 +2522,7 @@ namespace oomph
   /// scheme has been set up.)
   //============================================================================
   void QSphericalTaylorHoodElement::get_dof_numbers_for_unknowns(
-    std::list<std::pair<unsigned long, unsigned>> &dof_lookup_list) const
+    std::list<std::pair<unsigned long, unsigned>>& dof_lookup_list) const
   {
     // number of nodes
     unsigned n_node = this->nnode();

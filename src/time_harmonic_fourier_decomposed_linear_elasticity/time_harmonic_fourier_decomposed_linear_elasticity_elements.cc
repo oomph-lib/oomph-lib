@@ -55,7 +55,7 @@ namespace oomph
   /// Compute norm of the solution
   //=======================================================================
   void TimeHarmonicFourierDecomposedLinearElasticityEquations::compute_norm(
-    double &norm)
+    double& norm)
   {
     // Initialise
     norm = 0.0;
@@ -113,7 +113,7 @@ namespace oomph
   /// Get strain tensor
   //=======================================================================
   void TimeHarmonicFourierDecomposedLinearElasticityEquations::get_strain(
-    const Vector<double> &s, DenseMatrix<std::complex<double>> &strain)
+    const Vector<double>& s, DenseMatrix<std::complex<double>>& strain)
   {
     // Find out how many nodes there are
     unsigned n_node = this->nnode();
@@ -231,7 +231,7 @@ namespace oomph
   //=======================================================================
   void TimeHarmonicFourierDecomposedLinearElasticityEquations::
     fill_in_generic_contribution_to_residuals_fourier_decomp_time_harmonic_linear_elasticity(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag)
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag)
   {
     // Find out how many nodes there are
     unsigned n_node = this->nnode();
@@ -837,8 +837,8 @@ namespace oomph
   /// Output exact solution  r,z, u_r_real, u_z_real, ..., u_theta_imag
   //=======================================================================
   void TimeHarmonicFourierDecomposedLinearElasticityEquations::output_fct(
-    std::ostream &outfile,
-    const unsigned &nplot,
+    std::ostream& outfile,
+    const unsigned& nplot,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
   {
     // Vector of local coordinates
@@ -886,7 +886,7 @@ namespace oomph
   /// Output: r,z, u_r_real, u_z_real, ..., u_theta_imag
   //=======================================================================
   void TimeHarmonicFourierDecomposedLinearElasticityEquations::output(
-    std::ostream &outfile, const unsigned &nplot)
+    std::ostream& outfile, const unsigned& nplot)
   {
     // Set output Vector
     Vector<double> s(2);
@@ -937,7 +937,7 @@ namespace oomph
   /// C-style output:r,z, u_r_real, u_z_real, ..., u_theta_imag
   //=======================================================================
   void TimeHarmonicFourierDecomposedLinearElasticityEquations::output(
-    FILE *file_pt, const unsigned &nplot)
+    FILE* file_pt, const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(2);
@@ -993,10 +993,10 @@ namespace oomph
   /// and L2 norm of velocity solution over element.
   //=======================================================================
   void TimeHarmonicFourierDecomposedLinearElasticityEquations::compute_error(
-    std::ostream &outfile,
+    std::ostream& outfile,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-    double &error,
-    double &norm)
+    double& error,
+    double& norm)
   {
     error = 0.0;
     norm = 0.0;

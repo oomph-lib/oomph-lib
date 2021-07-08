@@ -49,19 +49,19 @@ class WarpedLine : public GeomObject
 {
 public:
   /// Constructor: Specify amplitude of deflection from straight horizontal line
-  WarpedLine(const double &ampl) : GeomObject(1, 2)
+  WarpedLine(const double& ampl) : GeomObject(1, 2)
   {
     Ampl = ampl;
   }
 
   /// Broken copy constructor
-  WarpedLine(const WarpedLine &dummy)
+  WarpedLine(const WarpedLine& dummy)
   {
     BrokenCopy::broken_copy("WarpedLine");
   }
 
   /// Broken assignment operator
-  void operator=(const WarpedLine &)
+  void operator=(const WarpedLine&)
   {
     BrokenCopy::broken_assign("WarpedLine");
   }
@@ -70,7 +70,7 @@ public:
   ~WarpedLine() {}
 
   /// \short Position vector at Lagrangian coordinate zeta
-  void position(const Vector<double> &zeta, Vector<double> &r) const
+  void position(const Vector<double>& zeta, Vector<double>& r) const
   {
     // Position vector
     r[0] = zeta[0] + 5.0 * Ampl * zeta[0] * (zeta[0] - 1.0) * (zeta[0] - 0.7);
@@ -81,15 +81,15 @@ public:
   /// \short Parametrised position on object: r(zeta). Evaluated at
   /// previous timestep. t=0: current time; t>0: previous
   /// timestep. Forward to steady version
-  void position(const unsigned &t,
-                const Vector<double> &zeta,
-                Vector<double> &r) const
+  void position(const unsigned& t,
+                const Vector<double>& zeta,
+                Vector<double>& r) const
   {
     position(zeta, r);
   }
 
   /// Access to amplitude
-  double &ampl()
+  double& ampl()
   {
     return Ampl;
   }
@@ -141,7 +141,7 @@ public:
     unsigned n_nod = solid_mesh_pt()->nboundary_node(b);
     for (unsigned i = 0; i < n_nod; i++)
     {
-      Node *nod_pt = solid_mesh_pt()->boundary_node_pt(b, i);
+      Node* nod_pt = solid_mesh_pt()->boundary_node_pt(b, i);
 
       // Get boundary coordinate associated with boundary 2
       Vector<double> zeta(1);
@@ -159,7 +159,7 @@ public:
   } // end actions_before_newton_solve
 
   /// Access function for the solid mesh
-  ElasticRefineableRectangularQuadMesh<ELEMENT> *&solid_mesh_pt()
+  ElasticRefineableRectangularQuadMesh<ELEMENT>*& solid_mesh_pt()
   {
     return Solid_mesh_pt;
   }
@@ -176,7 +176,7 @@ public:
 
 private:
   /// Pointer to solid mesh
-  ElasticRefineableRectangularQuadMesh<ELEMENT> *Solid_mesh_pt;
+  ElasticRefineableRectangularQuadMesh<ELEMENT>* Solid_mesh_pt;
 
   /// DocInfo object for output
   DocInfo Doc_info;
@@ -219,7 +219,7 @@ PrescribedBoundaryDisplacementProblem<
   for (unsigned i = 0; i < n_element; i++)
   {
     // Cast to a solid element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(solid_mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(solid_mesh_pt()->element_pt(i));
 
     // Set the constitutive law
     el_pt->constitutive_law_pt() = &Global_Physical_Variables::Constitutive_law;

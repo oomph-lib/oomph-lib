@@ -59,8 +59,8 @@ namespace oomph
   private:
     /// \short Function pointer to a wall unit normal function. Returns the
     /// unit normal on the wall, at the specified Eulerian coordinate.
-    typedef void (*WallUnitNormalFctPt)(const Vector<double> &x,
-                                        Vector<double> &unit_normal);
+    typedef void (*WallUnitNormalFctPt)(const Vector<double>& x,
+                                        Vector<double>& unit_normal);
 
     /// \short Pointer to a wall normal function that returns
     /// the wall unit normal as a function of position in global
@@ -68,10 +68,10 @@ namespace oomph
     WallUnitNormalFctPt Wall_unit_normal_fct_pt;
 
     /// Pointer to the desired value of the contact angle (if any)
-    double *Contact_angle_pt;
+    double* Contact_angle_pt;
 
     /// Pointer to the desired value of the capillary number
-    double *Ca_pt;
+    double* Ca_pt;
 
   protected:
     /// \short Flag used to determine whether the contact angle is to be
@@ -87,11 +87,11 @@ namespace oomph
     /// \short Function that is used to determine the local equation number of
     /// the kinematic equation associated with the nodes of the element
     /// This must be overloaded depending on the node update scheme
-    virtual int kinematic_local_eqn(const unsigned &n) = 0;
+    virtual int kinematic_local_eqn(const unsigned& n) = 0;
 
     /// \short Function that returns the unit normal of the bounding wall
     /// directed out of the fluid
-    void wall_unit_normal(const Vector<double> &x, Vector<double> &normal)
+    void wall_unit_normal(const Vector<double>& x, Vector<double>& normal)
     {
 #ifdef PARANOID
       if (Wall_unit_normal_fct_pt)
@@ -112,7 +112,7 @@ namespace oomph
     ///\short The geometric data of the parent element is included as
     /// external data and so a (bulk) node update must take place after
     /// the variation of any of this external data
-    inline void update_in_external_fd(const unsigned &i)
+    inline void update_in_external_fd(const unsigned& i)
     {
       // Update the bulk element
       bulk_element_pt()->node_update();
@@ -121,7 +121,7 @@ namespace oomph
     ///\short The only external data are these geometric data so
     /// We can omit the reset function (relying on the next update
     // function to take care of the remesh)
-    inline void reset_in_external_fd(const unsigned &i) {}
+    inline void reset_in_external_fd(const unsigned& i) {}
 
     /// \short We require a final node update in the bulk element
     /// after all finite differencing
@@ -142,7 +142,7 @@ namespace oomph
     }
 
     /// Access function: Pointer to wall unit normal function
-    WallUnitNormalFctPt &wall_unit_normal_fct_pt()
+    WallUnitNormalFctPt& wall_unit_normal_fct_pt()
     {
       return Wall_unit_normal_fct_pt;
     }
@@ -154,7 +154,7 @@ namespace oomph
     }
 
     /// Access for nodal index at which the velocity components are stored
-    Vector<unsigned> &u_index_interface_boundary()
+    Vector<unsigned>& u_index_interface_boundary()
     {
       return U_index_interface_boundary;
     }
@@ -164,16 +164,16 @@ namespace oomph
     /// chooses strong imposition via hijacking (true) or weak imposition
     /// via addition to momentum equation (false). The default strong imposition
     /// is appropriate for static contact angle problems.
-    void set_contact_angle(double *const &angle_pt, const bool &strong = true);
+    void set_contact_angle(double* const& angle_pt, const bool& strong = true);
 
     /// Access function to the pointer specifying the prescribed contact angle
-    double *&contact_angle_pt()
+    double*& contact_angle_pt()
     {
       return Contact_angle_pt;
     }
 
     /// Access function to the pointer specifying the capillary number
-    double *&ca_pt()
+    double*& ca_pt()
     {
       return Ca_pt;
     }
@@ -198,7 +198,7 @@ namespace oomph
     }
 
     /// Return value of the contact angle
-    double &contact_angle()
+    double& contact_angle()
     {
 #ifdef PARANOID
       if (Contact_angle_pt == 0)
@@ -214,7 +214,7 @@ namespace oomph
     }
 
     /// Calculate the residuals
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Add the residual contributions using a dummy matrix
       fill_in_generic_residual_contribution_interface_boundary(
@@ -223,8 +223,8 @@ namespace oomph
 
     /// Calculate the generic residuals contribution
     virtual void fill_in_generic_residual_contribution_interface_boundary(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
       unsigned flag) = 0;
 
     /// \short Empty helper function to calculate the additional contributions
@@ -235,36 +235,36 @@ namespace oomph
     /// the unit normal and integral weight are passed in so that they do not
     /// have to be recalculated.
     virtual void add_additional_residual_contributions_interface_boundary(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      const unsigned &flag,
-      const Shape &psif,
-      const DShape &dpsifds,
-      const Vector<double> &interpolated_n,
-      const double &W)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag,
+      const Shape& psif,
+      const DShape& dpsifds,
+      const Vector<double>& interpolated_n,
+      const double& W)
     {
     }
 
     /// Overload the output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       FiniteElement::output(outfile);
     }
 
     /// Output function
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       FiniteElement::output(outfile, n_plot);
     }
 
     /// Overload the C-style output function
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
 
     /// C-style Output function
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       FiniteElement::output(file_pt, n_plot);
     }
@@ -283,7 +283,7 @@ namespace oomph
     /// Specific additional contributions may be provided in
     /// add_additional_residual_contributions_interface_boundary(...)
     void fill_in_generic_residual_contribution_interface_boundary(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag);
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
 
   public:
     /// Constructor
@@ -302,7 +302,7 @@ namespace oomph
     /// Specific additional contributions may be provided in
     /// add_additional_residual_contributions_interface_boundary()
     void fill_in_generic_residual_contribution_interface_boundary(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag);
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
 
   public:
     /// Constructor
@@ -323,10 +323,10 @@ namespace oomph
 
   private:
     /// Pointer to the Capillary number
-    double *Ca_pt;
+    double* Ca_pt;
 
     /// Pointer to the Strouhal number
-    double *St_pt;
+    double* St_pt;
 
     /// Default value for physical constants
     static double Default_Physical_Constant_Value;
@@ -342,7 +342,7 @@ namespace oomph
     int External_data_number_of_external_pressure;
 
     /// \short Pointer to the Data item that stores the external pressure
-    Data *Pext_data_pt;
+    Data* Pext_data_pt;
 
     /// \short Which of the values in Pext_data_pt stores the external pressure
     unsigned Index_of_external_pressure_value;
@@ -351,7 +351,7 @@ namespace oomph
     /// for the (scalar) kinematic equation associated with the j-th local
     /// node. This must be overloaded by specific interface elements
     /// and depends on the method for handing the free-surface deformation.
-    virtual int kinematic_local_eqn(const unsigned &n) = 0;
+    virtual int kinematic_local_eqn(const unsigned& n) = 0;
 
     /// \short Access function for the local equation number that
     /// corresponds to the external pressure.
@@ -375,7 +375,7 @@ namespace oomph
     /// divergence information that is overloaded in each element
     /// i.e. axisymmetric, two- or three-dimensional.
     virtual void fill_in_generic_residual_contribution_interface(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag);
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
 
     /// \short Compute the surface gradient and surface divergence
     /// operators given the shape functions, derivatives,
@@ -399,12 +399,12 @@ namespace oomph
     /// In Cartesian cordinates the two surface derivatives are the
     /// same, but in Axisymmetric coordinates they are not!
     virtual double compute_surface_derivatives(
-      const Shape &psi,
-      const DShape &dpsids,
-      const DenseMatrix<double> &interpolated_t,
-      const Vector<double> &interpolated_x,
-      DShape &dpsidS,
-      DShape &dpsidS_div) = 0;
+      const Shape& psi,
+      const DShape& dpsids,
+      const DenseMatrix<double>& interpolated_t,
+      const Vector<double>& interpolated_x,
+      DShape& dpsidS,
+      DShape& dpsidS_div) = 0;
 
     /// \short Helper function to calculate the additional contributions
     /// to the resisuals and Jacobian that arise from specific node update
@@ -422,18 +422,18 @@ namespace oomph
     ///   along the element. (Note that in the axisymmmetric case this
     ///   includes the r term)!
     virtual void add_additional_residual_contributions_interface(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      const unsigned &flag,
-      const Shape &psif,
-      const DShape &dpsifds,
-      const DShape &dpsifdS,
-      const DShape &dpsifdS_div,
-      const Vector<double> &s,
-      const Vector<double> &interpolated_x,
-      const Vector<double> &interpolated_n,
-      const double &W,
-      const double &J)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag,
+      const Shape& psif,
+      const DShape& dpsifds,
+      const DShape& dpsifdS,
+      const DShape& dpsifdS_div,
+      const Vector<double>& s,
+      const Vector<double>& interpolated_x,
+      const Vector<double>& interpolated_n,
+      const double& W,
+      const double& J)
     {
     }
 
@@ -453,13 +453,13 @@ namespace oomph
     /// The default behaviour is a constant surface tension of value 1.0
     /// This function can be overloaded in more specialised elements to
     /// incorporate variations in surface tension.
-    virtual double sigma(const Vector<double> &s_local)
+    virtual double sigma(const Vector<double>& s_local)
     {
       return 1.0;
     }
 
     /// Calculate the residuals by calling the generic residual contribution.
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Add the residual contributions
       fill_in_generic_residual_contribution_interface(
@@ -467,7 +467,7 @@ namespace oomph
     }
 
     /// The value of the Capillary number
-    const double &ca() const
+    const double& ca() const
     {
 #ifdef PARANOID
       if (Ca_pt != 0)
@@ -486,31 +486,31 @@ namespace oomph
     }
 
     /// Pointer to the Capillary number
-    double *&ca_pt()
+    double*& ca_pt()
     {
       return Ca_pt;
     }
 
     /// The value of the Strouhal number
-    const double &st() const
+    const double& st() const
     {
       return *St_pt;
     }
 
     /// The pointer to the Strouhal number
-    double *&st_pt()
+    double*& st_pt()
     {
       return St_pt;
     }
 
     /// \short Return the i-th velocity component at local node j.
-    double u(const unsigned &j, const unsigned &i)
+    double u(const unsigned& j, const unsigned& i)
     {
       return node_pt(j)->value(U_index_interface[i]);
     }
 
     /// \short Calculate the i-th velocity component at the local coordinate s.
-    double interpolated_u(const Vector<double> &s, const unsigned &i);
+    double interpolated_u(const Vector<double>& s, const unsigned& i);
 
     /// Return the value of the external pressure
     double pext() const
@@ -533,7 +533,7 @@ namespace oomph
     /// interface/free-surface. Setting this only makes sense
     /// if the interface is, in fact, a free surface (well,
     /// an interface to another inviscid fluid if you want to be picky).
-    void set_external_pressure_data(Data *external_pressure_data_pt)
+    void set_external_pressure_data(Data* external_pressure_data_pt)
     {
 #ifdef PARANOID
       if (external_pressure_data_pt->nvalue() != 1)
@@ -573,8 +573,8 @@ namespace oomph
     /// Second argument specifies the index of the pressure
     /// value within the Data object.
     void set_external_pressure_data(
-      Data *external_pressure_data_pt,
-      const unsigned &index_of_external_pressure_value)
+      Data* external_pressure_data_pt,
+      const unsigned& index_of_external_pressure_value)
     {
       // Index of pressure value in Data object
       Index_of_external_pressure_value = index_of_external_pressure_value;
@@ -610,8 +610,8 @@ namespace oomph
 
     /// \short Create a bounding element e.g. to apply a contact angle boundary
     /// condition
-    virtual FluidInterfaceBoundingElement *make_bounding_element(
-      const int &face_index)
+    virtual FluidInterfaceBoundingElement* make_bounding_element(
+      const int& face_index)
     {
       throw OomphLibError("Virtual function not yet implemented",
                           OOMPH_CURRENT_FUNCTION,
@@ -625,25 +625,25 @@ namespace oomph
     /// This is required so that contact-angle conditions can be applied
     /// by the FluidInterfaceBoundingElements.
     virtual void hijack_kinematic_conditions(
-      const Vector<unsigned> &bulk_node_number) = 0;
+      const Vector<unsigned>& bulk_node_number) = 0;
 
     /// Overload the output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       FiniteElement::output(outfile);
     }
 
     /// Output function
-    void output(std::ostream &outfile, const unsigned &n_plot);
+    void output(std::ostream& outfile, const unsigned& n_plot);
 
     /// Overload the C-style output function
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
 
     /// C-style Output function
-    void output(FILE *file_pt, const unsigned &n_plot);
+    void output(FILE* file_pt, const unsigned& n_plot);
   };
 
   //=============================================================
@@ -660,12 +660,12 @@ namespace oomph
   protected:
     /// Fill in the specific surface derivative calculations
     double compute_surface_derivatives(
-      const Shape &psi,
-      const DShape &dpsids,
-      const DenseMatrix<double> &interpolated_t,
-      const Vector<double> &interpolated_x,
-      DShape &surface_gradient,
-      DShape &surface_divergence);
+      const Shape& psi,
+      const DShape& dpsids,
+      const DenseMatrix<double>& interpolated_t,
+      const Vector<double>& interpolated_x,
+      DShape& surface_gradient,
+      DShape& surface_divergence);
   };
 
   //=============================================================
@@ -683,12 +683,12 @@ namespace oomph
   protected:
     /// Fill in the specific surface derivative calculations
     double compute_surface_derivatives(
-      const Shape &psi,
-      const DShape &dpsids,
-      const DenseMatrix<double> &interpolated_t,
-      const Vector<double> &interpolated_x,
-      DShape &surface_gradient,
-      DShape &surface_divergence);
+      const Shape& psi,
+      const DShape& dpsids,
+      const DenseMatrix<double>& interpolated_t,
+      const Vector<double>& interpolated_x,
+      DShape& surface_gradient,
+      DShape& surface_divergence);
   };
 
   //=============================================================
@@ -706,12 +706,12 @@ namespace oomph
   protected:
     /// Fill in the specific surface derivative calculations
     double compute_surface_derivatives(
-      const Shape &psi,
-      const DShape &dpsids,
-      const DenseMatrix<double> &interpolated_t,
-      const Vector<double> &interpolated_x,
-      DShape &surface_gradient,
-      DShape &surface_divergence);
+      const Shape& psi,
+      const DShape& dpsids,
+      const DenseMatrix<double>& interpolated_t,
+      const Vector<double>& interpolated_x,
+      DShape& surface_gradient,
+      DShape& surface_divergence);
   };
 
 } // namespace oomph

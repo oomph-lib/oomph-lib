@@ -67,12 +67,12 @@ public:
 
   /// \short Doc the solution. DocInfo object stores flags/labels for where the
   /// output gets written to and the trace file
-  void doc_solution(DocInfo &doc_info, ofstream &trace_file);
+  void doc_solution(DocInfo& doc_info, ofstream& trace_file);
 
 private:
   /// \short Create YoungLaplace contact angle elements on the
   /// b-th boundary of the problem's mesh and add them to mesh
-  void create_contact_angle_elements(const unsigned &b);
+  void create_contact_angle_elements(const unsigned& b);
 
   /// \short Number of YoungLaplace "bulk" elements (We're attaching the
   /// contact angle elements to the bulk mesh --> only the first
@@ -86,7 +86,7 @@ private:
   unsigned Last_element_on_boundary3;
 
   /// Node at which the height (displacement along spine) is controlled/doced
-  Node *Control_node_pt;
+  Node* Control_node_pt;
 
 }; // end of problem class
 
@@ -122,18 +122,18 @@ YoungLaplaceProblem<ELEMENT>::YoungLaplaceProblem()
     new SimpleRectangularQuadMesh<ELEMENT>(n_x, n_y, l_x, l_y);
 
   //  Choose the prescribed height element
-  ELEMENT *prescribed_height_element_pt = dynamic_cast<ELEMENT *>(
+  ELEMENT* prescribed_height_element_pt = dynamic_cast<ELEMENT*>(
     mesh_pt()->element_pt(GlobalParameters::Control_element));
 
   // ...and the associated control node (node 0 in that element)
   // (we're storing this node even if there's no height-control, for
   // output purposes...)
   Control_node_pt =
-    static_cast<Node *>(prescribed_height_element_pt->node_pt(0));
+    static_cast<Node*>(prescribed_height_element_pt->node_pt(0));
 
   // If needed, create a height control element and store the
   // pointer to the Kappa Data created by this object
-  HeightControlElement *height_control_element_pt = 0;
+  HeightControlElement* height_control_element_pt = 0;
   if (GlobalParameters::Use_height_control)
   {
     cout << "Controlling height at (x,y) : (" << Control_node_pt->x(0) << ","
@@ -208,7 +208,7 @@ YoungLaplaceProblem<ELEMENT>::YoungLaplaceProblem()
   for (unsigned i = 0; i < N_bulk_elements; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     if (GlobalParameters::Use_spines)
     {
@@ -230,8 +230,8 @@ YoungLaplaceProblem<ELEMENT>::YoungLaplaceProblem()
     for (unsigned e = N_bulk_elements; e < Last_element_on_boundary1; e++)
     {
       // Upcast from GeneralisedElement to YoungLaplace contact angle element
-      YoungLaplaceContactAngleElement<ELEMENT> *el_pt =
-        dynamic_cast<YoungLaplaceContactAngleElement<ELEMENT> *>(
+      YoungLaplaceContactAngleElement<ELEMENT>* el_pt =
+        dynamic_cast<YoungLaplaceContactAngleElement<ELEMENT>*>(
           mesh_pt()->element_pt(e));
 
       // Set the pointer to the prescribed contact angle
@@ -241,8 +241,8 @@ YoungLaplaceProblem<ELEMENT>::YoungLaplaceProblem()
          e++)
     {
       // Upcast from GeneralisedElement to YoungLaplace contact angle element
-      YoungLaplaceContactAngleElement<ELEMENT> *el_pt =
-        dynamic_cast<YoungLaplaceContactAngleElement<ELEMENT> *>(
+      YoungLaplaceContactAngleElement<ELEMENT>* el_pt =
+        dynamic_cast<YoungLaplaceContactAngleElement<ELEMENT>*>(
           mesh_pt()->element_pt(e));
 
       // Set the pointer to the prescribed contact angle
@@ -270,7 +270,7 @@ YoungLaplaceProblem<ELEMENT>::YoungLaplaceProblem()
 //=======================================================================
 template<class ELEMENT>
 void YoungLaplaceProblem<ELEMENT>::create_contact_angle_elements(
-  const unsigned &b)
+  const unsigned& b)
 {
   // How many bulk elements are adjacent to boundary b?
   unsigned n_element = mesh_pt()->nboundary_element(b);
@@ -279,14 +279,14 @@ void YoungLaplaceProblem<ELEMENT>::create_contact_angle_elements(
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    ELEMENT *bulk_elem_pt =
-      dynamic_cast<ELEMENT *>(mesh_pt()->boundary_element_pt(b, e));
+    ELEMENT* bulk_elem_pt =
+      dynamic_cast<ELEMENT*>(mesh_pt()->boundary_element_pt(b, e));
 
     // What is the index of the face of the bulk element at the boundary
     int face_index = mesh_pt()->face_index_at_boundary(b, e);
 
     // Build the corresponding prescribed contact angle element
-    YoungLaplaceContactAngleElement<ELEMENT> *contact_angle_element_pt =
+    YoungLaplaceContactAngleElement<ELEMENT>* contact_angle_element_pt =
       new YoungLaplaceContactAngleElement<ELEMENT>(bulk_elem_pt, face_index);
 
     // Add the prescribed contact angle element to the mesh
@@ -328,8 +328,8 @@ void YoungLaplaceProblem<ELEMENT>::actions_before_newton_solve()
 /// Doc the solution: doc_info contains labels/output directory etc.
 //========================================================================
 template<class ELEMENT>
-void YoungLaplaceProblem<ELEMENT>::doc_solution(DocInfo &doc_info,
-                                                ofstream &trace_file)
+void YoungLaplaceProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
+                                                ofstream& trace_file)
 {
   // Output kappa vs height of the apex
   //------------------------------------
@@ -350,7 +350,7 @@ void YoungLaplaceProblem<ELEMENT>::doc_solution(DocInfo &doc_info,
   some_file.open(filename);
   for (unsigned i = 0; i < N_bulk_elements; i++)
   {
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
     el_pt->output(some_file, npts);
   }
   some_file.close();
@@ -408,8 +408,8 @@ void YoungLaplaceProblem<ELEMENT>::doc_solution(DocInfo &doc_info,
         contact_angle_file << "ZONE" << std::endl;
 
         // Upcast from GeneralisedElement to YoungLaplace contact angle element
-        YoungLaplaceContactAngleElement<ELEMENT> *el_pt =
-          dynamic_cast<YoungLaplaceContactAngleElement<ELEMENT> *>(
+        YoungLaplaceContactAngleElement<ELEMENT>* el_pt =
+          dynamic_cast<YoungLaplaceContactAngleElement<ELEMENT>*>(
             mesh_pt()->element_pt(e));
 
         // Loop over a few points in the contact angle element
@@ -418,7 +418,7 @@ void YoungLaplaceProblem<ELEMENT>::doc_solution(DocInfo &doc_info,
         {
           s[0] = -1.0 + 2.0 * double(i) / double(npts - 1);
 
-          dynamic_cast<ELEMENT *>(el_pt->bulk_element_pt())
+          dynamic_cast<ELEMENT*>(el_pt->bulk_element_pt())
             ->position(el_pt->local_coordinate_in_bulk(s), r_contact);
 
           el_pt->contact_line_vectors(s, tangent, normal);
@@ -450,7 +450,7 @@ void YoungLaplaceProblem<ELEMENT>::doc_solution(DocInfo &doc_info,
 /// Run code for current setting of parameter values -- specify name
 /// of output directory
 //========================================================================
-void run_it(const string &output_directory)
+void run_it(const string& output_directory)
 {
   // Create label for output
   //------------------------
@@ -514,7 +514,7 @@ void run_it(const string &output_directory)
 /// (for validation) or case (0,1,2 for all pinned, barrel and T junction)
 /// and number of steps.
 //========================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

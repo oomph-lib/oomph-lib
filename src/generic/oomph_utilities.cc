@@ -52,7 +52,7 @@ namespace oomph
   namespace SecondInvariantHelper
   {
     /// Compute second invariant of tensor
-    double second_invariant(const DenseMatrix<double> &tensor)
+    double second_invariant(const DenseMatrix<double>& tensor)
     {
       // get size of tensor
       unsigned n = tensor.nrow();
@@ -83,7 +83,7 @@ namespace oomph
   namespace BrokenCopy
   {
     /// Issue error message and terminate execution
-    void broken_assign(const std::string &class_name)
+    void broken_assign(const std::string& class_name)
     {
       // Write the error message into a string
       std::string error_message = "Assignment operator for class\n\n";
@@ -99,7 +99,7 @@ namespace oomph
     }
 
     /// Issue error message and terminate execution
-    void broken_copy(const std::string &class_name)
+    void broken_copy(const std::string& class_name)
     {
       // Write the error message into a string
       std::string error_message = "Copy constructor for class\n\n";
@@ -128,25 +128,25 @@ namespace oomph
   namespace CumulativeTimings
   {
     /// (Re-)start i-th timer
-    void start(const unsigned &i)
+    void start(const unsigned& i)
     {
       Start_time[i] = clock();
     }
 
     /// Halt i-th timer
-    void halt(const unsigned &i)
+    void halt(const unsigned& i)
     {
       Timing[i] += clock() - Start_time[i];
     }
 
     /// Report time accumulated by i-th timer
-    double cumulative_time(const unsigned &i)
+    double cumulative_time(const unsigned& i)
     {
       return double(Timing[i]) / CLOCKS_PER_SEC;
     }
 
     /// Reset i-th timer
-    void reset(const unsigned &i)
+    void reset(const unsigned& i)
     {
       Timing[i] = clock_t(0.0);
     }
@@ -162,7 +162,7 @@ namespace oomph
     }
 
     /// Set number of timings that can be recorded in parallel
-    void set_ntimers(const unsigned &ntimers)
+    void set_ntimers(const unsigned& ntimers)
     {
       Timing.resize(ntimers, clock_t(0.0));
       Start_time.resize(ntimers, clock_t(0.0));
@@ -182,9 +182,9 @@ namespace oomph
   namespace BlackBoxFDNewtonSolver
   {
     /// Function pointer for residual function: Parameters, unknowns, residuals
-    typedef void (*ResidualFctPt)(const Vector<double> &,
-                                  const Vector<double> &,
-                                  Vector<double> &);
+    typedef void (*ResidualFctPt)(const Vector<double>&,
+                                  const Vector<double>&,
+                                  Vector<double>&);
 
     /// Max. # of Newton iterations
     unsigned Max_iter = 20;
@@ -211,8 +211,8 @@ namespace oomph
     /// where all arguments are double Vectors.
     /// unknowns.size() = residuals.size()
     void black_box_fd_newton_solve(ResidualFctPt residual_fct,
-                                   const Vector<double> &params,
-                                   Vector<double> &unknowns)
+                                   const Vector<double>& params,
+                                   Vector<double>& unknowns)
     {
       // Jacobian, current and advanced residual Vectors
       unsigned ndof = unknowns.size();
@@ -357,15 +357,15 @@ namespace oomph
     //=======================================================================
     /// Line search helper for globally convergent Newton method
     //=======================================================================
-    void line_search(const Vector<double> &x_old,
+    void line_search(const Vector<double>& x_old,
                      const double half_residual_squared_old,
-                     const Vector<double> &gradient,
+                     const Vector<double>& gradient,
                      ResidualFctPt residual_fct,
-                     const Vector<double> &params,
-                     Vector<double> &newton_dir,
-                     Vector<double> &x,
-                     double &half_residual_squared,
-                     const double &stpmax)
+                     const Vector<double>& params,
+                     Vector<double>& newton_dir,
+                     Vector<double>& x,
+                     double& half_residual_squared,
+                     const double& stpmax)
     {
       const double min_fct_decrease = 1.0e-4;
       double convergence_tol_on_x = 1.0e-16;
@@ -498,7 +498,7 @@ namespace oomph
   /// issue a warning -- or, if directory_must_exist()==true,
   /// die by throwing and OomphLibError
   //======================================================================
-  void DocInfo::set_directory(const std::string &directory_)
+  void DocInfo::set_directory(const std::string& directory_)
   {
     // Try to open a file in output directory
     std::ostringstream filename;
@@ -544,7 +544,7 @@ namespace oomph
   namespace StringConversion
   {
     /// \short Convert a string to lower case (outputs a copy).
-    std::string to_lower(const std::string &input)
+    std::string to_lower(const std::string& input)
     {
       std::string output(input);
       std::string::iterator it;
@@ -557,7 +557,7 @@ namespace oomph
     }
 
     /// \short Convert a string to upper case (outputs a copy).
-    std::string to_upper(const std::string &input)
+    std::string to_upper(const std::string& input)
     {
       std::string output(input);
       std::string::iterator it;
@@ -572,9 +572,9 @@ namespace oomph
     /// an instance of delimiter (i.e. is delimiter is " " will give a list of
     /// words). Note that mutliple delimiters in a row will give empty
     /// strings.
-    void split_string(const std::string &s,
+    void split_string(const std::string& s,
                       char delim,
-                      Vector<std::string> &elems)
+                      Vector<std::string>& elems)
     {
       // From http://stackoverflow.com/questions/236129/splitting-a-string-in-c
       std::stringstream ss(s);
@@ -589,7 +589,7 @@ namespace oomph
     /// an instance of delimiter (i.e. is delimiter is " " will give a list of
     /// words). Note that mutliple delimiters in a row will give empty
     /// strings. Return by value.
-    Vector<std::string> split_string(const std::string &s, char delim)
+    Vector<std::string> split_string(const std::string& s, char delim)
     {
       // From http://stackoverflow.com/questions/236129/splitting-a-string-in-c
       Vector<std::string> elems;
@@ -608,7 +608,7 @@ namespace oomph
     int Argc;
 
     /// Arguments themselves
-    char **Argv;
+    char** Argv;
 
     /// Map to indicate an input flag as having been set
     std::map<std::string, ArgInfo<bool>> Specified_command_line_flag;
@@ -627,7 +627,7 @@ namespace oomph
       Specified_command_line_string_pt;
 
     /// Set values
-    void setup(int argc, char **argv)
+    void setup(int argc, char** argv)
     {
       Argc = argc;
       Argv = argv;
@@ -648,8 +648,8 @@ namespace oomph
     }
 
     /// Specify possible argument-free command line flag
-    void specify_command_line_flag(const std::string &command_line_flag,
-                                   const std::string &doc)
+    void specify_command_line_flag(const std::string& command_line_flag,
+                                   const std::string& doc)
     {
       Specified_command_line_flag[command_line_flag] =
         ArgInfo<bool>(false, 0, doc);
@@ -657,9 +657,9 @@ namespace oomph
 
     /// \short Specify possible command line flag that specifies a double,
     /// accessed via pointer
-    void specify_command_line_flag(const std::string &command_line_flag,
-                                   double *arg_pt,
-                                   const std::string &doc)
+    void specify_command_line_flag(const std::string& command_line_flag,
+                                   double* arg_pt,
+                                   const std::string& doc)
     {
       Specified_command_line_double_pt[command_line_flag] =
         ArgInfo<double>(false, arg_pt, doc);
@@ -667,9 +667,9 @@ namespace oomph
 
     /// \short Specify possible command line flag that specifies an int,
     /// accessed via pointer
-    void specify_command_line_flag(const std::string &command_line_flag,
-                                   int *arg_pt,
-                                   const std::string &doc)
+    void specify_command_line_flag(const std::string& command_line_flag,
+                                   int* arg_pt,
+                                   const std::string& doc)
     {
       Specified_command_line_int_pt[command_line_flag] =
         ArgInfo<int>(false, arg_pt, doc);
@@ -677,9 +677,9 @@ namespace oomph
 
     /// \short Specify possible command line flag that specifies an unsigned,
     /// accessed via pointer
-    void specify_command_line_flag(const std::string &command_line_flag,
-                                   unsigned *arg_pt,
-                                   const std::string &doc)
+    void specify_command_line_flag(const std::string& command_line_flag,
+                                   unsigned* arg_pt,
+                                   const std::string& doc)
     {
       Specified_command_line_unsigned_pt[command_line_flag] =
         ArgInfo<unsigned>(false, arg_pt, doc);
@@ -687,9 +687,9 @@ namespace oomph
 
     /// \short Specify possible command line flag that specifies a string,
     /// accessed via pointer
-    void specify_command_line_flag(const std::string &command_line_flag,
-                                   std::string *arg_pt,
-                                   const std::string &doc)
+    void specify_command_line_flag(const std::string& command_line_flag,
+                                   std::string* arg_pt,
+                                   const std::string& doc)
     {
       Specified_command_line_string_pt[command_line_flag] =
         ArgInfo<std::string>(false, arg_pt, doc);
@@ -697,7 +697,7 @@ namespace oomph
 
     /// \short Check if command line flag has been set (value will have been
     /// assigned directly).
-    bool command_line_flag_has_been_set(const std::string &flag)
+    bool command_line_flag_has_been_set(const std::string& flag)
     {
       for (std::map<std::string, ArgInfo<bool>>::iterator it =
              Specified_command_line_flag.begin();
@@ -758,7 +758,7 @@ namespace oomph
     }
 
     /// Document the values of all flags (specified or not).
-    void doc_all_flags(std::ostream &outstream)
+    void doc_all_flags(std::ostream& outstream)
     {
       for (std::map<std::string, ArgInfo<bool>>::iterator it =
              Specified_command_line_flag.begin();
@@ -931,7 +931,7 @@ namespace oomph
     }
 
     /// Helper function to check if command line index is legal
-    void check_arg_index(const int &argc, const int &arg_index)
+    void check_arg_index(const int& argc, const int& arg_index)
     {
       if (arg_index >= argc)
       {
@@ -954,8 +954,8 @@ namespace oomph
     /// \short Parse command line, check for recognised flags and assign
     /// associated values
     void parse_and_assign(int argc,
-                          char *argv[],
-                          const bool &throw_on_unrecognised_args)
+                          char* argv[],
+                          const bool& throw_on_unrecognised_args)
     {
       // Keep looping over command line arguments
       int arg_index = 1;
@@ -1122,7 +1122,7 @@ namespace oomph
 
     /// \short Parse previously specified command line, check for
     /// recognised flags and assign associated values
-    void parse_and_assign(const bool &throw_on_unrecognised_args)
+    void parse_and_assign(const bool& throw_on_unrecognised_args)
     {
       parse_and_assign(Argc, Argv, throw_on_unrecognised_args);
     }
@@ -1138,7 +1138,7 @@ namespace oomph
   //========================================================================
   /// Precede the output by the processor ID but output everything
   //========================================================================
-  bool MPIOutputModifier::operator()(std::ostream &stream)
+  bool MPIOutputModifier::operator()(std::ostream& stream)
   {
     int my_rank = Communicator_pt->my_rank();
 
@@ -1170,8 +1170,8 @@ namespace oomph
   /// MPI_COMM_WORLD itself as oomph-lib's communicator. Defaults to true.
   //=============================================================================
   void MPI_Helpers::init(int argc,
-                         char **argv,
-                         const bool &make_duplicate_of_mpi_comm_world)
+                         char** argv,
+                         const bool& make_duplicate_of_mpi_comm_world)
   {
 #ifdef OOMPH_HAS_MPI
     // call mpi int
@@ -1231,7 +1231,7 @@ namespace oomph
   //=============================================================================
   /// access to the global oomph-lib communicator
   //=============================================================================
-  OomphCommunicator *MPI_Helpers::communicator_pt()
+  OomphCommunicator* MPI_Helpers::communicator_pt()
   {
 #ifdef MPI
 #ifdef PARANOID
@@ -1275,7 +1275,7 @@ namespace oomph
   }
 
   bool MPI_Helpers::MPI_has_been_initialised = false;
-  OomphCommunicator *MPI_Helpers::Communicator_pt = 0;
+  OomphCommunicator* MPI_Helpers::Communicator_pt = 0;
 
   //====================================================================
   /// Namespace for flagging up obsolete parts of the code
@@ -1321,7 +1321,7 @@ namespace oomph
     }
 
     /// Ouput a warning message with a string argument
-    void obsolete(const std::string &message)
+    void obsolete(const std::string& message)
     {
       if (FlagObsoleteCode)
       {
@@ -1551,7 +1551,7 @@ namespace oomph
     /// empty_my_memory_usage_file(). Note: This requires getpid() which is
     /// defined in unistd.h so if you don't have that we won't build that
     /// function!
-    void doc_my_memory_usage(const std::string &prefix_string)
+    void doc_my_memory_usage(const std::string& prefix_string)
     {
       // bail out straight away?
       if (Bypass_all_memory_usage_monitoring) return;
@@ -1616,7 +1616,7 @@ namespace oomph
     /// memory usage in file whose name is specified by
     /// Total_memory_usage_filename. Data is appended to that file; wipe it with
     /// empty_memory_usage_file().
-    void doc_total_memory_usage(const std::string &prefix_string)
+    void doc_total_memory_usage(const std::string& prefix_string)
     {
       // bail out straight away?
       if (Bypass_all_memory_usage_monitoring) return;
@@ -1661,7 +1661,7 @@ namespace oomph
     /// \short Doc total and local memory usage, prepended by string (which
     /// allows identification from where the function is called, say). NOTE:
     /// Local memory usage only works if we have unistd.h header
-    void doc_memory_usage(const std::string &prefix_string)
+    void doc_memory_usage(const std::string& prefix_string)
     {
       // bail out straight away?
       if (Bypass_all_memory_usage_monitoring) return;
@@ -1707,7 +1707,7 @@ namespace oomph
     /// empty_top_file() if you wish. Note that this is again quite Linux
     /// specific and unlikely to work on other operating systems. Insert
     /// optional comment into output file before starting.
-    void run_continous_top(const std::string &comment)
+    void run_continous_top(const std::string& comment)
     {
       // bail out straight away?
       if (Bypass_all_memory_usage_monitoring) return;
@@ -1764,7 +1764,7 @@ namespace oomph
     /// \short Stop running top continuously. Note that this is
     /// again quite Linux specific and unlikely to work on other operating
     /// systems. Insert optional comment into output file before stopping.
-    void stop_continous_top(const std::string &comment)
+    void stop_continous_top(const std::string& comment)
     {
       // bail out straight away?
       if (Bypass_all_memory_usage_monitoring) return;
@@ -1802,7 +1802,7 @@ namespace oomph
     }
 
     /// \short Insert comment into running continuous top output
-    void insert_comment_to_continous_top(const std::string &comment)
+    void insert_comment_to_continous_top(const std::string& comment)
     {
       // bail out straight away?
       if (Bypass_all_memory_usage_monitoring) return;

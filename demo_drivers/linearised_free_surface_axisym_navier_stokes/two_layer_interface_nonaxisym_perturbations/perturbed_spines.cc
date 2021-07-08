@@ -47,7 +47,7 @@ namespace oomph
   /// PerturbedSpineMesh
   //=======================================================================
   void PerturbedSpineNode::node_update(
-    const bool &update_all_time_levels_for_new_node)
+    const bool& update_all_time_levels_for_new_node)
   {
     PerturbedSpine_mesh_pt->perturbed_spine_node_update(this);
 
@@ -90,15 +90,15 @@ namespace oomph
       for (unsigned n = 0; n < n_node; n++)
       {
         // Find pointer to the perturbed spine
-        PerturbedSpine *const perturbedspine_pt =
-          static_cast<PerturbedSpineNode *>(this->node_pt(n))
+        PerturbedSpine* const perturbedspine_pt =
+          static_cast<PerturbedSpineNode*>(this->node_pt(n))
             ->perturbed_spine_pt();
 
         // If there is a spine then find the pointer to the data
         if (perturbedspine_pt)
         {
           // Find the pointer to the data
-          Data *perturbed_spine_height_data_pt = perturbedspine_pt->height_pt();
+          Data* perturbed_spine_height_data_pt = perturbedspine_pt->height_pt();
 
           // Now find the index of the corresponding perturbed spine
           const unsigned n_node_update_data = this->ngeom_data();
@@ -135,7 +135,7 @@ namespace oomph
   /// so we buffer the case if update_all_solid_nodes (which defaults
   /// to false) is set to true.]
   //=======================================================================
-  void PerturbedSpineMesh::node_update(const bool &update_all_solid_nodes)
+  void PerturbedSpineMesh::node_update(const bool& update_all_solid_nodes)
   {
 #ifdef PARANOID
     if (update_all_solid_nodes)
@@ -157,7 +157,7 @@ namespace oomph
     for (unsigned long l = 0; l < Node_pt_range; l++)
     {
 #ifdef PARANOID
-      if (!dynamic_cast<PerturbedSpineNode *>(Node_pt[l]))
+      if (!dynamic_cast<PerturbedSpineNode*>(Node_pt[l]))
       {
         std::ostringstream error_stream;
         error_stream << "Error: Node " << l << "is a "
@@ -170,7 +170,7 @@ namespace oomph
 #endif
 
       // Need to cast to spine node to get to update function
-      dynamic_cast<PerturbedSpineNode *>(Node_pt[l])->node_update();
+      dynamic_cast<PerturbedSpineNode*>(Node_pt[l])->node_update();
     }
   }
 
@@ -178,7 +178,7 @@ namespace oomph
   /// Assign (global) equation numbers to spines, nodes and elements
   //=======================================================================
   unsigned long PerturbedSpineMesh::assign_global_eqn_numbers(
-    Vector<double *> &Dof_pt)
+    Vector<double*>& Dof_pt)
   {
     // First call the general mesh assign_eqn_numbers
     unsigned long equation_number = Mesh::assign_global_eqn_numbers(Dof_pt);
@@ -200,8 +200,8 @@ namespace oomph
   //=======================================================================
   /// Overload the dump function so that the spine data is also dumped
   //=======================================================================
-  void PerturbedSpineMesh::dump(std::ofstream &dump_file,
-                                const bool &use_old_ordering) const
+  void PerturbedSpineMesh::dump(std::ofstream& dump_file,
+                                const bool& use_old_ordering) const
   {
     // Call the standard mesh dump function
     Mesh::dump(dump_file, use_old_ordering);
@@ -226,7 +226,7 @@ namespace oomph
   //========================================================================
   /// Overload the read function so that the spine data is also read
   //========================================================================
-  void PerturbedSpineMesh::read(std::ifstream &restart_file)
+  void PerturbedSpineMesh::read(std::ifstream& restart_file)
   {
     // Call the standard mesh read function
     Mesh::read(restart_file);

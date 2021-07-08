@@ -61,7 +61,7 @@ namespace Global_Physical_Variables
   double Nu = 0.1;
 
   /// Constitutive law used to determine the mesh deformation
-  ConstitutiveLaw *Constitutive_law_pt;
+  ConstitutiveLaw* Constitutive_law_pt;
 
   /// Reynolds number
   double Re;
@@ -90,12 +90,12 @@ public:
   /// Constructor: Pass number of elements in x and y directions. Also lengths
   /// of the domain in x- and y-directions and the height of the layer
 
-  InterfaceProblem(const unsigned &Nx,
-                   const unsigned &Ny,
-                   const unsigned &Nz,
-                   const double &Lx,
-                   const double &Ly,
-                   const double &h);
+  InterfaceProblem(const unsigned& Nx,
+                   const unsigned& Ny,
+                   const unsigned& Nz,
+                   const double& Lx,
+                   const double& Ly,
+                   const double& h);
 
   /// Spine heights/lengths are unknowns in the problem so their
   /// values get corrected during each Newton step. However,
@@ -107,10 +107,10 @@ public:
   }
 
   /// Run an unsteady simulation with specified number of steps
-  void unsteady_run(const unsigned &nstep);
+  void unsteady_run(const unsigned& nstep);
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 private:
   /// Trace file
@@ -122,25 +122,25 @@ private:
   double Ly;
 
   /// Pointer to bulk mesh
-  SingleLayerCubicSpineMesh<ELEMENT> *Bulk_mesh_pt;
+  SingleLayerCubicSpineMesh<ELEMENT>* Bulk_mesh_pt;
 
   /// Pointer to the surface mes
-  Mesh *Surface_mesh_pt;
+  Mesh* Surface_mesh_pt;
 
   /// Pointer to a node for documentation purposes
-  Node *Document_node_pt;
+  Node* Document_node_pt;
 };
 
 //====================================================================
 /// Problem constructor
 //====================================================================
 template<class ELEMENT, class TIMESTEPPER>
-InterfaceProblem<ELEMENT, TIMESTEPPER>::InterfaceProblem(const unsigned &nx,
-                                                         const unsigned &ny,
-                                                         const unsigned &nz,
-                                                         const double &lx,
-                                                         const double &ly,
-                                                         const double &h) :
+InterfaceProblem<ELEMENT, TIMESTEPPER>::InterfaceProblem(const unsigned& nx,
+                                                         const unsigned& ny,
+                                                         const unsigned& nz,
+                                                         const double& lx,
+                                                         const double& ly,
+                                                         const double& h) :
   Lx(lx), Ly(ly)
 {
   // Allocate the timestepper
@@ -172,11 +172,11 @@ InterfaceProblem<ELEMENT, TIMESTEPPER>::InterfaceProblem(const unsigned &nx,
     {
       // Set a pointer to the bulk element we wish to our interface
       // element to
-      FiniteElement *bulk_element_pt =
+      FiniteElement* bulk_element_pt =
         Bulk_mesh_pt->finite_element_pt(nx * ny * (nz - 1) + e2 + e1 * nx);
 
       // Create the interface element (on face 3 of the bulk element)
-      FiniteElement *interface_element_pt =
+      FiniteElement* interface_element_pt =
         new SpineSurfaceFluidInterfaceElement<ELEMENT>(bulk_element_pt, 3);
 
       // Add the interface element to the surface mesh
@@ -223,7 +223,7 @@ InterfaceProblem<ELEMENT, TIMESTEPPER>::InterfaceProblem(const unsigned &nx,
 
   // Create a Data object whose single value stores the
   // external pressure
-  Data *external_pressure_data_pt = new Data(1);
+  Data* external_pressure_data_pt = new Data(1);
 
   // Set and pin the external pressure to some random value
   external_pressure_data_pt->set_value(0, 1.31);
@@ -236,7 +236,7 @@ InterfaceProblem<ELEMENT, TIMESTEPPER>::InterfaceProblem(const unsigned &nx,
   for (unsigned e = 0; e < n_bulk; e++)
   {
     // Cast to a fluid element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
     // Set the Reynolds number, etc
     el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -251,8 +251,8 @@ InterfaceProblem<ELEMENT, TIMESTEPPER>::InterfaceProblem(const unsigned &nx,
   for (unsigned e = 0; e < interface_element_pt_range; e++)
   {
     // Cast to a interface element
-    SpineSurfaceFluidInterfaceElement<ELEMENT> *el_pt =
-      dynamic_cast<SpineSurfaceFluidInterfaceElement<ELEMENT> *>(
+    SpineSurfaceFluidInterfaceElement<ELEMENT>* el_pt =
+      dynamic_cast<SpineSurfaceFluidInterfaceElement<ELEMENT>*>(
         Surface_mesh_pt->element_pt(e));
 
     // Set the Capillary number
@@ -270,7 +270,7 @@ InterfaceProblem<ELEMENT, TIMESTEPPER>::InterfaceProblem(const unsigned &nx,
 /// Doc the solution
 //========================================================================
 template<class ELEMENT, class TIMESTEPPER>
-void InterfaceProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo &doc_info)
+void InterfaceProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -299,7 +299,7 @@ void InterfaceProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo &doc_info)
 /// Unsteady run with specified number of steps
 //=============================================================================
 template<class ELEMENT, class TIMESTEPPER>
-void InterfaceProblem<ELEMENT, TIMESTEPPER>::unsteady_run(const unsigned &nstep)
+void InterfaceProblem<ELEMENT, TIMESTEPPER>::unsteady_run(const unsigned& nstep)
 {
   // Increase maximum residual
   Problem::Max_residuals = 100.0;
@@ -375,13 +375,13 @@ class ElasticSimpleCubicMesh : public SimpleCubicMesh<ELEMENT>, public SolidMesh
 {
   // Public functions
 public:
-  ElasticSimpleCubicMesh(const unsigned &nx,
-                         const unsigned &ny,
-                         const unsigned &nz,
-                         const double &lx,
-                         const double &ly,
-                         const double &lz,
-                         TimeStepper *time_stepper_pt) :
+  ElasticSimpleCubicMesh(const unsigned& nx,
+                         const unsigned& ny,
+                         const unsigned& nz,
+                         const double& lx,
+                         const double& ly,
+                         const double& lz,
+                         TimeStepper* time_stepper_pt) :
     SimpleCubicMesh<ELEMENT>(nx, ny, nz, lx, ly, lz, time_stepper_pt),
     SolidMesh()
   {
@@ -399,18 +399,18 @@ class ElasticInterfaceProblem : public Problem
 public:
   /// Constructor: Pass number of elements in x and y directions. Also lengths
   /// of the domain in x- and y-directions and the height of the layer
-  ElasticInterfaceProblem(const unsigned &Nx,
-                          const unsigned &Ny,
-                          const unsigned &Nz,
-                          const double &Lx,
-                          const double &Ly,
-                          const double &h);
+  ElasticInterfaceProblem(const unsigned& Nx,
+                          const unsigned& Ny,
+                          const unsigned& Nz,
+                          const double& Lx,
+                          const double& Ly,
+                          const double& h);
 
   /// Run an unsteady simulation with specified number of steps
-  void unsteady_run(const unsigned &nstep);
+  void unsteady_run(const unsigned& nstep);
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 private:
   /// Trace file
@@ -422,13 +422,13 @@ private:
   double Ly;
 
   /// Pointer to bulk mesh
-  ElasticSimpleCubicMesh<ELEMENT> *Bulk_mesh_pt;
+  ElasticSimpleCubicMesh<ELEMENT>* Bulk_mesh_pt;
 
   /// Pointer to the surface mes
-  Mesh *Surface_mesh_pt;
+  Mesh* Surface_mesh_pt;
 
   /// Pointer to a node for documentation purposes
-  Node *Document_node_pt;
+  Node* Document_node_pt;
 };
 
 //====================================================================
@@ -436,12 +436,12 @@ private:
 //====================================================================
 template<class ELEMENT, class TIMESTEPPER>
 ElasticInterfaceProblem<ELEMENT, TIMESTEPPER>::ElasticInterfaceProblem(
-  const unsigned &nx,
-  const unsigned &ny,
-  const unsigned &nz,
-  const double &lx,
-  const double &ly,
-  const double &h) :
+  const unsigned& nx,
+  const unsigned& ny,
+  const unsigned& nz,
+  const double& lx,
+  const double& ly,
+  const double& h) :
   Lx(lx), Ly(ly)
 {
   // Allocate the timestepper
@@ -473,11 +473,11 @@ ElasticInterfaceProblem<ELEMENT, TIMESTEPPER>::ElasticInterfaceProblem(
     {
       // Set a pointer to the bulk element we wish to our interface
       // element to
-      FiniteElement *bulk_element_pt =
+      FiniteElement* bulk_element_pt =
         Bulk_mesh_pt->finite_element_pt(nx * ny * (nz - 1) + e2 + e1 * nx);
 
       // Create the interface element (on face 3 of the bulk element)
-      FiniteElement *interface_element_pt =
+      FiniteElement* interface_element_pt =
         new ElasticSurfaceFluidInterfaceElement<ELEMENT>(bulk_element_pt, 3);
 
       // Add the interface element to the surface mesh
@@ -496,8 +496,8 @@ ElasticInterfaceProblem<ELEMENT, TIMESTEPPER>::ElasticInterfaceProblem(
   unsigned long n_boundary_node = Bulk_mesh_pt->nboundary_node(0);
   for (unsigned long n = 0; n < n_boundary_node; n++)
   {
-    SolidNode *nod_pt =
-      static_cast<SolidNode *>(Bulk_mesh_pt->boundary_node_pt(0, n));
+    SolidNode* nod_pt =
+      static_cast<SolidNode*>(Bulk_mesh_pt->boundary_node_pt(0, n));
     for (unsigned i = 0; i < 3; i++)
     {
       nod_pt->pin(i);
@@ -511,8 +511,8 @@ ElasticInterfaceProblem<ELEMENT, TIMESTEPPER>::ElasticInterfaceProblem(
     n_boundary_node = Bulk_mesh_pt->nboundary_node(b);
     for (unsigned long n = 0; n < n_boundary_node; n++)
     {
-      SolidNode *nod_pt =
-        static_cast<SolidNode *>(Bulk_mesh_pt->boundary_node_pt(b, n));
+      SolidNode* nod_pt =
+        static_cast<SolidNode*>(Bulk_mesh_pt->boundary_node_pt(b, n));
       nod_pt->pin(1);
       nod_pt->pin_position(1);
     }
@@ -524,8 +524,8 @@ ElasticInterfaceProblem<ELEMENT, TIMESTEPPER>::ElasticInterfaceProblem(
     n_boundary_node = Bulk_mesh_pt->nboundary_node(b);
     for (unsigned long n = 0; n < n_boundary_node; n++)
     {
-      SolidNode *nod_pt =
-        static_cast<SolidNode *>(Bulk_mesh_pt->boundary_node_pt(b, n));
+      SolidNode* nod_pt =
+        static_cast<SolidNode*>(Bulk_mesh_pt->boundary_node_pt(b, n));
       nod_pt->pin(0);
       nod_pt->pin_position(0);
     }
@@ -535,14 +535,14 @@ ElasticInterfaceProblem<ELEMENT, TIMESTEPPER>::ElasticInterfaceProblem(
   unsigned n_node = Bulk_mesh_pt->nnode();
   for (unsigned n = 0; n < n_node; n++)
   {
-    SolidNode *nod_pt = static_cast<SolidNode *>(Bulk_mesh_pt->node_pt(n));
+    SolidNode* nod_pt = static_cast<SolidNode*>(Bulk_mesh_pt->node_pt(n));
     nod_pt->pin_position(0);
     nod_pt->pin_position(1);
   }
 
   // Create a Data object whose single value stores the
   // external pressure
-  Data *external_pressure_data_pt = new Data(1);
+  Data* external_pressure_data_pt = new Data(1);
 
   // Set and pin the external pressure to some random value
   external_pressure_data_pt->set_value(0, 1.31);
@@ -555,7 +555,7 @@ ElasticInterfaceProblem<ELEMENT, TIMESTEPPER>::ElasticInterfaceProblem(
   for (unsigned e = 0; e < n_bulk; e++)
   {
     // Cast to a fluid element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
     // Set the Reynolds number, etc
     el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -573,8 +573,8 @@ ElasticInterfaceProblem<ELEMENT, TIMESTEPPER>::ElasticInterfaceProblem(
   for (unsigned e = 0; e < interface_element_pt_range; e++)
   {
     // Cast to a interface element
-    ElasticSurfaceFluidInterfaceElement<ELEMENT> *el_pt =
-      dynamic_cast<ElasticSurfaceFluidInterfaceElement<ELEMENT> *>(
+    ElasticSurfaceFluidInterfaceElement<ELEMENT>* el_pt =
+      dynamic_cast<ElasticSurfaceFluidInterfaceElement<ELEMENT>*>(
         Surface_mesh_pt->element_pt(e));
 
     // Set the Capillary number
@@ -593,7 +593,7 @@ ElasticInterfaceProblem<ELEMENT, TIMESTEPPER>::ElasticInterfaceProblem(
 //========================================================================
 template<class ELEMENT, class TIMESTEPPER>
 void ElasticInterfaceProblem<ELEMENT, TIMESTEPPER>::doc_solution(
-  DocInfo &doc_info)
+  DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -625,7 +625,7 @@ void ElasticInterfaceProblem<ELEMENT, TIMESTEPPER>::doc_solution(
 //=============================================================================
 template<class ELEMENT, class TIMESTEPPER>
 void ElasticInterfaceProblem<ELEMENT, TIMESTEPPER>::unsteady_run(
-  const unsigned &nstep)
+  const unsigned& nstep)
 {
   // Increase maximum residual
   Problem::Max_residuals = 100.0;
@@ -638,7 +638,7 @@ void ElasticInterfaceProblem<ELEMENT, TIMESTEPPER>::unsteady_run(
   unsigned n_node = Bulk_mesh_pt->nnode();
   for (unsigned n = 0; n < n_node; n++)
   {
-    Node *nod_pt = Bulk_mesh_pt->node_pt(n);
+    Node* nod_pt = Bulk_mesh_pt->node_pt(n);
     // Get the x y and z values
     double x_value = nod_pt->x(0);
     double y_value = nod_pt->x(1);
@@ -704,7 +704,7 @@ void ElasticInterfaceProblem<ELEMENT, TIMESTEPPER>::unsteady_run(
 
 // In my version we will change nsteps in the programs
 //======================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Set physical parameters:
 

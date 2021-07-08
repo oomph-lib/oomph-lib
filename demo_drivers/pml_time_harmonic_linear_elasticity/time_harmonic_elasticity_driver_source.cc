@@ -59,7 +59,7 @@ using namespace oomph;
 namespace Global_Parameters
 {
   /// \short Body force
-  void body_force(const Vector<double> &x, Vector<std::complex<double>> &b)
+  void body_force(const Vector<double>& x, Vector<std::complex<double>>& b)
   {
     /// Define the magnitude of the forcing
     double magnitude = 1.0;
@@ -128,7 +128,7 @@ namespace Global_Parameters
   double Omega_sq = 10.0;
 
   /// The elasticity tensor
-  PMLTimeHarmonicIsotropicElasticityTensor *E_pt;
+  PMLTimeHarmonicIsotropicElasticityTensor* E_pt;
 
   /// Output directory
   string Directory = "RESLT";
@@ -163,7 +163,7 @@ public:
   void actions_after_adapt();
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 private:
   /// Helper function to complete problem setup
@@ -174,38 +174,38 @@ private:
   /// Pointer to refineable solid mesh
   /// Adaptivity is not verified in this particular case
   /// The computation will run as a non-adaptive solution
-  RectangularQuadMesh<ELASTICITY_ELEMENT> *Solid_mesh_pt;
+  RectangularQuadMesh<ELASTICITY_ELEMENT>* Solid_mesh_pt;
 
 #else
 
   /// Pointer to solid mesh
-  RectangularQuadMesh<ELASTICITY_ELEMENT> *Solid_mesh_pt;
+  RectangularQuadMesh<ELASTICITY_ELEMENT>* Solid_mesh_pt;
 
 #endif
 
   /// Pointer to the right PML mesh
-  Mesh *PML_right_mesh_pt;
+  Mesh* PML_right_mesh_pt;
 
   /// Pointer to the top PML mesh
-  Mesh *PML_top_mesh_pt;
+  Mesh* PML_top_mesh_pt;
 
   /// Pointer to the left PML mesh
-  Mesh *PML_left_mesh_pt;
+  Mesh* PML_left_mesh_pt;
 
   /// Pointer to the bottom PML mesh
-  Mesh *PML_bottom_mesh_pt;
+  Mesh* PML_bottom_mesh_pt;
 
   /// Pointer to the top right corner PML mesh
-  Mesh *PML_top_right_mesh_pt;
+  Mesh* PML_top_right_mesh_pt;
 
   /// Pointer to the top left corner PML mesh
-  Mesh *PML_top_left_mesh_pt;
+  Mesh* PML_top_left_mesh_pt;
 
   /// Pointer to the bottom right corner PML mesh
-  Mesh *PML_bottom_right_mesh_pt;
+  Mesh* PML_bottom_right_mesh_pt;
 
   /// Pointer to the bottom left corner PML mesh
-  Mesh *PML_bottom_left_mesh_pt;
+  Mesh* PML_bottom_left_mesh_pt;
 
   /// DocInfo object for output
   DocInfo Doc_info;
@@ -312,8 +312,8 @@ void ElasticAnnulusProblem<ELASTICITY_ELEMENT>::complete_problem_setup()
   {
     /// \short Upcast from GeneralisedElement to time harmonic
     /// linear elasticity bulk element
-    PMLTimeHarmonicLinearElasticityEquations<2> *el_pt =
-      dynamic_cast<PMLTimeHarmonicLinearElasticityEquations<2> *>(
+    PMLTimeHarmonicLinearElasticityEquations<2>* el_pt =
+      dynamic_cast<PMLTimeHarmonicLinearElasticityEquations<2>*>(
         mesh_pt()->element_pt(e));
 
     // Set the constitutive law
@@ -385,7 +385,7 @@ void ElasticAnnulusProblem<ELASTICITY_ELEMENT>::actions_after_adapt()
 /// Doc the solution
 //==================================================================
 template<class ELASTICITY_ELEMENT>
-void ElasticAnnulusProblem<ELASTICITY_ELEMENT>::doc_solution(DocInfo &doc_info)
+void ElasticAnnulusProblem<ELASTICITY_ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -579,7 +579,7 @@ void ElasticAnnulusProblem<ELASTICITY_ELEMENT>::create_pml_meshes()
 //=======start_of_main==================================================
 /// Driver for annular disk loaded by pressure
 //======================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Start timing of the code
   Global_Parameters::T_start = TimingHelpers::timer();

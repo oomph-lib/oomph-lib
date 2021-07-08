@@ -49,12 +49,12 @@ namespace oomph
     TetgenScaffoldMesh() {}
 
     /// \short Constructor: Pass the filename of the tetrahedra file
-    TetgenScaffoldMesh(const std::string &node_file_name,
-                       const std::string &element_file_name,
-                       const std::string &face_file_name);
+    TetgenScaffoldMesh(const std::string& node_file_name,
+                       const std::string& element_file_name,
+                       const std::string& face_file_name);
 
     /// \short Constructor using direct tetgenio object
-    TetgenScaffoldMesh(tetgenio &tetgen_data);
+    TetgenScaffoldMesh(tetgenio& tetgen_data);
 
     /// Empty destructor
     ~TetgenScaffoldMesh() {}
@@ -62,7 +62,7 @@ namespace oomph
     /// \short Return the global node of each local node
     /// listed element-by-element e*n_local_node + n_local
     /// Note that the node numbers are indexed from 1
-    unsigned global_node_number(const unsigned &i)
+    unsigned global_node_number(const unsigned& i)
     {
       return Global_node[i];
     }
@@ -71,7 +71,7 @@ namespace oomph
     /// This is zero-based as in tetgen. Zero means the face is not
     /// on a boundary. Postive numbers identify the boundary.
     /// Will be reduced by one to identify the oomph-lib boundary.
-    unsigned face_boundary(const unsigned &e, const unsigned &i) const
+    unsigned face_boundary(const unsigned& e, const unsigned& i) const
     {
       return Face_boundary[e][i];
     }
@@ -84,14 +84,14 @@ namespace oomph
 
     /// \short Return a boolean indicating whether the i-th global
     /// edge is on a boundary
-    bool edge_boundary(const unsigned &i)
+    bool edge_boundary(const unsigned& i)
     {
       return Edge_boundary[i];
     }
 
     /// \short Return the global index of the i-th edge in the e-th element:
     /// The global index starts from zero
-    unsigned edge_index(const unsigned &e, const unsigned &i) const
+    unsigned edge_index(const unsigned& e, const unsigned& i) const
     {
       return Edge_index[e][i];
     }
@@ -104,7 +104,7 @@ namespace oomph
 
     /// \short Return the global index of the i-th face in the e-th element:
     /// The global index starts from zero
-    unsigned face_index(const unsigned &e, const unsigned &i) const
+    unsigned face_index(const unsigned& e, const unsigned& i) const
     {
       return Face_index[e][i];
     }
@@ -112,7 +112,7 @@ namespace oomph
     /// \short Return the attribute of the element e.
     /// NOTE: Attributes are doubles because tetgen forces us to! We only
     /// use them for region IDs
-    double element_attribute(const unsigned &e) const
+    double element_attribute(const unsigned& e) const
     {
       return Element_attribute[e];
     }

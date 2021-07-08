@@ -49,7 +49,7 @@ namespace oomph
   {
   private:
     /// Undeformed Eulerian shape
-    GeomObject *Undef_eulerian_posn_pt;
+    GeomObject* Undef_eulerian_posn_pt;
 
     /// Set the default gradients of the elements
     void assign_default_element_gradients();
@@ -63,21 +63,21 @@ namespace oomph
     /// and the timestepper -- defaults to (Steady) default timestepper defined
     /// in the Mesh base class
     OneDLagrangianMesh(
-      const unsigned &n_element,
-      const double &length,
-      GeomObject *undef_eulerian_posn_pt,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper);
+      const unsigned& n_element,
+      const double& length,
+      GeomObject* undef_eulerian_posn_pt,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
     /// \short Constructor: Pass number of elements, xmin, xmax
     /// pointer to GeomObject that defines the undeformed Eulerian position,
     /// and the timestepper -- defaults to (Steady) default timestepper defined
     /// in the Mesh base class
     OneDLagrangianMesh(
-      const unsigned &n_element,
-      const double &xmin,
-      const double &xmax,
-      GeomObject *undef_eulerian_posn_pt,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper);
+      const unsigned& n_element,
+      const double& xmin,
+      const double& xmax,
+      GeomObject* undef_eulerian_posn_pt,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
   };
 
 } // namespace oomph

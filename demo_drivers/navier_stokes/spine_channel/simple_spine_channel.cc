@@ -55,13 +55,13 @@ class WavyWall : public GeomObject
 {
 public:
   /// \short Constructor:  Pass wavelength and amplitude
-  WavyWall(const double &l, const double &amplitude) :
+  WavyWall(const double& l, const double& amplitude) :
     GeomObject(1, 2), L(l), A(amplitude)
   {
   }
 
   /// Position vector to wavy wall.
-  void position(const Vector<double> &zeta, Vector<double> &r) const
+  void position(const Vector<double>& zeta, Vector<double>& r) const
   {
     r[0] = zeta[0];
     r[1] = A * (1.0 - cos(2.0 * MathematicalConstants::Pi * zeta[0] / L));
@@ -92,27 +92,27 @@ public:
   /// number of elements in y-direction, length in x direction, initial
   /// height of mesh, and pointer to timestepper (defaults to
   /// Steady timestepper)
-  SimpleSpineMesh(const unsigned &nx,
-                  const unsigned &ny,
-                  const double &lx,
-                  const double &h,
-                  GeomObject *substrate_pt,
-                  TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper);
+  SimpleSpineMesh(const unsigned& nx,
+                  const unsigned& ny,
+                  const double& lx,
+                  const double& h,
+                  GeomObject* substrate_pt,
+                  TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
   /// \short Function pointer to  function, h(x), that may be used
   /// to specify the "height" of the domain, by assigning the function
   /// values to the spine heights.
-  typedef double (*HeightFctPt)(const double &x);
+  typedef double (*HeightFctPt)(const double& x);
 
   /// Access function: Pointer to height function
-  HeightFctPt &height_fct_pt()
+  HeightFctPt& height_fct_pt()
   {
     return Height_fct_pt;
   }
 
   /// \short Height function -- this is called by update_spine_heights()
   /// when spine heights are assigned.
-  double height_fct(const double &x)
+  double height_fct(const double& x)
   {
     // Resolve function pointer if non-NULL
     if (Height_fct_pt == 0)
@@ -146,7 +146,7 @@ public:
   /// actions: Nodes are located along vertical "spines" that emanate
   /// from the "substrate" (the lower wall) specified by a
   /// GeomObject.
-  virtual void spine_node_update(SpineNode *spine_node_pt)
+  virtual void spine_node_update(SpineNode* spine_node_pt)
   {
     // Get fraction along the spine
     double w = spine_node_pt->fraction();
@@ -176,7 +176,7 @@ private:
   HeightFctPt Height_fct_pt;
 
   /// Pointer to GeomObject that specifies the "substrate" (the lower wall)
-  GeomObject *Substrate_pt;
+  GeomObject* Substrate_pt;
 };
 
 //===========================================================================
@@ -189,12 +189,12 @@ private:
 /// e.g  SpineElement<QCrouzeixRaviartElement<2>)
 //===========================================================================
 template<class ELEMENT>
-SimpleSpineMesh<ELEMENT>::SimpleSpineMesh(const unsigned &nx,
-                                          const unsigned &ny,
-                                          const double &lx,
-                                          const double &h,
-                                          GeomObject *substrate_pt,
-                                          TimeStepper *time_stepper_pt) :
+SimpleSpineMesh<ELEMENT>::SimpleSpineMesh(const unsigned& nx,
+                                          const unsigned& ny,
+                                          const double& lx,
+                                          const double& h,
+                                          GeomObject* substrate_pt,
+                                          TimeStepper* time_stepper_pt) :
   SimpleRectangularQuadMesh<ELEMENT>(nx, ny, lx, h, time_stepper_pt),
   Default_height(h),
   Height_fct_pt(0),
@@ -208,7 +208,7 @@ SimpleSpineMesh<ELEMENT>::SimpleSpineMesh(const unsigned &nx,
   // Allocate memory for the spines and fractions along spines
 
   // Read out number of linear points in the element
-  unsigned np = dynamic_cast<ELEMENT *>(finite_element_pt(0))->nnode_1d();
+  unsigned np = dynamic_cast<ELEMENT*>(finite_element_pt(0))->nnode_1d();
 
   // Number of spines
   unsigned nspine = (np - 1) * nx + 1;
@@ -224,11 +224,11 @@ SimpleSpineMesh<ELEMENT>::SimpleSpineMesh(const unsigned &nx,
   // Element 0
   // Node 0
   // Assign the new spine with specified height
-  Spine *new_spine_pt = new Spine(h);
+  Spine* new_spine_pt = new Spine(h);
   Spine_pt.push_back(new_spine_pt);
 
   // Get pointer to node
-  SpineNode *nod_pt = element_node_pt(0, 0);
+  SpineNode* nod_pt = element_node_pt(0, 0);
 
   // Pass the pointer to the spine to the node
   nod_pt->spine_pt() = new_spine_pt;
@@ -258,7 +258,7 @@ SimpleSpineMesh<ELEMENT>::SimpleSpineMesh(const unsigned &nx,
 
   // The remesh function involving this spine only involves
   // a single geometric object: The substrate
-  Vector<GeomObject *> geom_object_pt(1);
+  Vector<GeomObject*> geom_object_pt(1);
   geom_object_pt[0] = Substrate_pt;
 
   // Pass geom object(s) to spine
@@ -273,7 +273,7 @@ SimpleSpineMesh<ELEMENT>::SimpleSpineMesh(const unsigned &nx,
     for (unsigned l1 = 1; l1 < np; l1++)
     {
       // Get pointer to node
-      SpineNode *nod_pt = element_node_pt(i * nx, l1 * np);
+      SpineNode* nod_pt = element_node_pt(i * nx, l1 * np);
 
       // Pass the pointer to the spine to the node
       nod_pt->spine_pt() = new_spine_pt;
@@ -308,7 +308,7 @@ SimpleSpineMesh<ELEMENT>::SimpleSpineMesh(const unsigned &nx,
       Spine_pt.push_back(new_spine_pt);
 
       // Get the node
-      SpineNode *nod_pt = element_node_pt(j, l2);
+      SpineNode* nod_pt = element_node_pt(j, l2);
 
       // Pass the pointer to the spine to the node
       nod_pt->spine_pt() = new_spine_pt;
@@ -338,7 +338,7 @@ SimpleSpineMesh<ELEMENT>::SimpleSpineMesh(const unsigned &nx,
 
       // The remesh function involving this spine only involves
       // a single geometric object: The substrate
-      Vector<GeomObject *> geom_object_pt(1);
+      Vector<GeomObject*> geom_object_pt(1);
       geom_object_pt[0] = Substrate_pt;
 
       // Pass geom object(s) to spine
@@ -352,7 +352,7 @@ SimpleSpineMesh<ELEMENT>::SimpleSpineMesh(const unsigned &nx,
         for (unsigned l1 = 1; l1 < np; l1++)
         {
           // Get the node
-          SpineNode *nod_pt = element_node_pt(i * nx + j, l1 * np + l2);
+          SpineNode* nod_pt = element_node_pt(i * nx + j, l1 * np + l2);
 
           // Set the pointer to the spine
           nod_pt->spine_pt() = new_spine_pt;
@@ -400,7 +400,7 @@ namespace Global_Physical_Variables
   double A = -0.6;
 
   /// Height of domain
-  double height(const double &x)
+  double height(const double& x)
   {
     if ((x > X_indent_start) && (x < (X_indent_start + L)))
     {
@@ -445,12 +445,12 @@ public:
   void actions_after_newton_solve() {}
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// Overload access to mesh
-  SimpleSpineMesh<ELEMENT> *mesh_pt()
+  SimpleSpineMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<SimpleSpineMesh<ELEMENT> *>(Problem::mesh_pt());
+    return dynamic_cast<SimpleSpineMesh<ELEMENT>*>(Problem::mesh_pt());
   }
 
 private:
@@ -480,7 +480,7 @@ ChannelSpineFlowProblem<ELEMENT>::ChannelSpineFlowProblem()
   unsigned Ny = 10;
 
   // Substrate (lower wall): A wavy wall
-  GeomObject *substrate_pt =
+  GeomObject* substrate_pt =
     new WavyWall(Global_Physical_Variables::L_total, -0.2);
 
   // Build and assign mesh -- pass pointer to geometric object
@@ -568,7 +568,7 @@ ChannelSpineFlowProblem<ELEMENT>::ChannelSpineFlowProblem()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Physical_Variables::Re;
   }
@@ -582,7 +582,7 @@ ChannelSpineFlowProblem<ELEMENT>::ChannelSpineFlowProblem()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void ChannelSpineFlowProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void ChannelSpineFlowProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];

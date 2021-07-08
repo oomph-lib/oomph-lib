@@ -81,12 +81,12 @@ namespace oomph
     /// \short Pointer that addresses the storage that will be used to read and
     /// set the shape functions. The shape functions are packed into
     /// a flat array of doubles.
-    double *Psi;
+    double* Psi;
 
     /// \short Pointer that addresses the storage allocated by the object on
     /// construction. This will be the same as Psi if the object is not
     /// copied.
-    double *Allocated_storage;
+    double* Allocated_storage;
 
     /// Size of the first index of the shape function
     unsigned Index1;
@@ -95,7 +95,7 @@ namespace oomph
     unsigned Index2;
 
     /// Private function that checks whether the index is in range
-    void range_check(const unsigned &i, const unsigned &j) const
+    void range_check(const unsigned& i, const unsigned& j) const
     {
       // If an index is out of range, throw an error
       if ((i >= Index1) || (j >= Index2))
@@ -119,21 +119,21 @@ namespace oomph
 
   public:
     /// Constructor for a single-index set of shape functions.
-    Shape(const unsigned &N) : Index1(N), Index2(1)
+    Shape(const unsigned& N) : Index1(N), Index2(1)
     {
       Allocated_storage = new double[N];
       Psi = Allocated_storage;
     }
 
     /// Constructor for a two-index set of shape functions.
-    Shape(const unsigned &N, const unsigned &M) : Index1(N), Index2(M)
+    Shape(const unsigned& N, const unsigned& M) : Index1(N), Index2(M)
     {
       Allocated_storage = new double[N * M];
       Psi = Allocated_storage;
     }
 
     /// Broken copy constructor
-    Shape(const Shape &shape)
+    Shape(const Shape& shape)
     {
       BrokenCopy::broken_copy("Shape");
     }
@@ -144,7 +144,7 @@ namespace oomph
 
     /// The assignment operator does a shallow copy
     /// (resets the pointer to the data)
-    void operator=(const Shape &shape)
+    void operator=(const Shape& shape)
     {
 #ifdef PARANOID
       // Check the dimensions
@@ -165,7 +165,7 @@ namespace oomph
 
     /// The assignment operator does a shallow copy
     /// (resets the pointer to the data)
-    void operator=(Shape *const &shape_pt)
+    void operator=(Shape* const& shape_pt)
     {
 #ifdef PARANOID
       // Check the dimensions
@@ -192,7 +192,7 @@ namespace oomph
     }
 
     /// Change the size of the storage
-    void resize(const unsigned &N, const unsigned &M = 1)
+    void resize(const unsigned& N, const unsigned& M = 1)
     {
       // Clear old storage
       delete[] Allocated_storage;
@@ -207,7 +207,7 @@ namespace oomph
     }
 
     /// Overload the bracket operator to provide access to values.
-    inline double &operator[](const unsigned &i)
+    inline double& operator[](const unsigned& i)
     {
 #ifdef RANGE_CHECKING
       range_check(i, 0);
@@ -216,7 +216,7 @@ namespace oomph
     }
 
     /// Overload the bracket operator (const version)
-    inline const double &operator[](const unsigned &i) const
+    inline const double& operator[](const unsigned& i) const
     {
 #ifdef RANGE_CHECKING
       range_check(i, 0);
@@ -225,7 +225,7 @@ namespace oomph
     }
 
     /// Overload the round bracket operator to provide access to values.
-    inline double &operator()(const unsigned &i)
+    inline double& operator()(const unsigned& i)
     {
 #ifdef RANGE_CHECKING
       range_check(i, 0);
@@ -234,7 +234,7 @@ namespace oomph
     }
 
     /// Overload the round bracket operator (const version)
-    inline const double &operator()(const unsigned &i) const
+    inline const double& operator()(const unsigned& i) const
     {
 #ifdef RANGE_CHECKING
       range_check(i, 0);
@@ -243,7 +243,7 @@ namespace oomph
     }
 
     /// Overload the round bracket operator, allowing for two indices
-    inline double &operator()(const unsigned &i, const unsigned &j)
+    inline double& operator()(const unsigned& i, const unsigned& j)
     {
 #ifdef RANGE_CHECKING
       range_check(i, j);
@@ -253,7 +253,7 @@ namespace oomph
 
     ///\short Overload the round bracket operator, allowing for two indices
     /// (const version)
-    inline const double &operator()(const unsigned &i, const unsigned &j) const
+    inline const double& operator()(const unsigned& i, const unsigned& j) const
     {
 #ifdef RANGE_CHECKING
       range_check(i, j);
@@ -286,12 +286,12 @@ namespace oomph
     /// \short Pointer that addresses the storage that will be used to read and
     /// set the shape-function derivatives. The values are packed into
     /// a flat array of doubles.
-    double *DPsi;
+    double* DPsi;
 
     /// \short Pointer that addresses the storage allocated by the object on
     /// construction. This will be the same as DPsi if the object is not
     /// copied.
-    double *Allocated_storage;
+    double* Allocated_storage;
 
     /// Size of the first index of the shape function
     unsigned Index1;
@@ -303,9 +303,9 @@ namespace oomph
     unsigned Index3;
 
     /// Private function that checks whether the indices are in range
-    void range_check(const unsigned &i,
-                     const unsigned &j,
-                     const unsigned &k) const
+    void range_check(const unsigned& i,
+                     const unsigned& j,
+                     const unsigned& k) const
     {
       // Check the first index
       if ((i >= Index1) || (j >= Index2) || (k >= Index3))
@@ -334,7 +334,7 @@ namespace oomph
 
   public:
     /// Constructor with two parameters: a single-index shape function
-    DShape(const unsigned &N, const unsigned &P) :
+    DShape(const unsigned& N, const unsigned& P) :
       Index1(N), Index2(1), Index3(P)
     {
       Allocated_storage = new double[N * P];
@@ -342,7 +342,7 @@ namespace oomph
     }
 
     /// Constructor with three paramters: a two-index shape function
-    DShape(const unsigned &N, const unsigned &M, const unsigned &P) :
+    DShape(const unsigned& N, const unsigned& M, const unsigned& P) :
       Index1(N), Index2(M), Index3(P)
     {
       Allocated_storage = new double[N * M * P];
@@ -354,14 +354,14 @@ namespace oomph
     DShape() : DPsi(0), Allocated_storage(0), Index1(0), Index2(0), Index3(0) {}
 
     /// Broken copy constructor
-    DShape(const DShape &dshape)
+    DShape(const DShape& dshape)
     {
       BrokenCopy::broken_copy("DShape");
     }
 
     /// The assignment operator does a shallow copy
     /// (resets the pointer to the data)
-    void operator=(const DShape &dshape)
+    void operator=(const DShape& dshape)
     {
 #ifdef PARANOID
       // Check the dimensions
@@ -383,7 +383,7 @@ namespace oomph
 
     /// The assignment operator does a shallow copy
     /// (resets the pointer to the data)
-    void operator=(DShape *const &dshape_pt)
+    void operator=(DShape* const& dshape_pt)
     {
 #ifdef PARANOID
       // Check the dimensions
@@ -414,7 +414,7 @@ namespace oomph
     /// Change the size of the storage. Note that (for some strange reason)
     /// index2 is the "optional" index, to conform with the existing
     /// constructor.
-    void resize(const unsigned &N, const unsigned &P, const unsigned &M = 1)
+    void resize(const unsigned& N, const unsigned& P, const unsigned& M = 1)
     {
       // Clear old storage
       delete[] Allocated_storage;
@@ -430,7 +430,7 @@ namespace oomph
     }
 
     /// Overload the round bracket operator for access to the data
-    inline double &operator()(const unsigned &i, const unsigned &k)
+    inline double& operator()(const unsigned& i, const unsigned& k)
     {
 #ifdef RANGE_CHECKING
       range_check(i, 0, k);
@@ -439,7 +439,7 @@ namespace oomph
     }
 
     /// Overload the round bracket operator (const version)
-    inline const double &operator()(const unsigned &i, const unsigned &k) const
+    inline const double& operator()(const unsigned& i, const unsigned& k) const
     {
 #ifdef RANGE_CHECKING
       range_check(i, 0, k);
@@ -448,9 +448,9 @@ namespace oomph
     }
 
     /// Overload the round bracket operator, with 3 indices
-    inline double &operator()(const unsigned &i,
-                              const unsigned &j,
-                              const unsigned &k)
+    inline double& operator()(const unsigned& i,
+                              const unsigned& j,
+                              const unsigned& k)
     {
 #ifdef RANGE_CHECKING
       range_check(i, j, k);
@@ -459,9 +459,9 @@ namespace oomph
     }
 
     /// Overload the round bracket operator (const version)
-    inline const double &operator()(const unsigned &i,
-                                    const unsigned &j,
-                                    const unsigned &k) const
+    inline const double& operator()(const unsigned& i,
+                                    const unsigned& j,
+                                    const unsigned& k) const
     {
 #ifdef RANGE_CHECKING
       range_check(i, j, k);
@@ -473,7 +473,7 @@ namespace oomph
     /// column-major format. WARNING: Only for experienced users. Only
     /// use this if raw speed is of the essence, as in the solid mechanics
     /// problems.
-    inline double &raw_direct_access(const unsigned long &i)
+    inline double& raw_direct_access(const unsigned long& i)
     {
       return DPsi[i];
     }
@@ -482,7 +482,7 @@ namespace oomph
     /// column-major format. WARNING: Only for experienced users. Only
     /// use this if raw speed is of the essence, as in the solid mechanics
     /// problems.
-    inline const double &raw_direct_access(const unsigned long &i) const
+    inline const double& raw_direct_access(const unsigned long& i) const
     {
       return DPsi[i];
     }
@@ -491,7 +491,7 @@ namespace oomph
     /// required for a given i,j. WARNING: Only for experienced users. Only
     /// use this if raw speed is of the essence, as in the solid mechanics
     /// problems.
-    unsigned offset(const unsigned long &i, const unsigned long &j) const
+    unsigned offset(const unsigned long& i, const unsigned long& j) const
     {
       return (i * Index2 + j) * Index3 + 0;
     }
@@ -525,16 +525,16 @@ namespace oomph
   {
   public:
     /// Constructor for a single-index set of shape functions.
-    ShapeWithDeepCopy(const unsigned &N) : Shape(N) {}
+    ShapeWithDeepCopy(const unsigned& N) : Shape(N) {}
 
     /// Constructor for a two-index set of shape functions.
-    ShapeWithDeepCopy(const unsigned &N, const unsigned &M) : Shape(N, M) {}
+    ShapeWithDeepCopy(const unsigned& N, const unsigned& M) : Shape(N, M) {}
 
     /// Default constructor
     ShapeWithDeepCopy() : Shape() {}
 
     /// Deep copy constructor
-    ShapeWithDeepCopy(const ShapeWithDeepCopy &old_shape) :
+    ShapeWithDeepCopy(const ShapeWithDeepCopy& old_shape) :
       Shape(old_shape.Index1, old_shape.Index2)
     {
       for (unsigned i = 0; i < Index1 * Index2; i++)
@@ -544,7 +544,7 @@ namespace oomph
     }
 
     /// Broken assignment operator
-    void operator=(const ShapeWithDeepCopy &old_shape)
+    void operator=(const ShapeWithDeepCopy& old_shape)
     {
       BrokenCopy::broken_assign("ShapeWithDeepCopy");
     }
@@ -570,7 +570,7 @@ namespace oomph
     /// value of all the shape functions at the local coordinate s
     /// are returned in the array Psi.
     template<unsigned NNODE_1D>
-    void shape(const double &s, double *Psi)
+    void shape(const double& s, double* Psi)
     {
       std::ostringstream error_stream;
       error_stream << "One dimensional Lagrange shape functions "
@@ -584,7 +584,7 @@ namespace oomph
     /// value of all the shape function derivatives at the local coordinate s
     /// are returned in the array DPsi.
     template<unsigned NNODE_1D>
-    void dshape(const double &s, double *DPsi)
+    void dshape(const double& s, double* DPsi)
     {
       std::ostringstream error_stream;
       error_stream << "One dimensional Lagrange shape function derivatives "
@@ -599,7 +599,7 @@ namespace oomph
     /// value of all the shape function derivatives at the local coordinate s
     /// are returned in the array DPsi.
     template<unsigned NNODE_1D>
-    void d2shape(const double &s, double *DPsi)
+    void d2shape(const double& s, double* DPsi)
     {
       std::ostringstream error_stream;
       error_stream << "One dimensional Lagrange shape function "
@@ -614,7 +614,7 @@ namespace oomph
     // Note that the numbering is such that shape[0] is at s = -1.0.
     // and shape[1] is at s = 1.0
     template<>
-    inline void shape<2>(const double &s, double *Psi)
+    inline void shape<2>(const double& s, double* Psi)
     {
       Psi[0] = 0.5 * (1.0 - s);
       Psi[1] = 0.5 * (1.0 + s);
@@ -622,7 +622,7 @@ namespace oomph
 
     /// Derivatives of 1D shape functions specialised to linear order (2 Nodes)
     template<>
-    inline void dshape<2>(const double &s, double *DPsi)
+    inline void dshape<2>(const double& s, double* DPsi)
     {
       DPsi[0] = -0.5;
       DPsi[1] = 0.5;
@@ -631,7 +631,7 @@ namespace oomph
     /// \short Second Derivatives of 1D shape functions,
     /// specialised to linear order  (2 Nodes)
     template<>
-    inline void d2shape<2>(const double &s, double *DPsi)
+    inline void d2shape<2>(const double& s, double* DPsi)
     {
       DPsi[0] = 0.0;
       DPsi[1] = 0.0;
@@ -641,7 +641,7 @@ namespace oomph
     // Note that the numbering is such that shape[0] is at s = -1.0,
     // shape[1] is at s = 0.0 and shape[2] is at s = 1.0.
     template<>
-    inline void shape<3>(const double &s, double *Psi)
+    inline void shape<3>(const double& s, double* Psi)
     {
       Psi[0] = 0.5 * s * (s - 1.0);
       Psi[1] = 1.0 - s * s;
@@ -651,7 +651,7 @@ namespace oomph
     /// Derivatives of 1D shape functions specialised to quadratic order (3
     /// Nodes)
     template<>
-    inline void dshape<3>(const double &s, double *DPsi)
+    inline void dshape<3>(const double& s, double* DPsi)
     {
       DPsi[0] = s - 0.5;
       DPsi[1] = -2.0 * s;
@@ -661,7 +661,7 @@ namespace oomph
     /// Second Derivatives of 1D shape functions, specialised to quadratic order
     /// (3 Nodes)
     template<>
-    inline void d2shape<3>(const double &s, double *DPsi)
+    inline void d2shape<3>(const double& s, double* DPsi)
     {
       DPsi[0] = 1.0;
       DPsi[1] = -2.0;
@@ -670,7 +670,7 @@ namespace oomph
 
     /// 1D shape functions specialised to cubic order (4 Nodes)
     template<>
-    inline void shape<4>(const double &s, double *Psi)
+    inline void shape<4>(const double& s, double* Psi)
     {
       // Output from Maple
       double t1 = s * s;
@@ -688,7 +688,7 @@ namespace oomph
 
     /// Derivatives of 1D shape functions specialised to cubic order (4 Nodes)
     template<>
-    inline void dshape<4>(const double &s, double *DPsi)
+    inline void dshape<4>(const double& s, double* DPsi)
     {
       // Output from Maple
       double t1 = s * s;
@@ -704,7 +704,7 @@ namespace oomph
     /// Second Derivatives of 1D shape functions specialised to cubic
     /// order (4 Nodes)
     template<>
-    inline void d2shape<4>(const double &s, double *DPsi)
+    inline void d2shape<4>(const double& s, double* DPsi)
     {
       // Output from Maple (modified by ALH, CHECK IT)
       double t1 = 2.0 * s;
@@ -728,7 +728,7 @@ namespace oomph
     // Node 0 is at s=0 and 1 is s=1
 
     /// Constructor sets the values of the shape functions at the position s.
-    inline void shape(const double &s, double Psi[2][2])
+    inline void shape(const double& s, double Psi[2][2])
     {
       // Node 0
       Psi[0][0] = 0.25 * (s * s * s - 3.0 * s + 2.0);
@@ -739,7 +739,7 @@ namespace oomph
     }
 
     /// Derivatives of 1D Hermite shape functions
-    inline void dshape(const double &s, double DPsi[2][2])
+    inline void dshape(const double& s, double DPsi[2][2])
     {
       // Node 0
       DPsi[0][0] = 0.75 * (s * s - 1.0);
@@ -750,7 +750,7 @@ namespace oomph
     }
 
     /// Second derivatives of the Hermite shape functions
-    inline void d2shape(const double &s, double DPsi[2][2])
+    inline void d2shape(const double& s, double DPsi[2][2])
     {
       // Node 0
       DPsi[0][0] = 1.5 * s;
@@ -783,13 +783,13 @@ namespace oomph
       }
     }
 
-    static inline double nodal_position(const unsigned &n)
+    static inline double nodal_position(const unsigned& n)
     {
       return z[n];
     }
 
     /// Constructor
-    OneDimensionalLegendreShape(const double &s) : Shape(NNODE_1D)
+    OneDimensionalLegendreShape(const double& s) : Shape(NNODE_1D)
     {
       using namespace Orthpoly;
 
@@ -823,7 +823,7 @@ namespace oomph
   {
   public:
     // Constructor
-    OneDimensionalLegendreDShape(const double &s) : Shape(NNODE_1D)
+    OneDimensionalLegendreDShape(const double& s) : Shape(NNODE_1D)
     {
       unsigned p = NNODE_1D - 1;
       Vector<double> z = OneDimensionalLegendreShape<NNODE_1D>::z;
@@ -882,7 +882,7 @@ namespace oomph
   {
   public:
     /// Constructor
-    OneDimensionalModalShape(const unsigned p_order, const double &s) :
+    OneDimensionalModalShape(const unsigned p_order, const double& s) :
       Shape(p_order)
     {
       // Populate the shape functions
@@ -900,7 +900,7 @@ namespace oomph
   {
   public:
     // Constructor
-    OneDimensionalModalDShape(const unsigned p_order, const double &s) :
+    OneDimensionalModalDShape(const unsigned p_order, const double& s) :
       Shape(p_order)
     {
       // Populate the shape functions

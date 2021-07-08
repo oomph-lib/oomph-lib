@@ -60,13 +60,13 @@ namespace oomph
     LineMeshBase() {}
 
     /// Broken copy constructor
-    LineMeshBase(const LineMeshBase &node)
+    LineMeshBase(const LineMeshBase& node)
     {
       BrokenCopy::broken_copy("LineMeshBase");
     }
 
     /// Broken assignment operator
-    void operator=(const LineMeshBase &)
+    void operator=(const LineMeshBase&)
     {
       BrokenCopy::broken_assign("LineMeshBase");
     }
@@ -84,7 +84,7 @@ namespace oomph
 
     /// \short Set up lookup schemes which establish which elements are
     /// located next to mesh's boundaries. Doc in outfile (if it's open).
-    void setup_boundary_element_info(std::ostream &outfile);
+    void setup_boundary_element_info(std::ostream& outfile);
   };
 
 } // namespace oomph

@@ -48,13 +48,13 @@ namespace oomph
   {
   public:
     /// Constructor
-    TwoDAnnularMesh(const bool &periodic,
-                    const double &azimuthal_fraction,
-                    const unsigned &ntheta,
-                    const unsigned &nr,
-                    const double &a,
-                    const double &h,
-                    TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+    TwoDAnnularMesh(const bool& periodic,
+                    const double& azimuthal_fraction,
+                    const unsigned& ntheta,
+                    const unsigned& nr,
+                    const double& a,
+                    const double& h,
+                    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       RectangularQuadMesh<ELEMENT>(
         ntheta, nr, 1.0, 1.0, periodic, time_stepper_pt)
     {
@@ -67,14 +67,14 @@ namespace oomph
     }
 
     /// Constructor; rotate mesh by angle phi.
-    TwoDAnnularMesh(const bool &periodic,
-                    const double &azimuthal_fraction,
-                    const unsigned &ntheta,
-                    const unsigned &nr,
-                    const double &a,
-                    const double &h,
-                    const double &phi,
-                    TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+    TwoDAnnularMesh(const bool& periodic,
+                    const double& azimuthal_fraction,
+                    const unsigned& ntheta,
+                    const unsigned& nr,
+                    const double& a,
+                    const double& h,
+                    const double& phi,
+                    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       RectangularQuadMesh<ELEMENT>(
         ntheta, nr, 1.0, 1.0, periodic, time_stepper_pt)
     {
@@ -87,10 +87,10 @@ namespace oomph
 
   private:
     /// Wrap mesh into annular shape
-    void wrap_into_annular_shape(const double &a,
-                                 const double &h,
-                                 const double &azimuthal_fraction,
-                                 const double &phi);
+    void wrap_into_annular_shape(const double& a,
+                                 const double& h,
+                                 const double& azimuthal_fraction,
+                                 const double& phi);
   };
 
   //////////////////////////////////////////////////////////////////////
@@ -109,13 +109,13 @@ namespace oomph
   public:
     /// Constructor
     RefineableTwoDAnnularMesh(
-      const bool &periodic,
-      const double &azimuthal_fraction,
-      const unsigned &ntheta,
-      const unsigned &nr,
-      const double &a,
-      const double &h,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      const bool& periodic,
+      const double& azimuthal_fraction,
+      const unsigned& ntheta,
+      const unsigned& nr,
+      const double& a,
+      const double& h,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       RectangularQuadMesh<ELEMENT>(
         ntheta, nr, 1.0, 1.0, periodic, time_stepper_pt),
       TwoDAnnularMesh<ELEMENT>(
@@ -132,7 +132,7 @@ namespace oomph
       unsigned nel = this->nelement();
       for (unsigned ielem = 0; ielem < nel; ielem++)
       {
-        dynamic_cast<RefineableQElement<2> *>(this->element_pt(ielem))
+        dynamic_cast<RefineableQElement<2>*>(this->element_pt(ielem))
           ->set_macro_elem_pt(this->Domain_pt->macro_element_pt(ielem));
       }
 
@@ -147,17 +147,16 @@ namespace oomph
       // Cast to specific elements
       if (periodic)
       {
-        Vector<TreeRoot *> left_root_pt(nr);
-        Vector<TreeRoot *> right_root_pt(nr);
+        Vector<TreeRoot*> left_root_pt(nr);
+        Vector<TreeRoot*> right_root_pt(nr);
         for (unsigned i = 0; i < nr; i++)
         {
-          left_root_pt[i] =
-            dynamic_cast<ELEMENT *>(this->element_pt(i * ntheta))
-              ->tree_pt()
-              ->root_pt();
+          left_root_pt[i] = dynamic_cast<ELEMENT*>(this->element_pt(i * ntheta))
+                              ->tree_pt()
+                              ->root_pt();
 
           right_root_pt[i] =
-            dynamic_cast<ELEMENT *>(this->element_pt((i + 1) * ntheta - 1))
+            dynamic_cast<ELEMENT*>(this->element_pt((i + 1) * ntheta - 1))
               ->tree_pt()
               ->root_pt();
         }
@@ -177,14 +176,14 @@ namespace oomph
 
     /// Constructor; rotate mesh by angle phi
     RefineableTwoDAnnularMesh(
-      const bool &periodic,
-      const double &azimuthal_fraction,
-      const unsigned &ntheta,
-      const unsigned &nr,
-      const double &a,
-      const double &h,
-      const double &phi,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      const bool& periodic,
+      const double& azimuthal_fraction,
+      const unsigned& ntheta,
+      const unsigned& nr,
+      const double& a,
+      const double& h,
+      const double& phi,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       RectangularQuadMesh<ELEMENT>(
         ntheta, nr, 1.0, 1.0, periodic, time_stepper_pt),
       TwoDAnnularMesh<ELEMENT>(
@@ -200,7 +199,7 @@ namespace oomph
       unsigned nel = this->nelement();
       for (unsigned ielem = 0; ielem < nel; ielem++)
       {
-        dynamic_cast<RefineableQElement<2> *>(this->element_pt(ielem))
+        dynamic_cast<RefineableQElement<2>*>(this->element_pt(ielem))
           ->set_macro_elem_pt(this->Domain_pt->macro_element_pt(ielem));
       }
 
@@ -215,17 +214,16 @@ namespace oomph
       // Cast to specific elements
       if (periodic)
       {
-        Vector<TreeRoot *> left_root_pt(nr);
-        Vector<TreeRoot *> right_root_pt(nr);
+        Vector<TreeRoot*> left_root_pt(nr);
+        Vector<TreeRoot*> right_root_pt(nr);
         for (unsigned i = 0; i < nr; i++)
         {
-          left_root_pt[i] =
-            dynamic_cast<ELEMENT *>(this->element_pt(i * ntheta))
-              ->tree_pt()
-              ->root_pt();
+          left_root_pt[i] = dynamic_cast<ELEMENT*>(this->element_pt(i * ntheta))
+                              ->tree_pt()
+                              ->root_pt();
 
           right_root_pt[i] =
-            dynamic_cast<ELEMENT *>(this->element_pt((i + 1) * ntheta - 1))
+            dynamic_cast<ELEMENT*>(this->element_pt((i + 1) * ntheta - 1))
               ->tree_pt()
               ->root_pt();
         }
@@ -245,7 +243,7 @@ namespace oomph
 
   private:
     /// Pointer to domain
-    AnnularDomain *Domain_pt;
+    AnnularDomain* Domain_pt;
   };
 
 } // namespace oomph

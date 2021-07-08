@@ -74,7 +74,7 @@ namespace oomph
 
     /// \short Pure virtual function: Return temperature at
     /// local coordinate s.
-    virtual double penetrator_temperature(const Vector<double> &s) const = 0;
+    virtual double penetrator_temperature(const Vector<double>& s) const = 0;
   };
 
   /////////////////////////////////////////////////////////////////////////
@@ -100,7 +100,7 @@ namespace oomph
     ///\short The required number of values stored at the nodes is the sum of
     /// the required values of the two single-physics  elements. Note that this
     /// step is generic for any multi-physics element of this type.
-    unsigned required_nvalue(const unsigned &n) const
+    unsigned required_nvalue(const unsigned& n) const
     {
       return (TLinearElasticityElement<DIM, NNODE_1D>::required_nvalue(n) +
               TUnsteadyHeatElement<DIM, NNODE_1D>::required_nvalue(n));
@@ -123,9 +123,9 @@ namespace oomph
     /// \short Write values of the i-th scalar field at the plot points. Broken
     /// virtual. Needs to be implemented for each new specific element type.
     /// Temporary dummy
-    void scalar_value_paraview(std::ofstream &file_out,
-                               const unsigned &i,
-                               const unsigned &nplot) const
+    void scalar_value_paraview(std::ofstream& file_out,
+                               const unsigned& i,
+                               const unsigned& nplot) const
     {
       throw OomphLibError(
         "This function hasn't been implemented for this element",
@@ -136,19 +136,19 @@ namespace oomph
     /// \short Name of the i-th scalar field. Default implementation
     /// returns V1 for the first one, V2 for the second etc. Can (should!) be
     /// overloaded with more meaningful names.
-    std::string scalar_name_paraview(const unsigned &i) const
+    std::string scalar_name_paraview(const unsigned& i) const
     {
       return "V" + StringConversion::to_string(i);
     }
 
     ///  Overload the standard output function with the broken default
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       FiniteElement::output(outfile);
     }
 
     /// \short Output function:
-    void output(std::ostream &outfile, const unsigned &nplot)
+    void output(std::ostream& outfile, const unsigned& nplot)
     {
       // Set output Vector
       Vector<double> s(DIM);
@@ -192,20 +192,20 @@ namespace oomph
     }
 
     /// \short C-style output function: Broken default
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
 
     ///  \short C-style output function: Broken default
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       FiniteElement::output(file_pt, n_plot);
     }
 
     /// \short Output function for an exact solution: Broken default
-    void output_fct(std::ostream &outfile,
-                    const unsigned &Nplot,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& Nplot,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
     {
       FiniteElement::output_fct(outfile, Nplot, exact_soln_pt);
@@ -213,9 +213,9 @@ namespace oomph
 
     /// \short Output function for a time-dependent exact solution:
     /// Broken default.
-    void output_fct(std::ostream &outfile,
-                    const unsigned &Nplot,
-                    const double &time,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& Nplot,
+                    const double& time,
                     FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
     {
       FiniteElement::output_fct(outfile, Nplot, time, exact_soln_pt);
@@ -233,11 +233,11 @@ namespace oomph
     /// Plot at a given number of plot points and compute L2 error
     /// and L2 norm of velocity solution over element
     /// Call the broken default
-    void compute_error(std::ostream &outfile,
+    void compute_error(std::ostream& outfile,
                        FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
-                       const double &time,
-                       double &error,
-                       double &norm)
+                       const double& time,
+                       double& error,
+                       double& norm)
     {
       FiniteElement::compute_error(outfile, exact_soln_pt, time, error, norm);
     }
@@ -247,10 +247,10 @@ namespace oomph
     /// Plot at a given number of plot points and compute L2 error
     /// and L2 norm of velocity solution over element
     /// Call the broken default
-    void compute_error(std::ostream &outfile,
+    void compute_error(std::ostream& outfile,
                        FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-                       double &error,
-                       double &norm)
+                       double& error,
+                       double& norm)
     {
       FiniteElement::compute_error(outfile, exact_soln_pt, error, norm);
     }
@@ -260,7 +260,7 @@ namespace oomph
     /// in the vector to zero. This allows us to call the
     /// fill_in_* functions of the constituent single-physics elements
     /// sequentially, without wiping out any previously computed entries.
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Fill in the residuals of the linear elasticity equations
       LinearElasticityEquations<DIM>::fill_in_contribution_to_residuals(
@@ -272,8 +272,8 @@ namespace oomph
 
     ///\short Compute the element's residual Vector and the Jacobian matrix.
     /// No off diagonal blocks!
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       // Calculate the linear elasticity contributions (diagonal block and
       // residuals)
@@ -289,7 +289,7 @@ namespace oomph
 
     /// 'Flux' vector for Z2 error estimation: Error estimation
     /// is based on error in unsteady heat element
-    void get_Z2_flux(const Vector<double> &s, Vector<double> &flux)
+    void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
       TUnsteadyHeatElement<DIM, NNODE_1D>::get_Z2_flux(s, flux);
     }
@@ -308,7 +308,7 @@ namespace oomph
     }
 
     /// \short Pointer to the j-th vertex node in the element
-    Node *vertex_node_pt(const unsigned &j) const
+    Node* vertex_node_pt(const unsigned& j) const
     {
       return TUnsteadyHeatElement<DIM, NNODE_1D>::vertex_node_pt(j);
     }
@@ -374,11 +374,10 @@ namespace oomph
     /// the Data object and the value within it, that correspond to field fld.
     /// In the underlying elements the
     /// the displacements and temperatures are stored at the nodal values
-    Vector<std::pair<Data *, unsigned>> data_values_of_field(
-      const unsigned &fld)
+    Vector<std::pair<Data*, unsigned>> data_values_of_field(const unsigned& fld)
     {
       // Create the vector
-      Vector<std::pair<Data *, unsigned>> data_values;
+      Vector<std::pair<Data*, unsigned>> data_values;
 
       // Loop over all nodes and extract the fld-th nodal value
       unsigned nnod = this->nnode();
@@ -401,7 +400,7 @@ namespace oomph
 
     /// \short Number of history values to be stored for fld-th field.
     /// (includes present value!)
-    unsigned nhistory_values_for_projection(const unsigned &fld)
+    unsigned nhistory_values_for_projection(const unsigned& fld)
     {
 #ifdef PARANOID
       if (fld > 3)
@@ -425,9 +424,9 @@ namespace oomph
 
     /// \short Return Jacobian of mapping and shape functions of field fld
     /// at local coordinate s
-    double jacobian_and_shape_of_field(const unsigned &fld,
-                                       const Vector<double> &s,
-                                       Shape &psi)
+    double jacobian_and_shape_of_field(const unsigned& fld,
+                                       const Vector<double>& s,
+                                       Shape& psi)
     {
       unsigned n_dim = this->dim();
       unsigned n_node = this->nnode();
@@ -440,9 +439,9 @@ namespace oomph
 
     /// \short Return interpolated field fld at local coordinate s, at time
     /// level t (t=0: present; t>0: history values)
-    double get_field(const unsigned &t,
-                     const unsigned &fld,
-                     const Vector<double> &s)
+    double get_field(const unsigned& t,
+                     const unsigned& fld,
+                     const Vector<double>& s)
     {
       unsigned n_node = this->nnode();
 
@@ -486,13 +485,13 @@ namespace oomph
     }
 
     /// Return number of values in field fld
-    unsigned nvalue_of_field(const unsigned &fld)
+    unsigned nvalue_of_field(const unsigned& fld)
     {
       return this->nnode();
     }
 
     /// Return local equation number of value j in field fld.
-    int local_equation(const unsigned &fld, const unsigned &j)
+    int local_equation(const unsigned& fld, const unsigned& j)
     {
       // over-zealous I think. This will quietly do the right thing
       // even if there are additional degrees of freedom floating around.
@@ -558,7 +557,7 @@ namespace oomph
     /// \short Pure virtual function: Return heat flux required to
     /// maintain continuity of temperature to adjacent penetrator at
     /// local coordinate s.
-    virtual double heat_flux(const Vector<double> &s) const = 0;
+    virtual double heat_flux(const Vector<double>& s) const = 0;
   };
 
   ///////////////////////////////////////////////////////////////////////
@@ -586,10 +585,10 @@ namespace oomph
     /// \short Constructor, which takes a "bulk" element and the
     /// value of the index and its limit
     HeatedLinearSurfaceContactElement(
-      FiniteElement *const &element_pt,
-      const int &face_index,
-      const unsigned &id = 0,
-      const bool &called_from_refineable_constructor = false) :
+      FiniteElement* const& element_pt,
+      const int& face_index,
+      const unsigned& id = 0,
+      const bool& called_from_refineable_constructor = false) :
       SurfaceContactElementBase<ELEMENT>(
         element_pt, face_index, id, called_from_refineable_constructor),
       LinearSurfaceContactElement<ELEMENT>(
@@ -643,8 +642,8 @@ namespace oomph
     /// built up incrementally as we descend through the
     /// call hierarchy of this function when called from
     /// Problem::describe_dofs(...)
-    void describe_local_dofs(std::ostream &out,
-                             const std::string &current_string) const
+    void describe_local_dofs(std::ostream& out,
+                             const std::string& current_string) const
     {
       LinearSurfaceContactElement<ELEMENT>::describe_local_dofs(out,
                                                                 current_string);
@@ -653,8 +652,8 @@ namespace oomph
 
     // hierher why do we suddenly need this?
     /// Final over-rider -- use version in element with external element
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       ElementWithExternalElement::fill_in_contribution_to_jacobian(residuals,
                                                                    jacobian);
@@ -662,7 +661,7 @@ namespace oomph
 
     /// \short Return heat flux required to maintain continuity of temperature
     /// to adjacent penetrator at local coordinate s
-    double heat_flux(const Vector<double> &s) const
+    double heat_flux(const Vector<double>& s) const
     {
       // Get shape function for Lagrange multiplier
       unsigned n_node = this->nnode();
@@ -674,8 +673,8 @@ namespace oomph
       for (unsigned l = 0; l < n_node; l++)
       {
         // Cast to a boundary node
-        BoundaryNodeBase *bnod_pt =
-          dynamic_cast<BoundaryNodeBase *>(this->node_pt(l));
+        BoundaryNodeBase* bnod_pt =
+          dynamic_cast<BoundaryNodeBase*>(this->node_pt(l));
 
         // Get the index of the nodal value associated with
         // this FaceElement
@@ -692,9 +691,9 @@ namespace oomph
     }
 
     /// hierher overload...
-    double zeta_nodal(const unsigned &n,
-                      const unsigned &k,
-                      const unsigned &i) const
+    double zeta_nodal(const unsigned& n,
+                      const unsigned& k,
+                      const unsigned& i) const
     {
       unsigned dim = this->node_pt(n)->ndim();
       Vector<double> x(dim);
@@ -707,7 +706,7 @@ namespace oomph
       return zeta[i];
     }
 
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       unsigned n_dim = this->nodal_dimension();
 
@@ -817,13 +816,13 @@ namespace oomph
     }
 
     /// Access function: Pointer to flag to use collocated heat_flux
-    bool *&use_collocated_heat_flux_flag_pt()
+    bool*& use_collocated_heat_flux_flag_pt()
     {
       return Use_collocated_heat_flux_flag_pt;
     }
     /// Access function: Pointer to flag to use collocated heat_flux (const
     /// version)
-    bool *use_collocated_heat_flux_flag_pt() const
+    bool* use_collocated_heat_flux_flag_pt() const
     {
       return Use_collocated_heat_flux_flag_pt;
     }
@@ -832,14 +831,14 @@ namespace oomph
     /// \short Overloaded fill in contributions function -- includes heat flux
     /// to ensure continuity of temperature
     void fill_in_contribution_to_residuals_surface_contact(
-      Vector<double> &residuals);
+      Vector<double>& residuals);
 
     /// ID of heat flux Lagrange multiplier (to ensure continuity of
     /// temperature)
     unsigned Heat_flux_lagr_multiplier_id;
 
     /// Set options for basis/test functions for penetration and pressure
-    bool *Use_collocated_heat_flux_flag_pt;
+    bool* Use_collocated_heat_flux_flag_pt;
 
     /// hierher currently we don't want to use isoparametric for
     /// the lagrange multipliers and collocation for penetration
@@ -856,10 +855,10 @@ namespace oomph
   //=====================================================================
   template<class ELEMENT>
   void HeatedLinearSurfaceContactElement<ELEMENT>::
-    fill_in_contribution_to_residuals_surface_contact(Vector<double> &residuals)
+    fill_in_contribution_to_residuals_surface_contact(Vector<double>& residuals)
   {
     // Get pointer to bulk element
-    ELEMENT *bulk_el_pt = dynamic_cast<ELEMENT *>(this->bulk_element_pt());
+    ELEMENT* bulk_el_pt = dynamic_cast<ELEMENT*>(this->bulk_element_pt());
 
     // Get index of temperature in bulk element
     unsigned temperature_index = bulk_el_pt->u_index_ust_heat();
@@ -957,8 +956,8 @@ namespace oomph
         for (unsigned l = 0; l < n_node; l++)
         {
           // Cast to a boundary node
-          BoundaryNodeBase *bnod_pt =
-            dynamic_cast<BoundaryNodeBase *>(this->node_pt(l));
+          BoundaryNodeBase* bnod_pt =
+            dynamic_cast<BoundaryNodeBase*>(this->node_pt(l));
 
           // Get the index of the nodal value associated with
           // this FaceElement
@@ -1011,8 +1010,8 @@ namespace oomph
         if (external_element_pt(0, ipt) != 0)
         {
           Vector<double> s_ext(external_element_local_coord(0, ipt));
-          TemplateFreeHeatedPenetratorFluxElementBase *el_pt =
-            dynamic_cast<TemplateFreeHeatedPenetratorFluxElementBase *>(
+          TemplateFreeHeatedPenetratorFluxElementBase* el_pt =
+            dynamic_cast<TemplateFreeHeatedPenetratorFluxElementBase*>(
               external_element_pt(0, ipt));
           // Note: this does NOT take contact or no contact into account
           // it simply returns the local temperature at "that point" in "that
@@ -1181,10 +1180,10 @@ namespace oomph
       for (unsigned l = 0; l < n_node; l++)
       {
         // get the node pt
-        Node *nod_pt = this->node_pt(l);
+        Node* nod_pt = this->node_pt(l);
 
         // Cast to a boundary node
-        BoundaryNodeBase *bnod_pt = dynamic_cast<BoundaryNodeBase *>(nod_pt);
+        BoundaryNodeBase* bnod_pt = dynamic_cast<BoundaryNodeBase*>(nod_pt);
 
         // Get the index of the first nodal value associated with
         // this FaceElement
@@ -1398,23 +1397,23 @@ namespace oomph
 
     /// \short Constructor, takes the pointer to the "bulk" element and the
     /// index of the face to be created
-    HeatedPenetratorFluxElement(FiniteElement *const &bulk_el_pt,
-                                const int &face_index);
+    HeatedPenetratorFluxElement(FiniteElement* const& bulk_el_pt,
+                                const int& face_index);
 
     /// Broken copy constructor
-    HeatedPenetratorFluxElement(const HeatedPenetratorFluxElement &dummy)
+    HeatedPenetratorFluxElement(const HeatedPenetratorFluxElement& dummy)
     {
       BrokenCopy::broken_copy("HeatedPenetratorFluxElement");
     }
 
     /// \short Pointer to penetrator
-    Penetrator *penetrator_pt() const
+    Penetrator* penetrator_pt() const
     {
       return Penetrator_pt;
     }
 
     /// \short Set pointer to penetrator
-    void set_penetrator_pt(Penetrator *penetrator_pt)
+    void set_penetrator_pt(Penetrator* penetrator_pt)
     {
       Penetrator_pt = penetrator_pt;
     }
@@ -1424,7 +1423,7 @@ namespace oomph
     // UnsteadyHeatPrescribedFluxFctPt& flux_fct_pt() {return Flux_fct_pt;}
 
     /// Compute the element residual vector
-    inline void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    inline void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Call the generic residuals function with flag set to 0
       // using a dummy matrix argument
@@ -1433,8 +1432,8 @@ namespace oomph
     }
 
     /// Use version in element with external element
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       ElementWithExternalElement::fill_in_contribution_to_jacobian(residuals,
                                                                    jacobian);
@@ -1449,9 +1448,9 @@ namespace oomph
     //  }
 
     /// hierher overload...
-    double zeta_nodal(const unsigned &n,
-                      const unsigned &k,
-                      const unsigned &i) const
+    double zeta_nodal(const unsigned& n,
+                      const unsigned& k,
+                      const unsigned& i) const
     {
       Vector<double> displ(this->penetrator_pt()->rigid_body_displacement());
       unsigned dim = this->node_pt(n)->ndim();
@@ -1468,7 +1467,7 @@ namespace oomph
 
     /// Output function -- forward to broken version in FiniteElement
     /// until somebody decides what exactly they want to plot here...
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       FaceGeometry<ELEMENT>::output(outfile);
     }
@@ -1479,7 +1478,7 @@ namespace oomph
     // {FaceGeometry<ELEMENT>::output(outfile,n_plot);}
 
     //\short Output function -- hierher rushed
-    void output(std::ostream &outfile, const unsigned &nplot)
+    void output(std::ostream& outfile, const unsigned& nplot)
     {
       // Set output Vector
       Vector<double> s(1); // hierher - should be DIM and DIM-1
@@ -1519,7 +1518,7 @@ namespace oomph
 
     /// C-style output function -- forward to broken version in FiniteElement
     /// until somebody decides what exactly they want to plot here...
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FaceGeometry<ELEMENT>::output(file_pt);
     }
@@ -1527,14 +1526,14 @@ namespace oomph
     /// \short C-style output function -- forward to broken version in
     /// FiniteElement until somebody decides what exactly they want to plot
     /// here...
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       FaceGeometry<ELEMENT>::output(file_pt, n_plot);
     }
 
     /// \short Pure virtual function: Return temperature at
     /// local coordinate s.
-    double penetrator_temperature(const Vector<double> &s) const
+    double penetrator_temperature(const Vector<double>& s) const
     {
       // Get shape function for temperature
       unsigned n_node = this->nnode();
@@ -1556,9 +1555,9 @@ namespace oomph
     /// \short Function to compute the shape and test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
-    inline double shape_and_test(const Vector<double> &s,
-                                 Shape &psi,
-                                 Shape &test) const
+    inline double shape_and_test(const Vector<double>& s,
+                                 Shape& psi,
+                                 Shape& test) const
     {
       // Find number of nodes
       unsigned n_node = nnode();
@@ -1597,10 +1596,10 @@ namespace oomph
     /// \short Compute the element residual vector.
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void fill_in_generic_residual_contribution_ust_heat_flux(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag);
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
 
     /// Pointer to penetrator
-    Penetrator *Penetrator_pt;
+    Penetrator* Penetrator_pt;
 
     // hierher
     // /// Function pointer to the (global) prescribed-flux function
@@ -1623,7 +1622,7 @@ namespace oomph
   //===========================================================================
   template<class ELEMENT>
   HeatedPenetratorFluxElement<ELEMENT>::HeatedPenetratorFluxElement(
-    FiniteElement *const &bulk_el_pt, const int &face_index) :
+    FiniteElement* const& bulk_el_pt, const int& face_index) :
     FaceGeometry<ELEMENT>(), FaceElement()
   {
     // Let the bulk element build the FaceElement, i.e. setup the pointers
@@ -1634,14 +1633,14 @@ namespace oomph
 #ifdef PARANOID
     {
       // Check that the element is not a refineable 3d element
-      ELEMENT *elem_pt = dynamic_cast<ELEMENT *>(bulk_el_pt);
+      ELEMENT* elem_pt = dynamic_cast<ELEMENT*>(bulk_el_pt);
 
       // If it's three-d
       if (elem_pt->dim() == 3)
       {
         // Is it refineable
-        RefineableElement *ref_el_pt =
-          dynamic_cast<RefineableElement *>(elem_pt);
+        RefineableElement* ref_el_pt =
+          dynamic_cast<RefineableElement*>(elem_pt);
         if (ref_el_pt != 0)
         {
           if (this->has_hanging_nodes())
@@ -1683,8 +1682,8 @@ namespace oomph
         // One dimensional problem
       case 1:
       {
-        UnsteadyHeatEquations<1> *eqn_pt =
-          dynamic_cast<UnsteadyHeatEquations<1> *>(bulk_el_pt);
+        UnsteadyHeatEquations<1>* eqn_pt =
+          dynamic_cast<UnsteadyHeatEquations<1>*>(bulk_el_pt);
         // If the cast has failed die
         if (eqn_pt == 0)
         {
@@ -1711,8 +1710,8 @@ namespace oomph
       // Two dimensional problem
       case 2:
       {
-        UnsteadyHeatEquations<2> *eqn_pt =
-          dynamic_cast<UnsteadyHeatEquations<2> *>(bulk_el_pt);
+        UnsteadyHeatEquations<2>* eqn_pt =
+          dynamic_cast<UnsteadyHeatEquations<2>*>(bulk_el_pt);
         // If the cast has failed die
         if (eqn_pt == 0)
         {
@@ -1738,8 +1737,8 @@ namespace oomph
       // Three dimensional problem
       case 3:
       {
-        UnsteadyHeatEquations<3> *eqn_pt =
-          dynamic_cast<UnsteadyHeatEquations<3> *>(bulk_el_pt);
+        UnsteadyHeatEquations<3>* eqn_pt =
+          dynamic_cast<UnsteadyHeatEquations<3>*>(bulk_el_pt);
         // If the cast has failed die
         if (eqn_pt == 0)
         {
@@ -1780,7 +1779,7 @@ namespace oomph
   template<class ELEMENT>
   void HeatedPenetratorFluxElement<ELEMENT>::
     fill_in_generic_residual_contribution_ust_heat_flux(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag)
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag)
   {
     // Find out how many nodes there are
     const unsigned n_node = nnode();
@@ -1854,8 +1853,8 @@ namespace oomph
       if (external_element_pt(0, ipt) != 0)
       {
         Vector<double> s_ext(external_element_local_coord(0, ipt));
-        TemplateFreeHeatedLinearSurfaceContactElementBase *el_pt =
-          dynamic_cast<TemplateFreeHeatedLinearSurfaceContactElementBase *>(
+        TemplateFreeHeatedLinearSurfaceContactElementBase* el_pt =
+          dynamic_cast<TemplateFreeHeatedLinearSurfaceContactElementBase*>(
             external_element_pt(0, ipt));
         // hierher sign?
         flux = -el_pt->heat_flux(s_ext);
@@ -1895,8 +1894,8 @@ class FiniteElementComp
 {
 public:
   /// Comparison. Is x coordinate of el1_pt less than that of el2_pt?
-  bool operator()(FiniteElement *const &el1_pt,
-                  FiniteElement *const &el2_pt) const
+  bool operator()(FiniteElement* const& el1_pt,
+                  FiniteElement* const& el2_pt) const
   {
     return el1_pt->node_pt(0)->x(0) < el2_pt->node_pt(0)->x(0);
   }
@@ -1909,7 +1908,7 @@ class WarpedLine : public GeomObject
 {
 public:
   /// Constructor: Specify amplitude of deflection from straight horizontal line
-  WarpedLine(const double &ampl, const double &x_min, const double &x_max) :
+  WarpedLine(const double& ampl, const double& x_min, const double& x_max) :
     GeomObject(1, 2)
   {
     Ampl = ampl;
@@ -1921,13 +1920,13 @@ public:
   }
 
   /// Broken copy constructor
-  WarpedLine(const WarpedLine &dummy)
+  WarpedLine(const WarpedLine& dummy)
   {
     BrokenCopy::broken_copy("WarpedLine");
   }
 
   /// Broken assignment operator
-  void operator=(const WarpedLine &)
+  void operator=(const WarpedLine&)
   {
     BrokenCopy::broken_assign("WarpedLine");
   }
@@ -1936,7 +1935,7 @@ public:
   ~WarpedLine() {}
 
   /// \short Position vector at Lagrangian coordinate zeta
-  void position(const Vector<double> &zeta, Vector<double> &r) const
+  void position(const Vector<double>& zeta, Vector<double>& r) const
   {
     double zetaa = X_min + zeta[0] * (X_max - X_min);
     if (Reversed)
@@ -1960,9 +1959,9 @@ public:
   /// \short Parametrised position on object: r(zeta). Evaluated at
   /// previous timestep. t=0: current time; t>0: previous
   /// timestep. Forward to steady version
-  void position(const unsigned &t,
-                const Vector<double> &zeta,
-                Vector<double> &r) const
+  void position(const unsigned& t,
+                const Vector<double>& zeta,
+                Vector<double>& r) const
   {
     position(zeta, r);
   }
@@ -1982,7 +1981,7 @@ public:
   }
 
   /// Access to amplitude
-  double &ampl()
+  double& ampl()
   {
     return Ampl;
   }
@@ -2007,13 +2006,13 @@ public:
   }
 
   /// Lift off amplitude
-  double &lift_off_amplitude()
+  double& lift_off_amplitude()
   {
     return Lift_off_amplitude;
   }
 
   /// Exponential factor for lift off (controls sharpness)
-  double &lift_off_alpha()
+  double& lift_off_alpha()
   {
     return Lift_off_alpha;
   }
@@ -2090,11 +2089,11 @@ public:
   /// displacement (linear elasticity).
   // hierher not only SolidNode
   HeatedCircularPenetratorElement(
-    SolidNode *control_node_pt,
-    const unsigned &index_of_contact_pressure,
-    const unsigned &index_of_horizontal_displacement,
-    const unsigned &index_of_vertical_displacement,
-    double *r_pt)
+    SolidNode* control_node_pt,
+    const unsigned& index_of_contact_pressure,
+    const unsigned& index_of_horizontal_displacement,
+    const unsigned& index_of_vertical_displacement,
+    double* r_pt)
   {
     // Create internal data, representing the angle of rotation about
     // contact point. Determined either directly via insisting
@@ -2147,7 +2146,7 @@ public:
   /// \short Get surface coordinate along penetrator for given point x.
   /// We assume that point on the surface and given point share the
   /// same polar angle and return that polar angle
-  void surface_coordinate(const Vector<double> &x, Vector<double> &zeta) const
+  void surface_coordinate(const Vector<double>& x, Vector<double>& zeta) const
   {
     zeta[0] = atan2(x[1] - centre(1), x[0] - centre(0));
   }
@@ -2166,7 +2165,7 @@ public:
 
   /// \short Set original centre of penetrator (for computation of rigid body
   /// displacement
-  void set_original_centre(const Vector<double> &orig_centre)
+  void set_original_centre(const Vector<double>& orig_centre)
   {
     Orig_centre = orig_centre;
   }
@@ -2174,16 +2173,16 @@ public:
   /// \short Vector of pairs identifying values (via a pair of pointer to
   /// Data object and index within it) that correspond to the Data values
   /// that are determined by the horizontal/vertical/... equilibrium equations.
-  Vector<std::pair<Data *, unsigned>> equilibrium_data()
+  Vector<std::pair<Data*, unsigned>> equilibrium_data()
   {
     // We're in 2D
-    Vector<std::pair<Data *, unsigned>> thingy(2);
+    Vector<std::pair<Data*, unsigned>> thingy(2);
 
     // Horizontal equilibrium determines the rotation angle
     // which is stored as the zero-th internal data
     if (Target_horizontal_force_pt == 0)
     {
-      thingy[0] = std::make_pair(static_cast<Data *>(0), 0);
+      thingy[0] = std::make_pair(static_cast<Data*>(0), 0);
     }
     else
     {
@@ -2194,7 +2193,7 @@ public:
     // (Lagrange multiplier) at control node
     if (Target_weight_pt == 0)
     {
-      thingy[1] = std::make_pair(static_cast<Data *>(0), 0);
+      thingy[1] = std::make_pair(static_cast<Data*>(0), 0);
     }
     else
     {
@@ -2213,14 +2212,14 @@ public:
   }
 
   /// Set angle of rotation around contact point
-  void set_angle(const double &angle)
+  void set_angle(const double& angle)
   {
     internal_data_pt(0)->set_value(0, angle);
   }
 
   /// \short Access to pointer to mesh of contact elements that contribute to
   /// force on penetrator
-  Mesh *contact_element_mesh_pt() const
+  Mesh* contact_element_mesh_pt() const
   {
     return Contact_element_mesh_pt;
   }
@@ -2230,7 +2229,7 @@ public:
   /// element. Also set the node pointed to by Control_node_pt
   /// as external Data for the elements in the contact mesh
   /// (unless they contain this node already).
-  void set_contact_element_mesh_pt(Mesh *contact_element_mesh_pt)
+  void set_contact_element_mesh_pt(Mesh* contact_element_mesh_pt)
   {
     Contact_element_mesh_pt = contact_element_mesh_pt;
     flush_external_data();
@@ -2253,11 +2252,11 @@ public:
     for (unsigned e = 0; e < nel; e++)
     {
       bool el_contains_control_node = false;
-      FiniteElement *el_pt = Contact_element_mesh_pt->finite_element_pt(e);
+      FiniteElement* el_pt = Contact_element_mesh_pt->finite_element_pt(e);
       unsigned nnod = el_pt->nnode();
       for (unsigned j = 0; j < nnod; j++)
       {
-        SolidNode *nod_pt = dynamic_cast<SolidNode *>(el_pt->node_pt(j));
+        SolidNode* nod_pt = dynamic_cast<SolidNode*>(el_pt->node_pt(j));
         if (nod_pt == Control_node_pt)
         {
           el_contains_control_node = true;
@@ -2367,7 +2366,7 @@ public:
 
   /// \short Impose weight (rather than imposed displacement). Target
   /// weight specified via pointer.
-  void impose_weight(double *target_weight_pt)
+  void impose_weight(double* target_weight_pt)
   {
     Target_weight_pt = target_weight_pt;
     Target_yc_pt = 0;
@@ -2375,7 +2374,7 @@ public:
 
   /// \short Impose vertical position of control node (rather than weight).
   /// Target vertical position of control node specified via pointer.
-  void impose_yc(double *target_yc_pt)
+  void impose_yc(double* target_yc_pt)
   {
     Target_weight_pt = 0;
     Target_yc_pt = target_yc_pt;
@@ -2390,7 +2389,7 @@ public:
 
   /// \short Impose horizontal force (rather than rotation about contact node).
   /// Target force specified via pointer.
-  void impose_horizontal_force(double *target_horizontal_force_pt)
+  void impose_horizontal_force(double* target_horizontal_force_pt)
   {
     Target_horizontal_force_pt = target_horizontal_force_pt;
     Target_rotation_angle_pt = 0;
@@ -2398,14 +2397,14 @@ public:
 
   /// \short Impose rotation about contact node (rather than horizontal force)
   /// Target angle specified via pointer.
-  void impose_rotation_angle(double *target_rotation_angle_pt)
+  void impose_rotation_angle(double* target_rotation_angle_pt)
   {
     Target_horizontal_force_pt = 0;
     Target_rotation_angle_pt = target_rotation_angle_pt;
   }
 
   /// Fill in contribution to residuals
-  void fill_in_contribution_to_residuals(Vector<double> &residuals)
+  void fill_in_contribution_to_residuals(Vector<double>& residuals)
   {
     // Get resulting force from all associated PseudoContactElements
     // onto the elastic body
@@ -2493,7 +2492,7 @@ public:
   }
 
   /// Get centre of penetrator
-  double centre(const unsigned &i) const
+  double centre(const unsigned& i) const
   {
     switch (i)
     {
@@ -2518,10 +2517,10 @@ public:
   }
 
   /// \short Get penetration for given point x.
-  void penetration(const Vector<double> &x,
-                   const Vector<double> &n,
-                   double &d,
-                   bool &intersection) const
+  void penetration(const Vector<double>& x,
+                   const Vector<double>& n,
+                   double& d,
+                   bool& intersection) const
   {
     // Vector from potential contact point to centre of penetrator
     Vector<double> l(2);
@@ -2558,14 +2557,14 @@ public:
   /// point x using the same logic as for the position function). Here
   /// we assume that both points shrare the same polar angle relative
   /// to the centre of (circular!) penetrator
-  double temperature(const Vector<double> &x) const
+  double temperature(const Vector<double>& x) const
   {
     double phi = atan2(x[1] - centre(1), x[0] - centre(0));
     return cos(phi - 0.5 * MathematicalConstants::Pi);
   }
 
   /// Output coordinates of penetrator at nplot plot points
-  void output(std::ostream &outfile, const unsigned &nplot) const
+  void output(std::ostream& outfile, const unsigned& nplot) const
   {
     for (unsigned j = 0; j < nplot; j++)
     {
@@ -2577,7 +2576,7 @@ public:
   }
 
   /// \short Get position to surface, r, in terms of surface coordinate zeta.
-  void position_from_zeta(const Vector<double> &zeta, Vector<double> &r) const
+  void position_from_zeta(const Vector<double>& zeta, Vector<double>& r) const
   {
     double phi = zeta[0];
     r[0] = centre(0) + (*Radius_pt) * cos(phi);
@@ -2592,7 +2591,7 @@ public:
     unsigned nel = Contact_element_mesh_pt->nelement();
     for (unsigned e = 0; e < nel; e++)
     {
-      dynamic_cast<TemplateFreeContactElementBase *>(
+      dynamic_cast<TemplateFreeContactElementBase*>(
         Contact_element_mesh_pt->element_pt(e))
         ->resulting_contact_force(el_contact_force);
       for (unsigned i = 0; i < 2; i++)
@@ -2611,14 +2610,14 @@ public:
 
 private:
   /// Pointer to radius of penetrator
-  double *Radius_pt;
+  double* Radius_pt;
 
   /// \short Original centre of penetrator (origin for cylindrical polar
   /// coordinate system)
   Vector<double> Orig_centre;
 
   /// Control node
-  SolidNode *Control_node_pt;
+  SolidNode* Control_node_pt;
 
   /// \short Index at which contact pressure (Lagr mult) is stored in nodal
   /// data associated with control node
@@ -2636,22 +2635,22 @@ private:
 
   /// \short Pointer to target weight (null if vertical displacement of control
   /// node is imposed)
-  double *Target_weight_pt;
+  double* Target_weight_pt;
 
   /// \short Pointer to target horizontal force (null if rotation angle angle
   /// about control node is imposed)
-  double *Target_horizontal_force_pt;
+  double* Target_horizontal_force_pt;
 
   /// \short Pointer to  target vertical displacement of control node (null if
   /// weight is imposed)
-  double *Target_yc_pt;
+  double* Target_yc_pt;
 
   /// \short Pointer to target rotation angle about control node (null
   /// if horizontal force is imposed)
-  double *Target_rotation_angle_pt;
+  double* Target_rotation_angle_pt;
 
   /// Mesh of contact elements that contribute to weight/horizontal force
-  Mesh *Contact_element_mesh_pt;
+  Mesh* Contact_element_mesh_pt;
 };
 
 ///////////////////////////////////////////////////////////////////////
@@ -2664,7 +2663,7 @@ private:
 namespace ProblemParameters
 {
   /// hierher temp flux.
-  void unit_flux(const double &time, const Vector<double> &x, double &flux)
+  void unit_flux(const double& time, const Vector<double>& x, double& flux)
   {
     flux = 1.0;
   }
@@ -2716,13 +2715,13 @@ namespace ProblemParameters
   IsotropicElasticityTensor E(Nu);
 
   /// Pointer to constitutive law
-  ConstitutiveLaw *Constitutive_law_pt = 0;
+  ConstitutiveLaw* Constitutive_law_pt = 0;
 
   /// Radius of penetrator
   double Radius = 0.5;
 
   /// Penetrator
-  HeatedPenetrator *Penetrator_pt = 0;
+  HeatedPenetrator* Penetrator_pt = 0;
 
   /// NOTE: WE IMPOSE EITHER THESE ...
 
@@ -2797,7 +2796,7 @@ public:
     unsigned nnod = Bulk_mesh_pt->nboundary_node(b);
     for (unsigned j = 0; j < nnod; j++)
     {
-      SolidNode *nod_pt = Bulk_mesh_pt->boundary_node_pt(b, j);
+      SolidNode* nod_pt = Bulk_mesh_pt->boundary_node_pt(b, j);
       // hierher index read out from element, though
       // this shouldn't actually be set at all. Kill
       nod_pt->set_value(2, ProblemParameters::T_contact);
@@ -2949,10 +2948,10 @@ public:
   /// Switch to displ control
   void switch_to_displ_control()
   {
-    dynamic_cast<HeatedCircularPenetratorElement *>(
+    dynamic_cast<HeatedCircularPenetratorElement*>(
       ProblemParameters::Penetrator_pt)
       ->impose_yc(&ProblemParameters::Y_c);
-    dynamic_cast<HeatedCircularPenetratorElement *>(
+    dynamic_cast<HeatedCircularPenetratorElement*>(
       ProblemParameters::Penetrator_pt)
       ->impose_rotation_angle(&ProblemParameters::Rotation_angle);
     ProblemParameters::Y_c = Control_node_pt->x(1) + Control_node_pt->value(1);
@@ -2961,20 +2960,20 @@ public:
   /// Switch to force control
   void switch_to_force_control()
   {
-    dynamic_cast<HeatedCircularPenetratorElement *>(
+    dynamic_cast<HeatedCircularPenetratorElement*>(
       ProblemParameters::Penetrator_pt)
       ->impose_weight(&ProblemParameters::Weight);
-    dynamic_cast<HeatedCircularPenetratorElement *>(
+    dynamic_cast<HeatedCircularPenetratorElement*>(
       ProblemParameters::Penetrator_pt)
       ->impose_horizontal_force(&ProblemParameters::Horizontal_force);
-    dynamic_cast<HeatedCircularPenetratorElement *>(
+    dynamic_cast<HeatedCircularPenetratorElement*>(
       ProblemParameters::Penetrator_pt)
       ->set_equilibrium_target_forces();
 
     // Re-set contact mesh -- we now need to treat the positions
     // and penalty pressures of all nodes as external data of the
     // penetrator element!
-    dynamic_cast<HeatedCircularPenetratorElement *>(
+    dynamic_cast<HeatedCircularPenetratorElement*>(
       ProblemParameters::Penetrator_pt)
       ->set_contact_element_mesh_pt(Surface_contact_mesh_pt);
 
@@ -2984,8 +2983,8 @@ public:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Upcast from GeneralisedElement
-      HeatedLinearSurfaceContactElement<ELEMENT> *el_pt =
-        dynamic_cast<HeatedLinearSurfaceContactElement<ELEMENT> *>(
+      HeatedLinearSurfaceContactElement<ELEMENT>* el_pt =
+        dynamic_cast<HeatedLinearSurfaceContactElement<ELEMENT>*>(
           Surface_contact_mesh_pt->element_pt(e));
 
       // Set pointer to penetrator
@@ -3006,12 +3005,12 @@ private:
     Vector<unsigned> boundary_id;
     boundary_id.push_back(Contact_boundary_id);
 #ifndef STRUCTURED_MESH
-    Node *left_contact_node_pt = 0;
-    Node *right_contact_node_pt = 0;
-    Node *left_left_top_node_pt = 0;
-    Node *right_left_top_node_pt = 0;
-    Node *left_right_top_node_pt = 0;
-    Node *right_right_top_node_pt = 0;
+    Node* left_contact_node_pt = 0;
+    Node* right_contact_node_pt = 0;
+    Node* left_left_top_node_pt = 0;
+    Node* right_left_top_node_pt = 0;
+    Node* left_right_top_node_pt = 0;
+    Node* right_right_top_node_pt = 0;
     boundary_id.push_back(Left_top_boundary_id);
     boundary_id.push_back(Right_top_boundary_id);
 #endif
@@ -3027,14 +3026,14 @@ private:
       for (unsigned e = 0; e < n_element; e++)
       {
         // Get pointer to the bulk element that is adjacent to boundary b
-        ELEMENT *bulk_elem_pt =
-          dynamic_cast<ELEMENT *>(Bulk_mesh_pt->boundary_element_pt(b, e));
+        ELEMENT* bulk_elem_pt =
+          dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(b, e));
 
         // Find the index of the face of element e along boundary b
         int face_index = Bulk_mesh_pt->face_index_at_boundary(b, e);
 
         // Create new element
-        ImposeDisplacementByLagrangeMultiplierElement<ELEMENT> *el_pt =
+        ImposeDisplacementByLagrangeMultiplierElement<ELEMENT>* el_pt =
           new ImposeDisplacementByLagrangeMultiplierElement<ELEMENT>(
             bulk_elem_pt, face_index);
 
@@ -3065,7 +3064,7 @@ private:
               unsigned nnod = el_pt->nnode();
               for (unsigned j = 0; j < nnod; j++)
               {
-                Node *nod_pt = el_pt->node_pt(j);
+                Node* nod_pt = el_pt->node_pt(j);
                 if (nod_pt->is_on_boundary(Left_top_boundary_id))
                 {
                   left_contact_node_pt = nod_pt;
@@ -3091,7 +3090,7 @@ private:
               unsigned nnod = el_pt->nnode();
               for (unsigned j = 0; j < nnod; j++)
               {
-                Node *nod_pt = el_pt->node_pt(j);
+                Node* nod_pt = el_pt->node_pt(j);
                 if (nod_pt->is_on_boundary(Left_boundary_id))
                 {
                   left_left_top_node_pt = nod_pt;
@@ -3117,7 +3116,7 @@ private:
               unsigned nnod = el_pt->nnode();
               for (unsigned j = 0; j < nnod; j++)
               {
-                Node *nod_pt = el_pt->node_pt(j);
+                Node* nod_pt = el_pt->node_pt(j);
                 if (nod_pt->is_on_boundary(Right_boundary_id))
                 {
                   right_right_top_node_pt = nod_pt;
@@ -3143,7 +3142,7 @@ private:
         unsigned nnod = el_pt->nnode();
         for (unsigned j = 0; j < nnod; j++)
         {
-          Node *nod_pt = el_pt->node_pt(j);
+          Node* nod_pt = el_pt->node_pt(j);
 
           // Is the node also on side boundaries?
           if ((nod_pt->is_on_boundary(Left_boundary_id)) ||
@@ -3247,9 +3246,9 @@ private:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Get pointer to the bulk element that is adjacent to boundary b
-      ProjectableUnsteadyHeatElement<TUnsteadyHeatElement<2, 3>> *bulk_elem_pt =
+      ProjectableUnsteadyHeatElement<TUnsteadyHeatElement<2, 3>>* bulk_elem_pt =
         dynamic_cast<
-          ProjectableUnsteadyHeatElement<TUnsteadyHeatElement<2, 3>> *>(
+          ProjectableUnsteadyHeatElement<TUnsteadyHeatElement<2, 3>>*>(
           Boulder_mesh_pt->boundary_element_pt(b, e));
 
       // What is the face index of element e along boundary b
@@ -3257,8 +3256,8 @@ private:
 
       // Build the corresponding contact element
       HeatedPenetratorFluxElement<
-        ProjectableUnsteadyHeatElement<TUnsteadyHeatElement<2, 3>>>
-        *contact_element_pt = new HeatedPenetratorFluxElement<
+        ProjectableUnsteadyHeatElement<TUnsteadyHeatElement<2, 3>>>*
+        contact_element_pt = new HeatedPenetratorFluxElement<
           ProjectableUnsteadyHeatElement<TUnsteadyHeatElement<2, 3>>>(
           bulk_elem_pt, face_index);
 
@@ -3282,9 +3281,9 @@ private:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Get pointer to the bulk element that is adjacent to boundary b
-      ProjectableUnsteadyHeatElement<TUnsteadyHeatElement<2, 3>> *bulk_elem_pt =
+      ProjectableUnsteadyHeatElement<TUnsteadyHeatElement<2, 3>>* bulk_elem_pt =
         dynamic_cast<
-          ProjectableUnsteadyHeatElement<TUnsteadyHeatElement<2, 3>> *>(
+          ProjectableUnsteadyHeatElement<TUnsteadyHeatElement<2, 3>>*>(
           Boulder_mesh_pt->boundary_element_pt(b, e));
 
       // What is the face index of element e along boundary b
@@ -3292,8 +3291,8 @@ private:
 
       // Build the corresponding flux element
       UnsteadyHeatFluxElement<
-        ProjectableUnsteadyHeatElement<TUnsteadyHeatElement<2, 3>>>
-        *flux_element_pt = new UnsteadyHeatFluxElement<
+        ProjectableUnsteadyHeatElement<TUnsteadyHeatElement<2, 3>>>*
+        flux_element_pt = new UnsteadyHeatFluxElement<
           ProjectableUnsteadyHeatElement<TUnsteadyHeatElement<2, 3>>>(
           bulk_elem_pt, face_index);
 
@@ -3317,14 +3316,14 @@ private:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Get pointer to the bulk element that is adjacent to boundary b
-      ELEMENT *bulk_elem_pt =
-        dynamic_cast<ELEMENT *>(Bulk_mesh_pt->boundary_element_pt(b, e));
+      ELEMENT* bulk_elem_pt =
+        dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(b, e));
 
       // What is the face index of element e along boundary b
       int face_index = Bulk_mesh_pt->face_index_at_boundary(b, e);
 
       // Build the corresponding contact element
-      HeatedLinearSurfaceContactElement<ELEMENT> *contact_element_pt =
+      HeatedLinearSurfaceContactElement<ELEMENT>* contact_element_pt =
         new HeatedLinearSurfaceContactElement<ELEMENT>(
           bulk_elem_pt, face_index, Contact_id);
 
@@ -3390,7 +3389,7 @@ private:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Cast to a solid element
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
       // Set the constitutive law
       el_pt->constitutive_law_pt() = ProblemParameters::Constitutive_law_pt;
@@ -3421,7 +3420,7 @@ private:
     unsigned nnod = Bulk_mesh_pt->nboundary_node(b);
     for (unsigned j = 0; j < nnod; j++)
     {
-      SolidNode *nod_pt = Bulk_mesh_pt->boundary_node_pt(b, j);
+      SolidNode* nod_pt = Bulk_mesh_pt->boundary_node_pt(b, j);
       nod_pt->pin_position(0);
       nod_pt->pin_position(1);
       nod_pt->pin(0);
@@ -3433,7 +3432,7 @@ private:
     nnod = Bulk_mesh_pt->nboundary_node(b);
     for (unsigned j = 0; j < nnod; j++)
     {
-      SolidNode *nod_pt = Bulk_mesh_pt->boundary_node_pt(b, j);
+      SolidNode* nod_pt = Bulk_mesh_pt->boundary_node_pt(b, j);
       nod_pt->pin_position(0);
       nod_pt->pin(0);
     }
@@ -3441,7 +3440,7 @@ private:
     nnod = Bulk_mesh_pt->nboundary_node(b);
     for (unsigned j = 0; j < nnod; j++)
     {
-      SolidNode *nod_pt = Bulk_mesh_pt->boundary_node_pt(b, j);
+      SolidNode* nod_pt = Bulk_mesh_pt->boundary_node_pt(b, j);
       nod_pt->pin_position(0);
       nod_pt->pin(0);
     }
@@ -3452,8 +3451,8 @@ private:
       // Update angle?
       bool update_angle = false;
       double phi_old = 0.0;
-      HeatedCircularPenetratorElement *pen_el_pt =
-        dynamic_cast<HeatedCircularPenetratorElement *>(
+      HeatedCircularPenetratorElement* pen_el_pt =
+        dynamic_cast<HeatedCircularPenetratorElement*>(
           ProblemParameters::Penetrator_pt);
       if (pen_el_pt != 0)
       {
@@ -3464,15 +3463,15 @@ private:
       // Find closest/most loaded node
       double x_c = 0.5;
       Control_node_pt = 0;
-      SolidNode *most_central_node_pt = 0;
-      SolidNode *most_loaded_node_pt = 0;
+      SolidNode* most_central_node_pt = 0;
+      SolidNode* most_loaded_node_pt = 0;
       double dist_min = DBL_MAX;
       double load_max = 0.0;
       unsigned b = Contact_boundary_id;
       unsigned nnod = Bulk_mesh_pt->nboundary_node(b);
       for (unsigned j = 0; j < nnod; j++)
       {
-        SolidNode *nod_pt = Bulk_mesh_pt->boundary_node_pt(b, j);
+        SolidNode* nod_pt = Bulk_mesh_pt->boundary_node_pt(b, j);
 
         // Find closest node
         double dist = std::fabs(nod_pt->x(0) - x_c);
@@ -3483,7 +3482,7 @@ private:
         }
 
         // Find most loaded node
-        BoundaryNodeBase *bnod_pt = dynamic_cast<BoundaryNodeBase *>(nod_pt);
+        BoundaryNodeBase* bnod_pt = dynamic_cast<BoundaryNodeBase*>(nod_pt);
         unsigned index_of_contact_pressure =
           bnod_pt->index_of_first_value_assigned_by_face_element(Contact_id);
         if (nod_pt->value(index_of_contact_pressure) > load_max)
@@ -3513,7 +3512,7 @@ private:
         double phi_new =
           asin((Xc_old - Control_node_pt->x(0)) / ProblemParameters::Radius +
                sin(phi_old));
-        dynamic_cast<HeatedCircularPenetratorElement *>(
+        dynamic_cast<HeatedCircularPenetratorElement*>(
           ProblemParameters::Penetrator_pt)
           ->set_angle(phi_new);
         oomph_info << "Old/new angle: " << phi_old << " " << phi_new
@@ -3560,14 +3559,14 @@ private:
         bool found = false;
         for (unsigned e = 0; e < nel; e++)
         {
-          HeatedLinearSurfaceContactElement<ELEMENT> *el_pt =
-            dynamic_cast<HeatedLinearSurfaceContactElement<ELEMENT> *>(
+          HeatedLinearSurfaceContactElement<ELEMENT>* el_pt =
+            dynamic_cast<HeatedLinearSurfaceContactElement<ELEMENT>*>(
               Surface_contact_mesh_pt->element_pt(e));
           unsigned nnod = el_pt->nnode();
           for (unsigned j = 0; j < nnod; j++)
           {
-            SolidNode *solid_nod_pt =
-              dynamic_cast<SolidNode *>(el_pt->node_pt(j));
+            SolidNode* solid_nod_pt =
+              dynamic_cast<SolidNode*>(el_pt->node_pt(j));
             if (solid_nod_pt == Control_node_pt)
             {
               // Got it!
@@ -3575,8 +3574,8 @@ private:
 
               // Find index at which contact pressure/Lagrange multiplier
               // is stored
-              BoundaryNodeBase *bnod_pt =
-                dynamic_cast<BoundaryNodeBase *>(solid_nod_pt);
+              BoundaryNodeBase* bnod_pt =
+                dynamic_cast<BoundaryNodeBase*>(solid_nod_pt);
 
               // Get the index of the first nodal value associated with
               // this FaceElement
@@ -3616,8 +3615,8 @@ private:
         }
 
         // Back up old penetrator (if it existed)
-        HeatedCircularPenetratorElement *old_penetrator_pt =
-          dynamic_cast<HeatedCircularPenetratorElement *>(
+        HeatedCircularPenetratorElement* old_penetrator_pt =
+          dynamic_cast<HeatedCircularPenetratorElement*>(
             ProblemParameters::Penetrator_pt);
 
         // Make new one
@@ -3641,13 +3640,13 @@ private:
         }
         if (impose_displ)
         {
-          dynamic_cast<HeatedCircularPenetratorElement *>(
+          dynamic_cast<HeatedCircularPenetratorElement*>(
             ProblemParameters::Penetrator_pt)
             ->impose_yc(&ProblemParameters::Y_c);
         }
         else
         {
-          dynamic_cast<HeatedCircularPenetratorElement *>(
+          dynamic_cast<HeatedCircularPenetratorElement*>(
             ProblemParameters::Penetrator_pt)
             ->impose_weight(&ProblemParameters::Weight);
         }
@@ -3663,16 +3662,16 @@ private:
         }
         if (impose_angle)
         {
-          dynamic_cast<HeatedCircularPenetratorElement *>(
+          dynamic_cast<HeatedCircularPenetratorElement*>(
             ProblemParameters::Penetrator_pt)
             ->impose_rotation_angle(&ProblemParameters::Rotation_angle);
         }
         else
         {
-          dynamic_cast<HeatedCircularPenetratorElement *>(
+          dynamic_cast<HeatedCircularPenetratorElement*>(
             ProblemParameters::Penetrator_pt)
             ->impose_horizontal_force(&ProblemParameters::Horizontal_force);
-          dynamic_cast<HeatedCircularPenetratorElement *>(
+          dynamic_cast<HeatedCircularPenetratorElement*>(
             ProblemParameters::Penetrator_pt)
             ->set_angle(old_penetrator_pt->angle());
         }
@@ -3682,15 +3681,15 @@ private:
 
         // Add to mesh
         Penetrator_mesh_pt->add_element_pt(
-          dynamic_cast<HeatedCircularPenetratorElement *>(
+          dynamic_cast<HeatedCircularPenetratorElement*>(
             ProblemParameters::Penetrator_pt));
       }
 
       // Pass contact elements to penetrator element and declare their
       // positions and Lagrange multiplier (contact pressure) values
       // to be external data.
-      HeatedCircularPenetratorElement *el_pt =
-        dynamic_cast<HeatedCircularPenetratorElement *>(
+      HeatedCircularPenetratorElement* el_pt =
+        dynamic_cast<HeatedCircularPenetratorElement*>(
           ProblemParameters::Penetrator_pt);
       if (el_pt != 0)
       {
@@ -3706,8 +3705,8 @@ private:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Upcast from GeneralisedElement
-      HeatedLinearSurfaceContactElement<ELEMENT> *el_pt =
-        dynamic_cast<HeatedLinearSurfaceContactElement<ELEMENT> *>(
+      HeatedLinearSurfaceContactElement<ELEMENT>* el_pt =
+        dynamic_cast<HeatedLinearSurfaceContactElement<ELEMENT>*>(
           Surface_contact_mesh_pt->element_pt(e));
 
       // Set pointer to penetrator
@@ -3763,37 +3762,37 @@ private:
 
   /// Pointer to boulder mesh
   RefineableTriangleMesh<
-    ProjectableUnsteadyHeatElement<TUnsteadyHeatElement<2, 3>>>
-    *Boulder_mesh_pt;
+    ProjectableUnsteadyHeatElement<TUnsteadyHeatElement<2, 3>>>*
+    Boulder_mesh_pt;
 
 #ifdef STRUCTURED_MESH
 
   /// Pointer to bulk mesh
-  ElasticRefineableRectangularQuadMesh<ELEMENT> *Bulk_mesh_pt;
+  ElasticRefineableRectangularQuadMesh<ELEMENT>* Bulk_mesh_pt;
 
 #else
 
   /// Pointer to bulk mesh
-  RefineableSolidTriangleMesh<ELEMENT> *Bulk_mesh_pt;
+  RefineableSolidTriangleMesh<ELEMENT>* Bulk_mesh_pt;
 
 #endif
 
   /// Pointer to the "surface" contact mesh
-  Mesh *Surface_contact_mesh_pt;
+  Mesh* Surface_contact_mesh_pt;
 
   /// \short Pointers to meshes of Lagrange multiplier elements to impose
   /// displacement of top boundary
-  SolidMesh *Displ_imposition_mesh_pt;
+  SolidMesh* Displ_imposition_mesh_pt;
 
   /// Mesh of elements that imposed unit heat flux on top of boulder
-  Mesh *Boulder_surface_heat_flux_mesh_pt;
+  Mesh* Boulder_surface_heat_flux_mesh_pt;
 
   /// Penetrator mesh
-  Mesh *Penetrator_mesh_pt;
+  Mesh* Penetrator_mesh_pt;
 
   /// \short Pointer to the "surface" mesh on boulder that applies flux boundary
   /// condition to boulder
-  Mesh *Boulder_surface_contact_mesh_pt;
+  Mesh* Boulder_surface_contact_mesh_pt;
 
   // Boundary enumeration
   enum
@@ -3818,20 +3817,20 @@ private:
 
   /// \short Backup of Surface_contact_mesh_pt so the Lagrange multipliers
   /// can be projected across
-  BackupMeshForProjection<QElement<1, 3>> *Backed_up_surface_contact_mesh_pt;
+  BackupMeshForProjection<QElement<1, 3>>* Backed_up_surface_contact_mesh_pt;
 
 #else
 
   /// \short Backup of Surface_contact_mesh_pt so the Lagrange multipliers
   /// can be projected across
-  BackupMeshForProjection<TElement<1, 3>> *Backed_up_surface_contact_mesh_pt;
+  BackupMeshForProjection<TElement<1, 3>>* Backed_up_surface_contact_mesh_pt;
 
 #endif
 
   /// \short Pointer to control node where Lagrange multiplier (contact
   /// pressure) is "pseudo-hijacked" to impose either displacement or weight
   /// constraint.
-  SolidNode *Control_node_pt;
+  SolidNode* Control_node_pt;
 
   /// x coordinate of old control node
   double Xc_old;
@@ -3853,7 +3852,7 @@ private:
   double Y_ur;
 
   /// Contact boundary in its poly line representation
-  TriangleMeshPolyLine *Contact_boundary_pt;
+  TriangleMeshPolyLine* Contact_boundary_pt;
 
   /// Max. element length on contact boundary
   double Maximum_element_length_on_contact_boundary;
@@ -3909,12 +3908,12 @@ ContactProblem<ELEMENT>::ContactProblem()
   //--------------------
 
   // Create circle representing outer boundary
-  Circle *boulder_boundary_circle_pt = new Circle(ProblemParameters::Centre[0],
+  Circle* boulder_boundary_circle_pt = new Circle(ProblemParameters::Centre[0],
                                                   ProblemParameters::Centre[1],
                                                   ProblemParameters::Radius);
 
   // Provide storage for pointers to the two parts of the curvilinear boundary
-  Vector<TriangleMeshCurveSection *> boulder_outer_curvilinear_boundary_pt(2);
+  Vector<TriangleMeshCurveSection*> boulder_outer_curvilinear_boundary_pt(2);
 
   // First bit
   double zeta_start = 0.0;
@@ -3939,7 +3938,7 @@ ContactProblem<ELEMENT>::ContactProblem()
 
   // Combine to curvilinear boundary and define the
   // outer boundary
-  TriangleMeshClosedCurve *boulder_outer_boundary_pt =
+  TriangleMeshClosedCurve* boulder_outer_boundary_pt =
     new TriangleMeshClosedCurve(boulder_outer_curvilinear_boundary_pt);
 
   // Use the TriangleMeshParameters object for helping on the manage
@@ -3957,7 +3956,7 @@ ContactProblem<ELEMENT>::ContactProblem()
     boulder_triangle_mesh_parameters, time_stepper_pt());
 
   // Set error estimator for bulk mesh
-  Z2ErrorEstimator *boulder_error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* boulder_error_estimator_pt = new Z2ErrorEstimator;
   Boulder_mesh_pt->spatial_error_estimator_pt() = boulder_error_estimator_pt;
 
   // Set element size limits (faire: just uncommented both of these)
@@ -3987,13 +3986,13 @@ ContactProblem<ELEMENT>::ContactProblem()
 #else
 
   // Pointer to the closed curve that defines the outer boundary
-  TriangleMeshClosedCurve *closed_curve_pt = 0;
+  TriangleMeshClosedCurve* closed_curve_pt = 0;
 
   // Build outer boundary as Polygon
 
   // The boundary is bounded by five distinct boundaries, each
   // represented by its own polyline
-  Vector<TriangleMeshCurveSection *> boundary_polyline_pt(6);
+  Vector<TriangleMeshCurveSection*> boundary_polyline_pt(6);
 
   // Vertex coordinates on boundary
   Vector<Vector<double>> bound_coords(2);
@@ -4054,7 +4053,7 @@ ContactProblem<ELEMENT>::ContactProblem()
   }
 
   // Build boundary poly line
-  TriangleMeshPolyLine *right_top_boundary_pt =
+  TriangleMeshPolyLine* right_top_boundary_pt =
     new TriangleMeshPolyLine(right_top_bound_coords, Right_top_boundary_id);
   boundary_polyline_pt[3] = right_top_boundary_pt;
 
@@ -4108,13 +4107,13 @@ ContactProblem<ELEMENT>::ContactProblem()
   top_left_bound_coords[npt_left - 1][1] = Y_ur;
 
   // Build boundary poly line
-  TriangleMeshPolyLine *top_left_boundary_pt =
+  TriangleMeshPolyLine* top_left_boundary_pt =
     new TriangleMeshPolyLine(top_left_bound_coords, Left_top_boundary_id);
   boundary_polyline_pt[5] = top_left_boundary_pt;
 
   // Create the triangle mesh polygon for outer boundary
   //----------------------------------------------------
-  TriangleMeshPolygon *outer_polygon =
+  TriangleMeshPolygon* outer_polygon =
     new TriangleMeshPolygon(boundary_polyline_pt);
 
   // Set the pointer
@@ -4152,7 +4151,7 @@ ContactProblem<ELEMENT>::ContactProblem()
 #else
 
   // Set error estimator for bulk mesh
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   Bulk_mesh_pt->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Set element size limits
@@ -4305,7 +4304,7 @@ void ContactProblem<ELEMENT>::doc_solution()
   unsigned nel = Surface_contact_mesh_pt->nelement();
   for (unsigned e = 0; e < nel; e++)
   {
-    dynamic_cast<HeatedLinearSurfaceContactElement<ELEMENT> *>(
+    dynamic_cast<HeatedLinearSurfaceContactElement<ELEMENT>*>(
       Surface_contact_mesh_pt->element_pt(e))
       ->output(some_file, 3);
   }
@@ -4322,8 +4321,8 @@ void ContactProblem<ELEMENT>::doc_solution()
   nel = Surface_contact_mesh_pt->nelement();
   for (unsigned e = 0; e < nel; e++)
   {
-    HeatedLinearSurfaceContactElement<ELEMENT> *el_pt =
-      dynamic_cast<HeatedLinearSurfaceContactElement<ELEMENT> *>(
+    HeatedLinearSurfaceContactElement<ELEMENT>* el_pt =
+      dynamic_cast<HeatedLinearSurfaceContactElement<ELEMENT>*>(
         Surface_contact_mesh_pt->element_pt(e));
     unsigned nint = el_pt->integral_pt()->nweight();
     for (unsigned j = 0; j < nint; j++)
@@ -4356,8 +4355,8 @@ void ContactProblem<ELEMENT>::doc_solution()
   nel = Surface_contact_mesh_pt->nelement();
   for (unsigned e = 0; e < nel; e++)
   {
-    HeatedLinearSurfaceContactElement<ELEMENT> *el_pt =
-      dynamic_cast<HeatedLinearSurfaceContactElement<ELEMENT> *>(
+    HeatedLinearSurfaceContactElement<ELEMENT>* el_pt =
+      dynamic_cast<HeatedLinearSurfaceContactElement<ELEMENT>*>(
         Surface_contact_mesh_pt->element_pt(e));
     el_pt->output(some_file, 3);
     el_pt->resulting_contact_force(contact_force);
@@ -4400,8 +4399,8 @@ void ContactProblem<ELEMENT>::doc_solution()
           Doc_info.number());
   some_file.open(filename);
   n = 500;
-  HeatedCircularPenetratorElement *pen_el_pt =
-    dynamic_cast<HeatedCircularPenetratorElement *>(
+  HeatedCircularPenetratorElement* pen_el_pt =
+    dynamic_cast<HeatedCircularPenetratorElement*>(
       ProblemParameters::Penetrator_pt);
   Vector<double> centre(2);
   if (pen_el_pt != 0)
@@ -4462,7 +4461,7 @@ void ContactProblem<ELEMENT>::doc_solution()
 //=======start_of_main====================================================
 /// \short Driver code
 //========================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // feenableexcept(FE_INVALID | FE_DIVBYZERO | FE_OVERFLOW | FE_UNDERFLOW);
 
@@ -4613,7 +4612,7 @@ int main(int argc, char *argv[])
       problem.max_newton_iterations() = max_iterations;
       problem.unsteady_newton_solve(dt);
     }
-    catch (OomphLibError &error) // This will catch any error,
+    catch (OomphLibError& error) // This will catch any error,
     // but actually we only want to catch failure to converge
     {
       max_iterations = 100;
@@ -4678,9 +4677,9 @@ int main(int argc, char *argv[])
 
       problem.newton_solve(max_adapt);
     }
-    catch (OomphLibError
-             &error) // This will catch any error,
-                     // but actually we only want to catch failure to converge
+    catch (OomphLibError&
+             error) // This will catch any error,
+                    // but actually we only want to catch failure to converge
     {
       // Increase number of iterations to give it chance to converge
       max_iterations = 100;
@@ -4704,11 +4703,11 @@ int main(int argc, char *argv[])
   ProblemParameters::Horizontal_force = 0.0;
 
   oomph_info << "RE-solving for weight="
-             << dynamic_cast<HeatedCircularPenetratorElement *>(
+             << dynamic_cast<HeatedCircularPenetratorElement*>(
                   ProblemParameters::Penetrator_pt)
                   ->target_weight()
              << " and horizontal force: "
-             << dynamic_cast<HeatedCircularPenetratorElement *>(
+             << dynamic_cast<HeatedCircularPenetratorElement*>(
                   ProblemParameters::Penetrator_pt)
                   ->target_horizontal_force()
              << std::endl;
@@ -4726,7 +4725,7 @@ int main(int argc, char *argv[])
 
     problem.unsteady_newton_solve(dt);
   }
-  catch (OomphLibError &error) // This will catch any error,
+  catch (OomphLibError& error) // This will catch any error,
   // but actually we only want to catch failure to converge
   {
     // Increase number of iterations to give it chance to converge
@@ -4798,11 +4797,11 @@ int main(int argc, char *argv[])
 #endif
 
     oomph_info << "Re-solving for weight="
-               << dynamic_cast<HeatedCircularPenetratorElement *>(
+               << dynamic_cast<HeatedCircularPenetratorElement*>(
                     ProblemParameters::Penetrator_pt)
                     ->target_weight()
                << " and horizontal force: "
-               << dynamic_cast<HeatedCircularPenetratorElement *>(
+               << dynamic_cast<HeatedCircularPenetratorElement*>(
                     ProblemParameters::Penetrator_pt)
                     ->target_horizontal_force()
                << " and lift off: " << lift_off << std::endl;
@@ -4816,7 +4815,7 @@ int main(int argc, char *argv[])
       problem.max_residuals() = max_residuals;
       problem.newton_solve(max_adapt);
     }
-    catch (OomphLibError &error) // This will catch any error,
+    catch (OomphLibError& error) // This will catch any error,
     // but actually we only want to catch failure to converge
     {
       max_iterations = 100;

@@ -70,8 +70,8 @@ public:
   /// \short Constructor, takes the pointer to the "bulk" element and the
   /// index of the face to be created. Calls the constructors of the
   /// underlying classes
-  StefanBoltzmannMeltElement(FiniteElement *const &bulk_el_pt,
-                             const int &face_index) :
+  StefanBoltzmannMeltElement(FiniteElement* const& bulk_el_pt,
+                             const int& face_index) :
     UnsteadyHeatBaseFaceElement<ELEMENT>(bulk_el_pt, face_index),
     StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT>(bulk_el_pt, face_index),
     SurfaceMeltElement<ELEMENT>(bulk_el_pt, face_index)
@@ -79,7 +79,7 @@ public:
   }
 
   /// Broken copy constructor
-  StefanBoltzmannMeltElement(const StefanBoltzmannMeltElement &dummy)
+  StefanBoltzmannMeltElement(const StefanBoltzmannMeltElement& dummy)
   {
     BrokenCopy::broken_copy("StefanBoltzmannMeltElement");
   }
@@ -88,9 +88,9 @@ public:
   /// The "global" intrinsic coordinate of the element when
   /// viewed as part of a geometric object should be given by
   /// the FaceElement representation, by default (final overload)
-  double zeta_nodal(const unsigned &n,
-                    const unsigned &k,
-                    const unsigned &i) const
+  double zeta_nodal(const unsigned& n,
+                    const unsigned& k,
+                    const unsigned& i) const
   {
     return FaceElement::zeta_nodal(n, k, i);
   }
@@ -109,19 +109,19 @@ class MyIntegral : public Integral
 public:
   /// \short Constructor: Specify number of uniformly spaced sample points in
   /// unit interval
-  MyIntegral(const unsigned &n_knot)
+  MyIntegral(const unsigned& n_knot)
   {
     N_knot = n_knot;
   }
 
   /// Broken copy constructor
-  MyIntegral(const MyIntegral &dummy)
+  MyIntegral(const MyIntegral& dummy)
   {
     BrokenCopy::broken_copy("MyIntegral");
   }
 
   /// Broken assignment operator
-  void operator=(const MyIntegral &)
+  void operator=(const MyIntegral&)
   {
     BrokenCopy::broken_assign("MyIntegral");
   }
@@ -133,14 +133,14 @@ public:
   }
 
   /// \short Return coordinate s[j] (j=0) of integration point i --
-  double knot(const unsigned &i, const unsigned &j) const
+  double knot(const unsigned& i, const unsigned& j) const
   {
     double dx = 1.0 / double(N_knot);
     return ((0.5 + double(i))) * dx;
   }
 
   /// Return weight of integration point i
-  double weight(const unsigned &i) const
+  double weight(const unsigned& i) const
   {
     // return 2.0/double(N_knot);
     return 1.0 / double(N_knot);
@@ -173,7 +173,7 @@ namespace GlobalParameters
   double Nu = 0.3;
 
   /// Pointer to constitutive law
-  ConstitutiveLaw *Constitutive_law_pt = 0;
+  ConstitutiveLaw* Constitutive_law_pt = 0;
 
   /// Melt-temperature
   double Melt_temperature = 0.8288627710;
@@ -221,7 +221,7 @@ namespace GlobalParameters
   double V0_hat = 0.5;
 
   /// Source function
-  void get_source(const double &time, const Vector<double> &x, double &source)
+  void get_source(const double& time, const Vector<double>& x, double& source)
   {
     double t = time;
     double t0 = 0.0;
@@ -649,9 +649,9 @@ namespace GlobalParameters
   }
 
   /// Exact solution as a Vector
-  void get_exact_u(const double &time,
-                   const Vector<double> &x,
-                   Vector<double> &u)
+  void get_exact_u(const double& time,
+                   const Vector<double>& x,
+                   Vector<double>& u)
   {
     double t = time;
     double t0 = 0.0;
@@ -868,7 +868,7 @@ namespace GlobalParameters
 
   /// \short Melt flux for exact solution (to test melting without feedback
   /// with S.B.)
-  double melt_flux(const double &t)
+  double melt_flux(const double& t)
   {
     double t0 = 0;
 
@@ -883,7 +883,7 @@ namespace GlobalParameters
   }
 
   /// Exact radius of inner circle
-  double radius(const double &t)
+  double radius(const double& t)
   {
     double t0 = 0.0;
 
@@ -899,7 +899,7 @@ namespace GlobalParameters
   }
 
   /// Incoming sb radiation on inside
-  double incoming_sb_inside(const double &t)
+  double incoming_sb_inside(const double& t)
   {
     double t0 = 0.0;
 
@@ -922,7 +922,7 @@ namespace GlobalParameters
   }
 
   /// Incoming sb radiation on outside
-  double incoming_sb_outside(const double &t)
+  double incoming_sb_outside(const double& t)
   {
     double t0 = 0.0;
 
@@ -997,7 +997,7 @@ public:
       unsigned n_node = Bulk_mesh_pt->nboundary_node(b);
       for (unsigned n = 0; n < n_node; n++)
       {
-        Node *nod_pt = Bulk_mesh_pt->boundary_node_pt(b, n);
+        Node* nod_pt = Bulk_mesh_pt->boundary_node_pt(b, n);
         Vector<double> x(2);
         x[0] = nod_pt->x(0);
         x[1] = nod_pt->x(1);
@@ -1025,14 +1025,14 @@ public:
       for (unsigned e = 0; e < n_element; e++)
       {
         // Get pointer to the bulk element that is adjacent to boundary b
-        ELEMENT *bulk_elem_pt =
-          dynamic_cast<ELEMENT *>(Bulk_mesh_pt->boundary_element_pt(b, e));
+        ELEMENT* bulk_elem_pt =
+          dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(b, e));
 
         // Find the index of the face of element e along boundary b
         int face_index = Bulk_mesh_pt->face_index_at_boundary(b, e);
 
         // Create flux element
-        StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT> *el_pt =
+        StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT>* el_pt =
           new StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT>(bulk_elem_pt,
                                                               face_index);
 
@@ -1063,9 +1063,9 @@ public:
     double x_min = DBL_MAX;
     double x_max = -DBL_MAX;
     double y_max = -DBL_MAX;
-    SolidNode *x_min_node_pt = 0;
-    SolidNode *x_max_node_pt = 0;
-    SolidNode *y_max_node_pt = 0;
+    SolidNode* x_min_node_pt = 0;
+    SolidNode* x_max_node_pt = 0;
+    SolidNode* y_max_node_pt = 0;
 
     // Loop over boundaries of inner circle
     for (unsigned b = 4; b <= 5; b++) // hierher enumerate
@@ -1075,8 +1075,8 @@ public:
       for (unsigned e = 0; e < n_element; e++)
       {
         // Get pointer to the bulk element that is adjacent to boundary b
-        ELEMENT *bulk_elem_pt =
-          dynamic_cast<ELEMENT *>(Bulk_mesh_pt->boundary_element_pt(b, e));
+        ELEMENT* bulk_elem_pt =
+          dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(b, e));
 
         // What is the face index of element e along boundary b
         int face_index = Bulk_mesh_pt->face_index_at_boundary(b, e);
@@ -1086,7 +1086,7 @@ public:
         //  SurfaceMeltElement<ELEMENT>(bulk_elem_pt,face_index);
 
         // Build the corresponding melt element
-        StefanBoltzmannMeltElement<ELEMENT> *melt_element_pt =
+        StefanBoltzmannMeltElement<ELEMENT>* melt_element_pt =
           new StefanBoltzmannMeltElement<ELEMENT>(bulk_elem_pt, face_index);
 
         // Add the melt element to the surface mesh
@@ -1115,8 +1115,8 @@ public:
           unsigned nnod = melt_element_pt->nnode();
           for (unsigned j = 0; j < nnod; j++)
           {
-            SolidNode *nod_pt =
-              dynamic_cast<SolidNode *>(melt_element_pt->node_pt(j));
+            SolidNode* nod_pt =
+              dynamic_cast<SolidNode*>(melt_element_pt->node_pt(j));
             double x = nod_pt->x(0);
             double y = nod_pt->x(1);
             if (x < x_min)
@@ -1156,13 +1156,13 @@ public:
 
 private:
   /// Pointer to the "bulk" mesh
-  RefineableSolidTriangleMesh<ELEMENT> *Bulk_mesh_pt;
+  RefineableSolidTriangleMesh<ELEMENT>* Bulk_mesh_pt;
 
   /// Pointer to surface mesh of radiative flux elements
-  Mesh *Unsteady_heat_flux_mesh_pt;
+  Mesh* Unsteady_heat_flux_mesh_pt;
 
   /// Pointer to the surface melt mesh
-  Mesh *Surface_melt_mesh_pt;
+  Mesh* Surface_melt_mesh_pt;
 
   /// Trace file
   ofstream Trace_file;
@@ -1171,13 +1171,13 @@ private:
   unsigned Ipt_leftmost_outer;
 
   /// Element containing leftmost point on outer boundary
-  StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT> *Leftmost_outer_el_pt;
+  StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT>* Leftmost_outer_el_pt;
 
   /// Integration point of rightmost point on inner boundary
   unsigned Ipt_rightmost_inner;
 
   /// Element containing rightmost point on inner boundary
-  StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT> *Rightmost_inner_el_pt;
+  StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT>* Rightmost_inner_el_pt;
 
   /// DocInfo object stores flags/labels for where the output gets written to
   DocInfo Doc_info;
@@ -1209,23 +1209,23 @@ StefanBoltzmannProblem<ELEMENT>::StefanBoltzmannProblem()
   double a = GlobalParameters::Radius_outer;
   double x_c = 0.0;
   double y_c = 0.0;
-  Circle *outer_circle_pt = new Circle(x_c, y_c, a);
+  Circle* outer_circle_pt = new Circle(x_c, y_c, a);
 
   // Create circle representing inner boundary
   a = GlobalParameters::Radius_inner;
   x_c = 0.0;
   y_c = 0.0;
-  Circle *inner_circle_pt = new Circle(x_c, y_c, a);
+  Circle* inner_circle_pt = new Circle(x_c, y_c, a);
 
   // Create circle representing boundary of central region
   a = GlobalParameters::Radius_innermost;
-  Circle *central_circle_pt = new Circle(x_c, y_c, a);
+  Circle* central_circle_pt = new Circle(x_c, y_c, a);
 
   // Outer boundary
   //---------------
 
   // Provide storage for pointers to the two parts of the curvilinear boundary
-  Vector<TriangleMeshCurveSection *> outer_curvilinear_boundary_pt(2);
+  Vector<TriangleMeshCurveSection*> outer_curvilinear_boundary_pt(2);
 
   // First bit
   double zeta_start = 0.0;
@@ -1243,12 +1243,12 @@ StefanBoltzmannProblem<ELEMENT>::StefanBoltzmannProblem()
 
   // Combine to curvilinear boundary and define the
   // outer boundary
-  TriangleMeshClosedCurve *outer_boundary_pt =
+  TriangleMeshClosedCurve* outer_boundary_pt =
     new TriangleMeshClosedCurve(outer_curvilinear_boundary_pt);
 
   // Inner circular boundaries
   //--------------------------
-  Vector<TriangleMeshCurveSection *> inner_boundary_line_pt(2);
+  Vector<TriangleMeshCurveSection*> inner_boundary_line_pt(2);
 
   // The intrinsic coordinates for the beginning and end of the curve
   double s_start = 0.0;
@@ -1265,7 +1265,7 @@ StefanBoltzmannProblem<ELEMENT>::StefanBoltzmannProblem()
     inner_circle_pt, s_start, s_end, n_inner, boundary_id);
 
   // Combine to hole
-  Vector<TriangleMeshClosedCurve *> internal_closed_curve_pt;
+  Vector<TriangleMeshClosedCurve*> internal_closed_curve_pt;
   Vector<double> hole_coords(2);
   hole_coords[0] =
     0.5 * (GlobalParameters::Radius_inner + GlobalParameters::Radius_innermost);
@@ -1275,7 +1275,7 @@ StefanBoltzmannProblem<ELEMENT>::StefanBoltzmannProblem()
 
   // Boundary of innermost region
   //------------------------------
-  Vector<TriangleMeshCurveSection *> central_boundary_line_pt(2);
+  Vector<TriangleMeshCurveSection*> central_boundary_line_pt(2);
 
   // The intrinsic coordinates for the beginning and end of the curve
   s_start = 0.0;
@@ -1331,8 +1331,8 @@ StefanBoltzmannProblem<ELEMENT>::StefanBoltzmannProblem()
   unsigned nel = Bulk_mesh_pt->nregion_element(r);
   for (unsigned e = 0; e < nel; e++)
   {
-    ELEMENT *el_pt =
-      dynamic_cast<ELEMENT *>(Bulk_mesh_pt->region_element_pt(r, e));
+    ELEMENT* el_pt =
+      dynamic_cast<ELEMENT*>(Bulk_mesh_pt->region_element_pt(r, e));
 
     // Thermal inertia
     el_pt->alpha_pt() = &GlobalParameters::Alpha0;
@@ -1361,8 +1361,8 @@ StefanBoltzmannProblem<ELEMENT>::StefanBoltzmannProblem()
   nel = Bulk_mesh_pt->nregion_element(r);
   for (unsigned e = 0; e < nel; e++)
   {
-    ELEMENT *el_pt =
-      dynamic_cast<ELEMENT *>(Bulk_mesh_pt->region_element_pt(r, e));
+    ELEMENT* el_pt =
+      dynamic_cast<ELEMENT*>(Bulk_mesh_pt->region_element_pt(r, e));
 
     // Thermal inertia
     el_pt->alpha_pt() = &GlobalParameters::Alpha1;
@@ -1389,7 +1389,7 @@ StefanBoltzmannProblem<ELEMENT>::StefanBoltzmannProblem()
     unsigned nnod = el_pt->nnode();
     for (unsigned j = 0; j < nnod; j++)
     {
-      SolidNode *nod_pt = dynamic_cast<SolidNode *>(el_pt->node_pt(j));
+      SolidNode* nod_pt = dynamic_cast<SolidNode*>(el_pt->node_pt(j));
       nod_pt->pin_position(0);
       nod_pt->pin_position(1);
     }
@@ -1427,7 +1427,7 @@ StefanBoltzmannProblem<ELEMENT>::StefanBoltzmannProblem()
   unsigned nnod = Bulk_mesh_pt->nnode();
   for (unsigned j = 0; j < nnod; j++)
   {
-    Node *nod_pt = Bulk_mesh_pt->node_pt(j);
+    Node* nod_pt = Bulk_mesh_pt->node_pt(j);
     Vector<double> x(2);
     x[0] = nod_pt->x(0);
     x[1] = nod_pt->x(1);
@@ -1443,7 +1443,7 @@ StefanBoltzmannProblem<ELEMENT>::StefanBoltzmannProblem()
     unsigned n_node = Bulk_mesh_pt->nboundary_node(b);
     for (unsigned n = 0; n < n_node; n++)
     {
-      Node *nod_pt = Bulk_mesh_pt->boundary_node_pt(b, n);
+      Node* nod_pt = Bulk_mesh_pt->boundary_node_pt(b, n);
       nod_pt->pin(0);
     }
   }
@@ -1457,8 +1457,8 @@ StefanBoltzmannProblem<ELEMENT>::StefanBoltzmannProblem()
     unsigned nel = Unsteady_heat_flux_mesh_pt->nelement();
     for (unsigned e = 0; e < nel; e++)
     {
-      StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT> *el_pt =
-        dynamic_cast<StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT> *>(
+      StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT>* el_pt =
+        dynamic_cast<StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT>*>(
           Unsteady_heat_flux_mesh_pt->element_pt(e));
       unsigned nintpt = el_pt->integral_pt()->nweight();
       for (unsigned ipt = 0; ipt < nintpt; ipt++)
@@ -1482,8 +1482,8 @@ StefanBoltzmannProblem<ELEMENT>::StefanBoltzmannProblem()
     nel = Surface_melt_mesh_pt->nelement();
     for (unsigned e = 0; e < nel; e++)
     {
-      StefanBoltzmannMeltElement<ELEMENT> *el_pt =
-        dynamic_cast<StefanBoltzmannMeltElement<ELEMENT> *>(
+      StefanBoltzmannMeltElement<ELEMENT>* el_pt =
+        dynamic_cast<StefanBoltzmannMeltElement<ELEMENT>*>(
           Surface_melt_mesh_pt->element_pt(e));
       unsigned nintpt = el_pt->integral_pt()->nweight();
       for (unsigned ipt = 0; ipt < nintpt; ipt++)
@@ -1516,7 +1516,7 @@ template<class ELEMENT>
 void StefanBoltzmannProblem<ELEMENT>::setup_sb_radiation()
 {
   // Identify face elements on potentially sun-exposed boundaries
-  Vector<FiniteElement *> shielding_face_element_pt;
+  Vector<FiniteElement*> shielding_face_element_pt;
   unsigned nel = Unsteady_heat_flux_mesh_pt->nelement();
   for (unsigned e = 0; e < nel; e++)
   {
@@ -1685,8 +1685,8 @@ void StefanBoltzmannProblem<ELEMENT>::doc_solution()
     for (unsigned e = 0; e < nel; e++)
     {
       // Get pointer to element
-      StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT> *el_pt =
-        dynamic_cast<StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT> *>(
+      StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT>* el_pt =
+        dynamic_cast<StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT>*>(
           Unsteady_heat_flux_mesh_pt->element_pt(e));
 
       // Get contribution to avergage (over integration points) of incoming rad
@@ -1718,8 +1718,8 @@ void StefanBoltzmannProblem<ELEMENT>::doc_solution()
     for (unsigned e = 0; e < nel; e++)
     {
       // Cast to element
-      StefanBoltzmannMeltElement<ELEMENT> *el_pt =
-        dynamic_cast<StefanBoltzmannMeltElement<ELEMENT> *>(
+      StefanBoltzmannMeltElement<ELEMENT>* el_pt =
+        dynamic_cast<StefanBoltzmannMeltElement<ELEMENT>*>(
           Surface_melt_mesh_pt->element_pt(e));
 
       // Get contribution to avergage (over integration points) of incoming rad
@@ -1793,8 +1793,8 @@ void StefanBoltzmannProblem<ELEMENT>::doc_solution()
     for (unsigned e = 0; e < nel; e++)
     {
       // Get pointer to element
-      StefanBoltzmannMeltElement<ELEMENT> *el_pt =
-        dynamic_cast<StefanBoltzmannMeltElement<ELEMENT> *>(
+      StefanBoltzmannMeltElement<ELEMENT>* el_pt =
+        dynamic_cast<StefanBoltzmannMeltElement<ELEMENT>*>(
           Surface_melt_mesh_pt->element_pt(e));
 
       // Get contribution to avergage (over integration points) of melt rate
@@ -1833,16 +1833,16 @@ void StefanBoltzmannProblem<ELEMENT>::doc_solution()
 
   // Get average radius
   double av_radius = 0.0;
-  std::map<Node *, bool> done;
+  std::map<Node*, bool> done;
   unsigned count = 0;
   unsigned nel = Surface_melt_mesh_pt->nelement();
   for (unsigned e = 0; e < nel; e++)
   {
-    FiniteElement *el_pt = Surface_melt_mesh_pt->finite_element_pt(e);
+    FiniteElement* el_pt = Surface_melt_mesh_pt->finite_element_pt(e);
     unsigned nnod = el_pt->nnode();
     for (unsigned j = 0; j < nnod; j++)
     {
-      Node *nod_pt = el_pt->node_pt(j);
+      Node* nod_pt = el_pt->node_pt(j);
       if (!done[nod_pt])
       {
         done[nod_pt] = true;
@@ -1900,7 +1900,7 @@ void StefanBoltzmannProblem<ELEMENT>::doc_solution()
 //==========start_of_main=================================================
 /// Solve 2D problem
 //========================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

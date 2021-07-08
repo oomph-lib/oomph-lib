@@ -59,7 +59,7 @@ using namespace oomph;
 namespace ConstSourceForPoisson
 {
   /// Const source function
-  void get_source(const Vector<double> &x, double &source)
+  void get_source(const Vector<double>& x, double& source)
   {
     source = -1.0;
   }
@@ -86,8 +86,8 @@ public:
   /// (defaults to (Steady) default timestepper defined in the Mesh
   /// base class).
   MyMacroElementNodeUpdateFishMesh(
-    GeomObject *back_pt,
-    TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+    GeomObject* back_pt,
+    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
     FishMesh<ELEMENT>(back_pt, time_stepper_pt)
   {
     // Set up all the information that's required for MacroElement-based
@@ -97,10 +97,10 @@ public:
     for (unsigned i = 0; i < n_element; i++)
     {
       // Upcast from FiniteElement to the present element
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(this->element_pt(i));
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->element_pt(i));
 
       // There's just one GeomObject
-      Vector<GeomObject *> geom_object_pt(1);
+      Vector<GeomObject*> geom_object_pt(1);
       geom_object_pt[0] = back_pt;
 
       // Tell the element which geom objects its macro-element-based
@@ -140,7 +140,7 @@ public:
   void actions_after_newton_solve() {}
 
   /// Access function for the fish mesh
-  MyMacroElementNodeUpdateFishMesh<ELEMENT> *fish_mesh_pt()
+  MyMacroElementNodeUpdateFishMesh<ELEMENT>* fish_mesh_pt()
   {
     return Fish_mesh_pt;
   }
@@ -158,11 +158,11 @@ public:
 
 private:
   /// Pointer to fish mesh
-  MyMacroElementNodeUpdateFishMesh<ELEMENT> *Fish_mesh_pt;
+  MyMacroElementNodeUpdateFishMesh<ELEMENT>* Fish_mesh_pt;
 
   /// Pointer to single-element mesh that stores the GeneralisedElement
   /// that represents the fish's back
-  Mesh *Fish_back_mesh_pt;
+  Mesh* Fish_back_mesh_pt;
 
 }; // end of problem class
 
@@ -179,7 +179,7 @@ FreeBoundaryPoissonProblem<ELEMENT>::FreeBoundaryPoissonProblem()
   double r_back = 1.0;
 
   // Build geometric object that will become the fish back
-  ElasticallySupportedRingElement *fish_back_pt =
+  ElasticallySupportedRingElement* fish_back_pt =
     new ElasticallySupportedRingElement(x_c, y_c, r_back);
 
   // Build fish mesh with geometric object that specifies the fish back
@@ -208,12 +208,12 @@ FreeBoundaryPoissonProblem<ELEMENT>::FreeBoundaryPoissonProblem()
   unsigned nnod = fish_mesh_pt()->finite_element_pt(0)->nnode();
 
   // The central node is the last node in element 0:
-  Node *control_node_pt =
+  Node* control_node_pt =
     fish_mesh_pt()->finite_element_pt(0)->node_pt(nnod - 1);
 
   // Use the solution (value 0) at the control node as the load
   // that acts on the ring. [Note: Node == Data by inheritance]
-  dynamic_cast<ElasticallySupportedRingElement *>(Fish_mesh_pt->fish_back_pt())
+  dynamic_cast<ElasticallySupportedRingElement*>(Fish_mesh_pt->fish_back_pt())
     ->set_load_pt(control_node_pt);
 
   // Set the boundary conditions for this problem: All nodes are
@@ -235,7 +235,7 @@ FreeBoundaryPoissonProblem<ELEMENT>::FreeBoundaryPoissonProblem()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from FiniteElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(fish_mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(fish_mesh_pt()->element_pt(i));
 
     // Set the source function pointer
     el_pt->source_fct_pt() = &ConstSourceForPoisson::get_source;

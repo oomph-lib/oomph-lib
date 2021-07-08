@@ -41,7 +41,7 @@ namespace oomph
   /// (defaults to (Steady) default timestepper defined in Mesh)
   //=================================================================
   template<class ELEMENT>
-  FishMesh<ELEMENT>::FishMesh(TimeStepper *time_stepper_pt)
+  FishMesh<ELEMENT>::FishMesh(TimeStepper* time_stepper_pt)
   {
     // Mesh can only be built with 2D Qelements.
     MeshChecker::assert_geometric_element<QElementGeometricBase, ELEMENT>(2);
@@ -65,8 +65,8 @@ namespace oomph
   /// (defaults to (Steady) default timestepper defined in Mesh)
   //=================================================================
   template<class ELEMENT>
-  FishMesh<ELEMENT>::FishMesh(GeomObject *back_pt,
-                              TimeStepper *time_stepper_pt) :
+  FishMesh<ELEMENT>::FishMesh(GeomObject* back_pt,
+                              TimeStepper* time_stepper_pt) :
     Back_pt(back_pt)
   {
     // Mesh can only be built with 2D Qelements.
@@ -84,7 +84,7 @@ namespace oomph
   /// defines the fish's back.
   //=================================================================
   template<class ELEMENT>
-  void FishMesh<ELEMENT>::build_mesh(TimeStepper *time_stepper_pt)
+  void FishMesh<ELEMENT>::build_mesh(TimeStepper* time_stepper_pt)
   {
     // Mesh can only be built with 2D Qelements.
     MeshChecker::assert_geometric_element<QElementGeometricBase, ELEMENT>(2);
@@ -128,7 +128,7 @@ namespace oomph
     Element_pt.resize(nelem);
 
     // Create  dummy element so we can determine the number of nodes
-    ELEMENT *dummy_el_pt = new ELEMENT;
+    ELEMENT* dummy_el_pt = new ELEMENT;
 
     // Read out the number of linear points in the element
     unsigned n_node_1d = dummy_el_pt->nnode_1d();
@@ -163,7 +163,7 @@ namespace oomph
           unsigned j_local = i0 + i1 * n_node_1d;
 
           // Create the node and store pointer to it
-          Node *node_pt =
+          Node* node_pt =
             finite_element_pt(e)->construct_node(j_local, time_stepper_pt);
 
           // Work out the node's coordinates in the finite element's local
@@ -557,7 +557,7 @@ namespace oomph
     for (unsigned e = 0; e < n_element; e++)
     {
       // Get pointer to element
-      FiniteElement *el_pt = this->finite_element_pt(e);
+      FiniteElement* el_pt = this->finite_element_pt(e);
 
       // Set pointer to macro element to enable MacroElement-based
       // remesh. Also enables the curvlinear boundaries
@@ -665,8 +665,8 @@ namespace oomph
   {
 #ifdef PARANOID
     /// Pointer to algebraic element in lower body
-    AlgebraicElementBase *lower_body_pt =
-      dynamic_cast<AlgebraicElementBase *>(Mesh::element_pt(0));
+    AlgebraicElementBase* lower_body_pt =
+      dynamic_cast<AlgebraicElementBase*>(Mesh::element_pt(0));
 
     if (lower_body_pt == 0)
     {
@@ -683,14 +683,14 @@ namespace oomph
 
     // Read out the number of linear points in the element
     unsigned n_p =
-      dynamic_cast<ELEMENT *>(FishMesh<ELEMENT>::Mesh::finite_element_pt(0))
+      dynamic_cast<ELEMENT*>(FishMesh<ELEMENT>::Mesh::finite_element_pt(0))
         ->nnode_1d();
 
     // Element 0: Lower body
     //----------------------
     {
       unsigned ielem = 0;
-      FiniteElement *el_pt = Mesh::finite_element_pt(ielem);
+      FiniteElement* el_pt = Mesh::finite_element_pt(ielem);
 
       // Loop over rows in y/s_1-direction
       for (unsigned i1 = 0; i1 < n_p; i1++)
@@ -702,7 +702,7 @@ namespace oomph
           unsigned jnod = i0 + i1 * n_p;
 
           // One geometric object is involved in update operation
-          Vector<GeomObject *> geom_object_pt(1);
+          Vector<GeomObject*> geom_object_pt(1);
           geom_object_pt[0] = this->Back_pt;
 
           // The update function requires three parameters:
@@ -721,7 +721,7 @@ namespace oomph
           ref_value[2] = -1.0;
 
           // Setup algebraic update for node: Pass update information
-          dynamic_cast<AlgebraicNode *>(el_pt->node_pt(jnod))
+          dynamic_cast<AlgebraicNode*>(el_pt->node_pt(jnod))
             ->add_node_update_info(this->Lower_body, // enumerated ID
                                    this, // mesh
                                    geom_object_pt, // vector of geom objects
@@ -734,7 +734,7 @@ namespace oomph
     //---------------------
     {
       unsigned ielem = 1;
-      FiniteElement *el_pt = Mesh::finite_element_pt(ielem);
+      FiniteElement* el_pt = Mesh::finite_element_pt(ielem);
 
       // Loop over rows in y/s_1-direction
       for (unsigned i1 = 0; i1 < n_p; i1++)
@@ -746,7 +746,7 @@ namespace oomph
           unsigned jnod = i0 + i1 * n_p;
 
           // One geometric object is involved in update operation
-          Vector<GeomObject *> geom_object_pt(1);
+          Vector<GeomObject*> geom_object_pt(1);
           geom_object_pt[0] = this->Back_pt;
 
           // The update function requires three parameters:
@@ -765,7 +765,7 @@ namespace oomph
           ref_value[2] = -1.0;
 
           // Setup algebraic update for node: Pass update information
-          dynamic_cast<AlgebraicNode *>(el_pt->node_pt(jnod))
+          dynamic_cast<AlgebraicNode*>(el_pt->node_pt(jnod))
             ->add_node_update_info(this->Lower_fin, // enumerated ID
                                    this, // mesh
                                    geom_object_pt, // vector of geom objects
@@ -778,7 +778,7 @@ namespace oomph
     //----------------------
     {
       unsigned ielem = 2;
-      FiniteElement *el_pt = Mesh::finite_element_pt(ielem);
+      FiniteElement* el_pt = Mesh::finite_element_pt(ielem);
 
       // Loop over rows in y/s_1-direction
       for (unsigned i1 = 0; i1 < n_p; i1++)
@@ -790,7 +790,7 @@ namespace oomph
           unsigned jnod = i0 + i1 * n_p;
 
           // One geometric object is involved in update operation
-          Vector<GeomObject *> geom_object_pt(1);
+          Vector<GeomObject*> geom_object_pt(1);
           geom_object_pt[0] = this->Back_pt;
 
           // The update function requires three parameters:
@@ -809,7 +809,7 @@ namespace oomph
           ref_value[2] = 1.0;
 
           // Setup algebraic update for node: Pass update information
-          dynamic_cast<AlgebraicNode *>(el_pt->node_pt(jnod))
+          dynamic_cast<AlgebraicNode*>(el_pt->node_pt(jnod))
             ->add_node_update_info(this->Upper_body, // enumerated ID
                                    this, // mesh
                                    geom_object_pt, // vector of geom objects
@@ -822,7 +822,7 @@ namespace oomph
     //---------------------
     {
       unsigned ielem = 3;
-      FiniteElement *el_pt = Mesh::finite_element_pt(ielem);
+      FiniteElement* el_pt = Mesh::finite_element_pt(ielem);
 
       // Loop over rows in y/s_1-direction
       for (unsigned i1 = 0; i1 < n_p; i1++)
@@ -834,7 +834,7 @@ namespace oomph
           unsigned jnod = i0 + i1 * n_p;
 
           // One geometric object is involved in update operation
-          Vector<GeomObject *> geom_object_pt(1);
+          Vector<GeomObject*> geom_object_pt(1);
           geom_object_pt[0] = this->Back_pt;
 
           // The update function requires three parameters:
@@ -853,7 +853,7 @@ namespace oomph
           ref_value[2] = 1.0;
 
           // Setup algebraic update for node: Pass update information
-          dynamic_cast<AlgebraicNode *>(el_pt->node_pt(jnod))
+          dynamic_cast<AlgebraicNode*>(el_pt->node_pt(jnod))
             ->add_node_update_info(this->Upper_fin, // enumerated ID
                                    this, // mesh
                                    geom_object_pt, // vector of geom objects
@@ -868,11 +868,11 @@ namespace oomph
   /// according to wall shape at time level t (t=0: present; t>0: previous)
   //======================================================================
   template<class ELEMENT>
-  void AlgebraicFishMesh<ELEMENT>::node_update_in_body(const unsigned &t,
-                                                       AlgebraicNode *&node_pt)
+  void AlgebraicFishMesh<ELEMENT>::node_update_in_body(const unsigned& t,
+                                                       AlgebraicNode*& node_pt)
   {
     // Pointer to geometric object that represents the fish back:
-    GeomObject *back_pt = node_pt->geom_object_pt(unsigned(0));
+    GeomObject* back_pt = node_pt->geom_object_pt(unsigned(0));
 
     // Fixed reference value: x-position of mouth
     double x_mouth = this->Domain_pt->x_mouth();
@@ -923,11 +923,11 @@ namespace oomph
   /// according to wall shape at time level t (t=0: present; t>0: previous)
   //======================================================================
   template<class ELEMENT>
-  void AlgebraicFishMesh<ELEMENT>::node_update_in_fin(const unsigned &t,
-                                                      AlgebraicNode *&node_pt)
+  void AlgebraicFishMesh<ELEMENT>::node_update_in_fin(const unsigned& t,
+                                                      AlgebraicNode*& node_pt)
   {
     // Pointer to geometric object that represents the fish back:
-    GeomObject *back_pt = node_pt->geom_object_pt(unsigned(0));
+    GeomObject* back_pt = node_pt->geom_object_pt(unsigned(0));
 
     // Fixed reference value: End coordinate on fish back
     double zeta_wall = this->Domain_pt->xi_tail();

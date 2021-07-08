@@ -44,7 +44,7 @@ namespace oomph
   /// spacing and boundary functions.
   //========================================================================
   template<class ELEMENT>
-  void SimpleCubicMesh<ELEMENT>::build_mesh(TimeStepper *time_stepper_pt)
+  void SimpleCubicMesh<ELEMENT>::build_mesh(TimeStepper* time_stepper_pt)
   {
     // Mesh can only be built with 3D Qelements.
     MeshChecker::assert_geometric_element<QElementGeometricBase, ELEMENT>(3);
@@ -70,7 +70,7 @@ namespace oomph
     Element_pt[element_num] = new ELEMENT;
 
     // Read out the number of linear points in the element
-    unsigned n_p = dynamic_cast<ELEMENT *>(finite_element_pt(0))->nnode_1d();
+    unsigned n_p = dynamic_cast<ELEMENT*>(finite_element_pt(0))->nnode_1d();
 
     // Can now allocate the store for the nodes
     Node_pt.resize((1 + (n_p - 1) * Nx) * (1 + (n_p - 1) * Ny) *

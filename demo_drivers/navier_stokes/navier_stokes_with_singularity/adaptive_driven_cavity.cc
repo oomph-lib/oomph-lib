@@ -131,7 +131,7 @@ public:
   } // end_of_actions_after_adapt
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// Build line plot points
   void setup_line_plot_points()
@@ -149,7 +149,7 @@ public:
     double r_max = 0.1;
     Vector<double> zeta(2);
     Vector<double> s(2);
-    GeomObject *geom_object_pt = 0;
+    GeomObject* geom_object_pt = 0;
     for (unsigned i = 0; i < n_phi; i++)
     {
       Line_plot_point[i].resize(npt);
@@ -175,20 +175,20 @@ public:
 
 private:
   /// Fix pressure in element e at pressure dof pdof and set to pvalue
-  void fix_pressure(const unsigned &e,
-                    const unsigned &pdof,
-                    const double &pvalue)
+  void fix_pressure(const unsigned& e,
+                    const unsigned& pdof,
+                    const double& pvalue)
   {
     // Cast to proper element and fix pressure
-    dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e))
+    dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))
       ->fix_pressure(pdof, pvalue);
   } // end_of_fix_pressure
 
   /// Mesh as geom object representation of mesh
-  MeshAsGeomObject *Mesh_as_geom_object_pt;
+  MeshAsGeomObject* Mesh_as_geom_object_pt;
 
   /// Line_plot_point[i_phi][i_rho]
-  Vector<Vector<std::pair<GeomObject *, Vector<double>>>> Line_plot_point;
+  Vector<Vector<std::pair<GeomObject*, Vector<double>>>> Line_plot_point;
 
 }; // end_of_problem_class
 
@@ -224,25 +224,25 @@ RefineableDrivenCavityProblem<ELEMENT>::RefineableDrivenCavityProblem()
   setup_line_plot_points();
 
   // Set error estimator
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
-  dynamic_cast<RefineableRectangularQuadMesh<ELEMENT> *>(mesh_pt())
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
+  dynamic_cast<RefineableRectangularQuadMesh<ELEMENT>*>(mesh_pt())
     ->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Allow for lots of refinement
-  dynamic_cast<RefineableRectangularQuadMesh<ELEMENT> *>(mesh_pt())
+  dynamic_cast<RefineableRectangularQuadMesh<ELEMENT>*>(mesh_pt())
     ->max_refinement_level() = 50;
 
   // Overwrite default for max. permitted error?
   if (Global_Physical_Variables::Max_permitted_error > 0.0)
   {
-    dynamic_cast<RefineableRectangularQuadMesh<ELEMENT> *>(mesh_pt())
+    dynamic_cast<RefineableRectangularQuadMesh<ELEMENT>*>(mesh_pt())
       ->max_permitted_error() = Global_Physical_Variables::Max_permitted_error;
   }
 
   // Overwrite default for min. permitted error?
   if (Global_Physical_Variables::Min_permitted_error > 0.0)
   {
-    dynamic_cast<RefineableRectangularQuadMesh<ELEMENT> *>(mesh_pt())
+    dynamic_cast<RefineableRectangularQuadMesh<ELEMENT>*>(mesh_pt())
       ->min_permitted_error() = Global_Physical_Variables::Min_permitted_error;
   }
 
@@ -272,7 +272,7 @@ RefineableDrivenCavityProblem<ELEMENT>::RefineableDrivenCavityProblem()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
     // Set the Reynolds number, etc
     el_pt->re_pt() = &Global_Physical_Variables::Re;
   } // end loop over elements
@@ -293,7 +293,7 @@ RefineableDrivenCavityProblem<ELEMENT>::RefineableDrivenCavityProblem()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void RefineableDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void RefineableDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file, some_file2;
   char filename[100];
@@ -392,7 +392,7 @@ void RefineableDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
                << " <GREEK>p</GREEK>/2 \"" << std::endl;
     for (unsigned j = 0; j < nr; j++)
     {
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Line_plot_point[i][j].first);
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Line_plot_point[i][j].first);
       s = Line_plot_point[i][j].second;
       el_pt->interpolated_x(s, x);
       el_pt->interpolated_u_nst(s, u);
@@ -414,7 +414,7 @@ void RefineableDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
 //==start_of_main======================================================
 /// Driver for RefineableDrivenCavity test problem
 //=====================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Allow indefinite refinement without complaints about near singular
   // Jacobian

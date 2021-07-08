@@ -41,7 +41,7 @@ namespace oomph
   /// Adapt problem based on specified elemental error estimates
   //======================================================================
   template<class ELEMENT>
-  void RefineableGmshTetMesh<ELEMENT>::adapt(const Vector<double> &elem_error)
+  void RefineableGmshTetMesh<ELEMENT>::adapt(const Vector<double>& elem_error)
   {
     double t_start = 0.0;
 
@@ -92,7 +92,7 @@ namespace oomph
       }
 
       // Are we dealing with a solid mesh?
-      SolidMesh *solid_mesh_pt = dynamic_cast<SolidMesh *>(this);
+      SolidMesh* solid_mesh_pt = dynamic_cast<SolidMesh*>(this);
 
       // If the mesh is a solid mesh then do the mapping based on the
       // Eulerian coordinates
@@ -102,7 +102,7 @@ namespace oomph
         use_eulerian_coords = true;
       }
 
-      MeshAsGeomObject *mesh_geom_obj_pt = 0;
+      MeshAsGeomObject* mesh_geom_obj_pt = 0;
 
 #ifdef OOMPH_HAS_CGAL
 
@@ -127,7 +127,7 @@ namespace oomph
 
       // Set up a map from pointer to element to its number
       // in the mesh
-      std::map<GeneralisedElement *, unsigned> element_number;
+      std::map<GeneralisedElement*, unsigned> element_number;
       unsigned nelem = this->nelement();
       for (unsigned e = 0; e < nelem; e++)
       {
@@ -201,14 +201,14 @@ namespace oomph
             // Try the specified number of nearest sample points for Newton
             // search then just settle on the nearest one
             Vector<double> s(3);
-            GeomObject *geom_obj_pt = 0;
+            GeomObject* geom_obj_pt = 0;
             unsigned max_sample_points =
               this->Gmsh_parameters_pt
                 ->max_sample_points_for_limited_locate_zeta_during_target_size_transfer();
 
 #ifdef OOMPH_HAS_CGAL
 
-            dynamic_cast<CGALSamplePointContainer *>(
+            dynamic_cast<CGALSamplePointContainer*>(
               mesh_geom_obj_pt->sample_point_container_pt())
               ->limited_locate_zeta(x, max_sample_points, geom_obj_pt, s);
 
@@ -240,7 +240,7 @@ namespace oomph
             {
 #endif
 
-              FiniteElement *fe_pt = dynamic_cast<FiniteElement *>(geom_obj_pt);
+              FiniteElement* fe_pt = dynamic_cast<FiniteElement*>(geom_obj_pt);
 
 #ifdef PARANOID
               if (fe_pt == 0)
@@ -288,7 +288,7 @@ namespace oomph
 
       // Build new mesh, reading area information from file
       bool use_mesh_grading_from_file = true;
-      RefineableGmshTetMesh<ELEMENT> *new_mesh_pt =
+      RefineableGmshTetMesh<ELEMENT>* new_mesh_pt =
         new RefineableGmshTetMesh<ELEMENT>(this->Gmsh_parameters_pt,
                                            use_mesh_grading_from_file,
                                            this->Time_stepper_pt);
@@ -304,7 +304,7 @@ namespace oomph
       t_start = TimingHelpers::timer();
       //###################################
 
-      ProjectionProblem<ELEMENT> *project_problem_pt = 0;
+      ProjectionProblem<ELEMENT>* project_problem_pt = 0;
 
       // Check that the projection step is not disabled
       if (!this->Gmsh_parameters_pt->projection_is_disabled())
@@ -464,7 +464,7 @@ namespace oomph
                         OOMPH_EXCEPTION_LOCATION);
 
         // Reset Lagrangian coordinates
-        dynamic_cast<SolidMesh *>(this)->set_lagrangian_nodal_coordinates();
+        dynamic_cast<SolidMesh*>(this)->set_lagrangian_nodal_coordinates();
       }
 
       double max_area;

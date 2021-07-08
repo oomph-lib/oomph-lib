@@ -63,7 +63,7 @@ namespace oomph
     /// Constructor, storage for two history derivatives (one for TR and
     /// one for the predictor step), one history value, present value and
     /// predicted value.
-    TR(const bool &adaptive = false) : TimeStepper(2 + 2 + 1, 1)
+    TR(const bool& adaptive = false) : TimeStepper(2 + 2 + 1, 1)
     {
       // Set the weight for the zero-th derivative
       Weight(0, 0) = 1.0;
@@ -128,7 +128,7 @@ namespace oomph
     }
 
     /// Location in data of derivatives
-    unsigned derivative_index(const unsigned &t) const
+    unsigned derivative_index(const unsigned& t) const
     {
 #ifdef PARANOID
       if (t >= 2)
@@ -155,7 +155,7 @@ namespace oomph
 
     /// \short Initialise the time-history for the Data values, corresponding
     /// to an impulsive start.
-    void assign_initial_values_impulsive(Data *const &data_pt)
+    void assign_initial_values_impulsive(Data* const& data_pt)
     {
       throw OomphLibError("Function not yet implemented",
                           OOMPH_EXCEPTION_LOCATION,
@@ -164,20 +164,20 @@ namespace oomph
 
     /// \short Initialise the time-history for the nodal positions
     /// corresponding to an impulsive start.
-    void assign_initial_positions_impulsive(Node *const &node_pt)
+    void assign_initial_positions_impulsive(Node* const& node_pt)
     {
       throw OomphLibError("Function not yet implemented",
                           OOMPH_EXCEPTION_LOCATION,
                           OOMPH_CURRENT_FUNCTION);
     }
 
-    void actions_after_timestep(Problem *problem_pt)
+    void actions_after_timestep(Problem* problem_pt)
     {
       // only ever want this to be true for one step
       Shift_f = true;
     }
 
-    void actions_before_timestep(Problem *problem_pt)
+    void actions_before_timestep(Problem* problem_pt)
     {
 #ifdef PARANOID
       if (!Initial_derivative_set)
@@ -189,7 +189,7 @@ namespace oomph
 #endif
     }
 
-    void setup_initial_derivative(Problem *problem_pt)
+    void setup_initial_derivative(Problem* problem_pt)
     {
       oomph_info
         << "Solving for derivative at initial time."
@@ -209,7 +209,7 @@ namespace oomph
 
     /// \short This function updates the Data's time history so that
     /// we can advance to the next timestep.
-    void shift_time_values(Data *const &data_pt)
+    void shift_time_values(Data* const& data_pt)
     {
       // Find number of values stored
       unsigned n_value = data_pt->nvalue();
@@ -255,13 +255,13 @@ namespace oomph
 
     ///\short This function advances the time history of the positions at a
     /// node.
-    void shift_time_positions(Node *const &node_pt)
+    void shift_time_positions(Node* const& node_pt)
     {
       // do nothing, not implemented for moving nodes
     }
 
     /// Function to calculate predicted positions at a node
-    void calculate_predicted_positions(Node *const &node_pt)
+    void calculate_predicted_positions(Node* const& node_pt)
     {
       // Loop over the dimensions
       unsigned n_dim = node_pt->ndim();
@@ -287,7 +287,7 @@ namespace oomph
     }
 
     /// Function to calculate predicted data values in a Data object
-    void calculate_predicted_values(Data *const &data_pt)
+    void calculate_predicted_values(Data* const& data_pt)
     {
       // Loop over the values
       unsigned n_value = data_pt->nvalue();
@@ -311,14 +311,14 @@ namespace oomph
     }
 
     /// Compute the error in the position i at a node
-    double temporal_error_in_position(Node *const &node_pt, const unsigned &i)
+    double temporal_error_in_position(Node* const& node_pt, const unsigned& i)
     {
       return Error_weight *
              (node_pt->x(i) - node_pt->x(predicted_value_index(), i));
     }
 
     /// Compute the error in the value i in a Data structure
-    double temporal_error_in_value(Data *const &data_pt, const unsigned &i)
+    double temporal_error_in_value(Data* const& data_pt, const unsigned& i)
     {
       return Error_weight *
              (data_pt->value(i) - data_pt->value(predicted_value_index(), i));
@@ -332,13 +332,13 @@ namespace oomph
     double Error_weight;
 
     /// Broken copy constructor
-    TR(const TR &dummy)
+    TR(const TR& dummy)
     {
       BrokenCopy::broken_copy("TR");
     }
 
     /// Broken assignment operator
-    void operator=(const TR &dummy)
+    void operator=(const TR& dummy)
     {
       BrokenCopy::broken_assign("TR");
     }

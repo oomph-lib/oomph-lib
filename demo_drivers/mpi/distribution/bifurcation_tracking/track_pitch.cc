@@ -60,7 +60,7 @@ using namespace oomph;
 //=============================================================================
 namespace Hypre_Subsidiary_Preconditioner_Helper
 {
-  Preconditioner *set_hypre_preconditioner()
+  Preconditioner* set_hypre_preconditioner()
   {
     return new HyprePreconditioner;
   }
@@ -81,7 +81,7 @@ private:
   // the second zones
   double Xfraction, Yfraction;
   // A Vector of pointers to node that line along the centreline of the disc
-  Vector<Node *> Centreline_node_pt;
+  Vector<Node*> Centreline_node_pt;
 
   // Public functions
 public:
@@ -90,11 +90,11 @@ public:
   // timestepper that will be used. It may seem odd to pass a timestepper
   // to a mesh. This is because the storage for any previous timesteps
   // must be assigned when the mesh is constructed.
-  CylinderMesh(const unsigned &nx1,
-               const unsigned &nx2,
-               const unsigned &ny1,
-               const unsigned &ny2,
-               const double &lx) :
+  CylinderMesh(const unsigned& nx1,
+               const unsigned& nx2,
+               const unsigned& ny1,
+               const unsigned& ny2,
+               const double& lx) :
     RectangularQuadMesh<ELEMENT>(
       nx1 + nx2, ny1 + ny2, 0.0, lx, 0.0, 1.0, false, false)
   {
@@ -225,13 +225,13 @@ public:
   }
 
   // Access function for the centreline node Vector
-  Node *centreline_node_pt(const unsigned &i) const
+  Node* centreline_node_pt(const unsigned& i) const
   {
     return Centreline_node_pt[i];
   }
 
   // Rescale the mesh to a new length
-  double rescale_length(const double &length)
+  double rescale_length(const double& length)
   {
     // Save the present length
     double old_length = this->Xmax;
@@ -271,10 +271,10 @@ public:
   // Constructor:
   // Nr: Number of elements in the r (radial) direction
   // Nz: Number of elements in the z (axial) direction
-  RotatingProblem(const unsigned &Nr1,
-                  const unsigned &Nr2,
-                  const unsigned &Nz1,
-                  const unsigned &Nz2);
+  RotatingProblem(const unsigned& Nr1,
+                  const unsigned& Nr2,
+                  const unsigned& Nz1,
+                  const unsigned& Nz2);
 
   // Set boundary conditions on the wall.
   void set_boundary_conditions();
@@ -286,9 +286,9 @@ public:
   void finish_problem_setup();
 
   // Overload access function for the mesh
-  CylinderMesh<ELEMENT> *mesh_pt()
+  CylinderMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<CylinderMesh<ELEMENT> *>(Problem::mesh_pt());
+    return dynamic_cast<CylinderMesh<ELEMENT>*>(Problem::mesh_pt());
   }
 
   //--pure virtual functions in Problem class that MUST be overloaded
@@ -339,10 +339,10 @@ public:
 
 // Constructor
 template<class ELEMENT>
-RotatingProblem<ELEMENT>::RotatingProblem(const unsigned &Nr1,
-                                          const unsigned &Nr2,
-                                          const unsigned &Nz1,
-                                          const unsigned &Nz2) :
+RotatingProblem<ELEMENT>::RotatingProblem(const unsigned& Nr1,
+                                          const unsigned& Nr2,
+                                          const unsigned& Nz1,
+                                          const unsigned& Nz2) :
   Re(0.0), Length(12.0) // Initialise value of Re to zero
 {
   // Set the Central Node
@@ -441,7 +441,7 @@ RotatingProblem<ELEMENT>::RotatingProblem(const unsigned &Nr1,
  static_cast<HSL_MA42*>(linear_solver_pt())->front_factor() = 3.0;*/
 
   // Specify the eigensolver shift
-  static_cast<ARPACK *>(eigen_solver_pt())->set_shift(5.0);
+  static_cast<ARPACK*>(eigen_solver_pt())->set_shift(5.0);
 
   // Complete the build of the elements
   finish_problem_setup();
@@ -480,7 +480,7 @@ RotatingProblem<ELEMENT>::RotatingProblem(const unsigned &Nr1,
   // system, but it shouldn't matter because pinning the value to zero means
   // that the unbalanced term should also be zero, which will not contribute
   // to the symmetry dot product.
-  dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(0))->fix_pressure(0, 0.0);
+  dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(0))->fix_pressure(0, 0.0);
 
   // Setup all the equation numbering and look-up schemes
   //(function defined in Problem class)
@@ -498,7 +498,7 @@ void RotatingProblem<ELEMENT>::finish_problem_setup()
     // Cast to the particular element type, this is necessary because
     // the base elements don't have the member functions that we're about
     // to call!
-    ELEMENT *temp_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* temp_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
     // Set the Reynolds number for each element
     //(yes we could have different Reynolds number in each element!!)
@@ -569,7 +569,7 @@ void RotatingProblem<ELEMENT>::solve_system()
   // Continuation parameters
 
   // Control parameter for contiuation
-  double *cont_param = &Re;
+  double* cont_param = &Re;
   // Initial continuation step
   double ds = 0.1;
   reset_arc_length_parameters();
@@ -590,7 +590,7 @@ void RotatingProblem<ELEMENT>::solve_system()
     {
       steady_newton_solve();
     }
-    catch (OomphLibError &error)
+    catch (OomphLibError& error)
     {
       error.disable_error_message();
       cout << "Caught solver error -- continuing regardless \n.";
@@ -652,7 +652,7 @@ void RotatingProblem<ELEMENT>::solve_system()
     unsigned n_node = mesh_pt()->nnode();
     for (unsigned n = 0; n < n_node; n++)
     {
-      Node *nod_pt = mesh_pt()->node_pt(n);
+      Node* nod_pt = mesh_pt()->node_pt(n);
       double y = nod_pt->x(1);
       // Loop over the nodal freedoms
       // Anti-symmetric in first
@@ -675,7 +675,7 @@ void RotatingProblem<ELEMENT>::solve_system()
     unsigned n_fluid = mesh_pt()->nelement();
     for (unsigned e = 0; e < n_fluid; e++)
     {
-      ELEMENT *elem_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+      ELEMENT* elem_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 // Ignore halo elements
 #ifdef OOMPH_HAS_MPI
       if (!elem_pt->is_halo())
@@ -713,7 +713,7 @@ void RotatingProblem<ELEMENT>::solve_system()
   {
     steady_newton_solve();
   }
-  catch (OomphLibError &error)
+  catch (OomphLibError& error)
   {
     error.disable_error_message();
     cout << "Caught solver error -- continuing regardless \n.";
@@ -737,7 +737,7 @@ void RotatingProblem<ELEMENT>::solve_system()
   {
     steady_newton_solve();
   }
-  catch (OomphLibError &error)
+  catch (OomphLibError& error)
   {
     error.disable_error_message();
     cout << "Caught solver error -- continuing regardless \n.";
@@ -800,7 +800,7 @@ void RotatingProblem<ELEMENT>::solve_system()
 }
 
 // Main driver loop
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
 #ifdef OOMPH_HAS_MPI
   MPI_Helpers::init(argc, argv);

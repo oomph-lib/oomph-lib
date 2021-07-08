@@ -54,7 +54,7 @@ using namespace oomph;
 //=============================================================================
 namespace Hypre_Subsidiary_Preconditioner_Helper
 {
-  Preconditioner *set_hypre_preconditioner()
+  Preconditioner* set_hypre_preconditioner()
   {
     return new HyprePreconditioner;
   }
@@ -88,10 +88,10 @@ namespace Global_Variables
   Vector<double> Linear_solver_time;
 
   /// Traction at the outflow boundary
-  void prescribed_traction(const double &t,
-                           const Vector<double> &x,
-                           const Vector<double> &n,
-                           Vector<double> &traction)
+  void prescribed_traction(const double& t,
+                           const Vector<double>& x,
+                           const Vector<double>& n,
+                           Vector<double>& traction)
   {
     traction.resize(3);
     traction[0] = 1.0;
@@ -112,14 +112,14 @@ class FpTestProblem : public Problem
 {
 public:
   /// Constructor
-  FpTestProblem(const unsigned &n_element,
-                const bool &use_tets,
-                const bool &use_adaptivity,
-                const bool &use_lsc,
-                const bool &use_hypre_for_pressure,
-                const bool &use_block_diagonal_for_momentum,
-                const bool &use_hypre_for_momentum_diagonals,
-                const int &problem_id);
+  FpTestProblem(const unsigned& n_element,
+                const bool& use_tets,
+                const bool& use_adaptivity,
+                const bool& use_lsc,
+                const bool& use_hypre_for_pressure,
+                const bool& use_block_diagonal_for_momentum,
+                const bool& use_hypre_for_momentum_diagonals,
+                const int& problem_id);
 
   /// Destructor: Cleanup
   ~FpTestProblem()
@@ -131,12 +131,12 @@ public:
   }
 
   /// Fix pressure in element e at pressure dof pdof and set to pvalue
-  void fix_pressure(const unsigned &e,
-                    const unsigned &pdof,
-                    const double &pvalue)
+  void fix_pressure(const unsigned& e,
+                    const unsigned& pdof,
+                    const double& pvalue)
   {
     // Cast to full element type and fix the pressure at that element
-    dynamic_cast<NavierStokesEquations<3> *>(Bulk_mesh_pt->element_pt(e))
+    dynamic_cast<NavierStokesEquations<3>*>(Bulk_mesh_pt->element_pt(e))
       ->fix_pressure(pdof, pvalue);
   } // end of fix_pressure
 
@@ -159,7 +159,7 @@ public:
   void actions_after_newton_step()
   {
     Global_Variables::Iterations.push_back(
-      dynamic_cast<IterativeLinearSolver *>(this->linear_solver_pt())
+      dynamic_cast<IterativeLinearSolver*>(this->linear_solver_pt())
         ->iterations());
 
     Global_Variables::Linear_solver_time.push_back(
@@ -217,7 +217,7 @@ public:
       unsigned num_nod = Bulk_mesh_pt->nboundary_node(ibound);
       for (unsigned inod = 0; inod < num_nod; inod++)
       {
-        Node *nod_pt = Bulk_mesh_pt->boundary_node_pt(ibound, inod);
+        Node* nod_pt = Bulk_mesh_pt->boundary_node_pt(ibound, inod);
         double y = nod_pt->x(1);
         double z = nod_pt->x(2);
         if ((y > 0.5) && (z > 0.5))
@@ -237,7 +237,7 @@ public:
   } // end_of_actions_before_newton_solve
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// Create traction elements on outflow boundary
   template<class ELEMENT>
@@ -252,29 +252,29 @@ public:
   void validate_fp()
   {
     DocInfo my_doc_info;
-    dynamic_cast<NavierStokesSchurComplementPreconditioner *>(Prec_pt)
+    dynamic_cast<NavierStokesSchurComplementPreconditioner*>(Prec_pt)
       ->template validate<FP_ELEMENT>(my_doc_info, this);
     pause("done validation");
   }
 
   /// Pointer to the "bulk" mesh
-  Mesh *&bulk_mesh_pt()
+  Mesh*& bulk_mesh_pt()
   {
     return Bulk_mesh_pt;
   }
 
 private:
   /// Solver
-  IterativeLinearSolver *Solver_pt;
+  IterativeLinearSolver* Solver_pt;
 
   /// Solver
-  Preconditioner *Prec_pt;
+  Preconditioner* Prec_pt;
 
   /// Inexact solver for P block
-  Preconditioner *P_matrix_preconditioner_pt;
+  Preconditioner* P_matrix_preconditioner_pt;
 
   /// Inexact solver for F block
-  Preconditioner *F_matrix_preconditioner_pt;
+  Preconditioner* F_matrix_preconditioner_pt;
 
   /// ID of driven boundary
   unsigned Driven_boundary;
@@ -289,24 +289,24 @@ private:
   unsigned Problem_id;
 
   /// Pointer to the "bulk" mesh
-  Mesh *Bulk_mesh_pt;
+  Mesh* Bulk_mesh_pt;
 
   /// Pointer to the "surface" mesh
-  Mesh *Surface_mesh_pt;
+  Mesh* Surface_mesh_pt;
 
 }; // end_of_problem_class
 
 //==start_of_constructor==================================================
 /// Constructor for DrivenCavity problem
 //========================================================================
-FpTestProblem::FpTestProblem(const unsigned &n_el,
-                             const bool &use_tets,
-                             const bool &use_adaptivity,
-                             const bool &use_lsc,
-                             const bool &use_hypre_for_pressure,
-                             const bool &use_block_diagonal_for_momentum,
-                             const bool &use_hypre_for_momentum_diagonals,
-                             const int &problem_id)
+FpTestProblem::FpTestProblem(const unsigned& n_el,
+                             const bool& use_tets,
+                             const bool& use_adaptivity,
+                             const bool& use_lsc,
+                             const bool& use_hypre_for_pressure,
+                             const bool& use_block_diagonal_for_momentum,
+                             const bool& use_hypre_for_momentum_diagonals,
+                             const int& problem_id)
 {
   // Store flag
   Problem_id = problem_id;
@@ -337,7 +337,7 @@ FpTestProblem::FpTestProblem(const unsigned &n_el,
     Bulk_mesh_pt = new SimpleCubicTetMesh<TTaylorHoodElement<3>>(
       n_x, n_y, n_z, l_x, l_y, l_z);
 
-    dynamic_cast<SimpleCubicTetMesh<TTaylorHoodElement<3>> *>(Bulk_mesh_pt)
+    dynamic_cast<SimpleCubicTetMesh<TTaylorHoodElement<3>>*>(Bulk_mesh_pt)
       ->setup_boundary_element_info();
 
     Driven_boundary = 4;
@@ -379,7 +379,7 @@ FpTestProblem::FpTestProblem(const unsigned &n_el,
   build_global_mesh();
 
   // Build preconditoner
-  NavierStokesSchurComplementPreconditioner *prec_pt =
+  NavierStokesSchurComplementPreconditioner* prec_pt =
     new NavierStokesSchurComplementPreconditioner(this);
   Prec_pt = prec_pt;
 
@@ -401,13 +401,13 @@ FpTestProblem::FpTestProblem(const unsigned &n_el,
 
     // Set parameters for use as preconditioner on Poisson-type problem
     Hypre_default_settings::set_defaults_for_2D_poisson_problem(
-      static_cast<HyprePreconditioner *>(P_matrix_preconditioner_pt));
+      static_cast<HyprePreconditioner*>(P_matrix_preconditioner_pt));
 
     // Use Hypre for the Schur complement block
     prec_pt->set_p_preconditioner(P_matrix_preconditioner_pt);
 
     // Shut up!
-    static_cast<HyprePreconditioner *>(P_matrix_preconditioner_pt)
+    static_cast<HyprePreconditioner*>(P_matrix_preconditioner_pt)
       ->disable_doc_time();
 
 #endif
@@ -424,7 +424,7 @@ FpTestProblem::FpTestProblem(const unsigned &n_el,
     if (use_hypre_for_pressure)
     {
 #ifdef OOMPH_HAS_HYPRE
-      dynamic_cast<BlockDiagonalPreconditioner<CRDoubleMatrix> *>(
+      dynamic_cast<BlockDiagonalPreconditioner<CRDoubleMatrix>*>(
         F_matrix_preconditioner_pt)
         ->set_subsidiary_preconditioner_function(
           Hypre_Subsidiary_Preconditioner_Helper::set_hypre_preconditioner);
@@ -472,9 +472,9 @@ FpTestProblem::FpTestProblem(const unsigned &n_el,
     unsigned num_nod = Bulk_mesh_pt->nboundary_node(ibound);
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
-      Node *nod_pt = Bulk_mesh_pt->boundary_node_pt(ibound, inod);
+      Node* nod_pt = Bulk_mesh_pt->boundary_node_pt(ibound, inod);
       // Only free if node is ONLY on a single boundary
-      std::set<unsigned> *bnd_pt = 0;
+      std::set<unsigned>* bnd_pt = 0;
       nod_pt->get_boundaries_pt(bnd_pt);
       if (bnd_pt != 0)
       {
@@ -499,8 +499,8 @@ FpTestProblem::FpTestProblem(const unsigned &n_el,
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    NavierStokesEquations<3> *el_pt =
-      dynamic_cast<NavierStokesEquations<3> *>(Bulk_mesh_pt->element_pt(e));
+    NavierStokesEquations<3>* el_pt =
+      dynamic_cast<NavierStokesEquations<3>*>(Bulk_mesh_pt->element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Variables::Re;
@@ -523,7 +523,7 @@ FpTestProblem::FpTestProblem(const unsigned &n_el,
 
   // Build iterative linear solver
   oomph_info << "Using Trilinos GMRES\n";
-  TrilinosAztecOOSolver *iterative_linear_solver_pt = new TrilinosAztecOOSolver;
+  TrilinosAztecOOSolver* iterative_linear_solver_pt = new TrilinosAztecOOSolver;
 
   Solver_pt = iterative_linear_solver_pt;
 
@@ -531,7 +531,7 @@ FpTestProblem::FpTestProblem(const unsigned &n_el,
 
   // Build solve and preconditioner
   Solver_pt = new GMRES<CRDoubleMatrix>;
-  dynamic_cast<GMRES<CRDoubleMatrix> *>(Solver_pt)->set_preconditioner_RHS();
+  dynamic_cast<GMRES<CRDoubleMatrix>*>(Solver_pt)->set_preconditioner_RHS();
 
 #endif
 
@@ -556,14 +556,14 @@ void FpTestProblem::create_refineable_traction_elements()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    ELEMENT *bulk_elem_pt =
-      dynamic_cast<ELEMENT *>(Bulk_mesh_pt->boundary_element_pt(b, e));
+    ELEMENT* bulk_elem_pt =
+      dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(b, e));
 
     // What is the index of the face of element e along boundary b
     int face_index = Bulk_mesh_pt->face_index_at_boundary(b, e);
 
     // Build the corresponding prescribed-flux element
-    RefineableNavierStokesTractionElement<ELEMENT> *flux_element_pt =
+    RefineableNavierStokesTractionElement<ELEMENT>* flux_element_pt =
       new RefineableNavierStokesTractionElement<ELEMENT>(bulk_elem_pt,
                                                          face_index);
 
@@ -598,14 +598,14 @@ void FpTestProblem::create_traction_elements()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    ELEMENT *bulk_elem_pt =
-      dynamic_cast<ELEMENT *>(Bulk_mesh_pt->boundary_element_pt(b, e));
+    ELEMENT* bulk_elem_pt =
+      dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(b, e));
 
     // What is the index of the face of element e along boundary b
     int face_index = Bulk_mesh_pt->face_index_at_boundary(b, e);
 
     // Build the corresponding prescribed-flux element
-    NavierStokesTractionElement<ELEMENT> *flux_element_pt =
+    NavierStokesTractionElement<ELEMENT>* flux_element_pt =
       new NavierStokesTractionElement<ELEMENT>(bulk_elem_pt, face_index);
 
     // Add the prescribed-flux element to the surface mesh
@@ -627,7 +627,7 @@ void FpTestProblem::create_traction_elements()
 //==start_of_doc_solution=================================================
 /// Doc the solution
 //========================================================================
-void FpTestProblem::doc_solution(DocInfo &doc_info)
+void FpTestProblem::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -652,7 +652,7 @@ void FpTestProblem::doc_solution(DocInfo &doc_info)
 //==start_of_main======================================================
 /// Driver for Fp preconditioner
 //=====================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
 #ifdef OOMPH_HAS_MPI
   MPI_Helpers::init(argc, argv);

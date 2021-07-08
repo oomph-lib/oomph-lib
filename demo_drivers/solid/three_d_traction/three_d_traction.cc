@@ -58,13 +58,13 @@ class ElasticCubicMesh :
 {
 public:
   /// \short Constructor:
-  ElasticCubicMesh(const unsigned &nx,
-                   const unsigned &ny,
-                   const unsigned &nz,
-                   const double &a,
-                   const double &b,
-                   const double &c,
-                   TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+  ElasticCubicMesh(const unsigned& nx,
+                   const unsigned& ny,
+                   const unsigned& nz,
+                   const double& a,
+                   const double& b,
+                   const double& c,
+                   TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
     SimpleCubicMesh<ELEMENT>(nx, ny, nz, -a, a, -b, b, -c, c, time_stepper_pt),
     SolidMesh()
   {
@@ -90,13 +90,13 @@ class RefineableElasticCubicMesh :
 public:
   /// \short Constructor:
   RefineableElasticCubicMesh(
-    const unsigned &nx,
-    const unsigned &ny,
-    const unsigned &nz,
-    const double &a,
-    const double &b,
-    const double &c,
-    TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+    const unsigned& nx,
+    const unsigned& ny,
+    const unsigned& nz,
+    const double& a,
+    const double& b,
+    const double& c,
+    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
     SimpleCubicMesh<ELEMENT>(nx, ny, nz, -a, a, -b, b, -c, c, time_stepper_pt),
     RefineableBrickMesh<ELEMENT>(),
     SolidMesh()
@@ -123,10 +123,10 @@ public:
 namespace Global_Physical_Variables
 {
   /// Pointer to strain energy function
-  StrainEnergyFunction *Strain_energy_function_pt;
+  StrainEnergyFunction* Strain_energy_function_pt;
 
   /// Pointer to constitutive law
-  ConstitutiveLaw *Constitutive_law_pt;
+  ConstitutiveLaw* Constitutive_law_pt;
 
   /// Elastic modulus
   double E = 1.0;
@@ -141,10 +141,10 @@ namespace Global_Physical_Variables
   double P = 0.0;
 
   /// Constant pressure load
-  void constant_pressure(const Vector<double> &xi,
-                         const Vector<double> &x,
-                         const Vector<double> &n,
-                         Vector<double> &traction)
+  void constant_pressure(const Vector<double>& xi,
+                         const Vector<double>& x,
+                         const Vector<double>& n,
+                         Vector<double>& traction)
   {
     unsigned dim = traction.size();
     for (unsigned i = 0; i < dim; i++)
@@ -171,10 +171,10 @@ public:
   BlockCompressionProblem();
 
   /// Run simulation.
-  void run(const std::string &dirname);
+  void run(const std::string& dirname);
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// Update function (empty)
   void actions_after_newton_solve() {}
@@ -232,7 +232,7 @@ public:
     for (unsigned e = 0; e < n_element; e++)
     {
       // The element itself:
-      FiniteElement *fe_pt = Solid_mesh_pt->boundary_element_pt(b, e);
+      FiniteElement* fe_pt = Solid_mesh_pt->boundary_element_pt(b, e);
 
       // Find the index of the face of element e along boundary b
       int face_index = Solid_mesh_pt->face_index_at_boundary(b, e);
@@ -259,15 +259,15 @@ public:
 #ifdef NOREFINE
 
       // Cast to a solid traction element
-      SolidTractionElement<ELEMENT> *el_pt =
-        dynamic_cast<SolidTractionElement<ELEMENT> *>(
+      SolidTractionElement<ELEMENT>* el_pt =
+        dynamic_cast<SolidTractionElement<ELEMENT>*>(
           Traction_mesh_pt->element_pt(i));
 
 #else
 
       // Cast to a solid traction element
-      RefineableSolidTractionElement<ELEMENT> *el_pt =
-        dynamic_cast<RefineableSolidTractionElement<ELEMENT> *>(
+      RefineableSolidTractionElement<ELEMENT>* el_pt =
+        dynamic_cast<RefineableSolidTractionElement<ELEMENT>*>(
           Traction_mesh_pt->element_pt(i));
 
 #endif
@@ -284,17 +284,17 @@ private:
 #ifdef NOREFINE
 
   /// Pointer to solid mesh
-  ElasticCubicMesh<ELEMENT> *Solid_mesh_pt;
+  ElasticCubicMesh<ELEMENT>* Solid_mesh_pt;
 
 #else
 
   /// Pointer to solid mesh
-  RefineableElasticCubicMesh<ELEMENT> *Solid_mesh_pt;
+  RefineableElasticCubicMesh<ELEMENT>* Solid_mesh_pt;
 
 #endif
 
   /// Pointer to mesh of traction elements
-  SolidMesh *Traction_mesh_pt;
+  SolidMesh* Traction_mesh_pt;
 };
 
 //======================================================================
@@ -342,7 +342,7 @@ BlockCompressionProblem<ELEMENT>::BlockCompressionProblem()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Cast to a solid element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Solid_mesh_pt->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Solid_mesh_pt->element_pt(i));
 
     // Set the constitutive law
     el_pt->constitutive_law_pt() =
@@ -377,7 +377,7 @@ BlockCompressionProblem<ELEMENT>::BlockCompressionProblem()
 /// Doc the solution
 //==================================================================
 template<class ELEMENT>
-void BlockCompressionProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void BlockCompressionProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -407,7 +407,7 @@ void BlockCompressionProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
 /// Run the problem
 //==================================================================
 template<class ELEMENT>
-void BlockCompressionProblem<ELEMENT>::run(const std::string &dirname)
+void BlockCompressionProblem<ELEMENT>::run(const std::string& dirname)
 {
   // Output
   DocInfo doc_info;
@@ -473,7 +473,7 @@ void BlockCompressionProblem<ELEMENT>::run(const std::string &dirname)
 //======================================================================
 /// Driver for simple elastic problem
 //======================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

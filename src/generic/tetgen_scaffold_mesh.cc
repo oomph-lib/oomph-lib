@@ -40,9 +40,9 @@ namespace oomph
   /// that BoundaryNodes are constructed. Any additional boundaries are
   /// determined from the face boundary information.
   //======================================================================
-  TetgenScaffoldMesh::TetgenScaffoldMesh(const std::string &node_file_name,
-                                         const std::string &element_file_name,
-                                         const std::string &face_file_name)
+  TetgenScaffoldMesh::TetgenScaffoldMesh(const std::string& node_file_name,
+                                         const std::string& element_file_name,
+                                         const std::string& face_file_name)
   {
     // Process the element file
     // --------------------------
@@ -716,7 +716,7 @@ namespace oomph
   /// that BoundaryNodes are constructed. Any additional boundaries are
   /// determined from the face boundary information.
   //======================================================================
-  TetgenScaffoldMesh::TetgenScaffoldMesh(tetgenio &tetgen_data)
+  TetgenScaffoldMesh::TetgenScaffoldMesh(tetgenio& tetgen_data)
   {
     // Find the number of elements
     unsigned n_element = static_cast<unsigned>(tetgen_data.numberoftetrahedra);

@@ -71,10 +71,10 @@ class SinusoidalWall : public GeomObject
 public:
   /// \short Constructor:  Pass height, amplitude, zeta min and zeta max
   /// (all are pinned by default)
-  SinusoidalWall(const double &height,
-                 const double &amplitude,
-                 const double &zeta_min,
-                 const double &zeta_max) :
+  SinusoidalWall(const double& height,
+                 const double& amplitude,
+                 const double& zeta_min,
+                 const double& zeta_max) :
     GeomObject(1, 2)
   {
     // Make space for the geometric data
@@ -107,7 +107,7 @@ public:
   ///  Geom_data_pt[0]->value(2) = zeta_min
   ///  Geom_data_pt[0]->value(3) = zeta_max
   /// \endcode
-  SinusoidalWall(const Vector<Data *> &geom_data_pt) : GeomObject(1, 2)
+  SinusoidalWall(const Vector<Data*>& geom_data_pt) : GeomObject(1, 2)
   {
 #ifdef PARANOID
     if (geom_data_pt.size() != 1)
@@ -144,19 +144,19 @@ public:
   }
 
   /// Access function for horizontal half axis
-  double &height()
+  double& height()
   {
     return *Geom_data_pt[0]->value_pt(0);
   }
 
   /// Access function for vertical half axis
-  double &amplitude()
+  double& amplitude()
   {
     return *Geom_data_pt[0]->value_pt(1);
   }
 
   /// \short Position vector at Lagrangian coordinate zeta
-  void position(const Vector<double> &zeta, Vector<double> &r) const
+  void position(const Vector<double>& zeta, Vector<double>& r) const
   {
 #ifdef PARANOID
     if (r.size() != Ndim)
@@ -181,9 +181,9 @@ public:
   /// \short Parametrised position on object: r(zeta). Evaluated at
   /// previous timestep. t=0: current time; t>0: previous
   /// timestep.
-  void position(const unsigned &t,
-                const Vector<double> &zeta,
-                Vector<double> &r) const
+  void position(const unsigned& t,
+                const Vector<double>& zeta,
+                Vector<double>& r) const
   {
 #ifdef PARANOID
     if (t > Geom_data_pt[0]->time_stepper_pt()->nprev_values())
@@ -213,8 +213,8 @@ public:
   /// \short Derivative of position Vector w.r.t. to coordinates:
   /// \f$ \frac{dR_i}{d \zeta_\alpha}\f$ = drdzeta(alpha,i).
   /// Evaluated at current time.
-  virtual void dposition(const Vector<double> &zeta,
-                         DenseMatrix<double> &drdzeta) const
+  virtual void dposition(const Vector<double>& zeta,
+                         DenseMatrix<double>& drdzeta) const
   {
     // Get parametres
     double A = Geom_data_pt[0]->value(1);
@@ -232,8 +232,8 @@ public:
   /// \short 2nd derivative of position Vector w.r.t. to coordinates:
   /// \f$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}\f$ =
   /// ddrdzeta(alpha,beta,i). Evaluated at current time.
-  virtual void d2position(const Vector<double> &zeta,
-                          RankThreeTensor<double> &ddrdzeta) const
+  virtual void d2position(const Vector<double>& zeta,
+                          RankThreeTensor<double>& ddrdzeta) const
   {
     // Get parametres
     double A = Geom_data_pt[0]->value(1);
@@ -253,10 +253,10 @@ public:
   /// \f$ \frac{dR_i}{d \zeta_\alpha}\f$ = drdzeta(alpha,i).
   /// \f$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}\f$ =
   /// ddrdzeta(alpha,beta,i). Evaluated at current time.
-  virtual void d2position(const Vector<double> &zeta,
-                          Vector<double> &r,
-                          DenseMatrix<double> &drdzeta,
-                          RankThreeTensor<double> &ddrdzeta) const
+  virtual void d2position(const Vector<double>& zeta,
+                          Vector<double>& r,
+                          DenseMatrix<double>& drdzeta,
+                          RankThreeTensor<double>& ddrdzeta) const
   {
     // Get parametres
     double H = Geom_data_pt[0]->value(0);
@@ -290,14 +290,14 @@ public:
 
   /// \short Return pointer to the j-th Data item that the object's
   /// shape depends on
-  Data *geom_data_pt(const unsigned &j)
+  Data* geom_data_pt(const unsigned& j)
   {
     return Geom_data_pt[j];
   }
 
 private:
   /// \short Vector of pointers to Data items that affects the object's shape
-  Vector<Data *> Geom_data_pt;
+  Vector<Data*> Geom_data_pt;
 
   /// Do I need to clean up?
   bool Must_clean_up;
@@ -334,7 +334,7 @@ public:
   void actions_after_newton_solve() {}
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 private:
   /// Width of channel
@@ -378,7 +378,7 @@ ChannelSpineFlowProblem<ELEMENT>::ChannelSpineFlowProblem()
   // Minimum and maximum coordinates of bump
   double zeta_min = Lx0;
   double zeta_max = Lx0 + Lx1;
-  GeomObject *UpperWall =
+  GeomObject* UpperWall =
     new SinusoidalWall(Ly, amplitude_upper, zeta_min, zeta_max);
 
   // Build and assign mesh -- pass pointer to geometric object
@@ -452,7 +452,7 @@ ChannelSpineFlowProblem<ELEMENT>::ChannelSpineFlowProblem()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Physical_Variables::Re;
   }
@@ -466,7 +466,7 @@ ChannelSpineFlowProblem<ELEMENT>::ChannelSpineFlowProblem()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void ChannelSpineFlowProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void ChannelSpineFlowProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -561,11 +561,11 @@ void doc_sparse_node_update()
   double amplitude_upper = -0.4 * Ly;
   double zeta_min = Lx0;
   double zeta_max = Lx0 + Lx1;
-  GeomObject *UpperWall =
+  GeomObject* UpperWall =
     new SinusoidalWall(Ly, amplitude_upper, zeta_min, zeta_max);
 
   // Build and assign mesh
-  ChannelSpineMesh<SpineElement<QTaylorHoodElement<2>>> *mesh_pt =
+  ChannelSpineMesh<SpineElement<QTaylorHoodElement<2>>>* mesh_pt =
     new ChannelSpineMesh<SpineElement<QTaylorHoodElement<2>>>(
       Nx0, Nx1, Nx2, Ny, Lx0, Lx1, Lx2, Ly, UpperWall);
 
@@ -573,7 +573,7 @@ void doc_sparse_node_update()
   mesh_pt->node_update();
 
   // Change the amplitude
-  dynamic_cast<SinusoidalWall *>(mesh_pt->wall_pt())->amplitude() = 0.5;
+  dynamic_cast<SinusoidalWall*>(mesh_pt->wall_pt())->amplitude() = 0.5;
 
   unsigned count = 0;
   ofstream some_file;
@@ -591,7 +591,7 @@ void doc_sparse_node_update()
   unsigned n_node = mesh_pt->nnode();
   for (unsigned inode = 0; inode < n_node; inode++)
   {
-    SpineNode *node_pt = dynamic_cast<SpineNode *>(mesh_pt->node_pt(inode));
+    SpineNode* node_pt = dynamic_cast<SpineNode*>(mesh_pt->node_pt(inode));
     if (node_pt->node_update_fct_id() == 1)
     {
       node_pt->node_update();

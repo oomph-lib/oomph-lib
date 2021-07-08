@@ -62,9 +62,9 @@ namespace oomph
 
     /// Constructor that can only be called by derived objects.
     /// Pass the information directly through to the TimeStepper object
-    GeneralisedTimeStepper(const unsigned &n_tstorage,
-                           const unsigned &max_deriv,
-                           const unsigned &ndof_storage_entries = 1) :
+    GeneralisedTimeStepper(const unsigned& n_tstorage,
+                           const unsigned& max_deriv,
+                           const unsigned& ndof_storage_entries = 1) :
       TimeStepper(n_tstorage, max_deriv),
       Ndof_storage_entries(ndof_storage_entries)
     {
@@ -75,13 +75,13 @@ namespace oomph
     GeneralisedTimeStepper() : TimeStepper() {}
 
     /// Broken copy constructor
-    GeneralisedTimeStepper(const GeneralisedTimeStepper &)
+    GeneralisedTimeStepper(const GeneralisedTimeStepper&)
     {
       BrokenCopy::broken_copy("GeneralisedTimeStepper");
     }
 
     /// Broken assignment operator
-    void operator=(const GeneralisedTimeStepper &)
+    void operator=(const GeneralisedTimeStepper&)
     {
       BrokenCopy::broken_assign("GeneralisedTimeStepper");
     }
@@ -129,13 +129,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    ContinuationStorageScheme(const ContinuationStorageScheme &)
+    ContinuationStorageScheme(const ContinuationStorageScheme&)
     {
       BrokenCopy::broken_copy("ContinuationStorageScheme");
     }
 
     /// Modify the scheme based on the underlying timestepper
-    void modify_storage(GeneralisedTimeStepper *const &time_stepper_pt)
+    void modify_storage(GeneralisedTimeStepper* const& time_stepper_pt)
     {
       // Get the number of "dofs" in the existing timestepper
       this->Ndof_storage_entries = time_stepper_pt->ndof_storage_entries();
@@ -158,7 +158,7 @@ namespace oomph
     }
 
     /// Broken assignment operator
-    void operator=(const ContinuationStorageScheme &)
+    void operator=(const ContinuationStorageScheme&)
     {
       BrokenCopy::broken_assign("ContinuationStorageScheme");
     }
@@ -178,7 +178,7 @@ namespace oomph
 
     /// \short Broken initialisation the time-history for the Data values
     /// corresponding to an impulsive start.
-    void assign_initial_values_impulsive(Data *const &data_pt)
+    void assign_initial_values_impulsive(Data* const& data_pt)
     {
       OomphLibWarning(
         "Cannot perform impulsive start for ContinuationStorageScheme",
@@ -188,7 +188,7 @@ namespace oomph
 
     /// \short Broken initialisation of
     /// the positions for the node corresponding to an impulsive start
-    void assign_initial_positions_impulsive(Node *const &node_pt)
+    void assign_initial_positions_impulsive(Node* const& node_pt)
     {
       OomphLibWarning(
         "Cannot perform impulsive start for ContinuationStorageScheme",
@@ -197,7 +197,7 @@ namespace oomph
     }
 
     /// Broken shifting of time values
-    void shift_time_values(Data *const &data_pt)
+    void shift_time_values(Data* const& data_pt)
     {
       throw OomphLibError(
         "Cannot shift time values forContinuationStorageScheme",
@@ -206,7 +206,7 @@ namespace oomph
     }
 
     /// Broken shifting of time positions
-    void shift_time_positions(Node *const &node_pt)
+    void shift_time_positions(Node* const& node_pt)
     {
       throw OomphLibError(
         "Cannot shift time positions forContinuationStorageScheme",
@@ -232,7 +232,7 @@ namespace oomph
     /// \short Set consistent values of the derivatives and current value when
     /// the data is pinned. This must be done by the "timestepper" because only
     /// it knows the local storage scheme
-    void set_consistent_pinned_values(Data *const &data_pt)
+    void set_consistent_pinned_values(Data* const& data_pt)
     {
 #ifdef PARANOID
       // If the data is not associated with the continuation time stepper then
@@ -272,10 +272,10 @@ namespace oomph
     /// \short Set consistent values of the derivatives and current value when
     /// the Nodes position is pinned. This must be done by the "timestepper"
     /// because only it knows the local storage scheme
-    void set_consistent_pinned_positions(Node *const &node_pt)
+    void set_consistent_pinned_positions(Node* const& node_pt)
     {
       // Only need to do anything if this is a solid node
-      if (SolidNode *const solid_node_pt = dynamic_cast<SolidNode *>(node_pt))
+      if (SolidNode* const solid_node_pt = dynamic_cast<SolidNode*>(node_pt))
       {
 #ifdef PARANOID
         // If the data is not associated with the continuation time stepper then

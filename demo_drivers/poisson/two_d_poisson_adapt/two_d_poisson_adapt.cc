@@ -62,11 +62,11 @@ public:
   /// and vertical directions, and the corresponding dimensions.
   /// Timestepper defaults to Static.
   SimpleRefineableRectangularQuadMesh(
-    const unsigned &Nx,
-    const unsigned &Ny,
-    const double &Lx,
-    const double &Ly,
-    TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+    const unsigned& Nx,
+    const unsigned& Ny,
+    const double& Lx,
+    const double& Ly,
+    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
     SimpleRectangularQuadMesh<ELEMENT>(Nx, Ny, Lx, Ly, time_stepper_pt)
   {
     // Nodal positions etc. were created in constructor for
@@ -94,13 +94,13 @@ namespace TanhSolnForPoisson
   double TanPhi = 0.0;
 
   /// Exact solution as a Vector
-  void get_exact_u(const Vector<double> &x, Vector<double> &u)
+  void get_exact_u(const Vector<double>& x, Vector<double>& u)
   {
     u[0] = tanh(1.0 - Alpha * (TanPhi * x[0] - x[1]));
   }
 
   /// Source function required to make the solution above an exact solution
-  void get_source(const Vector<double> &x, double &source)
+  void get_source(const Vector<double>& x, double& source)
   {
     source = 2.0 * tanh(-1.0 + Alpha * (TanPhi * x[0] - x[1])) *
                (1.0 - pow(tanh(-1.0 + Alpha * (TanPhi * x[0] - x[1])), 2.0)) *
@@ -137,14 +137,14 @@ public:
 
   /// \short Doc the solution. DocInfo object stores flags/labels for where the
   /// output gets written to
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// \short Overloaded version of the Problem's access function to
   /// the mesh. Recasts the pointer to the base Mesh object to
   /// the actual mesh type.
-  SimpleRefineableRectangularQuadMesh<ELEMENT> *mesh_pt()
+  SimpleRefineableRectangularQuadMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<SimpleRefineableRectangularQuadMesh<ELEMENT> *>(
+    return dynamic_cast<SimpleRefineableRectangularQuadMesh<ELEMENT>*>(
       Problem::mesh_pt());
   }
 
@@ -205,7 +205,7 @@ RefineablePoissonProblem<ELEMENT>::RefineablePoissonProblem(
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the source function pointer
     el_pt->source_fct_pt() = Source_fct_pt;
@@ -236,7 +236,7 @@ void RefineablePoissonProblem<ELEMENT>::actions_before_newton_solve()
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Get pointer to node
-      Node *nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
+      Node* nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
 
       // Extract nodal coordinates from node:
       Vector<double> x(2);
@@ -257,7 +257,7 @@ void RefineablePoissonProblem<ELEMENT>::actions_before_newton_solve()
 /// Doc the solution: doc_info contains labels/output directory etc.
 //========================================================================
 template<class ELEMENT>
-void RefineablePoissonProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void RefineablePoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];

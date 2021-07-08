@@ -72,7 +72,7 @@ namespace Global_Parameters
   double ReInvFr = 0.0;
 
   /// Constitutive law used to determine the mesh deformation
-  ConstitutiveLaw *Constitutive_law_pt = new GeneralisedHookean(&Nu);
+  ConstitutiveLaw* Constitutive_law_pt = new GeneralisedHookean(&Nu);
 } // namespace Global_Parameters
 
 namespace oomph
@@ -91,11 +91,11 @@ namespace oomph
     /// closed curves, also specified by TriangleMeshClosedSurfaces.
     /// Also specify target area for uniform element size.
     RefineableTetgenMesh(
-      TetMeshFacetedClosedSurface *const &outer_boundary_pt,
-      Vector<TetMeshFacetedSurface *> &internal_closed_surface_pt,
-      const double &element_volume,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper,
-      const bool &use_attributes = false) :
+      TetMeshFacetedClosedSurface* const& outer_boundary_pt,
+      Vector<TetMeshFacetedSurface*>& internal_closed_surface_pt,
+      const double& element_volume,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
+      const bool& use_attributes = false) :
       TetgenMesh<ELEMENT>(outer_boundary_pt,
                           internal_closed_surface_pt,
                           element_volume,
@@ -109,10 +109,10 @@ namespace oomph
     /// \short Build mesh from specified triangulation and
     /// associated target volumes for elements in it
     RefineableTetgenMesh(
-      const Vector<double> &target_volume,
-      tetgenio *const &tetgen_io_pt,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper,
-      const bool &use_attributes = false)
+      const Vector<double>& target_volume,
+      tetgenio* const& tetgen_io_pt,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
+      const bool& use_attributes = false)
     {
       // Initialise the data associated with adaptation
       initialise_adaptation_data();
@@ -128,7 +128,7 @@ namespace oomph
       // which may be bad because it's actually modifying things in the base
       // mesh
       // Create a local copy
-      tetgenio *tetgen_input_pt = new tetgenio;
+      tetgenio* tetgen_input_pt = new tetgenio;
       ;
       this->deep_copy_of_tetgenio(tetgen_io_pt, tetgen_input_pt);
       // Add volume constraints
@@ -175,31 +175,31 @@ namespace oomph
 
     /// \short Problem pointer (needed for multi-domain machinery during
     /// adaptation)
-    Problem *&problem_pt()
+    Problem*& problem_pt()
     {
       return Problem_pt;
     }
 
     /// Max element size allowed during adaptation
-    double &max_element_size()
+    double& max_element_size()
     {
       return Max_element_size;
     }
 
     /// Min element size allowed during adaptation
-    double &min_element_size()
+    double& min_element_size()
     {
       return Min_element_size;
     }
 
     /// Min angle before remesh gets triggered
-    double &max_permitted_edge_ratio()
+    double& max_permitted_edge_ratio()
     {
       return Max_permitted_edge_ratio;
     }
 
     /// Doc the targets for mesh adaptation
-    void doc_adaptivity_targets(std::ostream &outfile)
+    void doc_adaptivity_targets(std::ostream& outfile)
     {
       outfile << std::endl;
       outfile << "Targets for mesh adaptation: " << std::endl;
@@ -216,7 +216,7 @@ namespace oomph
     }
 
     /// Refine mesh uniformly and doc process
-    void refine_uniformly(DocInfo &doc_info)
+    void refine_uniformly(DocInfo& doc_info)
     {
       throw OomphLibError("refine_uniformly() not implemented yet",
                           OOMPH_CURRENT_FUNCTION,
@@ -236,15 +236,15 @@ namespace oomph
     }
 
     /// Adapt mesh, based on elemental error provided
-    void adapt(const Vector<double> &elem_error);
+    void adapt(const Vector<double>& elem_error);
 
     // protected:
 
     /// Overload the standard setup of boundary coordinates to use area
     /// coordinates for triangles
-    void setup_boundary_coordinates_generic(const unsigned &b,
-                                            const bool &switch_normal,
-                                            std::ofstream &outfile)
+    void setup_boundary_coordinates_generic(const unsigned& b,
+                                            const bool& switch_normal,
+                                            std::ofstream& outfile)
     {
       std::cout << "Calling this local version\n";
     }
@@ -254,14 +254,14 @@ namespace oomph
     /// constructed for the boundaries associated with the segments of the
     /// polygon.
     void update_faceted_surface_using_face_mesh(
-      TetMeshFacetedClosedSurface *faceted_surface_pt)
+      TetMeshFacetedClosedSurface* faceted_surface_pt)
     {
       // The easiest thing to do is simply to update the
       // positions of the key control nodes, leaving the connectivity alone,
       // but that doesn't allow for any surface remeshing
 
       /// List of vertex nodes
-      std::list<Node *> new_vertex_nodes;
+      std::list<Node*> new_vertex_nodes;
       // List of facets and boundary ids
       std::list<std::pair<Vector<unsigned>, unsigned>> new_facet_list;
 
@@ -277,7 +277,7 @@ namespace oomph
         // Create a face mesh adjacent to the fluid mesh's bound-th boundary.
         // The face mesh consists of FaceElements that may also be
         // interpreted as GeomObjects
-        Mesh *face_mesh_pt = new Mesh;
+        Mesh* face_mesh_pt = new Mesh;
         this->template build_face_mesh<ELEMENT, FaceElementAsGeomObject>(
           bound, face_mesh_pt);
 
@@ -288,8 +288,8 @@ namespace oomph
         for (unsigned e = 0; e < n_face_element; e++)
         {
           // Cast the element pointer to the correct thing!
-          FaceElementAsGeomObject<ELEMENT> *el_pt =
-            dynamic_cast<FaceElementAsGeomObject<ELEMENT> *>(
+          FaceElementAsGeomObject<ELEMENT>* el_pt =
+            dynamic_cast<FaceElementAsGeomObject<ELEMENT>*>(
               face_mesh_pt->element_pt(e));
 
           // Set bulk boundary number
@@ -308,18 +308,18 @@ namespace oomph
         for (unsigned e = 0; e < n_face_element; ++e)
         {
           // Cache pointer to the element
-          FiniteElement const *elem_pt = face_mesh_pt->finite_element_pt(e);
+          FiniteElement const* elem_pt = face_mesh_pt->finite_element_pt(e);
 
           // Just use the three primary (corner) nodes to define the facet
           unsigned n_vertex_node = 3;
           for (unsigned n = 0; n < n_vertex_node; n++)
           {
             // Cache the pointer to the node
-            Node *const nod_pt = elem_pt->node_pt(n);
+            Node* const nod_pt = elem_pt->node_pt(n);
             // If the vertex node is in the list return the number
             unsigned counter = 0;
             bool found_it = false;
-            for (std::list<Node *>::iterator it = new_vertex_nodes.begin();
+            for (std::list<Node*>::iterator it = new_vertex_nodes.begin();
                  it != new_vertex_nodes.end();
                  ++it, ++counter)
             {
@@ -356,7 +356,7 @@ namespace oomph
       unsigned n_facet_vertex = new_vertex_nodes.size();
       Vector<Vector<double>> facet_point(n_facet_vertex);
       unsigned count = 0;
-      for (std::list<Node *>::iterator it = new_vertex_nodes.begin();
+      for (std::list<Node*>::iterator it = new_vertex_nodes.begin();
            it != new_vertex_nodes.end();
            ++it)
       {
@@ -426,8 +426,8 @@ namespace oomph
       for (unsigned ihole = 0; ihole < n_hole; ihole++)
       {
         // Cache the pointer to the representation
-        TetgenMeshClosedFacetedSurface *const faceted_surface_pt =
-          dynamic_cast<TetgenMeshClosedFacetedSurface *>(
+        TetgenMeshClosedFacetedSurface* const faceted_surface_pt =
+          dynamic_cast<TetgenMeshClosedFacetedSurface*>(
             this->Internal_surface_pt[ihole]);
 
         // Now can the surface update its own representation goes in here
@@ -446,8 +446,8 @@ namespace oomph
     // virtual void surface_remesh_for_outer_boundary();
 
     /// \short Snap the boundary nodes onto any curvilinear boundaries
-    void snap_nodes_onto_boundary(RefineableTetgenMesh<ELEMENT> *&new_mesh_pt,
-                                  const unsigned &b)
+    void snap_nodes_onto_boundary(RefineableTetgenMesh<ELEMENT>*& new_mesh_pt,
+                                  const unsigned& b)
     {
       // Quick return
       if (!Boundary_coordinate_exists[b])
@@ -469,7 +469,7 @@ namespace oomph
       // Create a face mesh adjacent to the fluid mesh's b-th boundary.
       // The face mesh consists of FaceElements that may also be
       // interpreted as GeomObjects
-      Mesh *face_mesh_pt = new Mesh;
+      Mesh* face_mesh_pt = new Mesh;
       this->template build_face_mesh<ELEMENT, FaceElementAsGeomObject>(
         b, face_mesh_pt);
 
@@ -480,8 +480,8 @@ namespace oomph
       for (unsigned e = 0; e < n_face_element; e++)
       {
         // Cast the element pointer to the correct thing!
-        FaceElementAsGeomObject<ELEMENT> *el_pt =
-          dynamic_cast<FaceElementAsGeomObject<ELEMENT> *>(
+        FaceElementAsGeomObject<ELEMENT>* el_pt =
+          dynamic_cast<FaceElementAsGeomObject<ELEMENT>*>(
             face_mesh_pt->element_pt(e));
 
         // Set bulk boundary number
@@ -489,7 +489,7 @@ namespace oomph
       }
 
       // Now make the mesh as geometric object
-      MeshAsGeomObject *mesh_geom_obj_pt = new MeshAsGeomObject(face_mesh_pt);
+      MeshAsGeomObject* mesh_geom_obj_pt = new MeshAsGeomObject(face_mesh_pt);
 
       // Now assign the new nodes positions based on the old meshes
       // potentially curvilinear boundary (its geom object incarnation)
@@ -499,7 +499,7 @@ namespace oomph
       for (unsigned n = 0; n < n_new_boundary_node; n++)
       {
         // Get the boundary coordinate of all new nodes
-        Node *const nod_pt = new_mesh_pt->boundary_node_pt(b, n);
+        Node* const nod_pt = new_mesh_pt->boundary_node_pt(b, n);
         nod_pt->get_coordinates_on_boundary(b, b_coord);
         // Let's find boundary coordinates of the new node
         mesh_geom_obj_pt->position(b_coord, new_x);
@@ -536,8 +536,8 @@ namespace oomph
         for (unsigned e = 0; e < n_element; e++)
         {
           // Cache the element pointer
-          ELEMENT *elem_pt =
-            dynamic_cast<ELEMENT *>(new_mesh_pt->boundary_element_pt(b, e));
+          ELEMENT* elem_pt =
+            dynamic_cast<ELEMENT*>(new_mesh_pt->boundary_element_pt(b, e));
 
           // Find the number of nodes
           const unsigned n_node = elem_pt->nnode();
@@ -624,8 +624,8 @@ namespace oomph
 
     /// \short Compute target volume based on the element's error and the
     /// error target; return max edge ratio
-    double compute_volume_target(const Vector<double> &elem_error,
-                                 Vector<double> &target_volume)
+    double compute_volume_target(const Vector<double>& elem_error,
+                                 Vector<double>& target_volume)
     {
       double max_edge_ratio = 0.0;
       unsigned count_unrefined = 0;
@@ -636,7 +636,7 @@ namespace oomph
       for (unsigned e = 0; e < nel; e++)
       {
         // Get element
-        FiniteElement *el_pt = this->finite_element_pt(e);
+        FiniteElement* el_pt = this->finite_element_pt(e);
 
         // Calculate the volume of the element
         double volume = el_pt->size();
@@ -748,7 +748,7 @@ namespace oomph
 
     /// \short Problem pointer (needed for multi-domain machinery during
     /// adaptation
-    Problem *Problem_pt;
+    Problem* Problem_pt;
 
     /// Max permitted element size
     double Max_element_size;
@@ -768,7 +768,7 @@ namespace oomph
   /// Adapt problem based on specified elemental error estimates
   //======================================================================
   template<class ELEMENT>
-  void RefineableTetgenMesh<ELEMENT>::adapt(const Vector<double> &elem_error)
+  void RefineableTetgenMesh<ELEMENT>::adapt(const Vector<double>& elem_error)
   {
     // Get refinement targets
     Vector<double> target_size(elem_error.size());
@@ -824,13 +824,13 @@ namespace oomph
       }
 
       // Are we dealing with a solid mesh?
-      SolidMesh *solid_mesh_pt = dynamic_cast<SolidMesh *>(this);
+      SolidMesh* solid_mesh_pt = dynamic_cast<SolidMesh*>(this);
 
       // Build temporary uniform background mesh
       //----------------------------------------
       // with volume set by maximum required volume
       //---------------------------------------
-      RefineableTetgenMesh<ELEMENT> *tmp_new_mesh_pt = 0;
+      RefineableTetgenMesh<ELEMENT>* tmp_new_mesh_pt = 0;
       /*  if (solid_mesh_pt!=0)
      {
       tmp_new_mesh_pt=new RefineableSolidTriangleMesh<ELEMENT>
@@ -886,7 +886,7 @@ namespace oomph
       tmp_new_mesh_pt->output("mesh_nodes_snapped_0.dat");
 
       // Get the tetgenio object associated with that mesh
-      tetgenio *tmp_new_tetgenio_pt = tmp_new_mesh_pt->tetgenio_pt();
+      tetgenio* tmp_new_tetgenio_pt = tmp_new_mesh_pt->tetgenio_pt();
 
 #ifdef PARANOID
       if (this->Problem_pt == 0)
@@ -897,11 +897,11 @@ namespace oomph
       }
 #endif
 
-      RefineableTetgenMesh<ELEMENT> *new_mesh_pt = 0;
+      RefineableTetgenMesh<ELEMENT>* new_mesh_pt = 0;
 
       // Map storing target sizes for elements in temporary
       // tetgenio mesh
-      std::map<GeneralisedElement *, double> target_size_map;
+      std::map<GeneralisedElement*, double> target_size_map;
 
       //////////////////////////////////////////////////////////////
       // NOTE: Repeated setup of multidomain interaction could
@@ -930,12 +930,12 @@ namespace oomph
         unsigned nelem = this->nelement();
         for (unsigned e = 0; e < nelem; e++)
         {
-          dynamic_cast<ELEMENT *>(this->element_pt(e))->enable_projection();
+          dynamic_cast<ELEMENT*>(this->element_pt(e))->enable_projection();
         }
         unsigned nelem2 = tmp_new_mesh_pt->nelement();
         for (unsigned e = 0; e < nelem2; e++)
         {
-          dynamic_cast<ELEMENT *>(tmp_new_mesh_pt->element_pt(e))
+          dynamic_cast<ELEMENT*>(tmp_new_mesh_pt->element_pt(e))
             ->enable_projection();
         }
 
@@ -948,11 +948,11 @@ namespace oomph
         target_size_map.clear();
         for (unsigned e = 0; e < nelem; e++)
         {
-          ELEMENT *el_pt = dynamic_cast<ELEMENT *>(this->element_pt(e));
+          ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->element_pt(e));
           unsigned nint = el_pt->integral_pt()->nweight();
           for (unsigned ipt = 0; ipt < nint; ipt++)
           {
-            GeneralisedElement *ext_el_pt = el_pt->external_element_pt(0, ipt);
+            GeneralisedElement* ext_el_pt = el_pt->external_element_pt(0, ipt);
 
             // Use max. rather than min area of any element overlapping the
             // the current element, otherwise we get a rapid outward diffusion
@@ -962,11 +962,11 @@ namespace oomph
           }
 
           // Switch off projection capability
-          dynamic_cast<ELEMENT *>(this->element_pt(e))->disable_projection();
+          dynamic_cast<ELEMENT*>(this->element_pt(e))->disable_projection();
         }
         for (unsigned e = 0; e < nelem2; e++)
         {
-          dynamic_cast<ELEMENT *>(tmp_new_mesh_pt->element_pt(e))
+          dynamic_cast<ELEMENT*>(tmp_new_mesh_pt->element_pt(e))
             ->disable_projection();
         }
 
@@ -1081,7 +1081,7 @@ namespace oomph
 
       // Project current solution onto new mesh
       //---------------------------------------
-      ProjectionProblem<ELEMENT> *project_problem_pt =
+      ProjectionProblem<ELEMENT>* project_problem_pt =
         new ProjectionProblem<ELEMENT>;
       project_problem_pt->mesh_pt() = new_mesh_pt;
       project_problem_pt->project(this);
@@ -1235,7 +1235,7 @@ namespace oomph
                         OOMPH_EXCEPTION_LOCATION);
 
         // Reset Lagrangian coordinates
-        dynamic_cast<SolidMesh *>(this)->set_lagrangian_nodal_coordinates();
+        dynamic_cast<SolidMesh*>(this)->set_lagrangian_nodal_coordinates();
       }
 
       double max_area;
@@ -1265,11 +1265,11 @@ namespace oomph
     /// the outer boundary of the domain and any number of internal
     /// closed curves. Specify target area for uniform element size.
     RefineableSolidTetgenMesh(
-      TetgenMeshOLDFacetedSurface *const &outer_boundary_pt,
-      Vector<TetgenMeshOLDFacetedSurface *> &internal_closed_surface_pt,
-      const double &element_volume,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper,
-      const bool &use_attributes = false) :
+      TetgenMeshOLDFacetedSurface* const& outer_boundary_pt,
+      Vector<TetgenMeshOLDFacetedSurface*>& internal_closed_surface_pt,
+      const double& element_volume,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
+      const bool& use_attributes = false) :
       TetgenMesh<ELEMENT>(outer_boundary_pt,
                           internal_closed_surface_pt,
                           element_volume,
@@ -1289,10 +1289,10 @@ namespace oomph
     /// \short Build mesh from specified triangulation and
     /// associated target areas for elements in it.
     RefineableSolidTetgenMesh(
-      const Vector<double> &target_volume,
-      tetgenio *const &tetgen_io,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper,
-      const bool &use_attributes = false) :
+      const Vector<double>& target_volume,
+      tetgenio* const& tetgen_io,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
+      const bool& use_attributes = false) :
       RefineableTetgenMesh<ELEMENT>(
         target_volume, tetgen_io, time_stepper_pt, use_attributes)
     {
@@ -1349,14 +1349,14 @@ public:
       {
         // Get pointer to the bulk fluid element that is
         // adjacent to boundary b
-        ELEMENT *bulk_elem_pt =
-          dynamic_cast<ELEMENT *>(Fluid_mesh_pt->boundary_element_pt(b, e));
+        ELEMENT* bulk_elem_pt =
+          dynamic_cast<ELEMENT*>(Fluid_mesh_pt->boundary_element_pt(b, e));
 
         // Find the index of the face of element e along boundary b
         int face_index = Fluid_mesh_pt->face_index_at_boundary(b, e);
 
         // Create new element
-        ElasticSurfaceFluidInterfaceElement<ELEMENT> *el_pt =
+        ElasticSurfaceFluidInterfaceElement<ELEMENT>* el_pt =
           new ElasticSurfaceFluidInterfaceElement<ELEMENT>(bulk_elem_pt,
                                                            face_index);
 
@@ -1429,7 +1429,7 @@ public:
     for (unsigned i = 0; i < n_element; i++)
     {
       // Upcast from GeneralElement to the present element
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Fluid_mesh_pt->element_pt(i));
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Fluid_mesh_pt->element_pt(i));
 
       // Set the source function pointer
       el_pt->re_pt() = &Global_Parameters::Re;
@@ -1461,7 +1461,7 @@ public:
       unsigned num_nod = Fluid_mesh_pt->nboundary_node(ibound);
       for (unsigned inod = 0; inod < num_nod; inod++)
       {
-        Node *nod_pt = Fluid_mesh_pt->boundary_node_pt(ibound, inod);
+        Node* nod_pt = Fluid_mesh_pt->boundary_node_pt(ibound, inod);
         for (unsigned i = 0; i < final_index; ++i)
         {
           nod_pt->set_value(i, 0.0);
@@ -1490,7 +1490,7 @@ public:
   void actions_after_newton_solve() {}
 
   /// Doc the solution
-  void doc_solution(const unsigned &nplot, DocInfo &doc_info);
+  void doc_solution(const unsigned& nplot, DocInfo& doc_info);
 
   /// Create elements that impose volume constraint on the bubble
   void create_volume_constraint_elements()
@@ -1510,14 +1510,14 @@ public:
       {
         // Get pointer to the bulk fluid element that is
         // adjacent to boundary b
-        ELEMENT *bulk_elem_pt =
-          dynamic_cast<ELEMENT *>(Fluid_mesh_pt->boundary_element_pt(b, e));
+        ELEMENT* bulk_elem_pt =
+          dynamic_cast<ELEMENT*>(Fluid_mesh_pt->boundary_element_pt(b, e));
 
         // Find the index of the face of element e along boundary b
         int face_index = Fluid_mesh_pt->face_index_at_boundary(b, e);
 
         // Create new element
-        ElasticSurfaceVolumeConstraintBoundingElement<ELEMENT> *el_pt =
+        ElasticSurfaceVolumeConstraintBoundingElement<ELEMENT>* el_pt =
           new ElasticSurfaceVolumeConstraintBoundingElement<ELEMENT>(
             bulk_elem_pt, face_index);
 
@@ -1558,7 +1558,7 @@ public:
       unsigned n_node = Fluid_mesh_pt->nboundary_node(b);
       for (unsigned n = 0; n < n_node; ++n)
       {
-        Node *nod_pt = Fluid_mesh_pt->boundary_node_pt(b, n);
+        Node* nod_pt = Fluid_mesh_pt->boundary_node_pt(b, n);
         double x = nod_pt->x(0);
         double y = nod_pt->x(1);
         double z = nod_pt->x(2);
@@ -1596,7 +1596,7 @@ public:
         for (unsigned e = 0; e < n_element; e++)
         {
           // Cache the element pointer
-          ELEMENT *elem_pt = dynamic_cast<ELEMENT *>(
+          ELEMENT* elem_pt = dynamic_cast<ELEMENT*>(
             this->Fluid_mesh_pt->boundary_element_pt(b, e));
 
           // Find the number of nodes
@@ -1666,25 +1666,25 @@ public:
   }
 
   /// Pointer to data that will store the bubble pressure
-  Data *Bubble_pressure_data_pt;
+  Data* Bubble_pressure_data_pt;
 
 public:
   /// Pointer to the fluid mesh
-  RefineableSolidTetgenMesh<ELEMENT> *Fluid_mesh_pt;
+  RefineableSolidTetgenMesh<ELEMENT>* Fluid_mesh_pt;
 
   /// Pointers to mesh of free surface elements
-  Mesh *Free_surface_mesh_pt;
+  Mesh* Free_surface_mesh_pt;
 
   /// Pointer to mesh containing elements that impose volume constraint
-  Mesh *Volume_constraint_mesh_pt;
+  Mesh* Volume_constraint_mesh_pt;
 
   /// Pointer to element that imposes volume constraint for bubble
-  VolumeConstraintElement *Vol_constraint_el_pt;
+  VolumeConstraintElement* Vol_constraint_el_pt;
 
   /// Storage for the outer boundary object
-  TetgenMeshOLDFacetedSurface *Outer_boundary_pt;
+  TetgenMeshOLDFacetedSurface* Outer_boundary_pt;
 
-  Vector<TetgenMeshOLDFacetedSurface *> Inner_boundary_pt;
+  Vector<TetgenMeshOLDFacetedSurface*> Inner_boundary_pt;
 };
 
 //========================================================================
@@ -1990,7 +1990,7 @@ RisingBubbleProblem<ELEMENT>::RisingBubbleProblem()
     icosa_point, icosa_facet, icosa_facet_boundary_id);
 
   Vector<double> inner_point(3, 0.0);
-  dynamic_cast<TetgenMeshClosedFacetedSurface *>(Inner_boundary_pt[0])
+  dynamic_cast<TetgenMeshClosedFacetedSurface*>(Inner_boundary_pt[0])
     ->set_hole(inner_point);
 
   /*in.numberofregions = 1;
@@ -2008,7 +2008,7 @@ RisingBubbleProblem<ELEMENT>::RisingBubbleProblem()
   Fluid_mesh_pt->split_elements_in_corners(this->time_stepper_pt());
 
   // Set error estimator for bulk mesh
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   Fluid_mesh_pt->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Set targets for spatial adaptivity
@@ -2040,7 +2040,7 @@ RisingBubbleProblem<ELEMENT>::RisingBubbleProblem()
     unsigned num_nod = Fluid_mesh_pt->nboundary_node(ibound);
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
-      Node *nod_pt = Fluid_mesh_pt->boundary_node_pt(ibound, inod);
+      Node* nod_pt = Fluid_mesh_pt->boundary_node_pt(ibound, inod);
       // Pin the fluid velocities
       for (unsigned i = 0; i < final_index; ++i)
       {
@@ -2050,7 +2050,7 @@ RisingBubbleProblem<ELEMENT>::RisingBubbleProblem()
       // Now pin all positions not on bubble
       for (unsigned i = 0; i < 3; i++)
       {
-        dynamic_cast<SolidNode *>(nod_pt)->pin_position(i);
+        dynamic_cast<SolidNode*>(nod_pt)->pin_position(i);
       }
     }
   }
@@ -2065,7 +2065,7 @@ RisingBubbleProblem<ELEMENT>::RisingBubbleProblem()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Fluid_mesh_pt->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Fluid_mesh_pt->element_pt(i));
 
     // Set the source function pointer
     el_pt->re_pt() = &Global_Parameters::Re;
@@ -2122,8 +2122,8 @@ RisingBubbleProblem<ELEMENT>::RisingBubbleProblem()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void RisingBubbleProblem<ELEMENT>::doc_solution(const unsigned &nplot,
-                                                DocInfo &doc_info)
+void RisingBubbleProblem<ELEMENT>::doc_solution(const unsigned& nplot,
+                                                DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -2135,7 +2135,7 @@ void RisingBubbleProblem<ELEMENT>::doc_solution(const unsigned &nplot,
           doc_info.directory().c_str(),
           doc_info.number());
   some_file.open(filename);
-  FiniteElement *el_pt = Fluid_mesh_pt->finite_element_pt(0);
+  FiniteElement* el_pt = Fluid_mesh_pt->finite_element_pt(0);
   unsigned nnode = el_pt->nnode();
   unsigned ndim = el_pt->node_pt(0)->ndim();
   for (unsigned j = 0; j < nnode; j++)
@@ -2176,7 +2176,7 @@ void RisingBubbleProblem<ELEMENT>::doc_solution(const unsigned &nplot,
 //========================================================================
 /// Demonstrate how to solve Poisson problem
 //========================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Set the direction of gravity
   Global_Parameters::G[0] = 0.0;

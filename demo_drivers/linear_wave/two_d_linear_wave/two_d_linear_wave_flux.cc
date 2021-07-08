@@ -56,14 +56,14 @@ namespace TanhSolnForLinearWave
   double Phi;
 
   /// Exact solution
-  double exact_u(const double &time, const Vector<double> &x)
+  double exact_u(const double& time, const Vector<double>& x)
   {
     double zeta = cos(Phi) * x[0] + sin(Phi) * x[1];
     return tanh(1.0 - Alpha * (zeta - time));
   }
 
   /// 1st time-deriv of exact solution
-  double exact_dudt(const double &time, const Vector<double> &x)
+  double exact_dudt(const double& time, const Vector<double>& x)
   {
     double zeta = cos(Phi) * x[0] + sin(Phi) * x[1];
     return Alpha / (cosh(1.0 - Alpha * (zeta - time)) *
@@ -71,7 +71,7 @@ namespace TanhSolnForLinearWave
   }
 
   /// 2nd time-deriv of exact solution
-  double exact_d2udt2(const double &time, const Vector<double> &x)
+  double exact_d2udt2(const double& time, const Vector<double>& x)
   {
     double zeta = cos(Phi) * x[0] + sin(Phi) * x[1];
     return -2.0 * Alpha * Alpha * tanh(1.0 - Alpha * (zeta - time)) /
@@ -80,9 +80,9 @@ namespace TanhSolnForLinearWave
   }
 
   /// Exact solution as a vector
-  void get_exact_u(const double &time,
-                   const Vector<double> &x,
-                   Vector<double> &u)
+  void get_exact_u(const double& time,
+                   const Vector<double>& x,
+                   Vector<double>& u)
   {
     u[0] = exact_u(time, x);
     u[1] = exact_dudt(time, x);
@@ -90,15 +90,15 @@ namespace TanhSolnForLinearWave
   }
 
   /// Source function to make it an exact solution
-  void get_source(const double &time, const Vector<double> &x, double &source)
+  void get_source(const double& time, const Vector<double>& x, double& source)
   {
     source = 0.0;
   }
 
   /// Gradient of exact solution
-  void get_exact_gradient(const double &time,
-                          const Vector<double> &x,
-                          Vector<double> &dudx)
+  void get_exact_gradient(const double& time,
+                          const Vector<double>& x,
+                          Vector<double>& dudx)
   {
     double zeta = cos(Phi) * x[0] + sin(Phi) * x[1];
     dudx[0] =
@@ -110,9 +110,9 @@ namespace TanhSolnForLinearWave
   }
 
   /// Prescribed flux on a fixed y max boundary
-  void prescribed_flux_on_fixed_y_boundary(const double &time,
-                                           const Vector<double> &x,
-                                           double &flux)
+  void prescribed_flux_on_fixed_y_boundary(const double& time,
+                                           const Vector<double>& x,
+                                           double& flux)
   {
     // Set up normal
     Vector<double> dudx(2), n(2);
@@ -142,8 +142,8 @@ public:
   /// \short Constructor: pass number of elements in x and y directions
   /// and pointer to source function.
   LinearWaveProblem(
-    const unsigned &nx,
-    const unsigned &ny,
+    const unsigned& nx,
+    const unsigned& ny,
     LinearWaveEquations<2>::LinearWaveSourceFctPt source_fct_pt);
 
   /// Destructor (empty)
@@ -186,7 +186,7 @@ public:
         for (unsigned inod = 0; inod < num_nod; inod++)
         {
           // Set the boundary condition from the exact solution
-          Node *nod_pt = Bulk_mesh_pt->boundary_node_pt(ibound, inod);
+          Node* nod_pt = Bulk_mesh_pt->boundary_node_pt(ibound, inod);
 
           bool use_direct_assignment = false;
           if (use_direct_assignment)
@@ -203,8 +203,8 @@ public:
           else
           {
             // Get timestepper
-            TIMESTEPPER *timestepper_pt =
-              dynamic_cast<TIMESTEPPER *>(time_stepper_pt());
+            TIMESTEPPER* timestepper_pt =
+              dynamic_cast<TIMESTEPPER*>(time_stepper_pt());
 
             // Assign the history values
             timestepper_pt->assign_initial_data_values(
@@ -220,7 +220,7 @@ public:
   void set_initial_condition();
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// \short Do unsteady run
   void unsteady_run();
@@ -229,15 +229,15 @@ private:
   /// \short Create LinearWave flux elements on boundary b of the Mesh pointed
   /// to by bulk_mesh_pt and add them to the Mesh object pointed to by
   /// surface_mesh_pt
-  void create_flux_elements(const unsigned &b,
-                            Mesh *const &bulk_mesh_pt,
-                            Mesh *const &surface_mesh_pt);
+  void create_flux_elements(const unsigned& b,
+                            Mesh* const& bulk_mesh_pt,
+                            Mesh* const& surface_mesh_pt);
 
   /// Pointer to the "bulk" mesh
-  RectangularQuadMesh<ELEMENT> *Bulk_mesh_pt;
+  RectangularQuadMesh<ELEMENT>* Bulk_mesh_pt;
 
   /// Pointer to the "surface" mesh
-  Mesh *Surface_mesh_pt;
+  Mesh* Surface_mesh_pt;
 
   // Trace file
   ofstream Trace_file;
@@ -249,8 +249,8 @@ private:
 //========================================================================
 template<class ELEMENT, class TIMESTEPPER>
 LinearWaveProblem<ELEMENT, TIMESTEPPER>::LinearWaveProblem(
-  const unsigned &nx,
-  const unsigned &ny,
+  const unsigned& nx,
+  const unsigned& ny,
   LinearWaveEquations<2>::LinearWaveSourceFctPt source_fct_pt)
 {
   // Create the timestepper -- this constructs the time object as well
@@ -327,7 +327,7 @@ LinearWaveProblem<ELEMENT, TIMESTEPPER>::LinearWaveProblem(
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from FiniteElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(i));
 
     // Set the source function pointer
     el_pt->source_fct_pt() = source_fct_pt;
@@ -342,8 +342,8 @@ LinearWaveProblem<ELEMENT, TIMESTEPPER>::LinearWaveProblem(
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to LinearWave flux element
-    LinearWaveFluxElement<ELEMENT> *el_pt =
-      dynamic_cast<LinearWaveFluxElement<ELEMENT> *>(
+    LinearWaveFluxElement<ELEMENT>* el_pt =
+      dynamic_cast<LinearWaveFluxElement<ELEMENT>*>(
         Surface_mesh_pt->element_pt(e));
 
     el_pt->flux_fct_pt() =
@@ -362,7 +362,7 @@ template<class ELEMENT, class TIMESTEPPER>
 void LinearWaveProblem<ELEMENT, TIMESTEPPER>::set_initial_condition()
 {
   // Get timestepper
-  TIMESTEPPER *timestepper_pt = dynamic_cast<TIMESTEPPER *>(time_stepper_pt());
+  TIMESTEPPER* timestepper_pt = dynamic_cast<TIMESTEPPER*>(time_stepper_pt());
 
   // Vector of function pointers to functions that specify the
   // value, and the first and second time-derivatives of the
@@ -384,7 +384,7 @@ void LinearWaveProblem<ELEMENT, TIMESTEPPER>::set_initial_condition()
   for (unsigned jnod = 0; jnod < num_nod; jnod++)
   {
     // Pointer to node
-    Node *nod_pt = mesh_pt()->node_pt(jnod);
+    Node* nod_pt = mesh_pt()->node_pt(jnod);
 
     // Assign the history values
     timestepper_pt->assign_initial_data_values(
@@ -399,7 +399,7 @@ void LinearWaveProblem<ELEMENT, TIMESTEPPER>::set_initial_condition()
 //=======================================================================
 template<class ELEMENT, class TIMESTEPPER>
 void LinearWaveProblem<ELEMENT, TIMESTEPPER>::create_flux_elements(
-  const unsigned &b, Mesh *const &bulk_mesh_pt, Mesh *const &surface_mesh_pt)
+  const unsigned& b, Mesh* const& bulk_mesh_pt, Mesh* const& surface_mesh_pt)
 {
   // How many bulk elements are adjacent to boundary b?
   unsigned n_element = bulk_mesh_pt->nboundary_element(b);
@@ -408,14 +408,14 @@ void LinearWaveProblem<ELEMENT, TIMESTEPPER>::create_flux_elements(
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    ELEMENT *bulk_elem_pt =
-      dynamic_cast<ELEMENT *>(bulk_mesh_pt->boundary_element_pt(b, e));
+    ELEMENT* bulk_elem_pt =
+      dynamic_cast<ELEMENT*>(bulk_mesh_pt->boundary_element_pt(b, e));
 
     // Find the index of the face of element e along boundary b
     int face_index = bulk_mesh_pt->face_index_at_boundary(b, e);
 
     // Build the corresponding prescribed-flux element
-    LinearWaveFluxElement<ELEMENT> *flux_element_pt =
+    LinearWaveFluxElement<ELEMENT>* flux_element_pt =
       new LinearWaveFluxElement<ELEMENT>(bulk_elem_pt, face_index);
 
     // Add the prescribed-flux element to the surface mesh
@@ -429,7 +429,7 @@ void LinearWaveProblem<ELEMENT, TIMESTEPPER>::create_flux_elements(
 /// Doc the solution
 //========================================================================
 template<class ELEMENT, class TIMESTEPPER>
-void LinearWaveProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo &doc_info)
+void LinearWaveProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -570,7 +570,7 @@ void LinearWaveProblem<ELEMENT, TIMESTEPPER>::unsteady_run()
 //===start_of_main========================================================
 /// Demonstrate how to solve LinearWave problem
 //========================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

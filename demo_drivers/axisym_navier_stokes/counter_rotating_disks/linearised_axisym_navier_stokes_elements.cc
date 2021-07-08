@@ -62,7 +62,7 @@ namespace oomph
   /// coordinate direction.
   //==============================================================
   void LinearisedAxisymmetricNavierStokesEquations::output_veloc(
-    std::ostream &outfile, const unsigned &nplot, const unsigned &t)
+    std::ostream& outfile, const unsigned& nplot, const unsigned& t)
   {
     // Determine number of nodes in element
     const unsigned n_node = nnode();
@@ -147,7 +147,7 @@ namespace oomph
   /// coordinate direction.
   //==============================================================
   void LinearisedAxisymmetricNavierStokesEquations::output(
-    std::ostream &outfile, const unsigned &nplot)
+    std::ostream& outfile, const unsigned& nplot)
   {
     // Provide storage for vector of local coordinates
     Vector<double> s(2);
@@ -283,7 +283,7 @@ namespace oomph
   /// coordinate direction.
   //==============================================================
   void LinearisedAxisymmetricNavierStokesEquations::output(
-    FILE *file_pt, const unsigned &nplot)
+    FILE* file_pt, const unsigned& nplot)
   {
     // Provide storage for vector of local coordinates
     Vector<double> s(2);
@@ -337,7 +337,7 @@ namespace oomph
   /// \f$ \cos(k \theta) = \sin(k \theta) = 1/\sqrt{2} \f$.
   //==============================================================
   void LinearisedAxisymmetricNavierStokesEquations::strain_rate(
-    const Vector<double> &s, DenseMatrix<double> &strainrate) const
+    const Vector<double>& s, DenseMatrix<double>& strainrate) const
   {
 #ifdef PARANOID
     if ((strainrate.ncol() != 3) || (strainrate.nrow() != 3))
@@ -471,9 +471,9 @@ namespace oomph
   //==============================================================
   void LinearisedAxisymmetricNavierStokesEquations::
     fill_in_generic_residual_contribution_linearised_axi_nst(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix,
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
       unsigned flag)
   {
     // Determine number of nodes in the element
@@ -1932,7 +1932,7 @@ namespace oomph
   /// Number of values (pinned or dofs) required at node n.
   //========================================================================
   unsigned LinearisedAxisymmetricQCrouzeixRaviartElement::required_nvalue(
-    const unsigned &n) const
+    const unsigned& n) const
   {
     return Initial_Nvalue[n];
   }

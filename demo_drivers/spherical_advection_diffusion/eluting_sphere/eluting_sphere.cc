@@ -56,7 +56,7 @@ namespace Wind_Function
 {
   /// Wind that represents a constantly translating sphere
   /// in spherical polar coordinates
-  void get_wind(const Vector<double> &x, Vector<double> &wind)
+  void get_wind(const Vector<double>& x, Vector<double>& wind)
   {
     wind[0] = (-1.0 + 1.5 / x[0] - 0.5 / (x[0] * x[0] * x[0])) * cos(x[1]);
     wind[1] = (1.0 - 0.75 / x[0] - 0.25 / (x[0] * x[0] * x[0])) * sin(x[1]);
@@ -80,15 +80,15 @@ public:
   void set_boundary_conditions();
 
   // Access function for the specific mesh
-  RectangularQuadMesh<ELEMENT> *mesh_pt()
+  RectangularQuadMesh<ELEMENT>* mesh_pt()
   {
     // Upcast from pointer to the Mesh base class to the specific
     // element type that we're using here.
-    return dynamic_cast<RectangularQuadMesh<ELEMENT> *>(Problem::mesh_pt());
+    return dynamic_cast<RectangularQuadMesh<ELEMENT>*>(Problem::mesh_pt());
   }
 
   /// Document the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 }; // end_of_problem_class
 
@@ -147,7 +147,7 @@ EultingSphereProblem<ELEMENT>::EultingSphereProblem()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
     // Set the Reynolds number
     el_pt->pe_pt() = &Global_Physical_Variables::Pe;
@@ -174,7 +174,7 @@ void EultingSphereProblem<ELEMENT>::set_boundary_conditions()
   unsigned num_nod = mesh_pt()->nboundary_node(ibound);
   for (unsigned inod = 0; inod < num_nod; inod++)
   {
-    Node *nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
+    Node* nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
     nod_pt->set_value(0, 0.0);
   }
 
@@ -185,7 +185,7 @@ void EultingSphereProblem<ELEMENT>::set_boundary_conditions()
   num_nod = mesh_pt()->nboundary_node(ibound);
   for (unsigned inod = 0; inod < num_nod; inod++)
   {
-    Node *nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
+    Node* nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
     nod_pt->set_value(0, 1.0);
   }
 
@@ -209,7 +209,7 @@ EultingSphereProblem<ELEMENT>::~EultingSphereProblem()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void EultingSphereProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void EultingSphereProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];

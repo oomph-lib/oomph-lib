@@ -114,7 +114,7 @@ namespace oomph
     MapMatrixMixed(){};
 
     /// Broken assignment operator
-    void operator=(const MapMatrixMixed &)
+    void operator=(const MapMatrixMixed&)
     {
       BrokenCopy::broken_assign("MapMatrixMixed");
     }
@@ -129,7 +129,7 @@ namespace oomph
     typedef typename InnerMapMixed::const_iterator ConstInnerMixedIt;
 
     /// Typedef to keep the code more readable
-    typedef std::map<KEY_TYPE_ROW, std::map<KEY_TYPE_COL, VALUE_TYPE> *>
+    typedef std::map<KEY_TYPE_ROW, std::map<KEY_TYPE_COL, VALUE_TYPE>*>
       OuterMapMixed;
 
     /// Typedef to keep the code more readable
@@ -140,7 +140,7 @@ namespace oomph
 
     /// Copy constructor
     MapMatrixMixed(
-      const MapMatrixMixed<KEY_TYPE_ROW, KEY_TYPE_COL, VALUE_TYPE> &map_mat)
+      const MapMatrixMixed<KEY_TYPE_ROW, KEY_TYPE_COL, VALUE_TYPE>& map_mat)
     {
       // Step through the row pointers
       for (ConstOuterMixedIt it = map_mat.Row_pt.begin();
@@ -170,8 +170,8 @@ namespace oomph
     }
 
     /// Copy a single column into its own map
-    void copy_column(const KEY_TYPE_COL &j,
-                     std::map<KEY_TYPE_ROW, VALUE_TYPE> &copied_map)
+    void copy_column(const KEY_TYPE_COL& j,
+                     std::map<KEY_TYPE_ROW, VALUE_TYPE>& copied_map)
     {
       // Step through the row pointers
       for (OuterMixedIt it = Row_pt.begin(); it != Row_pt.end(); it++)
@@ -225,7 +225,7 @@ namespace oomph
     /// \short Return (reference to) entry.
     /// Careful: If the entry does not exist then it is created and
     /// set to zero
-    VALUE_TYPE &operator()(const KEY_TYPE_ROW &i, const KEY_TYPE_COL &j)
+    VALUE_TYPE& operator()(const KEY_TYPE_ROW& i, const KEY_TYPE_COL& j)
     {
       return *entry_pt(i, j);
     }
@@ -234,12 +234,12 @@ namespace oomph
     ///  Searches the container for an element with a key equivalent to
     /// (i,j) and returns the element if found, otherwise the default 0 value
     /// for the value type is returned. The container is not modified.
-    VALUE_TYPE get(const KEY_TYPE_ROW &i, const KEY_TYPE_COL &j) const
+    VALUE_TYPE get(const KEY_TYPE_ROW& i, const KEY_TYPE_COL& j) const
     {
       if (Row_pt.count(i) > 0)
       {
         // Get the pointer to the row and check the j key
-        InnerMapMixed *inner_map_mixed_pt = Row_pt.find(i)->second;
+        InnerMapMixed* inner_map_mixed_pt = Row_pt.find(i)->second;
         if (inner_map_mixed_pt->count(j) > 0)
         {
           return inner_map_mixed_pt->find(j)->second;
@@ -259,7 +259,7 @@ namespace oomph
     /// \short Dump all non-`zero' entries to file.
     /// Output is in the format
     ///   `i', `j', `entry[i][j]'
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       // NOTE:
       //------
@@ -407,7 +407,7 @@ namespace oomph
 
   protected:
     /// \short Return pointer to entry
-    VALUE_TYPE *entry_pt(const KEY_TYPE_ROW &i, const KEY_TYPE_COL &j)
+    VALUE_TYPE* entry_pt(const KEY_TYPE_ROW& i, const KEY_TYPE_COL& j)
     {
       // There's not a single entry in this row: Entry must be zero.
       if (Row_pt[i] == 0)
@@ -426,7 +426,7 @@ namespace oomph
 
     /// Here's the generalised matrix structure: A map of pointers to
     /// the maps that hold the entries in each row.
-    std::map<KEY_TYPE_ROW, std::map<KEY_TYPE_COL, VALUE_TYPE> *> Row_pt;
+    std::map<KEY_TYPE_ROW, std::map<KEY_TYPE_COL, VALUE_TYPE>*> Row_pt;
   };
 
   ///////////////////////////////////////////////////////////////////////
@@ -515,7 +515,7 @@ namespace oomph
     typedef typename InnerMap::const_iterator ConstInnerIt;
 
     /// Typedef to keep the code more readable
-    typedef std::map<KEY_TYPE, std::map<KEY_TYPE, VALUE_TYPE> *> OuterMap;
+    typedef std::map<KEY_TYPE, std::map<KEY_TYPE, VALUE_TYPE>*> OuterMap;
 
     /// Typedef to keep the code more readable
     typedef typename OuterMap::iterator OuterIt;
@@ -524,7 +524,7 @@ namespace oomph
     typedef typename OuterMap::const_iterator ConstOuterIt;
 
     /// Copy constructor
-    MapMatrix(const MapMatrix<KEY_TYPE, VALUE_TYPE> &map_mat)
+    MapMatrix(const MapMatrix<KEY_TYPE, VALUE_TYPE>& map_mat)
     {
       // Step through the row pointers
       for (ConstOuterIt it = map_mat.Row_pt.begin(); it != map_mat.Row_pt.end();
@@ -551,7 +551,7 @@ namespace oomph
     }
 
     /// Broken assignment operator
-    void operator=(const MapMatrix &)
+    void operator=(const MapMatrix&)
     {
       BrokenCopy::broken_assign("MapMatrix");
     }

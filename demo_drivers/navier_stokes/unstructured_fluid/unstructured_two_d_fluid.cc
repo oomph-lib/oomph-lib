@@ -54,10 +54,10 @@ class ElasticTriangleMesh :
 public:
   /// \short Constructor:
   ElasticTriangleMesh(
-    const std::string &node_file_name,
-    const std::string &element_file_name,
-    const std::string &poly_file_name,
-    TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+    const std::string& node_file_name,
+    const std::string& element_file_name,
+    const std::string& poly_file_name,
+    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
     TriangleMesh<ELEMENT>(
       node_file_name, element_file_name, poly_file_name, time_stepper_pt)
   {
@@ -77,7 +77,7 @@ public:
     unsigned n_node = this->nnode();
     for (unsigned j = 0; j < n_node; j++)
     {
-      Node *nod_pt = this->node_pt(j);
+      Node* nod_pt = this->node_pt(j);
 
       // Boundary 1 is left (inflow) boundary
       if (nod_pt->x(0) < 0.226)
@@ -122,7 +122,7 @@ namespace Global_Physical_Variables
   double Nu = 0.3;
 
   /// Constitutive law used to determine the mesh deformation
-  ConstitutiveLaw *Constitutive_law_pt = 0;
+  ConstitutiveLaw* Constitutive_law_pt = 0;
 
 } // namespace Global_Physical_Variables
 
@@ -144,7 +144,7 @@ public:
   ~UnstructuredFluidProblem() {}
 
   /// Access function for the fluid mesh
-  ElasticTriangleMesh<ELEMENT> *&fluid_mesh_pt()
+  ElasticTriangleMesh<ELEMENT>*& fluid_mesh_pt()
   {
     return Fluid_mesh_pt;
   }
@@ -153,11 +153,11 @@ public:
   void set_boundary_conditions();
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 private:
   /// Fluid mesh
-  ElasticTriangleMesh<ELEMENT> *Fluid_mesh_pt;
+  ElasticTriangleMesh<ELEMENT>* Fluid_mesh_pt;
 
 }; // end_of_problem_class
 
@@ -210,7 +210,7 @@ void UnstructuredFluidProblem<ELEMENT>::set_boundary_conditions()
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Get node
-      Node *nod_pt = Fluid_mesh_pt->boundary_node_pt(ibound, inod);
+      Node* nod_pt = Fluid_mesh_pt->boundary_node_pt(ibound, inod);
 
       // Pin velocity everywhere apart from outlet where we
       // have parallel outflow
@@ -230,7 +230,7 @@ void UnstructuredFluidProblem<ELEMENT>::set_boundary_conditions()
       for (unsigned i = 0; i < 2; i++)
       {
         // Pin the node
-        SolidNode *nod_pt = Fluid_mesh_pt->boundary_node_pt(ibound, inod);
+        SolidNode* nod_pt = Fluid_mesh_pt->boundary_node_pt(ibound, inod);
         nod_pt->pin_position(i);
 
         // Doc it as pinned
@@ -248,7 +248,7 @@ void UnstructuredFluidProblem<ELEMENT>::set_boundary_conditions()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(fluid_mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(fluid_mesh_pt()->element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -314,7 +314,7 @@ void UnstructuredFluidProblem<ELEMENT>::set_boundary_conditions()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void UnstructuredFluidProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void UnstructuredFluidProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];

@@ -63,20 +63,20 @@ namespace Global_Physical_Variables
   Vector<double> G(2);
 
   /// Pointer to film thickness at outflow on the lower wall
-  double *H_lo_pt;
+  double* H_lo_pt;
 
   /// Pointer to film thickness at outflow on the upper wall
-  double *H_up_pt;
+  double* H_up_pt;
 
   /// Pointer to y-position at inflow on the lower wall
-  double *Y_lo_pt;
+  double* Y_lo_pt;
 
   /// Pointer to y-position at inflow on the upper wall
-  double *Y_up_pt;
+  double* Y_up_pt;
 
   /// Set inflow velocity, based on spine heights at outflow
   /// and channel width at inflow
-  void inflow(const Vector<double> &x, Vector<double> &veloc)
+  void inflow(const Vector<double>& x, Vector<double>& veloc)
   {
 #ifdef PARANOID
     std::ostringstream error_stream;
@@ -155,7 +155,7 @@ class BrethertonElement : public ELEMENT
 public:
   /// \short Typedef for pointer (global) function that specifies the
   /// the inflow
-  typedef void (*InflowFctPt)(const Vector<double> &x, Vector<double> &veloc);
+  typedef void (*InflowFctPt)(const Vector<double>& x, Vector<double>& veloc);
 
   /// Constructor: Call the constructor of the underlying element
   BrethertonElement() : ELEMENT() {}
@@ -166,8 +166,8 @@ public:
   /// condition is to be applied and the function pointer to
   /// to the global function that defines the inflow
   void activate_inflow_dependency_on_external_data(
-    const Vector<Data *> &inflow_ext_data,
-    const unsigned &inflow_boundary,
+    const Vector<Data*>& inflow_ext_data,
+    const unsigned& inflow_boundary,
     InflowFctPt inflow_fct_pt)
   {
     // Copy data that affects the inflow
@@ -185,7 +185,7 @@ public:
 
   /// short Overload assign local equation numbers: Add the dependency
   /// on the external Data that affects the inflow profile
-  void assign_local_eqn_numbers(const bool &store_local_dof_pt)
+  void assign_local_eqn_numbers(const bool& store_local_dof_pt)
   {
     // Call the element's local equation numbering procedure first
     ELEMENT::assign_local_eqn_numbers(store_local_dof_pt);
@@ -203,7 +203,7 @@ public:
     for (unsigned i = 0; i < n_ext; i++)
     {
       // The external Data:
-      Data *data_pt = Inflow_ext_data[i];
+      Data* data_pt = Inflow_ext_data[i];
       // Number of values
       unsigned n_val = data_pt->nvalue();
       if (n_val > max_nvalue) max_nvalue = n_val;
@@ -219,7 +219,7 @@ public:
     for (unsigned i = 0; i < n_ext; i++)
     {
       // The external Data:
-      Data *data_pt = Inflow_ext_data[i];
+      Data* data_pt = Inflow_ext_data[i];
 
       // Loop over number of values:
       unsigned n_val = data_pt->nvalue();
@@ -252,7 +252,7 @@ public:
   /// of the underlying element and then adds the FD
   /// operations to evaluate the derivatives w.r.t. the Data values
   /// that affect the inflow.
-  void get_jacobian(Vector<double> &residuals, DenseMatrix<double> &jacobian)
+  void get_jacobian(Vector<double>& residuals, DenseMatrix<double>& jacobian)
   {
     // Loop over Data values that affect the inflow
     unsigned n_ext = Inflow_ext_data.size();
@@ -270,7 +270,7 @@ public:
     for (unsigned i = 0; i < n_ext; i++)
     {
       // Get Data item
-      Data *data_pt = Inflow_ext_data[i];
+      Data* data_pt = Inflow_ext_data[i];
 
       // Loop over values
       unsigned n_val = data_pt->nvalue();
@@ -283,7 +283,7 @@ public:
         if (local_eqn >= 0)
         {
           // get pointer to the data value
-          double *value_pt = data_pt->value_pt(ival);
+          double* value_pt = data_pt->value_pt(ival);
 
           // Backup Data value
           double backup = *value_pt;
@@ -334,7 +334,7 @@ private:
     unsigned n_nod = this->nnode();
     for (unsigned j = 0; j < n_nod; j++)
     {
-      Node *nod_pt = this->node_pt(j);
+      Node* nod_pt = this->node_pt(j);
 
       if (nod_pt->is_on_boundary(Inflow_boundary))
       {
@@ -367,7 +367,7 @@ private:
   }
 
   /// Storage for the external Data that affects the inflow
-  Vector<Data *> Inflow_ext_data;
+  Vector<Data*> Inflow_ext_data;
 
   /// \short Storage for the local equation numbers associated the Data
   /// values that affect the inflow
@@ -488,10 +488,10 @@ public:
   void actions_after_newton_solve() {}
 
   /// Fix pressure value l in element e to value p_value
-  void fix_pressure(const unsigned &e, const unsigned &l, const double &pvalue)
+  void fix_pressure(const unsigned& e, const unsigned& l, const double& pvalue)
   {
     // Fix the pressure at that element
-    dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e))
+    dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e))
       ->fix_pressure(l, pvalue);
   }
 
@@ -500,21 +500,21 @@ public:
   void activate_inflow_dependency();
 
   /// Run a parameter study; perform specified number of steps
-  void parameter_study(const unsigned &nsteps);
+  void parameter_study(const unsigned& nsteps);
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 private:
   /// Pointer to control element
-  ELEMENT *Control_element_pt;
+  ELEMENT* Control_element_pt;
 
   /// Trace file
   ofstream Trace_file;
 
   /// Pointer to bulk mesh
-  BrethertonSpineMesh<ELEMENT, SpineLineFluidInterfaceElement<ELEMENT>>
-    *Bulk_mesh_pt;
+  BrethertonSpineMesh<ELEMENT, SpineLineFluidInterfaceElement<ELEMENT>>*
+    Bulk_mesh_pt;
 };
 
 //====================================================================
@@ -544,8 +544,8 @@ BrethertonProblem<ELEMENT>::BrethertonProblem()
   double h = 0.1;
 
   // Create wall geom objects
-  GeomObject *lower_wall_pt = new StraightLine(-1.0);
-  GeomObject *upper_wall_pt = new StraightLine(1.0);
+  GeomObject* lower_wall_pt = new StraightLine(-1.0);
+  GeomObject* upper_wall_pt = new StraightLine(1.0);
 
   // Start coordinate on wall
   double xi0 = -4.0;
@@ -663,7 +663,7 @@ BrethertonProblem<ELEMENT>::BrethertonProblem()
   for (unsigned i = 0; i < n_bulk; i++)
   {
     // Cast to a fluid element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->bulk_element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->bulk_element_pt(i));
     // Set the Reynolds number, etc
     el_pt->re_pt() = &Global_Physical_Variables::Re;
     el_pt->re_st_pt() = &Global_Physical_Variables::ReSt;
@@ -676,8 +676,8 @@ BrethertonProblem<ELEMENT>::BrethertonProblem()
   for (unsigned i = 0; i < interface_element_pt_range; i++)
   {
     // Cast to a interface element
-    SpineLineFluidInterfaceElement<ELEMENT> *el_pt =
-      dynamic_cast<SpineLineFluidInterfaceElement<ELEMENT> *>(
+    SpineLineFluidInterfaceElement<ELEMENT>* el_pt =
+      dynamic_cast<SpineLineFluidInterfaceElement<ELEMENT>*>(
         Bulk_mesh_pt->interface_element_pt(i));
 
     // Set the Capillary number
@@ -700,7 +700,7 @@ template<class ELEMENT>
 void BrethertonProblem<ELEMENT>::activate_inflow_dependency()
 {
   // Spine heights that affect the inflow
-  Vector<Data *> outflow_spines(2);
+  Vector<Data*> outflow_spines(2);
 
   // First spine
   outflow_spines[0] = Bulk_mesh_pt->spine_pt(0)->spine_height_pt();
@@ -716,8 +716,8 @@ void BrethertonProblem<ELEMENT>::activate_inflow_dependency()
   for (unsigned e = 0; e < nel; e++)
   {
     // Get pointer to element
-    ELEMENT *el_pt =
-      dynamic_cast<ELEMENT *>(Bulk_mesh_pt->boundary_element_pt(ibound, e));
+    ELEMENT* el_pt =
+      dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(ibound, e));
     // Activate depency on inflow
     el_pt->activate_inflow_dependency_on_external_data(
       outflow_spines, ibound, &Global_Physical_Variables::inflow);
@@ -728,7 +728,7 @@ void BrethertonProblem<ELEMENT>::activate_inflow_dependency()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void BrethertonProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void BrethertonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -779,7 +779,7 @@ void BrethertonProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
 /// Parameter study
 //=============================================================================
 template<class ELEMENT>
-void BrethertonProblem<ELEMENT>::parameter_study(const unsigned &nsteps)
+void BrethertonProblem<ELEMENT>::parameter_study(const unsigned& nsteps)
 {
   // Increase maximum residual
   Problem::Max_residuals = 100.0;
@@ -874,7 +874,7 @@ void BrethertonProblem<ELEMENT>::parameter_study(const unsigned &nsteps)
 /// any command line arguments, we regard this as a validation run
 /// and perform only a single step.
 //======================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

@@ -53,7 +53,7 @@ namespace oomph
     ~CustomisedQPoissonElement(){};
 
     /// Overload output function
-    void output(std::ostream &output_file)
+    void output(std::ostream& output_file)
     {
       output_file << "Hello world" << std::endl;
     }

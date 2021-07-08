@@ -40,12 +40,12 @@ using namespace oomph;
 //========================================================================
 /// Driver
 //========================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Warped disk with specified amplitude and wavenumber for warping
   double epsilon = 0.1;
   unsigned n = 5;
-  WarpedCircularDisk *disk_pt = new WarpedCircularDisk(epsilon, n);
+  WarpedCircularDisk* disk_pt = new WarpedCircularDisk(epsilon, n);
 
   Vector<double> r(3);
   Vector<double> zeta(2);

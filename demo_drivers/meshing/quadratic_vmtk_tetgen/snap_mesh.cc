@@ -56,7 +56,7 @@ void demo_smoothing_with_linear_elasticity()
   string input_string;
 
   // Open input file
-  ifstream *input_file_pt =
+  ifstream* input_file_pt =
     new ifstream("short_coarse_mesh_files/boundary_enumeration.dat");
 
   // Check if it's been opened succesfully
@@ -148,7 +148,7 @@ void demo_smoothing_with_linear_elasticity()
   bool switch_normal;
 
   /// Storage for mesh
-  SolidTetgenMesh<TPVDElement<3, 3>> *Orig_mesh_pt;
+  SolidTetgenMesh<TPVDElement<3, 3>>* Orig_mesh_pt;
 
   // Loop over fluid and solid meshes
   for (unsigned do_solid = 0; do_solid < 2; do_solid++)
@@ -250,7 +250,7 @@ void demo_smoothing_with_linear_elasticity()
 
     // Create set containing the nodes whose displacements are contrained
     // (nodes on quadratic boundaries)
-    std::set<Node *> pinned_nodes;
+    std::set<Node*> pinned_nodes;
 
     if (do_solid == 1)
     {
@@ -340,7 +340,7 @@ void demo_smoothing_with_poisson()
   string input_string;
 
   // Open input file
-  ifstream *input_file_pt =
+  ifstream* input_file_pt =
     new ifstream("short_coarse_mesh_files/boundary_enumeration.dat");
 
   // Check if it's been opened succesfully
@@ -432,7 +432,7 @@ void demo_smoothing_with_poisson()
   bool switch_normal;
 
   /// Storage for mesh
-  SolidTetgenMesh<TPVDElement<3, 3>> *Orig_mesh_pt;
+  SolidTetgenMesh<TPVDElement<3, 3>>* Orig_mesh_pt;
 
   // Loop over fluid and solid meshes
   for (unsigned do_solid = 0; do_solid < 2; do_solid++)
@@ -534,7 +534,7 @@ void demo_smoothing_with_poisson()
 
     // Create set containing the nodes whose displacements are contrained
     // (nodes on quadratic boundaries)
-    std::set<Node *> pinned_nodes;
+    std::set<Node*> pinned_nodes;
 
     if (do_solid == 1)
     {
@@ -623,7 +623,7 @@ void demo_smoothing_with_nonlinear_elasticity()
   string input_string;
 
   // Open input file
-  ifstream *input_file_pt =
+  ifstream* input_file_pt =
     new ifstream("short_coarse_mesh_files/boundary_enumeration.dat");
 
   // Check if it's been opened succesfully
@@ -706,8 +706,8 @@ void demo_smoothing_with_nonlinear_elasticity()
   bool switch_normal;
 
   /// Storage for mesh and copy
-  SolidTetgenMesh<TPVDElement<3, 3>> *Orig_mesh_pt;
-  SolidTetgenMesh<TPVDElement<3, 3>> *Copy_of_mesh_pt;
+  SolidTetgenMesh<TPVDElement<3, 3>>* Orig_mesh_pt;
+  SolidTetgenMesh<TPVDElement<3, 3>>* Copy_of_mesh_pt;
 
   // Loop over fluid and solid meshes
   for (unsigned do_solid = 0; do_solid < 2; do_solid++)
@@ -846,7 +846,7 @@ void demo_smoothing_with_nonlinear_elasticity()
     unsigned nnod = Orig_mesh_pt->nnode();
     for (unsigned j = 0; j < nnod; j++)
     {
-      Node *nod_pt = Orig_mesh_pt->node_pt(j);
+      Node* nod_pt = Orig_mesh_pt->node_pt(j);
       node_file << nod_pt->x(0) << " " << nod_pt->x(1) << " " << nod_pt->x(2)
                 << " " << std::endl;
     }
@@ -868,7 +868,7 @@ void demo_smoothing_with_nonlinear_elasticity()
 /// Demonstrate how to update FSI fluid and solid meshes to
 /// quadratic representation of FSI interface.
 //========================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

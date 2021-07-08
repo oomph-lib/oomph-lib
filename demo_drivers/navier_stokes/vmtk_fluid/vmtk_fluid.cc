@@ -76,7 +76,7 @@ public:
   void actions_after_newton_solve() {}
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// Return total number of fluid inflow traction boundaries
   unsigned nfluid_inflow_traction_boundary()
@@ -101,11 +101,11 @@ private:
   void create_parallel_outflow_lagrange_elements();
 
   /// Bulk fluid mesh
-  TetgenMesh<ELEMENT> *Fluid_mesh_pt;
+  TetgenMesh<ELEMENT>* Fluid_mesh_pt;
 
   /// \short Meshes of FaceElements imposing parallel outflow
   /// and a pressure at the in/outflow
-  Vector<Mesh *> Parallel_outflow_lagrange_multiplier_mesh_pt;
+  Vector<Mesh*> Parallel_outflow_lagrange_multiplier_mesh_pt;
 
   /// \short IDs of fluid mesh boundaries along which inflow boundary conditions
   /// are applied
@@ -223,7 +223,7 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
       unsigned num_nod = Fluid_mesh_pt->nboundary_node(b);
       for (unsigned inod = 0; inod < num_nod; inod++)
       {
-        Node *nod_pt = Fluid_mesh_pt->boundary_node_pt(b, inod);
+        Node* nod_pt = Fluid_mesh_pt->boundary_node_pt(b, inod);
 
         // Pin all velocities
         nod_pt->pin(0);
@@ -262,7 +262,7 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
         if (is_in_or_outflow_node)
         {
           // Cast to a boundary node
-          BoundaryNodeBase *bnod_pt = dynamic_cast<BoundaryNodeBase *>(
+          BoundaryNodeBase* bnod_pt = dynamic_cast<BoundaryNodeBase*>(
             Fluid_mesh_pt->boundary_node_pt(b, inod));
 
           // What's the index of the first Lagrange multiplier
@@ -287,7 +287,7 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Fluid_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Fluid_mesh_pt->element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Parameters::Re;
@@ -334,14 +334,14 @@ void UnstructuredFluidProblem<
       for (unsigned e = 0; e < n_element; e++)
       {
         // Get pointer to the bulk element that is adjacent to boundary b
-        ELEMENT *bulk_elem_pt =
-          dynamic_cast<ELEMENT *>(Fluid_mesh_pt->boundary_element_pt(b, e));
+        ELEMENT* bulk_elem_pt =
+          dynamic_cast<ELEMENT*>(Fluid_mesh_pt->boundary_element_pt(b, e));
 
         // What is the index of the face of the element e along boundary b
         int face_index = Fluid_mesh_pt->face_index_at_boundary(b, e);
 
         // Build the corresponding lagrange element
-        ImposeParallelOutflowElement<ELEMENT> *el_pt =
+        ImposeParallelOutflowElement<ELEMENT>* el_pt =
           new ImposeParallelOutflowElement<ELEMENT>(bulk_elem_pt, face_index);
 
         // Add it to the mesh
@@ -369,7 +369,7 @@ void UnstructuredFluidProblem<
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void UnstructuredFluidProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void UnstructuredFluidProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -391,7 +391,7 @@ void UnstructuredFluidProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
 //=============start_main=================================================
 /// Demonstrate how to solve an unstructured 3D fluids problem
 //========================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

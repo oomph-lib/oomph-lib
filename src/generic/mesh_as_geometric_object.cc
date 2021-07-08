@@ -66,8 +66,8 @@ namespace oomph
     /// right type as selected
     /// by Default_sample_point_container_version
     void create_sample_point_container_parameters(
-      Mesh *mesh_pt,
-      SamplePointContainerParameters *&sample_point_container_parameters_pt)
+      Mesh* mesh_pt,
+      SamplePointContainerParameters*& sample_point_container_parameters_pt)
     {
       switch (Default_sample_point_container_version)
       {

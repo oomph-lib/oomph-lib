@@ -66,7 +66,7 @@ namespace Global_Physical_Variables
 
 namespace WallFunction
 {
-  void normal(const Vector<double> &x, Vector<double> &normal)
+  void normal(const Vector<double>& x, Vector<double>& normal)
   {
     // Calculate theta
     double theta = std::atan2(x[1], x[0]);
@@ -84,17 +84,17 @@ class AxialSpineQuarterTubeMesh :
   public SpineMesh
 {
   /// Vector of pointers to element in the fluid layer
-  Vector<GeneralisedElement *> Bulk_element_pt;
+  Vector<GeneralisedElement*> Bulk_element_pt;
 
   /// Vector of pointers to interface elements
-  Vector<FiniteElement *> Interface_element_pt;
+  Vector<FiniteElement*> Interface_element_pt;
 
   /// Vector of pointers to interface elements
-  Vector<FiniteElement *> Interface_edge_element_pt;
+  Vector<FiniteElement*> Interface_edge_element_pt;
 
 public:
   /// Access functions for pointers to interface elements
-  FiniteElement *&interface_element_pt(const unsigned long &i)
+  FiniteElement*& interface_element_pt(const unsigned long& i)
   {
     return Interface_element_pt[i];
   }
@@ -106,7 +106,7 @@ public:
   }
 
   /// Access functions for pointers to interface elements
-  FiniteElement *&interface_edge_element_pt(const unsigned long &i)
+  FiniteElement*& interface_edge_element_pt(const unsigned long& i)
   {
     return Interface_edge_element_pt[i];
   }
@@ -117,13 +117,13 @@ public:
     return Interface_edge_element_pt.size();
   }
 
-  Vector<GeneralisedElement *> &bulk_element_pt()
+  Vector<GeneralisedElement*>& bulk_element_pt()
   {
     return Bulk_element_pt;
   }
 
   /// Access functions for pointers to elements in bulk
-  GeneralisedElement *&bulk_element_pt(const unsigned long &i)
+  GeneralisedElement*& bulk_element_pt(const unsigned long& i)
   {
     return Bulk_element_pt[i];
   }
@@ -136,12 +136,12 @@ public:
 
   /// Constructor
   AxialSpineQuarterTubeMesh(
-    GeomObject *wall_pt,
-    const Vector<double> &xi_lo,
-    const double &fract_mid,
-    const Vector<double> &xi_hi,
-    const unsigned &nlayer,
-    TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+    GeomObject* wall_pt,
+    const Vector<double>& xi_lo,
+    const double& fract_mid,
+    const Vector<double>& xi_hi,
+    const unsigned& nlayer,
+    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
     QuarterTubeMesh<ELEMENT>(
       wall_pt, xi_lo, fract_mid, xi_hi, nlayer, time_stepper_pt),
 
@@ -173,12 +173,12 @@ public:
         for (unsigned n = 0; n < (n_p * n_p); n++)
         {
           // Get pointer to the node
-          SpineNode *nod_pt = element_node_pt(e, n);
+          SpineNode* nod_pt = element_node_pt(e, n);
           // If the node has no spine, create one
           if (nod_pt->spine_pt() == 0)
           {
             // Create a new spine of length 2
-            Spine *new_spine_pt = new Spine(2.0);
+            Spine* new_spine_pt = new Spine(2.0);
             // Add it to the mesh
             Spine_pt.push_back(new_spine_pt);
             nod_pt->spine_pt() = new_spine_pt;
@@ -191,7 +191,7 @@ public:
           // Loop up the spine and set the other nodes in the element
           for (unsigned m = 1; m < n_p; m++)
           {
-            SpineNode *nod2_pt = element_node_pt(e, (n_p * n_p) * m + n);
+            SpineNode* nod2_pt = element_node_pt(e, (n_p * n_p) * m + n);
             nod2_pt->spine_pt() = nod_pt->spine_pt();
             nod2_pt->fraction() = nod2_pt->x(2) / 2.0;
             nod2_pt->spine_mesh_pt() = this;
@@ -201,7 +201,7 @@ public:
     }
 
     double layer_width = 2.0 / (double)n_layer;
-    FiniteElement *interface_element_pt = 0;
+    FiniteElement* interface_element_pt = 0;
 
     // Loop over the remaining layers
     for (unsigned l = 1; l < n_layer; l++)
@@ -235,12 +235,12 @@ public:
           for (unsigned n = 0; n < (n_p * n_p); n++)
           {
             // Get pointer to the spine of the nodes
-            Spine *spine_pt = element_node_pt(e, n)->spine_pt();
+            Spine* spine_pt = element_node_pt(e, n)->spine_pt();
 
             // Loop up the spine and set the other nodes in the element
             for (unsigned m = 1; m < n_p; m++)
             {
-              SpineNode *nod_pt = element_node_pt(e, (n_p * n_p) * m + n);
+              SpineNode* nod_pt = element_node_pt(e, (n_p * n_p) * m + n);
               nod_pt->spine_pt() = spine_pt;
               nod_pt->fraction() = nod_pt->x(2) / 2.0;
               nod_pt->spine_mesh_pt() = this;
@@ -270,29 +270,29 @@ public:
             }
 
             // Now if we have a match make the element
-            FluidInterfaceBoundingElement *interface_edge_element_pt = 0;
+            FluidInterfaceBoundingElement* interface_edge_element_pt = 0;
             if (adjacent[0])
             {
               interface_edge_element_pt =
-                dynamic_cast<INTERFACE_ELEMENT *>(interface_element_pt)
+                dynamic_cast<INTERFACE_ELEMENT*>(interface_element_pt)
                   ->make_bounding_element(-2);
             }
             else if (adjacent[1])
             {
               interface_edge_element_pt =
-                dynamic_cast<INTERFACE_ELEMENT *>(interface_element_pt)
+                dynamic_cast<INTERFACE_ELEMENT*>(interface_element_pt)
                   ->make_bounding_element(1);
             }
             else if (adjacent[2])
             {
               interface_edge_element_pt =
-                dynamic_cast<INTERFACE_ELEMENT *>(interface_element_pt)
+                dynamic_cast<INTERFACE_ELEMENT*>(interface_element_pt)
                   ->make_bounding_element(2);
             }
             else if (adjacent[3])
             {
               interface_edge_element_pt =
-                dynamic_cast<INTERFACE_ELEMENT *>(interface_element_pt)
+                dynamic_cast<INTERFACE_ELEMENT*>(interface_element_pt)
                   ->make_bounding_element(-1);
             }
 
@@ -300,15 +300,15 @@ public:
             {
               Element_pt.push_back(interface_edge_element_pt);
               Interface_edge_element_pt.push_back(interface_edge_element_pt);
-              dynamic_cast<FluidInterfaceBoundingElement *>(
+              dynamic_cast<FluidInterfaceBoundingElement*>(
                 interface_edge_element_pt)
                 ->wall_unit_normal_fct_pt() = WallFunction::normal;
               // Set the contact angle
-              dynamic_cast<FluidInterfaceBoundingElement *>(
+              dynamic_cast<FluidInterfaceBoundingElement*>(
                 interface_edge_element_pt)
                 ->set_contact_angle(&Global_Physical_Variables::Angle);
               // and pass the capillary number
-              dynamic_cast<FluidInterfaceBoundingElement *>(
+              dynamic_cast<FluidInterfaceBoundingElement*>(
                 interface_edge_element_pt)
                 ->ca_pt() = &Global_Physical_Variables::Ca;
             }
@@ -383,7 +383,7 @@ public:
   }
 
   /// Update nodal positions in response to spine changes
-  virtual void spine_node_update(SpineNode *spine_node_pt)
+  virtual void spine_node_update(SpineNode* spine_node_pt)
   {
     // Get fraction along the spine
     double W = spine_node_pt->fraction();
@@ -402,9 +402,9 @@ class FreeSurfaceRotationProblem : public Problem
 {
 public:
   /// Constructor: Pass DocInfo object and target errors
-  FreeSurfaceRotationProblem(DocInfo &doc_info,
-                             const double &min_error_target,
-                             const double &max_error_target);
+  FreeSurfaceRotationProblem(DocInfo& doc_info,
+                             const double& min_error_target,
+                             const double& max_error_target);
 
   /// Destructor (empty)
   ~FreeSurfaceRotationProblem() {}
@@ -436,12 +436,11 @@ public:
 
   /// \short Overload generic access function by one that returns
   /// a pointer to the specific  mesh
-  AxialSpineQuarterTubeMesh<ELEMENT, SpineSurfaceFluidInterfaceElement<ELEMENT>>
-    *mesh_pt()
+  AxialSpineQuarterTubeMesh<ELEMENT, SpineSurfaceFluidInterfaceElement<ELEMENT>>* mesh_pt()
   {
     return dynamic_cast<
       AxialSpineQuarterTubeMesh<ELEMENT,
-                                SpineSurfaceFluidInterfaceElement<ELEMENT>> *>(
+                                SpineSurfaceFluidInterfaceElement<ELEMENT>>*>(
       Problem::mesh_pt());
   }
 
@@ -456,12 +455,12 @@ private:
 //========================================================================
 template<class ELEMENT>
 FreeSurfaceRotationProblem<ELEMENT>::FreeSurfaceRotationProblem(
-  DocInfo &doc_info,
-  const double &min_error_target,
-  const double &max_error_target) :
+  DocInfo& doc_info,
+  const double& min_error_target,
+  const double& max_error_target) :
   Doc_info(doc_info)
 {
-  Data *Pext_pt = new Data(1);
+  Data* Pext_pt = new Data(1);
   Pext_pt->pin(0);
   Pext_pt->set_value(0, 0.0);
 
@@ -475,7 +474,7 @@ FreeSurfaceRotationProblem<ELEMENT>::FreeSurfaceRotationProblem(
 
   // Create geometric objects: Elliptical tube with half axes = radius = 1.0
   double radius = 1.0;
-  GeomObject *Wall_pt = new EllipticalTube(radius, radius);
+  GeomObject* Wall_pt = new EllipticalTube(radius, radius);
 
   // Boundaries on object
   Vector<double> xi_lo(2);
@@ -503,7 +502,7 @@ FreeSurfaceRotationProblem<ELEMENT>::FreeSurfaceRotationProblem(
       Wall_pt, xi_lo, frac_mid, xi_hi, nlayer);
 
   // Set error estimator
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   mesh_pt()->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Error targets for adaptive refinement
@@ -567,7 +566,7 @@ FreeSurfaceRotationProblem<ELEMENT>::FreeSurfaceRotationProblem(
       if (n == 0)
       {
         // Pin one spine heights on the wall
-        static_cast<SpineNode *>(mesh_pt()->boundary_node_pt(b, n))
+        static_cast<SpineNode*>(mesh_pt()->boundary_node_pt(b, n))
           ->spine_pt()
           ->spine_height_pt()
           ->pin(0);
@@ -583,7 +582,7 @@ FreeSurfaceRotationProblem<ELEMENT>::FreeSurfaceRotationProblem(
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the Reynolds number, etc
     el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -597,8 +596,8 @@ FreeSurfaceRotationProblem<ELEMENT>::FreeSurfaceRotationProblem(
   unsigned n_interface = mesh_pt()->ninterface_element();
   for (unsigned e = 0; e < n_interface; e++)
   {
-    SpineSurfaceFluidInterfaceElement<ELEMENT> *el_pt =
-      dynamic_cast<SpineSurfaceFluidInterfaceElement<ELEMENT> *>(
+    SpineSurfaceFluidInterfaceElement<ELEMENT>* el_pt =
+      dynamic_cast<SpineSurfaceFluidInterfaceElement<ELEMENT>*>(
         mesh_pt()->interface_element_pt(e));
 
     // set the capillary number
@@ -616,7 +615,7 @@ FreeSurfaceRotationProblem<ELEMENT>::FreeSurfaceRotationProblem(
   for (unsigned j = 0; j < n_nod; j++)
   {
     using namespace Global_Physical_Variables;
-    Node *node_pt = mesh_pt()->node_pt(j);
+    Node* node_pt = mesh_pt()->node_pt(j);
     // Recover coordinates
     double x = node_pt->x(0);
     double y = node_pt->x(1);
@@ -665,7 +664,7 @@ void FreeSurfaceRotationProblem<ELEMENT>::doc_solution()
 /// any command line arguments, we regard this as a validation run
 /// and perform only a single adaptation
 //=====================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

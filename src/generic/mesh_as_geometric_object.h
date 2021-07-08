@@ -69,8 +69,8 @@ namespace oomph
     /// \short "Factory" for SamplePointContainerParameters of the right type as
     /// selected by Default_sample_point_container_version
     extern void create_sample_point_container_parameters(
-      Mesh *mesh_pt,
-      SamplePointContainerParameters *&sample_point_container_parameters_pt);
+      Mesh* mesh_pt,
+      SamplePointContainerParameters*& sample_point_container_parameters_pt);
 
   } // namespace MeshAsGeomObject_Helper
 
@@ -95,21 +95,21 @@ namespace oomph
   private:
     /// Helper function to actually build the thing
     void build_it(
-      SamplePointContainerParameters *sample_point_container_parameters_pt)
+      SamplePointContainerParameters* sample_point_container_parameters_pt)
     {
       Mesh_pt = sample_point_container_parameters_pt->mesh_pt();
-      if (dynamic_cast<RefineableBinArrayParameters *>(
+      if (dynamic_cast<RefineableBinArrayParameters*>(
             sample_point_container_parameters_pt) != 0)
       {
         Sample_point_container_version = UseRefineableBinArray;
       }
-      else if (dynamic_cast<NonRefineableBinArrayParameters *>(
+      else if (dynamic_cast<NonRefineableBinArrayParameters*>(
                  sample_point_container_parameters_pt) != 0)
       {
         Sample_point_container_version = UseNonRefineableBinArray;
       }
 #ifdef OOMPH_HAS_CGAL
-      else if (dynamic_cast<CGALSamplePointContainerParameters *>(
+      else if (dynamic_cast<CGALSamplePointContainerParameters*>(
                  sample_point_container_parameters_pt) != 0)
       {
         Sample_point_container_version = UseCGALSamplePointContainer;
@@ -180,7 +180,7 @@ namespace oomph
 
       // Create temporary storage for geometric Data (don't count
       // Data twice!
-      std::set<Data *> tmp_geom_data;
+      std::set<Data*> tmp_geom_data;
 
       // Copy all the elements in the mesh into local storage
       // N.B. elements must be able to have a geometric object representation.
@@ -190,7 +190,7 @@ namespace oomph
       {
         // (Try to) cast to a finite element:
         Sub_geom_object_pt[e] =
-          dynamic_cast<FiniteElement *>(Mesh_pt->element_pt(e));
+          dynamic_cast<FiniteElement*>(Mesh_pt->element_pt(e));
 
 #ifdef PARANOID
         if (Sub_geom_object_pt[e] == 0)
@@ -216,7 +216,7 @@ namespace oomph
       // Now copy unique geom Data values across into vector
       unsigned ngeom = tmp_geom_data.size();
       Geom_data_pt.resize(ngeom);
-      typedef std::set<Data *>::iterator IT;
+      typedef std::set<Data*>::iterator IT;
       unsigned count = 0;
       for (IT it = tmp_geom_data.begin(); it != tmp_geom_data.end(); it++)
       {
@@ -260,23 +260,23 @@ namespace oomph
     }
 
     /// \short Vector of pointers to Data items that affects the object's shape
-    Vector<Data *> Geom_data_pt;
+    Vector<Data*> Geom_data_pt;
 
     /// Internal storage for the elements that constitute the object
-    Vector<FiniteElement *> Sub_geom_object_pt;
+    Vector<FiniteElement*> Sub_geom_object_pt;
 
     /// \short Pointer to the sample point container
-    SamplePointContainer *Sample_point_container_pt;
+    SamplePointContainer* Sample_point_container_pt;
 
 #ifdef OOMPH_HAS_MPI
 
     /// Communicator
-    OomphCommunicator *Communicator_pt;
+    OomphCommunicator* Communicator_pt;
 
 #endif
 
     /// Pointer to mesh
-    Mesh *Mesh_pt;
+    Mesh* Mesh_pt;
 
     /// \short Which version of the sample point container
     /// are we using?
@@ -284,13 +284,13 @@ namespace oomph
 
   public:
     /// \short Pointer to the sample point container
-    SamplePointContainer *sample_point_container_pt() const
+    SamplePointContainer* sample_point_container_pt() const
     {
       return Sample_point_container_pt;
     }
 
     /// Return pointer to e-th finite element
-    FiniteElement *finite_element_pt(const unsigned &e)
+    FiniteElement* finite_element_pt(const unsigned& e)
     {
       return Sub_geom_object_pt[e];
     }
@@ -309,10 +309,10 @@ namespace oomph
     }
 
     ///\short Constructor
-    MeshAsGeomObject(Mesh *const &mesh_pt) : GeomObject()
+    MeshAsGeomObject(Mesh* const& mesh_pt) : GeomObject()
     {
       // Create default parameters
-      SamplePointContainerParameters *sample_point_container_parameters_pt = 0;
+      SamplePointContainerParameters* sample_point_container_parameters_pt = 0;
       MeshAsGeomObject_Helper::create_sample_point_container_parameters(
         mesh_pt, sample_point_container_parameters_pt);
 
@@ -323,7 +323,7 @@ namespace oomph
 
     ///\short Constructor
     MeshAsGeomObject(
-      SamplePointContainerParameters *sample_point_container_parameters_pt) :
+      SamplePointContainerParameters* sample_point_container_parameters_pt) :
       GeomObject()
     {
       build_it(sample_point_container_parameters_pt);
@@ -339,13 +339,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    MeshAsGeomObject(const MeshAsGeomObject &)
+    MeshAsGeomObject(const MeshAsGeomObject&)
     {
       BrokenCopy::broken_copy("MeshAsGeomObject");
     }
 
     /// Broken assignment operator
-    void operator=(const MeshAsGeomObject &)
+    void operator=(const MeshAsGeomObject&)
     {
       BrokenCopy::broken_assign("MeshAsGeomObject");
     }
@@ -358,7 +358,7 @@ namespace oomph
 
     /// \short Return pointer to the j-th Data item that the object's
     /// shape depends on
-    Data *geom_data_pt(const unsigned &j)
+    Data* geom_data_pt(const unsigned& j)
     {
       return Geom_data_pt[j];
     }
@@ -373,10 +373,10 @@ namespace oomph
     /// argument "s" is used as the initial guess. However, this doesn't
     /// make sense here and the argument is ignored (though a warning
     /// is issued when the code is compiled in PARANOID setting)
-    void locate_zeta(const Vector<double> &zeta,
-                     GeomObject *&sub_geom_object_pt,
-                     Vector<double> &s,
-                     const bool &use_coordinate_as_initial_guess = false)
+    void locate_zeta(const Vector<double>& zeta,
+                     GeomObject*& sub_geom_object_pt,
+                     Vector<double>& s,
+                     const bool& use_coordinate_as_initial_guess = false)
     {
 #ifdef PARANOID
       if (use_coordinate_as_initial_guess)
@@ -396,7 +396,7 @@ namespace oomph
     /// zeta. This provides an (expensive!) default implementation in which we
     /// loop over all the constituent sub-objects and check if they contain zeta
     /// and then evaluate their position() function.
-    void position(const Vector<double> &zeta, Vector<double> &r) const
+    void position(const Vector<double>& zeta, Vector<double>& r) const
     {
       // Call position function at current timestep:
       unsigned t = 0;
@@ -408,19 +408,19 @@ namespace oomph
     /// timestep. This provides an (expensive!) default implementation in which
     /// we loop over all the constituent sub-objects and check if they
     /// contain zeta and then evaluate their position() function.
-    void position(const unsigned &t,
-                  const Vector<double> &zeta,
-                  Vector<double> &r) const
+    void position(const unsigned& t,
+                  const Vector<double>& zeta,
+                  Vector<double>& r) const
     {
       // Storage for the GeomObject that contains the zeta coordinate
       // and the intrinsic coordinate within it.
-      GeomObject *sub_geom_object_pt;
+      GeomObject* sub_geom_object_pt;
       const unsigned n_lagrangian = this->nlagrangian();
       Vector<double> s(n_lagrangian);
 
       // Find the sub object containing zeta, and the local intrinsic coordinate
       // within it
-      const_cast<MeshAsGeomObject *>(this)->locate_zeta(
+      const_cast<MeshAsGeomObject*>(this)->locate_zeta(
         zeta, sub_geom_object_pt, s);
       if (sub_geom_object_pt == 0)
       {
@@ -442,7 +442,7 @@ namespace oomph
     } // end of position
 
     /// Return the derivative of the position
-    void dposition(const Vector<double> &xi, DenseMatrix<double> &drdxi) const
+    void dposition(const Vector<double>& xi, DenseMatrix<double>& drdxi) const
     {
       throw OomphLibError("dposition() not implemented",
                           OOMPH_CURRENT_FUNCTION,

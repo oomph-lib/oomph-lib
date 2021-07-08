@@ -56,7 +56,7 @@ namespace oomph
     /// \short Pointer to the ratio, \f$ Q \f$ , of the stress used to
     /// non-dimensionalise the fluid stresses to the stress used to
     /// non-dimensionalise the solid stresses.
-    double *Q_pt;
+    double* Q_pt;
 
     /// \short Static default value for the ratio of stress scales
     /// used in the fluid and solid equations (default is 1.0)
@@ -71,13 +71,13 @@ namespace oomph
     // fill_in_contribution_to_residuals in fill_in_contribution_to_jacobian
     // which causes all kinds of pain if overloading later on
     void fill_in_contribution_to_residuals_helmholtz_traction(
-      Vector<double> &residuals);
+      Vector<double>& residuals);
 
   public:
     /// \short Constructor, which takes a "bulk" element and the
     /// value of the index and its limit
     TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement(
-      FiniteElement *const &element_pt, const int &face_index) :
+      FiniteElement* const& element_pt, const int& face_index) :
       FaceGeometry<ELASTICITY_BULK_ELEMENT>(),
       FaceElement(),
       Q_pt(&Default_Q_Value)
@@ -89,14 +89,14 @@ namespace oomph
 #ifdef PARANOID
       {
         // Check that the element is not a refineable 3d element
-        ELASTICITY_BULK_ELEMENT *elem_pt =
-          dynamic_cast<ELASTICITY_BULK_ELEMENT *>(element_pt);
+        ELASTICITY_BULK_ELEMENT* elem_pt =
+          dynamic_cast<ELASTICITY_BULK_ELEMENT*>(element_pt);
         // If it's three-d
         if (elem_pt->dim() == 3)
         {
           // Is it refineable
-          RefineableElement *ref_el_pt =
-            dynamic_cast<RefineableElement *>(elem_pt);
+          RefineableElement* ref_el_pt =
+            dynamic_cast<RefineableElement*>(elem_pt);
           if (ref_el_pt != 0)
           {
             if (this->has_hanging_nodes())
@@ -120,8 +120,8 @@ namespace oomph
       unsigned n_dim = element_pt->nodal_dimension();
 
       // Find the index at which the displacement unknowns are stored
-      ELASTICITY_BULK_ELEMENT *cast_element_pt =
-        dynamic_cast<ELASTICITY_BULK_ELEMENT *>(element_pt);
+      ELASTICITY_BULK_ELEMENT* cast_element_pt =
+        dynamic_cast<ELASTICITY_BULK_ELEMENT*>(element_pt);
       this->U_index_time_harmonic_linear_elasticity_helmholtz_traction.resize(
         n_dim);
       for (unsigned i = 0; i < n_dim; i++)
@@ -132,14 +132,14 @@ namespace oomph
     }
 
     /// Return the residuals
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       fill_in_contribution_to_residuals_helmholtz_traction(residuals);
     }
 
     /// Fill in contribution from Jacobian
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       // Call the residuals
       fill_in_contribution_to_residuals_helmholtz_traction(residuals);
@@ -153,20 +153,20 @@ namespace oomph
     /// \f$ Q = (\omega a)^2 \rho/E \f$, i.e. the
     /// ratio between the inertial fluid stress and the solid's elastic
     /// modulus E.
-    const double &q() const
+    const double& q() const
     {
       return *Q_pt;
     }
 
     /// \short Return a pointer the ratio of stress scales used to
     /// non-dimensionalise the fluid and solid equations.
-    double *&q_pt()
+    double*& q_pt()
     {
       return Q_pt;
     }
 
     /// \short Output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       /// Dummy
       unsigned nplot = 0;
@@ -175,7 +175,7 @@ namespace oomph
 
     /// \short Output function: Plot traction etc at Gauss points
     /// nplot is ignored.
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       // Dimension
       unsigned n_dim = this->nodal_dimension();
@@ -209,8 +209,8 @@ namespace oomph
         interpolated_zeta(s_int, zeta);
 
         // Get external element for potential
-        HELMHOLTZ_BULK_ELEMENT *ext_el_pt =
-          dynamic_cast<HELMHOLTZ_BULK_ELEMENT *>(external_element_pt(0, ipt));
+        HELMHOLTZ_BULK_ELEMENT* ext_el_pt =
+          dynamic_cast<HELMHOLTZ_BULK_ELEMENT*>(external_element_pt(0, ipt));
         Vector<double> s_ext(external_element_local_coord(0, ipt));
         std::complex<double> u_helmholtz =
           ext_el_pt->interpolated_u_pml_helmholtz(s_ext);
@@ -239,13 +239,13 @@ namespace oomph
     }
 
     /// \short C_style output function
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FaceGeometry<ELASTICITY_BULK_ELEMENT>::output(file_pt);
     }
 
     /// \short C-style output function
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       FaceGeometry<ELASTICITY_BULK_ELEMENT>::output(file_pt, n_plot);
     }
@@ -263,11 +263,11 @@ namespace oomph
     /// the flux over the artificial boundary. Also output the
     /// flux  in the specified output file if it's open.
     std::complex<double> global_flux_contribution_from_solid(
-      std::ofstream &outfile)
+      std::ofstream& outfile)
     {
       // pointer to the corresponding elasticity bulk element
-      ELASTICITY_BULK_ELEMENT *bulk_elem_pt =
-        dynamic_cast<ELASTICITY_BULK_ELEMENT *>(this->bulk_element_pt());
+      ELASTICITY_BULK_ELEMENT* bulk_elem_pt =
+        dynamic_cast<ELASTICITY_BULK_ELEMENT*>(this->bulk_element_pt());
 
       // get the dim of the bulk and local nodes
       const unsigned bulk_dim = bulk_elem_pt->dim();
@@ -353,7 +353,7 @@ namespace oomph
     /// the flux over the artificial boundary. Also output the
     /// flux  in the specified output file if it's open.
     std::complex<double> global_flux_contribution_from_helmholtz(
-      std::ofstream &outfile)
+      std::ofstream& outfile)
     {
       // Get the dim of this element
       const unsigned local_dim = this->dim();
@@ -385,8 +385,8 @@ namespace oomph
         Vector<double> s_bulk(local_coordinate_in_bulk(s));
 
         // Get external element for potential
-        HELMHOLTZ_BULK_ELEMENT *ext_el_pt =
-          dynamic_cast<HELMHOLTZ_BULK_ELEMENT *>(external_element_pt(0, ipt));
+        HELMHOLTZ_BULK_ELEMENT* ext_el_pt =
+          dynamic_cast<HELMHOLTZ_BULK_ELEMENT*>(external_element_pt(0, ipt));
 
         // number of nodes in ext element
         unsigned nnode_ext = ext_el_pt->nnode();
@@ -499,7 +499,7 @@ namespace oomph
     ELASTICITY_BULK_ELEMENT,
     HELMHOLTZ_BULK_ELEMENT>::
     fill_in_contribution_to_residuals_helmholtz_traction(
-      Vector<double> &residuals)
+      Vector<double>& residuals)
   {
     // Find out how many nodes there are
     unsigned n_node = nnode();
@@ -619,8 +619,8 @@ namespace oomph
       double W = w * sqrt(Adet);
 
       // Get bulk element for potential
-      HELMHOLTZ_BULK_ELEMENT *ext_el_pt =
-        dynamic_cast<HELMHOLTZ_BULK_ELEMENT *>(external_element_pt(0, ipt));
+      HELMHOLTZ_BULK_ELEMENT* ext_el_pt =
+        dynamic_cast<HELMHOLTZ_BULK_ELEMENT*>(external_element_pt(0, ipt));
       Vector<double> s_ext(external_element_local_coord(0, ipt));
 
       // Traction: Pressure is proportional to POSITIVE potential
@@ -679,11 +679,11 @@ namespace oomph
     /// \short Constructor, takes the pointer to the "bulk" element and the
     /// face index identifying the face to which the element is attached.
     PMLHelmholtzFluxFromNormalDisplacementBCElement(
-      FiniteElement *const &bulk_el_pt, const int &face_index);
+      FiniteElement* const& bulk_el_pt, const int& face_index);
 
     /// Broken copy constructor
     PMLHelmholtzFluxFromNormalDisplacementBCElement(
-      const PMLHelmholtzFluxFromNormalDisplacementBCElement &dummy)
+      const PMLHelmholtzFluxFromNormalDisplacementBCElement& dummy)
     {
       BrokenCopy::broken_copy(
         "PMLHelmholtzFluxFromNormalDisplacementBCElement");
@@ -703,7 +703,7 @@ namespace oomph
        }*/
 
     /// Add the element's contribution to its residual vector
-    inline void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    inline void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Call the generic residuals function with flag set to 0
       // using a dummy matrix argument
@@ -713,8 +713,8 @@ namespace oomph
 
     /// \short Add the element's contribution to its residual vector and its
     /// Jacobian matrix
-    inline void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                                 DenseMatrix<double> &jacobian)
+    inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                                 DenseMatrix<double>& jacobian)
     {
       // Call the generic routine with the flag set to 1
       fill_in_generic_residual_contribution_helmholtz_flux_from_displacement(
@@ -725,7 +725,7 @@ namespace oomph
     }
 
     /// Output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       // Dummy
       unsigned nplot = 0;
@@ -733,7 +733,7 @@ namespace oomph
     }
 
     /// Output function: flux etc at Gauss points; n_plot is ignored.
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       outfile << "ZONE\n";
 
@@ -760,8 +760,8 @@ namespace oomph
         interpolated_zeta(s_int, zeta);
 
         // Get displacements
-        ELASTICITY_BULK_ELEMENT *ext_el_pt =
-          dynamic_cast<ELASTICITY_BULK_ELEMENT *>(external_element_pt(0, ipt));
+        ELASTICITY_BULK_ELEMENT* ext_el_pt =
+          dynamic_cast<ELASTICITY_BULK_ELEMENT*>(external_element_pt(0, ipt));
         Vector<double> s_ext(external_element_local_coord(0, ipt));
         Vector<std::complex<double>> displ(2);
         ext_el_pt->interpolated_u_time_harmonic_linear_elasticity(s_ext, displ);
@@ -794,13 +794,13 @@ namespace oomph
     }
 
     /// C-style output function
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FaceGeometry<HELMHOLTZ_BULK_ELEMENT>::output(file_pt);
     }
 
     /// C-style output function
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       FaceGeometry<HELMHOLTZ_BULK_ELEMENT>::output(file_pt, n_plot);
     }
@@ -809,9 +809,9 @@ namespace oomph
     /// \short Function to compute the shape and test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
-    inline double shape_and_test(const Vector<double> &s,
-                                 Shape &psi,
-                                 Shape &test) const
+    inline double shape_and_test(const Vector<double>& s,
+                                 Shape& psi,
+                                 Shape& test) const
     {
       // Find number of nodes
       unsigned n_node = nnode();
@@ -832,9 +832,9 @@ namespace oomph
     /// \short Function to compute the shape and test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
-    inline double shape_and_test_at_knot(const unsigned &ipt,
-                                         Shape &psi,
-                                         Shape &test) const
+    inline double shape_and_test_at_knot(const unsigned& ipt,
+                                         Shape& psi,
+                                         Shape& test) const
     {
       // Find number of nodes
       unsigned n_node = nnode();
@@ -857,9 +857,9 @@ namespace oomph
     /// flag=1(or 0): do (or don't) compute the contribution to the
     /// Jacobian as well.
     void fill_in_generic_residual_contribution_helmholtz_flux_from_displacement(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      const unsigned &flag);
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag);
 
     /// The spatial dimension of the problem
     unsigned Dim;
@@ -881,7 +881,7 @@ namespace oomph
   PMLHelmholtzFluxFromNormalDisplacementBCElement<HELMHOLTZ_BULK_ELEMENT,
                                                   ELASTICITY_BULK_ELEMENT>::
     PMLHelmholtzFluxFromNormalDisplacementBCElement(
-      FiniteElement *const &bulk_el_pt, const int &face_index) :
+      FiniteElement* const& bulk_el_pt, const int& face_index) :
     FaceGeometry<HELMHOLTZ_BULK_ELEMENT>(), FaceElement()
   {
     // Let the bulk element build the FaceElement, i.e. setup the pointers
@@ -892,14 +892,14 @@ namespace oomph
 #ifdef PARANOID
     {
       // Check that the element is not a refineable 3d element
-      HELMHOLTZ_BULK_ELEMENT *elem_pt =
-        dynamic_cast<HELMHOLTZ_BULK_ELEMENT *>(bulk_el_pt);
+      HELMHOLTZ_BULK_ELEMENT* elem_pt =
+        dynamic_cast<HELMHOLTZ_BULK_ELEMENT*>(bulk_el_pt);
       // If it's three-d
       if (elem_pt->dim() == 3)
       {
         // Is it refineable
-        RefineableElement *ref_el_pt =
-          dynamic_cast<RefineableElement *>(elem_pt);
+        RefineableElement* ref_el_pt =
+          dynamic_cast<RefineableElement*>(elem_pt);
         if (ref_el_pt != 0)
         {
           if (this->has_hanging_nodes())
@@ -938,8 +938,8 @@ namespace oomph
         // One dimensional problem
       case 1:
       {
-        PMLHelmholtzEquations<1> *eqn_pt =
-          dynamic_cast<PMLHelmholtzEquations<1> *>(bulk_el_pt);
+        PMLHelmholtzEquations<1>* eqn_pt =
+          dynamic_cast<PMLHelmholtzEquations<1>*>(bulk_el_pt);
         // If the cast has failed die
         if (eqn_pt == 0)
         {
@@ -966,8 +966,8 @@ namespace oomph
       // Two dimensional problem
       case 2:
       {
-        PMLHelmholtzEquations<2> *eqn_pt =
-          dynamic_cast<PMLHelmholtzEquations<2> *>(bulk_el_pt);
+        PMLHelmholtzEquations<2>* eqn_pt =
+          dynamic_cast<PMLHelmholtzEquations<2>*>(bulk_el_pt);
         // If the cast has failed die
         if (eqn_pt == 0)
         {
@@ -993,8 +993,8 @@ namespace oomph
       // Three dimensional problem
       case 3:
       {
-        PMLHelmholtzEquations<3> *eqn_pt =
-          dynamic_cast<PMLHelmholtzEquations<3> *>(bulk_el_pt);
+        PMLHelmholtzEquations<3>* eqn_pt =
+          dynamic_cast<PMLHelmholtzEquations<3>*>(bulk_el_pt);
         // If the cast has failed die
         if (eqn_pt == 0)
         {
@@ -1038,9 +1038,9 @@ namespace oomph
     HELMHOLTZ_BULK_ELEMENT,
     ELASTICITY_BULK_ELEMENT>::
     fill_in_generic_residual_contribution_helmholtz_flux_from_displacement(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      const unsigned &flag)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag)
   {
     // Find out how many nodes there are
     const unsigned n_node = nnode();
@@ -1099,8 +1099,8 @@ namespace oomph
       outer_unit_normal(ipt, interpolated_normal);
 
       // Get displacements
-      ELASTICITY_BULK_ELEMENT *ext_el_pt =
-        dynamic_cast<ELASTICITY_BULK_ELEMENT *>(external_element_pt(0, ipt));
+      ELASTICITY_BULK_ELEMENT* ext_el_pt =
+        dynamic_cast<ELASTICITY_BULK_ELEMENT*>(external_element_pt(0, ipt));
       Vector<double> s_ext(external_element_local_coord(0, ipt));
       Vector<std::complex<double>> displ(2);
       ext_el_pt->interpolated_u_time_harmonic_linear_elasticity(s_ext, displ);

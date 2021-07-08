@@ -58,20 +58,20 @@ namespace oomph
     /// l_y  : length in the y direction
     /// Ordering of elements: 'lower left' to 'lower right' then 'upwards'
     SimpleRectangularTriMesh(
-      const unsigned &n_x,
-      const unsigned &n_y,
-      const double &l_x,
-      const double &l_y,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper);
+      const unsigned& n_x,
+      const unsigned& n_y,
+      const double& l_x,
+      const double& l_y,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
     /// Access function for number of elements in x directions
-    const unsigned &nx() const
+    const unsigned& nx() const
     {
       return Nx;
     }
 
     /// Access function for number of elements in y directions
-    const unsigned &ny() const
+    const unsigned& ny() const
     {
       return Ny;
     }

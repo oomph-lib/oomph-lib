@@ -45,7 +45,7 @@ namespace oomph
   /// update function
   //======================================================================
   void ElementWithMovingNodes::assemble_set_of_all_geometric_data(
-    std::set<Data *> &unique_geom_data_pt)
+    std::set<Data*>& unique_geom_data_pt)
   {
     // First clear the set (just in case)
     unique_geom_data_pt.clear();
@@ -57,7 +57,7 @@ namespace oomph
     for (unsigned n = 0; n < n_node; n++)
     {
       // Cache pointer to the Node
-      Node *const nod_pt = this->node_pt(n);
+      Node* const nod_pt = this->node_pt(n);
 
       // Is the node hanging
       const bool node_is_hanging = nod_pt->is_hanging();
@@ -66,10 +66,10 @@ namespace oomph
       unsigned nmaster = 1;
 
       // Default: Node isn't hanging so it's its own master node
-      Node *master_node_pt = nod_pt;
+      Node* master_node_pt = nod_pt;
 
       // Cache the hanging point
-      HangInfo *hang_info_pt = 0;
+      HangInfo* hang_info_pt = 0;
 
       // Find the number of master nodes if the node is hanging
       if (node_is_hanging)
@@ -94,7 +94,7 @@ namespace oomph
         {
           // Get vector of geometric data involved in the geometric
           // change of this node
-          Data **node_geom_data_pt = master_node_pt->all_geom_data_pt();
+          Data** node_geom_data_pt = master_node_pt->all_geom_data_pt();
 
           for (unsigned i = 0; i < n_geom_data; i++)
           {
@@ -111,13 +111,13 @@ namespace oomph
           // Get vector of geometric objects involved in the default
           // update function for this (master) node.
           // Vector is constructed by copy operation.
-          GeomObject **geom_object_pt = master_node_pt->all_geom_object_pt();
+          GeomObject** geom_object_pt = master_node_pt->all_geom_object_pt();
 
           // Loop over the geometric objects
           for (unsigned i = 0; i < n_geom_obj; i++)
           {
             // Get the next geometric object
-            GeomObject *geom_obj_pt = geom_object_pt[i];
+            GeomObject* geom_obj_pt = geom_object_pt[i];
 
             // Number of items of geometric data that the geometric
             // object depends on
@@ -142,7 +142,7 @@ namespace oomph
   {
     // This set will hold the pointers to all the unique (geometric) Data that
     // affects the shape of this element
-    std::set<Data *> unique_geom_data_pt;
+    std::set<Data*> unique_geom_data_pt;
     // Assemble that data
     this->assemble_set_of_all_geometric_data(unique_geom_data_pt);
 
@@ -152,7 +152,7 @@ namespace oomph
 
     // Loop over all the unique remaining Data items involved in the
     // node update operations
-    typedef std::set<Data *>::iterator IT;
+    typedef std::set<Data*>::iterator IT;
     for (IT it = unique_geom_data_pt.begin(); it != unique_geom_data_pt.end();
          it++)
     {
@@ -171,7 +171,7 @@ namespace oomph
   /// Problem::describe_dofs(...)
   //==================================================================
   void ElementWithMovingNodes::describe_local_dofs(
-    std::ostream &out, const std::string &current_string) const
+    std::ostream& out, const std::string& current_string) const
   {
     // Call the standard finite element classification.
     FiniteElement::describe_local_dofs(out, current_string);
@@ -183,7 +183,7 @@ namespace oomph
     for (unsigned i = 0; i < n_geom_data; i++)
     {
       // Pointer to geometric Data
-      Data *data_pt = Geom_data_pt[i];
+      Data* data_pt = Geom_data_pt[i];
 
       std::stringstream conversion;
       conversion << " of Geometric Data " << i << current_string;
@@ -197,7 +197,7 @@ namespace oomph
   /// with the element.
   //==================================================================
   void ElementWithMovingNodes::assign_all_generic_local_eqn_numbers(
-    const bool &store_local_dof_pt)
+    const bool& store_local_dof_pt)
   {
     // Get local number of dofs so far
     unsigned local_eqn_number = this->ndof();
@@ -238,7 +238,7 @@ namespace oomph
 
       // Resize the storage for the geometric data local equation numbers
       // Firstly allocate the row pointers
-      Geometric_data_local_eqn = new int *[n_geom_data];
+      Geometric_data_local_eqn = new int*[n_geom_data];
 
       // Now allocate storage for all the equation numbers
       Geometric_data_local_eqn[0] = new int[n_total_values];
@@ -268,7 +268,7 @@ namespace oomph
       for (unsigned i = 0; i < n_geom_data; i++)
       {
         // Pointer to geometric Data
-        Data *data_pt = Geom_data_pt[i];
+        Data* data_pt = Geom_data_pt[i];
 
         // Loop over values at this Data item
         unsigned n_value = data_pt->nvalue();
@@ -309,7 +309,7 @@ namespace oomph
       // Clear the memory used in the deque
       if (store_local_dof_pt)
       {
-        std::deque<double *>().swap(GeneralisedElement::Dof_pt_deque);
+        std::deque<double*>().swap(GeneralisedElement::Dof_pt_deque);
       }
     }
   }
@@ -322,7 +322,7 @@ namespace oomph
   /// case FDing is used to computed the derivatives.
   //==================================================================
   void ElementWithMovingNodes::fill_in_jacobian_from_geometric_data(
-    Vector<double> &residuals, DenseMatrix<double> &jacobian)
+    Vector<double>& residuals, DenseMatrix<double>& jacobian)
   {
     if (!Bypass_fill_in_jacobian_from_geometric_data)
     {
@@ -348,7 +348,7 @@ namespace oomph
       unsigned n_shape_controlling_node = nnode();
 
       // Are we dealing with a refineable element?
-      RefineableElement *ref_el_pt = dynamic_cast<RefineableElement *>(this);
+      RefineableElement* ref_el_pt = dynamic_cast<RefineableElement*>(this);
       if (ref_el_pt != 0)
       {
         // Adjust number of shape controlling nodes
@@ -411,7 +411,7 @@ namespace oomph
               if (local_unknown >= 0)
               {
                 // Get a pointer to the geometric data value
-                double *value_pt = Geom_data_pt[i]->value_pt(j);
+                double* value_pt = Geom_data_pt[i]->value_pt(j);
 
                 // Save the old value
                 double old_var = *value_pt;
@@ -536,7 +536,7 @@ namespace oomph
   /// dnodal_coordinates_dgeom_dofs(l,i,j) = dX_{ij} / d s_l
   //======================================================================
   void ElementWithMovingNodes::get_dnodal_coordinates_dgeom_dofs(
-    RankThreeTensor<double> &dnodal_coordinates_dgeom_dofs)
+    RankThreeTensor<double>& dnodal_coordinates_dgeom_dofs)
   {
     // Get number of Data items involved in node update operations
     const unsigned n_geometric_data = ngeom_data();
@@ -560,7 +560,7 @@ namespace oomph
     unsigned n_shape_controlling_node = n_nod;
 
     // Are we dealing with a refineable element?
-    RefineableElement *ref_el_pt = dynamic_cast<RefineableElement *>(this);
+    RefineableElement* ref_el_pt = dynamic_cast<RefineableElement*>(this);
     if (ref_el_pt != 0)
     {
       // Adjust number of shape controlling nodes
@@ -571,7 +571,7 @@ namespace oomph
     DenseMatrix<double> pos(dim_nod, n_shape_controlling_node);
 
     // Shape controlling nodes
-    std::map<Node *, unsigned> local_shape_controlling_node_lookup;
+    std::map<Node*, unsigned> local_shape_controlling_node_lookup;
 
     // Refineable element:
     if (ref_el_pt != 0)
@@ -591,13 +591,13 @@ namespace oomph
     }
 
     // Loop over all shape-controlling nodes to backup their original position
-    for (std::map<Node *, unsigned>::iterator it =
+    for (std::map<Node*, unsigned>::iterator it =
            local_shape_controlling_node_lookup.begin();
          it != local_shape_controlling_node_lookup.end();
          it++)
     {
       // Get node
-      Node *nod_pt = it->first;
+      Node* nod_pt = it->first;
 
       // Get its number
       unsigned node_number = it->second;
@@ -628,7 +628,7 @@ namespace oomph
         if (local_unknown >= 0)
         {
           // Get a pointer to the geometric data value
-          double *value_pt = Geom_data_pt[i]->value_pt(j);
+          double* value_pt = Geom_data_pt[i]->value_pt(j);
 
           // Save the old value
           double old_var = *value_pt;
@@ -640,13 +640,13 @@ namespace oomph
           this->node_update();
 
           // Loop over all shape-controlling nodes
-          for (std::map<Node *, unsigned>::iterator it =
+          for (std::map<Node*, unsigned>::iterator it =
                  local_shape_controlling_node_lookup.begin();
                it != local_shape_controlling_node_lookup.end();
                it++)
           {
             // Get node
-            Node *nod_pt = it->first;
+            Node* nod_pt = it->first;
 
             // Get its number
             unsigned node_number = it->second;

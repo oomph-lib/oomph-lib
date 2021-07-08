@@ -57,7 +57,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    RefineableQSpectralElement(const RefineableQSpectralElement<3> &dummy)
+    RefineableQSpectralElement(const RefineableQSpectralElement<3>& dummy)
     {
       BrokenCopy::broken_copy("RefineableQSpectralElement<3>");
     }
@@ -82,7 +82,7 @@ namespace oomph
     }
 
     /// The only thing to add is rebuild from sons
-    void rebuild_from_sons(Mesh *&mesh_pt)
+    void rebuild_from_sons(Mesh*& mesh_pt)
     {
       // The timestepper should be the same for all nodes and node 0 should
       // never be deleted.
@@ -93,7 +93,7 @@ namespace oomph
                             OOMPH_EXCEPTION_LOCATION);
       }
 
-      TimeStepper *time_stepper_pt = this->node_pt(0)->time_stepper_pt();
+      TimeStepper* time_stepper_pt = this->node_pt(0)->time_stepper_pt();
       unsigned ntstorage = time_stepper_pt->ntstorage();
 
       unsigned jnod = 0;
@@ -128,7 +128,7 @@ namespace oomph
             if (this->node_pt(jnod) == 0)
             {
               // Has the node been created by one of its neighbours
-              Node *created_node_pt =
+              Node* created_node_pt =
                 this->node_created_by_neighbour(s_fraction);
 
               // If it has set the pointer
@@ -244,8 +244,8 @@ namespace oomph
                 }
 
                 // Get the pointer to the son element
-                RefineableQSpectralElement<3> *son_el_pt =
-                  dynamic_cast<RefineableQSpectralElement<3> *>(
+                RefineableQSpectralElement<3>* son_el_pt =
+                  dynamic_cast<RefineableQSpectralElement<3>*>(
                     this->tree_pt()->son_pt(son)->object_pt());
 
                 // If we are rebuilding, then worry about the boundary
@@ -406,15 +406,15 @@ namespace oomph
 
                   // Solid node? If so, deal with the positional boundary
                   // conditions:
-                  SolidNode *solid_node_pt =
-                    dynamic_cast<SolidNode *>(this->node_pt(jnod));
+                  SolidNode* solid_node_pt =
+                    dynamic_cast<SolidNode*>(this->node_pt(jnod));
                   if (solid_node_pt != 0)
                   {
                     // Get the positional boundary conditions from the father:
                     unsigned n_dim = this->node_pt(jnod)->ndim();
                     Vector<int> solid_bound_cons(n_dim);
-                    RefineableSolidQElement<3> *son_solid_el_pt =
-                      dynamic_cast<RefineableSolidQElement<3> *>(son_el_pt);
+                    RefineableSolidQElement<3>* son_solid_el_pt =
+                      dynamic_cast<RefineableSolidQElement<3>*>(son_el_pt);
 #ifdef PARANOID
                     if (son_solid_el_pt == 0)
                     {
@@ -521,8 +521,8 @@ namespace oomph
 
               // Algebraic stuff here
               // Check whether the element is an algebraic element
-              AlgebraicElementBase *alg_el_pt =
-                dynamic_cast<AlgebraicElementBase *>(this);
+              AlgebraicElementBase* alg_el_pt =
+                dynamic_cast<AlgebraicElementBase*>(this);
 
               // If we do have an algebraic element
               if (alg_el_pt != 0)

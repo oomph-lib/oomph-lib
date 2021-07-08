@@ -64,7 +64,7 @@ namespace oomph
     }
 
     /// Set error value for post-processing
-    void set_error(const double &error)
+    void set_error(const double& error)
     {
       Error = error;
     }
@@ -101,7 +101,7 @@ namespace oomph
     }
 
     /// Overload output function
-    void output(std::ostream &outfile, const unsigned &nplot)
+    void output(std::ostream& outfile, const unsigned& nplot)
     {
       // Assign dimension
       unsigned el_dim = 2;
@@ -381,7 +381,7 @@ namespace Problem_Parameter
   double Length = 3.0;
 
   /// Constitutive law used to determine the mesh deformation
-  ConstitutiveLaw *Constitutive_law_pt = 0;
+  ConstitutiveLaw* Constitutive_law_pt = 0;
 
   /// Trace file
   ofstream Trace_file;
@@ -498,10 +498,10 @@ public:
   void complete_problem_setup();
 
   /// Doc the solution
-  void doc_solution(const std::string &comment = "");
+  void doc_solution(const std::string& comment = "");
 
   /// Compute the error estimates and assign to elements for plotting
-  void compute_error_estimate(double &max_err, double &min_err);
+  void compute_error_estimate(double& max_err, double& min_err);
 
 private:
   /// \short Create free surface elements
@@ -548,25 +548,25 @@ private:
   } // end of delete_volume_constraint_elements
 
   /// Pointers to mesh of free surface elements
-  Mesh *Free_surface_mesh_pt;
+  Mesh* Free_surface_mesh_pt;
 
   /// Pointer to mesh containing elements that impose volume constraint
-  Mesh *Volume_constraint_mesh_pt;
+  Mesh* Volume_constraint_mesh_pt;
 
   /// Pointer to Fluid_mesh
-  RefineableSolidTriangleMesh<ELEMENT> *Fluid_mesh_pt;
+  RefineableSolidTriangleMesh<ELEMENT>* Fluid_mesh_pt;
 
   /// Vector storing pointer to the bubble polygons
-  Vector<TriangleMeshPolygon *> Bubble_polygon_pt;
+  Vector<TriangleMeshPolygon*> Bubble_polygon_pt;
 
   /// Triangle mesh polygon for outer boundary
-  TriangleMeshPolygon *Outer_boundary_polyline_pt;
+  TriangleMeshPolygon* Outer_boundary_polyline_pt;
 
   /// Pointer to a global bubble pressure datum
-  Data *Bubble_pressure_data_pt;
+  Data* Bubble_pressure_data_pt;
 
   /// Pointer to element that imposes volume constraint for bubble
-  VolumeConstraintElement *Vol_constraint_el_pt;
+  VolumeConstraintElement* Vol_constraint_el_pt;
 
   /// Enumeration of mesh boundaries
   enum
@@ -636,7 +636,7 @@ BubbleInChannelProblem<ELEMENT>::BubbleInChannelProblem()
   //--------------------------------------------------------------
   // four separate polylines
   //------------------------
-  Vector<TriangleMeshCurveSection *> boundary_polyline_pt(4);
+  Vector<TriangleMeshCurveSection*> boundary_polyline_pt(4);
 
   // Each polyline only has two vertices -- provide storage for their
   // coordinates
@@ -698,7 +698,7 @@ BubbleInChannelProblem<ELEMENT>::BubbleInChannelProblem()
   // Place it smack in the middle of the channel
   double x_center = 0.5 * Problem_Parameter::Length;
   double y_center = 0.5;
-  Ellipse *bubble_pt =
+  Ellipse* bubble_pt =
     new Ellipse(Problem_Parameter::Radius, Problem_Parameter::Radius);
 
   // Intrinsic coordinate along GeomObject defining the bubble
@@ -713,7 +713,7 @@ BubbleInChannelProblem<ELEMENT>::BubbleInChannelProblem()
 
   // This bubble is bounded by two distinct boundaries, each
   // represented by its own polyline
-  Vector<TriangleMeshCurveSection *> bubble_polyline_pt(2);
+  Vector<TriangleMeshCurveSection*> bubble_polyline_pt(2);
 
   // Vertex coordinates
   Vector<Vector<double>> bubble_vertex(npoints);
@@ -771,9 +771,9 @@ BubbleInChannelProblem<ELEMENT>::BubbleInChannelProblem()
   //----------------------
 
   // Convert to "closed curve" objects
-  TriangleMeshClosedCurve *outer_closed_curve_pt = Outer_boundary_polyline_pt;
+  TriangleMeshClosedCurve* outer_closed_curve_pt = Outer_boundary_polyline_pt;
   unsigned nb = Bubble_polygon_pt.size();
-  Vector<TriangleMeshClosedCurve *> bubble_closed_curve_pt(nb);
+  Vector<TriangleMeshClosedCurve*> bubble_closed_curve_pt(nb);
   for (unsigned i = 0; i < nb; i++)
   {
     bubble_closed_curve_pt[i] = Bubble_polygon_pt[i];
@@ -797,7 +797,7 @@ BubbleInChannelProblem<ELEMENT>::BubbleInChannelProblem()
     triangle_mesh_parameters, this->time_stepper_pt());
 
   // Set error estimator for bulk mesh
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   Fluid_mesh_pt->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Set targets for spatial adaptivity
@@ -871,14 +871,14 @@ void BubbleInChannelProblem<ELEMENT>::create_free_surface_elements()
     {
       // Get pointer to the bulk fluid element that is
       // adjacent to boundary b
-      ELEMENT *bulk_elem_pt =
-        dynamic_cast<ELEMENT *>(Fluid_mesh_pt->boundary_element_pt(b, e));
+      ELEMENT* bulk_elem_pt =
+        dynamic_cast<ELEMENT*>(Fluid_mesh_pt->boundary_element_pt(b, e));
 
       // Find the index of the face of element e along boundary b
       int face_index = Fluid_mesh_pt->face_index_at_boundary(b, e);
 
       // Create new element
-      ElasticLineFluidInterfaceElement<ELEMENT> *el_pt =
+      ElasticLineFluidInterfaceElement<ELEMENT>* el_pt =
         new ElasticLineFluidInterfaceElement<ELEMENT>(bulk_elem_pt, face_index);
 
       // Add it to the mesh
@@ -921,14 +921,14 @@ void BubbleInChannelProblem<ELEMENT>::create_volume_constraint_elements()
     {
       // Get pointer to the bulk fluid element that is
       // adjacent to boundary b
-      ELEMENT *bulk_elem_pt =
-        dynamic_cast<ELEMENT *>(Fluid_mesh_pt->boundary_element_pt(b, e));
+      ELEMENT* bulk_elem_pt =
+        dynamic_cast<ELEMENT*>(Fluid_mesh_pt->boundary_element_pt(b, e));
 
       // Find the index of the face of element e along boundary b
       int face_index = Fluid_mesh_pt->face_index_at_boundary(b, e);
 
       // Create new element
-      ElasticLineVolumeConstraintBoundingElement<ELEMENT> *el_pt =
+      ElasticLineVolumeConstraintBoundingElement<ELEMENT>* el_pt =
         new ElasticLineVolumeConstraintBoundingElement<ELEMENT>(bulk_elem_pt,
                                                                 face_index);
 
@@ -984,7 +984,7 @@ void BubbleInChannelProblem<ELEMENT>::complete_problem_setup()
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Get node
-      Node *nod_pt = Fluid_mesh_pt->boundary_node_pt(ibound, inod);
+      Node* nod_pt = Fluid_mesh_pt->boundary_node_pt(ibound, inod);
 
       // Pin both velocities on inflow (0) and side boundaries (1 and 3)
       if ((ibound == 0) || (ibound == 1) || (ibound == 3))
@@ -1001,7 +1001,7 @@ void BubbleInChannelProblem<ELEMENT>::complete_problem_setup()
 
       // Pin pseudo-solid positions apart from bubble boundary which
       // we allow to move
-      SolidNode *solid_node_pt = dynamic_cast<SolidNode *>(nod_pt);
+      SolidNode* solid_node_pt = dynamic_cast<SolidNode*>(nod_pt);
       if (is_on_bubble_bound[ibound])
       {
         solid_node_pt->unpin_position(0);
@@ -1024,7 +1024,7 @@ void BubbleInChannelProblem<ELEMENT>::complete_problem_setup()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Fluid_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Fluid_mesh_pt->element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &Problem_Parameter::Re;
@@ -1056,7 +1056,7 @@ void BubbleInChannelProblem<ELEMENT>::complete_problem_setup()
       for (unsigned inod = 0; inod < num_nod; inod++)
       {
         // Get node
-        Node *nod_pt = this->Fluid_mesh_pt->boundary_node_pt(ibound, inod);
+        Node* nod_pt = this->Fluid_mesh_pt->boundary_node_pt(ibound, inod);
 
         // Get number of previous (history) values
         unsigned n_prev = nod_pt->time_stepper_pt()->nprev_values();
@@ -1087,7 +1087,7 @@ void BubbleInChannelProblem<ELEMENT>::complete_problem_setup()
   for (unsigned inod = 0; inod < num_nod; inod++)
   {
     // Get node
-    Node *nod_pt =
+    Node* nod_pt =
       this->Fluid_mesh_pt->boundary_node_pt(Inflow_boundary_id, inod);
     // Now set the boundary velocity
     double y = nod_pt->x(1);
@@ -1101,7 +1101,7 @@ void BubbleInChannelProblem<ELEMENT>::complete_problem_setup()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void BubbleInChannelProblem<ELEMENT>::doc_solution(const std::string &comment)
+void BubbleInChannelProblem<ELEMENT>::doc_solution(const std::string& comment)
 {
   oomph_info << "Docing step: " << Problem_Parameter::Doc_info.number()
              << std::endl;
@@ -1128,13 +1128,13 @@ void BubbleInChannelProblem<ELEMENT>::doc_solution(const std::string &comment)
   for (unsigned e = 0; e < nel; e++)
   {
     square_of_l2_norm +=
-      dynamic_cast<ELEMENT *>(this->Fluid_mesh_pt->element_pt(e))
+      dynamic_cast<ELEMENT*>(this->Fluid_mesh_pt->element_pt(e))
         ->square_of_l2_norm();
   }
   Problem_Parameter::Norm_file << sqrt(square_of_l2_norm) << std::endl;
 
   some_file.open(filename);
-  some_file << dynamic_cast<ELEMENT *>(this->Fluid_mesh_pt->element_pt(0))
+  some_file << dynamic_cast<ELEMENT*>(this->Fluid_mesh_pt->element_pt(0))
                  ->variable_identifier();
   this->Fluid_mesh_pt->output(some_file, npts);
   some_file << "TEXT X = 25, Y = 78, CS=FRAME T = \"Global Step "
@@ -1175,11 +1175,11 @@ void BubbleInChannelProblem<ELEMENT>::doc_solution(const std::string &comment)
 /// Compute error estimates and assign to elements for plotting
 //========================================================================
 template<class ELEMENT>
-void BubbleInChannelProblem<ELEMENT>::compute_error_estimate(double &max_err,
-                                                             double &min_err)
+void BubbleInChannelProblem<ELEMENT>::compute_error_estimate(double& max_err,
+                                                             double& min_err)
 {
   // Get error estimator
-  ErrorEstimator *err_est_pt = Fluid_mesh_pt->spatial_error_estimator_pt();
+  ErrorEstimator* err_est_pt = Fluid_mesh_pt->spatial_error_estimator_pt();
 
   // Get/output error estimates
   unsigned nel = Fluid_mesh_pt->nelement();
@@ -1188,7 +1188,7 @@ void BubbleInChannelProblem<ELEMENT>::compute_error_estimate(double &max_err,
   // We need a dynamic cast, get_element_errors from the Fluid_mesh_pt
   // Dynamic cast is used because get_element_errors require a Mesh* ans
   // not a SolidMesh*
-  Mesh *fluid_mesh_pt = dynamic_cast<Mesh *>(Fluid_mesh_pt);
+  Mesh* fluid_mesh_pt = dynamic_cast<Mesh*>(Fluid_mesh_pt);
   err_est_pt->get_element_errors(fluid_mesh_pt, elemental_error);
 
   // Set errors for post-processing and find extrema
@@ -1196,7 +1196,7 @@ void BubbleInChannelProblem<ELEMENT>::compute_error_estimate(double &max_err,
   min_err = DBL_MAX;
   for (unsigned e = 0; e < nel; e++)
   {
-    dynamic_cast<MyTaylorHoodElement *>(Fluid_mesh_pt->element_pt(e))
+    dynamic_cast<MyTaylorHoodElement*>(Fluid_mesh_pt->element_pt(e))
       ->set_error(elemental_error[e]);
 
     max_err = std::max(max_err, elemental_error[e]);
@@ -1207,7 +1207,7 @@ void BubbleInChannelProblem<ELEMENT>::compute_error_estimate(double &max_err,
 //==========start_of_main=====================================
 /// Driver code for moving bubble problem
 //============================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

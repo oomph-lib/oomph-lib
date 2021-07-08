@@ -40,14 +40,14 @@ namespace oomph
     /// \short This function needs to be implemented in the derived problem:
     /// Returns a pointer to a new object of the same type as the derived
     /// problem
-    virtual MGProblem *make_new_problem() = 0;
+    virtual MGProblem* make_new_problem() = 0;
 
     /// \short Function to get a pointer to the mesh we will be working
     /// with. If there are flux elements present in the mesh this will
     /// be overloaded to return a pointer to the bulk mesh otherwise
     /// it can be overloaded to point to the global mesh but it must
     /// be of type RefineableMeshBase
-    virtual TreeBasedRefineableMeshBase *mg_bulk_mesh_pt() = 0;
+    virtual TreeBasedRefineableMeshBase* mg_bulk_mesh_pt() = 0;
 
   }; // End of MGProblem class
 
@@ -64,11 +64,11 @@ namespace oomph
   public:
     /// \short typedef for a function that returns a pointer to an object
     /// of the class Smoother to be used as the pre-smoother
-    typedef Smoother *(*PreSmootherFactoryFctPt)();
+    typedef Smoother* (*PreSmootherFactoryFctPt)();
 
     /// \short typedef for a function that returns a pointer to an object
     /// of the class Smoother to be used as the post-smoother
-    typedef Smoother *(*PostSmootherFactoryFctPt)();
+    typedef Smoother* (*PostSmootherFactoryFctPt)();
 
     /// Access function to set the pre-smoother creation function.
     void set_pre_smoother_factory_function(
@@ -88,7 +88,7 @@ namespace oomph
 
     /// \short Constructor: Set up default values for number of V-cycles
     /// and pre- and post-smoothing steps.
-    MGSolver(MGProblem *mg_problem_pt) :
+    MGSolver(MGProblem* mg_problem_pt) :
       Nvcycle(200),
       Mg_problem_pt(mg_problem_pt),
       Suppress_v_cycle_output(false),
@@ -209,9 +209,9 @@ namespace oomph
     /// \short Given a level in the hierarchy, an input vector and a filename
     /// this function will document the given vector according to the structure
     /// of the mesh on the given level
-    void plot(const unsigned &hierarchy_level,
-              const DoubleVector &input_vector,
-              const std::string &filename);
+    void plot(const unsigned& hierarchy_level,
+              const DoubleVector& input_vector,
+              const std::string& filename);
 
     /// \short Disable all output from mg_solve apart from the number of
     /// V-cycles used to solve the problem
@@ -298,7 +298,7 @@ namespace oomph
     } // End of disable_smoother_and_superlu_doc_time
 
     /// Return the number of post-smoothing iterations (lvalue)
-    unsigned &npost_smooth()
+    unsigned& npost_smooth()
     {
       // Return the number of post-smoothing iterations to be done on each
       // level of the hierarchy
@@ -306,7 +306,7 @@ namespace oomph
     } // End of npost_smooth
 
     /// Return the number of pre-smoothing iterations (lvalue)
-    unsigned &npre_smooth()
+    unsigned& npre_smooth()
     {
       // Return the number of pre-smoothing iterations to be done on each
       // level of the hierarchy
@@ -318,7 +318,7 @@ namespace oomph
     /// current solution vector, x. Return the residual vector r=b-Ax.
     /// Uses the default smoother (set in the MGProblem constructor)
     /// which can be overloaded for a specific problem.
-    void pre_smooth(const unsigned &level)
+    void pre_smooth(const unsigned& level)
     {
       // Run pre-smoother 'max_iter' times
       Pre_smoothers_storage_pt[level]->smoother_solve(
@@ -336,7 +336,7 @@ namespace oomph
     /// current solution vector, x. Uses the default smoother (set in
     /// the MGProblem constructor) which can be overloaded for specific
     /// problem.
-    void post_smooth(const unsigned &level)
+    void post_smooth(const unsigned& level)
     {
       // Run post-smoother 'max_iter' times
       Post_smoothers_storage_pt[level]->smoother_solve(
@@ -345,7 +345,7 @@ namespace oomph
 
     /// \short Return norm of residual r=b-Ax and the residual vector itself
     /// on the level-th level
-    double residual_norm(const unsigned &level)
+    double residual_norm(const unsigned& level)
     {
       // And zero the entries of residual
       Residual_mg_vectors_storage[level].initialise(0.0);
@@ -372,12 +372,12 @@ namespace oomph
     /// \short Builds a CRDoubleMatrix that is used to interpolate the
     /// residual between levels. The transpose can be used as the full
     /// weighting restriction.
-    void interpolation_matrix_set(const unsigned &level,
-                                  double *value,
-                                  int *col_index,
-                                  int *row_st,
-                                  unsigned &ncol,
-                                  unsigned &nnz)
+    void interpolation_matrix_set(const unsigned& level,
+                                  double* value,
+                                  int* col_index,
+                                  int* row_st,
+                                  unsigned& ncol,
+                                  unsigned& nnz)
     {
       // Dynamically allocate the interpolation matrix
       Interpolation_matrices_storage_pt[level] = new CRDoubleMatrix;
@@ -390,18 +390,18 @@ namespace oomph
     /// \short Builds a CRDoubleMatrix that is used to interpolate the
     /// residual between levels. The transpose can be used as the full
     /// weighting restriction.
-    void interpolation_matrix_set(const unsigned &level,
-                                  Vector<double> &value,
-                                  Vector<int> &col_index,
-                                  Vector<int> &row_st,
-                                  unsigned &ncol,
-                                  unsigned &nrow)
+    void interpolation_matrix_set(const unsigned& level,
+                                  Vector<double>& value,
+                                  Vector<int>& col_index,
+                                  Vector<int>& row_st,
+                                  unsigned& ncol,
+                                  unsigned& nrow)
     {
       // Dynamically allocate the interpolation matrix
       Interpolation_matrices_storage_pt[level] = new CRDoubleMatrix;
 
       // Make the distribution pointer
-      LinearAlgebraDistribution *dist_pt = new LinearAlgebraDistribution(
+      LinearAlgebraDistribution* dist_pt = new LinearAlgebraDistribution(
         Mg_hierarchy[level]->communicator_pt(), nrow, false);
 
 #ifdef PARANOID
@@ -451,17 +451,17 @@ namespace oomph
 
     /// \short Restrict residual (computed on level-th MG level) to the next
     /// coarser mesh and stick it into the coarse mesh RHS vector.
-    void restrict_residual(const unsigned &level);
+    void restrict_residual(const unsigned& level);
 
     /// \short Interpolate solution at current level onto next finer mesh
     /// and correct the solution x at that level
-    void interpolate_and_correct(const unsigned &level);
+    void interpolate_and_correct(const unsigned& level);
 
     /// \short Given the son_type of an element and a local node number
     /// j in that element with nnode_1d nodes per coordinate direction,
     /// return the local coordinate s in its father element. Needed in
     /// the setup of the interpolation matrices
-    void level_up_local_coord_of_node(const int &son_type, Vector<double> &s);
+    void level_up_local_coord_of_node(const int& son_type, Vector<double>& s);
 
     /// \short Setup the interpolation matrix on each level
     void setup_interpolation_matrices();
@@ -479,10 +479,10 @@ namespace oomph
 
     /// \short Virtual function in the base class that needs to be implemented
     /// later but for now just leave it empty
-    void solve(Problem *const &problem_pt, DoubleVector &result)
+    void solve(Problem* const& problem_pt, DoubleVector& result)
     {
       // Dynamically cast problem_pt of type Problem to a MGProblem pointer
-      MGProblem *mg_problem_pt = dynamic_cast<MGProblem *>(problem_pt);
+      MGProblem* mg_problem_pt = dynamic_cast<MGProblem*>(problem_pt);
 
 #ifdef PARANOID
       // PARANOID check - If the dynamic_cast produces a null pointer the
@@ -576,7 +576,7 @@ namespace oomph
     /// solve function in the LinearSolver base class. The function is stored
     /// as protected to allow the MGPreconditioner derived class to use the
     /// solver
-    void mg_solve(DoubleVector &result);
+    void mg_solve(DoubleVector& result);
 
     /// \short Normalise the rows of the restriction matrices to avoid
     /// amplifications when projecting to the coarser level
@@ -589,7 +589,7 @@ namespace oomph
 
     /// \short Pointer to the MG problem (deep copy). This is protected to
     /// provide access to the MG preconditioner
-    MGProblem *Mg_problem_pt;
+    MGProblem* Mg_problem_pt;
 
     /// \short Vector to store the RHS vectors (Rhs_mg). This is protected to
     /// allow the multigrid preconditioner to assign the RHS vector during
@@ -611,7 +611,7 @@ namespace oomph
     /// This is protected member data to allow the preconditioner to
     /// restore normal output if everything was chosen to be
     /// suppressed by the user
-    std::ostream *Stream_pt;
+    std::ostream* Stream_pt;
 
   private:
     /// \short Function to create pre-smoothers
@@ -636,16 +636,16 @@ namespace oomph
     unsigned Nlevel;
 
     /// Vector containing pointers to problems in hierarchy
-    Vector<MGProblem *> Mg_hierarchy;
+    Vector<MGProblem*> Mg_hierarchy;
 
     /// Vector to store the system matrices
-    Vector<CRDoubleMatrix *> Mg_matrices_storage_pt;
+    Vector<CRDoubleMatrix*> Mg_matrices_storage_pt;
 
     /// Vector to store the interpolation matrices
-    Vector<CRDoubleMatrix *> Interpolation_matrices_storage_pt;
+    Vector<CRDoubleMatrix*> Interpolation_matrices_storage_pt;
 
     /// Vector to store the restriction matrices
-    Vector<CRDoubleMatrix *> Restriction_matrices_storage_pt;
+    Vector<CRDoubleMatrix*> Restriction_matrices_storage_pt;
 
     /// Vector to store the solution vectors (X_mg)
     Vector<DoubleVector> X_mg_vectors_storage;
@@ -664,10 +664,10 @@ namespace oomph
     Vector<DoubleVector> Restriction_self_test_vectors_storage;
 
     /// Vector to store the pre-smoothers
-    Vector<Smoother *> Pre_smoothers_storage_pt;
+    Vector<Smoother*> Pre_smoothers_storage_pt;
 
     /// Vector to store the post-smoothers
-    Vector<Smoother *> Post_smoothers_storage_pt;
+    Vector<Smoother*> Post_smoothers_storage_pt;
 
     /// Number of pre-smoothing steps
     unsigned Npre_smooth;
@@ -701,7 +701,7 @@ namespace oomph
   {
   public:
     /// Constructor.
-    MGPreconditioner(MGProblem *mg_problem_pt) : MGSolver<DIM>(mg_problem_pt)
+    MGPreconditioner(MGProblem* mg_problem_pt) : MGSolver<DIM>(mg_problem_pt)
     {
       // Set the number of V-cycles to be 1 (as expected as a preconditioner)
       this->Nvcycle = 2;
@@ -711,13 +711,13 @@ namespace oomph
     ~MGPreconditioner(){};
 
     /// Broken copy constructor.
-    MGPreconditioner(const MGPreconditioner &)
+    MGPreconditioner(const MGPreconditioner&)
     {
       BrokenCopy::broken_copy("MGPreconditioner");
     }
 
     /// Broken assignment operator.
-    void operator=(const MGPreconditioner &)
+    void operator=(const MGPreconditioner&)
     {
       BrokenCopy::broken_assign("MGPreconditioner");
     }
@@ -750,7 +750,7 @@ namespace oomph
     } // End of setup
 
     /// \short Function applies MG to the vector r for a full solve
-    virtual void preconditioner_solve(const DoubleVector &rhs, DoubleVector &z)
+    virtual void preconditioner_solve(const DoubleVector& rhs, DoubleVector& z)
     {
 #ifdef PARANOID
       if (this->Mg_problem_pt->ndof() != rhs.nrow())
@@ -818,7 +818,7 @@ namespace oomph
 #ifdef PARANOID
     // PARANOID check - Make sure the dimension of the solver matches the
     // dimension of the elements used in the problems mesh
-    if (dynamic_cast<FiniteElement *>(Mg_problem_pt->mesh_pt()->element_pt(0))
+    if (dynamic_cast<FiniteElement*>(Mg_problem_pt->mesh_pt()->element_pt(0))
           ->dim() != DIM)
     {
       std::string err_strng = "The dimension of the elements used in the mesh ";
@@ -839,7 +839,7 @@ namespace oomph
       for (unsigned el_counter = 0; el_counter < n_elements; el_counter++)
       {
         // Upcast global mesh element to a refineable element
-        RefineableElement *el_pt = dynamic_cast<RefineableElement *>(
+        RefineableElement* el_pt = dynamic_cast<RefineableElement*>(
           Mg_problem_pt->mg_bulk_mesh_pt()->element_pt(el_counter));
 
         // Check if the upcast worked or not; if el_pt is a null pointer the
@@ -967,7 +967,7 @@ namespace oomph
     while (managed_to_create_unrefined_copy)
     {
       // Make a new object of the same type as the derived problem
-      MGProblem *new_problem_pt = Mg_problem_pt->make_new_problem();
+      MGProblem* new_problem_pt = Mg_problem_pt->make_new_problem();
 
       // Do anything that needs to be done before we can refine the mesh
       new_problem_pt->actions_before_adapt();
@@ -1110,7 +1110,7 @@ namespace oomph
     // Using full weighting so use setup_interpolation_matrices.
     // Note: There are two methods to choose from here, the ideal choice is
     // setup_interpolation_matrices() but that requires a refineable mesh base
-    if (dynamic_cast<TreeBasedRefineableMeshBase *>(
+    if (dynamic_cast<TreeBasedRefineableMeshBase*>(
           Mg_problem_pt->mg_bulk_mesh_pt()))
     {
       setup_interpolation_matrices();
@@ -1181,7 +1181,7 @@ namespace oomph
 
       // Resize the solution and RHS vector
       unsigned n_dof = Mg_hierarchy[i]->ndof();
-      LinearAlgebraDistribution *dist_pt = new LinearAlgebraDistribution(
+      LinearAlgebraDistribution* dist_pt = new LinearAlgebraDistribution(
         Mg_hierarchy[i]->communicator_pt(), n_dof, false);
 
 #ifdef PARANOID
@@ -1513,13 +1513,13 @@ namespace oomph
 
       // Make a pointer to the mesh on the finer level and dynamic_cast
       // it as an object of the refineable mesh class
-      RefineableMeshBase *ref_fine_mesh_pt = dynamic_cast<RefineableMeshBase *>(
+      RefineableMeshBase* ref_fine_mesh_pt = dynamic_cast<RefineableMeshBase*>(
         Mg_hierarchy[fine_level]->mg_bulk_mesh_pt());
 
       // Make a pointer to the mesh on the coarse level and dynamic_cast
       // it as an object of the refineable mesh class
-      RefineableMeshBase *ref_coarse_mesh_pt =
-        dynamic_cast<RefineableMeshBase *>(
+      RefineableMeshBase* ref_coarse_mesh_pt =
+        dynamic_cast<RefineableMeshBase*>(
           Mg_hierarchy[coarse_level]->mg_bulk_mesh_pt());
 
       // Access information about the number of elements in the fine mesh
@@ -1541,7 +1541,7 @@ namespace oomph
       // If this element in the fine mesh has not been unrefined,
       // the map returns the pointer to the same-sized equivalent
       // element in the coarsened mesh.
-      std::map<RefineableQElement<DIM> *, RefineableQElement<DIM> *>
+      std::map<RefineableQElement<DIM>*, RefineableQElement<DIM>*>
         coarse_mesh_reference_element_pt;
 
       // Counter of elements in coarse and fine meshes: Start with element
@@ -1555,13 +1555,13 @@ namespace oomph
       while (e_fine < fine_n_element)
       {
         // Pointer to element in fine mesh
-        RefineableQElement<DIM> *el_fine_pt =
-          dynamic_cast<RefineableQElement<DIM> *>(
+        RefineableQElement<DIM>* el_fine_pt =
+          dynamic_cast<RefineableQElement<DIM>*>(
             ref_fine_mesh_pt->finite_element_pt(e_fine));
 
         // Pointer to element in coarse mesh
-        RefineableQElement<DIM> *el_coarse_pt =
-          dynamic_cast<RefineableQElement<DIM> *>(
+        RefineableQElement<DIM>* el_coarse_pt =
+          dynamic_cast<RefineableQElement<DIM>*>(
             ref_coarse_mesh_pt->finite_element_pt(e_coarse));
 
         // If the levels are different then the element in the fine
@@ -1577,7 +1577,7 @@ namespace oomph
           {
             // Set mapping to father element in coarse mesh
             coarse_mesh_reference_element_pt
-              [dynamic_cast<RefineableQElement<DIM> *>(
+              [dynamic_cast<RefineableQElement<DIM>*>(
                 ref_fine_mesh_pt->finite_element_pt(e_fine))] = el_coarse_pt;
 
             // Increment counter for elements in fine mesh
@@ -1625,13 +1625,13 @@ namespace oomph
       for (unsigned k = 0; k < fine_n_element; k++)
       {
         // Set a pointer to the element in the fine mesh
-        RefineableQElement<DIM> *el_fine_pt =
-          dynamic_cast<RefineableQElement<DIM> *>(
+        RefineableQElement<DIM>* el_fine_pt =
+          dynamic_cast<RefineableQElement<DIM>*>(
             ref_fine_mesh_pt->finite_element_pt(k));
 
         // Get the reference element (either the father element or the
         // same-sized element) in the coarse mesh
-        RefineableQElement<DIM> *el_coarse_pt =
+        RefineableQElement<DIM>* el_coarse_pt =
           coarse_mesh_reference_element_pt[el_fine_pt];
 
         // Find out what type of son it is (set to OMEGA if no unrefinement
@@ -1715,7 +1715,7 @@ namespace oomph
                   {
                     // Find the number of master nodes of the hanging
                     // the node in the reference element
-                    HangInfo *hang_info_pt =
+                    HangInfo* hang_info_pt =
                       el_coarse_pt->node_pt(j)->hanging_pt();
                     unsigned nmaster = hang_info_pt->nmaster();
 
@@ -1723,7 +1723,7 @@ namespace oomph
                     for (unsigned i_master = 0; i_master < nmaster; i_master++)
                     {
                       // Set up a pointer to the master node
-                      Node *master_node_pt =
+                      Node* master_node_pt =
                         hang_info_pt->master_node_pt(i_master);
 
                       // The column number in the interpolation matrix: the
@@ -1814,11 +1814,11 @@ namespace oomph
 
       // Make a pointer to the mesh on the finer level and dynamic_cast
       // it as an object of the refineable mesh class
-      Mesh *ref_fine_mesh_pt = Mg_hierarchy[fine_level]->mg_bulk_mesh_pt();
+      Mesh* ref_fine_mesh_pt = Mg_hierarchy[fine_level]->mg_bulk_mesh_pt();
 
       // To use the locate zeta functionality the coarse mesh must be of the
       // type MeshAsGeomObject
-      MeshAsGeomObject *coarse_mesh_from_obj_pt =
+      MeshAsGeomObject* coarse_mesh_from_obj_pt =
         new MeshAsGeomObject(Mg_hierarchy[coarse_level]->mg_bulk_mesh_pt());
 
       // Access information about the number of degrees of freedom
@@ -1851,7 +1851,7 @@ namespace oomph
            i_fine_node++)
       {
         // Set a pointer to the i_fine_unknown-th node in the fine mesh
-        Node *fine_node_pt = ref_fine_mesh_pt->node_pt(i_fine_node);
+        Node* fine_node_pt = ref_fine_mesh_pt->node_pt(i_fine_node);
 
         // Get the global equation number
         int i_fine = fine_node_pt->eqn_number(0);
@@ -1867,14 +1867,14 @@ namespace oomph
           fine_node_pt->position(fine_node_position);
 
           // Create a null pointer to the GeomObject class
-          GeomObject *el_pt = 0;
+          GeomObject* el_pt = 0;
 
           // Get the reference element (either the father element or the
           // same-sized element) in the coarse mesh using locate_zeta
           coarse_mesh_from_obj_pt->locate_zeta(fine_node_position, el_pt, s);
 
           // Upcast GeomElement as a FiniteElement
-          FiniteElement *el_coarse_pt = dynamic_cast<FiniteElement *>(el_pt);
+          FiniteElement* el_coarse_pt = dynamic_cast<FiniteElement*>(el_pt);
 
           // Find the number of nodes in the element
           unsigned n_node = el_coarse_pt->nnode();
@@ -1894,7 +1894,7 @@ namespace oomph
           for (unsigned j_node = 0; j_node < n_node; j_node++)
           {
             // Get the j_coarse_unknown-th node in the coarse element
-            Node *coarse_node_pt = el_coarse_pt->node_pt(j_node);
+            Node* coarse_node_pt = el_coarse_pt->node_pt(j_node);
 
             // Column number in interpolation matrix: Global equation number of
             // the d.o.f. stored at this node in the coarse element
@@ -1909,14 +1909,14 @@ namespace oomph
               {
                 // Find the number of master nodes of the hanging
                 // the node in the reference element
-                HangInfo *hang_info_pt = coarse_node_pt->hanging_pt();
+                HangInfo* hang_info_pt = coarse_node_pt->hanging_pt();
                 unsigned nmaster = hang_info_pt->nmaster();
 
                 // Loop over the master nodes
                 for (unsigned i_master = 0; i_master < nmaster; i_master++)
                 {
                   // Set up a pointer to the master node
-                  Node *master_node_pt = hang_info_pt->master_node_pt(i_master);
+                  Node* master_node_pt = hang_info_pt->master_node_pt(i_master);
 
                   // The column number in the interpolation matrix: the
                   // global equation number of the d.o.f. stored at this master
@@ -1986,7 +1986,7 @@ namespace oomph
   /// of the interpolation matrix (if restrict_flag=2)
   //===================================================================
   template<unsigned DIM>
-  void MGSolver<DIM>::restrict_residual(const unsigned &level)
+  void MGSolver<DIM>::restrict_residual(const unsigned& level)
   {
 #ifdef PARANOID
     // Check to make sure we can actually restrict the vector
@@ -2009,7 +2009,7 @@ namespace oomph
   /// next finer mesh and correct the solution x at that level
   //===================================================================
   template<unsigned DIM>
-  void MGSolver<DIM>::interpolate_and_correct(const unsigned &level)
+  void MGSolver<DIM>::interpolate_and_correct(const unsigned& level)
   {
 #ifdef PARANOID
     // Check to make sure we can actually restrict the vector
@@ -2039,7 +2039,7 @@ namespace oomph
   void MGSolver<DIM>::modify_restriction_matrices()
   {
     // Create a null pointer
-    CRDoubleMatrix *restriction_matrix_pt = 0;
+    CRDoubleMatrix* restriction_matrix_pt = 0;
 
     // Loop over the levels
     for (unsigned level = 0; level < Nlevel - 1; level++)
@@ -2048,10 +2048,10 @@ namespace oomph
       restriction_matrix_pt = Restriction_matrices_storage_pt[level];
 
       // Get access to the row start data
-      const int *row_start_pt = restriction_matrix_pt->row_start();
+      const int* row_start_pt = restriction_matrix_pt->row_start();
 
       // Get access to the matrix entries
-      double *value_pt = restriction_matrix_pt->value();
+      double* value_pt = restriction_matrix_pt->value();
 
       // Initialise an auxiliary variable to store the index of the start
       // of the i-th row
@@ -2119,7 +2119,7 @@ namespace oomph
     unsigned n_dof = X_mg_vectors_storage[0].nrow();
 
     // Need to set up the distribution of the finest level vector
-    LinearAlgebraDistribution *dist_pt = new LinearAlgebraDistribution(
+    LinearAlgebraDistribution* dist_pt = new LinearAlgebraDistribution(
       Mg_problem_pt->communicator_pt(), n_dof, false);
 
 #ifdef PARANOID
@@ -2188,7 +2188,7 @@ namespace oomph
   void MGSolver<DIM>::set_self_test_vector()
   {
     // Set up a pointer to the refineable mesh
-    TreeBasedRefineableMeshBase *bulk_mesh_pt =
+    TreeBasedRefineableMeshBase* bulk_mesh_pt =
       Mg_problem_pt->mg_bulk_mesh_pt();
 
     // Find the number of elements in the bulk mesh
@@ -2205,13 +2205,13 @@ namespace oomph
     for (unsigned e = 0; e < n_el; e++)
     {
       // Get pointer to element
-      FiniteElement *el_pt = bulk_mesh_pt->finite_element_pt(e);
+      FiniteElement* el_pt = bulk_mesh_pt->finite_element_pt(e);
 
       // Loop over nodes
       for (unsigned j = 0; j < nnod; j++)
       {
         // Pointer to node
-        Node *nod_pt = el_pt->node_pt(j);
+        Node* nod_pt = el_pt->node_pt(j);
 
         // Sanity check
         if (nod_pt->nvalue() != 1)
@@ -2345,16 +2345,16 @@ namespace oomph
   /// nodal data, otherwise I don't know how to implement this...)
   //===================================================================
   template<unsigned DIM>
-  void MGSolver<DIM>::plot(const unsigned &hierarchy_level,
-                           const DoubleVector &input_vector,
-                           const std::string &filename)
+  void MGSolver<DIM>::plot(const unsigned& hierarchy_level,
+                           const DoubleVector& input_vector,
+                           const std::string& filename)
   {
     // Setup an output file
     std::ofstream some_file;
     some_file.open(filename.c_str());
 
     // Set up a pointer to the refineable mesh
-    TreeBasedRefineableMeshBase *bulk_mesh_pt =
+    TreeBasedRefineableMeshBase* bulk_mesh_pt =
       Mg_hierarchy[hierarchy_level]->mg_bulk_mesh_pt();
 
     // Find the number of elements in the bulk mesh
@@ -2374,7 +2374,7 @@ namespace oomph
     for (unsigned e = 0; e < n_el; e++)
     {
       // Get pointer to element
-      FiniteElement *el_pt = bulk_mesh_pt->finite_element_pt(e);
+      FiniteElement* el_pt = bulk_mesh_pt->finite_element_pt(e);
 
       // Input string for tecplot zone header (when plotting nnode_1d
       // points in each coordinate direction)
@@ -2384,7 +2384,7 @@ namespace oomph
       for (unsigned j = 0; j < nnod; j++)
       {
         // Pointer to node
-        Node *nod_pt = el_pt->node_pt(j);
+        Node* nod_pt = el_pt->node_pt(j);
 
         // Sanity check
         if (nod_pt->nvalue() != 1)
@@ -2452,14 +2452,14 @@ namespace oomph
 
             // Find the number of master nodes of the hanging
             // the node in the reference element
-            HangInfo *hang_info_pt = nod_pt->hanging_pt();
+            HangInfo* hang_info_pt = nod_pt->hanging_pt();
             unsigned nmaster = hang_info_pt->nmaster();
 
             // Loop over the master nodes
             for (unsigned i_master = 0; i_master < nmaster; i_master++)
             {
               // Set up a pointer to the master node
-              Node *master_node_pt = hang_info_pt->master_node_pt(i_master);
+              Node* master_node_pt = hang_info_pt->master_node_pt(i_master);
 
               // Get the global equation number of this node
               int master_jj = master_node_pt->eqn_number(0);
@@ -2491,7 +2491,7 @@ namespace oomph
   /// \short Linear solver
   //===================================================================
   template<unsigned DIM>
-  void MGSolver<DIM>::mg_solve(DoubleVector &result)
+  void MGSolver<DIM>::mg_solve(DoubleVector& result)
   {
     // If we're allowed to time things
     double t_mg_start = 0.0;

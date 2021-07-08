@@ -44,7 +44,7 @@ namespace oomph
   /// Get local coordinates of node j in the element; vector sets its own size
   template<unsigned INITIAL_NNODE_1D>
   void PRefineableQElement<1, INITIAL_NNODE_1D>::local_coordinate_of_node(
-    const unsigned &n, Vector<double> &s) const
+    const unsigned& n, Vector<double>& s) const
   {
     s.resize(1);
 
@@ -84,7 +84,7 @@ namespace oomph
   /// Get the local fractino of node j in the element
   template<unsigned INITIAL_NNODE_1D>
   void PRefineableQElement<1, INITIAL_NNODE_1D>::local_fraction_of_node(
-    const unsigned &n, Vector<double> &s_fraction)
+    const unsigned& n, Vector<double>& s_fraction)
   {
     this->local_coordinate_of_node(n, s_fraction);
     s_fraction[0] = 0.5 * (s_fraction[0] + 1.0);
@@ -92,7 +92,7 @@ namespace oomph
 
   template<unsigned INITIAL_NNODE_1D>
   double PRefineableQElement<1, INITIAL_NNODE_1D>::local_one_d_fraction_of_node(
-    const unsigned &n1d, const unsigned &i)
+    const unsigned& n1d, const unsigned& i)
   {
     switch (this->nnode_1d())
     {
@@ -135,8 +135,8 @@ namespace oomph
   /// Return the node at the specified local coordinate
   //==================================================================
   template<unsigned INITIAL_NNODE_1D>
-  Node *PRefineableQElement<1, INITIAL_NNODE_1D>::get_node_at_local_coordinate(
-    const Vector<double> &s) const
+  Node* PRefineableQElement<1, INITIAL_NNODE_1D>::get_node_at_local_coordinate(
+    const Vector<double>& s) const
   {
     // Load the tolerance into a local variable
     double tol = FiniteElement::Node_location_tolerance;
@@ -186,9 +186,9 @@ namespace oomph
   /// periodic the flag is_periodic will be true
   //===================================================================
   template<unsigned INITIAL_NNODE_1D>
-  Node *PRefineableQElement<1, INITIAL_NNODE_1D>::
-    node_created_by_son_of_neighbour(const Vector<double> &s_fraction,
-                                     bool &is_periodic)
+  Node* PRefineableQElement<1, INITIAL_NNODE_1D>::
+    node_created_by_son_of_neighbour(const Vector<double>& s_fraction,
+                                     bool& is_periodic)
   {
     // Not possible in 1D case, so return null pointer
     return 0;
@@ -202,22 +202,22 @@ namespace oomph
   //==================================================================
   template<unsigned INITIAL_NNODE_1D>
   void PRefineableQElement<1, INITIAL_NNODE_1D>::initial_setup(
-    Tree *const &adopted_father_pt, const unsigned &initial_p_order)
+    Tree* const& adopted_father_pt, const unsigned& initial_p_order)
   {
     // Storage for pointer to my father (in binarytree impersonation)
-    BinaryTree *father_pt = 0;
+    BinaryTree* father_pt = 0;
 
     // Check if an adopted father has been specified
     if (adopted_father_pt != 0)
     {
       // Get pointer to my father (in binarytree impersonation)
-      father_pt = dynamic_cast<BinaryTree *>(adopted_father_pt);
+      father_pt = dynamic_cast<BinaryTree*>(adopted_father_pt);
     }
     // Check if element is in a tree
     else if (Tree_pt != 0)
     {
       // Get pointer to my father (in binarytree impersonation)
-      father_pt = dynamic_cast<BinaryTree *>(binary_tree_pt()->father_pt());
+      father_pt = dynamic_cast<BinaryTree*>(binary_tree_pt()->father_pt());
     }
     // else
     // {
@@ -231,8 +231,8 @@ namespace oomph
     {
       if (father_pt != 0)
       {
-        PRefineableQElement<1, INITIAL_NNODE_1D> *father_el_pt =
-          dynamic_cast<PRefineableQElement<1, INITIAL_NNODE_1D> *>(
+        PRefineableQElement<1, INITIAL_NNODE_1D>* father_el_pt =
+          dynamic_cast<PRefineableQElement<1, INITIAL_NNODE_1D>*>(
             father_pt->object_pt());
         if (father_el_pt != 0)
         {
@@ -292,7 +292,7 @@ namespace oomph
   //==================================================================
   template<unsigned INITIAL_NNODE_1D>
   void PRefineableQElement<1, INITIAL_NNODE_1D>::pre_build(
-    Mesh *&mesh_pt, Vector<Node *> &new_node_pt)
+    Mesh*& mesh_pt, Vector<Node*>& new_node_pt)
   {
     /*
     //Pointer to my father (in binarytree impersonation)
@@ -328,11 +328,11 @@ namespace oomph
   //==================================================================
   template<unsigned INITIAL_NNODE_1D>
   void PRefineableQElement<1, INITIAL_NNODE_1D>::p_refine(
-    const int &inc, Mesh *const &mesh_pt, GeneralisedElement *const &clone_pt)
+    const int& inc, Mesh* const& mesh_pt, GeneralisedElement* const& clone_pt)
   {
     // Cast clone to correct type
-    PRefineableQElement<1, INITIAL_NNODE_1D> *clone_el_pt =
-      dynamic_cast<PRefineableQElement<1, INITIAL_NNODE_1D> *>(clone_pt);
+    PRefineableQElement<1, INITIAL_NNODE_1D>* clone_el_pt =
+      dynamic_cast<PRefineableQElement<1, INITIAL_NNODE_1D>*>(clone_pt);
 
     // Check if we can use it
     if (clone_el_pt == 0)
@@ -412,7 +412,7 @@ namespace oomph
 
     // Timestepper should be the same for all nodes -- use it
     // to create timesteppers for new nodes
-    TimeStepper *time_stepper_pt = this->node_pt(0)->time_stepper_pt();
+    TimeStepper* time_stepper_pt = this->node_pt(0)->time_stepper_pt();
 
     // Get number of history values (incl. present)
     unsigned ntstorage = time_stepper_pt->ntstorage();
@@ -483,7 +483,7 @@ namespace oomph
 
       // Get the pointer to the node in this element (or rather, its clone),
       // returns NULL if there is not node
-      Node *created_node_pt = clone_el_pt->get_node_at_local_coordinate(s);
+      Node* created_node_pt = clone_el_pt->get_node_at_local_coordinate(s);
 
       // Does this node already exist in this element?
       //----------------------------------------------
@@ -589,8 +589,8 @@ namespace oomph
           mesh_pt->add_node_pt(created_node_pt);
         }
 
-        AlgebraicElementBase *alg_el_pt =
-          dynamic_cast<AlgebraicElementBase *>(this);
+        AlgebraicElementBase* alg_el_pt =
+          dynamic_cast<AlgebraicElementBase*>(this);
 
         // If we do have an algebraic element
         if (alg_el_pt != 0)
@@ -607,8 +607,8 @@ namespace oomph
       } // End of case where we build the node ourselves
 
       // Check if the element is an algebraic element
-      AlgebraicElementBase *alg_el_pt =
-        dynamic_cast<AlgebraicElementBase *>(this);
+      AlgebraicElementBase* alg_el_pt =
+        dynamic_cast<AlgebraicElementBase*>(this);
 
       // If the element is an algebraic element, setup
       // node position (past and present) from algebraic node update
@@ -636,17 +636,17 @@ namespace oomph
     // geometric objects that affect the MacroElement-based
     // node update -- this needs to be done to set the node
     // update info for newly created nodes
-    MacroElementNodeUpdateElementBase *clone_m_el_pt =
-      dynamic_cast<MacroElementNodeUpdateElementBase *>(clone_el_pt);
+    MacroElementNodeUpdateElementBase* clone_m_el_pt =
+      dynamic_cast<MacroElementNodeUpdateElementBase*>(clone_el_pt);
     if (clone_m_el_pt != 0)
     {
       // Get vector of geometric objects from father (construct vector
       // via copy operation)
-      Vector<GeomObject *> geom_object_pt(clone_m_el_pt->geom_object_pt());
+      Vector<GeomObject*> geom_object_pt(clone_m_el_pt->geom_object_pt());
 
       // Cast current element to MacroElementNodeUpdateElement:
-      MacroElementNodeUpdateElementBase *m_el_pt =
-        dynamic_cast<MacroElementNodeUpdateElementBase *>(this);
+      MacroElementNodeUpdateElementBase* m_el_pt =
+        dynamic_cast<MacroElementNodeUpdateElementBase*>(this);
 
 #ifdef PARANOID
       if (m_el_pt == 0)
@@ -710,8 +710,8 @@ namespace oomph
   /// Shape functions for PRefineableQElement<DIM>
   //=======================================================================
   template<unsigned INITIAL_NNODE_1D>
-  void PRefineableQElement<1, INITIAL_NNODE_1D>::shape(const Vector<double> &s,
-                                                       Shape &psi) const
+  void PRefineableQElement<1, INITIAL_NNODE_1D>::shape(const Vector<double>& s,
+                                                       Shape& psi) const
   {
     switch (p_order())
     {
@@ -811,7 +811,7 @@ namespace oomph
   //=======================================================================
   template<unsigned INITIAL_NNODE_1D>
   void PRefineableQElement<1, INITIAL_NNODE_1D>::dshape_local(
-    const Vector<double> &s, Shape &psi, DShape &dpsi) const
+    const Vector<double>& s, Shape& psi, DShape& dpsi) const
   {
     switch (p_order())
     {
@@ -920,7 +920,7 @@ namespace oomph
   //=======================================================================
   template<unsigned INITIAL_NNODE_1D>
   void PRefineableQElement<1, INITIAL_NNODE_1D>::d2shape_local(
-    const Vector<double> &s, Shape &psi, DShape &dpsids, DShape &d2psids) const
+    const Vector<double>& s, Shape& psi, DShape& dpsids, DShape& d2psids) const
   {
     std::ostringstream error_message;
     error_message
@@ -935,7 +935,7 @@ namespace oomph
   //=================================================================
   template<unsigned INITIAL_NNODE_1D>
   void PRefineableQElement<1, INITIAL_NNODE_1D>::binary_hang_helper(
-    const int &value_id, const int &my_edge, std::ofstream &output_hangfile)
+    const int& value_id, const int& my_edge, std::ofstream& output_hangfile)
   {
   }
 
@@ -945,7 +945,7 @@ namespace oomph
   //=======================================================================
   template<unsigned INITIAL_NNODE_1D>
   void PRefineableQElement<1, INITIAL_NNODE_1D>::rebuild_from_sons(
-    Mesh *&mesh_pt)
+    Mesh*& mesh_pt)
   {
     // Get p-orders of sons
     unsigned n_sons = this->tree_pt()->nsons();
@@ -953,7 +953,7 @@ namespace oomph
     unsigned max_son_p_order = 0;
     for (unsigned ison = 0; ison < n_sons; ison++)
     {
-      PRefineableElement *el_pt = dynamic_cast<PRefineableElement *>(
+      PRefineableElement* el_pt = dynamic_cast<PRefineableElement*>(
         this->tree_pt()->son_pt(ison)->object_pt());
       son_p_order[ison] = el_pt->p_order();
       if (son_p_order[ison] > max_son_p_order)
@@ -997,7 +997,7 @@ namespace oomph
     }
 
     // Back up pointers to old nodes before they are lost
-    Vector<Node *> old_node_pt(old_Nnode);
+    Vector<Node*> old_node_pt(old_Nnode);
     for (unsigned n = 0; n < old_Nnode; n++)
     {
       old_node_pt[n] = this->node_pt(n);
@@ -1025,7 +1025,7 @@ namespace oomph
                           OOMPH_EXCEPTION_LOCATION);
     }
 
-    TimeStepper *time_stepper_pt = this->node_pt(0)->time_stepper_pt();
+    TimeStepper* time_stepper_pt = this->node_pt(0)->time_stepper_pt();
 
     // Determine number of history values stored
     const unsigned ntstorage = time_stepper_pt->ntstorage();
@@ -1050,7 +1050,7 @@ namespace oomph
       {
         // Has the node been created by one of its neighbours?
         bool is_periodic = false;
-        Node *created_node_pt =
+        Node* created_node_pt =
           this->node_created_by_neighbour(s_fraction, is_periodic);
 
         // If it has, set the pointer
@@ -1093,8 +1093,8 @@ namespace oomph
 
           // Get the pointer to the son element in which the new node
           // would live
-          PRefineableQElement<1, INITIAL_NNODE_1D> *son_el_pt =
-            dynamic_cast<PRefineableQElement<1, INITIAL_NNODE_1D> *>(
+          PRefineableQElement<1, INITIAL_NNODE_1D>* son_el_pt =
+            dynamic_cast<PRefineableQElement<1, INITIAL_NNODE_1D>*>(
               this->tree_pt()->son_pt(son)->object_pt());
 
           // In 1D we should never be rebuilding an element's vertex nodes
@@ -1173,8 +1173,7 @@ namespace oomph
     // Check if the element is an algebraic element
     // This is done on all nodes in the element after reconstruction
     // rather than as the nodes are built
-    AlgebraicElementBase *alg_el_pt =
-      dynamic_cast<AlgebraicElementBase *>(this);
+    AlgebraicElementBase* alg_el_pt = dynamic_cast<AlgebraicElementBase*>(this);
 
     // If so, throw error
     if (alg_el_pt != 0)
@@ -1197,7 +1196,7 @@ namespace oomph
   //====================================================================
   template<unsigned INITIAL_NNODE_1D>
   void PRefineableQElement<1, INITIAL_NNODE_1D>::check_integrity(
-    double &max_error)
+    double& max_error)
   {
     RefineableQElement<1>::check_integrity(max_error);
   }
@@ -1209,7 +1208,7 @@ namespace oomph
   /// Get local coordinates of node j in the element; vector sets its own size
   template<unsigned INITIAL_NNODE_1D>
   void PRefineableQElement<2, INITIAL_NNODE_1D>::local_coordinate_of_node(
-    const unsigned &n, Vector<double> &s) const
+    const unsigned& n, Vector<double>& s) const
   {
     s.resize(2);
     unsigned Nnode_1d = this->nnode_1d();
@@ -1262,7 +1261,7 @@ namespace oomph
   /// Get the local fractino of node j in the element
   template<unsigned INITIAL_NNODE_1D>
   void PRefineableQElement<2, INITIAL_NNODE_1D>::local_fraction_of_node(
-    const unsigned &n, Vector<double> &s_fraction)
+    const unsigned& n, Vector<double>& s_fraction)
   {
     this->local_coordinate_of_node(n, s_fraction);
     s_fraction[0] = 0.5 * (s_fraction[0] + 1.0);
@@ -1271,7 +1270,7 @@ namespace oomph
 
   template<unsigned INITIAL_NNODE_1D>
   double PRefineableQElement<2, INITIAL_NNODE_1D>::local_one_d_fraction_of_node(
-    const unsigned &n1d, const unsigned &i)
+    const unsigned& n1d, const unsigned& i)
   {
     switch (this->nnode_1d())
     {
@@ -1314,8 +1313,8 @@ namespace oomph
   /// Return the node at the specified local coordinate
   //==================================================================
   template<unsigned INITIAL_NNODE_1D>
-  Node *PRefineableQElement<2, INITIAL_NNODE_1D>::get_node_at_local_coordinate(
-    const Vector<double> &s) const
+  Node* PRefineableQElement<2, INITIAL_NNODE_1D>::get_node_at_local_coordinate(
+    const Vector<double>& s) const
   {
     unsigned Nnode_1d = this->nnode_1d();
     // Load the tolerance into a local variable
@@ -1379,8 +1378,8 @@ namespace oomph
   /// periodic the flag is_periodic will be true
   //===================================================================
   template<unsigned INITIAL_NNODE_1D>
-  Node *PRefineableQElement<2, INITIAL_NNODE_1D>::node_created_by_neighbour(
-    const Vector<double> &s_fraction, bool &is_periodic)
+  Node* PRefineableQElement<2, INITIAL_NNODE_1D>::node_created_by_neighbour(
+    const Vector<double>& s_fraction, bool& is_periodic)
   {
     using namespace QuadTreeNames;
 
@@ -1423,7 +1422,7 @@ namespace oomph
     for (unsigned j = 0; j < n_size; j++)
     {
       // Find pointer to neighbouring element along edge
-      QuadTree *neigh_pt;
+      QuadTree* neigh_pt;
       neigh_pt = quadtree_pt()->gteq_edge_neighbour(edges[j],
                                                     translate_s,
                                                     s_lo_neigh,
@@ -1440,8 +1439,8 @@ namespace oomph
         // pre-build they may contain pointers to the required nodes. e.g.
         // h-refinement of neighbouring linear and quadratic elements)
         bool a_vertex_node_is_built = false;
-        QElement<2, INITIAL_NNODE_1D> *neigh_obj_pt =
-          dynamic_cast<QElement<2, INITIAL_NNODE_1D> *>(neigh_pt->object_pt());
+        QElement<2, INITIAL_NNODE_1D>* neigh_obj_pt =
+          dynamic_cast<QElement<2, INITIAL_NNODE_1D>*>(neigh_pt->object_pt());
         if (neigh_obj_pt == 0)
         {
           throw OomphLibError("Not a quad element!",
@@ -1471,7 +1470,7 @@ namespace oomph
           }
 
           // Find the node in the neighbour
-          Node *neighbour_node_pt =
+          Node* neighbour_node_pt =
             neigh_pt->object_pt()->get_node_at_local_coordinate(s);
 
           // If there is a node, return it
@@ -1503,9 +1502,9 @@ namespace oomph
   /// periodic the flag is_periodic will be true
   //===================================================================
   template<unsigned INITIAL_NNODE_1D>
-  Node *PRefineableQElement<2, INITIAL_NNODE_1D>::
-    node_created_by_son_of_neighbour(const Vector<double> &s_fraction,
-                                     bool &is_periodic)
+  Node* PRefineableQElement<2, INITIAL_NNODE_1D>::
+    node_created_by_son_of_neighbour(const Vector<double>& s_fraction,
+                                     bool& is_periodic)
   {
     using namespace QuadTreeNames;
 
@@ -1548,7 +1547,7 @@ namespace oomph
     for (unsigned j = 0; j < n_size; j++)
     {
       // Find pointer to neighbouring element along edge
-      QuadTree *neigh_pt;
+      QuadTree* neigh_pt;
       neigh_pt = quadtree_pt()->gteq_edge_neighbour(edges[j],
                                                     translate_s,
                                                     s_lo_neigh,
@@ -1626,7 +1625,7 @@ namespace oomph
             }
 
             // Find the node in the neighbour's son
-            Node *neighbour_son_node_pt =
+            Node* neighbour_son_node_pt =
               neigh_pt->son_pt(son)->object_pt()->get_node_at_local_coordinate(
                 s_in_son);
 
@@ -1665,22 +1664,22 @@ namespace oomph
   //==================================================================
   template<unsigned INITIAL_NNODE_1D>
   void PRefineableQElement<2, INITIAL_NNODE_1D>::initial_setup(
-    Tree *const &adopted_father_pt, const unsigned &initial_p_order)
+    Tree* const& adopted_father_pt, const unsigned& initial_p_order)
   {
     // Storage for pointer to my father (in quadtree impersonation)
-    QuadTree *father_pt = 0;
+    QuadTree* father_pt = 0;
 
     // Check if an adopted father has been specified
     if (adopted_father_pt != 0)
     {
       // Get pointer to my father (in quadtree impersonation)
-      father_pt = dynamic_cast<QuadTree *>(adopted_father_pt);
+      father_pt = dynamic_cast<QuadTree*>(adopted_father_pt);
     }
     // Check if element is in a tree
     else if (Tree_pt != 0)
     {
       // Get pointer to my father (in quadtree impersonation)
-      father_pt = dynamic_cast<QuadTree *>(quadtree_pt()->father_pt());
+      father_pt = dynamic_cast<QuadTree*>(quadtree_pt()->father_pt());
     }
     // else
     // {
@@ -1694,8 +1693,8 @@ namespace oomph
     {
       if (father_pt != 0)
       {
-        PRefineableQElement<2, INITIAL_NNODE_1D> *father_el_pt =
-          dynamic_cast<PRefineableQElement<2, INITIAL_NNODE_1D> *>(
+        PRefineableQElement<2, INITIAL_NNODE_1D>* father_el_pt =
+          dynamic_cast<PRefineableQElement<2, INITIAL_NNODE_1D>*>(
             father_pt->object_pt());
         if (father_el_pt != 0)
         {
@@ -1755,7 +1754,7 @@ namespace oomph
   //==================================================================
   template<unsigned INITIAL_NNODE_1D>
   void PRefineableQElement<2, INITIAL_NNODE_1D>::pre_build(
-    Mesh *&mesh_pt, Vector<Node *> &new_node_pt)
+    Mesh*& mesh_pt, Vector<Node*>& new_node_pt)
   {
     using namespace QuadTreeNames;
 
@@ -1769,7 +1768,7 @@ namespace oomph
     }
 
     // Pointer to my father (in quadtree impersonation)
-    QuadTree *father_pt = dynamic_cast<QuadTree *>(quadtree_pt()->father_pt());
+    QuadTree* father_pt = dynamic_cast<QuadTree*>(quadtree_pt()->father_pt());
 
     // What type of son am I? Ask my quadtree representation...
     int son_type = Tree_pt->son_type();
@@ -1790,12 +1789,12 @@ namespace oomph
 #endif
 
       // Return pointer to father element
-      RefineableQElement<2> *father_el_pt =
-        dynamic_cast<RefineableQElement<2> *>(father_pt->object_pt());
+      RefineableQElement<2>* father_el_pt =
+        dynamic_cast<RefineableQElement<2>*>(father_pt->object_pt());
 
       // Timestepper should be the same for all nodes in father
       // element -- use it create timesteppers for new nodes
-      TimeStepper *time_stepper_pt =
+      TimeStepper* time_stepper_pt =
         father_el_pt->node_pt(0)->time_stepper_pt();
 
       // Number of history values (incl. present)
@@ -1910,7 +1909,7 @@ namespace oomph
 
             // Get the pointer to the node in the father, returns NULL
             // if there is not node
-            Node *created_node_pt =
+            Node* created_node_pt =
               father_el_pt->get_node_at_local_coordinate(s);
 
             // Does this node already exist in father element?
@@ -1961,12 +1960,12 @@ namespace oomph
       // If this is element updates by macro element node update then we need
       // to set the correct info in the nodes here since this won't get done
       // later in build() because we already have all our nodes created.
-      MacroElementNodeUpdateElementBase *m_el_pt =
-        dynamic_cast<MacroElementNodeUpdateElementBase *>(this);
+      MacroElementNodeUpdateElementBase* m_el_pt =
+        dynamic_cast<MacroElementNodeUpdateElementBase*>(this);
       if (m_el_pt != 0)
       {
         // Get vector of geometric objects
-        Vector<GeomObject *> geom_object_pt = m_el_pt->geom_object_pt();
+        Vector<GeomObject*> geom_object_pt = m_el_pt->geom_object_pt();
 
         //// Build update info by passing vector of geometric objects:
         //// This sets the current element to be the update element
@@ -1987,19 +1986,19 @@ namespace oomph
   //==================================================================
   template<unsigned INITIAL_NNODE_1D>
   void PRefineableQElement<2, INITIAL_NNODE_1D>::p_refine(
-    const int &inc, Mesh *const &mesh_pt, GeneralisedElement *const &clone_pt)
+    const int& inc, Mesh* const& mesh_pt, GeneralisedElement* const& clone_pt)
   {
     // Cast clone to correct type
-    PRefineableQElement<2, INITIAL_NNODE_1D> *clone_el_pt =
-      dynamic_cast<PRefineableQElement<2, INITIAL_NNODE_1D> *>(clone_pt);
+    PRefineableQElement<2, INITIAL_NNODE_1D>* clone_el_pt =
+      dynamic_cast<PRefineableQElement<2, INITIAL_NNODE_1D>*>(clone_pt);
 
     // If it is a MacroElement then we need to copy the geometric data too.
-    MacroElementNodeUpdateElementBase *m_el_pt =
-      dynamic_cast<MacroElementNodeUpdateElementBase *>(this);
+    MacroElementNodeUpdateElementBase* m_el_pt =
+      dynamic_cast<MacroElementNodeUpdateElementBase*>(this);
     if (m_el_pt != 0)
     {
-      MacroElementNodeUpdateElementBase *clone_m_el_pt =
-        dynamic_cast<MacroElementNodeUpdateElementBase *>(clone_pt);
+      MacroElementNodeUpdateElementBase* clone_m_el_pt =
+        dynamic_cast<MacroElementNodeUpdateElementBase*>(clone_pt);
 
       // Store local copy of geom object vector, so it can be passed on
       // to son elements (and their nodes) during refinement
@@ -2076,18 +2075,18 @@ namespace oomph
       }
 
       // Is this a macro element?
-      MacroElementNodeUpdateElementBase *m_el_pt =
-        dynamic_cast<MacroElementNodeUpdateElementBase *>(this);
+      MacroElementNodeUpdateElementBase* m_el_pt =
+        dynamic_cast<MacroElementNodeUpdateElementBase*>(this);
       if (m_el_pt != 0)
       {
         // Get macro element version of clone
-        MacroElementNodeUpdateElementBase *clone_m_el_pt =
-          dynamic_cast<MacroElementNodeUpdateElementBase *>(clone_el_pt);
+        MacroElementNodeUpdateElementBase* clone_m_el_pt =
+          dynamic_cast<MacroElementNodeUpdateElementBase*>(clone_el_pt);
 
         // Does the clone have the same geometric objects?
-        Vector<GeomObject *> clone_geom_object_pt(
+        Vector<GeomObject*> clone_geom_object_pt(
           clone_m_el_pt->geom_object_pt());
-        Vector<GeomObject *> geom_object_pt(m_el_pt->geom_object_pt());
+        Vector<GeomObject*> geom_object_pt(m_el_pt->geom_object_pt());
 
         clone_is_ok =
           clone_is_ok && (geom_object_pt.size() == clone_geom_object_pt.size());
@@ -2130,7 +2129,7 @@ namespace oomph
 
     // Timestepper should be the same for all nodes -- use it
     // to create timesteppers for new nodes
-    TimeStepper *time_stepper_pt = this->node_pt(0)->time_stepper_pt();
+    TimeStepper* time_stepper_pt = this->node_pt(0)->time_stepper_pt();
 
     // Get number of history values (incl. present)
     unsigned ntstorage = time_stepper_pt->ntstorage();
@@ -2214,7 +2213,7 @@ namespace oomph
 
         // Get the pointer to the node in this element (or rather, its clone),
         // returns NULL if there is not node
-        Node *created_node_pt = clone_el_pt->get_node_at_local_coordinate(s);
+        Node* created_node_pt = clone_el_pt->get_node_at_local_coordinate(s);
 
         // Does this node already exist in this element?
         //----------------------------------------------
@@ -2276,7 +2275,7 @@ namespace oomph
               // one
               // The returned created_node_pt is actually the neighbouring
               // periodic node
-              Node *neighbour_node_pt = created_node_pt;
+              Node* neighbour_node_pt = created_node_pt;
 
               // Determine the edge on which the new node will live
               //(cannot be a vertex node)
@@ -2411,7 +2410,7 @@ namespace oomph
                 // one
                 // The returned created_node_pt is actually the neighbouring
                 // periodic node
-                Node *neighbour_node_pt = created_node_pt;
+                Node* neighbour_node_pt = created_node_pt;
 
                 // Determine the edge on which the new node will live
                 //(cannot be a vertex node)
@@ -2596,15 +2595,15 @@ namespace oomph
 
             // Solid node? If so, deal with the positional boundary
             // conditions:
-            SolidNode *solid_node_pt =
-              dynamic_cast<SolidNode *>(created_node_pt);
+            SolidNode* solid_node_pt =
+              dynamic_cast<SolidNode*>(created_node_pt);
             if (solid_node_pt != 0)
             {
               // Get the positional boundary conditions from the father:
               unsigned n_dim = created_node_pt->ndim();
               Vector<int> solid_bound_cons(n_dim);
-              RefineableSolidQElement<2> *clone_solid_el_pt =
-                dynamic_cast<RefineableSolidQElement<2> *>(clone_el_pt);
+              RefineableSolidQElement<2>* clone_solid_el_pt =
+                dynamic_cast<RefineableSolidQElement<2>*>(clone_el_pt);
 #ifdef PARANOID
               if (clone_solid_el_pt == 0)
               {
@@ -2716,8 +2715,8 @@ namespace oomph
             mesh_pt->add_node_pt(created_node_pt);
           }
 
-          AlgebraicElementBase *alg_el_pt =
-            dynamic_cast<AlgebraicElementBase *>(this);
+          AlgebraicElementBase* alg_el_pt =
+            dynamic_cast<AlgebraicElementBase*>(this);
 
           // If we do have an algebraic element
           if (alg_el_pt != 0)
@@ -2734,8 +2733,8 @@ namespace oomph
         } // End of case when we build the node ourselves
 
         // Check if the element is an algebraic element
-        AlgebraicElementBase *alg_el_pt =
-          dynamic_cast<AlgebraicElementBase *>(this);
+        AlgebraicElementBase* alg_el_pt =
+          dynamic_cast<AlgebraicElementBase*>(this);
 
         // If the element is an algebraic element, setup
         // node position (past and present) from algebraic node update
@@ -2765,17 +2764,17 @@ namespace oomph
     // geometric objects that affect the MacroElement-based
     // node update -- this needs to be done to set the node
     // update info for newly created nodes
-    MacroElementNodeUpdateElementBase *clone_m_el_pt =
-      dynamic_cast<MacroElementNodeUpdateElementBase *>(clone_el_pt);
+    MacroElementNodeUpdateElementBase* clone_m_el_pt =
+      dynamic_cast<MacroElementNodeUpdateElementBase*>(clone_el_pt);
     if (clone_m_el_pt != 0)
     {
       // Get vector of geometric objects from father (construct vector
       // via copy operation)
-      Vector<GeomObject *> geom_object_pt(clone_m_el_pt->geom_object_pt());
+      Vector<GeomObject*> geom_object_pt(clone_m_el_pt->geom_object_pt());
 
       // Cast current element to MacroElementNodeUpdateElement:
-      MacroElementNodeUpdateElementBase *m_el_pt =
-        dynamic_cast<MacroElementNodeUpdateElementBase *>(this);
+      MacroElementNodeUpdateElementBase* m_el_pt =
+        dynamic_cast<MacroElementNodeUpdateElementBase*>(this);
 
 #ifdef PARANOID
       if (m_el_pt == 0)
@@ -2900,8 +2899,8 @@ namespace oomph
   /// Shape functions for PRefineableQElement<DIM>
   //=======================================================================
   template<unsigned INITIAL_NNODE_1D>
-  void PRefineableQElement<2, INITIAL_NNODE_1D>::shape(const Vector<double> &s,
-                                                       Shape &psi) const
+  void PRefineableQElement<2, INITIAL_NNODE_1D>::shape(const Vector<double>& s,
+                                                       Shape& psi) const
   {
     switch (p_order())
     {
@@ -3022,7 +3021,7 @@ namespace oomph
   //=======================================================================
   template<unsigned INITIAL_NNODE_1D>
   void PRefineableQElement<2, INITIAL_NNODE_1D>::dshape_local(
-    const Vector<double> &s, Shape &psi, DShape &dpsids) const
+    const Vector<double>& s, Shape& psi, DShape& dpsids) const
   {
     switch (p_order())
     {
@@ -3186,7 +3185,7 @@ namespace oomph
   //=======================================================================
   template<unsigned INITIAL_NNODE_1D>
   void PRefineableQElement<2, INITIAL_NNODE_1D>::d2shape_local(
-    const Vector<double> &s, Shape &psi, DShape &dpsids, DShape &d2psids) const
+    const Vector<double>& s, Shape& psi, DShape& dpsids, DShape& d2psids) const
   {
     std::ostringstream error_message;
     error_message
@@ -3201,7 +3200,7 @@ namespace oomph
   //=======================================================================
   template<unsigned INITIAL_NNODE_1D>
   void PRefineableQElement<2, INITIAL_NNODE_1D>::rebuild_from_sons(
-    Mesh *&mesh_pt)
+    Mesh*& mesh_pt)
   {
     using namespace QuadTreeNames;
 
@@ -3211,7 +3210,7 @@ namespace oomph
     unsigned max_son_p_order = 0;
     for (unsigned ison = 0; ison < n_sons; ison++)
     {
-      PRefineableElement *el_pt = dynamic_cast<PRefineableElement *>(
+      PRefineableElement* el_pt = dynamic_cast<PRefineableElement*>(
         this->tree_pt()->son_pt(ison)->object_pt());
       son_p_order[ison] = el_pt->p_order();
       if (son_p_order[ison] > max_son_p_order)
@@ -3255,7 +3254,7 @@ namespace oomph
     }
 
     // Back up pointers to old nodes before they are lost
-    Vector<Node *> old_node_pt(old_Nnode);
+    Vector<Node*> old_node_pt(old_Nnode);
     for (unsigned n = 0; n < old_Nnode; n++)
     {
       old_node_pt[n] = this->node_pt(n);
@@ -3279,22 +3278,22 @@ namespace oomph
       unsigned midpoint = (this->p_order() - 1) / 2;
 
       // Bottom edge
-      this->node_pt(midpoint) = dynamic_cast<RefineableQElement<2> *>(
+      this->node_pt(midpoint) = dynamic_cast<RefineableQElement<2>*>(
                                   quadtree_pt()->son_pt(SW)->object_pt())
                                   ->vertex_node_pt(1);
       // Left edge
       this->node_pt(midpoint * this->p_order()) =
-        dynamic_cast<RefineableQElement<2> *>(
+        dynamic_cast<RefineableQElement<2>*>(
           quadtree_pt()->son_pt(SW)->object_pt())
           ->vertex_node_pt(2);
       // Top edge
       this->node_pt((this->p_order() - 1) * this->p_order() + midpoint) =
-        dynamic_cast<RefineableQElement<2> *>(
+        dynamic_cast<RefineableQElement<2>*>(
           quadtree_pt()->son_pt(NE)->object_pt())
           ->vertex_node_pt(2);
       // Right edge
       this->node_pt((midpoint + 1) * this->p_order() - 1) =
-        dynamic_cast<RefineableQElement<2> *>(
+        dynamic_cast<RefineableQElement<2>*>(
           quadtree_pt()->son_pt(NE)->object_pt())
           ->vertex_node_pt(1);
     }
@@ -3308,7 +3307,7 @@ namespace oomph
                           OOMPH_EXCEPTION_LOCATION);
     }
 
-    TimeStepper *time_stepper_pt = this->node_pt(0)->time_stepper_pt();
+    TimeStepper* time_stepper_pt = this->node_pt(0)->time_stepper_pt();
     unsigned ntstorage = time_stepper_pt->ntstorage();
 
     unsigned jnod = 0;
@@ -3338,7 +3337,7 @@ namespace oomph
 
         // Get the pointer to the node in this element, returns NULL
         // if there is not node
-        Node *created_node_pt = this->get_node_at_local_coordinate(s);
+        Node* created_node_pt = this->get_node_at_local_coordinate(s);
 
         // Does this node already exist in this element?
         //----------------------------------------------
@@ -3433,8 +3432,8 @@ namespace oomph
 
           // Get the pointer to the son element in which the new node
           // would live
-          PRefineableQElement<2, INITIAL_NNODE_1D> *son_el_pt =
-            dynamic_cast<PRefineableQElement<2, INITIAL_NNODE_1D> *>(
+          PRefineableQElement<2, INITIAL_NNODE_1D>* son_el_pt =
+            dynamic_cast<PRefineableQElement<2, INITIAL_NNODE_1D>*>(
               this->tree_pt()->son_pt(son)->object_pt());
 
           // If we are rebuilding, then worry about the boundary conditions
@@ -3525,15 +3524,15 @@ namespace oomph
 
             // Solid node? If so, deal with the positional boundary
             // conditions:
-            SolidNode *solid_node_pt =
-              dynamic_cast<SolidNode *>(created_node_pt);
+            SolidNode* solid_node_pt =
+              dynamic_cast<SolidNode*>(created_node_pt);
             if (solid_node_pt != 0)
             {
               // Get the positional boundary conditions from the father:
               unsigned n_dim = created_node_pt->ndim();
               Vector<int> solid_bound_cons(n_dim);
-              RefineableSolidQElement<2> *son_solid_el_pt =
-                dynamic_cast<RefineableSolidQElement<2> *>(son_el_pt);
+              RefineableSolidQElement<2>* son_solid_el_pt =
+                dynamic_cast<RefineableSolidQElement<2>*>(son_el_pt);
 #ifdef PARANOID
               if (son_solid_el_pt == 0)
               {
@@ -3638,8 +3637,8 @@ namespace oomph
           mesh_pt->add_node_pt(created_node_pt);
 
           // Check if the element is an algebraic element
-          AlgebraicElementBase *alg_el_pt =
-            dynamic_cast<AlgebraicElementBase *>(this);
+          AlgebraicElementBase* alg_el_pt =
+            dynamic_cast<AlgebraicElementBase*>(this);
 
           // If we do have an algebraic element
           if (alg_el_pt != 0)
@@ -3662,8 +3661,8 @@ namespace oomph
     // parameters for the current element's nodes. These need to be reset
     // (as in MacroElementNodeUpdateElement<ELEMENT>::rebuild_from_sons())
     // because the nodes in this element have changed
-    MacroElementNodeUpdateElementBase *m_el_pt =
-      dynamic_cast<MacroElementNodeUpdateElementBase *>(this);
+    MacroElementNodeUpdateElementBase* m_el_pt =
+      dynamic_cast<MacroElementNodeUpdateElementBase*>(this);
     if (m_el_pt != 0)
     {
       // Loop over the nodes
@@ -3674,10 +3673,10 @@ namespace oomph
         this->local_coordinate_of_node(j, s_in_node_update_element);
 
         // Get vector of geometric objects
-        Vector<GeomObject *> geom_object_pt(m_el_pt->geom_object_pt());
+        Vector<GeomObject*> geom_object_pt(m_el_pt->geom_object_pt());
 
         // Pass the lot to the node
-        static_cast<MacroElementNodeUpdateNode *>(this->node_pt(j))
+        static_cast<MacroElementNodeUpdateNode*>(this->node_pt(j))
           ->set_node_update_info(
             this, s_in_node_update_element, geom_object_pt);
       }
@@ -3739,7 +3738,7 @@ namespace oomph
   //====================================================================
   template<unsigned INITIAL_NNODE_1D>
   void PRefineableQElement<2, INITIAL_NNODE_1D>::check_integrity(
-    double &max_error)
+    double& max_error)
   {
     // Overloaded to *not* check for continuity in value of interpolated
     // variables. This is necessary because mortaring does not ensure continuity
@@ -3786,7 +3785,7 @@ namespace oomph
       bool in_neighbouring_tree;
 
       // Find pointer to neighbour in this direction
-      QuadTree *neigh_pt;
+      QuadTree* neigh_pt;
       neigh_pt = quadtree_pt()->gteq_edge_neighbour(edges[edge_counter],
                                                     translate_s,
                                                     s_lo_neigh,
@@ -3826,7 +3825,7 @@ namespace oomph
         {
           unsigned my_p_order = this->p_order();
           unsigned neigh_p_order =
-            dynamic_cast<PRefineableQElement *>(neigh_pt->object_pt())
+            dynamic_cast<PRefineableQElement*>(neigh_pt->object_pt())
               ->p_order();
           if (my_p_order != neigh_p_order)
           {
@@ -3838,7 +3837,7 @@ namespace oomph
         // With macro-elements, (strong) continuity in position is nolonger
         // guaranteed either, so we don't check for this either. In fact, we do
         // nothing at all.
-        if (dynamic_cast<FiniteElement *>(neigh_pt->object_pt())
+        if (dynamic_cast<FiniteElement*>(neigh_pt->object_pt())
               ->macro_elem_pt() != 0)
         {
           // We have a macro element, so do nothing!
@@ -3852,7 +3851,7 @@ namespace oomph
           for (unsigned i0 = 0; i0 < n_p; i0++)
           {
             // Storage for pointer to the local node
-            Node *local_node_pt = 0;
+            Node* local_node_pt = 0;
 
             switch (edge_counter)
             {
@@ -4040,7 +4039,7 @@ namespace oomph
   //=================================================================
   template<unsigned INITIAL_NNODE_1D>
   void PRefineableQElement<2, INITIAL_NNODE_1D>::quad_hang_helper(
-    const int &value_id, const int &my_edge, std::ofstream &output_hangfile)
+    const int& value_id, const int& my_edge, std::ofstream& output_hangfile)
   {
     using namespace QuadTreeNames;
 
@@ -4051,7 +4050,7 @@ namespace oomph
     bool in_neighbouring_tree;
 
     // Find pointer to neighbour in this direction
-    QuadTree *neigh_pt;
+    QuadTree* neigh_pt;
     neigh_pt = this->quadtree_pt()->gteq_edge_neighbour(my_edge,
                                                         translate_s,
                                                         s_lo_neigh,
@@ -4084,10 +4083,10 @@ namespace oomph
         // Neighbour is same size as me
         // Find p-orders of each element
         unsigned my_p_order =
-          dynamic_cast<PRefineableQElement<2, INITIAL_NNODE_1D> *>(this)
+          dynamic_cast<PRefineableQElement<2, INITIAL_NNODE_1D>*>(this)
             ->p_order();
         unsigned neigh_p_order =
-          dynamic_cast<PRefineableQElement<2, INITIAL_NNODE_1D> *>(
+          dynamic_cast<PRefineableQElement<2, INITIAL_NNODE_1D>*>(
             neigh_pt->object_pt())
             ->p_order();
 
@@ -4136,13 +4135,13 @@ namespace oomph
       }
 
       // Get pointer to neighbouring master element (in p-refineable form)
-      PRefineableQElement<2, INITIAL_NNODE_1D> *neigh_obj_pt;
-      neigh_obj_pt = dynamic_cast<PRefineableQElement<2, INITIAL_NNODE_1D> *>(
+      PRefineableQElement<2, INITIAL_NNODE_1D>* neigh_obj_pt;
+      neigh_obj_pt = dynamic_cast<PRefineableQElement<2, INITIAL_NNODE_1D>*>(
         neigh_pt->object_pt());
 
       // Create vector of master and slave nodes
       //----------------------------------------
-      Vector<Node *> master_node_pt, slave_node_pt;
+      Vector<Node*> master_node_pt, slave_node_pt;
       Vector<unsigned> master_node_number, slave_node_number;
       Vector<Vector<double>> slave_node_s_fraction;
 
@@ -4176,7 +4175,7 @@ namespace oomph
       // Storage for pointers to the nodes and their numbers along the master
       // edge
       unsigned neighbour_node_number = 0;
-      Node *neighbour_node_pt = 0;
+      Node* neighbour_node_pt = 0;
 
       // Loop over nodes along the edge
       for (unsigned i0 = 0; i0 < neigh_n_p; i0++)
@@ -4221,7 +4220,7 @@ namespace oomph
 
       // Storage for pointers to the local nodes and their numbers along my edge
       unsigned local_node_number = 0;
-      Node *local_node_pt = 0;
+      Node* local_node_pt = 0;
 
       // Loop over the nodes along my edge
       for (unsigned i0 = 0; i0 < my_n_p; i0++)
@@ -4364,7 +4363,7 @@ namespace oomph
           slave_node_pt[vertex_pos[v]]->set_nonhanging();
 
           // Set up hanging scheme for this node
-          HangInfo *explicit_hang_pt = new HangInfo(n_master_nodes);
+          HangInfo* explicit_hang_pt = new HangInfo(n_master_nodes);
           for (unsigned m = 0; m < n_master_nodes; m++)
           {
             explicit_hang_pt->set_master_node_pt(
@@ -4465,7 +4464,7 @@ namespace oomph
         // data is not unnecessarily copied)
         // unsigned quadrature_order =
         // std::max(slave_element_nnode_1d,master_element_nnode_1d);
-        Vector<double> *quadrature_knot, *quadrature_weight;
+        Vector<double>*quadrature_knot, *quadrature_weight;
         if (slave_element_nnode_1d >= master_element_nnode_1d)
         {
           // Use the same quadrature order as the slave element (me)
@@ -4604,7 +4603,7 @@ namespace oomph
 
         // Create structures to hold the hanging info
         //-------------------------------------------
-        Vector<HangInfo *> hang_info_pt(n_slave_nodes);
+        Vector<HangInfo*> hang_info_pt(n_slave_nodes);
         for (unsigned i = 0; i < n_slave_nodes - n_mortar_vertices; i++)
         {
           hang_info_pt[i] = new HangInfo(n_master_nodes);
@@ -4760,7 +4759,7 @@ namespace oomph
   /// Get local coordinates of node j in the element; vector sets its own size
   template<unsigned INITIAL_NNODE_1D>
   void PRefineableQElement<3, INITIAL_NNODE_1D>::local_coordinate_of_node(
-    const unsigned &n, Vector<double> &s) const
+    const unsigned& n, Vector<double>& s) const
   {
     s.resize(3);
     unsigned Nnode_1d = this->nnode_1d();
@@ -4820,7 +4819,7 @@ namespace oomph
   /// Get the local fractino of node j in the element
   template<unsigned INITIAL_NNODE_1D>
   void PRefineableQElement<3, INITIAL_NNODE_1D>::local_fraction_of_node(
-    const unsigned &n, Vector<double> &s_fraction)
+    const unsigned& n, Vector<double>& s_fraction)
   {
     this->local_coordinate_of_node(n, s_fraction);
     s_fraction[0] = 0.5 * (s_fraction[0] + 1.0);
@@ -4830,7 +4829,7 @@ namespace oomph
 
   template<unsigned INITIAL_NNODE_1D>
   double PRefineableQElement<3, INITIAL_NNODE_1D>::local_one_d_fraction_of_node(
-    const unsigned &n1d, const unsigned &i)
+    const unsigned& n1d, const unsigned& i)
   {
     switch (this->nnode_1d())
     {
@@ -4873,8 +4872,8 @@ namespace oomph
   /// Return the node at the specified local coordinate
   //==================================================================
   template<unsigned INITIAL_NNODE_1D>
-  Node *PRefineableQElement<3, INITIAL_NNODE_1D>::get_node_at_local_coordinate(
-    const Vector<double> &s) const
+  Node* PRefineableQElement<3, INITIAL_NNODE_1D>::get_node_at_local_coordinate(
+    const Vector<double>& s) const
   {
     unsigned Nnode_1d = this->nnode_1d();
     // Load the tolerance into a local variable
@@ -4938,8 +4937,8 @@ namespace oomph
   /// a pointer to that node. If not, return NULL (0).
   //===================================================================
   template<unsigned INITIAL_NNODE_1D>
-  Node *PRefineableQElement<3, INITIAL_NNODE_1D>::node_created_by_neighbour(
-    const Vector<double> &s_fraction)
+  Node* PRefineableQElement<3, INITIAL_NNODE_1D>::node_created_by_neighbour(
+    const Vector<double>& s_fraction)
   {
     using namespace OcTreeNames;
 
@@ -5043,7 +5042,7 @@ namespace oomph
     for (unsigned j = 0; j < n_face; j++)
     {
       // Find pointer to neighbouring element along face
-      OcTree *neigh_pt;
+      OcTree* neigh_pt;
       neigh_pt = octree_pt()->gteq_face_neighbour(
         faces[j], translate_s, s_lo_neigh, s_hi_neigh, neigh_face, diff_level);
 
@@ -5055,8 +5054,8 @@ namespace oomph
         // pre-build they may contain pointers to the required nodes. e.g.
         // h-refinement of neighbouring linear and quadratic elements)
         bool a_vertex_node_is_built = false;
-        QElement<3, INITIAL_NNODE_1D> *neigh_obj_pt =
-          dynamic_cast<QElement<3, INITIAL_NNODE_1D> *>(neigh_pt->object_pt());
+        QElement<3, INITIAL_NNODE_1D>* neigh_obj_pt =
+          dynamic_cast<QElement<3, INITIAL_NNODE_1D>*>(neigh_pt->object_pt());
         if (neigh_obj_pt == 0)
         {
           throw OomphLibError("Not a quad element!",
@@ -5087,7 +5086,7 @@ namespace oomph
           }
 
           // Find the node in the neighbour
-          Node *neighbour_node_pt =
+          Node* neighbour_node_pt =
             neigh_pt->object_pt()->get_node_at_local_coordinate(s);
 
           // If there is a node, return it
@@ -5126,7 +5125,7 @@ namespace oomph
       while (keep_searching)
       {
         // Find pointer to neighbouring element along edge
-        OcTree *neigh_pt;
+        OcTree* neigh_pt;
         neigh_pt = octree_pt()->gteq_true_edge_neighbour(edges[j],
                                                          i_root_edge_neighbour,
                                                          nroot_edge_neighbour,
@@ -5144,9 +5143,8 @@ namespace oomph
           // pre-build they may contain pointers to the required nodes. e.g.
           // h-refinement of neighbouring linear and quadratic elements)
           bool a_vertex_node_is_built = false;
-          QElement<3, INITIAL_NNODE_1D> *neigh_obj_pt =
-            dynamic_cast<QElement<3, INITIAL_NNODE_1D> *>(
-              neigh_pt->object_pt());
+          QElement<3, INITIAL_NNODE_1D>* neigh_obj_pt =
+            dynamic_cast<QElement<3, INITIAL_NNODE_1D>*>(neigh_pt->object_pt());
           if (neigh_obj_pt == 0)
           {
             throw OomphLibError("Not a quad element!",
@@ -5178,7 +5176,7 @@ namespace oomph
             }
 
             // Find the node in the neighbour
-            Node *neighbour_node_pt =
+            Node* neighbour_node_pt =
               neigh_pt->object_pt()->get_node_at_local_coordinate(s);
 
             // If there is a node, return it
@@ -5215,8 +5213,8 @@ namespace oomph
   /// periodic the flag is_periodic will be true
   //===================================================================
   template<unsigned INITIAL_NNODE_1D>
-  Node *PRefineableQElement<3, INITIAL_NNODE_1D>::
-    node_created_by_son_of_neighbour(const Vector<double> &s_fraction)
+  Node* PRefineableQElement<3, INITIAL_NNODE_1D>::
+    node_created_by_son_of_neighbour(const Vector<double>& s_fraction)
   {
     using namespace OcTreeNames;
 
@@ -5320,7 +5318,7 @@ namespace oomph
     for (unsigned j = 0; j < n_face; j++)
     {
       // Find pointer to neighbouring element along face
-      OcTree *neigh_pt;
+      OcTree* neigh_pt;
       neigh_pt = octree_pt()->gteq_face_neighbour(
         faces[j], translate_s, s_lo_neigh, s_hi_neigh, neigh_face, diff_level);
 
@@ -5451,7 +5449,7 @@ namespace oomph
             }
 
             // Find the node in the neighbour's son
-            Node *neighbour_son_node_pt =
+            Node* neighbour_son_node_pt =
               neigh_pt->son_pt(son)->object_pt()->get_node_at_local_coordinate(
                 s_in_son);
 
@@ -5493,7 +5491,7 @@ namespace oomph
       while (keep_searching)
       {
         // Find pointer to neighbouring element along edge
-        OcTree *neigh_pt;
+        OcTree* neigh_pt;
         neigh_pt = octree_pt()->gteq_true_edge_neighbour(edges[j],
                                                          i_root_edge_neighbour,
                                                          nroot_edge_neighbour,
@@ -5630,7 +5628,7 @@ namespace oomph
               }
 
               // Find the node in the neighbour's son
-              Node *neighbour_son_node_pt =
+              Node* neighbour_son_node_pt =
                 neigh_pt->son_pt(son)
                   ->object_pt()
                   ->get_node_at_local_coordinate(s_in_son);
@@ -5671,22 +5669,22 @@ namespace oomph
   //==================================================================
   template<unsigned INITIAL_NNODE_1D>
   void PRefineableQElement<3, INITIAL_NNODE_1D>::initial_setup(
-    Tree *const &adopted_father_pt, const unsigned &initial_p_order)
+    Tree* const& adopted_father_pt, const unsigned& initial_p_order)
   {
     // Storage for pointer to my father (in octree impersonation)
-    OcTree *father_pt = 0;
+    OcTree* father_pt = 0;
 
     // Check if an adopted father has been specified
     if (adopted_father_pt != 0)
     {
       // Get pointer to my father (in octree impersonation)
-      father_pt = dynamic_cast<OcTree *>(adopted_father_pt);
+      father_pt = dynamic_cast<OcTree*>(adopted_father_pt);
     }
     // Check if element is in a tree
     else if (Tree_pt != 0)
     {
       // Get pointer to my father (in octree impersonation)
-      father_pt = dynamic_cast<OcTree *>(octree_pt()->father_pt());
+      father_pt = dynamic_cast<OcTree*>(octree_pt()->father_pt());
     }
     else
     {
@@ -5702,8 +5700,8 @@ namespace oomph
     {
       if (father_pt != 0)
       {
-        PRefineableQElement<3, INITIAL_NNODE_1D> *father_el_pt =
-          dynamic_cast<PRefineableQElement<3, INITIAL_NNODE_1D> *>(
+        PRefineableQElement<3, INITIAL_NNODE_1D>* father_el_pt =
+          dynamic_cast<PRefineableQElement<3, INITIAL_NNODE_1D>*>(
             father_pt->object_pt());
         if (father_el_pt != 0)
         {
@@ -5763,7 +5761,7 @@ namespace oomph
   //==================================================================
   template<unsigned INITIAL_NNODE_1D>
   void PRefineableQElement<3, INITIAL_NNODE_1D>::pre_build(
-    Mesh *&mesh_pt, Vector<Node *> &new_node_pt)
+    Mesh*& mesh_pt, Vector<Node*>& new_node_pt)
   {
     using namespace OcTreeNames;
 
@@ -5777,7 +5775,7 @@ namespace oomph
     }
 
     // Pointer to my father (in quadtree impersonation)
-    OcTree *father_pt = dynamic_cast<OcTree *>(octree_pt()->father_pt());
+    OcTree* father_pt = dynamic_cast<OcTree*>(octree_pt()->father_pt());
 
     // What type of son am I? Ask my quadtree representation...
     int son_type = Tree_pt->son_type();
@@ -5800,12 +5798,12 @@ namespace oomph
 #endif
 
       // Return pointer to father element
-      RefineableQElement<3> *father_el_pt =
-        dynamic_cast<RefineableQElement<3> *>(father_pt->object_pt());
+      RefineableQElement<3>* father_el_pt =
+        dynamic_cast<RefineableQElement<3>*>(father_pt->object_pt());
 
       // Timestepper should be the same for all nodes in father
       // element -- use it create timesteppers for new nodes
-      TimeStepper *time_stepper_pt =
+      TimeStepper* time_stepper_pt =
         father_el_pt->node_pt(0)->time_stepper_pt();
 
       // Number of history values (incl. present)
@@ -5954,7 +5952,7 @@ namespace oomph
 
               // Get the pointer to the node in the father, returns NULL
               // if there is not node
-              Node *created_node_pt =
+              Node* created_node_pt =
                 father_el_pt->get_node_at_local_coordinate(s);
 
               // Does this node already exist in father element?
@@ -6006,11 +6004,11 @@ namespace oomph
   //==================================================================
   template<unsigned INITIAL_NNODE_1D>
   void PRefineableQElement<3, INITIAL_NNODE_1D>::p_refine(
-    const int &inc, Mesh *const &mesh_pt, GeneralisedElement *const &clone_pt)
+    const int& inc, Mesh* const& mesh_pt, GeneralisedElement* const& clone_pt)
   {
     // Cast clone to correct type
-    PRefineableQElement<3, INITIAL_NNODE_1D> *clone_el_pt =
-      dynamic_cast<PRefineableQElement<3, INITIAL_NNODE_1D> *>(clone_pt);
+    PRefineableQElement<3, INITIAL_NNODE_1D>* clone_el_pt =
+      dynamic_cast<PRefineableQElement<3, INITIAL_NNODE_1D>*>(clone_pt);
 
     // Check if we can use it
     if (clone_el_pt == 0)
@@ -6090,7 +6088,7 @@ namespace oomph
 
     // Timestepper should be the same for all nodes -- use it
     // to create timesteppers for new nodes
-    TimeStepper *time_stepper_pt = this->node_pt(0)->time_stepper_pt();
+    TimeStepper* time_stepper_pt = this->node_pt(0)->time_stepper_pt();
 
     // Get number of history values (incl. present)
     unsigned ntstorage = time_stepper_pt->ntstorage();
@@ -6183,7 +6181,7 @@ namespace oomph
 
           // Get the pointer to the node in this element (or rather, its clone),
           // returns NULL if there is not node
-          Node *created_node_pt = clone_el_pt->get_node_at_local_coordinate(s);
+          Node* created_node_pt = clone_el_pt->get_node_at_local_coordinate(s);
           // created_node_pt = 0;
 
           // Does this node already exist in this element?
@@ -6443,15 +6441,15 @@ namespace oomph
 
               // Solid node? If so, deal with the positional boundary
               // conditions:
-              SolidNode *solid_node_pt =
-                dynamic_cast<SolidNode *>(created_node_pt);
+              SolidNode* solid_node_pt =
+                dynamic_cast<SolidNode*>(created_node_pt);
               if (solid_node_pt != 0)
               {
                 // Get the positional boundary conditions from the father:
                 unsigned n_dim = created_node_pt->ndim();
                 Vector<int> solid_bound_cons(n_dim);
-                RefineableSolidQElement<3> *clone_solid_el_pt =
-                  dynamic_cast<RefineableSolidQElement<3> *>(clone_el_pt);
+                RefineableSolidQElement<3>* clone_solid_el_pt =
+                  dynamic_cast<RefineableSolidQElement<3>*>(clone_el_pt);
 #ifdef PARANOID
                 if (clone_solid_el_pt == 0)
                 {
@@ -6566,8 +6564,8 @@ namespace oomph
               mesh_pt->add_node_pt(created_node_pt);
             }
 
-            AlgebraicElementBase *alg_el_pt =
-              dynamic_cast<AlgebraicElementBase *>(this);
+            AlgebraicElementBase* alg_el_pt =
+              dynamic_cast<AlgebraicElementBase*>(this);
 
             // If we do have an algebraic element
             if (alg_el_pt != 0)
@@ -6585,8 +6583,8 @@ namespace oomph
           } // End of case when we build the node ourselves
 
           // Check if the element is an algebraic element
-          AlgebraicElementBase *alg_el_pt =
-            dynamic_cast<AlgebraicElementBase *>(this);
+          AlgebraicElementBase* alg_el_pt =
+            dynamic_cast<AlgebraicElementBase*>(this);
 
           // If the element is an algebraic element, setup
           // node position (past and present) from algebraic node update
@@ -6667,17 +6665,17 @@ namespace oomph
     // geometric objects that affect the MacroElement-based
     // node update -- this needs to be done to set the node
     // update info for newly created nodes
-    MacroElementNodeUpdateElementBase *clone_m_el_pt =
-      dynamic_cast<MacroElementNodeUpdateElementBase *>(clone_el_pt);
+    MacroElementNodeUpdateElementBase* clone_m_el_pt =
+      dynamic_cast<MacroElementNodeUpdateElementBase*>(clone_el_pt);
     if (clone_m_el_pt != 0)
     {
       // Get vector of geometric objects from father (construct vector
       // via copy operation)
-      Vector<GeomObject *> geom_object_pt(clone_m_el_pt->geom_object_pt());
+      Vector<GeomObject*> geom_object_pt(clone_m_el_pt->geom_object_pt());
 
       // Cast current element to MacroElementNodeUpdateElement:
-      MacroElementNodeUpdateElementBase *m_el_pt =
-        dynamic_cast<MacroElementNodeUpdateElementBase *>(this);
+      MacroElementNodeUpdateElementBase* m_el_pt =
+        dynamic_cast<MacroElementNodeUpdateElementBase*>(this);
 
 #ifdef PARANOID
       if (m_el_pt == 0)
@@ -6716,8 +6714,8 @@ namespace oomph
   /// Shape functions for PRefineableQElement<DIM>
   //=======================================================================
   template<unsigned INITIAL_NNODE_1D>
-  void PRefineableQElement<3, INITIAL_NNODE_1D>::shape(const Vector<double> &s,
-                                                       Shape &psi) const
+  void PRefineableQElement<3, INITIAL_NNODE_1D>::shape(const Vector<double>& s,
+                                                       Shape& psi) const
   {
     switch (P_order)
     {
@@ -6862,7 +6860,7 @@ namespace oomph
   //=======================================================================
   template<unsigned INITIAL_NNODE_1D>
   void PRefineableQElement<3, INITIAL_NNODE_1D>::dshape_local(
-    const Vector<double> &s, Shape &psi, DShape &dpsids) const
+    const Vector<double>& s, Shape& psi, DShape& dpsids) const
   {
     switch (P_order)
     {
@@ -7056,7 +7054,7 @@ namespace oomph
   //=======================================================================
   template<unsigned INITIAL_NNODE_1D>
   void PRefineableQElement<3, INITIAL_NNODE_1D>::d2shape_local(
-    const Vector<double> &s, Shape &psi, DShape &dpsids, DShape &d2psids) const
+    const Vector<double>& s, Shape& psi, DShape& dpsids, DShape& d2psids) const
   {
     std::ostringstream error_message;
     error_message
@@ -7071,7 +7069,7 @@ namespace oomph
   //=======================================================================
   template<unsigned INITIAL_NNODE_1D>
   void PRefineableQElement<3, INITIAL_NNODE_1D>::rebuild_from_sons(
-    Mesh *&mesh_pt)
+    Mesh*& mesh_pt)
   {
     // Get p-orders of sons
     unsigned n_sons = this->tree_pt()->nsons();
@@ -7079,7 +7077,7 @@ namespace oomph
     unsigned max_son_p_order = 0;
     for (unsigned ison = 0; ison < n_sons; ison++)
     {
-      PRefineableElement *el_pt = dynamic_cast<PRefineableElement *>(
+      PRefineableElement* el_pt = dynamic_cast<PRefineableElement*>(
         this->tree_pt()->son_pt(ison)->object_pt());
       son_p_order[ison] = el_pt->p_order();
       if (son_p_order[ison] > max_son_p_order)
@@ -7124,7 +7122,7 @@ namespace oomph
     }
 
     // Back up pointers to old nodes before they are lost
-    Vector<Node *> old_node_pt(old_Nnode);
+    Vector<Node*> old_node_pt(old_Nnode);
     for (unsigned n = 0; n < old_Nnode; n++)
     {
       old_node_pt[n] = this->node_pt(n);
@@ -7165,101 +7163,101 @@ namespace oomph
       // Back face
       // DB edge
       this->node_pt(1 * s0space + 0 * s1space + 0 * s2space) =
-        dynamic_cast<RefineableQElement<3> *>(
+        dynamic_cast<RefineableQElement<3>*>(
           octree_pt()->son_pt(OcTreeNames::RDB)->object_pt())
           ->vertex_node_pt(0);
       // LB edge
       this->node_pt(0 * s0space + 1 * s1space + 0 * s2space) =
-        dynamic_cast<RefineableQElement<3> *>(
+        dynamic_cast<RefineableQElement<3>*>(
           octree_pt()->son_pt(OcTreeNames::LUB)->object_pt())
           ->vertex_node_pt(0);
       // B centre
       this->node_pt(1 * s0space + 1 * s1space + 0 * s2space) =
-        dynamic_cast<RefineableQElement<3> *>(
+        dynamic_cast<RefineableQElement<3>*>(
           octree_pt()->son_pt(OcTreeNames::RUB)->object_pt())
           ->vertex_node_pt(0);
       // RB edge
       this->node_pt(2 * s0space + 1 * s1space + 0 * s2space) =
-        dynamic_cast<RefineableQElement<3> *>(
+        dynamic_cast<RefineableQElement<3>*>(
           octree_pt()->son_pt(OcTreeNames::RUB)->object_pt())
           ->vertex_node_pt(1);
       // UB edge
       this->node_pt(1 * s0space + 2 * s1space + 0 * s2space) =
-        dynamic_cast<RefineableQElement<3> *>(
+        dynamic_cast<RefineableQElement<3>*>(
           octree_pt()->son_pt(OcTreeNames::RUB)->object_pt())
           ->vertex_node_pt(2);
 
       // Mid-way between between back and front faces
       // LD edge
       this->node_pt(0 * s0space + 0 * s1space + 1 * s2space) =
-        dynamic_cast<RefineableQElement<3> *>(
+        dynamic_cast<RefineableQElement<3>*>(
           octree_pt()->son_pt(OcTreeNames::LDF)->object_pt())
           ->vertex_node_pt(0);
       // D centre
       this->node_pt(1 * s0space + 0 * s1space + 1 * s2space) =
-        dynamic_cast<RefineableQElement<3> *>(
+        dynamic_cast<RefineableQElement<3>*>(
           octree_pt()->son_pt(OcTreeNames::LDF)->object_pt())
           ->vertex_node_pt(1);
       // RD edge
       this->node_pt(2 * s0space + 0 * s1space + 1 * s2space) =
-        dynamic_cast<RefineableQElement<3> *>(
+        dynamic_cast<RefineableQElement<3>*>(
           octree_pt()->son_pt(OcTreeNames::RDF)->object_pt())
           ->vertex_node_pt(1);
       // L centre
       this->node_pt(0 * s0space + 1 * s1space + 1 * s2space) =
-        dynamic_cast<RefineableQElement<3> *>(
+        dynamic_cast<RefineableQElement<3>*>(
           octree_pt()->son_pt(OcTreeNames::LUF)->object_pt())
           ->vertex_node_pt(0);
       // Centre
       this->node_pt(1 * s0space + 1 * s1space + 1 * s2space) =
-        dynamic_cast<RefineableQElement<3> *>(
+        dynamic_cast<RefineableQElement<3>*>(
           octree_pt()->son_pt(OcTreeNames::RUF)->object_pt())
           ->vertex_node_pt(0);
       // R centre
       this->node_pt(2 * s0space + 1 * s1space + 1 * s2space) =
-        dynamic_cast<RefineableQElement<3> *>(
+        dynamic_cast<RefineableQElement<3>*>(
           octree_pt()->son_pt(OcTreeNames::RUF)->object_pt())
           ->vertex_node_pt(1);
       // LU edge
       this->node_pt(0 * s0space + 2 * s1space + 1 * s2space) =
-        dynamic_cast<RefineableQElement<3> *>(
+        dynamic_cast<RefineableQElement<3>*>(
           octree_pt()->son_pt(OcTreeNames::LUF)->object_pt())
           ->vertex_node_pt(2);
       // U center
       this->node_pt(1 * s0space + 2 * s1space + 1 * s2space) =
-        dynamic_cast<RefineableQElement<3> *>(
+        dynamic_cast<RefineableQElement<3>*>(
           octree_pt()->son_pt(OcTreeNames::RUF)->object_pt())
           ->vertex_node_pt(2);
       // RU edge
       this->node_pt(2 * s0space + 2 * s1space + 1 * s2space) =
-        dynamic_cast<RefineableQElement<3> *>(
+        dynamic_cast<RefineableQElement<3>*>(
           octree_pt()->son_pt(OcTreeNames::RUF)->object_pt())
           ->vertex_node_pt(3);
 
       // Front face
       // DF edge
       this->node_pt(1 * s0space + 0 * s1space + 2 * s2space) =
-        dynamic_cast<RefineableQElement<3> *>(
+        dynamic_cast<RefineableQElement<3>*>(
           octree_pt()->son_pt(OcTreeNames::LDF)->object_pt())
           ->vertex_node_pt(5);
       // LF edge
       this->node_pt(0 * s0space + 1 * s1space + 2 * s2space) =
-        dynamic_cast<RefineableQElement<3> *>(
+        dynamic_cast<RefineableQElement<3>*>(
           octree_pt()->son_pt(OcTreeNames::LUF)->object_pt())
           ->vertex_node_pt(4);
       // F centre
       this->node_pt(1 * s0space + 1 * s1space + 2 * s2space) =
-        dynamic_cast<RefineableQElement<3> *>(
+        dynamic_cast<RefineableQElement<3>*>(
           octree_pt()->son_pt(OcTreeNames::RUF)->object_pt())
           ->vertex_node_pt(4);
       // RF edge
       this->node_pt(2 * s0space + 1 * s1space + 2 * s2space) =
-        dynamic_cast<RefineableQElement<3> *>(
+        dynamic_cast<RefineableQElement<3>*>(
           octree_pt()->son_pt(OcTreeNames::RUF)->object_pt())
           ->vertex_node_pt(5);
       // UF edge
       this->node_pt(1 * s0space + 2 * s1space + 2 * s2space) =
-        dynamic_cast<RefineableQElement<3> *>(
+        dynamic_cast<RefineableQElement<3>*>(
           octree_pt()->son_pt(OcTreeNames::RUF)->object_pt())
           ->vertex_node_pt(6);
     }
@@ -7274,7 +7272,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
-    TimeStepper *time_stepper_pt = this->node_pt(0)->time_stepper_pt();
+    TimeStepper* time_stepper_pt = this->node_pt(0)->time_stepper_pt();
     unsigned ntstorage = time_stepper_pt->ntstorage();
 
     unsigned jnod = 0;
@@ -7311,7 +7309,7 @@ namespace oomph
 
           // Get the pointer to the node in this element, returns NULL
           // if there is not node
-          Node *created_node_pt = this->get_node_at_local_coordinate(s);
+          Node* created_node_pt = this->get_node_at_local_coordinate(s);
 
           // Does this node already exist in this element?
           //----------------------------------------------
@@ -7451,8 +7449,8 @@ namespace oomph
 
             // Get the pointer to the son element in which the new node
             // would live
-            PRefineableQElement<3, INITIAL_NNODE_1D> *son_el_pt =
-              dynamic_cast<PRefineableQElement<3, INITIAL_NNODE_1D> *>(
+            PRefineableQElement<3, INITIAL_NNODE_1D>* son_el_pt =
+              dynamic_cast<PRefineableQElement<3, INITIAL_NNODE_1D>*>(
                 this->tree_pt()->son_pt(son)->object_pt());
 
             // If we are rebuilding, then worry about the boundary conditions
@@ -7615,15 +7613,15 @@ namespace oomph
 
               // Solid node? If so, deal with the positional boundary
               // conditions:
-              SolidNode *solid_node_pt =
-                dynamic_cast<SolidNode *>(created_node_pt);
+              SolidNode* solid_node_pt =
+                dynamic_cast<SolidNode*>(created_node_pt);
               if (solid_node_pt != 0)
               {
                 // Get the positional boundary conditions from the father:
                 unsigned n_dim = created_node_pt->ndim();
                 Vector<int> solid_bound_cons(n_dim);
-                RefineableSolidQElement<3> *son_solid_el_pt =
-                  dynamic_cast<RefineableSolidQElement<3> *>(son_el_pt);
+                RefineableSolidQElement<3>* son_solid_el_pt =
+                  dynamic_cast<RefineableSolidQElement<3>*>(son_el_pt);
 #ifdef PARANOID
                 if (son_solid_el_pt == 0)
                 {
@@ -7729,8 +7727,8 @@ namespace oomph
             mesh_pt->add_node_pt(created_node_pt);
 
             // Check if the element is an algebraic element
-            AlgebraicElementBase *alg_el_pt =
-              dynamic_cast<AlgebraicElementBase *>(this);
+            AlgebraicElementBase* alg_el_pt =
+              dynamic_cast<AlgebraicElementBase*>(this);
 
             // If we do have an algebraic element
             if (alg_el_pt != 0)
@@ -7760,7 +7758,7 @@ namespace oomph
   //====================================================================
   template<unsigned INITIAL_NNODE_1D>
   void PRefineableQElement<3, INITIAL_NNODE_1D>::check_integrity(
-    double &max_error)
+    double& max_error)
   {
     // Not yet implemented -- doing nothing for now.
 
@@ -7775,7 +7773,7 @@ namespace oomph
   //=================================================================
   template<unsigned INITIAL_NNODE_1D>
   void PRefineableQElement<3, INITIAL_NNODE_1D>::oc_hang_helper(
-    const int &value_id, const int &my_face, std::ofstream &output_hangfile)
+    const int& value_id, const int& my_face, std::ofstream& output_hangfile)
   {
     using namespace OcTreeNames;
 
@@ -7785,7 +7783,7 @@ namespace oomph
     int neigh_face, diff_level;
 
     // Find pointer to neighbour in this direction
-    OcTree *neigh_pt;
+    OcTree* neigh_pt;
     neigh_pt = this->octree_pt()->gteq_face_neighbour(
       my_face, translate_s, s_lo_neigh, s_hi_neigh, neigh_face, diff_level);
 
@@ -7813,10 +7811,10 @@ namespace oomph
         // Neighbour is same size as me
         // Find p-orders of each element
         unsigned my_p_order =
-          dynamic_cast<PRefineableQElement<3, INITIAL_NNODE_1D> *>(this)
+          dynamic_cast<PRefineableQElement<3, INITIAL_NNODE_1D>*>(this)
             ->p_order();
         unsigned neigh_p_order =
-          dynamic_cast<PRefineableQElement<3, INITIAL_NNODE_1D> *>(
+          dynamic_cast<PRefineableQElement<3, INITIAL_NNODE_1D>*>(
             neigh_pt->object_pt())
             ->p_order();
 
@@ -7930,13 +7928,13 @@ namespace oomph
         unsigned my_edge = face_edge[i];
 
         // Separate storage for edge mortaring
-        OcTree *edge_neigh_pt = 0;
+        OcTree* edge_neigh_pt = 0;
         Vector<unsigned> edge_translate_s(3);
         Vector<double> edge_s_lo_neigh(3);
         Vector<double> edge_s_hi_neigh(3);
         int neigh_edge = 0, edge_diff_level = 0;
         unsigned edge_p_order =
-          dynamic_cast<PRefineableQElement<3, INITIAL_NNODE_1D> *>(this)
+          dynamic_cast<PRefineableQElement<3, INITIAL_NNODE_1D>*>(this)
             ->p_order();
 
         // Temporary storage to keep track of master edge
@@ -7964,7 +7962,7 @@ namespace oomph
         while (keep_searching)
         {
           // Pointer to edge neighbouring OcTree
-          OcTree *tmp_edge_neigh_pt;
+          OcTree* tmp_edge_neigh_pt;
 
           // Looking in edge neighbours that are also face neighbours
           // if(index==0 || index==1)
@@ -8035,7 +8033,7 @@ namespace oomph
               // Update edge_diff_level and p-order
               edge_diff_level = tmp_edge_diff_level;
               edge_p_order =
-                dynamic_cast<PRefineableQElement<3, INITIAL_NNODE_1D> *>(
+                dynamic_cast<PRefineableQElement<3, INITIAL_NNODE_1D>*>(
                   tmp_edge_neigh_pt->object_pt())
                   ->p_order();
             }
@@ -8049,7 +8047,7 @@ namespace oomph
               // dynamic_cast<PRefineableQElement<3,INITIAL_NNODE_1D>*>
               //  (this)->p_order();
               unsigned tmp_edge_neigh_p_order =
-                dynamic_cast<PRefineableQElement<3, INITIAL_NNODE_1D> *>(
+                dynamic_cast<PRefineableQElement<3, INITIAL_NNODE_1D>*>(
                   tmp_edge_neigh_pt->object_pt())
                   ->p_order();
 
@@ -8066,7 +8064,7 @@ namespace oomph
                 // Update edge_diff_level and p-order
                 edge_diff_level = tmp_edge_diff_level;
                 edge_p_order =
-                  dynamic_cast<PRefineableQElement<3, INITIAL_NNODE_1D> *>(
+                  dynamic_cast<PRefineableQElement<3, INITIAL_NNODE_1D>*>(
                     tmp_edge_neigh_pt->object_pt())
                     ->p_order();
               }
@@ -8154,14 +8152,14 @@ namespace oomph
           }
 
           // Get pointer to neighbouring master element (in p-refineable form)
-          PRefineableQElement<3, INITIAL_NNODE_1D> *edge_neigh_obj_pt;
+          PRefineableQElement<3, INITIAL_NNODE_1D>* edge_neigh_obj_pt;
           edge_neigh_obj_pt =
-            dynamic_cast<PRefineableQElement<3, INITIAL_NNODE_1D> *>(
+            dynamic_cast<PRefineableQElement<3, INITIAL_NNODE_1D>*>(
               edge_neigh_pt->object_pt());
 
           // Create vector of master and slave nodes
           //----------------------------------------
-          Vector<Node *> master_node_pt, slave_node_pt;
+          Vector<Node*> master_node_pt, slave_node_pt;
           Vector<unsigned> master_node_number, slave_node_number;
           Vector<Vector<double>> slave_node_s_fraction;
 
@@ -8173,7 +8171,7 @@ namespace oomph
           // Storage for pointers to the nodes and their numbers along the
           // master edge
           unsigned neighbour_node_number = 0;
-          Node *neighbour_node_pt = 0;
+          Node* neighbour_node_pt = 0;
 
           // Loop over nodes along the edge
           bool master_is_not_edge = false;
@@ -8349,7 +8347,7 @@ namespace oomph
           // Storage for pointers to the local nodes and their numbers along my
           // edge
           unsigned local_node_number = 0;
-          Node *local_node_pt = 0;
+          Node* local_node_pt = 0;
 
           // Loop over the nodes along my edge
           for (unsigned i0 = 0; i0 < my_n_p; i0++)
@@ -8637,7 +8635,7 @@ namespace oomph
               }
 
               // Set up hanging scheme for this node
-              HangInfo *explicit_hang_pt =
+              HangInfo* explicit_hang_pt =
                 new HangInfo(n_master_nodes - master_node_zero_weight.size());
               unsigned mindex = 0;
               for (unsigned m = 0; m < n_master_nodes; m++)
@@ -8791,7 +8789,7 @@ namespace oomph
             // copied)
             // unsigned quadrature_order =
             // std::max(slave_element_nnode_1d,master_element_nnode_1d);
-            Vector<double> *quadrature_knot, *quadrature_weight;
+            Vector<double>*quadrature_knot, *quadrature_weight;
             if (slave_element_nnode_1d >= master_element_nnode_1d)
             {
               // Use the same quadrature order as the slave element (me)
@@ -8971,7 +8969,7 @@ namespace oomph
 
             // Create and populate structures to hold the hanging info
             //--------------------------------------------------------
-            Vector<HangInfo *> hang_info_pt(n_slave_nodes);
+            Vector<HangInfo*> hang_info_pt(n_slave_nodes);
             for (unsigned i = 0; i < n_slave_nodes - n_mortar_vertices; i++)
             {
               // Don't include master nodes with zero weights
@@ -9120,13 +9118,13 @@ namespace oomph
       }
 
       // Get pointer to neighbouring master element (in p-refineable form)
-      PRefineableQElement<3, INITIAL_NNODE_1D> *neigh_obj_pt;
-      neigh_obj_pt = dynamic_cast<PRefineableQElement<3, INITIAL_NNODE_1D> *>(
+      PRefineableQElement<3, INITIAL_NNODE_1D>* neigh_obj_pt;
+      neigh_obj_pt = dynamic_cast<PRefineableQElement<3, INITIAL_NNODE_1D>*>(
         neigh_pt->object_pt());
 
       // Create vector of master and slave nodes
       //----------------------------------------
-      Vector<Node *> master_node_pt, slave_node_pt;
+      Vector<Node*> master_node_pt, slave_node_pt;
       Vector<unsigned> master_node_number, slave_node_number;
       Vector<Vector<double>> slave_node_s_fraction;
 
@@ -9137,7 +9135,7 @@ namespace oomph
       // Storage for pointers to the nodes and their numbers along the master
       // edge
       unsigned neighbour_node_number = 0;
-      Node *neighbour_node_pt = 0;
+      Node* neighbour_node_pt = 0;
 
       // Loop over nodes on the face
       for (unsigned i0 = 0; i0 < neigh_n_p; i0++)
@@ -9205,7 +9203,7 @@ namespace oomph
 
       // Storage for pointers to the local nodes and their numbers along my edge
       unsigned local_node_number = 0;
-      Node *local_node_pt = 0;
+      Node* local_node_pt = 0;
 
       // Loop over the nodes along my edge
       for (unsigned i0 = 0; i0 < my_n_p; i0++)
@@ -9572,8 +9570,8 @@ namespace oomph
         // data is not unnecessarily copied)
         // unsigned quadrature_order =
         // std::max(slave_element_nnode_1d,master_element_nnode_1d);
-        Vector<Vector<double>> *quadrature_knot;
-        Vector<double> *quadrature_weight;
+        Vector<Vector<double>>* quadrature_knot;
+        Vector<double>* quadrature_weight;
         if (slave_element_nnode_1d >= master_element_nnode_1d)
         {
           // Use the same quadrature order as the slave element (me)
@@ -9779,7 +9777,7 @@ namespace oomph
 
         // Create structures to hold the hanging info
         //-------------------------------------------
-        Vector<HangInfo *> hang_info_pt(n_slave_nodes);
+        Vector<HangInfo*> hang_info_pt(n_slave_nodes);
         for (unsigned i = 0; i < n_slave_nodes - n_mortar_vertices; i++)
         {
           hang_info_pt[i] = new HangInfo(n_master_nodes);
@@ -9895,7 +9893,7 @@ namespace oomph
             if (slave_node_pt[i]->hanging_pt()->master_node_pt(m)->is_hanging())
             {
               // Check if node is master of master
-              Node *new_nod_pt =
+              Node* new_nod_pt =
                 slave_node_pt[i]->hanging_pt()->master_node_pt(m);
               for (unsigned mm = 0; mm < new_nod_pt->hanging_pt()->nmaster();
                    mm++)

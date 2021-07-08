@@ -57,9 +57,9 @@ namespace oomph
   template<unsigned DIM>
   void PMLHelmholtzEquations<DIM>::
     fill_in_generic_residual_contribution_helmholtz(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      const unsigned &flag)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag)
   {
     // Find out how many nodes there are
     const unsigned n_node = nnode();
@@ -340,8 +340,8 @@ namespace oomph
   /// nplot points in each coordinate direction
   //======================================================================
   template<unsigned DIM>
-  void PMLHelmholtzEquations<DIM>::output(std::ostream &outfile,
-                                          const unsigned &nplot)
+  void PMLHelmholtzEquations<DIM>::output(std::ostream& outfile,
+                                          const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(DIM);
@@ -379,9 +379,9 @@ namespace oomph
   /// Output at nplot points in each coordinate direction
   //======================================================================
   template<unsigned DIM>
-  void PMLHelmholtzEquations<DIM>::output_real(std::ostream &outfile,
-                                               const double &phi,
-                                               const unsigned &nplot)
+  void PMLHelmholtzEquations<DIM>::output_real(std::ostream& outfile,
+                                               const double& phi,
+                                               const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(DIM);
@@ -422,10 +422,10 @@ namespace oomph
   //======================================================================
   template<unsigned DIM>
   void PMLHelmholtzEquations<DIM>::output_total_real(
-    std::ostream &outfile,
+    std::ostream& outfile,
     FiniteElement::SteadyExactSolutionFctPt incoming_wave_fct_pt,
-    const double &phi,
-    const unsigned &nplot)
+    const double& phi,
+    const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(DIM);
@@ -479,9 +479,9 @@ namespace oomph
   /// Output at nplot points in each coordinate direction
   //======================================================================
   template<unsigned DIM>
-  void PMLHelmholtzEquations<DIM>::output_imag(std::ostream &outfile,
-                                               const double &phi,
-                                               const unsigned &nplot)
+  void PMLHelmholtzEquations<DIM>::output_imag(std::ostream& outfile,
+                                               const double& phi,
+                                               const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(DIM);
@@ -515,7 +515,7 @@ namespace oomph
   /// nplot points in each coordinate direction
   //======================================================================
   template<unsigned DIM>
-  void PMLHelmholtzEquations<DIM>::output(FILE *file_pt, const unsigned &nplot)
+  void PMLHelmholtzEquations<DIM>::output(FILE* file_pt, const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(DIM);
@@ -558,8 +558,8 @@ namespace oomph
   //======================================================================
   template<unsigned DIM>
   void PMLHelmholtzEquations<DIM>::output_fct(
-    std::ostream &outfile,
-    const unsigned &nplot,
+    std::ostream& outfile,
+    const unsigned& nplot,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
   {
     // Vector of local coordinates
@@ -612,9 +612,9 @@ namespace oomph
   //======================================================================
   template<unsigned DIM>
   void PMLHelmholtzEquations<DIM>::output_real_fct(
-    std::ostream &outfile,
-    const double &phi,
-    const unsigned &nplot,
+    std::ostream& outfile,
+    const double& phi,
+    const unsigned& nplot,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
   {
     // Vector of local coordinates
@@ -668,9 +668,9 @@ namespace oomph
   //======================================================================
   template<unsigned DIM>
   void PMLHelmholtzEquations<DIM>::output_imag_fct(
-    std::ostream &outfile,
-    const double &phi,
-    const unsigned &nplot,
+    std::ostream& outfile,
+    const double& phi,
+    const unsigned& nplot,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
   {
     // Vector of local coordinates
@@ -720,10 +720,10 @@ namespace oomph
   //======================================================================
   template<unsigned DIM>
   void PMLHelmholtzEquations<DIM>::compute_error(
-    std::ostream &outfile,
+    std::ostream& outfile,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-    double &error,
-    double &norm)
+    double& error,
+    double& norm)
   {
     // Initialise
     error = 0.0;
@@ -798,7 +798,7 @@ namespace oomph
   /// Compute norm of fe solution
   //======================================================================
   template<unsigned DIM>
-  void PMLHelmholtzEquations<DIM>::compute_norm(double &norm)
+  void PMLHelmholtzEquations<DIM>::compute_norm(double& norm)
   {
     // Initialise
     norm = 0.0;

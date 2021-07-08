@@ -65,17 +65,17 @@ namespace oomph
     bool Ignore_membrane_terms;
 
     /// Pointer to Poisson's ratio
-    double *Nu_pt;
+    double* Nu_pt;
 
     /// Pointer to dimensionless wall thickness
-    double *H_pt;
+    double* H_pt;
 
     /// Pointer to timescale ratio (non-dimensional density)
-    double *Lambda_sq_pt;
+    double* Lambda_sq_pt;
 
     /// \short Pointer to membrane pre-stress terms -- should
     /// probably generalise this to function pointers at some point
-    DenseMatrix<double *> Prestress_pt;
+    DenseMatrix<double*> Prestress_pt;
 
     /// Static default for prestress (set to zero)
     static double Zero_prestress;
@@ -85,24 +85,24 @@ namespace oomph
     inline double calculate_contravariant(double A[2][2], double Aup[2][2]);
 
     /// Default load function (zero traction)
-    static void Zero_traction_fct(const Vector<double> &xi,
-                                  const Vector<double> &x,
-                                  const Vector<double> &N,
-                                  Vector<double> &load);
+    static void Zero_traction_fct(const Vector<double>& xi,
+                                  const Vector<double>& x,
+                                  const Vector<double>& N,
+                                  Vector<double>& load);
 
     /// \short Pointer to load vector function: Its arguments are:
     /// Lagrangian coordinate, Eulerian coordinate, normal vector and
     /// load vector itself (not all of the input arguments will be
     /// required for all specific load functions but the list should
     /// cover all cases)
-    void (*Load_vector_fct_pt)(const Vector<double> &xi,
-                               const Vector<double> &x,
-                               const Vector<double> &N,
-                               Vector<double> &load);
+    void (*Load_vector_fct_pt)(const Vector<double>& xi,
+                               const Vector<double>& x,
+                               const Vector<double>& N,
+                               Vector<double>& load);
 
     /// \short Pointer to the GeomObject that specifies the undeformed midplane
     /// of the shell
-    GeomObject *Undeformed_midplane_pt;
+    GeomObject* Undeformed_midplane_pt;
 
     /// short Helper function to Return the residuals for
     /// the equations of KL shell theory. This is used to prevent
@@ -110,7 +110,7 @@ namespace oomph
     /// the function fill_in_contribution_to_jacobian that can
     /// lead to virtual inheritance woes if this element is ever
     /// used as part of a multi-physics element.
-    void fill_in_contribution_to_residuals_shell(Vector<double> &residuals);
+    void fill_in_contribution_to_residuals_shell(Vector<double>& residuals);
 
     /// \short Get the load vector for the computation of the rate of work
     /// done by the load. Here we simply forward this to
@@ -123,11 +123,11 @@ namespace oomph
     /// required for all specific load functions but the list should
     /// cover all cases).
     virtual void load_vector_for_rate_of_work_computation(
-      const unsigned &intpt,
-      const Vector<double> &xi,
-      const Vector<double> &x,
-      const Vector<double> &N,
-      Vector<double> &load)
+      const unsigned& intpt,
+      const Vector<double>& xi,
+      const Vector<double>& x,
+      const Vector<double>& N,
+      Vector<double>& load)
     {
       load_vector(intpt, xi, x, N, load);
     }
@@ -156,10 +156,10 @@ namespace oomph
     }
 
     /// Access to the load vector function pointer
-    void (*&load_vector_fct_pt())(const Vector<double> &xi,
-                                  const Vector<double> &x,
-                                  const Vector<double> &N,
-                                  Vector<double> &load)
+    void (*&load_vector_fct_pt())(const Vector<double>& xi,
+                                  const Vector<double>& x,
+                                  const Vector<double>& N,
+                                  Vector<double>& load)
     {
       return Load_vector_fct_pt;
     }
@@ -170,11 +170,11 @@ namespace oomph
     /// required for all specific load functions but the list should
     /// cover all cases). This function is virtual so it can be
     /// overloaded for FSI.
-    virtual void load_vector(const unsigned &intpt,
-                             const Vector<double> &xi,
-                             const Vector<double> &x,
-                             const Vector<double> &N,
-                             Vector<double> &load)
+    virtual void load_vector(const unsigned& intpt,
+                             const Vector<double>& xi,
+                             const Vector<double>& x,
+                             const Vector<double>& N,
+                             Vector<double>& load)
     {
       Load_vector_fct_pt(xi, x, N, load);
     }
@@ -182,9 +182,9 @@ namespace oomph
     /// \short Set pointer to (i,j)-th component of second Piola Kirchhoff
     /// membrane prestress to specified value (automatically imposes
     /// symmetry for off-diagonal entries)
-    void set_prestress_pt(const unsigned &i,
-                          const unsigned &j,
-                          double *value_pt)
+    void set_prestress_pt(const unsigned& i,
+                          const unsigned& j,
+                          double* value_pt)
     {
       Prestress_pt(i, j) = value_pt;
       Prestress_pt(j, i) = value_pt;
@@ -192,7 +192,7 @@ namespace oomph
 
     /// \short Return (i,j)-th component of second Piola Kirchhoff membrane
     /// prestress
-    double prestress(const unsigned &i, const unsigned &j)
+    double prestress(const unsigned& i, const unsigned& j)
     {
       return *Prestress_pt(i, j);
     }
@@ -210,71 +210,71 @@ namespace oomph
     }
 
     /// Return the Poisson's ratio
-    const double &nu() const
+    const double& nu() const
     {
       return *Nu_pt;
     }
 
     /// Return the wall thickness to undeformed radius ratio
-    const double &h() const
+    const double& h() const
     {
       return *H_pt;
     }
 
     /// Return the timescale ratio (non-dimensional density)
-    const double &lambda_sq() const
+    const double& lambda_sq() const
     {
       return *Lambda_sq_pt;
     }
 
     /// Return a pointer to the Poisson ratio
-    double *&nu_pt()
+    double*& nu_pt()
     {
       return Nu_pt;
     }
 
     /// Return a pointer to the non-dim wall thickness
-    double *&h_pt()
+    double*& h_pt()
     {
       return H_pt;
     }
 
     /// Return a pointer to timescale ratio (nondim density)
-    double *&lambda_sq_pt()
+    double*& lambda_sq_pt()
     {
       return Lambda_sq_pt;
     }
 
     /// \short Return a reference to geometric object that specifies the shell's
     /// undeformed geometry
-    GeomObject *&undeformed_midplane_pt()
+    GeomObject*& undeformed_midplane_pt()
     {
       return Undeformed_midplane_pt;
     }
 
     /// \short Get normal vector
-    void get_normal(const Vector<double> &s, Vector<double> &N);
+    void get_normal(const Vector<double>& s, Vector<double>& N);
 
     /// Overload the standard fill in residuals contribution
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Simply call the shell residuals
       fill_in_contribution_to_residuals_shell(residuals);
     }
 
     /// Return the jacobian is calculated by finite differences by default,
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian);
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian);
 
     /// \short Get potential (strain) and kinetic energy of the element
-    void get_energy(double &pot_en, double &kin_en);
+    void get_energy(double& pot_en, double& kin_en);
 
     /// \short Get strain and bending tensors; returns pair comprising the
     /// determinant of the undeformed (*.first) and deformed (*.second)
     /// midplane metric tensor.
-    std::pair<double, double> get_strain_and_bend(const Vector<double> &s,
-                                                  DenseDoubleMatrix &strain,
-                                                  DenseDoubleMatrix &bend);
+    std::pair<double, double> get_strain_and_bend(const Vector<double>& s,
+                                                  DenseDoubleMatrix& strain,
+                                                  DenseDoubleMatrix& bend);
 
     /// \short Get integral of instantaneous rate of work done on
     /// the wall due to the load returned by the virtual
@@ -288,25 +288,25 @@ namespace oomph
     double load_rate_of_work();
 
     /// Generic FiniteElement output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       FiniteElement::output(outfile);
     }
 
     /// Generic FiniteElement output function
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       FiniteElement::output(outfile, n_plot);
     }
 
     /// Generic FiniteElement output function
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
 
     /// Generic FiniteElement output function
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       FiniteElement::output(file_pt, n_plot);
     }
@@ -352,26 +352,26 @@ namespace oomph
     }
 
     /// Output position veloc and accel.
-    void output_with_time_dep_quantities(std::ostream &outfile,
-                                         const unsigned &n_plot);
+    void output_with_time_dep_quantities(std::ostream& outfile,
+                                         const unsigned& n_plot);
 
     /// Overload the output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       SolidQHermiteElement<2>::output(outfile);
     }
 
     /// Output function
-    void output(std::ostream &outfile, const unsigned &n_plot);
+    void output(std::ostream& outfile, const unsigned& n_plot);
 
     /// Overload the output function
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       SolidQHermiteElement<2>::output(file_pt);
     }
 
     /// Output function
-    void output(FILE *file_pt, const unsigned &n_plot);
+    void output(FILE* file_pt, const unsigned& n_plot);
   };
 
   //=========================================================================
@@ -434,11 +434,11 @@ namespace oomph
     /// required for all specific load functions but the list should
     /// cover all cases).
     virtual void load_vector_for_rate_of_work_computation(
-      const unsigned &intpt,
-      const Vector<double> &xi,
-      const Vector<double> &x,
-      const Vector<double> &N,
-      Vector<double> &load)
+      const unsigned& intpt,
+      const Vector<double>& xi,
+      const Vector<double>& x,
+      const Vector<double>& N,
+      Vector<double>& load)
     {
       /// Get fluid-only load vector
       if (Compute_rate_of_work_by_load_with_fluid_load_only)
@@ -497,7 +497,7 @@ namespace oomph
     /// \short Derivative of position vector w.r.t. the SolidFiniteElement's
     /// Lagrangian coordinates; evaluated at current time.
     void dposition_dlagrangian_at_local_coordinate(
-      const Vector<double> &s, DenseMatrix<double> &drdxi) const;
+      const Vector<double>& s, DenseMatrix<double>& drdxi) const;
 
     /// \short Get integral of instantaneous rate of work done on
     /// the wall due to the fluid load returned by the function
@@ -520,11 +520,11 @@ namespace oomph
     /// pressure load. Then we add to this the FSI load due to
     /// the traction exerted by the adjacent FSIFluidElements, taking
     /// the sign of the normal into account.
-    void load_vector(const unsigned &intpt,
-                     const Vector<double> &xi,
-                     const Vector<double> &x,
-                     const Vector<double> &N,
-                     Vector<double> &load)
+    void load_vector(const unsigned& intpt,
+                     const Vector<double>& xi,
+                     const Vector<double>& x,
+                     const Vector<double>& N,
+                     Vector<double>& load)
     {
       // Initially call the standard Load_vector_fct_pt
       Load_vector_fct_pt(xi, x, N, load);
@@ -552,8 +552,8 @@ namespace oomph
     /// \short Get the Jacobian and residuals. Wrapper to generic FSI version;
     /// that catches the case when we replace the Jacobian by the
     /// mass matrix (for the consistent assignment of initial conditions).
-    virtual void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                                  DenseMatrix<double> &jacobian)
+    virtual void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                                  DenseMatrix<double>& jacobian)
     {
       // Call the basic shell jacobian
       DiagHermiteShellElement::fill_in_contribution_to_jacobian(residuals,
@@ -576,7 +576,7 @@ namespace oomph
     /// (Function can obviously only be called if the equation numbering
     /// scheme has been set up.)
     void get_dof_numbers_for_unknowns(
-      std::list<std::pair<unsigned long, unsigned>> &dof_lookup_list) const;
+      std::list<std::pair<unsigned long, unsigned>>& dof_lookup_list) const;
   };
 
   ////////////////////////////////////////////////////////////////////////
@@ -622,7 +622,7 @@ namespace oomph
     /// \short Constructor, takes the pointer to the "bulk" element and the
     /// face index.
     ClampedHermiteShellBoundaryConditionElement(
-      FiniteElement *const &bulk_el_pt, const int &face_index);
+      FiniteElement* const& bulk_el_pt, const int& face_index);
 
     ///\short  Broken empty constructor
     ClampedHermiteShellBoundaryConditionElement()
@@ -635,19 +635,19 @@ namespace oomph
 
     /// Broken copy constructor
     ClampedHermiteShellBoundaryConditionElement(
-      const ClampedHermiteShellBoundaryConditionElement &dummy)
+      const ClampedHermiteShellBoundaryConditionElement& dummy)
     {
       BrokenCopy::broken_copy("ClampedHermiteShellBoundaryConditionElement");
     }
 
     /// Broken assignment operator
-    void operator=(const ClampedHermiteShellBoundaryConditionElement &)
+    void operator=(const ClampedHermiteShellBoundaryConditionElement&)
     {
       BrokenCopy::broken_assign("ClampedHermiteShellBoundaryConditionElement");
     }
 
     /// \short Set normal vector to clamping plane
-    void set_symmetry_line(const Vector<double> &normal_to_clamping_plane)
+    void set_symmetry_line(const Vector<double>& normal_to_clamping_plane)
     {
       Normal_to_clamping_plane[0] = normal_to_clamping_plane[0];
       Normal_to_clamping_plane[1] = normal_to_clamping_plane[1];
@@ -655,7 +655,7 @@ namespace oomph
     }
 
     /// Fill in the element's contribution to its residual vector
-    void fill_in_contribution_to_residuals(Vector<double> &residuals);
+    void fill_in_contribution_to_residuals(Vector<double>& residuals);
 
     //////////////////////////////////////////////////////////////////
     // Note: We should also overload all other versions of shape(...)
@@ -664,7 +664,7 @@ namespace oomph
 
     /// \short Calculate the geometric shape functions
     /// at local coordinate s. Set any "superfluous" shape functions to zero.
-    void shape(const Vector<double> &s, Shape &psi) const
+    void shape(const Vector<double>& s, Shape& psi) const
     {
       // Initialise all of them to zero
       unsigned n = psi.nindex1();
@@ -681,7 +681,7 @@ namespace oomph
 
     /// \short Calculate the geometric shape functions
     /// at local coordinate s. Set any "superfluous" shape functions to zero.
-    void dshape_local(const Vector<double> &s, Shape &psi, DShape &dpsids) const
+    void dshape_local(const Vector<double>& s, Shape& psi, DShape& dpsids) const
     {
       // Initialise all of them to zero
       unsigned n = psi.nindex1();
@@ -711,17 +711,17 @@ namespace oomph
 
     /// Output function -- forward to broken version in FiniteElement
     /// until somebody decides what exactly they want to plot here...
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       FiniteElement::output(outfile);
     }
 
     /// \short Output function
-    void output(std::ostream &outfile, const unsigned &n_plot);
+    void output(std::ostream& outfile, const unsigned& n_plot);
 
     /// C-style output function -- forward to broken version in FiniteElement
     /// until somebody decides what exactly they want to plot here...
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
@@ -729,7 +729,7 @@ namespace oomph
     /// \short C-style output function -- forward to broken version in
     /// FiniteElement until somebody decides what exactly they want to plot
     /// here...
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       FiniteElement::output(file_pt, n_plot);
     }
@@ -748,7 +748,7 @@ namespace oomph
     /// (Function can obviously only be called if the equation numbering
     /// scheme has been set up.)
     void get_dof_numbers_for_unknowns(
-      std::list<std::pair<unsigned long, unsigned>> &dof_lookup_list) const;
+      std::list<std::pair<unsigned long, unsigned>>& dof_lookup_list) const;
 
   private:
     /// \short Normal vector to the clamping plane

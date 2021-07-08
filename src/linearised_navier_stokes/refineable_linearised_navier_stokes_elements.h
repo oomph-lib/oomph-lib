@@ -56,7 +56,7 @@ namespace oomph
   protected:
     /// \short Pointer to n_p-th pressure node (Default: NULL,
     /// indicating that pressure is not based on nodal interpolation).
-    virtual Node *pressure_node_pt(const unsigned &n_p)
+    virtual Node* pressure_node_pt(const unsigned& n_p)
     {
       return NULL;
     }
@@ -86,7 +86,7 @@ namespace oomph
 
     /// \short Get 'flux' for Z2 error recovery:   Upper triangular entries
     /// in strain rate tensor.
-    void get_Z2_flux(const Vector<double> &s, Vector<double> &flux)
+    void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
 #ifdef PARANOID
       unsigned num_entries = 2 * (DIM + ((DIM * DIM) - DIM) / 2);
@@ -151,8 +151,8 @@ namespace oomph
     void further_build()
     {
       // Find the father element
-      RefineableLinearisedNavierStokesEquations *cast_father_element_pt =
-        dynamic_cast<RefineableLinearisedNavierStokesEquations *>(
+      RefineableLinearisedNavierStokesEquations* cast_father_element_pt =
+        dynamic_cast<RefineableLinearisedNavierStokesEquations*>(
           this->father_element_pt());
 
       // Set the viscosity ratio pointer
@@ -189,28 +189,28 @@ namespace oomph
     /// elements with nodal pressure degrees of freedom
     /// (e.g. for refineable Taylor-Hood.)
     static void pin_redundant_nodal_pressures(
-      const Vector<GeneralisedElement *> &element_pt)
+      const Vector<GeneralisedElement*>& element_pt)
     {
       // Loop over all elements to brutally pin all nodal pressure degrees of
       // freedom
       const unsigned n_element = element_pt.size();
       for (unsigned e = 0; e < n_element; e++)
       {
-        dynamic_cast<RefineableLinearisedNavierStokesEquations *>(element_pt[e])
+        dynamic_cast<RefineableLinearisedNavierStokesEquations*>(element_pt[e])
           ->pin_elemental_redundant_nodal_pressure_dofs();
       }
     }
 
     /// Unpin all pressure dofs in elements listed in Vector
     static void unpin_all_pressure_dofs(
-      const Vector<GeneralisedElement *> &element_pt)
+      const Vector<GeneralisedElement*>& element_pt)
     {
       // Loop over all elements to brutally unpin all nodal pressure degrees of
       // freedom and internal pressure degrees of freedom
       const unsigned n_element = element_pt.size();
       for (unsigned e = 0; e < n_element; e++)
       {
-        dynamic_cast<RefineableLinearisedNavierStokesEquations *>(element_pt[e])
+        dynamic_cast<RefineableLinearisedNavierStokesEquations*>(element_pt[e])
           ->unpin_elemental_pressure_dofs();
       }
     }
@@ -221,9 +221,9 @@ namespace oomph
     /// flag=1: compute both
     /// flag=0: compute only residual vector
     void fill_in_generic_residual_contribution_linearised_nst(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix,
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
       unsigned flag);
 
   }; // End of RefineableLinearisedNavierStokesEquations class defn
@@ -274,7 +274,7 @@ namespace oomph
     }
 
     /// Rebuild from sons: Reconstruct pressure from the (merged) sons
-    void rebuild_from_sons(Mesh *&mesh_pt)
+    void rebuild_from_sons(Mesh*& mesh_pt)
     {
       using namespace QuadTreeNames;
 
@@ -399,7 +399,7 @@ namespace oomph
     }
 
     /// \short Pointer to the j-th vertex node in the element
-    Node *vertex_node_pt(const unsigned &j) const
+    Node* vertex_node_pt(const unsigned& j) const
     {
       return LinearisedQCrouzeixRaviartElement::vertex_node_pt(j);
     }
@@ -408,8 +408,8 @@ namespace oomph
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines), the values Vector sets its own size in here.
-    void get_interpolated_values(const Vector<double> &s,
-                                 Vector<double> &values)
+    void get_interpolated_values(const Vector<double>& s,
+                                 Vector<double>& values)
     {
       // Determine size of values Vector: U^C, U^S, W^C, W^S, V^C, V^S
       const unsigned n_values = 4 * DIM;
@@ -433,9 +433,9 @@ namespace oomph
     /// \n
     /// Note: No pressure history is kept, so pressure is always
     /// the current value.
-    void get_interpolated_values(const unsigned &t,
-                                 const Vector<double> &s,
-                                 Vector<double> &values)
+    void get_interpolated_values(const unsigned& t,
+                                 const Vector<double>& s,
+                                 Vector<double>& values)
     {
       // Set size of Vector: U^C, U^S, W^C, W^S, V^C, V^S
       values.resize(4 * DIM);
@@ -484,7 +484,7 @@ namespace oomph
       int son_type = quadtree_pt()->son_type();
 
       // Pointer to my father (in element impersonation)
-      RefineableElement *father_el_pt = quadtree_pt()->father_pt()->object_pt();
+      RefineableElement* father_el_pt = quadtree_pt()->father_pt()->object_pt();
 
       Vector<double> s_father(2);
 
@@ -520,8 +520,8 @@ namespace oomph
       // ---------------------------------
 
       // Find pointer to father element
-      RefineableLinearisedQCrouzeixRaviartElement *cast_father_el_pt =
-        dynamic_cast<RefineableLinearisedQCrouzeixRaviartElement *>(
+      RefineableLinearisedQCrouzeixRaviartElement* cast_father_el_pt =
+        dynamic_cast<RefineableLinearisedQCrouzeixRaviartElement*>(
           father_el_pt);
 
       // Set up storage for pressure in father element
@@ -604,7 +604,7 @@ namespace oomph
   {
   private:
     /// Pointer to n_p-th pressure node
-    Node *pressure_node_pt(const unsigned &n_p)
+    Node* pressure_node_pt(const unsigned& n_p)
     {
       return this->node_pt(this->Pconv[n_p]);
     }
@@ -658,7 +658,7 @@ namespace oomph
       const unsigned n_pres = this->npres_linearised_nst();
       for (unsigned l = 0; l < n_pres; l++)
       {
-        Node *nod_pt = this->node_pt(this->Pconv[l]);
+        Node* nod_pt = this->node_pt(this->Pconv[l]);
         for (unsigned i = 0; i < 2; i++)
         {
           if (!nod_pt->is_hanging(p_index[i]))
@@ -682,7 +682,7 @@ namespace oomph
     /// \short Number of values (pinned or dofs) required at node n.
     /// Bumped up to 8 so we don't have to worry if a hanging mid-side node
     /// gets shared by a corner node (which has extra degrees of freedom)
-    unsigned required_nvalue(const unsigned &n) const
+    unsigned required_nvalue(const unsigned& n) const
     {
       return 8;
     }
@@ -695,7 +695,7 @@ namespace oomph
     }
 
     /// Rebuild from sons: empty
-    void rebuild_from_sons(Mesh *&mesh_pt) {}
+    void rebuild_from_sons(Mesh*& mesh_pt) {}
 
     /// \short Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.
@@ -711,7 +711,7 @@ namespace oomph
     }
 
     /// Pointer to the j-th vertex node in the element
-    Node *vertex_node_pt(const unsigned &j) const
+    Node* vertex_node_pt(const unsigned& j) const
     {
       return LinearisedQTaylorHoodElement::vertex_node_pt(j);
     }
@@ -720,8 +720,8 @@ namespace oomph
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines), the values Vector sets its own size in here.
-    void get_interpolated_values(const Vector<double> &s,
-                                 Vector<double> &values)
+    void get_interpolated_values(const Vector<double>& s,
+                                 Vector<double>& values)
     {
       // Determine size of values Vector:
       // U^C, U^S, W^C, W^S, V^C, V^S, P^C, P^S
@@ -747,9 +747,9 @@ namespace oomph
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines), the values Vector sets its own size in here.
-    void get_interpolated_values(const unsigned &t,
-                                 const Vector<double> &s,
-                                 Vector<double> &values)
+    void get_interpolated_values(const unsigned& t,
+                                 const Vector<double>& s,
+                                 Vector<double>& values)
     {
       // Set size of values Vector: U^C, U^S, W^C, W^S, V^C, V^S, P^C, P^S
       values.resize(2 * (DIM + 1));
@@ -801,7 +801,7 @@ namespace oomph
     /// interpolating the velocities are the geometric nodes. The
     /// pressure "nodes" are a subset of the nodes, so when n_value==6
     /// or 7, the n-th pressure node is returned.
-    Node *interpolating_node_pt(const unsigned &n, const int &n_value)
+    Node* interpolating_node_pt(const unsigned& n, const int& n_value)
 
     {
       // The only different nodes are the pressure nodes
@@ -819,9 +819,9 @@ namespace oomph
 
     /// \short The pressure nodes are the corner nodes, so when n_value==6
     /// or 7, the fraction is the same as the 1d node number, 0 or 1.
-    double local_one_d_fraction_of_interpolating_node(const unsigned &n1d,
-                                                      const unsigned &i,
-                                                      const int &n_value)
+    double local_one_d_fraction_of_interpolating_node(const unsigned& n1d,
+                                                      const unsigned& i,
+                                                      const int& n_value)
     {
       if (n_value == (2 * DIM) || n_value == ((2 * DIM) + 1))
       {
@@ -839,8 +839,8 @@ namespace oomph
     /// The pressure nodes must be calculated by using the same methods
     /// as the geometric nodes, but by recalling that there are only two
     /// pressure nodes per edge.
-    Node *get_interpolating_node_at_local_coordinate(const Vector<double> &s,
-                                                     const int &n_value)
+    Node* get_interpolating_node_at_local_coordinate(const Vector<double>& s,
+                                                     const int& n_value)
     {
       // If we are calculating pressure nodes
       if (n_value == static_cast<int>(2 * DIM) ||
@@ -903,7 +903,7 @@ namespace oomph
 
     /// \short The number of 1d pressure nodes is 2, the number of 1d
     /// velocity nodes is the same as the number of 1d geometric nodes.
-    unsigned ninterpolating_node_1d(const int &n_value)
+    unsigned ninterpolating_node_1d(const int& n_value)
     {
       if (n_value == (2 * DIM) || n_value == ((2 * DIM) + 1))
       {
@@ -917,7 +917,7 @@ namespace oomph
 
     /// \short The number of pressure nodes is 4. The number of
     /// velocity nodes is the same as the number of geometric nodes.
-    unsigned ninterpolating_node(const int &n_value)
+    unsigned ninterpolating_node(const int& n_value)
     {
       if (n_value == (2 * DIM) || n_value == ((2 * DIM) + 1))
       {
@@ -931,9 +931,9 @@ namespace oomph
 
     /// \short The basis interpolating the pressure is given by pshape().
     //// The basis interpolating the velocity is shape().
-    void interpolating_basis(const Vector<double> &s,
-                             Shape &psi,
-                             const int &n_value) const
+    void interpolating_basis(const Vector<double>& s,
+                             Shape& psi,
+                             const int& n_value) const
     {
       if (n_value == (2 * DIM) || n_value == ((2 * DIM) + 1))
       {

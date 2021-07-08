@@ -65,13 +65,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    MatrixVectorProduct(const MatrixVectorProduct &)
+    MatrixVectorProduct(const MatrixVectorProduct&)
     {
       BrokenCopy::broken_copy("MatrixVectorProduct");
     }
 
     /// Broken assignment operator
-    void operator=(const MatrixVectorProduct &)
+    void operator=(const MatrixVectorProduct&)
     {
       BrokenCopy::broken_assign("MatrixVectorProduct");
     }
@@ -104,19 +104,19 @@ namespace oomph
     /// x if using multiply(...) or y if using multiply_transpose(...)
     /// where this is A x = y. By default, this is assumed to the uniformly
     /// distributed based on matrix_pt->ncol().
-    void setup(CRDoubleMatrix *matrix_pt,
-               const LinearAlgebraDistribution *col_dist_pt = 0);
+    void setup(CRDoubleMatrix* matrix_pt,
+               const LinearAlgebraDistribution* col_dist_pt = 0);
 
     /// \short Apply the operator to the vector x and return the result in
     /// the vector y
-    void multiply(const DoubleVector &x, DoubleVector &y) const;
+    void multiply(const DoubleVector& x, DoubleVector& y) const;
 
     /// \short Apply the transpose of the operator to the vector x and return
     /// the result in the vector y
-    void multiply_transpose(const DoubleVector &x, DoubleVector &y) const;
+    void multiply_transpose(const DoubleVector& x, DoubleVector& y) const;
 
     /// Access function to the number of columns.
-    const unsigned &ncol() const
+    const unsigned& ncol() const
     {
       return Ncol;
     }
@@ -124,14 +124,14 @@ namespace oomph
   private:
 #ifdef OOMPH_HAS_TRILINOS
     /// Helper function for multiply(...)
-    void trilinos_multiply_helper(const DoubleVector &x, DoubleVector &y) const;
+    void trilinos_multiply_helper(const DoubleVector& x, DoubleVector& y) const;
 
     /// Helper function for multiply_transpose(...)
-    void trilinos_multiply_transpose_helper(const DoubleVector &x,
-                                            DoubleVector &y) const;
+    void trilinos_multiply_transpose_helper(const DoubleVector& x,
+                                            DoubleVector& y) const;
 
     /// \short The Epetra version of the matrix
-    Epetra_CrsMatrix *Epetra_matrix_pt;
+    Epetra_CrsMatrix* Epetra_matrix_pt;
 #endif
 
     /// \short boolean indicating whether we are using trilinos to perform
@@ -139,11 +139,11 @@ namespace oomph
     bool Using_trilinos;
 
     /// \short an oomph-lib matrix
-    CRDoubleMatrix *Oomph_matrix_pt;
+    CRDoubleMatrix* Oomph_matrix_pt;
 
     /// \short The distribution of: x if using multiply(...) or y
     /// if using multiply_transpose(...) where this is A x = y.
-    LinearAlgebraDistribution *Column_distribution_pt;
+    LinearAlgebraDistribution* Column_distribution_pt;
 
     /// number of columns of the matrix
     unsigned Ncol;

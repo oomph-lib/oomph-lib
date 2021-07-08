@@ -109,14 +109,14 @@ public:
   /// flag to make the mesh periodic in the x-direction, and pointer
   /// to timestepper (defaults to Steady timestepper)
   ElasticRefineableTwoLayerMesh(
-    const unsigned &nx,
-    const unsigned &ny1,
-    const unsigned &ny2,
-    const double &lx,
-    const double &h1,
-    const double &h2,
-    const bool &periodic_in_x,
-    TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+    const unsigned& nx,
+    const unsigned& ny1,
+    const unsigned& ny2,
+    const double& lx,
+    const double& h1,
+    const double& h2,
+    const bool& periodic_in_x,
+    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
     RectangularQuadMesh<ELEMENT>(
       nx, ny1 + ny2, lx, h1 + h2, periodic_in_x, time_stepper_pt),
     ElasticRectangularQuadMesh<ELEMENT>(
@@ -135,7 +135,7 @@ public:
     for (unsigned e = 0; e < nx; e++)
     {
       // Get pointer to element in lower fluid adjacent to interface
-      FiniteElement *el_pt = this->finite_element_pt(nx * (ny1 - 1) + e);
+      FiniteElement* el_pt = this->finite_element_pt(nx * (ny1 - 1) + e);
 
       // Determine number of nodes in this element
       const unsigned n_node = el_pt->nnode();
@@ -144,7 +144,7 @@ public:
       // Loop over these nodes and convert them to boundary nodes.
       for (unsigned n = 0; n < 3; n++)
       {
-        Node *nod_pt = el_pt->node_pt(n_node - 3 + n);
+        Node* nod_pt = el_pt->node_pt(n_node - 3 + n);
         this->convert_to_boundary_node(nod_pt);
         this->add_boundary_node(4, nod_pt);
       }
@@ -181,10 +181,10 @@ public:
   void set_boundary_conditions();
 
   /// Document the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// Do unsteady run up to maximum time t_max with given timestep dt
-  void unsteady_run(const double &t_max, const double &dt);
+  void unsteady_run(const double& t_max, const double& dt);
 
 private:
   /// No actions required before solve step
@@ -213,26 +213,26 @@ private:
   void delete_interface_elements();
 
   /// Deform the mesh/free surface to a prescribed function
-  void deform_free_surface(const double &epsilon, const unsigned &n_periods);
+  void deform_free_surface(const double& epsilon, const unsigned& n_periods);
 
   /// Fix pressure in element e at pressure dof pdof and set to pvalue
-  void fix_pressure(const unsigned &e,
-                    const unsigned &pdof,
-                    const double &pvalue)
+  void fix_pressure(const unsigned& e,
+                    const unsigned& pdof,
+                    const double& pvalue)
   {
     // Fix the pressure at that element
-    dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e))
+    dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))
       ->fix_pressure(pdof, pvalue);
   }
 
   /// Pointer to the (specific) "bulk" mesh
-  ElasticRefineableTwoLayerMesh<ELEMENT> *Bulk_mesh_pt;
+  ElasticRefineableTwoLayerMesh<ELEMENT>* Bulk_mesh_pt;
 
   /// Pointer to the "surface" mesh
-  Mesh *Surface_mesh_pt;
+  Mesh* Surface_mesh_pt;
 
   // Pointer to the constitutive law used to determine the mesh deformation
-  ConstitutiveLaw *Constitutive_law_pt;
+  ConstitutiveLaw* Constitutive_law_pt;
 
   /// Width of domain
   double Lx;
@@ -366,7 +366,7 @@ InterfaceProblem<ELEMENT, TIMESTEPPER>::InterfaceProblem()
   for (unsigned e = 0; e < n_lower; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -390,7 +390,7 @@ InterfaceProblem<ELEMENT, TIMESTEPPER>::InterfaceProblem()
   for (unsigned e = n_lower; e < (n_lower + n_upper); e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -561,8 +561,8 @@ void InterfaceProblem<ELEMENT, TIMESTEPPER>::create_interface_elements()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to the interface
-    ELEMENT *bulk_elem_pt =
-      dynamic_cast<ELEMENT *>(this->Bulk_mesh_pt->boundary_element_pt(4, e));
+    ELEMENT* bulk_elem_pt =
+      dynamic_cast<ELEMENT*>(this->Bulk_mesh_pt->boundary_element_pt(4, e));
 
     // We only want to attach interface elements to the bulk elements
     // which are BELOW the interface, and so we filter out those above by
@@ -574,7 +574,7 @@ void InterfaceProblem<ELEMENT, TIMESTEPPER>::create_interface_elements()
       const int face_index = this->Bulk_mesh_pt->face_index_at_boundary(4, e);
 
       // Create the interface element
-      FiniteElement *interface_element_element_pt =
+      FiniteElement* interface_element_element_pt =
         new ElasticLineFluidInterfaceElement<ELEMENT>(bulk_elem_pt, face_index);
 
       // Add the interface element to the surface mesh
@@ -593,8 +593,8 @@ void InterfaceProblem<ELEMENT, TIMESTEPPER>::create_interface_elements()
   for (unsigned e = 0; e < n_interface_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ElasticLineFluidInterfaceElement<ELEMENT> *el_pt =
-      dynamic_cast<ElasticLineFluidInterfaceElement<ELEMENT> *>(
+    ElasticLineFluidInterfaceElement<ELEMENT>* el_pt =
+      dynamic_cast<ElasticLineFluidInterfaceElement<ELEMENT>*>(
         Surface_mesh_pt->element_pt(e));
 
     // Set the Strouhal number
@@ -632,7 +632,7 @@ void InterfaceProblem<ELEMENT, TIMESTEPPER>::delete_interface_elements()
 //========================================================================
 template<class ELEMENT, class TIMESTEPPER>
 void InterfaceProblem<ELEMENT, TIMESTEPPER>::deform_free_surface(
-  const double &epsilon, const unsigned &n_periods)
+  const double& epsilon, const unsigned& n_periods)
 {
   // Determine number of nodes in the "bulk" mesh
   const unsigned n_node = Bulk_mesh_pt->nnode();
@@ -659,14 +659,14 @@ void InterfaceProblem<ELEMENT, TIMESTEPPER>::deform_free_surface(
 /// Doc the solution
 //========================================================================
 template<class ELEMENT, class TIMESTEPPER>
-void InterfaceProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo &doc_info)
+void InterfaceProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo& doc_info)
 {
   // Output the time
   cout << "Time is now " << time_pt()->time() << std::endl;
 
   // Upcast from GeneralisedElement to the present element
-  ElasticLineFluidInterfaceElement<ELEMENT> *el_pt =
-    dynamic_cast<ElasticLineFluidInterfaceElement<ELEMENT> *>(
+  ElasticLineFluidInterfaceElement<ELEMENT>* el_pt =
+    dynamic_cast<ElasticLineFluidInterfaceElement<ELEMENT>*>(
       Surface_mesh_pt->element_pt(0));
 
   // Document time and vertical position of left hand side of interface
@@ -710,8 +710,8 @@ void InterfaceProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo &doc_info)
 /// Perform run up to specified time t_max with given timestep dt
 //========================================================================
 template<class ELEMENT, class TIMESTEPPER>
-void InterfaceProblem<ELEMENT, TIMESTEPPER>::unsteady_run(const double &t_max,
-                                                          const double &dt)
+void InterfaceProblem<ELEMENT, TIMESTEPPER>::unsteady_run(const double& t_max,
+                                                          const double& dt)
 {
   // Set value of epsilon
   const double epsilon = 0.1;
@@ -798,7 +798,7 @@ void InterfaceProblem<ELEMENT, TIMESTEPPER>::unsteady_run(const double &t_max,
 //==start_of_main=========================================================
 /// Driver code for two-dimensional two fluid interface problem
 //========================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

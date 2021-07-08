@@ -37,7 +37,7 @@ namespace oomph
   //===============================================================
   /// This function is used to check whether a matrix is square
   //===============================================================
-  bool ConstitutiveLaw::is_matrix_square(const DenseMatrix<double> &M)
+  bool ConstitutiveLaw::is_matrix_square(const DenseMatrix<double>& M)
   {
     // If the number rows and columns is not equal, the matrix is not square
     if (M.nrow() != M.ncol())
@@ -54,7 +54,7 @@ namespace oomph
   /// This function is used to check whether matrices are of equal dimension
   //========================================================================
   bool ConstitutiveLaw::are_matrices_of_equal_dimensions(
-    const DenseMatrix<double> &M1, const DenseMatrix<double> &M2)
+    const DenseMatrix<double>& M1, const DenseMatrix<double>& M2)
   {
     // If the numbers of rows and columns are not the same, then the
     // matrices are not of equal dimension
@@ -72,9 +72,9 @@ namespace oomph
   /// This function is used to provide simple error (bounce) checks on the
   /// input to any calculate_second_piola_kirchhoff_stress
   //=======================================================================
-  void ConstitutiveLaw::error_checking_in_input(const DenseMatrix<double> &g,
-                                                const DenseMatrix<double> &G,
-                                                DenseMatrix<double> &sigma)
+  void ConstitutiveLaw::error_checking_in_input(const DenseMatrix<double>& g,
+                                                const DenseMatrix<double>& G,
+                                                DenseMatrix<double>& sigma)
   {
     // Test whether the undeformed metric tensor is square
     if (!is_matrix_square(g))
@@ -114,7 +114,7 @@ namespace oomph
   /// The function to calculate the contravariant tensor from a covariant one
   //===========================================================================
   double ConstitutiveLaw::calculate_contravariant(
-    const DenseMatrix<double> &Gdown, DenseMatrix<double> &Gup)
+    const DenseMatrix<double>& Gdown, DenseMatrix<double>& Gup)
   {
     // Initial error checking
 #ifdef PARANOID
@@ -224,9 +224,9 @@ namespace oomph
   /// the covariant tensor
   //===========================================================================
   void ConstitutiveLaw::calculate_d_contravariant_dG(
-    const DenseMatrix<double> &Gdown,
-    RankFourTensor<double> &d_Gup_dG,
-    DenseMatrix<double> &d_detG_dG)
+    const DenseMatrix<double>& Gdown,
+    RankFourTensor<double>& d_Gup_dG,
+    DenseMatrix<double>& d_detG_dG)
   {
     // Find the dimension of the matrix
     const unsigned dim = Gdown.ncol();
@@ -349,11 +349,11 @@ namespace oomph
   /// is possible.
   //==========================================================================
   void ConstitutiveLaw::calculate_d_second_piola_kirchhoff_stress_dG(
-    const DenseMatrix<double> &g,
-    const DenseMatrix<double> &G,
-    const DenseMatrix<double> &sigma,
-    RankFourTensor<double> &d_sigma_dG,
-    const bool &symmetrize_tensor)
+    const DenseMatrix<double>& g,
+    const DenseMatrix<double>& G,
+    const DenseMatrix<double>& sigma,
+    RankFourTensor<double>& d_sigma_dG,
+    const bool& symmetrize_tensor)
   {
     // Initial error checking
 #ifdef PARANOID
@@ -449,14 +449,14 @@ namespace oomph
   /// for the derivatives of the determinant, which are generic.
   //========================================================================
   void ConstitutiveLaw::calculate_d_second_piola_kirchhoff_stress_dG(
-    const DenseMatrix<double> &g,
-    const DenseMatrix<double> &G,
-    const DenseMatrix<double> &sigma,
-    const double &detG,
-    const double &interpolated_solid_p,
-    RankFourTensor<double> &d_sigma_dG,
-    DenseMatrix<double> &d_detG_dG,
-    const bool &symmetrize_tensor)
+    const DenseMatrix<double>& g,
+    const DenseMatrix<double>& G,
+    const DenseMatrix<double>& sigma,
+    const double& detG,
+    const double& interpolated_solid_p,
+    RankFourTensor<double>& d_sigma_dG,
+    DenseMatrix<double>& d_detG_dG,
+    const bool& symmetrize_tensor)
   {
     // Initial error checking
 #ifdef PARANOID
@@ -560,15 +560,15 @@ namespace oomph
   /// The default implementation uses finite differences.
   //=======================================================================
   void ConstitutiveLaw::calculate_d_second_piola_kirchhoff_stress_dG(
-    const DenseMatrix<double> &g,
-    const DenseMatrix<double> &G,
-    const DenseMatrix<double> &sigma,
-    const double &gen_dil,
-    const double &inv_kappa,
-    const double &interpolated_solid_p,
-    RankFourTensor<double> &d_sigma_dG,
-    DenseMatrix<double> &d_gen_dil_dG,
-    const bool &symmetrize_tensor)
+    const DenseMatrix<double>& g,
+    const DenseMatrix<double>& G,
+    const DenseMatrix<double>& sigma,
+    const double& gen_dil,
+    const double& inv_kappa,
+    const double& interpolated_solid_p,
+    RankFourTensor<double>& d_sigma_dG,
+    DenseMatrix<double>& d_gen_dil_dG,
+    const bool& symmetrize_tensor)
   {
     // Initial error checking
 #ifdef PARANOID
@@ -674,9 +674,9 @@ namespace oomph
   /// tensors, g and G, and the matrix in which to return the stress tensor.
   //=====================================================================
   void GeneralisedHookean::calculate_second_piola_kirchhoff_stress(
-    const DenseMatrix<double> &g,
-    const DenseMatrix<double> &G,
-    DenseMatrix<double> &sigma)
+    const DenseMatrix<double>& g,
+    const DenseMatrix<double>& G,
+    DenseMatrix<double>& sigma)
   {
     // Error checking
 #ifdef PARANOID
@@ -757,12 +757,12 @@ namespace oomph
   /// \f$ p / \kappa - d =0 \f$.
   //===========================================================================
   void GeneralisedHookean::calculate_second_piola_kirchhoff_stress(
-    const DenseMatrix<double> &g,
-    const DenseMatrix<double> &G,
-    DenseMatrix<double> &sigma_dev,
-    DenseMatrix<double> &Gup,
-    double &gen_dil,
-    double &inv_kappa)
+    const DenseMatrix<double>& g,
+    const DenseMatrix<double>& G,
+    DenseMatrix<double>& sigma_dev,
+    DenseMatrix<double>& Gup,
+    double& gen_dil,
+    double& inv_kappa)
   {
     // Find the dimension of the problem
     unsigned dim = G.nrow();
@@ -803,11 +803,11 @@ namespace oomph
   /// \f$ \det G_{ij} - \det g_{ij} = 0 \f$.
   //======================================================================
   void GeneralisedHookean::calculate_second_piola_kirchhoff_stress(
-    const DenseMatrix<double> &g,
-    const DenseMatrix<double> &G,
-    DenseMatrix<double> &sigma_dev,
-    DenseMatrix<double> &Gup,
-    double &detG)
+    const DenseMatrix<double>& g,
+    const DenseMatrix<double>& G,
+    DenseMatrix<double>& sigma_dev,
+    DenseMatrix<double>& Gup,
+    double& detG)
   {
     // Error checking
 #ifdef PARANOID
@@ -885,9 +885,9 @@ namespace oomph
   /// Uses correct 3D invariants for 2D (plane strain) problems.
   //=======================================================================
   void IsotropicStrainEnergyFunctionConstitutiveLaw::
-    calculate_second_piola_kirchhoff_stress(const DenseMatrix<double> &g,
-                                            const DenseMatrix<double> &G,
-                                            DenseMatrix<double> &sigma)
+    calculate_second_piola_kirchhoff_stress(const DenseMatrix<double>& g,
+                                            const DenseMatrix<double>& G,
+                                            DenseMatrix<double>& sigma)
   {
 // Error checking
 #ifdef PARANOID
@@ -998,11 +998,11 @@ namespace oomph
   /// This is the version for the pure incompressible formulation.
   //============================================================================
   void IsotropicStrainEnergyFunctionConstitutiveLaw::
-    calculate_second_piola_kirchhoff_stress(const DenseMatrix<double> &g,
-                                            const DenseMatrix<double> &G,
-                                            DenseMatrix<double> &sigma_dev,
-                                            DenseMatrix<double> &Gup,
-                                            double &detG)
+    calculate_second_piola_kirchhoff_stress(const DenseMatrix<double>& g,
+                                            const DenseMatrix<double>& G,
+                                            DenseMatrix<double>& sigma_dev,
+                                            DenseMatrix<double>& Gup,
+                                            double& detG)
   {
 // Error checking
 #ifdef PARANOID
@@ -1124,12 +1124,12 @@ namespace oomph
   /// This is the version for the near-incompressible formulation.
   //===========================================================================
   void IsotropicStrainEnergyFunctionConstitutiveLaw::
-    calculate_second_piola_kirchhoff_stress(const DenseMatrix<double> &g,
-                                            const DenseMatrix<double> &G,
-                                            DenseMatrix<double> &sigma_dev,
-                                            DenseMatrix<double> &Gup,
-                                            double &gen_dil,
-                                            double &inv_kappa)
+    calculate_second_piola_kirchhoff_stress(const DenseMatrix<double>& g,
+                                            const DenseMatrix<double>& G,
+                                            DenseMatrix<double>& sigma_dev,
+                                            DenseMatrix<double>& Gup,
+                                            double& gen_dil,
+                                            double& inv_kappa)
   {
 // Error checking
 #ifdef PARANOID

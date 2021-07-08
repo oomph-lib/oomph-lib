@@ -40,9 +40,9 @@ namespace oomph
   template<unsigned DIM>
   void RefineableHelmholtzEquations<DIM>::
     fill_in_generic_residual_contribution_helmholtz(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      const unsigned &flag)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag)
   {
     // Find out how many nodes there are in the element
     unsigned n_node = nnode();

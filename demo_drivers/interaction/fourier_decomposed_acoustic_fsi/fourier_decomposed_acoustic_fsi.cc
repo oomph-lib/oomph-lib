@@ -96,8 +96,8 @@ namespace Global_Parameters
   unsigned M = 4;
 
   /// \short Displacement field on inner boundary of solid
-  void solid_boundary_displacement(const Vector<double> &x,
-                                   Vector<std::complex<double>> &u)
+  void solid_boundary_displacement(const Vector<double>& x,
+                                   Vector<std::complex<double>>& u)
   {
     Vector<double> normal(2);
     double norm = sqrt(x[0] * x[0] + x[1] * x[1]);
@@ -140,7 +140,7 @@ public:
   }
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 private:
   /// \short Create FSI traction elements
@@ -156,19 +156,19 @@ private:
   void create_helmholtz_DtN_elements();
 
   /// Pointer to solid mesh
-  TwoDAnnularMesh<ELASTICITY_ELEMENT> *Solid_mesh_pt;
+  TwoDAnnularMesh<ELASTICITY_ELEMENT>* Solid_mesh_pt;
 
   /// Pointer to mesh of FSI traction elements
-  Mesh *FSI_traction_mesh_pt;
+  Mesh* FSI_traction_mesh_pt;
 
   /// Pointer to Helmholtz mesh
-  TwoDAnnularMesh<HELMHOLTZ_ELEMENT> *Helmholtz_mesh_pt;
+  TwoDAnnularMesh<HELMHOLTZ_ELEMENT>* Helmholtz_mesh_pt;
 
   /// Pointer to mesh of Helmholtz FSI flux elements
-  Mesh *Helmholtz_fsi_flux_mesh_pt;
+  Mesh* Helmholtz_fsi_flux_mesh_pt;
 
   /// \short Pointer to mesh containing the DtN elements
-  FourierDecomposedHelmholtzDtNMesh<HELMHOLTZ_ELEMENT> *Helmholtz_DtN_mesh_pt;
+  FourierDecomposedHelmholtzDtNMesh<HELMHOLTZ_ELEMENT>* Helmholtz_DtN_mesh_pt;
 
   /// Trace file
   ofstream Trace_file;
@@ -244,8 +244,8 @@ CoatedSphereProblem<ELASTICITY_ELEMENT,
   for (unsigned e = 0; e < nel; e++)
   {
     // Cast to a bulk element
-    ELASTICITY_ELEMENT *el_pt =
-      dynamic_cast<ELASTICITY_ELEMENT *>(Solid_mesh_pt->element_pt(e));
+    ELASTICITY_ELEMENT* el_pt =
+      dynamic_cast<ELASTICITY_ELEMENT*>(Solid_mesh_pt->element_pt(e));
 
     // Set the pointer to Fourier wavenumber
     el_pt->fourier_wavenumber_pt() = &Global_Parameters::Fourier_wavenumber;
@@ -262,8 +262,8 @@ CoatedSphereProblem<ELASTICITY_ELEMENT,
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    HELMHOLTZ_ELEMENT *el_pt =
-      dynamic_cast<HELMHOLTZ_ELEMENT *>(Helmholtz_mesh_pt->element_pt(i));
+    HELMHOLTZ_ELEMENT* el_pt =
+      dynamic_cast<HELMHOLTZ_ELEMENT*>(Helmholtz_mesh_pt->element_pt(i));
 
     // Set the k_squared pointer
     el_pt->k_squared_pt() = &Global_Parameters::K_squared;
@@ -318,7 +318,7 @@ CoatedSphereProblem<ELASTICITY_ELEMENT,
   // solid boundary
   for (unsigned i = 0; i < n_node; i++)
   {
-    Node *nod_pt = Solid_mesh_pt->boundary_node_pt(b, i);
+    Node* nod_pt = Solid_mesh_pt->boundary_node_pt(b, i);
     nod_pt->pin(0);
     nod_pt->pin(1);
     nod_pt->pin(2);
@@ -353,7 +353,7 @@ CoatedSphereProblem<ELASTICITY_ELEMENT,
       for (unsigned inod = 0; inod < num_nod; inod++)
       {
         // Get pointer to node
-        Node *nod_pt = Solid_mesh_pt->boundary_node_pt(ibound, inod);
+        Node* nod_pt = Solid_mesh_pt->boundary_node_pt(ibound, inod);
 
         // Pin radial displacement (u_0 (real) and u_3 (imag))
         nod_pt->pin(0);
@@ -378,7 +378,7 @@ CoatedSphereProblem<ELASTICITY_ELEMENT,
       for (unsigned inod = 0; inod < num_nod; inod++)
       {
         // Get pointer to node
-        Node *nod_pt = Solid_mesh_pt->boundary_node_pt(ibound, inod);
+        Node* nod_pt = Solid_mesh_pt->boundary_node_pt(ibound, inod);
 
         // Pin radial displacement (u_0 (real) and u_3 (imag))
         nod_pt->pin(0);
@@ -424,15 +424,15 @@ void CoatedSphereProblem<ELASTICITY_ELEMENT,
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    HELMHOLTZ_ELEMENT *bulk_elem_pt = dynamic_cast<HELMHOLTZ_ELEMENT *>(
+    HELMHOLTZ_ELEMENT* bulk_elem_pt = dynamic_cast<HELMHOLTZ_ELEMENT*>(
       Helmholtz_mesh_pt->boundary_element_pt(b, e));
 
     // Find the index of the face of element e along boundary b
     int face_index = Helmholtz_mesh_pt->face_index_at_boundary(b, e);
 
     // Build the corresponding DtN element
-    FourierDecomposedHelmholtzDtNBoundaryElement<HELMHOLTZ_ELEMENT>
-      *flux_element_pt =
+    FourierDecomposedHelmholtzDtNBoundaryElement<HELMHOLTZ_ELEMENT>*
+      flux_element_pt =
         new FourierDecomposedHelmholtzDtNBoundaryElement<HELMHOLTZ_ELEMENT>(
           bulk_elem_pt, face_index);
 
@@ -502,7 +502,7 @@ void CoatedSphereProblem<ELASTICITY_ELEMENT,
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    ELASTICITY_ELEMENT *bulk_elem_pt = dynamic_cast<ELASTICITY_ELEMENT *>(
+    ELASTICITY_ELEMENT* bulk_elem_pt = dynamic_cast<ELASTICITY_ELEMENT*>(
       Solid_mesh_pt->boundary_element_pt(b, e));
 
     // Find the index of the face of element e along boundary b
@@ -511,7 +511,7 @@ void CoatedSphereProblem<ELASTICITY_ELEMENT,
     // Create element
     FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement<
       ELASTICITY_ELEMENT,
-      HELMHOLTZ_ELEMENT> *el_pt =
+      HELMHOLTZ_ELEMENT>* el_pt =
       new FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement<
         ELASTICITY_ELEMENT,
         HELMHOLTZ_ELEMENT>(bulk_elem_pt, face_index);
@@ -545,7 +545,7 @@ void CoatedSphereProblem<ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT>::
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    HELMHOLTZ_ELEMENT *bulk_elem_pt = dynamic_cast<HELMHOLTZ_ELEMENT *>(
+    HELMHOLTZ_ELEMENT* bulk_elem_pt = dynamic_cast<HELMHOLTZ_ELEMENT*>(
       Helmholtz_mesh_pt->boundary_element_pt(b, e));
 
     // Find the index of the face of element e along boundary b
@@ -554,7 +554,7 @@ void CoatedSphereProblem<ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT>::
     // Create element
     FourierDecomposedHelmholtzFluxFromNormalDisplacementBCElement<
       HELMHOLTZ_ELEMENT,
-      ELASTICITY_ELEMENT> *el_pt =
+      ELASTICITY_ELEMENT>* el_pt =
       new FourierDecomposedHelmholtzFluxFromNormalDisplacementBCElement<
         HELMHOLTZ_ELEMENT,
         ELASTICITY_ELEMENT>(bulk_elem_pt, face_index);
@@ -574,7 +574,7 @@ void CoatedSphereProblem<ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT>::
 //==================================================================
 template<class ELASTICITY_ELEMENT, class HELMHOLTZ_ELEMENT>
 void CoatedSphereProblem<ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT>::doc_solution(
-  DocInfo &doc_info)
+  DocInfo& doc_info)
 {
   // Doc parameters
   oomph_info << "Writing result for step " << doc_info.number()
@@ -609,9 +609,8 @@ void CoatedSphereProblem<ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT>::doc_solution(
   unsigned nn_element = Helmholtz_DtN_mesh_pt->nelement();
   for (unsigned e = 0; e < nn_element; e++)
   {
-    FourierDecomposedHelmholtzBCElementBase<HELMHOLTZ_ELEMENT> *el_pt =
-      dynamic_cast<
-        FourierDecomposedHelmholtzBCElementBase<HELMHOLTZ_ELEMENT> *>(
+    FourierDecomposedHelmholtzBCElementBase<HELMHOLTZ_ELEMENT>* el_pt =
+      dynamic_cast<FourierDecomposedHelmholtzBCElementBase<HELMHOLTZ_ELEMENT>*>(
         Helmholtz_DtN_mesh_pt->element_pt(e));
     power += el_pt->global_power_contribution(some_file);
   }
@@ -672,7 +671,7 @@ void CoatedSphereProblem<ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT>::doc_solution(
 //=======start_of_main==================================================
 /// Driver for coated sphere loaded by lineared fluid loading
 //======================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

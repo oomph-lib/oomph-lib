@@ -71,16 +71,16 @@ public:
   /// Nevertheless we keep nx, ny, nz making reference
   //   to the elements in each direction of each cubic mesh
 
-  CombTipSpineMesh(const unsigned int &nel,
-                   const double &alpha,
-                   const double &length,
-                   const double &height,
-                   const double &radius,
-                   const unsigned &flag,
-                   TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper);
+  CombTipSpineMesh(const unsigned int& nel,
+                   const double& alpha,
+                   const double& length,
+                   const double& height,
+                   const double& radius,
+                   const unsigned& flag,
+                   TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
   /// Access functions for pointers to interface elements
-  FiniteElement *&interface_element_pt(const unsigned long &i)
+  FiniteElement*& interface_element_pt(const unsigned long& i)
   {
     return Interface_element_pt[i];
   }
@@ -93,7 +93,7 @@ public:
   }
 
   /// Access functions for pointers to elements in bulk
-  FiniteElement *&bulk_element_pt(const unsigned long &i)
+  FiniteElement*& bulk_element_pt(const unsigned long& i)
   {
     return Bulk_element_pt[i];
   }
@@ -129,7 +129,7 @@ public:
      spine_node_pt->x(2) = 0.0 + W*H;
      }*/
 
-  virtual void spine_node_update(SpineNode *spine_node_pt)
+  virtual void spine_node_update(SpineNode* spine_node_pt)
   {
     // Get fraction along the spine
     double W = spine_node_pt->fraction();
@@ -175,18 +175,18 @@ protected:
   double Zax;
 
   /// Vector of pointers to element in the fluid layer
-  Vector<FiniteElement *> Bulk_element_pt;
+  Vector<FiniteElement*> Bulk_element_pt;
 
   /// Vector of pointers to interface elements
-  Vector<FiniteElement *> Interface_element_pt;
+  Vector<FiniteElement*> Interface_element_pt;
 
   // Rotation functions
-  void rotate_90_zeq1_xeq0(SpineMesh *rot_mesh_pt)
+  void rotate_90_zeq1_xeq0(SpineMesh* rot_mesh_pt)
   {
     unsigned long nnode = rot_mesh_pt->nnode();
     for (unsigned long i = 0; i < nnode; i++)
     {
-      Node *node_pt = rot_mesh_pt->node_pt(i);
+      Node* node_pt = rot_mesh_pt->node_pt(i);
       double x_node = node_pt->x(0);
       double z_node = node_pt->x(2);
       node_pt->x(0) = 1.0 - z_node;
@@ -198,7 +198,7 @@ protected:
     unsigned long nspines = rot_mesh_pt->nspine();
     for (unsigned long i = 0; i < nspines; i++)
     {
-      Spine *spine_pt = rot_mesh_pt->spine_pt(i);
+      Spine* spine_pt = rot_mesh_pt->spine_pt(i);
       double x_spine = spine_pt->geom_parameter(0);
       double z_spine = spine_pt->geom_parameter(2);
       spine_pt->geom_parameter(0) = 1.0 - z_spine;
@@ -209,12 +209,12 @@ protected:
     rot_mesh_pt->node_update();
   }
 
-  void rotate_90_zeq1_yeq0(SpineMesh *rot_mesh_pt)
+  void rotate_90_zeq1_yeq0(SpineMesh* rot_mesh_pt)
   {
     unsigned long nnode = rot_mesh_pt->nnode();
     for (unsigned long i = 0; i < nnode; i++)
     {
-      Node *node_pt = rot_mesh_pt->node_pt(i);
+      Node* node_pt = rot_mesh_pt->node_pt(i);
       double y_node = node_pt->x(1);
       double z_node = node_pt->x(2);
       node_pt->x(1) = -1.0 + z_node;
@@ -227,7 +227,7 @@ protected:
     unsigned long nspines = rot_mesh_pt->nspine();
     for (unsigned long i = 0; i < nspines; i++)
     {
-      Spine *spine_pt = rot_mesh_pt->spine_pt(i);
+      Spine* spine_pt = rot_mesh_pt->spine_pt(i);
       double y_spine = spine_pt->geom_parameter(1);
       double z_spine = spine_pt->geom_parameter(2);
       spine_pt->geom_parameter(1) = -1.0 + z_spine;
@@ -240,15 +240,15 @@ protected:
 
   /// \short Helper function to actually build the single-layer spine mesh
   /// (called from various constructors)
-  virtual void build_single_layer_mesh(TimeStepper *time_stepper_pt);
+  virtual void build_single_layer_mesh(TimeStepper* time_stepper_pt);
 
   void add_side_spinemesh(unsigned int bound1,
-                          MyTipMesh<ELEMENT, INTERFACE_ELEMENT> *addmesh_pt,
-                          int *addmesh_map_boundary,
+                          MyTipMesh<ELEMENT, INTERFACE_ELEMENT>* addmesh_pt,
+                          int* addmesh_map_boundary,
                           int total_boundaries,
                           unsigned flag);
 
-  void change_boundaries(Mesh *pt_mesh,
+  void change_boundaries(Mesh* pt_mesh,
                          unsigned int oldbound,
                          unsigned int newbound,
                          unsigned int total_boundaries);
@@ -263,13 +263,13 @@ protected:
 //===========================================================================
 template<class ELEMENT, class INTERFACE_ELEMENT>
 CombTipSpineMesh<ELEMENT, INTERFACE_ELEMENT>::CombTipSpineMesh(
-  const unsigned int &nel,
-  const double &alpha,
-  const double &length,
-  const double &height,
-  const double &radius,
-  const unsigned &flag,
-  TimeStepper *time_stepper_pt) :
+  const unsigned int& nel,
+  const double& alpha,
+  const double& length,
+  const double& height,
+  const double& radius,
+  const unsigned& flag,
+  TimeStepper* time_stepper_pt) :
   Nel(nel),
   Alpha(alpha),
   Length(length),
@@ -296,7 +296,7 @@ CombTipSpineMesh<ELEMENT, INTERFACE_ELEMENT>::CombTipSpineMesh(
 //===========================================================================
 template<class ELEMENT, class INTERFACE_ELEMENT>
 void CombTipSpineMesh<ELEMENT, INTERFACE_ELEMENT>::build_single_layer_mesh(
-  TimeStepper *time_stepper_pt)
+  TimeStepper* time_stepper_pt)
 {
   // Axis pf simmetry
   Xax = 0.0;
@@ -308,7 +308,7 @@ void CombTipSpineMesh<ELEMENT, INTERFACE_ELEMENT>::build_single_layer_mesh(
   unsigned n_z = Nel;
 
   // Build the first canion mesh:
-  MyTipMesh<ELEMENT, INTERFACE_ELEMENT> *mesh1_pt =
+  MyTipMesh<ELEMENT, INTERFACE_ELEMENT>* mesh1_pt =
     new MyTipMesh<ELEMENT, INTERFACE_ELEMENT>(
       n_x, n_y, n_z, 0.0, 1.0, -1.0, 0.0, 0.0, 1.0, Radius, 0, time_stepper_pt);
 
@@ -360,14 +360,14 @@ void CombTipSpineMesh<ELEMENT, INTERFACE_ELEMENT>::build_single_layer_mesh(
     {
       // We remove the node from the old boundary mesh ( This is not necessary
       // and it is mainly wrotten for avoiding the warning message)
-      Node *node_pt = mesh1_pt->boundary_node_pt(b, i);
+      Node* node_pt = mesh1_pt->boundary_node_pt(b, i);
       node_pt->remove_from_boundary(b);
       this->add_boundary_node(b, node_pt);
     }
   }
 
   // We create a second mesh
-  MyTipMesh<ELEMENT, INTERFACE_ELEMENT> *mesh2_pt =
+  MyTipMesh<ELEMENT, INTERFACE_ELEMENT>* mesh2_pt =
     new MyTipMesh<ELEMENT, INTERFACE_ELEMENT>(
       n_x, n_y, n_z, 0.0, 1.0, -1.0, 0.0, 0.0, 1.0, Radius, 1, time_stepper_pt);
 
@@ -389,7 +389,7 @@ void CombTipSpineMesh<ELEMENT, INTERFACE_ELEMENT>::build_single_layer_mesh(
   //  cout<<"After adding 2 the mesh has "<<nbulk()<<" bulk elements"<<endl;
 
   // We create a third mesh
-  MyTipMesh<ELEMENT, INTERFACE_ELEMENT> *mesh3_pt =
+  MyTipMesh<ELEMENT, INTERFACE_ELEMENT>* mesh3_pt =
     new MyTipMesh<ELEMENT, INTERFACE_ELEMENT>(
       n_x, n_y, n_z, 0.0, 1.0, -1.0, 0.0, 0.0, 1.0, Radius, 2, time_stepper_pt);
 
@@ -415,7 +415,7 @@ void CombTipSpineMesh<ELEMENT, INTERFACE_ELEMENT>::build_single_layer_mesh(
   // cout<<"After adding 3 the mesh has "<<nbulk()<<" bulk elements"<<endl;
 
   // We create a fourth  mesh
-  MyTipMesh<ELEMENT, INTERFACE_ELEMENT> *mesh4_pt =
+  MyTipMesh<ELEMENT, INTERFACE_ELEMENT>* mesh4_pt =
     new MyTipMesh<ELEMENT, INTERFACE_ELEMENT>(
       n_x, n_y, n_z, 0.0, 1.0, -1.0, 0.0, 0.0, 1.0, Radius, 0, time_stepper_pt);
 
@@ -439,7 +439,7 @@ void CombTipSpineMesh<ELEMENT, INTERFACE_ELEMENT>::build_single_layer_mesh(
 
   // cout<<"After adding 4 the mesh has "<<nnode()<<" nodes "<<endl;
   // We create a fourth mesh
-  MyTipMesh<ELEMENT, INTERFACE_ELEMENT> *mesh5_pt =
+  MyTipMesh<ELEMENT, INTERFACE_ELEMENT>* mesh5_pt =
     new MyTipMesh<ELEMENT, INTERFACE_ELEMENT>(
       n_x, n_y, n_z, 0.0, 1.0, -1.0, 0.0, 0.0, 1.0, Radius, 0, time_stepper_pt);
 
@@ -469,7 +469,7 @@ void CombTipSpineMesh<ELEMENT, INTERFACE_ELEMENT>::build_single_layer_mesh(
   // cout<<"After adding 5 the mesh has "<<nbulk()<<" bulk elements"<<endl;
 
   // We create the last mesh
-  MyTipMesh<ELEMENT, INTERFACE_ELEMENT> *mesh6_pt =
+  MyTipMesh<ELEMENT, INTERFACE_ELEMENT>* mesh6_pt =
     new MyTipMesh<ELEMENT, INTERFACE_ELEMENT>(
       n_x, n_y, n_z, 0.0, 1.0, -1.0, 0.0, 0.0, 1.0, Radius, 1, time_stepper_pt);
 
@@ -521,7 +521,7 @@ void CombTipSpineMesh<ELEMENT, INTERFACE_ELEMENT>::build_single_layer_mesh(
   ncount = this->nnode();
   for (int i = 0; i < ncount; i++)
   {
-    Node *node_pt = this->node_pt(i);
+    Node* node_pt = this->node_pt(i);
     node_pt->x(0) = node_pt->x(0) * Alpha / 2;
     node_pt->x(1) = node_pt->x(1) * Length;
     node_pt->x(2) = node_pt->x(2) * Height / 2;
@@ -530,7 +530,7 @@ void CombTipSpineMesh<ELEMENT, INTERFACE_ELEMENT>::build_single_layer_mesh(
   unsigned long nspines = this->nspine();
   for (unsigned long i = 0; i < nspines; i++)
   {
-    Spine *spine_pt = this->spine_pt(i);
+    Spine* spine_pt = this->spine_pt(i);
     double x_spine = spine_pt->geom_parameter(0);
     double y_spine = spine_pt->geom_parameter(1);
     double z_spine = spine_pt->geom_parameter(2);
@@ -547,9 +547,9 @@ void CombTipSpineMesh<ELEMENT, INTERFACE_ELEMENT>::build_single_layer_mesh(
 
   for (int i = 0; i < ncount; i++)
   {
-    SpineNode *spine_node_pt =
-      dynamic_cast<SpineNode *>(this->boundary_node_pt(5, i));
-    Spine *spine_pt = spine_node_pt->spine_pt();
+    SpineNode* spine_node_pt =
+      dynamic_cast<SpineNode*>(this->boundary_node_pt(5, i));
+    Spine* spine_pt = spine_node_pt->spine_pt();
     double x_spine = spine_pt->geom_parameter(0);
     double y_spine = spine_pt->geom_parameter(1);
     double z_spine = spine_pt->geom_parameter(2);
@@ -577,8 +577,8 @@ void CombTipSpineMesh<ELEMENT, INTERFACE_ELEMENT>::build_single_layer_mesh(
 template<class ELEMENT, class INTERFACE_ELEMENT>
 void CombTipSpineMesh<ELEMENT, INTERFACE_ELEMENT>::add_side_spinemesh(
   unsigned int bound1,
-  MyTipMesh<ELEMENT, INTERFACE_ELEMENT> *addmesh_pt,
-  int *addmesh_map_boundary,
+  MyTipMesh<ELEMENT, INTERFACE_ELEMENT>* addmesh_pt,
+  int* addmesh_map_boundary,
   int total_boundaries,
   unsigned spine_flag)
 {
@@ -622,7 +622,7 @@ void CombTipSpineMesh<ELEMENT, INTERFACE_ELEMENT>::add_side_spinemesh(
 
 template<class ELEMENT, class INTERFACE_ELEMENT>
 void CombTipSpineMesh<ELEMENT, INTERFACE_ELEMENT>::change_boundaries(
-  Mesh *pt_mesh,
+  Mesh* pt_mesh,
   unsigned int oldbound,
   unsigned int newbound,
   unsigned int total_boundaries)

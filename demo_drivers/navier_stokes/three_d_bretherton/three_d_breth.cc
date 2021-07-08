@@ -92,10 +92,10 @@ namespace Global_Physical_Variables
   double Rat_press = 2.87;
 
   /// Function that prescribes the hydrostatic pressure field at the outlet
-  void hydrostatic_pressure(const double &time,
-                            const Vector<double> &x,
-                            const Vector<double> &n,
-                            Vector<double> &traction)
+  void hydrostatic_pressure(const double& time,
+                            const Vector<double>& x,
+                            const Vector<double>& n,
+                            Vector<double>& traction)
   {
     traction[0] = 0.0;
     traction[1] = ReInvFr * G[2] * x[2]; // Perpendicular to tube axis
@@ -122,12 +122,12 @@ public:
   ~ThreeDimBethertonProblem();
 
   /// Fix pressure in element e at pressure dof pdof and set to pvalue
-  void fix_pressure(const unsigned int &e,
-                    const unsigned int &pdof,
-                    const double &pvalue)
+  void fix_pressure(const unsigned int& e,
+                    const unsigned int& pdof,
+                    const double& pvalue)
   {
     // Cast to full element type and fix the pressure at that element
-    dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e))
+    dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))
       ->fix_pressure(pdof, pvalue);
   }
 
@@ -145,10 +145,10 @@ public:
     const unsigned n_element = mesh_pt()->nelement();
     for (unsigned e = 0; e < n_element; e++)
     {
-      if (dynamic_cast<ElementWithMovingNodes *>(mesh_pt()->element_pt(e)))
+      if (dynamic_cast<ElementWithMovingNodes*>(mesh_pt()->element_pt(e)))
       {
-        ElementWithMovingNodes *el_pt =
-          dynamic_cast<ElementWithMovingNodes *>(mesh_pt()->element_pt(e));
+        ElementWithMovingNodes* el_pt =
+          dynamic_cast<ElementWithMovingNodes*>(mesh_pt()->element_pt(e));
         el_pt->evaluate_shape_derivs_by_direct_fd();
       }
     }
@@ -161,7 +161,7 @@ public:
     unsigned int nel = Outlet_traction_element_pt.size();
     for (unsigned int i = 0; i < nel; i++)
     {
-      flow += dynamic_cast<SpineGravityTractionElement<Hijacked<ELEMENT>> *>(
+      flow += dynamic_cast<SpineGravityTractionElement<Hijacked<ELEMENT>>*>(
                 Outlet_traction_element_pt[i])
                 ->flow();
     }
@@ -178,7 +178,7 @@ public:
     for (unsigned e = 0; e < n_line_interface; e++)
     {
       // Cache the element
-      FiniteElement *const element_pt = Interface_line_element_pt[e];
+      FiniteElement* const element_pt = Interface_line_element_pt[e];
       // Loop over all nodes
       const unsigned n_node = element_pt->nnode();
       for (unsigned n = 0; n < n_node; n++)
@@ -194,7 +194,7 @@ public:
   }
 
   // If mult_width = 0, it multiplu only the channel length
-  void multiply_aspect_ratio(const double factor, const bool &mult_width)
+  void multiply_aspect_ratio(const double factor, const bool& mult_width)
   {
     // until now we have just worked with a square channel
     // lets change the aspect ratio
@@ -206,7 +206,7 @@ public:
     for (unsigned n = 0; n < n_node; n++)
     {
       // Multiply the x-coordinate and y-coordinate by the specified factor
-      Node *const node_pt = mesh_pt()->node_pt(n);
+      Node* const node_pt = mesh_pt()->node_pt(n);
       if (mult_width)
       {
         node_pt->x(0) = node_pt->x(0) * factor;
@@ -219,7 +219,7 @@ public:
     const unsigned n_spine = mesh_pt()->nspine();
     for (unsigned s = 0; s < n_spine; s++)
     {
-      Spine *spine_pt = mesh_pt()->spine_pt(s);
+      Spine* spine_pt = mesh_pt()->spine_pt(s);
       const double x_spine = spine_pt->geom_parameter(0);
       const double y_spine = spine_pt->geom_parameter(1);
       if (mult_width)
@@ -237,9 +237,9 @@ public:
     for (unsigned n = 0; n < n_boundary_node; n++)
     {
       // Get the root of the spine
-      SpineNode *spine_node_pt =
-        dynamic_cast<SpineNode *>(mesh_pt()->boundary_node_pt(5, n));
-      Spine *spine_pt = spine_node_pt->spine_pt();
+      SpineNode* spine_node_pt =
+        dynamic_cast<SpineNode*>(mesh_pt()->boundary_node_pt(5, n));
+      Spine* spine_pt = spine_node_pt->spine_pt();
       double x_spine = spine_pt->geom_parameter(0);
       double y_spine = spine_pt->geom_parameter(1);
       double z_spine = spine_pt->geom_parameter(2);
@@ -276,34 +276,34 @@ public:
   }
 
   // Access function for the specific mesh
-  STSpineMesh<Hijacked<ELEMENT>, SpineSurfaceFluidInterfaceElement<ELEMENT>>
-    *mesh_pt()
+  STSpineMesh<Hijacked<ELEMENT>, SpineSurfaceFluidInterfaceElement<ELEMENT>>* mesh_pt()
   {
     // Upcast from pointer to the Mesh base class to the specific
     // element type that we're using here.
     return dynamic_cast<
-      STSpineMesh<Hijacked<ELEMENT>, SpineSurfaceFluidInterfaceElement<ELEMENT>>
-        *>(Problem::mesh_pt());
+      STSpineMesh<Hijacked<ELEMENT>,
+                  SpineSurfaceFluidInterfaceElement<ELEMENT>>*>(
+      Problem::mesh_pt());
   }
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 private:
   // Vector of pointers to the inlet traction elements
-  Vector<FiniteElement *> Inlet_traction_element_pt;
+  Vector<FiniteElement*> Inlet_traction_element_pt;
 
   // Vector of pointers to the outlet traction elements
-  Vector<FiniteElement *> Outlet_traction_element_pt;
+  Vector<FiniteElement*> Outlet_traction_element_pt;
 
   // Vector of pointers to the interface line elements
-  Vector<FiniteElement *> Interface_line_element_pt;
+  Vector<FiniteElement*> Interface_line_element_pt;
 
   // Pointer to the element that fixes the spine height
-  FiniteElement *Fix_spine_height_element_pt;
+  FiniteElement* Fix_spine_height_element_pt;
 
   // Data value that represents the bubble pressure
-  Data *Bubble_pressure_data_pt;
+  Data* Bubble_pressure_data_pt;
 
 public:
   // Fixed height value
@@ -315,15 +315,15 @@ private:
 
   // Trace Spine poniters
 
-  Spine *Trace_spine_r_h_top;
+  Spine* Trace_spine_r_h_top;
 
-  Spine *Trace_spine_r_h_middle;
+  Spine* Trace_spine_r_h_middle;
 
-  Spine *Trace_spine_r_h_bottom;
+  Spine* Trace_spine_r_h_bottom;
 
-  Spine *Trace_spine_r_d_top;
+  Spine* Trace_spine_r_d_top;
 
-  Spine *Trace_spine_r_d_bottom;
+  Spine* Trace_spine_r_d_bottom;
 };
 
 //========================================================================
@@ -366,12 +366,12 @@ ThreeDimBethertonProblem<ELEMENT>::ThreeDimBethertonProblem()
 
   // Set the fixed spine element
   unsigned num_nodes = mesh_pt()->nnode();
-  SpineNode *spinenode_fixed = 0;
+  SpineNode* spinenode_fixed = 0;
 
   // Look fot the spine
   for (unsigned inod = 0; inod < num_nodes; inod++)
   {
-    SpineNode *spnd_pt = dynamic_cast<SpineNode *>(mesh_pt()->node_pt(inod));
+    SpineNode* spnd_pt = dynamic_cast<SpineNode*>(mesh_pt()->node_pt(inod));
     double height = Global_Physical_Variables::Height;
     double length_tip = Global_Physical_Variables::Length_tip;
     double distance =
@@ -388,7 +388,7 @@ ThreeDimBethertonProblem<ELEMENT>::ThreeDimBethertonProblem()
   }
 
   // Create a fixed element using the central spine
-  FixSpineHeightElement *fix_spine_element_pt =
+  FixSpineHeightElement* fix_spine_element_pt =
     new FixSpineHeightElement(spinenode_fixed);
 
   // Set the fixed spine height
@@ -425,8 +425,8 @@ ThreeDimBethertonProblem<ELEMENT>::ThreeDimBethertonProblem()
   for (unsigned e = 0; e < n_bulk; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    Hijacked<ELEMENT> *el_pt =
-      dynamic_cast<Hijacked<ELEMENT> *>(mesh_pt()->bulk_element_pt(e));
+    Hijacked<ELEMENT>* el_pt =
+      dynamic_cast<Hijacked<ELEMENT>*>(mesh_pt()->bulk_element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -449,8 +449,8 @@ ThreeDimBethertonProblem<ELEMENT>::ThreeDimBethertonProblem()
   for (unsigned e = 0; e < n_interface; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    SpineSurfaceFluidInterfaceElement<ELEMENT> *el_pt =
-      dynamic_cast<SpineSurfaceFluidInterfaceElement<ELEMENT> *>(
+    SpineSurfaceFluidInterfaceElement<ELEMENT>* el_pt =
+      dynamic_cast<SpineSurfaceFluidInterfaceElement<ELEMENT>*>(
         mesh_pt()->interface_element_pt(e));
     el_pt->ca_pt() = &Global_Physical_Variables::Ca;
 
@@ -480,8 +480,8 @@ ThreeDimBethertonProblem<ELEMENT>::ThreeDimBethertonProblem()
   unsigned long ninlet = mesh_pt()->nbulkinlet();
   for (unsigned long i = 0; i < ninlet; i++)
   {
-    SpineElement<NavierStokesTractionElement<Hijacked<ELEMENT>>>
-      *inlet_element_pt =
+    SpineElement<NavierStokesTractionElement<Hijacked<ELEMENT>>>*
+      inlet_element_pt =
         new SpineElement<NavierStokesTractionElement<Hijacked<ELEMENT>>>(
           mesh_pt()->bulk_inlet_element_pt(i), mesh_pt()->face_index_inlet());
 
@@ -504,7 +504,7 @@ ThreeDimBethertonProblem<ELEMENT>::ThreeDimBethertonProblem()
   unsigned long noutlet = mesh_pt()->nbulkoutlet();
   for (unsigned long i = 0; i < noutlet; i++)
   {
-    SpineGravityTractionElement<Hijacked<ELEMENT>> *outlet_element_pt =
+    SpineGravityTractionElement<Hijacked<ELEMENT>>* outlet_element_pt =
       new SpineGravityTractionElement<Hijacked<ELEMENT>>(
         mesh_pt()->bulk_outlet_element_pt(i), mesh_pt()->face_index_outlet());
 
@@ -532,9 +532,9 @@ ThreeDimBethertonProblem<ELEMENT>::ThreeDimBethertonProblem()
   {
     // Cast the return type to  the edge element and also
     // cast the interface element to the specific interface element
-    SpineLineFluidInterfaceBoundingElement<ELEMENT> *line_element_pt =
-      dynamic_cast<SpineLineFluidInterfaceBoundingElement<ELEMENT> *>(
-        dynamic_cast<SpineSurfaceFluidInterfaceElement<ELEMENT> *>(
+    SpineLineFluidInterfaceBoundingElement<ELEMENT>* line_element_pt =
+      dynamic_cast<SpineLineFluidInterfaceBoundingElement<ELEMENT>*>(
+        dynamic_cast<SpineSurfaceFluidInterfaceElement<ELEMENT>*>(
           mesh_pt()->interface_line_element_pt(i))
           ->make_bounding_element(mesh_pt()->face_index_outlet()));
 
@@ -695,7 +695,7 @@ ThreeDimBethertonProblem<ELEMENT>::ThreeDimBethertonProblem()
   // Loop over all nodes
   for (unsigned inod = 0; inod < n_node; inod++)
   {
-    SpineNode *spnd_pt = dynamic_cast<SpineNode *>(mesh_pt()->node_pt(inod));
+    SpineNode* spnd_pt = dynamic_cast<SpineNode*>(mesh_pt()->node_pt(inod));
 
     double distance =
       sqrt((spnd_pt->x(0) - x_trace) * (spnd_pt->x(0) - x_trace) +
@@ -714,7 +714,7 @@ ThreeDimBethertonProblem<ELEMENT>::ThreeDimBethertonProblem()
 
   for (unsigned inod = 0; inod < n_node; inod++)
   {
-    SpineNode *spnd_pt = dynamic_cast<SpineNode *>(mesh_pt()->node_pt(inod));
+    SpineNode* spnd_pt = dynamic_cast<SpineNode*>(mesh_pt()->node_pt(inod));
 
     double distance =
       sqrt((spnd_pt->x(0) - x_trace) * (spnd_pt->x(0) - x_trace) +
@@ -733,7 +733,7 @@ ThreeDimBethertonProblem<ELEMENT>::ThreeDimBethertonProblem()
 
   for (unsigned inod = 0; inod < n_node; inod++)
   {
-    SpineNode *spnd_pt = dynamic_cast<SpineNode *>(mesh_pt()->node_pt(inod));
+    SpineNode* spnd_pt = dynamic_cast<SpineNode*>(mesh_pt()->node_pt(inod));
 
     double distance =
       sqrt((spnd_pt->x(0) - x_trace) * (spnd_pt->x(0) - x_trace) +
@@ -752,7 +752,7 @@ ThreeDimBethertonProblem<ELEMENT>::ThreeDimBethertonProblem()
 
   for (unsigned inod = 0; inod < n_node; inod++)
   {
-    SpineNode *spnd_pt = dynamic_cast<SpineNode *>(mesh_pt()->node_pt(inod));
+    SpineNode* spnd_pt = dynamic_cast<SpineNode*>(mesh_pt()->node_pt(inod));
 
     double distance =
       sqrt((spnd_pt->x(0) - x_trace) * (spnd_pt->x(0) - x_trace) +
@@ -771,7 +771,7 @@ ThreeDimBethertonProblem<ELEMENT>::ThreeDimBethertonProblem()
 
   for (unsigned inod = 0; inod < n_node; inod++)
   {
-    SpineNode *spnd_pt = dynamic_cast<SpineNode *>(mesh_pt()->node_pt(inod));
+    SpineNode* spnd_pt = dynamic_cast<SpineNode*>(mesh_pt()->node_pt(inod));
 
     double distance =
       sqrt((spnd_pt->x(0) - x_trace) * (spnd_pt->x(0) - x_trace) +
@@ -800,7 +800,7 @@ ThreeDimBethertonProblem<ELEMENT>::~ThreeDimBethertonProblem()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void ThreeDimBethertonProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void ThreeDimBethertonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -856,8 +856,8 @@ void ThreeDimBethertonProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
   unsigned n_bulk = mesh_pt()->nbulk();
   for (unsigned e = 0; e < n_bulk; e++)
   {
-    Hijacked<ELEMENT> *el_pt =
-      dynamic_cast<Hijacked<ELEMENT> *>(mesh_pt()->bulk_element_pt(e));
+    Hijacked<ELEMENT>* el_pt =
+      dynamic_cast<Hijacked<ELEMENT>*>(mesh_pt()->bulk_element_pt(e));
     el_pt->output(some_file, npts);
   }
   some_file.close();
@@ -867,7 +867,7 @@ void ThreeDimBethertonProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
 /// Driver for RectangularDrivenCavity test problem -- test drive
 /// with two different types of element.
 //=====================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Doc info object
   DocInfo doc_info;

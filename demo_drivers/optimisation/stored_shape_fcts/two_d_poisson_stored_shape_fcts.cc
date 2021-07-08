@@ -55,13 +55,13 @@ namespace TanhSolnForPoisson
   double TanPhi = 0.0;
 
   /// Exact solution as a Vector
-  void get_exact_u(const Vector<double> &x, Vector<double> &u)
+  void get_exact_u(const Vector<double>& x, Vector<double>& u)
   {
     u[0] = tanh(1.0 - Alpha * (TanPhi * x[0] - x[1]));
   }
 
   /// Source function required to make the solution above an exact solution
-  void source_function(const Vector<double> &x, double &source)
+  void source_function(const Vector<double>& x, double& source)
   {
     source = 2.0 * tanh(-1.0 + Alpha * (TanPhi * x[0] - x[1])) *
                (1.0 - pow(tanh(-1.0 + Alpha * (TanPhi * x[0] - x[1])), 2.0)) *
@@ -85,7 +85,7 @@ public:
   /// \short Constructor: Pass pointer to source function
   /// Mesh has 2^|n_power| x 2^|n_power| elements.
   PoissonProblem(PoissonEquations<2>::PoissonSourceFctPt source_fct_pt,
-                 const unsigned &n_power);
+                 const unsigned& n_power);
 
   /// Destructor (empty)
   ~PoissonProblem() {}
@@ -118,10 +118,10 @@ public:
 
   /// \short Doc the solution. DocInfo object stores flags/labels for where the
   /// output gets written to
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// \short Run the probl
-  void run_it(DocInfo &doc_info);
+  void run_it(DocInfo& doc_info);
 
 private:
   /// Pointer to source function
@@ -136,7 +136,7 @@ private:
 template<class ELEMENT>
 PoissonProblem<ELEMENT>::PoissonProblem(
   PoissonEquations<2>::PoissonSourceFctPt source_fct_pt,
-  const unsigned &n_power) :
+  const unsigned& n_power) :
   Source_fct_pt(source_fct_pt)
 {
   // Setup mesh
@@ -195,7 +195,7 @@ PoissonProblem<ELEMENT>::PoissonProblem(
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the source function pointer
     el_pt->source_fct_pt() = Source_fct_pt;
@@ -226,7 +226,7 @@ void PoissonProblem<ELEMENT>::actions_before_newton_solve()
     for (unsigned n = 0; n < n_node; n++)
     {
       // Get pointer to node
-      Node *nod_pt = mesh_pt()->boundary_node_pt(i, n);
+      Node* nod_pt = mesh_pt()->boundary_node_pt(i, n);
 
       // Extract nodal coordinates from node:
       Vector<double> x(2);
@@ -247,7 +247,7 @@ void PoissonProblem<ELEMENT>::actions_before_newton_solve()
 /// Doc the solution: doc_info contains labels/output directory etc.
 //========================================================================
 template<class ELEMENT>
-void PoissonProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void PoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -258,7 +258,7 @@ void PoissonProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
   // Do output
   sprintf(
     filename, "%s/soln%i.dat", doc_info.directory().c_str(), doc_info.number());
-  FILE *file_pt = fopen(filename, "w");
+  FILE* file_pt = fopen(filename, "w");
   mesh_pt()->output(file_pt, npts);
   fclose(file_pt);
 
@@ -283,7 +283,7 @@ void PoissonProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
 /// Run the problem
 //====================================================================
 template<class ELEMENT>
-void PoissonProblem<ELEMENT>::run_it(DocInfo &doc_info)
+void PoissonProblem<ELEMENT>::run_it(DocInfo& doc_info)
 {
   // Repeated assembly of Jacobian -- stored shape functions only
   // pay of on subsequent solves.
@@ -343,7 +343,7 @@ void PoissonProblem<ELEMENT>::run_it(DocInfo &doc_info)
 //===== start_of_main=====================================================
 /// Driver code for 2D Poisson problem
 //========================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Number of uniform refinements relative to a 2x2 base mesh
   unsigned n_refine;
@@ -456,7 +456,7 @@ int main(int argc, char *argv[])
     unsigned nelem = problem.mesh_pt()->nelement();
     for (unsigned e = 0; e < nelem; e++)
     {
-      dynamic_cast<ELEMENT *>(problem.mesh_pt()->element_pt(e))
+      dynamic_cast<ELEMENT*>(problem.mesh_pt()->element_pt(e))
         ->pre_compute_dshape_eulerian_at_knots();
     }
 
@@ -481,9 +481,9 @@ int main(int argc, char *argv[])
     t_start = clock();
     for (unsigned e = 1; e < nelem; e++)
     {
-      dynamic_cast<ELEMENT *>(problem.mesh_pt()->element_pt(e))
+      dynamic_cast<ELEMENT*>(problem.mesh_pt()->element_pt(e))
         ->set_dshape_eulerian_stored_from_element(
-          dynamic_cast<ELEMENT *>(problem.mesh_pt()->element_pt(0)));
+          dynamic_cast<ELEMENT*>(problem.mesh_pt()->element_pt(0)));
     }
     // Finish/doc timing
     t_end = clock();

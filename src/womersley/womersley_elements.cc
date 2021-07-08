@@ -64,7 +64,7 @@ namespace oomph
   //======================================================================
   template<unsigned DIM>
   void WomersleyEquations<DIM>::fill_in_generic_residual_contribution_womersley(
-    Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag)
+    Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag)
   {
     // Find out how many nodes there are
     unsigned n_node = nnode();
@@ -298,9 +298,9 @@ namespace oomph
   /// against full Navier Stokes at n_nplot x n_plot points (2D)
   //======================================================================
   template<unsigned DIM>
-  void WomersleyEquations<DIM>::output_3d(std::ostream &outfile,
-                                          const unsigned &nplot,
-                                          const double &z_out)
+  void WomersleyEquations<DIM>::output_3d(std::ostream& outfile,
+                                          const unsigned& nplot,
+                                          const double& z_out)
   {
     // Vector of local coordinates
     Vector<double> s(DIM);
@@ -336,8 +336,8 @@ namespace oomph
   /// nplot points in each coordinate direction
   //======================================================================
   template<unsigned DIM>
-  void WomersleyEquations<DIM>::output(std::ostream &outfile,
-                                       const unsigned &nplot)
+  void WomersleyEquations<DIM>::output(std::ostream& outfile,
+                                       const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(DIM);
@@ -371,7 +371,7 @@ namespace oomph
   /// nplot points in each coordinate direction
   //======================================================================
   template<unsigned DIM>
-  void WomersleyEquations<DIM>::output(FILE *file_pt, const unsigned &nplot)
+  void WomersleyEquations<DIM>::output(FILE* file_pt, const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(DIM);
@@ -407,8 +407,8 @@ namespace oomph
   //======================================================================
   template<unsigned DIM>
   void WomersleyEquations<DIM>::output_fct(
-    std::ostream &outfile,
-    const unsigned &nplot,
+    std::ostream& outfile,
+    const unsigned& nplot,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
   {
     // Vector of local coordinates
@@ -458,9 +458,9 @@ namespace oomph
   //======================================================================
   template<unsigned DIM>
   void WomersleyEquations<DIM>::output_fct(
-    std::ostream &outfile,
-    const unsigned &nplot,
-    const double &time,
+    std::ostream& outfile,
+    const unsigned& nplot,
+    const double& time,
     FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
 
   {
@@ -510,10 +510,10 @@ namespace oomph
   //======================================================================
   template<unsigned DIM>
   void WomersleyEquations<DIM>::compute_error(
-    std::ostream &outfile,
+    std::ostream& outfile,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-    double &error,
-    double &norm)
+    double& error,
+    double& norm)
   {
     // Initialise
     error = 0.0;
@@ -588,11 +588,11 @@ namespace oomph
   //======================================================================
   template<unsigned DIM>
   void WomersleyEquations<DIM>::compute_error(
-    std::ostream &outfile,
+    std::ostream& outfile,
     FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
-    const double &time,
-    double &error,
-    double &norm)
+    const double& time,
+    double& error,
+    double& norm)
 
   {
     // Initialise

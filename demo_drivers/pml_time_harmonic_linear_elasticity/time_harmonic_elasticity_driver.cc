@@ -111,7 +111,7 @@ namespace Global_Parameters
   double Omega_sq = 30.0;
 
   /// The elasticity tensor
-  PMLTimeHarmonicIsotropicElasticityTensor *E_pt;
+  PMLTimeHarmonicIsotropicElasticityTensor* E_pt;
 
   /// Thickness of annulus
   double H_annulus = 0.5;
@@ -122,10 +122,10 @@ namespace Global_Parameters
   /// \short Compute Hankel function of the first kind of orders 0...n and
   /// its derivates  at coordinate x. The function returns the vector
   /// then its derivative.
-  void Hankel_first(const unsigned &n,
-                    const double &x,
-                    Vector<std::complex<double>> &h,
-                    Vector<std::complex<double>> &hp)
+  void Hankel_first(const unsigned& n,
+                    const double& x,
+                    Vector<std::complex<double>>& h,
+                    Vector<std::complex<double>>& hp)
   {
     int n_actual = 0;
     Vector<double> jn(n + 1), yn(n + 1), jnp(n + 1), ynp(n + 1);
@@ -149,7 +149,7 @@ namespace Global_Parameters
   }
 
   /// Exact solution as a Vector: {u_x_real, u_y_real, u_x_imag, u_y_imag}
-  void exact_u(const Vector<double> &x, Vector<double> &u)
+  void exact_u(const Vector<double>& x, Vector<double>& u)
   {
     double r = sqrt(x[0] * x[0] + x[1] * x[1]);
 
@@ -267,7 +267,7 @@ public:
   void actions_after_adapt();
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 private:
   /// Helper function to complete problem setup
@@ -276,38 +276,38 @@ private:
 #ifdef ADAPTIVE
 
   /// Pointer to refineable solid mesh
-  RefineableTriangleMesh<ELASTICITY_ELEMENT> *Solid_mesh_pt;
+  RefineableTriangleMesh<ELASTICITY_ELEMENT>* Solid_mesh_pt;
 
 #else
 
   /// Pointer to solid mesh
-  TriangleMesh<ELASTICITY_ELEMENT> *Solid_mesh_pt;
+  TriangleMesh<ELASTICITY_ELEMENT>* Solid_mesh_pt;
 
 #endif
 
   /// Pointer to the right PML mesh
-  Mesh *PML_right_mesh_pt;
+  Mesh* PML_right_mesh_pt;
 
   /// Pointer to the top PML mesh
-  Mesh *PML_top_mesh_pt;
+  Mesh* PML_top_mesh_pt;
 
   /// Pointer to the left PML mesh
-  Mesh *PML_left_mesh_pt;
+  Mesh* PML_left_mesh_pt;
 
   /// Pointer to the bottom PML mesh
-  Mesh *PML_bottom_mesh_pt;
+  Mesh* PML_bottom_mesh_pt;
 
   /// Pointer to the top right corner PML mesh
-  Mesh *PML_top_right_mesh_pt;
+  Mesh* PML_top_right_mesh_pt;
 
   /// Pointer to the top left corner PML mesh
-  Mesh *PML_top_left_mesh_pt;
+  Mesh* PML_top_left_mesh_pt;
 
   /// Pointer to the bottom right corner PML mesh
-  Mesh *PML_bottom_right_mesh_pt;
+  Mesh* PML_bottom_right_mesh_pt;
 
   /// Pointer to the bottom left corner PML mesh
-  Mesh *PML_bottom_left_mesh_pt;
+  Mesh* PML_bottom_left_mesh_pt;
 
   /// DocInfo object for output
   DocInfo Doc_info;
@@ -338,14 +338,14 @@ ElasticAnnulusProblem<ELASTICITY_ELEMENT>::ElasticAnnulusProblem()
   double a = 0.2;
   double x_c = 0.0;
   double y_c = 0.0;
-  Circle *inner_circle_pt = new Circle(x_c, y_c, a);
+  Circle* inner_circle_pt = new Circle(x_c, y_c, a);
 
   // Outer boundary
   //---------------
-  TriangleMeshClosedCurve *outer_boundary_pt = 0;
+  TriangleMeshClosedCurve* outer_boundary_pt = 0;
 
   unsigned n_segments = 16;
-  Vector<TriangleMeshCurveSection *> outer_boundary_line_pt(4);
+  Vector<TriangleMeshCurveSection*> outer_boundary_line_pt(4);
 
   // Each polyline only has three vertices, provide storage for their
   // coordinates
@@ -404,7 +404,7 @@ ElasticAnnulusProblem<ELASTICITY_ELEMENT>::ElasticAnnulusProblem()
 
   // Inner circular boundary
   //------------------------
-  Vector<TriangleMeshCurveSection *> inner_boundary_line_pt(2);
+  Vector<TriangleMeshCurveSection*> inner_boundary_line_pt(2);
 
   // The intrinsic coordinates for the beginning and end of the curve
   double s_start = 0.0;
@@ -422,7 +422,7 @@ ElasticAnnulusProblem<ELASTICITY_ELEMENT>::ElasticAnnulusProblem()
 
   // Combine to hole
   //----------------
-  Vector<TriangleMeshClosedCurve *> hole_pt(1);
+  Vector<TriangleMeshClosedCurve*> hole_pt(1);
   Vector<double> hole_coords(2);
   hole_coords[0] = 0.0;
   hole_coords[1] = 0.0;
@@ -507,8 +507,8 @@ void ElasticAnnulusProblem<ELASTICITY_ELEMENT>::complete_problem_setup()
   {
     /// \short Upcast from PMLElement to time harmonic
     /// linear elasticity bulk element
-    PMLTimeHarmonicLinearElasticityEquations<2> *el_pt =
-      dynamic_cast<PMLTimeHarmonicLinearElasticityEquations<2> *>(
+    PMLTimeHarmonicLinearElasticityEquations<2>* el_pt =
+      dynamic_cast<PMLTimeHarmonicLinearElasticityEquations<2>*>(
         mesh_pt()->element_pt(e));
 
     // Set the constitutive law
@@ -526,7 +526,7 @@ void ElasticAnnulusProblem<ELASTICITY_ELEMENT>::complete_problem_setup()
     unsigned n_node = Solid_mesh_pt->nboundary_node(b);
     for (unsigned n = 0; n < n_node; n++)
     {
-      Node *nod_pt = Solid_mesh_pt->boundary_node_pt(b, n);
+      Node* nod_pt = Solid_mesh_pt->boundary_node_pt(b, n);
       Vector<double> x_node(2);
       x_node[0] = nod_pt->x(0);
       x_node[1] = nod_pt->x(1);
@@ -601,7 +601,7 @@ void ElasticAnnulusProblem<ELASTICITY_ELEMENT>::actions_after_adapt()
 /// Doc the solution
 //==================================================================
 template<class ELASTICITY_ELEMENT>
-void ElasticAnnulusProblem<ELASTICITY_ELEMENT>::doc_solution(DocInfo &doc_info)
+void ElasticAnnulusProblem<ELASTICITY_ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -825,7 +825,7 @@ void ElasticAnnulusProblem<ELASTICITY_ELEMENT>::create_pml_meshes()
 //=======start_of_main==================================================
 /// Driver for annular disk loaded by pressure
 //======================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Start timing of the code
   Global_Parameters::T_start = TimingHelpers::timer();

@@ -65,7 +65,7 @@ namespace Global_Parameters
   IsotropicElasticityTensor E(Nu);
 
   /// The exact solution for infinite depth case
-  void exact_solution(const Vector<double> &x, Vector<double> &u)
+  void exact_solution(const Vector<double>& x, Vector<double>& u)
   {
     u[0] = -Amplitude * cos(2.0 * MathematicalConstants::Pi * x[0] / Lx) *
            exp(2.0 * MathematicalConstants::Pi * (x[1] - Ly)) /
@@ -76,10 +76,10 @@ namespace Global_Parameters
   }
 
   /// The traction function
-  void periodic_traction(const double &time,
-                         const Vector<double> &x,
-                         const Vector<double> &n,
-                         Vector<double> &result)
+  void periodic_traction(const double& time,
+                         const Vector<double>& x,
+                         const Vector<double>& n,
+                         Vector<double>& result)
   {
     result[0] = -Amplitude * cos(2.0 * MathematicalConstants::Pi * x[0] / Lx);
     result[1] = -Amplitude * sin(2.0 * MathematicalConstants::Pi * x[0] / Lx);
@@ -95,10 +95,10 @@ class RefineablePeriodicLoadProblem : public Problem
 public:
   /// \short Constructor: Pass number of elements in x and y directions
   /// and lengths.
-  RefineablePeriodicLoadProblem(const unsigned &nx,
-                                const unsigned &ny,
-                                const double &lx,
-                                const double &ly);
+  RefineablePeriodicLoadProblem(const unsigned& nx,
+                                const unsigned& ny,
+                                const double& lx,
+                                const double& ly);
 
   /// Update before solve is empty
   void actions_before_newton_solve() {}
@@ -127,7 +127,7 @@ public:
   }
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 private:
   /// Allocate traction elements on the top surface
@@ -151,10 +151,10 @@ private:
   }
 
   /// Pointer to the (refineable!) bulk mesh
-  TreeBasedRefineableMeshBase *Bulk_mesh_pt;
+  TreeBasedRefineableMeshBase* Bulk_mesh_pt;
 
   /// Pointer to the mesh of traction elements
-  Mesh *Surface_mesh_pt;
+  Mesh* Surface_mesh_pt;
 
 }; // end_of_problem_class
 
@@ -164,7 +164,7 @@ private:
 //====================================================================
 template<class ELEMENT>
 RefineablePeriodicLoadProblem<ELEMENT>::RefineablePeriodicLoadProblem(
-  const unsigned &nx, const unsigned &ny, const double &lx, const double &ly)
+  const unsigned& nx, const unsigned& ny, const double& lx, const double& ly)
 {
   // Create the mesh
   Bulk_mesh_pt = new RefineableRectangularQuadMesh<ELEMENT>(nx, ny, lx, ly);
@@ -187,15 +187,15 @@ RefineablePeriodicLoadProblem<ELEMENT>::RefineablePeriodicLoadProblem(
 
   // Get pointers to tree roots associated with elements on the
   // left and right boundaries
-  Vector<TreeRoot *> left_root_pt(ny);
-  Vector<TreeRoot *> right_root_pt(ny);
+  Vector<TreeRoot*> left_root_pt(ny);
+  Vector<TreeRoot*> right_root_pt(ny);
   for (unsigned i = 0; i < ny; i++)
   {
-    left_root_pt[i] = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(i * nx))
+    left_root_pt[i] = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(i * nx))
                         ->tree_pt()
                         ->root_pt();
     right_root_pt[i] =
-      dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(nx - 1 + i * nx))
+      dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(nx - 1 + i * nx))
         ->tree_pt()
         ->root_pt();
   }
@@ -229,7 +229,7 @@ RefineablePeriodicLoadProblem<ELEMENT>::RefineablePeriodicLoadProblem(
   for (unsigned inod = 0; inod < num_nod; inod++)
   {
     // Get pointer to node
-    Node *nod_pt = Bulk_mesh_pt->boundary_node_pt(ibound, inod);
+    Node* nod_pt = Bulk_mesh_pt->boundary_node_pt(ibound, inod);
 
     // Pinned in x & y at the bottom and set value
     nod_pt->pin(0);
@@ -266,7 +266,7 @@ RefineablePeriodicLoadProblem<ELEMENT>::RefineablePeriodicLoadProblem(
   for (unsigned e = 0; e < n_el; e++)
   {
     // Cast to a bulk element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
     // Set the elasticity tensor
     el_pt->elasticity_tensor_pt() = &Global_Parameters::E;
@@ -304,7 +304,7 @@ void RefineablePeriodicLoadProblem<ELEMENT>::assign_traction_elements()
   for (unsigned n = 0; n < n_neigh; n++)
   {
     // Create the face element
-    FiniteElement *traction_element_pt =
+    FiniteElement* traction_element_pt =
       new LinearElasticityTractionElement<ELEMENT>(
         Bulk_mesh_pt->boundary_element_pt(bound, n),
         Bulk_mesh_pt->face_index_at_boundary(bound, n));
@@ -318,8 +318,8 @@ void RefineablePeriodicLoadProblem<ELEMENT>::assign_traction_elements()
   for (unsigned e = 0; e < n_traction; e++)
   {
     // Cast to a surface element
-    LinearElasticityTractionElement<ELEMENT> *el_pt =
-      dynamic_cast<LinearElasticityTractionElement<ELEMENT> *>(
+    LinearElasticityTractionElement<ELEMENT>* el_pt =
+      dynamic_cast<LinearElasticityTractionElement<ELEMENT>*>(
         Surface_mesh_pt->element_pt(e));
 
     // Set the applied traction
@@ -332,7 +332,7 @@ void RefineablePeriodicLoadProblem<ELEMENT>::assign_traction_elements()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void RefineablePeriodicLoadProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void RefineablePeriodicLoadProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -371,7 +371,7 @@ void RefineablePeriodicLoadProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
 //===start_of_main======================================================
 /// Driver code for PeriodicLoad linearly elastic problem
 //======================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Number of elements in x-direction
   unsigned nx = 2;

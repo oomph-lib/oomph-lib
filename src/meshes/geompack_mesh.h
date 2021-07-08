@@ -46,9 +46,9 @@ namespace oomph
   {
   public:
     /// \short Constructor with the input files
-    GeompackQuadMesh(const std::string &mesh_file_name,
-                     const std::string &curve_file_name,
-                     TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper)
+    GeompackQuadMesh(const std::string& mesh_file_name,
+                     const std::string& curve_file_name,
+                     TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
     {
       // Mesh can only be built with four-noded 2D Qelements.
       MeshChecker::assert_geometric_element<QElementGeometricBase, ELEMENT>(2,
@@ -71,10 +71,10 @@ namespace oomph
 
   private:
     /// Temporary scaffold mesh
-    GeompackQuadScaffoldMesh *Tmp_mesh_pt;
+    GeompackQuadScaffoldMesh* Tmp_mesh_pt;
 
     /// Build mesh from scaffold
-    void build_from_scaffold(TimeStepper *time_stepper_pt);
+    void build_from_scaffold(TimeStepper* time_stepper_pt);
   };
 
 } // namespace oomph

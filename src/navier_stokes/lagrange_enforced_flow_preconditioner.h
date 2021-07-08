@@ -61,33 +61,33 @@ namespace oomph
   {
     /// \short CG with diagonal preconditioner for W-block subsidiary linear
     /// systems.
-    extern Preconditioner *get_w_cg_preconditioner();
+    extern Preconditioner* get_w_cg_preconditioner();
 
     /// \short Hypre Boomer AMG setting for the augmented momentum block
     /// of a 2D Navier-Stokes problem using the simple form of the viscous
     /// term (for serial code).
-    extern Preconditioner *boomer_amg_for_2D_momentum_simple_visc();
+    extern Preconditioner* boomer_amg_for_2D_momentum_simple_visc();
 
     /// \short Hypre Boomer AMG setting for the augmented momentum block
     /// of a 2D Navier-Stokes problem using the stress divergence form of the
     /// viscous term (for serial code).
-    extern Preconditioner *boomer_amg_for_2D_momentum_stressdiv_visc();
+    extern Preconditioner* boomer_amg_for_2D_momentum_stressdiv_visc();
 
     /// \short Hypre Boomer AMG setting for the augmented momentum block
     /// of a 3D Navier-Stokes problem (for serial code).
-    extern Preconditioner *boomer_amg_for_3D_momentum();
+    extern Preconditioner* boomer_amg_for_3D_momentum();
 
     /// \short Hypre Boomer AMG setting for the augmented momentum block
     /// of a 3D Navier-Stokes problem (for serial code).
-    extern Preconditioner *boomer_amg2v22_for_3D_momentum();
+    extern Preconditioner* boomer_amg2v22_for_3D_momentum();
 
     /// \short Hypre Boomer AMG setting for the 2D Poisson problem
     /// (for serial code).
-    extern Preconditioner *boomer_amg_for_2D_poisson_problem();
+    extern Preconditioner* boomer_amg_for_2D_poisson_problem();
 
     /// \short Hypre Boomer AMG setting for the 3D Poisson problem
     /// (for serial code).
-    extern Preconditioner *boomer_amg_for_3D_poisson_problem();
+    extern Preconditioner* boomer_amg_for_3D_poisson_problem();
 
   } // namespace
     // Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
@@ -174,7 +174,7 @@ namespace oomph
     /// This is the typedef of a function that should return an instance
     /// of a subsidiary preconditioning operator.  This preconditioner is
     /// responsible for the destruction of the subsidiary preconditioners.
-    typedef Preconditioner *(*SubsidiaryPreconditionerFctPt)();
+    typedef Preconditioner* (*SubsidiaryPreconditionerFctPt)();
 
     /// Constructor - initialise variables.
     LagrangeEnforcedFlowPreconditioner() : BlockPreconditioner<CRDoubleMatrix>()
@@ -214,13 +214,13 @@ namespace oomph
 
     /// \short Broken copy constructor
     LagrangeEnforcedFlowPreconditioner(
-      const LagrangeEnforcedFlowPreconditioner &)
+      const LagrangeEnforcedFlowPreconditioner&)
     {
       BrokenCopy::broken_copy("LagrangeEnforcedFlowPreconditioner");
     }
 
     /// \short Broken assignment operator
-    void operator=(const LagrangeEnforcedFlowPreconditioner &)
+    void operator=(const LagrangeEnforcedFlowPreconditioner&)
     {
       BrokenCopy::broken_assign(" LagrangeEnforcedFlowPreconditioner");
     }
@@ -230,11 +230,11 @@ namespace oomph
 
     /// \short Apply the preconditioner.
     /// r is the residual (rhs), z will contain the solution.
-    void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+    void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
     /// \short Set the meshes,
     /// the first mesh in the vector must be the bulk mesh.
-    void set_meshes(const Vector<Mesh *> &mesh_pt);
+    void set_meshes(const Vector<Mesh*>& mesh_pt);
 
     /// \short Set flag to use the infinite norm of the Navier-Stokes F matrix
     /// as the scaling sigma. This is the default behaviour. Note: the norm of
@@ -251,7 +251,7 @@ namespace oomph
     /// the Navier-Stokes F matrix as the scaling sigma to false.
     /// Warning is given if trying to set scaling sigma to be equal to
     /// or greater than zero.
-    void set_scaling_sigma(const double &scaling_sigma)
+    void set_scaling_sigma(const double& scaling_sigma)
     {
       // Check if scaling sigma is zero or positive.
 #ifdef PARANOID
@@ -290,7 +290,7 @@ namespace oomph
     /// \short Set a new Navier-Stokes matrix preconditioner
     /// (inexact solver)
     void set_navier_stokes_preconditioner(
-      Preconditioner *new_ns_preconditioner_pt = 0);
+      Preconditioner* new_ns_preconditioner_pt = 0);
 
     ///\short Set Navier-Stokes matrix preconditioner (inexact
     /// solver) to SuperLU
@@ -324,7 +324,7 @@ namespace oomph
     Vector<Vector<double>> Inv_w_diag_values;
 
     /// \short Pointer to the 'preconditioner' for the Navier-Stokes block
-    Preconditioner *Navier_stokes_preconditioner_pt;
+    Preconditioner* Navier_stokes_preconditioner_pt;
 
     /// \short Flag to indicate if the preconditioner for the Navier-Stokes
     /// block is a block preconditioner or not.
@@ -336,7 +336,7 @@ namespace oomph
     /// \short Storage for the meshes. In our implementation, the first mesh
     /// must always be the Navier-Stokes (bulk) mesh, followed by surface
     /// meshes.
-    Vector<Mesh *> My_mesh_pt;
+    Vector<Mesh*> My_mesh_pt;
 
     /// \short The number of DOF types in each mesh. This is used create
     /// various lookup lists.

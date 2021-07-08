@@ -39,13 +39,13 @@ namespace oomph
 {
   namespace VectorHelpers
   {
-    inline double two_norm(const Vector<double> &a)
+    inline double two_norm(const Vector<double>& a)
     {
       return std::sqrt(dot(a, a));
     }
 
-    inline Vector<double> vector_diff(const Vector<double> &a,
-                                      const Vector<double> &b)
+    inline Vector<double> vector_diff(const Vector<double>& a,
+                                      const Vector<double>& b)
     {
       check_lengths_match(a, b);
       unsigned ni = a.size();
@@ -72,7 +72,7 @@ namespace oomph
 
     virtual ~ODEProblem() {}
 
-    virtual void build(Vector<Mesh *> &bulk_mesh_pt)
+    virtual void build(Vector<Mesh*>& bulk_mesh_pt)
     {
       // Call the underlying build
       MyProblem::build(bulk_mesh_pt);
@@ -87,7 +87,7 @@ namespace oomph
       oomph_info << "Number of equations: " << ndof() << std::endl;
     }
 
-    void my_set_initial_condition(const SolutionFunctorBase &ic)
+    void my_set_initial_condition(const SolutionFunctorBase& ic)
     {
       // Loop over current & previous timesteps
       const unsigned nprev_values = time_stepper_pt()->nprev_values();
@@ -111,13 +111,13 @@ namespace oomph
       actions_after_set_initial_condition();
     }
 
-    virtual void write_additional_trace_headers(std::ofstream &trace_file) const
+    virtual void write_additional_trace_headers(std::ofstream& trace_file) const
     {
       trace_file << Trace_seperator << "exact";
     }
 
-    virtual void write_additional_trace_data(const unsigned &t_hist,
-                                             std::ofstream &trace_file) const
+    virtual void write_additional_trace_data(const unsigned& t_hist,
+                                             std::ofstream& trace_file) const
     {
       // Create a temporary vector to store the exact solution
       Vector<double> output_vector = exact_solution(time_pt()->time(t_hist));
@@ -142,7 +142,7 @@ namespace oomph
       }
     }
 
-    virtual double get_error_norm(const unsigned &t_hist = 0) const
+    virtual double get_error_norm(const unsigned& t_hist = 0) const
     {
       Vector<double> val = trace_values(t_hist);
       Vector<double> exact = exact_solution(time_pt()->time(t_hist));
@@ -150,37 +150,37 @@ namespace oomph
       return VectorHelpers::two_norm(VectorHelpers::vector_diff(val, exact));
     }
 
-    Vector<double> exact_solution(const double &time) const
+    Vector<double> exact_solution(const double& time) const
     {
-      ODEElement *el_pt =
-        checked_dynamic_cast<ODEElement *>(mesh_pt()->element_pt(0));
+      ODEElement* el_pt =
+        checked_dynamic_cast<ODEElement*>(mesh_pt()->element_pt(0));
       return el_pt->exact_solution(time);
     }
 
     /// Error norm: use abs(error in data).
     double global_temporal_error_norm()
     {
-      Data *dat_pt = mesh_pt()->element_pt(0)->internal_data_pt(0);
+      Data* dat_pt = mesh_pt()->element_pt(0)->internal_data_pt(0);
 
       return std::abs(ts_pt()->temporal_error_in_value(dat_pt, 0));
     }
 
-    Vector<double> trace_values(const unsigned &t_hist = 0) const
+    Vector<double> trace_values(const unsigned& t_hist = 0) const
     {
       return solution(t_hist);
     }
 
-    ODEElement *element_pt()
+    ODEElement* element_pt()
     {
-      return checked_dynamic_cast<ODEElement *>(mesh_pt()->element_pt(0));
+      return checked_dynamic_cast<ODEElement*>(mesh_pt()->element_pt(0));
     }
 
-    const ODEElement *element_pt() const
+    const ODEElement* element_pt() const
     {
-      return checked_dynamic_cast<ODEElement *>(mesh_pt()->element_pt(0));
+      return checked_dynamic_cast<ODEElement*>(mesh_pt()->element_pt(0));
     }
 
-    TimeStepper *ts_pt() const
+    TimeStepper* ts_pt() const
     {
       return element_pt()->internal_data_pt(0)->time_stepper_pt();
     }
@@ -191,9 +191,9 @@ namespace oomph
     }
 
     // Output solution
-    void output_solution(const unsigned &t,
-                         std::ostream &outstream,
-                         const unsigned &npoints = 2) const
+    void output_solution(const unsigned& t,
+                         std::ostream& outstream,
+                         const unsigned& npoints = 2) const
     {
       // Create a temporary vector to store the exact solution
       Vector<double> output_vector = solution(t);
@@ -240,9 +240,9 @@ namespace oomph
       // npoints is ignored
     }
 
-    Vector<double> solution(const unsigned &timestep = 0) const
+    Vector<double> solution(const unsigned& timestep = 0) const
     {
-      Data *dat_pt = mesh_pt()->element_pt(0)->internal_data_pt(0);
+      Data* dat_pt = mesh_pt()->element_pt(0)->internal_data_pt(0);
       Vector<double> solution(nvalue(), 0.0);
       dat_pt->value(timestep, solution);
       return solution;
@@ -255,7 +255,7 @@ namespace oomph
   {
     /// \short Make a timestepper from an input argument using
     /// new.
-    TimeStepper *time_stepper_factory(const std::string &ts_name)
+    TimeStepper* time_stepper_factory(const std::string& ts_name)
     {
       // Always make timestepper adaptive, we can control adaptivity by
       // calling adaptive or non adaptive newton solve.
@@ -271,15 +271,15 @@ namespace oomph
       }
       else if (ts_name == "real-imr")
       {
-        IMR *mp_pt = new IMR(adaptive_flag);
-        ExplicitTimeStepper *pred_pt = new EBDF3;
+        IMR* mp_pt = new IMR(adaptive_flag);
+        ExplicitTimeStepper* pred_pt = new EBDF3;
         mp_pt->set_predictor_pt(pred_pt);
         return mp_pt;
       }
       else if (ts_name == "imr")
       {
-        IMRByBDF *mp_pt = new IMRByBDF(adaptive_flag);
-        ExplicitTimeStepper *pred_pt = new EBDF3;
+        IMRByBDF* mp_pt = new IMRByBDF(adaptive_flag);
+        ExplicitTimeStepper* pred_pt = new EBDF3;
         mp_pt->set_predictor_pt(pred_pt);
         return mp_pt;
       }

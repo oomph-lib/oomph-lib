@@ -49,11 +49,11 @@ namespace oomph
     /// \short Constructor: Pass boundary object and start and end coordinates
     /// and fraction along boundary object where outer ring is divided.
     /// We form nlayer axial slices.
-    QuarterTubeDomain(GeomObject *boundary_geom_object_pt,
-                      const Vector<double> &xi_lo,
-                      const double &fract_mid,
-                      const Vector<double> &xi_hi,
-                      const unsigned &nlayer) :
+    QuarterTubeDomain(GeomObject* boundary_geom_object_pt,
+                      const Vector<double>& xi_lo,
+                      const double& fract_mid,
+                      const Vector<double>& xi_hi,
+                      const unsigned& nlayer) :
       Xi_lo(xi_lo),
       Fract_mid(fract_mid),
       Xi_hi(xi_hi),
@@ -76,13 +76,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    QuarterTubeDomain(const QuarterTubeDomain &)
+    QuarterTubeDomain(const QuarterTubeDomain&)
     {
       BrokenCopy::broken_copy("QuarterTubeDomain");
     }
 
     /// Broken assignment operator
-    void operator=(const QuarterTubeDomain &)
+    void operator=(const QuarterTubeDomain&)
     {
       BrokenCopy::broken_assign("QuarterTubeDomain");
     }
@@ -100,13 +100,13 @@ namespace oomph
     /// the outer two macro elements towards
     /// the wall by mapping the input value of the "radial" macro element
     /// coordinate to the return value
-    typedef double (*BLSquashFctPt)(const double &s);
+    typedef double (*BLSquashFctPt)(const double& s);
 
     /// \short Function pointer for function that squashes
     /// the outer two macro elements towards
     /// the wall by mapping the input value of the "radial" macro element
     /// coordinate to the return value
-    BLSquashFctPt &bl_squash_fct_pt()
+    BLSquashFctPt& bl_squash_fct_pt()
     {
       return BL_squash_fct_pt;
     }
@@ -114,25 +114,25 @@ namespace oomph
     /// \short Function that squashes the outer two macro elements towards
     /// the wall by mapping the input value of the "radial" macro element
     /// coordinate to the return value.
-    double s_squashed(const double &s)
+    double s_squashed(const double& s)
     {
       return BL_squash_fct_pt(s);
     }
 
     /// \short Typedef for function pointer for function that implements
     /// axial spacing of macro elements
-    typedef double (*AxialSpacingFctPt)(const double &xi);
+    typedef double (*AxialSpacingFctPt)(const double& xi);
 
     /// \short Function pointer for function that  implements
     /// axial spacing of macro elements
-    AxialSpacingFctPt &axial_spacing_fct_pt()
+    AxialSpacingFctPt& axial_spacing_fct_pt()
     {
       return Axial_spacing_fct_pt;
     }
 
     /// \short Function that implements
     /// axial spacing of macro elements
-    double axial_spacing_fct(const double &xi)
+    double axial_spacing_fct(const double& xi)
     {
       return Axial_spacing_fct_pt(xi);
     }
@@ -141,11 +141,11 @@ namespace oomph
     /// boundary i_direct (L/R/D/U/B/F) at time level t
     /// (t=0: present; t>0: previous):
     /// f(s).
-    void macro_element_boundary(const unsigned &t,
-                                const unsigned &i_macro,
-                                const unsigned &i_direct,
-                                const Vector<double> &s,
-                                Vector<double> &f);
+    void macro_element_boundary(const unsigned& t,
+                                const unsigned& i_macro,
+                                const unsigned& i_direct,
+                                const Vector<double>& s,
+                                Vector<double>& f);
 
   private:
     /// Lower limit for the coordinates along the wall
@@ -161,7 +161,7 @@ namespace oomph
     unsigned Nlayer;
 
     /// Pointer to geometric object that represents the curved wall
-    GeomObject *Wall_pt;
+    GeomObject* Wall_pt;
 
     /// \short Function pointer for function that squashes
     /// the outer two macro elements towards
@@ -173,7 +173,7 @@ namespace oomph
     /// the outer two macro elements towards
     /// the wall by mapping the input value of the "radial" macro element
     /// coordinate to the return value: Identity.
-    static double default_BL_squash_fct(const double &s)
+    static double default_BL_squash_fct(const double& s)
     {
       return s;
     }
@@ -184,136 +184,136 @@ namespace oomph
 
     /// \short Default for function that  implements
     /// axial spacing of macro elements
-    static double default_axial_spacing_fct(const double &xi)
+    static double default_axial_spacing_fct(const double& xi)
     {
       return xi;
     }
 
     /// \short Boundary of central box macro element in layer i_layer
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_centr_L(const unsigned &t,
-                   const Vector<double> &zeta,
-                   const unsigned &i_layer,
-                   Vector<double> &f);
+    void r_centr_L(const unsigned& t,
+                   const Vector<double>& zeta,
+                   const unsigned& i_layer,
+                   Vector<double>& f);
 
     /// \short Boundary of central box macro element in layer i_layer
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_centr_R(const unsigned &t,
-                   const Vector<double> &zeta,
-                   const unsigned &i_layer,
-                   Vector<double> &f);
+    void r_centr_R(const unsigned& t,
+                   const Vector<double>& zeta,
+                   const unsigned& i_layer,
+                   Vector<double>& f);
 
     /// \short Boundary of central box macro element in layer i_layer
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_centr_D(const unsigned &t,
-                   const Vector<double> &zeta,
-                   const unsigned &i_layer,
-                   Vector<double> &f);
+    void r_centr_D(const unsigned& t,
+                   const Vector<double>& zeta,
+                   const unsigned& i_layer,
+                   Vector<double>& f);
 
     /// \short Boundary of central box macro element in layer i_layer
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_centr_U(const unsigned &t,
-                   const Vector<double> &zeta,
-                   const unsigned &i_layer,
-                   Vector<double> &f);
+    void r_centr_U(const unsigned& t,
+                   const Vector<double>& zeta,
+                   const unsigned& i_layer,
+                   Vector<double>& f);
 
     /// \short Boundary of central box macro element in layer i_layer
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_centr_B(const unsigned &t,
-                   const Vector<double> &zeta,
-                   const unsigned &i_layer,
-                   Vector<double> &f);
+    void r_centr_B(const unsigned& t,
+                   const Vector<double>& zeta,
+                   const unsigned& i_layer,
+                   Vector<double>& f);
 
     /// \short Boundary of central box macro element in layer i_layer
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_centr_F(const unsigned &t,
-                   const Vector<double> &zeta,
-                   const unsigned &i_layer,
-                   Vector<double> &f);
+    void r_centr_F(const unsigned& t,
+                   const Vector<double>& zeta,
+                   const unsigned& i_layer,
+                   Vector<double>& f);
 
     /// \short Boundary of bottom right box macro element in layer i_layer
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_bot_right_L(const unsigned &t,
-                       const Vector<double> &zeta,
-                       const unsigned &i_layer,
-                       Vector<double> &f);
+    void r_bot_right_L(const unsigned& t,
+                       const Vector<double>& zeta,
+                       const unsigned& i_layer,
+                       Vector<double>& f);
 
     /// \short Boundary of bottom right box macro element in layer i_layer
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_bot_right_R(const unsigned &t,
-                       const Vector<double> &zeta,
-                       const unsigned &i_layer,
-                       Vector<double> &f);
+    void r_bot_right_R(const unsigned& t,
+                       const Vector<double>& zeta,
+                       const unsigned& i_layer,
+                       Vector<double>& f);
 
     /// \short Boundary of bottom right box macro element in layer i_layer
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_bot_right_D(const unsigned &t,
-                       const Vector<double> &zeta,
-                       const unsigned &i_layer,
-                       Vector<double> &f);
+    void r_bot_right_D(const unsigned& t,
+                       const Vector<double>& zeta,
+                       const unsigned& i_layer,
+                       Vector<double>& f);
 
     /// \short Boundary of bottom right box macro element in layer i_layer
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_bot_right_U(const unsigned &t,
-                       const Vector<double> &zeta,
-                       const unsigned &i_layer,
-                       Vector<double> &f);
+    void r_bot_right_U(const unsigned& t,
+                       const Vector<double>& zeta,
+                       const unsigned& i_layer,
+                       Vector<double>& f);
 
     /// \short Boundary of bottom right box macro element in layer i_layer
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_bot_right_B(const unsigned &t,
-                       const Vector<double> &zeta,
-                       const unsigned &i_layer,
-                       Vector<double> &f);
+    void r_bot_right_B(const unsigned& t,
+                       const Vector<double>& zeta,
+                       const unsigned& i_layer,
+                       Vector<double>& f);
 
     /// \short Boundary of bottom right box macro element in layer i_layer
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_bot_right_F(const unsigned &t,
-                       const Vector<double> &zeta,
-                       const unsigned &i_layer,
-                       Vector<double> &f);
+    void r_bot_right_F(const unsigned& t,
+                       const Vector<double>& zeta,
+                       const unsigned& i_layer,
+                       Vector<double>& f);
 
     /// \short Boundary of top left box macro element in layer i_layer
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_top_left_L(const unsigned &t,
-                      const Vector<double> &zeta,
-                      const unsigned &i_layer,
-                      Vector<double> &f);
+    void r_top_left_L(const unsigned& t,
+                      const Vector<double>& zeta,
+                      const unsigned& i_layer,
+                      Vector<double>& f);
 
     /// \short Boundary of top left box macro element in layer i_layer
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_top_left_R(const unsigned &t,
-                      const Vector<double> &zeta,
-                      const unsigned &i_layer,
-                      Vector<double> &f);
+    void r_top_left_R(const unsigned& t,
+                      const Vector<double>& zeta,
+                      const unsigned& i_layer,
+                      Vector<double>& f);
 
     /// \short Boundary of top left box macro element in layer i_layer
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_top_left_D(const unsigned &t,
-                      const Vector<double> &zeta,
-                      const unsigned &i_layer,
-                      Vector<double> &f);
+    void r_top_left_D(const unsigned& t,
+                      const Vector<double>& zeta,
+                      const unsigned& i_layer,
+                      Vector<double>& f);
 
     /// \short Boundary of top left box macro element in layer i_layer
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_top_left_U(const unsigned &t,
-                      const Vector<double> &zeta,
-                      const unsigned &i_layer,
-                      Vector<double> &f);
+    void r_top_left_U(const unsigned& t,
+                      const Vector<double>& zeta,
+                      const unsigned& i_layer,
+                      Vector<double>& f);
 
     /// \short Boundary of top left box macro element in layer i_layer
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_top_left_B(const unsigned &t,
-                      const Vector<double> &zeta,
-                      const unsigned &i_layer,
-                      Vector<double> &f);
+    void r_top_left_B(const unsigned& t,
+                      const Vector<double>& zeta,
+                      const unsigned& i_layer,
+                      Vector<double>& f);
 
     /// \short Boundary of top left box macro element in layer i_layer
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_top_left_F(const unsigned &t,
-                      const Vector<double> &zeta,
-                      const unsigned &i_layer,
-                      Vector<double> &f);
+    void r_top_left_F(const unsigned& t,
+                      const Vector<double>& zeta,
+                      const unsigned& i_layer,
+                      Vector<double>& f);
   };
 
   /////////////////////////////////////////////////////////////////////////
@@ -325,11 +325,11 @@ namespace oomph
   /// boundary idirect (L/R/D/U/B/F) at time level t
   /// (t=0: present; t>0: previous): f(s)
   //=================================================================
-  void QuarterTubeDomain::macro_element_boundary(const unsigned &t,
-                                                 const unsigned &imacro,
-                                                 const unsigned &idirect,
-                                                 const Vector<double> &s,
-                                                 Vector<double> &f)
+  void QuarterTubeDomain::macro_element_boundary(const unsigned& t,
+                                                 const unsigned& imacro,
+                                                 const unsigned& idirect,
+                                                 const Vector<double>& s,
+                                                 Vector<double>& f)
   {
     using namespace OcTreeNames;
 
@@ -484,10 +484,10 @@ namespace oomph
   /// \short Boundary of central box macro element in layer i_layer
   /// zeta \f$ \in [-1,1]^2 \f$
   //=======================================================================
-  void QuarterTubeDomain::r_centr_L(const unsigned &t,
-                                    const Vector<double> &zeta,
-                                    const unsigned &i_layer,
-                                    Vector<double> &f)
+  void QuarterTubeDomain::r_centr_L(const unsigned& t,
+                                    const Vector<double>& zeta,
+                                    const unsigned& i_layer,
+                                    Vector<double>& f)
   {
     // Wall coordinates along top edge of wall
     Vector<double> x(2);
@@ -515,10 +515,10 @@ namespace oomph
   /// \short Boundary of central box macro element in layer i_layer
   /// zeta \f$ \in [-1,1]^2 \f$
   //=======================================================================
-  void QuarterTubeDomain::r_centr_R(const unsigned &t,
-                                    const Vector<double> &zeta,
-                                    const unsigned &i_layer,
-                                    Vector<double> &f)
+  void QuarterTubeDomain::r_centr_R(const unsigned& t,
+                                    const Vector<double>& zeta,
+                                    const unsigned& i_layer,
+                                    Vector<double>& f)
   {
     // Note the repetition in the calculation, there is some scope
     // for optimisation
@@ -560,10 +560,10 @@ namespace oomph
   /// \short Boundary of central box macro element in layer i_layer
   /// zeta \f$ \in [-1,1]^2 \f$
   //=======================================================================
-  void QuarterTubeDomain::r_centr_D(const unsigned &t,
-                                    const Vector<double> &zeta,
-                                    const unsigned &i_layer,
-                                    Vector<double> &f)
+  void QuarterTubeDomain::r_centr_D(const unsigned& t,
+                                    const Vector<double>& zeta,
+                                    const unsigned& i_layer,
+                                    Vector<double>& f)
   {
     // Wall coordinates along bottom edge of wall
     Vector<double> x(2);
@@ -591,10 +591,10 @@ namespace oomph
   /// \short Boundary of central box macro element in layer i_layer
   /// zeta \f$ \in [-1,1]^2 \f$
   //=======================================================================
-  void QuarterTubeDomain::r_centr_U(const unsigned &t,
-                                    const Vector<double> &zeta,
-                                    const unsigned &i_layer,
-                                    Vector<double> &f)
+  void QuarterTubeDomain::r_centr_U(const unsigned& t,
+                                    const Vector<double>& zeta,
+                                    const unsigned& i_layer,
+                                    Vector<double>& f)
   {
     // Wall coordinates along top edge of wall
     Vector<double> x(2);
@@ -633,10 +633,10 @@ namespace oomph
   /// \short Boundary of central box macro element in layer i_layer
   /// zeta \f$ \in [-1,1]^2 \f$
   //=======================================================================
-  void QuarterTubeDomain::r_centr_B(const unsigned &t,
-                                    const Vector<double> &zeta,
-                                    const unsigned &i_layer,
-                                    Vector<double> &f)
+  void QuarterTubeDomain::r_centr_B(const unsigned& t,
+                                    const Vector<double>& zeta,
+                                    const unsigned& i_layer,
+                                    Vector<double>& f)
   {
     // Wall coordinates along bottom edge of wall
     Vector<double> x(2);
@@ -671,10 +671,10 @@ namespace oomph
   /// \short Boundary of central box macro element in layer i_layer
   /// zeta \f$ \in [-1,1]^2 \f$
   //=======================================================================
-  void QuarterTubeDomain::r_centr_F(const unsigned &t,
-                                    const Vector<double> &zeta,
-                                    const unsigned &i_layer,
-                                    Vector<double> &f)
+  void QuarterTubeDomain::r_centr_F(const unsigned& t,
+                                    const Vector<double>& zeta,
+                                    const unsigned& i_layer,
+                                    Vector<double>& f)
   {
     // Wall coordinates along bottom edge of wall
     Vector<double> x(2);
@@ -711,10 +711,10 @@ namespace oomph
   /// \short Boundary of bottom right box macro element in layer i_layer
   /// zeta \f$ \in [-1,1]^2 \f$
   //=======================================================================
-  void QuarterTubeDomain::r_bot_right_L(const unsigned &t,
-                                        const Vector<double> &zeta,
-                                        const unsigned &i_layer,
-                                        Vector<double> &f)
+  void QuarterTubeDomain::r_bot_right_L(const unsigned& t,
+                                        const Vector<double>& zeta,
+                                        const unsigned& i_layer,
+                                        Vector<double>& f)
   {
     r_centr_R(t, zeta, i_layer, f);
   }
@@ -723,10 +723,10 @@ namespace oomph
   /// \short Boundary of bottom right box macro element in layer i_layer
   /// zeta \f$ \in [-1,1]^2 \f$
   //=======================================================================
-  void QuarterTubeDomain::r_bot_right_R(const unsigned &t,
-                                        const Vector<double> &zeta,
-                                        const unsigned &i_layer,
-                                        Vector<double> &f)
+  void QuarterTubeDomain::r_bot_right_R(const unsigned& t,
+                                        const Vector<double>& zeta,
+                                        const unsigned& i_layer,
+                                        Vector<double>& f)
   {
     // Wall coordinates
     Vector<double> x(2);
@@ -744,10 +744,10 @@ namespace oomph
   /// \short Boundary of bottom right box macro element in layer i_layer
   /// zeta \f$ \in [-1,1]^2 \f$
   //=======================================================================
-  void QuarterTubeDomain::r_bot_right_D(const unsigned &t,
-                                        const Vector<double> &zeta,
-                                        const unsigned &i_layer,
-                                        Vector<double> &f)
+  void QuarterTubeDomain::r_bot_right_D(const unsigned& t,
+                                        const Vector<double>& zeta,
+                                        const unsigned& i_layer,
+                                        Vector<double>& f)
   {
     // Wall coordinates along bottom edge of wall
     Vector<double> x(2);
@@ -775,10 +775,10 @@ namespace oomph
   /// \short Boundary of bottom right box macro element in layer i_layer
   /// zeta \f$ \in [-1,1]^2 \f$
   //=======================================================================
-  void QuarterTubeDomain::r_bot_right_U(const unsigned &t,
-                                        const Vector<double> &zeta,
-                                        const unsigned &i_layer,
-                                        Vector<double> &f)
+  void QuarterTubeDomain::r_bot_right_U(const unsigned& t,
+                                        const Vector<double>& zeta,
+                                        const unsigned& i_layer,
+                                        Vector<double>& f)
   {
     // Wall coordinates of dividing line
     Vector<double> x(2);
@@ -812,10 +812,10 @@ namespace oomph
   /// \short Boundary of bottom right box macro element in layer i_layer
   /// zeta \f$ \in [-1,1]^2 \f$
   //=======================================================================
-  void QuarterTubeDomain::r_bot_right_B(const unsigned &t,
-                                        const Vector<double> &zeta,
-                                        const unsigned &i_layer,
-                                        Vector<double> &f)
+  void QuarterTubeDomain::r_bot_right_B(const unsigned& t,
+                                        const Vector<double>& zeta,
+                                        const unsigned& i_layer,
+                                        Vector<double>& f)
   {
     // Wall coordinates
     Vector<double> x(2);
@@ -847,10 +847,10 @@ namespace oomph
   /// \short Boundary of bottom right box macro element in layer i_layer
   /// zeta \f$ \in [-1,1]^2 \f$
   //=======================================================================
-  void QuarterTubeDomain::r_bot_right_F(const unsigned &t,
-                                        const Vector<double> &zeta,
-                                        const unsigned &i_layer,
-                                        Vector<double> &f)
+  void QuarterTubeDomain::r_bot_right_F(const unsigned& t,
+                                        const Vector<double>& zeta,
+                                        const unsigned& i_layer,
+                                        Vector<double>& f)
   {
     // Wall coordinates
     Vector<double> x(2);
@@ -884,10 +884,10 @@ namespace oomph
   /// \short Boundary of top left box macro element in layer i_layer
   /// zeta \f$ \in [-1,1]^2 \f$
   //=======================================================================
-  void QuarterTubeDomain::r_top_left_L(const unsigned &t,
-                                       const Vector<double> &zeta,
-                                       const unsigned &i_layer,
-                                       Vector<double> &f)
+  void QuarterTubeDomain::r_top_left_L(const unsigned& t,
+                                       const Vector<double>& zeta,
+                                       const unsigned& i_layer,
+                                       Vector<double>& f)
   {
     // Wall coordinates along top edge of wall
     Vector<double> x(2);
@@ -915,10 +915,10 @@ namespace oomph
   /// \short Boundary of top left box macro element in layer i_layer
   /// zeta \f$ \in [-1,1]^2 \f$
   //=======================================================================
-  void QuarterTubeDomain::r_top_left_R(const unsigned &t,
-                                       const Vector<double> &zeta,
-                                       const unsigned &i_layer,
-                                       Vector<double> &f)
+  void QuarterTubeDomain::r_top_left_R(const unsigned& t,
+                                       const Vector<double>& zeta,
+                                       const unsigned& i_layer,
+                                       Vector<double>& f)
   {
     // Swap coordinates
     Vector<double> zeta_br(2);
@@ -931,10 +931,10 @@ namespace oomph
   /// \short Boundary of top left box macro element in layer i_layer
   /// zeta \f$ \in [-1,1]^2 \f$
   //=======================================================================
-  void QuarterTubeDomain::r_top_left_D(const unsigned &t,
-                                       const Vector<double> &zeta,
-                                       const unsigned &i_layer,
-                                       Vector<double> &f)
+  void QuarterTubeDomain::r_top_left_D(const unsigned& t,
+                                       const Vector<double>& zeta,
+                                       const unsigned& i_layer,
+                                       Vector<double>& f)
   {
     r_centr_U(t, zeta, i_layer, f);
   }
@@ -943,10 +943,10 @@ namespace oomph
   /// \short Boundary of top left box macro element in layer i_layer
   /// zeta \f$ \in [-1,1]^2 \f$
   //=======================================================================
-  void QuarterTubeDomain::r_top_left_U(const unsigned &t,
-                                       const Vector<double> &zeta,
-                                       const unsigned &i_layer,
-                                       Vector<double> &f)
+  void QuarterTubeDomain::r_top_left_U(const unsigned& t,
+                                       const Vector<double>& zeta,
+                                       const unsigned& i_layer,
+                                       Vector<double>& f)
   {
     // Wall coordinates
     Vector<double> x(2);
@@ -965,10 +965,10 @@ namespace oomph
   /// \short Boundary of top left box macro element in layer i_layer
   /// zeta \f$ \in [-1,1]^2 \f$
   //=======================================================================
-  void QuarterTubeDomain::r_top_left_B(const unsigned &t,
-                                       const Vector<double> &zeta,
-                                       const unsigned &i_layer,
-                                       Vector<double> &f)
+  void QuarterTubeDomain::r_top_left_B(const unsigned& t,
+                                       const Vector<double>& zeta,
+                                       const unsigned& i_layer,
+                                       Vector<double>& f)
   {
     // Wall coordinates
     Vector<double> x(2);
@@ -1001,10 +1001,10 @@ namespace oomph
   /// \short Boundary of top left box macro element in layer i_layer
   /// zeta \f$ \in [-1,1]^2 \f$
   //=======================================================================
-  void QuarterTubeDomain::r_top_left_F(const unsigned &t,
-                                       const Vector<double> &zeta,
-                                       const unsigned &i_layer,
-                                       Vector<double> &f)
+  void QuarterTubeDomain::r_top_left_F(const unsigned& t,
+                                       const Vector<double>& zeta,
+                                       const unsigned& i_layer,
+                                       Vector<double>& f)
   {
     // Wall coordinates
     Vector<double> x(2);

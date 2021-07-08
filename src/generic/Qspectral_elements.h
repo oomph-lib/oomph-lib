@@ -52,7 +52,7 @@ namespace oomph
     static std::map<unsigned, Vector<double>> z;
 
     /// Static function used to populate the stored positions
-    static inline void calculate_nodal_positions(const unsigned &order)
+    static inline void calculate_nodal_positions(const unsigned& order)
     {
       // If we haven't already calculated these
       if (z.find(order) == z.end())
@@ -61,14 +61,14 @@ namespace oomph
       }
     }
 
-    static inline double nodal_position(const unsigned &order,
-                                        const unsigned &n)
+    static inline double nodal_position(const unsigned& order,
+                                        const unsigned& n)
     {
       return z[order][n];
     }
 
     /// Constructor
-    OneDLegendreShapeParam(const unsigned &order, const double &s) :
+    OneDLegendreShapeParam(const unsigned& order, const double& s) :
       Shape(order)
     {
       using namespace Orthpoly;
@@ -97,7 +97,7 @@ namespace oomph
   {
   public:
     // Constructor
-    OneDLegendreDShapeParam(const unsigned &order, const double &s) :
+    OneDLegendreDShapeParam(const unsigned& order, const double& s) :
       Shape(order)
     {
       unsigned p = order - 1;
@@ -155,7 +155,7 @@ namespace oomph
   {
   protected:
     /// Additional Storage for shared spectral data
-    Vector<Data *> *Spectral_data_pt;
+    Vector<Data*>* Spectral_data_pt;
 
     /// Vector that represents the spectral order in each dimension
     Vector<unsigned> Spectral_order;
@@ -180,7 +180,7 @@ namespace oomph
 
     ///\short Return the i-th data object associated with the polynomials
     /// of order p. Note that i <= p.
-    Data *spectral_data_pt(const unsigned &i) const
+    Data* spectral_data_pt(const unsigned& i) const
     {
       return (*Spectral_data_pt)[i];
     }
@@ -193,8 +193,8 @@ namespace oomph
     /// built up incrementally as we descend through the
     /// call hierarchy of this function when called from
     /// Problem::describe_dofs(...)
-    virtual void describe_local_dofs(std::ostream &out,
-                                     const std::string &current_string) const
+    virtual void describe_local_dofs(std::ostream& out,
+                                     const std::string& current_string) const
     {
       // Do the standard finite element stuff
       FiniteElement::describe_local_dofs(out, current_string);
@@ -205,7 +205,7 @@ namespace oomph
       for (unsigned n = 0; n < n_spectral; n++)
       {
         // Can we upcast to a node
-        Node *cast_node_pt = dynamic_cast<Node *>(spectral_data_pt(n));
+        Node* cast_node_pt = dynamic_cast<Node*>(spectral_data_pt(n));
         if (cast_node_pt)
         {
           std::stringstream conversion;
@@ -216,7 +216,7 @@ namespace oomph
         // Otherwise it is data.
         else
         {
-          Data *data_pt = spectral_data_pt(n);
+          Data* data_pt = spectral_data_pt(n);
           std::stringstream conversion;
           conversion << " of Data " << n << current_string;
           std::string in(conversion.str());
@@ -228,7 +228,7 @@ namespace oomph
     /// \short Assign the local equation numbers. If the boolean argument is
     /// true then store degrees of freedom at Dof_pt
     virtual void assign_all_generic_local_eqn_numbers(
-      const bool &store_local_dof_pt)
+      const bool& store_local_dof_pt)
     {
       // Do the standard finite element stuff
       FiniteElement::assign_all_generic_local_eqn_numbers(store_local_dof_pt);
@@ -259,7 +259,7 @@ namespace oomph
           n_spectral, max_n_value, Data::Is_unclassified);
 
         // Construct a set of pointers to the nodes
-        std::set<Data *> set_of_node_pt;
+        std::set<Data*> set_of_node_pt;
         unsigned n_node = nnode();
         for (unsigned n = 0; n < n_node; n++)
         {
@@ -276,7 +276,7 @@ namespace oomph
           //(and hence already assigned)
 
           // Can we upcast to a node
-          Node *cast_node_pt = dynamic_cast<Node *>(spectral_data_pt(n));
+          Node* cast_node_pt = dynamic_cast<Node*>(spectral_data_pt(n));
           if ((cast_node_pt) &&
               (set_of_node_pt.find(cast_node_pt) != set_of_node_pt.end()))
           {
@@ -294,7 +294,7 @@ namespace oomph
           // Otherwise it's just data
           else
           {
-            Data *const data_pt = spectral_data_pt(n);
+            Data* const data_pt = spectral_data_pt(n);
             unsigned n_value = data_pt->nvalue();
             // Loop over the number of values
             for (unsigned j = 0; j < n_value; j++)
@@ -334,7 +334,7 @@ namespace oomph
         // Clear the memory used in the deque
         if (store_local_dof_pt)
         {
-          std::deque<double *>().swap(GeneralisedElement::Dof_pt_deque);
+          std::deque<double*>().swap(GeneralisedElement::Dof_pt_deque);
         }
 
       } // End of case when there are spectral degrees of freedom
@@ -415,10 +415,10 @@ namespace oomph
     }
 
     /// Pointer to the j-th vertex node in the element
-    Node *vertex_node_pt(const unsigned &j) const
+    Node* vertex_node_pt(const unsigned& j) const
     {
       unsigned n_node_1d = nnode_1d();
-      Node *nod_pt;
+      Node* nod_pt;
       switch (j)
       {
         case 0:
@@ -440,14 +440,14 @@ namespace oomph
     }
 
     /// Get local coordinates of node j in the element; vector sets its own size
-    void local_coordinate_of_node(const unsigned &n, Vector<double> &s) const
+    void local_coordinate_of_node(const unsigned& n, Vector<double>& s) const
     {
       s.resize(1);
       s[0] = OneDimensionalLegendreShape<NNODE_1D>::nodal_position(n);
     }
 
     /// Get the local fractino of node j in the element
-    void local_fraction_of_node(const unsigned &n, Vector<double> &s_fraction)
+    void local_fraction_of_node(const unsigned& n, Vector<double>& s_fraction)
     {
       this->local_coordinate_of_node(n, s_fraction);
       // Resize
@@ -455,34 +455,34 @@ namespace oomph
     }
 
     /// The local one-d fraction is the same
-    double local_one_d_fraction_of_node(const unsigned &n1d, const unsigned &i)
+    double local_one_d_fraction_of_node(const unsigned& n1d, const unsigned& i)
     {
       return 0.5 *
              (OneDimensionalLegendreShape<NNODE_1D>::nodal_position(n1d) + 1.0);
     }
 
     /// Calculate the geometric shape functions at local coordinate s
-    inline void shape(const Vector<double> &s, Shape &psi) const;
+    inline void shape(const Vector<double>& s, Shape& psi) const;
 
     /// \short Compute the  geometric shape functions and
     /// derivatives w.r.t. local coordinates at local coordinate s
-    inline void dshape_local(const Vector<double> &s,
-                             Shape &psi,
-                             DShape &dpsids) const;
+    inline void dshape_local(const Vector<double>& s,
+                             Shape& psi,
+                             DShape& dpsids) const;
 
     /// \short Compute the geometric shape functions, derivatives and
     /// second derivatives w.r.t. local coordinates at local coordinate s
     /// d2psids(i,0) = \f$ d^2 \psi_j / d s^2 \f$
-    inline void d2shape_local(const Vector<double> &s,
-                              Shape &psi,
-                              DShape &dpsids,
-                              DShape &d2psids) const;
+    inline void d2shape_local(const Vector<double>& s,
+                              Shape& psi,
+                              DShape& dpsids,
+                              DShape& d2psids) const;
 
     /// \short Overload the template-free interface for the calculation of
     /// inverse jacobian matrix. This is a one-dimensional element, so
     /// use the 1D version.
-    double invert_jacobian_mapping(const DenseMatrix<double> &jacobian,
-                                   DenseMatrix<double> &inverse_jacobian) const
+    double invert_jacobian_mapping(const DenseMatrix<double>& jacobian,
+                                   DenseMatrix<double>& inverse_jacobian) const
     {
       return FiniteElement::invert_jacobian<1>(jacobian, inverse_jacobian);
     }
@@ -494,30 +494,30 @@ namespace oomph
     }
 
     /// C-style output
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
 
     /// C_style output at n_plot points
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       FiniteElement::output(file_pt, n_plot);
     }
 
     /// Output
-    void output(std::ostream &outfile);
+    void output(std::ostream& outfile);
 
     /// Output at n_plot points
-    void output(std::ostream &outfile, const unsigned &n_plot);
+    void output(std::ostream& outfile, const unsigned& n_plot);
 
     /// \short  Get cector of local coordinates of plot point i (when plotting
     /// nplot points in each "coordinate direction).
     void get_s_plot(
-      const unsigned &i,
-      const unsigned &nplot,
-      Vector<double> &s,
-      const bool &use_equally_spaced_interior_sample_points = false) const
+      const unsigned& i,
+      const unsigned& nplot,
+      Vector<double>& s,
+      const bool& use_equally_spaced_interior_sample_points = false) const
     {
       if (nplot > 1)
       {
@@ -538,7 +538,7 @@ namespace oomph
 
     /// \short Return string for tecplot zone header (when plotting
     /// nplot points in each "coordinate direction)
-    std::string tecplot_zone_string(const unsigned &nplot) const
+    std::string tecplot_zone_string(const unsigned& nplot) const
     {
       std::ostringstream header;
       header << "ZONE I=" << nplot << "\n";
@@ -547,7 +547,7 @@ namespace oomph
 
     /// \short Return total number of plot points (when plotting
     /// nplot points in each "coordinate direction)
-    unsigned nplot_points(const unsigned &nplot) const
+    unsigned nplot_points(const unsigned& nplot) const
     {
       unsigned DIM = 1;
       unsigned np = 1;
@@ -563,16 +563,16 @@ namespace oomph
     /// corresponding to the two possible faces:
     /// -1 (Left)  s[0] = -1.0
     /// +1 (Right) s[0] =  1.0
-    void build_face_element(const int &face_index,
-                            FaceElement *face_element_pt);
+    void build_face_element(const int& face_index,
+                            FaceElement* face_element_pt);
   };
 
   //=======================================================================
   /// Shape function for specific QSpectralElement<1,..>
   //=======================================================================
   template<unsigned NNODE_1D>
-  void QSpectralElement<1, NNODE_1D>::shape(const Vector<double> &s,
-                                            Shape &psi) const
+  void QSpectralElement<1, NNODE_1D>::shape(const Vector<double>& s,
+                                            Shape& psi) const
   {
     // Call the OneDimensional Shape functions
     OneDimensionalLegendreShape<NNODE_1D> psi1(s[0]);
@@ -590,9 +590,9 @@ namespace oomph
   /// Derivatives of shape functions for specific  QSpectralElement<1,..>
   //=======================================================================
   template<unsigned NNODE_1D>
-  void QSpectralElement<1, NNODE_1D>::dshape_local(const Vector<double> &s,
-                                                   Shape &psi,
-                                                   DShape &dpsids) const
+  void QSpectralElement<1, NNODE_1D>::dshape_local(const Vector<double>& s,
+                                                   Shape& psi,
+                                                   DShape& dpsids) const
   {
     // Call the shape functions and derivatives
     OneDimensionalLegendreShape<NNODE_1D> psi1(s[0]);
@@ -614,10 +614,10 @@ namespace oomph
   ///  d2psids(i,0) = \f$ d^2 \psi_j / d s^2 \f$
   //=======================================================================
   template<unsigned NNODE_1D>
-  void QSpectralElement<1, NNODE_1D>::d2shape_local(const Vector<double> &s,
-                                                    Shape &psi,
-                                                    DShape &dpsids,
-                                                    DShape &d2psids) const
+  void QSpectralElement<1, NNODE_1D>::d2shape_local(const Vector<double>& s,
+                                                    Shape& psi,
+                                                    DShape& dpsids,
+                                                    DShape& d2psids) const
   {
     std::ostringstream error_message;
     error_message
@@ -691,10 +691,10 @@ namespace oomph
     }
 
     /// Pointer to the j-th vertex node in the element
-    Node *vertex_node_pt(const unsigned &j) const
+    Node* vertex_node_pt(const unsigned& j) const
     {
       unsigned n_node_1d = nnode_1d();
-      Node *nod_pt;
+      Node* nod_pt;
       switch (j)
       {
         case 0:
@@ -722,7 +722,7 @@ namespace oomph
     }
 
     /// Get local coordinates of node j in the element; vector sets its own size
-    void local_coordinate_of_node(const unsigned &n, Vector<double> &s) const
+    void local_coordinate_of_node(const unsigned& n, Vector<double>& s) const
     {
       s.resize(2);
       unsigned n0 = n % NNODE_1D;
@@ -732,7 +732,7 @@ namespace oomph
     }
 
     /// Get the local fractino of node j in the element
-    void local_fraction_of_node(const unsigned &n, Vector<double> &s_fraction)
+    void local_fraction_of_node(const unsigned& n, Vector<double>& s_fraction)
     {
       this->local_coordinate_of_node(n, s_fraction);
       // Resize
@@ -741,36 +741,36 @@ namespace oomph
     }
 
     /// The local one-d fraction is the same
-    double local_one_d_fraction_of_node(const unsigned &n1d, const unsigned &i)
+    double local_one_d_fraction_of_node(const unsigned& n1d, const unsigned& i)
     {
       return 0.5 *
              (OneDimensionalLegendreShape<NNODE_1D>::nodal_position(n1d) + 1.0);
     }
 
     /// Calculate the geometric shape functions at local coordinate s
-    inline void shape(const Vector<double> &s, Shape &psi) const;
+    inline void shape(const Vector<double>& s, Shape& psi) const;
 
     /// \short Compute the  geometric shape functions and
     /// derivatives w.r.t. local coordinates at local coordinate s
-    inline void dshape_local(const Vector<double> &s,
-                             Shape &psi,
-                             DShape &dpsids) const;
+    inline void dshape_local(const Vector<double>& s,
+                             Shape& psi,
+                             DShape& dpsids) const;
 
     /// \short Compute the geometric shape functions, derivatives and
     /// second derivatives w.r.t. local coordinates at local coordinate s
     /// d2psids(i,0) = \f$ \partial ^2 \psi_j / \partial s_0^2 \f$
     /// d2psids(i,1) = \f$ \partial ^2 \psi_j / \partial s_1^2 \f$
     /// d2psids(i,2) = \f$ \partial ^2 \psi_j / \partial s_0 \partial s_1 \f$
-    inline void d2shape_local(const Vector<double> &s,
-                              Shape &psi,
-                              DShape &dpsids,
-                              DShape &d2psids) const;
+    inline void d2shape_local(const Vector<double>& s,
+                              Shape& psi,
+                              DShape& dpsids,
+                              DShape& d2psids) const;
 
     /// \short Overload the template-free interface for the calculation of
     /// inverse jacobian matrix. This is a one-dimensional element, so
     /// use the 1D version.
-    double invert_jacobian_mapping(const DenseMatrix<double> &jacobian,
-                                   DenseMatrix<double> &inverse_jacobian) const
+    double invert_jacobian_mapping(const DenseMatrix<double>& jacobian,
+                                   DenseMatrix<double>& inverse_jacobian) const
     {
       return FiniteElement::invert_jacobian<2>(jacobian, inverse_jacobian);
     }
@@ -782,30 +782,30 @@ namespace oomph
     }
 
     /// C-style output
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
 
     /// C_style output at n_plot points
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       FiniteElement::output(file_pt, n_plot);
     }
 
     /// Output
-    void output(std::ostream &outfile);
+    void output(std::ostream& outfile);
 
     /// Output at n_plot points
-    void output(std::ostream &outfile, const unsigned &n_plot);
+    void output(std::ostream& outfile, const unsigned& n_plot);
 
     /// \short  Get cector of local coordinates of plot point i (when plotting
     /// nplot points in each "coordinate direction).
     void get_s_plot(
-      const unsigned &i,
-      const unsigned &nplot,
-      Vector<double> &s,
-      const bool &use_equally_spaced_interior_sample_points = false) const
+      const unsigned& i,
+      const unsigned& nplot,
+      Vector<double>& s,
+      const bool& use_equally_spaced_interior_sample_points = false) const
     {
       if (nplot > 1)
       {
@@ -832,7 +832,7 @@ namespace oomph
 
     /// \short Return string for tecplot zone header (when plotting
     /// nplot points in each "coordinate direction)
-    std::string tecplot_zone_string(const unsigned &nplot) const
+    std::string tecplot_zone_string(const unsigned& nplot) const
     {
       std::ostringstream header;
       header << "ZONE I=" << nplot << ", J=" << nplot << "\n";
@@ -841,7 +841,7 @@ namespace oomph
 
     /// \short Return total number of plot points (when plotting
     /// nplot points in each "coordinate direction)
-    unsigned nplot_points(const unsigned &nplot) const
+    unsigned nplot_points(const unsigned& nplot) const
     {
       unsigned DIM = 2;
       unsigned np = 1;
@@ -859,16 +859,16 @@ namespace oomph
     /// +1 (East)  s[0] =  1.0
     /// -2 (South) s[1] = -1.0
     /// +2 (North) s[1] =  1.0
-    void build_face_element(const int &face_index,
-                            FaceElement *face_element_pt);
+    void build_face_element(const int& face_index,
+                            FaceElement* face_element_pt);
   };
 
   //=======================================================================
   /// Shape function for specific QSpectralElement<2,..>
   //=======================================================================
   template<unsigned NNODE_1D>
-  void QSpectralElement<2, NNODE_1D>::shape(const Vector<double> &s,
-                                            Shape &psi) const
+  void QSpectralElement<2, NNODE_1D>::shape(const Vector<double>& s,
+                                            Shape& psi) const
   {
     // Call the OneDimensional Shape functions
     OneDimensionalLegendreShape<NNODE_1D> psi1(s[0]), psi2(s[1]);
@@ -889,9 +889,9 @@ namespace oomph
   /// Derivatives of shape functions for specific  QSpectralElement<2,..>
   //=======================================================================
   template<unsigned NNODE_1D>
-  void QSpectralElement<2, NNODE_1D>::dshape_local(const Vector<double> &s,
-                                                   Shape &psi,
-                                                   DShape &dpsids) const
+  void QSpectralElement<2, NNODE_1D>::dshape_local(const Vector<double>& s,
+                                                   Shape& psi,
+                                                   DShape& dpsids) const
   {
     // Call the shape functions and derivatives
     OneDimensionalLegendreShape<NNODE_1D> psi1(s[0]), psi2(s[1]);
@@ -924,10 +924,10 @@ namespace oomph
   /// d2psids(i,2) = \f$ \partial ^2 \psi_j / \partial s_0 \partial s_1 \f$
   //=======================================================================
   template<unsigned NNODE_1D>
-  void QSpectralElement<2, NNODE_1D>::d2shape_local(const Vector<double> &s,
-                                                    Shape &psi,
-                                                    DShape &dpsids,
-                                                    DShape &d2psids) const
+  void QSpectralElement<2, NNODE_1D>::d2shape_local(const Vector<double>& s,
+                                                    Shape& psi,
+                                                    DShape& dpsids,
+                                                    DShape& d2psids) const
   {
     std::ostringstream error_message;
     error_message
@@ -1001,10 +1001,10 @@ namespace oomph
     }
 
     /// Pointer to the j-th vertex node in the element
-    Node *vertex_node_pt(const unsigned &j) const
+    Node* vertex_node_pt(const unsigned& j) const
     {
       unsigned n_node_1d = nnode_1d();
-      Node *nod_pt;
+      Node* nod_pt;
       switch (j)
       {
         case 0:
@@ -1045,7 +1045,7 @@ namespace oomph
     }
 
     /// Get local coordinates of node j in the element; vector sets its own size
-    void local_coordinate_of_node(const unsigned &n, Vector<double> &s) const
+    void local_coordinate_of_node(const unsigned& n, Vector<double>& s) const
     {
       s.resize(3);
       unsigned n0 = n % NNODE_1D;
@@ -1057,7 +1057,7 @@ namespace oomph
     }
 
     /// Get the local fractino of node j in the element
-    void local_fraction_of_node(const unsigned &n, Vector<double> &s_fraction)
+    void local_fraction_of_node(const unsigned& n, Vector<double>& s_fraction)
     {
       this->local_coordinate_of_node(n, s_fraction);
       // Resize
@@ -1067,20 +1067,20 @@ namespace oomph
     }
 
     /// The local one-d fraction is the same
-    double local_one_d_fraction_of_node(const unsigned &n1d, const unsigned &i)
+    double local_one_d_fraction_of_node(const unsigned& n1d, const unsigned& i)
     {
       return 0.5 *
              (OneDimensionalLegendreShape<NNODE_1D>::nodal_position(n1d) + 1.0);
     }
 
     /// Calculate the geometric shape functions at local coordinate s
-    inline void shape(const Vector<double> &s, Shape &psi) const;
+    inline void shape(const Vector<double>& s, Shape& psi) const;
 
     /// \short Compute the  geometric shape functions and
     /// derivatives w.r.t. local coordinates at local coordinate s
-    inline void dshape_local(const Vector<double> &s,
-                             Shape &psi,
-                             DShape &dpsids) const;
+    inline void dshape_local(const Vector<double>& s,
+                             Shape& psi,
+                             DShape& dpsids) const;
 
     /// \short Compute the geometric shape functions, derivatives and
     /// second derivatives w.r.t. local coordinates at local coordinate s
@@ -1090,16 +1090,16 @@ namespace oomph
     /// d2psids(i,3) = \f$ \partial ^2 \psi_j / \partial s_0 \partial s_1 \f$
     /// d2psids(i,4) = \f$ \partial ^2 \psi_j / \partial s_0 \partial s_2 \f$
     /// d2psids(i,5) = \f$ \partial ^2 \psi_j / \partial s_1 \partial s_2 \f$
-    inline void d2shape_local(const Vector<double> &s,
-                              Shape &psi,
-                              DShape &dpsids,
-                              DShape &d2psids) const;
+    inline void d2shape_local(const Vector<double>& s,
+                              Shape& psi,
+                              DShape& dpsids,
+                              DShape& d2psids) const;
 
     /// \short Overload the template-free interface for the calculation of
     /// inverse jacobian matrix. This is a one-dimensional element, so
     /// use the 3D version.
-    double invert_jacobian_mapping(const DenseMatrix<double> &jacobian,
-                                   DenseMatrix<double> &inverse_jacobian) const
+    double invert_jacobian_mapping(const DenseMatrix<double>& jacobian,
+                                   DenseMatrix<double>& inverse_jacobian) const
     {
       return FiniteElement::invert_jacobian<3>(jacobian, inverse_jacobian);
     }
@@ -1111,30 +1111,30 @@ namespace oomph
     }
 
     /// C-style output
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
 
     /// C_style output at n_plot points
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       FiniteElement::output(file_pt, n_plot);
     }
 
     /// Output
-    void output(std::ostream &outfile);
+    void output(std::ostream& outfile);
 
     /// Output at nplot points
-    void output(std::ostream &outfile, const unsigned &nplot);
+    void output(std::ostream& outfile, const unsigned& nplot);
 
     /// \short  Get cector of local coordinates of plot point i (when plotting
     /// nplot points in each "coordinate direction).
     void get_s_plot(
-      const unsigned &i,
-      const unsigned &nplot,
-      Vector<double> &s,
-      const bool &use_equally_spaced_interior_sample_points = false) const
+      const unsigned& i,
+      const unsigned& nplot,
+      Vector<double>& s,
+      const bool& use_equally_spaced_interior_sample_points = false) const
     {
       if (nplot > 1)
       {
@@ -1166,7 +1166,7 @@ namespace oomph
 
     /// \short Return string for tecplot zone header (when plotting
     /// nplot points in each "coordinate direction)
-    std::string tecplot_zone_string(const unsigned &nplot) const
+    std::string tecplot_zone_string(const unsigned& nplot) const
     {
       std::ostringstream header;
       header << "ZONE I=" << nplot << ", J=" << nplot << ", K=" << nplot
@@ -1176,7 +1176,7 @@ namespace oomph
 
     /// \short Return total number of plot points (when plotting
     /// nplot points in each "coordinate direction)
-    unsigned nplot_points(const unsigned &nplot) const
+    unsigned nplot_points(const unsigned& nplot) const
     {
       unsigned DIM = 3;
       unsigned np = 1;
@@ -1196,16 +1196,16 @@ namespace oomph
     /// +2 (Up)     s[1] =  1.0
     /// -3 (Back)   s[2] = -1.0
     /// +3 (Front)  s[2] =  1.0
-    void build_face_element(const int &face_index,
-                            FaceElement *face_element_pt);
+    void build_face_element(const int& face_index,
+                            FaceElement* face_element_pt);
   };
 
   //=======================================================================
   /// Shape function for specific QSpectralElement<3,..>
   //=======================================================================
   template<unsigned NNODE_1D>
-  void QSpectralElement<3, NNODE_1D>::shape(const Vector<double> &s,
-                                            Shape &psi) const
+  void QSpectralElement<3, NNODE_1D>::shape(const Vector<double>& s,
+                                            Shape& psi) const
   {
     // Call the OneDimensional Shape functions
     OneDimensionalLegendreShape<NNODE_1D> psi1(s[0]), psi2(s[1]), psi3(s[2]);
@@ -1231,9 +1231,9 @@ namespace oomph
   /// Derivatives of shape functions for specific  QSpectralElement<3,..>
   //=======================================================================
   template<unsigned NNODE_1D>
-  void QSpectralElement<3, NNODE_1D>::dshape_local(const Vector<double> &s,
-                                                   Shape &psi,
-                                                   DShape &dpsids) const
+  void QSpectralElement<3, NNODE_1D>::dshape_local(const Vector<double>& s,
+                                                   Shape& psi,
+                                                   DShape& dpsids) const
   {
     // Call the shape functions and derivatives
     // OneDLegendreShapeParam psi1(NNODE_1D,s[0]), psi2(NNODE_1D,s[1]),
@@ -1276,10 +1276,10 @@ namespace oomph
   /// d2psids(i,5) = \f$ \partial ^2 \psi_j / \partial s_1 \partial s_2 \f$
   //=======================================================================
   template<unsigned NNODE_1D>
-  void QSpectralElement<3, NNODE_1D>::d2shape_local(const Vector<double> &s,
-                                                    Shape &psi,
-                                                    DShape &dpsids,
-                                                    DShape &d2psids) const
+  void QSpectralElement<3, NNODE_1D>::d2shape_local(const Vector<double>& s,
+                                                    Shape& psi,
+                                                    DShape& dpsids,
+                                                    DShape& d2psids) const
   {
     std::ostringstream error_message;
     error_message

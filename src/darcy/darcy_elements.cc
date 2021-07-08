@@ -36,10 +36,10 @@ namespace oomph
   /// functions from the reference element to the actual element
   //=====================================================================
   template<unsigned DIM>
-  double DarcyEquations<DIM>::transform_basis(const Vector<double> &s,
-                                              const Shape &q_basis_local,
-                                              Shape &psi,
-                                              Shape &q_basis) const
+  double DarcyEquations<DIM>::transform_basis(const Vector<double>& s,
+                                              const Shape& q_basis_local,
+                                              Shape& psi,
+                                              Shape& q_basis) const
   {
     // Get the number of nodes in the element
     const unsigned n_node = this->nnode();
@@ -100,8 +100,8 @@ namespace oomph
   //=====================================================================
   template<unsigned DIM>
   void DarcyEquations<DIM>::output_with_projected_flux(
-    std::ostream &outfile,
-    const unsigned &nplot,
+    std::ostream& outfile,
+    const unsigned& nplot,
     const Vector<double> unit_normal)
   {
     // Vector of local coordinates
@@ -156,7 +156,7 @@ namespace oomph
   /// Nplot^DIM plot points
   //=====================================================================
   template<unsigned DIM>
-  void DarcyEquations<DIM>::output(std::ostream &outfile, const unsigned &nplot)
+  void DarcyEquations<DIM>::output(std::ostream& outfile, const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(DIM);
@@ -203,8 +203,8 @@ namespace oomph
   //=====================================================================
   template<unsigned DIM>
   void DarcyEquations<DIM>::output_fct(
-    std::ostream &outfile,
-    const unsigned &nplot,
+    std::ostream& outfile,
+    const unsigned& nplot,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
   {
     // Vector of local coordinates
@@ -255,10 +255,10 @@ namespace oomph
   //=====================================================================
   template<unsigned DIM>
   void DarcyEquations<DIM>::compute_error(
-    std::ostream &outfile,
+    std::ostream& outfile,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-    Vector<double> &error,
-    Vector<double> &norm)
+    Vector<double>& error,
+    Vector<double>& norm)
   {
     for (unsigned i = 0; i < 2; i++)
     {
@@ -347,7 +347,7 @@ namespace oomph
   //=====================================================================
   template<unsigned DIM>
   void DarcyEquations<DIM>::fill_in_generic_residual_contribution(
-    Vector<double> &residuals, DenseMatrix<double> &jacobian, bool flag)
+    Vector<double>& residuals, DenseMatrix<double>& jacobian, bool flag)
   {
     // Get the number of geometric nodes, total number of basis functions,
     // and number of edges basis functions

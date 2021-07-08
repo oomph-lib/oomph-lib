@@ -55,21 +55,21 @@ public:
   }
 
   /// Broken copy constructor
-  SSP_RungeKutta(const SSP_RungeKutta &)
+  SSP_RungeKutta(const SSP_RungeKutta&)
   {
     BrokenCopy::broken_copy("SS_PRungeKutta");
   }
 
   /// Broken assignment operator
-  void operator=(const SSP_RungeKutta &)
+  void operator=(const SSP_RungeKutta&)
   {
     BrokenCopy::broken_assign("SSP_RungeKutta");
   }
 
   /// Function that is used to advance time in the object
   // reference by object_pt by an amount dt
-  void timestep(ExplicitTimeSteppableObject *const &object_pt,
-                const double &dt);
+  void timestep(ExplicitTimeSteppableObject* const& object_pt,
+                const double& dt);
 };
 
 //====================================================================
@@ -77,7 +77,7 @@ public:
 //====================================================================
 template<unsigned ORDER>
 void SSP_RungeKutta<ORDER>::timestep(
-  ExplicitTimeSteppableObject *const &object_pt, const double &dt)
+  ExplicitTimeSteppableObject* const& object_pt, const double& dt)
 {
   std::ostringstream error_stream;
   error_stream << "Timestep not implemented for order " << ORDER << "\n";
@@ -89,8 +89,8 @@ void SSP_RungeKutta<ORDER>::timestep(
 /// Explicit specialisation for second-order RK scheme
 //==================================================================
 template<>
-void SSP_RungeKutta<2>::timestep(ExplicitTimeSteppableObject *const &object_pt,
-                                 const double &dt)
+void SSP_RungeKutta<2>::timestep(ExplicitTimeSteppableObject* const& object_pt,
+                                 const double& dt)
 {
   object_pt->actions_before_explicit_timestep();
 
@@ -163,16 +163,16 @@ template<class ELEMENT>
 class TwoDDGMesh : public DGMesh
 {
   // Map that will store the neighbours
-  std::map<std::pair<FiniteElement *, int>, FiniteElement *> Neighbour_map;
+  std::map<std::pair<FiniteElement*, int>, FiniteElement*> Neighbour_map;
 
   // map of face_reflection elements
-  std::map<std::pair<FiniteElement *, int>, FaceElement *> Face_element_pt;
+  std::map<std::pair<FiniteElement*, int>, FaceElement*> Face_element_pt;
 
 public:
   // Constructor
-  TwoDDGMesh(const unsigned &n_x,
-             const unsigned &n_y,
-             TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper)
+  TwoDDGMesh(const unsigned& n_x,
+             const unsigned& n_y,
+             TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
   {
     Vector<double> s_fraction;
     // Lengths of the mesh
@@ -201,7 +201,7 @@ public:
       for (unsigned ey = 0; ey < Ny1; ey++)
       {
         // Create a new DG element
-        ELEMENT *local_element_pt = new ELEMENT;
+        ELEMENT* local_element_pt = new ELEMENT;
         // Find the number of nodes
         const unsigned n_node = local_element_pt->nnode();
         // Have we constructed
@@ -343,7 +343,7 @@ public:
         for (unsigned n = 0; n < n_node; n++)
         {
           // Get pointer to the node
-          Node *nod_pt = local_element_pt->node_pt(n);
+          Node* nod_pt = local_element_pt->node_pt(n);
           // Get the relative position in local coordinates
           local_element_pt->local_fraction_of_node(n, s_fraction);
           // Loop over the coordinates and set the position
@@ -371,7 +371,7 @@ public:
       for (unsigned ey = 0; ey < Ny; ey++)
       {
         // Create a new DG element
-        ELEMENT *local_element_pt = new ELEMENT;
+        ELEMENT* local_element_pt = new ELEMENT;
         // Find the number of nodes
         const unsigned n_node = local_element_pt->nnode();
         // Have we constructed
@@ -468,7 +468,7 @@ public:
         for (unsigned n = 0; n < n_node; n++)
         {
           // Get pointer to the node
-          Node *nod_pt = local_element_pt->node_pt(n);
+          Node* nod_pt = local_element_pt->node_pt(n);
           // Get the relative position in local coordinates
           local_element_pt->local_fraction_of_node(n, s_fraction);
           // Loop over the coordinates and set the position
@@ -492,7 +492,7 @@ public:
     // Left-hand side
     for (unsigned e = 0; e < Ny1; e++)
     {
-      FiniteElement *const elem_pt = this->finite_element_pt(e);
+      FiniteElement* const elem_pt = this->finite_element_pt(e);
       unsigned n_p = elem_pt->nnode_1d();
       for (unsigned n = 0; n < n_p; n++)
       {
@@ -503,7 +503,7 @@ public:
     // Right hand side
     for (unsigned e = 0; e < Ny; e++)
     {
-      FiniteElement *const elem_pt =
+      FiniteElement* const elem_pt =
         this->finite_element_pt(Ny1 * Nx1 + Ny * (Nx - 1) + e);
       unsigned n_p = elem_pt->nnode_1d();
       for (unsigned n = 0; n < n_p; n++)
@@ -517,7 +517,7 @@ public:
       // First bit
       for (unsigned e = 0; e < Nx1; e++)
       {
-        FiniteElement *const elem_pt =
+        FiniteElement* const elem_pt =
           this->finite_element_pt(Ny1 - 1 + Ny1 * e);
         unsigned n_p = elem_pt->nnode_1d();
         for (unsigned n = 0; n < n_p; n++)
@@ -533,7 +533,7 @@ public:
       // Second bit
       for (unsigned e = 0; e < Nx; e++)
       {
-        FiniteElement *const elem_pt =
+        FiniteElement* const elem_pt =
           this->finite_element_pt(Nx1 * Ny1 + Ny - 1 + Ny * e);
         unsigned n_p = elem_pt->nnode_1d();
         for (unsigned n = 0; n < n_p; n++)
@@ -553,7 +553,7 @@ public:
       for (unsigned e = 0; e < Nx1; e++)
       {
         // Bottom
-        FiniteElement *const elem_pt = this->finite_element_pt(Ny1 * e);
+        FiniteElement* const elem_pt = this->finite_element_pt(Ny1 * e);
         unsigned n_p = elem_pt->nnode_1d();
         for (unsigned n = 0; n < n_p; n++)
         {
@@ -568,7 +568,7 @@ public:
       // Add the right-hand of the lower elements
       for (unsigned e = 0; e < n_y; e++)
       {
-        FiniteElement *const elem_pt =
+        FiniteElement* const elem_pt =
           this->finite_element_pt(Ny1 * (Nx1 - 1) + e);
         unsigned n_p = elem_pt->nnode_1d();
         for (unsigned n = 0; n < n_p; n++)
@@ -584,7 +584,7 @@ public:
       for (unsigned e = 0; e < Nx; e++)
       {
         // Bottom
-        FiniteElement *const elem_pt =
+        FiniteElement* const elem_pt =
           this->finite_element_pt(Nx1 * Ny1 + Ny * e);
         unsigned n_p = elem_pt->nnode_1d();
         for (unsigned n = 0; n < n_p; n++)
@@ -618,7 +618,7 @@ public:
       {
         // Get pointer to the element
         unsigned element_index = Nx1 * Ny1 + ex * Ny + ey;
-        FiniteElement *local_el_pt = finite_element_pt(element_index);
+        FiniteElement* local_el_pt = finite_element_pt(element_index);
 
         // Storage for indices of neighbours
         int index[4];
@@ -680,7 +680,7 @@ public:
       {
         // Get pointer to the element
         unsigned element_index = ex * Ny1 + ey;
-        FiniteElement *local_el_pt = finite_element_pt(element_index);
+        FiniteElement* local_el_pt = finite_element_pt(element_index);
 
         // Storage for indices of neighbours
         int index[4];
@@ -756,16 +756,16 @@ public:
   }
 
   // We can just use the map here
-  void neighbour_finder(FiniteElement *const &bulk_element_pt,
-                        const int &face_index,
-                        const Vector<double> &s_bulk,
-                        FaceElement *&face_element_pt,
-                        Vector<double> &s_face)
+  void neighbour_finder(FiniteElement* const& bulk_element_pt,
+                        const int& face_index,
+                        const Vector<double>& s_bulk,
+                        FaceElement*& face_element_pt,
+                        Vector<double>& s_face)
   {
     // We have a single face coordinate of size 1
     s_face.resize(1);
 
-    ELEMENT *elem_pt = 0;
+    ELEMENT* elem_pt = 0;
 
     // Now things differ depending upon which face we are located
     switch (face_index)
@@ -773,7 +773,7 @@ public:
         // North face
       case 2:
         // Get the neighbour
-        elem_pt = dynamic_cast<ELEMENT *>(
+        elem_pt = dynamic_cast<ELEMENT*>(
           Neighbour_map[std::make_pair(bulk_element_pt, 0)]);
 
         if (elem_pt != 0)
@@ -805,7 +805,7 @@ public:
         // East face
       case 1:
         // Get the neighbour
-        elem_pt = dynamic_cast<ELEMENT *>(
+        elem_pt = dynamic_cast<ELEMENT*>(
           Neighbour_map[std::make_pair(bulk_element_pt, 1)]);
 
         // The neighbouring face element is the west faec of the neighbour
@@ -815,8 +815,8 @@ public:
         }
         else
         {
-          ELEMENT *cast_bulk_element_pt =
-            dynamic_cast<ELEMENT *>(bulk_element_pt);
+          ELEMENT* cast_bulk_element_pt =
+            dynamic_cast<ELEMENT*>(bulk_element_pt);
           // If we're on the outlet set the face to be the face
           if (cast_bulk_element_pt->face_element_pt(1)
                 ->node_pt(0)
@@ -829,7 +829,7 @@ public:
             //          << "\n ";
 
             face_element_pt =
-              dynamic_cast<ELEMENT *>(bulk_element_pt)->face_element_pt(1);
+              dynamic_cast<ELEMENT*>(bulk_element_pt)->face_element_pt(1);
           }
           // Otherwise we must be on the corner
           else
@@ -855,7 +855,7 @@ public:
         // South face
       case -2:
         // Get the neighbour
-        elem_pt = dynamic_cast<ELEMENT *>(
+        elem_pt = dynamic_cast<ELEMENT*>(
           Neighbour_map[std::make_pair(bulk_element_pt, 2)]);
 
         // the neighbouring face element is the north face of the neighbour
@@ -889,7 +889,7 @@ public:
         // West face
       case -1:
         // Get the neighbour
-        elem_pt = dynamic_cast<ELEMENT *>(
+        elem_pt = dynamic_cast<ELEMENT*>(
           Neighbour_map[std::make_pair(bulk_element_pt, 3)]);
 
         // The neighbouring face element is the east face of the neighbour
@@ -900,7 +900,7 @@ public:
         else
         {
           face_element_pt =
-            dynamic_cast<ELEMENT *>(bulk_element_pt)->face_element_pt(3);
+            dynamic_cast<ELEMENT*>(bulk_element_pt)->face_element_pt(3);
         }
         s_face[0] = s_bulk[1];
         break;
@@ -918,9 +918,9 @@ template<class ELEMENT>
 class TwoDDGProblem : public Problem
 {
 public:
-  TwoDDGMesh<ELEMENT> *mesh_pt()
+  TwoDDGMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<TwoDDGMesh<ELEMENT> *>(Problem::mesh_pt());
+    return dynamic_cast<TwoDDGMesh<ELEMENT>*>(Problem::mesh_pt());
   }
 
   ~TwoDDGProblem()
@@ -929,7 +929,7 @@ public:
     delete this->explicit_time_stepper_pt();
   }
 
-  TwoDDGProblem(const unsigned &Nx, const unsigned &Ny)
+  TwoDDGProblem(const unsigned& Nx, const unsigned& Ny)
   {
     this->set_explicit_time_stepper_pt(new SSP_RungeKutta<2>);
     this->disable_info_in_newton_solve();
@@ -941,8 +941,8 @@ public:
     unsigned n_element = Problem::mesh_pt()->nelement();
     for (unsigned e = 0; e < n_element; e++)
     {
-      ELEMENT *cast_element_pt =
-        dynamic_cast<ELEMENT *>(Problem::mesh_pt()->element_pt(e));
+      ELEMENT* cast_element_pt =
+        dynamic_cast<ELEMENT*>(Problem::mesh_pt()->element_pt(e));
 
       cast_element_pt->gamma_pt() = &Global::Gamma;
     }
@@ -954,7 +954,7 @@ public:
         const unsigned n_node = mesh_pt()->nboundary_node(b);
         for (unsigned n = 0; n < n_node; n++)
         {
-          Node *nod_pt = mesh_pt()->boundary_node_pt(b, n);
+          Node* nod_pt = mesh_pt()->boundary_node_pt(b, n);
           const unsigned n_value = nod_pt->nvalue();
           for (unsigned i = 0; i < n_value; i++)
           {
@@ -975,7 +975,7 @@ public:
     unsigned n_node = mesh_pt()->nnode();
     for (unsigned n = 0; n < n_node; n++)
     {
-      Node *nod_pt = mesh_pt()->node_pt(n);
+      Node* nod_pt = mesh_pt()->node_pt(n);
       // Set the values
       nod_pt->set_value(0, gamma);
       nod_pt->set_value(1, E);
@@ -992,9 +992,9 @@ public:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Calculate the averages
-      dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e))
+      dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))
         ->allocate_memory_for_averages();
-      dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e))->calculate_averages();
+      dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))->calculate_averages();
     }
 
     Vector<double> s(2, 0.0), x(2);
@@ -1004,7 +1004,7 @@ public:
     const unsigned n_dim = 2;
 
     // Store pointers to neighbours
-    DenseMatrix<ELEMENT *> bulk_neighbour(n_element, 4);
+    DenseMatrix<ELEMENT*> bulk_neighbour(n_element, 4);
     // Storage for the unknowns
     Vector<double> interpolated_u(n_flux);
 
@@ -1012,8 +1012,8 @@ public:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Store the element
-      ELEMENT *cast_element_pt =
-        dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+      ELEMENT* cast_element_pt =
+        dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
       // Find the centre of the element
       cast_element_pt->interpolated_x(s, x);
 
@@ -1046,8 +1046,8 @@ public:
       // Loop over all the faces
       for (unsigned f = 0; f < 4; f++)
       {
-        DGFaceElement *face_element_pt =
-          dynamic_cast<DGFaceElement *>(cast_element_pt->face_element_pt(f));
+        DGFaceElement* face_element_pt =
+          dynamic_cast<DGFaceElement*>(cast_element_pt->face_element_pt(f));
 
         // Get the average of the nodal points on the face
         //(***NOT GENERAL**)
@@ -1068,7 +1068,7 @@ public:
         DenseMatrix<double> centre_x(n_face_node, n_dim);
 
         // Neighbours face
-        FaceElement *neighbour_face_pt = 0;
+        FaceElement* neighbour_face_pt = 0;
 
         // Now calculate those average values
         for (unsigned n = 0; n < n_face_node; n++)
@@ -1103,11 +1103,11 @@ public:
             face_element_pt->face_index(), s_bulk, neighbour_face_pt, s_face);
 
           // Get the fluxes of the neighbour
-          dynamic_cast<DGFaceElement *>(neighbour_face_pt)
+          dynamic_cast<DGFaceElement*>(neighbour_face_pt)
             ->interpolated_u(s_face, interpolated_u);
           // Add the flux from the neighbour
-          ELEMENT *neighbour_bulk_element_pt =
-            dynamic_cast<ELEMENT *>(neighbour_face_pt->bulk_element_pt());
+          ELEMENT* neighbour_bulk_element_pt =
+            dynamic_cast<ELEMENT*>(neighbour_face_pt->bulk_element_pt());
 
           /*std::cout << "Values at face neighbour :";
           for(unsigned i=0;i<n_flux;i++)
@@ -1331,8 +1331,8 @@ public:
 
     for (unsigned e = 0; e < n_element; e++)
     {
-      ELEMENT *cast_element_pt =
-        dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+      ELEMENT* cast_element_pt =
+        dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
       /*std::cout << "Base element \n";
         cast_element_pt->output(std::cout);*/
@@ -1342,7 +1342,7 @@ public:
       // Get the neighbours
       for (unsigned f = 0; f < 4; f++)
       {
-        ELEMENT *neighbour_bulk_element_pt = bulk_neighbour(e, f);
+        ELEMENT* neighbour_bulk_element_pt = bulk_neighbour(e, f);
 
         /*std::cout << "Neighbour face" << f << "\n";
           neighbour_bulk_element_pt->output(std::cout);*/
@@ -1409,7 +1409,7 @@ public:
       DenseMatrix<double> dx(n_node, 2);
       for (unsigned n = 0; n < n_node; n++)
       {
-        Node *nod_pt = cast_element_pt->node_pt(n);
+        Node* nod_pt = cast_element_pt->node_pt(n);
         for (unsigned i = 0; i < n_dim; i++)
         {
           dx(n, i) = nod_pt->x(i) - x[i];
@@ -1578,7 +1578,7 @@ public:
       for (unsigned n = 0; n < n_node; n++)
       {
         // Cache the node
-        Node *nod_pt = cast_element_pt->node_pt(n);
+        Node* nod_pt = cast_element_pt->node_pt(n);
         for (unsigned i = 0; i < n_flux; i++)
         {
           // Only limit if it's not pinned!
@@ -1595,7 +1595,7 @@ public:
     }
   }
 
-  void parameter_study(std::ostream &trace, const bool &disc)
+  void parameter_study(std::ostream& trace, const bool& disc)
   {
     this->enable_mass_matrix_reuse();
     double dt = 0.001;

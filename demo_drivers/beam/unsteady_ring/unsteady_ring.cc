@@ -58,10 +58,10 @@ namespace Global_Physical_Variables
   double T_kick;
 
   /// Load function: Perturbation pressure to force non-axisymmetric deformation
-  void press_load(const Vector<double> &xi,
-                  const Vector<double> &x,
-                  const Vector<double> &N,
-                  Vector<double> &load)
+  void press_load(const Vector<double>& xi,
+                  const Vector<double>& x,
+                  const Vector<double>& N,
+                  Vector<double>& load)
   {
     for (unsigned i = 0; i < 2; i++)
     {
@@ -93,12 +93,12 @@ class ElasticRingProblem : public Problem
 {
 public:
   /// Constructor: Number of elements
-  ElasticRingProblem(const unsigned &n_element);
+  ElasticRingProblem(const unsigned& n_element);
 
   /// Access function for the specific mesh
-  OneDLagrangianMesh<ELEMENT> *mesh_pt()
+  OneDLagrangianMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<OneDLagrangianMesh<ELEMENT> *>(Problem::mesh_pt());
+    return dynamic_cast<OneDLagrangianMesh<ELEMENT>*>(Problem::mesh_pt());
   }
 
   /// Update function is empty
@@ -111,18 +111,18 @@ public:
   void set_initial_conditions();
 
   /// Doc solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// Do unsteady run
   void unsteady_run();
 
   /// \short Dump problem-specific parameter values, then dump
   /// generic problem data.
-  void dump_it(ofstream &dump_file);
+  void dump_it(ofstream& dump_file);
 
   /// \short Read problem-specific parameter values, then recover
   /// generic problem data.
-  void restart(ifstream &restart_file);
+  void restart(ifstream& restart_file);
 
 private:
   /// Trace file for recording control data
@@ -141,7 +141,7 @@ private:
 //======================================================================
 template<class ELEMENT, class TIMESTEPPER>
 ElasticRingProblem<ELEMENT, TIMESTEPPER>::ElasticRingProblem(
-  const unsigned &n_element) :
+  const unsigned& n_element) :
   Validation_run_flag(0), // default: false
   Restart_flag(false)
 {
@@ -150,7 +150,7 @@ ElasticRingProblem<ELEMENT, TIMESTEPPER>::ElasticRingProblem(
   add_time_stepper_pt(new TIMESTEPPER());
 
   // Undeformed beam is an ellipse with unit axes
-  GeomObject *undef_geom_pt = new Ellipse(1.0, 1.0);
+  GeomObject* undef_geom_pt = new Ellipse(1.0, 1.0);
 
   // Length of domain
   double length = MathematicalConstants::Pi / 2.0;
@@ -182,7 +182,7 @@ ElasticRingProblem<ELEMENT, TIMESTEPPER>::ElasticRingProblem(
   for (unsigned i = 0; i < n_element; i++)
   {
     // Cast to proper element type
-    ELEMENT *elem_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* elem_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Pass pointer to square of timescale ratio (non-dimensional density)
     elem_pt->lambda_sq_pt() = &Global_Physical_Variables::Lambda_sq;
@@ -206,7 +206,7 @@ ElasticRingProblem<ELEMENT, TIMESTEPPER>::ElasticRingProblem(
 /// Document solution
 //========================================================================
 template<class ELEMENT, class TIMESTEPPER>
-void ElasticRingProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo &doc_info)
+void ElasticRingProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo& doc_info)
 {
   cout << "Doc-ing step " << doc_info.number() << " for time "
        << time_stepper_pt()->time_pt()->time() << std::endl;
@@ -218,13 +218,13 @@ void ElasticRingProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo &doc_info)
   double pot, kin;
   for (unsigned ielem = 0; ielem < n_elem; ielem++)
   {
-    dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(ielem))->get_energy(pot, kin);
+    dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(ielem))->get_energy(pot, kin);
     global_kin += kin;
     global_pot += pot;
   }
 
   // Get pointer to last element to document displacement
-  FiniteElement *trace_elem_pt = mesh_pt()->finite_element_pt(n_elem - 1);
+  FiniteElement* trace_elem_pt = mesh_pt()->finite_element_pt(n_elem - 1);
 
   // Vector of local coordinates at control point
   Vector<double> s_trace(1);
@@ -274,7 +274,7 @@ void ElasticRingProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo &doc_info)
     unsigned n_elem = mesh_pt()->nelement();
     for (unsigned ielem = 0; ielem < n_elem; ielem++)
     {
-      dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(ielem))
+      dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(ielem))
         ->output(t, some_file, npts);
     }
     some_file.close();
@@ -296,7 +296,7 @@ void ElasticRingProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo &doc_info)
 /// generic problem data.
 //=======================================================================
 template<class ELEMENT, class TIMESTEPPER>
-void ElasticRingProblem<ELEMENT, TIMESTEPPER>::dump_it(ofstream &dump_file)
+void ElasticRingProblem<ELEMENT, TIMESTEPPER>::dump_it(ofstream& dump_file)
 
 {
   // Write Pcos
@@ -315,7 +315,7 @@ void ElasticRingProblem<ELEMENT, TIMESTEPPER>::dump_it(ofstream &dump_file)
 /// generic problem data.
 //=======================================================================
 template<class ELEMENT, class TIMESTEPPER>
-void ElasticRingProblem<ELEMENT, TIMESTEPPER>::restart(ifstream &restart_file)
+void ElasticRingProblem<ELEMENT, TIMESTEPPER>::restart(ifstream& restart_file)
 {
   string input_string;
 
@@ -359,7 +359,7 @@ void ElasticRingProblem<ELEMENT, TIMESTEPPER>::set_initial_conditions()
   else
   {
     // Try to open restart file
-    ifstream *restart_file_pt =
+    ifstream* restart_file_pt =
       new ifstream(CommandLineArgs::Argv[2], ios_base::in);
     if (restart_file_pt != 0)
     {
@@ -501,7 +501,7 @@ void ElasticRingProblem<ELEMENT, TIMESTEPPER>::unsteady_run()
 //===start_of_main=====================================================
 /// Driver for oscillating ring problem
 //=====================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

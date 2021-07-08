@@ -77,7 +77,7 @@ namespace oomph
   public:
     /// \short Constructor: Pass pointer to Domain and the number of the
     ///  MacroElement within that Domain.
-    MacroElement(Domain *domain_pt, const unsigned &macro_element_number) :
+    MacroElement(Domain* domain_pt, const unsigned& macro_element_number) :
       Domain_pt(domain_pt), Macro_element_number(macro_element_number)
     {
 #ifdef LEAK_CHECK
@@ -94,13 +94,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    MacroElement(const MacroElement &dummy)
+    MacroElement(const MacroElement& dummy)
     {
       BrokenCopy::broken_copy("MacroElement");
     }
 
     /// Broken assignment operator
-    void operator=(const MacroElement &)
+    void operator=(const MacroElement&)
     {
       BrokenCopy::broken_assign("MacroElement");
     }
@@ -115,7 +115,7 @@ namespace oomph
 
     /// \short Plot: x,y (or x,y,z) at current time in tecplot
     /// format
-    void output(std::ostream &outfile, const int &nplot)
+    void output(std::ostream& outfile, const int& nplot)
     {
       unsigned t = 0;
       output(t, outfile, nplot);
@@ -123,12 +123,12 @@ namespace oomph
 
     /// \short Plot: x,y (or x,y,z) in tecplot format at time level t
     ///  (t=0: current; t>0: previous)
-    virtual void output(const unsigned &t,
-                        std::ostream &outfile,
-                        const unsigned &nplot) = 0;
+    virtual void output(const unsigned& t,
+                        std::ostream& outfile,
+                        const unsigned& nplot) = 0;
 
     /// The mapping from local to global coordinates at the current time : r(s)
-    void macro_map(const Vector<double> &s, Vector<double> &r)
+    void macro_map(const Vector<double>& s, Vector<double>& r)
     {
       // Evaluate at current timestep
       unsigned t = 0;
@@ -138,19 +138,19 @@ namespace oomph
     ///\short The time-dependent mapping from local to global coordinates:
     /// r(t,s).
     /// t is the discrete timelevel: t=0: current time; t>0: previous timestep.
-    virtual void macro_map(const unsigned &t,
-                           const Vector<double> &s,
-                           Vector<double> &r) = 0;
+    virtual void macro_map(const unsigned& t,
+                           const Vector<double>& s,
+                           Vector<double>& r) = 0;
 
     /// \short Output all macro element boundaries as tecplot zones
-    virtual void output_macro_element_boundaries(std::ostream &outfile,
-                                                 const unsigned &nplot) = 0;
+    virtual void output_macro_element_boundaries(std::ostream& outfile,
+                                                 const unsigned& nplot) = 0;
 
     ///\short the jacobian of the mapping from the macro coordinates to the
     /// global
     /// coordinates
     virtual void assemble_macro_to_eulerian_jacobian(
-      const unsigned &t, const Vector<double> &s, DenseMatrix<double> &jacobian)
+      const unsigned& t, const Vector<double>& s, DenseMatrix<double>& jacobian)
     {
       // error message stream
       std::ostringstream error_message;
@@ -165,9 +165,9 @@ namespace oomph
     ///\short Assembles the second derivative jacobian of the mapping from the
     /// macro coordinates to the global coordinates
     virtual void assemble_macro_to_eulerian_jacobian2(
-      const unsigned &t,
-      const Vector<double> &s,
-      DenseMatrix<double> &jacobian2)
+      const unsigned& t,
+      const Vector<double>& s,
+      DenseMatrix<double>& jacobian2)
     {
       // error message stream
       std::ostringstream error_message;
@@ -182,8 +182,8 @@ namespace oomph
     ///\short Assembles the jacobian of the mapping from the macro coordinates
     /// to
     /// the global coordinates
-    void assemble_macro_to_eulerian_jacobian(const Vector<double> &s,
-                                             DenseMatrix<double> &jacobian)
+    void assemble_macro_to_eulerian_jacobian(const Vector<double>& s,
+                                             DenseMatrix<double>& jacobian)
     {
       unsigned t = 0;
       assemble_macro_to_eulerian_jacobian(t, s, jacobian);
@@ -191,28 +191,28 @@ namespace oomph
 
     ///\short Assembles the second derivative jacobian of the mapping from the
     /// macro coordinates to the global coordinates
-    void assemble_macro_to_eulerian_jacobian2(const Vector<double> &s,
-                                              DenseMatrix<double> &jacobian2)
+    void assemble_macro_to_eulerian_jacobian2(const Vector<double>& s,
+                                              DenseMatrix<double>& jacobian2)
     {
       unsigned t = 0;
       assemble_macro_to_eulerian_jacobian2(t, s, jacobian2);
     }
 
     ///\short Access function to the Macro_element_number
-    unsigned &macro_element_number()
+    unsigned& macro_element_number()
     {
       return Macro_element_number;
     }
 
     ///\short Access function to the Domain_pt
-    Domain *&domain_pt()
+    Domain*& domain_pt()
     {
       return Domain_pt;
     }
 
   protected:
     /// Pointer to domain
-    Domain *Domain_pt;
+    Domain* Domain_pt;
 
     /// What is the number of the current macro element within its domain
     unsigned Macro_element_number;
@@ -256,7 +256,7 @@ namespace oomph
   public:
     /// \short Constructor: Pass the pointer to the domain and the macro
     /// element's number within this domain
-    QMacroElement(Domain *domain_pt, const unsigned &macro_element_number) :
+    QMacroElement(Domain* domain_pt, const unsigned& macro_element_number) :
       MacroElement(domain_pt, macro_element_number){};
 
     /// Default constructor (empty and broken)
@@ -268,13 +268,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    QMacroElement(const QMacroElement &dummy)
+    QMacroElement(const QMacroElement& dummy)
     {
       BrokenCopy::broken_copy("QMacroElement");
     }
 
     /// Broken assignment operator
-    void operator=(const QMacroElement &)
+    void operator=(const QMacroElement&)
     {
       BrokenCopy::broken_assign("QMacroElement");
     }
@@ -284,7 +284,7 @@ namespace oomph
 
     /// \short Plot: x,y in tecplot format at time level t (t=0: current;
     /// t>0: previous)
-    void output(const unsigned &t, std::ostream &outfile, const unsigned &nplot)
+    void output(const unsigned& t, std::ostream& outfile, const unsigned& nplot)
     {
       Vector<double> x(2), f(2);
       outfile << "ZONE I=" << nplot << ", J=" << nplot << std::endl;
@@ -301,28 +301,28 @@ namespace oomph
     }
 
     /// \short Output all macro element boundaries as tecplot zones
-    void output_macro_element_boundaries(std::ostream &outfile,
-                                         const unsigned &nplot);
+    void output_macro_element_boundaries(std::ostream& outfile,
+                                         const unsigned& nplot);
 
     /// \short Get global position r(S) at discrete time level t.
     /// t=0: Present time; t>0: previous timestep.
-    void macro_map(const unsigned &t,
-                   const Vector<double> &S,
-                   Vector<double> &r);
+    void macro_map(const unsigned& t,
+                   const Vector<double>& S,
+                   Vector<double>& r);
 
     ///\short assemble the jacobian of the mapping from the macro coordinates to
     /// the global coordinates
     virtual void assemble_macro_to_eulerian_jacobian(
-      const unsigned &t,
-      const Vector<double> &s,
-      DenseMatrix<double> &jacobian);
+      const unsigned& t,
+      const Vector<double>& s,
+      DenseMatrix<double>& jacobian);
 
     /// \short Assembles the second derivative jacobian of the mapping from the
     /// macro coordinates to global coordinates x
     virtual void assemble_macro_to_eulerian_jacobian2(
-      const unsigned &t,
-      const Vector<double> &s,
-      DenseMatrix<double> &jacobian2);
+      const unsigned& t,
+      const Vector<double>& s,
+      DenseMatrix<double>& jacobian2);
   };
 
   //================================================================
@@ -347,7 +347,7 @@ namespace oomph
   public:
     /// \short Constructor: Pass the pointer to the domain and the macro
     /// element's number within this domain
-    QMacroElement(Domain *domain_pt, const unsigned &macro_element_number) :
+    QMacroElement(Domain* domain_pt, const unsigned& macro_element_number) :
       MacroElement(domain_pt, macro_element_number){};
 
     /// Default constructor (empty and broken)
@@ -359,13 +359,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    QMacroElement(const QMacroElement &dummy)
+    QMacroElement(const QMacroElement& dummy)
     {
       BrokenCopy::broken_copy("QMacroElement");
     }
 
     /// Broken assignment operator
-    void operator=(const QMacroElement &)
+    void operator=(const QMacroElement&)
     {
       BrokenCopy::broken_assign("QMacroElement");
     }
@@ -375,7 +375,7 @@ namespace oomph
 
     /// \short Plot: x,y in tecplot format at time level t (t=0: current;
     /// t>0: previous)
-    void output(const unsigned &t, std::ostream &outfile, const unsigned &nplot)
+    void output(const unsigned& t, std::ostream& outfile, const unsigned& nplot)
     {
       Vector<double> x(3), f(3);
 
@@ -402,14 +402,14 @@ namespace oomph
     }
 
     /// \short Output all macro element boundaries as tecplot zones
-    void output_macro_element_boundaries(std::ostream &outfile,
-                                         const unsigned &nplot);
+    void output_macro_element_boundaries(std::ostream& outfile,
+                                         const unsigned& nplot);
 
     /// \short Get global position r(S) at discrete time level t.
     /// t=0: Present time; t>0: previous timestep.
-    void macro_map(const unsigned &t,
-                   const Vector<double> &S,
-                   Vector<double> &r);
+    void macro_map(const unsigned& t,
+                   const Vector<double>& S,
+                   Vector<double>& r);
   };
 
 } // namespace oomph

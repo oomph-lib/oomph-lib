@@ -56,16 +56,16 @@ namespace oomph
     /// for the streamfunction components.
     /// The default is to asssume that n is the local node number
     /// and the streamfunction component is the 1st unknown stored at the node.
-    virtual inline int s_local_eqn(const unsigned &n)
+    virtual inline int s_local_eqn(const unsigned& n)
     {
       return nodal_local_eqn(n, 0);
     }
 
     ///\short Function to compute the shape and test functions and to return
     /// the Jacobian of mapping
-    inline double shape_and_test_at_knot(const unsigned &ipt,
-                                         Shape &psi,
-                                         Shape &test) const
+    inline double shape_and_test_at_knot(const unsigned& ipt,
+                                         Shape& psi,
+                                         Shape& test) const
     {
       // Find number of nodes
       unsigned n_node = nnode();
@@ -83,12 +83,12 @@ namespace oomph
     ///\short This function returns the residuals for the
     /// traction function.
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
-    void fill_in_generic_residual_contribution(Vector<double> &residuals,
-                                               DenseMatrix<double> &jacobian,
-                                               DenseMatrix<double> &mass_matrix,
+    void fill_in_generic_residual_contribution(Vector<double>& residuals,
+                                               DenseMatrix<double>& jacobian,
+                                               DenseMatrix<double>& mass_matrix,
                                                unsigned flag);
     /// Pointer to the angle alpha
-    double *Alpha_pt;
+    double* Alpha_pt;
 
     // Traction elements need to know whether they're at the inlet or outlet
     // as the unit outward normal has a differing sign dependent on
@@ -98,13 +98,13 @@ namespace oomph
 
   public:
     /// Alpha
-    const double &alpha() const
+    const double& alpha() const
     {
       return *Alpha_pt;
     }
 
     /// Pointer to Alpha
-    double *&alpha_pt()
+    double*& alpha_pt()
     {
       return Alpha_pt;
     }
@@ -123,19 +123,19 @@ namespace oomph
 
     /// Constructor, which takes a "bulk" element and the value of the index
     /// and its limit
-    PolarStreamfunctionTractionElement(FiniteElement *const &element_pt,
-                                       const int &face_index) :
+    PolarStreamfunctionTractionElement(FiniteElement* const& element_pt,
+                                       const int& face_index) :
       FaceGeometry<ELEMENT>(), FaceElement()
     {
 #ifdef PARANOID
       {
         // Check that the element is not a refineable 3d element
-        ELEMENT *elem_pt = new ELEMENT;
+        ELEMENT* elem_pt = new ELEMENT;
         // If it's three-d
         if (elem_pt->dim() == 3)
         {
           // Is it refineable
-          if (dynamic_cast<RefineableElement *>(elem_pt))
+          if (dynamic_cast<RefineableElement*>(elem_pt))
           {
             // Issue a warning
             OomphLibWarning("This flux element will not work correctly if "
@@ -159,7 +159,7 @@ namespace oomph
     ~PolarStreamfunctionTractionElement() {}
 
     /// This function returns just the residuals
-    inline void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    inline void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Call the generic residuals function with flag set to 0
       // using a dummy matrix argument
@@ -170,8 +170,8 @@ namespace oomph
     }
 
     /// This function returns the residuals and the jacobian
-    inline void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                                 DenseMatrix<double> &jacobian)
+    inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                                 DenseMatrix<double>& jacobian)
     {
       // Call the generic routine with the flag set to 1
       fill_in_generic_residual_contribution(
@@ -181,9 +181,9 @@ namespace oomph
     ///\short Compute the element's residual Vector and the jacobian matrix
     /// Plus the mass matrix especially for eigenvalue problems
     void fill_in_contribution_to_jacobian_and_mass_matrix(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix)
     {
       // Call the generic routine with the flag set to 2
       fill_in_generic_residual_contribution(
@@ -191,25 +191,25 @@ namespace oomph
     }
 
     /// Overload the output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       FiniteElement::output(outfile);
     }
 
     /// Output function: x,y,[z],u,v,[w],p in tecplot format
-    void output(std::ostream &outfile, const unsigned &nplot)
+    void output(std::ostream& outfile, const unsigned& nplot)
     {
       FiniteElement::output(outfile, nplot);
     }
 
     /// local streamfunction
-    double s(const unsigned &l)
+    double s(const unsigned& l)
     {
       return nodal_value(l, 0);
     }
 
     /// local position
-    double x(const unsigned &l, const unsigned &i)
+    double x(const unsigned& l, const unsigned& i)
     {
       return nodal_position(l, i);
     }
@@ -225,9 +225,9 @@ namespace oomph
   //============================================================================
   template<class ELEMENT>
   void PolarStreamfunctionTractionElement<ELEMENT>::
-    fill_in_generic_residual_contribution(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian,
-                                          DenseMatrix<double> &mass_matrix,
+    fill_in_generic_residual_contribution(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian,
+                                          DenseMatrix<double>& mass_matrix,
                                           unsigned flag)
   {
     // Find out how many nodes there are

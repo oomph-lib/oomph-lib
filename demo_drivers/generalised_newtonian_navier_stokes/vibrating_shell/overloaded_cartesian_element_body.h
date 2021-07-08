@@ -77,7 +77,7 @@ MyTaylorHoodElement()
 
 /// \short Number of previous history values to be used for  extrapolation
 /// of strain rate
-unsigned &nprev_for_extrapolation_of_strain_rate()
+unsigned& nprev_for_extrapolation_of_strain_rate()
 {
   return Nprev_for_extrapolation_of_strain_rate;
 }
@@ -113,7 +113,7 @@ void disable_aitken_extrapolation()
 /// Return latest guess (obtained via fixed point iteration)
 /// for strain rate at integration point ipt
 void latest_fixed_point_iteration_guess_for_strain_rate(
-  const unsigned &ipt, DenseMatrix<double> &strainrate) const
+  const unsigned& ipt, DenseMatrix<double>& strainrate) const
 {
   for (unsigned i = 0; i < el_dim; i++)
   {
@@ -186,8 +186,8 @@ void update_latest_fixed_point_iteration_guess_for_strain_rate()
 /// \f$ i,j = r,z,\theta \f$ (in that order). Extrapolated
 /// from history values evaluated at integration point ipt. Overloaded
 /// version from base class.
-void extrapolated_strain_rate(const unsigned &ipt,
-                              DenseMatrix<double> &strainrate) const
+void extrapolated_strain_rate(const unsigned& ipt,
+                              DenseMatrix<double>& strainrate) const
 {
   if (Use_fixed_point_for_strain_rate)
   {
@@ -205,8 +205,8 @@ void extrapolated_strain_rate(const unsigned &ipt,
 /// \f$ i,j = r,z,\theta \f$ (in that order). Extrapolated
 /// from history values evaluated at local coordinate s. Overloaded
 /// version from base class.
-void extrapolated_strain_rate(const Vector<double> &s,
-                              DenseMatrix<double> &strainrate) const
+void extrapolated_strain_rate(const Vector<double>& s,
+                              DenseMatrix<double>& strainrate) const
 {
 #ifdef PARANOID
   if ((strainrate.ncol() != 2) || (strainrate.nrow() != 2))
@@ -231,7 +231,7 @@ void extrapolated_strain_rate(const Vector<double> &s,
   }
 
   // Get timestepper from first node
-  TimeStepper *time_stepper_pt = node_pt(0)->time_stepper_pt();
+  TimeStepper* time_stepper_pt = node_pt(0)->time_stepper_pt();
 
   // hierher #ifdef PARANOID
   if (time_stepper_pt->nprev_values() < Nprev_for_extrapolation_of_strain_rate)
@@ -495,7 +495,7 @@ void extrapolated_strain_rate(const Vector<double> &s,
 }
 
 /// Set error value for post-processing
-void set_error(const double &error)
+void set_error(const double& error)
 {
   Error = error;
 }
@@ -549,7 +549,7 @@ std::string variable_identifier()
 }
 
 /// Overload output function
-void output(std::ostream &outfile, const unsigned &nplot)
+void output(std::ostream& outfile, const unsigned& nplot)
 {
   // Vector of local coordinates
   Vector<double> s(el_dim);
@@ -789,7 +789,7 @@ void output(std::ostream &outfile, const unsigned &nplot)
 }
 
 /// \short Get 'flux' for Z2 error recovery
-void get_Z2_flux(const Vector<double> &s, Vector<double> &flux)
+void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
 {
 #ifdef PARANOID
   unsigned num_entries = el_dim + (el_dim * (el_dim - 1)) / 2;
@@ -879,9 +879,9 @@ void get_Z2_flux(const Vector<double> &s, Vector<double> &flux)
 /// \short Get square of L2 norms of (i) strain invariant, (ii) its
 /// extrapolated value, (iii) difference between the two. Returns area
 /// as a check
-double square_of_norm_of_strain_invariant(double &norm_squared,
-                                          double &extrapolated_norm_squared,
-                                          double &error_norm_squared)
+double square_of_norm_of_strain_invariant(double& norm_squared,
+                                          double& extrapolated_norm_squared,
+                                          double& error_norm_squared)
 {
   // Initialise
   norm_squared = 0.0;
@@ -940,9 +940,9 @@ double square_of_norm_of_strain_invariant(double &norm_squared,
 /// \short Get square of L2 norms of (i) viscosity, (ii) its
 /// extrapolated value, (iii) difference between the two. Returns area
 /// as a check
-double square_of_norm_of_viscosity(double &norm_squared,
-                                   double &extrapolated_norm_squared,
-                                   double &error_norm_squared)
+double square_of_norm_of_viscosity(double& norm_squared,
+                                   double& extrapolated_norm_squared,
+                                   double& error_norm_squared)
 {
   // Initialise
   norm_squared = 0.0;
@@ -1006,9 +1006,9 @@ double square_of_norm_of_viscosity(double &norm_squared,
 /// \short Get square of L2 norms of (i) current strainrate, (ii) its
 /// latest guess from fixed point iteration, (iii) difference
 /// between the two. Returns area as a check
-double square_of_norm_of_fixed_point(double &norm_squared,
-                                     double &latest_guess_norm_squared,
-                                     double &error_norm_squared)
+double square_of_norm_of_fixed_point(double& norm_squared,
+                                     double& latest_guess_norm_squared,
+                                     double& error_norm_squared)
 {
   // Initialise
   norm_squared = 0.0;

@@ -85,12 +85,12 @@ namespace oomph
 
     /// \short Constructor with the input files
     QuadFromTriangleMesh(
-      const std::string &node_file_name,
-      const std::string &element_file_name,
-      const std::string &poly_file_name,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper,
-      const bool &use_attributes = false,
-      const bool &allow_automatic_creation_of_vertices_on_boundaries = true)
+      const std::string& node_file_name,
+      const std::string& element_file_name,
+      const std::string& poly_file_name,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
+      const bool& use_attributes = false,
+      const bool& allow_automatic_creation_of_vertices_on_boundaries = true)
     {
       // Mesh can only be built with 2D Qelements.
       MeshChecker::assert_geometric_element<QElementGeometricBase, ELEMENT>(2);
@@ -106,7 +106,7 @@ namespace oomph
       this->Use_attributes = use_attributes;
 
       // Build scaffold
-      TriangleScaffoldMesh *tmp_mesh_pt = new TriangleScaffoldMesh(
+      TriangleScaffoldMesh* tmp_mesh_pt = new TriangleScaffoldMesh(
         node_file_name, element_file_name, poly_file_name);
 
       // Convert mesh from scaffold to actual mesh
@@ -130,8 +130,8 @@ namespace oomph
     /// TriangleMeshParameters. All the actual work is done
     /// in UnstructuredTwoDMeshGeometryBase
     QuadFromTriangleMesh(
-      TriangleMeshParameters &triangle_mesh_parameters,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper)
+      TriangleMeshParameters& triangle_mesh_parameters,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
     {
       // Mesh can only be built with 2D Qelements.
       MeshChecker::assert_geometric_element<QElementGeometricBase, ELEMENT>(2);
@@ -159,7 +159,7 @@ namespace oomph
       // *****************************************************************
       // Get the representation of the outer boundaries from the
       // TriangleMeshParameters object
-      Vector<TriangleMeshClosedCurve *> outer_boundary_pt =
+      Vector<TriangleMeshClosedCurve*> outer_boundary_pt =
         triangle_mesh_parameters.outer_boundary_pt();
 
 #ifdef PARANOID
@@ -183,7 +183,7 @@ namespace oomph
       unsigned n_outer_boundaries = outer_boundary_pt.size();
 
       // Create the storage for the polygons that define the outer boundaries
-      Vector<TriangleMeshPolygon *> outer_boundary_polygon_pt(
+      Vector<TriangleMeshPolygon*> outer_boundary_polygon_pt(
         n_outer_boundaries);
 
       // Loop over the number of outer boundaries
@@ -202,7 +202,7 @@ namespace oomph
       // *****************************************************************
       // Get the representation of the internal closed boundaries from the
       // TriangleMeshParameters object
-      Vector<TriangleMeshClosedCurve *> internal_closed_curve_pt =
+      Vector<TriangleMeshClosedCurve*> internal_closed_curve_pt =
         triangle_mesh_parameters.internal_closed_curve_pt();
 
       // Find the number of internal closed curves
@@ -211,7 +211,7 @@ namespace oomph
       // Create the storage for the polygons that define the internal closed
       // boundaries (again nothing happens (as above) if an internal closed
       // curve is already a polygon)
-      Vector<TriangleMeshPolygon *> internal_polygon_pt(
+      Vector<TriangleMeshPolygon*> internal_polygon_pt(
         n_internal_closed_curves);
 
       // Loop over the number of internal closed curves
@@ -228,14 +228,14 @@ namespace oomph
       // *****************************************************************
       // Get the representation of open boundaries from the
       // TriangleMeshParameteres object
-      Vector<TriangleMeshOpenCurve *> internal_open_curve_pt =
+      Vector<TriangleMeshOpenCurve*> internal_open_curve_pt =
         triangle_mesh_parameters.internal_open_curves_pt();
 
       // Find the number of internal open curves
       unsigned n_internal_open_curves = internal_open_curve_pt.size();
 
       // Create the storage for the polylines that define the open boundaries
-      Vector<TriangleMeshOpenCurve *> internal_open_curve_poly_pt(
+      Vector<TriangleMeshOpenCurve*> internal_open_curve_poly_pt(
         n_internal_open_curves);
 
       // Loop over the number of internal open curves
@@ -365,17 +365,17 @@ namespace oomph
     /// mesh once the different specific constructors have assembled the
     /// appropriate information.
     void generic_constructor(
-      Vector<TriangleMeshPolygon *> &outer_boundary_pt,
-      Vector<TriangleMeshPolygon *> &internal_polygon_pt,
-      Vector<TriangleMeshOpenCurve *> &open_polylines_pt,
-      const double &element_area,
-      Vector<Vector<double>> &extra_holes_coordinates,
-      std::map<unsigned, Vector<double>> &regions_coordinates,
-      std::map<unsigned, double> &regions_areas,
-      TimeStepper *time_stepper_pt,
-      const bool &use_attributes,
-      const bool &refine_boundary,
-      const bool &refine_internal_boundary)
+      Vector<TriangleMeshPolygon*>& outer_boundary_pt,
+      Vector<TriangleMeshPolygon*>& internal_polygon_pt,
+      Vector<TriangleMeshOpenCurve*>& open_polylines_pt,
+      const double& element_area,
+      Vector<Vector<double>>& extra_holes_coordinates,
+      std::map<unsigned, Vector<double>>& regions_coordinates,
+      std::map<unsigned, double>& regions_areas,
+      TimeStepper* time_stepper_pt,
+      const bool& use_attributes,
+      const bool& refine_boundary,
+      const bool& refine_internal_boundary)
     {
 #ifdef PARANOID
 
@@ -473,7 +473,7 @@ namespace oomph
       triangulate(triswitches, &triangulate_io, &triangulate_out, 0);
 
       // Build scaffold
-      TriangleScaffoldMesh *tmp_mesh_pt =
+      TriangleScaffoldMesh* tmp_mesh_pt =
         new TriangleScaffoldMesh(triangulate_out);
 
       // If we have filled holes then we must use the attributes
@@ -505,13 +505,13 @@ namespace oomph
 #endif // OOMPH_HAS_TRIANGLE_LIB
 
     /// Broken copy constructor
-    QuadFromTriangleMesh(const QuadFromTriangleMesh &dummy)
+    QuadFromTriangleMesh(const QuadFromTriangleMesh& dummy)
     {
       BrokenCopy::broken_copy("QuadFromTriangleMesh");
     }
 
     /// Broken assignment operator
-    void operator=(const QuadFromTriangleMesh &)
+    void operator=(const QuadFromTriangleMesh&)
     {
       BrokenCopy::broken_assign("QuadFromTriangleMesh");
     }
@@ -521,7 +521,7 @@ namespace oomph
     {
 #ifdef OOMPH_HAS_TRIANGLE_LIB
 
-      std::set<TriangleMeshCurveSection *>::iterator it_polyline;
+      std::set<TriangleMeshCurveSection*>::iterator it_polyline;
       for (it_polyline = Free_curve_section_pt.begin();
            it_polyline != Free_curve_section_pt.end();
            it_polyline++)
@@ -529,7 +529,7 @@ namespace oomph
         delete (*it_polyline);
       }
 
-      std::set<TriangleMeshPolygon *>::iterator it_polygon;
+      std::set<TriangleMeshPolygon*>::iterator it_polygon;
       for (it_polygon = Free_polygon_pt.begin();
            it_polygon != Free_polygon_pt.end();
            it_polygon++)
@@ -537,7 +537,7 @@ namespace oomph
         delete (*it_polygon);
       }
 
-      std::set<TriangleMeshOpenCurve *>::iterator it_open_polyline;
+      std::set<TriangleMeshOpenCurve*>::iterator it_open_polyline;
       for (it_open_polyline = Free_open_curve_pt.begin();
            it_open_polyline != Free_open_curve_pt.end();
            it_open_polyline++)
@@ -549,12 +549,12 @@ namespace oomph
     }
 
     /// Build the quad mesh from the given scaffold mesh
-    void build_from_scaffold(TriangleScaffoldMesh *tmp_mesh_pt,
-                             TimeStepper *time_stepper_pt,
-                             const bool &use_attributes);
+    void build_from_scaffold(TriangleScaffoldMesh* tmp_mesh_pt,
+                             TimeStepper* time_stepper_pt,
+                             const bool& use_attributes);
 
     /// Timestepper used to build elements
-    TimeStepper *Time_stepper_pt;
+    TimeStepper* Time_stepper_pt;
 
     /// Boolean flag to indicate whether to use attributes or not (required
     /// for multidomain meshes)
@@ -579,8 +579,8 @@ namespace oomph
     /// \short Build mesh, based on the specifications on
     /// TriangleMeshParameters
     RefineableQuadFromTriangleMesh(
-      TriangleMeshParameters &triangle_mesh_parameters,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      TriangleMeshParameters& triangle_mesh_parameters,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       QuadFromTriangleMesh<ELEMENT>(triangle_mesh_parameters, time_stepper_pt)
     {
       this->setup_quadtree_forest();
@@ -598,7 +598,7 @@ namespace oomph
     }
 
     /// Refine mesh uniformly and doc process
-    void refine_uniformly(DocInfo &doc_info)
+    void refine_uniformly(DocInfo& doc_info)
     {
       // Find the number of elements in the mesh
       unsigned nelem = this->nelement();
@@ -612,14 +612,14 @@ namespace oomph
 
     /// Overload the adapt function (to ensure nodes are snapped to the
     /// boundary)
-    void adapt(const Vector<double> &elem_error);
+    void adapt(const Vector<double>& elem_error);
 
     /// \short Build mesh, based on the polyfiles
     RefineableQuadFromTriangleMesh(
-      const std::string &node_file_name,
-      const std::string &element_file_name,
-      const std::string &poly_file_name,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      const std::string& node_file_name,
+      const std::string& element_file_name,
+      const std::string& poly_file_name,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       QuadFromTriangleMesh<ELEMENT>(
         node_file_name, element_file_name, poly_file_name, time_stepper_pt)
     {
@@ -644,11 +644,11 @@ namespace oomph
   {
   public:
     SolidQuadFromTriangleMesh(
-      const std::string &node_file_name,
-      const std::string &element_file_name,
-      const std::string &poly_file_name,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper,
-      const bool &use_attributes = false) :
+      const std::string& node_file_name,
+      const std::string& element_file_name,
+      const std::string& poly_file_name,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
+      const bool& use_attributes = false) :
       QuadFromTriangleMesh<ELEMENT>(node_file_name,
                                     element_file_name,
                                     poly_file_name,
@@ -665,8 +665,8 @@ namespace oomph
     /// the outer boundary of the domain and any number of internal
     /// clsed curves. Specify target area for uniform element size.
     SolidQuadFromTriangleMesh(
-      TriangleMeshParameters &triangle_mesh_parameters,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      TriangleMeshParameters& triangle_mesh_parameters,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       QuadFromTriangleMesh<ELEMENT>(triangle_mesh_parameters, time_stepper_pt)
     {
       // Assign the Lagrangian coordinates
@@ -695,11 +695,11 @@ namespace oomph
     /// \short Build mesh from specified triangulation and associated
     /// target areas for elements in it.
     RefineableSolidQuadFromTriangleMesh(
-      const std::string &node_file_name,
-      const std::string &element_file_name,
-      const std::string &poly_file_name,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper,
-      const bool &use_attributes = false) :
+      const std::string& node_file_name,
+      const std::string& element_file_name,
+      const std::string& poly_file_name,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
+      const bool& use_attributes = false) :
       RefineableQuadFromTriangleMesh<ELEMENT>(node_file_name,
                                               element_file_name,
                                               poly_file_name,
@@ -715,8 +715,8 @@ namespace oomph
     /// \short Build mesh, based on the specifications on
     /// TriangleMeshParameter
     RefineableSolidQuadFromTriangleMesh(
-      TriangleMeshParameters &triangle_mesh_parameters,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      TriangleMeshParameters& triangle_mesh_parameters,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       QuadFromTriangleMesh<ELEMENT>(triangle_mesh_parameters, time_stepper_pt),
       RefineableQuadFromTriangleMesh<ELEMENT>(triangle_mesh_parameters,
                                               time_stepper_pt)

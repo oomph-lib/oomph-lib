@@ -52,10 +52,10 @@ using namespace oomph;
 namespace Global_Physical_Variables
 {
   /// Pointer to strain energy function
-  StrainEnergyFunction *Strain_energy_function_pt;
+  StrainEnergyFunction* Strain_energy_function_pt;
 
   /// Pointer to constitutive law
-  ConstitutiveLaw *Constitutive_law_pt;
+  ConstitutiveLaw* Constitutive_law_pt;
 
   /// Elastic modulus
   double E = 1.0;
@@ -70,10 +70,10 @@ namespace Global_Physical_Variables
   double P = 0.0;
 
   /// Constant pressure load
-  void constant_pressure(const Vector<double> &xi,
-                         const Vector<double> &x,
-                         const Vector<double> &n,
-                         Vector<double> &traction)
+  void constant_pressure(const Vector<double>& xi,
+                         const Vector<double>& x,
+                         const Vector<double>& n,
+                         Vector<double>& traction)
   {
     unsigned dim = traction.size();
     for (unsigned i = 0; i < dim; i++)
@@ -86,7 +86,7 @@ namespace Global_Physical_Variables
   double Uniform_gamma = 1.1;
 
   /// Growth function
-  void growth_function(const Vector<double> &xi, double &gamma)
+  void growth_function(const Vector<double>& xi, double& gamma)
   {
     gamma = Uniform_gamma;
   }
@@ -118,11 +118,11 @@ public:
   /// \short Constructor: Build mesh and copy Eulerian coords to Lagrangian
   /// ones so that the initial configuration is the stress-free one.
   ElasticRefineableQuarterCircleSectorMesh<ELEMENT>(
-    GeomObject *wall_pt,
-    const double &xi_lo,
-    const double &fract_mid,
-    const double &xi_hi,
-    TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+    GeomObject* wall_pt,
+    const double& xi_lo,
+    const double& fract_mid,
+    const double& xi_hi,
+    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
     RefineableQuarterCircleSectorMesh<ELEMENT>(
       wall_pt, xi_lo, fract_mid, xi_hi, time_stepper_pt)
   {
@@ -133,7 +133,7 @@ public:
   }
 
   /// Function to create mesh made of traction elements
-  void make_traction_element_mesh(SolidMesh *&traction_mesh_pt)
+  void make_traction_element_mesh(SolidMesh*& traction_mesh_pt)
   {
     // Make new mesh
     traction_mesh_pt = new SolidMesh;
@@ -144,7 +144,7 @@ public:
     for (unsigned e = 0; e < n_element; e++)
     {
       // The element itself:
-      FiniteElement *fe_pt = this->boundary_element_pt(b, e);
+      FiniteElement* fe_pt = this->boundary_element_pt(b, e);
 
       // Find the index of the face of element e along boundary b
       int face_index = this->face_index_at_boundary(b, e);
@@ -168,10 +168,10 @@ public:
   StaticDiskCompressionProblem();
 
   /// Run simulation: Pass case number to label output files
-  void parameter_study(const unsigned &case_number);
+  void parameter_study(const unsigned& case_number);
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// Update function (empty)
   void actions_after_newton_solve() {}
@@ -184,13 +184,13 @@ private:
   ofstream Trace_file;
 
   /// Vector of pointers to nodes whose position we're tracing
-  Vector<Node *> Trace_node_pt;
+  Vector<Node*> Trace_node_pt;
 
   /// Pointer to solid mesh
-  ElasticRefineableQuarterCircleSectorMesh<ELEMENT> *Solid_mesh_pt;
+  ElasticRefineableQuarterCircleSectorMesh<ELEMENT>* Solid_mesh_pt;
 
   /// Pointer to mesh of traction elements
-  SolidMesh *Traction_mesh_pt;
+  SolidMesh* Traction_mesh_pt;
 };
 
 //======================================================================
@@ -201,7 +201,7 @@ StaticDiskCompressionProblem<ELEMENT>::StaticDiskCompressionProblem()
 {
   // Build the geometric object that describes the curvilinear
   // boundary of the quarter circle domain
-  Ellipse *curved_boundary_pt = new Ellipse(1.0, 1.0);
+  Ellipse* curved_boundary_pt = new Ellipse(1.0, 1.0);
 
   // The curved boundary of the mesh is defined by the geometric object
   // What follows are the start and end coordinates on the geometric object:
@@ -263,7 +263,7 @@ StaticDiskCompressionProblem<ELEMENT>::StaticDiskCompressionProblem()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Cast to a solid element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Solid_mesh_pt->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Solid_mesh_pt->element_pt(i));
 
     // Set the constitutive law
     el_pt->constitutive_law_pt() =
@@ -279,8 +279,8 @@ StaticDiskCompressionProblem<ELEMENT>::StaticDiskCompressionProblem()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Cast to a solid traction element
-    SolidTractionElement<ELEMENT> *el_pt =
-      dynamic_cast<SolidTractionElement<ELEMENT> *>(
+    SolidTractionElement<ELEMENT>* el_pt =
+      dynamic_cast<SolidTractionElement<ELEMENT>*>(
         Traction_mesh_pt->element_pt(i));
 
     // Set the traction function
@@ -295,7 +295,7 @@ StaticDiskCompressionProblem<ELEMENT>::StaticDiskCompressionProblem()
 /// Doc the solution
 //==================================================================
 template<class ELEMENT>
-void StaticDiskCompressionProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void StaticDiskCompressionProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -349,7 +349,7 @@ void StaticDiskCompressionProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
 //==================================================================
 template<class ELEMENT>
 void StaticDiskCompressionProblem<ELEMENT>::parameter_study(
-  const unsigned &case_number)
+  const unsigned& case_number)
 {
   // Output
   DocInfo doc_info;
@@ -402,7 +402,7 @@ void StaticDiskCompressionProblem<ELEMENT>::parameter_study(
 //=====start_of_main====================================================
 /// Driver code for disk-compression
 //======================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

@@ -65,16 +65,16 @@ namespace oomph
     extern double Peclet;
 
     /// Wind
-    extern void wind_function(const Vector<double> &x, Vector<double> &wind);
+    extern void wind_function(const Vector<double>& x, Vector<double>& wind);
 
     /// Exact solution as a Vector
-    extern void get_exact_u(const Vector<double> &x, Vector<double> &u);
+    extern void get_exact_u(const Vector<double>& x, Vector<double>& u);
 
     /// Exact solution as a scalar
-    extern void get_exact_u(const Vector<double> &x, double &u);
+    extern void get_exact_u(const Vector<double>& x, double& u);
 
     /// Source function required to make the solution above an exact solution
-    extern double source_function(const Vector<double> &x_vect);
+    extern double source_function(const Vector<double>& x_vect);
 
   } // namespace PressureAdvectionDiffusionValidation
 
@@ -91,7 +91,7 @@ namespace oomph
   {
   public:
     /// Constructor. Pass spatial dimension
-    FpPreconditionerAssemblyHandler(const unsigned &ndim) // : Ndim(ndim)
+    FpPreconditionerAssemblyHandler(const unsigned& ndim) // : Ndim(ndim)
     {
     }
 
@@ -99,8 +99,8 @@ namespace oomph
     virtual ~FpPreconditionerAssemblyHandler() {}
 
     /// \short Return the contribution to the residuals of the element elem_pt
-    void get_residuals(GeneralisedElement *const &elem_pt,
-                       Vector<double> &residuals)
+    void get_residuals(GeneralisedElement* const& elem_pt,
+                       Vector<double>& residuals)
     {
       unsigned n_dof = elem_pt->ndof();
       for (unsigned i = 0; i < n_dof; i++)
@@ -108,15 +108,15 @@ namespace oomph
         residuals[i] = 0.0;
       }
 
-      dynamic_cast<TemplateFreeNavierStokesEquationsBase *>(elem_pt)
+      dynamic_cast<TemplateFreeNavierStokesEquationsBase*>(elem_pt)
         ->fill_in_pressure_advection_diffusion_residuals(residuals);
     }
 
     /// \short Calculate the elemental Jacobian matrix "d equation
     /// / d variable" for elem_pt.
-    void get_jacobian(GeneralisedElement *const &elem_pt,
-                      Vector<double> &residuals,
-                      DenseMatrix<double> &jacobian)
+    void get_jacobian(GeneralisedElement* const& elem_pt,
+                      Vector<double>& residuals,
+                      DenseMatrix<double>& jacobian)
     {
       // Initialise
       unsigned n_dof = elem_pt->ndof();
@@ -129,7 +129,7 @@ namespace oomph
         }
       }
 
-      dynamic_cast<TemplateFreeNavierStokesEquationsBase *>(elem_pt)
+      dynamic_cast<TemplateFreeNavierStokesEquationsBase*>(elem_pt)
         ->fill_in_pressure_advection_diffusion_jacobian(residuals, jacobian);
     }
 
@@ -151,8 +151,8 @@ namespace oomph
   {
   public:
     /// Constructor: Pass Navier-Stokes mesh and pointer to orig problem
-    FpPressureAdvectionDiffusionProblem(Mesh *navier_stokes_mesh_pt,
-                                        Problem *orig_problem_pt)
+    FpPressureAdvectionDiffusionProblem(Mesh* navier_stokes_mesh_pt,
+                                        Problem* orig_problem_pt)
     {
       // Pass across mesh -- boundary conditions have already
       // been applied and the equations have been enumerated.
@@ -170,7 +170,7 @@ namespace oomph
     }
 
     /// Get the pressure advection diffusion Jacobian
-    void get_pressure_advection_diffusion_jacobian(CRDoubleMatrix &jacobian)
+    void get_pressure_advection_diffusion_jacobian(CRDoubleMatrix& jacobian)
     {
       // Pin all non-pressure dofs
       pin_all_non_pressure_dofs();
@@ -199,7 +199,7 @@ namespace oomph
       unsigned nnod = mesh_pt()->nnode();
       for (unsigned j = 0; j < nnod; j++)
       {
-        Node *nod_pt = mesh_pt()->node_pt(j);
+        Node* nod_pt = mesh_pt()->node_pt(j);
         unsigned nval = nod_pt->nvalue();
         for (unsigned i = 0; i < nval; i++)
         {
@@ -212,8 +212,8 @@ namespace oomph
       for (unsigned e = 0; e < nelem; e++)
       {
         // Get actual element
-        ELEMENT *el_pt =
-          dynamic_cast<ELEMENT *>(mesh_pt()->finite_element_pt(e));
+        ELEMENT* el_pt =
+          dynamic_cast<ELEMENT*>(mesh_pt()->finite_element_pt(e));
 
 #ifdef PARANOID
         if (el_pt == 0)
@@ -230,7 +230,7 @@ namespace oomph
         unsigned nint = el_pt->ninternal_data();
         for (unsigned j = 0; j < nint; j++)
         {
-          Data *data_pt = el_pt->internal_data_pt(j);
+          Data* data_pt = el_pt->internal_data_pt(j);
           unsigned nvalue = data_pt->nvalue();
           for (unsigned i = 0; i < nvalue; i++)
           {
@@ -247,7 +247,7 @@ namespace oomph
     /// also all pressure dofs along domain boundaries -- only used
     /// for validation)
     void pin_all_non_pressure_dofs(
-      const bool &set_pressure_bc_for_validation = false)
+      const bool& set_pressure_bc_for_validation = false)
     {
       // Backup pin status and then pin all non-pressure degrees of freedom
       unsigned nelem = mesh_pt()->nelement();
@@ -255,8 +255,8 @@ namespace oomph
       {
         // Get actual element (needed because different elements
         // store nodal pressure in different places)
-        ELEMENT *el_pt =
-          dynamic_cast<ELEMENT *>(mesh_pt()->finite_element_pt(e));
+        ELEMENT* el_pt =
+          dynamic_cast<ELEMENT*>(mesh_pt()->finite_element_pt(e));
 
 #ifdef PARANOID
         if (el_pt == 0)
@@ -287,7 +287,7 @@ namespace oomph
         unsigned nint = el_pt->ninternal_data();
         for (unsigned j = 0; j < nint; j++)
         {
-          Data *data_pt = el_pt->internal_data_pt(j);
+          Data* data_pt = el_pt->internal_data_pt(j);
           if (Eqn_number_backup[data_pt].size() == 0)
           {
             unsigned nvalue = data_pt->nvalue();
@@ -307,7 +307,7 @@ namespace oomph
         unsigned nnod = el_pt->nnode();
         for (unsigned j = 0; j < nnod; j++)
         {
-          Node *nod_pt = el_pt->node_pt(j);
+          Node* nod_pt = el_pt->node_pt(j);
           if (Eqn_number_backup[nod_pt].size() == 0)
           {
             unsigned nvalue = nod_pt->nvalue();
@@ -352,7 +352,7 @@ namespace oomph
 
     /// \short Validate pressure advection diffusion problem and doc exact
     /// and computed solution in directory specified in DocInfo object
-    void validate(DocInfo &doc_info)
+    void validate(DocInfo& doc_info)
     {
       oomph_info << "\n\n==============================================\n\n";
       oomph_info << "Doing validation for pressure adv diff problem\n";
@@ -367,14 +367,13 @@ namespace oomph
 
       // Set Peclet number
       PressureAdvectionDiffusionValidation::Peclet =
-        dynamic_cast<NavierStokesEquations<2> *>(mesh_pt()->element_pt(0))
-          ->re();
+        dynamic_cast<NavierStokesEquations<2>*>(mesh_pt()->element_pt(0))->re();
 
       // Loop over all elements and set source function pointer
       unsigned nel = mesh_pt()->nelement();
       for (unsigned e = 0; e < nel; e++)
       {
-        dynamic_cast<NavierStokesEquations<2> *>(mesh_pt()->element_pt(e))
+        dynamic_cast<NavierStokesEquations<2>*>(mesh_pt()->element_pt(e))
           ->source_fct_for_pressure_adv_diff() =
           &PressureAdvectionDiffusionValidation::source_function;
       }
@@ -396,8 +395,8 @@ namespace oomph
           // Loop over the bulk elements adjacent to boundary b?
           for (unsigned e = 0; e < n_element; e++)
           {
-            TemplateFreeNavierStokesEquationsBase *bulk_elem_pt =
-              dynamic_cast<TemplateFreeNavierStokesEquationsBase *>(
+            TemplateFreeNavierStokesEquationsBase* bulk_elem_pt =
+              dynamic_cast<TemplateFreeNavierStokesEquationsBase*>(
                 mesh_pt()->boundary_element_pt(b, e));
 
             // What is the index of the face of the bulk element e on bondary b
@@ -415,7 +414,7 @@ namespace oomph
       outfile.open("robin_elements.dat");
       for (unsigned e = 0; e < nel; e++)
       {
-        dynamic_cast<NavierStokesEquations<2> *>(mesh_pt()->element_pt(e))
+        dynamic_cast<NavierStokesEquations<2>*>(mesh_pt()->element_pt(e))
           ->output_pressure_advection_diffusion_robin_elements(outfile);
       }
       outfile.close();
@@ -438,8 +437,8 @@ namespace oomph
           // Loop over the bulk elements adjacent to boundary b?
           for (unsigned e = 0; e < n_element; e++)
           {
-            TemplateFreeNavierStokesEquationsBase *bulk_elem_pt =
-              dynamic_cast<TemplateFreeNavierStokesEquationsBase *>(
+            TemplateFreeNavierStokesEquationsBase* bulk_elem_pt =
+              dynamic_cast<TemplateFreeNavierStokesEquationsBase*>(
                 mesh_pt()->boundary_element_pt(b, e));
 
             // Kill associated Robin elements
@@ -462,7 +461,7 @@ namespace oomph
 
     /// \short Doc solution (only needed during development -- kept alive
     /// in case validation is required during code maintenance)
-    void doc_solution(DocInfo &doc_info)
+    void doc_solution(DocInfo& doc_info)
     {
       std::ofstream some_file;
       std::ostringstream filename;
@@ -474,9 +473,9 @@ namespace oomph
       // Check value of FE solution in first element
       Vector<double> s(Ndim, 0.0);
       Vector<double> x(Ndim);
-      double p = dynamic_cast<ELEMENT *>(mesh_pt()->finite_element_pt(0))
+      double p = dynamic_cast<ELEMENT*>(mesh_pt()->finite_element_pt(0))
                    ->interpolated_p_nst(s);
-      dynamic_cast<ELEMENT *>(mesh_pt()->finite_element_pt(0))
+      dynamic_cast<ELEMENT*>(mesh_pt()->finite_element_pt(0))
         ->interpolated_x(s, x);
 
       // Get offset-free exact solution
@@ -517,10 +516,10 @@ namespace oomph
 
     /// \short Pointer to orig problem (required so we can re-assign
     /// eqn numbers)
-    Problem *Orig_problem_pt;
+    Problem* Orig_problem_pt;
 
     /// Map to store original equation numbers
-    std::map<Data *, std::vector<int>> Eqn_number_backup;
+    std::map<Data*, std::vector<int>> Eqn_number_backup;
   };
 
   ////////////////////////////////////////////////////////////////////////////
@@ -638,7 +637,7 @@ namespace oomph
   {
   public:
     /// Constructor - sets defaults for control flags
-    NavierStokesSchurComplementPreconditioner(Problem *problem_pt) :
+    NavierStokesSchurComplementPreconditioner(Problem* problem_pt) :
       BlockPreconditioner<CRDoubleMatrix>(), Problem_pt(problem_pt)
     {
       // Insist that all elements are of type
@@ -699,7 +698,7 @@ namespace oomph
 
     /// Broken copy constructor
     NavierStokesSchurComplementPreconditioner(
-      const NavierStokesSchurComplementPreconditioner &)
+      const NavierStokesSchurComplementPreconditioner&)
     {
       BrokenCopy::broken_copy("NavierStokesSchurComplementPreconditioner");
     }
@@ -717,12 +716,12 @@ namespace oomph
 
     /// Set the problem pointer (non-const pointer, the problem WILL be
     /// changed) for use in get_pressure_advection_diffusion_matrix().
-    void set_problem_pt(Problem *problem_pt)
+    void set_problem_pt(Problem* problem_pt)
     {
       Problem_pt = problem_pt;
     }
 
-    Problem *problem_pt() const
+    Problem* problem_pt() const
     {
 #ifdef PARANOID
       if (Problem_pt == 0)
@@ -758,14 +757,14 @@ namespace oomph
     using Preconditioner::setup;
 
     /// Apply preconditioner to Vector r
-    void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+    void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
     /// Specify the mesh containing the block-preconditionable Navier-Stokes
     /// elements. The optional argument indicates if there are multiple types
     /// of elements in the same mesh.
     void set_navier_stokes_mesh(
-      Mesh *mesh_pt,
-      const bool &allow_multiple_element_type_in_navier_stokes_mesh = false)
+      Mesh* mesh_pt,
+      const bool& allow_multiple_element_type_in_navier_stokes_mesh = false)
     {
       // Store the mesh pointer.
       Navier_stokes_mesh_pt = mesh_pt;
@@ -776,7 +775,7 @@ namespace oomph
     }
 
     /// Function to set a new pressure matrix preconditioner (inexact solver)
-    void set_p_preconditioner(Preconditioner *new_p_preconditioner_pt)
+    void set_p_preconditioner(Preconditioner* new_p_preconditioner_pt)
     {
       // If the default preconditioner has been used
       // clean it up now...
@@ -800,7 +799,7 @@ namespace oomph
     }
 
     /// Function to set a new momentum matrix preconditioner (inexact solver)
-    void set_f_preconditioner(Preconditioner *new_f_preconditioner_pt)
+    void set_f_preconditioner(Preconditioner* new_f_preconditioner_pt)
     {
       // If the default preconditioner has been used
       // clean it up now...
@@ -885,7 +884,7 @@ namespace oomph
     /// \short Validate auxiliary pressure advection diffusion problem
     /// in 2D
     template<class ELEMENT>
-    void validate(DocInfo &doc_info, Problem *orig_problem_pt)
+    void validate(DocInfo& doc_info, Problem* orig_problem_pt)
     {
       FpPressureAdvectionDiffusionProblem<ELEMENT> aux_problem(
         Navier_stokes_mesh_pt, orig_problem_pt);
@@ -900,8 +899,8 @@ namespace oomph
       for (unsigned e = 0; e < nelem; e++)
       {
         // Get pointer to the bulk element that is adjacent to boundary b
-        TemplateFreeNavierStokesEquationsBase *el_pt =
-          dynamic_cast<TemplateFreeNavierStokesEquationsBase *>(
+        TemplateFreeNavierStokesEquationsBase* el_pt =
+          dynamic_cast<TemplateFreeNavierStokesEquationsBase*>(
             Navier_stokes_mesh_pt->element_pt(e));
 
         // Pin
@@ -910,7 +909,7 @@ namespace oomph
     }
 
     /// Get the pressure advection diffusion matrix
-    void get_pressure_advection_diffusion_matrix(CRDoubleMatrix &fp_matrix)
+    void get_pressure_advection_diffusion_matrix(CRDoubleMatrix& fp_matrix)
     {
       // Pin all non-pressure dofs
       pin_all_non_pressure_dofs();
@@ -919,14 +918,14 @@ namespace oomph
       unsigned ndim = Navier_stokes_mesh_pt->finite_element_pt(0)->dim();
 
       // Backup assembly handler and set new one
-      AssemblyHandler *backed_up_assembly_handler_pt =
+      AssemblyHandler* backed_up_assembly_handler_pt =
         problem_pt()->assembly_handler_pt();
       problem_pt()->assembly_handler_pt() =
         new FpPreconditionerAssemblyHandler(ndim);
 
       // Backup submeshes (if any)
       unsigned n_sub_mesh = problem_pt()->nsub_mesh();
-      Vector<Mesh *> backed_up_sub_mesh_pt(n_sub_mesh);
+      Vector<Mesh*> backed_up_sub_mesh_pt(n_sub_mesh);
       for (unsigned i = 0; i < n_sub_mesh; i++)
       {
         backed_up_sub_mesh_pt[i] = problem_pt()->mesh_pt(i);
@@ -936,7 +935,7 @@ namespace oomph
       problem_pt()->flush_sub_meshes();
 
       // Backup the problem's own mesh pointer
-      Mesh *backed_up_mesh_pt = problem_pt()->mesh_pt();
+      Mesh* backed_up_mesh_pt = problem_pt()->mesh_pt();
       problem_pt()->mesh_pt() = Navier_stokes_mesh_pt;
 
 #ifdef OOMPH_HAS_MPI
@@ -962,8 +961,8 @@ namespace oomph
         unsigned nel = Navier_stokes_mesh_pt->nelement();
         for (unsigned e = 0; e < nel; e++)
         {
-          TemplateFreeNavierStokesEquationsBase *bulk_elem_pt =
-            dynamic_cast<TemplateFreeNavierStokesEquationsBase *>(
+          TemplateFreeNavierStokesEquationsBase* bulk_elem_pt =
+            dynamic_cast<TemplateFreeNavierStokesEquationsBase*>(
               Navier_stokes_mesh_pt->element_pt(e));
           int local_eqn = bulk_elem_pt->p_local_eqn(0);
           if (local_eqn >= 0)
@@ -994,8 +993,8 @@ namespace oomph
       unsigned nel = Navier_stokes_mesh_pt->nelement();
       for (unsigned e = 0; e < nel; e++)
       {
-        TemplateFreeNavierStokesEquationsBase *bulk_elem_pt =
-          dynamic_cast<TemplateFreeNavierStokesEquationsBase *>(
+        TemplateFreeNavierStokesEquationsBase* bulk_elem_pt =
+          dynamic_cast<TemplateFreeNavierStokesEquationsBase*>(
             Navier_stokes_mesh_pt->element_pt(e));
 
         // Set pinned pressure equation
@@ -1015,8 +1014,8 @@ namespace oomph
           // Loop over the bulk elements adjacent to boundary b?
           for (unsigned e = 0; e < n_element; e++)
           {
-            TemplateFreeNavierStokesEquationsBase *bulk_elem_pt =
-              dynamic_cast<TemplateFreeNavierStokesEquationsBase *>(
+            TemplateFreeNavierStokesEquationsBase* bulk_elem_pt =
+              dynamic_cast<TemplateFreeNavierStokesEquationsBase*>(
                 Navier_stokes_mesh_pt->boundary_element_pt(b, e));
 
             // What is the index of the face of the bulk element e on bondary b
@@ -1046,8 +1045,8 @@ namespace oomph
           // Loop over the bulk elements adjacent to boundary b?
           for (unsigned e = 0; e < n_element; e++)
           {
-            TemplateFreeNavierStokesEquationsBase *bulk_elem_pt =
-              dynamic_cast<TemplateFreeNavierStokesEquationsBase *>(
+            TemplateFreeNavierStokesEquationsBase* bulk_elem_pt =
+              dynamic_cast<TemplateFreeNavierStokesEquationsBase*>(
                 Navier_stokes_mesh_pt->boundary_element_pt(b, e));
 
             // Kill associated Robin elements
@@ -1091,7 +1090,7 @@ namespace oomph
       unsigned nnod = Navier_stokes_mesh_pt->nnode();
       for (unsigned j = 0; j < nnod; j++)
       {
-        Node *nod_pt = Navier_stokes_mesh_pt->node_pt(j);
+        Node* nod_pt = Navier_stokes_mesh_pt->node_pt(j);
         unsigned nval = nod_pt->nvalue();
         for (unsigned i = 0; i < nval; i++)
         {
@@ -1099,10 +1098,10 @@ namespace oomph
         }
 
         // If it's a solid node deal with its positional data too
-        SolidNode *solid_nod_pt = dynamic_cast<SolidNode *>(nod_pt);
+        SolidNode* solid_nod_pt = dynamic_cast<SolidNode*>(nod_pt);
         if (solid_nod_pt != 0)
         {
-          Data *solid_posn_data_pt = solid_nod_pt->variable_position_pt();
+          Data* solid_posn_data_pt = solid_nod_pt->variable_position_pt();
           unsigned nval = solid_posn_data_pt->nvalue();
           for (unsigned i = 0; i < nval; i++)
           {
@@ -1117,13 +1116,13 @@ namespace oomph
       for (unsigned e = 0; e < nelem; e++)
       {
         // Pointer to element
-        GeneralisedElement *el_pt = Navier_stokes_mesh_pt->element_pt(e);
+        GeneralisedElement* el_pt = Navier_stokes_mesh_pt->element_pt(e);
 
         // Pin/unpin internal data
         unsigned nint = el_pt->ninternal_data();
         for (unsigned j = 0; j < nint; j++)
         {
-          Data *data_pt = el_pt->internal_data_pt(j);
+          Data* data_pt = el_pt->internal_data_pt(j);
           unsigned nvalue = data_pt->nvalue();
           for (unsigned i = 0; i < nvalue; i++)
           {
@@ -1143,10 +1142,10 @@ namespace oomph
     // Pointers to preconditioner (=inexact solver) objects
     // -----------------------------------------------------
     /// Pointer to the 'preconditioner' for the pressure matrix
-    Preconditioner *P_preconditioner_pt;
+    Preconditioner* P_preconditioner_pt;
 
     /// Pointer to the 'preconditioner' for the F matrix
-    Preconditioner *F_preconditioner_pt;
+    Preconditioner* F_preconditioner_pt;
 
     /// flag indicating whether the default F preconditioner is used
     bool Using_default_f_preconditioner;
@@ -1171,9 +1170,9 @@ namespace oomph
     /// mass matrix (the LSC version of the preconditioner only needs
     /// that one)
     void assemble_inv_press_and_veloc_mass_matrix_diagonal(
-      CRDoubleMatrix *&inv_p_mass_pt,
-      CRDoubleMatrix *&inv_v_mass_pt,
-      const bool &do_both);
+      CRDoubleMatrix*& inv_p_mass_pt,
+      CRDoubleMatrix*& inv_v_mass_pt,
+      const bool& do_both);
 
     /// \short Boolean indicating whether the momentum system preconditioner
     /// is a block preconditioner
@@ -1183,20 +1182,20 @@ namespace oomph
     bool Doc_time;
 
     /// MatrixVectorProduct operator for Qv^{-1} Bt
-    MatrixVectorProduct *QBt_mat_vec_pt;
+    MatrixVectorProduct* QBt_mat_vec_pt;
 
     /// MatrixVectorProduct operator for Bt
-    MatrixVectorProduct *Bt_mat_vec_pt;
+    MatrixVectorProduct* Bt_mat_vec_pt;
 
     /// MatrixVectorProduct operator for F
-    MatrixVectorProduct *F_mat_vec_pt;
+    MatrixVectorProduct* F_mat_vec_pt;
 
     /// MatrixVectorProduct operator for E = Fp Qp^{-1} (only for Fp variant)
-    MatrixVectorProduct *E_mat_vec_pt;
+    MatrixVectorProduct* E_mat_vec_pt;
 
     /// \short the pointer to the mesh of block preconditionable Navier
     /// Stokes elements.
-    Mesh *Navier_stokes_mesh_pt;
+    Mesh* Navier_stokes_mesh_pt;
 
     /// \short Flag to indicate if there are multiple element types in the
     /// Navier-Stokes mesh.
@@ -1210,7 +1209,7 @@ namespace oomph
 
     /// \short Map to store original eqn numbers of various Data values when
     /// assembling pressure advection diffusion matrix
-    std::map<Data *, std::vector<int>> Eqn_number_backup;
+    std::map<Data*, std::vector<int>> Eqn_number_backup;
 
     /// \short Boolean indicating if we want to pin first pressure
     /// dof in Navier Stokes mesh when
@@ -1221,7 +1220,7 @@ namespace oomph
 
     /// Storage for the (non-const!) problem pointer for use in
     /// get_pressure_advection_diffusion_matrix().
-    Problem *Problem_pt;
+    Problem* Problem_pt;
   };
 
   ///////////////////////////////////////////////////////////////////////////////
@@ -1246,7 +1245,7 @@ namespace oomph
     ~NavierStokesExactPreconditioner() {}
 
     /// Broken copy constructor
-    NavierStokesExactPreconditioner(const NavierStokesExactPreconditioner &)
+    NavierStokesExactPreconditioner(const NavierStokesExactPreconditioner&)
     {
       BrokenCopy::broken_copy("NavierStokesExactPreconditioner");
     }
@@ -1261,7 +1260,7 @@ namespace oomph
     void setup();
 
     /// Apply preconditioner to r
-    void preconditioner_solve(const Vector<double> &r, Vector<double> &z);
+    void preconditioner_solve(const Vector<double>& r, Vector<double>& z);
 
   protected:
     /// Preconditioner matrix

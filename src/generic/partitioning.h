@@ -54,31 +54,13 @@ namespace oomph
   {
     /// \short Metis graph partitioning function -- decomposes
     /// nodal graph based on minimum edgecut
-    void METIS_PartGraphKway(int *,
-                             int *,
-                             int *,
-                             int *,
-                             int *,
-                             int *,
-                             int *,
-                             int *,
-                             int *,
-                             int *,
-                             int *);
+    void METIS_PartGraphKway(
+      int*, int*, int*, int*, int*, int*, int*, int*, int*, int*, int*);
 
     /// \short Metis graph partitioning function -- decomposes
     /// nodal graph based on minimum communication volume
-    void METIS_PartGraphVKway(int *,
-                              int *,
-                              int *,
-                              int *,
-                              int *,
-                              int *,
-                              int *,
-                              int *,
-                              int *,
-                              int *,
-                              int *);
+    void METIS_PartGraphVKway(
+      int*, int*, int*, int*, int*, int*, int*, int*, int*, int*, int*);
   }
 
   //====================================================================
@@ -89,17 +71,17 @@ namespace oomph
     /// \short Default function that translates spatial
     /// error into weight for METIS partitioning (unit weight regardless
     /// of input)
-    extern void default_error_to_weight_fct(const double &spatial_error,
-                                            const double &max_error,
-                                            const double &min_error,
-                                            int &weight);
+    extern void default_error_to_weight_fct(const double& spatial_error,
+                                            const double& max_error,
+                                            const double& min_error,
+                                            int& weight);
 
     /// \short Typedef for function pointer to to function that translates
     /// spatial error into weight for METIS partitioning.
-    typedef void (*ErrorToWeightFctPt)(const double &spatial_error,
-                                       const double &max_error,
-                                       const double &min_error,
-                                       int &weight);
+    typedef void (*ErrorToWeightFctPt)(const double& spatial_error,
+                                       const double& max_error,
+                                       const double& min_error,
+                                       int& weight);
 
     /// \short Function pointer to to function that translates spatial
     /// error into weight for METIS partitioning.
@@ -111,9 +93,9 @@ namespace oomph
     /// On return, element_domain[ielem] contains the number
     /// of the domain [0,1,...,ndomain-1] to which
     /// element ielem has been assigned.
-    extern void uniform_partition_mesh(Problem *problem_pt,
-                                       const unsigned &ndomain,
-                                       Vector<unsigned> &element_domain);
+    extern void uniform_partition_mesh(Problem* problem_pt,
+                                       const unsigned& ndomain,
+                                       Vector<unsigned>& element_domain);
 
     /// \short Use METIS to assign each element to a domain.
     /// On return, element_domain[ielem] contains the number
@@ -123,10 +105,10 @@ namespace oomph
     /// - objective=1: minimise total communications volume.
     /// .
     /// Partioning is based on nodal graph of mesh.
-    extern void partition_mesh(Problem *problem_pt,
-                               const unsigned &ndomain,
-                               const unsigned &objective,
-                               Vector<unsigned> &element_domain);
+    extern void partition_mesh(Problem* problem_pt,
+                               const unsigned& ndomain,
+                               const unsigned& objective,
+                               Vector<unsigned>& element_domain);
 
     /// \short Use METIS to assign each element to a domain.
     /// On return, element_domain[ielem] contains the number
@@ -136,11 +118,11 @@ namespace oomph
     /// - objective=1: minimise total communications volume.
     /// .
     /// Partioning is based on nodal graph of mesh.
-    extern void partition_mesh(OomphCommunicator *comm_pt,
-                               Mesh *mesh_pt,
-                               const unsigned &ndomain,
-                               const unsigned &objective,
-                               Vector<unsigned> &element_domain);
+    extern void partition_mesh(OomphCommunicator* comm_pt,
+                               Mesh* mesh_pt,
+                               const unsigned& ndomain,
+                               const unsigned& objective,
+                               Vector<unsigned>& element_domain);
 
     //  /// \short Use METIS to assign each element to a domain.
     //  /// On return, element_domain[ielem] contains the number
@@ -180,10 +162,10 @@ namespace oomph
     /// elements over the domains and outputs the input that would have
     /// gone into METIS in the file metis_input_for_validation.dat
     extern void partition_distributed_mesh(
-      Problem *problem_pt,
-      const unsigned &objective,
-      Vector<unsigned> &element_domain_on_this_proc,
-      const bool &bypass_metis = false);
+      Problem* problem_pt,
+      const unsigned& objective,
+      Vector<unsigned>& element_domain_on_this_proc,
+      const bool& bypass_metis = false);
 
 #endif
 

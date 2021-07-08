@@ -51,13 +51,13 @@ namespace oomph
   {
   private:
     /// Pointer to the Capillary number
-    double *Ca_pt;
+    double* Ca_pt;
 
     /// Pointer to the Strouhal number
-    double *St_pt;
+    double* St_pt;
 
     /// Pointer to azimuthal mode number k in e^ik(theta) decomposition
-    int *Azimuthal_Mode_Number_pt;
+    int* Azimuthal_Mode_Number_pt;
 
     /// Static default value for the physical constants (zero)
     static double Default_Physical_Constant_Value;
@@ -77,20 +77,20 @@ namespace oomph
     /// for the i-th kinematic equation (i=1,2) that corresponds to the n-th
     /// local node. This must be overloaded by specific interface elements
     /// and depends on the method for handing the free-surface deformation.
-    virtual int kinematic_local_eqn(const unsigned &n, const unsigned &i) = 0;
+    virtual int kinematic_local_eqn(const unsigned& n, const unsigned& i) = 0;
 
   public:
     /// \short Hijack the kinematic condition at the nodes passed in the vector
     /// This is required so that contact-angle conditions can be applied
     /// by the LinearisedAxisymmetricFluidInterfaceEdgeElements.
     virtual void hijack_kinematic_conditions(
-      const Vector<unsigned> &bulk_node_number) = 0;
+      const Vector<unsigned>& bulk_node_number) = 0;
 
   protected:
     /// \short Helper function to calculate the residuals and (if flag==true)
     /// the Jacobian -- this function only deals with part of the Jacobian.
     virtual void fill_in_generic_residual_contribution_interface(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag);
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
 
     /// \short Helper function to calculate the additional contributions
     /// to the jacobian. This will be overloaded by elements that
@@ -100,24 +100,24 @@ namespace oomph
     /// bulk elements. The shape functions, normal, integral weight,
     /// and jacobian are passed so that they do not have to be recalculated.
     virtual void add_additional_residual_contributions(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      const unsigned &flag,
-      const Shape &psif,
-      const DShape &dpsifds,
-      const Vector<double> &interpolated_n,
-      const double &r,
-      const double &W,
-      const double &J)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag,
+      const Shape& psif,
+      const DShape& dpsifds,
+      const Vector<double>& interpolated_n,
+      const double& r,
+      const double& W,
+      const double& J)
     {
     }
 
     /// \short i-th component of dXhat/dt at local node n.
     /// Uses suitably interpolated value for hanging nodes.
-    double dXhat_dt(const unsigned &n, const unsigned &i) const
+    double dXhat_dt(const unsigned& n, const unsigned& i) const
     {
       // Get the data's positional timestepper
-      TimeStepper *position_time_stepper_pt =
+      TimeStepper* position_time_stepper_pt =
         this->node_pt(n)->position_time_stepper_pt();
 
       // Get the value
@@ -160,13 +160,13 @@ namespace oomph
     /// The default behaviour is a constant surface tension of value 1.0
     /// It is expected that this function will be overloaded in more
     /// specialised elements to incorporate variations in surface tension.
-    virtual double sigma(const Vector<double> &s_local)
+    virtual double sigma(const Vector<double>& s_local)
     {
       return 1.0;
     }
 
     /// Calculate the residuals by calling the generic residual contribution.
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Add the residual contributions
       fill_in_generic_residual_contribution_interface(
@@ -174,37 +174,37 @@ namespace oomph
     }
 
     /// Return the value of the Capillary number
-    const double &ca() const
+    const double& ca() const
     {
       return *Ca_pt;
     }
 
     /// Return a pointer to the Capillary number
-    double *&ca_pt()
+    double*& ca_pt()
     {
       return Ca_pt;
     }
 
     /// Return the value of the Strouhal number
-    const double &st() const
+    const double& st() const
     {
       return *St_pt;
     }
 
     /// Return a pointer to the Strouhal number
-    double *&st_pt()
+    double*& st_pt()
     {
       return St_pt;
     }
 
     /// Azimuthal mode number k in e^ik(theta) decomposition
-    const int &azimuthal_mode_number() const
+    const int& azimuthal_mode_number() const
     {
       return *Azimuthal_Mode_Number_pt;
     }
 
     /// Pointer to azimuthal mode number k in e^ik(theta) decomposition
-    int *&azimuthal_mode_number_pt()
+    int*& azimuthal_mode_number_pt()
     {
       return Azimuthal_Mode_Number_pt;
     }
@@ -212,13 +212,13 @@ namespace oomph
     /// \short Return the i-th velocity component at local node n
     /// The use of the array U_index_interface allows the velocity
     /// components to be stored in any location at the node.
-    double u(const unsigned &n, const unsigned &i)
+    double u(const unsigned& n, const unsigned& i)
     {
       return node_pt(n)->value(U_index_interface[i]);
     }
 
     /// Calculate the i-th velocity component at the local coordinate s
-    double interpolated_u(const Vector<double> &s, const unsigned &i)
+    double interpolated_u(const Vector<double>& s, const unsigned& i)
     {
       // Find number of nodes
       const unsigned n_node = nnode();
@@ -242,22 +242,22 @@ namespace oomph
     }
 
     /// Overload the output functions
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       FiniteElement::output(outfile);
     }
 
     /// Output the element
-    void output(std::ostream &outfile, const unsigned &n_plot);
+    void output(std::ostream& outfile, const unsigned& n_plot);
 
     /// Overload the C-style output function
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
 
     /// C-style Output function: x,y,[z],u,v,[w],p in tecplot format
-    void output(FILE *file_pt, const unsigned &n_plot);
+    void output(FILE* file_pt, const unsigned& n_plot);
   };
 
   //========================================================================
@@ -288,14 +288,14 @@ namespace oomph
     /// used to determine the "order epsilon" contributions to the free surface
     /// "height". We have two sets of unknowns, HC and HS, and we therefore have
     /// two kinematic conditions. Overload the function accordingly.
-    int kinematic_local_eqn(const unsigned &n, const unsigned &i)
+    int kinematic_local_eqn(const unsigned& n, const unsigned& i)
     {
       return this->spine_local_eqn(n, i);
     }
 
     /// \short Hijacking the kinematic condition corresponds to hijacking the
     /// spine heights.
-    void hijack_kinematic_conditions(const Vector<unsigned> &bulk_node_number)
+    void hijack_kinematic_conditions(const Vector<unsigned>& bulk_node_number)
     {
       // Loop over all the passed nodes
       for (Vector<unsigned>::const_iterator it = bulk_node_number.begin();
@@ -309,14 +309,14 @@ namespace oomph
 
     /// \short i-th component of dH/dt at local node n.
     /// Uses suitably interpolated value for hanging nodes.
-    double dH_dt(const unsigned &n, const unsigned &i) const
+    double dH_dt(const unsigned& n, const unsigned& i) const
     {
       // Get the data's timestepper
-      TimeStepper *time_stepper_pt = this->node_pt(n)->time_stepper_pt();
+      TimeStepper* time_stepper_pt = this->node_pt(n)->time_stepper_pt();
 
       // Upcast from general node to PerturbedSpineNode
-      PerturbedSpineNode *perturbed_spine_node_pt =
-        dynamic_cast<PerturbedSpineNode *>(this->node_pt(n));
+      PerturbedSpineNode* perturbed_spine_node_pt =
+        dynamic_cast<PerturbedSpineNode*>(this->node_pt(n));
 
       // Initialise dH/dt
       double dHdt = 0.0;
@@ -343,7 +343,7 @@ namespace oomph
     /// the local coordinate that is fixed on the face, and
     /// whether it is the upper or lower limit of that coordinate.
     PerturbedSpineLinearisedAxisymmetricFluidInterfaceElement(
-      FiniteElement *const &bulk_element_pt, const int &face_index) :
+      FiniteElement* const& bulk_element_pt, const int& face_index) :
       Hijacked<PerturbedSpineElement<FaceGeometry<ELEMENT>>>(),
       LinearisedAxisymmetricFluidInterfaceElement()
     {
@@ -352,7 +352,7 @@ namespace oomph
 
       // Find the index at which the velocity unknowns are stored
       // from the bulk element
-      ELEMENT *cast_element_pt = dynamic_cast<ELEMENT *>(bulk_element_pt);
+      ELEMENT* cast_element_pt = dynamic_cast<ELEMENT*>(bulk_element_pt);
 
       // We must have six velocity components
       this->U_index_interface.resize(6);
@@ -372,8 +372,8 @@ namespace oomph
     }
 
     /// Return the jacobian
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       // Call the generic residuals routine with the flag set to 1
       fill_in_generic_residual_contribution_interface(residuals, jacobian, 1);
@@ -391,44 +391,44 @@ namespace oomph
     /// is used, and that function should be implemented with the proper
     /// general maths which does not assume spines or anything.
     void fill_in_generic_residual_contribution_interface(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag);
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
 
     /// Overload the output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       FiniteElement::output(outfile);
     }
 
     /// Output the element
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       LinearisedAxisymmetricFluidInterfaceElement::output(outfile, n_plot);
     }
 
     /// Overload the C-style output function
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
 
     /// C-style Output function: x,y,[z],u,v,[w],p in tecplot format
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       LinearisedAxisymmetricFluidInterfaceElement::output(file_pt, n_plot);
     }
 
     /// Output just the interface position (base + perturbation)
-    void output_interface_position(std::ostream &outfile,
-                                   const unsigned &nplot);
+    void output_interface_position(std::ostream& outfile,
+                                   const unsigned& nplot);
 
     /// Output the perturbation to the interface position
-    void output_perturbation_to_interface(std::ostream &outfile,
-                                          const unsigned &nplot);
+    void output_perturbation_to_interface(std::ostream& outfile,
+                                          const unsigned& nplot);
 
     /// \short Return the i-th component of the FE interpolated perturbed
     /// surface height (i=0 is cosine part, i=1 is sine part) at local
     /// coordinate s
-    double interpolated_H(const Vector<double> &s, const unsigned &i) const
+    double interpolated_H(const Vector<double>& s, const unsigned& i) const
     {
       // Determine number of nodes in the element
       const unsigned n_node = nnode();
@@ -446,8 +446,8 @@ namespace oomph
       for (unsigned l = 0; l < n_node; l++)
       {
         // Upcast from general node to PerturbedSpineNode
-        PerturbedSpineNode *perturbed_spine_node_pt =
-          dynamic_cast<PerturbedSpineNode *>(this->node_pt(l));
+        PerturbedSpineNode* perturbed_spine_node_pt =
+          dynamic_cast<PerturbedSpineNode*>(this->node_pt(l));
 
         // Calculate interpolated i-th component of perturbed spine "heights"
         interpolated_H +=

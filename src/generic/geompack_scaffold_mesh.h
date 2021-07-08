@@ -46,17 +46,17 @@ namespace oomph
     GeompackQuadScaffoldMesh() {}
 
     /// \short Constructor: Pass the filename of the mesh files
-    GeompackQuadScaffoldMesh(const std::string &mesh_file_name,
-                             const std::string &curve_file_name);
+    GeompackQuadScaffoldMesh(const std::string& mesh_file_name,
+                             const std::string& curve_file_name);
 
     /// Broken copy constructor
-    GeompackQuadScaffoldMesh(const GeompackQuadScaffoldMesh &)
+    GeompackQuadScaffoldMesh(const GeompackQuadScaffoldMesh&)
     {
       BrokenCopy::broken_copy("GeompackQuadScaffoldMesh");
     }
 
     /// Broken assignment operator
-    void operator=(const GeompackQuadScaffoldMesh &)
+    void operator=(const GeompackQuadScaffoldMesh&)
     {
       BrokenCopy::broken_assign("GeompackQuadScaffoldMesh");
     }

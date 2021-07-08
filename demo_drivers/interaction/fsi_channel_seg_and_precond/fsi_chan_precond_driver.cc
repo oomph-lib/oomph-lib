@@ -79,18 +79,18 @@ class PreconditionedFSICollapsibleChannelProblem :
 public:
   /// \short Constructor: The arguments are the number of elements and
   /// the lengths of the domain.
-  PreconditionedFSICollapsibleChannelProblem(const unsigned &nup,
-                                             const unsigned &ncollapsible,
-                                             const unsigned &ndown,
-                                             const unsigned &ny,
-                                             const double &lup,
-                                             const double &lcollapsible,
-                                             const double &ldown,
-                                             const double &ly,
-                                             const bool &displ_control,
-                                             const bool &steady_flag,
-                                             const unsigned &solver_flag,
-                                             const unsigned &solver_sub_flag) :
+  PreconditionedFSICollapsibleChannelProblem(const unsigned& nup,
+                                             const unsigned& ncollapsible,
+                                             const unsigned& ndown,
+                                             const unsigned& ny,
+                                             const double& lup,
+                                             const double& lcollapsible,
+                                             const double& ldown,
+                                             const double& ly,
+                                             const bool& displ_control,
+                                             const bool& steady_flag,
+                                             const unsigned& solver_flag,
+                                             const unsigned& solver_sub_flag) :
     FSICollapsibleChannelProblem<ELEMENT>(nup,
                                           ncollapsible,
                                           ndown,
@@ -103,7 +103,7 @@ public:
                                           steady_flag)
   {
     // Build iterative linear solver
-    GMRES<CRDoubleMatrix> *iterative_linear_solver_pt =
+    GMRES<CRDoubleMatrix>* iterative_linear_solver_pt =
       new GMRES<CRDoubleMatrix>;
 
     // Set maximum number of iterations
@@ -145,7 +145,7 @@ public:
           "Exact preconditioner (re-arranged Jacobian)";
 
         {
-          ExactBlockPreconditioner<CRDoubleMatrix> *prec_pt =
+          ExactBlockPreconditioner<CRDoubleMatrix>* prec_pt =
             new ExactBlockPreconditioner<CRDoubleMatrix>;
 
           // With GeneralPurposeBlockPreconditioner, we set meshes with
@@ -159,7 +159,7 @@ public:
 
           // Create a vector of pointers to submeshes. Start with the solid
           // mesh itself.
-          Vector<Mesh *> s_mesh_pt(1);
+          Vector<Mesh*> s_mesh_pt(1);
           s_mesh_pt[0] = this->wall_mesh_pt();
 
           // Add the displacement control mesh if required
@@ -167,7 +167,7 @@ public:
             s_mesh_pt.push_back(this->Displ_control_mesh_pt);
 
           // Build "combined" mesh from vector of solid submeshes
-          Mesh *solid_mesh_pt = new Mesh(s_mesh_pt);
+          Mesh* solid_mesh_pt = new Mesh(s_mesh_pt);
 
           // Set solid mesh with "true" to tolerate multiple element types
           // in the mesh.
@@ -187,7 +187,7 @@ public:
                   << std::endl;
 
         {
-          SimpleFSIPreconditioner<CRDoubleMatrix> *prec_pt =
+          SimpleFSIPreconditioner<CRDoubleMatrix>* prec_pt =
             new SimpleFSIPreconditioner<CRDoubleMatrix>;
 
           // Set Navier Stokes mesh:
@@ -197,7 +197,7 @@ public:
 
           // Create a vector of pointers to submeshes. Start with the solid
           // mesh itself.
-          Vector<Mesh *> s_mesh_pt(1);
+          Vector<Mesh*> s_mesh_pt(1);
           s_mesh_pt[0] = this->wall_mesh_pt();
 
           // Add the displacement control mesh if required
@@ -205,7 +205,7 @@ public:
             s_mesh_pt.push_back(this->Displ_control_mesh_pt);
 
           // Build "combined" mesh from vector of solid submeshes
-          Mesh *solid_mesh_pt = new Mesh(s_mesh_pt);
+          Mesh* solid_mesh_pt = new Mesh(s_mesh_pt);
 
           // Set solid mesh with "true" to tolerate multiple element types in
           // the mesh.
@@ -276,7 +276,7 @@ public:
         {
           // Create an instance of the FSI preconditioner -- pass the pointer
           // to the problem
-          FSIPreconditioner *prec_pt = new FSIPreconditioner(this);
+          FSIPreconditioner* prec_pt = new FSIPreconditioner(this);
 
           // Set Navier Stokes mesh:
           prec_pt->set_navier_stokes_mesh(this->bulk_mesh_pt());
@@ -285,7 +285,7 @@ public:
 
           // Create a vector of pointers to submeshes. Start with the solid
           // mesh itself.
-          Vector<Mesh *> s_mesh_pt(1);
+          Vector<Mesh*> s_mesh_pt(1);
           s_mesh_pt[0] = this->wall_mesh_pt();
 
           // Add the displacement control mesh if required
@@ -295,7 +295,7 @@ public:
           }
 
           // Build compound mesh from vector of solid submeshes
-          Mesh *combined_solid_mesh_pt = new Mesh(s_mesh_pt);
+          Mesh* combined_solid_mesh_pt = new Mesh(s_mesh_pt);
 
           // Set solid mesh and tolerate multiple element types this is mesh.
           prec_pt->set_wall_mesh(combined_solid_mesh_pt, true);
@@ -376,7 +376,7 @@ public:
         {
           // Create an instance of the FSI preconditioner -- pass the pointer
           // to the problem
-          FSIPreconditioner *prec_pt = new FSIPreconditioner(this);
+          FSIPreconditioner* prec_pt = new FSIPreconditioner(this);
 
           // Set Navier Stokes mesh:
           prec_pt->set_navier_stokes_mesh(this->bulk_mesh_pt());
@@ -385,7 +385,7 @@ public:
 
           // Create a vector of pointers to submeshes. Start with the solid
           // mesh itself.
-          Vector<Mesh *> s_mesh_pt(1);
+          Vector<Mesh*> s_mesh_pt(1);
           s_mesh_pt[0] = this->wall_mesh_pt();
 
           // Add the displacement control mesh if required
@@ -395,7 +395,7 @@ public:
           }
 
           // Build compound mesh from vector of solid submeshes
-          Mesh *combined_solid_mesh_pt = new Mesh(s_mesh_pt);
+          Mesh* combined_solid_mesh_pt = new Mesh(s_mesh_pt);
 
           // Set solid mesh with true to tolerate multiple element types in
           // the mesh.
@@ -415,7 +415,7 @@ public:
             // solves of these blocks.
 
             // Create internal preconditioners used on Schur block
-            HyprePreconditioner *P_matrix_preconditioner_pt =
+            HyprePreconditioner* P_matrix_preconditioner_pt =
               new HyprePreconditioner;
 
             // Set defaults parameters for use as preconditioner on Poisson-type
@@ -516,8 +516,8 @@ public:
     this->Bulk_mesh_pt->node_update();
 
     // Try to cast to IterativeLinearSolver
-    IterativeLinearSolver *it_lin_solver_pt =
-      dynamic_cast<IterativeLinearSolver *>(this->linear_solver_pt());
+    IterativeLinearSolver* it_lin_solver_pt =
+      dynamic_cast<IterativeLinearSolver*>(this->linear_solver_pt());
 
     // Open convergence history file
     if (it_lin_solver_pt != 0)
@@ -556,8 +556,8 @@ public:
   void actions_after_newton_solve()
   {
     // Try to cast to IterativeLinearSolver
-    IterativeLinearSolver *it_lin_solver_pt =
-      dynamic_cast<IterativeLinearSolver *>(this->linear_solver_pt());
+    IterativeLinearSolver* it_lin_solver_pt =
+      dynamic_cast<IterativeLinearSolver*>(this->linear_solver_pt());
 
     // Close convergence history file
     if (it_lin_solver_pt != 0)
@@ -576,7 +576,7 @@ public:
 /// Presence of command line arguments indicates validation run with
 /// coarse resolution and small number of steps.
 //=============================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   //#ifdef OOMPH_HAS_MPI
   //  MPI_Helpers::init(argc,argv);

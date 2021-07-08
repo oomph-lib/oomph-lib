@@ -54,10 +54,10 @@ class SingularPoissonSolutionElement : public virtual GeneralisedElement
 {
 public:
   /// \short Function pointer to the singular function:
-  typedef double (*PoissonSingularFctPt)(const Vector<double> &x);
+  typedef double (*PoissonSingularFctPt)(const Vector<double>& x);
 
   /// \short Function pointer to the gradient of the singular function:
-  typedef Vector<double> (*PoissonGradSingularFctPt)(const Vector<double> &x);
+  typedef Vector<double> (*PoissonGradSingularFctPt)(const Vector<double>& x);
 
   /// Constructor
   SingularPoissonSolutionElement()
@@ -88,7 +88,7 @@ public:
   /// Does the singular fct satisfy Laplace's eqn? Default assumption
   /// is that it doesn't; user can overwrite this here to avoid unnecessary
   /// computation of integrals in residual
-  bool &singular_function_satisfies_laplace_equation()
+  bool& singular_function_satisfies_laplace_equation()
   {
     return Singular_function_satisfies_laplace_equation;
   }
@@ -103,9 +103,9 @@ public:
   /// the singularity (at local coordinate s). Also specify the direction
   /// in which the slope of the FE part of the solution is set to zero
   void set_wrapped_poisson_element_pt(
-    WRAPPED_POISSON_ELEMENT *wrapped_poisson_el_pt,
-    const Vector<double> &s,
-    unsigned *direction_pt)
+    WRAPPED_POISSON_ELEMENT* wrapped_poisson_el_pt,
+    const Vector<double>& s,
+    unsigned* direction_pt)
   {
     // Assign the pointer to the variable Wrapped_poisson_el_pt
     Wrapped_poisson_el_pt = wrapped_poisson_el_pt;
@@ -132,13 +132,13 @@ public:
   }
 
   /// \short Access function to pointer to singular function
-  PoissonSingularFctPt &singular_fct_pt()
+  PoissonSingularFctPt& singular_fct_pt()
   {
     return Singular_fct_pt;
   }
 
   /// Evaluate singular function at Eulerian position x
-  double singular_function(const Vector<double> &x) const
+  double singular_function(const Vector<double>& x) const
   {
 #ifdef PARANOID
     if (Singular_fct_pt == 0)
@@ -157,7 +157,7 @@ public:
 
   /// The singular function (including its amplitude): ubar = C * sing
   /// where sing is defined via the function pointer.
-  double u_bar(const Vector<double> &x)
+  double u_bar(const Vector<double>& x)
   {
     // Find the value of C
     double c = internal_data_pt(0)->value(0);
@@ -167,13 +167,13 @@ public:
   } // End of function
 
   /// \short Access function to pointer to the gradient of sing function
-  PoissonGradSingularFctPt &grad_singular_fct_pt()
+  PoissonGradSingularFctPt& grad_singular_fct_pt()
   {
     return Grad_singular_fct_pt;
   }
 
   /// Evaluate the gradient of the sing function at Eulerian position x
-  Vector<double> grad_singular_function(const Vector<double> &x) const
+  Vector<double> grad_singular_function(const Vector<double>& x) const
   {
     // Find the dimension of the problem
     unsigned cached_dim = Wrapped_poisson_el_pt->dim();
@@ -198,7 +198,7 @@ public:
   }
 
   /// Gradient of ubar (including the constant!)
-  Vector<double> grad_u_bar(const Vector<double> &x)
+  Vector<double> grad_u_bar(const Vector<double>& x)
   {
     // Compute the gradient of sing
     Vector<double> dsingular = grad_singular_function(x);
@@ -218,24 +218,24 @@ public:
   } // End of function
 
   // Compute local residual
-  void fill_in_contribution_to_residuals(Vector<double> &residual)
+  void fill_in_contribution_to_residuals(Vector<double>& residual)
   {
     fill_in_generic_contribution_to_residuals(
       residual, GeneralisedElement::Dummy_matrix, 0);
   }
 
   // Compute local residual and jacobian
-  void fill_in_contribution_to_jacobian(Vector<double> &residual,
-                                        DenseMatrix<double> &jacobian)
+  void fill_in_contribution_to_jacobian(Vector<double>& residual,
+                                        DenseMatrix<double>& jacobian)
   {
     fill_in_generic_contribution_to_residuals(residual, jacobian, 1);
   }
 
 private:
   /// Compute local residual, and, if flag=1, local jacobian matrix
-  void fill_in_generic_contribution_to_residuals(Vector<double> &residual,
-                                                 DenseMatrix<double> &jacobian,
-                                                 const unsigned &flag)
+  void fill_in_generic_contribution_to_residuals(Vector<double>& residual,
+                                                 DenseMatrix<double>& jacobian,
+                                                 const unsigned& flag)
   {
     // Get the local eqn number of our one-and-only
     // unknown
@@ -279,7 +279,7 @@ private:
   }
 
   /// Pointer to Poisson element that contains the singularity
-  WRAPPED_POISSON_ELEMENT *Wrapped_poisson_el_pt;
+  WRAPPED_POISSON_ELEMENT* Wrapped_poisson_el_pt;
 
   /// Pointer to singular function
   PoissonSingularFctPt Singular_fct_pt;
@@ -291,7 +291,7 @@ private:
   Vector<double> S_in_wrapped_poisson_element;
 
   /// Direction of the derivative used for the residual of the element
-  unsigned *Direction_pt;
+  unsigned* Direction_pt;
 
   /// Does singular fct satisfy Laplace's eqn?
   bool Singular_function_satisfies_laplace_equation;
@@ -349,13 +349,13 @@ public:
 
   /// \short Impose Dirichlet BC on sum of FE solution and u_bar on j-th local
   /// node
-  void impose_dirichlet_bc_on_node(const unsigned &j)
+  void impose_dirichlet_bc_on_node(const unsigned& j)
   {
     Node_is_subject_to_dirichlet_bc[j] = true;
   }
 
   /// Undo Dirichlet BCs on jth node
-  void undo_dirichlet_bc_on_node(const unsigned &j)
+  void undo_dirichlet_bc_on_node(const unsigned& j)
   {
     Node_is_subject_to_dirichlet_bc[j] = false;
   }
@@ -371,7 +371,7 @@ public:
   }
 
   /// Specify Dirichlet boundary value for j-th local node
-  void set_dirichlet_value_on_node(const unsigned &j, const double &value)
+  void set_dirichlet_value_on_node(const unsigned& j, const double& value)
   {
     Imposed_value_at_node[j] = value;
   }
@@ -381,7 +381,7 @@ public:
   /// specify the singular functions that are added to the (regular)
   /// FE solution
   Vector<SingularPoissonSolutionElement<
-    PoissonElementWithSingularity<BASIC_POISSON_ELEMENT>> *>
+    PoissonElementWithSingularity<BASIC_POISSON_ELEMENT>>*>
   c_equation_elements_pt()
   {
     return C_equation_elements_pt;
@@ -394,7 +394,7 @@ public:
   /// called after this function has been called.
   void add_c_equation_element_pt(
     SingularPoissonSolutionElement<
-      PoissonElementWithSingularity<BASIC_POISSON_ELEMENT>> *c_pt)
+      PoissonElementWithSingularity<BASIC_POISSON_ELEMENT>>* c_pt)
   {
     // Add the element
     C_equation_elements_pt.push_back(c_pt);
@@ -406,34 +406,34 @@ public:
 
   /// Evaluate i-th u_bar function (i.e. i-th singular incl. the
   /// amplitude) function at Eulerian position x
-  double u_bar(const unsigned &i, const Vector<double> &x) const
+  double u_bar(const unsigned& i, const Vector<double>& x) const
   {
     return C_equation_elements_pt[i]->u_bar(x);
   }
 
   /// Evaluate i-th "raw" singular function at Eulerian position x
-  double singular_function(const unsigned &i, const Vector<double> &x) const
+  double singular_function(const unsigned& i, const Vector<double>& x) const
   {
     return C_equation_elements_pt[i]->singular_function(x);
   }
 
   /// \short Evaluate the gradient the i-th singular (incl. the amplitude )
   /// at Eulerian position x
-  Vector<double> grad_u_bar(const unsigned i, const Vector<double> &x) const
+  Vector<double> grad_u_bar(const unsigned i, const Vector<double>& x) const
   {
     return C_equation_elements_pt[i]->grad_u_bar(x);
   }
 
   /// Evaluate the gradient of the i-th "raw" singular  at Eulerian position x
-  Vector<double> grad_singular_function(const unsigned &i,
-                                        const Vector<double> &x) const
+  Vector<double> grad_singular_function(const unsigned& i,
+                                        const Vector<double>& x) const
   {
     return C_equation_elements_pt[i]->grad_singular_function(x);
   }
 
   /// \short Return FE representation of solution WITHOUT singular
   /// contributions at local coordinate s
-  double interpolated_u_poisson_fe_only(const Vector<double> &s) const
+  double interpolated_u_poisson_fe_only(const Vector<double>& s) const
   {
     // Find number of nodes
     const unsigned n_node = this->nnode();
@@ -461,7 +461,7 @@ public:
   }
 
   /// Overloaded version including the singular contributions
-  inline double interpolated_u_poisson(const Vector<double> &s) const
+  inline double interpolated_u_poisson(const Vector<double>& s) const
   {
     // Find number of nodes
     const unsigned n_node = this->nnode();
@@ -505,7 +505,7 @@ public:
   }
 
   /// Add the element's contribution to its residual vector (wrapper)
-  void fill_in_contribution_to_residuals(Vector<double> &residuals)
+  void fill_in_contribution_to_residuals(Vector<double>& residuals)
   {
     // Call the generic residuals function with flag set to 0
     // using a dummy matrix argument
@@ -515,8 +515,8 @@ public:
 
   /// Add the element's contribution to its residual vector and
   /// element Jacobian matrix (wrapper)
-  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                        DenseMatrix<double> &jacobian)
+  void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                        DenseMatrix<double>& jacobian)
   {
     // Call the generic routine with the flag set to 1
     fill_in_generic_residual_contribution_wrapped_poisson(
@@ -524,7 +524,7 @@ public:
   }
 
   /// Overloaded output fct: x, y [,z], u, u_fe_only, u-u_fe_only
-  void output(std::ostream &outfile, const unsigned &nplot)
+  void output(std::ostream& outfile, const unsigned& nplot)
   {
     // Find the dimension of the problem
     unsigned cached_dim = this->dim();
@@ -560,10 +560,10 @@ public:
   }
 
   /// Compute error
-  void compute_error(std::ostream &outfile,
+  void compute_error(std::ostream& outfile,
                      FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-                     double &error,
-                     double &norm)
+                     double& error,
+                     double& norm)
   {
     // Initialise
     error = 0.0;
@@ -635,9 +635,9 @@ public:
 private:
   /// Overloaded fill-in function
   void fill_in_generic_residual_contribution_wrapped_poisson(
-    Vector<double> &residuals,
-    DenseMatrix<double> &jacobian,
-    const unsigned &flag)
+    Vector<double>& residuals,
+    DenseMatrix<double>& jacobian,
+    const unsigned& flag)
   {
     // Get the contribution from the underlying wrapped element first
     BASIC_POISSON_ELEMENT::fill_in_generic_residual_contribution_poisson(
@@ -863,7 +863,7 @@ private:
 
   /// Vector of pointers to SingularPoissonSolutionElement objects
   Vector<SingularPoissonSolutionElement<
-    PoissonElementWithSingularity<BASIC_POISSON_ELEMENT>> *>
+    PoissonElementWithSingularity<BASIC_POISSON_ELEMENT>>*>
     C_equation_elements_pt;
 
   /// Boolean indicating which node is subject to Dirichlet BC

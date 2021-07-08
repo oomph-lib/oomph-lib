@@ -81,7 +81,7 @@ namespace VorticityRecoveryHelpers
     } // End of get_maximum_order_of_velocity_derivative
 
     /// The maximum order of derivatives calculated in the vorticity recovery
-    void set_maximum_order_of_vorticity_derivative(const int &max_deriv)
+    void set_maximum_order_of_vorticity_derivative(const int& max_deriv)
     {
       // Make sure the user has supplied a valid input value
       if ((max_deriv < -1) || (max_deriv > 3))
@@ -101,7 +101,7 @@ namespace VorticityRecoveryHelpers
     } // End of set_maximum_order_of_vorticity_derivative
 
     /// The maximum order of derivatives calculated in the velocity recovery
-    void set_maximum_order_of_velocity_derivative(const int &max_deriv)
+    void set_maximum_order_of_velocity_derivative(const int& max_deriv)
     {
       // Make sure the user has supplied a valid input value. Note, unlike the
       // vorticity, we always output the zeroth derivative of the velocity
@@ -153,7 +153,7 @@ namespace VorticityRecoveryHelpers
     /// possible n-th order partial derivatives in d-dimensions. Implementation
     /// makes use of the code found at:
     ///    www.geeksforgeeks.org/space-and-time-efficient-binomial-coefficient/
-    unsigned npartial_derivative(const unsigned &n) const
+    unsigned npartial_derivative(const unsigned& n) const
     {
       // This will only work in 2D so n_dim is always 2
       unsigned n_dim = 2;
@@ -266,7 +266,7 @@ namespace oomph
     /// Typedef for pointer to function that specifies the exact vorticity
     /// and derivatives (for validation)
     typedef void (*ExactVorticityFctPt)(
-      const Vector<double> &x, Vector<Vector<double>> &vort_and_derivs);
+      const Vector<double>& x, Vector<Vector<double>>& vort_and_derivs);
 
     /// \short Helper function to create a container for the vorticity and
     /// its partial derivatives. If the user wishes to output everything then
@@ -316,7 +316,7 @@ namespace oomph
     /// Note 2: i=0: vorticity itself;
     ///         i>0: vorticity derivatives
     std::pair<unsigned, unsigned> vorticity_dof_to_container_id(
-      const unsigned &i) const
+      const unsigned& i) const
     {
       // Maximum number of vorticity derivatives (that we actually want)
       unsigned n_vort_deriv = Maximum_order_of_vorticity_derivative;
@@ -460,7 +460,7 @@ namespace oomph
     ///         nodal dof value. For example, if we're only recovering the
     ///         velocity derivatives then i=0 is associated with du/dx
     std::pair<unsigned, unsigned> recovered_dof_to_container_id(
-      const unsigned &i) const
+      const unsigned& i) const
     {
       // Create a pair to store the output
       std::pair<unsigned, unsigned> container_id;
@@ -554,7 +554,7 @@ namespace oomph
     /// with du/dx). The global recovered number is 11 (as there are currently
     /// 10 vorticity derivatives that can be recovered and du/dy is the second
     /// velocity derivative we can recover).
-    unsigned stored_dof_to_recoverable_dof(const unsigned &i) const
+    unsigned stored_dof_to_recoverable_dof(const unsigned& i) const
     {
       // Get the ID in the storage associated with i-th recovered dof
       std::pair<unsigned, unsigned> id =
@@ -701,7 +701,7 @@ namespace oomph
     } // End of nvelocity_derivatives_to_recover
 
     /// Call the function written in VorticityRecoveryHelpers
-    unsigned npartial_derivative(const unsigned &n) const
+    unsigned npartial_derivative(const unsigned& n) const
     {
       // Return the result
       return VorticityRecoveryHelpers::Recovery_helper.npartial_derivative(n);
@@ -709,7 +709,7 @@ namespace oomph
 
     /// \short Access function: Pointer to function that specifies exact
     /// vorticity and derivatives (for validation).
-    ExactVorticityFctPt &exact_vorticity_fct_pt()
+    ExactVorticityFctPt& exact_vorticity_fct_pt()
     {
       // Return the address of the function pointer
       return Exact_vorticity_fct_pt;
@@ -733,7 +733,7 @@ namespace oomph
     /// \short Number of values required at local node n. In order to simplify
     /// matters, we allocate storage for pressure variables at all the nodes
     /// and then pin those that are not used.
-    unsigned required_nvalue(const unsigned &n) const
+    unsigned required_nvalue(const unsigned& n) const
     {
       // Return the number of values used per field
       return Number_of_values_per_field;
@@ -750,8 +750,8 @@ namespace oomph
     /// Note: Given the generality of the interface (this function is usually
     /// called from black-box documentation or interpolation routines), the
     /// values Vector sets its own size in here.
-    void get_interpolated_values(const Vector<double> &s,
-                                 Vector<double> &values)
+    void get_interpolated_values(const Vector<double>& s,
+                                 Vector<double>& values)
     {
       // Get the value at the current time
       unsigned t = 0;
@@ -764,9 +764,9 @@ namespace oomph
     /// Note: Given the generality of the interface (this function is usually
     /// called from black-box documentation or interpolation routines), the
     /// values Vector sets its own size in here.
-    void get_interpolated_values(const unsigned &t,
-                                 const Vector<double> &s,
-                                 Vector<double> &values)
+    void get_interpolated_values(const unsigned& t,
+                                 const Vector<double>& s,
+                                 Vector<double>& values)
     {
       // Set size of vector and initialise all entries to zero
       values.resize(Number_of_values_per_field, 0.0);
@@ -809,7 +809,7 @@ namespace oomph
       for (unsigned j = 0; j < nnod; j++)
       {
         // Make a pointer to the j-th node in the element
-        Node *nod_pt = this->node_pt(j);
+        Node* nod_pt = this->node_pt(j);
 
         // Loop over the fields
         for (unsigned i = Smoothed_vorticity_index;
@@ -824,8 +824,8 @@ namespace oomph
 
     /// \short Output exact velocity, vorticity, derivatives and indicator
     /// based on functions specified by two function pointers
-    void output_analytical_veloc_and_vorticity(std::ostream &outfile,
-                                               const unsigned &nplot)
+    void output_analytical_veloc_and_vorticity(std::ostream& outfile,
+                                               const unsigned& nplot)
     {
       // Vector of local coordinates
       Vector<double> s(N_dim, 0.0);
@@ -898,7 +898,7 @@ namespace oomph
     } // End of output_analytical_veloc_and_vorticity
 
     /// \short Output the velocity, smoothed vorticity and derivatives
-    void output_smoothed_vorticity(std::ostream &outfile, const unsigned &nplot)
+    void output_smoothed_vorticity(std::ostream& outfile, const unsigned& nplot)
     {
       // Vector of local coordinates
       Vector<double> s(N_dim, 0.0);
@@ -994,9 +994,9 @@ namespace oomph
 
     /// \short Write values of the i-th scalar field at the plot points. Needs
     /// to be implemented for each new specific element type.
-    void scalar_value_paraview(std::ofstream &file_out,
-                               const unsigned &i,
-                               const unsigned &nplot) const
+    void scalar_value_paraview(std::ofstream& file_out,
+                               const unsigned& i,
+                               const unsigned& nplot) const
     {
       // Vector of local coordinates
       Vector<double> s(N_dim, 0.0);
@@ -1063,7 +1063,7 @@ namespace oomph
     /// \short Name of the i-th scalar field. Default implementation
     /// returns V1 for the first one, V2 for the second etc. Can (should!) be
     /// overloaded with more meaningful names in specific elements.
-    std::string scalar_name_paraview(const unsigned &i) const
+    std::string scalar_name_paraview(const unsigned& i) const
     {
       // Velocities
       if (i < N_dim)
@@ -1158,7 +1158,7 @@ namespace oomph
 
     /// \short Overloaded output function: Output velocity, pressure and the
     /// smoothed vorticity
-    void output(std::ostream &outfile, const unsigned &nplot)
+    void output(std::ostream& outfile, const unsigned& nplot)
     {
       // Vector of local coordinates
       Vector<double> s(N_dim, 0.0);
@@ -1240,8 +1240,8 @@ namespace oomph
     } // End of output
 
     /// Get raw derivative of velocity
-    void get_raw_velocity_deriv(const Vector<double> &s,
-                                Vector<double> &dveloc_dx) const
+    void get_raw_velocity_deriv(const Vector<double>& s,
+                                Vector<double>& dveloc_dx) const
     {
       // Find out how many nodes there are
       unsigned n_node = this->nnode();
@@ -1274,9 +1274,9 @@ namespace oomph
     } // End of get_raw_velocity_deriv
 
     /// Get raw derivative of velocity
-    void get_raw_velocity_deriv(const Vector<double> &s,
-                                double &dveloc_dx,
-                                const unsigned &index) const
+    void get_raw_velocity_deriv(const Vector<double>& s,
+                                double& dveloc_dx,
+                                const unsigned& index) const
     {
       // Find out how many nodes there are
       unsigned n_node = this->nnode();
@@ -1335,8 +1335,8 @@ namespace oomph
     } // End of get_raw_velocity_deriv
 
     /// Get raw derivative of smoothed vorticity
-    void get_raw_vorticity_deriv(const Vector<double> &s,
-                                 Vector<double> &dvorticity_dx) const
+    void get_raw_vorticity_deriv(const Vector<double>& s,
+                                 Vector<double>& dvorticity_dx) const
     {
       // Find out how many nodes there are
       unsigned n_node = this->nnode();
@@ -1367,9 +1367,9 @@ namespace oomph
     } // End of get_raw_vorticity_deriv
 
     /// Get raw derivative of smoothed vorticity
-    void get_raw_vorticity_deriv(const Vector<double> &s,
-                                 double &dvorticity_dx,
-                                 const unsigned &index) const
+    void get_raw_vorticity_deriv(const Vector<double>& s,
+                                 double& dvorticity_dx,
+                                 const unsigned& index) const
     {
       // Find out how many nodes there are
       unsigned n_node = this->nnode();
@@ -1414,8 +1414,8 @@ namespace oomph
     } // End of get_raw_vorticity_deriv
 
     /// Get raw derivative of smoothed derivative vorticity
-    void get_raw_vorticity_second_deriv(const Vector<double> &s,
-                                        Vector<double> &dvorticity_dxdy) const
+    void get_raw_vorticity_second_deriv(const Vector<double>& s,
+                                        Vector<double>& dvorticity_dxdy) const
     {
       // Find out how many nodes there are
       unsigned n_node = this->nnode();
@@ -1451,9 +1451,9 @@ namespace oomph
 
     /// Get raw derivative of smoothed derivative vorticity
     /// [0]: d^2/dx^2, [1]: d^2/dxdy, [2]: d^2/dy^2
-    void get_raw_vorticity_second_deriv(const Vector<double> &s,
-                                        double &dvorticity_dxdy,
-                                        const unsigned &index) const
+    void get_raw_vorticity_second_deriv(const Vector<double>& s,
+                                        double& dvorticity_dxdy,
+                                        const unsigned& index) const
     {
       // Find out how many nodes there are
       unsigned n_node = this->nnode();
@@ -1511,8 +1511,8 @@ namespace oomph
 
     /// Get raw derivative of smoothed derivative vorticity
     /// [0]: d^3/dx^3, [1]: d^3/dx^2dy, [2]: d^3/dxdy^2, [3]: d^3/dy^3
-    void get_raw_vorticity_third_deriv(const Vector<double> &s,
-                                       Vector<double> &dvorticity_dxdxdy) const
+    void get_raw_vorticity_third_deriv(const Vector<double>& s,
+                                       Vector<double>& dvorticity_dxdxdy) const
     {
       // Find out how many nodes there are
       unsigned n_node = this->nnode();
@@ -1552,9 +1552,9 @@ namespace oomph
 
     /// Get raw derivative of smoothed derivative vorticity
     /// [0]: d^3/dx^3, [1]: d^3/dx^2dy, [2]: d^3/dxdy^2, [3]: d^3/dy^3,
-    void get_raw_vorticity_third_deriv(const Vector<double> &s,
-                                       double &dvorticity_dxdxdy,
-                                       const unsigned &index) const
+    void get_raw_vorticity_third_deriv(const Vector<double>& s,
+                                       double& dvorticity_dxdxdy,
+                                       const unsigned& index) const
     {
       // Find out how many nodes there are
       unsigned n_node = this->nnode();
@@ -1624,7 +1624,7 @@ namespace oomph
     /// of the difference between exact and smoothed vorticity. The input
     /// i corresponds to the i-th dof stored at each node (excluding the
     /// velocities and pressure).
-    double vorticity_error_squared(const unsigned &i)
+    double vorticity_error_squared(const unsigned& i)
     {
 #ifdef PARANOID
       // Number of derivatives to be recovered
@@ -1735,8 +1735,8 @@ namespace oomph
     } // End of vorticity_error_squared
 
     /// \short Compute smoothed vorticity and its derivatives
-    void vorticity_and_its_derivs(const Vector<double> &s,
-                                  Vector<Vector<double>> &vort_and_derivs) const
+    void vorticity_and_its_derivs(const Vector<double>& s,
+                                  Vector<Vector<double>>& vort_and_derivs) const
     {
       // Get the number of nodes in this element
       unsigned n_node = this->nnode();
@@ -1834,19 +1834,19 @@ class VorticitySmoother
 {
 public:
   /// Constructor: Set order of recovery shape functions
-  VorticitySmoother(const unsigned &recovery_order) :
+  VorticitySmoother(const unsigned& recovery_order) :
     Recovery_order(recovery_order)
   {
   }
 
   /// Broken copy constructor
-  VorticitySmoother(const VorticitySmoother &)
+  VorticitySmoother(const VorticitySmoother&)
   {
     BrokenCopy::broken_copy("VorticitySmoother");
   }
 
   /// Broken assignment operator
-  void operator=(const VorticitySmoother &)
+  void operator=(const VorticitySmoother&)
   {
     BrokenCopy::broken_assign("VorticitySmoother");
   }
@@ -1855,7 +1855,7 @@ public:
   virtual ~VorticitySmoother() {}
 
   /// Access function for order of recovery polynomials
-  unsigned &recovery_order()
+  unsigned& recovery_order()
   {
     // Return the order of recovery
     return Recovery_order;
@@ -1864,7 +1864,7 @@ public:
   /// \short Recovery shape functions as functions of the global, Eulerian
   /// coordinate x of dimension dim. The recovery shape functions are complete
   /// polynomials of the order specified by Recovery_order.
-  void shape_rec(const Vector<double> &x, Vector<double> &psi_r)
+  void shape_rec(const Vector<double>& x, Vector<double>& psi_r)
   {
     // Create an ostringstream object to create a string
     std::ostringstream error_stream;
@@ -1924,7 +1924,7 @@ public:
   /// The type of element is specified by the boolean which is
   /// true if elements in the patch are QElements and false if they are
   /// TElements (will need change if we ever have other element types)
-  Integral *integral_rec(const bool &is_q_mesh)
+  Integral* integral_rec(const bool& is_q_mesh)
   {
     // Create an ostringstream object to create a string
     std::ostringstream error_stream;
@@ -1996,16 +1996,15 @@ public:
   /// adjacent_elements_pt[nod_pt] contains the pointer to the vector that
   /// contains the pointers to the elements that the node is part of.
   /// Also returns a Vector of vertex nodes for use in get_element_errors.
-  void setup_patches(
-    Mesh *&mesh_pt,
-    std::map<Node *, Vector<ELEMENT *> *> &adjacent_elements_pt,
-    Vector<Node *> &vertex_node_pt)
+  void setup_patches(Mesh*& mesh_pt,
+                     std::map<Node*, Vector<ELEMENT*>*>& adjacent_elements_pt,
+                     Vector<Node*>& vertex_node_pt)
   {
     // Clear: hierher should we do this in Z2 as well?
     adjacent_elements_pt.clear();
 
     // Auxiliary map that contains element-adjacency for ALL nodes
-    std::map<Node *, Vector<ELEMENT *> *> aux_adjacent_elements_pt;
+    std::map<Node*, Vector<ELEMENT*>*> aux_adjacent_elements_pt;
 
 #ifdef PARANOID
     // Check if all elements request the same recovery order
@@ -2019,7 +2018,7 @@ public:
     unsigned nelem = mesh_pt->nelement();
     for (unsigned e = 0; e < nelem; e++)
     {
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt->element_pt(e));
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt->element_pt(e));
 
 #ifdef PARANOID
       // Check if all elements request the same recovery order
@@ -2034,13 +2033,13 @@ public:
       for (unsigned n = 0; n < nnod; n++)
       {
         // Make a pointer to the n-th node
-        Node *nod_pt = el_pt->node_pt(n);
+        Node* nod_pt = el_pt->node_pt(n);
 
         // Has this node been considered before?
         if (aux_adjacent_elements_pt[nod_pt] == 0)
         {
           // Create Vector of pointers to its adjacent elements
-          aux_adjacent_elements_pt[nod_pt] = new Vector<ELEMENT *>;
+          aux_adjacent_elements_pt[nod_pt] = new Vector<ELEMENT*>;
         }
 
         // Add pointer to adjacent element
@@ -2068,13 +2067,13 @@ public:
     nelem = mesh_pt->nelement();
     for (unsigned e = 0; e < nelem; e++)
     {
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt->element_pt(e));
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt->element_pt(e));
 
       // Loop over corner nodes
       unsigned n_node = el_pt->nvertex_node();
       for (unsigned n = 0; n < n_node; n++)
       {
-        Node *nod_pt = el_pt->vertex_node_pt(n);
+        Node* nod_pt = el_pt->vertex_node_pt(n);
 
         // Has this node been considered before?
         if (adjacent_elements_pt[nod_pt] == 0)
@@ -2083,7 +2082,7 @@ public:
           vertex_node_pt.push_back(nod_pt);
 
           // Create Vector of pointers to its adjacent elements
-          adjacent_elements_pt[nod_pt] = new Vector<ELEMENT *>;
+          adjacent_elements_pt[nod_pt] = new Vector<ELEMENT*>;
 
           // Copy across:
           unsigned nel = (*aux_adjacent_elements_pt[nod_pt]).size();
@@ -2097,7 +2096,7 @@ public:
     } // End of loop over elements
 
     // Cleanup
-    for (typename std::map<Node *, Vector<ELEMENT *> *>::iterator it =
+    for (typename std::map<Node*, Vector<ELEMENT*>*>::iterator it =
            aux_adjacent_elements_pt.begin();
          it != aux_adjacent_elements_pt.end();
          it++)
@@ -2114,16 +2113,16 @@ public:
   /// 6: d^3/dx^3, 7: d^3/dx^2dy, 8: d^3/dxdy^2, 9: d^3/dy^3,
   /// 10: du/dx, 11: du/dy, 12: dv/dx, 13: dv/dy
   void get_recovered_vorticity_in_patch(
-    const Vector<ELEMENT *> &patch_el_pt,
-    const unsigned &num_recovery_terms,
-    Vector<double> *&recovered_vorticity_coefficient_pt,
-    unsigned &n_deriv)
+    const Vector<ELEMENT*>& patch_el_pt,
+    const unsigned& num_recovery_terms,
+    Vector<double>*& recovered_vorticity_coefficient_pt,
+    unsigned& n_deriv)
   {
     // Find the number of elements in the patch
     unsigned nelem = patch_el_pt.size();
 
     // Get a pointer to any element
-    ELEMENT *el_pt = patch_el_pt[0];
+    ELEMENT* el_pt = patch_el_pt[0];
 
 #ifdef PARANOID
     // If there's at least one element
@@ -2245,20 +2244,20 @@ public:
     // If we can dynamic cast to the TElementBase, then it's a triangle/tet
     // Note that I'm assuming that all elements are of the same geometry, but
     // if they weren't we could adapt...
-    if (dynamic_cast<TElementBase *>(patch_el_pt[0]))
+    if (dynamic_cast<TElementBase*>(patch_el_pt[0]))
     {
       // We're dealing with a triangle-based mesh so change the bool value
       is_q_mesh = false;
     }
 
     // Get a pointer to the appropriate integration type
-    Integral *const integ_pt = this->integral_rec(is_q_mesh);
+    Integral* const integ_pt = this->integral_rec(is_q_mesh);
 
     // Loop over all elements in patch to assemble linear system
     for (unsigned e = 0; e < nelem; e++)
     {
       // Get pointer to element
-      ELEMENT *const el_pt = patch_el_pt[e];
+      ELEMENT* const el_pt = patch_el_pt[e];
 
       // Create storage for the recovery shape function values
       Vector<double> psi_r(num_recovery_terms);
@@ -2425,7 +2424,7 @@ public:
   } // End of nrecovery_order
 
   /// Recover vorticity from patches
-  void recover_vorticity(Mesh *mesh_pt)
+  void recover_vorticity(Mesh* mesh_pt)
   {
     // Create a DocInfo object (used as a dummy argument)
     DocInfo doc_info;
@@ -2439,7 +2438,7 @@ public:
 
   /// \short Recover vorticity from patches -- output intermediate steps
   /// to directory specified by DocInfo object
-  void recover_vorticity(Mesh *mesh_pt, DocInfo &doc_info)
+  void recover_vorticity(Mesh* mesh_pt, DocInfo& doc_info)
   {
     // Start the timer
     double t_start = TimingHelpers::timer();
@@ -2453,16 +2452,16 @@ public:
     // Make patches
     //-------------
     // Allocate space for the mapping from nodes to elements
-    std::map<Node *, Vector<ELEMENT *> *> adjacent_elements_pt;
+    std::map<Node*, Vector<ELEMENT*>*> adjacent_elements_pt;
 
     // Allocate space for the vertex nodes
-    Vector<Node *> vertex_node_pt;
+    Vector<Node*> vertex_node_pt;
 
     // Set up the patches information
     setup_patches(mesh_pt, adjacent_elements_pt, vertex_node_pt);
 
     // Grab any element (this shouldn't be a null pointer)
-    ELEMENT *const el_pt = dynamic_cast<ELEMENT *>(mesh_pt->element_pt(0));
+    ELEMENT* const el_pt = dynamic_cast<ELEMENT*>(mesh_pt->element_pt(0));
 
     // Get the index of the vorticity
     unsigned smoothed_vorticity_index = el_pt->smoothed_vorticity_index();
@@ -2508,7 +2507,7 @@ public:
     unsigned num_recovery_terms = nrecovery_order();
 
     // Counter for averaging of recovered vorticity and its derivatives
-    std::map<Node *, unsigned> count;
+    std::map<Node*, unsigned> count;
 
     // Counter for which nodal value we're assigning
     unsigned nodal_dof = 0;
@@ -2535,19 +2534,19 @@ public:
 
       // Storage for accumulated nodal vorticity (used to compute nodal
       // averages)
-      std::map<Node *, double> averaged_recovered_vort;
+      std::map<Node*, double> averaged_recovered_vort;
 
       // Calculation of vorticity
       //-------------------------
       // Do patch recovery
       // unsigned counter=0;
-      for (typename std::map<Node *, Vector<ELEMENT *> *>::iterator it =
+      for (typename std::map<Node*, Vector<ELEMENT*>*>::iterator it =
              adjacent_elements_pt.begin();
            it != adjacent_elements_pt.end();
            it++)
       {
         // Pointer to the recovered vorticity coefficients
-        Vector<double> *recovered_vorticity_coefficient_pt;
+        Vector<double>* recovered_vorticity_coefficient_pt;
 
         // Setup smoothed vorticity field for patches
         get_recovered_vorticity_in_patch(*(it->second),
@@ -2565,7 +2564,7 @@ public:
         for (unsigned e = 0; e < nelem; e++)
         {
           // Get pointer to element
-          ELEMENT *const el_pt = (*(it->second))[e];
+          ELEMENT* const el_pt = (*(it->second))[e];
 
           // Get the number of nodes by element
           unsigned nnode_el = el_pt->nnode();
@@ -2574,7 +2573,7 @@ public:
           for (unsigned j = 0; j < nnode_el; j++)
           {
             // Get a pointer to the j-th node in this element
-            Node *nod_pt = el_pt->node_pt(j);
+            Node* nod_pt = el_pt->node_pt(j);
 
             // Get the local coordinates of the node
             el_pt->local_coordinate_of_node(j, s);
@@ -2621,7 +2620,7 @@ public:
       for (unsigned j = 0; j < nnod; j++)
       {
         // Make a pointer to the j-th node
-        Node *nod_pt = mesh_pt->node_pt(j);
+        Node* nod_pt = mesh_pt->node_pt(j);
 
         // Calculate the values of the smoothed vorticity
         averaged_recovered_vort[nod_pt] /= count[nod_pt];
@@ -2639,7 +2638,7 @@ public:
     } // for (unsigned deriv=0;deriv<max_vort_recov+max_veloc_recov;deriv++)
 
     // Cleanup
-    for (typename std::map<Node *, Vector<ELEMENT *> *>::iterator it =
+    for (typename std::map<Node*, Vector<ELEMENT*>*>::iterator it =
            adjacent_elements_pt.begin();
          it != adjacent_elements_pt.end();
          it++)

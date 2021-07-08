@@ -61,7 +61,7 @@ namespace Global_Physical_Variables
 
 namespace WallFunction
 {
-  void normal(const Vector<double> &x, Vector<double> &normal)
+  void normal(const Vector<double>& x, Vector<double>& normal)
   {
     // Calculate theta
     double theta = std::atan2(x[1], x[0]);
@@ -81,17 +81,17 @@ class AxialSolidQuarterTubeMesh :
   public SolidMesh
 {
   /// Vector of pointers to element in the fluid layer
-  Vector<GeneralisedElement *> Bulk_element_pt;
+  Vector<GeneralisedElement*> Bulk_element_pt;
 
   /// Vector of pointers to interface elements
-  Vector<FiniteElement *> Interface_element_pt;
+  Vector<FiniteElement*> Interface_element_pt;
 
   /// Vector of pointers to interface elements
-  Vector<FiniteElement *> Interface_edge_element_pt;
+  Vector<FiniteElement*> Interface_edge_element_pt;
 
 public:
   /// Access functions for pointers to interface elements
-  FiniteElement *&interface_element_pt(const unsigned long &i)
+  FiniteElement*& interface_element_pt(const unsigned long& i)
   {
     return Interface_element_pt[i];
   }
@@ -103,7 +103,7 @@ public:
   }
 
   /// Access functions for pointers to interface elements
-  FiniteElement *&interface_edge_element_pt(const unsigned long &i)
+  FiniteElement*& interface_edge_element_pt(const unsigned long& i)
   {
     return Interface_edge_element_pt[i];
   }
@@ -114,13 +114,13 @@ public:
     return Interface_edge_element_pt.size();
   }
 
-  Vector<GeneralisedElement *> &bulk_element_pt()
+  Vector<GeneralisedElement*>& bulk_element_pt()
   {
     return Bulk_element_pt;
   }
 
   /// Access functions for pointers to elements in bulk
-  GeneralisedElement *&bulk_element_pt(const unsigned long &i)
+  GeneralisedElement*& bulk_element_pt(const unsigned long& i)
   {
     return Bulk_element_pt[i];
   }
@@ -133,12 +133,12 @@ public:
 
   /// Constructor
   AxialSolidQuarterTubeMesh(
-    GeomObject *wall_pt,
-    const Vector<double> &xi_lo,
-    const double &fract_mid,
-    const Vector<double> &xi_hi,
-    const unsigned &nlayer,
-    TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+    GeomObject* wall_pt,
+    const Vector<double>& xi_lo,
+    const double& fract_mid,
+    const Vector<double>& xi_hi,
+    const unsigned& nlayer,
+    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
     QuarterTubeMesh<ELEMENT>(
       wall_pt, xi_lo, fract_mid, xi_hi, nlayer, time_stepper_pt),
 
@@ -157,7 +157,7 @@ public:
     // of the first node in each element.
     Bulk_element_pt = Element_pt;
 
-    FiniteElement *interface_element_pt = 0;
+    FiniteElement* interface_element_pt = 0;
 
     // Loop over the elements adjacent to boundary 4
     unsigned b = 4;
@@ -193,29 +193,29 @@ public:
       }
 
       // Now if we have a match make the element
-      FluidInterfaceBoundingElement *interface_edge_element_pt = 0;
+      FluidInterfaceBoundingElement* interface_edge_element_pt = 0;
       if (adjacent[0])
       {
         interface_edge_element_pt =
-          dynamic_cast<INTERFACE_ELEMENT *>(interface_element_pt)
+          dynamic_cast<INTERFACE_ELEMENT*>(interface_element_pt)
             ->make_bounding_element(-2);
       }
       else if (adjacent[1])
       {
         interface_edge_element_pt =
-          dynamic_cast<INTERFACE_ELEMENT *>(interface_element_pt)
+          dynamic_cast<INTERFACE_ELEMENT*>(interface_element_pt)
             ->make_bounding_element(1);
       }
       else if (adjacent[2])
       {
         interface_edge_element_pt =
-          dynamic_cast<INTERFACE_ELEMENT *>(interface_element_pt)
+          dynamic_cast<INTERFACE_ELEMENT*>(interface_element_pt)
             ->make_bounding_element(2);
       }
       else if (adjacent[3])
       {
         interface_edge_element_pt =
-          dynamic_cast<INTERFACE_ELEMENT *>(interface_element_pt)
+          dynamic_cast<INTERFACE_ELEMENT*>(interface_element_pt)
             ->make_bounding_element(-1);
       }
 
@@ -223,15 +223,15 @@ public:
       {
         Element_pt.push_back(interface_edge_element_pt);
         Interface_edge_element_pt.push_back(interface_edge_element_pt);
-        dynamic_cast<FluidInterfaceBoundingElement *>(interface_edge_element_pt)
+        dynamic_cast<FluidInterfaceBoundingElement*>(interface_edge_element_pt)
           ->wall_unit_normal_fct_pt() = WallFunction::normal;
 
         // Set the contact angle
-        dynamic_cast<FluidInterfaceBoundingElement *>(interface_edge_element_pt)
+        dynamic_cast<FluidInterfaceBoundingElement*>(interface_edge_element_pt)
           ->set_contact_angle(&Global_Physical_Variables::Angle);
 
         // Set the capillary number
-        dynamic_cast<FluidInterfaceBoundingElement *>(interface_edge_element_pt)
+        dynamic_cast<FluidInterfaceBoundingElement*>(interface_edge_element_pt)
           ->ca_pt() = &Global_Physical_Variables::Ca;
       }
     }
@@ -248,14 +248,14 @@ class SolidFreeSurfaceRotationProblem : public Problem
   double Volume;
 
   // Constitutive law used to determine the mesh deformation
-  ConstitutiveLaw *Constitutive_law_pt;
+  ConstitutiveLaw* Constitutive_law_pt;
 
 public:
   /// Constructor: Pass DocInfo object and target errors
-  SolidFreeSurfaceRotationProblem(DocInfo &doc_info,
-                                  const double &min_error_target,
-                                  const double &max_error_target,
-                                  const unsigned &hijack_flag);
+  SolidFreeSurfaceRotationProblem(DocInfo& doc_info,
+                                  const double& min_error_target,
+                                  const double& max_error_target,
+                                  const unsigned& hijack_flag);
 
   /// Destructor to clean up memory (empty)
   ~SolidFreeSurfaceRotationProblem() {}
@@ -266,8 +266,8 @@ public:
     unsigned n_node = Bulk_mesh_pt->nnode();
     for (unsigned n = 0; n < n_node; n++)
     {
-      SolidNode *solid_nod_pt =
-        static_cast<SolidNode *>(Bulk_mesh_pt->node_pt(n));
+      SolidNode* solid_nod_pt =
+        static_cast<SolidNode*>(Bulk_mesh_pt->node_pt(n));
       for (unsigned i = 0; i < 3; i++)
       {
         solid_nod_pt->x(i) = solid_nod_pt->xi(i);
@@ -288,26 +288,26 @@ public:
 private:
   /// Storage for the Bulk Mesh
   AxialSolidQuarterTubeMesh<ELEMENT,
-                            ElasticSurfaceFluidInterfaceElement<ELEMENT>>
-    *Bulk_mesh_pt;
+                            ElasticSurfaceFluidInterfaceElement<ELEMENT>>*
+    Bulk_mesh_pt;
 
   /// The mesh of free surface elements
-  Mesh *Free_surface_mesh_pt;
+  Mesh* Free_surface_mesh_pt;
 
   /// Storage for the elements on the free surface boundary
-  Mesh *Free_surface_bounding_mesh_pt;
+  Mesh* Free_surface_bounding_mesh_pt;
 
   /// Storage for the elements that compute the enclosed fluid volume
-  Mesh *Volume_computation_mesh_pt;
+  Mesh* Volume_computation_mesh_pt;
 
   /// Storage for the volume constraint element
-  Mesh *Volume_constraint_mesh_pt;
+  Mesh* Volume_constraint_mesh_pt;
 
   /// Storage for the external pressure
-  Data *External_pressure_data_pt;
+  Data* External_pressure_data_pt;
 
   /// Storage for the pressure that is traded for the volume constraint
-  Data *Traded_pressure_data_pt;
+  Data* Traded_pressure_data_pt;
 
 }; // end_of_problem_class
 
@@ -316,10 +316,10 @@ private:
 //========================================================================
 template<class ELEMENT>
 SolidFreeSurfaceRotationProblem<ELEMENT>::SolidFreeSurfaceRotationProblem(
-  DocInfo &doc_info,
-  const double &min_error_target,
-  const double &max_error_target,
-  const unsigned &hijack_flag) :
+  DocInfo& doc_info,
+  const double& min_error_target,
+  const double& max_error_target,
+  const unsigned& hijack_flag) :
   Volume(atan(1.0)), Doc_info(doc_info)
 {
   // Create a pointer to the external pressure
@@ -337,7 +337,7 @@ SolidFreeSurfaceRotationProblem<ELEMENT>::SolidFreeSurfaceRotationProblem(
 
   // Create geometric objects: Elliptical tube with half axes = radius = 1.0
   double radius = 1.0;
-  GeomObject *Wall_pt = new EllipticalTube(radius, radius);
+  GeomObject* Wall_pt = new EllipticalTube(radius, radius);
 
   // Boundaries on object
   Vector<double> xi_lo(2);
@@ -365,7 +365,7 @@ SolidFreeSurfaceRotationProblem<ELEMENT>::SolidFreeSurfaceRotationProblem(
       Wall_pt, xi_lo, frac_mid, xi_hi, nlayer);
 
   // Set error estimator
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   Bulk_mesh_pt->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Error targets for adaptive refinement
@@ -385,7 +385,7 @@ SolidFreeSurfaceRotationProblem<ELEMENT>::SolidFreeSurfaceRotationProblem(
         Bulk_mesh_pt->boundary_node_pt(b, n)->pin(i);
       }
       // Pin the z position of the bottom
-      static_cast<SolidNode *>(Bulk_mesh_pt->boundary_node_pt(b, n))
+      static_cast<SolidNode*>(Bulk_mesh_pt->boundary_node_pt(b, n))
         ->pin_position(2);
     }
   }
@@ -397,7 +397,7 @@ SolidFreeSurfaceRotationProblem<ELEMENT>::SolidFreeSurfaceRotationProblem(
     for (unsigned n = 0; n < n_node; n++)
     {
       Bulk_mesh_pt->boundary_node_pt(b, n)->pin(0);
-      static_cast<SolidNode *>(Bulk_mesh_pt->boundary_node_pt(b, n))
+      static_cast<SolidNode*>(Bulk_mesh_pt->boundary_node_pt(b, n))
         ->pin_position(0);
     }
   }
@@ -410,7 +410,7 @@ SolidFreeSurfaceRotationProblem<ELEMENT>::SolidFreeSurfaceRotationProblem(
     for (unsigned n = 0; n < n_node; n++)
     {
       Bulk_mesh_pt->boundary_node_pt(b, n)->pin(1);
-      static_cast<SolidNode *>(Bulk_mesh_pt->boundary_node_pt(b, n))
+      static_cast<SolidNode*>(Bulk_mesh_pt->boundary_node_pt(b, n))
         ->pin_position(1);
     }
   }
@@ -428,7 +428,7 @@ SolidFreeSurfaceRotationProblem<ELEMENT>::SolidFreeSurfaceRotationProblem(
 
       for (unsigned i = 0; i < 2; i++)
       {
-        static_cast<SolidNode *>(Bulk_mesh_pt->boundary_node_pt(b, n))
+        static_cast<SolidNode*>(Bulk_mesh_pt->boundary_node_pt(b, n))
           ->pin_position(i);
       }
     }
@@ -445,7 +445,7 @@ SolidFreeSurfaceRotationProblem<ELEMENT>::SolidFreeSurfaceRotationProblem(
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->bulk_element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->bulk_element_pt(i));
 
     el_pt->constitutive_law_pt() = Constitutive_law_pt;
   }
@@ -466,7 +466,7 @@ SolidFreeSurfaceRotationProblem<ELEMENT>::SolidFreeSurfaceRotationProblem(
     // can add an arbitrary constant to all pressures. To make
     // the solution unique, we pin a single pressure value in the bulk:
     // We arbitrarily set the pressure dof 0 in element 0 to zero.
-    dynamic_cast<ELEMENT *>(Bulk_mesh_pt->bulk_element_pt(0))
+    dynamic_cast<ELEMENT*>(Bulk_mesh_pt->bulk_element_pt(0))
       ->fix_pressure(0, 0.0);
   }
   // Otherwise we are hijacking an internal value
@@ -485,7 +485,7 @@ SolidFreeSurfaceRotationProblem<ELEMENT>::SolidFreeSurfaceRotationProblem(
       //(Its value will affect the residual of that element but it will not
       // be determined by it, i.e. it's hijacked).
       Traded_pressure_data_pt =
-        dynamic_cast<ELEMENT *>(Bulk_mesh_pt->bulk_element_pt(0))
+        dynamic_cast<ELEMENT*>(Bulk_mesh_pt->bulk_element_pt(0))
           ->hijack_nodal_value(0, 3);
     }
     // Otherwise hijack internal
@@ -496,7 +496,7 @@ SolidFreeSurfaceRotationProblem<ELEMENT>::SolidFreeSurfaceRotationProblem(
       //(Its value will affect the residual of that element but it will not
       // be determined by it, i.e. it's hijacked).
       Traded_pressure_data_pt =
-        dynamic_cast<ELEMENT *>(Bulk_mesh_pt->bulk_element_pt(0))
+        dynamic_cast<ELEMENT*>(Bulk_mesh_pt->bulk_element_pt(0))
           ->hijack_internal_value(0, 0);
     }
   }
@@ -505,8 +505,8 @@ SolidFreeSurfaceRotationProblem<ELEMENT>::SolidFreeSurfaceRotationProblem(
   unsigned n_interface = Bulk_mesh_pt->ninterface_element();
   for (unsigned e = 0; e < n_interface; e++)
   {
-    ElasticSurfaceFluidInterfaceElement<ELEMENT> *el_pt =
-      dynamic_cast<ElasticSurfaceFluidInterfaceElement<ELEMENT> *>(
+    ElasticSurfaceFluidInterfaceElement<ELEMENT>* el_pt =
+      dynamic_cast<ElasticSurfaceFluidInterfaceElement<ELEMENT>*>(
         Bulk_mesh_pt->interface_element_pt(e));
 
     // set the capillary number
@@ -538,7 +538,7 @@ void SolidFreeSurfaceRotationProblem<
 {
   // The single volume constraint element
   Volume_constraint_mesh_pt = new Mesh;
-  VolumeConstraintElement *vol_constraint_element =
+  VolumeConstraintElement* vol_constraint_element =
     new VolumeConstraintElement(&Volume, Traded_pressure_data_pt, 0);
   Volume_constraint_mesh_pt->add_element_pt(vol_constraint_element);
 
@@ -556,14 +556,14 @@ void SolidFreeSurfaceRotationProblem<
     {
       // Get pointer to the bulk fluid element that is
       // adjacent to boundary b
-      ELEMENT *bulk_elem_pt =
-        dynamic_cast<ELEMENT *>(Bulk_mesh_pt->boundary_element_pt(b, e));
+      ELEMENT* bulk_elem_pt =
+        dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(b, e));
 
       // Find the index of the face of element e along boundary b
       int face_index = Bulk_mesh_pt->face_index_at_boundary(b, e);
 
       // Create new element
-      ElasticSurfaceVolumeConstraintBoundingElement<ELEMENT> *el_pt =
+      ElasticSurfaceVolumeConstraintBoundingElement<ELEMENT>* el_pt =
         new ElasticSurfaceVolumeConstraintBoundingElement<ELEMENT>(bulk_elem_pt,
                                                                    face_index);
 
@@ -596,7 +596,7 @@ void SolidFreeSurfaceRotationProblem<ELEMENT>::doc_solution()
   unsigned n_element = Bulk_mesh_pt->nbulk();
   for (unsigned i = 0; i < n_element; i++)
   {
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->bulk_element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->bulk_element_pt(i));
     el_pt->output(some_file, npts);
   }
   some_file.close();
@@ -610,7 +610,7 @@ void SolidFreeSurfaceRotationProblem<ELEMENT>::doc_solution()
 /// any command line arguments, we regard this as a validation run
 /// and perform only a single adaptation
 //=====================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

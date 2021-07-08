@@ -47,13 +47,13 @@ namespace oomph
     /// in the x, y and z directions and the corresponding dimensions.
     /// Timestepper defaults to Steady.
     SimpleCubicTetMesh(
-      const unsigned &n_x,
-      const unsigned &n_y,
-      const unsigned &n_z,
-      const double &l_x,
-      const double &l_y,
-      const double &l_z,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper)
+      const unsigned& n_x,
+      const unsigned& n_y,
+      const unsigned& n_z,
+      const double& l_x,
+      const double& l_y,
+      const double& l_z,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
     {
       // Mesh can only be built with 3D Telements.
       MeshChecker::assert_geometric_element<TElementGeometricBase, ELEMENT>(3);
@@ -85,10 +85,10 @@ namespace oomph
 
   private:
     /// Build mesh from scaffold mesh
-    void build_from_scaffold(TimeStepper *time_stepper_pt);
+    void build_from_scaffold(TimeStepper* time_stepper_pt);
 
     /// Temporary scaffold mesh
-    Mesh *Tmp_mesh_pt;
+    Mesh* Tmp_mesh_pt;
   };
 
 } // namespace oomph

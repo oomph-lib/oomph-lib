@@ -76,13 +76,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    Domain(const Domain &)
+    Domain(const Domain&)
     {
       BrokenCopy::broken_copy("Domain");
     }
 
     /// Broken assignment operator
-    void operator=(const Domain &)
+    void operator=(const Domain&)
     {
       BrokenCopy::broken_assign("Domain");
     }
@@ -91,7 +91,7 @@ namespace oomph
     virtual ~Domain(){};
 
     /// \short Access to i-th macro element
-    MacroElement *macro_element_pt(const unsigned &i)
+    MacroElement* macro_element_pt(const unsigned& i)
     {
       return Macro_element_pt[i];
     }
@@ -103,7 +103,7 @@ namespace oomph
     }
 
     /// Output macro elements
-    void output(const std::string &filename, const unsigned &nplot)
+    void output(const std::string& filename, const unsigned& nplot)
     {
       std::ofstream outfile;
       outfile.open(filename.c_str());
@@ -112,7 +112,7 @@ namespace oomph
     }
 
     /// Output macro elements
-    void output(std::ostream &outfile, const unsigned &nplot)
+    void output(std::ostream& outfile, const unsigned& nplot)
     {
       unsigned nmacro = Macro_element_pt.size();
       for (unsigned i_macro = 0; i_macro < nmacro; i_macro++)
@@ -124,18 +124,18 @@ namespace oomph
     /// \short Vector representation of the  i_macro-th macro element
     /// boundary i_direct (e.g. N/S/W/E in 2D) at time level t
     /// (t=0: present; t>0: previous): f(s)
-    virtual void macro_element_boundary(const unsigned &t,
-                                        const unsigned &i_macro,
-                                        const unsigned &i_direct,
-                                        const Vector<double> &s,
-                                        Vector<double> &f) = 0;
+    virtual void macro_element_boundary(const unsigned& t,
+                                        const unsigned& i_macro,
+                                        const unsigned& i_direct,
+                                        const Vector<double>& s,
+                                        Vector<double>& f) = 0;
 
     /// \short Vector representation of the  i_macro-th macro element
     /// boundary i_direct (e.g. N/S/W/E in 2D) at current time: f(s).
-    void macro_element_boundary(const unsigned &i_macro,
-                                const unsigned &i_direct,
-                                const Vector<double> &s,
-                                Vector<double> &f)
+    void macro_element_boundary(const unsigned& i_macro,
+                                const unsigned& i_direct,
+                                const Vector<double>& s,
+                                Vector<double>& f)
     {
       // Call unsteady version for current time
       unsigned t = 0;
@@ -143,8 +143,8 @@ namespace oomph
     }
 
     /// \short Output all macro element boundaries as tecplot zones
-    void output_macro_element_boundaries(const std::string &filename,
-                                         const unsigned &nplot)
+    void output_macro_element_boundaries(const std::string& filename,
+                                         const unsigned& nplot)
     {
       std::ofstream outfile;
       outfile.open(filename.c_str());
@@ -153,8 +153,8 @@ namespace oomph
     }
 
     /// \short Output all macro element boundaries as tecplot zones
-    void output_macro_element_boundaries(std::ostream &outfile,
-                                         const unsigned &nplot)
+    void output_macro_element_boundaries(std::ostream& outfile,
+                                         const unsigned& nplot)
     {
       // Loop over macro elements
       unsigned nmacro = nmacro_element();
@@ -167,11 +167,11 @@ namespace oomph
     /// \short Vector representation of the  i_macro-th macro element
     /// boundary derivatives i_direct (e.g. N/S/W/E in 2D) at time level t
     /// (t=0: present; t>0: previous): f(s). Broken virtual.
-    virtual void dmacro_element_boundary(const unsigned &t,
-                                         const unsigned &i_macro,
-                                         const unsigned &i_direct,
-                                         const Vector<double> &s,
-                                         Vector<double> &f)
+    virtual void dmacro_element_boundary(const unsigned& t,
+                                         const unsigned& i_macro,
+                                         const unsigned& i_direct,
+                                         const Vector<double>& s,
+                                         Vector<double>& f)
     {
       throw OomphLibError(
         "Domain::dmacro_element_boundary() is broken virtual.",
@@ -182,10 +182,10 @@ namespace oomph
     /// \short Vector representation of the  i_macro-th macro element
     /// boundary derivatives i_direct (e.g. N/S/W/E in 2D) at current time:
     /// f(s).
-    void dmacro_element_boundary(const unsigned &i_macro,
-                                 const unsigned &i_direct,
-                                 const Vector<double> &s,
-                                 Vector<double> &f)
+    void dmacro_element_boundary(const unsigned& i_macro,
+                                 const unsigned& i_direct,
+                                 const Vector<double>& s,
+                                 Vector<double>& f)
     {
       // Call unsteady version for current time
       unsigned t = 0;
@@ -195,11 +195,11 @@ namespace oomph
     /// \short Vector representation of the  i_macro-th macro element
     /// boundary second derivatives i_direct (e.g. N/S/W/E in 2D) at time level
     /// t (t=0: present; t>0: previous): f(s). Broken virtual.
-    virtual void d2macro_element_boundary(const unsigned &t,
-                                          const unsigned &i_macro,
-                                          const unsigned &i_direct,
-                                          const Vector<double> &s,
-                                          Vector<double> &f)
+    virtual void d2macro_element_boundary(const unsigned& t,
+                                          const unsigned& i_macro,
+                                          const unsigned& i_direct,
+                                          const Vector<double>& s,
+                                          Vector<double>& f)
     {
       throw OomphLibError(
         "Domain::d2macro_element_boundary() is broken virtual.",
@@ -210,10 +210,10 @@ namespace oomph
     /// \short Vector representation of the  i_macro-th macro element
     /// boundary second derivatives i_direct (e.g. N/S/W/E in 2D) at
     /// current time: f(s).
-    void d2macro_element_boundary(const unsigned &i_macro,
-                                  const unsigned &i_direct,
-                                  const Vector<double> &s,
-                                  Vector<double> &f)
+    void d2macro_element_boundary(const unsigned& i_macro,
+                                  const unsigned& i_direct,
+                                  const Vector<double>& s,
+                                  Vector<double>& f)
     {
       // Call unsteady version for current time
       unsigned t = 0;
@@ -222,7 +222,7 @@ namespace oomph
 
   protected:
     /// \short Vector of pointers to macro elements
-    Vector<MacroElement *> Macro_element_pt;
+    Vector<MacroElement*> Macro_element_pt;
   };
 
   /////////////////////////////////////////////////////////////////////////
@@ -249,13 +249,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    WarpedCubeDomain(const WarpedCubeDomain &)
+    WarpedCubeDomain(const WarpedCubeDomain&)
     {
       BrokenCopy::broken_copy("WarpedCubeDomain");
     }
 
     /// Broken assignment operator
-    void operator=(const WarpedCubeDomain &)
+    void operator=(const WarpedCubeDomain&)
     {
       BrokenCopy::broken_assign("WarpedCubeDomain");
     }
@@ -267,42 +267,42 @@ namespace oomph
     }
 
     /// Warp the unit cube
-    void warp_it(Vector<double> &f);
+    void warp_it(Vector<double>& f);
 
     /// \short Vector representation of the  i_macro-th macro element
     /// boundary i_direct (L/R/D/U/B/F) at time level t
     /// (t=0: present; t>0: previous):
     /// f(s).
-    void macro_element_boundary(const unsigned &t,
-                                const unsigned &i_macro,
-                                const unsigned &i_direct,
-                                const Vector<double> &s,
-                                Vector<double> &f);
+    void macro_element_boundary(const unsigned& t,
+                                const unsigned& i_macro,
+                                const unsigned& i_direct,
+                                const Vector<double>& s,
+                                Vector<double>& f);
 
   private:
     /// \short Left boundary face
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_L(const unsigned &t, const Vector<double> &zeta, Vector<double> &f);
+    void r_L(const unsigned& t, const Vector<double>& zeta, Vector<double>& f);
 
     /// \short Right boundary face
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_R(const unsigned &t, const Vector<double> &zeta, Vector<double> &f);
+    void r_R(const unsigned& t, const Vector<double>& zeta, Vector<double>& f);
 
     /// \short Down boundary face
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_D(const unsigned &t, const Vector<double> &zeta, Vector<double> &f);
+    void r_D(const unsigned& t, const Vector<double>& zeta, Vector<double>& f);
 
     /// \short Up boundary face
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_U(const unsigned &t, const Vector<double> &zeta, Vector<double> &f);
+    void r_U(const unsigned& t, const Vector<double>& zeta, Vector<double>& f);
 
     /// \short Back boundary face
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_B(const unsigned &t, const Vector<double> &zeta, Vector<double> &f);
+    void r_B(const unsigned& t, const Vector<double>& zeta, Vector<double>& f);
 
     /// \short Front boundary face
     /// zeta \f$ \in [-1,1]^2 \f$
-    void r_F(const unsigned &t, const Vector<double> &zeta, Vector<double> &f);
+    void r_F(const unsigned& t, const Vector<double>& zeta, Vector<double>& f);
   };
 
 } // namespace oomph

@@ -47,18 +47,18 @@ namespace oomph
   //=============================================================
   template<class ELEMENT>
   CylinderWithFlagMesh<ELEMENT>::CylinderWithFlagMesh(
-    Circle *cylinder_pt,
-    GeomObject *top_flag_pt,
-    GeomObject *bottom_flag_pt,
-    GeomObject *tip_flag_pt,
-    const double &length,
-    const double &height,
-    const double &flag_length,
-    const double &flag_height,
-    const double &centre_x,
-    const double &centre_y,
-    const double &a,
-    TimeStepper *time_stepper_pt)
+    Circle* cylinder_pt,
+    GeomObject* top_flag_pt,
+    GeomObject* bottom_flag_pt,
+    GeomObject* tip_flag_pt,
+    const double& length,
+    const double& height,
+    const double& flag_length,
+    const double& flag_height,
+    const double& centre_x,
+    const double& centre_y,
+    const double& a,
+    TimeStepper* time_stepper_pt)
   {
     // Mesh can only be built with 2D Qelements.
     MeshChecker::assert_geometric_element<QElementGeometricBase, ELEMENT>(2);
@@ -84,7 +84,7 @@ namespace oomph
     Vector<double> r(2);
 
     // Setup temporary storage for the Node
-    Vector<Node *> tmp_node_pt;
+    Vector<Node*> tmp_node_pt;
 
     // Now blindly loop over the macro elements and associate and finite
     // element with each
@@ -96,7 +96,7 @@ namespace oomph
 
       // Read out the number of linear points in the element
       unsigned np =
-        dynamic_cast<ELEMENT *>(this->finite_element_pt(e))->nnode_1d();
+        dynamic_cast<ELEMENT*>(this->finite_element_pt(e))->nnode_1d();
 
       // Loop over nodes in the column
       for (unsigned l1 = 0; l1 < np; l1++)
@@ -130,7 +130,7 @@ namespace oomph
 
     // Read out the number of linear points in the element
     unsigned np =
-      dynamic_cast<ELEMENT *>(this->finite_element_pt(0))->nnode_1d();
+      dynamic_cast<ELEMENT*>(this->finite_element_pt(0))->nnode_1d();
 
     // Edge between Elements 0 and 1
     for (unsigned n = 0; n < np; n++)
@@ -840,7 +840,7 @@ namespace oomph
     unsigned nnode = this->nboundary_node(5);
     for (unsigned k = 0; k < nnode; k++)
     {
-      Node *nod_pt = this->boundary_node_pt(5, k);
+      Node* nod_pt = this->boundary_node_pt(5, k);
       zeta[0] = double(k) * flag_length / double(nnode - 1);
       nod_pt->set_coordinates_on_boundary(5, zeta);
     }
@@ -849,7 +849,7 @@ namespace oomph
     nnode = this->nboundary_node(6);
     for (unsigned k = 0; k < nnode; k++)
     {
-      Node *nod_pt = this->boundary_node_pt(6, k);
+      Node* nod_pt = this->boundary_node_pt(6, k);
       zeta[0] = double(k) * flag_length / double(nnode - 1);
       nod_pt->set_coordinates_on_boundary(6, zeta);
     }
@@ -858,7 +858,7 @@ namespace oomph
     nnode = this->nboundary_node(7);
     for (unsigned k = 0; k < nnode; k++)
     {
-      Node *nod_pt = this->boundary_node_pt(7, k);
+      Node* nod_pt = this->boundary_node_pt(7, k);
       zeta[0] = -flag_height / 2. + double(k) / double(nnode - 1) * flag_height;
       nod_pt->set_coordinates_on_boundary(7, zeta);
     }
@@ -871,7 +871,7 @@ namespace oomph
     // Loop over all elements and set macro element pointer
     for (unsigned e = 0; e < 31; e++)
     {
-      dynamic_cast<ELEMENT *>(this->element_pt(e))
+      dynamic_cast<ELEMENT*>(this->element_pt(e))
         ->set_macro_elem_pt(this->Domain_pt->macro_element_pt(e));
     }
   }
@@ -896,7 +896,7 @@ namespace oomph
     // Part I : macro elements 8,12,16
     for (unsigned k = 0; k < 3; k++)
     {
-      FiniteElement *el_pt = this->finite_element_pt(8 + k * 4);
+      FiniteElement* el_pt = this->finite_element_pt(8 + k * 4);
       unsigned nnode = el_pt->nnode();
       for (unsigned i = 0; i < nnode; i++)
       {
@@ -915,14 +915,14 @@ namespace oomph
                        ref_value[0] * 1. / 5. * Flag_length;
 
         // Sub-geomobject corresponding to the zeta coordinate on the flag
-        GeomObject *geom_obj_pt;
+        GeomObject* geom_obj_pt;
         Vector<double> s(1);
         Vector<double> zeta(1);
         zeta[0] = ref_value[2];
         Top_flag_pt->locate_zeta(zeta, geom_obj_pt, s);
 
         // Create vector of geomobject for add_node_update_info()
-        Vector<GeomObject *> geom_object_pt(1);
+        Vector<GeomObject*> geom_object_pt(1);
         geom_object_pt[0] = geom_obj_pt;
 
         // Fourth reference value : local coordinate in the sub geomobject
@@ -933,7 +933,7 @@ namespace oomph
 
         // Setup algebraic update for node: Pass update information
         // to AlgebraicNode:
-        dynamic_cast<AlgebraicNode *>(el_pt->node_pt(i))
+        dynamic_cast<AlgebraicNode*>(el_pt->node_pt(i))
           ->add_node_update_info(1, // ID
                                  this, // mesh
                                  geom_object_pt, // vector of geom objects
@@ -944,7 +944,7 @@ namespace oomph
     // Part II : macro elements 9,13,17
     for (unsigned k = 0; k < 3; k++)
     {
-      FiniteElement *el_pt = this->finite_element_pt(9 + k * 4);
+      FiniteElement* el_pt = this->finite_element_pt(9 + k * 4);
       unsigned nnode = el_pt->nnode();
       for (unsigned i = 0; i < nnode; i++)
       {
@@ -963,14 +963,14 @@ namespace oomph
                        ref_value[0] * 1. / 5. * Flag_length;
 
         // Sub-geomobject corresponding to the zeta coordinate on the flag
-        GeomObject *geom_obj_pt;
+        GeomObject* geom_obj_pt;
         Vector<double> s(1);
         Vector<double> zeta(1);
         zeta[0] = ref_value[2];
         Bottom_flag_pt->locate_zeta(zeta, geom_obj_pt, s);
 
         // Create vector of geomobject for add_node_update_info()
-        Vector<GeomObject *> geom_object_pt(1);
+        Vector<GeomObject*> geom_object_pt(1);
         geom_object_pt[0] = geom_obj_pt;
 
         // Fourth reference value : local coordinate in the sub geomobject
@@ -981,7 +981,7 @@ namespace oomph
 
         // Setup algebraic update for node: Pass update information
         // to AlgebraicNode:
-        dynamic_cast<AlgebraicNode *>(el_pt->node_pt(i))
+        dynamic_cast<AlgebraicNode*>(el_pt->node_pt(i))
           ->add_node_update_info(2, // ID
                                  this, // mesh
                                  geom_object_pt, // vector of geom objects
@@ -990,7 +990,7 @@ namespace oomph
     }
 
     // Part III : macro element 22
-    FiniteElement *el_pt = this->finite_element_pt(22);
+    FiniteElement* el_pt = this->finite_element_pt(22);
     unsigned nnode = el_pt->nnode();
     for (unsigned i = 0; i < nnode; i++)
     {
@@ -1008,14 +1008,14 @@ namespace oomph
       ref_value[2] = coord_loc[1] * Flag_height / 2.;
 
       // Sub-geomobject corresponding to the zeta coordinate on the flag
-      GeomObject *geom_obj_pt;
+      GeomObject* geom_obj_pt;
       Vector<double> s(1);
       Vector<double> zeta(1);
       zeta[0] = ref_value[2];
       Tip_flag_pt->locate_zeta(zeta, geom_obj_pt, s);
 
       // Create vector of geomobject for add_node_update_info()
-      Vector<GeomObject *> geom_object_pt(1);
+      Vector<GeomObject*> geom_object_pt(1);
       geom_object_pt[0] = geom_obj_pt;
 
       // Fourth reference value : local coordinate in the sub geomobject
@@ -1023,7 +1023,7 @@ namespace oomph
 
       // Setup algebraic update for node: Pass update information
       // to AlgebraicNode:
-      dynamic_cast<AlgebraicNode *>(el_pt->node_pt(i))
+      dynamic_cast<AlgebraicNode*>(el_pt->node_pt(i))
         ->add_node_update_info(3, // ID
                                this, // mesh
                                geom_object_pt, // vector of geom objects
@@ -1046,14 +1046,14 @@ namespace oomph
       ref_value[1] = 0.5 * (coord_loc[1] + 1.0);
 
       // Sub-geomobject corresponding to the tip of the Tip_flag
-      GeomObject *geom_obj_pt;
+      GeomObject* geom_obj_pt;
       Vector<double> s(1);
       Vector<double> zeta(1);
       zeta[0] = Flag_height / 2.;
       Tip_flag_pt->locate_zeta(zeta, geom_obj_pt, s);
 
       // Create vector of geomobject for add_node_update_info()
-      Vector<GeomObject *> geom_object_pt(1);
+      Vector<GeomObject*> geom_object_pt(1);
       geom_object_pt[0] = geom_obj_pt;
 
       // Third reference value : local coordinate in the sub geomobject
@@ -1061,7 +1061,7 @@ namespace oomph
 
       // Setup algebraic update for node: Pass update information
       // to AlgebraicNode:
-      dynamic_cast<AlgebraicNode *>(el_pt->node_pt(i))
+      dynamic_cast<AlgebraicNode*>(el_pt->node_pt(i))
         ->add_node_update_info(4, // ID
                                this, // mesh
                                geom_object_pt, // vector of geom objects
@@ -1084,14 +1084,14 @@ namespace oomph
       ref_value[1] = 0.5 * (coord_loc[1] + 1.0);
 
       // Sub-geomobject corresponding to the tip of the Tip_flag
-      GeomObject *geom_obj_pt;
+      GeomObject* geom_obj_pt;
       Vector<double> s(1);
       Vector<double> zeta(1);
       zeta[0] = -Flag_height / 2.;
       Tip_flag_pt->locate_zeta(zeta, geom_obj_pt, s);
 
       // Create vector of geomobject for add_node_update_info()
-      Vector<GeomObject *> geom_object_pt(1);
+      Vector<GeomObject*> geom_object_pt(1);
       geom_object_pt[0] = geom_obj_pt;
 
       // Third reference value : local coordinate in the sub geomobject
@@ -1099,7 +1099,7 @@ namespace oomph
 
       // Setup algebraic update for node: Pass update information
       // to AlgebraicNode:
-      dynamic_cast<AlgebraicNode *>(el_pt->node_pt(i))
+      dynamic_cast<AlgebraicNode*>(el_pt->node_pt(i))
         ->add_node_update_info(5, // ID
                                this, // mesh
                                geom_object_pt, // vector of geom objects
@@ -1126,14 +1126,14 @@ namespace oomph
         4. / 5. * Flag_length + ref_value[0] * 1. / 5. * Flag_length;
 
       // Sub-geomobject
-      GeomObject *geom_obj_pt;
+      GeomObject* geom_obj_pt;
       Vector<double> s(1);
       Vector<double> zeta(1);
       zeta[0] = ref_value[2];
       Top_flag_pt->locate_zeta(zeta, geom_obj_pt, s);
 
       // Create vector of geomobject for add_node_update_info()
-      Vector<GeomObject *> geom_object_pt(1);
+      Vector<GeomObject*> geom_object_pt(1);
       geom_object_pt[0] = geom_obj_pt;
 
       // Third reference value : local coordinate in the sub geomobject
@@ -1141,7 +1141,7 @@ namespace oomph
 
       // Setup algebraic update for node: Pass update information
       // to AlgebraicNode:
-      dynamic_cast<AlgebraicNode *>(el_pt->node_pt(i))
+      dynamic_cast<AlgebraicNode*>(el_pt->node_pt(i))
         ->add_node_update_info(6, // ID
                                this, // mesh
                                geom_object_pt, // vector of geom objects
@@ -1168,14 +1168,14 @@ namespace oomph
         4. / 5. * Flag_length + ref_value[0] * 1. / 5. * Flag_length;
 
       // Sub-geomobject
-      GeomObject *geom_obj_pt;
+      GeomObject* geom_obj_pt;
       Vector<double> s(1);
       Vector<double> zeta(1);
       zeta[0] = ref_value[2];
       Bottom_flag_pt->locate_zeta(zeta, geom_obj_pt, s);
 
       // Create vector of geomobject for add_node_update_info()
-      Vector<GeomObject *> geom_object_pt(1);
+      Vector<GeomObject*> geom_object_pt(1);
       geom_object_pt[0] = geom_obj_pt;
 
       // Third reference value : local coordinate in the sub geomobject
@@ -1183,7 +1183,7 @@ namespace oomph
 
       // Setup algebraic update for node: Pass update information
       // to AlgebraicNode:
-      dynamic_cast<AlgebraicNode *>(el_pt->node_pt(i))
+      dynamic_cast<AlgebraicNode*>(el_pt->node_pt(i))
         ->add_node_update_info(7, // ID
                                this, // mesh
                                geom_object_pt, // vector of geom objects
@@ -1210,7 +1210,7 @@ namespace oomph
 
       // Sub-geomobject corresponding to the zeta coordinate on the flag
       // at the reference point
-      GeomObject *geom_obj_pt;
+      GeomObject* geom_obj_pt;
       Vector<double> s(1);
       Vector<double> zeta(1);
       zeta[0] = ref_value[2];
@@ -1220,7 +1220,7 @@ namespace oomph
       ref_value[3] = s[0];
 
       // Create vector of geomobject for add_node_update_info()
-      Vector<GeomObject *> geom_object_pt(2);
+      Vector<GeomObject*> geom_object_pt(2);
       geom_object_pt[0] = geom_obj_pt;
 
       // Fifth reference value : zeta coordinate on flag at end of macro element
@@ -1239,7 +1239,7 @@ namespace oomph
 
       // Setup algebraic update for node: Pass update information
       // to AlgebraicNode:
-      dynamic_cast<AlgebraicNode *>(el_pt->node_pt(i))
+      dynamic_cast<AlgebraicNode*>(el_pt->node_pt(i))
         ->add_node_update_info(8, // ID
                                this, // mesh
                                geom_object_pt, // vector of geom objects
@@ -1266,7 +1266,7 @@ namespace oomph
 
       // Sub-geomobject corresponding to the zeta coordinate on the flag
       // at the reference point
-      GeomObject *geom_obj_pt;
+      GeomObject* geom_obj_pt;
       Vector<double> s(1);
       Vector<double> zeta(1);
       zeta[0] = ref_value[2];
@@ -1276,7 +1276,7 @@ namespace oomph
       ref_value[3] = s[0];
 
       // Create vector of geomobject for add_node_update_info()
-      Vector<GeomObject *> geom_object_pt(2);
+      Vector<GeomObject*> geom_object_pt(2);
       geom_object_pt[0] = geom_obj_pt;
 
       // Fifth reference value : zeta coordinate on flag at end of macro element
@@ -1295,7 +1295,7 @@ namespace oomph
 
       // Setup algebraic update for node: Pass update information
       // to AlgebraicNode:
-      dynamic_cast<AlgebraicNode *>(el_pt->node_pt(i))
+      dynamic_cast<AlgebraicNode*>(el_pt->node_pt(i))
         ->add_node_update_info(9, // ID
                                this, // mesh
                                geom_object_pt, // vector of geom objects
@@ -1309,7 +1309,7 @@ namespace oomph
   //=================================================================
   template<class ELEMENT>
   void AlgebraicCylinderWithFlagMesh<ELEMENT>::algebraic_node_update(
-    const unsigned &t, AlgebraicNode *&node_pt)
+    const unsigned& t, AlgebraicNode*& node_pt)
   {
     unsigned id = node_pt->node_update_fct_id();
 
@@ -1366,16 +1366,16 @@ namespace oomph
   //=================================================================
   template<class ELEMENT>
   void AlgebraicCylinderWithFlagMesh<ELEMENT>::node_update_I(
-    const unsigned &t, AlgebraicNode *&node_pt)
+    const unsigned& t, AlgebraicNode*& node_pt)
   {
     // Extract reference values for update by copy construction
     Vector<double> ref_value(node_pt->vector_ref_value());
 
     // Extract geometric objects for update by copy construction
-    Vector<GeomObject *> geom_object_pt(node_pt->vector_geom_object_pt());
+    Vector<GeomObject*> geom_object_pt(node_pt->vector_geom_object_pt());
 
     // Pointer to geom object
-    GeomObject *flag_pt = geom_object_pt[0];
+    GeomObject* flag_pt = geom_object_pt[0];
 
     // Point on the line y=p11[1] corresponding to the initial x.
     Vector<double> ref_point(2);
@@ -1404,16 +1404,16 @@ namespace oomph
   //=================================================================
   template<class ELEMENT>
   void AlgebraicCylinderWithFlagMesh<ELEMENT>::node_update_II(
-    const unsigned &t, AlgebraicNode *&node_pt)
+    const unsigned& t, AlgebraicNode*& node_pt)
   {
     // Extract reference values for update by copy construction
     Vector<double> ref_value(node_pt->vector_ref_value());
 
     // Extract geometric objects for update by copy construction
-    Vector<GeomObject *> geom_object_pt(node_pt->vector_geom_object_pt());
+    Vector<GeomObject*> geom_object_pt(node_pt->vector_geom_object_pt());
 
     // Pointer to geom object
-    GeomObject *flag_pt = geom_object_pt[0];
+    GeomObject* flag_pt = geom_object_pt[0];
 
     // Point on the line y=p37[1] corresponding to the initial x.
     Vector<double> ref_point(2);
@@ -1440,7 +1440,7 @@ namespace oomph
   //=================================================================
   template<class ELEMENT>
   void AlgebraicCylinderWithFlagMesh<ELEMENT>::node_update_III(
-    const unsigned &t, AlgebraicNode *&node_pt)
+    const unsigned& t, AlgebraicNode*& node_pt)
   {
     // useful points
     Vector<double> p15(2);
@@ -1456,10 +1456,10 @@ namespace oomph
     Vector<double> ref_value(node_pt->vector_ref_value());
 
     // Extract geometric objects for update by copy construction
-    Vector<GeomObject *> geom_object_pt(node_pt->vector_geom_object_pt());
+    Vector<GeomObject*> geom_object_pt(node_pt->vector_geom_object_pt());
 
     // Pointer to geom object
-    GeomObject *flag_pt = geom_object_pt[0];
+    GeomObject* flag_pt = geom_object_pt[0];
 
     // Point on the line x=p15[0]
     Vector<double> ref_point(2);
@@ -1486,7 +1486,7 @@ namespace oomph
   //=================================================================
   template<class ELEMENT>
   void AlgebraicCylinderWithFlagMesh<ELEMENT>::node_update_IV(
-    const unsigned &t, AlgebraicNode *&node_pt)
+    const unsigned& t, AlgebraicNode*& node_pt)
   {
     // Useful points
     Vector<double> p15(2);
@@ -1505,10 +1505,10 @@ namespace oomph
     Vector<double> ref_value(node_pt->vector_ref_value());
 
     // Extract geometric objects for update by copy construction
-    Vector<GeomObject *> geom_object_pt(node_pt->vector_geom_object_pt());
+    Vector<GeomObject*> geom_object_pt(node_pt->vector_geom_object_pt());
 
     // Pointer to geom object
-    GeomObject *flag_pt = geom_object_pt[0];
+    GeomObject* flag_pt = geom_object_pt[0];
 
     Vector<double> zeta(1);
     zeta[0] = ref_value[2];
@@ -1534,7 +1534,7 @@ namespace oomph
   //=================================================================
   template<class ELEMENT>
   void AlgebraicCylinderWithFlagMesh<ELEMENT>::node_update_V(
-    const unsigned &t, AlgebraicNode *&node_pt)
+    const unsigned& t, AlgebraicNode*& node_pt)
   {
     // Useful points
     Vector<double> p31(2);
@@ -1553,10 +1553,10 @@ namespace oomph
     Vector<double> ref_value(node_pt->vector_ref_value());
 
     // Extract geometric objects for update by copy construction
-    Vector<GeomObject *> geom_object_pt(node_pt->vector_geom_object_pt());
+    Vector<GeomObject*> geom_object_pt(node_pt->vector_geom_object_pt());
 
     // Pointer to geom object
-    GeomObject *flag_pt = geom_object_pt[0];
+    GeomObject* flag_pt = geom_object_pt[0];
 
     Vector<double> zeta(1);
     zeta[0] = ref_value[2];
@@ -1583,7 +1583,7 @@ namespace oomph
   //=================================================================
   template<class ELEMENT>
   void AlgebraicCylinderWithFlagMesh<ELEMENT>::node_update_VI(
-    const unsigned &t, AlgebraicNode *&node_pt)
+    const unsigned& t, AlgebraicNode*& node_pt)
   {
     // Extract reference values for update by copy construction
     Vector<double> ref_value(node_pt->vector_ref_value());
@@ -1600,10 +1600,10 @@ namespace oomph
     p5[1] = Height;
 
     // Extract geometric objects for update by copy construction
-    Vector<GeomObject *> geom_object_pt(node_pt->vector_geom_object_pt());
+    Vector<GeomObject*> geom_object_pt(node_pt->vector_geom_object_pt());
 
     // Pointer to geom object
-    GeomObject *flag_pt = geom_object_pt[0];
+    GeomObject* flag_pt = geom_object_pt[0];
 
     Vector<double> zeta(1);
     zeta[0] = ref_value[3];
@@ -1624,7 +1624,7 @@ namespace oomph
   //=================================================================
   template<class ELEMENT>
   void AlgebraicCylinderWithFlagMesh<ELEMENT>::node_update_VII(
-    const unsigned &t, AlgebraicNode *&node_pt)
+    const unsigned& t, AlgebraicNode*& node_pt)
   {
     // Extract reference values for update by copy construction
     Vector<double> ref_value(node_pt->vector_ref_value());
@@ -1641,10 +1641,10 @@ namespace oomph
     p45[1] = 0.0;
 
     // Extract geometric objects for update by copy construction
-    Vector<GeomObject *> geom_object_pt(node_pt->vector_geom_object_pt());
+    Vector<GeomObject*> geom_object_pt(node_pt->vector_geom_object_pt());
 
     // Pointer to geom object
-    GeomObject *flag_pt = geom_object_pt[0];
+    GeomObject* flag_pt = geom_object_pt[0];
 
     Vector<double> zeta(1);
     zeta[0] = ref_value[3];
@@ -1667,7 +1667,7 @@ namespace oomph
   //=================================================================
   template<class ELEMENT>
   void AlgebraicCylinderWithFlagMesh<ELEMENT>::node_update_VIII(
-    const unsigned &t, AlgebraicNode *&node_pt)
+    const unsigned& t, AlgebraicNode*& node_pt)
   {
     // Useful point
     Vector<double> p11(2);
@@ -1682,13 +1682,13 @@ namespace oomph
     Vector<double> ref_value(node_pt->vector_ref_value());
 
     // Extract geometric objects for update by copy construction
-    Vector<GeomObject *> geom_object_pt(node_pt->vector_geom_object_pt());
+    Vector<GeomObject*> geom_object_pt(node_pt->vector_geom_object_pt());
 
     // Pointer to geom object containing the reference point
-    GeomObject *flag_ref_pt = geom_object_pt[0];
+    GeomObject* flag_ref_pt = geom_object_pt[0];
 
     // Pointer to geom object containing the end of the macro element
-    GeomObject *flag_end_pt = geom_object_pt[1];
+    GeomObject* flag_end_pt = geom_object_pt[1];
 
     double omega_horizontal = ref_value[0];
     double omega_vertical = ref_value[1];
@@ -1753,7 +1753,7 @@ namespace oomph
   //=================================================================
   template<class ELEMENT>
   void AlgebraicCylinderWithFlagMesh<ELEMENT>::node_update_IX(
-    const unsigned &t, AlgebraicNode *&node_pt)
+    const unsigned& t, AlgebraicNode*& node_pt)
   {
     // Useful point
     Vector<double> p37(2);
@@ -1768,13 +1768,13 @@ namespace oomph
     Vector<double> ref_value(node_pt->vector_ref_value());
 
     // Extract geometric objects for update by copy construction
-    Vector<GeomObject *> geom_object_pt(node_pt->vector_geom_object_pt());
+    Vector<GeomObject*> geom_object_pt(node_pt->vector_geom_object_pt());
 
     // Pointer to geom object containing the reference point
-    GeomObject *flag_ref_pt = geom_object_pt[0];
+    GeomObject* flag_ref_pt = geom_object_pt[0];
 
     // Pointer to geom object containing the end of macro element
-    GeomObject *flag_end_pt = geom_object_pt[1];
+    GeomObject* flag_end_pt = geom_object_pt[1];
 
     double omega_horizontal = ref_value[0];
     double omega_vertical = ref_value[1];
@@ -1841,7 +1841,7 @@ namespace oomph
   //===================================================================
   template<class ELEMENT>
   void RefineableAlgebraicCylinderWithFlagMesh<ELEMENT>::update_node_update(
-    AlgebraicNode *&node_pt)
+    AlgebraicNode*& node_pt)
   {
     // Extract ID
     unsigned id = node_pt->node_update_fct_id();
@@ -1849,7 +1849,7 @@ namespace oomph
     if (id == 8)
     {
       // Extract geometric objects for update by copy construction
-      Vector<GeomObject *> geom_object_pt(node_pt->vector_geom_object_pt());
+      Vector<GeomObject*> geom_object_pt(node_pt->vector_geom_object_pt());
 
       // Extract reference values for node update by copy construction
       Vector<double> ref_value(node_pt->vector_ref_value());
@@ -1861,7 +1861,7 @@ namespace oomph
       // Get the sub-geomobject and the local coordinate containing the
       // reference point
       Vector<double> s(1);
-      GeomObject *geom_obj_pt;
+      GeomObject* geom_obj_pt;
       this->Top_flag_pt->locate_zeta(zeta_ref_flag, geom_obj_pt, s);
 
       // Update the pointer to the (sub-)GeomObject within which the
@@ -1900,7 +1900,7 @@ namespace oomph
     else if (id == 9)
     {
       // Extract geometric objects for update by copy construction
-      Vector<GeomObject *> geom_object_pt(node_pt->vector_geom_object_pt());
+      Vector<GeomObject*> geom_object_pt(node_pt->vector_geom_object_pt());
 
       // Extract reference values for node update by copy construction
       Vector<double> ref_value(node_pt->vector_ref_value());
@@ -1912,7 +1912,7 @@ namespace oomph
       // Get the sub-geomobject and the local coordinate containing the
       // reference point
       Vector<double> s(1);
-      GeomObject *geom_obj_pt;
+      GeomObject* geom_obj_pt;
       this->Bottom_flag_pt->locate_zeta(zeta_ref_flag, geom_obj_pt, s);
 
       // Update the pointer to the (sub-)GeomObject within which the
@@ -1960,11 +1960,11 @@ namespace oomph
 
       // Get the sub-geomobject and the local coordinate
       Vector<double> s(1);
-      GeomObject *geom_obj_pt;
+      GeomObject* geom_obj_pt;
       this->Top_flag_pt->locate_zeta(zeta_flag, geom_obj_pt, s);
 
       // Extract geometric objects for update by copy construction
-      Vector<GeomObject *> geom_object_pt(node_pt->vector_geom_object_pt());
+      Vector<GeomObject*> geom_object_pt(node_pt->vector_geom_object_pt());
 
       // Update the pointer to the (sub-)GeomObject within which the
       // reference point is located. (If the flag is simple GeomObject
@@ -2011,11 +2011,11 @@ namespace oomph
 
       // Get the sub-geomobject and the local coordinate
       Vector<double> s(1);
-      GeomObject *geom_obj_pt;
+      GeomObject* geom_obj_pt;
       this->Bottom_flag_pt->locate_zeta(zeta_flag, geom_obj_pt, s);
 
       // Extract geometric objects for update by copy construction
-      Vector<GeomObject *> geom_object_pt(node_pt->vector_geom_object_pt());
+      Vector<GeomObject*> geom_object_pt(node_pt->vector_geom_object_pt());
 
       // Update the pointer to the (sub-)GeomObject within which the
       // reference point is located. (If the flag is simple GeomObject
@@ -2073,11 +2073,11 @@ namespace oomph
 
       // Get the sub-geomobject and the local coordinate
       Vector<double> s(1);
-      GeomObject *geom_obj_pt;
+      GeomObject* geom_obj_pt;
       this->Tip_flag_pt->locate_zeta(zeta_flag, geom_obj_pt, s);
 
       // Extract geometric objects for update by copy construction
-      Vector<GeomObject *> geom_object_pt(node_pt->vector_geom_object_pt());
+      Vector<GeomObject*> geom_object_pt(node_pt->vector_geom_object_pt());
 
       // Update the pointer to the (sub-)GeomObject within which the
       // reference point is located. (If the flag is simple GeomObject

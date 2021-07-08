@@ -85,7 +85,7 @@ namespace oomph
     bool Xperiodic;
 
     /// Generic mesh construction function: contains all the hard work
-    void build_mesh(TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper);
+    void build_mesh(TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
     /// \short Constructor that allows the specification of minimum and maximum
     /// values of x and y coordinates and does not build the mesh
@@ -95,15 +95,15 @@ namespace oomph
     /// functions cannot be called in the base constructur, because they will
     /// not have been overloaded yet!!
     RectangularQuadMesh(
-      const unsigned &nx,
-      const unsigned &ny,
-      const double &xmin,
-      const double &xmax,
-      const double &ymin,
-      const double &ymax,
-      const bool &periodic_in_x,
-      const bool &build,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      const unsigned& nx,
+      const unsigned& ny,
+      const double& xmin,
+      const double& xmax,
+      const double& ymin,
+      const double& ymax,
+      const bool& periodic_in_x,
+      const bool& build,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       Nx(nx),
       Ny(ny),
       Xmin(xmin),
@@ -125,11 +125,11 @@ namespace oomph
     /// direction (0,lx); ly, length of domain in y direction (0,ly)
     /// Also pass pointer to timestepper (defaults to Steady)
     RectangularQuadMesh(
-      const unsigned &nx,
-      const unsigned &ny,
-      const double &lx,
-      const double &ly,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      const unsigned& nx,
+      const unsigned& ny,
+      const double& lx,
+      const double& ly,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       Nx(nx), Ny(ny), Xmin(0.0), Xmax(lx), Ymin(0.0), Ymax(ly), Xperiodic(false)
     {
       // Mesh can only be built with 2D Qelements.
@@ -142,13 +142,13 @@ namespace oomph
     /// \short Constructor that allows the specification of minimum and maximum
     /// values of x and y coordinates
     RectangularQuadMesh(
-      const unsigned &nx,
-      const unsigned &ny,
-      const double &xmin,
-      const double &xmax,
-      const double &ymin,
-      const double &ymax,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      const unsigned& nx,
+      const unsigned& ny,
+      const double& xmin,
+      const double& xmax,
+      const double& ymin,
+      const double& ymax,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       Nx(nx),
       Ny(ny),
       Xmin(xmin),
@@ -170,12 +170,12 @@ namespace oomph
     /// Boolean flag specifies if the mesh is periodic in the x-direction.
     /// Also pass pointer to timestepper (defaults to Steady)
     RectangularQuadMesh(
-      const unsigned &nx,
-      const unsigned &ny,
-      const double &lx,
-      const double &ly,
-      const bool &periodic_in_x,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      const unsigned& nx,
+      const unsigned& ny,
+      const double& lx,
+      const double& ly,
+      const bool& periodic_in_x,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       Nx(nx),
       Ny(ny),
       Xmin(0.0),
@@ -195,14 +195,14 @@ namespace oomph
     /// values of x and y coordinates.
     /// Boolean flag specifies if the mesh is periodic in the x-direction.
     RectangularQuadMesh(
-      const unsigned &nx,
-      const unsigned &ny,
-      const double &xmin,
-      const double &xmax,
-      const double &ymin,
-      const double &ymax,
-      const bool &periodic_in_x,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      const unsigned& nx,
+      const unsigned& ny,
+      const double& xmin,
+      const double& xmax,
+      const double& ymin,
+      const double& ymax,
+      const bool& periodic_in_x,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       Nx(nx),
       Ny(ny),
       Xmin(xmin),
@@ -219,14 +219,14 @@ namespace oomph
     }
 
     /// Return number of elements in x direction
-    const unsigned &nx() const
+    const unsigned& nx() const
     {
       // Return the value of Nx
       return Nx;
     }
 
     /// Return number of elements in y direction
-    const unsigned &ny() const
+    const unsigned& ny() const
     {
       // Return the value of Ny
       return Ny;
@@ -327,11 +327,11 @@ namespace oomph
     /// direction (0,lx); ly, length of domain in y direction (0,ly).
     /// Also pass pointer to timestepper (defaults to Steady)
     RefineableRectangularQuadMesh(
-      const unsigned &nx,
-      const unsigned &ny,
-      const double &lx,
-      const double &ly,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      const unsigned& nx,
+      const unsigned& ny,
+      const double& lx,
+      const double& ly,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       RectangularQuadMesh<ELEMENT>(nx, ny, lx, ly, time_stepper_pt)
     {
       // Nodal positions etc. were created in constructor for
@@ -345,12 +345,12 @@ namespace oomph
     /// periodic_in_x, periodicity in x.
     /// Also pass pointer to timestepper (defaults to Steady)
     RefineableRectangularQuadMesh(
-      const unsigned &nx,
-      const unsigned &ny,
-      const double &lx,
-      const double &ly,
-      const bool &periodic_in_x,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      const unsigned& nx,
+      const unsigned& ny,
+      const double& lx,
+      const double& ly,
+      const bool& periodic_in_x,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       RectangularQuadMesh<ELEMENT>(
         nx, ny, lx, ly, periodic_in_x, time_stepper_pt)
     {
@@ -363,13 +363,13 @@ namespace oomph
     /// values of x and y coordinates
     /// Also pass pointer to timestepper (defaults to Steady)
     RefineableRectangularQuadMesh(
-      const unsigned &nx,
-      const unsigned &ny,
-      const double &xmin,
-      const double &xmax,
-      const double &ymin,
-      const double &ymax,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      const unsigned& nx,
+      const unsigned& ny,
+      const double& xmin,
+      const double& xmax,
+      const double& ymin,
+      const double& ymax,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       RectangularQuadMesh<ELEMENT>(
         nx, ny, xmin, xmax, ymin, ymax, time_stepper_pt)
     {
@@ -382,14 +382,14 @@ namespace oomph
     /// values of x and y coordinates and periodicity
     /// Also pass pointer to timestepper (defaults to Steady)
     RefineableRectangularQuadMesh(
-      const unsigned &nx,
-      const unsigned &ny,
-      const double &xmin,
-      const double &xmax,
-      const double &ymin,
-      const double &ymax,
-      const bool &periodic_in_x,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      const unsigned& nx,
+      const unsigned& ny,
+      const double& xmin,
+      const double& xmax,
+      const double& ymin,
+      const double& ymax,
+      const bool& periodic_in_x,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       RectangularQuadMesh<ELEMENT>(
         nx, ny, xmin, xmax, ymin, ymax, periodic_in_x, time_stepper_pt)
     {
@@ -422,12 +422,12 @@ namespace oomph
     /// assign boundary coordinates. Origin specifies
     /// an additional rigid-body displacement.
     ElasticRectangularQuadMesh<ELEMENT>(
-      const unsigned &nx,
-      const unsigned &ny,
-      const double &lx,
-      const double &ly,
-      const Vector<double> &origin,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      const unsigned& nx,
+      const unsigned& ny,
+      const double& lx,
+      const double& ly,
+      const Vector<double>& origin,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       RectangularQuadMesh<ELEMENT>(nx, ny, lx, ly, time_stepper_pt)
     {
       // Translate the nodes
@@ -451,11 +451,11 @@ namespace oomph
     /// ones so that the initial configuration is the stress-free one and
     /// assign boundary coordinates
     ElasticRectangularQuadMesh<ELEMENT>(
-      const unsigned &nx,
-      const unsigned &ny,
-      const double &lx,
-      const double &ly,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      const unsigned& nx,
+      const unsigned& ny,
+      const double& lx,
+      const double& ly,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       RectangularQuadMesh<ELEMENT>(nx, ny, lx, ly, time_stepper_pt)
     {
       // No shift
@@ -475,12 +475,12 @@ namespace oomph
     /// assign boundary coordinates. This includes a boolean flag to specify
     /// if the mesh is periodic in the x-direction
     ElasticRectangularQuadMesh<ELEMENT>(
-      const unsigned &nx,
-      const unsigned &ny,
-      const double &lx,
-      const double &ly,
-      const bool &periodic_in_x,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      const unsigned& nx,
+      const unsigned& ny,
+      const double& lx,
+      const double& ly,
+      const bool& periodic_in_x,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       RectangularQuadMesh<ELEMENT>(
         nx, ny, lx, ly, periodic_in_x, time_stepper_pt)
     {
@@ -500,7 +500,7 @@ namespace oomph
     /// \short Setup the boundary coordinates. Vector
     /// origin specifies the coordinates of the lower left corner of
     /// the mesh.
-    void set_boundary_coordinates(const Vector<double> &origin)
+    void set_boundary_coordinates(const Vector<double>& origin)
     {
       // 1D vector fo boundary coordinate
       Vector<double> zeta(1);
@@ -567,11 +567,11 @@ namespace oomph
     /// assign boundary coordinates (variable Lagrangian coordinates along
     /// the relevant boundaries).
     ElasticRefineableRectangularQuadMesh<ELEMENT>(
-      const unsigned &nx,
-      const unsigned &ny,
-      const double &lx,
-      const double &ly,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      const unsigned& nx,
+      const unsigned& ny,
+      const double& lx,
+      const double& ly,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       RectangularQuadMesh<ELEMENT>(nx, ny, lx, ly, time_stepper_pt),
       ElasticRectangularQuadMesh<ELEMENT>(nx, ny, lx, ly, time_stepper_pt)
 
@@ -586,12 +586,12 @@ namespace oomph
     /// assign boundary coordinates. This includes a boolean flag to specify
     /// if the mesh is periodic in the x-direction
     ElasticRefineableRectangularQuadMesh<ELEMENT>(
-      const unsigned &nx,
-      const unsigned &ny,
-      const double &lx,
-      const double &ly,
-      const bool &periodic_in_x,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      const unsigned& nx,
+      const unsigned& ny,
+      const double& lx,
+      const double& ly,
+      const bool& periodic_in_x,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       RectangularQuadMesh<ELEMENT>(
         nx, ny, lx, ly, periodic_in_x, time_stepper_pt),
       ElasticRectangularQuadMesh<ELEMENT>(
@@ -608,12 +608,12 @@ namespace oomph
     /// the relevant boundaries). Origin specifies an additional rigid-body
     /// displacement.
     ElasticRefineableRectangularQuadMesh<ELEMENT>(
-      const unsigned &nx,
-      const unsigned &ny,
-      const double &lx,
-      const double &ly,
-      const Vector<double> &origin,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      const unsigned& nx,
+      const unsigned& ny,
+      const double& lx,
+      const double& ly,
+      const Vector<double>& origin,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       RectangularQuadMesh<ELEMENT>(nx, ny, lx, ly, time_stepper_pt),
       ElasticRectangularQuadMesh<ELEMENT>(
         nx, ny, lx, ly, origin, time_stepper_pt)

@@ -176,20 +176,20 @@ namespace oomph
 
     /// Function that prescribes the hydrostatic pressure field at the outlet
     /// Let's fix things so that the pressure at the top of the channel is zero.
-    void hydrostatic_pressure_outlet_upper(const double &time,
-                                           const Vector<double> &x,
-                                           const Vector<double> &n,
-                                           Vector<double> &traction)
+    void hydrostatic_pressure_outlet_upper(const double& time,
+                                           const Vector<double>& x,
+                                           const Vector<double>& n,
+                                           Vector<double>& traction)
     {
       traction[0] = ReInvFr * R * Direction_of_gravity[1] * (1.0 - x[1]);
       traction[1] = 0.0;
     }
 
     /// Function that prescribes hydrostatic pressure field at the inlet
-    void hydrostatic_pressure_inlet_upper(const double &time,
-                                          const Vector<double> &x,
-                                          const Vector<double> &n,
-                                          Vector<double> &traction)
+    void hydrostatic_pressure_inlet_upper(const double& time,
+                                          const Vector<double>& x,
+                                          const Vector<double>& n,
+                                          Vector<double>& traction)
     {
       traction[0] =
         Delta_P + -ReInvFr * R * Direction_of_gravity[1] * (1.0 - x[1]);
@@ -201,10 +201,10 @@ namespace oomph
     /// interface is not pinned
     /// (i.e. we'll need to read out the interfacial position
     /// on the boundary). For now assume it's at H0.
-    void hydrostatic_pressure_outlet_lower(const double &time,
-                                           const Vector<double> &x,
-                                           const Vector<double> &n,
-                                           Vector<double> &traction)
+    void hydrostatic_pressure_outlet_lower(const double& time,
+                                           const Vector<double>& x,
+                                           const Vector<double>& n,
+                                           Vector<double>& traction)
     {
       traction[0] =
         ReInvFr * Direction_of_gravity[1] * (R * (1.0 - H0) + H0 - x[1]);
@@ -212,10 +212,10 @@ namespace oomph
     }
 
     /// Function that prescribes hydrostatic pressure field at the inlet
-    void hydrostatic_pressure_inlet_lower(const double &time,
-                                          const Vector<double> &x,
-                                          const Vector<double> &n,
-                                          Vector<double> &traction)
+    void hydrostatic_pressure_inlet_lower(const double& time,
+                                          const Vector<double>& x,
+                                          const Vector<double>& n,
+                                          Vector<double>& traction)
     {
       traction[0] = Delta_P + -ReInvFr * Direction_of_gravity[1] *
                                 (R * (1.0 - H0) + H0 - x[1]);
@@ -231,15 +231,15 @@ namespace oomph
     Vector<double> Wall_normal;
 
     /// \short Function that specifies the wall unit normal at the inlet
-    void wall_unit_normal_inlet_fct(const Vector<double> &x,
-                                    Vector<double> &normal)
+    void wall_unit_normal_inlet_fct(const Vector<double>& x,
+                                    Vector<double>& normal)
     {
       normal = Wall_normal;
     }
 
     /// \short Function that specified the wall unit normal at the outlet
-    void wall_unit_normal_outlet_fct(const Vector<double> &x,
-                                     Vector<double> &normal)
+    void wall_unit_normal_outlet_fct(const Vector<double>& x,
+                                     Vector<double>& normal)
     {
       // Set the normal
       normal = Wall_normal;
@@ -270,7 +270,7 @@ class SurfactantProblem : public Problem
 public:
   /// Constructor. The boolean indicates whether the free surface
   // should be pinned or not in the first instance
-  SurfactantProblem(const bool &pin = true);
+  SurfactantProblem(const bool& pin = true);
 
   /// Destructor. Empty
   ~SurfactantProblem() {}
@@ -295,7 +295,7 @@ public:
       for (unsigned i = 0; i < n_element; i++)
       {
         // Upcast from GeneralsedElement to the present element
-        ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(i));
+        ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(i));
 
         el_pt->enable_ALE();
 
@@ -319,7 +319,7 @@ public:
       unsigned n_interface = Surface_mesh_pt->nelement();
       for (unsigned i = 0; i < n_interface; i++)
       {
-        FiniteElement *el_pt = Surface_mesh_pt->finite_element_pt(i);
+        FiniteElement* el_pt = Surface_mesh_pt->finite_element_pt(i);
 
         // Need to unpin the values of concentration and micelle
         unsigned n_el_node = el_pt->nnode();
@@ -335,8 +335,8 @@ public:
       for (unsigned e = 0; e < n_lower; e++)
       {
         // Upcast from GeneralisedElement to the present element
-        ELEMENT *el_pt =
-          dynamic_cast<ELEMENT *>(Bulk_mesh_pt->lower_layer_element_pt(e));
+        ELEMENT* el_pt =
+          dynamic_cast<ELEMENT*>(Bulk_mesh_pt->lower_layer_element_pt(e));
         unsigned n_node = el_pt->nnode();
         for (unsigned n = 0; n < n_node; ++n)
         {
@@ -374,24 +374,24 @@ public:
   }
 
   /// Fix pressure in element e at pressure dof pdof and set to pvalue
-  void fix_pressure(const unsigned &e,
-                    const unsigned &pdof,
-                    const double &pvalue)
+  void fix_pressure(const unsigned& e,
+                    const unsigned& pdof,
+                    const double& pvalue)
   {
     // Cast to specific element and fix pressure
-    dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e))
+    dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e))
       ->fix_pressure(pdof, pvalue);
   } // end_of_fix_pressure
 
   /// UnFix pressure in element e at pressure dof pdof and set to pvalue
-  void unfix_pressure(const unsigned &e, const unsigned &pdof)
+  void unfix_pressure(const unsigned& e, const unsigned& pdof)
   {
     // Cast to specific element and fix pressure
-    dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e))->unfix_pressure(pdof);
+    dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e))->unfix_pressure(pdof);
   } // end_of_unfix_pressure
 
   // Apply a prescribed deforamtion to the interface
-  void deform_interface(const double &epsilon, const unsigned &n_periods)
+  void deform_interface(const double& epsilon, const unsigned& n_periods)
   {
     // Determine number of spines in mesh
     const unsigned n_spine = Bulk_mesh_pt->nspine();
@@ -415,10 +415,10 @@ public:
   } // End of deform_free_surface
 
   /// \short Doc the solution.
-  void doc_solution(std::ofstream &trace);
+  void doc_solution(std::ofstream& trace);
 
   /// \short Set the boundary conditions
-  void set_boundary_conditions(const double &time);
+  void set_boundary_conditions(const double& time);
 
   // Return the global error norm to be used in adaptive timestepping
   double global_temporal_error_norm();
@@ -426,21 +426,21 @@ public:
   /// \short Overloaded version of the problem's access function to
   /// the mesh. Recasts the pointer to the base Mesh object to
   /// the actual mesh type.
-  TwoLayerSpineMesh<ELEMENT> *Bulk_mesh_pt;
+  TwoLayerSpineMesh<ELEMENT>* Bulk_mesh_pt;
 
   /// Storage to the mesh of Surface interface elements
-  Mesh *Surface_mesh_pt;
+  Mesh* Surface_mesh_pt;
 
   /// Storage to point elements if needed for non-periodic domains
-  Mesh *Point_mesh_pt;
+  Mesh* Point_mesh_pt;
 
   /// Storage for any traction elements applied to the inlet
-  Mesh *Inlet_traction_mesh_pt;
+  Mesh* Inlet_traction_mesh_pt;
 
   /// Storage for any traction elements applied to the outlet
-  Mesh *Outlet_traction_mesh_pt;
+  Mesh* Outlet_traction_mesh_pt;
 
-  void interface_min_max(double &min, double &max)
+  void interface_min_max(double& min, double& max)
   {
     // Loop over the interface and add each elemental contribution
     const unsigned n_interface = Surface_mesh_pt->nelement();
@@ -454,8 +454,8 @@ public:
       for (unsigned i = 0; i < n_interface; i++)
       {
         // Upcast from GeneralsedElement to the present element
-        INTERFACE_ELEMENT *el_pt =
-          dynamic_cast<INTERFACE_ELEMENT *>(Surface_mesh_pt->element_pt(i));
+        INTERFACE_ELEMENT* el_pt =
+          dynamic_cast<INTERFACE_ELEMENT*>(Surface_mesh_pt->element_pt(i));
 
         const unsigned n_node = el_pt->nnode();
         if (n_node != 3)
@@ -529,7 +529,7 @@ public:
 
   // Return the l2 norm of height difference between the interface
   // and its undeformed value
-  double l2_norm_of_height(const double &h0)
+  double l2_norm_of_height(const double& h0)
   {
     double norm = 0.0;
     // Loop over the interface and add each elemental contribution
@@ -537,8 +537,8 @@ public:
     for (unsigned i = 0; i < n_interface; i++)
     {
       // Upcast from GeneralsedElement to the present element
-      INTERFACE_ELEMENT *el_pt =
-        dynamic_cast<INTERFACE_ELEMENT *>(Surface_mesh_pt->element_pt(i));
+      INTERFACE_ELEMENT* el_pt =
+        dynamic_cast<INTERFACE_ELEMENT*>(Surface_mesh_pt->element_pt(i));
 
       norm += el_pt->l2_norm_of_height(h0);
     }
@@ -547,9 +547,9 @@ public:
 
   /// Return the total concentrations of the surfactant
   /// integrated over the bulk or surface accordingly
-  void compute_integrated_concentrations(double &surface,
-                                         double &bulk,
-                                         double &micelle)
+  void compute_integrated_concentrations(double& surface,
+                                         double& bulk,
+                                         double& micelle)
   {
     // Initialise to zero
     surface = 0.0;
@@ -558,8 +558,8 @@ public:
     for (unsigned i = 0; i < n_interface; i++)
     {
       // Upcast from GeneralsedElement to the present element
-      INTERFACE_ELEMENT *el_pt =
-        dynamic_cast<INTERFACE_ELEMENT *>(Surface_mesh_pt->element_pt(i));
+      INTERFACE_ELEMENT* el_pt =
+        dynamic_cast<INTERFACE_ELEMENT*>(Surface_mesh_pt->element_pt(i));
 
       surface += el_pt->integrated_C();
     }
@@ -574,8 +574,8 @@ public:
     for (unsigned e = 0; e < n_lower; e++)
     {
       // Upcast from GeneralisedElement to the present element
-      ELEMENT *el_pt =
-        dynamic_cast<ELEMENT *>(Bulk_mesh_pt->lower_layer_element_pt(e));
+      ELEMENT* el_pt =
+        dynamic_cast<ELEMENT*>(Bulk_mesh_pt->lower_layer_element_pt(e));
       double int_M = 0.0, int_C = 0.0;
       el_pt->integrated_C_and_M(int_C, int_M);
       bulk += int_C;
@@ -597,7 +597,7 @@ private:
 //========================================================================
 template<class ELEMENT, class INTERFACE_ELEMENT>
 SurfactantProblem<ELEMENT, INTERFACE_ELEMENT>::SurfactantProblem(
-  const bool &pin) :
+  const bool& pin) :
   Surface_pinned(pin)
 {
   // Allocate an (adaptive) timestepper
@@ -651,7 +651,7 @@ SurfactantProblem<ELEMENT, INTERFACE_ELEMENT>::SurfactantProblem(
     // coordinate 1 is fixed at its max. value (1) --- This is face 2
     // This relies on knowing the ordering of the elements in the mesh
     // This is the upper face
-    INTERFACE_ELEMENT *interface_element_pt = new INTERFACE_ELEMENT(
+    INTERFACE_ELEMENT* interface_element_pt = new INTERFACE_ELEMENT(
       Bulk_mesh_pt->finite_element_pt(n_x * (n_y1 - 1) + i), 2);
 
     // Push it back onto the stack
@@ -666,7 +666,7 @@ SurfactantProblem<ELEMENT, INTERFACE_ELEMENT>::SurfactantProblem(
       // the element order within the mesh)
       if (i == 0)
       {
-        FluidInterfaceBoundingElement *point_element_pt =
+        FluidInterfaceBoundingElement* point_element_pt =
           interface_element_pt->make_bounding_element(-1);
         // Add element to the point mesh
         Point_mesh_pt->add_element_pt(point_element_pt);
@@ -685,7 +685,7 @@ SurfactantProblem<ELEMENT, INTERFACE_ELEMENT>::SurfactantProblem(
       // the element order within the mesh)
       if (i == n_x - 1)
       {
-        FluidInterfaceBoundingElement *point_element_pt =
+        FluidInterfaceBoundingElement* point_element_pt =
           interface_element_pt->make_bounding_element(1);
         // Add element to the mesh
         Point_mesh_pt->add_element_pt(point_element_pt);
@@ -698,8 +698,8 @@ SurfactantProblem<ELEMENT, INTERFACE_ELEMENT>::SurfactantProblem(
     }
 
     // While we're here let's hijack the concentrations from the upper side
-    ELEMENT *el_pt =
-      dynamic_cast<ELEMENT *>(Bulk_mesh_pt->finite_element_pt(n_x * n_y1 + i));
+    ELEMENT* el_pt =
+      dynamic_cast<ELEMENT*>(Bulk_mesh_pt->finite_element_pt(n_x * n_y1 + i));
     // Hijack all nodes of all elements
     unsigned n_max_node = n_node_1d;
     for (unsigned n = 0; n < n_max_node; ++n)
@@ -726,7 +726,7 @@ SurfactantProblem<ELEMENT, INTERFACE_ELEMENT>::SurfactantProblem(
       // Loop over these elements and create the traction elements
       for (unsigned e = 0; e < n_boundary_element; e++)
       {
-        SpineElement<NavierStokesTractionElement<ELEMENT>> *surface_element_pt =
+        SpineElement<NavierStokesTractionElement<ELEMENT>>* surface_element_pt =
           new SpineElement<NavierStokesTractionElement<ELEMENT>>(
             Bulk_mesh_pt->boundary_element_pt(b, e),
             Bulk_mesh_pt->face_index_at_boundary(b, e));
@@ -746,7 +746,7 @@ SurfactantProblem<ELEMENT, INTERFACE_ELEMENT>::SurfactantProblem(
       // Loop over these elements and create the traction elements
       for (unsigned e = 0; e < n_boundary_element; e++)
       {
-        SpineElement<NavierStokesTractionElement<ELEMENT>> *surface_element_pt =
+        SpineElement<NavierStokesTractionElement<ELEMENT>>* surface_element_pt =
           new SpineElement<NavierStokesTractionElement<ELEMENT>>(
             Bulk_mesh_pt->boundary_element_pt(b, e),
             Bulk_mesh_pt->face_index_at_boundary(b, e));
@@ -767,7 +767,7 @@ SurfactantProblem<ELEMENT, INTERFACE_ELEMENT>::SurfactantProblem(
       // Loop over these elements and create the traction elements
       for (unsigned e = 0; e < n_boundary_element; e++)
       {
-        SpineElement<NavierStokesTractionElement<ELEMENT>> *surface_element_pt =
+        SpineElement<NavierStokesTractionElement<ELEMENT>>* surface_element_pt =
           new SpineElement<NavierStokesTractionElement<ELEMENT>>(
             Bulk_mesh_pt->boundary_element_pt(b, e),
             Bulk_mesh_pt->face_index_at_boundary(b, e));
@@ -787,7 +787,7 @@ SurfactantProblem<ELEMENT, INTERFACE_ELEMENT>::SurfactantProblem(
       // Loop over these elements and create the traction elements
       for (unsigned e = 0; e < n_boundary_element; e++)
       {
-        SpineElement<NavierStokesTractionElement<ELEMENT>> *surface_element_pt =
+        SpineElement<NavierStokesTractionElement<ELEMENT>>* surface_element_pt =
           new SpineElement<NavierStokesTractionElement<ELEMENT>>(
             Bulk_mesh_pt->boundary_element_pt(b, e),
             Bulk_mesh_pt->face_index_at_boundary(b, e));
@@ -878,8 +878,8 @@ SurfactantProblem<ELEMENT, INTERFACE_ELEMENT>::SurfactantProblem(
   for (unsigned e = 0; e < n_lower; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt =
-      dynamic_cast<ELEMENT *>(Bulk_mesh_pt->lower_layer_element_pt(e));
+    ELEMENT* el_pt =
+      dynamic_cast<ELEMENT*>(Bulk_mesh_pt->lower_layer_element_pt(e));
 
     // Set the diffusivities number
     el_pt->diff_pt() = &Global_Physical_Variables::D;
@@ -912,8 +912,8 @@ SurfactantProblem<ELEMENT, INTERFACE_ELEMENT>::SurfactantProblem(
   for (unsigned e = 0; e < n_upper; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt =
-      dynamic_cast<ELEMENT *>(Bulk_mesh_pt->upper_layer_element_pt(e));
+    ELEMENT* el_pt =
+      dynamic_cast<ELEMENT*>(Bulk_mesh_pt->upper_layer_element_pt(e));
 
     // Set the diffusivities number
     el_pt->diff_pt() = &Global_Physical_Variables::D;
@@ -965,8 +965,8 @@ SurfactantProblem<ELEMENT, INTERFACE_ELEMENT>::SurfactantProblem(
   for (unsigned i = 0; i < n_interface; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    INTERFACE_ELEMENT *el_pt =
-      dynamic_cast<INTERFACE_ELEMENT *>(Surface_mesh_pt->element_pt(i));
+    INTERFACE_ELEMENT* el_pt =
+      dynamic_cast<INTERFACE_ELEMENT*>(Surface_mesh_pt->element_pt(i));
 
     // Set the Biot number
     el_pt->bi_pt() = &Global_Physical_Variables::Biot;
@@ -1027,7 +1027,7 @@ SurfactantProblem<ELEMENT, INTERFACE_ELEMENT>::SurfactantProblem(
 //===========================================================
 template<class ELEMENT, class INTERFACE_ELEMENT>
 void SurfactantProblem<ELEMENT, INTERFACE_ELEMENT>::set_boundary_conditions(
-  const double &time)
+  const double& time)
 {
   // Set initial temperature profile
   if (time <= 0.0)
@@ -1039,11 +1039,11 @@ void SurfactantProblem<ELEMENT, INTERFACE_ELEMENT>::set_boundary_conditions(
     unsigned n_lower = Bulk_mesh_pt->nlower(); // nnode();
     for (unsigned e = 0; e < n_lower; e++)
     {
-      FiniteElement *el_pt = Bulk_mesh_pt->lower_layer_element_pt(e);
+      FiniteElement* el_pt = Bulk_mesh_pt->lower_layer_element_pt(e);
       unsigned n_node = el_pt->nnode();
       for (unsigned n = 0; n < n_node; n++)
       {
-        Node *nod_pt = el_pt->node_pt(n);
+        Node* nod_pt = el_pt->node_pt(n);
         // And in uniformly distributed surfactant
         // Be careful about upper and lower layers
         // If these are not set
@@ -1082,7 +1082,7 @@ void SurfactantProblem<ELEMENT, INTERFACE_ELEMENT>::set_boundary_conditions(
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Get pointer to node
-      Node *nod_pt = Bulk_mesh_pt->boundary_node_pt(ibound, inod);
+      Node* nod_pt = Bulk_mesh_pt->boundary_node_pt(ibound, inod);
 
       if (!Control_Parameters::Periodic_BCs)
       {
@@ -1116,7 +1116,7 @@ void SurfactantProblem<ELEMENT, INTERFACE_ELEMENT>::set_boundary_conditions(
 //========================================================================
 template<class ELEMENT, class INTERFACE_ELEMENT>
 void SurfactantProblem<ELEMENT, INTERFACE_ELEMENT>::doc_solution(
-  ofstream &trace)
+  ofstream& trace)
 {
   // Declare an output stream and filename
   ofstream some_file;
@@ -1151,7 +1151,7 @@ void SurfactantProblem<ELEMENT, INTERFACE_ELEMENT>::doc_solution(
 
   unsigned n_surface_element = Surface_mesh_pt->nelement();
 
-  Node *monitor_node_pt =
+  Node* monitor_node_pt =
     Surface_mesh_pt->finite_element_pt(n_surface_element / 2)->node_pt(1);
 
   // Let's get the mases
@@ -1223,7 +1223,7 @@ double SurfactantProblem<ELEMENT,
 //=======start_of_main================================================
 /// Driver code for 2D Boussinesq convection problem
 //====================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   ofstream trace("RESLT/trace.dat");
 

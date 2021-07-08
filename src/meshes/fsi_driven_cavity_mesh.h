@@ -72,13 +72,13 @@ namespace oomph
     /// pointer to GeomObject that defines the collapsible segment and pointer
     /// to TimeStepper (defaults to the default timestepper, Steady).
     FSIDrivenCavityMesh(
-      const unsigned &nx,
-      const unsigned &ny,
-      const double &lx,
-      const double &ly,
-      const double &gap_fraction,
-      GeomObject *wall_pt,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper);
+      const unsigned& nx,
+      const unsigned& ny,
+      const double& lx,
+      const double& ly,
+      const double& gap_fraction,
+      GeomObject* wall_pt,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
   protected:
     /// Number of elements in x direction
@@ -92,7 +92,7 @@ namespace oomph
     double Gap_fraction;
 
     /// Pointer to geometric object that represents the moving wall
-    GeomObject *Wall_pt;
+    GeomObject* Wall_pt;
   };
 
   /////////////////////////////////////////////////////////////////////
@@ -125,13 +125,13 @@ namespace oomph
     /// \short Constructor: Pass number of elements, lengths, pointer to
     /// geometric object that describes the wall and timestepper
     RefineableFSIDrivenCavityMesh(
-      const unsigned &nx,
-      const unsigned &ny,
-      const double &lx,
-      const double &ly,
-      const double &gap_fraction,
-      GeomObject *wall_pt,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      const unsigned& nx,
+      const unsigned& ny,
+      const double& lx,
+      const double& ly,
+      const double& gap_fraction,
+      GeomObject* wall_pt,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       FSIDrivenCavityMesh<ELEMENT>(
         nx, ny, lx, ly, gap_fraction, wall_pt, time_stepper_pt)
     {
@@ -162,13 +162,13 @@ namespace oomph
     /// GeomObject that defines the collapsible segment and pointer to
     /// TimeStepper (defaults to the default timestepper, Steady).
     AlgebraicFSIDrivenCavityMesh(
-      const unsigned &nx,
-      const unsigned &ny,
-      const double &lx,
-      const double &ly,
-      const double &gap_fraction,
-      GeomObject *wall_pt,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      const unsigned& nx,
+      const unsigned& ny,
+      const double& lx,
+      const double& ly,
+      const double& gap_fraction,
+      GeomObject* wall_pt,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       FSIDrivenCavityMesh<ELEMENT>(
         nx, ny, lx, ly, gap_fraction, wall_pt, time_stepper_pt)
     {
@@ -184,12 +184,12 @@ namespace oomph
 
     /// \short Update nodal position at time level t (t=0: present;
     /// t>0: previous)
-    void algebraic_node_update(const unsigned &t, AlgebraicNode *&node_pt);
+    void algebraic_node_update(const unsigned& t, AlgebraicNode*& node_pt);
 
     /// \short Update the node-udate data after mesh adaptation.
     /// Empty -- no update of node update required as this is
     /// non-refineable mesh.
-    void update_node_update(AlgebraicNode *&node_pt) {}
+    void update_node_update(AlgebraicNode*& node_pt) {}
 
   protected:
     /// Function to setup the algebraic node update
@@ -219,13 +219,13 @@ namespace oomph
     /// GeomObject that defines the collapsible segment and pointer to
     /// TimeStepper (defaults to the default timestepper, Steady).
     RefineableAlgebraicFSIDrivenCavityMesh(
-      const unsigned &nx,
-      const unsigned &ny,
-      const double &lx,
-      const double &ly,
-      const double &gap_fraction,
-      GeomObject *wall_pt,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      const unsigned& nx,
+      const unsigned& ny,
+      const double& lx,
+      const double& ly,
+      const double& gap_fraction,
+      GeomObject* wall_pt,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       FSIDrivenCavityMesh<ELEMENT>(
         nx, ny, lx, ly, gap_fraction, wall_pt, time_stepper_pt),
       AlgebraicFSIDrivenCavityMesh<ELEMENT>(
@@ -237,7 +237,7 @@ namespace oomph
 
     /// \short Update the node update data for specified node following
     /// any mesh adapation
-    void update_node_update(AlgebraicNode *&node_pt);
+    void update_node_update(AlgebraicNode*& node_pt);
   };
 
 } // namespace oomph

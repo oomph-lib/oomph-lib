@@ -49,7 +49,7 @@ namespace Global_Physical_Variables
   Vector<double> Wall_normal;
 
   /// \short Function that specifies the wall unit normal
-  void wall_unit_normal_fct(const Vector<double> &x, Vector<double> &normal)
+  void wall_unit_normal_fct(const Vector<double>& x, Vector<double>& normal)
   {
     normal = Wall_normal;
   }
@@ -65,10 +65,10 @@ private:
 
 public:
   // Constructor
-  GeneralEllipse(const double &centre_x,
-                 const double &centre_y,
-                 const double &a,
-                 const double &b) :
+  GeneralEllipse(const double& centre_x,
+                 const double& centre_y,
+                 const double& a,
+                 const double& b) :
     GeomObject(1, 2), centre_x_pt(0), centre_y_pt(0), a_pt(0), b_pt(0)
   {
     centre_x_pt = new double(centre_x);
@@ -87,7 +87,7 @@ public:
   }
 
   // Return the position
-  void position(const Vector<double> &xi, Vector<double> &r) const
+  void position(const Vector<double>& xi, Vector<double>& r) const
   {
     r[0] = *centre_x_pt + *a_pt * cos(xi[0]);
     r[1] = *centre_y_pt + *b_pt * sin(xi[0]);
@@ -107,11 +107,11 @@ private:
   double Upper_centre_left[2], Upper_centre_right[2];
 
   /// Geometric object that represents the rotating cylinder
-  GeomObject *Cylinder_pt;
+  GeomObject* Cylinder_pt;
 
 public:
   // Constructor, pass the length and height of the domain
-  CylinderAndInterfaceDomain(const double &Length, const double &Height)
+  CylinderAndInterfaceDomain(const double& Length, const double& Height)
   {
     centre_x = Length / 2.0;
     centre_y = Height / 2.0; // 3.0*Height/4.0;
@@ -193,8 +193,8 @@ public:
   // Private little interpolation problem
   void linear_interpolate(double Left[2],
                           double Right[2],
-                          const double &s,
-                          Vector<double> &f)
+                          const double& s,
+                          Vector<double>& f)
   {
     for (unsigned i = 0; i < 2; i++)
     {
@@ -203,11 +203,11 @@ public:
   }
 
   // Sort out the vector representation of the i-th macro element
-  void macro_element_boundary(const unsigned &time,
-                              const unsigned &m,
-                              const unsigned &direction,
-                              const Vector<double> &s,
-                              Vector<double> &f)
+  void macro_element_boundary(const unsigned& time,
+                              const unsigned& m,
+                              const unsigned& direction,
+                              const Vector<double>& s,
+                              Vector<double>& f)
   {
     using namespace QuadTreeNames;
 
@@ -445,19 +445,19 @@ class CylinderAndInterfaceMesh : public virtual SolidMesh
 
 protected:
   // Pointer to the domain
-  CylinderAndInterfaceDomain *Domain_pt;
+  CylinderAndInterfaceDomain* Domain_pt;
 
 public:
   // Access function to the domain
-  CylinderAndInterfaceDomain *domain_pt()
+  CylinderAndInterfaceDomain* domain_pt()
   {
     return Domain_pt;
   }
 
   // Constructor,
-  CylinderAndInterfaceMesh(const double &length,
-                           const double &height,
-                           TimeStepper *time_stepper_pt) :
+  CylinderAndInterfaceMesh(const double& length,
+                           const double& height,
+                           TimeStepper* time_stepper_pt) :
     Height(height)
   {
     // Create the domain
@@ -469,7 +469,7 @@ public:
     Vector<double> s(2), r(2);
 
     // Setup temporary storage for the Node
-    Vector<Node *> Tmp_node_pt;
+    Vector<Node*> Tmp_node_pt;
 
     // Now blindly loop over the macro elements and associate and finite
     // element with each
@@ -480,7 +480,7 @@ public:
       Element_pt.push_back(new ELEMENT);
 
       // Read out the number of linear points in the element
-      unsigned Np = dynamic_cast<ELEMENT *>(finite_element_pt(e))->nnode_1d();
+      unsigned Np = dynamic_cast<ELEMENT*>(finite_element_pt(e))->nnode_1d();
 
       // Loop over nodes in the column
       for (unsigned l1 = 0; l1 < Np; l1++)
@@ -512,7 +512,7 @@ public:
     // pointers and the deleting excess nodes
 
     // Read out the number of linear points in the element
-    unsigned Np = dynamic_cast<ELEMENT *>(finite_element_pt(0))->nnode_1d();
+    unsigned Np = dynamic_cast<ELEMENT*>(finite_element_pt(0))->nnode_1d();
 
     // DelaunayEdge between Elements 0 and 1
     for (unsigned n = 0; n < Np; n++)
@@ -600,7 +600,7 @@ public:
     for (unsigned n = 0; n < Np; n++)
     {
       // Left hand side
-      Node *temp_node_pt = finite_element_pt(0)->node_pt(n * Np);
+      Node* temp_node_pt = finite_element_pt(0)->node_pt(n * Np);
       this->convert_to_boundary_node(temp_node_pt);
       add_boundary_node(3, temp_node_pt);
 
@@ -628,7 +628,7 @@ public:
     for (unsigned n = 1; n < Np; n++)
     {
       // Middle of lower boundary
-      Node *temp_node_pt = finite_element_pt(4)->node_pt(n);
+      Node* temp_node_pt = finite_element_pt(4)->node_pt(n);
       this->convert_to_boundary_node(temp_node_pt);
       add_boundary_node(0, temp_node_pt);
 
@@ -646,7 +646,7 @@ public:
     for (unsigned n = 1; n < Np; n++)
     {
       // Final part of lower boundary
-      Node *temp_node_pt = finite_element_pt(5)->node_pt(n);
+      Node* temp_node_pt = finite_element_pt(5)->node_pt(n);
       this->convert_to_boundary_node(temp_node_pt);
       add_boundary_node(0, temp_node_pt);
 
@@ -664,7 +664,7 @@ public:
     for (unsigned n = 1; n < Np - 1; n++)
     {
       // Final part of hole
-      Node *temp_node_pt =
+      Node* temp_node_pt =
         finite_element_pt(1)->node_pt(Np * (Np - n - 1) + Np - 1);
       this->convert_to_boundary_node(temp_node_pt);
       add_boundary_node(4, temp_node_pt);
@@ -675,7 +675,7 @@ public:
     for (unsigned n = 0; n < Nnode; n++)
     {
       // Cast node to an elastic node
-      SolidNode *temp_pt = static_cast<SolidNode *>(Node_pt[n]);
+      SolidNode* temp_pt = static_cast<SolidNode*>(Node_pt[n]);
       for (unsigned i = 0; i < 2; i++)
       {
         temp_pt->xi(i) = temp_pt->x(i);
@@ -692,9 +692,9 @@ class RefineableCylinderAndInterfaceMesh :
 {
 public:
   // Constructor
-  RefineableCylinderAndInterfaceMesh(const double &length,
-                                     const double &height,
-                                     TimeStepper *time_stepper_pt) :
+  RefineableCylinderAndInterfaceMesh(const double& length,
+                                     const double& height,
+                                     TimeStepper* time_stepper_pt) :
     CylinderAndInterfaceMesh<ELEMENT>(length, height, time_stepper_pt)
   {
     // Nodal positions etc. were created in constructor for
@@ -703,7 +703,7 @@ public:
     // Loop over all elements and set macro element pointer
     for (unsigned e = 0; e < 6; e++)
     {
-      dynamic_cast<ELEMENT *>(this->element_pt(e))
+      dynamic_cast<ELEMENT*>(this->element_pt(e))
         ->set_macro_elem_pt(this->Domain_pt->macro_element_pt(e));
     }
 
@@ -725,9 +725,9 @@ private:
   double Length, Height;
 
   // Constitutive law used to determine the mesh deformation
-  ConstitutiveLaw *Constitutive_law_pt;
+  ConstitutiveLaw* Constitutive_law_pt;
 
-  Data *Traded_pressure_data_pt;
+  Data* Traded_pressure_data_pt;
 
 public:
   double Re, Ca, ReInvFr, Bo;
@@ -742,7 +742,7 @@ public:
 
   /// Constructor: Pass flag to indicate if you want
   /// a constant source function or the tanh profile.
-  RefineableRotatingCylinderProblem(const double &length, const double &height);
+  RefineableRotatingCylinderProblem(const double& length, const double& height);
 
   /// Update the problem specs after solve (empty)
   void actions_after_newton_solve() {}
@@ -771,16 +771,16 @@ public:
   void finish_problem_setup();
 
   // Access function for the mesh
-  RefineableCylinderAndInterfaceMesh<ELEMENT> *Bulk_mesh_pt;
+  RefineableCylinderAndInterfaceMesh<ELEMENT>* Bulk_mesh_pt;
 
   // Access function for surface mesh
-  Mesh *Surface_mesh_pt;
+  Mesh* Surface_mesh_pt;
 
   // Access function for point mesh
-  Mesh *Point_mesh_pt;
+  Mesh* Point_mesh_pt;
 
   /// The volume constraint mesh
-  Mesh *Volume_constraint_mesh_pt;
+  Mesh* Volume_constraint_mesh_pt;
 
   void set_boundary_conditions();
 
@@ -790,7 +790,7 @@ public:
   void create_volume_constraint_elements()
   {
     // The single volume constraint element
-    VolumeConstraintElement *vol_constraint_element =
+    VolumeConstraintElement* vol_constraint_element =
       new VolumeConstraintElement(&Volume, Traded_pressure_data_pt, 0);
     Volume_constraint_mesh_pt->add_element_pt(vol_constraint_element);
 
@@ -805,14 +805,14 @@ public:
       {
         // Get pointer to the bulk fluid element that is
         // adjacent to boundary b
-        ELEMENT *bulk_elem_pt =
-          dynamic_cast<ELEMENT *>(Bulk_mesh_pt->boundary_element_pt(b, e));
+        ELEMENT* bulk_elem_pt =
+          dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(b, e));
 
         // Find the index of the face of element e along boundary b
         int face_index = Bulk_mesh_pt->face_index_at_boundary(b, e);
 
         // Create new element
-        ElasticLineVolumeConstraintBoundingElement<ELEMENT> *el_pt =
+        ElasticLineVolumeConstraintBoundingElement<ELEMENT>* el_pt =
           new ElasticLineVolumeConstraintBoundingElement<ELEMENT>(bulk_elem_pt,
                                                                   face_index);
 
@@ -848,7 +848,7 @@ public:
     for (unsigned e = 0; e < n_boundary_element; e++)
     {
       // Create the free surface element (on face 2)
-      FiniteElement *free_surface_element_pt =
+      FiniteElement* free_surface_element_pt =
         new ElasticLineFluidInterfaceElement<ELEMENT>(
           Bulk_mesh_pt->boundary_element_pt(2, e),
           Bulk_mesh_pt->face_index_at_boundary(2, e));
@@ -876,8 +876,8 @@ public:
     }
 
     // Make the edge point
-    FiniteElement *point_element_pt =
-      dynamic_cast<ElasticLineFluidInterfaceElement<ELEMENT> *>(
+    FiniteElement* point_element_pt =
+      dynamic_cast<ElasticLineFluidInterfaceElement<ELEMENT>*>(
         Surface_mesh_pt->element_pt(final_element_index))
         ->make_bounding_element(1);
 
@@ -911,7 +911,7 @@ public:
 //========================================================================
 template<class ELEMENT>
 RefineableRotatingCylinderProblem<ELEMENT>::RefineableRotatingCylinderProblem(
-  const double &length, const double &height) :
+  const double& length, const double& height) :
   Length(length),
   Height(height),
   Re(0.0),
@@ -950,7 +950,7 @@ RefineableRotatingCylinderProblem<ELEMENT>::RefineableRotatingCylinderProblem(
     length, height, Problem::time_stepper_pt());
 
   // Set error estimator
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   Bulk_mesh_pt->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Refine the problem a couple of times
@@ -967,7 +967,7 @@ RefineableRotatingCylinderProblem<ELEMENT>::RefineableRotatingCylinderProblem(
   unsigned Nelement = Bulk_mesh_pt->nelement();
   for (unsigned e = 0; e < Nelement; e++)
   {
-    dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e))->set_macro_elem_pt(0);
+    dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e))->set_macro_elem_pt(0);
   }
 
   // The external pressure is a piece of global data
@@ -1042,18 +1042,18 @@ void RefineableRotatingCylinderProblem<ELEMENT>::finish_problem_setup()
     }
   }
 
-  dynamic_cast<FluidInterfaceBoundingElement *>(Point_mesh_pt->element_pt(0))
+  dynamic_cast<FluidInterfaceBoundingElement*>(Point_mesh_pt->element_pt(0))
     ->set_contact_angle(&Angle);
 
-  dynamic_cast<FluidInterfaceBoundingElement *>(Point_mesh_pt->element_pt(0))
+  dynamic_cast<FluidInterfaceBoundingElement*>(Point_mesh_pt->element_pt(0))
     ->ca_pt() = &Ca;
 
-  dynamic_cast<FluidInterfaceBoundingElement *>(Point_mesh_pt->element_pt(0))
+  dynamic_cast<FluidInterfaceBoundingElement*>(Point_mesh_pt->element_pt(0))
     ->wall_unit_normal_fct_pt() =
     &Global_Physical_Variables::wall_unit_normal_fct;
 
   // Pin one pressure
-  dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(0))->fix_pressure(0, 0.0);
+  dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(0))->fix_pressure(0, 0.0);
 
   // Loop over the lower boundary and pin nodal positions in both directions
   unsigned num_nod = Bulk_mesh_pt->nboundary_node(0);
@@ -1097,7 +1097,7 @@ void RefineableRotatingCylinderProblem<ELEMENT>::finish_problem_setup()
   for (unsigned i = 0; i < Nfluid; i++)
   {
     // Upcast from FiniteElement to the present element
-    ELEMENT *temp_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(i));
+    ELEMENT* temp_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(i));
 
     // Set the source function pointer
     temp_pt->re_pt() = &Re;
@@ -1116,8 +1116,8 @@ void RefineableRotatingCylinderProblem<ELEMENT>::finish_problem_setup()
   for (unsigned i = 0; i < Nfree; i++)
   {
     // Upcast from FiniteElement to the present element
-    ElasticLineFluidInterfaceElement<ELEMENT> *temp_pt =
-      dynamic_cast<ElasticLineFluidInterfaceElement<ELEMENT> *>(
+    ElasticLineFluidInterfaceElement<ELEMENT>* temp_pt =
+      dynamic_cast<ElasticLineFluidInterfaceElement<ELEMENT>*>(
         Surface_mesh_pt->element_pt(i));
     // Set the Capillary number
     temp_pt->ca_pt() = &Ca;
@@ -1233,7 +1233,7 @@ void RefineableRotatingCylinderProblem<ELEMENT>::solve()
     for (unsigned n = 0; n < Nnode; n++)
     {
       // Cast node to an elastic node
-      SolidNode *temp_pt = static_cast<SolidNode *>(Bulk_mesh_pt->node_pt(n));
+      SolidNode* temp_pt = static_cast<SolidNode*>(Bulk_mesh_pt->node_pt(n));
       for (unsigned j = 0; j < 2; j++)
       {
         temp_pt->xi(j) = temp_pt->x(j);
@@ -1246,8 +1246,8 @@ void RefineableRotatingCylinderProblem<ELEMENT>::solve()
     for (unsigned n = 0; n < Nfree; n++)
     {
       // Upcast from FiniteElement to the present element
-      ElasticLineFluidInterfaceElement<ELEMENT> *temp_pt =
-        dynamic_cast<ElasticLineFluidInterfaceElement<ELEMENT> *>(
+      ElasticLineFluidInterfaceElement<ELEMENT>* temp_pt =
+        dynamic_cast<ElasticLineFluidInterfaceElement<ELEMENT>*>(
           Surface_mesh_pt->element_pt(n));
       unsigned Nnode = temp_pt->nnode();
       // Reset the lagrange multipliers

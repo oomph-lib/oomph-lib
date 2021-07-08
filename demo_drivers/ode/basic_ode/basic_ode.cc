@@ -37,7 +37,7 @@
 
 using namespace oomph;
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   using namespace CommandLineArgs;
 
@@ -86,9 +86,9 @@ int main(int argc, char *argv[])
 
   problem.Exact_solution_pt = ODEFactories::exact_solutions_factory(ode_name);
 
-  TimeStepper *time_stepper_pt = Factories::time_stepper_factory(ts_name);
+  TimeStepper* time_stepper_pt = Factories::time_stepper_factory(ts_name);
 
-  Vector<Mesh *> mesh_pt;
+  Vector<Mesh*> mesh_pt;
   mesh_pt.push_back(new Mesh);
   if (element_type == "normal")
   {

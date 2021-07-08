@@ -53,10 +53,10 @@ namespace Global_Physical_Variables
   double P_ext;
 
   /// Load function: Apply a constant external pressure to the beam
-  void load(const Vector<double> &xi,
-            const Vector<double> &x,
-            const Vector<double> &N,
-            Vector<double> &load)
+  void load(const Vector<double>& xi,
+            const Vector<double>& x,
+            const Vector<double>& N,
+            Vector<double>& load)
   {
     for (unsigned i = 0; i < 2; i++)
     {
@@ -74,15 +74,15 @@ class ElasticBeamProblem : public Problem
 public:
   /// \short Constructor: The arguments are the number of elements,
   /// the length of domain
-  ElasticBeamProblem(const unsigned &n_elem, const double &length);
+  ElasticBeamProblem(const unsigned& n_elem, const double& length);
 
   /// Conduct a parameter study
   void parameter_study();
 
   /// Return pointer to the mesh
-  OneDLagrangianMesh<HermiteBeamElement> *mesh_pt()
+  OneDLagrangianMesh<HermiteBeamElement>* mesh_pt()
   {
-    return dynamic_cast<OneDLagrangianMesh<HermiteBeamElement> *>(
+    return dynamic_cast<OneDLagrangianMesh<HermiteBeamElement>*>(
       Problem::mesh_pt());
   }
 
@@ -94,21 +94,21 @@ public:
 
 private:
   /// Pointer to the node whose displacement is documented
-  Node *Doc_node_pt;
+  Node* Doc_node_pt;
 
   /// Length of domain (in terms of the Lagrangian coordinates)
   double Length;
 
   /// Pointer to geometric object that represents the beam's undeformed shape
-  GeomObject *Undef_beam_pt;
+  GeomObject* Undef_beam_pt;
 
 }; // end of problem class
 
 //=============start_of_constructor=====================================
 /// Constructor for elastic beam problem
 //======================================================================
-ElasticBeamProblem::ElasticBeamProblem(const unsigned &n_elem,
-                                       const double &length) :
+ElasticBeamProblem::ElasticBeamProblem(const unsigned& n_elem,
+                                       const double& length) :
   Length(length)
 {
   // Set the undeformed beam to be a straight line at y=0
@@ -143,8 +143,8 @@ ElasticBeamProblem::ElasticBeamProblem(const unsigned &n_elem,
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast to the specific element type
-    HermiteBeamElement *elem_pt =
-      dynamic_cast<HermiteBeamElement *>(mesh_pt()->element_pt(e));
+    HermiteBeamElement* elem_pt =
+      dynamic_cast<HermiteBeamElement*>(mesh_pt()->element_pt(e));
 
     // Set physical parameters for each element:
     elem_pt->sigma0_pt() = &Global_Physical_Variables::Sigma0;

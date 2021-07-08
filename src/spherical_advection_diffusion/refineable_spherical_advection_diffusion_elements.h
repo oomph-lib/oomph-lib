@@ -71,13 +71,13 @@ namespace oomph
 
     /// Broken copy constructor
     RefineableSphericalAdvectionDiffusionEquations(
-      const RefineableSphericalAdvectionDiffusionEquations &dummy)
+      const RefineableSphericalAdvectionDiffusionEquations& dummy)
     {
       BrokenCopy::broken_copy("RefineableSphericalAdvectionDiffusionEquations");
     }
 
     /// Broken assignment operator
-    void operator=(const RefineableSphericalAdvectionDiffusionEquations &)
+    void operator=(const RefineableSphericalAdvectionDiffusionEquations&)
     {
       BrokenCopy::broken_assign(
         "RefineableSphericalAdvectionDiffusionEquations");
@@ -91,7 +91,7 @@ namespace oomph
 
     /// \short Get 'flux' for Z2 error recovery:
     /// Standard flux.from AdvectionDiffusion equations
-    void get_Z2_flux(const Vector<double> &s, Vector<double> &flux)
+    void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
       this->get_flux(s, flux);
     }
@@ -100,8 +100,8 @@ namespace oomph
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines), the values Vector sets its own size in here.
-    void get_interpolated_values(const Vector<double> &s,
-                                 Vector<double> &values)
+    void get_interpolated_values(const Vector<double>& s,
+                                 Vector<double>& values)
     {
       // Set size of Vector: u
       values.resize(1);
@@ -132,9 +132,9 @@ namespace oomph
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines), the values Vector sets its own size in here.
-    void get_interpolated_values(const unsigned &t,
-                                 const Vector<double> &s,
-                                 Vector<double> &values)
+    void get_interpolated_values(const unsigned& t,
+                                 const Vector<double>& s,
+                                 Vector<double>& values)
     {
       // Set size of Vector: u
       values.resize(1);
@@ -181,7 +181,7 @@ namespace oomph
     }
 
     /// Fill in the geometric Jacobian, which in this case is r*r*sin(theta)
-    double geometric_jacobian(const Vector<double> &x)
+    double geometric_jacobian(const Vector<double>& x)
     {
       return x[0] * x[0] * sin(x[1]);
     }
@@ -189,8 +189,8 @@ namespace oomph
     ///  Further build: Copy source function pointer from father element
     void further_build()
     {
-      RefineableSphericalAdvectionDiffusionEquations *cast_father_element_pt =
-        dynamic_cast<RefineableSphericalAdvectionDiffusionEquations *>(
+      RefineableSphericalAdvectionDiffusionEquations* cast_father_element_pt =
+        dynamic_cast<RefineableSphericalAdvectionDiffusionEquations*>(
           this->father_element_pt());
 
       // Set the values of the pointers from the father
@@ -209,9 +209,9 @@ namespace oomph
     /// equation numbers corresponding to the data.
     /// Overload the non-refineable version to take account of hanging node
     /// information
-    void dinterpolated_u_adv_diff_ddata(const Vector<double> &s,
-                                        Vector<double> &du_ddata,
-                                        Vector<unsigned> &global_eqn_number)
+    void dinterpolated_u_adv_diff_ddata(const Vector<double>& s,
+                                        Vector<double>& du_ddata,
+                                        Vector<unsigned>& global_eqn_number)
     {
       // Find number of nodes
       unsigned n_node = this->nnode();
@@ -224,7 +224,7 @@ namespace oomph
       const unsigned u_nodal_index = this->u_index_spherical_adv_diff();
 
       // Storage for hang info pointer
-      HangInfo *hang_info_pt = 0;
+      HangInfo* hang_info_pt = 0;
       // Storage for global equation
       int global_eqn = 0;
 
@@ -347,9 +347,9 @@ namespace oomph
     /// flag=1: compute both
     /// flag=0: compute only residual vector
     void fill_in_generic_residual_contribution_spherical_adv_diff(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix,
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
       unsigned flag);
   };
 
@@ -376,14 +376,14 @@ namespace oomph
 
     /// Broken copy constructor
     RefineableQSphericalAdvectionDiffusionElement(
-      const RefineableQSphericalAdvectionDiffusionElement<NNODE_1D> &dummy)
+      const RefineableQSphericalAdvectionDiffusionElement<NNODE_1D>& dummy)
     {
       BrokenCopy::broken_copy("RefineableQSphericalAdvectionDiffusionElement");
     }
 
     /// Broken assignment operator
     void operator=(
-      const RefineableQSphericalAdvectionDiffusionElement<NNODE_1D> &)
+      const RefineableQSphericalAdvectionDiffusionElement<NNODE_1D>&)
     {
       BrokenCopy::broken_assign(
         "RefineableQSphericalAdvectionDiffusionElement");
@@ -402,13 +402,13 @@ namespace oomph
     }
 
     /// \short Pointer to the j-th vertex node in the element
-    Node *vertex_node_pt(const unsigned &j) const
+    Node* vertex_node_pt(const unsigned& j) const
     {
       return QSphericalAdvectionDiffusionElement<NNODE_1D>::vertex_node_pt(j);
     }
 
     /// Rebuild from sons: empty
-    void rebuild_from_sons(Mesh *&mesh_pt) {}
+    void rebuild_from_sons(Mesh*& mesh_pt) {}
 
     /// \short Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.

@@ -100,9 +100,9 @@ class BaseStateProblem : public Problem
 {
 public:
   /// Constructor
-  BaseStateProblem(const unsigned &n_r,
-                   const unsigned &n_z,
-                   const double &domain_height);
+  BaseStateProblem(const unsigned& n_r,
+                   const unsigned& n_z,
+                   const double& domain_height);
 
   /// Destructor (empty)
   ~BaseStateProblem() {}
@@ -147,23 +147,23 @@ public:
   void set_boundary_conditions();
 
   /// Access function for the specific mesh
-  RefineableRectangularQuadMesh<BASE_ELEMENT> *mesh_pt()
+  RefineableRectangularQuadMesh<BASE_ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<RefineableRectangularQuadMesh<BASE_ELEMENT> *>(
+    return dynamic_cast<RefineableRectangularQuadMesh<BASE_ELEMENT>*>(
       Problem::mesh_pt());
   }
 
   /// Access function for the specific timestepper
-  SelfStartingBDF2 *time_stepper_pt()
+  SelfStartingBDF2* time_stepper_pt()
   {
-    return dynamic_cast<SelfStartingBDF2 *>(Problem::time_stepper_pt());
+    return dynamic_cast<SelfStartingBDF2*>(Problem::time_stepper_pt());
   }
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info, const bool &output_soln = true);
+  void doc_solution(DocInfo& doc_info, const bool& output_soln = true);
 
   /// Create a trace file
-  void create_trace_file(DocInfo &doc_info)
+  void create_trace_file(DocInfo& doc_info)
   {
     // Open trace file
     char filename[256];
@@ -189,7 +189,7 @@ public:
   }
 
   /// Access function for trace file
-  ofstream &trace_file()
+  ofstream& trace_file()
   {
     return Trace_file;
   }
@@ -203,8 +203,8 @@ public:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Upcast from GeneralisedElement to the present element
-      BASE_ELEMENT *el_pt =
-        dynamic_cast<BASE_ELEMENT *>(mesh_pt()->element_pt(e));
+      BASE_ELEMENT* el_pt =
+        dynamic_cast<BASE_ELEMENT*>(mesh_pt()->element_pt(e));
 
       // Set the Reynolds number
       el_pt->re_pt() = &GlobalPhysicalVariables::Re_current;
@@ -220,11 +220,11 @@ public:
 
 private:
   /// Fix pressure in element e at pressure dof pdof and set to pvalue
-  void fix_pressure(const unsigned &e,
-                    const unsigned &pdof,
-                    const double &pvalue)
+  void fix_pressure(const unsigned& e,
+                    const unsigned& pdof,
+                    const double& pvalue)
   {
-    dynamic_cast<BASE_ELEMENT *>(mesh_pt()->element_pt(e))
+    dynamic_cast<BASE_ELEMENT*>(mesh_pt()->element_pt(e))
       ->fix_pressure(pdof, pvalue);
   }
 
@@ -237,9 +237,9 @@ private:
 /// Constructor for base state Tuckerman counter-rotating lids problem
 //=======================================================================
 template<class BASE_ELEMENT>
-BaseStateProblem<BASE_ELEMENT>::BaseStateProblem(const unsigned &n_r,
-                                                 const unsigned &n_z,
-                                                 const double &domain_height)
+BaseStateProblem<BASE_ELEMENT>::BaseStateProblem(const unsigned& n_r,
+                                                 const unsigned& n_z,
+                                                 const double& domain_height)
 {
   // Allocate the timestepper (this constructs the time object as well)
   add_time_stepper_pt(new SelfStartingBDF2);
@@ -295,8 +295,7 @@ BaseStateProblem<BASE_ELEMENT>::BaseStateProblem(const unsigned &n_r,
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    BASE_ELEMENT *el_pt =
-      dynamic_cast<BASE_ELEMENT *>(mesh_pt()->element_pt(e));
+    BASE_ELEMENT* el_pt = dynamic_cast<BASE_ELEMENT*>(mesh_pt()->element_pt(e));
 
     // Note that at this point we do not know the value of the Reynolds
     // number. Therefore we update Re, ReSt, ReInvFr using the function
@@ -438,8 +437,8 @@ void BaseStateProblem<BASE_ELEMENT>::set_boundary_conditions()
 /// Document the base state solution
 //=======================================================================
 template<class BASE_ELEMENT>
-void BaseStateProblem<BASE_ELEMENT>::doc_solution(DocInfo &doc_info,
-                                                  const bool &output_soln)
+void BaseStateProblem<BASE_ELEMENT>::doc_solution(DocInfo& doc_info,
+                                                  const bool& output_soln)
 {
   // Create vector of dofs
   DoubleVector dofs;
@@ -492,10 +491,10 @@ class PerturbedStateProblem : public Problem
 {
 public:
   /// Constructor
-  PerturbedStateProblem(const unsigned &n_r,
-                        const unsigned &n_z,
-                        const double &domain_height,
-                        Mesh *external_mesh_pt);
+  PerturbedStateProblem(const unsigned& n_r,
+                        const unsigned& n_z,
+                        const double& domain_height,
+                        Mesh* external_mesh_pt);
 
   /// Destructor (empty)
   ~PerturbedStateProblem() {}
@@ -549,30 +548,30 @@ public:
   void set_boundary_conditions();
 
   /// Access function for the specific mesh
-  RefineableRectangularQuadMesh<PERTURBED_ELEMENT> *mesh_pt()
+  RefineableRectangularQuadMesh<PERTURBED_ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<RefineableRectangularQuadMesh<PERTURBED_ELEMENT> *>(
+    return dynamic_cast<RefineableRectangularQuadMesh<PERTURBED_ELEMENT>*>(
       Problem::mesh_pt());
   }
 
   /// Access function for the base state mesh
-  RefineableRectangularQuadMesh<BASE_ELEMENT> *base_state_mesh_pt()
+  RefineableRectangularQuadMesh<BASE_ELEMENT>* base_state_mesh_pt()
   {
-    return dynamic_cast<RefineableRectangularQuadMesh<BASE_ELEMENT> *>(
+    return dynamic_cast<RefineableRectangularQuadMesh<BASE_ELEMENT>*>(
       Base_state_mesh_pt);
   }
 
   /// Access function for the specific timestepper
-  SelfStartingBDF2 *time_stepper_pt()
+  SelfStartingBDF2* time_stepper_pt()
   {
-    return dynamic_cast<SelfStartingBDF2 *>(Problem::time_stepper_pt());
+    return dynamic_cast<SelfStartingBDF2*>(Problem::time_stepper_pt());
   }
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info, const bool &output_soln = true);
+  void doc_solution(DocInfo& doc_info, const bool& output_soln = true);
 
   /// Create a trace file
-  void create_trace_file(DocInfo &doc_info)
+  void create_trace_file(DocInfo& doc_info)
   {
     // Open trace file
     char filename[256];
@@ -598,7 +597,7 @@ public:
   }
 
   /// Access function for trace file
-  ofstream &trace_file()
+  ofstream& trace_file()
   {
     return Trace_file;
   }
@@ -612,8 +611,8 @@ public:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Upcast from GeneralisedElement to the present element
-      PERTURBED_ELEMENT *el_pt =
-        dynamic_cast<PERTURBED_ELEMENT *>(mesh_pt()->element_pt(e));
+      PERTURBED_ELEMENT* el_pt =
+        dynamic_cast<PERTURBED_ELEMENT*>(mesh_pt()->element_pt(e));
 
       // Set the Reynolds number
       el_pt->re_pt() = &GlobalPhysicalVariables::Re_current;
@@ -625,14 +624,14 @@ public:
 
 private:
   /// Pointer to the base state mesh
-  Mesh *Base_state_mesh_pt;
+  Mesh* Base_state_mesh_pt;
 
   /// Fix pressure in element e at pressure dof pdof and set to pvalue
-  void fix_pressure(const unsigned &e,
-                    const unsigned &pdof,
-                    const double &pvalue)
+  void fix_pressure(const unsigned& e,
+                    const unsigned& pdof,
+                    const double& pvalue)
   {
-    dynamic_cast<PERTURBED_ELEMENT *>(mesh_pt()->element_pt(e))
+    dynamic_cast<PERTURBED_ELEMENT*>(mesh_pt()->element_pt(e))
       ->fix_pressure(pdof, pvalue);
   }
 
@@ -654,10 +653,10 @@ private:
 //=======================================================================
 template<class BASE_ELEMENT, class PERTURBED_ELEMENT>
 PerturbedStateProblem<BASE_ELEMENT, PERTURBED_ELEMENT>::PerturbedStateProblem(
-  const unsigned &n_r,
-  const unsigned &n_z,
-  const double &domain_height,
-  Mesh *external_mesh_pt) :
+  const unsigned& n_r,
+  const unsigned& n_z,
+  const double& domain_height,
+  Mesh* external_mesh_pt) :
   Base_state_mesh_pt(external_mesh_pt), Domain_height(domain_height)
 {
   // Be less verbose during newton solve
@@ -732,8 +731,8 @@ PerturbedStateProblem<BASE_ELEMENT, PERTURBED_ELEMENT>::PerturbedStateProblem(
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    PERTURBED_ELEMENT *el_pt =
-      dynamic_cast<PERTURBED_ELEMENT *>(mesh_pt()->element_pt(e));
+    PERTURBED_ELEMENT* el_pt =
+      dynamic_cast<PERTURBED_ELEMENT*>(mesh_pt()->element_pt(e));
 
     // Note that at this point we do not know the value of the Reynolds
     // number. Therefore we update Re and ReSt using the function
@@ -860,7 +859,7 @@ void PerturbedStateProblem<BASE_ELEMENT,
 //=======================================================================
 template<class BASE_ELEMENT, class PERTURBED_ELEMENT>
 void PerturbedStateProblem<BASE_ELEMENT, PERTURBED_ELEMENT>::doc_solution(
-  DocInfo &doc_info, const bool &output_soln)
+  DocInfo& doc_info, const bool& output_soln)
 {
   // Create vector of dofs
   DoubleVector dofs;
@@ -913,11 +912,11 @@ class StabilityProblem
 {
 public:
   /// Constructor: Build base and perturbed state problems
-  StabilityProblem(const unsigned &base_n_r,
-                   const unsigned &base_n_z,
-                   const unsigned &perturbed_n_r,
-                   const unsigned &perturbed_n_z,
-                   const double &domain_height)
+  StabilityProblem(const unsigned& base_n_r,
+                   const unsigned& base_n_z,
+                   const unsigned& perturbed_n_r,
+                   const unsigned& perturbed_n_z,
+                   const double& domain_height)
   {
     // Build base state problem
     Base_state_problem_pt =
@@ -936,7 +935,7 @@ public:
   ~StabilityProblem() {}
 
   /// Create trace files
-  void create_trace_files(DocInfo &doc_info)
+  void create_trace_files(DocInfo& doc_info)
   {
     // Set up base and perturbed state trace files
     Base_state_problem_pt->create_trace_file(doc_info);
@@ -977,14 +976,14 @@ public:
   }
 
   /// Initialise timestep (single dt version)
-  void initialise_dt(const double &dt)
+  void initialise_dt(const double& dt)
   {
     Base_state_problem_pt->initialise_dt(dt);
     Perturbed_state_problem_pt->initialise_dt(dt);
   }
 
   /// Initialise timestep (vector of dts version)
-  void initialise_dt(const Vector<double> &dt)
+  void initialise_dt(const Vector<double>& dt)
   {
     Base_state_problem_pt->initialise_dt(dt);
     Perturbed_state_problem_pt->initialise_dt(dt);
@@ -998,9 +997,9 @@ public:
   }
 
   /// Document base and perturbed state solutions
-  void doc_solution(DocInfo &doc_info,
-                    const bool &output_base_soln,
-                    const bool &output_perturbed_soln)
+  void doc_solution(DocInfo& doc_info,
+                    const bool& output_base_soln,
+                    const bool& output_perturbed_soln)
   {
     Base_state_problem_pt->doc_solution(doc_info, output_base_soln);
     Perturbed_state_problem_pt->doc_solution(doc_info, output_perturbed_soln);
@@ -1022,12 +1021,12 @@ public:
   /// eigenvector "input" will be returned. The return value of this
   /// function is the number of power method iterations which were
   /// performed.
-  unsigned perform_power_method(const double &dt,
-                                DocInfo &doc_info,
-                                const double &tolerance,
-                                const unsigned &max_iter,
-                                double &calc_eigenvalue,
-                                DoubleVector &input);
+  unsigned perform_power_method(const double& dt,
+                                DocInfo& doc_info,
+                                const double& tolerance,
+                                const unsigned& max_iter,
+                                double& calc_eigenvalue,
+                                DoubleVector& input);
 
   // Solve the steady base flow problem
   void base_flow_steady_newton_solve()
@@ -1037,7 +1036,7 @@ public:
   }
 
   /// Get perturbed state dofs
-  void get_perturbed_state_problem_dofs(DoubleVector &d)
+  void get_perturbed_state_problem_dofs(DoubleVector& d)
   {
     Perturbed_state_problem_pt->get_dofs(d);
   }
@@ -1052,14 +1051,14 @@ public:
   }
 
   /// Access function for base state problem
-  BaseStateProblem<BASE_ELEMENT> *base_state_problem_pt() const
+  BaseStateProblem<BASE_ELEMENT>* base_state_problem_pt() const
   {
     return Base_state_problem_pt;
   }
 
   /// Access function for perturbed state problem
-  PerturbedStateProblem<BASE_ELEMENT, PERTURBED_ELEMENT>
-    *perturbed_state_problem_pt() const
+  PerturbedStateProblem<BASE_ELEMENT, PERTURBED_ELEMENT>* perturbed_state_problem_pt()
+    const
   {
     return Perturbed_state_problem_pt;
   }
@@ -1087,11 +1086,11 @@ private:
   ofstream Trace_file_power_method;
 
   /// Pointer to base state problem class
-  BaseStateProblem<BASE_ELEMENT> *Base_state_problem_pt;
+  BaseStateProblem<BASE_ELEMENT>* Base_state_problem_pt;
 
   /// Pointer to perturbed state problem class
-  PerturbedStateProblem<BASE_ELEMENT, PERTURBED_ELEMENT>
-    *Perturbed_state_problem_pt;
+  PerturbedStateProblem<BASE_ELEMENT, PERTURBED_ELEMENT>*
+    Perturbed_state_problem_pt;
 
 }; // End of stability_problem class
 
@@ -1107,12 +1106,12 @@ private:
 //=======================================================================
 template<class BASE_ELEMENT, class PERTURBED_ELEMENT>
 unsigned StabilityProblem<BASE_ELEMENT, PERTURBED_ELEMENT>::
-  perform_power_method(const double &dt,
-                       DocInfo &doc_info,
-                       const double &tolerance,
-                       const unsigned &max_iter,
-                       double &calc_eigenvalue,
-                       DoubleVector &input)
+  perform_power_method(const double& dt,
+                       DocInfo& doc_info,
+                       const double& tolerance,
+                       const unsigned& max_iter,
+                       double& calc_eigenvalue,
+                       DoubleVector& input)
 {
   // Initialise output_base_state_solution flag to true
   bool output_base_state_solution = true;
@@ -1236,7 +1235,7 @@ unsigned StabilityProblem<BASE_ELEMENT, PERTURBED_ELEMENT>::
 //==start_of_main========================================================
 /// Driver for Tuckerman counter-rotating lids problem (no power method)
 //=======================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

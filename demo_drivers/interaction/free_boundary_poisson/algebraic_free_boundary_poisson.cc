@@ -59,7 +59,7 @@ namespace ConstSourceForPoisson
   double Strength = 1.0;
 
   /// Const source function
-  void get_source(const Vector<double> &x, double &source)
+  void get_source(const Vector<double>& x, double& source)
   {
     source = -Strength * (1.0 + x[0] * x[1]);
   }
@@ -81,9 +81,9 @@ public:
   /// \short  Constructor: Bool flag specifies if position of fish back is
   /// prescribed or computed from the coupled problem. String specifies
   /// output directory.
-  RefineableFishPoissonProblem(const bool &fix_position,
-                               const string &directory_name,
-                               const unsigned &i_case);
+  RefineableFishPoissonProblem(const bool& fix_position,
+                               const string& directory_name,
+                               const unsigned& i_case);
 
   /// Destructor
   virtual ~RefineableFishPoissonProblem();
@@ -105,22 +105,22 @@ public:
   }
 
   // Access function for the fish mesh
-  AlgebraicRefineableFishMesh<ELEMENT> *fish_mesh_pt()
+  AlgebraicRefineableFishMesh<ELEMENT>* fish_mesh_pt()
   {
     return Fish_mesh_pt;
   }
 
   /// Return value of the "load" on the elastically supported ring
-  double &load()
+  double& load()
   {
     return *Load_pt->value_pt(0);
   }
 
   /// \short Return value of the vertical displacement of the ring that
   /// represents the fish's back
-  double &y_c()
+  double& y_c()
   {
-    return static_cast<ElasticallySupportedRingElement *>(
+    return static_cast<ElasticallySupportedRingElement*>(
              fish_mesh_pt()->fish_back_pt())
       ->y_c();
   }
@@ -129,7 +129,7 @@ public:
   void doc_solution();
 
   /// Access to DocInfo object
-  DocInfo &doc_info()
+  DocInfo& doc_info()
   {
     return Doc_info;
   }
@@ -145,7 +145,7 @@ private:
     for (unsigned i = 0; i < n_element; i++)
     {
       // Upcast from FiniteElement to the present element
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(fish_mesh_pt()->element_pt(i));
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(fish_mesh_pt()->element_pt(i));
 
       // Direct FD
       if (Case_id == 0)
@@ -198,20 +198,20 @@ private:
   }
 
   /// Node at which the solution of the Poisson equation is documented
-  Node *Doc_node_pt;
+  Node* Doc_node_pt;
 
   /// Trace file
   ofstream Trace_file;
 
   /// Pointer to fish mesh
-  AlgebraicRefineableFishMesh<ELEMENT> *Fish_mesh_pt;
+  AlgebraicRefineableFishMesh<ELEMENT>* Fish_mesh_pt;
 
   /// Pointer to single-element mesh that stores the GeneralisedElement
   /// that represents the fish back
-  Mesh *Fish_back_mesh_pt;
+  Mesh* Fish_back_mesh_pt;
 
   /// \short Pointer to data item that stores the "load" on the fish back
-  Data *Load_pt;
+  Data* Load_pt;
 
   /// \short Is the position of the fish back prescribed?
   bool Fix_position;
@@ -230,9 +230,9 @@ private:
 //========================================================================
 template<class ELEMENT>
 RefineableFishPoissonProblem<ELEMENT>::RefineableFishPoissonProblem(
-  const bool &fix_position,
-  const string &directory_name,
-  const unsigned &i_case) :
+  const bool& fix_position,
+  const string& directory_name,
+  const unsigned& i_case) :
   Fix_position(fix_position), Case_id(i_case)
 {
   // Set output directory
@@ -256,7 +256,7 @@ RefineableFishPoissonProblem<ELEMENT>::RefineableFishPoissonProblem(
   double r_back = 1.0;
 
   // Build geometric element that will become the fish back
-  GeomObject *fish_back_pt =
+  GeomObject* fish_back_pt =
     new ElasticallySupportedRingElement(x_c, y_c, r_back);
 
   // Build fish mesh with geometric object that specifies the fish back
@@ -272,7 +272,7 @@ RefineableFishPoissonProblem<ELEMENT>::RefineableFishPoissonProblem(
   // one (and only!) GeneralisedElement which represents the shape
   // of the fish's back to it:
   Fish_back_mesh_pt->add_element_pt(
-    dynamic_cast<GeneralisedElement *>(Fish_mesh_pt->fish_back_pt()));
+    dynamic_cast<GeneralisedElement*>(Fish_mesh_pt->fish_back_pt()));
 
   // Add the fish back mesh to the problem's collection of submeshes:
   add_sub_mesh(Fish_back_mesh_pt);
@@ -309,8 +309,7 @@ RefineableFishPoissonProblem<ELEMENT>::RefineableFishPoissonProblem(
     Load_pt->pin(0);
 
     // Pin the vertical displacement
-    dynamic_cast<ElasticallySupportedRingElement *>(
-      Fish_mesh_pt->fish_back_pt())
+    dynamic_cast<ElasticallySupportedRingElement*>(Fish_mesh_pt->fish_back_pt())
       ->pin_yc();
   }
   // Coupled problem: The position of the fish back is determined
@@ -326,7 +325,7 @@ RefineableFishPoissonProblem<ELEMENT>::RefineableFishPoissonProblem(
 
   // Set the pointer to the Data object that specifies the
   // load on the fish's back
-  dynamic_cast<ElasticallySupportedRingElement *>(Fish_mesh_pt->fish_back_pt())
+  dynamic_cast<ElasticallySupportedRingElement*>(Fish_mesh_pt->fish_back_pt())
     ->set_load_pt(Load_pt);
 
   // Set the boundary conditions for this problem: All nodes are
@@ -358,7 +357,7 @@ RefineableFishPoissonProblem<ELEMENT>::RefineableFishPoissonProblem(
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from FiniteElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(fish_mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(fish_mesh_pt()->element_pt(i));
 
     // Set the source function pointer
     el_pt->source_fct_pt() = &ConstSourceForPoisson::get_source;
@@ -416,11 +415,11 @@ void RefineableFishPoissonProblem<ELEMENT>::doc_solution()
 
   // Write "load", vertical position of the fish back, and solution at
   // control node to trace file
-  Trace_file << static_cast<ElasticallySupportedRingElement *>(
+  Trace_file << static_cast<ElasticallySupportedRingElement*>(
                   fish_mesh_pt()->fish_back_pt())
                   ->load()
              << " "
-             << static_cast<ElasticallySupportedRingElement *>(
+             << static_cast<ElasticallySupportedRingElement*>(
                   fish_mesh_pt()->fish_back_pt())
                   ->y_c()
              << " " << Doc_node_pt->value(0) << std::endl;
@@ -435,7 +434,7 @@ void RefineableFishPoissonProblem<ELEMENT>::doc_solution()
 /// fish-shaped domain with mesh adaptation.
 //========================================================================
 template<class ELEMENT>
-void demo_fish_poisson(const string &directory_name)
+void demo_fish_poisson(const string& directory_name)
 {
   // Set up the problem with prescribed displacement of fish back
   bool fix_position = true;
@@ -485,7 +484,7 @@ void demo_fish_poisson(const string &directory_name)
 /// fish-shaped domain with mesh adaptation.
 //========================================================================
 template<class ELEMENT>
-void demo_elastic_fish_poisson(const string &directory_name)
+void demo_elastic_fish_poisson(const string& directory_name)
 {
   // Loop over all cases
   for (unsigned i_case = 0; i_case < 5; i_case++)
@@ -524,7 +523,7 @@ void demo_elastic_fish_poisson(const string &directory_name)
 /// If there are any command line arguments, we regard this as a
 /// validation run and perform only a single step.
 //========================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

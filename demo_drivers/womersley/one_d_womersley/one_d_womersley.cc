@@ -63,7 +63,7 @@ namespace BL_Squash
 
   /// \short Mapping [0,1] -> [0,1] that re-distributes
   /// nodal points across the channel width
-  double squash_fct(const double &s)
+  double squash_fct(const double& s)
   {
     // Default return
     double y = s;
@@ -126,12 +126,12 @@ public:
   /// one Lagrangian coordinate. Arguments: height at ends, x-coordinate of
   /// left end, length, amplitude of deflection, period of oscillation, and
   /// pointer to time object
-  OscillatingWall(const double &h,
-                  const double &x_left,
-                  const double &l,
-                  const double &a,
-                  const double &period,
-                  Time *time_pt) :
+  OscillatingWall(const double& h,
+                  const double& x_left,
+                  const double& l,
+                  const double& a,
+                  const double& period,
+                  Time* time_pt) :
     GeomObject(1, 2),
     H(h),
     Length(l),
@@ -148,13 +148,13 @@ public:
   ~OscillatingWall() {}
 
   /// Access function to the amplitude
-  double &amplitude()
+  double& amplitude()
   {
     return A;
   }
 
   /// Access function to the period
-  double &period()
+  double& period()
   {
     return T;
   }
@@ -175,9 +175,9 @@ public:
 
   /// \short Position vector at Lagrangian coordinate zeta
   /// at time level t.
-  void position(const unsigned &t,
-                const Vector<double> &zeta,
-                Vector<double> &r) const
+  void position(const unsigned& t,
+                const Vector<double>& zeta,
+                Vector<double>& r) const
   {
     using namespace MathematicalConstants;
 
@@ -211,7 +211,7 @@ public:
   } // end of "unsteady" version
 
   /// \short "Current" position vector at Lagrangian coordinate zeta
-  void position(const Vector<double> &zeta, Vector<double> &r) const
+  void position(const Vector<double>& zeta, Vector<double>& r) const
   {
     position(0, zeta, r);
   }
@@ -242,7 +242,7 @@ private:
   double T;
 
   /// Pointer to the global time object
-  Time *Time_pt;
+  Time* Time_pt;
 
   /// Flag which if true causes the wall to move to it's maximum amplitude
   /// position over one period and then remains steady
@@ -266,10 +266,10 @@ namespace Global_Physical_Variables
   double P_up = 0.0;
 
   /// Traction required at the left boundary
-  void prescribed_traction(const double &t,
-                           const Vector<double> &x,
-                           const Vector<double> &n,
-                           Vector<double> &traction)
+  void prescribed_traction(const double& t,
+                           const Vector<double>& x,
+                           const Vector<double>& n,
+                           Vector<double>& traction)
   {
     traction.resize(2);
     traction[0] = P_up;
@@ -277,7 +277,7 @@ namespace Global_Physical_Variables
   }
 
   /// Pointer to Data holding downstream pressure load
-  Data *Pout_data_pt;
+  Data* Pout_data_pt;
 
 } // namespace Global_Physical_Variables
 
@@ -291,28 +291,28 @@ public:
   /// \short Constructor : the arguments are the number of elements,
   /// the length of the domain and the amplitude and period of
   /// the oscillations
-  CollapsibleChannelProblem(const unsigned &nup,
-                            const unsigned &ncollapsible,
-                            const unsigned &ndown,
-                            const unsigned &ny,
-                            const double &lup,
-                            const double &lcollapsible,
-                            const double &ldown,
-                            const double &ly,
-                            const double &limpedance,
-                            const double &amplitude,
-                            const double &period,
-                            const unsigned &outflow);
+  CollapsibleChannelProblem(const unsigned& nup,
+                            const unsigned& ncollapsible,
+                            const unsigned& ndown,
+                            const unsigned& ny,
+                            const double& lup,
+                            const double& lcollapsible,
+                            const double& ldown,
+                            const double& ly,
+                            const double& limpedance,
+                            const double& amplitude,
+                            const double& period,
+                            const unsigned& outflow);
 
   /// Empty destructor
   ~CollapsibleChannelProblem() {}
 
   /// Access function for the fluid bulk mesh
-  RefineableCollapsibleChannelMesh<ELEMENT> *bulk_mesh_pt()
+  RefineableCollapsibleChannelMesh<ELEMENT>* bulk_mesh_pt()
   {
     // Upcast from pointer to the Mesh base class to the specific
     // element type that we're using here.
-    return dynamic_cast<RefineableCollapsibleChannelMesh<ELEMENT> *>(
+    return dynamic_cast<RefineableCollapsibleChannelMesh<ELEMENT>*>(
       Bulk_mesh_pt);
 
   } // end of access to bulk mesh
@@ -320,23 +320,23 @@ public:
   /// \short Access function to the pointer to the master impedance mesh which
   /// is used when using impedance boundary conditions with flux control
   /// elements
-  Mesh *&outflow_impedance_master_mesh_pt()
+  Mesh*& outflow_impedance_master_mesh_pt()
   {
     return Outflow_impedance_master_mesh_pt;
   }
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info, ofstream &trace_file);
+  void doc_solution(DocInfo& doc_info, ofstream& trace_file);
 
   /// Run unsteady problem
   void unsteady_run(string directory_for_data,
                     double nstep,
-                    const bool &validation_run = false);
+                    const bool& validation_run = false);
 
   /// \short Refine any element whoes centre node lies between x coorodinates
   /// x_min and x_max
-  void refine_elements_based_on_x_coord(const double &x_min,
-                                        const double &x_max);
+  void refine_elements_based_on_x_coord(const double& x_min,
+                                        const double& x_max);
 
   /// Function to switch off wall oscillations
   void switch_off_wall_oscillations()
@@ -345,7 +345,7 @@ public:
   }
 
   /// Create a mesh for the NavierStokesSchurComplementPreconditioner
-  Mesh *create_mesh_for_navier_stokes_preconditioner();
+  Mesh* create_mesh_for_navier_stokes_preconditioner();
 
 protected:
   /// Apply Poiseuille flow on outlet
@@ -418,36 +418,36 @@ private:
   double Ly;
 
   /// Pointer to the geometric object that parametrises the "collapsible" wall
-  OscillatingWall *Wall_pt;
+  OscillatingWall* Wall_pt;
 
   /// Pointer to the "bulk" mesh
-  RefineableCollapsibleChannelMesh<ELEMENT> *Bulk_mesh_pt;
+  RefineableCollapsibleChannelMesh<ELEMENT>* Bulk_mesh_pt;
 
   /// \short Pointer to the "surface" mesh that contains the applied traction
   /// elements at the inflow
-  Mesh *Inflow_traction_mesh_pt;
+  Mesh* Inflow_traction_mesh_pt;
 
   /// Pointer to mesh containing the net flux control element (only!)
-  Mesh *Outflow_flux_control_master_mesh_pt;
+  Mesh* Outflow_flux_control_master_mesh_pt;
 
   /// Pointer to mesh of flux control elements at outflow
-  Mesh *Outflow_flux_control_sub_mesh_pt;
+  Mesh* Outflow_flux_control_sub_mesh_pt;
 
   /// Pointer to impendance tube
-  WomersleyOutflowImpedanceTube<QWomersleyElement<1, 3>, 1>
-    *Womersley_impedance_tube_pt;
+  WomersleyOutflowImpedanceTube<QWomersleyElement<1, 3>, 1>*
+    Womersley_impedance_tube_pt;
 
   /// Pointer to the impedance mesh
-  Mesh *Outflow_impedance_mesh_pt;
+  Mesh* Outflow_impedance_mesh_pt;
 
   /// Pointer to the master impedance mesh when using flux control elements
-  Mesh *Outflow_impedance_master_mesh_pt;
+  Mesh* Outflow_impedance_master_mesh_pt;
 
   /// Pointer to the left control node
-  Node *Left_node_pt;
+  Node* Left_node_pt;
 
   /// Pointer to right control node
-  Node *Right_node_pt;
+  Node* Right_node_pt;
 
   /// Length of optional impedance tube
   double L_impedance;
@@ -478,18 +478,18 @@ private:
 //===============================================================
 template<class ELEMENT>
 CollapsibleChannelProblem<ELEMENT>::CollapsibleChannelProblem(
-  const unsigned &nup,
-  const unsigned &ncollapsible,
-  const unsigned &ndown,
-  const unsigned &ny,
-  const double &lup,
-  const double &lcollapsible,
-  const double &ldown,
-  const double &ly,
-  const double &limpedance,
-  const double &amplitude,
-  const double &period,
-  const unsigned &outflow)
+  const unsigned& nup,
+  const unsigned& ncollapsible,
+  const unsigned& ndown,
+  const unsigned& ny,
+  const double& lup,
+  const double& lcollapsible,
+  const double& ldown,
+  const double& ly,
+  const double& limpedance,
+  const double& amplitude,
+  const double& period,
+  const unsigned& outflow)
 {
   // Number of elements
   Nup = nup;
@@ -653,8 +653,8 @@ CollapsibleChannelProblem<ELEMENT>::CollapsibleChannelProblem(
   build_global_mesh();
 
   // Set errror estimator for bulk mesh
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
-  dynamic_cast<RefineableCollapsibleChannelMesh<ELEMENT> *>(Bulk_mesh_pt)
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
+  dynamic_cast<RefineableCollapsibleChannelMesh<ELEMENT>*>(Bulk_mesh_pt)
     ->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Loop over the elements to set up element-specific
@@ -663,7 +663,7 @@ CollapsibleChannelProblem<ELEMENT>::CollapsibleChannelProblem(
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -685,8 +685,8 @@ CollapsibleChannelProblem<ELEMENT>::CollapsibleChannelProblem(
     for (unsigned e = 0; e < n_el; e++)
     {
       // Upcast from GeneralisedElement to NavierStokes traction element
-      NavierStokesTractionElement<ELEMENT> *el_pt =
-        dynamic_cast<NavierStokesTractionElement<ELEMENT> *>(
+      NavierStokesTractionElement<ELEMENT>* el_pt =
+        dynamic_cast<NavierStokesTractionElement<ELEMENT>*>(
           Inflow_traction_mesh_pt->element_pt(e));
 
       // Set the pointer to the prescribed traction function
@@ -788,10 +788,10 @@ void CollapsibleChannelProblem<ELEMENT>::actions_before_newton_solve()
 //============================================================================
 template<class ELEMENT>
 void CollapsibleChannelProblem<ELEMENT>::refine_elements_based_on_x_coord(
-  const double &x_min, const double &x_max)
+  const double& x_min, const double& x_max)
 {
   // Vector to store pointers to elements to be refined
-  Vector<RefineableElement *> element_pt;
+  Vector<RefineableElement*> element_pt;
 
   // Get elements we want to refine
   unsigned n_el = Bulk_mesh_pt->nelement();
@@ -799,8 +799,8 @@ void CollapsibleChannelProblem<ELEMENT>::refine_elements_based_on_x_coord(
   for (unsigned e = 0; e < n_el; e++)
   {
     // Get element
-    RefineableElement *el_pt =
-      dynamic_cast<RefineableElement *>(Bulk_mesh_pt->element_pt(e));
+    RefineableElement* el_pt =
+      dynamic_cast<RefineableElement*>(Bulk_mesh_pt->element_pt(e));
 
     // Get x-coord of node at centre
     double x_centre = el_pt->node_pt(4)->x(0);
@@ -822,8 +822,8 @@ void CollapsibleChannelProblem<ELEMENT>::refine_elements_based_on_x_coord(
 /// Doc the solution
 //============================================================================
 template<class ELEMENT>
-void CollapsibleChannelProblem<ELEMENT>::doc_solution(DocInfo &doc_info,
-                                                      ofstream &trace_file)
+void CollapsibleChannelProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
+                                                      ofstream& trace_file)
 {
   ofstream some_file;
   char filename[100];
@@ -881,14 +881,14 @@ void CollapsibleChannelProblem<ELEMENT>::setup_inflow_traction_elements()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    ELEMENT *bulk_elem_pt =
-      dynamic_cast<ELEMENT *>(Bulk_mesh_pt->boundary_element_pt(b, e));
+    ELEMENT* bulk_elem_pt =
+      dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(b, e));
 
     // What is the index of the face of element e that lies along boundary b
     int face_index = Bulk_mesh_pt->face_index_at_boundary(b, e);
 
     // Build the corresponding prescribed-traction element
-    NavierStokesTractionElement<ELEMENT> *traction_element_pt =
+    NavierStokesTractionElement<ELEMENT>* traction_element_pt =
       new NavierStokesTractionElement<ELEMENT>(bulk_elem_pt, face_index);
 
     // Add the prescribed-flux element to the surface mesh
@@ -976,7 +976,7 @@ void CollapsibleChannelProblem<ELEMENT>::actions_before_implicit_timestep()
   for (unsigned inod = 0; inod < num_nod; inod++)
   {
     // Which node are we dealing with?
-    Node *node_pt = bulk_mesh_pt()->boundary_node_pt(ibound, inod);
+    Node* node_pt = bulk_mesh_pt()->boundary_node_pt(ibound, inod);
 
     // Apply no slip
     FSI_functions::apply_no_slip_on_moving_wall(node_pt);
@@ -1073,8 +1073,8 @@ void CollapsibleChannelProblem<ELEMENT>::actions_after_adapt()
     for (unsigned e = 0; e < n_element; e++)
     {
       // Upcast from GeneralisedElement to NavierStokesTractionElement element
-      NavierStokesTractionElement<ELEMENT> *el_pt =
-        dynamic_cast<NavierStokesTractionElement<ELEMENT> *>(
+      NavierStokesTractionElement<ELEMENT>* el_pt =
+        dynamic_cast<NavierStokesTractionElement<ELEMENT>*>(
           Inflow_traction_mesh_pt->element_pt(e));
 
       // Set the pointer to the prescribed traction function
@@ -1088,11 +1088,11 @@ void CollapsibleChannelProblem<ELEMENT>::actions_after_adapt()
 /// Create a mesh for the NavierStokesSchurComplementPreconditioner
 //========================================================================
 template<class ELEMENT>
-Mesh *CollapsibleChannelProblem<
+Mesh* CollapsibleChannelProblem<
   ELEMENT>::create_mesh_for_navier_stokes_preconditioner()
 {
   // Vector to hold the meshes
-  Vector<Mesh *> meshes;
+  Vector<Mesh*> meshes;
 
   // Add the bulk mesh
   meshes.push_back(Bulk_mesh_pt);
@@ -1104,7 +1104,7 @@ Mesh *CollapsibleChannelProblem<
   }
 
   // Build "combined" mesh from vector of submeshes
-  Mesh *mesh_pt = new Mesh(meshes);
+  Mesh* mesh_pt = new Mesh(meshes);
 
   return mesh_pt;
 }
@@ -1147,14 +1147,14 @@ void CollapsibleChannelProblem<ELEMENT>::setup_outflow_flux_control_elements()
   for (unsigned e = 0; e < n_bound_el; e++)
   {
     // Get pointer to bulk element
-    ELEMENT *bulk_elem_pt =
-      dynamic_cast<ELEMENT *>(Bulk_mesh_pt->boundary_element_pt(b, e));
+    ELEMENT* bulk_elem_pt =
+      dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(b, e));
 
     // Get the index of the face of element e along boundary b
     int face_index = Bulk_mesh_pt->face_index_at_boundary(b, e);
 
     // Build the corresponding flux control element
-    NavierStokesFluxControlElement<ELEMENT> *flux_element_pt =
+    NavierStokesFluxControlElement<ELEMENT>* flux_element_pt =
       new NavierStokesFluxControlElement<ELEMENT>(bulk_elem_pt, face_index);
 
     // Add the new element to its mesh
@@ -1162,7 +1162,7 @@ void CollapsibleChannelProblem<ELEMENT>::setup_outflow_flux_control_elements()
   }
 
   // Build master element
-  NetFluxControlElement *flux_control_el_pt = new NetFluxControlElement(
+  NetFluxControlElement* flux_control_el_pt = new NetFluxControlElement(
     Outflow_flux_control_sub_mesh_pt, &Prescribed_volume_flux);
 
   // Add NetFluxControlElement to its mesh
@@ -1178,10 +1178,10 @@ void CollapsibleChannelProblem<ELEMENT>::setup_outflow_flux_control_elements()
   for (unsigned e = 0; e < n_el; e++)
   {
     // Get pointer to the element
-    GeneralisedElement *el_pt = Outflow_flux_control_sub_mesh_pt->element_pt(e);
+    GeneralisedElement* el_pt = Outflow_flux_control_sub_mesh_pt->element_pt(e);
 
     // Dynamic cast
-    dynamic_cast<NavierStokesFluxControlElement<ELEMENT> *>(el_pt)
+    dynamic_cast<NavierStokesFluxControlElement<ELEMENT>*>(el_pt)
       ->add_pressure_data(Global_Physical_Variables::Pout_data_pt);
   }
 }
@@ -1268,15 +1268,15 @@ void CollapsibleChannelProblem<ELEMENT>::setup_outflow_impedance_elements()
     for (unsigned e = 0; e < n_bound_el; e++)
     {
       // Get pointer to bulk element
-      ELEMENT *bulk_elem_pt =
-        dynamic_cast<ELEMENT *>(Bulk_mesh_pt->boundary_element_pt(b, e));
+      ELEMENT* bulk_elem_pt =
+        dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(b, e));
 
       // Get the index of the face of element e along boundary b
       int face_index = Bulk_mesh_pt->face_index_at_boundary(b, e);
 
       // Build the corresponding prescribed traction element
-      NavierStokesImpedanceTractionElement<ELEMENT, QWomersleyElement<1, 3>, 1>
-        *traction_element_pt =
+      NavierStokesImpedanceTractionElement<ELEMENT, QWomersleyElement<1, 3>, 1>*
+        traction_element_pt =
           new NavierStokesImpedanceTractionElement<ELEMENT,
                                                    QWomersleyElement<1, 3>,
                                                    1>(bulk_elem_pt, face_index);
@@ -1304,14 +1304,14 @@ void CollapsibleChannelProblem<ELEMENT>::setup_outflow_impedance_elements()
     for (unsigned e = 0; e < n_bound_el; e++)
     {
       // Get pointer to bulk element
-      ELEMENT *bulk_elem_pt =
-        dynamic_cast<ELEMENT *>(Bulk_mesh_pt->boundary_element_pt(b, e));
+      ELEMENT* bulk_elem_pt =
+        dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(b, e));
 
       // Get the index of the face of element e along boundary b
       int face_index = Bulk_mesh_pt->face_index_at_boundary(b, e);
 
       // Build the corresponding flux control element
-      NavierStokesFluxControlElement<ELEMENT> *flux_element_pt =
+      NavierStokesFluxControlElement<ELEMENT>* flux_element_pt =
         new NavierStokesFluxControlElement<ELEMENT>(bulk_elem_pt, face_index);
 
       // Add the new element to its mesh
@@ -1334,14 +1334,14 @@ void CollapsibleChannelProblem<ELEMENT>::setup_outflow_impedance_elements()
         v_index);
 
     // Build the pressure control element and add to the master mesh
-    NavierStokesWomersleyPressureControlElement *pressure_control_element =
+    NavierStokesWomersleyPressureControlElement* pressure_control_element =
       new NavierStokesWomersleyPressureControlElement(
         Womersley_impedance_tube_pt);
 
     Outflow_impedance_master_mesh_pt->add_element_pt(pressure_control_element);
 
     // Build the flux control master element and add to the master mesh
-    NetFluxControlElementForWomersleyPressureControl *flux_control_element =
+    NetFluxControlElementForWomersleyPressureControl* flux_control_element =
       new NetFluxControlElementForWomersleyPressureControl(
         Outflow_flux_control_sub_mesh_pt, pressure_control_element);
 
@@ -1397,7 +1397,7 @@ void CollapsibleChannelProblem<ELEMENT>::set_parallel_outflow()
 //============================================================================
 template<class ELEMENT>
 void CollapsibleChannelProblem<ELEMENT>::unsteady_run(
-  string directory_for_data, double nstep, const bool &validation_run)
+  string directory_for_data, double nstep, const bool& validation_run)
 {
   // Set volume flux consistent with Re
   Prescribed_volume_flux = 1.0;
@@ -1484,7 +1484,7 @@ void CollapsibleChannelProblem<ELEMENT>::unsteady_run(
 /// indicates validation run with coarse resolution and small number of
 /// timesteps.
 //=============================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);
@@ -1810,8 +1810,8 @@ int main(int argc, char *argv[])
   oomph_info << "Amplitude=" << amplitude << "\nPeriod=" << period << "\n";
 
   // Solver stuff
-  GMRES<CRDoubleMatrix> *iterative_solver_pt = 0;
-  NavierStokesSchurComplementPreconditioner *ns_preconditioner_pt = 0;
+  GMRES<CRDoubleMatrix>* iterative_solver_pt = 0;
+  NavierStokesSchurComplementPreconditioner* ns_preconditioner_pt = 0;
 
   // Don't build the problem with Crouzeix Raviart Elements if using the
   // SchurComplement preconditioner!
@@ -1847,8 +1847,8 @@ int main(int argc, char *argv[])
     problem.linear_solver_pt() = iterative_solver_pt;
 
     // Set up the preconditioner
-    NavierStokesSchurComplementPreconditioner *ns_preconditioner_pt = 0;
-    FSIPreconditioner *fsi_preconditioner_pt = 0;
+    NavierStokesSchurComplementPreconditioner* ns_preconditioner_pt = 0;
+    FSIPreconditioner* fsi_preconditioner_pt = 0;
 
     if (outflow == 2)
     {
@@ -1858,7 +1858,7 @@ int main(int argc, char *argv[])
 
       // Get a pointer to the preconditioner
       ns_preconditioner_pt =
-        dynamic_cast<NavierStokesSchurComplementPreconditioner *>(
+        dynamic_cast<NavierStokesSchurComplementPreconditioner*>(
           fsi_preconditioner_pt->navier_stokes_preconditioner_pt());
 
       // Set solid mesh with "true" to tolerate multiple element types.
@@ -1896,9 +1896,9 @@ int main(int argc, char *argv[])
     if (p_solver == 0)
     {
 #ifdef OOMPH_HAS_HYPRE
-      Preconditioner *p_preconditioner_pt = new HyprePreconditioner;
-      HyprePreconditioner *hypre_preconditioner_pt =
-        static_cast<HyprePreconditioner *>(p_preconditioner_pt);
+      Preconditioner* p_preconditioner_pt = new HyprePreconditioner;
+      HyprePreconditioner* hypre_preconditioner_pt =
+        static_cast<HyprePreconditioner*>(p_preconditioner_pt);
       Hypre_default_settings::set_defaults_for_2D_poisson_problem(
         hypre_preconditioner_pt);
       ns_preconditioner_pt->set_p_preconditioner(p_preconditioner_pt);
@@ -1910,7 +1910,7 @@ int main(int argc, char *argv[])
     if (p_solver == 1)
     {
 #ifdef OOMPH_HAS_TRILINOS
-      Preconditioner *p_preconditioner_pt = new TrilinosMLPreconditioner;
+      Preconditioner* p_preconditioner_pt = new TrilinosMLPreconditioner;
       ns_preconditioner_pt->set_p_preconditioner(p_preconditioner_pt);
 #endif
     }
@@ -1921,9 +1921,9 @@ int main(int argc, char *argv[])
     if (f_solver == 0)
     {
 #ifdef OOMPH_HAS_HYPRE
-      Preconditioner *f_preconditioner_pt = new HyprePreconditioner;
-      HyprePreconditioner *hypre_preconditioner_pt =
-        static_cast<HyprePreconditioner *>(f_preconditioner_pt);
+      Preconditioner* f_preconditioner_pt = new HyprePreconditioner;
+      HyprePreconditioner* hypre_preconditioner_pt =
+        static_cast<HyprePreconditioner*>(f_preconditioner_pt);
       hypre_preconditioner_pt->use_BoomerAMG();
       hypre_preconditioner_pt->set_amg_iterations(1);
       hypre_preconditioner_pt->amg_using_simple_smoothing();
@@ -1939,9 +1939,9 @@ int main(int argc, char *argv[])
     if (f_solver == 1)
     {
 #ifdef OOMPH_HAS_TRILINOS
-      Preconditioner *f_preconditioner_pt = new TrilinosMLPreconditioner;
-      TrilinosMLPreconditioner *trilinos_preconditioner_pt =
-        static_cast<TrilinosMLPreconditioner *>(f_preconditioner_pt);
+      Preconditioner* f_preconditioner_pt = new TrilinosMLPreconditioner;
+      TrilinosMLPreconditioner* trilinos_preconditioner_pt =
+        static_cast<TrilinosMLPreconditioner*>(f_preconditioner_pt);
       if (f_ml_settings == 1)
       {
         trilinos_preconditioner_pt->set_NSSA_default_values();

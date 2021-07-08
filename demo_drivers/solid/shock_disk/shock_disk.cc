@@ -55,7 +55,7 @@ using namespace oomph;
 namespace Global_Physical_Variables
 {
   /// Pointer to constitutive law
-  ConstitutiveLaw *Constitutive_law_pt;
+  ConstitutiveLaw* Constitutive_law_pt;
 
   /// Elastic modulus
   double E = 1.0;
@@ -67,10 +67,10 @@ namespace Global_Physical_Variables
   double P = 0.00;
 
   /// Constant pressure load
-  void constant_pressure(const Vector<double> &xi,
-                         const Vector<double> &x,
-                         const Vector<double> &n,
-                         Vector<double> &traction)
+  void constant_pressure(const Vector<double>& xi,
+                         const Vector<double>& x,
+                         const Vector<double>& n,
+                         Vector<double>& traction)
   {
     unsigned dim = traction.size();
     for (unsigned i = 0; i < dim; i++)
@@ -106,18 +106,18 @@ public:
   /// \short Constructor: Build mesh and copy Eulerian coords to Lagrangian
   /// ones so that the initial configuration is the stress-free one.
   ElasticRefineableQuarterCircleSectorMesh<ELEMENT>(
-    GeomObject *wall_pt,
-    const double &xi_lo,
-    const double &fract_mid,
-    const double &xi_hi,
-    TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+    GeomObject* wall_pt,
+    const double& xi_lo,
+    const double& fract_mid,
+    const double& xi_hi,
+    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
     RefineableQuarterCircleSectorMesh<ELEMENT>(
       wall_pt, xi_lo, fract_mid, xi_hi, time_stepper_pt)
   {
 #ifdef PARANOID
     /// Check that the element type is derived from the SolidFiniteElement
-    SolidFiniteElement *el_pt =
-      dynamic_cast<SolidFiniteElement *>(finite_element_pt(0));
+    SolidFiniteElement* el_pt =
+      dynamic_cast<SolidFiniteElement*>(finite_element_pt(0));
     if (el_pt == 0)
     {
       throw OomphLibError(
@@ -134,7 +134,7 @@ public:
   }
 
   /// Function to create mesh made of traction elements
-  void make_traction_element_mesh(SolidMesh *&traction_mesh_pt)
+  void make_traction_element_mesh(SolidMesh*& traction_mesh_pt)
   {
     // Make new mesh
     traction_mesh_pt = new SolidMesh;
@@ -145,7 +145,7 @@ public:
     for (unsigned e = 0; e < n_element; e++)
     {
       // The element itself:
-      FiniteElement *fe_pt = this->boundary_element_pt(b, e);
+      FiniteElement* fe_pt = this->boundary_element_pt(b, e);
 
       // Find the index of the face of element e along boundary b
       int face_index = this->face_index_at_boundary(b, e);
@@ -157,7 +157,7 @@ public:
   }
 
   /// Function to wipe and re-create mesh made of traction elements
-  void remake_traction_element_mesh(SolidMesh *&traction_mesh_pt)
+  void remake_traction_element_mesh(SolidMesh*& traction_mesh_pt)
   {
     // Wipe existing mesh (but don't call it's destructor as this
     // would wipe all the nodes too!)
@@ -169,7 +169,7 @@ public:
     for (unsigned e = 0; e < n_element; e++)
     {
       // The element itself:
-      FiniteElement *fe_pt = this->boundary_element_pt(b, e);
+      FiniteElement* fe_pt = this->boundary_element_pt(b, e);
 
       // Find the index of the face of element e along boundary b
       int face_index = this->face_index_at_boundary(b, e);
@@ -198,16 +198,16 @@ public:
 
   /// \short Run the problem; specify case_number to label output
   /// directory
-  void run(const unsigned &case_number);
+  void run(const unsigned& case_number);
 
   /// Access function for the solid mesh
-  ElasticRefineableQuarterCircleSectorMesh<ELEMENT> *&solid_mesh_pt()
+  ElasticRefineableQuarterCircleSectorMesh<ELEMENT>*& solid_mesh_pt()
   {
     return Solid_mesh_pt;
   }
 
   /// Access function for the mesh of surface traction elements
-  SolidMesh *&traction_mesh_pt()
+  SolidMesh*& traction_mesh_pt()
   {
     return Traction_mesh_pt;
   }
@@ -226,15 +226,15 @@ public:
   void actions_after_adapt();
 
   /// \short Doc displacement and velocity: label file with before and after
-  void doc_displ_and_veloc(const int &stage = 0);
+  void doc_displ_and_veloc(const int& stage = 0);
 
   /// \short Dump problem-specific parameters values, then dump
   /// generic problem data.
-  void dump_it(ofstream &dump_file);
+  void dump_it(ofstream& dump_file);
 
   /// \short Read problem-specific parameter values, then recover
   /// generic problem data.
-  void restart(ifstream &restart_file);
+  void restart(ifstream& restart_file);
 
 private:
   // Output
@@ -244,13 +244,13 @@ private:
   ofstream Trace_file;
 
   /// Vector of pointers to nodes whose position we're tracing
-  Vector<Node *> Trace_node_pt;
+  Vector<Node*> Trace_node_pt;
 
   /// Pointer to solid mesh
-  ElasticRefineableQuarterCircleSectorMesh<ELEMENT> *Solid_mesh_pt;
+  ElasticRefineableQuarterCircleSectorMesh<ELEMENT>* Solid_mesh_pt;
 
   /// Pointer to mesh of traction elements
-  SolidMesh *Traction_mesh_pt;
+  SolidMesh* Traction_mesh_pt;
 };
 
 //======================================================================
@@ -270,7 +270,7 @@ DiskShockWaveProblem<ELEMENT, TIMESTEPPER>::DiskShockWaveProblem()
 
   // Build geometric object that specifies the fish back in the
   // undeformed configuration (basically a deep copy of the previous one)
-  GeomObject *curved_boundary_pt = new Circle(x_c, y_c, r, time_stepper_pt());
+  GeomObject* curved_boundary_pt = new Circle(x_c, y_c, r, time_stepper_pt());
 
   // The curved boundary of the mesh is defined by the geometric object
   // What follows are the start and end coordinates on the geometric object:
@@ -343,7 +343,7 @@ DiskShockWaveProblem<ELEMENT, TIMESTEPPER>::DiskShockWaveProblem()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Cast to a solid element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the constitutive law
     el_pt->constitutive_law_pt() =
@@ -364,8 +364,8 @@ DiskShockWaveProblem<ELEMENT, TIMESTEPPER>::DiskShockWaveProblem()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Cast to a solid traction element
-    SolidTractionElement<ELEMENT> *el_pt =
-      dynamic_cast<SolidTractionElement<ELEMENT> *>(
+    SolidTractionElement<ELEMENT>* el_pt =
+      dynamic_cast<SolidTractionElement<ELEMENT>*>(
         traction_mesh_pt()->element_pt(i));
 
     // Set the traction function
@@ -416,8 +416,8 @@ void DiskShockWaveProblem<ELEMENT, TIMESTEPPER>::actions_after_adapt()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Cast to a solid traction element
-    SolidTractionElement<ELEMENT> *el_pt =
-      dynamic_cast<SolidTractionElement<ELEMENT> *>(
+    SolidTractionElement<ELEMENT>* el_pt =
+      dynamic_cast<SolidTractionElement<ELEMENT>*>(
         traction_mesh_pt()->element_pt(i));
 
     // Set the traction function
@@ -468,8 +468,8 @@ void DiskShockWaveProblem<ELEMENT, TIMESTEPPER>::doc_solution()
     for (unsigned i = 0; i < npts; i++)
     {
       s_dummy[0] = -1.0 + 2.0 * double(i) / double(npts - 1);
-      SolidTractionElement<ELEMENT> *el_pt =
-        dynamic_cast<SolidTractionElement<ELEMENT> *>(
+      SolidTractionElement<ELEMENT>* el_pt =
+        dynamic_cast<SolidTractionElement<ELEMENT>*>(
           traction_mesh_pt()->finite_element_pt(e));
       el_pt->outer_unit_normal(s_dummy, unit_normal);
       el_pt->traction(s_dummy, traction);
@@ -513,7 +513,7 @@ void DiskShockWaveProblem<ELEMENT, TIMESTEPPER>::doc_solution()
         s[1] = -1.0;
 
         // Get pointer to element
-        SolidFiniteElement *el_pt = dynamic_cast<SolidFiniteElement *>(
+        SolidFiniteElement* el_pt = dynamic_cast<SolidFiniteElement*>(
           solid_mesh_pt()->boundary_element_pt(0, e));
 
         // Get Lagrangian coordinate
@@ -570,7 +570,7 @@ void DiskShockWaveProblem<ELEMENT, TIMESTEPPER>::doc_solution()
 //==================================================================
 template<class ELEMENT, class TIMESTEPPER>
 void DiskShockWaveProblem<ELEMENT, TIMESTEPPER>::doc_displ_and_veloc(
-  const int &stage)
+  const int& stage)
 {
   ofstream some_file;
   char filename[100];
@@ -618,8 +618,8 @@ void DiskShockWaveProblem<ELEMENT, TIMESTEPPER>::doc_displ_and_veloc(
         s[1] = -1.0 + 2.0 * double(j) / double(npts - 1);
 
         // Cast to full element type
-        ELEMENT *el_pt =
-          dynamic_cast<ELEMENT *>(solid_mesh_pt()->finite_element_pt(e));
+        ELEMENT* el_pt =
+          dynamic_cast<ELEMENT*>(solid_mesh_pt()->finite_element_pt(e));
 
         // Eulerian coordinate
         el_pt->interpolated_x(s, x);
@@ -646,7 +646,7 @@ void DiskShockWaveProblem<ELEMENT, TIMESTEPPER>::doc_displ_and_veloc(
 /// Dump the solution
 //========================================================================
 template<class ELEMENT, class TIMESTEPPER>
-void DiskShockWaveProblem<ELEMENT, TIMESTEPPER>::dump_it(ofstream &dump_file)
+void DiskShockWaveProblem<ELEMENT, TIMESTEPPER>::dump_it(ofstream& dump_file)
 {
   // Call generic dump()
   Problem::dump(dump_file);
@@ -656,7 +656,7 @@ void DiskShockWaveProblem<ELEMENT, TIMESTEPPER>::dump_it(ofstream &dump_file)
 /// Read solution from disk
 //========================================================================
 template<class ELEMENT, class TIMESTEPPER>
-void DiskShockWaveProblem<ELEMENT, TIMESTEPPER>::restart(ifstream &restart_file)
+void DiskShockWaveProblem<ELEMENT, TIMESTEPPER>::restart(ifstream& restart_file)
 {
   // Read generic problem data
   Problem::read(restart_file);
@@ -667,7 +667,7 @@ void DiskShockWaveProblem<ELEMENT, TIMESTEPPER>::restart(ifstream &restart_file)
 //==================================================================
 template<class ELEMENT, class TIMESTEPPER>
 void DiskShockWaveProblem<ELEMENT, TIMESTEPPER>::run(
-  const unsigned &case_number)
+  const unsigned& case_number)
 {
   // If there's a command line argument, run the validation (i.e. do only
   // 3 timesteps; otherwise do a few cycles
@@ -781,7 +781,7 @@ void DiskShockWaveProblem<ELEMENT, TIMESTEPPER>::run(
 //======================================================================
 /// Driver for simple elastic problem
 //======================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

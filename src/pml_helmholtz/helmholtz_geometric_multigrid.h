@@ -33,14 +33,14 @@ namespace oomph
     /// \short This function needs to be implemented in the derived problem:
     /// Returns a pointer to a new object of the same type as the derived
     /// problem
-    virtual HelmholtzMGProblem *make_new_problem() = 0;
+    virtual HelmholtzMGProblem* make_new_problem() = 0;
 
     /// \short Function to get a pointer to the mesh we will be working
     /// with. If there are flux elements present in the mesh this will
     /// be overloaded to return a pointer to the bulk mesh otherwise
     /// it can be overloaded to point to the global mesh but it must
     /// be of type RefineableMeshBase
-    virtual TreeBasedRefineableMeshBase *mg_bulk_mesh_pt() = 0;
+    virtual TreeBasedRefineableMeshBase* mg_bulk_mesh_pt() = 0;
 
   }; // End of HelmholtzMGProblem class
 
@@ -57,11 +57,11 @@ namespace oomph
   public:
     /// \short typedef for a function that returns a pointer to an object
     /// of the class HelmholtzSmoother to be used as the pre-smoother
-    typedef HelmholtzSmoother *(*PreSmootherFactoryFctPt)();
+    typedef HelmholtzSmoother* (*PreSmootherFactoryFctPt)();
 
     /// \short typedef for a function that returns a pointer to an object
     /// of the class HelmholtzSmoother to be used as the post-smoother
-    typedef HelmholtzSmoother *(*PostSmootherFactoryFctPt)();
+    typedef HelmholtzSmoother* (*PostSmootherFactoryFctPt)();
 
     /// Access function to set the pre-smoother creation function.
     void set_pre_smoother_factory_function(
@@ -81,7 +81,7 @@ namespace oomph
 
     /// \short Constructor: Set up default values for number of V-cycles
     /// and pre- and post-smoothing steps.
-    HelmholtzMGPreconditioner(HelmholtzMGProblem *mg_problem_pt) :
+    HelmholtzMGPreconditioner(HelmholtzMGProblem* mg_problem_pt) :
       BlockPreconditioner<CRDoubleMatrix>(),
       Pre_smoother_factory_function_pt(0),
       Post_smoother_factory_function_pt(0),
@@ -174,14 +174,14 @@ namespace oomph
     } // End of clean_up_memory
 
     /// Access function for the variable Tolerance (lvalue)
-    double &tolerance()
+    double& tolerance()
     {
       // Return the variable, Tolerance
       return Tolerance;
     } // End of tolerance
 
     /// Function to change the value of the shift
-    double &alpha_shift()
+    double& alpha_shift()
     {
       // Return the alpha shift value
       return Alpha_shift;
@@ -275,7 +275,7 @@ namespace oomph
     } // End of disable_smoother_and_superlu_doc_time
 
     /// Return the number of post-smoothing iterations (lvalue)
-    unsigned &npost_smooth()
+    unsigned& npost_smooth()
     {
       // Return the number of post-smoothing iterations to be done on each
       // level of the hierarchy
@@ -283,7 +283,7 @@ namespace oomph
     } // End of npost_smooth
 
     /// Return the number of pre-smoothing iterations (lvalue)
-    unsigned &npre_smooth()
+    unsigned& npre_smooth()
     {
       // Return the number of pre-smoothing iterations to be done on each
       // level of the hierarchy
@@ -295,7 +295,7 @@ namespace oomph
     /// current solution vector, x. Return the residual vector r=b-Ax.
     /// Uses the default smoother (set in the HelmholtzMGProblem constructor)
     /// which can be overloaded for a specific problem.
-    void pre_smooth(const unsigned &level)
+    void pre_smooth(const unsigned& level)
     {
       // Run pre-smoother 'max_iter' times
       Pre_smoothers_storage_pt[level]->complex_smoother_solve(
@@ -310,7 +310,7 @@ namespace oomph
     /// current solution vector, x. Uses the default smoother (set in
     /// the HelmholtzMGProblem constructor) which can be overloaded for specific
     /// problem.
-    void post_smooth(const unsigned &level)
+    void post_smooth(const unsigned& level)
     {
       // Run post-smoother 'max_iter' times
       Post_smoothers_storage_pt[level]->complex_smoother_solve(
@@ -322,7 +322,7 @@ namespace oomph
 
     /// \short Return norm of residual r=b-Ax and the residual vector itself
     /// on the level-th level
-    double residual_norm(const unsigned &level)
+    double residual_norm(const unsigned& level)
     {
       // Loop over the real and imaginary part of the residual vector on
       // the given level
@@ -337,7 +337,7 @@ namespace oomph
     } // End of residual_norm
 
     /// Calculate the norm of the residual vector, r=b-Ax
-    double residual_norm(const unsigned &level, Vector<DoubleVector> &residual);
+    double residual_norm(const unsigned& level, Vector<DoubleVector>& residual);
 
     /// \short Function to create the fully expanded system matrix on the
     /// coarsest level
@@ -366,12 +366,12 @@ namespace oomph
     /// \short Builds a CRDoubleMatrix that is used to interpolate the
     /// residual between levels. The transpose can be used as the full
     /// weighting restriction.
-    void interpolation_matrix_set(const unsigned &level,
-                                  double *value,
-                                  int *col_index,
-                                  int *row_st,
-                                  unsigned &ncol,
-                                  unsigned &nnz)
+    void interpolation_matrix_set(const unsigned& level,
+                                  double* value,
+                                  int* col_index,
+                                  int* row_st,
+                                  unsigned& ncol,
+                                  unsigned& nnz)
     {
       // Dynamically allocate the interpolation matrix
       Interpolation_matrices_storage_pt[level] = new CRDoubleMatrix;
@@ -385,18 +385,18 @@ namespace oomph
     /// \short Builds a CRDoubleMatrix that is used to interpolate the
     /// residual between levels. The transpose can be used as the full
     /// weighting restriction.
-    void interpolation_matrix_set(const unsigned &level,
-                                  Vector<double> &value,
-                                  Vector<int> &col_index,
-                                  Vector<int> &row_st,
-                                  unsigned &ncol,
-                                  unsigned &nrow)
+    void interpolation_matrix_set(const unsigned& level,
+                                  Vector<double>& value,
+                                  Vector<int>& col_index,
+                                  Vector<int>& row_st,
+                                  unsigned& ncol,
+                                  unsigned& nrow)
     {
       // Dynamically allocate the interpolation matrix
       Interpolation_matrices_storage_pt[level] = new CRDoubleMatrix;
 
       // Make the distribution pointer
-      LinearAlgebraDistribution *dist_pt = new LinearAlgebraDistribution(
+      LinearAlgebraDistribution* dist_pt = new LinearAlgebraDistribution(
         Mg_hierarchy_pt[level]->communicator_pt(), nrow, false);
 
 #ifdef PARANOID
@@ -447,17 +447,17 @@ namespace oomph
 
     /// \short Restrict residual (computed on level-th MG level) to the next
     /// coarser mesh and stick it into the coarse mesh RHS vector.
-    void restrict_residual(const unsigned &level);
+    void restrict_residual(const unsigned& level);
 
     /// \short Interpolate solution at current level onto next finer mesh
     /// and correct the solution x at that level
-    void interpolate_and_correct(const unsigned &level);
+    void interpolate_and_correct(const unsigned& level);
 
     /// \short Given the son_type of an element and a local node number
     /// j in that element with nnode_1d nodes per coordinate direction,
     /// return the local coordinate s in its father element. Needed in
     /// the setup of the interpolation matrices
-    void level_up_local_coord_of_node(const int &son_type, Vector<double> &s);
+    void level_up_local_coord_of_node(const int& son_type, Vector<double>& s);
 
     /// \short Setup the interpolation matrix on each level
     void setup_interpolation_matrices();
@@ -474,7 +474,7 @@ namespace oomph
     void full_setup();
 
     /// \short Function applies MG to the vector r for a full solve
-    void preconditioner_solve(const DoubleVector &r, DoubleVector &z)
+    void preconditioner_solve(const DoubleVector& r, DoubleVector& z)
     {
       // Split up the RHS vector into DoubleVectors, whose entries are
       // arranged to match the matrix blocks and assign it
@@ -530,7 +530,7 @@ namespace oomph
     /// solve function in the LinearSolver base class. The function is stored
     /// as protected to allow the HelmholtzMGPreconditioner derived class to use
     /// the solver
-    void mg_solve(Vector<DoubleVector> &result);
+    void mg_solve(Vector<DoubleVector>& result);
 
     /// \short Function to ensure the block form of the Jacobian matches
     /// the form described, i.e. we should have:
@@ -567,17 +567,17 @@ namespace oomph
 
     /// \short Estimate the value of the parameter h on the level-th problem
     /// in the hierarchy.
-    void maximum_edge_width(const unsigned &level, double &h);
+    void maximum_edge_width(const unsigned& level, double& h);
 
     /// \short Function to set up all of the smoothers once the system matrices
     /// have been set up
     void setup_smoothers();
 
     /// Pointer to the MG problem (deep copy)
-    HelmholtzMGProblem *Mg_problem_pt;
+    HelmholtzMGProblem* Mg_problem_pt;
 
     /// Vector containing pointers to problems in hierarchy
-    Vector<HelmholtzMGProblem *> Mg_hierarchy_pt;
+    Vector<HelmholtzMGProblem*> Mg_hierarchy_pt;
 
     /// \short Vector of vectors to store the system matrices. The i-th
     /// entry in this vector contains a vector of length two. The first
@@ -585,7 +585,7 @@ namespace oomph
     /// we refer to as A_r and the second entry contains the imaginary
     /// part of the system matrix which we refer to as A_c. That is to say,
     /// the true system matrix is given by A = A_r + iA_c
-    Vector<Vector<CRDoubleMatrix *>> Mg_matrices_storage_pt;
+    Vector<Vector<CRDoubleMatrix*>> Mg_matrices_storage_pt;
 
     /// \short Stores the system matrix on the coarest level in the fully
     /// expanded format:
@@ -595,7 +595,7 @@ namespace oomph
     ///                       | A_c |  A_r |
     ///                       |-----|------|
     /// Note: this is NOT the same as A = A_r + iA_c
-    CRDoubleMatrix *Coarsest_matrix_mg_pt;
+    CRDoubleMatrix* Coarsest_matrix_mg_pt;
 
     /// \short Assuming we're solving the system Ax=b, this vector will
     /// contain the expanded solution vector on the coarsest level of the
@@ -618,10 +618,10 @@ namespace oomph
     DoubleVector Coarsest_rhs_mg;
 
     /// Vector to store the interpolation matrices
-    Vector<CRDoubleMatrix *> Interpolation_matrices_storage_pt;
+    Vector<CRDoubleMatrix*> Interpolation_matrices_storage_pt;
 
     /// Vector to store the restriction matrices
-    Vector<CRDoubleMatrix *> Restriction_matrices_storage_pt;
+    Vector<CRDoubleMatrix*> Restriction_matrices_storage_pt;
 
     /// \short Vector of vectors to store the solution vectors (X_mg) in two
     /// parts; the real and imaginary. To access the real part of the solution
@@ -639,10 +639,10 @@ namespace oomph
     Vector<Vector<DoubleVector>> Residual_mg_vectors_storage;
 
     /// Vector to store the pre-smoothers
-    Vector<HelmholtzSmoother *> Pre_smoothers_storage_pt;
+    Vector<HelmholtzSmoother*> Pre_smoothers_storage_pt;
 
     /// Vector to store the post-smoothers
-    Vector<HelmholtzSmoother *> Post_smoothers_storage_pt;
+    Vector<HelmholtzSmoother*> Post_smoothers_storage_pt;
 
     /// \short Vector to storage the maximum edge width of each mesh. We only
     /// need the maximum edge width on levels where we use a smoother to
@@ -687,7 +687,7 @@ namespace oomph
     bool Has_been_solved;
 
     /// Pointer to the output stream -- defaults to std::cout
-    std::ostream *Stream_pt;
+    std::ostream* Stream_pt;
 
     /// Temporary version of the shift -- to run bash scripts
     double Alpha_shift;
@@ -705,7 +705,7 @@ namespace oomph
   //========================================================================
   template<unsigned DIM>
   double HelmholtzMGPreconditioner<DIM>::residual_norm(
-    const unsigned &level, Vector<DoubleVector> &residual)
+    const unsigned& level, Vector<DoubleVector>& residual)
   {
     // Number of rows in each block vector
     unsigned n_rows = X_mg_vectors_storage[level][0].nrow();
@@ -777,7 +777,7 @@ namespace oomph
 
     // Store the pointer to the distribution of Matrix_real_pt (the same as
     // Matrix_imag_pt presumably so we only need to use one)
-    LinearAlgebraDistribution *dist_pt =
+    LinearAlgebraDistribution* dist_pt =
       Mg_matrices_storage_pt[level][0]->distribution_pt();
 
     // Create 4 temporary vectors to store the various matrix-vector products
@@ -902,7 +902,7 @@ namespace oomph
     // check (i.e. the diagonals are the same and the off-diagonals are
     // negatives of each other in PARANOID mode. Otherwise we only extract 2
     // matrices
-    DenseMatrix<CRDoubleMatrix *> block_pt(nblock_types, nblock_types, 0);
+    DenseMatrix<CRDoubleMatrix*> block_pt(nblock_types, nblock_types, 0);
     for (unsigned i = 0; i < nblock_types; i++)
     {
       for (unsigned j = 0; j < nblock_types; j++)
@@ -1109,7 +1109,7 @@ namespace oomph
 #ifdef PARANOID
     // PARANOID check - Make sure the dimension of the solver matches the
     // dimension of the elements used in the problems mesh
-    if (dynamic_cast<FiniteElement *>(Mg_problem_pt->mesh_pt()->element_pt(0))
+    if (dynamic_cast<FiniteElement*>(Mg_problem_pt->mesh_pt()->element_pt(0))
           ->dim() != DIM)
     {
       // Create an error message
@@ -1133,7 +1133,7 @@ namespace oomph
       for (unsigned el_counter = 0; el_counter < n_elements; el_counter++)
       {
         // Upcast global mesh element to a refineable element
-        RefineableElement *el_pt = dynamic_cast<RefineableElement *>(
+        RefineableElement* el_pt = dynamic_cast<RefineableElement*>(
           Mg_problem_pt->mg_bulk_mesh_pt()->element_pt(el_counter));
 
         // Check if the upcast worked or not; if el_pt is a null pointer the
@@ -1264,7 +1264,7 @@ namespace oomph
     while (managed_to_create_unrefined_copy)
     {
       // Make a new object of the same type as the derived problem
-      HelmholtzMGProblem *new_problem_pt = Mg_problem_pt->make_new_problem();
+      HelmholtzMGProblem* new_problem_pt = Mg_problem_pt->make_new_problem();
 
       // Do anything that needs to be done before we can refine the mesh
       new_problem_pt->actions_before_adapt();
@@ -1409,7 +1409,7 @@ namespace oomph
     // Using full weighting so use setup_interpolation_matrices.
     // Note: There are two methods to choose from here, the ideal choice is
     // setup_interpolation_matrices() but that requires a refineable mesh base
-    if (dynamic_cast<TreeBasedRefineableMeshBase *>(
+    if (dynamic_cast<TreeBasedRefineableMeshBase*>(
           Mg_problem_pt->mg_bulk_mesh_pt()))
     {
       setup_interpolation_matrices();
@@ -1463,8 +1463,8 @@ namespace oomph
     Wavenumber = 0.0;
 
     // Upcast the first element in the bulk mesh
-    PMLHelmholtzEquations<DIM> *pml_helmholtz_el_pt =
-      dynamic_cast<PMLHelmholtzEquations<DIM> *>(
+    PMLHelmholtzEquations<DIM>* pml_helmholtz_el_pt =
+      dynamic_cast<PMLHelmholtzEquations<DIM>*>(
         Mg_problem_pt->mg_bulk_mesh_pt()->element_pt(0));
 
     // Grab the k_squared value from the element pointer and square root.
@@ -1494,7 +1494,7 @@ namespace oomph
       unsigned n_dof_per_block = Mg_hierarchy_pt[i]->ndof() / 2;
 
       // Create the linear algebra distribution to build the vectors
-      LinearAlgebraDistribution *dist_pt = new LinearAlgebraDistribution(
+      LinearAlgebraDistribution* dist_pt = new LinearAlgebraDistribution(
         Mg_hierarchy_pt[i]->communicator_pt(), n_dof_per_block, false);
 
 #ifdef PARANOID
@@ -1631,7 +1631,7 @@ namespace oomph
           //------------------------------------------------------------------
           // Create a pointer which will contain the value of the shift given
           // by Alpha_shift
-          double *alpha_shift_pt = new double(Alpha_shift);
+          double* alpha_shift_pt = new double(Alpha_shift);
 
           // Calculate the number of elements in the mesh
           unsigned n_element = Mg_hierarchy_pt[0]->mesh_pt()->nelement();
@@ -1639,19 +1639,19 @@ namespace oomph
           // To grab the static variable used to set the value of alpha we first
           // need to get an element of type PMLHelmholtzEquations (we
           // arbitrarily chose the first element in the mesh)
-          PMLHelmholtzEquations<DIM> *el_pt =
-            dynamic_cast<PMLHelmholtzEquations<DIM> *>(
+          PMLHelmholtzEquations<DIM>* el_pt =
+            dynamic_cast<PMLHelmholtzEquations<DIM>*>(
               Mg_hierarchy_pt[0]->mesh_pt()->element_pt(0));
 
           // Now grab the pointer from the element
-          static double *default_physical_constant_value_pt = el_pt->alpha_pt();
+          static double* default_physical_constant_value_pt = el_pt->alpha_pt();
 
           // Loop over all of the elements
           for (unsigned i_el = 0; i_el < n_element; i_el++)
           {
             // Upcast from a GeneralisedElement to a PmlHelmholtzElement
-            PMLHelmholtzEquations<DIM> *el_pt =
-              dynamic_cast<PMLHelmholtzEquations<DIM> *>(
+            PMLHelmholtzEquations<DIM>* el_pt =
+              dynamic_cast<PMLHelmholtzEquations<DIM>*>(
                 Mg_hierarchy_pt[0]->mesh_pt()->element_pt(i_el));
 
             // Make the internal element alpha pointer point to Alpha_shift (the
@@ -1670,10 +1670,10 @@ namespace oomph
           // matrix:
           //---------------------------------------------------------------------
           // Create a temporary pointer to the Jacobian
-          CRDoubleMatrix *jacobian_pt = this->matrix_pt();
+          CRDoubleMatrix* jacobian_pt = this->matrix_pt();
 
           // Create a new CRDoubleMatrix to hold the shifted Jacobian matrix
-          CRDoubleMatrix *shifted_jacobian_pt = new CRDoubleMatrix;
+          CRDoubleMatrix* shifted_jacobian_pt = new CRDoubleMatrix;
 
           // Allocate space for the residuals
           DoubleVector residuals;
@@ -1737,8 +1737,8 @@ namespace oomph
           for (unsigned i_el = 0; i_el < n_element; i_el++)
           {
             // Upcast from a GeneralisedElement to a PmlHelmholtzElement
-            PMLHelmholtzEquations<DIM> *el_pt =
-              dynamic_cast<PMLHelmholtzEquations<DIM> *>(
+            PMLHelmholtzEquations<DIM>* el_pt =
+              dynamic_cast<PMLHelmholtzEquations<DIM>*>(
                 Mg_hierarchy_pt[0]->mesh_pt()->element_pt(i_el));
 
             // Set the value of alpha
@@ -1959,8 +1959,8 @@ namespace oomph
     //---------------------------------------------------
 
     // Grab the real and imaginary matrix parts from storage
-    CRDoubleMatrix *real_matrix_pt = Mg_matrices_storage_pt[Nlevel - 1][0];
-    CRDoubleMatrix *imag_matrix_pt = Mg_matrices_storage_pt[Nlevel - 1][1];
+    CRDoubleMatrix* real_matrix_pt = Mg_matrices_storage_pt[Nlevel - 1][0];
+    CRDoubleMatrix* imag_matrix_pt = Mg_matrices_storage_pt[Nlevel - 1][1];
 
     // Number of nonzero entries in A_r
     unsigned nnz_r = real_matrix_pt->nnz();
@@ -1972,14 +1972,14 @@ namespace oomph
     // Acquire access to the value, row_start and column_index arrays from
     // the real and imaginary portions of the full matrix.
     // Real part:
-    const double *value_r_pt = real_matrix_pt->value();
-    const int *row_start_r_pt = real_matrix_pt->row_start();
-    const int *column_index_r_pt = real_matrix_pt->column_index();
+    const double* value_r_pt = real_matrix_pt->value();
+    const int* row_start_r_pt = real_matrix_pt->row_start();
+    const int* column_index_r_pt = real_matrix_pt->column_index();
 
     // Imaginary part:
-    const double *value_c_pt = imag_matrix_pt->value();
-    const int *row_start_c_pt = imag_matrix_pt->row_start();
-    const int *column_index_c_pt = imag_matrix_pt->column_index();
+    const double* value_c_pt = imag_matrix_pt->value();
+    const int* row_start_c_pt = imag_matrix_pt->row_start();
+    const int* column_index_c_pt = imag_matrix_pt->column_index();
 
 #ifdef PARANOID
     // PARANOID check - make sure the matrices have the same number of rows
@@ -2151,7 +2151,7 @@ namespace oomph
     Coarsest_matrix_mg_pt = new CRDoubleMatrix;
 
     // Make the distribution pointer
-    LinearAlgebraDistribution *dist_pt = new LinearAlgebraDistribution(
+    LinearAlgebraDistribution* dist_pt = new LinearAlgebraDistribution(
       Mg_hierarchy_pt[Nlevel - 1]->communicator_pt(), 2 * n_rows_r, false);
 
     // First, we need to build the matrix. Making use of its particular
@@ -2190,11 +2190,11 @@ namespace oomph
   /// This is the explicit template specialisation of the case DIM=2.
   //==========================================================================
   template<>
-  void HelmholtzMGPreconditioner<2>::maximum_edge_width(const unsigned &level,
-                                                        double &h)
+  void HelmholtzMGPreconditioner<2>::maximum_edge_width(const unsigned& level,
+                                                        double& h)
   {
     // Create a pointer to the "bulk" mesh
-    TreeBasedRefineableMeshBase *bulk_mesh_pt =
+    TreeBasedRefineableMeshBase* bulk_mesh_pt =
       Mg_hierarchy_pt[level]->mg_bulk_mesh_pt();
 
     // Reset the value of h
@@ -2203,7 +2203,7 @@ namespace oomph
     // Find out how many nodes there are along one edge of the first element.
     // We assume here that all elements have the same number of nodes
     unsigned nnode_1d =
-      dynamic_cast<FiniteElement *>(bulk_mesh_pt->element_pt(0))->nnode_1d();
+      dynamic_cast<FiniteElement*>(bulk_mesh_pt->element_pt(0))->nnode_1d();
 
     // Sort out corner node IDs:
     //--------------------------
@@ -2225,10 +2225,10 @@ namespace oomph
     // Create storage for the nodal information:
     //------------------------------------------
     // Pointer to the first corner node on the j-th edge
-    Node *first_node_pt = 0;
+    Node* first_node_pt = 0;
 
     // Pointer to the second corner node on the j-th edge
-    Node *second_node_pt = 0;
+    Node* second_node_pt = 0;
 
     // Vector to store the (Eulerian) position of the first corner node
     // along a given edge of the element
@@ -2244,7 +2244,7 @@ namespace oomph
     unsigned n_element = bulk_mesh_pt->nelement();
 
     // Store a pointer which will point to a given element in the bulk mesh
-    FiniteElement *el_pt = 0;
+    FiniteElement* el_pt = 0;
 
     // Initialise a dummy variable to compare with h
     double test_h = 0.0;
@@ -2256,7 +2256,7 @@ namespace oomph
     for (unsigned i = 0; i < n_element; i++)
     {
       // Upcast the pointer to the i-th element to a FiniteElement pointer
-      el_pt = dynamic_cast<FiniteElement *>(bulk_mesh_pt->element_pt(i));
+      el_pt = dynamic_cast<FiniteElement*>(bulk_mesh_pt->element_pt(i));
 
       // Loop over the edges of the element
       for (unsigned j = 0; j < n_edge; j++)
@@ -2322,11 +2322,11 @@ namespace oomph
   /// 12 edges to consider.
   //==========================================================================
   template<>
-  void HelmholtzMGPreconditioner<3>::maximum_edge_width(const unsigned &level,
-                                                        double &h)
+  void HelmholtzMGPreconditioner<3>::maximum_edge_width(const unsigned& level,
+                                                        double& h)
   {
     // Create a pointer to the "bulk" mesh
-    TreeBasedRefineableMeshBase *bulk_mesh_pt =
+    TreeBasedRefineableMeshBase* bulk_mesh_pt =
       Mg_hierarchy_pt[level]->mg_bulk_mesh_pt();
 
     //--------------------------------
@@ -2338,13 +2338,13 @@ namespace oomph
     // Find out how many nodes there are along one edge of the first element.
     // We assume here that all elements have the same number of nodes
     unsigned nnode_1d =
-      dynamic_cast<FiniteElement *>(bulk_mesh_pt->element_pt(0))->nnode_1d();
+      dynamic_cast<FiniteElement*>(bulk_mesh_pt->element_pt(0))->nnode_1d();
 
     // Sort out corner node IDs:
     //--------------------------
     // Grab the octree pointer from the first element in the bulk mesh
-    OcTree *octree_pt =
-      dynamic_cast<RefineableQElement<3> *>(bulk_mesh_pt->element_pt(0))
+    OcTree* octree_pt =
+      dynamic_cast<RefineableQElement<3>*>(bulk_mesh_pt->element_pt(0))
         ->octree_pt();
 
     // Initialise a vector to store local node IDs of the corners
@@ -2429,10 +2429,10 @@ namespace oomph
     // Create storage for the nodal information:
     //------------------------------------------
     // Pointer to the first corner node on the j-th edge
-    Node *first_node_pt = 0;
+    Node* first_node_pt = 0;
 
     // Pointer to the second corner node on the j-th edge
-    Node *second_node_pt = 0;
+    Node* second_node_pt = 0;
 
     // Vector to store the (Eulerian) position of the first corner node
     // along a given edge of the element
@@ -2448,7 +2448,7 @@ namespace oomph
     unsigned n_element = bulk_mesh_pt->nelement();
 
     // Store a pointer which will point to a given element in the bulk mesh
-    FiniteElement *el_pt = 0;
+    FiniteElement* el_pt = 0;
 
     // Initialise a dummy variable to compare with h
     double test_h = 0.0;
@@ -2457,7 +2457,7 @@ namespace oomph
     for (unsigned i = 0; i < n_element; i++)
     {
       // Upcast the pointer to the i-th element to a FiniteElement pointer
-      el_pt = dynamic_cast<FiniteElement *>(bulk_mesh_pt->element_pt(i));
+      el_pt = dynamic_cast<FiniteElement*>(bulk_mesh_pt->element_pt(i));
 
       // Loop over the edges of the element
       for (unsigned j = 0; j < n_edge; j++)
@@ -2539,7 +2539,7 @@ namespace oomph
         if (Wavenumber * Max_edge_width[i] < 0.5)
         {
           // Make a new ComplexDampedJacobi object and assign its pointer
-          ComplexDampedJacobi<CRDoubleMatrix> *damped_jacobi_pt =
+          ComplexDampedJacobi<CRDoubleMatrix>* damped_jacobi_pt =
             new ComplexDampedJacobi<CRDoubleMatrix>;
 
           // Assign the pre-smoother pointer
@@ -2551,7 +2551,7 @@ namespace oomph
         else
         {
           // Make a new ComplexGMRES object and assign its pointer
-          ComplexGMRES<CRDoubleMatrix> *gmres_pt =
+          ComplexGMRES<CRDoubleMatrix>* gmres_pt =
             new ComplexGMRES<CRDoubleMatrix>;
 
           // Assign the pre-smoother pointer
@@ -2578,7 +2578,7 @@ namespace oomph
         if (Wavenumber * Max_edge_width[i] < 0.5)
         {
           // Make a new ComplexDampedJacobi object and assign its pointer
-          ComplexDampedJacobi<CRDoubleMatrix> *damped_jacobi_pt =
+          ComplexDampedJacobi<CRDoubleMatrix>* damped_jacobi_pt =
             new ComplexDampedJacobi<CRDoubleMatrix>;
 
           // Assign the pre-smoother pointer
@@ -2590,7 +2590,7 @@ namespace oomph
         else
         {
           // Make a new ComplexGMRES object and assign its pointer
-          ComplexGMRES<CRDoubleMatrix> *gmres_pt =
+          ComplexGMRES<CRDoubleMatrix>* gmres_pt =
             new ComplexGMRES<CRDoubleMatrix>;
 
           // Assign the pre-smoother pointer
@@ -2769,12 +2769,12 @@ namespace oomph
     // quantity will be the same in all meshes we can precompute it here
     // using the original problem pointer
     unsigned nnod_element =
-      dynamic_cast<FiniteElement *>(Mg_problem_pt->mesh_pt()->element_pt(0))
+      dynamic_cast<FiniteElement*>(Mg_problem_pt->mesh_pt()->element_pt(0))
         ->nnode();
 
     // Initialise a null pointer which will be used to point to an object
     // of the class MeshAsGeomObject
-    MeshAsGeomObject *coarse_mesh_from_obj_pt = 0;
+    MeshAsGeomObject* coarse_mesh_from_obj_pt = 0;
 
     // Loop over each level (apart from the coarsest level; an interpolation
     // matrix and thus a restriction matrix is not needed here), with 0 being
@@ -2789,11 +2789,11 @@ namespace oomph
 
       // Make a pointer to the mesh on the finer level and dynamic_cast
       // it as an object of the refineable mesh class.
-      Mesh *ref_fine_mesh_pt = Mg_hierarchy_pt[fine_level]->mesh_pt();
+      Mesh* ref_fine_mesh_pt = Mg_hierarchy_pt[fine_level]->mesh_pt();
 
       // Make a pointer to the mesh on the coarse level and dynamic_cast
       // it as an object of the refineable mesh class
-      Mesh *ref_coarse_mesh_pt = Mg_hierarchy_pt[coarse_level]->mesh_pt();
+      Mesh* ref_coarse_mesh_pt = Mg_hierarchy_pt[coarse_level]->mesh_pt();
 
       // Access information about the number of elements in the fine mesh
       // from the pointer to the fine mesh (to loop over the rows of the
@@ -2840,7 +2840,7 @@ namespace oomph
       // If this element in the fine mesh has not been unrefined, the map
       // returns the pointer to the same-sized equivalent element in the
       // coarsened mesh.
-      std::map<RefineableQElement<DIM> *, RefineableQElement<DIM> *>
+      std::map<RefineableQElement<DIM>*, RefineableQElement<DIM>*>
         coarse_mesh_reference_element_pt;
 
       // Variable to count the number of elements in the fine mesh
@@ -2858,8 +2858,8 @@ namespace oomph
       while (e_fine < n_bulk_mesh_element)
       {
         // Pointer to element in fine mesh
-        RefineableQElement<DIM> *el_fine_pt =
-          dynamic_cast<RefineableQElement<DIM> *>(
+        RefineableQElement<DIM>* el_fine_pt =
+          dynamic_cast<RefineableQElement<DIM>*>(
             ref_fine_mesh_pt->finite_element_pt(e_fine));
 
 #ifdef PARANOID
@@ -2884,8 +2884,8 @@ namespace oomph
 #endif
 
         // Pointer to element in coarse mesh
-        RefineableQElement<DIM> *el_coarse_pt =
-          dynamic_cast<RefineableQElement<DIM> *>(
+        RefineableQElement<DIM>* el_coarse_pt =
+          dynamic_cast<RefineableQElement<DIM>*>(
             ref_coarse_mesh_pt->finite_element_pt(e_coarse));
 
         // If the levels are different then the element in the fine
@@ -2901,7 +2901,7 @@ namespace oomph
           {
             // Set mapping to father element in coarse mesh
             coarse_mesh_reference_element_pt
-              [dynamic_cast<RefineableQElement<DIM> *>(
+              [dynamic_cast<RefineableQElement<DIM>*>(
                 ref_fine_mesh_pt->finite_element_pt(e_fine))] = el_coarse_pt;
 
             // Increment counter for elements in fine mesh
@@ -2917,7 +2917,7 @@ namespace oomph
           // The element in the fine mesh has not been unrefined between these
           // two levels
           coarse_mesh_reference_element_pt
-            [dynamic_cast<RefineableQElement<DIM> *>(
+            [dynamic_cast<RefineableQElement<DIM>*>(
               ref_fine_mesh_pt->finite_element_pt(e_fine))] = el_coarse_pt;
 
           // Increment counter for elements in fine mesh
@@ -2982,8 +2982,8 @@ namespace oomph
       for (unsigned k = 0; k < fine_n_element; k++)
       {
         // Set a pointer to the element in the fine mesh
-        RefineableQElement<DIM> *el_fine_pt =
-          dynamic_cast<RefineableQElement<DIM> *>(
+        RefineableQElement<DIM>* el_fine_pt =
+          dynamic_cast<RefineableQElement<DIM>*>(
             ref_fine_mesh_pt->finite_element_pt(k));
 
         // Initialise a null pointer which will point to the corresponding
@@ -2992,7 +2992,7 @@ namespace oomph
         // there was no refinement between the levels). If, however, we're
         // in the PML layer then this will point to element that encloses
         // the fine mesh PML element
-        RefineableQElement<DIM> *el_coarse_pt = 0;
+        RefineableQElement<DIM>* el_coarse_pt = 0;
 
         // Variable to store the son type of the fine mesh element with
         // respect to the corresponding coarse mesh element (set to OMEGA
@@ -3070,7 +3070,7 @@ namespace oomph
 
                 // Initalise a null pointer to point to an object of the class
                 // GeomObject
-                GeomObject *el_pt = 0;
+                GeomObject* el_pt = 0;
 
                 // Get the reference element (either the father element or the
                 // same-sized element) in the coarse-mesh PML layer using
@@ -3079,7 +3079,7 @@ namespace oomph
                   fine_node_position, el_pt, s);
 
                 // Upcast the GeomElement object to a RefineableQElement object
-                el_coarse_pt = dynamic_cast<RefineableQElement<DIM> *>(el_pt);
+                el_coarse_pt = dynamic_cast<RefineableQElement<DIM>*>(el_pt);
               }
               else
               {
@@ -3122,7 +3122,7 @@ namespace oomph
                   {
                     // Find the number of master nodes of the hanging
                     // the node in the reference element
-                    HangInfo *hang_info_pt =
+                    HangInfo* hang_info_pt =
                       el_coarse_pt->node_pt(j)->hanging_pt();
                     unsigned nmaster = hang_info_pt->nmaster();
 
@@ -3130,7 +3130,7 @@ namespace oomph
                     for (unsigned i_master = 0; i_master < nmaster; i_master++)
                     {
                       // Set up a pointer to the master node
-                      Node *master_node_pt =
+                      Node* master_node_pt =
                         hang_info_pt->master_node_pt(i_master);
 
                       // The column number in the interpolation matrix: the
@@ -3237,11 +3237,11 @@ namespace oomph
 
       // Make a pointer to the mesh on the finer level and dynamic_cast
       // it as an object of the refineable mesh class
-      Mesh *ref_fine_mesh_pt = Mg_hierarchy_pt[fine_level]->mg_bulk_mesh_pt();
+      Mesh* ref_fine_mesh_pt = Mg_hierarchy_pt[fine_level]->mg_bulk_mesh_pt();
 
       // To use the locate zeta functionality the coarse mesh must be of the
       // type MeshAsGeomObject
-      MeshAsGeomObject *coarse_mesh_from_obj_pt =
+      MeshAsGeomObject* coarse_mesh_from_obj_pt =
         new MeshAsGeomObject(Mg_hierarchy_pt[coarse_level]->mg_bulk_mesh_pt());
 
       // Access information about the number of degrees of freedom
@@ -3274,7 +3274,7 @@ namespace oomph
            i_fine_node++)
       {
         // Set a pointer to the i_fine_unknown-th node in the fine mesh
-        Node *fine_node_pt = ref_fine_mesh_pt->node_pt(i_fine_node);
+        Node* fine_node_pt = ref_fine_mesh_pt->node_pt(i_fine_node);
 
         // Get the global equation number
         int i_fine = fine_node_pt->eqn_number(0);
@@ -3290,14 +3290,14 @@ namespace oomph
           fine_node_pt->position(fine_node_position);
 
           // Create a null pointer to the GeomObject class
-          GeomObject *el_pt = 0;
+          GeomObject* el_pt = 0;
 
           // Get the reference element (either the father element or the
           // same-sized element) in the coarse mesh using locate_zeta
           coarse_mesh_from_obj_pt->locate_zeta(fine_node_position, el_pt, s);
 
           // Upcast GeomElement as a FiniteElement
-          FiniteElement *el_coarse_pt = dynamic_cast<FiniteElement *>(el_pt);
+          FiniteElement* el_coarse_pt = dynamic_cast<FiniteElement*>(el_pt);
 
           // Find the number of nodes in the element
           unsigned n_node = el_coarse_pt->nnode();
@@ -3317,7 +3317,7 @@ namespace oomph
           for (unsigned j_node = 0; j_node < n_node; j_node++)
           {
             // Get the j_coarse_unknown-th node in the coarse element
-            Node *coarse_node_pt = el_coarse_pt->node_pt(j_node);
+            Node* coarse_node_pt = el_coarse_pt->node_pt(j_node);
 
             // Column number in interpolation matrix: Global equation number of
             // the d.o.f. stored at this node in the coarse element
@@ -3332,14 +3332,14 @@ namespace oomph
               {
                 // Find the number of master nodes of the hanging
                 // the node in the reference element
-                HangInfo *hang_info_pt = coarse_node_pt->hanging_pt();
+                HangInfo* hang_info_pt = coarse_node_pt->hanging_pt();
                 unsigned nmaster = hang_info_pt->nmaster();
 
                 // Loop over the master nodes
                 for (unsigned i_master = 0; i_master < nmaster; i_master++)
                 {
                   // Set up a pointer to the master node
-                  Node *master_node_pt = hang_info_pt->master_node_pt(i_master);
+                  Node* master_node_pt = hang_info_pt->master_node_pt(i_master);
 
                   // The column number in the interpolation matrix: the
                   // global equation number of the d.o.f. stored at this master
@@ -3409,7 +3409,7 @@ namespace oomph
   //=========================================================================
   template<>
   void HelmholtzMGPreconditioner<3>::level_up_local_coord_of_node(
-    const int &son_type, Vector<double> &s)
+    const int& son_type, Vector<double>& s)
   {
     // If the element is unrefined between the levels the local coordinate
     // of the node in one element is the same as that in the other element
@@ -3476,7 +3476,7 @@ namespace oomph
   //=========================================================================
   template<>
   void HelmholtzMGPreconditioner<2>::level_up_local_coord_of_node(
-    const int &son_type, Vector<double> &s)
+    const int& son_type, Vector<double>& s)
   {
     // If the element is unrefined between the levels the local coordinate
     // of the node in one element is the same as that in the other element
@@ -3530,7 +3530,7 @@ namespace oomph
   /// of the interpolation matrix (if restrict_flag=2)
   //===================================================================
   template<unsigned DIM>
-  void HelmholtzMGPreconditioner<DIM>::restrict_residual(const unsigned &level)
+  void HelmholtzMGPreconditioner<DIM>::restrict_residual(const unsigned& level)
   {
 #ifdef PARANOID
     // Check to make sure we can actually restrict the vector
@@ -3563,7 +3563,7 @@ namespace oomph
   //===================================================================
   template<unsigned DIM>
   void HelmholtzMGPreconditioner<DIM>::interpolate_and_correct(
-    const unsigned &level)
+    const unsigned& level)
   {
 #ifdef PARANOID
     // Check to make sure we can actually restrict the vector
@@ -3605,7 +3605,7 @@ namespace oomph
   /// is implemented
   //===================================================================
   template<unsigned DIM>
-  void HelmholtzMGPreconditioner<DIM>::mg_solve(Vector<DoubleVector> &result)
+  void HelmholtzMGPreconditioner<DIM>::mg_solve(Vector<DoubleVector>& result)
   {
     // If we're allowed to time things
     double t_mg_start = 0.0;

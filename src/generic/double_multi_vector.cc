@@ -39,7 +39,7 @@ namespace oomph
   /// \b NOTE 2: The current distribution and the new distribution must have
   /// the same Communicator.
   void DoubleMultiVector::redistribute(
-    const LinearAlgebraDistribution *const &dist_pt)
+    const LinearAlgebraDistribution* const& dist_pt)
   {
 #ifdef OOMPH_HAS_MPI
 #ifdef PARANOID
@@ -151,8 +151,8 @@ namespace oomph
         }
 
         // Storage for the new data
-        double **temp_data = new double *[n_vector];
-        double *contiguous_temp_data =
+        double** temp_data = new double*[n_vector];
+        double* contiguous_temp_data =
           new double[n_vector * new_nrow_local_data[my_rank]];
         for (unsigned v = 0; v < n_vector; ++v)
         {
@@ -217,9 +217,9 @@ namespace oomph
       {
         // copy existing Values_pt to temp_data
         unsigned n_local_data = this->nrow_local();
-        double **temp_data = new double *[n_vector];
+        double** temp_data = new double*[n_vector];
         // New continguous data
-        double *contiguous_temp_data = new double[n_vector * n_local_data];
+        double* contiguous_temp_data = new double[n_vector * n_local_data];
         for (unsigned v = 0; v < n_vector; ++v)
         {
           temp_data[v] = &contiguous_temp_data[v * n_local_data];
@@ -231,15 +231,15 @@ namespace oomph
 
         // clear and resize Values_pt
         delete[] Values[0];
-        double *values = new double[this->nrow() * n_vector];
+        double* values = new double[this->nrow() * n_vector];
         for (unsigned v = 0; v < n_vector; v++)
         {
           Values[v] = &values[v * this->nrow()];
         }
 
         // create a int vector of first rows
-        int *dist_first_row = new int[nproc];
-        int *dist_nrow_local = new int[nproc];
+        int* dist_first_row = new int[nproc];
+        int* dist_nrow_local = new int[nproc];
         for (int p = 0; p < nproc; p++)
         {
           dist_first_row[p] = this->first_row(p);
@@ -285,8 +285,8 @@ namespace oomph
         unsigned first_row = dist_pt->first_row();
 
         const unsigned n_local_data = nrow_local;
-        double **temp_data = new double *[n_vector];
-        double *contiguous_temp_data = new double[n_vector * n_local_data];
+        double** temp_data = new double*[n_vector];
+        double* contiguous_temp_data = new double[n_vector * n_local_data];
 
         // copy the data
         for (unsigned v = 0; v < n_vector; v++)

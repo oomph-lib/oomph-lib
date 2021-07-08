@@ -52,7 +52,7 @@ namespace oomph
   /// Adapt problem based on specified elemental error estimates
   //======================================================================
   template<class ELEMENT>
-  void RefineableTetgenMesh<ELEMENT>::adapt(const Vector<double> &elem_error)
+  void RefineableTetgenMesh<ELEMENT>::adapt(const Vector<double>& elem_error)
   {
     double t_start = 0.0;
     //###################################
@@ -106,13 +106,13 @@ namespace oomph
       //###################################
 
       // Are we dealing with a solid mesh?
-      SolidMesh *solid_mesh_pt = dynamic_cast<SolidMesh *>(this);
+      SolidMesh* solid_mesh_pt = dynamic_cast<SolidMesh*>(this);
 
       // Build temporary uniform background mesh
       //----------------------------------------
       // with volume set by maximum required volume
       //---------------------------------------
-      RefineableTetgenMesh<ELEMENT> *tmp_new_mesh_pt = 0;
+      RefineableTetgenMesh<ELEMENT>* tmp_new_mesh_pt = 0;
       if (solid_mesh_pt != 0)
       {
         throw OomphLibError("Solid RefineableTetgenMesh not done yet.",
@@ -143,8 +143,8 @@ namespace oomph
       //##################################################################
 
       // Get the tetgenio object associated with that mesh
-      tetgenio *tmp_new_tetgenio_pt = tmp_new_mesh_pt->tetgenio_pt();
-      RefineableTetgenMesh<ELEMENT> *new_mesh_pt = 0;
+      tetgenio* tmp_new_tetgenio_pt = tmp_new_mesh_pt->tetgenio_pt();
+      RefineableTetgenMesh<ELEMENT>* new_mesh_pt = 0;
 
       // If the mesh is a solid mesh then do the mapping based on the
       // Eulerian coordinates
@@ -162,7 +162,7 @@ namespace oomph
       {
         cgal_params.enable_use_eulerian_coordinates_during_setup();
       }
-      MeshAsGeomObject *mesh_geom_obj_pt = new MeshAsGeomObject(&cgal_params);
+      MeshAsGeomObject* mesh_geom_obj_pt = new MeshAsGeomObject(&cgal_params);
 
 #else
 
@@ -189,7 +189,7 @@ namespace oomph
 
       // Set up a map from pointer to element to its number
       // in the mesh
-      std::map<GeneralisedElement *, unsigned> element_number;
+      std::map<GeneralisedElement*, unsigned> element_number;
       unsigned nelem = this->nelement();
       for (unsigned e = 0; e < nelem; e++)
       {
@@ -216,8 +216,8 @@ namespace oomph
         Vector<double> new_transferred_target_size(nelem, 0.0);
         for (unsigned e = 0; e < nelem; e++)
         {
-          ELEMENT *el_pt =
-            dynamic_cast<ELEMENT *>(tmp_new_mesh_pt->element_pt(e));
+          ELEMENT* el_pt =
+            dynamic_cast<ELEMENT*>(tmp_new_mesh_pt->element_pt(e));
           unsigned nint = el_pt->integral_pt()->nweight();
           for (unsigned ipt = 0; ipt < nint; ipt++)
           {
@@ -235,9 +235,9 @@ namespace oomph
 
             // Try the five nearest sample points for Newton search
             // then just settle on the nearest one
-            GeomObject *geom_obj_pt = 0;
+            GeomObject* geom_obj_pt = 0;
             unsigned max_sample_points = 5;
-            dynamic_cast<CGALSamplePointContainer *>(
+            dynamic_cast<CGALSamplePointContainer*>(
               mesh_geom_obj_pt->sample_point_container_pt())
               ->limited_locate_zeta(x, max_sample_points, geom_obj_pt, s);
 #ifdef PARANOID
@@ -254,7 +254,7 @@ namespace oomph
             else
             {
 #endif
-              FiniteElement *fe_pt = dynamic_cast<FiniteElement *>(geom_obj_pt);
+              FiniteElement* fe_pt = dynamic_cast<FiniteElement*>(geom_obj_pt);
 #ifdef PARANOID
               if (fe_pt == 0)
               {
@@ -386,7 +386,7 @@ namespace oomph
         for (unsigned e = 0; e < nel_new; e++)
         {
           // The finite element
-          FiniteElement *f_ele_pt = tmp_new_mesh_pt->finite_element_pt(e);
+          FiniteElement* f_ele_pt = tmp_new_mesh_pt->finite_element_pt(e);
 
           // Transferred target size
           const double new_size = new_transferred_target_size[e];
@@ -607,7 +607,7 @@ namespace oomph
 
         // Project current solution onto new mesh
         //---------------------------------------
-        ProjectionProblem<ELEMENT> *project_problem_pt =
+        ProjectionProblem<ELEMENT>* project_problem_pt =
           new ProjectionProblem<ELEMENT>;
         project_problem_pt->mesh_pt() = new_mesh_pt;
         project_problem_pt->project(this);
@@ -770,7 +770,7 @@ namespace oomph
                         OOMPH_EXCEPTION_LOCATION);
 
         // Reset Lagrangian coordinates
-        dynamic_cast<SolidMesh *>(this)->set_lagrangian_nodal_coordinates();
+        dynamic_cast<SolidMesh*>(this)->set_lagrangian_nodal_coordinates();
       }
 
       double max_area;

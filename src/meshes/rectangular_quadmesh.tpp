@@ -45,7 +45,7 @@ namespace oomph
   /// of any derived classes.
   //===========================================================================
   template<class ELEMENT>
-  void RectangularQuadMesh<ELEMENT>::build_mesh(TimeStepper *time_stepper_pt)
+  void RectangularQuadMesh<ELEMENT>::build_mesh(TimeStepper* time_stepper_pt)
   {
     // Mesh can only be built with 2D Qelements.
     MeshChecker::assert_geometric_element<QElementGeometricBase, ELEMENT>(2);
@@ -59,7 +59,7 @@ namespace oomph
     Element_pt[0] = new ELEMENT;
 
     // Read out the number of linear points in the element
-    Np = dynamic_cast<ELEMENT *>(finite_element_pt(0))->nnode_1d();
+    Np = dynamic_cast<ELEMENT*>(finite_element_pt(0))->nnode_1d();
 
     // Can now allocate the store for the nodes
     Node_pt.resize((1 + (Np - 1) * Nx) * (1 + (Np - 1) * Ny));
@@ -841,7 +841,7 @@ namespace oomph
     // Find out how many elements there are
     unsigned long Nelement = nelement();
     // Create a dummy array of elements
-    Vector<FiniteElement *> dummy;
+    Vector<FiniteElement*> dummy;
 
     // Loop over the elements in horizontal order
     for (unsigned long j = 0; j < Nx; j++)

@@ -79,7 +79,7 @@ namespace oomph
   //==========================================================================
   template<>
   void TAxisymmetricPoroelasticityElement<0>::get_q_basis_local(
-    const Vector<double> &s, Shape &q_basis) const
+    const Vector<double>& s, Shape& q_basis) const
   {
     // RT_0 basis functions
     q_basis(0, 0) = Sign_edge[0] * std::sqrt(2) * s[0];
@@ -97,7 +97,7 @@ namespace oomph
   //==========================================================================
   template<>
   void TAxisymmetricPoroelasticityElement<0>::get_div_q_basis_local(
-    const Vector<double> &s, Shape &div_q_basis_ds) const
+    const Vector<double>& s, Shape& div_q_basis_ds) const
   {
     div_q_basis_ds(0) = Sign_edge[0] * 2 * std::sqrt(2);
     div_q_basis_ds(1) = Sign_edge[1] * 2;
@@ -133,7 +133,7 @@ namespace oomph
   //==========================================================================
   template<>
   void TAxisymmetricPoroelasticityElement<0>::get_p_basis(
-    const Vector<double> &s, Shape &p_basis) const
+    const Vector<double>& s, Shape& p_basis) const
   {
     p_basis(0) = 1.0;
   }
@@ -218,7 +218,7 @@ namespace oomph
   //==========================================================================
   template<>
   void TAxisymmetricPoroelasticityElement<1>::get_q_basis_local(
-    const Vector<double> &s, Shape &q_basis) const
+    const Vector<double>& s, Shape& q_basis) const
   {
     // RT_1 basis functions
     Vector<double> g1_vect, g2_vect;
@@ -270,7 +270,7 @@ namespace oomph
   //==========================================================================
   template<>
   void TAxisymmetricPoroelasticityElement<1>::get_div_q_basis_local(
-    const Vector<double> &s, Shape &div_q_basis_ds) const
+    const Vector<double>& s, Shape& div_q_basis_ds) const
   {
     Vector<double> g1_vect, g2_vect;
     g1_vect = edge_flux_interpolation_point(0, 0);
@@ -329,7 +329,7 @@ namespace oomph
   //==========================================================================
   template<>
   void TAxisymmetricPoroelasticityElement<1>::get_p_basis(
-    const Vector<double> &s, Shape &p_basis) const
+    const Vector<double>& s, Shape& p_basis) const
   {
     p_basis(0) = 1.0;
     p_basis(1) = s[0];

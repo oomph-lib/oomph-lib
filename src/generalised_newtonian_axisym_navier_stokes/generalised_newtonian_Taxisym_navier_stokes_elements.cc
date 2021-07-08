@@ -62,7 +62,7 @@ namespace oomph
   /// load computed in the \c get_load(...) function.
   //=========================================================================
   void GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement::
-    identify_load_data(std::set<std::pair<Data *, unsigned>> &paired_load_data)
+    identify_load_data(std::set<std::pair<Data*, unsigned>>& paired_load_data)
   {
     // Find the index at which the velocity is stored
     unsigned u_index[3];
@@ -98,7 +98,7 @@ namespace oomph
   //=========================================================================
   void GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement::
     identify_pressure_data(
-      std::set<std::pair<Data *, unsigned>> &paired_pressure_data)
+      std::set<std::pair<Data*, unsigned>>& paired_pressure_data)
   {
     // Loop over the internal data
     unsigned n_internal = this->ninternal_data();
@@ -176,7 +176,7 @@ namespace oomph
     unsigned n_pres = npres_axi_nst();
     for (unsigned l = 0; l < n_pres; l++)
     {
-      Node *nod_pt = this->node_pt(Pconv[l]);
+      Node* nod_pt = this->node_pt(Pconv[l]);
       if (!nod_pt->is_hanging(3))
       {
         nod_pt->unpin(3);
@@ -194,7 +194,7 @@ namespace oomph
   /// load computed in the \c get_load(...) function.
   //=========================================================================
   void GeneralisedNewtonianAxisymmetricTTaylorHoodElement::identify_load_data(
-    std::set<std::pair<Data *, unsigned>> &paired_load_data)
+    std::set<std::pair<Data*, unsigned>>& paired_load_data)
   {
     // Loop over the nodes
     unsigned n_node = this->nnode();
@@ -223,7 +223,7 @@ namespace oomph
   //=========================================================================
   void GeneralisedNewtonianAxisymmetricTTaylorHoodElement::
     identify_pressure_data(
-      std::set<std::pair<Data *, unsigned>> &paired_load_data)
+      std::set<std::pair<Data*, unsigned>>& paired_load_data)
   {
     // Loop over the pressure data
     unsigned n_pres = npres_axi_nst();

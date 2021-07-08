@@ -71,7 +71,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    TUnsteadyHeatElement(const TUnsteadyHeatElement<DIM, NNODE_1D> &dummy)
+    TUnsteadyHeatElement(const TUnsteadyHeatElement<DIM, NNODE_1D>& dummy)
     {
       BrokenCopy::broken_copy("TUnsteadyHeatElement");
     }
@@ -89,43 +89,43 @@ namespace oomph
 
     /// \short  Access function for Nvalue: # of `values' (pinned or dofs)
     /// at node n (always returns the same value at every node, 1)
-    inline unsigned required_nvalue(const unsigned &n) const
+    inline unsigned required_nvalue(const unsigned& n) const
     {
       return Initial_Nvalue;
     }
 
     /// \short Output function:
     ///  x,y,u   or    x,y,z,u
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       UnsteadyHeatEquations<DIM>::output(outfile);
     }
 
     ///  \short Output function:
     ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       UnsteadyHeatEquations<DIM>::output(outfile, n_plot);
     }
 
     /// \short C-style output function:
     ///  x,y,u   or    x,y,z,u
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       UnsteadyHeatEquations<DIM>::output(file_pt);
     }
 
     ///  \short C-style output function:
     ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       UnsteadyHeatEquations<DIM>::output(file_pt, n_plot);
     }
 
     /// \short Output function for an exact solution:
     ///  x,y,u_exact
-    void output_fct(std::ostream &outfile,
-                    const unsigned &n_plot,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& n_plot,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
     {
       UnsteadyHeatEquations<DIM>::output_fct(outfile, n_plot, exact_soln_pt);
@@ -133,9 +133,9 @@ namespace oomph
 
     /// \short Output function for a time-dependent exact solution.
     ///  x,y,u_exact (calls the steady version)
-    void output_fct(std::ostream &outfile,
-                    const unsigned &n_plot,
-                    const double &time,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& n_plot,
+                    const double& time,
                     FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
     {
       UnsteadyHeatEquations<DIM>::output_fct(
@@ -145,33 +145,33 @@ namespace oomph
   protected:
     /// Shape, test functions & derivs. w.r.t. to global coords. Return
     /// Jacobian.
-    inline double dshape_and_dtest_eulerian_ust_heat(const Vector<double> &s,
-                                                     Shape &psi,
-                                                     DShape &dpsidx,
-                                                     Shape &test,
-                                                     DShape &dtestdx) const;
+    inline double dshape_and_dtest_eulerian_ust_heat(const Vector<double>& s,
+                                                     Shape& psi,
+                                                     DShape& dpsidx,
+                                                     Shape& test,
+                                                     DShape& dtestdx) const;
 
     /// Shape, test functions & derivs. w.r.t. to global coords. Return
     /// Jacobian.
     inline double dshape_and_dtest_eulerian_at_knot_ust_heat(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidx,
-      Shape &test,
-      DShape &dtestdx) const;
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const;
 
     /// \short Shape/test functions and derivs w.r.t. to global coords at
     /// integration point ipt; return Jacobian of mapping (J). Also compute
     /// derivatives of dpsidx, dtestdx and J w.r.t. nodal coordinates.
     inline double dshape_and_dtest_eulerian_at_knot_ust_heat(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidx,
-      RankFourTensor<double> &d_dpsidx_dX,
-      Shape &test,
-      DShape &dtestdx,
-      RankFourTensor<double> &d_dtestdx_dX,
-      DenseMatrix<double> &djacobian_dX) const;
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      RankFourTensor<double>& d_dpsidx_dX,
+      Shape& test,
+      DShape& dtestdx,
+      RankFourTensor<double>& d_dtestdx_dX,
+      DenseMatrix<double>& djacobian_dX) const;
 
     /// \short Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.
@@ -188,7 +188,7 @@ namespace oomph
 
     /// \short Get 'flux' for Z2 error recovery:  Standard flux from
     /// UnsteadyHeat equations
-    void get_Z2_flux(const Vector<double> &s, Vector<double> &flux)
+    void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
       this->get_flux(s, flux);
     }
@@ -200,7 +200,7 @@ namespace oomph
     }
 
     /// \short Pointer to the j-th vertex node in the element
-    Node *vertex_node_pt(const unsigned &j) const
+    Node* vertex_node_pt(const unsigned& j) const
     {
       return TElement<DIM, NNODE_1D>::vertex_node_pt(j);
     }
@@ -220,11 +220,11 @@ namespace oomph
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
   double TUnsteadyHeatElement<DIM, NNODE_1D>::
-    dshape_and_dtest_eulerian_ust_heat(const Vector<double> &s,
-                                       Shape &psi,
-                                       DShape &dpsidx,
-                                       Shape &test,
-                                       DShape &dtestdx) const
+    dshape_and_dtest_eulerian_ust_heat(const Vector<double>& s,
+                                       Shape& psi,
+                                       DShape& dpsidx,
+                                       Shape& test,
+                                       DShape& dtestdx) const
   {
     unsigned n_node = this->nnode();
 
@@ -252,11 +252,11 @@ namespace oomph
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
   double TUnsteadyHeatElement<DIM, NNODE_1D>::
-    dshape_and_dtest_eulerian_at_knot_ust_heat(const unsigned &ipt,
-                                               Shape &psi,
-                                               DShape &dpsidx,
-                                               Shape &test,
-                                               DShape &dtestdx) const
+    dshape_and_dtest_eulerian_at_knot_ust_heat(const unsigned& ipt,
+                                               Shape& psi,
+                                               DShape& dpsidx,
+                                               Shape& test,
+                                               DShape& dtestdx) const
   {
     // Call the geometrical shape functions and derivatives
     double J = this->dshape_eulerian_at_knot(ipt, psi, dpsidx);
@@ -280,14 +280,14 @@ namespace oomph
   template<unsigned DIM, unsigned NNODE_1D>
   double TUnsteadyHeatElement<DIM, NNODE_1D>::
     dshape_and_dtest_eulerian_at_knot_ust_heat(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidx,
-      RankFourTensor<double> &d_dpsidx_dX,
-      Shape &test,
-      DShape &dtestdx,
-      RankFourTensor<double> &d_dtestdx_dX,
-      DenseMatrix<double> &djacobian_dX) const
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      RankFourTensor<double>& d_dpsidx_dX,
+      Shape& test,
+      DShape& dtestdx,
+      RankFourTensor<double>& d_dtestdx_dX,
+      DenseMatrix<double>& djacobian_dX) const
   {
     // Call the geometrical shape functions and derivatives
     const double J = this->dshape_eulerian_at_knot(

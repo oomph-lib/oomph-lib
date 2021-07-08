@@ -73,56 +73,56 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    TFoepplvonKarmanElement(const TFoepplvonKarmanElement<NNODE_1D> &dummy)
+    TFoepplvonKarmanElement(const TFoepplvonKarmanElement<NNODE_1D>& dummy)
     {
       BrokenCopy::broken_copy("TFoepplvonKarmanElement");
     }
 
     /// Broken assignment operator
-    void operator=(const TFoepplvonKarmanElement<NNODE_1D> &)
+    void operator=(const TFoepplvonKarmanElement<NNODE_1D>&)
     {
       BrokenCopy::broken_assign("TFoepplvonKarmanElement");
     }
 
     /// \short  Access function for Nvalue: # of `values' (pinned or dofs)
     /// at node n (always returns the same value at every node, 8)
-    inline unsigned required_nvalue(const unsigned &n) const
+    inline unsigned required_nvalue(const unsigned& n) const
     {
       return Initial_Nvalue;
     }
 
     /// \short Output function:
     ///  x,y,w
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       FoepplvonKarmanEquations::output(outfile);
     }
 
     ///  \short Output function:
     ///   x,y,w at n_plot^2 plot points
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       FoepplvonKarmanEquations::output(outfile, n_plot);
     }
 
     /// \short C-style output function:
     ///  x,y,w
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FoepplvonKarmanEquations::output(file_pt);
     }
 
     ///  \short C-style output function:
     ///   x,y,w at n_plot^2 plot points
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       FoepplvonKarmanEquations::output(file_pt, n_plot);
     }
 
     /// \short Output function for an exact solution:
     ///  x,y,w_exact
-    void output_fct(std::ostream &outfile,
-                    const unsigned &n_plot,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& n_plot,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
     {
       FoepplvonKarmanEquations::output_fct(outfile, n_plot, exact_soln_pt);
@@ -130,9 +130,9 @@ namespace oomph
 
     /// \short Output function for a time-dependent exact solution.
     ///  x,y,w_exact (calls the steady version)
-    void output_fct(std::ostream &outfile,
-                    const unsigned &n_plot,
-                    const double &time,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& n_plot,
+                    const double& time,
                     FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
     {
       FoepplvonKarmanEquations::output_fct(
@@ -142,19 +142,19 @@ namespace oomph
   protected:
     /// Shape, test functions & derivs. w.r.t. to global coords. Return
     /// Jacobian.
-    inline double dshape_and_dtest_eulerian_fvk(const Vector<double> &s,
-                                                Shape &psi,
-                                                DShape &dpsidx,
-                                                Shape &test,
-                                                DShape &dtestdx) const;
+    inline double dshape_and_dtest_eulerian_fvk(const Vector<double>& s,
+                                                Shape& psi,
+                                                DShape& dpsidx,
+                                                Shape& test,
+                                                DShape& dtestdx) const;
 
     /// Shape, test functions & derivs. w.r.t. to global coords. Return
     /// Jacobian.
-    inline double dshape_and_dtest_eulerian_at_knot_fvk(const unsigned &ipt,
-                                                        Shape &psi,
-                                                        DShape &dpsidx,
-                                                        Shape &test,
-                                                        DShape &dtestdx) const;
+    inline double dshape_and_dtest_eulerian_at_knot_fvk(const unsigned& ipt,
+                                                        Shape& psi,
+                                                        DShape& dpsidx,
+                                                        Shape& test,
+                                                        DShape& dtestdx) const;
 
     /// \short Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.
@@ -170,7 +170,7 @@ namespace oomph
     }
 
     /// Get 'flux' for Z2 error recovery:  Standard flux.from FvK equations
-    void get_Z2_flux(const Vector<double> &s, Vector<double> &flux)
+    void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
       this->get_gradient_of_deflection(s, flux);
     }
@@ -182,7 +182,7 @@ namespace oomph
     }
 
     /// \short Pointer to the j-th vertex node in the element
-    Node *vertex_node_pt(const unsigned &j) const
+    Node* vertex_node_pt(const unsigned& j) const
     {
       return TElement<2, NNODE_1D>::vertex_node_pt(j);
     }
@@ -202,11 +202,11 @@ namespace oomph
   //======================================================================
   template<unsigned NNODE_1D>
   double TFoepplvonKarmanElement<NNODE_1D>::dshape_and_dtest_eulerian_fvk(
-    const Vector<double> &s,
-    Shape &psi,
-    DShape &dpsidx,
-    Shape &test,
-    DShape &dtestdx) const
+    const Vector<double>& s,
+    Shape& psi,
+    DShape& dpsidx,
+    Shape& test,
+    DShape& dtestdx) const
   {
     unsigned n_node = this->nnode();
 
@@ -234,11 +234,11 @@ namespace oomph
   //======================================================================
   template<unsigned NNODE_1D>
   double TFoepplvonKarmanElement<
-    NNODE_1D>::dshape_and_dtest_eulerian_at_knot_fvk(const unsigned &ipt,
-                                                     Shape &psi,
-                                                     DShape &dpsidx,
-                                                     Shape &test,
-                                                     DShape &dtestdx) const
+    NNODE_1D>::dshape_and_dtest_eulerian_at_knot_fvk(const unsigned& ipt,
+                                                     Shape& psi,
+                                                     DShape& dpsidx,
+                                                     Shape& test,
+                                                     DShape& dtestdx) const
   {
     // Call the geometrical shape functions and derivatives
     double J = this->dshape_eulerian_at_knot(ipt, psi, dpsidx);

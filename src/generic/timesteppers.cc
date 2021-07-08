@@ -110,7 +110,7 @@ namespace oomph
   /// This function must be called after the time-values have been shifted!
   //=======================================================================
   template<>
-  void BDF<1>::calculate_predicted_values(Data *const &data_pt)
+  void BDF<1>::calculate_predicted_values(Data* const& data_pt)
   {
     // If it's adaptive calculate the values
     if (adaptive_flag())
@@ -142,7 +142,7 @@ namespace oomph
   /// Calculate predictions for the positions
   //=======================================================================
   template<>
-  void BDF<1>::calculate_predicted_positions(Node *const &node_pt)
+  void BDF<1>::calculate_predicted_positions(Node* const& node_pt)
   {
     // Only do this if adaptive
     if (adaptive_flag())
@@ -183,8 +183,8 @@ namespace oomph
   /// Function to compute the error in position i at node
   //===================================================================
   template<>
-  double BDF<1>::temporal_error_in_position(Node *const &node_pt,
-                                            const unsigned &i)
+  double BDF<1>::temporal_error_in_position(Node* const& node_pt,
+                                            const unsigned& i)
   {
     if (adaptive_flag())
     {
@@ -202,8 +202,8 @@ namespace oomph
   /// Function to calculate the error in the data value i
   //=========================================================================
   template<>
-  double BDF<1>::temporal_error_in_value(Data *const &data_pt,
-                                         const unsigned &i)
+  double BDF<1>::temporal_error_in_value(Data* const& data_pt,
+                                         const unsigned& i)
   {
     if (adaptive_flag())
     {
@@ -269,7 +269,7 @@ namespace oomph
   /// This function must be called after the time-values have been shifted!
   //=======================================================================
   template<>
-  void BDF<2>::calculate_predicted_values(Data *const &data_pt)
+  void BDF<2>::calculate_predicted_values(Data* const& data_pt)
   {
     // If it's adaptive calculate the values
     if (adaptive_flag())
@@ -302,7 +302,7 @@ namespace oomph
   /// Calculate predictions for the positions
   //=======================================================================
   template<>
-  void BDF<2>::calculate_predicted_positions(Node *const &node_pt)
+  void BDF<2>::calculate_predicted_positions(Node* const& node_pt)
   {
     // Only do this if adaptive
     if (adaptive_flag())
@@ -352,8 +352,8 @@ namespace oomph
   /// Function to compute the error in position i at node
   //===================================================================
   template<>
-  double BDF<2>::temporal_error_in_position(Node *const &node_pt,
-                                            const unsigned &i)
+  double BDF<2>::temporal_error_in_position(Node* const& node_pt,
+                                            const unsigned& i)
   {
     if (adaptive_flag())
     {
@@ -371,8 +371,8 @@ namespace oomph
   /// Function to calculate the error in the data value i
   //=========================================================================
   template<>
-  double BDF<2>::temporal_error_in_value(Data *const &data_pt,
-                                         const unsigned &i)
+  double BDF<2>::temporal_error_in_value(Data* const& data_pt,
+                                         const unsigned& i)
   {
     if (adaptive_flag())
     {
@@ -432,7 +432,7 @@ namespace oomph
   /// This function must be called after the time-values have been shifted!
   //=======================================================================
   template<>
-  void BDF<4>::calculate_predicted_values(Data *const &data_pt)
+  void BDF<4>::calculate_predicted_values(Data* const& data_pt)
   {
     throw OomphLibError(
       "Not implemented yet", OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
@@ -440,7 +440,7 @@ namespace oomph
 
   /// Calculate predictions for the positions
   template<>
-  void BDF<4>::calculate_predicted_positions(Node *const &node_pt)
+  void BDF<4>::calculate_predicted_positions(Node* const& node_pt)
   {
     throw OomphLibError(
       "Not implemented yet", OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
@@ -458,8 +458,8 @@ namespace oomph
   /// Function to compute the error in position i at node
   //===================================================================
   template<>
-  double BDF<4>::temporal_error_in_position(Node *const &node_pt,
-                                            const unsigned &i)
+  double BDF<4>::temporal_error_in_position(Node* const& node_pt,
+                                            const unsigned& i)
   {
     throw OomphLibError(
       "Not implemented yet", OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
@@ -470,8 +470,8 @@ namespace oomph
   /// Function to calculate the error in the data value i
   //=========================================================================
   template<>
-  double BDF<4>::temporal_error_in_value(Data *const &data_pt,
-                                         const unsigned &i)
+  double BDF<4>::temporal_error_in_value(Data* const& data_pt,
+                                         const unsigned& i)
   {
     throw OomphLibError(
       "Not implemented yet", OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
@@ -487,7 +487,7 @@ namespace oomph
   /// corresponding to an impulsive start.
   //=========================================================================
   template<unsigned NSTEPS>
-  void Newmark<NSTEPS>::assign_initial_values_impulsive(Data *const &data_pt)
+  void Newmark<NSTEPS>::assign_initial_values_impulsive(Data* const& data_pt)
   {
     // Find number of values stored in Data object
     unsigned n_value = data_pt->nvalue();
@@ -515,7 +515,7 @@ namespace oomph
   /// corresponding to an impulsive start.
   //=========================================================================
   template<unsigned NSTEPS>
-  void Newmark<NSTEPS>::assign_initial_positions_impulsive(Node *const &node_pt)
+  void Newmark<NSTEPS>::assign_initial_positions_impulsive(Node* const& node_pt)
   {
     // Find the number of coordinates
     unsigned n_dim = node_pt->ndim();
@@ -552,7 +552,7 @@ namespace oomph
   //=========================================================================
   template<unsigned NSTEPS>
   void Newmark<NSTEPS>::assign_initial_data_values(
-    Data *const &data_pt,
+    Data* const& data_pt,
     Vector<InitialConditionFctPt> initial_value_fct,
     Vector<InitialConditionFctPt> initial_veloc_fct,
     Vector<InitialConditionFctPt> initial_accel_fct)
@@ -670,7 +670,7 @@ namespace oomph
   //=========================================================================
   template<unsigned NSTEPS>
   void Newmark<NSTEPS>::assign_initial_data_values(
-    Node *const &node_pt,
+    Node* const& node_pt,
     Vector<NodeInitialConditionFctPt> initial_value_fct,
     Vector<NodeInitialConditionFctPt> initial_veloc_fct,
     Vector<NodeInitialConditionFctPt> initial_accel_fct)
@@ -811,7 +811,7 @@ namespace oomph
   //=========================================================================
   template<unsigned NSTEPS>
   void Newmark<NSTEPS>::assign_initial_data_values_stage1(
-    const unsigned t_deriv, Data *const &data_pt)
+    const unsigned t_deriv, Data* const& data_pt)
   {
     // Find number of values stored
     unsigned n_value = data_pt->nvalue();
@@ -867,7 +867,7 @@ namespace oomph
   /// are represented exactly by the Newmark scheme.
   //=========================================================================
   template<unsigned NSTEPS>
-  void Newmark<NSTEPS>::assign_initial_data_values_stage2(Data *const &data_pt)
+  void Newmark<NSTEPS>::assign_initial_data_values_stage2(Data* const& data_pt)
   {
     // Find number of values stored
     unsigned n_value = data_pt->nvalue();
@@ -926,7 +926,7 @@ namespace oomph
   /// we can advance to the next timestep.
   //=========================================================================
   template<unsigned NSTEPS>
-  void Newmark<NSTEPS>::shift_time_values(Data *const &data_pt)
+  void Newmark<NSTEPS>::shift_time_values(Data* const& data_pt)
   {
     // Find number of values stored
     unsigned n_value = data_pt->nvalue();
@@ -959,7 +959,7 @@ namespace oomph
   /// we can advance to the next timestep.
   //=========================================================================
   template<unsigned NSTEPS>
-  void Newmark<NSTEPS>::shift_time_positions(Node *const &node_pt)
+  void Newmark<NSTEPS>::shift_time_positions(Node* const& node_pt)
   {
     // Find the number of coordinates
     unsigned n_dim = node_pt->ndim();
@@ -1056,7 +1056,7 @@ namespace oomph
   /// we can advance to the next timestep.
   //=========================================================================
   template<unsigned NSTEPS>
-  void NewmarkBDF<NSTEPS>::shift_time_values(Data *const &data_pt)
+  void NewmarkBDF<NSTEPS>::shift_time_values(Data* const& data_pt)
   {
     // Find number of values stored
     unsigned n_value = data_pt->nvalue();
@@ -1101,7 +1101,7 @@ namespace oomph
   /// we can advance to the next timestep.
   //=========================================================================
   template<unsigned NSTEPS>
-  void NewmarkBDF<NSTEPS>::shift_time_positions(Node *const &node_pt)
+  void NewmarkBDF<NSTEPS>::shift_time_positions(Node* const& node_pt)
   {
     // Find the number of coordinates
     unsigned n_dim = node_pt->ndim();

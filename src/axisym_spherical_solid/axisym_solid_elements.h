@@ -54,22 +54,22 @@ namespace oomph
   {
   private:
     /// Pointer to constitutive law
-    ConstitutiveLaw *Constitutive_law_pt;
+    ConstitutiveLaw* Constitutive_law_pt;
 
   public:
     /// Constructor
     AxisymmetricPVDEquations() : Constitutive_law_pt(0) {}
 
     /// Return the constitutive law pointer
-    ConstitutiveLaw *&constitutive_law_pt()
+    ConstitutiveLaw*& constitutive_law_pt()
     {
       return Constitutive_law_pt;
     }
 
     /// Return the stress tensor, as calculated from the constitutive law
-    void get_stress(const DenseMatrix<double> &g,
-                    const DenseMatrix<double> &G,
-                    DenseMatrix<double> &sigma)
+    void get_stress(const DenseMatrix<double>& g,
+                    const DenseMatrix<double>& G,
+                    DenseMatrix<double>& sigma)
     {
 #ifdef PARANOID
       // If the pointer to the constitutive law hasn't been set, issue an error
@@ -89,14 +89,14 @@ namespace oomph
     }
 
     /// Fill in the residuals by calling the generic function
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       fill_in_contribution_to_residuals_axisym_pvd(residuals);
     }
 
     /// Return the residuals for the equations of solid mechanics
     inline void fill_in_contribution_to_residuals_axisym_pvd(
-      Vector<double> &residuals)
+      Vector<double>& residuals)
     {
       // Set the number of Lagrangian coordinates
       unsigned n_lagrangian = 2;
@@ -388,8 +388,8 @@ namespace oomph
     }
 
     /// Assign the contribution to the residual using only finite differences
-    inline void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                                 DenseMatrix<double> &jacobian)
+    inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                                 DenseMatrix<double>& jacobian)
     {
       // Add the solid contribution to the residuals
       fill_in_contribution_to_residuals_axisym_pvd(residuals);
@@ -406,13 +406,13 @@ namespace oomph
     }
 
     /// Overload the output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       FiniteElement::output(outfile);
     }
 
     /// Output function
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       // Set the output Vector
       Vector<double> s(2);
@@ -446,13 +446,13 @@ namespace oomph
     }
 
     /// Overload the output function
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
 
     /// Output function
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       // Set the output Vector
       Vector<double> s(2);
@@ -504,25 +504,25 @@ namespace oomph
     AxisymQPVDElement() : SolidQElement<2, 3>(), AxisymmetricPVDEquations() {}
 
     /// Overload the output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       FiniteElement::output(outfile);
     }
 
     /// Output function
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       AxisymmetricPVDEquations::output(outfile, n_plot);
     }
 
     /// Overload the output function
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
 
     /// Output function
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       AxisymmetricPVDEquations::output(file_pt, n_plot);
     }
@@ -553,13 +553,13 @@ namespace oomph
     }
 
     /// Overload the output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       FiniteElement::output(outfile);
     }
 
     /// Output function
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       // Set the output Vector
       Vector<double> s(2);
@@ -593,13 +593,13 @@ namespace oomph
     }
 
     /// Overload the output function
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
 
     /// Output function
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       // Set the output Vector
       Vector<double> s(2);
@@ -658,7 +658,7 @@ namespace oomph
   {
   private:
     /// Pointer to constitutive law
-    ConstitutiveLaw *Constitutive_law_pt;
+    ConstitutiveLaw* Constitutive_law_pt;
 
     /// Boolean to determine whether the solid is incompressible or not
     bool Incompressible;
@@ -666,13 +666,13 @@ namespace oomph
   protected:
     /// Access function that returns the local equation number for
     /// the n-th solid pressure value.
-    virtual int solid_p_local_eqn(const unsigned &i) = 0;
+    virtual int solid_p_local_eqn(const unsigned& i) = 0;
 
     /// Return the solid pressure shape functions
-    virtual void solid_pshape(const Vector<double> &s, Shape &psi) const = 0;
+    virtual void solid_pshape(const Vector<double>& s, Shape& psi) const = 0;
 
     /// Return the stored solid shape functions at the knots
-    void solid_pshape_at_knot(const unsigned &ipt, Shape &psi) const;
+    void solid_pshape_at_knot(const unsigned& ipt, Shape& psi) const;
 
   public:
     /// Constructor, by default the element is not incompressible
@@ -682,19 +682,19 @@ namespace oomph
     }
 
     /// Return the constitutive law pointer
-    ConstitutiveLaw *&constitutive_law_pt()
+    ConstitutiveLaw*& constitutive_law_pt()
     {
       return Constitutive_law_pt;
     }
 
     /// \short Return the stress tensor, as calculated from the constitutive law
     /// in the Near-incompresible formulation
-    void get_stress(const DenseMatrix<double> &g,
-                    const DenseMatrix<double> &G,
-                    DenseMatrix<double> &sigma,
-                    DenseMatrix<double> &Gup,
-                    double &pressure_stress,
-                    double &kappa)
+    void get_stress(const DenseMatrix<double>& g,
+                    const DenseMatrix<double>& G,
+                    DenseMatrix<double>& sigma,
+                    DenseMatrix<double>& Gup,
+                    double& pressure_stress,
+                    double& kappa)
     {
 #ifdef PARANOID
       // If the pointer to the constitutive law hasn't been set, issue an error
@@ -716,11 +716,11 @@ namespace oomph
 
     /// \short Return the stress tensor, as calculated from the constitutive law
     /// in the "true" incompresible formulation
-    void get_stress(const DenseMatrix<double> &g,
-                    const DenseMatrix<double> &G,
-                    DenseMatrix<double> &sigma,
-                    DenseMatrix<double> &Gup,
-                    double &detG)
+    void get_stress(const DenseMatrix<double>& g,
+                    const DenseMatrix<double>& G,
+                    DenseMatrix<double>& sigma,
+                    DenseMatrix<double>& Gup,
+                    double& detG)
     {
 #ifdef PARANOID
       // If the pointer to the constitutive law hasn't been set, issue an error
@@ -762,10 +762,10 @@ namespace oomph
     virtual unsigned nsolid_pres() const = 0;
 
     /// Return the lth solid pressures
-    virtual double solid_p(const unsigned &l) = 0;
+    virtual double solid_p(const unsigned& l) = 0;
 
     /// Return the residuals
-    inline void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    inline void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Call the generic residuals function with flag set to 0
       // using a dummy matrix argument
@@ -774,8 +774,8 @@ namespace oomph
     }
 
     /// Return the residuals and the jacobian
-    inline void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                                 DenseMatrix<double> &jacobian)
+    inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                                 DenseMatrix<double>& jacobian)
     {
       // Call the generic routine with the flag set to 1
       fill_in_generic_residual_contribution_axisym_pvd_with_pressure(
@@ -787,7 +787,7 @@ namespace oomph
     /// \short Return the residuals for the equations of solid mechanics
     /// formulated in the incompressible case!
     inline void fill_in_generic_residual_contribution_axisym_pvd_with_pressure(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag)
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag)
     {
       // Set the number of Lagrangian coordinates
       unsigned n_lagrangian = 2;
@@ -1226,7 +1226,7 @@ namespace oomph
     }
 
     /// Return the interpolated_solid_pressure
-    double interpolated_solid_p(const Vector<double> &s)
+    double interpolated_solid_p(const Vector<double>& s)
     {
       // Find number of nodes
       unsigned n_solid_pres = nsolid_pres();
@@ -1247,13 +1247,13 @@ namespace oomph
     }
 
     /// Overload the output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       FiniteElement::output(outfile);
     }
 
     /// Output function
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       // Set the output Vector
       Vector<double> s(2);
@@ -1288,13 +1288,13 @@ namespace oomph
     }
 
     /// Overload the output function
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
 
     /// Output function
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       // Set the output Vector
       Vector<double> s(2);
@@ -1346,13 +1346,13 @@ namespace oomph
     unsigned P_solid_internal_index;
 
     /// Overload the access function for the solid pressure equation numbers
-    inline int solid_p_local_eqn(const unsigned &i)
+    inline int solid_p_local_eqn(const unsigned& i)
     {
       return internal_local_eqn(P_solid_internal_index, i);
     }
 
     /// Return the pressure shape functions
-    inline void solid_pshape(const Vector<double> &s, Shape &psi) const;
+    inline void solid_pshape(const Vector<double>& s, Shape& psi) const;
 
   public:
     /// \short There is internal solid data so we can't use the automatic
@@ -1372,7 +1372,7 @@ namespace oomph
     }
 
     /// Return the l-th pressure value
-    double solid_p(const unsigned &l)
+    double solid_p(const unsigned& l)
     {
       return this->internal_data_pt(P_solid_internal_index)->value(l);
     }
@@ -1384,32 +1384,32 @@ namespace oomph
     }
 
     /// Fix the pressure dof l to the value pvalue
-    void fix_solid_pressure(const unsigned &l, const double &pvalue)
+    void fix_solid_pressure(const unsigned& l, const double& pvalue)
     {
       this->internal_data_pt(P_solid_internal_index)->pin(l);
       this->internal_data_pt(P_solid_internal_index)->set_value(l, pvalue);
     }
 
     /// Overload the output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       FiniteElement::output(outfile);
     }
 
     /// Output function
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       AxisymmetricPVDEquationsWithPressure::output(outfile, n_plot);
     }
 
     /// Overload the output function
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
 
     /// Output function
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       AxisymmetricPVDEquationsWithPressure::output(file_pt, n_plot);
     }
@@ -1417,7 +1417,7 @@ namespace oomph
 
   /// Define the pressure shape functions
   inline void AxisymQPVDElementWithPressure::solid_pshape(
-    const Vector<double> &s, Shape &psi) const
+    const Vector<double>& s, Shape& psi) const
   {
     psi[0] = 1.0;
     psi[1] = s[0];

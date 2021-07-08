@@ -52,13 +52,13 @@ using namespace MathematicalConstants;
 namespace GlobalPhysicalParameters
 {
   /// Prescribed volume flux -- must be assigned to Prescribed_volume_flux
-  double prescribed_volume_flux(const double &time)
+  double prescribed_volume_flux(const double& time)
   {
     return 2.0 * cos(2.0 * MathematicalConstants::Pi * time);
   }
 
   /// Prescribed pressure gradient
-  double prescribed_pressure_gradient(const double &time)
+  double prescribed_pressure_gradient(const double& time)
   {
     return 2.0 * cos(2.0 * MathematicalConstants::Pi * time);
   }
@@ -89,7 +89,7 @@ public:
   /// Constructor: Pass length and function that prescribes the volume
   /// flux to constructor of underlying base class
   RectangularWomersleyImpedanceTube(
-    const double &length,
+    const double& length,
     typename WomersleyImpedanceTubeBase<ELEMENT, 2>::PrescribedVolumeFluxFctPt
       prescribed_volume_flux_fct_pt) :
     WomersleyImpedanceTubeBase<ELEMENT, 2>(length,
@@ -101,7 +101,7 @@ public:
   /// WomersleyImpedanceTubeBase) that builds the mesh of Womersley elements
   /// (of the type specified by the template argument), using the
   /// specified timestepper. Also applies the boundary condition.
-  Mesh *build_mesh_and_apply_boundary_conditions(TimeStepper *time_stepper_pt)
+  Mesh* build_mesh_and_apply_boundary_conditions(TimeStepper* time_stepper_pt)
   {
     // Setup mesh
 
@@ -114,7 +114,7 @@ public:
     double ly = 1.0;
 
     // Build mesh
-    Mesh *my_mesh_pt =
+    Mesh* my_mesh_pt =
       new RectangularQuadMesh<ELEMENT>(nx, ny, lx, ly, time_stepper_pt);
 
     // Set the boundary conditions for this problem:
@@ -164,7 +164,7 @@ void run_navier_stokes_outflow()
 
   // Create geometric objects: Elliptical tube with half axes = radius = 1.0
   double radius = 1.0;
-  GeomObject *Wall_pt = new EllipticalTube(radius, radius);
+  GeomObject* Wall_pt = new EllipticalTube(radius, radius);
 
   // Boundaries on object
   Vector<double> xi_lo(2);
@@ -181,7 +181,7 @@ void run_navier_stokes_outflow()
   double frac_mid = 0.5;
 
   // Build volume mesh
-  RefineableQuarterTubeMesh<RefineableQTaylorHoodElement<3>> *n_st_mesh_pt =
+  RefineableQuarterTubeMesh<RefineableQTaylorHoodElement<3>>* n_st_mesh_pt =
     new RefineableQuarterTubeMesh<RefineableQTaylorHoodElement<3>>(
       Wall_pt, xi_lo, frac_mid, xi_hi, nlayer);
 
@@ -197,7 +197,7 @@ void run_navier_stokes_outflow()
   }
 
   // Create outflow mesh
-  Mesh *Outflow_traction_mesh_pt = new Mesh;
+  Mesh* Outflow_traction_mesh_pt = new Mesh;
 
   // Populate it...
   unsigned b = n_st_mesh_pt->nboundary() - 1;
@@ -207,8 +207,8 @@ void run_navier_stokes_outflow()
     for (unsigned e = 0; e < n_bound_el; e++)
     {
       // Get pointer to bulk element
-      RefineableQTaylorHoodElement<3> *bulk_elem_pt =
-        dynamic_cast<RefineableQTaylorHoodElement<3> *>(
+      RefineableQTaylorHoodElement<3>* bulk_elem_pt =
+        dynamic_cast<RefineableQTaylorHoodElement<3>*>(
           n_st_mesh_pt->boundary_element_pt(b, e));
 
       // What is the index of the face of element e along boundary b
@@ -217,7 +217,7 @@ void run_navier_stokes_outflow()
       // Build the corresponding prescribed traction element
       NavierStokesImpedanceTractionElement<RefineableQTaylorHoodElement<3>,
                                            QWomersleyElement<2, 3>,
-                                           2> *traction_element_pt =
+                                           2>* traction_element_pt =
         new NavierStokesImpedanceTractionElement<
           RefineableQTaylorHoodElement<3>,
           QWomersleyElement<2, 3>,
@@ -235,8 +235,8 @@ void run_navier_stokes_outflow()
   // Build Womersley impedance tube
   unsigned fixed_coordinate = 2;
   unsigned w_index = 2;
-  WomersleyOutflowImpedanceTube<QWomersleyElement<2, 3>, 2>
-    *womersley_impedance_tube_pt =
+  WomersleyOutflowImpedanceTube<QWomersleyElement<2, 3>, 2>*
+    womersley_impedance_tube_pt =
       new WomersleyOutflowImpedanceTube<QWomersleyElement<2, 3>, 2>(
         GlobalPhysicalParameters::L_impedance,
         Outflow_traction_mesh_pt,
@@ -285,7 +285,7 @@ void run_navier_stokes_outflow()
     unsigned nnod = n_st_mesh_pt->nnode();
     for (unsigned j = 0; j < nnod; j++)
     {
-      Node *nod_pt = n_st_mesh_pt->node_pt(j);
+      Node* nod_pt = n_st_mesh_pt->node_pt(j);
       double x = nod_pt->x(0);
       double y = nod_pt->x(1);
       double time =
@@ -348,8 +348,8 @@ void run_impedance_tube()
   double dt = 0.05;
 
   // Build Womersley impedance tube
-  RectangularWomersleyImpedanceTube<QWomersleyElement<2, 4>>
-    *womersley_impedance_tube_pt =
+  RectangularWomersleyImpedanceTube<QWomersleyElement<2, 4>>*
+    womersley_impedance_tube_pt =
       new RectangularWomersleyImpedanceTube<QWomersleyElement<2, 4>>(
         GlobalPhysicalParameters::L_impedance,
         &GlobalPhysicalParameters::prescribed_volume_flux);
@@ -412,7 +412,7 @@ void run_impedance_tube()
 void run_prescribed_flux()
 {
   // Create timestepper
-  TimeStepper *time_stepper_pt = new BDF<2>;
+  TimeStepper* time_stepper_pt = new BDF<2>;
 
   // Setup mesh
 
@@ -425,7 +425,7 @@ void run_prescribed_flux()
   double ly = 1.0;
 
   // Build mesh
-  Mesh *my_mesh_pt = new RectangularQuadMesh<QWomersleyElement<2, 4>>(
+  Mesh* my_mesh_pt = new RectangularQuadMesh<QWomersleyElement<2, 4>>(
     nx, ny, lx, ly, time_stepper_pt);
 
   // Set the boundary conditions for this problem:
@@ -525,7 +525,7 @@ void run_prescribed_flux()
 void run_prescribed_pressure_gradient()
 {
   // Create timestepper
-  TimeStepper *time_stepper_pt = new BDF<2>;
+  TimeStepper* time_stepper_pt = new BDF<2>;
 
   // Setup mesh
 
@@ -538,7 +538,7 @@ void run_prescribed_pressure_gradient()
   double ly = 1.0;
 
   // Build mesh
-  Mesh *my_mesh_pt = new RectangularQuadMesh<QWomersleyElement<2, 4>>(
+  Mesh* my_mesh_pt = new RectangularQuadMesh<QWomersleyElement<2, 4>>(
     nx, ny, lx, ly, time_stepper_pt);
 
   // Set the boundary conditions for this problem:

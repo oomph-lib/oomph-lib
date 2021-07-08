@@ -51,11 +51,11 @@ namespace oomph
   //===========================================================================
   template<class ELEMENT>
   HorizontalSingleLayerSpineMesh<ELEMENT>::HorizontalSingleLayerSpineMesh(
-    const unsigned &nx,
-    const unsigned &ny,
-    const double &lx,
-    const double &h,
-    TimeStepper *time_stepper_pt) :
+    const unsigned& nx,
+    const unsigned& ny,
+    const double& lx,
+    const double& h,
+    TimeStepper* time_stepper_pt) :
     RectangularQuadMesh<ELEMENT>(
       nx, ny, 0.0, lx, 0.0, h, false, false, time_stepper_pt)
   {
@@ -78,7 +78,7 @@ namespace oomph
   //===========================================================================
   template<class ELEMENT>
   void HorizontalSingleLayerSpineMesh<
-    ELEMENT>::build_horizontal_single_layer_mesh(TimeStepper *time_stepper_pt)
+    ELEMENT>::build_horizontal_single_layer_mesh(TimeStepper* time_stepper_pt)
   {
     // Build the underlying quad mesh:
     RectangularQuadMesh<ELEMENT>::build_mesh(time_stepper_pt);
@@ -91,7 +91,7 @@ namespace oomph
     //---------------------------------------------------------
 
     // Read out number of linear points in the element
-    unsigned n_p = dynamic_cast<ELEMENT *>(finite_element_pt(0))->nnode_1d();
+    unsigned n_p = dynamic_cast<ELEMENT*>(finite_element_pt(0))->nnode_1d();
     Spine_pt.reserve((n_p - 1) * n_y + 1);
 
     // FIRST SPINE
@@ -100,11 +100,11 @@ namespace oomph
     // Element 0
     // Node 0
     // Assign the new spine with unit length
-    Spine *new_spine_pt = new Spine(1.0);
+    Spine* new_spine_pt = new Spine(1.0);
     Spine_pt.push_back(new_spine_pt);
 
     // Get pointer to node
-    SpineNode *nod_pt = element_node_pt(0, 0);
+    SpineNode* nod_pt = element_node_pt(0, 0);
     // Set the pointer to the spine
     nod_pt->spine_pt() = new_spine_pt;
     // Set the fraction
@@ -123,7 +123,7 @@ namespace oomph
         // SpineNode* nod_pt=element_node_pt(i*n_y,l1*n_p);
 
         // Get pointer to node(without reoder)
-        SpineNode *nod_pt = element_node_pt(i, l1);
+        SpineNode* nod_pt = element_node_pt(i, l1);
         // Set the pointer to the spine
         nod_pt->spine_pt() = new_spine_pt;
         // Set the fraction
@@ -156,7 +156,7 @@ namespace oomph
         // SpineNode* nod_pt=element_node_pt(j,l2);
 
         // Get the node (without reorder)
-        SpineNode *nod_pt = element_node_pt(j * n_x, l2 * n_p);
+        SpineNode* nod_pt = element_node_pt(j * n_x, l2 * n_p);
         // Set the pointer to spine
         nod_pt->spine_pt() = new_spine_pt;
         // Set the fraction
@@ -175,7 +175,7 @@ namespace oomph
             // SpineNode* nod_pt=element_node_pt(i*n_y+j,l1*n_p+l2);
 
             // Get the node (without reorder)
-            SpineNode *nod_pt = element_node_pt(j * n_x + i, l2 * n_p + l1);
+            SpineNode* nod_pt = element_node_pt(j * n_x + i, l2 * n_p + l1);
             // Set the pointer to the spine
             nod_pt->spine_pt() = new_spine_pt;
             // Set the fraction

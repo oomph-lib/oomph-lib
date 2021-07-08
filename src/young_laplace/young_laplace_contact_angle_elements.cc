@@ -39,7 +39,7 @@ namespace oomph
   //===========================================================================
   template<class ELEMENT>
   YoungLaplaceContactAngleElement<ELEMENT>::YoungLaplaceContactAngleElement(
-    FiniteElement *const &bulk_el_pt, const int &face_index) :
+    FiniteElement* const& bulk_el_pt, const int& face_index) :
     FaceGeometry<ELEMENT>(), FaceElement()
   {
     // Let the bulk element build the FaceElement, i.e. setup the pointers
@@ -69,7 +69,7 @@ namespace oomph
   //================================================================
   template<class ELEMENT>
   void YoungLaplaceContactAngleElement<
-    ELEMENT>::fill_in_contribution_to_residuals(Vector<double> &residuals)
+    ELEMENT>::fill_in_contribution_to_residuals(Vector<double>& residuals)
   {
     // Find out how many nodes there are
     unsigned n_node = nnode();
@@ -152,10 +152,10 @@ namespace oomph
   //========================================================================
   template<class ELEMENT>
   double YoungLaplaceContactAngleElement<ELEMENT>::actual_cos_contact_angle(
-    const Vector<double> &s)
+    const Vector<double>& s)
   {
     // Get pointer to bulk element
-    ELEMENT *bulk_elem_pt = dynamic_cast<ELEMENT *>(this->bulk_element_pt());
+    ELEMENT* bulk_elem_pt = dynamic_cast<ELEMENT*>(this->bulk_element_pt());
 
     double cos_gamma = 0.0;
 
@@ -261,14 +261,14 @@ namespace oomph
   //========================================================================
   template<class ELEMENT>
   void YoungLaplaceContactAngleElement<ELEMENT>::contact_line_vectors(
-    const Vector<double> &s,
-    Vector<double> &tangent,
-    Vector<double> &normal,
-    Vector<double> &spine,
-    double &norm_of_drds)
+    const Vector<double>& s,
+    Vector<double>& tangent,
+    Vector<double>& normal,
+    Vector<double>& spine,
+    double& norm_of_drds)
   {
     // Get pointer to bulk element
-    ELEMENT *bulk_elem_pt = dynamic_cast<ELEMENT *>(this->bulk_element_pt());
+    ELEMENT* bulk_elem_pt = dynamic_cast<ELEMENT*>(this->bulk_element_pt());
 
     // Dimension of (= number of local coordinates in) bulk element
     unsigned dim_bulk = bulk_elem_pt->dim();

@@ -49,7 +49,7 @@ class MyCurvedCylinder : public GeomObject
 public:
   /// Constructor that takes the radius and curvature of the tube
   /// as its arguments
-  MyCurvedCylinder(const double &radius, const double &delta) :
+  MyCurvedCylinder(const double& radius, const double& delta) :
     GeomObject(3, 3), Radius(radius), Delta(delta)
   {
   }
@@ -58,7 +58,7 @@ public:
   virtual ~MyCurvedCylinder() {}
 
   /// Lagrangian coordinate xi
-  void position(const Vector<double> &xi, Vector<double> &r) const
+  void position(const Vector<double>& xi, Vector<double>& r) const
   {
     r[0] =
       (1.0 / Delta) * cos(xi[0]) + xi[2] * Radius * cos(xi[0]) * cos(xi[1]);
@@ -69,9 +69,9 @@ public:
 
   /// Return the position of the tube as a function of time
   /// (doesn't move as a function of time)
-  void position(const unsigned &t,
-                const Vector<double> &xi,
-                Vector<double> &r) const
+  void position(const unsigned& t,
+                const Vector<double>& xi,
+                Vector<double>& r) const
   {
     position(xi, r);
   }
@@ -104,9 +104,9 @@ class SteadyCurvedTubeProblem : public Problem
 {
 public:
   /// Constructor: Pass DocInfo object and target errors
-  SteadyCurvedTubeProblem(DocInfo &doc_info,
-                          const double &min_error_target,
-                          const double &max_error_target);
+  SteadyCurvedTubeProblem(DocInfo& doc_info,
+                          const double& min_error_target,
+                          const double& max_error_target);
 
   /// Destructor (empty)
   ~SteadyCurvedTubeProblem() {}
@@ -127,9 +127,9 @@ public:
 
   /// \short Overload generic access function by one that returns
   /// a pointer to the specific  mesh
-  RefineableTubeMesh<ELEMENT> *mesh_pt()
+  RefineableTubeMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<RefineableTubeMesh<ELEMENT> *>(Problem::mesh_pt());
+    return dynamic_cast<RefineableTubeMesh<ELEMENT>*>(Problem::mesh_pt());
   }
 
 private:
@@ -137,7 +137,7 @@ private:
   DocInfo Doc_info;
 
   /// Pointer to GeomObject that specifies the domain volume
-  GeomObject *Volume_pt;
+  GeomObject* Volume_pt;
 
 }; // end_of_problem_class
 
@@ -146,9 +146,9 @@ private:
 //========================================================================
 template<class ELEMENT>
 SteadyCurvedTubeProblem<ELEMENT>::SteadyCurvedTubeProblem(
-  DocInfo &doc_info,
-  const double &min_error_target,
-  const double &max_error_target) :
+  DocInfo& doc_info,
+  const double& min_error_target,
+  const double& max_error_target) :
   Doc_info(doc_info)
 {
   // Setup mesh:
@@ -188,7 +188,7 @@ SteadyCurvedTubeProblem<ELEMENT>::SteadyCurvedTubeProblem(
     Volume_pt, centreline_limits, theta_positions, radial_frac, nlayer);
 
   // Set error estimator
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   mesh_pt()->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Error targets for adaptive refinement
@@ -229,7 +229,7 @@ SteadyCurvedTubeProblem<ELEMENT>::SteadyCurvedTubeProblem(
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the Reynolds number, etc
     el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -307,7 +307,7 @@ void SteadyCurvedTubeProblem<ELEMENT>::doc_solution()
 /// any command line arguments, we regard this as a validation run
 /// and perform only a single adaptation
 //=====================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

@@ -43,7 +43,7 @@ namespace oomph
   {
   public:
     /// Constructor
-    HalfEllipse(const double &centre_z, const double &a, const double &b) :
+    HalfEllipse(const double& centre_z, const double& a, const double& b) :
       GeomObject(1, 2), Centre_z(centre_z), A(a), B(b)
     {
     }
@@ -52,26 +52,26 @@ namespace oomph
     ~HalfEllipse() {}
 
     /// Return the position of the Half Ellipse
-    void position(const Vector<double> &xi, Vector<double> &r) const
+    void position(const Vector<double>& xi, Vector<double>& r) const
     {
       r[0] = A * sin(xi[0]);
       r[1] = Centre_z + B * cos(xi[0]);
     }
 
     /// Access to  z-coordinate of centre
-    double &centre_z()
+    double& centre_z()
     {
       return Centre_z;
     }
 
     /// Access to r-half axis
-    double &a()
+    double& a()
     {
       return A;
     }
 
     /// Access to z-half axis
-    double &b()
+    double& b()
     {
       return B;
     }
@@ -101,15 +101,15 @@ namespace oomph
     /// represents the cylinder, the length (z) and half-height (r) of the
     /// domain. The GeomObject must be parametrised such that \f$\zeta \in
     /// [0,\pi]\f$ sweeps around the circumference in anticlockwise direction.
-    HalfRectangleWithHoleDomain(GeomObject *cylinder_pt,
-                                const double &radius,
-                                const double &length,
-                                const double &up_length,
-                                const unsigned &nup,
-                                const double &down_length,
-                                const unsigned &ndown,
-                                const double &width_near_cylinder,
-                                const unsigned &ncolumn) :
+    HalfRectangleWithHoleDomain(GeomObject* cylinder_pt,
+                                const double& radius,
+                                const double& length,
+                                const double& up_length,
+                                const unsigned& nup,
+                                const double& down_length,
+                                const unsigned& ndown,
+                                const double& width_near_cylinder,
+                                const unsigned& ncolumn) :
       Cylinder_pt(cylinder_pt), Nup(nup), Ndown(ndown), Ncolumn(ncolumn)
     {
       // Axial spacing between lines
@@ -210,8 +210,8 @@ namespace oomph
     /// "right" and "left" points; \f$ s \in [-1,1] \f$
     void linear_interpolate(Vector<double> left,
                             Vector<double> right,
-                            const double &s,
-                            Vector<double> &f)
+                            const double& s,
+                            Vector<double>& f)
     {
       for (unsigned i = 0; i < 2; i++)
       {
@@ -223,11 +223,11 @@ namespace oomph
     /// vector to macro-element m's boundary in the specified direction
     /// [N/S/E/W] at the specfied discrete time level (time=0: present; time>0:
     /// previous)
-    void macro_element_boundary(const unsigned &time,
-                                const unsigned &m,
-                                const unsigned &direction,
-                                const Vector<double> &s,
-                                Vector<double> &f)
+    void macro_element_boundary(const unsigned& time,
+                                const unsigned& m,
+                                const unsigned& direction,
+                                const Vector<double>& s,
+                                Vector<double>& f)
     {
       // Lagrangian coordinate along surface of cylinder
       Vector<double> xi(1);
@@ -567,7 +567,7 @@ namespace oomph
     Vector<Vector<Vector<double>>> Down;
 
     /// Pointer to geometric object that represents the central cylinder
-    GeomObject *Cylinder_pt;
+    GeomObject* Cylinder_pt;
 
     /// Number of upstream macro elements
     unsigned Nup;
@@ -597,16 +597,16 @@ namespace oomph
     /// in anticlockwise direction. Timestepper defaults to Steady
     /// default timestepper.
     HalfRectangleWithHoleMesh(
-      GeomObject *cylinder_pt,
-      const double &radius,
-      const double &length,
-      const double &up_length,
-      const unsigned &nup,
-      const double &down_length,
-      const unsigned &ndown,
-      const double &width_near_cylinder,
-      const unsigned &ncolumn,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper)
+      GeomObject* cylinder_pt,
+      const double& radius,
+      const double& length,
+      const double& up_length,
+      const unsigned& nup,
+      const double& down_length,
+      const unsigned& ndown,
+      const double& width_near_cylinder,
+      const unsigned& ncolumn,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
     {
       // Create the domain
       Domain_pt = new HalfRectangleWithHoleDomain(cylinder_pt,
@@ -626,7 +626,7 @@ namespace oomph
       Vector<double> s(2), r(2);
 
       // Setup temporary storage for the Node
-      Vector<Node *> Tmp_node_pt;
+      Vector<Node*> Tmp_node_pt;
 
       // Now blindly loop over the macro elements and associate and finite
       // element with each
@@ -637,7 +637,7 @@ namespace oomph
         Element_pt.push_back(new ELEMENT);
 
         // Read out the number of linear points in the element
-        unsigned np = dynamic_cast<ELEMENT *>(finite_element_pt(e))->nnode_1d();
+        unsigned np = dynamic_cast<ELEMENT*>(finite_element_pt(e))->nnode_1d();
 
         // Loop over nodes in the column
         for (unsigned l1 = 0; l1 < np; l1++)
@@ -669,7 +669,7 @@ namespace oomph
       // pointers and the deleting excess nodes
 
       // Read out the number of linear points in the element
-      unsigned np = dynamic_cast<ELEMENT *>(finite_element_pt(0))->nnode_1d();
+      unsigned np = dynamic_cast<ELEMENT*>(finite_element_pt(0))->nnode_1d();
 
       // Edges between the upstream elements including that immediately below
       // the cylinder
@@ -804,7 +804,7 @@ namespace oomph
       for (unsigned n = 0; n < np; n++)
       {
         // First part of left hand side
-        Node *nod_pt = finite_element_pt(0)->node_pt(n * np);
+        Node* nod_pt = finite_element_pt(0)->node_pt(n * np);
         convert_to_boundary_node(nod_pt);
         add_boundary_node(3, nod_pt);
 
@@ -840,7 +840,7 @@ namespace oomph
         for (unsigned m = 1; m < nup; m++)
         {
           // Next part of left hand side
-          Node *nod_pt = finite_element_pt(m)->node_pt(n * np);
+          Node* nod_pt = finite_element_pt(m)->node_pt(n * np);
           convert_to_boundary_node(nod_pt);
           add_boundary_node(3, nod_pt);
 
@@ -851,7 +851,7 @@ namespace oomph
         }
 
         // Next part of hole
-        Node *nod_pt = finite_element_pt(nup + 1)->node_pt(n * np);
+        Node* nod_pt = finite_element_pt(nup + 1)->node_pt(n * np);
         convert_to_boundary_node(nod_pt);
         add_boundary_node(4, nod_pt);
       }
@@ -866,7 +866,7 @@ namespace oomph
       for (unsigned n = 1; n < np; n++)
       {
         // Next two parts of left boundary
-        Node *nod_pt = finite_element_pt(nup)->node_pt(n * np);
+        Node* nod_pt = finite_element_pt(nup)->node_pt(n * np);
         convert_to_boundary_node(nod_pt);
         add_boundary_node(3, nod_pt);
 
@@ -888,7 +888,7 @@ namespace oomph
         for (unsigned m = nup + 3; m < (nup + ndown + 3); m++)
         {
           // Next part of left hand side
-          Node *nod_pt = finite_element_pt(m)->node_pt(n * np);
+          Node* nod_pt = finite_element_pt(m)->node_pt(n * np);
           convert_to_boundary_node(nod_pt);
           add_boundary_node(3, nod_pt);
 
@@ -904,7 +904,7 @@ namespace oomph
         {
           for (unsigned m = nup + 1; m < (nup + ndown + 1); m++)
           {
-            Node *nod_pt =
+            Node* nod_pt =
               finite_element_pt(rhs_offset + m)->node_pt(n * np + np - 1);
             convert_to_boundary_node(nod_pt);
             add_boundary_node(1, nod_pt);
@@ -918,7 +918,7 @@ namespace oomph
       {
         for (unsigned n = 1; n < np; n++)
         {
-          Node *nod_pt = finite_element_pt(lower_index)->node_pt(n);
+          Node* nod_pt = finite_element_pt(lower_index)->node_pt(n);
           convert_to_boundary_node(nod_pt);
           add_boundary_node(0, nod_pt);
 
@@ -935,14 +935,14 @@ namespace oomph
     }
 
     /// Access function to the domain
-    HalfRectangleWithHoleDomain *domain_pt()
+    HalfRectangleWithHoleDomain* domain_pt()
     {
       return Domain_pt;
     }
 
   protected:
     /// Pointer to the domain
-    HalfRectangleWithHoleDomain *Domain_pt;
+    HalfRectangleWithHoleDomain* Domain_pt;
   };
 
   //////////////////////////////////////////////////////////////////////////
@@ -967,16 +967,16 @@ namespace oomph
     /// in anticlockwise direction. Timestepper defaults to Steady
     /// default timestepper.
     RefineableHalfRectangleWithHoleMesh(
-      GeomObject *cylinder_pt,
-      const double &radius,
-      const double &length,
-      const double &up_length,
-      const unsigned &nup,
-      const double &down_length,
-      const unsigned &ndown,
-      const double &width_near_cylinder,
-      const unsigned &ncolumn,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      GeomObject* cylinder_pt,
+      const double& radius,
+      const double& length,
+      const double& up_length,
+      const unsigned& nup,
+      const double& down_length,
+      const unsigned& ndown,
+      const double& width_near_cylinder,
+      const unsigned& ncolumn,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       HalfRectangleWithHoleMesh<ELEMENT>(cylinder_pt,
                                          radius,
                                          length,
@@ -994,7 +994,7 @@ namespace oomph
       // Loop over all elements and set macro element pointer
       for (unsigned e = 0; e < (ndown + nup + 3); e++)
       {
-        dynamic_cast<ELEMENT *>(this->element_pt(e))
+        dynamic_cast<ELEMENT*>(this->element_pt(e))
           ->set_macro_elem_pt(this->Domain_pt->macro_element_pt(e));
       }
 

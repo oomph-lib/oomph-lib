@@ -54,7 +54,7 @@ class NonIsothermalAxisymmetricQCrouzeixRaviartElement :
 public:
   /// \short Function pointer to the function that specifies the
   /// viscosity ratio as function of the temperature.
-  typedef void (*ViscosityRatioFctPt)(double &temperature, double &result);
+  typedef void (*ViscosityRatioFctPt)(double& temperature, double& result);
 
   /// \short Constructor: call the QSteadyAxisymAdvectionDiffusionElement
   /// and AxisymmetricQCrouzeixRaviartElement
@@ -68,14 +68,14 @@ public:
   ///\short The required number of values stored at the nodes is the sum of the
   /// required values of the two single-physics  elements. Note that this step
   /// is generic for any multi-physics element of this type.
-  unsigned required_nvalue(const unsigned &n) const
+  unsigned required_nvalue(const unsigned& n) const
   {
     return (QSteadyAxisymAdvectionDiffusionElement<3>::required_nvalue(n) +
             AxisymmetricQCrouzeixRaviartElement::required_nvalue(n));
   }
 
   /// Overload the standard output function with the broken default
-  void output(ostream &outfile)
+  void output(ostream& outfile)
   {
     FiniteElement::output(outfile);
   }
@@ -83,7 +83,7 @@ public:
   /// \short Output function:
   ///  Output r, z, u, w, v, p, theta at Nplot^2 plot points
   // Start of output function
-  void output(ostream &outfile, const unsigned &nplot)
+  void output(ostream& outfile, const unsigned& nplot)
   {
     // vector of local coordinates
     Vector<double> s(2);
@@ -123,20 +123,20 @@ public:
   } // End of output function
 
   /// \short C-style output function: Broken default
-  void output(FILE *file_pt)
+  void output(FILE* file_pt)
   {
     FiniteElement::output(file_pt);
   }
 
   ///  \short C-style output function: Broken default
-  void output(FILE *file_pt, const unsigned &n_plot)
+  void output(FILE* file_pt, const unsigned& n_plot)
   {
     FiniteElement::output(file_pt, n_plot);
   }
 
   /// \short Output function for an exact solution: Broken default
-  void output_fct(ostream &outfile,
-                  const unsigned &Nplot,
+  void output_fct(ostream& outfile,
+                  const unsigned& Nplot,
                   FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
   {
     FiniteElement::output_fct(outfile, Nplot, exact_soln_pt);
@@ -154,16 +154,16 @@ public:
   /// Plot at a given number of plot points and compute L2 error
   /// and L2 norm of velocity solution over element
   /// Call the broken default
-  void compute_error(ostream &outfile,
+  void compute_error(ostream& outfile,
                      FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-                     double &error,
-                     double &norm)
+                     double& error,
+                     double& norm)
   {
     FiniteElement::compute_error(outfile, exact_soln_pt, error, norm);
   }
 
   /// Access function: Pointer to viscosity ratio function
-  ViscosityRatioFctPt &viscosity_ratio_fct_pt()
+  ViscosityRatioFctPt& viscosity_ratio_fct_pt()
   {
     return Viscosity_ratio_fct_pt;
   }
@@ -177,10 +177,10 @@ public:
   /// \short Overload the viscosity ratio in the Navier-Stokes equations
   /// This provides the coupling from axisymmetric advection-diffusion equations
   /// to the Axisymmetric Navier--Stokes equations.
-  inline virtual void get_viscosity_ratio_axisym_nst(const unsigned &ipt,
-                                                     const Vector<double> &s,
-                                                     const Vector<double> &x,
-                                                     double &visco)
+  inline virtual void get_viscosity_ratio_axisym_nst(const unsigned& ipt,
+                                                     const Vector<double>& s,
+                                                     const Vector<double>& x,
+                                                     double& visco)
   {
     // If the function pointer is zero return zero
     if (Viscosity_ratio_fct_pt == 0)
@@ -211,10 +211,10 @@ public:
   /// \short Overload the wind function in the advection-diffusion equations.
   /// This provides the coupling from the Navier--Stokes equations to the
   /// advection-diffusion equations because the wind is the fluid velocity.
-  void get_wind_axisym_adv_diff(const unsigned &ipt,
-                                const Vector<double> &s,
-                                const Vector<double> &x,
-                                Vector<double> &wind) const
+  void get_wind_axisym_adv_diff(const unsigned& ipt,
+                                const Vector<double>& s,
+                                const Vector<double>& x,
+                                Vector<double>& wind) const
   {
     // The wind function is simply the velocity at the points
     this->interpolated_u_axi_nst(s, wind);
@@ -225,7 +225,7 @@ public:
   /// in the vector to zero. This allows us to call the
   /// fill_in_* functions of the constituent single-physics elements
   /// sequentially, without wiping out any previously computed entries.
-  void fill_in_contribution_to_residuals(Vector<double> &residuals)
+  void fill_in_contribution_to_residuals(Vector<double>& residuals)
   {
     // Fill in the residuals of the Navier-Stokes equations
     AxisymmetricNavierStokesEquations::fill_in_contribution_to_residuals(
@@ -242,8 +242,8 @@ public:
 
   ///\short Compute the element's residual vector and the Jacobian matrix.
   /// Jacobian is computed by finite-differencing.
-  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                        DenseMatrix<double> &jacobian)
+  void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                        DenseMatrix<double>& jacobian)
   {
     // This function computes the Jacobian by finite-differencing
     FiniteElement::fill_in_contribution_to_jacobian(residuals, jacobian);
@@ -257,8 +257,8 @@ public:
 
   ///\short Helper function to get the off-diagonal blocks of the Jacobian
   /// matrix by finite differences
-  void fill_in_off_diagonal_jacobian_blocks_by_fd(Vector<double> &residuals,
-                                                  DenseMatrix<double> &jacobian)
+  void fill_in_off_diagonal_jacobian_blocks_by_fd(Vector<double>& residuals,
+                                                  DenseMatrix<double>& jacobian)
   {
     // Local storage for the index in the nodes at which the
     // Navier-Stokes velocities are stored (we know that this should be 0,1,2)
@@ -302,7 +302,7 @@ public:
         if (local_unknown >= 0)
         {
           // Get a pointer to the velocity value
-          double *value_pt = this->node_pt(n)->value_pt(u_nodal_nst[i]);
+          double* value_pt = this->node_pt(n)->value_pt(u_nodal_nst[i]);
 
           // Save the old value
           double old_var = *value_pt;
@@ -351,7 +351,7 @@ public:
         if (local_unknown >= 0)
         {
           // Get a pointer to the concentration value
-          double *value_pt = this->node_pt(n)->value_pt(u_nodal_adv_diff);
+          double* value_pt = this->node_pt(n)->value_pt(u_nodal_adv_diff);
 
           // Save the old value
           double old_var = *value_pt;
@@ -397,8 +397,8 @@ public:
 
   ///\short Compute the element's residual Vector and the Jacobian matrix.
   /// Use finite-differencing only for the off-diagonal blocks.
-  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                        DenseMatrix<double> &jacobian)
+  void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                        DenseMatrix<double>& jacobian)
   {
     // Calculate the Navier-Stokes contributions (diagonal block and residuals)
     AxisymmetricNavierStokesEquations::fill_in_contribution_to_jacobian(
@@ -421,7 +421,7 @@ public:
   ///\short Helper function to get the off-diagonal blocks of the Jacobian
   /// matrix analytically
   void fill_in_off_diagonal_jacobian_blocks_analytic(
-    Vector<double> &residuals, DenseMatrix<double> &jacobian)
+    Vector<double>& residuals, DenseMatrix<double>& jacobian)
   {
     // We now fill in the off-diagonal (interaction) blocks analytically
     // This requires knowledge of exactly how the residuals are assembled
@@ -523,8 +523,8 @@ public:
 
   ///\short Compute the element's residual Vector and the Jacobian matrix.
   /// Use analytic expressions for the off-diagonal blocks
-  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                        DenseMatrix<double> &jacobian)
+  void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                        DenseMatrix<double>& jacobian)
   {
     // Calculate the Navier-Stokes contributions (diagonal block and residuals)
     AxisymmetricNavierStokesEquations::fill_in_contribution_to_jacobian(

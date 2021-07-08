@@ -64,13 +64,13 @@ namespace oomph
 
     /// Broken copy constructor
     RefineableLinearWaveEquations(
-      const RefineableLinearWaveEquations<DIM> &dummy)
+      const RefineableLinearWaveEquations<DIM>& dummy)
     {
       BrokenCopy::broken_copy("RefineableLinearWaveEquations");
     }
 
     /// Broken assignment operator
-    void operator=(const RefineableLinearWaveEquations<DIM> &)
+    void operator=(const RefineableLinearWaveEquations<DIM>&)
     {
       BrokenCopy::broken_assign("RefineableLinearWaveEquations");
     }
@@ -83,7 +83,7 @@ namespace oomph
 
     /// Get 'flux' for Z2 error recovery:  Standard flux.from LinearWave
     /// equations
-    void get_Z2_flux(const Vector<double> &s, Vector<double> &flux)
+    void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
       this->get_flux(s, flux);
     }
@@ -92,8 +92,8 @@ namespace oomph
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines), the values Vector sets its own size in here.
-    void get_interpolated_values(const Vector<double> &s,
-                                 Vector<double> &values)
+    void get_interpolated_values(const Vector<double>& s,
+                                 Vector<double>& values)
     {
       // Set size of Vector: u
       values.resize(1);
@@ -124,9 +124,9 @@ namespace oomph
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines), the values Vector sets its own size in here.
-    void get_interpolated_values(const unsigned &t,
-                                 const Vector<double> &s,
-                                 Vector<double> &values)
+    void get_interpolated_values(const unsigned& t,
+                                 const Vector<double>& s,
+                                 Vector<double>& values)
     {
       // Set size of Vector:
       values.resize(1);
@@ -154,7 +154,7 @@ namespace oomph
     ///  Further build: Copy source function pointer from father element
     void further_build()
     {
-      this->Source_fct_pt = dynamic_cast<RefineableLinearWaveEquations<DIM> *>(
+      this->Source_fct_pt = dynamic_cast<RefineableLinearWaveEquations<DIM>*>(
                               this->father_element_pt())
                               ->source_fct_pt();
     }
@@ -165,7 +165,7 @@ namespace oomph
     /// flag=1: compute both
     /// flag=0: compute only residual vector
     void fill_in_generic_residual_contribution_lin_wave(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag);
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
   };
 
   //======================================================================
@@ -191,13 +191,13 @@ namespace oomph
 
     /// Broken copy constructor
     RefineableQLinearWaveElement(
-      const RefineableQLinearWaveElement<DIM, NNODE_1D> &dummy)
+      const RefineableQLinearWaveElement<DIM, NNODE_1D>& dummy)
     {
       BrokenCopy::broken_copy("RefineableQuadLinearWaveElement");
     }
 
     /// Broken assignment operator
-    void operator=(const RefineableQLinearWaveElement<DIM, NNODE_1D> &)
+    void operator=(const RefineableQLinearWaveElement<DIM, NNODE_1D>&)
     {
       BrokenCopy::broken_assign("RefineableQuadLinearWaveElement");
     }
@@ -215,13 +215,13 @@ namespace oomph
     }
 
     /// \short Pointer to the j-th vertex node in the element
-    Node *vertex_node_pt(const unsigned &j) const
+    Node* vertex_node_pt(const unsigned& j) const
     {
       return QLinearWaveElement<DIM, NNODE_1D>::vertex_node_pt(j);
     }
 
     /// Rebuild from sons: empty
-    void rebuild_from_sons(Mesh *&mesh_pt) {}
+    void rebuild_from_sons(Mesh*& mesh_pt) {}
 
     /// \short Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.

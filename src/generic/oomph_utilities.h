@@ -83,7 +83,7 @@ namespace oomph
   namespace SecondInvariantHelper
   {
     /// Compute second invariant of tensor
-    extern double second_invariant(const DenseMatrix<double> &tensor);
+    extern double second_invariant(const DenseMatrix<double>& tensor);
 
   } // namespace SecondInvariantHelper
 
@@ -94,10 +94,10 @@ namespace oomph
   namespace BrokenCopy
   {
     /// Issue error message and terminate execution
-    extern void broken_assign(const std::string &class_name);
+    extern void broken_assign(const std::string& class_name);
 
     /// Issue error message and terminate execution
-    extern void broken_copy(const std::string &class_name);
+    extern void broken_copy(const std::string& class_name);
 
   } // namespace BrokenCopy
 
@@ -123,7 +123,7 @@ namespace oomph
   {
   public:
     /// Comparison. Are the values identical or not?
-    bool operator()(const T &x, const T &y) const
+    bool operator()(const T& x, const T& y) const
     {
       return std::abs(x) < std::abs(y);
     }
@@ -147,24 +147,24 @@ namespace oomph
     }
 
     /// \short Convert a string to lower case (outputs a copy).
-    std::string to_lower(const std::string &input);
+    std::string to_lower(const std::string& input);
 
     /// \short Convert a string to upper case (outputs a copy).
-    std::string to_upper(const std::string &input);
+    std::string to_upper(const std::string& input);
 
     /// \short Split a string, s, into a vector of strings where ever there is
     /// an instance of delimiter (i.e. is delimiter is " " will give a list of
     /// words). Note that multiple delimiters in a row will give empty
     /// strings.
-    void split_string(const std::string &s,
+    void split_string(const std::string& s,
                       char delim,
-                      Vector<std::string> &elems);
+                      Vector<std::string>& elems);
 
     /// \short Split a string, s, into a vector of strings where ever there is
     /// an instance of delimiter (i.e. is delimiter is " " will give a list of
     /// words). Note that multiple delimiters in a row will give empty
     /// strings. Return by value.
-    Vector<std::string> split_string(const std::string &s, char delim);
+    Vector<std::string> split_string(const std::string& s, char delim);
 
   } // namespace StringConversion
 
@@ -174,7 +174,7 @@ namespace oomph
     /// not write real code using this function as it is implementation
     /// dependant!
     template<class T>
-    std::string get_type_name(T &obj)
+    std::string get_type_name(T& obj)
     {
       using namespace StringConversion;
 
@@ -201,7 +201,7 @@ namespace oomph
     /// do not write real code using this function as it is implementation
     /// dependant!
     template<class T>
-    std::string get_type_name(T *obj)
+    std::string get_type_name(T* obj)
     {
       return get_type_name(*obj);
     }
@@ -218,22 +218,22 @@ namespace oomph
   namespace CumulativeTimings
   {
     /// (Re-)start i-th timer
-    extern void start(const unsigned &i);
+    extern void start(const unsigned& i);
 
     /// Halt i-th timer
-    extern void halt(const unsigned &i);
+    extern void halt(const unsigned& i);
 
     /// Reset i-th timer
-    extern void reset(const unsigned &i);
+    extern void reset(const unsigned& i);
 
     /// Reset all timers
     extern void reset();
 
     /// Report time accumulated by i-th timer
-    extern double cumulative_time(const unsigned &i);
+    extern double cumulative_time(const unsigned& i);
 
     /// Set number of timings that can be recorded in parallel
-    extern void set_ntimers(const unsigned &ntimers);
+    extern void set_ntimers(const unsigned& ntimers);
 
     /// Cumulative timings
     extern Vector<clock_t> Timing;
@@ -259,7 +259,7 @@ namespace oomph
   /// http://www.boost.org/doc/libs/1_52_0/libs/conversion/cast.htm for more
   /// details.
   template<class Target, class Source>
-  inline Target checked_dynamic_cast(Source *x)
+  inline Target checked_dynamic_cast(Source* x)
   {
     Target tmp = dynamic_cast<Target>(x);
 #ifdef PARANOID
@@ -281,7 +281,7 @@ namespace oomph
   /// http://www.boost.org/doc/libs/1_52_0/libs/conversion/cast.htm for more
   /// details.
   template<class Target, class Source>
-  inline Target checked_static_cast(Source *x)
+  inline Target checked_static_cast(Source* x)
   {
 #ifdef PARANOID
     // Check that the cast will work as expected.
@@ -305,31 +305,31 @@ namespace oomph
   {
   public:
     /// Constructor: Specify number of timers
-    Timer(const unsigned &n_timer)
+    Timer(const unsigned& n_timer)
     {
       set_ntimers(n_timer);
     }
 
     /// (Re-)start i-th timer
-    void start(const unsigned &i)
+    void start(const unsigned& i)
     {
       Start_time[i] = clock();
     }
 
     /// Halt i-th timer
-    void halt(const unsigned &i)
+    void halt(const unsigned& i)
     {
       Timing[i] += clock() - Start_time[i];
     }
 
     /// Report time accumulated by i-th timer
-    double cumulative_time(const unsigned &i)
+    double cumulative_time(const unsigned& i)
     {
       return double(Timing[i]) / CLOCKS_PER_SEC;
     }
 
     /// Reset i-th timer
-    void reset(const unsigned &i)
+    void reset(const unsigned& i)
     {
       Timing[i] = clock_t(0.0);
     }
@@ -345,7 +345,7 @@ namespace oomph
     }
 
     /// Set number of timings that can be recorded in parallel
-    void set_ntimers(const unsigned &ntimers)
+    void set_ntimers(const unsigned& ntimers)
     {
       Timing.resize(ntimers, clock_t(0.0));
       Start_time.resize(ntimers, clock_t(0.0));
@@ -370,9 +370,9 @@ namespace oomph
   {
     // Function pointer for function that specifies residuals: The arguments
     // are: Parameters, unknowns, residuals
-    typedef void (*ResidualFctPt)(const Vector<double> &parameters,
-                                  const Vector<double> &unknowns,
-                                  Vector<double> &residuals);
+    typedef void (*ResidualFctPt)(const Vector<double>& parameters,
+                                  const Vector<double>& unknowns,
+                                  Vector<double>& residuals);
 
     // Maximum number of Newton iterations
     extern unsigned Max_iter;
@@ -399,19 +399,19 @@ namespace oomph
     // where all arguments are double Vectors.
     // unknowns.size() = residuals.size()
     extern void black_box_fd_newton_solve(ResidualFctPt residual_fct,
-                                          const Vector<double> &params,
-                                          Vector<double> &unknowns);
+                                          const Vector<double>& params,
+                                          Vector<double>& unknowns);
 
     // Line search helper for globally convergent Newton method
-    extern void line_search(const Vector<double> &x_old,
+    extern void line_search(const Vector<double>& x_old,
                             const double half_residual_squared_old,
-                            const Vector<double> &gradient,
+                            const Vector<double>& gradient,
                             ResidualFctPt residual_fct,
-                            const Vector<double> &params,
-                            Vector<double> &newton_dir,
-                            Vector<double> &x,
-                            double &half_residual_squared,
-                            const double &stpmax);
+                            const Vector<double>& params,
+                            Vector<double>& newton_dir,
+                            Vector<double>& x,
+                            double& half_residual_squared,
+                            const double& stpmax);
 
   } // namespace BlackBoxFDNewtonSolver
 
@@ -477,7 +477,7 @@ namespace oomph
     }
 
     /// \short Accessor function for the iteration and times.
-    Vector<Vector<Vector<double>>> &iterations_and_times()
+    Vector<Vector<Vector<double>>>& iterations_and_times()
     {
       return Iterations_and_times;
     }
@@ -515,7 +515,7 @@ namespace oomph
     }
 
     /// \short Constructor with specific directory.
-    DocInfo(const std::string &directory) :
+    DocInfo(const std::string& directory) :
       Directory(directory),
       Doc_flag(true),
       Number(0),
@@ -534,7 +534,7 @@ namespace oomph
     /// to see if the directory exists -- if it doesn't we'll
     /// issue a warning -- or, if directory_must_exist()==true,
     /// throw and OomphLibError
-    void set_directory(const std::string &directory);
+    void set_directory(const std::string& directory);
 
     /// \short Enable documentation
     void enable_doc()
@@ -555,7 +555,7 @@ namespace oomph
     }
 
     /// Number used (e.g.) for labeling output files
-    unsigned &number()
+    unsigned& number()
     {
       return Number;
     }
@@ -573,7 +573,7 @@ namespace oomph
     }
 
     /// String used (e.g.) for labeling output files
-    std::string &label()
+    std::string& label()
     {
       return Label;
     }
@@ -626,7 +626,7 @@ namespace oomph
     struct ArgInfo
     {
       /// Proper constructor
-      ArgInfo(const bool &is_set, T *arg_pt, const std::string &doc)
+      ArgInfo(const bool& is_set, T* arg_pt, const std::string& doc)
       {
         this->is_set = is_set;
         this->arg_pt = arg_pt;
@@ -656,7 +656,7 @@ namespace oomph
       bool is_set;
 
       /// The place to put the argument's value when it is set
-      T *arg_pt;
+      T* arg_pt;
 
       /// Information about what the argument does
       std::string doc;
@@ -666,7 +666,7 @@ namespace oomph
     extern int Argc;
 
     // Arguments themselves
-    extern char **Argv;
+    extern char** Argv;
 
     /// Map to indicate an input flag as having been set
     extern std::map<std::string, ArgInfo<bool>> Specified_command_line_flag;
@@ -687,51 +687,51 @@ namespace oomph
       Specified_command_line_string_pt;
 
     // Set values
-    extern void setup(int argc, char **argv);
+    extern void setup(int argc, char** argv);
 
     // Doc the command line arguments
     extern void output();
 
     /// Specify possible argument-free command line flag
     extern void specify_command_line_flag(
-      const std::string &command_line_flag,
-      const std::string &documentation = "Undocumented");
+      const std::string& command_line_flag,
+      const std::string& documentation = "Undocumented");
 
     /// \short Specify possible command line flag that specifies a double,
     /// accessed via pointer
     extern void specify_command_line_flag(
-      const std::string &command_line_flag,
-      double *arg_pt,
-      const std::string &documentation = "Undocumented");
+      const std::string& command_line_flag,
+      double* arg_pt,
+      const std::string& documentation = "Undocumented");
 
     /// \short Specify possible command line flag that specifies an int,
     /// accessed via pointer
     extern void specify_command_line_flag(
-      const std::string &command_line_flag,
-      int *arg_pt,
-      const std::string &documentation = "Undocumented");
+      const std::string& command_line_flag,
+      int* arg_pt,
+      const std::string& documentation = "Undocumented");
 
     /// \short Specify possible command line flag that specifies an unsigned,
     /// accessed via pointer
     extern void specify_command_line_flag(
-      const std::string &command_line_flag,
-      unsigned *arg_pt,
-      const std::string &documentation = "Undocumented");
+      const std::string& command_line_flag,
+      unsigned* arg_pt,
+      const std::string& documentation = "Undocumented");
 
     /// \short Specify possible command line flag that specifies a string,
     /// accessed via pointer
     extern void specify_command_line_flag(
-      const std::string &command_line_flag,
-      std::string *arg_pt,
-      const std::string &documentation = "Undocumented");
+      const std::string& command_line_flag,
+      std::string* arg_pt,
+      const std::string& documentation = "Undocumented");
 
     /// \short Check if specified flag has been set (the associated
     /// value will have been assigned directly)
-    extern bool command_line_flag_has_been_set(const std::string &flag);
+    extern bool command_line_flag_has_been_set(const std::string& flag);
 
     /// Document the values of all flags (specified or not)
     extern void doc_all_flags(
-      std::ostream &outstream = *oomph_info.stream_pt());
+      std::ostream& outstream = *oomph_info.stream_pt());
 
     /// Document specified command line flags
     extern void doc_specified_flags();
@@ -740,17 +740,17 @@ namespace oomph
     extern void doc_available_flags();
 
     /// Helper function to check if command line index is legal
-    extern void check_arg_index(const int &argc, const int &arg_index);
+    extern void check_arg_index(const int& argc, const int& arg_index);
 
     /// \short Parse command line, check for recognised flags and assign
     /// associated values
     extern void parse_and_assign(int argc,
-                                 char *argv[],
-                                 const bool &throw_on_unrecognised_args = true);
+                                 char* argv[],
+                                 const bool& throw_on_unrecognised_args = true);
 
     /// \short Parse previously specified command line, check for
     /// recognised flags and assign associated values
-    extern void parse_and_assign(const bool &throw_on_unrecognised_args = true);
+    extern void parse_and_assign(const bool& throw_on_unrecognised_args = true);
 
   } // namespace CommandLineArgs
 
@@ -775,24 +775,24 @@ namespace oomph
     bool Output_from_single_processor;
 
     /// Communicator
-    OomphCommunicator *Communicator_pt;
+    OomphCommunicator* Communicator_pt;
 
   public:
     /// Constructor -- initialise flags for output from all processors
     MPIOutputModifier() : Output_rank(0), Output_from_single_processor(false) {}
 
     /// Return pointer to communicator
-    OomphCommunicator *&communicator_pt()
+    OomphCommunicator*& communicator_pt()
     {
       return Communicator_pt;
     }
 
     /// Precede the output by the processor ID but output everything
-    virtual bool operator()(std::ostream &stream);
+    virtual bool operator()(std::ostream& stream);
 
     /// Switch to ensure output is only produced from a single
     /// processor (default: Master node, i.e. rank 0)
-    void restrict_output_to_single_processor(const unsigned &output_rank = 0)
+    void restrict_output_to_single_processor(const unsigned& output_rank = 0)
     {
       Output_from_single_processor = true;
       Output_rank = output_rank;
@@ -836,8 +836,8 @@ namespace oomph
     /// If optional boolean flag is set to false, we use
     /// MPI_COMM_WORLD itself as oomph-lib's communicator. Defaults to true.
     static void init(int argc,
-                     char **argv,
-                     const bool &make_duplicate_of_mpi_comm_world = true);
+                     char** argv,
+                     const bool& make_duplicate_of_mpi_comm_world = true);
 
     /// finalize mpi (oomph-lib equivalent of MPI_Finalize())
     /// Deletes the global oomph-lib communicator and finalizes MPI.
@@ -845,7 +845,7 @@ namespace oomph
 
     /// access to global communicator. This is the oomph-lib equivalent of
     /// MPI_COMM_WORLD
-    static OomphCommunicator *communicator_pt();
+    static OomphCommunicator* communicator_pt();
 
     /// return true if MPI has been initialised
     static bool mpi_has_been_initialised()
@@ -860,13 +860,13 @@ namespace oomph
 
     /// \short private copy constructor definition (to prevent instances of
     /// the class being instantiated)
-    MPI_Helpers(const MPI_Helpers &);
+    MPI_Helpers(const MPI_Helpers&);
 
     /// Bool set to true if MPI has been initialised
     static bool MPI_has_been_initialised;
 
     /// the global communicator
-    static OomphCommunicator *Communicator_pt;
+    static OomphCommunicator* Communicator_pt;
   };
 
   //====================================================================
@@ -881,7 +881,7 @@ namespace oomph
     extern void obsolete();
 
     // Output specified warning message
-    extern void obsolete(const std::string &message);
+    extern void obsolete(const std::string& message);
 
   } // namespace ObsoleteCode
 
@@ -1007,7 +1007,7 @@ namespace oomph
     /// empty_my_memory_usage_file(). Note: This requires getpid() which is
     /// defined in unistd.h so if you don't have that we won't build that
     /// function!
-    void doc_my_memory_usage(const std::string &prefix_string = 0);
+    void doc_my_memory_usage(const std::string& prefix_string = 0);
 
 #endif
 
@@ -1033,7 +1033,7 @@ namespace oomph
     /// mem usage in file whose name is specified by
     /// Total_memory_usage_filename. Data is appended to that file; wipe it with
     /// empty_memory_usage_file().
-    void doc_total_memory_usage(const std::string &prefix_string = "");
+    void doc_total_memory_usage(const std::string& prefix_string = "");
 
     /// \short Function to empty file that records total and local memory usage
     /// in appropriate files
@@ -1041,7 +1041,7 @@ namespace oomph
 
     /// \short Doc total and local memory usage, prepended by string (which
     /// allows identification from where the function is called, say)
-    void doc_memory_usage(const std::string &prefix_string = "");
+    void doc_memory_usage(const std::string& prefix_string = "");
 
     /// \short String containing system command that runs "top" (or equivalent)
     /// "indefinitely" and writes to file specified in Top_output_filename.
@@ -1066,16 +1066,16 @@ namespace oomph
     /// empty_top_file() first if you wish. Note that this is again
     /// quite Linux specific and unlikely to work on other operating systems.
     /// Insert optional comment into output file before starting.
-    void run_continous_top(const std::string &comment = "");
+    void run_continous_top(const std::string& comment = "");
 
     /// \short Stop running top continuously. Note that this is
     /// again quite Linux specific and unlikely to work on other operating
     /// systems.
     /// Insert optional comment into output file before stopping.
-    void stop_continous_top(const std::string &comment = "");
+    void stop_continous_top(const std::string& comment = "");
 
     /// \short Insert comment into running continuous top output
-    void insert_comment_to_continous_top(const std::string &comment);
+    void insert_comment_to_continous_top(const std::string& comment);
 
   } // end of namespace MemoryUsage
 
@@ -1097,38 +1097,38 @@ namespace oomph
     // Some typedefs first:
 
     /// General function of space and time which returns a double.
-    typedef double (*TimeSpaceToDoubleFctPt)(const double &t,
-                                             const Vector<double> &x);
+    typedef double (*TimeSpaceToDoubleFctPt)(const double& t,
+                                             const Vector<double>& x);
 
     /// General function of space and time which returns a vector of doubles.
     typedef Vector<double> (*TimeSpaceToDoubleVectFctPt)(
-      const double &t, const Vector<double> &x);
+      const double& t, const Vector<double>& x);
 
     /// General function of time, space and a value vector which returns a
     /// vector of doubles.
     typedef Vector<double> (*TimeSpaceValueToDoubleVectFctPt)(
-      const double &t, const Vector<double> &x, const Vector<double> &u);
+      const double& t, const Vector<double>& x, const Vector<double>& u);
 
     /// Virtual destructor
     virtual ~SolutionFunctorBase() {}
 
     /// Call the function.
-    virtual Vector<double> operator()(const double &t,
-                                      const Vector<double> &x) const = 0;
+    virtual Vector<double> operator()(const double& t,
+                                      const Vector<double>& x) const = 0;
 
     /// Call the derivative function.
-    virtual Vector<double> derivative(const double &t,
-                                      const Vector<double> &x,
-                                      const Vector<double> &u) const = 0;
+    virtual Vector<double> derivative(const double& t,
+                                      const Vector<double>& x,
+                                      const Vector<double>& u) const = 0;
 
     /// The derivatives of the derivative function with respect to u (note
     /// that this is not quite the jacobian of the residuals for an ODE
     /// problem defined by this solution: you also need the time derivative
     /// part there). Broken virtual function because not often needed.
-    virtual void jacobian(const double &t,
-                          const Vector<double> &x,
-                          const Vector<double> &u,
-                          DenseMatrix<double> &jacobian) const
+    virtual void jacobian(const double& t,
+                          const Vector<double>& x,
+                          const Vector<double>& u,
+                          DenseMatrix<double>& jacobian) const
     {
       std::string err = "No Jacobian function implemented";
       throw OomphLibError(
@@ -1142,7 +1142,7 @@ namespace oomph
     }
 
     /// Overload to grab data from the problem.
-    virtual void initialise_from_problem(const Problem *problem_pt) {}
+    virtual void initialise_from_problem(const Problem* problem_pt) {}
   };
 
   /// Function class for a simple function with no external parameters (just
@@ -1178,21 +1178,21 @@ namespace oomph
 
     virtual ~SolutionFunctor() {}
 
-    SolutionFunctor(const SolutionFunctor &that)
+    SolutionFunctor(const SolutionFunctor& that)
     {
       Solution_fpt = that.Solution_fpt;
       Derivative_fpt = that.Derivative_fpt;
     }
 
-    void operator=(const SolutionFunctor &that)
+    void operator=(const SolutionFunctor& that)
     {
       this->Solution_fpt = that.Solution_fpt;
       this->Derivative_fpt = that.Derivative_fpt;
     }
 
     /// Call the function.
-    virtual Vector<double> operator()(const double &t,
-                                      const Vector<double> &x) const
+    virtual Vector<double> operator()(const double& t,
+                                      const Vector<double>& x) const
     {
 #ifdef PARANOID
       if (Solution_fpt == 0)
@@ -1206,9 +1206,9 @@ namespace oomph
     }
 
     /// Call the derivative function.
-    virtual Vector<double> derivative(const double &t,
-                                      const Vector<double> &x,
-                                      const Vector<double> &u) const
+    virtual Vector<double> derivative(const double& t,
+                                      const Vector<double>& x,
+                                      const Vector<double>& u) const
     {
 #ifdef PARANOID
       if (Derivative_fpt == 0)

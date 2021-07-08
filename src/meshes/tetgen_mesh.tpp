@@ -49,8 +49,8 @@ namespace oomph
   /// Build unstructured tet mesh based on output from scaffold
   //========================================================================
   template<class ELEMENT>
-  void TetgenMesh<ELEMENT>::build_from_scaffold(TimeStepper *time_stepper_pt,
-                                                const bool &use_attributes)
+  void TetgenMesh<ELEMENT>::build_from_scaffold(TimeStepper* time_stepper_pt,
+                                                const bool& use_attributes)
   {
     // Mesh can only be built with 3D Telements.
     MeshChecker::assert_geometric_element<TElementGeometricBase, ELEMENT>(3);
@@ -89,11 +89,11 @@ namespace oomph
     // Setup map to check the (pseudo-)global node number
     // Nodes whose number is zero haven't been copied across
     // into the mesh yet.
-    std::map<Node *, unsigned> global_number;
+    std::map<Node*, unsigned> global_number;
     unsigned global_count = 0;
 
     // Map of element attribute pairs
-    std::map<double, Vector<FiniteElement *>> element_attribute_map;
+    std::map<double, Vector<FiniteElement*>> element_attribute_map;
 
     // Loop over elements in scaffold mesh, visit their nodes
     for (unsigned e = 0; e < nelem; e++)
@@ -102,7 +102,7 @@ namespace oomph
       for (unsigned j = 0; j < nnod_el; j++)
       {
         // Pointer to node in the scaffold mesh
-        Node *scaffold_node_pt = Tmp_mesh_pt->finite_element_pt(e)->node_pt(j);
+        Node* scaffold_node_pt = Tmp_mesh_pt->finite_element_pt(e)->node_pt(j);
 
         // Get the (pseudo-)global node number in scaffold mesh
         // (It's zero [=default] if not visited this one yet)
@@ -113,14 +113,14 @@ namespace oomph
         {
           // Get pointer to set of mesh boundaries that this
           // scaffold node occupies; NULL if the node is not on any boundary
-          std::set<unsigned> *boundaries_pt;
+          std::set<unsigned>* boundaries_pt;
           scaffold_node_pt->get_boundaries_pt(boundaries_pt);
 
           // Is it on boundaries?
           if (boundaries_pt != 0)
           {
             // Create new boundary node
-            Node *new_node_pt =
+            Node* new_node_pt =
               finite_element_pt(e)->construct_boundary_node(j, time_stepper_pt);
 
             // Give it a number (not necessarily the global node
@@ -186,7 +186,7 @@ namespace oomph
       Region_attribute.resize(n_attribute);
       // Copy the vectors in the map over to our internal storage
       unsigned count = 0;
-      for (std::map<double, Vector<FiniteElement *>>::iterator it =
+      for (std::map<double, Vector<FiniteElement*>>::iterator it =
              element_attribute_map.begin();
            it != element_attribute_map.end();
            ++it)
@@ -229,11 +229,11 @@ namespace oomph
 
     // Storage for each global edge of the mesh
     unsigned n_global_edge = Tmp_mesh_pt->nglobal_edge();
-    Vector<Vector<Node *>> nodes_on_global_edge(n_global_edge);
+    Vector<Vector<Node*>> nodes_on_global_edge(n_global_edge);
 
     // Storage for each global face of the mesh
     unsigned n_global_face = Tmp_mesh_pt->nglobal_face();
-    Vector<Vector<Node *>> nodes_on_global_face(n_global_face);
+    Vector<Vector<Node*>> nodes_on_global_face(n_global_face);
 
     // Map storing the mid-side of an edge; edge identified by
     // pointers to vertex nodes in scaffold mesh
@@ -257,8 +257,8 @@ namespace oomph
     for (unsigned e = 0; e < nelem; e++)
     {
       // Cache pointers to the elements
-      FiniteElement *const elem_pt = this->finite_element_pt(e);
-      FiniteElement *const tmp_elem_pt = Tmp_mesh_pt->finite_element_pt(e);
+      FiniteElement* const elem_pt = this->finite_element_pt(e);
+      FiniteElement* const tmp_elem_pt = Tmp_mesh_pt->finite_element_pt(e);
 
       // The number of edge nodes is 4 + 6*(n_node1d-2)
       unsigned n_edge_node = 4 + 6 * (n_node_1d - 2);
@@ -301,7 +301,7 @@ namespace oomph
             for (unsigned j2 = 0; j2 < n_node_1d - 2; ++j2)
             {
               // Storage for the new node
-              Node *new_node_pt = 0;
+              Node* new_node_pt = 0;
 
               // If the edge is on a boundary, determined from the
               // scaffold mesh, construct a boundary node
@@ -385,7 +385,7 @@ namespace oomph
             if (nodes_on_global_face[face_index].size() == 0)
             {
               // Storage for the new node
-              Node *new_node_pt = 0;
+              Node* new_node_pt = 0;
 
               // If the face is on a boundary, construct a boundary node
               if (boundary_id > 0)
@@ -428,7 +428,7 @@ namespace oomph
 
           // Construct the element's central node, which is not on a boundary
           {
-            Node *new_node_pt =
+            Node* new_node_pt =
               finite_element_pt(e)->construct_node(n, time_stepper_pt);
             Node_pt.push_back(new_node_pt);
 
@@ -823,8 +823,8 @@ namespace oomph
   /// The output is assumed to have been constructed and "empty"
   //=========================================================================
   template<class ELEMENT>
-  void TetgenMesh<ELEMENT>::deep_copy_of_tetgenio(tetgenio *const &input_pt,
-                                                  tetgenio *&output_pt)
+  void TetgenMesh<ELEMENT>::deep_copy_of_tetgenio(tetgenio* const& input_pt,
+                                                  tetgenio*& output_pt)
   {
     // Copy data values
     output_pt->firstnumber = input_pt->firstnumber;
@@ -847,7 +847,7 @@ namespace oomph
       }
 
       // If there are point markers copy as well
-      if (input_pt->pointmarkerlist != (int *)NULL)
+      if (input_pt->pointmarkerlist != (int*)NULL)
       {
         output_pt->pointmarkerlist = new int[n_point];
         for (int n = 0; n < n_point; ++n)
@@ -895,7 +895,7 @@ namespace oomph
       }
 
       // Add in the volume constriants
-      if (input_pt->tetrahedronvolumelist != (double *)NULL)
+      if (input_pt->tetrahedronvolumelist != (double*)NULL)
       {
         output_pt->tetrahedronvolumelist = new double[n_tetra];
         for (int n = 0; n < n_tetra; ++n)
@@ -919,7 +919,7 @@ namespace oomph
       }
 
       // Add in the neighbour list
-      if (input_pt->neighborlist != (int *)NULL)
+      if (input_pt->neighborlist != (int*)NULL)
       {
         output_pt->neighborlist = new int[n_tetra * 4];
         for (int n = 0; n < (n_tetra * 4); ++n)
@@ -937,8 +937,8 @@ namespace oomph
       output_pt->facetlist = new tetgenio::facet[n_facet];
       for (int n = 0; n < n_facet; ++n)
       {
-        tetgenio::facet *input_f_pt = &input_pt->facetlist[n];
-        tetgenio::facet *output_f_pt = &output_pt->facetlist[n];
+        tetgenio::facet* input_f_pt = &input_pt->facetlist[n];
+        tetgenio::facet* output_f_pt = &output_pt->facetlist[n];
 
         // Copy polygons and holes from the facets
         output_f_pt->numberofpolygons = input_f_pt->numberofpolygons;
@@ -950,8 +950,8 @@ namespace oomph
           output_f_pt->polygonlist = new tetgenio::polygon[n_poly];
           for (int p = 0; p < n_poly; ++p)
           {
-            tetgenio::polygon *output_p_pt = &output_f_pt->polygonlist[p];
-            tetgenio::polygon *input_p_pt = &input_f_pt->polygonlist[p];
+            tetgenio::polygon* output_p_pt = &output_f_pt->polygonlist[p];
+            tetgenio::polygon* input_p_pt = &input_f_pt->polygonlist[p];
             // Find out how many vertices each polygon has
             output_p_pt->numberofvertices = input_p_pt->numberofvertices;
             // Now copy of the vertices
@@ -979,7 +979,7 @@ namespace oomph
       } // end of loop over facets
 
       // Add the facetmarkers if there are any
-      if (input_pt->facetmarkerlist != (int *)NULL)
+      if (input_pt->facetmarkerlist != (int*)NULL)
       {
         output_pt->facetmarkerlist = new int[n_facet];
         for (int n = 0; n < n_facet; ++n)

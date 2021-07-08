@@ -49,7 +49,7 @@ namespace oomph
     /// The GeomObject must be parametrised such that
     /// \f$\zeta \in [0,2\pi]\f$ sweeps around the circumference
     /// in anticlockwise direction.
-    RectangleWithHoleDomain(GeomObject *cylinder_pt, const double &length) :
+    RectangleWithHoleDomain(GeomObject* cylinder_pt, const double& length) :
       Cylinder_pt(cylinder_pt)
     {
       // Vertices of rectangle
@@ -110,8 +110,8 @@ namespace oomph
     /// "right" and "left" points; \f$ s \in [-1,1] \f$
     void linear_interpolate(Vector<double> left,
                             Vector<double> right,
-                            const double &s,
-                            Vector<double> &f)
+                            const double& s,
+                            Vector<double>& f)
     {
       for (unsigned i = 0; i < 2; i++)
       {
@@ -123,11 +123,11 @@ namespace oomph
     /// vector to macro-element m's boundary in the specified direction
     /// [N/S/E/W] at the specfied discrete time level (time=0: present; time>0:
     /// previous)
-    void macro_element_boundary(const unsigned &time,
-                                const unsigned &m,
-                                const unsigned &direction,
-                                const Vector<double> &s,
-                                Vector<double> &f)
+    void macro_element_boundary(const unsigned& time,
+                                const unsigned& m,
+                                const unsigned& direction,
+                                const Vector<double>& s,
+                                Vector<double>& f)
     {
 #ifdef WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES
       // Warn about time argument being moved to the front
@@ -336,7 +336,7 @@ namespace oomph
     Vector<double> Upper_mid_right;
 
     /// Pointer to geometric object that represents the central cylinder
-    GeomObject *Cylinder_pt;
+    GeomObject* Cylinder_pt;
   };
 
 } // namespace oomph

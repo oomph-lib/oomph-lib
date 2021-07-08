@@ -55,9 +55,9 @@ namespace oomph
     /// intersect (true) or not (false). From
     /// http://paulbourke.net/geometry/lineline2d/
     /// C++ contribution by Damian Coventry.
-    bool intersects(const Vector<Vector<double>> &first_segment_vertex,
-                    const Vector<Vector<double>> &second_segment_vertex,
-                    const double &epsilon_parallel = 1.0e-15)
+    bool intersects(const Vector<Vector<double>>& first_segment_vertex,
+                    const Vector<Vector<double>>& second_segment_vertex,
+                    const double& epsilon_parallel = 1.0e-15)
     {
       double denom =
         ((first_segment_vertex[1][1] - first_segment_vertex[0][1]) *
@@ -119,10 +119,10 @@ namespace oomph
     //=======================================================================
     /// Default atmospheric radiation function in terms of time
     //=======================================================================
-    void Zero_atmospheric_radiation_fct(const double &time,
-                                        double &solar_flux_magnitude,
-                                        Vector<double> &solar_flux_unit_vector,
-                                        double &total_diffuse_radiation)
+    void Zero_atmospheric_radiation_fct(const double& time,
+                                        double& solar_flux_magnitude,
+                                        Vector<double>& solar_flux_unit_vector,
+                                        double& total_diffuse_radiation)
     {
       solar_flux_magnitude = 0.0;
       solar_flux_unit_vector[0] = 0.0;
@@ -173,7 +173,7 @@ namespace oomph
     /// \short Enable smoothing of shadow; optional argument provides
     /// value for tanh smoothing factor (defaults to 100)
     void enable_smoothed_sun_shadow(
-      const double &alpha_tanh_smooth_sun_shadow = 100.0)
+      const double& alpha_tanh_smooth_sun_shadow = 100.0)
     {
       Smoothed_sun_shadow = true;
       Alpha_tanh_smooth_sun_shadow = alpha_tanh_smooth_sun_shadow;
@@ -200,10 +200,10 @@ namespace oomph
 
     /// Reference to the atmospheric radiation function pointer
     void (*&atmospheric_radiation_fct_pt())(
-      const double &time,
-      double &solar_flux_magnitude,
-      Vector<double> &solar_flux_unit_vector,
-      double &total_diffuse_radiation)
+      const double& time,
+      double& solar_flux_magnitude,
+      Vector<double>& solar_flux_unit_vector,
+      double& total_diffuse_radiation)
     {
       return Atmospheric_radiation_fct_pt;
     }
@@ -212,35 +212,35 @@ namespace oomph
     /// pointers to nodes that make up the "upper boundary"
     /// that can potentially shield the integration points from diffuse
     /// radiation
-    void update_limiting_angles(const Vector<Node *> &shielding_node_pt);
+    void update_limiting_angles(const Vector<Node*>& shielding_node_pt);
 
     /// \short Get the atmospheric radiation as fct of integration point
     /// index, time, Eulerian coordinate and outer unit normal. Virtual
     /// so it can be overloaded in multiphysics problems
-    virtual double atmospheric_radiation(const unsigned &intpt,
-                                         const double &time,
-                                         const Vector<double> &x,
-                                         const Vector<double> &n);
+    virtual double atmospheric_radiation(const unsigned& intpt,
+                                         const double& time,
+                                         const Vector<double>& x,
+                                         const Vector<double>& n);
 
     /// Output cone of diffuse radiation for all integration points
-    void output_diffuse_radiation_cone(std::ostream &outfile,
-                                       const double &radius);
+    void output_diffuse_radiation_cone(std::ostream& outfile,
+                                       const double& radius);
 
     /// \short Output min angle of cone of diffuse radiation for
     /// all integration points
-    void output_diffuse_radiation_cone_min_angle(std::ostream &outfile,
-                                                 const double &radius);
+    void output_diffuse_radiation_cone_min_angle(std::ostream& outfile,
+                                                 const double& radius);
 
     /// \short Output max angle of cone of diffuse radiation for
     /// all integration points
-    void output_diffuse_radiation_cone_max_angle(std::ostream &outfile,
-                                                 const double &radius);
+    void output_diffuse_radiation_cone_max_angle(std::ostream& outfile,
+                                                 const double& radius);
 
     /// Output illumination angles for all integration points
-    void output_limiting_angles(std::ostream &outfile);
+    void output_limiting_angles(std::ostream& outfile);
 
     /// Output diffuse and direct radiation
-    void output_atmospheric_radiation(std::ostream &outfile);
+    void output_atmospheric_radiation(std::ostream& outfile);
 
   protected:
     /// Use tanh profile to smooth solar shadows
@@ -259,10 +259,10 @@ namespace oomph
     /// radiation in terms of directional solar flux (unit vector and magnitude)
     /// and total diffusive radiation (which is later weighted by diffuse
     /// limiting angles). Input argument: time.
-    void (*Atmospheric_radiation_fct_pt)(const double &time,
-                                         double &solar_flux_magnitude,
-                                         Vector<double> &solar_flux_unit_vector,
-                                         double &total_diffuse_radiation);
+    void (*Atmospheric_radiation_fct_pt)(const double& time,
+                                         double& solar_flux_magnitude,
+                                         Vector<double>& solar_flux_unit_vector,
+                                         double& total_diffuse_radiation);
 
   private:
     /// \short Private helper function to check if the straight line
@@ -272,14 +272,14 @@ namespace oomph
     /// Error (indicated by no_problem being false) occurs if
     /// the line crosses the origin exactly in which case we're
     /// stuffed. Diagnostics are returned in error string.
-    void check_quadrant_jump(const double &x_prev,
-                             const double &y_prev,
-                             const double &x_next,
-                             const double &y_next,
-                             bool &crossing_quadrants,
-                             int &n_winding_increment,
-                             std::string &error_string,
-                             bool &no_problem);
+    void check_quadrant_jump(const double& x_prev,
+                             const double& y_prev,
+                             const double& x_next,
+                             const double& y_next,
+                             bool& crossing_quadrants,
+                             int& n_winding_increment,
+                             std::string& error_string,
+                             bool& no_problem);
   };
 
   //=====================================================================
@@ -287,10 +287,10 @@ namespace oomph
   /// index, time, Eulerian coordinate and outer unit normal. Virtual
   /// so it can be overloaded in multiphysics problems
   //=====================================================================
-  double SolarRadiationBase::atmospheric_radiation(const unsigned &intpt,
-                                                   const double &time,
-                                                   const Vector<double> &x,
-                                                   const Vector<double> &n)
+  double SolarRadiationBase::atmospheric_radiation(const unsigned& intpt,
+                                                   const double& time,
+                                                   const Vector<double>& x,
+                                                   const Vector<double>& n)
   {
     double radiation = 0.0;
     unsigned n_dim = this->nodal_dimension();
@@ -386,14 +386,14 @@ namespace oomph
   /// the line crosses the origin exactly in which case we're
   /// stuffed. Diagnostics are returned in error string.
   //====================================================================
-  void SolarRadiationBase::check_quadrant_jump(const double &x_prev,
-                                               const double &y_prev,
-                                               const double &x_next,
-                                               const double &y_next,
-                                               bool &crossing_quadrants,
-                                               int &n_winding_increment,
-                                               std::string &error_string,
-                                               bool &no_problem)
+  void SolarRadiationBase::check_quadrant_jump(const double& x_prev,
+                                               const double& y_prev,
+                                               const double& x_next,
+                                               const double& y_next,
+                                               bool& crossing_quadrants,
+                                               int& n_winding_increment,
+                                               std::string& error_string,
+                                               bool& no_problem)
   {
     // Sanity check: We have to keep track of winding numbers
     // but we're stuffed if we our discrete increments in coordinates
@@ -509,13 +509,13 @@ namespace oomph
   /// radiation
   //=====================================================================
   void SolarRadiationBase::update_limiting_angles(
-    const Vector<Node *> &shielding_node_pt)
+    const Vector<Node*>& shielding_node_pt)
   {
     // Search through all shielding nodes and find the
     // bounding ones for this element
-    Node *first_vertex_node_pt = node_pt(0);
+    Node* first_vertex_node_pt = node_pt(0);
     unsigned nnod_el = nnode();
-    Node *second_vertex_node_pt = node_pt(nnod_el - 1);
+    Node* second_vertex_node_pt = node_pt(nnod_el - 1);
 
     // Find left and rightmost node of element in shielding_node_pt vector:
     unsigned j_left = 0;
@@ -571,7 +571,7 @@ namespace oomph
       int n_winding = 0;
 
       // Initial point
-      Node *nod_pt = shielding_node_pt[0];
+      Node* nod_pt = shielding_node_pt[0];
 
       // Coordinate relative to sampling point
       double x_prev = nod_pt->x(0) - x[0];
@@ -612,7 +612,7 @@ namespace oomph
       // Loop over all other nodes
       for (unsigned j = 1; j <= j_left; j++)
       {
-        Node *nod_pt = shielding_node_pt[j];
+        Node* nod_pt = shielding_node_pt[j];
         double x_next = nod_pt->x(0) - x[0];
         double y_next = nod_pt->x(1) - x[1];
         double phi_next = atan2(y_next, x_next);
@@ -654,7 +654,7 @@ namespace oomph
           error_message << "chain of shielding nodes on left:\n";
           for (unsigned jj = 1; jj <= j_left; jj++)
           {
-            Node *nnod_pt = shielding_node_pt[jj];
+            Node* nnod_pt = shielding_node_pt[jj];
             error_message << nnod_pt->x(0) << " " << nnod_pt->x(1) << "\n";
           }
           throw OomphLibError(error_message.str(),
@@ -733,7 +733,7 @@ namespace oomph
       // for (unsigned j=j_right+1;j<nnod;j++)
       for (unsigned j = nnod - 2; j >= j_right; j--)
       {
-        Node *nod_pt = shielding_node_pt[j];
+        Node* nod_pt = shielding_node_pt[j];
         double x_next = nod_pt->x(0) - x[0];
         double y_next = nod_pt->x(1) - x[1];
         double phi_next = atan2(y_next, x_next);
@@ -772,7 +772,7 @@ namespace oomph
           error_message << "chain of shielding nodes on right:\n";
           for (unsigned jj = j_right; jj < nnod; jj++)
           {
-            Node *nnod_pt = shielding_node_pt[jj];
+            Node* nnod_pt = shielding_node_pt[jj];
             error_message << nnod_pt->x(0) << " " << nnod_pt->x(1) << "\n";
           }
           throw OomphLibError(error_message.str(),
@@ -823,8 +823,8 @@ namespace oomph
   //=====================================================================
   /// \short Output cone of diffuse radiation for all integration points
   //=====================================================================
-  void SolarRadiationBase::output_diffuse_radiation_cone(std::ostream &outfile,
-                                                         const double &radius)
+  void SolarRadiationBase::output_diffuse_radiation_cone(std::ostream& outfile,
+                                                         const double& radius)
   {
     // Set the value of n_intpt
     unsigned n_intpt = integral_pt()->nweight();
@@ -874,7 +874,7 @@ namespace oomph
   /// all integration points
   //=====================================================================
   void SolarRadiationBase::output_diffuse_radiation_cone_max_angle(
-    std::ostream &outfile, const double &radius)
+    std::ostream& outfile, const double& radius)
   {
     // Set the value of n_intpt
     unsigned n_intpt = integral_pt()->nweight();
@@ -924,7 +924,7 @@ namespace oomph
   /// all integration points
   //=====================================================================
   void SolarRadiationBase::output_diffuse_radiation_cone_min_angle(
-    std::ostream &outfile, const double &radius)
+    std::ostream& outfile, const double& radius)
   {
     // Set the value of n_intpt
     unsigned n_intpt = integral_pt()->nweight();
@@ -973,7 +973,7 @@ namespace oomph
   //=====================================================================
   /// \short Output illumination angles for all integration points
   //=====================================================================
-  void SolarRadiationBase::output_limiting_angles(std::ostream &outfile)
+  void SolarRadiationBase::output_limiting_angles(std::ostream& outfile)
   {
     // Set the value of n_intpt
     unsigned n_intpt = integral_pt()->nweight();
@@ -1013,7 +1013,7 @@ namespace oomph
   //=====================================================================
   /// \short Output illumination angles for all integration points
   //=====================================================================
-  void SolarRadiationBase::output_atmospheric_radiation(std::ostream &outfile)
+  void SolarRadiationBase::output_atmospheric_radiation(std::ostream& outfile)
   {
     // Get time from first node
     double time = node_pt(0)->time_stepper_pt()->time_pt()->time();
@@ -1082,13 +1082,13 @@ namespace oomph
     }
 
     /// Pointer to non-dim Stefan Boltzmann constant
-    double *&sigma_pt()
+    double*& sigma_pt()
     {
       return Sigma_pt;
     }
 
     /// Pointer to non-dim zero centrigrade offset in Stefan Boltzmann law
-    double *&theta_0_pt()
+    double*& theta_0_pt()
     {
       return Theta_0_pt;
     }
@@ -1136,9 +1136,9 @@ namespace oomph
     /// using the integration points (in current element) contained
     /// in visible_intpts_in_current_element.
     double contribution_to_stefan_boltzmann_radiation(
-      const Vector<double> &r_illuminated,
-      const Vector<double> &n_illuminated,
-      const Vector<unsigned> &visible_intpts_in_current_element)
+      const Vector<double>& r_illuminated,
+      const Vector<double>& n_illuminated,
+      const Vector<unsigned>& visible_intpts_in_current_element)
     {
       // Dummy file
       std::ofstream outfile;
@@ -1155,10 +1155,10 @@ namespace oomph
     /// using the integration points (in current element) contained
     /// in visible_intpts_in_current_element; output in outfile
     double contribution_to_stefan_boltzmann_radiation(
-      const Vector<double> &r_illuminated,
-      const Vector<double> &n_illuminated,
-      const Vector<unsigned> &visible_intpts_in_current_element,
-      std::ofstream &outfile);
+      const Vector<double>& r_illuminated,
+      const Vector<double>& n_illuminated,
+      const Vector<unsigned>& visible_intpts_in_current_element,
+      std::ofstream& outfile);
 
     /// Wipe illumination info
     void wipe_stefan_boltzmann_illumination_info()
@@ -1184,10 +1184,10 @@ namespace oomph
     /// Optional boolean  add_solid_position_data (default: true) adds
     /// nodal position data if the nodes are solid nodes.
     void add_stefan_boltzmann_illumination_info(
-      const unsigned &ipt,
-      StefanBoltzmannRadiationBase *illuminating_el_pt,
-      Vector<unsigned> &illuminating_integration_point_index,
-      const bool &add_solid_position_data = true)
+      const unsigned& ipt,
+      StefanBoltzmannRadiationBase* illuminating_el_pt,
+      Vector<unsigned>& illuminating_integration_point_index,
+      const bool& add_solid_position_data = true)
     {
 #ifdef PARANOID
       unsigned n = Stefan_boltzmann_illumination_info[ipt].size();
@@ -1210,7 +1210,7 @@ namespace oomph
       unsigned nnod = illuminating_el_pt->nnode();
       for (unsigned j = 0; j < nnod; j++)
       {
-        Node *ext_node_pt = illuminating_el_pt->node_pt(j);
+        Node* ext_node_pt = illuminating_el_pt->node_pt(j);
         bool own = false;
         for (unsigned jj = 0; jj < nnod; jj++)
         {
@@ -1225,7 +1225,7 @@ namespace oomph
           add_external_data(ext_node_pt);
           if (add_solid_position_data)
           {
-            SolidNode *solid_node_pt = dynamic_cast<SolidNode *>(ext_node_pt);
+            SolidNode* solid_node_pt = dynamic_cast<SolidNode*>(ext_node_pt);
             if (solid_node_pt != 0)
             {
               add_external_data(solid_node_pt->variable_position_pt());
@@ -1236,21 +1236,21 @@ namespace oomph
     }
 
     /// \short Output Stefan Boltzmann radiation: x,y,in,out,n_x,n_y
-    void output_stefan_boltzmann_radiation(std::ostream &outfile);
+    void output_stefan_boltzmann_radiation(std::ostream& outfile);
 
     /// \short Output Stefan Boltzmann radiation: Plots rays from illuminated
     /// integration point to illuminating ones (and back).
     void output_stefan_boltzmann_radiation_rays(
-      std::ostream &outfile, const unsigned &integration_point = UINT_MAX);
+      std::ostream& outfile, const unsigned& integration_point = UINT_MAX);
 
     /// \short Compute the incoming Stefan Boltzmann radiation
     /// onto integration point ipt -- input externally pre-computed
     /// Eulerian coordinate of illuminated integration point, r_illuminated,
     /// and outer unit normal to that point, n_illuminated.
     double incoming_stefan_boltzmann_radiation(
-      const unsigned &ipt,
-      const Vector<double> &r_illuminated,
-      const Vector<double> &n_illuminated)
+      const unsigned& ipt,
+      const Vector<double>& r_illuminated,
+      const Vector<double>& n_illuminated)
     {
       // Initialise flux
       double flux = 0.0;
@@ -1260,7 +1260,7 @@ namespace oomph
       for (unsigned e = 0; e < n_contrib; e++)
       {
         // Pointer to contributing (illuminating) element
-        StefanBoltzmannRadiationBase *el_pt =
+        StefanBoltzmannRadiationBase* el_pt =
           Stefan_boltzmann_illumination_info[ipt][e].first;
 
         // Indices of illuminating integration points that contribute
@@ -1277,10 +1277,10 @@ namespace oomph
 
   protected:
     /// Pointer to non-dim Stefan Boltzmann constant
-    double *Sigma_pt;
+    double* Sigma_pt;
 
     /// Pointer to non-dim zero centrigrade offset in Stefan Boltzmann law
-    double *Theta_0_pt;
+    double* Theta_0_pt;
 
     /// \short Illumination info: For each integration point, ipt,
     /// we store all pairs identifying illuminating elements
@@ -1293,7 +1293,7 @@ namespace oomph
     /// Stefan_boltzmann_illumination_info[ipt][e].second = vector containing
     ///       index of integration points in e-th illuminating element that are
     ///       visible from current element's ipt'th integration point.
-    Vector<Vector<std::pair<StefanBoltzmannRadiationBase *, Vector<unsigned>>>>
+    Vector<Vector<std::pair<StefanBoltzmannRadiationBase*, Vector<unsigned>>>>
       Stefan_boltzmann_illumination_info;
   };
 
@@ -1305,10 +1305,10 @@ namespace oomph
   //=====================================================================
   double StefanBoltzmannRadiationBase::
     contribution_to_stefan_boltzmann_radiation(
-      const Vector<double> &r_illuminated,
-      const Vector<double> &n_illuminated,
-      const Vector<unsigned> &visible_intpts_in_current_element,
-      std::ofstream &outfile)
+      const Vector<double>& r_illuminated,
+      const Vector<double>& n_illuminated,
+      const Vector<unsigned>& visible_intpts_in_current_element,
+      std::ofstream& outfile)
   {
     if (outfile.is_open())
     {
@@ -1410,7 +1410,7 @@ namespace oomph
   /// integration point to illuminating ones (and back).
   //=====================================================================
   void StefanBoltzmannRadiationBase::output_stefan_boltzmann_radiation_rays(
-    std::ostream &outfile, const unsigned &integration_point)
+    std::ostream& outfile, const unsigned& integration_point)
   {
     // Vector to illuminated/ing Gauss points
     Vector<double> r_illuminated(2);
@@ -1446,7 +1446,7 @@ namespace oomph
       for (unsigned i2 = 0; i2 < n_illuminating; i2++)
       {
         // Get pointer to illuminating element
-        FiniteElement *el_pt = ( // dynamic_cast<FiniteElement*>(
+        FiniteElement* el_pt = ( // dynamic_cast<FiniteElement*>(
           Stefan_boltzmann_illumination_info[ipt][i2].first);
 
         // Illuminating Gauss points in illuminating element
@@ -1493,19 +1493,19 @@ namespace oomph
   public:
     /// \short Constructor, takes the pointer to the "bulk" element and the
     /// index of the face to be created
-    StefanBoltzmannUnsteadyHeatFluxElement(FiniteElement *const &bulk_el_pt,
-                                           const int &face_index);
+    StefanBoltzmannUnsteadyHeatFluxElement(FiniteElement* const& bulk_el_pt,
+                                           const int& face_index);
 
     /// Broken copy constructor
     StefanBoltzmannUnsteadyHeatFluxElement(
-      const StefanBoltzmannUnsteadyHeatFluxElement &dummy)
+      const StefanBoltzmannUnsteadyHeatFluxElement& dummy)
     {
       BrokenCopy::broken_copy("StefanBoltzmannUnsteadyHeatFluxElement");
     }
 
     /// \short Change integration scheme (overloads underlying version and
     /// and resizes lookup schemes introduced in this class.
-    void set_integration_scheme(Integral *const &integral_pt)
+    void set_integration_scheme(Integral* const& integral_pt)
     {
       FiniteElement::set_integration_scheme(integral_pt);
       unsigned n_intpt = integral_pt->nweight();
@@ -1517,9 +1517,9 @@ namespace oomph
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default (needed to break
     /// indeterminacy if bulk element is SolidElement)
-    double zeta_nodal(const unsigned &n,
-                      const unsigned &k,
-                      const unsigned &i) const
+    double zeta_nodal(const unsigned& n,
+                      const unsigned& k,
+                      const unsigned& i) const
     {
       return FaceElement::zeta_nodal(n, k, i);
     }
@@ -1530,7 +1530,7 @@ namespace oomph
     /// simply given by difference between incoming and outgoing radiation since
     /// we don't allow any user-specified additional flux (the get_flux(...)
     /// function has been overloaded.
-    void output_stefan_boltzmann_radiation(std::ostream &outfile)
+    void output_stefan_boltzmann_radiation(std::ostream& outfile)
     {
       unsigned n_dim = this->nodal_dimension();
       Vector<double> x(n_dim);
@@ -1632,12 +1632,12 @@ namespace oomph
     /// balance between incoming and outgoing Stefan Boltzmann radiation.
     /// The dependence on u makes the problem highly nonlinear -- Jacobian
     /// is currently worked out by finite differencing.
-    virtual void get_flux(const unsigned &ipt,
-                          const double &time,
-                          const Vector<double> &x,
-                          const Vector<double> &n,
-                          const double &u,
-                          double &flux)
+    virtual void get_flux(const unsigned& ipt,
+                          const double& time,
+                          const Vector<double>& x,
+                          const Vector<double>& n,
+                          const double& u,
+                          double& flux)
     {
 #ifdef PARANOID
       // We shouldn't really have an externally imposed flux (cos it's ignored)
@@ -1678,8 +1678,8 @@ namespace oomph
   //===========================================================================
   template<class ELEMENT>
   StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT>::
-    StefanBoltzmannUnsteadyHeatFluxElement(FiniteElement *const &bulk_el_pt,
-                                           const int &face_index) :
+    StefanBoltzmannUnsteadyHeatFluxElement(FiniteElement* const& bulk_el_pt,
+                                           const int& face_index) :
     UnsteadyHeatBaseFaceElement<ELEMENT>(bulk_el_pt, face_index)
   {
 #ifdef PARANOID
@@ -1688,7 +1688,7 @@ namespace oomph
       if (bulk_el_pt->dim() == 3)
       {
         // Is it refineable
-        if (dynamic_cast<RefineableElement *>(bulk_el_pt))
+        if (dynamic_cast<RefineableElement*>(bulk_el_pt))
         {
           // Issue a warning
           std::string error_string =
@@ -1725,7 +1725,7 @@ namespace oomph
   namespace StefanBoltzmannHelper
   {
     /// Bin to store pointers to finite elements in
-    Vector<Vector<std::set<FiniteElement *>>> Element_in_bin;
+    Vector<Vector<std::set<FiniteElement*>>> Element_in_bin;
 
     /// Max bin coords
     Vector<double> Max_coord(2, -DBL_MAX);
@@ -1764,11 +1764,11 @@ namespace oomph
     ///           to that file but only if populate_bin=false. Only used for
     ///           debugging...
     //======================================================================
-    void bin_helper(const Vector<Vector<double>> &ray_vertex,
-                    const bool &populate_bin,
-                    Vector<std::pair<unsigned, unsigned>> &intersected_bin,
-                    FiniteElement *el_pt,
-                    std::ofstream &outfile)
+    void bin_helper(const Vector<Vector<double>>& ray_vertex,
+                    const bool& populate_bin,
+                    Vector<std::pair<unsigned, unsigned>>& intersected_bin,
+                    FiniteElement* el_pt,
+                    std::ofstream& outfile)
     {
       // Actually plot
       bool plot_it = false;
@@ -1992,7 +1992,7 @@ namespace oomph
     //=================================================================
     // Doc populated bins
     //=================================================================
-    void doc_bins(std::ofstream &bin_file)
+    void doc_bins(std::ofstream& bin_file)
     {
       // Loop over bins
       for (unsigned ix = 0; ix < Nx_bin; ix++)
@@ -2020,8 +2020,8 @@ namespace oomph
     //=================================================================
     // Doc sample points of Stefan Boltzmann elements
     //=================================================================
-    void doc_sample_points(std::ofstream &outfile,
-                           const Vector<FiniteElement *> &sb_face_element_pt)
+    void doc_sample_points(std::ofstream& outfile,
+                           const Vector<FiniteElement*>& sb_face_element_pt)
     {
       // Vector for  coordinates of sample point
       Vector<double> sample_point(2);
@@ -2031,8 +2031,8 @@ namespace oomph
       unsigned nel = sb_face_element_pt.size();
       for (unsigned e = 0; e < nel; e++)
       {
-        StefanBoltzmannRadiationBase *el_pt =
-          dynamic_cast<StefanBoltzmannRadiationBase *>(sb_face_element_pt[e]);
+        StefanBoltzmannRadiationBase* el_pt =
+          dynamic_cast<StefanBoltzmannRadiationBase*>(sb_face_element_pt[e]);
 #ifdef PARANOID
         if (el_pt == 0)
         {
@@ -2066,7 +2066,7 @@ namespace oomph
     /// contained in vector.
     //=======================================================================
     void setup_stefan_boltzmann_visibility(
-      const Vector<FiniteElement *> &sb_face_element_pt)
+      const Vector<FiniteElement*>& sb_face_element_pt)
     {
       // Output file for debugging
       const bool plot_it = false;
@@ -2077,8 +2077,8 @@ namespace oomph
       unsigned nel = sb_face_element_pt.size();
       for (unsigned e_illuminated = 0; e_illuminated < nel; e_illuminated++)
       {
-        StefanBoltzmannRadiationBase *illuminated_el_pt =
-          dynamic_cast<StefanBoltzmannRadiationBase *>(
+        StefanBoltzmannRadiationBase* illuminated_el_pt =
+          dynamic_cast<StefanBoltzmannRadiationBase*>(
             sb_face_element_pt[e_illuminated]);
 #ifdef PARANOID
         if (illuminated_el_pt == 0)
@@ -2133,8 +2133,8 @@ namespace oomph
         unsigned nel = sb_face_element_pt.size();
         for (unsigned e_illuminated = 0; e_illuminated < nel; e_illuminated++)
         {
-          StefanBoltzmannRadiationBase *illuminated_el_pt =
-            dynamic_cast<StefanBoltzmannRadiationBase *>(
+          StefanBoltzmannRadiationBase* illuminated_el_pt =
+            dynamic_cast<StefanBoltzmannRadiationBase*>(
               sb_face_element_pt[e_illuminated]);
 #ifdef PARANOID
           if (illuminated_el_pt == 0)
@@ -2204,8 +2204,8 @@ namespace oomph
             sample_vertex[1][0] = 0.9;
             sample_vertex[1][1] = 0.9;
 
-            StefanBoltzmannRadiationBase *el_pt =
-              dynamic_cast<StefanBoltzmannRadiationBase *>(
+            StefanBoltzmannRadiationBase* el_pt =
+              dynamic_cast<StefanBoltzmannRadiationBase*>(
                 sb_face_element_pt[0]);
 
             bin_helper(sample_vertex,
@@ -2231,8 +2231,8 @@ namespace oomph
             sample_vertex[1][0] = -0.9;
             sample_vertex[1][1] = -0.9;
 
-            StefanBoltzmannRadiationBase *el_pt =
-              dynamic_cast<StefanBoltzmannRadiationBase *>(
+            StefanBoltzmannRadiationBase* el_pt =
+              dynamic_cast<StefanBoltzmannRadiationBase*>(
                 sb_face_element_pt[0]);
 
             bin_helper(sample_vertex,
@@ -2258,8 +2258,8 @@ namespace oomph
             sample_vertex[1][0] = -0.7;
             sample_vertex[1][1] = 0.9;
 
-            StefanBoltzmannRadiationBase *el_pt =
-              dynamic_cast<StefanBoltzmannRadiationBase *>(
+            StefanBoltzmannRadiationBase* el_pt =
+              dynamic_cast<StefanBoltzmannRadiationBase*>(
                 sb_face_element_pt[0]);
 
             bin_helper(sample_vertex,
@@ -2285,8 +2285,8 @@ namespace oomph
             sample_vertex[1][0] = 0.7;
             sample_vertex[1][1] = -0.9;
 
-            StefanBoltzmannRadiationBase *el_pt =
-              dynamic_cast<StefanBoltzmannRadiationBase *>(
+            StefanBoltzmannRadiationBase* el_pt =
+              dynamic_cast<StefanBoltzmannRadiationBase*>(
                 sb_face_element_pt[0]);
 
             bin_helper(sample_vertex,
@@ -2305,8 +2305,8 @@ namespace oomph
         nel = sb_face_element_pt.size();
         for (unsigned e = 0; e < nel; e++)
         {
-          StefanBoltzmannRadiationBase *el_pt =
-            dynamic_cast<StefanBoltzmannRadiationBase *>(sb_face_element_pt[e]);
+          StefanBoltzmannRadiationBase* el_pt =
+            dynamic_cast<StefanBoltzmannRadiationBase*>(sb_face_element_pt[e]);
 #ifdef PARANOID
           if (el_pt == 0)
           {
@@ -2395,8 +2395,8 @@ namespace oomph
         // Loop over all face elements -- viewed as illuminated ones
         for (unsigned e_illuminated = 0; e_illuminated < nel; e_illuminated++)
         {
-          StefanBoltzmannRadiationBase *illuminated_el_pt =
-            dynamic_cast<StefanBoltzmannRadiationBase *>(
+          StefanBoltzmannRadiationBase* illuminated_el_pt =
+            dynamic_cast<StefanBoltzmannRadiationBase*>(
               sb_face_element_pt[e_illuminated]);
 
 #ifdef PARANOID
@@ -2413,8 +2413,8 @@ namespace oomph
 #endif
 
           // Recast to FaceElement
-          FaceElement *illuminated_face_el_pt =
-            dynamic_cast<FaceElement *>(illuminated_el_pt);
+          FaceElement* illuminated_face_el_pt =
+            dynamic_cast<FaceElement*>(illuminated_el_pt);
 
           // Loop over iluminated integration points
           unsigned nint = illuminated_el_pt->integral_pt()->nweight();
@@ -2441,8 +2441,8 @@ namespace oomph
             for (unsigned e_illuminating = e_lo; e_illuminating < nel;
                  e_illuminating++)
             {
-              StefanBoltzmannRadiationBase *illuminating_el_pt =
-                dynamic_cast<StefanBoltzmannRadiationBase *>(
+              StefanBoltzmannRadiationBase* illuminating_el_pt =
+                dynamic_cast<StefanBoltzmannRadiationBase*>(
                   sb_face_element_pt[e_illuminating]);
 
 #ifdef PARANOID
@@ -2459,8 +2459,8 @@ namespace oomph
 #endif
 
               // Recast to FaceElement
-              FaceElement *illuminating_face_el_pt =
-                dynamic_cast<FaceElement *>(illuminating_el_pt);
+              FaceElement* illuminating_face_el_pt =
+                dynamic_cast<FaceElement*>(illuminating_el_pt);
 
               // Storage to accumulate indices of integration points in
               // illuminating face element that is visible from
@@ -2529,7 +2529,7 @@ namespace oomph
                       // Find bins that are intersected by ray
                       Vector<std::pair<unsigned, unsigned>> intersected_bin;
                       bool populate_bin = false;
-                      FiniteElement *dummy_el_pt = 0;
+                      FiniteElement* dummy_el_pt = 0;
                       bin_helper(ray_vertex,
                                  populate_bin,
                                  intersected_bin,
@@ -2558,14 +2558,14 @@ namespace oomph
                         unsigned j = intersected_bin[b].second;
 
                         // Loop over elements in that bin
-                        for (std::set<FiniteElement *>::iterator it =
+                        for (std::set<FiniteElement*>::iterator it =
                                Element_in_bin[i][j].begin();
                              it != Element_in_bin[i][j].end();
                              it++)
                         {
                           // Get possibly blocking element
-                          StefanBoltzmannRadiationBase *el_pt =
-                            dynamic_cast<StefanBoltzmannRadiationBase *>(*it);
+                          StefanBoltzmannRadiationBase* el_pt =
+                            dynamic_cast<StefanBoltzmannRadiationBase*>(*it);
 
 #ifdef PARANOID
                           if (illuminated_el_pt == 0)
@@ -2736,8 +2736,8 @@ namespace oomph
           // Loop over all face elements -- viewed as illuminated ones
           for (unsigned e_illuminated = 0; e_illuminated < nel; e_illuminated++)
           {
-            StefanBoltzmannRadiationBase *illuminated_el_pt =
-              dynamic_cast<StefanBoltzmannRadiationBase *>(
+            StefanBoltzmannRadiationBase* illuminated_el_pt =
+              dynamic_cast<StefanBoltzmannRadiationBase*>(
                 sb_face_element_pt[e_illuminated]);
 
 #ifdef PARANOID
@@ -2762,8 +2762,8 @@ namespace oomph
               for (unsigned e_illuminating = 0; e_illuminating < e_illuminated;
                    e_illuminating++)
               {
-                StefanBoltzmannRadiationBase *illuminating_el_pt =
-                  dynamic_cast<StefanBoltzmannRadiationBase *>(
+                StefanBoltzmannRadiationBase* illuminating_el_pt =
+                  dynamic_cast<StefanBoltzmannRadiationBase*>(
                     sb_face_element_pt[e_illuminating]);
 
 #ifdef PARANOID

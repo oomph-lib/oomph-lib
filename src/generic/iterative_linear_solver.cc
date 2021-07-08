@@ -60,7 +60,7 @@ namespace oomph
   /// the vector result.
   //==================================================================
   template<typename MATRIX>
-  void BiCGStab<MATRIX>::resolve(const DoubleVector &rhs, DoubleVector &result)
+  void BiCGStab<MATRIX>::resolve(const DoubleVector& rhs, DoubleVector& result)
   {
     // We are re-solving
     Resolving = true;
@@ -87,7 +87,7 @@ namespace oomph
   /// the problem's fully assembled Jacobian and residual vector.
   //==================================================================
   template<typename MATRIX>
-  void BiCGStab<MATRIX>::solve(Problem *const &problem_pt, DoubleVector &result)
+  void BiCGStab<MATRIX>::solve(Problem* const& problem_pt, DoubleVector& result)
   {
     // Initialise timer
 #ifdef OOMPH_HAS_MPI
@@ -127,11 +127,11 @@ namespace oomph
     }
 
     // set the distribution
-    if (dynamic_cast<DistributableLinearAlgebraObject *>(Matrix_pt))
+    if (dynamic_cast<DistributableLinearAlgebraObject*>(Matrix_pt))
     {
       // the solver has the same distribution as the matrix if possible
       this->build_distribution(
-        dynamic_cast<DistributableLinearAlgebraObject *>(Matrix_pt)
+        dynamic_cast<DistributableLinearAlgebraObject*>(Matrix_pt)
           ->distribution_pt());
     }
     else
@@ -166,9 +166,9 @@ namespace oomph
   /// der Vorst. SIAM  (1998), page 185.
   //==================================================================
   template<typename MATRIX>
-  void BiCGStab<MATRIX>::solve_helper(DoubleMatrixBase *const &matrix_pt,
-                                      const DoubleVector &rhs,
-                                      DoubleVector &solution)
+  void BiCGStab<MATRIX>::solve_helper(DoubleMatrixBase* const& matrix_pt,
+                                      const DoubleVector& rhs,
+                                      DoubleVector& solution)
   {
 #ifdef PARANOID
     // check that the rhs vector is setup
@@ -204,8 +204,8 @@ namespace oomph
 
     // if the matrix is distributable then it too should have the same
     // communicator as the rhs vector
-    DistributableLinearAlgebraObject *dist_matrix_pt =
-      dynamic_cast<DistributableLinearAlgebraObject *>(matrix_pt);
+    DistributableLinearAlgebraObject* dist_matrix_pt =
+      dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt);
     if (dist_matrix_pt != 0)
     {
       if (!(*dist_matrix_pt->distribution_pt() == *rhs.distribution_pt()))
@@ -594,9 +594,9 @@ namespace oomph
   /// page 529.
   //==================================================================
   template<typename MATRIX>
-  void CG<MATRIX>::solve_helper(DoubleMatrixBase *const &matrix_pt,
-                                const DoubleVector &rhs,
-                                DoubleVector &solution)
+  void CG<MATRIX>::solve_helper(DoubleMatrixBase* const& matrix_pt,
+                                const DoubleVector& rhs,
+                                DoubleVector& solution)
   {
 #ifdef PARANOID
     // check that the rhs vector is setup
@@ -632,8 +632,8 @@ namespace oomph
 
     // if the matrix is distributable then it too should have the same
     // communicator as the rhs vector
-    DistributableLinearAlgebraObject *dist_matrix_pt =
-      dynamic_cast<DistributableLinearAlgebraObject *>(matrix_pt);
+    DistributableLinearAlgebraObject* dist_matrix_pt =
+      dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt);
     if (dist_matrix_pt != 0)
     {
       if (!(*dist_matrix_pt->distribution_pt() == *rhs.distribution_pt()))
@@ -903,7 +903,7 @@ namespace oomph
   /// the vector result.
   //==================================================================
   template<typename MATRIX>
-  void CG<MATRIX>::resolve(const DoubleVector &rhs, DoubleVector &result)
+  void CG<MATRIX>::resolve(const DoubleVector& rhs, DoubleVector& result)
   {
     // We are re-solving
     Resolving = true;
@@ -930,7 +930,7 @@ namespace oomph
   /// the problem's fully assembled Jacobian and residual vector.
   //==================================================================
   template<typename MATRIX>
-  void CG<MATRIX>::solve(Problem *const &problem_pt, DoubleVector &result)
+  void CG<MATRIX>::solve(Problem* const& problem_pt, DoubleVector& result)
   {
     // Initialise timer
     double t_start = TimingHelpers::timer();
@@ -961,11 +961,11 @@ namespace oomph
     }
 
     // set the distribution
-    if (dynamic_cast<DistributableLinearAlgebraObject *>(Matrix_pt))
+    if (dynamic_cast<DistributableLinearAlgebraObject*>(Matrix_pt))
     {
       // the solver has the same distribution as the matrix if possible
       this->build_distribution(
-        dynamic_cast<DistributableLinearAlgebraObject *>(Matrix_pt)
+        dynamic_cast<DistributableLinearAlgebraObject*>(Matrix_pt)
           ->distribution_pt());
     }
     else
@@ -1007,16 +1007,16 @@ namespace oomph
   /// be built, is.
   //==================================================================
   template<typename MATRIX>
-  void Smoother::check_validity_of_solve_helper_inputs(MATRIX *const &matrix_pt,
-                                                       const DoubleVector &rhs,
-                                                       DoubleVector &solution,
-                                                       const double &n_dof)
+  void Smoother::check_validity_of_solve_helper_inputs(MATRIX* const& matrix_pt,
+                                                       const DoubleVector& rhs,
+                                                       DoubleVector& solution,
+                                                       const double& n_dof)
   {
     // Check that if the matrix is not distributable then it should not
     // be distributed
-    if (dynamic_cast<DistributableLinearAlgebraObject *>(matrix_pt) != 0)
+    if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt) != 0)
     {
-      if (dynamic_cast<DistributableLinearAlgebraObject *>(matrix_pt)
+      if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt)
             ->distributed())
       {
         std::ostringstream error_message_stream;
@@ -1080,7 +1080,7 @@ namespace oomph
   /// by the problem's fully assembled Jacobian and residual vector.
   //==================================================================
   template<typename MATRIX>
-  void GS<MATRIX>::solve(Problem *const &problem_pt, DoubleVector &result)
+  void GS<MATRIX>::solve(Problem* const& problem_pt, DoubleVector& result)
   {
     // Reset the Use_as_smoother_flag as the solver is not being used
     // as a smoother
@@ -1140,16 +1140,16 @@ namespace oomph
   /// rhs vector and returns the solution of the linear system.
   //==================================================================
   template<typename MATRIX>
-  void GS<MATRIX>::solve_helper(DoubleMatrixBase *const &matrix_pt,
-                                const DoubleVector &rhs,
-                                DoubleVector &solution)
+  void GS<MATRIX>::solve_helper(DoubleMatrixBase* const& matrix_pt,
+                                const DoubleVector& rhs,
+                                DoubleVector& solution)
   {
     // Get number of dofs
     unsigned n_dof = rhs.nrow();
 
 #ifdef PARANOID
     // Upcast the matrix to the appropriate type
-    MATRIX *tmp_matrix_pt = dynamic_cast<MATRIX *>(matrix_pt);
+    MATRIX* tmp_matrix_pt = dynamic_cast<MATRIX*>(matrix_pt);
 
     // PARANOID Run the self-tests to check the inputs are correct
     this->check_validity_of_solve_helper_inputs<MATRIX>(
@@ -1336,8 +1336,8 @@ namespace oomph
   /// vector which contains the solution of the linear system defined
   /// by the problem's fully assembled Jacobian and residual vector.
   //==================================================================
-  void GS<CRDoubleMatrix>::solve(Problem *const &problem_pt,
-                                 DoubleVector &result)
+  void GS<CRDoubleMatrix>::solve(Problem* const& problem_pt,
+                                 DoubleVector& result)
   {
     // Reset the Use_as_smoother_flag as the solver is not being used
     // as a smoother
@@ -1409,7 +1409,7 @@ namespace oomph
   /// given matrix so that the CRDoubleMatrix implementation of the
   /// solver can be used.
   //==================================================================
-  void GS<CRDoubleMatrix>::setup_helper(DoubleMatrixBase *matrix_pt)
+  void GS<CRDoubleMatrix>::setup_helper(DoubleMatrixBase* matrix_pt)
   {
     // Assume the matrix has been passed in from the outside so we must
     // not delete it. This is needed to avoid pre- and post-smoothers
@@ -1419,7 +1419,7 @@ namespace oomph
     Matrix_can_be_deleted = false;
 
     // Upcast the input matrix to system matrix to the type MATRIX
-    Matrix_pt = dynamic_cast<CRDoubleMatrix *>(matrix_pt);
+    Matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
 
     // The system matrix here is a CRDoubleMatrix. To make use of the
     // specific implementation of the solver for this type of matrix we
@@ -1454,16 +1454,16 @@ namespace oomph
   /// function for CR matrices. Exploiting the sparsity of the given
   /// matrix allows for a much faster iterative solver.
   //==================================================================
-  void GS<CRDoubleMatrix>::solve_helper(DoubleMatrixBase *const &matrix_pt,
-                                        const DoubleVector &rhs,
-                                        DoubleVector &solution)
+  void GS<CRDoubleMatrix>::solve_helper(DoubleMatrixBase* const& matrix_pt,
+                                        const DoubleVector& rhs,
+                                        DoubleVector& solution)
   {
     // Get number of dofs
     unsigned n_dof = rhs.nrow();
 
 #ifdef PARANOID
     // Upcast the matrix to the appropriate type
-    CRDoubleMatrix *cr_matrix_pt = dynamic_cast<CRDoubleMatrix *>(matrix_pt);
+    CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
 
     // PARANOID Run the self-tests to check the inputs are correct
     this->check_validity_of_solve_helper_inputs<CRDoubleMatrix>(
@@ -1554,13 +1554,13 @@ namespace oomph
 
     // Create a temporary matrix pointer to allow for the extraction of the
     // row start, column index and value pointers
-    CRDoubleMatrix *tmp_matrix_pt = dynamic_cast<CRDoubleMatrix *>(matrix_pt);
+    CRDoubleMatrix* tmp_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
 
     // First acquire access to the value, row_start and column_index arrays
     // from the compressed row matrix
-    const double *value_pt = tmp_matrix_pt->value();
-    const int *row_start_pt = tmp_matrix_pt->row_start();
-    const int *column_index_pt = tmp_matrix_pt->column_index();
+    const double* value_pt = tmp_matrix_pt->value();
+    const int* row_start_pt = tmp_matrix_pt->row_start();
+    const int* column_index_pt = tmp_matrix_pt->column_index();
 
     // We've finished using the temporary matrix pointer so make it a null
     // pointer
@@ -1830,8 +1830,8 @@ namespace oomph
   /// by the problem's fully assembled Jacobian and residual vector.
   //==================================================================
   template<typename MATRIX>
-  void DampedJacobi<MATRIX>::solve(Problem *const &problem_pt,
-                                   DoubleVector &result)
+  void DampedJacobi<MATRIX>::solve(Problem* const& problem_pt,
+                                   DoubleVector& result)
   {
     // Reset the Use_as_smoother_flag as the solver is not being used
     // as a smoother
@@ -1894,16 +1894,16 @@ namespace oomph
   /// rhs vector and returns the solution of the linear system.
   //==================================================================
   template<typename MATRIX>
-  void DampedJacobi<MATRIX>::solve_helper(DoubleMatrixBase *const &matrix_pt,
-                                          const DoubleVector &rhs,
-                                          DoubleVector &solution)
+  void DampedJacobi<MATRIX>::solve_helper(DoubleMatrixBase* const& matrix_pt,
+                                          const DoubleVector& rhs,
+                                          DoubleVector& solution)
   {
     // Get number of dofs
     unsigned n_dof = rhs.nrow();
 
 #ifdef PARANOID
     // Upcast the matrix to the appropriate type
-    MATRIX *tmp_matrix_pt = dynamic_cast<MATRIX *>(matrix_pt);
+    MATRIX* tmp_matrix_pt = dynamic_cast<MATRIX*>(matrix_pt);
 
     // PARANOID Run the self-tests to check the inputs are correct
     this->check_validity_of_solve_helper_inputs<MATRIX>(
@@ -2103,7 +2103,7 @@ namespace oomph
   /// the vector result.
   //==================================================================
   template<typename MATRIX>
-  void GMRES<MATRIX>::resolve(const DoubleVector &rhs, DoubleVector &result)
+  void GMRES<MATRIX>::resolve(const DoubleVector& rhs, DoubleVector& result)
   {
     // We are re-solving
     Resolving = true;
@@ -2130,7 +2130,7 @@ namespace oomph
   /// the problem's fully assembled Jacobian and residual vector.
   //==================================================================
   template<typename MATRIX>
-  void GMRES<MATRIX>::solve(Problem *const &problem_pt, DoubleVector &result)
+  void GMRES<MATRIX>::solve(Problem* const& problem_pt, DoubleVector& result)
   {
     // Find # of degrees of freedom (variables)
     unsigned n_dof = problem_pt->ndof();
@@ -2152,11 +2152,11 @@ namespace oomph
     // and nonlinear residual vector
     Matrix_pt = new MATRIX;
     DoubleVector f;
-    if (dynamic_cast<DistributableLinearAlgebraObject *>(Matrix_pt) != 0)
+    if (dynamic_cast<DistributableLinearAlgebraObject*>(Matrix_pt) != 0)
     {
-      if (dynamic_cast<CRDoubleMatrix *>(Matrix_pt) != 0)
+      if (dynamic_cast<CRDoubleMatrix*>(Matrix_pt) != 0)
       {
-        dynamic_cast<CRDoubleMatrix *>(Matrix_pt)->build(
+        dynamic_cast<CRDoubleMatrix*>(Matrix_pt)->build(
           this->distribution_pt());
         f.build(this->distribution_pt(), 0.0);
       }
@@ -2207,9 +2207,9 @@ namespace oomph
   /// library : http://math.nist.gov/iml++/
   //=============================================================================
   template<typename MATRIX>
-  void GMRES<MATRIX>::solve_helper(DoubleMatrixBase *const &matrix_pt,
-                                   const DoubleVector &rhs,
-                                   DoubleVector &solution)
+  void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const& matrix_pt,
+                                   const DoubleVector& rhs,
+                                   DoubleVector& solution)
   {
     // Get number of dofs
     unsigned n_dof = rhs.nrow();
@@ -2217,9 +2217,9 @@ namespace oomph
 #ifdef PARANOID
     // PARANOID check that if the matrix is distributable then it should not be
     // then it should not be distributed
-    if (dynamic_cast<DistributableLinearAlgebraObject *>(matrix_pt) != 0)
+    if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt) != 0)
     {
-      if (dynamic_cast<DistributableLinearAlgebraObject *>(matrix_pt)
+      if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt)
             ->distributed())
       {
         std::ostringstream error_message_stream;
@@ -2349,7 +2349,7 @@ namespace oomph
     double normb = 0;
 
     // compute norm(r)
-    double *r_pt = r.values_pt();
+    double* r_pt = r.values_pt();
     for (unsigned i = 0; i < n_dof; i++)
     {
       normb += r_pt[i] * r_pt[i];
@@ -2410,7 +2410,7 @@ namespace oomph
     {
       // set zeroth basis vector v[0] to r/beta
       v[0].build(this->distribution_pt(), 0.0);
-      double *v0_pt = v[0].values_pt();
+      double* v0_pt = v[0].values_pt();
       for (unsigned i = 0; i < n_dof; i++)
       {
         v0_pt[i] = r_pt[i] / beta;
@@ -2447,12 +2447,12 @@ namespace oomph
         }
 
         //
-        double *w_pt = w.values_pt();
+        double* w_pt = w.values_pt();
         for (unsigned k = 0; k <= iter_restart; k++)
         {
           //
           H[iter_restart][k] = 0.0;
-          double *vk_pt = v[k].values_pt();
+          double* vk_pt = v[k].values_pt();
           for (unsigned i = 0; i < n_dof; i++)
           {
             H[iter_restart][k] += w_pt[i] * vk_pt[i];
@@ -2478,7 +2478,7 @@ namespace oomph
 
         //
         v[iter_restart + 1].build(this->distribution_pt(), 0.0);
-        double *v_pt = v[iter_restart + 1].values_pt();
+        double* v_pt = v[iter_restart + 1].values_pt();
         for (unsigned i = 0; i < n_dof; i++)
         {
           v_pt[i] = w_pt[i] / H[iter_restart][iter_restart + 1];
@@ -2562,8 +2562,8 @@ namespace oomph
       {
         DoubleVector temp(this->distribution_pt(), 0.0);
         matrix_pt->multiply(solution, temp);
-        double *temp_pt = temp.values_pt();
-        const double *rhs_pt = rhs.values_pt();
+        double* temp_pt = temp.values_pt();
+        const double* rhs_pt = rhs.values_pt();
         for (unsigned i = 0; i < n_dof; i++)
         {
           temp_pt[i] = rhs_pt[i] - temp_pt[i];

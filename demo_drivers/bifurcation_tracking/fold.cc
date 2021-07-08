@@ -50,50 +50,50 @@ using namespace oomph;
 //========================================================================
 namespace Global_Physical_Variables
 {
-  double *Lambda_pt;
-  double *Mu_pt;
+  double* Lambda_pt;
+  double* Mu_pt;
 } // namespace Global_Physical_Variables
 
 template<unsigned NNODE_1D>
 class GelfandBratuElement : public QElement<1, NNODE_1D>
 {
-  double *Lambda_pt;
+  double* Lambda_pt;
 
-  double *Mu_pt;
+  double* Mu_pt;
 
 public:
   GelfandBratuElement() {}
 
   // Interface to the parameter
-  const double &lambda() const
+  const double& lambda() const
   {
     return *Lambda_pt;
   }
 
-  const double &mu() const
+  const double& mu() const
   {
     return *Mu_pt;
   }
 
   // Set the pointer
-  double *&lambda_pt()
+  double*& lambda_pt()
   {
     return Lambda_pt;
   }
 
-  double *&mu_pt()
+  double*& mu_pt()
   {
     return Mu_pt;
   }
 
   /// For the Equation, only one value is stored at each node
-  unsigned required_nvalue(const unsigned &n) const
+  unsigned required_nvalue(const unsigned& n) const
   {
     return 1;
   }
 
   /// Add the element's contribution to its residual vector (wrapper)
-  void fill_in_contribution_to_residuals(Vector<double> &residuals)
+  void fill_in_contribution_to_residuals(Vector<double>& residuals)
   {
     // Call the generic residuals function with flag set to 0
     // using a dummy matrix argument
@@ -103,8 +103,8 @@ public:
 
   /// Add the element's contribution to its residual vector and
   /// element Jacobian matrix (wrapper)
-  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                        DenseMatrix<double> &jacobian)
+  void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                        DenseMatrix<double>& jacobian)
   {
     // Call the generic routine with the flag set to 1
     fill_in_generic_residual_contribution(residuals, jacobian, 1);
@@ -112,8 +112,8 @@ public:
 
   /// \short Calculate the elemental contributions to the global
   /// residual vector for the weak form of the Gelfand-Bratu equation
-  void fill_in_generic_residual_contribution(Vector<double> &residuals,
-                                             DenseMatrix<double> &jacobian,
+  void fill_in_generic_residual_contribution(Vector<double>& residuals,
+                                             DenseMatrix<double>& jacobian,
                                              unsigned flag)
   {
     // Find the number of nodes in the element
@@ -204,7 +204,7 @@ public:
   /// Add the element's contribution to the derivatives of
   /// its residual vector with respect to a parameter (wrapper)
   void fill_in_contribution_to_dresiduals_dparameter(
-    double *const &parameter_pt, Vector<double> &dres_dparam)
+    double* const& parameter_pt, Vector<double>& dres_dparam)
   {
     // Call the generic residuals function with flag set to 0
     // using a dummy matrix argument
@@ -216,9 +216,9 @@ public:
   /// residual vector and element Jacobian matrix with respect to a parameter
   /// (wrapper)
   void fill_in_contribution_to_djacobian_dparameter(
-    double *const &parameter_pt,
-    Vector<double> &dres_dparam,
-    DenseMatrix<double> &djac_dparam)
+    double* const& parameter_pt,
+    Vector<double>& dres_dparam,
+    DenseMatrix<double>& djac_dparam)
   {
     // Call the generic routine with the flag set to 1
     fill_in_generic_dresidual_contribution(
@@ -228,9 +228,9 @@ public:
   /// \short Calculate the elemental contributions to the derivatives of
   /// the global residual vector and jacobian for the weak form of the
   /// Gelfand-Bratu equation with respect to the passed parameter.
-  void fill_in_generic_dresidual_contribution(double *const &parameter_pt,
-                                              Vector<double> &dres_dparam,
-                                              DenseMatrix<double> &djac_dparam,
+  void fill_in_generic_dresidual_contribution(double* const& parameter_pt,
+                                              Vector<double>& dres_dparam,
+                                              DenseMatrix<double>& djac_dparam,
                                               unsigned flag)
   {
     // There are only two parameters, if it's not either of them, then
@@ -341,7 +341,7 @@ public:
   } // End of function
 
   // Define an output function for the element
-  void output(ostream &output)
+  void output(ostream& output)
   {
     // Read out the number of nodes in the element
     unsigned n_node = this->nnode();
@@ -363,16 +363,16 @@ template<class ELEMENT>
 class BratuProblem : public Problem
 {
 private:
-  Node *Trace_node_pt;
+  Node* Trace_node_pt;
 
 public:
   // Constructor
-  BratuProblem(const unsigned &Nx);
+  BratuProblem(const unsigned& Nx);
 
   // Overload Access function for the mesh
-  OneDMesh<ELEMENT> *mesh_pt()
+  OneDMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<OneDMesh<ELEMENT> *>(Problem::mesh_pt());
+    return dynamic_cast<OneDMesh<ELEMENT>*>(Problem::mesh_pt());
   }
 
   // Update functions are both empty
@@ -384,7 +384,7 @@ public:
 
 // Constructor
 template<class ELEMENT>
-BratuProblem<ELEMENT>::BratuProblem(const unsigned &Nx)
+BratuProblem<ELEMENT>::BratuProblem(const unsigned& Nx)
 {
   // Now create the mesh
   Problem::mesh_pt() = new OneDMesh<ELEMENT>(Nx, 1.0);
@@ -405,7 +405,7 @@ BratuProblem<ELEMENT>::BratuProblem(const unsigned &Nx)
   for (unsigned e = 0; e < n_element; e++)
   {
     // Cast to a shell element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
     // Set the load function
     el_pt->lambda_pt() = Lambda_pt;
     el_pt->mu_pt() = Mu_pt;

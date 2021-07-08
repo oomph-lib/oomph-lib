@@ -63,14 +63,14 @@ namespace oomph
   {
   public:
     /// \short Function pointer to "spine base" function
-    typedef void (*SpineBaseFctPt)(const Vector<double> &x,
-                                   Vector<double> &spine_base,
-                                   Vector<Vector<double>> &dspine_base);
+    typedef void (*SpineBaseFctPt)(const Vector<double>& x,
+                                   Vector<double>& spine_base,
+                                   Vector<Vector<double>>& dspine_base);
 
     /// \short Function pointer to "spine" function
-    typedef void (*SpineFctPt)(const Vector<double> &x,
-                               Vector<double> &spine,
-                               Vector<Vector<double>> &dspine);
+    typedef void (*SpineFctPt)(const Vector<double>& x,
+                               Vector<double>& spine,
+                               Vector<Vector<double>>& dspine);
 
     /// Constructor: Initialise pointers to NULL, so by default
     /// prescribed kappa evaluates to zero, and no spines are used.
@@ -79,26 +79,26 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    YoungLaplaceEquations(const YoungLaplaceEquations &dummy)
+    YoungLaplaceEquations(const YoungLaplaceEquations& dummy)
     {
       BrokenCopy::broken_copy("YoungLaplaceEquations");
     }
 
     /// Broken assignment operator
-    void operator=(const YoungLaplaceEquations &)
+    void operator=(const YoungLaplaceEquations&)
     {
       BrokenCopy::broken_assign("YoungLaplaceEquations");
     }
 
     /// Access function: Nodal function value at local node n
     /// Uses suitably interpolated value for hanging nodes.
-    virtual inline double u(const unsigned &n) const
+    virtual inline double u(const unsigned& n) const
     {
       return nodal_value(n, 0);
     }
 
     /// Output with default number of plot points
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       unsigned n_plot = 5;
       output(outfile, n_plot);
@@ -106,20 +106,20 @@ namespace oomph
 
     /// \short Output FE representation of soln
     /// at n_plot^2 plot points
-    void output(std::ostream &outfile, const unsigned &n_plot);
+    void output(std::ostream& outfile, const unsigned& n_plot);
 
     /// Output exact soln at n_plot^2 plot points
-    void output_fct(std::ostream &outfile,
-                    const unsigned &n_plot,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& n_plot,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
 
     /// \short Output exact soln at
     /// n_plot^2 plot points (dummy time-dependent version to
     /// keep intel compiler happy)
     virtual void output_fct(
-      std::ostream &outfile,
-      const unsigned &n_plot,
-      const double &time,
+      std::ostream& outfile,
+      const unsigned& n_plot,
+      const double& time,
       FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
     {
       throw OomphLibError("These equations are steady => no time dependence",
@@ -128,17 +128,17 @@ namespace oomph
     }
 
     /// Get error against and norm of exact solution
-    void compute_error(std::ostream &outfile,
+    void compute_error(std::ostream& outfile,
                        FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-                       double &error,
-                       double &norm);
+                       double& error,
+                       double& norm);
 
     /// Dummy, time dependent error checker
-    void compute_error(std::ostream &outfile,
+    void compute_error(std::ostream& outfile,
                        FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
-                       const double &time,
-                       double &error,
-                       double &norm)
+                       const double& time,
+                       double& error,
+                       double& norm)
     {
       throw OomphLibError("These equations are steady => no time dependence",
                           OOMPH_CURRENT_FUNCTION,
@@ -148,7 +148,7 @@ namespace oomph
     /// \short Access function: Pointer Data object that stores kappa (const
     /// version -- kappa must be set with set_kappa() which also ensures
     /// that the Data object is added to the element's external Data.
-    Data *kappa_pt()
+    Data* kappa_pt()
     {
       return Kappa_pt;
     }
@@ -162,20 +162,20 @@ namespace oomph
 
     /// \short Access function to function pointer that specifies spine base
     /// vector field
-    SpineBaseFctPt &spine_base_fct_pt()
+    SpineBaseFctPt& spine_base_fct_pt()
     {
       return Spine_base_fct_pt;
     }
 
     /// \short Access function to function pointer that specifies spine
     /// vector field
-    SpineFctPt &spine_fct_pt()
+    SpineFctPt& spine_fct_pt()
     {
       return Spine_fct_pt;
     }
 
     /// Set curvature data (and add it to the element's external Data)
-    void set_kappa(Data *kappa_pt)
+    void set_kappa(Data* kappa_pt)
     {
 #ifdef PARANOID
       if (kappa_pt->nvalue() != 1)
@@ -209,7 +209,7 @@ namespace oomph
     }
 
     /// Get flux: flux[i] = du/dx_i: Mainly used for error estimation.
-    void get_flux(const Vector<double> &s, Vector<double> &flux) const
+    void get_flux(const Vector<double>& s, Vector<double>& flux) const
     {
       // Find out how many nodes there are in the element
       unsigned n_node = nnode();
@@ -242,9 +242,9 @@ namespace oomph
     /// representation if no spine base fct pointers have been set.
     /// dspine_B[i][j] = d spine_B[j] / dx_i
     inline virtual void get_spine_base(
-      const Vector<double> &x,
-      Vector<double> &spine_base,
-      Vector<Vector<double>> &dspine_base) const
+      const Vector<double>& x,
+      Vector<double>& spine_base,
+      Vector<Vector<double>>& dspine_base) const
     {
       // If no spine function has been set, default to vertical spines
       // emanating from x[0](,x[1])
@@ -269,9 +269,9 @@ namespace oomph
     /// \short Get spine vector field: Defaults to standard cartesian
     /// representation if no spine base fct pointers have been set.
     /// dspine[i][j] = d spine[j] / dx_i
-    inline void get_spine(const Vector<double> &x,
-                          Vector<double> &spine,
-                          Vector<Vector<double>> &dspine) const
+    inline void get_spine(const Vector<double>& x,
+                          Vector<double>& spine,
+                          Vector<Vector<double>>& dspine) const
     {
       // If no spine function has been set, default to vertical spines
       // emanating from x[0](,x[1])
@@ -297,18 +297,18 @@ namespace oomph
     }
 
     /// Get position vector to meniscus at local coordinate s
-    void position(const Vector<double> &s, Vector<double> &r) const;
+    void position(const Vector<double>& s, Vector<double>& r) const;
 
     /// Get exact position vector to meniscus at local coordinate s
-    void exact_position(const Vector<double> &s,
-                        Vector<double> &r,
+    void exact_position(const Vector<double>& s,
+                        Vector<double>& r,
                         FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
 
     /// Add the element's contribution to its residual vector
-    void fill_in_contribution_to_residuals(Vector<double> &residuals);
+    void fill_in_contribution_to_residuals(Vector<double>& residuals);
 
     /// Return FE representation of function value u(s) at local coordinate s
-    inline double interpolated_u(const Vector<double> &s) const
+    inline double interpolated_u(const Vector<double>& s) const
     {
       // Find number of nodes
       unsigned n_node = nnode();
@@ -338,7 +338,7 @@ namespace oomph
     /// to v(n_rows,n_cols) and initialise each component to 0.0.
     static void allocate_vector_of_vectors(unsigned n_rows,
                                            unsigned n_cols,
-                                           Vector<Vector<double>> &v)
+                                           Vector<Vector<double>>& v)
     {
       v.resize(n_rows);
       for (unsigned i = 0; i < n_rows; i++)
@@ -352,9 +352,9 @@ namespace oomph
     }
 
     /// Multiply a vector by a scalar
-    static void scalar_times_vector(const double &lambda,
-                                    const Vector<double> &v,
-                                    Vector<double> &lambda_times_v)
+    static void scalar_times_vector(const double& lambda,
+                                    const Vector<double>& v,
+                                    Vector<double>& lambda_times_v)
     {
       unsigned n = v.size();
       for (unsigned i = 0; i < n; i++)
@@ -364,7 +364,7 @@ namespace oomph
     }
 
     /// 2-norm of a vector
-    static double two_norm(const Vector<double> &v)
+    static double two_norm(const Vector<double>& v)
     {
       double norm = 0.0;
       unsigned n = v.size();
@@ -376,8 +376,8 @@ namespace oomph
     }
 
     /// Scalar product between two vectors
-    static double scalar_product(const Vector<double> &v1,
-                                 const Vector<double> &v2)
+    static double scalar_product(const Vector<double>& v1,
+                                 const Vector<double>& v2)
     {
       double scalar = 0.0;
       unsigned n = v1.size();
@@ -389,9 +389,9 @@ namespace oomph
     }
 
     /// Cross-product: v_cross= v1 x v2
-    static void cross_product(const Vector<double> &v1,
-                              const Vector<double> &v2,
-                              Vector<double> &v_cross)
+    static void cross_product(const Vector<double>& v1,
+                              const Vector<double>& v2,
+                              Vector<double>& v_cross)
     {
 #ifdef PARANOID
       if ((v1.size() != v2.size()) || (v1.size() != 3))
@@ -407,9 +407,9 @@ namespace oomph
     }
 
     /// Vectorial sum of two vectors
-    static void vector_sum(const Vector<double> &v1,
-                           const Vector<double> &v2,
-                           Vector<double> &vs)
+    static void vector_sum(const Vector<double>& v1,
+                           const Vector<double>& v2,
+                           Vector<double>& vs)
     {
       unsigned n = v1.size();
       for (unsigned i = 0; i < n; i++)
@@ -422,7 +422,7 @@ namespace oomph
     /// \short Get the local equation number of the (one and only) unknown
     /// stored at local node n (returns -1 if value is pinned).
     /// Can be overloaded in derived multiphysics elements.
-    virtual inline int u_local_eqn(const unsigned &n)
+    virtual inline int u_local_eqn(const unsigned& n)
     {
       return nodal_local_eqn(n, 0);
     }
@@ -441,7 +441,7 @@ namespace oomph
     /// -- private to ensure that it must be set with
     /// set_kappa(...) which adds the Data to the element's internal
     /// Data!
-    Data *Kappa_pt;
+    Data* Kappa_pt;
   };
 
   ///////////////////////////////////////////////////////////////////////////
@@ -468,39 +468,39 @@ namespace oomph
     QYoungLaplaceElement() : QElement<2, NNODE_1D>(), YoungLaplaceEquations() {}
 
     /// Broken copy constructor
-    QYoungLaplaceElement(const QYoungLaplaceElement<NNODE_1D> &dummy)
+    QYoungLaplaceElement(const QYoungLaplaceElement<NNODE_1D>& dummy)
     {
       BrokenCopy::broken_copy("QYoungLaplaceElement");
     }
 
     /// Broken assignment operator
-    void operator=(const QYoungLaplaceElement<NNODE_1D> &)
+    void operator=(const QYoungLaplaceElement<NNODE_1D>&)
     {
       BrokenCopy::broken_assign("QYoungLaplaceElement");
     }
 
     /// \short  Required  # of `values' (pinned or dofs)
     /// at node n
-    inline unsigned required_nvalue(const unsigned &n) const
+    inline unsigned required_nvalue(const unsigned& n) const
     {
       return Initial_Nvalue[n];
     }
 
     /// \short Output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       YoungLaplaceEquations::output(outfile);
     }
 
     ///  \short Output function at n_plot^2 plot points
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       YoungLaplaceEquations::output(outfile, n_plot);
     }
 
     /// \short Output function for an exact solutio at n_plot^2 plot points
-    void output_fct(std::ostream &outfile,
-                    const unsigned &n_plot,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& n_plot,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
     {
       YoungLaplaceEquations::output_fct(outfile, n_plot, exact_soln_pt);
@@ -508,9 +508,9 @@ namespace oomph
 
     /// \short Output function for a time-dependent exact solution
     /// at n_plot^2 plot points (calls the steady version)
-    void output_fct(std::ostream &outfile,
-                    const unsigned &n_plot,
-                    const double &time,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& n_plot,
+                    const double& time,
                     FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
     {
       YoungLaplaceEquations::output_fct(outfile, n_plot, time, exact_soln_pt);
@@ -554,7 +554,7 @@ namespace oomph
     /// Constructor: Pass pointer to node at which the height is controlled
     /// and pointer to double that stores the prescribed height at that
     /// node.
-    HeightControlElement(Node *control_node_pt, double *prescribed_height_pt) :
+    HeightControlElement(Node* control_node_pt, double* prescribed_height_pt) :
       GeneralisedElement()
     {
       // Store pointer to prescribed height value
@@ -570,12 +570,12 @@ namespace oomph
       Curvature_data_index = add_internal_data(new Data(1));
 
       // Add control_node_pt as external data
-      add_external_data(static_cast<Data *>(control_node_pt));
+      add_external_data(static_cast<Data*>(control_node_pt));
     }
 
     /// \short Access function to the pointer to the Data object that
     /// stores the curvature.
-    Data *&kappa_pt()
+    Data*& kappa_pt()
     {
       return internal_data_pt(Curvature_data_index);
     }
@@ -593,7 +593,7 @@ namespace oomph
     /// \short Add the element's contribution to its residual vector:
     /// The height constraint. [Note: Jacobian is computed
     /// automatically by finite-differencing]
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       residuals[Height_ctrl_local_eqn] =
         Control_node_pt->value(0) - (*Prescribed_height_pt);
@@ -601,10 +601,10 @@ namespace oomph
 
   private:
     /// Pointer to value that stores the controlled height
-    double *Prescribed_height_pt;
+    double* Prescribed_height_pt;
 
     /// \short Pointer to node at which the height is controlled
-    Node *Control_node_pt;
+    Node* Control_node_pt;
 
     /// \short In which component (in the vector of the element's internal
     /// Data) is the unknown curvature stored?

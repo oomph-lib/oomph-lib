@@ -58,7 +58,7 @@ namespace oomph
     ///\short Calculates Legendre polynomial of degree p at x
     /// using the three term recurrence relation
     /// \f$ (n+1) P_{n+1} = (2n+1)xP_{n} - nP_{n-1} \f$
-    inline double legendre(const unsigned &p, const double &x)
+    inline double legendre(const unsigned& p, const double& x)
     {
       // Return the constant value
       if (p == 0) return 1.0;
@@ -88,9 +88,9 @@ namespace oomph
     /// \short Calculates Legendre polynomial of degree p at x
     /// using three term recursive formula. Returns all polynomials up to
     /// order p in the vector
-    inline void legendre_vector(const unsigned &p,
-                                const double &x,
-                                Vector<double> &polys)
+    inline void legendre_vector(const unsigned& p,
+                                const double& x,
+                                Vector<double>& polys)
     {
       // Set the constant term
       polys[0] = 1.0;
@@ -120,7 +120,7 @@ namespace oomph
     /// polynomial of degree p at x
     /// using three term recursive formula.
     /// \f$ nP_{n+1}^{'} = (2n+1)xP_{n}^{'} - (n+1)P_{n-1}^{'} \f$
-    inline double dlegendre(const unsigned &p, const double &x)
+    inline double dlegendre(const unsigned& p, const double& x)
     {
       double dL1 = 1.0, dL2 = 3 * x, dL3 = 0.0;
       if (p == 0) return 0.0;
@@ -143,7 +143,7 @@ namespace oomph
     /// \short Calculates second derivative of Legendre
     /// polynomial of degree p at x
     /// using three term recursive formula.
-    inline double ddlegendre(const unsigned &p, const double &x)
+    inline double ddlegendre(const unsigned& p, const double& x)
     {
       double ddL2 = 3.0, ddL3 = 15 * x, ddL4 = 0.0;
       if (p == 0) return 0.0;
@@ -167,10 +167,10 @@ namespace oomph
     }
 
     /// \short Calculate the Jacobi polnomials
-    inline double jacobi(const int &alpha,
-                         const int &beta,
-                         const unsigned &p,
-                         const double &x)
+    inline double jacobi(const int& alpha,
+                         const int& beta,
+                         const unsigned& p,
+                         const double& x)
     {
       double P0 = 1.0;
       double P1 = 0.5 * (alpha - beta + (alpha + beta + 2.0) * x);
@@ -199,11 +199,11 @@ namespace oomph
     }
 
     /// \short Calculate the Jacobi polnomials all in one goe
-    inline void jacobi(const int &alpha,
-                       const int &beta,
-                       const unsigned &p,
-                       const double &x,
-                       Vector<double> &polys)
+    inline void jacobi(const int& alpha,
+                       const int& beta,
+                       const unsigned& p,
+                       const double& x,
+                       Vector<double>& polys)
     {
       // Set the constant term
       polys[0] = 1.0;
@@ -239,16 +239,16 @@ namespace oomph
     }
 
     /// Calculates the Gauss Lobatto Legendre abscissas for degree p = NNode-1
-    void gll_nodes(const unsigned &Nnode, Vector<double> &x);
+    void gll_nodes(const unsigned& Nnode, Vector<double>& x);
 
     // This version of gll_nodes calculates the abscissas AND weights
-    void gll_nodes(const unsigned &Nnode, Vector<double> &x, Vector<double> &w);
+    void gll_nodes(const unsigned& Nnode, Vector<double>& x, Vector<double>& w);
 
     // Calculates the Gauss Legendre abscissas of degree p=Nnode-1
-    void gl_nodes(const unsigned &Nnode, Vector<double> &x);
+    void gl_nodes(const unsigned& Nnode, Vector<double>& x);
 
     // This version of gl_nodes calculates the abscissas AND weights
-    void gl_nodes(const unsigned &Nnode, Vector<double> &x, Vector<double> &w);
+    void gl_nodes(const unsigned& Nnode, Vector<double>& x, Vector<double>& w);
 
   } // namespace Orthpoly
 

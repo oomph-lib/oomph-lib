@@ -62,9 +62,9 @@ class FlowPastBoxProblem : public Problem
 {
 public:
   /// Constructor: Pass filenames for mesh
-  FlowPastBoxProblem(const string &node_file_name,
-                     const string &element_file_name,
-                     const string &poly_file_name);
+  FlowPastBoxProblem(const string& node_file_name,
+                     const string& element_file_name,
+                     const string& poly_file_name);
 
   /// Destructor (empty)
   ~FlowPastBoxProblem() {}
@@ -117,13 +117,13 @@ public:
   } // end_of_actions_before_newton_solve
 
   /// Access function for the specific mesh
-  TriangleMesh<ELEMENT> *mesh_pt()
+  TriangleMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<TriangleMesh<ELEMENT> *>(Problem::mesh_pt());
+    return dynamic_cast<TriangleMesh<ELEMENT>*>(Problem::mesh_pt());
   }
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 }; // end_of_problem_class
 
@@ -131,9 +131,9 @@ public:
 /// Constructor for FlowPastBox problem. Pass filenames for mesh
 //========================================================================
 template<class ELEMENT>
-FlowPastBoxProblem<ELEMENT>::FlowPastBoxProblem(const string &node_file_name,
-                                                const string &element_file_name,
-                                                const string &poly_file_name)
+FlowPastBoxProblem<ELEMENT>::FlowPastBoxProblem(const string& node_file_name,
+                                                const string& element_file_name,
+                                                const string& poly_file_name)
 {
   Problem::Max_residuals = 1000.0;
 
@@ -158,7 +158,7 @@ FlowPastBoxProblem<ELEMENT>::FlowPastBoxProblem(const string &node_file_name,
 
   // Pin the zero-th pressure dof in the zero-th element
   // and set it to zero
-  dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(0))->fix_pressure(0, 0.0);
+  dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(0))->fix_pressure(0, 0.0);
 
   // Complete the build of all elements so they are fully functional
 
@@ -170,7 +170,7 @@ FlowPastBoxProblem<ELEMENT>::FlowPastBoxProblem(const string &node_file_name,
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -185,7 +185,7 @@ FlowPastBoxProblem<ELEMENT>::FlowPastBoxProblem(const string &node_file_name,
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void FlowPastBoxProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void FlowPastBoxProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -209,7 +209,7 @@ void FlowPastBoxProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
 //==start_of_main======================================================
 /// Driver for FlowPastBox test problem
 //=====================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

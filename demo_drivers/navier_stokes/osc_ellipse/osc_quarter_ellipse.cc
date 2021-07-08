@@ -53,10 +53,10 @@ class MyEllipse : public GeomObject
 public:
   /// \short Constructor:  Pass initial x-half axis, amplitude of x-variation,
   /// period of oscillation and pointer to time object.
-  MyEllipse(const double &a,
-            const double &a_hat,
-            const double &period,
-            Time *time_pt) :
+  MyEllipse(const double& a,
+            const double& a_hat,
+            const double& period,
+            Time* time_pt) :
     GeomObject(1, 2), A(a), A_hat(a_hat), T(period), Time_pt(time_pt)
   {
   }
@@ -66,7 +66,7 @@ public:
 
   /// \short Current position vector to material point at
   /// Lagrangian coordinate xi
-  void position(const Vector<double> &xi, Vector<double> &r) const
+  void position(const Vector<double>& xi, Vector<double>& r) const
   {
     // Get current time:
     double time = Time_pt->time();
@@ -80,9 +80,9 @@ public:
   /// \short Parametrised position on object: r(xi). Evaluated at
   /// previous time level. t=0: current time; t>0: previous
   /// time level.
-  void position(const unsigned &t,
-                const Vector<double> &xi,
-                Vector<double> &r) const
+  void position(const unsigned& t,
+                const Vector<double>& xi,
+                Vector<double>& r) const
   {
     // Get current time:
     double time = Time_pt->time(t);
@@ -104,7 +104,7 @@ private:
   double T;
 
   /// Pointer to time object
-  Time *Time_pt;
+  Time* Time_pt;
 
 }; // end of MyEllipse
 
@@ -133,7 +133,7 @@ namespace Global_Physical_Variables
   double T = 1.0;
 
   /// Exact solution of the problem as a vector containing u,v,p
-  void get_exact_u(const double &t, const Vector<double> &x, Vector<double> &u)
+  void get_exact_u(const double& t, const Vector<double>& x, Vector<double>& u)
   {
     using namespace MathematicalConstants;
 
@@ -220,7 +220,7 @@ public:
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Which node are we dealing with?
-      Node *node_pt = mesh_pt()->boundary_node_pt(ibound, inod);
+      Node* node_pt = mesh_pt()->boundary_node_pt(ibound, inod);
 
       // Apply no slip
       FSI_functions::apply_no_slip_on_moving_wall(node_pt);
@@ -231,27 +231,27 @@ public:
   void actions_after_implicit_timestep() {}
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// Timestepping loop
-  void unsteady_run(DocInfo &doc_info);
+  void unsteady_run(DocInfo& doc_info);
 
   /// \short Set initial condition
   void set_initial_condition();
 
 private:
   /// Fix pressure in element e at pressure dof pdof and set to pvalue
-  void fix_pressure(const unsigned &e,
-                    const unsigned &pdof,
-                    const double &pvalue)
+  void fix_pressure(const unsigned& e,
+                    const unsigned& pdof,
+                    const double& pvalue)
   {
     // Cast to proper element and fix pressure
-    dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e))
+    dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))
       ->fix_pressure(pdof, pvalue);
   } // end_of_fix_pressure
 
   /// Pointer to GeomObject that specifies the domain bondary
-  GeomObject *Wall_pt;
+  GeomObject* Wall_pt;
 
 }; // end of problem_class
 
@@ -352,7 +352,7 @@ OscEllipseProblem<ELEMENT, TIMESTEPPER>::OscEllipseProblem()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from FiniteElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the Reynolds number, etc
     el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -448,7 +448,7 @@ void OscEllipseProblem<ELEMENT, TIMESTEPPER>::set_initial_condition()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT, class TIMESTEPPER>
-void OscEllipseProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo &doc_info)
+void OscEllipseProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -543,7 +543,7 @@ void OscEllipseProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo &doc_info)
 /// Unsteady run
 //========================================================================
 template<class ELEMENT, class TIMESTEPPER>
-void OscEllipseProblem<ELEMENT, TIMESTEPPER>::unsteady_run(DocInfo &doc_info)
+void OscEllipseProblem<ELEMENT, TIMESTEPPER>::unsteady_run(DocInfo& doc_info)
 {
   // Specify duration of the simulation
   double t_max = 3.0;
@@ -606,7 +606,7 @@ void OscEllipseProblem<ELEMENT, TIMESTEPPER>::unsteady_run(DocInfo &doc_info)
 /// oscillating ellipse. If the code is executed with command line
 /// arguments, a validation run is performed.
 //====================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

@@ -62,21 +62,21 @@ namespace oomph
 
     /// Call the residuals including hanging node cases
     void fill_in_generic_contribution_to_residuals_pvd(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      const unsigned &flag);
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag);
 
     /// No values are interpolated in this element (pure solid)
-    void get_interpolated_values(const unsigned &t,
-                                 const Vector<double> &s,
-                                 Vector<double> &values)
+    void get_interpolated_values(const unsigned& t,
+                                 const Vector<double>& s,
+                                 Vector<double>& values)
     {
       values.clear();
     }
 
     /// No values are interpolated in this element (pure solid)
-    void get_interpolated_values(const Vector<double> &s,
-                                 Vector<double> &values)
+    void get_interpolated_values(const Vector<double>& s,
+                                 Vector<double>& values)
     {
       values.clear();
     }
@@ -90,7 +90,7 @@ namespace oomph
 
     /// \short Get 'flux' for Z2 error recovery:   Upper triangular entries
     /// in strain tensor.
-    void get_Z2_flux(const Vector<double> &s, Vector<double> &flux)
+    void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
 #ifdef PARANOID
       unsigned num_entries = DIM + ((DIM * DIM) - DIM) / 2;
@@ -140,7 +140,7 @@ namespace oomph
     // Return a pointer to the solid node at which pressure dof l2 is stored
     // This is only required so that the generic templating in
     // PseudoSolidNodeUpdateElements works OK
-    virtual Node *solid_pressure_node_pt(const unsigned &l)
+    virtual Node* solid_pressure_node_pt(const unsigned& l)
     {
       return 0;
     }
@@ -148,8 +148,8 @@ namespace oomph
     /// Further build function, pass the pointers down to the sons
     void further_build()
     {
-      RefineablePVDEquations<DIM> *cast_father_element_pt =
-        dynamic_cast<RefineablePVDEquations<DIM> *>(this->father_element_pt());
+      RefineablePVDEquations<DIM>* cast_father_element_pt =
+        dynamic_cast<RefineablePVDEquations<DIM>*>(this->father_element_pt());
 
       // Do whatever needs to be done in the base class
       RefineableSolidElement::further_build();
@@ -197,7 +197,7 @@ namespace oomph
     }
 
     /// Empty rebuild from sons, no need to reconstruct anything here
-    void rebuild_from_sons(Mesh *&mesh_pt) {}
+    void rebuild_from_sons(Mesh*& mesh_pt) {}
 
     /// \short Number of vertex nodes in the element
     unsigned nvertex_node() const
@@ -206,7 +206,7 @@ namespace oomph
     }
 
     /// \short Pointer to the j-th vertex node in the element
-    Node *vertex_node_pt(const unsigned &j) const
+    Node* vertex_node_pt(const unsigned& j) const
     {
       return QPVDElement<DIM, NNODE_1D>::vertex_node_pt(j);
     }
@@ -301,22 +301,22 @@ namespace oomph
     /// flag=1: compute both
     /// flag=0: compute only residual vector
     void fill_in_generic_residual_contribution_pvd_with_pressure(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix,
-      const unsigned &flag);
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
+      const unsigned& flag);
 
     /// No values are interpolated in this element (pure solid)
-    void get_interpolated_values(const unsigned &t,
-                                 const Vector<double> &s,
-                                 Vector<double> &values)
+    void get_interpolated_values(const unsigned& t,
+                                 const Vector<double>& s,
+                                 Vector<double>& values)
     {
       values.clear();
     }
 
     /// No values are interpolated in this element (pure solid)
-    void get_interpolated_values(const Vector<double> &s,
-                                 Vector<double> &values)
+    void get_interpolated_values(const Vector<double>& s,
+                                 Vector<double>& values)
     {
       values.clear();
     }
@@ -331,7 +331,7 @@ namespace oomph
     // Get 'flux' for Z2 error recovery:   Upper triangular entries
     /// in strain tensor.
     //----------------------------------------------------------------
-    void get_Z2_flux(const Vector<double> &s, Vector<double> &flux)
+    void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
       // Find the dimension of the problem
 #ifdef PARANOID
@@ -380,7 +380,7 @@ namespace oomph
     }
 
     // Return a pointer to the solid node at which pressure dof l2 is stored
-    virtual Node *solid_pressure_node_pt(const unsigned &l)
+    virtual Node* solid_pressure_node_pt(const unsigned& l)
     {
       return 0;
     }
@@ -388,8 +388,8 @@ namespace oomph
     /// Pass the generic stuff down to the sons
     void further_build()
     {
-      RefineablePVDEquationsWithPressure<DIM> *cast_father_element_pt =
-        dynamic_cast<RefineablePVDEquationsWithPressure<DIM> *>(
+      RefineablePVDEquationsWithPressure<DIM>* cast_father_element_pt =
+        dynamic_cast<RefineablePVDEquationsWithPressure<DIM>*>(
           this->father_element_pt());
 
       // Do whatever needs to be done in the base class
@@ -421,7 +421,7 @@ namespace oomph
 
     /// \short Compute the diagonal of the displacement mass matrix for
     /// LSC preconditioner
-    void get_mass_matrix_diagonal(Vector<double> &mass_diag);
+    void get_mass_matrix_diagonal(Vector<double>& mass_diag);
   };
 
   //===========================================================================
@@ -461,7 +461,7 @@ namespace oomph
 
     /// \short Reconstruct the pressure from the sons
     /// Must be specialized for each dimension
-    inline void rebuild_from_sons(Mesh *&mesh_pt);
+    inline void rebuild_from_sons(Mesh*& mesh_pt);
 
     /// \short Number of vertex nodes in the element
     unsigned nvertex_node() const
@@ -470,7 +470,7 @@ namespace oomph
     }
 
     /// \short Pointer to the j-th vertex node in the element
-    Node *vertex_node_pt(const unsigned &j) const
+    Node* vertex_node_pt(const unsigned& j) const
     {
       return QPVDElementWithPressure<DIM>::vertex_node_pt(j);
     }
@@ -529,7 +529,7 @@ namespace oomph
   //===================================================================
   template<>
   inline void RefineableQPVDElementWithPressure<2>::rebuild_from_sons(
-    Mesh *&mesh_pt)
+    Mesh*& mesh_pt)
   {
     using namespace QuadTreeNames;
 
@@ -541,7 +541,7 @@ namespace oomph
     {
       // Add the sons midnode pressure
       centre_solid_p[ison] =
-        dynamic_cast<RefineableQPVDElementWithPressure<2> *>(
+        dynamic_cast<RefineableQPVDElementWithPressure<2>*>(
           quadtree_pt()->son_pt(ison)->object_pt())
           ->solid_p(0);
     }
@@ -597,7 +597,7 @@ namespace oomph
     int son_type = quadtree_pt()->son_type();
 
     // Pointer to my father (in element impersonation)
-    RefineableElement *father_el_pt = quadtree_pt()->father_pt()->object_pt();
+    RefineableElement* father_el_pt = quadtree_pt()->father_pt()->object_pt();
 
     Vector<double> s_father(2);
 
@@ -630,8 +630,8 @@ namespace oomph
     }
 
     // Pressure value in father element
-    RefineableQPVDElementWithPressure<2> *cast_father_element_pt =
-      dynamic_cast<RefineableQPVDElementWithPressure<2> *>(father_el_pt);
+    RefineableQPVDElementWithPressure<2>* cast_father_element_pt =
+      dynamic_cast<RefineableQPVDElementWithPressure<2>*>(father_el_pt);
     double press = cast_father_element_pt->interpolated_solid_p(s_father);
 
     // Pressure  value gets copied straight into internal dof:
@@ -647,7 +647,7 @@ namespace oomph
   //===============================================================
   template<>
   inline void RefineableQPVDElementWithPressure<3>::rebuild_from_sons(
-    Mesh *&mesh_pt)
+    Mesh*& mesh_pt)
   {
     using namespace OcTreeNames;
 
@@ -747,7 +747,7 @@ namespace oomph
     int son_type = octree_pt()->son_type();
 
     // Pointer to my father (in element impersonation)
-    RefineableQElement<3> *father_el_pt = dynamic_cast<RefineableQElement<3> *>(
+    RefineableQElement<3>* father_el_pt = dynamic_cast<RefineableQElement<3>*>(
       octree_pt()->father_pt()->object_pt());
 
     Vector<double> s_father(3);
@@ -759,8 +759,8 @@ namespace oomph
     }
 
     // Pressure value in father element
-    RefineableQPVDElementWithPressure<3> *cast_father_element_pt =
-      dynamic_cast<RefineableQPVDElementWithPressure<3> *>(father_el_pt);
+    RefineableQPVDElementWithPressure<3>* cast_father_element_pt =
+      dynamic_cast<RefineableQPVDElementWithPressure<3>*>(father_el_pt);
 
     double press = cast_father_element_pt->interpolated_solid_p(s_father);
 
@@ -825,7 +825,7 @@ namespace oomph
 
     /// \short Overload the number of additional solid dofs at each node, we
     /// shall always assign 1, otherwise it's a real pain
-    unsigned required_nvalue(const unsigned &n) const
+    unsigned required_nvalue(const unsigned& n) const
     {
       return 1;
     }
@@ -837,11 +837,11 @@ namespace oomph
     }
 
     /// Empty rebuild from sons, empty
-    void rebuild_from_sons(Mesh *&mesh_pt) {}
+    void rebuild_from_sons(Mesh*& mesh_pt) {}
 
     /// OK, interpolate the solid pressures
-    void get_interpolated_values(const Vector<double> &s,
-                                 Vector<double> &values)
+    void get_interpolated_values(const Vector<double>& s,
+                                 Vector<double>& values)
     {
       // There is only one solid pressure, initialise to zero
       values.resize(1);
@@ -851,9 +851,9 @@ namespace oomph
     }
 
     /// OK get the time-dependent verion
-    void get_interpolated_values(const unsigned &t,
-                                 const Vector<double> &s,
-                                 Vector<double> &values)
+    void get_interpolated_values(const unsigned& t,
+                                 const Vector<double>& s,
+                                 Vector<double>& values)
     {
       // There is only one solid pressure, initialise to zero
       values.resize(1);
@@ -892,7 +892,7 @@ namespace oomph
       // Loop over these nodes and unpin the solid pressures
       for (unsigned l = 0; l < n_solid_pres; l++)
       {
-        Node *nod_pt = this->solid_pressure_node_pt(l);
+        Node* nod_pt = this->solid_pressure_node_pt(l);
         if (!nod_pt->is_hanging(solid_p_index))
         {
           nod_pt->unpin(solid_p_index);
@@ -907,7 +907,7 @@ namespace oomph
     }
 
     /// \short Pointer to the j-th vertex node in the element
-    Node *vertex_node_pt(const unsigned &j) const
+    Node* vertex_node_pt(const unsigned& j) const
     {
       return QPVDElementWithContinuousPressure<DIM>::vertex_node_pt(j);
     }
@@ -922,7 +922,7 @@ namespace oomph
     /// \short The pressure "nodes" are a
     /// subset of the nodes, so when value_id==0, the n-th pressure
     /// node is returned.
-    Node *interpolating_node_pt(const unsigned &n, const int &value_id)
+    Node* interpolating_node_pt(const unsigned& n, const int& value_id)
 
     {
 #ifdef PARANOID
@@ -942,9 +942,9 @@ namespace oomph
 
     /// \short The pressure nodes are the corner nodes, so when value_id==0,
     /// the fraction is the same as the 1d node number, 0 or 1.
-    double local_one_d_fraction_of_interpolating_node(const unsigned &n1d,
-                                                      const unsigned &i,
-                                                      const int &value_id)
+    double local_one_d_fraction_of_interpolating_node(const unsigned& n1d,
+                                                      const unsigned& i,
+                                                      const int& value_id)
     {
 #ifdef PARANOID
       RefineableElement::check_value_id(1, value_id);
@@ -966,8 +966,8 @@ namespace oomph
     /// pressure nodes must be calculated by using the same methods as
     /// the geometric nodes, but by recalling that there are only two pressure
     /// nodes per edge.
-    Node *get_interpolating_node_at_local_coordinate(const Vector<double> &s,
-                                                     const int &value_id)
+    Node* get_interpolating_node_at_local_coordinate(const Vector<double>& s,
+                                                     const int& value_id)
     {
 #ifdef PARANOID
       RefineableElement::check_value_id(1, value_id);
@@ -1030,7 +1030,7 @@ namespace oomph
 
     /// \short The number of 1d pressure nodes is 2, otherwise we have
     /// the positional nodes
-    unsigned ninterpolating_node_1d(const int &value_id)
+    unsigned ninterpolating_node_1d(const int& value_id)
     {
 #ifdef PARANOID
       RefineableElement::check_value_id(1, value_id);
@@ -1048,7 +1048,7 @@ namespace oomph
 
     /// \short The number of pressure nodes is 2^DIM. The number of
     /// velocity nodes is the same as the number of geometric nodes.
-    unsigned ninterpolating_node(const int &value_id)
+    unsigned ninterpolating_node(const int& value_id)
     {
 #ifdef PARANOID
       RefineableElement::check_value_id(1, value_id);
@@ -1066,9 +1066,9 @@ namespace oomph
 
     /// \short The basis interpolating the pressure is given by pshape().
     //// The basis interpolating the velocity is shape().
-    void interpolating_basis(const Vector<double> &s,
-                             Shape &psi,
-                             const int &value_id) const
+    void interpolating_basis(const Vector<double>& s,
+                             Shape& psi,
+                             const int& value_id) const
     {
 #ifdef PARANOID
       RefineableElement::check_value_id(1, value_id);
@@ -1092,7 +1092,7 @@ namespace oomph
     }
 
     // Return a pointer to the solid node at which pressure dof l2 is stored
-    Node *solid_pressure_node_pt(const unsigned &l)
+    Node* solid_pressure_node_pt(const unsigned& l)
     {
       return this->node_pt(this->Pconv[l]);
     }

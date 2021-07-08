@@ -203,22 +203,22 @@ class SegregatedFSICollapsibleChannelProblem :
   /// (in their incarnation as
   /// GeomObjects) that contains the control points and the local coordinate
   /// in those objects
-  Vector<std::pair<GeomObject *, Vector<double>>> Control_point_pair;
+  Vector<std::pair<GeomObject*, Vector<double>>> Control_point_pair;
 
 public:
   /// \short Constructor: The arguments are the same as the original
   /// (non-segregated) problem, namely, numbers of elements and lengths
   /// of different sections of the domain.
-  SegregatedFSICollapsibleChannelProblem(const unsigned &nup,
-                                         const unsigned &ncollapsible,
-                                         const unsigned &ndown,
-                                         const unsigned &ny,
-                                         const double &lup,
-                                         const double &lcollapsible,
-                                         const double &ldown,
-                                         const double &ly,
-                                         const bool &displ_control,
-                                         const bool &steady_flag);
+  SegregatedFSICollapsibleChannelProblem(const unsigned& nup,
+                                         const unsigned& ncollapsible,
+                                         const unsigned& ndown,
+                                         const unsigned& ny,
+                                         const double& lup,
+                                         const double& lcollapsible,
+                                         const double& ldown,
+                                         const double& ly,
+                                         const bool& displ_control,
+                                         const bool& steady_flag);
 
   /// Empty destructor
   ~SegregatedFSICollapsibleChannelProblem() {}
@@ -227,16 +227,16 @@ public:
   /// contain only elements involved in the respective sub-problems.
   /// This is a specific implementation of a pure virtual function in the
   /// SegregatableFSIProblem base class.
-  void identify_fluid_and_solid_dofs(Vector<Data *> &fluid_data_pt,
-                                     Vector<Data *> &solid_data_pt,
-                                     Mesh *&fluid_mesh_pt,
-                                     Mesh *&solid_mesh_pt);
+  void identify_fluid_and_solid_dofs(Vector<Data*>& fluid_data_pt,
+                                     Vector<Data*>& solid_data_pt,
+                                     Mesh*& fluid_mesh_pt,
+                                     Mesh*& solid_mesh_pt);
 
   //============================================================================
   /// Write header for convergence history file
   //============================================================================
-  void write_convergence_history_header(std::ofstream &convergence_file,
-                                        const bool &doc_max_global_residual)
+  void write_convergence_history_header(std::ofstream& convergence_file,
+                                        const bool& doc_max_global_residual)
   {
     convergence_file
       << "VARIABLES=\"iteration\",\"CPU time (excluding doc etc.)\",";
@@ -262,13 +262,13 @@ public:
   //============================================================================
   /// Write to convergence history file
   //============================================================================
-  void write_convergence_history(const unsigned &iter,
-                                 const double &rms_change,
-                                 const double &max_change,
-                                 const double &rms_norm,
-                                 const double &max_res,
-                                 std::ofstream &convergence_file,
-                                 const bool &doc_max_global_residual)
+  void write_convergence_history(const unsigned& iter,
+                                 const double& rms_change,
+                                 const double& max_change,
+                                 const double& rms_norm,
+                                 const double& max_res,
+                                 std::ofstream& convergence_file,
+                                 const bool& doc_max_global_residual)
   {
     // Doc iteration number
     convergence_file << iter << " ";
@@ -298,7 +298,7 @@ public:
   /// convergence history is written. This can be overloaded to insert
   /// zone information that can be used to identify
   /// the problem parameters for this solve.
-  void write_zone_info_for_convergence_history(ofstream &convergence_file);
+  void write_zone_info_for_convergence_history(ofstream& convergence_file);
 
   /// \short Initialise timer and reset counter for Newton iterations
   /// if monolithic solver is used.
@@ -339,30 +339,30 @@ public:
   /// Perform output of wall shape  during after the iter-th
   /// Picard iteration. This re-implements an empty virtual fct
   /// in the SegregatableFSIproblem base class.
-  void solid_output_during_picard(const unsigned &iter, DocInfo &doc_info);
+  void solid_output_during_picard(const unsigned& iter, DocInfo& doc_info);
 
   /// Perform output of fluid flow during after the iter-th
   /// Picard iteration. This re-implements an empty virtual fct
   /// in the SegregatableFSIproblem base class.
-  void fluid_output_during_picard(const unsigned &iter, DocInfo &doc_info);
+  void fluid_output_during_picard(const unsigned& iter, DocInfo& doc_info);
 
   /// Doc the steady solution
-  void doc_solution_steady(DocInfo &doc_info,
-                           ofstream &trace_file,
-                           const double &cpu,
-                           const unsigned &niter);
+  void doc_solution_steady(DocInfo& doc_info,
+                           ofstream& trace_file,
+                           const double& cpu,
+                           const unsigned& niter);
 
   /// Doc the unsteady solution
-  void doc_solution_unsteady(DocInfo &doc_info,
-                             ofstream &trace_file,
-                             const double &cpu,
-                             const unsigned &niter);
+  void doc_solution_unsteady(DocInfo& doc_info,
+                             ofstream& trace_file,
+                             const double& cpu,
+                             const unsigned& niter);
 
   /// Steady run
   void steady_run();
 
   /// Unsteady run
-  void unsteady_run(const double &dummy_dt = 0.1);
+  void unsteady_run(const double& dummy_dt = 0.1);
 
 private:
   /// Output stream to document the convergence history
@@ -374,16 +374,16 @@ private:
 //===============================================================
 template<class ELEMENT>
 SegregatedFSICollapsibleChannelProblem<
-  ELEMENT>::SegregatedFSICollapsibleChannelProblem(const unsigned &nup,
-                                                   const unsigned &ncollapsible,
-                                                   const unsigned &ndown,
-                                                   const unsigned &ny,
-                                                   const double &lup,
-                                                   const double &lcollapsible,
-                                                   const double &ldown,
-                                                   const double &ly,
-                                                   const bool &displ_control,
-                                                   const bool &steady_flag) :
+  ELEMENT>::SegregatedFSICollapsibleChannelProblem(const unsigned& nup,
+                                                   const unsigned& ncollapsible,
+                                                   const unsigned& ndown,
+                                                   const unsigned& ny,
+                                                   const double& lup,
+                                                   const double& lcollapsible,
+                                                   const double& ldown,
+                                                   const double& ly,
+                                                   const bool& displ_control,
+                                                   const bool& steady_flag) :
   FSICollapsibleChannelProblem<ELEMENT>(nup,
                                         ncollapsible,
                                         ndown,
@@ -598,7 +598,7 @@ void SegregatedFSICollapsibleChannelProblem<
 //============================================================================
 template<class ELEMENT>
 void SegregatedFSICollapsibleChannelProblem<
-  ELEMENT>::write_zone_info_for_convergence_history(ofstream &convergence_file)
+  ELEMENT>::write_zone_info_for_convergence_history(ofstream& convergence_file)
 {
   convergence_file << "ZONE T=\"";
   convergence_file << "Re=" << Global_Physical_Variables::Re << ", ";
@@ -635,10 +635,10 @@ void SegregatedFSICollapsibleChannelProblem<
 //============================================================================
 template<class ELEMENT>
 void SegregatedFSICollapsibleChannelProblem<
-  ELEMENT>::identify_fluid_and_solid_dofs(Vector<Data *> &fluid_data_pt,
-                                          Vector<Data *> &solid_data_pt,
-                                          Mesh *&fluid_mesh_pt,
-                                          Mesh *&solid_mesh_pt)
+  ELEMENT>::identify_fluid_and_solid_dofs(Vector<Data*>& fluid_data_pt,
+                                          Vector<Data*>& solid_data_pt,
+                                          Mesh*& fluid_mesh_pt,
+                                          Mesh*& solid_mesh_pt)
 {
   // FLUID DATA:
   // All fluid elements are stored in the Mesh addressed by bulk_mesh_pt()
@@ -651,7 +651,7 @@ void SegregatedFSICollapsibleChannelProblem<
   // Loop over fluid elements and add internal data to fluid_data_ptt
   for (unsigned e = 0; e < n_fluid_elem; e++)
   {
-    GeneralisedElement *el_pt = this->bulk_mesh_pt()->element_pt(e);
+    GeneralisedElement* el_pt = this->bulk_mesh_pt()->element_pt(e);
     unsigned n_internal = el_pt->ninternal_data();
     for (unsigned i = 0; i < n_internal; i++)
     {
@@ -690,7 +690,7 @@ void SegregatedFSICollapsibleChannelProblem<
   // of the solid problem
 
   // We will assemble a single solid mesh from a vector of pointers to meshes
-  Vector<Mesh *> s_mesh_pt(1);
+  Vector<Mesh*> s_mesh_pt(1);
   // The wall_mesh_pt() contains all solid elements and is the first
   // entry in our vector
   s_mesh_pt[0] = this->wall_mesh_pt();
@@ -715,10 +715,10 @@ void SegregatedFSICollapsibleChannelProblem<
 //============================================================================
 template<class ELEMENT>
 void SegregatedFSICollapsibleChannelProblem<ELEMENT>::doc_solution_steady(
-  DocInfo &doc_info,
-  ofstream &trace_file,
-  const double &cpu,
-  const unsigned &niter)
+  DocInfo& doc_info,
+  ofstream& trace_file,
+  const double& cpu,
+  const unsigned& niter)
 {
   ofstream some_file;
   char filename[100];
@@ -761,7 +761,7 @@ void SegregatedFSICollapsibleChannelProblem<ELEMENT>::doc_solution_steady(
   // Get wall control points
   for (unsigned i = 0; i < n_control; i++)
   {
-    std::pair<GeomObject *, Vector<double>> point = Control_point_pair[i];
+    std::pair<GeomObject*, Vector<double>> point = Control_point_pair[i];
 
     // Get position
     Vector<double> r_ctrl(2);
@@ -784,10 +784,10 @@ void SegregatedFSICollapsibleChannelProblem<ELEMENT>::doc_solution_steady(
 //============================================================================
 template<class ELEMENT>
 void SegregatedFSICollapsibleChannelProblem<ELEMENT>::doc_solution_unsteady(
-  DocInfo &doc_info,
-  ofstream &trace_file,
-  const double &cpu,
-  const unsigned &niter)
+  DocInfo& doc_info,
+  ofstream& trace_file,
+  const double& cpu,
+  const unsigned& niter)
 {
   std::cout << "Doc-ing " << doc_info.number() << std::endl;
 
@@ -835,7 +835,7 @@ void SegregatedFSICollapsibleChannelProblem<ELEMENT>::doc_solution_unsteady(
   // Get wall control points
   for (unsigned i = 0; i < n_control; i++)
   {
-    std::pair<GeomObject *, Vector<double>> point = Control_point_pair[i];
+    std::pair<GeomObject*, Vector<double>> point = Control_point_pair[i];
 
     // Get position
     Vector<double> r_ctrl(2);
@@ -1113,7 +1113,7 @@ void SegregatedFSICollapsibleChannelProblem<ELEMENT>::steady_run()
 //============================================================================
 template<class ELEMENT>
 void SegregatedFSICollapsibleChannelProblem<ELEMENT>::unsteady_run(
-  const double &dummy_dt)
+  const double& dummy_dt)
 {
   // Set initial value for external pressure (on the wall stiffness scale).
   // Will be overwritten by restart data if a restart file (and pressure
@@ -1354,7 +1354,7 @@ void SegregatedFSICollapsibleChannelProblem<ELEMENT>::unsteady_run(
 /// Presence of command line arguments indicates validation run with
 /// coarse resolution and small number of steps.
 //=============================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

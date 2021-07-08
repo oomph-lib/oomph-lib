@@ -98,7 +98,7 @@ namespace oomph
         delete[] External_element_pt;
       }
       // Allocate new memory
-      External_element_pt = new FiniteElement *[n_external_element_storage];
+      External_element_pt = new FiniteElement*[n_external_element_storage];
 
       // Initialise all new pointers to zero
       for (unsigned i = 0; i < n_external_element_storage; i++)
@@ -153,15 +153,15 @@ namespace oomph
   //================================================================
   void ElementWithExternalElement::
     identify_all_field_data_for_external_interaction(
-      Vector<std::set<FiniteElement *>> const &external_elements_pt,
-      std::set<std::pair<Data *, unsigned>> &paired_interaction_data)
+      Vector<std::set<FiniteElement*>> const& external_elements_pt,
+      std::set<std::pair<Data*, unsigned>>& paired_interaction_data)
   {
     // Loop over each interaction
     const unsigned n_interaction = this->ninteraction();
     for (unsigned i = 0; i < n_interaction; i++)
     {
       // Loop over each element in the set
-      for (std::set<FiniteElement *>::const_iterator it =
+      for (std::set<FiniteElement*>::const_iterator it =
              external_elements_pt[i].begin();
            it != external_elements_pt[i].end();
            it++)
@@ -179,15 +179,15 @@ namespace oomph
   //=======================================================================
   void ElementWithExternalElement::
     identify_all_geometric_data_for_external_interaction(
-      Vector<std::set<FiniteElement *>> const &external_elements_pt,
-      std::set<Data *> &external_geometric_data_pt)
+      Vector<std::set<FiniteElement*>> const& external_elements_pt,
+      std::set<Data*>& external_geometric_data_pt)
   {
     // Loop over each interaction
     const unsigned n_interaction = this->ninteraction();
     for (unsigned i = 0; i < n_interaction; i++)
     {
       // Loop over each element in the set
-      for (std::set<FiniteElement *>::const_iterator it =
+      for (std::set<FiniteElement*>::const_iterator it =
              external_elements_pt[i].begin();
            it != external_elements_pt[i].end();
            it++)
@@ -206,7 +206,7 @@ namespace oomph
   /// call hierarchy of this function when called from
   /// Problem::describe_dofs(...)
   void ElementWithExternalElement::describe_local_dofs(
-    std::ostream &out, const std::string &current_string) const
+    std::ostream& out, const std::string& current_string) const
   {
     // Find the number of external field data
     const unsigned n_external_field_data = nexternal_interaction_field_data();
@@ -247,7 +247,7 @@ namespace oomph
   //==========================================================================
   void ElementWithExternalElement::
     assign_external_interaction_data_local_eqn_numbers(
-      const bool &store_local_dof_pt)
+      const bool& store_local_dof_pt)
   {
     // Reset number of stored field data to zero
     Nexternal_interaction_field_data = 0;
@@ -305,7 +305,7 @@ namespace oomph
 
         // Sets of all (external) FiniteElements that affect the interactions
         // One set per interaction
-        Vector<std::set<FiniteElement *>> external_interaction_elements_pt(
+        Vector<std::set<FiniteElement*>> external_interaction_elements_pt(
           n_interaction);
 
         // Loop over the interactions
@@ -325,7 +325,7 @@ namespace oomph
 
         // Storage for a pairs of interaction data (pointer to Data and the
         // index of the value within this Data object) affecting the element.
-        std::set<std::pair<Data *, unsigned>> paired_field_data;
+        std::set<std::pair<Data*, unsigned>> paired_field_data;
 
         // Determine the field data that affects the external interactions
         // for all sets of external elements
@@ -339,7 +339,7 @@ namespace oomph
         for (unsigned n = 0; n < n_internal; n++)
         {
           // Cache the data pointer
-          Data *const dat_pt = this->internal_data_pt(n);
+          Data* const dat_pt = this->internal_data_pt(n);
           // Find the number of data values stored in the data object
           const unsigned n_value = dat_pt->nvalue();
           // Add the index of each data value and the pointer to the set
@@ -355,7 +355,7 @@ namespace oomph
         for (unsigned n = 0; n < n_node; n++)
         {
           // Find the node point
-          Node *const nod_pt = this->node_pt(n);
+          Node* const nod_pt = this->node_pt(n);
           // Find the number of values stored at the node
           const unsigned n_value = nod_pt->nvalue();
           // Loop over values and erase all pairs from the set
@@ -363,10 +363,10 @@ namespace oomph
           {
             paired_field_data.erase(std::make_pair(nod_pt, i));
           }
-          SolidNode *solid_nod_pt = dynamic_cast<SolidNode *>(nod_pt);
+          SolidNode* solid_nod_pt = dynamic_cast<SolidNode*>(nod_pt);
           if (solid_nod_pt != 0)
           {
-            Data *pos_data_pt = solid_nod_pt->variable_position_pt();
+            Data* pos_data_pt = solid_nod_pt->variable_position_pt();
             // Find the number of positional values stored at the node
             const unsigned n_value = pos_data_pt->nvalue();
             // Loop over values and erase all pairs from the set
@@ -383,14 +383,14 @@ namespace oomph
           paired_field_data.size();
         Nexternal_interaction_field_data = n_external_interaction_field_data;
         External_interaction_field_data_pt =
-          new Data *[n_external_interaction_field_data];
+          new Data*[n_external_interaction_field_data];
         External_interaction_field_data_index =
           new unsigned[n_external_interaction_field_data];
 
         // Add the pairs of data to the field data vectors
         {
           unsigned count = 0;
-          for (std::set<std::pair<Data *, unsigned>>::iterator it =
+          for (std::set<std::pair<Data*, unsigned>>::iterator it =
                  paired_field_data.begin();
                it != paired_field_data.end();
                it++)
@@ -405,7 +405,7 @@ namespace oomph
         if (Add_external_geometric_data)
         {
           // Storage for a set of external geometric Data affecting the element
-          std::set<Data *> external_geometric_data_pt;
+          std::set<Data*> external_geometric_data_pt;
 
           // Determine the geometric data that affects the external interactions
           // for all sets of external elements
@@ -437,13 +437,13 @@ namespace oomph
           const unsigned n_node = this->nnode();
           for (unsigned n = 0; n < n_node; n++)
           {
-            Node *const nod_pt = this->node_pt(n);
+            Node* const nod_pt = this->node_pt(n);
             external_geometric_data_pt.erase(nod_pt);
 
-            SolidNode *solid_nod_pt = dynamic_cast<SolidNode *>(nod_pt);
+            SolidNode* solid_nod_pt = dynamic_cast<SolidNode*>(nod_pt);
             if (solid_nod_pt != 0)
             {
-              Data *pos_data_pt = solid_nod_pt->variable_position_pt();
+              Data* pos_data_pt = solid_nod_pt->variable_position_pt();
               //          std::ostringstream junk;
               //          junk << "Erasing ";
               //          unsigned nval=pos_data_pt->nvalue();
@@ -459,7 +459,7 @@ namespace oomph
           // Next allocate storage for the geometric field data
           // Find out how many individual data we have
           unsigned n_external_interaction_geometric_data = 0;
-          for (std::set<Data *>::iterator it =
+          for (std::set<Data*>::iterator it =
                  external_geometric_data_pt.begin();
                it != external_geometric_data_pt.end();
                it++)
@@ -472,14 +472,14 @@ namespace oomph
           Nexternal_interaction_geometric_data =
             n_external_interaction_geometric_data;
           External_interaction_geometric_data_pt =
-            new Data *[n_external_interaction_geometric_data];
+            new Data*[n_external_interaction_geometric_data];
           External_interaction_geometric_data_index =
             new unsigned[n_external_interaction_geometric_data];
 
           // Now we can add all the geometric data to the geometric data vectors
           {
             unsigned count = 0;
-            for (std::set<Data *>::iterator it =
+            for (std::set<Data*>::iterator it =
                    external_geometric_data_pt.begin();
                  it != external_geometric_data_pt.end();
                  it++)
@@ -563,7 +563,7 @@ namespace oomph
         // Clear the memory used in the deque
         if (store_local_dof_pt)
         {
-          std::deque<double *>().swap(GeneralisedElement::Dof_pt_deque);
+          std::deque<double*>().swap(GeneralisedElement::Dof_pt_deque);
         }
       }
 
@@ -622,7 +622,7 @@ namespace oomph
         // Clear the memory used in the deque
         if (store_local_dof_pt)
         {
-          std::deque<double *>().swap(GeneralisedElement::Dof_pt_deque);
+          std::deque<double*>().swap(GeneralisedElement::Dof_pt_deque);
         }
       }
     }
@@ -637,7 +637,7 @@ namespace oomph
   //==========================================================================
   void ElementWithExternalElement::
     fill_in_jacobian_from_external_interaction_field_by_fd(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian)
+      Vector<double>& residuals, DenseMatrix<double>& jacobian)
   {
     // Locally cache the number of data
     const unsigned n_external_interaction_field_data =
@@ -674,7 +674,7 @@ namespace oomph
       if (local_unknown >= 0)
       {
         // Store a pointer to the field value
-        double *value_pt = External_interaction_field_data_pt[i]->value_pt(
+        double* value_pt = External_interaction_field_data_pt[i]->value_pt(
           External_interaction_field_data_index[i]);
 
         // Save the old value of the field value
@@ -718,7 +718,7 @@ namespace oomph
   //==========================================================================
   void ElementWithExternalElement::
     fill_in_jacobian_from_external_interaction_geometric_by_fd(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian)
+      Vector<double>& residuals, DenseMatrix<double>& jacobian)
   {
     // Locally cache the number of data
     const unsigned n_external_interaction_geometric_data =
@@ -754,7 +754,7 @@ namespace oomph
       if (local_unknown >= 0)
       {
         // Store a pointer to the geometric value
-        double *value_pt = External_interaction_geometric_data_pt[i]->value_pt(
+        double* value_pt = External_interaction_geometric_data_pt[i]->value_pt(
           External_interaction_geometric_data_index[i]);
 
         // Save the old value of the geometric value
@@ -795,7 +795,7 @@ namespace oomph
   /// index
   //==========================================================================
   void ElementWithExternalElement::output_external_elements(
-    std::ostream &outfile, const unsigned &interaction_index)
+    std::ostream& outfile, const unsigned& interaction_index)
   {
     // Dimension of element
     unsigned n_dim_el = dim();
@@ -820,7 +820,7 @@ namespace oomph
       interpolated_x(s, x);
 
       // Get pointer to external element
-      FiniteElement *ext_el_pt = external_element_pt(interaction_index, ipt);
+      FiniteElement* ext_el_pt = external_element_pt(interaction_index, ipt);
       // Get local coordinate in external element
       Vector<double> s_ext(
         external_element_local_coord(interaction_index, ipt));

@@ -57,13 +57,13 @@ namespace oomph
     ~PicardConvergenceData(){};
 
     /// Number of iterations performed
-    unsigned &niter()
+    unsigned& niter()
     {
       return Niter;
     }
 
     /// Total CPU time for segregated solve
-    double &cpu_total()
+    double& cpu_total()
     {
       return CPU_total;
     }
@@ -71,7 +71,7 @@ namespace oomph
     /// \short Total essential CPU time for segregated solve
     /// (excluding any actions that merely doc the progress
     /// of the iteration, etc.)
-    double &essential_cpu_total()
+    double& essential_cpu_total()
     {
       return Essential_cpu_total;
     }
@@ -80,13 +80,13 @@ namespace oomph
     /// Note: This time is contained in Total_CPU and is
     /// only used if convergence is based on the residual
     /// of the fully coupled system.
-    double &cpu_for_global_residual()
+    double& cpu_for_global_residual()
     {
       return CPU_for_global_residual;
     }
 
     /// Final tolerance achieved by the iteration
-    double &tol_achieved()
+    double& tol_achieved()
     {
       return Tol_achieved;
     }
@@ -145,7 +145,7 @@ namespace oomph
   {
   public:
     /// Default constructor, does nothing
-    SegregatedSolverError(const bool &ran_out_of_iterations = false)
+    SegregatedSolverError(const bool& ran_out_of_iterations = false)
     {
       Ran_out_of_iterations = ran_out_of_iterations;
     }
@@ -253,10 +253,10 @@ namespace oomph
     /// and the residual vector, even if their contributions only contain
     /// zero entries. This can be costly, though the code will
     /// still compute the correct results.
-    virtual void identify_fluid_and_solid_dofs(Vector<Data *> &fluid_data_pt,
-                                               Vector<Data *> &solid_data_pt,
-                                               Mesh *&fluid_mesh_pt,
-                                               Mesh *&solid_mesh_pt) = 0;
+    virtual void identify_fluid_and_solid_dofs(Vector<Data*>& fluid_data_pt,
+                                               Vector<Data*>& solid_data_pt,
+                                               Mesh*& fluid_mesh_pt,
+                                               Mesh*& solid_mesh_pt) = 0;
 
     /// \short Setup the segregated solver: Backup the pinned status of
     /// the fluid and solid dofs and allocate the internal storage
@@ -270,7 +270,7 @@ namespace oomph
     /// acceleration techniques is reset, but the fluid and solid dofs
     /// are not altered.
     void setup_segregated_solver(
-      const bool &full_setup_of_fluid_and_solid_dofs = true);
+      const bool& full_setup_of_fluid_and_solid_dofs = true);
 
     /// \short Segregated solver. Peform a segregated step from
     /// the present state of the system.
@@ -289,7 +289,7 @@ namespace oomph
     /// this function.
     /// Returns PicardConvergenceData object that contains the
     /// vital stats of the iteration.
-    PicardConvergenceData unsteady_segregated_solve(const double &dt);
+    PicardConvergenceData unsteady_segregated_solve(const double& dt);
 
     /// \short Unsteady segregated solver. Advance time by dt and solve
     /// the system by a segregated method. The boolean flag is used to
@@ -298,12 +298,12 @@ namespace oomph
     /// timesteps) before the solution step.
     /// Returns PicardConvergenceData object that contains the
     /// vital stats of the iteration.
-    PicardConvergenceData unsteady_segregated_solve(const double &dt,
-                                                    const bool &shift_values);
+    PicardConvergenceData unsteady_segregated_solve(const double& dt,
+                                                    const bool& shift_values);
 
     /// \short Assess convergence based on max. residual of coupled system of
     /// eqns. The argument specifies the convergence tolerance.
-    void assess_convergence_based_on_max_global_residual(const double &tol)
+    void assess_convergence_based_on_max_global_residual(const double& tol)
     {
       Convergence_criterion = Assess_convergence_based_on_max_global_residual;
       Convergence_tolerance = tol;
@@ -321,7 +321,7 @@ namespace oomph
 
     /// \short Assess convergence based on max. absolute change of solid
     /// dofs. The argument specifies the convergence tolerance.
-    void assess_convergence_based_on_absolute_solid_change(const double &tol)
+    void assess_convergence_based_on_absolute_solid_change(const double& tol)
     {
       Convergence_criterion = Assess_convergence_based_on_absolute_solid_change;
       Convergence_tolerance = tol;
@@ -339,7 +339,7 @@ namespace oomph
 
     /// \short Assess convergence based on max. relative change of solid
     /// dofs. The argument specifies the convergence tolerance.
-    void assess_convergence_based_on_relative_solid_change(const double &tol)
+    void assess_convergence_based_on_relative_solid_change(const double& tol)
     {
       Convergence_criterion = Assess_convergence_based_on_relative_solid_change;
       Convergence_tolerance = tol;
@@ -358,7 +358,7 @@ namespace oomph
     /// \short Use pointwise Aitken extrapolation. The argument is used to
     /// specify the Picard iteration after which pointwise Aitken extrapolation
     /// is to be used for the first time.
-    void enable_pointwise_aitken(const unsigned &pointwise_aitken_start)
+    void enable_pointwise_aitken(const unsigned& pointwise_aitken_start)
     {
       Pointwise_aitken_start = pointwise_aitken_start;
       Use_pointwise_aitken = true;
@@ -383,7 +383,7 @@ namespace oomph
     /// Other extreme: omega=0.0 (freeze wall shape). Under-relaxation
     /// parameter can also be computed dynamically by setting
     /// use_irons_and_tuck_extrapolation()
-    void enable_under_relaxation(const double &omega = 1.0)
+    void enable_under_relaxation(const double& omega = 1.0)
     {
       Omega_relax = omega;
     }
@@ -420,9 +420,9 @@ namespace oomph
     /// solid dofs and the rms norm of the solid dofs themselves.
     /// Change is computed relative to the reference values stored when
     /// store_solid_dofs() was last called.
-    void get_solid_change(double &rms_change,
-                          double &max_change,
-                          double &rms_norm);
+    void get_solid_change(double& rms_change,
+                          double& max_change,
+                          double& rms_norm);
 
     /// \short Store the current solid values as reference values for
     /// future convergence check. Also add another entry to pointwise
@@ -510,7 +510,7 @@ namespace oomph
     /// \short Vector storing the Data objects associated with the fluid
     /// problem: Tyically the nodal and internal data of the elements in the
     /// fluid bulk mesh
-    Vector<Data *> Fluid_data_pt;
+    Vector<Data*> Fluid_data_pt;
 
     /// \short Vector of vectors that store the pinned status of
     /// fluid Data values
@@ -519,7 +519,7 @@ namespace oomph
     /// \short Vector storing the Data objects associated with the solid
     /// problem: Typically the positional data of solid nodes and
     /// any quantities associated with displacement control, say.
-    Vector<Data *> Solid_data_pt;
+    Vector<Data*> Solid_data_pt;
 
     /// \short Vector of vectors that store the pinned status of
     /// solid Data values
@@ -532,15 +532,15 @@ namespace oomph
     /// \short Mesh containing only fluid elements -- the elements in this
     /// Mesh will be excluded from the assembly process when
     /// the solid problem is solved
-    Mesh *Fluid_mesh_pt;
+    Mesh* Fluid_mesh_pt;
 
     /// \short Mesh containing only solid elements -- the elements in this
     /// mesh will be excluded from the assembly process when
     /// the fluid problem is solved
-    Mesh *Solid_mesh_pt;
+    Mesh* Solid_mesh_pt;
 
     /// \short Backup for the pointers to the submeshes in the original problem
-    Vector<Mesh *> Orig_sub_mesh_pt;
+    Vector<Mesh*> Orig_sub_mesh_pt;
 
     /// Vector of changes in Irons and Tuck under-relaxation
     Vector<double> Del_irons_and_tuck;

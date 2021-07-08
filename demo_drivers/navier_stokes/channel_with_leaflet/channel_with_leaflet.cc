@@ -51,12 +51,12 @@ public:
   /// the x-coordinate of the origin and the period of the oscillation.
   /// Passes the number of Lagrangian and Eulerian coordinates to the
   /// constructor of the GeomObject base class.
-  Leaflet(const double &length,
-          const double &d_x,
-          const double &d_y,
-          const double &x_0,
-          const double &period,
-          Time *time_pt) :
+  Leaflet(const double& length,
+          const double& d_x,
+          const double& d_y,
+          const double& x_0,
+          const double& period,
+          Time* time_pt) :
     GeomObject(1, 2),
     Length(length),
     D_x(d_x),
@@ -73,9 +73,9 @@ public:
   /// \short Position vector, r, to the point identified by
   /// its 1D Lagrangian coordinate, xi (passed as a 1D Vector) at discrete time
   /// level t (t=0: present; t>0: previous).
-  void position(const unsigned &t,
-                const Vector<double> &xi,
-                Vector<double> &r) const
+  void position(const unsigned& t,
+                const Vector<double>& xi,
+                Vector<double>& r) const
   {
     using namespace MathematicalConstants;
 
@@ -87,7 +87,7 @@ public:
   }
 
   /// Steady version: Get current shape
-  void position(const Vector<double> &xi, Vector<double> &r) const
+  void position(const Vector<double>& xi, Vector<double>& r) const
   {
     position(0, xi, r);
   }
@@ -105,7 +105,7 @@ public:
   }
 
   /// Amplitude of horizontal tip displacement
-  double &d_x()
+  double& d_x()
   {
     return D_x;
   }
@@ -139,7 +139,7 @@ private:
   double T;
 
   /// Pointer to the global time object
-  Time *Time_pt;
+  Time* Time_pt;
 
 }; // end_of_the_GeomObject
 
@@ -177,28 +177,28 @@ public:
   /// the number of macro-elements above hleaflet ny2,the x-displacement
   /// of the leaflet d_x,the y-displacement of the leaflet d_y,the abscissa
   /// of the origin of the leaflet x_0, the period of the moving leaflet.
-  ChannelWithLeafletProblem(const double &l_left,
-                            const double &l_right,
-                            const double &h_leaflet,
-                            const double &h_tot,
-                            const unsigned &nleft,
-                            const unsigned &nright,
-                            const unsigned &ny1,
-                            const unsigned &ny2,
-                            const double &d_x,
-                            const double &d_y,
-                            const double &x_0,
-                            const double &period);
+  ChannelWithLeafletProblem(const double& l_left,
+                            const double& l_right,
+                            const double& h_leaflet,
+                            const double& h_tot,
+                            const unsigned& nleft,
+                            const unsigned& nright,
+                            const unsigned& ny1,
+                            const unsigned& ny2,
+                            const double& d_x,
+                            const double& d_y,
+                            const double& x_0,
+                            const double& period);
 
   /// Destructor (empty)
   ~ChannelWithLeafletProblem() {}
 
   /// Overloaded access function to specific mesh
-  RefineableAlgebraicChannelWithLeafletMesh<ELEMENT> *mesh_pt()
+  RefineableAlgebraicChannelWithLeafletMesh<ELEMENT>* mesh_pt()
   {
     // Upcast from pointer to the Mesh base class to the specific
     // element type that we're using here.
-    return dynamic_cast<RefineableAlgebraicChannelWithLeafletMesh<ELEMENT> *>(
+    return dynamic_cast<RefineableAlgebraicChannelWithLeafletMesh<ELEMENT>*>(
       Problem::mesh_pt());
   }
 
@@ -215,11 +215,11 @@ public:
   void actions_before_implicit_timestep();
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 private:
   /// Pointer to the GeomObject
-  GeomObject *Leaflet_pt;
+  GeomObject* Leaflet_pt;
 };
 
 //==start_of_constructor=================================================
@@ -227,18 +227,18 @@ private:
 //=======================================================================
 template<class ELEMENT>
 ChannelWithLeafletProblem<ELEMENT>::ChannelWithLeafletProblem(
-  const double &l_left,
-  const double &l_right,
-  const double &h_leaflet,
-  const double &h_tot,
-  const unsigned &nleft,
-  const unsigned &nright,
-  const unsigned &ny1,
-  const unsigned &ny2,
-  const double &d_x,
-  const double &d_y,
-  const double &x_0,
-  const double &period)
+  const double& l_left,
+  const double& l_right,
+  const double& h_leaflet,
+  const double& h_tot,
+  const unsigned& nleft,
+  const unsigned& nright,
+  const unsigned& ny1,
+  const unsigned& ny2,
+  const double& d_x,
+  const double& d_y,
+  const double& x_0,
+  const double& period)
 {
   // Allocate the timestepper
   add_time_stepper_pt(new BDF<2>);
@@ -260,8 +260,8 @@ ChannelWithLeafletProblem<ELEMENT>::ChannelWithLeafletProblem(
                                                            time_stepper_pt());
 
   // Set error estimator
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
-  dynamic_cast<RefineableAlgebraicChannelWithLeafletMesh<ELEMENT> *>(mesh_pt())
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
+  dynamic_cast<RefineableAlgebraicChannelWithLeafletMesh<ELEMENT>*>(mesh_pt())
     ->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Loop over the elements to set up element-specific
@@ -270,7 +270,7 @@ ChannelWithLeafletProblem<ELEMENT>::ChannelWithLeafletProblem(
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -337,7 +337,7 @@ void ChannelWithLeafletProblem<ELEMENT>::actions_before_implicit_timestep()
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Which node are we dealing with?
-      Node *node_pt = mesh_pt()->boundary_node_pt(ibound, inod);
+      Node* node_pt = mesh_pt()->boundary_node_pt(ibound, inod);
 
       // Apply no slip
       FSI_functions::apply_no_slip_on_moving_wall(node_pt);
@@ -365,7 +365,7 @@ void ChannelWithLeafletProblem<ELEMENT>::actions_after_adapt()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void ChannelWithLeafletProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void ChannelWithLeafletProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -400,7 +400,7 @@ void ChannelWithLeafletProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
 /// Driver code -- pass a command line argument if you want to run
 /// the code in validation mode where it only performs a few steps
 //=====================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

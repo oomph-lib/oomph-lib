@@ -46,7 +46,7 @@ namespace oomph
     /// \short Set default parameters for use as preconditioner in
     /// 2D Poisson-type problem.
     void set_defaults_for_2D_poisson_problem(
-      HyprePreconditioner *hypre_preconditioner_pt)
+      HyprePreconditioner* hypre_preconditioner_pt)
     {
       // Set iterations to 1
       hypre_preconditioner_pt->set_amg_iterations(1);
@@ -72,7 +72,7 @@ namespace oomph
     /// \short Set default parameters for use as preconditioner in
     /// 3D Poisson-type problem.
     void set_defaults_for_3D_poisson_problem(
-      HyprePreconditioner *hypre_preconditioner_pt)
+      HyprePreconditioner* hypre_preconditioner_pt)
     {
       // Set default settings as for 2D Poisson
       set_defaults_for_2D_poisson_problem(hypre_preconditioner_pt);
@@ -84,7 +84,7 @@ namespace oomph
     /// \short Set default parameters for use as preconditioner in
     /// for momentum block in Navier-Stokes problem
     void set_defaults_for_navier_stokes_momentum_block(
-      HyprePreconditioner *hypre_preconditioner_pt)
+      HyprePreconditioner* hypre_preconditioner_pt)
     {
       // Set default settings as for 2D Poisson
       set_defaults_for_2D_poisson_problem(hypre_preconditioner_pt);
@@ -143,7 +143,7 @@ namespace oomph
     /// associated with any error, and reset the global error flag to zero.
     /// This function also returns the error value.
     //========================================================================
-    int check_HYPRE_error_flag(std::ostringstream &message)
+    int check_HYPRE_error_flag(std::ostringstream& message)
     {
       // get the Hypre error flag
       int err = HYPRE_GetError();
@@ -152,7 +152,7 @@ namespace oomph
       if (err)
       {
         oomph_info << "Hypre error flag=" << err << std::endl;
-        char *error_message = new char[128];
+        char* error_message = new char[128];
         HYPRE_DescribeError(err, error_message);
         message << "WARNING: " << std::endl
                 << "HYPRE error message: " << error_message << std::endl;
@@ -173,10 +173,10 @@ namespace oomph
     /// + If MPI and distributed input vector the distributed output vectors
     ///   are created.
     //========================================================================
-    void create_HYPRE_Vector(const DoubleVector &oomph_vec,
-                             const LinearAlgebraDistribution *dist_pt,
-                             HYPRE_IJVector &hypre_ij_vector,
-                             HYPRE_ParVector &hypre_par_vector)
+    void create_HYPRE_Vector(const DoubleVector& oomph_vec,
+                             const LinearAlgebraDistribution* dist_pt,
+                             HYPRE_IJVector& hypre_ij_vector,
+                             HYPRE_ParVector& hypre_par_vector)
     {
       // the lower and upper row of the vector on this processor
       unsigned lower = dist_pt->first_row();
@@ -199,15 +199,15 @@ namespace oomph
       HYPRE_IJVectorInitialize(hypre_ij_vector);
 
       // set up array containing indices
-      int *indices = new int[nrow_local];
-      double *values = new double[nrow_local];
+      int* indices = new int[nrow_local];
+      double* values = new double[nrow_local];
       const unsigned hypre_first_row = dist_pt->first_row();
       unsigned j = 0;
       if (!oomph_vec.distributed() && dist_pt->distributed())
       {
         j = hypre_first_row;
       }
-      const double *o_pt = oomph_vec.values_pt();
+      const double* o_pt = oomph_vec.values_pt();
       for (unsigned i = 0; i < nrow_local; i++)
       {
         indices[i] = hypre_first_row + i;
@@ -219,7 +219,7 @@ namespace oomph
 
       // assemble vectors
       HYPRE_IJVectorAssemble(hypre_ij_vector);
-      HYPRE_IJVectorGetObject(hypre_ij_vector, (void **)&hypre_par_vector);
+      HYPRE_IJVectorGetObject(hypre_ij_vector, (void**)&hypre_par_vector);
 
       // clean up
       delete[] indices;
@@ -234,9 +234,9 @@ namespace oomph
     /// + If MPI and distributed input vector the distributed output vectors
     ///   are created.
     //========================================================================
-    void create_HYPRE_Vector(const LinearAlgebraDistribution *dist_pt,
-                             HYPRE_IJVector &hypre_ij_vector,
-                             HYPRE_ParVector &hypre_par_vector)
+    void create_HYPRE_Vector(const LinearAlgebraDistribution* dist_pt,
+                             HYPRE_IJVector& hypre_ij_vector,
+                             HYPRE_ParVector& hypre_par_vector)
     {
       // the lower and upper row of the vector on this processor
       unsigned lower = dist_pt->first_row();
@@ -254,7 +254,7 @@ namespace oomph
 
       // assemble vectors
       HYPRE_IJVectorAssemble(hypre_ij_vector);
-      HYPRE_IJVectorGetObject(hypre_ij_vector, (void **)&hypre_par_vector);
+      HYPRE_IJVectorGetObject(hypre_ij_vector, (void**)&hypre_par_vector);
     }
 
     //========================================================================
@@ -263,10 +263,10 @@ namespace oomph
     /// NOTE: dist_pt is rebuilt to match the distribution of the hypre solver
     /// which is not necassarily the same as the oomph lib matrix
     //========================================================================
-    void create_HYPRE_Matrix(CRDoubleMatrix *oomph_matrix,
-                             HYPRE_IJMatrix &hypre_ij_matrix,
-                             HYPRE_ParCSRMatrix &hypre_par_matrix,
-                             LinearAlgebraDistribution *dist_pt)
+    void create_HYPRE_Matrix(CRDoubleMatrix* oomph_matrix,
+                             HYPRE_IJMatrix& hypre_ij_matrix,
+                             HYPRE_ParCSRMatrix& hypre_par_matrix,
+                             LinearAlgebraDistribution* dist_pt)
     {
 #ifdef PARANOID
       // check that the matrix is built
@@ -314,13 +314,13 @@ namespace oomph
       // get pointers to the matrix
 
       // column indices of matrix
-      const int *matrix_cols = oomph_matrix->column_index();
+      const int* matrix_cols = oomph_matrix->column_index();
 
       // entries of matrix
-      const double *matrix_vals = oomph_matrix->value();
+      const double* matrix_vals = oomph_matrix->value();
 
       // row starts
-      const int *matrix_row_start = oomph_matrix->row_start();
+      const int* matrix_row_start = oomph_matrix->row_start();
 
       // build the distribution
       if (oomph_matrix->distribution_pt()->distributed())
@@ -361,8 +361,8 @@ namespace oomph
       // and first row / nrow_local
       const unsigned hypre_nrow_local = dist_pt->nrow_local();
       const unsigned hypre_first_row = dist_pt->first_row();
-      int *ncols_per_row = new int[hypre_nrow_local];
-      int *row_map = new int[hypre_nrow_local];
+      int* ncols_per_row = new int[hypre_nrow_local];
+      int* row_map = new int[hypre_nrow_local];
       for (unsigned i = 0; i < hypre_nrow_local; i++)
       {
         unsigned j = i;
@@ -390,7 +390,7 @@ namespace oomph
 
       // assemble matrix
       HYPRE_IJMatrixAssemble(hypre_ij_matrix); // hierher leak?
-      HYPRE_IJMatrixGetObject(hypre_ij_matrix, (void **)&hypre_par_matrix);
+      HYPRE_IJMatrixGetObject(hypre_ij_matrix, (void**)&hypre_par_matrix);
 
       // tidy up memory
       delete[] ncols_per_row;
@@ -401,20 +401,20 @@ namespace oomph
     /// \short Helper function to set Euclid options using a command line
     /// like array.
     //=====================================================================
-    void euclid_settings_helper(const bool &use_block_jacobi,
-                                const bool &use_row_scaling,
-                                const bool &use_ilut,
-                                const int &level,
-                                const double &drop_tol,
-                                const int &print_level,
-                                HYPRE_Solver &euclid_object)
+    void euclid_settings_helper(const bool& use_block_jacobi,
+                                const bool& use_row_scaling,
+                                const bool& use_ilut,
+                                const int& level,
+                                const double& drop_tol,
+                                const int& print_level,
+                                HYPRE_Solver& euclid_object)
     {
       // Easier to use C-arrays rather than std::strings because Euclid takes
       // char** as argument and because C++ doesn't provide decent number to
       // std::string conversion functions.
 
       int n_args = 0;
-      const char *args[22];
+      const char* args[22];
 
       // first argument is empty string
       args[n_args++] = "";
@@ -487,7 +487,7 @@ namespace oomph
       args[n_args] = 0;
 
       // Send the parameters
-      HYPRE_EuclidSetParams(euclid_object, n_args, const_cast<char **>(args));
+      HYPRE_EuclidSetParams(euclid_object, n_args, const_cast<char**>(args));
     }
 
   } // namespace HypreHelpers
@@ -503,7 +503,7 @@ namespace oomph
   /// If OOMPH-LIB has been set up for MPI use, the Hypre matrix is
   /// distributed over the available processors.
   //=============================================================================
-  void HypreInterface::hypre_matrix_setup(CRDoubleMatrix *matrix_pt)
+  void HypreInterface::hypre_matrix_setup(CRDoubleMatrix* matrix_pt)
   {
     // reset Hypre's global error flag
     hypre__global_error = 0;
@@ -593,7 +593,7 @@ namespace oomph
           // double * relaxweight = new double[AMG_max_levels];
 
           // This is how they do it in a hypre demo code
-          double *relaxweight = hypre_CTAlloc(double, AMG_max_levels);
+          double* relaxweight = hypre_CTAlloc(double, AMG_max_levels);
 
           for (unsigned i = 0; i < AMG_max_levels; i++)
           {
@@ -710,7 +710,7 @@ namespace oomph
         // double * relaxweight = new double[AMG_max_levels];
 
         // This is how they do it in a hypre demo code
-        double *relaxweight = hypre_CTAlloc(double, AMG_max_levels);
+        double* relaxweight = hypre_CTAlloc(double, AMG_max_levels);
 
         for (unsigned i = 0; i < AMG_max_levels; i++)
         {
@@ -1070,8 +1070,8 @@ namespace oomph
   /// Helper function performs a solve if solver data has been set
   /// up using hypre_solver_setup(...).
   //====================================================================
-  void HypreInterface::hypre_solve(const DoubleVector &rhs,
-                                   DoubleVector &solution)
+  void HypreInterface::hypre_solve(const DoubleVector& rhs,
+                                   DoubleVector& solution)
   {
     // Record time
     double t_start = TimingHelpers::timer();
@@ -1136,7 +1136,7 @@ namespace oomph
           this_processor_do_solving = 1;
         }
         // Get the communicator
-        OomphCommunicator *comm_pt = MPI_Helpers::communicator_pt();
+        OomphCommunicator* comm_pt = MPI_Helpers::communicator_pt();
         // Communicate with all procesoors
         MPI_Allreduce(&this_processor_do_solving,
                       &all_processors_do_solving,
@@ -1214,12 +1214,12 @@ namespace oomph
     // Copy result to solution
     unsigned nrow_local = Hypre_distribution_pt->nrow_local();
     unsigned first_row = Hypre_distribution_pt->first_row();
-    int *indices = new int[nrow_local];
+    int* indices = new int[nrow_local];
     for (unsigned i = 0; i < nrow_local; i++)
     {
       indices[i] = first_row + i;
     }
-    LinearAlgebraDistribution *soln_dist_pt;
+    LinearAlgebraDistribution* soln_dist_pt;
     if (solution.built())
     {
       soln_dist_pt = new LinearAlgebraDistribution(solution.distribution_pt());
@@ -1364,7 +1364,7 @@ namespace oomph
   /// processors hold all values because this is what the Newton solver
   /// requires.
   //====================================================================
-  void HypreSolver::solve(Problem *const &problem_pt, DoubleVector &solution)
+  void HypreSolver::solve(Problem* const& problem_pt, DoubleVector& solution)
   {
     double t_start = TimingHelpers::timer();
 
@@ -1380,7 +1380,7 @@ namespace oomph
 
     // Get oomph-lib Jacobian matrix and residual vector
     DoubleVector residual;
-    CRDoubleMatrix *matrix = new CRDoubleMatrix;
+    CRDoubleMatrix* matrix = new CRDoubleMatrix;
     problem_pt->get_jacobian(residual, *matrix);
 
     // Output times
@@ -1416,9 +1416,9 @@ namespace oomph
   /// Note: the returned solution vector is never distributed, i.e. all
   /// processors hold all values
   //====================================================================
-  void HypreSolver::solve(DoubleMatrixBase *const &matrix_pt,
-                          const DoubleVector &rhs,
-                          DoubleVector &solution)
+  void HypreSolver::solve(DoubleMatrixBase* const& matrix_pt,
+                          const DoubleVector& rhs,
+                          DoubleVector& solution)
   {
 #ifdef PARANOID
     // check the matrix is square
@@ -1444,7 +1444,7 @@ namespace oomph
     Delete_input_data = Delete_matrix;
 
     // Try cast to a CRDoubleMatrix
-    CRDoubleMatrix *cr_matrix_pt = dynamic_cast<CRDoubleMatrix *>(matrix_pt);
+    CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
 
     // If cast successful set things up for a serial solve
     if (cr_matrix_pt)
@@ -1511,7 +1511,7 @@ namespace oomph
   /// Resolve performs a linear solve using current solver data (if
   /// such data exists).
   //====================================================================
-  void HypreSolver::resolve(const DoubleVector &rhs, DoubleVector &solution)
+  void HypreSolver::resolve(const DoubleVector& rhs, DoubleVector& solution)
   {
 #ifdef PARANOID
     // check solver data exists
@@ -1715,7 +1715,7 @@ namespace oomph
     Delete_input_data = Delete_matrix;
 
     // Try casting to a CRDoubleMatrix
-    CRDoubleMatrix *cr_matrix_pt = dynamic_cast<CRDoubleMatrix *>(matrix_pt());
+    CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt());
 
     // If cast successful set things up for a serial solve
     if (cr_matrix_pt)
@@ -1750,8 +1750,8 @@ namespace oomph
   //===================================================================
   /// Preconditioner_solve uses a hypre solver to precondition vector r
   //====================================================================
-  void HyprePreconditioner::preconditioner_solve(const DoubleVector &r,
-                                                 DoubleVector &z)
+  void HyprePreconditioner::preconditioner_solve(const DoubleVector& r,
+                                                 DoubleVector& z)
   {
     // Store time
     double t_start = TimingHelpers::timer();

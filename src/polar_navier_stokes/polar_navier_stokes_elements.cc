@@ -63,11 +63,11 @@ namespace oomph
   /// and L2 norm of velocity solution over element.
   //=======================================================================
   void PolarNavierStokesEquations::compute_error(
-    std::ostream &outfile,
+    std::ostream& outfile,
     FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
-    const double &time,
-    double &error,
-    double &norm)
+    const double& time,
+    double& error,
+    double& norm)
   {
     error = 0.0;
     norm = 0.0;
@@ -141,10 +141,10 @@ namespace oomph
   /// and L2 norm of velocity solution over element.
   //=======================================================================
   void PolarNavierStokesEquations::compute_error(
-    std::ostream &outfile,
+    std::ostream& outfile,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-    double &error,
-    double &norm)
+    double& error,
+    double& norm)
   {
     error = 0.0;
     norm = 0.0;
@@ -218,8 +218,8 @@ namespace oomph
   /// Function prints as many components as are returned in solution Vector.
   //=======================================================================
   void PolarNavierStokesEquations::output_fct(
-    std::ostream &outfile,
-    const unsigned &nplot,
+    std::ostream& outfile,
+    const unsigned& nplot,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
   {
     // Vector of local coordinates
@@ -273,9 +273,9 @@ namespace oomph
   /// Function prints as many components as are returned in solution Vector.
   //=======================================================================
   void PolarNavierStokesEquations::output_fct(
-    std::ostream &outfile,
-    const unsigned &nplot,
-    const double &time,
+    std::ostream& outfile,
+    const unsigned& nplot,
+    const double& time,
     FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
   {
     // Vector of local coordinates
@@ -329,9 +329,9 @@ namespace oomph
   /// t>0: previous timestep). Specified number of plot points in each
   /// coordinate direction.
   //==============================================================
-  void PolarNavierStokesEquations::output_veloc(std::ostream &outfile,
-                                                const unsigned &nplot,
-                                                const unsigned &t)
+  void PolarNavierStokesEquations::output_veloc(std::ostream& outfile,
+                                                const unsigned& nplot,
+                                                const unsigned& t)
   {
     // Find number of nodes
     unsigned n_node = nnode();
@@ -395,8 +395,8 @@ namespace oomph
   /// in tecplot format. Specified number of plot points in each
   /// coordinate direction.
   //==============================================================
-  void PolarNavierStokesEquations::output(std::ostream &outfile,
-                                          const unsigned &nplot)
+  void PolarNavierStokesEquations::output(std::ostream& outfile,
+                                          const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(2);
@@ -564,7 +564,7 @@ namespace oomph
   /// in tecplot format. Specified number of plot points in each
   /// coordinate direction.
   //==============================================================
-  void PolarNavierStokesEquations::output(FILE *file_pt, const unsigned &nplot)
+  void PolarNavierStokesEquations::output(FILE* file_pt, const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(2);
@@ -607,8 +607,8 @@ namespace oomph
   /// in tecplot format. Specified number of plot points in each
   /// coordinate direction
   //==============================================================
-  void PolarNavierStokesEquations::full_output(std::ostream &outfile,
-                                               const unsigned &nplot)
+  void PolarNavierStokesEquations::full_output(std::ostream& outfile,
+                                               const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(2);
@@ -769,9 +769,9 @@ namespace oomph
   /// \short Compute traction (on the viscous scale) at local
   /// coordinate s for outer unit normal N
   //==============================================================
-  void PolarNavierStokesEquations::get_traction(const Vector<double> &s,
-                                                const Vector<double> &N,
-                                                Vector<double> &traction)
+  void PolarNavierStokesEquations::get_traction(const Vector<double>& s,
+                                                const Vector<double>& N,
+                                                Vector<double>& traction)
   {
     // Get velocity gradients
     DenseMatrix<double> strainrate(2, 2);
@@ -795,7 +795,7 @@ namespace oomph
   //==============================================================
   /// Return dissipation at local coordinate s
   //==============================================================
-  double PolarNavierStokesEquations::dissipation(const Vector<double> &s) const
+  double PolarNavierStokesEquations::dissipation(const Vector<double>& s) const
   {
     // Get strain rate matrix
     DenseMatrix<double> strainrate(2, 2);
@@ -820,7 +820,7 @@ namespace oomph
   /// Slightly more complicated in polar coordinates (see eg. Aris)
   //==============================================================
   void PolarNavierStokesEquations::strain_rate(
-    const Vector<double> &s, DenseMatrix<double> &strainrate) const
+    const Vector<double>& s, DenseMatrix<double>& strainrate) const
   {
 #ifdef PARANOID
     if ((strainrate.ncol() != 2) || (strainrate.nrow() != 2))
@@ -907,7 +907,7 @@ namespace oomph
   /// Slightly more complicated in polar coordinates (see eg. Aris)
   //==============================================================
   void PolarNavierStokesEquations::strain_rate_by_r(
-    const Vector<double> &s, DenseMatrix<double> &strainrate) const
+    const Vector<double>& s, DenseMatrix<double>& strainrate) const
   {
 #ifdef PARANOID
     if ((strainrate.ncol() != 2) || (strainrate.nrow() != 2))
@@ -1098,9 +1098,9 @@ namespace oomph
   ///  dimensionless phi
   //==============================================================
   void PolarNavierStokesEquations::fill_in_generic_residual_contribution(
-    Vector<double> &residuals,
-    DenseMatrix<double> &jacobian,
-    DenseMatrix<double> &mass_matrix,
+    Vector<double>& residuals,
+    DenseMatrix<double>& jacobian,
+    DenseMatrix<double>& mass_matrix,
     unsigned flag)
   {
     // Find out how many nodes there are
@@ -1561,7 +1561,7 @@ namespace oomph
   /// Number of values (pinned or dofs) required at node n.
   //========================================================================
   unsigned PolarCrouzeixRaviartElement::required_nvalue(
-    const unsigned int &n) const
+    const unsigned int& n) const
   {
     return Initial_Nvalue[n];
   }
@@ -1572,7 +1572,7 @@ namespace oomph
   /// to the SolidElements to the set paired_load_data
   //=========================================================================
   void PolarCrouzeixRaviartElement::get_load_data(
-    std::set<std::pair<Data *, unsigned>> &paired_load_data)
+    std::set<std::pair<Data*, unsigned>>& paired_load_data)
   {
     // Loop over the nodes
     unsigned n_node = this->nnode();
@@ -1617,7 +1617,7 @@ namespace oomph
   /// to the SolidElements to the set  paired_load_data.
   //=========================================================================
   void PolarTaylorHoodElement::get_load_data(
-    std::set<std::pair<Data *, unsigned>> &paired_load_data)
+    std::set<std::pair<Data*, unsigned>>& paired_load_data)
   {
     // Loop over the nodes
     unsigned n_node = this->nnode();

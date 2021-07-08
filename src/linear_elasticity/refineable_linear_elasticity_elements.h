@@ -63,9 +63,9 @@ namespace oomph
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines), the values Vector sets its own size in here.
-    void get_interpolated_values(const unsigned &t,
-                                 const Vector<double> &s,
-                                 Vector<double> &values)
+    void get_interpolated_values(const unsigned& t,
+                                 const Vector<double>& s,
+                                 Vector<double>& values)
     {
       // Create enough initialised storage
       values.resize(DIM, 0.0);
@@ -93,8 +93,8 @@ namespace oomph
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines),the values Vector sets its own size in here.
-    void get_interpolated_values(const Vector<double> &s,
-                                 Vector<double> &values)
+    void get_interpolated_values(const Vector<double>& s,
+                                 Vector<double>& values)
     {
       values.resize(DIM);
       this->interpolated_u_linear_elasticity(s, values);
@@ -109,7 +109,7 @@ namespace oomph
 
     /// \short Get 'flux' for Z2 error recovery:   Upper triangular entries
     /// in strain tensor.
-    void get_Z2_flux(const Vector<double> &s, Vector<double> &flux)
+    void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
 #ifdef PARANOID
       unsigned num_entries = DIM + ((DIM * DIM) - DIM) / 2;
@@ -159,8 +159,8 @@ namespace oomph
     /// Further build function, pass the pointers down to the sons
     void further_build()
     {
-      RefineableLinearElasticityEquations<DIM> *cast_father_element_pt =
-        dynamic_cast<RefineableLinearElasticityEquations<DIM> *>(
+      RefineableLinearElasticityEquations<DIM>* cast_father_element_pt =
+        dynamic_cast<RefineableLinearElasticityEquations<DIM>*>(
           this->father_element_pt());
 
       // Set pointer to body force function
@@ -180,7 +180,7 @@ namespace oomph
   private:
     /// Overloaded helper function to take hanging nodes into account
     void fill_in_generic_contribution_to_residuals_linear_elasticity(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag);
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
   };
 
   //////////////////////////////////////////////////////////////////////
@@ -207,7 +207,7 @@ namespace oomph
     }
 
     /// Empty rebuild from sons, no need to reconstruct anything here
-    void rebuild_from_sons(Mesh *&mesh_pt) {}
+    void rebuild_from_sons(Mesh*& mesh_pt) {}
 
     /// \short Number of vertex nodes in the element
     unsigned nvertex_node() const
@@ -216,7 +216,7 @@ namespace oomph
     }
 
     /// \short Pointer to the j-th vertex node in the element
-    Node *vertex_node_pt(const unsigned &j) const
+    Node* vertex_node_pt(const unsigned& j) const
     {
       return QLinearElasticityElement<DIM, NNODE_1D>::vertex_node_pt(j);
     }
@@ -263,7 +263,7 @@ namespace oomph
 
     /// Broken copy constructor
     PRefineableQLinearElasticityElement(
-      const PRefineableQLinearElasticityElement<DIM> &dummy)
+      const PRefineableQLinearElasticityElement<DIM>& dummy)
     {
       BrokenCopy::broken_copy("PRefineableQLinearElasticityElement");
     }
@@ -289,7 +289,7 @@ namespace oomph
     }
 
     /// \short Pointer to the j-th vertex node in the element
-    Node *vertex_node_pt(const unsigned &j) const
+    Node* vertex_node_pt(const unsigned& j) const
     {
       return QLinearElasticityElement<DIM, 2>::vertex_node_pt(j);
     }
@@ -309,10 +309,10 @@ namespace oomph
     }
 
     void compute_energy_error(
-      std::ostream &outfile,
+      std::ostream& outfile,
       FiniteElement::SteadyExactSolutionFctPt exact_grad_pt,
-      double &error,
-      double &norm);
+      double& error,
+      double& norm);
   };
 
   //==============================================================

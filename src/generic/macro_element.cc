@@ -36,9 +36,9 @@ namespace oomph
   /// \short Get global position r(S) at discrete time level t.
   /// t=0: Present time; t>0: previous timestep.
   //=================================================================
-  void QMacroElement<2>::macro_map(const unsigned &t,
-                                   const Vector<double> &S,
-                                   Vector<double> &r)
+  void QMacroElement<2>::macro_map(const unsigned& t,
+                                   const Vector<double>& S,
+                                   Vector<double>& r)
   {
     using namespace QuadTreeNames;
 
@@ -121,8 +121,8 @@ namespace oomph
   //=================================================================
   /// \short Output all macro element boundaries as tecplot zones
   //=================================================================
-  void QMacroElement<2>::output_macro_element_boundaries(std::ostream &outfile,
-                                                         const unsigned &nplot)
+  void QMacroElement<2>::output_macro_element_boundaries(std::ostream& outfile,
+                                                         const unsigned& nplot)
   {
     using namespace QuadTreeNames;
 
@@ -148,7 +148,7 @@ namespace oomph
   /// the global coordinates
   //=============================================================================
   void QMacroElement<2>::assemble_macro_to_eulerian_jacobian(
-    const unsigned &t, const Vector<double> &S, DenseMatrix<double> &jacobian)
+    const unsigned& t, const Vector<double>& S, DenseMatrix<double>& jacobian)
   {
     using namespace QuadTreeNames;
 
@@ -240,7 +240,7 @@ namespace oomph
   /// macro coordinates to global coordinates x
   //=============================================================================
   void QMacroElement<2>::assemble_macro_to_eulerian_jacobian2(
-    const unsigned &t, const Vector<double> &S, DenseMatrix<double> &jacobian2)
+    const unsigned& t, const Vector<double>& S, DenseMatrix<double>& jacobian2)
   {
     using namespace QuadTreeNames;
 
@@ -340,9 +340,9 @@ namespace oomph
   /// \short Get global position r(S) at discrete time level t.
   /// t=0: Present time; t>0: previous timestep.
   //=================================================================
-  void QMacroElement<3>::macro_map(const unsigned &t,
-                                   const Vector<double> &S,
-                                   Vector<double> &r)
+  void QMacroElement<3>::macro_map(const unsigned& t,
+                                   const Vector<double>& S,
+                                   Vector<double>& r)
   {
     // get the eight corners
     Vector<double> corner_LDB(3);
@@ -554,8 +554,8 @@ namespace oomph
   //=================================================================
   /// \short Output all macro element boundaries as tecplot zones
   //=================================================================
-  void QMacroElement<3>::output_macro_element_boundaries(std::ostream &outfile,
-                                                         const unsigned &nplot)
+  void QMacroElement<3>::output_macro_element_boundaries(std::ostream& outfile,
+                                                         const unsigned& nplot)
   {
     using namespace OcTreeNames;
 

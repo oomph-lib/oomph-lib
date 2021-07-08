@@ -44,8 +44,8 @@ namespace oomph
   namespace TriangleHelper
   {
     /// Clear TriangulateIO structure
-    void clear_triangulateio(TriangulateIO &triangulate_io,
-                             const bool &clear_hole_data)
+    void clear_triangulateio(TriangulateIO& triangulate_io,
+                             const bool& clear_hole_data)
     {
       // Clear the point,attribute and marker list
       free(triangulate_io.pointlist);
@@ -90,41 +90,41 @@ namespace oomph
     }
 
     /// Initialise TriangulateIO structure
-    void initialise_triangulateio(TriangulateIO &triangle_io)
+    void initialise_triangulateio(TriangulateIO& triangle_io)
     {
       // Initialize the point list
-      triangle_io.pointlist = (double *)NULL;
-      triangle_io.pointattributelist = (double *)NULL;
-      triangle_io.pointmarkerlist = (int *)NULL;
+      triangle_io.pointlist = (double*)NULL;
+      triangle_io.pointattributelist = (double*)NULL;
+      triangle_io.pointmarkerlist = (int*)NULL;
       triangle_io.numberofpoints = 0;
       triangle_io.numberofpointattributes = 0;
 
       // Initialize the triangle list
-      triangle_io.trianglelist = (int *)NULL;
-      triangle_io.triangleattributelist = (double *)NULL;
-      triangle_io.trianglearealist = (double *)NULL;
-      triangle_io.neighborlist = (int *)NULL;
+      triangle_io.trianglelist = (int*)NULL;
+      triangle_io.triangleattributelist = (double*)NULL;
+      triangle_io.trianglearealist = (double*)NULL;
+      triangle_io.neighborlist = (int*)NULL;
       triangle_io.numberoftriangles = 0;
       triangle_io.numberofcorners = 0;
       triangle_io.numberoftriangleattributes = 0;
 
       // Initialize the segment list
-      triangle_io.segmentlist = (int *)NULL;
-      triangle_io.segmentmarkerlist = (int *)NULL;
+      triangle_io.segmentlist = (int*)NULL;
+      triangle_io.segmentmarkerlist = (int*)NULL;
       triangle_io.numberofsegments = 0;
 
       // Initialise hole list
-      triangle_io.holelist = (double *)NULL;
+      triangle_io.holelist = (double*)NULL;
       triangle_io.numberofholes = 0;
 
       // Initialize region list
-      triangle_io.regionlist = (double *)NULL;
+      triangle_io.regionlist = (double*)NULL;
       triangle_io.numberofregions = 0;
 
       // Initialize edge list
-      triangle_io.edgelist = (int *)NULL;
-      triangle_io.edgemarkerlist = (int *)NULL;
-      triangle_io.normlist = (double *)NULL;
+      triangle_io.edgelist = (int*)NULL;
+      triangle_io.edgemarkerlist = (int*)NULL;
+      triangle_io.normlist = (double*)NULL;
       triangle_io.numberofedges = 0;
     }
 
@@ -133,7 +133,7 @@ namespace oomph
     /// Warnings are issued if triangulate_io contains data that is not
     /// not copied, unless quiet=true;
     TriangulateIO deep_copy_of_triangulateio_representation(
-      TriangulateIO &triangle_io, const bool &quiet)
+      TriangulateIO& triangle_io, const bool& quiet)
     {
       // Create the struct
       TriangulateIO triangle_out;
@@ -144,14 +144,14 @@ namespace oomph
       // Point data
       triangle_out.numberofpoints = triangle_io.numberofpoints;
       triangle_out.pointlist =
-        (double *)malloc(triangle_out.numberofpoints * 2 * sizeof(double));
+        (double*)malloc(triangle_out.numberofpoints * 2 * sizeof(double));
       for (int j = 0; j < triangle_out.numberofpoints * 2; j++)
       {
         triangle_out.pointlist[j] = triangle_io.pointlist[j];
       }
 
       triangle_out.pointmarkerlist =
-        (int *)malloc(triangle_out.numberofpoints * sizeof(int));
+        (int*)malloc(triangle_out.numberofpoints * sizeof(int));
       for (int j = 0; j < triangle_out.numberofpoints; j++)
       {
         triangle_out.pointmarkerlist[j] = triangle_io.pointmarkerlist[j];
@@ -173,7 +173,7 @@ namespace oomph
       // Triangle data
       triangle_out.numberoftriangles = triangle_io.numberoftriangles;
       triangle_out.trianglelist =
-        (int *)malloc(triangle_out.numberoftriangles * 3 * sizeof(int));
+        (int*)malloc(triangle_out.numberoftriangles * 3 * sizeof(int));
       for (int j = 0; j < triangle_out.numberoftriangles * 3; j++)
       {
         triangle_out.trianglelist[j] = triangle_io.trianglelist[j];
@@ -182,7 +182,7 @@ namespace oomph
       // Copy over the triangle attribute data
       triangle_out.numberoftriangleattributes =
         triangle_io.numberoftriangleattributes;
-      triangle_out.triangleattributelist = (double *)malloc(
+      triangle_out.triangleattributelist = (double*)malloc(
         triangle_out.numberoftriangles *
         triangle_out.numberoftriangleattributes * sizeof(double));
       for (int j = 0; j < (triangle_out.numberoftriangles *
@@ -227,13 +227,13 @@ namespace oomph
       // Segment data
       triangle_out.numberofsegments = triangle_io.numberofsegments;
       triangle_out.segmentlist =
-        (int *)malloc(triangle_out.numberofsegments * 2 * sizeof(int));
+        (int*)malloc(triangle_out.numberofsegments * 2 * sizeof(int));
       for (int j = 0; j < triangle_out.numberofsegments * 2; j++)
       {
         triangle_out.segmentlist[j] = triangle_io.segmentlist[j];
       }
       triangle_out.segmentmarkerlist =
-        (int *)malloc(triangle_out.numberofsegments * sizeof(int));
+        (int*)malloc(triangle_out.numberofsegments * sizeof(int));
       for (int j = 0; j < triangle_out.numberofsegments; j++)
       {
         triangle_out.segmentmarkerlist[j] = triangle_io.segmentmarkerlist[j];
@@ -242,7 +242,7 @@ namespace oomph
       // Region data
       triangle_out.numberofregions = triangle_io.numberofregions;
       triangle_out.regionlist =
-        (double *)malloc(triangle_out.numberofregions * 4 * sizeof(double));
+        (double*)malloc(triangle_out.numberofregions * 4 * sizeof(double));
       for (int j = 0; j < triangle_out.numberofregions * 4; ++j)
       {
         triangle_out.regionlist[j] = triangle_io.regionlist[j];
@@ -251,7 +251,7 @@ namespace oomph
       // Hole data
       triangle_out.numberofholes = triangle_io.numberofholes;
       triangle_out.holelist =
-        (double *)malloc(triangle_out.numberofholes * 2 * sizeof(double));
+        (double*)malloc(triangle_out.numberofholes * 2 * sizeof(double));
       for (int j = 0; j < triangle_out.numberofholes * 2; j++)
       {
         triangle_out.holelist[j] = triangle_io.holelist[j];
@@ -300,8 +300,8 @@ namespace oomph
 
     /// \short Write the triangulateio data to disk as a poly file,
     /// mainly used for debugging
-    void write_triangulateio_to_polyfile(TriangulateIO &triangle_io,
-                                         std::ostream &poly_file)
+    void write_triangulateio_to_polyfile(TriangulateIO& triangle_io,
+                                         std::ostream& poly_file)
     {
       // Up the precision dramatiacally
       poly_file.precision(20);
@@ -396,11 +396,11 @@ namespace oomph
     /// externally. The triangulateio structure is required to dump the mesh
     /// topology for restarts.
     void create_triangulateio_from_polyfiles(
-      const std::string &node_file_name,
-      const std::string &element_file_name,
-      const std::string &poly_file_name,
-      TriangulateIO &triangle_io,
-      bool &use_attributes)
+      const std::string& node_file_name,
+      const std::string& element_file_name,
+      const std::string& poly_file_name,
+      TriangulateIO& triangle_io,
+      bool& use_attributes)
     {
       // Initialise the TriangulateIO data structure
       initialise_triangulateio(triangle_io);
@@ -434,12 +434,12 @@ namespace oomph
 
       // Allocate storage in the data structure
       triangle_io.trianglelist =
-        (int *)malloc(triangle_io.numberoftriangles *
-                      triangle_io.numberofcorners * sizeof(int));
+        (int*)malloc(triangle_io.numberoftriangles *
+                     triangle_io.numberofcorners * sizeof(int));
 
       if (n_attributes > 0)
       {
-        triangle_io.triangleattributelist = (double *)malloc(
+        triangle_io.triangleattributelist = (double*)malloc(
           triangle_io.numberoftriangles *
           triangle_io.numberoftriangleattributes * sizeof(double));
       }
@@ -510,14 +510,14 @@ namespace oomph
 
       // Allocate storage
       triangle_io.pointlist =
-        (double *)malloc(triangle_io.numberofpoints * 2 * sizeof(double));
+        (double*)malloc(triangle_io.numberofpoints * 2 * sizeof(double));
       triangle_io.pointattributelist =
-        (double *)malloc(triangle_io.numberofpoints *
-                         triangle_io.numberofpointattributes * sizeof(double));
+        (double*)malloc(triangle_io.numberofpoints *
+                        triangle_io.numberofpointattributes * sizeof(double));
       if (boundary_markers_flag)
       {
         triangle_io.pointmarkerlist =
-          (int *)malloc(triangle_io.numberofpoints * sizeof(int));
+          (int*)malloc(triangle_io.numberofpoints * sizeof(int));
       }
 
       // Dummy for node number
@@ -606,11 +606,11 @@ namespace oomph
 
       // Allocate storage
       triangle_io.segmentlist =
-        (int *)malloc(triangle_io.numberofsegments * 2 * sizeof(int));
+        (int*)malloc(triangle_io.numberofsegments * 2 * sizeof(int));
       if (boundary_markers_flag)
       {
         triangle_io.segmentmarkerlist =
-          (int *)malloc(triangle_io.numberofsegments * sizeof(int));
+          (int*)malloc(triangle_io.numberofsegments * sizeof(int));
       }
 
       // Dummy for global segment number
@@ -634,7 +634,7 @@ namespace oomph
 
       // Allocate memory
       triangle_io.holelist =
-        (double *)malloc(triangle_io.numberofholes * 2 * sizeof(double));
+        (double*)malloc(triangle_io.numberofholes * 2 * sizeof(double));
 
       // Dummy for hole number
       unsigned dummy_hole;
@@ -653,7 +653,7 @@ namespace oomph
 
       // Allocate memory
       triangle_io.regionlist =
-        (double *)malloc(triangle_io.numberofregions * 4 * sizeof(double));
+        (double*)malloc(triangle_io.numberofregions * 4 * sizeof(double));
 
       // Check for using regions
       if (n_regions > 0)
@@ -696,7 +696,7 @@ namespace oomph
 
     /// \short Write all the triangulateio data to disk in a dump file
     /// that can then be used to restart simulations
-    void dump_triangulateio(TriangulateIO &triangle_io, std::ostream &dump_file)
+    void dump_triangulateio(TriangulateIO& triangle_io, std::ostream& dump_file)
     {
       // Dump the triangles first
       dump_file << triangle_io.numberoftriangles
@@ -838,8 +838,8 @@ namespace oomph
 
     /// \short Read the triangulateio data from a dump file on
     /// disk, which can then be used to restart simulations
-    void read_triangulateio(std::istream &restart_file,
-                            TriangulateIO &triangle_io)
+    void read_triangulateio(std::istream& restart_file,
+                            TriangulateIO& triangle_io)
     {
       // String for reading
       std::string input_string;
@@ -875,12 +875,12 @@ namespace oomph
 
       // Allocate storage in the data structure
       triangle_io.trianglelist =
-        (int *)malloc(triangle_io.numberoftriangles *
-                      triangle_io.numberofcorners * sizeof(int));
+        (int*)malloc(triangle_io.numberoftriangles *
+                     triangle_io.numberofcorners * sizeof(int));
 
       if (n_attribute > 0)
       {
-        triangle_io.triangleattributelist = (double *)malloc(
+        triangle_io.triangleattributelist = (double*)malloc(
           triangle_io.numberoftriangles *
           triangle_io.numberoftriangleattributes * sizeof(double));
       }
@@ -928,14 +928,14 @@ namespace oomph
 
       // Allocate storage
       triangle_io.pointlist =
-        (double *)malloc(triangle_io.numberofpoints * 2 * sizeof(double));
+        (double*)malloc(triangle_io.numberofpoints * 2 * sizeof(double));
       triangle_io.pointattributelist =
-        (double *)malloc(triangle_io.numberofpoints *
-                         triangle_io.numberofpointattributes * sizeof(double));
+        (double*)malloc(triangle_io.numberofpoints *
+                        triangle_io.numberofpointattributes * sizeof(double));
       if (point_marker_flag)
       {
         triangle_io.pointmarkerlist =
-          (int *)malloc(triangle_io.numberofpoints * sizeof(int));
+          (int*)malloc(triangle_io.numberofpoints * sizeof(int));
       }
 
       // Now read the point data
@@ -989,11 +989,11 @@ namespace oomph
 
       // Allocate storage
       triangle_io.segmentlist =
-        (int *)malloc(triangle_io.numberofsegments * 2 * sizeof(int));
+        (int*)malloc(triangle_io.numberofsegments * 2 * sizeof(int));
       if (seg_marker_flag)
       {
         triangle_io.segmentmarkerlist =
-          (int *)malloc(triangle_io.numberofsegments * sizeof(int));
+          (int*)malloc(triangle_io.numberofsegments * sizeof(int));
       }
 
       const int n_segments = triangle_io.numberofsegments;
@@ -1026,7 +1026,7 @@ namespace oomph
 
       // Allocate memory
       triangle_io.holelist =
-        (double *)malloc(triangle_io.numberofholes * 2 * sizeof(double));
+        (double*)malloc(triangle_io.numberofholes * 2 * sizeof(double));
 
       const int n_hole = triangle_io.numberofholes;
       // Output the hole data
@@ -1050,7 +1050,7 @@ namespace oomph
 
       // Allocate memory
       triangle_io.regionlist =
-        (double *)malloc(triangle_io.numberofregions * 4 * sizeof(double));
+        (double*)malloc(triangle_io.numberofregions * 4 * sizeof(double));
 
       // Loop over the regions
       counter = 0;
@@ -1100,9 +1100,9 @@ namespace oomph
   /// tolerance
   // =======================================================================
   void TriangleMeshCurveSection::connect_initial_vertex_to_polyline(
-    TriangleMeshPolyLine *polyline_pt,
-    const unsigned &vertex_number,
-    const double &tolerance_for_connection)
+    TriangleMeshPolyLine* polyline_pt,
+    const unsigned& vertex_number,
+    const double& tolerance_for_connection)
   {
 #ifdef PARANOID
     unsigned n_vertices = polyline_pt->nvertex();
@@ -1169,9 +1169,9 @@ namespace oomph
   /// tolerance
   // =======================================================================
   void TriangleMeshCurveSection::connect_final_vertex_to_polyline(
-    TriangleMeshPolyLine *polyline_pt,
-    const unsigned &vertex_number,
-    const double &tolerance_for_connection)
+    TriangleMeshPolyLine* polyline_pt,
+    const unsigned& vertex_number,
+    const double& tolerance_for_connection)
   {
 #ifdef PARANOID
     unsigned n_vertices = polyline_pt->nvertex();
@@ -1239,9 +1239,9 @@ namespace oomph
   /// than the given tolerance
   // =======================================================================
   void TriangleMeshCurveSection::connect_initial_vertex_to_curviline(
-    TriangleMeshCurviLine *curviline_pt,
-    const double &s_value,
-    const double &tolerance_for_connection)
+    TriangleMeshCurviLine* curviline_pt,
+    const double& s_value,
+    const double& tolerance_for_connection)
   {
 #ifdef PARANOID
     double z_initial = curviline_pt->zeta_start();
@@ -1318,9 +1318,9 @@ namespace oomph
   /// than the given tolerance
   // =======================================================================
   void TriangleMeshCurveSection::connect_final_vertex_to_curviline(
-    TriangleMeshCurviLine *curviline_pt,
-    const double &s_value,
-    const double &tolerance_for_connection)
+    TriangleMeshCurviLine* curviline_pt,
+    const double& s_value,
+    const double& tolerance_for_connection)
   {
 #ifdef PARANOID
     double z_initial = curviline_pt->zeta_start();
@@ -1398,9 +1398,9 @@ namespace oomph
   /// Class defining a closed curve for the Triangle mesh generation
   //=====================================================================
   TriangleMeshClosedCurve::TriangleMeshClosedCurve(
-    const Vector<TriangleMeshCurveSection *> &curve_section_pt,
-    const Vector<double> &internal_point_pt,
-    const bool &is_internal_point_fixed) :
+    const Vector<TriangleMeshCurveSection*>& curve_section_pt,
+    const Vector<double>& internal_point_pt,
+    const bool& is_internal_point_fixed) :
     TriangleMeshCurve(curve_section_pt),
     Internal_point_pt(internal_point_pt),
     Is_internal_point_fixed(is_internal_point_fixed)
@@ -1468,10 +1468,10 @@ namespace oomph
       else
       {
         // Aligns (only implemented for polylines)
-        TriangleMeshPolyLine *current_polyline =
-          dynamic_cast<TriangleMeshPolyLine *>(Curve_section_pt[i]);
-        TriangleMeshPolyLine *next_polyline =
-          dynamic_cast<TriangleMeshPolyLine *>(Curve_section_pt[i + 1]);
+        TriangleMeshPolyLine* current_polyline =
+          dynamic_cast<TriangleMeshPolyLine*>(Curve_section_pt[i]);
+        TriangleMeshPolyLine* next_polyline =
+          dynamic_cast<TriangleMeshPolyLine*>(Curve_section_pt[i + 1]);
 
         // Was it able to do the cast?
         if (current_polyline && next_polyline)
@@ -1517,11 +1517,10 @@ namespace oomph
     else
     {
       // Aligns (only implemented for polylines)
-      TriangleMeshPolyLine *first_polyline =
-        dynamic_cast<TriangleMeshPolyLine *>(Curve_section_pt[0]);
-      TriangleMeshPolyLine *last_polyline =
-        dynamic_cast<TriangleMeshPolyLine *>(
-          Curve_section_pt[n_boundaries - 1]);
+      TriangleMeshPolyLine* first_polyline =
+        dynamic_cast<TriangleMeshPolyLine*>(Curve_section_pt[0]);
+      TriangleMeshPolyLine* last_polyline =
+        dynamic_cast<TriangleMeshPolyLine*>(Curve_section_pt[n_boundaries - 1]);
 
       // Was it able to do the cast?
       if (first_polyline && last_polyline)
@@ -1554,9 +1553,9 @@ namespace oomph
   /// mode for this constraint
   //=========================================================================
   TriangleMeshPolygon::TriangleMeshPolygon(
-    const Vector<TriangleMeshCurveSection *> &boundary_polyline_pt,
-    const Vector<double> &internal_point_pt,
-    const bool &is_internal_point_fixed) :
+    const Vector<TriangleMeshCurveSection*>& boundary_polyline_pt,
+    const Vector<double>& internal_point_pt,
+    const bool& is_internal_point_fixed) :
     TriangleMeshCurve(boundary_polyline_pt),
     TriangleMeshClosedCurve(
       boundary_polyline_pt, internal_point_pt, is_internal_point_fixed),
@@ -1571,8 +1570,8 @@ namespace oomph
     // instance of TriangleMeshPolyLine
     for (unsigned p = 0; p < n_bound; p++)
     {
-      TriangleMeshPolyLine *tmp_polyline_pt =
-        dynamic_cast<TriangleMeshPolyLine *>(boundary_polyline_pt[p]);
+      TriangleMeshPolyLine* tmp_polyline_pt =
+        dynamic_cast<TriangleMeshPolyLine*>(boundary_polyline_pt[p]);
       if (tmp_polyline_pt == 0)
       {
         std::ostringstream error_stream;
@@ -1811,7 +1810,7 @@ namespace oomph
   /// Class defining an open curve for the Triangle mesh generation
   //=====================================================================
   TriangleMeshOpenCurve::TriangleMeshOpenCurve(
-    const Vector<TriangleMeshCurveSection *> &curve_section_pt) :
+    const Vector<TriangleMeshCurveSection*>& curve_section_pt) :
     TriangleMeshCurve(curve_section_pt)
   {
     // Matching of curve sections i.e. the last vertex of
@@ -1856,10 +1855,10 @@ namespace oomph
       else
       {
         // Aligns (only implemented for polylines)
-        TriangleMeshPolyLine *current_polyline =
-          dynamic_cast<TriangleMeshPolyLine *>(Curve_section_pt[i]);
-        TriangleMeshPolyLine *next_polyline =
-          dynamic_cast<TriangleMeshPolyLine *>(Curve_section_pt[i + 1]);
+        TriangleMeshPolyLine* current_polyline =
+          dynamic_cast<TriangleMeshPolyLine*>(Curve_section_pt[i]);
+        TriangleMeshPolyLine* next_polyline =
+          dynamic_cast<TriangleMeshPolyLine*>(Curve_section_pt[i + 1]);
 
         if (current_polyline && next_polyline)
         {
@@ -1880,13 +1879,13 @@ namespace oomph
   /// information as well
   //======================================================================
   void UnstructuredTwoDMeshGeometryBase::build_triangulateio(
-    Vector<TriangleMeshPolygon *> &outer_polygons_pt,
-    Vector<TriangleMeshPolygon *> &internal_polygons_pt,
-    Vector<TriangleMeshOpenCurve *> &open_curves_pt,
-    Vector<Vector<double>> &extra_holes_coordinates,
-    std::map<unsigned, Vector<double>> &regions_coordinates,
-    std::map<unsigned, double> &regions_areas,
-    TriangulateIO &triangulate_io)
+    Vector<TriangleMeshPolygon*>& outer_polygons_pt,
+    Vector<TriangleMeshPolygon*>& internal_polygons_pt,
+    Vector<TriangleMeshOpenCurve*>& open_curves_pt,
+    Vector<Vector<double>>& extra_holes_coordinates,
+    std::map<unsigned, Vector<double>>& regions_coordinates,
+    std::map<unsigned, double>& regions_areas,
+    TriangulateIO& triangulate_io)
   {
     // These are the general stages of the algorithm
     // --------------------------------------------------------------------
@@ -1978,7 +1977,7 @@ namespace oomph
       for (unsigned p = 0; p < n_polylines; p++)
       {
         // Get a pointer to the current polyline
-        TriangleMeshPolyLine *tmp_polyline_pt =
+        TriangleMeshPolyLine* tmp_polyline_pt =
           outer_polygons_pt[i]->polyline_pt(p);
 
         // Get the boundary id of the current polyline
@@ -1995,7 +1994,7 @@ namespace oomph
         boundary_chunk_n_vertices[bound_id][bound_chunk] = n_vertices;
 
         // Get the next polyline (or the initial polyline)
-        TriangleMeshPolyLine *next_polyline_pt = 0;
+        TriangleMeshPolyLine* next_polyline_pt = 0;
 
         // Is there next polyline
         if (p < n_polylines - 1)
@@ -2032,7 +2031,7 @@ namespace oomph
       for (unsigned p = 0; p < n_polylines; p++)
       {
         // Get a pointer to the current polyline
-        TriangleMeshPolyLine *tmp_polyline_pt =
+        TriangleMeshPolyLine* tmp_polyline_pt =
           internal_polygons_pt[i]->polyline_pt(p);
 
         // Get the boundary id of the current polyline
@@ -2049,7 +2048,7 @@ namespace oomph
         boundary_chunk_n_vertices[bound_id][bound_chunk] = n_vertices;
 
         // Get the next polyline (or the initial polyline)
-        TriangleMeshPolyLine *next_polyline_pt = 0;
+        TriangleMeshPolyLine* next_polyline_pt = 0;
 
         // Is there next polyline
         if (p < n_polylines - 1)
@@ -2086,7 +2085,7 @@ namespace oomph
       for (unsigned p = 0; p < n_polylines; p++)
       {
         // Get a pointer to the current polyline
-        TriangleMeshPolyLine *tmp_polyline_pt =
+        TriangleMeshPolyLine* tmp_polyline_pt =
           open_curves_pt[i]->polyline_pt(p);
 
         // Get the boundary id of the current polyline
@@ -2103,7 +2102,7 @@ namespace oomph
         boundary_chunk_n_vertices[bound_id][bound_chunk] = n_vertices;
 
         // Get the next polyline (or the initial polyline)
-        TriangleMeshPolyLine *next_polyline_pt = 0;
+        TriangleMeshPolyLine* next_polyline_pt = 0;
 
         // Is there next polyline
         if (p < n_polylines - 1)
@@ -2146,7 +2145,7 @@ namespace oomph
       for (unsigned p = 0; p < n_polylines; p++)
       {
         // Get a pointer to the current polyline
-        TriangleMeshPolyLine *tmp_polyline_pt =
+        TriangleMeshPolyLine* tmp_polyline_pt =
           outer_polygons_pt[i]->polyline_pt(p);
 
         // Identify the base vertices in the current polyline
@@ -2169,7 +2168,7 @@ namespace oomph
       for (unsigned p = 0; p < n_polylines; p++)
       {
         // Get a pointer to the current polyline
-        TriangleMeshPolyLine *tmp_polyline_pt =
+        TriangleMeshPolyLine* tmp_polyline_pt =
           internal_polygons_pt[i]->polyline_pt(p);
 
         // Identify the base vertices in the current polyline
@@ -2192,7 +2191,7 @@ namespace oomph
       for (unsigned p = 0; p < n_polylines; p++)
       {
         // Get a pointer to the current polyline
-        TriangleMeshPolyLine *tmp_polyline_pt =
+        TriangleMeshPolyLine* tmp_polyline_pt =
           open_curves_pt[i]->polyline_pt(p);
 
         // Identify the base vertices in the current polyline
@@ -2273,7 +2272,7 @@ namespace oomph
       for (unsigned p = 0; p < n_polylines; p++)
       {
         // Get a pointer to the current polyline
-        TriangleMeshPolyLine *tmp_polyline_pt =
+        TriangleMeshPolyLine* tmp_polyline_pt =
           outer_polygons_pt[i]->polyline_pt(p);
 
         // Get the boundary id of the current polyline
@@ -2483,7 +2482,7 @@ namespace oomph
       for (unsigned p = 0; p < n_polylines; p++)
       {
         // Get a pointer to the current polyline
-        TriangleMeshPolyLine *tmp_polyline_pt =
+        TriangleMeshPolyLine* tmp_polyline_pt =
           internal_polygons_pt[i]->polyline_pt(p);
 
         // Get the boundary id of the current polyline
@@ -2693,7 +2692,7 @@ namespace oomph
       for (unsigned p = 0; p < n_polylines; p++)
       {
         // Get a pointer to the current polyline
-        TriangleMeshPolyLine *tmp_polyline_pt =
+        TriangleMeshPolyLine* tmp_polyline_pt =
           open_curves_pt[i]->polyline_pt(p);
 
         // Get the boundary id of the current polyline
@@ -3259,11 +3258,11 @@ namespace oomph
 
     // Allocate memory in the triangulateIO structure to store the values
     triangulate_io.pointlist =
-      (double *)malloc(triangulate_io.numberofpoints * 2 * sizeof(double));
+      (double*)malloc(triangulate_io.numberofpoints * 2 * sizeof(double));
     triangulate_io.segmentlist =
-      (int *)malloc(triangulate_io.numberofsegments * 2 * sizeof(int));
+      (int*)malloc(triangulate_io.numberofsegments * 2 * sizeof(int));
     triangulate_io.segmentmarkerlist =
-      (int *)malloc(triangulate_io.numberofsegments * sizeof(int));
+      (int*)malloc(triangulate_io.numberofsegments * sizeof(int));
 
     // Fill triangulateIO data structure
     // ---------------------------------------
@@ -3301,7 +3300,7 @@ namespace oomph
     {
       triangulate_io.numberofregions = n_regions;
       triangulate_io.regionlist =
-        (double *)malloc(triangulate_io.numberofregions * 4 * sizeof(double));
+        (double*)malloc(triangulate_io.numberofregions * 4 * sizeof(double));
 
       // Loop over the regions map
       unsigned p = 1;
@@ -3354,7 +3353,7 @@ namespace oomph
 
     // Allocate memory for the holes coordinates
     triangulate_io.holelist =
-      (double *)malloc(triangulate_io.numberofholes * 2 * sizeof(double));
+      (double*)malloc(triangulate_io.numberofholes * 2 * sizeof(double));
 
     // Store the holes coordinates
     unsigned count_hole = 0;
@@ -3389,10 +3388,10 @@ namespace oomph
   /// given polyline
   //========================================================================
   void UnstructuredTwoDMeshGeometryBase::add_connection_matrix_info_helper(
-    TriangleMeshPolyLine *polyline_pt,
-    std::map<unsigned, std::map<unsigned, Vector<vertex_connection_info>>>
-      &connection_matrix,
-    TriangleMeshPolyLine *next_polyline_pt)
+    TriangleMeshPolyLine* polyline_pt,
+    std::map<unsigned, std::map<unsigned, Vector<vertex_connection_info>>>&
+      connection_matrix,
+    TriangleMeshPolyLine* next_polyline_pt)
   {
     // Get the boundary id of the current polyline
     const unsigned bound_id = polyline_pt->boundary_id();
@@ -3516,9 +3515,9 @@ namespace oomph
   // no visited and not being a base vertex
   //========================================================================
   void UnstructuredTwoDMeshGeometryBase::initialise_base_vertex(
-    TriangleMeshPolyLine *polyline_pt,
-    std::map<unsigned, std::map<unsigned, Vector<base_vertex_info>>>
-      &base_vertices)
+    TriangleMeshPolyLine* polyline_pt,
+    std::map<unsigned, std::map<unsigned, Vector<base_vertex_info>>>&
+      base_vertices)
   {
     // Get the boundary id of the current polyline
     const unsigned bound_id = polyline_pt->boundary_id();
@@ -3552,12 +3551,12 @@ namespace oomph
   // \short Helps to identify the base vertex of the given polyline
   //========================================================================
   void UnstructuredTwoDMeshGeometryBase::add_base_vertex_info_helper(
-    TriangleMeshPolyLine *polyline_pt,
-    std::map<unsigned, std::map<unsigned, Vector<base_vertex_info>>>
-      &base_vertices,
-    std::map<unsigned, std::map<unsigned, Vector<vertex_connection_info>>>
-      &connection_matrix,
-    std::map<unsigned, std::map<unsigned, unsigned>> &boundary_chunk_nvertices)
+    TriangleMeshPolyLine* polyline_pt,
+    std::map<unsigned, std::map<unsigned, Vector<base_vertex_info>>>&
+      base_vertices,
+    std::map<unsigned, std::map<unsigned, Vector<vertex_connection_info>>>&
+      connection_matrix,
+    std::map<unsigned, std::map<unsigned, unsigned>>& boundary_chunk_nvertices)
   {
     // Get the general data of the polyline
 
@@ -3999,7 +3998,7 @@ namespace oomph
     for (unsigned b = 0; b < n_bound; b++)
     {
       // Find the geometric object
-      GeomObject *const geom_object_pt = this->boundary_geom_object_pt(b);
+      GeomObject* const geom_object_pt = this->boundary_geom_object_pt(b);
 
       // If there is one
       if (geom_object_pt != 0)
@@ -4010,7 +4009,7 @@ namespace oomph
         for (unsigned n = 0; n < n_boundary_node; ++n)
         {
           // Get the boundary node and coordinates
-          Node *const nod_pt = this->boundary_node_pt(b, n);
+          Node* const nod_pt = this->boundary_node_pt(b, n);
           nod_pt->get_coordinates_on_boundary(b, b_coord);
 
           // Get the position and time history according to the underlying
@@ -4094,9 +4093,9 @@ namespace oomph
   //======================================================================
   const bool UnstructuredTwoDMeshGeometryBase::
     get_connected_vertex_number_on_destination_polyline(
-      TriangleMeshPolyLine *dst_polyline_pt,
-      Vector<double> &vertex_coordinates,
-      unsigned &vertex_number)
+      TriangleMeshPolyLine* dst_polyline_pt,
+      Vector<double>& vertex_coordinates,
+      unsigned& vertex_number)
   {
     // The returning flag indicating that the vertex was found in the
     // destination boundary
@@ -4144,8 +4143,8 @@ namespace oomph
   /// the input curve(polyline or curviline) to the output polyline
   //======================================================================
   void UnstructuredTwoDMeshGeometryBase::copy_connection_information(
-    TriangleMeshCurveSection *input_curve_pt,
-    TriangleMeshCurveSection *output_curve_pt)
+    TriangleMeshCurveSection* input_curve_pt,
+    TriangleMeshCurveSection* output_curve_pt)
   {
     // Is there a connection to the initial vertex
     const bool initial_connection =
@@ -4406,8 +4405,8 @@ namespace oomph
   //======================================================================
   void UnstructuredTwoDMeshGeometryBase::
     copy_connection_information_to_sub_polylines(
-      TriangleMeshCurveSection *input_curve_pt,
-      TriangleMeshCurveSection *output_curve_pt)
+      TriangleMeshCurveSection* input_curve_pt,
+      TriangleMeshCurveSection* output_curve_pt)
   {
     // Is there a connection to the initial vertex
     const bool initial_connection =

@@ -65,7 +65,7 @@ namespace oomph
     unsigned AMG_smoother_iterations = 2;
 
     /// set the defaults
-    void set_defaults(HyprePreconditioner *hypre_prec_pt)
+    void set_defaults(HyprePreconditioner* hypre_prec_pt)
     {
       // use AMG preconditioner
       hypre_prec_pt->hypre_method() = HypreSolver::BoomerAMG;
@@ -212,7 +212,7 @@ namespace oomph
     Sub_preconditioner_1_pt->setup(matrix_pt());
 
     // get the matrix ans setup sub preconditioner pt 2
-    CRDoubleMatrix *j_33_pt = new CRDoubleMatrix;
+    CRDoubleMatrix* j_33_pt = new CRDoubleMatrix;
     this->get_block(3, 3, *j_33_pt);
     Sub_preconditioner_2_pt->setup(j_33_pt);
     delete j_33_pt;
@@ -225,7 +225,7 @@ namespace oomph
     if (this->nblock_types() == 5)
     {
       // get the matrix for block J_33
-      CRDoubleMatrix *j_44_pt = new CRDoubleMatrix;
+      CRDoubleMatrix* j_44_pt = new CRDoubleMatrix;
       this->get_block(4, 4, *j_44_pt);
 
       // setup the hijacked sub preconditioner
@@ -239,8 +239,8 @@ namespace oomph
   //============================================================================
   /// \short preconditioner solve for the biharmonic preconditioner
   //============================================================================
-  void BiharmonicPreconditioner::preconditioner_solve(const DoubleVector &r,
-                                                      DoubleVector &z)
+  void BiharmonicPreconditioner::preconditioner_solve(const DoubleVector& r,
+                                                      DoubleVector& z)
   {
     // zero z
     z.initialise(0.0);
@@ -331,7 +331,7 @@ namespace oomph
   /// \short preconditioner solve for the exact sub biharmonic preconditioner
   //============================================================================
   void ExactSubBiharmonicPreconditioner::preconditioner_solve(
-    const DoubleVector &r, DoubleVector &z)
+    const DoubleVector& r, DoubleVector& z)
   {
     // vectors for use within the sub preconditioner
     DoubleVector sub_r;
@@ -415,7 +415,7 @@ namespace oomph
       // Use Hypre Boomer AMG
       S_00_preconditioner_pt = new HyprePreconditioner;
       Biharmonic_schur_complement_Hypre_defaults::set_defaults(
-        static_cast<HyprePreconditioner *>(S_00_preconditioner_pt));
+        static_cast<HyprePreconditioner*>(S_00_preconditioner_pt));
 #else
       std::ostringstream error_message;
       error_message << "Request AMG solver but oomph-lib does not have HYPRE";
@@ -443,11 +443,11 @@ namespace oomph
   void InexactSubBiharmonicPreconditioner::compute_inexact_schur_complement()
   {
     // if required get pointers to the vector components of J01 and J10
-    int *J_01_row_start = 0;
-    int *J_01_column_index = 0;
-    double *J_01_value = 0;
-    int *J_10_row_start = 0;
-    int *J_10_column_index = 0;
+    int* J_01_row_start = 0;
+    int* J_01_column_index = 0;
+    double* J_01_value = 0;
+    int* J_10_row_start = 0;
+    int* J_10_column_index = 0;
 
     // J_01 matrix
     J_01_row_start = Matrix_of_block_pointers(0, 1)->row_start();
@@ -459,11 +459,11 @@ namespace oomph
     J_10_column_index = Matrix_of_block_pointers(1, 0)->column_index();
 
     // if required get pointers to the vector components of J01 and J10
-    int *J_02_row_start = 0;
-    int *J_02_column_index = 0;
-    double *J_02_value = 0;
-    int *J_20_row_start = 0;
-    int *J_20_column_index = 0;
+    int* J_02_row_start = 0;
+    int* J_02_column_index = 0;
+    double* J_02_value = 0;
+    int* J_20_row_start = 0;
+    int* J_20_column_index = 0;
 
     // J_02 matrix
     J_02_row_start = Matrix_of_block_pointers(0, 2)->row_start();
@@ -475,12 +475,12 @@ namespace oomph
     J_20_column_index = Matrix_of_block_pointers(2, 0)->column_index();
 
     // get the inverse lumped vector of J_11 if required
-    double *J_11_lumped_and_inverted = 0;
+    double* J_11_lumped_and_inverted = 0;
     J_11_lumped_and_inverted =
       Lumped_J_11_preconditioner_pt->inverse_lumped_vector_pt();
 
     // get the inverse lumped vector of J_22 if required
-    double *J_22_lumped_and_inverted = 0;
+    double* J_22_lumped_and_inverted = 0;
     J_22_lumped_and_inverted =
       Lumped_J_22_preconditioner_pt->inverse_lumped_vector_pt();
 
@@ -494,8 +494,8 @@ namespace oomph
 
     // number of elements in the x-dimension of the mesh
     unsigned n_element_x =
-      dynamic_cast<HermiteQuadMesh<Hijacked<BiharmonicElement<2>>> *>(
-        dynamic_cast<BiharmonicPreconditioner *>(
+      dynamic_cast<HermiteQuadMesh<Hijacked<BiharmonicElement<2>>>*>(
+        dynamic_cast<BiharmonicPreconditioner*>(
           this->master_block_preconditioner_pt())
           ->bulk_element_mesh_pt())
         ->nelement_in_dim(0);
@@ -651,7 +651,7 @@ namespace oomph
   /// \short preconditioner solve for the inexact sub biharmonic preconditioner
   //============================================================================
   void InexactSubBiharmonicPreconditioner::preconditioner_solve(
-    const DoubleVector &r, DoubleVector &z)
+    const DoubleVector& r, DoubleVector& z)
   {
     // get the block vectors
     Vector<DoubleVector> block_r(3);

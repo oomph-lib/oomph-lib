@@ -42,14 +42,14 @@ namespace oomph
   //=======================================================================
   template<class ELEMENT>
   void BrickFromTetMesh<ELEMENT>::build_mesh(
-    XdaTetMesh<TElement<3, 3>> *tet_mesh_pt, TimeStepper *time_stepper_pt)
+    XdaTetMesh<TElement<3, 3>>* tet_mesh_pt, TimeStepper* time_stepper_pt)
   {
     // Mesh can only be built with 3D Qelements.
     MeshChecker::assert_geometric_element<QElementGeometricBase, ELEMENT>(3, 3);
 
     // Figure out if the tet mesh is a solid mesh
     bool tet_mesh_is_solid_mesh = false;
-    if (dynamic_cast<SolidFiniteElement *>(tet_mesh_pt->element_pt(0)) != 0)
+    if (dynamic_cast<SolidFiniteElement*>(tet_mesh_pt->element_pt(0)) != 0)
     {
       tet_mesh_is_solid_mesh = true;
     }
@@ -187,17 +187,17 @@ namespace oomph
     // Maps to check which nodes have already been done
 
     // Map that stores the new brick node corresponding to an existing tet node
-    std::map<Node *, Node *> tet_node_node_pt;
+    std::map<Node*, Node*> tet_node_node_pt;
 
     // Map that stores node on an edge between two brick nodes
-    std::map<Edge, Node *> brick_edge_node_pt;
+    std::map<Edge, Node*> brick_edge_node_pt;
 
     // Map that stores node on face spanned by three tet nodes
-    std::map<TFace, Node *> tet_face_node_pt;
+    std::map<TFace, Node*> tet_face_node_pt;
 
     // Create the four Dummy bricks:
     //------------------------------
-    Vector<DummyBrickElement *> dummy_q_el_pt(4);
+    Vector<DummyBrickElement*> dummy_q_el_pt(4);
     for (unsigned e = 0; e < 4; e++)
     {
       dummy_q_el_pt[e] = new DummyBrickElement;
@@ -212,8 +212,8 @@ namespace oomph
     for (unsigned e_tet = 0; e_tet < n_el_tet; e_tet++)
     {
       // Cast to ten-noded tet
-      TElement<3, 3> *tet_el_pt =
-        dynamic_cast<TElement<3, 3> *>(tet_mesh_pt->element_pt(e_tet));
+      TElement<3, 3>* tet_el_pt =
+        dynamic_cast<TElement<3, 3>*>(tet_mesh_pt->element_pt(e_tet));
 
 #ifdef PARANOID
       if (tet_el_pt == 0)
@@ -228,23 +228,23 @@ namespace oomph
 #endif
 
       // Storage for the centroid node for this tet
-      Node *centroid_node_pt = 0;
+      Node* centroid_node_pt = 0;
 
       // Internal mid brick-face nodes
-      Node *top_mid_face_node0_pt = 0;
-      Node *right_mid_face_node0_pt = 0;
-      Node *back_mid_face_node0_pt = 0;
+      Node* top_mid_face_node0_pt = 0;
+      Node* right_mid_face_node0_pt = 0;
+      Node* back_mid_face_node0_pt = 0;
 
-      Node *top_mid_face_node1_pt = 0;
-      Node *right_mid_face_node1_pt = 0;
+      Node* top_mid_face_node1_pt = 0;
+      Node* right_mid_face_node1_pt = 0;
 
-      Node *top_mid_face_node2_pt = 0;
+      Node* top_mid_face_node2_pt = 0;
 
       // Newly created brick elements
-      FiniteElement *brick_el0_pt = 0;
-      FiniteElement *brick_el1_pt = 0;
-      FiniteElement *brick_el2_pt = 0;
-      FiniteElement *brick_el3_pt = 0;
+      FiniteElement* brick_el0_pt = 0;
+      FiniteElement* brick_el1_pt = 0;
+      FiniteElement* brick_el2_pt = 0;
+      FiniteElement* brick_el3_pt = 0;
 
       // First brick element is centred at node 0 of tet:
       //-------------------------------------------------
@@ -252,7 +252,7 @@ namespace oomph
         // Assign coordinates of dummy element
         for (unsigned j = 0; j < 8; j++)
         {
-          Node *nod_pt = dummy_q_el_pt[0]->node_pt(j);
+          Node* nod_pt = dummy_q_el_pt[0]->node_pt(j);
           Vector<double> s_tet(3);
           Vector<double> x_tet(3);
           switch (j)
@@ -356,7 +356,7 @@ namespace oomph
         }
 
         // Create actual zeroth brick element
-        FiniteElement *el_pt = new ELEMENT;
+        FiniteElement* el_pt = new ELEMENT;
         brick_el0_pt = el_pt;
         Element_pt.push_back(el_pt);
 
@@ -384,8 +384,8 @@ namespace oomph
         // Node number of tet vertex that node 0 in brick is centred on
         unsigned central_tet_vertex = 0;
 
-        Node *tet_node_pt = 0;
-        Node *old_node_pt = 0;
+        Node* tet_node_pt = 0;
+        Node* old_node_pt = 0;
 
         // Corner node
         {
@@ -396,7 +396,7 @@ namespace oomph
           old_node_pt = tet_node_node_pt[tet_node_pt];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (tet_node_pt->is_on_boundary())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -433,7 +433,7 @@ namespace oomph
           old_node_pt = tet_node_node_pt[tet_node_pt];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (tet_node_pt->is_on_boundary())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -470,7 +470,7 @@ namespace oomph
           old_node_pt = tet_node_node_pt[tet_node_pt];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (tet_node_pt->is_on_boundary())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -507,7 +507,7 @@ namespace oomph
           old_node_pt = tet_node_node_pt[tet_node_pt];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (tet_node_pt->is_on_boundary())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -544,7 +544,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face0];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face0.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -581,7 +581,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face1];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face1.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -618,7 +618,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face2];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face2.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -653,7 +653,7 @@ namespace oomph
 
           // Always new
           {
-            Node *new_node_pt = el_pt->construct_node(j, time_stepper_pt);
+            Node* new_node_pt = el_pt->construct_node(j, time_stepper_pt);
             centroid_node_pt = new_node_pt;
             Node_pt.push_back(new_node_pt);
             Vector<double> s(3);
@@ -674,7 +674,7 @@ namespace oomph
 
           // Always new
           {
-            Node *new_node_pt = el_pt->construct_node(j, time_stepper_pt);
+            Node* new_node_pt = el_pt->construct_node(j, time_stepper_pt);
             Node_pt.push_back(new_node_pt);
             Vector<double> s(3);
             Vector<double> s_tet(3);
@@ -697,7 +697,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -734,7 +734,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -771,7 +771,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -808,7 +808,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -845,7 +845,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -882,7 +882,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -919,7 +919,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -956,7 +956,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -993,7 +993,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -1030,7 +1030,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -1067,7 +1067,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -1104,7 +1104,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -1145,7 +1145,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -1186,7 +1186,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -1227,7 +1227,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -1258,7 +1258,7 @@ namespace oomph
         // Top mid brick-face node -- only built by first element
         {
           unsigned j = 22;
-          Node *new_node_pt = el_pt->construct_node(j, time_stepper_pt);
+          Node* new_node_pt = el_pt->construct_node(j, time_stepper_pt);
           Node_pt.push_back(new_node_pt);
           Vector<double> s(3);
           Vector<double> s_tet(3);
@@ -1275,7 +1275,7 @@ namespace oomph
         // Right mid brick-face node -- only built by first element
         {
           unsigned j = 14;
-          Node *new_node_pt = el_pt->construct_node(j, time_stepper_pt);
+          Node* new_node_pt = el_pt->construct_node(j, time_stepper_pt);
           Node_pt.push_back(new_node_pt);
           Vector<double> s(3);
           Vector<double> s_tet(3);
@@ -1292,7 +1292,7 @@ namespace oomph
         // Back mid brick-face node -- only built by first element
         {
           unsigned j = 16;
-          Node *new_node_pt = el_pt->construct_node(j, time_stepper_pt);
+          Node* new_node_pt = el_pt->construct_node(j, time_stepper_pt);
           Node_pt.push_back(new_node_pt);
           Vector<double> s(3);
           Vector<double> s_tet(3);
@@ -1313,7 +1313,7 @@ namespace oomph
         // Assign coordinates of dummy element
         for (unsigned j = 0; j < 8; j++)
         {
-          Node *nod_pt = dummy_q_el_pt[1]->node_pt(j);
+          Node* nod_pt = dummy_q_el_pt[1]->node_pt(j);
           Vector<double> s_tet(3);
           Vector<double> x_tet(3);
           switch (j)
@@ -1417,7 +1417,7 @@ namespace oomph
         }
 
         // Create actual first brick element
-        FiniteElement *el_pt = new ELEMENT;
+        FiniteElement* el_pt = new ELEMENT;
         brick_el1_pt = el_pt;
         Element_pt.push_back(el_pt);
 
@@ -1445,8 +1445,8 @@ namespace oomph
         // Node number of tet vertex that node 0 in brick is centred on
         unsigned central_tet_vertex = 1;
 
-        Node *tet_node_pt = 0;
-        Node *old_node_pt = 0;
+        Node* tet_node_pt = 0;
+        Node* old_node_pt = 0;
 
         // Corner node
         {
@@ -1457,7 +1457,7 @@ namespace oomph
           old_node_pt = tet_node_node_pt[tet_node_pt];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (tet_node_pt->is_on_boundary())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -1494,7 +1494,7 @@ namespace oomph
           old_node_pt = tet_node_node_pt[tet_node_pt];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (tet_node_pt->is_on_boundary())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -1531,7 +1531,7 @@ namespace oomph
           old_node_pt = tet_node_node_pt[tet_node_pt];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (tet_node_pt->is_on_boundary())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -1568,7 +1568,7 @@ namespace oomph
           old_node_pt = tet_node_node_pt[tet_node_pt];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (tet_node_pt->is_on_boundary())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -1604,7 +1604,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face0];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face0.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -1640,7 +1640,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face1];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face1.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -1676,7 +1676,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face2];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face2.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -1719,7 +1719,7 @@ namespace oomph
 
           // Always new
           {
-            Node *new_node_pt = el_pt->construct_node(j, time_stepper_pt);
+            Node* new_node_pt = el_pt->construct_node(j, time_stepper_pt);
             Node_pt.push_back(new_node_pt);
             Vector<double> s(3);
             Vector<double> s_tet(3);
@@ -1742,7 +1742,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -1779,7 +1779,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -1816,7 +1816,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -1853,7 +1853,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -1890,7 +1890,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -1927,7 +1927,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -1964,7 +1964,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -2001,7 +2001,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -2038,7 +2038,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -2075,7 +2075,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -2112,7 +2112,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -2149,7 +2149,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -2190,7 +2190,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -2231,7 +2231,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -2272,7 +2272,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -2303,7 +2303,7 @@ namespace oomph
         // Top mid brick-face node -- only built by this element
         {
           unsigned j = 22;
-          Node *new_node_pt = el_pt->construct_node(j, time_stepper_pt);
+          Node* new_node_pt = el_pt->construct_node(j, time_stepper_pt);
           Node_pt.push_back(new_node_pt);
           Vector<double> s(3);
           Vector<double> s_tet(3);
@@ -2320,7 +2320,7 @@ namespace oomph
         // Right mid brick-face node -- only built by this element
         {
           unsigned j = 14;
-          Node *new_node_pt = el_pt->construct_node(j, time_stepper_pt);
+          Node* new_node_pt = el_pt->construct_node(j, time_stepper_pt);
           Node_pt.push_back(new_node_pt);
           Vector<double> s(3);
           Vector<double> s_tet(3);
@@ -2349,7 +2349,7 @@ namespace oomph
         // Assign coordinates of dummy element
         for (unsigned j = 0; j < 8; j++)
         {
-          Node *nod_pt = dummy_q_el_pt[2]->node_pt(j);
+          Node* nod_pt = dummy_q_el_pt[2]->node_pt(j);
           Vector<double> s_tet(3);
           Vector<double> x_tet(3);
           switch (j)
@@ -2453,7 +2453,7 @@ namespace oomph
         }
 
         // Create actual second brick element
-        FiniteElement *el_pt = new ELEMENT;
+        FiniteElement* el_pt = new ELEMENT;
         brick_el2_pt = el_pt;
         Element_pt.push_back(el_pt);
 
@@ -2481,8 +2481,8 @@ namespace oomph
         // Node number of tet vertex that node 0 in brick is centred on
         unsigned central_tet_vertex = 3;
 
-        Node *tet_node_pt = 0;
-        Node *old_node_pt = 0;
+        Node* tet_node_pt = 0;
+        Node* old_node_pt = 0;
 
         // Corner node
         {
@@ -2493,7 +2493,7 @@ namespace oomph
           old_node_pt = tet_node_node_pt[tet_node_pt];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (tet_node_pt->is_on_boundary())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -2530,7 +2530,7 @@ namespace oomph
           old_node_pt = tet_node_node_pt[tet_node_pt];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (tet_node_pt->is_on_boundary())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -2567,7 +2567,7 @@ namespace oomph
           old_node_pt = tet_node_node_pt[tet_node_pt];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (tet_node_pt->is_on_boundary())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -2604,7 +2604,7 @@ namespace oomph
           old_node_pt = tet_node_node_pt[tet_node_pt];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (tet_node_pt->is_on_boundary())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -2640,7 +2640,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face0];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face0.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -2676,7 +2676,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face1];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face1.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -2712,7 +2712,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face2];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face2.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -2755,7 +2755,7 @@ namespace oomph
 
           // Always new
           {
-            Node *new_node_pt = el_pt->construct_node(j, time_stepper_pt);
+            Node* new_node_pt = el_pt->construct_node(j, time_stepper_pt);
             Node_pt.push_back(new_node_pt);
             Vector<double> s(3);
             Vector<double> s_tet(3);
@@ -2778,7 +2778,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -2815,7 +2815,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -2852,7 +2852,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -2889,7 +2889,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -2926,7 +2926,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -2963,7 +2963,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -3000,7 +3000,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -3037,7 +3037,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -3074,7 +3074,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -3111,7 +3111,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -3148,7 +3148,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -3185,7 +3185,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -3226,7 +3226,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -3266,7 +3266,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -3307,7 +3307,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -3338,7 +3338,7 @@ namespace oomph
         // Top mid brick-face node -- only built by this element
         {
           unsigned j = 22;
-          Node *new_node_pt = el_pt->construct_node(j, time_stepper_pt);
+          Node* new_node_pt = el_pt->construct_node(j, time_stepper_pt);
           Node_pt.push_back(new_node_pt);
           Vector<double> s(3);
           Vector<double> s_tet(3);
@@ -3375,7 +3375,7 @@ namespace oomph
         // Assign coordinates of dummy element
         for (unsigned j = 0; j < 8; j++)
         {
-          Node *nod_pt = dummy_q_el_pt[3]->node_pt(j);
+          Node* nod_pt = dummy_q_el_pt[3]->node_pt(j);
           Vector<double> s_tet(3);
           Vector<double> x_tet(3);
           switch (j)
@@ -3479,7 +3479,7 @@ namespace oomph
         }
 
         // Create actual third brick element
-        FiniteElement *el_pt = new ELEMENT;
+        FiniteElement* el_pt = new ELEMENT;
         brick_el3_pt = el_pt;
         Element_pt.push_back(el_pt);
 
@@ -3507,8 +3507,8 @@ namespace oomph
         // Node number of tet vertex that node 0 in brick is centred on
         unsigned central_tet_vertex = 2;
 
-        Node *tet_node_pt = 0;
-        Node *old_node_pt = 0;
+        Node* tet_node_pt = 0;
+        Node* old_node_pt = 0;
 
         // Corner node
         {
@@ -3519,7 +3519,7 @@ namespace oomph
           old_node_pt = tet_node_node_pt[tet_node_pt];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (tet_node_pt->is_on_boundary())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -3556,7 +3556,7 @@ namespace oomph
           old_node_pt = tet_node_node_pt[tet_node_pt];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (tet_node_pt->is_on_boundary())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -3593,7 +3593,7 @@ namespace oomph
           old_node_pt = tet_node_node_pt[tet_node_pt];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (tet_node_pt->is_on_boundary())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -3630,7 +3630,7 @@ namespace oomph
           old_node_pt = tet_node_node_pt[tet_node_pt];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (tet_node_pt->is_on_boundary())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -3666,7 +3666,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face0];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face0.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -3702,7 +3702,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face1];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face1.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -3738,7 +3738,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face2];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face2.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -3781,7 +3781,7 @@ namespace oomph
 
           // Always new
           {
-            Node *new_node_pt = el_pt->construct_node(j, time_stepper_pt);
+            Node* new_node_pt = el_pt->construct_node(j, time_stepper_pt);
             Node_pt.push_back(new_node_pt);
             Vector<double> s(3);
             Vector<double> s_tet(3);
@@ -3804,7 +3804,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -3841,7 +3841,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -3878,7 +3878,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -3915,7 +3915,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -3952,7 +3952,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -3989,7 +3989,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -4026,7 +4026,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -4063,7 +4063,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -4100,7 +4100,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -4137,7 +4137,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -4174,7 +4174,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -4211,7 +4211,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -4252,7 +4252,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -4293,7 +4293,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -4334,7 +4334,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -4395,7 +4395,7 @@ namespace oomph
       for (int face_index = 0; face_index < 4; face_index++)
       {
         // Identify face and coordinates in it
-        TFace *face_pt = 0;
+        TFace* face_pt = 0;
         switch (face_index)
         {
           case 0:
@@ -4432,7 +4432,7 @@ namespace oomph
         if (face_pt->is_boundary_face())
         {
           std::set<unsigned> bnd;
-          std::set<unsigned> *bnd_pt = &bnd;
+          std::set<unsigned>* bnd_pt = &bnd;
           face_pt->get_boundaries_pt(bnd_pt);
 
 #ifdef PARANOID
@@ -4449,11 +4449,11 @@ namespace oomph
           if ((*bnd_pt).size() == 1)
           {
             // Create new face element
-            FaceElement *face_el_pt = 0;
+            FaceElement* face_el_pt = 0;
             if (tet_mesh_is_solid_mesh)
             {
 #ifdef PARANOID
-              if (dynamic_cast<SolidTElement<3, 3> *>(tet_el_pt) == 0)
+              if (dynamic_cast<SolidTElement<3, 3>*>(tet_el_pt) == 0)
               {
                 std::ostringstream error_stream;
                 error_stream
@@ -4473,7 +4473,7 @@ namespace oomph
             else
             {
 #ifdef PARANOID
-              if (dynamic_cast<TElement<3, 3> *>(tet_el_pt) == 0)
+              if (dynamic_cast<TElement<3, 3>*>(tet_el_pt) == 0)
               {
                 std::ostringstream error_stream;
                 error_stream << "Tet-element cannot be cast to TElement<3,3>.\n"
@@ -4499,7 +4499,7 @@ namespace oomph
 
             // Now set up the brick nodes on this face, enumerated as
             // in s_face
-            Vector<Node *> brick_face_node_pt(19);
+            Vector<Node*> brick_face_node_pt(19);
 
             switch (face_index)
             {
@@ -4634,7 +4634,7 @@ namespace oomph
             for (unsigned j = 0; j < 19; j++)
             {
               // Which node is it?
-              Node *brick_node_pt = brick_face_node_pt[translate[j]];
+              Node* brick_node_pt = brick_face_node_pt[translate[j]];
 
               // Get coordinates etc of point from face
               Vector<double> s = s_face[j];
@@ -4809,14 +4809,14 @@ namespace oomph
   //=======================================================================
   template<class ELEMENT>
   void BrickFromTetMesh<ELEMENT>::build_mesh(
-    TetgenMesh<TElement<3, 3>> *tet_mesh_pt, TimeStepper *time_stepper_pt)
+    TetgenMesh<TElement<3, 3>>* tet_mesh_pt, TimeStepper* time_stepper_pt)
   {
     // Mesh can only be built with 3D Qelements.
     MeshChecker::assert_geometric_element<QElementGeometricBase, ELEMENT>(3, 3);
 
     // Figure out if the tet mesh is a solid mesh
     bool tet_mesh_is_solid_mesh = false;
-    if (dynamic_cast<SolidFiniteElement *>(tet_mesh_pt->element_pt(0)) != 0)
+    if (dynamic_cast<SolidFiniteElement*>(tet_mesh_pt->element_pt(0)) != 0)
     {
       tet_mesh_is_solid_mesh = true;
     }
@@ -4954,17 +4954,17 @@ namespace oomph
     // Maps to check which nodes have already been done
 
     // Map that stores the new brick node corresponding to an existing tet node
-    std::map<Node *, Node *> tet_node_node_pt;
+    std::map<Node*, Node*> tet_node_node_pt;
 
     // Map that stores node on an edge between two brick nodes
-    std::map<Edge, Node *> brick_edge_node_pt;
+    std::map<Edge, Node*> brick_edge_node_pt;
 
     // Map that stores node on face spanned by three tet nodes
-    std::map<TFace, Node *> tet_face_node_pt;
+    std::map<TFace, Node*> tet_face_node_pt;
 
     // Create the four Dummy bricks:
     //------------------------------
-    Vector<DummyBrickElement *> dummy_q_el_pt(4);
+    Vector<DummyBrickElement*> dummy_q_el_pt(4);
     for (unsigned e = 0; e < 4; e++)
     {
       dummy_q_el_pt[e] = new DummyBrickElement;
@@ -4979,8 +4979,8 @@ namespace oomph
     for (unsigned e_tet = 0; e_tet < n_el_tet; e_tet++)
     {
       // Cast to ten-noded tet
-      TElement<3, 3> *tet_el_pt =
-        dynamic_cast<TElement<3, 3> *>(tet_mesh_pt->element_pt(e_tet));
+      TElement<3, 3>* tet_el_pt =
+        dynamic_cast<TElement<3, 3>*>(tet_mesh_pt->element_pt(e_tet));
 
 #ifdef PARANOID
       if (tet_el_pt == 0)
@@ -4995,23 +4995,23 @@ namespace oomph
 #endif
 
       // Storage for the centroid node for this tet
-      Node *centroid_node_pt = 0;
+      Node* centroid_node_pt = 0;
 
       // Internal mid brick-face nodes
-      Node *top_mid_face_node0_pt = 0;
-      Node *right_mid_face_node0_pt = 0;
-      Node *back_mid_face_node0_pt = 0;
+      Node* top_mid_face_node0_pt = 0;
+      Node* right_mid_face_node0_pt = 0;
+      Node* back_mid_face_node0_pt = 0;
 
-      Node *top_mid_face_node1_pt = 0;
-      Node *right_mid_face_node1_pt = 0;
+      Node* top_mid_face_node1_pt = 0;
+      Node* right_mid_face_node1_pt = 0;
 
-      Node *top_mid_face_node2_pt = 0;
+      Node* top_mid_face_node2_pt = 0;
 
       // Newly created brick elements
-      FiniteElement *brick_el0_pt = 0;
-      FiniteElement *brick_el1_pt = 0;
-      FiniteElement *brick_el2_pt = 0;
-      FiniteElement *brick_el3_pt = 0;
+      FiniteElement* brick_el0_pt = 0;
+      FiniteElement* brick_el1_pt = 0;
+      FiniteElement* brick_el2_pt = 0;
+      FiniteElement* brick_el3_pt = 0;
 
       // First brick element is centred at node 0 of tet:
       //-------------------------------------------------
@@ -5019,7 +5019,7 @@ namespace oomph
         // Assign coordinates of dummy element
         for (unsigned j = 0; j < 8; j++)
         {
-          Node *nod_pt = dummy_q_el_pt[0]->node_pt(j);
+          Node* nod_pt = dummy_q_el_pt[0]->node_pt(j);
           Vector<double> s_tet(3);
           Vector<double> x_tet(3);
           switch (j)
@@ -5123,7 +5123,7 @@ namespace oomph
         }
 
         // Create actual zeroth brick element
-        FiniteElement *el_pt = new ELEMENT;
+        FiniteElement* el_pt = new ELEMENT;
         brick_el0_pt = el_pt;
         Element_pt.push_back(el_pt);
 
@@ -5151,8 +5151,8 @@ namespace oomph
         // Node number of tet vertex that node 0 in brick is centred on
         unsigned central_tet_vertex = 0;
 
-        Node *tet_node_pt = 0;
-        Node *old_node_pt = 0;
+        Node* tet_node_pt = 0;
+        Node* old_node_pt = 0;
 
         // Corner node
         {
@@ -5163,7 +5163,7 @@ namespace oomph
           old_node_pt = tet_node_node_pt[tet_node_pt];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (tet_node_pt->is_on_boundary())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -5200,7 +5200,7 @@ namespace oomph
           old_node_pt = tet_node_node_pt[tet_node_pt];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (tet_node_pt->is_on_boundary())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -5237,7 +5237,7 @@ namespace oomph
           old_node_pt = tet_node_node_pt[tet_node_pt];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (tet_node_pt->is_on_boundary())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -5274,7 +5274,7 @@ namespace oomph
           old_node_pt = tet_node_node_pt[tet_node_pt];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (tet_node_pt->is_on_boundary())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -5311,7 +5311,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face0];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face0.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -5348,7 +5348,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face1];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face1.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -5385,7 +5385,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face2];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face2.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -5420,7 +5420,7 @@ namespace oomph
 
           // Always new
           {
-            Node *new_node_pt = el_pt->construct_node(j, time_stepper_pt);
+            Node* new_node_pt = el_pt->construct_node(j, time_stepper_pt);
             centroid_node_pt = new_node_pt;
             Node_pt.push_back(new_node_pt);
             Vector<double> s(3);
@@ -5441,7 +5441,7 @@ namespace oomph
 
           // Always new
           {
-            Node *new_node_pt = el_pt->construct_node(j, time_stepper_pt);
+            Node* new_node_pt = el_pt->construct_node(j, time_stepper_pt);
             Node_pt.push_back(new_node_pt);
             Vector<double> s(3);
             Vector<double> s_tet(3);
@@ -5464,7 +5464,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -5501,7 +5501,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -5538,7 +5538,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -5575,7 +5575,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -5612,7 +5612,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -5649,7 +5649,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -5686,7 +5686,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -5723,7 +5723,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -5760,7 +5760,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -5797,7 +5797,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -5834,7 +5834,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -5871,7 +5871,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -5912,7 +5912,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -5953,7 +5953,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -5994,7 +5994,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -6025,7 +6025,7 @@ namespace oomph
         // Top mid brick-face node -- only built by first element
         {
           unsigned j = 22;
-          Node *new_node_pt = el_pt->construct_node(j, time_stepper_pt);
+          Node* new_node_pt = el_pt->construct_node(j, time_stepper_pt);
           Node_pt.push_back(new_node_pt);
           Vector<double> s(3);
           Vector<double> s_tet(3);
@@ -6042,7 +6042,7 @@ namespace oomph
         // Right mid brick-face node -- only built by first element
         {
           unsigned j = 14;
-          Node *new_node_pt = el_pt->construct_node(j, time_stepper_pt);
+          Node* new_node_pt = el_pt->construct_node(j, time_stepper_pt);
           Node_pt.push_back(new_node_pt);
           Vector<double> s(3);
           Vector<double> s_tet(3);
@@ -6059,7 +6059,7 @@ namespace oomph
         // Back mid brick-face node -- only built by first element
         {
           unsigned j = 16;
-          Node *new_node_pt = el_pt->construct_node(j, time_stepper_pt);
+          Node* new_node_pt = el_pt->construct_node(j, time_stepper_pt);
           Node_pt.push_back(new_node_pt);
           Vector<double> s(3);
           Vector<double> s_tet(3);
@@ -6080,7 +6080,7 @@ namespace oomph
         // Assign coordinates of dummy element
         for (unsigned j = 0; j < 8; j++)
         {
-          Node *nod_pt = dummy_q_el_pt[1]->node_pt(j);
+          Node* nod_pt = dummy_q_el_pt[1]->node_pt(j);
           Vector<double> s_tet(3);
           Vector<double> x_tet(3);
           switch (j)
@@ -6184,7 +6184,7 @@ namespace oomph
         }
 
         // Create actual first brick element
-        FiniteElement *el_pt = new ELEMENT;
+        FiniteElement* el_pt = new ELEMENT;
         brick_el1_pt = el_pt;
         Element_pt.push_back(el_pt);
 
@@ -6212,8 +6212,8 @@ namespace oomph
         // Node number of tet vertex that node 0 in brick is centred on
         unsigned central_tet_vertex = 1;
 
-        Node *tet_node_pt = 0;
-        Node *old_node_pt = 0;
+        Node* tet_node_pt = 0;
+        Node* old_node_pt = 0;
 
         // Corner node
         {
@@ -6224,7 +6224,7 @@ namespace oomph
           old_node_pt = tet_node_node_pt[tet_node_pt];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (tet_node_pt->is_on_boundary())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -6261,7 +6261,7 @@ namespace oomph
           old_node_pt = tet_node_node_pt[tet_node_pt];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (tet_node_pt->is_on_boundary())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -6298,7 +6298,7 @@ namespace oomph
           old_node_pt = tet_node_node_pt[tet_node_pt];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (tet_node_pt->is_on_boundary())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -6335,7 +6335,7 @@ namespace oomph
           old_node_pt = tet_node_node_pt[tet_node_pt];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (tet_node_pt->is_on_boundary())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -6371,7 +6371,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face0];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face0.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -6407,7 +6407,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face1];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face1.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -6443,7 +6443,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face2];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face2.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -6486,7 +6486,7 @@ namespace oomph
 
           // Always new
           {
-            Node *new_node_pt = el_pt->construct_node(j, time_stepper_pt);
+            Node* new_node_pt = el_pt->construct_node(j, time_stepper_pt);
             Node_pt.push_back(new_node_pt);
             Vector<double> s(3);
             Vector<double> s_tet(3);
@@ -6509,7 +6509,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -6546,7 +6546,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -6583,7 +6583,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -6620,7 +6620,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -6657,7 +6657,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -6694,7 +6694,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -6731,7 +6731,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -6768,7 +6768,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -6805,7 +6805,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -6842,7 +6842,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -6879,7 +6879,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -6916,7 +6916,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -6957,7 +6957,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -6998,7 +6998,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -7039,7 +7039,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -7070,7 +7070,7 @@ namespace oomph
         // Top mid brick-face node -- only built by this element
         {
           unsigned j = 22;
-          Node *new_node_pt = el_pt->construct_node(j, time_stepper_pt);
+          Node* new_node_pt = el_pt->construct_node(j, time_stepper_pt);
           Node_pt.push_back(new_node_pt);
           Vector<double> s(3);
           Vector<double> s_tet(3);
@@ -7087,7 +7087,7 @@ namespace oomph
         // Right mid brick-face node -- only built by this element
         {
           unsigned j = 14;
-          Node *new_node_pt = el_pt->construct_node(j, time_stepper_pt);
+          Node* new_node_pt = el_pt->construct_node(j, time_stepper_pt);
           Node_pt.push_back(new_node_pt);
           Vector<double> s(3);
           Vector<double> s_tet(3);
@@ -7116,7 +7116,7 @@ namespace oomph
         // Assign coordinates of dummy element
         for (unsigned j = 0; j < 8; j++)
         {
-          Node *nod_pt = dummy_q_el_pt[2]->node_pt(j);
+          Node* nod_pt = dummy_q_el_pt[2]->node_pt(j);
           Vector<double> s_tet(3);
           Vector<double> x_tet(3);
           switch (j)
@@ -7220,7 +7220,7 @@ namespace oomph
         }
 
         // Create actual second brick element
-        FiniteElement *el_pt = new ELEMENT;
+        FiniteElement* el_pt = new ELEMENT;
         brick_el2_pt = el_pt;
         Element_pt.push_back(el_pt);
 
@@ -7248,8 +7248,8 @@ namespace oomph
         // Node number of tet vertex that node 0 in brick is centred on
         unsigned central_tet_vertex = 3;
 
-        Node *tet_node_pt = 0;
-        Node *old_node_pt = 0;
+        Node* tet_node_pt = 0;
+        Node* old_node_pt = 0;
 
         // Corner node
         {
@@ -7260,7 +7260,7 @@ namespace oomph
           old_node_pt = tet_node_node_pt[tet_node_pt];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (tet_node_pt->is_on_boundary())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -7297,7 +7297,7 @@ namespace oomph
           old_node_pt = tet_node_node_pt[tet_node_pt];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (tet_node_pt->is_on_boundary())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -7334,7 +7334,7 @@ namespace oomph
           old_node_pt = tet_node_node_pt[tet_node_pt];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (tet_node_pt->is_on_boundary())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -7371,7 +7371,7 @@ namespace oomph
           old_node_pt = tet_node_node_pt[tet_node_pt];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (tet_node_pt->is_on_boundary())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -7407,7 +7407,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face0];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face0.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -7443,7 +7443,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face1];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face1.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -7479,7 +7479,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face2];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face2.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -7522,7 +7522,7 @@ namespace oomph
 
           // Always new
           {
-            Node *new_node_pt = el_pt->construct_node(j, time_stepper_pt);
+            Node* new_node_pt = el_pt->construct_node(j, time_stepper_pt);
             Node_pt.push_back(new_node_pt);
             Vector<double> s(3);
             Vector<double> s_tet(3);
@@ -7545,7 +7545,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -7582,7 +7582,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -7619,7 +7619,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -7656,7 +7656,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -7693,7 +7693,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -7730,7 +7730,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -7767,7 +7767,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -7804,7 +7804,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -7841,7 +7841,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -7878,7 +7878,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -7915,7 +7915,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -7952,7 +7952,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -7993,7 +7993,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -8033,7 +8033,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -8074,7 +8074,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -8105,7 +8105,7 @@ namespace oomph
         // Top mid brick-face node -- only built by this element
         {
           unsigned j = 22;
-          Node *new_node_pt = el_pt->construct_node(j, time_stepper_pt);
+          Node* new_node_pt = el_pt->construct_node(j, time_stepper_pt);
           Node_pt.push_back(new_node_pt);
           Vector<double> s(3);
           Vector<double> s_tet(3);
@@ -8142,7 +8142,7 @@ namespace oomph
         // Assign coordinates of dummy element
         for (unsigned j = 0; j < 8; j++)
         {
-          Node *nod_pt = dummy_q_el_pt[3]->node_pt(j);
+          Node* nod_pt = dummy_q_el_pt[3]->node_pt(j);
           Vector<double> s_tet(3);
           Vector<double> x_tet(3);
           switch (j)
@@ -8246,7 +8246,7 @@ namespace oomph
         }
 
         // Create actual third brick element
-        FiniteElement *el_pt = new ELEMENT;
+        FiniteElement* el_pt = new ELEMENT;
         brick_el3_pt = el_pt;
         Element_pt.push_back(el_pt);
 
@@ -8274,8 +8274,8 @@ namespace oomph
         // Node number of tet vertex that node 0 in brick is centred on
         unsigned central_tet_vertex = 2;
 
-        Node *tet_node_pt = 0;
-        Node *old_node_pt = 0;
+        Node* tet_node_pt = 0;
+        Node* old_node_pt = 0;
 
         // Corner node
         {
@@ -8286,7 +8286,7 @@ namespace oomph
           old_node_pt = tet_node_node_pt[tet_node_pt];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (tet_node_pt->is_on_boundary())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -8323,7 +8323,7 @@ namespace oomph
           old_node_pt = tet_node_node_pt[tet_node_pt];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (tet_node_pt->is_on_boundary())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -8360,7 +8360,7 @@ namespace oomph
           old_node_pt = tet_node_node_pt[tet_node_pt];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (tet_node_pt->is_on_boundary())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -8397,7 +8397,7 @@ namespace oomph
           old_node_pt = tet_node_node_pt[tet_node_pt];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (tet_node_pt->is_on_boundary())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -8433,7 +8433,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face0];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face0.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -8469,7 +8469,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face1];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face1.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -8505,7 +8505,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face2];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face2.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -8548,7 +8548,7 @@ namespace oomph
 
           // Always new
           {
-            Node *new_node_pt = el_pt->construct_node(j, time_stepper_pt);
+            Node* new_node_pt = el_pt->construct_node(j, time_stepper_pt);
             Node_pt.push_back(new_node_pt);
             Vector<double> s(3);
             Vector<double> s_tet(3);
@@ -8571,7 +8571,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -8608,7 +8608,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -8645,7 +8645,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -8682,7 +8682,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -8719,7 +8719,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -8756,7 +8756,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -8793,7 +8793,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -8830,7 +8830,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -8867,7 +8867,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -8904,7 +8904,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -8941,7 +8941,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -8978,7 +8978,7 @@ namespace oomph
           old_node_pt = brick_edge_node_pt[edge];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (edge.is_boundary_edge())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -9019,7 +9019,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -9060,7 +9060,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -9101,7 +9101,7 @@ namespace oomph
           old_node_pt = tet_face_node_pt[face];
           if (old_node_pt == 0)
           {
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
             if (face.is_boundary_face())
             {
               new_node_pt = el_pt->construct_boundary_node(j, time_stepper_pt);
@@ -9162,7 +9162,7 @@ namespace oomph
       for (int face_index = 0; face_index < 4; face_index++)
       {
         // Identify face and coordinates in it
-        TFace *face_pt = 0;
+        TFace* face_pt = 0;
         switch (face_index)
         {
           case 0:
@@ -9199,7 +9199,7 @@ namespace oomph
         if (face_pt->is_boundary_face())
         {
           std::set<unsigned> bnd;
-          std::set<unsigned> *bnd_pt = &bnd;
+          std::set<unsigned>* bnd_pt = &bnd;
           face_pt->get_boundaries_pt(bnd_pt);
 
 #ifdef PARANOID
@@ -9216,11 +9216,11 @@ namespace oomph
           if ((*bnd_pt).size() == 1)
           {
             // Create new face element
-            FaceElement *face_el_pt = 0;
+            FaceElement* face_el_pt = 0;
             if (tet_mesh_is_solid_mesh)
             {
 #ifdef PARANOID
-              if (dynamic_cast<SolidTElement<3, 3> *>(tet_el_pt) == 0)
+              if (dynamic_cast<SolidTElement<3, 3>*>(tet_el_pt) == 0)
               {
                 std::ostringstream error_stream;
                 error_stream
@@ -9240,7 +9240,7 @@ namespace oomph
             else
             {
 #ifdef PARANOID
-              if (dynamic_cast<TElement<3, 3> *>(tet_el_pt) == 0)
+              if (dynamic_cast<TElement<3, 3>*>(tet_el_pt) == 0)
               {
                 std::ostringstream error_stream;
                 error_stream << "Tet-element cannot be cast to TElement<3,3>.\n"
@@ -9266,7 +9266,7 @@ namespace oomph
 
             // Now set up the brick nodes on this face, enumerated as
             // in s_face
-            Vector<Node *> brick_face_node_pt(19);
+            Vector<Node*> brick_face_node_pt(19);
 
             switch (face_index)
             {
@@ -9401,7 +9401,7 @@ namespace oomph
             for (unsigned j = 0; j < 19; j++)
             {
               // Which node is it?
-              Node *brick_node_pt = brick_face_node_pt[translate[j]];
+              Node* brick_node_pt = brick_face_node_pt[translate[j]];
 
               // Get coordinates etc of point from face
               Vector<double> s = s_face[j];

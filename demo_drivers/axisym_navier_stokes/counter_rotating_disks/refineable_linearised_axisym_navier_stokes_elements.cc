@@ -39,9 +39,9 @@ namespace oomph
   //========================================================================
   void RefineableLinearisedAxisymmetricNavierStokesEquations::
     fill_in_generic_residual_contribution_linearised_axi_nst(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix,
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
       unsigned flag)
   {
     // The dimension is actually two

@@ -70,13 +70,13 @@ namespace oomph
     virtual void clean_up_my_memory();
 
     /// Broken copy constructor
-    Diagonal(const Diagonal &)
+    Diagonal(const Diagonal&)
     {
       BrokenCopy::broken_copy("Diagonal");
     }
 
     /// Broken assignment operator
-    void operator=(const Diagonal &)
+    void operator=(const Diagonal&)
     {
       BrokenCopy::broken_assign("Diagonal");
     }
@@ -89,10 +89,10 @@ namespace oomph
     using Preconditioner::setup;
 
     /// Apply preconditioner to r, i.e. return solution of P z = r
-    void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+    void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
     /// Specify the mesh that contains multi-poisson elements
-    void set_multi_poisson_mesh(Mesh *multi_poisson_mesh_pt)
+    void set_multi_poisson_mesh(Mesh* multi_poisson_mesh_pt)
     {
       Multi_poisson_mesh_pt = multi_poisson_mesh_pt;
     }
@@ -100,11 +100,11 @@ namespace oomph
   private:
     /// \short Vector of pointers to preconditioners/inexact solvers
     /// for each diagonal block
-    Vector<Preconditioner *> Diagonal_block_preconditioner_pt;
+    Vector<Preconditioner*> Diagonal_block_preconditioner_pt;
 
     /// \short Mesh pointers with preconditionable elements used
     /// for classification of dof types.
-    Mesh *Multi_poisson_mesh_pt;
+    Mesh* Multi_poisson_mesh_pt;
   };
 
   //=========================start_of_setup_for_simple========================
@@ -171,8 +171,8 @@ namespace oomph
   /// linear system.
   //============================================================================
   template<typename MATRIX>
-  void Diagonal<MATRIX>::preconditioner_solve(const DoubleVector &r,
-                                              DoubleVector &z)
+  void Diagonal<MATRIX>::preconditioner_solve(const DoubleVector& r,
+                                              DoubleVector& z)
   {
     // Get number of blocks
     unsigned nblock_types = this->nblock_types();
@@ -243,13 +243,13 @@ namespace oomph
     virtual void clean_up_my_memory();
 
     /// Broken copy constructor
-    SimpleTwoDofOnly(const SimpleTwoDofOnly &)
+    SimpleTwoDofOnly(const SimpleTwoDofOnly&)
     {
       BrokenCopy::broken_copy("SimpleTwoDofOnly");
     }
 
     /// Broken assignment operator
-    void operator=(const SimpleTwoDofOnly &)
+    void operator=(const SimpleTwoDofOnly&)
     {
       BrokenCopy::broken_assign("SimpleTwoDofOnly");
     }
@@ -262,10 +262,10 @@ namespace oomph
     using Preconditioner::setup;
 
     /// Apply preconditioner to r, i.e. return solution of P z = r
-    void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+    void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
     /// Specify the mesh that contains multi-poisson elements
-    void set_multi_poisson_mesh(Mesh *multi_poisson_mesh_pt)
+    void set_multi_poisson_mesh(Mesh* multi_poisson_mesh_pt)
     {
       Multi_poisson_mesh_pt = multi_poisson_mesh_pt;
     }
@@ -273,11 +273,11 @@ namespace oomph
   private:
     /// \short Vector of pointers to preconditioners/inexact solvers
     /// for each diagonal block
-    Vector<Preconditioner *> Diagonal_block_preconditioner_pt;
+    Vector<Preconditioner*> Diagonal_block_preconditioner_pt;
 
     /// \short Pointer to mesh with preconditionable elements used
     /// for classification of dof types.
-    Mesh *Multi_poisson_mesh_pt;
+    Mesh* Multi_poisson_mesh_pt;
   };
 
   //=========================start_of_setup_for_simple==========================
@@ -368,8 +368,8 @@ namespace oomph
   /// linear system.
   //============================================================================
   template<typename MATRIX>
-  void SimpleTwoDofOnly<MATRIX>::preconditioner_solve(const DoubleVector &r,
-                                                      DoubleVector &z)
+  void SimpleTwoDofOnly<MATRIX>::preconditioner_solve(const DoubleVector& r,
+                                                      DoubleVector& z)
   {
     // Get number of blocks
     unsigned nblock_types = this->nblock_types();
@@ -441,13 +441,13 @@ namespace oomph
     virtual void clean_up_my_memory();
 
     /// Broken copy constructor
-    SimpleOneDofOnly(const SimpleOneDofOnly &)
+    SimpleOneDofOnly(const SimpleOneDofOnly&)
     {
       BrokenCopy::broken_copy("SimpleOneDofOnly");
     }
 
     /// Broken assignment operator
-    void operator=(const SimpleOneDofOnly &)
+    void operator=(const SimpleOneDofOnly&)
     {
       BrokenCopy::broken_assign("SimpleOneDofOnly");
     }
@@ -460,21 +460,21 @@ namespace oomph
     using Preconditioner::setup;
 
     /// Apply preconditioner to r, i.e. return solution of P z = r
-    void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+    void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
     /// Specify the mesh that contains multi-poisson elements
-    void set_multi_poisson_mesh(Mesh *multi_poisson_mesh_pt)
+    void set_multi_poisson_mesh(Mesh* multi_poisson_mesh_pt)
     {
       Multi_poisson_mesh_pt = multi_poisson_mesh_pt;
     }
 
   private:
     /// \short Pointer to the preconditioners/inexact solver.
-    Preconditioner *Subsidiary_preconditioner_pt;
+    Preconditioner* Subsidiary_preconditioner_pt;
 
     /// \short Pointer to mesh with preconditionable elements used
     /// for classification of dof types.
-    Mesh *Multi_poisson_mesh_pt;
+    Mesh* Multi_poisson_mesh_pt;
   };
 
   //=========================start_of_setup_for_simple==========================
@@ -550,8 +550,8 @@ namespace oomph
   /// Apply preconditioner to r and return z, so that P z = r.
   //============================================================================
   template<typename MATRIX>
-  void SimpleOneDofOnly<MATRIX>::preconditioner_solve(const DoubleVector &r,
-                                                      DoubleVector &z)
+  void SimpleOneDofOnly<MATRIX>::preconditioner_solve(const DoubleVector& r,
+                                                      DoubleVector& z)
   {
     // Get the rhs into block order.
     DoubleVector block_r;
@@ -614,13 +614,13 @@ namespace oomph
     virtual void clean_up_my_memory();
 
     /// Broken copy constructor
-    CoarseTwoIntoOne(const CoarseTwoIntoOne &)
+    CoarseTwoIntoOne(const CoarseTwoIntoOne&)
     {
       BrokenCopy::broken_copy("CoarseTwoIntoOne");
     }
 
     /// Broken assignment operator
-    void operator=(const CoarseTwoIntoOne &)
+    void operator=(const CoarseTwoIntoOne&)
     {
       BrokenCopy::broken_assign("CoarseTwoIntoOne");
     }
@@ -638,21 +638,21 @@ namespace oomph
     /// Apply preconditioner to r and return z, so that P z = r, where
     /// P is the block diagonal matrix constructed from the original
     /// linear system.
-    void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+    void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
     /// Specify the mesh that contains multi-poisson elements
-    void set_multi_poisson_mesh(Mesh *multi_poisson_mesh_pt)
+    void set_multi_poisson_mesh(Mesh* multi_poisson_mesh_pt)
     {
       Multi_poisson_mesh_pt = multi_poisson_mesh_pt;
     }
 
   private:
     /// \short Pointer to the preconditioners/inexact solvers
-    Preconditioner *Subsidiary_preconditioner_pt;
+    Preconditioner* Subsidiary_preconditioner_pt;
 
     /// \short Pointer to mesh with preconditionable elements used
     /// for classification of dof types.
-    Mesh *Multi_poisson_mesh_pt;
+    Mesh* Multi_poisson_mesh_pt;
   };
 
   //=========================start_of_setup_for_simple==========================
@@ -715,7 +715,7 @@ namespace oomph
 #endif
 
     // Create the subsidiary preconditioners
-    SimpleOneDofOnly<CRDoubleMatrix> *block_prec_pt =
+    SimpleOneDofOnly<CRDoubleMatrix>* block_prec_pt =
       new SimpleOneDofOnly<CRDoubleMatrix>;
     Subsidiary_preconditioner_pt = block_prec_pt;
 
@@ -765,8 +765,8 @@ namespace oomph
   /// linear system.
   //============================================================================
   template<typename MATRIX>
-  void CoarseTwoIntoOne<MATRIX>::preconditioner_solve(const DoubleVector &r,
-                                                      DoubleVector &z)
+  void CoarseTwoIntoOne<MATRIX>::preconditioner_solve(const DoubleVector& r,
+                                                      DoubleVector& z)
   {
     // Call the subsidiary block preconditioner's preconditioner_solve(...)
     // function. We do not need to return the solution to the vector z since
@@ -816,19 +816,19 @@ namespace oomph
     virtual void clean_up_my_memory();
 
     /// Broken copy constructor
-    UpperTriangular(const UpperTriangular &)
+    UpperTriangular(const UpperTriangular&)
     {
       BrokenCopy::broken_copy("UpperTriangular");
     }
 
     /// Broken assignment operator
-    void operator=(const UpperTriangular &)
+    void operator=(const UpperTriangular&)
     {
       BrokenCopy::broken_assign("UpperTriangular");
     }
 
     /// Apply preconditioner to r
-    void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+    void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
     /// \short Setup the preconditioner
     void setup();
@@ -838,22 +838,22 @@ namespace oomph
     using Preconditioner::setup;
 
     /// Specify the mesh that contains multi-poisson elements
-    void set_multi_poisson_mesh(Mesh *multi_poisson_mesh_pt)
+    void set_multi_poisson_mesh(Mesh* multi_poisson_mesh_pt)
     {
       Multi_poisson_mesh_pt = multi_poisson_mesh_pt;
     }
 
   private:
     /// Pointers to matrix vector product operators for the off diagonals
-    DenseMatrix<MatrixVectorProduct *> Off_diagonal_matrix_vector_product_pt;
+    DenseMatrix<MatrixVectorProduct*> Off_diagonal_matrix_vector_product_pt;
 
     /// \short Vector of pointers to preconditioners/inexact solvers
     /// for each diagonal block
-    Vector<Preconditioner *> Block_preconditioner_pt;
+    Vector<Preconditioner*> Block_preconditioner_pt;
 
     /// \short Pointer to mesh with preconditionable elements used
     /// for classification of dof types.
-    Mesh *Multi_poisson_mesh_pt;
+    Mesh* Multi_poisson_mesh_pt;
   };
 
   //========================start_of_setup_for_upper_triangular_class===========
@@ -947,8 +947,8 @@ namespace oomph
   /// linear system.
   //=============================================================================
   template<typename MATRIX>
-  void UpperTriangular<MATRIX>::preconditioner_solve(const DoubleVector &r,
-                                                     DoubleVector &z)
+  void UpperTriangular<MATRIX>::preconditioner_solve(const DoubleVector& r,
+                                                     DoubleVector& z)
   {
     // Get number of blocks
     unsigned n_block = this->nblock_types();
@@ -1049,25 +1049,25 @@ namespace oomph
     virtual void clean_up_my_memory();
 
     /// Broken copy constructor
-    TwoPlusThree(const TwoPlusThree &)
+    TwoPlusThree(const TwoPlusThree&)
     {
       BrokenCopy::broken_copy("TwoPlusThree");
     }
 
     /// Broken assignment operator
-    void operator=(const TwoPlusThree &)
+    void operator=(const TwoPlusThree&)
     {
       BrokenCopy::broken_assign("TwoPlusThree");
     }
 
     /// Apply preconditioner to r, i.e. return z such that P z = r
-    void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+    void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
     /// \short Setup the preconditioner
     virtual void setup();
 
     /// Specify the mesh that contains multi-poisson elements
-    void set_multi_poisson_mesh(Mesh *multi_poisson_mesh_pt)
+    void set_multi_poisson_mesh(Mesh* multi_poisson_mesh_pt)
     {
       Multi_poisson_mesh_pt = multi_poisson_mesh_pt;
     }
@@ -1075,15 +1075,15 @@ namespace oomph
   private:
     /// \short Pointer to preconditioners/inexact solver
     /// for (0,0) block
-    Preconditioner *First_subsidiary_preconditioner_pt;
+    Preconditioner* First_subsidiary_preconditioner_pt;
 
     /// \short Pointer to preconditioners/inexact solver
     /// for (1,1) block
-    Preconditioner *Second_subsidiary_preconditioner_pt;
+    Preconditioner* Second_subsidiary_preconditioner_pt;
 
     /// \short Pointer to mesh with preconditionable elements used
     /// for classification of dof types.
-    Mesh *Multi_poisson_mesh_pt;
+    Mesh* Multi_poisson_mesh_pt;
   };
 
   //====================start_of_setup_for_two_plus_three=======================
@@ -1169,8 +1169,8 @@ namespace oomph
   /// linear system.
   //=============================================================================
   template<typename MATRIX>
-  void TwoPlusThree<MATRIX>::preconditioner_solve(const DoubleVector &r,
-                                                  DoubleVector &z)
+  void TwoPlusThree<MATRIX>::preconditioner_solve(const DoubleVector& r,
+                                                  DoubleVector& z)
   {
     // Get number of blocks
     unsigned n_block = this->nblock_types();
@@ -1246,19 +1246,19 @@ namespace oomph
     virtual void clean_up_my_memory();
 
     /// Broken copy constructor
-    TwoPlusThreeUpperTriangular(const TwoPlusThreeUpperTriangular &)
+    TwoPlusThreeUpperTriangular(const TwoPlusThreeUpperTriangular&)
     {
       BrokenCopy::broken_copy("TwoPlusThreeUpperTriangular");
     }
 
     /// Broken assignment operator
-    void operator=(const TwoPlusThreeUpperTriangular &)
+    void operator=(const TwoPlusThreeUpperTriangular&)
     {
       BrokenCopy::broken_assign("TwoPlusThreeUpperTriangular");
     }
 
     /// Apply preconditioner to r
-    void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+    void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
     /// \short Setup the preconditioner
     void setup();
@@ -1268,26 +1268,26 @@ namespace oomph
     using Preconditioner::setup;
 
     /// Specify the mesh that contains multi-poisson elements
-    void set_multi_poisson_mesh(Mesh *multi_poisson_mesh_pt)
+    void set_multi_poisson_mesh(Mesh* multi_poisson_mesh_pt)
     {
       Multi_poisson_mesh_pt = multi_poisson_mesh_pt;
     }
 
   private:
     /// Pointer to matrix vector product operator for the single off diagonals
-    MatrixVectorProduct *Off_diagonal_matrix_vector_product_pt;
+    MatrixVectorProduct* Off_diagonal_matrix_vector_product_pt;
 
     /// \short Pointer to preconditioners/inexact solver
     /// for (0,0) block
-    Preconditioner *First_subsidiary_preconditioner_pt;
+    Preconditioner* First_subsidiary_preconditioner_pt;
 
     /// \short Pointer to preconditioners/inexact solver
     /// for (1,1) block
-    Preconditioner *Second_subsidiary_preconditioner_pt;
+    Preconditioner* Second_subsidiary_preconditioner_pt;
 
     /// \short Pointer to mesh with preconditionable elements used
     /// for classification of dof types.
-    Mesh *Multi_poisson_mesh_pt;
+    Mesh* Multi_poisson_mesh_pt;
   };
 
   //==============start_of_setup_for_two_plus_three_upper_triangular_class=======
@@ -1387,7 +1387,7 @@ namespace oomph
   //=============================================================================
   template<typename MATRIX>
   void TwoPlusThreeUpperTriangular<MATRIX>::preconditioner_solve(
-    const DoubleVector &r, DoubleVector &z)
+    const DoubleVector& r, DoubleVector& z)
   {
     // Get number of blocks
     unsigned n_block = this->nblock_types();
@@ -1478,21 +1478,21 @@ namespace oomph
 
     /// Broken copy constructor
     TwoPlusThreeUpperTriangularWithOneLevelSubsidiary(
-      const TwoPlusThreeUpperTriangularWithOneLevelSubsidiary &)
+      const TwoPlusThreeUpperTriangularWithOneLevelSubsidiary&)
     {
       BrokenCopy::broken_copy(
         "TwoPlusThreeUpperTriangularWithOneLevelSubsidiary");
     }
 
     /// Broken assignment operator
-    void operator=(const TwoPlusThreeUpperTriangularWithOneLevelSubsidiary &)
+    void operator=(const TwoPlusThreeUpperTriangularWithOneLevelSubsidiary&)
     {
       BrokenCopy::broken_assign(
         "TwoPlusThreeUpperTriangularWithOneLevelSubsidiary");
     }
 
     /// Apply preconditioner to r
-    void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+    void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
     /// \short Setup the preconditioner
     void setup();
@@ -1502,26 +1502,26 @@ namespace oomph
     using Preconditioner::setup;
 
     /// Specify the mesh that contains multi-poisson elements
-    void set_multi_poisson_mesh(Mesh *multi_poisson_mesh_pt)
+    void set_multi_poisson_mesh(Mesh* multi_poisson_mesh_pt)
     {
       Multi_poisson_mesh_pt = multi_poisson_mesh_pt;
     }
 
   private:
     /// Pointer to matrix vector product operators for the off diagonal block
-    MatrixVectorProduct *Off_diagonal_matrix_vector_product_pt;
+    MatrixVectorProduct* Off_diagonal_matrix_vector_product_pt;
 
     /// \short Pointer to preconditioners/inexact solver
     /// for (0,0) block
-    Preconditioner *First_subsidiary_preconditioner_pt;
+    Preconditioner* First_subsidiary_preconditioner_pt;
 
     /// \short Pointer to preconditioners/inexact solver
     /// for (1,1) block
-    Preconditioner *Second_subsidiary_preconditioner_pt;
+    Preconditioner* Second_subsidiary_preconditioner_pt;
 
     /// \short Pointer to mesh with preconditionable elements used
     /// for classification of dof types.
-    Mesh *Multi_poisson_mesh_pt;
+    Mesh* Multi_poisson_mesh_pt;
   };
 
   //=======start_of_setup_for_two_plus_three_upper_triangular_with_sub_class====
@@ -1577,7 +1577,7 @@ namespace oomph
     {
       // Block upper triangular block preconditioner for compound
       // 2x2 top left block in "big" 5x5 matrix
-      UpperTriangular<CRDoubleMatrix> *block_prec_pt =
+      UpperTriangular<CRDoubleMatrix>* block_prec_pt =
         new UpperTriangular<CRDoubleMatrix>;
       First_subsidiary_preconditioner_pt = block_prec_pt;
 
@@ -1601,7 +1601,7 @@ namespace oomph
 
     {
       // Block upper triangular for 3x3 bottom right block in "big" 5x5 matrix
-      UpperTriangular<CRDoubleMatrix> *block_prec_pt =
+      UpperTriangular<CRDoubleMatrix>* block_prec_pt =
         new UpperTriangular<CRDoubleMatrix>;
       Second_subsidiary_preconditioner_pt = block_prec_pt;
 
@@ -1649,7 +1649,7 @@ namespace oomph
   //=============================================================================
   template<typename MATRIX>
   void TwoPlusThreeUpperTriangularWithOneLevelSubsidiary<
-    MATRIX>::preconditioner_solve(const DoubleVector &z, DoubleVector &y)
+    MATRIX>::preconditioner_solve(const DoubleVector& z, DoubleVector& y)
   {
     // Solve "bottom right" (1,1) diagonal block system, using the
     // subsidiary block preconditioner that acts on the
@@ -1766,19 +1766,19 @@ namespace oomph
 
     /// Broken copy constructor
     TwoPlusOneUpperTriangularPreconditioner(
-      const TwoPlusOneUpperTriangularPreconditioner &)
+      const TwoPlusOneUpperTriangularPreconditioner&)
     {
       BrokenCopy::broken_copy("TwoPlusOneUpperTriangularPreconditioner");
     }
 
     /// Broken assignment operator
-    void operator=(const TwoPlusOneUpperTriangularPreconditioner &)
+    void operator=(const TwoPlusOneUpperTriangularPreconditioner&)
     {
       BrokenCopy::broken_assign("TwoPlusOneUpperTriangularPreconditioner");
     }
 
     /// Apply preconditioner to r, i.e. return z such that P z = r
-    void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+    void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
     /// \short Setup the preconditioner
     void setup();
@@ -1788,7 +1788,7 @@ namespace oomph
     using Preconditioner::setup;
 
     /// Specify the mesh that contains multi-poisson elements
-    void set_multi_poisson_mesh(Mesh *multi_poisson_mesh_pt)
+    void set_multi_poisson_mesh(Mesh* multi_poisson_mesh_pt)
     {
       Multi_poisson_mesh_pt = multi_poisson_mesh_pt;
     }
@@ -1796,18 +1796,18 @@ namespace oomph
   private:
     /// \short Pointer to preconditioners/inexact solver
     /// for (0,0) block
-    Preconditioner *First_subsidiary_preconditioner_pt;
+    Preconditioner* First_subsidiary_preconditioner_pt;
 
     /// \short Pointer to preconditioners/inexact solver
     /// for (1,1) block
-    Preconditioner *Second_subsidiary_preconditioner_pt;
+    Preconditioner* Second_subsidiary_preconditioner_pt;
 
     /// Matrix vector product operators for the off diagonals.
-    MatrixVectorProduct *Off_diagonal_matrix_vector_product_pt;
+    MatrixVectorProduct* Off_diagonal_matrix_vector_product_pt;
 
     /// \short Pointer to mesh with preconditionable elements used
     /// for classification of dof types.
-    Mesh *Multi_poisson_mesh_pt;
+    Mesh* Multi_poisson_mesh_pt;
   };
 
   //================start_of_setup_for_two_plus_one_preconditioner=============
@@ -1860,7 +1860,7 @@ namespace oomph
 
     // First one:
     {
-      UpperTriangular<CRDoubleMatrix> *block_prec_pt =
+      UpperTriangular<CRDoubleMatrix>* block_prec_pt =
         new UpperTriangular<CRDoubleMatrix>;
       First_subsidiary_preconditioner_pt = block_prec_pt;
 
@@ -1885,7 +1885,7 @@ namespace oomph
 
     // Second one:
     {
-      UpperTriangular<CRDoubleMatrix> *block_prec_pt =
+      UpperTriangular<CRDoubleMatrix>* block_prec_pt =
         new UpperTriangular<CRDoubleMatrix>;
       Second_subsidiary_preconditioner_pt = block_prec_pt;
 
@@ -1934,7 +1934,7 @@ namespace oomph
   //=============================================================================
   template<typename MATRIX>
   void TwoPlusOneUpperTriangularPreconditioner<MATRIX>::preconditioner_solve(
-    const DoubleVector &r, DoubleVector &z)
+    const DoubleVector& r, DoubleVector& z)
   {
     // Solve (1,1) diagonal block system:
     // Apply the subsidiary block preconditioner that acts on the
@@ -2033,21 +2033,21 @@ namespace oomph
 
     /// Broken copy constructor
     TwoPlusThreeUpperTriangularWithTwoLevelSubsidiary(
-      const TwoPlusThreeUpperTriangularWithTwoLevelSubsidiary &)
+      const TwoPlusThreeUpperTriangularWithTwoLevelSubsidiary&)
     {
       BrokenCopy::broken_copy(
         "TwoPlusThreeUpperTriangularWithTwoLevelSubsidiary");
     }
 
     /// Broken assignment operator
-    void operator=(const TwoPlusThreeUpperTriangularWithTwoLevelSubsidiary &)
+    void operator=(const TwoPlusThreeUpperTriangularWithTwoLevelSubsidiary&)
     {
       BrokenCopy::broken_assign(
         "TwoPlusThreeUpperTriangularWithTwoLevelSubsidiary");
     }
 
     /// Apply preconditioner to r
-    void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+    void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
     /// \short Setup the preconditioner
     void setup();
@@ -2057,26 +2057,26 @@ namespace oomph
     using Preconditioner::setup;
 
     /// Specify the mesh that contains multi-poisson elements
-    void set_multi_poisson_mesh(Mesh *multi_poisson_mesh_pt)
+    void set_multi_poisson_mesh(Mesh* multi_poisson_mesh_pt)
     {
       Multi_poisson_mesh_pt = multi_poisson_mesh_pt;
     }
 
   private:
     /// Pointer to matrix vector product operator
-    MatrixVectorProduct *Off_diagonal_matrix_vector_product_pt;
+    MatrixVectorProduct* Off_diagonal_matrix_vector_product_pt;
 
     /// \short Pointer to preconditioners/inexact solver
     /// for (0,0) block
-    Preconditioner *First_subsidiary_preconditioner_pt;
+    Preconditioner* First_subsidiary_preconditioner_pt;
 
     /// \short Pointer to preconditioners/inexact solver
     /// for (1,1) block
-    Preconditioner *Second_subsidiary_preconditioner_pt;
+    Preconditioner* Second_subsidiary_preconditioner_pt;
 
     /// \short Pointer to mesh with preconditionable elements used
     /// for classification of dof types.
-    Mesh *Multi_poisson_mesh_pt;
+    Mesh* Multi_poisson_mesh_pt;
   };
 
   //===start_of_setup_for_two_plus_three_upper_triangular_with_two_sub_class=====
@@ -2136,7 +2136,7 @@ namespace oomph
 
     // First subsidiary precond is a block diagonal preconditioner itself.
     {
-      UpperTriangular<CRDoubleMatrix> *block_prec_pt =
+      UpperTriangular<CRDoubleMatrix>* block_prec_pt =
         new UpperTriangular<CRDoubleMatrix>;
       First_subsidiary_preconditioner_pt = block_prec_pt;
 
@@ -2161,7 +2161,7 @@ namespace oomph
 
     // Second subsidiary precond is a block diagonal preconditioner itself
     {
-      TwoPlusOneUpperTriangularPreconditioner<CRDoubleMatrix> *block_prec_pt =
+      TwoPlusOneUpperTriangularPreconditioner<CRDoubleMatrix>* block_prec_pt =
         new TwoPlusOneUpperTriangularPreconditioner<CRDoubleMatrix>;
       Second_subsidiary_preconditioner_pt = block_prec_pt;
 
@@ -2215,7 +2215,7 @@ namespace oomph
   //=============================================================================
   template<typename MATRIX>
   void TwoPlusThreeUpperTriangularWithTwoLevelSubsidiary<
-    MATRIX>::preconditioner_solve(const DoubleVector &r, DoubleVector &z)
+    MATRIX>::preconditioner_solve(const DoubleVector& r, DoubleVector& z)
   {
     // Solve (1,1) diagonal block system
     // Apply the subsidiary block preconditioner that acts on the
@@ -2328,25 +2328,25 @@ namespace oomph
 
     /// Broken copy constructor
     TwoPlusThreeUpperTriangularWithReplace(
-      const TwoPlusThreeUpperTriangularWithReplace &)
+      const TwoPlusThreeUpperTriangularWithReplace&)
     {
       BrokenCopy::broken_copy("TwoPlusThreeUpperTriangularWithReplace");
     }
 
     /// Broken assignment operator
-    void operator=(const TwoPlusThreeUpperTriangularWithReplace &)
+    void operator=(const TwoPlusThreeUpperTriangularWithReplace&)
     {
       BrokenCopy::broken_assign("TwoPlusThreeUpperTriangularWithReplace");
     }
 
     /// Apply preconditioner to r, i.e. return z such that P z = r
-    void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+    void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
     /// \short Setup the preconditioner
     void setup();
 
     /// Specify the mesh that contains multi-poisson elements
-    void set_multi_poisson_mesh(Mesh *multi_poisson_mesh_pt)
+    void set_multi_poisson_mesh(Mesh* multi_poisson_mesh_pt)
     {
       Multi_poisson_mesh_pt = multi_poisson_mesh_pt;
     }
@@ -2354,22 +2354,22 @@ namespace oomph
   private:
     /// \short Pointer to preconditioners/inexact solver
     /// for compound  (0,0) block
-    Preconditioner *First_subsidiary_preconditioner_pt;
+    Preconditioner* First_subsidiary_preconditioner_pt;
 
     /// \short Pointer to preconditioners/inexact solver
     /// for compound (1,1) block
-    Preconditioner *Second_subsidiary_preconditioner_pt;
+    Preconditioner* Second_subsidiary_preconditioner_pt;
 
     /// \short Matrix vector product operator with the compound
     /// (0,1) off diagonal block.
-    MatrixVectorProduct *Off_diagonal_matrix_vector_product_pt;
+    MatrixVectorProduct* Off_diagonal_matrix_vector_product_pt;
 
     // Matrix of pointers to replacement matrix blocks
-    DenseMatrix<CRDoubleMatrix *> Replacement_matrix_pt;
+    DenseMatrix<CRDoubleMatrix*> Replacement_matrix_pt;
 
     /// \short Pointer to mesh with preconditionable elements used
     /// for classification of dof types.
-    Mesh *Multi_poisson_mesh_pt;
+    Mesh* Multi_poisson_mesh_pt;
   };
 
   //==start_of_setup_for_two_plus_three_upper_triangular_with_replace===========
@@ -2472,7 +2472,7 @@ namespace oomph
           else
           {
             // Get the DOF block's (row!) distribution.
-            LinearAlgebraDistribution *dof_block_dist_pt =
+            LinearAlgebraDistribution* dof_block_dist_pt =
               this->dof_block_distribution_pt(i);
 
             // Number of rows in DOF block matrix (i,j).
@@ -2512,7 +2512,7 @@ namespace oomph
 
     // First subsidiary precond is a block triangular preconditioner
     {
-      UpperTriangular<CRDoubleMatrix> *block_prec_pt =
+      UpperTriangular<CRDoubleMatrix>* block_prec_pt =
         new UpperTriangular<CRDoubleMatrix>;
       First_subsidiary_preconditioner_pt = block_prec_pt;
 
@@ -2536,7 +2536,7 @@ namespace oomph
 
     // Second subsidiary precond is a block triangular preconditioner
     {
-      UpperTriangular<CRDoubleMatrix> *block_prec_pt =
+      UpperTriangular<CRDoubleMatrix>* block_prec_pt =
         new UpperTriangular<CRDoubleMatrix>;
       Second_subsidiary_preconditioner_pt = block_prec_pt;
 
@@ -2589,7 +2589,7 @@ namespace oomph
   //=============================================================================
   template<typename MATRIX>
   void TwoPlusThreeUpperTriangularWithReplace<MATRIX>::preconditioner_solve(
-    const DoubleVector &r, DoubleVector &z)
+    const DoubleVector& r, DoubleVector& z)
   {
     // Now apply the subsidiary block preconditioner that acts on the
     // "bottom right" 3x3 sub-system (only!). The subsidiary preconditioner
@@ -2702,25 +2702,25 @@ namespace oomph
     virtual void clean_up_my_memory();
 
     /// Broken copy constructor
-    CoarseTwoPlusTwoPlusOne(const CoarseTwoPlusTwoPlusOne &)
+    CoarseTwoPlusTwoPlusOne(const CoarseTwoPlusTwoPlusOne&)
     {
       BrokenCopy::broken_copy("CoarseTwoPlusTwoPlusOne");
     }
 
     /// Broken assignment operator
-    void operator=(const CoarseTwoPlusTwoPlusOne &)
+    void operator=(const CoarseTwoPlusTwoPlusOne&)
     {
       BrokenCopy::broken_assign("CoarseTwoPlusTwoPlusOne");
     }
 
     /// Apply preconditioner to r, i.e. return z such that P z = r
-    void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+    void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
     /// \short Setup the preconditioner
     virtual void setup();
 
     /// Specify the mesh that contains multi-poisson elements
-    void set_multi_poisson_mesh(Mesh *multi_poisson_mesh_pt)
+    void set_multi_poisson_mesh(Mesh* multi_poisson_mesh_pt)
     {
       Multi_poisson_mesh_pt = multi_poisson_mesh_pt;
     }
@@ -2728,21 +2728,21 @@ namespace oomph
   private:
     /// \short Pointer to preconditioners/inexact solver
     /// for (0,0) block
-    Preconditioner *First_subsidiary_preconditioner_pt;
+    Preconditioner* First_subsidiary_preconditioner_pt;
 
     /// \short Pointer to preconditioners/inexact solver
     /// for (1,1) block
-    Preconditioner *Second_subsidiary_preconditioner_pt;
+    Preconditioner* Second_subsidiary_preconditioner_pt;
 
     // Matrix of pointers to replacement matrix blocks
-    DenseMatrix<CRDoubleMatrix *> Replacement_matrix_pt;
+    DenseMatrix<CRDoubleMatrix*> Replacement_matrix_pt;
 
     /// Matrix vector product operator
-    MatrixVectorProduct *Off_diagonal_matrix_vector_product_pt;
+    MatrixVectorProduct* Off_diagonal_matrix_vector_product_pt;
 
     /// \short Pointer to mesh with preconditionable elements used
     /// for classification of dof types.
-    Mesh *Multi_poisson_mesh_pt;
+    Mesh* Multi_poisson_mesh_pt;
   };
 
   //===============start_of_setup_for_coarse_two_plus_two_plus_one=============
@@ -2801,7 +2801,7 @@ namespace oomph
         if (i != j)
         {
           // Get the DOF block's (row!) distribution.
-          LinearAlgebraDistribution *dof_block_dist_pt =
+          LinearAlgebraDistribution* dof_block_dist_pt =
             this->dof_block_distribution_pt(i);
 
           // Number of rows in DOF block matrix (i,j).
@@ -2844,7 +2844,7 @@ namespace oomph
     //--------------------------------------
     {
       // First subsidiary precond is a block diagonal preconditioner itself.
-      UpperTriangular<CRDoubleMatrix> *block_prec_pt =
+      UpperTriangular<CRDoubleMatrix>* block_prec_pt =
         new UpperTriangular<CRDoubleMatrix>;
       First_subsidiary_preconditioner_pt = block_prec_pt;
 
@@ -2868,7 +2868,7 @@ namespace oomph
 
     // Second subsidiary preconditioner is also a block preconditioner
     {
-      SimpleTwoDofOnly<CRDoubleMatrix> *block_prec_pt =
+      SimpleTwoDofOnly<CRDoubleMatrix>* block_prec_pt =
         new SimpleTwoDofOnly<CRDoubleMatrix>;
       Second_subsidiary_preconditioner_pt = block_prec_pt;
 
@@ -2950,7 +2950,7 @@ namespace oomph
   //=============================================================================
   template<typename MATRIX>
   void CoarseTwoPlusTwoPlusOne<MATRIX>::preconditioner_solve(
-    const DoubleVector &r, DoubleVector &z)
+    const DoubleVector& r, DoubleVector& z)
   {
     // Now apply the subsidiary block preconditioner that acts on the
     // "bottom right" 3x3 sub-system (only!). The subsidiary preconditioner
@@ -3066,25 +3066,25 @@ namespace oomph
     virtual void clean_up_my_memory();
 
     /// Broken copy constructor
-    OnePlusFourWithTwoCoarse(const OnePlusFourWithTwoCoarse &)
+    OnePlusFourWithTwoCoarse(const OnePlusFourWithTwoCoarse&)
     {
       BrokenCopy::broken_copy("OnePlusFourWithTwoCoarse");
     }
 
     /// Broken assignment operator
-    void operator=(const OnePlusFourWithTwoCoarse &)
+    void operator=(const OnePlusFourWithTwoCoarse&)
     {
       BrokenCopy::broken_assign("OnePlusFourWithTwoCoarse");
     }
 
     /// Apply preconditioner to r, i.e. return z such that P z = r
-    void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+    void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
     /// \short Setup the preconditioner
     virtual void setup();
 
     /// Specify the mesh that contains multi-poisson elements
-    void set_multi_poisson_mesh(Mesh *multi_poisson_mesh_pt)
+    void set_multi_poisson_mesh(Mesh* multi_poisson_mesh_pt)
     {
       Multi_poisson_mesh_pt = multi_poisson_mesh_pt;
     }
@@ -3092,21 +3092,21 @@ namespace oomph
   private:
     /// \short Pointer to preconditioners/inexact solver
     /// for (0,0) block
-    Preconditioner *First_subsidiary_preconditioner_pt;
+    Preconditioner* First_subsidiary_preconditioner_pt;
 
     /// \short Pointer to preconditioners/inexact solver
     /// for (1,1) block
-    Preconditioner *Second_subsidiary_preconditioner_pt;
+    Preconditioner* Second_subsidiary_preconditioner_pt;
 
     // Matrix of pointers to replacement matrx blocks
-    DenseMatrix<CRDoubleMatrix *> Replacement_matrix_pt;
+    DenseMatrix<CRDoubleMatrix*> Replacement_matrix_pt;
 
     /// Matrix vector product operators for the off diagonal.
-    MatrixVectorProduct *Off_diagonal_matrix_vector_product_pt;
+    MatrixVectorProduct* Off_diagonal_matrix_vector_product_pt;
 
     /// \short Pointer to mesh with preconditionable elements used
     /// for classification of dof types.
-    Mesh *Multi_poisson_mesh_pt;
+    Mesh* Multi_poisson_mesh_pt;
   };
 
   //===============start_of_setup_for_coarse_two_plus_two_plus_one=============
@@ -3165,7 +3165,7 @@ namespace oomph
         if (i != j)
         {
           // Get the DOF block's (row!) distribution.
-          LinearAlgebraDistribution *dof_block_dist_pt =
+          LinearAlgebraDistribution* dof_block_dist_pt =
             this->dof_block_distribution_pt(i);
 
           // Number of rows in DOF block matrix (i,j).
@@ -3209,7 +3209,7 @@ namespace oomph
     {
       // First subsidiary precond is a block diagonal preconditioner itself.
       // Put in owns cope so block_prec_pt goes out of scope.
-      UpperTriangular<CRDoubleMatrix> *block_prec_pt =
+      UpperTriangular<CRDoubleMatrix>* block_prec_pt =
         new UpperTriangular<CRDoubleMatrix>;
       First_subsidiary_preconditioner_pt = block_prec_pt;
 
@@ -3234,7 +3234,7 @@ namespace oomph
     // This preconditioner only accepts two DOF types, it then coarsen these
     // two dof types to use a block preconditioner which accepts only one DOF
     // type.
-    CoarseTwoIntoOne<CRDoubleMatrix> *block_prec_pt =
+    CoarseTwoIntoOne<CRDoubleMatrix>* block_prec_pt =
       new CoarseTwoIntoOne<CRDoubleMatrix>;
     Second_subsidiary_preconditioner_pt = block_prec_pt;
 
@@ -3315,7 +3315,7 @@ namespace oomph
   //=============================================================================
   template<typename MATRIX>
   void OnePlusFourWithTwoCoarse<MATRIX>::preconditioner_solve(
-    const DoubleVector &r, DoubleVector &z)
+    const DoubleVector& r, DoubleVector& z)
   {
     // Now apply the subsidiary block preconditioner that acts on the
     // "bottom right" 4x4 sub-system (only!). The subsidiary preconditioner

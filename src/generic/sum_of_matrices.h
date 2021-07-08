@@ -55,14 +55,14 @@ namespace oomph
     /// global equation numbers. Useful for the case when the main matrix is
     /// a Jacobian and the added matrix is a contribution only on a certain
     /// mesh.
-    AddedMainNumberingLookup(const Mesh *mesh_pt, const unsigned &dof_index)
+    AddedMainNumberingLookup(const Mesh* mesh_pt, const unsigned& dof_index)
     {
       this->build(mesh_pt, dof_index);
     }
 
     /// Construct lookup schemes from int array (HLib's format for this
     /// data).
-    AddedMainNumberingLookup(const int *lookup_array, const unsigned &length)
+    AddedMainNumberingLookup(const int* lookup_array, const unsigned& length)
     {
       this->build(lookup_array, length);
     }
@@ -72,7 +72,7 @@ namespace oomph
 
     /// \short Given a main matrix row/col number get the equivalent row/col
     /// in the added matrix. Throw an error if not found.
-    unsigned main_to_added(const int &main) const
+    unsigned main_to_added(const int& main) const
     {
       int result = unsafe_main_to_added(main);
 #ifdef PARANOID
@@ -98,7 +98,7 @@ namespace oomph
 
     /// \short Given a main matrix row/col number get the equivalent row/col
     /// in the added matrix. Return -1 if not found.
-    int unsafe_main_to_added(const int &main) const
+    int unsafe_main_to_added(const int& main) const
     {
       // Find the entry
       std::map<unsigned, unsigned>::const_iterator it =
@@ -117,14 +117,14 @@ namespace oomph
 
     /// Given a row/col number in the added matrix return the equivalent
     /// row/col number in the main matrix.
-    unsigned added_to_main(const unsigned &added) const
+    unsigned added_to_main(const unsigned& added) const
     {
       return Added_to_main_mapping[added];
     }
 
     /// Construct the lookup schemes given a mesh and the degree of freedom
     /// to lookup main equation numbers for.
-    void build(const Mesh *mesh_pt, const unsigned &dof_index)
+    void build(const Mesh* mesh_pt, const unsigned& dof_index)
     {
       construct_added_to_main_mapping(mesh_pt, dof_index);
       construct_reverse_mapping();
@@ -132,7 +132,7 @@ namespace oomph
 
     /// Construct lookup schemes from int array (HLib's format for this
     /// data).
-    void build(const int *lookup_array, const unsigned &length)
+    void build(const int* lookup_array, const unsigned& length)
     {
 #ifdef PARANOID
       // Check for negative entries just in case (since it's an integer
@@ -154,8 +154,7 @@ namespace oomph
     }
 
     /// Construct lookup using node vector
-    void build(const Vector<const Node *> &bem_lookup,
-               const unsigned &dof_index)
+    void build(const Vector<const Node*>& bem_lookup, const unsigned& dof_index)
     {
       const unsigned ni = bem_lookup.size();
       Added_to_main_mapping.assign(ni, -1);
@@ -169,7 +168,7 @@ namespace oomph
     }
 
     /// Construct an identity map (mostly for testing).
-    void build_identity_map(const unsigned &n)
+    void build_identity_map(const unsigned& n)
     {
       Added_to_main_mapping.assign(n, 0);
       for (unsigned j = 0; j < n; j++)
@@ -183,21 +182,21 @@ namespace oomph
     // ============================================================
 
     /// \short Const access function for mapping.
-    const Vector<unsigned> *added_to_main_mapping_pt() const
+    const Vector<unsigned>* added_to_main_mapping_pt() const
     {
       return &Added_to_main_mapping;
     }
 
     /// \short Const access function for mapping.
-    const std::map<unsigned, unsigned> *main_to_added_mapping_pt() const
+    const std::map<unsigned, unsigned>* main_to_added_mapping_pt() const
     {
       return &Main_to_added_mapping;
     }
 
   private:
     /// Set up the lookup from added matrix row/col to main matrix.
-    void construct_added_to_main_mapping(const Mesh *mesh_pt,
-                                         const unsigned &dof_index)
+    void construct_added_to_main_mapping(const Mesh* mesh_pt,
+                                         const unsigned& dof_index)
     {
       // Basically just copy from the node data.
       Added_to_main_mapping.resize(mesh_pt->nnode());
@@ -243,13 +242,13 @@ namespace oomph
     std::map<unsigned, unsigned> Main_to_added_mapping;
 
     /// Inaccessible copy constructor
-    AddedMainNumberingLookup(const AddedMainNumberingLookup &dummy)
+    AddedMainNumberingLookup(const AddedMainNumberingLookup& dummy)
     {
       BrokenCopy::broken_copy("AddedMainNumberingLookup");
     }
 
     /// Inaccessible assignment operator
-    void operator=(const AddedMainNumberingLookup &dummy)
+    void operator=(const AddedMainNumberingLookup& dummy)
     {
       BrokenCopy::broken_assign("AddedMainNumberingLookup");
     }
@@ -270,18 +269,18 @@ namespace oomph
   {
   private:
     /// Pointer to the matrix which we are adding the others to
-    DoubleMatrixBase *Main_matrix_pt;
+    DoubleMatrixBase* Main_matrix_pt;
 
     /// List of pointers to the matrices that are added to the main matrix
-    Vector<DoubleMatrixBase *> Added_matrix_pt;
+    Vector<DoubleMatrixBase*> Added_matrix_pt;
 
     /// \short List of maps between row numbers of the main matrix and the
     /// added matrices.
-    Vector<const AddedMainNumberingLookup *> Row_map_pt;
+    Vector<const AddedMainNumberingLookup*> Row_map_pt;
 
     /// \short List of maps between col numbers of the main matrix and the
     /// added matrices.
-    Vector<const AddedMainNumberingLookup *> Col_map_pt;
+    Vector<const AddedMainNumberingLookup*> Col_map_pt;
 
     /// Should we delete the sub matrices when destructor is called?
     Vector<unsigned> Should_delete_added_matrix;
@@ -303,7 +302,7 @@ namespace oomph
     }
 
     /// Constructor taking a pointer to the main matrix as input.
-    SumOfMatrices(DoubleMatrixBase *main_matrix_pt) :
+    SumOfMatrices(DoubleMatrixBase* main_matrix_pt) :
       Main_matrix_pt(main_matrix_pt),
       Added_matrix_pt(0),
       Row_map_pt(0),
@@ -314,13 +313,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    SumOfMatrices(const SumOfMatrices &matrix)
+    SumOfMatrices(const SumOfMatrices& matrix)
     {
       BrokenCopy::broken_copy("SumOfMatrices");
     }
 
     /// Broken assignment operator
-    void operator=(const SumOfMatrices &)
+    void operator=(const SumOfMatrices&)
     {
       BrokenCopy::broken_assign("SumOfMatrices");
     }
@@ -344,11 +343,11 @@ namespace oomph
     }
 
     /// Access to the main matrix
-    const DoubleMatrixBase *main_matrix_pt() const
+    const DoubleMatrixBase* main_matrix_pt() const
     {
       return Main_matrix_pt;
     }
-    DoubleMatrixBase *&main_matrix_pt()
+    DoubleMatrixBase*& main_matrix_pt()
     {
       return Main_matrix_pt;
     }
@@ -363,7 +362,7 @@ namespace oomph
     /// \short Output the "bottom right" entry regardless of it being
     /// zero or not (this allows automatic detection of matrix size in
     /// e.g. matlab, python).
-    void output_bottom_right_zero_helper(std::ostream &outfile) const
+    void output_bottom_right_zero_helper(std::ostream& outfile) const
     {
       int last_row = this->nrow() - 1;
       int last_col = this->ncol() - 1;
@@ -378,7 +377,7 @@ namespace oomph
 
     /// \short Output the matrix in sparse format. Note that this is going to be
     /// slow because we have to check every entry of every matrix for non-zeros.
-    void sparse_indexed_output_helper(std::ostream &outfile) const
+    void sparse_indexed_output_helper(std::ostream& outfile) const
     {
       for (unsigned long i = 0; i < nrow(); i++)
       {
@@ -397,9 +396,9 @@ namespace oomph
     /// \short Get a list of row/col indices and total entry for non-zeros in
     /// the matrix. e.g. for use as input to other matrix classes. Warning this
     /// is SLOW! for sparse matrices.
-    void get_as_indices(Vector<int> &row,
-                        Vector<int> &col,
-                        Vector<double> &values)
+    void get_as_indices(Vector<int>& row,
+                        Vector<int>& col,
+                        Vector<double>& values)
     {
       row.clear();
       col.clear();
@@ -423,9 +422,9 @@ namespace oomph
 
     /// \short Add a new matrix to the sum by giving a matrix pointer and a
     /// mapping from the main matrix numbering to the added matrix's numbering.
-    void add_matrix(DoubleMatrixBase *added_matrix_pt_in,
-                    const AddedMainNumberingLookup *main_to_added_rows_pt,
-                    const AddedMainNumberingLookup *main_to_added_cols_pt,
+    void add_matrix(DoubleMatrixBase* added_matrix_pt_in,
+                    const AddedMainNumberingLookup* main_to_added_rows_pt,
+                    const AddedMainNumberingLookup* main_to_added_cols_pt,
                     bool should_delete_matrix = false)
     {
 #ifdef PARANOID
@@ -454,7 +453,7 @@ namespace oomph
 #ifdef RANGE_CHECKING
       // Check that all entries in the row mapping are "in range" for the
       // main matrix.
-      const Vector<unsigned> *rowmap_pt =
+      const Vector<unsigned>* rowmap_pt =
         main_to_added_rows_pt->added_to_main_mapping_pt();
       unsigned max_row =
         *std::max_element(rowmap_pt->begin(), rowmap_pt->end());
@@ -470,7 +469,7 @@ namespace oomph
 
       // Check that all entries in the row mapping are "in range" for the
       // main matrix.
-      const Vector<unsigned> *colmap_pt =
+      const Vector<unsigned>* colmap_pt =
         main_to_added_cols_pt->added_to_main_mapping_pt();
       unsigned max_col =
         *std::max_element(colmap_pt->begin(), colmap_pt->end());
@@ -493,17 +492,17 @@ namespace oomph
 
     /// Access function for ith added matrix (main matrix not included in
     /// numbering).
-    inline DoubleMatrixBase *added_matrix_pt(const unsigned &i) const
+    inline DoubleMatrixBase* added_matrix_pt(const unsigned& i) const
     {
       return Added_matrix_pt[i];
     }
 
     /// Access to the maps
-    const AddedMainNumberingLookup *row_map_pt(const unsigned &i) const
+    const AddedMainNumberingLookup* row_map_pt(const unsigned& i) const
     {
       return Row_map_pt[i];
     }
-    const AddedMainNumberingLookup *col_map_pt(const unsigned &i) const
+    const AddedMainNumberingLookup* col_map_pt(const unsigned& i) const
     {
       return Col_map_pt[i];
     }
@@ -544,11 +543,11 @@ namespace oomph
 
     /// \short Multiply: just call multiply on each of the matrices and add up
     /// the results (with appropriate bookeeping of the relative positions).
-    void multiply(const DoubleVector &x, DoubleVector &soln) const;
+    void multiply(const DoubleVector& x, DoubleVector& soln) const;
 
     /// \short Broken operator() because it does not make sense to return
     /// anything by reference.
-    double &entry(const unsigned long &i, const unsigned long &j) const
+    double& entry(const unsigned long& i, const unsigned long& j) const
     {
       throw OomphLibError(
         "Broken write to entry: it does not make sense to write to a sum, you "
@@ -560,7 +559,7 @@ namespace oomph
     /// Access function to get the total value of entries in position
     /// (i,j). Warning: this way of getting entries is far too slow to use
     /// inside of loops.
-    double operator()(const unsigned long &i, const unsigned long &j) const
+    double operator()(const unsigned long& i, const unsigned long& j) const
     {
       // Get contributions from all matrices
       double sum = main_matrix_pt()->operator()(i, j);
@@ -581,8 +580,8 @@ namespace oomph
 
     /// \short Dummy overload of a pure virtual function. I'm not sure how best
     /// to implement this and I don't think I need it.
-    virtual void multiply_transpose(const DoubleVector &x,
-                                    DoubleVector &soln) const
+    virtual void multiply_transpose(const DoubleVector& x,
+                                    DoubleVector& soln) const
     {
       std::ostringstream error_msg;
       error_msg << "Function not yet implemented.";

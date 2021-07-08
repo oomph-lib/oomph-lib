@@ -48,7 +48,7 @@ namespace oomph
   /// The output function for general 1D QSpectralElements
   //=======================================================================
   template<unsigned NNODE_1D>
-  void QSpectralElement<1, NNODE_1D>::output(std::ostream &outfile)
+  void QSpectralElement<1, NNODE_1D>::output(std::ostream& outfile)
   {
     // Tecplot header info
     outfile << "ZONE I=" << NNODE_1D << std::endl;
@@ -80,8 +80,8 @@ namespace oomph
   /// The output function for nplot points in each coordinate direction
   //=======================================================================
   template<unsigned NNODE_1D>
-  void QSpectralElement<1, NNODE_1D>::output(std::ostream &outfile,
-                                             const unsigned &nplot)
+  void QSpectralElement<1, NNODE_1D>::output(std::ostream& outfile,
+                                             const unsigned& nplot)
   {
     // Local variables
     Vector<double> s(1);
@@ -118,7 +118,7 @@ namespace oomph
   //===========================================================
   template<unsigned NNODE_1D>
   void QSpectralElement<1, NNODE_1D>::build_face_element(
-    const int &face_index, FaceElement *face_element_pt)
+    const int& face_index, FaceElement* face_element_pt)
   {
     /*throw OomphLibError("Untested",
       OOMPH_CURRENT_FUNCTION,
@@ -225,7 +225,7 @@ namespace oomph
   /// The output function for general 1D QSpectralElements
   //=======================================================================
   template<unsigned NNODE_1D>
-  void QSpectralElement<2, NNODE_1D>::output(std::ostream &outfile)
+  void QSpectralElement<2, NNODE_1D>::output(std::ostream& outfile)
   {
     // Tecplot header info
     outfile << "ZONE I=" << NNODE_1D << ", J=" << NNODE_1D << std::endl;
@@ -262,8 +262,8 @@ namespace oomph
   /// The output function for n+plot points in each coordinate direction
   //=======================================================================
   template<unsigned NNODE_1D>
-  void QSpectralElement<2, NNODE_1D>::output(std::ostream &outfile,
-                                             const unsigned &n_plot)
+  void QSpectralElement<2, NNODE_1D>::output(std::ostream& outfile,
+                                             const unsigned& n_plot)
   {
     // Local variables
     Vector<double> s(2);
@@ -299,7 +299,7 @@ namespace oomph
   //===========================================================
   template<unsigned NNODE_1D>
   void QSpectralElement<2, NNODE_1D>::build_face_element(
-    const int &face_index, FaceElement *face_element_pt)
+    const int& face_index, FaceElement* face_element_pt)
   {
     // Set the nodal dimension from the "bulk"
     face_element_pt->set_nodal_dimension(this->node_pt(0)->ndim());
@@ -447,7 +447,7 @@ namespace oomph
   /// The output function for general 1D QSpectralElements
   //=======================================================================
   template<unsigned NNODE_1D>
-  void QSpectralElement<3, NNODE_1D>::output(std::ostream &outfile)
+  void QSpectralElement<3, NNODE_1D>::output(std::ostream& outfile)
   {
     // Tecplot header info
     outfile << "ZONE I=" << NNODE_1D << ", J=" << NNODE_1D << ", K=" << NNODE_1D
@@ -488,8 +488,8 @@ namespace oomph
   /// The output function for n_plot points in each coordinate direction
   //=======================================================================
   template<unsigned NNODE_1D>
-  void QSpectralElement<3, NNODE_1D>::output(std::ostream &outfile,
-                                             const unsigned &n_plot)
+  void QSpectralElement<3, NNODE_1D>::output(std::ostream& outfile,
+                                             const unsigned& n_plot)
   {
     // Local variables
     Vector<double> s(3);
@@ -530,7 +530,7 @@ namespace oomph
   //=======================================================================
   template<unsigned NNODE_1D>
   void QSpectralElement<3, NNODE_1D>::build_face_element(
-    const int &face_index, FaceElement *face_element_pt)
+    const int& face_index, FaceElement* face_element_pt)
   {
     oomph_info << " WARNING UNTESTED CODE" << std::endl;
 

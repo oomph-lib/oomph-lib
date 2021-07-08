@@ -52,14 +52,14 @@ namespace FishSolnOneDPoisson
   int Sign = -1;
 
   /// Exact, fish-shaped solution as a 1D vector
-  void get_exact_u(const Vector<double> &x, Vector<double> &u)
+  void get_exact_u(const Vector<double>& x, Vector<double>& u)
   {
     u[0] =
       double(Sign) * ((sin(sqrt(30.0)) - 1.0) * x[0] - sin(sqrt(30.0) * x[0]));
   }
 
   /// Source function required to make the fish shape an exact solution
-  void source_function(const Vector<double> &x, double &source)
+  void source_function(const Vector<double>& x, double& source)
   {
     source = double(Sign) * 30.0 * sin(sqrt(30.0) * x[0]);
   }
@@ -74,7 +74,7 @@ class OneDPoissonProblem : public Problem
 {
 public:
   /// Constructor: Pass number of elements and pointer to source function
-  OneDPoissonProblem(const unsigned &n_element,
+  OneDPoissonProblem(const unsigned& n_element,
                      PoissonEquations<1>::PoissonSourceFctPt source_fct_pt);
 
   /// Destructor (empty)
@@ -88,7 +88,7 @@ public:
 
   /// \short Doc the solution, pass the number of the case considered,
   /// so that output files can be distinguished.
-  void doc_solution(const unsigned &label);
+  void doc_solution(const unsigned& label);
 
 private:
   /// Pointer to source function
@@ -103,7 +103,7 @@ private:
 //========================================================================
 template<class ELEMENT>
 OneDPoissonProblem<ELEMENT>::OneDPoissonProblem(
-  const unsigned &n_element,
+  const unsigned& n_element,
   PoissonEquations<1>::PoissonSourceFctPt source_fct_pt) :
   Source_fct_pt(source_fct_pt)
 {
@@ -131,7 +131,7 @@ OneDPoissonProblem<ELEMENT>::OneDPoissonProblem(
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *elem_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* elem_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the source function pointer
     elem_pt->source_fct_pt() = Source_fct_pt;
@@ -153,7 +153,7 @@ void OneDPoissonProblem<ELEMENT>::actions_before_newton_solve()
   // from the exact solution.
 
   // Left boundary is node 0 in the mesh:
-  Node *left_node_pt = mesh_pt()->node_pt(0);
+  Node* left_node_pt = mesh_pt()->node_pt(0);
 
   // Determine the position of the boundary node (the exact solution
   // requires the coordinate in a 1D vector!)
@@ -170,7 +170,7 @@ void OneDPoissonProblem<ELEMENT>::actions_before_newton_solve()
 
   // Right boundary is last node in the mesh:
   unsigned last_node = mesh_pt()->nnode() - 1;
-  Node *right_node_pt = mesh_pt()->node_pt(last_node);
+  Node* right_node_pt = mesh_pt()->node_pt(last_node);
 
   // Determine the position of the boundary node
   x[0] = right_node_pt->x(0);
@@ -188,7 +188,7 @@ void OneDPoissonProblem<ELEMENT>::actions_before_newton_solve()
 /// Doc the solution in tecplot format. Label files with label.
 //========================================================================
 template<class ELEMENT>
-void OneDPoissonProblem<ELEMENT>::doc_solution(const unsigned &label)
+void OneDPoissonProblem<ELEMENT>::doc_solution(const unsigned& label)
 {
   ofstream some_file;
   char filename[100];
@@ -226,7 +226,7 @@ void OneDPoissonProblem<ELEMENT>::doc_solution(const unsigned &label)
 } // end of doc
 
 template<unsigned SPECTRAL_ORDER>
-void construct_and_solve_problem(const unsigned &i)
+void construct_and_solve_problem(const unsigned& i)
 {
   // Set up the problem:
   // Solve a 1D Poisson problem using a source function that generates

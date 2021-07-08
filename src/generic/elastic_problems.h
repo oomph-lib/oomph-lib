@@ -102,13 +102,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    SolidICProblem(const SolidICProblem &)
+    SolidICProblem(const SolidICProblem&)
     {
       BrokenCopy::broken_copy("SolidICProblem");
     }
 
     /// Broken assignment operator
-    void operator=(const SolidICProblem &)
+    void operator=(const SolidICProblem&)
     {
       BrokenCopy::broken_assign("SolidICProblem");
     }
@@ -122,16 +122,16 @@ namespace oomph
     /// \short Force the elastic structure that is discretised on the specified
     /// mesh to deform in the shape of the initial condition object
     /// (evaluated at the time specified)
-    void set_static_initial_condition(Problem *problem_pt,
-                                      Mesh *mesh_pt,
-                                      SolidInitialCondition *ic_pt,
-                                      const double &time);
+    void set_static_initial_condition(Problem* problem_pt,
+                                      Mesh* mesh_pt,
+                                      SolidInitialCondition* ic_pt,
+                                      const double& time);
 
     /// \short Force the elastic structure that is discretised on the specified
     /// mesh to deform in the shape of the initial condition object (wrapper)
-    void set_static_initial_condition(Problem *problem_pt,
-                                      Mesh *mesh_pt,
-                                      SolidInitialCondition *ic_pt)
+    void set_static_initial_condition(Problem* problem_pt,
+                                      Mesh* mesh_pt,
+                                      SolidInitialCondition* ic_pt)
     {
       double time;
       set_static_initial_condition(problem_pt, mesh_pt, ic_pt, time);
@@ -142,11 +142,11 @@ namespace oomph
     /// the velocity and accelerations determined by the Newmark
     /// scheme are exact at the initial time.
     template<class TIMESTEPPER>
-    void set_newmark_initial_condition_directly(Problem *problem_pt,
-                                                Mesh *mesh_pt,
-                                                TIMESTEPPER *timestepper_pt,
-                                                SolidInitialCondition *ic_pt,
-                                                const double &dt);
+    void set_newmark_initial_condition_directly(Problem* problem_pt,
+                                                Mesh* mesh_pt,
+                                                TIMESTEPPER* timestepper_pt,
+                                                SolidInitialCondition* ic_pt,
+                                                const double& dt);
 
     /// \short Setup initial condition for time-integration
     /// with Newmark's method. Past displacements and velocities are assigned
@@ -163,17 +163,17 @@ namespace oomph
     /// for a non-dimensionalisation based on the problem's intrinsic timescale.
     template<class TIMESTEPPER>
     void set_newmark_initial_condition_consistently(
-      Problem *problem_pt,
-      Mesh *mesh_pt,
-      TIMESTEPPER *timestepper_pt,
-      SolidInitialCondition *ic_pt,
-      const double &dt,
+      Problem* problem_pt,
+      Mesh* mesh_pt,
+      TIMESTEPPER* timestepper_pt,
+      SolidInitialCondition* ic_pt,
+      const double& dt,
       SolidFiniteElement::MultiplierFctPt multiplier_fct_pt = 0);
 
     /// \short Max. tolerated residual after application of consistent
     /// Newmark IC. Used to check if we have specified the correct
     /// timescale ratio (non-dim density).
-    double &max_residual_after_consistent_newton_ic()
+    double& max_residual_after_consistent_newton_ic()
     {
       return Max_residual_after_consistent_newton_ic;
     }
@@ -190,13 +190,13 @@ namespace oomph
     void setup_problem();
 
     /// Pointer to initial condition object
-    SolidInitialCondition *IC_pt;
+    SolidInitialCondition* IC_pt;
 
     /// Vector to store pinned status of all data
     Vector<int> Backup_pinned;
 
     /// Vector of Vectors  to store pointers to exernal data in the elements
-    Vector<Vector<Data *>> Backup_ext_data;
+    Vector<Vector<Data*>> Backup_ext_data;
 
     /// \short Max. tolerated residual after application of consistent
     /// Newmark IC. Used to check if we have specified the correct
@@ -212,11 +212,11 @@ namespace oomph
   //======================================================================
   template<class TIMESTEPPER>
   void SolidICProblem::set_newmark_initial_condition_directly(
-    Problem *problem_pt,
-    Mesh *wall_mesh_pt,
-    TIMESTEPPER *timestepper_pt,
-    SolidInitialCondition *ic_pt,
-    const double &dt)
+    Problem* problem_pt,
+    Mesh* wall_mesh_pt,
+    TIMESTEPPER* timestepper_pt,
+    SolidInitialCondition* ic_pt,
+    const double& dt)
   {
 #ifdef PARANOID
     if (timestepper_pt->type() != "Newmark")
@@ -287,7 +287,7 @@ namespace oomph
         // position
         timestepper_pt->assign_initial_data_values_stage1(
           t_deriv,
-          dynamic_cast<SolidNode *>(mesh_pt()->node_pt(n))
+          dynamic_cast<SolidNode*>(mesh_pt()->node_pt(n))
             ->variable_position_pt());
       }
     }
@@ -315,7 +315,7 @@ namespace oomph
     for (unsigned n = 0; n < n_node; n++)
     {
       timestepper_pt->assign_initial_data_values_stage2(
-        dynamic_cast<SolidNode *>(mesh_pt()->node_pt(n))
+        dynamic_cast<SolidNode*>(mesh_pt()->node_pt(n))
           ->variable_position_pt());
     }
 
@@ -353,11 +353,11 @@ namespace oomph
   //======================================================================
   template<class TIMESTEPPER>
   void SolidICProblem::set_newmark_initial_condition_consistently(
-    Problem *problem_pt,
-    Mesh *wall_mesh_pt,
-    TIMESTEPPER *timestepper_pt,
-    SolidInitialCondition *ic_pt,
-    const double &dt,
+    Problem* problem_pt,
+    Mesh* wall_mesh_pt,
+    TIMESTEPPER* timestepper_pt,
+    SolidInitialCondition* ic_pt,
+    const double& dt,
     SolidFiniteElement::MultiplierFctPt multiplier_fct_pt)
   {
 #ifdef PARANOID
@@ -442,9 +442,8 @@ namespace oomph
       for (unsigned n = 0; n < n_node; n++)
       {
         // Get the variable position data
-        Data *position_data_pt =
-          dynamic_cast<SolidNode *>(mesh_pt()->node_pt(n))
-            ->variable_position_pt();
+        Data* position_data_pt = dynamic_cast<SolidNode*>(mesh_pt()->node_pt(n))
+                                   ->variable_position_pt();
         // Get number of values
         unsigned nval = position_data_pt->nvalue();
 
@@ -484,8 +483,8 @@ namespace oomph
     for (unsigned n = 0; n < n_node; n++)
     {
       // Get the position data
-      Data *position_data_pt = dynamic_cast<SolidNode *>(mesh_pt()->node_pt(n))
-                                 ->variable_position_pt();
+      Data* position_data_pt =
+        dynamic_cast<SolidNode*>(mesh_pt()->node_pt(n))->variable_position_pt();
 
       // Get number of values
       unsigned nval = position_data_pt->nvalue();
@@ -525,8 +524,8 @@ namespace oomph
     for (unsigned i = 0; i < Nelement; i++)
     {
       // Cast to proper element type
-      SolidFiniteElement *elem_pt =
-        dynamic_cast<SolidFiniteElement *>(mesh_pt()->element_pt(i));
+      SolidFiniteElement* elem_pt =
+        dynamic_cast<SolidFiniteElement*>(mesh_pt()->element_pt(i));
 
       // Switch system to the one that determines the Newmark accelerations
       // by setting the Jacobian to the mass matrix
@@ -543,8 +542,8 @@ namespace oomph
     DoubleVector correction;
 
     /// Pointer to member type solver
-    typedef void (LinearSolver::*SolverMemPtr)(Problem *const &problem,
-                                               DoubleVector &result);
+    typedef void (LinearSolver::*SolverMemPtr)(Problem* const& problem,
+                                               DoubleVector& result);
     SolverMemPtr solver_mem_pt = &LinearSolver::solve;
 
     // Now do the linear solve
@@ -557,8 +556,8 @@ namespace oomph
     for (unsigned n = 0; n < n_node; n++)
     {
       // Get the pointer to the position data
-      Data *position_data_pt = dynamic_cast<SolidNode *>(mesh_pt()->node_pt(n))
-                                 ->variable_position_pt();
+      Data* position_data_pt =
+        dynamic_cast<SolidNode*>(mesh_pt()->node_pt(n))->variable_position_pt();
 
       // Get number of values
       unsigned nval = position_data_pt->nvalue();

@@ -79,9 +79,9 @@ class FlowAroundHalfCylinderProblem : public Problem
 public:
   /// Constructor: Pass geometric object that represents
   /// central cylinder, and length and height of domain.
-  FlowAroundHalfCylinderProblem(GeomObject *cylinder_pt,
-                                const double &radius,
-                                const double &length);
+  FlowAroundHalfCylinderProblem(GeomObject* cylinder_pt,
+                                const double& radius,
+                                const double& length);
 
   /// Update the problem specs after solve (empty)
   void actions_after_newton_solve() {}
@@ -177,16 +177,16 @@ public:
   } // end_of_actions_after_adapt
 
   /// Access function for the specific mesh
-  RefineableHalfRectangleWithHoleMesh<NST_ELEMENT> *nst_mesh_pt()
+  RefineableHalfRectangleWithHoleMesh<NST_ELEMENT>* nst_mesh_pt()
   {
-    return dynamic_cast<RefineableHalfRectangleWithHoleMesh<NST_ELEMENT> *>(
+    return dynamic_cast<RefineableHalfRectangleWithHoleMesh<NST_ELEMENT>*>(
       Nst_mesh_pt);
   }
 
   /// Access function for the specific mesh
-  RefineableHalfRectangleWithHoleMesh<AD_ELEMENT> *adv_diff_mesh_pt()
+  RefineableHalfRectangleWithHoleMesh<AD_ELEMENT>* adv_diff_mesh_pt()
   {
-    return dynamic_cast<RefineableHalfRectangleWithHoleMesh<AD_ELEMENT> *>(
+    return dynamic_cast<RefineableHalfRectangleWithHoleMesh<AD_ELEMENT>*>(
       Adv_diff_mesh_pt);
   }
 
@@ -198,10 +198,10 @@ private:
   double Domain_length;
 
   /// Navier Stokes mesh
-  RefineableQuadMesh<NST_ELEMENT> *Nst_mesh_pt;
+  RefineableQuadMesh<NST_ELEMENT>* Nst_mesh_pt;
 
   /// Advection diffusion mesh
-  RefineableQuadMesh<AD_ELEMENT> *Adv_diff_mesh_pt;
+  RefineableQuadMesh<AD_ELEMENT>* Adv_diff_mesh_pt;
 };
 
 //========================================================================
@@ -209,9 +209,9 @@ private:
 //========================================================================
 template<class NST_ELEMENT, class AD_ELEMENT>
 FlowAroundHalfCylinderProblem<NST_ELEMENT, AD_ELEMENT>::
-  FlowAroundHalfCylinderProblem(GeomObject *cylinder_pt,
-                                const double &radius,
-                                const double &length)
+  FlowAroundHalfCylinderProblem(GeomObject* cylinder_pt,
+                                const double& radius,
+                                const double& length)
 {
   Domain_radius = radius;
   Domain_length = length;
@@ -283,8 +283,8 @@ FlowAroundHalfCylinderProblem<NST_ELEMENT, AD_ELEMENT>::
   unsigned n_nst_elem = nst_mesh_pt()->nelement();
   for (unsigned e = 0; e < n_nst_elem; e++)
   {
-    NST_ELEMENT *el_pt =
-      dynamic_cast<NST_ELEMENT *>(nst_mesh_pt()->element_pt(e));
+    NST_ELEMENT* el_pt =
+      dynamic_cast<NST_ELEMENT*>(nst_mesh_pt()->element_pt(e));
 
     // Set the Reynolds number (1/Pr in our non-dimensionalisation)
     el_pt->re_pt() = &Global_Parameters::Re;
@@ -308,8 +308,8 @@ FlowAroundHalfCylinderProblem<NST_ELEMENT, AD_ELEMENT>::
   unsigned n_ad_elem = adv_diff_mesh_pt()->nelement();
   for (unsigned e = 0; e < n_ad_elem; e++)
   {
-    AD_ELEMENT *el_pt =
-      dynamic_cast<AD_ELEMENT *>(adv_diff_mesh_pt()->element_pt(e));
+    AD_ELEMENT* el_pt =
+      dynamic_cast<AD_ELEMENT*>(adv_diff_mesh_pt()->element_pt(e));
 
     // Set the Peclet number
     el_pt->pe_pt() = &Global_Parameters::Pe;
@@ -427,7 +427,7 @@ int main()
   Global_Parameters::Sphere_centre_z = 50.0;
 
   // Create a new ellipse object as the central cylinder
-  HalfEllipse *cylinder_pt =
+  HalfEllipse* cylinder_pt =
     new HalfEllipse(Global_Parameters::Sphere_centre_z, 0.5, 0.5);
 
   // Create Problem

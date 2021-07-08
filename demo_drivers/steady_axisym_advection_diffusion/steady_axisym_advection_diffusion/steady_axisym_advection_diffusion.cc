@@ -65,21 +65,21 @@ namespace TanhSolnForSteadyAxisymAdvectionDiffusion
   double K_Alpha = 1.0;
 
   /// Exact solution as a Vector
-  void get_exact_u(const Vector<double> &x, Vector<double> &u)
+  void get_exact_u(const Vector<double>& x, Vector<double>& u)
   {
     double f_rz = 1.0 - (TanPhi * pow(x[0], 2.0) - Omega * x[1]);
     u[0] = tanh(f_rz);
   }
 
   /// Exact solution as a scalar
-  void get_exact_u(const Vector<double> &x, double &u)
+  void get_exact_u(const Vector<double>& x, double& u)
   {
     double f_rz = 1.0 - (TanPhi * pow(x[0], 2.0) - Omega * x[1]);
     u = tanh(f_rz);
   }
 
   /// Source function required to make the solution above an exact solution
-  void source_function(const Vector<double> &x_vect, double &source)
+  void source_function(const Vector<double>& x_vect, double& source)
   {
     double r = x_vect[0];
     double z = x_vect[1];
@@ -94,8 +94,8 @@ namespace TanhSolnForSteadyAxisymAdvectionDiffusion
   }
 
   /// Beta required by the exact solution on a boundary on which r is fixed
-  void prescribed_beta_on_fixed_r_boundary(const Vector<double> &x_vect,
-                                           double &beta)
+  void prescribed_beta_on_fixed_r_boundary(const Vector<double>& x_vect,
+                                           double& beta)
   {
     double r = x_vect[0];
     double z = x_vect[1];
@@ -111,8 +111,8 @@ namespace TanhSolnForSteadyAxisymAdvectionDiffusion
   }
 
   /// Alfa required by the exact solution on a boundary on which r is fixed
-  void prescribed_alpha_on_fixed_r_boundary(const Vector<double> &x_vect,
-                                            double &alpha)
+  void prescribed_alpha_on_fixed_r_boundary(const Vector<double>& x_vect,
+                                            double& alpha)
   {
     double r = x_vect[0];
     double z = x_vect[1];
@@ -126,7 +126,7 @@ namespace TanhSolnForSteadyAxisymAdvectionDiffusion
   }
 
   /// Wind
-  void wind_function(const Vector<double> &x, Vector<double> &wind)
+  void wind_function(const Vector<double>& x, Vector<double>& wind)
   {
     double r = x[0];
     double z = x[1];
@@ -160,7 +160,7 @@ public:
   ~TwoMeshFluxSteadyAxisymAdvectionDiffusionProblem() {}
 
   /// \short Doc the solution.
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 private:
   /// \short Update the problem specs before solve: Reset boundary conditions
@@ -173,19 +173,19 @@ private:
   /// \short Create Axisymmetric Advection Diffusion flux elements on boundary b
   /// of the Mesh pointed to by bulk_mesh_pt and add them to the Mesh object
   /// pointed to by surface_mesh_pt
-  void create_flux_elements(const unsigned &b,
-                            Mesh *const &bulk_mesh_pt,
-                            Mesh *const &surface_mesh_pt);
+  void create_flux_elements(const unsigned& b,
+                            Mesh* const& bulk_mesh_pt,
+                            Mesh* const& surface_mesh_pt);
 
   /// \short Delete Axisymmetric Advection Diffusion flux elements and wipe the
   /// surface mesh
-  void delete_flux_elements(Mesh *const &surface_mesh_pt);
+  void delete_flux_elements(Mesh* const& surface_mesh_pt);
 
   /// Pointer to the "bulk" mesh
-  RectangularQuadMesh<ELEMENT> *Bulk_mesh_pt;
+  RectangularQuadMesh<ELEMENT>* Bulk_mesh_pt;
 
   /// Pointer to the "surface" mesh
-  Mesh *Surface_mesh_pt;
+  Mesh* Surface_mesh_pt;
 
   /// Pointer to source function
   SteadyAxisymAdvectionDiffusionEquations::
@@ -301,7 +301,7 @@ TwoMeshFluxSteadyAxisymAdvectionDiffusionProblem<ELEMENT>::
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(i));
 
     // Set the source function pointer
     el_pt->source_fct_pt() = Source_fct_pt;
@@ -318,8 +318,8 @@ TwoMeshFluxSteadyAxisymAdvectionDiffusionProblem<ELEMENT>::
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to AdvectionDiffusion flux element
-    SteadyAxisymAdvectionDiffusionFluxElement<ELEMENT> *el_pt =
-      dynamic_cast<SteadyAxisymAdvectionDiffusionFluxElement<ELEMENT> *>(
+    SteadyAxisymAdvectionDiffusionFluxElement<ELEMENT>* el_pt =
+      dynamic_cast<SteadyAxisymAdvectionDiffusionFluxElement<ELEMENT>*>(
         Surface_mesh_pt->element_pt(e));
 
     // Set the pointer to the prescribed beta function
@@ -359,7 +359,7 @@ void TwoMeshFluxSteadyAxisymAdvectionDiffusionProblem<
       for (unsigned inod = 0; inod < num_nod; inod++)
       {
         // Get pointer to node
-        Node *nod_pt = Bulk_mesh_pt->boundary_node_pt(ibound, inod);
+        Node* nod_pt = Bulk_mesh_pt->boundary_node_pt(ibound, inod);
 
         // Extract nodal coordinates from node:
         Vector<double> x(2);
@@ -382,7 +382,7 @@ void TwoMeshFluxSteadyAxisymAdvectionDiffusionProblem<
 //========================================================================
 template<class ELEMENT>
 void TwoMeshFluxSteadyAxisymAdvectionDiffusionProblem<ELEMENT>::doc_solution(
-  DocInfo &doc_info)
+  DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -437,9 +437,9 @@ void TwoMeshFluxSteadyAxisymAdvectionDiffusionProblem<ELEMENT>::doc_solution(
 //=======================================================================
 template<class ELEMENT>
 void TwoMeshFluxSteadyAxisymAdvectionDiffusionProblem<
-  ELEMENT>::create_flux_elements(const unsigned &b,
-                                 Mesh *const &bulk_mesh_pt,
-                                 Mesh *const &surface_mesh_pt)
+  ELEMENT>::create_flux_elements(const unsigned& b,
+                                 Mesh* const& bulk_mesh_pt,
+                                 Mesh* const& surface_mesh_pt)
 {
   // How many bulk elements are adjacent to boundary b?
   unsigned n_element = bulk_mesh_pt->nboundary_element(b);
@@ -448,14 +448,14 @@ void TwoMeshFluxSteadyAxisymAdvectionDiffusionProblem<
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    ELEMENT *bulk_elem_pt =
-      dynamic_cast<ELEMENT *>(bulk_mesh_pt->boundary_element_pt(b, e));
+    ELEMENT* bulk_elem_pt =
+      dynamic_cast<ELEMENT*>(bulk_mesh_pt->boundary_element_pt(b, e));
 
     // Find the index of the face of element e along boundary b
     int face_index = bulk_mesh_pt->face_index_at_boundary(b, e);
 
     // Build the corresponding prescribed-flux element
-    SteadyAxisymAdvectionDiffusionFluxElement<ELEMENT> *flux_element_pt =
+    SteadyAxisymAdvectionDiffusionFluxElement<ELEMENT>* flux_element_pt =
       new SteadyAxisymAdvectionDiffusionFluxElement<ELEMENT>(bulk_elem_pt,
                                                              face_index);
 
@@ -471,7 +471,7 @@ void TwoMeshFluxSteadyAxisymAdvectionDiffusionProblem<
 //=======================================================================
 template<class ELEMENT>
 void TwoMeshFluxSteadyAxisymAdvectionDiffusionProblem<
-  ELEMENT>::delete_flux_elements(Mesh *const &surface_mesh_pt)
+  ELEMENT>::delete_flux_elements(Mesh* const& surface_mesh_pt)
 {
   // How many surface elements are in the surface mesh
   unsigned n_element = surface_mesh_pt->nelement();

@@ -46,13 +46,13 @@ namespace oomph
   //===========================================================================
   template<class ELEMENT>
   SingleLayerCubicSpineMesh<ELEMENT>::SingleLayerCubicSpineMesh(
-    const unsigned &nx,
-    const unsigned &ny,
-    const unsigned &nz,
-    const double &lx,
-    const double &ly,
-    const double &h,
-    TimeStepper *time_stepper_pt) :
+    const unsigned& nx,
+    const unsigned& ny,
+    const unsigned& nz,
+    const double& lx,
+    const double& ly,
+    const double& h,
+    TimeStepper* time_stepper_pt) :
     SimpleCubicMesh<ELEMENT>(nx, ny, nz, lx, ly, h, time_stepper_pt)
   {
     // Mesh can only be built with 3D Qelements.
@@ -71,7 +71,7 @@ namespace oomph
   //===========================================================================
   template<class ELEMENT>
   void SingleLayerCubicSpineMesh<ELEMENT>::build_single_layer_mesh(
-    TimeStepper *time_stepper_pt)
+    TimeStepper* time_stepper_pt)
   {
     // Read out the number of elements in the x-direction
     unsigned n_x = this->Nx;
@@ -83,7 +83,7 @@ namespace oomph
     // Allocate memory for the spines and fractions along spines
 
     // Read out number of linear points in the element
-    unsigned n_p = dynamic_cast<ELEMENT *>(finite_element_pt(0))->nnode_1d();
+    unsigned n_p = dynamic_cast<ELEMENT*>(finite_element_pt(0))->nnode_1d();
 
     // Allocate store for the spines: (different in the case of periodic meshes
     // !!)
@@ -98,11 +98,11 @@ namespace oomph
       for (unsigned l2 = 0; l2 < n_p; l2++) // x loop over the nodes
       {
         // Assign the new spine with length h
-        Spine *new_spine_pt = new Spine(1.0);
+        Spine* new_spine_pt = new Spine(1.0);
         Spine_pt.push_back(new_spine_pt);
 
         // Get pointer to node
-        SpineNode *nod_pt = element_node_pt(0, l2 + l1 * n_p);
+        SpineNode* nod_pt = element_node_pt(0, l2 + l1 * n_p);
         // Set the pointer to the spine
         nod_pt->spine_pt() = new_spine_pt;
         // Set the fraction
@@ -118,7 +118,7 @@ namespace oomph
           for (unsigned l3 = 1; l3 < n_p; l3++)
           {
             // Get pointer to node
-            SpineNode *nod_pt =
+            SpineNode* nod_pt =
               element_node_pt(k * n_x * n_y, l3 * n_p * n_p + l2 + l1 * n_p);
             // Set the pointer to the spine
             nod_pt->spine_pt() = new_spine_pt;
@@ -149,11 +149,11 @@ namespace oomph
         {
           // Node j + i*np
           // Assign the new spine with unit length
-          Spine *new_spine_pt = new Spine(1.0);
+          Spine* new_spine_pt = new Spine(1.0);
           Spine_pt.push_back(new_spine_pt);
 
           // Get pointer to node
-          SpineNode *nod_pt = element_node_pt(j, l2 + l1 * n_p);
+          SpineNode* nod_pt = element_node_pt(j, l2 + l1 * n_p);
 
           // Set the pointer to the spine
           nod_pt->spine_pt() = new_spine_pt;
@@ -170,7 +170,7 @@ namespace oomph
             for (unsigned l3 = 1; l3 < n_p; l3++)
             {
               // Get pointer to node
-              SpineNode *nod_pt = element_node_pt(
+              SpineNode* nod_pt = element_node_pt(
                 j + k * n_x * n_y, l3 * n_p * n_p + l2 + l1 * n_p);
               // Set the pointer to the spine
               nod_pt->spine_pt() = new_spine_pt;
@@ -199,12 +199,12 @@ namespace oomph
         {
           // Node j + i*np
           // Assign the new spine with unit length
-          Spine *new_spine_pt = new Spine(1.0);
+          Spine* new_spine_pt = new Spine(1.0);
           Spine_pt.push_back(new_spine_pt);
 
           // Get pointer to node
           // Element i*n_x; node l2 + l1*n_p
-          SpineNode *nod_pt = element_node_pt(i * n_x, l2 + l1 * n_p);
+          SpineNode* nod_pt = element_node_pt(i * n_x, l2 + l1 * n_p);
           // Set the pointer to the spine
           nod_pt->spine_pt() = new_spine_pt;
           // Set the fraction
@@ -220,7 +220,7 @@ namespace oomph
             for (unsigned l3 = 1; l3 < n_p; l3++)
             {
               // Get pointer to node
-              SpineNode *nod_pt = element_node_pt(
+              SpineNode* nod_pt = element_node_pt(
                 i * n_x + k * n_x * n_y, l3 * n_p * n_p + l2 + l1 * n_p);
               // Set the pointer to the spine
               nod_pt->spine_pt() = new_spine_pt;
@@ -244,12 +244,12 @@ namespace oomph
           {
             // Node j + i*np
             // Assign the new spine with unit length
-            Spine *new_spine_pt = new Spine(1.0);
+            Spine* new_spine_pt = new Spine(1.0);
             Spine_pt.push_back(new_spine_pt);
 
             // Get pointer to node
             // Element j + i*n_x; node l2 + l1*n_p
-            SpineNode *nod_pt = element_node_pt(j + i * n_x, l2 + l1 * n_p);
+            SpineNode* nod_pt = element_node_pt(j + i * n_x, l2 + l1 * n_p);
             // Set the pointer to the spine
             nod_pt->spine_pt() = new_spine_pt;
             // Set the fraction
@@ -265,7 +265,7 @@ namespace oomph
               for (unsigned l3 = 1; l3 < n_p; l3++)
               {
                 // Get pointer to node
-                SpineNode *nod_pt = element_node_pt(
+                SpineNode* nod_pt = element_node_pt(
                   j + i * n_x + k * n_x * n_y, l3 * n_p * n_p + l2 + l1 * n_p);
                 // Set the pointer to the spine
                 nod_pt->spine_pt() = new_spine_pt;

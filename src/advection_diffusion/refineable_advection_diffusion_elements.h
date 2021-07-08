@@ -71,13 +71,13 @@ namespace oomph
 
     /// Broken copy constructor
     RefineableAdvectionDiffusionEquations(
-      const RefineableAdvectionDiffusionEquations<DIM> &dummy)
+      const RefineableAdvectionDiffusionEquations<DIM>& dummy)
     {
       BrokenCopy::broken_copy("RefineableAdvectionDiffusionEquations");
     }
 
     /// Broken assignment operator
-    void operator=(const RefineableAdvectionDiffusionEquations<DIM> &)
+    void operator=(const RefineableAdvectionDiffusionEquations<DIM>&)
     {
       BrokenCopy::broken_assign("RefineableAdvectionDiffusionEquations");
     }
@@ -90,7 +90,7 @@ namespace oomph
 
     /// \short Get 'flux' for Z2 error recovery:
     /// Standard flux.from AdvectionDiffusion equations
-    void get_Z2_flux(const Vector<double> &s, Vector<double> &flux)
+    void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
       this->get_flux(s, flux);
     }
@@ -99,8 +99,8 @@ namespace oomph
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines), the values Vector sets its own size in here.
-    void get_interpolated_values(const Vector<double> &s,
-                                 Vector<double> &values)
+    void get_interpolated_values(const Vector<double>& s,
+                                 Vector<double>& values)
     {
       // Set size of Vector: u
       values.resize(1);
@@ -131,9 +131,9 @@ namespace oomph
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines), the values Vector sets its own size in here.
-    void get_interpolated_values(const unsigned &t,
-                                 const Vector<double> &s,
-                                 Vector<double> &values)
+    void get_interpolated_values(const unsigned& t,
+                                 const Vector<double>& s,
+                                 Vector<double>& values)
     {
       // Set size of Vector: u
       values.resize(1);
@@ -183,8 +183,8 @@ namespace oomph
     ///  Further build: Copy source function pointer from father element
     void further_build()
     {
-      RefineableAdvectionDiffusionEquations<DIM> *cast_father_element_pt =
-        dynamic_cast<RefineableAdvectionDiffusionEquations<DIM> *>(
+      RefineableAdvectionDiffusionEquations<DIM>* cast_father_element_pt =
+        dynamic_cast<RefineableAdvectionDiffusionEquations<DIM>*>(
           this->father_element_pt());
 
       // Set the values of the pointers from the father
@@ -203,9 +203,9 @@ namespace oomph
     /// equation numbers corresponding to the data.
     /// Overload the non-refineable version to take account of hanging node
     /// information
-    void dinterpolated_u_adv_diff_ddata(const Vector<double> &s,
-                                        Vector<double> &du_ddata,
-                                        Vector<unsigned> &global_eqn_number)
+    void dinterpolated_u_adv_diff_ddata(const Vector<double>& s,
+                                        Vector<double>& du_ddata,
+                                        Vector<unsigned>& global_eqn_number)
     {
       // Find number of nodes
       unsigned n_node = this->nnode();
@@ -218,7 +218,7 @@ namespace oomph
       const unsigned u_nodal_index = this->u_index_adv_diff();
 
       // Storage for hang info pointer
-      HangInfo *hang_info_pt = 0;
+      HangInfo* hang_info_pt = 0;
       // Storage for global equation
       int global_eqn = 0;
 
@@ -341,9 +341,9 @@ namespace oomph
     /// flag=1: compute both
     /// flag=0: compute only residual vector
     void fill_in_generic_residual_contribution_adv_diff(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix,
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
       unsigned flag);
   };
 
@@ -370,13 +370,13 @@ namespace oomph
 
     /// Broken copy constructor
     RefineableQAdvectionDiffusionElement(
-      const RefineableQAdvectionDiffusionElement<DIM, NNODE_1D> &dummy)
+      const RefineableQAdvectionDiffusionElement<DIM, NNODE_1D>& dummy)
     {
       BrokenCopy::broken_copy("RefineableQuadAdvectionDiffusionElement");
     }
 
     /// Broken assignment operator
-    void operator=(const RefineableQAdvectionDiffusionElement<DIM, NNODE_1D> &)
+    void operator=(const RefineableQAdvectionDiffusionElement<DIM, NNODE_1D>&)
     {
       BrokenCopy::broken_assign("RefineableQuadAdvectionDiffusionElement");
     }
@@ -394,13 +394,13 @@ namespace oomph
     }
 
     /// \short Pointer to the j-th vertex node in the element
-    Node *vertex_node_pt(const unsigned &j) const
+    Node* vertex_node_pt(const unsigned& j) const
     {
       return QAdvectionDiffusionElement<DIM, NNODE_1D>::vertex_node_pt(j);
     }
 
     /// Rebuild from sons: empty
-    void rebuild_from_sons(Mesh *&mesh_pt) {}
+    void rebuild_from_sons(Mesh*& mesh_pt) {}
 
     /// \short Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.

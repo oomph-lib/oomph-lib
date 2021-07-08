@@ -63,10 +63,10 @@ namespace Global_Physical_Variables
   //   {return (*Pext_data_pt->value_pt(0))*pow(0.05,3)/12.0;}
 
   /// Load function, normal pressure loading
-  void press_load(const Vector<double> &xi,
-                  const Vector<double> &x,
-                  const Vector<double> &N,
-                  Vector<double> &load)
+  void press_load(const Vector<double>& xi,
+                  const Vector<double>& x,
+                  const Vector<double>& N,
+                  Vector<double>& load)
   {
     for (unsigned i = 0; i < 3; i++)
     {
@@ -88,15 +88,15 @@ class ShellProblem : public Problem
 {
 public:
   /// Constructor
-  ShellProblem(const unsigned &nx,
-               const unsigned &ny,
-               const double &lx,
-               const double &ly);
+  ShellProblem(const unsigned& nx,
+               const unsigned& ny,
+               const double& lx,
+               const double& ly);
 
   /// Overload Access function for the mesh
-  CircularCylindricalShellMesh<ELEMENT> *mesh_pt()
+  CircularCylindricalShellMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<CircularCylindricalShellMesh<ELEMENT> *>(
+    return dynamic_cast<CircularCylindricalShellMesh<ELEMENT>*>(
       Problem::mesh_pt());
   }
 
@@ -113,17 +113,17 @@ public:
   void run_it();
 
   /// Doc solution
-  void doc_solution(DocInfo &doc_info, ofstream &trace_file);
+  void doc_solution(DocInfo& doc_info, ofstream& trace_file);
 
 private:
   /// Pointer to GeomObject that specifies the undeformed midplane
-  GeomObject *Undeformed_midplane_pt;
+  GeomObject* Undeformed_midplane_pt;
 
   /// First trace node
-  Node *Trace_node_pt;
+  Node* Trace_node_pt;
 
   /// Second trace node
-  Node *Trace_node2_pt;
+  Node* Trace_node2_pt;
 
   /// Number of shell elements
   unsigned Nshell;
@@ -133,10 +133,10 @@ private:
 /// Constructor
 //======================================================================
 template<class ELEMENT>
-ShellProblem<ELEMENT>::ShellProblem(const unsigned &nx,
-                                    const unsigned &ny,
-                                    const double &lx,
-                                    const double &ly)
+ShellProblem<ELEMENT>::ShellProblem(const unsigned& nx,
+                                    const unsigned& ny,
+                                    const double& lx,
+                                    const double& ly)
 {
   // Create the timestepper and add it to the Problem's collection of
   // timesteppers -- this creates the Problem's Time object.
@@ -319,8 +319,8 @@ ShellProblem<ELEMENT>::ShellProblem(const unsigned &nx,
   }
 
   // Controlled element
-  SolidFiniteElement *controlled_element_pt =
-    dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(nel_ctrl));
+  SolidFiniteElement* controlled_element_pt =
+    dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(nel_ctrl));
 
   // Doc control point
   Vector<double> xi(2);
@@ -352,13 +352,13 @@ ShellProblem<ELEMENT>::ShellProblem(const unsigned &nx,
   unsigned n_element = nx * ny;
 
   // Explicit pointer to first element in the mesh
-  ELEMENT *first_el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(0));
+  ELEMENT* first_el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(0));
 
   // Loop over the elements
   for (unsigned e = 0; e < n_element; e++)
   {
     // Cast to a shell element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
     // Set the load function
     el_pt->load_vector_fct_pt() = &Global_Physical_Variables::press_load;
@@ -441,8 +441,8 @@ ShellProblem<ELEMENT>::ShellProblem(const unsigned &nx,
 /// Doc solution
 //================================================================
 template<class ELEMENT>
-void ShellProblem<ELEMENT>::doc_solution(DocInfo &doc_info,
-                                         ofstream &trace_file)
+void ShellProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
+                                         ofstream& trace_file)
 {
   ofstream some_file;
   char filename[100];
@@ -454,7 +454,7 @@ void ShellProblem<ELEMENT>::doc_solution(DocInfo &doc_info,
   double pot, kin;
   for (unsigned ielem = 0; ielem < Nshell; ielem++)
   {
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(ielem));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(ielem));
     el_pt->get_energy(pot, kin);
     global_kin += kin;
     global_pot += pot;
@@ -566,7 +566,7 @@ void ShellProblem<ELEMENT>::run_it()
 //====================================================================
 /// Driver
 //====================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

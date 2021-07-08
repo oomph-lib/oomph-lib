@@ -58,7 +58,7 @@ namespace oomph
     virtual ~StrainEnergyFunction() {}
 
     /// Return the strain energy in terms of the strain tensor
-    virtual double W(const DenseMatrix<double> &gamma)
+    virtual double W(const DenseMatrix<double>& gamma)
     {
       std::string error_message =
         "The strain-energy function as a function of the strain-tensor,\n";
@@ -71,7 +71,7 @@ namespace oomph
     }
 
     /// Return the strain energy in terms of the strain invariants
-    virtual double W(const Vector<double> &I)
+    virtual double W(const Vector<double>& I)
     {
       std::string error_message =
         "The strain-energy function as a function of the strain\n ";
@@ -87,8 +87,8 @@ namespace oomph
     /// \short Return the derivatives of the strain energy function with
     /// respect to the components of the strain tensor (default is to use
     /// finite differences).
-    virtual void derivative(const DenseMatrix<double> &gamma,
-                            DenseMatrix<double> &dWdgamma)
+    virtual void derivative(const DenseMatrix<double>& gamma,
+                            DenseMatrix<double>& dWdgamma)
     {
       throw OomphLibError(
         "Sorry, the FD setup of dW/dgamma hasn't been implemented yet",
@@ -99,7 +99,7 @@ namespace oomph
     /// \short Return the derivatives of the strain energy function with
     /// respect to the strain invariants. Default version is to use finite
     /// differences
-    virtual void derivatives(Vector<double> &I, Vector<double> &dWdI)
+    virtual void derivatives(Vector<double>& I, Vector<double>& dWdI)
     {
       // Calculate the derivatives of the strain-energy-function wrt the strain
       // invariants
@@ -145,7 +145,7 @@ namespace oomph
   {
   public:
     /// Constructor takes the pointer to the value of the constants
-    MooneyRivlin(double *c1_pt, double *c2_pt) :
+    MooneyRivlin(double* c1_pt, double* c2_pt) :
       StrainEnergyFunction(), C1_pt(c1_pt), C2_pt(c2_pt)
     {
     }
@@ -154,20 +154,20 @@ namespace oomph
     virtual ~MooneyRivlin() {}
 
     /// Return the strain energy in terms of strain tensor
-    double W(const DenseMatrix<double> &gamma)
+    double W(const DenseMatrix<double>& gamma)
     {
       return StrainEnergyFunction::W(gamma);
     }
 
     /// Return the strain energy in terms of the strain invariants
-    double W(const Vector<double> &I)
+    double W(const Vector<double>& I)
     {
       return (*C1_pt) * (I[0] - 3.0) + (*C2_pt) * (I[1] - 3.0);
     }
 
     /// \short Return the derivatives of the strain energy function with
     /// respect to the strain invariants
-    void derivatives(Vector<double> &I, Vector<double> &dWdI)
+    void derivatives(Vector<double>& I, Vector<double>& dWdI)
     {
       dWdI[0] = (*C1_pt);
       dWdI[1] = (*C2_pt);
@@ -185,10 +185,10 @@ namespace oomph
 
   private:
     /// Pointer to first Mooney Rivlin constant
-    double *C1_pt;
+    double* C1_pt;
 
     /// Pointer to second Mooney Rivlin constant
-    double *C2_pt;
+    double* C2_pt;
   };
 
   ////////////////////////////////////////////////////////////////////
@@ -213,7 +213,7 @@ namespace oomph
     /// \short Constructor takes the pointers to the constitutive parameters:
     /// Poisson's ratio, the Mooney-Rivlin parameter. Young's modulus is set
     /// to 1, implying that it has been used to scale the stresses
-    GeneralisedMooneyRivlin(double *nu_pt, double *c1_pt) :
+    GeneralisedMooneyRivlin(double* nu_pt, double* c1_pt) :
       StrainEnergyFunction(),
       Nu_pt(nu_pt),
       C1_pt(c1_pt),
@@ -224,7 +224,7 @@ namespace oomph
 
     /// \short Constructor takes the pointers to the constitutive parameters:
     /// Poisson's ratio, the Mooney-Rivlin parameter and Young's modulus
-    GeneralisedMooneyRivlin(double *nu_pt, double *c1_pt, double *e_pt) :
+    GeneralisedMooneyRivlin(double* nu_pt, double* c1_pt, double* e_pt) :
       StrainEnergyFunction(),
       Nu_pt(nu_pt),
       C1_pt(c1_pt),
@@ -240,13 +240,13 @@ namespace oomph
     }
 
     /// Return the strain energy in terms of strain tensor
-    double W(const DenseMatrix<double> &gamma)
+    double W(const DenseMatrix<double>& gamma)
     {
       return StrainEnergyFunction::W(gamma);
     }
 
     /// Return the strain energy in terms of the strain invariants
-    double W(const Vector<double> &I)
+    double W(const Vector<double>& I)
     {
       double G = (*E_pt) / (2.0 * (1.0 + (*Nu_pt)));
       return 0.5 * ((*C1_pt) * (I[0] - 3.0) + (G - (*C1_pt)) * (I[1] - 3.0) +
@@ -257,7 +257,7 @@ namespace oomph
 
     /// \short Return the derivatives of the strain energy function with
     /// respect to the strain invariants
-    void derivatives(Vector<double> &I, Vector<double> &dWdI)
+    void derivatives(Vector<double>& I, Vector<double>& dWdI)
     {
       double G = (*E_pt) / (2.0 * (1.0 + (*Nu_pt)));
       dWdI[0] = 0.5 * (*C1_pt);
@@ -278,13 +278,13 @@ namespace oomph
 
   private:
     /// Poisson's ratio
-    double *Nu_pt;
+    double* Nu_pt;
 
     /// Mooney-Rivlin parameter
-    double *C1_pt;
+    double* C1_pt;
 
     /// Young's modulus
-    double *E_pt;
+    double* E_pt;
 
     /// \short Boolean flag to indicate if storage for elastic modulus
     /// must be deleted in destructor
@@ -477,29 +477,29 @@ namespace oomph
   {
   protected:
     /// \short Test whether a matrix is square
-    bool is_matrix_square(const DenseMatrix<double> &M);
+    bool is_matrix_square(const DenseMatrix<double>& M);
 
     /// \short Test whether two matrices are of equal dimensions
-    bool are_matrices_of_equal_dimensions(const DenseMatrix<double> &M1,
-                                          const DenseMatrix<double> &M2);
+    bool are_matrices_of_equal_dimensions(const DenseMatrix<double>& M1,
+                                          const DenseMatrix<double>& M2);
 
     /// \short Check for errors in the input,
     /// i.e. check that the dimensions of the arrays are all consistent
-    void error_checking_in_input(const DenseMatrix<double> &g,
-                                 const DenseMatrix<double> &G,
-                                 DenseMatrix<double> &sigma);
+    void error_checking_in_input(const DenseMatrix<double>& g,
+                                 const DenseMatrix<double>& G,
+                                 DenseMatrix<double>& sigma);
 
     /// \short Calculate a contravariant tensor from a covariant tensor,
     /// and return the determinant of the covariant tensor.
-    double calculate_contravariant(const DenseMatrix<double> &Gcov,
-                                   DenseMatrix<double> &Gcontra);
+    double calculate_contravariant(const DenseMatrix<double>& Gcov,
+                                   DenseMatrix<double>& Gcontra);
 
     /// \short Calculate the derivatives of the contravariant tensor
     /// and the derivatives of the determinant of the covariant tensor
     /// with respect to the components of the covariant tensor
-    void calculate_d_contravariant_dG(const DenseMatrix<double> &Gcov,
-                                      RankFourTensor<double> &dGcontra_dG,
-                                      DenseMatrix<double> &d_detG_dG);
+    void calculate_d_contravariant_dG(const DenseMatrix<double>& Gcov,
+                                      RankFourTensor<double>& dGcontra_dG,
+                                      DenseMatrix<double>& d_detG_dG);
 
   public:
     /// Empty constructor
@@ -513,9 +513,9 @@ namespace oomph
     /// covariant undeformed and deformed metric tensor and the
     /// matrix in which to return the stress tensor
     virtual void calculate_second_piola_kirchhoff_stress(
-      const DenseMatrix<double> &g,
-      const DenseMatrix<double> &G,
-      DenseMatrix<double> &sigma) = 0;
+      const DenseMatrix<double>& g,
+      const DenseMatrix<double>& G,
+      DenseMatrix<double>& sigma) = 0;
 
     /// \short Calculate the derivatives of the contravariant
     /// 2nd Piola Kirchhoff stress tensor with respect to the deformed metric
@@ -530,11 +530,11 @@ namespace oomph
     /// "upper  triangular" entries of the tensor will be filled in. This is
     /// a useful efficiency when using the derivatives in Jacobian calculations.
     virtual void calculate_d_second_piola_kirchhoff_stress_dG(
-      const DenseMatrix<double> &g,
-      const DenseMatrix<double> &G,
-      const DenseMatrix<double> &sigma,
-      RankFourTensor<double> &d_sigma_dG,
-      const bool &symmetrize_tensor = true);
+      const DenseMatrix<double>& g,
+      const DenseMatrix<double>& G,
+      const DenseMatrix<double>& sigma,
+      RankFourTensor<double>& d_sigma_dG,
+      const bool& symmetrize_tensor = true);
 
     /// \short Calculate the deviatoric part
     /// \f$ \overline{ \sigma^{ij}}\f$  of the contravariant
@@ -547,11 +547,11 @@ namespace oomph
     /// where the "pressure" \f$ p \f$ is determined by
     /// \f$ \det G_{ij} - \det g_{ij} = 0 \f$.
     virtual void calculate_second_piola_kirchhoff_stress(
-      const DenseMatrix<double> &g,
-      const DenseMatrix<double> &G,
-      DenseMatrix<double> &sigma_dev,
-      DenseMatrix<double> &G_contra,
-      double &Gdet)
+      const DenseMatrix<double>& g,
+      const DenseMatrix<double>& G,
+      DenseMatrix<double>& sigma_dev,
+      DenseMatrix<double>& G_contra,
+      double& Gdet)
     {
       throw OomphLibError(
         "Incompressible formulation not implemented for this constitutive law",
@@ -573,14 +573,14 @@ namespace oomph
     /// "upper  triangular" entries of the tensor will be filled in. This is
     /// a useful efficiency when using the derivatives in Jacobian calculations.
     virtual void calculate_d_second_piola_kirchhoff_stress_dG(
-      const DenseMatrix<double> &g,
-      const DenseMatrix<double> &G,
-      const DenseMatrix<double> &sigma,
-      const double &detG,
-      const double &interpolated_solid_p,
-      RankFourTensor<double> &d_sigma_dG,
-      DenseMatrix<double> &d_detG_dG,
-      const bool &symmetrize_tensor = true);
+      const DenseMatrix<double>& g,
+      const DenseMatrix<double>& G,
+      const DenseMatrix<double>& sigma,
+      const double& detG,
+      const double& interpolated_solid_p,
+      RankFourTensor<double>& d_sigma_dG,
+      DenseMatrix<double>& d_detG_dG,
+      const bool& symmetrize_tensor = true);
 
     /// \short Calculate the deviatoric part of the contravariant
     /// 2nd Piola Kirchoff stress tensor. Also return the contravariant
@@ -591,12 +591,12 @@ namespace oomph
     /// where the "pressure" \f$ p \f$ is determined from
     /// \f$ p / \kappa - d =0 \f$.
     virtual void calculate_second_piola_kirchhoff_stress(
-      const DenseMatrix<double> &g,
-      const DenseMatrix<double> &G,
-      DenseMatrix<double> &sigma_dev,
-      DenseMatrix<double> &Gcontra,
-      double &gen_dil,
-      double &inv_kappa)
+      const DenseMatrix<double>& g,
+      const DenseMatrix<double>& G,
+      DenseMatrix<double>& sigma_dev,
+      DenseMatrix<double>& Gcontra,
+      double& gen_dil,
+      double& inv_kappa)
     {
       throw OomphLibError(
         "Near-incompressible formulation not implemented for constitutive law",
@@ -615,15 +615,15 @@ namespace oomph
     /// "upper  triangular" entries of the tensor will be filled in. This is
     /// a useful efficiency when using the derivatives in Jacobian calculations.
     virtual void calculate_d_second_piola_kirchhoff_stress_dG(
-      const DenseMatrix<double> &g,
-      const DenseMatrix<double> &G,
-      const DenseMatrix<double> &sigma,
-      const double &gen_dil,
-      const double &inv_kappa,
-      const double &interpolated_solid_p,
-      RankFourTensor<double> &d_sigma_dG,
-      DenseMatrix<double> &d_gen_dil_dG,
-      const bool &symmetrize_tensor = true);
+      const DenseMatrix<double>& g,
+      const DenseMatrix<double>& G,
+      const DenseMatrix<double>& sigma,
+      const double& gen_dil,
+      const double& inv_kappa,
+      const double& interpolated_solid_p,
+      RankFourTensor<double>& d_sigma_dG,
+      DenseMatrix<double>& d_gen_dil_dG,
+      const bool& symmetrize_tensor = true);
 
     /// \short Pure virtual function in which the user must declare if the
     /// constitutive equation requires an incompressible formulation
@@ -701,7 +701,7 @@ namespace oomph
   public:
     /// The constructor takes the pointers to values of material parameters:
     /// Poisson's ratio and Young's modulus.
-    GeneralisedHookean(double *nu_pt, double *e_pt) :
+    GeneralisedHookean(double* nu_pt, double* e_pt) :
       ConstitutiveLaw(), Nu_pt(nu_pt), E_pt(e_pt), Must_delete_e(false)
     {
     }
@@ -710,7 +710,7 @@ namespace oomph
     /// Poisson's ratio . Young's modulus is set to E=1.0,
     /// implying that all stresses have been non-dimensionalised
     /// on on it.
-    GeneralisedHookean(double *nu_pt) :
+    GeneralisedHookean(double* nu_pt) :
       ConstitutiveLaw(),
       Nu_pt(nu_pt),
       E_pt(new double(1.0)),
@@ -728,9 +728,9 @@ namespace oomph
     /// stress tensor. Arguments are the
     /// covariant undeformed and deformed metric tensor and the
     /// matrix in which to return the stress tensor
-    void calculate_second_piola_kirchhoff_stress(const DenseMatrix<double> &g,
-                                                 const DenseMatrix<double> &G,
-                                                 DenseMatrix<double> &sigma);
+    void calculate_second_piola_kirchhoff_stress(const DenseMatrix<double>& g,
+                                                 const DenseMatrix<double>& G,
+                                                 DenseMatrix<double>& sigma);
 
     /// \short Calculate the deviatoric part
     /// \f$ \overline{ \sigma^{ij}}\f$  of the contravariant
@@ -742,11 +742,11 @@ namespace oomph
     /// \f$ \sigma^{ij} = - p G^{ij} +\overline{ \sigma^{ij}}  \f$
     /// where the "pressure" \f$ p \f$ is determined by
     /// \f$ \det G_{ij} - \det g_{ij} = 0 \f$.
-    void calculate_second_piola_kirchhoff_stress(const DenseMatrix<double> &g,
-                                                 const DenseMatrix<double> &G,
-                                                 DenseMatrix<double> &sigma_dev,
-                                                 DenseMatrix<double> &G_contra,
-                                                 double &Gdet);
+    void calculate_second_piola_kirchhoff_stress(const DenseMatrix<double>& g,
+                                                 const DenseMatrix<double>& G,
+                                                 DenseMatrix<double>& sigma_dev,
+                                                 DenseMatrix<double>& G_contra,
+                                                 double& Gdet);
 
     /// \short Calculate the deviatoric part of the contravariant
     /// 2nd Piola Kirchoff stress tensor. Also return the contravariant
@@ -756,12 +756,12 @@ namespace oomph
     /// \f$ \sigma^{ij} = -p G^{ij} + \overline{ \sigma^{ij}}  \f$
     /// where the "pressure" \f$ p \f$ is determined from
     /// \f$ p / \kappa - d =0 \f$.
-    void calculate_second_piola_kirchhoff_stress(const DenseMatrix<double> &g,
-                                                 const DenseMatrix<double> &G,
-                                                 DenseMatrix<double> &sigma_dev,
-                                                 DenseMatrix<double> &Gcontra,
-                                                 double &gen_dil,
-                                                 double &inv_kappa);
+    void calculate_second_piola_kirchhoff_stress(const DenseMatrix<double>& g,
+                                                 const DenseMatrix<double>& G,
+                                                 DenseMatrix<double>& sigma_dev,
+                                                 DenseMatrix<double>& Gcontra,
+                                                 double& gen_dil,
+                                                 double& inv_kappa);
 
     /// \short Pure virtual function in which the writer must declare if the
     /// constitutive equation requires an incompressible formulation
@@ -774,10 +774,10 @@ namespace oomph
 
   private:
     /// Poisson ratio
-    double *Nu_pt;
+    double* Nu_pt;
 
     /// Young's modulus
-    double *E_pt;
+    double* E_pt;
 
     /// \short Boolean flag to indicate if storage for elastic modulus
     /// must be deleted in destructor
@@ -796,12 +796,12 @@ namespace oomph
   {
   private:
     /// Pointer to the strain energy function
-    StrainEnergyFunction *Strain_energy_function_pt;
+    StrainEnergyFunction* Strain_energy_function_pt;
 
   public:
     /// Constructor takes a pointer to the strain energy function
     IsotropicStrainEnergyFunctionConstitutiveLaw(
-      StrainEnergyFunction *const &strain_energy_function_pt) :
+      StrainEnergyFunction* const& strain_energy_function_pt) :
       ConstitutiveLaw(), Strain_energy_function_pt(strain_energy_function_pt)
     {
     }
@@ -811,9 +811,9 @@ namespace oomph
     /// covariant undeformed and deformed metric tensor and the
     /// matrix in which to return the stress tensor.
     /// Uses correct 3D invariants for 2D (plane strain) problems.
-    void calculate_second_piola_kirchhoff_stress(const DenseMatrix<double> &g,
-                                                 const DenseMatrix<double> &G,
-                                                 DenseMatrix<double> &sigma);
+    void calculate_second_piola_kirchhoff_stress(const DenseMatrix<double>& g,
+                                                 const DenseMatrix<double>& G,
+                                                 DenseMatrix<double>& sigma);
 
     /// \short Calculate the deviatoric part
     /// \f$ \overline{ \sigma^{ij}}\f$  of the contravariant
@@ -825,11 +825,11 @@ namespace oomph
     /// \f$ \sigma^{ij} = - p G^{ij} +\overline{ \sigma^{ij}}  \f$
     /// where the "pressure" \f$ p \f$ is determined by
     /// \f$ \det G_{ij} - \det g_{ij} = 0 \f$.
-    void calculate_second_piola_kirchhoff_stress(const DenseMatrix<double> &g,
-                                                 const DenseMatrix<double> &G,
-                                                 DenseMatrix<double> &sigma_dev,
-                                                 DenseMatrix<double> &G_contra,
-                                                 double &Gdet);
+    void calculate_second_piola_kirchhoff_stress(const DenseMatrix<double>& g,
+                                                 const DenseMatrix<double>& G,
+                                                 DenseMatrix<double>& sigma_dev,
+                                                 DenseMatrix<double>& G_contra,
+                                                 double& Gdet);
 
     /// \short Calculate the deviatoric part of the contravariant
     /// 2nd Piola Kirchoff stress tensor. Also return the contravariant
@@ -839,12 +839,12 @@ namespace oomph
     /// \f$ \sigma^{ij} = -p G^{ij} + \overline{ \sigma^{ij}}  \f$
     /// where the "pressure" \f$ p \f$ is determined from
     /// \f$ p / \kappa - d =0 \f$.
-    void calculate_second_piola_kirchhoff_stress(const DenseMatrix<double> &g,
-                                                 const DenseMatrix<double> &G,
-                                                 DenseMatrix<double> &sigma_dev,
-                                                 DenseMatrix<double> &Gcontra,
-                                                 double &gen_dil,
-                                                 double &inv_kappa);
+    void calculate_second_piola_kirchhoff_stress(const DenseMatrix<double>& g,
+                                                 const DenseMatrix<double>& G,
+                                                 DenseMatrix<double>& sigma_dev,
+                                                 DenseMatrix<double>& Gcontra,
+                                                 double& gen_dil,
+                                                 double& inv_kappa);
 
     /// \short State if the constitutive equation requires an incompressible
     /// formulation in which the volume constraint is enforced explicitly.

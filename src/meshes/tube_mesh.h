@@ -66,12 +66,12 @@ namespace oomph
     /// at the dividing lines, the number of layers
     /// and the timestepper.
     /// Timestepper defaults to Steady dummy timestepper.
-    TubeMesh(GeomObject *wall_pt,
-             const Vector<double> &centreline_limits,
-             const Vector<double> &theta_positions,
-             const Vector<double> &radius_box,
-             const unsigned &nlayer,
-             TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper);
+    TubeMesh(GeomObject* wall_pt,
+             const Vector<double>& centreline_limits,
+             const Vector<double>& theta_positions,
+             const Vector<double>& radius_box,
+             const unsigned& nlayer,
+             TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
     /// \short Destructor: empty
     virtual ~TubeMesh()
@@ -80,29 +80,29 @@ namespace oomph
     }
 
     /// Access function to GeomObject representing wall
-    GeomObject *&volume_pt()
+    GeomObject*& volume_pt()
     {
       return Volume_pt;
     }
 
     /// Access function to domain
-    TubeDomain *domain_pt()
+    TubeDomain* domain_pt()
     {
       return Domain_pt;
     }
 
     /// Access function to underlying domain
-    TubeDomain *domain_pt() const
+    TubeDomain* domain_pt() const
     {
       return Domain_pt;
     }
 
   protected:
     /// Pointer to domain
-    TubeDomain *Domain_pt;
+    TubeDomain* Domain_pt;
 
     /// Pointer to the geometric object that represents the curved wall
-    GeomObject *Volume_pt;
+    GeomObject* Volume_pt;
   };
 
   ////////////////////////////////////////////////////////////////////
@@ -137,12 +137,12 @@ namespace oomph
     /// and the timestepper.
     /// Timestepper defaults to Steady dummy timestepper.
     RefineableTubeMesh(
-      GeomObject *wall_pt,
-      const Vector<double> &centreline_limits,
-      const Vector<double> &theta_positions,
-      const Vector<double> &radius_box,
-      const unsigned &nlayer,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      GeomObject* wall_pt,
+      const Vector<double>& centreline_limits,
+      const Vector<double>& theta_positions,
+      const Vector<double>& radius_box,
+      const unsigned& nlayer,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       TubeMesh<ELEMENT>(wall_pt,
                         centreline_limits,
                         theta_positions,
@@ -153,19 +153,19 @@ namespace oomph
       // Loop over all elements and set macro element pointer
       for (unsigned ielem = 0; ielem < TubeMesh<ELEMENT>::nelement(); ielem++)
       {
-        dynamic_cast<RefineableQElement<3> *>(
+        dynamic_cast<RefineableQElement<3>*>(
           TubeMesh<ELEMENT>::element_pt(ielem))
           ->set_macro_elem_pt(this->Domain_pt->macro_element_pt(ielem));
       }
 
       // Setup Octree forest: Turn elements into individual octrees
       // and plant in forest
-      Vector<TreeRoot *> trees_pt;
+      Vector<TreeRoot*> trees_pt;
       for (unsigned iel = 0; iel < TubeMesh<ELEMENT>::nelement(); iel++)
       {
-        FiniteElement *el_pt = TubeMesh<ELEMENT>::finite_element_pt(iel);
-        ELEMENT *ref_el_pt = dynamic_cast<ELEMENT *>(el_pt);
-        OcTreeRoot *octree_root_pt = new OcTreeRoot(ref_el_pt);
+        FiniteElement* el_pt = TubeMesh<ELEMENT>::finite_element_pt(iel);
+        ELEMENT* ref_el_pt = dynamic_cast<ELEMENT*>(el_pt);
+        OcTreeRoot* octree_root_pt = new OcTreeRoot(ref_el_pt);
         trees_pt.push_back(octree_root_pt);
       }
       this->Forest_pt = new OcTreeForest(trees_pt);
@@ -173,7 +173,7 @@ namespace oomph
 #ifdef PARANOID
       // Run self test
       unsigned success_flag =
-        dynamic_cast<OcTreeForest *>(this->Forest_pt)->self_test();
+        dynamic_cast<OcTreeForest*>(this->Forest_pt)->self_test();
       if (success_flag == 0)
       {
         oomph_info << "Successfully built octree forest " << std::endl;

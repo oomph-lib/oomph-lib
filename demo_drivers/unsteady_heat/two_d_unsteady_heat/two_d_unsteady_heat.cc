@@ -60,23 +60,23 @@ namespace ExactSolnForUnsteadyHeat
   double Phi = 1.0;
 
   /// Exact solution as a Vector
-  void get_exact_u(const double &time,
-                   const Vector<double> &x,
-                   Vector<double> &u)
+  void get_exact_u(const double& time,
+                   const Vector<double>& x,
+                   Vector<double>& u)
   {
     double zeta = cos(Phi) * x[0] + sin(Phi) * x[1];
     u[0] = exp(-K * time) * sin(zeta * sqrt(K));
   }
 
   /// Exact solution as a scalar
-  void get_exact_u(const double &time, const Vector<double> &x, double &u)
+  void get_exact_u(const double& time, const Vector<double>& x, double& u)
   {
     double zeta = cos(Phi) * x[0] + sin(Phi) * x[1];
     u = exp(-K * time) * sin(zeta * sqrt(K));
   }
 
   /// Source function to make it an exact solution
-  void get_source(const double &time, const Vector<double> &x, double &source)
+  void get_source(const double& time, const Vector<double>& x, double& source)
   {
     source = 0.0;
   }
@@ -119,14 +119,14 @@ public:
   void set_initial_condition();
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info, ofstream &trace_file);
+  void doc_solution(DocInfo& doc_info, ofstream& trace_file);
 
 private:
   /// Pointer to source function
   UnsteadyHeatEquations<2>::UnsteadyHeatSourceFctPt Source_fct_pt;
 
   /// Pointer to control node at which the solution is documented
-  Node *Control_node_pt;
+  Node* Control_node_pt;
 
 }; // end of problem class
 
@@ -203,7 +203,7 @@ UnsteadyHeatProblem<ELEMENT>::UnsteadyHeatProblem(
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from FiniteElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the source function pointer
     el_pt->source_fct_pt() = Source_fct_pt;
@@ -233,7 +233,7 @@ void UnsteadyHeatProblem<ELEMENT>::actions_before_implicit_timestep()
     unsigned num_nod = mesh_pt()->nboundary_node(ibound);
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
-      Node *nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
+      Node* nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
       double u;
       Vector<double> x(2);
       x[0] = nod_pt->x(0);
@@ -314,8 +314,8 @@ void UnsteadyHeatProblem<ELEMENT>::set_initial_condition()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void UnsteadyHeatProblem<ELEMENT>::doc_solution(DocInfo &doc_info,
-                                                ofstream &trace_file)
+void UnsteadyHeatProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
+                                                ofstream& trace_file)
 {
   ofstream some_file;
   char filename[100];

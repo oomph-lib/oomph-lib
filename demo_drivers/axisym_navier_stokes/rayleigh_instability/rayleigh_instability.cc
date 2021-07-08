@@ -89,10 +89,10 @@ public:
   /// Constructor: Pass the number of elements and the lengths of the
   /// domain in the r and z directions (h is the height of the fluid layer
   /// i.e. the length of the domain in the z direction)
-  InterfaceProblem(const unsigned &n_r,
-                   const unsigned &n_z,
-                   const double &l_r,
-                   const double &h);
+  InterfaceProblem(const unsigned& n_r,
+                   const unsigned& n_z,
+                   const double& l_r,
+                   const double& h);
 
   /// Destructor (empty)
   ~InterfaceProblem() {}
@@ -140,20 +140,20 @@ public:
   } // End of set_initial_condition
 
   /// \short Access function for the specific mesh
-  HorizontalSingleLayerSpineMesh<ELEMENT> *Bulk_mesh_pt;
+  HorizontalSingleLayerSpineMesh<ELEMENT>* Bulk_mesh_pt;
 
   /// \short Mesh for the free surface (interface) elements
-  Mesh *Interface_mesh_pt;
+  Mesh* Interface_mesh_pt;
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// Do unsteady run up to maximum time t_max with given timestep dt
-  void unsteady_run(const double &t_max, const double &dt);
+  void unsteady_run(const double& t_max, const double& dt);
 
 private:
   /// Deform the mesh/free surface to a prescribed function
-  void deform_free_surface(const double &epsilon)
+  void deform_free_surface(const double& epsilon)
   {
     // Determine number of spines in mesh
     const unsigned n_spine = Bulk_mesh_pt->nspine();
@@ -191,10 +191,10 @@ private:
 /// Constructor for single fluid interface problem
 //========================================================================
 template<class ELEMENT, class TIMESTEPPER>
-InterfaceProblem<ELEMENT, TIMESTEPPER>::InterfaceProblem(const unsigned &n_r,
-                                                         const unsigned &n_z,
-                                                         const double &l_r,
-                                                         const double &h) :
+InterfaceProblem<ELEMENT, TIMESTEPPER>::InterfaceProblem(const unsigned& n_r,
+                                                         const unsigned& n_z,
+                                                         const double& l_r,
+                                                         const double& h) :
   Lr(l_r), Height(h)
 
 {
@@ -216,14 +216,14 @@ InterfaceProblem<ELEMENT, TIMESTEPPER>::InterfaceProblem(const unsigned &n_r,
     for (unsigned e = 0; e < n_element; e++)
     {
       // Get pointer to the bulk element that is adjacent to boundary b
-      ELEMENT *bulk_elem_pt =
-        dynamic_cast<ELEMENT *>(Bulk_mesh_pt->boundary_element_pt(1, e));
+      ELEMENT* bulk_elem_pt =
+        dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(1, e));
 
       // Find the index of the face of element e along boundary b
       int face_index = Bulk_mesh_pt->face_index_at_boundary(1, e);
 
       // Build the corresponding free surface element
-      SpineAxisymmetricFluidInterfaceElement<ELEMENT> *interface_element_pt =
+      SpineAxisymmetricFluidInterfaceElement<ELEMENT>* interface_element_pt =
         new SpineAxisymmetricFluidInterfaceElement<ELEMENT>(bulk_elem_pt,
                                                             face_index);
 
@@ -286,7 +286,7 @@ InterfaceProblem<ELEMENT, TIMESTEPPER>::InterfaceProblem(const unsigned &n_r,
   for (unsigned e = 0; e < n_bulk; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -304,7 +304,7 @@ InterfaceProblem<ELEMENT, TIMESTEPPER>::InterfaceProblem(const unsigned &n_r,
   } // End of loop over bulk elements
 
   // Create a Data object whose single value stores the external pressure
-  Data *external_pressure_data_pt = new Data(1);
+  Data* external_pressure_data_pt = new Data(1);
 
   // Pin and set the external pressure to some arbitrary value
   double p_ext = Global_Physical_Variables::P_ext;
@@ -319,8 +319,8 @@ InterfaceProblem<ELEMENT, TIMESTEPPER>::InterfaceProblem(const unsigned &n_r,
   for (unsigned e = 0; e < n_interface_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    SpineAxisymmetricFluidInterfaceElement<ELEMENT> *el_pt =
-      dynamic_cast<SpineAxisymmetricFluidInterfaceElement<ELEMENT> *>(
+    SpineAxisymmetricFluidInterfaceElement<ELEMENT>* el_pt =
+      dynamic_cast<SpineAxisymmetricFluidInterfaceElement<ELEMENT>*>(
         Interface_mesh_pt->element_pt(e));
 
     // Set the Capillary number
@@ -340,7 +340,7 @@ InterfaceProblem<ELEMENT, TIMESTEPPER>::InterfaceProblem(const unsigned &n_r,
 /// Doc the solution
 //========================================================================
 template<class ELEMENT, class TIMESTEPPER>
-void InterfaceProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo &doc_info)
+void InterfaceProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo& doc_info)
 {
   // Output the time
   double t = time_pt()->time();
@@ -397,8 +397,8 @@ void InterfaceProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo &doc_info)
 /// Perform run up to specified time t_max with given timestep dt
 //========================================================================
 template<class ELEMENT, class TIMESTEPPER>
-void InterfaceProblem<ELEMENT, TIMESTEPPER>::unsteady_run(const double &t_max,
-                                                          const double &dt)
+void InterfaceProblem<ELEMENT, TIMESTEPPER>::unsteady_run(const double& t_max,
+                                                          const double& dt)
 {
   // Set value of epsilon
   double epsilon = Global_Physical_Variables::Epsilon;
@@ -481,7 +481,7 @@ void InterfaceProblem<ELEMENT, TIMESTEPPER>::unsteady_run(const double &t_max,
 //==start_of_main=========================================================
 /// Driver code for single fluid axisymmetric horizontal interface problem
 //========================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

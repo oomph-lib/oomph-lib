@@ -78,10 +78,10 @@ class GeneralEllipse : public GeomObject
 {
 public:
   /// Constructor
-  GeneralEllipse(const double &centre_x,
-                 const double &centre_y,
-                 const double &a,
-                 const double &b) :
+  GeneralEllipse(const double& centre_x,
+                 const double& centre_y,
+                 const double& a,
+                 const double& b) :
     GeomObject(1, 2), Centre_x(centre_x), Centre_y(centre_y), A(a), B(b)
   {
   }
@@ -90,32 +90,32 @@ public:
   ~GeneralEllipse() {}
 
   /// Return the position
-  void position(const Vector<double> &xi, Vector<double> &r) const
+  void position(const Vector<double>& xi, Vector<double>& r) const
   {
     r[0] = Centre_x + A * cos(xi[0]);
     r[1] = Centre_y + B * sin(xi[0]);
   }
 
   /// Access to  x-coordinate of centre
-  double &centre_x()
+  double& centre_x()
   {
     return Centre_x;
   }
 
   /// Access to  y-coordinate of centre
-  double &centre_y()
+  double& centre_y()
   {
     return Centre_y;
   }
 
   /// Access to x-half axis
-  double &a()
+  double& a()
   {
     return A;
   }
 
   /// Access to y-half axis
-  double &b()
+  double& b()
   {
     return B;
   }
@@ -158,13 +158,13 @@ public:
   /// The GeomObject must be parametrised such that
   /// \f$\zeta \in [0,2\pi]\f$ sweeps around the circumference
   /// in anticlockwise direction.
-  RectangleWithHoleDomain(GeomObject *cylinder_pt,
-                          const double &length,
-                          const double &height) :
+  RectangleWithHoleDomain(GeomObject* cylinder_pt,
+                          const double& length,
+                          const double& height) :
     Cylinder_pt(cylinder_pt)
   {
-    Centre_x = static_cast<GeneralEllipse *>(cylinder_pt)->centre_x();
-    Centre_y = static_cast<GeneralEllipse *>(cylinder_pt)->centre_y();
+    Centre_x = static_cast<GeneralEllipse*>(cylinder_pt)->centre_x();
+    Centre_y = static_cast<GeneralEllipse*>(cylinder_pt)->centre_y();
 
     double lower_wall = -0.5 * height;
     double upper_wall = 0.5 * height;
@@ -258,8 +258,8 @@ public:
   /// "right" and "left" points; \f$ s \in [-1,1] \f$
   void linear_interpolate(Vector<double> left,
                           Vector<double> right,
-                          const double &s,
-                          Vector<double> &f)
+                          const double& s,
+                          Vector<double>& f)
   {
     for (unsigned i = 0; i < 2; i++)
     {
@@ -270,11 +270,11 @@ public:
   /// \short Parametrisation of macro element boundaries: f(s) is the position
   /// vector to macro-element m's boundary in the specified direction [N/S/E/W]
   /// at the specfied discrete time level (time=0: present; time>0: previous)
-  void macro_element_boundary(const unsigned &time,
-                              const unsigned &m,
-                              const unsigned &direction,
-                              const Vector<double> &s,
-                              Vector<double> &f)
+  void macro_element_boundary(const unsigned& time,
+                              const unsigned& m,
+                              const unsigned& direction,
+                              const Vector<double>& s,
+                              Vector<double>& f)
   {
 #ifdef WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES
     // Warn about time argument being moved to the front
@@ -666,7 +666,7 @@ private:
   double Centre_y;
 
   /// Pointer to geometric object that represents the central cylinder
-  GeomObject *Cylinder_pt;
+  GeomObject* Cylinder_pt;
 };
 
 //////////////////////////////////////////////////////////////////
@@ -687,10 +687,10 @@ public:
   /// in anticlockwise direction. Timestepper defaults to Steady
   /// default timestepper.
   RectangleWithHoleMesh(
-    GeomObject *cylinder_pt,
-    const double &length,
-    const double &height,
-    TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper)
+    GeomObject* cylinder_pt,
+    const double& length,
+    const double& height,
+    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
   {
     // Create the domain
     Domain_pt = new RectangleWithHoleDomain(cylinder_pt, length, height);
@@ -702,7 +702,7 @@ public:
     Vector<double> s(2), r(2);
 
     // Setup temporary storage for the Node
-    Vector<Node *> Tmp_node_pt;
+    Vector<Node*> Tmp_node_pt;
 
     // Now blindly loop over the macro elements and associate and finite
     // element with each
@@ -713,7 +713,7 @@ public:
       Element_pt.push_back(new ELEMENT);
 
       // Read out the number of linear points in the element
-      unsigned np = dynamic_cast<ELEMENT *>(finite_element_pt(e))->nnode_1d();
+      unsigned np = dynamic_cast<ELEMENT*>(finite_element_pt(e))->nnode_1d();
 
       // Loop over nodes in the column
       for (unsigned l1 = 0; l1 < np; l1++)
@@ -745,7 +745,7 @@ public:
     // pointers and the deleting excess nodes
 
     // Read out the number of linear points in the element
-    unsigned np = dynamic_cast<ELEMENT *>(finite_element_pt(0))->nnode_1d();
+    unsigned np = dynamic_cast<ELEMENT*>(finite_element_pt(0))->nnode_1d();
 
     // Edge between Elements 0 and 8
     for (unsigned n = 0; n < np; n++)
@@ -867,7 +867,7 @@ public:
     for (unsigned n = 0; n < np; n++)
     {
       // Left hand side
-      Node *nod_pt = finite_element_pt(8)->node_pt(n * np);
+      Node* nod_pt = finite_element_pt(8)->node_pt(n * np);
       convert_to_boundary_node(nod_pt);
       add_boundary_node(3, nod_pt);
 
@@ -895,7 +895,7 @@ public:
     for (unsigned n = 1; n < np; n++)
     {
       // Second part of lower boundary
-      Node *nod_pt = finite_element_pt(3)->node_pt(n);
+      Node* nod_pt = finite_element_pt(3)->node_pt(n);
       convert_to_boundary_node(nod_pt);
       add_boundary_node(0, nod_pt);
 
@@ -923,7 +923,7 @@ public:
     for (unsigned n = 1; n < np; n++)
     {
       // Third part of lower boundary
-      Node *nod_pt = finite_element_pt(5)->node_pt(n);
+      Node* nod_pt = finite_element_pt(5)->node_pt(n);
       convert_to_boundary_node(nod_pt);
       add_boundary_node(0, nod_pt);
 
@@ -936,7 +936,7 @@ public:
     for (unsigned n = 1; n < np; n++)
     {
       // Fourth part of lower boundary
-      Node *nod_pt = finite_element_pt(6)->node_pt(n);
+      Node* nod_pt = finite_element_pt(6)->node_pt(n);
       convert_to_boundary_node(nod_pt);
       add_boundary_node(0, nod_pt);
 
@@ -949,7 +949,7 @@ public:
     for (unsigned n = 1; n < np; n++)
     {
       // Final part of lower boundary
-      Node *nod_pt = finite_element_pt(7)->node_pt(n);
+      Node* nod_pt = finite_element_pt(7)->node_pt(n);
       convert_to_boundary_node(nod_pt);
       add_boundary_node(0, nod_pt);
 
@@ -967,21 +967,21 @@ public:
     for (unsigned n = 1; n < np - 1; n++)
     {
       // Final part of hole
-      Node *nod_pt = finite_element_pt(0)->node_pt(np * (np - n - 1) + np - 1);
+      Node* nod_pt = finite_element_pt(0)->node_pt(np * (np - n - 1) + np - 1);
       convert_to_boundary_node(nod_pt);
       add_boundary_node(4, nod_pt);
     }
   }
 
   /// Access function to the domain
-  RectangleWithHoleDomain *domain_pt()
+  RectangleWithHoleDomain* domain_pt()
   {
     return Domain_pt;
   }
 
 protected:
   /// Pointer to the domain
-  RectangleWithHoleDomain *Domain_pt;
+  RectangleWithHoleDomain* Domain_pt;
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -1006,10 +1006,10 @@ public:
   /// in anticlockwise direction. Timestepper defaults to Steady
   /// default timestepper.
   RefineableRectangleWithHoleMesh(
-    GeomObject *cylinder_pt,
-    const double &length,
-    const double &height,
-    TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+    GeomObject* cylinder_pt,
+    const double& length,
+    const double& height,
+    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
     RectangleWithHoleMesh<ELEMENT>(cylinder_pt, length, height, time_stepper_pt)
   {
     // Nodal positions etc. were created in constructor for
@@ -1018,7 +1018,7 @@ public:
     // Loop over all elements and set macro element pointer
     for (unsigned e = 0; e < 9; e++)
     {
-      dynamic_cast<ELEMENT *>(this->element_pt(e))
+      dynamic_cast<ELEMENT*>(this->element_pt(e))
         ->set_macro_elem_pt(this->Domain_pt->macro_element_pt(e));
     }
 
@@ -1038,7 +1038,7 @@ class FlowAroundCylinderProblem : public Problem
 {
 public:
   /// Make a copy for using in bifurcation tracking
-  Problem *make_copy()
+  Problem* make_copy()
   {
     // Make a copy based on the current parameters
     return (new FlowAroundCylinderProblem<ELEMENT>(
@@ -1047,9 +1047,9 @@ public:
 
   /// Constructor: Pass geometric object that represents
   /// central cylinder, and length and height of domain.
-  FlowAroundCylinderProblem(GeomObject *cylinder_pt,
-                            const double &length,
-                            const double &height);
+  FlowAroundCylinderProblem(GeomObject* cylinder_pt,
+                            const double& length,
+                            const double& height);
 
   /// Destructor: clean up the memory
   ~FlowAroundCylinderProblem();
@@ -1144,13 +1144,13 @@ public:
   }
 
   /// Access function for the specific mesh
-  RefineableRectangleWithHoleMesh<ELEMENT> *mesh_pt()
+  RefineableRectangleWithHoleMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<RefineableRectangleWithHoleMesh<ELEMENT> *>(
+    return dynamic_cast<RefineableRectangleWithHoleMesh<ELEMENT>*>(
       Problem::mesh_pt());
   }
 
-  Mesh *&mesh_pt(const unsigned &num)
+  Mesh*& mesh_pt(const unsigned& num)
   {
     return Problem::mesh_pt(num);
   }
@@ -1163,7 +1163,7 @@ private:
   double Domain_length;
 
   /// The geometric cylinder
-  GeomObject *Cylinder_pt;
+  GeomObject* Cylinder_pt;
 };
 
 //========================================================================
@@ -1171,7 +1171,7 @@ private:
 //========================================================================
 template<class ELEMENT>
 FlowAroundCylinderProblem<ELEMENT>::FlowAroundCylinderProblem(
-  GeomObject *cylinder_pt, const double &length, const double &height) :
+  GeomObject* cylinder_pt, const double& length, const double& height) :
   Domain_height(height), Domain_length(length), Cylinder_pt(cylinder_pt)
 
 {
@@ -1182,8 +1182,8 @@ FlowAroundCylinderProblem<ELEMENT>::FlowAroundCylinderProblem(
   if (!Global_Parameters::Read_in_eigenfunction_from_disk)
   {
     this->eigen_solver_pt() = new ARPACK;
-    static_cast<ARPACK *>(eigen_solver_pt())->set_shift(50.0);
-    static_cast<ARPACK *>(eigen_solver_pt())->narnoldi() = 70;
+    static_cast<ARPACK*>(eigen_solver_pt())->set_shift(50.0);
+    static_cast<ARPACK*>(eigen_solver_pt())->narnoldi() = 70;
   }
 
   // Build mesh
@@ -1191,7 +1191,7 @@ FlowAroundCylinderProblem<ELEMENT>::FlowAroundCylinderProblem(
     new RefineableRectangleWithHoleMesh<ELEMENT>(cylinder_pt, length, height);
 
   // Set error estimator
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   mesh_pt()->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Pin redudant pressure dofs
@@ -1209,8 +1209,8 @@ FlowAroundCylinderProblem<ELEMENT>::FlowAroundCylinderProblem(
   unsigned nelem = mesh_pt()->nelement();
   for (unsigned e = 0; e < nelem; e++)
   {
-    dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e))->re_pt() = &Re;
-    dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e))->re_st_pt() = &Re;
+    dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))->re_pt() = &Re;
+    dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))->re_st_pt() = &Re;
   }
 }
 
@@ -1241,7 +1241,7 @@ int main()
 
   // Create a new ellipse object with equal semi-minor and semi-major axes
   // to be the central cylinder
-  GeneralEllipse *cylinder_pt = new GeneralEllipse(4.5, 0.0, 0.5, 0.5);
+  GeneralEllipse* cylinder_pt = new GeneralEllipse(4.5, 0.0, 0.5, 0.5);
 
   // Create Problem
   FlowAroundCylinderProblem<RefineableQCrouzeixRaviartElement<2>> problem(

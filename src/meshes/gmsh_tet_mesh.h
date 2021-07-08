@@ -56,8 +56,8 @@ namespace oomph
     /// \short Specify outer boundary of domain to be meshed.
     /// Other parameters get default values and can be set via
     /// member functions
-    GmshParameters(TetMeshFacetedClosedSurface *const &outer_boundary_pt,
-                   const std::string &gmsh_command_line_invocation) :
+    GmshParameters(TetMeshFacetedClosedSurface* const& outer_boundary_pt,
+                   const std::string& gmsh_command_line_invocation) :
       Outer_boundary_pt(outer_boundary_pt),
       Element_volume(1.0),
       Target_size_file_name(".gmsh_target_size_for_adaptation.dat"),
@@ -77,19 +77,19 @@ namespace oomph
     }
 
     /// Outer boundary
-    TetMeshFacetedClosedSurface *&outer_boundary_pt()
+    TetMeshFacetedClosedSurface*& outer_boundary_pt()
     {
       return Outer_boundary_pt;
     }
 
     /// Internal boundaries
-    Vector<TetMeshFacetedSurface *> &internal_surface_pt()
+    Vector<TetMeshFacetedSurface*>& internal_surface_pt()
     {
       return Internal_surface_pt;
     }
 
     /// Uniform target element volume
-    double &element_volume()
+    double& element_volume()
     {
       return Element_volume;
     }
@@ -97,44 +97,44 @@ namespace oomph
     /// \short Filename for target volumes (for system-call based transfer to
     /// gmsh during mesh adaptation). Default:
     /// .gmsh_target_size_for_adaptation.dat
-    std::string &target_size_file_name()
+    std::string& target_size_file_name()
     {
       return Target_size_file_name;
     }
 
     /// String to be issued via system command to activate gmsh
-    std::string &gmsh_command_line_invocation()
+    std::string& gmsh_command_line_invocation()
     {
       return Gmsh_command_line_invocation;
     }
 
     /// \short Stem for geo and msh files (input/output to command-line gmsh
     /// invocation)
-    std::string &geo_and_msh_file_stem()
+    std::string& geo_and_msh_file_stem()
     {
       return Geo_and_msh_file_stem;
     }
 
     /// Max. element size during refinement
-    double &max_element_size()
+    double& max_element_size()
     {
       return Max_element_size;
     }
 
     /// Min. element size during refinement
-    double &min_element_size()
+    double& min_element_size()
     {
       return Min_element_size;
     }
 
     /// Max. permitted edge ratio
-    double &max_permitted_edge_ratio()
+    double& max_permitted_edge_ratio()
     {
       return Max_permitted_edge_ratio;
     }
 
     /// (Isotropic) grid spacing for target size transfer
-    double &dx_for_target_size_transfer()
+    double& dx_for_target_size_transfer()
     {
       return Dx_for_target_size_transfer;
     }
@@ -143,7 +143,7 @@ namespace oomph
     /// locate zeta. We try to find the exact point in the existing
     /// mesh but if we fail to converge from the nearest specified number
     /// of sample points we use the nearest of those.
-    unsigned &max_sample_points_for_limited_locate_zeta_during_target_size_transfer()
+    unsigned& max_sample_points_for_limited_locate_zeta_during_target_size_transfer()
     {
       return Max_sample_points_for_limited_locate_zeta_during_target_size_transfer;
     }
@@ -151,7 +151,7 @@ namespace oomph
     /// \short Stem for filename used to doc target element sizes on
     /// gmsh grid. No doc if stem is equal to empty string (or counter
     /// is negative)
-    std::string &stem_for_filename_gmsh_size_transfer()
+    std::string& stem_for_filename_gmsh_size_transfer()
     {
       return Stem_for_filename_gmsh_size_transfer;
     }
@@ -159,7 +159,7 @@ namespace oomph
     /// \short Counter for filename used to doc target element sizes on
     /// gmsh grid. No doc if stem is equal to empty string (or counter
     /// is negative)
-    int &counter_for_filename_gmsh_size_transfer()
+    int& counter_for_filename_gmsh_size_transfer()
     {
       return Counter_for_filename_gmsh_size_transfer;
     }
@@ -183,24 +183,24 @@ namespace oomph
     }
 
     /// \short Output filename for gmsh on-screen output
-    std::string &gmsh_onscreen_output_file_name()
+    std::string& gmsh_onscreen_output_file_name()
     {
       return Gmsh_onscreen_output_file_name;
     }
 
     /// \short Counter for marker that indicates where we are
     /// in gmsh on-screen output
-    unsigned &gmsh_onscreen_output_counter()
+    unsigned& gmsh_onscreen_output_counter()
     {
       return Gmsh_onscreen_output_counter;
     }
 
   private:
     /// Pointer to outer boundary
-    TetMeshFacetedClosedSurface *Outer_boundary_pt;
+    TetMeshFacetedClosedSurface* Outer_boundary_pt;
 
     /// Internal boundaries
-    Vector<TetMeshFacetedSurface *> Internal_surface_pt;
+    Vector<TetMeshFacetedSurface*> Internal_surface_pt;
 
     /// Uniform element volume
     double Element_volume;
@@ -269,7 +269,7 @@ namespace oomph
     /// \short Constructor: Pass two vertices, identified by their indices
     ///  Edge "direction" is from lower vertex to higher vertex id so
     /// can compare if we're dealing with the same one...
-    TetEdge(const unsigned &vertex1, const unsigned &vertex2)
+    TetEdge(const unsigned& vertex1, const unsigned& vertex2)
     {
       if (vertex1 > vertex2)
       {
@@ -311,7 +311,7 @@ namespace oomph
 
     /// \short Comparison operator: Edges are identical if their sorted
     /// (and therefore possibly reversed) vertex ids agree
-    bool operator==(const TetEdge &tet_edge) const
+    bool operator==(const TetEdge& tet_edge) const
     {
       return ((tet_edge.first_vertex_id() == Vertex_pair.first) &&
               (tet_edge.second_vertex_id() == Vertex_pair.second));
@@ -319,7 +319,7 @@ namespace oomph
 
     /// \short Comparison operator. Lexicographic comparison based on
     /// vertex ids
-    bool operator<(const TetEdge &tet_edge) const
+    bool operator<(const TetEdge& tet_edge) const
     {
       if ((tet_edge.first_vertex_id() == Vertex_pair.first) &&
           (tet_edge.second_vertex_id() == Vertex_pair.second))
@@ -369,8 +369,8 @@ namespace oomph
     /// \short Build mesh, based on specified parameters. If boolean is set
     /// to true, the target element sizes are read from file (used during
     /// adaptation; otherwise uniform target size is used).
-    GmshTetScaffoldMesh(GmshParameters *gmsh_parameters_pt,
-                        const bool &use_mesh_grading_from_file) :
+    GmshTetScaffoldMesh(GmshParameters* gmsh_parameters_pt,
+                        const bool& use_mesh_grading_from_file) :
       Gmsh_parameters_pt(gmsh_parameters_pt)
     {
       double t_start = TimingHelpers::timer();
@@ -773,7 +773,7 @@ namespace oomph
       Node_pt.resize(nnod);
 
       // Existing nodes
-      Vector<Node *> existing_node_pt(nnod, 0);
+      Vector<Node*> existing_node_pt(nnod, 0);
 
       // Now process the simplex tets only (they have four nodes!)
       unsigned e = 0;
@@ -786,7 +786,7 @@ namespace oomph
         if (el_nnod == 4)
         {
           // Here comes the new element
-          TElement<3, 2> *el_pt = new TElement<3, 2>;
+          TElement<3, 2>* el_pt = new TElement<3, 2>;
 
           // Store it
           Element_pt[e] = el_pt;
@@ -807,7 +807,7 @@ namespace oomph
             // Make new node
             else
             {
-              Node *nod_pt = 0;
+              Node* nod_pt = 0;
 
               // Is it on the boundary?
               if (one_based_boundaries_of_node[node_number].size() == 0)
@@ -868,7 +868,7 @@ namespace oomph
         {
           unsigned one_based_el_number = (*itt);
           this->Region_element_pt[region_count][count] =
-            dynamic_cast<FiniteElement *>(Element_pt[one_based_el_number - 1]);
+            dynamic_cast<FiniteElement*>(Element_pt[one_based_el_number - 1]);
           count++;
         }
         region_count++;
@@ -1001,18 +1001,18 @@ namespace oomph
     }
 
     /// Write geo file for gmsh
-    void write_geo_file(const bool &use_mesh_grading_from_file)
+    void write_geo_file(const bool& use_mesh_grading_from_file)
     {
       // Transfer data from parameters
-      TetMeshFacetedClosedSurface *outer_boundary_pt =
+      TetMeshFacetedClosedSurface* outer_boundary_pt =
         Gmsh_parameters_pt->outer_boundary_pt();
 
-      Vector<TetMeshFacetedSurface *> internal_surface_pt =
+      Vector<TetMeshFacetedSurface*> internal_surface_pt =
         Gmsh_parameters_pt->internal_surface_pt();
 
       double element_volume = Gmsh_parameters_pt->element_volume();
 
-      std::string &target_size_file_name =
+      std::string& target_size_file_name =
         Gmsh_parameters_pt->target_size_file_name();
 
       // Write gmsh geo file:
@@ -1035,11 +1035,11 @@ namespace oomph
       geo_file << std::endl;
       geo_file << "// Vertices" << std::endl;
       geo_file << "//---------" << std::endl;
-      std::map<TetMeshVertex *, unsigned> vertex_number;
+      std::map<TetMeshVertex*, unsigned> vertex_number;
       unsigned nv = outer_boundary_pt->nvertex();
       for (unsigned j = 0; j < nv; j++)
       {
-        TetMeshVertex *vertex_pt = outer_boundary_pt->vertex_pt(j);
+        TetMeshVertex* vertex_pt = outer_boundary_pt->vertex_pt(j);
         vertex_number[vertex_pt] = j;
         geo_file << "Point(" << j + 1 << ")={";
         for (unsigned i = 0; i < 3; i++)
@@ -1054,18 +1054,18 @@ namespace oomph
       unsigned nfacet = outer_boundary_pt->nfacet();
       for (unsigned f = 0; f < nfacet; f++)
       {
-        TetMeshFacet *facet_pt = outer_boundary_pt->facet_pt(f);
+        TetMeshFacet* facet_pt = outer_boundary_pt->facet_pt(f);
         unsigned nv = facet_pt->nvertex();
         for (unsigned j = 0; j < nv - 1; j++)
         {
-          TetMeshVertex *first_vertex_pt = facet_pt->vertex_pt(j);
-          TetMeshVertex *second_vertex_pt = facet_pt->vertex_pt(j + 1);
+          TetMeshVertex* first_vertex_pt = facet_pt->vertex_pt(j);
+          TetMeshVertex* second_vertex_pt = facet_pt->vertex_pt(j + 1);
           TetEdge my_tet_edge(vertex_number[first_vertex_pt] + 1,
                               vertex_number[second_vertex_pt] + 1);
           tet_edge_set.insert(my_tet_edge);
         }
-        TetMeshVertex *first_vertex_pt = facet_pt->vertex_pt(nv - 1);
-        TetMeshVertex *second_vertex_pt = facet_pt->vertex_pt(0);
+        TetMeshVertex* first_vertex_pt = facet_pt->vertex_pt(nv - 1);
+        TetMeshVertex* second_vertex_pt = facet_pt->vertex_pt(0);
         TetEdge my_tet_edge(vertex_number[first_vertex_pt] + 1,
                             vertex_number[second_vertex_pt] + 1);
         tet_edge_set.insert(my_tet_edge);
@@ -1094,12 +1094,12 @@ namespace oomph
       {
         geo_file << "Line Loop(" << f + 1 << ")={";
 
-        TetMeshFacet *facet_pt = outer_boundary_pt->facet_pt(f);
+        TetMeshFacet* facet_pt = outer_boundary_pt->facet_pt(f);
         unsigned nv = facet_pt->nvertex();
         for (unsigned j = 0; j < nv - 1; j++)
         {
-          TetMeshVertex *first_vertex_pt = facet_pt->vertex_pt(j);
-          TetMeshVertex *second_vertex_pt = facet_pt->vertex_pt(j + 1);
+          TetMeshVertex* first_vertex_pt = facet_pt->vertex_pt(j);
+          TetMeshVertex* second_vertex_pt = facet_pt->vertex_pt(j + 1);
           TetEdge my_tet_edge(vertex_number[first_vertex_pt] + 1,
                               vertex_number[second_vertex_pt] + 1);
 
@@ -1114,8 +1114,8 @@ namespace oomph
           }
         }
 
-        TetMeshVertex *first_vertex_pt = facet_pt->vertex_pt(nv - 1);
-        TetMeshVertex *second_vertex_pt = facet_pt->vertex_pt(0);
+        TetMeshVertex* first_vertex_pt = facet_pt->vertex_pt(nv - 1);
+        TetMeshVertex* second_vertex_pt = facet_pt->vertex_pt(0);
         TetEdge my_tet_edge(vertex_number[first_vertex_pt] + 1,
                             vertex_number[second_vertex_pt] + 1);
 
@@ -1172,8 +1172,8 @@ namespace oomph
       for (unsigned i_internal = 0; i_internal < n_internal; i_internal++)
       {
         // Closed surface?
-        TetMeshFacetedClosedSurface *closed_srf_pt =
-          dynamic_cast<TetMeshFacetedClosedSurface *>(
+        TetMeshFacetedClosedSurface* closed_srf_pt =
+          dynamic_cast<TetMeshFacetedClosedSurface*>(
             internal_surface_pt[i_internal]);
         bool inner_surface_is_closed = true;
         if (closed_srf_pt == 0)
@@ -1192,11 +1192,11 @@ namespace oomph
         geo_file << std::endl;
         geo_file << "// Vertices" << std::endl;
         geo_file << "//---------" << std::endl;
-        std::map<TetMeshVertex *, unsigned> vertex_number;
+        std::map<TetMeshVertex*, unsigned> vertex_number;
         unsigned nv = internal_surface_pt[i_internal]->nvertex();
         for (unsigned j = 0; j < nv; j++)
         {
-          TetMeshVertex *vertex_pt =
+          TetMeshVertex* vertex_pt =
             internal_surface_pt[i_internal]->vertex_pt(j);
           vertex_number[vertex_pt] = nvertex_offset + j;
           geo_file << "Point(" << nvertex_offset + j + 1 << ")={";
@@ -1212,18 +1212,18 @@ namespace oomph
         unsigned nfacet = internal_surface_pt[i_internal]->nfacet();
         for (unsigned f = 0; f < nfacet; f++)
         {
-          TetMeshFacet *facet_pt = internal_surface_pt[i_internal]->facet_pt(f);
+          TetMeshFacet* facet_pt = internal_surface_pt[i_internal]->facet_pt(f);
           unsigned nv = facet_pt->nvertex();
           for (unsigned j = 0; j < nv - 1; j++)
           {
-            TetMeshVertex *first_vertex_pt = facet_pt->vertex_pt(j);
-            TetMeshVertex *second_vertex_pt = facet_pt->vertex_pt(j + 1);
+            TetMeshVertex* first_vertex_pt = facet_pt->vertex_pt(j);
+            TetMeshVertex* second_vertex_pt = facet_pt->vertex_pt(j + 1);
             TetEdge my_tet_edge(vertex_number[first_vertex_pt] + 1,
                                 vertex_number[second_vertex_pt] + 1);
             tet_edge_set.insert(my_tet_edge);
           }
-          TetMeshVertex *first_vertex_pt = facet_pt->vertex_pt(nv - 1);
-          TetMeshVertex *second_vertex_pt = facet_pt->vertex_pt(0);
+          TetMeshVertex* first_vertex_pt = facet_pt->vertex_pt(nv - 1);
+          TetMeshVertex* second_vertex_pt = facet_pt->vertex_pt(0);
           TetEdge my_tet_edge(vertex_number[first_vertex_pt] + 1,
                               vertex_number[second_vertex_pt] + 1);
           tet_edge_set.insert(my_tet_edge);
@@ -1253,12 +1253,12 @@ namespace oomph
         {
           geo_file << "Line Loop(" << nfacet_offset + f + 1 << ")={";
 
-          TetMeshFacet *facet_pt = internal_surface_pt[i_internal]->facet_pt(f);
+          TetMeshFacet* facet_pt = internal_surface_pt[i_internal]->facet_pt(f);
           unsigned nv = facet_pt->nvertex();
           for (unsigned j = 0; j < nv - 1; j++)
           {
-            TetMeshVertex *first_vertex_pt = facet_pt->vertex_pt(j);
-            TetMeshVertex *second_vertex_pt = facet_pt->vertex_pt(j + 1);
+            TetMeshVertex* first_vertex_pt = facet_pt->vertex_pt(j);
+            TetMeshVertex* second_vertex_pt = facet_pt->vertex_pt(j + 1);
             TetEdge my_tet_edge(vertex_number[first_vertex_pt] + 1,
                                 vertex_number[second_vertex_pt] + 1);
 
@@ -1274,8 +1274,8 @@ namespace oomph
             }
           }
 
-          TetMeshVertex *first_vertex_pt = facet_pt->vertex_pt(nv - 1);
-          TetMeshVertex *second_vertex_pt = facet_pt->vertex_pt(0);
+          TetMeshVertex* first_vertex_pt = facet_pt->vertex_pt(nv - 1);
+          TetMeshVertex* second_vertex_pt = facet_pt->vertex_pt(0);
           TetEdge my_tet_edge(vertex_number[first_vertex_pt] + 1,
                               vertex_number[second_vertex_pt] + 1);
 
@@ -1338,7 +1338,7 @@ namespace oomph
         // by them
         for (unsigned f = 0; f < nfacet; f++)
         {
-          TetMeshFacet *facet_pt = internal_surface_pt[i_internal]->facet_pt(f);
+          TetMeshFacet* facet_pt = internal_surface_pt[i_internal]->facet_pt(f);
           std::set<unsigned> region_id(
             facet_pt->one_based_adjacent_region_id());
           unsigned nr = region_id.size();
@@ -1614,7 +1614,7 @@ namespace oomph
     }
 
     /// Parameters
-    GmshParameters *Gmsh_parameters_pt;
+    GmshParameters* Gmsh_parameters_pt;
   };
 
   //////////////////////////////////////////////////////////////////////////
@@ -1629,8 +1629,8 @@ namespace oomph
   {
   public:
     /// \short Constructor
-    GmshTetMesh(GmshParameters *gmsh_parameters_pt,
-                TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+    GmshTetMesh(GmshParameters* gmsh_parameters_pt,
+                TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       Gmsh_parameters_pt(gmsh_parameters_pt)
     {
       bool use_mesh_grading_from_file = false;
@@ -1640,9 +1640,9 @@ namespace oomph
     /// \short Constructor. If boolean is set
     /// to true, the target element sizes are read from file (used during
     /// adaptation; otherwise uniform target size is used).
-    GmshTetMesh(GmshParameters *gmsh_parameters_pt,
-                const bool &use_mesh_grading_from_file,
-                TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+    GmshTetMesh(GmshParameters* gmsh_parameters_pt,
+                const bool& use_mesh_grading_from_file,
+                TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       Gmsh_parameters_pt(gmsh_parameters_pt)
     {
       build_it(time_stepper_pt, use_mesh_grading_from_file);
@@ -1650,17 +1650,17 @@ namespace oomph
 
   private:
     // Build function
-    void build_it(TimeStepper *time_stepper_pt,
-                  const bool &use_mesh_grading_from_file)
+    void build_it(TimeStepper* time_stepper_pt,
+                  const bool& use_mesh_grading_from_file)
     {
       // Mesh can only be built with 3D Telements.
       MeshChecker::assert_geometric_element<TElementGeometricBase, ELEMENT>(3);
 
       // Transfer data from parameters
-      TetMeshFacetedClosedSurface *outer_boundary_pt =
+      TetMeshFacetedClosedSurface* outer_boundary_pt =
         Gmsh_parameters_pt->outer_boundary_pt();
 
-      Vector<TetMeshFacetedSurface *> internal_surface_pt =
+      Vector<TetMeshFacetedSurface*> internal_surface_pt =
         Gmsh_parameters_pt->internal_surface_pt();
 
       // Remember timestepper
@@ -1723,7 +1723,7 @@ namespace oomph
       }
 
       // Build scaffold
-      GmshTetScaffoldMesh *tmp_scaffold_mesh_pt =
+      GmshTetScaffoldMesh* tmp_scaffold_mesh_pt =
         new GmshTetScaffoldMesh(Gmsh_parameters_pt, use_mesh_grading_from_file);
 
       // Convert mesh from scaffold to actual mesh
@@ -1748,12 +1748,12 @@ namespace oomph
 
   protected:
     /// Parameters
-    GmshParameters *Gmsh_parameters_pt;
+    GmshParameters* Gmsh_parameters_pt;
 
   private:
     /// Build unstructured tet gmesh mesh based on output from scaffold
-    void build_from_scaffold(GmshTetScaffoldMesh *tmp_scaffold_mesh_pt,
-                             TimeStepper *time_stepper_pt)
+    void build_from_scaffold(GmshTetScaffoldMesh* tmp_scaffold_mesh_pt,
+                             TimeStepper* time_stepper_pt)
     {
       // Mesh can only be built with 3D Telements.
       MeshChecker::assert_geometric_element<TElementGeometricBase, ELEMENT>(3);
@@ -1763,7 +1763,7 @@ namespace oomph
       Element_pt.resize(nelem);
 
       // Relation between elements pointers and numbers in old mesh
-      std::map<FiniteElement *, unsigned> scaffold_mesh_element_number;
+      std::map<FiniteElement*, unsigned> scaffold_mesh_element_number;
 
       // Create space for nodes
       unsigned nnode_scaffold = tmp_scaffold_mesh_pt->nnode();
@@ -1791,7 +1791,7 @@ namespace oomph
       // Setup map to check the (pseudo-)global node number
       // Nodes whose number is zero haven't been copied across
       // into the mesh yet.
-      std::map<Node *, unsigned> global_number;
+      std::map<Node*, unsigned> global_number;
       unsigned global_count = 0;
 
       // Loop over elements in scaffold mesh, visit their nodes
@@ -1806,7 +1806,7 @@ namespace oomph
         for (unsigned j = 0; j < nnod_el; j++)
         {
           // Pointer to node in the scaffold mesh
-          Node *scaffold_node_pt =
+          Node* scaffold_node_pt =
             tmp_scaffold_mesh_pt->finite_element_pt(e)->node_pt(j);
 
           // Get the (pseudo-)global node number in scaffold mesh
@@ -1818,14 +1818,14 @@ namespace oomph
           {
             // Get pointer to set of mesh boundaries that this
             // scaffold node occupies; NULL if the node is not on any boundary
-            std::set<unsigned> *boundaries_pt;
+            std::set<unsigned>* boundaries_pt;
             scaffold_node_pt->get_boundaries_pt(boundaries_pt);
 
             // Is it on boundaries?
             if (boundaries_pt != 0)
             {
               // Create new boundary node
-              Node *new_node_pt = finite_element_pt(e)->construct_boundary_node(
+              Node* new_node_pt = finite_element_pt(e)->construct_boundary_node(
                 j, time_stepper_pt);
 
               // Give it a number (not necessarily the global node
@@ -1874,12 +1874,12 @@ namespace oomph
         }
 
         // Now figure out which boundaries the faces are on
-        FiniteElement *fe_pt = finite_element_pt(e);
+        FiniteElement* fe_pt = finite_element_pt(e);
         for (unsigned f = 0; f < 4; f++)
         {
-          Node *face_node0_pt = 0;
-          Node *face_node1_pt = 0;
-          Node *face_node2_pt = 0;
+          Node* face_node0_pt = 0;
+          Node* face_node1_pt = 0;
+          Node* face_node2_pt = 0;
 
           switch (f)
           {
@@ -1918,15 +1918,15 @@ namespace oomph
 
           // If any of the boundary sets are empty we don't have
           // three nodes on the boundary...
-          std::set<unsigned> *bc0_pt;
+          std::set<unsigned>* bc0_pt;
           face_node0_pt->get_boundaries_pt(bc0_pt);
           if (bc0_pt != 0)
           {
-            std::set<unsigned> *bc1_pt;
+            std::set<unsigned>* bc1_pt;
             face_node1_pt->get_boundaries_pt(bc1_pt);
             if (bc1_pt != 0)
             {
-              std::set<unsigned> *bc2_pt;
+              std::set<unsigned>* bc2_pt;
               face_node2_pt->get_boundaries_pt(bc2_pt);
               if (bc2_pt != 0)
               {
@@ -1971,19 +1971,19 @@ namespace oomph
         Region_element_pt[i].resize(nel);
         for (unsigned e = 0; e < nel; e++)
         {
-          FiniteElement *scaff_el_pt =
+          FiniteElement* scaff_el_pt =
             tmp_scaffold_mesh_pt->Region_element_pt[i][e];
           unsigned scaff_el_number = scaffold_mesh_element_number[scaff_el_pt];
           Region_element_pt[i][e] =
-            dynamic_cast<FiniteElement *>(Element_pt[scaff_el_number]);
+            dynamic_cast<FiniteElement*>(Element_pt[scaff_el_number]);
 
           // Now figure out which boundaries the faces are on (again!)
-          FiniteElement *fe_pt = Region_element_pt[i][e];
+          FiniteElement* fe_pt = Region_element_pt[i][e];
           for (unsigned f = 0; f < 4; f++)
           {
-            Node *face_node0_pt = 0;
-            Node *face_node1_pt = 0;
-            Node *face_node2_pt = 0;
+            Node* face_node0_pt = 0;
+            Node* face_node1_pt = 0;
+            Node* face_node2_pt = 0;
 
             switch (f)
             {
@@ -2021,15 +2021,15 @@ namespace oomph
 
             // If any of the boundary sets are empty we don't have
             // three nodes on the boundary...
-            std::set<unsigned> *bc0_pt;
+            std::set<unsigned>* bc0_pt;
             face_node0_pt->get_boundaries_pt(bc0_pt);
             if (bc0_pt != 0)
             {
-              std::set<unsigned> *bc1_pt;
+              std::set<unsigned>* bc1_pt;
               face_node1_pt->get_boundaries_pt(bc1_pt);
               if (bc1_pt != 0)
               {
-                std::set<unsigned> *bc2_pt;
+                std::set<unsigned>* bc2_pt;
                 face_node2_pt->get_boundaries_pt(bc2_pt);
                 if (bc2_pt != 0)
                 {
@@ -2092,23 +2092,23 @@ namespace oomph
       Vector<double> s(3);
 
       // Map associating edge with midside node
-      std::map<std::pair<Node *, Node *>, Node *> midside_node_pt;
+      std::map<std::pair<Node*, Node*>, Node*> midside_node_pt;
 
       // Loop over all elements
       for (unsigned e = 0; e < nelem; e++)
       {
         // Cache pointers to the elements
-        FiniteElement *const el_pt = this->finite_element_pt(e);
-        FiniteElement *const simplex_el_pt =
+        FiniteElement* const el_pt = this->finite_element_pt(e);
+        FiniteElement* const simplex_el_pt =
           tmp_scaffold_mesh_pt->finite_element_pt(e);
 
         // Loop over the edges
         for (unsigned j = 0; j < 6; ++j)
         {
-          Node *nod0_pt = 0;
-          Node *nod1_pt = 0;
+          Node* nod0_pt = 0;
+          Node* nod1_pt = 0;
           unsigned new_node_number = 0;
-          std::pair<Node *, Node *> edge;
+          std::pair<Node*, Node*> edge;
           switch (j)
           {
             case 0:
@@ -2158,17 +2158,17 @@ namespace oomph
           // Identify existence of node via edge
           edge = std::make_pair(std::min(nod0_pt, nod1_pt),
                                 std::max(nod0_pt, nod1_pt));
-          Node *existing_node_pt = midside_node_pt[edge];
+          Node* existing_node_pt = midside_node_pt[edge];
           if (existing_node_pt == 0)
           {
             // If any of the boundary sets are empty we don't have
             // two edge nodes on the boundary...
             std::set<unsigned> common_bound_0_and_1;
-            std::set<unsigned> *bc0_pt;
+            std::set<unsigned>* bc0_pt;
             nod0_pt->get_boundaries_pt(bc0_pt);
             if (bc0_pt != 0)
             {
-              std::set<unsigned> *bc1_pt;
+              std::set<unsigned>* bc1_pt;
               nod1_pt->get_boundaries_pt(bc1_pt);
               if (bc1_pt != 0)
               {
@@ -2182,7 +2182,7 @@ namespace oomph
               }
             }
             // Storage for the new node
-            Node *new_node_pt = 0;
+            Node* new_node_pt = 0;
 
             // New non-boundary node:
             if (common_bound_0_and_1.size() == 0)
@@ -2247,9 +2247,9 @@ namespace oomph
     /// to true, the target element sizes are read from file (used during
     /// adaptation; otherwise uniform target size is used).
     RefineableGmshTetMesh(
-      GmshParameters *gmsh_parameters_pt,
-      const bool &use_mesh_grading_from_file,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      GmshParameters* gmsh_parameters_pt,
+      const bool& use_mesh_grading_from_file,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       GmshTetMesh<ELEMENT>(
         gmsh_parameters_pt, use_mesh_grading_from_file, time_stepper_pt)
     {
@@ -2258,8 +2258,8 @@ namespace oomph
 
     /// \short Constructor
     RefineableGmshTetMesh(
-      GmshParameters *gmsh_parameters_pt,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      GmshParameters* gmsh_parameters_pt,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       GmshTetMesh<ELEMENT>(gmsh_parameters_pt,
                            false, // Don't read mesh size data from file unless
                                   // explicitly requested.
@@ -2269,7 +2269,7 @@ namespace oomph
     }
 
     /// Adapt mesh, based on elemental error provided
-    void adapt(const Vector<double> &elem_error);
+    void adapt(const Vector<double>& elem_error);
 
     /// Refine uniformly
     unsigned unrefine_uniformly()
@@ -2281,7 +2281,7 @@ namespace oomph
     }
 
     /// Unrefine uniformly
-    void refine_uniformly(DocInfo &doc_info)
+    void refine_uniformly(DocInfo& doc_info)
     {
       // hierher do it!
       std::string error_msg("Not written yet...");

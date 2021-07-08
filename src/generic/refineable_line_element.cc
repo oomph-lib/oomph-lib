@@ -92,8 +92,8 @@ namespace oomph
   /// element, s_fraction, return a pointer to that node. If not, return
   /// NULL (0). If the node is periodic the flag is_periodic will be true.
   //==========================================================================
-  Node *RefineableQElement<1>::node_created_by_neighbour(
-    const Vector<double> &s_fraction, bool &is_periodic)
+  Node* RefineableQElement<1>::node_created_by_neighbour(
+    const Vector<double>& s_fraction, bool& is_periodic)
   {
     using namespace BinaryTreeNames;
 
@@ -133,7 +133,7 @@ namespace oomph
 
     // Allocate storage for the pointer to the neighbouring element
     // (using its binary tree representation)
-    BinaryTree *neighbour_pt;
+    BinaryTree* neighbour_pt;
 
     // Find pointer to neighbouring element along the edge in question and
     // calculate the local coordinate of the node within that element
@@ -151,7 +151,7 @@ namespace oomph
       if (neighbour_pt->object_pt()->nodes_built())
       {
         // If they have, find the node in question in the neighbour
-        Node *neighbour_node_pt =
+        Node* neighbour_node_pt =
           neighbour_pt->object_pt()->get_node_at_local_coordinate(
             s_in_neighbour);
 
@@ -213,10 +213,10 @@ namespace oomph
   ///   pressure values in a manner consistent with the pressure distribution
   ///   in the father element.
   //==========================================================================
-  void RefineableQElement<1>::build(Mesh *&mesh_pt,
-                                    Vector<Node *> &new_node_pt,
-                                    bool &was_already_built,
-                                    std::ofstream &new_nodes_file)
+  void RefineableQElement<1>::build(Mesh*& mesh_pt,
+                                    Vector<Node*>& new_node_pt,
+                                    bool& was_already_built,
+                                    std::ofstream& new_nodes_file)
   {
     using namespace BinaryTreeNames;
 
@@ -231,8 +231,8 @@ namespace oomph
     }
 
     // Pointer to the current element's father (in binary tree impersonation)
-    BinaryTree *father_pt =
-      dynamic_cast<BinaryTree *>(binary_tree_pt()->father_pt());
+    BinaryTree* father_pt =
+      dynamic_cast<BinaryTree*>(binary_tree_pt()->father_pt());
 
     // What type of son is the current element?
     // Ask its binary tree representation...
@@ -260,12 +260,12 @@ namespace oomph
       was_already_built = false;
 
       // Return pointer to father element
-      RefineableQElement<1> *father_el_pt =
-        dynamic_cast<RefineableQElement<1> *>(father_pt->object_pt());
+      RefineableQElement<1>* father_el_pt =
+        dynamic_cast<RefineableQElement<1>*>(father_pt->object_pt());
 
       // Timestepper should be the same for all nodes in father element.
       // Use it create timesteppers for new nodes.
-      TimeStepper *time_stepper_pt =
+      TimeStepper* time_stepper_pt =
         father_el_pt->node_pt(0)->time_stepper_pt();
 
       // Determine number of history values (including present)
@@ -359,7 +359,7 @@ namespace oomph
 
           // Get the pointer to the node in the father (returns NULL if there
           // is no node at this position)
-          Node *created_node_pt =
+          Node* created_node_pt =
             father_el_pt->get_node_at_local_coordinate(s_in_father);
 
           // Does this node already exist in father element?
@@ -517,8 +517,8 @@ namespace oomph
           } // End of case where we build the node ourselves
 
           // Check if the element is an algebraic element
-          AlgebraicElementBase *alg_el_pt =
-            dynamic_cast<AlgebraicElementBase *>(this);
+          AlgebraicElementBase* alg_el_pt =
+            dynamic_cast<AlgebraicElementBase*>(this);
 
           // If it is, set up node position (past and present) from algebraic
           // node position (past and present) from algebraic node update
@@ -550,17 +550,17 @@ namespace oomph
         // the vector of (pointers to the) geometric objects that affect the
         // MacroElement-based node update. This is the same as that in the
         // father element
-        MacroElementNodeUpdateElementBase *father_m_el_pt =
-          dynamic_cast<MacroElementNodeUpdateElementBase *>(father_el_pt);
+        MacroElementNodeUpdateElementBase* father_m_el_pt =
+          dynamic_cast<MacroElementNodeUpdateElementBase*>(father_el_pt);
         if (father_m_el_pt != 0)
         {
           // Get Vector of geometric objects from father (construct Vector
           // via copy operation)
-          Vector<GeomObject *> geom_object_pt(father_m_el_pt->geom_object_pt());
+          Vector<GeomObject*> geom_object_pt(father_m_el_pt->geom_object_pt());
 
           // Cast current element to MacroElementNodeUpdateElement:
-          MacroElementNodeUpdateElementBase *m_el_pt =
-            dynamic_cast<MacroElementNodeUpdateElementBase *>(this);
+          MacroElementNodeUpdateElementBase* m_el_pt =
+            dynamic_cast<MacroElementNodeUpdateElementBase*>(this);
 
 #ifdef PARANOID
           if (m_el_pt == 0)
@@ -592,15 +592,15 @@ namespace oomph
 #endif
 
         // Is the new element an ElementWithMovingNodes?
-        ElementWithMovingNodes *aux_el_pt =
-          dynamic_cast<ElementWithMovingNodes *>(this);
+        ElementWithMovingNodes* aux_el_pt =
+          dynamic_cast<ElementWithMovingNodes*>(this);
 
         // Pass down the information re the method for the evaluation
         // of the shape derivatives
         if (aux_el_pt != 0)
         {
-          ElementWithMovingNodes *aux_father_el_pt =
-            dynamic_cast<ElementWithMovingNodes *>(father_el_pt);
+          ElementWithMovingNodes* aux_father_el_pt =
+            dynamic_cast<ElementWithMovingNodes*>(father_el_pt);
 
 #ifdef PARANOID
           if (aux_father_el_pt == 0)
@@ -654,8 +654,8 @@ namespace oomph
   //==========================================================================
   ///  Print corner nodes, use colour (default "BLACK")
   //==========================================================================
-  void RefineableQElement<1>::output_corners(std::ostream &outfile,
-                                             const std::string &colour) const
+  void RefineableQElement<1>::output_corners(std::ostream& outfile,
+                                             const std::string& colour) const
   {
     // Allocate storage for local coordinate s
     Vector<double> s(1);
@@ -685,7 +685,7 @@ namespace oomph
   /// - nodal positions
   /// - (nodally) interpolated function values
   //==========================================================================
-  void RefineableQElement<1>::check_integrity(double &max_error)
+  void RefineableQElement<1>::check_integrity(double& max_error)
   {
     using namespace BinaryTreeNames;
 
@@ -737,7 +737,7 @@ namespace oomph
 
       // Allocate storage for the pointer to the neighbouring element
       // (using its binary tree representation)
-      BinaryTree *neighbour_pt;
+      BinaryTree* neighbour_pt;
 
       // Find pointer to neighbouring element along the edge in question and
       // calculate the local coordinate of the node within that element,
@@ -763,7 +763,7 @@ namespace oomph
         }
 
         // Allocate storage for pointer to the local node
-        Node *local_node_pt = 0;
+        Node* local_node_pt = 0;
 
         switch (edge_counter)
         {

@@ -72,7 +72,7 @@ namespace ProblemParameters
   double Nu = 0.3;
 
   /// Pointer to constitutive law
-  ConstitutiveLaw *Constitutive_law_pt = 0;
+  ConstitutiveLaw* Constitutive_law_pt = 0;
 
   /// Radius of penetrator
   double Radius = 0.2;
@@ -84,7 +84,7 @@ namespace ProblemParameters
   Vector<double> Centre;
 
   /// Penetrator
-  Penetrator *Penetrator_pt = 0;
+  Penetrator* Penetrator_pt = 0;
 
   /// Diffuse radiation (based on 300 W/m^2)
   double Diffuse_radiation = 0.4147111183;
@@ -101,10 +101,10 @@ namespace ProblemParameters
   /// (which has direction and magnitude; well, like most vectors, actually)
   /// and total diffusive radiation (which is later weighted by diffuse limiting
   /// angles). Input argument: time.
-  void atmospheric_radiation(const double &time,
-                             double &solar_flux_magnitude,
-                             Vector<double> &solar_flux_unit_vector,
-                             double &total_diffuse_radiation)
+  void atmospheric_radiation(const double& time,
+                             double& solar_flux_magnitude,
+                             Vector<double>& solar_flux_unit_vector,
+                             double& total_diffuse_radiation)
   {
     // Diffuse background radiation
     total_diffuse_radiation = Diffuse_radiation;
@@ -144,9 +144,9 @@ namespace ExactSolution
   double Omega_cos = 0.0;
 
   /// Exact solution as a Vector
-  void get_exact_u_for_unsteady_heat_validation(const double &t,
-                                                const Vector<double> &x,
-                                                Vector<double> &u)
+  void get_exact_u_for_unsteady_heat_validation(const double& t,
+                                                const Vector<double>& x,
+                                                Vector<double>& u)
   {
     double X = x[0];
     double Y = x[1];
@@ -158,9 +158,9 @@ namespace ExactSolution
   }
 
   /// Exact solution as a scalar
-  void get_exact_u_for_unsteady_heat_validation(const double &t,
-                                                const Vector<double> &x,
-                                                double &u)
+  void get_exact_u_for_unsteady_heat_validation(const double& t,
+                                                const Vector<double>& x,
+                                                double& u)
   {
     Vector<double> u_vect(1);
     get_exact_u_for_unsteady_heat_validation(t, x, u_vect);
@@ -168,9 +168,9 @@ namespace ExactSolution
   }
 
   /// Source function to make it an exact solution
-  void get_source_for_unsteady_heat_validation(const double &t,
-                                               const Vector<double> &x,
-                                               double &source)
+  void get_source_for_unsteady_heat_validation(const double& t,
+                                               const Vector<double>& x,
+                                               double& source)
   {
     double X = x[0];
     double Y = x[1];
@@ -202,11 +202,11 @@ namespace ExactSolution
 
   /// \short Flux into bulk required by the exact solution on a
   /// boundary with outer unit normal n. No dependence on temperature u.
-  void flux_into_bulk(const double &t,
-                      const Vector<double> &x,
-                      const Vector<double> &n,
-                      const double &u,
-                      double &flux)
+  void flux_into_bulk(const double& t,
+                      const Vector<double>& x,
+                      const Vector<double>& n,
+                      const double& u,
+                      double& flux)
   {
     double X = x[0];
     double Y = x[1];
@@ -236,11 +236,11 @@ namespace ExactSolution
   /// \short Total flux (into bulk + melt) required by the exact
   /// solution on a boundary with outer unit
   /// normal n. No dependence on temperature u.
-  void prescribed_flux_for_unsteady_heat_validation(const double &t,
-                                                    const Vector<double> &x,
-                                                    const Vector<double> &n,
-                                                    const double &u,
-                                                    double &flux)
+  void prescribed_flux_for_unsteady_heat_validation(const double& t,
+                                                    const Vector<double>& x,
+                                                    const Vector<double>& n,
+                                                    const double& u,
+                                                    double& flux)
   {
     double X = x[0];
 
@@ -258,7 +258,7 @@ namespace ExactSolution
   }
 
   /// Height of melting surface
-  double melting_surface_height(const double &t, const double &x)
+  double melting_surface_height(const double& t, const double& x)
   {
     return 1.0 -
            Growth_rate * t * t * (1.0 - cos(2.0 * x * 0.3141592653589793E1));
@@ -366,7 +366,7 @@ public:
     unsigned nel = Surface_flux_mesh_pt->nelement();
     for (unsigned e = 0; e < nel; e++)
     {
-      dynamic_cast<StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT> *>(
+      dynamic_cast<StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT>*>(
         Surface_flux_mesh_pt->element_pt(e))
         ->update_limiting_angles(Ordered_shielding_node_pt);
     }
@@ -383,18 +383,18 @@ public:
     // hierher Ordered_shielding_node_pt.push_back(Left_horizon_node_pt);
 
     // Associate elements with vertex nodes
-    std::map<Node *, std::set<FiniteElement *>> adj_el_pt;
+    std::map<Node*, std::set<FiniteElement*>> adj_el_pt;
     unsigned nel = Surface_flux_mesh_pt->nelement();
 
     oomph_info << "Number of elements: " << nel << std::endl;
 
     for (unsigned e = 0; e < nel; e++)
     {
-      FiniteElement *el_pt = Surface_flux_mesh_pt->finite_element_pt(e);
+      FiniteElement* el_pt = Surface_flux_mesh_pt->finite_element_pt(e);
       unsigned nnod = el_pt->nnode();
 
       // Associate element with first vertex node
-      Node *nod_pt = el_pt->node_pt(0);
+      Node* nod_pt = el_pt->node_pt(0);
       adj_el_pt[nod_pt].insert(el_pt);
 
       // Associate element with last vertex node
@@ -404,9 +404,9 @@ public:
 
     // Find node that is only associated with single element
     unsigned nfound = 0;
-    Node *first_node_pt = 0;
-    FiniteElement *first_element_pt = 0;
-    for (std::map<Node *, std::set<FiniteElement *>>::iterator it =
+    Node* first_node_pt = 0;
+    FiniteElement* first_element_pt = 0;
+    for (std::map<Node*, std::set<FiniteElement*>>::iterator it =
            adj_el_pt.begin();
          it != adj_el_pt.end();
          it++)
@@ -421,7 +421,7 @@ public:
         }
         else
         {
-          Node *other_node_pt = (*it).first;
+          Node* other_node_pt = (*it).first;
           if (other_node_pt->x(0) <= first_node_pt->x(0))
           {
             first_node_pt = other_node_pt;
@@ -433,8 +433,8 @@ public:
     }
 
     // Current element/node
-    FiniteElement *current_element_pt = first_element_pt;
-    Node *current_node_pt = first_node_pt;
+    FiniteElement* current_element_pt = first_element_pt;
+    Node* current_node_pt = first_node_pt;
 
     oomph_info << "FIRST NODE: " << first_node_pt->x(0) << " "
                << first_node_pt->x(1) << " " << std::endl;
@@ -448,7 +448,7 @@ public:
     while (n_associated_els == 2)
     {
       // Next node
-      Node *next_node_pt = current_element_pt->node_pt(0);
+      Node* next_node_pt = current_element_pt->node_pt(0);
       if (next_node_pt == current_node_pt)
       {
         unsigned nnod = current_element_pt->nnode();
@@ -456,8 +456,8 @@ public:
       }
 
       // Get next element
-      std::set<FiniteElement *>::iterator it = adj_el_pt[next_node_pt].begin();
-      FiniteElement *next_element_pt = (*it);
+      std::set<FiniteElement*>::iterator it = adj_el_pt[next_node_pt].begin();
+      FiniteElement* next_element_pt = (*it);
       if (next_element_pt == current_element_pt)
       {
         it++;
@@ -513,7 +513,7 @@ private:
       for (unsigned e = 0; e < n_element; e++)
       {
         // Get pointer to the bulk element that is adjacent to boundary b
-        ELEMENT *bulk_elem_pt = dynamic_cast<ELEMENT *>(
+        ELEMENT* bulk_elem_pt = dynamic_cast<ELEMENT*>(
           Bulk_mesh_pt->boundary_element_in_region_pt(b, 1, e));
 
         // What is the face index of element e along boundary b
@@ -524,7 +524,7 @@ private:
         unsigned id = 0; // hierher make member
 
         // Build the corresponding contact element
-        NonlinearSurfaceContactElement<ELEMENT> *contact_element_pt =
+        NonlinearSurfaceContactElement<ELEMENT>* contact_element_pt =
           new NonlinearSurfaceContactElement<ELEMENT>(
             bulk_elem_pt, face_index, id);
 
@@ -571,14 +571,14 @@ private:
       for (unsigned e = 0; e < n_element; e++)
       {
         // Get pointer to the bulk element that is adjacent to boundary b
-        ELEMENT *bulk_elem_pt =
-          dynamic_cast<ELEMENT *>(Bulk_mesh_pt->boundary_element_pt(b, e));
+        ELEMENT* bulk_elem_pt =
+          dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(b, e));
 
         // What is the face index of element e along boundary b
         int face_index = Bulk_mesh_pt->face_index_at_boundary(b, e);
 
         // Create flux element
-        StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT> *el_pt =
+        StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT>* el_pt =
           new StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT>(bulk_elem_pt,
                                                               face_index);
 
@@ -616,8 +616,8 @@ private:
     unsigned nel = Bulk_mesh_pt->nregion_element(r);
     for (unsigned e = 0; e < nel; e++)
     {
-      ELEMENT *el_pt =
-        dynamic_cast<ELEMENT *>(Bulk_mesh_pt->region_element_pt(r, e));
+      ELEMENT* el_pt =
+        dynamic_cast<ELEMENT*>(Bulk_mesh_pt->region_element_pt(r, e));
 
       // Non-dim thermal inertia
       el_pt->alpha_pt() = &ProblemParameters::Alpha_rock;
@@ -632,7 +632,7 @@ private:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Cast to a solid element
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
       // Set the constitutive law
       el_pt->constitutive_law_pt() = ProblemParameters::Constitutive_law_pt;
@@ -656,7 +656,7 @@ private:
     unsigned nnod = Bulk_mesh_pt->nboundary_node(b);
     for (unsigned j = 0; j < nnod; j++)
     {
-      SolidNode *nod_pt = Bulk_mesh_pt->boundary_node_pt(b, j);
+      SolidNode* nod_pt = Bulk_mesh_pt->boundary_node_pt(b, j);
       nod_pt->pin_position(0);
       nod_pt->pin_position(1);
     }
@@ -666,14 +666,14 @@ private:
     nnod = Bulk_mesh_pt->nboundary_node(b);
     for (unsigned j = 0; j < nnod; j++)
     {
-      SolidNode *nod_pt = Bulk_mesh_pt->boundary_node_pt(b, j);
+      SolidNode* nod_pt = Bulk_mesh_pt->boundary_node_pt(b, j);
       nod_pt->pin_position(0);
     }
     b = Right_boundary_id;
     nnod = Bulk_mesh_pt->nboundary_node(b);
     for (unsigned j = 0; j < nnod; j++)
     {
-      SolidNode *nod_pt = Bulk_mesh_pt->boundary_node_pt(b, j);
+      SolidNode* nod_pt = Bulk_mesh_pt->boundary_node_pt(b, j);
       nod_pt->pin_position(0);
     }
 
@@ -689,8 +689,8 @@ private:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Upcast from GeneralisedElement
-      NonlinearSurfaceContactElement<ELEMENT> *el_pt =
-        dynamic_cast<NonlinearSurfaceContactElement<ELEMENT> *>(
+      NonlinearSurfaceContactElement<ELEMENT>* el_pt =
+        dynamic_cast<NonlinearSurfaceContactElement<ELEMENT>*>(
           Surface_contact_mesh_pt->element_pt(e));
 
       // Set pointer to penetrator
@@ -706,8 +706,8 @@ private:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Upcast from GeneralisedElement
-      StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT> *el_pt =
-        dynamic_cast<StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT> *>(
+      StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT>* el_pt =
+        dynamic_cast<StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT>*>(
           Surface_flux_mesh_pt->element_pt(e));
 
       // Set atmospheric radiation fct
@@ -725,20 +725,20 @@ private:
 #ifdef ADAPTIVE
 
   /// Pointer to bulk mesh
-  RefineableSolidTriangleMesh<ELEMENT> *Bulk_mesh_pt;
+  RefineableSolidTriangleMesh<ELEMENT>* Bulk_mesh_pt;
 
 #else
 
   /// Pointer to bulk mesh
-  SolidTriangleMesh<ELEMENT> *Bulk_mesh_pt;
+  SolidTriangleMesh<ELEMENT>* Bulk_mesh_pt;
 
 #endif
 
   /// Pointer to the "surface" mesh
-  Mesh *Surface_contact_mesh_pt;
+  Mesh* Surface_contact_mesh_pt;
 
   /// Pointer to the "surface" mesh
-  Mesh *Surface_flux_mesh_pt;
+  Mesh* Surface_flux_mesh_pt;
 
   /// ID of left melt boundary
   unsigned Left_melt_boundary_id;
@@ -768,10 +768,10 @@ private:
   DocInfo Doc_info;
 
   /// Storage for ordered shielding nodes
-  Vector<Node *> Ordered_shielding_node_pt;
+  Vector<Node*> Ordered_shielding_node_pt;
 
   /// Face elements on potentially sun-exposed boundaries
-  Vector<FiniteElement *> Ordered_shielding_face_element_pt;
+  Vector<FiniteElement*> Ordered_shielding_face_element_pt;
 
 }; // end of problem class
 
@@ -799,12 +799,12 @@ SolarRadiationProblem<ELEMENT>::SolarRadiationProblem()
   add_time_stepper_pt(new BDF<2>);
 
   // Pointer to the closed curve that defines the outer boundary
-  TriangleMeshClosedCurve *closed_curve_pt = 0;
+  TriangleMeshClosedCurve* closed_curve_pt = 0;
 
   // Build outer boundary as Polygon
 
   // The boundary, represented by polylines
-  Vector<TriangleMeshCurveSection *> boundary_polyline_pt;
+  Vector<TriangleMeshCurveSection*> boundary_polyline_pt;
 
   // Store coordinates of left and right point at which penetrator
   // penetrates flat surface
@@ -914,11 +914,11 @@ SolarRadiationProblem<ELEMENT>::SolarRadiationProblem()
 
   // Build boundary poly line
   Lower_contact_boundary_id = 6;
-  TriangleMeshPolyLine *lower_contact_boundary_pt =
+  TriangleMeshPolyLine* lower_contact_boundary_pt =
     new TriangleMeshPolyLine(circle_bound_coords, Lower_contact_boundary_id);
 
   // Store as internal poly line
-  Vector<TriangleMeshCurveSection *> internal_polyline_pt(1);
+  Vector<TriangleMeshCurveSection*> internal_polyline_pt(1);
   internal_polyline_pt[0] = lower_contact_boundary_pt;
 
   // Vertex coordinates on upper contact boundary
@@ -953,7 +953,7 @@ SolarRadiationProblem<ELEMENT>::SolarRadiationProblem()
 
   // Build boundary poly line
   Upper_contact_boundary_id = 4;
-  TriangleMeshPolyLine *upper_contact_boundary_pt =
+  TriangleMeshPolyLine* upper_contact_boundary_pt =
     new TriangleMeshPolyLine(circle_bound_coords, Upper_contact_boundary_id);
   boundary_polyline_pt.push_back(upper_contact_boundary_pt);
 
@@ -1021,7 +1021,7 @@ SolarRadiationProblem<ELEMENT>::SolarRadiationProblem()
 
   // Build boundary poly line
   Left_melt_boundary_id = 5;
-  TriangleMeshPolyLine *left_melt_boundary_pt =
+  TriangleMeshPolyLine* left_melt_boundary_pt =
     new TriangleMeshPolyLine(left_melt_bound_coords, Left_melt_boundary_id);
   boundary_polyline_pt.push_back(left_melt_boundary_pt);
 
@@ -1029,7 +1029,7 @@ SolarRadiationProblem<ELEMENT>::SolarRadiationProblem()
   // with initial vertex of lower contact boundary
   unsigned vertex_id_of_connection = 0;
   lower_contact_boundary_pt->connect_initial_vertex_to_polyline(
-    dynamic_cast<TriangleMeshPolyLine *>(upper_contact_boundary_pt),
+    dynamic_cast<TriangleMeshPolyLine*>(upper_contact_boundary_pt),
     vertex_id_of_connection);
 
 //#define USE_BROKEN
@@ -1042,7 +1042,7 @@ SolarRadiationProblem<ELEMENT>::SolarRadiationProblem()
   // with final vertex of lower contact boundary
   vertex_id_of_connection = nvertex_contact_upper - 1;
   lower_contact_boundary_pt->connect_final_vertex_to_polyline(
-    dynamic_cast<TriangleMeshPolyLine *>(upper_contact_boundary_pt),
+    dynamic_cast<TriangleMeshPolyLine*>(upper_contact_boundary_pt),
     vertex_id_of_connection);
 
 #else
@@ -1051,18 +1051,18 @@ SolarRadiationProblem<ELEMENT>::SolarRadiationProblem()
   // with final vertex of lower contact boundary
   vertex_id_of_connection = 0;
   lower_contact_boundary_pt->connect_final_vertex_to_polyline(
-    dynamic_cast<TriangleMeshPolyLine *>(left_melt_boundary_pt),
+    dynamic_cast<TriangleMeshPolyLine*>(left_melt_boundary_pt),
     vertex_id_of_connection);
 
 #endif
 
   // Create open curve that defines boulder/ice interface
-  Vector<TriangleMeshOpenCurve *> inner_boundary_pt;
+  Vector<TriangleMeshOpenCurve*> inner_boundary_pt;
   inner_boundary_pt.push_back(new TriangleMeshOpenCurve(internal_polyline_pt));
 
   // Create the triangle mesh polygon for outer boundary
   //----------------------------------------------------
-  TriangleMeshPolygon *outer_polygon =
+  TriangleMeshPolygon* outer_polygon =
     new TriangleMeshPolygon(boundary_polyline_pt);
 
   // Set the pointer
@@ -1092,7 +1092,7 @@ SolarRadiationProblem<ELEMENT>::SolarRadiationProblem()
     triangle_mesh_parameters, time_stepper_pt());
 
   // Set error estimator for bulk mesh
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   Bulk_mesh_pt->spatial_error_estimator_pt() = error_estimator_pt;
 
   // // Set element size limits
@@ -1186,7 +1186,7 @@ void SolarRadiationProblem<ELEMENT>::doc_solution()
   unsigned nel = Surface_contact_mesh_pt->nelement();
   for (unsigned e = 0; e < nel; e++)
   {
-    dynamic_cast<NonlinearSurfaceContactElement<ELEMENT> *>(
+    dynamic_cast<NonlinearSurfaceContactElement<ELEMENT>*>(
       Surface_contact_mesh_pt->element_pt(e))
       ->output(some_file);
   }
@@ -1233,7 +1233,7 @@ void SolarRadiationProblem<ELEMENT>::doc_solution()
   nel = Surface_flux_mesh_pt->nelement();
   for (unsigned e = 0; e < nel; e++)
   {
-    dynamic_cast<StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT> *>(
+    dynamic_cast<StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT>*>(
       Surface_flux_mesh_pt->element_pt(e))
       ->output_atmospheric_radiation(some_file);
   }
@@ -1248,7 +1248,7 @@ void SolarRadiationProblem<ELEMENT>::doc_solution()
   nel = Surface_flux_mesh_pt->nelement();
   for (unsigned e = 0; e < nel; e++)
   {
-    dynamic_cast<StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT> *>(
+    dynamic_cast<StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT>*>(
       Surface_flux_mesh_pt->element_pt(e))
       ->output_limiting_angles(some_file);
   }
@@ -1271,7 +1271,7 @@ void SolarRadiationProblem<ELEMENT>::doc_solution()
               Doc_info.number(),
               count++);
       some_file.open(filename);
-      dynamic_cast<StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT> *>(
+      dynamic_cast<StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT>*>(
         Ordered_shielding_face_element_pt[e])
         ->output_diffuse_radiation_cone(some_file, radius);
       some_file.close();
@@ -1285,7 +1285,7 @@ void SolarRadiationProblem<ELEMENT>::doc_solution()
               Doc_info.number(),
               count++);
       some_file.open(filename);
-      dynamic_cast<StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT> *>(
+      dynamic_cast<StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT>*>(
         Ordered_shielding_face_element_pt[e])
         ->output_diffuse_radiation_cone_max_angle(some_file, radius);
       some_file.close();
@@ -1299,7 +1299,7 @@ void SolarRadiationProblem<ELEMENT>::doc_solution()
               Doc_info.number(),
               count++);
       some_file.open(filename);
-      dynamic_cast<StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT> *>(
+      dynamic_cast<StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT>*>(
         Ordered_shielding_face_element_pt[e])
         ->output_diffuse_radiation_cone_min_angle(some_file, radius);
       some_file.close();
@@ -1343,7 +1343,7 @@ void SolarRadiationProblem<ELEMENT>::doc_solution()
 //=======start_of_main====================================================
 /// \short Driver code
 //========================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // hierher
   FiniteElement::Accept_negative_jacobian = true;

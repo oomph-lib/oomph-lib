@@ -41,7 +41,7 @@ namespace oomph
   /// Dump the triangulateio structure to a dump file and
   /// record boundary coordinates of boundary nodes
   //==============================================================
-  void TriangleMeshBase::dump_triangulateio(std::ostream &dump_file)
+  void TriangleMeshBase::dump_triangulateio(std::ostream& dump_file)
   {
     TriangleHelper::dump_triangulateio(Triangulateio, dump_file);
 
@@ -65,7 +65,7 @@ namespace oomph
           dump_file << nnod << " # Number of dumped boundary nodes\n";
           for (unsigned j = 0; j < nnod; j++)
           {
-            Node *nod_pt = boundary_node_pt(b, j);
+            Node* nod_pt = boundary_node_pt(b, j);
             nod_pt->get_coordinates_on_boundary(b, zeta);
             dump_file << zeta[0] << std::endl;
           }
@@ -87,7 +87,7 @@ namespace oomph
   /// Regenerate the mesh from a dumped triangulateio file
   /// and dumped boundary coordinates of boundary nodes
   //==============================================================
-  void TriangleMeshBase::remesh_from_triangulateio(std::istream &restart_file)
+  void TriangleMeshBase::remesh_from_triangulateio(std::istream& restart_file)
   {
 #ifdef PARANOID
     // Record number of boundaries
@@ -179,7 +179,7 @@ namespace oomph
             zeta[0] = atof(input_string.c_str());
 
             // Set it
-            Node *nod_pt = boundary_node_pt(b, j);
+            Node* nod_pt = boundary_node_pt(b, j);
             nod_pt->set_coordinates_on_boundary(b, zeta);
           }
 
@@ -219,8 +219,8 @@ namespace oomph
   /// The function give the same result of the "report" function
   /// included in the tricall.c, esternal_src.
   //==============================================================
-  void TriangleMeshBase::write_triangulateio(TriangulateIO &triangle,
-                                             std::string &s)
+  void TriangleMeshBase::write_triangulateio(TriangulateIO& triangle,
+                                             std::string& s)
   {
     std::ofstream outfile;
     char filename[100];
@@ -397,7 +397,7 @@ namespace oomph
   /// Setup lookup schemes which establish which elements are located
   /// next to which boundaries (Doc to outfile if it's open).
   //================================================================
-  void TriangleMeshBase::setup_boundary_element_info(std::ostream &outfile)
+  void TriangleMeshBase::setup_boundary_element_info(std::ostream& outfile)
   {
     // Should we document the output here
     bool doc = false;
@@ -415,11 +415,11 @@ namespace oomph
 
     // Temporary vector of vectors of pointers to elements on the boundaries:
     // This is a vector to ensure that order is strictly preserved
-    Vector<Vector<FiniteElement *>> vector_of_boundary_element_pt;
+    Vector<Vector<FiniteElement*>> vector_of_boundary_element_pt;
     vector_of_boundary_element_pt.resize(nbound);
 
     // Matrix map for working out the fixed face for elements on boundary
-    MapMatrixMixed<unsigned, FiniteElement *, int> face_identifier;
+    MapMatrixMixed<unsigned, FiniteElement*, int> face_identifier;
 
     // Loop over elements
     //-------------------
@@ -427,14 +427,14 @@ namespace oomph
 
     // Get pointer to vector of boundaries that the
     // node lives on
-    Vector<std::set<unsigned> *> boundaries_pt(3, 0);
+    Vector<std::set<unsigned>*> boundaries_pt(3, 0);
 
     // Data needed to deal with edges through the
     // interior of the domain
     std::map<Edge, unsigned> edge_count;
     std::map<Edge, TriangleBoundaryHelper::BCInfo> edge_bcinfo;
     std::map<Edge, TriangleBoundaryHelper::BCInfo> face_info;
-    MapMatrixMixed<unsigned, FiniteElement *, int> face_count;
+    MapMatrixMixed<unsigned, FiniteElement*, int> face_count;
     Vector<unsigned> bonus(nbound);
 
     // When using internal boundaries, an edge can be related to more than
@@ -444,7 +444,7 @@ namespace oomph
     for (unsigned e = 0; e < nel; e++)
     {
       // Get pointer to element
-      FiniteElement *fe_pt = finite_element_pt(e);
+      FiniteElement* fe_pt = finite_element_pt(e);
 
       if (doc)
       {
@@ -653,7 +653,7 @@ namespace oomph
         {
           // Add element and face to the appropriate vectors
           // Does the pointer already exits in the vector
-          Vector<FiniteElement *>::iterator b_el_it = std::find(
+          Vector<FiniteElement*>::iterator b_el_it = std::find(
             vector_of_boundary_element_pt[static_cast<unsigned>(bound)].begin(),
             vector_of_boundary_element_pt[static_cast<unsigned>(bound)].end(),
             it->second.FE_pt);
@@ -692,13 +692,13 @@ namespace oomph
       Face_index_at_boundary[i].resize(nel);
 
       unsigned e_count = 0;
-      typedef Vector<FiniteElement *>::iterator IT;
+      typedef Vector<FiniteElement*>::iterator IT;
       for (IT it = vector_of_boundary_element_pt[i].begin();
            it != vector_of_boundary_element_pt[i].end();
            it++)
       {
         // Recover pointer to element
-        FiniteElement *fe_pt = *it;
+        FiniteElement* fe_pt = *it;
 
         // Add to permanent storage
         Boundary_element_pt[i].push_back(fe_pt);
@@ -738,7 +738,7 @@ namespace oomph
         // Loop over elements on given boundary
         for (unsigned e = 0; e < nel; e++)
         {
-          FiniteElement *fe_pt = Boundary_element_pt[i][e];
+          FiniteElement* fe_pt = Boundary_element_pt[i][e];
           outfile << "Boundary element:" << fe_pt
                   << " Face index of boundary is "
                   << Face_index_at_boundary[i][e] << std::endl;

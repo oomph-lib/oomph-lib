@@ -70,7 +70,7 @@ namespace oomph
   {
   private:
     /// Pointer to a private data member, the Rayleigh number
-    double *Ra_pt;
+    double* Ra_pt;
 
     /// The static default value of the Rayleigh number
     static double Default_Physical_Constant_Value;
@@ -86,7 +86,7 @@ namespace oomph
     }
 
     /// Unpin p_dof-th pressure dof
-    void unfix_pressure(const unsigned &p_dof)
+    void unfix_pressure(const unsigned& p_dof)
     {
       this->internal_data_pt(this->P_nst_internal_index)->unpin(p_dof);
     }
@@ -94,20 +94,20 @@ namespace oomph
     ///\short The required number of values stored at the nodes is the sum of
     /// the required values of the two single-physics  elements. Note that this
     /// step is generic for any multi-physics element of this type.
-    unsigned required_nvalue(const unsigned &n) const
+    unsigned required_nvalue(const unsigned& n) const
     {
       return (QAdvectionDiffusionElement<DIM, 3>::required_nvalue(n) +
               QCrouzeixRaviartElement<DIM>::required_nvalue(n));
     }
 
     /// Access function for the Rayleigh number (const version)
-    const double &ra() const
+    const double& ra() const
     {
       return *Ra_pt;
     }
 
     /// Access function for the pointer to the Rayleigh number
-    double *&ra_pt()
+    double*& ra_pt()
     {
       return Ra_pt;
     }
@@ -145,9 +145,9 @@ namespace oomph
     /// \short Write values of the i-th scalar field at the plot points. Broken
     /// virtual. Needs to be implemented for each new specific element type.
     /// Temporary dummy
-    void scalar_value_paraview(std::ofstream &file_out,
-                               const unsigned &i,
-                               const unsigned &nplot) const
+    void scalar_value_paraview(std::ofstream& file_out,
+                               const unsigned& i,
+                               const unsigned& nplot) const
     {
       throw OomphLibError(
         "This function hasn't been implemented for this element",
@@ -158,13 +158,13 @@ namespace oomph
     /// \short Name of the i-th scalar field. Default implementation
     /// returns V1 for the first one, V2 for the second etc. Can (should!) be
     /// overloaded with more meaningful names.
-    std::string scalar_name_paraview(const unsigned &i) const
+    std::string scalar_name_paraview(const unsigned& i) const
     {
       return "V" + StringConversion::to_string(i);
     }
 
     ///  Overload the standard output function with the broken default
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       FiniteElement::output(outfile);
     }
@@ -172,7 +172,7 @@ namespace oomph
     /// \short Output function:
     ///  Output x, y, u, v, p, theta at Nplot^DIM plot points
     // Start of output function
-    void output(std::ostream &outfile, const unsigned &nplot)
+    void output(std::ostream& outfile, const unsigned& nplot)
     {
       // vector of local coordinates
       Vector<double> s(DIM);
@@ -212,20 +212,20 @@ namespace oomph
     } // End of output function
 
     /// \short C-style output function: Broken default
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
 
     ///  \short C-style output function: Broken default
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       FiniteElement::output(file_pt, n_plot);
     }
 
     /// \short Output function for an exact solution: Broken default
-    void output_fct(std::ostream &outfile,
-                    const unsigned &Nplot,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& Nplot,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
     {
       FiniteElement::output_fct(outfile, Nplot, exact_soln_pt);
@@ -233,9 +233,9 @@ namespace oomph
 
     /// \short Output function for a time-dependent exact solution:
     /// Broken default.
-    void output_fct(std::ostream &outfile,
-                    const unsigned &Nplot,
-                    const double &time,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& Nplot,
+                    const double& time,
                     FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
     {
       FiniteElement::output_fct(outfile, Nplot, time, exact_soln_pt);
@@ -253,11 +253,11 @@ namespace oomph
     /// Plot at a given number of plot points and compute L2 error
     /// and L2 norm of velocity solution over element
     /// Call the broken default
-    void compute_error(std::ostream &outfile,
+    void compute_error(std::ostream& outfile,
                        FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
-                       const double &time,
-                       double &error,
-                       double &norm)
+                       const double& time,
+                       double& error,
+                       double& norm)
     {
       FiniteElement::compute_error(outfile, exact_soln_pt, time, error, norm);
     }
@@ -267,10 +267,10 @@ namespace oomph
     /// Plot at a given number of plot points and compute L2 error
     /// and L2 norm of velocity solution over element
     /// Call the broken default
-    void compute_error(std::ostream &outfile,
+    void compute_error(std::ostream& outfile,
                        FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-                       double &error,
-                       double &norm)
+                       double& error,
+                       double& norm)
     {
       FiniteElement::compute_error(outfile, exact_soln_pt, error, norm);
     }
@@ -278,10 +278,10 @@ namespace oomph
     /// \short Overload the wind function in the advection-diffusion equations.
     /// This provides the coupling from the Navier--Stokes equations to the
     /// advection-diffusion equations because the wind is the fluid velocity.
-    void get_wind_adv_diff(const unsigned &ipt,
-                           const Vector<double> &s,
-                           const Vector<double> &x,
-                           Vector<double> &wind) const
+    void get_wind_adv_diff(const unsigned& ipt,
+                           const Vector<double>& s,
+                           const Vector<double>& x,
+                           Vector<double>& wind) const
     {
       // The wind function is simply the velocity at the points
       this->interpolated_u_nst(s, wind);
@@ -292,11 +292,11 @@ namespace oomph
     /// to the Navier--Stokes equations, the body force is the
     /// temperature multiplied by the Rayleigh number acting in the
     /// direction opposite to gravity.
-    void get_body_force_nst(const double &time,
-                            const unsigned &ipt,
-                            const Vector<double> &s,
-                            const Vector<double> &x,
-                            Vector<double> &result)
+    void get_body_force_nst(const double& time,
+                            const unsigned& ipt,
+                            const Vector<double>& s,
+                            const Vector<double>& x,
+                            Vector<double>& result)
     {
       // Get the temperature
       const double interpolated_t = this->interpolated_u_adv_diff(s);
@@ -317,7 +317,7 @@ namespace oomph
     /// in the vector to zero. This allows us to call the
     /// fill_in_* functions of the constituent single-physics elements
     /// sequentially, without wiping out any previously computed entries.
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Fill in the residuals of the Navier-Stokes equations
       NavierStokesEquations<DIM>::fill_in_contribution_to_residuals(residuals);
@@ -333,8 +333,8 @@ namespace oomph
 
     ///\short Compute the element's residual vector and the Jacobian matrix.
     /// Jacobian is computed by finite-differencing.
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       // This function computes the Jacobian by finite-differencing
       FiniteElement::fill_in_contribution_to_jacobian(residuals, jacobian);
@@ -343,9 +343,9 @@ namespace oomph
     /// Add the element's contribution to its residuals vector,
     /// jacobian matrix and mass matrix
     void fill_in_contribution_to_jacobian_and_mass_matrix(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix)
     {
       // Call the standard (Broken) function
       // which will prevent these elements from being used
@@ -362,7 +362,7 @@ namespace oomph
     ///\short Helper function to get the off-diagonal blocks of the Jacobian
     /// matrix by finite differences
     void fill_in_off_diagonal_jacobian_blocks_by_fd(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian)
+      Vector<double>& residuals, DenseMatrix<double>& jacobian)
     {
       // Local storage for the index in the nodes at which the
       // Navier-Stokes velocities are stored (we know that this should be 0,1,2)
@@ -406,7 +406,7 @@ namespace oomph
           if (local_unknown >= 0)
           {
             // Get a pointer to the velocity value
-            double *value_pt = this->node_pt(n)->value_pt(u_nodal_nst[i]);
+            double* value_pt = this->node_pt(n)->value_pt(u_nodal_nst[i]);
 
             // Save the old value
             double old_var = *value_pt;
@@ -458,7 +458,7 @@ namespace oomph
           if (local_unknown >= 0)
           {
             // Get a pointer to the concentration value
-            double *value_pt = this->node_pt(n)->value_pt(u_nodal_adv_diff);
+            double* value_pt = this->node_pt(n)->value_pt(u_nodal_adv_diff);
 
             // Save the old value
             double old_var = *value_pt;
@@ -506,8 +506,8 @@ namespace oomph
 
     ///\short Compute the element's residual Vector and the Jacobian matrix.
     /// Use finite-differencing only for the off-diagonal blocks.
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       // Calculate the Navier-Stokes contributions (diagonal block and
       // residuals)
@@ -527,9 +527,9 @@ namespace oomph
     /// Add the element's contribution to its residuals vector,
     /// jacobian matrix and mass matrix
     void fill_in_contribution_to_jacobian_and_mass_matrix(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix)
     {
       // Get the analytic diagonal terms
       NavierStokesEquations<
@@ -553,7 +553,7 @@ namespace oomph
     ///\short Helper function to get the off-diagonal blocks of the Jacobian
     /// matrix analytically
     void fill_in_off_diagonal_jacobian_blocks_analytic(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian)
+      Vector<double>& residuals, DenseMatrix<double>& jacobian)
     {
       // We now fill in the off-diagonal (interaction) blocks analytically
       // This requires knowledge of exactly how the residuals are assembled
@@ -683,8 +683,8 @@ namespace oomph
 
     ///\short Compute the element's residual Vector and the Jacobian matrix.
     /// Use analytic expressions for the off-diagonal blocks
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       // Calculate the Navier-Stokes contributions (diagonal block and
       // residuals)
@@ -703,9 +703,9 @@ namespace oomph
     /// Add the element's contribution to its residuals vector,
     /// jacobian matrix and mass matrix
     void fill_in_contribution_to_jacobian_and_mass_matrix(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix)
     {
       // Get the analytic diagonal terms for the jacobian and mass matrix
       NavierStokesEquations<
@@ -789,7 +789,7 @@ namespace oomph
   {
   private:
     /// Pointer to a new physical variable, the Rayleigh number
-    double *Ra_pt;
+    double* Ra_pt;
 
     /// The static default value of the Rayleigh number
     static double Default_Physical_Constant_Value;
@@ -808,20 +808,20 @@ namespace oomph
     ///\short The required number of values stored at the nodes is
     /// the sum of the required values of the two single-physics elements. This
     /// step is generic for any composed element of this type.
-    inline unsigned required_nvalue(const unsigned &n) const
+    inline unsigned required_nvalue(const unsigned& n) const
     {
       return (RefineableQAdvectionDiffusionElement<DIM, 3>::required_nvalue(n) +
               RefineableQCrouzeixRaviartElement<DIM>::required_nvalue(n));
     }
 
     /// Access function for the Rayleigh number (const version)
-    const double &ra() const
+    const double& ra() const
     {
       return *Ra_pt;
     }
 
     /// Access function for the pointer to the Rayleigh number
-    double *&ra_pt()
+    double*& ra_pt()
     {
       return Ra_pt;
     }
@@ -859,9 +859,9 @@ namespace oomph
     /// \short Write values of the i-th scalar field at the plot points. Broken
     /// virtual. Needs to be implemented for each new specific element type.
     /// Temporary dummy
-    void scalar_value_paraview(std::ofstream &file_out,
-                               const unsigned &i,
-                               const unsigned &nplot) const
+    void scalar_value_paraview(std::ofstream& file_out,
+                               const unsigned& i,
+                               const unsigned& nplot) const
     {
       throw OomphLibError(
         "This function hasn't been implemented for this element",
@@ -872,20 +872,20 @@ namespace oomph
     /// \short Name of the i-th scalar field. Default implementation
     /// returns V1 for the first one, V2 for the second etc. Can (should!) be
     /// overloaded with more meaningful names.
-    std::string scalar_name_paraview(const unsigned &i) const
+    std::string scalar_name_paraview(const unsigned& i) const
     {
       return "V" + StringConversion::to_string(i);
     }
 
     ///  Overload the standard output function with the broken default
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       FiniteElement::output(outfile);
     }
 
     /// \short Output function:
     ///  x,y,u   or    x,y,z,u at Nplot^DIM plot points
-    void output(std::ostream &outfile, const unsigned &nplot)
+    void output(std::ostream& outfile, const unsigned& nplot)
     {
       // vector of local coordinates
       Vector<double> s(DIM);
@@ -925,20 +925,20 @@ namespace oomph
     }
 
     /// \short C-style output function:  Broken default
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
 
     ///  \short C-style output function: Broken default
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       FiniteElement::output(file_pt, n_plot);
     }
 
     /// \short Output function for an exact solution: Broken default
-    void output_fct(std::ostream &outfile,
-                    const unsigned &Nplot,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& Nplot,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
     {
       FiniteElement::output_fct(outfile, Nplot, exact_soln_pt);
@@ -946,9 +946,9 @@ namespace oomph
 
     /// \short Output function for a time-dependent exact solution.
     /// Broken default
-    void output_fct(std::ostream &outfile,
-                    const unsigned &Nplot,
-                    const double &time,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& Nplot,
+                    const double& time,
                     FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
     {
       FiniteElement::output_fct(outfile, Nplot, time, exact_soln_pt);
@@ -970,7 +970,7 @@ namespace oomph
 
     /// \short Pointer to the j-th vertex node in the element,
     /// Call the geometric element's function.
-    Node *vertex_node_pt(const unsigned &j) const
+    Node* vertex_node_pt(const unsigned& j) const
     {
       return QElement<DIM, 3>::vertex_node_pt(j);
     }
@@ -985,8 +985,8 @@ namespace oomph
     /// \short Get the continuously interpolated values at the local coordinate
     /// s. We choose to put the fluid velocities first, followed by the
     /// temperature.
-    void get_interpolated_values(const Vector<double> &s,
-                                 Vector<double> &values)
+    void get_interpolated_values(const Vector<double>& s,
+                                 Vector<double>& values)
     {
       // Storage for the fluid velocities
       Vector<double> nst_values;
@@ -1016,9 +1016,9 @@ namespace oomph
     /// coordinate s at time level t (t=0: present; t>0: previous).
     /// We choose to put the fluid velocities first, followed by the
     /// temperature
-    void get_interpolated_values(const unsigned &t,
-                                 const Vector<double> &s,
-                                 Vector<double> &values)
+    void get_interpolated_values(const unsigned& t,
+                                 const Vector<double>& s,
+                                 Vector<double>& values)
     {
       // Storage for the fluid velocities
       Vector<double> nst_values;
@@ -1056,7 +1056,7 @@ namespace oomph
 
     /// \short Call the rebuild_from_sons functions for each of the
     /// constituent multi-physics elements.
-    void rebuild_from_sons(Mesh *&mesh_pt)
+    void rebuild_from_sons(Mesh*& mesh_pt)
     {
       RefineableQAdvectionDiffusionElement<DIM, 3>::rebuild_from_sons(mesh_pt);
       RefineableQCrouzeixRaviartElement<DIM>::rebuild_from_sons(mesh_pt);
@@ -1072,8 +1072,8 @@ namespace oomph
 
       // Cast the pointer to the father element to the specific
       // element type
-      RefineableBuoyantQCrouzeixRaviartElement<DIM> *cast_father_element_pt =
-        dynamic_cast<RefineableBuoyantQCrouzeixRaviartElement<DIM> *>(
+      RefineableBuoyantQCrouzeixRaviartElement<DIM>* cast_father_element_pt =
+        dynamic_cast<RefineableBuoyantQCrouzeixRaviartElement<DIM>*>(
           this->father_element_pt());
 
       // Set the pointer to the Rayleigh number to be the same as that in
@@ -1098,7 +1098,7 @@ namespace oomph
 
     /// \short Get the Z2 flux by concatenating the fluxes from the fluid and
     /// the advection diffusion elements.
-    void get_Z2_flux(const Vector<double> &s, Vector<double> &flux)
+    void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
       // Find the number of fluid fluxes
       unsigned n_fluid_flux =
@@ -1132,7 +1132,7 @@ namespace oomph
 
     /// \short Fill in which flux components are associated with the fluid
     /// measure and which are associated with the temperature measure
-    void get_Z2_compound_flux_indices(Vector<unsigned> &flux_index)
+    void get_Z2_compound_flux_indices(Vector<unsigned>& flux_index)
     {
       // Find the number of fluid fluxes
       unsigned n_fluid_flux =
@@ -1162,11 +1162,11 @@ namespace oomph
     /// Plot at a given number of plot points and compute L2 error
     /// and L2 norm of velocity solution over element
     /// Overload to broken default
-    void compute_error(std::ostream &outfile,
+    void compute_error(std::ostream& outfile,
                        FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
-                       const double &time,
-                       double &error,
-                       double &norm)
+                       const double& time,
+                       double& error,
+                       double& norm)
     {
       FiniteElement::compute_error(outfile, exact_soln_pt, time, error, norm);
     }
@@ -1176,10 +1176,10 @@ namespace oomph
     /// Plot at a given number of plot points and compute L2 error
     /// and L2 norm of velocity solution over element
     /// Overload to broken default.
-    void compute_error(std::ostream &outfile,
+    void compute_error(std::ostream& outfile,
                        FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-                       double &error,
-                       double &norm)
+                       double& error,
+                       double& norm)
     {
       FiniteElement::compute_error(outfile, exact_soln_pt, error, norm);
     }
@@ -1187,10 +1187,10 @@ namespace oomph
     /// \short Overload the wind function in the advection-diffusion equations.
     /// This provides the coupling from the Navier--Stokes equations to the
     /// advection-diffusion equations because the wind is the fluid velocity.
-    void get_wind_adv_diff(const unsigned &ipt,
-                           const Vector<double> &s,
-                           const Vector<double> &x,
-                           Vector<double> &wind) const
+    void get_wind_adv_diff(const unsigned& ipt,
+                           const Vector<double>& s,
+                           const Vector<double>& x,
+                           Vector<double>& wind) const
     {
       // The wind function is simply the velocity at the points
       this->interpolated_u_nst(s, wind);
@@ -1201,11 +1201,11 @@ namespace oomph
     /// to the Navier--Stokes equations, the body force is the
     /// temperature multiplied by the Rayleigh number acting in the
     /// direction opposite to gravity.
-    void get_body_force_nst(const double &time,
-                            const unsigned &ipt,
-                            const Vector<double> &s,
-                            const Vector<double> &x,
-                            Vector<double> &result)
+    void get_body_force_nst(const double& time,
+                            const unsigned& ipt,
+                            const Vector<double>& s,
+                            const Vector<double>& x,
+                            Vector<double>& result)
     {
       // Get the temperature
       const double interpolated_t = this->interpolated_u_adv_diff(s);
@@ -1222,7 +1222,7 @@ namespace oomph
     }
 
     /// Fill in the constituent elements' contribution to the residual vector.
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Call the residuals of the Navier-Stokes equations
       RefineableNavierStokesEquations<DIM>::fill_in_contribution_to_residuals(
@@ -1235,8 +1235,8 @@ namespace oomph
 
     ///\short Compute the element's residual Vector and the jacobian matrix
     /// using full finite differences, the default implementation
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
 #ifdef USE_FD_JACOBIAN_FOR_REFINEABLE_BUOYANT_Q_ELEMENT
       FiniteElement::fill_in_contribution_to_jacobian(residuals, jacobian);
@@ -1259,9 +1259,9 @@ namespace oomph
     /// Add the element's contribution to its residuals vector,
     /// jacobian matrix and mass matrix
     void fill_in_contribution_to_jacobian_and_mass_matrix(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix)
     {
       // Call the (broken) version in the base class
       FiniteElement::fill_in_contribution_to_jacobian_and_mass_matrix(
@@ -1271,7 +1271,7 @@ namespace oomph
     /// \short Compute the contribution of the off-diagonal blocks
     /// analytically.
     void fill_in_off_diagonal_jacobian_blocks_analytic(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian)
+      Vector<double>& residuals, DenseMatrix<double>& jacobian)
     {
       // Perform another loop over the integration loops using the information
       // from the original elements' residual assembly loops to determine

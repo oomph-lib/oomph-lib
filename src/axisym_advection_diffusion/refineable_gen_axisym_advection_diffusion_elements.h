@@ -71,7 +71,7 @@ namespace oomph
 
     /// Broken copy constructor
     RefineableGeneralisedAxisymAdvectionDiffusionEquations(
-      const RefineableGeneralisedAxisymAdvectionDiffusionEquations &dummy)
+      const RefineableGeneralisedAxisymAdvectionDiffusionEquations& dummy)
     {
       BrokenCopy::broken_copy(
         "RefineableGeneralisedAxisymAdvectionDiffusionEquations");
@@ -98,7 +98,7 @@ namespace oomph
 
     /// \short Get 'flux' for Z2 error recovery:
     /// Standard flux.from GeneralisedAxisymAdvectionDiffusion equations
-    void get_Z2_flux(const Vector<double> &s, Vector<double> &flux)
+    void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
       this->get_flux(s, flux);
     }
@@ -107,8 +107,8 @@ namespace oomph
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines), the values Vector sets its own size in here.
-    void get_interpolated_values(const Vector<double> &s,
-                                 Vector<double> &values)
+    void get_interpolated_values(const Vector<double>& s,
+                                 Vector<double>& values)
     {
       // Set size of Vector: u
       values.resize(1);
@@ -139,9 +139,9 @@ namespace oomph
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines), the values Vector sets its own size in here.
-    void get_interpolated_values(const unsigned &t,
-                                 const Vector<double> &s,
-                                 Vector<double> &values)
+    void get_interpolated_values(const unsigned& t,
+                                 const Vector<double>& s,
+                                 Vector<double>& values)
     {
       // Set size of Vector:
       values.resize(1);
@@ -169,7 +169,7 @@ namespace oomph
     }
 
     /// Fill in the geometric Jacobian, which in this case is r
-    double geometric_jacobian(const Vector<double> &x)
+    double geometric_jacobian(const Vector<double>& x)
     {
       return x[0];
     }
@@ -177,10 +177,10 @@ namespace oomph
     ///  Further build: Copy source function pointer from father element
     void further_build()
     {
-      RefineableGeneralisedAxisymAdvectionDiffusionEquations
-        *cast_father_element_pt = dynamic_cast<
-          RefineableGeneralisedAxisymAdvectionDiffusionEquations *>(
-          this->father_element_pt());
+      RefineableGeneralisedAxisymAdvectionDiffusionEquations*
+        cast_father_element_pt =
+          dynamic_cast<RefineableGeneralisedAxisymAdvectionDiffusionEquations*>(
+            this->father_element_pt());
 
       // Set the values of the pointers from the father
       this->Source_fct_pt = cast_father_element_pt->source_fct_pt();
@@ -201,9 +201,9 @@ namespace oomph
     /// flag=1: compute both
     /// flag=0: compute only residual vector
     void fill_in_generic_residual_contribution_cons_axisym_adv_diff(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix,
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
       unsigned flag);
   };
 
@@ -231,8 +231,8 @@ namespace oomph
 
     /// Broken copy constructor
     RefineableQGeneralisedAxisymAdvectionDiffusionElement(
-      const RefineableQGeneralisedAxisymAdvectionDiffusionElement<NNODE_1D>
-        &dummy)
+      const RefineableQGeneralisedAxisymAdvectionDiffusionElement<NNODE_1D>&
+        dummy)
     {
       BrokenCopy::broken_copy(
         "RefineableQuadGeneralisedAxisymAdvectionDiffusionElement");
@@ -260,14 +260,14 @@ namespace oomph
     }
 
     /// \short Pointer to the j-th vertex node in the element
-    Node *vertex_node_pt(const unsigned &j) const
+    Node* vertex_node_pt(const unsigned& j) const
     {
       return QGeneralisedAxisymAdvectionDiffusionElement<
         NNODE_1D>::vertex_node_pt(j);
     }
 
     /// Rebuild from sons: empty
-    void rebuild_from_sons(Mesh *&mesh_pt) {}
+    void rebuild_from_sons(Mesh*& mesh_pt) {}
 
     /// \short Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.

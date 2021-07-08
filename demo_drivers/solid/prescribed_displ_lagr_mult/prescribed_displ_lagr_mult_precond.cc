@@ -81,7 +81,7 @@ namespace oomph
     /// 5 - y displacement (with lagr mult traction)\n
     /// 6 - z displacement (with lagr mult traction)\n
     void get_dof_numbers_for_unknowns(
-      std::list<std::pair<unsigned long, unsigned>> &dof_lookup_list) const
+      std::list<std::pair<unsigned long, unsigned>>& dof_lookup_list) const
     {
       // temporary pair (used to store dof lookup prior to being added to list
       std::pair<unsigned, unsigned> dof_lookup;
@@ -155,9 +155,9 @@ namespace DiagonalPreconditionerHelper
 {
   /// \short Create a matrix-based diagonal preconditioner for
   /// subsidiary linear systems
-  Preconditioner *get_diagonal_preconditioner()
+  Preconditioner* get_diagonal_preconditioner()
   {
-    MatrixBasedDiagPreconditioner *prec_pt = new MatrixBasedDiagPreconditioner;
+    MatrixBasedDiagPreconditioner* prec_pt = new MatrixBasedDiagPreconditioner;
     return prec_pt;
   }
 
@@ -175,8 +175,8 @@ class FiniteElementComp
 {
 public:
   /// Comparison. Is x coordinate of el1_pt less than that of el2_pt?
-  bool operator()(FiniteElement *const &el1_pt,
-                  FiniteElement *const &el2_pt) const
+  bool operator()(FiniteElement* const& el1_pt,
+                  FiniteElement* const& el2_pt) const
   {
     return el1_pt->node_pt(0)->x(0) < el2_pt->node_pt(0)->x(0);
   }
@@ -189,19 +189,19 @@ class WarpedLine : public GeomObject
 {
 public:
   /// Constructor: Specify amplitude of deflection from straight horizontal line
-  WarpedLine(const double &ampl) : GeomObject(1, 2)
+  WarpedLine(const double& ampl) : GeomObject(1, 2)
   {
     Ampl = ampl;
   }
 
   /// Broken copy constructor
-  WarpedLine(const WarpedLine &dummy)
+  WarpedLine(const WarpedLine& dummy)
   {
     BrokenCopy::broken_copy("WarpedLine");
   }
 
   /// Broken assignment operator
-  void operator=(const WarpedLine &)
+  void operator=(const WarpedLine&)
   {
     BrokenCopy::broken_assign("WarpedLine");
   }
@@ -210,7 +210,7 @@ public:
   ~WarpedLine() {}
 
   /// \short Position vector at Lagrangian coordinate zeta
-  void position(const Vector<double> &zeta, Vector<double> &r) const
+  void position(const Vector<double>& zeta, Vector<double>& r) const
   {
     // Position vector
     r[0] = zeta[0] + 5.0 * Ampl * zeta[0] * (zeta[0] - 1.0) * (zeta[0] - 0.7);
@@ -221,15 +221,15 @@ public:
   /// \short Parametrised position on object: r(zeta). Evaluated at
   /// previous timestep. t=0: current time; t>0: previous
   /// timestep. Forward to steady version
-  void position(const unsigned &t,
-                const Vector<double> &zeta,
-                Vector<double> &r) const
+  void position(const unsigned& t,
+                const Vector<double>& zeta,
+                Vector<double>& r) const
   {
     position(zeta, r);
   }
 
   /// Access to amplitude
-  double &ampl()
+  double& ampl()
   {
     return Ampl;
   }
@@ -275,7 +275,7 @@ class PrescribedBoundaryDisplacementProblem : public Problem
 {
 public:
   /// Constructor: Pass in number of elements along axes
-  PrescribedBoundaryDisplacementProblem(const unsigned &nel_1d);
+  PrescribedBoundaryDisplacementProblem(const unsigned& nel_1d);
 
   /// Update function (empty)
   void actions_after_newton_solve() {}
@@ -284,7 +284,7 @@ public:
   void actions_before_newton_solve() {}
 
   /// Access function for the solid mesh
-  ElasticRefineableRectangularQuadMesh<ELEMENT> *&solid_mesh_pt()
+  ElasticRefineableRectangularQuadMesh<ELEMENT>*& solid_mesh_pt()
   {
     return Solid_mesh_pt;
   }
@@ -308,10 +308,10 @@ private:
   void delete_lagrange_multiplier_elements();
 
   /// Pointer to solid mesh
-  ElasticRefineableRectangularQuadMesh<ELEMENT> *Solid_mesh_pt;
+  ElasticRefineableRectangularQuadMesh<ELEMENT>* Solid_mesh_pt;
 
   /// Pointers to meshes of Lagrange multiplier elements
-  SolidMesh *Lagrange_multiplier_mesh_pt;
+  SolidMesh* Lagrange_multiplier_mesh_pt;
 
   /// DocInfo object for output
   DocInfo Doc_info;
@@ -322,7 +322,7 @@ private:
 //======================================================================
 template<class ELEMENT>
 PrescribedBoundaryDisplacementProblem<
-  ELEMENT>::PrescribedBoundaryDisplacementProblem(const unsigned &nel_1d)
+  ELEMENT>::PrescribedBoundaryDisplacementProblem(const unsigned& nel_1d)
 {
   // Create the mesh
 
@@ -351,7 +351,7 @@ PrescribedBoundaryDisplacementProblem<
   for (unsigned i = 0; i < n_element; i++)
   {
     // Cast to a solid element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(solid_mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(solid_mesh_pt()->element_pt(i));
 
     // Set the constitutive law
     el_pt->constitutive_law_pt() = &Global_Physical_Variables::Constitutive_law;
@@ -401,7 +401,7 @@ PrescribedBoundaryDisplacementProblem<
   Doc_info.set_directory("RESLT");
 
   // Create the linear solver
-  IterativeLinearSolver *solver_pt = 0;
+  IterativeLinearSolver* solver_pt = 0;
 
   // If we have trilinos, use it
 #ifdef OOMPH_HAS_TRILINOS
@@ -410,7 +410,7 @@ PrescribedBoundaryDisplacementProblem<
   solver_pt = new TrilinosAztecOOSolver;
 
   // Use GMRES
-  dynamic_cast<TrilinosAztecOOSolver *>(solver_pt)->solver_type() =
+  dynamic_cast<TrilinosAztecOOSolver*>(solver_pt)->solver_type() =
     TrilinosAztecOOSolver::GMRES;
 
 #else
@@ -424,7 +424,7 @@ PrescribedBoundaryDisplacementProblem<
   linear_solver_pt() = solver_pt;
 
   // Create the preconditioner
-  PseudoElasticPreconditioner *prec_pt = new PseudoElasticPreconditioner;
+  PseudoElasticPreconditioner* prec_pt = new PseudoElasticPreconditioner;
 
   // Set solid and lagrange multiplier meshes
   prec_pt->set_elastic_mesh(Solid_mesh_pt);
@@ -533,8 +533,8 @@ void PrescribedBoundaryDisplacementProblem<
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    ELEMENT *bulk_elem_pt =
-      dynamic_cast<ELEMENT *>(solid_mesh_pt()->boundary_element_pt(b, e));
+    ELEMENT* bulk_elem_pt =
+      dynamic_cast<ELEMENT*>(solid_mesh_pt()->boundary_element_pt(b, e));
 
     // Find the index of the face of element e along boundary b
     int face_index = solid_mesh_pt()->face_index_at_boundary(b, e);
@@ -551,8 +551,8 @@ void PrescribedBoundaryDisplacementProblem<
   for (unsigned i = 0; i < n_element; i++)
   {
     // Cast to a Lagrange multiplier element
-    ImposeDisplacementByLagrangeMultiplierElement<ELEMENT> *el_pt =
-      dynamic_cast<ImposeDisplacementByLagrangeMultiplierElement<ELEMENT> *>(
+    ImposeDisplacementByLagrangeMultiplierElement<ELEMENT>* el_pt =
+      dynamic_cast<ImposeDisplacementByLagrangeMultiplierElement<ELEMENT>*>(
         Lagrange_multiplier_mesh_pt->element_pt(i));
 
     // Set the GeomObject that defines the boundary shape and
@@ -565,7 +565,7 @@ void PrescribedBoundaryDisplacementProblem<
     unsigned nnod = el_pt->nnode();
     for (unsigned j = 0; j < nnod; j++)
     {
-      Node *nod_pt = el_pt->node_pt(j);
+      Node* nod_pt = el_pt->node_pt(j);
 
       // Is the node also on boundary 1 or 3?
       if ((nod_pt->is_on_boundary(1)) || (nod_pt->is_on_boundary(3)))
@@ -637,7 +637,7 @@ void PrescribedBoundaryDisplacementProblem<ELEMENT>::doc_solution()
 
   // This makes sure the elements are ordered in same way every time
   // the code is run -- necessary for validation tests.
-  std::vector<FiniteElement *> el_pt;
+  std::vector<FiniteElement*> el_pt;
   unsigned nelem = Lagrange_multiplier_mesh_pt->nelement();
   for (unsigned e = 0; e < nelem; e++)
   {
@@ -658,7 +658,7 @@ void PrescribedBoundaryDisplacementProblem<ELEMENT>::doc_solution()
 //=======start_of_main==================================================
 /// Driver code
 //======================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
 #ifdef OOMPH_HAS_MPI
 

@@ -73,16 +73,16 @@ namespace oomph
     /// GeomObject that defines the collapsible segment and pointer to
     /// TimeStepper (defaults to the default timestepper, Steady).
     CollapsibleChannelMesh(
-      const unsigned &nup,
-      const unsigned &ncollapsible,
-      const unsigned &ndown,
-      const unsigned &ny,
-      const double &lup,
-      const double &lcollapsible,
-      const double &ldown,
-      const double &ly,
-      GeomObject *wall_pt,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper);
+      const unsigned& nup,
+      const unsigned& ncollapsible,
+      const unsigned& ndown,
+      const unsigned& ny,
+      const double& lup,
+      const double& lcollapsible,
+      const double& ldown,
+      const double& ly,
+      GeomObject* wall_pt,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
     /// \short destructor
     ~CollapsibleChannelMesh()
@@ -91,13 +91,13 @@ namespace oomph
     }
 
     /// Access function to GeomObject representing wall
-    GeomObject *&wall_pt()
+    GeomObject*& wall_pt()
     {
       return Wall_pt;
     }
 
     /// Access function to domain
-    CollapsibleChannelDomain *domain_pt()
+    CollapsibleChannelDomain* domain_pt()
     {
       return Domain_pt;
     }
@@ -109,7 +109,7 @@ namespace oomph
     /// so we can break it in derived classes (e.g. the Algebraic
     /// versions of this mesh where it doesn't make any sense
     /// to provide the bl_squash_fct after the mesh has been built).
-    virtual CollapsibleChannelDomain::BLSquashFctPt &bl_squash_fct_pt()
+    virtual CollapsibleChannelDomain::BLSquashFctPt& bl_squash_fct_pt()
     {
       return Domain_pt->bl_squash_fct_pt();
     }
@@ -128,14 +128,14 @@ namespace oomph
     /// so we can break it in derived classes (e.g. the Algebraic
     /// versions of this mesh where it doesn't make any sense
     /// to provide the bl_squash_fct after the mesh has been built).
-    virtual CollapsibleChannelDomain::AxialSpacingFctPt &axial_spacing_fct_pt()
+    virtual CollapsibleChannelDomain::AxialSpacingFctPt& axial_spacing_fct_pt()
     {
       return Domain_pt->axial_spacing_fct_pt();
     }
 
     /// \short Function pointer for function that redistributes the
     /// elements in the axial direction. Const version
-    virtual CollapsibleChannelDomain::AxialSpacingFctPt &axial_spacing_fct_pt()
+    virtual CollapsibleChannelDomain::AxialSpacingFctPt& axial_spacing_fct_pt()
       const
     {
       return Domain_pt->axial_spacing_fct_pt();
@@ -143,7 +143,7 @@ namespace oomph
 
   protected:
     /// Pointer to domain
-    CollapsibleChannelDomain *Domain_pt;
+    CollapsibleChannelDomain* Domain_pt;
 
     /// Number of element columns in upstream part
     unsigned Nup;
@@ -158,7 +158,7 @@ namespace oomph
     unsigned Ny;
 
     /// Pointer to geometric object that represents the moving wall
-    GeomObject *Wall_pt;
+    GeomObject* Wall_pt;
   };
 
   /////////////////////////////////////////////////////////////////////
@@ -185,16 +185,16 @@ namespace oomph
     /// \short Constructor: Pass number of elements, lengths, pointer to
     /// geometric object that describes the wall and timestepper
     RefineableCollapsibleChannelMesh(
-      const unsigned &nup,
-      const unsigned &ncollapsible,
-      const unsigned &ndown,
-      const unsigned &ny,
-      const double &lup,
-      const double &lcollapsible,
-      const double &ldown,
-      const double &ly,
-      GeomObject *wall_pt,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      const unsigned& nup,
+      const unsigned& ncollapsible,
+      const unsigned& ndown,
+      const unsigned& ny,
+      const double& lup,
+      const double& lcollapsible,
+      const double& ldown,
+      const double& ly,
+      GeomObject* wall_pt,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       CollapsibleChannelMesh<ELEMENT>(nup,
                                       ncollapsible,
                                       ndown,
@@ -239,16 +239,16 @@ namespace oomph
     /// geometric object that represents the wall and pointer to
     /// timestepper (defaults to Steady).
     MacroElementNodeUpdateCollapsibleChannelMesh(
-      const unsigned &nup,
-      const unsigned &ncollapsible,
-      const unsigned &ndown,
-      const unsigned &ny,
-      const double &lup,
-      const double &lcollapsible,
-      const double &ldown,
-      const double &ly,
-      GeomObject *wall_pt,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      const unsigned& nup,
+      const unsigned& ncollapsible,
+      const unsigned& ndown,
+      const unsigned& ny,
+      const double& lup,
+      const double& lcollapsible,
+      const double& ldown,
+      const double& ly,
+      GeomObject* wall_pt,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       CollapsibleChannelMesh<ELEMENT>(nup,
                                       ncollapsible,
                                       ndown,
@@ -261,8 +261,8 @@ namespace oomph
                                       time_stepper_pt)
     {
 #ifdef PARANOID
-      ELEMENT *el_pt = new ELEMENT;
-      if (dynamic_cast<MacroElementNodeUpdateElementBase *>(el_pt) == 0)
+      ELEMENT* el_pt = new ELEMENT;
+      if (dynamic_cast<MacroElementNodeUpdateElementBase*>(el_pt) == 0)
       {
         std::ostringstream error_message;
         error_message << "Base class for ELEMENT in "
@@ -289,12 +289,12 @@ namespace oomph
       for (unsigned i = 0; i < n_element; i++)
       {
         // Upcast from FiniteElement to the present element
-        ELEMENT *el_pt = dynamic_cast<ELEMENT *>(this->element_pt(i));
+        ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->element_pt(i));
 
 #ifdef PARANOID
         // Check if cast is successful
-        MacroElementNodeUpdateElementBase *m_el_pt =
-          dynamic_cast<MacroElementNodeUpdateElementBase *>(el_pt);
+        MacroElementNodeUpdateElementBase* m_el_pt =
+          dynamic_cast<MacroElementNodeUpdateElementBase*>(el_pt);
         if (m_el_pt == 0)
         {
           std::ostringstream error_message;
@@ -315,7 +315,7 @@ namespace oomph
 #endif
 
         // There's just one GeomObject
-        Vector<GeomObject *> geom_object_pt(1);
+        Vector<GeomObject*> geom_object_pt(1);
         geom_object_pt[0] = this->Wall_pt;
 
         // Tell the element which geom objects its macro-element-based
@@ -324,7 +324,7 @@ namespace oomph
       }
 
       // Add the geometric object(s) for the wall to the mesh's storage
-      Vector<GeomObject *> geom_object_pt(1);
+      Vector<GeomObject*> geom_object_pt(1);
       geom_object_pt[0] = this->Wall_pt;
       MacroElementNodeUpdateMesh::set_geom_object_vector_pt(geom_object_pt);
 
@@ -363,16 +363,16 @@ namespace oomph
     /// geometric object that represents the wall and pointer to
     /// timestepper (defaults to Steady).
     MacroElementNodeUpdateRefineableCollapsibleChannelMesh(
-      const unsigned &nup,
-      const unsigned &ncollapsible,
-      const unsigned &ndown,
-      const unsigned &ny,
-      const double &lup,
-      const double &lcollapsible,
-      const double &ldown,
-      const double &ly,
-      GeomObject *wall_pt,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      const unsigned& nup,
+      const unsigned& ncollapsible,
+      const unsigned& ndown,
+      const unsigned& ny,
+      const double& lup,
+      const double& lcollapsible,
+      const double& ldown,
+      const double& ly,
+      GeomObject* wall_pt,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       CollapsibleChannelMesh<ELEMENT>(nup,
                                       ncollapsible,
                                       ndown,
@@ -422,16 +422,16 @@ namespace oomph
     /// GeomObject that defines the collapsible segment and pointer to
     /// TimeStepper (defaults to the default timestepper, Steady).
     AlgebraicCollapsibleChannelMesh(
-      const unsigned &nup,
-      const unsigned &ncollapsible,
-      const unsigned &ndown,
-      const unsigned &ny,
-      const double &lup,
-      const double &lcollapsible,
-      const double &ldown,
-      const double &ly,
-      GeomObject *wall_pt,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      const unsigned& nup,
+      const unsigned& ncollapsible,
+      const unsigned& ndown,
+      const unsigned& ny,
+      const double& lup,
+      const double& lcollapsible,
+      const double& ldown,
+      const double& ly,
+      GeomObject* wall_pt,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       CollapsibleChannelMesh<ELEMENT>(nup,
                                       ncollapsible,
                                       ndown,
@@ -459,17 +459,17 @@ namespace oomph
     /// GeomObject that defines the collapsible segment and pointer to
     /// TimeStepper (defaults to the default timestepper, Steady).
     AlgebraicCollapsibleChannelMesh(
-      const unsigned &nup,
-      const unsigned &ncollapsible,
-      const unsigned &ndown,
-      const unsigned &ny,
-      const double &lup,
-      const double &lcollapsible,
-      const double &ldown,
-      const double &ly,
-      GeomObject *wall_pt,
+      const unsigned& nup,
+      const unsigned& ncollapsible,
+      const unsigned& ndown,
+      const unsigned& ny,
+      const double& lup,
+      const double& lcollapsible,
+      const double& ldown,
+      const double& ly,
+      GeomObject* wall_pt,
       CollapsibleChannelDomain::BLSquashFctPt bl_squash_function_pt,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       CollapsibleChannelMesh<ELEMENT>(nup,
                                       ncollapsible,
                                       ndown,
@@ -501,7 +501,7 @@ namespace oomph
     /// that overloads the version in the CollapsibleChannelMesh.
     /// It does not make sense to specify the function pointer
     /// after the mesh has been set up!
-    CollapsibleChannelDomain::BLSquashFctPt &bl_squash_fct_pt()
+    CollapsibleChannelDomain::BLSquashFctPt& bl_squash_fct_pt()
     {
       std::ostringstream error_message;
       error_message
@@ -525,7 +525,7 @@ namespace oomph
     /// that overloads the version in the CollapsibleChannelMesh.
     /// It does not make sense to specify the function pointer
     /// after the mesh has been set up!
-    CollapsibleChannelDomain::BLSquashFctPt &axial_spacing_fct_pt()
+    CollapsibleChannelDomain::BLSquashFctPt& axial_spacing_fct_pt()
     {
       std::ostringstream error_message;
       error_message
@@ -544,12 +544,12 @@ namespace oomph
 
     /// \short Update nodal position at time level t (t=0: present;
     /// t>0: previous)
-    void algebraic_node_update(const unsigned &t, AlgebraicNode *&node_pt);
+    void algebraic_node_update(const unsigned& t, AlgebraicNode*& node_pt);
 
     /// \short Update the node-udate data after mesh adaptation.
     /// Empty -- no update of node update required as this is
     /// non-refineable mesh.
-    void update_node_update(AlgebraicNode *&node_pt) {}
+    void update_node_update(AlgebraicNode*& node_pt) {}
 
   protected:
     /// Function to setup the algebraic node update
@@ -579,16 +579,16 @@ namespace oomph
     /// GeomObject that defines the collapsible segment and pointer to
     /// TimeStepper (defaults to the default timestepper, Steady).
     RefineableAlgebraicCollapsibleChannelMesh(
-      const unsigned &nup,
-      const unsigned &ncollapsible,
-      const unsigned &ndown,
-      const unsigned &ny,
-      const double &lup,
-      const double &lcollapsible,
-      const double &ldown,
-      const double &ly,
-      GeomObject *wall_pt,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      const unsigned& nup,
+      const unsigned& ncollapsible,
+      const unsigned& ndown,
+      const unsigned& ny,
+      const double& lup,
+      const double& lcollapsible,
+      const double& ldown,
+      const double& ly,
+      GeomObject* wall_pt,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       CollapsibleChannelMesh<ELEMENT>(nup,
                                       ncollapsible,
                                       ndown,
@@ -620,17 +620,17 @@ namespace oomph
     /// GeomObject that defines the collapsible segment and pointer to
     /// TimeStepper (defaults to the default timestepper, Steady).
     RefineableAlgebraicCollapsibleChannelMesh(
-      const unsigned &nup,
-      const unsigned &ncollapsible,
-      const unsigned &ndown,
-      const unsigned &ny,
-      const double &lup,
-      const double &lcollapsible,
-      const double &ldown,
-      const double &ly,
-      GeomObject *wall_pt,
+      const unsigned& nup,
+      const unsigned& ncollapsible,
+      const unsigned& ndown,
+      const unsigned& ny,
+      const double& lup,
+      const double& lcollapsible,
+      const double& ldown,
+      const double& ly,
+      GeomObject* wall_pt,
       CollapsibleChannelDomain::BLSquashFctPt bl_squash_function_pt,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       CollapsibleChannelMesh<ELEMENT>(nup,
                                       ncollapsible,
                                       ndown,
@@ -659,7 +659,7 @@ namespace oomph
 
     /// \short Update the node update data for specified node following
     /// any mesh adapation
-    void update_node_update(AlgebraicNode *&node_pt);
+    void update_node_update(AlgebraicNode*& node_pt);
   };
 
 } // namespace oomph

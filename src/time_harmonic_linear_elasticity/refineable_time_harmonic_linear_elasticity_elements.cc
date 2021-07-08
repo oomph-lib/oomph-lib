@@ -40,7 +40,7 @@ namespace oomph
   template<unsigned DIM>
   void RefineableTimeHarmonicLinearElasticityEquations<DIM>::
     fill_in_generic_contribution_to_residuals_time_harmonic_linear_elasticity(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag)
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag)
   {
 #ifdef PARANOID
 

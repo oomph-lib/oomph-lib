@@ -47,7 +47,7 @@ namespace oomph
   /// 3) otherwise return null
   //??ds compatability wrapper, remove?
   template<class T>
-  T smart_cast_preconditioner(Preconditioner *prec_pt)
+  T smart_cast_preconditioner(Preconditioner* prec_pt)
   {
     T bp_pt = dynamic_cast<T>(prec_pt);
     if (bp_pt != 0)
@@ -67,7 +67,7 @@ namespace oomph
   inline std::string real_date_time()
   {
     time_t rawtime;
-    struct tm *timeinfo;
+    struct tm* timeinfo;
     char buffer[80];
 
     // Get time
@@ -89,7 +89,7 @@ namespace oomph
       mass_matrix_solver_for_explicit_timestepper_pt = 0;
     }
 
-    LinearSolver *linear_solver_pt;
+    LinearSolver* linear_solver_pt;
 
     // Newton options
     double newton_solver_tolerance;
@@ -104,7 +104,7 @@ namespace oomph
     bool problem_is_nonlinear;
 
     // Explicit solver
-    LinearSolver *mass_matrix_solver_for_explicit_timestepper_pt;
+    LinearSolver* mass_matrix_solver_for_explicit_timestepper_pt;
     bool mass_matrix_reuse_is_enabled;
     bool mass_matrix_has_been_computed;
     bool discontinuous_element_formulation;
@@ -171,7 +171,7 @@ namespace oomph
 
     /// Do the newton solve or explicit step (different ones depending flags
     /// set).
-    double smart_time_step(double dt, const double &tol)
+    double smart_time_step(double dt, const double& tol)
     {
       double step_time_start = TimingHelpers::timer();
 
@@ -206,7 +206,7 @@ namespace oomph
       return false;
     }
 
-    void get_solver_parameters(SolverParameters &sp)
+    void get_solver_parameters(SolverParameters& sp)
     {
       sp.linear_solver_pt = linear_solver_pt();
 
@@ -230,7 +230,7 @@ namespace oomph
       sp.discontinuous_element_formulation = Discontinuous_element_formulation;
     }
 
-    void set_solver_parameters(SolverParameters &sp)
+    void set_solver_parameters(SolverParameters& sp)
     {
       linear_solver_pt() = sp.linear_solver_pt;
 
@@ -300,8 +300,8 @@ namespace oomph
 
       // No non-linear residuals to store
 
-      const IterativeLinearSolver *its_pt =
-        dynamic_cast<const IterativeLinearSolver *>(
+      const IterativeLinearSolver* its_pt =
+        dynamic_cast<const IterativeLinearSolver*>(
           this->mass_matrix_solver_for_explicit_timestepper_pt());
       if (its_pt != 0)
       {
@@ -348,8 +348,8 @@ namespace oomph
       Solver_times.push_back(
         this->linear_solver_pt()->linear_solver_solution_time());
 
-      const IterativeLinearSolver *its_pt =
-        dynamic_cast<const IterativeLinearSolver *>(this->linear_solver_pt());
+      const IterativeLinearSolver* its_pt =
+        dynamic_cast<const IterativeLinearSolver*>(this->linear_solver_pt());
       if (its_pt != 0)
       {
         Solver_iterations.push_back(its_pt->iterations());
@@ -377,14 +377,14 @@ namespace oomph
     /// different magic pinning number so that it can be easily undone
     /// using undo_segregated_pinning(). Does not handle: global data,
     /// element data, nodes with varying nvalue.
-    void segregated_pin_indices(const Vector<unsigned> &indices)
+    void segregated_pin_indices(const Vector<unsigned>& indices)
     {
       for (unsigned msh = 0, nmsh = nsub_mesh(); msh < nmsh; msh++)
       {
-        Mesh *mesh_pt = this->mesh_pt(msh);
+        Mesh* mesh_pt = this->mesh_pt(msh);
         for (unsigned nd = 0, nnd = mesh_pt->nnode(); nd < nnd; nd++)
         {
-          Node *nd_pt = mesh_pt->node_pt(nd);
+          Node* nd_pt = mesh_pt->node_pt(nd);
           for (unsigned j = 0; j < indices.size(); j++)
           {
             if (!nd_pt->is_pinned(indices[j]))
@@ -426,10 +426,10 @@ namespace oomph
     {
       for (unsigned msh = 0, nmsh = nsub_mesh(); msh < nmsh; msh++)
       {
-        Mesh *mesh_pt = this->mesh_pt(msh);
+        Mesh* mesh_pt = this->mesh_pt(msh);
         for (unsigned nd = 0, nnd = mesh_pt->nnode(); nd < nnd; nd++)
         {
-          Node *nd_pt = mesh_pt->node_pt(nd);
+          Node* nd_pt = mesh_pt->node_pt(nd);
           for (unsigned j = 0; j < nd_pt->nvalue(); j++)
           {
             if (nd_pt->eqn_number(j) == Data::Is_segregated_solve_pinned)
@@ -443,15 +443,15 @@ namespace oomph
     }
 
     /// Check that nothing is currently pinned for a segregated solve.
-    void check_not_segregated(const char *function) const
+    void check_not_segregated(const char* function) const
     {
 #ifdef PARANOID
       for (unsigned msh = 0, nmsh = nsub_mesh(); msh < nmsh; msh++)
       {
-        Mesh *mesh_pt = this->mesh_pt(msh);
+        Mesh* mesh_pt = this->mesh_pt(msh);
         for (unsigned nd = 0, nnd = mesh_pt->nnode(); nd < nnd; nd++)
         {
-          Node *nd_pt = mesh_pt->node_pt(nd);
+          Node* nd_pt = mesh_pt->node_pt(nd);
           for (unsigned j = 0; j < nd_pt->nvalue(); j++)
           {
             if (nd_pt->eqn_number(j) == Data::Is_segregated_solve_pinned)
@@ -503,25 +503,25 @@ namespace oomph
 
     /// \short Write some general data about the previous time step to a
     /// trace file. Extend by overloading write_additional_trace_data(...).
-    void write_trace(const unsigned &t_hist = 0);
+    void write_trace(const unsigned& t_hist = 0);
 
     /// \short Overload to write problem specific data into trace
     /// file. Note: don't add any line endings, seperate data with the
     /// Trace_seperator string (BEFORE each data entry).
-    virtual void write_additional_trace_data(const unsigned &t_hist,
-                                             std::ofstream &trace_file) const
+    virtual void write_additional_trace_data(const unsigned& t_hist,
+                                             std::ofstream& trace_file) const
     {
     }
 
     /// \short Overload to write problem specific headers into trace
     /// file. Note: don't add any line endings, seperate headers with the
     /// Trace_seperator string (BEFORE each data entry).
-    virtual void write_additional_trace_headers(std::ofstream &trace_file) const
+    virtual void write_additional_trace_headers(std::ofstream& trace_file) const
     {
     }
 
     /// Overload to write any problem specific data
-    virtual void output_solution(std::ofstream &soln_file) const {}
+    virtual void output_solution(std::ofstream& soln_file) const {}
     virtual void final_doc_additional() const {}
     virtual void initial_doc_additional() const {}
 
@@ -566,24 +566,24 @@ namespace oomph
     /// output ltes depending on value of Output_ltes. Extend by
     /// overloading output_solution(...). Optional prefix for special
     /// outputs (special outputs don't go in pvd file, yet? too messy...)
-    void doc_solution(const unsigned &t_hist = 0,
-                      const std::string &prefix = "");
+    void doc_solution(const unsigned& t_hist = 0,
+                      const std::string& prefix = "");
 
     /// Standard output function: loop over all elements in all meshes and
     /// output.
-    virtual void output_solution(const unsigned &t,
-                                 std::ostream &outstream,
-                                 const unsigned &npoints = 2) const
+    virtual void output_solution(const unsigned& t,
+                                 std::ostream& outstream,
+                                 const unsigned& npoints = 2) const
     {
       const unsigned n_msh = nsub_mesh();
       for (unsigned msh = 0; msh < n_msh; msh++)
       {
-        Mesh *msh_pt = mesh_pt(msh);
+        Mesh* msh_pt = mesh_pt(msh);
 
         const unsigned n_ele = msh_pt->nelement();
         for (unsigned ele = 0; ele < n_ele; ele++)
         {
-          FiniteElement *ele_pt = msh_pt->finite_element_pt(ele);
+          FiniteElement* ele_pt = msh_pt->finite_element_pt(ele);
           ele_pt->output(t, outstream, npoints);
         }
       }
@@ -591,40 +591,40 @@ namespace oomph
 
     /// Output nodes with boundary number to csv file
     virtual void doc_boundaries(
-      const std::string &boundary_file_basename) const;
+      const std::string& boundary_file_basename) const;
 
     /// output_solution(...) with default output time step = 0 = current
     /// time.
-    void output_solution(std::ostream &outstream,
-                         const unsigned &npoints = 2) const
+    void output_solution(std::ostream& outstream,
+                         const unsigned& npoints = 2) const
     {
       output_solution(0, outstream, npoints);
     }
 
     /// Standard output function: loop over all elements in all meshes and
     /// output exact solution.
-    virtual void output_exact_solution(const unsigned &t_hist,
-                                       std::ostream &outstream,
-                                       const unsigned &npoints = 2) const
+    virtual void output_exact_solution(const unsigned& t_hist,
+                                       std::ostream& outstream,
+                                       const unsigned& npoints = 2) const
     {
       const double time = time_pt()->time();
 
       const unsigned n_msh = nsub_mesh();
       for (unsigned msh = 0; msh < n_msh; msh++)
       {
-        Mesh *msh_pt = mesh_pt(msh);
+        Mesh* msh_pt = mesh_pt(msh);
 
         const unsigned n_ele = msh_pt->nelement();
         for (unsigned ele = 0; ele < n_ele; ele++)
         {
-          FiniteElement *ele_pt = msh_pt->finite_element_pt(ele);
+          FiniteElement* ele_pt = msh_pt->finite_element_pt(ele);
           ele_pt->output_fct(outstream, npoints, time, *Exact_solution_pt);
         }
       }
     }
 
     /// \short Error norm calculator
-    virtual double get_error_norm(const unsigned &t_hist = 0) const
+    virtual double get_error_norm(const unsigned& t_hist = 0) const
     {
       if (Exact_solution_pt != 0)
       {
@@ -640,7 +640,7 @@ namespace oomph
         const unsigned n_node = mesh_pt()->nnode();
         for (unsigned nd = 0; nd < n_node; nd++)
         {
-          Node *nd_pt = mesh_pt()->node_pt(nd);
+          Node* nd_pt = mesh_pt()->node_pt(nd);
           Vector<double> values(nd_pt->nvalue(), 0.0), x(dim(), 0.0);
           nd_pt->position(t_hist, x);
           nd_pt->value(t_hist, values);
@@ -663,7 +663,7 @@ namespace oomph
     }
 
     /// \short Dummy solution norm calculator (overload in derived classes).
-    virtual double get_solution_norm(const unsigned &t_hist = 0) const
+    virtual double get_solution_norm(const unsigned& t_hist = 0) const
     {
       DoubleVector dofs;
       get_dofs(t_hist, dofs);
@@ -673,8 +673,8 @@ namespace oomph
     /// \short should the previous step be doc'ed? Check if we went past an
     /// entry of Doc_times in the last step. If no Doc_times have been set
     /// then always output.
-    virtual bool should_doc_this_step(const double &dt,
-                                      const double &time) const
+    virtual bool should_doc_this_step(const double& dt,
+                                      const double& time) const
     {
       // I'm sure there should be a more efficient way to do this if we
       // know that Doc_times is ordered, but it shouldn't really matter I
@@ -697,7 +697,7 @@ namespace oomph
     }
 
     /// \short Assign a vector of times to output the full solution at.
-    void set_doc_times(Vector<double> &doc_times)
+    void set_doc_times(Vector<double>& doc_times)
     {
       Doc_times = doc_times;
     }
@@ -722,16 +722,16 @@ namespace oomph
       return Want_doc_exact && (Exact_solution_pt != 0);
     }
 
-    virtual Vector<double> trace_values(const unsigned &t_hist = 0) const
+    virtual Vector<double> trace_values(const unsigned& t_hist = 0) const
     {
       unsigned nele = mesh_pt()->nelement();
       unsigned e = nele / 2;
 
       Vector<double> values;
-      if (dynamic_cast<FiniteElement *>(mesh_pt()->element_pt(e)))
+      if (dynamic_cast<FiniteElement*>(mesh_pt()->element_pt(e)))
       {
         // Just use an element somewhere in the middle...
-        Node *nd_pt = mesh_pt()->finite_element_pt(e)->node_pt(0);
+        Node* nd_pt = mesh_pt()->finite_element_pt(e)->node_pt(0);
         values.assign(nd_pt->nvalue(), 0.0);
         nd_pt->value(t_hist, values);
       }
@@ -744,15 +744,15 @@ namespace oomph
       return values;
     }
 
-    void dump_current_mm_or_jacobian_residuals(const std::string &label);
+    void dump_current_mm_or_jacobian_residuals(const std::string& label);
 
-    IterativeLinearSolver *iterative_linear_solver_pt() const
+    IterativeLinearSolver* iterative_linear_solver_pt() const
     {
-      return dynamic_cast<IterativeLinearSolver *>(this->linear_solver_pt());
+      return dynamic_cast<IterativeLinearSolver*>(this->linear_solver_pt());
     }
 
     /// \short Perform set up of problem.
-    virtual void build(Vector<Mesh *> &bulk_mesh_pt);
+    virtual void build(Vector<Mesh*>& bulk_mesh_pt);
 
     /// \short Get problem dimension (nodal dimension).
     const unsigned dim() const
@@ -769,7 +769,7 @@ namespace oomph
     virtual void set_up_impulsive_initial_condition();
 
     /// Assign initial conditions from function pointer
-    virtual void my_set_initial_condition(const SolutionFunctorBase &ic);
+    virtual void my_set_initial_condition(const SolutionFunctorBase& ic);
 
     /// Hook to be overloaded with any calculations needed after setting of
     /// initial conditions.
@@ -778,10 +778,10 @@ namespace oomph
     /// \short Integrate a function given by func_pt over every element
     /// in every bulk mesh in this problem.
     virtual double integrate_over_problem(
-      const ElementalFunction *func_pt,
-      const Integral *quadrature_pt = 0) const;
+      const ElementalFunction* func_pt,
+      const Integral* quadrature_pt = 0) const;
 
-    virtual void dump(std::ofstream &dump_file) const
+    virtual void dump(std::ofstream& dump_file) const
     {
       // Set very high precision to avoid any issues
       dump_file.precision(14);
@@ -791,7 +791,7 @@ namespace oomph
       Problem::dump(dump_file);
     }
 
-    virtual void read(std::ifstream &restart_file)
+    virtual void read(std::ifstream& restart_file)
     {
       // buffer
       std::string input_string;
@@ -822,7 +822,7 @@ namespace oomph
     /// increase point size so that things are easily visible. Not
     /// implemented for nodes with varying numbers of values (you might
     /// need something fancier than a csv file for this).
-    void output_ltes(const unsigned &t_hist, std::ostream &output) const
+    void output_ltes(const unsigned& t_hist, std::ostream& output) const
     {
       // Output position labels
       for (unsigned j = 0; j < Dim; j++)
@@ -842,7 +842,7 @@ namespace oomph
       // Output actual positions and ltes
       for (unsigned i = 0, ni = mesh_pt()->nnode(); i < ni; i++)
       {
-        Node *nd_pt = mesh_pt()->node_pt(i);
+        Node* nd_pt = mesh_pt()->node_pt(i);
 
         // Output position of node
         for (unsigned j = 0; j < Dim; j++)
@@ -904,11 +904,11 @@ namespace oomph
     bool Output_initial_condition;
 
     /// Function pointer for exact solution
-    SolutionFunctorBase *Exact_solution_pt;
+    SolutionFunctorBase* Exact_solution_pt;
 
     /// Get exact solution
-    Vector<double> exact_solution(const double &t,
-                                  const Vector<double> &x) const
+    Vector<double> exact_solution(const double& t,
+                                  const Vector<double>& x) const
     {
 #ifdef PARANOID
       if (Exact_solution_pt == 0)
@@ -938,13 +938,13 @@ namespace oomph
     Vector<double> Doc_times;
 
     /// Inaccessible copy constructor
-    MyProblem(const MyProblem &dummy)
+    MyProblem(const MyProblem& dummy)
     {
       BrokenCopy::broken_copy("MyProblem");
     }
 
     /// Inaccessible assignment operator
-    void operator=(const MyProblem &dummy)
+    void operator=(const MyProblem& dummy)
     {
       BrokenCopy::broken_assign("MyProblem");
     }
@@ -952,8 +952,8 @@ namespace oomph
 
   /// \short Integrate a function given by func_pt over every element
   /// in every bulk mesh in this problem.
-  double MyProblem::integrate_over_problem(const ElementalFunction *func_pt,
-                                           const Integral *quadrature_pt) const
+  double MyProblem::integrate_over_problem(const ElementalFunction* func_pt,
+                                           const Integral* quadrature_pt) const
   {
     throw OomphLibError("Not implemented (yet?).",
                         OOMPH_CURRENT_FUNCTION,
@@ -961,7 +961,7 @@ namespace oomph
   }
 
   void MyProblem::dump_current_mm_or_jacobian_residuals(
-    const std::string &label)
+    const std::string& label)
   {
     throw OomphLibError("Not implemented (yet?).",
                         OOMPH_CURRENT_FUNCTION,
@@ -969,17 +969,17 @@ namespace oomph
   }
 
   /// \short Perform set up of problem.
-  void MyProblem::build(Vector<Mesh *> &bulk_mesh_pt)
+  void MyProblem::build(Vector<Mesh*>& bulk_mesh_pt)
   {
     // Copy the first mesh's first timestepper to the problem
 
-    FiniteElement *fele_pt =
-      dynamic_cast<FiniteElement *>(bulk_mesh_pt[0]->element_pt(0));
+    FiniteElement* fele_pt =
+      dynamic_cast<FiniteElement*>(bulk_mesh_pt[0]->element_pt(0));
 
     // Finite element mesh: grab ts from node
     if (fele_pt != 0)
     {
-      TimeStepper *ts_pt = bulk_mesh_pt[0]->node_pt(0)->time_stepper_pt();
+      TimeStepper* ts_pt = bulk_mesh_pt[0]->node_pt(0)->time_stepper_pt();
       this->add_time_stepper_pt(ts_pt);
 
       // ??ds assumed any timesteppers hiding somewhere else are added elsewhere
@@ -1001,7 +1001,7 @@ namespace oomph
     // Non finite element mesh: grab ts from internal data
     else
     {
-      TimeStepper *ts_pt =
+      TimeStepper* ts_pt =
         bulk_mesh_pt[0]->element_pt(0)->internal_data_pt(0)->time_stepper_pt();
       this->add_time_stepper_pt(ts_pt);
 
@@ -1033,15 +1033,15 @@ namespace oomph
 
     // If we have an iterative solver with a block preconditioner then
     // add all the meshes to the block preconditioner as well.
-    IterativeLinearSolver *its_pt = iterative_linear_solver_pt();
+    IterativeLinearSolver* its_pt = iterative_linear_solver_pt();
     if (its_pt != 0)
     {
       // RRR add comments to why this is incorrect:
       // We cannot call set_nmesh and set_mesh, this is handled by the derived
       // classes.
       // Try to get a block preconditioner from the preconditioner
-      BlockPreconditioner<CRDoubleMatrix> *bp_pt =
-        smart_cast_preconditioner<BlockPreconditioner<CRDoubleMatrix> *>(
+      BlockPreconditioner<CRDoubleMatrix>* bp_pt =
+        smart_cast_preconditioner<BlockPreconditioner<CRDoubleMatrix>*>(
           its_pt->preconditioner_pt());
 
       if (bp_pt != 0)
@@ -1086,7 +1086,7 @@ namespace oomph
     {
       // Set the solver for explicit timesteps (mass matrix) to CG with a
       // diagonal predconditioner.
-      IterativeLinearSolver *expl_solver_pt = new CG<CRDoubleMatrix>;
+      IterativeLinearSolver* expl_solver_pt = new CG<CRDoubleMatrix>;
       expl_solver_pt->preconditioner_pt() =
         new MatrixBasedLumpedPreconditioner<CRDoubleMatrix>;
 
@@ -1119,7 +1119,7 @@ namespace oomph
   void MyProblem::actions_after_set_initial_condition()
   {
     // If using TR calculate initial derivative with these initial conditions
-    TR *tr_pt = dynamic_cast<TR *>(time_stepper_pt());
+    TR* tr_pt = dynamic_cast<TR*>(time_stepper_pt());
     if (tr_pt != 0)
     {
       tr_pt->setup_initial_derivative(this);
@@ -1137,7 +1137,7 @@ namespace oomph
     }
 #endif
 
-    const std::string &dir = Doc_info.directory();
+    const std::string& dir = Doc_info.directory();
 
     // Output Jacobian if requested
     if ((to_lower(Doc_info.output_jacobian) == "at_start") ||
@@ -1253,8 +1253,8 @@ namespace oomph
     this->doc_solution();
   }
 
-  void MyProblem::doc_solution(const unsigned &t_hist,
-                               const std::string &prefix)
+  void MyProblem::doc_solution(const unsigned& t_hist,
+                               const std::string& prefix)
   {
     bool doc_this_step = true;
     if (!is_steady())
@@ -1385,8 +1385,8 @@ namespace oomph
     // if there are only some none finite elements in the mesh...
 
     //??ds what happens with face elements?
-    FiniteElement *test_pt =
-      dynamic_cast<FiniteElement *>(mesh_pt(0)->element_pt(0));
+    FiniteElement* test_pt =
+      dynamic_cast<FiniteElement*>(mesh_pt(0)->element_pt(0));
 
     if (test_pt != 0)
     {
@@ -1396,10 +1396,10 @@ namespace oomph
       // Loop over all meshes in problem
       for (unsigned msh = 0, nmsh = nsub_mesh(); msh < nmsh; msh++)
       {
-        Mesh *mesh_pt = this->mesh_pt(msh);
+        Mesh* mesh_pt = this->mesh_pt(msh);
         for (unsigned ele = 0, nele = mesh_pt->nelement(); ele < nele; ele++)
         {
-          FiniteElement *ele_pt = mesh_pt->finite_element_pt(ele);
+          FiniteElement* ele_pt = mesh_pt->finite_element_pt(ele);
           double new_size = ele_pt->compute_physical_size();
           if (new_size < min_size)
           {
@@ -1418,7 +1418,7 @@ namespace oomph
     }
   }
 
-  void MyProblem::write_trace(const unsigned &t_hist)
+  void MyProblem::write_trace(const unsigned& t_hist)
   {
     std::ofstream trace_file(
       (Doc_info.directory() + "/" + Trace_filename).c_str(), std::ios::app);
@@ -1605,7 +1605,7 @@ namespace oomph
   }
 
   void MyProblem::doc_boundaries(
-    const std::string &boundary_file_basename) const
+    const std::string& boundary_file_basename) const
   {
     const unsigned n_boundary = mesh_pt()->nboundary();
     for (unsigned b = 0; b < n_boundary; b++)
@@ -1620,7 +1620,7 @@ namespace oomph
       const unsigned n_boundary_node = mesh_pt()->nboundary_node(b);
       for (unsigned nd = 0; nd < n_boundary_node; nd++)
       {
-        Node *node_pt = mesh_pt()->boundary_node_pt(b, nd);
+        Node* node_pt = mesh_pt()->boundary_node_pt(b, nd);
         Vector<double> position = node_pt->position();
 
         // Write out this node
@@ -1656,11 +1656,11 @@ namespace oomph
       // Loop over all nodes in all meshes in problem and set values.
       for (unsigned msh = 0, nmsh = nsub_mesh(); msh < nmsh; msh++)
       {
-        Mesh *mesh_pt = this->mesh_pt(msh);
+        Mesh* mesh_pt = this->mesh_pt(msh);
 
         for (unsigned nd = 0, nnd = mesh_pt->nnode(); nd < nnd; nd++)
         {
-          Node *nd_pt = mesh_pt->node_pt(nd);
+          Node* nd_pt = mesh_pt->node_pt(nd);
           for (unsigned j = 0, nj = nd_pt->nvalue(); j < nj; j++)
           {
             nd_pt->set_value(t, j, nd_pt->value(0, j));
@@ -1670,7 +1670,7 @@ namespace oomph
 #ifdef PARANOID
         for (unsigned ele = 0, nele = mesh_pt->nelement(); ele < nele; ele++)
         {
-          FiniteElement *ele_pt = mesh_pt->finite_element_pt(ele);
+          FiniteElement* ele_pt = mesh_pt->finite_element_pt(ele);
           if (ele_pt->ninternal_data() != 0)
           {
             std::string err =
@@ -1686,7 +1686,7 @@ namespace oomph
     actions_after_set_initial_condition();
   }
 
-  void MyProblem::my_set_initial_condition(const SolutionFunctorBase &ic)
+  void MyProblem::my_set_initial_condition(const SolutionFunctorBase& ic)
   {
 #ifdef PARANOID
     // Can't set global data from a function of space... have to overload this
@@ -1710,11 +1710,11 @@ namespace oomph
       const unsigned nmsh = nsub_mesh();
       for (unsigned msh = 0; msh < nmsh; msh++)
       {
-        Mesh *mesh_pt = this->mesh_pt(msh);
+        Mesh* mesh_pt = this->mesh_pt(msh);
 
         for (unsigned nd = 0, nnd = mesh_pt->nnode(); nd < nnd; nd++)
         {
-          Node *nd_pt = mesh_pt->node_pt(nd);
+          Node* nd_pt = mesh_pt->node_pt(nd);
 
           // Get the position at present time
           const unsigned dim = nd_pt->ndim();
@@ -1750,7 +1750,7 @@ namespace oomph
         // Can't set internal data like this so check that we have none.
         for (unsigned ele = 0, nele = mesh_pt->nelement(); ele < nele; ele++)
         {
-          FiniteElement *ele_pt = mesh_pt->finite_element_pt(ele);
+          FiniteElement* ele_pt = mesh_pt->finite_element_pt(ele);
           if (ele_pt->ninternal_data() != 0)
           {
             std::string err =

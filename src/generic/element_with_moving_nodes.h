@@ -91,13 +91,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    ElementWithMovingNodes(const ElementWithMovingNodes &)
+    ElementWithMovingNodes(const ElementWithMovingNodes&)
     {
       BrokenCopy::broken_copy("ElementWithMovingNodes");
     }
 
     /// Broken assignment operator
-    void operator=(const ElementWithMovingNodes &)
+    void operator=(const ElementWithMovingNodes&)
     {
       BrokenCopy::broken_assign("ElementWithMovingNodes");
     }
@@ -110,8 +110,8 @@ namespace oomph
     /// built up incrementally as we descend through the
     /// call hierarchy of this function when called from
     /// Problem::describe_dofs(...)
-    void describe_local_dofs(std::ostream &out,
-                             const std::string &current_string) const;
+    void describe_local_dofs(std::ostream& out,
+                             const std::string& current_string) const;
 
     /// Virtual destructor (clean up and allocated memory)
     virtual ~ElementWithMovingNodes()
@@ -131,7 +131,7 @@ namespace oomph
 
     /// \short Return the local equation number corresponding to the i-th
     /// value at the n-th geometric data object.
-    inline int geometric_data_local_eqn(const unsigned &n, const unsigned &i)
+    inline int geometric_data_local_eqn(const unsigned& n, const unsigned& i)
     {
 #ifdef RANGE_CHECKING
       unsigned n_data = Geom_data_pt.size();
@@ -173,13 +173,13 @@ namespace oomph
 
     /// Return a set of all geometric data associated with the element
     void assemble_set_of_all_geometric_data(
-      std::set<Data *> &unique_geom_data_pt);
+      std::set<Data*>& unique_geom_data_pt);
 
     /// \short Specify Data that affects the geometry of the element
     /// by adding the element's geometric Data to the set that's passed in.
     /// (This functionality is required in FSI problems; set is used to
     /// avoid double counting).
-    void identify_geometric_data(std::set<Data *> &geometric_data_pt)
+    void identify_geometric_data(std::set<Data*>& geometric_data_pt)
     {
       // Loop over the node update data and add to the set
       const unsigned n_geom_data = Geom_data_pt.size();
@@ -225,7 +225,7 @@ namespace oomph
     /// default because it's broken; can re-enable use by setting optional
     /// boolean to true.
     void evaluate_shape_derivs_by_chain_rule(
-      const bool &i_know_what_i_am_doing = false)
+      const bool& i_know_what_i_am_doing = false)
     {
       if (!i_know_what_i_am_doing)
       {
@@ -250,7 +250,7 @@ namespace oomph
     /// Currently disabled by default because it's broken; can re-enable
     /// use by setting optional boolean to true.
     void evaluate_shape_derivs_by_fastest_method(
-      const bool &i_know_what_i_am_doing = false)
+      const bool& i_know_what_i_am_doing = false)
     {
       if (!i_know_what_i_am_doing)
       {
@@ -272,7 +272,7 @@ namespace oomph
     }
 
     /// Access to method (enumerated flag) for determination of shape derivs
-    int &method_for_shape_derivs()
+    int& method_for_shape_derivs()
     {
       return Method_for_shape_derivs;
     }
@@ -302,7 +302,7 @@ namespace oomph
     /// for specific elements.
     /// dnodal_coordinates_dgeom_dofs(l,i,j) = dX_{ij} / d s_l
     virtual void get_dnodal_coordinates_dgeom_dofs(
-      RankThreeTensor<double> &dnodal_coordinates_dgeom_dofs);
+      RankThreeTensor<double>& dnodal_coordinates_dgeom_dofs);
 
     /// Construct the vector of (unique) geometric data
     void complete_setup_of_dependencies();
@@ -311,20 +311,20 @@ namespace oomph
     /// If the boolean argument is true then the degrees of freedom are stored
     /// in Dof_pt
     virtual void assign_all_generic_local_eqn_numbers(
-      const bool &store_local_dof_pt);
+      const bool& store_local_dof_pt);
 
     /// \short Calculate the contributions to the Jacobian matrix from the
     /// geometric data. This version
     /// assumes that the (full) residuals vector has already been calculated
     /// and is passed in as the first argument -- needed in case
     /// the derivatives are computed by FD.
-    void fill_in_jacobian_from_geometric_data(Vector<double> &residuals,
-                                              DenseMatrix<double> &jacobian);
+    void fill_in_jacobian_from_geometric_data(Vector<double>& residuals,
+                                              DenseMatrix<double>& jacobian);
 
     /// Calculate the contributions to the Jacobian matrix from the
     /// geometric data. This version computes
     /// the residuals vector before calculating the Jacobian terms
-    void fill_in_jacobian_from_geometric_data(DenseMatrix<double> &jacobian)
+    void fill_in_jacobian_from_geometric_data(DenseMatrix<double>& jacobian)
     {
       if (!Bypass_fill_in_jacobian_from_geometric_data)
       {
@@ -343,7 +343,7 @@ namespace oomph
     /// \short Vector that stores pointers to all Data that affect the
     /// node update operations, i.e. the variables that can affect
     /// the position of the node.
-    Vector<Data *> Geom_data_pt;
+    Vector<Data*> Geom_data_pt;
 
   public:
     /// \short Return the number of geometric data upon which the shape
@@ -356,7 +356,7 @@ namespace oomph
   private:
     /// \short Array to hold local eqn number information for the
     /// geometric Data variables
-    int **Geometric_data_local_eqn;
+    int** Geometric_data_local_eqn;
 
     /// \short Number of geometric dofs (computed on the fly when
     /// equation numbers are set up)
@@ -395,8 +395,8 @@ namespace oomph
     /// built up incrementally as we descend through the
     /// call hierarchy of this function when called from
     /// Problem::describe_dofs(...)
-    void describe_local_dofs(std::ostream &out,
-                             const std::string &current_string) const
+    void describe_local_dofs(std::ostream& out,
+                             const std::string& current_string) const
     {
       ELEMENT::describe_local_dofs(out, current_string);
       ElementWithMovingNodes::describe_local_dofs(out, current_string);
@@ -406,8 +406,8 @@ namespace oomph
     ElementWithSpecificMovingNodes() : ELEMENT(), ElementWithMovingNodes() {}
 
     /// Constructor used for face elements
-    ElementWithSpecificMovingNodes(FiniteElement *const &element_pt,
-                                   const int &face_index) :
+    ElementWithSpecificMovingNodes(FiniteElement* const& element_pt,
+                                   const int& face_index) :
       ELEMENT(element_pt, face_index), ElementWithMovingNodes()
     {
     }
@@ -416,7 +416,7 @@ namespace oomph
     ~ElementWithSpecificMovingNodes() {}
 
     /// Unique final overrider for describe_dofs
-    void describe_local_dofs(std::ostream &out, std::string &curr_str)
+    void describe_local_dofs(std::ostream& out, std::string& curr_str)
     {
       ElementWithMovingNodes::describe_local_dofs(out, curr_str);
       ELEMENT::describe_local_dofs(out, curr_str);
@@ -424,7 +424,7 @@ namespace oomph
 
     /// \short Overload the node assignment routine to assign nodes of the
     /// appropriate type.
-    Node *construct_node(const unsigned &n)
+    Node* construct_node(const unsigned& n)
     {
       // Assign a node to the local node pointer
       // The dimension and number of values are taken from internal element data
@@ -437,7 +437,7 @@ namespace oomph
     }
 
     /// Overloaded node allocation for unsteady problems
-    Node *construct_node(const unsigned &n, TimeStepper *const &time_stepper_pt)
+    Node* construct_node(const unsigned& n, TimeStepper* const& time_stepper_pt)
     {
       // Assign a node to the local node pointer
       // The dimension and number of values are taken from internal element data
@@ -451,7 +451,7 @@ namespace oomph
     }
 
     /// Overload the node assignment routine to assign boundary nodes
-    Node *construct_boundary_node(const unsigned &n)
+    Node* construct_boundary_node(const unsigned& n)
     {
       // Assign a node to the local node pointer
       // The dimension and number of values are taken from internal element data
@@ -465,8 +465,8 @@ namespace oomph
     }
 
     /// Overloaded boundary node allocation for unsteady problems
-    Node *construct_boundary_node(const unsigned &n,
-                                  TimeStepper *const &time_stepper_pt)
+    Node* construct_boundary_node(const unsigned& n,
+                                  TimeStepper* const& time_stepper_pt)
     {
       // Assign a node to the local node pointer
       // The dimension and number of values are taken from internal element data
@@ -497,7 +497,7 @@ namespace oomph
 
     /// \short Assign local equation numbers for the underlying element, then
     /// deal with the additional geometric dofs
-    void assign_all_generic_local_eqn_numbers(const bool &store_local_dof_pt)
+    void assign_all_generic_local_eqn_numbers(const bool& store_local_dof_pt)
     {
       // Call the generic local equation numbering scheme of the ELEMENT
       ELEMENT::assign_all_generic_local_eqn_numbers(store_local_dof_pt);
@@ -506,7 +506,7 @@ namespace oomph
     }
 
     /// Compute the element's residuals vector and jacobian matrix
-    void get_jacobian(Vector<double> &residuals, DenseMatrix<double> &jacobian)
+    void get_jacobian(Vector<double>& residuals, DenseMatrix<double>& jacobian)
     {
       /// Call the element's get jacobian function
       ELEMENT::get_jacobian(residuals, jacobian);
@@ -516,9 +516,9 @@ namespace oomph
     }
 
     /// Compute the element's residuals vector and jacobian matrix
-    void get_jacobian_and_mass_matrix(Vector<double> &residuals,
-                                      DenseMatrix<double> &jacobian,
-                                      DenseMatrix<double> &mass_matrix)
+    void get_jacobian_and_mass_matrix(Vector<double>& residuals,
+                                      DenseMatrix<double>& jacobian,
+                                      DenseMatrix<double>& mass_matrix)
     {
       /// Call the element's get jacobian function
       ELEMENT::get_jacobian_and_mass_matrix(residuals, jacobian, mass_matrix);

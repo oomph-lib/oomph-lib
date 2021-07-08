@@ -49,7 +49,7 @@ namespace oomph
   /// Calculate the pressure value from the unknowns
   //=====================================================
   template<unsigned DIM>
-  double EulerEquations<DIM>::pressure(const Vector<double> &u) const
+  double EulerEquations<DIM>::pressure(const Vector<double>& u) const
   {
     // Initialise the pressure to zero
     double p = 0.0;
@@ -75,8 +75,8 @@ namespace oomph
   /// the velocity components
   //=========================================================
   template<unsigned DIM>
-  void EulerEquations<DIM>::flux(const Vector<double> &u,
-                                 DenseMatrix<double> &f)
+  void EulerEquations<DIM>::flux(const Vector<double>& u,
+                                 DenseMatrix<double>& f)
   {
     // The density flux is the momentum
     for (unsigned j = 0; j < DIM; j++)
@@ -110,7 +110,7 @@ namespace oomph
   /// Output function, print the values of all unknowns
   //==================================================================
   template<unsigned DIM>
-  void EulerEquations<DIM>::output(std::ostream &outfile, const unsigned &nplot)
+  void EulerEquations<DIM>::output(std::ostream& outfile, const unsigned& nplot)
   {
     // Find the number of fluxes
     const unsigned n_flux = this->nflux();

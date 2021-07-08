@@ -67,32 +67,32 @@ namespace oomph
     /// end of the leaflet. Timestepper defaults to Steady default
     /// Timestepper defined in the Mesh base class
     ChannelWithLeafletMesh(
-      GeomObject *leaflet_pt,
-      const double &lleft,
-      const double &lright,
-      const double &hleaflet,
-      const double &htot,
-      const unsigned &nleft,
-      const unsigned &nright,
-      const unsigned &ny1,
-      const unsigned &ny2,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper);
+      GeomObject* leaflet_pt,
+      const double& lleft,
+      const double& lright,
+      const double& hleaflet,
+      const double& htot,
+      const unsigned& nleft,
+      const unsigned& nright,
+      const unsigned& ny1,
+      const unsigned& ny2,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
     /// Destructor : empty
     virtual ~ChannelWithLeafletMesh() {}
 
     /// Access function to domain
-    ChannelWithLeafletDomain *domain_pt()
+    ChannelWithLeafletDomain* domain_pt()
     {
       return Domain_pt;
     }
 
   protected:
     /// Pointer to domain
-    ChannelWithLeafletDomain *Domain_pt;
+    ChannelWithLeafletDomain* Domain_pt;
 
     /// Pointer to GeomObject that represents the leaflet
-    GeomObject *Leaflet_pt;
+    GeomObject* Leaflet_pt;
   };
 
   /////////////////////////////////////////////////////////////////////
@@ -118,16 +118,16 @@ namespace oomph
     /// end of the leaflet. Timestepper defaults to Steady default
     /// Timestepper defined in the Mesh base class
     RefineableChannelWithLeafletMesh(
-      GeomObject *leaflet_pt,
-      const double &lleft,
-      const double &lright,
-      const double &hleaflet,
-      const double &htot,
-      const unsigned &nleft,
-      const unsigned &nright,
-      const unsigned &ny1,
-      const unsigned &ny2,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      GeomObject* leaflet_pt,
+      const double& lleft,
+      const double& lright,
+      const double& hleaflet,
+      const double& htot,
+      const unsigned& nleft,
+      const unsigned& nright,
+      const unsigned& ny1,
+      const unsigned& ny2,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       ChannelWithLeafletMesh<ELEMENT>(leaflet_pt,
                                       lleft,
                                       lright,
@@ -177,16 +177,16 @@ namespace oomph
     /// end of the leaflet. Timestepper defaults to Steady default
     /// Timestepper defined in the Mesh base class
     MacroElementNodeUpdateChannelWithLeafletMesh(
-      GeomObject *leaflet_pt,
-      const double &lleft,
-      const double &lright,
-      const double &hleaflet,
-      const double &htot,
-      const unsigned &nleft,
-      const unsigned &nright,
-      const unsigned &ny1,
-      const unsigned &ny2,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      GeomObject* leaflet_pt,
+      const double& lleft,
+      const double& lright,
+      const double& hleaflet,
+      const double& htot,
+      const unsigned& nleft,
+      const unsigned& nright,
+      const unsigned& ny1,
+      const unsigned& ny2,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       ChannelWithLeafletMesh<ELEMENT>(leaflet_pt,
                                       lleft,
                                       lright,
@@ -199,8 +199,8 @@ namespace oomph
                                       time_stepper_pt)
     {
 #ifdef PARANOID
-      ELEMENT *el_pt = new ELEMENT;
-      if (dynamic_cast<MacroElementNodeUpdateElementBase *>(el_pt) == 0)
+      ELEMENT* el_pt = new ELEMENT;
+      if (dynamic_cast<MacroElementNodeUpdateElementBase*>(el_pt) == 0)
       {
         std::ostringstream error_message;
         error_message << "Base class for ELEMENT in "
@@ -227,12 +227,12 @@ namespace oomph
       for (unsigned i = 0; i < n_element; i++)
       {
         // Upcast from FiniteElement to the present element
-        ELEMENT *el_pt = dynamic_cast<ELEMENT *>(this->element_pt(i));
+        ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->element_pt(i));
 
 #ifdef PARANOID
         // Check if cast is successful
-        MacroElementNodeUpdateElementBase *m_el_pt =
-          dynamic_cast<MacroElementNodeUpdateElementBase *>(el_pt);
+        MacroElementNodeUpdateElementBase* m_el_pt =
+          dynamic_cast<MacroElementNodeUpdateElementBase*>(el_pt);
         if (m_el_pt == 0)
         {
           std::ostringstream error_message;
@@ -253,7 +253,7 @@ namespace oomph
 #endif
 
         // There's just one GeomObject
-        Vector<GeomObject *> geom_object_pt(1);
+        Vector<GeomObject*> geom_object_pt(1);
         geom_object_pt[0] = this->Leaflet_pt;
 
         // Tell the element which geom objects its macro-element-based
@@ -262,7 +262,7 @@ namespace oomph
       }
 
       // Add the geometric object(s) for the wall to the mesh's storage
-      Vector<GeomObject *> geom_object_pt(1);
+      Vector<GeomObject*> geom_object_pt(1);
       geom_object_pt[0] = this->Leaflet_pt;
       MacroElementNodeUpdateMesh::set_geom_object_vector_pt(geom_object_pt);
 
@@ -299,16 +299,16 @@ namespace oomph
     /// end of the leaflet. Timestepper defaults to Steady default
     /// Timestepper defined in the Mesh base class
     MacroElementNodeUpdateRefineableChannelWithLeafletMesh(
-      GeomObject *leaflet_pt,
-      const double &lleft,
-      const double &lright,
-      const double &hleaflet,
-      const double &htot,
-      const unsigned &nleft,
-      const unsigned &nright,
-      const unsigned &ny1,
-      const unsigned &ny2,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      GeomObject* leaflet_pt,
+      const double& lleft,
+      const double& lright,
+      const double& hleaflet,
+      const double& htot,
+      const unsigned& nleft,
+      const unsigned& nright,
+      const unsigned& ny1,
+      const unsigned& ny2,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       ChannelWithLeafletMesh<ELEMENT>(leaflet_pt,
                                       lleft,
                                       lright,
@@ -364,16 +364,16 @@ namespace oomph
     /// end of the leaflet. Timestepper defaults to Steady default
     /// Timestepper defined in the Mesh base class
     AlgebraicChannelWithLeafletMesh(
-      GeomObject *leaflet_pt,
-      const double &lleft,
-      const double &lright,
-      const double &hleaflet,
-      const double &htot,
-      const unsigned &nleft,
-      const unsigned &nright,
-      const unsigned &ny1,
-      const unsigned &ny2,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      GeomObject* leaflet_pt,
+      const double& lleft,
+      const double& lright,
+      const double& hleaflet,
+      const double& htot,
+      const unsigned& nleft,
+      const unsigned& nright,
+      const unsigned& ny1,
+      const unsigned& ny2,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       ChannelWithLeafletMesh<ELEMENT>(leaflet_pt,
                                       lleft,
                                       lright,
@@ -409,32 +409,32 @@ namespace oomph
     /// \short Update the geometric references that are used
     /// to update node after mesh adaptation.
     /// Empty -- no update of node update required without adaptivity
-    void update_node_update(AlgebraicNode *&node_pt) {}
+    void update_node_update(AlgebraicNode*& node_pt) {}
 
     /// \short Update nodal position at time level t (t=0: present;
     /// t>0: previous)
-    void algebraic_node_update(const unsigned &t, AlgebraicNode *&node_pt);
+    void algebraic_node_update(const unsigned& t, AlgebraicNode*& node_pt);
 
   protected:
     /// Function to setup the algebraic node update
     void setup_algebraic_node_update();
 
     /// Update function for nodes in lower left region (I)
-    void node_update_I(const unsigned &t, AlgebraicNode *&node_pt);
+    void node_update_I(const unsigned& t, AlgebraicNode*& node_pt);
 
     /// Update function for nodes in lower right region (II)
-    void node_update_II(const unsigned &t, AlgebraicNode *&node_pt);
+    void node_update_II(const unsigned& t, AlgebraicNode*& node_pt);
 
     /// Update function for nodes in upper left region (III)
-    void node_update_III(const unsigned &t, AlgebraicNode *&node_pt);
+    void node_update_III(const unsigned& t, AlgebraicNode*& node_pt);
 
     /// Update function for nodes in upper right region (IV)
-    void node_update_IV(const unsigned &t, AlgebraicNode *&node_pt);
+    void node_update_IV(const unsigned& t, AlgebraicNode*& node_pt);
 
     /// Helper function
-    void slanted_bound_up(const unsigned &t,
-                          const Vector<double> &zeta,
-                          Vector<double> &r);
+    void slanted_bound_up(const unsigned& t,
+                          const Vector<double>& zeta,
+                          Vector<double>& r);
 
     /// Origin of the wall (stored explicitly for reference in
     /// algebraic node update -- it's also stored independently in
@@ -470,16 +470,16 @@ namespace oomph
     /// end of the leaflet. Timestepper defaults to Steady default
     /// Timestepper defined in the Mesh base class
     RefineableAlgebraicChannelWithLeafletMesh(
-      GeomObject *leaflet_pt,
-      const double &lleft,
-      const double &lright,
-      const double &hleaflet,
-      const double &htot,
-      const unsigned &nleft,
-      const unsigned &nright,
-      const unsigned &ny1,
-      const unsigned &ny2,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      GeomObject* leaflet_pt,
+      const double& lleft,
+      const double& lright,
+      const double& hleaflet,
+      const double& htot,
+      const unsigned& nleft,
+      const unsigned& nright,
+      const unsigned& ny1,
+      const unsigned& ny2,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       ChannelWithLeafletMesh<ELEMENT>(leaflet_pt,
                                       lleft,
                                       lright,
@@ -507,7 +507,7 @@ namespace oomph
 
     /// \short Update the node update data for specified node following
     /// any mesh adapation
-    void update_node_update(AlgebraicNode *&node_pt);
+    void update_node_update(AlgebraicNode*& node_pt);
   };
 
   /////////////////////////////////////////////////////////////////////
@@ -532,16 +532,16 @@ namespace oomph
     /// end of the leaflet. Timestepper defaults to Steady default
     /// Timestepper defined in the Mesh base class
     PseudoElasticChannelWithLeafletMesh(
-      GeomObject *leaflet_pt,
-      const double &lleft,
-      const double &lright,
-      const double &hleaflet,
-      const double &htot,
-      const unsigned &nleft,
-      const unsigned &nright,
-      const unsigned &ny1,
-      const unsigned &ny2,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      GeomObject* leaflet_pt,
+      const double& lleft,
+      const double& lright,
+      const double& hleaflet,
+      const double& htot,
+      const unsigned& nleft,
+      const unsigned& nright,
+      const unsigned& ny1,
+      const unsigned& ny2,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       ChannelWithLeafletMesh<ELEMENT>(leaflet_pt,
                                       lleft,
                                       lright,

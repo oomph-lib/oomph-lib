@@ -59,19 +59,19 @@ namespace GlobalPhysicalParameters
   double TanPhi = 1.0;
 
   /// Some "solution" for assignment of boundary values
-  void get_boundary_values(const Vector<double> &x, Vector<double> &u)
+  void get_boundary_values(const Vector<double>& x, Vector<double>& u)
   {
     u[0] = tanh(1.0 - Alpha * (TanPhi * x[0] - x[1]));
   }
 
   /// Zero source function
-  void source_function(const Vector<double> &x_vect, double &source)
+  void source_function(const Vector<double>& x_vect, double& source)
   {
     source = 0.0;
   }
 
   /// Wind
-  void wind_function(const Vector<double> &x, Vector<double> &wind)
+  void wind_function(const Vector<double>& x, Vector<double>& wind)
   {
     wind[0] = sin(6.0 * x[1]);
     wind[1] = cos(6.0 * x[0]);
@@ -97,7 +97,7 @@ public:
   SUPGAdvectionDiffusionProblem(
     AdvectionDiffusionEquations<2>::AdvectionDiffusionSourceFctPt source_fct_pt,
     AdvectionDiffusionEquations<2>::AdvectionDiffusionWindFctPt wind_fct_pt,
-    const bool &use_stabilisation);
+    const bool& use_stabilisation);
 
   /// Destructor. Empty
   ~SUPGAdvectionDiffusionProblem() {}
@@ -116,9 +116,9 @@ public:
   /// \short Overloaded version of the problem's access function to
   /// the mesh. Recasts the pointer to the base Mesh object to
   /// the actual mesh type.
-  RectangularQuadMesh<ELEMENT> *mesh_pt()
+  RectangularQuadMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<RectangularQuadMesh<ELEMENT> *>(Problem::mesh_pt());
+    return dynamic_cast<RectangularQuadMesh<ELEMENT>*>(Problem::mesh_pt());
   }
 
 private:
@@ -145,7 +145,7 @@ template<class ELEMENT>
 SUPGAdvectionDiffusionProblem<ELEMENT>::SUPGAdvectionDiffusionProblem(
   AdvectionDiffusionEquations<2>::AdvectionDiffusionSourceFctPt source_fct_pt,
   AdvectionDiffusionEquations<2>::AdvectionDiffusionWindFctPt wind_fct_pt,
-  const bool &use_stabilisation) :
+  const bool& use_stabilisation) :
   Source_fct_pt(source_fct_pt),
   Wind_fct_pt(wind_fct_pt),
   Use_stabilisation(use_stabilisation)
@@ -199,7 +199,7 @@ SUPGAdvectionDiffusionProblem<ELEMENT>::SUPGAdvectionDiffusionProblem(
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the source function pointer
     el_pt->source_fct_pt() = Source_fct_pt;
@@ -235,7 +235,7 @@ void SUPGAdvectionDiffusionProblem<ELEMENT>::actions_before_newton_solve()
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Get pointer to node
-      Node *nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
+      Node* nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
 
       // Extract nodal coordinates from node:
       Vector<double> x(2);
@@ -256,7 +256,7 @@ void SUPGAdvectionDiffusionProblem<ELEMENT>::actions_before_newton_solve()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Use stabilisation?
     if (Use_stabilisation)

@@ -39,9 +39,9 @@ namespace oomph
   //=======================================================================
   void RefineableSphericalNavierStokesEquations::
     fill_in_generic_residual_contribution_spherical_nst(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix,
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
       unsigned flag)
   {
     // Find out how many nodes there are

@@ -414,9 +414,9 @@ namespace oomph
     }
 
     /// Residual function for buckled ring
-    void buckled_ring_residual(const Vector<double> &params,
-                               const Vector<double> &unknowns,
-                               Vector<double> &residuals)
+    void buckled_ring_residual(const Vector<double>& params,
+                               const Vector<double>& unknowns,
+                               Vector<double>& residuals)
     {
       // Parameters
       double t = params[0];
@@ -433,9 +433,9 @@ namespace oomph
     }
 
     /// Exact solution: x,y,u,v,p
-    void exact_soln(const double &time,
-                    const Vector<double> &x,
-                    Vector<double> &soln)
+    void exact_soln(const double& time,
+                    const Vector<double>& x,
+                    Vector<double>& soln)
     {
       // Primary variables only
       soln.resize(3);
@@ -489,9 +489,9 @@ namespace oomph
     }
 
     /// Full exact solution: x,y,u,v,p,du/dt,dv/dt,diss
-    void full_exact_soln(const double &time,
-                         const Vector<double> &x,
-                         Vector<double> &soln)
+    void full_exact_soln(const double& time,
+                         const Vector<double>& x,
+                         Vector<double>& soln)
     {
       // Full solution
       soln.resize(6);

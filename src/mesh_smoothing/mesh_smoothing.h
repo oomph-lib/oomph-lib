@@ -55,7 +55,7 @@ namespace oomph
     IsotropicElasticityTensor Isotropic_elasticity_tensor(Nu);
 
     /// Create constitutive law (for smoothing by nonlinear elasticity)
-    ConstitutiveLaw *Constitutive_law_pt = new GeneralisedHookean(&Nu, &E);
+    ConstitutiveLaw* Constitutive_law_pt = new GeneralisedHookean(&Nu, &E);
 
     /// Scale for displacement of quadratic boundary (0.0: simplex; 1.0:
     /// quadratic)
@@ -111,10 +111,10 @@ namespace oomph
     /// the inversion of elements). The final optional argument
     /// specifies the max. number of increments in which the mesh
     /// boundary is deformed.
-    void operator()(SolidMesh *orig_mesh_pt,
-                    SolidMesh *copy_of_mesh_pt,
-                    const Vector<unsigned> &controlled_boundary_id,
-                    const unsigned &max_steps = 100000000)
+    void operator()(SolidMesh* orig_mesh_pt,
+                    SolidMesh* copy_of_mesh_pt,
+                    const Vector<unsigned>& controlled_boundary_id,
+                    const unsigned& max_steps = 100000000)
     {
       // Dummy doc_info
       DocInfo doc_info;
@@ -139,11 +139,11 @@ namespace oomph
     /// of the intermediate meshes. The final optional argument
     /// specifies the max. number of increments in which the mesh
     /// boundary is deformed.
-    void operator()(SolidMesh *orig_mesh_pt,
-                    SolidMesh *copy_of_mesh_pt,
-                    const Vector<unsigned> &controlled_boundary_id,
+    void operator()(SolidMesh* orig_mesh_pt,
+                    SolidMesh* copy_of_mesh_pt,
+                    const Vector<unsigned>& controlled_boundary_id,
                     DocInfo doc_info,
-                    const unsigned &max_steps = 100000000)
+                    const unsigned& max_steps = 100000000)
     {
       // Make original mesh available to everyone...
       Orig_mesh_pt = orig_mesh_pt;
@@ -165,7 +165,7 @@ namespace oomph
       for (unsigned j = 0; j < nnod; j++)
       {
         Orig_node_pos[j].resize(dim);
-        SolidNode *nod_pt = dynamic_cast<SolidNode *>(Orig_mesh_pt->node_pt(j));
+        SolidNode* nod_pt = dynamic_cast<SolidNode*>(Orig_mesh_pt->node_pt(j));
         for (unsigned i = 0; i < dim; i++)
         {
           Orig_node_pos[j][i] = nod_pt->x(i);
@@ -174,10 +174,10 @@ namespace oomph
 
       // Meshes containing the face elements that represent the
       // quadratic surface
-      Vector<SolidMesh *> quadratic_surface_mesh_pt(nbound);
+      Vector<SolidMesh*> quadratic_surface_mesh_pt(nbound);
 
       // GeomObject incarnations
-      Vector<MeshAsGeomObject *> quadratic_surface_geom_obj_pt(nbound);
+      Vector<MeshAsGeomObject*> quadratic_surface_geom_obj_pt(nbound);
 
       // Create FaceElements on original mesh to define
       //-------------------------------------------------
@@ -200,14 +200,14 @@ namespace oomph
         for (unsigned e = 0; e < n_element; e++)
         {
           // Get pointer to the bulk element that is adjacent to boundary b
-          ELEMENT *bulk_elem_pt =
-            dynamic_cast<ELEMENT *>(Orig_mesh_pt->boundary_element_pt(b, e));
+          ELEMENT* bulk_elem_pt =
+            dynamic_cast<ELEMENT*>(Orig_mesh_pt->boundary_element_pt(b, e));
 
           // What is the index of the face of the element e along boundary b
           int face_index = Orig_mesh_pt->face_index_at_boundary(b, e);
 
           // Create new element
-          SolidTractionElement<ELEMENT> *el_pt =
+          SolidTractionElement<ELEMENT>* el_pt =
             new SolidTractionElement<ELEMENT>(bulk_elem_pt, face_index);
 
           // Add it to the mesh
@@ -224,7 +224,7 @@ namespace oomph
 
       // Now create Lagrange multiplier elements on dummy mesh
       //-------------------------------------------------------
-      Vector<SolidMesh *> dummy_lagrange_multiplier_mesh_pt(n);
+      Vector<SolidMesh*> dummy_lagrange_multiplier_mesh_pt(n);
       for (unsigned i = 0; i < n; i++)
       {
         // Get boundary ID
@@ -241,14 +241,14 @@ namespace oomph
         {
           // Get pointer to the bulk fluid element that is adjacent to boundary
           // b
-          ELEMENT *bulk_elem_pt =
-            dynamic_cast<ELEMENT *>(Dummy_mesh_pt->boundary_element_pt(b, e));
+          ELEMENT* bulk_elem_pt =
+            dynamic_cast<ELEMENT*>(Dummy_mesh_pt->boundary_element_pt(b, e));
 
           // Find the index of the face of element e along boundary b
           int face_index = Dummy_mesh_pt->face_index_at_boundary(b, e);
 
           // Create new element
-          ImposeDisplacementByLagrangeMultiplierElement<ELEMENT> *el_pt =
+          ImposeDisplacementByLagrangeMultiplierElement<ELEMENT>* el_pt =
             new ImposeDisplacementByLagrangeMultiplierElement<ELEMENT>(
               bulk_elem_pt, face_index);
 
@@ -278,7 +278,7 @@ namespace oomph
       for (unsigned e = 0; e < n_element; e++)
       {
         // Upcast from GeneralisedElement to the present element
-        ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Dummy_mesh_pt->element_pt(e));
+        ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Dummy_mesh_pt->element_pt(e));
 
         // Set the constitutive law for pseudo-elastic mesh deformation
         el_pt->constitutive_law_pt() =
@@ -320,7 +320,7 @@ namespace oomph
           // Solve
           newton_solve();
         }
-        catch (oomph::NewtonSolverError &)
+        catch (oomph::NewtonSolverError&)
         {
           success = false;
           Helper_namespace_for_mesh_smoothing::Scale -=
@@ -353,8 +353,8 @@ namespace oomph
       for (unsigned j = 0; j < nnode; j++)
       {
         // Get nodes
-        Node *orig_node_pt = orig_mesh_pt->node_pt(j);
-        Node *new_node_pt = Dummy_mesh_pt->node_pt(j);
+        Node* orig_node_pt = orig_mesh_pt->node_pt(j);
+        Node* new_node_pt = Dummy_mesh_pt->node_pt(j);
 
         // Assign new position
         for (unsigned i = 0; i < dim; i++)
@@ -393,7 +393,7 @@ namespace oomph
       unsigned nnod = Orig_mesh_pt->nnode();
       for (unsigned j = 0; j < nnod; j++)
       {
-        SolidNode *nod_pt = dynamic_cast<SolidNode *>(Orig_mesh_pt->node_pt(j));
+        SolidNode* nod_pt = dynamic_cast<SolidNode*>(Orig_mesh_pt->node_pt(j));
         unsigned dim = nod_pt->ndim();
         for (unsigned i = 0; i < dim; i++)
         {
@@ -412,8 +412,7 @@ namespace oomph
       Backup_node_pos.resize(nnod);
       for (unsigned j = 0; j < nnod; j++)
       {
-        SolidNode *nod_pt =
-          dynamic_cast<SolidNode *>(Dummy_mesh_pt->node_pt(j));
+        SolidNode* nod_pt = dynamic_cast<SolidNode*>(Dummy_mesh_pt->node_pt(j));
         unsigned dim = nod_pt->ndim();
         Backup_node_pos[j].resize(dim);
         for (unsigned i = 0; i < dim; i++)
@@ -430,8 +429,7 @@ namespace oomph
       unsigned nnod = Dummy_mesh_pt->nnode();
       for (unsigned j = 0; j < nnod; j++)
       {
-        SolidNode *nod_pt =
-          dynamic_cast<SolidNode *>(Dummy_mesh_pt->node_pt(j));
+        SolidNode* nod_pt = dynamic_cast<SolidNode*>(Dummy_mesh_pt->node_pt(j));
         unsigned dim = nod_pt->ndim();
         for (unsigned i = 0; i < dim; i++)
         {
@@ -441,7 +439,7 @@ namespace oomph
     }
 
     /// Doc the solution
-    void doc_solution(DocInfo &doc_info)
+    void doc_solution(DocInfo& doc_info)
     {
       // Bail out
       if (!doc_info.is_doc_enabled()) return;
@@ -483,10 +481,10 @@ namespace oomph
     Vector<Vector<double>> Backup_node_pos;
 
     /// Bulk original mesh
-    SolidMesh *Orig_mesh_pt;
+    SolidMesh* Orig_mesh_pt;
 
     /// Copy of mesh to work on
-    SolidMesh *Dummy_mesh_pt;
+    SolidMesh* Dummy_mesh_pt;
   };
 
   //////////////////////////////////////////////////////////////////
@@ -518,7 +516,7 @@ namespace oomph
     /// \short Constructor: Specify SolidMesh whose nodal positions are to
     /// be adjusted, and set of nodes in that mesh whose position
     /// are to remain fixed.
-    void operator()(SolidMesh *orig_mesh_pt, std::set<Node *> pinned_nodes)
+    void operator()(SolidMesh* orig_mesh_pt, std::set<Node*> pinned_nodes)
     {
       // Create new mesh and read out node/element numbers from old one
       mesh_pt() = new Mesh;
@@ -526,13 +524,13 @@ namespace oomph
       unsigned nnode = orig_mesh_pt->nnode();
 
       // Have we already created that node?
-      std::map<Node *, Node *> new_node;
+      std::map<Node*, Node*> new_node;
 
       // Create new elements
       for (unsigned e = 0; e < nelem; e++)
       {
         // Make/add new element
-        LINEAR_ELASTICITY_ELEMENT *el_pt = new LINEAR_ELASTICITY_ELEMENT;
+        LINEAR_ELASTICITY_ELEMENT* el_pt = new LINEAR_ELASTICITY_ELEMENT;
         mesh_pt()->add_element_pt(el_pt);
 
         // Set elasticity tensor
@@ -540,8 +538,8 @@ namespace oomph
           &Helper_namespace_for_mesh_smoothing::Isotropic_elasticity_tensor;
 
         // Find corresponding original element
-        SolidFiniteElement *orig_elem_pt = dynamic_cast<SolidFiniteElement *>(
-          orig_mesh_pt->finite_element_pt(e));
+        SolidFiniteElement* orig_elem_pt =
+          dynamic_cast<SolidFiniteElement*>(orig_mesh_pt->finite_element_pt(e));
         unsigned nnod = orig_elem_pt->nnode();
 
         // Create nodes
@@ -550,7 +548,7 @@ namespace oomph
           // Does it not exist yet?
           if (new_node[orig_elem_pt->node_pt(j)] == 0)
           {
-            Node *new_nod_pt =
+            Node* new_nod_pt =
               mesh_pt()->finite_element_pt(e)->construct_node(j);
             new_node[orig_elem_pt->node_pt(j)] = new_nod_pt;
             mesh_pt()->add_node_pt(new_nod_pt);
@@ -560,7 +558,7 @@ namespace oomph
               // Set new nodal position to be the old one in the
               // SolidMesh (assumed to contain no inverted elements)
               new_nod_pt->x(i) =
-                dynamic_cast<SolidNode *>(orig_elem_pt->node_pt(j))->xi(i);
+                dynamic_cast<SolidNode*>(orig_elem_pt->node_pt(j))->xi(i);
             }
           }
           // It already exists -- copy across
@@ -575,7 +573,7 @@ namespace oomph
       // Loop over pinned nodes -- pin their positions and assign updated nodal
       // positions
       double scale = 1.0;
-      for (std::set<Node *>::iterator it = pinned_nodes.begin();
+      for (std::set<Node*>::iterator it = pinned_nodes.begin();
            it != pinned_nodes.end();
            it++)
       {
@@ -585,8 +583,8 @@ namespace oomph
           new_node[*it]->pin(i);
           new_node[*it]->set_value(i,
                                    scale *
-                                     (dynamic_cast<SolidNode *>(*it)->x(i) -
-                                      dynamic_cast<SolidNode *>(*it)->xi(i)));
+                                     (dynamic_cast<SolidNode*>(*it)->x(i) -
+                                      dynamic_cast<SolidNode*>(*it)->xi(i)));
         }
       }
 
@@ -600,8 +598,8 @@ namespace oomph
       for (unsigned j = 0; j < nnode; j++)
       {
         // Get nodes
-        SolidNode *orig_node_pt = orig_mesh_pt->node_pt(j);
-        Node *new_node_pt = new_node[orig_node_pt];
+        SolidNode* orig_node_pt = orig_mesh_pt->node_pt(j);
+        Node* new_node_pt = new_node[orig_node_pt];
 
         // Assign displacement difference
         unsigned dim = new_node_pt->ndim();
@@ -650,7 +648,7 @@ namespace oomph
     /// \short Functor: Specify SolidMesh whose nodal positions are to
     /// be adjusted, and set of nodes in that mesh whose position
     /// are to remain fixed.
-    void operator()(SolidMesh *orig_mesh_pt, std::set<Node *> pinned_nodes)
+    void operator()(SolidMesh* orig_mesh_pt, std::set<Node*> pinned_nodes)
     {
       // Create new mesh and read out node/element numbers from old one
       mesh_pt() = new Mesh;
@@ -658,7 +656,7 @@ namespace oomph
       unsigned nnode = orig_mesh_pt->nnode();
 
       // Have we already created that node?
-      std::map<Node *, Node *> new_node;
+      std::map<Node*, Node*> new_node;
 
       // Create new elements
       for (unsigned e = 0; e < nelem; e++)
@@ -666,8 +664,8 @@ namespace oomph
         mesh_pt()->add_element_pt(new POISSON_ELEMENT);
 
         // Find corresponding original element
-        SolidFiniteElement *orig_elem_pt = dynamic_cast<SolidFiniteElement *>(
-          orig_mesh_pt->finite_element_pt(e));
+        SolidFiniteElement* orig_elem_pt =
+          dynamic_cast<SolidFiniteElement*>(orig_mesh_pt->finite_element_pt(e));
         unsigned nnod = orig_elem_pt->nnode();
 
         // Create nodes
@@ -676,7 +674,7 @@ namespace oomph
           // Does it not exist yet?
           if (new_node[orig_elem_pt->node_pt(j)] == 0)
           {
-            Node *new_nod_pt =
+            Node* new_nod_pt =
               mesh_pt()->finite_element_pt(e)->construct_node(j);
             new_node[orig_elem_pt->node_pt(j)] = new_nod_pt;
             mesh_pt()->add_node_pt(new_nod_pt);
@@ -686,7 +684,7 @@ namespace oomph
               // Set new nodal position to be the old one in the
               // SolidMesh (assumed to contain no inverted elements)
               new_nod_pt->x(i) =
-                dynamic_cast<SolidNode *>(orig_elem_pt->node_pt(j))->xi(i);
+                dynamic_cast<SolidNode*>(orig_elem_pt->node_pt(j))->xi(i);
             }
           }
           // It already exists -- copy across
@@ -699,7 +697,7 @@ namespace oomph
       }
 
       // Loop over pinned nodes
-      for (std::set<Node *>::iterator it = pinned_nodes.begin();
+      for (std::set<Node*>::iterator it = pinned_nodes.begin();
            it != pinned_nodes.end();
            it++)
       {
@@ -717,8 +715,8 @@ namespace oomph
         for (unsigned j = 0; j < nnode; j++)
         {
           // Get nodes
-          SolidNode *orig_node_pt = orig_mesh_pt->node_pt(j);
-          Node *new_node_pt = new_node[orig_node_pt];
+          SolidNode* orig_node_pt = orig_mesh_pt->node_pt(j);
+          Node* new_node_pt = new_node[orig_node_pt];
 
           // Assign displacement difference
           new_node_pt->set_value(0, orig_node_pt->x(i) - orig_node_pt->xi(i));
@@ -731,8 +729,8 @@ namespace oomph
         for (unsigned j = 0; j < nnode; j++)
         {
           // Get nodes
-          SolidNode *orig_node_pt = orig_mesh_pt->node_pt(j);
-          Node *new_node_pt = new_node[orig_node_pt];
+          SolidNode* orig_node_pt = orig_mesh_pt->node_pt(j);
+          Node* new_node_pt = new_node[orig_node_pt];
 
           // Assign displacement difference
           orig_node_pt->x(i) = orig_node_pt->xi(i) + new_node_pt->value(0);

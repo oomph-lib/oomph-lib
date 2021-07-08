@@ -54,13 +54,13 @@ namespace oomph
     /// Output: the viscosity
     /// For Newtonian behaviour this returns 1
     virtual double viscosity(
-      const double &second_invariant_of_rate_of_strain_tensor) = 0;
+      const double& second_invariant_of_rate_of_strain_tensor) = 0;
 
     /// Function returning the derivative of the viscosity w.r.t.
     /// the second invariant of the rate of strain tensor
     /// For Newtonian behaviour this returns 0.0
     virtual double dviscosity_dinvariant(
-      const double &second_invariant_of_rate_of_strain_tensor) = 0;
+      const double& second_invariant_of_rate_of_strain_tensor) = 0;
   };
 
   //===================================================================
@@ -73,20 +73,20 @@ namespace oomph
   {
   public:
     /// Constructor: specify viscosity ratio (defaults to one)
-    NewtonianConstitutiveEquation(const double &viscosity_ratio = 1.0) :
+    NewtonianConstitutiveEquation(const double& viscosity_ratio = 1.0) :
       Viscosity_ratio(viscosity_ratio)
     {
     }
 
     /// in the Newtonian case the viscosity is constant
-    double viscosity(const double &second_invariant_of_rate_of_strain_tensor)
+    double viscosity(const double& second_invariant_of_rate_of_strain_tensor)
     {
       return Viscosity_ratio;
     }
 
     /// the derivative w.r.t. I2 is zero
     double dviscosity_dinvariant(
-      const double &second_invariant_of_rate_of_strain_tensor)
+      const double& second_invariant_of_rate_of_strain_tensor)
     {
       return 0.0;
     }
@@ -107,21 +107,21 @@ namespace oomph
   {
   private:
     /// power law index n
-    double *Power_pt;
+    double* Power_pt;
 
     /// regularisation parameter e << 1
-    double *Regularisation_parameter_pt;
+    double* Regularisation_parameter_pt;
 
   public:
-    PowerLawBerEngRegConstitutiveEquation(double *power_pt,
-                                          double *reg_par_pt) :
+    PowerLawBerEngRegConstitutiveEquation(double* power_pt,
+                                          double* reg_par_pt) :
       GeneralisedNewtonianConstitutiveEquation<DIM>(),
       Power_pt(power_pt),
       Regularisation_parameter_pt(reg_par_pt)
     {
     }
 
-    double viscosity(const double &second_invariant_of_rate_of_strain_tensor)
+    double viscosity(const double& second_invariant_of_rate_of_strain_tensor)
     {
       // Pre-multiply the second invariant with +/-1 depending on whether it's
       // positive or not
@@ -153,19 +153,19 @@ namespace oomph
   {
   private:
     /// yield stress tau_y
-    double *Yield_stress_pt;
+    double* Yield_stress_pt;
 
     /// power law index n
-    double *Flow_index_pt;
+    double* Flow_index_pt;
 
     /// regularisation parameter e << 1
-    double *Regularisation_parameter_pt;
+    double* Regularisation_parameter_pt;
 
   public:
     HerschelBulkleyBerEngRegConstitutiveEquation(
-      double *yield_stress_pt,
-      double *flow_index_pt,
-      double *regularisation_parameter_pt) :
+      double* yield_stress_pt,
+      double* flow_index_pt,
+      double* regularisation_parameter_pt) :
       GeneralisedNewtonianConstitutiveEquation<DIM>(),
       Yield_stress_pt(yield_stress_pt),
       Flow_index_pt(flow_index_pt),
@@ -173,7 +173,7 @@ namespace oomph
     {
     }
 
-    double viscosity(const double &second_invariant_of_rate_of_strain_tensor)
+    double viscosity(const double& second_invariant_of_rate_of_strain_tensor)
     {
       // Pre-multiply the second invariant with +/-1 depending on whether it's
       // positive or not
@@ -195,7 +195,7 @@ namespace oomph
 
     // not implemented yet
     double dviscosity_dinvariant(
-      const double &second_invariant_of_rate_of_strain_tensor)
+      const double& second_invariant_of_rate_of_strain_tensor)
     {
       // Pre-multiply the second invariant with +/-1 depending on whether it's
       // positive or not
@@ -235,21 +235,21 @@ namespace oomph
   {
   private:
     /// yield stress tau_y
-    double *Yield_stress_pt;
+    double* Yield_stress_pt;
 
     /// power law index n
-    double *Flow_index_pt;
+    double* Flow_index_pt;
 
     /// value of the second invariant below which we have
     /// constant (Newtonian) viscosity -- assumed to be always positive
-    double *Critical_second_invariant_pt;
+    double* Critical_second_invariant_pt;
 
   public:
     /// "Cutoff regularised" Herschel Bulkley constitutive equation
     HerschelBulkleyTanMilRegConstitutiveEquation(
-      double *yield_stress_pt,
-      double *flow_index_pt,
-      double *critical_second_invariant_pt) :
+      double* yield_stress_pt,
+      double* flow_index_pt,
+      double* critical_second_invariant_pt) :
       GeneralisedNewtonianConstitutiveEquation<DIM>(),
       Yield_stress_pt(yield_stress_pt),
       Flow_index_pt(flow_index_pt),
@@ -277,15 +277,15 @@ namespace oomph
     }
 
     /// Report cutoff values
-    void report_cut_off_values(double &cut_off_invariant,
-                               double &cut_off_viscosity)
+    void report_cut_off_values(double& cut_off_invariant,
+                               double& cut_off_viscosity)
     {
       cut_off_invariant = *Critical_second_invariant_pt;
       cut_off_viscosity = calculate_cut_off_viscosity();
     }
 
     /// Viscosity ratio as a fct of strain rate invariant
-    double viscosity(const double &second_invariant_of_rate_of_strain_tensor)
+    double viscosity(const double& second_invariant_of_rate_of_strain_tensor)
     {
       // Pre-multiply the second invariant with +/-1 depending on whether it's
       // positive or not
@@ -318,7 +318,7 @@ namespace oomph
 
     /// Deriv of viscosity w.r.t. strain rate invariant
     double dviscosity_dinvariant(
-      const double &second_invariant_of_rate_of_strain_tensor)
+      const double& second_invariant_of_rate_of_strain_tensor)
     {
       // Pre-multiply the second invariant with +/-1 depending on whether it's
       // positive or not
@@ -358,21 +358,21 @@ namespace oomph
   {
   private:
     /// yield stress tau_y
-    double *Yield_stress_pt;
+    double* Yield_stress_pt;
 
     /// power law index n
-    double *Flow_index_pt;
+    double* Flow_index_pt;
 
     /// value of the second invariant below which we have
     /// constant (Newtonian) viscosity -- assumed to be always positive
-    double *Critical_second_invariant_pt;
+    double* Critical_second_invariant_pt;
 
   public:
     /// "Cutoff regularised" Herschel Bulkley constitutive equation
     HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation(
-      double *yield_stress_pt,
-      double *flow_index_pt,
-      double *critical_second_invariant_pt) :
+      double* yield_stress_pt,
+      double* flow_index_pt,
+      double* critical_second_invariant_pt) :
       GeneralisedNewtonianConstitutiveEquation<DIM>(),
       Yield_stress_pt(yield_stress_pt),
       Flow_index_pt(flow_index_pt),
@@ -411,7 +411,7 @@ namespace oomph
     /// Offset by how much the zero shear rate viscosity lies
     /// above the viscosity at I2_cutoff
     /// Hard-coded to a value that ensures a smooth transition
-    double calculate_viscosity_offset_at_zero_shear(double &cut_off_viscosity)
+    double calculate_viscosity_offset_at_zero_shear(double& cut_off_viscosity)
     {
       return cut_off_viscosity / 5.0;
     }
@@ -431,9 +431,9 @@ namespace oomph
     }
 
     /// Report cutoff values
-    void report_cut_off_values(double &cut_off_invariant,
-                               double &cut_off_viscosity,
-                               double &zero_shear_viscosity)
+    void report_cut_off_values(double& cut_off_invariant,
+                               double& cut_off_viscosity,
+                               double& zero_shear_viscosity)
     {
       cut_off_invariant = *Critical_second_invariant_pt;
       cut_off_viscosity = calculate_cutoff_viscosity();
@@ -441,7 +441,7 @@ namespace oomph
     }
 
     // Calculate the fitting parameters for the cubic blending
-    void calculate_fitting_parameters_of_cubic(double &a, double &b)
+    void calculate_fitting_parameters_of_cubic(double& a, double& b)
     {
       // get the viscosity at the cutoff invariant
       double Cut_off_viscosity = calculate_cutoff_viscosity();
@@ -492,7 +492,7 @@ namespace oomph
     }
 
     /// Viscosity ratio as a fct of strain rate invariant
-    double viscosity(const double &second_invariant_of_rate_of_strain_tensor)
+    double viscosity(const double& second_invariant_of_rate_of_strain_tensor)
     {
       // Get the parameters of the cubic
       double a;
@@ -533,7 +533,7 @@ namespace oomph
 
     /// Deriv of viscosity w.r.t. strain rate invariant
     double dviscosity_dinvariant(
-      const double &second_invariant_of_rate_of_strain_tensor)
+      const double& second_invariant_of_rate_of_strain_tensor)
     {
       // Get the parameters of the cubic
       double a;
@@ -580,19 +580,19 @@ namespace oomph
   {
   private:
     /// Yield stress tau_y
-    double *Yield_stress_pt;
+    double* Yield_stress_pt;
 
     /// Power law index n
-    double *Flow_index_pt;
+    double* Flow_index_pt;
 
     /// Regularisation parameter m >> 1
-    double *Exponential_parameter_pt;
+    double* Exponential_parameter_pt;
 
   public:
     HerschelBulkleyPapRegConstitutiveEquation(
-      double *yield_stress_pt,
-      double *flow_index_pt,
-      double *exponential_parameter_pt) :
+      double* yield_stress_pt,
+      double* flow_index_pt,
+      double* exponential_parameter_pt) :
       GeneralisedNewtonianConstitutiveEquation<DIM>(),
       Yield_stress_pt(yield_stress_pt),
       Flow_index_pt(flow_index_pt),
@@ -600,7 +600,7 @@ namespace oomph
     {
     }
 
-    double viscosity(const double &second_invariant_of_rate_of_strain_tensor)
+    double viscosity(const double& second_invariant_of_rate_of_strain_tensor)
     {
       // Calculate magnitude of the rate of strain tensor
       double measure_of_rate_of_strain =
@@ -627,20 +627,20 @@ namespace oomph
   {
   private:
     /// yield stress tau_y
-    double *Yield_stress_pt;
+    double* Yield_stress_pt;
 
     /// power law index n
-    double *Flow_index_pt;
+    double* Flow_index_pt;
 
     /// the viscosity at zero shear rate
-    double *Zero_shear_viscosity_pt;
+    double* Zero_shear_viscosity_pt;
 
   public:
     /// "Exponentially regularised" Herschel Bulkley constitutive equation
     HerschelBulkleyMenDutRegConstitutiveEquation(
-      double *yield_stress_pt,
-      double *flow_index_pt,
-      double *zero_shear_viscosity_pt) :
+      double* yield_stress_pt,
+      double* flow_index_pt,
+      double* zero_shear_viscosity_pt) :
       GeneralisedNewtonianConstitutiveEquation<DIM>(),
       Yield_stress_pt(yield_stress_pt),
       Flow_index_pt(flow_index_pt),
@@ -649,7 +649,7 @@ namespace oomph
     }
 
     /// Viscosity ratio as a fct of strain rate invariant
-    double viscosity(const double &second_invariant_of_rate_of_strain_tensor)
+    double viscosity(const double& second_invariant_of_rate_of_strain_tensor)
     {
       // Pre-multiply the second invariant with +/-1 depending on whether it's
       // positive or not
@@ -680,7 +680,7 @@ namespace oomph
 
     /// Deriv of viscosity w.r.t. strain rate invariant
     double dviscosity_dinvariant(
-      const double &second_invariant_of_rate_of_strain_tensor)
+      const double& second_invariant_of_rate_of_strain_tensor)
     {
       // Pre-multiply the second invariant with +/-1 depending on whether it's
       // positive or not
@@ -737,21 +737,21 @@ namespace oomph
   {
   private:
     /// pre-factor alpha
-    double *Alpha_pt;
+    double* Alpha_pt;
 
     /// power law index n
-    double *Flow_index_pt;
+    double* Flow_index_pt;
 
     /// value of the second invariant below which we have
     /// constant (Newtonian) viscosity -- assumed to be always positive
-    double *Critical_second_invariant_pt;
+    double* Critical_second_invariant_pt;
 
   public:
     /// "Cutoff regularised" Sisko constitutive equation
     SiskoTanMilRegWithBlendingConstitutiveEquation(
-      double *alpha_pt,
-      double *flow_index_pt,
-      double *critical_second_invariant_pt) :
+      double* alpha_pt,
+      double* flow_index_pt,
+      double* critical_second_invariant_pt) :
       GeneralisedNewtonianConstitutiveEquation<DIM>(),
       Alpha_pt(alpha_pt),
       Flow_index_pt(flow_index_pt),
@@ -789,7 +789,7 @@ namespace oomph
     /// Offset by how much the zero shear rate viscosity lies
     /// above the viscosity at I2_cutoff
     /// Hard-coded to a value that ensures a smooth transition
-    double calculate_viscosity_offset_at_zero_shear(double &cut_off_viscosity)
+    double calculate_viscosity_offset_at_zero_shear(double& cut_off_viscosity)
     {
       return cut_off_viscosity / 5.0;
     }
@@ -809,9 +809,9 @@ namespace oomph
     }
 
     /// Report cutoff values
-    void report_cut_off_values(double &cut_off_invariant,
-                               double &cut_off_viscosity,
-                               double &zero_shear_viscosity)
+    void report_cut_off_values(double& cut_off_invariant,
+                               double& cut_off_viscosity,
+                               double& zero_shear_viscosity)
     {
       cut_off_invariant = *Critical_second_invariant_pt;
       cut_off_viscosity = calculate_cutoff_viscosity();
@@ -819,7 +819,7 @@ namespace oomph
     }
 
     // Calculate the fitting parameters for the cubic blending
-    void calculate_fitting_parameters_of_cubic(double &a, double &b)
+    void calculate_fitting_parameters_of_cubic(double& a, double& b)
     {
       // get the viscosity at the cutoff invariant
       double Cut_off_viscosity = calculate_cutoff_viscosity();
@@ -854,7 +854,7 @@ namespace oomph
     }
 
     /// Viscosity ratio as a fct of strain rate invariant
-    double viscosity(const double &second_invariant_of_rate_of_strain_tensor)
+    double viscosity(const double& second_invariant_of_rate_of_strain_tensor)
     {
       // Get the parameters of the cubic
       double a;
@@ -895,7 +895,7 @@ namespace oomph
 
     /// Deriv of viscosity w.r.t. strain rate invariant
     double dviscosity_dinvariant(
-      const double &second_invariant_of_rate_of_strain_tensor)
+      const double& second_invariant_of_rate_of_strain_tensor)
     {
       // Get the parameters of the cubic
       double a;
@@ -941,16 +941,16 @@ namespace oomph
   {
   private:
     /// Yield stress
-    double *Yield_stress_pt;
+    double* Yield_stress_pt;
 
     /// value of the second invariant below which we have
     /// constant (Newtonian) viscosity -- assumed to be always positive
-    double *Critical_second_invariant_pt;
+    double* Critical_second_invariant_pt;
 
   public:
     /// "Cutoff regularised" Casson constitutive equation
     CassonTanMilRegWithBlendingConstitutiveEquation(
-      double *yield_stress_pt, double *critical_second_invariant_pt) :
+      double* yield_stress_pt, double* critical_second_invariant_pt) :
       GeneralisedNewtonianConstitutiveEquation<DIM>(),
       Yield_stress_pt(yield_stress_pt),
       Critical_second_invariant_pt(critical_second_invariant_pt)
@@ -988,7 +988,7 @@ namespace oomph
     /// Offset by how much the zero shear rate viscosity lies
     /// above the viscosity at I2_cutoff
     /// Hard-coded to a value that ensures a smooth transition
-    double calculate_viscosity_offset_at_zero_shear(double &cut_off_viscosity)
+    double calculate_viscosity_offset_at_zero_shear(double& cut_off_viscosity)
     {
       return cut_off_viscosity / 5.0;
     }
@@ -1008,9 +1008,9 @@ namespace oomph
     }
 
     /// Report cutoff values
-    void report_cut_off_values(double &cut_off_invariant,
-                               double &cut_off_viscosity,
-                               double &zero_shear_viscosity)
+    void report_cut_off_values(double& cut_off_invariant,
+                               double& cut_off_viscosity,
+                               double& zero_shear_viscosity)
     {
       cut_off_invariant = *Critical_second_invariant_pt;
       cut_off_viscosity = calculate_cutoff_viscosity();
@@ -1018,7 +1018,7 @@ namespace oomph
     }
 
     // Calculate the fitting parameters for the cubic blending
-    void calculate_fitting_parameters_of_cubic(double &a, double &b)
+    void calculate_fitting_parameters_of_cubic(double& a, double& b)
     {
       // get the viscosity at the cutoff invariant
       double Cut_off_viscosity = calculate_cutoff_viscosity();
@@ -1051,7 +1051,7 @@ namespace oomph
     }
 
     /// Viscosity ratio as a fct of strain rate invariant
-    double viscosity(const double &second_invariant_of_rate_of_strain_tensor)
+    double viscosity(const double& second_invariant_of_rate_of_strain_tensor)
     {
       // Get the parameters of the cubic
       double a;
@@ -1094,7 +1094,7 @@ namespace oomph
 
     /// Deriv of viscosity w.r.t. strain rate invariant
     double dviscosity_dinvariant(
-      const double &second_invariant_of_rate_of_strain_tensor)
+      const double& second_invariant_of_rate_of_strain_tensor)
     {
       // Get the parameters of the cubic
       double a;
@@ -1141,18 +1141,18 @@ namespace oomph
   {
   private:
     /// high shear rate viscosity
-    double *Mu_inf_pt;
+    double* Mu_inf_pt;
 
     /// zero shear rate viscosity
-    double *Mu_0_pt;
+    double* Mu_0_pt;
 
     /// parameter that controls the steepness of the curve
-    double *Alpha_pt;
+    double* Alpha_pt;
 
   public:
-    NicosConstitutiveEquation(double *mu_inf_pt,
-                              double *mu_0_pt,
-                              double *alpha_pt) :
+    NicosConstitutiveEquation(double* mu_inf_pt,
+                              double* mu_0_pt,
+                              double* alpha_pt) :
       GeneralisedNewtonianConstitutiveEquation<DIM>(),
       Mu_inf_pt(mu_inf_pt),
       Mu_0_pt(mu_0_pt),
@@ -1160,7 +1160,7 @@ namespace oomph
     {
     }
 
-    double viscosity(const double &second_invariant_of_rate_of_strain_tensor)
+    double viscosity(const double& second_invariant_of_rate_of_strain_tensor)
     {
       return (*Mu_inf_pt) +
              ((*Mu_0_pt) - (*Mu_inf_pt)) *
@@ -1168,7 +1168,7 @@ namespace oomph
     }
 
     double dviscosity_dinvariant(
-      const double &second_invariant_of_rate_of_strain_tensor)
+      const double& second_invariant_of_rate_of_strain_tensor)
     {
       // std::ostringstream error_stream;
       // error_stream << "This has not been implemented yet!";
@@ -1194,24 +1194,24 @@ namespace oomph
   {
   private:
     /// high shear rate viscosity
-    double *Mu_inf_pt;
+    double* Mu_inf_pt;
 
     /// zero shear rate viscosity
-    double *Mu_0_pt;
+    double* Mu_0_pt;
 
     /// parameter controlling the steepness of the step
     /// nb -- I used 10.0/(*Critical_second_invariant_pt)
-    double *Alpha_pt;
+    double* Alpha_pt;
 
     /// parameter that controls the location of the step -- assumed
     /// to be always positive
-    double *Critical_second_invariant_pt;
+    double* Critical_second_invariant_pt;
 
   public:
-    TanhProfileConstitutiveEquation(double *mu_inf_pt,
-                                    double *mu_0_pt,
-                                    double *alpha_pt,
-                                    double *critical_second_invariant_pt) :
+    TanhProfileConstitutiveEquation(double* mu_inf_pt,
+                                    double* mu_0_pt,
+                                    double* alpha_pt,
+                                    double* critical_second_invariant_pt) :
       GeneralisedNewtonianConstitutiveEquation<DIM>(),
       Mu_inf_pt(mu_inf_pt),
       Mu_0_pt(mu_0_pt),
@@ -1220,7 +1220,7 @@ namespace oomph
     {
     }
 
-    double viscosity(const double &second_invariant_of_rate_of_strain_tensor)
+    double viscosity(const double& second_invariant_of_rate_of_strain_tensor)
     {
       // Pre-multiply the second invariant with +/-1 depending on whether it's
       // positive or not
@@ -1238,7 +1238,7 @@ namespace oomph
     }
 
     double dviscosity_dinvariant(
-      const double &second_invariant_of_rate_of_strain_tensor)
+      const double& second_invariant_of_rate_of_strain_tensor)
     {
       // Pre-multiply the second invariant with +/-1 depending on whether it's
       // positive or not

@@ -45,8 +45,8 @@ namespace oomph
   void MatrixBasedDiagPreconditioner::setup()
   {
     // first attempt to cast to DistributableLinearAlgebraObject
-    DistributableLinearAlgebraObject *dist_matrix_pt =
-      dynamic_cast<DistributableLinearAlgebraObject *>(matrix_pt());
+    DistributableLinearAlgebraObject* dist_matrix_pt =
+      dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt());
 
     // if it is a distributable matrix
     if (dist_matrix_pt != 0)
@@ -116,7 +116,7 @@ namespace oomph
   /// Apply preconditioner: Multiply r by the inverse of the diagonal.
   //=============================================================================
   void MatrixBasedDiagPreconditioner::preconditioner_solve(
-    const DoubleVector &r, DoubleVector &z)
+    const DoubleVector& r, DoubleVector& z)
   {
 #ifdef PARANOID
     if (*r.distribution_pt() != *this->distribution_pt())
@@ -152,8 +152,8 @@ namespace oomph
     }
 
     // apply the preconditioner
-    const double *r_values = r.values_pt();
-    double *z_values = z.values_pt();
+    const double* r_values = r.values_pt();
+    double* z_values = z.values_pt();
     unsigned nrow_local = this->nrow_local();
     for (unsigned i = 0; i < nrow_local; i++)
     {
@@ -184,11 +184,11 @@ namespace oomph
     }
 
     // cast the Double Base Matrix to Compressed Column Double Matrix
-    CCDoubleMatrix *cc_matrix_pt = dynamic_cast<CCDoubleMatrix *>(matrix_pt());
+    CCDoubleMatrix* cc_matrix_pt = dynamic_cast<CCDoubleMatrix*>(matrix_pt());
 
     // get the matrix
-    int *m_row_index = cc_matrix_pt->row_index();
-    double *m_value = cc_matrix_pt->value();
+    int* m_row_index = cc_matrix_pt->row_index();
+    double* m_value = cc_matrix_pt->value();
     unsigned m_nnz = cc_matrix_pt->nnz();
 
     // intially set positive matrix to true
@@ -225,7 +225,7 @@ namespace oomph
   void MatrixBasedLumpedPreconditioner<CRDoubleMatrix>::setup()
   {
     // first attempt to cast to CRDoubleMatrix
-    CRDoubleMatrix *cr_matrix_pt = dynamic_cast<CRDoubleMatrix *>(matrix_pt());
+    CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt());
 
     // # of rows in the matrix
     Nrow = cr_matrix_pt->nrow_local();
@@ -244,8 +244,8 @@ namespace oomph
     }
 
     // get the matrix
-    int *m_row_start = cr_matrix_pt->row_start();
-    double *m_value = cr_matrix_pt->value();
+    int* m_row_start = cr_matrix_pt->row_start();
+    double* m_value = cr_matrix_pt->value();
 
     // intially set positive matrix to true
     Positive_matrix = true;
@@ -278,7 +278,7 @@ namespace oomph
   //=============================================================================
   template<typename MATRIX>
   void MatrixBasedLumpedPreconditioner<MATRIX>::preconditioner_solve(
-    const DoubleVector &r, DoubleVector &z)
+    const DoubleVector& r, DoubleVector& z)
   {
 #ifdef PARANOID
     if (*r.distribution_pt() != *this->distribution_pt())
@@ -324,7 +324,7 @@ namespace oomph
   void ILUZeroPreconditioner<CCDoubleMatrix>::setup()
   {
     // cast the Double Base Matrix to Compressed Column Double Matrix
-    CCDoubleMatrix *cc_matrix_pt = dynamic_cast<CCDoubleMatrix *>(matrix_pt());
+    CCDoubleMatrix* cc_matrix_pt = dynamic_cast<CCDoubleMatrix*>(matrix_pt());
 
 #ifdef PARANOID
     if (cc_matrix_pt == 0)
@@ -348,9 +348,9 @@ namespace oomph
     int u_nz = 0;
 
     // create space for m matrix
-    int *m_column_start;
-    int *m_row_index;
-    double *m_value;
+    int* m_column_start;
+    int* m_row_index;
+    double* m_value;
 
     // get the m matrix
     m_column_start = cc_matrix_pt->column_start();
@@ -470,7 +470,7 @@ namespace oomph
   void ILUZeroPreconditioner<CRDoubleMatrix>::setup()
   {
     // cast the Double Base Matrix to Compressed Column Double Matrix
-    CRDoubleMatrix *cr_matrix_pt = dynamic_cast<CRDoubleMatrix *>(matrix_pt());
+    CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt());
 
 #ifdef PARANOID
     if (cr_matrix_pt == 0)
@@ -487,7 +487,7 @@ namespace oomph
     if (cr_matrix_pt->distributed())
     {
       // get the global matrix
-      CRDoubleMatrix *global_matrix_pt = cr_matrix_pt->global_matrix();
+      CRDoubleMatrix* global_matrix_pt = cr_matrix_pt->global_matrix();
 
       // store at cr_matrix pointer
       cr_matrix_pt = global_matrix_pt;
@@ -507,9 +507,9 @@ namespace oomph
     int u_nz = 0;
 
     // create space for m matrix
-    int *m_row_start;
-    int *m_column_index;
-    double *m_value;
+    int* m_row_start;
+    int* m_column_index;
+    double* m_value;
 
     // get the m matrix
     m_row_start = cr_matrix_pt->row_start();
@@ -616,13 +616,13 @@ namespace oomph
   /// Uz=y and return z
   //=============================================================================
   void ILUZeroPreconditioner<CCDoubleMatrix>::preconditioner_solve(
-    const DoubleVector &r, DoubleVector &z)
+    const DoubleVector& r, DoubleVector& z)
   {
     // # of rows in the matrix
     int n_row = r.nrow();
 
     // store the distribution of z
-    LinearAlgebraDistribution *z_dist = 0;
+    LinearAlgebraDistribution* z_dist = 0;
     if (z.built())
     {
       z_dist = new LinearAlgebraDistribution(z.distribution_pt());
@@ -674,13 +674,13 @@ namespace oomph
   ///  and return z
   //=============================================================================
   void ILUZeroPreconditioner<CRDoubleMatrix>::preconditioner_solve(
-    const DoubleVector &r, DoubleVector &z)
+    const DoubleVector& r, DoubleVector& z)
   {
     // # of rows in the matrix
     int n_row = r.nrow();
 
     // store the distribution of z
-    LinearAlgebraDistribution *z_dist = 0;
+    LinearAlgebraDistribution* z_dist = 0;
     if (z.built())
     {
       z_dist = new LinearAlgebraDistribution(z.distribution_pt());

@@ -58,14 +58,14 @@ namespace TanhSolnForLinearWave
   double Phi;
 
   /// Exact solution
-  double exact_u(const double &time, const Vector<double> &x)
+  double exact_u(const double& time, const Vector<double>& x)
   {
     double zeta = cos(Phi) * x[0] + sin(Phi) * x[1];
     return tanh(1.0 - Alpha * (zeta - time));
   }
 
   /// 1st time-deriv of exact solution
-  double exact_dudt(const double &time, const Vector<double> &x)
+  double exact_dudt(const double& time, const Vector<double>& x)
   {
     double zeta = cos(Phi) * x[0] + sin(Phi) * x[1];
     return Alpha / (cosh(1.0 - Alpha * (zeta - time)) *
@@ -73,7 +73,7 @@ namespace TanhSolnForLinearWave
   }
 
   /// 2nd time-deriv of exact solution
-  double exact_d2udt2(const double &time, const Vector<double> &x)
+  double exact_d2udt2(const double& time, const Vector<double>& x)
   {
     double zeta = cos(Phi) * x[0] + sin(Phi) * x[1];
     return -2.0 * Alpha * Alpha * tanh(1.0 - Alpha * (zeta - time)) /
@@ -82,9 +82,9 @@ namespace TanhSolnForLinearWave
   }
 
   /// Exact solution as a vector
-  void get_exact_u(const double &time,
-                   const Vector<double> &x,
-                   Vector<double> &u)
+  void get_exact_u(const double& time,
+                   const Vector<double>& x,
+                   Vector<double>& u)
   {
     u[0] = exact_u(time, x);
     u[1] = exact_dudt(time, x);
@@ -92,7 +92,7 @@ namespace TanhSolnForLinearWave
   }
 
   /// Source function to make it an exact solution
-  void get_source(const double &time, const Vector<double> &x, double &source)
+  void get_source(const double& time, const Vector<double>& x, double& source)
   {
     source = 0.0;
   }
@@ -114,9 +114,9 @@ public:
   /// bool indicating impulsive or "smooth" start,
   /// and pointer to source function
   LinearWaveProblem(
-    const unsigned &nx,
-    const unsigned &ny,
-    const bool &impulsive_start,
+    const unsigned& nx,
+    const unsigned& ny,
+    const bool& impulsive_start,
     LinearWaveEquations<2>::LinearWaveSourceFctPt source_fct_pt);
 
   /// Destructor (empty)
@@ -156,7 +156,7 @@ public:
       for (unsigned inod = 0; inod < num_nod; inod++)
       {
         // Set the boundary condition from the exact solution
-        Node *nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
+        Node* nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
 
         bool use_direct_assignment = false;
         if (use_direct_assignment)
@@ -173,8 +173,8 @@ public:
         else
         {
           // Get timestepper
-          TIMESTEPPER *timestepper_pt =
-            dynamic_cast<TIMESTEPPER *>(time_stepper_pt());
+          TIMESTEPPER* timestepper_pt =
+            dynamic_cast<TIMESTEPPER*>(time_stepper_pt());
 
           // Assign the history values
           timestepper_pt->assign_initial_data_values(
@@ -188,7 +188,7 @@ public:
   void set_initial_condition();
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// \short Do unsteady run
   void unsteady_run();
@@ -207,9 +207,9 @@ private:
 //========================================================================
 template<class ELEMENT, class TIMESTEPPER>
 LinearWaveProblem<ELEMENT, TIMESTEPPER>::LinearWaveProblem(
-  const unsigned &nx,
-  const unsigned &ny,
-  const bool &impulsive_start,
+  const unsigned& nx,
+  const unsigned& ny,
+  const bool& impulsive_start,
   LinearWaveEquations<2>::LinearWaveSourceFctPt source_fct_pt) :
   Impulsive_start(impulsive_start)
 {
@@ -266,7 +266,7 @@ LinearWaveProblem<ELEMENT, TIMESTEPPER>::LinearWaveProblem(
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the source function pointer
     el_pt->source_fct_pt() = source_fct_pt;
@@ -284,7 +284,7 @@ template<class ELEMENT, class TIMESTEPPER>
 void LinearWaveProblem<ELEMENT, TIMESTEPPER>::set_initial_condition()
 {
   // Get timestepper
-  TIMESTEPPER *timestepper_pt = dynamic_cast<TIMESTEPPER *>(time_stepper_pt());
+  TIMESTEPPER* timestepper_pt = dynamic_cast<TIMESTEPPER*>(time_stepper_pt());
 
   // Impulsive start
   //----------------
@@ -295,7 +295,7 @@ void LinearWaveProblem<ELEMENT, TIMESTEPPER>::set_initial_condition()
     for (unsigned jnod = 0; jnod < num_nod; jnod++)
     {
       // Pointer to node
-      Node *nod_pt = mesh_pt()->node_pt(jnod);
+      Node* nod_pt = mesh_pt()->node_pt(jnod);
 
       // Get nodal coordinates
       Vector<double> x(2);
@@ -339,7 +339,7 @@ void LinearWaveProblem<ELEMENT, TIMESTEPPER>::set_initial_condition()
     for (unsigned jnod = 0; jnod < num_nod; jnod++)
     {
       // Pointer to node
-      Node *nod_pt = mesh_pt()->node_pt(jnod);
+      Node* nod_pt = mesh_pt()->node_pt(jnod);
 
       // Assign the history values
       timestepper_pt->assign_initial_data_values(
@@ -351,7 +351,7 @@ void LinearWaveProblem<ELEMENT, TIMESTEPPER>::set_initial_condition()
     for (unsigned jnod = 0; jnod < num_nod; jnod++)
     {
       // Pointer to node
-      Node *nod_pt = mesh_pt()->node_pt(jnod);
+      Node* nod_pt = mesh_pt()->node_pt(jnod);
 
       // Get nodal coordinates
       Vector<double> x(2);
@@ -387,7 +387,7 @@ void LinearWaveProblem<ELEMENT, TIMESTEPPER>::set_initial_condition()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT, class TIMESTEPPER>
-void LinearWaveProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo &doc_info)
+void LinearWaveProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -531,7 +531,7 @@ void LinearWaveProblem<ELEMENT, TIMESTEPPER>::unsteady_run()
 //===start_of_main========================================================
 /// Demonstrate how to solve LinearWave problem.
 //========================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments: If a command line argument is specied
   // we regard this as validation run.

@@ -57,15 +57,15 @@ namespace oomph
   {
   public:
     /// Typedef for fct that defines the axial stretching fct
-    typedef double (*AxialBLStretchingFctPt)(const double &x);
+    typedef double (*AxialBLStretchingFctPt)(const double& x);
 
     /// Constructor for the mesh -- uniformly spaced elements
     CircularCylindricalShellMesh(
-      const unsigned &nx,
-      const unsigned &ny,
-      const double &lx,
-      const double &ly,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      const unsigned& nx,
+      const unsigned& ny,
+      const double& lx,
+      const double& ly,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       RectangularQuadMesh<ELEMENT>(nx, ny, lx, ly, time_stepper_pt)
     {
       // Use default stretching fct
@@ -83,12 +83,12 @@ namespace oomph
     ///  Lagr. coordinates to new positions to allow for better resolution of
     /// bending boundary layer
     CircularCylindricalShellMesh(
-      const unsigned &nx,
-      const unsigned &ny,
-      const double &lx,
-      const double &ly,
+      const unsigned& nx,
+      const unsigned& ny,
+      const double& lx,
+      const double& ly,
       AxialBLStretchingFctPt axial_bl_stretching_fct_pt,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       RectangularQuadMesh<ELEMENT>(nx, ny, lx, ly, time_stepper_pt)
     {
       // Apply stretching fct
@@ -106,13 +106,13 @@ namespace oomph
     /// elements near the ends are squashed to that axial extent
     /// of the elements changes from lx/nx to delta_bl.
     CircularCylindricalShellMesh(
-      const unsigned &nx,
-      const unsigned &ny,
-      const double &lx,
-      const double &ly,
-      const unsigned &nx_bl,
-      const double &delta_bl,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      const unsigned& nx,
+      const unsigned& ny,
+      const double& lx,
+      const double& ly,
+      const unsigned& nx_bl,
+      const double& delta_bl,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       RectangularQuadMesh<ELEMENT>(nx, ny, lx, ly, time_stepper_pt)
     {
       // Use default stretching fct
@@ -130,7 +130,7 @@ namespace oomph
     /// undeformed, or reference, position, corresponding to the
     /// stress-free state of the elastic body. This function assigns
     /// the undeformed position for the nodes on the elastic tube
-    void assign_undeformed_positions(GeomObject *const &undeformed_midplane_pt);
+    void assign_undeformed_positions(GeomObject* const& undeformed_midplane_pt);
 
     /// Access to fct pointer to fct that defines the axial stretching fct
     AxialBLStretchingFctPt axial_bl_stretching_fct_pt() const
@@ -140,14 +140,14 @@ namespace oomph
 
   private:
     /// Mesh build helper fct
-    void build_mesh(const unsigned &nx,
-                    const unsigned &ny,
-                    const double &lx,
-                    const double &ly);
+    void build_mesh(const unsigned& nx,
+                    const unsigned& ny,
+                    const double& lx,
+                    const double& ly);
 
     /// \short Fct that defines the axial stretching to accomodate
     /// bending boundary layers
-    double scaled_x(const double &x)
+    double scaled_x(const double& x)
     {
       if (Axial_bl_stretching_fct_pt == 0)
       {
@@ -160,7 +160,7 @@ namespace oomph
     }
 
     /// Default axial scaling fct
-    double piecewise_linear_axial_bl_stretching_fct(const double &xi)
+    double piecewise_linear_axial_bl_stretching_fct(const double& xi)
     {
       // Length of shell
       double lx = this->Xmax - this->Xmin;

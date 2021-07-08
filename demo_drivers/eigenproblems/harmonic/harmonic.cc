@@ -50,7 +50,7 @@ class ComplexLess
 {
 public:
   /// Comparison. Are the values identical or not?
-  bool operator()(const complex<T> &x, const complex<T> &y) const
+  bool operator()(const complex<T>& x, const complex<T>& y) const
   {
     return x.real() < y.real();
   }
@@ -77,13 +77,13 @@ public:
   /// \short Access function: Eigenfunction value at local node n
   /// Note that solving the eigenproblem does not assign values
   /// to this storage space. It is used for output purposes only.
-  virtual inline double u(const unsigned &n) const
+  virtual inline double u(const unsigned& n) const
   {
     return nodal_value(n, 0);
   }
 
   /// Output the eigenfunction with default number of plot points
-  void output(ostream &outfile)
+  void output(ostream& outfile)
   {
     unsigned nplot = 5;
     output(outfile, nplot);
@@ -91,7 +91,7 @@ public:
 
   /// \short Output FE representation of soln: x,y,u or x,y,z,u at
   /// Nplot  plot points
-  void output(ostream &outfile, const unsigned &nplot)
+  void output(ostream& outfile, const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(1);
@@ -115,9 +115,9 @@ public:
   /// \short Assemble the contributions to the jacobian and mass
   /// matrices
   void fill_in_contribution_to_jacobian_and_mass_matrix(
-    Vector<double> &residuals,
-    DenseMatrix<double> &jacobian,
-    DenseMatrix<double> &mass_matrix)
+    Vector<double>& residuals,
+    DenseMatrix<double>& jacobian,
+    DenseMatrix<double>& mass_matrix)
   {
     // Find out how many nodes there are
     unsigned n_node = nnode();
@@ -171,7 +171,7 @@ public:
   } // end_of_fill_in_contribution_to_jacobian_and_mass_matrix
 
   /// Return FE representation of function value u(s) at local coordinate s
-  inline double interpolated_u(const Vector<double> &s) const
+  inline double interpolated_u(const Vector<double>& s) const
   {
     unsigned n_node = nnode();
 
@@ -197,20 +197,20 @@ public:
 protected:
   /// \short Shape/test functions and derivs w.r.t. to global coords at
   /// local coord. s; return  Jacobian of mapping
-  virtual double dshape_eulerian(const Vector<double> &s,
-                                 Shape &psi,
-                                 DShape &dpsidx) const = 0;
+  virtual double dshape_eulerian(const Vector<double>& s,
+                                 Shape& psi,
+                                 DShape& dpsidx) const = 0;
 
   /// \short Shape/test functions and derivs w.r.t. to global coords at
   /// integration point ipt; return  Jacobian of mapping
-  virtual double dshape_eulerian_at_knot(const unsigned &ipt,
-                                         Shape &psi,
-                                         DShape &dpsidx) const = 0;
+  virtual double dshape_eulerian_at_knot(const unsigned& ipt,
+                                         Shape& psi,
+                                         DShape& dpsidx) const = 0;
 
   /// \short Access function that returns the local equation number
   /// of the unknown in the problem. Default is to assume that it is the
   /// first (only) value stored at the node.
-  virtual inline int u_local_eqn(const unsigned &n)
+  virtual inline int u_local_eqn(const unsigned& n)
   {
     return nodal_local_eqn(n, 0);
   }
@@ -235,37 +235,37 @@ public:
 
   /// \short  Required  # of `values' (pinned or dofs)
   /// at node n
-  inline unsigned required_nvalue(const unsigned &n) const
+  inline unsigned required_nvalue(const unsigned& n) const
   {
     return 1;
   }
 
   /// \short Output function overloaded from HarmonicEquations
-  void output(ostream &outfile)
+  void output(ostream& outfile)
   {
     HarmonicEquations::output(outfile);
   }
 
   ///  \short Output function overloaded from HarmonicEquations
-  void output(ostream &outfile, const unsigned &Nplot)
+  void output(ostream& outfile, const unsigned& Nplot)
   {
     HarmonicEquations::output(outfile, Nplot);
   }
 
 protected:
   /// Shape, test functions & derivs. w.r.t. to global coords. Return Jacobian.
-  inline double dshape_eulerian(const Vector<double> &s,
-                                Shape &psi,
-                                DShape &dpsidx) const
+  inline double dshape_eulerian(const Vector<double>& s,
+                                Shape& psi,
+                                DShape& dpsidx) const
   {
     return QElement<1, NNODE_1D>::dshape_eulerian(s, psi, dpsidx);
   }
 
   /// \short Shape, test functions & derivs. w.r.t. to global coords. at
   /// integration point ipt. Return Jacobian.
-  inline double dshape_eulerian_at_knot(const unsigned &ipt,
-                                        Shape &psi,
-                                        DShape &dpsidx) const
+  inline double dshape_eulerian_at_knot(const unsigned& ipt,
+                                        Shape& psi,
+                                        DShape& dpsidx) const
   {
     return QElement<1, NNODE_1D>::dshape_eulerian_at_knot(ipt, psi, dpsidx);
   }
@@ -280,7 +280,7 @@ class HarmonicProblem : public Problem
 {
 public:
   /// Constructor: Pass number of elements and pointer to source function
-  HarmonicProblem(const unsigned &n_element);
+  HarmonicProblem(const unsigned& n_element);
 
   /// Destructor (empty)
   ~HarmonicProblem()
@@ -290,11 +290,11 @@ public:
   }
 
   /// Solve the problem
-  void solve(const unsigned &label);
+  void solve(const unsigned& label);
 
   /// \short Doc the solution, pass the number of the case considered,
   /// so that output files can be distinguished.
-  void doc_solution(const unsigned &label);
+  void doc_solution(const unsigned& label);
 
 }; // end of problem class
 
@@ -305,13 +305,13 @@ public:
 //========================================================================
 template<class ELEMENT, class EIGEN_SOLVER>
 HarmonicProblem<ELEMENT, EIGEN_SOLVER>::HarmonicProblem(
-  const unsigned &n_element)
+  const unsigned& n_element)
 {
   // Create the eigen solver
   this->eigen_solver_pt() = new EIGEN_SOLVER;
 
   // Get the positive eigenvalues, shift is zero by default
-  static_cast<EIGEN_SOLVER *>(eigen_solver_pt())
+  static_cast<EIGEN_SOLVER*>(eigen_solver_pt())
     ->get_eigenvalues_right_of_shift();
 
   // Set domain length
@@ -341,7 +341,7 @@ HarmonicProblem<ELEMENT, EIGEN_SOLVER>::HarmonicProblem(
 /// Doc the solution in tecplot format. Label files with label.
 //========================================================================
 template<class ELEMENT, class EIGEN_SOLVER>
-void HarmonicProblem<ELEMENT, EIGEN_SOLVER>::doc_solution(const unsigned &label)
+void HarmonicProblem<ELEMENT, EIGEN_SOLVER>::doc_solution(const unsigned& label)
 {
   ofstream some_file;
   char filename[100];
@@ -362,7 +362,7 @@ void HarmonicProblem<ELEMENT, EIGEN_SOLVER>::doc_solution(const unsigned &label)
 /// Solve the eigenproblem
 //===================================================================
 template<class ELEMENT, class EIGEN_SOLVER>
-void HarmonicProblem<ELEMENT, EIGEN_SOLVER>::solve(const unsigned &label)
+void HarmonicProblem<ELEMENT, EIGEN_SOLVER>::solve(const unsigned& label)
 {
   // Set external storage for the eigenvalues
   Vector<complex<double>> eigenvalues;
@@ -453,7 +453,7 @@ void HarmonicProblem<ELEMENT, EIGEN_SOLVER>::solve(const unsigned &label)
 //======start_of_main==================================================
 /// Driver for 1D Poisson problem
 //=====================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
 // Want to test Trilinos if we have it, so we must initialise MPI
 // if we have compiled with it

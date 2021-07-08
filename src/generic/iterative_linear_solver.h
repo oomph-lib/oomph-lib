@@ -84,13 +84,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    IterativeLinearSolver(const IterativeLinearSolver &)
+    IterativeLinearSolver(const IterativeLinearSolver&)
     {
       BrokenCopy::broken_copy("IterativeLinearSolver");
     }
 
     /// Broken assignment operator
-    void operator=(const IterativeLinearSolver &)
+    void operator=(const IterativeLinearSolver&)
     {
       BrokenCopy::broken_assign("IterativeLinearSolver");
     }
@@ -99,25 +99,25 @@ namespace oomph
     virtual ~IterativeLinearSolver() {}
 
     /// Access function to preconditioner
-    Preconditioner *&preconditioner_pt()
+    Preconditioner*& preconditioner_pt()
     {
       return Preconditioner_pt;
     }
 
     /// Access function to preconditioner (const version)
-    Preconditioner *const &preconditioner_pt() const
+    Preconditioner* const& preconditioner_pt() const
     {
       return Preconditioner_pt;
     }
 
     /// Access to convergence tolerance
-    double &tolerance()
+    double& tolerance()
     {
       return Tolerance;
     }
 
     /// Access to max. number of iterations
-    unsigned &max_iter()
+    unsigned& max_iter()
     {
       return Max_iter;
     }
@@ -143,7 +143,7 @@ namespace oomph
     /// we're running (e.g. what combination of linear solver and
     /// preconditioner or parameter values are used).
     void open_convergence_history_file_stream(
-      const std::string &file_name, const std::string &zone_title = "")
+      const std::string& file_name, const std::string& zone_title = "")
     {
       // start docing
       Doc_convergence_history = true;
@@ -249,7 +249,7 @@ namespace oomph
     unsigned Max_iter;
 
     /// Pointer to the preconditioner
-    Preconditioner *Preconditioner_pt;
+    Preconditioner* Preconditioner_pt;
 
     /// Jacobian setup time
     double Jacobian_setup_time;
@@ -301,13 +301,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    CG(const CG &)
+    CG(const CG&)
     {
       BrokenCopy::broken_copy("CG");
     }
 
     /// Broken assignment operator
-    void operator=(const CG &)
+    void operator=(const CG&)
     {
       BrokenCopy::broken_assign("CG");
     }
@@ -322,18 +322,18 @@ namespace oomph
     /// \short Solver: Takes pointer to problem and returns the results vector
     /// which contains the solution of the linear system defined by
     /// the problem's fully assembled Jacobian and residual vector.
-    void solve(Problem *const &problem_pt, DoubleVector &result);
+    void solve(Problem* const& problem_pt, DoubleVector& result);
 
     /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs
     /// vector and returns the solution of the linear system.
-    void solve(DoubleMatrixBase *const &matrix_pt,
-               const DoubleVector &rhs,
-               DoubleVector &solution)
+    void solve(DoubleMatrixBase* const& matrix_pt,
+               const DoubleVector& rhs,
+               DoubleVector& solution)
     {
       // Store the matrix if required
       if ((Enable_resolve) && (!Resolving))
       {
-        Matrix_pt = dynamic_cast<MATRIX *>(matrix_pt);
+        Matrix_pt = dynamic_cast<MATRIX*>(matrix_pt);
 
         // Matrix has been passed in from the outside so we must not
         // delete it
@@ -341,11 +341,11 @@ namespace oomph
       }
 
       // set the distribution
-      if (dynamic_cast<DistributableLinearAlgebraObject *>(matrix_pt))
+      if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt))
       {
         // the solver has the same distribution as the matrix if possible
         this->build_distribution(
-          dynamic_cast<DistributableLinearAlgebraObject *>(matrix_pt)
+          dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt)
             ->distribution_pt());
       }
       else
@@ -361,7 +361,7 @@ namespace oomph
     /// \short Re-solve the system defined by the last assembled Jacobian
     /// and the rhs vector specified here. Solution is returned in the
     /// vector result.
-    void resolve(const DoubleVector &rhs, DoubleVector &result);
+    void resolve(const DoubleVector& rhs, DoubleVector& result);
 
     /// Number of iterations taken
     unsigned iterations() const
@@ -371,9 +371,9 @@ namespace oomph
 
   private:
     /// General interface to solve function
-    void solve_helper(DoubleMatrixBase *const &matrix_pt,
-                      const DoubleVector &rhs,
-                      DoubleVector &solution);
+    void solve_helper(DoubleMatrixBase* const& matrix_pt,
+                      const DoubleVector& rhs,
+                      DoubleVector& solution);
 
     /// Cleanup data that's stored for resolve (if any has been stored)
     void clean_up_memory()
@@ -389,7 +389,7 @@ namespace oomph
     unsigned Iterations;
 
     /// Pointer to matrix
-    MATRIX *Matrix_pt;
+    MATRIX* Matrix_pt;
 
     /// \short Boolean flag to indicate if the solve is done in re-solve mode,
     /// bypassing setup of matrix and preconditioner
@@ -424,13 +424,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    BiCGStab(const BiCGStab &)
+    BiCGStab(const BiCGStab&)
     {
       BrokenCopy::broken_copy("BiCGStab");
     }
 
     /// Broken assignment operator
-    void operator=(const BiCGStab &)
+    void operator=(const BiCGStab&)
     {
       BrokenCopy::broken_assign("BiCGStab");
     }
@@ -445,18 +445,18 @@ namespace oomph
     /// \short Solver: Takes pointer to problem and returns the results vector
     /// which contains the solution of the linear system defined by
     /// the problem's fully assembled Jacobian and residual vector.
-    void solve(Problem *const &problem_pt, DoubleVector &result);
+    void solve(Problem* const& problem_pt, DoubleVector& result);
 
     /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs
     /// vector and returns the solution of the linear system.
-    void solve(DoubleMatrixBase *const &matrix_pt,
-               const DoubleVector &rhs,
-               DoubleVector &solution)
+    void solve(DoubleMatrixBase* const& matrix_pt,
+               const DoubleVector& rhs,
+               DoubleVector& solution)
     {
       // Store the matrix if required
       if ((Enable_resolve) && (!Resolving))
       {
-        Matrix_pt = dynamic_cast<MATRIX *>(matrix_pt);
+        Matrix_pt = dynamic_cast<MATRIX*>(matrix_pt);
 
         // Matrix has been passed in from the outside so we must not
         // delete it
@@ -464,11 +464,11 @@ namespace oomph
       }
 
       // set the distribution
-      if (dynamic_cast<DistributableLinearAlgebraObject *>(matrix_pt))
+      if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt))
       {
         // the solver has the same distribution as the matrix if possible
         this->build_distribution(
-          dynamic_cast<DistributableLinearAlgebraObject *>(matrix_pt)
+          dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt)
             ->distribution_pt());
       }
       else
@@ -485,9 +485,9 @@ namespace oomph
     /// and rhs vector and returns the solution of the linear system
     /// Call the broken base-class version. If you want this, please
     /// implement it
-    void solve(DoubleMatrixBase *const &matrix_pt,
-               const Vector<double> &rhs,
-               Vector<double> &result)
+    void solve(DoubleMatrixBase* const& matrix_pt,
+               const Vector<double>& rhs,
+               Vector<double>& result)
     {
       LinearSolver::solve(matrix_pt, rhs, result);
     }
@@ -495,7 +495,7 @@ namespace oomph
     /// \short Re-solve the system defined by the last assembled Jacobian
     /// and the rhs vector specified here. Solution is returned in the
     /// vector result.
-    void resolve(const DoubleVector &rhs, DoubleVector &result);
+    void resolve(const DoubleVector& rhs, DoubleVector& result);
 
     /// Number of iterations taken
     unsigned iterations() const
@@ -505,9 +505,9 @@ namespace oomph
 
   private:
     /// General interface to solve function
-    void solve_helper(DoubleMatrixBase *const &matrix_pt,
-                      const DoubleVector &rhs,
-                      DoubleVector &solution);
+    void solve_helper(DoubleMatrixBase* const& matrix_pt,
+                      const DoubleVector& rhs,
+                      DoubleVector& solution);
 
     /// Cleanup data that's stored for resolve (if any has been stored)
     void clean_up_memory()
@@ -523,7 +523,7 @@ namespace oomph
     unsigned Iterations;
 
     /// Pointer to matrix
-    MATRIX *Matrix_pt;
+    MATRIX* Matrix_pt;
 
     /// \short Boolean flag to indicate if the solve is done in re-solve mode,
     /// bypassing setup of matrix and preconditioner
@@ -560,19 +560,19 @@ namespace oomph
     /// IterativeLinearSolver class. Note that the result vector MUST NOT
     /// re-initialised to zero (as it would typically be when the Smoother is
     /// called as a iterative linear solver).
-    virtual void smoother_solve(const DoubleVector &rhs,
-                                DoubleVector &result) = 0;
+    virtual void smoother_solve(const DoubleVector& rhs,
+                                DoubleVector& result) = 0;
 
     /// Set up the smoother for the matrix specified by the pointer
-    virtual void smoother_setup(DoubleMatrixBase *matrix_pt) = 0;
+    virtual void smoother_setup(DoubleMatrixBase* matrix_pt) = 0;
 
     /// \short Self-test to check that all the dimensions of the inputs to
     /// solve helper are consistent and everything that needs to be built, is.
     template<typename MATRIX>
-    void check_validity_of_solve_helper_inputs(MATRIX *const &matrix_pt,
-                                               const DoubleVector &rhs,
-                                               DoubleVector &solution,
-                                               const double &n_dof);
+    void check_validity_of_solve_helper_inputs(MATRIX* const& matrix_pt,
+                                               const DoubleVector& rhs,
+                                               DoubleVector& solution,
+                                               const double& n_dof);
 
   protected:
     /// \short When a derived class object is being used as a smoother in
@@ -608,13 +608,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    GS(const GS &)
+    GS(const GS&)
     {
       BrokenCopy::broken_copy("GS");
     }
 
     /// Broken assignment operator
-    void operator=(const GS &)
+    void operator=(const GS&)
     {
       BrokenCopy::broken_assign("GS");
     }
@@ -627,7 +627,7 @@ namespace oomph
     } // End of disable_resolve
 
     /// Set up the smoother for the matrix specified by the pointer
-    void smoother_setup(DoubleMatrixBase *matrix_pt)
+    void smoother_setup(DoubleMatrixBase* matrix_pt)
     {
       // Assume the matrix has been passed in from the outside so we must
       // not delete it. This is needed to avoid pre- and post-smoothers
@@ -637,14 +637,14 @@ namespace oomph
       Matrix_can_be_deleted = false;
 
       // Upcast the input matrix to system matrix to the type MATRIX
-      Matrix_pt = dynamic_cast<MATRIX *>(matrix_pt);
+      Matrix_pt = dynamic_cast<MATRIX*>(matrix_pt);
     } // End of smoother_setup
 
     /// \short The smoother_solve function performs fixed number of iterations
     /// on the system A*result=rhs. The number of (smoothing) iterations is
     /// the same as the max. number of iterations in the underlying
     /// IterativeLinearSolver class.
-    void smoother_solve(const DoubleVector &rhs, DoubleVector &result)
+    void smoother_solve(const DoubleVector& rhs, DoubleVector& result)
     {
       // If you use a smoother but you don't want to calculate the residual
       Use_as_smoother = true;
@@ -656,13 +656,13 @@ namespace oomph
     /// \short Solver: Takes pointer to problem and returns the results
     /// vector which contains the solution of the linear system defined
     /// by the problem's fully assembled Jacobian and residual vector.
-    void solve(Problem *const &problem_pt, DoubleVector &result);
+    void solve(Problem* const& problem_pt, DoubleVector& result);
 
     /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs
     /// vector and returns the solution of the linear system.
-    void solve(DoubleMatrixBase *const &matrix_pt,
-               const DoubleVector &rhs,
-               DoubleVector &solution)
+    void solve(DoubleMatrixBase* const& matrix_pt,
+               const DoubleVector& rhs,
+               DoubleVector& solution)
     {
       // Reset the Use_as_smoother_flag as the solver is not being used
       // as a smoother
@@ -675,7 +675,7 @@ namespace oomph
       if ((Enable_resolve) && (!Resolving))
       {
         // Upcast to the appropriate matrix type
-        Matrix_pt = dynamic_cast<MATRIX *>(matrix_pt);
+        Matrix_pt = dynamic_cast<MATRIX*>(matrix_pt);
       }
 
       // Matrix has been passed in from the outside so we must not delete it
@@ -689,9 +689,9 @@ namespace oomph
     /// and rhs vector and returns the solution of the linear system
     /// Call the broken base-class version. If you want this, please
     /// implement it
-    void solve(DoubleMatrixBase *const &matrix_pt,
-               const Vector<double> &rhs,
-               Vector<double> &result)
+    void solve(DoubleMatrixBase* const& matrix_pt,
+               const Vector<double>& rhs,
+               Vector<double>& result)
     {
       LinearSolver::solve(matrix_pt, rhs, result);
     } // End of solve
@@ -699,7 +699,7 @@ namespace oomph
     /// \short Re-solve the system defined by the last assembled Jacobian
     /// and the rhs vector specified here. Solution is returned in the
     /// vector result.
-    void resolve(const DoubleVector &rhs, DoubleVector &result)
+    void resolve(const DoubleVector& rhs, DoubleVector& result)
     {
       // We are re-solving
       Resolving = true;
@@ -738,9 +738,9 @@ namespace oomph
 
   private:
     /// General interface to solve function
-    void solve_helper(DoubleMatrixBase *const &matrix_pt,
-                      const DoubleVector &rhs,
-                      DoubleVector &solution);
+    void solve_helper(DoubleMatrixBase* const& matrix_pt,
+                      const DoubleVector& rhs,
+                      DoubleVector& solution);
 
     /// Cleanup data that's stored for resolve (if any has been stored)
     void clean_up_memory()
@@ -758,7 +758,7 @@ namespace oomph
     } // End of clean_up_memory
 
     /// System matrix pointer in the format specified by the template argument
-    MATRIX *Matrix_pt;
+    MATRIX* Matrix_pt;
 
     /// Number of iterations taken
     unsigned Iterations;
@@ -797,13 +797,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    GS(const GS &)
+    GS(const GS&)
     {
       BrokenCopy::broken_copy("GS");
     }
 
     /// Broken assignment operator
-    void operator=(const GS &)
+    void operator=(const GS&)
     {
       BrokenCopy::broken_assign("GS");
     }
@@ -812,7 +812,7 @@ namespace oomph
     /// on the system A*result=rhs. The number of (smoothing) iterations is
     /// the same as the max. number of iterations in the underlying
     /// IterativeLinearSolver class.
-    void smoother_solve(const DoubleVector &rhs, DoubleVector &result)
+    void smoother_solve(const DoubleVector& rhs, DoubleVector& result)
     {
       // If you use a smoother but you don't want to calculate the residual
       Use_as_smoother = true;
@@ -829,7 +829,7 @@ namespace oomph
     } // End of disable_resolve
 
     /// Set up the smoother for the matrix specified by the pointer
-    void smoother_setup(DoubleMatrixBase *matrix_pt)
+    void smoother_setup(DoubleMatrixBase* matrix_pt)
     {
       // Assume the matrix has been passed in from the outside so we must
       // not delete it. This is needed to avoid pre- and post-smoothers
@@ -844,18 +844,18 @@ namespace oomph
 
     /// \short Generic setup function to sort out everything that needs to be
     /// set up with regards to the input matrix
-    void setup_helper(DoubleMatrixBase *matrix_pt);
+    void setup_helper(DoubleMatrixBase* matrix_pt);
 
     /// \short Solver: Takes pointer to problem and returns the results vector
     /// which contains the solution of the linear system defined by
     /// the problem's fully assembled Jacobian and residual vector.
-    void solve(Problem *const &problem_pt, DoubleVector &result);
+    void solve(Problem* const& problem_pt, DoubleVector& result);
 
     /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs
     /// vector and returns the solution of the linear system.
-    void solve(DoubleMatrixBase *const &matrix_pt,
-               const DoubleVector &rhs,
-               DoubleVector &solution)
+    void solve(DoubleMatrixBase* const& matrix_pt,
+               const DoubleVector& rhs,
+               DoubleVector& solution)
     {
       // Reset the Use_as_smoother_flag as the solver is not being used
       // as a smoother
@@ -870,7 +870,7 @@ namespace oomph
         // Upcast to the appropriate matrix type and sort the matrix entries
         // out so that the CRDoubleMatrix implementation of the Gauss-Seidel
         // solver can be used
-        Matrix_pt = dynamic_cast<CRDoubleMatrix *>(matrix_pt);
+        Matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
       }
       // We still need to sort the entries
       else
@@ -878,10 +878,10 @@ namespace oomph
         // The system matrix here is a CRDoubleMatrix. To make use of the
         // specific implementation of the solver for this type of matrix we
         // need to make sure the entries are arranged correctly
-        dynamic_cast<CRDoubleMatrix *>(matrix_pt)->sort_entries();
+        dynamic_cast<CRDoubleMatrix*>(matrix_pt)->sort_entries();
 
         // Now get access to the vector Index_of_diagonal_entries
-        Index_of_diagonal_entries = dynamic_cast<CRDoubleMatrix *>(matrix_pt)
+        Index_of_diagonal_entries = dynamic_cast<CRDoubleMatrix*>(matrix_pt)
                                       ->get_index_of_diagonal_entries();
       }
 
@@ -896,9 +896,9 @@ namespace oomph
     /// and rhs vector and returns the solution of the linear system
     /// Call the broken base-class version. If you want this, please
     /// implement it
-    void solve(DoubleMatrixBase *const &matrix_pt,
-               const Vector<double> &rhs,
-               Vector<double> &result)
+    void solve(DoubleMatrixBase* const& matrix_pt,
+               const Vector<double>& rhs,
+               Vector<double>& result)
     {
       LinearSolver::solve(matrix_pt, rhs, result);
     } // End of solve
@@ -906,7 +906,7 @@ namespace oomph
     /// \short Re-solve the system defined by the last assembled Jacobian
     /// and the rhs vector specified here. Solution is returned in the
     /// vector result.
-    void resolve(const DoubleVector &rhs, DoubleVector &result)
+    void resolve(const DoubleVector& rhs, DoubleVector& result)
     {
       // We are re-solving
       Resolving = true;
@@ -953,9 +953,9 @@ namespace oomph
 
   private:
     /// General interface to solve function
-    void solve_helper(DoubleMatrixBase *const &matrix_pt,
-                      const DoubleVector &rhs,
-                      DoubleVector &solution);
+    void solve_helper(DoubleMatrixBase* const& matrix_pt,
+                      const DoubleVector& rhs,
+                      DoubleVector& solution);
 
     /// Clean up data that's stored for resolve (if any has been stored)
     void clean_up_memory()
@@ -973,7 +973,7 @@ namespace oomph
     } // End of clean_up_memory
 
     /// System matrix pointer in the format specified by the template argument
-    CRDoubleMatrix *Matrix_pt;
+    CRDoubleMatrix* Matrix_pt;
 
     /// Number of iterations taken
     unsigned Iterations;
@@ -1005,7 +1005,7 @@ namespace oomph
   {
   public:
     /// Empty constructor
-    DampedJacobi(const double &omega = 2.0 / 3.0) : Matrix_can_be_deleted(true)
+    DampedJacobi(const double& omega = 2.0 / 3.0) : Matrix_can_be_deleted(true)
     {
       // Damping factor
       Omega = omega;
@@ -1019,13 +1019,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    DampedJacobi(const DampedJacobi &)
+    DampedJacobi(const DampedJacobi&)
     {
       BrokenCopy::broken_copy("DampedJacobi");
     }
 
     /// Broken assignment operator
-    void operator=(const DampedJacobi &)
+    void operator=(const DampedJacobi&)
     {
       BrokenCopy::broken_assign("DampedJacobi");
     }
@@ -1046,35 +1046,35 @@ namespace oomph
     } // End of clean_up_memory
 
     /// Setup: Pass pointer to the matrix and store in cast form
-    void smoother_setup(DoubleMatrixBase *matrix_pt)
+    void smoother_setup(DoubleMatrixBase* matrix_pt)
     {
       // Assume the matrix has been passed in from the outside so we must not
       // delete it
       Matrix_can_be_deleted = false;
 
       // Upcast to the appropriate matrix type
-      Matrix_pt = dynamic_cast<MATRIX *>(matrix_pt);
+      Matrix_pt = dynamic_cast<MATRIX*>(matrix_pt);
 
       // Extract the diagonal entries of the matrix and store them
       extract_diagonal_entries(matrix_pt);
     } // End of smoother_setup
 
     /// Function to extract the diagonal entries from the matrix
-    void extract_diagonal_entries(DoubleMatrixBase *matrix_pt)
+    void extract_diagonal_entries(DoubleMatrixBase* matrix_pt)
     {
       // If we're using a CRDoubleMatrix object
-      if (dynamic_cast<CRDoubleMatrix *>(matrix_pt))
+      if (dynamic_cast<CRDoubleMatrix*>(matrix_pt))
       {
         // The matrix diagonal (we need this when we need to calculate inv(D)
         // where D is the diagonal of A and it remains the same for all uses
         // of the iterative scheme so we can store it and call it in each
         // iteration)
         Matrix_diagonal =
-          dynamic_cast<CRDoubleMatrix *>(Matrix_pt)->diagonal_entries();
+          dynamic_cast<CRDoubleMatrix*>(Matrix_pt)->diagonal_entries();
       }
       // If we're using a complex matrix then diagonal entries has to be a
       // complex vector rather than a vector of doubles.
-      else if (dynamic_cast<CCDoubleMatrix *>(matrix_pt))
+      else if (dynamic_cast<CCDoubleMatrix*>(matrix_pt))
       {
         // Make an ostringstream object to create an error message
         std::ostringstream error_message_stream;
@@ -1119,7 +1119,7 @@ namespace oomph
     /// on the system A*result=rhs. The number of (smoothing) iterations is
     /// the same as the max. number of iterations in the underlying
     /// IterativeLinearSolver class.
-    void smoother_solve(const DoubleVector &rhs, DoubleVector &solution)
+    void smoother_solve(const DoubleVector& rhs, DoubleVector& solution)
     {
       // If you use a smoother but you don't want to calculate the residual
       Use_as_smoother = true;
@@ -1132,13 +1132,13 @@ namespace oomph
     /// This obtains the Jacobian matrix J and the residual vector r
     /// (needed for the Newton method) from the problem's get_jacobian
     /// function and returns the result of Jx=r.
-    void solve(Problem *const &problem_pt, DoubleVector &result);
+    void solve(Problem* const& problem_pt, DoubleVector& result);
 
     /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs
     /// vector and returns the solution of the linear system.
-    void solve(DoubleMatrixBase *const &matrix_pt,
-               const DoubleVector &rhs,
-               DoubleVector &solution)
+    void solve(DoubleMatrixBase* const& matrix_pt,
+               const DoubleVector& rhs,
+               DoubleVector& solution)
     {
       // Matrix has been passed in from the outside so we must not delete it
       Matrix_can_be_deleted = false;
@@ -1153,7 +1153,7 @@ namespace oomph
       if ((Enable_resolve) && (!Resolving))
       {
         // Upcast to the appropriate matrix type
-        Matrix_pt = dynamic_cast<MATRIX *>(matrix_pt);
+        Matrix_pt = dynamic_cast<MATRIX*>(matrix_pt);
       }
 
       // Extract the diagonal entries of the matrix and store them
@@ -1166,7 +1166,7 @@ namespace oomph
     /// \short Re-solve the system defined by the last assembled Jacobian
     /// and the rhs vector specified here. Solution is returned in the
     /// vector result.
-    void resolve(const DoubleVector &rhs, DoubleVector &result)
+    void resolve(const DoubleVector& rhs, DoubleVector& result)
     {
       // We are re-solving
       Resolving = true;
@@ -1197,12 +1197,12 @@ namespace oomph
   private:
     /// \short This is where the actual work is done -- different
     /// implementations for different matrix types.
-    void solve_helper(DoubleMatrixBase *const &matrix_pt,
-                      const DoubleVector &rhs,
-                      DoubleVector &solution);
+    void solve_helper(DoubleMatrixBase* const& matrix_pt,
+                      const DoubleVector& rhs,
+                      DoubleVector& solution);
 
     /// Pointer to the matrix
-    MATRIX *Matrix_pt;
+    MATRIX* Matrix_pt;
 
     /// Vector containing the diagonal entries of A
     Vector<double> Matrix_diagonal;
@@ -1248,13 +1248,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    GMRES(const GMRES &)
+    GMRES(const GMRES&)
     {
       BrokenCopy::broken_copy("GMRES");
     }
 
     /// Broken assignment operator
-    void operator=(const GMRES &)
+    void operator=(const GMRES&)
     {
       BrokenCopy::broken_assign("GMRES");
     }
@@ -1269,13 +1269,13 @@ namespace oomph
     /// \short Solver: Takes pointer to problem and returns the results vector
     /// which contains the solution of the linear system defined by
     /// the problem's fully assembled Jacobian and residual vector.
-    void solve(Problem *const &problem_pt, DoubleVector &result);
+    void solve(Problem* const& problem_pt, DoubleVector& result);
 
     /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs
     /// vector and returns the solution of the linear system.
-    void solve(DoubleMatrixBase *const &matrix_pt,
-               const DoubleVector &rhs,
-               DoubleVector &solution)
+    void solve(DoubleMatrixBase* const& matrix_pt,
+               const DoubleVector& rhs,
+               DoubleVector& solution)
     {
       // setup the distribution
       this->build_distribution(rhs.distribution_pt());
@@ -1283,7 +1283,7 @@ namespace oomph
       // Store the matrix if required
       if ((Enable_resolve) && (!Resolving))
       {
-        Matrix_pt = dynamic_cast<MATRIX *>(matrix_pt);
+        Matrix_pt = dynamic_cast<MATRIX*>(matrix_pt);
 
         // Matrix has been passed in from the outside so we must not
         // delete it
@@ -1298,9 +1298,9 @@ namespace oomph
     /// and rhs vector and returns the solution of the linear system
     /// Call the broken base-class version. If you want this, please
     /// implement it
-    void solve(DoubleMatrixBase *const &matrix_pt,
-               const Vector<double> &rhs,
-               Vector<double> &result)
+    void solve(DoubleMatrixBase* const& matrix_pt,
+               const Vector<double>& rhs,
+               Vector<double>& result)
     {
       LinearSolver::solve(matrix_pt, rhs, result);
     }
@@ -1308,7 +1308,7 @@ namespace oomph
     /// \short Re-solve the system defined by the last assembled Jacobian
     /// and the rhs vector specified here. Solution is returned in the
     /// vector result.
-    void resolve(const DoubleVector &rhs, DoubleVector &result);
+    void resolve(const DoubleVector& rhs, DoubleVector& result);
 
     /// Number of iterations taken
     unsigned iterations() const
@@ -1325,7 +1325,7 @@ namespace oomph
     /// \short switches on iteration restarting and takes as an argument the
     /// number of iterations after which the construction of the
     /// orthogonalisation basis vectors should be restarted
-    void enable_iteration_restart(const unsigned &restart)
+    void enable_iteration_restart(const unsigned& restart)
     {
       Restart = restart;
       Iteration_restart = true;
@@ -1351,9 +1351,9 @@ namespace oomph
 
   private:
     /// General interface to solve function
-    void solve_helper(DoubleMatrixBase *const &matrix_pt,
-                      const DoubleVector &rhs,
-                      DoubleVector &solution);
+    void solve_helper(DoubleMatrixBase* const& matrix_pt,
+                      const DoubleVector& rhs,
+                      DoubleVector& solution);
 
     /// Cleanup data that's stored for resolve (if any has been stored)
     void clean_up_memory()
@@ -1367,11 +1367,11 @@ namespace oomph
 
     /// Helper function to update the result vector using the result,
     /// x=x_0+V_m*y
-    void update(const unsigned &k,
-                const Vector<Vector<double>> &H,
-                const Vector<double> &s,
-                const Vector<DoubleVector> &v,
-                DoubleVector &x)
+    void update(const unsigned& k,
+                const Vector<Vector<double>>& H,
+                const Vector<double>& s,
+                const Vector<DoubleVector>& v,
+                DoubleVector& x)
     {
       // Make a local copy of s
       Vector<double> y(s);
@@ -1400,13 +1400,13 @@ namespace oomph
       DoubleVector z(x.distribution_pt(), 0.0);
 
       // Get access to the underlying values
-      double *temp_pt = temp.values_pt();
+      double* temp_pt = temp.values_pt();
 
       // Calculate x=Vy
       for (unsigned j = 0; j <= k; j++)
       {
         // Get access to j-th column of v
-        const double *vj_pt = v[j].values_pt();
+        const double* vj_pt = v[j].values_pt();
 
         // Loop over the entries of the vector, temp
         for (unsigned i = 0; i < n_x; i++)
@@ -1463,7 +1463,7 @@ namespace oomph
     /// \sin\theta&=\dfrac{dy}{\sqrt{pow(dx,2)+pow(dy,2)}}.
     /// \f]
     /// Taken from: Saad Y."Iterative methods for sparse linear systems", p.192
-    void generate_plane_rotation(double &dx, double &dy, double &cs, double &sn)
+    void generate_plane_rotation(double& dx, double& dy, double& cs, double& sn)
     {
       // If dy=0 then we do not need to apply a rotation
       if (dy == 0.0)
@@ -1522,7 +1522,7 @@ namespace oomph
     /// dy
     /// \end{bmatrix}.
     /// \f]
-    void apply_plane_rotation(double &dx, double &dy, double &cs, double &sn)
+    void apply_plane_rotation(double& dx, double& dy, double& cs, double& sn)
     {
       // Calculate the value of dx but don't update it yet
       double temp = cs * dx + sn * dy;
@@ -1545,7 +1545,7 @@ namespace oomph
     bool Iteration_restart;
 
     /// Pointer to matrix
-    MATRIX *Matrix_pt;
+    MATRIX* Matrix_pt;
 
     /// \short Boolean flag to indicate if the solve is done in re-solve mode,
     /// bypassing setup of matrix and preconditioner

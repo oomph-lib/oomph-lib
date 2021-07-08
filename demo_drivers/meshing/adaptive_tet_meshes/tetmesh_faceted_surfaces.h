@@ -45,8 +45,8 @@ namespace oomph
   namespace HelperForSortingVectorOfPairsOfVertexPtAndDouble
   {
     /// Less than comparison based on double
-    bool less_than_based_on_double(std::pair<TetMeshVertex *, double> i,
-                                   std::pair<TetMeshVertex *, double> j)
+    bool less_than_based_on_double(std::pair<TetMeshVertex*, double> i,
+                                   std::pair<TetMeshVertex*, double> j)
     {
       return (i.second < j.second);
     }
@@ -66,9 +66,9 @@ namespace oomph
     /// \short Constructor: The six faces are enumerated consecutively
     /// starting from boundary_id_offset (defaults to zero in which
     /// case the boundaries are enumerated (in one-based fashion) 1,...,6.
-    CubicTetMeshFacetedSurface(const double &box_half_width,
-                               const double &box_half_length,
-                               const unsigned &one_based_boundary_id_offset = 0)
+    CubicTetMeshFacetedSurface(const double& box_half_width,
+                               const double& box_half_length,
+                               const unsigned& one_based_boundary_id_offset = 0)
     {
       unsigned one_based_region_id = 0;
       Vector<double> offset(3, 0.0);
@@ -82,10 +82,10 @@ namespace oomph
     /// \short Constructor: The six faces are enumerated consecutively
     /// starting from boundary_id_offset (defaults to zero in which
     /// case the boundaries are enumerated (in one-based fashion) 1,...,6.
-    CubicTetMeshFacetedSurface(const double &box_half_width,
-                               const double &box_half_length,
-                               const Vector<double> &offset,
-                               const unsigned &one_based_boundary_id_offset = 0)
+    CubicTetMeshFacetedSurface(const double& box_half_width,
+                               const double& box_half_length,
+                               const Vector<double>& offset,
+                               const unsigned& one_based_boundary_id_offset = 0)
     {
       unsigned one_based_region_id = 0;
       build_it(one_based_region_id,
@@ -99,10 +99,10 @@ namespace oomph
     /// assigned. The six faces are enumerated consecutively
     /// starting from boundary_id_offset (defaults to zero in which
     /// case the boundaries are enumerated (in one-based fashion) 1,...,6.
-    CubicTetMeshFacetedSurface(const unsigned &one_based_region_id,
-                               const double &box_half_width,
-                               const double &box_half_length,
-                               const unsigned &one_based_boundary_id_offset = 0)
+    CubicTetMeshFacetedSurface(const unsigned& one_based_region_id,
+                               const double& box_half_width,
+                               const double& box_half_length,
+                               const unsigned& one_based_boundary_id_offset = 0)
     {
       Vector<double> offset(3, 0.0);
       build_it(one_based_region_id,
@@ -117,11 +117,11 @@ namespace oomph
     /// assigned. The six faces are enumerated consecutively
     /// starting from boundary_id_offset (defaults to zero in which
     /// case the boundaries are enumerated (in one-based fashion) 1,...,6.
-    CubicTetMeshFacetedSurface(const unsigned &one_based_region_id,
-                               const double &box_half_width,
-                               const double &box_half_length,
-                               const Vector<double> &offset,
-                               const unsigned &one_based_boundary_id_offset = 0)
+    CubicTetMeshFacetedSurface(const unsigned& one_based_region_id,
+                               const double& box_half_width,
+                               const double& box_half_length,
+                               const Vector<double>& offset,
+                               const unsigned& one_based_boundary_id_offset = 0)
     {
       build_it(one_based_region_id,
                box_half_width,
@@ -132,11 +132,11 @@ namespace oomph
 
   private:
     /// Build the thing
-    void build_it(const unsigned &one_based_region_id,
-                  const double &box_half_width,
-                  const double &box_half_length,
-                  const Vector<double> &offset,
-                  const unsigned &one_based_boundary_id_offset)
+    void build_it(const unsigned& one_based_region_id,
+                  const double& box_half_width,
+                  const double& box_half_length,
+                  const Vector<double>& offset,
+                  const unsigned& one_based_boundary_id_offset)
     {
       // Make vertices
       unsigned n_vertex = 8;
@@ -271,20 +271,20 @@ namespace oomph
   public:
     /// \short Constructor: Specify dimension, offset vector and
     /// (one-based!) boundary_id.
-    RectangularTetMeshFacetedSurface(const double &half_x_width,
-                                     const double &half_y_length,
-                                     const Vector<double> &offset,
-                                     const unsigned &one_based_boundary_id)
+    RectangularTetMeshFacetedSurface(const double& half_x_width,
+                                     const double& half_y_length,
+                                     const Vector<double>& offset,
+                                     const unsigned& one_based_boundary_id)
     {
       build_it(half_x_width, half_y_length, offset, one_based_boundary_id);
     }
 
   private:
     /// Build the thing
-    void build_it(const double &half_x_width,
-                  const double &half_y_length,
-                  const Vector<double> &offset,
-                  const unsigned &one_based_boundary_id)
+    void build_it(const double& half_x_width,
+                  const double& half_y_length,
+                  const Vector<double>& offset,
+                  const unsigned& one_based_boundary_id)
     {
       // Make vertices
       unsigned n_vertex = 4;
@@ -343,11 +343,11 @@ namespace oomph
     /// on the disk. Returns last one-based boundary id used to enumerate the
     /// disk
     DiskTetMeshFacetedSurface(
-      DiskLikeGeomObjectWithBoundaries
-        *disk_parametrised_by_nonsingular_coordinates_pt,
-      const unsigned &half_nsegment,
-      const unsigned &first_one_based_boundary_id_for_disk,
-      unsigned &last_one_based_boundary_id_for_disk)
+      DiskLikeGeomObjectWithBoundaries*
+        disk_parametrised_by_nonsingular_coordinates_pt,
+      const unsigned& half_nsegment,
+      const unsigned& first_one_based_boundary_id_for_disk,
+      unsigned& last_one_based_boundary_id_for_disk)
 
     {
       Geom_object_with_boundaries_pt =
@@ -355,10 +355,10 @@ namespace oomph
 
       // Provide storage for pointers to the two parts of the curvilinear
       // boundary
-      Vector<TriangleMeshCurveSection *> outer_curvilinear_boundary_pt(2);
+      Vector<TriangleMeshCurveSection*> outer_curvilinear_boundary_pt(2);
 
       // First bit
-      GeomObject *outer_boundary_ellipse0_pt =
+      GeomObject* outer_boundary_ellipse0_pt =
         disk_parametrised_by_nonsingular_coordinates_pt
           ->boundary_parametrising_geom_object_pt(0);
       double zeta_start =
@@ -375,7 +375,7 @@ namespace oomph
                                   boundary_id);
 
       // Second bit
-      GeomObject *outer_boundary_ellipse1_pt =
+      GeomObject* outer_boundary_ellipse1_pt =
         disk_parametrised_by_nonsingular_coordinates_pt
           ->boundary_parametrising_geom_object_pt(1);
       zeta_start =
@@ -393,7 +393,7 @@ namespace oomph
 
       // Combine to curvilinear boundary and define the
       // outer boundary
-      TriangleMeshClosedCurve *closed_curve_pt =
+      TriangleMeshClosedCurve* closed_curve_pt =
         new TriangleMeshClosedCurve(outer_curvilinear_boundary_pt);
 
       // Use the TriangleMeshParameters object for helping on the manage of the
@@ -405,10 +405,10 @@ namespace oomph
       {
         // Provide storage for pointers to the two parts of the curvilinear
         // boundary
-        Vector<TriangleMeshCurveSection *> inner_curvilinear_boundary_pt(2);
+        Vector<TriangleMeshCurveSection*> inner_curvilinear_boundary_pt(2);
 
         // First bit
-        GeomObject *inner_boundary_ellipse0_pt =
+        GeomObject* inner_boundary_ellipse0_pt =
           disk_parametrised_by_nonsingular_coordinates_pt
             ->boundary_parametrising_geom_object_pt(2);
         double zeta_start =
@@ -426,7 +426,7 @@ namespace oomph
                                     boundary_id);
 
         // Second bit
-        GeomObject *inner_boundary_ellipse1_pt =
+        GeomObject* inner_boundary_ellipse1_pt =
           disk_parametrised_by_nonsingular_coordinates_pt
             ->boundary_parametrising_geom_object_pt(3);
         zeta_start =
@@ -445,10 +445,10 @@ namespace oomph
 
         // Combine to curvilinear boundary and define the
         // inner boundary
-        TriangleMeshClosedCurve *inner_curve_pt =
+        TriangleMeshClosedCurve* inner_curve_pt =
           new TriangleMeshClosedCurve(inner_curvilinear_boundary_pt);
 
-        Vector<TriangleMeshClosedCurve *> inner_boundaries_pt(1);
+        Vector<TriangleMeshClosedCurve*> inner_boundaries_pt(1);
         inner_boundaries_pt[0] = inner_curve_pt;
 
         // Specify the internal closed boundaries
@@ -482,17 +482,17 @@ namespace oomph
 
       // Loop over all boundary elements and rotate their nodes so that
       // the first two nodes are on the boundary
-      std::map<FiniteElement *, bool> is_on_boundary;
+      std::map<FiniteElement*, bool> is_on_boundary;
       for (unsigned b = 0; b < 2; b++)
       {
         unsigned nel = Tri_mesh_pt->nboundary_element(b);
         for (unsigned e = 0; e < nel; e++)
         {
-          FiniteElement *el_pt = Tri_mesh_pt->boundary_element_pt(b, e);
+          FiniteElement* el_pt = Tri_mesh_pt->boundary_element_pt(b, e);
           unsigned count = 0;
           for (unsigned j = 0; j < 3; j++)
           {
-            Node *nod_pt = el_pt->node_pt(j);
+            Node* nod_pt = el_pt->node_pt(j);
             if (nod_pt->is_on_boundary()) count++;
           }
           if (count == 2)
@@ -506,9 +506,9 @@ namespace oomph
             else
             {
               // Reorder nodes so that the first two nodes are on the boundary
-              Node *nod0_pt = el_pt->node_pt(0);
-              Node *nod1_pt = el_pt->node_pt(1);
-              Node *nod2_pt = el_pt->node_pt(2);
+              Node* nod0_pt = el_pt->node_pt(0);
+              Node* nod1_pt = el_pt->node_pt(1);
+              Node* nod2_pt = el_pt->node_pt(2);
               if (!el_pt->node_pt(0)->is_on_boundary())
               {
                 el_pt->node_pt(0) = nod1_pt;
@@ -548,7 +548,7 @@ namespace oomph
       Vertex_pt.resize(nnod);
       for (unsigned j = 0; j < nnod; j++)
       {
-        Node *nod_pt = Tri_mesh_pt->node_pt(j);
+        Node* nod_pt = Tri_mesh_pt->node_pt(j);
         Vector<double> sheet_point(3, 0.0);
         Vector<double> zeta(nod_pt->position());
         Geom_object_with_boundaries_pt->position(zeta, sheet_point);
@@ -562,7 +562,7 @@ namespace oomph
       unsigned nel = Tri_mesh_pt->nelement();
       for (unsigned e = 0; e < nel; e++)
       {
-        FiniteElement *el_pt = Tri_mesh_pt->finite_element_pt(e);
+        FiniteElement* el_pt = Tri_mesh_pt->finite_element_pt(e);
         if (is_on_boundary[el_pt])
         {
           Nelement_on_disk_boundary++;
@@ -581,11 +581,11 @@ namespace oomph
       unsigned n_vertex_on_facet = 3;
       for (unsigned e = 0; e < nel; e++)
       {
-        FiniteElement *el_pt = Tri_mesh_pt->finite_element_pt(e);
+        FiniteElement* el_pt = Tri_mesh_pt->finite_element_pt(e);
         if (is_on_boundary[el_pt])
         {
-          Node *left_node_pt = el_pt->node_pt(0);
-          Node *right_node_pt = el_pt->node_pt(1);
+          Node* left_node_pt = el_pt->node_pt(0);
+          Node* right_node_pt = el_pt->node_pt(1);
           Vector<double> boundary_zeta(1);
           if (left_node_pt->is_on_boundary(0) &&
               right_node_pt->is_on_boundary(0))
@@ -642,9 +642,9 @@ namespace oomph
     /// boundary connecting vertices 0 and 1 in the
     /// facet. NOTE: input zeta_boundary ranges between 0 and 1;
     /// gets mapped to actual boundary coordinate inside!
-    void boundary_zeta01(const unsigned &facet_id,
-                         const double &zeta_boundary,
-                         Vector<double> &zeta)
+    void boundary_zeta01(const unsigned& facet_id,
+                         const double& zeta_boundary,
+                         Vector<double>& zeta)
     {
       if (Facet_is_on_boundary[facet_id])
       {
@@ -687,10 +687,10 @@ namespace oomph
     unsigned Nelement_on_disk_boundary;
 
     /// Mesh used to facet-ise (discretise) disk
-    TriangleMesh<TPoissonElement<2, 2>> *Tri_mesh_pt;
+    TriangleMesh<TPoissonElement<2, 2>>* Tri_mesh_pt;
 
     /// Mapping between nodes and vertices
-    std::map<Node *, TetMeshVertex *> Equivalent_vertex_pt;
+    std::map<Node*, TetMeshVertex*> Equivalent_vertex_pt;
   };
 
   ///////////////////////////////////////////////////////////////////////////
@@ -727,18 +727,18 @@ namespace oomph
     ///   not enclosed within the torus
     /// .
     DiskWithTorusAroundEdgeTetMeshFacetedSurface(
-      DiskLikeGeomObjectWithBoundaries
-        *disk_parametrised_by_nonsingular_coordinates_pt,
-      const unsigned &half_nsegment,
-      const double &r_torus,
-      const unsigned &nvertex_torus,
-      const unsigned &first_one_based_boundary_id_for_disk,
-      const unsigned &one_based_torus_region_id,
-      unsigned &last_one_based_boundary_id_for_disk,
-      unsigned &first_one_based_boundary_id_for_torus,
-      unsigned &last_one_based_boundary_id_for_torus,
-      Vector<unsigned> &one_based_boundary_id_for_disk_within_torus,
-      Vector<unsigned> &one_based_boundary_id_for_disk_outside_torus) :
+      DiskLikeGeomObjectWithBoundaries*
+        disk_parametrised_by_nonsingular_coordinates_pt,
+      const unsigned& half_nsegment,
+      const double& r_torus,
+      const unsigned& nvertex_torus,
+      const unsigned& first_one_based_boundary_id_for_disk,
+      const unsigned& one_based_torus_region_id,
+      unsigned& last_one_based_boundary_id_for_disk,
+      unsigned& first_one_based_boundary_id_for_torus,
+      unsigned& last_one_based_boundary_id_for_torus,
+      Vector<unsigned>& one_based_boundary_id_for_disk_within_torus,
+      Vector<unsigned>& one_based_boundary_id_for_disk_outside_torus) :
       DiskTetMeshFacetedSurface(disk_parametrised_by_nonsingular_coordinates_pt,
                                 half_nsegment,
                                 first_one_based_boundary_id_for_disk,
@@ -749,7 +749,7 @@ namespace oomph
       one_based_boundary_id_for_disk_outside_torus.clear();
 
       // Is element in torus region or not?
-      std::map<FiniteElement *, bool> is_in_torus_region;
+      std::map<FiniteElement*, bool> is_in_torus_region;
       {
         unsigned r = 1;
         /* ofstream some_file; */
@@ -757,7 +757,7 @@ namespace oomph
         unsigned nel = Tri_mesh_pt->nregion_element(r);
         for (unsigned e = 0; e < nel; e++)
         {
-          FiniteElement *el_pt = Tri_mesh_pt->region_element_pt(r, e);
+          FiniteElement* el_pt = Tri_mesh_pt->region_element_pt(r, e);
           is_in_torus_region[el_pt] = true;
           // unsigned npts=3;
           // el_pt->output(some_file,npts);
@@ -769,7 +769,7 @@ namespace oomph
       unsigned nel = Tri_mesh_pt->nelement();
       for (unsigned e = 0; e < nel; e++)
       {
-        FiniteElement *el_pt = Tri_mesh_pt->finite_element_pt(e);
+        FiniteElement* el_pt = Tri_mesh_pt->finite_element_pt(e);
         unsigned one_based_boundary_id = Facet_pt[e]->one_based_boundary_id();
         if (is_in_torus_region[el_pt])
         {
@@ -792,16 +792,16 @@ namespace oomph
 
       // Find sorted sequence of vertices going around the
       // inner boundary (innermost part of torus)
-      Vector<TetMeshVertex *> sorted_vertex_pt;
-      Vector<std::pair<TetMeshVertex *, double>> vertex_pt_and_boundary_coord;
-      std::map<Node *, bool> done;
+      Vector<TetMeshVertex*> sorted_vertex_pt;
+      Vector<std::pair<TetMeshVertex*, double>> vertex_pt_and_boundary_coord;
+      std::map<Node*, bool> done;
       Vector<double> boundary_zeta(1);
       for (unsigned b = 2; b <= 3; b++)
       {
         unsigned nnod = Tri_mesh_pt->nboundary_node(b);
         for (unsigned j = 0; j < nnod; j++)
         {
-          Node *nod_pt = Tri_mesh_pt->boundary_node_pt(b, j);
+          Node* nod_pt = Tri_mesh_pt->boundary_node_pt(b, j);
           if (!done[nod_pt])
           {
             nod_pt->get_coordinates_on_boundary(b, boundary_zeta);
@@ -823,7 +823,7 @@ namespace oomph
       Vector<double> point_in_torus(3);
       unsigned b = 0;
       unsigned j = 0;
-      Node *nod_pt = Tri_mesh_pt->boundary_node_pt(b, j);
+      Node* nod_pt = Tri_mesh_pt->boundary_node_pt(b, j);
       point_in_torus[0] = Equivalent_vertex_pt[nod_pt]->x(0);
       point_in_torus[1] = Equivalent_vertex_pt[nod_pt]->x(1);
       point_in_torus[2] = Equivalent_vertex_pt[nod_pt]->x(2) + 0.5 * r_torus;
@@ -857,7 +857,7 @@ namespace oomph
       unsigned new_vertex_count = 0;
       unsigned new_facet_count = 0;
       unsigned n = vertex_pt_and_boundary_coord.size();
-      Vector<Vector<TetMeshVertex *>> annulus_vertex_pt(n);
+      Vector<Vector<TetMeshVertex*>> annulus_vertex_pt(n);
       for (unsigned j = 0; j < n; j++)
       {
         // Wrap around for simplicity
@@ -925,7 +925,7 @@ namespace oomph
           x[2] = r_edge[2] + rho * cos(phi) * normal[2] +
                  rho * sin(phi) * normal_normal[2];
 
-          TetMeshVertex *new_vertex_pt = new TetMeshVertex(x);
+          TetMeshVertex* new_vertex_pt = new TetMeshVertex(x);
           annulus_vertex_pt[j][i] = new_vertex_pt;
           Vertex_pt[jv] = new_vertex_pt;
           jv++;
@@ -939,7 +939,7 @@ namespace oomph
         for (unsigned j = 0; j < m - 1; j++)
         {
           unsigned n_vertex_on_facet = 4;
-          TetMeshFacet *new_facet_pt = new TetMeshFacet(n_vertex_on_facet);
+          TetMeshFacet* new_facet_pt = new TetMeshFacet(n_vertex_on_facet);
           new_facet_count++;
           new_facet_pt->set_vertex_pt(0, annulus_vertex_pt[i][j]);
           new_facet_pt->set_vertex_pt(1, annulus_vertex_pt[i][j + 1]);
@@ -958,7 +958,7 @@ namespace oomph
       for (unsigned j = 0; j < m - 1; j++)
       {
         unsigned n_vertex_on_facet = 4;
-        TetMeshFacet *new_facet_pt = new TetMeshFacet(n_vertex_on_facet);
+        TetMeshFacet* new_facet_pt = new TetMeshFacet(n_vertex_on_facet);
         new_facet_count++;
         new_facet_pt->set_vertex_pt(0, annulus_vertex_pt[n - 1][j]);
         new_facet_pt->set_vertex_pt(1, annulus_vertex_pt[n - 1][j + 1]);
@@ -1030,14 +1030,14 @@ namespace oomph
     /// - last one-based boundary id used to enumerate any boundaries
     /// .
     DiskWithTwoLayersTetMeshFacetedSurface(
-      DiskLikeGeomObjectWithBoundaries
-        *disk_parametrised_by_nonsingular_coordinates_pt,
-      const unsigned &half_nsegment,
-      const unsigned &first_one_based_boundary_id_for_disk,
-      const unsigned &one_based_region_id_above_disk,
-      const unsigned &one_based_region_id_below_disk,
-      unsigned &last_one_based_boundary_id_for_disk,
-      unsigned &last_one_based_boundary_id) :
+      DiskLikeGeomObjectWithBoundaries*
+        disk_parametrised_by_nonsingular_coordinates_pt,
+      const unsigned& half_nsegment,
+      const unsigned& first_one_based_boundary_id_for_disk,
+      const unsigned& one_based_region_id_above_disk,
+      const unsigned& one_based_region_id_below_disk,
+      unsigned& last_one_based_boundary_id_for_disk,
+      unsigned& last_one_based_boundary_id) :
       DiskTetMeshFacetedSurface(disk_parametrised_by_nonsingular_coordinates_pt,
                                 half_nsegment,
                                 first_one_based_boundary_id_for_disk,
@@ -1062,8 +1062,8 @@ namespace oomph
 
       // Find sorted sequence of vertices going around the
       // perimeter of the disk
-      Vector<TetMeshVertex *> sorted_perimeter_vertex_pt;
-      std::set<TetMeshFacet *> boundary_facet_pt;
+      Vector<TetMeshVertex*> sorted_perimeter_vertex_pt;
+      std::set<TetMeshFacet*> boundary_facet_pt;
       bool first = true;
       for (unsigned e = 0; e < nel; e++)
       {
@@ -1072,7 +1072,7 @@ namespace oomph
           boundary_facet_pt.insert(Facet_pt[e]);
           if (first)
           {
-            TetMeshVertex *vertex0_pt = Facet_pt[e]->vertex_pt(0);
+            TetMeshVertex* vertex0_pt = Facet_pt[e]->vertex_pt(0);
             sorted_perimeter_vertex_pt.push_back(vertex0_pt);
             first = false;
           }
@@ -1080,7 +1080,7 @@ namespace oomph
       }
       while (boundary_facet_pt.size() != 1)
       {
-        for (std::set<TetMeshFacet *>::iterator it = boundary_facet_pt.begin();
+        for (std::set<TetMeshFacet*>::iterator it = boundary_facet_pt.begin();
              it != boundary_facet_pt.end();
              it++)
         {

@@ -41,7 +41,7 @@ namespace oomph
 
   protected:
     /// \short Pointer to the Data item that stores the external pressure
-    Data *Pext_pt;
+    Data* Pext_pt;
 
     /// \short The Data that contains the traded pressure is stored
     /// as external Data for the element. Which external Data item is it?
@@ -59,7 +59,7 @@ namespace oomph
     }
 
     /// Function for setting up external pressure
-    void set_pressure_data(Data *pext_pt)
+    void set_pressure_data(Data* pext_pt)
     {
       // Set external pressure pointer
       Pext_pt = pext_pt;
@@ -70,7 +70,7 @@ namespace oomph
     }
 
     // Add the contribution to the residuals
-    inline void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    inline void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Storage for local eqn number
       int pext_local_eqn;
@@ -91,8 +91,8 @@ namespace oomph
       }
     }
 
-    inline void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                                 DenseMatrix<double> &jacobian)
+    inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                                 DenseMatrix<double>& jacobian)
     {
       // Call the residuals
       fill_in_contribution_to_residuals(residuals);
@@ -100,9 +100,9 @@ namespace oomph
     }
 
     inline void fill_in_contribution_to_jacobian_and_mass_matrix(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix)
     {
       // Call the residuals
       fill_in_contribution_to_residuals(residuals);
@@ -118,19 +118,19 @@ namespace oomph
   {
   protected:
     // Storage for pointers to my traction elements
-    Vector<PolarNavierStokesTractionElement<ELEMENT> *> Inlet_traction_elt_pt;
-    Vector<PolarNavierStokesTractionElement<ELEMENT> *> Outlet_traction_elt_pt;
+    Vector<PolarNavierStokesTractionElement<ELEMENT>*> Inlet_traction_elt_pt;
+    Vector<PolarNavierStokesTractionElement<ELEMENT>*> Outlet_traction_elt_pt;
     /// Generalised element to determine my mass flux (always 1)
-    FluxConstraint *Flux_constraint_pt;
+    FluxConstraint* Flux_constraint_pt;
     // Storage for pointers to my shear stress integral elements
-    Vector<PolarStressIntegralElement<ELEMENT> *> Lower_stress_integral_elt_pt;
-    Vector<PolarStressIntegralElement<ELEMENT> *> Upper_stress_integral_elt_pt;
+    Vector<PolarStressIntegralElement<ELEMENT>*> Lower_stress_integral_elt_pt;
+    Vector<PolarStressIntegralElement<ELEMENT>*> Upper_stress_integral_elt_pt;
 
     // Internal storage for traction parameters
 
   public:
     /// Return  pointer to inlet traction element e
-    PolarNavierStokesTractionElement<ELEMENT> *inlet_traction_elt_pt(unsigned e)
+    PolarNavierStokesTractionElement<ELEMENT>* inlet_traction_elt_pt(unsigned e)
     {
       return Inlet_traction_elt_pt[e];
     }
@@ -140,7 +140,7 @@ namespace oomph
       return Inlet_traction_elt_pt.size();
     }
     /// Return  pointer to outlet traction element e
-    PolarNavierStokesTractionElement<ELEMENT> *outlet_traction_elt_pt(
+    PolarNavierStokesTractionElement<ELEMENT>* outlet_traction_elt_pt(
       unsigned e)
     {
       return Outlet_traction_elt_pt[e];
@@ -152,13 +152,13 @@ namespace oomph
     }
 
     /// Return  pointer to Flux Cosntraint Element
-    FluxConstraint *flux_constraint_elt_pt()
+    FluxConstraint* flux_constraint_elt_pt()
     {
       return Flux_constraint_pt;
     }
 
     /// Return  pointer to shear integral element
-    PolarStressIntegralElement<ELEMENT> *lower_stress_integral_elt_pt(
+    PolarStressIntegralElement<ELEMENT>* lower_stress_integral_elt_pt(
       unsigned long e)
     {
       return Lower_stress_integral_elt_pt[e];
@@ -169,7 +169,7 @@ namespace oomph
       return Lower_stress_integral_elt_pt.size();
     }
     /// Return  pointer to shear integral element
-    PolarStressIntegralElement<ELEMENT> *upper_stress_integral_elt_pt(
+    PolarStressIntegralElement<ELEMENT>* upper_stress_integral_elt_pt(
       unsigned long e)
     {
       return Upper_stress_integral_elt_pt[e];
@@ -182,7 +182,7 @@ namespace oomph
 
     /// \short Constructor, which "builds" the mesh. The arguments are the
     /// number of elements in each direction.
-    jh_mesh(const unsigned int &nx, const unsigned int &ny) :
+    jh_mesh(const unsigned int& nx, const unsigned int& ny) :
       Refineable_r_mesh<ELEMENT>(nx, ny)
     {
       // Now bolt on traction stuff
@@ -204,7 +204,7 @@ namespace oomph
     }
 
     // Function to add the traction boundary elements
-    void make_traction_elements(const bool &outlet)
+    void make_traction_elements(const bool& outlet)
     {
       // Specify inlet/outlet specific quantities
       unsigned ibound;
@@ -228,7 +228,7 @@ namespace oomph
       // Loop over the number of elements on the boundary
       for (unsigned ielt = 0; ielt < num_elt; ielt++)
       {
-        PolarNavierStokesTractionElement<ELEMENT> *surface_element_pt =
+        PolarNavierStokesTractionElement<ELEMENT>* surface_element_pt =
           new PolarNavierStokesTractionElement<ELEMENT>(
             this->boundary_element_pt(ibound, ielt), index);
         // Push it back onto the Element_pt Vector
@@ -283,7 +283,7 @@ namespace oomph
         for (unsigned ielt = 0; ielt < num_elt; ielt++)
         {
           // Element on lower boundary
-          PolarStressIntegralElement<ELEMENT> *surface_element_pt =
+          PolarStressIntegralElement<ELEMENT>* surface_element_pt =
             new PolarStressIntegralElement<ELEMENT>(
               this->boundary_element_pt(ibound, ielt), index);
 

@@ -42,7 +42,7 @@ namespace oomph
   /// Get the surfactant concentration
   //=====================================================================
   double SurfactantTransportInterfaceElement::interpolated_C(
-    const Vector<double> &s)
+    const Vector<double>& s)
   {
     // Find number of nodes
     unsigned n_node = this->nnode();
@@ -69,10 +69,10 @@ namespace oomph
   /// The time derivative of the surface concentration
   //=====================================================================
   double SurfactantTransportInterfaceElement::dcdt_surface(
-    const unsigned &l) const
+    const unsigned& l) const
   {
     // Get the data's timestepper
-    TimeStepper *time_stepper_pt = this->node_pt(l)->time_stepper_pt();
+    TimeStepper* time_stepper_pt = this->node_pt(l)->time_stepper_pt();
 
     // Initialise dudt
     double dcdt = 0.0;
@@ -96,7 +96,7 @@ namespace oomph
   /// concentration with constant of proportionality equal
   /// to the elasticity  number.
   //=====================================================================
-  double SurfactantTransportInterfaceElement::sigma(const Vector<double> &s)
+  double SurfactantTransportInterfaceElement::sigma(const Vector<double>& s)
   {
     // Find the number of shape functions
     const unsigned n_node = this->nnode();
@@ -123,18 +123,18 @@ namespace oomph
   /// additional entries are calculated inside the integration loop
   void SurfactantTransportInterfaceElement::
     add_additional_residual_contributions_interface(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      const unsigned &flag,
-      const Shape &psif,
-      const DShape &dpsifds,
-      const DShape &dpsifdS,
-      const DShape &dpsifdS_div,
-      const Vector<double> &s,
-      const Vector<double> &interpolated_x,
-      const Vector<double> &interpolated_n,
-      const double &W,
-      const double &J)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag,
+      const Shape& psif,
+      const DShape& dpsifds,
+      const DShape& dpsifdS,
+      const DShape& dpsifdS_div,
+      const Vector<double>& s,
+      const Vector<double>& interpolated_x,
+      const Vector<double>& interpolated_n,
+      const double& W,
+      const double& J)
   {
     // Find out how many nodes there are
     unsigned n_node = this->nnode();
@@ -219,7 +219,7 @@ namespace oomph
           for (unsigned l2 = 0; l2 < n_node; l2++)
           {
             // Get the time stepper
-            TimeStepper *time_stepper_pt = this->node_pt(l2)->time_stepper_pt();
+            TimeStepper* time_stepper_pt = this->node_pt(l2)->time_stepper_pt();
 
             // Get the unknown c_index
             local_unknown = this->nodal_local_eqn(l2, this->C_index[l2]);
@@ -296,8 +296,8 @@ namespace oomph
   //=======================================================
   /// Overload the output function
   //=======================================================
-  void SurfactantTransportInterfaceElement::output(std::ostream &outfile,
-                                                   const unsigned &n_plot)
+  void SurfactantTransportInterfaceElement::output(std::ostream& outfile,
+                                                   const unsigned& n_plot)
   {
     outfile.precision(16);
 

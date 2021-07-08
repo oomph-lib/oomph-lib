@@ -51,7 +51,7 @@ namespace oomph
     }
 
     /// Set error value for post-processing
-    void set_error(const double &error)
+    void set_error(const double& error)
     {
       Error = error;
     }
@@ -84,7 +84,7 @@ namespace oomph
     }
 
     /// Overload output function
-    void output(std::ostream &outfile, const unsigned &nplot)
+    void output(std::ostream& outfile, const unsigned& nplot)
     {
       // Assign dimension
       unsigned el_dim = 2;

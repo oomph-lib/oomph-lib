@@ -64,9 +64,9 @@ namespace oomph
     /// for the pressure that is "traded" in exchange for the
     /// volume constraint.
     FoepplvonKarmanVolumeConstraintElement(
-      MESH<ELEMENT> *bounding_mesh_pt,
-      const Vector<unsigned> &contributing_region,
-      const double &pressure = 0.0) :
+      MESH<ELEMENT>* bounding_mesh_pt,
+      const Vector<unsigned>& contributing_region,
+      const double& pressure = 0.0) :
       Bounding_mesh_pt(bounding_mesh_pt),
       Contributing_region(contributing_region),
       Prescribed_volume_pt(0)
@@ -84,13 +84,13 @@ namespace oomph
 
     /// Broken copy constructor
     FoepplvonKarmanVolumeConstraintElement(
-      const FoepplvonKarmanVolumeConstraintElement &)
+      const FoepplvonKarmanVolumeConstraintElement&)
     {
       BrokenCopy::broken_copy("FoepplvonKarmanVolumeConstraintElement");
     }
 
     /// Broken assignment operator
-    void operator=(const FoepplvonKarmanVolumeConstraintElement &)
+    void operator=(const FoepplvonKarmanVolumeConstraintElement&)
     {
       BrokenCopy::broken_assign("FoepplvonKarmanVolumeConstraintElement");
     }
@@ -111,7 +111,7 @@ namespace oomph
         for (unsigned e = 0; e < n_inner_el; e++)
         {
           // Add the contribution
-          ELEMENT *el_pt = dynamic_cast<ELEMENT *>(
+          ELEMENT* el_pt = dynamic_cast<ELEMENT*>(
             Bounding_mesh_pt->region_element_pt(Contributing_region[r], e));
           bounded_volume += el_pt->get_bounded_volume();
         }
@@ -127,7 +127,7 @@ namespace oomph
 
     /// \short Fill in residual: Difference between actual and
     /// prescribed bounded volume.
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       if (Volume_control_local_eqn >= 0)
       {
@@ -136,8 +136,8 @@ namespace oomph
     }
 
     /// Fill in contribution to elemental residual and Jacobian
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       if (Volume_control_local_eqn >= 0)
       {
@@ -234,14 +234,14 @@ namespace oomph
     }
 
     /// Set pointer to target volume
-    void set_prescribed_volume(double *volume_pt)
+    void set_prescribed_volume(double* volume_pt)
     {
       Prescribed_volume_pt = volume_pt;
     }
 
     /// \short Access to Data object whose single value contains the pressure
     /// that has been "traded" for the volume constraint.
-    Data *pressure_data_pt() const
+    Data* pressure_data_pt() const
     {
       return Volume_control_pressure_pt;
     }
@@ -249,7 +249,7 @@ namespace oomph
   protected:
     /// \short Data object whose single value contains the pressure
     /// that has been "traded" for the volume constraint.
-    Data *Volume_control_pressure_pt;
+    Data* Volume_control_pressure_pt;
 
     /// \short Unsigned indicating which internal Data object
     /// stores the pressure
@@ -263,14 +263,14 @@ namespace oomph
     /// to the bounding volume are in charge of adding their own
     /// contribution to the volume constraint equation (and the
     /// associated Jacobian)
-    MESH<ELEMENT> *Bounding_mesh_pt;
+    MESH<ELEMENT>* Bounding_mesh_pt;
 
     /// \short Region IDs in the bounding mesh that contribute to the
     /// prescribed/controlled volume
     Vector<unsigned> Contributing_region;
 
     /// Pointer to target volume
-    double *Prescribed_volume_pt;
+    double* Prescribed_volume_pt;
   };
 
 } // namespace oomph

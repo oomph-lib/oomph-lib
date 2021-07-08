@@ -62,20 +62,20 @@ namespace oomph
 
   public:
     /// Constructor for the case when we allow adaptive timestepping
-    PeriodicOrbitTimeDiscretisation(const unsigned &n_tstorage) :
+    PeriodicOrbitTimeDiscretisation(const unsigned& n_tstorage) :
       TimeStepper(n_tstorage, 1)
     {
       Type = "PeriodicOrbitTimeDiscretisation";
     }
 
     /// Broken copy constructor
-    PeriodicOrbitTimeDiscretisation(const PeriodicOrbitTimeDiscretisation &)
+    PeriodicOrbitTimeDiscretisation(const PeriodicOrbitTimeDiscretisation&)
     {
       BrokenCopy::broken_copy("PeriodicOrbitTimeDiscretisation");
     }
 
     /// Broken assignment operator
-    void operator=(const PeriodicOrbitTimeDiscretisation &)
+    void operator=(const PeriodicOrbitTimeDiscretisation&)
     {
       BrokenCopy::broken_assign("PeriodicOrbitTimeDiscretisation");
     }
@@ -88,7 +88,7 @@ namespace oomph
 
     /// \short Broken initialisation the time-history for the Data values
     /// corresponding to an impulsive start.
-    void assign_initial_values_impulsive(Data *const &data_pt)
+    void assign_initial_values_impulsive(Data* const& data_pt)
     {
       throw OomphLibError(
         "Cannot perform impulsive start for PeriodicOrbitTimeDiscretisation",
@@ -98,7 +98,7 @@ namespace oomph
 
     /// \short Broken initialisation of
     /// the positions for the node corresponding to an impulsive start
-    void assign_initial_positions_impulsive(Node *const &node_pt)
+    void assign_initial_positions_impulsive(Node* const& node_pt)
     {
       throw OomphLibError(
         "Cannot perform impulsive start for PeriodicOrbitTimeDiscretisation",
@@ -108,13 +108,13 @@ namespace oomph
 
     /// \short Typedef for function that returns the (scalar) initial
     /// value at a given value of the continuous time t.
-    typedef double (*InitialConditionFctPt)(const double &t);
+    typedef double (*InitialConditionFctPt)(const double& t);
 
     /// \short  Initialise the time-history for the Data values,
     /// corresponding to given time history, specified by
     /// Vector of function pointers.
     void assign_initial_data_values(
-      Data *const &data_pt, Vector<InitialConditionFctPt> initial_value_fct)
+      Data* const& data_pt, Vector<InitialConditionFctPt> initial_value_fct)
     {
       // The time history stores the previous function values
       unsigned n_time_value = ntstorage();
@@ -137,7 +137,7 @@ namespace oomph
     }
 
     /// Broken shifting of time values
-    void shift_time_values(Data *const &data_pt)
+    void shift_time_values(Data* const& data_pt)
     {
       throw OomphLibError(
         "Cannot shift time values for PeriodicOrbitTimeDiscretisation",
@@ -146,7 +146,7 @@ namespace oomph
     }
 
     /// Broken shifting of time positions
-    void shift_time_positions(Node *const &node_pt)
+    void shift_time_positions(Node* const& node_pt)
     {
       throw OomphLibError(
         "Cannot shift time positions for PeriodicOrbitTimeDiscretisation",
@@ -177,17 +177,17 @@ namespace oomph
     unsigned Ntstorage;
 
     // Pointer to the global variable that represents the frequency
-    double *Omega_pt;
+    double* Omega_pt;
 
     /// Pointer to global time.
-    Time *Time_pt;
+    Time* Time_pt;
 
   public:
     // Constructor, do nothing
     PeriodicOrbitEquations() : Ntstorage(0), Omega_pt(0), Time_pt(0) {}
 
     /// Broken copy constructor
-    PeriodicOrbitEquations(const PeriodicOrbitEquations &dummy)
+    PeriodicOrbitEquations(const PeriodicOrbitEquations& dummy)
     {
       BrokenCopy::broken_copy("PeriodicOrbitEquations");
     }
@@ -204,7 +204,7 @@ namespace oomph
    }*/
 
     /// Set the pointer to the frequency
-    double *&omega_pt()
+    double*& omega_pt()
     {
       return Omega_pt;
     }
@@ -216,19 +216,19 @@ namespace oomph
     }
 
     /// Set the total number of time storage values
-    void set_ntstorage(const unsigned &n_tstorage)
+    void set_ntstorage(const unsigned& n_tstorage)
     {
       Ntstorage = n_tstorage;
     }
 
     /// Retun the pointer to the global time
-    Time *&time_pt()
+    Time*& time_pt()
     {
       return Time_pt;
     }
 
     /// Return the pointer to the global time (const version)
-    Time *const &time_pt() const
+    Time* const& time_pt() const
     {
       return Time_pt;
     }
@@ -249,9 +249,9 @@ namespace oomph
 
     /// Add the element's contribution to its residual vector (wrapper)
     void fill_in_contribution_to_integrated_residuals(
-      PeriodicOrbitAssemblyHandlerBase *const &assembly_handler_pt,
-      GeneralisedElement *const &elem_pt,
-      Vector<double> &residuals)
+      PeriodicOrbitAssemblyHandlerBase* const& assembly_handler_pt,
+      GeneralisedElement* const& elem_pt,
+      Vector<double>& residuals)
     {
       // Call the generic residuals function with flag set to 0
       // using a dummy matrix argument
@@ -266,34 +266,34 @@ namespace oomph
     /// Add the element's contribution to its residual vector and
     /// element Jacobian matrix (wrapper)
     void fill_in_contribution_to_integrated_jacobian(
-      PeriodicOrbitAssemblyHandlerBase *const &assembly_handler_pt,
-      GeneralisedElement *const &elem_pt,
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian)
+      PeriodicOrbitAssemblyHandlerBase* const& assembly_handler_pt,
+      GeneralisedElement* const& elem_pt,
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian)
     {
       // Call the generic routine with the flag set to 1
       fill_in_generic_residual_contribution_orbit(
         assembly_handler_pt, elem_pt, residuals, jacobian, 1);
     }
 
-    void orbit_output(GeneralisedElement *const &elem_pt,
-                      std::ostream &outfile,
-                      const unsigned &n_plot);
+    void orbit_output(GeneralisedElement* const& elem_pt,
+                      std::ostream& outfile,
+                      const unsigned& n_plot);
 
   protected:
     /// The routine that actually does all the work!
     void fill_in_generic_residual_contribution_orbit(
-      PeriodicOrbitAssemblyHandlerBase *const &assembly_handler_pt,
-      GeneralisedElement *const &elem_pt,
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      const unsigned &flag);
+      PeriodicOrbitAssemblyHandlerBase* const& assembly_handler_pt,
+      GeneralisedElement* const& elem_pt,
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag);
 
     /// \short Set the timestepper weights
-    void set_timestepper_weights(const Shape &psi, const DShape &dpsidt)
+    void set_timestepper_weights(const Shape& psi, const DShape& dpsidt)
     {
-      PeriodicOrbitTimeDiscretisation *cast_time_stepper_pt =
-        dynamic_cast<PeriodicOrbitTimeDiscretisation *>(time_stepper_pt());
+      PeriodicOrbitTimeDiscretisation* cast_time_stepper_pt =
+        dynamic_cast<PeriodicOrbitTimeDiscretisation*>(time_stepper_pt());
 
       // Zero the timestepper weights
       unsigned n_time_dof = cast_time_stepper_pt->ntstorage();
@@ -322,20 +322,20 @@ namespace oomph
 
     /// \short Shape/test functions and derivs w.r.t. to global coords at
     /// local coord. s; return  Jacobian of mapping
-    virtual double dshape_and_dtest_eulerian_orbit(const Vector<double> &s,
-                                                   Shape &psi,
-                                                   DShape &dpsidt,
-                                                   Shape &test,
-                                                   DShape &dtestdt) const = 0;
+    virtual double dshape_and_dtest_eulerian_orbit(const Vector<double>& s,
+                                                   Shape& psi,
+                                                   DShape& dpsidt,
+                                                   Shape& test,
+                                                   DShape& dtestdt) const = 0;
 
     /// \short Shape/test functions and derivs w.r.t. to global coords at
     /// integration point ipt; return  Jacobian of mapping
     virtual double dshape_and_dtest_eulerian_at_knot_orbit(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidt,
-      Shape &test,
-      DShape &dtestdt) const = 0;
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidt,
+      Shape& test,
+      DShape& dtestdt) const = 0;
 
     /// \short Compute element residual Vector only (if flag=and/or element
     /// Jacobian matrix
@@ -369,7 +369,7 @@ namespace oomph
 
     /// Broken copy constructor
     SpectralPeriodicOrbitElement(
-      const SpectralPeriodicOrbitElement<NNODE_1D> &dummy)
+      const SpectralPeriodicOrbitElement<NNODE_1D>& dummy)
     {
       BrokenCopy::broken_copy("SpectralPeriodicOrbitElement");
     }
@@ -384,7 +384,7 @@ namespace oomph
     /// at node n (only ever one dummy value, used for equation numbering)
     /// This is also used to represent all *spatial* variables during a
     /// temporal refinement, which is a bit naughty but it quick and dirty.
-    inline unsigned required_nvalue(const unsigned &n) const
+    inline unsigned required_nvalue(const unsigned& n) const
     {
       return 1;
     }
@@ -396,15 +396,15 @@ namespace oomph
     }
 
     /// \short Return the dummy values
-    void get_interpolated_values(const Vector<double> &s, Vector<double> &value)
+    void get_interpolated_values(const Vector<double>& s, Vector<double>& value)
     {
       this->get_interpolated_values(0, s, value);
     }
 
     ///\short Return the temporal dummy values
-    void get_interpolated_values(const unsigned &t,
-                                 const Vector<double> &s,
-                                 Vector<double> &value)
+    void get_interpolated_values(const unsigned& t,
+                                 const Vector<double>& s,
+                                 Vector<double>& value)
     {
       value.resize(1);
       value[0] = 0.0;
@@ -433,7 +433,7 @@ namespace oomph
     }
 
     /// \short Get the fluxes for the recovert
-    void get_Z2_flux(const Vector<double> &s, Vector<double> &flux)
+    void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
       // Find out the number of nodes in the element
       const unsigned n_node = this->nnode();
@@ -472,7 +472,7 @@ namespace oomph
     }
 
     /// \short Pointer to the j-th vertex node in the element
-    Node *vertex_node_pt(const unsigned &j) const
+    Node* vertex_node_pt(const unsigned& j) const
     {
       return QSpectralElement<1, NNODE_1D>::vertex_node_pt(j);
     }
@@ -482,28 +482,28 @@ namespace oomph
 
     /// \short Output function:
     ///  x,y,u   or    x,y,z,u
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       PeriodicOrbitEquations::output(outfile);
     }
 
     ///  \short Output function:
     ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       PeriodicOrbitEquations::output(outfile, n_plot);
     }
 
     /// \short C-style output function:
     ///  x,y,u   or    x,y,z,u
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       PeriodicOrbitEquations::output(file_pt);
     }
 
     ///  \short C-style output function:
     ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       PeriodicOrbitEquations::output(file_pt, n_plot);
     }
@@ -511,20 +511,20 @@ namespace oomph
   protected:
     /// Shape, test functions & derivs. w.r.t. to global coords. Return
     /// Jacobian.
-    inline double dshape_and_dtest_eulerian_orbit(const Vector<double> &s,
-                                                  Shape &psi,
-                                                  DShape &dpsidt,
-                                                  Shape &test,
-                                                  DShape &dtestdt) const;
+    inline double dshape_and_dtest_eulerian_orbit(const Vector<double>& s,
+                                                  Shape& psi,
+                                                  DShape& dpsidt,
+                                                  Shape& test,
+                                                  DShape& dtestdt) const;
 
     /// \short Shape, test functions & derivs. w.r.t. to global coords. at
     /// integration point ipt. Return Jacobian.
     inline double dshape_and_dtest_eulerian_at_knot_orbit(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidt,
-      Shape &test,
-      DShape &dtestdt) const;
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidt,
+      Shape& test,
+      DShape& dtestdt) const;
   };
 
   // Inline functions:
@@ -537,11 +537,11 @@ namespace oomph
   //======================================================================
   template<unsigned NNODE_1D>
   double SpectralPeriodicOrbitElement<
-    NNODE_1D>::dshape_and_dtest_eulerian_orbit(const Vector<double> &s,
-                                               Shape &psi,
-                                               DShape &dpsidt,
-                                               Shape &test,
-                                               DShape &dtestdt) const
+    NNODE_1D>::dshape_and_dtest_eulerian_orbit(const Vector<double>& s,
+                                               Shape& psi,
+                                               DShape& dpsidt,
+                                               Shape& test,
+                                               DShape& dtestdt) const
   {
     // Call the geometrical shape functions and derivatives
     const double J = this->dshape_eulerian(s, psi, dpsidt);
@@ -562,11 +562,11 @@ namespace oomph
   //======================================================================
   template<unsigned NNODE_1D>
   double SpectralPeriodicOrbitElement<
-    NNODE_1D>::dshape_and_dtest_eulerian_at_knot_orbit(const unsigned &ipt,
-                                                       Shape &psi,
-                                                       DShape &dpsidt,
-                                                       Shape &test,
-                                                       DShape &dtestdt) const
+    NNODE_1D>::dshape_and_dtest_eulerian_at_knot_orbit(const unsigned& ipt,
+                                                       Shape& psi,
+                                                       DShape& dpsidt,
+                                                       Shape& test,
+                                                       DShape& dtestdt) const
   {
     // Call the geometrical shape functions and derivatives
     const double J = this->dshape_eulerian_at_knot(ipt, psi, dpsidt);
@@ -594,7 +594,7 @@ namespace oomph
 
   public:
     /// Constructor, create a 1D mesh from 0 to 1 that is periodic
-    PeriodicOrbitTemporalMesh(const unsigned &n_element) :
+    PeriodicOrbitTemporalMesh(const unsigned& n_element) :
       OneDMesh<ELEMENT>(n_element, 1.0),
       RefineableOneDMesh<ELEMENT>(n_element, 1.0)
     {
@@ -605,24 +605,24 @@ namespace oomph
     }
 
     // Output the orbit for all elements in the mesh
-    void orbit_output(GeneralisedElement *const &elem_pt,
-                      std::ostream &outfile,
-                      const unsigned &n_plot)
+    void orbit_output(GeneralisedElement* const& elem_pt,
+                      std::ostream& outfile,
+                      const unsigned& n_plot)
     {
       // Loop over all elements in the mesh
       const unsigned n_element = this->nelement();
       for (unsigned e = 0; e < n_element; e++)
       {
-        dynamic_cast<ELEMENT *>(this->element_pt(e))
+        dynamic_cast<ELEMENT*>(this->element_pt(e))
           ->orbit_output(elem_pt, outfile, n_plot);
       }
     }
 
     // Loop over all temporal elements and assemble their contributions
     void assemble_residuals(
-      PeriodicOrbitAssemblyHandlerBase *const &assembly_handler_pt,
-      GeneralisedElement *const &elem_pt,
-      Vector<double> &residuals)
+      PeriodicOrbitAssemblyHandlerBase* const& assembly_handler_pt,
+      GeneralisedElement* const& elem_pt,
+      Vector<double>& residuals)
     {
       // Initialise the residuals to zero
       residuals.initialise(0.0);
@@ -630,7 +630,7 @@ namespace oomph
       const unsigned n_element = this->nelement();
       for (unsigned e = 0; e < n_element; e++)
       {
-        dynamic_cast<ELEMENT *>(this->element_pt(e))
+        dynamic_cast<ELEMENT*>(this->element_pt(e))
           ->fill_in_contribution_to_integrated_residuals(
             assembly_handler_pt, elem_pt, residuals);
       }
@@ -639,10 +639,10 @@ namespace oomph
     // Loop over all temporal elements and assemble their contributions
     // and the jaobian
     void assemble_residuals_and_jacobian(
-      PeriodicOrbitAssemblyHandlerBase *const &assembly_handler_pt,
-      GeneralisedElement *const &elem_pt,
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian)
+      PeriodicOrbitAssemblyHandlerBase* const& assembly_handler_pt,
+      GeneralisedElement* const& elem_pt,
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian)
     {
       // Initialise the residuals to zero
       residuals.initialise(0.0);
@@ -651,7 +651,7 @@ namespace oomph
       const unsigned n_element = this->nelement();
       for (unsigned e = 0; e < n_element; e++)
       {
-        dynamic_cast<ELEMENT *>(this->element_pt(e))
+        dynamic_cast<ELEMENT*>(this->element_pt(e))
           ->fill_in_contribution_to_integrated_jacobian(
             assembly_handler_pt, elem_pt, residuals, jacobian);
       }
@@ -668,14 +668,14 @@ namespace oomph
     PeriodicOrbitAssemblyHandlerBase() {}
 
     // Provide interface
-    virtual void get_dofs_for_element(GeneralisedElement *const elem_pt,
-                                      Vector<double> &dofs) = 0;
+    virtual void get_dofs_for_element(GeneralisedElement* const elem_pt,
+                                      Vector<double>& dofs) = 0;
 
     virtual void get_previous_dofs_for_element(
-      GeneralisedElement *const elem_pt, Vector<double> &dofs) = 0;
+      GeneralisedElement* const elem_pt, Vector<double>& dofs) = 0;
 
-    virtual void set_dofs_for_element(GeneralisedElement *const elem_pt,
-                                      Vector<double> const &dofs) = 0;
+    virtual void set_dofs_for_element(GeneralisedElement* const elem_pt,
+                                      Vector<double> const& dofs) = 0;
   };
 
   //======================================================================
@@ -687,17 +687,17 @@ namespace oomph
   {
   private:
     /// Pointer to the timestepper
-    PeriodicOrbitTimeDiscretisation *Time_stepper_pt;
+    PeriodicOrbitTimeDiscretisation* Time_stepper_pt;
 
     /// Pointer to the problem
-    Problem *Problem_pt;
+    Problem* Problem_pt;
 
     /// Storage for mesh of temporal elements
-    PeriodicOrbitTemporalMesh<SpectralPeriodicOrbitElement<NNODE_1D>>
-      *Time_mesh_pt;
+    PeriodicOrbitTemporalMesh<SpectralPeriodicOrbitElement<NNODE_1D>>*
+      Time_mesh_pt;
 
     /// Storage for the mesh of temporal elements with a simple mesh pointer
-    Mesh *Basic_time_mesh_pt;
+    Mesh* Basic_time_mesh_pt;
 
     /// Storage for the previous solution
     Vector<double> Previous_dofs;
@@ -717,10 +717,10 @@ namespace oomph
   public:
     /// Constructor, initialises values and constructs mesh of elements
     PeriodicOrbitAssemblyHandler<NNODE_1D>(
-      Problem *const &problem_pt,
-      const unsigned &n_element_in_period,
-      const DenseMatrix<double> &initial_guess,
-      const double &omega) :
+      Problem* const& problem_pt,
+      const unsigned& n_element_in_period,
+      const DenseMatrix<double>& initial_guess,
+      const double& omega) :
       Problem_pt(problem_pt),
       N_element_in_period(n_element_in_period),
       Omega(omega / (2.0 * MathematicalConstants::Pi))
@@ -745,7 +745,7 @@ namespace oomph
 
       // Now we need to number the mesh
       // Dummy dof pointer
-      Vector<double *> dummy_dof_pt;
+      Vector<double*> dummy_dof_pt;
       Time_mesh_pt->assign_global_eqn_numbers(dummy_dof_pt);
       // Assign the local equation numbers
       Time_mesh_pt->assign_local_eqn_numbers(false);
@@ -761,8 +761,8 @@ namespace oomph
       // Loop over the temporal elements and set the pointers
       for (unsigned e = 0; e < n_element_in_period; e++)
       {
-        SpectralPeriodicOrbitElement<NNODE_1D> *el_pt =
-          dynamic_cast<SpectralPeriodicOrbitElement<NNODE_1D> *>(
+        SpectralPeriodicOrbitElement<NNODE_1D>* el_pt =
+          dynamic_cast<SpectralPeriodicOrbitElement<NNODE_1D>*>(
             Time_mesh_pt->element_pt(e));
 
         // Set the time and the timestepper
@@ -795,7 +795,7 @@ namespace oomph
       unsigned n_node = problem_pt->mesh_pt()->nnode();
       for (unsigned n = 0; n < n_node; n++)
       {
-        Node *const nod_pt = problem_pt->mesh_pt()->node_pt(n);
+        Node* const nod_pt = problem_pt->mesh_pt()->node_pt(n);
         nod_pt->set_time_stepper(Time_stepper_pt, false);
         // If the unknowns are pinned then copy the value to all values
         unsigned n_value = nod_pt->nvalue();
@@ -821,7 +821,7 @@ namespace oomph
         for (unsigned i = 0; i < n_internal; i++)
         {
           // Cache the internal data
-          Data *const data_pt =
+          Data* const data_pt =
             problem_pt->mesh_pt()->element_pt(e)->internal_data_pt(i);
           // and set the timestepper
           data_pt->set_time_stepper(Time_stepper_pt, false);
@@ -903,15 +903,15 @@ namespace oomph
     }
 
     /// Return the number of degrees of freedom in the element elem_pt
-    unsigned ndof(GeneralisedElement *const &elem_pt)
+    unsigned ndof(GeneralisedElement* const& elem_pt)
     {
       return ((elem_pt->ndof()) * N_tstorage + 1);
     }
 
     /// \short Return the global equation number of the local unknown ieqn_local
     /// in elem_pt.
-    unsigned long eqn_number(GeneralisedElement *const &elem_pt,
-                             const unsigned &ieqn_local)
+    unsigned long eqn_number(GeneralisedElement* const& elem_pt,
+                             const unsigned& ieqn_local)
     {
       // Get unaugmented number of (spatial) dofs in element
       unsigned raw_ndof = elem_pt->ndof();
@@ -933,15 +933,15 @@ namespace oomph
     }
 
     /// Return the contribution to the residuals of the element elem_pt
-    void get_residuals(GeneralisedElement *const &elem_pt,
-                       Vector<double> &residuals)
+    void get_residuals(GeneralisedElement* const& elem_pt,
+                       Vector<double>& residuals)
     {
       Time_mesh_pt->assemble_residuals(this, elem_pt, residuals);
     }
 
     // Provide interface
-    void get_dofs_for_element(GeneralisedElement *const elem_pt,
-                              Vector<double> &dofs)
+    void get_dofs_for_element(GeneralisedElement* const elem_pt,
+                              Vector<double>& dofs)
     {
       // Find the number of dofs in the element
       const unsigned n_elem_dof = this->ndof(elem_pt);
@@ -954,8 +954,8 @@ namespace oomph
       }
     }
 
-    void get_previous_dofs_for_element(GeneralisedElement *const elem_pt,
-                                       Vector<double> &dofs)
+    void get_previous_dofs_for_element(GeneralisedElement* const elem_pt,
+                                       Vector<double>& dofs)
     {
       // Find the number of dofs in the element
       const unsigned n_elem_dof = this->ndof(elem_pt);
@@ -968,8 +968,8 @@ namespace oomph
       }
     }
 
-    void set_dofs_for_element(GeneralisedElement *const elem_pt,
-                              Vector<double> const &dofs)
+    void set_dofs_for_element(GeneralisedElement* const elem_pt,
+                              Vector<double> const& dofs)
     {
       // Find the number of dofs in the element
       const unsigned n_elem_dof = this->ndof(elem_pt);
@@ -983,9 +983,9 @@ namespace oomph
 
     /// \short Calculate the elemental Jacobian matrix "d equation
     /// / d variable" for elem_pt.
-    void get_jacobian(GeneralisedElement *const &elem_pt,
-                      Vector<double> &residuals,
-                      DenseMatrix<double> &jacobian)
+    void get_jacobian(GeneralisedElement* const& elem_pt,
+                      Vector<double>& residuals,
+                      DenseMatrix<double>& jacobian)
     {
       Time_mesh_pt->assemble_residuals_and_jacobian(
         this, elem_pt, residuals, jacobian);
@@ -1011,7 +1011,7 @@ namespace oomph
     // virtual void get_eigenfunction(Vector<DoubleVector> &eigenfunction);
 
     /// Return the contribution to the residuals of the element elem_pt
-    void orbit_output(std::ostream &outfile, const unsigned &n_plot)
+    void orbit_output(std::ostream& outfile, const unsigned& n_plot)
     {
       const unsigned n_element = Problem_pt->mesh_pt()->nelement();
       for (unsigned e = 0; e < n_element; e++)
@@ -1022,7 +1022,7 @@ namespace oomph
     }
 
     /// Tell me the times at which you want the solution
-    void discrete_times(Vector<double> &t)
+    void discrete_times(Vector<double>& t)
     {
       const unsigned n_node = Time_mesh_pt->nnode();
       t.resize(n_node);
@@ -1060,8 +1060,8 @@ namespace oomph
       for (unsigned n = 0; n < n_node; n++)
       {
         total_n_value += Problem_pt->mesh_pt()->node_pt(n)->nvalue();
-        SolidNode *solid_nod_pt =
-          dynamic_cast<SolidNode *>(Problem_pt->mesh_pt()->node_pt(n));
+        SolidNode* solid_nod_pt =
+          dynamic_cast<SolidNode*>(Problem_pt->mesh_pt()->node_pt(n));
         if (solid_nod_pt != 0)
         {
           total_n_value += solid_nod_pt->variable_position_pt()->nvalue();
@@ -1083,7 +1083,7 @@ namespace oomph
 
       // Now in theory I know the total number of values in the problem
       // So I can create another Fake timestepper
-      TimeStepper *fake_space_time_stepper_pt =
+      TimeStepper* fake_space_time_stepper_pt =
         new PeriodicOrbitTimeDiscretisation(total_n_value);
 
       // Now apply this time stepper to all time nodes
@@ -1098,7 +1098,7 @@ namespace oomph
       unsigned count = 0;
       for (unsigned i = 0; i < n_global_data; i++)
       {
-        Data *const glob_data_pt = Problem_pt->global_data_pt(i);
+        Data* const glob_data_pt = Problem_pt->global_data_pt(i);
         const unsigned n_value = glob_data_pt->nvalue();
         for (unsigned j = 0; j < n_value; j++)
         {
@@ -1116,7 +1116,7 @@ namespace oomph
       // Now the nodal data
       for (unsigned n = 0; n < n_node; n++)
       {
-        Node *const nod_pt = Problem_pt->mesh_pt()->node_pt(n);
+        Node* const nod_pt = Problem_pt->mesh_pt()->node_pt(n);
         const unsigned n_value = nod_pt->nvalue();
         for (unsigned i = 0; i < n_value; i++)
         {
@@ -1128,7 +1128,7 @@ namespace oomph
         }
 
         // Now deal with the solid node data
-        SolidNode *solid_nod_pt = dynamic_cast<SolidNode *>(nod_pt);
+        SolidNode* solid_nod_pt = dynamic_cast<SolidNode*>(nod_pt);
         if (solid_nod_pt != 0)
         {
           const unsigned n_solid_value =
@@ -1152,7 +1152,7 @@ namespace oomph
           Problem_pt->mesh_pt()->element_pt(e)->ninternal_data();
         for (unsigned i = 0; i < n_internal; i++)
         {
-          Data *const internal_dat_pt =
+          Data* const internal_dat_pt =
             Problem_pt->mesh_pt()->element_pt(e)->internal_data_pt(i);
 
           const unsigned n_value = internal_dat_pt->nvalue();
@@ -1244,7 +1244,7 @@ namespace oomph
 
       // Now we need to number the mesh
       // Dummy dof pointer
-      Vector<double *> dummy_dof_pt;
+      Vector<double*> dummy_dof_pt;
       Time_mesh_pt->assign_global_eqn_numbers(dummy_dof_pt);
       // Assign the local equation numbers
       Time_mesh_pt->assign_local_eqn_numbers(false);
@@ -1255,14 +1255,14 @@ namespace oomph
       N_element_in_period = Time_mesh_pt->nelement();
 
       // Create the new "fake" timestepper
-      PeriodicOrbitTimeDiscretisation *periodic_time_stepper_pt =
+      PeriodicOrbitTimeDiscretisation* periodic_time_stepper_pt =
         new PeriodicOrbitTimeDiscretisation(N_tstorage);
 
       // Loop over the temporal elements and set the pointers
       for (unsigned e = 0; e < N_element_in_period; e++)
       {
-        SpectralPeriodicOrbitElement<NNODE_1D> *el_pt =
-          dynamic_cast<SpectralPeriodicOrbitElement<NNODE_1D> *>(
+        SpectralPeriodicOrbitElement<NNODE_1D>* el_pt =
+          dynamic_cast<SpectralPeriodicOrbitElement<NNODE_1D>*>(
             Time_mesh_pt->element_pt(e));
 
         // Set the time and the timestepper
@@ -1294,7 +1294,7 @@ namespace oomph
       // OK now we have only one mesh
       for (unsigned n = 0; n < n_node; n++)
       {
-        Node *const nod_pt = Problem_pt->mesh_pt()->node_pt(n);
+        Node* const nod_pt = Problem_pt->mesh_pt()->node_pt(n);
         nod_pt->set_time_stepper(periodic_time_stepper_pt, false);
       }
 
@@ -1305,7 +1305,7 @@ namespace oomph
         for (unsigned i = 0; i < n_internal; i++)
         {
           // Cache the internal data
-          Data *const data_pt =
+          Data* const data_pt =
             Problem_pt->mesh_pt()->element_pt(e)->internal_data_pt(i);
           // and set the timestepper
           data_pt->set_time_stepper(periodic_time_stepper_pt, false);
@@ -1348,7 +1348,7 @@ namespace oomph
       count = 0;
       for (unsigned i = 0; i < n_global_data; i++)
       {
-        Data *const glob_data_pt = Problem_pt->global_data_pt(i);
+        Data* const glob_data_pt = Problem_pt->global_data_pt(i);
         const unsigned n_value = glob_data_pt->nvalue();
         for (unsigned j = 0; j < n_value; j++)
         {
@@ -1366,7 +1366,7 @@ namespace oomph
       // Now the nodal data
       for (unsigned n = 0; n < n_node; n++)
       {
-        Node *const nod_pt = Problem_pt->mesh_pt()->node_pt(n);
+        Node* const nod_pt = Problem_pt->mesh_pt()->node_pt(n);
         const unsigned n_value = nod_pt->nvalue();
         for (unsigned i = 0; i < n_value; i++)
         {
@@ -1378,7 +1378,7 @@ namespace oomph
         }
 
         // Now deal with the solid node data
-        SolidNode *solid_nod_pt = dynamic_cast<SolidNode *>(nod_pt);
+        SolidNode* solid_nod_pt = dynamic_cast<SolidNode*>(nod_pt);
         if (solid_nod_pt != 0)
         {
           const unsigned n_solid_value =
@@ -1402,7 +1402,7 @@ namespace oomph
           Problem_pt->mesh_pt()->element_pt(e)->ninternal_data();
         for (unsigned i = 0; i < n_internal; i++)
         {
-          Data *const internal_dat_pt =
+          Data* const internal_dat_pt =
             Problem_pt->mesh_pt()->element_pt(e)->internal_data_pt(i);
 
           const unsigned n_value = internal_dat_pt->nvalue();
@@ -1446,14 +1446,14 @@ namespace oomph
     PeriodicOrbitBaseElement() : GeneralisedElement() {}
 
     /// Interface to get the current value of all (internal and shared) unknowns
-    virtual void get_non_external_dofs(Vector<double> &u) {}
+    virtual void get_non_external_dofs(Vector<double>& u) {}
 
     /// Interface to get the current value of the time derivative of
     /// all (internal and shared) unknowns
-    virtual void get_non_external_ddofs_dt(Vector<double> &du_dt) {}
+    virtual void get_non_external_ddofs_dt(Vector<double>& du_dt) {}
 
     /// Get the inner product matrix
-    virtual void get_inner_product_matrix(DenseMatrix<double> &inner_product)
+    virtual void get_inner_product_matrix(DenseMatrix<double>& inner_product)
     {
       const unsigned n_dof = this->ndof();
       inner_product.initialise(0.0);
@@ -1463,9 +1463,9 @@ namespace oomph
       }
     }
 
-    virtual void spacetime_output(std::ostream &outilfe,
-                                  const unsigned &Nplot,
-                                  const double &time = 0.0)
+    virtual void spacetime_output(std::ostream& outilfe,
+                                  const unsigned& Nplot,
+                                  const double& time = 0.0)
     {
     }
   };

@@ -49,12 +49,12 @@ public:
   /// \short Constructor: The arguments are the number of elements,
   /// the lengths of the domain, the fractional height of the gap
   /// next to the moving lid and the period of the lid's oscillation
-  SegregatedFSIDrivenCavityProblem(const unsigned &nx,
-                                   const unsigned &ny,
-                                   const double &lx,
-                                   const double &ly,
-                                   const double &gap_fraction,
-                                   const double &period);
+  SegregatedFSIDrivenCavityProblem(const unsigned& nx,
+                                   const unsigned& ny,
+                                   const double& lx,
+                                   const double& ly,
+                                   const double& gap_fraction,
+                                   const double& period);
 
   /// Destructor (empty)
   ~SegregatedFSIDrivenCavityProblem() {}
@@ -63,16 +63,16 @@ public:
   /// contain only elements that are involved in the respective sub-problems.
   /// This implements a pure pure virtual function in the
   /// SegregatableFSIProblem base class.
-  void identify_fluid_and_solid_dofs(Vector<Data *> &fluid_data_pt,
-                                     Vector<Data *> &solid_data_pt,
-                                     Mesh *&fluid_mesh_pt,
-                                     Mesh *&solid_mesh_pt);
+  void identify_fluid_and_solid_dofs(Vector<Data*>& fluid_data_pt,
+                                     Vector<Data*>& solid_data_pt,
+                                     Mesh*& fluid_mesh_pt,
+                                     Mesh*& solid_mesh_pt);
 
   /// \short Overload empty virtual function that is called before header for
   /// convergence history is written. This can be overloaded to insert
   /// zone information that can be used to identify
   /// the problem parameters for this solve.
-  void write_zone_info_for_convergence_history(ofstream &convergence_file);
+  void write_zone_info_for_convergence_history(ofstream& convergence_file);
 
   /// empty final overload
   void actions_after_newton_solve() {}
@@ -116,12 +116,12 @@ private:
 //===============================================================
 template<class ELEMENT>
 SegregatedFSIDrivenCavityProblem<ELEMENT>::SegregatedFSIDrivenCavityProblem(
-  const unsigned &nx,
-  const unsigned &ny,
-  const double &lx,
-  const double &ly,
-  const double &gap_fraction,
-  const double &period) :
+  const unsigned& nx,
+  const unsigned& ny,
+  const double& lx,
+  const double& ly,
+  const double& gap_fraction,
+  const double& period) :
   FSIDrivenCavityProblem<ELEMENT>(nx, ny, lx, ly, gap_fraction, period)
 {
   Max_picard = 50;
@@ -157,8 +157,7 @@ SegregatedFSIDrivenCavityProblem<ELEMENT>::SegregatedFSIDrivenCavityProblem(
 
   // Number of wall control points
   unsigned n_control = 10;
-  Vector<std::pair<GeomObject *, Vector<double>>> control_point_pairs(
-    n_control);
+  Vector<std::pair<GeomObject*, Vector<double>>> control_point_pairs(n_control);
 
   // Get wall control points
   for (unsigned i = 0; i < n_control; i++)
@@ -250,7 +249,7 @@ void SegregatedFSIDrivenCavityProblem<
 //============================================================================
 template<class ELEMENT>
 void SegregatedFSIDrivenCavityProblem<
-  ELEMENT>::write_zone_info_for_convergence_history(ofstream &convergence_file)
+  ELEMENT>::write_zone_info_for_convergence_history(ofstream& convergence_file)
 {
   convergence_file << "ZONE T=\"";
   convergence_file << "Re=" << Global_Physical_Variables::Re << ", ";
@@ -277,10 +276,10 @@ void SegregatedFSIDrivenCavityProblem<
 //============================================================================
 template<class ELEMENT>
 void SegregatedFSIDrivenCavityProblem<ELEMENT>::identify_fluid_and_solid_dofs(
-  Vector<Data *> &fluid_data_pt,
-  Vector<Data *> &solid_data_pt,
-  Mesh *&fluid_mesh_pt,
-  Mesh *&solid_mesh_pt)
+  Vector<Data*>& fluid_data_pt,
+  Vector<Data*>& solid_data_pt,
+  Mesh*& fluid_mesh_pt,
+  Mesh*& solid_mesh_pt)
 {
   // Fluid
   //------
@@ -292,7 +291,7 @@ void SegregatedFSIDrivenCavityProblem<ELEMENT>::identify_fluid_and_solid_dofs(
   unsigned n_fluid_elem = this->bulk_mesh_pt()->nelement();
   for (unsigned e = 0; e < n_fluid_elem; e++)
   {
-    GeneralisedElement *el_pt = this->bulk_mesh_pt()->element_pt(e);
+    GeneralisedElement* el_pt = this->bulk_mesh_pt()->element_pt(e);
     unsigned n_internal = el_pt->ninternal_data();
     for (unsigned j = 0; j < n_internal; j++)
     {
@@ -325,7 +324,7 @@ void SegregatedFSIDrivenCavityProblem<ELEMENT>::identify_fluid_and_solid_dofs(
   }
 
   // Build  the mesh that contains only solid elements:
-  Vector<Mesh *> s_mesh_pt(1);
+  Vector<Mesh*> s_mesh_pt(1);
   s_mesh_pt[0] = this->wall_mesh_pt();
 
   // Build "combined" mesh
@@ -341,7 +340,7 @@ void SegregatedFSIDrivenCavityProblem<ELEMENT>::identify_fluid_and_solid_dofs(
 /// Presence of command line arguments indicates validation run with
 /// coarse resolution and small number of steps.
 //=============================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

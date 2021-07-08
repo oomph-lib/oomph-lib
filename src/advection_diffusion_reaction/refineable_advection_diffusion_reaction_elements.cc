@@ -40,9 +40,9 @@ namespace oomph
   template<unsigned NREAGENT, unsigned DIM>
   void RefineableAdvectionDiffusionReactionEquations<NREAGENT, DIM>::
     fill_in_generic_residual_contribution_adv_diff_react(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix,
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
       unsigned flag)
   {
     // Find out how many nodes there are in the element

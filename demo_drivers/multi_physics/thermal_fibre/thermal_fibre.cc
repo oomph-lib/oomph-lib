@@ -103,21 +103,21 @@ namespace Global_Physical_Variables
   double eta = 0.0;
 
   /// Viscosity ratio function modeled following a Arrhenius fashion
-  void viscosity_ratio_function(double &temperature, double &result)
+  void viscosity_ratio_function(double& temperature, double& result)
   {
     result = G * exp(eta * (T_inlet - temperature));
   }
 
   /// Beta on a boundary on which r is fixed
-  void prescribed_beta_on_fixed_r_boundary(const Vector<double> &x_vector,
-                                           double &beta)
+  void prescribed_beta_on_fixed_r_boundary(const Vector<double>& x_vector,
+                                           double& beta)
   {
     beta = -Bi * T_ext;
   }
 
   /// Alfa on a boundary on which r is fixed
-  void prescribed_alpha_on_fixed_r_boundary(const Vector<double> &x_vect,
-                                            double &alpha)
+  void prescribed_alpha_on_fixed_r_boundary(const Vector<double>& x_vect,
+                                            double& alpha)
   {
     // Use alpha<0 for put T_inf<u(r,z)<T_inlet
     // alpha = -Bi and beta = -Bi*T_inf with Bi>0
@@ -142,10 +142,10 @@ public:
   /// Constructor: Pass the number of elements and the lengths of the
   /// domain in the r and z directions (h is the height of the fluid layer
   /// i.e. the length of the domain in the z direction)
-  AxisymFreeSurfaceNozzleAdvDiffRobinProblem(const unsigned &n_r,
-                                             const unsigned &n_z,
-                                             const double &l_r,
-                                             const double &h);
+  AxisymFreeSurfaceNozzleAdvDiffRobinProblem(const unsigned& n_r,
+                                             const unsigned& n_z,
+                                             const double& l_r,
+                                             const double& h);
 
   /// Destructor. Empty
   ~AxisymFreeSurfaceNozzleAdvDiffRobinProblem() {}
@@ -160,7 +160,7 @@ public:
   }
 
   /// \short Doc the solution.
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// Do steady run up to maximum time t_max with given timestep dt
   void steady_run();
@@ -176,25 +176,25 @@ private:
   /// \short Create Axisymmetric Advection Diffusion flux elements on boundary b
   /// of the Mesh pointed to by bulk_mesh_pt and add them to the Mesh object
   /// pointed to by surface_mesh_pt
-  void create_flux_elements(const unsigned &b,
-                            Mesh *const &bulk_mesh_pt,
-                            Mesh *const &surface_mesh_pt);
+  void create_flux_elements(const unsigned& b,
+                            Mesh* const& bulk_mesh_pt,
+                            Mesh* const& surface_mesh_pt);
 
   /// \short Delete Axisymmetric Advection Diffusion flux elements and wipe the
   /// surface mesh
-  void delete_flux_elements(Mesh *const &surface_mesh_pt);
+  void delete_flux_elements(Mesh* const& surface_mesh_pt);
 
   /// Pointer to the "bulk" mesh
-  HorizontalSingleLayerSpineMesh<ELEMENT> *Bulk_mesh_pt;
+  HorizontalSingleLayerSpineMesh<ELEMENT>* Bulk_mesh_pt;
 
   /// Pointer to the "surface" mesh of flux elements
-  Mesh *Surface_mesh_pt;
+  Mesh* Surface_mesh_pt;
 
   /// Pointer to the mesh of interface elements
-  Mesh *Interface_mesh_pt;
+  Mesh* Interface_mesh_pt;
 
   /// Deform the mesh/free surface to a prescribed function
-  void deform_free_surface(const double &Dr)
+  void deform_free_surface(const double& Dr)
   {
     // Determine number of spines in mesh
     const unsigned n_spine = Bulk_mesh_pt->nspine();
@@ -234,10 +234,10 @@ private:
 //========================================================================
 template<class ELEMENT>
 AxisymFreeSurfaceNozzleAdvDiffRobinProblem<
-  ELEMENT>::AxisymFreeSurfaceNozzleAdvDiffRobinProblem(const unsigned &n_r,
-                                                       const unsigned &n_z,
-                                                       const double &l_r,
-                                                       const double &h) :
+  ELEMENT>::AxisymFreeSurfaceNozzleAdvDiffRobinProblem(const unsigned& n_r,
+                                                       const unsigned& n_z,
+                                                       const double& l_r,
+                                                       const double& h) :
   Lr(l_r), Height(h)
 {
   // Build and assign mesh
@@ -253,14 +253,14 @@ AxisymFreeSurfaceNozzleAdvDiffRobinProblem<
     for (unsigned e = 0; e < n_element; e++)
     {
       // Get pointer to the bulk element that is adjacent to boundary b
-      ELEMENT *bulk_elem_pt =
-        dynamic_cast<ELEMENT *>(Bulk_mesh_pt->boundary_element_pt(1, e));
+      ELEMENT* bulk_elem_pt =
+        dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(1, e));
 
       // Find the index of the face of element e along boundary b
       int face_index = Bulk_mesh_pt->face_index_at_boundary(1, e);
 
       // Build the corresponding free surface element
-      SpineAxisymmetricFluidInterfaceElement<ELEMENT> *interface_element_pt =
+      SpineAxisymmetricFluidInterfaceElement<ELEMENT>* interface_element_pt =
         new SpineAxisymmetricFluidInterfaceElement<ELEMENT>(bulk_elem_pt,
                                                             face_index);
 
@@ -369,7 +369,7 @@ AxisymFreeSurfaceNozzleAdvDiffRobinProblem<
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -391,7 +391,7 @@ AxisymFreeSurfaceNozzleAdvDiffRobinProblem<
   } // End of loop over elements
 
   // Create a Data object whose single value stores the external pressure
-  Data *external_pressure_data_pt = new Data(1);
+  Data* external_pressure_data_pt = new Data(1);
 
   // Pin and set the external pressure to some arbitrary value
   double p_ext = Global_Physical_Variables::P_ext;
@@ -406,8 +406,8 @@ AxisymFreeSurfaceNozzleAdvDiffRobinProblem<
   for (unsigned e = 0; e < n_interface_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    SpineAxisymmetricFluidInterfaceElement<ELEMENT> *el_pt =
-      dynamic_cast<SpineAxisymmetricFluidInterfaceElement<ELEMENT> *>(
+    SpineAxisymmetricFluidInterfaceElement<ELEMENT>* el_pt =
+      dynamic_cast<SpineAxisymmetricFluidInterfaceElement<ELEMENT>*>(
         Interface_mesh_pt->element_pt(e));
 
     // Set the Capillary number
@@ -424,8 +424,8 @@ AxisymFreeSurfaceNozzleAdvDiffRobinProblem<
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to AdvectionDiffusion flux element
-    SteadyAxisymAdvectionDiffusionFluxElement<ELEMENT> *el_pt =
-      dynamic_cast<SteadyAxisymAdvectionDiffusionFluxElement<ELEMENT> *>(
+    SteadyAxisymAdvectionDiffusionFluxElement<ELEMENT>* el_pt =
+      dynamic_cast<SteadyAxisymAdvectionDiffusionFluxElement<ELEMENT>*>(
         Surface_mesh_pt->element_pt(e));
     if (e < n_element) // Free surface
     {
@@ -546,7 +546,7 @@ void AxisymFreeSurfaceNozzleAdvDiffRobinProblem<
 //========================================================================
 template<class ELEMENT>
 void AxisymFreeSurfaceNozzleAdvDiffRobinProblem<ELEMENT>::doc_solution(
-  DocInfo &doc_info)
+  DocInfo& doc_info)
 {
   // Declare an output stream and filename
   ofstream some_file;
@@ -568,7 +568,7 @@ void AxisymFreeSurfaceNozzleAdvDiffRobinProblem<ELEMENT>::doc_solution(
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
     // Set the Reynolds number
     el_pt->output(some_file, npts);
@@ -586,7 +586,7 @@ void AxisymFreeSurfaceNozzleAdvDiffRobinProblem<ELEMENT>::doc_solution(
 //=======================================================================
 template<class ELEMENT>
 void AxisymFreeSurfaceNozzleAdvDiffRobinProblem<ELEMENT>::create_flux_elements(
-  const unsigned &b, Mesh *const &bulk_mesh_pt, Mesh *const &surface_mesh_pt)
+  const unsigned& b, Mesh* const& bulk_mesh_pt, Mesh* const& surface_mesh_pt)
 {
   // How many bulk elements are adjacent to boundary b?
   unsigned n_element = bulk_mesh_pt->nboundary_element(b);
@@ -595,14 +595,14 @@ void AxisymFreeSurfaceNozzleAdvDiffRobinProblem<ELEMENT>::create_flux_elements(
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    ELEMENT *bulk_elem_pt =
-      dynamic_cast<ELEMENT *>(bulk_mesh_pt->boundary_element_pt(b, e));
+    ELEMENT* bulk_elem_pt =
+      dynamic_cast<ELEMENT*>(bulk_mesh_pt->boundary_element_pt(b, e));
 
     // Find the index of the face of element e along boundary b
     int face_index = bulk_mesh_pt->face_index_at_boundary(b, e);
 
     // Build the corresponding prescribed-flux element
-    SteadyAxisymAdvectionDiffusionFluxElement<ELEMENT> *flux_element_pt =
+    SteadyAxisymAdvectionDiffusionFluxElement<ELEMENT>* flux_element_pt =
       new SteadyAxisymAdvectionDiffusionFluxElement<ELEMENT>(bulk_elem_pt,
                                                              face_index);
 
@@ -618,7 +618,7 @@ void AxisymFreeSurfaceNozzleAdvDiffRobinProblem<ELEMENT>::create_flux_elements(
 //=======================================================================
 template<class ELEMENT>
 void AxisymFreeSurfaceNozzleAdvDiffRobinProblem<ELEMENT>::delete_flux_elements(
-  Mesh *const &surface_mesh_pt)
+  Mesh* const& surface_mesh_pt)
 {
   // How many surface elements are in the surface mesh
   unsigned n_element = surface_mesh_pt->nelement();
@@ -696,7 +696,7 @@ void AxisymFreeSurfaceNozzleAdvDiffRobinProblem<ELEMENT>::steady_run()
 //=======start_of_main================================================
 /// Driver code for 2D Boussinesq convection problem
 //====================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

@@ -48,11 +48,11 @@ class ElementCmp
 {
 public:
   /// Comparison. Are the values identical or not?
-  bool operator()(GeneralisedElement *const &x,
-                  GeneralisedElement *const &y) const
+  bool operator()(GeneralisedElement* const& x,
+                  GeneralisedElement* const& y) const
   {
-    FiniteElement *cast_x = dynamic_cast<FiniteElement *>(x);
-    FiniteElement *cast_y = dynamic_cast<FiniteElement *>(y);
+    FiniteElement* cast_x = dynamic_cast<FiniteElement*>(x);
+    FiniteElement* cast_y = dynamic_cast<FiniteElement*>(y);
 
     if ((cast_x == 0) || (cast_y == 0))
     {
@@ -125,17 +125,17 @@ public:
   /// \short Overloaded version of the problem's access function to
   /// the NST mesh. Recasts the pointer to the base Mesh object to
   /// the actual mesh type.
-  RefineableSimpleCubicMesh<NST_ELEMENT> *nst_mesh_pt()
+  RefineableSimpleCubicMesh<NST_ELEMENT>* nst_mesh_pt()
   {
-    return dynamic_cast<RefineableSimpleCubicMesh<NST_ELEMENT> *>(Nst_mesh_pt);
+    return dynamic_cast<RefineableSimpleCubicMesh<NST_ELEMENT>*>(Nst_mesh_pt);
   }
 
   /// \short Overloaded version of the problem's access function to
   /// the AD mesh. Recasts the pointer to the base Mesh object to
   /// the actual mesh type.
-  RefineableSimpleCubicMesh<AD_ELEMENT> *adv_diff_mesh_pt()
+  RefineableSimpleCubicMesh<AD_ELEMENT>* adv_diff_mesh_pt()
   {
-    return dynamic_cast<RefineableSimpleCubicMesh<AD_ELEMENT> *>(
+    return dynamic_cast<RefineableSimpleCubicMesh<AD_ELEMENT>*>(
       Adv_diff_mesh_pt);
   }
 
@@ -166,8 +166,8 @@ private:
   double Lz;
 
 protected:
-  RefineableSimpleCubicMesh<NST_ELEMENT> *Nst_mesh_pt;
-  RefineableSimpleCubicMesh<AD_ELEMENT> *Adv_diff_mesh_pt;
+  RefineableSimpleCubicMesh<NST_ELEMENT>* Nst_mesh_pt;
+  RefineableSimpleCubicMesh<AD_ELEMENT>* Adv_diff_mesh_pt;
 
 }; // end of problem class
 
@@ -278,8 +278,8 @@ RefineableConvectionProblem<NST_ELEMENT,
   for (unsigned i = 0; i < n_nst_element; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    NST_ELEMENT *el_pt =
-      dynamic_cast<NST_ELEMENT *>(nst_mesh_pt()->element_pt(i));
+    NST_ELEMENT* el_pt =
+      dynamic_cast<NST_ELEMENT*>(nst_mesh_pt()->element_pt(i));
 
     // Set the Reynolds number (1/Pr in our non-dimensionalisation)
     el_pt->re_pt() = &Global_Physical_Variables::Reynolds;
@@ -298,8 +298,8 @@ RefineableConvectionProblem<NST_ELEMENT,
   for (unsigned i = 0; i < n_ad_element; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    AD_ELEMENT *el_pt =
-      dynamic_cast<AD_ELEMENT *>(adv_diff_mesh_pt()->element_pt(i));
+    AD_ELEMENT* el_pt =
+      dynamic_cast<AD_ELEMENT*>(adv_diff_mesh_pt()->element_pt(i));
 
     // Set the Peclet number
     el_pt->pe_pt() = &Global_Physical_Variables::Peclet;
@@ -339,7 +339,7 @@ void RefineableConvectionProblem<NST_ELEMENT, AD_ELEMENT>::
   // Set this to higher than default (10)
   Problem::Max_newton_iterations = 20;
   // Build iterative linear solver
-  GMRES<CRDoubleMatrix> *iterative_linear_solver_pt = new GMRES<CRDoubleMatrix>;
+  GMRES<CRDoubleMatrix>* iterative_linear_solver_pt = new GMRES<CRDoubleMatrix>;
 
   // Set maximum number of iterations
   iterative_linear_solver_pt->max_iter() = 100;
@@ -347,7 +347,7 @@ void RefineableConvectionProblem<NST_ELEMENT, AD_ELEMENT>::
   // Set tolerance
   iterative_linear_solver_pt->tolerance() = 1.0e-8;
 
-  FSIPreconditioner *prec_pt = new FSIPreconditioner(this);
+  FSIPreconditioner* prec_pt = new FSIPreconditioner(this);
 
   // Tell preconditioner about meshes
   prec_pt->set_navier_stokes_mesh(Nst_mesh_pt);
@@ -370,29 +370,29 @@ void RefineableConvectionProblem<NST_ELEMENT, AD_ELEMENT>::
 #endif
   {
     // Need to create a SuperLUDistPreconditioner for the temperature ("solid")
-    HyprePreconditioner *Temperature_prec_pt = new HyprePreconditioner;
+    HyprePreconditioner* Temperature_prec_pt = new HyprePreconditioner;
     Hypre_default_settings::set_defaults_for_navier_stokes_momentum_block(
-      static_cast<HyprePreconditioner *>(Temperature_prec_pt));
+      static_cast<HyprePreconditioner*>(Temperature_prec_pt));
     // SuperLUPreconditioner* Temperature_prec_pt =new SuperLUPreconditioner;
     prec_pt->set_solid_preconditioner_pt(Temperature_prec_pt);
 
     // Set up the internal preconditioners
-    Preconditioner *P_matrix_preconditioner_pt = new HyprePreconditioner;
+    Preconditioner* P_matrix_preconditioner_pt = new HyprePreconditioner;
 
     // Set parameters for use as preconditioner on Poisson-type problem
     Hypre_default_settings::set_defaults_for_3D_poisson_problem(
-      static_cast<HyprePreconditioner *>(P_matrix_preconditioner_pt));
+      static_cast<HyprePreconditioner*>(P_matrix_preconditioner_pt));
 
     // Use Hypre for the Schur complement block
     prec_pt->navier_stokes_preconditioner_pt()->set_p_preconditioner(
       P_matrix_preconditioner_pt);
 
-    Preconditioner *F_matrix_preconditioner_pt = new HyprePreconditioner;
+    Preconditioner* F_matrix_preconditioner_pt = new HyprePreconditioner;
 
     // Set parameters for use as preconditioner in for momentum
     // block in Navier-Stokes problem
     Hypre_default_settings::set_defaults_for_navier_stokes_momentum_block(
-      static_cast<HyprePreconditioner *>(F_matrix_preconditioner_pt));
+      static_cast<HyprePreconditioner*>(F_matrix_preconditioner_pt));
 
     // Use Hypre for momentum block
     prec_pt->navier_stokes_preconditioner_pt()->set_f_preconditioner(
@@ -429,7 +429,7 @@ void RefineableConvectionProblem<NST_ELEMENT,
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Get pointer to node
-      Node *nod_pt = nst_mesh_pt()->boundary_node_pt(ibound, inod);
+      Node* nod_pt = nst_mesh_pt()->boundary_node_pt(ibound, inod);
 
       // If we are on the inlet
       if (ibound == 0)
@@ -496,7 +496,7 @@ void RefineableConvectionProblem<NST_ELEMENT,
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Get pointer to node
-      Node *nod_pt = adv_diff_mesh_pt()->boundary_node_pt(ibound, inod);
+      Node* nod_pt = adv_diff_mesh_pt()->boundary_node_pt(ibound, inod);
 
       // If we are on the inlet
       if (ibound == 0)
@@ -571,7 +571,7 @@ void RefineableConvectionProblem<NST_ELEMENT, AD_ELEMENT>::doc_solution()
 /// Driver code for 3D Boussinesq convection problem with
 /// adaptivity.
 //====================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Uncomment this to turn this into a parallel code
   //#ifdef OOMPH_HAS_MPI

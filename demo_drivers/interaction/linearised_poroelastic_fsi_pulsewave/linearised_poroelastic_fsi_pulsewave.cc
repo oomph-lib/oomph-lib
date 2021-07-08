@@ -161,10 +161,10 @@ namespace Global_Physical_Variables
   double Q = 1.0e-9;
 
   /// Inflow traction applied to the fluid mesh
-  void fluid_inflow_boundary_traction(const double &time,
-                                      const Vector<double> &x,
-                                      const Vector<double> &n,
-                                      Vector<double> &result)
+  void fluid_inflow_boundary_traction(const double& time,
+                                      const Vector<double>& x,
+                                      const Vector<double>& n,
+                                      Vector<double>& result)
   {
     result[0] = 0.0;
     result[1] = P_inlet_const;
@@ -287,7 +287,7 @@ namespace Global_Physical_Variables
 
   /// \short Global function that completes the edge sign setup
   template<class ELEMENT>
-  void edge_sign_setup(Mesh *mesh_pt)
+  void edge_sign_setup(Mesh* mesh_pt)
   {
     // The dictionary keeping track of edge signs
     std::map<Edge, unsigned> assignments;
@@ -296,7 +296,7 @@ namespace Global_Physical_Variables
     unsigned n_element = mesh_pt->nelement();
     for (unsigned e = 0; e < n_element; e++)
     {
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt->element_pt(e));
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt->element_pt(e));
 
       // Assign edge signs: Loop over the vertex nodes (always
       // first 3 nodes for triangles)
@@ -364,50 +364,50 @@ public:
   }
 
   /// Doc solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 private:
   /// Setup fsi
   void setup_fsi();
 
   /// Fluid mesh
-  TriangleMesh<FLUID_ELEMENT> *Fluid_mesh_pt;
+  TriangleMesh<FLUID_ELEMENT>* Fluid_mesh_pt;
 
   /// Poroelasticity mesh
-  TriangleMesh<POROELASTICITY_ELEMENT> *Poro_mesh_pt;
+  TriangleMesh<POROELASTICITY_ELEMENT>* Poro_mesh_pt;
 
   /// Poroelasticity surface mesh at FSI interface
-  Mesh *FSI_poro_surface_mesh_pt;
+  Mesh* FSI_poro_surface_mesh_pt;
 
   /// Inflow fluid surface mesh
-  Mesh *Inflow_fluid_surface_mesh_pt;
+  Mesh* Inflow_fluid_surface_mesh_pt;
 
   /// FSI fluid surface mesh
-  Mesh *FSI_fluid_surface_mesh_pt;
+  Mesh* FSI_fluid_surface_mesh_pt;
 
   /// Pointer to the poroelasticity timestepper
-  TimeStepper *Poro_time_stepper_pt;
+  TimeStepper* Poro_time_stepper_pt;
 
   /// Pointer to the fluid timestepper
-  TimeStepper *Fluid_time_stepper_pt;
+  TimeStepper* Fluid_time_stepper_pt;
 
   /// Id for Lagrange multiplier that enforces (no-)slip on fluid
   unsigned Lagrange_id;
 
   /// \short Mesh as geom object representation of fluid mesh
-  MeshAsGeomObject *Fluid_mesh_geom_obj_pt;
+  MeshAsGeomObject* Fluid_mesh_geom_obj_pt;
 
   /// \short Vector of pairs containing pointers to elements and
   /// local coordinates within them for regularly spaced plot points
-  Vector<std::pair<FLUID_ELEMENT *, Vector<double>>>
+  Vector<std::pair<FLUID_ELEMENT*, Vector<double>>>
     Fluid_regularly_spaced_plot_point;
 
   /// \short Mesh as geom object representation of solid mesh
-  MeshAsGeomObject *Solid_mesh_geom_obj_pt;
+  MeshAsGeomObject* Solid_mesh_geom_obj_pt;
 
   /// \short Vector of pairs containing pointers to elements and
   /// local coordinates within them for regularly spaced plot points
-  Vector<std::pair<POROELASTICITY_ELEMENT *, Vector<double>>>
+  Vector<std::pair<POROELASTICITY_ELEMENT*, Vector<double>>>
     Solid_regularly_spaced_plot_point;
 
   /// Enumeration of fluid boundaries
@@ -481,7 +481,7 @@ PressureWaveFSIProblem<FLUID_ELEMENT,
   fluid_vertex_coords[6][1] = 0.0;
 
   // Loop over the vertices and create a polyline between each consecutive pair
-  Vector<TriangleMeshCurveSection *> fluid_outer_polyline_boundary_pt(4);
+  Vector<TriangleMeshCurveSection*> fluid_outer_polyline_boundary_pt(4);
   unsigned vertex_count = 0;
   for (unsigned i = 0; i < 4; i++)
   {
@@ -507,33 +507,33 @@ PressureWaveFSIProblem<FLUID_ELEMENT,
 
   // Internal boundary forcing at least one layer of elements
   // within a nominal boundary layer near the wall
-  Vector<TriangleMeshOpenCurve *> bl_boundary_pt(1);
+  Vector<TriangleMeshOpenCurve*> bl_boundary_pt(1);
   Vector<Vector<double>> bl_coord(2, Vector<double>(2));
   bl_coord[0][0] = fluid_vertex_coords[1][0];
   bl_coord[0][1] = fluid_vertex_coords[1][1];
   bl_coord[1][0] = fluid_vertex_coords[4][0];
   bl_coord[1][1] = fluid_vertex_coords[4][1];
-  TriangleMeshPolyLine *bl_polyline_pt =
+  TriangleMeshPolyLine* bl_polyline_pt =
     new TriangleMeshPolyLine(bl_coord, Internal_boundary_layer_fluid_boundary);
 
   // Connect start point to first node on lower outer boundary polyline
   bl_polyline_pt->connect_initial_vertex_to_polyline(
-    dynamic_cast<TriangleMeshPolyLine *>(fluid_outer_polyline_boundary_pt[0]),
+    dynamic_cast<TriangleMeshPolyLine*>(fluid_outer_polyline_boundary_pt[0]),
     1);
 
   // Connect end point to first node on upper outer boundary polyline
   bl_polyline_pt->connect_final_vertex_to_polyline(
-    dynamic_cast<TriangleMeshPolyLine *>(fluid_outer_polyline_boundary_pt[2]),
+    dynamic_cast<TriangleMeshPolyLine*>(fluid_outer_polyline_boundary_pt[2]),
     1);
 
-  Vector<TriangleMeshCurveSection *> bl_curve_section_pt(1);
+  Vector<TriangleMeshCurveSection*> bl_curve_section_pt(1);
   bl_curve_section_pt[0] = bl_polyline_pt;
 
-  Vector<TriangleMeshOpenCurve *> bl_open_boundary_pt(1);
+  Vector<TriangleMeshOpenCurve*> bl_open_boundary_pt(1);
   bl_open_boundary_pt[0] = new TriangleMeshOpenCurve(bl_curve_section_pt);
 
   // Create the outer boundary closed curve
-  TriangleMeshClosedCurve *fluid_outer_boundary_pt =
+  TriangleMeshClosedCurve* fluid_outer_boundary_pt =
     new TriangleMeshClosedCurve(fluid_outer_polyline_boundary_pt);
 
   // Use the TriangleMeshParameters object for gathering all
@@ -575,14 +575,14 @@ PressureWaveFSIProblem<FLUID_ELEMENT,
         double(iz) / double(nplot_z - 1) * Global_Physical_Variables::Length;
 
       // Pointer to GeomObject that contains this point
-      GeomObject *geom_obj_pt = 0;
+      GeomObject* geom_obj_pt = 0;
 
       // Get it
       Fluid_mesh_geom_obj_pt->locate_zeta(x, geom_obj_pt, s);
 
       // Store it
       Fluid_regularly_spaced_plot_point[count].first =
-        dynamic_cast<FLUID_ELEMENT *>(geom_obj_pt);
+        dynamic_cast<FLUID_ELEMENT*>(geom_obj_pt);
       Fluid_regularly_spaced_plot_point[count].second = s;
 
       count++;
@@ -613,7 +613,7 @@ PressureWaveFSIProblem<FLUID_ELEMENT,
 
   // Loop over the vertices and create a polyline between each consecutive pair
   Vector<Vector<double>> temp_coord(2, Vector<double>(2));
-  Vector<TriangleMeshCurveSection *> poro_outer_polyline_boundary_pt(4);
+  Vector<TriangleMeshCurveSection*> poro_outer_polyline_boundary_pt(4);
   for (unsigned i = 0; i < 4; i++)
   {
     // =============================================================
@@ -631,11 +631,11 @@ PressureWaveFSIProblem<FLUID_ELEMENT,
   }
 
   // Create the outer boundary closed curve
-  TriangleMeshClosedCurve *poro_outer_boundary_pt =
+  TriangleMeshClosedCurve* poro_outer_boundary_pt =
     new TriangleMeshClosedCurve(poro_outer_polyline_boundary_pt);
 
   // Internal boundary to prevent problem with flux B.C.s
-  Vector<TriangleMeshOpenCurve *> poro_inner_open_boundary_pt;
+  Vector<TriangleMeshOpenCurve*> poro_inner_open_boundary_pt;
 
   // We need 2 inner boundaries to split the corners
   poro_inner_open_boundary_pt.resize(2);
@@ -656,18 +656,16 @@ PressureWaveFSIProblem<FLUID_ELEMENT,
   temp_inner_coord[3][0] = Global_Physical_Variables::Inner_radius;
   temp_inner_coord[3][1] = Global_Physical_Variables::Length;
 
-  TriangleMeshPolyLine *poro_inner_open_polyline1_pt =
+  TriangleMeshPolyLine* poro_inner_open_polyline1_pt =
     new TriangleMeshPolyLine(temp_inner_coord, Bottom_internal_poro_boundary);
 
   poro_inner_open_polyline1_pt->connect_initial_vertex_to_polyline(
-    dynamic_cast<TriangleMeshPolyLine *>(poro_outer_polyline_boundary_pt[0]),
-    0);
+    dynamic_cast<TriangleMeshPolyLine*>(poro_outer_polyline_boundary_pt[0]), 0);
 
   poro_inner_open_polyline1_pt->connect_final_vertex_to_polyline(
-    dynamic_cast<TriangleMeshPolyLine *>(poro_outer_polyline_boundary_pt[3]),
-    0);
+    dynamic_cast<TriangleMeshPolyLine*>(poro_outer_polyline_boundary_pt[3]), 0);
 
-  Vector<TriangleMeshCurveSection *> poro_inner_open_polyline1_curve_section_pt(
+  Vector<TriangleMeshCurveSection*> poro_inner_open_polyline1_curve_section_pt(
     1);
   poro_inner_open_polyline1_curve_section_pt[0] = poro_inner_open_polyline1_pt;
 
@@ -687,12 +685,11 @@ PressureWaveFSIProblem<FLUID_ELEMENT,
   temp_inner_coord[3][0] = Global_Physical_Variables::Outer_radius;
   temp_inner_coord[3][1] = 0.0;
 
-  TriangleMeshPolyLine *poro_inner_open_polyline2_pt =
+  TriangleMeshPolyLine* poro_inner_open_polyline2_pt =
     new TriangleMeshPolyLine(temp_inner_coord, Top_internal_poro_boundary);
 
   poro_inner_open_polyline2_pt->connect_initial_vertex_to_polyline(
-    dynamic_cast<TriangleMeshPolyLine *>(poro_outer_polyline_boundary_pt[2]),
-    0);
+    dynamic_cast<TriangleMeshPolyLine*>(poro_outer_polyline_boundary_pt[2]), 0);
 
   // // hierher JULIO: WHY DOES THIS: not work?
   // poro_inner_open_polyline2_pt->connect_final_vertex_to_polyline(
@@ -700,10 +697,9 @@ PressureWaveFSIProblem<FLUID_ELEMENT,
   //   (poro_outer_polyline_boundary_pt[2]),1);
 
   poro_inner_open_polyline2_pt->connect_final_vertex_to_polyline(
-    dynamic_cast<TriangleMeshPolyLine *>(poro_outer_polyline_boundary_pt[0]),
-    1);
+    dynamic_cast<TriangleMeshPolyLine*>(poro_outer_polyline_boundary_pt[0]), 1);
 
-  Vector<TriangleMeshCurveSection *> poro_inner_open_polyline2_curve_section_pt(
+  Vector<TriangleMeshCurveSection*> poro_inner_open_polyline2_curve_section_pt(
     1);
   poro_inner_open_polyline2_curve_section_pt[0] = poro_inner_open_polyline2_pt;
 
@@ -748,14 +744,14 @@ PressureWaveFSIProblem<FLUID_ELEMENT,
         double(iz) / double(nplot_z - 1) * Global_Physical_Variables::Length;
 
       // Pointer to GeomObject that contains this point
-      GeomObject *geom_obj_pt = 0;
+      GeomObject* geom_obj_pt = 0;
 
       // Get it
       Solid_mesh_geom_obj_pt->locate_zeta(x, geom_obj_pt, s);
 
       // Store it
       Solid_regularly_spaced_plot_point[count].first =
-        dynamic_cast<POROELASTICITY_ELEMENT *>(geom_obj_pt);
+        dynamic_cast<POROELASTICITY_ELEMENT*>(geom_obj_pt);
       Solid_regularly_spaced_plot_point[count].second = s;
 
       count++;
@@ -785,8 +781,8 @@ PressureWaveFSIProblem<FLUID_ELEMENT,
   for (unsigned e = 0; e < n_element; e++)
   {
     // Cast to the particular element type
-    FLUID_ELEMENT *el_pt =
-      dynamic_cast<FLUID_ELEMENT *>(Fluid_mesh_pt->element_pt(e));
+    FLUID_ELEMENT* el_pt =
+      dynamic_cast<FLUID_ELEMENT*>(Fluid_mesh_pt->element_pt(e));
 
     // There is no need for ALE
     el_pt->disable_ALE();
@@ -801,7 +797,7 @@ PressureWaveFSIProblem<FLUID_ELEMENT,
     unsigned n_node = el_pt->nnode();
     for (unsigned n = 0; n < n_node; n++)
     {
-      Node *nod_pt = el_pt->node_pt(n);
+      Node* nod_pt = el_pt->node_pt(n);
       nod_pt->pin(2);
     }
   }
@@ -815,8 +811,8 @@ PressureWaveFSIProblem<FLUID_ELEMENT,
   for (unsigned e = 0; e < n_element; e++)
   {
     // Cast to a bulk element
-    POROELASTICITY_ELEMENT *el_pt =
-      dynamic_cast<POROELASTICITY_ELEMENT *>(Poro_mesh_pt->element_pt(e));
+    POROELASTICITY_ELEMENT* el_pt =
+      dynamic_cast<POROELASTICITY_ELEMENT*>(Poro_mesh_pt->element_pt(e));
 
     // Set the pointer to Poisson's ratio
     el_pt->nu_pt() = &Global_Physical_Variables::Nu;
@@ -866,7 +862,7 @@ PressureWaveFSIProblem<FLUID_ELEMENT,
       unsigned n_boundary_node = Fluid_mesh_pt->nboundary_node(b);
       for (unsigned n = 0; n < n_boundary_node; ++n)
       {
-        Node *nod_pt = Fluid_mesh_pt->boundary_node_pt(b, n);
+        Node* nod_pt = Fluid_mesh_pt->boundary_node_pt(b, n);
         nod_pt->pin(0);
 
         // If node is also on FSI boundary it must be on in/outflow:
@@ -891,7 +887,7 @@ PressureWaveFSIProblem<FLUID_ELEMENT,
       unsigned n_boundary_node = Poro_mesh_pt->nboundary_node(b);
       for (unsigned n = 0; n < n_boundary_node; n++)
       {
-        Node *nod_pt = Poro_mesh_pt->boundary_node_pt(b, n);
+        Node* nod_pt = Poro_mesh_pt->boundary_node_pt(b, n);
 
         // pin the solid displacement
         nod_pt->pin(0);
@@ -916,19 +912,19 @@ PressureWaveFSIProblem<FLUID_ELEMENT,
   {
     // Get face element
     LinearisedAxisymPoroelasticBJS_FSIElement<FLUID_ELEMENT,
-                                              POROELASTICITY_ELEMENT>
-      *traction_element_pt = dynamic_cast<
+                                              POROELASTICITY_ELEMENT>*
+      traction_element_pt = dynamic_cast<
         LinearisedAxisymPoroelasticBJS_FSIElement<FLUID_ELEMENT,
-                                                  POROELASTICITY_ELEMENT> *>(
+                                                  POROELASTICITY_ELEMENT>*>(
         FSI_fluid_surface_mesh_pt->element_pt(e));
 
     unsigned n_node = traction_element_pt->nnode();
     for (unsigned n = 0; n < n_node; n++)
     {
-      Node *nod_pt = traction_element_pt->node_pt(n);
+      Node* nod_pt = traction_element_pt->node_pt(n);
 
       // Cast to a boundary node
-      BoundaryNodeBase *bnod_pt = dynamic_cast<BoundaryNodeBase *>(nod_pt);
+      BoundaryNodeBase* bnod_pt = dynamic_cast<BoundaryNodeBase*>(nod_pt);
 
       // Get the index of the first nodal value associated with
       // this FaceElement
@@ -985,8 +981,8 @@ void PressureWaveFSIProblem<FLUID_ELEMENT, POROELASTICITY_ELEMENT>::
   {
     // Create the face element that applies pressure boundary condition
     // at inflow
-    AxisymmetricNavierStokesTractionElement<FLUID_ELEMENT>
-      *traction_element_pt =
+    AxisymmetricNavierStokesTractionElement<FLUID_ELEMENT>*
+      traction_element_pt =
         new AxisymmetricNavierStokesTractionElement<FLUID_ELEMENT>(
           Fluid_mesh_pt->boundary_element_pt(bound, e),
           Fluid_mesh_pt->face_index_at_boundary(bound, e));
@@ -1010,8 +1006,8 @@ void PressureWaveFSIProblem<FLUID_ELEMENT, POROELASTICITY_ELEMENT>::
     // Create the face element that imposes [no] slip (Beavers Joseph Saffman)
     // condition at FSI interface
     LinearisedAxisymPoroelasticBJS_FSIElement<FLUID_ELEMENT,
-                                              POROELASTICITY_ELEMENT>
-      *traction_element_pt =
+                                              POROELASTICITY_ELEMENT>*
+      traction_element_pt =
         new LinearisedAxisymPoroelasticBJS_FSIElement<FLUID_ELEMENT,
                                                       POROELASTICITY_ELEMENT>(
           Fluid_mesh_pt->boundary_element_pt(bound, e),
@@ -1054,7 +1050,7 @@ void PressureWaveFSIProblem<FLUID_ELEMENT,
     // solid
     FSILinearisedAxisymPoroelasticTractionElement<
       POROELASTICITY_ELEMENT,
-      FLUID_ELEMENT> *face_element_pt =
+      FLUID_ELEMENT>* face_element_pt =
       new FSILinearisedAxisymPoroelasticTractionElement<POROELASTICITY_ELEMENT,
                                                         FLUID_ELEMENT>(
         Poro_mesh_pt->boundary_element_pt(bound, n),
@@ -1102,7 +1098,7 @@ void PressureWaveFSIProblem<FLUID_ELEMENT, POROELASTICITY_ELEMENT>::setup_fsi()
 //==========================================================================
 template<class FLUID_ELEMENT, class POROELASTICITY_ELEMENT>
 void PressureWaveFSIProblem<FLUID_ELEMENT, POROELASTICITY_ELEMENT>::
-  doc_solution(DocInfo &doc_info)
+  doc_solution(DocInfo& doc_info)
 {
   oomph_info << "Outputting step " << doc_info.number() << " for time "
              << time_pt()->time() << std::endl;
@@ -1163,7 +1159,7 @@ void PressureWaveFSIProblem<FLUID_ELEMENT, POROELASTICITY_ELEMENT>::
   for (unsigned i = 0; i < npts; i++)
   {
     // Pointer to element
-    FLUID_ELEMENT *el_pt = Fluid_regularly_spaced_plot_point[i].first;
+    FLUID_ELEMENT* el_pt = Fluid_regularly_spaced_plot_point[i].first;
 
     // Coordinates in it
     s = Fluid_regularly_spaced_plot_point[i].second;
@@ -1227,7 +1223,7 @@ void PressureWaveFSIProblem<FLUID_ELEMENT, POROELASTICITY_ELEMENT>::
   for (unsigned i = 0; i < npts; i++)
   {
     // Pointer to element
-    POROELASTICITY_ELEMENT *el_pt = Solid_regularly_spaced_plot_point[i].first;
+    POROELASTICITY_ELEMENT* el_pt = Solid_regularly_spaced_plot_point[i].first;
 
     // Coordinates in it
     s = Solid_regularly_spaced_plot_point[i].second;
@@ -1257,7 +1253,7 @@ void PressureWaveFSIProblem<FLUID_ELEMENT, POROELASTICITY_ELEMENT>::
 //================================================================
 // Driver code
 //================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

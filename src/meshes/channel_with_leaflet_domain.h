@@ -52,15 +52,15 @@ namespace oomph
     /// the number of rows of elements from the bottom of the channel to
     /// the end of the leaflet, the number of rows of elements above the
     /// end of the leaflet.
-    ChannelWithLeafletDomain(GeomObject *leaflet_pt,
-                             const double &lleft,
-                             const double &lright,
-                             const double &hleaflet,
-                             const double &htot,
-                             const unsigned &nleft,
-                             const unsigned &nright,
-                             const unsigned &ny1,
-                             const unsigned &ny2)
+    ChannelWithLeafletDomain(GeomObject* leaflet_pt,
+                             const double& lleft,
+                             const double& lright,
+                             const double& hleaflet,
+                             const double& htot,
+                             const unsigned& nleft,
+                             const unsigned& nright,
+                             const unsigned& ny1,
+                             const unsigned& ny2)
     {
       // Copy assignments into private storage
       Lleft = lleft;
@@ -126,134 +126,134 @@ namespace oomph
     }
 
     /// Pointer to the wall
-    GeomObject *&leaflet_pt()
+    GeomObject*& leaflet_pt()
     {
       return Leaflet_pt;
     };
 
     /// Parametrisation of macro element boundaries
-    void macro_element_boundary(const unsigned &t,
-                                const unsigned &imacro,
-                                const unsigned &idirect,
-                                const Vector<double> &zeta,
-                                Vector<double> &r);
+    void macro_element_boundary(const unsigned& t,
+                                const unsigned& imacro,
+                                const unsigned& idirect,
+                                const Vector<double>& zeta,
+                                Vector<double>& r);
 
   protected:
     /// Helper function
-    void macro_bound_I_N(const unsigned &t,
-                         const Vector<double> &zeta,
-                         Vector<double> &r,
-                         const unsigned &i,
-                         const unsigned &j);
+    void macro_bound_I_N(const unsigned& t,
+                         const Vector<double>& zeta,
+                         Vector<double>& r,
+                         const unsigned& i,
+                         const unsigned& j);
 
     /// Helper function
-    void macro_bound_I_S(const unsigned &t,
-                         const Vector<double> &zeta,
-                         Vector<double> &r,
-                         const unsigned &i,
-                         const unsigned &j);
+    void macro_bound_I_S(const unsigned& t,
+                         const Vector<double>& zeta,
+                         Vector<double>& r,
+                         const unsigned& i,
+                         const unsigned& j);
 
     /// Helper function
-    void macro_bound_I_W(const unsigned &t,
-                         const Vector<double> &zeta,
-                         Vector<double> &r,
-                         const unsigned &i,
-                         const unsigned &j);
+    void macro_bound_I_W(const unsigned& t,
+                         const Vector<double>& zeta,
+                         Vector<double>& r,
+                         const unsigned& i,
+                         const unsigned& j);
 
     /// Helper function
-    void macro_bound_I_E(const unsigned &t,
-                         const Vector<double> &zeta,
-                         Vector<double> &r,
-                         const unsigned &i,
-                         const unsigned &j);
+    void macro_bound_I_E(const unsigned& t,
+                         const Vector<double>& zeta,
+                         Vector<double>& r,
+                         const unsigned& i,
+                         const unsigned& j);
 
     /// Helper function
-    void macro_bound_II_N(const unsigned &t,
-                          const Vector<double> &zeta,
-                          Vector<double> &r,
-                          const unsigned &i,
-                          const unsigned &j);
+    void macro_bound_II_N(const unsigned& t,
+                          const Vector<double>& zeta,
+                          Vector<double>& r,
+                          const unsigned& i,
+                          const unsigned& j);
 
     /// Helper function
-    void macro_bound_II_S(const unsigned &t,
-                          const Vector<double> &zeta,
-                          Vector<double> &r,
-                          const unsigned &i,
-                          const unsigned &j);
+    void macro_bound_II_S(const unsigned& t,
+                          const Vector<double>& zeta,
+                          Vector<double>& r,
+                          const unsigned& i,
+                          const unsigned& j);
 
     /// Helper function
-    void macro_bound_II_W(const unsigned &t,
-                          const Vector<double> &zeta,
-                          Vector<double> &r,
-                          const unsigned &i,
-                          const unsigned &j);
+    void macro_bound_II_W(const unsigned& t,
+                          const Vector<double>& zeta,
+                          Vector<double>& r,
+                          const unsigned& i,
+                          const unsigned& j);
 
     /// Helper function
-    void macro_bound_II_E(const unsigned &t,
-                          const Vector<double> &zeta,
-                          Vector<double> &r,
-                          const unsigned &i,
-                          const unsigned &j);
+    void macro_bound_II_E(const unsigned& t,
+                          const Vector<double>& zeta,
+                          Vector<double>& r,
+                          const unsigned& i,
+                          const unsigned& j);
 
     /// Helper function
-    void macro_bound_III_N(const unsigned &t,
-                           const Vector<double> &zeta,
-                           Vector<double> &r,
-                           const unsigned &i,
-                           const unsigned &j);
+    void macro_bound_III_N(const unsigned& t,
+                           const Vector<double>& zeta,
+                           Vector<double>& r,
+                           const unsigned& i,
+                           const unsigned& j);
 
     /// Helper function
-    void macro_bound_III_S(const unsigned &t,
-                           const Vector<double> &zeta,
-                           Vector<double> &r,
-                           const unsigned &i,
-                           const unsigned &j);
+    void macro_bound_III_S(const unsigned& t,
+                           const Vector<double>& zeta,
+                           Vector<double>& r,
+                           const unsigned& i,
+                           const unsigned& j);
 
     /// Helper function
-    void macro_bound_III_W(const unsigned &t,
-                           const Vector<double> &zeta,
-                           Vector<double> &r,
-                           const unsigned &i,
-                           const unsigned &j);
+    void macro_bound_III_W(const unsigned& t,
+                           const Vector<double>& zeta,
+                           Vector<double>& r,
+                           const unsigned& i,
+                           const unsigned& j);
 
     /// Helper function
-    void macro_bound_III_E(const unsigned &t,
-                           const Vector<double> &zeta,
-                           Vector<double> &r,
-                           const unsigned &i,
-                           const unsigned &j);
+    void macro_bound_III_E(const unsigned& t,
+                           const Vector<double>& zeta,
+                           Vector<double>& r,
+                           const unsigned& i,
+                           const unsigned& j);
 
     /// Helper function
-    void macro_bound_IV_N(const unsigned &t,
-                          const Vector<double> &zeta,
-                          Vector<double> &r,
-                          const unsigned &i,
-                          const unsigned &j);
+    void macro_bound_IV_N(const unsigned& t,
+                          const Vector<double>& zeta,
+                          Vector<double>& r,
+                          const unsigned& i,
+                          const unsigned& j);
 
     /// Helper function
-    void macro_bound_IV_S(const unsigned &t,
-                          const Vector<double> &zeta,
-                          Vector<double> &r,
-                          const unsigned &i,
-                          const unsigned &j);
+    void macro_bound_IV_S(const unsigned& t,
+                          const Vector<double>& zeta,
+                          Vector<double>& r,
+                          const unsigned& i,
+                          const unsigned& j);
 
     /// Helper function
-    void macro_bound_IV_W(const unsigned &t,
-                          const Vector<double> &zeta,
-                          Vector<double> &r,
-                          const unsigned &i,
-                          const unsigned &j);
+    void macro_bound_IV_W(const unsigned& t,
+                          const Vector<double>& zeta,
+                          Vector<double>& r,
+                          const unsigned& i,
+                          const unsigned& j);
 
     /// Helper function
-    void macro_bound_IV_E(const unsigned &t,
-                          const Vector<double> &zeta,
-                          Vector<double> &r,
-                          const unsigned &i,
-                          const unsigned &j);
+    void macro_bound_IV_E(const unsigned& t,
+                          const Vector<double>& zeta,
+                          Vector<double>& r,
+                          const unsigned& i,
+                          const unsigned& j);
     /// Helper function
-    void slanted_bound_up(const unsigned &t,
-                          const Vector<double> &zeta,
-                          Vector<double> &r);
+    void slanted_bound_up(const unsigned& t,
+                          const Vector<double>& zeta,
+                          Vector<double>& r);
 
     /// Length of the domain to the right of the leaflet
     double Lright;
@@ -284,18 +284,18 @@ namespace oomph
     double X_0;
 
     /// Pointer to leaflet
-    GeomObject *Leaflet_pt;
+    GeomObject* Leaflet_pt;
   };
 
   //===================================================================
   /// Parametrisation of macro element boundaries
   //===================================================================
   void ChannelWithLeafletDomain::macro_element_boundary(
-    const unsigned &t,
-    const unsigned &imacro,
-    const unsigned &idirect,
-    const Vector<double> &zeta,
-    Vector<double> &r)
+    const unsigned& t,
+    const unsigned& imacro,
+    const unsigned& idirect,
+    const Vector<double>& zeta,
+    Vector<double>& r)
   {
 #ifdef WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES
     // Warn about time argument being moved to the front
@@ -418,11 +418,11 @@ namespace oomph
   //=====================================================================
   /// Helper function for eastern boundary in lower left region
   //=====================================================================
-  void ChannelWithLeafletDomain::macro_bound_I_E(const unsigned &t,
-                                                 const Vector<double> &zeta,
-                                                 Vector<double> &r,
-                                                 const unsigned &i,
-                                                 const unsigned &j)
+  void ChannelWithLeafletDomain::macro_bound_I_E(const unsigned& t,
+                                                 const Vector<double>& zeta,
+                                                 Vector<double>& r,
+                                                 const unsigned& i,
+                                                 const unsigned& j)
   {
     // Find x,y on the wall corresponding to the position of the macro element
 
@@ -460,11 +460,11 @@ namespace oomph
   //=====================================================================
   /// Helper function for western boundary in lower left region
   //=====================================================================
-  void ChannelWithLeafletDomain::macro_bound_I_W(const unsigned &t,
-                                                 const Vector<double> &zeta,
-                                                 Vector<double> &r,
-                                                 const unsigned &i,
-                                                 const unsigned &j)
+  void ChannelWithLeafletDomain::macro_bound_I_W(const unsigned& t,
+                                                 const Vector<double>& zeta,
+                                                 Vector<double>& r,
+                                                 const unsigned& i,
+                                                 const unsigned& j)
   {
     // Find x,y on the wall corresponding to the position of the macro element
 
@@ -502,11 +502,11 @@ namespace oomph
   //=====================================================================
   /// Helper function for northern boundary in lower left region
   //=====================================================================
-  void ChannelWithLeafletDomain::macro_bound_I_N(const unsigned &t,
-                                                 const Vector<double> &zeta,
-                                                 Vector<double> &r,
-                                                 const unsigned &i,
-                                                 const unsigned &j)
+  void ChannelWithLeafletDomain::macro_bound_I_N(const unsigned& t,
+                                                 const Vector<double>& zeta,
+                                                 Vector<double>& r,
+                                                 const unsigned& i,
+                                                 const unsigned& j)
   {
     // Find the coordinates of the two corners of the north boundary
     Vector<double> xi(1);
@@ -524,11 +524,11 @@ namespace oomph
   //=====================================================================
   /// Helper function for southern boundary in lower left region
   //=====================================================================
-  void ChannelWithLeafletDomain::macro_bound_I_S(const unsigned &t,
-                                                 const Vector<double> &zeta,
-                                                 Vector<double> &r,
-                                                 const unsigned &i,
-                                                 const unsigned &j)
+  void ChannelWithLeafletDomain::macro_bound_I_S(const unsigned& t,
+                                                 const Vector<double>& zeta,
+                                                 Vector<double>& r,
+                                                 const unsigned& i,
+                                                 const unsigned& j)
   {
     /// Find the coordinates of the two corners of the south boundary
     Vector<double> xi(1);
@@ -552,11 +552,11 @@ namespace oomph
   //=====================================================================
   /// Helper function for eastern boundary in lower right region
   //=====================================================================
-  void ChannelWithLeafletDomain::macro_bound_II_E(const unsigned &t,
-                                                  const Vector<double> &zeta,
-                                                  Vector<double> &r,
-                                                  const unsigned &i,
-                                                  const unsigned &j)
+  void ChannelWithLeafletDomain::macro_bound_II_E(const unsigned& t,
+                                                  const Vector<double>& zeta,
+                                                  Vector<double>& r,
+                                                  const unsigned& i,
+                                                  const unsigned& j)
 
   {
     // Find x,y on the wall corresponding to the position of the macro element
@@ -595,11 +595,11 @@ namespace oomph
   //=====================================================================
   /// Helper function for western boundary in lower right region
   //=====================================================================
-  void ChannelWithLeafletDomain::macro_bound_II_W(const unsigned &t,
-                                                  const Vector<double> &zeta,
-                                                  Vector<double> &r,
-                                                  const unsigned &i,
-                                                  const unsigned &j)
+  void ChannelWithLeafletDomain::macro_bound_II_W(const unsigned& t,
+                                                  const Vector<double>& zeta,
+                                                  Vector<double>& r,
+                                                  const unsigned& i,
+                                                  const unsigned& j)
   {
     // Abscissa of the origin of the boudary east
 
@@ -639,11 +639,11 @@ namespace oomph
   //=====================================================================
   /// Helper function for northern boundary in lower right region
   //=====================================================================
-  void ChannelWithLeafletDomain::macro_bound_II_N(const unsigned &t,
-                                                  const Vector<double> &zeta,
-                                                  Vector<double> &r,
-                                                  const unsigned &i,
-                                                  const unsigned &j)
+  void ChannelWithLeafletDomain::macro_bound_II_N(const unsigned& t,
+                                                  const Vector<double>& zeta,
+                                                  Vector<double>& r,
+                                                  const unsigned& i,
+                                                  const unsigned& j)
   {
     // Find the coordinates of the two corners of the north boundary
     Vector<double> xi(1);
@@ -661,11 +661,11 @@ namespace oomph
   //=====================================================================
   /// Helper function for southern boundary in lower right region
   //=====================================================================
-  void ChannelWithLeafletDomain::macro_bound_II_S(const unsigned &t,
-                                                  const Vector<double> &zeta,
-                                                  Vector<double> &r,
-                                                  const unsigned &i,
-                                                  const unsigned &j)
+  void ChannelWithLeafletDomain::macro_bound_II_S(const unsigned& t,
+                                                  const Vector<double>& zeta,
+                                                  Vector<double>& r,
+                                                  const unsigned& i,
+                                                  const unsigned& j)
   {
     // Find the coordinates of the two corners of the south boundary
     Vector<double> xi(1);
@@ -690,9 +690,9 @@ namespace oomph
   /// Describe the line between the boundary north of the domain (at x=X_0)
   /// and the top of the wall, when zeta goes from 0 to 1.
   //=====================================================================
-  void ChannelWithLeafletDomain::slanted_bound_up(const unsigned &t,
-                                                  const Vector<double> &zeta,
-                                                  Vector<double> &r)
+  void ChannelWithLeafletDomain::slanted_bound_up(const unsigned& t,
+                                                  const Vector<double>& zeta,
+                                                  Vector<double>& r)
   {
     // Coordinates of the point on the boundary beetween the upper
     // and the lower part, in the same column, at the east.
@@ -710,11 +710,11 @@ namespace oomph
   //=====================================================================
   /// Helper function for eastern boundary in upper left region
   //=====================================================================
-  void ChannelWithLeafletDomain::macro_bound_III_E(const unsigned &t,
-                                                   const Vector<double> &zeta,
-                                                   Vector<double> &r,
-                                                   const unsigned &i,
-                                                   const unsigned &j)
+  void ChannelWithLeafletDomain::macro_bound_III_E(const unsigned& t,
+                                                   const Vector<double>& zeta,
+                                                   Vector<double>& r,
+                                                   const unsigned& i,
+                                                   const unsigned& j)
   {
     // Find x,y on the slanted straight line (SSL) corresponding to
     // the position of the macro element
@@ -754,11 +754,11 @@ namespace oomph
   //=====================================================================
   /// Helper function for western boundary in upper left region
   //=====================================================================
-  void ChannelWithLeafletDomain::macro_bound_III_W(const unsigned &t,
-                                                   const Vector<double> &zeta,
-                                                   Vector<double> &r,
-                                                   const unsigned &i,
-                                                   const unsigned &j)
+  void ChannelWithLeafletDomain::macro_bound_III_W(const unsigned& t,
+                                                   const Vector<double>& zeta,
+                                                   Vector<double>& r,
+                                                   const unsigned& i,
+                                                   const unsigned& j)
   {
     // Find x,y on the slanted straight line (SSL) corresponding to
     // the position of the macro element
@@ -798,11 +798,11 @@ namespace oomph
   //=====================================================================
   /// Helper function for northern boundary in upper left region
   //=====================================================================
-  void ChannelWithLeafletDomain::macro_bound_III_N(const unsigned &t,
-                                                   const Vector<double> &zeta,
-                                                   Vector<double> &r,
-                                                   const unsigned &i,
-                                                   const unsigned &j)
+  void ChannelWithLeafletDomain::macro_bound_III_N(const unsigned& t,
+                                                   const Vector<double>& zeta,
+                                                   Vector<double>& r,
+                                                   const unsigned& i,
+                                                   const unsigned& j)
   {
     // Find the coordinates of the two corners of the north boundary
     Vector<double> xi(1);
@@ -820,11 +820,11 @@ namespace oomph
   //=====================================================================
   /// Helper function for southern boundary in upper left region
   //=====================================================================
-  void ChannelWithLeafletDomain::macro_bound_III_S(const unsigned &t,
-                                                   const Vector<double> &zeta,
-                                                   Vector<double> &r,
-                                                   const unsigned &i,
-                                                   const unsigned &j)
+  void ChannelWithLeafletDomain::macro_bound_III_S(const unsigned& t,
+                                                   const Vector<double>& zeta,
+                                                   Vector<double>& r,
+                                                   const unsigned& i,
+                                                   const unsigned& j)
   {
     // Find the coordinates of the two corners of the south boundary
     Vector<double> xi(1);
@@ -848,11 +848,11 @@ namespace oomph
   //=====================================================================
   /// Helper function for eastern boundary in upper right region
   //=====================================================================
-  void ChannelWithLeafletDomain::macro_bound_IV_E(const unsigned &t,
-                                                  const Vector<double> &zeta,
-                                                  Vector<double> &r,
-                                                  const unsigned &i,
-                                                  const unsigned &j)
+  void ChannelWithLeafletDomain::macro_bound_IV_E(const unsigned& t,
+                                                  const Vector<double>& zeta,
+                                                  Vector<double>& r,
+                                                  const unsigned& i,
+                                                  const unsigned& j)
   {
     // Find x,y on the slanted straight line (SSL) corresponding to
     // the position of the macro element
@@ -892,11 +892,11 @@ namespace oomph
   //=====================================================================
   /// Helper function for western boundary in upper right region
   //=====================================================================
-  void ChannelWithLeafletDomain::macro_bound_IV_W(const unsigned &t,
-                                                  const Vector<double> &zeta,
-                                                  Vector<double> &r,
-                                                  const unsigned &i,
-                                                  const unsigned &j)
+  void ChannelWithLeafletDomain::macro_bound_IV_W(const unsigned& t,
+                                                  const Vector<double>& zeta,
+                                                  Vector<double>& r,
+                                                  const unsigned& i,
+                                                  const unsigned& j)
   {
     // Find x,y on the slanted straight line (SSL) corresponding to
     // the position of the macro element
@@ -936,11 +936,11 @@ namespace oomph
   //=====================================================================
   /// Helper function for northern boundary in upper right region
   //=====================================================================
-  void ChannelWithLeafletDomain::macro_bound_IV_N(const unsigned &t,
-                                                  const Vector<double> &zeta,
-                                                  Vector<double> &r,
-                                                  const unsigned &i,
-                                                  const unsigned &j)
+  void ChannelWithLeafletDomain::macro_bound_IV_N(const unsigned& t,
+                                                  const Vector<double>& zeta,
+                                                  Vector<double>& r,
+                                                  const unsigned& i,
+                                                  const unsigned& j)
   {
     // Find the coordinates of the two corners of the north boundary
     Vector<double> xi(1);
@@ -958,11 +958,11 @@ namespace oomph
   //=====================================================================
   /// Helper function for southern boundary in upper right region
   //=====================================================================
-  void ChannelWithLeafletDomain::macro_bound_IV_S(const unsigned &t,
-                                                  const Vector<double> &zeta,
-                                                  Vector<double> &r,
-                                                  const unsigned &i,
-                                                  const unsigned &j)
+  void ChannelWithLeafletDomain::macro_bound_IV_S(const unsigned& t,
+                                                  const Vector<double>& zeta,
+                                                  Vector<double>& r,
+                                                  const unsigned& i,
+                                                  const unsigned& j)
   {
     // Find the coordinates of the two corners of the south boundary
     Vector<double> xi(1);

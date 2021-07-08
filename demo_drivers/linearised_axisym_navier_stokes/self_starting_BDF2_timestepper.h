@@ -55,7 +55,7 @@ namespace oomph
   public:
     /// Constructor for the case when we allow adaptive timestepping.
     /// Set BDF1_mode flag to false (default is BDF2 mode)
-    SelfStartingBDF2(const bool &adaptive = false) :
+    SelfStartingBDF2(const bool& adaptive = false) :
       TimeStepper(3, 1), BDF1_mode(false)
     {
       Type = "BDF";
@@ -91,13 +91,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    SelfStartingBDF2(const SelfStartingBDF2 &)
+    SelfStartingBDF2(const SelfStartingBDF2&)
     {
       BrokenCopy::broken_copy("SelfStartingBDF2");
     }
 
     /// Broken assignment operator
-    void operator=(const SelfStartingBDF2 &)
+    void operator=(const SelfStartingBDF2&)
     {
       BrokenCopy::broken_assign("SelfStartingBDF2");
     }
@@ -158,7 +158,7 @@ namespace oomph
 
     /// \short Initialise the time-history for the Data values,
     /// corresponding to an impulsive start.
-    void assign_initial_values_impulsive(Data *const &data_pt)
+    void assign_initial_values_impulsive(Data* const& data_pt)
     {
       // Find number of values stored
       const unsigned n_value = data_pt->nvalue();
@@ -188,7 +188,7 @@ namespace oomph
 
     /// \short Initialise the time-history for the nodal positions
     /// corresponding to an impulsive start.
-    void assign_initial_positions_impulsive(Node *const &node_pt)
+    void assign_initial_positions_impulsive(Node* const& node_pt)
     {
       // Find the dimension of the node
       const unsigned n_dim = node_pt->ndim();
@@ -226,13 +226,13 @@ namespace oomph
 
     /// \short Typedef for function that returns the (scalar) initial
     /// value at a given value of the continuous time t.
-    typedef double (*InitialConditionFctPt)(const double &t);
+    typedef double (*InitialConditionFctPt)(const double& t);
 
     /// \short Initialise the time-history for the Data values,
     /// corresponding to given time history, specified by
     /// Vector of function pointers.
     void assign_initial_data_values(
-      Data *const &data_pt, Vector<InitialConditionFctPt> initial_value_fct)
+      Data* const& data_pt, Vector<InitialConditionFctPt> initial_value_fct)
     {
       // The time history stores the previous function values
       const unsigned n_time_value = ntstorage();
@@ -257,7 +257,7 @@ namespace oomph
     /// \short This function updates the Data's time history so that
     /// we can advance to the next timestep. For BDF schemes,
     /// we simply push the values backwards...
-    void shift_time_values(Data *const &data_pt)
+    void shift_time_values(Data* const& data_pt)
     {
       // Find number of values stored
       const unsigned n_value = data_pt->nvalue();
@@ -294,7 +294,7 @@ namespace oomph
 
     /// \short This function advances the time history of the positions
     /// at a node.
-    void shift_time_positions(Node *const &node_pt)
+    void shift_time_positions(Node* const& node_pt)
     {
       // Find the number of coordinates
       const unsigned n_dim = node_pt->ndim();
@@ -391,16 +391,16 @@ namespace oomph
     void set_predictor_weights_bdf2();
 
     /// Function to calculate predicted positions at a node (BDF1)
-    void calculate_predicted_positions_bdf1(Node *const &node_pt);
+    void calculate_predicted_positions_bdf1(Node* const& node_pt);
 
     /// Function to calculate predicted positions at a node (BDF2)
-    void calculate_predicted_positions_bdf2(Node *const &node_pt);
+    void calculate_predicted_positions_bdf2(Node* const& node_pt);
 
     /// Function to calculate predicted data values in a Data object (BDF1)
-    void calculate_predicted_values_bdf1(Data *const &data_pt);
+    void calculate_predicted_values_bdf1(Data* const& data_pt);
 
     /// Function to calculate predicted data values in a Data object (BDF2)
-    void calculate_predicted_values_bdf2(Data *const &data_pt);
+    void calculate_predicted_values_bdf2(Data* const& data_pt);
 
     /// Function to set the error weights corresponding to BDF1
     void set_error_weights_bdf1();
@@ -409,20 +409,20 @@ namespace oomph
     void set_error_weights_bdf2();
 
     /// Compute the error in the position i at a node (BDF1)
-    double temporal_error_in_position_bdf1(Node *const &node_pt,
-                                           const unsigned &i);
+    double temporal_error_in_position_bdf1(Node* const& node_pt,
+                                           const unsigned& i);
 
     /// Compute the error in the position i at a node (BDF2)
-    double temporal_error_in_position_bdf2(Node *const &node_pt,
-                                           const unsigned &i);
+    double temporal_error_in_position_bdf2(Node* const& node_pt,
+                                           const unsigned& i);
 
     /// Compute the error in the value i in a Data structure (BDF1)
-    double temporal_error_in_value_bdf1(Data *const &data_pt,
-                                        const unsigned &i);
+    double temporal_error_in_value_bdf1(Data* const& data_pt,
+                                        const unsigned& i);
 
     /// Compute the error in the value i in a Data structure (BDF2)
-    double temporal_error_in_value_bdf2(Data *const &data_pt,
-                                        const unsigned &i);
+    double temporal_error_in_value_bdf2(Data* const& data_pt,
+                                        const unsigned& i);
   };
 
   //////////////////////////////////////////////////////////////////////////
@@ -466,7 +466,7 @@ namespace oomph
   /// location in the data structure (BDF1)
   /// This function must be called after the time-values have been shifted!
   //=======================================================================
-  void SelfStartingBDF2::calculate_predicted_values_bdf1(Data *const &data_pt)
+  void SelfStartingBDF2::calculate_predicted_values_bdf1(Data* const& data_pt)
   {
     throw OomphLibError("Not implemented yet",
                         "SelfStartingBDF2::calculate_predicted_weights_bdf1()",
@@ -477,7 +477,7 @@ namespace oomph
   /// Calculate predictions for the positions (BDF1)
   //=======================================================================
   void SelfStartingBDF2::calculate_predicted_positions_bdf1(
-    Node *const &node_pt)
+    Node* const& node_pt)
   {
     throw OomphLibError(
       "Not implemented yet",
@@ -498,8 +498,8 @@ namespace oomph
   //===================================================================
   /// Function to compute the error in position i at node (BDF1)
   //===================================================================
-  double SelfStartingBDF2::temporal_error_in_position_bdf1(Node *const &node_pt,
-                                                           const unsigned &i)
+  double SelfStartingBDF2::temporal_error_in_position_bdf1(Node* const& node_pt,
+                                                           const unsigned& i)
   {
     throw OomphLibError("Not implemented yet",
                         "SelfStartingBDF2::temporal_error_in_position_bdf1()",
@@ -510,8 +510,8 @@ namespace oomph
   //=========================================================================
   /// Function to calculate the error in the data value i (BDF1)
   //=========================================================================
-  double SelfStartingBDF2::temporal_error_in_value_bdf1(Data *const &data_pt,
-                                                        const unsigned &i)
+  double SelfStartingBDF2::temporal_error_in_value_bdf1(Data* const& data_pt,
+                                                        const unsigned& i)
   {
     throw OomphLibError("Not implemented yet",
                         "SelfStartingBDF2::temporal_error_in_value_bdf1()",
@@ -566,7 +566,7 @@ namespace oomph
   /// location in the data structure (BDF2)
   /// This function must be called after the time-values have been shifted!
   //=======================================================================
-  void SelfStartingBDF2::calculate_predicted_values_bdf2(Data *const &data_pt)
+  void SelfStartingBDF2::calculate_predicted_values_bdf2(Data* const& data_pt)
   {
     // If it's adaptive calculate the values
     if (adaptive_flag())
@@ -599,7 +599,7 @@ namespace oomph
   /// Calculate predictions for the positions (BDF2)
   //=======================================================================
   void SelfStartingBDF2::calculate_predicted_positions_bdf2(
-    Node *const &node_pt)
+    Node* const& node_pt)
   {
     // Only do this if adaptive
     if (adaptive_flag())
@@ -648,8 +648,8 @@ namespace oomph
   //===================================================================
   /// Function to compute the error in position i at node (BDF2)
   //===================================================================
-  double SelfStartingBDF2::temporal_error_in_position_bdf2(Node *const &node_pt,
-                                                           const unsigned &i)
+  double SelfStartingBDF2::temporal_error_in_position_bdf2(Node* const& node_pt,
+                                                           const unsigned& i)
   {
     if (adaptive_flag())
     {
@@ -665,8 +665,8 @@ namespace oomph
   //=========================================================================
   /// Function to calculate the error in the data value i (BDF2)
   //=========================================================================
-  double SelfStartingBDF2::temporal_error_in_value_bdf2(Data *const &data_pt,
-                                                        const unsigned &i)
+  double SelfStartingBDF2::temporal_error_in_value_bdf2(Data* const& data_pt,
+                                                        const unsigned& i)
   {
     if (adaptive_flag())
     {

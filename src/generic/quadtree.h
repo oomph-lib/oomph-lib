@@ -110,24 +110,24 @@ namespace oomph
     virtual ~QuadTree() {}
 
     /// Broken copy constructor
-    QuadTree(const QuadTree &dummy)
+    QuadTree(const QuadTree& dummy)
     {
       BrokenCopy::broken_copy("QuadTree");
     }
 
     /// Broken assignment operator
-    void operator=(const QuadTree &)
+    void operator=(const QuadTree&)
     {
       BrokenCopy::broken_assign("QuadTree");
     }
 
     /// \short Overload the function construct_son to ensure that the son
     /// is a specific QuadTree and not a general Tree.
-    Tree *construct_son(RefineableElement *const &object_pt,
-                        Tree *const &father_pt,
-                        const int &son_type)
+    Tree* construct_son(RefineableElement* const& object_pt,
+                        Tree* const& father_pt,
+                        const int& son_type)
     {
-      QuadTree *temp_quad_pt = new QuadTree(object_pt, father_pt, son_type);
+      QuadTree* temp_quad_pt = new QuadTree(object_pt, father_pt, son_type);
       return temp_quad_pt;
     }
 
@@ -163,23 +163,23 @@ namespace oomph
     ///   in another tree in the forest. The introduction of this flag
     ///   was necessitated by periodic problems where a TreeRoot can be its
     ///   own neighbour.
-    QuadTree *gteq_edge_neighbour(const int &direction,
-                                  Vector<unsigned> &translate_s,
-                                  Vector<double> &s_lo,
-                                  Vector<double> &s_hi,
-                                  int &edge,
-                                  int &diff_level,
-                                  bool &in_neighbouring_tree) const;
+    QuadTree* gteq_edge_neighbour(const int& direction,
+                                  Vector<unsigned>& translate_s,
+                                  Vector<double>& s_lo,
+                                  Vector<double>& s_hi,
+                                  int& edge,
+                                  int& diff_level,
+                                  bool& in_neighbouring_tree) const;
 
     /// \short Traverse Tree: Preorder traverse and stick pointers to
     /// neighbouring leaf nodes (only) into Vector
     void stick_neighbouring_leaves_into_vector(
-      Vector<const QuadTree *> &tree_neighbouring_nodes,
-      Vector<Vector<double>> &tree_neighbouring_s_lo,
-      Vector<Vector<double>> &tree_neighbouring_s_hi,
-      Vector<int> &tree_neighbouring_diff_level,
-      const QuadTree *my_neigh_pt,
-      const int &direction) const;
+      Vector<const QuadTree*>& tree_neighbouring_nodes,
+      Vector<Vector<double>>& tree_neighbouring_s_lo,
+      Vector<Vector<double>>& tree_neighbouring_s_hi,
+      Vector<int>& tree_neighbouring_diff_level,
+      const QuadTree* my_neigh_pt,
+      const int& direction) const;
 
     /// \short Self-test: Check all neighbours. Return success (0)
     /// if the max. distance between corresponding points in the
@@ -197,10 +197,10 @@ namespace oomph
     /// neighbours_txt_file.  Finally, compute the max. error between
     /// vertices when viewed from neighhbouring element.
     /// If the two filestreams are closed, output is suppressed.
-    static void doc_neighbours(Vector<Tree *> forest_nodes_pt,
-                               std::ofstream &neighbours_file,
-                               std::ofstream &neighbours_txt_file,
-                               double &max_error);
+    static void doc_neighbours(Vector<Tree*> forest_nodes_pt,
+                               std::ofstream& neighbours_file,
+                               std::ofstream& neighbours_txt_file,
+                               double& max_error);
 
     /// Translate (enumerated) directions into strings
     static Vector<std::string> Direct_string;
@@ -220,7 +220,7 @@ namespace oomph
     /// Protected because QuadTrees can only be created internally,
     /// during the split operation. Only QuadTreeRoots can be
     /// created externally.
-    QuadTree(RefineableElement *const &object_pt) : Tree(object_pt) {}
+    QuadTree(RefineableElement* const& object_pt) : Tree(object_pt) {}
 
     /// \short Constructor for tree that has a father: Pass it the pointer
     /// to its object, the pointer to its father and tell it what type
@@ -228,9 +228,9 @@ namespace oomph
     /// Protected because QuadTrees can only be created internally,
     /// during the split operation.  Only QuadTreeRoots can be
     /// created externally.
-    QuadTree(RefineableElement *const &object_pt,
-             Tree *const &father_pt,
-             const int &son_type) :
+    QuadTree(RefineableElement* const& object_pt,
+             Tree* const& father_pt,
+             const int& son_type) :
       Tree(object_pt, father_pt, son_type)
     {
     }
@@ -241,12 +241,12 @@ namespace oomph
   private:
     /// \short Find greater or equal-sized edge neighbour in direction.
     /// Auxiliary internal routine which passes additional information around.
-    QuadTree *gteq_edge_neighbour(const int &direction,
-                                  double &s_diff,
-                                  int &diff_level,
-                                  bool &in_neighbouring_tree,
+    QuadTree* gteq_edge_neighbour(const int& direction,
+                                  double& s_diff,
+                                  int& diff_level,
+                                  bool& in_neighbouring_tree,
                                   int max_level,
-                                  QuadTreeRoot *const &orig_root_pt) const;
+                                  QuadTreeRoot* const& orig_root_pt) const;
 
     /// Colours for neighbours in various directions
     static Vector<std::string> Colour;
@@ -311,7 +311,7 @@ namespace oomph
   public:
     /// Constructor for the (empty) root quadtree: Pass pointer to
     /// associated object, a RefineableQElement<2>.
-    QuadTreeRoot(RefineableElement *const &object_pt) :
+    QuadTreeRoot(RefineableElement* const& object_pt) :
       Tree(object_pt), QuadTree(object_pt), TreeRoot(object_pt)
     {
 #ifdef PARANOID
@@ -340,13 +340,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    QuadTreeRoot(const QuadTreeRoot &dummy) : TreeRoot(dummy)
+    QuadTreeRoot(const QuadTreeRoot& dummy) : TreeRoot(dummy)
     {
       BrokenCopy::broken_copy("QuadTreeRoot");
     }
 
     /// Broken assignment operator
-    void operator=(const QuadTreeRoot &)
+    void operator=(const QuadTreeRoot&)
     {
       BrokenCopy::broken_assign("QuadTreeRoot");
     }
@@ -360,7 +360,7 @@ namespace oomph
     /// neighbour is rotated by 180 degrees relative to the current quadtree,
     /// say, we have \c north_equivalent(W)=S (read as: "in my Western
     /// neighbour, my North is its South"); etc.
-    int &north_equivalent(const int &neighbour)
+    int& north_equivalent(const int& neighbour)
     {
 #ifdef PARANOID
       using namespace QuadTreeNames;
@@ -382,7 +382,7 @@ namespace oomph
 
     /// \short If quadtree_root_pt is a neighbour, return the direction
     /// [N/S/E/W] in which it is found, otherwise return OMEGA
-    int direction_of_neighbour(QuadTreeRoot *quadtree_root_pt)
+    int direction_of_neighbour(QuadTreeRoot* quadtree_root_pt)
     {
       using namespace QuadTreeNames;
       if (Neighbour_pt[N] == quadtree_root_pt)
@@ -427,16 +427,16 @@ namespace oomph
 
     /// \short Constructor: Pass vector of pointers to the roots of the
     /// constituent QuadTrees
-    QuadTreeForest(Vector<TreeRoot *> &trees_pt);
+    QuadTreeForest(Vector<TreeRoot*>& trees_pt);
 
     /// Broken copy constructor
-    QuadTreeForest(const QuadTreeForest &dummy)
+    QuadTreeForest(const QuadTreeForest& dummy)
     {
       BrokenCopy::broken_copy("QuadTreeForest");
     }
 
     /// Broken assignment operator
-    void operator=(const QuadTreeForest &)
+    void operator=(const QuadTreeForest&)
     {
       BrokenCopy::broken_assign("QuadTreeForest");
     }
@@ -449,12 +449,12 @@ namespace oomph
     /// in the forest. DocInfo object specifies the output directory
     /// and file numbers for the various files. If \c doc_info.disable_doc()
     /// has been called no output is created.
-    void check_all_neighbours(DocInfo &doc_info);
+    void check_all_neighbours(DocInfo& doc_info);
 
     /// \short Open output files that will store any hanging nodes in
     /// the forest and return a vector of the streams.
-    void open_hanging_node_files(DocInfo &doc_info,
-                                 Vector<std::ofstream *> &output_stream);
+    void open_hanging_node_files(DocInfo& doc_info,
+                                 Vector<std::ofstream*>& output_stream);
 
     /// \short Self-test: Check all neighbours. Return success (0)
     /// if the max. distance between corresponding points in the
@@ -472,18 +472,18 @@ namespace oomph
     /// Return pointer to i-th root quadtree in this forest.
     /// (Performs a dynamic cast from the TreeRoot to a
     /// QuadTreeRoot).
-    QuadTreeRoot *quadtree_pt(const unsigned &i)
+    QuadTreeRoot* quadtree_pt(const unsigned& i)
     {
-      return dynamic_cast<QuadTreeRoot *>(Trees_pt[i]);
+      return dynamic_cast<QuadTreeRoot*>(Trees_pt[i]);
     }
 
     /// \short Given the number i of the root quadtree in this forest, return
     /// pointer to its neighbour in the specified direction. NULL
     /// if neighbour doesn't exist. (This does the dynamic cast
     /// from a TreeRoot to a QuadTreeRoot internally).
-    QuadTreeRoot *quad_neigh_pt(const unsigned &i, const int &direction)
+    QuadTreeRoot* quad_neigh_pt(const unsigned& i, const int& direction)
     {
-      return dynamic_cast<QuadTreeRoot *>(Trees_pt[i]->neighbour_pt(direction));
+      return dynamic_cast<QuadTreeRoot*>(Trees_pt[i]->neighbour_pt(direction));
     }
   };
 

@@ -61,7 +61,7 @@ namespace Global_Physical_Variables
 namespace Boundary_Items
 {
   // Provide a scalar value for the velocity at boundary 1
-  void get_exact_u_b1(double &time, const Vector<double> &x, double &u)
+  void get_exact_u_b1(double& time, const Vector<double>& x, double& u)
   {
     // u assignment - spin-up problem
     u = x[0] * (1.0 - std::exp(-time));
@@ -90,12 +90,12 @@ public:
   ~RefineableSphericalSpinUpProblem();
 
   /// Fix pressure in element e at pressure dof pdof and set to pvalue
-  void fix_pressure(const unsigned &e,
-                    const unsigned &pdof,
-                    const double &pvalue)
+  void fix_pressure(const unsigned& e,
+                    const unsigned& pdof,
+                    const double& pvalue)
   {
     // Cast to full element type and fix the pressure at that element
-    dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e))
+    dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))
       ->fix_pressure(pdof, pvalue);
   } // end of fix_pressure
 
@@ -163,20 +163,20 @@ public:
   } // End of set_initial_condition
 
   // Access function for the specific mesh
-  RefineableQuarterCircleSectorMesh<ELEMENT> *mesh_pt()
+  RefineableQuarterCircleSectorMesh<ELEMENT>* mesh_pt()
   {
     // Upcast from pointer to the Mesh base class to the specific
     // element type that we're using here.
-    return dynamic_cast<RefineableQuarterCircleSectorMesh<ELEMENT> *>(
+    return dynamic_cast<RefineableQuarterCircleSectorMesh<ELEMENT>*>(
       Problem::mesh_pt());
   }
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info, std::ofstream &);
+  void doc_solution(DocInfo& doc_info, std::ofstream&);
 
 private:
   /// Geometric object that defines the boundary of the domain
-  Ellipse *Curved_boundary_pt;
+  Ellipse* Curved_boundary_pt;
 
 }; // end_of_problem_class
 
@@ -210,7 +210,7 @@ RefineableSphericalSpinUpProblem<ELEMENT>::RefineableSphericalSpinUpProblem()
   // Setup mesh  -don't forget to include the timestepping in the mesh build
   //------------------------------------------------------------------------
   // Set error estimator
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   mesh_pt()->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Set the boundary conditions for this problem: All nodes are
@@ -265,7 +265,7 @@ RefineableSphericalSpinUpProblem<ELEMENT>::RefineableSphericalSpinUpProblem()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -306,7 +306,7 @@ void RefineableSphericalSpinUpProblem<ELEMENT>::set_boundary_conditions()
   unsigned num_nod = mesh_pt()->nboundary_node(ibound);
   for (unsigned inod = 0; inod < num_nod; inod++)
   {
-    Node *nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
+    Node* nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
     // Set the z value to zero
     nod_pt->set_value(1, 0.0);
   }
@@ -318,7 +318,7 @@ void RefineableSphericalSpinUpProblem<ELEMENT>::set_boundary_conditions()
   num_nod = mesh_pt()->nboundary_node(ibound);
   for (unsigned inod = 0; inod < num_nod; inod++)
   {
-    Node *nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
+    Node* nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
     double u;
 
     Vector<double> x(2);
@@ -339,7 +339,7 @@ void RefineableSphericalSpinUpProblem<ELEMENT>::set_boundary_conditions()
   num_nod = mesh_pt()->nboundary_node(ibound);
   for (unsigned inod = 0; inod < num_nod; inod++)
   {
-    Node *nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
+    Node* nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
 
     nod_pt->set_value(0, 0.0);
     nod_pt->set_value(2, 0.0);
@@ -361,8 +361,8 @@ RefineableSphericalSpinUpProblem<ELEMENT>::~RefineableSphericalSpinUpProblem()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void RefineableSphericalSpinUpProblem<ELEMENT>::doc_solution(DocInfo &doc_info,
-                                                             std::ofstream &)
+void RefineableSphericalSpinUpProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
+                                                             std::ofstream&)
 {
   ofstream some_file;
   char filename[100];
@@ -456,7 +456,7 @@ int main()
     problem.mesh_pt()->min_refinement_level() = 1; // minimum_ref_level;
 
     // Specify the normalising factor explicitly
-    Z2ErrorEstimator *error_pt = dynamic_cast<Z2ErrorEstimator *>(
+    Z2ErrorEstimator* error_pt = dynamic_cast<Z2ErrorEstimator*>(
       problem.mesh_pt()->spatial_error_estimator_pt());
     error_pt->reference_flux_norm() = 0.01;
 
@@ -485,7 +485,7 @@ int main()
       // Output solution
       problem.doc_solution(doc_info, trace_file);
 
-      Node *nod_pt = // problem.mesh_pt()->finite_element_pt(435)->node_pt(0);
+      Node* nod_pt = // problem.mesh_pt()->finite_element_pt(435)->node_pt(0);
         problem.mesh_pt()->node_pt(50);
 
       trace_file << problem.time() << " " << nod_pt->x(0) << " " << nod_pt->x(1)

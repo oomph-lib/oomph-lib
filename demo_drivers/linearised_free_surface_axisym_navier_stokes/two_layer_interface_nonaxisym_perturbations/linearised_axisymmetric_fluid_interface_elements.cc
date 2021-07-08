@@ -53,7 +53,7 @@ namespace oomph
   //=======================================================================
   void LinearisedAxisymmetricFluidInterfaceElement::
     fill_in_generic_residual_contribution_interface(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag)
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag)
   {
     std::ostringstream error_stream;
 
@@ -77,7 +77,7 @@ namespace oomph
   /// Overload the output function
   //=======================================================================
   void LinearisedAxisymmetricFluidInterfaceElement::output(
-    std::ostream &outfile, const unsigned &n_plot)
+    std::ostream& outfile, const unsigned& n_plot)
   {
   }
 
@@ -85,7 +85,7 @@ namespace oomph
   /// Overload the output function
   //=======================================================================
   void LinearisedAxisymmetricFluidInterfaceElement::output(
-    FILE *file_pt, const unsigned &n_plot)
+    FILE* file_pt, const unsigned& n_plot)
   {
     // Set output Vector
     Vector<double> s(1);
@@ -123,8 +123,8 @@ namespace oomph
   //=======================================================================
   template<class ELEMENT>
   void PerturbedSpineLinearisedAxisymmetricFluidInterfaceElement<
-    ELEMENT>::output_perturbation_to_interface(std::ostream &outfile,
-                                               const unsigned &nplot)
+    ELEMENT>::output_perturbation_to_interface(std::ostream& outfile,
+                                               const unsigned& nplot)
   {
     // Provide storage for vector of local coordinates
     Vector<double> s(1);
@@ -164,8 +164,8 @@ namespace oomph
   //=======================================================================
   template<class ELEMENT>
   void PerturbedSpineLinearisedAxisymmetricFluidInterfaceElement<
-    ELEMENT>::output_interface_position(std::ostream &outfile,
-                                        const unsigned &nplot)
+    ELEMENT>::output_interface_position(std::ostream& outfile,
+                                        const unsigned& nplot)
   {
     // Provide storage for vector of local coordinates
     Vector<double> s(1);
@@ -209,7 +209,7 @@ namespace oomph
   template<class ELEMENT>
   void PerturbedSpineLinearisedAxisymmetricFluidInterfaceElement<ELEMENT>::
     fill_in_generic_residual_contribution_interface(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag)
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag)
   {
     // Determine number of nodes in the element
     const unsigned n_node = this->nnode();
@@ -232,8 +232,8 @@ namespace oomph
     Vector<double> s_parent(2);
 
     // Get a pointer to the parent element
-    LinearisedAxisymmetricNavierStokesEquations *bulk_el_pt =
-      dynamic_cast<LinearisedAxisymmetricNavierStokesEquations *>(
+    LinearisedAxisymmetricNavierStokesEquations* bulk_el_pt =
+      dynamic_cast<LinearisedAxisymmetricNavierStokesEquations*>(
         bulk_element_pt());
 
     // Determine the number of nodes in the parent element
@@ -307,8 +307,8 @@ namespace oomph
       for (unsigned l = 0; l < n_node; l++)
       {
         // Upcast from general node to PerturbedSpineNode
-        PerturbedSpineNode *perturbed_spine_node_pt =
-          dynamic_cast<PerturbedSpineNode *>(this->node_pt(l));
+        PerturbedSpineNode* perturbed_spine_node_pt =
+          dynamic_cast<PerturbedSpineNode*>(this->node_pt(l));
 
         // Cache the shape function and its derivative
         const double psif_ = psif(l);

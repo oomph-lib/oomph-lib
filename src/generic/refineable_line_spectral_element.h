@@ -61,7 +61,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    RefineableQSpectralElement(const RefineableQSpectralElement<1> &dummy)
+    RefineableQSpectralElement(const RefineableQSpectralElement<1>& dummy)
     {
       BrokenCopy::broken_copy("RefineableQSpectralElement<1>");
     }
@@ -86,7 +86,7 @@ namespace oomph
     }
 
     /// The only thing to add is rebuild from sons
-    void rebuild_from_sons(Mesh *&mesh_pt)
+    void rebuild_from_sons(Mesh*& mesh_pt)
     {
       // The timestepper should be the same for all nodes and node 0 should
       // never be deleted.
@@ -97,7 +97,7 @@ namespace oomph
                             OOMPH_EXCEPTION_LOCATION);
       }
 
-      TimeStepper *time_stepper_pt = this->node_pt(0)->time_stepper_pt();
+      TimeStepper* time_stepper_pt = this->node_pt(0)->time_stepper_pt();
 
       // Determine number of history values stored
       const unsigned ntstorage = time_stepper_pt->ntstorage();
@@ -122,7 +122,7 @@ namespace oomph
         {
           // Has the node been created by one of its neighbours?
           bool is_periodic = false;
-          Node *created_node_pt =
+          Node* created_node_pt =
             this->node_created_by_neighbour(s_fraction, is_periodic);
 
           // If it has, set the pointer
@@ -166,8 +166,8 @@ namespace oomph
 
             // Get the pointer to the son element in which the new node
             // would live
-            RefineableQSpectralElement<1> *son_el_pt =
-              dynamic_cast<RefineableQSpectralElement<1> *>(
+            RefineableQSpectralElement<1>* son_el_pt =
+              dynamic_cast<RefineableQSpectralElement<1>*>(
                 this->tree_pt()->son_pt(son)->object_pt());
 
             // In 1D we should never be rebuilding an element's vertex nodes
@@ -242,8 +242,8 @@ namespace oomph
           } // End of case where we build the node ourselves
 
           // Check if the element is an algebraic element
-          AlgebraicElementBase *alg_el_pt =
-            dynamic_cast<AlgebraicElementBase *>(this);
+          AlgebraicElementBase* alg_el_pt =
+            dynamic_cast<AlgebraicElementBase*>(this);
 
           // If so, throw error
           if (alg_el_pt != 0)

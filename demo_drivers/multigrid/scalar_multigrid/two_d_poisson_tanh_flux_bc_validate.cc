@@ -109,7 +109,7 @@ namespace Smoother_Factory_Function_Helper
 {
   /// \short Returns a pointer to a Smoother object which is to be used as
   /// the pre-smoother
-  Smoother *set_pre_smoother()
+  Smoother* set_pre_smoother()
   {
     // Set the pre-smoother
     if (Global_Parameters::Pre_smoother_flag == 0)
@@ -135,7 +135,7 @@ namespace Smoother_Factory_Function_Helper
 
   /// \short Returns a pointer to a Smoother object which is to be used as
   /// the post-smoother
-  Smoother *set_post_smoother()
+  Smoother* set_post_smoother()
   {
     // Set the post-smoother
     if (Global_Parameters::Post_smoother_flag == 0)
@@ -176,13 +176,13 @@ namespace SolnForPoisson
   double TanPhi = 1.0;
 
   /// Exact solution as a Vector
-  void get_exact_u(const Vector<double> &x, Vector<double> &u)
+  void get_exact_u(const Vector<double>& x, Vector<double>& u)
   {
     u[0] = tanh(1.0 - Alpha * (TanPhi * x[0] - x[1]));
   }
 
   /// Source function required to make the solution above an exact solution
-  void source_function(const Vector<double> &x, double &source)
+  void source_function(const Vector<double>& x, double& source)
   {
     source = 2.0 * tanh(-1.0 + Alpha * (TanPhi * x[0] - x[1])) *
                (1.0 - pow(tanh(-1.0 + Alpha * (TanPhi * x[0] - x[1])), 2.0)) *
@@ -193,8 +193,8 @@ namespace SolnForPoisson
   }
 
   /// Flux required by the exact solution on a boundary on which x is fixed
-  void prescribed_flux_on_fixed_x_boundary(const Vector<double> &x,
-                                           double &flux)
+  void prescribed_flux_on_fixed_x_boundary(const Vector<double>& x,
+                                           double& flux)
   {
     // The outer unit normal to the boundary is (1,0)
     double N[2] = {1.0, 0.0};
@@ -240,7 +240,7 @@ public:
   /// \short Pointer to the bulk mesh. Overloads the pure virtual function in
   /// the abstract base class MGProblem. Must be refineable to allow the
   /// use of refine_base_mesh_as_in_reference_mesh() in make_copy()
-  TreeBasedRefineableMeshBase *mg_bulk_mesh_pt()
+  TreeBasedRefineableMeshBase* mg_bulk_mesh_pt()
   {
     // Return the pointer to the bulk mesh
     return Bulk_mesh_pt;
@@ -262,13 +262,13 @@ public:
 
 private:
   /// Access function for the mesh
-  MESH *mesh_pt()
+  MESH* mesh_pt()
   {
-    return dynamic_cast<MESH *>(Problem::mesh_pt());
+    return dynamic_cast<MESH*>(Problem::mesh_pt());
   }
 
   /// \short Return a pointer to a new instance of the same problem.
-  MGProblem *make_new_problem()
+  MGProblem* make_new_problem()
   {
     // Make new problem of the FluxPoissonMGProblem class whose template
     // parameters are specified by the template parameters of the current
@@ -279,18 +279,18 @@ private:
 
   /// \short Create Poisson flux elements on the b-th boundary of the
   /// problem's mesh
-  void create_flux_elements(const unsigned &b,
-                            MESH *const &bulk_mesh_pt,
-                            Mesh *const &surface_mesh_pt);
+  void create_flux_elements(const unsigned& b,
+                            MESH* const& bulk_mesh_pt,
+                            Mesh* const& surface_mesh_pt);
 
   /// Delete Poisson flux elements and wipe the surface mesh
-  void delete_flux_elements(Mesh *const &surface_mesh_pt);
+  void delete_flux_elements(Mesh* const& surface_mesh_pt);
 
   /// Pointer to the "bulk" mesh
-  MESH *Bulk_mesh_pt;
+  MESH* Bulk_mesh_pt;
 
   /// Pointer to the "surface" mesh
-  Mesh *Surface_mesh_pt;
+  Mesh* Surface_mesh_pt;
 
   /// Pointer to source function
   PoissonEquations<2>::PoissonSourceFctPt Source_fct_pt;
@@ -303,7 +303,7 @@ template<class ELEMENT, class MESH>
 void FluxPoissonMGProblem<ELEMENT, MESH>::set_multigrid_solver()
 {
   // Make an object of the MGSolver class and get the pointer to it
-  MGSolver<2> *mg_solver_pt = new MGSolver<2>(this);
+  MGSolver<2>* mg_solver_pt = new MGSolver<2>(this);
 
   // Switch solver to MG
   linear_solver_pt() = mg_solver_pt;
@@ -430,7 +430,7 @@ FluxPoissonMGProblem<ELEMENT, MESH>::FluxPoissonMGProblem(
   for (unsigned e = 0; e < Bulk_mesh_pt->nelement(); e++)
   {
     // Upcast from GeneralisedElement to Poisson bulk element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
     // Set the source function pointer
     el_pt->source_fct_pt() = Source_fct_pt;
@@ -480,7 +480,7 @@ FluxPoissonMGProblem<ELEMENT, MESH>::~FluxPoissonMGProblem()
 //========================================================================
 template<class ELEMENT, class MESH>
 void FluxPoissonMGProblem<ELEMENT, MESH>::create_flux_elements(
-  const unsigned &b, MESH *const &bulk_mesh_pt, Mesh *const &surface_mesh_pt)
+  const unsigned& b, MESH* const& bulk_mesh_pt, Mesh* const& surface_mesh_pt)
 {
   // How many bulk elements are adjacent to boundary b?
   unsigned n_belement = bulk_mesh_pt->nboundary_element(b);
@@ -489,14 +489,14 @@ void FluxPoissonMGProblem<ELEMENT, MESH>::create_flux_elements(
   for (unsigned e = 0; e < n_belement; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    ELEMENT *bulk_elem_pt =
-      dynamic_cast<ELEMENT *>(bulk_mesh_pt->boundary_element_pt(b, e));
+    ELEMENT* bulk_elem_pt =
+      dynamic_cast<ELEMENT*>(bulk_mesh_pt->boundary_element_pt(b, e));
 
     // Find the index of the face of the bulk element at the boundary
     int face_index = bulk_mesh_pt->face_index_at_boundary(b, e);
 
     // Build the corresponding prescribed-flux element
-    PoissonFluxElement<ELEMENT> *flux_element_pt =
+    PoissonFluxElement<ELEMENT>* flux_element_pt =
       new PoissonFluxElement<ELEMENT>(bulk_elem_pt, face_index);
 
     // Add the prescribed-flux element to the mesh
@@ -508,8 +508,8 @@ void FluxPoissonMGProblem<ELEMENT, MESH>::create_flux_elements(
   for (unsigned e = 0; e < n_selement; e++)
   {
     // Upcast from GeneralisedElement to Poisson flux element
-    PoissonFluxElement<ELEMENT> *el_pt =
-      dynamic_cast<PoissonFluxElement<ELEMENT> *>(
+    PoissonFluxElement<ELEMENT>* el_pt =
+      dynamic_cast<PoissonFluxElement<ELEMENT>*>(
         Surface_mesh_pt->element_pt(e));
 
     // Set the pointer to the prescribed flux function
@@ -522,7 +522,7 @@ void FluxPoissonMGProblem<ELEMENT, MESH>::create_flux_elements(
 //========================================================================
 template<class ELEMENT, class MESH>
 void FluxPoissonMGProblem<ELEMENT, MESH>::delete_flux_elements(
-  Mesh *const &surface_mesh_pt)
+  Mesh* const& surface_mesh_pt)
 {
   // Find out how many surface elements there are in the surface mesh
   unsigned n_element = surface_mesh_pt->nelement();
@@ -597,7 +597,7 @@ void FluxPoissonMGProblem<ELEMENT, MESH>::actions_before_newton_solve()
       for (unsigned n = 0; n < n_node; n++)
       {
         // Get pointer to node
-        Node *nod_pt = Bulk_mesh_pt->boundary_node_pt(i, n);
+        Node* nod_pt = Bulk_mesh_pt->boundary_node_pt(i, n);
 
         // Extract nodal coordinates from node:
         Vector<double> x(2);
@@ -677,7 +677,7 @@ void FluxPoissonMGProblem<ELEMENT, MESH>::doc_solution()
 /// \short Demonstrate how to solve 2D Poisson problem with flux boundary
 /// conditions
 //========================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   //------------------------
   // Command line arguments
@@ -745,7 +745,7 @@ int main(int argc, char **argv)
   // Set up the problem
   //--------------------
   // Initialise a null pointer to the class Problem
-  Problem *problem_pt = 0;
+  Problem* problem_pt = 0;
 
   // Set the problem pointer depending on the input (defaulted to nnode_1d=2)
   if (Global_Parameters::Nnode_1d == 2)

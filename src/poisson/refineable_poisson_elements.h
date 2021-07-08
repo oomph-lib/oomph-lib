@@ -70,13 +70,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    RefineablePoissonEquations(const RefineablePoissonEquations<DIM> &dummy)
+    RefineablePoissonEquations(const RefineablePoissonEquations<DIM>& dummy)
     {
       BrokenCopy::broken_copy("RefineablePoissonEquations");
     }
 
     /// Broken assignment operator
-    void operator=(const RefineablePoissonEquations<DIM> &)
+    void operator=(const RefineablePoissonEquations<DIM>&)
     {
       BrokenCopy::broken_assign("RefineablePoissonEquations");
     }
@@ -88,24 +88,24 @@ namespace oomph
     }
 
     /// Get 'flux' for Z2 error recovery:  Standard flux.from Poisson equations
-    void get_Z2_flux(const Vector<double> &s, Vector<double> &flux)
+    void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
       this->get_flux(s, flux);
     }
 
     /// Get error against and norm of exact flux
     void compute_exact_Z2_error(
-      std::ostream &outfile,
+      std::ostream& outfile,
       FiniteElement::SteadyExactSolutionFctPt exact_flux_pt,
-      double &error,
-      double &norm);
+      double& error,
+      double& norm);
 
     /// \short Get the function value u in Vector.
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines), the values Vector sets its own size in here.
-    void get_interpolated_values(const Vector<double> &s,
-                                 Vector<double> &values)
+    void get_interpolated_values(const Vector<double>& s,
+                                 Vector<double>& values)
     {
       // Set size of Vector: u
       values.resize(1);
@@ -136,9 +136,9 @@ namespace oomph
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines), the values Vector sets its own size in here.
-    void get_interpolated_values(const unsigned &t,
-                                 const Vector<double> &s,
-                                 Vector<double> &values)
+    void get_interpolated_values(const unsigned& t,
+                                 const Vector<double>& s,
+                                 Vector<double>& values)
     {
       if (t != 0)
       {
@@ -161,7 +161,7 @@ namespace oomph
     ///  Further build: Copy source function pointer from father element
     void further_build()
     {
-      this->Source_fct_pt = dynamic_cast<RefineablePoissonEquations<DIM> *>(
+      this->Source_fct_pt = dynamic_cast<RefineablePoissonEquations<DIM>*>(
                               this->father_element_pt())
                               ->source_fct_pt();
     }
@@ -172,16 +172,16 @@ namespace oomph
     /// flag=1: compute both
     /// flag=0: compute only residual vector
     void fill_in_generic_residual_contribution_poisson(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      const unsigned &flag);
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag);
 
     /// \short Compute derivatives of elemental residual vector with respect
     /// to nodal coordinates. Overwrites default implementation in
     /// FiniteElement base class.
     /// dresidual_dnodal_coordinates(l,i,j) = d res(l) / dX_{ij}
     virtual void get_dresidual_dnodal_coordinates(
-      RankThreeTensor<double> &dresidual_dnodal_coordinates);
+      RankThreeTensor<double>& dresidual_dnodal_coordinates);
   };
 
   //======================================================================
@@ -207,13 +207,13 @@ namespace oomph
 
     /// Broken copy constructor
     RefineableQPoissonElement(
-      const RefineableQPoissonElement<DIM, NNODE_1D> &dummy)
+      const RefineableQPoissonElement<DIM, NNODE_1D>& dummy)
     {
       BrokenCopy::broken_copy("RefineableQuadPoissonElement");
     }
 
     /// Broken assignment operator
-    void operator=(const RefineableQPoissonElement<DIM, NNODE_1D> &)
+    void operator=(const RefineableQPoissonElement<DIM, NNODE_1D>&)
     {
       BrokenCopy::broken_assign("RefineableQuadPoissonElement");
     }
@@ -231,13 +231,13 @@ namespace oomph
     }
 
     /// \short Pointer to the j-th vertex node in the element
-    Node *vertex_node_pt(const unsigned &j) const
+    Node* vertex_node_pt(const unsigned& j) const
     {
       return QPoissonElement<DIM, NNODE_1D>::vertex_node_pt(j);
     }
 
     /// Rebuild from sons: empty
-    void rebuild_from_sons(Mesh *&mesh_pt) {}
+    void rebuild_from_sons(Mesh*& mesh_pt) {}
 
     /// \short Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.
@@ -281,13 +281,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    PRefineableQPoissonElement(const PRefineableQPoissonElement<DIM> &dummy)
+    PRefineableQPoissonElement(const PRefineableQPoissonElement<DIM>& dummy)
     {
       BrokenCopy::broken_copy("PRefineableQPoissonElement");
     }
 
     /// Broken assignment operator
-    void operator=(const PRefineableQPoissonElement<DIM> &)
+    void operator=(const PRefineableQPoissonElement<DIM>&)
     {
       BrokenCopy::broken_assign("PRefineableQPoissonElement");
     }
@@ -307,7 +307,7 @@ namespace oomph
     }
 
     /// \short Pointer to the j-th vertex node in the element
-    Node *vertex_node_pt(const unsigned &j) const
+    Node* vertex_node_pt(const unsigned& j) const
     {
       return QPoissonElement<DIM, 2>::vertex_node_pt(j);
     }
@@ -327,10 +327,10 @@ namespace oomph
     }
 
     void compute_energy_error(
-      std::ostream &outfile,
+      std::ostream& outfile,
       FiniteElement::SteadyExactSolutionFctPt exact_grad_pt,
-      double &error,
-      double &norm);
+      double& error,
+      double& norm);
   };
 
   ////////////////////////////////////////////////////////////////////////

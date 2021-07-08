@@ -50,7 +50,7 @@ namespace Global_Physical_Variables
 
   /// \short Pointer to pressure load (stored in Data so it can
   /// become an unknown in the problem when displacement control is used
-  Data *Pext_data_pt;
+  Data* Pext_data_pt;
 
   /// Perturbation pressure
   double Pcos = 1.0;
@@ -63,10 +63,10 @@ namespace Global_Physical_Variables
   }
 
   /// Load function, normal pressure loading
-  void press_load(const Vector<double> &xi,
-                  const Vector<double> &x,
-                  const Vector<double> &N,
-                  Vector<double> &load)
+  void press_load(const Vector<double>& xi,
+                  const Vector<double>& x,
+                  const Vector<double>& N,
+                  Vector<double>& load)
   {
     for (unsigned i = 0; i < 3; i++)
     {
@@ -86,16 +86,16 @@ class ShellProblem : public Problem
 {
 public:
   /// Constructor
-  ShellProblem(const unsigned &nx,
-               const unsigned &ny,
-               const double &lx,
-               const double &ly,
-               const unsigned &problem_id);
+  ShellProblem(const unsigned& nx,
+               const unsigned& ny,
+               const double& lx,
+               const double& ly,
+               const unsigned& problem_id);
 
   /// Overload Access function for the mesh
-  CircularCylindricalShellMesh<ELEMENT> *mesh_pt()
+  CircularCylindricalShellMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<CircularCylindricalShellMesh<ELEMENT> *>(
+    return dynamic_cast<CircularCylindricalShellMesh<ELEMENT>*>(
       Problem::mesh_pt());
   }
 
@@ -106,20 +106,20 @@ public:
   void actions_before_newton_solve() {}
 
   /// Create clamping bc face elements on the b-th boundary of the Mesh
-  void create_bc_elements(const unsigned &b);
+  void create_bc_elements(const unsigned& b);
 
   /// Do parameter study
-  void solve(string &dir_name);
+  void solve(string& dir_name);
 
 private:
   /// Pointer to GeomObject that specifies the undeformed midplane
-  GeomObject *Undeformed_midplane_pt;
+  GeomObject* Undeformed_midplane_pt;
 
   /// First trace node
-  Node *Trace_node_pt;
+  Node* Trace_node_pt;
 
   /// Second trace node
-  Node *Trace_node2_pt;
+  Node* Trace_node2_pt;
 
   /// Number of shell elements
   unsigned Nshell;
@@ -129,11 +129,11 @@ private:
 /// Constructor
 //======================================================================
 template<class ELEMENT>
-ShellProblem<ELEMENT>::ShellProblem(const unsigned &nx,
-                                    const unsigned &ny,
-                                    const double &lx,
-                                    const double &ly,
-                                    const unsigned &problem_id)
+ShellProblem<ELEMENT>::ShellProblem(const unsigned& nx,
+                                    const unsigned& ny,
+                                    const double& lx,
+                                    const double& ly,
+                                    const unsigned& problem_id)
 {
   // Create the undeformed midplane object
   Undeformed_midplane_pt = new EllipticalTube(1.0, 1.0);
@@ -275,14 +275,14 @@ ShellProblem<ELEMENT>::ShellProblem(const unsigned &nx,
   }
 
   // Controlled element
-  SolidFiniteElement *controlled_element_pt =
-    dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(nel_ctrl));
+  SolidFiniteElement* controlled_element_pt =
+    dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(nel_ctrl));
 
   // Fix the displacement in the y (1) direction...
   unsigned controlled_direction = 1;
 
   // Pointer to displacement control element
-  DisplacementControlElement *displ_control_el_pt;
+  DisplacementControlElement* displ_control_el_pt;
 
   // Build displacement control element
   displ_control_el_pt =
@@ -319,13 +319,13 @@ ShellProblem<ELEMENT>::ShellProblem(const unsigned &nx,
   unsigned n_element = nx * ny;
 
   // Explicit pointer to first element in the mesh
-  ELEMENT *first_el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(0));
+  ELEMENT* first_el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(0));
 
   // Loop over the elements
   for (unsigned e = 0; e < n_element; e++)
   {
     // Cast to a shell element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
     // Set the load function
     el_pt->load_vector_fct_pt() = &Global_Physical_Variables::press_load;
@@ -372,7 +372,7 @@ ShellProblem<ELEMENT>::ShellProblem(const unsigned &nx,
 /// Create clamping bc face elements on the b-th boundary of the Mesh
 //=======================================================================
 template<class ELEMENT>
-void ShellProblem<ELEMENT>::create_bc_elements(const unsigned &b)
+void ShellProblem<ELEMENT>::create_bc_elements(const unsigned& b)
 {
   // How many bulk elements are adjacent to boundary b?
   unsigned n_element = mesh_pt()->nboundary_element(b);
@@ -384,14 +384,14 @@ void ShellProblem<ELEMENT>::create_bc_elements(const unsigned &b)
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    ELEMENT *bulk_elem_pt =
-      dynamic_cast<ELEMENT *>(mesh_pt()->boundary_element_pt(b, e));
+    ELEMENT* bulk_elem_pt =
+      dynamic_cast<ELEMENT*>(mesh_pt()->boundary_element_pt(b, e));
 
     // What is the index of the face of element e along boundary b
     int face_index = mesh_pt()->face_index_at_boundary(b, e);
 
     // Build the corresponding bc element
-    ClampedHermiteShellBoundaryConditionElement *flux_element_pt =
+    ClampedHermiteShellBoundaryConditionElement* flux_element_pt =
       new ClampedHermiteShellBoundaryConditionElement(bulk_elem_pt, face_index);
 
     // Add the bc element to the mesh
@@ -404,7 +404,7 @@ void ShellProblem<ELEMENT>::create_bc_elements(const unsigned &b)
 // /Define the solve function, disp ctl and then continuation
 //================================================================
 template<class ELEMENT>
-void ShellProblem<ELEMENT>::solve(string &dir_name)
+void ShellProblem<ELEMENT>::solve(string& dir_name)
 {
   ofstream some_file;
   char filename[100];
@@ -481,7 +481,7 @@ void ShellProblem<ELEMENT>::solve(string &dir_name)
 //====================================================================
 /// Driver
 //====================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

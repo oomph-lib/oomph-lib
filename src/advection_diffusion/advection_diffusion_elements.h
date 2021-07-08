@@ -59,13 +59,13 @@ namespace oomph
   public:
     /// \short Function pointer to source function fct(x,f(x)) --
     /// x is a Vector!
-    typedef void (*AdvectionDiffusionSourceFctPt)(const Vector<double> &x,
-                                                  double &f);
+    typedef void (*AdvectionDiffusionSourceFctPt)(const Vector<double>& x,
+                                                  double& f);
 
     /// \short Function pointer to wind function fct(x,w(x)) --
     /// x is a Vector!
-    typedef void (*AdvectionDiffusionWindFctPt)(const Vector<double> &x,
-                                                Vector<double> &wind);
+    typedef void (*AdvectionDiffusionWindFctPt)(const Vector<double>& x,
+                                                Vector<double>& wind);
 
     /// \short Constructor: Initialise the Source_fct_pt and Wind_fct_pt
     /// to null and set (pointer to) Peclet number to default
@@ -79,13 +79,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    AdvectionDiffusionEquations(const AdvectionDiffusionEquations &dummy)
+    AdvectionDiffusionEquations(const AdvectionDiffusionEquations& dummy)
     {
       BrokenCopy::broken_copy("AdvectionDiffusionEquations");
     }
 
     /// Broken assignment operator
-    void operator=(const AdvectionDiffusionEquations &)
+    void operator=(const AdvectionDiffusionEquations&)
     {
       BrokenCopy::broken_assign("AdvectionDiffusionEquations");
     }
@@ -104,10 +104,10 @@ namespace oomph
 
     /// \short du/dt at local node n.
     /// Uses suitably interpolated value for hanging nodes.
-    double du_dt_adv_diff(const unsigned &n) const
+    double du_dt_adv_diff(const unsigned& n) const
     {
       // Get the data's timestepper
-      TimeStepper *time_stepper_pt = this->node_pt(n)->time_stepper_pt();
+      TimeStepper* time_stepper_pt = this->node_pt(n)->time_stepper_pt();
 
       // Initialise dudt
       double dudt = 0.0;
@@ -154,9 +154,9 @@ namespace oomph
 
     /// \short Write values of the i-th scalar field at the plot points. Needs
     /// to be implemented for each new specific element type.
-    void scalar_value_paraview(std::ofstream &file_out,
-                               const unsigned &i,
-                               const unsigned &nplot) const
+    void scalar_value_paraview(std::ofstream& file_out,
+                               const unsigned& i,
+                               const unsigned& nplot) const
     {
       // Vector of local coordinates
       Vector<double> s(DIM);
@@ -204,7 +204,7 @@ namespace oomph
     /// \short Name of the i-th scalar field. Default implementation
     /// returns V1 for the first one, V2 for the second etc. Can (should!) be
     /// overloaded with more meaningful names in specific elements.
-    std::string scalar_name_paraview(const unsigned &i) const
+    std::string scalar_name_paraview(const unsigned& i) const
     {
       // Winds
       if (i < DIM)
@@ -230,7 +230,7 @@ namespace oomph
     }
 
     /// Output with default number of plot points
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       unsigned nplot = 5;
       output(outfile, nplot);
@@ -238,10 +238,10 @@ namespace oomph
 
     /// \short Output FE representation of soln: x,y,u or x,y,z,u at
     /// nplot^DIM plot points
-    void output(std::ostream &outfile, const unsigned &nplot);
+    void output(std::ostream& outfile, const unsigned& nplot);
 
     /// C_style output with default number of plot points
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       unsigned n_plot = 5;
       output(file_pt, n_plot);
@@ -249,20 +249,20 @@ namespace oomph
 
     /// \short C-style output FE representation of soln: x,y,u or x,y,z,u at
     /// n_plot^DIM plot points
-    void output(FILE *file_pt, const unsigned &n_plot);
+    void output(FILE* file_pt, const unsigned& n_plot);
 
     /// Output exact soln: x,y,u_exact or x,y,z,u_exact at nplot^DIM plot points
-    void output_fct(std::ostream &outfile,
-                    const unsigned &nplot,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& nplot,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
 
     /// \short Output exact soln: x,y,u_exact or x,y,z,u_exact at
     /// nplot^DIM plot points (dummy time-dependent version to
     /// keep intel compiler happy)
     virtual void output_fct(
-      std::ostream &outfile,
-      const unsigned &nplot,
-      const double &time,
+      std::ostream& outfile,
+      const unsigned& nplot,
+      const double& time,
       FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
     {
       throw OomphLibError("There is no time-dependent output_fct() for "
@@ -272,17 +272,17 @@ namespace oomph
     }
 
     /// Get error against and norm of exact solution
-    void compute_error(std::ostream &outfile,
+    void compute_error(std::ostream& outfile,
                        FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-                       double &error,
-                       double &norm);
+                       double& error,
+                       double& norm);
 
     /// Dummy, time dependent error checker
-    void compute_error(std::ostream &outfile,
+    void compute_error(std::ostream& outfile,
                        FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
-                       const double &time,
-                       double &error,
-                       double &norm)
+                       const double& time,
+                       double& error,
+                       double& norm)
     {
       throw OomphLibError(
         "No time-dependent compute_error() for Advection Diffusion elements",
@@ -291,7 +291,7 @@ namespace oomph
     }
 
     /// Access function: Pointer to source function
-    AdvectionDiffusionSourceFctPt &source_fct_pt()
+    AdvectionDiffusionSourceFctPt& source_fct_pt()
     {
       return Source_fct_pt;
     }
@@ -303,7 +303,7 @@ namespace oomph
     }
 
     /// Access function: Pointer to wind function
-    AdvectionDiffusionWindFctPt &wind_fct_pt()
+    AdvectionDiffusionWindFctPt& wind_fct_pt()
     {
       return Wind_fct_pt;
     }
@@ -315,25 +315,25 @@ namespace oomph
     }
 
     /// Peclet number
-    const double &pe() const
+    const double& pe() const
     {
       return *Pe_pt;
     }
 
     /// Pointer to Peclet number
-    double *&pe_pt()
+    double*& pe_pt()
     {
       return Pe_pt;
     }
 
     /// Peclet number multiplied by Strouhal number
-    const double &pe_st() const
+    const double& pe_st() const
     {
       return *PeSt_pt;
     }
 
     /// Pointer to Peclet number multipled by Strouha number
-    double *&pe_st_pt()
+    double*& pe_st_pt()
     {
       return PeSt_pt;
     }
@@ -342,9 +342,9 @@ namespace oomph
     /// virtual to allow overloading in multi-physics problems where
     /// the strength of the source function might be determined by
     /// another system of equations
-    inline virtual void get_source_adv_diff(const unsigned &ipt,
-                                            const Vector<double> &x,
-                                            double &source) const
+    inline virtual void get_source_adv_diff(const unsigned& ipt,
+                                            const Vector<double>& x,
+                                            double& source) const
     {
       // If no source function has been set, return zero
       if (Source_fct_pt == 0)
@@ -363,10 +363,10 @@ namespace oomph
     /// virtual to allow overloading in multi-physics problems where
     /// the wind function might be determined by
     /// another system of equations
-    inline virtual void get_wind_adv_diff(const unsigned &ipt,
-                                          const Vector<double> &s,
-                                          const Vector<double> &x,
-                                          Vector<double> &wind) const
+    inline virtual void get_wind_adv_diff(const unsigned& ipt,
+                                          const Vector<double>& s,
+                                          const Vector<double>& x,
+                                          Vector<double>& wind) const
     {
       // If no wind function has been set, return zero
       if (Wind_fct_pt == 0)
@@ -384,7 +384,7 @@ namespace oomph
     }
 
     /// Get flux: \f$\mbox{flux}[i] = \mbox{d}u / \mbox{d}x_i \f$
-    void get_flux(const Vector<double> &s, Vector<double> &flux) const
+    void get_flux(const Vector<double>& s, Vector<double>& flux) const
     {
       // Find out how many nodes there are in the element
       unsigned n_node = nnode();
@@ -417,7 +417,7 @@ namespace oomph
     }
 
     /// Add the element's contribution to its residual vector (wrapper)
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Call the generic residuals function with flag set to 0 and using
       // a dummy matrix
@@ -430,8 +430,8 @@ namespace oomph
 
     /// \short Add the element's contribution to its residual vector and
     /// the element Jacobian matrix (wrapper)
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       // Call the generic routine with the flag set to 1
       fill_in_generic_residual_contribution_adv_diff(
@@ -441,9 +441,9 @@ namespace oomph
     /// Add the element's contribution to its residuals vector,
     /// jacobian matrix and mass matrix
     void fill_in_contribution_to_jacobian_and_mass_matrix(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix)
     {
       // Call the generic routine with the flag set to 2
       fill_in_generic_residual_contribution_adv_diff(
@@ -451,7 +451,7 @@ namespace oomph
     }
 
     /// Return FE representation of function value u(s) at local coordinate s
-    inline double interpolated_u_adv_diff(const Vector<double> &s) const
+    inline double interpolated_u_adv_diff(const Vector<double>& s) const
     {
       // Find number of nodes
       unsigned n_node = nnode();
@@ -483,9 +483,9 @@ namespace oomph
     /// data. This is virtual so that it can be overloaded in the
     /// refineable version
     virtual void dinterpolated_u_adv_diff_ddata(
-      const Vector<double> &s,
-      Vector<double> &du_ddata,
-      Vector<unsigned> &global_eqn_number)
+      const Vector<double>& s,
+      Vector<double>& du_ddata,
+      Vector<unsigned>& global_eqn_number)
     {
       // Find number of nodes
       const unsigned n_node = nnode();
@@ -541,34 +541,34 @@ namespace oomph
     /// \short Shape/test functions and derivs w.r.t. to global coords at
     /// local coord. s; return  Jacobian of mapping
     virtual double dshape_and_dtest_eulerian_adv_diff(
-      const Vector<double> &s,
-      Shape &psi,
-      DShape &dpsidx,
-      Shape &test,
-      DShape &dtestdx) const = 0;
+      const Vector<double>& s,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const = 0;
 
     /// \short Shape/test functions and derivs w.r.t. to global coords at
     /// integration point ipt; return  Jacobian of mapping
     virtual double dshape_and_dtest_eulerian_at_knot_adv_diff(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidx,
-      Shape &test,
-      DShape &dtestdx) const = 0;
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const = 0;
 
     /// \short Add the element's contribution to its residual vector only
     /// (if flag=and/or element  Jacobian matrix
     virtual void fill_in_generic_residual_contribution_adv_diff(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix,
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
       unsigned flag);
 
     /// Pointer to global Peclet number
-    double *Pe_pt;
+    double* Pe_pt;
 
     /// Pointer to global Peclet number multiplied by Strouhal number
-    double *PeSt_pt;
+    double* PeSt_pt;
 
     /// Pointer to source function:
     AdvectionDiffusionSourceFctPt Source_fct_pt;
@@ -615,56 +615,56 @@ namespace oomph
 
     /// Broken copy constructor
     QAdvectionDiffusionElement(
-      const QAdvectionDiffusionElement<DIM, NNODE_1D> &dummy)
+      const QAdvectionDiffusionElement<DIM, NNODE_1D>& dummy)
     {
       BrokenCopy::broken_copy("QAdvectionDiffusionElement");
     }
 
     /// Broken assignment operator
-    void operator=(const QAdvectionDiffusionElement<DIM, NNODE_1D> &)
+    void operator=(const QAdvectionDiffusionElement<DIM, NNODE_1D>&)
     {
       BrokenCopy::broken_assign("QAdvectionDiffusionElement");
     }
 
     /// \short  Required  # of `values' (pinned or dofs)
     /// at node n
-    inline unsigned required_nvalue(const unsigned &n) const
+    inline unsigned required_nvalue(const unsigned& n) const
     {
       return Initial_Nvalue;
     }
 
     /// \short Output function:
     ///  x,y,u   or    x,y,z,u
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       AdvectionDiffusionEquations<DIM>::output(outfile);
     }
 
     /// \short Output function:
     ///  x,y,u   or    x,y,z,u at n_plot^DIM plot points
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       AdvectionDiffusionEquations<DIM>::output(outfile, n_plot);
     }
 
     /// \short C-style output function:
     ///  x,y,u   or    x,y,z,u
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       AdvectionDiffusionEquations<DIM>::output(file_pt);
     }
 
     ///  \short C-style output function:
     ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       AdvectionDiffusionEquations<DIM>::output(file_pt, n_plot);
     }
 
     /// \short Output function for an exact solution:
     ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
-    void output_fct(std::ostream &outfile,
-                    const unsigned &n_plot,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& n_plot,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
     {
       AdvectionDiffusionEquations<DIM>::output_fct(
@@ -674,9 +674,9 @@ namespace oomph
     /// \short Output function for a time-dependent exact solution.
     ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
     /// (Calls the steady version)
-    void output_fct(std::ostream &outfile,
-                    const unsigned &n_plot,
-                    const double &time,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& n_plot,
+                    const double& time,
                     FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
     {
       AdvectionDiffusionEquations<DIM>::output_fct(
@@ -686,20 +686,20 @@ namespace oomph
   protected:
     /// Shape, test functions & derivs. w.r.t. to global coords. Return
     /// Jacobian.
-    inline double dshape_and_dtest_eulerian_adv_diff(const Vector<double> &s,
-                                                     Shape &psi,
-                                                     DShape &dpsidx,
-                                                     Shape &test,
-                                                     DShape &dtestdx) const;
+    inline double dshape_and_dtest_eulerian_adv_diff(const Vector<double>& s,
+                                                     Shape& psi,
+                                                     DShape& dpsidx,
+                                                     Shape& test,
+                                                     DShape& dtestdx) const;
 
     /// \short Shape, test functions & derivs. w.r.t. to global coords. at
     /// integration point ipt. Return Jacobian.
     inline double dshape_and_dtest_eulerian_at_knot_adv_diff(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidx,
-      Shape &test,
-      DShape &dtestdx) const;
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const;
   };
 
   // Inline functions:
@@ -712,11 +712,11 @@ namespace oomph
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
   double QAdvectionDiffusionElement<DIM, NNODE_1D>::
-    dshape_and_dtest_eulerian_adv_diff(const Vector<double> &s,
-                                       Shape &psi,
-                                       DShape &dpsidx,
-                                       Shape &test,
-                                       DShape &dtestdx) const
+    dshape_and_dtest_eulerian_adv_diff(const Vector<double>& s,
+                                       Shape& psi,
+                                       DShape& dpsidx,
+                                       Shape& test,
+                                       DShape& dtestdx) const
   {
     // Call the geometrical shape functions and derivatives
     double J = this->dshape_eulerian(s, psi, dpsidx);
@@ -744,11 +744,11 @@ namespace oomph
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
   double QAdvectionDiffusionElement<DIM, NNODE_1D>::
-    dshape_and_dtest_eulerian_at_knot_adv_diff(const unsigned &ipt,
-                                               Shape &psi,
-                                               DShape &dpsidx,
-                                               Shape &test,
-                                               DShape &dtestdx) const
+    dshape_and_dtest_eulerian_at_knot_adv_diff(const unsigned& ipt,
+                                               Shape& psi,
+                                               DShape& dpsidx,
+                                               Shape& test,
+                                               DShape& dtestdx) const
   {
     // Call the geometrical shape functions and derivatives
     double J = this->dshape_eulerian_at_knot(ipt, psi, dpsidx);

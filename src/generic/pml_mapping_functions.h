@@ -55,10 +55,10 @@ namespace oomph
     /// \short Pure virtual to return Pml mapping gamma, where gamma is the
     /// \f$d\tilde x / d x\f$ as  function of \f$\nu\f$ where \f$\nu = x - h\f$
     /// where h is the vector from the origin to the start of the Pml
-    virtual std::complex<double> gamma(const double &nu_i,
-                                       const double &pml_width_i,
-                                       const double &wavenumber_squared,
-                                       const double &alpha_shift = 0.0) = 0;
+    virtual std::complex<double> gamma(const double& nu_i,
+                                       const double& pml_width_i,
+                                       const double& wavenumber_squared,
+                                       const double& alpha_shift = 0.0) = 0;
   };
 
   //=======================================================================
@@ -74,10 +74,10 @@ namespace oomph
 
     /// \short Overwrite the pure Pml mapping coefficient function to return the
     /// coeffcients proposed by Bermudez et al
-    std::complex<double> gamma(const double &nu_i,
-                               const double &pml_width_i,
-                               const double &wavenumber_squared,
-                               const double &alpha_shift = 0.0)
+    std::complex<double> gamma(const double& nu_i,
+                               const double& pml_width_i,
+                               const double& wavenumber_squared,
+                               const double& alpha_shift = 0.0)
     {
       /// return \f$\gamma=1 + (1/k)(i/|outer_boundary - x|)\f$
       return 1.0 + MathematicalConstants::I / sqrt(wavenumber_squared) *
@@ -99,10 +99,10 @@ namespace oomph
 
     /// \short Overwrite the pure Pml mapping coefficient function to return the
     /// coeffcients proposed by Bermudez et al
-    std::complex<double> gamma(const double &nu_i,
-                               const double &pml_width_i,
-                               const double &wavenumber_squared,
-                               const double &alpha_shift = 0.0)
+    std::complex<double> gamma(const double& nu_i,
+                               const double& pml_width_i,
+                               const double& wavenumber_squared,
+                               const double& alpha_shift = 0.0)
     {
       /// return \f$\gamma=1 + (i/k)(1/|outer_boundary - x|-1/|pml width|)\f$
       return 1.0 + MathematicalConstants::I / sqrt(wavenumber_squared) *

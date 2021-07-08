@@ -75,58 +75,58 @@ namespace oomph
     /// \short Velocity shape and test functions and their derivs
     /// w.r.t. to global coords  at local coordinate s (taken from geometry)
     /// Return Jacobian of mapping between local and global coordinates.
-    inline double dshape_and_dtest_eulerian_axi_nst(const Vector<double> &s,
-                                                    Shape &psi,
-                                                    DShape &dpsidx,
-                                                    Shape &test,
-                                                    DShape &dtestdx) const;
+    inline double dshape_and_dtest_eulerian_axi_nst(const Vector<double>& s,
+                                                    Shape& psi,
+                                                    DShape& dpsidx,
+                                                    Shape& test,
+                                                    DShape& dtestdx) const;
 
     /// \short Velocity shape and test functions and their derivs
     /// w.r.t. to global coords at ipt-th integation point (taken from geometry)
     /// Return Jacobian of mapping between local and global coordinates.
     inline double dshape_and_dtest_eulerian_at_knot_axi_nst(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidx,
-      Shape &test,
-      DShape &dtestdx) const;
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const;
 
     /// \short Shape/test functions and derivs w.r.t. to global coords at
     /// integration point ipt; return Jacobian of mapping (J). Also compute
     /// derivatives of dpsidx, dtestdx and J w.r.t. nodal coordinates.
     inline double dshape_and_dtest_eulerian_at_knot_axi_nst(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidx,
-      RankFourTensor<double> &d_dpsidx_dX,
-      Shape &test,
-      DShape &dtestdx,
-      RankFourTensor<double> &d_dtestdx_dX,
-      DenseMatrix<double> &djacobian_dX) const;
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      RankFourTensor<double>& d_dpsidx_dX,
+      Shape& test,
+      DShape& dtestdx,
+      RankFourTensor<double>& d_dtestdx_dX,
+      DenseMatrix<double>& djacobian_dX) const;
 
     /// \short Pressure shape and test functions and their derivs
     /// w.r.t. to global coords  at local coordinate s (taken from geometry)
     /// Return Jacobian of mapping between local and global coordinates.
-    inline double dpshape_and_dptest_eulerian_axi_nst(const Vector<double> &s,
-                                                      Shape &ppsi,
-                                                      DShape &dppsidx,
-                                                      Shape &ptest,
-                                                      DShape &dptestdx) const;
+    inline double dpshape_and_dptest_eulerian_axi_nst(const Vector<double>& s,
+                                                      Shape& ppsi,
+                                                      DShape& dppsidx,
+                                                      Shape& ptest,
+                                                      DShape& dptestdx) const;
 
   public:
     /// Pressure shape functions at local coordinate s
-    inline void pshape_axi_nst(const Vector<double> &s, Shape &psi) const;
+    inline void pshape_axi_nst(const Vector<double>& s, Shape& psi) const;
 
     /// Pressure shape and test functions at local coordinte s
-    inline void pshape_axi_nst(const Vector<double> &s,
-                               Shape &psi,
-                               Shape &test) const;
+    inline void pshape_axi_nst(const Vector<double>& s,
+                               Shape& psi,
+                               Shape& test) const;
 
     /// Unpin all internal pressure dofs
     void unpin_all_internal_pressure_dofs();
 
     /// Return the local equation numbers for the pressure values.
-    inline int p_local_eqn(const unsigned &n) const
+    inline int p_local_eqn(const unsigned& n) const
     {
       return this->internal_local_eqn(P_axi_nst_internal_index, n);
     }
@@ -144,7 +144,7 @@ namespace oomph
 
     /// Broken copy constructor
     GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement(
-      const GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement &dummy)
+      const GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement& dummy)
     {
       BrokenCopy::broken_copy(
         "GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement");
@@ -152,14 +152,14 @@ namespace oomph
 
     /// Broken assignment operator
     void operator=(
-      const GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement &)
+      const GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement&)
     {
       BrokenCopy::broken_assign(
         "GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement");
     }
 
     /// \short Number of values (pinned or dofs) required at local node n.
-    inline virtual unsigned required_nvalue(const unsigned &n) const
+    inline virtual unsigned required_nvalue(const unsigned& n) const
     {
       return 3;
     }
@@ -167,7 +167,7 @@ namespace oomph
     /// \short Return the pressure values at internal dof i_internal
     /// (Discontinous pressure interpolation -- no need to cater for hanging
     /// nodes).
-    double p_axi_nst(const unsigned &i) const
+    double p_axi_nst(const unsigned& i) const
     {
       return this->internal_data_pt(P_axi_nst_internal_index)->value(i);
     }
@@ -179,7 +179,7 @@ namespace oomph
     }
 
     /// Pin p_dof-th pressure dof and set it to value specified by p_value.
-    void fix_pressure(const unsigned &p_dof, const double &p_value)
+    void fix_pressure(const unsigned& p_dof, const double& p_value)
     {
       this->internal_data_pt(P_axi_nst_internal_index)->pin(p_dof);
       this->internal_data_pt(P_axi_nst_internal_index)
@@ -191,7 +191,7 @@ namespace oomph
     /// index the values in the data object that affect the load (traction),
     /// as specified in the get_load() function.
     void identify_load_data(
-      std::set<std::pair<Data *, unsigned>> &paired_load_data);
+      std::set<std::pair<Data*, unsigned>>& paired_load_data);
 
     /// \short  Add to the set \c paired_pressure_data pairs
     /// containing
@@ -202,29 +202,29 @@ namespace oomph
     /// for all pressure values that affect the
     /// load computed in the \c get_load(...) function.
     void identify_pressure_data(
-      std::set<std::pair<Data *, unsigned>> &paired_pressure_data);
+      std::set<std::pair<Data*, unsigned>>& paired_pressure_data);
 
     /// Redirect output to NavierStokesEquations output
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       GeneralisedNewtonianAxisymmetricNavierStokesEquations::output(outfile);
     }
 
     /// Redirect output to NavierStokesEquations output
-    void output(std::ostream &outfile, const unsigned &nplot)
+    void output(std::ostream& outfile, const unsigned& nplot)
     {
       GeneralisedNewtonianAxisymmetricNavierStokesEquations::output(outfile,
                                                                     nplot);
     }
 
     /// Redirect output to NavierStokesEquations output
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       GeneralisedNewtonianAxisymmetricNavierStokesEquations::output(file_pt);
     }
 
     /// Redirect output to NavierStokesEquations output
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       GeneralisedNewtonianAxisymmetricNavierStokesEquations::output(file_pt,
                                                                     n_plot);
@@ -244,7 +244,7 @@ namespace oomph
     }
 
     /// \short Pointer to the j-th vertex node in the element
-    Node *vertex_node_pt(const unsigned &j) const
+    Node* vertex_node_pt(const unsigned& j) const
     {
       return node_pt(j);
     }
@@ -258,7 +258,7 @@ namespace oomph
 
     /// \short Get 'flux' for Z2 error recovery:   Upper triangular entries
     /// in strain rate tensor.
-    void get_Z2_flux(const Vector<double> &s, Vector<double> &flux)
+    void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
 #ifdef PARANOID
       unsigned num_entries = 6;
@@ -313,7 +313,7 @@ namespace oomph
     /// (Function can obviously only be called if the equation numbering
     /// scheme has been set up.) Velocity=0; Pressure=1
     void get_dof_numbers_for_unknowns(
-      std::list<std::pair<unsigned long, unsigned>> &dof_lookup_list) const
+      std::list<std::pair<unsigned long, unsigned>>& dof_lookup_list) const
     {
       // number of nodes
       unsigned n_node = this->nnode();
@@ -384,11 +384,11 @@ namespace oomph
   /// local and global coordinates.
   //=======================================================================
   inline double GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement::
-    dshape_and_dtest_eulerian_axi_nst(const Vector<double> &s,
-                                      Shape &psi,
-                                      DShape &dpsidx,
-                                      Shape &test,
-                                      DShape &dtestdx) const
+    dshape_and_dtest_eulerian_axi_nst(const Vector<double>& s,
+                                      Shape& psi,
+                                      DShape& dpsidx,
+                                      Shape& test,
+                                      DShape& dtestdx) const
   {
     // Call the geometrical shape functions and derivatives
     double J = this->dshape_eulerian(s, psi, dpsidx);
@@ -405,11 +405,11 @@ namespace oomph
   /// local and global coordinates.
   //=======================================================================
   inline double GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement::
-    dshape_and_dtest_eulerian_at_knot_axi_nst(const unsigned &ipt,
-                                              Shape &psi,
-                                              DShape &dpsidx,
-                                              Shape &test,
-                                              DShape &dtestdx) const
+    dshape_and_dtest_eulerian_at_knot_axi_nst(const unsigned& ipt,
+                                              Shape& psi,
+                                              DShape& dpsidx,
+                                              Shape& test,
+                                              DShape& dtestdx) const
   {
     // Call the geometrical shape functions and derivatives
     double J = this->dshape_eulerian_at_knot(ipt, psi, dpsidx);
@@ -430,14 +430,14 @@ namespace oomph
   //=======================================================================
   inline double GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement::
     dshape_and_dtest_eulerian_at_knot_axi_nst(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidx,
-      RankFourTensor<double> &d_dpsidx_dX,
-      Shape &test,
-      DShape &dtestdx,
-      RankFourTensor<double> &d_dtestdx_dX,
-      DenseMatrix<double> &djacobian_dX) const
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      RankFourTensor<double>& d_dpsidx_dX,
+      Shape& test,
+      DShape& dtestdx,
+      RankFourTensor<double>& d_dtestdx_dX,
+      DenseMatrix<double>& djacobian_dX) const
   {
     // Call the geometrical shape functions and derivatives
     const double J = this->dshape_eulerian_at_knot(
@@ -456,7 +456,7 @@ namespace oomph
   /// Pressure shape functions
   //=======================================================================
   inline void GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement::
-    pshape_axi_nst(const Vector<double> &s, Shape &psi) const
+    pshape_axi_nst(const Vector<double>& s, Shape& psi) const
   {
     psi[0] = 1.0;
     psi[1] = s[0];
@@ -467,7 +467,7 @@ namespace oomph
   /// Pressure shape and test functions
   //=======================================================================
   inline void GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement::
-    pshape_axi_nst(const Vector<double> &s, Shape &psi, Shape &test) const
+    pshape_axi_nst(const Vector<double>& s, Shape& psi, Shape& test) const
   {
     // Call the pressure shape functions
     this->pshape_axi_nst(s, psi);
@@ -481,11 +481,11 @@ namespace oomph
   /// Return Jacobian of mapping between local and global coordinates.
   //==========================================================================
   inline double GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement::
-    dpshape_and_dptest_eulerian_axi_nst(const Vector<double> &s,
-                                        Shape &ppsi,
-                                        DShape &dppsidx,
-                                        Shape &ptest,
-                                        DShape &dptestdx) const
+    dpshape_and_dptest_eulerian_axi_nst(const Vector<double>& s,
+                                        Shape& ppsi,
+                                        DShape& dppsidx,
+                                        Shape& ptest,
+                                        DShape& dptestdx) const
   {
     // Initalise with shape fcts and derivs. w.r.t. to local coordinates
     ppsi[0] = 1.0;
@@ -573,43 +573,43 @@ namespace oomph
     /// \short Velocity shape and test functions and their derivs
     /// w.r.t. to global coords  at local coordinate s (taken from geometry)
     /// Return Jacobian of mapping between local and global coordinates.
-    inline double dshape_and_dtest_eulerian_axi_nst(const Vector<double> &s,
-                                                    Shape &psi,
-                                                    DShape &dpsidx,
-                                                    Shape &test,
-                                                    DShape &dtestdx) const;
+    inline double dshape_and_dtest_eulerian_axi_nst(const Vector<double>& s,
+                                                    Shape& psi,
+                                                    DShape& dpsidx,
+                                                    Shape& test,
+                                                    DShape& dtestdx) const;
 
     /// \short Velocity shape and test functions and their derivs
     /// w.r.t. to global coords  at local coordinate s (taken from geometry)
     /// Return Jacobian of mapping between local and global coordinates.
     inline double dshape_and_dtest_eulerian_at_knot_axi_nst(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidx,
-      Shape &test,
-      DShape &dtestdx) const;
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const;
 
     /// \short Shape/test functions and derivs w.r.t. to global coords at
     /// integration point ipt; return Jacobian of mapping (J). Also compute
     /// derivatives of dpsidx, dtestdx and J w.r.t. nodal coordinates.
     inline double dshape_and_dtest_eulerian_at_knot_axi_nst(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidx,
-      RankFourTensor<double> &d_dpsidx_dX,
-      Shape &test,
-      DShape &dtestdx,
-      RankFourTensor<double> &d_dtestdx_dX,
-      DenseMatrix<double> &djacobian_dX) const;
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      RankFourTensor<double>& d_dpsidx_dX,
+      Shape& test,
+      DShape& dtestdx,
+      RankFourTensor<double>& d_dtestdx_dX,
+      DenseMatrix<double>& djacobian_dX) const;
 
     /// \short Compute the pressure shape and test functions and derivatives
     /// w.r.t. global coords at local coordinate s.
     /// Return Jacobian of mapping between local and global coordinates.
-    virtual double dpshape_and_dptest_eulerian_axi_nst(const Vector<double> &s,
-                                                       Shape &ppsi,
-                                                       DShape &dppsidx,
-                                                       Shape &ptest,
-                                                       DShape &dptestdx) const;
+    virtual double dpshape_and_dptest_eulerian_axi_nst(const Vector<double>& s,
+                                                       Shape& ppsi,
+                                                       DShape& dppsidx,
+                                                       Shape& ptest,
+                                                       DShape& dptestdx) const;
 
     /// Unpin all pressure dofs
     void unpin_all_nodal_pressure_dofs();
@@ -629,14 +629,14 @@ namespace oomph
 
     /// Broken copy constructor
     GeneralisedNewtonianAxisymmetricTTaylorHoodElement(
-      const GeneralisedNewtonianAxisymmetricTTaylorHoodElement &dummy)
+      const GeneralisedNewtonianAxisymmetricTTaylorHoodElement& dummy)
     {
       BrokenCopy::broken_copy(
         "GeneralisedNewtonianAxisymmetricTTaylorHoodElement");
     }
 
     /// Broken assignment operator
-    void operator=(const GeneralisedNewtonianAxisymmetricTTaylorHoodElement &)
+    void operator=(const GeneralisedNewtonianAxisymmetricTTaylorHoodElement&)
     {
       BrokenCopy::broken_assign(
         "GeneralisedNewtonianAxisymmetricTTaylorHoodElement");
@@ -644,7 +644,7 @@ namespace oomph
 
     /// \short Number of values (pinned or dofs) required at node n. Can
     /// be overwritten for hanging node version
-    inline virtual unsigned required_nvalue(const unsigned &n) const
+    inline virtual unsigned required_nvalue(const unsigned& n) const
     {
       return Initial_Nvalue[n];
     }
@@ -654,12 +654,12 @@ namespace oomph
     // {return this->node_pt(Pconv[p_dof])->is_hanging(DIM);}
 
     /// Pressure shape functions at local coordinate s
-    inline void pshape_axi_nst(const Vector<double> &s, Shape &psi) const;
+    inline void pshape_axi_nst(const Vector<double>& s, Shape& psi) const;
 
     /// Pressure shape and test functions at local coordinte s
-    inline void pshape_axi_nst(const Vector<double> &s,
-                               Shape &psi,
-                               Shape &test) const;
+    inline void pshape_axi_nst(const Vector<double>& s,
+                               Shape& psi,
+                               Shape& test) const;
 
     /// \short Which nodal value represents the pressure?
     unsigned p_index_axi_nst()
@@ -672,14 +672,14 @@ namespace oomph
     //{return this->Node_pt[Pconv[n_p]];}
 
     /// Return the local equation numbers for the pressure values.
-    inline int p_local_eqn(const unsigned &n) const
+    inline int p_local_eqn(const unsigned& n) const
     {
       return this->nodal_local_eqn(Pconv[n], 3);
     }
 
     /// \short Access function for the pressure values at local pressure
     /// node n_p (const version)
-    double p_axi_nst(const unsigned &n_p) const
+    double p_axi_nst(const unsigned& n_p) const
     {
       return this->nodal_value(Pconv[n_p], 3);
     }
@@ -697,7 +697,7 @@ namespace oomph
     }
 
     /// Pin p_dof-th pressure dof and set it to value specified by p_value.
-    void fix_pressure(const unsigned &p_dof, const double &p_value)
+    void fix_pressure(const unsigned& p_dof, const double& p_value)
     {
       this->node_pt(Pconv[p_dof])->pin(3);
       this->node_pt(Pconv[p_dof])->set_value(3, p_value);
@@ -711,7 +711,7 @@ namespace oomph
     /// for all values (pressures, velocities) that affect the
     /// load computed in the \c get_load(...) function.
     void identify_load_data(
-      std::set<std::pair<Data *, unsigned>> &paired_load_data);
+      std::set<std::pair<Data*, unsigned>>& paired_load_data);
 
     /// \short  Add to the set \c paired_pressure_data pairs
     /// containing
@@ -722,29 +722,29 @@ namespace oomph
     /// for all pressure values that affect the
     /// load computed in the \c get_load(...) function.
     void identify_pressure_data(
-      std::set<std::pair<Data *, unsigned>> &paired_pressure_data);
+      std::set<std::pair<Data*, unsigned>>& paired_pressure_data);
 
     /// Redirect output to NavierStokesEquations output
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       GeneralisedNewtonianAxisymmetricNavierStokesEquations::output(outfile);
     }
 
     /// Redirect output to NavierStokesEquations output
-    void output(std::ostream &outfile, const unsigned &nplot)
+    void output(std::ostream& outfile, const unsigned& nplot)
     {
       GeneralisedNewtonianAxisymmetricNavierStokesEquations::output(outfile,
                                                                     nplot);
     }
 
     /// Redirect output to NavierStokesEquations output
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       GeneralisedNewtonianAxisymmetricNavierStokesEquations::output(file_pt);
     }
 
     /// Redirect output to NavierStokesEquations output
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       GeneralisedNewtonianAxisymmetricNavierStokesEquations::output(file_pt,
                                                                     n_plot);
@@ -764,7 +764,7 @@ namespace oomph
     }
 
     /// \short Pointer to the j-th vertex node in the element
-    Node *vertex_node_pt(const unsigned &j) const
+    Node* vertex_node_pt(const unsigned& j) const
     {
       return node_pt(j);
     }
@@ -778,7 +778,7 @@ namespace oomph
 
     /// \short Get 'flux' for Z2 error recovery:   Upper triangular entries
     /// in strain rate tensor.
-    void get_Z2_flux(const Vector<double> &s, Vector<double> &flux)
+    void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
 #ifdef PARANOID
       unsigned num_entries = 6;
@@ -833,7 +833,7 @@ namespace oomph
     /// (Function can obviously only be called if the equation numbering
     /// scheme has been set up.) Velocity=0; Pressure=1
     void get_dof_numbers_for_unknowns(
-      std::list<std::pair<unsigned long, unsigned>> &dof_lookup_list) const
+      std::list<std::pair<unsigned long, unsigned>>& dof_lookup_list) const
     {
       // number of nodes
       unsigned n_node = this->nnode();
@@ -881,11 +881,11 @@ namespace oomph
   /// local and global coordinates.
   //==========================================================================
   inline double GeneralisedNewtonianAxisymmetricTTaylorHoodElement::
-    dshape_and_dtest_eulerian_axi_nst(const Vector<double> &s,
-                                      Shape &psi,
-                                      DShape &dpsidx,
-                                      Shape &test,
-                                      DShape &dtestdx) const
+    dshape_and_dtest_eulerian_axi_nst(const Vector<double>& s,
+                                      Shape& psi,
+                                      DShape& dpsidx,
+                                      Shape& test,
+                                      DShape& dtestdx) const
   {
     // Call the geometrical shape functions and derivatives
     double J = this->dshape_eulerian(s, psi, dpsidx);
@@ -902,11 +902,11 @@ namespace oomph
   /// local and global coordinates.
   //==========================================================================
   inline double GeneralisedNewtonianAxisymmetricTTaylorHoodElement::
-    dshape_and_dtest_eulerian_at_knot_axi_nst(const unsigned &ipt,
-                                              Shape &psi,
-                                              DShape &dpsidx,
-                                              Shape &test,
-                                              DShape &dtestdx) const
+    dshape_and_dtest_eulerian_at_knot_axi_nst(const unsigned& ipt,
+                                              Shape& psi,
+                                              DShape& dpsidx,
+                                              Shape& test,
+                                              DShape& dtestdx) const
   {
     // Call the geometrical shape functions and derivatives
     double J = this->dshape_eulerian_at_knot(ipt, psi, dpsidx);
@@ -927,14 +927,14 @@ namespace oomph
   //==========================================================================
   inline double GeneralisedNewtonianAxisymmetricTTaylorHoodElement::
     dshape_and_dtest_eulerian_at_knot_axi_nst(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidx,
-      RankFourTensor<double> &d_dpsidx_dX,
-      Shape &test,
-      DShape &dtestdx,
-      RankFourTensor<double> &d_dtestdx_dX,
-      DenseMatrix<double> &djacobian_dX) const
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      RankFourTensor<double>& d_dpsidx_dX,
+      Shape& test,
+      DShape& dtestdx,
+      RankFourTensor<double>& d_dtestdx_dX,
+      DenseMatrix<double>& djacobian_dX) const
   {
     // Call the geometrical shape functions and derivatives
     const double J = this->dshape_eulerian_at_knot(
@@ -954,11 +954,11 @@ namespace oomph
   /// Return Jacobian of mapping between local and global coordinates.
   //==========================================================================
   inline double GeneralisedNewtonianAxisymmetricTTaylorHoodElement::
-    dpshape_and_dptest_eulerian_axi_nst(const Vector<double> &s,
-                                        Shape &ppsi,
-                                        DShape &dppsidx,
-                                        Shape &ptest,
-                                        DShape &dptestdx) const
+    dpshape_and_dptest_eulerian_axi_nst(const Vector<double>& s,
+                                        Shape& ppsi,
+                                        DShape& dppsidx,
+                                        Shape& ptest,
+                                        DShape& dptestdx) const
   {
     ppsi[0] = s[0];
     ppsi[1] = s[1];
@@ -1000,7 +1000,7 @@ namespace oomph
   /// Pressure shape functions
   //==========================================================================
   inline void GeneralisedNewtonianAxisymmetricTTaylorHoodElement::
-    pshape_axi_nst(const Vector<double> &s, Shape &psi) const
+    pshape_axi_nst(const Vector<double>& s, Shape& psi) const
   {
     psi[0] = s[0];
     psi[1] = s[1];
@@ -1011,7 +1011,7 @@ namespace oomph
   /// Pressure shape and test functions
   //==========================================================================
   inline void GeneralisedNewtonianAxisymmetricTTaylorHoodElement::
-    pshape_axi_nst(const Vector<double> &s, Shape &psi, Shape &test) const
+    pshape_axi_nst(const Vector<double>& s, Shape& psi, Shape& test) const
   {
     // Call the pressure shape functions
     this->pshape_axi_nst(s, psi);

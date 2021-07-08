@@ -63,12 +63,12 @@ class RefineableElasticQuarterTubeMesh :
 public:
   /// \short Constructor:
   RefineableElasticQuarterTubeMesh(
-    GeomObject *wall_pt,
-    const Vector<double> &xi_lo,
-    const double &fract_mid,
-    const Vector<double> &xi_hi,
-    const unsigned &nlayer,
-    TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+    GeomObject* wall_pt,
+    const Vector<double>& xi_lo,
+    const double& fract_mid,
+    const Vector<double>& xi_hi,
+    const unsigned& nlayer,
+    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
     QuarterTubeMesh<ELEMENT>(
       wall_pt, xi_lo, fract_mid, xi_hi, nlayer, time_stepper_pt),
     RefineableQuarterTubeMesh<ELEMENT>(
@@ -98,12 +98,12 @@ class ElasticQuarterTubeMesh :
 public:
   /// \short Constructor:
   ElasticQuarterTubeMesh(
-    GeomObject *wall_pt,
-    const Vector<double> &xi_lo,
-    const double &fract_mid,
-    const Vector<double> &xi_hi,
-    const unsigned &nlayer,
-    TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+    GeomObject* wall_pt,
+    const Vector<double>& xi_lo,
+    const double& fract_mid,
+    const Vector<double>& xi_hi,
+    const unsigned& nlayer,
+    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
     QuarterTubeMesh<ELEMENT>(
       wall_pt, xi_lo, fract_mid, xi_hi, nlayer, time_stepper_pt),
     SolidMesh()
@@ -132,13 +132,13 @@ class RefineableElasticCubicMesh :
 public:
   /// \short Constructor:
   RefineableElasticCubicMesh(
-    const unsigned &nx,
-    const unsigned &ny,
-    const unsigned &nz,
-    const double &a,
-    const double &b,
-    const double &c,
-    TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+    const unsigned& nx,
+    const unsigned& ny,
+    const unsigned& nz,
+    const double& a,
+    const double& b,
+    const double& c,
+    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
     SimpleCubicMesh<ELEMENT>(nx, ny, nz, -a, a, -b, b, -c, c, time_stepper_pt),
     RefineableBrickMesh<ELEMENT>(),
     SolidMesh()
@@ -167,13 +167,13 @@ class ElasticCubicMesh :
 {
 public:
   /// \short Constructor:
-  ElasticCubicMesh(const unsigned &nx,
-                   const unsigned &ny,
-                   const unsigned &nz,
-                   const double &a,
-                   const double &b,
-                   const double &c,
-                   TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+  ElasticCubicMesh(const unsigned& nx,
+                   const unsigned& ny,
+                   const unsigned& nz,
+                   const double& a,
+                   const double& b,
+                   const double& c,
+                   TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
     SimpleCubicMesh<ELEMENT>(nx, ny, nz, -a, a, -b, b, -c, c, time_stepper_pt)
   {
     // Assign the initial lagrangian coordinates
@@ -283,7 +283,7 @@ public:
 namespace Global_Physical_Variables
 {
   /// Pointer to strain energy function
-  StrainEnergyFunction *Strain_energy_function_pt;
+  StrainEnergyFunction* Strain_energy_function_pt;
 
   /// "Mooney Rivlin" coefficient for generalised Mooney Rivlin law
   double C1 = 1.3;
@@ -298,7 +298,7 @@ namespace Global_Physical_Variables
   double L = 10.0;
 
   /// Pointer to constitutive law
-  ConstitutiveLaw *Constitutive_law_pt;
+  ConstitutiveLaw* Constitutive_law_pt;
 
   /// Elastic modulus
   double E = 1.0;
@@ -314,10 +314,10 @@ namespace Global_Physical_Variables
   /// depend on the Lagrangian and Eulerian coordinates x and xi, and on the
   /// outer unit normal to the surface. Here we only need the outer unit
   /// normal.
-  void constant_pressure(const Vector<double> &xi,
-                         const Vector<double> &x,
-                         const Vector<double> &n,
-                         Vector<double> &traction)
+  void constant_pressure(const Vector<double>& xi,
+                         const Vector<double>& x,
+                         const Vector<double>& n,
+                         Vector<double>& traction)
   {
     unsigned dim = traction.size();
     for (unsigned i = 0; i < dim; i++)
@@ -330,7 +330,7 @@ namespace Global_Physical_Variables
   double Gravity = 0.0;
 
   /// Non-dimensional gravity as body force
-  void gravity(const double &time, const Vector<double> &xi, Vector<double> &b)
+  void gravity(const double& time, const Vector<double>& xi, Vector<double>& b)
   {
     b[0] = 0.0;
     b[1] = -Gravity;
@@ -346,7 +346,7 @@ class CantileverProblem : public Problem
 {
 public:
   /// Constructor:
-  CantileverProblem(const bool &incompress, const bool &use_fd);
+  CantileverProblem(const bool& incompress, const bool& use_fd);
 
   /// Update function (empty)
   void actions_after_newton_solve() {}
@@ -364,7 +364,7 @@ public:
   void doc_solution();
 
   /// Run the job -- doc in RESLTi_case
-  void run_it(const unsigned &i_case);
+  void run_it(const unsigned& i_case);
 
 private:
   /// \short Pass pointer to traction function to the
@@ -381,7 +381,7 @@ private:
   ofstream Trace_file;
 
   /// Pointers to node whose position we're tracing
-  Node *Trace_node_pt;
+  Node* Trace_node_pt;
 
   /// DocInfo object for output
   DocInfo Doc_info;
@@ -391,8 +391,8 @@ private:
 /// Constructor:
 //======================================================================
 template<class ELEMENT>
-CantileverProblem<ELEMENT>::CantileverProblem(const bool &incompress,
-                                              const bool &use_fd)
+CantileverProblem<ELEMENT>::CantileverProblem(const bool& incompress,
+                                              const bool& use_fd)
 {
   // Create the mesh
 
@@ -416,7 +416,7 @@ CantileverProblem<ELEMENT>::CantileverProblem(const bool &incompress,
 
   // Create geometric objects: Elliptical tube with half axes = radius = 1.0
   double radius = 1.0;
-  GeomObject *wall_pt = new EllipticalTube(radius, radius);
+  GeomObject* wall_pt = new EllipticalTube(radius, radius);
 
   // Boundaries on object
   Vector<double> xi_lo(2);
@@ -448,13 +448,13 @@ CantileverProblem<ELEMENT>::CantileverProblem(const bool &incompress,
     wall_pt, xi_lo, frac_mid, xi_hi, nlayer);
 
   // Set error estimator
-  dynamic_cast<RefineableElasticQuarterTubeMesh<ELEMENT> *>(mesh_pt())
+  dynamic_cast<RefineableElasticQuarterTubeMesh<ELEMENT>*>(mesh_pt())
     ->spatial_error_estimator_pt() = new Z2ErrorEstimator;
 
   // Error targets for adaptive refinement
-  dynamic_cast<RefineableElasticQuarterTubeMesh<ELEMENT> *>(mesh_pt())
+  dynamic_cast<RefineableElasticQuarterTubeMesh<ELEMENT>*>(mesh_pt())
     ->max_permitted_error() = 0.05;
-  dynamic_cast<RefineableElasticQuarterTubeMesh<ELEMENT> *>(mesh_pt())
+  dynamic_cast<RefineableElasticQuarterTubeMesh<ELEMENT>*>(mesh_pt())
     ->min_permitted_error() = 0.005;
 
   // 0.115319 0.00212537
@@ -473,7 +473,7 @@ CantileverProblem<ELEMENT>::CantileverProblem(const bool &incompress,
   for (unsigned i = 0; i < n_element; i++)
   {
     // Cast to a solid element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the constitutive law
     el_pt->constitutive_law_pt() =
@@ -495,8 +495,8 @@ CantileverProblem<ELEMENT>::CantileverProblem(const bool &incompress,
     // Is it incompressible
     if (incompress)
     {
-      PVDEquationsWithPressure<3> *test_pt =
-        dynamic_cast<PVDEquationsWithPressure<3> *>(mesh_pt()->element_pt(i));
+      PVDEquationsWithPressure<3>* test_pt =
+        dynamic_cast<PVDEquationsWithPressure<3>*>(mesh_pt()->element_pt(i));
       if (test_pt != 0)
       {
         test_pt->set_incompressible();
@@ -514,13 +514,13 @@ CantileverProblem<ELEMENT>::CantileverProblem(const bool &incompress,
 
 #ifdef REFINE
 
-  RefineableElasticQuarterTubeMesh<ELEMENT> *solid_mesh_pt =
-    dynamic_cast<RefineableElasticQuarterTubeMesh<ELEMENT> *>(mesh_pt());
+  RefineableElasticQuarterTubeMesh<ELEMENT>* solid_mesh_pt =
+    dynamic_cast<RefineableElasticQuarterTubeMesh<ELEMENT>*>(mesh_pt());
 
 #else
 
-  ElasticQuarterTubeMesh<ELEMENT> *solid_mesh_pt =
-    dynamic_cast<ElasticQuarterTubeMesh<ELEMENT> *>(mesh_pt());
+  ElasticQuarterTubeMesh<ELEMENT>* solid_mesh_pt =
+    dynamic_cast<ElasticQuarterTubeMesh<ELEMENT>*>(mesh_pt());
 
 #endif
 
@@ -610,7 +610,7 @@ void CantileverProblem<ELEMENT>::doc_solution()
 /// Run it
 //==================================================================
 template<class ELEMENT>
-void CantileverProblem<ELEMENT>::run_it(const unsigned &i_case)
+void CantileverProblem<ELEMENT>::run_it(const unsigned& i_case)
 {
 #ifdef TIME_SOLID_JAC
   PVDEquationsBase<3>::Solid_timer.reset();
@@ -686,7 +686,7 @@ void CantileverProblem<ELEMENT>::run_it(const unsigned &i_case)
 /// Driver for cantilever beam loaded by surface traction and/or
 /// gravity
 //======================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
 #ifdef OOMPH_HAS_MPI
   MPI_Helpers::init(argc, argv);

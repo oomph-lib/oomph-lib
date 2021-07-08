@@ -49,7 +49,7 @@ namespace oomph
     /// in nodal values 0,1,[2]. This is the default for all currently
     /// existing Navier-Stokes elements. If you use any others,
     /// use this function at your own risk.
-    void apply_no_slip_on_moving_wall(Node *node_pt)
+    void apply_no_slip_on_moving_wall(Node* node_pt)
     {
       // Find out spatial dimension of node
       unsigned ndim = node_pt->ndim();
@@ -79,7 +79,7 @@ namespace oomph
   /// Problem::describe_dofs(...)
   //====================================================================
   void FSIWallElement::describe_local_dofs(
-    std::ostream &out, const std::string &current_string) const
+    std::ostream& out, const std::string& current_string) const
   {
     // Call the standard finite element classification.
     FiniteElement::describe_local_dofs(out, current_string);
@@ -121,8 +121,8 @@ namespace oomph
   /// FSIWallElement::enable_fluid_loading_on_both_sides()
   /// to enable fluid loading on the back, too.
   //====================================================================
-  void FSIWallElement::setup_fsi_wall_element(const unsigned &nlagr_solid,
-                                              const unsigned &ndim_fluid)
+  void FSIWallElement::setup_fsi_wall_element(const unsigned& nlagr_solid,
+                                              const unsigned& ndim_fluid)
   {
     // Set storage for underlying GeomObject
     set_nlagrangian_and_ndim(nlagr_solid, ndim_fluid);
@@ -160,9 +160,9 @@ namespace oomph
   /// from the reverse element is \b subtracted, because it's
   /// computed with the same normal vector.
   //==================================================================
-  void FSIWallElement::fluid_load_vector(const unsigned &intpt,
-                                         const Vector<double> &N,
-                                         Vector<double> &load)
+  void FSIWallElement::fluid_load_vector(const unsigned& intpt,
+                                         const Vector<double>& N,
+                                         Vector<double>& load)
   {
     // Size of load vector
     unsigned n_load = load.size();
@@ -184,8 +184,8 @@ namespace oomph
       Vector<double> s_adjacent(external_element_local_coord(face, intpt));
 
       // Call the load function for adjacent element
-      FSIFluidElement *el_f_pt =
-        dynamic_cast<FSIFluidElement *>(external_element_pt(face, intpt));
+      FSIFluidElement* el_f_pt =
+        dynamic_cast<FSIFluidElement*>(external_element_pt(face, intpt));
       if (el_f_pt != 0)
       {
         el_f_pt->get_load(s_adjacent, N, fluid_load);
@@ -230,7 +230,7 @@ namespace oomph
   void FSIWallElement::node_update_adjacent_fluid_elements()
   {
     // Don't update elements repeatedly
-    std::map<FSIFluidElement *, bool> done;
+    std::map<FSIFluidElement*, bool> done;
 
     // Number of integration points
     unsigned n_intpt = integral_pt()->nweight();
@@ -244,8 +244,8 @@ namespace oomph
       for (unsigned iint = 0; iint < n_intpt; iint++)
       {
         // Get fluid element that affects this integration point
-        FSIFluidElement *el_f_pt =
-          dynamic_cast<FSIFluidElement *>(external_element_pt(face, iint));
+        FSIFluidElement* el_f_pt =
+          dynamic_cast<FSIFluidElement*>(external_element_pt(face, iint));
 
         // Is there an adjacent fluid element?
         if (el_f_pt != 0)
@@ -275,22 +275,22 @@ namespace oomph
   /// ignore the shear stresses when computing the Jacobian.
   //=======================================================================
   void FSIWallElement::identify_all_field_data_for_external_interaction(
-    Vector<std::set<FiniteElement *>> const &external_elements_pt,
-    std::set<std::pair<Data *, unsigned>> &paired_interaction_data)
+    Vector<std::set<FiniteElement*>> const& external_elements_pt,
+    std::set<std::pair<Data*, unsigned>>& paired_interaction_data)
   {
     // Loop over each inteaction
     const unsigned n_interaction = this->ninteraction();
     for (unsigned i = 0; i < n_interaction; i++)
     {
       // Loop over each element in the set
-      for (std::set<FiniteElement *>::const_iterator it =
+      for (std::set<FiniteElement*>::const_iterator it =
              external_elements_pt[i].begin();
            it != external_elements_pt[i].end();
            it++)
       {
         // Cast the element  the specific fluid element
-        FSIFluidElement *external_fluid_el_pt =
-          dynamic_cast<FSIFluidElement *>(*it);
+        FSIFluidElement* external_fluid_el_pt =
+          dynamic_cast<FSIFluidElement*>(*it);
 
         // Only add pressure load if so desired
         if (Ignore_shear_stress_in_jacobian)
@@ -313,8 +313,8 @@ namespace oomph
   /// in the desired interactions from the external element
   //===================================================================
   void FSIWallElement::identify_all_geometric_data_for_external_interaction(
-    Vector<std::set<FiniteElement *>> const &external_elements_pt,
-    std::set<Data *> &external_geometric_data_pt)
+    Vector<std::set<FiniteElement*>> const& external_elements_pt,
+    std::set<Data*>& external_geometric_data_pt)
   {
     // If we are ignoring the shear stress, then we can ignore all
     // external geometric data
@@ -329,7 +329,7 @@ namespace oomph
       for (unsigned i = 0; i < n_interaction; i++)
       {
         // Loop over each element in the set
-        for (std::set<FiniteElement *>::const_iterator it =
+        for (std::set<FiniteElement*>::const_iterator it =
                external_elements_pt[i].begin();
              it != external_elements_pt[i].end();
              it++)

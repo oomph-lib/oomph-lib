@@ -59,7 +59,7 @@ namespace oomph
   public:
     /// \short Constructor: Pass refinement level to refineable element
     /// (default 0 = root)
-    RefineableYoungLaplaceEquations(const int &refine_level = 0) :
+    RefineableYoungLaplaceEquations(const int& refine_level = 0) :
       YoungLaplaceEquations(),
       RefineableElement(),
       ElementWithZ2ErrorEstimator()
@@ -68,19 +68,19 @@ namespace oomph
 
     /// Broken copy constructor
     RefineableYoungLaplaceEquations(
-      const RefineableYoungLaplaceEquations &dummy)
+      const RefineableYoungLaplaceEquations& dummy)
     {
       BrokenCopy::broken_copy("RefineableYoungLaplaceEquations");
     }
 
     /// Broken assignment operator
-    void operator=(const RefineableYoungLaplaceEquations &)
+    void operator=(const RefineableYoungLaplaceEquations&)
     {
       BrokenCopy::broken_assign("RefineableYoungLaplaceEquations");
     }
 
     /// Compute element residual vector taking hanging nodes into account
-    void fill_in_contribution_to_residuals(Vector<double> &residuals);
+    void fill_in_contribution_to_residuals(Vector<double>& residuals);
 
     /// Number of 'flux' terms for Z2 error estimation
     unsigned num_Z2_flux_terms()
@@ -90,7 +90,7 @@ namespace oomph
 
     /// \short Get 'flux' for Z2 error recovery:  Standard flux
     /// from YoungLaplace equations
-    void get_Z2_flux(const Vector<double> &s, Vector<double> &flux)
+    void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
       this->get_flux(s, flux);
     }
@@ -99,8 +99,8 @@ namespace oomph
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines), the values Vector sets its own size in here.
-    void get_interpolated_values(const Vector<double> &s,
-                                 Vector<double> &values)
+    void get_interpolated_values(const Vector<double>& s,
+                                 Vector<double>& values)
     {
       // Set size of Vector: u
       values.resize(1);
@@ -128,9 +128,9 @@ namespace oomph
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines), the values Vector sets its own size in here.
-    void get_interpolated_values(const unsigned &t,
-                                 const Vector<double> &s,
-                                 Vector<double> &values)
+    void get_interpolated_values(const unsigned& t,
+                                 const Vector<double>& s,
+                                 Vector<double>& values)
     {
       if (t != 0)
       {
@@ -151,16 +151,16 @@ namespace oomph
     {
       // Copy kappa with set_kappa() to ensure that it's added to the
       // element's external Data.
-      this->set_kappa(dynamic_cast<RefineableYoungLaplaceEquations *>(
+      this->set_kappa(dynamic_cast<RefineableYoungLaplaceEquations*>(
                         this->father_element_pt())
                         ->kappa_pt());
 
       // Copy spine functions
-      this->Spine_fct_pt = dynamic_cast<RefineableYoungLaplaceEquations *>(
+      this->Spine_fct_pt = dynamic_cast<RefineableYoungLaplaceEquations*>(
                              this->father_element_pt())
                              ->spine_fct_pt();
 
-      this->Spine_base_fct_pt = dynamic_cast<RefineableYoungLaplaceEquations *>(
+      this->Spine_base_fct_pt = dynamic_cast<RefineableYoungLaplaceEquations*>(
                                   this->father_element_pt())
                                   ->spine_base_fct_pt();
     }
@@ -190,13 +190,13 @@ namespace oomph
 
     /// Broken copy constructor
     RefineableQYoungLaplaceElement(
-      const RefineableQYoungLaplaceElement<NNODE_1D> &dummy)
+      const RefineableQYoungLaplaceElement<NNODE_1D>& dummy)
     {
       BrokenCopy::broken_copy("RefineableQuadYoungLaplaceElement");
     }
 
     /// Broken assignment operator
-    void operator=(const RefineableQYoungLaplaceElement<NNODE_1D> &)
+    void operator=(const RefineableQYoungLaplaceElement<NNODE_1D>&)
     {
       BrokenCopy::broken_assign("RefineableQuadYoungLaplaceElement");
     }
@@ -214,13 +214,13 @@ namespace oomph
     }
 
     /// \short Pointer to the j-th vertex node in the element
-    Node *vertex_node_pt(const unsigned &j) const
+    Node* vertex_node_pt(const unsigned& j) const
     {
       return QYoungLaplaceElement<NNODE_1D>::vertex_node_pt(j);
     }
 
     /// Rebuild from sons: empty
-    void rebuild_from_sons(Mesh *&mesh_pt) {}
+    void rebuild_from_sons(Mesh*& mesh_pt) {}
 
     /// \short Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.

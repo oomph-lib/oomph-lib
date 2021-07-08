@@ -56,12 +56,12 @@ namespace oomph
   public:
     /// \short Function pointer to the prescribed-flux function fct(x,f(x)) --
     /// x is a Vector!
-    typedef void (*PoissonPrescribedFluxFctPt)(const Vector<double> &x,
-                                               double &flux);
+    typedef void (*PoissonPrescribedFluxFctPt)(const Vector<double>& x,
+                                               double& flux);
 
     /// \short Constructor, takes the pointer to the "bulk" element and the
     /// index of the face to which the element is attached.
-    PoissonFluxElement(FiniteElement *const &bulk_el_pt, const int &face_index);
+    PoissonFluxElement(FiniteElement* const& bulk_el_pt, const int& face_index);
 
     ///\short  Broken empty constructor
     PoissonFluxElement()
@@ -72,13 +72,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    PoissonFluxElement(const PoissonFluxElement &dummy)
+    PoissonFluxElement(const PoissonFluxElement& dummy)
     {
       BrokenCopy::broken_copy("PoissonFluxElement");
     }
 
     /// Broken assignment operator
-    void operator=(const PoissonFluxElement &)
+    void operator=(const PoissonFluxElement&)
     {
       BrokenCopy::broken_assign("PoissonFluxElement");
     }
@@ -88,21 +88,21 @@ namespace oomph
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default (needed to break
     /// indeterminacy if bulk element is SolidElement)
-    double zeta_nodal(const unsigned &n,
-                      const unsigned &k,
-                      const unsigned &i) const
+    double zeta_nodal(const unsigned& n,
+                      const unsigned& k,
+                      const unsigned& i) const
     {
       return FaceElement::zeta_nodal(n, k, i);
     }
 
     /// Access function for the prescribed-flux function pointer
-    PoissonPrescribedFluxFctPt &flux_fct_pt()
+    PoissonPrescribedFluxFctPt& flux_fct_pt()
     {
       return Flux_fct_pt;
     }
 
     /// Add the element's contribution to its residual vector
-    inline void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    inline void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Call the generic residuals function with flag set to 0
       // using a dummy matrix argument
@@ -112,8 +112,8 @@ namespace oomph
 
     /// \short Add the element's contribution to its residual vector and its
     /// Jacobian matrix
-    inline void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                                 DenseMatrix<double> &jacobian)
+    inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                                 DenseMatrix<double>& jacobian)
     {
       // Call the generic routine with the flag set to 1
       fill_in_generic_residual_contribution_poisson_flux(
@@ -121,14 +121,14 @@ namespace oomph
     }
 
     /// Output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       const unsigned n_plot = 5;
       output(outfile, n_plot);
     }
 
     /// \short Output function
-    void output(std::ostream &outfile, const unsigned &nplot)
+    void output(std::ostream& outfile, const unsigned& nplot)
     {
       // Dimension of element
       unsigned el_dim = dim();
@@ -163,7 +163,7 @@ namespace oomph
 
     /// C-style output function -- forward to broken version in FiniteElement
     /// until somebody decides what exactly they want to plot here...
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
@@ -171,7 +171,7 @@ namespace oomph
     /// \short C-style output function -- forward to broken version in
     /// FiniteElement until somebody decides what exactly they want to plot
     /// here...
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       FiniteElement::output(file_pt, n_plot);
     }
@@ -180,9 +180,9 @@ namespace oomph
     /// \short Function to compute the shape and test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
-    inline double shape_and_test(const Vector<double> &s,
-                                 Shape &psi,
-                                 Shape &test) const
+    inline double shape_and_test(const Vector<double>& s,
+                                 Shape& psi,
+                                 Shape& test) const
     {
       // Find number of nodes
       unsigned n_node = nnode();
@@ -203,9 +203,9 @@ namespace oomph
     /// \short Function to compute the shape and test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
-    inline double shape_and_test_at_knot(const unsigned &ipt,
-                                         Shape &psi,
-                                         Shape &test) const
+    inline double shape_and_test_at_knot(const unsigned& ipt,
+                                         Shape& psi,
+                                         Shape& test) const
     {
       // Find number of nodes
       unsigned n_node = nnode();
@@ -225,7 +225,7 @@ namespace oomph
 
     /// Function to calculate the prescribed flux at a given spatial
     /// position
-    void get_flux(const Vector<double> &x, double &flux)
+    void get_flux(const Vector<double>& x, double& flux)
     {
       // If the function pointer is zero return zero
       if (Flux_fct_pt == 0)
@@ -244,9 +244,9 @@ namespace oomph
     /// flag=1(or 0): do (or don't) compute the contribution to the
     /// Jacobian as well.
     void fill_in_generic_residual_contribution_poisson_flux(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      const unsigned &flag);
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag);
 
     /// Function pointer to the (global) prescribed-flux function
     PoissonPrescribedFluxFctPt Flux_fct_pt;
@@ -271,7 +271,7 @@ namespace oomph
   //===========================================================================
   template<class ELEMENT>
   PoissonFluxElement<ELEMENT>::PoissonFluxElement(
-    FiniteElement *const &bulk_el_pt, const int &face_index) :
+    FiniteElement* const& bulk_el_pt, const int& face_index) :
     FaceGeometry<ELEMENT>(), FaceElement()
   {
     // Let the bulk element build the FaceElement, i.e. setup the pointers
@@ -282,13 +282,13 @@ namespace oomph
 #ifdef PARANOID
     {
       // Check that the element is not a refineable 3d element
-      ELEMENT *elem_pt = dynamic_cast<ELEMENT *>(bulk_el_pt);
+      ELEMENT* elem_pt = dynamic_cast<ELEMENT*>(bulk_el_pt);
       // If it's three-d
       if (elem_pt->dim() == 3)
       {
         // Is it refineable
-        RefineableElement *ref_el_pt =
-          dynamic_cast<RefineableElement *>(elem_pt);
+        RefineableElement* ref_el_pt =
+          dynamic_cast<RefineableElement*>(elem_pt);
         if (ref_el_pt != 0)
         {
           if (this->has_hanging_nodes())
@@ -324,8 +324,8 @@ namespace oomph
         // One dimensional problem
       case 1:
       {
-        PoissonEquations<1> *eqn_pt =
-          dynamic_cast<PoissonEquations<1> *>(bulk_el_pt);
+        PoissonEquations<1>* eqn_pt =
+          dynamic_cast<PoissonEquations<1>*>(bulk_el_pt);
         // If the cast has failed die
         if (eqn_pt == 0)
         {
@@ -352,8 +352,8 @@ namespace oomph
       // Two dimensional problem
       case 2:
       {
-        PoissonEquations<2> *eqn_pt =
-          dynamic_cast<PoissonEquations<2> *>(bulk_el_pt);
+        PoissonEquations<2>* eqn_pt =
+          dynamic_cast<PoissonEquations<2>*>(bulk_el_pt);
         // If the cast has failed die
         if (eqn_pt == 0)
         {
@@ -379,8 +379,8 @@ namespace oomph
       // Three dimensional problem
       case 3:
       {
-        PoissonEquations<3> *eqn_pt =
-          dynamic_cast<PoissonEquations<3> *>(bulk_el_pt);
+        PoissonEquations<3>* eqn_pt =
+          dynamic_cast<PoissonEquations<3>*>(bulk_el_pt);
         // If the cast has failed die
         if (eqn_pt == 0)
         {
@@ -421,9 +421,9 @@ namespace oomph
   template<class ELEMENT>
   void PoissonFluxElement<ELEMENT>::
     fill_in_generic_residual_contribution_poisson_flux(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      const unsigned &flag)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag)
   {
     // Find out how many nodes there are
     const unsigned n_node = nnode();

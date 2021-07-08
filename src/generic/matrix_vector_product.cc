@@ -42,8 +42,8 @@ namespace oomph
   /// where this is A x = y. By default, this is assumed to the uniformly
   /// distributed based on matrix_pt->ncol().
   //============================================================================
-  void MatrixVectorProduct::setup(CRDoubleMatrix *matrix_pt,
-                                  const LinearAlgebraDistribution *col_dist_pt)
+  void MatrixVectorProduct::setup(CRDoubleMatrix* matrix_pt,
+                                  const LinearAlgebraDistribution* col_dist_pt)
   {
     // clean memory
     this->clean_up_memory();
@@ -109,8 +109,8 @@ namespace oomph
   /// \short Apply the operator to the vector x and return the result in
   /// the vector y
   //============================================================================
-  void MatrixVectorProduct::multiply(const DoubleVector &x,
-                                     DoubleVector &y) const
+  void MatrixVectorProduct::multiply(const DoubleVector& x,
+                                     DoubleVector& y) const
   {
 #ifdef PARANOID
     // check that the distribution of x is setup
@@ -178,8 +178,8 @@ namespace oomph
   /// \short Apply the transpose of the operator to the vector x and return
   /// the result in the vector y
   //============================================================================
-  void MatrixVectorProduct::multiply_transpose(const DoubleVector &x,
-                                               DoubleVector &y) const
+  void MatrixVectorProduct::multiply_transpose(const DoubleVector& x,
+                                               DoubleVector& y) const
   {
 #ifdef PARANOID
     // check that the distribution of x is setup
@@ -243,17 +243,17 @@ namespace oomph
   /// \short Apply the operator to the vector x and return
   /// the result in the vector y (helper function)
   //============================================================================
-  void MatrixVectorProduct::trilinos_multiply_helper(const DoubleVector &x,
-                                                     DoubleVector &y) const
+  void MatrixVectorProduct::trilinos_multiply_helper(const DoubleVector& x,
+                                                     DoubleVector& y) const
   {
     // convert x to a Trilinos Epetra vector.
     // x is const so it much be copied.
-    Epetra_Vector *epetra_x_pt =
+    Epetra_Vector* epetra_x_pt =
       TrilinosEpetraHelpers::create_distributed_epetra_vector(x);
 
     // create Trilinos vector for soln ('viewing' the contents of the oomph-lib
     // matrix)
-    Epetra_Vector *epetra_soln_pt =
+    Epetra_Vector* epetra_soln_pt =
       TrilinosEpetraHelpers::create_distributed_epetra_vector(y);
 
     // do the multiply
@@ -289,16 +289,16 @@ namespace oomph
   /// the result in the vector y (helper function)
   //============================================================================
   void MatrixVectorProduct::trilinos_multiply_transpose_helper(
-    const DoubleVector &x, DoubleVector &y) const
+    const DoubleVector& x, DoubleVector& y) const
   {
     // convert x to a Trilinos Epetra vector.
     // x is const so it much be copied.
-    Epetra_Vector *epetra_x_pt =
+    Epetra_Vector* epetra_x_pt =
       TrilinosEpetraHelpers::create_distributed_epetra_vector(x);
 
     // create Trilinos vector for soln ('viewing' the contents of the oomph-lib
     // matrix)
-    Epetra_Vector *epetra_soln_pt =
+    Epetra_Vector* epetra_soln_pt =
       TrilinosEpetraHelpers::create_distributed_epetra_vector(y);
 
     // do the multiply

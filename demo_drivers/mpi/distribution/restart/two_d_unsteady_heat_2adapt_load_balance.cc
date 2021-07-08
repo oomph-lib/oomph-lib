@@ -55,12 +55,12 @@ class MyEllipse : public GeomObject
 public:
   /// \short Constructor:  Pass half axes, amplitudes of their variation, period
   /// of oscillation and pointer to time object.
-  MyEllipse(const double &a,
-            const double &b,
-            const double &a_hat,
-            const double &b_hat,
-            const double &period,
-            Time *time_pt) :
+  MyEllipse(const double& a,
+            const double& b,
+            const double& a_hat,
+            const double& b_hat,
+            const double& period,
+            Time* time_pt) :
     GeomObject(1, 2),
     A(a),
     B(b),
@@ -76,7 +76,7 @@ public:
 
   /// \short Current position vector to material point at
   /// Lagrangian coordinate xi
-  void position(const Vector<double> &xi, Vector<double> &r) const
+  void position(const Vector<double>& xi, Vector<double>& r) const
   {
     // Get current time:
     double time = Time_pt->time();
@@ -92,9 +92,9 @@ public:
   /// \short Parametrised position on object: r(xi). Evaluated at
   /// previous time level. t=0: current time; t>0: previous
   /// time level.
-  void position(const unsigned &t,
-                const Vector<double> &xi,
-                Vector<double> &r) const
+  void position(const unsigned& t,
+                const Vector<double>& xi,
+                Vector<double>& r) const
   {
     // Get current time:
     double time = Time_pt->time(t);
@@ -124,7 +124,7 @@ protected:
   double T;
 
   /// Pointer to time object
-  Time *Time_pt;
+  Time* Time_pt;
 
 }; // end of MyEllipse
 
@@ -157,15 +157,15 @@ namespace GlobalParameters
   double TanPhi;
 
   /// Position of step (x-axis intercept)
-  double step_position(const double &time)
+  double step_position(const double& time)
   {
     return Beta * tanh(Gamma * cos(0.2E1 * MathematicalConstants::Pi * time));
   }
 
   /// Exact solution as a Vector
-  void get_exact_u(const double &time,
-                   const Vector<double> &x,
-                   Vector<double> &u)
+  void get_exact_u(const double& time,
+                   const Vector<double>& x,
+                   Vector<double>& u)
   {
     double X = x[0];
     double Y = x[1];
@@ -179,7 +179,7 @@ namespace GlobalParameters
   }
 
   /// Exact solution as a scalar
-  void get_exact_u(const double &time, const Vector<double> &x, double &u)
+  void get_exact_u(const double& time, const Vector<double>& x, double& u)
   {
     double X = x[0];
     double Y = x[1];
@@ -193,7 +193,7 @@ namespace GlobalParameters
   }
 
   /// Source function to make it an exact solution
-  void get_source(const double &time, const Vector<double> &x, double &source)
+  void get_source(const double& time, const Vector<double>& x, double& source)
   {
     double X = x[0];
     double Y = x[1];
@@ -250,9 +250,9 @@ namespace GlobalParameters
   }
 
   /// Flux required by the exact solution on a boundary on which y is fixed
-  void prescribed_flux_on_fixed_y_boundary(const double &time,
-                                           const Vector<double> &x,
-                                           double &flux)
+  void prescribed_flux_on_fixed_y_boundary(const double& time,
+                                           const Vector<double>& x,
+                                           double& flux)
   {
     double X = x[0];
     double Y = x[1];
@@ -359,36 +359,36 @@ public:
   /// \short Create UnsteadyHeat flux elements on boundary b of the Mesh pointed
   /// to by bulk_mesh_pt and add them to the Mesh object pointed to by
   /// surface_mesh_pt
-  void create_flux_elements(const unsigned &b,
-                            Mesh *const &bulk_mesh_pt,
-                            Mesh *const &surface_mesh_pt);
+  void create_flux_elements(const unsigned& b,
+                            Mesh* const& bulk_mesh_pt,
+                            Mesh* const& surface_mesh_pt);
 
   /// \short Delete UnsteadyHeat flux elements and wipe the surface mesh
-  void delete_flux_elements(Mesh *const &surface_mesh_pt);
+  void delete_flux_elements(Mesh* const& surface_mesh_pt);
 
   /// Doc the solution
-  void doc_solution(const std::string &comment = "");
+  void doc_solution(const std::string& comment = "");
 
   /// Return DocInfo object
-  DocInfo &doc_info()
+  DocInfo& doc_info()
   {
     return Doc_info;
   }
 
   /// \short Dump problem data to allow for later restart
-  void dump_it(ofstream &dump_file);
+  void dump_it(ofstream& dump_file);
 
   /// \short Read problem data for restart
-  void restart(ifstream &restart_file);
+  void restart(ifstream& restart_file);
 
   /// Pointer to bulk mesh
-  RefineableQuarterCircleSectorMesh<ELEMENT> *bulk_mesh_pt()
+  RefineableQuarterCircleSectorMesh<ELEMENT>* bulk_mesh_pt()
   {
     return Bulk_mesh_pt;
   }
 
   /// Target error for adaptive timestepping
-  double &epsilon_t()
+  double& epsilon_t()
   {
     return Epsilon_t;
   }
@@ -398,7 +398,7 @@ public:
 
   /// Suggestion for next timestep (stored to allow it to be written
   /// to (or read from) restart file)
-  double &next_dt()
+  double& next_dt()
   {
     return Next_dt;
   }
@@ -419,19 +419,19 @@ private:
   double Next_dt;
 
   /// Pointer to GeomObject that specifies the domain bondary
-  GeomObject *Boundary_pt;
+  GeomObject* Boundary_pt;
 
   /// Pointer to source function
   UnsteadyHeatEquations<2>::UnsteadyHeatSourceFctPt Source_fct_pt;
 
   /// Pointer to the "bulk" mesh
-  RefineableQuarterCircleSectorMesh<ELEMENT> *Bulk_mesh_pt;
+  RefineableQuarterCircleSectorMesh<ELEMENT>* Bulk_mesh_pt;
 
   /// Pointer to the "surface" mesh
-  Mesh *Surface_mesh_pt;
+  Mesh* Surface_mesh_pt;
 
   /// Pointer to central node (exists at all refinement levels) for doc
-  Node *Doc_node_pt;
+  Node* Doc_node_pt;
 
   /// Trace file
   ofstream Trace_file;
@@ -568,7 +568,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::build_mesh()
   build_global_mesh();
 
   // Set error estimator for bulk mesh
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   Bulk_mesh_pt->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Set the boundary conditions for this problem: All nodes are
@@ -591,7 +591,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::build_mesh()
 
   // Extract pointer to the central node (this exists at all refinement levels)
   // for doc of solution
-  FiniteElement *el0_pt = Bulk_mesh_pt->finite_element_pt(0);
+  FiniteElement* el0_pt = Bulk_mesh_pt->finite_element_pt(0);
   unsigned nnod = el0_pt->nnode();
   Doc_node_pt = el0_pt->node_pt(nnod - 1);
 
@@ -610,7 +610,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::build_mesh()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from FiniteElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(i));
 
     // Set the source function pointer
     el_pt->source_fct_pt() = Source_fct_pt;
@@ -621,8 +621,8 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::build_mesh()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to UnsteadyHeat flux element
-    UnsteadyHeatFluxElement<ELEMENT> *el_pt =
-      dynamic_cast<UnsteadyHeatFluxElement<ELEMENT> *>(
+    UnsteadyHeatFluxElement<ELEMENT>* el_pt =
+      dynamic_cast<UnsteadyHeatFluxElement<ELEMENT>*>(
         Surface_mesh_pt->element_pt(e));
 
     // Set the pointer to the prescribed flux function
@@ -656,7 +656,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::actions_before_implicit_timestep()
       unsigned num_nod = Bulk_mesh_pt->nboundary_node(b);
       for (unsigned j = 0; j < num_nod; j++)
       {
-        Node *nod_pt = Bulk_mesh_pt->boundary_node_pt(b, j);
+        Node* nod_pt = Bulk_mesh_pt->boundary_node_pt(b, j);
         double u;
         Vector<double> x(2);
         x[0] = nod_pt->x(0);
@@ -702,8 +702,8 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::generic_actions_after()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to UnsteadyHeat flux element
-    UnsteadyHeatFluxElement<ELEMENT> *el_pt =
-      dynamic_cast<UnsteadyHeatFluxElement<ELEMENT> *>(
+    UnsteadyHeatFluxElement<ELEMENT>* el_pt =
+      dynamic_cast<UnsteadyHeatFluxElement<ELEMENT>*>(
         Surface_mesh_pt->element_pt(e));
 
     // Set the pointer to the prescribed flux function
@@ -802,7 +802,7 @@ template<class ELEMENT>
 void RefineableUnsteadyHeatProblem<ELEMENT>::restart()
 {
   // Pointer to restart file
-  ifstream *restart_file_pt = 0;
+  ifstream* restart_file_pt = 0;
 
   // Open restart file from stem
   char filename[100];
@@ -882,7 +882,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::write_trace_file_header()
 //========================================================================
 template<class ELEMENT>
 void RefineableUnsteadyHeatProblem<ELEMENT>::doc_solution(
-  const std::string &comment)
+  const std::string& comment)
 {
   ofstream some_file;
   char filename[100];
@@ -1069,7 +1069,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::doc_solution(
 //=======================================================================
 template<class ELEMENT>
 void RefineableUnsteadyHeatProblem<ELEMENT>::create_flux_elements(
-  const unsigned &b, Mesh *const &bulk_mesh_pt, Mesh *const &surface_mesh_pt)
+  const unsigned& b, Mesh* const& bulk_mesh_pt, Mesh* const& surface_mesh_pt)
 {
   // How many bulk elements are adjacent to boundary b?
   unsigned n_element = bulk_mesh_pt->nboundary_element(b);
@@ -1078,14 +1078,14 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::create_flux_elements(
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    ELEMENT *bulk_elem_pt =
-      dynamic_cast<ELEMENT *>(bulk_mesh_pt->boundary_element_pt(b, e));
+    ELEMENT* bulk_elem_pt =
+      dynamic_cast<ELEMENT*>(bulk_mesh_pt->boundary_element_pt(b, e));
 
     // What is the face index of element e on boundary b
     int face_index = bulk_mesh_pt->face_index_at_boundary(b, e);
 
     // Build the corresponding prescribed-flux element
-    UnsteadyHeatFluxElement<ELEMENT> *flux_element_pt =
+    UnsteadyHeatFluxElement<ELEMENT>* flux_element_pt =
       new UnsteadyHeatFluxElement<ELEMENT>(bulk_elem_pt, face_index);
 
     // Add the prescribed-flux element to the surface mesh
@@ -1100,7 +1100,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::create_flux_elements(
 //=======================================================================
 template<class ELEMENT>
 void RefineableUnsteadyHeatProblem<ELEMENT>::delete_flux_elements(
-  Mesh *const &surface_mesh_pt)
+  Mesh* const& surface_mesh_pt)
 {
   // How many surface elements are in the surface mesh
   unsigned n_element = surface_mesh_pt->nelement();
@@ -1136,7 +1136,7 @@ double RefineableUnsteadyHeatProblem<ELEMENT>::global_temporal_error_norm()
   int count = 0;
   for (unsigned i = 0; i < n_node; i++)
   {
-    Node *nod_pt = Bulk_mesh_pt->node_pt(i);
+    Node* nod_pt = Bulk_mesh_pt->node_pt(i);
     if (!(nod_pt->is_halo()))
     {
       // Get error in solution: Difference between predicted and actual
@@ -1210,7 +1210,7 @@ double RefineableUnsteadyHeatProblem<ELEMENT>::global_temporal_error_norm()
 /// Dump the solution to disk
 //========================================================================
 template<class ELEMENT>
-void RefineableUnsteadyHeatProblem<ELEMENT>::dump_it(ofstream &dump_file)
+void RefineableUnsteadyHeatProblem<ELEMENT>::dump_it(ofstream& dump_file)
 {
   // Write step number
   dump_file << Doc_info.number() << " # step number" << std::endl;
@@ -1227,7 +1227,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::dump_it(ofstream &dump_file)
 /// Read solution from disk
 //========================================================================
 template<class ELEMENT>
-void RefineableUnsteadyHeatProblem<ELEMENT>::restart(ifstream &restart_file)
+void RefineableUnsteadyHeatProblem<ELEMENT>::restart(ifstream& restart_file)
 {
   double local_next_dt = 0.0;
   unsigned local_doc_info_number = 0;
@@ -1300,7 +1300,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::restart(ifstream &restart_file)
 /// Demonstrate how to solve an unsteady heat problem in deformable domain
 /// with mesh adaptation.
 //========================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
 #ifdef OOMPH_HAS_MPI
   MPI_Helpers::init(argc, argv);
@@ -1355,7 +1355,7 @@ int main(int argc, char *argv[])
         // cout << GlobalParameters::Restart_file.c_str() << endl;
         char filename[100];
         sprintf(filename, "%s", GlobalParameters::Restart_file.c_str());
-        char *step;
+        char* step;
         step = strtok(filename, "/");
         step = strtok(NULL, "/");
         sprintf(doc_info_directory,
@@ -1378,7 +1378,7 @@ int main(int argc, char *argv[])
         // Restarting
         char filename[100];
         sprintf(filename, "%s", GlobalParameters::Restart_file.c_str());
-        char *step;
+        char* step;
         step = strtok(filename, "/");
         step = strtok(NULL, "/");
         sprintf(

@@ -66,10 +66,10 @@ namespace oomph
   {
   private:
     /// Pointer to a Biot number
-    double *Bi_pt;
+    double* Bi_pt;
 
     /// Pointer to a Marangoni number
-    double *Ma_pt;
+    double* Ma_pt;
 
     /// Index at which the temperature is stored at the nodes
     unsigned T_index;
@@ -81,7 +81,7 @@ namespace oomph
     /// The surface tension function is linear in the
     /// temperature with constant of proportionality equal
     /// to the Marangoni number.
-    double sigma(const Vector<double> &s)
+    double sigma(const Vector<double>& s)
     {
       // Find the number of shape functions
       const unsigned n_node = this->nnode();
@@ -107,8 +107,8 @@ namespace oomph
 
     /// \short Fill in the contribution to the residuals
     /// Calculate the contribution to the jacobian
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       // Call the generic routine with the flag set to 1
       this->fill_in_generic_residual_contribution_interface(
@@ -139,7 +139,7 @@ namespace oomph
           if (local_unknown >= 0)
           {
             // Store a pointer to the nodal data value
-            double *value_pt = this->node_pt(n)->value_pt(t_index);
+            double* value_pt = this->node_pt(n)->value_pt(t_index);
 
             // Save the old value of the Nodal data
             double old_var = *value_pt;
@@ -173,18 +173,18 @@ namespace oomph
     /// jacobian entries. This particular function ensures that the
     /// additional entries are calculated inside the integration loop
     void add_additional_residual_contributions_interface(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      const unsigned &flag,
-      const Shape &psif,
-      const DShape &dpsifds,
-      const DShape &dpsifdS,
-      const DShape &dpsifdS_div,
-      const Vector<double> &s,
-      const Vector<double> &interpolated_x,
-      const Vector<double> &interpolated_n,
-      const double &W,
-      const double &J)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag,
+      const Shape& psif,
+      const DShape& dpsifds,
+      const DShape& dpsifdS,
+      const DShape& dpsifdS_div,
+      const Vector<double>& s,
+      const Vector<double>& interpolated_x,
+      const Vector<double>& interpolated_n,
+      const double& W,
+      const double& J)
     {
       // Find the index at which the temperature is stored
       unsigned t_index = this->T_index;
@@ -240,9 +240,9 @@ namespace oomph
     /// Add the element's contribution to its residuals vector,
     /// jacobian matrix and mass matrix
     void fill_in_contribution_to_jacobian_and_mass_matrix(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix)
     {
       // Add the contribution to the jacobian
       this->fill_in_contribution_to_jacobian(residuals, jacobian);
@@ -252,8 +252,8 @@ namespace oomph
   public:
     /// Constructor that passes the bulk element and face index down
     /// to the underlying element
-    SpineLineMarangoniFluidInterfaceElement(FiniteElement *const &element_pt,
-                                            const int &face_index) :
+    SpineLineMarangoniFluidInterfaceElement(FiniteElement* const& element_pt,
+                                            const int& face_index) :
       SpineLineFluidInterfaceElement<ELEMENT>(element_pt, face_index)
     {
       // Initialise the values
@@ -261,7 +261,7 @@ namespace oomph
       Ma_pt = &Default_Physical_Constant_Value;
 
       // Cast the bulk element
-      ELEMENT *cast_element_pt = dynamic_cast<ELEMENT *>(element_pt);
+      ELEMENT* cast_element_pt = dynamic_cast<ELEMENT*>(element_pt);
       // Now find the index at which the temperature is stored from the
       // advection-diffusion part of the bulk element
       T_index = cast_element_pt->u_index_adv_diff();
@@ -280,13 +280,13 @@ namespace oomph
     }
 
     /// Access function for pointer to the Marangoni number
-    double *&ma_pt()
+    double*& ma_pt()
     {
       return Ma_pt;
     }
 
     /// Access function for pointer to the Biot number
-    double *&bi_pt()
+    double*& bi_pt()
     {
       return Bi_pt;
     }
@@ -349,7 +349,7 @@ class ConvectionProblem : public Problem
 public:
   /// Constructor. The boolean indicates whether the free surface
   // should be pinned or not in the first instance
-  ConvectionProblem(const bool &pin = true);
+  ConvectionProblem(const bool& pin = true);
 
   /// Destructor. Empty
   ~ConvectionProblem() {}
@@ -388,7 +388,7 @@ public:
       for (unsigned i = 0; i < n_element; i++)
       {
         // Upcast from GeneralsedElement to the present element
-        ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(i));
+        ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(i));
 
         el_pt->enable_ALE();
       }
@@ -422,8 +422,8 @@ public:
     const unsigned n_element = Bulk_mesh_pt->nelement();
     for (unsigned e = 0; e < n_element; e++)
     {
-      ElementWithMovingNodes *el_pt =
-        dynamic_cast<ElementWithMovingNodes *>(Bulk_mesh_pt->element_pt(e));
+      ElementWithMovingNodes* el_pt =
+        dynamic_cast<ElementWithMovingNodes*>(Bulk_mesh_pt->element_pt(e));
       el_pt->evaluate_shape_derivs_by_direct_fd();
     }
   }
@@ -436,34 +436,34 @@ public:
   }
 
   /// Fix pressure in element e at pressure dof pdof and set to pvalue
-  void fix_pressure(const unsigned &e,
-                    const unsigned &pdof,
-                    const double &pvalue)
+  void fix_pressure(const unsigned& e,
+                    const unsigned& pdof,
+                    const double& pvalue)
   {
     // Cast to specific element and fix pressure
-    dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e))
+    dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e))
       ->fix_pressure(pdof, pvalue);
   } // end_of_fix_pressure
 
   /// UnFix pressure in element e at pressure dof pdof and set to pvalue
-  void unfix_pressure(const unsigned &e, const unsigned &pdof)
+  void unfix_pressure(const unsigned& e, const unsigned& pdof)
   {
     // Cast to specific element and fix pressure
-    dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e))->unfix_pressure(pdof);
+    dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e))->unfix_pressure(pdof);
   } // end_of_unfix_pressure
 
   /// \short Doc the solution.
   void doc_solution();
 
   /// \short Set the boundary conditions
-  void set_boundary_conditions(const double &time);
+  void set_boundary_conditions(const double& time);
 
   /// \short Overloaded version of the problem's access function to
   /// the mesh. Recasts the pointer to the base Mesh object to
   /// the actual mesh type.
-  SingleLayerSpineMesh<ELEMENT> *Bulk_mesh_pt;
+  SingleLayerSpineMesh<ELEMENT>* Bulk_mesh_pt;
 
-  Mesh *Surface_mesh_pt;
+  Mesh* Surface_mesh_pt;
 
 private:
   /// DocInfo object
@@ -479,7 +479,7 @@ private:
 //========================================================================
 template<class ELEMENT, class INTERFACE_ELEMENT>
 ConvectionProblem<ELEMENT, INTERFACE_ELEMENT>::ConvectionProblem(
-  const bool &pin) :
+  const bool& pin) :
   Surface_pinned(pin)
 {
   // Allocate a timestepper
@@ -513,7 +513,7 @@ ConvectionProblem<ELEMENT, INTERFACE_ELEMENT>::ConvectionProblem(
   {
     // Construct a new 1D line element on the face on which the local
     // coordinate 1 is fixed at its max. value (1) --- This is face 2
-    FiniteElement *interface_element_pt = new INTERFACE_ELEMENT(
+    FiniteElement* interface_element_pt = new INTERFACE_ELEMENT(
       Bulk_mesh_pt->finite_element_pt(n_x * (n_y - 1) + i), 2);
 
     // Push it back onto the stack
@@ -601,7 +601,7 @@ ConvectionProblem<ELEMENT, INTERFACE_ELEMENT>::ConvectionProblem(
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(i));
 
     // Set the Peclet number
     el_pt->pe_pt() = &Global_Physical_Variables::Peclet;
@@ -638,8 +638,8 @@ ConvectionProblem<ELEMENT, INTERFACE_ELEMENT>::ConvectionProblem(
   for (unsigned i = 0; i < n_interface; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    INTERFACE_ELEMENT *el_pt =
-      dynamic_cast<INTERFACE_ELEMENT *>(Surface_mesh_pt->element_pt(i));
+    INTERFACE_ELEMENT* el_pt =
+      dynamic_cast<INTERFACE_ELEMENT*>(Surface_mesh_pt->element_pt(i));
 
     // Set the Biot number
     el_pt->bi_pt() = &Global_Physical_Variables::Biot;
@@ -662,7 +662,7 @@ ConvectionProblem<ELEMENT, INTERFACE_ELEMENT>::ConvectionProblem(
 //===========================================================
 template<class ELEMENT, class INTERFACE_ELEMENT>
 void ConvectionProblem<ELEMENT, INTERFACE_ELEMENT>::set_boundary_conditions(
-  const double &time)
+  const double& time)
 {
   // Set initial temperature profile
   if (time <= 0.0)
@@ -670,7 +670,7 @@ void ConvectionProblem<ELEMENT, INTERFACE_ELEMENT>::set_boundary_conditions(
     unsigned n_node = Bulk_mesh_pt->nnode();
     for (unsigned n = 0; n < n_node; n++)
     {
-      Node *nod_pt = Bulk_mesh_pt->node_pt(n);
+      Node* nod_pt = Bulk_mesh_pt->node_pt(n);
       // Set linear variation
       nod_pt->set_value(2, 2.0 - nod_pt->x(1));
     }
@@ -685,7 +685,7 @@ void ConvectionProblem<ELEMENT, INTERFACE_ELEMENT>::set_boundary_conditions(
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Get pointer to node
-      Node *nod_pt = Bulk_mesh_pt->boundary_node_pt(ibound, inod);
+      Node* nod_pt = Bulk_mesh_pt->boundary_node_pt(ibound, inod);
 
       // Set the number of velocity components
       unsigned vel_max = 2;
@@ -763,7 +763,7 @@ void ConvectionProblem<ELEMENT, INTERFACE_ELEMENT>::doc_solution()
 //=======start_of_main================================================
 /// Driver code for 2D Boussinesq convection problem
 //====================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Set the direction of gravity
   Global_Physical_Variables::Direction_of_gravity[0] = 0.0;

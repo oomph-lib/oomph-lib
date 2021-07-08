@@ -57,8 +57,8 @@ namespace oomph
   public:
     /// \short Constructor, takes the pointer to the "bulk" element and the
     /// index of the face to which the element is attached.
-    YoungLaplaceContactAngleElement(FiniteElement *const &bulk_el_pt,
-                                    const int &face_index);
+    YoungLaplaceContactAngleElement(FiniteElement* const& bulk_el_pt,
+                                    const int& face_index);
 
     ///\short  Broken empty constructor
     YoungLaplaceContactAngleElement()
@@ -71,37 +71,37 @@ namespace oomph
 
     /// Broken copy constructor
     YoungLaplaceContactAngleElement(
-      const YoungLaplaceContactAngleElement &dummy)
+      const YoungLaplaceContactAngleElement& dummy)
     {
       BrokenCopy::broken_copy("YoungLaplaceContactAngleElement");
     }
 
     /// Broken assignment operator
-    void operator=(const YoungLaplaceContactAngleElement &)
+    void operator=(const YoungLaplaceContactAngleElement&)
     {
       BrokenCopy::broken_assign("YoungLaplaceContactAngleElement");
     }
 
     /// \short Access function for the pointer to the prescribed contact angle
     /// (const version)
-    double *prescribed_cos_gamma_pt() const
+    double* prescribed_cos_gamma_pt() const
     {
       return Prescribed_cos_gamma_pt;
     }
 
     /// Access function for the pointer to the prescribed contact angle
-    double *&prescribed_cos_gamma_pt()
+    double*& prescribed_cos_gamma_pt()
     {
       return Prescribed_cos_gamma_pt;
     }
 
     /// Add the element's contribution to its residual vector
-    void fill_in_contribution_to_residuals(Vector<double> &residuals);
+    void fill_in_contribution_to_residuals(Vector<double>& residuals);
 
     /// \short Get the local equation number of the (one and only) unknown
     /// stored at local node n (returns -1 if value is pinned).
     /// Can be overloaded in derived multiphysics elements.
-    inline int u_local_eqn(const unsigned &n)
+    inline int u_local_eqn(const unsigned& n)
     {
       // Local equation number is the first value stored at the node
       return nodal_local_eqn(n, 0);
@@ -112,30 +112,30 @@ namespace oomph
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default (needed to break
     /// indeterminacy if bulk element is SolidElement)
-    double zeta_nodal(const unsigned &n,
-                      const unsigned &k,
-                      const unsigned &i) const
+    double zeta_nodal(const unsigned& n,
+                      const unsigned& k,
+                      const unsigned& i) const
     {
       return FaceElement::zeta_nodal(n, k, i);
     }
 
     /// Output function -- forward to broken version in FiniteElement
     /// until somebody decides what exactly they want to plot here...
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       FiniteElement::output(outfile);
     }
 
     /// \short Output function -- forward to broken version in FiniteElement
     /// until somebody decides what exactly they want to plot here...
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       FiniteElement::output(outfile, n_plot);
     }
 
     /// C-style output function -- forward to broken version in FiniteElement
     /// until somebody decides what exactly they want to plot here...
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
@@ -143,18 +143,18 @@ namespace oomph
     /// \short C-style output function -- forward to broken version in
     /// FiniteElement until somebody decides what exactly they want to plot
     /// here...
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       FiniteElement::output(file_pt, n_plot);
     }
 
     /// Compute cosinus of actual contact angle
-    double actual_cos_contact_angle(const Vector<double> &s);
+    double actual_cos_contact_angle(const Vector<double>& s);
 
     /// Get unit tangent and normal vectors to contact line
-    void contact_line_vectors(const Vector<double> &s,
-                              Vector<double> &tangent,
-                              Vector<double> &normal)
+    void contact_line_vectors(const Vector<double>& s,
+                              Vector<double>& tangent,
+                              Vector<double>& normal)
     {
       // Dummy
       double norm_of_drds;
@@ -165,10 +165,10 @@ namespace oomph
     /// \short Get unit tangent and normal vectors to contact line. Final
     /// argument gives the norm of dR/ds where R is the vector to the
     /// contact line and s the local coordinate in the element.
-    void contact_line_vectors(const Vector<double> &s,
-                              Vector<double> &tangent,
-                              Vector<double> &normal,
-                              double &norm_of_drds)
+    void contact_line_vectors(const Vector<double>& s,
+                              Vector<double>& tangent,
+                              Vector<double>& normal,
+                              double& norm_of_drds)
     {
       // Dummy
       Vector<double> spine(3);
@@ -179,18 +179,18 @@ namespace oomph
     /// (wall normal can then be obtained by cross-product). Final
     /// argument gives the norm of dR/ds where R is the vector to the
     /// contact line and s the local coordinate in the element.
-    void contact_line_vectors(const Vector<double> &s,
-                              Vector<double> &tangent,
-                              Vector<double> &normal,
-                              Vector<double> &spine,
-                              double &norm_of_drds);
+    void contact_line_vectors(const Vector<double>& s,
+                              Vector<double>& tangent,
+                              Vector<double>& normal,
+                              Vector<double>& spine,
+                              double& norm_of_drds);
 
   protected:
     /// \short Define an access function to the first data value stored
     /// at each node. In a more general "Equation" element, such abstraction
     /// is essential, because different Elements will store the same variables
     /// in different locations.
-    double &u(const unsigned int &n)
+    double& u(const unsigned int& n)
     {
       return *this->node_pt(n)->value_pt(0);
     }
@@ -212,7 +212,7 @@ namespace oomph
 
   private:
     /// Pointer to prescribed cos gamma
-    double *Prescribed_cos_gamma_pt;
+    double* Prescribed_cos_gamma_pt;
   };
 
 } // namespace oomph

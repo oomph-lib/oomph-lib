@@ -56,13 +56,13 @@ namespace oomph
   public:
     /// \short Constructor: Pass number of elements in various directions,
     /// the inner and outer radius and the length of the tube
-    QuarterPipeMesh(const unsigned &ntheta,
-                    const unsigned &nr,
-                    const unsigned &nz,
-                    const double &rmin,
-                    const double &rmax,
-                    const double &length,
-                    TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper);
+    QuarterPipeMesh(const unsigned& ntheta,
+                    const unsigned& nr,
+                    const unsigned& nz,
+                    const double& rmin,
+                    const double& rmax,
+                    const double& length,
+                    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
     /// Empty Destructor
     virtual ~QuarterPipeMesh()
@@ -71,13 +71,13 @@ namespace oomph
     }
 
     /// Access function to domain
-    QuarterPipeDomain *domain_pt()
+    QuarterPipeDomain* domain_pt()
     {
       return Domain_pt;
     }
 
     /// Access function to underlying domain
-    QuarterPipeDomain *domain_pt() const
+    QuarterPipeDomain* domain_pt() const
     {
       return Domain_pt;
     }
@@ -102,7 +102,7 @@ namespace oomph
     double Length;
 
     /// Pointer to domain
-    QuarterPipeDomain *Domain_pt;
+    QuarterPipeDomain* Domain_pt;
 
   }; // endofclass
 
@@ -122,25 +122,25 @@ namespace oomph
     /// \short Constructor: Pass number of elements in various directions,
     /// the inner and outer radius and the length of the tube
     RefineableQuarterPipeMesh(
-      const unsigned &ntheta,
-      const unsigned &nr,
-      const unsigned &nz,
-      const double &rmin,
-      const double &rmax,
-      const double &length,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      const unsigned& ntheta,
+      const unsigned& nr,
+      const unsigned& nz,
+      const double& rmin,
+      const double& rmax,
+      const double& length,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       SimpleCubicMesh<ELEMENT>(ntheta, nr, nz, 1.0, 1.0, 1.0, time_stepper_pt),
       QuarterPipeMesh<ELEMENT>(
         ntheta, nr, nz, rmin, rmax, length, time_stepper_pt)
     {
       // Setup Octree forest: Turn elements into individual octrees
       // and plant in forest
-      Vector<TreeRoot *> trees_pt;
+      Vector<TreeRoot*> trees_pt;
       for (unsigned iel = 0; iel < (nr * ntheta * nz); iel++)
       {
-        FiniteElement *el_pt = QuarterPipeMesh<ELEMENT>::finite_element_pt(iel);
-        ELEMENT *ref_el_pt = dynamic_cast<ELEMENT *>(el_pt);
-        OcTreeRoot *octree_root_pt = new OcTreeRoot(ref_el_pt);
+        FiniteElement* el_pt = QuarterPipeMesh<ELEMENT>::finite_element_pt(iel);
+        ELEMENT* ref_el_pt = dynamic_cast<ELEMENT*>(el_pt);
+        OcTreeRoot* octree_root_pt = new OcTreeRoot(ref_el_pt);
         trees_pt.push_back(octree_root_pt);
       }
 
@@ -174,13 +174,13 @@ namespace oomph
     /// Builds mesh and copies Eulerian coords to Lagrangian
     /// ones so that the initial configuration is the stress-free one.
     ElasticQuarterPipeMesh(
-      const unsigned &ntheta,
-      const unsigned &nr,
-      const unsigned &nz,
-      const double &rmin,
-      const double &rmax,
-      const double &length,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      const unsigned& ntheta,
+      const unsigned& nr,
+      const unsigned& nz,
+      const double& rmin,
+      const double& rmax,
+      const double& length,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       SimpleCubicMesh<ELEMENT>(ntheta, nr, nz, 1.0, 1.0, 1.0, time_stepper_pt),
       QuarterPipeMesh<ELEMENT>(
         ntheta, nr, nz, rmin, rmax, length, time_stepper_pt)
@@ -210,13 +210,13 @@ namespace oomph
     /// Builds mesh and copies Eulerian coords to Lagrangian
     /// ones so that the initial configuration is the stress-free one.
     ElasticRefineableQuarterPipeMesh(
-      const unsigned &ntheta,
-      const unsigned &nr,
-      const unsigned &nz,
-      const double &rmin,
-      const double &rmax,
-      const double &length,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      const unsigned& ntheta,
+      const unsigned& nr,
+      const unsigned& nz,
+      const double& rmin,
+      const double& rmax,
+      const double& length,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       SimpleCubicMesh<ELEMENT>(ntheta, nr, nz, 1.0, 1.0, 1.0, time_stepper_pt),
       QuarterPipeMesh<ELEMENT>(
         ntheta, nr, nz, rmin, rmax, length, time_stepper_pt),
@@ -225,12 +225,12 @@ namespace oomph
     {
       // Setup Octree forest: Turn elements into individual octrees
       // and plant in forest
-      Vector<TreeRoot *> trees_pt;
+      Vector<TreeRoot*> trees_pt;
       for (unsigned iel = 0; iel < (nr * ntheta * nz); iel++)
       {
-        FiniteElement *el_pt = QuarterPipeMesh<ELEMENT>::finite_element_pt(iel);
-        ELEMENT *ref_el_pt = dynamic_cast<ELEMENT *>(el_pt);
-        OcTreeRoot *octree_root_pt = new OcTreeRoot(ref_el_pt);
+        FiniteElement* el_pt = QuarterPipeMesh<ELEMENT>::finite_element_pt(iel);
+        ELEMENT* ref_el_pt = dynamic_cast<ELEMENT*>(el_pt);
+        OcTreeRoot* octree_root_pt = new OcTreeRoot(ref_el_pt);
         trees_pt.push_back(octree_root_pt);
       }
       this->Forest_pt = new OcTreeForest(trees_pt);
@@ -240,7 +240,7 @@ namespace oomph
       for (unsigned e = 0; e < n_element; e++)
       {
         // Get pointer to full element type
-        ELEMENT *el_pt = dynamic_cast<ELEMENT *>(this->element_pt(e));
+        ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->element_pt(e));
 
         // Set pointer to macro element so the curvlinear boundaries
         // of the undeformed mesh/domain get picked up during adaptive

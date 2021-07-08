@@ -72,9 +72,9 @@ namespace oomph
   //======================================================================
   template<class ELEMENT>
   void QuadFromTriangleMesh<ELEMENT>::build_from_scaffold(
-    TriangleScaffoldMesh *tmp_mesh_pt,
-    TimeStepper *time_stepper_pt,
-    const bool &use_attributes)
+    TriangleScaffoldMesh* tmp_mesh_pt,
+    TimeStepper* time_stepper_pt,
+    const bool& use_attributes)
   {
     // Create space for elements
     unsigned nelem = tmp_mesh_pt->nelement();
@@ -95,7 +95,7 @@ namespace oomph
     Face_index_at_boundary.resize(nbound);
 
     // Create a quad element for nodal data
-    ELEMENT *temp_el_pt = new ELEMENT;
+    ELEMENT* temp_el_pt = new ELEMENT;
 
     // Get the number of nodes in a quad element
     unsigned nnode_el = temp_el_pt->nnode();
@@ -146,12 +146,12 @@ namespace oomph
     // backwards (as progressing through an edge of an element in a clockwise
     // manner is equivalent to proceeding through the edge of the neighbouring
     // element in an anti-clockwise manner)
-    std::map<Edge, Vector<Node *>> edge_nodes_map;
+    std::map<Edge, Vector<Node*>> edge_nodes_map;
 
     // Set up a map to check if the scaffold mesh node has been set up in the
     // quad mesh. If the node has been set up this map will return a pointer
     // to it otherwise it will return a null pointer
-    std::map<Node *, Node *> scaffold_to_quad_mesh_node;
+    std::map<Node*, Node*> scaffold_to_quad_mesh_node;
 
     // Loop over elements in scaffold mesh
     unsigned new_el_count = 0;
@@ -196,12 +196,12 @@ namespace oomph
       // Create element pointers and assign them to a vector
       //----------------------------------------------------
       // Make new quad elements of the type specified by the template parameter
-      ELEMENT *el0_pt = new ELEMENT;
-      ELEMENT *el1_pt = new ELEMENT;
-      ELEMENT *el2_pt = new ELEMENT;
+      ELEMENT* el0_pt = new ELEMENT;
+      ELEMENT* el1_pt = new ELEMENT;
+      ELEMENT* el2_pt = new ELEMENT;
 
       // Create a vector of ELEMENTs to store el0_pt, el1_pt and el2_pt
-      Vector<ELEMENT *> el_vector_pt(3, 0);
+      Vector<ELEMENT*> el_vector_pt(3, 0);
 
       // Assign the entries to el_vector_pt
       el_vector_pt[0] = el0_pt;
@@ -217,17 +217,17 @@ namespace oomph
       for (unsigned j = 0; j < 3; j++)
       {
         // Pointer to node in the scaffold mesh
-        Node *scaffold_node_pt = tmp_mesh_pt->finite_element_pt(e)->node_pt(j);
+        Node* scaffold_node_pt = tmp_mesh_pt->finite_element_pt(e)->node_pt(j);
 
         // Check if the node has been set up yet
-        Node *qmesh_node_pt = scaffold_to_quad_mesh_node[scaffold_node_pt];
+        Node* qmesh_node_pt = scaffold_to_quad_mesh_node[scaffold_node_pt];
 
         // Haven't done this one yet
         if (qmesh_node_pt == 0)
         {
           // Get pointer to set of mesh boundaries that this
           // scaffold node occupies; NULL if the node is not on any boundary
-          std::set<unsigned> *boundaries_pt;
+          std::set<unsigned>* boundaries_pt;
           scaffold_node_pt->get_boundaries_pt(boundaries_pt);
 
           // Check to see if it's on any boundaries
@@ -288,9 +288,9 @@ namespace oomph
 
       // Check if the edges have been set up (each will have size nnode_1d).
       // If they have not been set up yet, this will
-      Vector<Node *> edge0_vector_pt = edge_nodes_map[edge0];
-      Vector<Node *> edge1_vector_pt = edge_nodes_map[edge1];
-      Vector<Node *> edge2_vector_pt = edge_nodes_map[edge2];
+      Vector<Node*> edge0_vector_pt = edge_nodes_map[edge0];
+      Vector<Node*> edge1_vector_pt = edge_nodes_map[edge1];
+      Vector<Node*> edge2_vector_pt = edge_nodes_map[edge2];
 
       // Bools to indicate whether or not the edges have been set up
       bool edge0_setup = (edge0_vector_pt.size() != 0);
@@ -429,7 +429,7 @@ namespace oomph
       // pointer to it with each element:
       //---------------------------------------------------------------------------
       // Construct the centroid node
-      Node *nod_pt = el0_pt->construct_node(corner_3, time_stepper_pt);
+      Node* nod_pt = el0_pt->construct_node(corner_3, time_stepper_pt);
 
       // Add the pointer to the vector of nodal pointers
       Node_pt.push_back(nod_pt);
@@ -505,7 +505,7 @@ namespace oomph
             if (q0_lower_boundary_id > 0)
             {
               // Construct a boundary node
-              Node *nod_pt =
+              Node* nod_pt =
                 el0_pt->construct_boundary_node(j, time_stepper_pt);
 
               // Add it to the list of boundary nodes
@@ -526,7 +526,7 @@ namespace oomph
           if (!done)
           {
             // Construct a normal node
-            Node *nod_pt = el0_pt->construct_node(j, time_stepper_pt);
+            Node* nod_pt = el0_pt->construct_node(j, time_stepper_pt);
 
             // Add the node into the vector of nodes on edge 0
             edge0_vector_pt[j] = nod_pt;
@@ -559,7 +559,7 @@ namespace oomph
             if (q0_left_boundary_id > 0)
             {
               // Construct a boundary node
-              Node *nod_pt =
+              Node* nod_pt =
                 el0_pt->construct_boundary_node(j, time_stepper_pt);
 
               // Add it to the list of boundary nodes
@@ -581,7 +581,7 @@ namespace oomph
           if (!done)
           {
             // Construct a normal node
-            Node *nod_pt = el0_pt->construct_node(j, time_stepper_pt);
+            Node* nod_pt = el0_pt->construct_node(j, time_stepper_pt);
 
             // Add the node into the vector of nodes on edge 2 in clockwise
             // order
@@ -599,7 +599,7 @@ namespace oomph
         if (!done)
         {
           // Construct a normal node
-          Node *nod_pt = el0_pt->construct_node(j, time_stepper_pt);
+          Node* nod_pt = el0_pt->construct_node(j, time_stepper_pt);
 
           // Add it to the list of nodes in the mesh
           Node_pt.push_back(nod_pt);
@@ -673,7 +673,7 @@ namespace oomph
             if (q1_lower_boundary_id > 0)
             {
               // Construct a boundary node
-              Node *nod_pt =
+              Node* nod_pt =
                 el1_pt->construct_boundary_node(j, time_stepper_pt);
 
               // Add it to the list of boundary nodes
@@ -694,7 +694,7 @@ namespace oomph
           if (!done)
           {
             // Construct a normal node
-            Node *nod_pt = el1_pt->construct_node(j, time_stepper_pt);
+            Node* nod_pt = el1_pt->construct_node(j, time_stepper_pt);
 
             // Add the node into the vector of nodes on edge 1
             edge1_vector_pt[j] = nod_pt;
@@ -727,7 +727,7 @@ namespace oomph
             if (q1_left_boundary_id > 0)
             {
               // Construct a boundary node
-              Node *nod_pt =
+              Node* nod_pt =
                 el1_pt->construct_boundary_node(j, time_stepper_pt);
 
               // Add it to the list of boundary nodes
@@ -749,7 +749,7 @@ namespace oomph
           if (!done)
           {
             // Construct a normal node
-            Node *nod_pt = el1_pt->construct_node(j, time_stepper_pt);
+            Node* nod_pt = el1_pt->construct_node(j, time_stepper_pt);
 
             // Add the node into the vector of nodes on edge 0 in clockwise
             // order
@@ -767,7 +767,7 @@ namespace oomph
         if (!done)
         {
           // Construct a normal node
-          Node *nod_pt = el1_pt->construct_node(j, time_stepper_pt);
+          Node* nod_pt = el1_pt->construct_node(j, time_stepper_pt);
 
           // Add it to the list of nodes in the mesh
           Node_pt.push_back(nod_pt);
@@ -853,7 +853,7 @@ namespace oomph
             if (q2_lower_boundary_id > 0)
             {
               // Construct a boundary node
-              Node *nod_pt =
+              Node* nod_pt =
                 el2_pt->construct_boundary_node(j, time_stepper_pt);
 
               // Add it to the list of boundary nodes
@@ -874,7 +874,7 @@ namespace oomph
           if (!done)
           {
             // Construct a normal node
-            Node *nod_pt = el2_pt->construct_node(j, time_stepper_pt);
+            Node* nod_pt = el2_pt->construct_node(j, time_stepper_pt);
 
             // Add the node into the vector of nodes on edge 2
             edge2_vector_pt[j] = nod_pt;
@@ -918,7 +918,7 @@ namespace oomph
             if (q2_left_boundary_id > 0)
             {
               // Construct a boundary node
-              Node *nod_pt =
+              Node* nod_pt =
                 el2_pt->construct_boundary_node(j, time_stepper_pt);
 
               // Add it to the list of boundary nodes
@@ -940,7 +940,7 @@ namespace oomph
           if (!done)
           {
             // Construct a normal node
-            Node *nod_pt = el2_pt->construct_node(j, time_stepper_pt);
+            Node* nod_pt = el2_pt->construct_node(j, time_stepper_pt);
 
             // Add the node into the vector of nodes on edge 1 in clockwise
             // order
@@ -958,7 +958,7 @@ namespace oomph
         if (!done)
         {
           // Construct a normal node
-          Node *nod_pt = el2_pt->construct_node(j, time_stepper_pt);
+          Node* nod_pt = el2_pt->construct_node(j, time_stepper_pt);
 
           // Add it to the list of nodes in the mesh
           Node_pt.push_back(nod_pt);
@@ -1020,7 +1020,7 @@ namespace oomph
   //======================================================================
   template<class ELEMENT>
   void RefineableQuadFromTriangleMesh<ELEMENT>::adapt(
-    const Vector<double> &elem_error)
+    const Vector<double>& elem_error)
   {
     // Call the adapt function from the TreeBasedRefineableMeshBase base class
     TreeBasedRefineableMeshBase::adapt(elem_error);

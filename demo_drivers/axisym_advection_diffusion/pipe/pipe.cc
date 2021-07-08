@@ -58,7 +58,7 @@ namespace Global_Physical_Variables
   double Radius = 1.0;
 
   /// Wind
-  void wind_function(const Vector<double> &x, Vector<double> &wind)
+  void wind_function(const Vector<double>& x, Vector<double>& wind)
   {
     // Poiseulle flow no radial flow, but quadratic axial flow
     // plus a possible swirl component which will do nothing
@@ -116,9 +116,9 @@ public:
   /// \short Overloaded version of the problem's access function to
   /// the mesh. Recasts the pointer to the base Mesh object to
   /// the actual mesh type.
-  RefineableRectangularQuadMesh<ELEMENT> *mesh_pt()
+  RefineableRectangularQuadMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<RefineableRectangularQuadMesh<ELEMENT> *>(
+    return dynamic_cast<RefineableRectangularQuadMesh<ELEMENT>*>(
       Problem::mesh_pt());
   }
 
@@ -181,7 +181,7 @@ RefineableAdvectionDiffusionPipeProblem<
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the wind function pointer
     el_pt->wind_fct_pt() = Global_Physical_Variables::wind_function;
@@ -216,7 +216,7 @@ void RefineableAdvectionDiffusionPipeProblem<ELEMENT>::set_inlet_concentration()
   unsigned n_node = mesh_pt()->nboundary_node(b);
   for (unsigned n = 0; n < n_node; n++)
   {
-    Node *nod_pt = this->mesh_pt()->boundary_node_pt(b, n);
+    Node* nod_pt = this->mesh_pt()->boundary_node_pt(b, n);
     // Get the radial value
     double r = nod_pt->x(0);
 

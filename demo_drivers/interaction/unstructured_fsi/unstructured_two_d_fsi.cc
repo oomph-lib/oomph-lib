@@ -56,7 +56,7 @@ namespace Global_Parameters
   double Gravity = 0.0;
 
   /// Non-dimensional gravity as body force
-  void gravity(const double &time, const Vector<double> &xi, Vector<double> &b)
+  void gravity(const double& time, const Vector<double>& xi, Vector<double>& b)
   {
     b[0] = 0.0;
     b[1] = -Gravity;
@@ -66,14 +66,14 @@ namespace Global_Parameters
   double Nu = 0.3;
 
   /// Constitutive law for the solid (and pseudo-solid) mechanics
-  ConstitutiveLaw *Constitutive_law_pt = 0;
+  ConstitutiveLaw* Constitutive_law_pt = 0;
 
   /// Boolean to identify if node is on fsi boundary
-  bool is_on_fsi_boundary(Node *nod_pt)
+  bool is_on_fsi_boundary(Node* nod_pt)
   {
     if ((
           // Is it a boundary node?
-          dynamic_cast<BoundaryNodeBase *>(nod_pt) != 0) &&
+          dynamic_cast<BoundaryNodeBase*>(nod_pt) != 0) &&
         (
           // Horizontal extent of main immersed obstacle
           ((nod_pt->x(0) > 1.6) && (nod_pt->x(0) < 4.75) &&
@@ -110,10 +110,10 @@ class MySolidTriangleMesh :
 public:
   /// Constructor:
   MySolidTriangleMesh(
-    const std::string &node_file_name,
-    const std::string &element_file_name,
-    const std::string &poly_file_name,
-    TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+    const std::string& node_file_name,
+    const std::string& element_file_name,
+    const std::string& poly_file_name,
+    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
     TriangleMesh<ELEMENT>(
       node_file_name, element_file_name, poly_file_name, time_stepper_pt)
   {
@@ -126,7 +126,7 @@ public:
     unsigned n_node = this->nnode();
     for (unsigned j = 0; j < n_node; j++)
     {
-      Node *nod_pt = this->node_pt(j);
+      Node* nod_pt = this->node_pt(j);
 
       // Boundary 1 is lower boundary
       if (nod_pt->x(1) < 0.15)
@@ -169,10 +169,10 @@ class FluidTriangleMesh :
 {
 public:
   /// Constructor
-  FluidTriangleMesh(const std::string &node_file_name,
-                    const std::string &element_file_name,
-                    const std::string &poly_file_name,
-                    TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+  FluidTriangleMesh(const std::string& node_file_name,
+                    const std::string& element_file_name,
+                    const std::string& poly_file_name,
+                    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
     TriangleMesh<ELEMENT>(
       node_file_name, element_file_name, poly_file_name, time_stepper_pt)
   {
@@ -185,7 +185,7 @@ public:
     unsigned n_node = this->nnode();
     for (unsigned j = 0; j < n_node; j++)
     {
-      Node *nod_pt = this->node_pt(j);
+      Node* nod_pt = this->node_pt(j);
 
       // Boundary 1 is left (inflow) boundary
       if (nod_pt->x(0) < 0.226)
@@ -261,19 +261,19 @@ public:
   ~UnstructuredFSIProblem() {}
 
   /// Access function for the fluid mesh
-  FluidTriangleMesh<FLUID_ELEMENT> *&fluid_mesh_pt()
+  FluidTriangleMesh<FLUID_ELEMENT>*& fluid_mesh_pt()
   {
     return Fluid_mesh_pt;
   }
 
   /// Access function for the solid mesh
-  MySolidTriangleMesh<SOLID_ELEMENT> *&solid_mesh_pt()
+  MySolidTriangleMesh<SOLID_ELEMENT>*& solid_mesh_pt()
   {
     return Solid_mesh_pt;
   }
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 private:
   /// Create FSI traction elements
@@ -287,19 +287,19 @@ private:
   void doc_solid_boundary_coordinates();
 
   /// Fluid mesh
-  FluidTriangleMesh<FLUID_ELEMENT> *Fluid_mesh_pt;
+  FluidTriangleMesh<FLUID_ELEMENT>* Fluid_mesh_pt;
 
   /// Solid mesh
-  MySolidTriangleMesh<SOLID_ELEMENT> *Solid_mesh_pt;
+  MySolidTriangleMesh<SOLID_ELEMENT>* Solid_mesh_pt;
 
   /// Pointers to mesh of Lagrange multiplier elements
-  SolidMesh *Lagrange_multiplier_mesh_pt;
+  SolidMesh* Lagrange_multiplier_mesh_pt;
 
   /// Vector of pointers to mesh of FSI traction elements
-  SolidMesh *Traction_mesh_pt;
+  SolidMesh* Traction_mesh_pt;
 
   /// GeomObject incarnation of fsi boundary in solid mesh
-  MeshAsGeomObject *Solid_fsi_boundary_pt;
+  MeshAsGeomObject* Solid_fsi_boundary_pt;
 };
 
 //==start_of_constructor==================================================
@@ -345,7 +345,7 @@ UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::UnstructuredFSIProblem()
         for (unsigned i = 0; i < 2; i++)
         {
           // Pin the node
-          SolidNode *nod_pt = Fluid_mesh_pt->boundary_node_pt(ibound, inod);
+          SolidNode* nod_pt = Fluid_mesh_pt->boundary_node_pt(ibound, inod);
           nod_pt->pin_position(i);
 
           // Doc it as pinned
@@ -364,8 +364,8 @@ UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::UnstructuredFSIProblem()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    FLUID_ELEMENT *el_pt =
-      dynamic_cast<FLUID_ELEMENT *>(Fluid_mesh_pt->element_pt(e));
+    FLUID_ELEMENT* el_pt =
+      dynamic_cast<FLUID_ELEMENT*>(Fluid_mesh_pt->element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Parameters::Re;
@@ -440,8 +440,8 @@ UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::UnstructuredFSIProblem()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Cast to a solid element
-    SOLID_ELEMENT *el_pt =
-      dynamic_cast<SOLID_ELEMENT *>(Solid_mesh_pt->element_pt(i));
+    SOLID_ELEMENT* el_pt =
+      dynamic_cast<SOLID_ELEMENT*>(Solid_mesh_pt->element_pt(i));
 
     // Set the constitutive law
     el_pt->constitutive_law_pt() = Global_Parameters::Constitutive_law_pt;
@@ -535,8 +535,8 @@ void UnstructuredFSIProblem<FLUID_ELEMENT,
   for (unsigned e = 0; e < n_face_element; e++)
   {
     // Cast the element pointer
-    FSISolidTractionElement<SOLID_ELEMENT, 2> *el_pt =
-      dynamic_cast<FSISolidTractionElement<SOLID_ELEMENT, 2> *>(
+    FSISolidTractionElement<SOLID_ELEMENT, 2>* el_pt =
+      dynamic_cast<FSISolidTractionElement<SOLID_ELEMENT, 2>*>(
         Traction_mesh_pt->element_pt(e));
 
     // Doc boundary coordinate
@@ -603,14 +603,14 @@ void UnstructuredFSIProblem<FLUID_ELEMENT,
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    SOLID_ELEMENT *bulk_elem_pt =
-      dynamic_cast<SOLID_ELEMENT *>(solid_mesh_pt()->boundary_element_pt(b, e));
+    SOLID_ELEMENT* bulk_elem_pt =
+      dynamic_cast<SOLID_ELEMENT*>(solid_mesh_pt()->boundary_element_pt(b, e));
 
     // What is the index of the face of the element e along boundary b
     int face_index = solid_mesh_pt()->face_index_at_boundary(b, e);
 
     // Create new element
-    FSISolidTractionElement<SOLID_ELEMENT, 2> *el_pt =
+    FSISolidTractionElement<SOLID_ELEMENT, 2>* el_pt =
       new FSISolidTractionElement<SOLID_ELEMENT, 2>(bulk_elem_pt, face_index);
 
     // Add it to the mesh
@@ -646,14 +646,14 @@ void UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk fluid element that is adjacent to boundary b
-    FLUID_ELEMENT *bulk_elem_pt =
-      dynamic_cast<FLUID_ELEMENT *>(Fluid_mesh_pt->boundary_element_pt(b, e));
+    FLUID_ELEMENT* bulk_elem_pt =
+      dynamic_cast<FLUID_ELEMENT*>(Fluid_mesh_pt->boundary_element_pt(b, e));
 
     // Find the index of the face of element e along boundary b
     int face_index = Fluid_mesh_pt->face_index_at_boundary(b, e);
 
     // Create new element
-    ImposeDisplacementByLagrangeMultiplierElement<FLUID_ELEMENT> *el_pt =
+    ImposeDisplacementByLagrangeMultiplierElement<FLUID_ELEMENT>* el_pt =
       new ImposeDisplacementByLagrangeMultiplierElement<FLUID_ELEMENT>(
         bulk_elem_pt, face_index);
 
@@ -669,7 +669,7 @@ void UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
     unsigned nnod = el_pt->nnode();
     for (unsigned j = 0; j < nnod; j++)
     {
-      Node *nod_pt = el_pt->node_pt(j);
+      Node* nod_pt = el_pt->node_pt(j);
 
       // Is the node also on boundary 0?
       if (nod_pt->is_on_boundary(0))
@@ -695,7 +695,7 @@ void UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::
 //========================================================================
 template<class FLUID_ELEMENT, class SOLID_ELEMENT>
 void UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::doc_solution(
-  DocInfo &doc_info)
+  DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];

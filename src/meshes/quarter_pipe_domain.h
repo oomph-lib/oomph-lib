@@ -46,12 +46,12 @@ namespace oomph
   public:
     /// \short Constructor: Pass number of elements in various directions,
     /// the inner and outer radius and the length of the tube
-    QuarterPipeDomain(const unsigned &ntheta,
-                      const unsigned &nr,
-                      const unsigned &nz,
-                      const double &rmin,
-                      const double &rmax,
-                      const double &length) :
+    QuarterPipeDomain(const unsigned& ntheta,
+                      const unsigned& nr,
+                      const unsigned& nz,
+                      const double& rmin,
+                      const double& rmax,
+                      const double& length) :
       Ntheta(ntheta),
       Nr(nr),
       Nz(nz),
@@ -79,13 +79,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    QuarterPipeDomain(const QuarterPipeDomain &)
+    QuarterPipeDomain(const QuarterPipeDomain&)
     {
       BrokenCopy::broken_copy("QuarterPipeDomain");
     }
 
     /// Broken assignment operator
-    void operator=(const QuarterPipeDomain &)
+    void operator=(const QuarterPipeDomain&)
     {
       BrokenCopy::broken_assign("QuarterPipeDomain");
     }
@@ -104,18 +104,18 @@ namespace oomph
 
     /// \short Typedef for function pointer for function that implements
     /// axial spacing of macro elements
-    typedef double (*AxialSpacingFctPt)(const double &xi);
+    typedef double (*AxialSpacingFctPt)(const double& xi);
 
     /// \short Function pointer for function that  implements
     /// axial spacing of macro elements
-    AxialSpacingFctPt &axial_spacing_fct_pt()
+    AxialSpacingFctPt& axial_spacing_fct_pt()
     {
       return Axial_spacing_fct_pt;
     }
 
     /// \short Function that implements
     /// axial spacing of macro elements
-    double axial_spacing_fct(const double &xi)
+    double axial_spacing_fct(const double& xi)
     {
       return Axial_spacing_fct_pt(xi);
     }
@@ -123,11 +123,11 @@ namespace oomph
     /// \short Vector representation of the i_macro-th macro element
     /// boundary i_direct (U/D/L/R/F/B) at time level t
     /// (t=0: present; t>0: previous): f(s).
-    void macro_element_boundary(const unsigned &t,
-                                const unsigned &i_macro,
-                                const unsigned &i_direct,
-                                const Vector<double> &s,
-                                Vector<double> &f);
+    void macro_element_boundary(const unsigned& t,
+                                const unsigned& i_macro,
+                                const unsigned& i_direct,
+                                const Vector<double>& s,
+                                Vector<double>& f);
 
   private:
     /// Number of elements azimuthal direction
@@ -150,11 +150,11 @@ namespace oomph
 
     /// \short Geom object representing the outer boundary of
     /// the cross section
-    GeomObject *Outer_boundary_cross_section_pt;
+    GeomObject* Outer_boundary_cross_section_pt;
 
     /// \short Geom object representing the inner boundary of
     /// the cross section
-    GeomObject *Inner_boundary_cross_section_pt;
+    GeomObject* Inner_boundary_cross_section_pt;
 
     /// \short Function pointer for function that implements
     /// axial spacing of macro elements
@@ -162,76 +162,76 @@ namespace oomph
 
     /// \short Default for function that  implements
     /// axial spacing of macro elements
-    static double default_axial_spacing_fct(const double &xi)
+    static double default_axial_spacing_fct(const double& xi)
     {
       return xi;
     }
 
     /// \short Boundary of macro element zeta \f$ \in [-1,1]x[-1,1] \f$
-    void r_U(const unsigned &t,
-             const Vector<double> &zeta,
-             Vector<double> &f,
-             const double &rmin,
-             const double &rmax,
-             const double &thetamin,
-             const double &thetamax,
-             const double &zmin,
-             const double &zmax);
+    void r_U(const unsigned& t,
+             const Vector<double>& zeta,
+             Vector<double>& f,
+             const double& rmin,
+             const double& rmax,
+             const double& thetamin,
+             const double& thetamax,
+             const double& zmin,
+             const double& zmax);
 
     /// \short Boundary of macro element zeta \f$ \in [-1,1]x[-1,1] \f$
-    void r_L(const unsigned &t,
-             const Vector<double> &zeta,
-             Vector<double> &f,
-             const double &rmin,
-             const double &rmax,
-             const double &thetamin,
-             const double &thetamax,
-             const double &zmin,
-             const double &zmax);
+    void r_L(const unsigned& t,
+             const Vector<double>& zeta,
+             Vector<double>& f,
+             const double& rmin,
+             const double& rmax,
+             const double& thetamin,
+             const double& thetamax,
+             const double& zmin,
+             const double& zmax);
 
     /// \short Boundary of macro element zeta \f$ \in [-1,1]x[-1,1] \f$
-    void r_D(const unsigned &t,
-             const Vector<double> &zeta,
-             Vector<double> &f,
-             const double &rmin,
-             const double &rmax,
-             const double &thetamin,
-             const double &thetamax,
-             const double &zmin,
-             const double &zmax);
+    void r_D(const unsigned& t,
+             const Vector<double>& zeta,
+             Vector<double>& f,
+             const double& rmin,
+             const double& rmax,
+             const double& thetamin,
+             const double& thetamax,
+             const double& zmin,
+             const double& zmax);
 
     /// \short Boundary of macro element zeta \f$ \in [-1,1]x[-1,1] \f$
-    void r_R(const unsigned &t,
-             const Vector<double> &zeta,
-             Vector<double> &f,
-             const double &rmin,
-             const double &rmax,
-             const double &thetamin,
-             const double &thetamax,
-             const double &zmin,
-             const double &zmax);
+    void r_R(const unsigned& t,
+             const Vector<double>& zeta,
+             Vector<double>& f,
+             const double& rmin,
+             const double& rmax,
+             const double& thetamin,
+             const double& thetamax,
+             const double& zmin,
+             const double& zmax);
 
     /// \short Boundary of macro element zeta \f$ \in [-1,1]x[-1,1] \f$
-    void r_F(const unsigned &t,
-             const Vector<double> &zeta,
-             Vector<double> &f,
-             const double &rmin,
-             const double &rmax,
-             const double &thetamin,
-             const double &thetamax,
-             const double &zmin,
-             const double &zmax);
+    void r_F(const unsigned& t,
+             const Vector<double>& zeta,
+             Vector<double>& f,
+             const double& rmin,
+             const double& rmax,
+             const double& thetamin,
+             const double& thetamax,
+             const double& zmin,
+             const double& zmax);
 
     /// \short Boundary of macro element zeta \f$ \in [-1,1]x[-1,1] \f$
-    void r_B(const unsigned &t,
-             const Vector<double> &zeta,
-             Vector<double> &f,
-             const double &rmin,
-             const double &rmax,
-             const double &thetamin,
-             const double &thetamax,
-             const double &zmin,
-             const double &zmax);
+    void r_B(const unsigned& t,
+             const Vector<double>& zeta,
+             Vector<double>& f,
+             const double& rmin,
+             const double& rmax,
+             const double& thetamin,
+             const double& thetamax,
+             const double& zmin,
+             const double& zmax);
 
   }; // endofclass
 
@@ -240,11 +240,11 @@ namespace oomph
   /// boundary idirect (U/D/L/R/F/B) at time level t:
   /// f(s)
   //=================================================================
-  void QuarterPipeDomain::macro_element_boundary(const unsigned &t,
-                                                 const unsigned &imacro,
-                                                 const unsigned &idirect,
-                                                 const Vector<double> &s,
-                                                 Vector<double> &f)
+  void QuarterPipeDomain::macro_element_boundary(const unsigned& t,
+                                                 const unsigned& imacro,
+                                                 const unsigned& idirect,
+                                                 const Vector<double>& s,
+                                                 Vector<double>& f)
   {
     using namespace OcTreeNames;
 
@@ -312,15 +312,15 @@ namespace oomph
   //=================================================================
   /// Left face of a macro element \f$ s \in [-1,1]*[-1,1] \f$
   //=================================================================
-  void QuarterPipeDomain::r_L(const unsigned &t,
-                              const Vector<double> &s,
-                              Vector<double> &f,
-                              const double &rmin,
-                              const double &rmax,
-                              const double &thetamin,
-                              const double &thetamax,
-                              const double &zmin,
-                              const double &zmax)
+  void QuarterPipeDomain::r_L(const unsigned& t,
+                              const Vector<double>& s,
+                              Vector<double>& f,
+                              const double& rmin,
+                              const double& rmax,
+                              const double& thetamin,
+                              const double& thetamax,
+                              const double& zmin,
+                              const double& zmax)
   {
     Vector<double> x(1);
     x[0] = thetamax;
@@ -353,15 +353,15 @@ namespace oomph
   //=================================================================
   /// Right face of a macro element \f$ s \in [-1,1]*[-1,1] \f$
   //=================================================================
-  void QuarterPipeDomain::r_R(const unsigned &t,
-                              const Vector<double> &s,
-                              Vector<double> &f,
-                              const double &rmin,
-                              const double &rmax,
-                              const double &thetamin,
-                              const double &thetamax,
-                              const double &zmin,
-                              const double &zmax)
+  void QuarterPipeDomain::r_R(const unsigned& t,
+                              const Vector<double>& s,
+                              Vector<double>& f,
+                              const double& rmin,
+                              const double& rmax,
+                              const double& thetamin,
+                              const double& thetamax,
+                              const double& zmin,
+                              const double& zmax)
   {
     Vector<double> x(1);
     x[0] = thetamin;
@@ -394,15 +394,15 @@ namespace oomph
   //=================================================================
   /// Left face of a macro element \f$s \in [-1,1]*[-1,1] \f$
   //=================================================================
-  void QuarterPipeDomain::r_D(const unsigned &t,
-                              const Vector<double> &s,
-                              Vector<double> &f,
-                              const double &rmin,
-                              const double &rmax,
-                              const double &thetamin,
-                              const double &thetamax,
-                              const double &zmin,
-                              const double &zmax)
+  void QuarterPipeDomain::r_D(const unsigned& t,
+                              const Vector<double>& s,
+                              Vector<double>& f,
+                              const double& rmin,
+                              const double& rmax,
+                              const double& thetamin,
+                              const double& thetamax,
+                              const double& zmin,
+                              const double& zmax)
   {
     Vector<double> x(1);
     x[0] = thetamax + (0.5 * (s[0] + 1.0)) * (thetamin - thetamax);
@@ -427,15 +427,15 @@ namespace oomph
   //=================================================================
   /// Right face of a macro element \f$ s \in [-1,1]*[-1,1] \f$
   //=================================================================
-  void QuarterPipeDomain::r_U(const unsigned &t,
-                              const Vector<double> &s,
-                              Vector<double> &f,
-                              const double &rmin,
-                              const double &rmax,
-                              const double &thetamin,
-                              const double &thetamax,
-                              const double &zmin,
-                              const double &zmax)
+  void QuarterPipeDomain::r_U(const unsigned& t,
+                              const Vector<double>& s,
+                              Vector<double>& f,
+                              const double& rmin,
+                              const double& rmax,
+                              const double& thetamin,
+                              const double& thetamax,
+                              const double& zmin,
+                              const double& zmax)
   {
     Vector<double> x(1);
     x[0] = thetamax + (0.5 * (s[0] + 1.0)) * (thetamin - thetamax);
@@ -460,15 +460,15 @@ namespace oomph
   //=================================================================
   /// Front face of a macro element \f$ s \in [-1,1]*[-1,1] \f$
   //=================================================================
-  void QuarterPipeDomain::r_F(const unsigned &t,
-                              const Vector<double> &s,
-                              Vector<double> &f,
-                              const double &rmin,
-                              const double &rmax,
-                              const double &thetamin,
-                              const double &thetamax,
-                              const double &zmin,
-                              const double &zmax)
+  void QuarterPipeDomain::r_F(const unsigned& t,
+                              const Vector<double>& s,
+                              Vector<double>& f,
+                              const double& rmin,
+                              const double& rmax,
+                              const double& thetamin,
+                              const double& thetamax,
+                              const double& zmin,
+                              const double& zmax)
   {
     Vector<double> x(1);
     x[0] = thetamax + (0.5 * (s[0] + 1.0)) * (thetamin - thetamax);
@@ -494,15 +494,15 @@ namespace oomph
   //=================================================================
   /// Back face of a macro element \f$ s \in [-1,1]*[-1,1] \f$
   //=================================================================
-  void QuarterPipeDomain::r_B(const unsigned &t,
-                              const Vector<double> &s,
-                              Vector<double> &f,
-                              const double &rmin,
-                              const double &rmax,
-                              const double &thetamin,
-                              const double &thetamax,
-                              const double &zmin,
-                              const double &zmax)
+  void QuarterPipeDomain::r_B(const unsigned& t,
+                              const Vector<double>& s,
+                              Vector<double>& f,
+                              const double& rmin,
+                              const double& rmax,
+                              const double& thetamin,
+                              const double& thetamax,
+                              const double& zmin,
+                              const double& zmax)
   {
     Vector<double> x(1);
     x[0] = thetamax + (0.5 * (s[0] + 1.0)) * (thetamin - thetamax);

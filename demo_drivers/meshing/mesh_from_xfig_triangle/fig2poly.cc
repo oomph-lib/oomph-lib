@@ -38,7 +38,7 @@
 using namespace std;
 
 /// Helper function -- ignores specified number of ints from input stream
-void ignore_ints(std::ifstream &fig_file, const unsigned &nints = 1)
+void ignore_ints(std::ifstream& fig_file, const unsigned& nints = 1)
 {
   int dummy;
   for (unsigned i = 0; i < nints; i++)
@@ -48,7 +48,7 @@ void ignore_ints(std::ifstream &fig_file, const unsigned &nints = 1)
 }
 
 /// Helper function -- ignores specified number of floats from input stream
-void ignore_floats(std::ifstream &fig_file, const unsigned &nfloats = 1)
+void ignore_floats(std::ifstream& fig_file, const unsigned& nfloats = 1)
 {
   float dummy;
   for (unsigned i = 0; i < nfloats; i++)
@@ -58,7 +58,7 @@ void ignore_floats(std::ifstream &fig_file, const unsigned &nfloats = 1)
 }
 
 /// Helper function -- ignores specified number of floats from stringstream
-void ignore_ints(std::istream &fig_file, const unsigned &nints = 1)
+void ignore_ints(std::istream& fig_file, const unsigned& nints = 1)
 {
   int dummy;
   for (unsigned i = 0; i < nints; i++)
@@ -68,7 +68,7 @@ void ignore_ints(std::istream &fig_file, const unsigned &nints = 1)
 }
 
 /// Helper function -- ignores specified number of floats from stringstream
-void ignore_floats(std::istream &fig_file, const unsigned &nfloats = 1)
+void ignore_floats(std::istream& fig_file, const unsigned& nfloats = 1)
 {
   float dummy;
   for (unsigned i = 0; i < nfloats; i++)
@@ -85,7 +85,7 @@ void ignore_floats(std::istream &fig_file, const unsigned &nfloats = 1)
 /// fig2poly: Converts xfig drawings into input files for
 /// Jonathan Shewczuk's triangle code.
 //====================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Check number of command line arguments: Need exactly one.
   if (argc != 2)

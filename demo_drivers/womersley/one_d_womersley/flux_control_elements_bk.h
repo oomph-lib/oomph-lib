@@ -57,8 +57,8 @@ namespace oomph
   public:
     /// Constructor, which takes a mesh of the face elements which will
     /// impose the pressure to control the flux
-    NetFluxControlElement(Mesh *flux_control_mesh_pt,
-                          double *prescribed_outflow_value_pt) :
+    NetFluxControlElement(Mesh* flux_control_mesh_pt,
+                          double* prescribed_outflow_value_pt) :
       Flux_control_mesh_pt(flux_control_mesh_pt),
       Prescribed_outflow_value_pt(prescribed_outflow_value_pt)
     {
@@ -78,7 +78,7 @@ namespace oomph
       for (unsigned e = 0; e < n_el; e++)
       {
         // Get pointer to the element
-        FiniteElement *f_el_pt = Flux_control_mesh_pt->finite_element_pt(e);
+        FiniteElement* f_el_pt = Flux_control_mesh_pt->finite_element_pt(e);
 
         // Loop over the nodes
         unsigned n_node = f_el_pt->nnode();
@@ -93,7 +93,7 @@ namespace oomph
     ~NetFluxControlElement() {}
 
     /// Broken copy constructor
-    NetFluxControlElement(const NetFluxControlElement &)
+    NetFluxControlElement(const NetFluxControlElement&)
     {
       BrokenCopy::broken_copy("NetFluxControlElement");
     }
@@ -101,7 +101,7 @@ namespace oomph
     /// \short Function return pointer to the Data object whose
     /// single value is the pressure applied by the elements in
     /// Flux_control_mesh_pt
-    Data *pressure_data_pt() const
+    Data* pressure_data_pt() const
     {
       return Pressure_data_pt;
     }
@@ -109,7 +109,7 @@ namespace oomph
     /// \short Add the element's contribution to its residual vector:
     /// The flow constraint. [Note: Jacobian is computed
     /// automatically by finite-differencing]
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Initialise volume flux
       double volume_flux = 0.0;
@@ -119,11 +119,11 @@ namespace oomph
       for (unsigned e = 0; e < n_el; e++)
       {
         // Get a pointer to the element
-        GeneralisedElement *el_pt = Flux_control_mesh_pt->element_pt(e);
+        GeneralisedElement* el_pt = Flux_control_mesh_pt->element_pt(e);
 
         // Cast to NavierStokesFluxControlElement
-        NavierStokesFluxControlElement<ELEMENT> *flux_control_el_pt =
-          dynamic_cast<NavierStokesFluxControlElement<ELEMENT> *>(el_pt);
+        NavierStokesFluxControlElement<ELEMENT>* flux_control_el_pt =
+          dynamic_cast<NavierStokesFluxControlElement<ELEMENT>*>(el_pt);
 
         // Add the elemental volume flux
         volume_flux += flux_control_el_pt->get_volume_flux();
@@ -176,14 +176,14 @@ namespace oomph
   private:
     /// \short Data object whose single value is the pressure
     /// applied by the elements in the Flux_control_mesh_pt
-    Data *Pressure_data_pt;
+    Data* Pressure_data_pt;
 
     /// \short Mesh of elements which impose a pressure which controls
     /// the net flux
-    Mesh *Flux_control_mesh_pt;
+    Mesh* Flux_control_mesh_pt;
 
     /// \short Pointer to the value that stores the prescribed outflow
-    double *Prescribed_outflow_value_pt;
+    double* Prescribed_outflow_value_pt;
   };
 
   //////////////////////////////////////////////////////////////////////////
@@ -205,19 +205,19 @@ namespace oomph
   public:
     /// Constructor, which takes a "bulk" element and the value of the index
     /// and its limit
-    NavierStokesFluxControlElement(FiniteElement *const &element_pt,
-                                   const int &face_index) :
+    NavierStokesFluxControlElement(FiniteElement* const& element_pt,
+                                   const int& face_index) :
       NavierStokesSurfacePowerElement<ELEMENT>(element_pt, face_index)
     {
 #ifdef PARANOID
       {
         // Check that the element is not a refineable 3d element
-        ELEMENT *elem_pt = new ELEMENT;
+        ELEMENT* elem_pt = new ELEMENT;
         // If it's three-d
         if (elem_pt->dim() == 3)
         {
           // Is it refineable
-          if (dynamic_cast<RefineableElement *>(elem_pt))
+          if (dynamic_cast<RefineableElement*>(elem_pt))
           {
             // Issue a warning
             OomphLibWarning("This flux element will not work correctly if "
@@ -250,12 +250,12 @@ namespace oomph
     /// \short Create a list of pairs for all unknowns in this element,
     /// Do nothing since this element adds no new dofs
     void get_dof_numbers_for_unknowns(
-      std::list<std::pair<unsigned long, unsigned>> &block_lookup_list)
+      std::list<std::pair<unsigned long, unsigned>>& block_lookup_list)
     {
     }
 
     /// This function returns just the residuals
-    inline void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    inline void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Call the generic residuals function using a dummy matrix argument
       fill_in_generic_residual_contribution_fluid_traction(
@@ -274,20 +274,20 @@ namespace oomph
     /*   } */
 
     /// Overload the output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       FiniteElement::output(outfile);
     }
 
     /// Output function: x,y,[z],u,v,[w],p in tecplot format
-    void output(std::ostream &outfile, const unsigned &nplot)
+    void output(std::ostream& outfile, const unsigned& nplot)
     {
       FiniteElement::output(outfile, nplot);
     }
 
     /// \short Function to add to external data the Data object whose
     /// single value is the pressure applied by the element
-    void add_pressure_data(Data *pressure_data_pt)
+    void add_pressure_data(Data* pressure_data_pt)
     {
       Pressure_data_id = this->add_external_data(pressure_data_pt);
     }
@@ -298,16 +298,16 @@ namespace oomph
     /// u_local_eqn(n,i) = local equation number or < 0 if pinned.
     /// The default is to asssume that n is the local node number
     /// and the i-th velocity component is the i-th unknown stored at the node.
-    virtual inline int u_local_eqn(const unsigned &n, const unsigned &i)
+    virtual inline int u_local_eqn(const unsigned& n, const unsigned& i)
     {
       return this->nodal_local_eqn(n, i);
     }
 
     ///\short Function to compute the shape and test functions and to return
     /// the Jacobian of mapping
-    inline double shape_and_test_at_knot(const unsigned &ipt,
-                                         Shape &psi,
-                                         Shape &test) const
+    inline double shape_and_test_at_knot(const unsigned& ipt,
+                                         Shape& psi,
+                                         Shape& test) const
     {
       // Find number of nodes
       unsigned n_node = this->nnode();
@@ -326,7 +326,7 @@ namespace oomph
     /// traction function.
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void fill_in_generic_residual_contribution_fluid_traction(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian)
+      Vector<double>& residuals, DenseMatrix<double>& jacobian)
     {
       // Find out how many nodes there are
       unsigned n_node = this->nnode();

@@ -87,12 +87,12 @@ namespace oomph
   public:
     /// definition of flux function pointer, flux must be parametised in terms
     /// of the macro element coordinate position (s) along the problem edge
-    typedef void (*FluxFctPt)(const double &s, double &flux);
+    typedef void (*FluxFctPt)(const double& s, double& flux);
 
     ///\short constructor
-    BiharmonicFluxElement(FiniteElement *const &bulk_el_pt,
-                          const int &face_index,
-                          const unsigned &b);
+    BiharmonicFluxElement(FiniteElement* const& bulk_el_pt,
+                          const int& face_index,
+                          const unsigned& b);
 
     ///\short  Broken empty constructor
     BiharmonicFluxElement()
@@ -103,31 +103,31 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    BiharmonicFluxElement(const BiharmonicFluxElement &dummy)
+    BiharmonicFluxElement(const BiharmonicFluxElement& dummy)
     {
       BrokenCopy::broken_copy("BiharmonicFluxElement<DIM>");
     }
 
     /// Broken assignment operator
-    void operator=(const BiharmonicFluxElement &)
+    void operator=(const BiharmonicFluxElement&)
     {
       BrokenCopy::broken_assign("BiharmonicFluxElement<DIM>");
     }
 
     /// Access function for the flux0 function pointer
-    FluxFctPt &flux0_fct_pt()
+    FluxFctPt& flux0_fct_pt()
     {
       return Flux0_fct_pt;
     }
 
     /// Access function for the flux1 function pointer
-    FluxFctPt &flux1_fct_pt()
+    FluxFctPt& flux1_fct_pt()
     {
       return Flux1_fct_pt;
     }
 
     /// Add the element's contribution to its residual vector
-    inline void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    inline void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Call the generic residuals function
       fill_in_generic_residual_contribution_biharmonic_flux(residuals);
@@ -135,8 +135,8 @@ namespace oomph
 
     /// \short Add the element's contribution to its residual vector and its
     /// Jacobian matrix (note - no contributions are made to the jacobian)
-    inline void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                                 DenseMatrix<double> &jacobian)
+    inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                                 DenseMatrix<double>& jacobian)
     {
       // Call the generic residuals routine
       fill_in_generic_residual_contribution_biharmonic_flux(residuals);
@@ -147,36 +147,36 @@ namespace oomph
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default (needed to break
     /// indeterminacy if bulk element is SolidElement)
-    double zeta_nodal(const unsigned &n,
-                      const unsigned &k,
-                      const unsigned &i) const
+    double zeta_nodal(const unsigned& n,
+                      const unsigned& k,
+                      const unsigned& i) const
     {
       return FaceElement::zeta_nodal(n, k, i);
     }
 
     /// Output function -- does nothing
-    void output(std::ostream &outfile) {}
+    void output(std::ostream& outfile) {}
 
     /// \short Output function -- does nothing
-    void output(std::ostream &outfile, const unsigned &n_plot) {}
+    void output(std::ostream& outfile, const unsigned& n_plot) {}
 
     /// C-style output function -- does nothing
-    void output(FILE *file_pt) {}
+    void output(FILE* file_pt) {}
 
     /// \short C-style output function -- does nothing
-    void output(FILE *file_pt, const unsigned &n_plot) {}
+    void output(FILE* file_pt, const unsigned& n_plot) {}
 
     /// compute_error -- does nothing
-    void compute_error(std::ostream &outfile,
+    void compute_error(std::ostream& outfile,
                        FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-                       double &error,
-                       double &norm)
+                       double& error,
+                       double& norm)
     {
     }
 
     virtual void output_fct(
-      std::ostream &outfile,
-      const unsigned &nplot,
+      std::ostream& outfile,
+      const unsigned& nplot,
       FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
     {
     }
@@ -184,7 +184,7 @@ namespace oomph
   private:
     /// \short Function to return the prescribed flux at a given macro element
     /// coordinate position
-    void get_flux0(const double &s, double &flux)
+    void get_flux0(const double& s, double& flux)
     {
       // If the function pointer is zero return zero
       if (Flux0_fct_pt == 0)
@@ -200,7 +200,7 @@ namespace oomph
 
     /// \short Function to return the prescribed flux at a given macro element
     /// coordinate position
-    void get_flux1(const double &s, double &flux)
+    void get_flux1(const double& s, double& flux)
     {
       // If the function pointer is zero return zero
       if (Flux1_fct_pt == 0)
@@ -216,12 +216,12 @@ namespace oomph
 
     /// \short Calculate the Jacobian of the mapping between local and global
     /// coordinates at the position s for face elements
-    double J_eulerian(const Vector<double> &s) const;
+    double J_eulerian(const Vector<double>& s) const;
 
     /// \short Add the element's contribution to its residual vector. Flux
     /// elements only make contribution to the residual vector
     void fill_in_generic_residual_contribution_biharmonic_flux(
-      Vector<double> &residuals);
+      Vector<double>& residuals);
 
     /// Function pointer to the prescribed flux
     FluxFctPt Flux0_fct_pt;

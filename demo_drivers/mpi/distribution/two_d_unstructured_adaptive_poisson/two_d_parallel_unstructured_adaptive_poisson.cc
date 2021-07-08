@@ -61,19 +61,19 @@ namespace TanhSolnForPoisson
   double Beta;
 
   /// Exact solution as a Vector
-  void get_exact_u(const Vector<double> &x, Vector<double> &u)
+  void get_exact_u(const Vector<double>& x, Vector<double>& u)
   {
     u[0] = tanh(1.0 - Alpha * (Beta * x[0] - x[1]));
   }
 
   /// Exact solution as a scalar
-  void get_exact_u(const Vector<double> &x, double &u)
+  void get_exact_u(const Vector<double>& x, double& u)
   {
     u = tanh(1.0 - Alpha * (Beta * x[0] - x[1]));
   }
 
   /// Source function to make it an exact solution
-  void get_source(const Vector<double> &x, double &source)
+  void get_source(const Vector<double>& x, double& source)
   {
     source = 2.0 * tanh(-1.0 + Alpha * (Beta * x[0] - x[1])) *
                (1.0 - pow(tanh(-1.0 + Alpha * (Beta * x[0] - x[1])), 2.0)) *
@@ -178,15 +178,15 @@ public:
   }
 
   // Access funtion for the specific mesh
-  RefineableTriangleMesh<ELEMENT> *mesh_pt()
+  RefineableTriangleMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<RefineableTriangleMesh<ELEMENT> *>(Problem::mesh_pt());
+    return dynamic_cast<RefineableTriangleMesh<ELEMENT>*>(Problem::mesh_pt());
   }
 
   /// Doc the solution (when working in parallel each processor creates
   /// output files, thus we must be careful with the naming of the
   /// output files)
-  void doc_solution(DocInfo &doc_info, ofstream &trace_file);
+  void doc_solution(DocInfo& doc_info, ofstream& trace_file);
 
   /// Required function ONLY to perform load balancing. However, it is
   /// a good practice to implement this function and build the mesh in
@@ -195,10 +195,10 @@ public:
 
   /// Read the distribution data
   void read_custom_distribution_from_file(
-    Vector<unsigned> &output_distribution);
+    Vector<unsigned>& output_distribution);
 
   /// Saves the custom distribution to file
-  void save_custom_distribution_to_file(Vector<unsigned> &input_distribution);
+  void save_custom_distribution_to_file(Vector<unsigned>& input_distribution);
 
 private:
   // Apply boundary conditions (used at the end of the constructor and
@@ -211,10 +211,10 @@ private:
   void complete_problem_setup();
 
   // The adaptive unstructured mesh
-  RefineableTriangleMesh<ELEMENT> *Bulk_mesh_pt;
+  RefineableTriangleMesh<ELEMENT>* Bulk_mesh_pt;
 
   // Erros estimator for the unstructured adaptive mesh
-  Z2ErrorEstimator *Error_estimator_pt;
+  Z2ErrorEstimator* Error_estimator_pt;
 
   /// Pointer to source function
   PoissonEquations<2>::PoissonSourceFctPt Source_fct_pt;
@@ -359,7 +359,7 @@ void PoissonProblem<ELEMENT>::square_domain()
   vertices[1][1] = length;
 
   boundary_id = 0;
-  TriangleMeshPolyLine *boundary0_pt =
+  TriangleMeshPolyLine* boundary0_pt =
     new TriangleMeshPolyLine(vertices, boundary_id);
 
   // ---------------------------------------------------------------------
@@ -379,7 +379,7 @@ void PoissonProblem<ELEMENT>::square_domain()
   vertices[1][1] = length;
 
   boundary_id = 1;
-  TriangleMeshPolyLine *boundary1_pt =
+  TriangleMeshPolyLine* boundary1_pt =
     new TriangleMeshPolyLine(vertices, boundary_id);
 
   // ---------------------------------------------------------------------
@@ -399,7 +399,7 @@ void PoissonProblem<ELEMENT>::square_domain()
   vertices[1][1] = 0;
 
   boundary_id = 2;
-  TriangleMeshPolyLine *boundary2_pt =
+  TriangleMeshPolyLine* boundary2_pt =
     new TriangleMeshPolyLine(vertices, boundary_id);
 
   // ---------------------------------------------------------------------
@@ -419,7 +419,7 @@ void PoissonProblem<ELEMENT>::square_domain()
   vertices[1][1] = 0;
 
   boundary_id = 3;
-  TriangleMeshPolyLine *boundary3_pt =
+  TriangleMeshPolyLine* boundary3_pt =
     new TriangleMeshPolyLine(vertices, boundary_id);
 
   // ---------------------------------------------------------------------
@@ -427,7 +427,7 @@ void PoissonProblem<ELEMENT>::square_domain()
 
   // >> Setting up the domain with PolyLines
 
-  Vector<TriangleMeshCurveSection *> outer_boundary_polylines_pt(4);
+  Vector<TriangleMeshCurveSection*> outer_boundary_polylines_pt(4);
 
   outer_boundary_polylines_pt[0] = boundary0_pt;
   outer_boundary_polylines_pt[1] = boundary1_pt;
@@ -435,7 +435,7 @@ void PoissonProblem<ELEMENT>::square_domain()
   outer_boundary_polylines_pt[3] = boundary3_pt;
 
   // We have only one outer boundary (one outer polygon)
-  Vector<TriangleMeshClosedCurve *> outer_boundary_pt(1);
+  Vector<TriangleMeshClosedCurve*> outer_boundary_pt(1);
   outer_boundary_pt[0] = new TriangleMeshPolygon(outer_boundary_polylines_pt);
 
   // ---------------------------------------------------------------------
@@ -467,7 +467,7 @@ void PoissonProblem<ELEMENT>::half_circle_domain()
   vertices_b0[1][1] = 0;
 
   boundary_id = 0;
-  TriangleMeshPolyLine *boundary0_pt =
+  TriangleMeshPolyLine* boundary0_pt =
     new TriangleMeshPolyLine(vertices_b0, boundary_id);
 
   // ---------------------------------------------------------------------
@@ -477,14 +477,14 @@ void PoissonProblem<ELEMENT>::half_circle_domain()
   double y_centre_b1 = 0.0;
   double r_circle_b1 = 1.0;
 
-  Circle *boundary_circle_b1_pt =
+  Circle* boundary_circle_b1_pt =
     new Circle(x_centre_b1, y_centre_b1, r_circle_b1);
 
   double z_start_b1 = 0.0;
   double z_end_b1 = MathematicalConstants::Pi;
 
   boundary_id = 1;
-  TriangleMeshCurviLine *boundary1_pt = new TriangleMeshCurviLine(
+  TriangleMeshCurviLine* boundary1_pt = new TriangleMeshCurviLine(
     boundary_circle_b1_pt, z_start_b1, z_end_b1, num_segments_b1, boundary_id);
 
   // ---------------------------------------------------------------------
@@ -492,13 +492,13 @@ void PoissonProblem<ELEMENT>::half_circle_domain()
 
   // >> Setting up the domain with PolyLines
 
-  Vector<TriangleMeshCurveSection *> outer_boundary_curve_section_pt(2);
+  Vector<TriangleMeshCurveSection*> outer_boundary_curve_section_pt(2);
 
   outer_boundary_curve_section_pt[0] = boundary0_pt;
   outer_boundary_curve_section_pt[1] = boundary1_pt;
 
   // We have only one outer boundary (one outer polygon)
-  Vector<TriangleMeshClosedCurve *> outer_boundary_pt(1);
+  Vector<TriangleMeshClosedCurve*> outer_boundary_pt(1);
   outer_boundary_pt[0] =
     new TriangleMeshClosedCurve(outer_boundary_curve_section_pt);
 
@@ -543,7 +543,7 @@ void PoissonProblem<ELEMENT>::half_circle_domain_with_internal_boundaries()
   vertices_b0[5][1] = 0;
 
   boundary_id = 0;
-  TriangleMeshPolyLine *boundary0_pt =
+  TriangleMeshPolyLine* boundary0_pt =
     new TriangleMeshPolyLine(vertices_b0, boundary_id);
 
   // ---------------------------------------------------------------------
@@ -553,13 +553,13 @@ void PoissonProblem<ELEMENT>::half_circle_domain_with_internal_boundaries()
   const double y_centre = 0.0;
   const double r_circle = 10.0;
 
-  Circle *boundary_circle_pt = new Circle(x_centre, y_centre, r_circle);
+  Circle* boundary_circle_pt = new Circle(x_centre, y_centre, r_circle);
 
   const double z_start = 0.0;
   const double z_end = MathematicalConstants::Pi;
 
   boundary_id = 1;
-  TriangleMeshCurviLine *boundary1_pt = new TriangleMeshCurviLine(
+  TriangleMeshCurviLine* boundary1_pt = new TriangleMeshCurviLine(
     boundary_circle_pt, z_start, z_end, num_segments, boundary_id);
 
   // ---------------------------------------------------------------------
@@ -582,7 +582,7 @@ void PoissonProblem<ELEMENT>::half_circle_domain_with_internal_boundaries()
   verticesb2[2][1] = 6;
 
   boundary_id = 2;
-  TriangleMeshPolyLine *boundary2_pt =
+  TriangleMeshPolyLine* boundary2_pt =
     new TriangleMeshPolyLine(verticesb2, boundary_id);
 
   // ---------------------------------------------------------------------
@@ -602,7 +602,7 @@ void PoissonProblem<ELEMENT>::half_circle_domain_with_internal_boundaries()
   verticesb3[2][1] = 6;
 
   boundary_id = 3;
-  TriangleMeshPolyLine *boundary3_pt =
+  TriangleMeshPolyLine* boundary3_pt =
     new TriangleMeshPolyLine(verticesb3, boundary_id);
 
   // ---------------------------------------------------------------------
@@ -622,7 +622,7 @@ void PoissonProblem<ELEMENT>::half_circle_domain_with_internal_boundaries()
   verticesb4[2][1] = 6;
 
   boundary_id = 4;
-  TriangleMeshPolyLine *boundary4_pt =
+  TriangleMeshPolyLine* boundary4_pt =
     new TriangleMeshPolyLine(verticesb4, boundary_id);
 
   // ---------------------------------------------------------------------
@@ -642,18 +642,18 @@ void PoissonProblem<ELEMENT>::half_circle_domain_with_internal_boundaries()
   verticesb5[2][1] = 7;
 
   boundary_id = 5;
-  TriangleMeshPolyLine *boundary5_pt =
+  TriangleMeshPolyLine* boundary5_pt =
     new TriangleMeshPolyLine(verticesb5, boundary_id);
 
   // ---------------------------------------------------------------------
   // >> Building the OUTER BOUNDARY
-  Vector<TriangleMeshCurveSection *> outer_boundary_polylines_pt(2);
+  Vector<TriangleMeshCurveSection*> outer_boundary_polylines_pt(2);
 
   outer_boundary_polylines_pt[0] = boundary0_pt;
   outer_boundary_polylines_pt[1] = boundary1_pt;
 
   // We have only one outer boundary (one outer polygon)
-  Vector<TriangleMeshClosedCurve *> outer_boundary_pt(1);
+  Vector<TriangleMeshClosedCurve*> outer_boundary_pt(1);
   outer_boundary_pt[0] =
     new TriangleMeshClosedCurve(outer_boundary_polylines_pt);
 
@@ -661,10 +661,10 @@ void PoissonProblem<ELEMENT>::half_circle_domain_with_internal_boundaries()
   // >> Building the OPEN BOUNDARIES
 
   // We have two open curves
-  Vector<TriangleMeshOpenCurve *> open_curve_pt(2);
+  Vector<TriangleMeshOpenCurve*> open_curve_pt(2);
 
   // The first open curve is formed by the following boundaries
-  Vector<TriangleMeshCurveSection *> open_curve_one_pt(3);
+  Vector<TriangleMeshCurveSection*> open_curve_one_pt(3);
   open_curve_one_pt[0] = boundary2_pt;
   open_curve_one_pt[1] = boundary3_pt;
   open_curve_one_pt[2] = boundary4_pt;
@@ -672,7 +672,7 @@ void PoissonProblem<ELEMENT>::half_circle_domain_with_internal_boundaries()
   open_curve_pt[0] = new TriangleMeshOpenCurve(open_curve_one_pt);
 
   // The second open curve is formed by only one boundary
-  Vector<TriangleMeshCurveSection *> open_curve_two_pt(1);
+  Vector<TriangleMeshCurveSection*> open_curve_two_pt(1);
   open_curve_two_pt[0] = boundary5_pt;
 
   open_curve_pt[1] = new TriangleMeshOpenCurve(open_curve_two_pt);
@@ -722,7 +722,7 @@ void PoissonProblem<ELEMENT>::complex_domain_with_holes()
   vertices_b0[5][1] = 0;
 
   boundary_id = 0;
-  TriangleMeshPolyLine *boundary0_pt =
+  TriangleMeshPolyLine* boundary0_pt =
     new TriangleMeshPolyLine(vertices_b0, boundary_id);
 
   // ---------------------------------------------------------------------
@@ -732,14 +732,14 @@ void PoissonProblem<ELEMENT>::complex_domain_with_holes()
   double y_centre_b1 = 0.0;
   double r_circle_b1 = 10.0;
 
-  Circle *boundary_circle_b1_pt =
+  Circle* boundary_circle_b1_pt =
     new Circle(x_centre_b1, y_centre_b1, r_circle_b1);
 
   double z_start_b1 = 0.0;
   double z_end_b1 = MathematicalConstants::Pi;
 
   boundary_id = 1;
-  TriangleMeshCurviLine *boundary1_pt = new TriangleMeshCurviLine(
+  TriangleMeshCurviLine* boundary1_pt = new TriangleMeshCurviLine(
     boundary_circle_b1_pt, z_start_b1, z_end_b1, num_segments_b1, boundary_id);
 
   // ---------------------------------------------------------------------
@@ -747,13 +747,13 @@ void PoissonProblem<ELEMENT>::complex_domain_with_holes()
 
   // >> Setting up the domain with PolyLines
 
-  Vector<TriangleMeshCurveSection *> outer_boundary_curve_section_pt(2);
+  Vector<TriangleMeshCurveSection*> outer_boundary_curve_section_pt(2);
 
   outer_boundary_curve_section_pt[0] = boundary0_pt;
   outer_boundary_curve_section_pt[1] = boundary1_pt;
 
   // We have only one outer boundary (one outer polygon)
-  Vector<TriangleMeshClosedCurve *> outer_boundary_pt(1);
+  Vector<TriangleMeshClosedCurve*> outer_boundary_pt(1);
   outer_boundary_pt[0] =
     new TriangleMeshClosedCurve(outer_boundary_curve_section_pt);
 
@@ -787,7 +787,7 @@ void PoissonProblem<ELEMENT>::complex_domain_with_holes()
   vertices_b2[5][1] = 1;
 
   boundary_id = 2;
-  TriangleMeshPolyLine *boundary2_pt =
+  TriangleMeshPolyLine* boundary2_pt =
     new TriangleMeshPolyLine(vertices_b2, boundary_id);
 
   // ---------------------------------------------------------------------
@@ -797,14 +797,14 @@ void PoissonProblem<ELEMENT>::complex_domain_with_holes()
   double y_centre_b3 = 4.0;
   double r_circle_b3 = 3.0;
 
-  Circle *boundary_circle_b3_pt =
+  Circle* boundary_circle_b3_pt =
     new Circle(x_centre_b3, y_centre_b3, r_circle_b3);
 
   double z_start_b3 = MathematicalConstants::Pi * (3.0 / 2.0);
   double z_end_b3 = MathematicalConstants::Pi * (5.0 / 2.0);
 
   boundary_id = 3;
-  TriangleMeshCurviLine *boundary3_pt = new TriangleMeshCurviLine(
+  TriangleMeshCurviLine* boundary3_pt = new TriangleMeshCurviLine(
     boundary_circle_b3_pt, z_start_b3, z_end_b3, num_segments_b3, boundary_id);
 
   // ---------------------------------------------------------------------
@@ -826,7 +826,7 @@ void PoissonProblem<ELEMENT>::complex_domain_with_holes()
   vertices_b4[2][1] = 4;
 
   boundary_id = 4;
-  TriangleMeshPolyLine *boundary4_pt =
+  TriangleMeshPolyLine* boundary4_pt =
     new TriangleMeshPolyLine(vertices_b4, boundary_id);
 
   // ---------------------------------------------------------------------
@@ -847,7 +847,7 @@ void PoissonProblem<ELEMENT>::complex_domain_with_holes()
   vertices_b5[2][1] = 4;
 
   boundary_id = 5;
-  TriangleMeshPolyLine *boundary5_pt =
+  TriangleMeshPolyLine* boundary5_pt =
     new TriangleMeshPolyLine(vertices_b5, boundary_id);
 
   // ---------------------------------------------------------------------
@@ -868,7 +868,7 @@ void PoissonProblem<ELEMENT>::complex_domain_with_holes()
   vertices_b6[2][1] = 1;
 
   boundary_id = 6;
-  TriangleMeshPolyLine *boundary6_pt =
+  TriangleMeshPolyLine* boundary6_pt =
     new TriangleMeshPolyLine(vertices_b6, boundary_id);
 
   // ---------------------------------------------------------------------
@@ -889,7 +889,7 @@ void PoissonProblem<ELEMENT>::complex_domain_with_holes()
   vertices_b7[2][1] = 1;
 
   boundary_id = 7;
-  TriangleMeshPolyLine *boundary7_pt =
+  TriangleMeshPolyLine* boundary7_pt =
     new TriangleMeshPolyLine(vertices_b7, boundary_id);
 
   // ---------------------------------------------------------------------
@@ -900,14 +900,14 @@ void PoissonProblem<ELEMENT>::complex_domain_with_holes()
   double y_centre_b8 = 7.5;
   double r_circle_b8 = 1.0;
 
-  Circle *boundary_circle_b8_pt =
+  Circle* boundary_circle_b8_pt =
     new Circle(x_centre_b8, y_centre_b8, r_circle_b8);
 
   double z_start_b8 = 0.0;
   double z_end_b8 = MathematicalConstants::Pi;
 
   boundary_id = 8;
-  TriangleMeshCurviLine *boundary8_pt = new TriangleMeshCurviLine(
+  TriangleMeshCurviLine* boundary8_pt = new TriangleMeshCurviLine(
     boundary_circle_b8_pt, z_start_b8, z_end_b8, num_segments_b8, boundary_id);
 
   // ---------------------------------------------------------------------
@@ -917,14 +917,14 @@ void PoissonProblem<ELEMENT>::complex_domain_with_holes()
   double y_centre_b9 = 7.5;
   double r_circle_b9 = 1.0;
 
-  Circle *boundary_circle_b9_pt =
+  Circle* boundary_circle_b9_pt =
     new Circle(x_centre_b9, y_centre_b9, r_circle_b9);
 
   double z_start_b9 = MathematicalConstants::Pi;
   double z_end_b9 = 2.0 * MathematicalConstants::Pi;
 
   boundary_id = 9;
-  TriangleMeshCurviLine *boundary9_pt = new TriangleMeshCurviLine(
+  TriangleMeshCurviLine* boundary9_pt = new TriangleMeshCurviLine(
     boundary_circle_b9_pt, z_start_b9, z_end_b9, num_segments_b9, boundary_id);
 
   // ---------------------------------------------------------------------
@@ -934,8 +934,8 @@ void PoissonProblem<ELEMENT>::complex_domain_with_holes()
   // Set the holes information (indicate the number of holes)
   const unsigned nholes = 3;
 
-  Vector<TriangleMeshClosedCurve *> inner_boundaries_pt(nholes);
-  Vector<Vector<TriangleMeshCurveSection *>> inner_boundary_curve_section_pt(
+  Vector<TriangleMeshClosedCurve*> inner_boundaries_pt(nholes);
+  Vector<Vector<TriangleMeshCurveSection*>> inner_boundary_curve_section_pt(
     nholes);
 
   // -----------------
@@ -1002,8 +1002,8 @@ void PoissonProblem<ELEMENT>::complex_domain_with_holes()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void PoissonProblem<ELEMENT>::doc_solution(DocInfo &doc_info,
-                                           ofstream &trace_file)
+void PoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
+                                           ofstream& trace_file)
 {
   ofstream some_file;
   char filename[100];
@@ -1104,7 +1104,7 @@ void PoissonProblem<ELEMENT>::complete_problem_setup()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the source function pointer
     el_pt->source_fct_pt() = Source_fct_pt;
@@ -1130,7 +1130,7 @@ void PoissonProblem<ELEMENT>::apply_boundary_conditions()
     const unsigned num_nod = mesh_pt()->nboundary_node(ibound);
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
-      Node *nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
+      Node* nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
       double u;
       Vector<double> x(2);
       x[0] = nod_pt->x(0);
@@ -1146,13 +1146,13 @@ void PoissonProblem<ELEMENT>::apply_boundary_conditions()
 //========================================================================
 template<class ELEMENT>
 void PoissonProblem<ELEMENT>::read_custom_distribution_from_file(
-  Vector<unsigned> &output_distribution)
+  Vector<unsigned>& output_distribution)
 {
   // Get the rank of the processor
   const unsigned my_rank = this->communicator_pt()->my_rank();
 
   // Pointer for the file
-  FILE *file_pt;
+  FILE* file_pt;
   // Store the file name
   char file_name[500];
   sprintf(file_name,
@@ -1226,7 +1226,7 @@ void PoissonProblem<ELEMENT>::read_custom_distribution_from_file(
 //========================================================================
 template<class ELEMENT>
 void PoissonProblem<ELEMENT>::save_custom_distribution_to_file(
-  Vector<unsigned> &input_distribution)
+  Vector<unsigned>& input_distribution)
 {
   // Get the rank of the processor
   const unsigned my_rank = this->communicator_pt()->my_rank();
@@ -1245,7 +1245,7 @@ void PoissonProblem<ELEMENT>::save_custom_distribution_to_file(
   oomph_info << "Save custom distribution to file: " << file_name << std::endl;
 
   // Open the file
-  FILE *file_pt = fopen(file_name, "w");
+  FILE* file_pt = fopen(file_name, "w");
   if (file_pt != NULL)
   {
     // Store the number of elements (DATA) in the mesh(es)
@@ -1281,7 +1281,7 @@ void PoissonProblem<ELEMENT>::save_custom_distribution_to_file(
 /// Demonstrate how to solve Poisson problem using parallel
 // unstructured mesh adaptation
 //========================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // initialise MPI
 #ifdef OOMPH_HAS_MPI

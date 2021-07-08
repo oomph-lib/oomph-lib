@@ -93,23 +93,23 @@ namespace oomph
     /// which the dividing line is to be placed, and the timestepper
     /// (defaults to (Steady) default timestepper defined in Mesh)
     QuarterCircleSectorMesh(
-      GeomObject *wall_pt,
-      const double &xi_lo,
-      const double &fract_mid,
-      const double &xi_hi,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper);
+      GeomObject* wall_pt,
+      const double& xi_lo,
+      const double& fract_mid,
+      const double& xi_hi,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
     /// \short Destructor:
     virtual ~QuarterCircleSectorMesh() {}
 
     /// Access function to GeomObject representing wall
-    GeomObject *&wall_pt()
+    GeomObject*& wall_pt()
     {
       return Wall_pt;
     }
 
     /// Access function to domain
-    QuarterCircleSectorDomain *domain_pt()
+    QuarterCircleSectorDomain* domain_pt()
     {
       return Domain_pt;
     }
@@ -118,18 +118,18 @@ namespace oomph
     /// the outer two macro elements towards
     /// the wall by mapping the input value of the "radial" macro element
     /// coordinate to the return value (defined in the underlying Domain object)
-    QuarterCircleSectorDomain::BLSquashFctPt &bl_squash_fct_pt()
+    QuarterCircleSectorDomain::BLSquashFctPt& bl_squash_fct_pt()
     {
       return Domain_pt->bl_squash_fct_pt();
     }
 
   protected:
     /// Pointer to Domain
-    QuarterCircleSectorDomain *Domain_pt;
+    QuarterCircleSectorDomain* Domain_pt;
 
     /// \short Pointer to the geometric object that represents the curved wall
     /// (mesh boundary 1)
-    GeomObject *Wall_pt;
+    GeomObject* Wall_pt;
 
     /// Lower limit for the (1D) coordinates along the wall
     double Xi_lo;
@@ -192,11 +192,11 @@ namespace oomph
     /// (defaults to (Steady) default timestepper defined in Mesh).
     /// Adds refinement data to elements of QuarterCircleSectorMesh.
     RefineableQuarterCircleSectorMesh(
-      GeomObject *wall_pt,
-      const double &xi_lo,
-      const double &fract_mid,
-      const double &xi_hi,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      GeomObject* wall_pt,
+      const double& xi_lo,
+      const double& fract_mid,
+      const double& xi_hi,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       QuarterCircleSectorMesh<ELEMENT>(
         wall_pt, xi_lo, fract_mid, xi_hi, time_stepper_pt)
     {
@@ -265,18 +265,18 @@ namespace oomph
     /// constructor for the underlying  RefineableQuarterCircleSectorMesh)
     /// and the algebraic node update functions for nodes.
     MacroElementNodeUpdateRefineableQuarterCircleSectorMesh(
-      GeomObject *wall_pt,
-      const double &xi_lo,
-      const double &fract_mid,
-      const double &xi_hi,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      GeomObject* wall_pt,
+      const double& xi_lo,
+      const double& fract_mid,
+      const double& xi_hi,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       MacroElementNodeUpdateMesh(),
       RefineableQuarterCircleSectorMesh<ELEMENT>(
         wall_pt, xi_lo, fract_mid, xi_hi, time_stepper_pt)
     {
 #ifdef PARANOID
-      ELEMENT *el_pt = new ELEMENT;
-      if (dynamic_cast<MacroElementNodeUpdateElementBase *>(el_pt) == 0)
+      ELEMENT* el_pt = new ELEMENT;
+      if (dynamic_cast<MacroElementNodeUpdateElementBase*>(el_pt) == 0)
       {
         std::ostringstream error_message;
         error_message
@@ -312,7 +312,7 @@ namespace oomph
     /// [Doesn't make sense to use this mesh with SolidElements anyway,
     /// so we buffer the case if update_all_solid_nodes is set to
     /// true.]
-    void node_update(const bool &update_all_solid_nodes = false)
+    void node_update(const bool& update_all_solid_nodes = false)
     {
 #ifdef PARANOID
       if (update_all_solid_nodes)
@@ -344,12 +344,12 @@ namespace oomph
       for (unsigned i = 0; i < n_element; i++)
       {
         // Upcast from FiniteElement to the present element
-        ELEMENT *el_pt = dynamic_cast<ELEMENT *>(this->element_pt(i));
+        ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->element_pt(i));
 
 #ifdef PARANOID
         // Check if cast is successful
-        MacroElementNodeUpdateElementBase *m_el_pt =
-          dynamic_cast<MacroElementNodeUpdateElementBase *>(el_pt);
+        MacroElementNodeUpdateElementBase* m_el_pt =
+          dynamic_cast<MacroElementNodeUpdateElementBase*>(el_pt);
         if (m_el_pt == 0)
         {
           std::ostringstream error_message;
@@ -369,7 +369,7 @@ namespace oomph
         }
 #endif
         // There's just one GeomObject
-        Vector<GeomObject *> geom_object_pt(1);
+        Vector<GeomObject*> geom_object_pt(1);
         geom_object_pt[0] = this->Wall_pt;
 
         // Tell the element which geom objects its macro-element-based
@@ -378,7 +378,7 @@ namespace oomph
       }
 
       // Add the geometric object(s) for the wall to the mesh's storage
-      Vector<GeomObject *> geom_object_pt(1);
+      Vector<GeomObject*> geom_object_pt(1);
       geom_object_pt[0] = this->Wall_pt;
       MacroElementNodeUpdateMesh::set_geom_object_vector_pt(geom_object_pt);
 
@@ -444,17 +444,17 @@ namespace oomph
     /// constructor for the underlying  RefineableQuarterCircleSectorMesh)
     /// and the algebraic update functions for nodes.
     AlgebraicRefineableQuarterCircleSectorMesh(
-      GeomObject *wall_pt,
-      const double &xi_lo,
-      const double &fract_mid,
-      const double &xi_hi,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      GeomObject* wall_pt,
+      const double& xi_lo,
+      const double& fract_mid,
+      const double& xi_hi,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       RefineableQuarterCircleSectorMesh<ELEMENT>(
         wall_pt, xi_lo, fract_mid, xi_hi, time_stepper_pt)
     {
 #ifdef PARANOID
-      ELEMENT *el_pt = new ELEMENT;
-      if (dynamic_cast<AlgebraicElementBase *>(el_pt) == 0)
+      ELEMENT* el_pt = new ELEMENT;
+      if (dynamic_cast<AlgebraicElementBase*>(el_pt) == 0)
       {
         std::ostringstream error_message;
 
@@ -493,7 +493,7 @@ namespace oomph
     /// [Doesn't make sense to use this mesh with SolidElements anyway,
     /// so we buffer the case if update_all_solid_nodes is set to
     /// true.]
-    void node_update(const bool &update_all_solid_nodes = false)
+    void node_update(const bool& update_all_solid_nodes = false)
     {
 #ifdef PARANOID
       if (update_all_solid_nodes)
@@ -518,7 +518,7 @@ namespace oomph
     /// \short Implement the algebraic node update function for a node
     /// at time level t (t=0: present; t>0: previous): Update with
     /// the node's first (default) update function.
-    void algebraic_node_update(const unsigned &t, AlgebraicNode *&node_pt)
+    void algebraic_node_update(const unsigned& t, AlgebraicNode*& node_pt)
     {
       // Update with the update function for the node's first (default)
       // node update fct
@@ -563,7 +563,7 @@ namespace oomph
 
     /// \short Update the node update info for specified algebraic node
     /// following any spatial mesh adaptation.
-    void update_node_update(AlgebraicNode *&node_pt)
+    void update_node_update(AlgebraicNode*& node_pt)
     {
       // Get all node update fct for this node  (resizes internally)
       Vector<int> id;
@@ -629,28 +629,28 @@ namespace oomph
 
     /// \short Algebraic update function for a node that is located
     /// in the central box
-    void node_update_in_central_box(const unsigned &t, AlgebraicNode *&node_pt);
+    void node_update_in_central_box(const unsigned& t, AlgebraicNode*& node_pt);
 
     /// \short Algebraic update function for a node that is located
     /// in the lower right box
-    void node_update_in_lower_right_box(const unsigned &t,
-                                        AlgebraicNode *&node_pt);
+    void node_update_in_lower_right_box(const unsigned& t,
+                                        AlgebraicNode*& node_pt);
 
     /// \short Algebraic update function for a node that is located
     /// in the upper left box
-    void node_update_in_upper_left_box(const unsigned &t,
-                                       AlgebraicNode *&node_pt);
+    void node_update_in_upper_left_box(const unsigned& t,
+                                       AlgebraicNode*& node_pt);
 
     /// \short Setup algebraic update operation for all nodes
     void setup_algebraic_node_update();
 
     /// \short Update algebraic node update function for nodes in
     /// lower right box
-    void update_node_update_in_lower_right_box(AlgebraicNode *&node_pt);
+    void update_node_update_in_lower_right_box(AlgebraicNode*& node_pt);
 
     /// \short Update algebraic node update function for nodes
     /// in upper left box
-    void update_node_update_in_upper_left_box(AlgebraicNode *&node_pt);
+    void update_node_update_in_upper_left_box(AlgebraicNode*& node_pt);
   };
 
 } // namespace oomph

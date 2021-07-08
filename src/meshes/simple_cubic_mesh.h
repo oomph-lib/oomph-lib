@@ -53,13 +53,13 @@ namespace oomph
     /// \short Constructor: Pass number of elements in the x, y, and z
     /// directions, and the corresponding dimensions. Assume that the back lower
     /// left corner is located at (0,0,0) Timestepper defaults to Steady.
-    SimpleCubicMesh(const unsigned &nx,
-                    const unsigned &ny,
-                    const unsigned &nz,
-                    const double &lx,
-                    const double &ly,
-                    const double &lz,
-                    TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+    SimpleCubicMesh(const unsigned& nx,
+                    const unsigned& ny,
+                    const unsigned& nz,
+                    const double& lx,
+                    const double& ly,
+                    const double& lz,
+                    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       Nx(nx),
       Ny(ny),
       Nz(nz),
@@ -80,16 +80,16 @@ namespace oomph
     /// \short Constructor: Pass the number of elements in the x,y and z
     /// directions and the correspoding minimum and maximum values of the
     /// coordinates in each direction
-    SimpleCubicMesh(const unsigned &nx,
-                    const unsigned &ny,
-                    const unsigned &nz,
-                    const double &xmin,
-                    const double &xmax,
-                    const double &ymin,
-                    const double &ymax,
-                    const double &zmin,
-                    const double &zmax,
-                    TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+    SimpleCubicMesh(const unsigned& nx,
+                    const unsigned& ny,
+                    const unsigned& nz,
+                    const double& xmin,
+                    const double& xmax,
+                    const double& ymin,
+                    const double& ymax,
+                    const double& zmin,
+                    const double& zmax,
+                    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       Nx(nx),
       Ny(ny),
       Nz(nz),
@@ -108,19 +108,19 @@ namespace oomph
     }
 
     /// Access function for number of elements in x directions
-    const unsigned &nx() const
+    const unsigned& nx() const
     {
       return Nx;
     }
 
     /// Access function for number of elements in y directions
-    const unsigned &ny() const
+    const unsigned& ny() const
     {
       return Ny;
     }
 
     /// Access function for number of elements in y directions
-    const unsigned &nz() const
+    const unsigned& nz() const
     {
       return Nx;
     }
@@ -154,7 +154,7 @@ namespace oomph
     double Zmax;
 
     /// Generic mesh construction function: contains all the hard work
-    void build_mesh(TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper);
+    void build_mesh(TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
   };
 
   ////////////////////////////////////////////////////////////////////////////
@@ -174,13 +174,13 @@ namespace oomph
     /// directions, and the corresponding dimensions. Assume that the back lower
     /// left corner is located at (0,0,0) Timestepper defaults to Steady.
     RefineableSimpleCubicMesh(
-      const unsigned &nx,
-      const unsigned &ny,
-      const unsigned &nz,
-      const double &lx,
-      const double &ly,
-      const double &lz,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      const unsigned& nx,
+      const unsigned& ny,
+      const unsigned& nz,
+      const double& lx,
+      const double& ly,
+      const double& lz,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       SimpleCubicMesh<ELEMENT>(nx, ny, nz, lx, ly, lz, time_stepper_pt)
     {
       // Nodal positions etc. were created in constructor for
@@ -192,16 +192,16 @@ namespace oomph
     /// directions and the correspoding minimum and maximum values of the
     /// coordinates in each direction.
     RefineableSimpleCubicMesh(
-      const unsigned &nx,
-      const unsigned &ny,
-      const unsigned &nz,
-      const double &xmin,
-      const double &xmax,
-      const double &ymin,
-      const double &ymax,
-      const double &zmin,
-      const double &zmax,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      const unsigned& nx,
+      const unsigned& ny,
+      const unsigned& nz,
+      const double& xmin,
+      const double& xmax,
+      const double& ymin,
+      const double& ymax,
+      const double& zmin,
+      const double& zmax,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       SimpleCubicMesh<ELEMENT>(
         nx, ny, nz, xmin, xmax, ymin, ymax, zmin, zmax, time_stepper_pt)
     {

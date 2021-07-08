@@ -47,7 +47,7 @@ namespace oomph
   //======================================================================
   template<unsigned DIM>
   void LinearElasticityEquationsBase<DIM>::get_strain(
-    const Vector<double> &s, DenseMatrix<double> &strain) const
+    const Vector<double>& s, DenseMatrix<double>& strain) const
   {
 #ifdef PARANOID
     if ((strain.ncol() != DIM) || (strain.nrow() != DIM))
@@ -143,7 +143,7 @@ namespace oomph
   //======================================================================
   template<unsigned DIM>
   void LinearElasticityEquations<DIM>::get_stress(
-    const Vector<double> &s, DenseMatrix<double> &stress) const
+    const Vector<double>& s, DenseMatrix<double>& stress) const
   {
 #ifdef PARANOID
     if ((stress.ncol() != DIM) || (stress.nrow() != DIM))
@@ -187,7 +187,7 @@ namespace oomph
   template<unsigned DIM>
   void LinearElasticityEquations<DIM>::
     fill_in_generic_contribution_to_residuals_linear_elasticity(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag)
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag)
   {
     // Find out how many nodes there are
     unsigned n_node = this->nnode();
@@ -373,8 +373,8 @@ namespace oomph
   //=======================================================================
   template<unsigned DIM>
   void LinearElasticityEquations<DIM>::output_fct(
-    std::ostream &outfile,
-    const unsigned &nplot,
+    std::ostream& outfile,
+    const unsigned& nplot,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
   {
     // Vector of local coordinates
@@ -423,9 +423,9 @@ namespace oomph
   //=======================================================================
   template<unsigned DIM>
   void LinearElasticityEquations<DIM>::output_fct(
-    std::ostream &outfile,
-    const unsigned &nplot,
-    const double &time,
+    std::ostream& outfile,
+    const unsigned& nplot,
+    const double& time,
     FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
   {
     // Vector of local coordinates
@@ -473,8 +473,8 @@ namespace oomph
   /// Output: x,y,[z],u,v,[w]
   //=======================================================================
   template<unsigned DIM>
-  void LinearElasticityEquations<DIM>::output(std::ostream &outfile,
-                                              const unsigned &nplot)
+  void LinearElasticityEquations<DIM>::output(std::ostream& outfile,
+                                              const unsigned& nplot)
   {
     // Set output Vector
     Vector<double> s(DIM);
@@ -518,8 +518,8 @@ namespace oomph
   /// C-style output: x,y,[z],u,v,[w]
   //=======================================================================
   template<unsigned DIM>
-  void LinearElasticityEquations<DIM>::output(FILE *file_pt,
-                                              const unsigned &nplot)
+  void LinearElasticityEquations<DIM>::output(FILE* file_pt,
+                                              const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(DIM);
@@ -560,10 +560,10 @@ namespace oomph
   //=======================================================================
   template<unsigned DIM>
   void LinearElasticityEquations<DIM>::compute_error(
-    std::ostream &outfile,
+    std::ostream& outfile,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-    double &error,
-    double &norm)
+    double& error,
+    double& norm)
   {
     error = 0.0;
     norm = 0.0;
@@ -639,11 +639,11 @@ namespace oomph
   //=======================================================================
   template<unsigned DIM>
   void LinearElasticityEquations<DIM>::compute_error(
-    std::ostream &outfile,
+    std::ostream& outfile,
     FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
-    const double &time,
-    double &error,
-    double &norm)
+    const double& time,
+    double& error,
+    double& norm)
   {
     error = 0.0;
     norm = 0.0;

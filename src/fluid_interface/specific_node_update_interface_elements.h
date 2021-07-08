@@ -98,7 +98,7 @@ namespace oomph
 
     ///\short Specific interface that states how many additional values are
     /// required for the n-th node. Default is zero, but issue error_message.
-    inline unsigned nadditional_values(const unsigned &n)
+    inline unsigned nadditional_values(const unsigned& n)
     {
       error_message();
       return 0;
@@ -107,8 +107,8 @@ namespace oomph
     ///\short Specify any additional index setup information that is required;
     /// i.e. the look-up schemes for the additional values.
     /// Default is empty with error message
-    inline void setup_equation_indices(ELEMENT *const &element_pt,
-                                       const unsigned &id)
+    inline void setup_equation_indices(ELEMENT* const& element_pt,
+                                       const unsigned& id)
     {
       error_message();
     }
@@ -127,7 +127,7 @@ namespace oomph
 
     ///\short Specific interface that states how many additional values are
     /// required for the n-th node. No additional values
-    inline unsigned nadditional_values(const unsigned &n)
+    inline unsigned nadditional_values(const unsigned& n)
     {
       return 0;
     }
@@ -135,8 +135,8 @@ namespace oomph
     ///\short Specify any additional index setup information that is required;
     /// i.e. the look-up schemes for the additional values.
     /// Empty
-    inline void setup_equation_indices(FluidInterfaceElement *const &element_pt,
-                                       const unsigned &id)
+    inline void setup_equation_indices(FluidInterfaceElement* const& element_pt,
+                                       const unsigned& id)
     {
     }
   };
@@ -160,14 +160,14 @@ namespace oomph
     /// \short In spine elements, the kinematic condition is the equation
     /// used to determine the unknown spine heights. Overload the
     /// function accordingly
-    int kinematic_local_eqn(const unsigned &n)
+    int kinematic_local_eqn(const unsigned& n)
     {
       return this->spine_local_eqn(n);
     }
 
     /// \short Hijacking the kinematic condition corresponds to hijacking the
     /// variables associated with the spine heights.
-    void hijack_kinematic_conditions(const Vector<unsigned> &bulk_node_number)
+    void hijack_kinematic_conditions(const Vector<unsigned>& bulk_node_number)
     {
       // Loop over all the node numbers that are passed in
       for (Vector<unsigned>::const_iterator it = bulk_node_number.begin();
@@ -183,12 +183,12 @@ namespace oomph
     ///\short Fill in the specific surface derivative calculations
     /// by calling the appropriate class function
     double compute_surface_derivatives(
-      const Shape &psi,
-      const DShape &dpsids,
-      const DenseMatrix<double> &interpolated_t,
-      const Vector<double> &interpolated_x,
-      DShape &surface_gradient,
-      DShape &surface_divergence)
+      const Shape& psi,
+      const DShape& dpsids,
+      const DenseMatrix<double>& interpolated_t,
+      const Vector<double>& interpolated_x,
+      DShape& surface_gradient,
+      DShape& surface_divergence)
     {
       return DERIVATIVE_CLASS::compute_surface_derivatives(psi,
                                                            dpsids,
@@ -201,9 +201,9 @@ namespace oomph
   public:
     /// \short Constructor, the arguments are a pointer to the  "bulk" element
     /// and the index of the face to be created
-    SpineUpdateFluidInterfaceElement(FiniteElement *const &element_pt,
-                                     const int &face_index,
-                                     const unsigned &id = 0) :
+    SpineUpdateFluidInterfaceElement(FiniteElement* const& element_pt,
+                                     const int& face_index,
+                                     const unsigned& id = 0) :
       Hijacked<SpineElement<FaceGeometry<ELEMENT>>>(),
       EQUATION_CLASS(),
       DERIVATIVE_CLASS()
@@ -214,8 +214,8 @@ namespace oomph
 
 #ifdef PARANOID
       // Is it refineable
-      RefineableElement *ref_el_pt =
-        dynamic_cast<RefineableElement *>(element_pt);
+      RefineableElement* ref_el_pt =
+        dynamic_cast<RefineableElement*>(element_pt);
       if (ref_el_pt != 0)
       {
         if (this->has_hanging_nodes())
@@ -230,7 +230,7 @@ namespace oomph
 
       // Find the index at which the velocity unknowns are stored
       // from the bulk element and allocate the local storage
-      ELEMENT *cast_element_pt = dynamic_cast<ELEMENT *>(element_pt);
+      ELEMENT* cast_element_pt = dynamic_cast<ELEMENT*>(element_pt);
       // Find number of momentum equation required
       const unsigned n_u_index = cast_element_pt->n_u_nst();
       this->U_index_interface.resize(n_u_index);
@@ -243,8 +243,8 @@ namespace oomph
       unsigned n_node_face = this->nnode();
       // Create an instance of the policy class that determines
       // how many additional values are required
-      FluidInterfaceAdditionalValues<EQUATION_CLASS>
-        *interface_additional_values_pt =
+      FluidInterfaceAdditionalValues<EQUATION_CLASS>*
+        interface_additional_values_pt =
           new FluidInterfaceAdditionalValues<EQUATION_CLASS>();
       // Do we need to add any values
       // By default the spines don't need to so we can save
@@ -277,8 +277,8 @@ namespace oomph
     }
 
     /// Calculate the contribution to the residuals and the jacobian
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       // Call the generic routine with the flag set to 1
       EQUATION_CLASS::fill_in_generic_residual_contribution_interface(
@@ -292,18 +292,18 @@ namespace oomph
     /// Helper function to calculate the additional contributions
     /// These are those filled in by the particular equations
     void add_additional_residual_contributions_interface(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      const unsigned &flag,
-      const Shape &psif,
-      const DShape &dpsifds,
-      const DShape &dpsifdS,
-      const DShape &dpsifdS_div,
-      const Vector<double> &s,
-      const Vector<double> &interpolated_x,
-      const Vector<double> &interpolated_n,
-      const double &W,
-      const double &J)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag,
+      const Shape& psif,
+      const DShape& dpsifds,
+      const DShape& dpsifdS,
+      const DShape& dpsifdS_div,
+      const Vector<double>& s,
+      const Vector<double>& interpolated_x,
+      const Vector<double>& interpolated_n,
+      const double& W,
+      const double& J)
     {
       EQUATION_CLASS::add_additional_residual_contributions_interface(
         residuals,
@@ -321,25 +321,25 @@ namespace oomph
     }
 
     /// Overload the output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       EQUATION_CLASS::output(outfile);
     }
 
     /// Output the element
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       EQUATION_CLASS::output(outfile, n_plot);
     }
 
     /// Overload the C-style output function
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       EQUATION_CLASS::output(file_pt);
     }
 
     /// C-style Output function
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       EQUATION_CLASS::output(file_pt, n_plot);
     }
@@ -349,15 +349,15 @@ namespace oomph
     /// Here, this allows
     /// the application of a contact angle boundary condition on the
     /// the specified face.
-    virtual FluidInterfaceBoundingElement *make_bounding_element(
-      const int &face_index)
+    virtual FluidInterfaceBoundingElement* make_bounding_element(
+      const int& face_index)
     {
       // Create a temporary pointer to the appropriate FaceElement read our from
       // our policy class
       BoundingElementType<SpineUpdateFluidInterfaceElement<EQUATION_CLASS,
                                                            DERIVATIVE_CLASS,
-                                                           ELEMENT>>
-        *face_el_pt = new BoundingElementType<
+                                                           ELEMENT>>*
+        face_el_pt = new BoundingElementType<
           SpineUpdateFluidInterfaceElement<EQUATION_CLASS,
                                            DERIVATIVE_CLASS,
                                            ELEMENT>>;
@@ -383,17 +383,17 @@ namespace oomph
 
       // Set of unique geometric data that is used to update the bulk,
       // but is not used to update the face
-      std::set<Data *> unique_additional_geom_data;
+      std::set<Data*> unique_additional_geom_data;
 
       // Get all the geometric data for this (bulk) element
       this->assemble_set_of_all_geometric_data(unique_additional_geom_data);
 
       // Now assemble the set of geometric data for the face element
-      std::set<Data *> unique_face_geom_data_pt;
+      std::set<Data*> unique_face_geom_data_pt;
       face_el_pt->assemble_set_of_all_geometric_data(unique_face_geom_data_pt);
 
       // Erase the face geometric data from the additional data
-      for (std::set<Data *>::iterator it = unique_face_geom_data_pt.begin();
+      for (std::set<Data*>::iterator it = unique_face_geom_data_pt.begin();
            it != unique_face_geom_data_pt.end();
            ++it)
       {
@@ -401,7 +401,7 @@ namespace oomph
       }
 
       // Finally add all unique additional data as external data
-      for (std::set<Data *>::iterator it = unique_additional_geom_data.begin();
+      for (std::set<Data*>::iterator it = unique_additional_geom_data.begin();
            it != unique_additional_geom_data.end();
            ++it)
       {
@@ -431,32 +431,32 @@ namespace oomph
     }
 
     /// Overload the output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       FiniteElement::output(outfile);
     }
 
     /// Output the element
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       FluidInterfaceBoundingElement::output(outfile, n_plot);
     }
 
     /// Overload the C-style output function
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
 
     /// C-style Output function
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       FluidInterfaceBoundingElement::output(file_pt, n_plot);
     }
 
     /// Calculate the elemental residual vector and the Jacobian
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       // Call the generic routine with the flag set to 1
       this->fill_in_generic_residual_contribution_interface_boundary(
@@ -470,7 +470,7 @@ namespace oomph
 
     /// \short Return local equation number associated with the kinematic
     /// constraint for local node n
-    int kinematic_local_eqn(const unsigned &n)
+    int kinematic_local_eqn(const unsigned& n)
     {
       return this->spine_local_eqn(n);
     }
@@ -494,32 +494,32 @@ namespace oomph
     }
 
     /// Overload the output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       FiniteElement::output(outfile);
     }
 
     /// Output the element
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       FluidInterfaceBoundingElement::output(outfile, n_plot);
     }
 
     /// Overload the C-style output function
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
 
     /// C-style Output function
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       FluidInterfaceBoundingElement::output(file_pt, n_plot);
     }
 
     /// Calculate the jacobian
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       // Call the generic routine with the flag set to 1
       this->fill_in_generic_residual_contribution_interface_boundary(
@@ -532,7 +532,7 @@ namespace oomph
     }
 
     /// Local eqn number of the kinematic bc associated with local node n
-    int kinematic_local_eqn(const unsigned &n)
+    int kinematic_local_eqn(const unsigned& n)
     {
       // Kinematic bc is always associated with the n-th spine height
       return this->spine_local_eqn(n);
@@ -549,8 +549,8 @@ namespace oomph
                                             ELEMENT>
   {
   public:
-    SpineLineFluidInterfaceElement(FiniteElement *const &element_pt,
-                                   const int &face_index) :
+    SpineLineFluidInterfaceElement(FiniteElement* const& element_pt,
+                                   const int& face_index) :
       SpineUpdateFluidInterfaceElement<FluidInterfaceElement,
                                        LineDerivatives,
                                        ELEMENT>(element_pt, face_index)
@@ -583,8 +583,8 @@ namespace oomph
                                             ELEMENT>
   {
   public:
-    SpineAxisymmetricFluidInterfaceElement(FiniteElement *const &element_pt,
-                                           const int &face_index) :
+    SpineAxisymmetricFluidInterfaceElement(FiniteElement* const& element_pt,
+                                           const int& face_index) :
       SpineUpdateFluidInterfaceElement<FluidInterfaceElement,
                                        AxisymmetricDerivatives,
                                        ELEMENT>(element_pt, face_index)
@@ -619,8 +619,8 @@ namespace oomph
                                             ELEMENT>
   {
   public:
-    SpineSurfaceFluidInterfaceElement(FiniteElement *const &element_pt,
-                                      const int &face_index) :
+    SpineSurfaceFluidInterfaceElement(FiniteElement* const& element_pt,
+                                      const int& face_index) :
       SpineUpdateFluidInterfaceElement<FluidInterfaceElement,
                                        SurfaceDerivatives,
                                        ELEMENT>(element_pt, face_index)
@@ -672,14 +672,14 @@ namespace oomph
 
     /// \short Return the index at which the lagrange multiplier is
     /// stored at the n-th node
-    inline unsigned lagrange_index(const unsigned &n)
+    inline unsigned lagrange_index(const unsigned& n)
     {
       return this->Lagrange_index[n];
     }
 
     /// \short Equation number of the kinematic BC associated with node j.
     /// (This is the equation for the Lagrange multiplier)
-    inline int kinematic_local_eqn(const unsigned &n)
+    inline int kinematic_local_eqn(const unsigned& n)
     {
       // Get the index of the nodal value associated with Lagrange multiplier
       return this->nodal_local_eqn(n, this->lagrange_index(n));
@@ -688,7 +688,7 @@ namespace oomph
     /// \short Hijacking the kinematic condition corresponds to hijacking the
     /// variables associated with the Lagrange multipliers that are assigned
     /// on construction of this element.
-    void hijack_kinematic_conditions(const Vector<unsigned> &bulk_node_number)
+    void hijack_kinematic_conditions(const Vector<unsigned>& bulk_node_number)
     {
       // Loop over all the nodes that are passed in
       for (Vector<unsigned>::const_iterator it = bulk_node_number.begin();
@@ -704,12 +704,12 @@ namespace oomph
     ///\short Fill in the specific surface derivative calculations
     /// by calling the appropriate function from the derivative class
     double compute_surface_derivatives(
-      const Shape &psi,
-      const DShape &dpsids,
-      const DenseMatrix<double> &interpolated_t,
-      const Vector<double> &interpolated_x,
-      DShape &surface_gradient,
-      DShape &surface_divergence)
+      const Shape& psi,
+      const DShape& dpsids,
+      const DenseMatrix<double>& interpolated_t,
+      const Vector<double>& interpolated_x,
+      DShape& surface_gradient,
+      DShape& surface_divergence)
     {
       return DERIVATIVE_CLASS::compute_surface_derivatives(psi,
                                                            dpsids,
@@ -725,9 +725,9 @@ namespace oomph
     /// The optional identifier can be used
     /// to distinguish the additional nodal value (Lagr mult) created by
     /// this element from those created by other FaceElements.
-    ElasticUpdateFluidInterfaceElement(FiniteElement *const &element_pt,
-                                       const int &face_index,
-                                       const unsigned &id = 0) :
+    ElasticUpdateFluidInterfaceElement(FiniteElement* const& element_pt,
+                                       const int& face_index,
+                                       const unsigned& id = 0) :
       FaceGeometry<ELEMENT>(), EQUATION_CLASS(), DERIVATIVE_CLASS()
     {
       // Attach the geometrical information to the element
@@ -737,8 +737,8 @@ namespace oomph
 
 #ifdef PARANOID
       // Is it refineable
-      RefineableElement *ref_el_pt =
-        dynamic_cast<RefineableElement *>(element_pt);
+      RefineableElement* ref_el_pt =
+        dynamic_cast<RefineableElement*>(element_pt);
       if (ref_el_pt != 0)
       {
         if (this->has_hanging_nodes())
@@ -753,7 +753,7 @@ namespace oomph
 
       // Find the index at which the velocity unknowns are stored
       // from the bulk element and resize the local storage scheme
-      ELEMENT *cast_element_pt = dynamic_cast<ELEMENT *>(element_pt);
+      ELEMENT* cast_element_pt = dynamic_cast<ELEMENT*>(element_pt);
       const unsigned n_u_index = cast_element_pt->n_u_nst();
       this->U_index_interface.resize(n_u_index);
       for (unsigned i = 0; i < n_u_index; i++)
@@ -766,8 +766,8 @@ namespace oomph
 
       // Create an instance of the policy class that determines
       // how many additional values are required
-      FluidInterfaceAdditionalValues<EQUATION_CLASS>
-        *interface_additional_values_pt =
+      FluidInterfaceAdditionalValues<EQUATION_CLASS>*
+        interface_additional_values_pt =
           new FluidInterfaceAdditionalValues<EQUATION_CLASS>();
 
       // Set the additional data values in the face
@@ -793,7 +793,7 @@ namespace oomph
       {
         Lagrange_index[n] =
           additional_data_values[n] - 1 +
-          dynamic_cast<BoundaryNodeBase *>(this->node_pt(n))
+          dynamic_cast<BoundaryNodeBase*>(this->node_pt(n))
             ->index_of_first_value_assigned_by_face_element(id);
       }
 
@@ -808,22 +808,22 @@ namespace oomph
     /// \short The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default
-    double zeta_nodal(const unsigned &n,
-                      const unsigned &k,
-                      const unsigned &i) const
+    double zeta_nodal(const unsigned& n,
+                      const unsigned& k,
+                      const unsigned& i) const
     {
       return FaceElement::zeta_nodal(n, k, i);
     }
 
     /// Return the lagrange multiplier at local node n
-    double &lagrange(const unsigned &n)
+    double& lagrange(const unsigned& n)
     {
       return *this->node_pt(n)->value_pt(this->lagrange_index(n));
     }
 
     /// Fill in contribution to residuals and Jacobian
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       // Call the generic routine with the flag set to 1
       EQUATION_CLASS::fill_in_generic_residual_contribution_interface(
@@ -834,25 +834,25 @@ namespace oomph
     }
 
     /// Overload the output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       EQUATION_CLASS::output(outfile);
     }
 
     /// Output the element
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       EQUATION_CLASS::output(outfile, n_plot);
     }
 
     /// Overload the C-style output function
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       EQUATION_CLASS::output(file_pt);
     }
 
     /// C-style Output function
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       EQUATION_CLASS::output(file_pt, n_plot);
     }
@@ -862,18 +862,18 @@ namespace oomph
     /// Lagrange multiplier contribution, as well as any
     /// additional contributions by the other equations.
     void add_additional_residual_contributions_interface(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      const unsigned &flag,
-      const Shape &psif,
-      const DShape &dpsifds,
-      const DShape &dpsifdS,
-      const DShape &dpsifdS_div,
-      const Vector<double> &s,
-      const Vector<double> &interpolated_x,
-      const Vector<double> &interpolated_n,
-      const double &W,
-      const double &J)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag,
+      const Shape& psif,
+      const DShape& dpsifds,
+      const DShape& dpsifdS,
+      const DShape& dpsifdS_div,
+      const Vector<double>& s,
+      const Vector<double>& interpolated_x,
+      const Vector<double>& interpolated_n,
+      const double& W,
+      const double& J)
     {
       EQUATION_CLASS::add_additional_residual_contributions_interface(
         residuals,
@@ -943,14 +943,14 @@ namespace oomph
     /// of type ElasticLineFluidInterfaceBoundingElement<ELEMENT> that allows
     /// the application of a contact angle boundary condition on the
     /// the specified face.
-    virtual FluidInterfaceBoundingElement *make_bounding_element(
-      const int &face_index)
+    virtual FluidInterfaceBoundingElement* make_bounding_element(
+      const int& face_index)
     {
       // Create a temporary pointer to the appropriate FaceElement
       BoundingElementType<ElasticUpdateFluidInterfaceElement<EQUATION_CLASS,
                                                              DERIVATIVE_CLASS,
-                                                             ELEMENT>>
-        *face_el_pt = new BoundingElementType<
+                                                             ELEMENT>>*
+        face_el_pt = new BoundingElementType<
           ElasticUpdateFluidInterfaceElement<EQUATION_CLASS,
                                              DERIVATIVE_CLASS,
                                              ELEMENT>>;
@@ -981,11 +981,11 @@ namespace oomph
       face_el_pt->set_lagrange_index(local_lagrange_index);
 
       // Find the nodes
-      std::set<SolidNode *> set_of_solid_nodes;
+      std::set<SolidNode*> set_of_solid_nodes;
       const unsigned n_node = this->nnode();
       for (unsigned n = 0; n < n_node; n++)
       {
-        set_of_solid_nodes.insert(static_cast<SolidNode *>(this->node_pt(n)));
+        set_of_solid_nodes.insert(static_cast<SolidNode*>(this->node_pt(n)));
       }
 
       // Delete the nodes from the face
@@ -998,11 +998,11 @@ namespace oomph
 
         // Now delete the nodes from the set
         set_of_solid_nodes.erase(
-          static_cast<SolidNode *>(face_el_pt->node_pt(n)));
+          static_cast<SolidNode*>(face_el_pt->node_pt(n)));
       }
 
       // Now add these as external data
-      for (std::set<SolidNode *>::iterator it = set_of_solid_nodes.begin();
+      for (std::set<SolidNode*>::iterator it = set_of_solid_nodes.begin();
            it != set_of_solid_nodes.end();
            ++it)
       {
@@ -1031,7 +1031,7 @@ namespace oomph
 
   public:
     ///\short Set the Id and offset
-    void set_lagrange_index(const Vector<unsigned> &lagrange_index)
+    void set_lagrange_index(const Vector<unsigned>& lagrange_index)
     {
       Lagrange_index = lagrange_index;
     }
@@ -1040,9 +1040,9 @@ namespace oomph
     /// The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default
-    double zeta_nodal(const unsigned &n,
-                      const unsigned &k,
-                      const unsigned &i) const
+    double zeta_nodal(const unsigned& n,
+                      const unsigned& k,
+                      const unsigned& i) const
     {
       return FaceElement::zeta_nodal(n, k, i);
     }
@@ -1055,32 +1055,32 @@ namespace oomph
     }
 
     /// Overload the output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       FiniteElement::output(outfile);
     }
 
     /// Output the element
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       FluidInterfaceBoundingElement::output(outfile, n_plot);
     }
 
     /// Overload the C-style output function
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
 
     /// C-style Output function
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       FluidInterfaceBoundingElement::output(file_pt, n_plot);
     }
 
     /// Calculate the element's residual vector and Jacobian
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       // Call the generic routine with the flag set to 1
       fill_in_generic_residual_contribution_interface_boundary(
@@ -1094,7 +1094,7 @@ namespace oomph
     }
 
     /// Set the kinematic local equation
-    inline int kinematic_local_eqn(const unsigned &n)
+    inline int kinematic_local_eqn(const unsigned& n)
     {
       return this->nodal_local_eqn(n, this->Lagrange_index[n]);
     }
@@ -1115,7 +1115,7 @@ namespace oomph
 
   public:
     ///\short Set the Id
-    void set_lagrange_index(const Vector<unsigned> &lagrange_index)
+    void set_lagrange_index(const Vector<unsigned>& lagrange_index)
     {
       Lagrange_index = lagrange_index;
     }
@@ -1130,40 +1130,40 @@ namespace oomph
     /// The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default
-    double zeta_nodal(const unsigned &n,
-                      const unsigned &k,
-                      const unsigned &i) const
+    double zeta_nodal(const unsigned& n,
+                      const unsigned& k,
+                      const unsigned& i) const
     {
       return FaceElement::zeta_nodal(n, k, i);
     }
 
     /// Overload the output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       FiniteElement::output(outfile);
     }
 
     /// Output the element
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       FluidInterfaceBoundingElement::output(outfile, n_plot);
     }
 
     /// Overload the C-style output function
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
 
     /// C-style Output function
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       FluidInterfaceBoundingElement::output(file_pt, n_plot);
     }
 
     /// Calculate the elemental residual vector and Jacobian
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       // Call the generic routine with the flag set to 1
       fill_in_generic_residual_contribution_interface_boundary(
@@ -1178,7 +1178,7 @@ namespace oomph
     }
 
     /// Local eqn number of kinematic bc associated with local node n
-    int kinematic_local_eqn(const unsigned &n)
+    int kinematic_local_eqn(const unsigned& n)
     {
       // Read out the kinematic constraint from the Id which is passed down
       // from the constructing element
@@ -1196,9 +1196,9 @@ namespace oomph
                                               ELEMENT>
   {
   public:
-    ElasticLineFluidInterfaceElement(FiniteElement *const &element_pt,
-                                     const int &face_index,
-                                     const unsigned &id = 0) :
+    ElasticLineFluidInterfaceElement(FiniteElement* const& element_pt,
+                                     const int& face_index,
+                                     const unsigned& id = 0) :
       ElasticUpdateFluidInterfaceElement<FluidInterfaceElement,
                                          LineDerivatives,
                                          ELEMENT>(element_pt, face_index, id)
@@ -1232,9 +1232,9 @@ namespace oomph
                                               ELEMENT>
   {
   public:
-    ElasticAxisymmetricFluidInterfaceElement(FiniteElement *const &element_pt,
-                                             const int &face_index,
-                                             const unsigned &id = 0) :
+    ElasticAxisymmetricFluidInterfaceElement(FiniteElement* const& element_pt,
+                                             const int& face_index,
+                                             const unsigned& id = 0) :
       ElasticUpdateFluidInterfaceElement<FluidInterfaceElement,
                                          AxisymmetricDerivatives,
                                          ELEMENT>(element_pt, face_index, id)
@@ -1269,9 +1269,9 @@ namespace oomph
                                               ELEMENT>
   {
   public:
-    ElasticSurfaceFluidInterfaceElement(FiniteElement *const &element_pt,
-                                        const int &face_index,
-                                        const unsigned &id = 0) :
+    ElasticSurfaceFluidInterfaceElement(FiniteElement* const& element_pt,
+                                        const int& face_index,
+                                        const unsigned& id = 0) :
       ElasticUpdateFluidInterfaceElement<FluidInterfaceElement,
                                          SurfaceDerivatives,
                                          ELEMENT>(element_pt, face_index, id)

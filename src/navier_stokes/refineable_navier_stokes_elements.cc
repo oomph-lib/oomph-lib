@@ -40,9 +40,9 @@ namespace oomph
   template<unsigned DIM>
   void RefineableNavierStokesEquations<DIM>::
     get_pressure_and_velocity_mass_matrix_diagonal(
-      Vector<double> &press_mass_diag,
-      Vector<double> &veloc_mass_diag,
-      const unsigned &which_one)
+      Vector<double>& press_mass_diag,
+      Vector<double>& veloc_mass_diag,
+      const unsigned& which_one)
   {
     // Resize and initialise
     unsigned n_dof = ndof();
@@ -53,7 +53,7 @@ namespace oomph
       veloc_mass_diag.assign(n_dof, 0.0);
 
     // Pointers to hang info object
-    HangInfo *hang_info_pt = 0;
+    HangInfo* hang_info_pt = 0;
 
     // Number of master nodes and weight for shape fcts
     unsigned n_master = 1;
@@ -286,7 +286,7 @@ namespace oomph
   template<unsigned DIM>
   void RefineableNavierStokesEquations<DIM>::
     fill_in_generic_pressure_advection_diffusion_contribution_nst(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag)
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag)
   {
     // Return immediately if there are no dofs
     if (ndof() == 0) return;
@@ -569,9 +569,9 @@ namespace oomph
   //========================================================================
   template<unsigned DIM>
   void RefineableNavierStokesEquations<DIM>::
-    fill_in_generic_residual_contribution_nst(Vector<double> &residuals,
-                                              DenseMatrix<double> &jacobian,
-                                              DenseMatrix<double> &mass_matrix,
+    fill_in_generic_residual_contribution_nst(Vector<double>& residuals,
+                                              DenseMatrix<double>& jacobian,
+                                              DenseMatrix<double>& mass_matrix,
                                               unsigned flag)
   {
     // Find out how many nodes there are
@@ -1117,7 +1117,7 @@ namespace oomph
   //======================================================================
   template<unsigned DIM>
   void RefineableNavierStokesEquations<DIM>::get_dresidual_dnodal_coordinates(
-    RankThreeTensor<double> &dresidual_dnodal_coordinates)
+    RankThreeTensor<double>& dresidual_dnodal_coordinates)
   {
     // Return immediately if there are no dofs
     if (ndof() == 0)
@@ -1216,17 +1216,17 @@ namespace oomph
     // X_ij only affects U_ij.
     bool element_has_node_with_aux_node_update_fct = false;
 
-    std::map<Node *, unsigned> local_shape_controlling_node_lookup =
+    std::map<Node*, unsigned> local_shape_controlling_node_lookup =
       shape_controlling_node_lookup();
 
     // FD loop over shape-controlling nodes
-    for (std::map<Node *, unsigned>::iterator it =
+    for (std::map<Node*, unsigned>::iterator it =
            local_shape_controlling_node_lookup.begin();
          it != local_shape_controlling_node_lookup.end();
          it++)
     {
       // Get node
-      Node *nod_pt = it->first;
+      Node* nod_pt = it->first;
 
       // Get its number
       unsigned q = it->second;
@@ -1273,7 +1273,7 @@ namespace oomph
     int local_eqn = 0;
 
     // Pointers to hang info object
-    HangInfo *hang_info_pt = 0;
+    HangInfo* hang_info_pt = 0;
 
     // Loop over the integration points
     for (unsigned ipt = 0; ipt < n_intpt; ipt++)
@@ -1563,12 +1563,12 @@ namespace oomph
                   // the shape function
                   unsigned n_master2 = 1;
                   double hang_weight2 = 1.0;
-                  HangInfo *hang_info2_pt = 0;
+                  HangInfo* hang_info2_pt = 0;
 
                   // Local boolean to indicate whether the node is hanging
                   bool is_node_hanging2 = node_pt(q_local)->is_hanging();
 
-                  Node *actual_shape_controlling_node_pt = node_pt(q_local);
+                  Node* actual_shape_controlling_node_pt = node_pt(q_local);
 
                   // If the node is hanging
                   if (is_node_hanging2)
@@ -1726,12 +1726,12 @@ namespace oomph
                 // the shape function
                 unsigned n_master2 = 1;
                 double hang_weight2 = 1.0;
-                HangInfo *hang_info2_pt = 0;
+                HangInfo* hang_info2_pt = 0;
 
                 // Local boolean to indicate whether the node is hanging
                 bool is_node_hanging2 = node_pt(q_local)->is_hanging();
 
-                Node *actual_shape_controlling_node_pt = node_pt(q_local);
+                Node* actual_shape_controlling_node_pt = node_pt(q_local);
 
                 // If the node is hanging
                 if (is_node_hanging2)
@@ -1804,7 +1804,7 @@ namespace oomph
     }
     else
     {
-      Data *new_data_pt = new Data(this->npres_nst());
+      Data* new_data_pt = new Data(this->npres_nst());
       delete internal_data_pt(this->P_nst_internal_index);
       internal_data_pt(this->P_nst_internal_index) = new_data_pt;
     }
@@ -1812,8 +1812,8 @@ namespace oomph
     if (this->tree_pt()->father_pt() != 0)
     {
       // Pointer to my father (in C-R element impersonation)
-      PRefineableQCrouzeixRaviartElement<2> *father_element_pt =
-        dynamic_cast<PRefineableQCrouzeixRaviartElement<2> *>(
+      PRefineableQCrouzeixRaviartElement<2>* father_element_pt =
+        dynamic_cast<PRefineableQCrouzeixRaviartElement<2>*>(
           quadtree_pt()->father_pt()->object_pt());
 
       // If element has same p-order as father then do the projection problem
@@ -1915,7 +1915,7 @@ namespace oomph
     }
     else
     {
-      Data *new_data_pt = new Data(this->npres_nst());
+      Data* new_data_pt = new Data(this->npres_nst());
       delete internal_data_pt(this->P_nst_internal_index);
       internal_data_pt(this->P_nst_internal_index) = new_data_pt;
     }
@@ -1923,8 +1923,8 @@ namespace oomph
     if (this->tree_pt()->father_pt() != 0)
     {
       // Pointer to my father (in C-R element impersonation)
-      PRefineableQCrouzeixRaviartElement<3> *father_element_pt =
-        dynamic_cast<PRefineableQCrouzeixRaviartElement<3> *>(
+      PRefineableQCrouzeixRaviartElement<3>* father_element_pt =
+        dynamic_cast<PRefineableQCrouzeixRaviartElement<3>*>(
           octree_pt()->father_pt()->object_pt());
 
       // If element has same p-order as father then do the projection problem

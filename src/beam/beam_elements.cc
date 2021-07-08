@@ -52,10 +52,10 @@ namespace oomph
   //=======================================================================
   /// Default load function (zero traction)
   //=======================================================================
-  void KirchhoffLoveBeamEquations::Zero_traction_fct(const Vector<double> &xi,
-                                                     const Vector<double> &x,
-                                                     const Vector<double> &N,
-                                                     Vector<double> &load)
+  void KirchhoffLoveBeamEquations::Zero_traction_fct(const Vector<double>& xi,
+                                                     const Vector<double>& x,
+                                                     const Vector<double>& N,
+                                                     Vector<double>& load)
   {
     unsigned n_dim = load.size();
     for (unsigned i = 0; i < n_dim; i++)
@@ -67,9 +67,9 @@ namespace oomph
   //=======================================================================
   /// Default wall profile function (constant thickness h_0)
   //=======================================================================
-  void KirchhoffLoveBeamEquations::Unit_profile_fct(const Vector<double> &xi,
-                                                    const Vector<double> &x,
-                                                    double &h_ratio)
+  void KirchhoffLoveBeamEquations::Unit_profile_fct(const Vector<double>& xi,
+                                                    const Vector<double>& x,
+                                                    double& h_ratio)
   {
     h_ratio = 1.0;
   }
@@ -77,9 +77,9 @@ namespace oomph
   //=======================================================================
   /// Get position vector to and normal vector on wall
   //=======================================================================
-  void KirchhoffLoveBeamEquations::get_normal(const Vector<double> &s,
-                                              Vector<double> &r,
-                                              Vector<double> &N)
+  void KirchhoffLoveBeamEquations::get_normal(const Vector<double>& s,
+                                              Vector<double>& r,
+                                              Vector<double>& N)
   {
 #ifdef PARANOID
     if (N.size() != 2)
@@ -183,9 +183,9 @@ namespace oomph
   //=======================================================================
   /// Get position vector to and non-unit tangent vector on wall: dr/ds
   //=======================================================================
-  void KirchhoffLoveBeamEquations::get_non_unit_tangent(const Vector<double> &s,
-                                                        Vector<double> &r,
-                                                        Vector<double> &drds)
+  void KirchhoffLoveBeamEquations::get_non_unit_tangent(const Vector<double>& s,
+                                                        Vector<double>& r,
+                                                        Vector<double>& drds)
   {
 #ifdef PARANOID
     if (drds.size() != 2)
@@ -274,7 +274,7 @@ namespace oomph
   /// veloc/accel to the dofs.
   //=======================================================================
   void KirchhoffLoveBeamEquations::fill_in_contribution_to_residuals_beam(
-    Vector<double> &residuals)
+    Vector<double>& residuals)
   {
     // Set up the initial conditions, if an IC pointer has been set
     if (Solid_ic_pt != 0)
@@ -532,7 +532,7 @@ namespace oomph
   /// Get FE jacobian and residuals (Jacobian done by finite differences)
   //=======================================================================
   void KirchhoffLoveBeamEquations::fill_in_contribution_to_jacobian(
-    Vector<double> &residuals, DenseMatrix<double> &jacobian)
+    Vector<double>& residuals, DenseMatrix<double>& jacobian)
   {
     // Call the element's residuals vector
     fill_in_contribution_to_residuals_beam(residuals);
@@ -564,7 +564,7 @@ namespace oomph
   /// Compute the potential (strain) and kinetic energy of the
   /// element (wrapper function).
   //=======================================================================
-  void KirchhoffLoveBeamEquations::get_energy(double &pot_en, double &kin_en)
+  void KirchhoffLoveBeamEquations::get_energy(double& pot_en, double& kin_en)
   {
     // Initialise
     double stretch = 0.0;
@@ -583,9 +583,9 @@ namespace oomph
   /// element, breaking down the potential energy into stretching and
   /// bending components.
   //=======================================================================
-  void KirchhoffLoveBeamEquations::get_energy(double &stretch,
-                                              double &bend,
-                                              double &kin_en)
+  void KirchhoffLoveBeamEquations::get_energy(double& stretch,
+                                              double& bend,
+                                              double& kin_en)
   {
     // Initialise
     stretch = 0.0;
@@ -781,9 +781,9 @@ namespace oomph
   /// Output position at previous time (t=0: present; t>0: previous)
   /// with specified number of plot points.
   //=======================================================================
-  void HermiteBeamElement::output(const unsigned &t,
-                                  std::ostream &outfile,
-                                  const unsigned &n_plot) const
+  void HermiteBeamElement::output(const unsigned& t,
+                                  std::ostream& outfile,
+                                  const unsigned& n_plot) const
   {
 #ifdef WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES
     // Warn about time argument being moved to the front
@@ -819,7 +819,7 @@ namespace oomph
   //=======================================================================
   /// Output function
   //=======================================================================
-  void HermiteBeamElement::output(std::ostream &outfile, const unsigned &n_plot)
+  void HermiteBeamElement::output(std::ostream& outfile, const unsigned& n_plot)
   {
     // Local variables
     Vector<double> s(1);
@@ -921,7 +921,7 @@ namespace oomph
   //=======================================================================
   /// Output function
   //=======================================================================
-  void HermiteBeamElement::output(std::ostream &outfile)
+  void HermiteBeamElement::output(std::ostream& outfile)
   {
     unsigned n_plot = 5;
     output(outfile, n_plot);
@@ -931,9 +931,9 @@ namespace oomph
   /// C-style output position at previous time (t=0: present; t>0: previous)
   /// with specified number of plot points.
   //=======================================================================
-  void HermiteBeamElement::output(const unsigned &t,
-                                  FILE *file_pt,
-                                  const unsigned &n_plot) const
+  void HermiteBeamElement::output(const unsigned& t,
+                                  FILE* file_pt,
+                                  const unsigned& n_plot) const
   {
 #ifdef WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES
     // Warn about time argument being moved to the front
@@ -972,7 +972,7 @@ namespace oomph
   //=======================================================================
   /// Output function
   //=======================================================================
-  void HermiteBeamElement::output(FILE *file_pt, const unsigned &n_plot)
+  void HermiteBeamElement::output(FILE* file_pt, const unsigned& n_plot)
   {
     // Local variables
     Vector<double> s(1);
@@ -1083,7 +1083,7 @@ namespace oomph
   //=======================================================================
   /// C-style output function
   //=======================================================================
-  void HermiteBeamElement::output(FILE *file_pt)
+  void HermiteBeamElement::output(FILE* file_pt)
   {
     unsigned n_plot = 5;
     output(file_pt, n_plot);
@@ -1102,10 +1102,10 @@ namespace oomph
   /// is not located within the element it is set to NULL.
   //======================================================================
   void FSIHermiteBeamElement::locate_zeta(
-    const Vector<double> &zeta,
-    GeomObject *&geom_object_pt,
-    Vector<double> &s,
-    const bool &use_coordinate_as_initial_guess)
+    const Vector<double>& zeta,
+    GeomObject*& geom_object_pt,
+    Vector<double>& s,
+    const bool& use_coordinate_as_initial_guess)
   {
     // Assumed that the first node has a lower xi coordinate than the second
     unsigned lo = 0, hi = 1;
@@ -1184,7 +1184,7 @@ namespace oomph
   /// conditions in FSI problems.
   //=========================================================================
   void FSIHermiteBeamElement::dposition_dlagrangian_at_local_coordinate(
-    const Vector<double> &s, DenseMatrix<double> &drdxi) const
+    const Vector<double>& s, DenseMatrix<double>& drdxi) const
   {
 #ifdef PARANOID
     if (Undeformed_beam_pt == 0)
@@ -1246,7 +1246,7 @@ namespace oomph
   /// This element is only in charge of the solid dofs.
   //=============================================================================
   void FSIHermiteBeamElement::get_dof_numbers_for_unknowns(
-    std::list<std::pair<unsigned long, unsigned>> &dof_lookup_list) const
+    std::list<std::pair<unsigned long, unsigned>>& dof_lookup_list) const
   {
     // temporary pair (used to store dof lookup prior to being added to list)
     std::pair<unsigned, unsigned> dof_lookup;
@@ -1302,7 +1302,7 @@ namespace oomph
   //===========================================================================
   ClampedSlidingHermiteBeamBoundaryConditionElement::
     ClampedSlidingHermiteBeamBoundaryConditionElement(
-      FiniteElement *const &bulk_el_pt, const int &face_index) :
+      FiniteElement* const& bulk_el_pt, const int& face_index) :
     FaceGeometry<HermiteBeamElement>(), FaceElement()
   {
     // Number of nodal position types: 2
@@ -1338,12 +1338,12 @@ namespace oomph
   /// Add the element's contribution to its residual vector
   //===========================================================================
   void ClampedSlidingHermiteBeamBoundaryConditionElement::
-    fill_in_contribution_to_residuals(Vector<double> &residuals)
+    fill_in_contribution_to_residuals(Vector<double>& residuals)
   {
     // Get position vector to and normal & tangent vectors on wall (from
     // bulk element)
-    HermiteBeamElement *bulk_el_pt =
-      dynamic_cast<HermiteBeamElement *>(bulk_element_pt());
+    HermiteBeamElement* bulk_el_pt =
+      dynamic_cast<HermiteBeamElement*>(bulk_element_pt());
 
     // Get the value of the constant local coordinate in the bulk element
     // Dummy local coordinate of size zero

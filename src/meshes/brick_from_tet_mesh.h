@@ -64,14 +64,14 @@ namespace oomph
   public:
     /// Constructor: Pass xda file name.
     BrickFromTetMesh(const std::string xda_file_name,
-                     TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper)
+                     TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
     {
       // Mesh can only be built with 3D Qelements.
       MeshChecker::assert_geometric_element<QElementGeometricBase, ELEMENT>(3,
                                                                             3);
 
       // Build temporary tet mesh
-      XdaTetMesh<TElement<3, 3>> *tmp_mesh_pt =
+      XdaTetMesh<TElement<3, 3>>* tmp_mesh_pt =
         new XdaTetMesh<TElement<3, 3>>(xda_file_name, time_stepper_pt);
 
       // Actually build the mesh
@@ -82,19 +82,19 @@ namespace oomph
     }
 
     /// Constructor: Pass the files required for the tetgen mesh.
-    BrickFromTetMesh(const std::string &node_file_name,
-                     const std::string &element_file_name,
-                     const std::string &face_file_name,
-                     const bool &split_corner_elements,
-                     TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper,
-                     const bool &use_attributes = false)
+    BrickFromTetMesh(const std::string& node_file_name,
+                     const std::string& element_file_name,
+                     const std::string& face_file_name,
+                     const bool& split_corner_elements,
+                     TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper,
+                     const bool& use_attributes = false)
     {
       // Mesh can only be built with 3D Qelements.
       MeshChecker::assert_geometric_element<QElementGeometricBase, ELEMENT>(3,
                                                                             3);
 
       // Build temporary tet mesh
-      TetgenMesh<TElement<3, 3>> *tmp_mesh_pt =
+      TetgenMesh<TElement<3, 3>>* tmp_mesh_pt =
         new TetgenMesh<TElement<3, 3>>(node_file_name,
                                        element_file_name,
                                        face_file_name,
@@ -113,8 +113,8 @@ namespace oomph
     /// internally built XdaTetMesh for external use. Note that YOU
     /// are responsible for deleting this mesh.
     BrickFromTetMesh(const std::string xda_file_name,
-                     XdaTetMesh<TElement<3, 3>> *&xda_tet_mesh_pt,
-                     TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper)
+                     XdaTetMesh<TElement<3, 3>>*& xda_tet_mesh_pt,
+                     TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
     {
       // Mesh can only be built with 3D Qelements.
       MeshChecker::assert_geometric_element<QElementGeometricBase, ELEMENT>(3,
@@ -132,19 +132,19 @@ namespace oomph
 
     /// \short Access functions to the Vector of oomph-lib boundary ids
     /// that make up boundary b in the original xda enumeration
-    Vector<unsigned> oomph_lib_boundary_ids(const unsigned &xda_boundary_id)
+    Vector<unsigned> oomph_lib_boundary_ids(const unsigned& xda_boundary_id)
     {
       return Boundary_id[xda_boundary_id];
     }
 
   private:
     /// Build fct: Pass pointer to existing tet mesh.
-    void build_mesh(XdaTetMesh<TElement<3, 3>> *tet_mesh_pt,
-                    TimeStepper *time_stepper_pt);
+    void build_mesh(XdaTetMesh<TElement<3, 3>>* tet_mesh_pt,
+                    TimeStepper* time_stepper_pt);
 
     /// Build fct: Pass pointer to existing tet mesh.
-    void build_mesh(TetgenMesh<TElement<3, 3>> *tet_mesh_pt,
-                    TimeStepper *time_stepper_pt);
+    void build_mesh(TetgenMesh<TElement<3, 3>>* tet_mesh_pt,
+                    TimeStepper* time_stepper_pt);
 
     /// \short Vector of vectors containing the boundary IDs of
     /// the overall boundary specified in the xda file.
@@ -169,7 +169,7 @@ namespace oomph
     /// Constructor: Pass xda file name.
     SolidBrickFromTetMesh(
       const std::string xda_file_name,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       BrickFromTetMesh<ELEMENT>(xda_file_name, time_stepper_pt)
     {
       // Make the current configuration the undeformed one by
@@ -183,8 +183,8 @@ namespace oomph
     /// are responsible for deleting this mesh.
     SolidBrickFromTetMesh(
       const std::string xda_file_name,
-      XdaTetMesh<TElement<3, 3>> *&xda_tet_mesh_pt,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      XdaTetMesh<TElement<3, 3>>*& xda_tet_mesh_pt,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       BrickFromTetMesh<ELEMENT>(xda_file_name, xda_tet_mesh_pt, time_stepper_pt)
     {
       // Make the current configuration the undeformed one by
@@ -212,7 +212,7 @@ namespace oomph
     /// Constructor: Pass xda file name.
     RefineableBrickFromTetMesh(
       const std::string xda_file_name,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       BrickFromTetMesh<ELEMENT>(xda_file_name, time_stepper_pt)
     {
       // Nodal positions etc. were created in constructor for
@@ -225,8 +225,8 @@ namespace oomph
     /// are responsible for deleting this mesh.
     RefineableBrickFromTetMesh(
       const std::string xda_file_name,
-      XdaTetMesh<TElement<3, 3>> *&xda_tet_mesh_pt,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      XdaTetMesh<TElement<3, 3>>*& xda_tet_mesh_pt,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       BrickFromTetMesh<ELEMENT>(xda_file_name, xda_tet_mesh_pt, time_stepper_pt)
     {
       // Nodal positions etc. were created in constructor for
@@ -255,7 +255,7 @@ namespace oomph
     /// Constructor: Pass xda file name.
     RefineableSolidBrickFromTetMesh(
       const std::string xda_file_name,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       BrickFromTetMesh<ELEMENT>(xda_file_name, time_stepper_pt)
     {
       // Make the current configuration the undeformed one by
@@ -273,8 +273,8 @@ namespace oomph
     /// are responsible for deleting this mesh.
     RefineableSolidBrickFromTetMesh(
       const std::string xda_file_name,
-      XdaTetMesh<TElement<3, 3>> *&xda_tet_mesh_pt,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      XdaTetMesh<TElement<3, 3>>*& xda_tet_mesh_pt,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       BrickFromTetMesh<ELEMENT>(xda_file_name, xda_tet_mesh_pt, time_stepper_pt)
     {
       // Make the current configuration the undeformed one by

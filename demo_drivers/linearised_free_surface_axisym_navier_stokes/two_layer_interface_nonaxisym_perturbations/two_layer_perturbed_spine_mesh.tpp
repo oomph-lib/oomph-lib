@@ -68,14 +68,14 @@ namespace oomph
   //=======================================================================
   template<class ELEMENT>
   TwoLayerPerturbedSpineMesh<ELEMENT>::TwoLayerPerturbedSpineMesh(
-    const unsigned &nx,
-    const unsigned &ny1,
-    const unsigned &ny2,
-    const double &lx,
-    const double &h1,
-    const double &h2,
-    SpineMesh *&base_mesh_pt,
-    TimeStepper *time_stepper_pt) :
+    const unsigned& nx,
+    const unsigned& ny1,
+    const unsigned& ny2,
+    const double& lx,
+    const double& h1,
+    const double& h2,
+    SpineMesh*& base_mesh_pt,
+    TimeStepper* time_stepper_pt) :
     RectangularQuadMesh<ELEMENT>(
       nx, ny1 + ny2, 0.0, lx, 0.0, h1 + h2, false, false, time_stepper_pt),
     Base_mesh_pt(base_mesh_pt),
@@ -125,15 +125,15 @@ namespace oomph
   //=======================================================================
   template<class ELEMENT>
   TwoLayerPerturbedSpineMesh<ELEMENT>::TwoLayerPerturbedSpineMesh(
-    const unsigned &nx,
-    const unsigned &ny1,
-    const unsigned &ny2,
-    const double &lx,
-    const double &h1,
-    const double &h2,
-    const bool &periodic_in_x,
-    SpineMesh *&base_mesh_pt,
-    TimeStepper *time_stepper_pt) :
+    const unsigned& nx,
+    const unsigned& ny1,
+    const unsigned& ny2,
+    const double& lx,
+    const double& h1,
+    const double& h2,
+    const bool& periodic_in_x,
+    SpineMesh*& base_mesh_pt,
+    TimeStepper* time_stepper_pt) :
     RectangularQuadMesh<ELEMENT>(nx,
                                  ny1 + ny2,
                                  0.0,
@@ -192,16 +192,16 @@ namespace oomph
   //=======================================================================
   template<class ELEMENT>
   TwoLayerPerturbedSpineMesh<ELEMENT>::TwoLayerPerturbedSpineMesh(
-    const unsigned &nx,
-    const unsigned &ny1,
-    const unsigned &ny2,
-    const double &lx,
-    const double &h1,
-    const double &h2,
-    const bool &periodic_in_x,
-    const bool &build_mesh,
-    SpineMesh *&base_mesh_pt,
-    TimeStepper *time_stepper_pt) :
+    const unsigned& nx,
+    const unsigned& ny1,
+    const unsigned& ny2,
+    const double& lx,
+    const double& h1,
+    const double& h2,
+    const bool& periodic_in_x,
+    const bool& build_mesh,
+    SpineMesh*& base_mesh_pt,
+    TimeStepper* time_stepper_pt) :
     RectangularQuadMesh<ELEMENT>(nx,
                                  ny1 + ny2,
                                  0.0,
@@ -306,7 +306,7 @@ namespace oomph
   //===========================================================================
   template<class ELEMENT>
   void TwoLayerPerturbedSpineMesh<ELEMENT>::build_two_layer_mesh(
-    TimeStepper *time_stepper_pt)
+    TimeStepper* time_stepper_pt)
   {
     // Build the underlying quad mesh:
     RectangularQuadMesh<ELEMENT>::build_mesh(time_stepper_pt);
@@ -336,7 +336,7 @@ namespace oomph
 
     // Read out number of linear points in the element
     const unsigned n_p =
-      dynamic_cast<ELEMENT *>(finite_element_pt(0))->nnode_1d();
+      dynamic_cast<ELEMENT*>(finite_element_pt(0))->nnode_1d();
 
     // Allocate store for the spines:
     if (this->Xperiodic)
@@ -356,12 +356,12 @@ namespace oomph
 
     // Create a perturbed spine and pass it a pointer to the corresponding
     // base spine
-    PerturbedSpine *new_perturbed_spine_pt =
+    PerturbedSpine* new_perturbed_spine_pt =
       new PerturbedSpine(time_stepper_pt, Base_mesh_pt->spine_pt(0));
     PerturbedSpine_pt.push_back(new_perturbed_spine_pt);
 
     // Get pointer to node
-    PerturbedSpineNode *nod_pt = element_node_pt(0, 0);
+    PerturbedSpineNode* nod_pt = element_node_pt(0, 0);
 
     // Set the pointer to the spine
     nod_pt->perturbed_spine_pt() = new_perturbed_spine_pt;
@@ -383,7 +383,7 @@ namespace oomph
       for (unsigned l1 = 1; l1 < n_p; l1++)
       {
         // Get pointer to node
-        PerturbedSpineNode *nod_pt = element_node_pt(i * this->Nx, l1 * n_p);
+        PerturbedSpineNode* nod_pt = element_node_pt(i * this->Nx, l1 * n_p);
         // Set the pointer to the spine
         nod_pt->perturbed_spine_pt() = new_perturbed_spine_pt;
         // Set the fraction
@@ -402,7 +402,7 @@ namespace oomph
       for (unsigned l1 = 1; l1 < n_p; l1++)
       {
         // Get pointer to node
-        PerturbedSpineNode *nod_pt =
+        PerturbedSpineNode* nod_pt =
           element_node_pt((Ny1 + i) * this->Nx, l1 * n_p);
 
         // Set the pointer to the spine
@@ -444,7 +444,7 @@ namespace oomph
         PerturbedSpine_pt.push_back(new_perturbed_spine_pt);
 
         // Get pointer to node
-        PerturbedSpineNode *nod_pt = element_node_pt(j, l2);
+        PerturbedSpineNode* nod_pt = element_node_pt(j, l2);
 
         // Set the pointer to the spine
         nod_pt->perturbed_spine_pt() = new_perturbed_spine_pt;
@@ -466,7 +466,7 @@ namespace oomph
           for (unsigned l1 = 1; l1 < n_p; l1++)
           {
             // Get pointer to node
-            PerturbedSpineNode *nod_pt =
+            PerturbedSpineNode* nod_pt =
               element_node_pt(i * this->Nx + j, l1 * n_p + l2);
             // Set the pointer to the spine
             nod_pt->perturbed_spine_pt() = new_perturbed_spine_pt;
@@ -486,7 +486,7 @@ namespace oomph
           for (unsigned l1 = 1; l1 < n_p; l1++)
           {
             // Get pointer to node
-            PerturbedSpineNode *nod_pt =
+            PerturbedSpineNode* nod_pt =
               element_node_pt((Ny1 + i) * this->Nx + j, l1 * n_p + l2);
 
             // Set the pointer to the spine
@@ -513,10 +513,10 @@ namespace oomph
     if (this->Xperiodic)
     {
       // Last spine is the same as first one...
-      PerturbedSpine *final_perturbed_spine_pt = PerturbedSpine_pt[0];
+      PerturbedSpine* final_perturbed_spine_pt = PerturbedSpine_pt[0];
 
       // Get pointer to node
-      PerturbedSpineNode *nod_pt = element_node_pt((this->Nx - 1), (n_p - 1));
+      PerturbedSpineNode* nod_pt = element_node_pt((this->Nx - 1), (n_p - 1));
 
       // Set the pointer to the spine
       nod_pt->perturbed_spine_pt() = final_perturbed_spine_pt;
@@ -535,7 +535,7 @@ namespace oomph
         for (unsigned l1 = 1; l1 < n_p; l1++)
         {
           // Get pointer to node
-          PerturbedSpineNode *nod_pt = element_node_pt(
+          PerturbedSpineNode* nod_pt = element_node_pt(
             i * this->Nx + (this->Nx - 1), l1 * n_p + (n_p - 1));
 
           // Set the pointer to the spine
@@ -567,7 +567,7 @@ namespace oomph
     // Find out how many fluid elements there are
     unsigned long Nfluid = Nx * (Ny1 + Ny2);
     // Create a dummy array of elements
-    Vector<FiniteElement *> dummy;
+    Vector<FiniteElement*> dummy;
 
     // Loop over the elements in horizontal order
     for (unsigned long j = 0; j < Nx; j++)

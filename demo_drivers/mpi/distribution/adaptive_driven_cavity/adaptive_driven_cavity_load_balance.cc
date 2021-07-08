@@ -112,7 +112,7 @@ public:
   void build_mesh();
 
   /// Doc the solution
-  void doc_solution(const std::string &header);
+  void doc_solution(const std::string& header);
 
 private:
   /// Doc info object
@@ -146,7 +146,7 @@ private:
         double pvalue = 0.0;
 
         // Cast to proper element and fix pressure
-        dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e))
+        dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))
           ->fix_pressure(pdof, pvalue);
       }
     }
@@ -198,15 +198,15 @@ void RefineableDrivenCavityProblem<ELEMENT>::build_mesh()
     new RefineableRectangularQuadMesh<ELEMENT>(n_x, n_y, l_x, l_y);
 
   // Set error estimator
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
-  dynamic_cast<RefineableRectangularQuadMesh<ELEMENT> *>(mesh_pt())
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
+  dynamic_cast<RefineableRectangularQuadMesh<ELEMENT>*>(mesh_pt())
     ->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Fine tune error targets to get "interesting" refinement pattern
-  dynamic_cast<RefineableRectangularQuadMesh<ELEMENT> *>(mesh_pt())
+  dynamic_cast<RefineableRectangularQuadMesh<ELEMENT>*>(mesh_pt())
     ->max_permitted_error() = 1.0e-5;
 
-  dynamic_cast<RefineableRectangularQuadMesh<ELEMENT> *>(mesh_pt())
+  dynamic_cast<RefineableRectangularQuadMesh<ELEMENT>*>(mesh_pt())
     ->min_permitted_error() = 1.0e-6;
 
   // Set the boundary conditions for this problem: All nodes are
@@ -235,7 +235,7 @@ void RefineableDrivenCavityProblem<ELEMENT>::build_mesh()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Physical_Variables::Re;
   } // end loop over elements
@@ -250,7 +250,7 @@ void RefineableDrivenCavityProblem<ELEMENT>::build_mesh()
 //========================================================================
 template<class ELEMENT>
 void RefineableDrivenCavityProblem<ELEMENT>::doc_solution(
-  const std::string &header)
+  const std::string& header)
 {
   ofstream some_file;
   ofstream some_file2;
@@ -340,7 +340,7 @@ void RefineableDrivenCavityProblem<ELEMENT>::doc_solution(
     unsigned nnod = mesh_pt()->nnode();
     for (unsigned j = 0; j < nnod; j++)
     {
-      Node *nod_pt = mesh_pt()->node_pt(j);
+      Node* nod_pt = mesh_pt()->node_pt(j);
       if (!(nod_pt->is_halo()))
       {
         count_non_halo++;
@@ -375,7 +375,7 @@ void RefineableDrivenCavityProblem<ELEMENT>::doc_solution(
 //==start_of_main======================================================
 /// Driver for RefineableDrivenCavity test problem
 //=====================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
 #ifdef OOMPH_HAS_MPI
   // Initialise MPI

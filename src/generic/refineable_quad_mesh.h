@@ -66,7 +66,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    RefineableQuadMesh(const RefineableQuadMesh &dummy)
+    RefineableQuadMesh(const RefineableQuadMesh& dummy)
     {
       BrokenCopy::broken_copy("RefineableQuadMesh");
     }
@@ -102,7 +102,7 @@ namespace oomph
       if (this->Forest_pt != 0)
       {
         // Get all the tree nodes
-        Vector<Tree *> all_tree_nodes_pt;
+        Vector<Tree*> all_tree_nodes_pt;
         this->Forest_pt->stick_all_tree_nodes_into_vector(all_tree_nodes_pt);
 
         // Get min and max refinement level from the tree
@@ -149,7 +149,7 @@ namespace oomph
           delete this->Forest_pt;
 
           // Empty dummy vector to build empty forest
-          Vector<TreeRoot *> trees_pt;
+          Vector<TreeRoot*> trees_pt;
 
           // Make a new (empty) Forest
           this->Forest_pt = new QuadTreeForest(trees_pt);
@@ -157,21 +157,21 @@ namespace oomph
         }
 
         // Vector to store trees for new Forest
-        Vector<TreeRoot *> trees_pt;
+        Vector<TreeRoot*> trees_pt;
 
         // Loop over tree nodes (e.g. elements)
         unsigned n_tree_nodes = all_tree_nodes_pt.size();
         for (unsigned e = 0; e < n_tree_nodes; e++)
         {
-          Tree *tree_pt = all_tree_nodes_pt[e];
+          Tree* tree_pt = all_tree_nodes_pt[e];
 
           // If the object_pt has been flushed then we don't want to keep
           // this tree
           if (tree_pt->object_pt() != 0)
           {
             // Get the refinement level of the current tree node
-            RefineableElement *el_pt =
-              dynamic_cast<RefineableElement *>(tree_pt->object_pt());
+            RefineableElement* el_pt =
+              dynamic_cast<RefineableElement*>(tree_pt->object_pt());
             unsigned level = el_pt->refinement_level();
 
             // If we are below the minimum refinement level, remove tree
@@ -190,14 +190,14 @@ namespace oomph
             {
               // Get the sons (if there are any) and store them
               unsigned n_sons = tree_pt->nsons();
-              Vector<Tree *> backed_up_sons(n_sons);
+              Vector<Tree*> backed_up_sons(n_sons);
               for (unsigned i_son = 0; i_son < n_sons; i_son++)
               {
                 backed_up_sons[i_son] = tree_pt->son_pt(i_son);
               }
 
               // Make the element into a new tree-root
-              QuadTreeRoot *tree_root_pt = new QuadTreeRoot(el_pt);
+              QuadTreeRoot* tree_root_pt = new QuadTreeRoot(el_pt);
 
               // Pass sons
               tree_root_pt->set_son_pt(backed_up_sons);
@@ -205,14 +205,14 @@ namespace oomph
               // Loop over sons and make the new treeroot their father
               for (unsigned i_son = 0; i_son < n_sons; i_son++)
               {
-                Tree *son_pt = backed_up_sons[i_son];
+                Tree* son_pt = backed_up_sons[i_son];
 
                 // Tell the son about its new father (which is also the root)
                 son_pt->set_father_pt(tree_root_pt);
                 son_pt->root_pt() = tree_root_pt;
 
                 // ...and then tell all the descendants too
-                Vector<Tree *> all_sons_pt;
+                Vector<Tree*> all_sons_pt;
                 son_pt->stick_all_tree_nodes_into_vector(all_sons_pt);
                 unsigned n = all_sons_pt.size();
                 for (unsigned i = 0; i < n; i++)
@@ -255,7 +255,7 @@ namespace oomph
       {
         // Each finite element in the coarse base mesh gets associated
         // with (the root of) a QuadTree. Store QuadTreeRoots in vector:
-        Vector<TreeRoot *> trees_pt;
+        Vector<TreeRoot*> trees_pt;
 
         // Loop over all elements, build corresponding QuadTree
         // and store QuadTreeRoots in vector:
@@ -263,7 +263,7 @@ namespace oomph
         for (unsigned e = 0; e < n_element; e++)
         {
           // Get pointer to full element type
-          ELEMENT *el_pt = dynamic_cast<ELEMENT *>(this->element_pt(e));
+          ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->element_pt(e));
 
           // Build associated quadtree(root) -- pass pointer to corresponding
           // finite element and add the pointer to vector of quadtree (roots):

@@ -44,10 +44,10 @@ namespace oomph
   /// Mesh build fct
   //=======================================================================
   template<class ELEMENT>
-  void CircularCylindricalShellMesh<ELEMENT>::build_mesh(const unsigned &nx,
-                                                         const unsigned &ny,
-                                                         const double &lx,
-                                                         const double &ly)
+  void CircularCylindricalShellMesh<ELEMENT>::build_mesh(const unsigned& nx,
+                                                         const unsigned& ny,
+                                                         const double& lx,
+                                                         const double& ly)
   {
     // Mesh can only be built with 2D Qelements.
     MeshChecker::assert_geometric_element<QElementGeometricBase, ELEMENT>(2);
@@ -68,7 +68,7 @@ namespace oomph
     // for all nodes
 
     // Initialise map
-    std::map<Node *, double> min_dx;
+    std::map<Node*, double> min_dx;
     unsigned nnod = nnode();
     for (unsigned j = 0; j < nnod; j++) min_dx[node_pt(j)] = DBL_MAX;
 
@@ -76,16 +76,16 @@ namespace oomph
     unsigned nelem = nelement();
     for (unsigned e = 0; e < nelem; e++)
     {
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(element_pt(e));
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(element_pt(e));
       unsigned n_node = el_pt->nnode();
       for (unsigned j = 0; j < n_node; j++)
       {
-        SolidNode *nod_pt = dynamic_cast<SolidNode *>(el_pt->node_pt(j));
+        SolidNode* nod_pt = dynamic_cast<SolidNode*>(el_pt->node_pt(j));
         double x = nod_pt->xi(0);
         for (unsigned k = 0; k < n_node; k++)
         {
           double dx =
-            fabs(x - dynamic_cast<SolidNode *>(el_pt->node_pt(k))->xi(0));
+            fabs(x - dynamic_cast<SolidNode*>(el_pt->node_pt(k))->xi(0));
           if (dx < min_dx[nod_pt])
           {
             if (dx != 0.0) min_dx[nod_pt] = dx;
@@ -111,7 +111,7 @@ namespace oomph
       // Adjust for non-uniform spacing
       for (unsigned j = 0; j < n_node; j++)
       {
-        SolidNode *nod_pt = node_pt(j);
+        SolidNode* nod_pt = node_pt(j);
 
         // Get min. spacing for non-uniform axial spacing
         xstep = min_dx[nod_pt];
@@ -128,20 +128,20 @@ namespace oomph
   //=======================================================================
   template<class ELEMENT>
   void CircularCylindricalShellMesh<ELEMENT>::assign_undeformed_positions(
-    GeomObject *const &undeformed_midplane_pt)
+    GeomObject* const& undeformed_midplane_pt)
   {
     // Loop over nodes in elements
     unsigned nelem = nelement();
     for (unsigned e = 0; e < nelem; e++)
     {
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(element_pt(e));
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(element_pt(e));
       unsigned n_node = el_pt->nnode();
       for (unsigned n = 0; n < n_node; n++)
       {
         // Get the Lagrangian coordinates
         Vector<double> xi(2);
-        xi[0] = dynamic_cast<SolidNode *>(el_pt->node_pt(n))->xi(0);
-        xi[1] = dynamic_cast<SolidNode *>(el_pt->node_pt(n))->xi(1);
+        xi[0] = dynamic_cast<SolidNode*>(el_pt->node_pt(n))->xi(0);
+        xi[1] = dynamic_cast<SolidNode*>(el_pt->node_pt(n))->xi(1);
 
         // Assign memory for values of derivatives, etc
         Vector<double> R(3);

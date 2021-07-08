@@ -39,13 +39,13 @@ namespace oomph
   namespace QElement1FaceToBulkCoordinates
   {
     /// The translation scheme for the face s0 = -1.0
-    void face0(const Vector<double> &s, Vector<double> &s_bulk)
+    void face0(const Vector<double>& s, Vector<double>& s_bulk)
     {
       s_bulk[0] = -1.0;
     }
 
     /// The translation scheme for the face s0 = 1.0
-    void face1(const Vector<double> &s, Vector<double> &s_bulk)
+    void face1(const Vector<double>& s, Vector<double>& s_bulk)
     {
       s_bulk[0] = 1.0;
     }
@@ -59,9 +59,9 @@ namespace oomph
   namespace QElement1BulkCoordinateDerivatives
   {
     /// Function for both faces -- the bulk coordinate is fixed on both
-    void faces0(const Vector<double> &s,
-                DenseMatrix<double> &dsbulk_dsface,
-                unsigned &interior_direction)
+    void faces0(const Vector<double>& s,
+                DenseMatrix<double>& dsbulk_dsface,
+                unsigned& interior_direction)
     {
       // Bulk coordinate s[0] does not vary along the face
       dsbulk_dsface(0, 0) = 0.0;
@@ -78,28 +78,28 @@ namespace oomph
   namespace QElement2FaceToBulkCoordinates
   {
     /// The translation scheme for the west face (s0 = -1.0)
-    void face0(const Vector<double> &s, Vector<double> &s_bulk)
+    void face0(const Vector<double>& s, Vector<double>& s_bulk)
     {
       s_bulk[0] = -1.0;
       s_bulk[1] = s[0];
     }
 
     /// The translation scheme for the south face (s1 = -1.0)
-    void face1(const Vector<double> &s, Vector<double> &s_bulk)
+    void face1(const Vector<double>& s, Vector<double>& s_bulk)
     {
       s_bulk[0] = s[0];
       s_bulk[1] = -1.0;
     }
 
     /// The translation scheme for the east face (s0 = 1.0)
-    void face2(const Vector<double> &s, Vector<double> &s_bulk)
+    void face2(const Vector<double>& s, Vector<double>& s_bulk)
     {
       s_bulk[0] = 1.0;
       s_bulk[1] = s[0];
     }
 
     /// The translation scheme for the north face (s1 = 1.0)
-    void face3(const Vector<double> &s, Vector<double> &s_bulk)
+    void face3(const Vector<double>& s, Vector<double>& s_bulk)
     {
       s_bulk[0] = s[0];
       s_bulk[1] = 1.0;
@@ -114,9 +114,9 @@ namespace oomph
   namespace QElement2BulkCoordinateDerivatives
   {
     /// Function for the east and west faces, along which s0 is fixed
-    void faces0(const Vector<double> &s,
-                DenseMatrix<double> &dsbulk_dsface,
-                unsigned &interior_direction)
+    void faces0(const Vector<double>& s,
+                DenseMatrix<double>& dsbulk_dsface,
+                unsigned& interior_direction)
     {
       // Bulk coordinate s[0] does not vary along the face
       dsbulk_dsface(0, 0) = 0.0;
@@ -128,9 +128,9 @@ namespace oomph
     }
 
     /// Function for the north and south faces, along which s1 is fixed
-    void faces1(const Vector<double> &s,
-                DenseMatrix<double> &dsbulk_dsface,
-                unsigned &interior_direction)
+    void faces1(const Vector<double>& s,
+                DenseMatrix<double>& dsbulk_dsface,
+                unsigned& interior_direction)
     {
       // Bulk coordinate s[0] is the face coordinate
       dsbulk_dsface(0, 0) = 1.0;
@@ -149,7 +149,7 @@ namespace oomph
   namespace QElement3FaceToBulkCoordinates
   {
     /// The translation scheme for the left face (s0 = -1.0)
-    void face0(const Vector<double> &s, Vector<double> &s_bulk)
+    void face0(const Vector<double>& s, Vector<double>& s_bulk)
     {
       s_bulk[0] = -1.0;
       s_bulk[1] = s[0];
@@ -157,7 +157,7 @@ namespace oomph
     }
 
     /// The translation scheme for the down face (s1 = -1.0)
-    void face1(const Vector<double> &s, Vector<double> &s_bulk)
+    void face1(const Vector<double>& s, Vector<double>& s_bulk)
     {
       s_bulk[0] = s[0];
       s_bulk[1] = -1.0;
@@ -165,7 +165,7 @@ namespace oomph
     }
 
     /// The translation scheme for the back face (s2 = -1.0)
-    void face2(const Vector<double> &s, Vector<double> &s_bulk)
+    void face2(const Vector<double>& s, Vector<double>& s_bulk)
     {
       s_bulk[0] = s[0];
       s_bulk[1] = s[1];
@@ -173,7 +173,7 @@ namespace oomph
     }
 
     /// The translation scheme for the right face (s0 = 1.0)
-    void face3(const Vector<double> &s, Vector<double> &s_bulk)
+    void face3(const Vector<double>& s, Vector<double>& s_bulk)
     {
       s_bulk[0] = 1.0;
       s_bulk[1] = s[0];
@@ -181,7 +181,7 @@ namespace oomph
     }
 
     /// The translation scheme for the up face (s1 = 1.0)
-    void face4(const Vector<double> &s, Vector<double> &s_bulk)
+    void face4(const Vector<double>& s, Vector<double>& s_bulk)
     {
       s_bulk[0] = s[0];
       s_bulk[1] = 1.0;
@@ -189,7 +189,7 @@ namespace oomph
     }
 
     /// The translation scheme for the front face (s2 = 1.0)
-    void face5(const Vector<double> &s, Vector<double> &s_bulk)
+    void face5(const Vector<double>& s, Vector<double>& s_bulk)
     {
       s_bulk[0] = s[0];
       s_bulk[1] = s[1];
@@ -205,9 +205,9 @@ namespace oomph
   namespace QElement3BulkCoordinateDerivatives
   {
     /// Function for the back and front  faces, along which s0 is fixed
-    void faces0(const Vector<double> &s,
-                DenseMatrix<double> &dsbulk_dsface,
-                unsigned &interior_direction)
+    void faces0(const Vector<double>& s,
+                DenseMatrix<double>& dsbulk_dsface,
+                unsigned& interior_direction)
     {
       // Bulk coordinate s[0] does not vary along the face
       dsbulk_dsface(0, 0) = 0.0;
@@ -224,9 +224,9 @@ namespace oomph
     }
 
     /// Function for the up and down  faces, along which s1 is fixed
-    void faces1(const Vector<double> &s,
-                DenseMatrix<double> &dsbulk_dsface,
-                unsigned &interior_direction)
+    void faces1(const Vector<double>& s,
+                DenseMatrix<double>& dsbulk_dsface,
+                unsigned& interior_direction)
     {
       // Bulk coordinate s[0] is face coordinate 0
       dsbulk_dsface(0, 0) = 1.0;
@@ -243,9 +243,9 @@ namespace oomph
     }
 
     /// Function for the left and right  faces, along which s2 is fixed
-    void faces2(const Vector<double> &s,
-                DenseMatrix<double> &dsbulk_dsface,
-                unsigned &interior_direction)
+    void faces2(const Vector<double>& s,
+                DenseMatrix<double>& dsbulk_dsface,
+                unsigned& interior_direction)
     {
       // Bulk coordinate s[0] is face coordinate 0
       dsbulk_dsface(0, 0) = 1.0;

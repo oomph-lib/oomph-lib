@@ -55,9 +55,9 @@ namespace oomph
     }
 
     /// \short Nodal value of boundary coordinate
-    double zeta_nodal(const unsigned &n,
-                      const unsigned &k,
-                      const unsigned &i) const
+    double zeta_nodal(const unsigned& n,
+                      const unsigned& k,
+                      const unsigned& i) const
     {
       // Vector in which to hold the intrinsic coordinate
       Vector<double> zeta(this->dim());
@@ -82,7 +82,7 @@ namespace oomph
     }
 
     /// Boundary id
-    void set_boundary_id(const unsigned &boundary_id)
+    void set_boundary_id(const unsigned& boundary_id)
     {
       Boundary_id = boundary_id;
     }
@@ -107,12 +107,11 @@ namespace oomph
     /// \short Specify the values associated with field fld.
     /// The information is returned in a vector of pairs which comprise
     /// the Data object and the value within it, that correspond to field fld.
-    Vector<std::pair<Data *, unsigned>> data_values_of_field(
-      const unsigned &fld)
+    Vector<std::pair<Data*, unsigned>> data_values_of_field(const unsigned& fld)
     {
       // Create the vector
       unsigned nnod = this->nnode();
-      Vector<std::pair<Data *, unsigned>> data_values(nnod);
+      Vector<std::pair<Data*, unsigned>> data_values(nnod);
 
       // Loop over all nodes
       for (unsigned j = 0; j < nnod; j++)
@@ -134,7 +133,7 @@ namespace oomph
     /// \short Number of history values to be stored for fld-th field
     /// (includes current value!). Extract from first node but assume it's
     /// the same for all.
-    unsigned nhistory_values_for_projection(const unsigned &fld)
+    unsigned nhistory_values_for_projection(const unsigned& fld)
     {
       return this->node_pt(0)->ntstorage();
     }
@@ -149,9 +148,9 @@ namespace oomph
 
     /// \short Return Jacobian of mapping and shape functions of field fld
     /// at local coordinate s.
-    double jacobian_and_shape_of_field(const unsigned &fld,
-                                       const Vector<double> &s,
-                                       Shape &psi)
+    double jacobian_and_shape_of_field(const unsigned& fld,
+                                       const Vector<double>& s,
+                                       Shape& psi)
     {
       this->shape(s, psi);
       return this->J_eulerian(s);
@@ -159,9 +158,9 @@ namespace oomph
 
     /// \short Return interpolated field fld at local coordinate s, at time
     /// level t (t=0: present; t>0: history values)
-    double get_field(const unsigned &t,
-                     const unsigned &fld,
-                     const Vector<double> &s)
+    double get_field(const unsigned& t,
+                     const unsigned& fld,
+                     const Vector<double>& s)
     {
       // Local shape function
       unsigned n_node = this->nnode();
@@ -182,14 +181,14 @@ namespace oomph
     }
 
     /// \short Return number of values in field fld
-    unsigned nvalue_of_field(const unsigned &fld)
+    unsigned nvalue_of_field(const unsigned& fld)
     {
       return this->nnode();
     }
 
     /// \short Return local equation number of value j in field fld. Assumed to
     /// be the local nodal equation.
-    int local_equation(const unsigned &fld, const unsigned &j)
+    int local_equation(const unsigned& fld, const unsigned& j)
     {
       return this->nodal_local_eqn(j, fld);
     }
@@ -226,9 +225,9 @@ namespace oomph
     /// index of the relevant nodal value!) to be projected.
     /// If omitted, we project all of them.
     BackupMeshForProjection(
-      Mesh *mesh_pt,
-      const unsigned &boundary_id,
-      const unsigned &id_of_field_to_be_projected = UINT_MAX) :
+      Mesh* mesh_pt,
+      const unsigned& boundary_id,
+      const unsigned& id_of_field_to_be_projected = UINT_MAX) :
       Boundary_id(boundary_id),
       ID_of_field_to_be_projected(id_of_field_to_be_projected)
     {
@@ -240,12 +239,12 @@ namespace oomph
       Node_pt.reserve(mesh_pt->nnode());
       for (unsigned e = 0; e < nel; e++)
       {
-        FiniteElement *el_pt = mesh_pt->finite_element_pt(e);
+        FiniteElement* el_pt = mesh_pt->finite_element_pt(e);
         if (el_pt != 0)
         {
           // Make new element
 #ifdef PARANOID
-          if (dynamic_cast<GEOMETRIC_ELEMENT *>(mesh_pt->element_pt(e)) == 0)
+          if (dynamic_cast<GEOMETRIC_ELEMENT*>(mesh_pt->element_pt(e)) == 0)
           {
             std::ostringstream error_message;
             error_message << "Element is of wrong type " << typeid(el_pt).name()
@@ -269,8 +268,8 @@ namespace oomph
 #endif
 
           // Make a new element
-          GenericLagrangeInterpolatedProjectableElement<GEOMETRIC_ELEMENT>
-            *new_el_pt = new GenericLagrangeInterpolatedProjectableElement<
+          GenericLagrangeInterpolatedProjectableElement<GEOMETRIC_ELEMENT>*
+            new_el_pt = new GenericLagrangeInterpolatedProjectableElement<
               GEOMETRIC_ELEMENT>;
 
           // Set boundary ID
@@ -287,10 +286,10 @@ namespace oomph
           unsigned nnod = el_pt->nnode();
           for (unsigned j = 0; j < nnod; j++)
           {
-            Node *old_node_pt = el_pt->node_pt(j);
+            Node* old_node_pt = el_pt->node_pt(j);
             if (New_node_pt[old_node_pt] == 0)
             {
-              Node *new_nod_pt = 0;
+              Node* new_nod_pt = 0;
 
 #ifdef PARANOID
               // Check boundary node-ness
@@ -309,11 +308,11 @@ namespace oomph
               unsigned first_index_in_old_node = 0;
               if (ID_of_field_to_be_projected != UINT_MAX)
               {
-                nval = dynamic_cast<BoundaryNodeBase *>(old_node_pt)
+                nval = dynamic_cast<BoundaryNodeBase*>(old_node_pt)
                          ->nvalue_assigned_by_face_element(
                            ID_of_field_to_be_projected);
                 first_index_in_old_node =
-                  dynamic_cast<BoundaryNodeBase *>(old_node_pt)
+                  dynamic_cast<BoundaryNodeBase*>(old_node_pt)
                     ->index_of_first_value_assigned_by_face_element(
                       ID_of_field_to_be_projected);
               }
@@ -387,17 +386,17 @@ namespace oomph
     /// pointed to by new_mesh_pt. Note that elements in the new mesh do
     /// not have to be projectable. The original mesh may by now have
     /// been deleted.
-    void project_onto_new_mesh(Mesh *new_mesh_pt)
+    void project_onto_new_mesh(Mesh* new_mesh_pt)
     {
       // Make copy of new mesh that we can project onto
-      BackupMeshForProjection<GEOMETRIC_ELEMENT> *projectable_new_mesh_pt =
+      BackupMeshForProjection<GEOMETRIC_ELEMENT>* projectable_new_mesh_pt =
         new BackupMeshForProjection<GEOMETRIC_ELEMENT>(
           new_mesh_pt, Boundary_id, ID_of_field_to_be_projected);
 
       // Create projection problem
       ProjectionProblem<
-        GenericLagrangeInterpolatedProjectableElement<GEOMETRIC_ELEMENT>>
-        *proj_problem_pt = new ProjectionProblem<
+        GenericLagrangeInterpolatedProjectableElement<GEOMETRIC_ELEMENT>>*
+        proj_problem_pt = new ProjectionProblem<
           GenericLagrangeInterpolatedProjectableElement<GEOMETRIC_ELEMENT>>;
 
       // Set the mesh we want to project onto
@@ -420,15 +419,15 @@ namespace oomph
     /// mesh still exists!
     void copy_onto_original_mesh()
     {
-      for (std::map<Node *, Node *>::iterator it = New_node_pt.begin();
+      for (std::map<Node*, Node*>::iterator it = New_node_pt.begin();
            it != New_node_pt.end();
            it++)
       {
         // Get old node (in the previously existing mesh)
-        Node *old_node_pt = (*it).first;
+        Node* old_node_pt = (*it).first;
 
         // ...and corresponding new one (in the mesh where we did the projection
-        Node *new_node_pt = (*it).second;
+        Node* new_node_pt = (*it).second;
 
         // How many values are we moving across?
         unsigned nval = old_node_pt->nvalue();
@@ -436,10 +435,10 @@ namespace oomph
         if (ID_of_field_to_be_projected != UINT_MAX)
         {
           nval =
-            dynamic_cast<BoundaryNodeBase *>(old_node_pt)
+            dynamic_cast<BoundaryNodeBase*>(old_node_pt)
               ->nvalue_assigned_by_face_element(ID_of_field_to_be_projected);
           first_index_in_old_node =
-            dynamic_cast<BoundaryNodeBase *>(old_node_pt)
+            dynamic_cast<BoundaryNodeBase*>(old_node_pt)
               ->index_of_first_value_assigned_by_face_element(
                 ID_of_field_to_be_projected);
         }
@@ -459,7 +458,7 @@ namespace oomph
 
   private:
     /// Map returning new node, labeled by node point in original mesh
-    std::map<Node *, Node *> New_node_pt;
+    std::map<Node*, Node*> New_node_pt;
 
     /// Boundary id
     unsigned Boundary_id;

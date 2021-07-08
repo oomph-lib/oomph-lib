@@ -50,9 +50,9 @@ namespace oomph
   /// prec_pt.
   //============================================================================
   void PreconditionerArray::setup_preconditioners(
-    Vector<CRDoubleMatrix *> matrix_pt,
-    Vector<Preconditioner *> prec_pt,
-    const OomphCommunicator *comm_pt)
+    Vector<CRDoubleMatrix*> matrix_pt,
+    Vector<Preconditioner*> prec_pt,
+    const OomphCommunicator* comm_pt)
   {
     // clean memory
     this->clean_up_memory();
@@ -194,7 +194,7 @@ namespace oomph
     Local_communicator_pt = Global_communicator_pt->split(Color, my_rank);
 
     // pointer for the local matrix on this processor
-    CRDoubleMatrix *local_matrix_pt = 0;
+    CRDoubleMatrix* local_matrix_pt = 0;
 
     // resize storage for details of the data to be sent and received
     First_row_for_proc.resize(Nprec);
@@ -318,7 +318,7 @@ namespace oomph
           {
             if (Nrow_local_for_proc[i][p] != 0)
             {
-              int *row_start = matrix_pt[i]->row_start();
+              int* row_start = matrix_pt[i]->row_start();
               unsigned k =
                 First_row_for_proc[i][p] - current_first_row[my_rank];
               nnz_send[i][p] =
@@ -388,9 +388,9 @@ namespace oomph
           }
 
           // get pointers to the underlying data in the current matrix
-          double *values_send = matrix_pt[i]->value();
-          int *row_start_send = matrix_pt[i]->row_start();
-          int *column_index_send = matrix_pt[i]->column_index();
+          double* values_send = matrix_pt[i]->value();
+          int* row_start_send = matrix_pt[i]->row_start();
+          int* column_index_send = matrix_pt[i]->column_index();
 
           // send and receive the contents of the vector
           for (unsigned p = 0; p < nproc; p++)
@@ -465,7 +465,7 @@ namespace oomph
           if (i == Color)
           {
             // create the local distribution for this matrix
-            LinearAlgebraDistribution *temp_dist_pt =
+            LinearAlgebraDistribution* temp_dist_pt =
               new LinearAlgebraDistribution(
                 Local_communicator_pt, matrix_pt[i]->nrow(), false);
 
@@ -474,9 +474,9 @@ namespace oomph
             delete temp_dist_pt; // (dist has now been copied)
 
             // get pointers to the underlying data
-            double *values_pt = matrix_pt[i]->value();
-            int *column_index_pt = matrix_pt[i]->column_index();
-            int *row_start_pt = matrix_pt[i]->row_start();
+            double* values_pt = matrix_pt[i]->value();
+            int* column_index_pt = matrix_pt[i]->column_index();
+            int* row_start_pt = matrix_pt[i]->row_start();
 
             // build the matrix without a copy of the data
             local_matrix_pt->build_without_copy(matrix_pt[i]->ncol(),
@@ -497,7 +497,7 @@ namespace oomph
           if (i == Color)
           {
             // create the local distribution for this matrix
-            LinearAlgebraDistribution *temp_dist_pt =
+            LinearAlgebraDistribution* temp_dist_pt =
               new LinearAlgebraDistribution(Local_communicator_pt,
                                             target_first_row[i][my_rank],
                                             target_nrow_local[i][my_rank]);
@@ -535,9 +535,9 @@ namespace oomph
             }
 
             // storage for received data
-            double *values_recv = new double[nnz_total];
-            int *column_index_recv = new int[nnz_total];
-            int *row_start_recv = new int[target_nrow_local[i][my_rank] + 1];
+            double* values_recv = new double[nnz_total];
+            int* column_index_recv = new int[nnz_total];
+            int* row_start_recv = new int[target_nrow_local[i][my_rank] + 1];
 
             // send and receive the contents of the vector
             for (unsigned pp = 0; pp < nproc; pp++)
@@ -603,9 +603,9 @@ namespace oomph
                 if (nnz_recv[i][p] != 0)
                 {
                   // get pointers to the underlying data in the current matrix
-                  double *values_send = matrix_pt[i]->value();
-                  int *row_start_send = matrix_pt[i]->row_start();
-                  int *column_index_send = matrix_pt[i]->column_index();
+                  double* values_send = matrix_pt[i]->value();
+                  int* row_start_send = matrix_pt[i]->row_start();
+                  int* column_index_send = matrix_pt[i]->column_index();
 
                   // offset for row_start send to self
                   unsigned offset_n_send =
@@ -694,7 +694,7 @@ namespace oomph
     else if (Method == 1)
     {
       // temporary storgage for nnz recv
-      unsigned *nnz_recv_temp = new unsigned[nproc * Nprec];
+      unsigned* nnz_recv_temp = new unsigned[nproc * Nprec];
       for (unsigned j = 0; j < nproc * Nprec; j++)
       {
         nnz_recv_temp[j] = 0;
@@ -712,7 +712,7 @@ namespace oomph
           if (i == Color)
           {
             // create the local distribution for this matrix
-            LinearAlgebraDistribution *temp_dist_pt =
+            LinearAlgebraDistribution* temp_dist_pt =
               new LinearAlgebraDistribution(
                 Local_communicator_pt, matrix_pt[i]->nrow(), false);
 
@@ -721,9 +721,9 @@ namespace oomph
             delete temp_dist_pt; // (dist has now been copied)
 
             // get pointers to the underlying data
-            double *values_pt = matrix_pt[i]->value();
-            int *column_index_pt = matrix_pt[i]->column_index();
-            int *row_start_pt = matrix_pt[i]->row_start();
+            double* values_pt = matrix_pt[i]->value();
+            int* column_index_pt = matrix_pt[i]->column_index();
+            int* row_start_pt = matrix_pt[i]->row_start();
 
             // build the matrix without a copy of the data
             local_matrix_pt->build_without_copy(matrix_pt[i]->ncol(),
@@ -823,7 +823,7 @@ namespace oomph
           {
             if (Nrow_local_for_proc[i][p] != 0)
             {
-              int *row_start = matrix_pt[i]->row_start();
+              int* row_start = matrix_pt[i]->row_start();
               unsigned k =
                 First_row_for_proc[i][p] - current_first_row[my_rank];
               nnz_send[i][p] =
@@ -935,9 +935,9 @@ namespace oomph
       Vector<MPI_Datatype> datatypes;
 
       // storage for received data
-      double *values_recv = new double[nnz_total];
-      int *column_index_recv = new int[nnz_total];
-      int *row_start_recv = new int[target_nrow_local[Color][my_rank] + 1];
+      double* values_recv = new double[nnz_total];
+      int* column_index_recv = new int[nnz_total];
+      int* row_start_recv = new int[target_nrow_local[Color][my_rank] + 1];
 
       ///////////////////////////////////////////////////////////////////////////
       // SEND
@@ -950,9 +950,9 @@ namespace oomph
       for (unsigned i = 0; i < Nprec; i++)
       {
         // get pointers to the underlying data in the current matrix
-        double *values_send = matrix_pt[i]->value();
-        int *row_start_send = matrix_pt[i]->row_start();
-        int *column_index_send = matrix_pt[i]->column_index();
+        double* values_send = matrix_pt[i]->value();
+        int* row_start_send = matrix_pt[i]->row_start();
+        int* column_index_send = matrix_pt[i]->column_index();
 
         // send and receive the contents of the vector
         for (unsigned p = 0; p < nproc; p++)
@@ -1142,9 +1142,9 @@ namespace oomph
       if (nnz_recv[Color][my_rank] != 0)
       {
         // get pointers to the underlying data in the current matrix
-        double *values_send = matrix_pt[Color]->value();
-        int *row_start_send = matrix_pt[Color]->row_start();
-        int *column_index_send = matrix_pt[Color]->column_index();
+        double* values_send = matrix_pt[Color]->value();
+        int* row_start_send = matrix_pt[Color]->row_start();
+        int* column_index_send = matrix_pt[Color]->column_index();
 
         // offset for row_start send to self
         unsigned offset_n_send = First_row_for_proc[Color][my_rank] -
@@ -1185,7 +1185,7 @@ namespace oomph
       }
 
       // create the local distribution for this matrix
-      LinearAlgebraDistribution *temp_dist_pt =
+      LinearAlgebraDistribution* temp_dist_pt =
         new LinearAlgebraDistribution(Local_communicator_pt,
                                       target_first_row[Color][my_rank],
                                       target_nrow_local[Color][my_rank]);
@@ -1255,7 +1255,7 @@ namespace oomph
     else if (Method == 2)
     {
       // temporary storgage for nnz recv
-      unsigned *nnz_recv_temp = new unsigned[nproc * Nprec];
+      unsigned* nnz_recv_temp = new unsigned[nproc * Nprec];
       for (unsigned j = 0; j < nproc * Nprec; j++)
       {
         nnz_recv_temp[j] = 0;
@@ -1273,7 +1273,7 @@ namespace oomph
           if (i == Color)
           {
             // create the local distribution for this matrix
-            LinearAlgebraDistribution *temp_dist_pt =
+            LinearAlgebraDistribution* temp_dist_pt =
               new LinearAlgebraDistribution(
                 Local_communicator_pt, matrix_pt[i]->nrow(), false);
 
@@ -1282,9 +1282,9 @@ namespace oomph
             delete temp_dist_pt; // (dist has now been copied)
 
             // get pointers to the underlying data
-            double *values_pt = matrix_pt[i]->value();
-            int *column_index_pt = matrix_pt[i]->column_index();
-            int *row_start_pt = matrix_pt[i]->row_start();
+            double* values_pt = matrix_pt[i]->value();
+            int* column_index_pt = matrix_pt[i]->column_index();
+            int* row_start_pt = matrix_pt[i]->row_start();
 
             // build the matrix without a copy of the data
             local_matrix_pt->build_without_copy(matrix_pt[i]->ncol(),
@@ -1384,7 +1384,7 @@ namespace oomph
           {
             if (Nrow_local_for_proc[i][p] != 0)
             {
-              int *row_start = matrix_pt[i]->row_start();
+              int* row_start = matrix_pt[i]->row_start();
               unsigned k =
                 First_row_for_proc[i][p] - current_first_row[my_rank];
               nnz_send[i][p] =
@@ -1496,9 +1496,9 @@ namespace oomph
       Vector<MPI_Datatype> datatypes;
 
       // storage for received data
-      double *values_recv = new double[nnz_total];
-      int *column_index_recv = new int[nnz_total];
-      int *row_start_recv = new int[target_nrow_local[Color][my_rank] + 1];
+      double* values_recv = new double[nnz_total];
+      int* column_index_recv = new int[nnz_total];
+      int* row_start_recv = new int[target_nrow_local[Color][my_rank] + 1];
 
       ///////////////////////////////////////////////////////////////////////////
       // RECV
@@ -1608,9 +1608,9 @@ namespace oomph
       for (unsigned i = 0; i < Nprec; i++)
       {
         // get pointers to the underlying data in the current matrix
-        double *values_send = matrix_pt[i]->value();
-        int *row_start_send = matrix_pt[i]->row_start();
-        int *column_index_send = matrix_pt[i]->column_index();
+        double* values_send = matrix_pt[i]->value();
+        int* row_start_send = matrix_pt[i]->row_start();
+        int* column_index_send = matrix_pt[i]->column_index();
 
         // send and receive the contents of the vector
         for (unsigned p = 0; p < nproc; p++)
@@ -1703,9 +1703,9 @@ namespace oomph
       if (nnz_recv[Color][my_rank] != 0)
       {
         // get pointers to the underlying data in the current matrix
-        double *values_send = matrix_pt[Color]->value();
-        int *row_start_send = matrix_pt[Color]->row_start();
-        int *column_index_send = matrix_pt[Color]->column_index();
+        double* values_send = matrix_pt[Color]->value();
+        int* row_start_send = matrix_pt[Color]->row_start();
+        int* column_index_send = matrix_pt[Color]->column_index();
 
         // offset for row_start send to self
         unsigned offset_n_send = First_row_for_proc[Color][my_rank] -
@@ -1746,7 +1746,7 @@ namespace oomph
       }
 
       // create the local distribution for this matrix
-      LinearAlgebraDistribution *temp_dist_pt =
+      LinearAlgebraDistribution* temp_dist_pt =
         new LinearAlgebraDistribution(Local_communicator_pt,
                                       target_first_row[Color][my_rank],
                                       target_nrow_local[Color][my_rank]);
@@ -1816,7 +1816,7 @@ namespace oomph
     else if (Method == 3)
     {
       // temporary storgage for nnz recv
-      unsigned *nnz_recv_temp = new unsigned[nproc * Nprec];
+      unsigned* nnz_recv_temp = new unsigned[nproc * Nprec];
       for (unsigned j = 0; j < nproc * Nprec; j++)
       {
         nnz_recv_temp[j] = 0;
@@ -1834,7 +1834,7 @@ namespace oomph
           if (i == Color)
           {
             // create the local distribution for this matrix
-            LinearAlgebraDistribution *temp_dist_pt =
+            LinearAlgebraDistribution* temp_dist_pt =
               new LinearAlgebraDistribution(
                 Local_communicator_pt, matrix_pt[i]->nrow(), false);
 
@@ -1843,9 +1843,9 @@ namespace oomph
             delete temp_dist_pt; // (dist has now been copied)
 
             // get pointers to the underlying data
-            double *values_pt = matrix_pt[i]->value();
-            int *column_index_pt = matrix_pt[i]->column_index();
-            int *row_start_pt = matrix_pt[i]->row_start();
+            double* values_pt = matrix_pt[i]->value();
+            int* column_index_pt = matrix_pt[i]->column_index();
+            int* row_start_pt = matrix_pt[i]->row_start();
 
             // build the matrix without a copy of the data
             local_matrix_pt->build_without_copy(matrix_pt[i]->ncol(),
@@ -1945,7 +1945,7 @@ namespace oomph
           {
             if (Nrow_local_for_proc[i][p] != 0)
             {
-              int *row_start = matrix_pt[i]->row_start();
+              int* row_start = matrix_pt[i]->row_start();
               unsigned k =
                 First_row_for_proc[i][p] - current_first_row[my_rank];
               nnz_send[i][p] =
@@ -2064,9 +2064,9 @@ namespace oomph
       Vector<MPI_Datatype> datatypes;
 
       // storage for received data
-      double *values_recv = new double[nnz_total];
-      int *column_index_recv = new int[nnz_total];
-      int *row_start_recv = new int[target_nrow_local[Color][my_rank] + 1];
+      double* values_recv = new double[nnz_total];
+      int* column_index_recv = new int[nnz_total];
+      int* row_start_recv = new int[target_nrow_local[Color][my_rank] + 1];
 
       ///////////////////////////////////////////////////////////////////////////
       // RECV
@@ -2176,9 +2176,9 @@ namespace oomph
       for (unsigned i = 0; i < Nprec; i++)
       {
         // get pointers to the underlying data in the current matrix
-        double *values_send = matrix_pt[i]->value();
-        int *row_start_send = matrix_pt[i]->row_start();
-        int *column_index_send = matrix_pt[i]->column_index();
+        double* values_send = matrix_pt[i]->value();
+        int* row_start_send = matrix_pt[i]->row_start();
+        int* column_index_send = matrix_pt[i]->column_index();
 
         // send and receive the contents of the vector
         for (unsigned p = 0; p < nproc; p++)
@@ -2271,9 +2271,9 @@ namespace oomph
       if (nnz_recv[Color][my_rank] != 0)
       {
         // get pointers to the underlying data in the current matrix
-        double *values_send = matrix_pt[Color]->value();
-        int *row_start_send = matrix_pt[Color]->row_start();
-        int *column_index_send = matrix_pt[Color]->column_index();
+        double* values_send = matrix_pt[Color]->value();
+        int* row_start_send = matrix_pt[Color]->row_start();
+        int* column_index_send = matrix_pt[Color]->column_index();
 
         // offset for row_start send to self
         unsigned offset_n_send = First_row_for_proc[Color][my_rank] -
@@ -2314,7 +2314,7 @@ namespace oomph
       }
 
       // create the local distribution for this matrix
-      LinearAlgebraDistribution *temp_dist_pt =
+      LinearAlgebraDistribution* temp_dist_pt =
         new LinearAlgebraDistribution(Local_communicator_pt,
                                       target_first_row[Color][my_rank],
                                       target_nrow_local[Color][my_rank]);
@@ -2399,8 +2399,8 @@ namespace oomph
   /// \short Applies each preconditioner to the corresponding vector in
   /// r and z
   //=============================================================================
-  void PreconditionerArray::solve_preconditioners(const Vector<DoubleVector> &r,
-                                                  Vector<DoubleVector> &z)
+  void PreconditionerArray::solve_preconditioners(const Vector<DoubleVector>& r,
+                                                  Vector<DoubleVector>& z)
   {
 #ifdef PARANOID
     // check that a preconditioner has been setup
@@ -2467,7 +2467,7 @@ namespace oomph
     unsigned first_row = Preconditioner_pt->first_row();
 
     // local residual values for this processor
-    double *local_r_values = local_r.values_pt();
+    double* local_r_values = local_r.values_pt();
 
     // for every vector we assemble the duplicate of the vector on the
     // appropirate subset of processors
@@ -2495,7 +2495,7 @@ namespace oomph
               // send the values
               int tag = this->compute_tag(nproc, my_rank, p, 0);
               MPI_Request tr;
-              MPI_Isend(const_cast<double *>(r[i].values_pt()) + offset_n,
+              MPI_Isend(const_cast<double*>(r[i].values_pt()) + offset_n,
                         int(Nrow_local_for_proc[i][p]),
                         MPI_DOUBLE,
                         p,
@@ -2532,7 +2532,7 @@ namespace oomph
     if (!r[Color].distributed())
     {
       // just copy to the new vector
-      const double *r_pt = r[Color].values_pt();
+      const double* r_pt = r[Color].values_pt();
       unsigned nrow_local = local_r.nrow_local();
       for (unsigned i = 0; i < nrow_local; i++)
       {
@@ -2542,7 +2542,7 @@ namespace oomph
     else
     {
       // the incoming residual associated with the processor
-      const double *r_pt = r[Color].values_pt();
+      const double* r_pt = r[Color].values_pt();
 
       // current first_row and nrow_local
       unsigned current_first_row = r[Color].first_row();
@@ -2585,7 +2585,7 @@ namespace oomph
     local_r.clear();
 
     // the local z values
-    double *local_z_values = local_z.values_pt();
+    double* local_z_values = local_z.values_pt();
 
     // setup the vectors
     for (unsigned i = 0; i < Nprec; i++)
@@ -2705,7 +2705,7 @@ namespace oomph
     if (!r[Color].distributed())
     {
       // just copy to the new vector
-      double *z_pt = z[Color].values_pt();
+      double* z_pt = z[Color].values_pt();
       unsigned nrow_local = local_z.nrow_local();
       for (unsigned i = 0; i < nrow_local; i++)
       {
@@ -2715,7 +2715,7 @@ namespace oomph
     else
     {
       //
-      double *z_pt = z[Color].values_pt();
+      double* z_pt = z[Color].values_pt();
 
       // current first_row and nrow_local
       unsigned current_first_row = r[Color].first_row();

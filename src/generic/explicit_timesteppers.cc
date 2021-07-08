@@ -42,7 +42,7 @@ namespace oomph
   ///\short A single virtual function that returns the residuals
   /// vector multiplied by the inverse mass matrix
   //=================================================================
-  void ExplicitTimeSteppableObject::get_dvaluesdt(DoubleVector &minv_res)
+  void ExplicitTimeSteppableObject::get_dvaluesdt(DoubleVector& minv_res)
   {
     std::ostringstream error_stream;
     error_stream
@@ -60,7 +60,7 @@ namespace oomph
   //=======================================================================
   /// Function that should get the values of the dofs in the object
   //=======================================================================
-  void ExplicitTimeSteppableObject::get_dofs(DoubleVector &dofs) const
+  void ExplicitTimeSteppableObject::get_dofs(DoubleVector& dofs) const
   {
     std::ostringstream error_stream;
     error_stream
@@ -77,8 +77,8 @@ namespace oomph
   //=======================================================================
   /// Function that should get the values of the dofs in the object
   //=======================================================================
-  void ExplicitTimeSteppableObject::get_dofs(const unsigned &t,
-                                             DoubleVector &dofs) const
+  void ExplicitTimeSteppableObject::get_dofs(const unsigned& t,
+                                             DoubleVector& dofs) const
   {
     std::ostringstream error_stream;
     error_stream
@@ -95,7 +95,7 @@ namespace oomph
   //=====================================================================
   /// Function that sets the values of the dofs in the object
   //====================================================================
-  void ExplicitTimeSteppableObject::set_dofs(const DoubleVector &dofs)
+  void ExplicitTimeSteppableObject::set_dofs(const DoubleVector& dofs)
   {
     std::ostringstream error_stream;
     error_stream
@@ -112,7 +112,7 @@ namespace oomph
   /// vector to the dofs in the object
   //====================================================================
   void ExplicitTimeSteppableObject::add_to_dofs(
-    const double &lambda, const DoubleVector &increment_dofs)
+    const double& lambda, const DoubleVector& increment_dofs)
   {
     std::ostringstream error_stream;
     error_stream
@@ -131,7 +131,7 @@ namespace oomph
   ///\short Virtual function that should be overloaded to return access
   /// to the local time in the object
   //=================================================================
-  double &ExplicitTimeSteppableObject::time()
+  double& ExplicitTimeSteppableObject::time()
   {
     std::ostringstream error_stream;
     error_stream << "Empty default function called.\n"
@@ -146,7 +146,7 @@ namespace oomph
 
   /// \short Virtual function that should be overloaded to return a pointer to a
   /// Time object.
-  Time *ExplicitTimeSteppableObject::time_pt() const
+  Time* ExplicitTimeSteppableObject::time_pt() const
   {
     std::ostringstream error_stream;
     error_stream
@@ -161,8 +161,8 @@ namespace oomph
   //================================================================
   /// Euler timestepping x^{t+1} = x^{t} + dt M^{-1} L(x^{t})
   //=================================================================
-  void Euler::timestep(ExplicitTimeSteppableObject *const &object_pt,
-                       const double &dt)
+  void Euler::timestep(ExplicitTimeSteppableObject* const& object_pt,
+                       const double& dt)
   {
     object_pt->actions_before_explicit_timestep();
     object_pt->actions_before_explicit_stage();
@@ -188,7 +188,7 @@ namespace oomph
   //====================================================================
   template<unsigned ORDER>
   void RungeKutta<ORDER>::timestep(
-    ExplicitTimeSteppableObject *const &object_pt, const double &dt)
+    ExplicitTimeSteppableObject* const& object_pt, const double& dt)
   {
     std::ostringstream error_stream;
     error_stream << "Timestep not implemented for order " << ORDER << "\n";
@@ -200,8 +200,8 @@ namespace oomph
   /// Explicit specialisation for fourth-order RK scheme
   //==================================================================
   template<>
-  void RungeKutta<4>::timestep(ExplicitTimeSteppableObject *const &object_pt,
-                               const double &dt)
+  void RungeKutta<4>::timestep(ExplicitTimeSteppableObject* const& object_pt,
+                               const double& dt)
   {
     object_pt->actions_before_explicit_timestep();
 
@@ -275,8 +275,8 @@ namespace oomph
   /// Explicit specialisation for second-order RK scheme
   //==================================================================
   template<>
-  void RungeKutta<2>::timestep(ExplicitTimeSteppableObject *const &object_pt,
-                               const double &dt)
+  void RungeKutta<2>::timestep(ExplicitTimeSteppableObject* const& object_pt,
+                               const double& dt)
   {
     object_pt->actions_before_explicit_timestep();
 
@@ -331,7 +331,7 @@ namespace oomph
   //======================================================================
   template<unsigned ORDER>
   void LowStorageRungeKutta<ORDER>::timestep(
-    ExplicitTimeSteppableObject *const &object_pt, const double &dt)
+    ExplicitTimeSteppableObject* const& object_pt, const double& dt)
   {
     std::ostringstream error_stream;
     error_stream << "Timestep not implemented for order " << ORDER << "\n";
@@ -372,7 +372,7 @@ namespace oomph
   // Explicit specialisation for fourth-order RK scheme
   template<>
   void LowStorageRungeKutta<4>::timestep(
-    ExplicitTimeSteppableObject *const &object_pt, const double &dt)
+    ExplicitTimeSteppableObject* const& object_pt, const double& dt)
   {
     object_pt->actions_before_explicit_timestep();
 
@@ -420,8 +420,8 @@ namespace oomph
 
   // ??ds this could be heavily optimised if needed. Keeping it simple for
   // now
-  void EBDF3::timestep(ExplicitTimeSteppableObject *const &object_pt,
-                       const double &dt)
+  void EBDF3::timestep(ExplicitTimeSteppableObject* const& object_pt,
+                       const double& dt)
   {
     using namespace StringConversion;
 
@@ -486,9 +486,9 @@ namespace oomph
   }
 
   /// Calculate the weights for this set of step sizes.
-  void EBDF3::set_weights(const double &dtn,
-                          const double &dtnm1,
-                          const double &dtnm2)
+  void EBDF3::set_weights(const double& dtn,
+                          const double& dtnm1,
+                          const double& dtnm2)
   {
     using namespace std;
 

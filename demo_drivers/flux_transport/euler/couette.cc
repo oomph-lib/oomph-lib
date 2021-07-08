@@ -46,9 +46,9 @@ namespace Global
   double Gamma = 1.4;
 
   /// Function that determines the initial conditions
-  void exact_solution(const double &t,
-                      const Vector<double> &x,
-                      Vector<double> &u)
+  void exact_solution(const double& t,
+                      const Vector<double>& x,
+                      Vector<double>& u)
   {
     double r = sqrt(x[0] * x[0] + x[1] * x[1]);
     double theta = atan2(x[1], x[0]);
@@ -73,13 +73,13 @@ template<class ELEMENT>
 class TwoDDGMesh : public DGMesh
 {
   // Map that will store the neighbours
-  std::map<std::pair<FiniteElement *, unsigned>, FiniteElement *> Neighbour_map;
+  std::map<std::pair<FiniteElement*, unsigned>, FiniteElement*> Neighbour_map;
 
 public:
   // Constructor
-  TwoDDGMesh(const unsigned &Nx,
-             const unsigned &Ny,
-             TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper)
+  TwoDDGMesh(const unsigned& Nx,
+             const unsigned& Ny,
+             TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
   {
     Vector<double> s_fraction;
     // Lengths of the mesh
@@ -103,7 +103,7 @@ public:
       for (unsigned ey = 0; ey < Ny; ey++)
       {
         // Create a new DG element
-        ELEMENT *local_element_pt = new ELEMENT;
+        ELEMENT* local_element_pt = new ELEMENT;
         // Find the number of nodes
         const unsigned n_node = local_element_pt->nnode();
         // Have we constructed
@@ -239,7 +239,7 @@ public:
         for (unsigned n = 0; n < n_node; n++)
         {
           // Get pointer to the node
-          Node *nod_pt = local_element_pt->node_pt(n);
+          Node* nod_pt = local_element_pt->node_pt(n);
           // Get the relative position in local coordinates
           local_element_pt->local_fraction_of_node(n, s_fraction);
           // Loop over the coordinates and set the position
@@ -264,7 +264,7 @@ public:
     for (unsigned e = 0; e < Ny; e++)
     {
       // Left
-      FiniteElement *elem_pt = this->finite_element_pt(e);
+      FiniteElement* elem_pt = this->finite_element_pt(e);
       unsigned n_p = elem_pt->nnode_1d();
       for (unsigned n = 0; n < n_p; n++)
       {
@@ -286,7 +286,7 @@ public:
       {
         // Get pointer to the element
         unsigned element_index = ex * Ny + ey;
-        FiniteElement *local_el_pt = finite_element_pt(element_index);
+        FiniteElement* local_el_pt = finite_element_pt(element_index);
 
         // Storage for indices of neighbours
         unsigned index[4];
@@ -353,11 +353,11 @@ public:
   }
 
   // We can just use the map here
-  void neighbour_finder(FiniteElement *const &bulk_element_pt,
-                        const int &face_index,
-                        const Vector<double> &s_bulk,
-                        FaceElement *&face_element_pt,
-                        Vector<double> &s_face)
+  void neighbour_finder(FiniteElement* const& bulk_element_pt,
+                        const int& face_index,
+                        const Vector<double>& s_bulk,
+                        FaceElement*& face_element_pt,
+                        Vector<double>& s_face)
   {
     // We have a single face coordinate of size 1
     s_face.resize(1);
@@ -368,7 +368,7 @@ public:
         // North face
       case 2:
         // The neighbouring face element is the south face of the neighbour
-        face_element_pt = dynamic_cast<ELEMENT *>(
+        face_element_pt = dynamic_cast<ELEMENT*>(
                             Neighbour_map[std::make_pair(bulk_element_pt, 0)])
                             ->face_element_pt(2);
         // Then set the face coordinate
@@ -378,7 +378,7 @@ public:
         // East face
       case 1:
         // The neighbouring face element is the west faec of the neighbour
-        face_element_pt = dynamic_cast<ELEMENT *>(
+        face_element_pt = dynamic_cast<ELEMENT*>(
                             Neighbour_map[std::make_pair(bulk_element_pt, 1)])
                             ->face_element_pt(3);
         // Then set the face coordinate
@@ -388,7 +388,7 @@ public:
         // South face
       case -2:
         // the neighbouring face element is the north face of the neighbour
-        face_element_pt = dynamic_cast<ELEMENT *>(
+        face_element_pt = dynamic_cast<ELEMENT*>(
                             Neighbour_map[std::make_pair(bulk_element_pt, 2)])
                             ->face_element_pt(0);
         // Then set the face coordiante
@@ -398,7 +398,7 @@ public:
         // West face
       case -1:
         // The neighbouring face element is the east face of the neighbour
-        face_element_pt = dynamic_cast<ELEMENT *>(
+        face_element_pt = dynamic_cast<ELEMENT*>(
                             Neighbour_map[std::make_pair(bulk_element_pt, 3)])
                             ->face_element_pt(1);
         s_face[0] = s_bulk[1];
@@ -417,9 +417,9 @@ template<class ELEMENT>
 class TwoDDGProblem : public Problem
 {
 public:
-  TwoDDGMesh<ELEMENT> *mesh_pt()
+  TwoDDGMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<TwoDDGMesh<ELEMENT> *>(Problem::mesh_pt());
+    return dynamic_cast<TwoDDGMesh<ELEMENT>*>(Problem::mesh_pt());
   }
 
   ~TwoDDGProblem()
@@ -428,7 +428,7 @@ public:
     delete this->explicit_time_stepper_pt();
   }
 
-  TwoDDGProblem(const unsigned &Nx, const unsigned &Ny)
+  TwoDDGProblem(const unsigned& Nx, const unsigned& Ny)
   {
     this->set_explicit_time_stepper_pt(new RungeKutta<4>);
     this->disable_info_in_newton_solve();
@@ -440,8 +440,8 @@ public:
     unsigned n_element = Problem::mesh_pt()->nelement();
     for (unsigned e = 0; e < n_element; e++)
     {
-      ELEMENT *cast_element_pt =
-        dynamic_cast<ELEMENT *>(Problem::mesh_pt()->element_pt(e));
+      ELEMENT* cast_element_pt =
+        dynamic_cast<ELEMENT*>(Problem::mesh_pt()->element_pt(e));
 
       cast_element_pt->gamma_pt() = &Global::Gamma;
     }
@@ -455,7 +455,7 @@ public:
       const unsigned n_node = mesh_pt()->nboundary_node(b);
       for (unsigned n = 0; n < n_node; n++)
       {
-        Node *nod_pt = mesh_pt()->boundary_node_pt(b, n);
+        Node* nod_pt = mesh_pt()->boundary_node_pt(b, n);
         const unsigned n_value = nod_pt->nvalue();
         for (unsigned i = 0; i < n_value; i++)
         {
@@ -478,7 +478,7 @@ public:
   }
 
   /// Compute the complete errors in the problem
-  void compute_error(const double &t, Vector<double> &error)
+  void compute_error(const double& t, Vector<double>& error)
   {
     error.initialise(0.0);
 
@@ -489,7 +489,7 @@ public:
     // Do the timestep
     for (unsigned e = 0; e < n_element; e++)
     {
-      dynamic_cast<ELEMENT *>(Problem::mesh_pt()->element_pt(e))
+      dynamic_cast<ELEMENT*>(Problem::mesh_pt()->element_pt(e))
         ->compute_error(
           std::cout, Global::exact_solution, t, local_error, local_norm);
       for (unsigned i = 0; i < 4; i++)
@@ -509,7 +509,7 @@ public:
     unsigned n_node = mesh_pt()->nnode();
     for (unsigned n = 0; n < n_node; n++)
     {
-      Node *nod_pt = mesh_pt()->node_pt(n);
+      Node* nod_pt = mesh_pt()->node_pt(n);
       x[0] = nod_pt->x(0);
       x[1] = nod_pt->x(1);
       // Get the initial conditions
@@ -522,7 +522,7 @@ public:
     }
   }
 
-  void parameter_study(std::ostream &trace, const bool &disc)
+  void parameter_study(std::ostream& trace, const bool& disc)
   {
     this->enable_mass_matrix_reuse();
     double dt = 0.001;

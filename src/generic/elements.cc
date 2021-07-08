@@ -61,8 +61,8 @@ namespace oomph
   /// return the index required to obtain it from the access
   /// function \c internal_data_pt()
   //=======================================================================
-  unsigned GeneralisedElement::add_internal_data(Data *const &data_pt,
-                                                 const bool &fd)
+  unsigned GeneralisedElement::add_internal_data(Data* const& data_pt,
+                                                 const bool& fd)
   {
     // Local cache of numbers of internal and external data
     const unsigned n_internal_data = Ninternal_data;
@@ -109,7 +109,7 @@ namespace oomph
     }
 
     // Allocate new storage for the pointers to data
-    Data **new_data_pt = new Data *[n_internal_data + n_external_data + 1];
+    Data** new_data_pt = new Data*[n_internal_data + n_external_data + 1];
 
     // Copy the old internal values across to the beginning of the array
     for (unsigned i = 0; i < n_internal_data; i++)
@@ -156,8 +156,8 @@ namespace oomph
   /// are added in order, i.e. from the front.
   //=======================================================================
   void GeneralisedElement::add_global_eqn_numbers(
-    std::deque<unsigned long> const &global_eqn_numbers,
-    std::deque<double *> const &global_dof_pt)
+    std::deque<unsigned long> const& global_eqn_numbers,
+    std::deque<double*> const& global_dof_pt)
   {
     // Find the number of dofs
     const unsigned n_dof = Ndof;
@@ -172,7 +172,7 @@ namespace oomph
     // Find the new total number of equation numbers
     const unsigned new_n_dof = n_dof + n_additional_dof;
     // Create storage for all equations, initialised to NULL
-    unsigned long *new_eqn_number = new unsigned long[new_n_dof];
+    unsigned long* new_eqn_number = new unsigned long[new_n_dof];
 
     // Copy over the existing values to the start new storage
     for (unsigned i = 0; i < n_dof; i++)
@@ -215,7 +215,7 @@ namespace oomph
 #endif
 
       // Create storge for all dofs initialised to NULL
-      double **new_dof_pt = new double *[new_n_dof];
+      double** new_dof_pt = new double*[new_n_dof];
       // Copy over the exisiting values to the start of new storage
       for (unsigned i = 0; i < n_dof; i++)
       {
@@ -225,7 +225,7 @@ namespace oomph
       // Set an index to the next position in the new storage
       unsigned index = n_dof;
       // Loop over the queue and add it's entries to our new storage
-      for (std::deque<double *>::const_iterator it = global_dof_pt.begin();
+      for (std::deque<double*>::const_iterator it = global_dof_pt.begin();
            it != global_dof_pt.end();
            ++it)
       {
@@ -260,7 +260,7 @@ namespace oomph
   /// Static storage used when pointers to the dofs are being assembled by
   /// add_global_eqn_numbers()
   //========================================================================
-  std::deque<double *> GeneralisedElement::Dof_pt_deque;
+  std::deque<double*> GeneralisedElement::Dof_pt_deque;
 
   //=========================================================================
   /// Default value used as the increment for finite difference calculations
@@ -303,8 +303,8 @@ namespace oomph
   /// return the index required to obtain it from the access
   /// function \c external_data_pt()
   //=======================================================================
-  unsigned GeneralisedElement::add_external_data(Data *const &data_pt,
-                                                 const bool &fd)
+  unsigned GeneralisedElement::add_external_data(Data* const& data_pt,
+                                                 const bool& fd)
   {
     // Find the numbers of internal and external data
     const unsigned n_internal_data = Ninternal_data;
@@ -350,7 +350,7 @@ namespace oomph
     }
 
     // Allocate new storage for the pointers to data
-    Data **new_data_pt = new Data *[n_internal_data + n_external_data + 1];
+    Data** new_data_pt = new Data*[n_internal_data + n_external_data + 1];
 
     // Copy the old internal and external values across to the new array
     for (unsigned i = 0; i < (n_internal_data + n_external_data); i++)
@@ -391,7 +391,7 @@ namespace oomph
     if (n_external_data > 0)
     {
       // Storage for new data, initialised to NULL
-      Data **new_data_pt = 0;
+      Data** new_data_pt = 0;
 
       // Find the number of internal data
       const unsigned n_internal_data = Ninternal_data;
@@ -400,7 +400,7 @@ namespace oomph
       if (n_internal_data > 0)
       {
         // The new data pointer should only be the size of the internal data
-        new_data_pt = new Data *[n_internal_data];
+        new_data_pt = new Data*[n_internal_data];
         // Copy over the internal data only
         for (unsigned i = 0; i < n_internal_data; i++)
         {
@@ -424,7 +424,7 @@ namespace oomph
   /// Remove the object addressed by data_pt from the external data array
   /// Note that this could mess up the numbering of other external data
   //========================================================================
-  void GeneralisedElement::flush_external_data(Data *const &data_pt)
+  void GeneralisedElement::flush_external_data(Data* const& data_pt)
   {
     // Get the current numbers of external data
     const unsigned n_external_data = Nexternal_data;
@@ -448,7 +448,7 @@ namespace oomph
     if (index < n_external_data)
     {
       // Initialise a new array to NULL
-      Data **new_data_pt = 0;
+      Data** new_data_pt = 0;
 
       // Find the number of internals
       const unsigned n_internal_data = Ninternal_data;
@@ -459,7 +459,7 @@ namespace oomph
       // Create a new array containing the data items, if we have any
       if (n_total_data > 0)
       {
-        new_data_pt = new Data *[n_total_data];
+        new_data_pt = new Data*[n_total_data];
       }
 
       // Copy over all the internal data
@@ -524,7 +524,7 @@ namespace oomph
   /// .
   //==========================================================================
   void GeneralisedElement::assign_internal_eqn_numbers(
-    unsigned long &global_number, Vector<double *> &Dof_pt)
+    unsigned long& global_number, Vector<double*>& Dof_pt)
   {
     // Loop over the internal data and assign the equation numbers
     // The internal data are stored at the beginning of the Data_pt array
@@ -545,7 +545,7 @@ namespace oomph
   /// Problem::describe_dofs(...)
   //==========================================================================
   void GeneralisedElement::describe_dofs(
-    std::ostream &out, const std::string &current_string) const
+    std::ostream& out, const std::string& current_string) const
   {
     for (unsigned i = 0; i < Ninternal_data; i++)
     {
@@ -567,7 +567,7 @@ namespace oomph
   /// Problem::describe_dofs(...)
   //==========================================================================
   void GeneralisedElement::describe_local_dofs(
-    std::ostream &out, const std::string &current_string) const
+    std::ostream& out, const std::string& current_string) const
   {
     // Find the number of internal and external data
     const unsigned n_internal_data = Ninternal_data;
@@ -577,7 +577,7 @@ namespace oomph
     for (unsigned i = 0; i < n_internal_data; i++)
     {
       // Pointer to the internal data
-      Data *const data_pt = internal_data_pt(i);
+      Data* const data_pt = internal_data_pt(i);
 
       std::stringstream conversion;
       conversion << " of Internal Data " << i << current_string;
@@ -589,7 +589,7 @@ namespace oomph
     for (unsigned i = 0; i < n_external_data; i++)
     {
       // Pointer to the external data
-      Data *const data_pt = external_data_pt(i);
+      Data* const data_pt = external_data_pt(i);
 
       std::stringstream conversion;
       conversion << " of External Data " << i << current_string;
@@ -604,7 +604,7 @@ namespace oomph
   /// equation number.
   //==========================================================================
   void GeneralisedElement::add_internal_value_pt_to_map(
-    std::map<unsigned, double *> &map_of_value_pt)
+    std::map<unsigned, double*>& map_of_value_pt)
   {
     // Loop over the internal data and add their data to the map
     // The internal data are stored at the beginning of the Data_pt array
@@ -620,7 +620,7 @@ namespace oomph
   /// the internal storage order
   //=========================================================================
   void GeneralisedElement::add_internal_data_values_to_vector(
-    Vector<double> &vector_of_values)
+    Vector<double>& vector_of_values)
   {
     for (unsigned i = 0; i < Ninternal_data; i++)
     {
@@ -634,7 +634,7 @@ namespace oomph
   /// set to the value at the end of the data that has been read in
   //========================================================================
   void GeneralisedElement::read_internal_data_values_from_vector(
-    const Vector<double> &vector_of_values, unsigned &index)
+    const Vector<double>& vector_of_values, unsigned& index)
   {
     for (unsigned i = 0; i < Ninternal_data; i++)
     {
@@ -647,7 +647,7 @@ namespace oomph
   /// to the vector in the internal storage order
   //=========================================================================
   void GeneralisedElement::add_internal_eqn_numbers_to_vector(
-    Vector<long> &vector_of_eqn_numbers)
+    Vector<long>& vector_of_eqn_numbers)
   {
     for (unsigned i = 0; i < Ninternal_data; i++)
     {
@@ -662,7 +662,7 @@ namespace oomph
   /// set to the value at the end of the data that has been read in
   //=========================================================================
   void GeneralisedElement::read_internal_eqn_numbers_from_vector(
-    const Vector<long> &vector_of_eqn_numbers, unsigned &index)
+    const Vector<long>& vector_of_eqn_numbers, unsigned& index)
   {
     for (unsigned i = 0; i < Ninternal_data; i++)
     {
@@ -682,7 +682,7 @@ namespace oomph
   /// may be overloaded by the user if they *really* know what they are doing.
   //==========================================================================
   void GeneralisedElement::assign_local_eqn_numbers(
-    const bool &store_local_dof_pt)
+    const bool& store_local_dof_pt)
   {
     clear_global_eqn_numbers();
     assign_all_generic_local_eqn_numbers(store_local_dof_pt);
@@ -731,7 +731,7 @@ namespace oomph
       error_stream << "Number of internal data " << nint << std::endl;
       for (unsigned i = 0; i < nint; i++)
       {
-        Data *data_pt = this->internal_data_pt(i);
+        Data* data_pt = this->internal_data_pt(i);
         unsigned nval = data_pt->nvalue();
         for (unsigned j = 0; j < nval; j++)
         {
@@ -749,7 +749,7 @@ namespace oomph
       error_stream << "Number of external data " << next << std::endl;
       for (unsigned i = 0; i < next; i++)
       {
-        Data *data_pt = this->external_data_pt(i);
+        Data* data_pt = this->external_data_pt(i);
         unsigned nval = data_pt->nvalue();
         for (unsigned j = 0; j < nval; j++)
         {
@@ -758,7 +758,7 @@ namespace oomph
           if (is_repeated[unsigned(eqn_no)])
           {
             error_stream << "Repeated external dof: " << eqn_no;
-            Node *nod_pt = dynamic_cast<Node *>(data_pt);
+            Node* nod_pt = dynamic_cast<Node*>(data_pt);
             if (nod_pt != 0)
             {
               error_stream << " (is a node at: ";
@@ -775,8 +775,8 @@ namespace oomph
 
       // If it's an element with external element check the associated
       // Data
-      ElementWithExternalElement *e_el_pt =
-        dynamic_cast<ElementWithExternalElement *>(this);
+      ElementWithExternalElement* e_el_pt =
+        dynamic_cast<ElementWithExternalElement*>(this);
       if (e_el_pt != 0)
       {
         // Check if the repeated dofs are among the external Data values
@@ -784,7 +784,7 @@ namespace oomph
           unsigned next = e_el_pt->nexternal_interaction_field_data();
           error_stream << "Number of external element data " << next
                        << std::endl;
-          Vector<Data *> data_pt(e_el_pt->external_interaction_field_data_pt());
+          Vector<Data*> data_pt(e_el_pt->external_interaction_field_data_pt());
           for (unsigned i = 0; i < next; i++)
           {
             unsigned nval = data_pt[i]->nvalue();
@@ -795,7 +795,7 @@ namespace oomph
               if (is_repeated[unsigned(eqn_no)])
               {
                 error_stream << "Repeated external element dof: " << eqn_no;
-                Node *nod_pt = dynamic_cast<Node *>(data_pt[i]);
+                Node* nod_pt = dynamic_cast<Node*>(data_pt[i]);
                 if (nod_pt != 0)
                 {
                   error_stream << " (is a node at: ";
@@ -816,7 +816,7 @@ namespace oomph
           unsigned next = e_el_pt->nexternal_interaction_geometric_data();
           error_stream << "Number of external element geom data " << next
                        << std::endl;
-          Vector<Data *> data_pt(
+          Vector<Data*> data_pt(
             e_el_pt->external_interaction_geometric_data_pt());
           for (unsigned i = 0; i < next; i++)
           {
@@ -831,7 +831,7 @@ namespace oomph
                 error_stream
                   << "Repeated external element geometric dof: " << eqn_no
                   << " " << data_pt[i]->value(j);
-                Node *nod_pt = dynamic_cast<Node *>(data_pt[i]);
+                Node* nod_pt = dynamic_cast<Node*>(data_pt[i]);
                 if (nod_pt != 0)
                 {
                   error_stream << " (is a node at: ";
@@ -850,13 +850,13 @@ namespace oomph
       }
 
       // If it's a FiniteElement then output its nodes
-      FiniteElement *f_el_pt = dynamic_cast<FiniteElement *>(this);
+      FiniteElement* f_el_pt = dynamic_cast<FiniteElement*>(this);
       if (f_el_pt != 0)
       {
         unsigned n_node = f_el_pt->nnode();
         for (unsigned n = 0; n < n_node; n++)
         {
-          Node *nod_pt = f_el_pt->node_pt(n);
+          Node* nod_pt = f_el_pt->node_pt(n);
           unsigned nval = nod_pt->nvalue();
           for (unsigned j = 0; j < nval; j++)
           {
@@ -876,10 +876,10 @@ namespace oomph
               }
             }
           }
-          SolidNode *solid_nod_pt = dynamic_cast<SolidNode *>(nod_pt);
+          SolidNode* solid_nod_pt = dynamic_cast<SolidNode*>(nod_pt);
           if (solid_nod_pt != 0)
           {
-            Data *data_pt = solid_nod_pt->variable_position_pt();
+            Data* data_pt = solid_nod_pt->variable_position_pt();
             unsigned nval = data_pt->nvalue();
             for (unsigned j = 0; j < nval; j++)
             {
@@ -899,7 +899,7 @@ namespace oomph
         n_node = f_el_pt->nnode();
         for (unsigned n = 0; n < n_node; n++)
         {
-          Node *nod_pt = f_el_pt->node_pt(n);
+          Node* nod_pt = f_el_pt->node_pt(n);
           unsigned n_dim = nod_pt->ndim();
           error_stream << "Node " << n << " at ( ";
           for (unsigned i = 0; i < n_dim; i++)
@@ -925,7 +925,7 @@ namespace oomph
   /// stored in Dof_pt
   //==========================================================================
   void GeneralisedElement::assign_internal_and_external_local_eqn_numbers(
-    const bool &store_local_dof_pt)
+    const bool& store_local_dof_pt)
   {
     // Find the number of internal and external data
     const unsigned n_internal_data = Ninternal_data;
@@ -969,7 +969,7 @@ namespace oomph
       // external equation numbers
 
       // Firstly allocate pointers to the rows for each data item
-      Data_local_eqn = new int *[n_total_data];
+      Data_local_eqn = new int*[n_total_data];
       // Now allocate storage for all the equation numbers
       Data_local_eqn[0] = new int[n_total_values];
       // Set all values to be unclassified
@@ -996,7 +996,7 @@ namespace oomph
       for (unsigned i = 0; i < n_internal_data; i++)
       {
         // Pointer to the internal data
-        Data *const data_pt = internal_data_pt(i);
+        Data* const data_pt = internal_data_pt(i);
         // Find the number of values stored at the internal data
         unsigned n_value = data_pt->nvalue();
 
@@ -1032,7 +1032,7 @@ namespace oomph
       for (unsigned i = 0; i < n_external_data; i++)
       {
         // Pointer to the external data
-        Data *const data_pt = external_data_pt(i);
+        Data* const data_pt = external_data_pt(i);
         // Find the number of values stored at the external data
         unsigned n_value = data_pt->nvalue();
 
@@ -1070,7 +1070,7 @@ namespace oomph
       // Clear the memory used in the deque
       if (store_local_dof_pt)
       {
-        std::deque<double *>().swap(GeneralisedElement::Dof_pt_deque);
+        std::deque<double*>().swap(GeneralisedElement::Dof_pt_deque);
       }
     }
   }
@@ -1087,9 +1087,9 @@ namespace oomph
   /// certain data.
   //==========================================================================
   void GeneralisedElement::fill_in_jacobian_from_internal_by_fd(
-    Vector<double> &residuals,
-    DenseMatrix<double> &jacobian,
-    const bool &fd_all_data)
+    Vector<double>& residuals,
+    DenseMatrix<double>& jacobian,
+    const bool& fd_all_data)
   {
     // Locally cache the number of internal data
     const unsigned n_internal_data = Ninternal_data;
@@ -1135,7 +1135,7 @@ namespace oomph
           if (local_unknown >= 0)
           {
             // Get a pointer to the value of the internal data
-            double *const value_pt = internal_data_pt(i)->value_pt(j);
+            double* const value_pt = internal_data_pt(i)->value_pt(j);
 
             // Save the old value of the Internal data
             const double old_var = *value_pt;
@@ -1184,9 +1184,9 @@ namespace oomph
   /// certain data.
   //==========================================================================
   void GeneralisedElement::fill_in_jacobian_from_external_by_fd(
-    Vector<double> &residuals,
-    DenseMatrix<double> &jacobian,
-    const bool &fd_all_data)
+    Vector<double>& residuals,
+    DenseMatrix<double>& jacobian,
+    const bool& fd_all_data)
   {
     // Locally cache the number of external data
     const unsigned n_external_data = Nexternal_data;
@@ -1231,7 +1231,7 @@ namespace oomph
           if (local_unknown >= 0)
           {
             // Get a pointer to the External data value
-            double *const value_pt = external_data_pt(i)->value_pt(j);
+            double* const value_pt = external_data_pt(i)->value_pt(j);
 
             // Save the old value of the External data
             const double old_var = *value_pt;
@@ -1277,7 +1277,7 @@ namespace oomph
   /// is deliberately broken.
   //=====================================================================
   void GeneralisedElement::fill_in_contribution_to_mass_matrix(
-    Vector<double> &residuals, DenseMatrix<double> &mass_matrix)
+    Vector<double>& residuals, DenseMatrix<double>& mass_matrix)
   {
     std::string error_message =
       "Empty fill_in_contribution_to_mass_matrix() has been called.\n";
@@ -1307,9 +1307,9 @@ namespace oomph
   /// broken.
   //=====================================================================
   void GeneralisedElement::fill_in_contribution_to_jacobian_and_mass_matrix(
-    Vector<double> &residuals,
-    DenseMatrix<double> &jacobian,
-    DenseMatrix<double> &mass_matrix)
+    Vector<double>& residuals,
+    DenseMatrix<double>& jacobian,
+    DenseMatrix<double>& mass_matrix)
   {
     std::string error_message =
       "Empty fill_in_contribution_to_jacobian_and_mass_matrix() has been ";
@@ -1342,7 +1342,7 @@ namespace oomph
   /// The default implementation is deliberately broken
   //========================================================================
   void GeneralisedElement::fill_in_contribution_to_dresiduals_dparameter(
-    double *const &parameter_pt, Vector<double> &dres_dparam)
+    double* const& parameter_pt, Vector<double>& dres_dparam)
   {
     std::string error_message =
       "Empty fill_in_contribution_to_dresiduals_dparameter() has been ";
@@ -1386,9 +1386,9 @@ namespace oomph
   /// the derivatives.
   //========================================================================
   void GeneralisedElement::fill_in_contribution_to_djacobian_dparameter(
-    double *const &parameter_pt,
-    Vector<double> &dres_dparam,
-    DenseMatrix<double> &djac_dparam)
+    double* const& parameter_pt,
+    Vector<double>& dres_dparam,
+    DenseMatrix<double>& djac_dparam)
   {
     std::string error_message =
       "Empty fill_in_contribution_to_djacobian_dparameter() has been ";
@@ -1435,10 +1435,10 @@ namespace oomph
   //=====================================================================
   void GeneralisedElement::
     fill_in_contribution_to_djacobian_and_dmass_matrix_dparameter(
-      double *const &parameter_pt,
-      Vector<double> &dres_dparam,
-      DenseMatrix<double> &djac_dparam,
-      DenseMatrix<double> &dmass_matrix_dparam)
+      double* const& parameter_pt,
+      Vector<double>& dres_dparam,
+      DenseMatrix<double>& djac_dparam,
+      DenseMatrix<double>& dmass_matrix_dparam)
   {
     std::string error_message =
       "Empty fill_in_contribution_to_djacobian_and_dmass_matrix_dparameter() "
@@ -1482,9 +1482,9 @@ namespace oomph
   /// easy calculation of finite difference default
   //==========================================================================
   void GeneralisedElement::fill_in_contribution_to_hessian_vector_products(
-    Vector<double> const &Y,
-    DenseMatrix<double> const &C,
-    DenseMatrix<double> &product)
+    Vector<double> const& Y,
+    DenseMatrix<double> const& C,
+    DenseMatrix<double>& product)
   {
     std::string error_message =
       "Empty fill_in_contribution_to_hessian_vector_products() has been ";
@@ -1522,8 +1522,8 @@ namespace oomph
   /// pairs of history values
   //==========================================================================
   void GeneralisedElement::fill_in_contribution_to_inner_products(
-    Vector<std::pair<unsigned, unsigned>> const &history_index,
-    Vector<double> &inner_product)
+    Vector<std::pair<unsigned, unsigned>> const& history_index,
+    Vector<double>& inner_product)
   {
     std::string error_message =
       "Empty fill_in_contribution_to_inner_products() has been called.\n";
@@ -1550,8 +1550,8 @@ namespace oomph
   /// over the element
   //==========================================================================
   void GeneralisedElement::fill_in_contribution_to_inner_product_vectors(
-    Vector<unsigned> const &history_index,
-    Vector<Vector<double>> &inner_product_vector)
+    Vector<unsigned> const& history_index,
+    Vector<Vector<double>>& inner_product_vector)
   {
     std::string error_message =
       "Empty fill_in_contribution_to_inner_product_vectors() has been "
@@ -1661,8 +1661,8 @@ namespace oomph
   /// (by other means) just before this function is called so I can't
   /// really see how we could possibly be responsible for this...
   //======================================================================
-  double FiniteElement::raw_nodal_position(const unsigned &n,
-                                           const unsigned &i) const
+  double FiniteElement::raw_nodal_position(const unsigned& n,
+                                           const unsigned& i) const
   {
     /* oomph_info << "n: "<< n << std::endl; */
     /* oomph_info << "i: "<< i << std::endl; */
@@ -1684,7 +1684,7 @@ namespace oomph
   /// Problem::describe_dofs(...)
   //======================================================================
   void FiniteElement::describe_local_dofs(
-    std::ostream &out, const std::string &current_string) const
+    std::ostream& out, const std::string& current_string) const
   {
     // Call the standard finite element classification.
     GeneralisedElement::describe_local_dofs(out, current_string);
@@ -1702,14 +1702,14 @@ namespace oomph
   /// Problem::describe_dofs(...)
   //======================================================================
   void FiniteElement::describe_nodal_local_dofs(
-    std::ostream &out, const std::string &current_string) const
+    std::ostream& out, const std::string& current_string) const
   {
     // Find the number of nodes
     const unsigned n_node = nnode();
     for (unsigned n = 0; n < n_node; n++)
     {
       // Pointer to node
-      Node *const nod_pt = node_pt(n);
+      Node* const nod_pt = node_pt(n);
 
       std::stringstream conversion;
       conversion << " of Node " << n << current_string;
@@ -1724,7 +1724,7 @@ namespace oomph
   /// global or lagrangian coordinates. Negative jacobians are allowed if the
   /// Accept_negative_jacobian flag is set to true.
   //========================================================================
-  void FiniteElement::check_jacobian(const double &jacobian) const
+  void FiniteElement::check_jacobian(const double& jacobian) const
   {
     // First check for a zero jacobian
     if (std::fabs(jacobian) < Tolerance_for_singular_jacobian)
@@ -1879,7 +1879,7 @@ namespace oomph
   /// of local coordinates as global coordinates (i.e. for "bulk" elements).
   //=========================================================================
   void FiniteElement::assemble_local_to_eulerian_jacobian(
-    const DShape &dpsids, DenseMatrix<double> &jacobian) const
+    const DShape& dpsids, DenseMatrix<double>& jacobian) const
   {
     // Locally cache the elemental dimension
     const unsigned el_dim = dim();
@@ -1936,7 +1936,7 @@ namespace oomph
   /// shape functions.
   //=========================================================================
   void FiniteElement::assemble_local_to_eulerian_jacobian2(
-    const DShape &d2psids, DenseMatrix<double> &jacobian2) const
+    const DShape& d2psids, DenseMatrix<double>& jacobian2) const
   {
     // Find the dimension of the element
     const unsigned el_dim = dim();
@@ -1982,7 +1982,7 @@ namespace oomph
   /// before calling this function
   //=====================================================================
   void FiniteElement::assemble_eulerian_base_vectors(
-    const DShape &dpsids, DenseMatrix<double> &interpolated_G) const
+    const DShape& dpsids, DenseMatrix<double>& interpolated_G) const
   {
     // Find the number of nodes and position types
     const unsigned n_node = nnode();
@@ -2016,8 +2016,8 @@ namespace oomph
   //============================================================================
   template<>
   double FiniteElement::invert_jacobian<0>(
-    const DenseMatrix<double> &jacobian,
-    DenseMatrix<double> &inverse_jacobian) const
+    const DenseMatrix<double>& jacobian,
+    DenseMatrix<double>& inverse_jacobian) const
   {
     // Issue a warning
     oomph_info << "\nWarning: You are trying to invert the jacobian for "
@@ -2035,8 +2035,8 @@ namespace oomph
   //===========================================================================
   template<>
   double FiniteElement::invert_jacobian<1>(
-    const DenseMatrix<double> &jacobian,
-    DenseMatrix<double> &inverse_jacobian) const
+    const DenseMatrix<double>& jacobian,
+    DenseMatrix<double>& inverse_jacobian) const
   {
     // Calculate the determinant of the matrix
     const double det = jacobian(0, 0);
@@ -2058,8 +2058,8 @@ namespace oomph
   //===========================================================================
   template<>
   double FiniteElement::invert_jacobian<2>(
-    const DenseMatrix<double> &jacobian,
-    DenseMatrix<double> &inverse_jacobian) const
+    const DenseMatrix<double>& jacobian,
+    DenseMatrix<double>& inverse_jacobian) const
   {
     // Calculate the determinant of the matrix
     const double det =
@@ -2086,8 +2086,8 @@ namespace oomph
   //=============================================================================
   template<>
   double FiniteElement::invert_jacobian<3>(
-    const DenseMatrix<double> &jacobian,
-    DenseMatrix<double> &inverse_jacobian) const
+    const DenseMatrix<double>& jacobian,
+    DenseMatrix<double>& inverse_jacobian) const
   {
     // Calculate the determinant of the matrix
     const double det = jacobian(0, 0) * jacobian(1, 1) * jacobian(2, 2) +
@@ -2137,8 +2137,8 @@ namespace oomph
   /// for efficiency reasons.
   //========================================================================
   double FiniteElement::invert_jacobian_mapping(
-    const DenseMatrix<double> &jacobian,
-    DenseMatrix<double> &inverse_jacobian) const
+    const DenseMatrix<double>& jacobian,
+    DenseMatrix<double>& inverse_jacobian) const
   {
     // Find the spatial dimension of the element
     const unsigned el_dim = dim();
@@ -2177,9 +2177,9 @@ namespace oomph
   //============================================================================
   template<>
   void FiniteElement::dJ_eulerian_dnodal_coordinates_templated_helper<0>(
-    const DenseMatrix<double> &jacobian,
-    const DShape &dpsids,
-    DenseMatrix<double> &djacobian_dX) const
+    const DenseMatrix<double>& jacobian,
+    const DShape& dpsids,
+    DenseMatrix<double>& djacobian_dX) const
   {
     // Issue a warning
     oomph_info << "\nWarning: You are trying to calculate derivatives of "
@@ -2196,9 +2196,9 @@ namespace oomph
   //===========================================================================
   template<>
   void FiniteElement::dJ_eulerian_dnodal_coordinates_templated_helper<1>(
-    const DenseMatrix<double> &jacobian,
-    const DShape &dpsids,
-    DenseMatrix<double> &djacobian_dX) const
+    const DenseMatrix<double>& jacobian,
+    const DShape& dpsids,
+    DenseMatrix<double>& djacobian_dX) const
   {
     // Determine the number of nodes in the element
     const unsigned n_node = nnode();
@@ -2216,9 +2216,9 @@ namespace oomph
   //===========================================================================
   template<>
   void FiniteElement::dJ_eulerian_dnodal_coordinates_templated_helper<2>(
-    const DenseMatrix<double> &jacobian,
-    const DShape &dpsids,
-    DenseMatrix<double> &djacobian_dX) const
+    const DenseMatrix<double>& jacobian,
+    const DShape& dpsids,
+    DenseMatrix<double>& djacobian_dX) const
   {
     // Determine the number of nodes in the element
     const unsigned n_node = nnode();
@@ -2242,9 +2242,9 @@ namespace oomph
   //=============================================================================
   template<>
   void FiniteElement::dJ_eulerian_dnodal_coordinates_templated_helper<3>(
-    const DenseMatrix<double> &jacobian,
-    const DShape &dpsids,
-    DenseMatrix<double> &djacobian_dX) const
+    const DenseMatrix<double>& jacobian,
+    const DShape& dpsids,
+    DenseMatrix<double>& djacobian_dX) const
   {
     // Determine the number of nodes in the element
     const unsigned n_node = nnode();
@@ -2288,12 +2288,12 @@ namespace oomph
   //============================================================================
   template<>
   void FiniteElement::d_dshape_eulerian_dnodal_coordinates_templated_helper<0>(
-    const double &det_jacobian,
-    const DenseMatrix<double> &jacobian,
-    const DenseMatrix<double> &djacobian_dX,
-    const DenseMatrix<double> &inverse_jacobian,
-    const DShape &dpsids,
-    RankFourTensor<double> &d_dpsidx_dX) const
+    const double& det_jacobian,
+    const DenseMatrix<double>& jacobian,
+    const DenseMatrix<double>& djacobian_dX,
+    const DenseMatrix<double>& inverse_jacobian,
+    const DShape& dpsids,
+    RankFourTensor<double>& d_dpsidx_dX) const
   {
     // Issue a warning
     oomph_info << "\nWarning: You are trying to calculate derivatives of "
@@ -2311,12 +2311,12 @@ namespace oomph
   //===========================================================================
   template<>
   void FiniteElement::d_dshape_eulerian_dnodal_coordinates_templated_helper<1>(
-    const double &det_jacobian,
-    const DenseMatrix<double> &jacobian,
-    const DenseMatrix<double> &djacobian_dX,
-    const DenseMatrix<double> &inverse_jacobian,
-    const DShape &dpsids,
-    RankFourTensor<double> &d_dpsidx_dX) const
+    const double& det_jacobian,
+    const DenseMatrix<double>& jacobian,
+    const DenseMatrix<double>& djacobian_dX,
+    const DenseMatrix<double>& inverse_jacobian,
+    const DShape& dpsids,
+    RankFourTensor<double>& d_dpsidx_dX) const
   {
     // Find inverse of determinant of jacobian of mapping
     const double inv_det_jac = 1.0 / det_jacobian;
@@ -2343,12 +2343,12 @@ namespace oomph
   //===========================================================================
   template<>
   void FiniteElement::d_dshape_eulerian_dnodal_coordinates_templated_helper<2>(
-    const double &det_jacobian,
-    const DenseMatrix<double> &jacobian,
-    const DenseMatrix<double> &djacobian_dX,
-    const DenseMatrix<double> &inverse_jacobian,
-    const DShape &dpsids,
-    RankFourTensor<double> &d_dpsidx_dX) const
+    const double& det_jacobian,
+    const DenseMatrix<double>& jacobian,
+    const DenseMatrix<double>& djacobian_dX,
+    const DenseMatrix<double>& inverse_jacobian,
+    const DShape& dpsids,
+    RankFourTensor<double>& d_dpsidx_dX) const
   {
     // Find inverse of determinant of jacobian of mapping
     const double inv_det_jac = 1.0 / det_jacobian;
@@ -2400,12 +2400,12 @@ namespace oomph
   //=============================================================================
   template<>
   void FiniteElement::d_dshape_eulerian_dnodal_coordinates_templated_helper<3>(
-    const double &det_jacobian,
-    const DenseMatrix<double> &jacobian,
-    const DenseMatrix<double> &djacobian_dX,
-    const DenseMatrix<double> &inverse_jacobian,
-    const DShape &dpsids,
-    RankFourTensor<double> &d_dpsidx_dX) const
+    const double& det_jacobian,
+    const DenseMatrix<double>& jacobian,
+    const DenseMatrix<double>& djacobian_dX,
+    const DenseMatrix<double>& inverse_jacobian,
+    const DShape& dpsids,
+    RankFourTensor<double>& d_dpsidx_dX) const
   {
     // Find inverse of determinant of jacobian of mapping
     const double inv_det_jac = 1.0 / det_jacobian;
@@ -2558,9 +2558,9 @@ namespace oomph
   /// inverse jacobian are returned.
   //==========================================================================
   double FiniteElement::local_to_eulerian_mapping_diagonal(
-    const DShape &dpsids,
-    DenseMatrix<double> &jacobian,
-    DenseMatrix<double> &inverse_jacobian) const
+    const DShape& dpsids,
+    DenseMatrix<double>& jacobian,
+    DenseMatrix<double>& inverse_jacobian) const
   {
     // Find the dimension of the element
     const unsigned el_dim = dim();
@@ -2639,9 +2639,9 @@ namespace oomph
   /// reasons.
   //========================================================================
   void FiniteElement::dJ_eulerian_dnodal_coordinates(
-    const DenseMatrix<double> &jacobian,
-    const DShape &dpsids,
-    DenseMatrix<double> &djacobian_dX) const
+    const DenseMatrix<double>& jacobian,
+    const DShape& dpsids,
+    DenseMatrix<double>& djacobian_dX) const
   {
     // Determine the spatial dimension of the element
     const unsigned el_dim = dim();
@@ -2723,12 +2723,12 @@ namespace oomph
   /// for efficiency reasons.
   //========================================================================
   void FiniteElement::d_dshape_eulerian_dnodal_coordinates(
-    const double &det_jacobian,
-    const DenseMatrix<double> &jacobian,
-    const DenseMatrix<double> &djacobian_dX,
-    const DenseMatrix<double> &inverse_jacobian,
-    const DShape &dpsids,
-    RankFourTensor<double> &d_dpsidx_dX) const
+    const double& det_jacobian,
+    const DenseMatrix<double>& jacobian,
+    const DenseMatrix<double>& djacobian_dX,
+    const DenseMatrix<double>& inverse_jacobian,
+    const DShape& dpsids,
+    RankFourTensor<double>& d_dpsidx_dX) const
   {
     // Determine the spatial dimension of the element
     const unsigned el_dim = dim();
@@ -2807,7 +2807,7 @@ namespace oomph
   /// modified in this function from dbasisds to dbasisdX.
   //======================================================================
   void FiniteElement::transform_derivatives(
-    const DenseMatrix<double> &inverse_jacobian, DShape &dbasis) const
+    const DenseMatrix<double>& inverse_jacobian, DShape& dbasis) const
   {
     // Find the number of basis functions and basis function types
     const unsigned n_basis = dbasis.nindex1();
@@ -2851,7 +2851,7 @@ namespace oomph
   /// saves a few loops, but is probably worth it.
   //======================================================================
   void FiniteElement::transform_derivatives_diagonal(
-    const DenseMatrix<double> &inverse_jacobian, DShape &dbasis) const
+    const DenseMatrix<double>& inverse_jacobian, DShape& dbasis) const
   {
     // Find the number of basis functions and basis function types
     const unsigned n_basis = dbasis.nindex1();
@@ -2883,11 +2883,11 @@ namespace oomph
   //=======================================================================
   template<>
   void FiniteElement::transform_second_derivatives_template<1>(
-    const DenseMatrix<double> &jacobian,
-    const DenseMatrix<double> &inverse_jacobian,
-    const DenseMatrix<double> &jacobian2,
-    DShape &dbasis,
-    DShape &d2basis) const
+    const DenseMatrix<double>& jacobian,
+    const DenseMatrix<double>& inverse_jacobian,
+    const DenseMatrix<double>& jacobian2,
+    DShape& dbasis,
+    DShape& d2basis) const
   {
     // Find the number of basis functions and basis function types
     const unsigned n_basis = dbasis.nindex1();
@@ -2922,11 +2922,11 @@ namespace oomph
   //=======================================================================
   template<>
   void FiniteElement::transform_second_derivatives_template<2>(
-    const DenseMatrix<double> &jacobian,
-    const DenseMatrix<double> &inverse_jacobian,
-    const DenseMatrix<double> &jacobian2,
-    DShape &dbasis,
-    DShape &d2basis) const
+    const DenseMatrix<double>& jacobian,
+    const DenseMatrix<double>& inverse_jacobian,
+    const DenseMatrix<double>& jacobian2,
+    DShape& dbasis,
+    DShape& d2basis) const
   {
     // Find the number of basis functions and basis function types
     const unsigned n_basis = dbasis.nindex1();
@@ -3033,11 +3033,11 @@ namespace oomph
   //=======================================================================
   template<>
   void FiniteElement::transform_second_derivatives_diagonal<1>(
-    const DenseMatrix<double> &jacobian,
-    const DenseMatrix<double> &inverse_jacobian,
-    const DenseMatrix<double> &jacobian2,
-    DShape &dbasis,
-    DShape &d2basis) const
+    const DenseMatrix<double>& jacobian,
+    const DenseMatrix<double>& inverse_jacobian,
+    const DenseMatrix<double>& jacobian2,
+    DShape& dbasis,
+    DShape& d2basis) const
   {
     FiniteElement::transform_second_derivatives_template<1>(
       jacobian, inverse_jacobian, jacobian2, dbasis, d2basis);
@@ -3050,11 +3050,11 @@ namespace oomph
   //=========================================================================
   template<>
   void FiniteElement::transform_second_derivatives_diagonal<2>(
-    const DenseMatrix<double> &jacobian,
-    const DenseMatrix<double> &inverse_jacobian,
-    const DenseMatrix<double> &jacobian2,
-    DShape &dbasis,
-    DShape &d2basis) const
+    const DenseMatrix<double>& jacobian,
+    const DenseMatrix<double>& inverse_jacobian,
+    const DenseMatrix<double>& jacobian2,
+    DShape& dbasis,
+    DShape& d2basis) const
   {
     // Find the number of basis functions and basis function types
     const unsigned n_basis = dbasis.nindex1();
@@ -3095,11 +3095,11 @@ namespace oomph
   /// overloaded for efficiency
   //============================================================================
   void FiniteElement::transform_second_derivatives(
-    const DenseMatrix<double> &jacobian,
-    const DenseMatrix<double> &inverse_jacobian,
-    const DenseMatrix<double> &jacobian2,
-    DShape &dbasis,
-    DShape &d2basis) const
+    const DenseMatrix<double>& jacobian,
+    const DenseMatrix<double>& inverse_jacobian,
+    const DenseMatrix<double>& jacobian2,
+    DShape& dbasis,
+    DShape& d2basis) const
   {
     // Find the dimension of the element
     const unsigned el_dim = dim();
@@ -3158,8 +3158,8 @@ namespace oomph
   /// Get the local fraction of the node j in the element;
   /// vector sets its own size
   //==============================================================
-  void FiniteElement::local_fraction_of_node(const unsigned &j,
-                                             Vector<double> &s_fraction)
+  void FiniteElement::local_fraction_of_node(const unsigned& j,
+                                             Vector<double>& s_fraction)
   {
     // Default implementation is rather dumb
     // Get the local coordinate and scale by local coordinate range
@@ -3177,7 +3177,7 @@ namespace oomph
   /// placing the values into storage so that they may be re-used,
   /// without recalculation
   //=======================================================================
-  void FiniteElement::set_integration_scheme(Integral *const &integral_pt)
+  void FiniteElement::set_integration_scheme(Integral* const& integral_pt)
   {
     // Assign the integration scheme
     Integral_pt = integral_pt;
@@ -3187,7 +3187,7 @@ namespace oomph
   /// \short Return the shape function stored at the ipt-th integration
   /// point.
   //=========================================================================
-  void FiniteElement::shape_at_knot(const unsigned &ipt, Shape &psi) const
+  void FiniteElement::shape_at_knot(const unsigned& ipt, Shape& psi) const
   {
     // Find the dimension of the element
     const unsigned el_dim = dim();
@@ -3206,9 +3206,9 @@ namespace oomph
   /// \short Return the shape function and its derivatives w.r.t. the local
   /// coordinates at the ipt-th integration point.
   //=========================================================================
-  void FiniteElement::dshape_local_at_knot(const unsigned &ipt,
-                                           Shape &psi,
-                                           DShape &dpsids) const
+  void FiniteElement::dshape_local_at_knot(const unsigned& ipt,
+                                           Shape& psi,
+                                           DShape& dpsids) const
   {
     // Find the dimension of the element
     const unsigned el_dim = dim();
@@ -3241,10 +3241,10 @@ namespace oomph
   /// d2psids(i,4) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_2 \f$
   /// d2psids(i,5) = \f$ \partial^2 \psi_j / \partial s_1 \partial s_2 \f$
   //=========================================================================
-  void FiniteElement::d2shape_local_at_knot(const unsigned &ipt,
-                                            Shape &psi,
-                                            DShape &dpsids,
-                                            DShape &d2psids) const
+  void FiniteElement::d2shape_local_at_knot(const unsigned& ipt,
+                                            Shape& psi,
+                                            DShape& dpsids,
+                                            DShape& d2psids) const
   {
     // Find the dimension of the element
     const unsigned el_dim = dim();
@@ -3265,9 +3265,9 @@ namespace oomph
   /// Returns Jacobian of mapping from global to local coordinates.
   /// Most general form of the function, but may be over-loaded, if desired
   //=========================================================================
-  double FiniteElement::dshape_eulerian(const Vector<double> &s,
-                                        Shape &psi,
-                                        DShape &dpsi) const
+  double FiniteElement::dshape_eulerian(const Vector<double>& s,
+                                        Shape& psi,
+                                        DShape& dpsi) const
   {
     // Find the element dimension
     const unsigned el_dim = dim();
@@ -3292,9 +3292,9 @@ namespace oomph
   /// derivatives w.r.t. global coordinates at integration point ipt.
   /// Most general form of function, but may be over-loaded if desired
   //========================================================================
-  double FiniteElement::dshape_eulerian_at_knot(const unsigned &ipt,
-                                                Shape &psi,
-                                                DShape &dpsi) const
+  double FiniteElement::dshape_eulerian_at_knot(const unsigned& ipt,
+                                                Shape& psi,
+                                                DShape& dpsi) const
   {
     // Find the element dimension
     const unsigned el_dim = dim();
@@ -3321,7 +3321,7 @@ namespace oomph
   /// nodal coordinates.
   //========================================================================
   double FiniteElement::dJ_eulerian_at_knot(
-    const unsigned &ipt, Shape &psi, DenseMatrix<double> &djacobian_dX) const
+    const unsigned& ipt, Shape& psi, DenseMatrix<double>& djacobian_dX) const
   {
     // Find the element dimension
     const unsigned el_dim = dim();
@@ -3356,11 +3356,11 @@ namespace oomph
   /// Most general form of function, but may be over-loaded if desired.
   //========================================================================
   double FiniteElement::dshape_eulerian_at_knot(
-    const unsigned &ipt,
-    Shape &psi,
-    DShape &dpsi,
-    DenseMatrix<double> &djacobian_dX,
-    RankFourTensor<double> &d_dpsidx_dX) const
+    const unsigned& ipt,
+    Shape& psi,
+    DShape& dpsi,
+    DenseMatrix<double>& djacobian_dX,
+    RankFourTensor<double>& d_dpsidx_dX) const
   {
     // Find the element dimension
     const unsigned el_dim = dim();
@@ -3412,10 +3412,10 @@ namespace oomph
   /// d2psidx(i,4) = \f$ \partial^2 \psi_j / \partial x_0 \partial x_2 \f$
   /// d2psidx(i,5) = \f$ \partial^2 \psi_j / \partial x_1 \partial x_2 \f$
   //===========================================================================
-  double FiniteElement::d2shape_eulerian(const Vector<double> &s,
-                                         Shape &psi,
-                                         DShape &dpsi,
-                                         DShape &d2psi) const
+  double FiniteElement::d2shape_eulerian(const Vector<double>& s,
+                                         Shape& psi,
+                                         DShape& dpsi,
+                                         DShape& d2psi) const
   {
     // Find the values of the indices of the shape functions
     // Locally cached.
@@ -3466,10 +3466,10 @@ namespace oomph
   /// d2psidx(i,4) = \f$ \partial^2 \psi_j / \partial x_0 \partial x_2 \f$
   /// d2psidx(i,5) = \f$ \partial^2 \psi_j / \partial x_1 \partial x_2 \f$
   //==========================================================================
-  double FiniteElement::d2shape_eulerian_at_knot(const unsigned &ipt,
-                                                 Shape &psi,
-                                                 DShape &dpsi,
-                                                 DShape &d2psi) const
+  double FiniteElement::d2shape_eulerian_at_knot(const unsigned& ipt,
+                                                 Shape& psi,
+                                                 DShape& dpsi,
+                                                 DShape& d2psi) const
   {
     // Find the values of the indices of the shape functions
     // Locally cached
@@ -3508,7 +3508,7 @@ namespace oomph
   /// stored in Dof_pt
   //==========================================================================
   void FiniteElement::assign_nodal_local_eqn_numbers(
-    const bool &store_local_dof_pt)
+    const bool& store_local_dof_pt)
   {
     // Find the number of nodes
     const unsigned n_node = nnode();
@@ -3544,7 +3544,7 @@ namespace oomph
 
       // Resize the storage for the nodal local equation numbers
       // Firstly allocate pointers to rows for each node
-      Nodal_local_eqn = new int *[n_node];
+      Nodal_local_eqn = new int*[n_node];
       // Now allocate storage for the equation numbers
       Nodal_local_eqn[0] = new int[n_total_values];
       // initially all local equations are unclassified
@@ -3571,7 +3571,7 @@ namespace oomph
       for (unsigned n = 0; n < n_node; n++)
       {
         // Pointer to node
-        Node *const nod_pt = node_pt(n);
+        Node* const nod_pt = node_pt(n);
 
         // Find the number of values stored at the node
         unsigned n_value = nod_pt->nvalue();
@@ -3610,7 +3610,7 @@ namespace oomph
       // Clear the memory used in the deque
       if (store_local_dof_pt)
       {
-        std::deque<double *>().swap(GeneralisedElement::Dof_pt_deque);
+        std::deque<double*>().swap(GeneralisedElement::Dof_pt_deque);
       }
     }
   }
@@ -3622,7 +3622,7 @@ namespace oomph
   /// rather than an analytical formulation, so can be done in total generality.
   //==========================================================================
   void FiniteElement::fill_in_jacobian_from_nodal_by_fd(
-    Vector<double> &residuals, DenseMatrix<double> &jacobian)
+    Vector<double>& residuals, DenseMatrix<double>& jacobian)
   {
     // Find the number of nodes
     const unsigned n_node = nnode();
@@ -3662,7 +3662,7 @@ namespace oomph
         if (local_unknown >= 0)
         {
           // Store a pointer to the nodal data value
-          double *const value_pt = node_pt(n)->value_pt(i);
+          double* const value_pt = node_pt(n)->value_pt(i);
 
           // Save the old value of the Nodal data
           const double old_var = *value_pt;
@@ -3705,7 +3705,7 @@ namespace oomph
   /// dresidual_dnodal_coordinates(l,i,j) = d res(l) / dX_{ij}
   ////=======================================================================
   void FiniteElement::get_dresidual_dnodal_coordinates(
-    RankThreeTensor<double> &dresidual_dnodal_coordinates)
+    RankThreeTensor<double>& dresidual_dnodal_coordinates)
   {
     // Number of nodes
     unsigned n_nod = nnode();
@@ -3731,7 +3731,7 @@ namespace oomph
     for (unsigned j = 0; j < n_nod; j++)
     {
       // Get node
-      Node *nod_pt = node_pt(j);
+      Node* nod_pt = node_pt(j);
 
       // Loop over coordinate directions
       for (unsigned i = 0; i < dim_nod; i++)
@@ -3773,7 +3773,7 @@ namespace oomph
   /// Return the number of the node located at *node_pt
   /// if this node is in the element, else return \f$ -1 \f$
   //===============================================================
-  int FiniteElement::get_node_number(Node *const &global_node_pt) const
+  int FiniteElement::get_node_number(Node* const& global_node_pt) const
   {
     // Initialise the number to -1
     int number = -1;
@@ -3840,8 +3840,8 @@ namespace oomph
   /// force implementation, can almost certainly be made more efficient for
   /// specific elements.
   //==========================================================================
-  Node *FiniteElement::get_node_at_local_coordinate(
-    const Vector<double> &s) const
+  Node* FiniteElement::get_node_at_local_coordinate(
+    const Vector<double>& s) const
   {
     // Locally cache the tolerance
     const double tol = Node_location_tolerance;
@@ -3883,7 +3883,7 @@ namespace oomph
   /// operations. NOTE: All computed in terms of zeta!
   //======================================================================
   void FiniteElement::get_centre_of_gravity_and_max_radius_in_terms_of_zeta(
-    Vector<double> &cog, double &max_radius) const
+    Vector<double>& cog, double& max_radius) const
   {
     // Initialise
     cog.resize(Elemental_dimension);
@@ -3920,8 +3920,8 @@ namespace oomph
   //======================================================================
   /// Return FE interpolated coordinate x[i] at local coordinate s
   //======================================================================
-  double FiniteElement::interpolated_x(const Vector<double> &s,
-                                       const unsigned &i) const
+  double FiniteElement::interpolated_x(const Vector<double>& s,
+                                       const unsigned& i) const
   {
     // Find the number of nodes
     const unsigned n_node = nnode();
@@ -3951,9 +3951,9 @@ namespace oomph
   /// Return FE interpolated coordinate x[i] at local coordinate s
   /// at previous timestep t (t=0: present; t>0: previous timestep)
   //========================================================================
-  double FiniteElement::interpolated_x(const unsigned &t,
-                                       const Vector<double> &s,
-                                       const unsigned &i) const
+  double FiniteElement::interpolated_x(const unsigned& t,
+                                       const Vector<double>& s,
+                                       const unsigned& i) const
   {
     // Find the number of nodes
     const unsigned n_node = nnode();
@@ -3983,8 +3983,8 @@ namespace oomph
   //=======================================================================
   /// Return FE interpolated position x[] at local coordinate s as Vector
   //=======================================================================
-  void FiniteElement::interpolated_x(const Vector<double> &s,
-                                     Vector<double> &x) const
+  void FiniteElement::interpolated_x(const Vector<double>& s,
+                                     Vector<double>& x) const
   {
     // Find the number of nodes
     const unsigned n_node = nnode();
@@ -4019,9 +4019,9 @@ namespace oomph
   /// Return FE interpolated position x[] at local coordinate s
   /// at previous timestep t as Vector (t=0: present; t>0: previous timestep)
   //==========================================================================
-  void FiniteElement::interpolated_x(const unsigned &t,
-                                     const Vector<double> &s,
-                                     Vector<double> &x) const
+  void FiniteElement::interpolated_x(const unsigned& t,
+                                     const Vector<double>& s,
+                                     Vector<double>& x) const
   {
     // Find the number of nodes
     const unsigned n_node = nnode();
@@ -4061,7 +4061,7 @@ namespace oomph
   /// not match the spatial dimension. WARNING: this is always positive
   /// and cannot be used to check if the element is inverted, say!
   //========================================================================
-  double FiniteElement::J_eulerian(const Vector<double> &s) const
+  double FiniteElement::J_eulerian(const Vector<double>& s) const
   {
     // Find the number of nodes and position types
     const unsigned n_node = nnode();
@@ -4126,7 +4126,7 @@ namespace oomph
   /// \short Compute the Jacobian of the mapping between the local and global
   /// coordinates at the ipt-th integration point
   //========================================================================
-  double FiniteElement::J_eulerian_at_knot(const unsigned &ipt) const
+  double FiniteElement::J_eulerian_at_knot(const unsigned& ipt) const
   {
     // Find the number of nodes
     const unsigned n_node = nnode();
@@ -4195,7 +4195,7 @@ namespace oomph
   /// \short Check that Jacobian of mapping between local and Eulerian
   /// coordinates at all integration points is positive.
   //========================================================================
-  void FiniteElement::check_J_eulerian_at_knots(bool &passed) const
+  void FiniteElement::check_J_eulerian_at_knots(bool& passed) const
   {
     // Bypass check deep down in the guts...
     bool backup = FiniteElement::Accept_negative_jacobian;
@@ -4272,8 +4272,8 @@ namespace oomph
   //==================================================================
   void FiniteElement::integrate_fct(
     FiniteElement::UnsteadyExactSolutionFctPt integrand_fct_pt,
-    const double &time,
-    Vector<double> &integral)
+    const double& time,
+    Vector<double>& integral)
   {
     // Initialise all components of integral Vector and setup integrand vector
     const unsigned ncomponents = integral.size();
@@ -4334,7 +4334,7 @@ namespace oomph
   //==================================================================
   void FiniteElement::integrate_fct(
     FiniteElement::SteadyExactSolutionFctPt integrand_fct_pt,
-    Vector<double> &integral)
+    Vector<double>& integral)
   {
     // Initialise all components of integral Vector
     const unsigned ncomponents = integral.size();
@@ -4445,8 +4445,8 @@ namespace oomph
 
       // For FaceElements checking the Jacobian via dpsidx doesn't
       // make sense
-      FiniteElement *tmp_pt = const_cast<FiniteElement *>(this);
-      FaceElement *face_el_pt = dynamic_cast<FaceElement *>(tmp_pt);
+      FiniteElement* tmp_pt = const_cast<FiniteElement*>(this);
+      FaceElement* face_el_pt = dynamic_cast<FaceElement*>(tmp_pt);
       if (face_el_pt == 0)
       {
         ntest = 2;
@@ -4547,9 +4547,9 @@ namespace oomph
   /// i-th FE-interpolated Eulerian coordinate at
   /// local coordinate s.
   //=======================================================================
-  double FiniteElement::interpolated_dxdt(const Vector<double> &s,
-                                          const unsigned &i,
-                                          const unsigned &t_deriv)
+  double FiniteElement::interpolated_dxdt(const Vector<double>& s,
+                                          const unsigned& i,
+                                          const unsigned& t_deriv)
   {
     // Find the number of nodes and positions (locally cached)
     const unsigned n_node = nnode();
@@ -4579,9 +4579,9 @@ namespace oomph
   /// FE-interpolated Eulerian coordinate vector at
   /// local coordinate s.
   //=======================================================================
-  void FiniteElement::interpolated_dxdt(const Vector<double> &s,
-                                        const unsigned &t_deriv,
-                                        Vector<double> &dxdt)
+  void FiniteElement::interpolated_dxdt(const Vector<double>& s,
+                                        const unsigned& t_deriv,
+                                        Vector<double>& dxdt)
   {
     // Find the number of nodes and positions (locally cached)
     const unsigned n_node = nnode();
@@ -4625,8 +4625,8 @@ namespace oomph
   /// Meshes covering the same curvilinear domain in cases where one element
   /// is much coarser than the other.
   //==========================================================================
-  void FiniteElement::interpolated_zeta(const Vector<double> &s,
-                                        Vector<double> &zeta) const
+  void FiniteElement::interpolated_zeta(const Vector<double>& s,
+                                        Vector<double>& zeta) const
   {
     // If there is a macro element use it
     if (Macro_elem_pt != 0)
@@ -4684,10 +4684,10 @@ namespace oomph
   /// Setting the optional bool argument to true means that the coordinate
   /// argument "s" is used as the initial guess. (Default is false).
   //=========================================================================
-  void FiniteElement::locate_zeta(const Vector<double> &zeta,
-                                  GeomObject *&geom_object_pt,
-                                  Vector<double> &s,
-                                  const bool &use_coordinate_as_initial_guess)
+  void FiniteElement::locate_zeta(const Vector<double>& zeta,
+                                  GeomObject*& geom_object_pt,
+                                  Vector<double>& s,
+                                  const bool& use_coordinate_as_initial_guess)
   {
     // Find the number of coordinates, the dimension of the element
     // This must be the same for the local and intrinsic global coordinate
@@ -4936,7 +4936,7 @@ namespace oomph
       {
         jacobian.solve(dx);
       }
-      catch (OomphLibError &error)
+      catch (OomphLibError& error)
       {
         // I've caught the error so shut up!
         error.disable_error_message();
@@ -5046,14 +5046,14 @@ namespace oomph
   /// \c identify_geometric_data()
   //======================================================================
   void FiniteElement::identify_field_data_for_interactions(
-    std::set<std::pair<Data *, unsigned>> &paired_field_data)
+    std::set<std::pair<Data*, unsigned>>& paired_field_data)
   {
     // Loop over all internal data
     const unsigned n_internal = this->ninternal_data();
     for (unsigned n = 0; n < n_internal; n++)
     {
       // Cache the data pointer
-      Data *const dat_pt = this->internal_data_pt(n);
+      Data* const dat_pt = this->internal_data_pt(n);
       // Find the number of data values stored in the data object
       const unsigned n_value = dat_pt->nvalue();
       // Add the index of each data value and the pointer to the set
@@ -5069,7 +5069,7 @@ namespace oomph
     for (unsigned n = 0; n < n_node; n++)
     {
       // Cache the node pointer
-      Node *const nod_pt = this->node_pt(n);
+      Node* const nod_pt = this->node_pt(n);
       // Find the number of values stored at the node
       const unsigned n_value = nod_pt->nvalue();
       // Add the index of each data value and the pointer to the set
@@ -5081,8 +5081,8 @@ namespace oomph
     }
   }
 
-  void FiniteElement::build_face_element(const int &face_index,
-                                         FaceElement *face_element_pt)
+  void FiniteElement::build_face_element(const int& face_index,
+                                         FaceElement* face_element_pt)
   {
     // Set the nodal dimension
     face_element_pt->set_nodal_dimension(nodal_dimension());
@@ -5148,7 +5148,7 @@ namespace oomph
   //========================================================================
   /// Output boundary coordinate zeta
   //========================================================================
-  void FaceElement::output_zeta(std::ostream &outfile, const unsigned &nplot)
+  void FaceElement::output_zeta(std::ostream& outfile, const unsigned& nplot)
   {
     // Vector of local coordinates
     unsigned n_dim = dim();
@@ -5189,7 +5189,7 @@ namespace oomph
   /// Jacobian of the mapping between local and global
   /// coordinates at the position s. Overloaded from FiniteElement.
   //========================================================================
-  double FaceElement::J_eulerian(const Vector<double> &s) const
+  double FaceElement::J_eulerian(const Vector<double>& s) const
   {
     // Find out the sptial dimension of the element
     unsigned n_dim_el = this->dim();
@@ -5274,7 +5274,7 @@ namespace oomph
   /// coordinates at the ipt-th integration point. Overloaded from
   /// FiniteElement.
   //========================================================================
-  double FaceElement::J_eulerian_at_knot(const unsigned &ipt) const
+  double FaceElement::J_eulerian_at_knot(const unsigned& ipt) const
   {
     // Find the number of nodes
     const unsigned n_node = nnode();
@@ -5356,7 +5356,7 @@ namespace oomph
   /// \short Check that Jacobian of mapping between local and Eulerian
   /// coordinates at all integration points is positive.
   //========================================================================
-  void FaceElement::check_J_eulerian_at_knots(bool &passed) const
+  void FaceElement::check_J_eulerian_at_knots(bool& passed) const
   {
     // Let's be optimistic...
     passed = true;
@@ -5457,9 +5457,9 @@ namespace oomph
   /// product of the projection and the unit normal.
   //=======================================================================
   void FaceElement::continuous_tangent_and_outer_unit_normal(
-    const Vector<double> &s,
-    Vector<Vector<double>> &tang_vec,
-    Vector<double> &unit_normal) const
+    const Vector<double>& s,
+    Vector<Vector<double>>& tang_vec,
+    Vector<double>& unit_normal) const
   {
     // Find the spatial dimension of the FaceElement
     const unsigned element_dim = dim();
@@ -5798,7 +5798,7 @@ namespace oomph
           // Tangent_direction_pt, recall that proj_u(v) = (u.v)/(u.u) * u
 
           // Get the direction vector. The vector is NOT copied! :)
-          Vector<double> &direction_vector = *Tangent_direction_pt;
+          Vector<double>& direction_vector = *Tangent_direction_pt;
 
 #ifdef PARANOID
           // Check that the angle between the direction vector and the normal
@@ -5929,9 +5929,9 @@ namespace oomph
   /// converted into local coordinates.
   //=======================================================================
   void FaceElement::continuous_tangent_and_outer_unit_normal(
-    const unsigned &ipt,
-    Vector<Vector<double>> &tang_vec,
-    Vector<double> &unit_normal) const
+    const unsigned& ipt,
+    Vector<Vector<double>>& tang_vec,
+    Vector<double>& unit_normal) const
   {
     // Find the dimension of the element
     const unsigned element_dim = dim();
@@ -5948,8 +5948,8 @@ namespace oomph
   //=======================================================================
   /// Compute the outer unit normal at the specified local coordinate
   //=======================================================================
-  void FaceElement::outer_unit_normal(const Vector<double> &s,
-                                      Vector<double> &unit_normal) const
+  void FaceElement::outer_unit_normal(const Vector<double>& s,
+                                      Vector<double>& unit_normal) const
   {
     // Find the spatial dimension of the FaceElement
     const unsigned element_dim = dim();
@@ -6275,8 +6275,8 @@ namespace oomph
   //=======================================================================
   /// Compute the outer unit normal at the ipt-th integration point
   //=======================================================================
-  void FaceElement::outer_unit_normal(const unsigned &ipt,
-                                      Vector<double> &unit_normal) const
+  void FaceElement::outer_unit_normal(const unsigned& ipt,
+                                      Vector<double>& unit_normal) const
   {
     // Find the dimension of the element
     const unsigned element_dim = dim();
@@ -6295,7 +6295,7 @@ namespace oomph
   /// given the local coordinates in this FaceElement
   //=======================================================================
   Vector<double> FaceElement::local_coordinate_in_bulk(
-    const Vector<double> &s) const
+    const Vector<double>& s) const
   {
     // Find the dimension of the bulk element
     unsigned dim_bulk = Bulk_element_pt->dim();
@@ -6324,8 +6324,8 @@ namespace oomph
   /// Calculate the  vector of local coordinates in bulk element,
   /// given the local coordinates in this FaceElement
   //=======================================================================
-  void FaceElement::get_local_coordinate_in_bulk(const Vector<double> &s,
-                                                 Vector<double> &s_bulk) const
+  void FaceElement::get_local_coordinate_in_bulk(const Vector<double>& s,
+                                                 Vector<double>& s_bulk) const
   {
     // Use the function pointer if it is set
     if (Face_to_bulk_coordinate_fct_pt)
@@ -6348,9 +6348,9 @@ namespace oomph
   /// In addition return the index of a bulk local coordinate that varies away
   /// from the face.
   //=======================================================================
-  void FaceElement::get_ds_bulk_ds_face(const Vector<double> &s,
-                                        DenseMatrix<double> &dsbulk_dsface,
-                                        unsigned &interior_direction) const
+  void FaceElement::get_ds_bulk_ds_face(const Vector<double>& s,
+                                        DenseMatrix<double>& dsbulk_dsface,
+                                        unsigned& interior_direction) const
   {
     // Use the function pointer if it is set
     if (Bulk_coordinate_derivatives_fct_pt)
@@ -6379,7 +6379,7 @@ namespace oomph
   /// Calculate the L2 norm of the displacement u=R-r to overload the
   /// compute_norm function in the GeneralisedElement base class
   //==================================================================
-  void SolidFiniteElement::compute_norm(double &el_norm)
+  void SolidFiniteElement::compute_norm(double& el_norm)
   {
     // Initialise el_norm to 0.0
     el_norm = 0.0;
@@ -6451,7 +6451,7 @@ namespace oomph
   /// Problem::describe_dofs(...)
   //=========================================================================
   void SolidFiniteElement::describe_local_dofs(
-    std::ostream &out, const std::string &current_string) const
+    std::ostream& out, const std::string& current_string) const
   {
     // Call the standard finite element description.
     FiniteElement::describe_local_dofs(out, current_string);
@@ -6464,7 +6464,7 @@ namespace oomph
   /// derivatives of the shape functions.
   //=========================================================================
   void SolidFiniteElement::assemble_local_to_lagrangian_jacobian(
-    const DShape &dpsids, DenseMatrix<double> &jacobian) const
+    const DShape& dpsids, DenseMatrix<double>& jacobian) const
   {
     // Find the the dimension of the element
     const unsigned el_dim = dim();
@@ -6522,7 +6522,7 @@ namespace oomph
   /// shape functions.
   //=========================================================================
   void SolidFiniteElement::assemble_local_to_lagrangian_jacobian2(
-    const DShape &d2psids, DenseMatrix<double> &jacobian2) const
+    const DShape& d2psids, DenseMatrix<double>& jacobian2) const
   {
     // Find the the dimension of the element
     const unsigned el_dim = dim();
@@ -6578,9 +6578,9 @@ namespace oomph
   /// inverse jacobian are returned.
   //==========================================================================
   double SolidFiniteElement::local_to_lagrangian_mapping_diagonal(
-    const DShape &dpsids,
-    DenseMatrix<double> &jacobian,
-    DenseMatrix<double> &inverse_jacobian) const
+    const DShape& dpsids,
+    DenseMatrix<double>& jacobian,
+    DenseMatrix<double>& inverse_jacobian) const
   {
     // Find the dimension of the element
     const unsigned el_dim = dim();
@@ -6644,9 +6644,9 @@ namespace oomph
   /// from Lagrangian to local coordinates.
   /// General case, may be overloaded
   //========================================================================
-  double SolidFiniteElement::dshape_lagrangian(const Vector<double> &s,
-                                               Shape &psi,
-                                               DShape &dpsi) const
+  double SolidFiniteElement::dshape_lagrangian(const Vector<double>& s,
+                                               Shape& psi,
+                                               DShape& dpsi) const
   {
     // Find the element dimension
     const unsigned el_dim = dim();
@@ -6671,9 +6671,9 @@ namespace oomph
   /// derivatives w.r.t. Lagrangian coordinates at integration point ipt.
   /// Most general form of function, but may be over-loaded if desired
   //========================================================================
-  double SolidFiniteElement::dshape_lagrangian_at_knot(const unsigned &ipt,
-                                                       Shape &psi,
-                                                       DShape &dpsi) const
+  double SolidFiniteElement::dshape_lagrangian_at_knot(const unsigned& ipt,
+                                                       Shape& psi,
+                                                       DShape& dpsi) const
   {
     // Find the element dimension
     const unsigned el_dim = dim();
@@ -6715,10 +6715,10 @@ namespace oomph
   /// d2psidxi(i,4) = \f$ \partial^2 \psi_j/\partial \xi_0 \partial \xi_2 \f$
   /// d2psidxi(i,5) = \f$ \partial^2 \psi_j/\partial \xi_1 \partial \xi_2 \f$
   //========================================================================
-  double SolidFiniteElement::d2shape_lagrangian(const Vector<double> &s,
-                                                Shape &psi,
-                                                DShape &dpsi,
-                                                DShape &d2psi) const
+  double SolidFiniteElement::d2shape_lagrangian(const Vector<double>& s,
+                                                Shape& psi,
+                                                DShape& dpsi,
+                                                DShape& d2psi) const
   {
     // Find the element dimension
     const unsigned el_dim = dim();
@@ -6766,10 +6766,10 @@ namespace oomph
   /// d2psidxi(i,4) = \f$ \partial^2 \psi_j/\partial \xi_0 \partial \xi_2 \f$
   /// d2psidxi(i,5) = \f$ \partial^2 \psi_j/\partial \xi_1 \partial \xi_2 \f$
   //========================================================================
-  double SolidFiniteElement::d2shape_lagrangian_at_knot(const unsigned &ipt,
-                                                        Shape &psi,
-                                                        DShape &dpsi,
-                                                        DShape &d2psi) const
+  double SolidFiniteElement::d2shape_lagrangian_at_knot(const unsigned& ipt,
+                                                        Shape& psi,
+                                                        DShape& dpsi,
+                                                        DShape& d2psi) const
   {
     // Find the values of the indices of the shape functions
     // Find the element dimension
@@ -6809,7 +6809,7 @@ namespace oomph
   /// Problem::describe_dofs(...)
   //============================================================================
   void SolidFiniteElement::describe_solid_local_dofs(
-    std::ostream &out, const std::string &current_string) const
+    std::ostream& out, const std::string& current_string) const
   {
     // Find the number of nodes
     const unsigned n_node = nnode();
@@ -6817,7 +6817,7 @@ namespace oomph
     for (unsigned n = 0; n < n_node; n++)
     {
       // Cast to a solid node
-      SolidNode *cast_node_pt = static_cast<SolidNode *>(node_pt(n));
+      SolidNode* cast_node_pt = static_cast<SolidNode*>(node_pt(n));
       std::stringstream conversion;
       conversion << " of Solid Node " << n << current_string;
       std::string in(conversion.str());
@@ -6833,7 +6833,7 @@ namespace oomph
   /// stored in Dof_pt.
   //============================================================================
   void SolidFiniteElement::assign_solid_local_eqn_numbers(
-    const bool &store_local_dof_pt)
+    const bool& store_local_dof_pt)
   {
     // Find the number of nodes
     const unsigned n_node = nnode();
@@ -6862,7 +6862,7 @@ namespace oomph
       for (unsigned n = 0; n < n_node; n++)
       {
         // Cast to a solid node
-        SolidNode *cast_node_pt = static_cast<SolidNode *>(node_pt(n));
+        SolidNode* cast_node_pt = static_cast<SolidNode*>(node_pt(n));
 
         // Loop over the number of position dofs
         for (unsigned j = 0; j < n_position_type; j++)
@@ -6906,7 +6906,7 @@ namespace oomph
       // Clear the memory used in the deque
       if (store_local_dof_pt)
       {
-        std::deque<double *>().swap(GeneralisedElement::Dof_pt_deque);
+        std::deque<double*>().swap(GeneralisedElement::Dof_pt_deque);
       }
 
     } // End of the case when there are nodes
@@ -6919,7 +6919,7 @@ namespace oomph
   /// rather than an analytical formulation, so can be done in total generality.
   //==========================================================================
   void SolidFiniteElement::fill_in_jacobian_from_solid_position_by_fd(
-    Vector<double> &residuals, DenseMatrix<double> &jacobian)
+    Vector<double>& residuals, DenseMatrix<double>& jacobian)
   {
     // Flag to indicate if we use first or second order FD
     // bool use_first_order_fd=false;
@@ -6968,7 +6968,7 @@ namespace oomph
           if (local_unknown >= 0)
           {
             // Store a pointer to the (generalised) Eulerian nodal position
-            double *const value_pt = &(node_pt(n)->x_gen(k, i));
+            double* const value_pt = &(node_pt(n)->x_gen(k, i));
 
             // Save the old value of the (generalised) Eulerian nodal position
             const double old_var = *value_pt;
@@ -7036,8 +7036,8 @@ namespace oomph
   /// Return i-th FE-interpolated Lagrangian coordinate at
   /// local coordinate s.
   //============================================================================
-  double SolidFiniteElement::interpolated_xi(const Vector<double> &s,
-                                             const unsigned &i) const
+  double SolidFiniteElement::interpolated_xi(const Vector<double>& s,
+                                             const unsigned& i) const
   {
     // Find the number of nodes
     const unsigned n_node = nnode();
@@ -7071,8 +7071,8 @@ namespace oomph
   /// Compute FE-interpolated Lagrangian coordinate vector xi[] at
   /// local coordinate s.
   //============================================================================
-  void SolidFiniteElement::interpolated_xi(const Vector<double> &s,
-                                           Vector<double> &xi) const
+  void SolidFiniteElement::interpolated_xi(const Vector<double>& s,
+                                           Vector<double>& xi) const
   {
     // Find the number of nodes
     const unsigned n_node = nnode();
@@ -7111,8 +7111,8 @@ namespace oomph
   /// Compute derivatives of FE-interpolated Lagrangian coordinates xi
   /// with respect to local coordinates: dxids[i][j]=dxi_i/ds_j
   //============================================================================
-  void SolidFiniteElement::interpolated_dxids(const Vector<double> &s,
-                                              DenseMatrix<double> &dxids) const
+  void SolidFiniteElement::interpolated_dxids(const Vector<double>& s,
+                                              DenseMatrix<double>& dxids) const
   {
     // Find the number of nodes
     const unsigned n_node = nnode();
@@ -7159,7 +7159,7 @@ namespace oomph
   /// initial "accelerations" in Newmark scheme. Jacobian is the mass matrix.
   //=======================================================================
   void SolidFiniteElement::fill_in_jacobian_for_newmark_accel(
-    DenseMatrix<double> &jacobian)
+    DenseMatrix<double>& jacobian)
   {
 #ifdef PARANOID
     // Check that we're computing the real residuals, not the
@@ -7203,7 +7203,7 @@ namespace oomph
     Vector<double> s(n_lagrangian);
 
     // Get positional timestepper from first nodal point
-    TimeStepper *timestepper_pt = node_pt(0)->position_time_stepper_pt();
+    TimeStepper* timestepper_pt = node_pt(0)->position_time_stepper_pt();
 
 #ifdef PARANOID
     // Of course all this only works if we're actually using a
@@ -7312,9 +7312,9 @@ namespace oomph
   /// stores the order of the time-derivative \f$ D \f$ to be assigned.
   //=======================================================================
   void SolidFiniteElement::fill_in_generic_jacobian_for_solid_ic(
-    Vector<double> &residuals,
-    DenseMatrix<double> &jacobian,
-    const unsigned &flag)
+    Vector<double>& residuals,
+    DenseMatrix<double>& jacobian,
+    const unsigned& flag)
   {
     // Find the number of nodes and position types
     const unsigned n_node = nnode();
@@ -7462,7 +7462,7 @@ namespace oomph
   //===============================================================
   /// Return the geometric shape function at the local coordinate s
   //===============================================================
-  void PointElement::shape(const Vector<double> &s, Shape &psi) const
+  void PointElement::shape(const Vector<double>& s, Shape& psi) const
   {
     // Single shape function always has value 1
     psi[0] = 1.0;

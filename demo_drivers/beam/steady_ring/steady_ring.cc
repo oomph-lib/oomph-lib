@@ -59,14 +59,14 @@ namespace Global_Physical_Variables
 
   /// \short Pointer to pressure load (stored in Data so it can
   /// become an unknown in the problem when displacement control is used
-  Data *Pext_data_pt;
+  Data* Pext_data_pt;
 
   /// \short Load function: Constant external pressure with cos variation to
   /// induce buckling in n=2 mode
-  void press_load(const Vector<double> &xi,
-                  const Vector<double> &x,
-                  const Vector<double> &N,
-                  Vector<double> &load)
+  void press_load(const Vector<double>& xi,
+                  const Vector<double>& x,
+                  const Vector<double>& N,
+                  Vector<double>& load)
   {
     for (unsigned i = 0; i < 2; i++)
     {
@@ -78,7 +78,7 @@ namespace Global_Physical_Variables
   /// load on the elastic ring.
   /// A reference is obtained by de-referencing the pointer to the
   /// data value that contains the external load
-  double &external_pressure()
+  double& external_pressure()
   {
     return *Pext_data_pt->value_pt(0);
   }
@@ -98,14 +98,14 @@ class ElasticRingProblem : public Problem
 public:
   /// Constructor: Number of elements and flags for displ control
   /// and displacement control with existing data respectively.
-  ElasticRingProblem(const unsigned &n_element,
-                     bool &displ_control,
-                     bool &load_data_already_exists);
+  ElasticRingProblem(const unsigned& n_element,
+                     bool& displ_control,
+                     bool& load_data_already_exists);
 
   /// Access function for the specific mesh
-  OneDLagrangianMesh<ELEMENT> *mesh_pt()
+  OneDLagrangianMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<OneDLagrangianMesh<ELEMENT> *>(Problem::mesh_pt());
+    return dynamic_cast<OneDLagrangianMesh<ELEMENT>*>(Problem::mesh_pt());
   }
 
   /// Update function is empty
@@ -115,17 +115,17 @@ public:
   void actions_before_newton_solve() {}
 
   /// Doc solution
-  void doc_solution(DocInfo &doc_info, ofstream &trace_file);
+  void doc_solution(DocInfo& doc_info, ofstream& trace_file);
 
   /// Perform the parameter study
-  void parameter_study(DocInfo &doc_info);
+  void parameter_study(DocInfo& doc_info);
 
 private:
   /// Use displacement control?
   bool Displ_control;
 
   /// Pointer to geometric object that represents the undeformed shape
-  GeomObject *Undef_geom_pt;
+  GeomObject* Undef_geom_pt;
 
   /// Number of elements in the beam mesh
   unsigned Nbeam_element;
@@ -137,9 +137,9 @@ private:
 //======================================================================
 template<class ELEMENT>
 ElasticRingProblem<ELEMENT>::ElasticRingProblem(
-  const unsigned &n_element,
-  bool &displ_control,
-  bool &load_data_already_exists) :
+  const unsigned& n_element,
+  bool& displ_control,
+  bool& load_data_already_exists) :
   Displ_control(displ_control), Nbeam_element(n_element)
 {
   // Undeformed beam is an elliptical ring
@@ -184,8 +184,8 @@ ElasticRingProblem<ELEMENT>::ElasticRingProblem(
   else
   {
     // Choose element in which displacement control is applied: the last one
-    SolidFiniteElement *controlled_element_pt =
-      dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(Nbeam_element - 1));
+    SolidFiniteElement* controlled_element_pt =
+      dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(Nbeam_element - 1));
 
     // Fix the displacement in the vertical (1) direction...
     unsigned controlled_direction = 1;
@@ -195,7 +195,7 @@ ElasticRingProblem<ELEMENT>::ElasticRingProblem(
     s_displ_control[0] = 1.0;
 
     // Pointer to displacement control element
-    DisplacementControlElement *displ_control_el_pt;
+    DisplacementControlElement* displ_control_el_pt;
 
     // Displacement control without previously existing load Data
     //-----------------------------------------------------------
@@ -246,7 +246,7 @@ ElasticRingProblem<ELEMENT>::ElasticRingProblem(
   for (unsigned i = 0; i < Nbeam_element; i++)
   {
     // Cast to proper element type
-    ELEMENT *elem_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* elem_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set wall thickness
     elem_pt->h_pt() = &Global_Physical_Variables::H;
@@ -277,8 +277,8 @@ ElasticRingProblem<ELEMENT>::ElasticRingProblem(
 /// Document solution
 //========================================================================
 template<class ELEMENT>
-void ElasticRingProblem<ELEMENT>::doc_solution(DocInfo &doc_info,
-                                               ofstream &trace_file)
+void ElasticRingProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
+                                               ofstream& trace_file)
 {
   ofstream some_file;
   char filename[100];
@@ -303,11 +303,10 @@ void ElasticRingProblem<ELEMENT>::doc_solution(DocInfo &doc_info,
   trace_file << Global_Physical_Variables::Pext_data_pt->value(0) /
                   (pow(Global_Physical_Variables::H, 3) / 12.0)
              << " "
-             << dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(0))
+             << dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(0))
                   ->interpolated_x(s_left, 0)
              << " "
-             << dynamic_cast<ELEMENT *>(
-                  mesh_pt()->element_pt(Nbeam_element - 1))
+             << dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(Nbeam_element - 1))
                   ->interpolated_x(s_right, 1)
              << std::endl;
 
@@ -317,7 +316,7 @@ void ElasticRingProblem<ELEMENT>::doc_solution(DocInfo &doc_info,
 /// Solver loop to perform parameter study
 //=========================================================================
 template<class ELEMENT>
-void ElasticRingProblem<ELEMENT>::parameter_study(DocInfo &doc_info)
+void ElasticRingProblem<ELEMENT>::parameter_study(DocInfo& doc_info)
 {
   // Open a trace file
   char filename[100];

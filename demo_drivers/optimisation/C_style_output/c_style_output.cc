@@ -79,11 +79,11 @@ public:
   /// \short Constructor: Build mesh and copy Eulerian coords to Lagrangian
   /// ones so that the initial configuration is the stress-free one.
   ElasticRefineableQuarterCircleSectorMesh<ELEMENT>(
-    GeomObject *wall_pt,
-    const double &xi_lo,
-    const double &fract_mid,
-    const double &xi_hi,
-    TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+    GeomObject* wall_pt,
+    const double& xi_lo,
+    const double& fract_mid,
+    const double& xi_hi,
+    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
     RefineableQuarterCircleSectorMesh<ELEMENT>(
       wall_pt, xi_lo, fract_mid, xi_hi, time_stepper_pt)
   {
@@ -94,7 +94,7 @@ public:
   }
 
   /// Function to create mesh made of traction elements
-  void make_traction_element_mesh(SolidMesh *&traction_mesh_pt)
+  void make_traction_element_mesh(SolidMesh*& traction_mesh_pt)
   {
     // Make new mesh
     traction_mesh_pt = new SolidMesh;
@@ -105,7 +105,7 @@ public:
     for (unsigned e = 0; e < n_element; e++)
     {
       // The element itself:
-      FiniteElement *fe_pt = this->boundary_element_pt(b, e);
+      FiniteElement* fe_pt = this->boundary_element_pt(b, e);
 
       // Find the index of the face of element e along boundary b
       int face_index = this->face_index_at_boundary(b, e);
@@ -136,11 +136,11 @@ public:
   /// and vertical directions, and the corresponding dimensions.
   /// Timestepper defaults to Static.
   SimpleRefineableRectangularQuadMesh(
-    const unsigned &Nx,
-    const unsigned &Ny,
-    const double &Lx,
-    const double &Ly,
-    TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+    const unsigned& Nx,
+    const unsigned& Ny,
+    const double& Lx,
+    const double& Ly,
+    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
     SimpleRectangularQuadMesh<ELEMENT>(Nx, Ny, Lx, Ly, time_stepper_pt)
   {
     // Nodal positions etc. were created in constructor for
@@ -163,9 +163,9 @@ public:
 //=====================================================================
 /// Global output function to compare C++ and C-style output routines
 //=====================================================================
-void output_both_versions(const string &file_root,
-                          Mesh *mesh_pt,
-                          const unsigned &npts)
+void output_both_versions(const string& file_root,
+                          Mesh* mesh_pt,
+                          const unsigned& npts)
 {
   cout << std::endl
        << "==============================================" << std::endl
@@ -188,7 +188,7 @@ void output_both_versions(const string &file_root,
     // Output solution
     sprintf(
       filename, "%s/%s.dat", doc_info.directory().c_str(), file_root.c_str());
-    FILE *file_pt = fopen(filename, "w");
+    FILE* file_pt = fopen(filename, "w");
     clock_t t_start = clock();
     mesh_pt->output(file_pt, npts);
     clock_t t_end = clock();
@@ -226,7 +226,7 @@ void output_both_versions(const string &file_root,
 /// Ugly driver code -- brutally loop over lots of mesh/element
 /// combinations and produce C/C++-style output.
 //=====================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   unsigned nplot = 5;
   unsigned nelem = 1000;
@@ -236,19 +236,19 @@ int main(int argc, char *argv[])
 
   {
     // Set the undeformed beam to be a straight line at y=0
-    GeomObject *undef_beam_pt = new StraightLine(0.0);
+    GeomObject* undef_beam_pt = new StraightLine(0.0);
 
     // Build and assign mesh
     double L = 1.0;
-    Mesh *mesh_pt =
+    Mesh* mesh_pt =
       new OneDLagrangianMesh<HermiteBeamElement>(nelem, L, undef_beam_pt);
 
     // Assign undeformed geometry
     for (unsigned i = 0; i < nelem; i++)
     {
       // Cast to proper element type
-      HermiteBeamElement *elem_pt =
-        dynamic_cast<HermiteBeamElement *>(mesh_pt->element_pt(i));
+      HermiteBeamElement* elem_pt =
+        dynamic_cast<HermiteBeamElement*>(mesh_pt->element_pt(i));
 
       // Assign the undeformed beam shape
       elem_pt->undeformed_beam_pt() = undef_beam_pt;
@@ -268,7 +268,7 @@ int main(int argc, char *argv[])
 
   {
     // Build the geometric object that describes the outer wall
-    GeomObject *curved_boundary_pt = new Ellipse(1.0, 1.0);
+    GeomObject* curved_boundary_pt = new Ellipse(1.0, 1.0);
 
     // The curved boundary of the mesh is defined by the geometric object
     // What follows are the start and end coordinates on the geometric object:
@@ -282,7 +282,7 @@ int main(int argc, char *argv[])
     //--------------------------------------------------
     {
       // Build and assign mesh
-      Mesh *mesh_pt = new ElasticRefineableQuarterCircleSectorMesh<
+      Mesh* mesh_pt = new ElasticRefineableQuarterCircleSectorMesh<
         RefineableQPVDElement<2, 2>>(
         curved_boundary_pt, xi_lo, fract_mid, xi_hi);
 
@@ -298,7 +298,7 @@ int main(int argc, char *argv[])
     //--------------------------------------------------
     {
       // Build and assign mesh
-      Mesh *mesh_pt = new ElasticRefineableQuarterCircleSectorMesh<
+      Mesh* mesh_pt = new ElasticRefineableQuarterCircleSectorMesh<
         RefineableQPVDElement<2, 3>>(
         curved_boundary_pt, xi_lo, fract_mid, xi_hi);
 
@@ -314,7 +314,7 @@ int main(int argc, char *argv[])
     //--------------------------------------------------
     {
       // Build and assign mesh
-      Mesh *mesh_pt = new ElasticRefineableQuarterCircleSectorMesh<
+      Mesh* mesh_pt = new ElasticRefineableQuarterCircleSectorMesh<
         RefineableQPVDElement<2, 4>>(
         curved_boundary_pt, xi_lo, fract_mid, xi_hi);
 
@@ -330,7 +330,7 @@ int main(int argc, char *argv[])
     //--------------------------------------------------
     {
       // Build and assign mesh
-      Mesh *mesh_pt = new ElasticRefineableQuarterCircleSectorMesh<
+      Mesh* mesh_pt = new ElasticRefineableQuarterCircleSectorMesh<
         RefineableQPVDElementWithContinuousPressure<2>>(
         curved_boundary_pt, xi_lo, fract_mid, xi_hi);
 
@@ -346,7 +346,7 @@ int main(int argc, char *argv[])
     //--------------------------------------------------
     {
       // Build and assign mesh
-      Mesh *mesh_pt = new ElasticRefineableQuarterCircleSectorMesh<
+      Mesh* mesh_pt = new ElasticRefineableQuarterCircleSectorMesh<
         RefineableQPVDElementWithPressure<2>>(
         curved_boundary_pt, xi_lo, fract_mid, xi_hi);
 
@@ -379,9 +379,9 @@ int main(int argc, char *argv[])
   double L_up = 1.0;
   double L = 5.0;
   double L_down = 5.0;
-  TimeStepper *time_stepper_pt = new Steady<0>;
+  TimeStepper* time_stepper_pt = new Steady<0>;
 
-  GeomObject *Wall_pt = new EllipticalTube(1.0, 1.0);
+  GeomObject* Wall_pt = new EllipticalTube(1.0, 1.0);
 
   // Boundaries on object: quarter tube
   Vector<double> xi_lo(2);
@@ -397,7 +397,7 @@ int main(int argc, char *argv[])
   //-------------------------------------------------------------
   {
     // Build and assign mesh
-    Mesh *mesh_pt =
+    Mesh* mesh_pt =
       new RefineableQuarterTubeMesh<RefineableQTaylorHoodElement<3>>(
         Wall_pt, xi_lo, frac_mid, xi_hi, nlayer, time_stepper_pt);
 
@@ -413,7 +413,7 @@ int main(int argc, char *argv[])
   //-------------------------------------------------------------
   {
     // Build and assign mesh
-    Mesh *mesh_pt =
+    Mesh* mesh_pt =
       new RefineableQuarterTubeMesh<RefineableQCrouzeixRaviartElement<3>>(
         Wall_pt, xi_lo, frac_mid, xi_hi, nlayer, time_stepper_pt);
 
@@ -429,7 +429,7 @@ int main(int argc, char *argv[])
   //--------------------------------------------------
   {
     // Build and assign mesh
-    Mesh *mesh_pt =
+    Mesh* mesh_pt =
       new SimpleRectangularQuadMesh<QTaylorHoodElement<2>>(n_x, n_y, l_x, l_y);
 
     // Filename for output
@@ -444,7 +444,7 @@ int main(int argc, char *argv[])
   //--------------------------------------------------
   {
     // Build and assign mesh
-    Mesh *mesh_pt = new SimpleRectangularQuadMesh<QCrouzeixRaviartElement<2>>(
+    Mesh* mesh_pt = new SimpleRectangularQuadMesh<QCrouzeixRaviartElement<2>>(
       n_x, n_y, l_x, l_y);
 
     // Filename for output
@@ -459,7 +459,7 @@ int main(int argc, char *argv[])
   //--------------------------------------------------
   {
     // Build and assign mesh
-    Mesh *mesh_pt = new SimpleRefineableRectangularQuadMesh<
+    Mesh* mesh_pt = new SimpleRefineableRectangularQuadMesh<
       RefineableQCrouzeixRaviartElement<2>>(n_x, n_y, l_x, l_y);
 
     // Filename for output
@@ -474,7 +474,7 @@ int main(int argc, char *argv[])
   //--------------------------------------------------
   {
     // Build and assign mesh
-    Mesh *mesh_pt =
+    Mesh* mesh_pt =
       new SimpleRefineableRectangularQuadMesh<RefineableQTaylorHoodElement<2>>(
         n_x, n_y, l_x, l_y);
 
@@ -490,7 +490,7 @@ int main(int argc, char *argv[])
   //-------------------------------------------------------------
   {
     // Build and assign mesh
-    Mesh *mesh_pt = new QuarterTubeMesh<QPoissonElement<3, 2>>(
+    Mesh* mesh_pt = new QuarterTubeMesh<QPoissonElement<3, 2>>(
       Wall_pt, xi_lo, frac_mid, xi_hi, nlayer, time_stepper_pt);
 
     // Filename for output
@@ -505,7 +505,7 @@ int main(int argc, char *argv[])
   //-------------------------------------------------------------
   {
     // Build and assign mesh
-    Mesh *mesh_pt = new QuarterTubeMesh<QPoissonElement<3, 3>>(
+    Mesh* mesh_pt = new QuarterTubeMesh<QPoissonElement<3, 3>>(
       Wall_pt, xi_lo, frac_mid, xi_hi, nlayer, time_stepper_pt);
 
     // Filename for output
@@ -520,7 +520,7 @@ int main(int argc, char *argv[])
   //-------------------------------------------------------------
   {
     // Build and assign mesh
-    Mesh *mesh_pt = new QuarterTubeMesh<QPoissonElement<3, 4>>(
+    Mesh* mesh_pt = new QuarterTubeMesh<QPoissonElement<3, 4>>(
       Wall_pt, xi_lo, frac_mid, xi_hi, nlayer, time_stepper_pt);
 
     // Filename for output
@@ -535,7 +535,7 @@ int main(int argc, char *argv[])
   //-------------------------------------------------------------
   {
     // Build and assign mesh
-    Mesh *mesh_pt =
+    Mesh* mesh_pt =
       new RefineableQuarterTubeMesh<RefineableQPoissonElement<3, 2>>(
         Wall_pt, xi_lo, frac_mid, xi_hi, nlayer, time_stepper_pt);
 
@@ -551,7 +551,7 @@ int main(int argc, char *argv[])
   //-------------------------------------------------------------
   {
     // Build and assign mesh
-    Mesh *mesh_pt =
+    Mesh* mesh_pt =
       new RefineableQuarterTubeMesh<RefineableQPoissonElement<3, 3>>(
         Wall_pt, xi_lo, frac_mid, xi_hi, nlayer, time_stepper_pt);
 
@@ -567,7 +567,7 @@ int main(int argc, char *argv[])
   //-------------------------------------------------------------
   {
     // Build and assign mesh
-    Mesh *mesh_pt =
+    Mesh* mesh_pt =
       new RefineableQuarterTubeMesh<RefineableQPoissonElement<3, 4>>(
         Wall_pt, xi_lo, frac_mid, xi_hi, nlayer, time_stepper_pt);
 
@@ -583,7 +583,7 @@ int main(int argc, char *argv[])
   //--------------------------------------------------
   {
     // Build mesh and store pointer
-    Mesh *mesh_pt = new OneDMesh<QPoissonElement<1, 2>>(nelem, 1.0);
+    Mesh* mesh_pt = new OneDMesh<QPoissonElement<1, 2>>(nelem, 1.0);
 
     // Filename for output
     string file_root = "poisson_1_2";
@@ -597,7 +597,7 @@ int main(int argc, char *argv[])
   //--------------------------------------------------
   {
     // Build mesh and store pointer
-    Mesh *mesh_pt = new OneDMesh<QPoissonElement<1, 3>>(nelem, 1.0);
+    Mesh* mesh_pt = new OneDMesh<QPoissonElement<1, 3>>(nelem, 1.0);
 
     // Filename for output
     string file_root = "poisson_1_3";
@@ -611,7 +611,7 @@ int main(int argc, char *argv[])
   //--------------------------------------------------
   {
     // Build mesh and store pointer
-    Mesh *mesh_pt = new OneDMesh<QPoissonElement<1, 4>>(nelem, 1.0);
+    Mesh* mesh_pt = new OneDMesh<QPoissonElement<1, 4>>(nelem, 1.0);
 
     // Filename for output
     string file_root = "poisson_1_4";
@@ -625,7 +625,7 @@ int main(int argc, char *argv[])
   //--------------------------------------------------
   {
     // Build and assign mesh
-    Mesh *mesh_pt =
+    Mesh* mesh_pt =
       new SimpleRectangularQuadMesh<QPoissonElement<2, 2>>(n_x, n_y, l_x, l_y);
 
     // Filename for output
@@ -640,7 +640,7 @@ int main(int argc, char *argv[])
   //--------------------------------------------------
   {
     // Build and assign mesh
-    Mesh *mesh_pt =
+    Mesh* mesh_pt =
       new SimpleRectangularQuadMesh<QPoissonElement<2, 3>>(n_x, n_y, l_x, l_y);
 
     // Filename for output
@@ -655,7 +655,7 @@ int main(int argc, char *argv[])
   //--------------------------------------------------
   {
     // Build and assign mesh
-    Mesh *mesh_pt =
+    Mesh* mesh_pt =
       new SimpleRectangularQuadMesh<QPoissonElement<2, 4>>(n_x, n_y, l_x, l_y);
 
     // Filename for output
@@ -670,7 +670,7 @@ int main(int argc, char *argv[])
   //--------------------------------------------------
   {
     // Build and assign mesh
-    Mesh *mesh_pt =
+    Mesh* mesh_pt =
       new SimpleRefineableRectangularQuadMesh<RefineableQPoissonElement<2, 2>>(
         n_x, n_y, l_x, l_y);
 
@@ -686,7 +686,7 @@ int main(int argc, char *argv[])
   //--------------------------------------------------
   {
     // Build and assign mesh
-    Mesh *mesh_pt =
+    Mesh* mesh_pt =
       new SimpleRefineableRectangularQuadMesh<RefineableQPoissonElement<2, 3>>(
         n_x, n_y, l_x, l_y);
 
@@ -702,7 +702,7 @@ int main(int argc, char *argv[])
   //--------------------------------------------------
   {
     // Build and assign mesh
-    Mesh *mesh_pt =
+    Mesh* mesh_pt =
       new SimpleRefineableRectangularQuadMesh<RefineableQPoissonElement<2, 4>>(
         n_x, n_y, l_x, l_y);
 
@@ -722,7 +722,7 @@ int main(int argc, char *argv[])
   //-------------------------------------------------------------
   {
     // Build and assign mesh
-    Mesh *mesh_pt = new QuarterTubeMesh<QUnsteadyHeatElement<3, 2>>(
+    Mesh* mesh_pt = new QuarterTubeMesh<QUnsteadyHeatElement<3, 2>>(
       Wall_pt, xi_lo, frac_mid, xi_hi, nlayer, time_stepper_pt);
 
     // Filename for output
@@ -737,7 +737,7 @@ int main(int argc, char *argv[])
   //-------------------------------------------------------------
   {
     // Build and assign mesh
-    Mesh *mesh_pt = new QuarterTubeMesh<QUnsteadyHeatElement<3, 3>>(
+    Mesh* mesh_pt = new QuarterTubeMesh<QUnsteadyHeatElement<3, 3>>(
       Wall_pt, xi_lo, frac_mid, xi_hi, nlayer, time_stepper_pt);
 
     // Filename for output
@@ -752,7 +752,7 @@ int main(int argc, char *argv[])
   //-------------------------------------------------------------
   {
     // Build and assign mesh
-    Mesh *mesh_pt = new QuarterTubeMesh<QUnsteadyHeatElement<3, 4>>(
+    Mesh* mesh_pt = new QuarterTubeMesh<QUnsteadyHeatElement<3, 4>>(
       Wall_pt, xi_lo, frac_mid, xi_hi, nlayer, time_stepper_pt);
 
     // Filename for output
@@ -769,7 +769,7 @@ int main(int argc, char *argv[])
   //--------------------------------------------------
   {
     // Build mesh and store pointer
-    Mesh *mesh_pt = new OneDMesh<QUnsteadyHeatElement<1, 2>>(nelem, 1.0);
+    Mesh* mesh_pt = new OneDMesh<QUnsteadyHeatElement<1, 2>>(nelem, 1.0);
 
     // Filename for output
     string file_root = "unsteady_heat_1_2";
@@ -783,7 +783,7 @@ int main(int argc, char *argv[])
   //--------------------------------------------------
   {
     // Build mesh and store pointer
-    Mesh *mesh_pt = new OneDMesh<QUnsteadyHeatElement<1, 3>>(nelem, 1.0);
+    Mesh* mesh_pt = new OneDMesh<QUnsteadyHeatElement<1, 3>>(nelem, 1.0);
 
     // Filename for output
     string file_root = "unsteady_heat_1_3";
@@ -797,7 +797,7 @@ int main(int argc, char *argv[])
   //--------------------------------------------------
   {
     // Build mesh and store pointer
-    Mesh *mesh_pt = new OneDMesh<QUnsteadyHeatElement<1, 4>>(nelem, 1.0);
+    Mesh* mesh_pt = new OneDMesh<QUnsteadyHeatElement<1, 4>>(nelem, 1.0);
 
     // Filename for output
     string file_root = "unsteady_heat_1_4";
@@ -811,7 +811,7 @@ int main(int argc, char *argv[])
   //--------------------------------------------------
   {
     // Build and assign mesh
-    Mesh *mesh_pt = new SimpleRectangularQuadMesh<QUnsteadyHeatElement<2, 2>>(
+    Mesh* mesh_pt = new SimpleRectangularQuadMesh<QUnsteadyHeatElement<2, 2>>(
       n_x, n_y, l_x, l_y);
 
     // Filename for output
@@ -826,7 +826,7 @@ int main(int argc, char *argv[])
   //--------------------------------------------------
   {
     // Build and assign mesh
-    Mesh *mesh_pt = new SimpleRectangularQuadMesh<QUnsteadyHeatElement<2, 3>>(
+    Mesh* mesh_pt = new SimpleRectangularQuadMesh<QUnsteadyHeatElement<2, 3>>(
       n_x, n_y, l_x, l_y);
 
     // Filename for output
@@ -841,7 +841,7 @@ int main(int argc, char *argv[])
   //--------------------------------------------------
   {
     // Build and assign mesh
-    Mesh *mesh_pt = new SimpleRectangularQuadMesh<QUnsteadyHeatElement<2, 4>>(
+    Mesh* mesh_pt = new SimpleRectangularQuadMesh<QUnsteadyHeatElement<2, 4>>(
       n_x, n_y, l_x, l_y);
 
     // Filename for output
@@ -856,7 +856,7 @@ int main(int argc, char *argv[])
   //--------------------------------------------------
   {
     // Build and assign mesh
-    Mesh *mesh_pt = new SimpleRefineableRectangularQuadMesh<
+    Mesh* mesh_pt = new SimpleRefineableRectangularQuadMesh<
       RefineableQUnsteadyHeatElement<2, 2>>(n_x, n_y, l_x, l_y);
 
     // Filename for output
@@ -871,7 +871,7 @@ int main(int argc, char *argv[])
   //--------------------------------------------------
   {
     // Build and assign mesh
-    Mesh *mesh_pt = new SimpleRefineableRectangularQuadMesh<
+    Mesh* mesh_pt = new SimpleRefineableRectangularQuadMesh<
       RefineableQUnsteadyHeatElement<2, 3>>(n_x, n_y, l_x, l_y);
 
     // Filename for output
@@ -886,7 +886,7 @@ int main(int argc, char *argv[])
   //--------------------------------------------------
   {
     // Build and assign mesh
-    Mesh *mesh_pt = new SimpleRefineableRectangularQuadMesh<
+    Mesh* mesh_pt = new SimpleRefineableRectangularQuadMesh<
       RefineableQUnsteadyHeatElement<2, 4>>(n_x, n_y, l_x, l_y);
 
     // Filename for output

@@ -37,7 +37,7 @@ namespace oomph
   /// Solid pressure shape function evaluated at integration point
   //==================================================================
   void AxisymmetricPVDEquationsWithPressure::solid_pshape_at_knot(
-    const unsigned &ipt, Shape &psi) const
+    const unsigned& ipt, Shape& psi) const
   {
     // Storage for local coordinates of the integration point
     Vector<double> s(2);

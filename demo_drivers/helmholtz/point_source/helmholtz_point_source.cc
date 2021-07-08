@@ -97,15 +97,15 @@ namespace oomph
     ~HelmholtzPointSourceElement() {}
 
     /// Set local coordinate and magnitude of point source
-    void setup(const Vector<double> &s_point_source,
-               const std::complex<double> &magnitude)
+    void setup(const Vector<double>& s_point_source,
+               const std::complex<double>& magnitude)
     {
       S_point_source = s_point_source;
       Point_source_magnitude = magnitude;
     }
 
     /// Add the element's contribution to its residual vector (wrapper)
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Call the generic residuals function with flag set to 0
       // using a dummy matrix argument
@@ -118,8 +118,8 @@ namespace oomph
 
     /// \short Add the element's contribution to its residual vector and
     /// element Jacobian matrix (wrapper)
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       // Call the generic routine with the flag set to 1
       ELEMENT::fill_in_generic_residual_contribution_helmholtz(
@@ -132,7 +132,7 @@ namespace oomph
   private:
     /// Add the point source contribution to the residual vector
     void fill_in_point_source_contribution_to_residuals(
-      Vector<double> &residuals)
+      Vector<double>& residuals)
     {
       // No further action
       if (S_point_source.size() == 0) return;
@@ -237,7 +237,7 @@ public:
 
   /// \short Doc the solution. DocInfo object stores flags/labels for where the
   /// output gets written to
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// \short Update the problem specs before solve (empty)
   void actions_before_newton_solve() {}
@@ -263,12 +263,12 @@ public:
 private:
   /// \short Create BC elements on boundary b of the Mesh pointed
   /// to by bulk_mesh_pt and add them to the specified survace Mesh
-  void create_outer_bc_elements(const unsigned &b,
-                                Mesh *const &bulk_mesh_pt,
-                                Mesh *const &helmholtz_outer_boundary_mesh_pt);
+  void create_outer_bc_elements(const unsigned& b,
+                                Mesh* const& bulk_mesh_pt,
+                                Mesh* const& helmholtz_outer_boundary_mesh_pt);
 
   /// \short Delete boundary face elements and wipe the surface mesh
-  void delete_face_elements(Mesh *const &boundary_mesh_pt);
+  void delete_face_elements(Mesh* const& boundary_mesh_pt);
 
   /// \short Set up boundary condition elements on outer boundary
   void setup_outer_boundary();
@@ -279,21 +279,21 @@ private:
 #ifdef ADAPTIVE
 
   /// Pointer to the "bulk" mesh
-  RefineableTriangleMesh<ELEMENT> *Bulk_mesh_pt;
+  RefineableTriangleMesh<ELEMENT>* Bulk_mesh_pt;
 
 #else
 
   /// Pointer to the "bulk" mesh
-  TriangleMesh<ELEMENT> *Bulk_mesh_pt;
+  TriangleMesh<ELEMENT>* Bulk_mesh_pt;
 
 #endif
 
   /// Mesh as geometric object representation of bulk mesh
-  MeshAsGeomObject *Mesh_as_geom_obj_pt;
+  MeshAsGeomObject* Mesh_as_geom_obj_pt;
 
   /// \short Pointer to mesh containing the DtN (or ABC) boundary
   /// condition elements
-  HelmholtzDtNMesh<ELEMENT> *Helmholtz_outer_boundary_mesh_pt;
+  HelmholtzDtNMesh<ELEMENT>* Helmholtz_outer_boundary_mesh_pt;
 
   /// Trace file
   ofstream Trace_file;
@@ -317,15 +317,15 @@ HelmholtzPointSourceProblem<ELEMENT>::HelmholtzPointSourceProblem()
   // Create circle representing outer boundary
   double x_c = 0.0;
   double y_c = 0.0;
-  Circle *outer_circle_pt =
+  Circle* outer_circle_pt =
     new Circle(x_c, y_c, GlobalParameters::Outer_radius);
 
   // Outer boundary
   //---------------
-  TriangleMeshClosedCurve *outer_boundary_pt = 0;
+  TriangleMeshClosedCurve* outer_boundary_pt = 0;
 
   unsigned n_segments = 40;
-  Vector<TriangleMeshCurveSection *> outer_boundary_line_pt(2);
+  Vector<TriangleMeshCurveSection*> outer_boundary_line_pt(2);
 
   // The intrinsic coordinates for the beginning and end of the curve
   double s_start = 0.0;
@@ -396,7 +396,7 @@ HelmholtzPointSourceProblem<ELEMENT>::HelmholtzPointSourceProblem()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to Helmholtz bulk element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
     // Set the k_squared  pointer
     el_pt->k_squared_pt() = &GlobalParameters::K_squared;
@@ -442,7 +442,7 @@ void HelmholtzPointSourceProblem<ELEMENT>::actions_after_adapt()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to Helmholtz bulk element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
     // Set the k_squared  pointer
     el_pt->k_squared_pt() = &GlobalParameters::K_squared;
@@ -480,14 +480,14 @@ void HelmholtzPointSourceProblem<ELEMENT>::setup_point_source()
   x_point_source[0] = 0.2;
   x_point_source[1] = 0.3;
 
-  GeomObject *sub_geom_object_pt = 0;
+  GeomObject* sub_geom_object_pt = 0;
   Vector<double> s_point_source(2);
   Mesh_as_geom_obj_pt->locate_zeta(
     x_point_source, sub_geom_object_pt, s_point_source);
 
   // Set point force
   std::complex<double> magnitude(2.0, 3.0);
-  dynamic_cast<ELEMENT *>(sub_geom_object_pt)->setup(s_point_source, magnitude);
+  dynamic_cast<ELEMENT*>(sub_geom_object_pt)->setup(s_point_source, magnitude);
 }
 
 //==================start_of_setup_outer_boundary=========================
@@ -505,8 +505,8 @@ void HelmholtzPointSourceProblem<ELEMENT>::setup_outer_boundary()
     if (GlobalParameters::DtN_BC)
     {
       // Upcast from GeneralisedElement to Helmholtz flux element
-      HelmholtzDtNBoundaryElement<ELEMENT> *el_pt =
-        dynamic_cast<HelmholtzDtNBoundaryElement<ELEMENT> *>(
+      HelmholtzDtNBoundaryElement<ELEMENT>* el_pt =
+        dynamic_cast<HelmholtzDtNBoundaryElement<ELEMENT>*>(
           Helmholtz_outer_boundary_mesh_pt->element_pt(e));
 
       // Set pointer to the mesh that contains all the boundary condition
@@ -517,8 +517,8 @@ void HelmholtzPointSourceProblem<ELEMENT>::setup_outer_boundary()
     else
     {
       // Upcast from GeneralisedElement to appropriate type
-      HelmholtzAbsorbingBCElement<ELEMENT> *el_pt =
-        dynamic_cast<HelmholtzAbsorbingBCElement<ELEMENT> *>(
+      HelmholtzAbsorbingBCElement<ELEMENT>* el_pt =
+        dynamic_cast<HelmholtzAbsorbingBCElement<ELEMENT>*>(
           Helmholtz_outer_boundary_mesh_pt->element_pt(e));
 
       // Set pointer to outer radius of artificial boundary
@@ -534,7 +534,7 @@ void HelmholtzPointSourceProblem<ELEMENT>::setup_outer_boundary()
 /// Doc the solution: doc_info contains labels/output directory etc.
 //========================================================================
 template<class ELEMENT>
-void HelmholtzPointSourceProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void HelmholtzPointSourceProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file, some_file2;
   char filename[100];
@@ -558,8 +558,8 @@ void HelmholtzPointSourceProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
   unsigned nn_element = Helmholtz_outer_boundary_mesh_pt->nelement();
   for (unsigned e = 0; e < nn_element; e++)
   {
-    HelmholtzBCElementBase<ELEMENT> *el_pt =
-      dynamic_cast<HelmholtzBCElementBase<ELEMENT> *>(
+    HelmholtzBCElementBase<ELEMENT>* el_pt =
+      dynamic_cast<HelmholtzBCElementBase<ELEMENT>*>(
         Helmholtz_outer_boundary_mesh_pt->element_pt(e));
     power += el_pt->global_power_contribution(some_file);
   }
@@ -594,17 +594,17 @@ void HelmholtzPointSourceProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
 //===========================================================================
 template<class ELEMENT>
 void HelmholtzPointSourceProblem<ELEMENT>::create_outer_bc_elements(
-  const unsigned &b,
-  Mesh *const &bulk_mesh_pt,
-  Mesh *const &helmholtz_outer_boundary_mesh_pt)
+  const unsigned& b,
+  Mesh* const& bulk_mesh_pt,
+  Mesh* const& helmholtz_outer_boundary_mesh_pt)
 {
   // Loop over the bulk elements adjacent to boundary b?
   unsigned n_element = bulk_mesh_pt->nboundary_element(b);
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    ELEMENT *bulk_elem_pt =
-      dynamic_cast<ELEMENT *>(bulk_mesh_pt->boundary_element_pt(b, e));
+    ELEMENT* bulk_elem_pt =
+      dynamic_cast<ELEMENT*>(bulk_mesh_pt->boundary_element_pt(b, e));
 
     // Find the index of the face of element e along boundary b
     int face_index = bulk_mesh_pt->face_index_at_boundary(b, e);
@@ -614,7 +614,7 @@ void HelmholtzPointSourceProblem<ELEMENT>::create_outer_bc_elements(
     // Dirichlet to Neumann boundary conditon
     if (GlobalParameters::DtN_BC)
     {
-      HelmholtzDtNBoundaryElement<ELEMENT> *flux_element_pt =
+      HelmholtzDtNBoundaryElement<ELEMENT>* flux_element_pt =
         new HelmholtzDtNBoundaryElement<ELEMENT>(bulk_elem_pt, face_index);
 
       // Add the flux boundary element to the  helmholtz_outer_boundary_mesh
@@ -623,7 +623,7 @@ void HelmholtzPointSourceProblem<ELEMENT>::create_outer_bc_elements(
     //  ABCs BC
     else
     {
-      HelmholtzAbsorbingBCElement<ELEMENT> *flux_element_pt =
+      HelmholtzAbsorbingBCElement<ELEMENT>* flux_element_pt =
         new HelmholtzAbsorbingBCElement<ELEMENT>(bulk_elem_pt, face_index);
 
       // Add the flux boundary element to the  helmholtz_outer_boundary_mesh
@@ -637,7 +637,7 @@ void HelmholtzPointSourceProblem<ELEMENT>::create_outer_bc_elements(
 //==========================================================
 template<class ELEMENT>
 void HelmholtzPointSourceProblem<ELEMENT>::delete_face_elements(
-  Mesh *const &boundary_mesh_pt)
+  Mesh* const& boundary_mesh_pt)
 {
   // Loop over the surface elements
   unsigned n_element = boundary_mesh_pt->nelement();
@@ -656,7 +656,7 @@ void HelmholtzPointSourceProblem<ELEMENT>::delete_face_elements(
 /// Solve 2D Helmholtz problem for scattering of a planar wave from a
 /// unit disk
 //========================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

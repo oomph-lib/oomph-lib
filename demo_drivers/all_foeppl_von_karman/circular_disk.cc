@@ -57,14 +57,14 @@ namespace GlobalParameters
   double Pressure = 0.0;
 
   /// Pressure depending on the position (x,y)
-  void get_pressure(const Vector<double> &x, double &pressure)
+  void get_pressure(const Vector<double>& x, double& pressure)
   {
     pressure = Pressure;
   }
 
   /// Function to compute norm of solution itself (we treat this
   /// as the "exact" solution)
-  void zero(const Vector<double> &x, Vector<double> &u)
+  void zero(const Vector<double>& x, Vector<double>& u)
   {
     u[0] = 0.0;
   }
@@ -109,7 +109,7 @@ private:
   void complete_problem_setup();
 
   /// Pointers to specific mesh
-  TriangleMesh<ELEMENT> *My_mesh_pt;
+  TriangleMesh<ELEMENT>* My_mesh_pt;
 
   /// Trace file to document norm of solution
   ofstream Trace_file;
@@ -130,10 +130,10 @@ private:
   /// Element area
   double Element_area;
   /// Geom object made of mesh
-  MeshAsGeomObject *Mesh_as_geom_object_pt;
+  MeshAsGeomObject* Mesh_as_geom_object_pt;
 
   /// Plot points along radial line are located in this element/local coord
-  Vector<std::pair<GeomObject *, Vector<double>>> Radial_sample_point_pt;
+  Vector<std::pair<GeomObject*, Vector<double>>> Radial_sample_point_pt;
 
 }; // end_of_problem_class
 
@@ -149,11 +149,11 @@ UnstructuredFvKProblem<ELEMENT>::UnstructuredFvKProblem(double element_area) :
 
   // Outer boundary
   //--------------
-  Ellipse *outer_boundary_ellipse_pt = new Ellipse(1.0, 1.0);
+  Ellipse* outer_boundary_ellipse_pt = new Ellipse(1.0, 1.0);
 
-  TriangleMeshClosedCurve *outer_boundary_pt = 0;
+  TriangleMeshClosedCurve* outer_boundary_pt = 0;
 
-  Vector<TriangleMeshCurveSection *> outer_curvilinear_boundary_pt(2);
+  Vector<TriangleMeshCurveSection*> outer_curvilinear_boundary_pt(2);
 
   // First bit
   double zeta_start = 0.0;
@@ -174,11 +174,11 @@ UnstructuredFvKProblem<ELEMENT>::UnstructuredFvKProblem(double element_area) :
 
   // Inner boundary
   //--------------
-  Ellipse *inner_boundary_ellipse_pt =
+  Ellipse* inner_boundary_ellipse_pt =
     new Ellipse(GlobalParameters::R_b, GlobalParameters::R_b);
 
-  Vector<TriangleMeshClosedCurve *> inner_boundary_pt(1);
-  Vector<TriangleMeshCurveSection *> inner_curvilinear_boundary_pt(2);
+  Vector<TriangleMeshClosedCurve*> inner_boundary_pt(1);
+  Vector<TriangleMeshCurveSection*> inner_curvilinear_boundary_pt(2);
 
   // First part
   zeta_start = 0.0;
@@ -209,7 +209,7 @@ UnstructuredFvKProblem<ELEMENT>::UnstructuredFvKProblem(double element_area) :
     new TriangleMeshClosedCurve(inner_curvilinear_boundary_pt);
 
   // Diameter boundary line
-  Vector<TriangleMeshOpenCurve *> inner_open_boundary_pt(4);
+  Vector<TriangleMeshOpenCurve*> inner_open_boundary_pt(4);
 
   Vector<Vector<double>> vertex_coord(2, Vector<double>(2));
 
@@ -219,18 +219,18 @@ UnstructuredFvKProblem<ELEMENT>::UnstructuredFvKProblem(double element_area) :
   vertex_coord[1][0] = 0.0;
   vertex_coord[1][1] = -GlobalParameters::R_b;
 
-  TriangleMeshPolyLine *inner_open_polyline1_pt =
+  TriangleMeshPolyLine* inner_open_polyline1_pt =
     new TriangleMeshPolyLine(vertex_coord, Inner_boundary2);
 
   inner_open_polyline1_pt->connect_initial_vertex_to_curviline(
-    dynamic_cast<TriangleMeshCurviLine *>(outer_curvilinear_boundary_pt[1]),
+    dynamic_cast<TriangleMeshCurviLine*>(outer_curvilinear_boundary_pt[1]),
     1.5 * MathematicalConstants::Pi);
 
   inner_open_polyline1_pt->connect_final_vertex_to_curviline(
-    dynamic_cast<TriangleMeshCurviLine *>(inner_curvilinear_boundary_pt[1]),
+    dynamic_cast<TriangleMeshCurviLine*>(inner_curvilinear_boundary_pt[1]),
     1.5 * MathematicalConstants::Pi);
 
-  Vector<TriangleMeshCurveSection *> inner_boundary_line1_pt(1);
+  Vector<TriangleMeshCurveSection*> inner_boundary_line1_pt(1);
   inner_boundary_line1_pt[0] = inner_open_polyline1_pt;
 
   inner_open_boundary_pt[0] =
@@ -242,14 +242,14 @@ UnstructuredFvKProblem<ELEMENT>::UnstructuredFvKProblem(double element_area) :
   vertex_coord[1][0] = 0.0;
   vertex_coord[1][1] = 0.0;
 
-  TriangleMeshPolyLine *inner_open_polyline2_pt =
+  TriangleMeshPolyLine* inner_open_polyline2_pt =
     new TriangleMeshPolyLine(vertex_coord, Inner_boundary3);
 
   inner_open_polyline2_pt->connect_initial_vertex_to_curviline(
-    dynamic_cast<TriangleMeshCurviLine *>(inner_curvilinear_boundary_pt[1]),
+    dynamic_cast<TriangleMeshCurviLine*>(inner_curvilinear_boundary_pt[1]),
     1.5 * MathematicalConstants::Pi);
 
-  Vector<TriangleMeshCurveSection *> inner_boundary_line2_pt(1);
+  Vector<TriangleMeshCurveSection*> inner_boundary_line2_pt(1);
   inner_boundary_line2_pt[0] = inner_open_polyline2_pt;
 
   inner_open_boundary_pt[1] =
@@ -261,17 +261,17 @@ UnstructuredFvKProblem<ELEMENT>::UnstructuredFvKProblem(double element_area) :
   vertex_coord[1][0] = 0.0;
   vertex_coord[1][1] = GlobalParameters::R_b;
 
-  TriangleMeshPolyLine *inner_open_polyline3_pt =
+  TriangleMeshPolyLine* inner_open_polyline3_pt =
     new TriangleMeshPolyLine(vertex_coord, Inner_boundary4);
 
   inner_open_polyline3_pt->connect_initial_vertex_to_polyline(
     inner_open_polyline2_pt, 1);
 
   inner_open_polyline3_pt->connect_final_vertex_to_curviline(
-    dynamic_cast<TriangleMeshCurviLine *>(inner_curvilinear_boundary_pt[0]),
+    dynamic_cast<TriangleMeshCurviLine*>(inner_curvilinear_boundary_pt[0]),
     0.5 * MathematicalConstants::Pi);
 
-  Vector<TriangleMeshCurveSection *> inner_boundary_line3_pt(1);
+  Vector<TriangleMeshCurveSection*> inner_boundary_line3_pt(1);
   inner_boundary_line3_pt[0] = inner_open_polyline3_pt;
 
   inner_open_boundary_pt[2] =
@@ -283,18 +283,18 @@ UnstructuredFvKProblem<ELEMENT>::UnstructuredFvKProblem(double element_area) :
   vertex_coord[1][0] = 0.0;
   vertex_coord[1][1] = 1.0;
 
-  TriangleMeshPolyLine *inner_open_polyline4_pt =
+  TriangleMeshPolyLine* inner_open_polyline4_pt =
     new TriangleMeshPolyLine(vertex_coord, Inner_boundary5);
 
   inner_open_polyline4_pt->connect_initial_vertex_to_curviline(
-    dynamic_cast<TriangleMeshCurviLine *>(inner_curvilinear_boundary_pt[0]),
+    dynamic_cast<TriangleMeshCurviLine*>(inner_curvilinear_boundary_pt[0]),
     0.5 * MathematicalConstants::Pi);
 
   inner_open_polyline4_pt->connect_final_vertex_to_curviline(
-    dynamic_cast<TriangleMeshCurviLine *>(outer_curvilinear_boundary_pt[0]),
+    dynamic_cast<TriangleMeshCurviLine*>(outer_curvilinear_boundary_pt[0]),
     0.5 * MathematicalConstants::Pi);
 
-  Vector<TriangleMeshCurveSection *> inner_boundary_line4_pt(1);
+  Vector<TriangleMeshCurveSection*> inner_boundary_line4_pt(1);
   inner_boundary_line4_pt[0] = inner_open_polyline4_pt;
 
   inner_open_boundary_pt[3] =
@@ -342,7 +342,7 @@ void UnstructuredFvKProblem<ELEMENT>::complete_problem_setup()
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Get node
-      Node *nod_pt = My_mesh_pt->boundary_node_pt(ibound, inod);
+      Node* nod_pt = My_mesh_pt->boundary_node_pt(ibound, inod);
 
       // Pin unknown values
       nod_pt->pin(0); // pin vertical displacement; Laplacian of w unpinned
@@ -356,7 +356,7 @@ void UnstructuredFvKProblem<ELEMENT>::complete_problem_setup()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(My_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(My_mesh_pt->element_pt(e));
 
     // Set the pressure function pointers and the physical constants
     el_pt->eta_pt() = &GlobalParameters::Eta;
@@ -432,7 +432,7 @@ void UnstructuredFvKProblem<ELEMENT>::doc_solution()
   unsigned nplot = Radial_sample_point_pt.size();
   for (unsigned j = 0; j < nplot; j++)
   {
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Radial_sample_point_pt[j].first);
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Radial_sample_point_pt[j].first);
     Vector<double> s = Radial_sample_point_pt[j].second;
     el_pt->interpolated_x(s, x);
     some_file << x[0] << " " << x[1] << " " << el_pt->interpolated_w_fvk(s)
@@ -463,7 +463,7 @@ void UnstructuredFvKProblem<ELEMENT>::doc_solution()
 //=======start_of_main========================================
 /// Driver code for demo of inline triangle mesh generation
 //============================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

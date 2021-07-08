@@ -44,11 +44,11 @@ namespace oomph
   /// the mesh which MUST have implemented a neighbour finding scheme
   //==================================================================
   void DGFaceElement::setup_neighbour_info(
-    const bool &add_neighbour_data_to_bulk)
+    const bool& add_neighbour_data_to_bulk)
   {
     // Cache the pointer to the bulk element
-    DGElement *const bulk_element_pt =
-      dynamic_cast<DGElement *>(this->bulk_element_pt());
+    DGElement* const bulk_element_pt =
+      dynamic_cast<DGElement*>(this->bulk_element_pt());
 
     // Find the number of points in the integration scheme
     const unsigned n_intpt = integral_pt()->nweight();
@@ -74,7 +74,7 @@ namespace oomph
     Vector<double> s_bulk(n_dim);
 
     // Storage for the interpolation data in the neighbour
-    Vector<Data *> neighbour_data;
+    Vector<Data*> neighbour_data;
 
     // Now loop over the integration points
     for (unsigned ipt = 0; ipt < n_intpt; ipt++)
@@ -100,7 +100,7 @@ namespace oomph
       if (add_neighbour_data_to_bulk)
       {
         // Throw the appropriate data from the neighbour face to the set
-        dynamic_cast<DGFaceElement *>(Neighbour_face_pt[ipt])
+        dynamic_cast<DGFaceElement*>(Neighbour_face_pt[ipt])
           ->get_interpolation_data(neighbour_data);
 
         // Find the number of data
@@ -194,7 +194,7 @@ namespace oomph
   //=====================================================================
   /// Return the interpolated values of the unknown fluxes
   //=====================================================================
-  void DGFaceElement::interpolated_u(const Vector<double> &s, Vector<double> &u)
+  void DGFaceElement::interpolated_u(const Vector<double>& s, Vector<double>& u)
   {
     // Find the number of nodes
     const unsigned n_node = nnode();
@@ -239,7 +239,7 @@ namespace oomph
   /// be consistent with the interpolated_u function above and the default
   /// implementation assumes pure nodal interpolaton.
   //=====================================================================
-  void DGFaceElement::get_interpolation_data(Vector<Data *> &interpolation_data)
+  void DGFaceElement::get_interpolation_data(Vector<Data*>& interpolation_data)
   {
     // Find the number of nodes
     const unsigned n_node = nnode();
@@ -264,11 +264,11 @@ namespace oomph
   /// most general interface than can be overloaded if desired. The shape
   /// functions at the knot point will be passed into this function.
   //====================================================================
-  void DGFaceElement::numerical_flux_at_knot(const unsigned &ipt,
-                                             const Shape &psi,
-                                             Vector<double> &flux,
-                                             DenseMatrix<double> &dflux_du_int,
-                                             DenseMatrix<double> &dflux_du_ext,
+  void DGFaceElement::numerical_flux_at_knot(const unsigned& ipt,
+                                             const Shape& psi,
+                                             Vector<double>& flux,
+                                             DenseMatrix<double>& dflux_du_int,
+                                             DenseMatrix<double>& dflux_du_ext,
                                              unsigned flag)
   {
     // Find the number of nodes
@@ -305,8 +305,8 @@ namespace oomph
     this->outer_unit_normal(ipt, interpolated_n);
 
     // Get the pointer to the neighbour
-    DGFaceElement *neighbour_element_pt =
-      dynamic_cast<DGFaceElement *>(Neighbour_face_pt[ipt]);
+    DGFaceElement* neighbour_element_pt =
+      dynamic_cast<DGFaceElement*>(Neighbour_face_pt[ipt]);
 
     // Get the neighbour's fluxes
     Vector<double> interpolated_u_neigh(n_flux);
@@ -336,11 +336,11 @@ namespace oomph
   /// with respect to the interior and exterior variables
   /// Default is to use finite differences
   //=============================================================
-  void DGFaceElement::dnumerical_flux_du(const Vector<double> &n_out,
-                                         const Vector<double> &u_int,
-                                         const Vector<double> &u_ext,
-                                         DenseMatrix<double> &dflux_du_int,
-                                         DenseMatrix<double> &dflux_du_ext)
+  void DGFaceElement::dnumerical_flux_du(const Vector<double>& n_out,
+                                         const Vector<double>& u_int,
+                                         const Vector<double>& u_ext,
+                                         DenseMatrix<double>& dflux_du_int,
+                                         DenseMatrix<double>& dflux_du_ext)
   {
     // Find the number of fluxes
     const unsigned n_flux = this->required_nflux();
@@ -413,8 +413,8 @@ namespace oomph
   /// Calculate the integrated (numerical) flux out of the face and add
   /// it to the residuals vector
   //===================================================================
-  void DGFaceElement::add_flux_contributions(Vector<double> &residuals,
-                                             DenseMatrix<double> &jacobian,
+  void DGFaceElement::add_flux_contributions(Vector<double>& residuals,
+                                             DenseMatrix<double>& jacobian,
                                              unsigned flag)
   {
 // Check that we have set up the coupling data if we are computing the jacobin
@@ -455,8 +455,7 @@ namespace oomph
     }
 
     // Cache the bulk element
-    DGElement *bulk_elem_pt =
-      dynamic_cast<DGElement *>(this->bulk_element_pt());
+    DGElement* bulk_elem_pt = dynamic_cast<DGElement*>(this->bulk_element_pt());
 
     // Storage for the flux and its derivatives
     Vector<double> F(n_flux);
@@ -486,8 +485,8 @@ namespace oomph
       // Limit if desired here
 
       // Cache the pointer to the neighbour
-      DGFaceElement *neighbour_element_pt =
-        dynamic_cast<DGFaceElement *>(Neighbour_face_pt[ipt]);
+      DGFaceElement* neighbour_element_pt =
+        dynamic_cast<DGFaceElement*>(Neighbour_face_pt[ipt]);
 
       // Finally  we need to assemble the appropriate contributions
       // to the residuals
@@ -550,7 +549,7 @@ namespace oomph
                   {
                     // Get the local unknown equation number in the bulk
                     int local_unknown =
-                      dynamic_cast<DGElement *>(this->bulk_element_pt())
+                      dynamic_cast<DGElement*>(this->bulk_element_pt())
                         ->external_local_eqn(Neighbour_external_data[ipt][l2],
                                              flux_nodal_index[i2]);
 
@@ -611,7 +610,7 @@ namespace oomph
   /// applied)
   //============================================================================
   void DGElement::get_inverse_mass_matrix_times_residuals(
-    Vector<double> &minv_res)
+    Vector<double>& minv_res)
   {
     // If there are external data this is not going to work
     if (nexternal_data() > 0)
@@ -671,16 +670,16 @@ namespace oomph
   }
 
   void DGElement::get_neighbouring_face_and_local_coordinate(
-    const int &face_index,
-    const Vector<double> &s,
-    FaceElement *&face_element_pt,
-    Vector<double> &s_face)
+    const int& face_index,
+    const Vector<double>& s,
+    FaceElement*& face_element_pt,
+    Vector<double>& s_face)
   {
     DG_mesh_pt->neighbour_finder(this, face_index, s, face_element_pt, s_face);
   }
 
   /// Limit the slope within an element
-  void DGElement::slope_limit(SlopeLimiter *const &slope_limiter_pt)
+  void DGElement::slope_limit(SlopeLimiter* const& slope_limiter_pt)
   {
     // Firstly find the dimension
     const unsigned n_dim = this->dim();
@@ -693,17 +692,17 @@ namespace oomph
       case 1:
       {
         // Storage for the element and its neighbours
-        Vector<DGElement *> required_element_pt(3);
+        Vector<DGElement*> required_element_pt(3);
         required_element_pt[0] = this;
 
         // Get the pointer to the element on the left
-        required_element_pt[1] = dynamic_cast<DGElement *>(
-          dynamic_cast<DGFaceElement *>(this->face_element_pt(0))
+        required_element_pt[1] = dynamic_cast<DGElement*>(
+          dynamic_cast<DGFaceElement*>(this->face_element_pt(0))
             ->neighbour_face_pt(0)
             ->bulk_element_pt());
         // Get the pointer to the element on the right
-        required_element_pt[2] = dynamic_cast<DGElement *>(
-          dynamic_cast<DGFaceElement *>(this->face_element_pt(1))
+        required_element_pt[2] = dynamic_cast<DGElement*>(
+          dynamic_cast<DGFaceElement*>(this->face_element_pt(1))
             ->neighbour_face_pt(0)
             ->bulk_element_pt());
 
@@ -733,7 +732,7 @@ namespace oomph
   //====================================================
   /// Helper minmod function
   //====================================================
-  double MinModLimiter::minmod(Vector<double> &args)
+  double MinModLimiter::minmod(Vector<double>& args)
   {
     const unsigned n_arg = args.size();
     // If no arguments return zero
@@ -792,7 +791,7 @@ namespace oomph
   }
 
   /// Modified minmod limiter to fix behaviour in smooth regions
-  double MinModLimiter::minmodB(Vector<double> &args, const double &h)
+  double MinModLimiter::minmodB(Vector<double>& args, const double& h)
   {
     const unsigned n_arg = args.size();
     // If no arguments return zero
@@ -814,8 +813,8 @@ namespace oomph
   }
 
   /// Implement the limiter function for the basic MinModlimiter
-  void MinModLimiter::limit(const unsigned &i,
-                            const Vector<DGElement *> &required_element_pt)
+  void MinModLimiter::limit(const unsigned& i,
+                            const Vector<DGElement*>& required_element_pt)
   {
     // Set the tolerance
     const double tol = 1.0e-16;

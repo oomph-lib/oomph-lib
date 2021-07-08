@@ -83,8 +83,8 @@ namespace oomph
     /// on more than one processor, then the returned Epetra_Vector will be
     /// uniformly distributed. If the oomph_vec is distributed then the
     /// Epetra_Vector returned will have the same distribution as oomp_vec.
-    Epetra_Vector *create_distributed_epetra_vector(
-      const DoubleVector &oomph_vec);
+    Epetra_Vector* create_distributed_epetra_vector(
+      const DoubleVector& oomph_vec);
 
     /// \short create an Epetra_Vector based on the argument oomph-lib
     /// LinearAlgebraDistribution
@@ -93,8 +93,8 @@ namespace oomph
     /// uniformly distributed. If dist is distributed then the Epetra_Vector
     /// returned will have the same distribution as dist.
     /// The coefficient values are not set.
-    Epetra_Vector *create_distributed_epetra_vector(
-      const LinearAlgebraDistribution *dist_pt);
+    Epetra_Vector* create_distributed_epetra_vector(
+      const LinearAlgebraDistribution* dist_pt);
 
     /// \short create an Epetra_Vector equivalent of DoubleVector
     /// The argument DoubleVector must be built.
@@ -102,13 +102,13 @@ namespace oomph
     /// DoubleVector.
     /// The oomph-lib DoubleVector and the returned Epetra_Vector will have the
     /// the same distribution.
-    Epetra_Vector *create_epetra_vector_view_data(DoubleVector &oomph_vec);
+    Epetra_Vector* create_epetra_vector_view_data(DoubleVector& oomph_vec);
 
     /// \short Helper function to copy the contents of a Trilinos vector to an
     /// oomph-lib distributed vector. The distribution of the two vectors must
     /// be identical
-    void copy_to_oomphlib_vector(const Epetra_Vector *epetra_vec_pt,
-                                 DoubleVector &oomph_vec);
+    void copy_to_oomphlib_vector(const Epetra_Vector* epetra_vec_pt,
+                                 DoubleVector& oomph_vec);
 
     // MATRIX METHODS
     // ============================================================
@@ -121,9 +121,9 @@ namespace oomph
     /// oomph_matrix_pt.
     /// The LinearAlgebraDistribution argument dist_pt should specify the
     /// distribution of the object this matrix will operate on.
-    Epetra_CrsMatrix *create_distributed_epetra_matrix(
-      const CRDoubleMatrix *oomph_matrix_pt,
-      const LinearAlgebraDistribution *dist_pt);
+    Epetra_CrsMatrix* create_distributed_epetra_matrix(
+      const CRDoubleMatrix* oomph_matrix_pt,
+      const LinearAlgebraDistribution* dist_pt);
 
     /// \short create and Epetra_CrsMatrix from an oomph-lib CRDoubleMatrix.
     /// Specialisation for Trilinos AztecOO.
@@ -134,8 +134,8 @@ namespace oomph
     /// oomph_matrix_pt.
     /// For AztecOO, the column map is ordered such that the local rows are
     /// first.
-    Epetra_CrsMatrix *create_distributed_epetra_matrix_for_aztecoo(
-      CRDoubleMatrix *oomph_matrix_pt);
+    Epetra_CrsMatrix* create_distributed_epetra_matrix_for_aztecoo(
+      CRDoubleMatrix* oomph_matrix_pt);
 
     // MATRIX OPERATION METHODS
     // ==================================================
@@ -146,9 +146,9 @@ namespace oomph
     /// NOTE 2. The vector will be returned with the same distribution
     /// as the matrix, unless a distribution is predefined in the solution
     /// vector in which case the vector will be returned with that distribution.
-    void multiply(const CRDoubleMatrix *matrix,
-                  const DoubleVector &x,
-                  DoubleVector &soln);
+    void multiply(const CRDoubleMatrix* matrix,
+                  const DoubleVector& x,
+                  DoubleVector& soln);
 
     /// \short Function to perform a matrix-matrix multiplication on oomph-lib
     /// matrices by using Trilinos functionality.
@@ -158,16 +158,16 @@ namespace oomph
     /// \b NOTE 2. the solution matrix (matrix_soln) will be returned with the
     /// same distribution as matrix1
     /// \b NOTE 3. All matrices must share the same communicator.
-    void multiply(const CRDoubleMatrix &matrix_1,
-                  const CRDoubleMatrix &matrix_2,
-                  CRDoubleMatrix &matrix_soln,
-                  const bool &use_ml = false);
+    void multiply(const CRDoubleMatrix& matrix_1,
+                  const CRDoubleMatrix& matrix_2,
+                  CRDoubleMatrix& matrix_soln,
+                  const bool& use_ml = false);
 
     // HELPER METHODS
     // ============================================================
 
     /// create an Epetra_Map corresponding to the LinearAlgebraDistribution
-    Epetra_Map *create_epetra_map(const LinearAlgebraDistribution *const dist);
+    Epetra_Map* create_epetra_map(const LinearAlgebraDistribution* const dist);
   }; // namespace TrilinosEpetraHelpers
 } // namespace oomph
 #endif

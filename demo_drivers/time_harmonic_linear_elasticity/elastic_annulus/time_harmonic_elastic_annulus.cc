@@ -66,7 +66,7 @@ namespace Global_Parameters
   double Displacement_amplitude = 0.1;
 
   /// Real-valued, radial displacement field on inner boundary
-  void solid_boundary_displacement(const Vector<double> &x, Vector<double> &u)
+  void solid_boundary_displacement(const Vector<double>& x, Vector<double>& u)
   {
     Vector<double> normal(2);
     double norm = sqrt(x[0] * x[0] + x[1] * x[1]);
@@ -81,9 +81,9 @@ namespace Global_Parameters
   double P = 0.0;
 
   /// Constant pressure load (real and imag part)
-  void constant_pressure(const Vector<double> &x,
-                         const Vector<double> &n,
-                         Vector<std::complex<double>> &traction)
+  void constant_pressure(const Vector<double>& x,
+                         const Vector<double>& n,
+                         Vector<std::complex<double>>& traction)
   {
     unsigned dim = traction.size();
     for (unsigned i = 0; i < dim; i++)
@@ -102,7 +102,7 @@ namespace Global_Parameters
   unsigned Nr = 10;
 
   /// Helper function to evaluate Y_n(x) from bloody maple output
-  double BesselY(const double &n, const double &x)
+  double BesselY(const double& n, const double& x)
   {
     // Bessel fcts J_0(x), J_1(x), Y_0(x), Y_1(x) and their derivatives
     double j0, j1, y0, y1, j0p, j1p, y0p, y1p;
@@ -124,7 +124,7 @@ namespace Global_Parameters
   }
 
   /// Helper function to evaluate J_n(x) from bloody maple output
-  double BesselJ(const double &n, const double &x)
+  double BesselJ(const double& n, const double& x)
   {
     // Bessel fcts J_0(x), J_1(x), Y_0(x), Y_1(x) and their derivatives
     double j0, j1, y0, y1, j0p, j1p, y0p, y1p;
@@ -146,7 +146,7 @@ namespace Global_Parameters
   }
 
   /// Exact solution as a Vector
-  void exact_u(const Vector<double> &x, Vector<double> &u)
+  void exact_u(const Vector<double>& x, Vector<double>& u)
   {
     double r = sqrt(x[0] * x[0] + x[1] * x[1]);
 
@@ -597,17 +597,17 @@ private:
 #ifdef ADAPTIVE
 
   /// Pointer to refineable solid mesh
-  TreeBasedRefineableMeshBase *Solid_mesh_pt;
+  TreeBasedRefineableMeshBase* Solid_mesh_pt;
 
 #else
 
   /// Pointer to solid mesh
-  Mesh *Solid_mesh_pt;
+  Mesh* Solid_mesh_pt;
 
 #endif
 
   /// Pointer to mesh of traction elements
-  Mesh *Traction_mesh_pt;
+  Mesh* Traction_mesh_pt;
 
   /// DocInfo object for output
   DocInfo Doc_info;
@@ -678,8 +678,8 @@ AnnularDiskProblem<ELASTICITY_ELEMENT>::AnnularDiskProblem()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Cast to a solid element
-    ELASTICITY_ELEMENT *el_pt =
-      dynamic_cast<ELASTICITY_ELEMENT *>(Solid_mesh_pt->element_pt(i));
+    ELASTICITY_ELEMENT* el_pt =
+      dynamic_cast<ELASTICITY_ELEMENT*>(Solid_mesh_pt->element_pt(i));
 
     // Set the constitutive law
     el_pt->elasticity_tensor_pt() = &Global_Parameters::E;
@@ -715,7 +715,7 @@ AnnularDiskProblem<ELASTICITY_ELEMENT>::AnnularDiskProblem()
   Vector<double> x(2);
   for (unsigned i = 0; i < n_node; i++)
   {
-    Node *nod_pt = Solid_mesh_pt->boundary_node_pt(b_inner, i);
+    Node* nod_pt = Solid_mesh_pt->boundary_node_pt(b_inner, i);
     nod_pt->pin(0);
     nod_pt->pin(1);
     nod_pt->pin(2);
@@ -799,14 +799,14 @@ void AnnularDiskProblem<ELASTICITY_ELEMENT>::create_traction_elements()
     for (unsigned e = 0; e < n_element; e++)
     {
       // Get pointer to the bulk element that is adjacent to boundary b
-      ELASTICITY_ELEMENT *bulk_elem_pt = dynamic_cast<ELASTICITY_ELEMENT *>(
+      ELASTICITY_ELEMENT* bulk_elem_pt = dynamic_cast<ELASTICITY_ELEMENT*>(
         Solid_mesh_pt->boundary_element_pt(b, e));
 
       // Find the index of the face of element e along boundary b
       int face_index = Solid_mesh_pt->face_index_at_boundary(b, e);
 
       // Create element
-      TimeHarmonicLinearElasticityTractionElement<ELASTICITY_ELEMENT> *el_pt =
+      TimeHarmonicLinearElasticityTractionElement<ELASTICITY_ELEMENT>* el_pt =
         new TimeHarmonicLinearElasticityTractionElement<ELASTICITY_ELEMENT>(
           bulk_elem_pt, face_index);
 
@@ -895,7 +895,7 @@ void AnnularDiskProblem<ELASTICITY_ELEMENT>::doc_solution()
 //=======start_of_main==================================================
 /// Driver for annular disk loaded by pressure
 //======================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

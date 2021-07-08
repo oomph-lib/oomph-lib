@@ -73,7 +73,7 @@ namespace oomph
     EigenSolver() : Sigma_real(0.0) {}
 
     /// Empty copy constructor
-    EigenSolver(const EigenSolver &) {}
+    EigenSolver(const EigenSolver&) {}
 
     /// Empty destructor
     virtual ~EigenSolver() {}
@@ -81,19 +81,19 @@ namespace oomph
     /// \short Actual eigensolver. This takes a pointer to a problem and returns
     /// a vector of complex numbers representing the eigenvalues
     /// and a corresponding vector of eigenvectors
-    virtual void solve_eigenproblem(Problem *const &problem_pt,
-                                    const int &n_eval,
-                                    Vector<std::complex<double>> &eigenvalue,
-                                    Vector<DoubleVector> &eigenvector) = 0;
+    virtual void solve_eigenproblem(Problem* const& problem_pt,
+                                    const int& n_eval,
+                                    Vector<std::complex<double>>& eigenvalue,
+                                    Vector<DoubleVector>& eigenvector) = 0;
 
     /// Set the value of the shift
-    void set_shift(const double &shift_value)
+    void set_shift(const double& shift_value)
     {
       Sigma_real = shift_value;
     }
 
     /// Return the value of the shift (const version)
-    const double &get_shift() const
+    const double& get_shift() const
     {
       return Sigma_real;
     }
@@ -106,10 +106,10 @@ namespace oomph
   {
   private:
     /// \short Pointer to a linear solver
-    LinearSolver *Linear_solver_pt;
+    LinearSolver* Linear_solver_pt;
 
     /// \short Pointer to a default linear solver
-    LinearSolver *Default_linear_solver_pt;
+    LinearSolver* Default_linear_solver_pt;
 
     /// \short Integer to set whether the real, imaginary or magnitude is
     /// required
@@ -131,19 +131,19 @@ namespace oomph
     ARPACK();
 
     /// Empty copy constructor
-    ARPACK(const ARPACK &) {}
+    ARPACK(const ARPACK&) {}
 
     /// Destructor, delete the linear solver
     virtual ~ARPACK();
 
     /// Access function for the number of Arnoldi vectors
-    int &narnoldi()
+    int& narnoldi()
     {
       return NArnoldi;
     }
 
     /// Access function for the number of Arnoldi vectors (const version)
-    const int &narnoldi() const
+    const int& narnoldi() const
     {
       return NArnoldi;
     }
@@ -161,10 +161,10 @@ namespace oomph
     }
 
     /// Solve the eigen problem
-    void solve_eigenproblem(Problem *const &problem_pt,
-                            const int &n_eval,
-                            Vector<std::complex<double>> &eigenvalue,
-                            Vector<DoubleVector> &eigenvector);
+    void solve_eigenproblem(Problem* const& problem_pt,
+                            const int& n_eval,
+                            Vector<std::complex<double>>& eigenvalue,
+                            Vector<DoubleVector>& eigenvector);
 
     /// Use the eigensolver to find the eigenvalues of a given matrix
     // void find_eigenvalues(const DoubleMatrixBase &A, const int &n_eval,
@@ -202,13 +202,13 @@ namespace oomph
     }
 
     /// Return a pointer to the linear solver object
-    LinearSolver *&linear_solver_pt()
+    LinearSolver*& linear_solver_pt()
     {
       return Linear_solver_pt;
     }
 
     /// Return a pointer to the linear solver object (const version)
-    LinearSolver *const &linear_solver_pt() const
+    LinearSolver* const& linear_solver_pt() const
     {
       return Linear_solver_pt;
     }
@@ -224,23 +224,23 @@ namespace oomph
     LAPACK_QZ() : EigenSolver() {}
 
     /// Empty copy constructor
-    LAPACK_QZ(const LAPACK_QZ &) {}
+    LAPACK_QZ(const LAPACK_QZ&) {}
 
     /// Empty desctructor
     virtual ~LAPACK_QZ() {}
 
     /// Solve the eigen problem
-    void solve_eigenproblem(Problem *const &problem_pt,
-                            const int &n_eval,
-                            Vector<std::complex<double>> &eigenvalue,
-                            Vector<DoubleVector> &eigenvector);
+    void solve_eigenproblem(Problem* const& problem_pt,
+                            const int& n_eval,
+                            Vector<std::complex<double>>& eigenvalue,
+                            Vector<DoubleVector>& eigenvector);
 
     /// Find the eigenvalues of a generalised eigenvalue problem
     /// specified by \f$ Ax = \lambda  Mx \f$
-    void find_eigenvalues(const ComplexMatrixBase &A,
-                          const ComplexMatrixBase &M,
-                          Vector<std::complex<double>> &eigenvalue,
-                          Vector<Vector<std::complex<double>>> &eigenvector);
+    void find_eigenvalues(const ComplexMatrixBase& A,
+                          const ComplexMatrixBase& M,
+                          Vector<std::complex<double>>& eigenvalue,
+                          Vector<Vector<std::complex<double>>>& eigenvector);
 
     /// Set the desired eigenvalues to be right of the shift
     /// Dummy at the moment

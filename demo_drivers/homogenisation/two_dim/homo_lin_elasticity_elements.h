@@ -55,8 +55,8 @@ namespace oomph
   {
   public:
     /// \short Function pointer to a return a pointer to an  elasticity tensor
-    typedef void (*HomLinElasticityTensorFctPt)(const Vector<double> &x,
-                                                ElasticityTensor *&E_pt);
+    typedef void (*HomLinElasticityTensorFctPt)(const Vector<double>& x,
+                                                ElasticityTensor*& E_pt);
 
     /// \short Return the index at which the i-th unknown displacement
     /// component is stored. The default value, i, is appropriate for
@@ -67,8 +67,8 @@ namespace oomph
     }
 
     /// Compute vector of FE interpolated displacement u at local coordinate s
-    void interpolated_u_linear_elasticity(const Vector<double> &s,
-                                          Vector<double> &disp) const
+    void interpolated_u_linear_elasticity(const Vector<double>& s,
+                                          Vector<double>& disp) const
     {
       // Find number of nodes
       unsigned n_node = nnode();
@@ -92,8 +92,8 @@ namespace oomph
     }
 
     /// Return FE interpolated displacement u[i] at local coordinate s
-    double interpolated_u_linear_elasticity(const Vector<double> &s,
-                                            const unsigned &i) const
+    double interpolated_u_linear_elasticity(const Vector<double>& s,
+                                            const unsigned& i) const
     {
       // Find number of nodes
       unsigned n_node = nnode();
@@ -129,7 +129,7 @@ namespace oomph
     }
 
     /// Access function for the pointer to the p value
-    unsigned *&p_pt()
+    unsigned*& p_pt()
     {
       return P_pt;
     }
@@ -151,7 +151,7 @@ namespace oomph
     }
 
     /// Access function for the pointer to the m value
-    unsigned *&m_pt()
+    unsigned*& m_pt()
     {
       return M_pt;
     }
@@ -173,7 +173,7 @@ namespace oomph
     }
 
     /// Access function to set the function pointer for the elasticity tensor
-    HomLinElasticityTensorFctPt &elasticity_tensor_fct_pt()
+    HomLinElasticityTensorFctPt& elasticity_tensor_fct_pt()
     {
       return Elasticity_tensor_fct_pt;
     }
@@ -187,7 +187,7 @@ namespace oomph
 
     /// \short Function to get the specific value of elasticity tensor
     /// at the given position
-    inline void get_E_pt(const Vector<double> &x, ElasticityTensor *&E_pt)
+    inline void get_E_pt(const Vector<double>& x, ElasticityTensor*& E_pt)
     {
       if (this->Elasticity_tensor_fct_pt == 0)
       {
@@ -202,19 +202,19 @@ namespace oomph
     }
 
     /// Access function for timescale ratio (nondim density)
-    const double &lambda_sq() const
+    const double& lambda_sq() const
     {
       return *Lambda_sq_pt;
     }
 
     /// Access function for pointer to timescale ratio (nondim density)
-    double *&lambda_sq_pt()
+    double*& lambda_sq_pt()
     {
       return Lambda_sq_pt;
     }
 
     /// Access function to flag that switches inertia on/off
-    bool &unsteady()
+    bool& unsteady()
     {
       return Unsteady;
     }
@@ -225,8 +225,8 @@ namespace oomph
       return Unsteady;
     }
 
-    virtual FaceElement *make_face_element(const unsigned &s_fixed_index,
-                                           const int &s_limit)
+    virtual FaceElement* make_face_element(const unsigned& s_fixed_index,
+                                           const int& s_limit)
     {
       throw OomphLibError("make_face_element not implemented",
                           OOMPH_CURRENT_FUNCTION,
@@ -238,13 +238,13 @@ namespace oomph
     HomLinElasticityTensorFctPt Elasticity_tensor_fct_pt;
 
     /// Timescale ratio (non-dim. density)
-    double *Lambda_sq_pt;
+    double* Lambda_sq_pt;
 
     /// \short Pointer to the index P in the cell problem
-    unsigned *P_pt;
+    unsigned* P_pt;
 
     /// \short Pointer to the index M in the cell problem
-    unsigned *M_pt;
+    unsigned* M_pt;
 
     /// Flag that switches inertia on/off
     bool Unsteady;
@@ -266,14 +266,14 @@ namespace oomph
     HomogenisedLinearElasticityEquations() {}
 
     /// Always have three displacement components
-    unsigned required_nvalue(const unsigned &n) const
+    unsigned required_nvalue(const unsigned& n) const
     {
       return 3;
     }
 
     /// \short Return the residuals for the solid equations (the discretised
     /// principle of virtual displacements)
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       fill_in_generic_contribution_to_residuals_linear_elasticity(
         residuals, GeneralisedElement::Dummy_matrix, 0);
@@ -282,13 +282,13 @@ namespace oomph
     /// \short Return the generic contribuion to the residuals and (optionally)
     /// the jacobian matrix depending on the flag
     virtual void fill_in_generic_contribution_to_residuals_linear_elasticity(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag);
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
 
     /// The jacobian is calculated by finite differences by default,
     /// We need only to take finite differences w.r.t. positional variables
     /// For this element
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       // Add the contribution to the residuals
       this->fill_in_generic_contribution_to_residuals_linear_elasticity(
@@ -296,27 +296,27 @@ namespace oomph
     }
 
     /// Compute contribution to the effective modulus
-    void calculate_effective_modulus(DenseMatrix<double> &H);
+    void calculate_effective_modulus(DenseMatrix<double>& H);
 
     /// Output: x,y,[z],xi0,xi1,[xi2],gamma
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       unsigned n_plot = 5;
       output(outfile, n_plot);
     }
 
     /// Output: x,y,[z],xi0,xi1,[xi2],gamma
-    void output(std::ostream &outfile, const unsigned &n_plot);
+    void output(std::ostream& outfile, const unsigned& n_plot);
 
     /// C-style output: x,y,[z],xi0,xi1,[xi2],gamma
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       unsigned n_plot = 5;
       output(file_pt, n_plot);
     }
 
     /// Output: x,y,[z],xi0,xi1,[xi2],gamma
-    void output(FILE *file_pt, const unsigned &n_plot);
+    void output(FILE* file_pt, const unsigned& n_plot);
   };
 
 } // namespace oomph

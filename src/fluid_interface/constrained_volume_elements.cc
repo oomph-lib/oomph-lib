@@ -39,7 +39,7 @@ namespace oomph
   //====================================================================
   void VolumeConstraintElement::
     fill_in_generic_contribution_to_residuals_volume_constraint(
-      Vector<double> &residuals)
+      Vector<double>& residuals)
   {
     // Note: This element can only be used with the associated
     // VolumeConstraintBoundingElement elements which compute the actual
@@ -60,7 +60,7 @@ namespace oomph
   /// "traded" for the volume contraint is created internally (as a Data
   /// item with a single pressure value)
   //===========================================================================
-  VolumeConstraintElement::VolumeConstraintElement(double *prescribed_volume_pt)
+  VolumeConstraintElement::VolumeConstraintElement(double* prescribed_volume_pt)
   {
     // Store pointer to prescribed volume
     Prescribed_volume_pt = prescribed_volume_pt;
@@ -84,9 +84,9 @@ namespace oomph
   /// The Data is stored as external Data for this element.
   //======================================================================
   VolumeConstraintElement::VolumeConstraintElement(
-    double *prescribed_volume_pt,
-    Data *p_traded_data_pt,
-    const unsigned &index_of_traded_pressure)
+    double* prescribed_volume_pt,
+    Data* p_traded_data_pt,
+    const unsigned& index_of_traded_pressure)
   {
     // Store pointer to prescribed volume
     Prescribed_volume_pt = prescribed_volume_pt;
@@ -114,7 +114,7 @@ namespace oomph
   //====================================================================
   void LineVolumeConstraintBoundingElement::
     fill_in_generic_residual_contribution_volume_constraint(
-      Vector<double> &residuals)
+      Vector<double>& residuals)
   {
     // Add in the volume constraint term if required
     const int local_eqn = this->ptraded_local_eqn();
@@ -347,7 +347,7 @@ namespace oomph
   //====================================================================
   void AxisymmetricVolumeConstraintBoundingElement::
     fill_in_generic_residual_contribution_volume_constraint(
-      Vector<double> &residuals)
+      Vector<double>& residuals)
   {
     // Add in the volume constraint term if required
     const int local_eqn = this->ptraded_local_eqn();
@@ -429,7 +429,7 @@ namespace oomph
   //=================================================================
   void SurfaceVolumeConstraintBoundingElement::
     fill_in_generic_residual_contribution_volume_constraint(
-      Vector<double> &residuals)
+      Vector<double>& residuals)
   {
     // Add in the volume constraint term if required
     const int local_eqn = this->ptraded_local_eqn();

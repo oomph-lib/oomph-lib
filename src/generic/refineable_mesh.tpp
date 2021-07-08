@@ -56,7 +56,7 @@ namespace oomph
   //========================================================================
   template<class ELEMENT>
   void TreeBasedRefineableMesh<ELEMENT>::additional_synchronise_hanging_nodes(
-    const unsigned &ncont_interpolated_values)
+    const unsigned& ncont_interpolated_values)
   {
     // Check if additional synchronisation of hanging nodes is disabled
     if (is_additional_synchronisation_of_hanging_nodes_disabled() == true)
@@ -152,7 +152,7 @@ namespace oomph
 
     // Storage for the haloed nodes with discrepancies in their hanging status
     // with each processor
-    Vector<std::map<Node *, unsigned>> haloed_hanging_node_with_discrepancy_pt(
+    Vector<std::map<Node*, unsigned>> haloed_hanging_node_with_discrepancy_pt(
       n_proc);
 
     if (Global_timings::Doc_comprehensive_timings)
@@ -176,7 +176,7 @@ namespace oomph
         for (unsigned j = 0; j < nh; j++)
         {
           // Get node
-          Node *nod_pt = haloed_node_pt(d, j);
+          Node* nod_pt = haloed_node_pt(d, j);
 
           // Loop over the hanging status for each interpolated variable
           // (and the geometry)
@@ -244,7 +244,7 @@ namespace oomph
             for (unsigned j = 0; j < nh; j++)
             {
               // Get node
-              Node *nod_pt = halo_node_pt(dd, j);
+              Node* nod_pt = halo_node_pt(dd, j);
 
               // Loop over the hanging status for each interpolated variable
               // (and the geometry)
@@ -317,7 +317,7 @@ namespace oomph
         for (unsigned j = 0; j < nh; j++)
         {
           // Get node
-          Node *nod_pt = haloed_node_pt(d, j);
+          Node* nod_pt = haloed_node_pt(d, j);
 
           // Loop over the hanging status for each interpolated variable
           // (and the geometry)
@@ -333,7 +333,7 @@ namespace oomph
             {
               // Store this node so it can be synchronised later
               haloed_hanging_node_with_discrepancy_pt[d].insert(
-                std::pair<Node *, unsigned>(nod_pt, d));
+                std::pair<Node*, unsigned>(nod_pt, d));
             }
             // Increment counter for number of haloed data
             count++;
@@ -365,16 +365,16 @@ namespace oomph
         Vector<unsigned> haloed_nonmaster_node_index(0);
 
         // Loop over hanging halo nodes with discrepancies
-        std::map<Node *, unsigned>::iterator j;
+        std::map<Node*, unsigned>::iterator j;
         for (j = haloed_hanging_node_with_discrepancy_pt[d].begin();
              j != haloed_hanging_node_with_discrepancy_pt[d].end();
              j++)
         {
-          Node *nod_pt = (*j).first;
+          Node* nod_pt = (*j).first;
           // Find index of this haloed node in the halo storage of processor d
           //(But find in shared node storage in case it is actually haloed on
           // another processor which we don't know about)
-          std::vector<Node *>::iterator it = std::find(
+          std::vector<Node*>::iterator it = std::find(
             Shared_node_pt[d].begin(), Shared_node_pt[d].end(), nod_pt);
           if (it != Shared_node_pt[d].end())
           {
@@ -544,11 +544,11 @@ namespace oomph
             {
               // Get pointer to halo nonmaster node which needs processing
               //(But given index is its index in the shared storage)
-              Node *nod_pt = shared_node_pt(dd, halo_nonmaster_node_index[j]);
+              Node* nod_pt = shared_node_pt(dd, halo_nonmaster_node_index[j]);
 
 #ifdef PARANOID
               // Check if we have a MacroElementNodeUpdateNode
-              if (dynamic_cast<MacroElementNodeUpdateNode *>(nod_pt))
+              if (dynamic_cast<MacroElementNodeUpdateNode*>(nod_pt))
               {
                 // BENFLAG: The construction of missing master nodes for
                 //         MacroElementNodeUpdateNodes does not work as
@@ -620,7 +620,7 @@ namespace oomph
     {
       // map of bools for whether the (external) node has been shared,
       // initialised to 0 (false) for each domain d
-      std::map<Node *, bool> node_shared;
+      std::map<Node*, bool> node_shared;
 
       // For all domains lower than the current domain: Do halos first
       // then haloed, to ensure correct order in lookup scheme from
@@ -631,7 +631,7 @@ namespace oomph
         unsigned nexternal_halo_nod = nexternal_halo_node(d);
         for (unsigned j = 0; j < nexternal_halo_nod; j++)
         {
-          Node *nod_pt = external_halo_node_pt(d, j);
+          Node* nod_pt = external_halo_node_pt(d, j);
 
           // Add it as a shared node from current domain
           if (!node_shared[nod_pt])
@@ -647,7 +647,7 @@ namespace oomph
         unsigned nexternal_haloed_nod = nexternal_haloed_node(d);
         for (unsigned j = 0; j < nexternal_haloed_nod; j++)
         {
-          Node *nod_pt = external_haloed_node_pt(d, j);
+          Node* nod_pt = external_haloed_node_pt(d, j);
 
           // Add it as a shared node from current domain
           if (!node_shared[nod_pt])
@@ -673,7 +673,7 @@ namespace oomph
         unsigned nexternal_haloed_nod = nexternal_haloed_node(d);
         for (unsigned j = 0; j < nexternal_haloed_nod; j++)
         {
-          Node *nod_pt = external_haloed_node_pt(d, j);
+          Node* nod_pt = external_haloed_node_pt(d, j);
 
           // Add it as a shared node from current domain
           if (!node_shared[nod_pt])
@@ -693,7 +693,7 @@ namespace oomph
         unsigned nexternal_halo_nod = nexternal_halo_node(d);
         for (unsigned j = 0; j < nexternal_halo_nod; j++)
         {
-          Node *nod_pt = external_halo_node_pt(d, j);
+          Node* nod_pt = external_halo_node_pt(d, j);
 
           // Add it as a shared node from current domain
           if (!node_shared[nod_pt])

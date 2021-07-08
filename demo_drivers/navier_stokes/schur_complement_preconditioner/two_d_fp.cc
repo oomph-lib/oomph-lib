@@ -54,7 +54,7 @@ using namespace oomph;
 //=============================================================================
 namespace Hypre_Subsidiary_Preconditioner_Helper
 {
-  Preconditioner *set_hypre_preconditioner()
+  Preconditioner* set_hypre_preconditioner()
   {
     return new HyprePreconditioner;
   }
@@ -100,15 +100,15 @@ class FpTestProblem : public Problem
 {
 public:
   /// Constructor
-  FpTestProblem(const unsigned &n_element,
-                const bool &use_triangles,
-                const bool &use_adaptivity,
-                const bool &use_lsc,
-                const bool &use_robin,
-                const bool &use_hypre_for_pressure,
-                const bool &use_block_diagonal_for_momentum,
-                const bool &use_hypre_for_momentum_diagonals,
-                const int &problem_id);
+  FpTestProblem(const unsigned& n_element,
+                const bool& use_triangles,
+                const bool& use_adaptivity,
+                const bool& use_lsc,
+                const bool& use_robin,
+                const bool& use_hypre_for_pressure,
+                const bool& use_block_diagonal_for_momentum,
+                const bool& use_hypre_for_momentum_diagonals,
+                const int& problem_id);
 
   /// Destructor: Cleanup
   ~FpTestProblem()
@@ -121,12 +121,12 @@ public:
   }
 
   /// Fix pressure in element e at pressure dof pdof and set to pvalue
-  void fix_pressure(const unsigned &e,
-                    const unsigned &pdof,
-                    const double &pvalue)
+  void fix_pressure(const unsigned& e,
+                    const unsigned& pdof,
+                    const double& pvalue)
   {
     // Cast to full element type and fix the pressure at that element
-    dynamic_cast<NavierStokesEquations<2> *>(mesh_pt()->element_pt(e))
+    dynamic_cast<NavierStokesEquations<2>*>(mesh_pt()->element_pt(e))
       ->fix_pressure(pdof, pvalue);
   } // end of fix_pressure
 
@@ -149,7 +149,7 @@ public:
   void actions_after_newton_step()
   {
     Global_Variables::Iterations.push_back(
-      dynamic_cast<IterativeLinearSolver *>(this->linear_solver_pt())
+      dynamic_cast<IterativeLinearSolver*>(this->linear_solver_pt())
         ->iterations());
 
     Global_Variables::Linear_solver_time.push_back(
@@ -204,7 +204,7 @@ public:
       unsigned num_nod = mesh_pt()->nboundary_node(ibound);
       for (unsigned inod = 0; inod < num_nod; inod++)
       {
-        Node *nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
+        Node* nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
         double x = nod_pt->x(1);
         double u = -4.0 * (2.0 - x) * (x - 1.0);
         nod_pt->set_value(0, u);
@@ -215,30 +215,30 @@ public:
   } // end_of_actions_before_newton_solve
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// Validate fp
   template<class FP_ELEMENT>
   void validate_fp()
   {
     DocInfo my_doc_info;
-    dynamic_cast<NavierStokesSchurComplementPreconditioner *>(Prec_pt)
+    dynamic_cast<NavierStokesSchurComplementPreconditioner*>(Prec_pt)
       ->template validate<FP_ELEMENT>(my_doc_info, this);
     pause("done validation");
   }
 
 private:
   /// Solver
-  IterativeLinearSolver *Solver_pt;
+  IterativeLinearSolver* Solver_pt;
 
   /// Solver
-  Preconditioner *Prec_pt;
+  Preconditioner* Prec_pt;
 
   /// Inexact solver for P block
-  Preconditioner *P_matrix_preconditioner_pt;
+  Preconditioner* P_matrix_preconditioner_pt;
 
   /// Inexact solver for F block
-  Preconditioner *F_matrix_preconditioner_pt;
+  Preconditioner* F_matrix_preconditioner_pt;
 
   /// Problem id
   unsigned Problem_id;
@@ -248,15 +248,15 @@ private:
 //==start_of_constructor==================================================
 /// Constructor
 //========================================================================
-FpTestProblem::FpTestProblem(const unsigned &n_el,
-                             const bool &use_triangles,
-                             const bool &use_adaptivity,
-                             const bool &use_lsc,
-                             const bool &use_robin,
-                             const bool &use_hypre_for_pressure,
-                             const bool &use_block_diagonal_for_momentum,
-                             const bool &use_hypre_for_momentum_diagonals,
-                             const int &problem_id)
+FpTestProblem::FpTestProblem(const unsigned& n_el,
+                             const bool& use_triangles,
+                             const bool& use_adaptivity,
+                             const bool& use_lsc,
+                             const bool& use_robin,
+                             const bool& use_hypre_for_pressure,
+                             const bool& use_block_diagonal_for_momentum,
+                             const bool& use_hypre_for_momentum_diagonals,
+                             const int& problem_id)
 {
   // Allow for poor initial guess
   Problem::Max_residuals = 1.0e10;
@@ -265,7 +265,7 @@ FpTestProblem::FpTestProblem(const unsigned &n_el,
   Problem_id = problem_id;
 
   // Build preconditoner
-  NavierStokesSchurComplementPreconditioner *prec_pt =
+  NavierStokesSchurComplementPreconditioner* prec_pt =
     new NavierStokesSchurComplementPreconditioner(this);
   Prec_pt = prec_pt;
 
@@ -287,13 +287,13 @@ FpTestProblem::FpTestProblem(const unsigned &n_el,
 
     // Set parameters for use as preconditioner on Poisson-type problem
     Hypre_default_settings::set_defaults_for_2D_poisson_problem(
-      static_cast<HyprePreconditioner *>(P_matrix_preconditioner_pt));
+      static_cast<HyprePreconditioner*>(P_matrix_preconditioner_pt));
 
     // Use Hypre for the Schur complement block
     prec_pt->set_p_preconditioner(P_matrix_preconditioner_pt);
 
     // Shut up!
-    static_cast<HyprePreconditioner *>(P_matrix_preconditioner_pt)
+    static_cast<HyprePreconditioner*>(P_matrix_preconditioner_pt)
       ->disable_doc_time();
 
 #endif
@@ -310,7 +310,7 @@ FpTestProblem::FpTestProblem(const unsigned &n_el,
     if (use_hypre_for_pressure)
     {
 #ifdef OOMPH_HAS_HYPRE
-      dynamic_cast<BlockDiagonalPreconditioner<CRDoubleMatrix> *>(
+      dynamic_cast<BlockDiagonalPreconditioner<CRDoubleMatrix>*>(
         F_matrix_preconditioner_pt)
         ->set_subsidiary_preconditioner_function(
           Hypre_Subsidiary_Preconditioner_Helper::set_hypre_preconditioner);
@@ -373,7 +373,7 @@ FpTestProblem::FpTestProblem(const unsigned &n_el,
       mesh_pt() =
         new SimpleRectangularTriMesh<TTaylorHoodElement<2>>(n_x, n_y, l_x, l_y);
 
-      dynamic_cast<SimpleRectangularTriMesh<TTaylorHoodElement<2>> *>(mesh_pt())
+      dynamic_cast<SimpleRectangularTriMesh<TTaylorHoodElement<2>>*>(mesh_pt())
         ->setup_boundary_element_info();
     }
   }
@@ -452,7 +452,7 @@ FpTestProblem::FpTestProblem(const unsigned &n_el,
     unsigned num_nod = mesh_pt()->nboundary_node(ibound);
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
-      Node *nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
+      Node* nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
       if ((!(nod_pt->is_on_boundary(4))) && (!(nod_pt->is_on_boundary(0))))
       {
         nod_pt->unpin(0);
@@ -475,8 +475,8 @@ FpTestProblem::FpTestProblem(const unsigned &n_el,
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    NavierStokesEquations<2> *el_pt =
-      dynamic_cast<NavierStokesEquations<2> *>(mesh_pt()->element_pt(e));
+    NavierStokesEquations<2>* el_pt =
+      dynamic_cast<NavierStokesEquations<2>*>(mesh_pt()->element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Variables::Re;
@@ -499,7 +499,7 @@ FpTestProblem::FpTestProblem(const unsigned &n_el,
 
   // Build iterative linear solver
   oomph_info << "Using Trilinos GMRES\n";
-  TrilinosAztecOOSolver *iterative_linear_solver_pt = new TrilinosAztecOOSolver;
+  TrilinosAztecOOSolver* iterative_linear_solver_pt = new TrilinosAztecOOSolver;
 
   Solver_pt = iterative_linear_solver_pt;
 
@@ -507,7 +507,7 @@ FpTestProblem::FpTestProblem(const unsigned &n_el,
 
   // Build solve and preconditioner
   Solver_pt = new GMRES<CRDoubleMatrix>;
-  dynamic_cast<GMRES<CRDoubleMatrix> *>(Solver_pt)->set_preconditioner_RHS();
+  dynamic_cast<GMRES<CRDoubleMatrix>*>(Solver_pt)->set_preconditioner_RHS();
 
 #endif
 
@@ -524,7 +524,7 @@ FpTestProblem::FpTestProblem(const unsigned &n_el,
 //==start_of_doc_solution=================================================
 /// Doc the solution
 //========================================================================
-void FpTestProblem::doc_solution(DocInfo &doc_info)
+void FpTestProblem::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -549,7 +549,7 @@ void FpTestProblem::doc_solution(DocInfo &doc_info)
 //==start_of_main======================================================
 /// Driver for Fp preconditioner
 //=====================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
 #ifdef OOMPH_HAS_MPI
   MPI_Helpers::init(argc, argv);

@@ -50,8 +50,8 @@ class FiniteElementComp
 {
 public:
   /// Comparison. Is x/y coordinate of el1_pt less than that of el2_pt?
-  bool operator()(FiniteElement *const &el1_pt,
-                  FiniteElement *const &el2_pt) const
+  bool operator()(FiniteElement* const& el1_pt,
+                  FiniteElement* const& el2_pt) const
   {
     if (el1_pt->node_pt(0)->x(0) < el2_pt->node_pt(0)->x(0))
     {
@@ -82,19 +82,19 @@ class WarpedPlane : public GeomObject
 {
 public:
   /// Constructor: Specify amplitude of deflection from flat horizontal plane
-  WarpedPlane(const double &ampl) : GeomObject(2, 3)
+  WarpedPlane(const double& ampl) : GeomObject(2, 3)
   {
     Ampl = ampl;
   }
 
   /// Broken copy constructor
-  WarpedPlane(const WarpedPlane &dummy)
+  WarpedPlane(const WarpedPlane& dummy)
   {
     BrokenCopy::broken_copy("WarpedPlane");
   }
 
   /// Broken assignment operator
-  void operator=(const WarpedPlane &)
+  void operator=(const WarpedPlane&)
   {
     BrokenCopy::broken_assign("WarpedPlane");
   }
@@ -103,7 +103,7 @@ public:
   ~WarpedPlane() {}
 
   /// \short Position vector at Lagrangian coordinate zeta
-  void position(const Vector<double> &zeta, Vector<double> &r) const
+  void position(const Vector<double>& zeta, Vector<double>& r) const
   {
     // Position vector
     r[0] = zeta[0] + 5.0 * Ampl * zeta[0] * (zeta[0] - 1.0) * (zeta[0] - 0.7) *
@@ -118,15 +118,15 @@ public:
   /// \short Parametrised position on object: r(zeta). Evaluated at
   /// previous timestep. t=0: current time; t>0: previous
   /// timestep. Forward to steady version
-  void position(const unsigned &t,
-                const Vector<double> &zeta,
-                Vector<double> &r) const
+  void position(const unsigned& t,
+                const Vector<double>& zeta,
+                Vector<double>& r) const
   {
     position(zeta, r);
   }
 
   /// Access to amplitude
-  double &ampl()
+  double& ampl()
   {
     return Ampl;
   }
@@ -179,13 +179,13 @@ class RefineableElasticCubicMesh :
 public:
   /// \short Constructor:
   RefineableElasticCubicMesh(
-    const unsigned &nx,
-    const unsigned &ny,
-    const unsigned &nz,
-    const double &a,
-    const double &b,
-    const double &c,
-    TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+    const unsigned& nx,
+    const unsigned& ny,
+    const unsigned& nz,
+    const double& a,
+    const double& b,
+    const double& c,
+    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
     SimpleCubicMesh<ELEMENT>(
       nx, ny, nz, 0.0, a, 0.0, b, 0.0, c, time_stepper_pt),
     RefineableBrickMesh<ELEMENT>(),
@@ -203,7 +203,7 @@ public:
       Vector<double> zeta(2);
       for (unsigned j = 0; j < n_node; j++)
       {
-        Node *nod_pt = this->boundary_node_pt(b, j);
+        Node* nod_pt = this->boundary_node_pt(b, j);
         zeta[0] = nod_pt->x(0);
         zeta[1] = nod_pt->x(1);
         nod_pt->set_coordinates_on_boundary(b, zeta);
@@ -244,7 +244,7 @@ public:
   void actions_after_distribute();
 
   /// Access function for the solid mesh
-  RefineableElasticCubicMesh<ELEMENT> *&solid_mesh_pt()
+  RefineableElasticCubicMesh<ELEMENT>*& solid_mesh_pt()
   {
     return Solid_mesh_pt;
   }
@@ -268,10 +268,10 @@ private:
   void delete_lagrange_multiplier_elements();
 
   /// Pointer to solid mesh
-  RefineableElasticCubicMesh<ELEMENT> *Solid_mesh_pt;
+  RefineableElasticCubicMesh<ELEMENT>* Solid_mesh_pt;
 
   /// Pointers to meshes of Lagrange multiplier elements
-  SolidMesh *Lagrange_multiplier_mesh_pt;
+  SolidMesh* Lagrange_multiplier_mesh_pt;
 
   /// DocInfo object for output
   DocInfo Doc_info;
@@ -328,7 +328,7 @@ PrescribedBoundaryDisplacementProblem<
   for (unsigned i = 0; i < n_element; i++)
   {
     // Cast to a solid element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(solid_mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(solid_mesh_pt()->element_pt(i));
 
     // Set the constitutive law
     el_pt->constitutive_law_pt() = &Global_Physical_Variables::Constitutive_law;
@@ -468,8 +468,8 @@ void PrescribedBoundaryDisplacementProblem<
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    ELEMENT *bulk_elem_pt =
-      dynamic_cast<ELEMENT *>(solid_mesh_pt()->boundary_element_pt(b, e));
+    ELEMENT* bulk_elem_pt =
+      dynamic_cast<ELEMENT*>(solid_mesh_pt()->boundary_element_pt(b, e));
 
     // Find the index of the face of element e along boundary b
     int face_index = solid_mesh_pt()->face_index_at_boundary(b, e);
@@ -486,9 +486,9 @@ void PrescribedBoundaryDisplacementProblem<
   for (unsigned i = 0; i < n_element; i++)
   {
     // Cast to a Lagrange multiplier element
-    RefineableImposeDisplacementByLagrangeMultiplierElement<ELEMENT> *el_pt =
+    RefineableImposeDisplacementByLagrangeMultiplierElement<ELEMENT>* el_pt =
       dynamic_cast<
-        RefineableImposeDisplacementByLagrangeMultiplierElement<ELEMENT> *>(
+        RefineableImposeDisplacementByLagrangeMultiplierElement<ELEMENT>*>(
         Lagrange_multiplier_mesh_pt->element_pt(i));
 
     // Set the GeomObject that defines the boundary shape and
@@ -501,7 +501,7 @@ void PrescribedBoundaryDisplacementProblem<
     unsigned nnod = el_pt->nnode();
     for (unsigned j = 0; j < nnod; j++)
     {
-      Node *nod_pt = el_pt->node_pt(j);
+      Node* nod_pt = el_pt->node_pt(j);
 
       // Is the node also on boundaries 1, 2, 3 or 4?
       if ((nod_pt->is_on_boundary(1)) || (nod_pt->is_on_boundary(2)) ||
@@ -574,7 +574,7 @@ void PrescribedBoundaryDisplacementProblem<ELEMENT>::doc_solution()
 
   // This makes sure the elements are ordered in same way every time
   // the code is run -- necessary for validation tests.
-  std::vector<FiniteElement *> el_pt;
+  std::vector<FiniteElement*> el_pt;
   unsigned nelem = Lagrange_multiplier_mesh_pt->nelement();
   for (unsigned e = 0; e < nelem; e++)
   {
@@ -602,7 +602,7 @@ void PrescribedBoundaryDisplacementProblem<ELEMENT>::doc_solution()
 //=======start_of_main==================================================
 /// Driver code
 //======================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
 #ifdef OOMPH_HAS_MPI
   MPI_Helpers::init(argc, argv);

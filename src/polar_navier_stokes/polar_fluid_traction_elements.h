@@ -58,9 +58,9 @@ namespace oomph
   {
   private:
     /// Pointer to an imposed traction function
-    void (*Traction_fct_pt)(const double &time,
-                            const Vector<double> &x,
-                            Vector<double> &result);
+    void (*Traction_fct_pt)(const double& time,
+                            const Vector<double>& x,
+                            Vector<double>& result);
 
     /// The highest dimension of the problem
     unsigned Dim;
@@ -71,16 +71,16 @@ namespace oomph
     /// u_local_eqn(n,i) = local equation number or < 0 if pinned.
     /// The default is to asssume that n is the local node number
     /// and the i-th velocity component is the i-th unknown stored at the node.
-    virtual inline int u_local_eqn(const unsigned &n, const unsigned &i)
+    virtual inline int u_local_eqn(const unsigned& n, const unsigned& i)
     {
       return nodal_local_eqn(n, i);
     }
 
     ///\short Function to compute the shape and test functions and to return
     /// the Jacobian of mapping
-    inline double shape_and_test_at_knot(const unsigned &ipt,
-                                         Shape &psi,
-                                         Shape &test) const
+    inline double shape_and_test_at_knot(const unsigned& ipt,
+                                         Shape& psi,
+                                         Shape& test) const
     {
       // Find number of nodes
       unsigned n_node = nnode();
@@ -97,8 +97,8 @@ namespace oomph
 
     /// Function to calculate the traction applied to the fluid
     void get_traction(double time,
-                      const Vector<double> &x,
-                      Vector<double> &result)
+                      const Vector<double>& x,
+                      Vector<double>& result)
     {
       // If the function pointer is zero return zero
       if (Traction_fct_pt == 0)
@@ -119,15 +119,15 @@ namespace oomph
     ///\short This function returns the residuals for the
     /// traction function.
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
-    void fill_in_generic_residual_contribution(Vector<double> &residuals,
-                                               DenseMatrix<double> &jacobian,
-                                               DenseMatrix<double> &mass_matrix,
+    void fill_in_generic_residual_contribution(Vector<double>& residuals,
+                                               DenseMatrix<double>& jacobian,
+                                               DenseMatrix<double>& mass_matrix,
                                                unsigned flag);
     /// Pointer to the angle alpha
-    double *Alpha_pt;
+    double* Alpha_pt;
 
     /// \short Pointer to the Data item that stores the external pressure
-    Data *Pext_data_pt;
+    Data* Pext_data_pt;
 
     /// \short The Data that contains the traded pressure is stored
     /// as external Data for the element. Which external Data item is it?
@@ -144,19 +144,19 @@ namespace oomph
 
   public:
     /// Alpha
-    const double &alpha() const
+    const double& alpha() const
     {
       return *Alpha_pt;
     }
 
     /// Pointer to Alpha
-    double *&alpha_pt()
+    double*& alpha_pt()
     {
       return Alpha_pt;
     }
 
     /// Function for setting up external pressure
-    void set_external_pressure_data(Data *pext_data_pt)
+    void set_external_pressure_data(Data* pext_data_pt)
     {
       // Set external pressure pointer
       Pext_data_pt = pext_data_pt;
@@ -192,8 +192,8 @@ namespace oomph
 
     /// Constructor, which takes a "bulk" element and the value of the index
     /// and its limit
-    PolarNavierStokesTractionElement(FiniteElement *const &element_pt,
-                                     const int &face_index) :
+    PolarNavierStokesTractionElement(FiniteElement* const& element_pt,
+                                     const int& face_index) :
       FaceGeometry<ELEMENT>(), FaceElement()
     {
       // Attach the geometrical information to the element. N.B. This function
@@ -203,13 +203,13 @@ namespace oomph
 #ifdef PARANOID
       {
         // Check that the element is not a refineable 3d element
-        ELEMENT *elem_pt = dynamic_cast<ELEMENT *>(element_pt);
+        ELEMENT* elem_pt = dynamic_cast<ELEMENT*>(element_pt);
         // If it's three-d
         if (elem_pt->dim() == 3)
         {
           // Is it refineable
-          RefineableElement *ref_el_pt =
-            dynamic_cast<RefineableElement *>(elem_pt);
+          RefineableElement* ref_el_pt =
+            dynamic_cast<RefineableElement*>(elem_pt);
           if (ref_el_pt != 0)
           {
             if (this->has_hanging_nodes())
@@ -241,15 +241,15 @@ namespace oomph
     ~PolarNavierStokesTractionElement() {}
 
     // Access function for the imposed traction pointer
-    void (*&traction_fct_pt())(const double &t,
-                               const Vector<double> &x,
-                               Vector<double> &result)
+    void (*&traction_fct_pt())(const double& t,
+                               const Vector<double>& x,
+                               Vector<double>& result)
     {
       return Traction_fct_pt;
     }
 
     /// This function returns just the residuals
-    inline void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    inline void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Call the generic residuals function with flag set to 0
       // using a dummy matrix argument
@@ -260,8 +260,8 @@ namespace oomph
     }
 
     /// This function returns the residuals and the jacobian
-    inline void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                                 DenseMatrix<double> &jacobian)
+    inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                                 DenseMatrix<double>& jacobian)
     {
       // Call the generic routine with the flag set to 1
       fill_in_generic_residual_contribution(
@@ -271,9 +271,9 @@ namespace oomph
     ///\short Compute the element's residual Vector and the jacobian matrix
     /// Plus the mass matrix especially for eigenvalue problems
     void fill_in_contribution_to_jacobian_and_mass_matrix(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix)
     {
       // Call the generic routine with the flag set to 2
       fill_in_generic_residual_contribution(
@@ -281,25 +281,25 @@ namespace oomph
     }
 
     /// Overload the output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       FiniteElement::output(outfile);
     }
 
     /// Output function: x,y,[z],u,v,[w],p in tecplot format
-    void output(std::ostream &outfile, const unsigned &nplot)
+    void output(std::ostream& outfile, const unsigned& nplot)
     {
       FiniteElement::output(outfile, nplot);
     }
 
     /// local velocities
-    double u(const unsigned &l, const unsigned &i)
+    double u(const unsigned& l, const unsigned& i)
     {
       return nodal_value(l, i);
     }
 
     /// local position
-    double x(const unsigned &l, const unsigned &i)
+    double x(const unsigned& l, const unsigned& i)
     {
       return nodal_position(l, i);
     }
@@ -315,9 +315,9 @@ namespace oomph
   //============================================================================
   template<class ELEMENT>
   void PolarNavierStokesTractionElement<ELEMENT>::
-    fill_in_generic_residual_contribution(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian,
-                                          DenseMatrix<double> &mass_matrix,
+    fill_in_generic_residual_contribution(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian,
+                                          DenseMatrix<double>& mass_matrix,
                                           unsigned flag)
   {
     // Find out how many nodes there are

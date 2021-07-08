@@ -122,11 +122,11 @@ namespace oomph
     /// .
     /// The load \c Data is treated as external \c Data for this
     /// element.
-    DisplacementControlElement(SolidFiniteElement *controlled_element_pt,
-                               const Vector<double> &controlled_point,
-                               const unsigned &controlled_direction,
-                               double *control_position_value_pt,
-                               Data *displacement_control_load_pt) :
+    DisplacementControlElement(SolidFiniteElement* controlled_element_pt,
+                               const Vector<double>& controlled_point,
+                               const unsigned& controlled_direction,
+                               double* control_position_value_pt,
+                               Data* displacement_control_load_pt) :
       Displacement_control_load_pt(displacement_control_load_pt),
       Control_position_value_pt(control_position_value_pt),
       Controlled_direction(controlled_direction),
@@ -157,7 +157,7 @@ namespace oomph
       for (unsigned j = 0; j < nnode; j++)
       {
         add_external_data(
-          static_cast<SolidNode *>(Controlled_element_pt->node_pt(j))
+          static_cast<SolidNode*>(Controlled_element_pt->node_pt(j))
             ->variable_position_pt());
       }
     }
@@ -177,10 +177,10 @@ namespace oomph
     /// in the element's internal \c Data. It is accessible (for use
     /// the load function) via the access function
     /// \c displacement_control_load_pt()
-    DisplacementControlElement(SolidFiniteElement *controlled_element_pt,
-                               const Vector<double> &controlled_point,
-                               const unsigned &controlled_direction,
-                               double *control_position_value_pt) :
+    DisplacementControlElement(SolidFiniteElement* controlled_element_pt,
+                               const Vector<double>& controlled_point,
+                               const unsigned& controlled_direction,
+                               double* control_position_value_pt) :
       Control_position_value_pt(control_position_value_pt),
       Controlled_direction(controlled_direction),
       Controlled_element_pt(controlled_element_pt),
@@ -204,26 +204,26 @@ namespace oomph
       for (unsigned j = 0; j < nnode; j++)
       {
         add_external_data(
-          static_cast<SolidNode *>(Controlled_element_pt->node_pt(j))
+          static_cast<SolidNode*>(Controlled_element_pt->node_pt(j))
             ->variable_position_pt());
       }
     }
 
     /// Broken copy constructor
-    DisplacementControlElement(const DisplacementControlElement &)
+    DisplacementControlElement(const DisplacementControlElement&)
     {
       BrokenCopy::broken_copy("DisplacementControlElement");
     }
 
     /// Broken assignment operator
-    void operator=(const DisplacementControlElement &)
+    void operator=(const DisplacementControlElement&)
     {
       BrokenCopy::broken_assign("DisplacementControlElement");
     }
 
     /// \short Pointer to Data object whose one-and-only value represents the
     /// load that is adjusted to allow displacement control
-    Data *displacement_control_load_pt() const
+    Data* displacement_control_load_pt() const
     {
       return Displacement_control_load_pt;
     }
@@ -250,7 +250,7 @@ namespace oomph
     /// \short Add the element's contribution to its residual vector:
     /// The displacement constraint. [Note: Jacobian is computed
     /// automatically by finite-differencing]
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       if (Displ_ctrl_local_eqn >= 0)
       {
@@ -277,7 +277,7 @@ namespace oomph
     /// of is the control load, provided it's been created as
     /// internal Data.
     void get_dof_numbers_for_unknowns(
-      std::list<std::pair<unsigned long, unsigned>> &dof_lookup_list) const
+      std::list<std::pair<unsigned long, unsigned>>& dof_lookup_list) const
     {
       if (Load_data_created_internally)
       {
@@ -306,18 +306,18 @@ namespace oomph
     /// \short Pointer to Data item whose one-and-only  value
     /// contains the load value that is being adjusted
     /// to allow displacement control.
-    Data *Displacement_control_load_pt;
+    Data* Displacement_control_load_pt;
 
     /// \short Pointer to the value that stores the prescribed coordinate
     /// of the control point
-    double *Control_position_value_pt;
+    double* Control_position_value_pt;
 
     /// \short Coordinate direction in which the displacement of the
     /// control point is controlled
     unsigned Controlled_direction;
 
     /// Pointer to SolidFiniteElement at which control displacement is applied
-    SolidFiniteElement *Controlled_element_pt;
+    SolidFiniteElement* Controlled_element_pt;
 
     /// \short Vector of local coordinates of point at which control
     /// displacement is applied

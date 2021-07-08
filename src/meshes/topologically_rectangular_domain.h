@@ -55,7 +55,7 @@ namespace oomph
     /// macro element coordinate position on that boundary and for that position
     /// returns the global coordinates (x) coordinates, or derivatives -
     /// dx_i/dm_t or second derivatives d2x_i/dm_t^2
-    typedef void (*BoundaryFctPt)(const double &s, Vector<double> &r);
+    typedef void (*BoundaryFctPt)(const double& s, Vector<double>& r);
 
     /// \short Constructor - domain boundaries are described with four boundary
     /// function pointers describing the topology of the north, east, south, and
@@ -68,23 +68,23 @@ namespace oomph
     /// \short Constructor - takes length of domain in x and y direction as
     /// arguements. Assumes domain is rectangular, and the south west (lower
     /// left) corner is at 0,0.
-    TopologicallyRectangularDomain(const double &l_x, const double &l_y);
+    TopologicallyRectangularDomain(const double& l_x, const double& l_y);
 
     /// \short Constructor - takes the minimum and maximum coordinates of the
     /// of an assumed rectanguler domain in the x and y direction
-    TopologicallyRectangularDomain(const double &x_min,
-                                   const double &x_max,
-                                   const double &y_min,
-                                   const double &y_max);
+    TopologicallyRectangularDomain(const double& x_min,
+                                   const double& x_max,
+                                   const double& y_min,
+                                   const double& y_max);
 
     /// Broken copy constructor
-    TopologicallyRectangularDomain(const TopologicallyRectangularDomain &)
+    TopologicallyRectangularDomain(const TopologicallyRectangularDomain&)
     {
       BrokenCopy::broken_copy("TopologicallyRectangularDomain");
     }
 
     /// Broken assignment operator
-    void operator=(const TopologicallyRectangularDomain &)
+    void operator=(const TopologicallyRectangularDomain&)
     {
       BrokenCopy::broken_assign("TopologicallyRectangularDomain");
     }
@@ -126,29 +126,29 @@ namespace oomph
 
     /// returns the global coordinate position (f) of macro element position s
     /// on boundary i_direct (e.g. N/S/W/E in 2D) at time t (no time dependence)
-    void macro_element_boundary(const unsigned &t,
-                                const unsigned &i_macro,
-                                const unsigned &i_direct,
-                                const Vector<double> &s,
-                                Vector<double> &f);
+    void macro_element_boundary(const unsigned& t,
+                                const unsigned& i_macro,
+                                const unsigned& i_direct,
+                                const Vector<double>& s,
+                                Vector<double>& f);
 
     /// returns the derivates of the global coordinate position (f) wrt to the
     /// macro element coordinate at macro macro element position s on boundary
     /// i_direct (e.g. N/S/W/E in 2D) at time t (no time dependence)
-    void dmacro_element_boundary(const unsigned &t,
-                                 const unsigned &i_macro,
-                                 const unsigned &i_direct,
-                                 const Vector<double> &s,
-                                 Vector<double> &f);
+    void dmacro_element_boundary(const unsigned& t,
+                                 const unsigned& i_macro,
+                                 const unsigned& i_direct,
+                                 const Vector<double>& s,
+                                 Vector<double>& f);
 
     /// returns the second derivates of the global coordinate position (f) wrt
     /// to the macro element coordinate at macro macro element position s on
     /// boundary i_direct (e.g. N/S/W/E in 2D) at time t (no time dependence)
-    void d2macro_element_boundary(const unsigned &t,
-                                  const unsigned &i_macro,
-                                  const unsigned &i_direct,
-                                  const Vector<double> &s,
-                                  Vector<double> &f);
+    void d2macro_element_boundary(const unsigned& t,
+                                  const unsigned& i_macro,
+                                  const unsigned& i_direct,
+                                  const Vector<double>& s,
+                                  Vector<double>& f);
 
   private:
     /// \short Function pointer to prescribe the north boundary of this
@@ -213,60 +213,60 @@ namespace oomph
 
     /// \short takes the macro element coordinate position along the north
     /// boundary and returns the global coordinate position along that boundary
-    void r_N(const Vector<double> &s, Vector<double> &f);
+    void r_N(const Vector<double>& s, Vector<double>& f);
 
     /// \short takes the macro element coordinate position along the east
     /// boundary and returns the global coordinate position along that boundary
-    void r_E(const Vector<double> &s, Vector<double> &f);
+    void r_E(const Vector<double>& s, Vector<double>& f);
 
     /// \short takes the macro element coordinate position along the south
     /// boundary and returns the global coordinate position along that boundary
-    void r_S(const Vector<double> &s, Vector<double> &f);
+    void r_S(const Vector<double>& s, Vector<double>& f);
 
     /// \short takes the macro element coordinate position along the west
     /// boundary and returns the global coordinate position along that boundary
     /// access down boundary function pointer
-    void r_W(const Vector<double> &s, Vector<double> &f);
+    void r_W(const Vector<double>& s, Vector<double>& f);
 
     /// \short takes the macro element coordinate position along the north
     /// boundary and returns the derivates of the global coordinates with
     /// respect to the boundary
-    void dr_N(const Vector<double> &s, Vector<double> &dr);
+    void dr_N(const Vector<double>& s, Vector<double>& dr);
 
     /// \short takes the macro element coordinate position along the E
     /// boundary and returns the derivates of the global coordinates with
     /// respect to the boundary
-    void dr_E(const Vector<double> &s, Vector<double> &dr);
+    void dr_E(const Vector<double>& s, Vector<double>& dr);
 
     /// \short takes the macro element coordinate position along the south
     /// boundary and returns the derivates of the global coordinates with
     /// respect to the boundary
-    void dr_S(const Vector<double> &s, Vector<double> &dr);
+    void dr_S(const Vector<double>& s, Vector<double>& dr);
 
     /// \short takes the macro element coordinate position along the W
     /// boundary and returns the derivates of the global coordinates with
     /// respect to the boundary
-    void dr_W(const Vector<double> &s, Vector<double> &dr);
+    void dr_W(const Vector<double>& s, Vector<double>& dr);
 
     /// \short takes the macro element coordinate position along the north
     /// boundary and returns the second derivates of the global coordinates with
     /// respect to the boundary
-    void d2r_N(const Vector<double> &s, Vector<double> &d2r);
+    void d2r_N(const Vector<double>& s, Vector<double>& d2r);
 
     /// \short takes the macro element coordinate position along the east
     /// boundary and returns the second derivates of the global coordinates with
     /// respect to the boundary
-    void d2r_E(const Vector<double> &s, Vector<double> &d2r);
+    void d2r_E(const Vector<double>& s, Vector<double>& d2r);
 
     /// \short takes the macro element coordinate position along the south
     /// boundary and returns the second derivates of the global coordinates with
     /// respect to the boundary
-    void d2r_S(const Vector<double> &s, Vector<double> &d2r);
+    void d2r_S(const Vector<double>& s, Vector<double>& d2r);
 
     /// \short takes the macro element coordinate position along the west
     /// boundary and returns the second derivates of the global coordinates with
     /// respect to the boundary
-    void d2r_W(const Vector<double> &s, Vector<double> &d2r);
+    void d2r_W(const Vector<double>& s, Vector<double>& d2r);
   };
 
   //=============================================================================
@@ -391,7 +391,7 @@ namespace oomph
   /// left) corner is at 0,0.
   //=============================================================================
   inline TopologicallyRectangularDomain::TopologicallyRectangularDomain(
-    const double &l_x, const double &l_y)
+    const double& l_x, const double& l_y)
   {
     // domain comprises one macro element
     Macro_element_pt.resize(1);
@@ -435,10 +435,10 @@ namespace oomph
   /// of an assumed rectanguler domain in the x and y direction
   //=============================================================================
   inline TopologicallyRectangularDomain::TopologicallyRectangularDomain(
-    const double &x_min,
-    const double &x_max,
-    const double &y_min,
-    const double &y_max)
+    const double& x_min,
+    const double& x_max,
+    const double& y_min,
+    const double& y_max)
   {
     // domain comprises one macro element
     Macro_element_pt.resize(1);
@@ -529,11 +529,11 @@ namespace oomph
   /// on boundary i_direct (e.g. N/S/W/E in 2D) at time t (no time dependence)
   //=============================================================================
   inline void TopologicallyRectangularDomain::macro_element_boundary(
-    const unsigned &t,
-    const unsigned &i_macro,
-    const unsigned &i_direct,
-    const Vector<double> &s,
-    Vector<double> &f)
+    const unsigned& t,
+    const unsigned& i_macro,
+    const unsigned& i_direct,
+    const Vector<double>& s,
+    Vector<double>& f)
   {
     // use quad tree edge names to label edge of domain
     using namespace QuadTreeNames;
@@ -565,11 +565,11 @@ namespace oomph
   /// i_direct (e.g. N/S/W/E in 2D) at time t (no time dependence)
   //=============================================================================
   inline void TopologicallyRectangularDomain::dmacro_element_boundary(
-    const unsigned &t,
-    const unsigned &i_macro,
-    const unsigned &i_direct,
-    const Vector<double> &s,
-    Vector<double> &f)
+    const unsigned& t,
+    const unsigned& i_macro,
+    const unsigned& i_direct,
+    const Vector<double>& s,
+    Vector<double>& f)
   {
     // use quad tree edge names to label edge of domain
     using namespace QuadTreeNames;
@@ -601,11 +601,11 @@ namespace oomph
   /// i_direct (e.g. N/S/W/E in 2D) at time t (no time dependence)
   //=============================================================================
   inline void TopologicallyRectangularDomain::d2macro_element_boundary(
-    const unsigned &t,
-    const unsigned &i_macro,
-    const unsigned &i_direct,
-    const Vector<double> &s,
-    Vector<double> &f)
+    const unsigned& t,
+    const unsigned& i_macro,
+    const unsigned& i_direct,
+    const Vector<double>& s,
+    Vector<double>& f)
   {
     // use quad tree edge names to label edge of domain
     using namespace QuadTreeNames;
@@ -635,8 +635,8 @@ namespace oomph
   /// \short takes the macro element coordinate position along the north
   /// boundary and returns the global coordinate position along that boundary
   //=============================================================================
-  inline void TopologicallyRectangularDomain::r_N(const Vector<double> &s,
-                                                  Vector<double> &f)
+  inline void TopologicallyRectangularDomain::r_N(const Vector<double>& s,
+                                                  Vector<double>& f)
   {
     if (North_boundary_fn_pt != 0)
     {
@@ -654,8 +654,8 @@ namespace oomph
   /// \short takes the macro element coordinate position along the east
   /// boundary and returns the global coordinate position along that boundary
   //=============================================================================
-  inline void TopologicallyRectangularDomain::r_E(const Vector<double> &s,
-                                                  Vector<double> &f)
+  inline void TopologicallyRectangularDomain::r_E(const Vector<double>& s,
+                                                  Vector<double>& f)
   {
     if (East_boundary_fn_pt != 0)
     {
@@ -673,8 +673,8 @@ namespace oomph
   /// \short takes the macro element coordinate position along the south
   /// boundary and returns the global coordinate position along that boundary
   //=============================================================================
-  inline void TopologicallyRectangularDomain::r_S(const Vector<double> &s,
-                                                  Vector<double> &f)
+  inline void TopologicallyRectangularDomain::r_S(const Vector<double>& s,
+                                                  Vector<double>& f)
   {
     if (South_boundary_fn_pt != 0)
     {
@@ -693,8 +693,8 @@ namespace oomph
   /// boundary and returns the global coordinate position along that boundary
   /// access down boundary function pointer
   //=============================================================================
-  inline void TopologicallyRectangularDomain::r_W(const Vector<double> &s,
-                                                  Vector<double> &f)
+  inline void TopologicallyRectangularDomain::r_W(const Vector<double>& s,
+                                                  Vector<double>& f)
   {
     if (West_boundary_fn_pt != 0)
     {
@@ -713,8 +713,8 @@ namespace oomph
   /// boundary and returns the derivates of the global coordinates with respect
   /// to the boundary
   //=============================================================================
-  inline void TopologicallyRectangularDomain::dr_N(const Vector<double> &s,
-                                                   Vector<double> &dr)
+  inline void TopologicallyRectangularDomain::dr_N(const Vector<double>& s,
+                                                   Vector<double>& dr)
   {
     // if N boundary fn provided
     if (North_boundary_fn_pt != 0)
@@ -749,8 +749,8 @@ namespace oomph
   /// boundary and returns the derivates of the global coordinates with respect
   /// to the boundary
   //=============================================================================
-  inline void TopologicallyRectangularDomain::dr_E(const Vector<double> &s,
-                                                   Vector<double> &dr)
+  inline void TopologicallyRectangularDomain::dr_E(const Vector<double>& s,
+                                                   Vector<double>& dr)
   {
     // if E boundary fn provided
     if (East_boundary_fn_pt != 0)
@@ -785,8 +785,8 @@ namespace oomph
   /// boundary and returns the derivates of the global coordinates with respect
   /// to the boundary
   //=============================================================================
-  inline void TopologicallyRectangularDomain::dr_S(const Vector<double> &s,
-                                                   Vector<double> &dr)
+  inline void TopologicallyRectangularDomain::dr_S(const Vector<double>& s,
+                                                   Vector<double>& dr)
   {
     // if S boundary fn provided
     if (South_boundary_fn_pt != 0)
@@ -821,8 +821,8 @@ namespace oomph
   /// boundary and returns the derivates of the global coordinates with respect
   /// to the boundary
   //=============================================================================
-  inline void TopologicallyRectangularDomain::dr_W(const Vector<double> &s,
-                                                   Vector<double> &dr)
+  inline void TopologicallyRectangularDomain::dr_W(const Vector<double>& s,
+                                                   Vector<double>& dr)
   {
     // if W boundary fn provided
     if (West_boundary_fn_pt != 0)
@@ -857,8 +857,8 @@ namespace oomph
   /// boundary and returns the second derivates of the global coordinates with
   /// respect to the boundary
   //=============================================================================
-  inline void TopologicallyRectangularDomain::d2r_N(const Vector<double> &s,
-                                                    Vector<double> &d2r)
+  inline void TopologicallyRectangularDomain::d2r_N(const Vector<double>& s,
+                                                    Vector<double>& d2r)
   {
     // if N boundary fn provided
     if (North_boundary_fn_pt != 0)
@@ -910,8 +910,8 @@ namespace oomph
   /// boundary and returns the second derivates of the global coordinates with
   /// respect to the boundary
   //=============================================================================
-  inline void TopologicallyRectangularDomain::d2r_E(const Vector<double> &s,
-                                                    Vector<double> &d2r)
+  inline void TopologicallyRectangularDomain::d2r_E(const Vector<double>& s,
+                                                    Vector<double>& d2r)
   {
     // if E boundary fn provided
     if (East_boundary_fn_pt != 0)
@@ -963,8 +963,8 @@ namespace oomph
   /// boundary and returns the second derivates of the global coordinates with
   /// respect to the boundary
   //=============================================================================
-  inline void TopologicallyRectangularDomain::d2r_S(const Vector<double> &s,
-                                                    Vector<double> &d2r)
+  inline void TopologicallyRectangularDomain::d2r_S(const Vector<double>& s,
+                                                    Vector<double>& d2r)
   {
     // if S boundary fn provided
     if (South_boundary_fn_pt != 0)
@@ -1016,8 +1016,8 @@ namespace oomph
   /// boundary and returns the second derivates of the global coordinates with
   /// respect to the boundary
   //=============================================================================
-  inline void TopologicallyRectangularDomain::d2r_W(const Vector<double> &s,
-                                                    Vector<double> &d2r)
+  inline void TopologicallyRectangularDomain::d2r_W(const Vector<double>& s,
+                                                    Vector<double>& d2r)
   {
     // if W boundary fn provided
     if (West_boundary_fn_pt != 0)

@@ -64,7 +64,7 @@ namespace oomph
   /// Note: This simply merges the meshes' elements and nodes (ignoring
   /// duplicates; no boundary information etc. is created).
   //=======================================================================
-  void Mesh::merge_meshes(const Vector<Mesh *> &sub_mesh_pt)
+  void Mesh::merge_meshes(const Vector<Mesh*>& sub_mesh_pt)
   {
     // No boundary lookup scheme is set up for the combined mesh
     Lookup_for_elements_next_boundary_is_setup = false;
@@ -99,8 +99,8 @@ namespace oomph
     // Sets of pointers to elements and nodes (to exlude duplicates -- they
     // shouldn't occur anyway but if they do, they must only be added
     // once in the global mesh to avoid trouble in the timestepping)
-    std::set<GeneralisedElement *> element_set_pt;
-    std::set<Node *> node_set_pt;
+    std::set<GeneralisedElement*> element_set_pt;
+    std::set<Node*> node_set_pt;
 
     // Counter for total number of boundaries in all the submeshes
     unsigned ibound_global = 0;
@@ -113,7 +113,7 @@ namespace oomph
       unsigned long n_element = sub_mesh_pt[imesh]->nelement();
       for (unsigned long e = 0; e < n_element; e++)
       {
-        GeneralisedElement *el_pt = sub_mesh_pt[imesh]->element_pt(e);
+        GeneralisedElement* el_pt = sub_mesh_pt[imesh]->element_pt(e);
         element_set_pt.insert(el_pt);
         // Was it a duplicate?
         unsigned nel_now = element_set_pt.size();
@@ -141,7 +141,7 @@ namespace oomph
       unsigned long n_node = sub_mesh_pt[imesh]->nnode();
       for (unsigned long n = 0; n < n_node; n++)
       {
-        Node *nod_pt = sub_mesh_pt[imesh]->node_pt(n);
+        Node* nod_pt = sub_mesh_pt[imesh]->node_pt(n);
         node_set_pt.insert(nod_pt);
         // Was it a duplicate?
         unsigned nnod_now = node_set_pt.size();
@@ -186,7 +186,7 @@ namespace oomph
   /// Remove the information about nodes stored on the
   /// b-th boundary of the mesh
   //========================================================
-  void Mesh::remove_boundary_nodes(const unsigned &b)
+  void Mesh::remove_boundary_nodes(const unsigned& b)
   {
     // Loop over all the nodes on the boundary and call
     // their remove_from_boundary function
@@ -219,10 +219,10 @@ namespace oomph
   /// This function also removes the information from the Node
   /// itself
   //===========================================================
-  void Mesh::remove_boundary_node(const unsigned &b, Node *const &node_pt)
+  void Mesh::remove_boundary_node(const unsigned& b, Node* const& node_pt)
   {
     // Find the location of the node in the boundary
-    Vector<Node *>::iterator it = std::find(
+    Vector<Node*>::iterator it = std::find(
       Boundary_node_pt[b].begin(), Boundary_node_pt[b].end(), node_pt);
     // If the node is on this boundary
     if (it != Boundary_node_pt[b].end())
@@ -240,7 +240,7 @@ namespace oomph
   /// This function also sets the boundary information in the
   /// Node itself
   //=========================================================
-  void Mesh::add_boundary_node(const unsigned &b, Node *const &node_pt)
+  void Mesh::add_boundary_node(const unsigned& b, Node* const& node_pt)
   {
     // Tell the node that it's on boundary b.
     // At this point, if the node is not a BoundaryNode, the function
@@ -283,7 +283,7 @@ namespace oomph
   /// whose position is determined by the boundary position, unless
   /// the bool flag is set to true.
   //========================================================
-  void Mesh::node_update(const bool &update_all_solid_nodes)
+  void Mesh::node_update(const bool& update_all_solid_nodes)
   {
 #ifdef PARANOID
 #ifdef OOMPH_HAS_MPI
@@ -291,7 +291,7 @@ namespace oomph
     // with nonuniformly spaced nodes for which some masters are 'external'
     for (unsigned long n = 0; n < nnode(); n++)
     {
-      Node *nod_pt = Node_pt[n];
+      Node* nod_pt = Node_pt[n];
       if (nod_pt->is_hanging())
       {
         // Loop over master nodes
@@ -299,16 +299,16 @@ namespace oomph
         for (unsigned imaster = 0; imaster < nmaster; imaster++)
         {
           // Get pointer to master node
-          Node *master_nod_pt = nod_pt->hanging_pt()->master_node_pt(imaster);
+          Node* master_nod_pt = nod_pt->hanging_pt()->master_node_pt(imaster);
 
           // Get vector of all external halo nodes
-          Vector<Node *> external_halo_node_pt;
+          Vector<Node*> external_halo_node_pt;
           get_external_halo_node_pt(external_halo_node_pt);
 
           // Search the external halo storage for this node
-          Vector<Node *>::iterator it = std::find(external_halo_node_pt.begin(),
-                                                  external_halo_node_pt.end(),
-                                                  master_nod_pt);
+          Vector<Node*>::iterator it = std::find(external_halo_node_pt.begin(),
+                                                 external_halo_node_pt.end(),
+                                                 master_nod_pt);
 
           // Check if the node was found
           if (it != external_halo_node_pt.end())
@@ -354,7 +354,7 @@ namespace oomph
     for (unsigned e = 0; e < nel; e++)
     {
       // Try to cast to FiniteElement
-      FiniteElement *el_pt = dynamic_cast<FiniteElement *>(element_pt(e));
+      FiniteElement* el_pt = dynamic_cast<FiniteElement*>(element_pt(e));
 
       // If it's a finite element we can proceed: FiniteElements have
       // nodes and a get_x() function
@@ -369,7 +369,7 @@ namespace oomph
         for (unsigned j = 0; j < n_node; j++)
         {
           // Get pointer to node
-          Node *nod_pt = el_pt->node_pt(j);
+          Node* nod_pt = el_pt->node_pt(j);
 
           // Get spatial dimension of node
           unsigned ndim_node = nod_pt->ndim();
@@ -385,7 +385,7 @@ namespace oomph
             el_pt->get_x(s, r);
 
             // Try to cast to SolidNode
-            SolidNode *solid_node_pt = dynamic_cast<SolidNode *>(nod_pt);
+            SolidNode* solid_node_pt = dynamic_cast<SolidNode*>(nod_pt);
 
             // Loop over coordinate directions
             for (unsigned i = 0; i < ndim_node; i++)
@@ -415,13 +415,13 @@ namespace oomph
 #ifdef OOMPH_HAS_MPI
     // Loop over all external halo nodes with other processors
     // and update them
-    for (std::map<unsigned, Vector<Node *>>::iterator it =
+    for (std::map<unsigned, Vector<Node*>>::iterator it =
            External_halo_node_pt.begin();
          it != External_halo_node_pt.end();
          it++)
     {
       // Get vector of external halo nodes
-      Vector<Node *> ext_halo_node_pt = (*it).second;
+      Vector<Node*> ext_halo_node_pt = (*it).second;
       unsigned nnod = ext_halo_node_pt.size();
       for (unsigned j = 0; j < nnod; j++)
       {
@@ -435,7 +435,7 @@ namespace oomph
     unsigned long n_node = nnode();
     for (unsigned long n = 0; n < n_node; n++)
     {
-      Node *nod_pt = Node_pt[n];
+      Node* nod_pt = Node_pt[n];
       if (nod_pt->is_hanging())
       {
         // Get spatial dimension of node
@@ -474,9 +474,9 @@ namespace oomph
   /// Reorder nodes in the order in which they are
   /// encountered when stepping through the elements
   //========================================================
-  void Mesh::reorder_nodes(const bool &use_old_ordering)
+  void Mesh::reorder_nodes(const bool& use_old_ordering)
   {
-    Vector<Node *> reordering;
+    Vector<Node*> reordering;
     get_node_reordering(reordering, use_old_ordering);
 
     unsigned n_node = nnode();
@@ -491,13 +491,13 @@ namespace oomph
   /// when stepping through the elements (similar to reorder_nodes() but
   /// without changing the mesh's node vector).
   //========================================================
-  void Mesh::get_node_reordering(Vector<Node *> &reordering,
-                                 const bool &use_old_ordering) const
+  void Mesh::get_node_reordering(Vector<Node*>& reordering,
+                                 const bool& use_old_ordering) const
   {
     if (use_old_ordering)
     {
       // Setup map to check if nodes have been done yet
-      std::map<Node *, bool> done;
+      std::map<Node*, bool> done;
 
       // Loop over all nodes
       unsigned nnod = nnode();
@@ -524,12 +524,12 @@ namespace oomph
       for (unsigned e = 0; e < nel; e++)
       {
         // Loop over nodes in element
-        FiniteElement *el_pt =
-          checked_dynamic_cast<FiniteElement *>(element_pt(e));
+        FiniteElement* el_pt =
+          checked_dynamic_cast<FiniteElement*>(element_pt(e));
         unsigned nnod = el_pt->nnode();
         for (unsigned j = 0; j < nnod; j++)
         {
-          Node *nod_pt = el_pt->node_pt(j);
+          Node* nod_pt = el_pt->node_pt(j);
           // Has node been done yet?
           if (!done[nod_pt])
           {
@@ -606,7 +606,7 @@ namespace oomph
   //========================================================
   /// Assign (global) equation numbers to the nodes
   //========================================================
-  unsigned long Mesh::assign_global_eqn_numbers(Vector<double *> &Dof_pt)
+  unsigned long Mesh::assign_global_eqn_numbers(Vector<double*>& Dof_pt)
   {
     // Find out the current number of equations
     unsigned long equation_number = Dof_pt.size();
@@ -640,8 +640,8 @@ namespace oomph
   /// call hierarchy of this function when called from
   /// Problem::describe_dofs(...)
   //========================================================
-  void Mesh::describe_dofs(std::ostream &out,
-                           const std::string &current_string) const
+  void Mesh::describe_dofs(std::ostream& out,
+                           const std::string& current_string) const
   {
     // Loop over the nodes and call their classification functions
     unsigned long nnod = Node_pt.size();
@@ -675,8 +675,8 @@ namespace oomph
   /// call hierarchy of this function when called from
   /// Problem::describe_dofs(...)
   //========================================================
-  void Mesh::describe_local_dofs(std::ostream &out,
-                                 const std::string &current_string) const
+  void Mesh::describe_local_dofs(std::ostream& out,
+                                 const std::string& current_string) const
   {
     // Now loop over the elements and describe local dofs
     unsigned long nel = Element_pt.size();
@@ -693,7 +693,7 @@ namespace oomph
   //========================================================
   /// Assign local equation numbers in all elements
   //========================================================
-  void Mesh::assign_local_eqn_numbers(const bool &store_local_dof_pt)
+  void Mesh::assign_local_eqn_numbers(const bool& store_local_dof_pt)
   {
     // Now loop over the elements and assign local equation numbers
     unsigned long Element_pt_range = Element_pt.size();
@@ -729,7 +729,7 @@ namespace oomph
     //   }
 
     // Loop over the elements, check for duplicates and do self test
-    std::set<GeneralisedElement *> element_set_pt;
+    std::set<GeneralisedElement*> element_set_pt;
     unsigned long Element_pt_range = Element_pt.size();
     for (unsigned long i = 0; i < Element_pt_range; i++)
     {
@@ -753,7 +753,7 @@ namespace oomph
     }
 
     // Loop over the nodes, check for duplicates and do self test
-    std::set<Node *> node_set_pt;
+    std::set<Node*> node_set_pt;
     unsigned long Node_pt_range = Node_pt.size();
     for (unsigned long i = 0; i < Node_pt_range; i++)
     {
@@ -796,8 +796,8 @@ namespace oomph
   /// Inverted elements are output in inverted_element_file (if the
   /// stream is open).
   //========================================================
-  void Mesh::check_inverted_elements(bool &mesh_has_inverted_elements,
-                                     std::ofstream &inverted_element_file)
+  void Mesh::check_inverted_elements(bool& mesh_has_inverted_elements,
+                                     std::ofstream& inverted_element_file)
   {
     // Initialise flag
     mesh_has_inverted_elements = false;
@@ -811,7 +811,7 @@ namespace oomph
     unsigned nelem = nelement();
     for (unsigned e = 0; e < nelem; e++)
     {
-      FiniteElement *el_pt = finite_element_pt(e);
+      FiniteElement* el_pt = finite_element_pt(e);
 
       // Only check for finite elements
       if (el_pt != 0)
@@ -859,13 +859,13 @@ namespace oomph
               {
                 el_pt->check_jacobian(J);
               }
-              catch (OomphLibQuietException &error)
+              catch (OomphLibQuietException& error)
               {
                 is_inverted = true;
               }
 #endif
             }
-            catch (OomphLibQuietException &error)
+            catch (OomphLibQuietException& error)
             {
               is_inverted = true;
             }
@@ -891,14 +891,14 @@ namespace oomph
   /// from the mesh and the its boundaries. Returns vector
   /// of pointers to deleted nodes.
   //========================================================
-  Vector<Node *> Mesh::prune_dead_nodes()
+  Vector<Node*> Mesh::prune_dead_nodes()
   {
     // Only copy the 'live' nodes across to new mesh
     //----------------------------------------------
 
     // New Vector of pointers to nodes
-    Vector<Node *> new_node_pt;
-    Vector<Node *> deleted_node_pt;
+    Vector<Node*> new_node_pt;
+    Vector<Node*> deleted_node_pt;
 
     // Loop over all nodes in mesh
     unsigned long n_node = nnode();
@@ -937,7 +937,7 @@ namespace oomph
     for (unsigned ibound = 0; ibound < num_bound; ibound++)
     {
       // New Vector of pointers to existent boundary nodes
-      Vector<Node *> new_boundary_node_pt;
+      Vector<Node*> new_boundary_node_pt;
 
       // Loop over the boundary nodes
       unsigned long Nboundary_node = Boundary_node_pt[ibound].size();
@@ -964,7 +964,7 @@ namespace oomph
           if (!Boundary_node_pt[ibound][n]->is_on_boundary())
           {
             deleted_node_pt.push_back(
-              dynamic_cast<Node *>(Boundary_node_pt[ibound][n]));
+              dynamic_cast<Node*>(Boundary_node_pt[ibound][n]));
 
             delete Boundary_node_pt[ibound][n];
           }
@@ -987,7 +987,7 @@ namespace oomph
   /// of the points on the boundary (in individual tecplot
   /// zones)
   //========================================================
-  void Mesh::output_boundaries(std::ostream &outfile)
+  void Mesh::output_boundaries(std::ostream& outfile)
   {
     // Loop over the boundaries
     unsigned num_bound = nboundary();
@@ -1010,11 +1010,11 @@ namespace oomph
   /// Dump function for the mesh class.
   /// Loop over all nodes and elements and dump them
   //===================================================================
-  void Mesh::dump(std::ofstream &dump_file, const bool &use_old_ordering) const
+  void Mesh::dump(std::ofstream& dump_file, const bool& use_old_ordering) const
   {
     // Get a reordering of the nodes so that the dump file is in a standard
     // ordering regardless of the sequence of mesh refinements etc.
-    Vector<Node *> reordering;
+    Vector<Node*> reordering;
     this->get_node_reordering(reordering, use_old_ordering);
 
     // Find number of nodes
@@ -1033,7 +1033,7 @@ namespace oomph
     unsigned n_element = this->nelement();
     for (unsigned e = 0; e < n_element; e++)
     {
-      GeneralisedElement *el_pt = this->element_pt(e);
+      GeneralisedElement* el_pt = this->element_pt(e);
       unsigned n_internal = el_pt->ninternal_data();
       if (n_internal > 0)
       {
@@ -1051,7 +1051,7 @@ namespace oomph
   //=======================================================
   /// Read solution from restart file
   //=======================================================
-  void Mesh::read(std::ifstream &restart_file)
+  void Mesh::read(std::ifstream& restart_file)
   {
     std::string input_string;
 
@@ -1088,7 +1088,7 @@ namespace oomph
     for (unsigned long n = 0; n < n_node; n++)
     {
       /// Try to cast to elastic node
-      SolidNode *el_node_pt = dynamic_cast<SolidNode *>(this->node_pt(n));
+      SolidNode* el_node_pt = dynamic_cast<SolidNode*>(this->node_pt(n));
       if (el_node_pt != 0)
       {
         el_node_pt->read(restart_file);
@@ -1105,7 +1105,7 @@ namespace oomph
     unsigned n_element = this->nelement();
     for (unsigned e = 0; e < n_element; e++)
     {
-      GeneralisedElement *el_pt = this->element_pt(e);
+      GeneralisedElement* el_pt = this->element_pt(e);
       unsigned n_internal = el_pt->ninternal_data();
       if (n_internal > 0)
       {
@@ -1145,8 +1145,8 @@ namespace oomph
   /// type (fct will break (in paranoid mode) if paraview
   /// output fcts of the elements are inconsistent).
   //========================================================
-  void Mesh::output_paraview(std::ofstream &file_out,
-                             const unsigned &nplot) const
+  void Mesh::output_paraview(std::ofstream& file_out,
+                             const unsigned& nplot) const
   {
     // Change the scientific format so that E is used rather than e
     file_out.setf(std::ios_base::uppercase);
@@ -1155,7 +1155,7 @@ namespace oomph
     unsigned long number_of_elements = this->Element_pt.size();
 
     // Cast to finite element and return if cast fails.
-    FiniteElement *fe_pt = dynamic_cast<FiniteElement *>(element_pt(0));
+    FiniteElement* fe_pt = dynamic_cast<FiniteElement*>(element_pt(0));
 
 #ifdef PARANOID
     if (fe_pt == 0)
@@ -1172,7 +1172,7 @@ namespace oomph
     unsigned el_zero_ndof = fe_pt->nscalar_paraview();
     for (unsigned i = 1; i < number_of_elements; i++)
     {
-      FiniteElement *fe_pt = dynamic_cast<FiniteElement *>(element_pt(i));
+      FiniteElement* fe_pt = dynamic_cast<FiniteElement*>(element_pt(i));
       unsigned el_i_ndof = fe_pt->nscalar_paraview();
       if (el_zero_ndof != el_i_ndof)
       {
@@ -1197,7 +1197,7 @@ namespace oomph
     {
       // Cast to FiniteElement and (in paranoid mode) check
       // if cast has failed.
-      FiniteElement *fe_pt = dynamic_cast<FiniteElement *>(element_pt(i));
+      FiniteElement* fe_pt = dynamic_cast<FiniteElement*>(element_pt(i));
 
 #ifdef PARANOID
       if (fe_pt == 0)
@@ -1251,7 +1251,7 @@ namespace oomph
       {
         // Cast to FiniteElement and (in paranoid mode) check
         // if cast has failed.
-        FiniteElement *fe_pt = dynamic_cast<FiniteElement *>(element_pt(j));
+        FiniteElement* fe_pt = dynamic_cast<FiniteElement*>(element_pt(j));
 
 #ifdef PARANOID
         if (fe_pt == 0)
@@ -1289,7 +1289,7 @@ namespace oomph
     {
       // Cast to FiniteElement and (in paranoid mode) check
       // if cast has failed.
-      FiniteElement *fe_pt = dynamic_cast<FiniteElement *>(element_pt(i));
+      FiniteElement* fe_pt = dynamic_cast<FiniteElement*>(element_pt(i));
 
 #ifdef PARANOID
       if (fe_pt == 0)
@@ -1323,7 +1323,7 @@ namespace oomph
     {
       // Cast to FiniteElement and (in paranoid mode) check
       // if cast has failed.
-      FiniteElement *fe_pt = dynamic_cast<FiniteElement *>(element_pt(i));
+      FiniteElement* fe_pt = dynamic_cast<FiniteElement*>(element_pt(i));
 
 #ifdef PARANOID
       if (fe_pt == 0)
@@ -1349,7 +1349,7 @@ namespace oomph
     {
       // Cast to FiniteElement and (in paranoid mode) check
       // if cast has failed.
-      FiniteElement *fe_pt = dynamic_cast<FiniteElement *>(element_pt(i));
+      FiniteElement* fe_pt = dynamic_cast<FiniteElement*>(element_pt(i));
 
 #ifdef PARANOID
       if (fe_pt == 0)
@@ -1371,7 +1371,7 @@ namespace oomph
     {
       // Cast to FiniteElement and (in paranoid mode) check
       // if cast has failed.
-      FiniteElement *fe_pt = dynamic_cast<FiniteElement *>(element_pt(i));
+      FiniteElement* fe_pt = dynamic_cast<FiniteElement*>(element_pt(i));
 
 #ifdef PARANOID
       if (fe_pt == 0)
@@ -1405,8 +1405,8 @@ namespace oomph
   /// output fcts of the elements are inconsistent).
   //========================================================
   void Mesh::output_fct_paraview(
-    std::ofstream &file_out,
-    const unsigned &nplot,
+    std::ofstream& file_out,
+    const unsigned& nplot,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt) const
   {
     // Change the scientific format so that E is used rather than e
@@ -1416,7 +1416,7 @@ namespace oomph
     unsigned long number_of_elements = this->Element_pt.size();
 
     // Cast to finite element and return if cast fails.
-    FiniteElement *fe_pt = dynamic_cast<FiniteElement *>(element_pt(0));
+    FiniteElement* fe_pt = dynamic_cast<FiniteElement*>(element_pt(0));
 
 #ifdef PARANOID
     if (fe_pt == 0)
@@ -1433,7 +1433,7 @@ namespace oomph
     unsigned el_zero_ndof = fe_pt->nscalar_paraview();
     for (unsigned i = 1; i < number_of_elements; i++)
     {
-      FiniteElement *fe_pt = dynamic_cast<FiniteElement *>(element_pt(i));
+      FiniteElement* fe_pt = dynamic_cast<FiniteElement*>(element_pt(i));
       unsigned el_i_ndof = fe_pt->nscalar_paraview();
       if (el_zero_ndof != el_i_ndof)
       {
@@ -1458,7 +1458,7 @@ namespace oomph
     {
       // Cast to FiniteElement and (in paranoid mode) check
       // if cast has failed.
-      FiniteElement *fe_pt = dynamic_cast<FiniteElement *>(element_pt(i));
+      FiniteElement* fe_pt = dynamic_cast<FiniteElement*>(element_pt(i));
 
 #ifdef PARANOID
       if (fe_pt == 0)
@@ -1512,7 +1512,7 @@ namespace oomph
       {
         // Cast to FiniteElement and (in paranoid mode) check
         // if cast has failed.
-        FiniteElement *fe_pt = dynamic_cast<FiniteElement *>(element_pt(j));
+        FiniteElement* fe_pt = dynamic_cast<FiniteElement*>(element_pt(j));
 
 #ifdef PARANOID
         if (fe_pt == 0)
@@ -1550,7 +1550,7 @@ namespace oomph
     {
       // Cast to FiniteElement and (in paranoid mode) check
       // if cast has failed.
-      FiniteElement *fe_pt = dynamic_cast<FiniteElement *>(element_pt(i));
+      FiniteElement* fe_pt = dynamic_cast<FiniteElement*>(element_pt(i));
 
 #ifdef PARANOID
       if (fe_pt == 0)
@@ -1584,7 +1584,7 @@ namespace oomph
     {
       // Cast to FiniteElement and (in paranoid mode) check
       // if cast has failed.
-      FiniteElement *fe_pt = dynamic_cast<FiniteElement *>(element_pt(i));
+      FiniteElement* fe_pt = dynamic_cast<FiniteElement*>(element_pt(i));
 
 #ifdef PARANOID
       if (fe_pt == 0)
@@ -1610,7 +1610,7 @@ namespace oomph
     {
       // Cast to FiniteElement and (in paranoid mode) check
       // if cast has failed.
-      FiniteElement *fe_pt = dynamic_cast<FiniteElement *>(element_pt(i));
+      FiniteElement* fe_pt = dynamic_cast<FiniteElement*>(element_pt(i));
 
 #ifdef PARANOID
       if (fe_pt == 0)
@@ -1632,7 +1632,7 @@ namespace oomph
     {
       // Cast to FiniteElement and (in paranoid mode) check
       // if cast has failed.
-      FiniteElement *fe_pt = dynamic_cast<FiniteElement *>(element_pt(i));
+      FiniteElement* fe_pt = dynamic_cast<FiniteElement*>(element_pt(i));
 
 #ifdef PARANOID
       if (fe_pt == 0)
@@ -1663,7 +1663,7 @@ namespace oomph
   /// Loop over all elements and plot (i.e. execute
   /// the element's own output() function)
   //========================================================
-  void Mesh::output(std::ostream &outfile)
+  void Mesh::output(std::ostream& outfile)
   {
     // Loop over the elements and call their output functions
     // Assign Element_pt_range
@@ -1671,7 +1671,7 @@ namespace oomph
     for (unsigned long e = 0; e < Element_pt_range; e++)
     {
       // Try to cast to FiniteElement
-      FiniteElement *el_pt = dynamic_cast<FiniteElement *>(Element_pt[e]);
+      FiniteElement* el_pt = dynamic_cast<FiniteElement*>(Element_pt[e]);
       if (el_pt == 0)
       {
         oomph_info << "Can't execute output(...) for non FiniteElements"
@@ -1705,7 +1705,7 @@ namespace oomph
   /// the element's own output() function). Use
   /// n_plot plot points in each coordinate direction.
   //========================================================
-  void Mesh::output(std::ostream &outfile, const unsigned &n_plot)
+  void Mesh::output(std::ostream& outfile, const unsigned& n_plot)
   {
     // Loop over the elements and call their output functions
     // Assign Element_pt_range
@@ -1714,7 +1714,7 @@ namespace oomph
     for (unsigned long e = 0; e < Element_pt_range; e++)
     {
       // Try to cast to FiniteElement
-      FiniteElement *el_pt = dynamic_cast<FiniteElement *>(Element_pt[e]);
+      FiniteElement* el_pt = dynamic_cast<FiniteElement*>(Element_pt[e]);
       if (el_pt == 0)
       {
         oomph_info << "Can't execute output(...) for non FiniteElements"
@@ -1748,7 +1748,7 @@ namespace oomph
   /// the element's own output() function)
   /// (C style output)
   //========================================================
-  void Mesh::output(FILE *file_pt)
+  void Mesh::output(FILE* file_pt)
   {
     // Loop over the elements and call their output functions
     // Assign Element_pt_range
@@ -1756,7 +1756,7 @@ namespace oomph
     for (unsigned long e = 0; e < Element_pt_range; e++)
     {
       // Try to cast to FiniteElement
-      FiniteElement *el_pt = dynamic_cast<FiniteElement *>(Element_pt[e]);
+      FiniteElement* el_pt = dynamic_cast<FiniteElement*>(Element_pt[e]);
       if (el_pt == 0)
       {
         oomph_info << "Can't execute output(...) for non FiniteElements"
@@ -1791,7 +1791,7 @@ namespace oomph
   /// n_plot plot points in each coordinate direction.
   /// (C style output)
   //========================================================
-  void Mesh::output(FILE *file_pt, const unsigned &n_plot)
+  void Mesh::output(FILE* file_pt, const unsigned& n_plot)
   {
     // Loop over the elements and call their output functions
     // Assign Element_pt_range
@@ -1799,7 +1799,7 @@ namespace oomph
     for (unsigned long e = 0; e < Element_pt_range; e++)
     {
       // Try to cast to FiniteElement
-      FiniteElement *el_pt = dynamic_cast<FiniteElement *>(Element_pt[e]);
+      FiniteElement* el_pt = dynamic_cast<FiniteElement*>(Element_pt[e]);
       if (el_pt == 0)
       {
         oomph_info << "Can't execute output(...) for non FiniteElements"
@@ -1833,8 +1833,8 @@ namespace oomph
   /// the element's own output() function). Use
   /// n_plot plot points in each coordinate direction.
   //========================================================
-  void Mesh::output_fct(std::ostream &outfile,
-                        const unsigned &n_plot,
+  void Mesh::output_fct(std::ostream& outfile,
+                        const unsigned& n_plot,
                         FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
   {
     // Loop over the elements and call their output functions
@@ -1843,7 +1843,7 @@ namespace oomph
     for (unsigned long e = 0; e < Element_pt_range; e++)
     {
       // Try to cast to FiniteElement
-      FiniteElement *el_pt = dynamic_cast<FiniteElement *>(Element_pt[e]);
+      FiniteElement* el_pt = dynamic_cast<FiniteElement*>(Element_pt[e]);
       if (el_pt == 0)
       {
         oomph_info << "Can't execute output_fct(...) for non FiniteElements"
@@ -1877,9 +1877,9 @@ namespace oomph
   /// the element's own output() function) at time t. Use
   /// n_plot plot points in each coordinate direction.
   //========================================================
-  void Mesh::output_fct(std::ostream &outfile,
-                        const unsigned &n_plot,
-                        const double &time,
+  void Mesh::output_fct(std::ostream& outfile,
+                        const unsigned& n_plot,
+                        const double& time,
                         FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
   {
     // Loop over the elements and call their output functions
@@ -1888,7 +1888,7 @@ namespace oomph
     for (unsigned long e = 0; e < Element_pt_range; e++)
     {
       // Try to cast to FiniteElement
-      FiniteElement *el_pt = dynamic_cast<FiniteElement *>(Element_pt[e]);
+      FiniteElement* el_pt = dynamic_cast<FiniteElement*>(Element_pt[e]);
       if (el_pt == 0)
       {
         oomph_info << "Can't execute output_fct(...) for non FiniteElements"
@@ -2036,8 +2036,8 @@ namespace oomph
   /// Virtual function that should be overloaded if the mesh
   /// has any mesh level storage of the timestepper
   //==================================================================
-  void Mesh::set_mesh_level_time_stepper(TimeStepper *const &time_stepper_pt,
-                                         const bool &preserve_existing_data)
+  void Mesh::set_mesh_level_time_stepper(TimeStepper* const& time_stepper_pt,
+                                         const bool& preserve_existing_data)
   {
 #ifdef PARANOID
     if (!Suppress_warning_about_empty_mesh_level_time_stepper_function)
@@ -2071,7 +2071,7 @@ namespace oomph
   /// when the data is pinned.
   //==================================================================
   void Mesh::set_consistent_pinned_values_for_continuation(
-    ContinuationStorageScheme *const &continuation_storage_pt)
+    ContinuationStorageScheme* const& continuation_storage_pt)
   {
     // Loop over the nodes
     const unsigned long n_node = this->nnode();
@@ -2087,7 +2087,7 @@ namespace oomph
     for (unsigned long e = 0; e < n_element; e++)
     {
       // Cache pointer to the elemnet
-      GeneralisedElement *const elem_pt = this->element_pt(e);
+      GeneralisedElement* const elem_pt = this->element_pt(e);
       // Find the number of internal dofs
       const unsigned n_internal = elem_pt->ninternal_data();
 
@@ -2104,7 +2104,7 @@ namespace oomph
   /// Return true if the pointer corresponds to any data stored in
   /// the mesh and false if not
   //==================================================================
-  bool Mesh::does_pointer_correspond_to_mesh_data(double *const &parameter_pt)
+  bool Mesh::does_pointer_correspond_to_mesh_data(double* const& parameter_pt)
   {
     // Loop over the nodes
     const unsigned long n_node = this->nnode();
@@ -2124,7 +2124,7 @@ namespace oomph
     for (unsigned long e = 0; e < n_element; e++)
     {
       // Cache pointer to the elemnet
-      GeneralisedElement *const elem_pt = this->element_pt(e);
+      GeneralisedElement* const elem_pt = this->element_pt(e);
 
       // Find the number of internal dofs
       const unsigned n_internal = elem_pt->ninternal_data();
@@ -2148,8 +2148,8 @@ namespace oomph
   /// Set the time stepper associated with all the nodal data
   /// in the problem
   //==============================================================
-  void Mesh::set_nodal_time_stepper(TimeStepper *const &time_stepper_pt,
-                                    const bool &preserve_existing_data)
+  void Mesh::set_nodal_time_stepper(TimeStepper* const& time_stepper_pt,
+                                    const bool& preserve_existing_data)
   {
     // Loop over the nodes
     const unsigned long n_node = this->nnode();
@@ -2168,7 +2168,7 @@ namespace oomph
   /// in the elements in the mesh
   //===============================================================
   void Mesh::set_elemental_internal_time_stepper(
-    TimeStepper *const &time_stepper_pt, const bool &preserve_existing_data)
+    TimeStepper* const& time_stepper_pt, const bool& preserve_existing_data)
   {
     // Loop over the elements
     const unsigned long n_element = this->nelement();
@@ -2196,10 +2196,10 @@ namespace oomph
   /// We shouldn't ever really use this, but it does make life that
   /// bit easier for the lazy mesh writer.
   //=======================================================================
-  void Mesh::convert_to_boundary_node(Node *&node_pt)
+  void Mesh::convert_to_boundary_node(Node*& node_pt)
   {
     // Cache a list of FiniteElement pointers for use in this function.
-    Vector<FiniteElement *> fe_pt(nelement(), 0);
+    Vector<FiniteElement*> fe_pt(nelement(), 0);
     for (unsigned e = 0, ne = nelement(); e < ne; e++)
     {
       // Some elements may not have been build yet, just store a null pointer
@@ -2223,11 +2223,11 @@ namespace oomph
   // O(N) times your boundary node creation complexity is O(N^2).
   // ============================================================
   void Mesh::convert_to_boundary_node(
-    Node *&node_pt, const Vector<FiniteElement *> &finite_element_pt)
+    Node*& node_pt, const Vector<FiniteElement*>& finite_element_pt)
   {
     // If the node is already a boundary node, then return straight away,
     // we don't need to do anything
-    if (dynamic_cast<BoundaryNodeBase *>(node_pt) != 0)
+    if (dynamic_cast<BoundaryNodeBase*>(node_pt) != 0)
     {
       return;
     }
@@ -2281,7 +2281,7 @@ namespace oomph
     // This is required because if we have passed a reference to the
     // first element that we find, constructing the new node
     // will over-write our pointer and we'll get segmentation faults.
-    Node *old_node_pt = node_pt;
+    Node* old_node_pt = node_pt;
 
     // We now create the new node by using the first element in the list
     std::list<std::pair<unsigned long, int>>::iterator list_it =
@@ -2289,18 +2289,18 @@ namespace oomph
 
     // Create a new boundary node, using the timestepper from the
     // original node
-    Node *new_node_pt =
+    Node* new_node_pt =
       finite_element_pt[list_it->first]->construct_boundary_node(
         list_it->second, node_pt->time_stepper_pt());
 
     // Now copy all the information accross from the old node
 
     // Can we cast the node to a solid node
-    SolidNode *solid_node_pt = dynamic_cast<SolidNode *>(new_node_pt);
+    SolidNode* solid_node_pt = dynamic_cast<SolidNode*>(new_node_pt);
     // If it's a solid node, do the casting
     if (solid_node_pt != 0)
     {
-      solid_node_pt->copy(dynamic_cast<SolidNode *>(old_node_pt));
+      solid_node_pt->copy(dynamic_cast<SolidNode*>(old_node_pt));
     }
     else
     {
@@ -2317,7 +2317,7 @@ namespace oomph
     }
 
     // Finally, find the position of the node in the global mesh
-    Vector<Node *>::iterator it =
+    Vector<Node*>::iterator it =
       std::find(Node_pt.begin(), Node_pt.end(), old_node_pt);
 
     // If it is in the mesh, update the pointer
@@ -2369,7 +2369,7 @@ namespace oomph
     {
       // map of bools for whether the node has been shared,
       // initialised to 0 (false) for each domain d
-      std::map<Node *, bool> node_shared;
+      std::map<Node*, bool> node_shared;
 
       // For all domains lower than the current domain: Do halos first
       // then haloed, to ensure correct order in lookup scheme from
@@ -2377,20 +2377,20 @@ namespace oomph
       if (d < my_rank)
       {
         // Get the nodes from the halo elements first
-        Vector<GeneralisedElement *> halo_elem_pt(this->halo_element_pt(d));
+        Vector<GeneralisedElement*> halo_elem_pt(this->halo_element_pt(d));
         unsigned nhalo_elem = halo_elem_pt.size();
 
         for (unsigned e = 0; e < nhalo_elem; e++)
         {
           // Get finite element
-          FiniteElement *el_pt = dynamic_cast<FiniteElement *>(halo_elem_pt[e]);
+          FiniteElement* el_pt = dynamic_cast<FiniteElement*>(halo_elem_pt[e]);
           if (el_pt != 0)
           {
             // Loop over nodes
             unsigned nnod = el_pt->nnode();
             for (unsigned j = 0; j < nnod; j++)
             {
-              Node *nod_pt = el_pt->node_pt(j);
+              Node* nod_pt = el_pt->node_pt(j);
 
               // Add it as a shared node from current domain
               if (!node_shared[nod_pt])
@@ -2405,21 +2405,21 @@ namespace oomph
         } // end loop over elements
 
         // Now get any left over nodes on the haloed elements
-        Vector<GeneralisedElement *> haloed_elem_pt(this->haloed_element_pt(d));
+        Vector<GeneralisedElement*> haloed_elem_pt(this->haloed_element_pt(d));
         unsigned nhaloed_elem = haloed_elem_pt.size();
 
         for (unsigned e = 0; e < nhaloed_elem; e++)
         {
           // Get element
-          FiniteElement *el_pt =
-            dynamic_cast<FiniteElement *>(haloed_elem_pt[e]);
+          FiniteElement* el_pt =
+            dynamic_cast<FiniteElement*>(haloed_elem_pt[e]);
           if (el_pt != 0)
           {
             // Loop over the nodes
             unsigned nnod = el_pt->nnode();
             for (unsigned j = 0; j < nnod; j++)
             {
-              Node *nod_pt = el_pt->node_pt(j);
+              Node* nod_pt = el_pt->node_pt(j);
 
               // Add it as a shared node from current domain
               if (!node_shared[nod_pt])
@@ -2439,21 +2439,21 @@ namespace oomph
       if (d > my_rank)
       {
         // Get the nodes from the haloed elements first
-        Vector<GeneralisedElement *> haloed_elem_pt(this->haloed_element_pt(d));
+        Vector<GeneralisedElement*> haloed_elem_pt(this->haloed_element_pt(d));
         unsigned nhaloed_elem = haloed_elem_pt.size();
 
         for (unsigned e = 0; e < nhaloed_elem; e++)
         {
           // Get element
-          FiniteElement *el_pt =
-            dynamic_cast<FiniteElement *>(haloed_elem_pt[e]);
+          FiniteElement* el_pt =
+            dynamic_cast<FiniteElement*>(haloed_elem_pt[e]);
           if (el_pt != 0)
           {
             // Loop over nodes
             unsigned nnod = el_pt->nnode();
             for (unsigned j = 0; j < nnod; j++)
             {
-              Node *nod_pt = el_pt->node_pt(j);
+              Node* nod_pt = el_pt->node_pt(j);
 
               // Add it as a shared node from current domain
               if (!node_shared[nod_pt])
@@ -2467,20 +2467,20 @@ namespace oomph
         } // end loop over elements
 
         // Now get the nodes from any halo elements left over
-        Vector<GeneralisedElement *> halo_elem_pt(this->halo_element_pt(d));
+        Vector<GeneralisedElement*> halo_elem_pt(this->halo_element_pt(d));
         unsigned nhalo_elem = halo_elem_pt.size();
 
         for (unsigned e = 0; e < nhalo_elem; e++)
         {
           // Get element
-          FiniteElement *el_pt = dynamic_cast<FiniteElement *>(halo_elem_pt[e]);
+          FiniteElement* el_pt = dynamic_cast<FiniteElement*>(halo_elem_pt[e]);
           if (el_pt != 0)
           {
             // Loop over nodes
             unsigned nnod = el_pt->nnode();
             for (unsigned j = 0; j < nnod; j++)
             {
-              Node *nod_pt = el_pt->node_pt(j);
+              Node* nod_pt = el_pt->node_pt(j);
 
               // Add it as a shared node from current domain
               if (!node_shared[nod_pt])
@@ -2520,7 +2520,7 @@ namespace oomph
   /// information can be required, e.g. when synchronising hanging node
   /// schemes over all processors.
   //========================================================================
-  void Mesh::synchronise_shared_nodes(const bool &report_stats)
+  void Mesh::synchronise_shared_nodes(const bool& report_stats)
   {
     double t_start = 0.0;
     if (Global_timings::Doc_comprehensive_timings)
@@ -2553,10 +2553,10 @@ namespace oomph
 
     // Stage 1: Populate the set of of processor IDs that
     // each haloed node on current processor is haloed by.
-    std::map<Node *, std::set<int>> shared_domain_set;
+    std::map<Node*, std::set<int>> shared_domain_set;
 
     // Associate unique number with any haloed nodes on this processor
-    std::map<Node *, unsigned> global_haloed_node_number_plus_one;
+    std::map<Node*, unsigned> global_haloed_node_number_plus_one;
     unsigned global_haloed_count = 0;
 
     // Loop over domains
@@ -2569,7 +2569,7 @@ namespace oomph
         unsigned nnod_haloed = this->nhaloed_node(d);
         for (unsigned j = 0; j < nnod_haloed; j++)
         {
-          Node *nod_pt = this->haloed_node_pt(d, j);
+          Node* nod_pt = this->haloed_node_pt(d, j);
           shared_domain_set[nod_pt].insert(d);
           if (global_haloed_node_number_plus_one[nod_pt] == 0)
           {
@@ -2623,7 +2623,7 @@ namespace oomph
         unsigned nnod_haloed = this->nhaloed_node(domain);
         for (unsigned j = 0; j < nnod_haloed; j++)
         {
-          Node *nod_pt = this->haloed_node_pt(domain, j);
+          Node* nod_pt = this->haloed_node_pt(domain, j);
 
           // Send global ID of haloed node
           send_data.push_back(global_haloed_node_number_plus_one[nod_pt] - 1);
@@ -2711,7 +2711,7 @@ namespace oomph
 
     // Copy vector-based representation of shared nodes into
     // sets for faster search
-    Vector<std::set<Node *>> shared_node_set(n_proc);
+    Vector<std::set<Node*>> shared_node_set(n_proc);
     for (int d = 0; d < n_proc; d++)
     {
       unsigned n_vector = Shared_node_pt[d].size();
@@ -2748,13 +2748,13 @@ namespace oomph
         // domains_map[global_haloed_node_number].second = set of domains
         //                                                 this node is
         //                                                 associated with.
-        std::map<unsigned, std::pair<Node *, std::set<unsigned>>> domains_map;
+        std::map<unsigned, std::pair<Node*, std::set<unsigned>>> domains_map;
 
         // Loop over halo nodes with sending processor
         unsigned nnod_halo = this->nhalo_node(send_rank);
         for (unsigned j = 0; j < nnod_halo; j++)
         {
-          Node *nod_pt = this->halo_node_pt(send_rank, j);
+          Node* nod_pt = this->halo_node_pt(send_rank, j);
 
           // Read unique ID of haloed node on send proc
           unsigned haloed_node_id_on_send_proc = receive_data[count++];
@@ -2784,7 +2784,7 @@ namespace oomph
 #ifdef PARANOID
         int previous_one = -1;
 #endif
-        for (std::map<unsigned, std::pair<Node *, std::set<unsigned>>>::iterator
+        for (std::map<unsigned, std::pair<Node*, std::set<unsigned>>>::iterator
                it = domains_map.begin();
              it != domains_map.end();
              it++)
@@ -2807,7 +2807,7 @@ namespace oomph
 #endif
 
           // Extract node
-          Node *nod_pt = (*it).second.first;
+          Node* nod_pt = (*it).second.first;
 
           // Extract set of domains
           std::set<unsigned> domain_set((*it).second.second);
@@ -2824,7 +2824,7 @@ namespace oomph
             {
               // Is node already listed in shared node scheme? Find it
               // and get iterator to entry
-              std::set<Node *>::iterator ittt =
+              std::set<Node*>::iterator ittt =
                 shared_node_set[shared_domain].find(nod_pt);
 
               // If it's not in there already iterator points to end of
@@ -2877,8 +2877,8 @@ namespace oomph
   //========================================================================
   /// Classify all halo and haloed information in the mesh
   //========================================================================
-  void Mesh::classify_halo_and_haloed_nodes(DocInfo &doc_info,
-                                            const bool &report_stats)
+  void Mesh::classify_halo_and_haloed_nodes(DocInfo& doc_info,
+                                            const bool& report_stats)
   {
     //  MemoryUsage::doc_memory_usage(
     //   "at beginning of Mesh::classify_halo_and_haloed_nodes");
@@ -2922,35 +2922,35 @@ namespace oomph
 
     // Determine which processors the nodes are associated with
     // and hence who's in charge
-    std::map<Data *, std::set<unsigned>> processors_associated_with_data;
-    std::map<Data *, unsigned> processor_in_charge;
+    std::map<Data*, std::set<unsigned>> processors_associated_with_data;
+    std::map<Data*, unsigned> processor_in_charge;
 
     // Loop over all processors and associate any nodes on the halo
     // elements involved with that processor
     for (int domain = 0; domain < n_proc; domain++)
     {
       // Get vector of halo elements by copy operation
-      Vector<GeneralisedElement *> halo_elem_pt(this->halo_element_pt(domain));
+      Vector<GeneralisedElement*> halo_elem_pt(this->halo_element_pt(domain));
 
       // Loop over halo elements associated with this adjacent domain
       unsigned nelem = halo_elem_pt.size();
       for (unsigned e = 0; e < nelem; e++)
       {
         // Get element only have nodes if a finite element
-        FiniteElement *finite_el_pt =
-          dynamic_cast<FiniteElement *>(halo_elem_pt[e]);
+        FiniteElement* finite_el_pt =
+          dynamic_cast<FiniteElement*>(halo_elem_pt[e]);
         if (finite_el_pt != 0)
         {
           // Loop over nodes
           unsigned nnod = finite_el_pt->nnode();
           for (unsigned j = 0; j < nnod; j++)
           {
-            Node *nod_pt = finite_el_pt->node_pt(j);
+            Node* nod_pt = finite_el_pt->node_pt(j);
             // Associate node with this domain
             processors_associated_with_data[nod_pt].insert(domain);
 
             // Do the same if the node is solid
-            SolidNode *solid_nod_pt = dynamic_cast<SolidNode *>(nod_pt);
+            SolidNode* solid_nod_pt = dynamic_cast<SolidNode*>(nod_pt);
             if (solid_nod_pt != 0)
             {
               processors_associated_with_data[solid_nod_pt
@@ -2967,8 +2967,8 @@ namespace oomph
     unsigned nelem = this->nelement();
     for (unsigned e = 0; e < nelem; e++)
     {
-      FiniteElement *finite_el_pt =
-        dynamic_cast<FiniteElement *>(this->element_pt(e));
+      FiniteElement* finite_el_pt =
+        dynamic_cast<FiniteElement*>(this->element_pt(e));
 
       // Only visit non-halos and finite elements
       if ((finite_el_pt != 0) && (!finite_el_pt->is_halo()))
@@ -2977,13 +2977,13 @@ namespace oomph
         unsigned nnod = finite_el_pt->nnode();
         for (unsigned j = 0; j < nnod; j++)
         {
-          Node *nod_pt = finite_el_pt->node_pt(j);
+          Node* nod_pt = finite_el_pt->node_pt(j);
 
           // Associate this node with current processor
           processors_associated_with_data[nod_pt].insert(my_rank);
 
           // do the same if we have a SolidNode
-          SolidNode *solid_nod_pt = dynamic_cast<SolidNode *>(nod_pt);
+          SolidNode* solid_nod_pt = dynamic_cast<SolidNode*>(nod_pt);
           if (solid_nod_pt != 0)
           {
             processors_associated_with_data[solid_nod_pt
@@ -3025,7 +3025,7 @@ namespace oomph
         // Communicate the processors associated with data on haloed elements
 
         // Get haloed elements
-        Vector<GeneralisedElement *> haloed_elem_pt(this->haloed_element_pt(d));
+        Vector<GeneralisedElement*> haloed_elem_pt(this->haloed_element_pt(d));
 
         // Initialise counter for this haloed layer
         unsigned count_data = 0;
@@ -3035,15 +3035,15 @@ namespace oomph
         for (unsigned e = 0; e < n_haloed_elem; e++)
         {
           // Only nodes in finite elements
-          FiniteElement *haloed_el_pt =
-            dynamic_cast<FiniteElement *>(haloed_elem_pt[e]);
+          FiniteElement* haloed_el_pt =
+            dynamic_cast<FiniteElement*>(haloed_elem_pt[e]);
           if (haloed_el_pt != 0)
           {
             // Loop over nodes
             unsigned n_node = haloed_el_pt->nnode();
             for (unsigned j = 0; j < n_node; j++)
             {
-              Node *nod_pt = haloed_el_pt->node_pt(j);
+              Node* nod_pt = haloed_el_pt->node_pt(j);
 
               // Number of processors associated with this node
               unsigned n_assoc = processors_associated_with_data[nod_pt].size();
@@ -3086,8 +3086,7 @@ namespace oomph
           if (dd != my_rank) // (my_rank=d)
           {
             // We will be looping over the halo elements with process dd
-            Vector<GeneralisedElement *> halo_elem_pt(
-              this->halo_element_pt(dd));
+            Vector<GeneralisedElement*> halo_elem_pt(this->halo_element_pt(dd));
             unsigned n_halo_elem = halo_elem_pt.size();
             unsigned count_data = 0;
             MPI_Recv(&count_data,
@@ -3112,14 +3111,14 @@ namespace oomph
               count_data = 0;
               for (unsigned e = 0; e < n_halo_elem; e++)
               {
-                FiniteElement *halo_el_pt =
-                  dynamic_cast<FiniteElement *>(halo_elem_pt[e]);
+                FiniteElement* halo_el_pt =
+                  dynamic_cast<FiniteElement*>(halo_elem_pt[e]);
                 if (halo_el_pt != 0)
                 {
                   unsigned n_node = halo_el_pt->nnode();
                   for (unsigned j = 0; j < n_node; j++)
                   {
-                    Node *nod_pt = halo_el_pt->node_pt(j);
+                    Node* nod_pt = halo_el_pt->node_pt(j);
 
                     // Get number of processors associated with data that was
                     // sent
@@ -3140,8 +3139,8 @@ namespace oomph
                         sent_domain);
 
                       // If the node is solid then add the ID to the solid data
-                      SolidNode *solid_nod_pt =
-                        dynamic_cast<SolidNode *>(nod_pt);
+                      SolidNode* solid_nod_pt =
+                        dynamic_cast<SolidNode*>(nod_pt);
                       if (solid_nod_pt != 0)
                       {
                         processors_associated_with_data
@@ -3175,14 +3174,14 @@ namespace oomph
     unsigned nnod = this->nnode();
     for (unsigned j = 0; j < nnod; j++)
     {
-      Node *nod_pt = this->node_pt(j);
+      Node* nod_pt = this->node_pt(j);
 
       // Reset halo status of node to false
       nod_pt->set_nonhalo();
 
       // If it's a SolidNode then the halo status of the data
       // associated with that must also be reset to false
-      SolidNode *solid_nod_pt = dynamic_cast<SolidNode *>(nod_pt);
+      SolidNode* solid_nod_pt = dynamic_cast<SolidNode*>(nod_pt);
       if (solid_nod_pt != 0)
       {
         solid_nod_pt->variable_position_pt()->set_nonhalo();
@@ -3222,13 +3221,13 @@ namespace oomph
     // current processor
 
     // Only count nodes once (map is initialised to 0 = false)
-    std::map<Node *, bool> done;
+    std::map<Node*, bool> done;
 
     // Loop over all processors
     for (int domain = 0; domain < n_proc; domain++)
     {
       // Get vector of halo elements by copy operation
-      Vector<GeneralisedElement *> halo_elem_pt(this->halo_element_pt(domain));
+      Vector<GeneralisedElement*> halo_elem_pt(this->halo_element_pt(domain));
 
       // Loop over halo elements associated with this adjacent domain
       unsigned nelem = halo_elem_pt.size();
@@ -3236,17 +3235,17 @@ namespace oomph
       for (unsigned e = 0; e < nelem; e++)
       {
         // Get element
-        GeneralisedElement *el_pt = halo_elem_pt[e];
+        GeneralisedElement* el_pt = halo_elem_pt[e];
 
         // Can if be cast to a finite element
-        FiniteElement *finite_el_pt = dynamic_cast<FiniteElement *>(el_pt);
+        FiniteElement* finite_el_pt = dynamic_cast<FiniteElement*>(el_pt);
         if (finite_el_pt != 0)
         {
           // Loop over nodes
           unsigned nnod = finite_el_pt->nnode();
           for (unsigned j = 0; j < nnod; j++)
           {
-            Node *nod_pt = finite_el_pt->node_pt(j);
+            Node* nod_pt = finite_el_pt->node_pt(j);
 
             // Have we done this node already?
             if (!done[nod_pt])
@@ -3270,7 +3269,7 @@ namespace oomph
 
                   // If it's a SolidNode then the data associated with that
                   // must also be halo
-                  SolidNode *solid_nod_pt = dynamic_cast<SolidNode *>(nod_pt);
+                  SolidNode* solid_nod_pt = dynamic_cast<SolidNode*>(nod_pt);
                   if (solid_nod_pt != 0)
                   {
                     solid_nod_pt->variable_position_pt()->set_halo(
@@ -3302,10 +3301,10 @@ namespace oomph
     for (int domain = 0; domain < n_proc; domain++)
     {
       // Only count nodes once (map is initialised to 0 = false)
-      std::map<Node *, bool> node_done;
+      std::map<Node*, bool> node_done;
 
       // Get vector of haloed elements by copy operation
-      Vector<GeneralisedElement *> haloed_elem_pt(
+      Vector<GeneralisedElement*> haloed_elem_pt(
         this->haloed_element_pt(domain));
 
       // Loop over haloed elements associated with this adjacent domain
@@ -3314,17 +3313,17 @@ namespace oomph
       for (unsigned e = 0; e < nelem; e++)
       {
         // Get element
-        GeneralisedElement *el_pt = haloed_elem_pt[e];
+        GeneralisedElement* el_pt = haloed_elem_pt[e];
 
         // Can it be cast to a finite element
-        FiniteElement *finite_el_pt = dynamic_cast<FiniteElement *>(el_pt);
+        FiniteElement* finite_el_pt = dynamic_cast<FiniteElement*>(el_pt);
         if (finite_el_pt != 0)
         {
           // Loop over nodes
           unsigned nnod = finite_el_pt->nnode();
           for (unsigned j = 0; j < nnod; j++)
           {
-            Node *nod_pt = finite_el_pt->node_pt(j);
+            Node* nod_pt = finite_el_pt->node_pt(j);
 
             // Have we done this node already?
             if (!node_done[nod_pt])
@@ -3380,11 +3379,11 @@ namespace oomph
 
     // Record previously overlooked halo nodes so they can be
     // added to the shared node lookup scheme (in a consistent order) below
-    Vector<Vector<Node *>> over_looked_halo_node_pt(n_proc);
+    Vector<Vector<Node*>> over_looked_halo_node_pt(n_proc);
 
     // Record previously overlooked haloed nodes so they can be
     // added to the shared node lookup scheme (in a consistent order) below
-    Vector<Vector<Node *>> over_looked_haloed_node_pt(n_proc);
+    Vector<Vector<Node*>> over_looked_haloed_node_pt(n_proc);
 
     // Data to be sent to each processor
     Vector<int> send_n(n_proc, 0);
@@ -3408,7 +3407,7 @@ namespace oomph
         unsigned nnod = nshared_node(domain);
         for (unsigned j = 0; j < nnod; j++)
         {
-          Node *nod_pt = shared_node_pt(domain, j);
+          Node* nod_pt = shared_node_pt(domain, j);
 
           // Is a different-numbered processor/domain in charge of this node?
           int proc_in_charge = processor_in_charge[nod_pt];
@@ -3427,7 +3426,7 @@ namespace oomph
 
             // If it's a SolidNode then the data associated with that
             // must also be halo
-            SolidNode *solid_nod_pt = dynamic_cast<SolidNode *>(nod_pt);
+            SolidNode* solid_nod_pt = dynamic_cast<SolidNode*>(nod_pt);
             if (solid_nod_pt != 0)
             {
               solid_nod_pt->variable_position_pt()->set_halo(proc_in_charge);
@@ -3579,7 +3578,7 @@ namespace oomph
               unsigned proc_in_charge = unsigned(receive_data[count++]);
 
               // Find actual node from shared node lookup scheme
-              Node *nod_pt = shared_node_pt(send_rank, j);
+              Node* nod_pt = shared_node_pt(send_rank, j);
 
               // Note: This search seems relatively cheap
               //       and in the tests done, did not benefit
@@ -3783,7 +3782,7 @@ namespace oomph
               unsigned j = unsigned(next_one);
 
               // Get pointer to previously overlooked halo
-              Node *nod_pt = shared_node_pt(send_rank, j);
+              Node* nod_pt = shared_node_pt(send_rank, j);
 
               // Proc where overlooked halo is
               unsigned proc_with_overlooked_halo = all_receive_data[count++];
@@ -3862,9 +3861,9 @@ namespace oomph
         for (int iproc = 0; iproc < n_proc; iproc++)
         {
           // Get vector of halo elements by copy operation
-          Vector<GeneralisedElement *> halo_elem_pt(
+          Vector<GeneralisedElement*> halo_elem_pt(
             this->halo_element_pt(iproc));
-          Vector<GeneralisedElement *> haloed_elem_pt(
+          Vector<GeneralisedElement*> haloed_elem_pt(
             this->haloed_element_pt(iproc));
           oomph_info << "With process " << iproc << ", there are "
                      << this->nhalo_node(iproc) << " halo nodes, and "
@@ -3968,8 +3967,8 @@ namespace oomph
       for (int iproc = 0; iproc < n_proc; iproc++)
       {
         // Get vector of halo elements by copy operation
-        Vector<GeneralisedElement *> halo_elem_pt(this->halo_element_pt(iproc));
-        Vector<GeneralisedElement *> haloed_elem_pt(
+        Vector<GeneralisedElement*> halo_elem_pt(this->halo_element_pt(iproc));
+        Vector<GeneralisedElement*> haloed_elem_pt(
           this->haloed_element_pt(iproc));
         oomph_info << "With process " << iproc << ", there are "
                    << this->nhalo_node(iproc) << " halo nodes, and "
@@ -4119,7 +4118,7 @@ namespace oomph
                   for (int j = 0; j < int(hi_nod); j++)
                   {
                     // Which node are we dealing with
-                    Node *nod_pt = 0;
+                    Node* nod_pt = 0;
                     if (loop == 0)
                     {
                       nod_pt = this->halo_node_pt(dd, j);
@@ -4145,8 +4144,8 @@ namespace oomph
                     if (nentry != 0)
                     {
                       // Is current node a boundary node?
-                      BoundaryNodeBase *bnod_pt =
-                        dynamic_cast<BoundaryNodeBase *>(nod_pt);
+                      BoundaryNodeBase* bnod_pt =
+                        dynamic_cast<BoundaryNodeBase*>(nod_pt);
 #ifdef PARANOID
                       if (bnod_pt == 0)
                       {
@@ -4173,7 +4172,7 @@ namespace oomph
 
                       // Get pointer to the map of indices associated with
                       // additional values created by face elements
-                      std::map<unsigned, unsigned> *map_pt =
+                      std::map<unsigned, unsigned>* map_pt =
                         bnod_pt
                           ->index_of_first_value_assigned_by_face_element_pt();
 
@@ -4251,7 +4250,7 @@ namespace oomph
               for (int j = 0; j < int(hi_nod); j++)
               {
                 // Which node are we dealing with?
-                Node *nod_pt = 0;
+                Node* nod_pt = 0;
                 if (loop == 0)
                 {
                   nod_pt = this->haloed_node_pt(d, j);
@@ -4268,8 +4267,8 @@ namespace oomph
                 // additional values created by face elements
 
                 // Is it a boundary node?
-                BoundaryNodeBase *bnod_pt =
-                  dynamic_cast<BoundaryNodeBase *>(nod_pt);
+                BoundaryNodeBase* bnod_pt =
+                  dynamic_cast<BoundaryNodeBase*>(nod_pt);
                 if (bnod_pt == 0)
                 {
                   // Not a boundary node -- there are zero map entries to follow
@@ -4278,7 +4277,7 @@ namespace oomph
                 else
                 {
                   // It's a boundary node: Check if it's been resized
-                  std::map<unsigned, unsigned> *map_pt =
+                  std::map<unsigned, unsigned>* map_pt =
                     bnod_pt->index_of_first_value_assigned_by_face_element_pt();
 
                   // No additional values created -- there are zero map entries
@@ -4338,10 +4337,10 @@ namespace oomph
   /// Get all the halo data stored in the mesh and add pointers to
   /// the data to the map, indexed by global equation number
   //=========================================================================
-  void Mesh::get_all_halo_data(std::map<unsigned, double *> &map_of_halo_data)
+  void Mesh::get_all_halo_data(std::map<unsigned, double*>& map_of_halo_data)
   {
     // Loop over the map of Halo_nodes
-    for (std::map<unsigned, Vector<Node *>>::iterator it = Halo_node_pt.begin();
+    for (std::map<unsigned, Vector<Node*>>::iterator it = Halo_node_pt.begin();
          it != Halo_node_pt.end();
          ++it)
     {
@@ -4358,7 +4357,7 @@ namespace oomph
 
     // Now loop over all the halo elements and add their internal data
     // Loop over the map of Halo_nodes
-    for (std::map<unsigned, Vector<GeneralisedElement *>>::iterator it =
+    for (std::map<unsigned, Vector<GeneralisedElement*>>::iterator it =
            Root_halo_element_pt.begin();
          it != Root_halo_element_pt.end();
          ++it)
@@ -4367,15 +4366,15 @@ namespace oomph
       unsigned n_element = (it->second).size();
       for (unsigned e = 0; e < n_element; e++)
       {
-        GeneralisedElement *el_pt = (it->second)[e];
+        GeneralisedElement* el_pt = (it->second)[e];
 
         // Is it a refineable element?
-        RefineableElement *ref_el_pt = dynamic_cast<RefineableElement *>(el_pt);
+        RefineableElement* ref_el_pt = dynamic_cast<RefineableElement*>(el_pt);
         if (ref_el_pt != 0)
         {
           // Vector of pointers to leaves in tree emanating from
           // current root halo element
-          Vector<Tree *> leaf_pt;
+          Vector<Tree*> leaf_pt;
           ref_el_pt->tree_pt()->stick_leaves_into_vector(leaf_pt);
 
           // Loop over leaves and add their objects (the finite elements)
@@ -4395,7 +4394,7 @@ namespace oomph
     }
 
     /// Repeat for the external data
-    for (std::map<unsigned, Vector<Node *>>::iterator it =
+    for (std::map<unsigned, Vector<Node*>>::iterator it =
            External_halo_node_pt.begin();
          it != External_halo_node_pt.end();
          ++it)
@@ -4413,7 +4412,7 @@ namespace oomph
 
     // Now loop over all the halo elements and add their internal data
     // Loop over the map of Halo_nodes
-    for (std::map<unsigned, Vector<GeneralisedElement *>>::iterator it =
+    for (std::map<unsigned, Vector<GeneralisedElement*>>::iterator it =
            External_halo_element_pt.begin();
          it != External_halo_element_pt.end();
          ++it)
@@ -4433,9 +4432,9 @@ namespace oomph
   /// \b Careful: Involves MPI Broadcasts and must therefore
   /// be called on all processors!
   //========================================================================
-  void Mesh::get_halo_node_stats(double &av_number,
-                                 unsigned &max_number,
-                                 unsigned &min_number)
+  void Mesh::get_halo_node_stats(double& av_number,
+                                 unsigned& max_number,
+                                 unsigned& min_number)
   {
     // Storage for number of processors and current processor
     int n_proc = Comm_pt->nproc();
@@ -4491,9 +4490,9 @@ namespace oomph
   /// \b Careful: Involves MPI Broadcasts and must therefore
   /// be called on all processors!
   //========================================================================
-  void Mesh::get_haloed_node_stats(double &av_number,
-                                   unsigned &max_number,
-                                   unsigned &min_number)
+  void Mesh::get_haloed_node_stats(double& av_number,
+                                   unsigned& max_number,
+                                   unsigned& min_number)
   {
     // Storage for number of processors and current processor
     int n_proc = Comm_pt->nproc();
@@ -4546,12 +4545,12 @@ namespace oomph
   //========================================================================
   /// Distribute the mesh. Add to vector of deleted elements.
   //========================================================================
-  void Mesh::distribute(OomphCommunicator *comm_pt,
-                        const Vector<unsigned> &element_domain,
-                        Vector<GeneralisedElement *> &deleted_element_pt,
-                        DocInfo &doc_info,
-                        const bool &report_stats,
-                        const bool &overrule_keep_as_halo_element_status)
+  void Mesh::distribute(OomphCommunicator* comm_pt,
+                        const Vector<unsigned>& element_domain,
+                        Vector<GeneralisedElement*>& deleted_element_pt,
+                        DocInfo& doc_info,
+                        const bool& report_stats,
+                        const bool& overrule_keep_as_halo_element_status)
   {
     // Store communicator
     Comm_pt = comm_pt;
@@ -4573,7 +4572,7 @@ namespace oomph
       if (my_rank == 0)
       {
         // Open files for doc of element partitioning
-        Vector<std::ofstream *> domain_file(n_proc);
+        Vector<std::ofstream*> domain_file(n_proc);
         for (int d = 0; d < n_proc; d++)
         {
           // Note: doc_info.number() was set in Problem::distribute(...) to
@@ -4590,8 +4589,8 @@ namespace oomph
         {
           // If we can't cast to a finite element, we can't output because
           // there is no output function
-          FiniteElement *f_el_pt =
-            dynamic_cast<FiniteElement *>(this->element_pt(e));
+          FiniteElement* f_el_pt =
+            dynamic_cast<FiniteElement*>(this->element_pt(e));
           if (f_el_pt != 0)
           {
             f_el_pt->output(*domain_file[element_domain[e]], 5);
@@ -4615,13 +4614,13 @@ namespace oomph
     //---------------------------------------
 
     // Storage for processors in charge and processors associated with data
-    std::map<Data *, std::set<unsigned>> processors_associated_with_data;
-    std::map<Data *, unsigned> processor_in_charge;
+    std::map<Data*, std::set<unsigned>> processors_associated_with_data;
+    std::map<Data*, unsigned> processor_in_charge;
 
     // For all nodes set the processor in charge to zero
     for (unsigned j = 0; j < nnod; j++)
     {
-      Node *nod_pt = this->node_pt(j);
+      Node* nod_pt = this->node_pt(j);
       processor_in_charge[nod_pt] = 0;
     }
 
@@ -4629,7 +4628,7 @@ namespace oomph
     for (unsigned e = 0; e < nelem; e++)
     {
       // Get an element and its domain
-      FiniteElement *el_pt = dynamic_cast<FiniteElement *>(this->element_pt(e));
+      FiniteElement* el_pt = dynamic_cast<FiniteElement*>(this->element_pt(e));
       // Element will only have nodes if it is a finite element
       if (el_pt != 0)
       {
@@ -4639,7 +4638,7 @@ namespace oomph
         unsigned nnod = el_pt->nnode();
         for (unsigned j = 0; j < nnod; j++)
         {
-          Node *nod_pt = el_pt->node_pt(j);
+          Node* nod_pt = el_pt->node_pt(j);
 
           // processor in charge was initialised to 0 above
           if (el_domain > processor_in_charge[nod_pt])
@@ -4658,7 +4657,7 @@ namespace oomph
       if (my_rank == 0)
       {
         // Open files for doc of node partitioning
-        Vector<std::ofstream *> node_file(n_proc);
+        Vector<std::ofstream*> node_file(n_proc);
         for (int d = 0; d < n_proc; d++)
         {
           // Note: doc_info.number() was set in Problem::distribute(...) to
@@ -4673,7 +4672,7 @@ namespace oomph
         // Doc
         for (unsigned j = 0; j < nnod; j++)
         {
-          Node *nod_pt = this->node_pt(j);
+          Node* nod_pt = this->node_pt(j);
           const unsigned n_dim = nod_pt->ndim();
           for (unsigned i = 0; i < n_dim; i++)
           {
@@ -4702,7 +4701,7 @@ namespace oomph
     //-------------------------------------
 
     // Backup pointers to elements in this mesh
-    Vector<GeneralisedElement *> backed_up_el_pt(nelem);
+    Vector<GeneralisedElement*> backed_up_el_pt(nelem);
     for (unsigned e = 0; e < nelem; e++)
     {
       backed_up_el_pt[e] = this->element_pt(e);
@@ -4720,10 +4719,10 @@ namespace oomph
     Vector<Vector<unsigned>> ntmp_boundary_elements_in_region(tmp_nboundary);
     // Also get the finite element version of the elements and back them
     // up
-    Vector<FiniteElement *> backed_up_f_el_pt(nelem);
+    Vector<FiniteElement*> backed_up_f_el_pt(nelem);
 
     // Only do this if the mesh is a TriangleMeshBase
-    TriangleMeshBase *triangle_mesh_pt = dynamic_cast<TriangleMeshBase *>(this);
+    TriangleMeshBase* triangle_mesh_pt = dynamic_cast<TriangleMeshBase*>(this);
     bool is_a_triangle_mesh_base_mesh = false;
     if (triangle_mesh_pt != 0)
     {
@@ -4800,7 +4799,7 @@ namespace oomph
     for (unsigned e = 0; e < nelem; e++)
     {
       // Get element and its domain
-      GeneralisedElement *el_pt = backed_up_el_pt[e];
+      GeneralisedElement* el_pt = backed_up_el_pt[e];
       unsigned el_domain = element_domain[e];
 
       // If element is located on current processor add it back to the mesh
@@ -4835,13 +4834,13 @@ namespace oomph
         else
         {
           // Can only have nodes if this is a finite element
-          FiniteElement *finite_el_pt = dynamic_cast<FiniteElement *>(el_pt);
+          FiniteElement* finite_el_pt = dynamic_cast<FiniteElement*>(el_pt);
           if (finite_el_pt != 0)
           {
             unsigned n_node = finite_el_pt->nnode();
             for (unsigned n = 0; n < n_node; n++)
             {
-              Node *nod_pt = finite_el_pt->node_pt(n);
+              Node* nod_pt = finite_el_pt->node_pt(n);
 
               // Keep element? (use stl find?)
               unsigned keep_it = false;
@@ -4912,7 +4911,7 @@ namespace oomph
 
     // Store the finite element pointer version of the elements that are
     // about to be deleted, used to reset the boundary elements info
-    Vector<FiniteElement *> deleted_f_element_pt;
+    Vector<FiniteElement*> deleted_f_element_pt;
 
     // Copy the elements associated with the actual
     // current processor into its own permanent storage.
@@ -4920,7 +4919,7 @@ namespace oomph
     nelem = backed_up_el_pt.size();
     for (unsigned e = 0; e < nelem; e++)
     {
-      GeneralisedElement *el_pt = backed_up_el_pt[e];
+      GeneralisedElement* el_pt = backed_up_el_pt[e];
       if (element_retained[e])
       {
         this->add_element_pt(el_pt);
@@ -4928,7 +4927,7 @@ namespace oomph
       else
       {
         // Flush the object attached to the tree for this element?
-        RefineableElement *ref_el_pt = dynamic_cast<RefineableElement *>(el_pt);
+        RefineableElement* ref_el_pt = dynamic_cast<RefineableElement*>(el_pt);
         if (ref_el_pt != 0)
         {
           ref_el_pt->tree_pt()->flush_object();
@@ -5089,7 +5088,7 @@ namespace oomph
         if (number >= 0)
         {
           // Get pointer to element
-          GeneralisedElement *el_pt = backed_up_el_pt[number];
+          GeneralisedElement* el_pt = backed_up_el_pt[number];
 
           // Halo elements can't be haloed themselves
           if (!el_pt->is_halo())
@@ -5132,8 +5131,8 @@ namespace oomph
     nelem = this->nelement();
     for (unsigned e = 0; e < nelem; e++)
     {
-      FiniteElement *f_el_pt =
-        dynamic_cast<FiniteElement *>(this->element_pt(e));
+      FiniteElement* f_el_pt =
+        dynamic_cast<FiniteElement*>(this->element_pt(e));
 
       // If we have a finite element
       if (f_el_pt != 0)
@@ -5142,7 +5141,7 @@ namespace oomph
         unsigned nnod = f_el_pt->nnode();
         for (unsigned j = 0; j < nnod; j++)
         {
-          Node *nod_pt = f_el_pt->node_pt(j);
+          Node* nod_pt = f_el_pt->node_pt(j);
           nod_pt->set_non_obsolete();
         }
       }
@@ -5173,8 +5172,8 @@ namespace oomph
     // Re-setup tree forest. (Call this every time even if
     // a (distributed) mesh has no elements on this processor.
     // We still need to participate in communication.)
-    TreeBasedRefineableMeshBase *ref_mesh_pt =
-      dynamic_cast<TreeBasedRefineableMeshBase *>(this);
+    TreeBasedRefineableMeshBase* ref_mesh_pt =
+      dynamic_cast<TreeBasedRefineableMeshBase*>(this);
     if (ref_mesh_pt != 0)
     {
       ref_mesh_pt->setup_tree_forest();
@@ -5200,9 +5199,9 @@ namespace oomph
   /// has been called.
   //========================================================================
   void Mesh::prune_halo_elements_and_nodes(
-    Vector<GeneralisedElement *> &deleted_element_pt,
-    DocInfo &doc_info,
-    const bool &report_stats)
+    Vector<GeneralisedElement*>& deleted_element_pt,
+    DocInfo& doc_info,
+    const bool& report_stats)
   {
     // MemoryUsage::doc_memory_usage("at start of mesh-level prunes");
 
@@ -5212,8 +5211,8 @@ namespace oomph
     this->delete_all_external_storage();
 #endif
 
-    TreeBasedRefineableMeshBase *ref_mesh_pt =
-      dynamic_cast<TreeBasedRefineableMeshBase *>(this);
+    TreeBasedRefineableMeshBase* ref_mesh_pt =
+      dynamic_cast<TreeBasedRefineableMeshBase*>(this);
     if (ref_mesh_pt != 0)
     {
       // Storage for number of processors and current processor
@@ -5272,8 +5271,8 @@ namespace oomph
       // Backup pointers to elements in this mesh (they must be finite elements
       // beacuse it's a refineable mesh)
       unsigned nelem = this->nelement();
-      Vector<FiniteElement *> backed_up_el_pt(nelem);
-      std::map<RefineableElement *, bool> keep_element;
+      Vector<FiniteElement*> backed_up_el_pt(nelem);
+      std::map<RefineableElement*, bool> keep_element;
       for (unsigned e = 0; e < nelem; e++)
       {
         backed_up_el_pt[e] = this->finite_element_pt(e);
@@ -5366,7 +5365,7 @@ namespace oomph
         ref_mesh_pt->uniform_refinement_level_when_pruned() = min_ref;
 
         // Get the elements at the specified "base" refinement level
-        Vector<RefineableElement *> base_level_elements_pt;
+        Vector<RefineableElement*> base_level_elements_pt;
         ref_mesh_pt->get_elements_at_refinement_level(base_level,
                                                       base_level_elements_pt);
 
@@ -5375,7 +5374,7 @@ namespace oomph
         for (unsigned e = 0; e < n_base_el; e++)
         {
           // Extract correct element...
-          RefineableElement *ref_el_pt = base_level_elements_pt[e];
+          RefineableElement* ref_el_pt = base_level_elements_pt[e];
 
           // Check it exists
           if (ref_el_pt != 0)
@@ -5427,37 +5426,36 @@ namespace oomph
       // halo element" necessary to complete this step
 
       // Temp map of vectors holding the pointers to the root halo elements
-      std::map<unsigned, Vector<FiniteElement *>> tmp_root_halo_element_pt;
+      std::map<unsigned, Vector<FiniteElement*>> tmp_root_halo_element_pt;
 
       // Temp map of vectors holding the pointers to the root haloed elements
-      std::map<unsigned, Vector<FiniteElement *>> tmp_root_haloed_element_pt;
+      std::map<unsigned, Vector<FiniteElement*>> tmp_root_haloed_element_pt;
 
       // Make sure we only push back each element once
-      std::map<unsigned, std::map<FiniteElement *, bool>>
+      std::map<unsigned, std::map<FiniteElement*, bool>>
         tmp_root_halo_element_is_retained;
 
       // Map to store if a halo element survives
-      std::map<FiniteElement *, bool> halo_element_is_retained;
+      std::map<FiniteElement*, bool> halo_element_is_retained;
 
       for (int domain = 0; domain < n_proc; domain++)
       {
         // Get vector of halo elements with processor domain by copy operation
-        Vector<GeneralisedElement *> halo_elem_pt(
-          this->halo_element_pt(domain));
+        Vector<GeneralisedElement*> halo_elem_pt(this->halo_element_pt(domain));
 
         // Loop over halo elements associated with this adjacent domain
         unsigned nelem = halo_elem_pt.size();
         for (unsigned e = 0; e < nelem; e++)
         {
           // Get element
-          RefineableElement *ref_el_pt =
-            dynamic_cast<RefineableElement *>(halo_elem_pt[e]);
+          RefineableElement* ref_el_pt =
+            dynamic_cast<RefineableElement*>(halo_elem_pt[e]);
 
           // An element should only be kept if its refinement
           // level is the same as the minimum refinement level
           unsigned halo_el_level = ref_el_pt->refinement_level();
 
-          RefineableElement *el_pt = 0;
+          RefineableElement* el_pt = 0;
           if (halo_el_level == min_ref)
           {
             // Already at the correct level
@@ -5466,7 +5464,7 @@ namespace oomph
           else
           {
             // Need to go up the tree to the father element at min_ref
-            RefineableElement *father_el_pt;
+            RefineableElement* father_el_pt;
             ref_el_pt->get_father_at_refinement_level(min_ref, father_el_pt);
             el_pt = father_el_pt;
           }
@@ -5479,7 +5477,7 @@ namespace oomph
           for (unsigned j = 0; j < nnod; j++)
           {
             // Node has been reclaimed by one of the non-halo elements above
-            Node *nod_pt = el_pt->node_pt(j);
+            Node* nod_pt = el_pt->node_pt(j);
             if (!nod_pt->is_obsolete())
             {
               // Keep element and add it to preliminary storage for
@@ -5531,7 +5529,7 @@ namespace oomph
             if (d == my_rank)
             {
               // Get vector all elements that are currently haloed by domain dd
-              Vector<GeneralisedElement *> haloed_elem_pt(
+              Vector<GeneralisedElement*> haloed_elem_pt(
                 this->haloed_element_pt(dd));
 
               // Create a vector of ints to indicate if the halo element
@@ -5554,15 +5552,15 @@ namespace oomph
                 // Classify haloed element accordingly
                 for (unsigned e = 0; e < nelem; e++)
                 {
-                  RefineableElement *ref_el_pt =
-                    dynamic_cast<RefineableElement *>(haloed_elem_pt[e]);
+                  RefineableElement* ref_el_pt =
+                    dynamic_cast<RefineableElement*>(haloed_elem_pt[e]);
 
                   // An element should only be kept if its refinement
                   // level is the same as the minimum refinement level
                   unsigned haloed_el_level = ref_el_pt->refinement_level();
 
                   // Go up the tree to the correct level
-                  RefineableElement *el_pt;
+                  RefineableElement* el_pt;
 
                   if (haloed_el_level == min_ref)
                   {
@@ -5572,7 +5570,7 @@ namespace oomph
                   else
                   {
                     // Need to go up the tree to the father element at min_ref
-                    RefineableElement *father_el_pt;
+                    RefineableElement* father_el_pt;
                     ref_el_pt->get_father_at_refinement_level(min_ref,
                                                               father_el_pt);
                     el_pt = father_el_pt;
@@ -5608,7 +5606,7 @@ namespace oomph
               {
                 // Find (current) halo elements on processor dd whose non-halo
                 // is on processor d
-                Vector<GeneralisedElement *> halo_elem_pt(
+                Vector<GeneralisedElement*> halo_elem_pt(
                   this->halo_element_pt(d));
 
                 // Create a vector of ints to indicate if the halo
@@ -5617,15 +5615,15 @@ namespace oomph
                 Vector<int> halo_kept(nelem, 0);
                 for (unsigned e = 0; e < nelem; e++)
                 {
-                  RefineableElement *ref_el_pt =
-                    dynamic_cast<RefineableElement *>(halo_elem_pt[e]);
+                  RefineableElement* ref_el_pt =
+                    dynamic_cast<RefineableElement*>(halo_elem_pt[e]);
 
                   // An element should only be kept if its refinement
                   // level is the same as the minimum refinement level
                   unsigned halo_el_level = ref_el_pt->refinement_level();
 
                   // Go up the tree to the correct level
-                  RefineableElement *el_pt;
+                  RefineableElement* el_pt;
                   if (halo_el_level == min_ref)
                   {
                     // Already at the correct level
@@ -5634,7 +5632,7 @@ namespace oomph
                   else
                   {
                     // Need to go up the tree to the father element at min_ref
-                    RefineableElement *father_el_pt;
+                    RefineableElement* father_el_pt;
                     ref_el_pt->get_father_at_refinement_level(min_ref,
                                                               father_el_pt);
                     el_pt = father_el_pt;
@@ -5674,7 +5672,7 @@ namespace oomph
 
       // Backup pointers to nodes in this mesh
       nnod = this->nnode();
-      Vector<Node *> backed_up_nod_pt(nnod);
+      Vector<Node*> backed_up_nod_pt(nnod);
       for (unsigned j = 0; j < nnod; j++)
       {
         backed_up_nod_pt[j] = this->node_pt(j);
@@ -5684,20 +5682,20 @@ namespace oomph
       this->flush_element_and_node_storage();
 
       // Storage for non-active trees/elements that are to be deleted
-      std::set<Tree *> trees_to_be_deleted_pt;
+      std::set<Tree*> trees_to_be_deleted_pt;
 
       // Loop over all backed-up elements
       nelem = backed_up_el_pt.size();
       for (unsigned e = 0; e < nelem; e++)
       {
-        RefineableElement *ref_el_pt =
-          dynamic_cast<RefineableElement *>(backed_up_el_pt[e]);
+        RefineableElement* ref_el_pt =
+          dynamic_cast<RefineableElement*>(backed_up_el_pt[e]);
 
         // Get refinement level
         unsigned level = ref_el_pt->refinement_level();
 
         // Go up the tree to the correct level
-        RefineableElement *el_pt;
+        RefineableElement* el_pt;
 
         if (level == min_ref)
         {
@@ -5707,7 +5705,7 @@ namespace oomph
         else
         {
           // Need to go up the tree to the father element at min_ref
-          RefineableElement *father_el_pt;
+          RefineableElement* father_el_pt;
           ref_el_pt->get_father_at_refinement_level(min_ref, father_el_pt);
           el_pt = father_el_pt;
         }
@@ -5721,18 +5719,18 @@ namespace oomph
         else
         {
           // Flush the object attached to the tree for this element?
-          RefineableElement *my_el_pt =
-            dynamic_cast<RefineableElement *>(ref_el_pt);
+          RefineableElement* my_el_pt =
+            dynamic_cast<RefineableElement*>(ref_el_pt);
           if (my_el_pt != 0)
           {
             my_el_pt->tree_pt()->flush_object();
           }
 
           // Get associated tree root
-          Tree *tmp_tree_root_pt = my_el_pt->tree_pt()->root_pt();
+          Tree* tmp_tree_root_pt = my_el_pt->tree_pt()->root_pt();
 
           // Get all the tree nodes
-          Vector<Tree *> tmp_all_tree_nodes_pt;
+          Vector<Tree*> tmp_all_tree_nodes_pt;
           tmp_tree_root_pt->stick_all_tree_nodes_into_vector(
             tmp_all_tree_nodes_pt);
 
@@ -5764,11 +5762,11 @@ namespace oomph
       // MemoryUsage::doc_memory_usage("before deleting superfluous elements");
 
       // Delete superfluous elements
-      for (std::set<Tree *>::iterator it = trees_to_be_deleted_pt.begin();
+      for (std::set<Tree*>::iterator it = trees_to_be_deleted_pt.begin();
            it != trees_to_be_deleted_pt.end();
            it++)
       {
-        Tree *tree_pt = (*it);
+        Tree* tree_pt = (*it);
         if (tree_pt->object_pt() != 0)
         {
           deleted_element_pt.push_back(tree_pt->object_pt());
@@ -5809,13 +5807,13 @@ namespace oomph
       nelem = this->nelement();
       for (unsigned e = 0; e < nelem; e++)
       {
-        FiniteElement *el_pt = this->finite_element_pt(e);
+        FiniteElement* el_pt = this->finite_element_pt(e);
 
         // Loop over nodes
         unsigned nnod = el_pt->nnode();
         for (unsigned j = 0; j < nnod; j++)
         {
-          Node *nod_pt = el_pt->node_pt(j);
+          Node* nod_pt = el_pt->node_pt(j);
           nod_pt->set_non_obsolete();
         }
       }
@@ -5828,7 +5826,7 @@ namespace oomph
       nnod = backed_up_nod_pt.size();
       for (unsigned j = 0; j < nnod; j++)
       {
-        Node *nod_pt = backed_up_nod_pt[j];
+        Node* nod_pt = backed_up_nod_pt[j];
         if (!nod_pt->is_obsolete())
         {
           // Not obsolete so add it back to the mesh
@@ -5854,8 +5852,8 @@ namespace oomph
       // Re-setup tree forest if needed. (Call this every time even if
       // a (distributed) mesh has no elements on this processor.
       // We still need to participate in communication.)
-      TreeBasedRefineableMeshBase *ref_mesh_pt =
-        dynamic_cast<TreeBasedRefineableMeshBase *>(this);
+      TreeBasedRefineableMeshBase* ref_mesh_pt =
+        dynamic_cast<TreeBasedRefineableMeshBase*>(this);
       if (ref_mesh_pt != 0)
       {
         ref_mesh_pt->setup_tree_forest();
@@ -5958,9 +5956,9 @@ namespace oomph
   /// elements. Efficieny per processor =  (number of non-halo elements)/
   /// (total number of elements).
   //========================================================================
-  void Mesh::get_efficiency_of_mesh_distribution(double &av_efficiency,
-                                                 double &max_efficiency,
-                                                 double &min_efficiency)
+  void Mesh::get_efficiency_of_mesh_distribution(double& av_efficiency,
+                                                 double& max_efficiency,
+                                                 double& min_efficiency)
   {
     // Storage for number of processors and current processor
     int n_proc = Comm_pt->nproc();
@@ -5974,7 +5972,7 @@ namespace oomph
     unsigned count = 0;
     for (int d = 0; d < n_proc; d++)
     {
-      Vector<GeneralisedElement *> halo_elem_pt(halo_element_pt(d));
+      Vector<GeneralisedElement*> halo_elem_pt(halo_element_pt(d));
       count += halo_elem_pt.size();
     }
 
@@ -6037,7 +6035,7 @@ namespace oomph
   //========================================================================
   /// Doc the mesh distribution
   //========================================================================
-  void Mesh::doc_mesh_distribution(DocInfo &doc_info)
+  void Mesh::doc_mesh_distribution(DocInfo& doc_info)
   {
     // Storage for current processor and number of processors
     int my_rank = Comm_pt->my_rank();
@@ -6068,11 +6066,11 @@ namespace oomph
     for (unsigned e = 0; e < nelem; e++)
     {
       // Get the element
-      GeneralisedElement *el_pt = this->element_pt(e);
+      GeneralisedElement* el_pt = this->element_pt(e);
       // Only output if not  a halo element
       if (!el_pt->is_halo())
       {
-        FiniteElement *f_el_pt = dynamic_cast<FiniteElement *>(el_pt);
+        FiniteElement* f_el_pt = dynamic_cast<FiniteElement*>(el_pt);
         // Indicate a generalised element
         if (f_el_pt == 0)
         {
@@ -6103,18 +6101,18 @@ namespace oomph
       some_file2.open(filename2.str().c_str());
 
       // Get vector of halo elements by copy operation
-      Vector<GeneralisedElement *> halo_elem_pt(this->halo_element_pt(domain));
+      Vector<GeneralisedElement*> halo_elem_pt(this->halo_element_pt(domain));
       unsigned nelem = halo_elem_pt.size();
       for (unsigned e = 0; e < nelem; e++)
       {
-        FiniteElement *f_el_pt = dynamic_cast<FiniteElement *>(halo_elem_pt[e]);
+        FiniteElement* f_el_pt = dynamic_cast<FiniteElement*>(halo_elem_pt[e]);
         if (f_el_pt != 0)
         {
 #ifdef PARANOID
           // Check if it's refineable and if so if it's a leaf.
           // If not something must have gone wrong.
-          RefineableElement *ref_el_pt =
-            dynamic_cast<RefineableElement *>(f_el_pt);
+          RefineableElement* ref_el_pt =
+            dynamic_cast<RefineableElement*>(f_el_pt);
           if (ref_el_pt != 0)
           {
             if (!(ref_el_pt->tree_pt()->is_leaf()))
@@ -6127,7 +6125,7 @@ namespace oomph
               unsigned nnod = ref_el_pt->nnode();
               for (unsigned j = 0; j < nnod; j++)
               {
-                Node *nod_pt = ref_el_pt->node_pt(j);
+                Node* nod_pt = ref_el_pt->node_pt(j);
                 unsigned n_dim = nod_pt->ndim();
                 for (unsigned i = 0; i < n_dim; i++)
                 {
@@ -6171,21 +6169,21 @@ namespace oomph
       some_file2.open(filename2.str().c_str());
 
       // Get vector of haloed elements by copy operation
-      Vector<GeneralisedElement *> haloed_elem_pt(
+      Vector<GeneralisedElement*> haloed_elem_pt(
         this->haloed_element_pt(domain));
       unsigned nelem = haloed_elem_pt.size();
       for (unsigned e = 0; e < nelem; e++)
       {
         // Is it a finite element
-        FiniteElement *finite_el_pt =
-          dynamic_cast<FiniteElement *>(haloed_elem_pt[e]);
+        FiniteElement* finite_el_pt =
+          dynamic_cast<FiniteElement*>(haloed_elem_pt[e]);
         if (finite_el_pt != 0)
         {
 #ifdef PARANOID
           // Check if it's refineable and if so if it's a leaf.
           // If not something must have gone wrong.
-          RefineableElement *ref_el_pt =
-            dynamic_cast<RefineableElement *>(finite_el_pt);
+          RefineableElement* ref_el_pt =
+            dynamic_cast<RefineableElement*>(finite_el_pt);
           if (ref_el_pt != 0)
           {
             if (!(ref_el_pt->tree_pt()->is_leaf()))
@@ -6198,7 +6196,7 @@ namespace oomph
               unsigned nnod = ref_el_pt->nnode();
               for (unsigned j = 0; j < nnod; j++)
               {
-                Node *nod_pt = ref_el_pt->node_pt(j);
+                Node* nod_pt = ref_el_pt->node_pt(j);
                 unsigned n_dim = nod_pt->ndim();
                 for (unsigned i = 0; i < n_dim; i++)
                 {
@@ -6236,7 +6234,7 @@ namespace oomph
     unsigned nnod = this->nnode();
     for (unsigned j = 0; j < nnod; j++)
     {
-      Node *nod_pt = this->node_pt(j);
+      Node* nod_pt = this->node_pt(j);
       if (!nod_pt->is_halo())
       {
         unsigned ndim = nod_pt->ndim();
@@ -6259,7 +6257,7 @@ namespace oomph
     some_file.open(filename.str().c_str());
     for (unsigned j = 0; j < nnod; j++)
     {
-      Node *nod_pt = this->node_pt(j);
+      Node* nod_pt = this->node_pt(j);
       unsigned ndim = nod_pt->ndim();
       for (unsigned i = 0; i < ndim; i++)
       {
@@ -6279,8 +6277,8 @@ namespace oomph
     unsigned nsnod = this->nnode();
     for (unsigned j = 0; j < nsnod; j++)
     {
-      Node *nod_pt = this->node_pt(j);
-      SolidNode *solid_nod_pt = dynamic_cast<SolidNode *>(nod_pt);
+      Node* nod_pt = this->node_pt(j);
+      SolidNode* solid_nod_pt = dynamic_cast<SolidNode*>(nod_pt);
       if (solid_nod_pt != 0)
       {
         unsigned ndim = solid_nod_pt->ndim();
@@ -6311,7 +6309,7 @@ namespace oomph
       unsigned nnod = this->nhalo_node(domain);
       for (unsigned j = 0; j < nnod; j++)
       {
-        Node *nod_pt = this->halo_node_pt(domain, j);
+        Node* nod_pt = this->halo_node_pt(domain, j);
         unsigned ndim = nod_pt->ndim();
         for (unsigned i = 0; i < ndim; i++)
         {
@@ -6345,7 +6343,7 @@ namespace oomph
       unsigned nnod = this->nhaloed_node(domain);
       for (unsigned j = 0; j < nnod; j++)
       {
-        Node *nod_pt = this->haloed_node_pt(domain, j);
+        Node* nod_pt = this->haloed_node_pt(domain, j);
         unsigned ndim = nod_pt->ndim();
         for (unsigned i = 0; i < ndim; i++)
         {
@@ -6379,7 +6377,7 @@ namespace oomph
       unsigned nnod = this->nshared_node(domain);
       for (unsigned j = 0; j < nnod; j++)
       {
-        Node *nod_pt = this->shared_node_pt(domain, j);
+        Node* nod_pt = this->shared_node_pt(domain, j);
         unsigned ndim = nod_pt->ndim();
         for (unsigned i = 0; i < ndim; i++)
         {
@@ -6438,8 +6436,8 @@ namespace oomph
   //========================================================================
   /// Check the halo/haloed/shared node/element schemes on the Mesh
   //========================================================================
-  void Mesh::check_halo_schemes(DocInfo &doc_info,
-                                double &max_permitted_error_for_halo_check)
+  void Mesh::check_halo_schemes(DocInfo& doc_info,
+                                double& max_permitted_error_for_halo_check)
   {
     oomph_info << "Doing check_halo_schemes for mesh: " << typeid(*this).name()
                << std::endl;
@@ -6480,7 +6478,7 @@ namespace oomph
         unsigned nnod = nshared_node(dd);
         for (unsigned j = 0; j < nnod; j++)
         {
-          Node *nod_pt = shared_node_pt(dd, j);
+          Node* nod_pt = shared_node_pt(dd, j);
           unsigned ndim = nod_pt->ndim();
           for (unsigned i = 0; i < ndim; i++)
           {
@@ -6492,7 +6490,7 @@ namespace oomph
         // (needed for tecplot)
         if ((nnod == 0) && (nelement() != 0))
         {
-          FiniteElement *f_el_pt = dynamic_cast<FiniteElement *>(element_pt(0));
+          FiniteElement* f_el_pt = dynamic_cast<FiniteElement*>(element_pt(0));
           // If it's a generalised element mesh dummy output
           if (f_el_pt == 0)
           {
@@ -6519,7 +6517,7 @@ namespace oomph
     for (int d = 0; d < n_proc; d++)
     {
       unsigned n_vector = Shared_node_pt[d].size();
-      std::set<Node *> shared_node_set;
+      std::set<Node*> shared_node_set;
       for (unsigned i = 0; i < n_vector; i++)
       {
         unsigned old_size = shared_node_set.size();
@@ -6527,7 +6525,7 @@ namespace oomph
         unsigned new_size = shared_node_set.size();
         if (old_size == new_size)
         {
-          Node *nod_pt = Shared_node_pt[d][i];
+          Node* nod_pt = Shared_node_pt[d][i];
           oomph_info << "Repeated node in shared node lookup scheme: " << i
                      << "-th node with proc " << d << " : " << nod_pt
                      << " at: ";
@@ -6753,7 +6751,7 @@ namespace oomph
         halo_file.open(filename.str().c_str());
 
         // Get vectors of halo/haloed elements by copy operation
-        Vector<GeneralisedElement *> halo_elem_pt(halo_element_pt(dd));
+        Vector<GeneralisedElement*> halo_elem_pt(halo_element_pt(dd));
 
         unsigned nelem = halo_elem_pt.size();
 
@@ -6761,14 +6759,14 @@ namespace oomph
         {
           halo_file << "ZONE " << std::endl;
           // Can I cast to a finite element
-          FiniteElement *finite_el_pt =
-            dynamic_cast<FiniteElement *>(halo_elem_pt[e]);
+          FiniteElement* finite_el_pt =
+            dynamic_cast<FiniteElement*>(halo_elem_pt[e]);
           if (finite_el_pt != 0)
           {
             unsigned nnod = finite_el_pt->nnode();
             for (unsigned j = 0; j < nnod; j++)
             {
-              Node *nod_pt = finite_el_pt->node_pt(j);
+              Node* nod_pt = finite_el_pt->node_pt(j);
               unsigned ndim = nod_pt->ndim();
               for (unsigned i = 0; i < ndim; i++)
               {
@@ -6791,21 +6789,21 @@ namespace oomph
         haloed_file.open(filename.str().c_str());
 
         // Get vectors of halo/haloed elements by copy operation
-        Vector<GeneralisedElement *> haloed_elem_pt(haloed_element_pt(d));
+        Vector<GeneralisedElement*> haloed_elem_pt(haloed_element_pt(d));
 
         unsigned nelem2 = haloed_elem_pt.size();
         for (unsigned e = 0; e < nelem2; e++)
         {
           haloed_file << "ZONE " << std::endl;
           // Is it a finite element
-          FiniteElement *finite_el_pt =
-            dynamic_cast<FiniteElement *>(haloed_elem_pt[e]);
+          FiniteElement* finite_el_pt =
+            dynamic_cast<FiniteElement*>(haloed_elem_pt[e]);
           if (finite_el_pt != 0)
           {
             // Check if it's refineable and if so if it's a leaf.
             // If not something must have gone wrong.
-            RefineableElement *ref_el_pt =
-              dynamic_cast<RefineableElement *>(finite_el_pt);
+            RefineableElement* ref_el_pt =
+              dynamic_cast<RefineableElement*>(finite_el_pt);
             if (ref_el_pt != 0)
             {
               if (!(ref_el_pt->tree_pt()->is_leaf()))
@@ -6818,7 +6816,7 @@ namespace oomph
                 unsigned nnod = ref_el_pt->nnode();
                 for (unsigned j = 0; j < nnod; j++)
                 {
-                  Node *nod_pt = ref_el_pt->node_pt(j);
+                  Node* nod_pt = ref_el_pt->node_pt(j);
                   unsigned n_dim = nod_pt->ndim();
                   for (unsigned i = 0; i < n_dim; i++)
                   {
@@ -6834,7 +6832,7 @@ namespace oomph
             unsigned nnod2 = finite_el_pt->nnode();
             for (unsigned j = 0; j < nnod2; j++)
             {
-              Node *nod_pt = finite_el_pt->node_pt(j);
+              Node* nod_pt = finite_el_pt->node_pt(j);
               unsigned ndim = nod_pt->ndim();
               for (unsigned i = 0; i < ndim; i++)
               {
@@ -6867,7 +6865,7 @@ namespace oomph
           if (dd != d)
           {
             // Get vectors of haloed elements by copy operation
-            Vector<GeneralisedElement *> haloed_elem_pt(haloed_element_pt(dd));
+            Vector<GeneralisedElement*> haloed_elem_pt(haloed_element_pt(dd));
 
             // How many of my elements are haloed elements whose halo
             // counterpart is located on processor dd?
@@ -6902,7 +6900,7 @@ namespace oomph
               }
 
               // We can only check nodal stuff for meshes of finite elements
-              if (dynamic_cast<FiniteElement *>(this->element_pt(0)))
+              if (dynamic_cast<FiniteElement*>(this->element_pt(0)))
               {
                 // Get strung-together elemental nodal positions
                 // from other processor
@@ -6975,15 +6973,15 @@ namespace oomph
                 unsigned count_hanging = 0;
                 for (int e = 0; e < nelem_haloed; e++)
                 {
-                  FiniteElement *finite_el_pt =
-                    dynamic_cast<FiniteElement *>(haloed_elem_pt[e]);
+                  FiniteElement* finite_el_pt =
+                    dynamic_cast<FiniteElement*>(haloed_elem_pt[e]);
 
                   if (finite_el_pt != 0)
                   {
                     unsigned nnod_this_el = finite_el_pt->nnode();
                     for (unsigned j = 0; j < nnod_this_el; j++)
                     {
-                      Node *nod_pt = finite_el_pt->node_pt(j);
+                      Node* nod_pt = finite_el_pt->node_pt(j);
                       // unsigned nod_dim = nod_pt->ndim();
 
                       // Testing POSITIONS, not x location
@@ -7172,7 +7170,7 @@ namespace oomph
       else
       {
         // Get vectors of halo elements by copy operation
-        Vector<GeneralisedElement *> halo_elem_pt(halo_element_pt(d));
+        Vector<GeneralisedElement*> halo_elem_pt(halo_element_pt(d));
 
         // How many of my elements are halo elements whose non-halo
         // counterpart is located on processor d?
@@ -7185,7 +7183,7 @@ namespace oomph
           MPI_Send(&nelem_halo, 1, MPI_UNSIGNED, d, 0, Comm_pt->mpi_comm());
 
           // Only bother if the mesh consists of finite elements
-          if (dynamic_cast<FiniteElement *>(this->element_pt(0)))
+          if (dynamic_cast<FiniteElement*>(this->element_pt(0)))
           {
             // Now string together the nodal positions of all halo nodes
             // Use this only to work out roughly how much space to
@@ -7203,14 +7201,14 @@ namespace oomph
             // unsigned count=0;
             for (unsigned e = 0; e < nelem_halo; e++)
             {
-              FiniteElement *finite_el_pt =
-                dynamic_cast<FiniteElement *>(halo_elem_pt[e]);
+              FiniteElement* finite_el_pt =
+                dynamic_cast<FiniteElement*>(halo_elem_pt[e]);
               if (finite_el_pt != 0)
               {
                 unsigned nnod_this_el = finite_el_pt->nnode();
                 for (unsigned j = 0; j < nnod_this_el; j++)
                 {
-                  Node *nod_pt = finite_el_pt->node_pt(j);
+                  Node* nod_pt = finite_el_pt->node_pt(j);
                   // unsigned nod_dim = nod_pt->ndim();
 
                   // Throw error if node doesn't exist
@@ -7331,7 +7329,7 @@ namespace oomph
         unsigned nnod = nhalo_node(dd);
         for (unsigned j = 0; j < nnod; j++)
         {
-          Node *nod_pt = halo_node_pt(dd, j);
+          Node* nod_pt = halo_node_pt(dd, j);
           unsigned ndim = nod_pt->ndim();
           for (unsigned i = 0; i < ndim; i++)
           {
@@ -7344,7 +7342,7 @@ namespace oomph
         // (This will only work if there are elements on this processor...)
         if ((nnod == 0) && (nelement() != 0))
         {
-          FiniteElement *f_el_pt = dynamic_cast<FiniteElement *>(element_pt(0));
+          FiniteElement* f_el_pt = dynamic_cast<FiniteElement*>(element_pt(0));
           // If it's a generalised element mesh dummy output
           if (f_el_pt == 0)
           {
@@ -7379,7 +7377,7 @@ namespace oomph
         unsigned nnod = nhaloed_node(d);
         for (unsigned j = 0; j < nnod; j++)
         {
-          Node *nod_pt = haloed_node_pt(d, j);
+          Node* nod_pt = haloed_node_pt(d, j);
           unsigned ndim = nod_pt->ndim();
           for (unsigned i = 0; i < ndim; i++)
           {
@@ -7391,7 +7389,7 @@ namespace oomph
         // (needed for tecplot)
         if ((nnod == 0) && (nelement() != 0))
         {
-          FiniteElement *f_el_pt = dynamic_cast<FiniteElement *>(element_pt(0));
+          FiniteElement* f_el_pt = dynamic_cast<FiniteElement*>(element_pt(0));
           // If it's a generalised element mesh dummy output
           if (f_el_pt == 0)
           {
@@ -7581,7 +7579,7 @@ namespace oomph
         ext_halo_file.open(filename.str().c_str());
 
         // Get vectors of external halo/haloed elements by copy operation
-        Vector<GeneralisedElement *> ext_halo_elem_pt(
+        Vector<GeneralisedElement*> ext_halo_elem_pt(
           External_halo_element_pt[dd]);
 
         unsigned nelem = ext_halo_elem_pt.size();
@@ -7590,14 +7588,14 @@ namespace oomph
         {
           ext_halo_file << "ZONE " << std::endl;
           // Can I cast to a finite element
-          FiniteElement *finite_el_pt =
-            dynamic_cast<FiniteElement *>(ext_halo_elem_pt[e]);
+          FiniteElement* finite_el_pt =
+            dynamic_cast<FiniteElement*>(ext_halo_elem_pt[e]);
           if (finite_el_pt != 0)
           {
             unsigned nnod = finite_el_pt->nnode();
             for (unsigned j = 0; j < nnod; j++)
             {
-              Node *nod_pt = finite_el_pt->node_pt(j);
+              Node* nod_pt = finite_el_pt->node_pt(j);
               unsigned ndim = nod_pt->ndim();
               for (unsigned i = 0; i < ndim; i++)
               {
@@ -7628,7 +7626,7 @@ namespace oomph
         ext_haloed_file.open(filename.str().c_str());
 
         // Get vectors of external halo/haloed elements by copy operation
-        Vector<GeneralisedElement *> ext_haloed_elem_pt(
+        Vector<GeneralisedElement*> ext_haloed_elem_pt(
           External_haloed_element_pt[d]);
 
         unsigned nelem2 = ext_haloed_elem_pt.size();
@@ -7636,14 +7634,14 @@ namespace oomph
         {
           ext_haloed_file << "ZONE " << std::endl;
           // Is it a finite element
-          FiniteElement *finite_el_pt =
-            dynamic_cast<FiniteElement *>(ext_haloed_elem_pt[e]);
+          FiniteElement* finite_el_pt =
+            dynamic_cast<FiniteElement*>(ext_haloed_elem_pt[e]);
           if (finite_el_pt != 0)
           {
             unsigned nnod2 = finite_el_pt->nnode();
             for (unsigned j = 0; j < nnod2; j++)
             {
-              Node *nod_pt = finite_el_pt->node_pt(j);
+              Node* nod_pt = finite_el_pt->node_pt(j);
               unsigned ndim = nod_pt->ndim();
               for (unsigned i = 0; i < ndim; i++)
               {
@@ -7676,7 +7674,7 @@ namespace oomph
           if (dd != d)
           {
             // Get vectors of external haloed elements by copy operation
-            Vector<GeneralisedElement *> ext_haloed_elem_pt(
+            Vector<GeneralisedElement*> ext_haloed_elem_pt(
               External_haloed_element_pt[dd]);
 
             // How many of my elements are external haloed elements whose halo
@@ -7712,8 +7710,8 @@ namespace oomph
               }
 
               // We can only check nodal stuff for meshes of finite elements
-              FiniteElement *fe_pt =
-                dynamic_cast<FiniteElement *>(ext_haloed_elem_pt[0]);
+              FiniteElement* fe_pt =
+                dynamic_cast<FiniteElement*>(ext_haloed_elem_pt[0]);
               if (fe_pt != 0)
               {
                 // Get strung-together elemental nodal positions
@@ -7787,15 +7785,15 @@ namespace oomph
                 unsigned count_hanging = 0;
                 for (int e = 0; e < nelem_haloed; e++)
                 {
-                  FiniteElement *finite_el_pt =
-                    dynamic_cast<FiniteElement *>(ext_haloed_elem_pt[e]);
+                  FiniteElement* finite_el_pt =
+                    dynamic_cast<FiniteElement*>(ext_haloed_elem_pt[e]);
 
                   if (finite_el_pt != 0)
                   {
                     unsigned nnod_this_el = finite_el_pt->nnode();
                     for (unsigned j = 0; j < nnod_this_el; j++)
                     {
-                      Node *nod_pt = finite_el_pt->node_pt(j);
+                      Node* nod_pt = finite_el_pt->node_pt(j);
                       // unsigned nod_dim = mod_pt->ndim();
 
                       // Testing POSITIONS, not x location
@@ -7985,7 +7983,7 @@ namespace oomph
       else
       {
         // Get vectors of external halo elements by copy operation
-        Vector<GeneralisedElement *> ext_halo_elem_pt(
+        Vector<GeneralisedElement*> ext_halo_elem_pt(
           External_halo_element_pt[d]);
 
         // How many of my elements are external halo elements whose non-halo
@@ -7999,8 +7997,8 @@ namespace oomph
           MPI_Send(&nelem_halo, 1, MPI_UNSIGNED, d, 0, Comm_pt->mpi_comm());
 
           // Only bother if the mesh consists of finite elements
-          FiniteElement *fe_pt =
-            dynamic_cast<FiniteElement *>(ext_halo_elem_pt[0]);
+          FiniteElement* fe_pt =
+            dynamic_cast<FiniteElement*>(ext_halo_elem_pt[0]);
           if (fe_pt != 0)
           {
             // Now string together the nodal positions of all halo nodes
@@ -8015,14 +8013,14 @@ namespace oomph
             unsigned count = 0;
             for (unsigned e = 0; e < nelem_halo; e++)
             {
-              FiniteElement *finite_el_pt =
-                dynamic_cast<FiniteElement *>(ext_halo_elem_pt[e]);
+              FiniteElement* finite_el_pt =
+                dynamic_cast<FiniteElement*>(ext_halo_elem_pt[e]);
               if (finite_el_pt != 0)
               {
                 unsigned nnod_this_el = finite_el_pt->nnode();
                 for (unsigned j = 0; j < nnod_this_el; j++)
                 {
-                  Node *nod_pt = finite_el_pt->node_pt(j);
+                  Node* nod_pt = finite_el_pt->node_pt(j);
 
                   // Testing POSITIONS, not x location (cf hanging nodes,
                   // nodes.h)
@@ -8110,10 +8108,10 @@ namespace oomph
   //========================================================================
   /// Null out specified external halo node (used when deleting duplicates)
   //========================================================================
-  void Mesh::null_external_halo_node(const unsigned &p, Node *nod_pt)
+  void Mesh::null_external_halo_node(const unsigned& p, Node* nod_pt)
   {
     // Loop over all external halo nodes with specified processor
-    Vector<Node *> ext_halo_node_pt = External_halo_node_pt[p];
+    Vector<Node*> ext_halo_node_pt = External_halo_node_pt[p];
     unsigned n = ext_halo_node_pt.size();
     for (unsigned j = 0; j < n; j++)
     {
@@ -8158,7 +8156,7 @@ namespace oomph
       if (domain != my_rank)
       {
         // Make backup of external halo node pointers with this domain
-        Vector<Node *> backup_pt = External_halo_node_pt[domain];
+        Vector<Node*> backup_pt = External_halo_node_pt[domain];
 
         // Wipe
         External_halo_node_pt[domain].clear();
@@ -8171,7 +8169,7 @@ namespace oomph
         for (unsigned j = 0; j < nnod; j++)
         {
           // Get pointer to node
-          Node *nod_pt = backup_pt[j];
+          Node* nod_pt = backup_pt[j];
 
           // Has it been nulled out?
           if (nod_pt == 0)
@@ -8266,7 +8264,7 @@ namespace oomph
         }
 
         // Make backup of external haloed node pointers with this domain
-        Vector<Node *> backup_pt = External_haloed_node_pt[send_rank];
+        Vector<Node*> backup_pt = External_haloed_node_pt[send_rank];
 
         // Wipe
         External_haloed_node_pt[send_rank].clear();
@@ -8279,7 +8277,7 @@ namespace oomph
         for (unsigned j = 0; j < nnod; j++)
         {
           // Get pointer to node
-          Node *nod_pt = backup_pt[j];
+          Node* nod_pt = backup_pt[j];
 
           // Has it been nulled out?
           if (nod_pt != 0)
@@ -8352,7 +8350,7 @@ namespace oomph
         // Collect on root the number of dofs types determined independently
         // on all processors (-1 indicates that the processor didn't have
         // any elements and therefore doesn't know!)
-        int *ndof_types_recv = 0;
+        int* ndof_types_recv = 0;
         if (my_rank == 0)
         {
           ndof_types_recv = new int[nproc];
@@ -8500,7 +8498,7 @@ namespace oomph
         // Collect on root the dimension number determined independently
         // on all processors (-1 indicates that the processor didn't have
         // any elements and therefore doesn't know!)
-        int *dim_recv = 0;
+        int* dim_recv = 0;
         if (my_rank == 0)
         {
           dim_recv = new int[nproc];
@@ -8638,7 +8636,7 @@ namespace oomph
         // Collect on root the dimension number determined independently
         // on all processors (-1 indicates that the processor didn't have
         // any elements and therefore doesn't know!)
-        int *dim_recv = 0;
+        int* dim_recv = 0;
         if (my_rank == 0)
         {
           dim_recv = new int[nproc];
@@ -8742,7 +8740,7 @@ namespace oomph
       for (unsigned i = 0; i < nnode(); i++)
       {
         // Get pointer to the node
-        Node *nod_pt = node_pt(i);
+        Node* nod_pt = node_pt(i);
 
         // Check if the node exists
         if (nod_pt != 0)
@@ -8751,7 +8749,7 @@ namespace oomph
           if (nod_pt->is_hanging())
           {
             // Get pointer to the hang info
-            HangInfo *hang_pt = nod_pt->hanging_pt();
+            HangInfo* hang_pt = nod_pt->hanging_pt();
 
             // Check if any master is in the external halo storage
             // External haloed nodes don't get deleted, so we don't need to
@@ -8760,7 +8758,7 @@ namespace oomph
             for (unsigned m = 0; m < hang_pt->nmaster(); m++)
             {
               // Iterator for vector of nodes
-              Vector<Node *>::iterator it;
+              Vector<Node*>::iterator it;
 
               // Loop over external halo storage with all processors
               bool found_this_master_in_external_halo_storage = false;
@@ -8823,8 +8821,7 @@ namespace oomph
 
               // If it's an algebraic node: Update its previous nodal positions
               // too
-              AlgebraicNode *alg_node_pt =
-                dynamic_cast<AlgebraicNode *>(nod_pt);
+              AlgebraicNode* alg_node_pt = dynamic_cast<AlgebraicNode*>(nod_pt);
               if (alg_node_pt != 0)
               {
                 bool update_all_time_levels = true;
@@ -8833,7 +8830,7 @@ namespace oomph
 
               // If it's a Solid node, update Lagrangian coordinates
               // from its hanging node representation
-              SolidNode *solid_node_pt = dynamic_cast<SolidNode *>(nod_pt);
+              SolidNode* solid_node_pt = dynamic_cast<SolidNode*>(nod_pt);
               if (solid_node_pt != 0)
               {
                 unsigned n_lagrangian = solid_node_pt->nlagrangian();
@@ -8885,7 +8882,7 @@ namespace oomph
 
     // Careful: some of the external halo nodes are also in boundary
     //          node storage and should be removed from this first
-    for (std::map<unsigned, Vector<Node *>>::iterator it =
+    for (std::map<unsigned, Vector<Node*>>::iterator it =
            External_halo_node_pt.begin();
          it != External_halo_node_pt.end();
          it++)
@@ -8897,7 +8894,7 @@ namespace oomph
       unsigned n_ext_halo_nod = nexternal_halo_node(d);
       for (unsigned j = 0; j < n_ext_halo_nod; j++)
       {
-        Node *ext_halo_nod_pt = external_halo_node_pt(d, j);
+        Node* ext_halo_nod_pt = external_halo_node_pt(d, j);
         unsigned n_bnd = nboundary();
         for (unsigned i_bnd = 0; i_bnd < n_bnd; i_bnd++)
         {
@@ -8909,7 +8906,7 @@ namespace oomph
     }
 
     // A loop to delete external halo nodes
-    for (std::map<unsigned, Vector<Node *>>::iterator it =
+    for (std::map<unsigned, Vector<Node*>>::iterator it =
            External_halo_node_pt.begin();
          it != External_halo_node_pt.end();
          it++)
@@ -8938,7 +8935,7 @@ namespace oomph
           // Loop over all other higher-numbered processors and check
           // for duplicated external halo nodes
           // (The highest numbered processor should delete all its ext halos)
-          for (std::map<unsigned, Vector<Node *>>::iterator itt =
+          for (std::map<unsigned, Vector<Node*>>::iterator itt =
                  External_halo_node_pt.begin();
                itt != External_halo_node_pt.end();
                itt++)
@@ -8970,7 +8967,7 @@ namespace oomph
     }
 
     // Another loop to delete external halo elements (which are distinct)
-    for (std::map<unsigned, Vector<GeneralisedElement *>>::iterator it =
+    for (std::map<unsigned, Vector<GeneralisedElement*>>::iterator it =
            External_halo_element_pt.begin();
          it != External_halo_element_pt.end();
          it++)
@@ -9011,8 +9008,8 @@ namespace oomph
   /// on processor p to the storage scheme for external haloed elements.
   /// If the element is already in the storage scheme then return its index
   //========================================================================
-  unsigned Mesh::add_external_haloed_element_pt(const unsigned &p,
-                                                GeneralisedElement *&el_pt)
+  unsigned Mesh::add_external_haloed_element_pt(const unsigned& p,
+                                                GeneralisedElement*& el_pt)
   {
     // Loop over current storage
     unsigned n_extern_haloed = nexternal_haloed_element(p);
@@ -9052,7 +9049,7 @@ namespace oomph
   /// is held on processor p to the storage scheme for external haloed nodes.
   /// If the node is already in the storage scheme then return its index
   //========================================================================
-  unsigned Mesh::add_external_haloed_node_pt(const unsigned &p, Node *&nod_pt)
+  unsigned Mesh::add_external_haloed_node_pt(const unsigned& p, Node*& nod_pt)
   {
     // Loop over current storage
     unsigned n_ext_haloed_nod = nexternal_haloed_node(p);
@@ -9108,7 +9105,7 @@ namespace oomph
     {
       // Cast node to solid node (can safely be done because
       // SolidMeshes consist of SolidNodes
-      SolidNode *node_pt = static_cast<SolidNode *>(Node_pt[n]);
+      SolidNode* node_pt = static_cast<SolidNode*>(Node_pt[n]);
 
       // Number of Lagrangian coordinates
       unsigned n_lagrangian = node_pt->nlagrangian();
@@ -9146,7 +9143,7 @@ namespace oomph
   namespace ParaviewHelper
   {
     /// Write the pvd file header
-    void write_pvd_header(std::ofstream &pvd_file)
+    void write_pvd_header(std::ofstream& pvd_file)
     {
       pvd_file << "<?xml version=\"1.0\"?>" << std::endl
                << "<VTKFile type=\"Collection\" version=\"0.1\">" << std::endl
@@ -9155,9 +9152,9 @@ namespace oomph
 
     /// \short Add name of output file and associated continuous time
     /// to pvd file.
-    void write_pvd_information(std::ofstream &pvd_file,
-                               const std::string &output_filename,
-                               const double &time)
+    void write_pvd_information(std::ofstream& pvd_file,
+                               const std::string& output_filename,
+                               const double& time)
     {
       // Output the actual time values
       pvd_file << "<DataSet timestep=\"" << time << "\" ";
@@ -9170,7 +9167,7 @@ namespace oomph
     }
 
     /// Write the pvd file footer
-    void write_pvd_footer(std::ofstream &pvd_file)
+    void write_pvd_footer(std::ofstream& pvd_file)
     {
       pvd_file << "</Collection>" << std::endl << "</VTKFile>";
     }

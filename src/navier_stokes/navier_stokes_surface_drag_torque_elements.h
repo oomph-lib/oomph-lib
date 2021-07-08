@@ -56,8 +56,8 @@ namespace oomph
   public:
     ///\short Constructor, which takes a "bulk" element and the value of an
     /// index describing to which face the element should be attached.
-    NavierStokesSurfaceDragTorqueElement(FiniteElement *const &element_pt,
-                                         const int &face_index) :
+    NavierStokesSurfaceDragTorqueElement(FiniteElement* const& element_pt,
+                                         const int& face_index) :
       FaceGeometry<ELEMENT>(), FaceElement()
     {
       // Attach the geometrical information to the element. N.B. This function
@@ -73,21 +73,21 @@ namespace oomph
 
     /// \short Set the translation and rotation of the rigid object
     /// as external data
-    void set_translation_and_rotation(Data *const &object_data_pt)
+    void set_translation_and_rotation(Data* const& object_data_pt)
     {
       this->Translation_index = this->add_external_data(object_data_pt);
     }
 
     /// \short Access function for the centre of rotation
-    double &centre_of_rotation(const unsigned &i)
+    double& centre_of_rotation(const unsigned& i)
     {
       return this->Centre_of_rotation[i];
     }
 
     /// \short Function that specifies the drag force and the torque about
     /// the origin
-    virtual void get_drag_and_torque(Vector<double> &drag_force,
-                                     Vector<double> &drag_torque)
+    virtual void get_drag_and_torque(Vector<double>& drag_force,
+                                     Vector<double>& drag_torque)
     {
       // Spatial dimension of element
       unsigned ndim = dim();
@@ -118,7 +118,7 @@ namespace oomph
       unsigned n_intpt = integral_pt()->nweight();
 
       // Get pointer to assocated bulk element
-      ELEMENT *bulk_el_pt = dynamic_cast<ELEMENT *>(bulk_element_pt());
+      ELEMENT* bulk_el_pt = dynamic_cast<ELEMENT*>(bulk_element_pt());
 
       // Loop over the integration points
       for (unsigned ipt = 0; ipt < n_intpt; ipt++)
@@ -226,18 +226,18 @@ namespace oomph
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default (needed to break
     /// indeterminacy if bulk element is SolidElement)
-    double zeta_nodal(const unsigned &n,
-                      const unsigned &k,
-                      const unsigned &i) const
+    double zeta_nodal(const unsigned& n,
+                      const unsigned& k,
+                      const unsigned& i) const
     {
       return FaceElement::zeta_nodal(n, k, i);
     }
 
     /// \short Output function
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       // Get pointer to assocated bulk element
-      ELEMENT *bulk_el_pt = dynamic_cast<ELEMENT *>(bulk_element_pt());
+      ELEMENT* bulk_el_pt = dynamic_cast<ELEMENT*>(bulk_element_pt());
 
       // Elemental dimension
       unsigned dim_el = dim();

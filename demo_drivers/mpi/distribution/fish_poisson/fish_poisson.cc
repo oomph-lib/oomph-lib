@@ -52,7 +52,7 @@ namespace ConstSourceForPoisson
   double Strength = -1.00;
 
   /// Const source function
-  void source_function(const Vector<double> &x, double &source)
+  void source_function(const Vector<double>& x, double& source)
   {
     source = Strength;
   }
@@ -88,14 +88,14 @@ public:
   /// \short Overloaded version of the problem's access function to
   /// the mesh. Recasts the pointer to the base Mesh object to
   /// the actual mesh type.
-  RefineableFishMesh<ELEMENT> *mesh_pt()
+  RefineableFishMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<RefineableFishMesh<ELEMENT> *>(Problem::mesh_pt());
+    return dynamic_cast<RefineableFishMesh<ELEMENT>*>(Problem::mesh_pt());
   }
 
   /// \short Doc the solution. Output directory and labels are specified
   /// by DocInfo object
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 }; // end of problem class
 
@@ -137,7 +137,7 @@ RefineableFishPoissonProblem<ELEMENT>::RefineableFishPoissonProblem()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from FiniteElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
     // Set the source function pointer
     el_pt->source_fct_pt() = &ConstSourceForPoisson::source_function;
@@ -152,7 +152,7 @@ RefineableFishPoissonProblem<ELEMENT>::RefineableFishPoissonProblem()
 /// Doc the solution in tecplot format.
 //========================================================================
 template<class ELEMENT>
-void RefineableFishPoissonProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void RefineableFishPoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   unsigned min_refinement_level = 0;
   unsigned max_refinement_level = 0;
@@ -505,8 +505,8 @@ void solve_with_selected_refinement_pattern()
     unsigned nels = problem.mesh_pt()->nelement();
     for (unsigned e = 0; e < nels; e++)
     {
-      FiniteElement *el_pt =
-        dynamic_cast<FiniteElement *>(problem.mesh_pt()->element_pt(e));
+      FiniteElement* el_pt =
+        dynamic_cast<FiniteElement*>(problem.mesh_pt()->element_pt(e));
       if ((el_pt->node_pt(4)->x(1) >= (-0.35)) &&
           (el_pt->node_pt(4)->x(1) <= 0.35))
       {
@@ -535,7 +535,7 @@ void solve_with_selected_refinement_pattern()
 /// Demonstrate how to solve 2D Poisson problem in
 /// fish-shaped domain with mesh adaptation.
 //========================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // initialise MPI
 #ifdef OOMPH_HAS_MPI

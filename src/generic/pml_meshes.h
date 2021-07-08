@@ -96,9 +96,9 @@ namespace oomph
     /// these are used to adjust the perfectly matched layer mechanism. Needs to
     /// be called separately for each pml-ified direction (if needed -- e.g. in
     /// corner elements)
-    void enable_pml(const int &direction,
-                    const double &interface_border_value,
-                    const double &outer_domain_border_value)
+    void enable_pml(const int& direction,
+                    const double& interface_border_value,
+                    const double& outer_domain_border_value)
     {
       Pml_is_enabled = true;
       Pml_direction_active[direction] = true;
@@ -114,7 +114,7 @@ namespace oomph
     /// for 2D time-harmonic linear elasticity; etc.). Vector
     /// must be resized internally!
     virtual void values_to_be_pinned_on_outer_pml_boundary(
-      Vector<unsigned> &values_to_pin) = 0;
+      Vector<unsigned>& values_to_pin) = 0;
 
   protected:
     /// Boolean indicating if element is used in pml mode
@@ -147,16 +147,16 @@ namespace oomph
   namespace TwoDimensionalPMLHelper
   {
     /// helper function for sorting the right boundary nodes
-    extern bool sorter_right_boundary(Node *nod_i_pt, Node *nod_j_pt);
+    extern bool sorter_right_boundary(Node* nod_i_pt, Node* nod_j_pt);
 
     /// helper function for sorting the top boundary nodes
-    extern bool sorter_top_boundary(Node *nod_i_pt, Node *nod_j_pt);
+    extern bool sorter_top_boundary(Node* nod_i_pt, Node* nod_j_pt);
 
     /// helper function for sorting the left boundary nodes
-    extern bool sorter_left_boundary(Node *nod_i_pt, Node *nod_j_pt);
+    extern bool sorter_left_boundary(Node* nod_i_pt, Node* nod_j_pt);
 
     /// helper function for sorting the bottom boundary nodes
-    extern bool sorter_bottom_boundary(Node *nod_i_pt, Node *nod_j_pt);
+    extern bool sorter_bottom_boundary(Node* nod_i_pt, Node* nod_j_pt);
 
   } // namespace TwoDimensionalPMLHelper
 
@@ -176,8 +176,8 @@ namespace oomph
     /// the locate_zeta function for PML meshes. As the PML meshes are
     /// rectangular (in 2D, or rectangular prisms in 3D) the location of
     /// a point in the mesh is simpler than in a more complex mesh
-    virtual void pml_locate_zeta(const Vector<double> &x,
-                                 FiniteElement *&el_pt) = 0;
+    virtual void pml_locate_zeta(const Vector<double>& x,
+                                 FiniteElement*& el_pt) = 0;
   };
 
   //====================================================================
@@ -190,13 +190,13 @@ namespace oomph
   {
   public:
     /// \short Constructor: Create the underlying rectangular quad mesh
-    PMLQuadMeshBase(const unsigned &n_pml_x,
-                    const unsigned &n_pml_y,
-                    const double &x_pml_start,
-                    const double &x_pml_end,
-                    const double &y_pml_start,
-                    const double &y_pml_end,
-                    TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+    PMLQuadMeshBase(const unsigned& n_pml_x,
+                    const unsigned& n_pml_y,
+                    const double& x_pml_start,
+                    const double& x_pml_end,
+                    const double& y_pml_start,
+                    const double& y_pml_end,
+                    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       RectangularQuadMesh<ELEMENT>(n_pml_x,
                                    n_pml_y,
                                    x_pml_start,
@@ -212,8 +212,8 @@ namespace oomph
     /// may be nonunique if the given point lies on the boundary of two
     /// elements in the mesh. Additionally, we assume that the PML mesh is
     /// axis aligned when deciding if the given point lies inside the mesh
-    void pml_locate_zeta(const Vector<double> &x,
-                         FiniteElement *&coarse_mesh_el_pt)
+    void pml_locate_zeta(const Vector<double>& x,
+                         FiniteElement*& coarse_mesh_el_pt)
     {
       //------------------------------------------
       // Make sure the point lies inside the mesh:
@@ -268,7 +268,7 @@ namespace oomph
       unsigned nnode = this->finite_element_pt(0)->nnode();
 
       // Create a pointer to store the element pointer as a FiniteElement
-      FiniteElement *el_pt = 0;
+      FiniteElement* el_pt = 0;
 
       // Vector to store the coordinate of each element corner node which
       // lies on the bottom boundary of the mesh and varies, i.e. if we're
@@ -422,8 +422,7 @@ namespace oomph
       unsigned el_id = element_y_id * nx + element_x_id;
 
       // Set the pointer to this element
-      coarse_mesh_el_pt =
-        dynamic_cast<FiniteElement *>(this->element_pt(el_id));
+      coarse_mesh_el_pt = dynamic_cast<FiniteElement*>(this->element_pt(el_id));
     } // End of pml_locate_zeta
   };
 
@@ -442,16 +441,16 @@ namespace oomph
     ///             1: constant x, bulk mesh to the right;
     ///             2: constant y, bulk mesh above;
     ///             3: constant x, bulk mesh to left.
-    PMLQuadMesh(Mesh *bulk_mesh_pt,
-                const unsigned &boundary_id,
-                const unsigned &quad_boundary_id,
-                const unsigned &n_pml_x,
-                const unsigned &n_pml_y,
-                const double &x_pml_start,
-                const double &x_pml_end,
-                const double &y_pml_start,
-                const double &y_pml_end,
-                TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+    PMLQuadMesh(Mesh* bulk_mesh_pt,
+                const unsigned& boundary_id,
+                const unsigned& quad_boundary_id,
+                const unsigned& n_pml_x,
+                const unsigned& n_pml_y,
+                const double& x_pml_start,
+                const double& x_pml_end,
+                const double& y_pml_start,
+                const double& y_pml_end,
+                TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       PMLQuadMeshBase<ELEMENT>(n_pml_x,
                                n_pml_y,
                                x_pml_start,
@@ -463,7 +462,7 @@ namespace oomph
       unsigned n_boundary_node = bulk_mesh_pt->nboundary_node(boundary_id);
 
       // Create a vector of ordered boundary nodes
-      Vector<Node *> ordered_boundary_node_pt(n_boundary_node);
+      Vector<Node*> ordered_boundary_node_pt(n_boundary_node);
 
       // Fill the vector with the nodes on the respective boundary
       for (unsigned n = 0; n < n_boundary_node; n++)
@@ -551,7 +550,7 @@ namespace oomph
           if ((e % n_pml_x) == 0)
           {
             // Upcast from GeneralisedElement to bulk element
-            ELEMENT *el_pt = dynamic_cast<ELEMENT *>(this->element_pt(e));
+            ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->element_pt(e));
 
             // Loop over all nodes in element
             unsigned n_node = el_pt->nnode();
@@ -583,7 +582,7 @@ namespace oomph
           if ((int)(e / n_pml_x) == 0)
           {
             // Upcast from GeneralisedElement to bulk element
-            ELEMENT *el_pt = dynamic_cast<ELEMENT *>(this->element_pt(e));
+            ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->element_pt(e));
 
             // Loop over all nodes in element
             unsigned n_node = el_pt->nnode();
@@ -615,7 +614,7 @@ namespace oomph
           if ((e % n_pml_x) == (n_pml_x - 1))
           {
             // Upcast from GeneralisedElement to bulk element
-            ELEMENT *el_pt = dynamic_cast<ELEMENT *>(this->element_pt(e));
+            ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->element_pt(e));
 
             // Loop over all nodes in element
             unsigned n_node = el_pt->nnode();
@@ -648,7 +647,7 @@ namespace oomph
           if (e >= (n_pml_x * (n_pml_y - 1)))
           {
             // Upcast from GeneralisedElement to bulk element
-            ELEMENT *el_pt = dynamic_cast<ELEMENT *>(this->element_pt(e));
+            ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->element_pt(e));
 
             // Loop over all nodes in element
             unsigned n_node = el_pt->nnode();
@@ -683,7 +682,7 @@ namespace oomph
       for (unsigned e = 0; e < n_pml_element; e++)
       {
         // Upcast from GeneralisedElement to bulk element
-        ELEMENT *el_pt = dynamic_cast<ELEMENT *>(this->element_pt(e));
+        ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->element_pt(e));
         unsigned n_node = el_pt->nnode();
 
         // Loop over all nodes in element
@@ -724,7 +723,7 @@ namespace oomph
       for (unsigned e = interior_element_nr_helper_1; e < n_pml_element; e--)
       {
         // Upcast from GeneralisedElement to bulk element
-        ELEMENT *el_pt = dynamic_cast<ELEMENT *>(this->element_pt(e));
+        ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->element_pt(e));
         unsigned n_node = el_pt->nnode();
 
         // Loop over all nodes in element
@@ -782,21 +781,21 @@ namespace oomph
     /// PML mesh in between them based on their element number
     /// and coordinates.
     PMLCornerQuadMesh(
-      Mesh *PMLQuad_mesh_x_pt,
-      Mesh *PMLQuad_mesh_y_pt,
-      Mesh *bulk_mesh_pt,
-      Node *special_corner_node_pt,
-      const unsigned &parent_boundary_x_id,
-      const unsigned &parent_boundary_y_id,
-      const unsigned &current_boundary_x_id,
-      const unsigned &current_boundary_y_id,
-      const unsigned &n_pml_x,
-      const unsigned &n_pml_y,
-      const double &x_pml_start,
-      const double &x_pml_end,
-      const double &y_pml_start,
-      const double &y_pml_end,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      Mesh* PMLQuad_mesh_x_pt,
+      Mesh* PMLQuad_mesh_y_pt,
+      Mesh* bulk_mesh_pt,
+      Node* special_corner_node_pt,
+      const unsigned& parent_boundary_x_id,
+      const unsigned& parent_boundary_y_id,
+      const unsigned& current_boundary_x_id,
+      const unsigned& current_boundary_y_id,
+      const unsigned& n_pml_x,
+      const unsigned& n_pml_y,
+      const double& x_pml_start,
+      const double& x_pml_end,
+      const double& y_pml_start,
+      const double& y_pml_end,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       PMLQuadMeshBase<ELEMENT>(n_pml_x,
                                n_pml_y,
                                x_pml_start,
@@ -826,7 +825,7 @@ namespace oomph
           PMLQuad_mesh_x_pt->nboundary_node(parent_boundary_x_id);
 
         // Create a vector of ordered boundary nodes
-        Vector<Node *> ordered_boundary_x_node_pt(n_boundary_x_node);
+        Vector<Node*> ordered_boundary_x_node_pt(n_boundary_x_node);
 
         // Fill the vector with the nodes on the respective boundary
         for (unsigned n = 0; n < n_boundary_x_node; n++)
@@ -848,7 +847,7 @@ namespace oomph
           PMLQuad_mesh_y_pt->nboundary_node(parent_boundary_y_id);
 
         // Create a vector of ordered boundary nodes
-        Vector<Node *> ordered_boundary_y_node_pt(n_boundary_y_node);
+        Vector<Node*> ordered_boundary_y_node_pt(n_boundary_y_node);
 
         // Fill the vector with the nodes on the respective boundary
         for (unsigned n = 0; n < n_boundary_y_node; n++)
@@ -894,7 +893,7 @@ namespace oomph
             if ((e % n_pml_x) == 0)
             {
               // Upcast from GeneralisedElement to bulk element
-              ELEMENT *el_pt = dynamic_cast<ELEMENT *>(this->element_pt(e));
+              ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->element_pt(e));
 
               // Loop over all nodes in element
               unsigned n_node = el_pt->nnode();
@@ -947,7 +946,7 @@ namespace oomph
             if ((int)(e / n_pml_x) == 0)
             {
               // Upcast from GeneralisedElement to bulk element
-              ELEMENT *el_pt = dynamic_cast<ELEMENT *>(this->element_pt(e));
+              ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->element_pt(e));
 
               // Loop over all nodes in element
               unsigned n_node = el_pt->nnode();
@@ -998,7 +997,7 @@ namespace oomph
           PMLQuad_mesh_x_pt->nboundary_node(parent_boundary_x_id);
 
         // Create a vector of ordered boundary nodes
-        Vector<Node *> ordered_boundary_x_node_pt(n_boundary_x_node);
+        Vector<Node*> ordered_boundary_x_node_pt(n_boundary_x_node);
 
         // Fill the vector with the nodes on the respective boundary
         for (unsigned n = 0; n < n_boundary_x_node; n++)
@@ -1020,7 +1019,7 @@ namespace oomph
           PMLQuad_mesh_y_pt->nboundary_node(parent_boundary_y_id);
 
         // Create a vector of ordered boundary nodes
-        Vector<Node *> ordered_boundary_y_node_pt(n_boundary_y_node);
+        Vector<Node*> ordered_boundary_y_node_pt(n_boundary_y_node);
 
         // Fill the vector with the nodes on the respective boundary
         for (unsigned n = 0; n < n_boundary_y_node; n++)
@@ -1067,7 +1066,7 @@ namespace oomph
             if ((e % n_pml_x) == 0)
             {
               // Upcast from GeneralisedElement to bulk element
-              ELEMENT *el_pt = dynamic_cast<ELEMENT *>(this->element_pt(e));
+              ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->element_pt(e));
 
               // Loop over all nodes in element
               unsigned n_node = el_pt->nnode();
@@ -1123,7 +1122,7 @@ namespace oomph
             if (e >= ((n_pml_x - 0) * (n_pml_y - 1)))
             {
               // Upcast from GeneralisedElement to bulk element
-              ELEMENT *el_pt = dynamic_cast<ELEMENT *>(this->element_pt(e));
+              ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->element_pt(e));
 
               // Loop over all nodes in element
               unsigned n_node = el_pt->nnode();
@@ -1176,7 +1175,7 @@ namespace oomph
           PMLQuad_mesh_x_pt->nboundary_node(parent_boundary_x_id);
 
         // Create a vector of ordered boundary nodes
-        Vector<Node *> ordered_boundary_x_node_pt(n_boundary_x_node);
+        Vector<Node*> ordered_boundary_x_node_pt(n_boundary_x_node);
 
         // Fill the vector with the nodes on the respective boundary
         for (unsigned n = 0; n < n_boundary_x_node; n++)
@@ -1198,7 +1197,7 @@ namespace oomph
           PMLQuad_mesh_y_pt->nboundary_node(parent_boundary_y_id);
 
         // Create a vector of ordered boundary nodes
-        Vector<Node *> ordered_boundary_y_node_pt(n_boundary_y_node);
+        Vector<Node*> ordered_boundary_y_node_pt(n_boundary_y_node);
 
         // Fill the vector with the nodes on the respective boundary
         for (unsigned n = 0; n < n_boundary_y_node; n++)
@@ -1245,7 +1244,7 @@ namespace oomph
             if ((e % n_pml_x) == (n_pml_x - 1))
             {
               // Upcast from GeneralisedElement to bulk element
-              ELEMENT *el_pt = dynamic_cast<ELEMENT *>(this->element_pt(e));
+              ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->element_pt(e));
 
               // Loop over all nodes in element
               unsigned n_node = el_pt->nnode();
@@ -1299,7 +1298,7 @@ namespace oomph
             if ((int)(e / n_pml_x) == 0)
             {
               // Upcast from GeneralisedElement to bulk element
-              ELEMENT *el_pt = dynamic_cast<ELEMENT *>(this->element_pt(e));
+              ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->element_pt(e));
 
               // Loop over all nodes in element
               unsigned n_node = el_pt->nnode();
@@ -1352,7 +1351,7 @@ namespace oomph
           PMLQuad_mesh_x_pt->nboundary_node(parent_boundary_x_id);
 
         // Create a vector of ordered boundary nodes
-        Vector<Node *> ordered_boundary_x_node_pt(n_boundary_x_node);
+        Vector<Node*> ordered_boundary_x_node_pt(n_boundary_x_node);
 
         // Fill the vector with the nodes on the respective boundary
         for (unsigned n = 0; n < n_boundary_x_node; n++)
@@ -1374,7 +1373,7 @@ namespace oomph
           PMLQuad_mesh_y_pt->nboundary_node(parent_boundary_y_id);
 
         // Create a vector of ordered boundary nodes
-        Vector<Node *> ordered_boundary_y_node_pt(n_boundary_y_node);
+        Vector<Node*> ordered_boundary_y_node_pt(n_boundary_y_node);
 
         // Fill the vector with the nodes on the respective boundary
         for (unsigned n = 0; n < n_boundary_y_node; n++)
@@ -1420,7 +1419,7 @@ namespace oomph
             if ((e % n_pml_x) == (n_pml_x - 1))
             {
               // Upcast from GeneralisedElement to bulk element
-              ELEMENT *el_pt = dynamic_cast<ELEMENT *>(this->element_pt(e));
+              ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->element_pt(e));
 
               // Loop over all nodes in element
               unsigned n_node = el_pt->nnode();
@@ -1476,7 +1475,7 @@ namespace oomph
             if (e >= ((n_pml_x) * (n_pml_y - 1)))
             {
               // Upcast from GeneralisedElement to bulk element
-              ELEMENT *el_pt = dynamic_cast<ELEMENT *>(this->element_pt(e));
+              ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->element_pt(e));
 
               // Loop over all nodes in element
               unsigned n_node = el_pt->nnode();
@@ -1537,19 +1536,19 @@ namespace oomph
     /// boundary
     //============================================================================
     template<class ASSOCIATED_PML_QUAD_ELEMENT>
-    Mesh *create_right_pml_mesh(
-      Mesh *bulk_mesh_pt,
-      const unsigned &right_boundary_id,
-      const unsigned &n_x_right_pml,
-      const double &width_x_right_pml,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper)
+    Mesh* create_right_pml_mesh(
+      Mesh* bulk_mesh_pt,
+      const unsigned& right_boundary_id,
+      const unsigned& n_x_right_pml,
+      const double& width_x_right_pml,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
     {
       // Look at the right boundary of the triangular mesh
       unsigned n_right_boundary_node =
         bulk_mesh_pt->nboundary_node(right_boundary_id);
 
       // Create a vector of ordered boundary nodes
-      Vector<Node *> ordered_right_boundary_node_pt(n_right_boundary_node);
+      Vector<Node*> ordered_right_boundary_node_pt(n_right_boundary_node);
 
       // Fill the vector with the nodes on the respective boundary
       for (unsigned n = 0; n < n_right_boundary_node; n++)
@@ -1580,7 +1579,7 @@ namespace oomph
       unsigned right_quadPML_boundary_id = 3;
 
       // Create the mesh to be designated to the PML
-      Mesh *pml_right_mesh_pt = 0;
+      Mesh* pml_right_mesh_pt = 0;
 
       // Build the right one
       pml_right_mesh_pt =
@@ -1600,15 +1599,15 @@ namespace oomph
       for (unsigned e = 0; e < n_element_pml_right; e++)
       {
         // Upcast
-        PMLElementBase<2> *el_pt =
-          dynamic_cast<PMLElementBase<2> *>(pml_right_mesh_pt->element_pt(e));
+        PMLElementBase<2>* el_pt =
+          dynamic_cast<PMLElementBase<2>*>(pml_right_mesh_pt->element_pt(e));
         el_pt->enable_pml(0, l_pml_right_x_start, l_pml_right_x_end);
       }
 
       // Get the values to be pinned from the first element (which we
       // assume exists!)
-      PMLElementBase<2> *el_pt =
-        dynamic_cast<PMLElementBase<2> *>(pml_right_mesh_pt->element_pt(0));
+      PMLElementBase<2>* el_pt =
+        dynamic_cast<PMLElementBase<2>*>(pml_right_mesh_pt->element_pt(0));
       Vector<unsigned> values_to_pin;
       el_pt->values_to_be_pinned_on_outer_pml_boundary(values_to_pin);
       unsigned npin = values_to_pin.size();
@@ -1621,7 +1620,7 @@ namespace oomph
         unsigned n_node = pml_right_mesh_pt->nboundary_node(b);
         for (unsigned n = 0; n < n_node; n++)
         {
-          Node *nod_pt = pml_right_mesh_pt->boundary_node_pt(b, n);
+          Node* nod_pt = pml_right_mesh_pt->boundary_node_pt(b, n);
           if (b == 1)
           {
             for (unsigned j = 0; j < npin; j++)
@@ -1644,19 +1643,19 @@ namespace oomph
     /// boundary
     //===========================================================================
     template<class ASSOCIATED_PML_QUAD_ELEMENT>
-    Mesh *create_top_pml_mesh(
-      Mesh *bulk_mesh_pt,
-      const unsigned &top_boundary_id,
-      const unsigned &n_y_top_pml,
-      const double &width_y_top_pml,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper)
+    Mesh* create_top_pml_mesh(
+      Mesh* bulk_mesh_pt,
+      const unsigned& top_boundary_id,
+      const unsigned& n_y_top_pml,
+      const double& width_y_top_pml,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
     {
       // Look at the top boundary of the triangular mesh
       unsigned n_top_boundary_node =
         bulk_mesh_pt->nboundary_node(top_boundary_id);
 
       // Create a vector of ordered boundary nodes
-      Vector<Node *> ordered_top_boundary_node_pt(n_top_boundary_node);
+      Vector<Node*> ordered_top_boundary_node_pt(n_top_boundary_node);
 
       // Fill the vector with the nodes on the respective boundary
       for (unsigned n = 0; n < n_top_boundary_node; n++)
@@ -1685,7 +1684,7 @@ namespace oomph
       unsigned top_quadPML_boundary_id = 0;
 
       // Create the mesh to be designated to the PML
-      Mesh *pml_top_mesh_pt = 0;
+      Mesh* pml_top_mesh_pt = 0;
 
       // Build the top PML mesh
       pml_top_mesh_pt =
@@ -1705,15 +1704,15 @@ namespace oomph
       for (unsigned e = 0; e < n_element_pml_top; e++)
       {
         // Upcast
-        PMLElementBase<2> *el_pt =
-          dynamic_cast<PMLElementBase<2> *>(pml_top_mesh_pt->element_pt(e));
+        PMLElementBase<2>* el_pt =
+          dynamic_cast<PMLElementBase<2>*>(pml_top_mesh_pt->element_pt(e));
         el_pt->enable_pml(1, l_pml_top_y_start, l_pml_top_y_end);
       }
 
       // Get the values to be pinned from the first element (which we
       // assume exists!)
-      PMLElementBase<2> *el_pt =
-        dynamic_cast<PMLElementBase<2> *>(pml_top_mesh_pt->element_pt(0));
+      PMLElementBase<2>* el_pt =
+        dynamic_cast<PMLElementBase<2>*>(pml_top_mesh_pt->element_pt(0));
       Vector<unsigned> values_to_pin;
       el_pt->values_to_be_pinned_on_outer_pml_boundary(values_to_pin);
       unsigned npin = values_to_pin.size();
@@ -1727,7 +1726,7 @@ namespace oomph
         unsigned n_node = pml_top_mesh_pt->nboundary_node(b);
         for (unsigned n = 0; n < n_node; n++)
         {
-          Node *nod_pt = pml_top_mesh_pt->boundary_node_pt(b, n);
+          Node* nod_pt = pml_top_mesh_pt->boundary_node_pt(b, n);
           if (b == 2)
           {
             for (unsigned j = 0; j < npin; j++)
@@ -1750,19 +1749,19 @@ namespace oomph
     /// boundary
     //============================================================================
     template<class ASSOCIATED_PML_QUAD_ELEMENT>
-    Mesh *create_left_pml_mesh(
-      Mesh *bulk_mesh_pt,
-      const unsigned &left_boundary_id,
-      const unsigned &n_x_left_pml,
-      const double &width_x_left_pml,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper)
+    Mesh* create_left_pml_mesh(
+      Mesh* bulk_mesh_pt,
+      const unsigned& left_boundary_id,
+      const unsigned& n_x_left_pml,
+      const double& width_x_left_pml,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
     {
       // Look at the left boundary of the triangular mesh
       unsigned n_left_boundary_node =
         bulk_mesh_pt->nboundary_node(left_boundary_id);
 
       // Create a vector of ordered boundary nodes
-      Vector<Node *> ordered_left_boundary_node_pt(n_left_boundary_node);
+      Vector<Node*> ordered_left_boundary_node_pt(n_left_boundary_node);
 
       // Fill the vector with the nodes on the respective boundary
       for (unsigned n = 0; n < n_left_boundary_node; n++)
@@ -1793,7 +1792,7 @@ namespace oomph
       unsigned left_quadPML_boundary_id = 1;
 
       // Create the mesh to be designated to the PML
-      Mesh *pml_left_mesh_pt = 0;
+      Mesh* pml_left_mesh_pt = 0;
 
       // Build the left PML mesh
       pml_left_mesh_pt =
@@ -1813,15 +1812,15 @@ namespace oomph
       for (unsigned e = 0; e < n_element_pml_left; e++)
       {
         // Upcast
-        PMLElementBase<2> *el_pt =
-          dynamic_cast<PMLElementBase<2> *>(pml_left_mesh_pt->element_pt(e));
+        PMLElementBase<2>* el_pt =
+          dynamic_cast<PMLElementBase<2>*>(pml_left_mesh_pt->element_pt(e));
         el_pt->enable_pml(0, l_pml_left_x_end, l_pml_left_x_start);
       }
 
       // Get the values to be pinned from the first element (which we
       // assume exists!)
-      PMLElementBase<2> *el_pt =
-        dynamic_cast<PMLElementBase<2> *>(pml_left_mesh_pt->element_pt(0));
+      PMLElementBase<2>* el_pt =
+        dynamic_cast<PMLElementBase<2>*>(pml_left_mesh_pt->element_pt(0));
       Vector<unsigned> values_to_pin;
       el_pt->values_to_be_pinned_on_outer_pml_boundary(values_to_pin);
       unsigned npin = values_to_pin.size();
@@ -1835,7 +1834,7 @@ namespace oomph
         unsigned n_node = pml_left_mesh_pt->nboundary_node(b);
         for (unsigned n = 0; n < n_node; n++)
         {
-          Node *nod_pt = pml_left_mesh_pt->boundary_node_pt(b, n);
+          Node* nod_pt = pml_left_mesh_pt->boundary_node_pt(b, n);
           if (b == 3)
           {
             for (unsigned j = 0; j < npin; j++)
@@ -1858,19 +1857,19 @@ namespace oomph
     /// boundary
     //============================================================================
     template<class ASSOCIATED_PML_QUAD_ELEMENT>
-    Mesh *create_bottom_pml_mesh(
-      Mesh *bulk_mesh_pt,
-      const unsigned &bottom_boundary_id,
-      const unsigned &n_y_bottom_pml,
-      const double &width_y_bottom_pml,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper)
+    Mesh* create_bottom_pml_mesh(
+      Mesh* bulk_mesh_pt,
+      const unsigned& bottom_boundary_id,
+      const unsigned& n_y_bottom_pml,
+      const double& width_y_bottom_pml,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
     {
       // Look at the bottom boundary of the triangular mesh
       unsigned n_bottom_boundary_node =
         bulk_mesh_pt->nboundary_node(bottom_boundary_id);
 
       // Create a vector of ordered boundary nodes
-      Vector<Node *> ordered_bottom_boundary_node_pt(n_bottom_boundary_node);
+      Vector<Node*> ordered_bottom_boundary_node_pt(n_bottom_boundary_node);
 
       // Fill the vector with the nodes on the respective boundary
       for (unsigned n = 0; n < n_bottom_boundary_node; n++)
@@ -1901,7 +1900,7 @@ namespace oomph
       unsigned bottom_quadPML_boundary_id = 2;
 
       // Create the mesh to be designated to the PML
-      Mesh *pml_bottom_mesh_pt = 0;
+      Mesh* pml_bottom_mesh_pt = 0;
 
       // Build the bottom PML mesh
       pml_bottom_mesh_pt =
@@ -1921,15 +1920,15 @@ namespace oomph
       for (unsigned e = 0; e < n_element_pml_bottom; e++)
       {
         // Upcast
-        PMLElementBase<2> *el_pt =
-          dynamic_cast<PMLElementBase<2> *>(pml_bottom_mesh_pt->element_pt(e));
+        PMLElementBase<2>* el_pt =
+          dynamic_cast<PMLElementBase<2>*>(pml_bottom_mesh_pt->element_pt(e));
         el_pt->enable_pml(1, l_pml_bottom_y_end, l_pml_bottom_y_start);
       }
 
       // Get the values to be pinned from the first element (which we
       // assume exists!)
-      PMLElementBase<2> *el_pt =
-        dynamic_cast<PMLElementBase<2> *>(pml_bottom_mesh_pt->element_pt(0));
+      PMLElementBase<2>* el_pt =
+        dynamic_cast<PMLElementBase<2>*>(pml_bottom_mesh_pt->element_pt(0));
       Vector<unsigned> values_to_pin;
       el_pt->values_to_be_pinned_on_outer_pml_boundary(values_to_pin);
       unsigned npin = values_to_pin.size();
@@ -1943,7 +1942,7 @@ namespace oomph
         unsigned n_node = pml_bottom_mesh_pt->nboundary_node(b);
         for (unsigned n = 0; n < n_node; n++)
         {
-          Node *nod_pt = pml_bottom_mesh_pt->boundary_node_pt(b, n);
+          Node* nod_pt = pml_bottom_mesh_pt->boundary_node_pt(b, n);
           if (b == 0)
           {
             for (unsigned j = 0; j < npin; j++)
@@ -1966,12 +1965,12 @@ namespace oomph
     /// aligned with the existing PML meshes
     //==========================================================================
     template<class ASSOCIATED_PML_QUAD_ELEMENT>
-    Mesh *create_top_right_pml_mesh(
-      Mesh *pml_right_mesh_pt,
-      Mesh *pml_top_mesh_pt,
-      Mesh *bulk_mesh_pt,
-      const unsigned &right_boundary_id,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper)
+    Mesh* create_top_right_pml_mesh(
+      Mesh* pml_right_mesh_pt,
+      Mesh* pml_top_mesh_pt,
+      Mesh* bulk_mesh_pt,
+      const unsigned& right_boundary_id,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
     {
       /// \short Relevant boundary id's to be used in construction
       /// Parent id refers to already existing PML meshes
@@ -1986,7 +1985,7 @@ namespace oomph
         bulk_mesh_pt->nboundary_node(right_boundary_id);
 
       // Create a vector of ordered boundary nodes
-      Vector<Node *> ordered_right_boundary_node_pt(n_right_boundary_node);
+      Vector<Node*> ordered_right_boundary_node_pt(n_right_boundary_node);
 
       // Fill the vector with the nodes on the respective boundary
       for (unsigned n = 0; n < n_right_boundary_node; n++)
@@ -2027,7 +2026,7 @@ namespace oomph
           ->x(1);
 
       // Create the mesh to be designated to the PML
-      Mesh *pml_top_right_mesh_pt = 0;
+      Mesh* pml_top_right_mesh_pt = 0;
 
       // Build the top right corner PML mesh
       pml_top_right_mesh_pt =
@@ -2055,7 +2054,7 @@ namespace oomph
       for (unsigned e = 0; e < n_element_pml_top_right; e++)
       {
         // Upcast
-        PMLElementBase<2> *el_pt = dynamic_cast<PMLElementBase<2> *>(
+        PMLElementBase<2>* el_pt = dynamic_cast<PMLElementBase<2>*>(
           pml_top_right_mesh_pt->element_pt(e));
         el_pt->enable_pml(0, l_pml_right_x_start, l_pml_right_x_end);
         el_pt->enable_pml(1, l_pml_top_y_start, l_pml_top_y_end);
@@ -2063,8 +2062,8 @@ namespace oomph
 
       // Get the values to be pinned from the first element (which we
       // assume exists!)
-      PMLElementBase<2> *el_pt =
-        dynamic_cast<PMLElementBase<2> *>(pml_top_right_mesh_pt->element_pt(0));
+      PMLElementBase<2>* el_pt =
+        dynamic_cast<PMLElementBase<2>*>(pml_top_right_mesh_pt->element_pt(0));
       Vector<unsigned> values_to_pin;
       el_pt->values_to_be_pinned_on_outer_pml_boundary(values_to_pin);
       unsigned npin = values_to_pin.size();
@@ -2078,7 +2077,7 @@ namespace oomph
         unsigned n_node = pml_top_right_mesh_pt->nboundary_node(b);
         for (unsigned n = 0; n < n_node; n++)
         {
-          Node *nod_pt = pml_top_right_mesh_pt->boundary_node_pt(b, n);
+          Node* nod_pt = pml_top_right_mesh_pt->boundary_node_pt(b, n);
           if ((b == 1) || (b == 2))
           {
             for (unsigned j = 0; j < npin; j++)
@@ -2101,12 +2100,12 @@ namespace oomph
     /// aligned with the existing PML meshes
     //==========================================================================
     template<class ASSOCIATED_PML_QUAD_ELEMENT>
-    Mesh *create_bottom_right_pml_mesh(
-      Mesh *pml_right_mesh_pt,
-      Mesh *pml_bottom_mesh_pt,
-      Mesh *bulk_mesh_pt,
-      const unsigned &right_boundary_id,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper)
+    Mesh* create_bottom_right_pml_mesh(
+      Mesh* pml_right_mesh_pt,
+      Mesh* pml_bottom_mesh_pt,
+      Mesh* bulk_mesh_pt,
+      const unsigned& right_boundary_id,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
     {
       /// \short Relevant boundary id's to be used in construction
       /// Parent id refers to already existing PML meshes
@@ -2121,7 +2120,7 @@ namespace oomph
         bulk_mesh_pt->nboundary_node(right_boundary_id);
 
       // Create a vector of ordered boundary nodes
-      Vector<Node *> ordered_right_boundary_node_pt(n_right_boundary_node);
+      Vector<Node*> ordered_right_boundary_node_pt(n_right_boundary_node);
 
       // Fill the vector with the nodes on the respective boundary
       for (unsigned n = 0; n < n_right_boundary_node; n++)
@@ -2156,7 +2155,7 @@ namespace oomph
       double l_pml_bottom_y_end = ordered_right_boundary_node_pt[0]->x(1);
 
       // Create the mesh to be designated to the PML
-      Mesh *pml_bottom_right_mesh_pt = 0;
+      Mesh* pml_bottom_right_mesh_pt = 0;
 
       // Build the bottom right corner PML mesh
       pml_bottom_right_mesh_pt =
@@ -2186,7 +2185,7 @@ namespace oomph
       for (unsigned e = 0; e < n_element_pml_bottom_right; e++)
       {
         // Upcast
-        PMLElementBase<2> *el_pt = dynamic_cast<PMLElementBase<2> *>(
+        PMLElementBase<2>* el_pt = dynamic_cast<PMLElementBase<2>*>(
           pml_bottom_right_mesh_pt->element_pt(e));
         el_pt->enable_pml(0, l_pml_right_x_start, l_pml_right_x_end);
         el_pt->enable_pml(1, l_pml_bottom_y_end, l_pml_bottom_y_start);
@@ -2194,7 +2193,7 @@ namespace oomph
 
       // Get the values to be pinned from the first element (which we
       // assume exists!)
-      PMLElementBase<2> *el_pt = dynamic_cast<PMLElementBase<2> *>(
+      PMLElementBase<2>* el_pt = dynamic_cast<PMLElementBase<2>*>(
         pml_bottom_right_mesh_pt->element_pt(0));
       Vector<unsigned> values_to_pin;
       el_pt->values_to_be_pinned_on_outer_pml_boundary(values_to_pin);
@@ -2209,7 +2208,7 @@ namespace oomph
         unsigned n_node = pml_bottom_right_mesh_pt->nboundary_node(b);
         for (unsigned n = 0; n < n_node; n++)
         {
-          Node *nod_pt = pml_bottom_right_mesh_pt->boundary_node_pt(b, n);
+          Node* nod_pt = pml_bottom_right_mesh_pt->boundary_node_pt(b, n);
           if ((b == 0) || (b == 1))
           {
             for (unsigned j = 0; j < npin; j++)
@@ -2232,12 +2231,12 @@ namespace oomph
     /// aligned with the existing PML meshes
     //==========================================================================
     template<class ASSOCIATED_PML_QUAD_ELEMENT>
-    Mesh *create_top_left_pml_mesh(
-      Mesh *pml_left_mesh_pt,
-      Mesh *pml_top_mesh_pt,
-      Mesh *bulk_mesh_pt,
-      const unsigned &left_boundary_id,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper)
+    Mesh* create_top_left_pml_mesh(
+      Mesh* pml_left_mesh_pt,
+      Mesh* pml_top_mesh_pt,
+      Mesh* bulk_mesh_pt,
+      const unsigned& left_boundary_id,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
     {
       /// \short Relevant boundary id's to be used in construction
       /// Parent id refers to already existing PML meshes
@@ -2252,7 +2251,7 @@ namespace oomph
         bulk_mesh_pt->nboundary_node(left_boundary_id);
 
       // Create a vector of ordered boundary nodes
-      Vector<Node *> ordered_left_boundary_node_pt(n_left_boundary_node);
+      Vector<Node*> ordered_left_boundary_node_pt(n_left_boundary_node);
 
       // Fill the vector with the nodes on the respective boundary
       for (unsigned n = 0; n < n_left_boundary_node; n++)
@@ -2291,7 +2290,7 @@ namespace oomph
           ->x(1);
 
       // Create the mesh to be designated to the PML
-      Mesh *pml_top_left_mesh_pt = 0;
+      Mesh* pml_top_left_mesh_pt = 0;
 
       // Build the top left corner PML mesh
       pml_top_left_mesh_pt = new PMLCornerQuadMesh<ASSOCIATED_PML_QUAD_ELEMENT>(
@@ -2319,16 +2318,16 @@ namespace oomph
       for (unsigned e = 0; e < n_element_pml_top_left; e++)
       {
         // Upcast
-        PMLElementBase<2> *el_pt = dynamic_cast<PMLElementBase<2> *>(
-          pml_top_left_mesh_pt->element_pt(e));
+        PMLElementBase<2>* el_pt =
+          dynamic_cast<PMLElementBase<2>*>(pml_top_left_mesh_pt->element_pt(e));
         el_pt->enable_pml(0, l_pml_left_x_end, l_pml_left_x_start);
         el_pt->enable_pml(1, l_pml_top_y_start, l_pml_top_y_end);
       }
 
       // Get the values to be pinned from the first element (which we
       // assume exists!)
-      PMLElementBase<2> *el_pt =
-        dynamic_cast<PMLElementBase<2> *>(pml_top_left_mesh_pt->element_pt(0));
+      PMLElementBase<2>* el_pt =
+        dynamic_cast<PMLElementBase<2>*>(pml_top_left_mesh_pt->element_pt(0));
       Vector<unsigned> values_to_pin;
       el_pt->values_to_be_pinned_on_outer_pml_boundary(values_to_pin);
       unsigned npin = values_to_pin.size();
@@ -2342,7 +2341,7 @@ namespace oomph
         unsigned n_node = pml_top_left_mesh_pt->nboundary_node(b);
         for (unsigned n = 0; n < n_node; n++)
         {
-          Node *nod_pt = pml_top_left_mesh_pt->boundary_node_pt(b, n);
+          Node* nod_pt = pml_top_left_mesh_pt->boundary_node_pt(b, n);
           if ((b == 2) || (b == 3))
           {
             for (unsigned j = 0; j < npin; j++)
@@ -2365,12 +2364,12 @@ namespace oomph
     /// aligned with the existing PML meshes
     //==========================================================================
     template<class ASSOCIATED_PML_QUAD_ELEMENT>
-    Mesh *create_bottom_left_pml_mesh(
-      Mesh *pml_left_mesh_pt,
-      Mesh *pml_bottom_mesh_pt,
-      Mesh *bulk_mesh_pt,
-      const unsigned &left_boundary_id,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper)
+    Mesh* create_bottom_left_pml_mesh(
+      Mesh* pml_left_mesh_pt,
+      Mesh* pml_bottom_mesh_pt,
+      Mesh* bulk_mesh_pt,
+      const unsigned& left_boundary_id,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
     {
       /// \short Relevant boundary id's to be used in construction
       /// Parent id refers to already existing PML meshes
@@ -2385,7 +2384,7 @@ namespace oomph
         bulk_mesh_pt->nboundary_node(left_boundary_id);
 
       // Create a vector of ordered boundary nodes
-      Vector<Node *> ordered_left_boundary_node_pt(n_left_boundary_node);
+      Vector<Node*> ordered_left_boundary_node_pt(n_left_boundary_node);
 
       // Fill the vector with the nodes on the respective boundary
       for (unsigned n = 0; n < n_left_boundary_node; n++)
@@ -2419,7 +2418,7 @@ namespace oomph
       double l_pml_bottom_y_end = ordered_left_boundary_node_pt[0]->x(1);
 
       // Create the mesh to be designated to the PML
-      Mesh *pml_bottom_left_mesh_pt = 0;
+      Mesh* pml_bottom_left_mesh_pt = 0;
 
       // Build the bottom left corner PML mesh
       pml_bottom_left_mesh_pt =
@@ -2447,7 +2446,7 @@ namespace oomph
       for (unsigned e = 0; e < n_element_pml_bottom_left; e++)
       {
         // Upcast
-        PMLElementBase<2> *el_pt = dynamic_cast<PMLElementBase<2> *>(
+        PMLElementBase<2>* el_pt = dynamic_cast<PMLElementBase<2>*>(
           pml_bottom_left_mesh_pt->element_pt(e));
         el_pt->enable_pml(0, l_pml_left_x_end, l_pml_left_x_start);
         el_pt->enable_pml(1, l_pml_bottom_y_end, l_pml_bottom_y_start);
@@ -2455,7 +2454,7 @@ namespace oomph
 
       // Get the values to be pinned from the first element (which we
       // assume exists!)
-      PMLElementBase<2> *el_pt = dynamic_cast<PMLElementBase<2> *>(
+      PMLElementBase<2>* el_pt = dynamic_cast<PMLElementBase<2>*>(
         pml_bottom_left_mesh_pt->element_pt(0));
       Vector<unsigned> values_to_pin;
       el_pt->values_to_be_pinned_on_outer_pml_boundary(values_to_pin);
@@ -2470,7 +2469,7 @@ namespace oomph
         unsigned n_node = pml_bottom_left_mesh_pt->nboundary_node(b);
         for (unsigned n = 0; n < n_node; n++)
         {
-          Node *nod_pt = pml_bottom_left_mesh_pt->boundary_node_pt(b, n);
+          Node* nod_pt = pml_bottom_left_mesh_pt->boundary_node_pt(b, n);
           if ((b == 0) || (b == 3))
           {
             for (unsigned j = 0; j < npin; j++)

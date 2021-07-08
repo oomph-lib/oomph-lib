@@ -65,22 +65,22 @@ namespace oomph
     /// wall
     /// - time_stepper_pt: Pointer to timestepper; defaults to Steady
     BrethertonSpineMesh(
-      const unsigned &nx1,
-      const unsigned &nx2,
-      const unsigned &nx3,
-      const unsigned &nh,
-      const unsigned &nhalf,
-      const double &h,
-      GeomObject *lower_wall_pt,
-      GeomObject *upper_wall_pt,
-      const double &zeta_start,
-      const double &zeta_transition_start,
-      const double &zeta_transition_end,
-      const double &zeta_end,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper);
+      const unsigned& nx1,
+      const unsigned& nx2,
+      const unsigned& nx3,
+      const unsigned& nh,
+      const unsigned& nhalf,
+      const double& h,
+      GeomObject* lower_wall_pt,
+      GeomObject* upper_wall_pt,
+      const double& zeta_start,
+      const double& zeta_transition_start,
+      const double& zeta_transition_end,
+      const double& zeta_end,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
     /// Access functions for pointers to interface elements
-    FiniteElement *&interface_element_pt(const unsigned long &i)
+    FiniteElement*& interface_element_pt(const unsigned long& i)
     {
       return Interface_element_pt[i];
     }
@@ -92,7 +92,7 @@ namespace oomph
     }
 
     /// Access functions for pointers to elements in bulk
-    FiniteElement *&bulk_element_pt(const unsigned long &i)
+    FiniteElement*& bulk_element_pt(const unsigned long& i)
     {
       return Bulk_element_pt[i];
     }
@@ -112,16 +112,16 @@ namespace oomph
     }
 
     /// Recalculate the spine lengths after repositioning
-    double find_distance_to_free_surface(GeomObject *const &fs_geom_object_pt,
-                                         Vector<double> &initial_zeta,
-                                         const Vector<double> &spine_base,
-                                         const Vector<double> &spine_end);
+    double find_distance_to_free_surface(GeomObject* const& fs_geom_object_pt,
+                                         Vector<double>& initial_zeta,
+                                         const Vector<double>& spine_base,
+                                         const Vector<double>& spine_end);
 
     /// Reposition the spines in response to changes in geometry
-    void reposition_spines(const double &zeta_lo_transition_start,
-                           const double &zeta_lo_transition_end,
-                           const double &zeta_up_transition_start,
-                           const double &zeta_up_transition_end);
+    void reposition_spines(const double& zeta_lo_transition_start,
+                           const double& zeta_lo_transition_end,
+                           const double& zeta_up_transition_start,
+                           const double& zeta_up_transition_end);
 
     /// Pin all spines so the mesh can be used for computation
     /// without free surfaces
@@ -137,7 +137,7 @@ namespace oomph
     /// \short General node update function implements pure virtual function
     /// defined in SpineMesh base class and performs specific update
     /// actions, depending on the node update fct id stored for each node.
-    void spine_node_update(SpineNode *spine_node_pt)
+    void spine_node_update(SpineNode* spine_node_pt)
     {
       unsigned id = spine_node_pt->node_update_fct_id();
       switch (id)
@@ -183,7 +183,7 @@ namespace oomph
     /// \short Pointer to control element (just under the symmetry line
     /// near the bubble tip, so the bubble tip is located at
     /// s=[1.0,1.0] in this element.
-    ELEMENT *control_element_pt()
+    ELEMENT* control_element_pt()
     {
       return Control_element_pt;
     }
@@ -195,7 +195,7 @@ namespace oomph
     }
 
     /// \short Set the pointer to the spine centre's vertial fraction
-    void set_spine_centre_fraction_pt(double *const &fraction_pt)
+    void set_spine_centre_fraction_pt(double* const& fraction_pt)
     {
       Spine_centre_fraction_pt = fraction_pt;
     }
@@ -203,7 +203,7 @@ namespace oomph
   protected:
     /// \short Update function for the deposited film region in the
     /// lower part of the domain: Vertical spines
-    void spine_node_update_film_lower(SpineNode *spine_node_pt)
+    void spine_node_update_film_lower(SpineNode* spine_node_pt)
     {
       // Get fraction along the spine
       double w = spine_node_pt->fraction();
@@ -225,7 +225,7 @@ namespace oomph
 
     /// \short Update function for the horizontal transitition region in the
     /// lower part of the domain: Spine points from wall to origin
-    void spine_node_update_horizontal_transition_lower(SpineNode *spine_node_pt)
+    void spine_node_update_horizontal_transition_lower(SpineNode* spine_node_pt)
     {
       // Get fraction along the spine
       double w = spine_node_pt->fraction();
@@ -270,7 +270,7 @@ namespace oomph
 
     /// \short Update function for the vertical transitition region in the
     /// lower part of the domain: Spine points to origin
-    void spine_node_update_vertical_transition_lower(SpineNode *spine_node_pt)
+    void spine_node_update_vertical_transition_lower(SpineNode* spine_node_pt)
     {
       // Get fraction along the spine
       double w = spine_node_pt->fraction();
@@ -326,7 +326,7 @@ namespace oomph
 
     /// \short Update function for the vertical transitition region in the
     /// upper part of the domain: Spine points to origin
-    void spine_node_update_vertical_transition_upper(SpineNode *spine_node_pt)
+    void spine_node_update_vertical_transition_upper(SpineNode* spine_node_pt)
     {
       // Get fraction along the spine
       double w = spine_node_pt->fraction();
@@ -382,7 +382,7 @@ namespace oomph
 
     /// \short Update function for the horizontal transitition region in the
     /// upper part of the domain: Spine points towards origin
-    void spine_node_update_horizontal_transition_upper(SpineNode *spine_node_pt)
+    void spine_node_update_horizontal_transition_upper(SpineNode* spine_node_pt)
     {
       // Get fraction along the spine
       double w = spine_node_pt->fraction();
@@ -428,7 +428,7 @@ namespace oomph
 
     /// \short Update function for the deposited film region in the
     /// upper part of the domain: Vertical spines
-    void spine_node_update_film_upper(SpineNode *spine_node_pt)
+    void spine_node_update_film_upper(SpineNode* spine_node_pt)
     {
       // Get fraction along the spine
       double w = spine_node_pt->fraction();
@@ -451,7 +451,7 @@ namespace oomph
     /// \short Update function for the nodes in the channel region ahead
     /// of the finger tip: Nodes are evenly distributed along vertical
     /// lines between the top and bottom walls
-    void spine_node_update_channel(SpineNode *spine_node_pt)
+    void spine_node_update_channel(SpineNode* spine_node_pt)
     {
       // Get fraction along the spine
       double w = spine_node_pt->fraction();
@@ -500,10 +500,10 @@ namespace oomph
     double H;
 
     /// Pointer to geometric object that represents the upper wall
-    GeomObject *Upper_wall_pt;
+    GeomObject* Upper_wall_pt;
 
     /// Pointer to geometric object that represents the lower wall
-    GeomObject *Lower_wall_pt;
+    GeomObject* Lower_wall_pt;
 
     /// Start coordinate on wall
     double Zeta_start;
@@ -518,7 +518,7 @@ namespace oomph
     double Zeta_transition_end;
 
     /// Pointer to vertical fraction of the spine centre
-    double *Spine_centre_fraction_pt;
+    double* Spine_centre_fraction_pt;
 
     /// Default spine fraction
     double Default_spine_centre_fraction;
@@ -526,13 +526,13 @@ namespace oomph
     /// \short Pointer to control element (just under the symmetry line
     /// near the bubble tip; the bubble tip is located at s=[1.0,1.0]
     /// in this element
-    ELEMENT *Control_element_pt;
+    ELEMENT* Control_element_pt;
 
     /// Vector of pointers to element in the fluid layer
-    Vector<FiniteElement *> Bulk_element_pt;
+    Vector<FiniteElement*> Bulk_element_pt;
 
     /// Vector of pointers to interface elements
-    Vector<FiniteElement *> Interface_element_pt;
+    Vector<FiniteElement*> Interface_element_pt;
   };
 
 } // namespace oomph

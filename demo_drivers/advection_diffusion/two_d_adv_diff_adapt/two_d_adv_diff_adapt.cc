@@ -58,19 +58,19 @@ namespace TanhSolnForAdvectionDiffusion
   double TanPhi;
 
   /// Exact solution as a Vector
-  void get_exact_u(const Vector<double> &x, Vector<double> &u)
+  void get_exact_u(const Vector<double>& x, Vector<double>& u)
   {
     u[0] = tanh(1.0 - Alpha * (TanPhi * x[0] - x[1]));
   }
 
   /// Exact solution as a scalar
-  void get_exact_u(const Vector<double> &x, double &u)
+  void get_exact_u(const Vector<double>& x, double& u)
   {
     u = tanh(1.0 - Alpha * (TanPhi * x[0] - x[1]));
   }
 
   /// Source function required to make the solution above an exact solution
-  void source_function(const Vector<double> &x_vect, double &source)
+  void source_function(const Vector<double>& x_vect, double& source)
   {
     double x = x_vect[0];
     double y = x_vect[1];
@@ -90,7 +90,7 @@ namespace TanhSolnForAdvectionDiffusion
   }
 
   /// Wind
-  void wind_function(const Vector<double> &x, Vector<double> &wind)
+  void wind_function(const Vector<double>& x, Vector<double>& wind)
   {
     wind[0] = sin(6.0 * x[1]);
     wind[1] = cos(6.0 * x[0]);
@@ -142,9 +142,9 @@ public:
   /// \short Overloaded version of the problem's access function to
   /// the mesh. Recasts the pointer to the base Mesh object to
   /// the actual mesh type.
-  RefineableRectangularQuadMesh<ELEMENT> *mesh_pt()
+  RefineableRectangularQuadMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<RefineableRectangularQuadMesh<ELEMENT> *>(
+    return dynamic_cast<RefineableRectangularQuadMesh<ELEMENT>*>(
       Problem::mesh_pt());
   }
 
@@ -217,7 +217,7 @@ RefineableAdvectionDiffusionProblem<ELEMENT>::
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the source function pointer
     el_pt->source_fct_pt() = Source_fct_pt;
@@ -254,7 +254,7 @@ void RefineableAdvectionDiffusionProblem<ELEMENT>::actions_before_newton_solve()
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Get pointer to node
-      Node *nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
+      Node* nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
 
       // Extract nodal coordinates from node:
       Vector<double> x(2);

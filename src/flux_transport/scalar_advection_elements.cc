@@ -37,8 +37,8 @@ namespace oomph
   /// \short Return the flux as a function of the unknowns
   //=========================================================
   template<unsigned DIM>
-  void ScalarAdvectionEquations<DIM>::flux(const Vector<double> &u,
-                                           DenseMatrix<double> &f)
+  void ScalarAdvectionEquations<DIM>::flux(const Vector<double>& u,
+                                           DenseMatrix<double>& f)
   {
     // Get the wind
     Vector<double> W(DIM);
@@ -58,8 +58,8 @@ namespace oomph
   /// \short Return the flux derivatives as a function of the unknowns
   //=====================================================================
   template<unsigned DIM>
-  void ScalarAdvectionEquations<DIM>::dflux_du(const Vector<double> &u,
-                                               RankThreeTensor<double> &df_du)
+  void ScalarAdvectionEquations<DIM>::dflux_du(const Vector<double>& u,
+                                               RankThreeTensor<double>& df_du)
   {
     const unsigned n_flux = this->nflux();
 

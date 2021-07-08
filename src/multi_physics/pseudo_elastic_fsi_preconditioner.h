@@ -68,7 +68,7 @@ namespace oomph
     /// \short constructor - just set defaults. Specify the spatial
     /// dimension of the fluid and a (non-const) problem pointer needed for
     /// the underlying NavierStokesSchurComplementPreconditioner.
-    PseudoElasticFSIPreconditioner(const unsigned &dim, Problem *problem_pt) :
+    PseudoElasticFSIPreconditioner(const unsigned& dim, Problem* problem_pt) :
       Dim(dim)
     {
       Use_navier_stokes_schur_complement_preconditioner = true;
@@ -129,7 +129,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    PseudoElasticFSIPreconditioner(const PseudoElasticFSIPreconditioner &)
+    PseudoElasticFSIPreconditioner(const PseudoElasticFSIPreconditioner&)
     {
       BrokenCopy::broken_copy("PseudoElasticFSIPreconditioner");
     }
@@ -152,29 +152,29 @@ namespace oomph
     void setup();
 
     ///  \short Apply the preconditioner
-    void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+    void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
     /// specify the mesh containing the combined fluid/pseudo solid elements
-    void set_fluid_and_pseudo_elastic_mesh_pt(Mesh *mesh_pt)
+    void set_fluid_and_pseudo_elastic_mesh_pt(Mesh* mesh_pt)
     {
       Fluid_and_pseudo_elastic_mesh_pt = mesh_pt;
     }
 
     /// specify the mesh containing the solid elements
-    void set_solid_mesh_pt(Mesh *mesh_pt)
+    void set_solid_mesh_pt(Mesh* mesh_pt)
     {
       Solid_mesh_pt = mesh_pt;
     }
 
     /// specify the mesh containing the lagrange multiplier elements
-    void set_lagrange_multiplier_mesh_pt(Mesh *mesh_pt)
+    void set_lagrange_multiplier_mesh_pt(Mesh* mesh_pt)
     {
       Lagrange_multiplier_mesh_pt = mesh_pt;
     }
 
     /// \short speicify a non default solid preconditioner. This preconditioner
     /// will not delete it
-    void set_solid_preconditioner(Preconditioner *prec_pt)
+    void set_solid_preconditioner(Preconditioner* prec_pt)
     {
       if (Using_default_solid_preconditioner)
       {
@@ -185,13 +185,13 @@ namespace oomph
     }
 
     /// Access function to the pseudo elastic subsidiary preconditioner
-    PseudoElasticPreconditioner *const pseudo_elastic_preconditioner_pt()
+    PseudoElasticPreconditioner* const pseudo_elastic_preconditioner_pt()
     {
       return Pseudo_elastic_preconditioner_pt;
     }
 
     /// Access function to the Navier Stokes Schur complement preconditioner.
-    NavierStokesSchurComplementPreconditioner *const navier_stokes_schur_complement_preconditioner_pt()
+    NavierStokesSchurComplementPreconditioner* const navier_stokes_schur_complement_preconditioner_pt()
     {
       return Navier_stokes_schur_complement_preconditioner_pt;
     }
@@ -212,17 +212,17 @@ namespace oomph
 
   private:
     /// \short pointer to the pseudo solid preconditioner
-    PseudoElasticPreconditioner *Pseudo_elastic_preconditioner_pt;
+    PseudoElasticPreconditioner* Pseudo_elastic_preconditioner_pt;
 
     /// \short pointer to the navier stokes precondtioner
-    Preconditioner *Navier_stokes_preconditioner_pt;
+    Preconditioner* Navier_stokes_preconditioner_pt;
 
     /// \short Navier Stokes Schur complement preconditioner.
-    NavierStokesSchurComplementPreconditioner
-      *Navier_stokes_schur_complement_preconditioner_pt;
+    NavierStokesSchurComplementPreconditioner*
+      Navier_stokes_schur_complement_preconditioner_pt;
 
     /// \short pointer to the solid preconditioner
-    Preconditioner *Solid_preconditioner_pt;
+    Preconditioner* Solid_preconditioner_pt;
 
     /// \short boolean flag to indicate whether default Solid preconditioner
     /// is used
@@ -233,25 +233,25 @@ namespace oomph
     bool Solid_preconditioner_is_block_preconditioner;
 
     /// fluid onto pseudosolid matrix vector operator
-    MatrixVectorProduct *Fluid_pseudo_elastic_matvec_pt;
+    MatrixVectorProduct* Fluid_pseudo_elastic_matvec_pt;
 
     /// solid onto fluid matrix vector operatio
-    MatrixVectorProduct *Solid_fluid_matvec_pt;
+    MatrixVectorProduct* Solid_fluid_matvec_pt;
 
     /// solid onto pseudo solid matrix vector operatio
-    MatrixVectorProduct *Solid_pseudo_elastic_matvec_pt;
+    MatrixVectorProduct* Solid_pseudo_elastic_matvec_pt;
 
     // lagrange onto solid matric vector product
-    MatrixVectorProduct *Lagrange_solid_matvec_pt;
+    MatrixVectorProduct* Lagrange_solid_matvec_pt;
 
     /// \short Mesh containing the combined fluid and pseudo solid element
-    Mesh *Fluid_and_pseudo_elastic_mesh_pt;
+    Mesh* Fluid_and_pseudo_elastic_mesh_pt;
 
     /// \short Mesh containing the solid elements
-    Mesh *Solid_mesh_pt;
+    Mesh* Solid_mesh_pt;
 
     /// \short Mesh containing the lagrange multiplier elements
-    Mesh *Lagrange_multiplier_mesh_pt;
+    Mesh* Lagrange_multiplier_mesh_pt;
 
     /// \short the dimension of the fluid
     unsigned Dim;

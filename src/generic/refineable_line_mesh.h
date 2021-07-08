@@ -63,13 +63,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    RefineableLineMesh(const RefineableLineMesh &dummy)
+    RefineableLineMesh(const RefineableLineMesh& dummy)
     {
       BrokenCopy::broken_copy("RefineableLineMesh");
     }
 
     /// Broken assignment operator
-    void operator=(const RefineableLineMesh &)
+    void operator=(const RefineableLineMesh&)
     {
       BrokenCopy::broken_assign("RefineableLineMesh");
     }
@@ -94,7 +94,7 @@ namespace oomph
 
       // Each finite element in the coarse base mesh gets associated with
       // (the root of) a BinaryTree. Store BinaryTreeRoots in vector:
-      Vector<TreeRoot *> trees_pt;
+      Vector<TreeRoot*> trees_pt;
 
       // Determine number of elements in mesh
       const unsigned n_element = this->nelement();
@@ -104,7 +104,7 @@ namespace oomph
       for (unsigned e = 0; e < n_element; e++)
       {
         // Get pointer to full element type
-        ELEMENT *el_pt = dynamic_cast<ELEMENT *>(this->element_pt(e));
+        ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->element_pt(e));
 
         // Build associated binary tree(root) -- pass pointer to corresponding
         // finite element and add the pointer to vector of binary tree (roots):

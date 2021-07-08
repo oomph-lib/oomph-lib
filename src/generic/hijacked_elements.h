@@ -70,13 +70,13 @@ namespace oomph
     }
 
     /// Return the value of the residual multiplier
-    inline const double &residual_multiplier() const
+    inline const double& residual_multiplier() const
     {
       return *Residual_multiplier_pt;
     }
 
     /// Return the pointer to the residual multiplier
-    inline double *&residual_multiplier_pt()
+    inline double*& residual_multiplier_pt()
     {
       return Residual_multiplier_pt;
     }
@@ -86,19 +86,19 @@ namespace oomph
     /// hijacked by this element. Note that these MUST be pointers because
     /// hijacking information is set BEFORE global equation numbers have
     /// been assigned.
-    std::set<long *> *Hijacked_global_eqn_number_pt;
+    std::set<long*>* Hijacked_global_eqn_number_pt;
 
     /// \short Pointer to  a vector of integers
     /// containing the local equation numbers of
     /// any hijacked variables in the element.
-    Vector<int> *Hijacked_local_eqn_number_pt;
+    Vector<int>* Hijacked_local_eqn_number_pt;
 
     /// \short Pointer to a double that multiplies the contribution to
     /// the residuals from the original element.
     /// This is usually used as a homotopy parameter to permit a smooth
     /// transition between different types of boundary conditions, rather than
     /// switching them on or off abruptly
-    double *Residual_multiplier_pt;
+    double* Residual_multiplier_pt;
 
     /// Static default value for the double that multiplies the original
     /// residuals
@@ -106,11 +106,11 @@ namespace oomph
 
     /// \short Mark the global equation, addressed by global_eqn_pt,
     /// as hijacked by this element.
-    void hijack_global_eqn(long *const &global_eqn_pt);
+    void hijack_global_eqn(long* const& global_eqn_pt);
 
     /// \short The global equation, addressed by global_eqn_pt,
     /// is no longer hijacked by this element.
-    void unhijack_global_eqn(long *const &global_eqn_pt);
+    void unhijack_global_eqn(long* const& global_eqn_pt);
   };
 
   //========================================================================
@@ -137,16 +137,16 @@ namespace oomph
     Hijacked() : ELEMENT(), HijackedElementBase() {}
 
     /// Constructor used for hijacking face elements
-    Hijacked(FiniteElement *const &element_pt, const int &face_index) :
+    Hijacked(FiniteElement* const& element_pt, const int& face_index) :
       ELEMENT(element_pt, face_index), HijackedElementBase()
     {
     }
 
     /// \short Constructor used for hijacking face elements with specification
     /// of ID of additional variables
-    Hijacked(FiniteElement *const &element_pt,
-             const int &face_index,
-             const unsigned &id = 0) :
+    Hijacked(FiniteElement* const& element_pt,
+             const int& face_index,
+             const unsigned& id = 0) :
       ELEMENT(element_pt, face_index, id), HijackedElementBase()
     {
     }
@@ -157,12 +157,12 @@ namespace oomph
     /// Note that the calling program assumes responsibility for this
     /// data object and must clean it up. The default is that
     /// the data object is returned
-    Data *hijack_internal_value(const unsigned &n,
-                                const unsigned &i,
-                                const bool &return_data = true)
+    Data* hijack_internal_value(const unsigned& n,
+                                const unsigned& i,
+                                const bool& return_data = true)
     {
       // Initialise pointer to zero
-      Data *temp_data_pt = 0;
+      Data* temp_data_pt = 0;
 
       // If desired,
       // Create a new Data object containing only the value that is to be
@@ -184,12 +184,12 @@ namespace oomph
     /// the hijacked value. Note that the calling program assumes
     /// responsibility for this data object and must clean it up.
     /// The default is that the data object is returned
-    Data *hijack_external_value(const unsigned &n,
-                                const unsigned &i,
-                                const bool &return_data = true)
+    Data* hijack_external_value(const unsigned& n,
+                                const unsigned& i,
+                                const bool& return_data = true)
     {
       // Initialise pointer to zero
-      Data *temp_data_pt = 0;
+      Data* temp_data_pt = 0;
       // If desired
       // create a new Data object containing only the value that is to be
       // hijacked
@@ -210,12 +210,12 @@ namespace oomph
     /// the hijacked value. Once again, the calling program must
     /// clean up the allocated Data object.
     /// The default is that the data object is returned
-    Data *hijack_nodal_value(const unsigned &n,
-                             const unsigned &i,
-                             const bool &return_data = true)
+    Data* hijack_nodal_value(const unsigned& n,
+                             const unsigned& i,
+                             const bool& return_data = true)
     {
       // Initialise pointer to zero
-      Data *temp_data_pt = 0;
+      Data* temp_data_pt = 0;
       // If desired
       // create a new Data object containing only the value that is to be
       // hijacked
@@ -236,12 +236,12 @@ namespace oomph
     /// the hijacked value. Again, responsibility for the memory allocated
     /// lies with the calling function.
     /// The default is that the data object is returned
-    Data *hijack_nodal_position_value(const unsigned &n,
-                                      const unsigned &i,
-                                      const bool &return_data = true)
+    Data* hijack_nodal_position_value(const unsigned& n,
+                                      const unsigned& i,
+                                      const bool& return_data = true)
     {
       // Can we do the casting?
-      SolidNode *solid_node_pt = dynamic_cast<SolidNode *>(this->node_pt(n));
+      SolidNode* solid_node_pt = dynamic_cast<SolidNode*>(this->node_pt(n));
       if (solid_node_pt == 0)
       {
         std::string error_message = "Failed to cast to SolidNode\n ";
@@ -252,7 +252,7 @@ namespace oomph
       }
 
       // Initialise pointer to zero
-      Data *temp_data_pt = 0;
+      Data* temp_data_pt = 0;
       // If desired
       // create a new Data object containing only the value that is to be
       // hijacked
@@ -275,12 +275,12 @@ namespace oomph
     /// Optionally return a custom-made (copied) data object that contains only
     /// the hijacked value. Deletion must be handled at the higher level
     /// The default is that the data object is returned
-    Data *hijack_nodal_spine_value(const unsigned &n,
-                                   const unsigned &i,
-                                   const bool &return_data = true)
+    Data* hijack_nodal_spine_value(const unsigned& n,
+                                   const unsigned& i,
+                                   const bool& return_data = true)
     {
       // Can we actually do this casting
-      SpineNode *spine_node_pt = dynamic_cast<SpineNode *>(this->node_pt(n));
+      SpineNode* spine_node_pt = dynamic_cast<SpineNode*>(this->node_pt(n));
       if (spine_node_pt == 0)
       {
         std::string error_message = "Failed to cast to SpineNode\n ";
@@ -291,7 +291,7 @@ namespace oomph
       }
 
       // Initialise pointer to zero
-      Data *temp_data_pt = 0;
+      Data* temp_data_pt = 0;
       // If desired
       // create a new Data object containing only the value that is to be
       // hijacked
@@ -313,7 +313,7 @@ namespace oomph
     /// then set up the local arrays to hold the hijacked variables.
     /// If the boolean argument is true then pointers to the associated degrees
     /// of freedom are stored in the array Dof_pt
-    void assign_local_eqn_numbers(const bool &store_local_dof_pt)
+    void assign_local_eqn_numbers(const bool& store_local_dof_pt)
     {
       // If things have already been allocated,
       // clear the local hijacked array, so that if the equation numbers
@@ -343,7 +343,7 @@ namespace oomph
         for (unsigned i = 0; i < n_dof; i++)
         {
           // Loop over *all* hijacked data
-          for (std::set<long *>::iterator it =
+          for (std::set<long*>::iterator it =
                  Hijacked_global_eqn_number_pt->begin();
                it != Hijacked_global_eqn_number_pt->end();
                ++it)
@@ -371,7 +371,7 @@ namespace oomph
     /// \short Get the residuals from the underlying element, but then wipe the
     /// entries in the residual vector that correspond to hijacked
     /// values -- they will be computed by other elements.
-    void get_residuals(Vector<double> &residuals)
+    void get_residuals(Vector<double>& residuals)
     {
       // Get parent redisuals
       ELEMENT::get_residuals(residuals);
@@ -388,7 +388,7 @@ namespace oomph
     /// element, but then wipe the entries in the residual vector and the
     /// rows in the Jacobian matrix that correspond to hijacked
     /// values -- they will be computed by other elements.
-    void get_jacobian(Vector<double> &residuals, DenseMatrix<double> &jacobian)
+    void get_jacobian(Vector<double>& residuals, DenseMatrix<double>& jacobian)
     {
       // Call the element's get jacobian function
       ELEMENT::get_jacobian(residuals, jacobian);

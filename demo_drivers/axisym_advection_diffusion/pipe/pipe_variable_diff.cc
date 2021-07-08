@@ -61,7 +61,7 @@ namespace Global_Physical_Variables
   double Radius = 1.0;
 
   /// Wind
-  void wind_function(const Vector<double> &x, Vector<double> &wind)
+  void wind_function(const Vector<double>& x, Vector<double>& wind)
   {
     // Poiseulle flow no radial flow, but quadratic axial flow
     // plus a possible swirl component which will do nothing
@@ -75,7 +75,7 @@ namespace Global_Physical_Variables
   // Conserved bit (the swimming velocity)
   // You can include three velocity components but only two will
   // matter in the axisymmetric advection-diffusion equations
-  void swimming(const Vector<double> &x, Vector<double> &swim)
+  void swimming(const Vector<double>& x, Vector<double>& swim)
   {
     // Radial direction
     swim[0] = 0.0;
@@ -87,7 +87,7 @@ namespace Global_Physical_Variables
 
   /// Diffusivity tensor (again 3x3 but only the upper 2x2 block affects
   /// the axisymmetric advection diffusion equations)
-  void diff_function(const Vector<double> &x, DenseMatrix<double> &D)
+  void diff_function(const Vector<double>& x, DenseMatrix<double>& D)
   {
     // Radial component
     D(0, 0) = 0.5;
@@ -136,9 +136,9 @@ public:
   /// \short Overloaded version of the problem's access function to
   /// the mesh. Recasts the pointer to the base Mesh object to
   /// the actual mesh type.
-  RefineableRectangularQuadMesh<ELEMENT> *mesh_pt()
+  RefineableRectangularQuadMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<RefineableRectangularQuadMesh<ELEMENT> *>(
+    return dynamic_cast<RefineableRectangularQuadMesh<ELEMENT>*>(
       Problem::mesh_pt());
   }
 
@@ -197,16 +197,16 @@ RefineableAdvectionDiffusionPipeProblem<
 
   // Get pointers to tree roots associated with elements on the
   // top and bottom  boundaries
-  Vector<TreeRoot *> top_root_pt(n_r);
-  Vector<TreeRoot *> bottom_root_pt(n_r);
+  Vector<TreeRoot*> top_root_pt(n_r);
+  Vector<TreeRoot*> bottom_root_pt(n_r);
   for (unsigned i = 0; i < n_r; i++)
   {
     top_root_pt[i] =
-      dynamic_cast<ELEMENT *>(mesh_pt()->element_pt((n_z - 1) * n_r + i))
+      dynamic_cast<ELEMENT*>(mesh_pt()->element_pt((n_z - 1) * n_r + i))
         ->tree_pt()
         ->root_pt();
     bottom_root_pt[i] =
-      dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i))->tree_pt()->root_pt();
+      dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i))->tree_pt()->root_pt();
   }
 
   // Switch on QuadTreeNames for enumeration of directions
@@ -238,7 +238,7 @@ RefineableAdvectionDiffusionPipeProblem<
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the wind function pointer
     el_pt->wind_fct_pt() = Global_Physical_Variables::wind_function;
@@ -271,7 +271,7 @@ void RefineableAdvectionDiffusionPipeProblem<ELEMENT>::set_initial_condition()
   unsigned n_node = mesh_pt()->nnode();
   for (unsigned n = 0; n < n_node; n++)
   {
-    Node *nod_pt = mesh_pt()->node_pt(n);
+    Node* nod_pt = mesh_pt()->node_pt(n);
     double r = nod_pt->x(0);
     double z = nod_pt->x(1);
 

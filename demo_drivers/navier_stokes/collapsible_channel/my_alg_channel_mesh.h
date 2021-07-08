@@ -54,16 +54,16 @@ namespace oomph
     /// GeomObject that defines the collapsible segment, and pointer to
     /// TimeStepper (defaults to the default timestepper, Steady).
     MyAlgebraicCollapsibleChannelMesh(
-      const unsigned &nup,
-      const unsigned &ncollapsible,
-      const unsigned &ndown,
-      const unsigned &ny,
-      const double &lup,
-      const double &lcollapsible,
-      const double &ldown,
-      const double &ly,
-      GeomObject *wall_pt,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      const unsigned& nup,
+      const unsigned& ncollapsible,
+      const unsigned& ndown,
+      const unsigned& ny,
+      const double& lup,
+      const double& lcollapsible,
+      const double& ldown,
+      const double& ly,
+      GeomObject* wall_pt,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       CollapsibleChannelMesh<ELEMENT>(nup,
                                       ncollapsible,
                                       ndown,
@@ -86,17 +86,17 @@ namespace oomph
     /// to "boundary layer squash function", and pointer to
     /// TimeStepper (defaults to the default timestepper, Steady).
     MyAlgebraicCollapsibleChannelMesh(
-      const unsigned &nup,
-      const unsigned &ncollapsible,
-      const unsigned &ndown,
-      const unsigned &ny,
-      const double &lup,
-      const double &lcollapsible,
-      const double &ldown,
-      const double &ly,
-      GeomObject *wall_pt,
+      const unsigned& nup,
+      const unsigned& ncollapsible,
+      const unsigned& ndown,
+      const unsigned& ny,
+      const double& lup,
+      const double& lcollapsible,
+      const double& ldown,
+      const double& ly,
+      GeomObject* wall_pt,
       CollapsibleChannelDomain::BLSquashFctPt bl_squash_function_pt,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       CollapsibleChannelMesh<ELEMENT>(nup,
                                       ncollapsible,
                                       ndown,
@@ -127,7 +127,7 @@ namespace oomph
     /// used in underlying CollapsibleChannelDomain.
     /// This (deliberately broken) function overloads the one
     /// in the CollapsibleChannelMesh base class.
-    CollapsibleChannelDomain::BLSquashFctPt &bl_squash_fct_pt()
+    CollapsibleChannelDomain::BLSquashFctPt& bl_squash_fct_pt()
     {
       std::ostringstream error_message;
       error_message
@@ -146,12 +146,12 @@ namespace oomph
 
     /// \short Update nodal position at time level t (t=0: present;
     /// t>0: previous)
-    void algebraic_node_update(const unsigned &t, AlgebraicNode *&node_pt);
+    void algebraic_node_update(const unsigned& t, AlgebraicNode*& node_pt);
 
     /// \short Update the geometric references that are used
     /// to update node after mesh adaptation.
     /// Empty -- no update of node update required
-    void update_node_update(AlgebraicNode *&node_pt) {}
+    void update_node_update(AlgebraicNode*& node_pt) {}
 
   protected:
     /// Function to setup the algebraic node update
@@ -182,16 +182,16 @@ namespace oomph
     /// to "boundary layer squash function", and pointer to
     /// TimeStepper (defaults to the default timestepper, Steady).
     MyRefineableAlgebraicCollapsibleChannelMesh(
-      const unsigned &nup,
-      const unsigned &ncollapsible,
-      const unsigned &ndown,
-      const unsigned &ny,
-      const double &lup,
-      const double &lcollapsible,
-      const double &ldown,
-      const double &ly,
-      GeomObject *wall_pt,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      const unsigned& nup,
+      const unsigned& ncollapsible,
+      const unsigned& ndown,
+      const unsigned& ny,
+      const double& lup,
+      const double& lcollapsible,
+      const double& ldown,
+      const double& ly,
+      GeomObject* wall_pt,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       CollapsibleChannelMesh<ELEMENT>(nup,
                                       ncollapsible,
                                       ndown,
@@ -224,17 +224,17 @@ namespace oomph
     /// to "boundary layer squash function",  and pointer to
     /// TimeStepper (defaults to the default timestepper, Steady).
     MyRefineableAlgebraicCollapsibleChannelMesh(
-      const unsigned &nup,
-      const unsigned &ncollapsible,
-      const unsigned &ndown,
-      const unsigned &ny,
-      const double &lup,
-      const double &lcollapsible,
-      const double &ldown,
-      const double &ly,
-      GeomObject *wall_pt,
+      const unsigned& nup,
+      const unsigned& ncollapsible,
+      const unsigned& ndown,
+      const unsigned& ny,
+      const double& lup,
+      const double& lcollapsible,
+      const double& ldown,
+      const double& ly,
+      GeomObject* wall_pt,
       CollapsibleChannelDomain::BLSquashFctPt bl_squash_function_pt,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       CollapsibleChannelMesh<ELEMENT>(nup,
                                       ncollapsible,
                                       ndown,
@@ -278,7 +278,7 @@ namespace oomph
     for (unsigned j = 0; j < nnod; j++)
     {
       // Get pointer to node
-      AlgebraicNode *nod_pt = node_pt(j);
+      AlgebraicNode* nod_pt = node_pt(j);
 
       // Get coordinates
       double x = nod_pt->x(0);
@@ -316,7 +316,7 @@ namespace oomph
 
         // Only a single geometric object is involved in the node update
         // operation
-        Vector<GeomObject *> geom_object_pt(1);
+        Vector<GeomObject*> geom_object_pt(1);
 
         // The wall geometric object
         geom_object_pt[0] = this->Wall_pt;
@@ -351,13 +351,13 @@ namespace oomph
   //=================================================================
   template<class ELEMENT>
   void MyAlgebraicCollapsibleChannelMesh<ELEMENT>::algebraic_node_update(
-    const unsigned &t, AlgebraicNode *&node_pt)
+    const unsigned& t, AlgebraicNode*& node_pt)
   {
     // Extract reference values for update by copy construction
     Vector<double> ref_value(node_pt->vector_ref_value());
 
     // Extract geometric objects for update by copy construction
-    Vector<GeomObject *> geom_object_pt(node_pt->vector_geom_object_pt());
+    Vector<GeomObject*> geom_object_pt(node_pt->vector_geom_object_pt());
 
     // First reference value: Original x-position
     double x_bottom = ref_value[0];
@@ -372,7 +372,7 @@ namespace oomph
     zeta[0] = ref_value[2];
 
     // Pointer to wall geom object
-    GeomObject *wall_pt = geom_object_pt[0];
+    GeomObject* wall_pt = geom_object_pt[0];
 
     // Get position vector to wall at previous timestep t
     Vector<double> r_wall(2);

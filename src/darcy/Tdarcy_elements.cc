@@ -78,8 +78,8 @@ namespace oomph
   /// Compute the local form of the q basis at local coordinate s
   //===========================================================================
   template<>
-  void TRaviartThomasDarcyElement<0>::get_q_basis_local(const Vector<double> &s,
-                                                        Shape &q_basis) const
+  void TRaviartThomasDarcyElement<0>::get_q_basis_local(const Vector<double>& s,
+                                                        Shape& q_basis) const
   {
     // RT_0 basis functions
     q_basis(0, 0) = Sign_edge[0] * std::sqrt(2) * s[0];
@@ -97,7 +97,7 @@ namespace oomph
   //===========================================================================
   template<>
   void TRaviartThomasDarcyElement<0>::get_div_q_basis_local(
-    const Vector<double> &s, Shape &div_q_basis_ds) const
+    const Vector<double>& s, Shape& div_q_basis_ds) const
   {
     div_q_basis_ds(0) = Sign_edge[0] * 2 * std::sqrt(2);
     div_q_basis_ds(1) = Sign_edge[1] * 2;
@@ -123,7 +123,7 @@ namespace oomph
   /// Return the equation number of the n-th pressure degree of freedom
   //===========================================================================
   template<>
-  int TRaviartThomasDarcyElement<0>::p_local_eqn(const unsigned &n) const
+  int TRaviartThomasDarcyElement<0>::p_local_eqn(const unsigned& n) const
   {
     return this->internal_local_eqn(P_internal_data_index, n);
   }
@@ -132,7 +132,7 @@ namespace oomph
   /// Return the nth pressure value
   //===========================================================================
   template<>
-  double TRaviartThomasDarcyElement<0>::p_value(const unsigned &n) const
+  double TRaviartThomasDarcyElement<0>::p_value(const unsigned& n) const
   {
     return this->internal_data_pt(P_internal_data_index)->value(n);
   }
@@ -150,8 +150,8 @@ namespace oomph
   /// Compute the pressure basis
   //===========================================================================
   template<>
-  void TRaviartThomasDarcyElement<0>::get_p_basis(const Vector<double> &s,
-                                                  Shape &p_basis) const
+  void TRaviartThomasDarcyElement<0>::get_p_basis(const Vector<double>& s,
+                                                  Shape& p_basis) const
   {
     p_basis(0) = 1.0;
   }
@@ -245,8 +245,8 @@ namespace oomph
   /// Compute the local form of the q basis at local coordinate s
   //===========================================================================
   template<>
-  void TRaviartThomasDarcyElement<1>::get_q_basis_local(const Vector<double> &s,
-                                                        Shape &q_basis) const
+  void TRaviartThomasDarcyElement<1>::get_q_basis_local(const Vector<double>& s,
+                                                        Shape& q_basis) const
   {
     // RT_1 basis functions
 
@@ -296,7 +296,7 @@ namespace oomph
   //===========================================================================
   template<>
   void TRaviartThomasDarcyElement<1>::get_div_q_basis_local(
-    const Vector<double> &s, Shape &div_q_basis_ds) const
+    const Vector<double>& s, Shape& div_q_basis_ds) const
   {
     Vector<double> g1_vect = edge_flux_interpolation_point(0, 0);
     Vector<double> g2_vect = edge_flux_interpolation_point(0, 1);
@@ -343,7 +343,7 @@ namespace oomph
   /// Return the equation number of the n-th pressure degree of freedom
   //===========================================================================
   template<>
-  int TRaviartThomasDarcyElement<1>::p_local_eqn(const unsigned &n) const
+  int TRaviartThomasDarcyElement<1>::p_local_eqn(const unsigned& n) const
   {
     return this->internal_local_eqn(P_internal_data_index, n);
   }
@@ -352,7 +352,7 @@ namespace oomph
   /// Return the nth pressure value
   //===========================================================================
   template<>
-  double TRaviartThomasDarcyElement<1>::p_value(const unsigned &n) const
+  double TRaviartThomasDarcyElement<1>::p_value(const unsigned& n) const
   {
     return this->internal_data_pt(P_internal_data_index)->value(n);
   }
@@ -370,8 +370,8 @@ namespace oomph
   /// Compute the pressure basis
   //===========================================================================
   template<>
-  void TRaviartThomasDarcyElement<1>::get_p_basis(const Vector<double> &s,
-                                                  Shape &p_basis) const
+  void TRaviartThomasDarcyElement<1>::get_p_basis(const Vector<double>& s,
+                                                  Shape& p_basis) const
   {
     p_basis(0) = 1.0;
     p_basis(1) = s[0];

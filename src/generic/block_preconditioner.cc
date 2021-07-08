@@ -51,7 +51,7 @@ namespace oomph
   //============================================================================
   template<typename MATRIX>
   void BlockPreconditioner<MATRIX>::block_setup(
-    const Vector<unsigned> &dof_to_block_map_in)
+    const Vector<unsigned>& dof_to_block_map_in)
   {
 #ifdef PARANOID
     // Subsidiary preconditioners don't really need the meshes
@@ -807,10 +807,10 @@ namespace oomph
     // start of master block preconditioner only operations
     /////////////////////////////////////////////////////////////////////////////
 #ifdef OOMPH_HAS_MPI
-    unsigned *nreq_sparse = new unsigned[nproc]();
-    unsigned *nreq_sparse_for_proc = new unsigned[nproc]();
-    unsigned **index_in_dof_block_sparse_send = new unsigned *[nproc]();
-    unsigned **dof_number_sparse_send = new unsigned *[nproc]();
+    unsigned* nreq_sparse = new unsigned[nproc]();
+    unsigned* nreq_sparse_for_proc = new unsigned[nproc]();
+    unsigned** index_in_dof_block_sparse_send = new unsigned*[nproc]();
+    unsigned** dof_number_sparse_send = new unsigned*[nproc]();
     Vector<MPI_Request> send_requests_sparse;
     Vector<MPI_Request> recv_requests_sparse;
 #endif
@@ -828,10 +828,10 @@ namespace oomph
       }
       // Setup the distribution of this preconditioner, assumed to be the same
       // as the matrix if the matrix is distributable.
-      if (dynamic_cast<DistributableLinearAlgebraObject *>(matrix_pt()))
+      if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt()))
       {
         this->build_distribution(
-          dynamic_cast<DistributableLinearAlgebraObject *>(matrix_pt())
+          dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt())
             ->distribution_pt());
       }
       else
@@ -848,8 +848,7 @@ namespace oomph
          this->distribution_pt()->communicator_pt()->nproc() > 1);
 
       // Matrix must be a CR matrix.
-      CRDoubleMatrix *cr_matrix_pt =
-        dynamic_cast<CRDoubleMatrix *>(matrix_pt());
+      CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt());
 
       if (cr_matrix_pt == 0)
       {
@@ -887,7 +886,7 @@ namespace oomph
       if (matrix_distributed)
       {
         unsigned nnz = cr_matrix_pt->nnz();
-        int *column_index = cr_matrix_pt->column_index();
+        int* column_index = cr_matrix_pt->column_index();
         for (unsigned i = 0; i < nnz; i++)
         {
           unsigned ci = column_index[i];
@@ -1189,8 +1188,8 @@ namespace oomph
 
         // next copy the map of my dofs to two vectors to send
         unsigned my_ndof = my_dof_map.size();
-        unsigned long *my_global_dofs = new unsigned long[my_ndof];
-        unsigned *my_dof_numbers = new unsigned[my_ndof];
+        unsigned long* my_global_dofs = new unsigned long[my_ndof];
+        unsigned* my_dof_numbers = new unsigned[my_ndof];
         typedef std::map<unsigned long, unsigned>::iterator IT;
         unsigned pt = 0;
         for (IT it = my_dof_map.begin(); it != my_dof_map.end(); it++)
@@ -1204,8 +1203,8 @@ namespace oomph
         my_dof_map.clear();
 
         // count up how many DOFs need to be sent to each processor
-        int *first_dof_to_send = new int[nproc];
-        int *ndof_to_send = new int[nproc];
+        int* first_dof_to_send = new int[nproc];
+        int* ndof_to_send = new int[nproc];
         unsigned ptr = 0;
         for (unsigned p = 0; p < nproc; p++)
         {
@@ -1226,7 +1225,7 @@ namespace oomph
         }
 
         // next communicate to each processor how many dofs it expects to recv
-        int *ndof_to_recv = new int[nproc];
+        int* ndof_to_recv = new int[nproc];
         MPI_Alltoall(ndof_to_send,
                      1,
                      MPI_INT,
@@ -1248,8 +1247,8 @@ namespace oomph
         // next send and recv
         Vector<MPI_Request> send_requests;
         Vector<MPI_Request> recv_requests;
-        Vector<unsigned long *> global_dofs_recv(nproc, 0);
-        Vector<unsigned *> dof_numbers_recv(nproc, 0);
+        Vector<unsigned long*> global_dofs_recv(nproc, 0);
+        Vector<unsigned*> dof_numbers_recv(nproc, 0);
         Vector<unsigned> proc;
         for (unsigned p = 0; p < nproc; p++)
         {
@@ -1439,7 +1438,7 @@ namespace oomph
 #endif
       }
 #ifdef OOMPH_HAS_MPI
-      Vector<unsigned *> sparse_rows_for_proc(nproc, 0);
+      Vector<unsigned*> sparse_rows_for_proc(nproc, 0);
       Vector<MPI_Request> sparse_rows_for_proc_requests;
       if (matrix_distributed)
       {
@@ -1497,7 +1496,7 @@ namespace oomph
 
         // first compute how many instances of each dof are on this
         // processor
-        unsigned *my_nrows_in_dof_block = new unsigned[Internal_ndof_types];
+        unsigned* my_nrows_in_dof_block = new unsigned[Internal_ndof_types];
         for (unsigned i = 0; i < Internal_ndof_types; i++)
         {
           my_nrows_in_dof_block[i] = 0;
@@ -1508,7 +1507,7 @@ namespace oomph
         }
 
         // next share the data
-        unsigned *nrow_in_dof_block_recv =
+        unsigned* nrow_in_dof_block_recv =
           new unsigned[Internal_ndof_types * nproc];
         MPI_Allgather(my_nrows_in_dof_block,
                       Internal_ndof_types,
@@ -1739,8 +1738,8 @@ namespace oomph
         // parent preconditioner level, not the most fine grain level).
         const unsigned ncoarsened_dofs_in_dof_i =
           Doftype_coarsen_map_coarse[dof_i].size();
-        Vector<LinearAlgebraDistribution *> tmp_dist_pt(
-          ncoarsened_dofs_in_dof_i, 0);
+        Vector<LinearAlgebraDistribution*> tmp_dist_pt(ncoarsened_dofs_in_dof_i,
+                                                       0);
         for (unsigned parent_dof_i = 0; parent_dof_i < ncoarsened_dofs_in_dof_i;
              parent_dof_i++)
         {
@@ -1777,7 +1776,7 @@ namespace oomph
            super_block_i++)
       {
         unsigned sub_block_size = Block_to_dof_map_coarse[super_block_i].size();
-        Vector<LinearAlgebraDistribution *> tmp_dist_pt(sub_block_size, 0);
+        Vector<LinearAlgebraDistribution*> tmp_dist_pt(sub_block_size, 0);
 
         for (unsigned sub_block_i = 0; sub_block_i < sub_block_size;
              sub_block_i++)
@@ -1835,7 +1834,7 @@ namespace oomph
       // Now iterate through Auxiliary_block_distribution_pt and delete
       // everything except for the value which corresponds to
       // preconditioner_matrix_key.
-      std::map<Vector<unsigned>, LinearAlgebraDistribution *>::iterator iter =
+      std::map<Vector<unsigned>, LinearAlgebraDistribution*>::iterator iter =
         Auxiliary_block_distribution_pt.begin();
       while (iter != Auxiliary_block_distribution_pt.end())
       {
@@ -1927,7 +1926,7 @@ namespace oomph
 #ifdef OOMPH_HAS_MPI
 
       // the pointer to the master distribution
-      const LinearAlgebraDistribution *master_distribution_pt =
+      const LinearAlgebraDistribution* master_distribution_pt =
         this->master_distribution_pt();
 
       // resize the nrows... storage
@@ -1973,8 +1972,8 @@ namespace oomph
       Nrows_to_recv_for_get_ordered.initialise(0);
 
       // next we send the number of rows that will be sent by this processor
-      Vector<unsigned *> nrows_to_send(nproc, 0);
-      Vector<unsigned *> nrows_to_recv(nproc, 0);
+      Vector<unsigned*> nrows_to_send(nproc, 0);
+      Vector<unsigned*> nrows_to_recv(nproc, 0);
       Vector<MPI_Request> send_requests_nrow;
       Vector<MPI_Request> recv_requests_nrow;
       Vector<unsigned> proc;
@@ -2025,8 +2024,8 @@ namespace oomph
 
       // create some temporary storage for the global row indices that will
       // be received from another processor.
-      DenseMatrix<int *> block_rows_to_send(Internal_nblock_types, nproc, 0);
-      Vector<int *> ordered_rows_to_send(nproc, 0);
+      DenseMatrix<int*> block_rows_to_send(Internal_nblock_types, nproc, 0);
+      Vector<int*> ordered_rows_to_send(nproc, 0);
 
       // resize the rows... storage
       Rows_to_send_for_get_block.resize(Internal_nblock_types, nproc);
@@ -2366,8 +2365,8 @@ namespace oomph
   //============================================================================
   template<typename MATRIX>
   void BlockPreconditioner<MATRIX>::turn_into_subsidiary_block_preconditioner(
-    BlockPreconditioner<MATRIX> *master_block_prec_pt,
-    const Vector<unsigned> &doftype_in_master_preconditioner_coarse)
+    BlockPreconditioner<MATRIX>* master_block_prec_pt,
+    const Vector<unsigned>& doftype_in_master_preconditioner_coarse)
   {
     // Create the identity dof_coarsen_map
     Vector<Vector<unsigned>> doftype_coarsen_map_coarse;
@@ -2444,9 +2443,9 @@ namespace oomph
   //============================================================================
   template<typename MATRIX>
   void BlockPreconditioner<MATRIX>::turn_into_subsidiary_block_preconditioner(
-    BlockPreconditioner<MATRIX> *master_block_prec_pt,
-    const Vector<unsigned> &doftype_in_master_preconditioner_coarse,
-    const Vector<Vector<unsigned>> &doftype_coarsen_map_coarse)
+    BlockPreconditioner<MATRIX>* master_block_prec_pt,
+    const Vector<unsigned>& doftype_in_master_preconditioner_coarse,
+    const Vector<Vector<unsigned>>& doftype_coarsen_map_coarse)
   {
     // Set the master block preconditioner pointer
     Master_block_preconditioner_pt = master_block_prec_pt;
@@ -2524,8 +2523,8 @@ namespace oomph
   //============================================================================
   template<typename MATRIX>
   void BlockPreconditioner<MATRIX>::get_blocks(
-    DenseMatrix<bool> &required_blocks,
-    DenseMatrix<MATRIX *> &block_matrix_pt) const
+    DenseMatrix<bool>& required_blocks,
+    DenseMatrix<MATRIX*>& block_matrix_pt) const
   {
     // Cache number of block types
     const unsigned n_block_types = nblock_types();
@@ -2595,9 +2594,9 @@ namespace oomph
   //============================================================================
   template<typename MATRIX>
   void BlockPreconditioner<MATRIX>::get_concatenated_block_vector(
-    const Vector<unsigned> &block_vec_number,
-    const DoubleVector &v,
-    DoubleVector &w)
+    const Vector<unsigned>& block_vec_number,
+    const DoubleVector& v,
+    DoubleVector& w)
   {
 #ifdef PARANOID
 
@@ -2710,8 +2709,7 @@ namespace oomph
     // store it for future use. We store it because concatenation of
     // distributions requires communication, so concatenation of
     // distributions on-the-fly should be avoided.
-    std::map<Vector<unsigned>, LinearAlgebraDistribution *>::const_iterator
-      iter;
+    std::map<Vector<unsigned>, LinearAlgebraDistribution*>::const_iterator iter;
 
     // Attempt to get an iterator pointing to the pair with the value
     // block_vec_number.
@@ -2727,7 +2725,7 @@ namespace oomph
     // Else, we need to create the distribution and store it in
     // Auxiliary_block_distribution_pt.
     {
-      Vector<LinearAlgebraDistribution *> tmp_vec_dist_pt(n_block, 0);
+      Vector<LinearAlgebraDistribution*> tmp_vec_dist_pt(n_block, 0);
       for (unsigned b = 0; b < n_block; b++)
       {
         tmp_vec_dist_pt[b] = Block_distribution_pt[block_vec_number[b]];
@@ -2735,7 +2733,7 @@ namespace oomph
 
       // Note that the distribution is created with new but not deleted here.
       // This is handled in the clean up functions.
-      LinearAlgebraDistribution *tmp_dist_pt = new LinearAlgebraDistribution;
+      LinearAlgebraDistribution* tmp_dist_pt = new LinearAlgebraDistribution;
       LinearAlgebraDistributionHelpers::concatenate(tmp_vec_dist_pt,
                                                     *tmp_dist_pt);
 
@@ -2762,9 +2760,9 @@ namespace oomph
   //============================================================================
   template<typename MATRIX>
   void BlockPreconditioner<MATRIX>::return_concatenated_block_vector(
-    const Vector<unsigned> &block_vec_number,
-    const DoubleVector &w,
-    DoubleVector &v) const
+    const Vector<unsigned>& block_vec_number,
+    const DoubleVector& w,
+    DoubleVector& v) const
   {
 #ifdef PARANOID
 
@@ -2853,7 +2851,7 @@ namespace oomph
     // the distribution from w.
     // Recall that w is the concatenation of the block vectors defined by
     // the values in block_vec_number. We check that this is the case.
-    Vector<LinearAlgebraDistribution *> para_vec_dist_pt(
+    Vector<LinearAlgebraDistribution*> para_vec_dist_pt(
       para_block_vec_number_size, 0);
 
     for (unsigned b = 0; b < para_block_vec_number_size; b++)
@@ -2927,9 +2925,9 @@ namespace oomph
   //============================================================================
   template<typename MATRIX>
   void BlockPreconditioner<MATRIX>::get_block_vectors(
-    const Vector<unsigned> &block_vec_number,
-    const DoubleVector &v,
-    Vector<DoubleVector> &s) const
+    const Vector<unsigned>& block_vec_number,
+    const DoubleVector& v,
+    Vector<DoubleVector>& s) const
   {
 #ifdef PARANOID
 
@@ -3060,7 +3058,7 @@ namespace oomph
       // Concatenate the relevant dof vectors into s[b].
       {
         s[b].build(Block_distribution_pt[mapped_b], 0);
-        Vector<DoubleVector *> tmp_vec_pt(n_dof, 0);
+        Vector<DoubleVector*> tmp_vec_pt(n_dof, 0);
         for (unsigned vec_i = 0; vec_i < n_dof; vec_i++)
         {
           tmp_vec_pt[vec_i] = &dof_vector[offset + vec_i];
@@ -3089,7 +3087,7 @@ namespace oomph
   //============================================================================
   template<typename MATRIX>
   void BlockPreconditioner<MATRIX>::get_block_vectors(
-    const DoubleVector &v, Vector<DoubleVector> &s) const
+    const DoubleVector& v, Vector<DoubleVector>& s) const
   {
     // Get the number of blocks in this block preconditioner.
     const unsigned n_block = nblock_types();
@@ -3118,9 +3116,9 @@ namespace oomph
   //============================================================================
   template<typename MATRIX>
   void BlockPreconditioner<MATRIX>::internal_get_block_vectors(
-    const Vector<unsigned> &block_vec_number,
-    const DoubleVector &v,
-    Vector<DoubleVector> &s) const
+    const Vector<unsigned>& block_vec_number,
+    const DoubleVector& v,
+    Vector<DoubleVector>& s) const
   {
 #ifdef PARANOID
     if (!v.built())
@@ -3155,14 +3153,14 @@ namespace oomph
       s.resize(nblock);
 
       // pointer to the data in v
-      const double *v_pt = v.values_pt();
+      const double* v_pt = v.values_pt();
 
       // setup the block vector and then insert the data
       for (unsigned b = 0; b < nblock; b++)
       {
         const unsigned required_block = block_vec_number[b];
         s[b].build(Internal_block_distribution_pt[required_block], 0.0);
-        double *s_pt = s[b].values_pt();
+        double* s_pt = s[b].values_pt();
         unsigned nrow = s[b].nrow();
         for (unsigned i = 0; i < nrow; i++)
         {
@@ -3216,7 +3214,7 @@ namespace oomph
 
       // create a vectors of 1s the size of the nblock for the mpi indexed
       // data types
-      int *block_lengths = new int[max_n_send_or_recv];
+      int* block_lengths = new int[max_n_send_or_recv];
       for (unsigned i = 0; i < max_n_send_or_recv; i++)
       {
         block_lengths[i] = 1;
@@ -3273,7 +3271,7 @@ namespace oomph
 
             // send
             MPI_Request send_req;
-            MPI_Isend(const_cast<double *>(v.values_pt()),
+            MPI_Isend(const_cast<double*>(v.values_pt()),
                       1,
                       type_send,
                       p,
@@ -3355,12 +3353,12 @@ namespace oomph
         // communicate with self
         else
         {
-          const double *v_values_pt = v.values_pt();
+          const double* v_values_pt = v.values_pt();
           for (unsigned b = 0; b < nblock; b++)
           {
             const unsigned required_block = block_vec_number[b];
 
-            double *w_values_pt = s[b].values_pt();
+            double* w_values_pt = s[b].values_pt();
             for (unsigned i = 0;
                  i < Nrows_to_send_for_get_block(required_block, p);
                  i++)
@@ -3407,7 +3405,7 @@ namespace oomph
   //============================================================================
   template<typename MATRIX>
   void BlockPreconditioner<MATRIX>::internal_get_block_vectors(
-    const DoubleVector &v, Vector<DoubleVector> &s) const
+    const DoubleVector& v, Vector<DoubleVector>& s) const
   {
     // Number of block types
     const unsigned nblock = this->internal_nblock_types();
@@ -3430,9 +3428,9 @@ namespace oomph
   //============================================================================
   template<typename MATRIX>
   void BlockPreconditioner<MATRIX>::return_block_vectors(
-    const Vector<unsigned> &block_vec_number,
-    const Vector<DoubleVector> &s,
-    DoubleVector &v) const
+    const Vector<unsigned>& block_vec_number,
+    const Vector<DoubleVector>& s,
+    DoubleVector& v) const
   {
 #ifdef PARANOID
 
@@ -3601,7 +3599,7 @@ namespace oomph
       // Need to split s[b] into it's most fine grain dof vectors
       {
         // To store pointers to the dof vectors associated with this block.
-        Vector<DoubleVector *> tmp_dof_vector_pt(ndof, 0);
+        Vector<DoubleVector*> tmp_dof_vector_pt(ndof, 0);
 
         for (unsigned d = 0; d < ndof; d++)
         {
@@ -3641,7 +3639,7 @@ namespace oomph
   //============================================================================
   template<typename MATRIX>
   void BlockPreconditioner<MATRIX>::return_block_vectors(
-    const Vector<DoubleVector> &s, DoubleVector &v) const
+    const Vector<DoubleVector>& s, DoubleVector& v) const
   {
     // The number of block types in this preconditioner.
     const unsigned n_block = nblock_types();
@@ -3670,9 +3668,9 @@ namespace oomph
   //============================================================================
   template<typename MATRIX>
   void BlockPreconditioner<MATRIX>::internal_return_block_vectors(
-    const Vector<unsigned> &block_vec_number,
-    const Vector<DoubleVector> &s,
-    DoubleVector &v) const
+    const Vector<unsigned>& block_vec_number,
+    const Vector<DoubleVector>& s,
+    DoubleVector& v) const
   {
     // the number of blocks
     const unsigned nblock = block_vec_number.size();
@@ -3727,12 +3725,12 @@ namespace oomph
     if (this->distribution_pt()->communicator_pt()->nproc() == 1 ||
         !this->distribution_pt()->distributed())
     {
-      double *v_pt = v.values_pt();
+      double* v_pt = v.values_pt();
       for (unsigned b = 0; b < nblock; b++)
       {
         const unsigned required_block = block_vec_number[b];
 
-        const double *s_pt = s[b].values_pt();
+        const double* s_pt = s[b].values_pt();
         unsigned nrow = this->internal_block_dimension(required_block);
         for (unsigned i = 0; i < nrow; i++)
         {
@@ -3780,7 +3778,7 @@ namespace oomph
 
       // create a vectors of 1s the size of the nblock for the mpi indexed
       // data types
-      int *block_lengths = new int[max_n_send_or_recv];
+      int* block_lengths = new int[max_n_send_or_recv];
       for (unsigned i = 0; i < max_n_send_or_recv; i++)
       {
         block_lengths[i] = 1;
@@ -3866,7 +3864,7 @@ namespace oomph
 
             // all displacements are computed relative to s[0] values
             MPI_Aint displacements_base;
-            MPI_Get_address(const_cast<double *>(s[0].values_pt()),
+            MPI_Get_address(const_cast<double*>(s[0].values_pt()),
                             &displacements_base);
 
             // now build
@@ -3883,7 +3881,7 @@ namespace oomph
                                  MPI_DOUBLE,
                                  &block_send_types[ptr]);
                 MPI_Type_commit(&block_send_types[ptr]);
-                MPI_Get_address(const_cast<double *>(s[b].values_pt()),
+                MPI_Get_address(const_cast<double*>(s[b].values_pt()),
                                 &displacements[ptr]);
                 displacements[ptr] -= displacements_base;
                 lengths[ptr] = 1;
@@ -3902,7 +3900,7 @@ namespace oomph
 
             // send
             MPI_Request send_req;
-            MPI_Isend(const_cast<double *>(s[0].values_pt()),
+            MPI_Isend(const_cast<double*>(s[0].values_pt()),
                       1,
                       type_send,
                       p,
@@ -3921,12 +3919,12 @@ namespace oomph
         // communicate wih self
         else
         {
-          double *v_values_pt = v.values_pt();
+          double* v_values_pt = v.values_pt();
           for (unsigned b = 0; b < nblock; b++)
           {
             const unsigned required_block = block_vec_number[b];
 
-            const double *w_values_pt = s[b].values_pt();
+            const double* w_values_pt = s[b].values_pt();
             for (unsigned i = 0;
                  i < Nrows_to_send_for_get_block(required_block, p);
                  i++)
@@ -3973,7 +3971,7 @@ namespace oomph
   //============================================================================
   template<typename MATRIX>
   void BlockPreconditioner<MATRIX>::internal_return_block_vectors(
-    const Vector<DoubleVector> &s, DoubleVector &v) const
+    const Vector<DoubleVector>& s, DoubleVector& v) const
   {
     // the number of blocks
     const unsigned nblock = this->internal_nblock_types();
@@ -3995,7 +3993,7 @@ namespace oomph
   //============================================================================
   template<typename MATRIX>
   void BlockPreconditioner<MATRIX>::internal_get_block_vector(
-    const unsigned &b, const DoubleVector &v, DoubleVector &w) const
+    const unsigned& b, const DoubleVector& v, DoubleVector& w) const
   {
 #ifdef PARANOID
     // the number of blocks
@@ -4039,8 +4037,8 @@ namespace oomph
     if (this->distribution_pt()->communicator_pt()->nproc() == 1 ||
         !this->distribution_pt()->distributed())
     {
-      double *w_pt = w.values_pt();
-      const double *v_pt = v.values_pt();
+      double* w_pt = w.values_pt();
+      const double* v_pt = v.values_pt();
       unsigned n_row = w.nrow();
       for (unsigned i = 0; i < n_row; i++)
       {
@@ -4070,7 +4068,7 @@ namespace oomph
 
       // create a vectors of 1s (the size of the nblock for the mpi indexed
       // data types
-      int *block_lengths = new int[max_n_send_or_recv];
+      int* block_lengths = new int[max_n_send_or_recv];
       for (unsigned i = 0; i < max_n_send_or_recv; i++)
       {
         block_lengths[i] = 1;
@@ -4096,7 +4094,7 @@ namespace oomph
 
             // send
             MPI_Request send_req;
-            MPI_Isend(const_cast<double *>(v.values_pt()),
+            MPI_Isend(const_cast<double*>(v.values_pt()),
                       1,
                       type_send,
                       p,
@@ -4135,8 +4133,8 @@ namespace oomph
         // communicate with self
         else
         {
-          double *w_values_pt = w.values_pt();
-          const double *v_values_pt = v.values_pt();
+          double* w_values_pt = w.values_pt();
+          const double* v_values_pt = v.values_pt();
           for (unsigned i = 0; i < Nrows_to_send_for_get_block(b, p); i++)
           {
             w_values_pt[Rows_to_recv_for_get_block(b, p)[i]] =
@@ -4171,9 +4169,9 @@ namespace oomph
   /// preconditioner.
   //============================================================================
   template<typename MATRIX>
-  void BlockPreconditioner<MATRIX>::get_block_vector(const unsigned &b,
-                                                     const DoubleVector &v,
-                                                     DoubleVector &w) const
+  void BlockPreconditioner<MATRIX>::get_block_vector(const unsigned& b,
+                                                     const DoubleVector& v,
+                                                     DoubleVector& w) const
   {
 #ifdef PARANOID
     // the number of blocks
@@ -4279,7 +4277,7 @@ namespace oomph
   //============================================================================
   template<typename MATRIX>
   void BlockPreconditioner<MATRIX>::internal_return_block_vector(
-    const unsigned &b, const DoubleVector &w, DoubleVector &v) const
+    const unsigned& b, const DoubleVector& w, DoubleVector& v) const
   {
 #ifdef PARANOID
     // the number of blocks
@@ -4340,8 +4338,8 @@ namespace oomph
       unsigned n_row = this->internal_block_dimension(b);
 
       // copy back from the block vector to the naturally ordered vector
-      double *v_pt = v.values_pt();
-      const double *w_pt = w.values_pt();
+      double* v_pt = v.values_pt();
+      const double* w_pt = w.values_pt();
       for (unsigned i = 0; i < n_row; i++)
       {
         v_pt[this->Global_index[b][i]] = w_pt[i];
@@ -4370,7 +4368,7 @@ namespace oomph
 
       // create a vectors of 1s (the size of the nblock for the mpi indexed
       // data types
-      int *block_lengths = new int[max_n_send_or_recv];
+      int* block_lengths = new int[max_n_send_or_recv];
       for (unsigned i = 0; i < max_n_send_or_recv; i++)
       {
         block_lengths[i] = 1;
@@ -4396,7 +4394,7 @@ namespace oomph
 
             // send
             MPI_Request send_req;
-            MPI_Isend(const_cast<double *>(w.values_pt()),
+            MPI_Isend(const_cast<double*>(w.values_pt()),
                       1,
                       type_send,
                       p,
@@ -4435,8 +4433,8 @@ namespace oomph
         // communicate wih self
         else
         {
-          const double *w_values_pt = w.values_pt();
-          double *v_values_pt = v.values_pt();
+          const double* w_values_pt = w.values_pt();
+          double* v_values_pt = v.values_pt();
           for (unsigned i = 0; i < Nrows_to_send_for_get_block(b, p); i++)
           {
             v_values_pt[Rows_to_send_for_get_block(b, p)[i]] =
@@ -4474,9 +4472,9 @@ namespace oomph
   /// are left alone.
   //============================================================================
   template<typename MATRIX>
-  void BlockPreconditioner<MATRIX>::return_block_vector(const unsigned &n,
-                                                        const DoubleVector &b,
-                                                        DoubleVector &v) const
+  void BlockPreconditioner<MATRIX>::return_block_vector(const unsigned& n,
+                                                        const DoubleVector& b,
+                                                        DoubleVector& v) const
   {
 #ifdef PARANOID
     // the number of blocks
@@ -4584,8 +4582,8 @@ namespace oomph
   //============================================================================
   template<typename MATRIX>
   void BlockPreconditioner<MATRIX>::
-    internal_get_block_ordered_preconditioner_vector(const DoubleVector &v,
-                                                     DoubleVector &w) const
+    internal_get_block_ordered_preconditioner_vector(const DoubleVector& v,
+                                                     DoubleVector& w) const
   {
 #ifdef PARANOID
     if (!v.built())
@@ -4620,8 +4618,8 @@ namespace oomph
 
       // copy to w
       unsigned block_offset = 0;
-      double *w_pt = w.values_pt();
-      const double *v_pt = v.values_pt();
+      double* w_pt = w.values_pt();
+      const double* v_pt = v.values_pt();
       for (unsigned b = 0; b < nblock; b++)
       {
         unsigned block_nrow = this->internal_block_dimension(b);
@@ -4655,7 +4653,7 @@ namespace oomph
 
       // create a vectors of 1s (the size of the nblock for the mpi indexed
       // data types
-      int *block_lengths = new int[max_n_send_or_recv];
+      int* block_lengths = new int[max_n_send_or_recv];
       for (unsigned i = 0; i < max_n_send_or_recv; i++)
       {
         block_lengths[i] = 1;
@@ -4681,7 +4679,7 @@ namespace oomph
 
             // send
             MPI_Request send_req;
-            MPI_Isend(const_cast<double *>(v.values_pt()),
+            MPI_Isend(const_cast<double*>(v.values_pt()),
                       1,
                       type_send,
                       p,
@@ -4720,8 +4718,8 @@ namespace oomph
         // communicate with self
         else
         {
-          double *w_values_pt = w.values_pt();
-          const double *v_values_pt = v.values_pt();
+          double* w_values_pt = w.values_pt();
+          const double* v_values_pt = v.values_pt();
           for (unsigned i = 0; i < Nrows_to_send_for_get_ordered[p]; i++)
           {
             w_values_pt[Rows_to_recv_for_get_ordered[p][i]] =
@@ -4779,7 +4777,7 @@ namespace oomph
   //============================================================================
   template<typename MATRIX>
   void BlockPreconditioner<MATRIX>::get_block_ordered_preconditioner_vector(
-    const DoubleVector &v, DoubleVector &w)
+    const DoubleVector& v, DoubleVector& w)
   {
 #ifdef PARANOID
     if (!v.built())
@@ -4835,8 +4833,8 @@ namespace oomph
   //============================================================================
   template<typename MATRIX>
   void BlockPreconditioner<MATRIX>::
-    internal_return_block_ordered_preconditioner_vector(const DoubleVector &w,
-                                                        DoubleVector &v) const
+    internal_return_block_ordered_preconditioner_vector(const DoubleVector& w,
+                                                        DoubleVector& v) const
   {
 #ifdef PARANOID
     if (!v.built())
@@ -4884,8 +4882,8 @@ namespace oomph
 
       // copy to w
       unsigned block_offset = 0;
-      const double *w_pt = w.values_pt();
-      double *v_pt = v.values_pt();
+      const double* w_pt = w.values_pt();
+      double* v_pt = v.values_pt();
       for (unsigned b = 0; b < nblock; b++)
       {
         unsigned block_nrow = this->internal_block_dimension(b);
@@ -4919,7 +4917,7 @@ namespace oomph
 
       // create a vectors of 1s (the size of the nblock for the mpi indexed
       // data types
-      int *block_lengths = new int[max_n_send_or_recv];
+      int* block_lengths = new int[max_n_send_or_recv];
       for (unsigned i = 0; i < max_n_send_or_recv; i++)
       {
         block_lengths[i] = 1;
@@ -4945,7 +4943,7 @@ namespace oomph
 
             // send
             MPI_Request send_req;
-            MPI_Isend(const_cast<double *>(w.values_pt()),
+            MPI_Isend(const_cast<double*>(w.values_pt()),
                       1,
                       type_send,
                       p,
@@ -4984,8 +4982,8 @@ namespace oomph
         // communicate wih self
         else
         {
-          const double *w_values_pt = w.values_pt();
-          double *v_values_pt = v.values_pt();
+          const double* w_values_pt = w.values_pt();
+          double* v_values_pt = v.values_pt();
           for (unsigned i = 0; i < Nrows_to_send_for_get_ordered[p]; i++)
           {
             v_values_pt[Rows_to_send_for_get_ordered[p][i]] =
@@ -5030,7 +5028,7 @@ namespace oomph
   //============================================================================
   template<typename MATRIX>
   void BlockPreconditioner<MATRIX>::return_block_ordered_preconditioner_vector(
-    const DoubleVector &w, DoubleVector &v) const
+    const DoubleVector& w, DoubleVector& v) const
   {
 #ifdef PARANOID
     if (!v.built())
@@ -5085,9 +5083,9 @@ namespace oomph
   //=============================================================================
   template<>
   void BlockPreconditioner<CRDoubleMatrix>::internal_get_block(
-    const unsigned &block_i,
-    const unsigned &block_j,
-    CRDoubleMatrix &output_block) const
+    const unsigned& block_i,
+    const unsigned& block_j,
+    CRDoubleMatrix& output_block) const
   {
 #ifdef PARANOID
     // the number of blocks
@@ -5118,7 +5116,7 @@ namespace oomph
 #endif
 
     // Cast the pointer
-    CRDoubleMatrix *cr_matrix_pt = dynamic_cast<CRDoubleMatrix *>(matrix_pt());
+    CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt());
 
     // if + only one processor
     //    + more than one processor but matrix_pt is not distributed
@@ -5127,9 +5125,9 @@ namespace oomph
         !cr_matrix_pt->distribution_pt()->distributed())
     {
       // pointers for the jacobian matrix is compressed row sparse format
-      int *j_row_start;
-      int *j_column_index;
-      double *j_value;
+      int* j_row_start;
+      int* j_column_index;
+      double* j_value;
 
       // sets pointers to jacobian matrix
       j_row_start = cr_matrix_pt->row_start();
@@ -5144,7 +5142,7 @@ namespace oomph
       // temp_ptr is used to point to an element in each column - required as
       // cannot assume that order of block's rows in jacobian and the block
       // matrix will be the same
-      int *temp_row_start = new int[block_nrow + 1];
+      int* temp_row_start = new int[block_nrow + 1];
       for (unsigned i = 0; i <= block_nrow; i++)
       {
         temp_row_start[i] = 0;
@@ -5175,8 +5173,8 @@ namespace oomph
       }
 
       // if the matrix is not empty
-      int *temp_column_index = new int[block_nnz];
-      double *temp_value = new double[block_nnz];
+      int* temp_column_index = new int[block_nnz];
+      double* temp_value = new double[block_nnz];
       if (block_nnz > 0)
       {
         // uses number of elements in each column of block to determine values
@@ -5238,19 +5236,19 @@ namespace oomph
       unsigned my_rank = this->distribution_pt()->communicator_pt()->my_rank();
 
       // sets pointers to jacobian matrix
-      int *j_row_start = cr_matrix_pt->row_start();
-      int *j_column_index = cr_matrix_pt->column_index();
-      double *j_value = cr_matrix_pt->value();
+      int* j_row_start = cr_matrix_pt->row_start();
+      int* j_column_index = cr_matrix_pt->column_index();
+      double* j_value = cr_matrix_pt->value();
 
       // number of non zeros in each row to be sent
-      Vector<int *> nnz_send(nproc, 0);
+      Vector<int*> nnz_send(nproc, 0);
 
       // number of non zeros in each row to be received
-      Vector<int *> nnz_recv(nproc, 0);
+      Vector<int*> nnz_recv(nproc, 0);
 
       // storage for data to be sent
-      Vector<int *> column_index_for_proc(nproc, 0);
-      Vector<double *> values_for_proc(nproc, 0);
+      Vector<int*> column_index_for_proc(nproc, 0);
+      Vector<double*> values_for_proc(nproc, 0);
 
       // number of non zeros to be sent to each processor
       Vector<unsigned> total_nnz_send(nproc, 0);
@@ -5449,7 +5447,7 @@ namespace oomph
       }
 
       // next assemble row start recv
-      int *row_start_recv = new int[nrow_local + 1];
+      int* row_start_recv = new int[nrow_local + 1];
       for (unsigned i = 0; i <= nrow_local; i++)
       {
         row_start_recv[i] = 0;
@@ -5473,8 +5471,8 @@ namespace oomph
       row_start_recv[nrow_local] = row_start_recv[nrow_local - 1] + g;
 
       // next assemble the offset and the number of nzs in each recv block
-      Vector<int *> offset_recv_block(nproc, 0);
-      Vector<int *> nnz_recv_block(nproc, 0);
+      Vector<int*> offset_recv_block(nproc, 0);
+      Vector<int*> nnz_recv_block(nproc, 0);
       for (unsigned p = 0; p < nproc; p++)
       {
         if (Nrows_to_recv_for_get_block(block_i, p) > 0)
@@ -5506,8 +5504,8 @@ namespace oomph
       }
 
       // post the receives
-      int *column_index_recv = new int[local_block_nnz];
-      double *values_recv = new double[local_block_nnz];
+      int* column_index_recv = new int[local_block_nnz];
+      double* values_recv = new double[local_block_nnz];
       Vector<MPI_Request> recv2_req;
       for (unsigned p = 0; p < nproc; p++)
       {
@@ -5653,10 +5651,10 @@ namespace oomph
   //=============================================================================
   template<>
   void BlockPreconditioner<CRDoubleMatrix>::get_dof_level_block(
-    const unsigned &block_i,
-    const unsigned &block_j,
-    CRDoubleMatrix &output_block,
-    const bool &ignore_replacement_block) const
+    const unsigned& block_i,
+    const unsigned& block_j,
+    CRDoubleMatrix& output_block,
+    const bool& ignore_replacement_block) const
   {
 #ifdef PARANOID
     // the number of dof types.
@@ -5674,7 +5672,7 @@ namespace oomph
     }
 #endif
 
-    CRDoubleMatrix *tmp_block_pt =
+    CRDoubleMatrix* tmp_block_pt =
       Replacement_dof_block_pt.get(block_i, block_j);
 
     if ((tmp_block_pt == 0) || ignore_replacement_block)
@@ -5705,7 +5703,7 @@ namespace oomph
       }
       else
       {
-        DenseMatrix<CRDoubleMatrix *> tmp_blocks_pt(
+        DenseMatrix<CRDoubleMatrix*> tmp_blocks_pt(
           ndof_in_parent_i, ndof_in_parent_j, 0);
 
         Vector<Vector<unsigned>> new_block(
@@ -5747,8 +5745,7 @@ namespace oomph
           }
         }
 
-        Vector<LinearAlgebraDistribution *> tmp_row_dist_pt(ndof_in_parent_i,
-                                                            0);
+        Vector<LinearAlgebraDistribution*> tmp_row_dist_pt(ndof_in_parent_i, 0);
 
         for (unsigned parent_dof_i = 0; parent_dof_i < ndof_in_parent_i;
              parent_dof_i++)
@@ -5772,8 +5769,7 @@ namespace oomph
           }
         }
 
-        Vector<LinearAlgebraDistribution *> tmp_col_dist_pt(ndof_in_parent_j,
-                                                            0);
+        Vector<LinearAlgebraDistribution*> tmp_col_dist_pt(ndof_in_parent_j, 0);
 
         for (unsigned parent_dof_j = 0; parent_dof_j < ndof_in_parent_j;
              parent_dof_j++)
@@ -5823,9 +5819,9 @@ namespace oomph
   //=============================================================================
   template<typename MATRIX>
   void BlockPreconditioner<MATRIX>::block_matrix_test(
-    const unsigned &block_i,
-    const unsigned &block_j,
-    const MATRIX *block_matrix_pt) const
+    const unsigned& block_i,
+    const unsigned& block_j,
+    const MATRIX* block_matrix_pt) const
   {
     // boolean flag to indicate whether test is passed
     bool check = true;

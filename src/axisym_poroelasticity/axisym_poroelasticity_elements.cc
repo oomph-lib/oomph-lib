@@ -81,11 +81,11 @@ namespace oomph
   /// functions from the reference element to the actual element
   //======================================================================
   double AxisymmetricPoroelasticityEquations::transform_basis(
-    const Vector<double> &s,
-    const Shape &q_basis_local,
-    Shape &psi,
-    DShape &dpsi,
-    Shape &q_basis) const
+    const Vector<double>& s,
+    const Shape& q_basis_local,
+    Shape& psi,
+    DShape& dpsi,
+    Shape& q_basis) const
   {
     // Call the (geometric) shape functions and their derivatives
     this->dshape_local(s, psi, dpsi);
@@ -144,8 +144,8 @@ namespace oomph
   /// \short Output FE representation of soln:
   /// x,y,u1,u2,q1,q2,div_q,p at Nplot^2 plot points
   //========================================================================
-  void AxisymmetricPoroelasticityEquations::output(std::ostream &outfile,
-                                                   const unsigned &nplot)
+  void AxisymmetricPoroelasticityEquations::output(std::ostream& outfile,
+                                                   const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(2);
@@ -205,8 +205,8 @@ namespace oomph
   /// Nplot^2 plot points
   //============================================================================
   void AxisymmetricPoroelasticityEquations::output_fct(
-    std::ostream &outfile,
-    const unsigned &nplot,
+    std::ostream& outfile,
+    const unsigned& nplot,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
   {
     // Vector of local coordinates
@@ -256,9 +256,9 @@ namespace oomph
   /// Nplot^2 plot points. Unsteady version
   //========================================================================
   void AxisymmetricPoroelasticityEquations::output_fct(
-    std::ostream &outfile,
-    const unsigned &nplot,
-    const double &time,
+    std::ostream& outfile,
+    const unsigned& nplot,
+    const double& time,
     FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
   {
     // Vector of local coordinates
@@ -308,10 +308,10 @@ namespace oomph
   /// using the H(div) norm for q and L^2 norm for u and p
   //========================================================================
   void AxisymmetricPoroelasticityEquations::compute_error(
-    std::ostream &outfile,
+    std::ostream& outfile,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-    Vector<double> &error,
-    Vector<double> &norm)
+    Vector<double>& error,
+    Vector<double>& norm)
   {
     for (unsigned i = 0; i < 3; i++)
     {
@@ -415,11 +415,11 @@ namespace oomph
   /// using the H(div) norm for u and L^2 norm for p. Unsteady version
   //========================================================================
   void AxisymmetricPoroelasticityEquations::compute_error(
-    std::ostream &outfile,
+    std::ostream& outfile,
     FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
-    const double &time,
-    Vector<double> &error,
-    Vector<double> &norm)
+    const double& time,
+    Vector<double>& error,
+    Vector<double>& norm)
   {
     for (unsigned i = 0; i < 3; i++)
     {
@@ -522,8 +522,8 @@ namespace oomph
   /// Fill in residuals and, if flag==true, jacobian
   //========================================================================
   void AxisymmetricPoroelasticityEquations::
-    fill_in_generic_residual_contribution(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian,
+    fill_in_generic_residual_contribution(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian,
                                           bool flag)
   {
     // Get the number of geometric nodes, total number of basis functions,
@@ -827,7 +827,7 @@ namespace oomph
               // d(u_eqn_l,a)/d(Q_l2)
               for (unsigned l2 = 0; l2 < n_q_basis; l2++)
               {
-                TimeStepper *timestepper_pt = 0;
+                TimeStepper* timestepper_pt = 0;
 
                 if (l2 < n_q_basis_edge)
                 {
@@ -933,7 +933,7 @@ namespace oomph
             // d(q_eqn_l)/d(Q_l2)
             for (unsigned l2 = 0; l2 < n_q_basis; l2++)
             {
-              TimeStepper *timestepper_pt = 0;
+              TimeStepper* timestepper_pt = 0;
 
               if (l2 < n_q_basis_edge)
               {

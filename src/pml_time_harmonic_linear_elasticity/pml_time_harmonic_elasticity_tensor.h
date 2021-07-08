@@ -67,7 +67,7 @@ namespace oomph
     /// Member function that returns the i-th independent component of the
     /// elasticity tensor
     virtual inline std::complex<double> independent_component(
-      const unsigned &i) const
+      const unsigned& i) const
     {
       return std::complex<double>(0.0, 0.0);
     }
@@ -76,10 +76,10 @@ namespace oomph
     /// (Note that this only captures over-runs in 3D but
     /// errors are likely to be caught in evaluation of the
     /// stress and strain tensors anyway...)
-    void range_check(const unsigned &i,
-                     const unsigned &j,
-                     const unsigned &k,
-                     const unsigned &l) const
+    void range_check(const unsigned& i,
+                     const unsigned& j,
+                     const unsigned& k,
+                     const unsigned& l) const
     {
       if ((i > 2) || (j > 2) || (k > 2) || (l > 2))
       {
@@ -124,10 +124,10 @@ namespace oomph
   public:
     ///\short Return the appropriate independent component
     /// via the index translation scheme (const version).
-    std::complex<double> operator()(const unsigned &i,
-                                    const unsigned &j,
-                                    const unsigned &k,
-                                    const unsigned &l) const
+    std::complex<double> operator()(const unsigned& i,
+                                    const unsigned& j,
+                                    const unsigned& k,
+                                    const unsigned& l) const
     {
       // Range check
 #ifdef PARANOID
@@ -165,8 +165,8 @@ namespace oomph
     /// Young's modulus to the Young's modulus (or other reference stiffness)
     /// used to non-dimensionalise stresses and tractions in the governing
     /// equations).
-    PMLTimeHarmonicIsotropicElasticityTensor(const double &nu,
-                                             const double &E) :
+    PMLTimeHarmonicIsotropicElasticityTensor(const double& nu,
+                                             const double& E) :
       PMLTimeHarmonicElasticityTensor(), Nu(nu)
     {
       // Set the three indepdent components
@@ -179,7 +179,7 @@ namespace oomph
     /// \short Constructor. Passing in the value of the Poisson's ratio.
     /// Stresses and tractions in the governing equations are assumed
     /// to have been non-dimensionalised on Young's modulus.
-    PMLTimeHarmonicIsotropicElasticityTensor(const double &nu) :
+    PMLTimeHarmonicIsotropicElasticityTensor(const double& nu) :
       PMLTimeHarmonicElasticityTensor(), Nu(nu)
     {
       // Set the three indepdent components
@@ -203,7 +203,7 @@ namespace oomph
     /// Young's modulus to the Young's modulus (or other reference stiffness)
     /// used to non-dimensionalise stresses and tractions in the governing
     /// equations).
-    void update_constitutive_parameters(const double &nu, const double &E = 1.0)
+    void update_constitutive_parameters(const double& nu, const double& E = 1.0)
     {
       // Set the three indepdent components
       C[0] = std::complex<double>(0.0, 0.0);
@@ -213,14 +213,14 @@ namespace oomph
     }
 
     /// Overload the independent coefficient function
-    inline std::complex<double> independent_component(const unsigned &i) const
+    inline std::complex<double> independent_component(const unsigned& i) const
     {
       return C[StaticIndex[i]];
     }
 
   private:
     // Set the values of the lame coefficients
-    void set_lame_coefficients(const double &lambda, const double &mu)
+    void set_lame_coefficients(const double& lambda, const double& mu)
     {
       C[1] = lambda + 2.0 * mu;
       C[2] = lambda;

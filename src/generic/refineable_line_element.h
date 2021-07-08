@@ -83,7 +83,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    RefineableQElement(const RefineableQElement<1> &dummy)
+    RefineableQElement(const RefineableQElement<1>& dummy)
     {
       BrokenCopy::broken_copy("RefineableQElement<1>");
     }
@@ -118,16 +118,16 @@ namespace oomph
     /// present element, s_fraction, return a pointer to that node. If
     /// not, return NULL (0). If the node is on a periodic boundary the
     /// flag is_periodic is true, otherwise it will be false.
-    Node *node_created_by_neighbour(const Vector<double> &s_fraction,
-                                    bool &is_periodic);
+    Node* node_created_by_neighbour(const Vector<double>& s_fraction,
+                                    bool& is_periodic);
 
     /// \short If a neighbouring element has already created a node at a
     /// position corresponding to the local fractional position within the
     /// present element, s_fraction, return a pointer to that node. If
     /// not, return NULL (0). If the node is on a periodic boundary the
     /// flag is_periodic is true, otherwise it will be false.
-    Node *node_created_by_son_of_neighbour(const Vector<double> &s_fraction,
-                                           bool &is_periodic)
+    Node* node_created_by_son_of_neighbour(const Vector<double>& s_fraction,
+                                           bool& is_periodic)
     {
       // It is impossible for this situation to arise in meshes
       // containing elements of uniform p-order. This is here so
@@ -139,32 +139,32 @@ namespace oomph
     /// etc. Pointers to any new nodes will be returned in new_node_pt.
     /// If it is open, the positions of the new nodes will be written to
     /// the file stream new_nodes_file.
-    virtual void build(Mesh *&mesh_pt,
-                       Vector<Node *> &new_node_pt,
-                       bool &was_already_built,
-                       std::ofstream &new_nodes_file);
+    virtual void build(Mesh*& mesh_pt,
+                       Vector<Node*>& new_node_pt,
+                       bool& was_already_built,
+                       std::ofstream& new_nodes_file);
 
     /// \short Check the integrity of the element: ensure that the position
     /// and values are continuous across the element edges.
-    void check_integrity(double &max_error);
+    void check_integrity(double& max_error);
 
     ///  Print corner nodes, using colour
-    void output_corners(std::ostream &outfile, const std::string &colour) const;
+    void output_corners(std::ostream& outfile, const std::string& colour) const;
 
     /// Pointer to binary tree representation of this element
-    BinaryTree *binary_tree_pt()
+    BinaryTree* binary_tree_pt()
     {
-      return dynamic_cast<BinaryTree *>(Tree_pt);
+      return dynamic_cast<BinaryTree*>(Tree_pt);
     }
 
     /// Pointer to binary tree representation of this element (const version)
-    BinaryTree *binary_tree_pt() const
+    BinaryTree* binary_tree_pt() const
     {
-      return dynamic_cast<BinaryTree *>(Tree_pt);
+      return dynamic_cast<BinaryTree*>(Tree_pt);
     }
 
     /// Line elements have no hanging nodes so this is deliberately left empty
-    void setup_hanging_nodes(Vector<std::ofstream *> &output_stream) {}
+    void setup_hanging_nodes(Vector<std::ofstream*>& output_stream) {}
 
   protected:
     /// \short Coincidence between son nodal points and father boundaries:
@@ -176,12 +176,12 @@ namespace oomph
     void setup_father_bounds();
 
     /// Line elements have no hanging nodes so this is deliberately left empty
-    void setup_hang_for_value(const int &value_id) {}
+    void setup_hang_for_value(const int& value_id) {}
 
     /// Line elements have no hanging nodes so this is deliberately left empty
-    void binary_hang_helper(const int &value_id,
-                            const int &my_edge,
-                            std::ofstream &output_hangfile)
+    void binary_hang_helper(const int& value_id,
+                            const int& my_edge,
+                            std::ofstream& output_hangfile)
     {
     }
   };
@@ -215,7 +215,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    RefineableSolidQElement(const RefineableSolidQElement<1> &dummy)
+    RefineableSolidQElement(const RefineableSolidQElement<1>& dummy)
     {
       BrokenCopy::broken_copy("RefineableSolidQElement<1>");
     }
@@ -230,14 +230,14 @@ namespace oomph
     virtual ~RefineableSolidQElement() {}
 
     /// \short Final over-ride: Use version in QSolidElementBase
-    void set_macro_elem_pt(MacroElement *macro_elem_pt)
+    void set_macro_elem_pt(MacroElement* macro_elem_pt)
     {
       QSolidElementBase::set_macro_elem_pt(macro_elem_pt);
     }
 
     /// \short Final over-ride: Use version in QSolidElementBase
-    void set_macro_elem_pt(MacroElement *macro_elem_pt,
-                           MacroElement *undeformed_macro_elem_pt)
+    void set_macro_elem_pt(MacroElement* macro_elem_pt,
+                           MacroElement* undeformed_macro_elem_pt)
     {
       QSolidElementBase::set_macro_elem_pt(macro_elem_pt,
                                            undeformed_macro_elem_pt);
@@ -245,7 +245,7 @@ namespace oomph
 
     /// \short Use the generic finite difference routine defined in
     /// RefineableSolidElement to calculate the Jacobian matrix
-    void get_jacobian(Vector<double> &residuals, DenseMatrix<double> &jacobian)
+    void get_jacobian(Vector<double>& residuals, DenseMatrix<double>& jacobian)
     {
       RefineableSolidElement::get_jacobian(residuals, jacobian);
     }
@@ -253,10 +253,10 @@ namespace oomph
     /// \short Build the element, i.e. give it nodal positions, apply BCs, etc.
     /// Incl. documention into new_nodes_file
     // NOTE: FOR SOME REASON THIS NEEDS TO LIVE IN *.H TO WORK ON INTEL
-    void build(Mesh *&mesh_pt,
-               Vector<Node *> &new_node_pt,
-               bool &was_already_built,
-               std::ofstream &new_nodes_file)
+    void build(Mesh*& mesh_pt,
+               Vector<Node*>& new_node_pt,
+               bool& was_already_built,
+               std::ofstream& new_nodes_file)
     {
       throw OomphLibError("This function has not been implemented yet:",
                           OOMPH_CURRENT_FUNCTION,

@@ -111,12 +111,12 @@ public:
   }
 
   /// Fix pressure in element e at pressure dof pdof and set to pvalue
-  void fix_pressure(const unsigned &e,
-                    const unsigned &pdof,
-                    const double &pvalue)
+  void fix_pressure(const unsigned& e,
+                    const unsigned& pdof,
+                    const double& pvalue)
   {
     // Cast to specific element and fix pressure
-    dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e))
+    dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))
       ->fix_pressure(pdof, pvalue);
   } // end_of_fix_pressure
 
@@ -124,17 +124,17 @@ public:
   void doc_solution();
 
   /// \short Set the boundary conditions
-  void set_boundary_conditions(const double &time);
+  void set_boundary_conditions(const double& time);
 
   /// \short Overloaded version of the problem's access function to
   /// the mesh. Recasts the pointer to the base Mesh object to
   /// the actual mesh type.
-  RectangularQuadMesh<ELEMENT> *mesh_pt()
+  RectangularQuadMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<RectangularQuadMesh<ELEMENT> *>(Problem::mesh_pt());
+    return dynamic_cast<RectangularQuadMesh<ELEMENT>*>(Problem::mesh_pt());
   }
 
-  void get_kinetic_energy(double &E, double &Edot);
+  void get_kinetic_energy(double& E, double& Edot);
 
 private:
   /// DocInfo object
@@ -225,7 +225,7 @@ ConvectionProblem<ELEMENT>::ConvectionProblem()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the Diffusivities
     el_pt->diff_pt() = &Global_Physical_Variables::Diff;
@@ -260,7 +260,7 @@ ConvectionProblem<ELEMENT>::ConvectionProblem()
 /// Get kinetic energy and kinetic energy flux
 //===========================================================
 template<class ELEMENT>
-void ConvectionProblem<ELEMENT>::get_kinetic_energy(double &E, double &Edot)
+void ConvectionProblem<ELEMENT>::get_kinetic_energy(double& E, double& Edot)
 {
   // Reset values to zero
   E = 0.0;
@@ -270,7 +270,7 @@ void ConvectionProblem<ELEMENT>::get_kinetic_energy(double &E, double &Edot)
   unsigned n_element = mesh_pt()->nelement();
   for (unsigned e = 0; e < n_element; e++)
   {
-    ELEMENT *elem_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* elem_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
     E += elem_pt->kin_energy();
     Edot += elem_pt->d_kin_energy_dt();
@@ -282,7 +282,7 @@ void ConvectionProblem<ELEMENT>::get_kinetic_energy(double &E, double &Edot)
 /// time
 //===========================================================
 template<class ELEMENT>
-void ConvectionProblem<ELEMENT>::set_boundary_conditions(const double &time)
+void ConvectionProblem<ELEMENT>::set_boundary_conditions(const double& time)
 {
   // Loop over the boundaries
   unsigned num_bound = mesh_pt()->nboundary();
@@ -293,7 +293,7 @@ void ConvectionProblem<ELEMENT>::set_boundary_conditions(const double &time)
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Get pointer to node
-      Node *nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
+      Node* nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
 
       // Set the number of velocity components
       unsigned vel_min = 0;
@@ -374,7 +374,7 @@ void ConvectionProblem<ELEMENT>::doc_solution()
 //=======start_of_main================================================
 /// Driver code for 2D Boussinesq convection problem
 //====================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Set the direction of gravity
   Global_Physical_Variables::Direction_of_gravity[0] = 0.0;

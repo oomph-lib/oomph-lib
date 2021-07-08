@@ -78,13 +78,13 @@ namespace oomph
 #endif
 
     /// \short Broken copy constructor.
-    SamplePointContainerParameters(const SamplePointContainerParameters &data)
+    SamplePointContainerParameters(const SamplePointContainerParameters& data)
     {
       BrokenCopy::broken_copy("SamplePointContainerParameters");
     }
 
     /// Broken assignment operator.
-    void operator=(const SamplePointContainerParameters &)
+    void operator=(const SamplePointContainerParameters&)
     {
       BrokenCopy::broken_assign("SamplePointContainerParameters");
     }
@@ -93,7 +93,7 @@ namespace oomph
     virtual ~SamplePointContainerParameters() {}
 
     /// Pointer to mesh from whose FiniteElements sample points are created
-    Mesh *mesh_pt() const
+    Mesh* mesh_pt() const
     {
       return Mesh_pt;
     }
@@ -102,7 +102,7 @@ namespace oomph
     /// Call: Min_and_max_coordinates[j] gives me the
     /// pair of min (first) and max. (second) coordinates in the j-th
     /// coordinate direction.
-    Vector<std::pair<double, double>> &min_and_max_coordinates()
+    Vector<std::pair<double, double>>& min_and_max_coordinates()
     {
       return Min_and_max_coordinates;
     }
@@ -124,7 +124,7 @@ namespace oomph
     }
 
     /// "Measure of" number of sample points generated in each element
-    unsigned &nsample_points_generated_per_element()
+    unsigned& nsample_points_generated_per_element()
     {
       return Nsample_points_generated_per_element;
     }
@@ -173,7 +173,7 @@ namespace oomph
 
   protected:
     /// Pointer to mesh from whose FiniteElements sample points are created
-    Mesh *Mesh_pt;
+    Mesh* Mesh_pt;
 
     /// Vector of pairs of doubles for min and maximum coordinates.
     /// Call: Min_and_max_coordinates[j] gives me the
@@ -200,7 +200,7 @@ namespace oomph
     /// \short Constructor: Pass mesh.
     /// Constructor is private and can only be called
     /// by the derived friends.
-    SamplePointContainerParameters(Mesh *mesh_pt) :
+    SamplePointContainerParameters(Mesh* mesh_pt) :
       Mesh_pt(mesh_pt),
       Nsample_points_generated_per_element(
         Default_nsample_points_generated_per_element),
@@ -235,20 +235,20 @@ namespace oomph
   {
   public:
     /// Constructor: Pass mesh.
-    CGALSamplePointContainerParameters(Mesh *mesh_pt) :
+    CGALSamplePointContainerParameters(Mesh* mesh_pt) :
       SamplePointContainerParameters(mesh_pt)
     {
     }
 
     /// \short Broken copy constructor.
     CGALSamplePointContainerParameters(
-      const CGALSamplePointContainerParameters &data)
+      const CGALSamplePointContainerParameters& data)
     {
       BrokenCopy::broken_copy("CGALSamplePointContainerParameters");
     }
 
     /// Broken assignment operator.
-    void operator=(const CGALSamplePointContainerParameters &)
+    void operator=(const CGALSamplePointContainerParameters&)
     {
       BrokenCopy::broken_assign("CGALSamplePointContainerParameters");
     }
@@ -272,13 +272,13 @@ namespace oomph
     friend class NonRefineableBinArrayParameters;
 
     /// \short Broken copy constructor.
-    BinArrayParameters(const BinArrayParameters &data)
+    BinArrayParameters(const BinArrayParameters& data)
     {
       BrokenCopy::broken_copy("BinArrayParameters");
     }
 
     /// Broken assignment operator.
-    void operator=(const BinArrayParameters &)
+    void operator=(const BinArrayParameters&)
     {
       BrokenCopy::broken_assign("BinArrayParameters");
     }
@@ -287,7 +287,7 @@ namespace oomph
     virtual ~BinArrayParameters() {}
 
     /// \short Number of bins in each coordinate direction
-    Vector<unsigned> &dimensions_of_bin_array()
+    Vector<unsigned>& dimensions_of_bin_array()
     {
       return Dimensions_of_bin_array;
     }
@@ -305,7 +305,7 @@ namespace oomph
   private:
     /// \short Constructor: Pass mesh. Constructor is private and can only
     /// be called by the derived friends.
-    BinArrayParameters(Mesh *mesh_pt) : SamplePointContainerParameters(mesh_pt)
+    BinArrayParameters(Mesh* mesh_pt) : SamplePointContainerParameters(mesh_pt)
     {
     }
 
@@ -332,7 +332,7 @@ namespace oomph
   {
   public:
     /// Constructor: Pass mesh
-    RefineableBinArrayParameters(Mesh *mesh_pt) :
+    RefineableBinArrayParameters(Mesh* mesh_pt) :
       SamplePointContainerParameters(mesh_pt),
       BinArrayParameters(mesh_pt),
       Bin_array_is_recursive(true),
@@ -345,13 +345,13 @@ namespace oomph
     }
 
     /// \short Broken copy constructor.
-    RefineableBinArrayParameters(const RefineableBinArrayParameters &data)
+    RefineableBinArrayParameters(const RefineableBinArrayParameters& data)
     {
       BrokenCopy::broken_copy("RefineableBinArrayParameters");
     }
 
     /// Broken assignment operator.
-    void operator=(const RefineableBinArrayParameters &)
+    void operator=(const RefineableBinArrayParameters&)
     {
       BrokenCopy::broken_assign("RefineableBinArrayParameters");
     }
@@ -378,7 +378,7 @@ namespace oomph
     }
 
     /// \short Variable which stores the Depth value of the bin_array.
-    unsigned &depth()
+    unsigned& depth()
     {
       return Depth;
     }
@@ -391,7 +391,7 @@ namespace oomph
     }
 
     /// \short Max. depth value of the bin_array.
-    unsigned &max_depth()
+    unsigned& max_depth()
     {
       return Max_depth;
     }
@@ -405,7 +405,7 @@ namespace oomph
 
     /// \short Maximum number of sample points in bin (before it's subdivided
     /// recursively)
-    unsigned &max_number_of_sample_point_per_bin()
+    unsigned& max_number_of_sample_point_per_bin()
     {
       return Max_number_of_sample_point_per_bin;
     }
@@ -418,13 +418,13 @@ namespace oomph
     }
 
     /// Pointer to root bin array
-    RefineableBinArray *&root_bin_array_pt()
+    RefineableBinArray*& root_bin_array_pt()
     {
       return Root_bin_array_pt;
     }
 
     /// Pointer to root bin array; const version
-    RefineableBinArray *root_bin_array_pt() const
+    RefineableBinArray* root_bin_array_pt() const
     {
       return Root_bin_array_pt;
     }
@@ -453,7 +453,7 @@ namespace oomph
     unsigned Max_number_of_sample_point_per_bin;
 
     /// Pointer to root bin array
-    RefineableBinArray *Root_bin_array_pt;
+    RefineableBinArray* Root_bin_array_pt;
   };
 
   //////////////////////////////////////////////////////////////////////////////
@@ -468,7 +468,7 @@ namespace oomph
   {
   public:
     /// Constructor: Pass mesh
-    NonRefineableBinArrayParameters(Mesh *mesh_pt) :
+    NonRefineableBinArrayParameters(Mesh* mesh_pt) :
       SamplePointContainerParameters(mesh_pt),
       BinArrayParameters(mesh_pt),
       Nspiral_chunk(Default_nspiral_chunk)
@@ -476,13 +476,13 @@ namespace oomph
     }
 
     /// \short Broken copy constructor.
-    NonRefineableBinArrayParameters(const NonRefineableBinArrayParameters &data)
+    NonRefineableBinArrayParameters(const NonRefineableBinArrayParameters& data)
     {
       BrokenCopy::broken_copy("NonRefineableBinArrayParameters");
     }
 
     /// Broken assignment operator.
-    void operator=(const NonRefineableBinArrayParameters &)
+    void operator=(const NonRefineableBinArrayParameters&)
     {
       BrokenCopy::broken_assign("NonRefineableBinArrayParameters");
     }
@@ -499,7 +499,7 @@ namespace oomph
     }
     /// \short Number of spirals that are being
     /// visited before doing another circular mpi communication
-    unsigned &nspiral_chunk()
+    unsigned& nspiral_chunk()
     {
       return Nspiral_chunk;
     }

@@ -141,39 +141,39 @@ namespace Global_Physical_Variables
   bool Non_linear_springs = false;
 
   /// Pointer to the upper wall
-  GeomObject *Upper_wall_pt;
+  GeomObject* Upper_wall_pt;
 
   /// Pointer to the lower wall
-  GeomObject *Lower_wall_pt;
+  GeomObject* Lower_wall_pt;
 
   /// Upper wall map
-  map<double, pair<GeomObject *, Vector<double>>> upper_map;
+  map<double, pair<GeomObject*, Vector<double>>> upper_map;
 
   /// Lower wall map
-  map<double, pair<GeomObject *, Vector<double>>> lower_map;
+  map<double, pair<GeomObject*, Vector<double>>> lower_map;
 
   /// Function that prescribes the hydrostatic pressure field at the outlet
-  void hydrostatic_pressure(const double &time,
-                            const Vector<double> &x,
-                            const Vector<double> &n,
-                            Vector<double> &traction)
+  void hydrostatic_pressure(const double& time,
+                            const Vector<double>& x,
+                            const Vector<double>& n,
+                            Vector<double>& traction)
   {
     traction[0] = -ReInvFr * G[1] * x[1];
     traction[1] = 0.0;
   }
 
   /// Load function for the wall elements
-  void spring_load(const Vector<double> &xi,
-                   const Vector<double> &x,
-                   const Vector<double> &N,
-                   Vector<double> &load)
+  void spring_load(const Vector<double>& xi,
+                   const Vector<double>& x,
+                   const Vector<double>& N,
+                   Vector<double>& load)
   {
     load[0] = -Pext * N[0];
     load[1] = -Pext * N[1]; // + Kstiff*(Rest_length_linear - x[1]);
 
     // Now we wish to penalise the tube if it goes above the natural width
     // Find the position of the lower wall
-    pair<GeomObject *, Vector<double>> paired_lower = lower_map[xi[0]];
+    pair<GeomObject*, Vector<double>> paired_lower = lower_map[xi[0]];
     Vector<double> lower_x(2);
     paired_lower.first->position(paired_lower.second, lower_x);
 
@@ -222,10 +222,10 @@ namespace Global_Physical_Variables
   }
 
   /// Load function for the wall elements
-  void spring_load_lower(const Vector<double> &xi,
-                         const Vector<double> &x,
-                         const Vector<double> &N,
-                         Vector<double> &load)
+  void spring_load_lower(const Vector<double>& xi,
+                         const Vector<double>& x,
+                         const Vector<double>& N,
+                         Vector<double>& load)
   {
     load[0] = Pext * N[0];
     load[1] = Pext * N[1]; // - Kstiff*(Rest_length_linear + x[1]);
@@ -239,7 +239,7 @@ namespace Global_Physical_Variables
 
     // Now we wish to penalise the tube if it goes above the natural width
     // Find the position of the upper wall
-    pair<GeomObject *, Vector<double>> paired_upper = upper_map[xi[0]];
+    pair<GeomObject*, Vector<double>> paired_upper = upper_map[xi[0]];
     Vector<double> upper_x(2);
     paired_upper.first->position(paired_upper.second, upper_x);
 
@@ -286,17 +286,17 @@ namespace Global_Physical_Variables
 namespace No_Slip
 {
   /// Function that is used to set and update the no-slip boundary condition
-  void no_slip_condition_first(Node *node_pt)
+  void no_slip_condition_first(Node* node_pt)
   {
     // Cast the node to a spine node
-    SpineNode *spine_node_pt = static_cast<SpineNode *>(node_pt);
+    SpineNode* spine_node_pt = static_cast<SpineNode*>(node_pt);
     // Get the wall coordinate
     Vector<double> s(1);
     s[0] = spine_node_pt->spine_pt()->geom_parameter(0);
     // Prepare the storage for the derivative
     DenseMatrix<double> drdxi(1, 2);
     // Get the derivative
-    dynamic_cast<FSIHermiteBeamElement *>(
+    dynamic_cast<FSIHermiteBeamElement*>(
       spine_node_pt->spine_pt()->geom_object_pt(0))
       ->dposition_dlagrangian_at_local_coordinate(s, drdxi);
 
@@ -306,17 +306,17 @@ namespace No_Slip
     }
   }
 
-  void no_slip_condition_second(Node *node_pt)
+  void no_slip_condition_second(Node* node_pt)
   {
     // Cast the node to a spine node
-    SpineNode *spine_node_pt = static_cast<SpineNode *>(node_pt);
+    SpineNode* spine_node_pt = static_cast<SpineNode*>(node_pt);
     // Get the wall coordinate
     Vector<double> s(1);
     s[0] = spine_node_pt->spine_pt()->geom_parameter(1);
     // Prepare the storage for the derivative
     DenseMatrix<double> drdxi(1, 2);
     // Get the derivative
-    dynamic_cast<FSIHermiteBeamElement *>(
+    dynamic_cast<FSIHermiteBeamElement*>(
       spine_node_pt->spine_pt()->geom_object_pt(1))
       ->dposition_dlagrangian_at_local_coordinate(s, drdxi);
 
@@ -334,11 +334,11 @@ class ElementCmp
 {
 public:
   /// Comparison. Are the values identical or not?
-  bool operator()(GeneralisedElement *const &x,
-                  GeneralisedElement *const &y) const
+  bool operator()(GeneralisedElement* const& x,
+                  GeneralisedElement* const& y) const
   {
-    FiniteElement *cast_x = dynamic_cast<FiniteElement *>(x);
-    FiniteElement *cast_y = dynamic_cast<FiniteElement *>(y);
+    FiniteElement* cast_x = dynamic_cast<FiniteElement*>(x);
+    FiniteElement* cast_y = dynamic_cast<FiniteElement*>(y);
 
     if ((cast_x == 0) || (cast_y == 0))
     {
@@ -365,22 +365,22 @@ class SpineGravityTractionElement :
   unsigned Dim;
 
   /// Pointer to the global Reynold number divided by the Froude number
-  double *ReInvFr_pt;
+  double* ReInvFr_pt;
 
   /// Pointer to global gravity Vector
-  Vector<double> *G_pt;
+  Vector<double>* G_pt;
 
   /// \short Pointer to the viscosity ratio (relative to the
   /// viscosity used in the definition of the Reynolds number)
-  double *Viscosity_Ratio_pt;
+  double* Viscosity_Ratio_pt;
 
   /// \short Pointer to the density ratio (relative to the density used in the
   /// definition of the Reynolds number)
-  double *Density_Ratio_pt;
+  double* Density_Ratio_pt;
 
   /// \short Pointer to an External Data object that represents the
   /// an unknown pressure gradient
-  Data *Delta_P_pt;
+  Data* Delta_P_pt;
 
 protected:
   ///\short Array to hold local eqn number information for veloc:
@@ -406,8 +406,8 @@ protected:
 public:
   /// Constructor, which takes a "bulk" element and the value of the index
   /// and its limit
-  SpineGravityTractionElement(FiniteElement *const &element_pt,
-                              const int &face_index) :
+  SpineGravityTractionElement(FiniteElement* const& element_pt,
+                              const int& face_index) :
     SpineElement<FaceGeometry<ELEMENT>>(), FaceElement()
   {
     // Attach the geometrical information to the element. N.B. This function
@@ -418,7 +418,7 @@ public:
     Dim = node_pt(0)->ndim();
 
     // Set the Physical values from the bulk elemenet
-    ELEMENT *cast_element_pt = dynamic_cast<ELEMENT *>(element_pt);
+    ELEMENT* cast_element_pt = dynamic_cast<ELEMENT*>(element_pt);
     this->ReInvFr_pt = cast_element_pt->re_invfr_pt();
     this->G_pt = cast_element_pt->g_pt();
     this->Viscosity_Ratio_pt = cast_element_pt->viscosity_ratio_pt();
@@ -464,16 +464,16 @@ public:
 
     // Set of unique geometric data that is used to update the bulk,
     // but is not used to update the face
-    std::set<Data *> unique_additional_geom_data;
+    std::set<Data*> unique_additional_geom_data;
     // Get all the geometric data for this (bulk) element
     cast_element_pt->assemble_set_of_all_geometric_data(
       unique_additional_geom_data);
 
     // Now assemble the set of geometric data for the face element
-    std::set<Data *> unique_face_geom_data_pt;
+    std::set<Data*> unique_face_geom_data_pt;
     this->assemble_set_of_all_geometric_data(unique_face_geom_data_pt);
     // Erase the face geometric data from the additional data
-    for (std::set<Data *>::iterator it = unique_face_geom_data_pt.begin();
+    for (std::set<Data*>::iterator it = unique_face_geom_data_pt.begin();
          it != unique_face_geom_data_pt.end();
          ++it)
     {
@@ -481,7 +481,7 @@ public:
     }
 
     // Finally add all unique additional data as external data
-    for (std::set<Data *>::iterator it = unique_additional_geom_data.begin();
+    for (std::set<Data*>::iterator it = unique_additional_geom_data.begin();
          it != unique_additional_geom_data.end();
          ++it)
     {
@@ -491,7 +491,7 @@ public:
 
   void hijack_all_nodes()
   {
-    ELEMENT *cast_element_pt = dynamic_cast<ELEMENT *>(bulk_element_pt());
+    ELEMENT* cast_element_pt = dynamic_cast<ELEMENT*>(bulk_element_pt());
     // Hijack the nodes in the bulk element in the axial coordinate
     unsigned n_node = this->nnode();
     for (unsigned m = 0; m < n_node; m++)
@@ -501,7 +501,7 @@ public:
   }
 
   /// \short Access function to the pointer to pressure gradient data
-  void set_delta_p_pt(Data *const &delta_p_pt)
+  void set_delta_p_pt(Data* const& delta_p_pt)
   {
     Delta_P_pt = delta_p_pt;
     // Add the external data and do not finite difference it!
@@ -529,72 +529,72 @@ public:
 
   /// \short Viscosity ratio for element: Element's viscosity relative to the
   /// viscosity used in the definition of the Reynolds number
-  const double &viscosity_ratio() const
+  const double& viscosity_ratio() const
   {
     return *Viscosity_Ratio_pt;
   }
 
   /// Pointer to Viscosity Ratio
-  double *&viscosity_ratio_pt()
+  double*& viscosity_ratio_pt()
   {
     return Viscosity_Ratio_pt;
   }
 
   /// \short Density ratio for element: Element's density relative to the
   ///  viscosity used in the definition of the Reynolds number
-  const double &density_ratio() const
+  const double& density_ratio() const
   {
     return *Density_Ratio_pt;
   }
 
   /// Pointer to Density ratio
-  double *&density_ratio_pt()
+  double*& density_ratio_pt()
   {
     return Density_Ratio_pt;
   }
 
   /// Pointer to Reynolds number divided by Froude number
-  double *&re_invfr_pt()
+  double*& re_invfr_pt()
   {
     return ReInvFr_pt;
   }
 
   /// Reynolds number divided by Froude number
-  const double &re_invfr()
+  const double& re_invfr()
   {
     return *ReInvFr_pt;
   }
 
   /// Vector of gravitational components
-  const Vector<double> &g() const
+  const Vector<double>& g() const
   {
     return *G_pt;
   }
 
   /// Pointer to Vector of gravitational components
-  Vector<double> *&g_pt()
+  Vector<double>*& g_pt()
   {
     return G_pt;
   }
 
   /// Access function for the velocity. N. B. HEAVY ASSUMPTIONS HERE
-  double u(const unsigned &l, const unsigned &i)
+  double u(const unsigned& l, const unsigned& i)
   {
     return nodal_value(l, i);
   }
 
   ////// \short Velocity i at local node l at timestep t (t=0: present;
   /// t>0: previous). SIMILAR HEAVY ASSUMPTIONS
-  double u(const unsigned &t, const unsigned &l, const unsigned &i) const
+  double u(const unsigned& t, const unsigned& l, const unsigned& i) const
   {
     return nodal_value(t, l, i);
   }
 
   /// \short i-th component of du/dt at local node l.
-  double du_dt(const unsigned &l, const unsigned &i) const
+  double du_dt(const unsigned& l, const unsigned& i) const
   {
     // Get the data's timestepper
-    TimeStepper *time_stepper_pt = node_pt(l)->time_stepper_pt();
+    TimeStepper* time_stepper_pt = node_pt(l)->time_stepper_pt();
 
     // Number of timsteps (past & present)
     unsigned n_time = time_stepper_pt->ntstorage();
@@ -614,7 +614,7 @@ public:
   }
 
   /// Add the contribution to the residuals
-  inline void fill_in_contribution_to_residuals(Vector<double> &residuals)
+  inline void fill_in_contribution_to_residuals(Vector<double>& residuals)
   {
     // Create a dummy matrix
     DenseMatrix<double> dummy(1);
@@ -623,8 +623,8 @@ public:
   }
 
   /// This function returns the residuals and the jacobian
-  inline void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                               DenseMatrix<double> &jacobian)
+  inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                               DenseMatrix<double>& jacobian)
   {
     // Call the generic routine with the flag set to 1
     add_generic_residual_contribution(residuals, jacobian, 1);
@@ -638,8 +638,8 @@ public:
   /// This function returns the residuals for the Navier--Stokes equations;
   /// flag=1(or 0): do (or don't) compute the Jacobian as well.
   //----------------------------------------------------------------------
-  void add_generic_residual_contribution(Vector<double> &residuals,
-                                         DenseMatrix<double> &jacobian,
+  void add_generic_residual_contribution(Vector<double>& residuals,
+                                         DenseMatrix<double>& jacobian,
                                          unsigned flag)
   {
     // Find out how many nodes there are
@@ -655,7 +655,7 @@ public:
     Vector<double> s_parent(Dim);
 
     // Get a pointer to the parent element
-    ELEMENT *bulk_el_pt = dynamic_cast<ELEMENT *>(bulk_element_pt());
+    ELEMENT* bulk_el_pt = dynamic_cast<ELEMENT*>(bulk_element_pt());
 
     // Find the number of nodes in the parent element
     unsigned n_node_parent = bulk_el_pt->nnode();
@@ -1042,10 +1042,10 @@ public:
   }
 
   /// Overload the output function
-  void output(ostream &outfile) {}
+  void output(ostream& outfile) {}
 
   /// Output function: x,y,[z],u,v,[w],p in tecplot format
-  void output(ostream &outfile, const unsigned &Np) {}
+  void output(ostream& outfile, const unsigned& Np) {}
 };
 
 //=======================================================================
@@ -1055,25 +1055,25 @@ class FixSpineHeightElement : public SpineElement<PointElement>
 {
 private:
   /// Pointer to the desired value of the spine height
-  double *Height_pt;
+  double* Height_pt;
 
   /// \short The local eqn number for the pressure that has been traded for
   /// the volume constraint
   int Ptraded_local_eqn;
 
   /// \short The Data that contains the traded pressure
-  Data *Ptraded_data_pt;
+  Data* Ptraded_data_pt;
 
 protected:
   /// Calculate the geometric shape functions at local coordinate s.
-  void shape(const Vector<double> &s, Shape &psi) const
+  void shape(const Vector<double>& s, Shape& psi) const
   {
     psi[0] = 1.0;
   }
 
   /// \short Calculate the geometric shape functions and
   /// derivatives w.r.t. local coordinates at local coordinate s
-  void dshape_local(const Vector<double> &s, Shape &psi, DShape &dpsids) const
+  void dshape_local(const Vector<double>& s, Shape& psi, DShape& dpsids) const
   {
     psi[0] = 1.0;
     dpsids(0, 0) = 0.0;
@@ -1082,7 +1082,7 @@ protected:
 public:
   /// Constructor, there are no internal values. The pointer to the
   /// element's (single) spine is set on construction
-  FixSpineHeightElement(SpineNode *const &spine_node_pt) :
+  FixSpineHeightElement(SpineNode* const& spine_node_pt) :
     SpineElement<PointElement>()
   {
     // Initialise pointer to prescribed spine height
@@ -1095,7 +1095,7 @@ public:
   }
 
   /// Access function to the prescribed spine height
-  double *&height_pt()
+  double*& height_pt()
   {
     return Height_pt;
   }
@@ -1119,11 +1119,11 @@ public:
   }
 
   /// Calculate the residuals
-  void fill_in_contribution_to_residuals(Vector<double> &residuals);
+  void fill_in_contribution_to_residuals(Vector<double>& residuals);
 
   /// Calculate the residuals and the jacobian
-  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                        DenseMatrix<double> &jacobian);
+  void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                        DenseMatrix<double>& jacobian);
 
   /// \short Assign the local equation numbers and their coincidence with
   /// the global values
@@ -1132,7 +1132,7 @@ public:
   /// \short Set the Data that contains the single pressure value
   /// that is "traded" for the volume constraint.
   /// The Data item must only contain a single value!
-  void set_traded_pressure_data(Data *traded_pressure_data_pt)
+  void set_traded_pressure_data(Data* traded_pressure_data_pt)
   {
 #ifdef PARANOID
     if (traded_pressure_data_pt->nvalue() != 1)
@@ -1155,17 +1155,17 @@ public:
   }
 
   /// Overload the output function
-  void output(ostream &outfile) {}
+  void output(ostream& outfile) {}
 
   /// Output function: x,y,[z],u,v,[w],p in tecplot format
-  void output(ostream &outfile, const unsigned &Np) {}
+  void output(ostream& outfile, const unsigned& Np) {}
 };
 
 //==========================================================================
 /// Residuals for the spine-based volumetric constraint (point) element
 //==========================================================================
 void FixSpineHeightElement::fill_in_contribution_to_residuals(
-  Vector<double> &residuals)
+  Vector<double>& residuals)
 {
 #ifdef PARANOID
   if (Height_pt == 0)
@@ -1184,7 +1184,7 @@ void FixSpineHeightElement::fill_in_contribution_to_residuals(
   if (local_eqn >= 0)
   {
     residuals[local_eqn] =
-      static_cast<SpineNode *>(node_pt(0))->spine_pt()->height() - *Height_pt;
+      static_cast<SpineNode*>(node_pt(0))->spine_pt()->height() - *Height_pt;
   }
 }
 
@@ -1193,7 +1193,7 @@ void FixSpineHeightElement::fill_in_contribution_to_residuals(
 /// for the spine-based volumetric constraint element
 //=========================================================================
 void FixSpineHeightElement::fill_in_contribution_to_jacobian(
-  Vector<double> &residuals, DenseMatrix<double> &jacobian)
+  Vector<double>& residuals, DenseMatrix<double>& jacobian)
 {
   // Get the residuals
   fill_in_contribution_to_residuals(residuals);
@@ -1252,18 +1252,18 @@ public:
     add_internal_data(new Data(1));
   }
 
-  void set_flux(const double &flux_value)
+  void set_flux(const double& flux_value)
   {
     Flux = flux_value;
   }
 
-  const double &read_flux() const
+  const double& read_flux() const
   {
     return Flux;
   }
 
   // Add the contribution to the residuals
-  inline void fill_in_contribution_to_residuals(Vector<double> &residuals)
+  inline void fill_in_contribution_to_residuals(Vector<double>& residuals)
   {
     int local_eqn = internal_local_eqn(0, 0);
     if (local_eqn >= 0)
@@ -1272,8 +1272,8 @@ public:
     }
   }
 
-  inline void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                               DenseMatrix<double> &jacobian)
+  inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                               DenseMatrix<double>& jacobian)
   {
     // Call the residuals
     fill_in_contribution_to_residuals(residuals);
@@ -1318,7 +1318,7 @@ public:
 
   /// \short Overload the continuation actions because we're
   /// continuing in Ca which does not affect the mesh
-  void actions_after_change_in_global_parameter(double *const &parameter_pt)
+  void actions_after_change_in_global_parameter(double* const& parameter_pt)
   {
     // Check that the multipliers have worked
     using namespace Global_Physical_Variables;
@@ -1348,8 +1348,8 @@ public:
     const unsigned n_bulk_element = Bulk_mesh_pt->nelement();
     for (unsigned e = 0; e < n_bulk_element; e++)
     {
-      ElementWithMovingNodes *el_pt =
-        dynamic_cast<ElementWithMovingNodes *>(Bulk_mesh_pt->element_pt(e));
+      ElementWithMovingNodes* el_pt =
+        dynamic_cast<ElementWithMovingNodes*>(Bulk_mesh_pt->element_pt(e));
       el_pt->evaluate_shape_derivs_by_direct_fd();
     }
   }
@@ -1362,18 +1362,18 @@ public:
   void actions_after_newton_solve() {}
 
   /// Fix pressure value l in element e to value p_value
-  void fix_pressure(const unsigned &e, const unsigned &l, const double &pvalue)
+  void fix_pressure(const unsigned& e, const unsigned& l, const double& pvalue)
   {
     // Fix the pressure at that element
-    dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e))
+    dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e))
       ->fix_pressure(l, pvalue);
   }
 
   /// Run a parameter study; perform specified number of steps
-  void parameter_study(const unsigned &nsteps, const bool &restart);
+  void parameter_study(const unsigned& nsteps, const bool& restart);
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// Set up the actual outlet elements
   void construct_poisson_outlet_elements()
@@ -1383,7 +1383,7 @@ public:
     unsigned nbound_element = Bulk_mesh_pt->nboundary_element(b);
     for (unsigned e = 0; e < nbound_element; e++)
     {
-      SpineGravityTractionElement<ELEMENT> *outlet_element =
+      SpineGravityTractionElement<ELEMENT>* outlet_element =
         new SpineGravityTractionElement<ELEMENT>(
           Bulk_mesh_pt->boundary_element_pt(b, e),
           Bulk_mesh_pt->face_index_at_boundary(b, e));
@@ -1421,7 +1421,7 @@ public:
     unsigned nbound_element = Bulk_mesh_pt->nboundary_element(b);
     for (unsigned e = 0; e < nbound_element; e++)
     {
-      SpineElement<NavierStokesTractionElement<ELEMENT>> *outlet_element =
+      SpineElement<NavierStokesTractionElement<ELEMENT>>* outlet_element =
         new SpineElement<NavierStokesTractionElement<ELEMENT>>(
           Bulk_mesh_pt->boundary_element_pt(b, e),
           Bulk_mesh_pt->face_index_at_boundary(b, e));
@@ -1440,7 +1440,7 @@ public:
 
   double get_outlet_flux()
   {
-    if (dynamic_cast<SpineGravityTractionElement<ELEMENT> *>(
+    if (dynamic_cast<SpineGravityTractionElement<ELEMENT>*>(
           Outlet_traction_element_pt[0]) == 0)
     {
       return 0.0;
@@ -1450,7 +1450,7 @@ public:
     // Loop over the outlet and calculate the flux
     for (unsigned e = 0; e < Outlet_traction_element_pt.size(); e++)
     {
-      flux += dynamic_cast<SpineGravityTractionElement<ELEMENT> *>(
+      flux += dynamic_cast<SpineGravityTractionElement<ELEMENT>*>(
                 Outlet_traction_element_pt[e])
                 ->get_flux();
     }
@@ -1476,7 +1476,7 @@ public:
     // Hijack the nodes again
     for (unsigned i = 0; i < Outlet_traction_element_pt.size(); i++)
     {
-      dynamic_cast<SpineGravityTractionElement<ELEMENT> *>(
+      dynamic_cast<SpineGravityTractionElement<ELEMENT>*>(
         Outlet_traction_element_pt[i])
         ->hijack_all_nodes();
     }
@@ -1484,7 +1484,7 @@ public:
     // Hijack the nodes again
     for (unsigned i = 0; i < Gravity_traction_element_pt.size(); i++)
     {
-      dynamic_cast<SpineGravityTractionElement<ELEMENT> *>(
+      dynamic_cast<SpineGravityTractionElement<ELEMENT>*>(
         Gravity_traction_element_pt[i])
         ->hijack_all_nodes();
     }
@@ -1502,7 +1502,7 @@ public:
   }
 
   /// Dump the entire problem
-  void dump(ofstream &dump_file) const
+  void dump(ofstream& dump_file) const
   {
     using namespace Global_Physical_Variables;
     dump_file << Re << std::endl;
@@ -1528,7 +1528,7 @@ public:
   }
 
   /// Read the entire problem
-  void read(ifstream &restart_file)
+  void read(ifstream& restart_file)
   {
     using namespace Global_Physical_Variables;
     restart_file >> Re;
@@ -1556,20 +1556,20 @@ public:
   }
 
   /// Setup the coupling between the upper and lower walls
-  void connect_walls(Mesh *const &wall_mesh_pt,
-                     GeomObject *const &geom_object_pt,
-                     map<double, pair<GeomObject *, Vector<double>>> &globalmap)
+  void connect_walls(Mesh* const& wall_mesh_pt,
+                     GeomObject* const& geom_object_pt,
+                     map<double, pair<GeomObject*, Vector<double>>>& globalmap)
   {
     // Loop over the elements in the wall mesh
     unsigned n_wall_element = wall_mesh_pt->nelement();
     for (unsigned e = 0; e < n_wall_element; e++)
     {
       // A set of geometric data to be added to the element
-      set<Data *> extra_data;
+      set<Data*> extra_data;
 
       // Cast each element to an FSIWallElement
-      FSIHermiteBeamElement *solid_element_pt =
-        dynamic_cast<FSIHermiteBeamElement *>(wall_mesh_pt->element_pt(e));
+      FSIHermiteBeamElement* solid_element_pt =
+        dynamic_cast<FSIHermiteBeamElement*>(wall_mesh_pt->element_pt(e));
 
       // Find the number of Gauss points of the element
       unsigned nintpt = solid_element_pt->integral_pt()->nweight();
@@ -1580,7 +1580,7 @@ public:
       // Set storage for the zeta (intrinsic coordinate) at the Gauss point
       Vector<double> zeta(el_dim);
       // Define storage for the geometric object that contains the Gauss point
-      GeomObject *sub_obj_pt;
+      GeomObject* sub_obj_pt;
 
       // Loop over the integration points
       for (unsigned ipt = 0; ipt < nintpt; ipt++)
@@ -1612,8 +1612,7 @@ public:
       }
 
       // Add the data to the external data of the object
-      for (set<Data *>::iterator it = extra_data.begin();
-           it != extra_data.end();
+      for (set<Data*>::iterator it = extra_data.begin(); it != extra_data.end();
            ++it)
       {
         solid_element_pt->add_external_data(*it);
@@ -1623,49 +1622,49 @@ public:
 
 private:
   /// Pointer to control element
-  ELEMENT *Control_element_pt;
+  ELEMENT* Control_element_pt;
 
   /// Trace file
   ofstream Trace_file;
 
   /// Pointer to bulk mesh
-  BrethertonSpineMesh<ELEMENT, SpineLineFluidInterfaceElement<ELEMENT>>
-    *Bulk_mesh_pt;
+  BrethertonSpineMesh<ELEMENT, SpineLineFluidInterfaceElement<ELEMENT>>*
+    Bulk_mesh_pt;
 
   /// Pointer to Wall mesh
-  OneDLagrangianMesh<FSIHermiteBeamElement> *Upper_wall_mesh_pt;
+  OneDLagrangianMesh<FSIHermiteBeamElement>* Upper_wall_mesh_pt;
 
   /// Pointer to lower wall mesh
-  OneDLagrangianMesh<FSIHermiteBeamElement> *Lower_wall_mesh_pt;
+  OneDLagrangianMesh<FSIHermiteBeamElement>* Lower_wall_mesh_pt;
 
   /// Pointer to the constraint mesh
-  Mesh *Constraint_mesh_pt;
+  Mesh* Constraint_mesh_pt;
 
   /// Pointer to the Undeformed wall
-  GeomObject *Undeformed_upper_wall_geom_pt;
+  GeomObject* Undeformed_upper_wall_geom_pt;
 
   /// Pointer to the Undeformed wall
-  GeomObject *Undeformed_lower_wall_geom_pt;
+  GeomObject* Undeformed_lower_wall_geom_pt;
 
   /// Fixed height value
   double Fixed_spine_height;
 
   /// Data value that represents the bubble pressure
-  Data *Bubble_pressure_data_pt;
+  Data* Bubble_pressure_data_pt;
 
   /// \short Data value that represents the vertical fraction
   /// between the upper and lower walls of the centre of the spines
   /// at the point of transition of the spine mesh
-  Data *Mesh_fraction_at_transition_pt;
+  Data* Mesh_fraction_at_transition_pt;
 
   /// Vector of pointers to the traction elements
-  Vector<FiniteElement *> Gravity_traction_element_pt;
+  Vector<FiniteElement*> Gravity_traction_element_pt;
 
   /// Vector of pointers to the outlet traciton elements
-  Vector<FiniteElement *> Outlet_traction_element_pt;
+  Vector<FiniteElement*> Outlet_traction_element_pt;
 
   /// Flux constraint element
-  FluxConstraint *Flux_constraint_pt;
+  FluxConstraint* Flux_constraint_pt;
 
   /// Boolean flag  to specify the use of the frontal solver
   bool Frontal_solver;
@@ -1742,8 +1741,8 @@ AirwayReopeningProblem<ELEMENT>::AirwayReopeningProblem()
   unsigned n_upper_wall_element = Upper_wall_mesh_pt->nelement();
   for (unsigned e = 0; e < n_upper_wall_element; e++)
   {
-    FSIHermiteBeamElement *element_pt =
-      dynamic_cast<FSIHermiteBeamElement *>(Upper_wall_mesh_pt->element_pt(e));
+    FSIHermiteBeamElement* element_pt =
+      dynamic_cast<FSIHermiteBeamElement*>(Upper_wall_mesh_pt->element_pt(e));
 
     // Assign the undeformed beam shape
     element_pt->undeformed_beam_pt() = Undeformed_upper_wall_geom_pt;
@@ -1765,7 +1764,7 @@ AirwayReopeningProblem<ELEMENT>::AirwayReopeningProblem()
   }
 
   // Create a geometric object that represents the wall geometry
-  MeshAsGeomObject *upper_wall_element_pt =
+  MeshAsGeomObject* upper_wall_element_pt =
     new MeshAsGeomObject(Upper_wall_mesh_pt);
 
   // The underformed lower wall is a straight line at y = -1.0
@@ -1779,8 +1778,8 @@ AirwayReopeningProblem<ELEMENT>::AirwayReopeningProblem()
   unsigned n_lower_wall_element = Lower_wall_mesh_pt->nelement();
   for (unsigned e = 0; e < n_lower_wall_element; e++)
   {
-    FSIHermiteBeamElement *element_pt =
-      dynamic_cast<FSIHermiteBeamElement *>(Lower_wall_mesh_pt->element_pt(e));
+    FSIHermiteBeamElement* element_pt =
+      dynamic_cast<FSIHermiteBeamElement*>(Lower_wall_mesh_pt->element_pt(e));
 
     // Assign the undeformed beam shape
     element_pt->undeformed_beam_pt() = Undeformed_lower_wall_geom_pt;
@@ -1803,16 +1802,16 @@ AirwayReopeningProblem<ELEMENT>::AirwayReopeningProblem()
   }
 
   // Create a geometric object that represents the wall geometry
-  MeshAsGeomObject *lower_wall_element_pt =
+  MeshAsGeomObject* lower_wall_element_pt =
     new MeshAsGeomObject(Lower_wall_mesh_pt);
 
   // Create wall geom objects
   // GeomObject* lower_wall_pt = new StraightLine(-1.0);
-  GeomObject *lower_wall_pt = lower_wall_element_pt;
+  GeomObject* lower_wall_pt = lower_wall_element_pt;
   Global_Physical_Variables::Lower_wall_pt = lower_wall_pt;
 
   // GeomObject* upper_wall_pt=new StraightLine( 1.0);
-  GeomObject *upper_wall_pt = upper_wall_element_pt;
+  GeomObject* upper_wall_pt = upper_wall_element_pt;
   Global_Physical_Variables::Upper_wall_pt = upper_wall_pt;
 
   // Now create the mesh
@@ -1839,11 +1838,11 @@ AirwayReopeningProblem<ELEMENT>::AirwayReopeningProblem()
   Control_element_pt = Bulk_mesh_pt->control_element_pt();
 
   // Create a fixed element using the central spine
-  FixSpineHeightElement *fix_spine_element_pt = new FixSpineHeightElement(
-    static_cast<SpineNode *>(Control_element_pt->node_pt(8)));
+  FixSpineHeightElement* fix_spine_element_pt = new FixSpineHeightElement(
+    static_cast<SpineNode*>(Control_element_pt->node_pt(8)));
 
   // Set the fixed spine height
-  Fixed_spine_height = static_cast<SpineNode *>(Control_element_pt->node_pt(8))
+  Fixed_spine_height = static_cast<SpineNode*>(Control_element_pt->node_pt(8))
                          ->spine_pt()
                          ->height();
 
@@ -1862,7 +1861,7 @@ AirwayReopeningProblem<ELEMENT>::AirwayReopeningProblem()
     unsigned nbound_element = Bulk_mesh_pt->nboundary_element(b);
     for (unsigned e = 0; e < nbound_element; e++)
     {
-      SpineGravityTractionElement<ELEMENT> *inlet_element =
+      SpineGravityTractionElement<ELEMENT>* inlet_element =
         new SpineGravityTractionElement<ELEMENT>(
           Bulk_mesh_pt->boundary_element_pt(b, e),
           Bulk_mesh_pt->face_index_at_boundary(b, e));
@@ -1894,7 +1893,7 @@ AirwayReopeningProblem<ELEMENT>::AirwayReopeningProblem()
     Vector<double> zeta(1);
     for (unsigned n = 0; n < nbound; n++)
     {
-      Node *node_pt = Bulk_mesh_pt->boundary_node_pt(2, n);
+      Node* node_pt = Bulk_mesh_pt->boundary_node_pt(2, n);
       zeta[0] = node_pt->x(0);
       node_pt->set_coordinates_on_boundary(2, zeta);
     }
@@ -1910,7 +1909,7 @@ AirwayReopeningProblem<ELEMENT>::AirwayReopeningProblem()
     Vector<double> zeta(1);
     for (unsigned n = 0; n < nbound; n++)
     {
-      Node *node_pt = Bulk_mesh_pt->boundary_node_pt(0, n);
+      Node* node_pt = Bulk_mesh_pt->boundary_node_pt(0, n);
       zeta[0] = node_pt->x(0);
       node_pt->set_coordinates_on_boundary(0, zeta);
     }
@@ -1986,8 +1985,8 @@ AirwayReopeningProblem<ELEMENT>::AirwayReopeningProblem()
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // cast to a spine node
-      SpineNode *spine_node_pt =
-        static_cast<SpineNode *>(Bulk_mesh_pt->boundary_node_pt(b, inod));
+      SpineNode* spine_node_pt =
+        static_cast<SpineNode*>(Bulk_mesh_pt->boundary_node_pt(b, inod));
 
       // Find the id of the node
       unsigned id = spine_node_pt->node_update_fct_id();
@@ -2020,8 +2019,8 @@ AirwayReopeningProblem<ELEMENT>::AirwayReopeningProblem()
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // cast to a spine node
-      SpineNode *spine_node_pt =
-        static_cast<SpineNode *>(Bulk_mesh_pt->boundary_node_pt(b, inod));
+      SpineNode* spine_node_pt =
+        static_cast<SpineNode*>(Bulk_mesh_pt->boundary_node_pt(b, inod));
 
       // Find the id of the node
       unsigned id = spine_node_pt->node_update_fct_id();
@@ -2060,7 +2059,7 @@ AirwayReopeningProblem<ELEMENT>::AirwayReopeningProblem()
   for (unsigned long i = 0; i < n_bulk; i++)
   {
     // Cast to a fluid element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->bulk_element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->bulk_element_pt(i));
     // Set the Reynolds number, etc
     el_pt->re_pt() = &Global_Physical_Variables::Re;
     el_pt->re_st_pt() = &Global_Physical_Variables::ReSt;
@@ -2073,8 +2072,8 @@ AirwayReopeningProblem<ELEMENT>::AirwayReopeningProblem()
   for (unsigned i = 0; i < interface_element_pt_range; i++)
   {
     // Cast to a interface element
-    SpineLineFluidInterfaceElement<ELEMENT> *el_pt =
-      dynamic_cast<SpineLineFluidInterfaceElement<ELEMENT> *>(
+    SpineLineFluidInterfaceElement<ELEMENT>* el_pt =
+      dynamic_cast<SpineLineFluidInterfaceElement<ELEMENT>*>(
         Bulk_mesh_pt->interface_element_pt(i));
 
     // Set the Capillary number
@@ -2098,8 +2097,8 @@ AirwayReopeningProblem<ELEMENT>::AirwayReopeningProblem()
   for (unsigned e = 0; e < n_traction; e++)
   {
     // Cast to the traction element
-    SpineGravityTractionElement<ELEMENT> *el_pt =
-      dynamic_cast<SpineGravityTractionElement<ELEMENT> *>(
+    SpineGravityTractionElement<ELEMENT>* el_pt =
+      dynamic_cast<SpineGravityTractionElement<ELEMENT>*>(
         Gravity_traction_element_pt[e]);
 
     // Set the Reynolds number divided by the Froude number
@@ -2125,7 +2124,7 @@ AirwayReopeningProblem<ELEMENT>::AirwayReopeningProblem()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void AirwayReopeningProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void AirwayReopeningProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -2193,7 +2192,7 @@ void AirwayReopeningProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
   unsigned n_bulk = Bulk_mesh_pt->nbulk();
   for (unsigned i = 0; i < n_bulk; i++)
   {
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->bulk_element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->bulk_element_pt(i));
     el_pt->output(some_file, npts);
   }
   some_file.close();
@@ -2203,8 +2202,8 @@ void AirwayReopeningProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
 /// Parameter study
 //=============================================================================
 template<class ELEMENT>
-void AirwayReopeningProblem<ELEMENT>::parameter_study(const unsigned &nsteps,
-                                                      const bool &restart)
+void AirwayReopeningProblem<ELEMENT>::parameter_study(const unsigned& nsteps,
+                                                      const bool& restart)
 {
   double flux = 0.0;
   // Increase maximum residual
@@ -2350,7 +2349,7 @@ void AirwayReopeningProblem<ELEMENT>::parameter_study(const unsigned &nsteps,
 /// any command line arguments, we regard this as a validation run
 /// and perform only a single step.
 //======================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

@@ -49,7 +49,7 @@ namespace oomph
   //======================================================================
   template<class ELEMENT>
   XdaTetMesh<ELEMENT>::XdaTetMesh(const std::string xda_file_name,
-                                  TimeStepper *time_stepper_pt)
+                                  TimeStepper* time_stepper_pt)
   {
     // Mesh can only be built with 3D Telements.
     MeshChecker::assert_geometric_element<TElementGeometricBase, ELEMENT>(3);
@@ -344,13 +344,13 @@ namespace oomph
   //======================================================================
   template<class ELEMENT>
   void XdaTetMesh<ELEMENT>::setup_boundary_coordinates(
-    const unsigned &b, const bool &switch_normal, std::ofstream &outfile)
+    const unsigned& b, const bool& switch_normal, std::ofstream& outfile)
   {
     // Temporary storage for face elements
-    Vector<FiniteElement *> face_el_pt;
+    Vector<FiniteElement*> face_el_pt;
 
     // Backup for nodal positions
-    std::map<Node *, Vector<double>> backup_position;
+    std::map<Node*, Vector<double>> backup_position;
 
     // Loop over all elements on boundaries
     unsigned nel = this->nboundary_element(b);
@@ -360,13 +360,13 @@ namespace oomph
       for (unsigned e = 0; e < nel; e++)
       {
         // Get pointer to the bulk element that is adjacent to boundary b
-        FiniteElement *bulk_elem_pt = this->boundary_element_pt(b, e);
+        FiniteElement* bulk_elem_pt = this->boundary_element_pt(b, e);
 
         // Find the index of the face of element e along boundary b
         int face_index = this->face_index_at_boundary(b, e);
 
         // Create new face element
-        DummyFaceElement<ELEMENT> *el_pt =
+        DummyFaceElement<ELEMENT>* el_pt =
           new DummyFaceElement<ELEMENT>(bulk_elem_pt, face_index);
         face_el_pt.push_back(el_pt);
 
@@ -405,15 +405,15 @@ namespace oomph
       }
 
       // Loop over all nodes to find the lower left and upper right ones
-      Node *lower_left_node_pt = this->boundary_node_pt(b, 0);
-      Node *upper_right_node_pt = this->boundary_node_pt(b, 0);
+      Node* lower_left_node_pt = this->boundary_node_pt(b, 0);
+      Node* upper_right_node_pt = this->boundary_node_pt(b, 0);
 
       // Loop over all nodes on the boundary
       unsigned nnod = this->nboundary_node(b);
       for (unsigned j = 0; j < nnod; j++)
       {
         // Get node
-        Node *nod_pt = this->boundary_node_pt(b, j);
+        Node* nod_pt = this->boundary_node_pt(b, j);
 
         // Primary criterion for lower left: Does it have a lower z-coordinate?
         if (nod_pt->x(2) < lower_left_node_pt->x(2))
@@ -484,7 +484,7 @@ namespace oomph
       // Get (outer) unit normal to first face element
       Vector<double> normal(3);
       Vector<double> s(2, 0.0);
-      dynamic_cast<DummyFaceElement<ELEMENT> *>(face_el_pt[0])
+      dynamic_cast<DummyFaceElement<ELEMENT>*>(face_el_pt[0])
         ->outer_unit_normal(s, normal);
 
       if (switch_normal)
@@ -501,7 +501,7 @@ namespace oomph
       {
         // Get (outer) unit normal to face element
         Vector<double> my_normal(3);
-        dynamic_cast<DummyFaceElement<ELEMENT> *>(face_el_pt[0])
+        dynamic_cast<DummyFaceElement<ELEMENT>*>(face_el_pt[0])
           ->outer_unit_normal(s, my_normal);
 
         // Dot product should be one!
@@ -540,7 +540,7 @@ namespace oomph
       for (unsigned j = 0; j < nnod; j++)
       {
         // Get node
-        Node *nod_pt = this->boundary_node_pt(b, j);
+        Node* nod_pt = this->boundary_node_pt(b, j);
 
         // Difference vector to lower left corner
         Vector<double> delta(3);
@@ -599,12 +599,11 @@ namespace oomph
     }
 
     // Reset nodal position
-    for (std::map<Node *, Vector<double>>::iterator it =
-           backup_position.begin();
+    for (std::map<Node*, Vector<double>>::iterator it = backup_position.begin();
          it != backup_position.end();
          it++)
     {
-      Node *nod_pt = (*it).first;
+      Node* nod_pt = (*it).first;
       Vector<double> pos((*it).second);
       for (unsigned i = 0; i < 3; i++)
       {

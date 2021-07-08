@@ -84,10 +84,10 @@ namespace Global_Parameters
   double Zmax = Zmin + Lz;
 
   /// The traction function at r=Rmin: (t_r, t_z, t_theta)
-  void boundary_traction(const double &time,
-                         const Vector<double> &x,
-                         const Vector<double> &n,
-                         Vector<double> &result)
+  void boundary_traction(const double& time,
+                         const Vector<double>& x,
+                         const Vector<double>& n,
+                         Vector<double>& result)
   {
     result[0] =
       cos(time) * (-6.0 * pow(x[0], 2) * Mu * cos(x[1]) -
@@ -99,9 +99,9 @@ namespace Global_Parameters
 
   /// \short The body force function; returns vector of doubles
   /// in the order (b_r, b_z, b_theta)
-  void body_force(const double &time,
-                  const Vector<double> &x,
-                  Vector<double> &result)
+  void body_force(const double& time,
+                  const Vector<double>& x,
+                  Vector<double>& result)
   {
     result[0] =
       cos(time) * (x[0] * (-cos(x[1]) * (Lambda * (8.0 + 3.0 * x[0]) -
@@ -120,7 +120,7 @@ namespace Global_Parameters
   /// vector. This is necessary because we need to multiply this by different
   /// things to obtain the velocity and acceleration
   /// 0: u_r, 1: u_z, 2: u_theta
-  void exact_solution_th(const Vector<double> &x, Vector<double> &u)
+  void exact_solution_th(const Vector<double>& x, Vector<double>& u)
   {
     u[0] = pow(x[0], 3) * cos(x[1]);
     u[1] = pow(x[0], 3) * sin(x[1]);
@@ -132,7 +132,7 @@ namespace Global_Parameters
   // each component in each case.
 
   /// Calculate the time dependent form of the r-component of displacement
-  double u_r(const double &time, const Vector<double> &x)
+  double u_r(const double& time, const Vector<double>& x)
   {
     Vector<double> displ(3);
     exact_solution_th(x, displ);
@@ -140,7 +140,7 @@ namespace Global_Parameters
   } // end_of_u_r
 
   /// Calculate the time dependent form of the z-component of displacement
-  double u_z(const double &time, const Vector<double> &x)
+  double u_z(const double& time, const Vector<double>& x)
   {
     Vector<double> displ(3);
     exact_solution_th(x, displ);
@@ -148,7 +148,7 @@ namespace Global_Parameters
   }
 
   /// Calculate the time dependent form of the theta-component of displacement
-  double u_theta(const double &time, const Vector<double> &x)
+  double u_theta(const double& time, const Vector<double>& x)
   {
     Vector<double> displ(3);
     exact_solution_th(x, displ);
@@ -156,7 +156,7 @@ namespace Global_Parameters
   }
 
   /// Calculate the time dependent form of the r-component of velocity
-  double d_u_r_dt(const double &time, const Vector<double> &x)
+  double d_u_r_dt(const double& time, const Vector<double>& x)
   {
     Vector<double> displ(3);
     exact_solution_th(x, displ);
@@ -164,7 +164,7 @@ namespace Global_Parameters
   }
 
   /// Calculate the time dependent form of the z-component of velocity
-  double d_u_z_dt(const double &time, const Vector<double> &x)
+  double d_u_z_dt(const double& time, const Vector<double>& x)
   {
     Vector<double> displ(3);
     exact_solution_th(x, displ);
@@ -172,7 +172,7 @@ namespace Global_Parameters
   }
 
   /// Calculate the time dependent form of the theta-component of velocity
-  double d_u_theta_dt(const double &time, const Vector<double> &x)
+  double d_u_theta_dt(const double& time, const Vector<double>& x)
   {
     Vector<double> displ(3);
     exact_solution_th(x, displ);
@@ -180,7 +180,7 @@ namespace Global_Parameters
   }
 
   /// Calculate the time dependent form of the r-component of acceleration
-  double d2_u_r_dt2(const double &time, const Vector<double> &x)
+  double d2_u_r_dt2(const double& time, const Vector<double>& x)
   {
     Vector<double> displ(3);
     exact_solution_th(x, displ);
@@ -188,7 +188,7 @@ namespace Global_Parameters
   }
 
   /// Calculate the time dependent form of the z-component of acceleration
-  double d2_u_z_dt2(const double &time, const Vector<double> &x)
+  double d2_u_z_dt2(const double& time, const Vector<double>& x)
   {
     Vector<double> displ(3);
     exact_solution_th(x, displ);
@@ -196,7 +196,7 @@ namespace Global_Parameters
   }
 
   /// Calculate the time dependent form of the theta-component of acceleration
-  double d2_u_theta_dt2(const double &time, const Vector<double> &x)
+  double d2_u_theta_dt2(const double& time, const Vector<double>& x)
   {
     Vector<double> displ(3);
     exact_solution_th(x, displ);
@@ -205,9 +205,9 @@ namespace Global_Parameters
 
   /// The exact solution in a vector:
   /// 0: u_r, 1: u_z, 2: u_theta and their 1st and 2nd derivs
-  void exact_solution(const double &time,
-                      const Vector<double> &x,
-                      Vector<double> &u)
+  void exact_solution(const double& time,
+                      const Vector<double>& x,
+                      Vector<double>& u)
   {
     u[0] = u_r(time, x);
     u[1] = u_z(time, x);
@@ -257,17 +257,17 @@ public:
   void set_boundary_conditions();
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 private:
   /// Allocate traction elements on the bottom surface
   void assign_traction_elements();
 
   /// Pointer to the bulk mesh
-  Mesh *Bulk_mesh_pt;
+  Mesh* Bulk_mesh_pt;
 
   /// Pointer to the mesh of traction elements
-  Mesh *Surface_mesh_pt;
+  Mesh* Surface_mesh_pt;
 }; // end_of_problem_class
 
 //===start_of_constructor=============================================
@@ -304,7 +304,7 @@ AxisymmetricLinearElasticityProblem<ELEMENT, TIMESTEPPER>::
   for (unsigned e = 0; e < n_el; e++)
   {
     // Cast to a bulk element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
     // Set the body force
     el_pt->body_force_fct_pt() = &Global_Parameters::body_force;
@@ -325,8 +325,8 @@ AxisymmetricLinearElasticityProblem<ELEMENT, TIMESTEPPER>::
   for (unsigned e = 0; e < n_traction; e++)
   {
     // Cast to a surface element
-    AxisymmetricLinearElasticityTractionElement<ELEMENT> *el_pt =
-      dynamic_cast<AxisymmetricLinearElasticityTractionElement<ELEMENT> *>(
+    AxisymmetricLinearElasticityTractionElement<ELEMENT>* el_pt =
+      dynamic_cast<AxisymmetricLinearElasticityTractionElement<ELEMENT>*>(
         Surface_mesh_pt->element_pt(e));
 
     // Set the applied traction
@@ -395,7 +395,7 @@ void AxisymmetricLinearElasticityProblem<ELEMENT, TIMESTEPPER>::
   for (unsigned n = 0; n < n_neigh; n++)
   {
     // Create the face element
-    FiniteElement *traction_element_pt =
+    FiniteElement* traction_element_pt =
       new AxisymmetricLinearElasticityTractionElement<ELEMENT>(
         Bulk_mesh_pt->boundary_element_pt(bound, n),
         Bulk_mesh_pt->face_index_at_boundary(bound, n));
@@ -414,7 +414,7 @@ void AxisymmetricLinearElasticityProblem<ELEMENT,
                                          TIMESTEPPER>::set_initial_conditions()
 {
   // Upcast the timestepper to the specific type we have
-  TIMESTEPPER *timestepper_pt = dynamic_cast<TIMESTEPPER *>(time_stepper_pt());
+  TIMESTEPPER* timestepper_pt = dynamic_cast<TIMESTEPPER*>(time_stepper_pt());
 
   // By default do a non-impulsive start and provide initial conditions
   bool impulsive_start = false;
@@ -428,7 +428,7 @@ void AxisymmetricLinearElasticityProblem<ELEMENT,
     for (unsigned inod = 0; inod < n_node; inod++)
     {
       // Pointer to node
-      Node *nod_pt = Bulk_mesh_pt->node_pt(inod);
+      Node* nod_pt = Bulk_mesh_pt->node_pt(inod);
 
       // Get nodal coordinates
       Vector<double> x(2);
@@ -477,7 +477,7 @@ void AxisymmetricLinearElasticityProblem<ELEMENT,
     for (unsigned inod = 0; inod < n_node; inod++)
     {
       // Pointer to node
-      Node *nod_pt = Bulk_mesh_pt->node_pt(inod);
+      Node* nod_pt = Bulk_mesh_pt->node_pt(inod);
 
       // Assign the history values
       timestepper_pt->assign_initial_data_values(
@@ -491,7 +491,7 @@ void AxisymmetricLinearElasticityProblem<ELEMENT,
     for (unsigned jnod = 0; jnod < n_node; jnod++)
     {
       // Pointer to node
-      Node *nod_pt = Bulk_mesh_pt->node_pt(jnod);
+      Node* nod_pt = Bulk_mesh_pt->node_pt(jnod);
 
       // Get nodal coordinates
       Vector<double> x(2);
@@ -604,7 +604,7 @@ void AxisymmetricLinearElasticityProblem<ELEMENT,
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Get pointer to node
-      Node *nod_pt = Bulk_mesh_pt->boundary_node_pt(ibound, inod);
+      Node* nod_pt = Bulk_mesh_pt->boundary_node_pt(ibound, inod);
 
       // Pinned in r, z and theta
       nod_pt->pin(0);
@@ -631,8 +631,8 @@ void AxisymmetricLinearElasticityProblem<ELEMENT,
       else
       {
         // Upcast the timestepper to the specific type we have
-        TIMESTEPPER *timestepper_pt =
-          dynamic_cast<TIMESTEPPER *>(time_stepper_pt());
+        TIMESTEPPER* timestepper_pt =
+          dynamic_cast<TIMESTEPPER*>(time_stepper_pt());
 
         // Assign the history values
         timestepper_pt->assign_initial_data_values(
@@ -647,7 +647,7 @@ void AxisymmetricLinearElasticityProblem<ELEMENT,
 //========================================================================
 template<class ELEMENT, class TIMESTEPPER>
 void AxisymmetricLinearElasticityProblem<ELEMENT, TIMESTEPPER>::doc_solution(
-  DocInfo &doc_info)
+  DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -700,7 +700,7 @@ void AxisymmetricLinearElasticityProblem<ELEMENT, TIMESTEPPER>::doc_solution(
 //===start_of_main======================================================
 /// Driver code
 //======================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

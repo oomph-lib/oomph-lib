@@ -59,13 +59,13 @@ namespace oomph
     Integral(){};
 
     /// Broken copy constructor
-    Integral(const Integral &dummy)
+    Integral(const Integral& dummy)
     {
       BrokenCopy::broken_copy("Integral");
     }
 
     /// Broken assignment operator
-    void operator=(const Integral &)
+    void operator=(const Integral&)
     {
       BrokenCopy::broken_assign("Integral");
     }
@@ -77,10 +77,10 @@ namespace oomph
     virtual unsigned nweight() const = 0;
 
     /// Return local coordinate s[j]  of i-th integration point.
-    virtual double knot(const unsigned &i, const unsigned &j) const = 0;
+    virtual double knot(const unsigned& i, const unsigned& j) const = 0;
 
     /// Return local coordinates of i-th intergration point.
-    virtual Vector<double> knot(const unsigned &i) const
+    virtual Vector<double> knot(const unsigned& i) const
     {
       throw OomphLibError("Not implemented for this integration scheme (yet?).",
                           OOMPH_CURRENT_FUNCTION,
@@ -88,7 +88,7 @@ namespace oomph
     }
 
     /// Return weight of i-th integration point.
-    virtual double weight(const unsigned &i) const = 0;
+    virtual double weight(const unsigned& i) const = 0;
   };
 
   //=============================================================================
@@ -105,13 +105,13 @@ namespace oomph
     PointIntegral(){};
 
     /// Broken copy constructor
-    PointIntegral(const PointIntegral &dummy)
+    PointIntegral(const PointIntegral& dummy)
     {
       BrokenCopy::broken_copy("PointIntegral");
     }
 
     /// Broken assignment operator
-    void operator=(const PointIntegral &)
+    void operator=(const PointIntegral&)
     {
       BrokenCopy::broken_assign("PointIntegral");
     }
@@ -124,7 +124,7 @@ namespace oomph
 
     /// \short Return coordinate s[j] (j=0) of integration point i --
     /// deliberately broken!
-    double knot(const unsigned &i, const unsigned &j) const
+    double knot(const unsigned& i, const unsigned& j) const
     {
       throw OomphLibError("Local coordinate vector is of size zero, so this "
                           "should never be called.",
@@ -136,7 +136,7 @@ namespace oomph
     }
 
     /// Return weight of integration point i
-    double weight(const unsigned &i) const
+    double weight(const unsigned& i) const
     {
       return 1.0;
     }
@@ -186,13 +186,13 @@ namespace oomph
     Gauss(){};
 
     /// Broken copy constructor
-    Gauss(const Gauss &dummy)
+    Gauss(const Gauss& dummy)
     {
       BrokenCopy::broken_copy("Gauss");
     }
 
     /// Broken assignment operator
-    void operator=(const Gauss &)
+    void operator=(const Gauss&)
     {
       BrokenCopy::broken_assign("Gauss");
     }
@@ -204,13 +204,13 @@ namespace oomph
     }
 
     /// Return coordinate s[j] (j=0) of integration point i
-    double knot(const unsigned &i, const unsigned &j) const
+    double knot(const unsigned& i, const unsigned& j) const
     {
       return Knot[i][j];
     }
 
     /// Return weight of integration point i
-    double weight(const unsigned &i) const
+    double weight(const unsigned& i) const
     {
       return Weight[i];
     }
@@ -238,13 +238,13 @@ namespace oomph
     Gauss(){};
 
     /// Broken copy constructor
-    Gauss(const Gauss &dummy)
+    Gauss(const Gauss& dummy)
     {
       BrokenCopy::broken_copy("Gauss");
     }
 
     /// Broken assignment operator
-    void operator=(const Gauss &)
+    void operator=(const Gauss&)
     {
       BrokenCopy::broken_assign("Gauss");
     }
@@ -256,13 +256,13 @@ namespace oomph
     }
 
     /// Return coordinate s[j] (j=0) of integration point i
-    double knot(const unsigned &i, const unsigned &j) const
+    double knot(const unsigned& i, const unsigned& j) const
     {
       return Knot[i][j];
     }
 
     /// Return weight of integration point i
-    double weight(const unsigned &i) const
+    double weight(const unsigned& i) const
     {
       return Weight[i];
     }
@@ -290,13 +290,13 @@ namespace oomph
     Gauss(){};
 
     /// Broken copy constructor
-    Gauss(const Gauss &dummy)
+    Gauss(const Gauss& dummy)
     {
       BrokenCopy::broken_copy("Gauss");
     }
 
     /// Broken assignment operator
-    void operator=(const Gauss &)
+    void operator=(const Gauss&)
     {
       BrokenCopy::broken_assign("Gauss");
     }
@@ -308,13 +308,13 @@ namespace oomph
     }
 
     /// Return coordinate x[j] (j=0) of integration point i
-    double knot(const unsigned &i, const unsigned &j) const
+    double knot(const unsigned& i, const unsigned& j) const
     {
       return Knot[i][j];
     }
 
     /// Return weight of integration point i
-    double weight(const unsigned &i) const
+    double weight(const unsigned& i) const
     {
       return Weight[i];
     }
@@ -342,13 +342,13 @@ namespace oomph
     Gauss(){};
 
     /// Broken copy constructor
-    Gauss(const Gauss &dummy)
+    Gauss(const Gauss& dummy)
     {
       BrokenCopy::broken_copy("Gauss");
     }
 
     /// Broken assignment operator
-    void operator=(const Gauss &)
+    void operator=(const Gauss&)
     {
       BrokenCopy::broken_assign("Gauss");
     }
@@ -360,13 +360,13 @@ namespace oomph
     }
 
     /// Return coordinate x[j] of integration point i
-    double knot(const unsigned &i, const unsigned &j) const
+    double knot(const unsigned& i, const unsigned& j) const
     {
       return Knot[i][j];
     }
 
     /// Return weight of integration point i
-    double weight(const unsigned &i) const
+    double weight(const unsigned& i) const
     {
       return Weight[i];
     }
@@ -394,13 +394,13 @@ namespace oomph
     Gauss(){};
 
     /// Broken copy constructor
-    Gauss(const Gauss &dummy)
+    Gauss(const Gauss& dummy)
     {
       BrokenCopy::broken_copy("Gauss");
     }
 
     /// Broken assignment operator
-    void operator=(const Gauss &)
+    void operator=(const Gauss&)
     {
       BrokenCopy::broken_assign("Gauss");
     }
@@ -412,13 +412,13 @@ namespace oomph
     }
 
     /// Return coordinate s[j] of integration point i
-    double knot(const unsigned &i, const unsigned &j) const
+    double knot(const unsigned& i, const unsigned& j) const
     {
       return Knot[i][j];
     }
 
     /// Return weight of integration point i
-    double weight(const unsigned &i) const
+    double weight(const unsigned& i) const
     {
       return Weight[i];
     }
@@ -446,13 +446,13 @@ namespace oomph
     Gauss(){};
 
     /// Broken copy constructor
-    Gauss(const Gauss &dummy)
+    Gauss(const Gauss& dummy)
     {
       BrokenCopy::broken_copy("Gauss");
     }
 
     /// Broken assignment operator
-    void operator=(const Gauss &)
+    void operator=(const Gauss&)
     {
       BrokenCopy::broken_assign("Gauss");
     }
@@ -464,13 +464,13 @@ namespace oomph
     }
 
     /// Return coordinate s[j] of integration point i
-    double knot(const unsigned &i, const unsigned &j) const
+    double knot(const unsigned& i, const unsigned& j) const
     {
       return Knot[i][j];
     }
 
     /// Return weight of integration point i
-    double weight(const unsigned &i) const
+    double weight(const unsigned& i) const
     {
       return Weight[i];
     }
@@ -498,13 +498,13 @@ namespace oomph
     Gauss(){};
 
     /// Broken copy constructor
-    Gauss(const Gauss &dummy)
+    Gauss(const Gauss& dummy)
     {
       BrokenCopy::broken_copy("Gauss");
     }
 
     /// Broken assignment operator
-    void operator=(const Gauss &)
+    void operator=(const Gauss&)
     {
       BrokenCopy::broken_assign("Gauss");
     }
@@ -516,13 +516,13 @@ namespace oomph
     }
 
     /// Return coordinate s[j] of integration point i
-    double knot(const unsigned &i, const unsigned &j) const
+    double knot(const unsigned& i, const unsigned& j) const
     {
       return Knot[i][j];
     }
 
     /// Return weight of integration point i
-    double weight(const unsigned &i) const
+    double weight(const unsigned& i) const
     {
       return Weight[i];
     }
@@ -550,13 +550,13 @@ namespace oomph
     Gauss(){};
 
     /// Broken copy constructor
-    Gauss(const Gauss &dummy)
+    Gauss(const Gauss& dummy)
     {
       BrokenCopy::broken_copy("Gauss");
     }
 
     /// Broken assignment operator
-    void operator=(const Gauss &)
+    void operator=(const Gauss&)
     {
       BrokenCopy::broken_assign("Gauss");
     }
@@ -568,13 +568,13 @@ namespace oomph
     }
 
     /// Return coordinate x[j] of integration point i
-    double knot(const unsigned &i, const unsigned &j) const
+    double knot(const unsigned& i, const unsigned& j) const
     {
       return Knot[i][j];
     }
 
     /// Return weight of integration point i
-    double weight(const unsigned &i) const
+    double weight(const unsigned& i) const
     {
       return Weight[i];
     }
@@ -602,13 +602,13 @@ namespace oomph
     Gauss(){};
 
     /// Broken copy constructor
-    Gauss(const Gauss &dummy)
+    Gauss(const Gauss& dummy)
     {
       BrokenCopy::broken_copy("Gauss");
     }
 
     /// Broken assignment operator
-    void operator=(const Gauss &)
+    void operator=(const Gauss&)
     {
       BrokenCopy::broken_assign("Gauss");
     }
@@ -620,13 +620,13 @@ namespace oomph
     }
 
     /// Return coordinate x[j] of integration point i
-    double knot(const unsigned &i, const unsigned &j) const
+    double knot(const unsigned& i, const unsigned& j) const
     {
       return Knot[i][j];
     }
 
     /// Return weight of integration point i
-    double weight(const unsigned &i) const
+    double weight(const unsigned& i) const
     {
       return Weight[i];
     }
@@ -649,13 +649,13 @@ namespace oomph
     Gauss_Rescaled(){};
 
     /// Broken copy constructor
-    Gauss_Rescaled(const Gauss_Rescaled &dummy)
+    Gauss_Rescaled(const Gauss_Rescaled& dummy)
     {
       BrokenCopy::broken_copy("Gauss_Rescaled");
     }
 
     /// Broken assignment operator
-    void operator=(const Gauss_Rescaled &)
+    void operator=(const Gauss_Rescaled&)
     {
       BrokenCopy::broken_assign("Gauss_Rescaled");
     }
@@ -668,13 +668,13 @@ namespace oomph
     }
 
     /// Return the rescaled knot values s[j] at integration point i
-    double knot(const unsigned &i, const unsigned &j) const
+    double knot(const unsigned& i, const unsigned& j) const
     {
       return (0.5 * (Gauss<DIM, NPTS_1D>::knot(i, j) * Range + Lower + Upper));
     }
 
     /// Return the rescaled weight at integration point i
-    double weight(const unsigned &i) const
+    double weight(const unsigned& i) const
     {
       return Gauss<DIM, NPTS_1D>::weight(i) *
              pow(0.5 * Range, static_cast<int>(DIM));
@@ -726,13 +726,13 @@ namespace oomph
     TGauss(){};
 
     /// Broken copy constructor
-    TGauss(const TGauss &dummy)
+    TGauss(const TGauss& dummy)
     {
       BrokenCopy::broken_copy("TGauss");
     }
 
     /// Broken assignment operator
-    void operator=(const TGauss &)
+    void operator=(const TGauss&)
     {
       BrokenCopy::broken_assign("TGauss");
     }
@@ -744,13 +744,13 @@ namespace oomph
     }
 
     /// Return coordinate x[j] of integration point i
-    double knot(const unsigned &i, const unsigned &j) const
+    double knot(const unsigned& i, const unsigned& j) const
     {
       return Knot[i][j];
     }
 
     /// Return weight of integration point i
-    double weight(const unsigned &i) const
+    double weight(const unsigned& i) const
     {
       return Weight[i];
     }
@@ -778,13 +778,13 @@ namespace oomph
     TGauss(){};
 
     /// Broken copy constructor
-    TGauss(const TGauss &dummy)
+    TGauss(const TGauss& dummy)
     {
       BrokenCopy::broken_copy("TGauss");
     }
 
     /// Broken assignment operator
-    void operator=(const TGauss &)
+    void operator=(const TGauss&)
     {
       BrokenCopy::broken_assign("TGauss");
     }
@@ -796,13 +796,13 @@ namespace oomph
     }
 
     /// Return coordinate x[j] of integration point i
-    double knot(const unsigned &i, const unsigned &j) const
+    double knot(const unsigned& i, const unsigned& j) const
     {
       return Knot[i][j];
     }
 
     /// Return weight of integration point i
-    double weight(const unsigned &i) const
+    double weight(const unsigned& i) const
     {
       return Weight[i];
     }
@@ -830,13 +830,13 @@ namespace oomph
     TGauss(){};
 
     /// Broken copy constructor
-    TGauss(const TGauss &dummy)
+    TGauss(const TGauss& dummy)
     {
       BrokenCopy::broken_copy("TGauss");
     }
 
     /// Broken assignment operator
-    void operator=(const TGauss &)
+    void operator=(const TGauss&)
     {
       BrokenCopy::broken_assign("TGauss");
     }
@@ -848,13 +848,13 @@ namespace oomph
     }
 
     /// Return coordinate x[j] of integration point i
-    double knot(const unsigned &i, const unsigned &j) const
+    double knot(const unsigned& i, const unsigned& j) const
     {
       return Knot[i][j];
     }
 
     /// Return weight of integration point i
-    double weight(const unsigned &i) const
+    double weight(const unsigned& i) const
     {
       return Weight[i];
     }
@@ -875,13 +875,13 @@ namespace oomph
     TGauss(){};
 
     /// Broken copy constructor
-    TGauss(const TGauss &dummy)
+    TGauss(const TGauss& dummy)
     {
       BrokenCopy::broken_copy("TGauss");
     }
 
     /// Broken assignment operator
-    void operator=(const TGauss &)
+    void operator=(const TGauss&)
     {
       BrokenCopy::broken_assign("TGauss");
     }
@@ -893,13 +893,13 @@ namespace oomph
     }
 
     /// Return coordinate x[j] of integration point i
-    double knot(const unsigned &i, const unsigned &j) const
+    double knot(const unsigned& i, const unsigned& j) const
     {
       return Knot[i][j];
     }
 
     /// Return weight of integration point i
-    double weight(const unsigned &i) const
+    double weight(const unsigned& i) const
     {
       return Weight[i];
     }
@@ -928,13 +928,13 @@ namespace oomph
     TGauss(){};
 
     /// Broken copy constructor
-    TGauss(const TGauss &dummy)
+    TGauss(const TGauss& dummy)
     {
       BrokenCopy::broken_copy("TGauss");
     }
 
     /// Broken assignment operator
-    void operator=(const TGauss &)
+    void operator=(const TGauss&)
     {
       BrokenCopy::broken_assign("TGauss");
     }
@@ -946,13 +946,13 @@ namespace oomph
     }
 
     /// Return coordinate x[j] of integration point i
-    double knot(const unsigned &i, const unsigned &j) const
+    double knot(const unsigned& i, const unsigned& j) const
     {
       return Knot[i][j];
     }
 
     /// Return weight of integration point i
-    double weight(const unsigned &i) const
+    double weight(const unsigned& i) const
     {
       return Weight[i];
     }
@@ -980,13 +980,13 @@ namespace oomph
     TGauss(){};
 
     /// Broken copy constructor
-    TGauss(const TGauss &dummy)
+    TGauss(const TGauss& dummy)
     {
       BrokenCopy::broken_copy("TGauss");
     }
 
     /// Broken assignment operator
-    void operator=(const TGauss &)
+    void operator=(const TGauss&)
     {
       BrokenCopy::broken_assign("TGauss");
     }
@@ -998,13 +998,13 @@ namespace oomph
     }
 
     /// Return coordinate x[j] of integration point i
-    double knot(const unsigned &i, const unsigned &j) const
+    double knot(const unsigned& i, const unsigned& j) const
     {
       return Knot[i][j];
     }
 
     /// Return weight of integration point i
-    double weight(const unsigned &i) const
+    double weight(const unsigned& i) const
     {
       return Weight[i];
     }
@@ -1032,13 +1032,13 @@ namespace oomph
     TGauss(){};
 
     /// Broken copy constructor
-    TGauss(const TGauss &dummy)
+    TGauss(const TGauss& dummy)
     {
       BrokenCopy::broken_copy("TGauss");
     }
 
     /// Broken assignment operator
-    void operator=(const TGauss &)
+    void operator=(const TGauss&)
     {
       BrokenCopy::broken_assign("TGauss");
     }
@@ -1050,13 +1050,13 @@ namespace oomph
     }
 
     /// Return coordinate x[j] of integration point i
-    double knot(const unsigned &i, const unsigned &j) const
+    double knot(const unsigned& i, const unsigned& j) const
     {
       return Knot[i][j];
     }
 
     /// Return weight of integration point i
-    double weight(const unsigned &i) const
+    double weight(const unsigned& i) const
     {
       return Weight[i];
     }
@@ -1082,13 +1082,13 @@ namespace oomph
     TGauss(){};
 
     /// Broken copy constructor
-    TGauss(const TGauss &dummy)
+    TGauss(const TGauss& dummy)
     {
       BrokenCopy::broken_copy("TGauss");
     }
 
     /// Broken assignment operator
-    void operator=(const TGauss &)
+    void operator=(const TGauss&)
     {
       BrokenCopy::broken_assign("TGauss");
     }
@@ -1100,13 +1100,13 @@ namespace oomph
     }
 
     /// Return coordinate x[j] of integration point i
-    double knot(const unsigned &i, const unsigned &j) const
+    double knot(const unsigned& i, const unsigned& j) const
     {
       return Knot[i][j];
     }
 
     /// Return weight of integration point i
-    double weight(const unsigned &i) const
+    double weight(const unsigned& i) const
     {
       return Weight[i];
     }
@@ -1133,13 +1133,13 @@ namespace oomph
     TGauss(){};
 
     /// Broken copy constructor
-    TGauss(const TGauss &dummy)
+    TGauss(const TGauss& dummy)
     {
       BrokenCopy::broken_copy("TGauss");
     }
 
     /// Broken assignment operator
-    void operator=(const TGauss &)
+    void operator=(const TGauss&)
     {
       BrokenCopy::broken_assign("TGauss");
     }
@@ -1151,13 +1151,13 @@ namespace oomph
     }
 
     /// Return coordinate x[j] of integration point i
-    double knot(const unsigned &i, const unsigned &j) const
+    double knot(const unsigned& i, const unsigned& j) const
     {
       return Knot[i][j];
     }
 
     /// Return weight of integration point i
-    double weight(const unsigned &i) const
+    double weight(const unsigned& i) const
     {
       return Weight[i];
     }
@@ -1187,13 +1187,13 @@ namespace oomph
     TGauss(){};
 
     /// Broken copy constructor
-    TGauss(const TGauss &dummy)
+    TGauss(const TGauss& dummy)
     {
       BrokenCopy::broken_copy("TGauss");
     }
 
     /// Broken assignment operator
-    void operator=(const TGauss &)
+    void operator=(const TGauss&)
     {
       BrokenCopy::broken_assign("TGauss");
     }
@@ -1205,13 +1205,13 @@ namespace oomph
     }
 
     /// Return coordinate x[j] of integration point i
-    double knot(const unsigned &i, const unsigned &j) const
+    double knot(const unsigned& i, const unsigned& j) const
     {
       return Knot[i][j];
     }
 
     /// Return weight of integration point i
-    double weight(const unsigned &i) const
+    double weight(const unsigned& i) const
     {
       return Weight[i];
     }
@@ -1237,13 +1237,13 @@ namespace oomph
     TGauss(){};
 
     /// Broken copy constructor
-    TGauss(const TGauss &dummy)
+    TGauss(const TGauss& dummy)
     {
       BrokenCopy::broken_copy("TGauss");
     }
 
     /// Broken assignment operator
-    void operator=(const TGauss &)
+    void operator=(const TGauss&)
     {
       BrokenCopy::broken_assign("TGauss");
     }
@@ -1255,13 +1255,13 @@ namespace oomph
     }
 
     /// Return coordinate x[j] of integration point i
-    double knot(const unsigned &i, const unsigned &j) const
+    double knot(const unsigned& i, const unsigned& j) const
     {
       return Knot[i][j];
     }
 
     /// Return weight of integration point i
-    double weight(const unsigned &i) const
+    double weight(const unsigned& i) const
     {
       return Weight[i];
     }
@@ -1289,13 +1289,13 @@ namespace oomph
     TGauss(){};
 
     /// Broken copy constructor
-    TGauss(const TGauss &dummy)
+    TGauss(const TGauss& dummy)
     {
       BrokenCopy::broken_copy("TGauss");
     }
 
     /// Broken assignment operator
-    void operator=(const TGauss &)
+    void operator=(const TGauss&)
     {
       BrokenCopy::broken_assign("TGauss");
     }
@@ -1307,13 +1307,13 @@ namespace oomph
     }
 
     /// Return coordinate x[j] of integration point i
-    double knot(const unsigned &i, const unsigned &j) const
+    double knot(const unsigned& i, const unsigned& j) const
     {
       return Knot[i][j];
     }
 
     /// Return weight of integration point i
-    double weight(const unsigned &i) const
+    double weight(const unsigned& i) const
     {
       return Weight[i];
     }
@@ -1342,13 +1342,13 @@ namespace oomph
     TGauss(){};
 
     /// Broken copy constructor
-    TGauss(const TGauss &dummy)
+    TGauss(const TGauss& dummy)
     {
       BrokenCopy::broken_copy("TGauss");
     }
 
     /// Broken assignment operator
-    void operator=(const TGauss &)
+    void operator=(const TGauss&)
     {
       BrokenCopy::broken_assign("TGauss");
     }
@@ -1360,13 +1360,13 @@ namespace oomph
     }
 
     /// Return coordinate x[j] of integration point i
-    double knot(const unsigned &i, const unsigned &j) const
+    double knot(const unsigned& i, const unsigned& j) const
     {
       return Knot[i][j];
     }
 
     /// Return weight of integration point i
-    double weight(const unsigned &i) const
+    double weight(const unsigned& i) const
     {
       return Weight[i];
     }
@@ -1395,13 +1395,13 @@ namespace oomph
     TGauss(){};
 
     /// Broken copy constructor
-    TGauss(const TGauss &dummy)
+    TGauss(const TGauss& dummy)
     {
       BrokenCopy::broken_copy("TGauss");
     }
 
     /// Broken assignment operator
-    void operator=(const TGauss &)
+    void operator=(const TGauss&)
     {
       BrokenCopy::broken_assign("TGauss");
     }
@@ -1413,13 +1413,13 @@ namespace oomph
     }
 
     /// Return coordinate x[j] of integration point i
-    double knot(const unsigned &i, const unsigned &j) const
+    double knot(const unsigned& i, const unsigned& j) const
     {
       return Knot[i][j];
     }
 
     /// Return weight of integration point i
-    double weight(const unsigned &i) const
+    double weight(const unsigned& i) const
     {
       return Weight[i];
     }
@@ -1459,13 +1459,13 @@ namespace oomph
     }
 
     /// Return coordinate s[j] (j=0) of integration point i
-    double knot(const unsigned &i, const unsigned &j) const
+    double knot(const unsigned& i, const unsigned& j) const
     {
       return Knot[i][j];
     }
 
     /// Return weight of integration point i
-    double weight(const unsigned &i) const
+    double weight(const unsigned& i) const
     {
       return Weight[i];
     }
@@ -1516,13 +1516,13 @@ namespace oomph
     }
 
     /// Return coordinate s[j] (j=0) of integration point i
-    double knot(const unsigned &i, const unsigned &j) const
+    double knot(const unsigned& i, const unsigned& j) const
     {
       return Knot[i][j];
     }
 
     /// Return weight of integration point i
-    double weight(const unsigned &i) const
+    double weight(const unsigned& i) const
     {
       return Weight[i];
     }
@@ -1581,13 +1581,13 @@ namespace oomph
     }
 
     /// Return coordinate s[j] (j=0) of integration point i
-    double knot(const unsigned &i, const unsigned &j) const
+    double knot(const unsigned& i, const unsigned& j) const
     {
       return Knot[i][j];
     }
 
     /// Return weight of integration point i
-    double weight(const unsigned &i) const
+    double weight(const unsigned& i) const
     {
       return Weight[i];
     }
@@ -1659,13 +1659,13 @@ namespace oomph
     }
 
     /// Return coordinate s[j] (j=0) of integration point i
-    double knot(const unsigned &i, const unsigned &j) const
+    double knot(const unsigned& i, const unsigned& j) const
     {
       return Knot[i][j];
     }
 
     /// Return weight of integration point i
-    double weight(const unsigned &i) const
+    double weight(const unsigned& i) const
     {
       return Weight[i];
     }
@@ -1716,13 +1716,13 @@ namespace oomph
     }
 
     /// Return coordinate s[j] (j=0) of integration point i
-    double knot(const unsigned &i, const unsigned &j) const
+    double knot(const unsigned& i, const unsigned& j) const
     {
       return Knot[i][j];
     }
 
     /// Return weight of integration point i
-    double weight(const unsigned &i) const
+    double weight(const unsigned& i) const
     {
       return Weight[i];
     }
@@ -1781,13 +1781,13 @@ namespace oomph
     }
 
     /// Return coordinate s[j] (j=0) of integration point i
-    double knot(const unsigned &i, const unsigned &j) const
+    double knot(const unsigned& i, const unsigned& j) const
     {
       return Knot[i][j];
     }
 
     /// Return weight of integration point i
-    double weight(const unsigned &i) const
+    double weight(const unsigned& i) const
     {
       return Weight[i];
     }

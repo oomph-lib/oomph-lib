@@ -62,9 +62,9 @@ namespace oomph
     /// \short Constructor for steady algebraic node of spatial
     /// dimension n_dim, with n_position_type generalised coordinates
     /// and with initial_nvalue dofs.
-    AlgebraicNode(const unsigned &n_dim,
-                  const unsigned &n_position_type,
-                  const unsigned &initial_nvalue) :
+    AlgebraicNode(const unsigned& n_dim,
+                  const unsigned& n_position_type,
+                  const unsigned& initial_nvalue) :
       Node(n_dim, n_position_type, initial_nvalue)
     {
 #ifdef LEAK_CHECK
@@ -83,10 +83,10 @@ namespace oomph
     ///\short Constructor for bog-standard algebraic node of spatial
     /// dimension n_dim, with n_position_type generalised coordinates,
     /// with initial_nvalue dofs and with time dependence.
-    AlgebraicNode(TimeStepper *time_stepper_pt,
-                  const unsigned &n_dim,
-                  const unsigned &n_position_type,
-                  const unsigned &initial_nvalue) :
+    AlgebraicNode(TimeStepper* time_stepper_pt,
+                  const unsigned& n_dim,
+                  const unsigned& n_position_type,
+                  const unsigned& initial_nvalue) :
       Node(time_stepper_pt, n_dim, n_position_type, initial_nvalue)
     {
 #ifdef LEAK_CHECK
@@ -111,7 +111,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    AlgebraicNode(const AlgebraicNode &)
+    AlgebraicNode(const AlgebraicNode&)
     {
       BrokenCopy::broken_copy("AlgebraicNode");
     }
@@ -135,7 +135,7 @@ namespace oomph
     /// of this flag, this should only be done for newly
     /// created nodes, when this function is called from
     /// AlgebraicElementBase::setup_algebraic_node_update(...)
-    void node_update(const bool &update_all_time_levels_for_new_node = false);
+    void node_update(const bool& update_all_time_levels_for_new_node = false);
 
     /// Number of node update fcts
     unsigned nnode_update_fcts()
@@ -155,14 +155,14 @@ namespace oomph
     /// \short Return vector of node update fct ids (vector is
     /// resized to contain the correct number of entries). Somewhat costly
     /// to call as map needs to be copied into vector.
-    void node_update_fct_id(Vector<int> &id)
+    void node_update_fct_id(Vector<int>& id)
     {
       // Resize vector
       id.resize(0);
 
       // Loop over all entries and copy them across (again, we could
       // get this information from any of the maps...)
-      typedef std::map<int, AlgebraicMesh *>::iterator IT;
+      typedef std::map<int, AlgebraicMesh*>::iterator IT;
       for (IT it = Mesh_pt.begin(); it != Mesh_pt.end(); it++)
       {
         id.push_back(it->first);
@@ -170,19 +170,19 @@ namespace oomph
     }
 
     /// \short Default (usually first) mesh that implements update function
-    AlgebraicMesh *mesh_pt()
+    AlgebraicMesh* mesh_pt()
     {
       return Default_it_mesh_pt->second;
     }
 
     /// \short Mesh that implements the id-th node update function
-    AlgebraicMesh *mesh_pt(const int &id)
+    AlgebraicMesh* mesh_pt(const int& id)
     {
       return Mesh_pt[id];
     }
 
     /// \short Number of geometric objects involved in id-th update function
-    unsigned ngeom_object(const int &id)
+    unsigned ngeom_object(const int& id)
     {
       return Geom_object_pt[id].size();
     }
@@ -196,20 +196,20 @@ namespace oomph
 
     /// \short Return vector of geometric objects involved in
     /// id-th update function
-    Vector<GeomObject *> &vector_geom_object_pt(const int &id)
+    Vector<GeomObject*>& vector_geom_object_pt(const int& id)
     {
       return Geom_object_pt[id];
     }
 
     /// \short Return vector of geometric objects involved in
     /// default (usually first) update function
-    Vector<GeomObject *> &vector_geom_object_pt()
+    Vector<GeomObject*>& vector_geom_object_pt()
     {
       return Default_it_geom_object_pt->second;
     }
 
     /// \short Return the vector of all geometric objects
-    GeomObject **all_geom_object_pt()
+    GeomObject** all_geom_object_pt()
     {
       if (this->ngeom_object() == 0)
       {
@@ -223,13 +223,13 @@ namespace oomph
 
     /// \short Return pointer to i-th geometric object involved in
     /// default (usually first) update function
-    GeomObject *geom_object_pt(const unsigned &i)
+    GeomObject* geom_object_pt(const unsigned& i)
     {
       return Default_it_geom_object_pt->second[i];
     }
 
     /// Number of reference values involved in id-th update function
-    unsigned nref_value(const int &id)
+    unsigned nref_value(const int& id)
     {
       return Ref_value[id].size();
     }
@@ -243,21 +243,21 @@ namespace oomph
 
     /// \short Return vector of reference values involved in
     /// default (usually first) update function
-    Vector<double> &vector_ref_value()
+    Vector<double>& vector_ref_value()
     {
       return Default_it_ref_value->second;
     }
 
     /// \short Return vector of reference values involved in
     /// id-th update function
-    Vector<double> &vector_ref_value(const int &id)
+    Vector<double>& vector_ref_value(const int& id)
     {
       return Ref_value[id];
     }
 
     /// \short Return i-th reference value involved in
     /// default (usually first) update function
-    double ref_value(const unsigned &i)
+    double ref_value(const unsigned& i)
     {
       return Default_it_ref_value->second[i];
     }
@@ -270,11 +270,11 @@ namespace oomph
     /// needed for the update operation. Negative values for ID are only
     /// allowed when called from node constructor, as indicated
     /// by the final argument which defaults to false.
-    void add_node_update_info(const int &id,
-                              AlgebraicMesh *mesh_pt,
-                              const Vector<GeomObject *> &geom_object_pt,
-                              const Vector<double> &ref_value,
-                              const bool &called_from_constructor = false)
+    void add_node_update_info(const int& id,
+                              AlgebraicMesh* mesh_pt,
+                              const Vector<GeomObject*>& geom_object_pt,
+                              const Vector<double>& ref_value,
+                              const bool& called_from_constructor = false)
     {
       // Sanity check
       if (id < 0)
@@ -320,9 +320,9 @@ namespace oomph
     /// the vectors of reference values that are
     /// needed for the update operation. We're assigning a default
     /// node update fct id of 0.
-    void add_node_update_info(AlgebraicMesh *mesh_pt,
-                              const Vector<GeomObject *> &geom_object_pt,
-                              const Vector<double> &ref_value)
+    void add_node_update_info(AlgebraicMesh* mesh_pt,
+                              const Vector<GeomObject*>& geom_object_pt,
+                              const Vector<double>& ref_value)
     {
       // No update fct id supplied: Use a default assignment of 0.
       unsigned id = 0;
@@ -353,7 +353,7 @@ namespace oomph
 
     /// \short Erase algebraic node update information for id-th
     /// node update function. Id defaults to 0.
-    void kill_node_update_info(const int &id = 0)
+    void kill_node_update_info(const int& id = 0)
     {
       Mesh_pt.erase(Mesh_pt.find(id));
       Geom_object_pt.erase(Geom_object_pt.find(id));
@@ -370,7 +370,7 @@ namespace oomph
 
   private:
     /// Make id-th node update function the default
-    void set_default_node_update(const int &id)
+    void set_default_node_update(const int& id)
     {
       // Set default node update fct id
       Default_node_update_fct_id = id;
@@ -424,14 +424,14 @@ namespace oomph
     /// (Map because this node may only use the Mesh's 116th node update fct.
     /// There's no point in wasting an entire vector for the non-existing
     /// entries)
-    std::map<int, AlgebraicMesh *> Mesh_pt;
+    std::map<int, AlgebraicMesh*> Mesh_pt;
 
     /// \short Vector of geometric objects that are involved
     /// in the specified node update operation.
     /// (Map because this node may only use the Mesh's 116th node update fct.
     /// There's no point in wasting an entire vector for the non-existing
     /// entries)
-    std::map<int, Vector<GeomObject *>> Geom_object_pt;
+    std::map<int, Vector<GeomObject*>> Geom_object_pt;
 
     /// \short Vector of reference values that are required
     /// for the specified node update operation.
@@ -441,11 +441,11 @@ namespace oomph
     std::map<int, Vector<double>> Ref_value;
 
     /// Default iterator for mesh: This mesh performs the default update
-    std::map<int, AlgebraicMesh *>::iterator Default_it_mesh_pt;
+    std::map<int, AlgebraicMesh*>::iterator Default_it_mesh_pt;
 
     /// \short Default iterator for vector of geom objects. These
     /// GeomObjects are involved in the default update.
-    std::map<int, Vector<GeomObject *>>::iterator Default_it_geom_object_pt;
+    std::map<int, Vector<GeomObject*>>::iterator Default_it_geom_object_pt;
 
     /// Default iterator for vector of ref values. These
     /// reference values are involved in the default update.
@@ -464,14 +464,14 @@ namespace oomph
 
     /// \short Default dummy mesh to point to for nodes for which no remesh
     ///  fct is defined
-    static AlgebraicMesh *Dummy_mesh_pt;
+    static AlgebraicMesh* Dummy_mesh_pt;
 
     /// \short Static Dummy mesh to which the pointer is addressed
     static DummyAlgebraicMesh Dummy_mesh;
 
     /// \short Default dummy vector of geom objects to point to for nodes
     /// for which no remesh fct is defined
-    static Vector<GeomObject *> Dummy_geom_object_pt;
+    static Vector<GeomObject*> Dummy_geom_object_pt;
 
     /// \short Default dummy vector of reference values
     ///  to point to for nodes  for which no remesh fct is defined
@@ -495,13 +495,13 @@ namespace oomph
     AlgebraicElementBase() {}
 
     /// Broken copy constructor
-    AlgebraicElementBase(const AlgebraicElementBase &)
+    AlgebraicElementBase(const AlgebraicElementBase&)
     {
       BrokenCopy::broken_copy("AlgebraicElementBase");
     }
 
     /// Broken assignment operator
-    void operator=(const AlgebraicElementBase &)
+    void operator=(const AlgebraicElementBase&)
     {
       BrokenCopy::broken_assign("AlgebraicElementBase");
     }
@@ -510,9 +510,9 @@ namespace oomph
     /// I.e. work out its node update information by interpolation from
     /// the father element. Pass pointer to father element and the
     /// newly created node's local coordinate in the father element.
-    void setup_algebraic_node_update(Node *&node_pt,
-                                     const Vector<double> &s_father,
-                                     FiniteElement *father_el_pt) const;
+    void setup_algebraic_node_update(Node*& node_pt,
+                                     const Vector<double>& s_father,
+                                     FiniteElement* father_el_pt) const;
   };
 
   //========================================================================
@@ -539,7 +539,7 @@ namespace oomph
     }
 
     /// Constructor for face elements
-    AlgebraicElement(FiniteElement *const &element_pt, const int &face_index) :
+    AlgebraicElement(FiniteElement* const& element_pt, const int& face_index) :
       ElementWithSpecificMovingNodes<ELEMENT, AlgebraicNode>(element_pt,
                                                              face_index),
       AlgebraicElementBase()
@@ -547,7 +547,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    AlgebraicElement(const AlgebraicElement &)
+    AlgebraicElement(const AlgebraicElement&)
     {
       BrokenCopy::broken_copy("AlgebraicElement");
     }
@@ -600,7 +600,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    AlgebraicMesh(const AlgebraicMesh &)
+    AlgebraicMesh(const AlgebraicMesh&)
     {
       BrokenCopy::broken_copy("AlgebraicMesh");
     }
@@ -616,10 +616,10 @@ namespace oomph
 
     /// Return a pointer to the n-th global AlgebraicNode
     // Can safely cast the nodes to AlgebraicNodes
-    AlgebraicNode *node_pt(const unsigned long &n)
+    AlgebraicNode* node_pt(const unsigned long& n)
     {
 #ifdef PARANOID
-      if (!dynamic_cast<AlgebraicNode *>(Node_pt[n]))
+      if (!dynamic_cast<AlgebraicNode*>(Node_pt[n]))
       {
         std::ostringstream error_stream;
         error_stream << "Error: Node " << n << "is a "
@@ -630,24 +630,24 @@ namespace oomph
       }
 #endif
       // Return a cast to the Node_pt
-      return (dynamic_cast<AlgebraicNode *>(Node_pt[n]));
+      return (dynamic_cast<AlgebraicNode*>(Node_pt[n]));
     }
 
     /// \short Update the nodal position posn at time level t (t=0: present;
     /// t>0: previous). Must be implemented for every specific algebraic mesh.
-    virtual void algebraic_node_update(const unsigned &t,
-                                       AlgebraicNode *&node_pt) = 0;
+    virtual void algebraic_node_update(const unsigned& t,
+                                       AlgebraicNode*& node_pt) = 0;
 
     /// \short Update the node update info for given node, following
     /// mesh adaptation. Must be implemented for every specific algebraic
     /// mesh, though it may, of course, be left empty.
-    virtual void update_node_update(AlgebraicNode *&node_pt) = 0;
+    virtual void update_node_update(AlgebraicNode*& node_pt) = 0;
 
     /// \short Update all nodal positions via algebraic node update functions
     /// [Doesn't make sense to use this mesh with SolidElements anyway,
     /// so we buffer the case if update_all_solid_nodes is set to
     /// true.]
-    void node_update(const bool &update_all_solid_nodes = false)
+    void node_update(const bool& update_all_solid_nodes = false)
     {
 #ifdef PARANOID
       if (update_all_solid_nodes)
@@ -665,7 +665,7 @@ namespace oomph
       // Initial loop over ALL nodes to setup (need to place at least
       // all master nodes before we can update the position of the
       // hanging ones)
-      AlgebraicNode *alg_nod_pt = 0;
+      AlgebraicNode* alg_nod_pt = 0;
       unsigned n_node = nnode();
 
       // In parallel there may be no nodes on a particular process
@@ -673,7 +673,7 @@ namespace oomph
       {
         for (unsigned n = 0; n < n_node; n++)
         {
-          alg_nod_pt = static_cast<AlgebraicNode *>(node_pt(n));
+          alg_nod_pt = static_cast<AlgebraicNode*>(node_pt(n));
           alg_nod_pt->node_update();
         }
 
@@ -684,7 +684,7 @@ namespace oomph
         // to reflect the hanging node constraints
         for (unsigned n = 0; n < n_node; n++)
         {
-          Node *nod_pt = node_pt(n);
+          Node* nod_pt = node_pt(n);
           if (nod_pt->is_hanging())
           {
             // Initialise
@@ -719,13 +719,13 @@ namespace oomph
 #ifdef OOMPH_HAS_MPI
       // Update positions for external halo nodes attached to this mesh
       // Loop over processors
-      for (std::map<unsigned, Vector<Node *>>::iterator it =
+      for (std::map<unsigned, Vector<Node*>>::iterator it =
              External_halo_node_pt.begin();
            it != External_halo_node_pt.end();
            it++)
       {
         int iproc = (*it).first;
-        AlgebraicNode *alg_nod_pt = 0;
+        AlgebraicNode* alg_nod_pt = 0;
         unsigned n_ext_halo_node = nexternal_halo_node(iproc);
         // Only act if there are any external halo nodes
         if (n_ext_halo_node > 0)
@@ -733,7 +733,7 @@ namespace oomph
           for (unsigned n = 0; n < n_ext_halo_node; n++)
           {
             alg_nod_pt =
-              static_cast<AlgebraicNode *>(external_halo_node_pt(iproc, n));
+              static_cast<AlgebraicNode*>(external_halo_node_pt(iproc, n));
             alg_nod_pt->node_update();
           }
 
@@ -744,7 +744,7 @@ namespace oomph
           // to reflect the hanging node constraints
           for (unsigned n = 0; n < n_ext_halo_node; n++)
           {
-            Node *nod_pt = external_halo_node_pt(iproc, n);
+            Node* nod_pt = external_halo_node_pt(iproc, n);
             if (nod_pt->is_hanging())
             {
               // Initialise
@@ -795,7 +795,7 @@ namespace oomph
       unsigned n_node = nnode();
       for (unsigned n = 0; n < n_node; n++)
       {
-        if (static_cast<AlgebraicNode *>(node_pt(n))->self_test() != 0)
+        if (static_cast<AlgebraicNode*>(node_pt(n))->self_test() != 0)
         {
           passed = false;
         }
@@ -817,7 +817,7 @@ namespace oomph
     /// \short Add the specified GeomObject to the list of geometric objects
     /// associated with this AlgebraicMesh; remembering that the zeroth entry
     /// is null (set in the constructor above)
-    void add_geom_object_list_pt(GeomObject *geom_object_pt)
+    void add_geom_object_list_pt(GeomObject* geom_object_pt)
     {
       Geom_object_list_pt.push_back(geom_object_pt);
     }
@@ -829,7 +829,7 @@ namespace oomph
     }
 
     /// \short Access function to the ith GeomObject
-    GeomObject *geom_object_list_pt(const unsigned &i)
+    GeomObject* geom_object_list_pt(const unsigned& i)
     {
       // Probably should be a range check in here...
       return Geom_object_list_pt[i];
@@ -838,7 +838,7 @@ namespace oomph
   private:
     /// \short Vector of GeomObjects associated with this AlgebraicMesh
     /// The zeroth entry is null, proper entries from the 1st index onwards...
-    Vector<GeomObject *> Geom_object_list_pt;
+    Vector<GeomObject*> Geom_object_list_pt;
   };
 
   ///////////////////////////////////////////////////////////////////////
@@ -857,7 +857,7 @@ namespace oomph
     DummyAlgebraicMesh() {}
 
     /// Broken copy constructor
-    DummyAlgebraicMesh(const DummyAlgebraicMesh &)
+    DummyAlgebraicMesh(const DummyAlgebraicMesh&)
     {
       BrokenCopy::broken_copy("DummyAlgebraicMesh");
     }
@@ -870,8 +870,8 @@ namespace oomph
 
     /// \short Update the nodal position posn at time level t (t=0: present;
     /// t>0: previous). Do nothing
-    virtual void algebraic_node_update(const unsigned &t,
-                                       AlgebraicNode *&node_pt)
+    virtual void algebraic_node_update(const unsigned& t,
+                                       AlgebraicNode*& node_pt)
     {
     }
 
@@ -879,11 +879,11 @@ namespace oomph
     /// mesh adaptation. Must be implemented for every specific algebraic
     /// mesh, though it may, of course, be left empty which is exactly
     /// what we do here
-    virtual void update_node_update(AlgebraicNode *&node_pt) {}
+    virtual void update_node_update(AlgebraicNode*& node_pt) {}
 
     /// \short Setup algebraic node update for specified node;
     /// do nothing in this dummy version
-    virtual void setup_algebraic_node_update(AlgebraicNode *&nod_pt) {}
+    virtual void setup_algebraic_node_update(AlgebraicNode*& nod_pt) {}
   };
 
 } // namespace oomph

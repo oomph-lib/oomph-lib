@@ -86,10 +86,10 @@ public:
   /// Constructor: Pass the number of elements and the lengths of the
   /// domain in the x and y directions (h is the height of the fluid layer
   /// i.e. the length of the domain in the y direction)
-  InterfaceProblem(const unsigned &n_x,
-                   const unsigned &n_y,
-                   const double &l_x,
-                   const double &h);
+  InterfaceProblem(const unsigned& n_x,
+                   const unsigned& n_y,
+                   const double& l_x,
+                   const double& h);
 
   /// Destructor (empty)
   ~InterfaceProblem() {}
@@ -101,16 +101,16 @@ public:
   void set_boundary_conditions();
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// Do unsteady run up to maximum time t_max with given timestep dt
-  void unsteady_run(const double &t_max, const double &dt);
+  void unsteady_run(const double& t_max, const double& dt);
 
   /// \short The bulk fluid mesh, complete with spines and update information
-  SingleLayerSpineMesh<ELEMENT> *Bulk_mesh_pt;
+  SingleLayerSpineMesh<ELEMENT>* Bulk_mesh_pt;
 
   /// \short The mesh that contains the free surface elements
-  Mesh *Surface_mesh_pt;
+  Mesh* Surface_mesh_pt;
 
 private:
   /// \short Spine heights/lengths are unknowns in the problem so their
@@ -130,7 +130,7 @@ private:
   void actions_after_newton_solve() {}
 
   /// Deform the mesh/free surface to a prescribed function
-  void deform_free_surface(const double &epsilon, const unsigned &n_periods);
+  void deform_free_surface(const double& epsilon, const unsigned& n_periods);
 
   /// Width of domain
   double Lx;
@@ -144,10 +144,10 @@ private:
 /// Constructor for single fluid free surface problem
 //========================================================================
 template<class ELEMENT, class TIMESTEPPER>
-InterfaceProblem<ELEMENT, TIMESTEPPER>::InterfaceProblem(const unsigned &n_x,
-                                                         const unsigned &n_y,
-                                                         const double &l_x,
-                                                         const double &h) :
+InterfaceProblem<ELEMENT, TIMESTEPPER>::InterfaceProblem(const unsigned& n_x,
+                                                         const unsigned& n_y,
+                                                         const double& l_x,
+                                                         const double& h) :
   Lx(l_x)
 {
   // Allocate the timestepper (this constructs the time object as well)
@@ -167,7 +167,7 @@ InterfaceProblem<ELEMENT, TIMESTEPPER>::InterfaceProblem(const unsigned &n_x,
   {
     // Construct a new 1D line element on the face on which the local
     // coordinate 1 is fixed at its max. value (1) --- This is face 2
-    FiniteElement *interface_element_pt =
+    FiniteElement* interface_element_pt =
       new SpineLineFluidInterfaceElement<ELEMENT>(
         Bulk_mesh_pt->finite_element_pt(n_x * (n_y - 1) + i), 2);
 
@@ -228,7 +228,7 @@ InterfaceProblem<ELEMENT, TIMESTEPPER>::InterfaceProblem(const unsigned &n_x,
   for (unsigned e = 0; e < n_element_bulk; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -245,7 +245,7 @@ InterfaceProblem<ELEMENT, TIMESTEPPER>::InterfaceProblem(const unsigned &n_x,
   } // End of loop over bulk elements
 
   // Create a Data object whose single value stores the external pressure
-  Data *external_pressure_data_pt = new Data(1);
+  Data* external_pressure_data_pt = new Data(1);
 
   // Pin and set the external pressure to some arbitrary value
   external_pressure_data_pt->pin(0);
@@ -258,8 +258,8 @@ InterfaceProblem<ELEMENT, TIMESTEPPER>::InterfaceProblem(const unsigned &n_x,
   for (unsigned e = 0; e < n_interface_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    SpineLineFluidInterfaceElement<ELEMENT> *el_pt =
-      dynamic_cast<SpineLineFluidInterfaceElement<ELEMENT> *>(
+    SpineLineFluidInterfaceElement<ELEMENT>* el_pt =
+      dynamic_cast<SpineLineFluidInterfaceElement<ELEMENT>*>(
         Surface_mesh_pt->element_pt(e));
 
     // Set the Strouhal number
@@ -352,7 +352,7 @@ void InterfaceProblem<ELEMENT, TIMESTEPPER>::set_boundary_conditions()
 //========================================================================
 template<class ELEMENT, class TIMESTEPPER>
 void InterfaceProblem<ELEMENT, TIMESTEPPER>::deform_free_surface(
-  const double &epsilon, const unsigned &n_periods)
+  const double& epsilon, const unsigned& n_periods)
 {
   // Determine number of spines in mesh
   const unsigned n_spine = Bulk_mesh_pt->nspine();
@@ -378,7 +378,7 @@ void InterfaceProblem<ELEMENT, TIMESTEPPER>::deform_free_surface(
 /// Doc the solution
 //========================================================================
 template<class ELEMENT, class TIMESTEPPER>
-void InterfaceProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo &doc_info)
+void InterfaceProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo& doc_info)
 {
   // Output the time
   cout << "Time is now " << time_pt()->time() << std::endl;
@@ -412,8 +412,8 @@ void InterfaceProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo &doc_info)
 /// Perform run up to specified time t_max with given timestep dt
 //========================================================================
 template<class ELEMENT, class TIMESTEPPER>
-void InterfaceProblem<ELEMENT, TIMESTEPPER>::unsteady_run(const double &t_max,
-                                                          const double &dt)
+void InterfaceProblem<ELEMENT, TIMESTEPPER>::unsteady_run(const double& t_max,
+                                                          const double& dt)
 {
   // Set value of epsilon
   const double epsilon = 0.1;
@@ -482,7 +482,7 @@ void InterfaceProblem<ELEMENT, TIMESTEPPER>::unsteady_run(const double &t_max,
 //==start_of_main=========================================================
 /// Driver code for two-dimensional single fluid free surface problem
 //========================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

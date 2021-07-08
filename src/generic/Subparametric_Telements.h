@@ -72,7 +72,7 @@ namespace oomph
     //=======================================================================
     /// Return local coordinates of node j
     //=======================================================================
-    void local_coordinate_of_node(const unsigned &j, Vector<double> &s) const
+    void local_coordinate_of_node(const unsigned& j, Vector<double>& s) const
     {
       switch (j)
       {
@@ -103,9 +103,9 @@ namespace oomph
       }
     }
 
-    void Bshape(const Vector<double> &s,
-                Shape &psi,
-                DenseMatrix<double> &position) const
+    void Bshape(const Vector<double>& s,
+                Shape& psi,
+                DenseMatrix<double>& position) const
     {
       //---------------------------------------------
       // the mapping to physical coordinates
@@ -365,10 +365,10 @@ namespace oomph
           (b[0] * c[0] * lamb_p[0] * xi[1] + b[1] * c[1] * lamb[1] * xi[0]);
     }
 
-    void dBshape_local(const Vector<double> &s,
-                       Shape &psi,
-                       DShape &dpsids,
-                       DenseMatrix<double> &position) const
+    void dBshape_local(const Vector<double>& s,
+                       Shape& psi,
+                       DShape& dpsids,
+                       DenseMatrix<double>& position) const
     {
       // assign for shape functions
       Bshape(s, psi, position);
@@ -1048,11 +1048,11 @@ namespace oomph
                         psi1(2, 5, 2) * dxids1[2];
     }
 
-    void d2Bshape_local(const Vector<double> &s,
-                        Shape &psi,
-                        DShape &dpsids,
-                        DShape &d2psids,
-                        DenseMatrix<double> &position) const
+    void d2Bshape_local(const Vector<double>& s,
+                        Shape& psi,
+                        DShape& dpsids,
+                        DShape& d2psids,
+                        DenseMatrix<double>& position) const
     {
       // assign for dshape functions
       dBshape_local(s, psi, dpsids, position);
@@ -2613,7 +2613,7 @@ namespace oomph
     //=======================================================================
     /// Return local coordinates of node j
     //=======================================================================
-    void local_coordinate_of_node(const unsigned &j, Vector<double> &s) const
+    void local_coordinate_of_node(const unsigned& j, Vector<double>& s) const
     {
       switch (j)
       {
@@ -2647,7 +2647,7 @@ namespace oomph
     //=======================================================================
     /// Shape function for specific TElement<2,2>
     //=======================================================================
-    void Lshape(const Vector<double> &s, Shape &psi) const
+    void Lshape(const Vector<double>& s, Shape& psi) const
     {
       psi[0] = s[0];
       psi[1] = s[1];
@@ -2657,9 +2657,9 @@ namespace oomph
     //=======================================================================
     /// Derivatives of shape functions for specific TElement<2,2>
     //=======================================================================
-    void dLshape_local(const Vector<double> &s,
-                       Shape &psi,
-                       DShape &dpsids) const
+    void dLshape_local(const Vector<double>& s,
+                       Shape& psi,
+                       DShape& dpsids) const
     {
       this->Lshape(s, psi);
 
@@ -2678,10 +2678,10 @@ namespace oomph
     /// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ \n
     /// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ \n
     //=======================================================================
-    void d2Lshape_local(const Vector<double> &s,
-                        Shape &psi,
-                        DShape &dpsids,
-                        DShape &d2psids) const
+    void d2Lshape_local(const Vector<double>& s,
+                        Shape& psi,
+                        DShape& dpsids,
+                        DShape& d2psids) const
     {
       this->dLshape_local(s, psi, dpsids);
 
@@ -2737,7 +2737,7 @@ namespace oomph
     //=======================================================================
     /// Return local coordinates of node j
     //=======================================================================
-    void local_coordinate_of_node(const unsigned &j, Vector<double> &s) const
+    void local_coordinate_of_node(const unsigned& j, Vector<double>& s) const
     {
       switch (j)
       {
@@ -2772,13 +2772,13 @@ namespace oomph
     /// This function return the physical coordinates at the local coordinate s
     /// rather than a value of shape function at the local coordinate s
     //=======================================================================
-    void Lshape(const Vector<double> &s,
-                Shape &psi,
-                Shape &phi,
-                DenseMatrix<double> &position,
-                unsigned &bd_element,
-                DenseMatrix<double> &bd_position,
-                Vector<double> &x) const
+    void Lshape(const Vector<double>& s,
+                Shape& psi,
+                Shape& phi,
+                DenseMatrix<double>& position,
+                unsigned& bd_element,
+                DenseMatrix<double>& bd_position,
+                Vector<double>& x) const
     {
       // assign shape functions to the interior elements
       psi[0] = s[0];
@@ -2853,15 +2853,15 @@ namespace oomph
     /// the local coordinate s rather than a value of the derivatives of
     /// shape function at the local coordinate s
     //=======================================================================
-    void dLshape_local(const Vector<double> &s,
-                       Shape &psi,
-                       DShape &dpsids,
-                       Shape &phi,
-                       DShape &dphids,
-                       DenseMatrix<double> &position,
-                       unsigned &bd_element,
-                       DenseMatrix<double> &bd_position,
-                       Vector<double> &x) const
+    void dLshape_local(const Vector<double>& s,
+                       Shape& psi,
+                       DShape& dpsids,
+                       Shape& phi,
+                       DShape& dphids,
+                       DenseMatrix<double>& position,
+                       unsigned& bd_element,
+                       DenseMatrix<double>& bd_position,
+                       Vector<double>& x) const
     {
       this->Lshape(s, psi, phi, position, bd_element, bd_position, x);
       // Derivatives
@@ -2958,17 +2958,17 @@ namespace oomph
     /// coordinates at the local coordinate s rather than a value of the
     /// second-order derivatives of shape function at the local coordinate s
     ///=======================================================================
-    void d2Lshape_local(const Vector<double> &s,
-                        Shape &psi,
-                        DShape &dpsids,
-                        DShape &d2psids,
-                        Shape &phi,
-                        DShape &dphids,
-                        DShape &d2phids,
-                        DenseMatrix<double> &position,
-                        unsigned &bd_element,
-                        DenseMatrix<double> &bd_position,
-                        Vector<double> &x) const
+    void d2Lshape_local(const Vector<double>& s,
+                        Shape& psi,
+                        DShape& dpsids,
+                        DShape& d2psids,
+                        Shape& phi,
+                        DShape& dphids,
+                        DShape& d2phids,
+                        DenseMatrix<double>& position,
+                        unsigned& bd_element,
+                        DenseMatrix<double>& bd_position,
+                        Vector<double>& x) const
     {
       this->dLshape_local(
         s, psi, dpsids, phi, dphids, position, bd_element, bd_position, x);
@@ -3090,7 +3090,7 @@ namespace oomph
     //=======================================================================
     /// Return local coordinates of node j
     //=======================================================================
-    void local_coordinate_of_node(const unsigned &j, Vector<double> &s) const
+    void local_coordinate_of_node(const unsigned& j, Vector<double>& s) const
     {
       if (NNODE_1D == 2)
       {
@@ -3203,12 +3203,12 @@ namespace oomph
     ///============================================================
     /// compute for the set of value in the reference triangle
     ///============================================================
-    void set_of_value(DenseMatrix<double> &D,
-                      DenseMatrix<double> &B,
-                      DenseMatrix<double> &position,
-                      unsigned &bd_element,
-                      DenseMatrix<double> &bd_position,
-                      Vector<double> &x) const
+    void set_of_value(DenseMatrix<double>& D,
+                      DenseMatrix<double>& B,
+                      DenseMatrix<double>& position,
+                      unsigned& bd_element,
+                      DenseMatrix<double>& bd_position,
+                      Vector<double>& x) const
     {
       double angle_1 = atan2(bd_position(0, 1), bd_position(0, 0));
       double angle_2 = atan2(bd_position(1, 1), bd_position(1, 0));
@@ -4055,7 +4055,7 @@ namespace oomph
     ///=========================================================================
     /// Compute C1-curved shape functions at the local coordinate s
     ///========================================================================
-    void Cshape(const Vector<double> &s, Shape &psi_curve) const
+    void Cshape(const Vector<double>& s, Shape& psi_curve) const
     {
       // get basis
       Shape basis(36);
@@ -4082,9 +4082,9 @@ namespace oomph
     /// Compute the derivatives of C1-curved shape functions at the local
     /// coordinate s
     ///=========================================================================
-    void dCshape_local(const Vector<double> &s,
-                       Shape &psi_curve,
-                       DShape &dpsi_curve) const
+    void dCshape_local(const Vector<double>& s,
+                       Shape& psi_curve,
+                       DShape& dpsi_curve) const
     {
       Cshape(s, psi_curve);
       // get dbasis
@@ -4118,10 +4118,10 @@ namespace oomph
     /// Compute the second-order derivatives of C1-curved shape functions
     /// at the local coordinate s
     ///=========================================================================
-    void d2Cshape_local(const Vector<double> &s,
-                        Shape &psi_curve,
-                        DShape &dpsi_curve,
-                        DShape &d2psi_curve) const
+    void d2Cshape_local(const Vector<double>& s,
+                        Shape& psi_curve,
+                        DShape& dpsi_curve,
+                        DShape& d2psi_curve) const
     {
       dCshape_local(s, psi_curve, dpsi_curve);
 
@@ -4155,7 +4155,7 @@ namespace oomph
     ///=========================================================================
     /// Compute coefficients of the bases of the C1-curved shape functions
     ///=========================================================================
-    void get_coefficient(DenseMatrix<double> &A) const
+    void get_coefficient(DenseMatrix<double>& A) const
     {
       // initialize the matrix A
       for (unsigned i = 0; i < 36; i++)
@@ -4672,7 +4672,7 @@ namespace oomph
     /// Bases of the C1-curved shape functions:
     /// it is a complete polynomial of degree 7
     ///=========================================================================
-    void basis_curve(const Vector<double> &s, Shape &psi_curve) const
+    void basis_curve(const Vector<double>& s, Shape& psi_curve) const
     {
       // Get the shape function and derivatives
       psi_curve[7] = s[0] * s[0] * s[0] * s[0] * s[0] * s[0] * s[0];
@@ -4717,9 +4717,9 @@ namespace oomph
     /// Derivatives of bases of the C1-curved shape functions
     /// it is a complete polynomial of degree 7
     ///=========================================================================
-    void dbasis_local_curve(const Vector<double> &s,
-                            Shape &psi_curve,
-                            DShape &dpsi_curve) const
+    void dbasis_local_curve(const Vector<double>& s,
+                            Shape& psi_curve,
+                            DShape& dpsi_curve) const
     {
       basis_curve(s, psi_curve);
 
@@ -4803,10 +4803,10 @@ namespace oomph
     /// The second derivatived of bases of the C1-curved shape functions
     /// it is a complete polynomial of degree 7
     ///=========================================================================
-    void d2basis_local_curve(const Vector<double> &s,
-                             Shape &psi_curve,
-                             DShape &dpsi_curve,
-                             DShape &d2psi_curve) const
+    void d2basis_local_curve(const Vector<double>& s,
+                             Shape& psi_curve,
+                             DShape& dpsi_curve,
+                             DShape& d2psi_curve) const
     {
       dbasis_local_curve(s, psi_curve, dpsi_curve);
       // Get the shape function and derivatives
@@ -4940,48 +4940,48 @@ namespace oomph
     ///\short  Constructor: Call constructors for FiniteElement
     BellElementBase() : FiniteElement() {}
 
-    virtual void basis(const Vector<double> &s, Shape &psi) const {}
+    virtual void basis(const Vector<double>& s, Shape& psi) const {}
 
-    virtual void dbasis_local(const Vector<double> &s,
-                              Shape &psi,
-                              DShape &dpsids) const
+    virtual void dbasis_local(const Vector<double>& s,
+                              Shape& psi,
+                              DShape& dpsids) const
     {
     }
 
-    virtual void d2basis_local(const Vector<double> &s,
-                               Shape &psi,
-                               DShape &dpsids,
-                               DShape &d2psids) const
+    virtual void d2basis_local(const Vector<double>& s,
+                               Shape& psi,
+                               DShape& dpsids,
+                               DShape& d2psids) const
     {
     }
 
-    virtual void basis_c0(const Vector<double> &s, Shape &psi) const {}
+    virtual void basis_c0(const Vector<double>& s, Shape& psi) const {}
 
-    virtual void dbasis_c0_local(const Vector<double> &s,
-                                 Shape &psi,
-                                 DShape &dpsids) const
+    virtual void dbasis_c0_local(const Vector<double>& s,
+                                 Shape& psi,
+                                 DShape& dpsids) const
     {
     }
 
-    virtual void d2basis_c0_local(const Vector<double> &s,
-                                  Shape &psi,
-                                  DShape &dpsids,
-                                  DShape &d2psids) const
+    virtual void d2basis_c0_local(const Vector<double>& s,
+                                  Shape& psi,
+                                  DShape& dpsids,
+                                  DShape& d2psids) const
     {
     }
 
-    virtual void test(const Vector<double> &s, Shape &phi) const {}
+    virtual void test(const Vector<double>& s, Shape& phi) const {}
 
-    virtual void dtest_local(const Vector<double> &s,
-                             Shape &phi,
-                             DShape &dphids) const
+    virtual void dtest_local(const Vector<double>& s,
+                             Shape& phi,
+                             DShape& dphids) const
     {
     }
 
-    virtual void d2test_local(const Vector<double> &s,
-                              Shape &phi,
-                              DShape &dphids,
-                              DShape &d2phids) const
+    virtual void d2test_local(const Vector<double>& s,
+                              Shape& phi,
+                              DShape& dphids,
+                              DShape& d2phids) const
     {
     }
 
@@ -4989,7 +4989,7 @@ namespace oomph
     /// \short Return the C1-basis function stored at the ipt-th integration
     /// point.
     //=========================================================================
-    void basis_at_knot(const unsigned &ipt, Shape &psi) const
+    void basis_at_knot(const unsigned& ipt, Shape& psi) const
     {
       // Find the dimension of the element
       const unsigned el_dim = dim();
@@ -5008,9 +5008,9 @@ namespace oomph
     /// \short Return the C1-basis function and its derivatives w.r.t. the
     /// global coordinates at the ipt-th integration point.
     //=========================================================================
-    void dbasis_local_at_knot(const unsigned &ipt,
-                              Shape &psi,
-                              DShape &dpsids) const
+    void dbasis_local_at_knot(const unsigned& ipt,
+                              Shape& psi,
+                              DShape& dpsids) const
     {
       // Find the dimension of the element
       const unsigned el_dim = dim();
@@ -5031,10 +5031,10 @@ namespace oomph
     /// w.r.t. global coordinates at the ipt-th integration point.
     /// \n\n Numbering:
     //=========================================================================
-    void d2basis_local_at_knot(const unsigned &ipt,
-                               Shape &psi,
-                               DShape &dpsids,
-                               DShape &d2psids) const
+    void d2basis_local_at_knot(const unsigned& ipt,
+                               Shape& psi,
+                               DShape& dpsids,
+                               DShape& d2psids) const
     {
       // Find the dimension of the element
       const unsigned el_dim = dim();
@@ -5054,7 +5054,7 @@ namespace oomph
     /// \short Return the C0-basis function stored at the ipt-th integration
     /// point.
     //=========================================================================
-    void basis_c0_at_knot(const unsigned &ipt, Shape &psi) const
+    void basis_c0_at_knot(const unsigned& ipt, Shape& psi) const
     {
       // Find the dimension of the element
       const unsigned el_dim = dim();
@@ -5073,9 +5073,9 @@ namespace oomph
     /// \short Return the C0-basis function and its derivatives w.r.t. the local
     /// coordinates at the ipt-th integration point.
     //=========================================================================
-    void dbasis_c0_local_at_knot(const unsigned &ipt,
-                                 Shape &psi,
-                                 DShape &dpsids) const
+    void dbasis_c0_local_at_knot(const unsigned& ipt,
+                                 Shape& psi,
+                                 DShape& dpsids) const
     {
       // Find the dimension of the element
       const unsigned el_dim = dim();
@@ -5096,10 +5096,10 @@ namespace oomph
     /// w.r.t. local coordinates at the ipt-th integration point.
     /// \n\n Numbering:
     //=========================================================================
-    void d2basis_c0_local_at_knot(const unsigned &ipt,
-                                  Shape &psi,
-                                  DShape &dpsids,
-                                  DShape &d2psids) const
+    void d2basis_c0_local_at_knot(const unsigned& ipt,
+                                  Shape& psi,
+                                  DShape& dpsids,
+                                  DShape& d2psids) const
     {
       // Find the dimension of the element
       const unsigned el_dim = dim();
@@ -5118,7 +5118,7 @@ namespace oomph
     /// \short Return the test function stored at the ipt-th integration
     /// point.
     //=========================================================================
-    void test_at_knot(const unsigned &ipt, Shape &phi) const
+    void test_at_knot(const unsigned& ipt, Shape& phi) const
     {
       // Find the dimension of the element
       const unsigned el_dim = dim();
@@ -5137,9 +5137,9 @@ namespace oomph
     /// \short Return the test function and its derivatives w.r.t. the local
     /// coordinates at the ipt-th integration point.
     //=========================================================================
-    void dtest_local_at_knot(const unsigned &ipt,
-                             Shape &phi,
-                             DShape &dphids) const
+    void dtest_local_at_knot(const unsigned& ipt,
+                             Shape& phi,
+                             DShape& dphids) const
     {
       // Find the dimension of the element
       const unsigned el_dim = dim();
@@ -5159,10 +5159,10 @@ namespace oomph
     /// w.r.t. local coordinates at the ipt-th integration point.
     /// \n\n Numbering:
     //=========================================================================
-    void d2test_local_at_knot(const unsigned &ipt,
-                              Shape &phi,
-                              DShape &dphids,
-                              DShape &d2phids) const
+    void d2test_local_at_knot(const unsigned& ipt,
+                              Shape& phi,
+                              DShape& dphids,
+                              DShape& d2phids) const
     {
       // Find the dimension of the element
       const unsigned el_dim = dim();
@@ -5183,9 +5183,9 @@ namespace oomph
     /// Returns Jacobian of mapping from global to local coordinates.
     /// Most general form of the function, but may be over-loaded, if desired
     //=========================================================================
-    double dbasis_c0_eulerian(const Vector<double> &s,
-                              Shape &psi,
-                              DShape &dpsi) const
+    double dbasis_c0_eulerian(const Vector<double>& s,
+                              Shape& psi,
+                              DShape& dpsi) const
     {
       // Find the element dimension
       const unsigned el_dim = dim();
@@ -5220,10 +5220,10 @@ namespace oomph
     /// and second derivatives w.r.t. local coordinates at ipt-th integration
     /// point
     //===========================================================================
-    double d2basis_c0_eulerian(const Vector<double> &s,
-                               Shape &psi,
-                               DShape &dpsi,
-                               DShape &d2psi) const
+    double d2basis_c0_eulerian(const Vector<double>& s,
+                               Shape& psi,
+                               DShape& dpsi,
+                               DShape& d2psi) const
     {
       // Find the element dimension
       const unsigned el_dim = dim();
@@ -5267,9 +5267,9 @@ namespace oomph
     /// Returns Jacobian of mapping from global to local coordinates.
     /// Most general form of the function, but may be over-loaded, if desired
     //=========================================================================
-    double dbasis_eulerian(const Vector<double> &s,
-                           Shape &psi,
-                           DShape &dpsi) const
+    double dbasis_eulerian(const Vector<double>& s,
+                           Shape& psi,
+                           DShape& dpsi) const
     {
       // Find the element dimension
       const unsigned el_dim = dim();
@@ -5301,10 +5301,10 @@ namespace oomph
     /// and second derivatives w.r.t. global coordinates at ipt-th integration
     /// point
     //===========================================================================
-    double d2basis_eulerian(const Vector<double> &s,
-                            Shape &psi,
-                            DShape &dpsi,
-                            DShape &d2psi) const
+    double d2basis_eulerian(const Vector<double>& s,
+                            Shape& psi,
+                            DShape& dpsi,
+                            DShape& d2psi) const
     {
       // Find the element dimension
       const unsigned el_dim = dim();
@@ -5338,11 +5338,11 @@ namespace oomph
     /// \n\n Numbering:
     //=========================================================================
 
-    double dshape_and_dtest_eulerian_at_knot(const unsigned &ipt,
-                                             Shape &psi,
-                                             DShape &dpsi,
-                                             Shape &test,
-                                             DShape &dtest) const
+    double dshape_and_dtest_eulerian_at_knot(const unsigned& ipt,
+                                             Shape& psi,
+                                             DShape& dpsi,
+                                             Shape& test,
+                                             DShape& dtest) const
     {
       // Find the element dimension
       const unsigned el_dim = dim();
@@ -5378,13 +5378,13 @@ namespace oomph
     /// derivatives w.r.t. global coordinates at ipt-th integration points
     /// Returns Jacobian of mapping from global to local coordinates.
     //===========================================================================
-    double d2shape_and_d2test_eulerian_at_knot(const unsigned &ipt,
-                                               Shape &psi,
-                                               DShape &dpsi,
-                                               DShape &d2psi,
-                                               Shape &test,
-                                               DShape &dtest,
-                                               DShape &d2test) const
+    double d2shape_and_d2test_eulerian_at_knot(const unsigned& ipt,
+                                               Shape& psi,
+                                               DShape& dpsi,
+                                               DShape& d2psi,
+                                               Shape& test,
+                                               DShape& dtest,
+                                               DShape& d2test) const
     {
       // Find the element dimension
       const unsigned el_dim = dim();
@@ -5420,7 +5420,7 @@ namespace oomph
     /// mapping (ds/dx).
     //===========================================================================
     double local_to_eulerian_mapping2(
-      const DShape &dpsids, DenseMatrix<double> &inverse_jacobian) const
+      const DShape& dpsids, DenseMatrix<double>& inverse_jacobian) const
     {
       // Find the dimension of the element
       const unsigned el_dim = dim();
@@ -5432,9 +5432,9 @@ namespace oomph
 
     ///////////////////////////////////////////////////////////////
     virtual double local_to_eulerian_mapping2(
-      const DShape &dpsids,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &inverse_jacobian) const
+      const DShape& dpsids,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& inverse_jacobian) const
     {
       // Assemble the jacobian
       // Locally cache the elemental dimension
@@ -5478,7 +5478,7 @@ namespace oomph
     /// \short Calculate the Jacobian of the mapping between local and global
     /// coordinates at the position s
     //========================================================================
-    double J_eulerian1(const Vector<double> &s) const
+    double J_eulerian1(const Vector<double>& s) const
     {
       // Find the number of nodes and position types
       const unsigned n_node = 3;
@@ -5572,7 +5572,7 @@ namespace oomph
     /// shape functions.
     //=========================================================================
     void myassemble_local_to_eulerian_jacobian2(
-      const DShape &d2psids, DenseMatrix<double> &jacobian2) const
+      const DShape& d2psids, DenseMatrix<double>& jacobian2) const
     {
       // Find the the dimension of the element
       const unsigned el_dim = dim();
@@ -5614,7 +5614,7 @@ namespace oomph
     /// Return FE interpolated position x[] at local coordinate s as Vector
     // (using linear Lagrange interpolation)
     //=======================================================================
-    void my_interpolated_x(const Vector<double> &s, Vector<double> &x) const
+    void my_interpolated_x(const Vector<double>& s, Vector<double>& x) const
     {
       // Find the number of nodes
       const unsigned n_node = 3;
@@ -5667,33 +5667,33 @@ namespace oomph
     {
       // Set the number of types required to interpolate the coordinate
       this->set_nnodal_position_type(6);
-      TGauss<2, 4> *new_integral_pt = new TGauss<2, 4>;
+      TGauss<2, 4>* new_integral_pt = new TGauss<2, 4>;
       this->set_integration_scheme(new_integral_pt);
     }
 
     /// Broken copy constructor
-    BellElement(const BellElement &)
+    BellElement(const BellElement&)
     {
       BrokenCopy::broken_copy("BellElement");
     }
 
     /// Broken assignment operator
-    void operator=(const BellElement &)
+    void operator=(const BellElement&)
     {
       BrokenCopy::broken_assign("BellElement");
     }
 
     /// Calculate the geometric shape functions at local coordinate s
-    inline void shape(const Vector<double> &s, Shape &psi) const
+    inline void shape(const Vector<double>& s, Shape& psi) const
     {
       LinearTElement<2>::Lshape(s, psi);
     }
 
     /// \short Compute the geometric shape functions and
     /// derivatives w.r.t. local coordinates at local coordinate s
-    inline void dshape_local(const Vector<double> &s,
-                             Shape &psi,
-                             DShape &dpsids) const
+    inline void dshape_local(const Vector<double>& s,
+                             Shape& psi,
+                             DShape& dpsids) const
     {
       LinearTElement<2>::dLshape_local(s, psi, dpsids);
     }
@@ -5703,16 +5703,16 @@ namespace oomph
     /// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ \n
     /// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ \n
     /// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ \n
-    inline void d2shape_local(const Vector<double> &s,
-                              Shape &psi,
-                              DShape &dpsids,
-                              DShape &d2psids) const
+    inline void d2shape_local(const Vector<double>& s,
+                              Shape& psi,
+                              DShape& dpsids,
+                              DShape& d2psids) const
     {
       LinearTElement<2>::d2Lshape_local(s, psi, dpsids, d2psids);
     }
 
     /// Calculate the c1-basis functions at local coordinate s
-    inline void basis(const Vector<double> &s, Shape &psi) const
+    inline void basis(const Vector<double>& s, Shape& psi) const
     {
       /// Number of nodes along each element edge
       unsigned n_node = 3;
@@ -5733,9 +5733,9 @@ namespace oomph
 
     /// \short Compute the c1-basis functions and
     /// derivatives w.r.t. global coordinates at local coordinate s
-    inline void dbasis_local(const Vector<double> &s,
-                             Shape &psi,
-                             DShape &dpsids) const
+    inline void dbasis_local(const Vector<double>& s,
+                             Shape& psi,
+                             DShape& dpsids) const
     {
       /// Number of nodes along each element edge
       unsigned n_node = 3;
@@ -5757,10 +5757,10 @@ namespace oomph
 
     /// \short Compute the c1-basis functions and
     /// derivatives w.r.t. global coordinates at local coordinate s
-    inline void d2basis_local(const Vector<double> &s,
-                              Shape &psi,
-                              DShape &dpsids,
-                              DShape &d2psids) const
+    inline void d2basis_local(const Vector<double>& s,
+                              Shape& psi,
+                              DShape& dpsids,
+                              DShape& d2psids) const
     {
       /// Number of nodes along each element edge
       unsigned n_node = 3;
@@ -5781,16 +5781,16 @@ namespace oomph
     }
 
     /// Calculate the c0-basis functions at local coordinate s
-    inline void basis_c0(const Vector<double> &s, Shape &psi) const
+    inline void basis_c0(const Vector<double>& s, Shape& psi) const
     {
       TElementShape<2, NNODE_1D>::shape(s, psi);
     }
 
     /// \short Compute the c0-basis functions and
     /// derivatives w.r.t. local coordinates at local coordinate s
-    inline void dbasis_c0_local(const Vector<double> &s,
-                                Shape &psi,
-                                DShape &dpsids) const
+    inline void dbasis_c0_local(const Vector<double>& s,
+                                Shape& psi,
+                                DShape& dpsids) const
     {
       TElementShape<2, NNODE_1D>::dshape_local(s, psi, dpsids);
     }
@@ -5800,25 +5800,25 @@ namespace oomph
     /// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ \n
     /// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ \n
     /// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ \n
-    inline void d2basis_c0_local(const Vector<double> &s,
-                                 Shape &psi,
-                                 DShape &dpsids,
-                                 DShape &d2psids) const
+    inline void d2basis_c0_local(const Vector<double>& s,
+                                 Shape& psi,
+                                 DShape& dpsids,
+                                 DShape& d2psids) const
     {
       TElementShape<2, NNODE_1D>::d2shape_local(s, psi, dpsids, d2psids);
     }
 
     /// Calculate the test functions at local coordinate s
-    inline void test(const Vector<double> &s, Shape &psi) const
+    inline void test(const Vector<double>& s, Shape& psi) const
     {
       TElementShape<2, NNODE_1D>::shape(s, psi);
     }
 
     /// \short Compute the  test functions and
     /// derivatives w.r.t. local coordinates at local coordinate s
-    inline void dtest_local(const Vector<double> &s,
-                            Shape &psi,
-                            DShape &dpsids) const
+    inline void dtest_local(const Vector<double>& s,
+                            Shape& psi,
+                            DShape& dpsids) const
     {
       TElementShape<2, NNODE_1D>::dshape_local(s, psi, dpsids);
     }
@@ -5828,10 +5828,10 @@ namespace oomph
     /// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ \n
     /// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ \n
     /// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ \n
-    inline void d2test_local(const Vector<double> &s,
-                             Shape &psi,
-                             DShape &dpsids,
-                             DShape &d2psids) const
+    inline void d2test_local(const Vector<double>& s,
+                             Shape& psi,
+                             DShape& dpsids,
+                             DShape& d2psids) const
     {
       TElementShape<2, NNODE_1D>::d2shape_local(s, psi, dpsids, d2psids);
     }
@@ -5853,103 +5853,103 @@ namespace oomph
     ///\short  Constructor: Call constructors for FiniteElement
     C1CurvedElementBase() : FiniteElement() {}
     virtual void get_value_transform_matrix(
-      DenseMatrix<double> &D,
-      DenseMatrix<double> &B,
-      DenseMatrix<double> &node_position,
-      unsigned &bd_element,
-      DenseMatrix<double> &bd_node_position,
-      Vector<double> &x) const
+      DenseMatrix<double>& D,
+      DenseMatrix<double>& B,
+      DenseMatrix<double>& node_position,
+      unsigned& bd_element,
+      DenseMatrix<double>& bd_node_position,
+      Vector<double>& x) const
     {
     }
 
-    virtual void classify_boundary_node(DenseMatrix<double> &node_position,
-                                        unsigned &bd_element,
-                                        DenseMatrix<double> &bd_node_position,
-                                        Vector<double> &x) const
+    virtual void classify_boundary_node(DenseMatrix<double>& node_position,
+                                        unsigned& bd_element,
+                                        DenseMatrix<double>& bd_node_position,
+                                        Vector<double>& x) const
     {
     }
 
-    virtual void basis_straight(const Vector<double> &s, Shape &psi) const {}
+    virtual void basis_straight(const Vector<double>& s, Shape& psi) const {}
 
-    virtual void dbasis_local_straight(const Vector<double> &s,
-                                       Shape &psi,
-                                       DShape &dpsids) const
+    virtual void dbasis_local_straight(const Vector<double>& s,
+                                       Shape& psi,
+                                       DShape& dpsids) const
     {
     }
 
-    virtual void d2basis_local_straight(const Vector<double> &s,
-                                        Shape &psi,
-                                        DShape &dpsids,
-                                        DShape &d2psids) const
+    virtual void d2basis_local_straight(const Vector<double>& s,
+                                        Shape& psi,
+                                        DShape& dpsids,
+                                        DShape& d2psids) const
     {
     }
 
-    virtual void shape_geom(const Vector<double> &s,
-                            Shape &psi,
-                            Shape &phi) const
+    virtual void shape_geom(const Vector<double>& s,
+                            Shape& psi,
+                            Shape& phi) const
     {
     }
 
-    virtual void dshape_local_geom(const Vector<double> &s,
-                                   Shape &psi,
-                                   DShape &dpsids,
-                                   Shape &phi,
-                                   DShape &dphids) const
+    virtual void dshape_local_geom(const Vector<double>& s,
+                                   Shape& psi,
+                                   DShape& dpsids,
+                                   Shape& phi,
+                                   DShape& dphids) const
     {
     }
 
-    virtual void d2shape_local_geom(const Vector<double> &s,
-                                    Shape &psi,
-                                    DShape &dpsids,
-                                    DShape &d2psids,
-                                    Shape &phi,
-                                    DShape &dphids,
-                                    DShape &d2phids) const
+    virtual void d2shape_local_geom(const Vector<double>& s,
+                                    Shape& psi,
+                                    DShape& dpsids,
+                                    DShape& d2psids,
+                                    Shape& phi,
+                                    DShape& dphids,
+                                    DShape& d2phids) const
     {
     }
 
-    virtual void basis_curve(const Vector<double> &s, Shape &psi) const {}
+    virtual void basis_curve(const Vector<double>& s, Shape& psi) const {}
 
-    virtual void dbasis_local_curve(const Vector<double> &s,
-                                    Shape &psi,
-                                    DShape &dpsids) const
+    virtual void dbasis_local_curve(const Vector<double>& s,
+                                    Shape& psi,
+                                    DShape& dpsids) const
     {
     }
 
-    virtual void d2basis_local_curve(const Vector<double> &s,
-                                     Shape &psi,
-                                     DShape &dpsids,
-                                     DShape &d2psids) const
+    virtual void d2basis_local_curve(const Vector<double>& s,
+                                     Shape& psi,
+                                     DShape& dpsids,
+                                     DShape& d2psids) const
     {
     }
 
-    virtual void basis_c0(const Vector<double> &s, Shape &psi) const {}
+    virtual void basis_c0(const Vector<double>& s, Shape& psi) const {}
 
-    virtual void dbasis_c0_local(const Vector<double> &s,
-                                 Shape &psi,
-                                 DShape &dpsids) const
+    virtual void dbasis_c0_local(const Vector<double>& s,
+                                 Shape& psi,
+                                 DShape& dpsids) const
     {
     }
 
-    virtual void d2basis_c0_local(const Vector<double> &s,
-                                  Shape &psi,
-                                  DShape &dpsids,
-                                  DShape &d2psids) const
+    virtual void d2basis_c0_local(const Vector<double>& s,
+                                  Shape& psi,
+                                  DShape& dpsids,
+                                  DShape& d2psids) const
     {
     }
 
-    virtual void test(const Vector<double> &s, Shape &phi) const {}
+    virtual void test(const Vector<double>& s, Shape& phi) const {}
 
-    virtual void dtest_local(const Vector<double> &s,
-                             Shape &phi,
-                             DShape &dphids) const
+    virtual void dtest_local(const Vector<double>& s,
+                             Shape& phi,
+                             DShape& dphids) const
     {
     }
 
-    virtual void d2test_local(const Vector<double> &s,
-                              Shape &phi,
-                              DShape &dphids,
-                              DShape &d2phids) const
+    virtual void d2test_local(const Vector<double>& s,
+                              Shape& phi,
+                              DShape& dphids,
+                              DShape& d2phids) const
     {
     }
 
@@ -5957,7 +5957,7 @@ namespace oomph
     /// \short Return the c1-shape function associated with a straight-sided
     /// boundary stored at the ipt-th integration point.
     //=========================================================================
-    void basis_at_knot_straight(const unsigned &ipt, Shape &psi) const
+    void basis_at_knot_straight(const unsigned& ipt, Shape& psi) const
     {
       // Find the dimension of the element
       const unsigned el_dim = dim();
@@ -5977,9 +5977,9 @@ namespace oomph
     /// boundary and its derivatives w.r.t. the global
     /// coordinates at the ipt-th integration point.
     //=========================================================================
-    void dbasis_local_at_knot_straight(const unsigned &ipt,
-                                       Shape &psi,
-                                       DShape &dpsids) const
+    void dbasis_local_at_knot_straight(const unsigned& ipt,
+                                       Shape& psi,
+                                       DShape& dpsids) const
     {
       // Find the dimension of the element
       const unsigned el_dim = dim();
@@ -6000,10 +6000,10 @@ namespace oomph
     /// w.r.t. global coordinates at the ipt-th integration point.
     /// \n\n Numbering:
     //=========================================================================
-    void d2basis_local_at_knot_straight(const unsigned &ipt,
-                                        Shape &psi,
-                                        DShape &dpsids,
-                                        DShape &d2psids) const
+    void d2basis_local_at_knot_straight(const unsigned& ipt,
+                                        Shape& psi,
+                                        DShape& dpsids,
+                                        DShape& d2psids) const
     {
       // Find the dimension of the element
       const unsigned el_dim = dim();
@@ -6022,7 +6022,7 @@ namespace oomph
     /// \short Return the c1-shape function  associated with a curvilinear
     /// boundary stored at the ipt-th integration point.
     //=========================================================================
-    void basis_at_knot_curve(const unsigned &ipt, Shape &psi) const
+    void basis_at_knot_curve(const unsigned& ipt, Shape& psi) const
     {
       // Find the dimension of the element
       const unsigned el_dim = dim();
@@ -6042,9 +6042,9 @@ namespace oomph
     /// and its derivatives w.r.t. the local coordinates at the ipt-th
     /// integration point.
     //=========================================================================
-    void dbasis_local_at_knot_curve(const unsigned &ipt,
-                                    Shape &psi,
-                                    DShape &dpsids) const
+    void dbasis_local_at_knot_curve(const unsigned& ipt,
+                                    Shape& psi,
+                                    DShape& dpsids) const
     {
       // Find the dimension of the element
       const unsigned el_dim = dim();
@@ -6065,10 +6065,10 @@ namespace oomph
     /// ipt-th integration point.
     /// \n\n Numbering:
     //=========================================================================
-    void d2basis_local_at_knot_curve(const unsigned &ipt,
-                                     Shape &psi,
-                                     DShape &dpsids,
-                                     DShape &d2psids) const
+    void d2basis_local_at_knot_curve(const unsigned& ipt,
+                                     Shape& psi,
+                                     DShape& dpsids,
+                                     DShape& d2psids) const
     {
       // Find the dimension of the element
       const unsigned el_dim = dim();
@@ -6087,7 +6087,7 @@ namespace oomph
     /// \short Return the c0-shape function stored at the ipt-th integration
     /// point.
     //=========================================================================
-    void basis_c0_at_knot(const unsigned &ipt, Shape &psi) const
+    void basis_c0_at_knot(const unsigned& ipt, Shape& psi) const
     {
       // Find the dimension of the element
       const unsigned el_dim = dim();
@@ -6106,9 +6106,9 @@ namespace oomph
     /// \short Return the c0-shape function and its derivatives w.r.t. the local
     /// coordinates at the ipt-th integration point.
     //=========================================================================
-    void dbasis_c0_local_at_knot(const unsigned &ipt,
-                                 Shape &psi,
-                                 DShape &dpsids) const
+    void dbasis_c0_local_at_knot(const unsigned& ipt,
+                                 Shape& psi,
+                                 DShape& dpsids) const
     {
       // Find the dimension of the element
       const unsigned el_dim = dim();
@@ -6128,10 +6128,10 @@ namespace oomph
     /// w.r.t. local coordinates at the ipt-th integration point.
     /// \n\n Numbering:
     //=========================================================================
-    void d2basis_c0_local_at_knot(const unsigned &ipt,
-                                  Shape &psi,
-                                  DShape &dpsids,
-                                  DShape &d2psids) const
+    void d2basis_c0_local_at_knot(const unsigned& ipt,
+                                  Shape& psi,
+                                  DShape& dpsids,
+                                  DShape& d2psids) const
     {
       // Find the dimension of the element
       const unsigned el_dim = dim();
@@ -6150,7 +6150,7 @@ namespace oomph
     /// \short Return the geometric shape function stored at the ipt-th
     /// integration point.
     //=========================================================================
-    void shape_at_knot_geom(const unsigned &ipt, Shape &psi, Shape &phi) const
+    void shape_at_knot_geom(const unsigned& ipt, Shape& psi, Shape& phi) const
     {
       // Find the dimension of the element
       const unsigned el_dim = dim();
@@ -6169,11 +6169,11 @@ namespace oomph
     /// \short Return the geometric shape function and its derivatives w.r.t.
     /// the local coordinates at the ipt-th integration point.
     //=========================================================================
-    void dshape_local_at_knot_geom(const unsigned &ipt,
-                                   Shape &psi,
-                                   DShape &dpsids,
-                                   Shape &phi,
-                                   DShape &dphids) const
+    void dshape_local_at_knot_geom(const unsigned& ipt,
+                                   Shape& psi,
+                                   DShape& dpsids,
+                                   Shape& phi,
+                                   DShape& dphids) const
     {
       // Find the dimension of the element
       const unsigned el_dim = dim();
@@ -6194,13 +6194,13 @@ namespace oomph
     /// derivatives w.r.t. local coordinates at the ipt-th integration point.
     /// \n\n Numbering:
     //=========================================================================
-    void d2shape_local_at_knot_geom(const unsigned &ipt,
-                                    Shape &psi,
-                                    DShape &dpsids,
-                                    DShape &d2psids,
-                                    Shape &phi,
-                                    DShape &dphids,
-                                    DShape &d2phids) const
+    void d2shape_local_at_knot_geom(const unsigned& ipt,
+                                    Shape& psi,
+                                    DShape& dpsids,
+                                    DShape& d2psids,
+                                    Shape& phi,
+                                    DShape& dphids,
+                                    DShape& d2phids) const
     {
       // Find the dimension of the element
       const unsigned el_dim = dim();
@@ -6219,7 +6219,7 @@ namespace oomph
     /// \short Return the test function stored at the ipt-th integration
     /// point.
     //=========================================================================
-    void test_at_knot(const unsigned &ipt, Shape &phi) const
+    void test_at_knot(const unsigned& ipt, Shape& phi) const
     {
       // Find the dimension of the element
       const unsigned el_dim = dim();
@@ -6238,9 +6238,9 @@ namespace oomph
     /// \short Return the test function and its derivatives w.r.t. the local
     /// coordinates at the ipt-th integration point.
     //=========================================================================
-    void dtest_local_at_knot(const unsigned &ipt,
-                             Shape &phi,
-                             DShape &dphids) const
+    void dtest_local_at_knot(const unsigned& ipt,
+                             Shape& phi,
+                             DShape& dphids) const
     {
       // Find the dimension of the element
       const unsigned el_dim = dim();
@@ -6260,10 +6260,10 @@ namespace oomph
     /// w.r.t. local coordinates at the ipt-th integration point.
     /// \n\n Numbering:
     //=========================================================================
-    void d2test_local_at_knot(const unsigned &ipt,
-                              Shape &phi,
-                              DShape &dphids,
-                              DShape &d2phids) const
+    void d2test_local_at_knot(const unsigned& ipt,
+                              Shape& phi,
+                              DShape& dphids,
+                              DShape& d2phids) const
     {
       // Find the dimension of the element
       const unsigned el_dim = dim();
@@ -6283,11 +6283,11 @@ namespace oomph
     /// w.r.t. local coordinates at the ipt-th integration point.
     /// \n\n Numbering:
     //=========================================================================
-    double dshape_and_dtest_eulerian_at_knot(const unsigned &ipt,
-                                             Shape &psi,
-                                             DShape &dpsi,
-                                             Shape &test,
-                                             DShape &dtest) const
+    double dshape_and_dtest_eulerian_at_knot(const unsigned& ipt,
+                                             Shape& psi,
+                                             DShape& dpsi,
+                                             Shape& test,
+                                             DShape& dtest) const
     {
       // Find the element dimension
       const unsigned el_dim = dim();
@@ -6329,13 +6329,13 @@ namespace oomph
     /// global coordinates at ipt-th integration point Returns Jacobian of
     /// mapping from global to local coordinates.
     //===========================================================================
-    double d2shape_and_d2test_eulerian_at_knot(const unsigned &ipt,
-                                               Shape &psi,
-                                               DShape &dpsi,
-                                               DShape &d2psi,
-                                               Shape &test,
-                                               DShape &dtest,
-                                               DShape &d2test) const
+    double d2shape_and_d2test_eulerian_at_knot(const unsigned& ipt,
+                                               Shape& psi,
+                                               DShape& dpsi,
+                                               DShape& d2psi,
+                                               Shape& test,
+                                               DShape& dtest,
+                                               DShape& d2test) const
     {
       // Find the values of the indices of the shape functions
       // Locally cached
@@ -6375,9 +6375,9 @@ namespace oomph
     /// mapping (ds/dx).
     //===========================================================================
     double local_to_eulerian_mapping2(
-      const DShape &dpsids,
-      DShape &dphids,
-      DenseMatrix<double> &inverse_jacobian) const
+      const DShape& dpsids,
+      DShape& dphids,
+      DenseMatrix<double>& inverse_jacobian) const
     {
       // Find the dimension of the element
       const unsigned el_dim = dim();
@@ -6390,10 +6390,10 @@ namespace oomph
 
     ///////////////////////////////////////////////////////////////
     virtual double local_to_eulerian_mapping2(
-      const DShape &dpsids,
-      DShape &dphids,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &inverse_jacobian) const
+      const DShape& dpsids,
+      DShape& dphids,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& inverse_jacobian) const
     {
       // Assemble the jacobian
       // Locally cache the elemental dimension
@@ -6421,7 +6421,7 @@ namespace oomph
     /// shape functions.
     //=========================================================================
     void myassemble_local_to_eulerian_jacobian2(
-      const DShape &d2psids, DenseMatrix<double> &jacobian2) const
+      const DShape& d2psids, DenseMatrix<double>& jacobian2) const
     {
       // Find the the dimension of the element
       const unsigned el_dim = dim();
@@ -6446,7 +6446,7 @@ namespace oomph
     /// Return FE interpolated position x[] at local coordinate s as Vector
     // (using Hermite interpolation)
     //=======================================================================
-    void my_interpolated_x(const Vector<double> &s, Vector<double> &x) const
+    void my_interpolated_x(const Vector<double>& s, Vector<double>& x) const
     {
       // Find the number of nodes
       const unsigned n_node = 3;
@@ -6464,7 +6464,7 @@ namespace oomph
     /// \short Calculate the Jacobian of the mapping between local and global
     /// coordinates at the position s
     //========================================================================
-    double J_eulerian1(const Vector<double> &s) const
+    double J_eulerian1(const Vector<double>& s) const
     {
       // Find the number of nodes and position types
       const unsigned n_node = 3;
@@ -6577,9 +6577,9 @@ namespace oomph
     /// Returns Jacobian of mapping from global to local coordinates.
     /// Most general form of the function, but may be over-loaded, if desired
     //=========================================================================
-    double dbasis_c0_eulerian(const Vector<double> &s,
-                              Shape &psi,
-                              DShape &dpsi) const
+    double dbasis_c0_eulerian(const Vector<double>& s,
+                              Shape& psi,
+                              DShape& dpsi) const
     {
       // Find the element dimension
       const unsigned el_dim = dim();
@@ -6614,10 +6614,10 @@ namespace oomph
     /// Returns Jacobian of mapping from global to local coordinates.
     /// Most general form of the function, but may be over-loaded, if desired
     //=========================================================================
-    double d2basis_c0_eulerian(const Vector<double> &s,
-                               Shape &psi,
-                               DShape &dpsi,
-                               DShape &d2psi) const
+    double d2basis_c0_eulerian(const Vector<double>& s,
+                               Shape& psi,
+                               DShape& dpsi,
+                               DShape& d2psi) const
     {
       // Find the element dimension
       const unsigned el_dim = dim();
@@ -6658,9 +6658,9 @@ namespace oomph
     /// Returns Jacobian of mapping from global to local coordinates.
     /// Most general form of the function, but may be over-loaded, if desired
     //=========================================================================
-    double dbasis_eulerian_curve(const Vector<double> &s,
-                                 Shape &psi,
-                                 DShape &dpsi) const
+    double dbasis_eulerian_curve(const Vector<double>& s,
+                                 Shape& psi,
+                                 DShape& dpsi) const
     {
       // Find the element dimension
       const unsigned el_dim = dim();
@@ -6694,10 +6694,10 @@ namespace oomph
     /// and second derivatives w.r.t. global coordinates at ipt-th integration
     /// point
     //===========================================================================
-    double d2basis_eulerian_curve(const Vector<double> &s,
-                                  Shape &psi,
-                                  DShape &dpsi,
-                                  DShape &d2psi) const
+    double d2basis_eulerian_curve(const Vector<double>& s,
+                                  Shape& psi,
+                                  DShape& dpsi,
+                                  DShape& d2psi) const
     {
       // Find the element dimension
       const unsigned el_dim = dim();
@@ -6735,7 +6735,7 @@ namespace oomph
     //=======================================================================
     /// Return raw nodal value for nodes specified on the reference triangle
     //=======================================================================
-    void get_nodal_value_curve1(Vector<double> &u_value, DenseMatrix<double> &M)
+    void get_nodal_value_curve1(Vector<double>& u_value, DenseMatrix<double>& M)
     {
       // assign degrees of freedom to the reference element
       DenseMatrix<double> D(21, 21), B(21, 36);
@@ -6809,7 +6809,7 @@ namespace oomph
     /// the nodal values defined on the element doesn't match with the defined
     /// shape functions
     //=======================================================================
-    void get_nodal_eqn_curve(DenseMatrix<int> &nodal_eqn)
+    void get_nodal_eqn_curve(DenseMatrix<int>& nodal_eqn)
     {
       // assign degrees of freedom to the reference element
       DenseMatrix<double> D(21, 21), B(21, 36);
@@ -6883,10 +6883,10 @@ namespace oomph
     // This one is for the pre-permutation
     //=======================================================================
     void my_interpolated_u_normal1(const Vector<double> s,
-                                   Vector<double> &interpolated_u,
-                                   DenseMatrix<double> &interpolated_dudxi,
-                                   DenseMatrix<double> &interpolated_d2udxi,
-                                   DenseMatrix<double> &M)
+                                   Vector<double>& interpolated_u,
+                                   DenseMatrix<double>& interpolated_dudxi,
+                                   DenseMatrix<double>& interpolated_d2udxi,
+                                   DenseMatrix<double>& M)
     {
       // To check whether this element is on the boundary
       unsigned bd_element = is_boundary_element();
@@ -6960,9 +6960,9 @@ namespace oomph
     //=======================================================================
     void my_interpolated_u_normal(
       const Vector<double> s,
-      Vector<double> &interpolated_u,
-      DenseMatrix<double> &interpolated_dudxi,
-      DenseMatrix<double> &interpolated_d2udxi) const
+      Vector<double>& interpolated_u,
+      DenseMatrix<double>& interpolated_dudxi,
+      DenseMatrix<double>& interpolated_d2udxi) const
     {
       // To check whether this element is on the boundary
       unsigned bd_element = is_boundary_element();
@@ -7153,8 +7153,8 @@ namespace oomph
     //=======================================================================
     void my_interpolated_u_tangential(
       const Vector<double> s,
-      Vector<double> &interpolated_u,
-      DenseMatrix<double> &interpolated_dudxi) const
+      Vector<double>& interpolated_u,
+      DenseMatrix<double>& interpolated_dudxi) const
     {
       unsigned n_node = nnode() - 3;
 
@@ -7236,18 +7236,18 @@ namespace oomph
       this->set_dimension(2);
       // Set the number of types required to interpolate the coordinate
       this->set_nnodal_position_type(6);
-      TGauss<2, 5> *new_integral_pt = new TGauss<2, 5>;
+      TGauss<2, 5>* new_integral_pt = new TGauss<2, 5>;
       this->set_integration_scheme(new_integral_pt);
     }
 
     /// Broken copy constructor
-    C1CurvedElement(const C1CurvedElement &)
+    C1CurvedElement(const C1CurvedElement&)
     {
       BrokenCopy::broken_copy("C1CurvedElement");
     }
 
     /// Broken assignment operator
-    void operator=(const C1CurvedElement &)
+    void operator=(const C1CurvedElement&)
     {
       BrokenCopy::broken_assign("C1CurvedElement");
     }
@@ -7274,7 +7274,7 @@ namespace oomph
     }
 
     /// \short Pointer to the j-th vertex node in the element
-    Node *vertex_node_pt(const unsigned &j) const
+    Node* vertex_node_pt(const unsigned& j) const
     {
       // Vertex nodes come first:
 #ifdef PARANOID
@@ -7293,10 +7293,10 @@ namespace oomph
     }
 
     // Classify nodes on the element: boundary nodes and non-boundary nodes
-    inline void classify_boundary_node(DenseMatrix<double> &node_position,
-                                       unsigned &bd_element,
-                                       DenseMatrix<double> &bd_node_position,
-                                       Vector<double> &x) const
+    inline void classify_boundary_node(DenseMatrix<double>& node_position,
+                                       unsigned& bd_element,
+                                       DenseMatrix<double>& bd_node_position,
+                                       Vector<double>& x) const
     {
       /// Number of nodes along each element edge: Just for the three vertices
       /// not the internal points
@@ -7355,12 +7355,12 @@ namespace oomph
 
     // assign the set of value for a curved element
     inline void get_value_transform_matrix(
-      DenseMatrix<double> &D,
-      DenseMatrix<double> &B,
-      DenseMatrix<double> &node_position,
-      unsigned &bd_element,
-      DenseMatrix<double> &bd_node_position,
-      Vector<double> &x) const
+      DenseMatrix<double>& D,
+      DenseMatrix<double>& B,
+      DenseMatrix<double>& node_position,
+      unsigned& bd_element,
+      DenseMatrix<double>& bd_node_position,
+      Vector<double>& x) const
     {
       /// classify nodes in the element
       classify_boundary_node(node_position, bd_element, bd_node_position, x);
@@ -7370,15 +7370,15 @@ namespace oomph
     }
 
     /// Return local coordinates of node j
-    inline void local_coordinate_of_node(const unsigned &j,
-                                         Vector<double> &s) const
+    inline void local_coordinate_of_node(const unsigned& j,
+                                         Vector<double>& s) const
     {
       C1CurvedElementShape<2, NNODE_1D>::local_coordinate_of_node(j, s);
     }
 
     /// Calculate the c1-shape functions associated with a straight-sided
     /// boundary at local coordinate s
-    inline void basis_straight(const Vector<double> &s, Shape &psi) const
+    inline void basis_straight(const Vector<double>& s, Shape& psi) const
     {
       /// classify nodes in the element
       DenseMatrix<double> node_position(3, 2);
@@ -7391,9 +7391,9 @@ namespace oomph
 
     /// \short Compute the c1-shape functions associated with a straight-sided
     /// boundary and derivatives w.r.t. global coordinates at local coordinate s
-    inline void dbasis_local_straight(const Vector<double> &s,
-                                      Shape &psi,
-                                      DShape &dpsids) const
+    inline void dbasis_local_straight(const Vector<double>& s,
+                                      Shape& psi,
+                                      DShape& dpsids) const
     {
       /// classify nodes in the element
       DenseMatrix<double> node_position(3, 2);
@@ -7406,10 +7406,10 @@ namespace oomph
 
     /// \short Compute the c1-shape functions associated with a straight-sided
     /// boundary and derivatives w.r.t. global coordinates at local coordinate s
-    inline void d2basis_local_straight(const Vector<double> &s,
-                                       Shape &psi,
-                                       DShape &dpsids,
-                                       DShape &d2psids) const
+    inline void d2basis_local_straight(const Vector<double>& s,
+                                       Shape& psi,
+                                       DShape& dpsids,
+                                       DShape& d2psids) const
     {
       /// classify nodes in the element
       DenseMatrix<double> node_position(3, 2);
@@ -7423,35 +7423,35 @@ namespace oomph
 
     /// Calculate the c1-shape functions associated with a curved-sided
     /// boundary at local coordinate s
-    inline void basis_curve(const Vector<double> &s, Shape &psi) const
+    inline void basis_curve(const Vector<double>& s, Shape& psi) const
     {
       C1CurvedElementShape<2, NNODE_1D>::Cshape(s, psi);
     }
 
     /// \short Compute the c1-shape functions associated with a curved-sided
     /// boundary and derivatives w.r.t. local coordinates at local coordinate s
-    inline void dbasis_local_curve(const Vector<double> &s,
-                                   Shape &psi,
-                                   DShape &dpsids) const
+    inline void dbasis_local_curve(const Vector<double>& s,
+                                   Shape& psi,
+                                   DShape& dpsids) const
     {
       C1CurvedElementShape<2, NNODE_1D>::dCshape_local(s, psi, dpsids);
     }
 
     /// \short Compute the c1-shape functions associated with a curved-sided
     /// boundary and derivatives w.r.t. local coordinates at local coordinate s
-    inline void d2basis_local_curve(const Vector<double> &s,
-                                    Shape &psi,
-                                    DShape &dpsids,
-                                    DShape &d2psids) const
+    inline void d2basis_local_curve(const Vector<double>& s,
+                                    Shape& psi,
+                                    DShape& dpsids,
+                                    DShape& d2psids) const
     {
       C1CurvedElementShape<2, NNODE_1D>::d2Cshape_local(
         s, psi, dpsids, d2psids);
     }
 
     /// Calculate the linear shape functions at local coordinate s
-    inline void shape_geom(const Vector<double> &s,
-                           Shape &psi,
-                           Shape &phi) const
+    inline void shape_geom(const Vector<double>& s,
+                           Shape& psi,
+                           Shape& phi) const
     {
       /// classify nodes in the element
       DenseMatrix<double> node_position(3, 2);
@@ -7466,11 +7466,11 @@ namespace oomph
 
     /// \short Compute the linear functions and
     /// derivatives w.r.t. local coordinates at local coordinate s
-    inline void dshape_local_geom(const Vector<double> &s,
-                                  Shape &psi,
-                                  DShape &dpsids,
-                                  Shape &phi,
-                                  DShape &dphids) const
+    inline void dshape_local_geom(const Vector<double>& s,
+                                  Shape& psi,
+                                  DShape& dpsids,
+                                  Shape& phi,
+                                  DShape& dphids) const
     {
       /// classify nodes in the element
       DenseMatrix<double> node_position(3, 2);
@@ -7491,13 +7491,13 @@ namespace oomph
 
     /// \short Compute the linear functions and
     /// derivatives w.r.t. local coordinates at local coordinate s
-    inline void d2shape_local_geom(const Vector<double> &s,
-                                   Shape &psi,
-                                   DShape &dpsids,
-                                   DShape &d2psids,
-                                   Shape &phi,
-                                   DShape &dphids,
-                                   DShape &d2phids) const
+    inline void d2shape_local_geom(const Vector<double>& s,
+                                   Shape& psi,
+                                   DShape& dpsids,
+                                   DShape& d2psids,
+                                   Shape& phi,
+                                   DShape& dphids,
+                                   DShape& d2phids) const
     {
       /// classify nodes in the element
       DenseMatrix<double> node_position(3, 2);
@@ -7519,16 +7519,16 @@ namespace oomph
     }
 
     /// Calculate the c0-shape functions at local coordinate s
-    inline void basis_c0(const Vector<double> &s, Shape &psi) const
+    inline void basis_c0(const Vector<double>& s, Shape& psi) const
     {
       TElementShape<2, NNODE_1D>::shape(s, psi);
     }
 
     /// \short Compute the c0-shape functions and
     /// derivatives w.r.t. local coordinates at local coordinate s
-    inline void dbasis_c0_local(const Vector<double> &s,
-                                Shape &psi,
-                                DShape &dpsids) const
+    inline void dbasis_c0_local(const Vector<double>& s,
+                                Shape& psi,
+                                DShape& dpsids) const
     {
       TElementShape<2, NNODE_1D>::dshape_local(s, psi, dpsids);
     }
@@ -7538,25 +7538,25 @@ namespace oomph
     /// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ \n
     /// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ \n
     /// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ \n
-    inline void d2basis_c0_local(const Vector<double> &s,
-                                 Shape &psi,
-                                 DShape &dpsids,
-                                 DShape &d2psids) const
+    inline void d2basis_c0_local(const Vector<double>& s,
+                                 Shape& psi,
+                                 DShape& dpsids,
+                                 DShape& d2psids) const
     {
       TElementShape<2, NNODE_1D>::d2shape_local(s, psi, dpsids, d2psids);
     }
 
     /// Calculate the test functions at local coordinate s
-    inline void test(const Vector<double> &s, Shape &psi) const
+    inline void test(const Vector<double>& s, Shape& psi) const
     {
       TElementShape<2, NNODE_1D>::shape(s, psi);
     }
 
     /// \short Compute the  test functions and
     /// derivatives w.r.t. local coordinates at local coordinate s
-    inline void dtest_local(const Vector<double> &s,
-                            Shape &psi,
-                            DShape &dpsids) const
+    inline void dtest_local(const Vector<double>& s,
+                            Shape& psi,
+                            DShape& dpsids) const
     {
       TElementShape<2, NNODE_1D>::dshape_local(s, psi, dpsids);
     }
@@ -7566,10 +7566,10 @@ namespace oomph
     /// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ \n
     /// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ \n
     /// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ \n
-    inline void d2test_local(const Vector<double> &s,
-                             Shape &psi,
-                             DShape &dpsids,
-                             DShape &d2psids) const
+    inline void d2test_local(const Vector<double>& s,
+                             Shape& psi,
+                             DShape& dpsids,
+                             DShape& d2psids) const
     {
       TElementShape<2, NNODE_1D>::d2shape_local(s, psi, dpsids, d2psids);
     }
@@ -7579,8 +7579,8 @@ namespace oomph
     /// 0 (Left)         s[0] = 0.0
     /// 1 (Bottom)       s[1] = 0.0
     /// 2 (Sloping face) s[0] = 1.0 - s[1]
-    void build_face_element(const int &face_index,
-                            FaceElement *face_element_pt);
+    void build_face_element(const int& face_index,
+                            FaceElement* face_element_pt);
   };
 
   //===========================================================
@@ -7589,7 +7589,7 @@ namespace oomph
   //===========================================================
   template<unsigned NNODE_1D>
   void C1CurvedElement<2, NNODE_1D>::build_face_element(
-    const int &face_index, FaceElement *face_element_pt)
+    const int& face_index, FaceElement* face_element_pt)
   {
     // Build the standard non-solid FaceElement
     TElement<2, NNODE_1D>::build_face_element(face_index, face_element_pt);

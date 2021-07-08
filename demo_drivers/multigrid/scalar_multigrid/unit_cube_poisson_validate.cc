@@ -112,7 +112,7 @@ namespace Smoother_Factory_Function_Helper
 {
   // Returns a pointer to a Smoother object which is to be used as the
   // pre-smoother
-  Smoother *set_pre_smoother()
+  Smoother* set_pre_smoother()
   {
     // Set the pre-smoother
     if (Global_Parameters::Pre_smoother_flag == 0)
@@ -138,7 +138,7 @@ namespace Smoother_Factory_Function_Helper
 
   // Returns a pointer to a Smoother object which is to be used as the
   // post-smoother
-  Smoother *set_post_smoother()
+  Smoother* set_post_smoother()
   {
     // Set the post-smoother
     if (Global_Parameters::Post_smoother_flag == 0)
@@ -197,7 +197,7 @@ namespace TanhSolnForPoisson
   double Z_0 = 0.0;
 
   // Exact solution as a Vector
-  void get_exact_u(const Vector<double> &x, Vector<double> &u)
+  void get_exact_u(const Vector<double>& x, Vector<double>& u)
   {
     // Assign the solution value
     u[0] = tanh(Alpha *
@@ -207,7 +207,7 @@ namespace TanhSolnForPoisson
   }
 
   /// Exact solution as a scalar
-  void get_exact_u(const Vector<double> &x, double &u)
+  void get_exact_u(const Vector<double>& x, double& u)
   {
     // Assign the solution value
     u = tanh(Alpha *
@@ -217,7 +217,7 @@ namespace TanhSolnForPoisson
   }
 
   /// Source function to make it an exact solution
-  void get_source(const Vector<double> &x, double &source)
+  void get_source(const Vector<double>& x, double& source)
   {
     // Create auxiliary variables
     double s1;
@@ -328,10 +328,10 @@ public:
 private:
   /// \short Overload generic access function to the mesh by one that returns
   /// a pointer to the mesh with return type specified by the template parameter
-  MESH *mesh_pt()
+  MESH* mesh_pt()
   {
     // Upcast to the appropriate mesh type
-    return dynamic_cast<MESH *>(Problem::mesh_pt());
+    return dynamic_cast<MESH*>(Problem::mesh_pt());
   } // End of mesh_pt
 
   /// Build and set multgrid solver
@@ -340,14 +340,14 @@ private:
   /// \short Pointer to the bulk mesh. Overloads the pure virtual function in
   /// the abstract base class, MGProblem. Must be refineable to allow the
   /// use of refine_base_mesh_as_in_reference_mesh_minus_one() in make_copy()
-  TreeBasedRefineableMeshBase *mg_bulk_mesh_pt()
+  TreeBasedRefineableMeshBase* mg_bulk_mesh_pt()
   {
     // Return a handle to the global mesh
     return mesh_pt();
   } // End of mg_bulk_mesh_pt
 
   /// Return a pointer to a new instance of the same problem.
-  MGProblem *make_new_problem()
+  MGProblem* make_new_problem()
   {
     // Return a pointer to a new object of the UnitCubePoissonMGProblem class
     return new UnitCubePoissonMGProblem<ELEMENT, MESH>(
@@ -431,7 +431,7 @@ UnitCubePoissonMGProblem<ELEMENT, MESH>::UnitCubePoissonMGProblem(
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast the element to the type specified by the template parameter
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the source function pointer
     el_pt->source_fct_pt() = Source_fct_pt;
@@ -461,7 +461,7 @@ void UnitCubePoissonMGProblem<ELEMENT, MESH>::actions_before_newton_solve()
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Grab the inod-th node on the ibound-th boundary
-      Node *nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
+      Node* nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
 
       // Create a vector to hold the (Eulerian) position of the node
       Vector<double> x(3, 0.0);
@@ -492,7 +492,7 @@ template<class ELEMENT, class MESH>
 void UnitCubePoissonMGProblem<ELEMENT, MESH>::set_multigrid_solver()
 {
   // Make an object of the MGSolver class and get the pointer to it
-  MGSolver<3> *mg_solver_pt = new MGSolver<3>(this);
+  MGSolver<3>* mg_solver_pt = new MGSolver<3>(this);
 
   // Set the pre-smoother factory function
   mg_solver_pt->set_pre_smoother_factory_function(
@@ -625,7 +625,7 @@ void UnitCubePoissonMGProblem<ELEMENT, MESH>::doc_solution()
 /// \short Driver for 3D Poisson problem in a unit cube. Solution has
 /// a sharp step.
 //===================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   //------------------------
   // Command line arguments
@@ -692,7 +692,7 @@ int main(int argc, char *argv[])
   // Set up the problem
   //--------------------
   // Initialise a null pointer to the class Problem
-  Problem *problem_pt = 0;
+  Problem* problem_pt = 0;
 
   // Set the problem pointer depending on the input (defaulted to nnode_1d=2)
   if (Global_Parameters::Nnode_1d == 2)

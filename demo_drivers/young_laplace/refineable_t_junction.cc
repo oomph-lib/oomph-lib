@@ -67,9 +67,9 @@ namespace GlobalParameters
   /// derivatives w.r.t. to these coordinates.
   /// dspine_B[i][j] = d spine_B[j] / dx_i
   /// Spines start in the (x_1,x_2) plane at (x_1,x_2).
-  void spine_base_function(const Vector<double> &x,
-                           Vector<double> &spine_B,
-                           Vector<Vector<double>> &dspine_B)
+  void spine_base_function(const Vector<double>& x,
+                           Vector<double>& spine_B,
+                           Vector<Vector<double>>& dspine_B)
   {
     // Bspines and derivatives
     spine_B[0] = x[0];
@@ -96,9 +96,9 @@ namespace GlobalParameters
   /// \short Spine: The spine vector field as a function of the two
   /// coordinates x_1 and x_2, and its derivatives w.r.t. to these coordinates:
   /// dspine[i][j] = d spine[j] / dx_i
-  void spine_function(const Vector<double> &x,
-                      Vector<double> &spine,
-                      Vector<Vector<double>> &dspine)
+  void spine_function(const Vector<double>& x,
+                      Vector<double>& spine,
+                      Vector<Vector<double>>& dspine)
   {
     /// Spines (and derivatives)  are independent of x[0] and rotate
     /// in the x[1]-direction
@@ -163,8 +163,8 @@ public:
     {
       // Upcast from GeneralisedElement to YoungLaplace contact angle
       // element
-      YoungLaplaceContactAngleElement<ELEMENT> *el_pt =
-        dynamic_cast<YoungLaplaceContactAngleElement<ELEMENT> *>(
+      YoungLaplaceContactAngleElement<ELEMENT>* el_pt =
+        dynamic_cast<YoungLaplaceContactAngleElement<ELEMENT>*>(
           Contact_angle_mesh_pt->element_pt(e));
 
       // Set the pointer to the prescribed contact angle
@@ -177,30 +177,30 @@ public:
 
   /// \short Doc the solution. DocInfo object stores flags/labels for where the
   /// output gets written to and the trace file
-  void doc_solution(DocInfo &doc_info, ofstream &trace_file);
+  void doc_solution(DocInfo& doc_info, ofstream& trace_file);
 
 private:
   /// \short Create YoungLaplace contact angle elements on the
   /// b-th boundary of the bulk mesh and add them to contact angle mesh
-  void create_contact_angle_elements(const unsigned &b);
+  void create_contact_angle_elements(const unsigned& b);
 
   /// Delete contact angle elements
   void delete_contact_angle_elements();
 
   /// Pointer to the "bulk" mesh
-  RefineableRectangularQuadMesh<ELEMENT> *Bulk_mesh_pt;
+  RefineableRectangularQuadMesh<ELEMENT>* Bulk_mesh_pt;
 
   /// Pointer to the contact angle mesh
-  Mesh *Contact_angle_mesh_pt;
+  Mesh* Contact_angle_mesh_pt;
 
   /// Pointer to mesh containing the height control element
-  Mesh *Height_control_mesh_pt;
+  Mesh* Height_control_mesh_pt;
 
   /// Node at which the height (displacement along spine) is controlled/doced
-  Node *Control_node_pt;
+  Node* Control_node_pt;
 
   /// Pointer to Data object that stores the prescribed curvature
-  Data *Kappa_pt;
+  Data* Kappa_pt;
 
 }; // end of problem class
 
@@ -244,12 +244,12 @@ RefineableYoungLaplaceProblem<ELEMENT>::RefineableYoungLaplaceProblem()
   }
 
   //  This is the element that contains the central node:
-  ELEMENT *prescribed_height_element_pt =
-    dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(n_y * n_x / 2 + n_x / 2));
+  ELEMENT* prescribed_height_element_pt =
+    dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(n_y * n_x / 2 + n_x / 2));
 
   // The central node is node 0 in that element
   Control_node_pt =
-    static_cast<Node *>(prescribed_height_element_pt->node_pt(0));
+    static_cast<Node*>(prescribed_height_element_pt->node_pt(0));
 
   std::cout << "Controlling height at (x,y) : (" << Control_node_pt->x(0) << ","
             << Control_node_pt->x(1) << ")"
@@ -258,7 +258,7 @@ RefineableYoungLaplaceProblem<ELEMENT>::RefineableYoungLaplaceProblem()
 
   // Create a height control element and store the
   // pointer to the Kappa Data created by this object
-  HeightControlElement *height_control_element_pt = new HeightControlElement(
+  HeightControlElement* height_control_element_pt = new HeightControlElement(
     Control_node_pt, &GlobalParameters::Controlled_height);
 
   // Add to mesh
@@ -317,7 +317,7 @@ RefineableYoungLaplaceProblem<ELEMENT>::RefineableYoungLaplaceProblem()
   for (unsigned i = 0; i < n_bulk; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(i));
 
     // Set the spine function pointers
     el_pt->spine_base_fct_pt() = GlobalParameters::spine_base_function;
@@ -333,8 +333,8 @@ RefineableYoungLaplaceProblem<ELEMENT>::RefineableYoungLaplaceProblem()
   {
     // Upcast from GeneralisedElement to YoungLaplace contact angle
     // element
-    YoungLaplaceContactAngleElement<ELEMENT> *el_pt =
-      dynamic_cast<YoungLaplaceContactAngleElement<ELEMENT> *>(
+    YoungLaplaceContactAngleElement<ELEMENT>* el_pt =
+      dynamic_cast<YoungLaplaceContactAngleElement<ELEMENT>*>(
         Contact_angle_mesh_pt->element_pt(e));
 
     // Set the pointer to the prescribed contact angle
@@ -353,7 +353,7 @@ RefineableYoungLaplaceProblem<ELEMENT>::RefineableYoungLaplaceProblem()
 //=======================================================================
 template<class ELEMENT>
 void RefineableYoungLaplaceProblem<ELEMENT>::create_contact_angle_elements(
-  const unsigned &b)
+  const unsigned& b)
 {
   // How many bulk elements are adjacent to boundary b?
   unsigned n_element = Bulk_mesh_pt->nboundary_element(b);
@@ -362,14 +362,14 @@ void RefineableYoungLaplaceProblem<ELEMENT>::create_contact_angle_elements(
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    ELEMENT *bulk_elem_pt =
-      dynamic_cast<ELEMENT *>(Bulk_mesh_pt->boundary_element_pt(b, e));
+    ELEMENT* bulk_elem_pt =
+      dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(b, e));
 
     // What is the index of the face of the bulk element at the boundary
     int face_index = Bulk_mesh_pt->face_index_at_boundary(b, e);
 
     // Build the corresponding contact angle element
-    YoungLaplaceContactAngleElement<ELEMENT> *contact_angle_element_pt =
+    YoungLaplaceContactAngleElement<ELEMENT>* contact_angle_element_pt =
       new YoungLaplaceContactAngleElement<ELEMENT>(bulk_elem_pt, face_index);
 
     // Add the contact angle element to the contact angle mesh
@@ -404,8 +404,8 @@ void RefineableYoungLaplaceProblem<ELEMENT>::delete_contact_angle_elements()
 /// Doc the solution: doc_info contains labels/output directory etc.
 //========================================================================
 template<class ELEMENT>
-void RefineableYoungLaplaceProblem<ELEMENT>::doc_solution(DocInfo &doc_info,
-                                                          ofstream &trace_file)
+void RefineableYoungLaplaceProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
+                                                          ofstream& trace_file)
 {
   // Output kappa vs height
   //-----------------------
@@ -467,8 +467,8 @@ void RefineableYoungLaplaceProblem<ELEMENT>::doc_solution(DocInfo &doc_info,
     contact_angle_file << "ZONE" << std::endl;
 
     // Upcast from GeneralisedElement to YoungLaplace contact angle element
-    YoungLaplaceContactAngleElement<ELEMENT> *el_pt =
-      dynamic_cast<YoungLaplaceContactAngleElement<ELEMENT> *>(
+    YoungLaplaceContactAngleElement<ELEMENT>* el_pt =
+      dynamic_cast<YoungLaplaceContactAngleElement<ELEMENT>*>(
         Contact_angle_mesh_pt->element_pt(e));
 
     // Loop over a few points in the contact angle element
@@ -477,7 +477,7 @@ void RefineableYoungLaplaceProblem<ELEMENT>::doc_solution(DocInfo &doc_info,
     {
       s[0] = -1.0 + 2.0 * double(i) / double(npts - 1);
 
-      dynamic_cast<ELEMENT *>(el_pt->bulk_element_pt())
+      dynamic_cast<ELEMENT*>(el_pt->bulk_element_pt())
         ->position(el_pt->local_coordinate_in_bulk(s), r_contact);
 
       el_pt->contact_line_vectors(s, tangent, normal);

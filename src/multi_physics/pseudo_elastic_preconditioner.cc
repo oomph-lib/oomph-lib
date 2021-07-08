@@ -42,9 +42,9 @@ namespace oomph
 
     /// \short AMG w/ GS smoothing for the augmented elastic subsidiary linear
     /// systems
-    Preconditioner *get_elastic_preconditioner_hypre()
+    Preconditioner* get_elastic_preconditioner_hypre()
     {
-      HyprePreconditioner *hypre_preconditioner_pt =
+      HyprePreconditioner* hypre_preconditioner_pt =
         new HyprePreconditioner("Hypre for diagonal blocks in pseudo-solid");
       hypre_preconditioner_pt->set_amg_iterations(2);
       hypre_preconditioner_pt->amg_using_simple_smoothing();
@@ -66,7 +66,7 @@ namespace oomph
 
     /// \short AMG w/ GS smoothing for the augmented elastic subsidiary linear
     /// systems -- calls Hypre version to stay consistent with previous default
-    Preconditioner *get_elastic_preconditioner()
+    Preconditioner* get_elastic_preconditioner()
     {
       return get_elastic_preconditioner_hypre();
     }
@@ -77,18 +77,18 @@ namespace oomph
 
     /// \short TrilinosML smoothing for the augmented elastic
     /// subsidiary linear systems
-    Preconditioner *get_elastic_preconditioner_trilinos_ml()
+    Preconditioner* get_elastic_preconditioner_trilinos_ml()
     {
-      TrilinosMLPreconditioner *trilinos_prec_pt = new TrilinosMLPreconditioner;
+      TrilinosMLPreconditioner* trilinos_prec_pt = new TrilinosMLPreconditioner;
       return trilinos_prec_pt;
     }
 
     /// \short CG with diagonal preconditioner for the lagrange multiplier
     /// subsidiary linear systems.
-    Preconditioner *get_lagrange_multiplier_preconditioner()
+    Preconditioner* get_lagrange_multiplier_preconditioner()
     {
       InnerIterationPreconditioner<TrilinosAztecOOSolver,
-                                   MatrixBasedDiagPreconditioner> *prec_pt =
+                                   MatrixBasedDiagPreconditioner>* prec_pt =
         new InnerIterationPreconditioner<TrilinosAztecOOSolver,
                                          MatrixBasedDiagPreconditioner>;
       // Note: This makes CG a proper "inner iteration" for
@@ -172,7 +172,7 @@ namespace oomph
 
 #ifdef PARANOID
     // Recast Jacobian matrix to CRDoubleMatrix
-    CRDoubleMatrix *cr_matrix_pt = dynamic_cast<CRDoubleMatrix *>(matrix_pt());
+    CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt());
 
     if (cr_matrix_pt == 0)
     {
@@ -248,7 +248,7 @@ namespace oomph
     }
 
     // Get the solid blocks
-    DenseMatrix<CRDoubleMatrix *> solid_matrix_pt(
+    DenseMatrix<CRDoubleMatrix*> solid_matrix_pt(
       n_solid_dof_types, n_solid_dof_types, 0);
 
     for (unsigned row_i = 0; row_i < n_solid_dof_types; row_i++)
@@ -277,9 +277,9 @@ namespace oomph
       unsigned block_i = 2 * d + 1;
 
       // Data from the constrained block.
-      double *s_values = solid_matrix_pt(block_i, block_i)->value();
-      int *s_column_index = solid_matrix_pt(block_i, block_i)->column_index();
-      int *s_row_start = solid_matrix_pt(block_i, block_i)->row_start();
+      double* s_values = solid_matrix_pt(block_i, block_i)->value();
+      int* s_column_index = solid_matrix_pt(block_i, block_i)->column_index();
+      int* s_row_start = solid_matrix_pt(block_i, block_i)->row_start();
       int s_nrow_local = solid_matrix_pt(block_i, block_i)->nrow_local();
       int s_first_row = solid_matrix_pt(block_i, block_i)->first_row();
 
@@ -316,7 +316,7 @@ namespace oomph
     // matrix
     if (E_preconditioner_type == Exact_block_preconditioner)
     {
-      ExactBlockPreconditioner<CRDoubleMatrix> *s_prec_pt =
+      ExactBlockPreconditioner<CRDoubleMatrix>* s_prec_pt =
         new ExactBlockPreconditioner<CRDoubleMatrix>;
 
       // Add mesh (not actually used since this only acts as a subsidiary
@@ -358,7 +358,7 @@ namespace oomph
     // otherwise it is a block based preconditioner
     else
     {
-      GeneralPurposeBlockPreconditioner<CRDoubleMatrix> *s_prec_pt = 0;
+      GeneralPurposeBlockPreconditioner<CRDoubleMatrix>* s_prec_pt = 0;
 
       // set the block preconditioning method
       switch (E_preconditioner_type)
@@ -370,8 +370,8 @@ namespace oomph
         break;
         case Block_upper_triangular_preconditioner:
         {
-          BlockTriangularPreconditioner<CRDoubleMatrix>
-            *block_triangular_prec_pt =
+          BlockTriangularPreconditioner<CRDoubleMatrix>*
+            block_triangular_prec_pt =
               new BlockTriangularPreconditioner<CRDoubleMatrix>;
           block_triangular_prec_pt->upper_triangular();
 
@@ -380,8 +380,8 @@ namespace oomph
         break;
         case Block_lower_triangular_preconditioner:
         {
-          BlockTriangularPreconditioner<CRDoubleMatrix>
-            *block_triangular_prec_pt =
+          BlockTriangularPreconditioner<CRDoubleMatrix>*
+            block_triangular_prec_pt =
               new BlockTriangularPreconditioner<CRDoubleMatrix>;
           block_triangular_prec_pt->lower_triangular();
 
@@ -463,7 +463,7 @@ namespace oomph
     Lagrange_multiplier_preconditioner_pt.resize(Dim);
     for (unsigned d = 0; d < Dim; d++)
     {
-      CRDoubleMatrix *b_pt = new CRDoubleMatrix;
+      CRDoubleMatrix* b_pt = new CRDoubleMatrix;
       this->get_block(2 * Dim + d, 2 * d + 1, *b_pt);
 
       // if a non default preconditioner is specified create
@@ -490,7 +490,7 @@ namespace oomph
   /// \short Apply the elastic subsidiary preconditioner.
   //=============================================================================
   void PseudoElasticPreconditioner::elastic_preconditioner_solve(
-    const DoubleVector &r, DoubleVector &z)
+    const DoubleVector& r, DoubleVector& z)
   {
     // apply the solid preconditioner
     Elastic_preconditioner_pt->preconditioner_solve(r, z);
@@ -500,7 +500,7 @@ namespace oomph
   /// \short Apply the lagrange multiplier subsidiary preconditioner.
   //=============================================================================
   void PseudoElasticPreconditioner::lagrange_multiplier_preconditioner_solve(
-    const DoubleVector &r, DoubleVector &z)
+    const DoubleVector& r, DoubleVector& z)
   {
     // apply the lagrange multiplier preconditioner
     for (unsigned d = 0; d < Dim; d++)
@@ -511,7 +511,7 @@ namespace oomph
       Lagrange_multiplier_preconditioner_pt[d]->preconditioner_solve(x, y);
       Lagrange_multiplier_preconditioner_pt[d]->preconditioner_solve(y, x);
       unsigned nrow_local = x.nrow_local();
-      double *x_pt = x.values_pt();
+      double* x_pt = x.values_pt();
       for (unsigned i = 0; i < nrow_local; i++)
       {
         x_pt[i] = x_pt[i] * Scaling;
@@ -603,7 +603,7 @@ namespace oomph
     Dim = n_dof_types / 3;
 
     // Recast Jacobian matrix to CRDoubleMatrix
-    CRDoubleMatrix *cr_matrix_pt = dynamic_cast<CRDoubleMatrix *>(matrix_pt());
+    CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt());
 
 #ifdef PARANOID
     if (cr_matrix_pt == 0)
@@ -636,7 +636,7 @@ namespace oomph
         dof_list[i] = i;
       }
 
-      PseudoElasticPreconditionerScalingHelperOld *helper_pt =
+      PseudoElasticPreconditionerScalingHelperOld* helper_pt =
         new PseudoElasticPreconditionerScalingHelperOld(
           this, cr_matrix_pt, dof_list, Elastic_mesh_pt, comm_pt());
       Scaling = helper_pt->s_inf_norm();
@@ -653,7 +653,7 @@ namespace oomph
     // matrix
     if (E_preconditioner_type == Exact_block_preconditioner)
     {
-      PseudoElasticPreconditionerSubsidiaryPreconditionerOld *s_prec_pt =
+      PseudoElasticPreconditionerSubsidiaryPreconditionerOld* s_prec_pt =
         new PseudoElasticPreconditionerSubsidiaryPreconditionerOld;
       Vector<unsigned> dof_list(n_solid_dof_types);
       for (unsigned i = 0; i < n_solid_dof_types; i++)
@@ -675,7 +675,7 @@ namespace oomph
     else
     {
       // create the preconditioner
-      PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld *s_prec_pt =
+      PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld* s_prec_pt =
         new PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld;
       Vector<unsigned> dof_list(n_solid_dof_types);
       for (unsigned i = 0; i < n_solid_dof_types; i++)
@@ -719,7 +719,7 @@ namespace oomph
     Lagrange_multiplier_preconditioner_pt.resize(Dim);
     for (unsigned d = 0; d < Dim; d++)
     {
-      CRDoubleMatrix *b_pt = new CRDoubleMatrix;
+      CRDoubleMatrix* b_pt = new CRDoubleMatrix;
       this->get_block(2 * Dim + d, Dim + d, *b_pt);
 
       // if a non default preconditioner is specified create
@@ -747,7 +747,7 @@ namespace oomph
   /// \short Apply the elastic subsidiary preconditioner.
   //=============================================================================
   void PseudoElasticPreconditionerOld::elastic_preconditioner_solve(
-    const DoubleVector &r, DoubleVector &z)
+    const DoubleVector& r, DoubleVector& z)
   {
     // apply the solid preconditioner
     Elastic_preconditioner_pt->preconditioner_solve(r, z);
@@ -757,7 +757,7 @@ namespace oomph
   /// \short Apply the lagrange multiplier subsidiary preconditioner.
   //=============================================================================
   void PseudoElasticPreconditionerOld::lagrange_multiplier_preconditioner_solve(
-    const DoubleVector &r, DoubleVector &z)
+    const DoubleVector& r, DoubleVector& z)
   {
     // apply the lagrange multiplier preconditioner
     for (unsigned d = 0; d < Dim; d++)
@@ -768,7 +768,7 @@ namespace oomph
       Lagrange_multiplier_preconditioner_pt[d]->preconditioner_solve(x, y);
       Lagrange_multiplier_preconditioner_pt[d]->preconditioner_solve(y, x);
       unsigned nrow_local = x.nrow_local();
-      double *x_pt = x.values_pt();
+      double* x_pt = x.values_pt();
       for (unsigned i = 0; i < nrow_local; i++)
       {
         x_pt[i] = x_pt[i] * Scaling;
@@ -834,13 +834,13 @@ namespace oomph
     this->block_setup(dof_to_block_map);
 
     // get block 11
-    CRDoubleMatrix *s11_pt = new CRDoubleMatrix;
+    CRDoubleMatrix* s11_pt = new CRDoubleMatrix;
     this->get_block(1, 1, *s11_pt);
 
     // add the scaled identity matrix to block 11
-    double *s11_values = s11_pt->value();
-    int *s11_column_index = s11_pt->column_index();
-    int *s11_row_start = s11_pt->row_start();
+    double* s11_values = s11_pt->value();
+    int* s11_column_index = s11_pt->column_index();
+    int* s11_row_start = s11_pt->row_start();
     int s11_nrow_local = s11_pt->nrow_local();
     int s11_first_row = s11_pt->first_row();
     for (int i = 0; i < s11_nrow_local; i++)
@@ -889,7 +889,7 @@ namespace oomph
   /// \short Apply the preconditioner.
   //=============================================================================
   void PseudoElasticPreconditionerSubsidiaryPreconditionerOld::
-    preconditioner_solve(const DoubleVector &r, DoubleVector &z)
+    preconditioner_solve(const DoubleVector& r, DoubleVector& z)
   {
     DoubleVector x;
     this->get_block_ordered_preconditioner_vector(r, x);
@@ -1017,7 +1017,7 @@ namespace oomph
         }
         for (unsigned j = l; j < u; j++)
         {
-          CRDoubleMatrix *block_matrix_pt = new CRDoubleMatrix;
+          CRDoubleMatrix* block_matrix_pt = new CRDoubleMatrix;
           this->get_block(d, j, *block_matrix_pt);
           Off_diagonal_matrix_vector_products(d, j) = new MatrixVectorProduct();
           //        Off_diagonal_matrix_vector_products(d,j)->setup(block_matrix_pt);
@@ -1035,7 +1035,7 @@ namespace oomph
   /// Apply preconditioner to r
   //=============================================================================
   void PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld::
-    preconditioner_solve(const DoubleVector &res, DoubleVector &z)
+    preconditioner_solve(const DoubleVector& res, DoubleVector& z)
   {
     // copy r
     DoubleVector r(res);

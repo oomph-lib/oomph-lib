@@ -38,8 +38,8 @@ namespace oomph
   /// Vector of global unknowns required on this processor.
   //===========================================================================
   DoubleVectorHaloScheme::DoubleVectorHaloScheme(
-    LinearAlgebraDistribution *const &dist_pt,
-    const Vector<unsigned> &required_global_eqn) :
+    LinearAlgebraDistribution* const& dist_pt,
+    const Vector<unsigned>& required_global_eqn) :
     Distribution_pt(dist_pt)
   {
 #ifdef OOMPH_HAS_MPI
@@ -227,8 +227,8 @@ namespace oomph
   /// number
   //====================================================================
   void DoubleVectorHaloScheme::setup_halo_dofs(
-    const std::map<unsigned, double *> &halo_data_pt,
-    Vector<double *> &halo_dof_pt)
+    const std::map<unsigned, double*>& halo_data_pt,
+    Vector<double*>& halo_dof_pt)
   {
     // How many entries are there in the map
     unsigned n_halo = Local_index.size();
@@ -241,7 +241,7 @@ namespace oomph
          ++it)
     {
       // Find the pointer in the halo_data_pt map
-      std::map<unsigned, double *>::const_iterator it2 =
+      std::map<unsigned, double*>::const_iterator it2 =
         halo_data_pt.find(it->first);
       // Did we find it
       if (it2 != halo_data_pt.end())
@@ -377,7 +377,7 @@ namespace oomph
   /// Construct the halo scheme and storage for the halo data
   //=====================================================================
   void DoubleVectorWithHaloEntries::build_halo_scheme(
-    DoubleVectorHaloScheme *const &halo_scheme_pt)
+    DoubleVectorHaloScheme* const& halo_scheme_pt)
   {
     Halo_scheme_pt = halo_scheme_pt;
 

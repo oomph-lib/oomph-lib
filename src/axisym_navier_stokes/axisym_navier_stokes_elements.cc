@@ -63,9 +63,9 @@ namespace oomph
   //================================================================
   void AxisymmetricNavierStokesEquations::
     get_pressure_and_velocity_mass_matrix_diagonal(
-      Vector<double> &press_mass_diag,
-      Vector<double> &veloc_mass_diag,
-      const unsigned &which_one)
+      Vector<double>& press_mass_diag,
+      Vector<double>& veloc_mass_diag,
+      const unsigned& which_one)
   {
 #ifdef PARANOID
     if ((which_one == 0) || (which_one == 1))
@@ -154,11 +154,11 @@ namespace oomph
   /// and L2 norm of velocity solution over element.
   //=======================================================================
   void AxisymmetricNavierStokesEquations::compute_error(
-    std::ostream &outfile,
+    std::ostream& outfile,
     FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
-    const double &time,
-    double &error,
-    double &norm)
+    const double& time,
+    double& error,
+    double& norm)
   {
     error = 0.0;
     norm = 0.0;
@@ -232,10 +232,10 @@ namespace oomph
   /// and L2 norm of velocity solution over element.
   //=======================================================================
   void AxisymmetricNavierStokesEquations::compute_error(
-    std::ostream &outfile,
+    std::ostream& outfile,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-    double &error,
-    double &norm)
+    double& error,
+    double& norm)
   {
     error = 0.0;
     norm = 0.0;
@@ -309,8 +309,8 @@ namespace oomph
   /// Function prints as many components as are returned in solution Vector.
   //=======================================================================
   void AxisymmetricNavierStokesEquations::output_fct(
-    std::ostream &outfile,
-    const unsigned &nplot,
+    std::ostream& outfile,
+    const unsigned& nplot,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
   {
     // Vector of local coordinates
@@ -364,9 +364,9 @@ namespace oomph
   /// Function prints as many components as are returned in solution Vector.
   //=======================================================================
   void AxisymmetricNavierStokesEquations::output_fct(
-    std::ostream &outfile,
-    const unsigned &nplot,
-    const double &time,
+    std::ostream& outfile,
+    const unsigned& nplot,
+    const double& time,
     FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
   {
     // Vector of local coordinates
@@ -420,9 +420,9 @@ namespace oomph
   /// t>0: previous timestep). Specified number of plot points in each
   /// coordinate direction.
   //==============================================================
-  void AxisymmetricNavierStokesEquations::output_veloc(std::ostream &outfile,
-                                                       const unsigned &nplot,
-                                                       const unsigned &t)
+  void AxisymmetricNavierStokesEquations::output_veloc(std::ostream& outfile,
+                                                       const unsigned& nplot,
+                                                       const unsigned& t)
   {
     // Find number of nodes
     unsigned n_node = nnode();
@@ -497,8 +497,8 @@ namespace oomph
   /// in tecplot format. Specified number of plot points in each
   /// coordinate direction.
   //==============================================================
-  void AxisymmetricNavierStokesEquations::output(std::ostream &outfile,
-                                                 const unsigned &nplot)
+  void AxisymmetricNavierStokesEquations::output(std::ostream& outfile,
+                                                 const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(2);
@@ -542,8 +542,8 @@ namespace oomph
   /// in tecplot format. Specified number of plot points in each
   /// coordinate direction.
   //==============================================================
-  void AxisymmetricNavierStokesEquations::output(FILE *file_pt,
-                                                 const unsigned &nplot)
+  void AxisymmetricNavierStokesEquations::output(FILE* file_pt,
+                                                 const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(2);
@@ -645,9 +645,9 @@ namespace oomph
   /// coordinate s for outer unit normal N
   //==============================================================
   void AxisymmetricNavierStokesEquations::traction(
-    const Vector<double> &s,
-    const Vector<double> &N,
-    Vector<double> &traction) const
+    const Vector<double>& s,
+    const Vector<double>& N,
+    Vector<double>& traction) const
   {
     // throw OomphLibError(
     // "Check the traction calculation for axisymmetric NSt",
@@ -692,7 +692,7 @@ namespace oomph
   /// Return dissipation at local coordinate s
   //==============================================================
   double AxisymmetricNavierStokesEquations::dissipation(
-    const Vector<double> &s) const
+    const Vector<double>& s) const
   {
     throw OomphLibError(
       "Check the dissipation calculation for axisymmetric NSt",
@@ -721,7 +721,7 @@ namespace oomph
   /// \f$ i,j = r,z,\theta \f$ (in that order)
   //==============================================================
   void AxisymmetricNavierStokesEquations::strain_rate(
-    const Vector<double> &s, DenseMatrix<double> &strainrate) const
+    const Vector<double>& s, DenseMatrix<double>& strainrate) const
   {
 #ifdef PARANOID
     if ((strainrate.ncol() != 3) || (strainrate.nrow() != 3))
@@ -907,9 +907,9 @@ namespace oomph
   //==============================================================
   void AxisymmetricNavierStokesEquations::
     fill_in_generic_residual_contribution_axi_nst(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix,
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
       unsigned flag)
   {
     // Find out how many nodes there are
@@ -1553,7 +1553,7 @@ namespace oomph
   /// Overloads the FD-based version in the FiniteElement base class.
   //======================================================================
   void AxisymmetricNavierStokesEquations::get_dresidual_dnodal_coordinates(
-    RankThreeTensor<double> &dresidual_dnodal_coordinates)
+    RankThreeTensor<double>& dresidual_dnodal_coordinates)
   {
     // Return immediately if there are no dofs
     if (ndof() == 0)
@@ -1633,7 +1633,7 @@ namespace oomph
     for (unsigned q = 0; q < n_node; q++)
     {
       // Get pointer to q-th local node
-      Node *nod_pt = node_pt(q);
+      Node* nod_pt = node_pt(q);
 
       // Only compute if there's a node-update fct involved
       if (nod_pt->has_auxiliary_node_update_fct_pt())
@@ -2494,10 +2494,10 @@ namespace oomph
   //==============================================================
   void AxisymmetricNavierStokesEquations::
     fill_in_generic_dresidual_contribution_axi_nst(
-      double *const &parameter_pt,
-      Vector<double> &dres_dparam,
-      DenseMatrix<double> &djac_dparam,
-      DenseMatrix<double> &dmass_matrix_dparam,
+      double* const& parameter_pt,
+      Vector<double>& dres_dparam,
+      DenseMatrix<double>& djac_dparam,
+      DenseMatrix<double>& dmass_matrix_dparam,
       unsigned flag)
   {
     // Die if the parameter is not the Reynolds number
@@ -3217,9 +3217,9 @@ namespace oomph
   //=========================================================================
   void AxisymmetricNavierStokesEquations::
     fill_in_contribution_to_hessian_vector_products(
-      Vector<double> const &Y,
-      DenseMatrix<double> const &C,
-      DenseMatrix<double> &product)
+      Vector<double> const& Y,
+      DenseMatrix<double> const& C,
+      DenseMatrix<double>& product)
   {
     // Find out how many nodes there are
     unsigned n_node = nnode();
@@ -3610,7 +3610,7 @@ namespace oomph
   /// scheme has been set up.)
   //=============================================================================
   void AxisymmetricQCrouzeixRaviartElement::get_dof_numbers_for_unknowns(
-    std::list<std::pair<unsigned long, unsigned>> &dof_lookup_list) const
+    std::list<std::pair<unsigned long, unsigned>>& dof_lookup_list) const
   {
     // number of nodes
     unsigned n_node = this->nnode();
@@ -3681,7 +3681,7 @@ namespace oomph
   /// Number of values (pinned or dofs) required at node n.
   //========================================================================
   unsigned AxisymmetricQCrouzeixRaviartElement::required_nvalue(
-    const unsigned &n) const
+    const unsigned& n) const
   {
     return Initial_Nvalue[n];
   }
@@ -3690,9 +3690,9 @@ namespace oomph
   /// Compute traction at local coordinate s for outer unit normal N
   //========================================================================
   void AxisymmetricQCrouzeixRaviartElement::get_traction(
-    const Vector<double> &s,
-    const Vector<double> &N,
-    Vector<double> &traction) const
+    const Vector<double>& s,
+    const Vector<double>& N,
+    Vector<double>& traction) const
   {
     AxisymmetricNavierStokesEquations::traction(s, N, traction);
   }
@@ -3710,7 +3710,7 @@ namespace oomph
   /// scheme has been set up.)
   //============================================================================
   void AxisymmetricQTaylorHoodElement::get_dof_numbers_for_unknowns(
-    std::list<std::pair<unsigned long, unsigned>> &dof_lookup_list) const
+    std::list<std::pair<unsigned long, unsigned>>& dof_lookup_list) const
   {
     // number of nodes
     unsigned n_node = this->nnode();
@@ -3761,9 +3761,9 @@ namespace oomph
   /// Compute traction at local coordinate s for outer unit normal N
   //========================================================================
   void AxisymmetricQTaylorHoodElement::get_traction(
-    const Vector<double> &s,
-    const Vector<double> &N,
-    Vector<double> &traction) const
+    const Vector<double>& s,
+    const Vector<double>& N,
+    Vector<double>& traction) const
   {
     AxisymmetricNavierStokesEquations::traction(s, N, traction);
   }

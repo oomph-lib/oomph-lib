@@ -52,10 +52,10 @@ namespace oomph
     //=======================================================================
     /// Default load function (zero traction)
     //=======================================================================
-    void Zero_traction_fct(const double &time,
-                           const Vector<double> &x,
-                           const Vector<double> &N,
-                           Vector<double> &load)
+    void Zero_traction_fct(const double& time,
+                           const Vector<double>& x,
+                           const Vector<double>& N,
+                           Vector<double>& load)
     {
       unsigned n_dim = load.size();
       for (unsigned i = 0; i < n_dim; i++)
@@ -67,10 +67,10 @@ namespace oomph
     //=======================================================================
     /// Default load function (zero pressure)
     //=======================================================================
-    void Zero_pressure_fct(const double &time,
-                           const Vector<double> &x,
-                           const Vector<double> &N,
-                           double &load)
+    void Zero_pressure_fct(const double& time,
+                           const Vector<double>& x,
+                           const Vector<double>& N,
+                           double& load)
     {
       load = 0.0;
     }
@@ -91,36 +91,36 @@ namespace oomph
   {
   protected:
     /// pointer to the bulk element this face element is attached to
-    ELEMENT *Element_pt;
+    ELEMENT* Element_pt;
 
     /// \short Pointer to an imposed traction function. Arguments:
     /// Eulerian coordinate; outer unit normal; applied traction.
     /// (Not all of the input arguments will be required for all specific load
     /// functions but the list should cover all cases)
-    void (*Traction_fct_pt)(const double &time,
-                            const Vector<double> &x,
-                            const Vector<double> &n,
-                            Vector<double> &result);
+    void (*Traction_fct_pt)(const double& time,
+                            const Vector<double>& x,
+                            const Vector<double>& n,
+                            Vector<double>& result);
 
     /// \short Pointer to an imposed pressure function. Arguments:
     /// Eulerian coordinate; outer unit normal; applied pressure.
     /// (Not all of the input arguments will be required for all specific load
     /// functions but the list should cover all cases)
-    void (*Pressure_fct_pt)(const double &time,
-                            const Vector<double> &x,
-                            const Vector<double> &n,
-                            double &result);
+    void (*Pressure_fct_pt)(const double& time,
+                            const Vector<double>& x,
+                            const Vector<double>& n,
+                            double& result);
 
     /// \short Get the traction vector: Pass number of integration point
     /// (dummy), Eulerlian coordinate and normal vector and return the pressure
     /// (not all of the input arguments will be required for all specific load
     /// functions but the list should cover all cases). This function is virtual
     /// so it can be overloaded for FSI.
-    virtual void get_traction(const double &time,
-                              const unsigned &intpt,
-                              const Vector<double> &x,
-                              const Vector<double> &n,
-                              Vector<double> &traction)
+    virtual void get_traction(const double& time,
+                              const unsigned& intpt,
+                              const Vector<double>& x,
+                              const Vector<double>& n,
+                              Vector<double>& traction)
     {
       Traction_fct_pt(time, x, n, traction);
     }
@@ -130,11 +130,11 @@ namespace oomph
     /// (not all of the input arguments will be required for all specific load
     /// functions but the list should cover all cases). This function is virtual
     /// so it can be overloaded for FSI.
-    virtual void get_pressure(const double &time,
-                              const unsigned &intpt,
-                              const Vector<double> &x,
-                              const Vector<double> &n,
-                              double &pressure)
+    virtual void get_pressure(const double& time,
+                              const unsigned& intpt,
+                              const Vector<double>& x,
+                              const Vector<double>& n,
+                              double& pressure)
     {
       Pressure_fct_pt(time, x, n, pressure);
     }
@@ -144,24 +144,24 @@ namespace oomph
     // fill_in_contribution_to_residuals in fill_in_contribution_to_jacobian
     // which causes all kinds of pain if overloading later on
     void fill_in_contribution_to_residuals_darcy_face(
-      Vector<double> &residuals);
+      Vector<double>& residuals);
 
   public:
     /// \short Constructor, which takes a "bulk" element and the value of the
     /// index and its limit
-    PoroelasticityFaceElement(FiniteElement *const &element_pt,
-                              const int &face_index) :
+    PoroelasticityFaceElement(FiniteElement* const& element_pt,
+                              const int& face_index) :
       FaceGeometry<ELEMENT>(), FaceElement()
     {
 #ifdef PARANOID
       {
         // Check that the element is not a refineable 3d element
-        ELEMENT *elem_pt = new ELEMENT;
+        ELEMENT* elem_pt = new ELEMENT;
         // If it's three-d
         if (elem_pt->dim() == 3)
         {
           // Is it refineable
-          if (dynamic_cast<RefineableElement *>(elem_pt))
+          if (dynamic_cast<RefineableElement*>(elem_pt))
           {
             // Issue a warning
             OomphLibWarning("This flux element will not work correctly if "
@@ -174,7 +174,7 @@ namespace oomph
 #endif
 
       // Set the pointer to the bulk element
-      Element_pt = dynamic_cast<ELEMENT *>(element_pt);
+      Element_pt = dynamic_cast<ELEMENT*>(element_pt);
 
       // Attach the geometrical information to the element. N.B. This function
       // also assigns nbulk_value from the required_nvalue of the bulk element
@@ -188,32 +188,32 @@ namespace oomph
     }
 
     /// Reference to the traction function pointer
-    void (*&traction_fct_pt())(const double &time,
-                               const Vector<double> &x,
-                               const Vector<double> &n,
-                               Vector<double> &traction)
+    void (*&traction_fct_pt())(const double& time,
+                               const Vector<double>& x,
+                               const Vector<double>& n,
+                               Vector<double>& traction)
     {
       return Traction_fct_pt;
     }
 
     /// Reference to the pressure function pointer
-    void (*&pressure_fct_pt())(const double &time,
-                               const Vector<double> &x,
-                               const Vector<double> &n,
-                               double &pressure)
+    void (*&pressure_fct_pt())(const double& time,
+                               const Vector<double>& x,
+                               const Vector<double>& n,
+                               double& pressure)
     {
       return Pressure_fct_pt;
     }
 
     /// Return the residuals
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       fill_in_contribution_to_residuals_darcy_face(residuals);
     }
 
     /// Fill in contribution from Jacobian
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       // Call the residuals
       fill_in_contribution_to_residuals_darcy_face(residuals);
@@ -224,33 +224,33 @@ namespace oomph
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default (needed to break
     /// indeterminacy if bulk element is SolidElement)
-    double zeta_nodal(const unsigned &n,
-                      const unsigned &k,
-                      const unsigned &i) const
+    double zeta_nodal(const unsigned& n,
+                      const unsigned& k,
+                      const unsigned& i) const
     {
       return FaceElement::zeta_nodal(n, k, i);
     }
 
     /// \short Output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       FiniteElement::output(outfile);
     }
 
     /// \short Output function
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       FiniteElement::output(outfile, n_plot);
     }
 
     /// \short C_style output function
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
 
     /// \short C-style output function
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       FiniteElement::output(file_pt, n_plot);
     }
@@ -258,16 +258,16 @@ namespace oomph
     /// \short Compute traction vector at specified local coordinate
     /// Should only be used for post-processing; ignores dependence
     /// on integration point!
-    void traction(const double &time,
-                  const Vector<double> &s,
-                  Vector<double> &traction);
+    void traction(const double& time,
+                  const Vector<double>& s,
+                  Vector<double>& traction);
 
     /// \short Compute pressure value at specified local coordinate
     /// Should only be used for post-processing; ignores dependence
     /// on integration point!
-    void pressure(const double &time,
-                  const Vector<double> &s,
-                  double &pressure);
+    void pressure(const double& time,
+                  const Vector<double>& s,
+                  double& pressure);
   };
 
   ///////////////////////////////////////////////////////////////////////
@@ -280,9 +280,9 @@ namespace oomph
   /// on integration point!
   //=====================================================================
   template<class ELEMENT>
-  void PoroelasticityFaceElement<ELEMENT>::traction(const double &time,
-                                                    const Vector<double> &s,
-                                                    Vector<double> &traction)
+  void PoroelasticityFaceElement<ELEMENT>::traction(const double& time,
+                                                    const Vector<double>& s,
+                                                    Vector<double>& traction)
   {
     unsigned n_dim = this->nodal_dimension();
 
@@ -306,9 +306,9 @@ namespace oomph
   /// on integration point!
   //=====================================================================
   template<class ELEMENT>
-  void PoroelasticityFaceElement<ELEMENT>::pressure(const double &time,
-                                                    const Vector<double> &s,
-                                                    double &pressure)
+  void PoroelasticityFaceElement<ELEMENT>::pressure(const double& time,
+                                                    const Vector<double>& s,
+                                                    double& pressure)
   {
     unsigned n_dim = this->nodal_dimension();
 
@@ -332,7 +332,7 @@ namespace oomph
   //=====================================================================
   template<class ELEMENT>
   void PoroelasticityFaceElement<ELEMENT>::
-    fill_in_contribution_to_residuals_darcy_face(Vector<double> &residuals)
+    fill_in_contribution_to_residuals_darcy_face(Vector<double>& residuals)
   {
     // Find out how many nodes there are
     unsigned n_node = nnode();

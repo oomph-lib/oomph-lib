@@ -88,10 +88,10 @@ namespace oomph
     }
 
     /// Stream to output error messages
-    std::ostream *Error_message_stream_pt = &std::cerr;
+    std::ostream* Error_message_stream_pt = &std::cerr;
 
     /// String stream that records the error message
-    std::stringstream *Exception_stringstream_pt = 0;
+    std::stringstream* Exception_stringstream_pt = 0;
   } // namespace TerminateHelper
 
   ///////////////////////////////////////////////////////////////////////
@@ -129,12 +129,12 @@ namespace oomph
   /// exception stream. The output_width of the message can also be specified.
   /// Optionally provide a traceback of the function calls.
   //==========================================================================
-  OomphLibException::OomphLibException(const std::string &error_description,
-                                       const std::string &function_name,
-                                       const char *location,
-                                       const std::string &exception_type,
-                                       std::ostream &exception_stream,
-                                       const unsigned &output_width,
+  OomphLibException::OomphLibException(const std::string& error_description,
+                                       const std::string& function_name,
+                                       const char* location,
+                                       const std::string& exception_type,
+                                       std::ostream& exception_stream,
+                                       const unsigned& output_width,
                                        bool list_trace_back) :
     std::runtime_error("OomphException")
   {
@@ -207,7 +207,7 @@ namespace oomph
   //========================================================================
   /// Default output stream for OomphLibErorrs (cerr)
   //========================================================================
-  std::ostream *OomphLibError::Stream_pt = &std::cerr;
+  std::ostream* OomphLibError::Stream_pt = &std::cerr;
 
   //=======================================================================
   /// Default output width for OomphLibErrors (70)
@@ -217,7 +217,7 @@ namespace oomph
   //=======================================================================
   /// Default output stream for OomphLibWarnings(cerr)
   //=======================================================================
-  std::ostream *OomphLibWarning::Stream_pt = &std::cerr;
+  std::ostream* OomphLibWarning::Stream_pt = &std::cerr;
 
   //=======================================================================
   /// Default output width for OomphLibWarnings (70)
@@ -235,7 +235,7 @@ namespace oomph
   namespace Global_output_stream
   {
     /// Output stream
-    std::ofstream *Outfile = 0;
+    std::ofstream* Outfile = 0;
 
   } // namespace Global_output_stream
 
@@ -266,7 +266,7 @@ namespace oomph
   {
     /// \short Return the i-th string or "" if the relevant string hasn't
     /// been defined
-    std::string string(const unsigned &i)
+    std::string string(const unsigned& i)
     {
       if (i < String.size())
       {

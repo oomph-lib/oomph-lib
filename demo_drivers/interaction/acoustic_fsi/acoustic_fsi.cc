@@ -85,8 +85,8 @@ namespace Global_Parameters
   unsigned N = 0;
 
   /// \short Displacement field on inner boundary of solid
-  void solid_boundary_displacement(const Vector<double> &x,
-                                   Vector<std::complex<double>> &u)
+  void solid_boundary_displacement(const Vector<double>& x,
+                                   Vector<std::complex<double>>& u)
   {
     Vector<double> normal(2);
     double norm = sqrt(x[0] * x[0] + x[1] * x[1]);
@@ -105,7 +105,7 @@ namespace Global_Parameters
   unsigned El_multiplier = 1;
 
   /// Interface to Hankel function in maple style
-  std::complex<double> HankelH1(const double &k, const double &x)
+  std::complex<double> HankelH1(const double& k, const double& x)
   {
     Vector<std::complex<double>> h(2);
     Vector<std::complex<double>> hp(2);
@@ -239,7 +239,7 @@ namespace Global_Parameters
   }
 
   /// Exact solution for Helmholtz potential for axisymmetric solution
-  void exact_axisym_potential(const Vector<double> &x, Vector<double> &soln)
+  void exact_axisym_potential(const Vector<double>& x, Vector<double>& soln)
   {
     std::complex<double> C = axisym_coefficient();
     double r = sqrt(x[0] * x[0] + x[1] * x[1]);
@@ -312,7 +312,7 @@ private:
   void create_helmholtz_fsi_flux_elements();
 
   /// Delete (face) elements in specified mesh
-  void delete_face_elements(Mesh *const &boundary_mesh_pt);
+  void delete_face_elements(Mesh* const& boundary_mesh_pt);
 
   /// \short Create DtN face elements
   void create_helmholtz_DtN_elements();
@@ -321,19 +321,19 @@ private:
   void setup_interaction();
 
   /// Pointer to solid mesh
-  TreeBasedRefineableMeshBase *Solid_mesh_pt;
+  TreeBasedRefineableMeshBase* Solid_mesh_pt;
 
   /// Pointer to mesh of FSI traction elements
-  Mesh *FSI_traction_mesh_pt;
+  Mesh* FSI_traction_mesh_pt;
 
   /// Pointer to Helmholtz mesh
-  TreeBasedRefineableMeshBase *Helmholtz_mesh_pt;
+  TreeBasedRefineableMeshBase* Helmholtz_mesh_pt;
 
   /// Pointer to mesh of Helmholtz FSI flux elements
-  Mesh *Helmholtz_fsi_flux_mesh_pt;
+  Mesh* Helmholtz_fsi_flux_mesh_pt;
 
   /// \short Pointer to mesh containing the DtN elements
-  HelmholtzDtNMesh<HELMHOLTZ_ELEMENT> *Helmholtz_outer_boundary_mesh_pt;
+  HelmholtzDtNMesh<HELMHOLTZ_ELEMENT>* Helmholtz_outer_boundary_mesh_pt;
 
   /// DocInfo object for output
   DocInfo Doc_info;
@@ -413,8 +413,8 @@ CoatedDiskProblem<ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT>::CoatedDiskProblem()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Cast to a solid element
-    ELASTICITY_ELEMENT *el_pt =
-      dynamic_cast<ELASTICITY_ELEMENT *>(Solid_mesh_pt->element_pt(i));
+    ELASTICITY_ELEMENT* el_pt =
+      dynamic_cast<ELASTICITY_ELEMENT*>(Solid_mesh_pt->element_pt(i));
 
     // Set the constitutive law
     el_pt->elasticity_tensor_pt() = &Global_Parameters::E;
@@ -428,8 +428,8 @@ CoatedDiskProblem<ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT>::CoatedDiskProblem()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Cast to a solid element
-    HELMHOLTZ_ELEMENT *el_pt =
-      dynamic_cast<HELMHOLTZ_ELEMENT *>(Helmholtz_mesh_pt->element_pt(i));
+    HELMHOLTZ_ELEMENT* el_pt =
+      dynamic_cast<HELMHOLTZ_ELEMENT*>(Helmholtz_mesh_pt->element_pt(i));
 
     // Set the pointer to square of Helmholtz wavenumber
     el_pt->k_squared_pt() = &Global_Parameters::K_squared;
@@ -485,7 +485,7 @@ CoatedDiskProblem<ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT>::CoatedDiskProblem()
   Vector<double> x(2);
   for (unsigned i = 0; i < n_node; i++)
   {
-    Node *nod_pt = Solid_mesh_pt->boundary_node_pt(0, i);
+    Node* nod_pt = Solid_mesh_pt->boundary_node_pt(0, i);
     nod_pt->pin(0);
     nod_pt->pin(1);
     nod_pt->pin(2);
@@ -578,7 +578,7 @@ void CoatedDiskProblem<ELASTICITY_ELEMENT,
 //==========================================================
 template<class ELASTICITY_ELEMENT, class HELMHOLTZ_ELEMENT>
 void CoatedDiskProblem<ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT>::
-  delete_face_elements(Mesh *const &boundary_mesh_pt)
+  delete_face_elements(Mesh* const& boundary_mesh_pt)
 {
   // How many surface elements are in the surface mesh
   unsigned n_element = boundary_mesh_pt->nelement();
@@ -612,7 +612,7 @@ void CoatedDiskProblem<ELASTICITY_ELEMENT,
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    ELASTICITY_ELEMENT *bulk_elem_pt = dynamic_cast<ELASTICITY_ELEMENT *>(
+    ELASTICITY_ELEMENT* bulk_elem_pt = dynamic_cast<ELASTICITY_ELEMENT*>(
       Solid_mesh_pt->boundary_element_pt(b, e));
 
     // Find the index of the face of element e along boundary b
@@ -620,8 +620,8 @@ void CoatedDiskProblem<ELASTICITY_ELEMENT,
 
     // Create element
     TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement<ELASTICITY_ELEMENT,
-                                                           HELMHOLTZ_ELEMENT>
-      *el_pt = new TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement<
+                                                           HELMHOLTZ_ELEMENT>*
+      el_pt = new TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement<
         ELASTICITY_ELEMENT,
         HELMHOLTZ_ELEMENT>(bulk_elem_pt, face_index);
     // Add to mesh
@@ -654,7 +654,7 @@ void CoatedDiskProblem<ELASTICITY_ELEMENT,
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    HELMHOLTZ_ELEMENT *bulk_elem_pt = dynamic_cast<HELMHOLTZ_ELEMENT *>(
+    HELMHOLTZ_ELEMENT* bulk_elem_pt = dynamic_cast<HELMHOLTZ_ELEMENT*>(
       Helmholtz_mesh_pt->boundary_element_pt(b, e));
 
     // Find the index of the face of element e along boundary b
@@ -662,7 +662,7 @@ void CoatedDiskProblem<ELASTICITY_ELEMENT,
 
     // Create element
     HelmholtzFluxFromNormalDisplacementBCElement<HELMHOLTZ_ELEMENT,
-                                                 ELASTICITY_ELEMENT> *el_pt =
+                                                 ELASTICITY_ELEMENT>* el_pt =
       new HelmholtzFluxFromNormalDisplacementBCElement<HELMHOLTZ_ELEMENT,
                                                        ELASTICITY_ELEMENT>(
         bulk_elem_pt, face_index);
@@ -695,14 +695,14 @@ void CoatedDiskProblem<ELASTICITY_ELEMENT,
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    HELMHOLTZ_ELEMENT *bulk_elem_pt = dynamic_cast<HELMHOLTZ_ELEMENT *>(
+    HELMHOLTZ_ELEMENT* bulk_elem_pt = dynamic_cast<HELMHOLTZ_ELEMENT*>(
       Helmholtz_mesh_pt->boundary_element_pt(b, e));
 
     // Find the index of the face of element e along boundary b
     int face_index = Helmholtz_mesh_pt->face_index_at_boundary(b, e);
 
     // Build the corresponding DtN element
-    HelmholtzDtNBoundaryElement<HELMHOLTZ_ELEMENT> *flux_element_pt =
+    HelmholtzDtNBoundaryElement<HELMHOLTZ_ELEMENT>* flux_element_pt =
       new HelmholtzDtNBoundaryElement<HELMHOLTZ_ELEMENT>(bulk_elem_pt,
                                                          face_index);
 
@@ -763,8 +763,8 @@ void CoatedDiskProblem<ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT>::doc_solution()
   unsigned nn_element = Helmholtz_outer_boundary_mesh_pt->nelement();
   for (unsigned e = 0; e < nn_element; e++)
   {
-    HelmholtzBCElementBase<HELMHOLTZ_ELEMENT> *el_pt =
-      dynamic_cast<HelmholtzBCElementBase<HELMHOLTZ_ELEMENT> *>(
+    HelmholtzBCElementBase<HELMHOLTZ_ELEMENT>* el_pt =
+      dynamic_cast<HelmholtzBCElementBase<HELMHOLTZ_ELEMENT>*>(
         Helmholtz_outer_boundary_mesh_pt->element_pt(e));
     power += el_pt->global_power_contribution(some_file);
   }
@@ -856,7 +856,7 @@ void CoatedDiskProblem<ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT>::doc_solution()
 //=======start_of_main==================================================
 /// Driver for acoustic fsi problem
 //======================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

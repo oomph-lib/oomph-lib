@@ -49,8 +49,8 @@ namespace oomph
   /// Get exact position vector to meniscus
   //======================================================================
   void YoungLaplaceEquations::exact_position(
-    const Vector<double> &s,
-    Vector<double> &r,
+    const Vector<double>& s,
+    Vector<double>& r,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
   {
     // Get global coordinates
@@ -93,8 +93,8 @@ namespace oomph
   //======================================================================
   /// Get position vector to meniscus
   //======================================================================
-  void YoungLaplaceEquations::position(const Vector<double> &s,
-                                       Vector<double> &r) const
+  void YoungLaplaceEquations::position(const Vector<double>& s,
+                                       Vector<double>& r) const
   {
     // Get global coordinates
     Vector<double> x(2);
@@ -136,7 +136,7 @@ namespace oomph
   /// Compute element residual vector. Pure version without hanging nodes
   //======================================================================
   void YoungLaplaceEquations::fill_in_contribution_to_residuals(
-    Vector<double> &residuals)
+    Vector<double>& residuals)
   {
     // Find out how many nodes there are
     unsigned n_node = nnode();
@@ -387,8 +387,8 @@ namespace oomph
   //======================================================================
   /// Output solution at nplot points in each coordinate direction
   //======================================================================
-  void YoungLaplaceEquations::output(std::ostream &outfile,
-                                     const unsigned &nplot)
+  void YoungLaplaceEquations::output(std::ostream& outfile,
+                                     const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(2);
@@ -481,8 +481,8 @@ namespace oomph
   /// Plot at a given number of plot points.
   //======================================================================
   void YoungLaplaceEquations::output_fct(
-    std::ostream &outfile,
-    const unsigned &nplot,
+    std::ostream& outfile,
+    const unsigned& nplot,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
   {
     // Vector of local coordinates
@@ -533,10 +533,10 @@ namespace oomph
   ///
   //======================================================================
   void YoungLaplaceEquations::compute_error(
-    std::ostream &outfile,
+    std::ostream& outfile,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-    double &error,
-    double &norm)
+    double& error,
+    double& norm)
   {
     // Initialise
     error = 0.0;

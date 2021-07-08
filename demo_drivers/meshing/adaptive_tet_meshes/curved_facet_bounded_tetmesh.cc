@@ -117,7 +117,7 @@ public:
   void actions_after_newton_solve() {}
 
   /// Doc the solution
-  void doc_solution(const unsigned &nplot, DocInfo &doc_info);
+  void doc_solution(const unsigned& nplot, DocInfo& doc_info);
 
 private:
   /// Apply BCs and make elements functional
@@ -129,20 +129,20 @@ private:
 #ifdef DO_TETGEN
 
   /// Bulk mesh
-  RefineableTetgenMesh<ELEMENT> *Bulk_mesh_pt;
+  RefineableTetgenMesh<ELEMENT>* Bulk_mesh_pt;
 
 #else
 
   /// Bulk mesh
-  RefineableGmshTetMesh<ELEMENT> *Bulk_mesh_pt;
+  RefineableGmshTetMesh<ELEMENT>* Bulk_mesh_pt;
 
 #endif
 
   /// Storage for the outer boundary object
-  TetMeshFacetedClosedSurface *Outer_boundary_pt;
+  TetMeshFacetedClosedSurface* Outer_boundary_pt;
 
   /// Inner boundary
-  Vector<TetMeshFacetedSurface *> Inner_boundary_pt;
+  Vector<TetMeshFacetedSurface*> Inner_boundary_pt;
 
   /// First boundary ID for outer boundary
   unsigned First_boundary_id_for_outer_boundary;
@@ -245,7 +245,7 @@ TetmeshPoissonProblem<ELEMENT>::TetmeshPoissonProblem()
   double epsilon = 0.1;
   unsigned n = 4;
   double z_offset = 0.5;
-  WarpedCircularDisk *disk_pt = new WarpedCircularDisk(epsilon, n, z_offset);
+  WarpedCircularDisk* disk_pt = new WarpedCircularDisk(epsilon, n, z_offset);
 
   // (Half) number of segments used to represent the disk perimeter
   unsigned half_nsegment = 30;
@@ -259,7 +259,7 @@ TetmeshPoissonProblem<ELEMENT>::TetmeshPoissonProblem()
   unsigned last_one_based_boundary_for_disk_id = 0;
 
   // Create faceted representation of warped disk
-  DiskTetMeshFacetedSurface *disk_faceted_surface_pt =
+  DiskTetMeshFacetedSurface* disk_faceted_surface_pt =
     new DiskTetMeshFacetedSurface(disk_pt,
                                   half_nsegment,
                                   first_one_based_boundary_id,
@@ -288,7 +288,7 @@ TetmeshPoissonProblem<ELEMENT>::TetmeshPoissonProblem()
   // Thickness of annular region on disk = radius of torus surrounding the
   // edge
   double h_annulus = r_torus;
-  WarpedCircularDiskWithAnnularInternalBoundary *disk2_pt =
+  WarpedCircularDiskWithAnnularInternalBoundary* disk2_pt =
     new WarpedCircularDiskWithAnnularInternalBoundary(h_annulus, epsilon, n);
 
   // Number of vertices around perimeter of torus
@@ -308,7 +308,7 @@ TetmeshPoissonProblem<ELEMENT>::TetmeshPoissonProblem()
   unsigned one_based_torus_region_id = 4;
 
   // Build disk with torus around the edge
-  DiskWithTorusAroundEdgeTetMeshFacetedSurface *disk_with_torus_pt =
+  DiskWithTorusAroundEdgeTetMeshFacetedSurface* disk_with_torus_pt =
     new DiskWithTorusAroundEdgeTetMeshFacetedSurface(
       disk2_pt,
       half_nsegment,
@@ -344,7 +344,7 @@ TetmeshPoissonProblem<ELEMENT>::TetmeshPoissonProblem()
   epsilon = 0.1;
   n = 6;
   z_offset = -0.5;
-  WarpedCircularDisk *disk3_pt = new WarpedCircularDisk(epsilon, n, z_offset);
+  WarpedCircularDisk* disk3_pt = new WarpedCircularDisk(epsilon, n, z_offset);
 
   // Start enumeration from here
   first_one_based_boundary_id = last_one_based_torus_boundary_id + 200;
@@ -359,7 +359,7 @@ TetmeshPoissonProblem<ELEMENT>::TetmeshPoissonProblem()
   unsigned one_based_region_id_below_disk = 2409;
 
   // Create faceted representation of warped disk
-  DiskWithTwoLayersTetMeshFacetedSurface *disk_with_layers_faceted_surface_pt =
+  DiskWithTwoLayersTetMeshFacetedSurface* disk_with_layers_faceted_surface_pt =
     new DiskWithTwoLayersTetMeshFacetedSurface(
       disk3_pt,
       half_nsegment,
@@ -392,7 +392,7 @@ TetmeshPoissonProblem<ELEMENT>::TetmeshPoissonProblem()
   double initial_element_volume = 1.0;
 
   // Setup parameters for gmsh
-  GmshParameters *gmsh_parameters_pt = new GmshParameters(
+  GmshParameters* gmsh_parameters_pt = new GmshParameters(
     Outer_boundary_pt, Global_Parameters::Gmsh_command_line_invocation);
 
   // Element volume
@@ -443,7 +443,7 @@ TetmeshPoissonProblem<ELEMENT>::TetmeshPoissonProblem()
   Problem::mesh_pt() = Bulk_mesh_pt;
 
   // Set error estimator for bulk mesh
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   Bulk_mesh_pt->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Set targets for spatial adaptivity
@@ -456,7 +456,7 @@ TetmeshPoissonProblem<ELEMENT>::TetmeshPoissonProblem()
 #ifdef OOMPH_HAS_HYPRE
 
   // Create a new Hypre linear solver
-  HypreSolver *hypre_linear_solver_pt = new HypreSolver;
+  HypreSolver* hypre_linear_solver_pt = new HypreSolver;
 
   // Set the linear solver for problem
   linear_solver_pt() = hypre_linear_solver_pt;
@@ -577,8 +577,8 @@ void TetmeshPoissonProblem<ELEMENT>::apply_boundary_conditions()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned &nplot,
-                                                  DocInfo &doc_info)
+void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned& nplot,
+                                                  DocInfo& doc_info)
 {
   bool do_bulk_output = true;
   if (CommandLineArgs::command_line_flag_has_been_set("--suppress_bulk_output"))
@@ -797,7 +797,7 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned &nplot,
     unsigned nel = Bulk_mesh_pt->nboundary_element_in_region(b, region_id);
     for (unsigned e = 0; e < nel; e++)
     {
-      FiniteElement *el_pt =
+      FiniteElement* el_pt =
         Bulk_mesh_pt->boundary_element_in_region_pt(b, region_id, e);
 
       // What is the index of the face of the bulk element at the boundary
@@ -805,7 +805,7 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned &nplot,
         Bulk_mesh_pt->face_index_at_boundary_in_region(b, region_id, e);
 
       // Build the corresponding flux jump element
-      PoissonFluxElement<ELEMENT> *flux_element_pt =
+      PoissonFluxElement<ELEMENT>* flux_element_pt =
         new PoissonFluxElement<ELEMENT>(el_pt, face_index);
 
       // Get surface area
@@ -837,7 +837,7 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned &nplot,
     unsigned nel = Bulk_mesh_pt->nboundary_element_in_region(b, region_id);
     for (unsigned e = 0; e < nel; e++)
     {
-      FiniteElement *el_pt =
+      FiniteElement* el_pt =
         Bulk_mesh_pt->boundary_element_in_region_pt(b, region_id, e);
 
       // What is the index of the face of the bulk element at the boundary
@@ -845,7 +845,7 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned &nplot,
         Bulk_mesh_pt->face_index_at_boundary_in_region(b, region_id, e);
 
       // Build the corresponding flux jump element
-      PoissonFluxElement<ELEMENT> *flux_element_pt =
+      PoissonFluxElement<ELEMENT>* flux_element_pt =
         new PoissonFluxElement<ELEMENT>(el_pt, face_index);
 
       // Get surface area
@@ -878,7 +878,7 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned &nplot,
     unsigned nel = Bulk_mesh_pt->nboundary_element_in_region(b, region_id);
     for (unsigned e = 0; e < nel; e++)
     {
-      FiniteElement *el_pt =
+      FiniteElement* el_pt =
         Bulk_mesh_pt->boundary_element_in_region_pt(b, region_id, e);
 
       // What is the index of the face of the bulk element at the boundary
@@ -886,7 +886,7 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned &nplot,
         Bulk_mesh_pt->face_index_at_boundary_in_region(b, region_id, e);
 
       // Build the corresponding flux jump element
-      PoissonFluxElement<ELEMENT> *flux_element_pt =
+      PoissonFluxElement<ELEMENT>* flux_element_pt =
         new PoissonFluxElement<ELEMENT>(el_pt, face_index);
 
       // Get surface area
@@ -921,7 +921,7 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned &nplot,
     unsigned nel = Bulk_mesh_pt->nboundary_element_in_region(b, region_id);
     for (unsigned e = 0; e < nel; e++)
     {
-      FiniteElement *el_pt =
+      FiniteElement* el_pt =
         Bulk_mesh_pt->boundary_element_in_region_pt(b, region_id, e);
 
       // What is the index of the face of the bulk element at the boundary
@@ -929,7 +929,7 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned &nplot,
         Bulk_mesh_pt->face_index_at_boundary_in_region(b, region_id, e);
 
       // Build the corresponding flux jump element
-      PoissonFluxElement<ELEMENT> *flux_element_pt =
+      PoissonFluxElement<ELEMENT>* flux_element_pt =
         new PoissonFluxElement<ELEMENT>(el_pt, face_index);
 
       // Get surface area
@@ -962,7 +962,7 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned &nplot,
     unsigned nel = Bulk_mesh_pt->nboundary_element_in_region(b, region_id);
     for (unsigned e = 0; e < nel; e++)
     {
-      FiniteElement *el_pt =
+      FiniteElement* el_pt =
         Bulk_mesh_pt->boundary_element_in_region_pt(b, region_id, e);
 
       // What is the index of the face of the bulk element at the boundary
@@ -970,7 +970,7 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned &nplot,
         Bulk_mesh_pt->face_index_at_boundary_in_region(b, region_id, e);
 
       // Build the corresponding flux jump element
-      PoissonFluxElement<ELEMENT> *flux_element_pt =
+      PoissonFluxElement<ELEMENT>* flux_element_pt =
         new PoissonFluxElement<ELEMENT>(el_pt, face_index);
 
       // Get surface area
@@ -1003,7 +1003,7 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned &nplot,
     unsigned nel = Bulk_mesh_pt->nboundary_element_in_region(b, region_id);
     for (unsigned e = 0; e < nel; e++)
     {
-      FiniteElement *el_pt =
+      FiniteElement* el_pt =
         Bulk_mesh_pt->boundary_element_in_region_pt(b, region_id, e);
 
       // What is the index of the face of the bulk element at the boundary
@@ -1011,7 +1011,7 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned &nplot,
         Bulk_mesh_pt->face_index_at_boundary_in_region(b, region_id, e);
 
       // Build the corresponding flux jump element
-      PoissonFluxElement<ELEMENT> *flux_element_pt =
+      PoissonFluxElement<ELEMENT>* flux_element_pt =
         new PoissonFluxElement<ELEMENT>(el_pt, face_index);
 
       // Get surface area
@@ -1075,7 +1075,7 @@ void TetmeshPoissonProblem<ELEMENT>::doc_solution(const unsigned &nplot,
 //========================================================================
 /// Driver
 //========================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   MPI_Helpers::init(argc, argv);
 

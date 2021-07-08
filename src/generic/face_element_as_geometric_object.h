@@ -74,8 +74,8 @@ namespace oomph
     /// has to have the same interface as the the generic FaceElement
     /// constructor. Hence the boundary number (within the mesh) on which this
     /// element is located must be setup afterwards!
-    FaceElementAsGeomObject(FiniteElement *const &element_pt,
-                            const int &face_index) :
+    FaceElementAsGeomObject(FiniteElement* const& element_pt,
+                            const int& face_index) :
       FaceGeometry<ELEMENT>(),
       FaceElement(),
       // The geometric object has an intrinsic dimension one less than
@@ -92,7 +92,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    FaceElementAsGeomObject(const FaceElementAsGeomObject &)
+    FaceElementAsGeomObject(const FaceElementAsGeomObject&)
     {
       BrokenCopy::broken_copy("FaceElementAsGeomObject");
     }
@@ -111,9 +111,9 @@ namespace oomph
     /// \short The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default
-    double zeta_nodal(const unsigned &n,
-                      const unsigned &k,
-                      const unsigned &i) const
+    double zeta_nodal(const unsigned& n,
+                      const unsigned& k,
+                      const unsigned& i) const
     {
       return FaceElement::zeta_nodal(n, k, i);
     }
@@ -128,7 +128,7 @@ namespace oomph
     /// \short Return pointer to the j-th Data item that the object's
     /// shape depends on. Object doesn't depend on any geom Data
     /// so we die if this gets called.
-    Data *geom_data_pt(const unsigned &j)
+    Data* geom_data_pt(const unsigned& j)
     {
       std::ostringstream error_message;
       error_message
@@ -141,8 +141,8 @@ namespace oomph
     }
 
     /// Override fill in contribution to jacobian, nothing should be done
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       std::ostringstream warn_message;
       warn_message << "Warning: You have just called the empty function \n"
@@ -166,15 +166,15 @@ namespace oomph
     /// built up incrementally as we descend through the
     /// call hierarchy of this function when called from
     /// Problem::describe_dofs(...)
-    void describe_local_dofs(std::ostream &out,
-                             const std::string &current_string) const
+    void describe_local_dofs(std::ostream& out,
+                             const std::string& current_string) const
     {
       // Call the ElementWithExternalElement's describe function
       ElementWithExternalElement::describe_local_dofs(out, current_string);
     }
 
     /// Unique final overrider needed for assign_all_generic_local_eqn_numbers
-    void assign_all_generic_local_eqn_numbers(const bool &store_local_dof_pt)
+    void assign_all_generic_local_eqn_numbers(const bool& store_local_dof_pt)
     {
       // Call the ElementWithExternalElement's assign function
       ElementWithExternalElement::assign_all_generic_local_eqn_numbers(
@@ -191,14 +191,14 @@ namespace oomph
   {
   public:
     /// The actual comparison operator
-    int operator()(GeneralisedElement *const &element1_pt,
-                   GeneralisedElement *const &element2_pt)
+    int operator()(GeneralisedElement* const& element1_pt,
+                   GeneralisedElement* const& element2_pt)
     {
       // OK Dynamic cast the elements
-      FaceElementAsGeomObject<ELEMENT> *cast_element1_pt =
-        dynamic_cast<FaceElementAsGeomObject<ELEMENT> *>(element1_pt);
-      FaceElementAsGeomObject<ELEMENT> *cast_element2_pt =
-        dynamic_cast<FaceElementAsGeomObject<ELEMENT> *>(element2_pt);
+      FaceElementAsGeomObject<ELEMENT>* cast_element1_pt =
+        dynamic_cast<FaceElementAsGeomObject<ELEMENT>*>(element1_pt);
+      FaceElementAsGeomObject<ELEMENT>* cast_element2_pt =
+        dynamic_cast<FaceElementAsGeomObject<ELEMENT>*>(element2_pt);
 
 #ifdef PARANOID
       if (cast_element1_pt == 0)

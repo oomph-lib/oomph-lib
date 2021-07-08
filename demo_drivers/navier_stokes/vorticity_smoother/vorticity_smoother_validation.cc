@@ -61,7 +61,7 @@ namespace GlobalParameters
 
   /// Returns the velocity field associated with the Taylor-Green vortex
   /// solution (for validation of vorticity projection)
-  void sin_cos_velocity_field(const Vector<double> &x, Vector<double> &u)
+  void sin_cos_velocity_field(const Vector<double>& x, Vector<double>& u)
   {
     // Time remains fixed so set to zero
     double t = 0.0;
@@ -89,8 +89,8 @@ namespace GlobalParameters
 
   /// Returns the vorticity field associated with the Taylor-Green vortex
   /// solution (for validation of vorticity projection)
-  void sin_cos_vorticity(const Vector<double> &x,
-                         Vector<Vector<double>> &vort_and_derivs)
+  void sin_cos_vorticity(const Vector<double>& x,
+                         Vector<Vector<double>>& vort_and_derivs)
   {
     // Time remains fixed so set to zero
     double t = 0.0;
@@ -175,22 +175,22 @@ namespace GlobalParameters
   } // End of sin_cos_vorticity
 
   /// Synthetic velocity field for validation
-  void synthetic_velocity_field(const Vector<double> &x, Vector<double> &veloc)
+  void synthetic_velocity_field(const Vector<double>& x, Vector<double>& veloc)
   {
     // Get the sin/cos velocity field
     sin_cos_velocity_field(x, veloc);
   } // End of synthetic_velocity_field
 
   /// Synthetic vorticity field and derivs for validation
-  void synthetic_vorticity(const Vector<double> &x,
-                           Vector<Vector<double>> &vort_and_derivs)
+  void synthetic_vorticity(const Vector<double>& x,
+                           Vector<Vector<double>>& vort_and_derivs)
   {
     // Get the sin/cos vorticity field
     sin_cos_vorticity(x, vort_and_derivs);
   } // End of synthetic_vorticity
 
   /// Initial condition for velocity
-  void initial_condition(const Vector<double> &x, Vector<double> &u)
+  void initial_condition(const Vector<double>& x, Vector<double>& u)
   {
     // Call a helper function to calculate the initial conditions
     synthetic_velocity_field(x, u);
@@ -236,14 +236,14 @@ public:
   void assign_synthetic_veloc_field();
 
   /// Check the vorticity smoothing
-  void check_smoothed_vorticity(DocInfo &doc_info);
+  void check_smoothed_vorticity(DocInfo& doc_info);
 
   /// Document the solution
-  void doc_solution(DocInfo &doc_info, const bool &vorticity_recovered = false);
+  void doc_solution(DocInfo& doc_info, const bool& vorticity_recovered = false);
 
 private:
   /// Vorticity recoverer
-  VorticitySmoother<ELEMENT> *Vorticity_recoverer_pt;
+  VorticitySmoother<ELEMENT>* Vorticity_recoverer_pt;
 }; // end of problem_class
 
 //===start_of_constructor=============================================
@@ -330,7 +330,7 @@ void VorticityRecoveryProblem<ELEMENT>::assign_synthetic_veloc_field()
   for (unsigned n = 0; n < num_nod; n++)
   {
     // Get a pointer to the n-th node in the mesh
-    Node *node_pt = mesh_pt()->node_pt(n);
+    Node* node_pt = mesh_pt()->node_pt(n);
 
     // Get the nodal coordinates of the n-th node in the mesh
     node_pt->position(x);
@@ -375,7 +375,7 @@ void VorticityRecoveryProblem<ELEMENT>::apply_boundary_conditions()
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Get a pointer to the inod-th node on the ibound-th boundary
-      Node *node_pt = mesh_pt()->boundary_node_pt(ibound, inod);
+      Node* node_pt = mesh_pt()->boundary_node_pt(ibound, inod);
 
       // Get the global coordinates of this node
       node_pt->position(x);
@@ -413,7 +413,7 @@ void VorticityRecoveryProblem<ELEMENT>::complete_problem_setup()
   for (unsigned e = 0; e < n_el; e++)
   {
     // Upcast to a fluid element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &GlobalParameters::Re;
@@ -429,7 +429,7 @@ void VorticityRecoveryProblem<ELEMENT>::complete_problem_setup()
   }
 
   // Upcast the first element to a fluid element
-  ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(0));
+  ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(0));
 
   // Calculate the kinematic viscosity (constant everywhere)
   double kinematic_viscosity =
@@ -448,10 +448,10 @@ void VorticityRecoveryProblem<ELEMENT>::complete_problem_setup()
 //========================================================================
 template<class ELEMENT>
 void VorticityRecoveryProblem<ELEMENT>::check_smoothed_vorticity(
-  DocInfo &doc_info)
+  DocInfo& doc_info)
 {
   // Get any element in the mesh
-  ELEMENT *const el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(0));
+  ELEMENT* const el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(0));
 
   ofstream some_file;
   char filename[10000];
@@ -535,7 +535,7 @@ void VorticityRecoveryProblem<ELEMENT>::check_smoothed_vorticity(
     for (unsigned e = 0; e < n_el; e++)
     {
       // Upcast the e-th element in the mesh
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
       // Get the size of the element
       double size = el_pt->size();
@@ -577,7 +577,7 @@ void VorticityRecoveryProblem<ELEMENT>::check_smoothed_vorticity(
 //========================================================================
 template<class ELEMENT>
 void VorticityRecoveryProblem<ELEMENT>::doc_solution(
-  DocInfo &doc_info, const bool &vorticity_recovered)
+  DocInfo& doc_info, const bool& vorticity_recovered)
 {
   // Check if we've recovered the vorticity
   if (!vorticity_recovered)
@@ -625,7 +625,7 @@ void VorticityRecoveryProblem<ELEMENT>::doc_solution(
   for (unsigned e = 0; e < n_el; e++)
   {
     // Upcast the e-th element in the mesh
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
     // Output the analytical vorticity and derivatives
     el_pt->output_analytical_veloc_and_vorticity(some_file, npts);
@@ -641,7 +641,7 @@ void VorticityRecoveryProblem<ELEMENT>::doc_solution(
 //===start_of_main======================================================
 /// Driver code for Anne channel problem
 //======================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
 #ifdef OOMPH_HAS_MPI
   MPI_Helpers::init(argc, argv);

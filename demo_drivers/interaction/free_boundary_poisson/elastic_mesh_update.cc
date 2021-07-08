@@ -59,7 +59,7 @@ namespace ConstSourceForPoisson
   double Strength = 1.0;
 
   /// Const source function
-  void get_source(const Vector<double> &x, double &source)
+  void get_source(const Vector<double>& x, double& source)
   {
     source = -Strength;
   }
@@ -88,9 +88,9 @@ public:
   // called first! --> this is where we need to build the mesh;
   // the constructors of the derived meshes don't call the
   // base constructor again and simply add the extra functionality.
-  ElasticFishMesh(GeomObject *back_pt,
-                  GeomObject *undeformed_back_pt,
-                  TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+  ElasticFishMesh(GeomObject* back_pt,
+                  GeomObject* undeformed_back_pt,
+                  TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
     FishMesh<ELEMENT>(back_pt, time_stepper_pt),
     RefineableFishMesh<ELEMENT>(back_pt, time_stepper_pt)
   {
@@ -115,7 +115,7 @@ public:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Get pointer to full element type
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(this->element_pt(e));
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->element_pt(e));
 
       // Set pointer to macro element so the curvlinear boundaries
       // of the undeformed mesh/domain get picked up during adaptive
@@ -135,7 +135,7 @@ private:
   /// Pointer to "undeformed" Domain -- used to determine the
   /// Lagrangian coordinates of any newly created SolidNodes during
   /// Mesh refinement
-  Domain *Undeformed_domain_pt;
+  Domain* Undeformed_domain_pt;
 };
 
 ///////////////////////////////////////////////////////////////////////
@@ -148,7 +148,7 @@ private:
 namespace Global_Physical_Variables
 {
   /// Pointer to constitutive law
-  ConstitutiveLaw *Constitutive_law_pt;
+  ConstitutiveLaw* Constitutive_law_pt;
 
   /// Poisson's ratio
   double Nu = 0.3;
@@ -174,13 +174,13 @@ public:
   void run();
 
   /// Access function for the specific mesh
-  ElasticFishMesh<ELEMENT> *mesh_pt()
+  ElasticFishMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<ElasticFishMesh<ELEMENT> *>(Problem::mesh_pt());
+    return dynamic_cast<ElasticFishMesh<ELEMENT>*>(Problem::mesh_pt());
   }
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// Update function (empty)
   void actions_after_newton_solve() {}
@@ -213,13 +213,13 @@ public:
 
 private:
   /// Node at which the solution of the Poisson equation is documented
-  Node *Doc_node_pt;
+  Node* Doc_node_pt;
 
   /// Trace file
   ofstream Trace_file;
 
   // Geometric object that represents the deformable fish back
-  Circle *Fish_back_pt;
+  Circle* Fish_back_pt;
 };
 
 //======================================================================
@@ -239,7 +239,7 @@ DeformableFishPoissonProblem<ELEMENT>::DeformableFishPoissonProblem()
 
   // Build geometric object that specifies the fish back in the
   // undeformed configuration (basically a deep copy of the previous one)
-  GeomObject *undeformed_fish_back_pt = new Circle(x_c, y_c, r_back);
+  GeomObject* undeformed_fish_back_pt = new Circle(x_c, y_c, r_back);
 
   // Build fish mesh with geometric object that specifies the deformable
   // and undeformed fish back
@@ -263,7 +263,7 @@ DeformableFishPoissonProblem<ELEMENT>::DeformableFishPoissonProblem()
        << std::endl;
 
   // Set error estimator
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   mesh_pt()->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Change/doc targets for mesh adaptation
@@ -307,7 +307,7 @@ DeformableFishPoissonProblem<ELEMENT>::DeformableFishPoissonProblem()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from FiniteElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the source function pointer
     el_pt->source_fct_pt() = &ConstSourceForPoisson::get_source;
@@ -334,7 +334,7 @@ DeformableFishPoissonProblem<ELEMENT>::DeformableFishPoissonProblem()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Cast to a solid element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the constitutive law
     el_pt->constitutive_law_pt() =
@@ -366,7 +366,7 @@ DeformableFishPoissonProblem<ELEMENT>::DeformableFishPoissonProblem()
 /// Doc the solution
 //==================================================================
 template<class ELEMENT>
-void DeformableFishPoissonProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void DeformableFishPoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -383,7 +383,7 @@ void DeformableFishPoissonProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
 
   // Write vertical position of the fish back, and solution at
   // control node to trace file
-  Trace_file << static_cast<Circle *>(mesh_pt()->fish_back_pt())->y_c() << " "
+  Trace_file << static_cast<Circle*>(mesh_pt()->fish_back_pt())->y_c() << " "
              << Doc_node_pt->value(0) << std::endl;
 }
 
@@ -432,7 +432,7 @@ void DeformableFishPoissonProblem<ELEMENT>::run()
 /// If there are any command line arguments, we regard this as a
 /// validation run and perform only a single step.
 //======================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

@@ -48,8 +48,8 @@ namespace oomph
   /// Special solver for problems with one DOF -- HSL_MA42 can't handle
   /// that!
   //====================================================================
-  void HSL_MA42::solve_for_one_dof(Problem *const &problem_pt,
-                                   DoubleVector &result)
+  void HSL_MA42::solve_for_one_dof(Problem* const& problem_pt,
+                                   DoubleVector& result)
   {
     // Find the number of elements
     unsigned long n_el = problem_pt->mesh_pt()->nelement();
@@ -72,14 +72,14 @@ namespace oomph
     double global_res = 0.0;
 
     // Locally cache pointer to assembly handler
-    AssemblyHandler *const assembly_handler_pt =
+    AssemblyHandler* const assembly_handler_pt =
       problem_pt->assembly_handler_pt();
 
     // Do the assembly
     for (unsigned long e = 0; e < n_el; e++)
     {
       // Get pointer to the element
-      GeneralisedElement *elem_pt = problem_pt->mesh_pt()->element_pt(e);
+      GeneralisedElement* elem_pt = problem_pt->mesh_pt()->element_pt(e);
 
       // Get number of variables in element
       int nvar = assembly_handler_pt->ndof(elem_pt);
@@ -126,7 +126,7 @@ namespace oomph
   //====================================================================
   /// Wrapper for HSL MA42 frontal solver
   //====================================================================
-  void HSL_MA42::solve(Problem *const &problem_pt, DoubleVector &result)
+  void HSL_MA42::solve(Problem* const& problem_pt, DoubleVector& result)
   {
 #ifdef OOMPH_HAS_MPI
     if (problem_pt->communicator_pt()->nproc() > 1)
@@ -177,9 +177,9 @@ namespace oomph
 
     // Memory for last and dx should be allocated dynamically from the heap
     // rather than the stack, otherwise one gets a nasty segmentation fault
-    int *last = new int[n_dof];
+    int* last = new int[n_dof];
     // Set up memory for dx
-    double **dx = new double *;
+    double** dx = new double*;
     *dx = new double[n_dof];
 
     // Provide storage for exact values required for lenbuf array
@@ -221,7 +221,7 @@ namespace oomph
     int nfront[2];
 
     // Locally cache pointer to assembly handler
-    AssemblyHandler *const assembly_handler_pt =
+    AssemblyHandler* const assembly_handler_pt =
       problem_pt->assembly_handler_pt();
 
     // Loop over size allocation/solver until we've made all the arrays
@@ -240,10 +240,10 @@ namespace oomph
       for (unsigned long e = 0; e < n_el; e++)
       {
         // Pointer to the element
-        GeneralisedElement *elem_pt = problem_pt->mesh_pt()->element_pt(e);
+        GeneralisedElement* elem_pt = problem_pt->mesh_pt()->element_pt(e);
 
         // MH: changed array to allocateable
-        int *ivar;
+        int* ivar;
 
         // Get number of variables in element
         int nvar = assembly_handler_pt->ndof(elem_pt);
@@ -312,10 +312,10 @@ namespace oomph
       for (unsigned long e = 0; e < n_el; e++)
       {
         // Pointer to the element
-        GeneralisedElement *elem_pt = problem_pt->mesh_pt()->element_pt(e);
+        GeneralisedElement* elem_pt = problem_pt->mesh_pt()->element_pt(e);
 
         // MH: changed array to allocateable
-        int *ivar;
+        int* ivar;
 
         // Get number of variables in element
         int nvar = assembly_handler_pt->ndof(elem_pt);
@@ -579,13 +579,13 @@ namespace oomph
       for (unsigned long e = 0; e < n_el; e++)
       {
         // Get pointer to the element
-        GeneralisedElement *elem_pt = problem_pt->mesh_pt()->element_pt(e);
+        GeneralisedElement* elem_pt = problem_pt->mesh_pt()->element_pt(e);
 
         // Get number of variables in element
         int nvar = assembly_handler_pt->ndof(elem_pt);
 
         // MH: changed array to allocatable
-        int *ivar;
+        int* ivar;
 
         // Multiple equations
         //-------------------
@@ -663,13 +663,13 @@ namespace oomph
           // double avar[nvar][nmaxe], rhs[1][nmaxe];
           // Assign memory on the heap rather than the stack because the ndofs
           // could get too large
-          double **avar = new double *[nvar];
-          double *tmp = new double[nvar * nmaxe];
+          double** avar = new double*[nvar];
+          double* tmp = new double[nvar * nmaxe];
           for (int i = 0; i < nvar; i++)
           {
             avar[i] = &tmp[i * nmaxe];
           }
-          double **rhs = new double *[1];
+          double** rhs = new double*[1];
           rhs[0] = new double[nmaxe];
 
           for (int i = 0; i < nmaxe; i++)
@@ -868,7 +868,7 @@ namespace oomph
   //====================================================================
   /// Wrapper for HSL MA42 frontal solver
   //====================================================================
-  void HSL_MA42::resolve(const DoubleVector &rhs, DoubleVector &result)
+  void HSL_MA42::resolve(const DoubleVector& rhs, DoubleVector& result)
   {
     // If we haven't stored the factors complain
     if (W == 0)
@@ -910,7 +910,7 @@ namespace oomph
     int lx = n_dof;
 
     // Allocate storage for the RHS
-    double **b = new double *;
+    double** b = new double*;
     *b = new double[n_dof];
     // Load in the RHS vector
     for (int i = 0; i < n_dof; i++)
@@ -919,7 +919,7 @@ namespace oomph
     }
 
     // Storage for the results
-    double **x = new double *;
+    double** x = new double*;
     *x = new double[n_dof];
 
     // Now call the resolver
@@ -948,7 +948,7 @@ namespace oomph
   //=========================================================================
   /// Function to reorder the elements according to Sloan's algorithm
   //=========================================================================
-  void HSL_MA42::reorder_elements(Problem *const &problem_pt)
+  void HSL_MA42::reorder_elements(Problem* const& problem_pt)
   {
     // Find the number of elements
     unsigned long n_el = problem_pt->mesh_pt()->nelement();
@@ -982,15 +982,15 @@ namespace oomph
     }
 
     // Set up iw and w
-    int *iw = new int[liw];
-    double *w = new double[lw];
+    int* iw = new int[liw];
+    double* w = new double[lw];
 
     // Set up the vectors that hold the element connectivity information
     // Can initialise the first entry of eltptr to 1
     Vector<int> eltvar, eltptr(1, 1);
 
     // Locally cache pointer to assembly handler
-    AssemblyHandler *const assembly_handler_pt =
+    AssemblyHandler* const assembly_handler_pt =
       problem_pt->assembly_handler_pt();
 
     // Now loop over all the elements and assemble eltvar and eltptr
@@ -1000,7 +1000,7 @@ namespace oomph
       order[e] = e;
 
       // Get pointer to the element
-      GeneralisedElement *elem_pt = problem_pt->mesh_pt()->element_pt(e);
+      GeneralisedElement* elem_pt = problem_pt->mesh_pt()->element_pt(e);
 
       // Get the number of variables in the element via the assembly handler
       int nvar = assembly_handler_pt->ndof(elem_pt);
@@ -1107,7 +1107,7 @@ namespace oomph
     delete[] iw;
 
     // Store re-ordered elements in temporary vector
-    Vector<GeneralisedElement *> tmp_element_pt(n_el);
+    Vector<GeneralisedElement*> tmp_element_pt(n_el);
     for (unsigned e = 0; e < n_el; e++)
     {
       tmp_element_pt[e] = problem_pt->mesh_pt()->element_pt(order[e] - 1);

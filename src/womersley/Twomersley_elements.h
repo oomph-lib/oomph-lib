@@ -71,56 +71,56 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    TWomersleyElement(const TWomersleyElement<DIM, NNODE_1D> &dummy)
+    TWomersleyElement(const TWomersleyElement<DIM, NNODE_1D>& dummy)
     {
       BrokenCopy::broken_copy("TWomersleyElement");
     }
 
     /// Broken assignment operator
-    void operator=(const TWomersleyElement<DIM, NNODE_1D> &)
+    void operator=(const TWomersleyElement<DIM, NNODE_1D>&)
     {
       BrokenCopy::broken_assign("TWomersleyElement");
     }
 
     /// \short  Required  # of `values' (pinned or dofs)
     /// at node n
-    inline unsigned required_nvalue(const unsigned &n) const
+    inline unsigned required_nvalue(const unsigned& n) const
     {
       return Initial_Nvalue;
     }
 
     /// \short Output function:
     ///  x,y,u   or    x,y,z,u
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       WomersleyEquations<DIM>::output(outfile);
     }
 
     ///  \short Output function:
     ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       WomersleyEquations<DIM>::output(outfile, n_plot);
     }
 
     /// \short C-style output function:
     ///  x,y,u   or    x,y,z,u
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       WomersleyEquations<DIM>::output(file_pt);
     }
 
     ///  \short C-style output function:
     ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       WomersleyEquations<DIM>::output(file_pt, n_plot);
     }
 
     /// \short Output function for an exact solution:
     ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
-    void output_fct(std::ostream &outfile,
-                    const unsigned &n_plot,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& n_plot,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
     {
       WomersleyEquations<DIM>::output_fct(outfile, n_plot, exact_soln_pt);
@@ -129,9 +129,9 @@ namespace oomph
     /// \short Output function for a time-dependent exact solution.
     ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
     /// (Calls the steady version)
-    void output_fct(std::ostream &outfile,
-                    const unsigned &n_plot,
-                    const double &time,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& n_plot,
+                    const double& time,
                     FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
     {
       WomersleyEquations<DIM>::output_fct(outfile, n_plot, time, exact_soln_pt);
@@ -140,20 +140,20 @@ namespace oomph
   protected:
     /// Shape, test functions & derivs. w.r.t. to global coords. Return
     /// Jacobian.
-    inline double dshape_and_dtest_eulerian_womersley(const Vector<double> &s,
-                                                      Shape &psi,
-                                                      DShape &dpsidx,
-                                                      Shape &test,
-                                                      DShape &dtestdx) const;
+    inline double dshape_and_dtest_eulerian_womersley(const Vector<double>& s,
+                                                      Shape& psi,
+                                                      DShape& dpsidx,
+                                                      Shape& test,
+                                                      DShape& dtestdx) const;
 
     /// \short Shape/test functions and derivs w.r.t. to global coords at
     /// integration point ipt; return  Jacobian of mapping
     inline double dshape_and_dtest_eulerian_at_knot_womersley(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidx,
-      Shape &test,
-      DShape &dtestdx) const;
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const;
   };
 
   ////////////////////////////////////////////////////////////////////////
@@ -168,11 +168,11 @@ namespace oomph
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
   double TWomersleyElement<DIM, NNODE_1D>::dshape_and_dtest_eulerian_womersley(
-    const Vector<double> &s,
-    Shape &psi,
-    DShape &dpsidx,
-    Shape &test,
-    DShape &dtestdx) const
+    const Vector<double>& s,
+    Shape& psi,
+    DShape& dpsidx,
+    Shape& test,
+    DShape& dtestdx) const
   {
     // Call the geometrical shape functions and derivatives
     double J = this->dshape_eulerian(s, psi, dpsidx);
@@ -200,11 +200,11 @@ namespace oomph
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
   double TWomersleyElement<DIM, NNODE_1D>::
-    dshape_and_dtest_eulerian_at_knot_womersley(const unsigned &ipt,
-                                                Shape &psi,
-                                                DShape &dpsidx,
-                                                Shape &test,
-                                                DShape &dtestdx) const
+    dshape_and_dtest_eulerian_at_knot_womersley(const unsigned& ipt,
+                                                Shape& psi,
+                                                DShape& dpsidx,
+                                                Shape& test,
+                                                DShape& dtestdx) const
   {
     // Call the geometrical shape functions and derivatives
     double J = this->dshape_eulerian_at_knot(ipt, psi, dpsidx);

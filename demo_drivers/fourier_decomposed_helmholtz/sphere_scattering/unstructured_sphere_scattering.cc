@@ -67,7 +67,7 @@ namespace PlanarWave
   std::complex<double> I(0.0, 1.0);
 
   /// Exact solution as a Vector of size 2, containing real and imag parts
-  void get_exact_u(const Vector<double> &x, Vector<double> &u)
+  void get_exact_u(const Vector<double>& x, Vector<double>& u)
   {
     // Switch to spherical coordinates
     double R = sqrt(x[0] * x[0] + x[1] * x[1]);
@@ -182,7 +182,7 @@ namespace ProblemParameters
   std::complex<double> I(0.0, 1.0);
 
   /// Exact solution as a Vector of size 2, containing real and imag parts
-  void get_exact_u(const Vector<double> &x, Vector<double> &u)
+  void get_exact_u(const Vector<double>& x, Vector<double>& u)
   {
     // Switch to spherical coordinates
     double R = sqrt(x[0] * x[0] + x[1] * x[1]);
@@ -236,7 +236,7 @@ namespace ProblemParameters
 
   /// \short Get -du/dr (spherical r) for exact solution. Equal to prescribed
   /// flux on inner boundary.
-  void exact_minus_dudr(const Vector<double> &x, std::complex<double> &flux)
+  void exact_minus_dudr(const Vector<double>& x, std::complex<double>& flux)
   {
     // Initialise flux
     flux = std::complex<double>(0.0, 0.0);
@@ -317,7 +317,7 @@ public:
 
   /// \short Doc the solution. DocInfo object stores flags/labels for where the
   /// output gets written to
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// Recompute gamma integral before checking Newton residuals
   void actions_before_newton_convergence_check()
@@ -335,7 +335,7 @@ public:
   void actions_after_adapt();
 
   /// Check gamma computation
-  void check_gamma(DocInfo &doc_info);
+  void check_gamma(DocInfo& doc_info);
 
 private:
   /// \short Create BC elements on outer boundary
@@ -345,7 +345,7 @@ private:
   void create_flux_elements_on_inner_boundary();
 
   /// \short Delete boundary face elements and wipe the surface mesh
-  void delete_face_elements(Mesh *const &boundary_mesh_pt)
+  void delete_face_elements(Mesh* const& boundary_mesh_pt)
   {
     // Loop over the surface elements
     unsigned n_element = boundary_mesh_pt->nelement();
@@ -362,21 +362,21 @@ private:
 #ifdef ADAPTIVE
 
   /// Pointer to the "bulk" mesh
-  RefineableTriangleMesh<ELEMENT> *Bulk_mesh_pt;
+  RefineableTriangleMesh<ELEMENT>* Bulk_mesh_pt;
 
 #else
 
   /// Pointer to the "bulk" mesh
-  TriangleMesh<ELEMENT> *Bulk_mesh_pt;
+  TriangleMesh<ELEMENT>* Bulk_mesh_pt;
 
 #endif
 
   /// \short Pointer to mesh containing the DtN boundary
   /// condition elements
-  FourierDecomposedHelmholtzDtNMesh<ELEMENT> *Helmholtz_outer_boundary_mesh_pt;
+  FourierDecomposedHelmholtzDtNMesh<ELEMENT>* Helmholtz_outer_boundary_mesh_pt;
 
   /// on the inner boundary
-  Mesh *Helmholtz_inner_boundary_mesh_pt;
+  Mesh* Helmholtz_inner_boundary_mesh_pt;
 
   /// Trace file
   ofstream Trace_file;
@@ -416,7 +416,7 @@ void FourierDecomposedHelmholtzProblem<ELEMENT>::actions_after_adapt()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to Helmholtz bulk element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
     // Set the k_squared  pointer
     el_pt->k_squared_pt() = &ProblemParameters::K_squared;
@@ -453,12 +453,12 @@ FourierDecomposedHelmholtzProblem<ELEMENT>::FourierDecomposedHelmholtzProblem()
   double y_c = 0.0;
   double r_min = 1.0;
   double r_max = 3.0;
-  Circle *inner_circle_pt = new Circle(x_c, y_c, r_min);
-  Circle *outer_circle_pt = new Circle(x_c, y_c, r_max);
+  Circle* inner_circle_pt = new Circle(x_c, y_c, r_min);
+  Circle* outer_circle_pt = new Circle(x_c, y_c, r_max);
 
   // Edges/boundary segments making up outer boundary
   //-------------------------------------------------
-  Vector<TriangleMeshCurveSection *> outer_boundary_line_pt(4);
+  Vector<TriangleMeshCurveSection*> outer_boundary_line_pt(4);
 
   // Number of segments used for representing the curvilinear boundaries
   unsigned n_segments = 20;
@@ -539,7 +539,7 @@ FourierDecomposedHelmholtzProblem<ELEMENT>::FourierDecomposedHelmholtzProblem()
 
   // Create closed curve that defines outer boundary
   //------------------------------------------------
-  TriangleMeshClosedCurve *outer_boundary_pt =
+  TriangleMeshClosedCurve* outer_boundary_pt =
     new TriangleMeshClosedCurve(outer_boundary_line_pt);
 
   // Use the TriangleMeshParameters object for helping on the manage of the
@@ -605,7 +605,7 @@ FourierDecomposedHelmholtzProblem<ELEMENT>::FourierDecomposedHelmholtzProblem()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(i));
 
     // Set the k_squared pointer
     el_pt->k_squared_pt() = &ProblemParameters::K_squared;
@@ -623,7 +623,7 @@ FourierDecomposedHelmholtzProblem<ELEMENT>::FourierDecomposedHelmholtzProblem()
 /// Check gamma computation: \f$ \gamma = -du/dn \f$
 //========================================================================
 template<class ELEMENT>
-void FourierDecomposedHelmholtzProblem<ELEMENT>::check_gamma(DocInfo &doc_info)
+void FourierDecomposedHelmholtzProblem<ELEMENT>::check_gamma(DocInfo& doc_info)
 {
   // Compute gamma stuff
   Helmholtz_outer_boundary_mesh_pt->setup_gamma();
@@ -642,8 +642,8 @@ void FourierDecomposedHelmholtzProblem<ELEMENT>::check_gamma(DocInfo &doc_info)
   for (unsigned e = 0; e < nel; e++)
   {
     // Get a pointer to element
-    FourierDecomposedHelmholtzDtNBoundaryElement<ELEMENT> *el_pt =
-      dynamic_cast<FourierDecomposedHelmholtzDtNBoundaryElement<ELEMENT> *>(
+    FourierDecomposedHelmholtzDtNBoundaryElement<ELEMENT>* el_pt =
+      dynamic_cast<FourierDecomposedHelmholtzDtNBoundaryElement<ELEMENT>*>(
         Helmholtz_outer_boundary_mesh_pt->element_pt(e));
 
     // Set the value of n_intpt
@@ -688,7 +688,7 @@ void FourierDecomposedHelmholtzProblem<ELEMENT>::check_gamma(DocInfo &doc_info)
 /// Doc the solution: doc_info contains labels/output directory etc.
 //========================================================================
 template<class ELEMENT>
-void FourierDecomposedHelmholtzProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void FourierDecomposedHelmholtzProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -756,14 +756,14 @@ void FourierDecomposedHelmholtzProblem<ELEMENT>::create_outer_bc_elements()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    ELEMENT *bulk_elem_pt =
-      dynamic_cast<ELEMENT *>(Bulk_mesh_pt->boundary_element_pt(b, e));
+    ELEMENT* bulk_elem_pt =
+      dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(b, e));
 
     // Find the index of the face of element e along boundary b
     int face_index = Bulk_mesh_pt->face_index_at_boundary(b, e);
 
     // Build the corresponding DtN element
-    FourierDecomposedHelmholtzDtNBoundaryElement<ELEMENT> *flux_element_pt =
+    FourierDecomposedHelmholtzDtNBoundaryElement<ELEMENT>* flux_element_pt =
       new FourierDecomposedHelmholtzDtNBoundaryElement<ELEMENT>(bulk_elem_pt,
                                                                 face_index);
 
@@ -793,14 +793,14 @@ void FourierDecomposedHelmholtzProblem<
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    ELEMENT *bulk_elem_pt =
-      dynamic_cast<ELEMENT *>(Bulk_mesh_pt->boundary_element_pt(b, e));
+    ELEMENT* bulk_elem_pt =
+      dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(b, e));
 
     // Find the index of the face of element e along boundary b
     int face_index = Bulk_mesh_pt->face_index_at_boundary(b, e);
 
     // Build the corresponding prescribed incoming-flux element
-    FourierDecomposedHelmholtzFluxElement<ELEMENT> *flux_element_pt =
+    FourierDecomposedHelmholtzFluxElement<ELEMENT>* flux_element_pt =
       new FourierDecomposedHelmholtzFluxElement<ELEMENT>(bulk_elem_pt,
                                                          face_index);
 
@@ -817,7 +817,7 @@ void FourierDecomposedHelmholtzProblem<
 //===== start_of_main=====================================================
 /// Driver code for Fourier decomposed Helmholtz problem
 //========================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

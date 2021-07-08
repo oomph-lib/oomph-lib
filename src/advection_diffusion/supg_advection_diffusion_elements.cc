@@ -49,11 +49,11 @@ namespace oomph
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
   double QSUPGAdvectionDiffusionElement<DIM, NNODE_1D>::
-    dshape_and_dtest_eulerian_adv_diff(const Vector<double> &s,
-                                       Shape &psi,
-                                       DShape &dpsidx,
-                                       Shape &test,
-                                       DShape &dtestdx) const
+    dshape_and_dtest_eulerian_adv_diff(const Vector<double>& s,
+                                       Shape& psi,
+                                       DShape& dpsidx,
+                                       Shape& test,
+                                       DShape& dtestdx) const
   {
     // Call the geometrical shape functions and derivatives
     double J = QElement<DIM, NNODE_1D>::dshape_eulerian(s, psi, dpsidx);
@@ -106,11 +106,11 @@ namespace oomph
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
   double QSUPGAdvectionDiffusionElement<DIM, NNODE_1D>::
-    dshape_and_dtest_eulerian_at_knot_adv_diff(const unsigned &ipt,
-                                               Shape &psi,
-                                               DShape &dpsidx,
-                                               Shape &test,
-                                               DShape &dtestdx) const
+    dshape_and_dtest_eulerian_at_knot_adv_diff(const unsigned& ipt,
+                                               Shape& psi,
+                                               DShape& dpsidx,
+                                               Shape& test,
+                                               DShape& dtestdx) const
   {
     // Call the geometrical shape functions and derivatives
     double J = this->dshape_eulerian_at_knot(ipt, psi, dpsidx);

@@ -66,9 +66,9 @@ class FilledCircle : public GeomObject
 public:
   /// Constructor that takes the centre position and raidus of the circle
   /// as its arguments
-  FilledCircle(const double &centre_x,
-               const double &centre_y,
-               const double &radius) :
+  FilledCircle(const double& centre_x,
+               const double& centre_y,
+               const double& radius) :
     GeomObject(2, 2), Centre_x(centre_x), Centre_y(centre_y), Radius(radius)
   {
   }
@@ -77,7 +77,7 @@ public:
   virtual ~FilledCircle() {}
 
   /// Lagrangian coordinate xi
-  void position(const Vector<double> &xi, Vector<double> &r) const
+  void position(const Vector<double>& xi, Vector<double>& r) const
   {
     r[0] = Centre_x + Radius * xi[0] * cos(xi[1]);
     r[1] = Centre_y + Radius * xi[0] * sin(xi[1]);
@@ -85,9 +85,9 @@ public:
 
   /// Return the position of the circle as a function of time
   /// (doesn't move as a function of time)
-  void position(const unsigned &t,
-                const Vector<double> &xi,
-                Vector<double> &r) const
+  void position(const unsigned& t,
+                const Vector<double>& xi,
+                Vector<double>& r) const
   {
     position(xi, r);
   }
@@ -110,7 +110,7 @@ private:
 //=============================================================================
 namespace Hypre_Subsidiary_Preconditioner_Helper
 {
-  Preconditioner *set_hypre_preconditioner()
+  Preconditioner* set_hypre_preconditioner()
   {
     return new HyprePreconditioner;
   }
@@ -126,9 +126,9 @@ class TorusProblem : public Problem
 public:
   /// \short Constructor taking the maximum refinement level and
   /// the minimum and maximum error targets.
-  TorusProblem(const unsigned &max_refinement_level,
-               const double &min_error_target,
-               const double &max_error_target);
+  TorusProblem(const unsigned& max_refinement_level,
+               const double& min_error_target,
+               const double& max_error_target);
 
   /// Set the initial conditions: all nodes have zero velocity
   void set_initial_condition()
@@ -144,16 +144,15 @@ public:
   }
 
   /// Set boundary conditions on the walls
-  void set_boundary_conditions(const double &time);
+  void set_boundary_conditions(const double& time);
 
   /// Function that is used to run the parameter study
-  void solve_system(const double &dt, const unsigned &nstep);
+  void solve_system(const double& dt, const unsigned& nstep);
 
   /// Return a pointer to the specific mesh used
-  RefineableFullCircleMesh<ELEMENT> *mesh_pt()
+  RefineableFullCircleMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<RefineableFullCircleMesh<ELEMENT> *>(
-      Problem::mesh_pt());
+    return dynamic_cast<RefineableFullCircleMesh<ELEMENT>*>(Problem::mesh_pt());
   }
   /// \short Update the problem specs before next timestep:
   void actions_before_implicit_timestep()
@@ -174,7 +173,7 @@ public:
       mesh_pt()->element_pt());
 
     // Pin a single pressure value
-    dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(0))->fix_pressure(0, 0.0);
+    dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(0))->fix_pressure(0, 0.0);
   }
 };
 
@@ -183,9 +182,9 @@ public:
 /// maximum error targets
 //============================================================================
 template<class ELEMENT>
-TorusProblem<ELEMENT>::TorusProblem(const unsigned &max_refinement_level,
-                                    const double &min_error_target,
-                                    const double &max_error_target)
+TorusProblem<ELEMENT>::TorusProblem(const unsigned& max_refinement_level,
+                                    const double& min_error_target,
+                                    const double& max_error_target)
 {
   using namespace Global_Physical_Variables;
 
@@ -194,7 +193,7 @@ TorusProblem<ELEMENT>::TorusProblem(const unsigned &max_refinement_level,
 
   // Create the domain for the mesh, which consists of a circle of
   // radius Radius and centred at (1/Delta, 0)
-  GeomObject *area_pt = new FilledCircle(1.0 / Delta, 0.0, Radius);
+  GeomObject* area_pt = new FilledCircle(1.0 / Delta, 0.0, Radius);
 
   // Define pi
   const double pi = MathematicalConstants::Pi;
@@ -217,7 +216,7 @@ TorusProblem<ELEMENT>::TorusProblem(const unsigned &max_refinement_level,
     area_pt, theta_positions, radial_frac, time_stepper_pt());
 
   // Set error estimator
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   mesh_pt()->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Maximum number of refinements (increase this if you want a finer mesh)
@@ -228,7 +227,7 @@ TorusProblem<ELEMENT>::TorusProblem(const unsigned &max_refinement_level,
   mesh_pt()->min_permitted_error() = min_error_target;
 
   // Build iterative linear solver
-  GMRES<CRDoubleMatrix> *iterative_linear_solver_pt = new GMRES<CRDoubleMatrix>;
+  GMRES<CRDoubleMatrix>* iterative_linear_solver_pt = new GMRES<CRDoubleMatrix>;
 
   // Set maximum number of iterations
   iterative_linear_solver_pt->max_iter() = 100;
@@ -236,7 +235,7 @@ TorusProblem<ELEMENT>::TorusProblem(const unsigned &max_refinement_level,
   // Set tolerance
   iterative_linear_solver_pt->tolerance() = 1.0e-8;
 
-  NavierStokesSchurComplementPreconditioner *prec_pt =
+  NavierStokesSchurComplementPreconditioner* prec_pt =
     new NavierStokesSchurComplementPreconditioner(this);
   // Set the mesh
   prec_pt->set_navier_stokes_mesh(this->mesh_pt());
@@ -254,23 +253,23 @@ TorusProblem<ELEMENT>::TorusProblem(const unsigned &max_refinement_level,
 #ifndef OOMPH_HAS_MPI
 
   // Set up the internal preconditioners
-  Preconditioner *P_matrix_preconditioner_pt = new HyprePreconditioner;
+  Preconditioner* P_matrix_preconditioner_pt = new HyprePreconditioner;
 
   // Set parameters for use as preconditioner on Poisson-type problem
   Hypre_default_settings::set_defaults_for_2D_poisson_problem(
-    static_cast<HyprePreconditioner *>(P_matrix_preconditioner_pt));
+    static_cast<HyprePreconditioner*>(P_matrix_preconditioner_pt));
 
   // Use Hypre for the Schur complement block
   prec_pt->set_p_preconditioner(P_matrix_preconditioner_pt);
 
   // Shut up!
-  static_cast<HyprePreconditioner *>(P_matrix_preconditioner_pt)
+  static_cast<HyprePreconditioner*>(P_matrix_preconditioner_pt)
     ->disable_doc_time();
 #endif
 #endif
 
   // Set Block diagonal preconditioner for the momentum block
-  BlockDiagonalPreconditioner<CRDoubleMatrix> *F_matrix_preconditioner_pt =
+  BlockDiagonalPreconditioner<CRDoubleMatrix>* F_matrix_preconditioner_pt =
     new BlockDiagonalPreconditioner<CRDoubleMatrix>;
 
   // Set mesh
@@ -281,7 +280,7 @@ TorusProblem<ELEMENT>::TorusProblem(const unsigned &max_refinement_level,
 // Trap because HYPRE can't handle the case when
 // OOMPH_HAS_MPI, but we run in serial
 #ifndef OOMPH_HAS_MPI
-  dynamic_cast<BlockDiagonalPreconditioner<CRDoubleMatrix> *>(
+  dynamic_cast<BlockDiagonalPreconditioner<CRDoubleMatrix>*>(
     F_matrix_preconditioner_pt)
     ->set_subsidiary_preconditioner_function(
       Hypre_Subsidiary_Preconditioner_Helper::set_hypre_preconditioner);
@@ -298,7 +297,7 @@ TorusProblem<ELEMENT>::TorusProblem(const unsigned &max_refinement_level,
     // Cast to the particular element type, this is necessary because
     // the base elements don't have the member functions that we're about
     // to call!
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
     // There is no need for ALE
     el_pt->disable_ALE();
@@ -331,7 +330,7 @@ TorusProblem<ELEMENT>::TorusProblem(const unsigned &max_refinement_level,
     mesh_pt()->element_pt());
 
   // Pin a single pressure value
-  dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(0))->fix_pressure(0, 0.0);
+  dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(0))->fix_pressure(0, 0.0);
 
   // Setup all the equation numbering and look-up schemes
   std::cout << assign_eqn_numbers() << std::endl;
@@ -342,7 +341,7 @@ TorusProblem<ELEMENT>::TorusProblem(const unsigned &max_refinement_level,
 /// to spin up the torus
 //========================================================================
 template<class ELEMENT>
-void TorusProblem<ELEMENT>::set_boundary_conditions(const double &time)
+void TorusProblem<ELEMENT>::set_boundary_conditions(const double& time)
 {
   // NOTE: The default value of all parameters is zero, so we need only
   // set the values that are non-zero on the boundary, i.e. the swirl
@@ -365,8 +364,8 @@ void TorusProblem<ELEMENT>::set_boundary_conditions(const double &time)
 /// Solve the system for a number of different values of the Reynolds number
 //==========================================================================
 template<class ELEMENT>
-void TorusProblem<ELEMENT>::solve_system(const double &dt,
-                                         const unsigned &nstep)
+void TorusProblem<ELEMENT>::solve_system(const double& dt,
+                                         const unsigned& nstep)
 {
   using namespace Global_Physical_Variables;
 

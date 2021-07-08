@@ -167,7 +167,7 @@ namespace oomph
     /// \short Output function:
     /// x,y,u,w_x,w_y,tau_supg  or    x,y,z,u,w_x,w_y,w_z,tau_supg
     /// nplot points in each coordinate direction
-    void output(std::ostream &outfile, const unsigned &nplot)
+    void output(std::ostream& outfile, const unsigned& nplot)
     {
       // Vector of local coordinates
       Vector<double> s(DIM);
@@ -211,19 +211,19 @@ namespace oomph
     }
 
     /// Output at default number of plot points
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       FiniteElement::output(outfile);
     }
 
     /// C-style output
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
 
     /// C_style output at n_plot points
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       FiniteElement::output(file_pt, n_plot);
     }
@@ -231,19 +231,19 @@ namespace oomph
   protected:
     /// Shape, test functions & derivs. w.r.t. to global coords. Return
     /// Jacobian.
-    double dshape_and_dtest_eulerian_adv_diff(const Vector<double> &s,
-                                              Shape &psi,
-                                              DShape &dpsidx,
-                                              Shape &test,
-                                              DShape &dtestdx) const;
+    double dshape_and_dtest_eulerian_adv_diff(const Vector<double>& s,
+                                              Shape& psi,
+                                              DShape& dpsidx,
+                                              Shape& test,
+                                              DShape& dtestdx) const;
 
     /// Shape, test functions & derivs. w.r.t. to global coords. Return
     /// Jacobian.
-    double dshape_and_dtest_eulerian_at_knot_adv_diff(const unsigned &ipt,
-                                                      Shape &psi,
-                                                      DShape &dpsidx,
-                                                      Shape &test,
-                                                      DShape &dtestdx) const;
+    double dshape_and_dtest_eulerian_at_knot_adv_diff(const unsigned& ipt,
+                                                      Shape& psi,
+                                                      DShape& dpsidx,
+                                                      Shape& test,
+                                                      DShape& dtestdx) const;
 
     /// SUPG stabilisation parameter
     double Tau_SUPG;
@@ -277,14 +277,14 @@ namespace oomph
 
     /// Broken copy constructor
     RefineableQSUPGAdvectionDiffusionElement(
-      const RefineableQSUPGAdvectionDiffusionElement<DIM, NNODE_1D> &dummy)
+      const RefineableQSUPGAdvectionDiffusionElement<DIM, NNODE_1D>& dummy)
     {
       BrokenCopy::broken_copy("RefineableQSUPGAdvectionDiffusionElement");
     }
 
     /// Broken assignment operator
     void operator=(
-      const RefineableQSUPGAdvectionDiffusionElement<DIM, NNODE_1D> &)
+      const RefineableQSUPGAdvectionDiffusionElement<DIM, NNODE_1D>&)
     {
       BrokenCopy::broken_assign("RefineableQSUPGAdvectionDiffusionElement");
     }
@@ -302,13 +302,13 @@ namespace oomph
     }
 
     /// \short Pointer to the j-th vertex node in the element
-    Node *vertex_node_pt(const unsigned &j) const
+    Node* vertex_node_pt(const unsigned& j) const
     {
       return QSUPGAdvectionDiffusionElement<DIM, NNODE_1D>::vertex_node_pt(j);
     }
 
     /// Rebuild from sons: empty
-    void rebuild_from_sons(Mesh *&mesh_pt) {}
+    void rebuild_from_sons(Mesh*& mesh_pt) {}
 
     /// \short Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.

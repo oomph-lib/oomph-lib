@@ -81,14 +81,14 @@ class OscRingNStProblem : public Problem
 public:
   /// \short Constructor: Pass timestep and function pointer to the
   /// solution that provides the initial conditions for the fluid
-  OscRingNStProblem(const double &dt,
+  OscRingNStProblem(const double& dt,
                     FiniteElement::UnsteadyExactSolutionFctPt IC_fct_pt);
 
   /// Destructor (empty)
   ~OscRingNStProblem() {}
 
   /// Get pointer to wall as geometric object
-  GeomObject *wall_pt()
+  GeomObject* wall_pt()
   {
     return Wall_pt;
   }
@@ -135,34 +135,34 @@ public:
     }
 
     // Set the reference pressure as the constant pressure in element 0
-    dynamic_cast<PseudoBucklingRingElement *>(Wall_pt)
+    dynamic_cast<PseudoBucklingRingElement*>(Wall_pt)
       ->set_reference_pressure_pt(
         fluid_mesh_pt()->element_pt(0)->internal_data_pt(0));
   }
 
   /// Run the time integration for ntsteps steps
-  void unsteady_run(const unsigned &ntsteps,
-                    const bool &restarted,
-                    DocInfo &doc_info);
+  void unsteady_run(const unsigned& ntsteps,
+                    const bool& restarted,
+                    DocInfo& doc_info);
 
   /// \short Set initial condition (incl previous timesteps) according
   /// to specified function.
   void set_initial_condition();
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// Access function for the fluid mesh
-  AlgebraicRefineableQuarterCircleSectorMesh<ELEMENT> *fluid_mesh_pt()
+  AlgebraicRefineableQuarterCircleSectorMesh<ELEMENT>* fluid_mesh_pt()
   {
     return Fluid_mesh_pt;
   }
 
   /// \short Dump problem data.
-  void dump_it(ofstream &dump_file, DocInfo doc_info);
+  void dump_it(ofstream& dump_file, DocInfo doc_info);
 
   /// \short Read problem data.
-  void restart(ifstream &restart_file);
+  void restart(ifstream& restart_file);
 
 private:
   /// Write header for trace file
@@ -172,23 +172,23 @@ private:
   FiniteElement::UnsteadyExactSolutionFctPt IC_Fct_pt;
 
   /// Pointer to wall
-  GeomObject *Wall_pt;
+  GeomObject* Wall_pt;
 
   /// Pointer to fluid mesh
-  AlgebraicRefineableQuarterCircleSectorMesh<ELEMENT> *Fluid_mesh_pt;
+  AlgebraicRefineableQuarterCircleSectorMesh<ELEMENT>* Fluid_mesh_pt;
 
   /// Pointer to wall mesh (contains only a single GeneralisedElement)
-  Mesh *Wall_mesh_pt;
+  Mesh* Wall_mesh_pt;
 
   /// Trace file
   ofstream Trace_file;
 
   /// Pointer to node on coarsest mesh on which velocity is traced
-  Node *Veloc_trace_node_pt;
+  Node* Veloc_trace_node_pt;
 
   /// \short Pointer to node in symmetry plane on coarsest mesh at
   /// which velocity is traced
-  Node *Sarah_veloc_trace_node_pt;
+  Node* Sarah_veloc_trace_node_pt;
 };
 
 //========================================================================
@@ -197,7 +197,7 @@ private:
 //========================================================================
 template<class ELEMENT>
 OscRingNStProblem<ELEMENT>::OscRingNStProblem(
-  const double &dt, FiniteElement::UnsteadyExactSolutionFctPt IC_fct_pt) :
+  const double& dt, FiniteElement::UnsteadyExactSolutionFctPt IC_fct_pt) :
   IC_Fct_pt(IC_fct_pt)
 {
   // Period of oscillation
@@ -233,7 +233,7 @@ OscRingNStProblem<ELEMENT>::OscRingNStProblem(
     Wall_pt, xi_lo, fract_mid, xi_hi, time_stepper_pt());
 
   // Set error estimator
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   Fluid_mesh_pt->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Fluid mesh is first sub-mesh
@@ -244,7 +244,7 @@ OscRingNStProblem<ELEMENT>::OscRingNStProblem(
 
   // Wall mesh is completely empty: Add Wall element in its GeneralisedElement
   // incarnation
-  Wall_mesh_pt->add_element_pt(dynamic_cast<GeneralisedElement *>(Wall_pt));
+  Wall_mesh_pt->add_element_pt(dynamic_cast<GeneralisedElement*>(Wall_pt));
 
   // Wall mesh is second sub-mesh
   add_sub_mesh(Wall_mesh_pt);
@@ -263,14 +263,14 @@ OscRingNStProblem<ELEMENT>::OscRingNStProblem(
   // at all refinement levels and can be used to doc continuous timetrace
   // of velocities)
   unsigned nnode_1d =
-    dynamic_cast<ELEMENT *>(fluid_mesh_pt()->finite_element_pt(0))->nnode_1d();
+    dynamic_cast<ELEMENT*>(fluid_mesh_pt()->finite_element_pt(0))->nnode_1d();
   Sarah_veloc_trace_node_pt =
     fluid_mesh_pt()->finite_element_pt(0)->node_pt(nnode_1d - 1);
 
   // The "pseudo-elastic" wall element is "loaded" by a pressure.
   // Use the "constant" pressure component in Crouzeix Raviart
   // fluid element as that pressure.
-  dynamic_cast<PseudoBucklingRingElement *>(Wall_pt)->set_reference_pressure_pt(
+  dynamic_cast<PseudoBucklingRingElement*>(Wall_pt)->set_reference_pressure_pt(
     fluid_mesh_pt()->element_pt(0)->internal_data_pt(0));
 
   // Set the boundary conditions for this problem:
@@ -300,7 +300,7 @@ OscRingNStProblem<ELEMENT>::OscRingNStProblem(
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Which node are we dealing with?
-      Node *node_pt = fluid_mesh_pt()->boundary_node_pt(ibound, inod);
+      Node* node_pt = fluid_mesh_pt()->boundary_node_pt(ibound, inod);
 
       // Set auxiliary update function pointer to apply no-slip condition
       // to velocities whenever nodal position is updated
@@ -339,7 +339,7 @@ OscRingNStProblem<ELEMENT>::OscRingNStProblem(
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from FiniteElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(fluid_mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(fluid_mesh_pt()->element_pt(i));
 
     // Set the Reynolds number, etc
     el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -354,17 +354,17 @@ OscRingNStProblem<ELEMENT>::OscRingNStProblem(
 
   // Amplitude of the oscillation
   SarahBL::epsilon =
-    static_cast<PseudoBucklingRingElement *>(Wall_pt)->eps_buckl();
+    static_cast<PseudoBucklingRingElement*>(Wall_pt)->eps_buckl();
 
   // Womersley number is the same as square root of Reynolds number
   SarahBL::alpha = sqrt(Global_Physical_Variables::Re);
 
   // Amplitude ratio
-  SarahBL::A = static_cast<PseudoBucklingRingElement *>(Wall_pt)->ampl_ratio();
+  SarahBL::A = static_cast<PseudoBucklingRingElement*>(Wall_pt)->ampl_ratio();
 
   // Buckling wavenumber
   SarahBL::N =
-    static_cast<PseudoBucklingRingElement *>(Wall_pt)->n_buckl_float();
+    static_cast<PseudoBucklingRingElement*>(Wall_pt)->n_buckl_float();
 
   // Frequency of oscillation (period is one)
   SarahBL::Omega = 2.0 * MathematicalConstants::Pi;
@@ -384,7 +384,7 @@ void OscRingNStProblem<ELEMENT>::set_initial_condition()
   // Elastic wall: We're starting from a given initial state in which
   // the wall is undeformed. If set_initial_condition() is called again
   // after mesh refinement for first timestep, this needs to be reset.
-  dynamic_cast<PseudoBucklingRingElement *>(Wall_pt)->set_R_0(1.0);
+  dynamic_cast<PseudoBucklingRingElement*>(Wall_pt)->set_R_0(1.0);
 
   // Backup time in global timestepper
   double backed_up_time = time_pt()->time();
@@ -458,7 +458,7 @@ void OscRingNStProblem<ELEMENT>::set_initial_condition()
 ///
 //========================================================================
 template<class ELEMENT>
-void OscRingNStProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void OscRingNStProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   cout << "Doc-ing step " << doc_info.number() << " for time "
        << time_stepper_pt()->time_pt()->time() << std::endl;
@@ -479,7 +479,7 @@ void OscRingNStProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
   unsigned nelem = fluid_mesh_pt()->nelement();
   for (unsigned ielem = 0; ielem < nelem; ielem++)
   {
-    dynamic_cast<ELEMENT *>(fluid_mesh_pt()->element_pt(ielem))
+    dynamic_cast<ELEMENT*>(fluid_mesh_pt()->element_pt(ielem))
       ->full_output(some_file, npts);
   }
   some_file.close();
@@ -534,12 +534,12 @@ void OscRingNStProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
   for (unsigned ielem = 0; ielem < nelem; ielem++)
   {
     area += fluid_mesh_pt()->finite_element_pt(ielem)->size();
-    press_int += dynamic_cast<ELEMENT *>(fluid_mesh_pt()->element_pt(ielem))
+    press_int += dynamic_cast<ELEMENT*>(fluid_mesh_pt()->element_pt(ielem))
                    ->pressure_integral();
-    diss += dynamic_cast<ELEMENT *>(fluid_mesh_pt()->element_pt(ielem))
-              ->dissipation();
+    diss +=
+      dynamic_cast<ELEMENT*>(fluid_mesh_pt()->element_pt(ielem))->dissipation();
     kin_en +=
-      dynamic_cast<ELEMENT *>(fluid_mesh_pt()->element_pt(ielem))->kin_energy();
+      dynamic_cast<ELEMENT*>(fluid_mesh_pt()->element_pt(ielem))->kin_energy();
   }
 
   // Total kinetic energy in entire domain
@@ -564,7 +564,7 @@ void OscRingNStProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
   // Doc
   Trace_file << time_pt()->time() << " " << r[1] << " " << global_kin << " "
              << SarahBL::Kin_energy_sarah(time_pt()->time()) << " "
-             << static_cast<PseudoBucklingRingElement *>(Wall_pt)->r_0() << " "
+             << static_cast<PseudoBucklingRingElement*>(Wall_pt)->r_0() << " "
              << area << " " << press_int / area << " " << diss << " "
              << diss_asympt << " " << Veloc_trace_node_pt->x(0) << " "
              << Veloc_trace_node_pt->x(1) << " "
@@ -584,26 +584,26 @@ void OscRingNStProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
              << Sarah_veloc_trace_node_pt->value(1) << " " << x_sarah[0] << " "
              << x_sarah[1] << " " << soln_sarah[0] << " " << soln_sarah[1]
              << " "
-             << static_cast<PseudoBucklingRingElement *>(Wall_pt)->r_0() - 1.0
+             << static_cast<PseudoBucklingRingElement*>(Wall_pt)->r_0() - 1.0
              << std::endl;
 
   // Output fluid solution on coarse-ish mesh
   //-----------------------------------------
 
   // Extract all elements from quadtree representation
-  Vector<Tree *> all_element_pt;
+  Vector<Tree*> all_element_pt;
   fluid_mesh_pt()->forest_pt()->stick_all_tree_nodes_into_vector(
     all_element_pt);
 
   // Build a coarse mesh
-  Mesh *coarse_mesh_pt = new Mesh();
+  Mesh* coarse_mesh_pt = new Mesh();
 
   // Loop over all elements and check if their refinement level is
   // equal to the mesh's minimum refinement level
   nelem = all_element_pt.size();
   for (unsigned ielem = 0; ielem < nelem; ielem++)
   {
-    Tree *el_pt = all_element_pt[ielem];
+    Tree* el_pt = all_element_pt[ielem];
     if (el_pt->level() == min_level)
     {
       coarse_mesh_pt->add_element_pt(el_pt->object_pt());
@@ -619,7 +619,7 @@ void OscRingNStProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
   nelem = coarse_mesh_pt->nelement();
   for (unsigned ielem = 0; ielem < nelem; ielem++)
   {
-    dynamic_cast<ELEMENT *>(coarse_mesh_pt->element_pt(ielem))
+    dynamic_cast<ELEMENT*>(coarse_mesh_pt->element_pt(ielem))
       ->full_output(some_file, npts);
   }
   some_file.close();
@@ -638,7 +638,7 @@ void OscRingNStProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
 /// Dump the solution
 //========================================================================
 template<class ELEMENT>
-void OscRingNStProblem<ELEMENT>::dump_it(ofstream &dump_file, DocInfo doc_info)
+void OscRingNStProblem<ELEMENT>::dump_it(ofstream& dump_file, DocInfo doc_info)
 {
   // Dump refinement status of mesh
   // fluid_mesh_pt()->dump_refinement(dump_file);
@@ -651,7 +651,7 @@ void OscRingNStProblem<ELEMENT>::dump_it(ofstream &dump_file, DocInfo doc_info)
 /// Read solution from disk
 //========================================================================
 template<class ELEMENT>
-void OscRingNStProblem<ELEMENT>::restart(ifstream &restart_file)
+void OscRingNStProblem<ELEMENT>::restart(ifstream& restart_file)
 {
   // Refine fluid mesh according to the instructions in restart file
   // fluid_mesh_pt()->refine(restart_file);
@@ -676,9 +676,9 @@ void OscRingNStProblem<ELEMENT>::restart(ifstream &restart_file)
 ///
 //========================================================================
 template<class ELEMENT>
-void OscRingNStProblem<ELEMENT>::unsteady_run(const unsigned &ntsteps,
-                                              const bool &restarted,
-                                              DocInfo &doc_info)
+void OscRingNStProblem<ELEMENT>::unsteady_run(const unsigned& ntsteps,
+                                              const bool& restarted,
+                                              DocInfo& doc_info)
 {
   // Open trace file
   char filename[100];
@@ -852,7 +852,7 @@ void OscRingNStProblem<ELEMENT>::write_trace_file_header()
 /// Demonstrate how to solve OscRingNSt problem in deformable domain
 /// with mesh adaptation
 //========================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);
@@ -875,7 +875,7 @@ int main(int argc, char *argv[])
   bool restarted = false;
 
   // Pointer to restart file
-  ifstream *restart_file_pt = 0;
+  ifstream* restart_file_pt = 0;
 
   // No restart
   //-----------

@@ -58,7 +58,7 @@ namespace Global_Physical_Variables
 namespace ExactSolution
 {
   /// The rigid-body rotation solution
-  void rigid_body_rotation(const Vector<double> &x, Vector<double> &u)
+  void rigid_body_rotation(const Vector<double>& x, Vector<double>& u)
   {
     // store r sin(theta)
     double r_sin_theta = x[0] * sin(x[1]);
@@ -71,7 +71,7 @@ namespace ExactSolution
   }
 
   /// The r-derivative of the rigid-body rotation solution
-  void rigid_body_rotation_dr(const Vector<double> &x, Vector<double> &u)
+  void rigid_body_rotation_dr(const Vector<double>& x, Vector<double>& u)
   {
     // store  sin(theta)
     double sin_theta = sin(x[1]);
@@ -84,7 +84,7 @@ namespace ExactSolution
   }
 
   /// The theta-derivative of the rigid-body rotation solution
-  void rigid_body_rotation_dtheta(const Vector<double> &x, Vector<double> &u)
+  void rigid_body_rotation_dtheta(const Vector<double>& x, Vector<double>& u)
   {
     // store  sin(theta)
     u[0] = 0.0;
@@ -109,18 +109,18 @@ class SphericalSteadyRotationProblem : public Problem
 {
 public:
   /// Constructor
-  SphericalSteadyRotationProblem(const unsigned &nr, const unsigned &ntheta);
+  SphericalSteadyRotationProblem(const unsigned& nr, const unsigned& ntheta);
 
   /// Destructor to clean up memory
   ~SphericalSteadyRotationProblem();
 
   /// Fix pressure in element e at pressure dof pdof and set to pvalue
-  void fix_pressure(const unsigned &e,
-                    const unsigned &pdof,
-                    const double &pvalue)
+  void fix_pressure(const unsigned& e,
+                    const unsigned& pdof,
+                    const double& pvalue)
   {
     // Cast to full element type and fix the pressure at that element
-    dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e))
+    dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))
       ->fix_pressure(pdof, pvalue);
   } // end of fix_pressure
 
@@ -131,16 +131,16 @@ public:
   void actions_before_newton_solve() {}
 
   // Access function for the specific mesh
-  SimpleRectangularQuadMesh<ELEMENT> *mesh_pt()
+  SimpleRectangularQuadMesh<ELEMENT>* mesh_pt()
   {
     // Upcast from pointer to the Mesh base class to the specific
     // element type that we're using here.
-    return dynamic_cast<SimpleRectangularQuadMesh<ELEMENT> *>(
+    return dynamic_cast<SimpleRectangularQuadMesh<ELEMENT>*>(
       Problem::mesh_pt());
   }
 
   /// Perform a timestepping study
-  void parameter_study(std::ofstream &trace, const string &output_dir);
+  void parameter_study(std::ofstream& trace, const string& output_dir);
 
 private:
   // Storage for number of elements in the radial direction
@@ -156,7 +156,7 @@ private:
 //========================================================================
 template<class ELEMENT>
 SphericalSteadyRotationProblem<ELEMENT>::SphericalSteadyRotationProblem(
-  const unsigned &nr, const unsigned &ntheta) :
+  const unsigned& nr, const unsigned& ntheta) :
   Nr(nr), Ntheta(ntheta)
 {
   // Setup mesh  -don't forget to include the timestepping in the mesh build
@@ -191,7 +191,7 @@ SphericalSteadyRotationProblem<ELEMENT>::SphericalSteadyRotationProblem(
     const unsigned num_nod = mesh_pt()->nboundary_node(ibound);
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
-      Node *nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
+      Node* nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
       // Loop over values (u/v/w velocities)
       for (unsigned i = 0; i < 3; i++)
       {
@@ -234,7 +234,7 @@ SphericalSteadyRotationProblem<ELEMENT>::SphericalSteadyRotationProblem(
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -265,7 +265,7 @@ SphericalSteadyRotationProblem<ELEMENT>::~SphericalSteadyRotationProblem()
 /// Timestep the problem with a given (fixed) timestep dt for nstep steps
 template<class ELEMENT>
 void SphericalSteadyRotationProblem<ELEMENT>::parameter_study(
-  std::ofstream &trace, const string &output_dir)
+  std::ofstream& trace, const string& output_dir)
 {
   Global_Physical_Variables::Re = 0.0;
 
@@ -308,7 +308,7 @@ void SphericalSteadyRotationProblem<ELEMENT>::parameter_study(
       // Local storage for the velocity and pressure errors and norms
       double el_u_error = 0.0, el_u_norm = 0.0;
       double el_p_error = 0.0, el_p_norm = 0.0;
-      dynamic_cast<ELEMENT *>(this->mesh_pt()->element_pt(e))
+      dynamic_cast<ELEMENT*>(this->mesh_pt()->element_pt(e))
         ->compute_error_e(junk,
                           ExactSolution::rigid_body_rotation,
                           ExactSolution::rigid_body_rotation_dr,

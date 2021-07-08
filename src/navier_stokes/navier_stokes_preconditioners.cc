@@ -48,7 +48,7 @@ namespace oomph
     double Peclet = 0.0;
 
     /// Wind
-    void wind_function(const Vector<double> &x, Vector<double> &wind)
+    void wind_function(const Vector<double>& x, Vector<double>& wind)
     {
       if (Flag == 0)
       {
@@ -63,7 +63,7 @@ namespace oomph
     }
 
     /// Exact solution as a Vector
-    void get_exact_u(const Vector<double> &x, Vector<double> &u)
+    void get_exact_u(const Vector<double>& x, Vector<double>& u)
     {
       u.resize(3);
       wind_function(x, u);
@@ -79,7 +79,7 @@ namespace oomph
     }
 
     /// Exact solution as a scalar
-    void get_exact_u(const Vector<double> &x, double &u)
+    void get_exact_u(const Vector<double>& x, double& u)
     {
       if (Flag == 0)
       {
@@ -93,7 +93,7 @@ namespace oomph
     }
 
     /// Source function required to make the solution above an exact solution
-    double source_function(const Vector<double> &x_vect)
+    double source_function(const Vector<double>& x_vect)
     {
       double x[2];
       x[0] = x_vect[0];
@@ -192,7 +192,7 @@ namespace oomph
 
     // In comes the current Jacobian. Recast it to a CR double matrix;
     // shout if that can't be done.
-    CRDoubleMatrix *cr_matrix_pt = dynamic_cast<CRDoubleMatrix *>(matrix_pt());
+    CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt());
 
 #ifdef PARANOID
     if (cr_matrix_pt == 0)
@@ -256,8 +256,8 @@ namespace oomph
 
     // determine whether the F preconditioner is a block preconditioner (and
     // therefore a subsidiary preconditioner)
-    BlockPreconditioner<CRDoubleMatrix> *F_block_preconditioner_pt =
-      dynamic_cast<BlockPreconditioner<CRDoubleMatrix> *>(F_preconditioner_pt);
+    BlockPreconditioner<CRDoubleMatrix>* F_block_preconditioner_pt =
+      dynamic_cast<BlockPreconditioner<CRDoubleMatrix>*>(F_preconditioner_pt);
     F_preconditioner_is_block_preconditioner = true;
     if (F_block_preconditioner_pt == 0)
     {
@@ -266,7 +266,7 @@ namespace oomph
 
     // Get B (the divergence block)
     double t_get_B_start = TimingHelpers::timer();
-    CRDoubleMatrix *b_pt = new CRDoubleMatrix;
+    CRDoubleMatrix* b_pt = new CRDoubleMatrix;
     this->get_block(1, 0, *b_pt);
 
     double t_get_B_finish = TimingHelpers::timer();
@@ -290,8 +290,8 @@ namespace oomph
     }
 
     // get the inverse velocity and pressure mass matrices
-    CRDoubleMatrix *inv_v_mass_pt = 0;
-    CRDoubleMatrix *inv_p_mass_pt = 0;
+    CRDoubleMatrix* inv_v_mass_pt = 0;
+    CRDoubleMatrix* inv_p_mass_pt = 0;
 
     double ivmm_assembly_start_t = TimingHelpers::timer();
     if (Use_LSC)
@@ -330,7 +330,7 @@ namespace oomph
     }
 
     // Get gradient matrix Bt
-    CRDoubleMatrix *bt_pt = new CRDoubleMatrix;
+    CRDoubleMatrix* bt_pt = new CRDoubleMatrix;
     double t_get_Bt_start = TimingHelpers::timer();
     this->get_block(0, 1, *bt_pt);
     double t_get_Bt_finish = TimingHelpers::timer();
@@ -354,11 +354,11 @@ namespace oomph
     }
 
     // Build pressure Poisson matrix
-    CRDoubleMatrix *p_matrix_pt = new CRDoubleMatrix;
+    CRDoubleMatrix* p_matrix_pt = new CRDoubleMatrix;
 
     // Multiply inverse velocity mass matrix by gradient matrix B^T
     double t_QBt_matrix_start = TimingHelpers::timer();
-    CRDoubleMatrix *qbt_pt = new CRDoubleMatrix;
+    CRDoubleMatrix* qbt_pt = new CRDoubleMatrix;
     inv_v_mass_pt->multiply(*bt_pt, *qbt_pt);
     delete bt_pt;
     bt_pt = 0;
@@ -434,7 +434,7 @@ namespace oomph
       get_pressure_advection_diffusion_matrix(full_fp_matrix);
 
       // Now extract the pressure pressure block
-      CRDoubleMatrix *fp_matrix_pt = new CRDoubleMatrix;
+      CRDoubleMatrix* fp_matrix_pt = new CRDoubleMatrix;
       this->get_block_other_matrix(1, 1, &full_fp_matrix, *fp_matrix_pt);
       double t_get_Fp_finish = TimingHelpers::timer();
       if (Doc_time)
@@ -445,7 +445,7 @@ namespace oomph
 
       // Build vector product of pressure advection diffusion matrix with
       // inverse pressure mass matrix
-      CRDoubleMatrix *fp_qp_inv_pt = new CRDoubleMatrix;
+      CRDoubleMatrix* fp_qp_inv_pt = new CRDoubleMatrix;
       fp_matrix_pt->multiply(*inv_p_mass_pt, *fp_qp_inv_pt);
 
       // Build the matvec operator for E = F_p Q_p^{-1}
@@ -467,7 +467,7 @@ namespace oomph
     }
 
     // Get momentum block F
-    CRDoubleMatrix *f_pt = new CRDoubleMatrix;
+    CRDoubleMatrix* f_pt = new CRDoubleMatrix;
     double t_get_F_start = TimingHelpers::timer();
     this->get_block(0, 0, *f_pt);
     double t_get_F_finish = TimingHelpers::timer();
@@ -639,7 +639,7 @@ namespace oomph
   /// Apply preconditioner to r.
   //=======================================================================
   void NavierStokesSchurComplementPreconditioner::preconditioner_solve(
-    const DoubleVector &r, DoubleVector &z)
+    const DoubleVector& r, DoubleVector& z)
   {
 #ifdef PARANOID
     if (Preconditioner_has_been_setup == false)
@@ -824,9 +824,9 @@ namespace oomph
   //========================================================================
   void NavierStokesSchurComplementPreconditioner::
     assemble_inv_press_and_veloc_mass_matrix_diagonal(
-      CRDoubleMatrix *&inv_p_mass_pt,
-      CRDoubleMatrix *&inv_v_mass_pt,
-      const bool &do_both)
+      CRDoubleMatrix*& inv_p_mass_pt,
+      CRDoubleMatrix*& inv_v_mass_pt,
+      const bool& do_both)
   {
     // determine the velocity rows required by this processor
     unsigned v_first_row = this->block_distribution_pt(0)->first_row();
@@ -834,7 +834,7 @@ namespace oomph
     unsigned v_nrow = this->block_distribution_pt(0)->nrow();
 
     // create storage for the diagonals
-    double *v_values = new double[v_nrow_local];
+    double* v_values = new double[v_nrow_local];
     for (unsigned i = 0; i < v_nrow_local; i++)
     {
       v_values[i] = 0.0;
@@ -845,7 +845,7 @@ namespace oomph
     unsigned p_first_row = 0;
     unsigned p_nrow_local = 0;
     unsigned p_nrow = 0;
-    double *p_values = 0;
+    double* p_values = 0;
     if (!Use_LSC)
     {
       // determine the pressure rows required by this processor
@@ -897,7 +897,7 @@ namespace oomph
       unsigned n_el = Navier_stokes_mesh_pt->nelement();
 
       // get the master distribution pt
-      const LinearAlgebraDistribution *master_distribution_pt =
+      const LinearAlgebraDistribution* master_distribution_pt =
         this->master_distribution_pt();
 
       // Do the two blocks (0: veloc; 1: press)
@@ -907,7 +907,7 @@ namespace oomph
       {
         // Local working variables: Default to velocity
         unsigned v_or_p_first_row = v_first_row;
-        double *v_or_p_values = v_values;
+        double* v_or_p_values = v_values;
         // Switch to pressure
         if (block_index == 1)
         {
@@ -917,30 +917,30 @@ namespace oomph
 
         // the diagonal mass matrix contributions that have been
         // classified and should be sent to another processor
-        Vector<double> *classified_contributions_send =
+        Vector<double>* classified_contributions_send =
           new Vector<double>[nproc];
 
         // the corresponding block indices
-        Vector<unsigned> *classified_indices_send = new Vector<unsigned>[nproc];
+        Vector<unsigned>* classified_indices_send = new Vector<unsigned>[nproc];
 
         // the matrix contributions that cannot be classified by this processor
         // and therefore must be sent to another for classification
-        Vector<double> *unclassified_contributions_send =
+        Vector<double>* unclassified_contributions_send =
           new Vector<double>[nproc];
 
         // the corresponding global indices that require classification
-        Vector<unsigned> *unclassified_indices_send =
+        Vector<unsigned>* unclassified_indices_send =
           new Vector<unsigned>[nproc];
 
         // get the velocity or pressure distribution pt
-        const LinearAlgebraDistribution *velocity_or_press_dist_pt =
+        const LinearAlgebraDistribution* velocity_or_press_dist_pt =
           this->block_distribution_pt(block_index);
 
         // get the contribution for each element
         for (unsigned e = 0; e < n_el; e++)
         {
           // Get element
-          GeneralisedElement *el_pt = Navier_stokes_mesh_pt->element_pt(e);
+          GeneralisedElement* el_pt = Navier_stokes_mesh_pt->element_pt(e);
 
           // check that the element is not halo
           if (!el_pt->is_halo())
@@ -958,10 +958,9 @@ namespace oomph
             unsigned which_one = 2;
             if (block_index == 1) which_one = 1;
 
-            NavierStokesElementWithDiagonalMassMatrices *cast_el_pt = 0;
+            NavierStokesElementWithDiagonalMassMatrices* cast_el_pt = 0;
             cast_el_pt =
-              dynamic_cast<NavierStokesElementWithDiagonalMassMatrices *>(
-                el_pt);
+              dynamic_cast<NavierStokesElementWithDiagonalMassMatrices*>(el_pt);
             if (cast_el_pt != 0)
             {
               cast_el_pt->get_pressure_and_velocity_mass_matrix_diagonal(
@@ -1067,7 +1066,7 @@ namespace oomph
 
         // first determine how many unclassified rows are to be sent to
         // each processor
-        unsigned *n_unclassified_send = new unsigned[nproc];
+        unsigned* n_unclassified_send = new unsigned[nproc];
         for (unsigned p = 0; p < nproc; p++)
         {
           if (p == my_rank)
@@ -1081,7 +1080,7 @@ namespace oomph
         }
 
         // then all-to-all com number of unclassified to be sent / recv
-        unsigned *n_unclassified_recv = new unsigned[nproc];
+        unsigned* n_unclassified_recv = new unsigned[nproc];
         MPI_Alltoall(n_unclassified_send,
                      1,
                      MPI_UNSIGNED,
@@ -1096,8 +1095,8 @@ namespace oomph
 
         // allocate storage for the data to be received
         // and post the sends and recvs
-        Vector<double *> unclassified_contributions_recv(nproc);
-        Vector<unsigned *> unclassified_indices_recv(nproc);
+        Vector<double*> unclassified_contributions_recv(nproc);
+        Vector<unsigned*> unclassified_indices_recv(nproc);
         Vector<MPI_Request> unclassified_recv_requests;
         Vector<MPI_Request> unclassified_send_requests;
         Vector<unsigned> unclassified_recv_proc;
@@ -1276,7 +1275,7 @@ namespace oomph
 
         // first determine how many classified rows are to be sent to
         // each processor
-        unsigned *n_classified_send = new unsigned[nproc];
+        unsigned* n_classified_send = new unsigned[nproc];
         for (unsigned p = 0; p < nproc; p++)
         {
           if (p == my_rank)
@@ -1290,7 +1289,7 @@ namespace oomph
         }
 
         // then all-to-all number of classified to be sent / recv
-        unsigned *n_classified_recv = new unsigned[nproc];
+        unsigned* n_classified_recv = new unsigned[nproc];
         MPI_Alltoall(n_classified_send,
                      1,
                      MPI_UNSIGNED,
@@ -1301,8 +1300,8 @@ namespace oomph
 
         // allocate storage for the data to be received
         // and post the sends and recvs
-        Vector<double *> classified_contributions_recv(nproc);
-        Vector<unsigned *> classified_indices_recv(nproc);
+        Vector<double*> classified_contributions_recv(nproc);
+        Vector<unsigned*> classified_indices_recv(nproc);
         Vector<MPI_Request> classified_recv_requests;
         Vector<MPI_Request> classified_send_requests;
         Vector<unsigned> classified_recv_proc;
@@ -1494,7 +1493,7 @@ namespace oomph
       for (unsigned e = 0; e < n_el; e++)
       {
         // Get element
-        GeneralisedElement *el_pt = Navier_stokes_mesh_pt->element_pt(e);
+        GeneralisedElement* el_pt = Navier_stokes_mesh_pt->element_pt(e);
 
         // find number of degrees of freedom in the element
         // (this is slightly too big because it includes the
@@ -1506,9 +1505,9 @@ namespace oomph
         Vector<double> el_vmm_diagonal(el_dof, 0.0);
         Vector<double> el_pmm_diagonal(el_dof, 0.0);
 
-        NavierStokesElementWithDiagonalMassMatrices *cast_el_pt = 0;
+        NavierStokesElementWithDiagonalMassMatrices* cast_el_pt = 0;
         cast_el_pt =
-          dynamic_cast<NavierStokesElementWithDiagonalMassMatrices *>(el_pt);
+          dynamic_cast<NavierStokesElementWithDiagonalMassMatrices*>(el_pt);
         if (cast_el_pt != 0)
         {
           cast_el_pt->get_pressure_and_velocity_mass_matrix_diagonal(
@@ -1587,8 +1586,8 @@ namespace oomph
     }
 
     // Create column index and row start for velocity mass matrix
-    int *v_column_index = new int[v_nrow_local];
-    int *v_row_start = new int[v_nrow_local + 1];
+    int* v_column_index = new int[v_nrow_local];
+    int* v_row_start = new int[v_nrow_local + 1];
     for (unsigned i = 0; i < v_nrow_local; i++)
     {
 #ifdef PARANOID
@@ -1617,8 +1616,8 @@ namespace oomph
     if (!Use_LSC)
     {
       // Create column index and row start for pressure mass matrix
-      int *p_column_index = new int[p_nrow_local];
-      int *p_row_start = new int[p_nrow_local + 1];
+      int* p_column_index = new int[p_nrow_local];
+      int* p_row_start = new int[p_nrow_local + 1];
       for (unsigned i = 0; i < p_nrow_local; i++)
       {
 #ifdef PARANOID

@@ -54,7 +54,7 @@ namespace oomph
   {
   private:
     /// Pointer to the desired normalisation
-    std::complex<double> *Normalisation_pt;
+    std::complex<double>* Normalisation_pt;
 
     /// Storage for the initial index of the eigenvalue
     unsigned External_or_internal_data_index_of_eigenvalue;
@@ -63,7 +63,7 @@ namespace oomph
     unsigned Index_of_eigenvalue;
 
     /// \short The local eqn number for the traded pressure
-    inline int eigenvalue_local_eqn(const unsigned &i)
+    inline int eigenvalue_local_eqn(const unsigned& i)
     {
       return this->internal_local_eqn(
         External_or_internal_data_index_of_eigenvalue, Index_of_eigenvalue + i);
@@ -71,14 +71,14 @@ namespace oomph
 
     /// \short Fill in the residuals for the volume constraint
     void fill_in_generic_contribution_to_residuals_normalisation(
-      Vector<double> &residuals);
+      Vector<double>& residuals);
 
   public:
     /// \short Constructor: Pass pointer to target volume. "Pressure" value that
     /// "traded" for the volume contraint is created internally (as a Data
     /// item with a single pressure value)
     LinearisedNavierStokesEigenfunctionNormalisationElement(
-      std::complex<double> *const &normalisation_pt);
+      std::complex<double>* const& normalisation_pt);
 
     /// \short Constructor: Pass pointer to target volume, pointer to Data
     /// item whose value specified by index_of_traded_pressure represents
@@ -92,13 +92,13 @@ namespace oomph
     ~LinearisedNavierStokesEigenfunctionNormalisationElement() {}
 
     /// Access to Data that contains the traded pressure
-    inline Data *eigenvalue_data_pt()
+    inline Data* eigenvalue_data_pt()
     {
       return internal_data_pt(External_or_internal_data_index_of_eigenvalue);
     }
 
     /// Return the traded pressure value
-    inline double eigenvalue(const unsigned &i)
+    inline double eigenvalue(const unsigned& i)
     {
       return eigenvalue_data_pt()->value(Index_of_eigenvalue + i);
     }
@@ -110,14 +110,14 @@ namespace oomph
     }
 
     /// \short Fill in the residuals for the volume constraint
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       this->fill_in_generic_contribution_to_residuals_normalisation(residuals);
     }
 
     /// \short Fill in the residuals and jacobian for the volume constraint
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       // One contribution to jacobian; see comment in that function
       this->fill_in_generic_contribution_to_residuals_normalisation(residuals);
@@ -133,9 +133,9 @@ namespace oomph
     /// \short Fill in the residuals, jacobian and mass matrix for the volume
     /// constraint.
     void fill_in_contribution_to_jacobian_and_mass_matrix(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix)
     {
       // No contribution to jacobian or mass matrix; see comment in that
       // function

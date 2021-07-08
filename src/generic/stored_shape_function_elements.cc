@@ -211,7 +211,7 @@ namespace oomph
   /// without recalculation
   //=======================================================================
   void StorableShapeElementBase::set_integration_scheme(
-    Integral *const &integral_pt)
+    Integral* const& integral_pt)
   {
     // Assign the integration scheme
     FiniteElement::set_integration_scheme(integral_pt);
@@ -278,7 +278,7 @@ namespace oomph
     Can_delete_shape_local_stored = true;
 
     // Allocate internal storage for the shape functions
-    Shape_stored_pt = new Vector<Shape *>;
+    Shape_stored_pt = new Vector<Shape*>;
 
     // Storage for the shape functions and their local derivatives
     Shape psi(n_node, n_position_type);
@@ -291,7 +291,7 @@ namespace oomph
       FiniteElement::shape_at_knot(ipt, psi);
 
       // Set up local storage for the shape functions and derivatives
-      Shape *psi_pt = new Shape(n_node, n_position_type);
+      Shape* psi_pt = new Shape(n_node, n_position_type);
 
       // Copy the values of the shape functions and their local derivatives
       // into the element storage
@@ -341,8 +341,8 @@ namespace oomph
     Can_delete_shape_local_stored = true;
 
     // Allocate internal storage for the shape functions
-    Shape_stored_pt = new Vector<Shape *>;
-    DShape_local_stored_pt = new Vector<DShape *>;
+    Shape_stored_pt = new Vector<Shape*>;
+    DShape_local_stored_pt = new Vector<DShape*>;
 
     // Storage for the shape functions and their local derivatives
     Shape psi(n_node, n_position_type);
@@ -356,8 +356,8 @@ namespace oomph
       FiniteElement::dshape_local_at_knot(ipt, psi, dpsids);
 
       // Set up local storage for the shape functions and derivatives
-      Shape *psi_pt = new Shape(n_node, n_position_type);
-      DShape *dpsids_pt = new DShape(n_node, n_position_type, Dim);
+      Shape* psi_pt = new Shape(n_node, n_position_type);
+      DShape* dpsids_pt = new DShape(n_node, n_position_type, Dim);
 
       // Copy the values of the shape functions and their local derivatives
       // into the element storage
@@ -434,9 +434,9 @@ namespace oomph
     Can_delete_shape_local_stored = true;
 
     // Allocate internal storage for the shape functions
-    Shape_stored_pt = new Vector<Shape *>;
-    DShape_local_stored_pt = new Vector<DShape *>;
-    D2Shape_local_stored_pt = new Vector<DShape *>;
+    Shape_stored_pt = new Vector<Shape*>;
+    DShape_local_stored_pt = new Vector<DShape*>;
+    D2Shape_local_stored_pt = new Vector<DShape*>;
 
     // Storage for the shape functions and their local derivatives
     Shape psi(n_node, n_position_type);
@@ -451,9 +451,9 @@ namespace oomph
       FiniteElement::d2shape_local_at_knot(ipt, psi, dpsids, d2psids);
 
       // Set up local storage for the shape functions and derivatives
-      Shape *psi_pt = new Shape(n_node, n_position_type);
-      DShape *dpsids_pt = new DShape(n_node, n_position_type, Dim);
-      DShape *d2psids_pt = new DShape(n_node, n_position_type, n_deriv);
+      Shape* psi_pt = new Shape(n_node, n_position_type);
+      DShape* dpsids_pt = new DShape(n_node, n_position_type, Dim);
+      DShape* d2psids_pt = new DShape(n_node, n_position_type, n_deriv);
 
       // Copy the values of the shape functions and their local derivatives
       // into the element storage
@@ -529,7 +529,7 @@ namespace oomph
     Can_delete_dshape_eulerian_stored = true;
 
     // Allocate storage for the stored shape function derivatives
-    DShape_eulerian_stored_pt = new Vector<DShape *>;
+    DShape_eulerian_stored_pt = new Vector<DShape*>;
     Jacobian_eulerian_stored_pt = new Vector<double>;
 
     // Assign local variables for the shape function and derivatives
@@ -547,7 +547,7 @@ namespace oomph
         FiniteElement::dshape_eulerian_at_knot(ipt, psi, dpsidx));
 
       // Set up local storage for the shape function derivatives
-      DShape *dpsidx_pt = new DShape(n_node, n_position_type, n_dim);
+      DShape* dpsidx_pt = new DShape(n_node, n_position_type, n_dim);
 
       // Now copy the values over
       for (unsigned l = 0; l < n_node; l++)
@@ -610,8 +610,8 @@ namespace oomph
     Can_delete_dshape_eulerian_stored = true;
 
     // Allocate storage for the stored shape function derivatives
-    DShape_eulerian_stored_pt = new Vector<DShape *>;
-    D2Shape_eulerian_stored_pt = new Vector<DShape *>;
+    DShape_eulerian_stored_pt = new Vector<DShape*>;
+    D2Shape_eulerian_stored_pt = new Vector<DShape*>;
     Jacobian_eulerian_stored_pt = new Vector<double>;
 
     // Assign local variables for the shape function and derivatives
@@ -630,8 +630,8 @@ namespace oomph
         FiniteElement::d2shape_eulerian_at_knot(ipt, psi, dpsidx, d2psidx));
 
       // Set up local storage for the shape function derivatives
-      DShape *dpsidx_pt = new DShape(n_node, n_position_type, n_dim);
-      DShape *d2psidx_pt = new DShape(n_node, n_position_type, n_deriv);
+      DShape* dpsidx_pt = new DShape(n_node, n_position_type, n_dim);
+      DShape* d2psidx_pt = new DShape(n_node, n_position_type, n_deriv);
 
       // Now copy the values over
       for (unsigned l = 0; l < n_node; l++)
@@ -663,8 +663,8 @@ namespace oomph
   /// \short Return the shape function stored at the ipt-th integration
   /// point.
   //=========================================================================
-  void StorableShapeElementBase::shape_at_knot(const unsigned &ipt,
-                                               Shape &psi) const
+  void StorableShapeElementBase::shape_at_knot(const unsigned& ipt,
+                                               Shape& psi) const
   {
     // If we are not storing the shape functions, calculate the values
     if (Shape_stored_pt == 0)
@@ -683,9 +683,9 @@ namespace oomph
   /// \short Return the shape function and its derivatives w.r.t. the local
   /// coordinates at the ipt-th integration point.
   //=========================================================================
-  void StorableShapeElementBase::dshape_local_at_knot(const unsigned &ipt,
-                                                      Shape &psi,
-                                                      DShape &dpsids) const
+  void StorableShapeElementBase::dshape_local_at_knot(const unsigned& ipt,
+                                                      Shape& psi,
+                                                      DShape& dpsids) const
   {
     // If we are not storing the first derivatives, calculate them
     if (DShape_local_stored_pt == 0)
@@ -705,10 +705,10 @@ namespace oomph
   /// \short Return the shape function and its first and second derivatives
   /// w.r.t. the local coordinates at the ipt-th integration point.
   //=========================================================================
-  void StorableShapeElementBase::d2shape_local_at_knot(const unsigned &ipt,
-                                                       Shape &psi,
-                                                       DShape &dpsids,
-                                                       DShape &d2psids) const
+  void StorableShapeElementBase::d2shape_local_at_knot(const unsigned& ipt,
+                                                       Shape& psi,
+                                                       DShape& dpsids,
+                                                       DShape& d2psids) const
   {
     // If we are not storing the second derivatives, calculate them on the fly
     if (D2Shape_local_stored_pt == 0)
@@ -730,9 +730,9 @@ namespace oomph
   /// derivatives w.r.t eulerian coordinates at the ipt-th integration point.
   /// If the values have already been computed, return the stored values.
   //==========================================================================
-  double StorableShapeElementBase::dshape_eulerian_at_knot(const unsigned &ipt,
-                                                           Shape &psi,
-                                                           DShape &dpsidx) const
+  double StorableShapeElementBase::dshape_eulerian_at_knot(const unsigned& ipt,
+                                                           Shape& psi,
+                                                           DShape& dpsidx) const
   {
     // If we are not storing the values, return the calculated values
     if (DShape_eulerian_stored_pt == 0)
@@ -756,7 +756,7 @@ namespace oomph
   /// If the values have already been computed, return the stored values.
   //==========================================================================
   double StorableShapeElementBase::d2shape_eulerian_at_knot(
-    const unsigned &ipt, Shape &psi, DShape &dpsidx, DShape &d2psidx) const
+    const unsigned& ipt, Shape& psi, DShape& dpsidx, DShape& d2psidx) const
   {
     // If we are not storing the values return the calculated values
     if (D2Shape_eulerian_stored_pt == 0)
@@ -779,7 +779,7 @@ namespace oomph
   /// \short Return the Jacobian of the mapping between the local and global
   /// coordinates. If the value has been precomputed return that
   //==========================================================================
-  double StorableShapeElementBase::J_eulerian_at_knot(const unsigned &ipt) const
+  double StorableShapeElementBase::J_eulerian_at_knot(const unsigned& ipt) const
   {
     // If we are not storing the values, return the calculated values
     if (Jacobian_eulerian_stored_pt == 0)
@@ -801,7 +801,7 @@ namespace oomph
   /// case when a large number of elements have the same integration scheme
   //=======================================================================
   void StorableShapeElementBase::set_shape_local_stored_from_element(
-    StorableShapeElementBase *const &element_pt)
+    StorableShapeElementBase* const& element_pt)
   {
 #ifdef PARANOID
     // Check that we aren't nulling out
@@ -841,7 +841,7 @@ namespace oomph
   /// case when a large number of elements have the same integration scheme
   //=======================================================================
   void StorableShapeElementBase::set_dshape_eulerian_stored_from_element(
-    StorableShapeElementBase *const &element_pt)
+    StorableShapeElementBase* const& element_pt)
   {
     set_shape_local_stored_from_element(element_pt);
 
@@ -957,8 +957,8 @@ namespace oomph
     // Get the number of position types and the dimension from first node
     // N.B. Assume that it is the same for all nodes
     unsigned n_lagrangian_type =
-      static_cast<SolidNode *>(node_pt(0))->nlagrangian_type();
-    unsigned n_lagrangian = static_cast<SolidNode *>(node_pt(0))->nlagrangian();
+      static_cast<SolidNode*>(node_pt(0))->nlagrangian_type();
+    unsigned n_lagrangian = static_cast<SolidNode*>(node_pt(0))->nlagrangian();
 
     // Delete the exisiting stored objects
     delete_J_lagrangian_stored();
@@ -967,7 +967,7 @@ namespace oomph
     Can_delete_dshape_lagrangian_stored = true;
 
     // Allocate storage for the stored shape function derivatives
-    DShape_lagrangian_stored_pt = new Vector<DShape *>;
+    DShape_lagrangian_stored_pt = new Vector<DShape*>;
     Jacobian_lagrangian_stored_pt = new Vector<double>;
 
     // Assign local variables for the shape function and derivatives
@@ -985,7 +985,7 @@ namespace oomph
         SolidFiniteElement::dshape_lagrangian_at_knot(ipt, psi, dpsidxi));
 
       // Set up local storage for the shape function derivatives
-      DShape *dpsidxi_pt = new DShape(n_node, n_lagrangian_type, n_lagrangian);
+      DShape* dpsidxi_pt = new DShape(n_node, n_lagrangian_type, n_lagrangian);
 
       // Now copy the values over
       for (unsigned l = 0; l < n_node; l++)
@@ -1020,8 +1020,8 @@ namespace oomph
     // Get the number of position types and the dimension from first node
     // N.B. Assume that it is the same for all nodes
     unsigned n_lagrangian_type =
-      static_cast<SolidNode *>(node_pt(0))->nlagrangian_type();
-    unsigned n_lagrangian = static_cast<SolidNode *>(node_pt(0))->nlagrangian();
+      static_cast<SolidNode*>(node_pt(0))->nlagrangian_type();
+    unsigned n_lagrangian = static_cast<SolidNode*>(node_pt(0))->nlagrangian();
 
     // Find the number of second derivatives required
     // N.B. We are assuming that the mixed derivatives are symmetric here
@@ -1050,8 +1050,8 @@ namespace oomph
     Can_delete_dshape_lagrangian_stored = true;
 
     // Allocate storage for the stored shape function derivatives
-    DShape_lagrangian_stored_pt = new Vector<DShape *>;
-    D2Shape_lagrangian_stored_pt = new Vector<DShape *>;
+    DShape_lagrangian_stored_pt = new Vector<DShape*>;
+    D2Shape_lagrangian_stored_pt = new Vector<DShape*>;
     Jacobian_lagrangian_stored_pt = new Vector<double>;
 
     // Assign local variables for the shape function and derivatives
@@ -1071,8 +1071,8 @@ namespace oomph
           ipt, psi, dpsidxi, d2psidxi));
 
       // Set up local storage for the shape function derivatives
-      DShape *dpsidxi_pt = new DShape(n_node, n_lagrangian_type, n_lagrangian);
-      DShape *d2psidxi_pt = new DShape(n_node, n_lagrangian_type, n_deriv);
+      DShape* dpsidxi_pt = new DShape(n_node, n_lagrangian_type, n_lagrangian);
+      DShape* d2psidxi_pt = new DShape(n_node, n_lagrangian_type, n_deriv);
 
       // Now copy the values over
       for (unsigned l = 0; l < n_node; l++)
@@ -1106,7 +1106,7 @@ namespace oomph
   /// If the values have already been computed, return the stored values.
   //==========================================================================
   double StorableShapeSolidElementBase::dshape_lagrangian_at_knot(
-    const unsigned &ipt, Shape &psi, DShape &dpsidxi) const
+    const unsigned& ipt, Shape& psi, DShape& dpsidxi) const
   {
     // If we are not storing the values, return the calculated values
     if (DShape_lagrangian_stored_pt == 0)
@@ -1130,7 +1130,7 @@ namespace oomph
   /// If the values have already been computed, return the stored values.
   //==========================================================================
   double StorableShapeSolidElementBase::d2shape_lagrangian_at_knot(
-    const unsigned &ipt, Shape &psi, DShape &dpsidxi, DShape &d2psidxi) const
+    const unsigned& ipt, Shape& psi, DShape& dpsidxi, DShape& d2psidxi) const
   {
     // If we are not storing the values return the calculated values
     if (D2Shape_lagrangian_stored_pt == 0)
@@ -1159,7 +1159,7 @@ namespace oomph
   /// case when a large number of elements have the same integration scheme
   //=======================================================================
   void StorableShapeSolidElementBase::set_dshape_lagrangian_stored_from_element(
-    StorableShapeSolidElementBase *const &element_pt)
+    StorableShapeSolidElementBase* const& element_pt)
   {
     set_shape_local_stored_from_element(element_pt);
 

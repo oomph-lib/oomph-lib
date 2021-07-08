@@ -49,9 +49,9 @@ namespace oomph
   template<unsigned DIM>
   void AdvectionDiffusionEquations<DIM>::
     fill_in_generic_residual_contribution_adv_diff(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix,
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
       unsigned flag)
   {
     // Find out how many nodes there are
@@ -250,8 +250,8 @@ namespace oomph
   /// nplot points in each coordinate direction
   //======================================================================
   template<unsigned DIM>
-  void AdvectionDiffusionEquations<DIM>::output(std::ostream &outfile,
-                                                const unsigned &nplot)
+  void AdvectionDiffusionEquations<DIM>::output(std::ostream& outfile,
+                                                const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(DIM);
@@ -300,8 +300,8 @@ namespace oomph
   /// nplot points in each coordinate direction
   //======================================================================
   template<unsigned DIM>
-  void AdvectionDiffusionEquations<DIM>::output(FILE *file_pt,
-                                                const unsigned &nplot)
+  void AdvectionDiffusionEquations<DIM>::output(FILE* file_pt,
+                                                const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(DIM);
@@ -337,8 +337,8 @@ namespace oomph
   //======================================================================
   template<unsigned DIM>
   void AdvectionDiffusionEquations<DIM>::output_fct(
-    std::ostream &outfile,
-    const unsigned &nplot,
+    std::ostream& outfile,
+    const unsigned& nplot,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
   {
     // Vector of local coordinates
@@ -387,10 +387,10 @@ namespace oomph
   //======================================================================
   template<unsigned DIM>
   void AdvectionDiffusionEquations<DIM>::compute_error(
-    std::ostream &outfile,
+    std::ostream& outfile,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-    double &error,
-    double &norm)
+    double& error,
+    double& norm)
   {
     // Initialise
     error = 0.0;

@@ -46,11 +46,11 @@ namespace oomph
   /// boundary idirect (L/R/D/B/F) at time level t (t=0: present; t>0:
   /// previous): f(s)
   //=================================================================
-  void WarpedCubeDomain::macro_element_boundary(const unsigned &t,
-                                                const unsigned &imacro,
-                                                const unsigned &idirect,
-                                                const Vector<double> &s,
-                                                Vector<double> &f)
+  void WarpedCubeDomain::macro_element_boundary(const unsigned& t,
+                                                const unsigned& imacro,
+                                                const unsigned& idirect,
+                                                const Vector<double>& s,
+                                                Vector<double>& f)
   {
     using namespace OcTreeNames;
 
@@ -104,9 +104,9 @@ namespace oomph
   /// \short Left boundary face
   /// zeta \f$ \in [-1,1]^2 \f$
   //=======================================================================
-  void WarpedCubeDomain::r_L(const unsigned &t,
-                             const Vector<double> &zeta,
-                             Vector<double> &f)
+  void WarpedCubeDomain::r_L(const unsigned& t,
+                             const Vector<double>& zeta,
+                             Vector<double>& f)
   {
     f[0] = -1.0;
     f[1] = zeta[0];
@@ -120,9 +120,9 @@ namespace oomph
   /// \short Right boundary face
   /// zeta \f$ \in [-1,1]^2 \f$
   //=======================================================================
-  void WarpedCubeDomain::r_R(const unsigned &t,
-                             const Vector<double> &zeta,
-                             Vector<double> &f)
+  void WarpedCubeDomain::r_R(const unsigned& t,
+                             const Vector<double>& zeta,
+                             Vector<double>& f)
   {
     f[0] = 1.0;
     f[1] = zeta[0];
@@ -136,9 +136,9 @@ namespace oomph
   /// \short Down boundary face
   /// zeta \f$ \in [-1,1]^2 \f$
   //=======================================================================
-  void WarpedCubeDomain::r_D(const unsigned &t,
-                             const Vector<double> &zeta,
-                             Vector<double> &f)
+  void WarpedCubeDomain::r_D(const unsigned& t,
+                             const Vector<double>& zeta,
+                             Vector<double>& f)
   {
     f[0] = zeta[0];
     f[1] = -1.0;
@@ -152,9 +152,9 @@ namespace oomph
   /// \short Up boundary face
   /// zeta \f$ \in [-1,1]^2 \f$
   //=======================================================================
-  void WarpedCubeDomain::r_U(const unsigned &t,
-                             const Vector<double> &zeta,
-                             Vector<double> &f)
+  void WarpedCubeDomain::r_U(const unsigned& t,
+                             const Vector<double>& zeta,
+                             Vector<double>& f)
   {
     f[0] = zeta[0];
     f[1] = 1.0;
@@ -168,9 +168,9 @@ namespace oomph
   /// \short Back boundary face
   /// zeta \f$ \in [-1,1]^2 \f$
   //=======================================================================
-  void WarpedCubeDomain::r_B(const unsigned &t,
-                             const Vector<double> &zeta,
-                             Vector<double> &f)
+  void WarpedCubeDomain::r_B(const unsigned& t,
+                             const Vector<double>& zeta,
+                             Vector<double>& f)
   {
     f[0] = zeta[0];
     f[1] = zeta[1];
@@ -184,9 +184,9 @@ namespace oomph
   /// \short Front boundary face
   /// zeta \f$ \in [-1,1]^2 \f$
   //=======================================================================
-  void WarpedCubeDomain::r_F(const unsigned &t,
-                             const Vector<double> &zeta,
-                             Vector<double> &f)
+  void WarpedCubeDomain::r_F(const unsigned& t,
+                             const Vector<double>& zeta,
+                             Vector<double>& f)
   {
     f[0] = zeta[0];
     f[1] = zeta[1];
@@ -199,7 +199,7 @@ namespace oomph
   //=======================================================================
   /// Warp the unit cube
   //=======================================================================
-  void WarpedCubeDomain::warp_it(Vector<double> &f)
+  void WarpedCubeDomain::warp_it(Vector<double>& f)
   {
     Vector<double> f_aux(f);
     double x = 0.5 * (1.0 + f_aux[0]);

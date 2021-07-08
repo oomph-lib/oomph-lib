@@ -60,7 +60,7 @@ namespace oomph
   private:
     /// \short Special solver for problems with 1 dof (MA42 can't handle this
     /// case so solve() forwards the "solve" to this function.
-    void solve_for_one_dof(Problem *const &problem_pt, DoubleVector &result);
+    void solve_for_one_dof(Problem* const& problem_pt, DoubleVector& result);
 
     /// Doc the solver stats or stay quiet?
     bool Doc_stats;
@@ -101,13 +101,13 @@ namespace oomph
     int Info[23];
 
     /// Workspace storage for MA42
-    double *W;
+    double* W;
 
     /// Size of the workspace array, W
     int Lw;
 
     /// Integer workspace storage for MA42
-    int *IW;
+    int* IW;
 
     /// Size of the integer workspace array
     int Liw;
@@ -139,13 +139,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    HSL_MA42(const HSL_MA42 &)
+    HSL_MA42(const HSL_MA42&)
     {
       BrokenCopy::broken_copy("HSL_MA42");
     }
 
     /// Broken assignment operator
-    void operator=(const HSL_MA42 &)
+    void operator=(const HSL_MA42&)
     {
       BrokenCopy::broken_assign("HSL_MA42");
     }
@@ -177,15 +177,15 @@ namespace oomph
     /// \short Solver: Takes pointer to problem and returns the results Vector
     /// which contains the solution of the linear system defined by
     /// the problem's fully assembled Jacobian and residual Vector.
-    void solve(Problem *const &problem_pt, DoubleVector &result);
+    void solve(Problem* const& problem_pt, DoubleVector& result);
 
     /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs
     /// vector and returns the solution of the linear system.
     /// Call the broken base-class version. If you want this, please implement
     /// it
-    void solve(DoubleMatrixBase *const &matrix_pt,
-               const DoubleVector &rhs,
-               DoubleVector &result)
+    void solve(DoubleMatrixBase* const& matrix_pt,
+               const DoubleVector& rhs,
+               DoubleVector& result)
     {
       LinearSolver::solve(matrix_pt, rhs, result);
     }
@@ -194,9 +194,9 @@ namespace oomph
     /// and rhs vector and returns the solution of the linear system
     /// Call the broken base-class version. If you want this, please
     /// implement it
-    void solve(DoubleMatrixBase *const &matrix_pt,
-               const Vector<double> &rhs,
-               Vector<double> &result)
+    void solve(DoubleMatrixBase* const& matrix_pt,
+               const Vector<double>& rhs,
+               Vector<double>& result)
     {
       LinearSolver::solve(matrix_pt, rhs, result);
     }
@@ -204,10 +204,10 @@ namespace oomph
     /// \short Return the solution to the linear system Ax = result, where
     /// A is the most recently factorised jacobian matrix of the problem
     /// problem_pt. The solution is returned in the result vector.
-    void resolve(const DoubleVector &rhs, DoubleVector &result);
+    void resolve(const DoubleVector& rhs, DoubleVector& result);
 
     /// \short Function to reorder the elements based on Sloan's algorithm
-    void reorder_elements(Problem *const &problem_pt);
+    void reorder_elements(Problem* const& problem_pt);
 
     /// \short Enable documentation of statistics
     void enable_doc_stats()
@@ -247,35 +247,35 @@ namespace oomph
 
     /// \short Factor to increase storage for lenbuf[0]; see MA42 documentation
     /// for details.
-    double &lenbuf_factor0()
+    double& lenbuf_factor0()
     {
       return Lenbuf_factor0;
     }
 
     /// \short Factor to increase storage for lenbuf[1]; see MA42 documentation
     /// for details.
-    double &lenbuf_factor1()
+    double& lenbuf_factor1()
     {
       return Lenbuf_factor1;
     }
 
     /// \short Factor to increase storage for lenbuf[2]; see MA42 documentation
     /// for details.
-    double &lenbuf_factor2()
+    double& lenbuf_factor2()
     {
       return Lenbuf_factor2;
     }
 
     /// \short Factor to increase storage for front size; see MA42 documentation
     /// for details.
-    double &front_factor()
+    double& front_factor()
     {
       return Front_factor;
     }
 
     /// \short Factor to increase the size of the direct access files;
     /// see MA42 documentation for details.
-    double &lenfle_factor()
+    double& lenfle_factor()
     {
       return Lenfle_factor;
     }

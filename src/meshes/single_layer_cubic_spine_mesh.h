@@ -57,18 +57,18 @@ namespace oomph
     /// lengths in x- and y- directions, height of layer, and pointer
     /// to timestepper (defaults to Steady timestepper)
     SingleLayerCubicSpineMesh(
-      const unsigned &nx,
-      const unsigned &ny,
-      const unsigned &nz,
-      const double &lx,
-      const double &ly,
-      const double &h,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper);
+      const unsigned& nx,
+      const unsigned& ny,
+      const unsigned& nz,
+      const double& lx,
+      const double& ly,
+      const double& h,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
     /// \short General node update function implements pure virtual function
     /// defined in SpineMesh base class and performs specific node update
     /// actions:  along vertical spines
-    virtual void spine_node_update(SpineNode *spine_node_pt)
+    virtual void spine_node_update(SpineNode* spine_node_pt)
     {
       // Get fraction along the spine
       double W = spine_node_pt->fraction();
@@ -81,7 +81,7 @@ namespace oomph
   protected:
     /// \short Helper function to actually build the single-layer spine mesh
     /// (called from various constructors)
-    virtual void build_single_layer_mesh(TimeStepper *time_stepper_pt);
+    virtual void build_single_layer_mesh(TimeStepper* time_stepper_pt);
   };
 
 } // namespace oomph

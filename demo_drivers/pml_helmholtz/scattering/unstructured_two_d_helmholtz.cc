@@ -91,7 +91,7 @@ public:
 
   /// \short Doc the solution. DocInfo object stores flags/labels for where the
   /// output gets written to
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// Create PML meshes
   void create_pml_meshes();
@@ -113,39 +113,39 @@ public:
 
 private:
   /// Pointer to the refineable "bulk" mesh
-  RefineableTriangleMesh<ELEMENT> *Bulk_mesh_pt;
+  RefineableTriangleMesh<ELEMENT>* Bulk_mesh_pt;
 
 #else
 
 private:
   /// Pointer to the "bulk" mesh
-  TriangleMesh<ELEMENT> *Bulk_mesh_pt;
+  TriangleMesh<ELEMENT>* Bulk_mesh_pt;
 
 #endif
 
   /// Pointer to the right PML mesh
-  Mesh *PML_right_mesh_pt;
+  Mesh* PML_right_mesh_pt;
 
   /// Pointer to the top PML mesh
-  Mesh *PML_top_mesh_pt;
+  Mesh* PML_top_mesh_pt;
 
   /// Pointer to the left PML mesh
-  Mesh *PML_left_mesh_pt;
+  Mesh* PML_left_mesh_pt;
 
   /// Pointer to the bottom PML mesh
-  Mesh *PML_bottom_mesh_pt;
+  Mesh* PML_bottom_mesh_pt;
 
   /// Pointer to the top right corner PML mesh
-  Mesh *PML_top_right_mesh_pt;
+  Mesh* PML_top_right_mesh_pt;
 
   /// Pointer to the top left corner PML mesh
-  Mesh *PML_top_left_mesh_pt;
+  Mesh* PML_top_left_mesh_pt;
 
   /// Pointer to the bottom right corner PML mesh
-  Mesh *PML_bottom_right_mesh_pt;
+  Mesh* PML_bottom_right_mesh_pt;
 
   /// Pointer to the bottom left corner PML mesh
-  Mesh *PML_bottom_left_mesh_pt;
+  Mesh* PML_bottom_left_mesh_pt;
 
   /// Trace file
   ofstream Trace_file;
@@ -165,14 +165,14 @@ PMLProblem<ELEMENT>::PMLProblem()
   double a = 0.2;
   double x_c = 0.0;
   double y_c = 0.0;
-  Circle *inner_circle_pt = new Circle(x_c, y_c, a);
+  Circle* inner_circle_pt = new Circle(x_c, y_c, a);
 
   // Outer boundary
   //---------------
-  TriangleMeshClosedCurve *outer_boundary_pt = 0;
+  TriangleMeshClosedCurve* outer_boundary_pt = 0;
 
   unsigned n_segments = 20;
-  Vector<TriangleMeshCurveSection *> outer_boundary_line_pt(4);
+  Vector<TriangleMeshCurveSection*> outer_boundary_line_pt(4);
 
   // Each polyline only has three vertices, provide storage for their
   // coordinates
@@ -231,7 +231,7 @@ PMLProblem<ELEMENT>::PMLProblem()
 
   // Inner circular boundary
   //------------------------
-  Vector<TriangleMeshCurveSection *> inner_boundary_line_pt(2);
+  Vector<TriangleMeshCurveSection*> inner_boundary_line_pt(2);
 
   // The intrinsic coordinates for the beginning and end of the curve
   double s_start = 0.0;
@@ -249,7 +249,7 @@ PMLProblem<ELEMENT>::PMLProblem()
 
   // Combine to hole
   //----------------
-  Vector<TriangleMeshClosedCurve *> hole_pt(1);
+  Vector<TriangleMeshClosedCurve*> hole_pt(1);
   Vector<double> hole_coords(2);
   hole_coords[0] = 0.0;
   hole_coords[1] = 0.0;
@@ -303,8 +303,8 @@ PMLProblem<ELEMENT>::PMLProblem()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to Helmholtz bulk element
-    PMLHelmholtzEquations<2> *el_pt =
-      dynamic_cast<PMLHelmholtzEquations<2> *>(mesh_pt()->element_pt(e));
+    PMLHelmholtzEquations<2>* el_pt =
+      dynamic_cast<PMLHelmholtzEquations<2>*>(mesh_pt()->element_pt(e));
 
     // Set the k_squared double pointer
     el_pt->k_squared_pt() = &GlobalParameters::K_squared;
@@ -380,8 +380,8 @@ void PMLProblem<ELEMENT>::actions_after_adapt()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to PMLHelmholtz bulk element
-    PMLHelmholtzEquations<2> *el_pt =
-      dynamic_cast<PMLHelmholtzEquations<2> *>(mesh_pt()->element_pt(e));
+    PMLHelmholtzEquations<2>* el_pt =
+      dynamic_cast<PMLHelmholtzEquations<2>*>(mesh_pt()->element_pt(e));
 
     // Set the frequency function pointer
     el_pt->k_squared_pt() = &GlobalParameters::K_squared;
@@ -411,7 +411,7 @@ void PMLProblem<ELEMENT>::apply_boundary_conditions()
     {
       if ((b == 0) || (b == 1))
       {
-        Node *nod_pt = Bulk_mesh_pt->boundary_node_pt(b, n);
+        Node* nod_pt = Bulk_mesh_pt->boundary_node_pt(b, n);
         nod_pt->pin(0);
         nod_pt->pin(1);
 
@@ -427,7 +427,7 @@ void PMLProblem<ELEMENT>::apply_boundary_conditions()
 /// Doc the solution: doc_info contains labels/output directory etc.
 //========================================================================
 template<class ELEMENT>
-void PMLProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void PMLProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file, some_file2;
   char filename[100];
@@ -587,7 +587,7 @@ void PMLProblem<ELEMENT>::create_pml_meshes()
 //==========start_of_main=================================================
 /// Solve 2D Helmholtz problem
 //========================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Set up the problem
   //------------------

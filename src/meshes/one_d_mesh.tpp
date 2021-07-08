@@ -39,7 +39,7 @@ namespace oomph
   /// The generic mesh construction routine --- this contains all the hard
   /// work and is called by all constructors
   template<class ELEMENT>
-  void OneDMesh<ELEMENT>::build_mesh(TimeStepper *time_stepper_pt)
+  void OneDMesh<ELEMENT>::build_mesh(TimeStepper* time_stepper_pt)
   {
     // Set the length of the domain
     Length = Xmax - Xmin;
@@ -56,7 +56,7 @@ namespace oomph
     // Read out the number of nodes in the element (the member function
     // nnode_1d() is implemented in QElement)
     const unsigned n_node =
-      dynamic_cast<ELEMENT *>(finite_element_pt(0))->nnode_1d();
+      dynamic_cast<ELEMENT*>(finite_element_pt(0))->nnode_1d();
 
     // We can now allocate storage for the pointers to the nodes in the mesh
     Node_pt.resize(1 + (n_node - 1) * N);

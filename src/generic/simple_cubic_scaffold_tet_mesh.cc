@@ -36,20 +36,20 @@ namespace oomph
   /// Scaffold mesh for cubic tet mesh.
   //===========================================================
   SimpleCubicScaffoldTetMesh::SimpleCubicScaffoldTetMesh(
-    const unsigned &n_x,
-    const unsigned &n_y,
-    const unsigned &n_z,
-    const double &l_x,
-    const double &l_y,
-    const double &l_z,
-    TimeStepper *time_stepper_pt)
+    const unsigned& n_x,
+    const unsigned& n_y,
+    const unsigned& n_z,
+    const double& l_x,
+    const double& l_y,
+    const double& l_z,
+    TimeStepper* time_stepper_pt)
   {
     // Storage for the pointers to the nodes
-    RankThreeTensor<Node *> vertex_node_pt(n_x + 1, n_y + 1, n_z + 1);
-    RankThreeTensor<Node *> left_face_node_pt(n_x + 1, n_y + 1, n_z + 1);
-    RankThreeTensor<Node *> front_face_node_pt(n_x + 1, n_y + 1, n_z + 1);
-    RankThreeTensor<Node *> down_face_node_pt(n_x + 1, n_y + 1, n_z + 1);
-    RankThreeTensor<Node *> central_node_pt(n_x, n_y, n_z);
+    RankThreeTensor<Node*> vertex_node_pt(n_x + 1, n_y + 1, n_z + 1);
+    RankThreeTensor<Node*> left_face_node_pt(n_x + 1, n_y + 1, n_z + 1);
+    RankThreeTensor<Node*> front_face_node_pt(n_x + 1, n_y + 1, n_z + 1);
+    RankThreeTensor<Node*> down_face_node_pt(n_x + 1, n_y + 1, n_z + 1);
+    RankThreeTensor<Node*> central_node_pt(n_x, n_y, n_z);
 
     // "Lower left" corner
     double x_0 = 0.0;
@@ -77,7 +77,7 @@ namespace oomph
 
     // Generate the vertex nodes of all cells
     //=======================================
-    Node *node_pt;
+    Node* node_pt;
     for (unsigned k = 0; k < n_z + 1; k++)
     {
       for (unsigned j = 0; j < n_y + 1; j++)
@@ -282,7 +282,7 @@ namespace oomph
     }
 
     // Loop over blocks and create elements
-    TElement<3, 2> *el_pt = 0;
+    TElement<3, 2>* el_pt = 0;
     for (unsigned k = 0; k < n_z; k++)
     {
       for (unsigned j = 0; j < n_y; j++)

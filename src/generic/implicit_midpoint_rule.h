@@ -47,7 +47,7 @@ namespace oomph
   {
   public:
     /// Constructor with initialisation
-    IMRBase(const bool &adaptive = false) :
+    IMRBase(const bool& adaptive = false) :
       TimeStepper(2, 1) // initialise weights later
     {
       Adaptive_Flag = adaptive;
@@ -109,11 +109,11 @@ namespace oomph
 
     /// \short This function advances the Data's time history so that
     /// we can move on to the next timestep
-    void shift_time_values(Data *const &data_pt);
+    void shift_time_values(Data* const& data_pt);
 
     /// \short This function advances the time history of the positions
     /// at a node.
-    void shift_time_positions(Node *const &node_pt);
+    void shift_time_positions(Node* const& node_pt);
 
     /// \short Set the weights for the error computation. This is not used
     /// by midpoint rule.
@@ -124,27 +124,27 @@ namespace oomph
     void set_predictor_weights() {}
 
     /// not implemented (??ds TODO)
-    void assign_initial_values_impulsive(Data *const &data_pt)
+    void assign_initial_values_impulsive(Data* const& data_pt)
     {
       std::string err = "Not implemented";
       throw OomphLibError(
         err, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
-    void assign_initial_positions_impulsive(Node *const &node_pt)
-    {
-      std::string err = "Not implemented";
-      throw OomphLibError(
-        err, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-    }
-
-    void calculate_predicted_positions(Node *const &node_pt)
+    void assign_initial_positions_impulsive(Node* const& node_pt)
     {
       std::string err = "Not implemented";
       throw OomphLibError(
         err, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    double temporal_error_in_position(Node *const &node_pt, const unsigned &i)
+    void calculate_predicted_positions(Node* const& node_pt)
+    {
+      std::string err = "Not implemented";
+      throw OomphLibError(
+        err, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+    }
+
+    double temporal_error_in_position(Node* const& node_pt, const unsigned& i)
     {
       std::string err = "Not implemented";
       throw OomphLibError(
@@ -152,8 +152,8 @@ namespace oomph
     }
 
     // Adaptivity
-    void calculate_predicted_values(Data *const &data_pt);
-    double temporal_error_in_value(Data *const &data_pt, const unsigned &i);
+    void calculate_predicted_values(Data* const& data_pt);
+    double temporal_error_in_value(Data* const& data_pt, const unsigned& i);
   };
 
   /// The "real" implementation of the implicit midpoint rule. Implemented
@@ -173,7 +173,7 @@ namespace oomph
     ///   jacobian/residual (all of these MUST be evaluated at the midpoint).
 
     /// Constructor with initialisation
-    IMR(const bool &adaptive = false) : IMRBase(adaptive) {}
+    IMR(const bool& adaptive = false) : IMRBase(adaptive) {}
 
     /// Destructor, predictor_pt handled by base
     virtual ~IMR() {}
@@ -202,10 +202,10 @@ namespace oomph
 
   private:
     /// Inaccessible copy constructor.
-    IMR(const IMR &dummy) {}
+    IMR(const IMR& dummy) {}
 
     /// Inaccessible assignment operator.
-    void operator=(const IMR &dummy) {}
+    void operator=(const IMR& dummy) {}
   };
 
   /// Implementation of implicit midpoint rule by taking half a step of bdf1
@@ -219,7 +219,7 @@ namespace oomph
   {
   public:
     /// Constructor with initialisation
-    IMRByBDF(const bool &adaptive = false) : IMRBase(adaptive)
+    IMRByBDF(const bool& adaptive = false) : IMRBase(adaptive)
     {
       Update_pinned = true;
     }
@@ -245,21 +245,21 @@ namespace oomph
     }
 
     /// Half the timestep before starting solve
-    void actions_before_timestep(Problem *problem_pt);
+    void actions_before_timestep(Problem* problem_pt);
 
     /// Take problem from t={n+1/2} to t=n+1 by algebraic update and restore
     /// time step.
-    void actions_after_timestep(Problem *problem_pt);
+    void actions_after_timestep(Problem* problem_pt);
 
     /// Should we update pinned variables after the half-step?
     bool Update_pinned;
 
   private:
     /// Inaccessible copy constructor.
-    IMRByBDF(const IMRByBDF &dummy) {}
+    IMRByBDF(const IMRByBDF& dummy) {}
 
     /// Inaccessible assignment operator.
-    void operator=(const IMRByBDF &dummy) {}
+    void operator=(const IMRByBDF& dummy) {}
   };
 
 } // namespace oomph

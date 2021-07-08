@@ -46,8 +46,8 @@ namespace oomph
   /// via addition to momentum equation (false). The default strong imposition
   /// is appropriate for static contact problems.
   //=========================================================================
-  void FluidInterfaceBoundingElement::set_contact_angle(double *const &angle_pt,
-                                                        const bool &strong)
+  void FluidInterfaceBoundingElement::set_contact_angle(double* const& angle_pt,
+                                                        const bool& strong)
   {
     // Set the pointer to the contact angle
     Contact_angle_pt = angle_pt;
@@ -60,7 +60,7 @@ namespace oomph
       Contact_angle_flag = 1;
 
       // Hijack the bulk element residuals
-      dynamic_cast<FluidInterfaceElement *>(bulk_element_pt())
+      dynamic_cast<FluidInterfaceElement*>(bulk_element_pt())
         ->hijack_kinematic_conditions(Bulk_node_number);
     }
     // Otherwise, we'll impose it weakly via the momentum equations.
@@ -84,10 +84,10 @@ namespace oomph
   //=========================================================================
   void PointFluidInterfaceBoundingElement::
     fill_in_generic_residual_contribution_interface_boundary(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag)
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag)
   {
     // Let's get the info from the parent
-    FiniteElement *parent_pt = bulk_element_pt();
+    FiniteElement* parent_pt = bulk_element_pt();
 
     // Find the dimension of the problem
     unsigned spatial_dim = this->nodal_dimension();
@@ -118,8 +118,8 @@ namespace oomph
     this->get_local_coordinate_in_bulk(s_local, s_parent);
 
     // Just get the outer unit normal
-    dynamic_cast<FaceElement *>(parent_pt)->outer_unit_normal(s_parent,
-                                                              unit_normal);
+    dynamic_cast<FaceElement*>(parent_pt)->outer_unit_normal(s_parent,
+                                                             unit_normal);
 
     // Find the dot product of the two vectors
     double dot = 0.0;
@@ -130,7 +130,7 @@ namespace oomph
 
     // Get the value of sigma from the parent
     double sigma_local =
-      dynamic_cast<FluidInterfaceElement *>(parent_pt)->sigma(s_parent);
+      dynamic_cast<FluidInterfaceElement*>(parent_pt)->sigma(s_parent);
 
     // Are we doing the weak form replacement
     if (Contact_angle_flag == 2)
@@ -220,10 +220,10 @@ namespace oomph
   //=========================================================================
   void LineFluidInterfaceBoundingElement::
     fill_in_generic_residual_contribution_interface_boundary(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag)
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag)
   {
     // Let's get the info from the parent
-    FiniteElement *parent_pt = bulk_element_pt();
+    FiniteElement* parent_pt = bulk_element_pt();
 
     // Find the dimension of the problem
     unsigned spatial_dim = this->nodal_dimension();
@@ -286,8 +286,8 @@ namespace oomph
       if (Contact_angle_flag == 2)
       {
         // Get the outer unit normal of the entire interface
-        dynamic_cast<FaceElement *>(parent_pt)->outer_unit_normal(s_parent,
-                                                                  unit_normal);
+        dynamic_cast<FaceElement*>(parent_pt)->outer_unit_normal(s_parent,
+                                                                 unit_normal);
 
         // Calculate the wall normal
         wall_unit_normal(x, wall_normal);
@@ -308,7 +308,7 @@ namespace oomph
 
         // Get the value of sigma from the parent
         const double sigma_local =
-          dynamic_cast<FluidInterfaceElement *>(parent_pt)->sigma(s_parent);
+          dynamic_cast<FluidInterfaceElement*>(parent_pt)->sigma(s_parent);
 
         // Get the capillary number
         const double ca_local = ca();
@@ -353,7 +353,7 @@ namespace oomph
 
         // Get the value of sigma from the parent
         const double sigma_local =
-          dynamic_cast<FluidInterfaceElement *>(parent_pt)->sigma(s_parent);
+          dynamic_cast<FluidInterfaceElement*>(parent_pt)->sigma(s_parent);
 
         // Get the capillary number
         const double ca_local = ca();
@@ -384,8 +384,8 @@ namespace oomph
       if (Contact_angle_flag == 1)
       {
         // Get the outer unit normal of the whole interface
-        dynamic_cast<FaceElement *>(parent_pt)->outer_unit_normal(s_parent,
-                                                                  unit_normal);
+        dynamic_cast<FaceElement*>(parent_pt)->outer_unit_normal(s_parent,
+                                                                 unit_normal);
 
         // Calculate the wall normal
         wall_unit_normal(x, wall_normal);
@@ -433,8 +433,8 @@ namespace oomph
   //================================================================
   /// Calculate the i-th velocity component at local coordinate s
   //================================================================
-  double FluidInterfaceElement::interpolated_u(const Vector<double> &s,
-                                               const unsigned &i)
+  double FluidInterfaceElement::interpolated_u(const Vector<double>& s,
+                                               const unsigned& i)
   {
     // Find number of nodes
     unsigned n_node = FiniteElement::nnode();
@@ -463,7 +463,7 @@ namespace oomph
   /// added from the specific elements
   //========================================================================
   void FluidInterfaceElement::fill_in_generic_residual_contribution_interface(
-    Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag)
+    Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag)
   {
     // Find out how many nodes there are
     unsigned n_node = this->nnode();
@@ -660,8 +660,8 @@ namespace oomph
   //========================================================
   /// Overload the output functions generically
   //=======================================================
-  void FluidInterfaceElement::output(std::ostream &outfile,
-                                     const unsigned &n_plot)
+  void FluidInterfaceElement::output(std::ostream& outfile,
+                                     const unsigned& n_plot)
   {
     const unsigned el_dim = this->dim();
     const unsigned n_dim = this->nodal_dimension();
@@ -697,7 +697,7 @@ namespace oomph
   //===========================================================================
   /// Overload the output function
   //===========================================================================
-  void FluidInterfaceElement::output(FILE *file_pt, const unsigned &n_plot)
+  void FluidInterfaceElement::output(FILE* file_pt, const unsigned& n_plot)
   {
     const unsigned el_dim = this->dim();
     const unsigned n_dim = this->nodal_dimension();
@@ -744,12 +744,12 @@ namespace oomph
   /// Specialise the surface derivatives for the line interface case
   //===================================================================
   double LineDerivatives::compute_surface_derivatives(
-    const Shape &psi,
-    const DShape &dpsids,
-    const DenseMatrix<double> &interpolated_t,
-    const Vector<double> &interpolated_x,
-    DShape &dpsidS,
-    DShape &dpsidS_div)
+    const Shape& psi,
+    const DShape& dpsids,
+    const DenseMatrix<double>& interpolated_t,
+    const Vector<double>& interpolated_x,
+    DShape& dpsidS,
+    DShape& dpsidS_div)
   {
     const unsigned n_shape = psi.nindex1();
     const unsigned n_dim = 2;
@@ -784,12 +784,12 @@ namespace oomph
   /// Specialise the surface derivatives for the axisymmetric interface case
   //===================================================================
   double AxisymmetricDerivatives::compute_surface_derivatives(
-    const Shape &psi,
-    const DShape &dpsids,
-    const DenseMatrix<double> &interpolated_t,
-    const Vector<double> &interpolated_x,
-    DShape &dpsidS,
-    DShape &dpsidS_div)
+    const Shape& psi,
+    const DShape& dpsids,
+    const DenseMatrix<double>& interpolated_t,
+    const Vector<double>& interpolated_x,
+    DShape& dpsidS,
+    DShape& dpsidS_div)
   {
     // Initially the same as the 2D case
     const unsigned n_shape = psi.nindex1();
@@ -832,12 +832,12 @@ namespace oomph
   /// Specialise the surface derivatives for 2D surface case
   //===================================================================
   double SurfaceDerivatives::compute_surface_derivatives(
-    const Shape &psi,
-    const DShape &dpsids,
-    const DenseMatrix<double> &interpolated_t,
-    const Vector<double> &interpolated_x,
-    DShape &dpsidS,
-    DShape &dpsidS_div)
+    const Shape& psi,
+    const DShape& dpsids,
+    const DenseMatrix<double>& interpolated_t,
+    const Vector<double>& interpolated_x,
+    DShape& dpsidS,
+    DShape& dpsidS_div)
   {
     const unsigned n_shape = psi.nindex1();
     const unsigned n_dim = 3;

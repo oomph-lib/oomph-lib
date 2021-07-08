@@ -98,8 +98,8 @@ namespace oomph
 
     // determine whether the F preconditioner is a block preconditioner (and
     // therefore a subsidiary preconditioner)
-    BlockPreconditioner<CRDoubleMatrix> *F_block_preconditioner_pt =
-      dynamic_cast<BlockPreconditioner<CRDoubleMatrix> *>(F_preconditioner_pt);
+    BlockPreconditioner<CRDoubleMatrix>* F_block_preconditioner_pt =
+      dynamic_cast<BlockPreconditioner<CRDoubleMatrix>*>(F_preconditioner_pt);
     F_preconditioner_is_block_preconditioner = true;
     if (F_block_preconditioner_pt == 0)
     {
@@ -108,7 +108,7 @@ namespace oomph
 
     // Get B (the divergence block)
     double t_get_B_start = TimingHelpers::timer();
-    CRDoubleMatrix *b_pt = new CRDoubleMatrix;
+    CRDoubleMatrix* b_pt = new CRDoubleMatrix;
     this->get_block(1, 0, *b_pt);
     double t_get_B_finish = TimingHelpers::timer();
     if (Doc_time)
@@ -118,19 +118,19 @@ namespace oomph
     }
 
     // the pointer for f
-    CRDoubleMatrix *f_pt = new CRDoubleMatrix;
+    CRDoubleMatrix* f_pt = new CRDoubleMatrix;
 
     // the pointer for the p matrix
-    CRDoubleMatrix *p_matrix_pt = new CRDoubleMatrix;
+    CRDoubleMatrix* p_matrix_pt = new CRDoubleMatrix;
 
     // the pointer for bt
-    CRDoubleMatrix *bt_pt = new CRDoubleMatrix;
+    CRDoubleMatrix* bt_pt = new CRDoubleMatrix;
 
     // if BFBt is to be formed
     if (Form_BFBt_product)
     {
       // If using scaling then replace B with Bt
-      CRDoubleMatrix *ivmm_pt = 0;
+      CRDoubleMatrix* ivmm_pt = 0;
       if (P_matrix_using_scaling)
       {
         // Assemble the ivmm diagonal
@@ -147,7 +147,7 @@ namespace oomph
 
         // assemble BQ (stored in B)
         double t_BQ_start = TimingHelpers::timer();
-        CRDoubleMatrix *temp_matrix_pt = new CRDoubleMatrix;
+        CRDoubleMatrix* temp_matrix_pt = new CRDoubleMatrix;
         b_pt->multiply(*ivmm_pt, *temp_matrix_pt);
         delete b_pt;
         b_pt = 0;
@@ -186,7 +186,7 @@ namespace oomph
       // required
       if (P_matrix_using_scaling)
       {
-        CRDoubleMatrix *temp_matrix_pt = new CRDoubleMatrix;
+        CRDoubleMatrix* temp_matrix_pt = new CRDoubleMatrix;
         double t_QBt_start = TimingHelpers::timer();
         ivmm_pt->multiply(*bt_pt, *temp_matrix_pt);
         delete bt_pt;
@@ -218,7 +218,7 @@ namespace oomph
 
       // Auxiliary matrix for intermediate results
       double t_aux_matrix_start = TimingHelpers::timer();
-      CRDoubleMatrix *aux_matrix_pt = new CRDoubleMatrix;
+      CRDoubleMatrix* aux_matrix_pt = new CRDoubleMatrix;
       f_pt->multiply(*bt_pt, *aux_matrix_pt);
       double t_aux_matrix_finish = TimingHelpers::timer();
       if (Doc_time)
@@ -240,7 +240,7 @@ namespace oomph
 
       // now form BFBt
       double t_E_matrix_start = TimingHelpers::timer();
-      CRDoubleMatrix *e_matrix_pt = new CRDoubleMatrix;
+      CRDoubleMatrix* e_matrix_pt = new CRDoubleMatrix;
       b_pt->multiply(*aux_matrix_pt, *e_matrix_pt);
       delete aux_matrix_pt;
       delete b_pt;
@@ -282,7 +282,7 @@ namespace oomph
     else
     {
       // get the inverse mass matrix (Q)
-      CRDoubleMatrix *ivmm_pt = 0;
+      CRDoubleMatrix* ivmm_pt = 0;
       if (P_matrix_using_scaling)
       {
         double ivmm_assembly_start_t = TimingHelpers::timer();
@@ -311,7 +311,7 @@ namespace oomph
       if (P_matrix_using_scaling)
       {
         double t_QBt_matrix_start = TimingHelpers::timer();
-        CRDoubleMatrix *qbt_pt = new CRDoubleMatrix;
+        CRDoubleMatrix* qbt_pt = new CRDoubleMatrix;
         ivmm_pt->multiply(*bt_pt, *qbt_pt);
         delete bt_pt;
         bt_pt = 0;
@@ -489,7 +489,7 @@ namespace oomph
   /// Apply preconditioner to r.
   //=======================================================================
   void PressureBasedSolidLSCPreconditioner::preconditioner_solve(
-    const DoubleVector &r, DoubleVector &z)
+    const DoubleVector& r, DoubleVector& z)
   {
 #ifdef PARANOID
     if (Preconditioner_has_been_setup == false)
@@ -691,7 +691,7 @@ namespace oomph
   /// mass matrix from the elemental contributions defined in
   /// SolidElementWithDiagonalMassMatrix::get_mass_matrix_diagonal(...).
   //========================================================================
-  CRDoubleMatrix *PressureBasedSolidLSCPreconditioner::
+  CRDoubleMatrix* PressureBasedSolidLSCPreconditioner::
     assemble_mass_matrix_diagonal()
   {
     // determine the rows required by this processor
@@ -700,7 +700,7 @@ namespace oomph
     unsigned nrow = this->block_distribution_pt(0)->nrow();
 
     // create storage for the diagonals
-    double *m_values = new double[nrow_local];
+    double* m_values = new double[nrow_local];
     for (unsigned i = 0; i < nrow_local; i++)
     {
       m_values[i] = 0;
@@ -740,25 +740,25 @@ namespace oomph
 
       // the diagonal mass matrix contributions that have been
       // classified and should be sent to another processor
-      Vector<double> *classified_contributions_send = new Vector<double>[nproc];
+      Vector<double>* classified_contributions_send = new Vector<double>[nproc];
 
       // the corresponding block indices
-      Vector<unsigned> *classified_indices_send = new Vector<unsigned>[nproc];
+      Vector<unsigned>* classified_indices_send = new Vector<unsigned>[nproc];
 
       // the maitrix contributions that cannot be classified by this processor
       // and therefore must be sent to another for classification
-      Vector<double> *unclassified_contributions_send =
+      Vector<double>* unclassified_contributions_send =
         new Vector<double>[nproc];
 
       // the corresponding global indices that require classification
-      Vector<unsigned> *unclassified_indices_send = new Vector<unsigned>[nproc];
+      Vector<unsigned>* unclassified_indices_send = new Vector<unsigned>[nproc];
 
       // get the master distribution pt
-      const LinearAlgebraDistribution *master_distribution_pt =
+      const LinearAlgebraDistribution* master_distribution_pt =
         this->master_distribution_pt();
 
       // get the displacement/position distribution pt
-      const LinearAlgebraDistribution *displ_dist_pt =
+      const LinearAlgebraDistribution* displ_dist_pt =
         this->block_distribution_pt(0);
 
       // get the contribution for each element
@@ -776,8 +776,8 @@ namespace oomph
           // mass matrix diagonal
           Vector<double> el_vmm_diagonal(el_dof);
 
-          SolidElementWithDiagonalMassMatrix *cast_el_pt =
-            dynamic_cast<SolidElementWithDiagonalMassMatrix *>(
+          SolidElementWithDiagonalMassMatrix* cast_el_pt =
+            dynamic_cast<SolidElementWithDiagonalMassMatrix*>(
               Solid_mesh_pt->element_pt(e));
 
           if (cast_el_pt == 0)
@@ -872,7 +872,7 @@ namespace oomph
 
       // first determine how many unclassified rows are to be sent to
       // each processor
-      unsigned *n_unclassified_send = new unsigned[nproc];
+      unsigned* n_unclassified_send = new unsigned[nproc];
       for (unsigned p = 0; p < nproc; p++)
       {
         if (p == my_rank)
@@ -886,7 +886,7 @@ namespace oomph
       }
 
       // then all-to-all number of unclassified to be sent / recv
-      unsigned *n_unclassified_recv = new unsigned[nproc];
+      unsigned* n_unclassified_recv = new unsigned[nproc];
       MPI_Alltoall(n_unclassified_send,
                    1,
                    MPI_UNSIGNED,
@@ -901,8 +901,8 @@ namespace oomph
 
       // allocate storage for the data to be recieved
       // and post the sends and recvs
-      Vector<double *> unclassified_contributions_recv(nproc);
-      Vector<unsigned *> unclassified_indices_recv(nproc);
+      Vector<double*> unclassified_contributions_recv(nproc);
+      Vector<unsigned*> unclassified_indices_recv(nproc);
       Vector<MPI_Request> unclassified_recv_requests;
       Vector<MPI_Request> unclassified_send_requests;
       Vector<unsigned> unclassified_recv_proc;
@@ -1069,7 +1069,7 @@ namespace oomph
 
       // first determine how many classified rows are to be sent to
       // each processor
-      unsigned *n_classified_send = new unsigned[nproc];
+      unsigned* n_classified_send = new unsigned[nproc];
       for (unsigned p = 0; p < nproc; p++)
       {
         if (p == my_rank)
@@ -1083,7 +1083,7 @@ namespace oomph
       }
 
       // then all-to-all com number of classified to be sent / recv
-      unsigned *n_classified_recv = new unsigned[nproc];
+      unsigned* n_classified_recv = new unsigned[nproc];
       MPI_Alltoall(n_classified_send,
                    1,
                    MPI_UNSIGNED,
@@ -1094,8 +1094,8 @@ namespace oomph
 
       // allocate storage for the data to be recieved
       // and post the sends and recvs
-      Vector<double *> classified_contributions_recv(nproc);
-      Vector<unsigned *> classified_indices_recv(nproc);
+      Vector<double*> classified_contributions_recv(nproc);
+      Vector<unsigned*> classified_indices_recv(nproc);
       Vector<MPI_Request> classified_recv_requests;
       Vector<MPI_Request> classified_send_requests;
       Vector<unsigned> classified_recv_proc;
@@ -1268,8 +1268,8 @@ namespace oomph
         //  mass matrix diagonal
         Vector<double> el_vmm_diagonal(el_dof);
 
-        SolidElementWithDiagonalMassMatrix *cast_el_pt =
-          dynamic_cast<SolidElementWithDiagonalMassMatrix *>(
+        SolidElementWithDiagonalMassMatrix* cast_el_pt =
+          dynamic_cast<SolidElementWithDiagonalMassMatrix*>(
             Solid_mesh_pt->element_pt(e));
 
         if (cast_el_pt == 0)
@@ -1321,8 +1321,8 @@ namespace oomph
     }
 
     // create column index and row start
-    int *m_column_index = new int[nrow_local];
-    int *m_row_start = new int[nrow_local + 1];
+    int* m_column_index = new int[nrow_local];
+    int* m_row_start = new int[nrow_local + 1];
     for (unsigned i = 0; i < nrow_local; i++)
     {
       m_values[i] = 1 / m_values[i];
@@ -1332,7 +1332,7 @@ namespace oomph
     m_row_start[nrow_local] = nrow_local;
 
     // build the matrix
-    CRDoubleMatrix *m_pt = new CRDoubleMatrix(this->block_distribution_pt(0));
+    CRDoubleMatrix* m_pt = new CRDoubleMatrix(this->block_distribution_pt(0));
     m_pt->build_without_copy(
       nrow, nrow_local, m_values, m_column_index, m_row_start);
 

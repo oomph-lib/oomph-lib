@@ -201,11 +201,11 @@ namespace oomph
     /// mesh boundaries at the same time.
     template<class BULK_ELEMENT, unsigned DIM>
     void setup_bulk_elements_adjacent_to_face_mesh(
-      Problem *problem_pt,
-      Vector<unsigned> &boundary_in_bulk_mesh,
-      Mesh *const &bulk_mesh_pt,
-      Vector<Mesh *> &face_mesh_pt,
-      const unsigned &interaction = 0);
+      Problem* problem_pt,
+      Vector<unsigned>& boundary_in_bulk_mesh,
+      Mesh* const& bulk_mesh_pt,
+      Vector<Mesh*>& face_mesh_pt,
+      const unsigned& interaction = 0);
 
     /// \short Identify the \c FaceElements (stored in the mesh pointed to by
     /// \c face_mesh_pt) that are adjacent to the bulk elements next to the
@@ -215,11 +215,11 @@ namespace oomph
     /// bulk elements are stored as their external elements.
     template<class BULK_ELEMENT, unsigned DIM>
     void setup_bulk_elements_adjacent_to_face_mesh(
-      Problem *problem_pt,
-      const unsigned &boundary_in_bulk_mesh,
-      Mesh *const &bulk_mesh_pt,
-      Mesh *const &face_mesh_pt,
-      const unsigned &interaction = 0);
+      Problem* problem_pt,
+      const unsigned& boundary_in_bulk_mesh,
+      Mesh* const& bulk_mesh_pt,
+      Mesh* const& face_mesh_pt,
+      const unsigned& interaction = 0);
 
     /// \short Set up the two-way multi-domain interactions for the
     /// problem pointed to by \c problem_pt.
@@ -234,11 +234,11 @@ namespace oomph
     /// only a single interaction.
     template<class ELEMENT_0, class ELEMENT_1>
     void setup_multi_domain_interactions(
-      Problem *problem_pt,
-      Mesh *const &first_mesh_pt,
-      Mesh *const &second_mesh_pt,
-      const unsigned &first_interaction = 0,
-      const unsigned &second_interaction = 0);
+      Problem* problem_pt,
+      Mesh* const& first_mesh_pt,
+      Mesh* const& second_mesh_pt,
+      const unsigned& first_interaction = 0,
+      const unsigned& second_interaction = 0);
 
     /// \short Function to set up the one-way multi-domain interaction for
     /// problems where the meshes pointed to by \c mesh_pt and \c
@@ -254,10 +254,10 @@ namespace oomph
     ///   set by the user if there is more than one mesh that provides sources
     ///   for the Mesh pointed to by mesh_pt.
     template<class EXT_ELEMENT>
-    void setup_multi_domain_interaction(Problem *problem_pt,
-                                        Mesh *const &mesh_pt,
-                                        Mesh *const &external_mesh_pt,
-                                        const unsigned &interaction_index = 0);
+    void setup_multi_domain_interaction(Problem* problem_pt,
+                                        Mesh* const& mesh_pt,
+                                        Mesh* const& external_mesh_pt,
+                                        const unsigned& interaction_index = 0);
 
     /// \short Function to set up the one-way multi-domain interaction for
     /// FSI-like problems.
@@ -284,11 +284,11 @@ namespace oomph
     ///   elements" for the Mesh pointed to by mesh_pt (e.g. in the case
     ///   when a beam or shell structure is loaded by fluid from both sides.)
     template<class EXT_ELEMENT, class FACE_ELEMENT_GEOM_OBJECT>
-    void setup_multi_domain_interaction(Problem *problem_pt,
-                                        Mesh *const &mesh_pt,
-                                        Mesh *const &external_mesh_pt,
-                                        Mesh *const &external_face_mesh_pt,
-                                        const unsigned &interaction_index = 0);
+    void setup_multi_domain_interaction(Problem* problem_pt,
+                                        Mesh* const& mesh_pt,
+                                        Mesh* const& external_mesh_pt,
+                                        Mesh* const& external_face_mesh_pt,
+                                        const unsigned& interaction_index = 0);
 
     /// \short Function to set up the one-way multi-domain interaction for
     /// FSI-like problems.
@@ -319,193 +319,193 @@ namespace oomph
     /// on the meshes contained in the Vector arguments.
     template<class EXT_ELEMENT, class FACE_ELEMENT_GEOM_OBJECT>
     void setup_multi_domain_interaction(
-      Problem *problem_pt,
-      const Vector<Mesh *> &mesh_pt,
-      Mesh *const &external_mesh_pt,
-      const Vector<Mesh *> &external_face_mesh_pt,
-      const unsigned &interaction_index = 0);
+      Problem* problem_pt,
+      const Vector<Mesh*>& mesh_pt,
+      Mesh* const& external_mesh_pt,
+      const Vector<Mesh*>& external_face_mesh_pt,
+      const unsigned& interaction_index = 0);
 
     /// Auxiliary helper function
     template<class EXT_ELEMENT, class GEOM_OBJECT>
     void aux_setup_multi_domain_interaction(
-      Problem *problem_pt,
-      Mesh *const &mesh_pt,
-      Mesh *const &external_mesh_pt,
-      const unsigned &interaction_index,
-      Mesh *const &external_face_mesh_pt = 0);
+      Problem* problem_pt,
+      Mesh* const& mesh_pt,
+      Mesh* const& external_mesh_pt,
+      const unsigned& interaction_index,
+      Mesh* const& external_face_mesh_pt = 0);
 
     /// Auxiliary helper function
     template<class EXT_ELEMENT, class GEOM_OBJECT>
     void aux_setup_multi_domain_interaction(
-      Problem *problem_pt,
-      const Vector<Mesh *> &mesh_pt,
-      Mesh *const &external_mesh_pt,
-      const unsigned &interaction_index,
-      const Vector<Mesh *> &external_face_mesh_pt);
+      Problem* problem_pt,
+      const Vector<Mesh*>& mesh_pt,
+      Mesh* const& external_mesh_pt,
+      const unsigned& interaction_index,
+      const Vector<Mesh*>& external_face_mesh_pt);
 
     /// \short Helper function to locate "local" zeta coordinates
     /// This is the vector-based version which operates simultaenously
     /// on the meshes contained in the Vectors.
     void locate_zeta_for_local_coordinates(
-      const Vector<Mesh *> &mesh_pt,
-      Mesh *const &external_mesh_pt,
-      Vector<MeshAsGeomObject *> &mesh_geom_obj_pt,
-      const unsigned &interaction_index);
+      const Vector<Mesh*>& mesh_pt,
+      Mesh* const& external_mesh_pt,
+      Vector<MeshAsGeomObject*>& mesh_geom_obj_pt,
+      const unsigned& interaction_index);
 
 #ifdef OOMPH_HAS_MPI
 
     /// \short Helper function to send any "missing" zeta coordinates to
     /// the next process and receive any coordinates from previous process
-    void send_and_receive_missing_zetas(Problem *problem_pt);
+    void send_and_receive_missing_zetas(Problem* problem_pt);
 
     /// \short Helper function to locate these "missing" zeta coordinates.
     /// This is the vector-based function which operates simultaneously
     /// on the meshes contained in the vectors.
     void locate_zeta_for_missing_coordinates(
-      int &iproc,
-      Mesh *const &external_mesh_pt,
-      Problem *problem_pt,
-      Vector<MeshAsGeomObject *> &mesh_geom_obj_pt);
+      int& iproc,
+      Mesh* const& external_mesh_pt,
+      Problem* problem_pt,
+      Vector<MeshAsGeomObject*>& mesh_geom_obj_pt);
 
     /// \short Helper function to send back any located information
-    void send_and_receive_located_info(int &iproc,
-                                       Mesh *const &external_mesh_pt,
-                                       Problem *problem_pt);
+    void send_and_receive_located_info(int& iproc,
+                                       Mesh* const& external_mesh_pt,
+                                       Problem* problem_pt);
 
     /// \short Create external (halo) elements on the loop process based on the
     /// information received from each locate_zeta call on other processes
     /// This is the vector-based function which operates simultaneously
     /// on the meshes contained in the vectors.
     template<class EXT_ELEMENT>
-    void create_external_halo_elements(int &iproc,
-                                       const Vector<Mesh *> &mesh_pt,
-                                       Mesh *const &external_mesh_pt,
-                                       Problem *problem_pt,
-                                       const unsigned &interaction_index);
+    void create_external_halo_elements(int& iproc,
+                                       const Vector<Mesh*>& mesh_pt,
+                                       Mesh* const& external_mesh_pt,
+                                       Problem* problem_pt,
+                                       const unsigned& interaction_index);
 
     // Helper functions for external haloed node identification
 
     /// \short Helper function to add external haloed nodes, inc. masters
     /// of external haloed nodes
-    void add_external_haloed_node_to_storage(int &iproc,
-                                             Node *nod_pt,
-                                             Problem *problem_pt,
-                                             Mesh *const &external_mesh_pt,
-                                             int &n_cont_inter_values);
+    void add_external_haloed_node_to_storage(int& iproc,
+                                             Node* nod_pt,
+                                             Problem* problem_pt,
+                                             Mesh* const& external_mesh_pt,
+                                             int& n_cont_inter_values);
 
     /// \short Recursively add any master nodes (and their master nodes etc)
     /// of external haloed nodes
     void recursively_add_masters_of_external_haloed_node(
-      int &iproc,
-      Node *nod_pt,
-      Problem *problem_pt,
-      Mesh *const &external_mesh_pt,
-      int &n_cont_inter_values);
+      int& iproc,
+      Node* nod_pt,
+      Problem* problem_pt,
+      Mesh* const& external_mesh_pt,
+      int& n_cont_inter_values);
 
     /// \short Helper function to add external haloed node that is not a master
-    void add_external_haloed_node_helper(int &iproc,
-                                         Node *nod_pt,
-                                         Problem *problem_pt,
-                                         Mesh *const &external_mesh_pt,
-                                         int &n_cont_inter_values);
+    void add_external_haloed_node_helper(int& iproc,
+                                         Node* nod_pt,
+                                         Problem* problem_pt,
+                                         Mesh* const& external_mesh_pt,
+                                         int& n_cont_inter_values);
 
     /// \short Helper function to add external haloed node that is a master
-    void add_external_haloed_master_node_helper(int &iproc,
-                                                Node *master_nod_pt,
-                                                Problem *problem_pt,
-                                                Mesh *const &external_mesh_pt,
-                                                int &n_cont_inter_values);
+    void add_external_haloed_master_node_helper(int& iproc,
+                                                Node* master_nod_pt,
+                                                Problem* problem_pt,
+                                                Mesh* const& external_mesh_pt,
+                                                int& n_cont_inter_values);
 
     /// \short Helper function to get the required nodal information from an
     /// external haloed node so that a fully-functional external halo
     /// node (and therefore element) can be created on the receiving process
-    void get_required_nodal_information_helper(int &iproc,
-                                               Node *nod_pt,
-                                               Problem *problem_pt,
-                                               Mesh *const &external_mesh_pt,
-                                               int &n_cont_inter_values);
+    void get_required_nodal_information_helper(int& iproc,
+                                               Node* nod_pt,
+                                               Problem* problem_pt,
+                                               Mesh* const& external_mesh_pt,
+                                               int& n_cont_inter_values);
 
     /// \short Helper function to get the required master nodal information from
     /// an external haloed master node so that a fully-functional external halo
     /// master node (and possible element) can be created on the receiving proc
     void get_required_master_nodal_information_helper(
-      int &iproc,
-      Node *master_nod_pt,
-      Problem *problem_pt,
-      Mesh *const &external_mesh_pt,
-      int &n_cont_inter_values);
+      int& iproc,
+      Node* master_nod_pt,
+      Problem* problem_pt,
+      Mesh* const& external_mesh_pt,
+      int& n_cont_inter_values);
 
     // Helper functions for external halo node identification
 
     /// \short Helper function to add external halo nodes, including any
     /// masters, based on information received from the haloed process
     template<class EXT_ELEMENT>
-    void add_external_halo_node_to_storage(Node *&new_nod_pt,
-                                           Mesh *const &external_mesh_pt,
-                                           unsigned &loc_p,
-                                           unsigned &node_index,
-                                           FiniteElement *const &new_el_pt,
-                                           int &n_cont_inter_values,
-                                           Problem *problem_pt);
+    void add_external_halo_node_to_storage(Node*& new_nod_pt,
+                                           Mesh* const& external_mesh_pt,
+                                           unsigned& loc_p,
+                                           unsigned& node_index,
+                                           FiniteElement* const& new_el_pt,
+                                           int& n_cont_inter_values,
+                                           Problem* problem_pt);
 
     /// \short Recursively add masters of external halo nodes (and their
     /// masters, etc) based on information received from the haloed process
     template<class EXT_ELEMENT>
     void recursively_add_masters_of_external_halo_node_to_storage(
-      Node *&new_nod_pt,
-      Mesh *const &external_mesh_pt,
-      unsigned &loc_p,
-      unsigned &node_index,
-      FiniteElement *const &new_el_pt,
-      int &n_cont_inter_values,
-      Problem *problem_pt);
+      Node*& new_nod_pt,
+      Mesh* const& external_mesh_pt,
+      unsigned& loc_p,
+      unsigned& node_index,
+      FiniteElement* const& new_el_pt,
+      int& n_cont_inter_values,
+      Problem* problem_pt);
 
     /// \short Helper function to add external halo node that is not a master
-    void add_external_halo_node_helper(Node *&new_nod_pt,
-                                       Mesh *const &external_mesh_pt,
-                                       unsigned &loc_p,
-                                       unsigned &node_index,
-                                       FiniteElement *const &new_el_pt,
-                                       int &n_cont_inter_values,
-                                       Problem *problem_pt);
+    void add_external_halo_node_helper(Node*& new_nod_pt,
+                                       Mesh* const& external_mesh_pt,
+                                       unsigned& loc_p,
+                                       unsigned& node_index,
+                                       FiniteElement* const& new_el_pt,
+                                       int& n_cont_inter_values,
+                                       Problem* problem_pt);
 
     /// \short Helper function to add external halo node that is a master
     template<class EXT_ELEMENT>
-    void add_external_halo_master_node_helper(Node *&new_master_nod_pt,
-                                              Node *&new_nod_pt,
-                                              Mesh *const &external_mesh_pt,
-                                              unsigned &loc_p,
-                                              int &n_cont_inter_values,
-                                              Problem *problem_pt);
+    void add_external_halo_master_node_helper(Node*& new_master_nod_pt,
+                                              Node*& new_nod_pt,
+                                              Mesh* const& external_mesh_pt,
+                                              unsigned& loc_p,
+                                              int& n_cont_inter_values,
+                                              Problem* problem_pt);
 
     /// \short Helper function which constructs a new external halo node
     /// (on an element) with the information sent from the haloed process
     void construct_new_external_halo_node_helper(
-      Node *&new_nod_pt,
-      unsigned &loc_p,
-      unsigned &node_index,
-      FiniteElement *const &new_el_pt,
-      Mesh *const &external_mesh_pt,
-      Problem *problem_pt);
+      Node*& new_nod_pt,
+      unsigned& loc_p,
+      unsigned& node_index,
+      FiniteElement* const& new_el_pt,
+      Mesh* const& external_mesh_pt,
+      Problem* problem_pt);
 
     /// \short Helper function which constructs a new external halo master node
     /// with the information sent from the haloed process
     template<class EXT_ELEMENT>
     void construct_new_external_halo_master_node_helper(
-      Node *&new_master_nod_pt,
-      Node *&nod_pt,
-      unsigned &loc_p,
-      Mesh *const &external_mesh_pt,
-      Problem *problem_pt);
+      Node*& new_master_nod_pt,
+      Node*& nod_pt,
+      unsigned& loc_p,
+      Mesh* const& external_mesh_pt,
+      Problem* problem_pt);
 
 #endif
 
     /// \short Helper function that computes the dimension of the elements
     /// within each of the specified meshes (and checks they are the same)
     /// Stores result in Dim.
-    void get_dim_helper(Problem *problem_pt,
-                        Mesh *const &mesh_pt,
-                        Mesh *const &external_mesh_pt);
+    void get_dim_helper(Problem* problem_pt,
+                        Mesh* const& mesh_pt,
+                        Mesh* const& external_mesh_pt);
 
     /// \short Helper function that clears all the intermediate information used
     /// during the external storage creation at the end of the procedure

@@ -69,7 +69,7 @@ namespace oomph
 
     /// Broken copy constructor
     RefineableQSpectralPoissonElement(
-      const RefineableQSpectralPoissonElement<DIM, NNODE_1D> &dummy)
+      const RefineableQSpectralPoissonElement<DIM, NNODE_1D>& dummy)
     {
       BrokenCopy::broken_copy("RefineableQuadPoissonElement");
     }
@@ -98,12 +98,12 @@ namespace oomph
     }
 
     /// \short Pointer to the j-th vertex node in the element
-    Node *vertex_node_pt(const unsigned &j) const
+    Node* vertex_node_pt(const unsigned& j) const
     {
       return QSpectralPoissonElement<DIM, NNODE_1D>::vertex_node_pt(j);
     }
 
-    void assign_all_generic_local_eqn_numbers(const bool &store_local_dof_pt)
+    void assign_all_generic_local_eqn_numbers(const bool& store_local_dof_pt)
     {
       RefineableElement::assign_all_generic_local_eqn_numbers(
         store_local_dof_pt);
@@ -117,8 +117,8 @@ namespace oomph
     /// built up incrementally as we descend through the
     /// call hierarchy of this function when called from
     /// Problem::describe_dofs(...)
-    void describe_local_dofs(std::ostream &out,
-                             const std::string &current_string) const
+    void describe_local_dofs(std::ostream& out,
+                             const std::string& current_string) const
     {
       RefineableElement::describe_local_dofs(out, current_string);
     }

@@ -61,8 +61,8 @@ namespace oomph
     /// to prescibe the node spacing in a non-uniformly spaced mesh - takes the
     /// position of a node (in macro element coordinates) in the uniformly
     /// spaced mesh and return the position in the non-uniformly spaced mesh
-    typedef void (*MeshSpacingFnPtr)(const Vector<double> &m_uniform_spacing,
-                                     Vector<double> &m_non_uniform_spacing);
+    typedef void (*MeshSpacingFnPtr)(const Vector<double>& m_uniform_spacing,
+                                     Vector<double>& m_non_uniform_spacing);
 
     /// \short Mesh Constructor (for a uniformly spaced mesh). Takes the
     /// following arguments :  nx :              number of elements in x
@@ -74,11 +74,11 @@ namespace oomph
     ///                                the x direction (default = false);
     ///              time_stepper_pt : pointer to the time stepper (default = no
     ///                                timestepper);
-    HermiteQuadMesh(const unsigned &nx,
-                    const unsigned &ny,
-                    TopologicallyRectangularDomain *domain,
-                    const bool &periodic_in_x = false,
-                    TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper)
+    HermiteQuadMesh(const unsigned& nx,
+                    const unsigned& ny,
+                    TopologicallyRectangularDomain* domain,
+                    const bool& periodic_in_x = false,
+                    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
     {
       // Mesh can only be built with 2D QHermiteElements.
       MeshChecker::assert_geometric_element<QHermiteElementBase, ELEMENT>(2);
@@ -114,12 +114,12 @@ namespace oomph
     ///                                         (default = false);
     ///                       time_stepper_pt : pointer to the time stepper
     ///                                         (default = notimestepper);
-    HermiteQuadMesh(const unsigned &nx,
-                    const unsigned &ny,
-                    TopologicallyRectangularDomain *domain,
+    HermiteQuadMesh(const unsigned& nx,
+                    const unsigned& ny,
+                    TopologicallyRectangularDomain* domain,
                     const MeshSpacingFnPtr spacing_fn,
-                    const bool &periodic_in_x = false,
-                    TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper)
+                    const bool& periodic_in_x = false,
+                    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
     {
       // Mesh can only be built with 2D QHermiteElements.
       MeshChecker::assert_geometric_element<QHermiteElementBase, ELEMENT>(2);
@@ -146,7 +146,7 @@ namespace oomph
     ~HermiteQuadMesh(){};
 
     /// Access function for number of elements in mesh in each dimension
-    unsigned &nelement_in_dim(const unsigned &d)
+    unsigned& nelement_in_dim(const unsigned& d)
     {
       return Nelement[d];
     }
@@ -154,9 +154,9 @@ namespace oomph
   private:
     /// \short returns the macro element position of the node that is the x-th
     /// node along from the LHS and the y-th node up from the lower edge
-    void macro_coordinate_position(const unsigned &node_num_x,
-                                   const unsigned &node_num_y,
-                                   Vector<double> &macro_element_position)
+    void macro_coordinate_position(const unsigned& node_num_x,
+                                   const unsigned& node_num_y,
+                                   Vector<double>& macro_element_position)
     {
       // compute macro element position in uniformly spaced mesh
       macro_element_position[0] = 2 * node_num_x / double(Nelement[0]) - 1;
@@ -173,18 +173,18 @@ namespace oomph
     /// \short sets the generalised position of the node (i.e. - x_i, dx_i/ds_0,
     /// dx_i/ds_1 & d2x_i/ds_0ds_1 for i = 1,2). Takes the x,y coordinates of
     /// the node from which its position can be determined.
-    void set_position_of_node(const unsigned &node_num_x,
-                              const unsigned &node_num_y,
-                              Node *node_pt);
+    void set_position_of_node(const unsigned& node_num_x,
+                              const unsigned& node_num_y,
+                              Node* node_pt);
 
     /// \short sets the generalised position of the node (i.e. - x_i, dx_i/ds_0,
     /// dx_i/ds_1 & d2x_i/ds_0ds_1 for i = 1,2). Takes the x,y coordinates of
     /// the node from which its position can be determined. Also sets
     /// coordinates on boundary vector for the node to be the generalised
     /// position of the node in macro element coordinates
-    void set_position_of_boundary_node(const unsigned &node_num_x,
-                                       const unsigned &node_num_y,
-                                       BoundaryNode<Node> *node_pt);
+    void set_position_of_boundary_node(const unsigned& node_num_x,
+                                       const unsigned& node_num_y,
+                                       BoundaryNode<Node>* node_pt);
 
     /// \short computes the generalised position of the node at position
     /// (node_num_x, node_num_y) in the macro element coordinate scheme.
@@ -193,12 +193,12 @@ namespace oomph
     ///                        2 - dm_i/ds_1
     ///                        3 - d2m_i/ds_0ds_1    (where i is index 1 of
     ///                        m_gen)
-    void generalised_macro_element_position_of_node(const unsigned &node_num_x,
-                                                    const unsigned &node_num_y,
-                                                    DenseMatrix<double> &m_gen);
+    void generalised_macro_element_position_of_node(const unsigned& node_num_x,
+                                                    const unsigned& node_num_y,
+                                                    DenseMatrix<double>& m_gen);
 
     /// \short Generic mesh construction function to build the mesh
-    virtual void build_mesh(TimeStepper *time_stepper_pt);
+    virtual void build_mesh(TimeStepper* time_stepper_pt);
 
     /// Setup lookup schemes which establish whic elements are located
     /// next to mesh's boundaries (wrapper to suppress doc).
@@ -220,7 +220,7 @@ namespace oomph
     /// boundary. This is required when hijacking the BiharmonicElement to apply
     /// the BiharmonicFluidBoundaryElement in
     /// BiharmonicFluidProblem::impose_traction_free_edge(...)
-    virtual void setup_boundary_element_info(std::ostream &outfile);
+    virtual void setup_boundary_element_info(std::ostream& outfile);
 
     /// \short number of elements in each coordinate direction
     Vector<unsigned> Nelement;
@@ -231,7 +231,7 @@ namespace oomph
 
     /// \short Pointer to the topologically rectangular domain which prescribes
     /// the problem domain
-    TopologicallyRectangularDomain *Domain_pt;
+    TopologicallyRectangularDomain* Domain_pt;
 
     /// non uniform mesh spacing function pointer
     MeshSpacingFnPtr Node_spacing_fn;

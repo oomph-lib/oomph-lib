@@ -36,10 +36,10 @@ namespace oomph
   /// global_nrow as arguments. If global_nrow is not provided or equal to
   /// 0 then it is computed automatically
   //============================================================================
-  void LinearAlgebraDistribution::build(const OomphCommunicator *const comm_pt,
-                                        const unsigned &first_row,
-                                        const unsigned &local_nrow,
-                                        const unsigned &global_nrow)
+  void LinearAlgebraDistribution::build(const OomphCommunicator* const comm_pt,
+                                        const unsigned& first_row,
+                                        const unsigned& local_nrow,
+                                        const unsigned& global_nrow)
   {
     // copy the communicator
     delete Comm_pt;
@@ -176,9 +176,9 @@ namespace oomph
   /// global_nrow/n_proc, processor 1 holds the next
   /// global_nrow/n_proc and so on...
   //============================================================================
-  void LinearAlgebraDistribution::build(const OomphCommunicator *const comm_pt,
-                                        const unsigned &global_nrow,
-                                        const bool &distribute)
+  void LinearAlgebraDistribution::build(const OomphCommunicator* const comm_pt,
+                                        const unsigned& global_nrow,
+                                        const bool& distribute)
   {
     // copy the communicator
     delete Comm_pt;
@@ -227,7 +227,7 @@ namespace oomph
   /// helper method for the =assignment operator and copy constructor
   //============================================================================
   void LinearAlgebraDistribution::build(
-    const LinearAlgebraDistribution &new_dist)
+    const LinearAlgebraDistribution& new_dist)
   {
     // delete the existing storage
     First_row.clear();
@@ -268,7 +268,7 @@ namespace oomph
   /// operator==
   //============================================================================
   bool LinearAlgebraDistribution::operator==(
-    const LinearAlgebraDistribution &other_dist) const
+    const LinearAlgebraDistribution& other_dist) const
   {
 #ifdef OOMPH_HAS_MPI
     // compare the communicators
@@ -317,8 +317,8 @@ namespace oomph
   //=============================================================================
   /// output operator
   //=============================================================================
-  std::ostream &operator<<(std::ostream &stream,
-                           LinearAlgebraDistribution &dist)
+  std::ostream& operator<<(std::ostream& stream,
+                           LinearAlgebraDistribution& dist)
   {
     stream << "nrow()=" << dist.nrow() << ", first_row()=" << dist.first_row()
            << ", nrow_local()=" << dist.nrow_local()
@@ -367,8 +367,8 @@ namespace oomph
     /// creating the Vector of LinearAlgebraDistribution objects.
     //===========================================================================
     void concatenate(
-      const Vector<LinearAlgebraDistribution *> &in_distribution_pt,
-      LinearAlgebraDistribution &out_distribution)
+      const Vector<LinearAlgebraDistribution*>& in_distribution_pt,
+      LinearAlgebraDistribution& out_distribution)
     {
       // How many distributions are in in_distribution?
       unsigned ndistributions = in_distribution_pt.size();
@@ -469,7 +469,7 @@ namespace oomph
 #endif
 
       // Get the communicator pointer
-      const OomphCommunicator *const comm_pt =
+      const OomphCommunicator* const comm_pt =
         in_distribution_pt[0]->communicator_pt();
 
       // Number of processors
@@ -499,7 +499,7 @@ namespace oomph
         // My rank
         unsigned my_rank = comm_pt->my_rank();
 
-        unsigned *out_nrow_local_all = new unsigned[nproc];
+        unsigned* out_nrow_local_all = new unsigned[nproc];
         MPI_Allgather(&out_nrow_local,
                       1,
                       MPI_UNSIGNED,

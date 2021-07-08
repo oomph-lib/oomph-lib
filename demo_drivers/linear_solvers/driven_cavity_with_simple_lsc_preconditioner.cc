@@ -52,7 +52,7 @@ class SimpleLSCPreconditioner : public BlockPreconditioner<CRDoubleMatrix>
 {
 public:
   /// Constructor - sets defaults for control flags
-  NavierStokesSchurComplementPreconditioner(Problem *problem_pt) :
+  NavierStokesSchurComplementPreconditioner(Problem* problem_pt) :
     BlockPreconditioner<CRDoubleMatrix>(), Problem_pt(problem_pt)
   {
     // resize the mesh pt
@@ -75,13 +75,13 @@ public:
 
   /// Broken copy constructor
   NavierStokesSchurComplementPreconditioner(
-    const NavierStokesSchurComplementPreconditioner &)
+    const NavierStokesSchurComplementPreconditioner&)
   {
     BrokenCopy::broken_copy("NavierStokesSchurComplementPreconditioner");
   }
 
   /// Broken assignment operator
-  void operator=(const NavierStokesSchurComplementPreconditioner &)
+  void operator=(const NavierStokesSchurComplementPreconditioner&)
   {
     BrokenCopy::broken_assign("NavierStokesSchurComplementPreconditioner");
   }
@@ -94,11 +94,11 @@ public:
   // hierher using Preconditioner::setup;
 
   /// Apply preconditioner to Vector r
-  void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+  void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
   /// Specify the mesh containing the block-preconditionable Navier-Stokes
   /// elements.
-  void set_navier_stokes_mesh(Mesh *mesh_pt)
+  void set_navier_stokes_mesh(Mesh* mesh_pt)
   {
     Navier_stokes_mesh_pt = mesh_pt;
   }
@@ -113,10 +113,10 @@ private:
   // Pointers to preconditioner (=inexact solver) objects
   // -----------------------------------------------------
   /// Pointer to the 'preconditioner' for the pressure matrix
-  Preconditioner *P_preconditioner_pt;
+  Preconditioner* P_preconditioner_pt;
 
   /// Pointer to the 'preconditioner' for the F matrix
-  Preconditioner *F_preconditioner_pt;
+  Preconditioner* F_preconditioner_pt;
 
   // hierher
   // /// \short Helper function to assemble the inverse diagonals of the
@@ -136,17 +136,17 @@ private:
   bool F_preconditioner_is_block_preconditioner; // hierher
 
   /// MatrixVectorProduct operator for Qv^{-1} Bt
-  MatrixVectorProduct *QBt_mat_vec_pt;
+  MatrixVectorProduct* QBt_mat_vec_pt;
 
   /// MatrixVectorProduct operator for Bt
-  MatrixVectorProduct *Bt_mat_vec_pt;
+  MatrixVectorProduct* Bt_mat_vec_pt;
 
   /// MatrixVectorProduct operator for F
-  MatrixVectorProduct *F_mat_vec_pt;
+  MatrixVectorProduct* F_mat_vec_pt;
 
   /// \short the pointer to the mesh of block preconditionable Navier
   /// Stokes elements.
-  Mesh *Navier_stokes_mesh_pt;
+  Mesh* Navier_stokes_mesh_pt;
 };
 
 //===========================================================================
@@ -189,7 +189,7 @@ void NavierStokesSchurComplementPreconditioner::setup()
 
   // In comes the current Jacobian. Recast it to a CR double matrix;
   // shout if that can't be done.
-  CRDoubleMatrix *cr_matrix_pt = dynamic_cast<CRDoubleMatrix *>(matrix_pt());
+  CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt());
 
 #ifdef PARANOID
   if (cr_matrix_pt == 0)
@@ -225,7 +225,7 @@ void NavierStokesSchurComplementPreconditioner::setup()
   this->block_setup(dof_to_block_map);
 
   // Get B (the divergence block)
-  CRDoubleMatrix *b_pt = 0;
+  CRDoubleMatrix* b_pt = 0;
   this->get_block(1, 0, b_pt);
 
   // // get the inverse velocity and pressure mass matrices
@@ -250,12 +250,12 @@ void NavierStokesSchurComplementPreconditioner::setup()
   //  }
 
   // Get gradient matrix Bt
-  CRDoubleMatrix *bt_pt = 0;
+  CRDoubleMatrix* bt_pt = 0;
   this->get_block(0, 1, bt_pt);
 
   // Multiply inverse velocity mass matrix by gradient matrix B^T
   double t_QBt_matrix_start = TimingHelpers::timer();
-  CRDoubleMatrix *qbt_pt = new CRDoubleMatrix;
+  CRDoubleMatrix* qbt_pt = new CRDoubleMatrix;
   inv_v_mass_pt->multiply(*bt_pt, *qbt_pt);
   delete bt_pt;
 
@@ -280,7 +280,7 @@ void NavierStokesSchurComplementPreconditioner::setup()
   delete bt_pt;
 
   // Get momentum block F
-  CRDoubleMatrix *f_pt = 0;
+  CRDoubleMatrix* f_pt = 0;
   this->get_block(0, 0, f_pt);
 
   // form the matrix vector product helper
@@ -364,7 +364,7 @@ void NavierStokesSchurComplementPreconditioner::setup()
 /// Apply preconditioner to r.
 //=======================================================================
 void NavierStokesSchurComplementPreconditioner::preconditioner_solve(
-  const DoubleVector &r, DoubleVector &z)
+  const DoubleVector& r, DoubleVector& z)
 {
 #ifdef PARANOID
   if (Preconditioner_has_been_setup == false)
@@ -563,7 +563,7 @@ namespace oomph
     /// (Function can obviously only be called if the equation numbering
     /// scheme has been set up.)
     void get_dof_numbers_for_unknowns(
-      std::list<std::pair<unsigned long, unsigned>> &dof_lookup_list) const
+      std::list<std::pair<unsigned long, unsigned>>& dof_lookup_list) const
     {
       // number of nodes
       unsigned n_node = this->nnode();
@@ -630,7 +630,7 @@ namespace Global_Physical_Variables
 //=============================================================================
 namespace Hypre_Subsidiary_Preconditioner_Helper
 {
-  Preconditioner *set_hypre_preconditioner()
+  Preconditioner* set_hypre_preconditioner()
   {
     return new HyprePreconditioner;
   }
@@ -668,12 +668,12 @@ public:
   };
 
   /// Fix pressure in element e at pressure dof pdof and set to pvalue
-  void fix_pressure(const unsigned &e,
-                    const unsigned &pdof,
-                    const double &pvalue)
+  void fix_pressure(const unsigned& e,
+                    const unsigned& pdof,
+                    const double& pvalue)
   {
     // Cast to full element type and fix the pressure at that element
-    dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e))
+    dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))
       ->fix_pressure(pdof, pvalue);
   } // end of fix_pressure
 
@@ -713,29 +713,29 @@ public:
   } // end_of_actions_before_newton_solve
 
   // Access function for the specific mesh
-  SimpleRectangularQuadMesh<ELEMENT> *mesh_pt()
+  SimpleRectangularQuadMesh<ELEMENT>* mesh_pt()
   {
     // Upcast from pointer to the Mesh base class to the specific
     // element type that we're using here.
-    return dynamic_cast<SimpleRectangularQuadMesh<ELEMENT> *>(
+    return dynamic_cast<SimpleRectangularQuadMesh<ELEMENT>*>(
       Problem::mesh_pt());
   }
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 private:
   /// oomph-lib iterative linear solver
-  IterativeLinearSolver *Solver_pt;
+  IterativeLinearSolver* Solver_pt;
 
   /// Preconditioner
-  NavierStokesSchurComplementPreconditioner *Prec_pt;
+  NavierStokesSchurComplementPreconditioner* Prec_pt;
 
   /// Inexact solver for P block
-  Preconditioner *P_matrix_preconditioner_pt;
+  Preconditioner* P_matrix_preconditioner_pt;
 
   /// Inexact solver for F block
-  Preconditioner *F_matrix_preconditioner_pt;
+  Preconditioner* F_matrix_preconditioner_pt;
 
 }; // end_of_problem_class
 
@@ -809,7 +809,7 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -853,13 +853,13 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem()
 
       // Set parameters for use as preconditioner on Poisson-type problem
       Hypre_default_settings::set_defaults_for_2D_poisson_problem(
-        static_cast<HyprePreconditioner *>(P_matrix_preconditioner_pt));
+        static_cast<HyprePreconditioner*>(P_matrix_preconditioner_pt));
 
       // Use Hypre for the Schur complement block
       Prec_pt->set_p_preconditioner(P_matrix_preconditioner_pt);
 
       // Shut up!
-      static_cast<HyprePreconditioner *>(P_matrix_preconditioner_pt)
+      static_cast<HyprePreconditioner*>(P_matrix_preconditioner_pt)
         ->disable_doc_time();
     }
 #endif
@@ -877,7 +877,7 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem()
 #ifndef OOMPH_HAS_MPI
       if (use_hypre_for_momentum)
       {
-        dynamic_cast<BlockDiagonalPreconditioner<CRDoubleMatrix> *>(
+        dynamic_cast<BlockDiagonalPreconditioner<CRDoubleMatrix>*>(
           F_matrix_preconditioner_pt)
           ->set_subsidiary_preconditioner_function(
             Hypre_Subsidiary_Preconditioner_Helper::set_hypre_preconditioner);
@@ -898,13 +898,13 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem()
         F_matrix_preconditioner_pt = new HyprePreconditioner;
 
         // Shut up!
-        static_cast<HyprePreconditioner *>(F_matrix_preconditioner_pt)
+        static_cast<HyprePreconditioner*>(F_matrix_preconditioner_pt)
           ->disable_doc_time();
 
         // Set parameters for use as preconditioner in for momentum
         // block in Navier-Stokes problem
         Hypre_default_settings::set_defaults_for_navier_stokes_momentum_block(
-          static_cast<HyprePreconditioner *>(F_matrix_preconditioner_pt));
+          static_cast<HyprePreconditioner*>(F_matrix_preconditioner_pt));
 
         // Use Hypre for momentum block
         Prec_pt->set_f_preconditioner(F_matrix_preconditioner_pt);
@@ -923,7 +923,7 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void RectangularDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void RectangularDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -951,7 +951,7 @@ void RectangularDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
 /// and flag to indicate if iterative solver is used.
 /// Multiplier and flag both default to 1.
 //=====================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Label for output
   DocInfo doc_info;

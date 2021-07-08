@@ -50,14 +50,14 @@ namespace oomph
   {
   public:
     /// Source function pointer typedef
-    typedef void (*SourceFctPt)(const double &time,
-                                const Vector<double> &x,
-                                Vector<double> &f);
+    typedef void (*SourceFctPt)(const double& time,
+                                const Vector<double>& x,
+                                Vector<double>& f);
 
     /// Mass source function pointer typedef
-    typedef void (*MassSourceFctPt)(const double &time,
-                                    const Vector<double> &x,
-                                    double &f);
+    typedef void (*MassSourceFctPt)(const double& time,
+                                    const Vector<double>& x,
+                                    double& f);
 
     /// Constructor
     PoroelasticityEquations() :
@@ -74,67 +74,67 @@ namespace oomph
     }
 
     /// Access function for timescale ratio (nondim density)
-    const double &lambda_sq() const
+    const double& lambda_sq() const
     {
       return *Lambda_sq_pt;
     }
 
     /// Access function for pointer to timescale ratio (nondim density)
-    double *&lambda_sq_pt()
+    double*& lambda_sq_pt()
     {
       return Lambda_sq_pt;
     }
 
     /// Access function for the density ratio
-    const double &density_ratio() const
+    const double& density_ratio() const
     {
       return *Density_ratio_pt;
     }
 
     /// Access function for pointer to the density ratio
-    double *&density_ratio_pt()
+    double*& density_ratio_pt()
     {
       return Density_ratio_pt;
     }
 
     /// Access function for the nondim inverse permeability
-    const double &k_inv() const
+    const double& k_inv() const
     {
       return *K_inv_pt;
     }
 
     /// Access function for pointer to the nondim inverse permeability
-    double *&k_inv_pt()
+    double*& k_inv_pt()
     {
       return K_inv_pt;
     }
 
     /// Access function for alpha
-    const double &alpha() const
+    const double& alpha() const
     {
       return *Alpha_pt;
     }
 
     /// Access function for pointer to alpha
-    double *&alpha_pt()
+    double*& alpha_pt()
     {
       return Alpha_pt;
     }
 
     /// Access function for the porosity
-    const double &porosity() const
+    const double& porosity() const
     {
       return *Porosity_pt;
     }
 
     /// Access function for pointer to the porosity
-    double *&porosity_pt()
+    double*& porosity_pt()
     {
       return Porosity_pt;
     }
 
     /// Access function: Pointer to solid force function
-    SourceFctPt &force_solid_fct_pt()
+    SourceFctPt& force_solid_fct_pt()
     {
       return Force_solid_fct_pt;
     }
@@ -146,7 +146,7 @@ namespace oomph
     }
 
     /// Access function: Pointer to fluid force function
-    SourceFctPt &force_fluid_fct_pt()
+    SourceFctPt& force_fluid_fct_pt()
     {
       return Force_fluid_fct_pt;
     }
@@ -158,7 +158,7 @@ namespace oomph
     }
 
     /// Access function: Pointer to mass source function
-    MassSourceFctPt &mass_source_fct_pt()
+    MassSourceFctPt& mass_source_fct_pt()
     {
       return Mass_source_fct_pt;
     }
@@ -171,9 +171,9 @@ namespace oomph
 
     /// \short Indirect access to the solid force function - returns 0 if no
     /// forcing function has been set
-    void force_solid(const double &time,
-                     const Vector<double> &x,
-                     Vector<double> &b) const
+    void force_solid(const double& time,
+                     const Vector<double>& x,
+                     Vector<double>& b) const
     {
       // If no function has been set, return zero vector
       if (Force_solid_fct_pt == 0)
@@ -193,9 +193,9 @@ namespace oomph
 
     /// \short Indirect access to the fluid forcing function - returns 0 if no
     /// forcing function has been set
-    void force_fluid(const double &time,
-                     const Vector<double> &x,
-                     Vector<double> &b) const
+    void force_fluid(const double& time,
+                     const Vector<double>& x,
+                     Vector<double>& b) const
     {
       // If no function has been set, return zero vector
       if (Force_fluid_fct_pt == 0)
@@ -215,9 +215,9 @@ namespace oomph
 
     /// \short Indirect access to the mass source function - returns 0 if no
     /// mass source function has been set
-    void mass_source(const double &time,
-                     const Vector<double> &x,
-                     double &b) const
+    void mass_source(const double& time,
+                     const Vector<double>& x,
+                     double& b) const
     {
       // If no function has been set, return zero vector
       if (Mass_source_fct_pt == 0)
@@ -231,63 +231,63 @@ namespace oomph
     }
 
     /// Return the pointer to the elasticity_tensor
-    ElasticityTensor *&elasticity_tensor_pt()
+    ElasticityTensor*& elasticity_tensor_pt()
     {
       return Elasticity_tensor_pt;
     }
 
     /// Access function to the entries in the elasticity tensor
-    const double E(const unsigned &i,
-                   const unsigned &j,
-                   const unsigned &k,
-                   const unsigned &l) const
+    const double E(const unsigned& i,
+                   const unsigned& j,
+                   const unsigned& k,
+                   const unsigned& l) const
     {
       return (*Elasticity_tensor_pt)(i, j, k, l);
     }
 
     /// \short Return the Cauchy stress tensor, as calculated
     /// from the elasticity tensor at specified local coordinate
-    void get_stress(const Vector<double> &s, DenseMatrix<double> &sigma) const;
+    void get_stress(const Vector<double>& s, DenseMatrix<double>& sigma) const;
 
     /// \short Return the strain tensor
-    void get_strain(const Vector<double> &s, DenseMatrix<double> &strain) const;
+    void get_strain(const Vector<double>& s, DenseMatrix<double>& strain) const;
 
     /// Number of values required at node n
-    virtual unsigned required_nvalue(const unsigned &n) const = 0;
+    virtual unsigned required_nvalue(const unsigned& n) const = 0;
 
     /// Return the nodal index of the n-th solid displacement unknown
-    virtual unsigned u_index(const unsigned &n) const = 0;
+    virtual unsigned u_index(const unsigned& n) const = 0;
 
     /// Return the equation number of the n-th edge (flux) degree of freedom
-    virtual int q_edge_local_eqn(const unsigned &n) const = 0;
+    virtual int q_edge_local_eqn(const unsigned& n) const = 0;
 
     /// Return the equation number of the n-th internal (moment) degree of
     /// freedom
-    virtual int q_internal_local_eqn(const unsigned &n) const = 0;
+    virtual int q_internal_local_eqn(const unsigned& n) const = 0;
 
     /// Return the nodal index at which the nth edge unknown is stored
-    virtual unsigned q_edge_index(const unsigned &n) const = 0;
+    virtual unsigned q_edge_index(const unsigned& n) const = 0;
 
     /// \short Return the index of the internal data where the q_internal
     /// degrees of freedom are stored
     virtual unsigned q_internal_index() const = 0;
 
     /// Return the number of the node where the nth edge unknown is stored
-    virtual unsigned q_edge_node_number(const unsigned &n) const = 0;
+    virtual unsigned q_edge_node_number(const unsigned& n) const = 0;
 
     /// Return the values of the edge (flux) degrees of freedom
-    virtual double q_edge(const unsigned &n) const = 0;
+    virtual double q_edge(const unsigned& n) const = 0;
 
     /// \short Return the values of the edge (flux) degrees of freedom at time
     /// history level t
-    virtual double q_edge(const unsigned &t, const unsigned &n) const = 0;
+    virtual double q_edge(const unsigned& t, const unsigned& n) const = 0;
 
     /// Return the values of the internal (moment) degrees of freedom
-    virtual double q_internal(const unsigned &n) const = 0;
+    virtual double q_internal(const unsigned& n) const = 0;
 
     /// \short Return the values of the internal (moment) degrees of freedom at
     /// time history level t
-    virtual double q_internal(const unsigned &t, const unsigned &n) const = 0;
+    virtual double q_internal(const unsigned& t, const unsigned& n) const = 0;
 
     /// Return the total number of computational basis functions for q
     virtual unsigned nq_basis() const = 0;
@@ -296,16 +296,16 @@ namespace oomph
     virtual unsigned nq_basis_edge() const = 0;
 
     /// Returns the local form of the q basis at local coordinate s
-    virtual void get_q_basis_local(const Vector<double> &s,
-                                   Shape &q_basis) const = 0;
+    virtual void get_q_basis_local(const Vector<double>& s,
+                                   Shape& q_basis) const = 0;
 
     /// Returns the local form of the q basis and dbasis/ds at local coordinate
     /// s
-    virtual void get_div_q_basis_local(const Vector<double> &s,
-                                       Shape &div_q_basis_ds) const = 0;
+    virtual void get_div_q_basis_local(const Vector<double>& s,
+                                       Shape& div_q_basis_ds) const = 0;
 
     /// Returns the transformed basis at local coordinate s
-    void get_q_basis(const Vector<double> &s, Shape &q_basis) const
+    void get_q_basis(const Vector<double>& s, Shape& q_basis) const
     {
       const unsigned n_node = this->nnode();
       Shape psi(n_node, DIM);
@@ -319,49 +319,49 @@ namespace oomph
     virtual unsigned nedge_gauss_point() const = 0;
 
     /// Returns the nth gauss point along an edge
-    virtual double edge_gauss_point(const unsigned &edge,
-                                    const unsigned &n) const = 0;
+    virtual double edge_gauss_point(const unsigned& edge,
+                                    const unsigned& n) const = 0;
 
     /// Returns the global coordinates of the nth gauss point along an edge
-    virtual void edge_gauss_point_global(const unsigned &edge,
-                                         const unsigned &n,
-                                         Vector<double> &x) const = 0;
+    virtual void edge_gauss_point_global(const unsigned& edge,
+                                         const unsigned& n,
+                                         Vector<double>& x) const = 0;
 
     /// Pin the nth internal q value
-    virtual void pin_q_internal_value(const unsigned &n) = 0;
+    virtual void pin_q_internal_value(const unsigned& n) = 0;
 
     /// Return the equation number of the n-th pressure degree of freedom
-    virtual int p_local_eqn(const unsigned &n) const = 0;
+    virtual int p_local_eqn(const unsigned& n) const = 0;
 
     /// Return the nth pressure value
-    virtual double p_value(unsigned &n) const = 0;
+    virtual double p_value(unsigned& n) const = 0;
 
     /// Return the total number of pressure basis functions
     virtual unsigned np_basis() const = 0;
 
     /// Return the pressure basis
-    virtual void get_p_basis(const Vector<double> &s, Shape &p_basis) const = 0;
+    virtual void get_p_basis(const Vector<double>& s, Shape& p_basis) const = 0;
 
     /// Pin the nth pressure value
-    virtual void pin_p_value(const unsigned &n, const double &p) = 0;
+    virtual void pin_p_value(const unsigned& n, const double& p) = 0;
 
     /// Scale the edge basis to allow arbitrary edge mappings
-    virtual void scale_basis(Shape &basis) const = 0;
+    virtual void scale_basis(Shape& basis) const = 0;
 
     /// \short Performs a div-conserving transformation of the vector basis
     /// functions from the reference element to the actual element
-    double transform_basis(const Vector<double> &s,
-                           const Shape &q_basis_local,
-                           Shape &psi,
-                           DShape &dpsi,
-                           Shape &q_basis) const;
+    double transform_basis(const Vector<double>& s,
+                           const Shape& q_basis_local,
+                           Shape& psi,
+                           DShape& dpsi,
+                           Shape& q_basis) const;
 
     /// \short Performs a div-conserving transformation of the vector basis
     /// functions from the reference element to the actual element
-    double transform_basis(const Vector<double> &s,
-                           const Shape &q_basis_local,
-                           Shape &psi,
-                           Shape &q_basis) const
+    double transform_basis(const Vector<double>& s,
+                           const Shape& q_basis_local,
+                           Shape& psi,
+                           Shape& q_basis) const
     {
       const unsigned n_node = this->nnode();
       DShape dpsi(n_node, DIM);
@@ -369,21 +369,21 @@ namespace oomph
     }
 
     /// Fill in contribution to residuals for the Darcy equations
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       this->fill_in_generic_residual_contribution(
         residuals, GeneralisedElement::Dummy_matrix, 0);
     }
 
     /// Fill in the Jacobian matrix for the Newton method
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       this->fill_in_generic_residual_contribution(residuals, jacobian, 1);
     }
 
     /// Calculate the FE representation of u
-    void interpolated_u(const Vector<double> &s, Vector<double> &disp) const
+    void interpolated_u(const Vector<double>& s, Vector<double>& disp) const
     {
       // Find number of nodes
       unsigned n_node = nnode();
@@ -411,7 +411,7 @@ namespace oomph
     }
 
     /// Calculate the FE representation of the i-th component of u
-    double interpolated_u(const Vector<double> &s, const unsigned &i) const
+    double interpolated_u(const Vector<double>& s, const unsigned& i) const
     {
       // Find number of nodes
       unsigned n_node = nnode();
@@ -438,7 +438,7 @@ namespace oomph
     }
 
     /// Calculate the FE representation of q
-    void interpolated_q(const Vector<double> &s, Vector<double> &u) const
+    void interpolated_q(const Vector<double>& s, Vector<double>& u) const
     {
       unsigned n_q_basis = nq_basis();
       unsigned n_q_basis_edge = nq_basis_edge();
@@ -461,7 +461,7 @@ namespace oomph
     }
 
     /// Calculate the FE representation of the i-th component of q
-    double interpolated_q(const Vector<double> &s, const unsigned i) const
+    double interpolated_q(const Vector<double>& s, const unsigned i) const
     {
       unsigned n_q_basis = nq_basis();
       unsigned n_q_basis_edge = nq_basis_edge();
@@ -483,7 +483,7 @@ namespace oomph
     }
 
     /// Calculate the FE representation of div u
-    void interpolated_div_q(const Vector<double> &s, double &div_q) const
+    void interpolated_div_q(const Vector<double>& s, double& div_q) const
     {
       // Zero the divergence
       div_q = 0;
@@ -528,7 +528,7 @@ namespace oomph
     }
 
     /// Calculate the FE representation of div q and return it
-    double interpolated_div_q(const Vector<double> &s)
+    double interpolated_div_q(const Vector<double>& s)
     {
       // Temporary storage for div u
       double div_q = 0;
@@ -541,7 +541,7 @@ namespace oomph
     }
 
     /// Calculate the FE representation of p
-    void interpolated_p(const Vector<double> &s, double &p) const
+    void interpolated_p(const Vector<double>& s, double& p) const
     {
       // Get the number of p basis functions
       unsigned n_p_basis = np_basis();
@@ -563,7 +563,7 @@ namespace oomph
     }
 
     /// Calculate the FE representation of p and return it
-    double interpolated_p(const Vector<double> &s) const
+    double interpolated_p(const Vector<double>& s) const
     {
       // Temporary storage for p
       double p = 0;
@@ -576,10 +576,10 @@ namespace oomph
     }
 
     /// du/dt at local node n
-    double du_dt(const unsigned &n, const unsigned &i) const
+    double du_dt(const unsigned& n, const unsigned& i) const
     {
       // Get the timestepper
-      TimeStepper *time_stepper_pt = node_pt(n)->time_stepper_pt();
+      TimeStepper* time_stepper_pt = node_pt(n)->time_stepper_pt();
 
       // Storage for the derivative - initialise to 0
       double du_dt = 0.0;
@@ -606,10 +606,10 @@ namespace oomph
     }
 
     /// d^2u/dt^2 at local node n
-    double d2u_dt2(const unsigned &n, const unsigned &i) const
+    double d2u_dt2(const unsigned& n, const unsigned& i) const
     {
       // Get the timestepper
-      TimeStepper *time_stepper_pt = node_pt(n)->time_stepper_pt();
+      TimeStepper* time_stepper_pt = node_pt(n)->time_stepper_pt();
 
       // Storage for the derivative - initialise to 0
       double d2u_dt2 = 0.0;
@@ -636,12 +636,12 @@ namespace oomph
     }
 
     /// dq_edge/dt for the n-th edge degree of freedom
-    double dq_edge_dt(const unsigned &n) const
+    double dq_edge_dt(const unsigned& n) const
     {
       unsigned node_num = q_edge_node_number(n);
 
       // get the timestepper
-      TimeStepper *time_stepper_pt = node_pt(node_num)->time_stepper_pt();
+      TimeStepper* time_stepper_pt = node_pt(node_num)->time_stepper_pt();
 
       // storage for the derivative - initialise to 0
       double dq_dt = 0.0;
@@ -664,13 +664,13 @@ namespace oomph
     }
 
     /// dq_internal/dt for the n-th internal degree of freedom
-    double dq_internal_dt(const unsigned &n) const
+    double dq_internal_dt(const unsigned& n) const
     {
       // get the internal data index for q
       unsigned internal_index = q_internal_index();
 
       // get the timestepper
-      TimeStepper *time_stepper_pt =
+      TimeStepper* time_stepper_pt =
         internal_data_pt(internal_index)->time_stepper_pt();
 
       // storage for the derivative - initialise to 0
@@ -694,7 +694,7 @@ namespace oomph
     }
 
     /// Set the timestepper of the q internal data object
-    void set_q_internal_timestepper(TimeStepper *const time_stepper_pt)
+    void set_q_internal_timestepper(TimeStepper* const time_stepper_pt)
     {
       unsigned q_index = q_internal_index();
 
@@ -707,7 +707,7 @@ namespace oomph
     }
 
     /// Output with default number of plot points
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       unsigned nplot = 5;
       output(outfile, nplot);
@@ -715,76 +715,76 @@ namespace oomph
 
     /// \short Output FE representation of soln: x,y,u1,u2,div_q,p at
     /// Nplot^DIM plot points
-    void output(std::ostream &outfile, const unsigned &nplot);
+    void output(std::ostream& outfile, const unsigned& nplot);
 
     /// \short Output FE representation of exact soln: x,y,u1,u2,div_q,p at
     /// Nplot^DIM plot points
-    void output_fct(std::ostream &outfile,
-                    const unsigned &nplot,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& nplot,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
 
     /// \short Output FE representation of exact soln: x,y,u1,u2,div_q,p at
     /// Nplot^DIM plot points. Unsteady version
-    void output_fct(std::ostream &outfile,
-                    const unsigned &nplot,
-                    const double &time,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& nplot,
+                    const double& time,
                     FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt);
 
     /// \short Compute the error between the FE solution and the exact solution
     /// using the H(div) norm for q and L^2 norm for p
-    void compute_error(std::ostream &outfile,
+    void compute_error(std::ostream& outfile,
                        FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-                       Vector<double> &error,
-                       Vector<double> &norm);
+                       Vector<double>& error,
+                       Vector<double>& norm);
 
     /// \short Compute the error between the FE solution and the exact solution
     /// using the H(div) norm for q and L^2 norm for p. Unsteady version
-    void compute_error(std::ostream &outfile,
+    void compute_error(std::ostream& outfile,
                        FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
-                       const double &time,
-                       Vector<double> &error,
-                       Vector<double> &norm);
+                       const double& time,
+                       Vector<double>& error,
+                       Vector<double>& norm);
 
   protected:
     /// \short Returns the geometric basis, and the q, p and divergence basis
     /// functions and test functions at local coordinate s
-    virtual double shape_basis_test_local(const Vector<double> &s,
-                                          Shape &psi,
-                                          DShape &dpsi,
-                                          Shape &u_basis,
-                                          Shape &u_test,
-                                          DShape &du_basis_dx,
-                                          DShape &du_test_dx,
-                                          Shape &q_basis,
-                                          Shape &q_test,
-                                          Shape &p_basis,
-                                          Shape &p_test,
-                                          Shape &div_q_basis_ds,
-                                          Shape &div_q_test_ds) const = 0;
+    virtual double shape_basis_test_local(const Vector<double>& s,
+                                          Shape& psi,
+                                          DShape& dpsi,
+                                          Shape& u_basis,
+                                          Shape& u_test,
+                                          DShape& du_basis_dx,
+                                          DShape& du_test_dx,
+                                          Shape& q_basis,
+                                          Shape& q_test,
+                                          Shape& p_basis,
+                                          Shape& p_test,
+                                          Shape& div_q_basis_ds,
+                                          Shape& div_q_test_ds) const = 0;
 
     /// \short Returns the geometric basis, and the q, p and divergence basis
     /// functions and test functions at integration point ipt
     virtual double shape_basis_test_local_at_knot(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsi,
-      Shape &u_basis,
-      Shape &u_test,
-      DShape &du_basis_dx,
-      DShape &du_test_dx,
-      Shape &q_basis,
-      Shape &q_test,
-      Shape &p_basis,
-      Shape &p_test,
-      Shape &div_q_basis_ds,
-      Shape &div_q_test_ds) const = 0;
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsi,
+      Shape& u_basis,
+      Shape& u_test,
+      DShape& du_basis_dx,
+      DShape& du_test_dx,
+      Shape& q_basis,
+      Shape& q_test,
+      Shape& p_basis,
+      Shape& p_test,
+      Shape& div_q_basis_ds,
+      Shape& div_q_test_ds) const = 0;
 
     // fill in residuals and, if flag==true, jacobian
     virtual void fill_in_generic_residual_contribution(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, bool flag);
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, bool flag);
 
     /// Pointer to the elasticity tensor
-    ElasticityTensor *Elasticity_tensor_pt;
+    ElasticityTensor* Elasticity_tensor_pt;
 
   private:
     /// Pointer to solid source function
@@ -797,19 +797,19 @@ namespace oomph
     MassSourceFctPt Mass_source_fct_pt;
 
     /// Timescale ratio (non-dim. density)
-    double *Lambda_sq_pt;
+    double* Lambda_sq_pt;
 
     /// Density ratio
-    double *Density_ratio_pt;
+    double* Density_ratio_pt;
 
     /// 1/k
-    double *K_inv_pt;
+    double* K_inv_pt;
 
     /// Alpha
-    double *Alpha_pt;
+    double* Alpha_pt;
 
     /// Porosity
-    double *Porosity_pt;
+    double* Porosity_pt;
 
     /// Static default value for timescale ratio (1.0 -- for natural scaling)
     static double Default_lambda_sq_value;

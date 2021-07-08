@@ -127,7 +127,7 @@ namespace oomph
     }
 
     // Recast Jacobian matrix to CRDoubleMatrix
-    CRDoubleMatrix *cr_matrix_pt = dynamic_cast<CRDoubleMatrix *>(matrix_pt());
+    CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt());
 #ifdef PARANOID
     if (cr_matrix_pt == 0)
     {
@@ -165,7 +165,7 @@ namespace oomph
     }
     else
     {
-      CRDoubleMatrix *ns_matrix_pt = new CRDoubleMatrix;
+      CRDoubleMatrix* ns_matrix_pt = new CRDoubleMatrix;
       this->get_block(0, 0, *ns_matrix_pt);
 
       Navier_stokes_preconditioner_pt->setup(ns_matrix_pt);
@@ -174,13 +174,13 @@ namespace oomph
     }
 
     // next the solid preconditioner
-    if (dynamic_cast<BlockPreconditioner<CRDoubleMatrix> *>(
+    if (dynamic_cast<BlockPreconditioner<CRDoubleMatrix>*>(
           Solid_preconditioner_pt) != 0)
     {
       Solid_preconditioner_is_block_preconditioner = true;
-      GeneralPurposeBlockPreconditioner<CRDoubleMatrix>
-        *solid_block_preconditioner_pt =
-          dynamic_cast<GeneralPurposeBlockPreconditioner<CRDoubleMatrix> *>(
+      GeneralPurposeBlockPreconditioner<CRDoubleMatrix>*
+        solid_block_preconditioner_pt =
+          dynamic_cast<GeneralPurposeBlockPreconditioner<CRDoubleMatrix>*>(
             Solid_preconditioner_pt);
 
       if (solid_block_preconditioner_pt != 0)
@@ -211,7 +211,7 @@ namespace oomph
     else
     {
       Solid_preconditioner_is_block_preconditioner = false;
-      CRDoubleMatrix *s_matrix_pt = new CRDoubleMatrix;
+      CRDoubleMatrix* s_matrix_pt = new CRDoubleMatrix;
       this->get_block(1, 1, *s_matrix_pt);
       Solid_preconditioner_pt->setup(s_matrix_pt);
       delete s_matrix_pt;
@@ -243,7 +243,7 @@ namespace oomph
     // =========================================
 
     // setup the fluid pseudo-solid matvec operator
-    CRDoubleMatrix *fp_matrix_pt = new CRDoubleMatrix;
+    CRDoubleMatrix* fp_matrix_pt = new CRDoubleMatrix;
     get_block(0, 2, *fp_matrix_pt);
     //  Fluid_pseudo_elastic_matvec_pt->setup(fp_matrix_pt);
     this->setup_matrix_vector_product(
@@ -252,7 +252,7 @@ namespace oomph
     fp_matrix_pt = 0;
 
     // setup the solid fluid matvec operator
-    CRDoubleMatrix *sf_matrix_pt = new CRDoubleMatrix;
+    CRDoubleMatrix* sf_matrix_pt = new CRDoubleMatrix;
     get_block(1, 0, *sf_matrix_pt);
     //  Solid_fluid_matvec_pt->setup(sf_matrix_pt);
     this->setup_matrix_vector_product(Solid_fluid_matvec_pt, sf_matrix_pt, 0);
@@ -260,7 +260,7 @@ namespace oomph
     sf_matrix_pt = 0;
 
     // setup the solid pseudo-solid matvec operator
-    CRDoubleMatrix *sp_matrix_pt = new CRDoubleMatrix;
+    CRDoubleMatrix* sp_matrix_pt = new CRDoubleMatrix;
     get_block(1, 2, *sp_matrix_pt);
     //  Solid_pseudo_elastic_matvec_pt->setup(sp_matrix_pt);
     this->setup_matrix_vector_product(
@@ -269,7 +269,7 @@ namespace oomph
     sp_matrix_pt = 0;
 
     // build the lagrange solid matvec operator
-    CRDoubleMatrix *ls_matrix_pt = new CRDoubleMatrix;
+    CRDoubleMatrix* ls_matrix_pt = new CRDoubleMatrix;
     get_block(3, 1, *ls_matrix_pt);
     //  Lagrange_solid_matvec_pt->setup(ls_matrix_pt);
     this->setup_matrix_vector_product(
@@ -282,7 +282,7 @@ namespace oomph
   /// \short Apply the preconditioner
   //=============================================================================
   void PseudoElasticFSIPreconditioner::preconditioner_solve(
-    const DoubleVector &r, DoubleVector &z)
+    const DoubleVector& r, DoubleVector& z)
   {
     // apply the "pseudo solid" component of the pseudo solid preconditioner
     Pseudo_elastic_preconditioner_pt->elastic_preconditioner_solve(r, z);
@@ -338,7 +338,7 @@ namespace oomph
       DoubleVector z_copy(z);
       this->return_block_vector(1, x, z_copy);
       x.clear();
-      (dynamic_cast<GeneralPurposeBlockPreconditioner<CRDoubleMatrix> *>(
+      (dynamic_cast<GeneralPurposeBlockPreconditioner<CRDoubleMatrix>*>(
          Solid_preconditioner_pt))
         ->preconditioner_solve(z_copy, z);
       this->get_block_vector(1, z, y);

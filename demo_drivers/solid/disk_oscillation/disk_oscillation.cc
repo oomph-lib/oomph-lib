@@ -57,11 +57,11 @@ namespace Global_Physical_Variables
   double Lambda_sq = (1.0 - Nu) / ((1.0 + Nu) * (1.0 - 2.0 * Nu));
 
   /// Pointer to constitutive law
-  ConstitutiveLaw *Constitutive_law_pt = 0;
+  ConstitutiveLaw* Constitutive_law_pt = 0;
 
   /// \short Multiplier for inertia terms (needed for consistent assignment
   /// of initial conditions in Newmark scheme)
-  double multiplier(const Vector<double> &xi)
+  double multiplier(const Vector<double>& xi)
   {
     return Global_Physical_Variables::Lambda_sq;
   }
@@ -84,29 +84,29 @@ public:
   /// \short Constructor: 2 Lagrangian coordinate, 2 Eulerian coords. Pass
   /// amplitude of oscillation, Poisson ratio nu, and pointer to
   /// global timestepper.
-  AxisymOscillatingDisk(const double &ampl,
-                        const double &nu,
-                        TimeStepper *time_stepper_pt);
+  AxisymOscillatingDisk(const double& ampl,
+                        const double& nu,
+                        TimeStepper* time_stepper_pt);
 
   /// Destructor (empty)
   ~AxisymOscillatingDisk() {}
 
   /// \short Position vector at Lagrangian coordinate xi at present
   /// time
-  void position(const Vector<double> &xi, Vector<double> &r) const;
+  void position(const Vector<double>& xi, Vector<double>& r) const;
 
   ///\short Parametrised velocity on object at current time: veloc = d r(xi)/dt.
-  void veloc(const Vector<double> &xi, Vector<double> &veloc);
+  void veloc(const Vector<double>& xi, Vector<double>& veloc);
 
   /// \short Parametrised acceleration on object at current time:
   /// accel = d^2 r(xi)/dt^2.
-  void accel(const Vector<double> &xi, Vector<double> &accel);
+  void accel(const Vector<double>& xi, Vector<double>& accel);
 
   /// \short Parametrised j-th time-derivative on object at current time:
   /// \f$ \frac{d^{j} r(\zeta)}{dt^j} \f$.
-  void dposition_dt(const Vector<double> &xi,
-                    const unsigned &j,
-                    Vector<double> &drdt)
+  void dposition_dt(const Vector<double>& xi,
+                    const unsigned& j,
+                    Vector<double>& drdt)
   {
     switch (j)
     {
@@ -138,9 +138,9 @@ public:
   /// \short Residual of dispersion relation for use in black-box Newton method
   /// which requires global (or static) functions.
   /// Poisson's ratio is  passed as parameter.
-  static void residual_for_dispersion(const Vector<double> &param,
-                                      const Vector<double> &omega,
-                                      Vector<double> &residual);
+  static void residual_for_dispersion(const Vector<double>& param,
+                                      const Vector<double>& omega,
+                                      Vector<double>& residual);
 
 private:
   /// Amplitude of oscillation
@@ -162,9 +162,9 @@ private:
 /// amplitude of oscillation, Poisson ratio nu, and pointer to
 /// global timestepper.
 //========================================================================
-AxisymOscillatingDisk::AxisymOscillatingDisk(const double &ampl,
-                                             const double &nu,
-                                             TimeStepper *time_stepper_pt) :
+AxisymOscillatingDisk::AxisymOscillatingDisk(const double& ampl,
+                                             const double& nu,
+                                             TimeStepper* time_stepper_pt) :
   GeomObject(2, 2, time_stepper_pt), Ampl(ampl), Nu(nu)
 {
   // Parameters for dispersion relation
@@ -192,8 +192,8 @@ AxisymOscillatingDisk::AxisymOscillatingDisk(const double &ampl,
 /// \short Position Vector at Lagrangian coordinate xi at present
 /// time
 //========================================================================
-void AxisymOscillatingDisk::position(const Vector<double> &xi,
-                                     Vector<double> &r) const
+void AxisymOscillatingDisk::position(const Vector<double>& xi,
+                                     Vector<double>& r) const
 {
   // Parameter values at present time
   double time = Geom_object_time_stepper_pt->time_pt()->time();
@@ -228,8 +228,8 @@ void AxisymOscillatingDisk::position(const Vector<double> &xi,
 ///\short Parametrised velocity on object at current time:
 /// veloc = d r(xi)/dt.
 //========================================================================
-void AxisymOscillatingDisk::veloc(const Vector<double> &xi,
-                                  Vector<double> &veloc)
+void AxisymOscillatingDisk::veloc(const Vector<double>& xi,
+                                  Vector<double>& veloc)
 {
   // Parameter values at present time
   double time = Geom_object_time_stepper_pt->time_pt()->time();
@@ -264,8 +264,8 @@ void AxisymOscillatingDisk::veloc(const Vector<double> &xi,
 /// Parametrised acceleration on object at current time:
 /// accel = d^2 r(xi)/dt^2.
 //========================================================================
-void AxisymOscillatingDisk::accel(const Vector<double> &xi,
-                                  Vector<double> &accel)
+void AxisymOscillatingDisk::accel(const Vector<double>& xi,
+                                  Vector<double>& accel)
 {
   // Parameter values at present time
   double time = Geom_object_time_stepper_pt->time_pt()->time();
@@ -301,9 +301,9 @@ void AxisymOscillatingDisk::accel(const Vector<double> &xi,
 /// which requires global (or static) functions.
 /// Poisson's ratio is passed as parameter.
 //========================================================================
-void AxisymOscillatingDisk::residual_for_dispersion(const Vector<double> &param,
-                                                    const Vector<double> &omega,
-                                                    Vector<double> &residual)
+void AxisymOscillatingDisk::residual_for_dispersion(const Vector<double>& param,
+                                                    const Vector<double>& omega,
+                                                    Vector<double>& residual)
 {
   // Extract parameters
   double nu = param[0];
@@ -340,18 +340,18 @@ public:
   /// \short Constructor: Build mesh and copy Eulerian coords to Lagrangian
   /// ones so that the initial configuration is the stress-free one.
   ElasticRefineableQuarterCircleSectorMesh<ELEMENT>(
-    GeomObject *wall_pt,
-    const double &xi_lo,
-    const double &fract_mid,
-    const double &xi_hi,
-    TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+    GeomObject* wall_pt,
+    const double& xi_lo,
+    const double& fract_mid,
+    const double& xi_hi,
+    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
     RefineableQuarterCircleSectorMesh<ELEMENT>(
       wall_pt, xi_lo, fract_mid, xi_hi, time_stepper_pt)
   {
 #ifdef PARANOID
     /// Check that the element type is derived from the SolidFiniteElement
-    SolidFiniteElement *el_pt =
-      dynamic_cast<SolidFiniteElement *>(finite_element_pt(0));
+    SolidFiniteElement* el_pt =
+      dynamic_cast<SolidFiniteElement*>(finite_element_pt(0));
     if (el_pt == 0)
     {
       throw OomphLibError(
@@ -390,27 +390,27 @@ public:
   void actions_before_newton_solve() {}
 
   /// Access function for the solid mesh
-  ElasticRefineableQuarterCircleSectorMesh<ELEMENT> *mesh_pt()
+  ElasticRefineableQuarterCircleSectorMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<ElasticRefineableQuarterCircleSectorMesh<ELEMENT> *>(
+    return dynamic_cast<ElasticRefineableQuarterCircleSectorMesh<ELEMENT>*>(
       Problem::mesh_pt());
   }
 
   /// Run the problem: Pass number of timesteps to be performed.
-  void run(const unsigned &nstep);
+  void run(const unsigned& nstep);
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 private:
   /// Trace file
   ofstream Trace_file;
 
   /// Vector of pointers to nodes whose position we're tracing
-  Vector<Node *> Trace_node_pt;
+  Vector<Node*> Trace_node_pt;
 
   /// Geometric object that specifies the initial conditions
-  AxisymOscillatingDisk *IC_geom_object_pt;
+  AxisymOscillatingDisk* IC_geom_object_pt;
 
 }; // end class
 
@@ -426,7 +426,7 @@ DiskOscillationProblem<ELEMENT>::DiskOscillationProblem()
 
   // GeomObject that specifies the curvilinear boundary of the
   // circular disk
-  GeomObject *curved_boundary_pt = new Ellipse(1.0, 1.0);
+  GeomObject* curved_boundary_pt = new Ellipse(1.0, 1.0);
 
   // The start and end intrinsic coordinates on the geometric object
   // that defines the curvilinear boundary of the disk
@@ -476,7 +476,7 @@ DiskOscillationProblem<ELEMENT>::DiskOscillationProblem()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Cast to a solid element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the constitutive law
     el_pt->constitutive_law_pt() =
@@ -498,7 +498,7 @@ DiskOscillationProblem<ELEMENT>::DiskOscillationProblem()
 /// Doc the solution
 //==================================================================
 template<class ELEMENT>
-void DiskOscillationProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void DiskOscillationProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file, some_file2;
   char filename[100];
@@ -582,7 +582,7 @@ void DiskOscillationProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
         s[1] = -1.0;
 
         // Get pointer to element
-        SolidFiniteElement *el_pt = dynamic_cast<SolidFiniteElement *>(
+        SolidFiniteElement* el_pt = dynamic_cast<SolidFiniteElement*>(
           mesh_pt()->boundary_element_pt(0, e));
 
         // Get Lagrangian coordinate
@@ -652,8 +652,8 @@ void DiskOscillationProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
           s[1] = -1.0 + 2.0 * double(j) / double(npts - 1);
 
           // Get pointer to element
-          SolidFiniteElement *el_pt =
-            dynamic_cast<SolidFiniteElement *>(mesh_pt()->element_pt(e));
+          SolidFiniteElement* el_pt =
+            dynamic_cast<SolidFiniteElement*>(mesh_pt()->element_pt(e));
 
           // Get Lagrangian coordinate
           el_pt->interpolated_xi(s, xi);
@@ -690,7 +690,7 @@ void DiskOscillationProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
 /// Run the problem: Pass number of timesteps to be performed.
 //==================================================================
 template<class ELEMENT>
-void DiskOscillationProblem<ELEMENT>::run(const unsigned &nstep)
+void DiskOscillationProblem<ELEMENT>::run(const unsigned& nstep)
 {
   // Output
   DocInfo doc_info;
@@ -721,7 +721,7 @@ void DiskOscillationProblem<ELEMENT>::run(const unsigned &nstep)
     ampl, Global_Physical_Variables::Nu, time_stepper_pt());
 
   // Turn into object that specifies the initial conditions:
-  SolidInitialCondition *IC_pt = new SolidInitialCondition(IC_geom_object_pt);
+  SolidInitialCondition* IC_pt = new SolidInitialCondition(IC_geom_object_pt);
 
   // Assign initial condition
   SolidMesh::Solid_IC_problem.set_newmark_initial_condition_consistently(
@@ -749,7 +749,7 @@ void DiskOscillationProblem<ELEMENT>::run(const unsigned &nstep)
 //========start_main====================================================
 /// Driver for disk oscillation problem
 //======================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

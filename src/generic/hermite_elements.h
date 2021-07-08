@@ -63,13 +63,13 @@ namespace oomph
     QHermiteElementBase() {}
 
     /// Broken copy constructor
-    QHermiteElementBase(const QHermiteElementBase &)
+    QHermiteElementBase(const QHermiteElementBase&)
     {
       BrokenCopy::broken_copy("QHermiteElementBase");
     }
 
     /// Broken assignment operator
-    void operator=(const QHermiteElementBase &)
+    void operator=(const QHermiteElementBase&)
     {
       BrokenCopy::broken_assign("QHermiteElementBase");
     }
@@ -117,19 +117,19 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    QHermiteElement(const QHermiteElement &dummy)
+    QHermiteElement(const QHermiteElement& dummy)
     {
       BrokenCopy::broken_copy("QHermiteElement");
     }
 
     /// Broken assignment operator
-    void operator=(const QHermiteElement &)
+    void operator=(const QHermiteElement&)
     {
       BrokenCopy::broken_assign("QHermiteElement");
     }
 
     /// Check whether the local coordinate are valid or not
-    bool local_coord_is_valid(const Vector<double> &s)
+    bool local_coord_is_valid(const Vector<double>& s)
     {
       unsigned ncoord = dim();
       for (unsigned i = 0; i < ncoord; i++)
@@ -145,7 +145,7 @@ namespace oomph
 
     /// \short Adjust local coordinates so that they're located inside
     /// the element
-    void move_local_coord_back_into_element(Vector<double> &s) const
+    void move_local_coord_back_into_element(Vector<double>& s) const
     {
       unsigned ncoord = dim();
       for (unsigned i = 0; i < ncoord; i++)
@@ -158,13 +158,13 @@ namespace oomph
 
     /// Function to calculate the geometric shape functions at local coordinate
     /// s
-    void shape(const Vector<double> &s, Shape &psi) const;
+    void shape(const Vector<double>& s, Shape& psi) const;
 
     /// \short Function to compute the  geometric shape functions and
     /// derivatives w.r.t. local coordinates at local coordinate s
-    void dshape_local(const Vector<double> &s,
-                      Shape &psi,
-                      DShape &dpsids) const;
+    void dshape_local(const Vector<double>& s,
+                      Shape& psi,
+                      DShape& dpsids) const;
 
     /// \short Function to compute the geometric shape functions and
     /// also first and second derivatives wrt local coordinates at
@@ -183,16 +183,16 @@ namespace oomph
     /// d2psids(i,3) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$
     /// d2psids(i,4) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_2 \f$
     /// d2psids(i,5) = \f$ \partial^2 \psi_j / \partial s_1 \partial s_2 \f$
-    void d2shape_local(const Vector<double> &s,
-                       Shape &psi,
-                       DShape &dpsids,
-                       DShape &d2psids) const;
+    void d2shape_local(const Vector<double>& s,
+                       Shape& psi,
+                       DShape& dpsids,
+                       DShape& d2psids) const;
 
     /// \short Overload the template-free interface for the calculation of
     /// the inverse jacobian. The element dimension must be passed to
     /// the function
-    double invert_jacobian_mapping(const DenseMatrix<double> &jacobian,
-                                   DenseMatrix<double> &inverse_jacobian) const
+    double invert_jacobian_mapping(const DenseMatrix<double>& jacobian,
+                                   DenseMatrix<double>& inverse_jacobian) const
     {
       return invert_jacobian<DIM>(jacobian, inverse_jacobian);
     }
@@ -201,11 +201,11 @@ namespace oomph
     /// transformation of second derivatives. The element dimension should be
     /// passed as a template paremeter, for "optimum" efficiency.
     void transform_second_derivatives(
-      const DenseMatrix<double> &jacobian,
-      const DenseMatrix<double> &inverse_jacobian,
-      const DenseMatrix<double> &jacobian2,
-      DShape &dbasis,
-      DShape &d2basis) const
+      const DenseMatrix<double>& jacobian,
+      const DenseMatrix<double>& inverse_jacobian,
+      const DenseMatrix<double>& jacobian2,
+      DShape& dbasis,
+      DShape& d2basis) const
     {
       transform_second_derivatives_template<DIM>(
         jacobian, inverse_jacobian, jacobian2, dbasis, d2basis);
@@ -224,7 +224,7 @@ namespace oomph
     }
 
     /// Get local coordinates of node j in the element; vector sets its own size
-    void local_coordinate_of_node(const unsigned &j, Vector<double> &s) const
+    void local_coordinate_of_node(const unsigned& j, Vector<double>& s) const
     {
       s.resize(DIM);
       Vector<unsigned> j_sub(DIM);
@@ -241,7 +241,7 @@ namespace oomph
     }
 
     /// Get local fraction of node j in the element; vector sets its own size
-    void local_fraction_of_node(const unsigned &j, Vector<double> &s_fraction)
+    void local_fraction_of_node(const unsigned& j, Vector<double>& s_fraction)
     {
       s_fraction.resize(DIM);
       Vector<unsigned> j_sub(DIM);
@@ -257,7 +257,7 @@ namespace oomph
 
     /// \short Get the local fraction of any node in the n-th position
     /// in a one dimensional expansion along the i-th local coordinate
-    double local_one_d_fraction_of_node(const unsigned &n1d, const unsigned &i)
+    double local_one_d_fraction_of_node(const unsigned& n1d, const unsigned& i)
     {
       // The spacing is just the node number because there are only two
       // nodes
@@ -271,32 +271,32 @@ namespace oomph
     }
 
     /// Output
-    void output(std::ostream &outfile);
+    void output(std::ostream& outfile);
 
     /// Output at n_plot points
-    void output(std::ostream &outfile, const unsigned &n_plot);
+    void output(std::ostream& outfile, const unsigned& n_plot);
 
     /// C-style output
-    void output(FILE *file_pt);
+    void output(FILE* file_pt);
 
     /// C_style output at n_plot points
-    void output(FILE *file_pt, const unsigned &n_plot);
+    void output(FILE* file_pt, const unsigned& n_plot);
 
     /// \short  Get cector of local coordinates of plot point i (when plotting
     /// nplot points in each "coordinate direction).
     void get_s_plot(
-      const unsigned &i,
-      const unsigned &nplot,
-      Vector<double> &s,
-      const bool &use_equally_spaced_interior_sample_points = false) const;
+      const unsigned& i,
+      const unsigned& nplot,
+      Vector<double>& s,
+      const bool& use_equally_spaced_interior_sample_points = false) const;
 
     /// \short Return string for tecplot zone header (when plotting
     /// nplot points in each "coordinate direction)
-    std::string tecplot_zone_string(const unsigned &nplot) const;
+    std::string tecplot_zone_string(const unsigned& nplot) const;
 
     /// Return total number of plot points (when plotting
     /// nplot points in each "coordinate direction)
-    unsigned nplot_points(const unsigned &nplot) const;
+    unsigned nplot_points(const unsigned& nplot) const;
 
     /// \short Build the lower-dimensional FaceElement of the type
     /// QHermiteElement<DIM-1>. The face index takes a value that
@@ -319,8 +319,8 @@ namespace oomph
     /// +2 (Up)     s[1] =  1.0
     /// -3 (Back)   s[2] = -1.0
     /// +3 (Front)  s[2] =  1.0
-    void build_face_element(const int &face_index,
-                            FaceElement *face_element_pt);
+    void build_face_element(const int& face_index,
+                            FaceElement* face_element_pt);
   };
 
   // Inline functions:
@@ -330,10 +330,10 @@ namespace oomph
   //=======================================================================
   template<>
   inline void QHermiteElement<1>::get_s_plot(
-    const unsigned &i,
-    const unsigned &nplot,
-    Vector<double> &s,
-    const bool &use_equally_spaced_interior_sample_points) const
+    const unsigned& i,
+    const unsigned& nplot,
+    Vector<double>& s,
+    const bool& use_equally_spaced_interior_sample_points) const
   {
     if (nplot > 1)
     {
@@ -358,7 +358,7 @@ namespace oomph
   //=======================================================================
   template<>
   inline std::string QHermiteElement<1>::tecplot_zone_string(
-    const unsigned &nplot) const
+    const unsigned& nplot) const
   {
     std::ostringstream header;
     header << "ZONE I=" << nplot << "\n";
@@ -370,7 +370,7 @@ namespace oomph
   /// coordinate direction)
   //========================================================================
   template<>
-  inline unsigned QHermiteElement<1>::nplot_points(const unsigned &nplot) const
+  inline unsigned QHermiteElement<1>::nplot_points(const unsigned& nplot) const
   {
     return nplot;
   }
@@ -381,10 +381,10 @@ namespace oomph
   //=======================================================================
   template<>
   inline void QHermiteElement<2>::get_s_plot(
-    const unsigned &i,
-    const unsigned &nplot,
-    Vector<double> &s,
-    const bool &use_equally_spaced_interior_sample_points) const
+    const unsigned& i,
+    const unsigned& nplot,
+    Vector<double>& s,
+    const bool& use_equally_spaced_interior_sample_points) const
   {
     if (nplot > 1)
     {
@@ -416,7 +416,7 @@ namespace oomph
   //=======================================================================
   template<>
   inline std::string QHermiteElement<2>::tecplot_zone_string(
-    const unsigned &nplot) const
+    const unsigned& nplot) const
   {
     std::ostringstream header;
     header << "ZONE I=" << nplot << ", J=" << nplot << "\n";
@@ -428,7 +428,7 @@ namespace oomph
   /// nplot points in each coordinate direction)
   //=======================================================================
   template<>
-  inline unsigned QHermiteElement<2>::nplot_points(const unsigned &nplot) const
+  inline unsigned QHermiteElement<2>::nplot_points(const unsigned& nplot) const
   {
     return nplot * nplot;
   }
@@ -446,8 +446,8 @@ namespace oomph
     /// \short Overload the template-free interface for the calculation of
     /// the inverse jacobian. Pass the dimension of the element to the
     /// invert_jacobian function.
-    double invert_jacobian_mapping(const DenseMatrix<double> &jacobian,
-                                   DenseMatrix<double> &inverse_jacobian) const
+    double invert_jacobian_mapping(const DenseMatrix<double>& jacobian,
+                                   DenseMatrix<double>& inverse_jacobian) const
     {
       return FiniteElement::invert_jacobian<DIM>(jacobian, inverse_jacobian);
     }
@@ -455,9 +455,9 @@ namespace oomph
     /// \short Overload the local to eulerian mapping so that it uses diagonal
     /// terms only.
     double local_to_eulerian_mapping(
-      const DShape &dpsids,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &inverse_jacobian) const
+      const DShape& dpsids,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& inverse_jacobian) const
     {
       return this->local_to_eulerian_mapping_diagonal(
         dpsids, jacobian, inverse_jacobian);
@@ -465,8 +465,8 @@ namespace oomph
 
     /// \short Overload the template-free interface for the transformation
     /// of derivatives, so that the diagonal version is used.
-    void transform_derivatives(const DenseMatrix<double> &inverse_jacobian,
-                               DShape &dbasis) const
+    void transform_derivatives(const DenseMatrix<double>& inverse_jacobian,
+                               DShape& dbasis) const
     {
       FiniteElement::transform_derivatives_diagonal(inverse_jacobian, dbasis);
     }
@@ -474,11 +474,11 @@ namespace oomph
     /// \short Overload the template-free interface for the calculation of
     /// transformation of second derivatives.
     void transform_second_derivatives(
-      const DenseMatrix<double> &jacobian,
-      const DenseMatrix<double> &inverse_jacobian,
-      const DenseMatrix<double> &jacobian2,
-      DShape &dbasis,
-      DShape &d2basis) const
+      const DenseMatrix<double>& jacobian,
+      const DenseMatrix<double>& inverse_jacobian,
+      const DenseMatrix<double>& jacobian2,
+      DShape& dbasis,
+      DShape& d2basis) const
     {
       FiniteElement::transform_second_derivatives_diagonal<DIM>(
         jacobian, inverse_jacobian, jacobian2, dbasis, d2basis);
@@ -489,13 +489,13 @@ namespace oomph
     DiagQHermiteElement() : QHermiteElement<DIM>() {}
 
     /// Broken copy constructor
-    DiagQHermiteElement(const DiagQHermiteElement &dummy)
+    DiagQHermiteElement(const DiagQHermiteElement& dummy)
     {
       BrokenCopy::broken_copy("DiagQHermiteElement");
     }
 
     /// Broken assignment operator
-    void operator=(const DiagQHermiteElement &)
+    void operator=(const DiagQHermiteElement&)
     {
       BrokenCopy::broken_assign("DiagQHermiteElement");
     }
@@ -529,28 +529,28 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    SolidQHermiteElement(const SolidQHermiteElement &dummy)
+    SolidQHermiteElement(const SolidQHermiteElement& dummy)
     {
       BrokenCopy::broken_copy("SolidQHermiteElement");
     }
 
     /// Broken assignment operator
-    void operator=(const SolidQHermiteElement &)
+    void operator=(const SolidQHermiteElement&)
     {
       BrokenCopy::broken_assign("SolidQHermiteElement");
     }
 
     /// Overload the output function
-    void output(std::ostream &outfile);
+    void output(std::ostream& outfile);
 
     /// Output at n_plot points
-    void output(std::ostream &outfile, const unsigned &n_plot);
+    void output(std::ostream& outfile, const unsigned& n_plot);
 
     /// C-style output
-    void output(FILE *file_pt);
+    void output(FILE* file_pt);
 
     /// C_style output at n_plot points
-    void output(FILE *file_pt, const unsigned &n_plot);
+    void output(FILE* file_pt, const unsigned& n_plot);
 
     /// \short Build the lower-dimensional FaceElement of the type
     /// SolidQHermiteElement<DIM-1>. The face index takes a value that
@@ -573,8 +573,8 @@ namespace oomph
     /// +2 (Up)     s[1] =  1.0
     /// -3 (Back)   s[2] = -1.0
     /// +3 (Front)  s[2] =  1.0
-    void build_face_element(const int &face_index,
-                            FaceElement *face_element_pt);
+    void build_face_element(const int& face_index,
+                            FaceElement* face_element_pt);
   };
 
   //============================================================================
@@ -597,13 +597,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    SolidDiagQHermiteElement(const SolidDiagQHermiteElement &dummy)
+    SolidDiagQHermiteElement(const SolidDiagQHermiteElement& dummy)
     {
       BrokenCopy::broken_copy("SolidDiagQHermiteElement");
     }
 
     /// Broken assignment operator
-    void operator=(const SolidDiagQHermiteElement &)
+    void operator=(const SolidDiagQHermiteElement&)
     {
       BrokenCopy::broken_assign("SolidDiagQHermiteElement");
     }
@@ -611,9 +611,9 @@ namespace oomph
     /// \short Overload the local to lagrangian mapping so that it uses diagonal
     /// terms only.
     double local_to_lagrangian_mapping(
-      const DShape &dpsids,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &inverse_jacobian) const
+      const DShape& dpsids,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& inverse_jacobian) const
     {
       return this->local_to_lagrangian_mapping_diagonal(
         dpsids, jacobian, inverse_jacobian);

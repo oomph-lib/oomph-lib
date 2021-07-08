@@ -59,19 +59,19 @@ namespace TanhSolnForAdvectionDiffusion
   double TanPhi;
 
   /// Exact solution as a Vector
-  void get_exact_u(const Vector<double> &x, Vector<double> &u)
+  void get_exact_u(const Vector<double>& x, Vector<double>& u)
   {
     u[0] = tanh(1.0 - Alpha * (TanPhi * x[0] - x[1]));
   }
 
   /// Exact solution as a scalar
-  void get_exact_u(const Vector<double> &x, double &u)
+  void get_exact_u(const Vector<double>& x, double& u)
   {
     u = tanh(1.0 - Alpha * (TanPhi * x[0] - x[1]));
   }
 
   /// Source function required to make the solution above an exact solution
-  void source_function(const Vector<double> &x_vect, double &source)
+  void source_function(const Vector<double>& x_vect, double& source)
   {
     double x = x_vect[0];
     double y = x_vect[1];
@@ -93,8 +93,8 @@ namespace TanhSolnForAdvectionDiffusion
   }
 
   /// Flux required by the exact solution on a boundary on which x is fixed
-  void prescribed_flux_on_fixed_x_boundary(const Vector<double> &x,
-                                           double &flux)
+  void prescribed_flux_on_fixed_x_boundary(const Vector<double>& x,
+                                           double& flux)
   {
     // The outer unit normal to the boundary is (1,0)
     double N[2] = {1.0, 0.0};
@@ -108,7 +108,7 @@ namespace TanhSolnForAdvectionDiffusion
   }
 
   /// Wind
-  void wind_function(const Vector<double> &x, Vector<double> &wind)
+  void wind_function(const Vector<double>& x, Vector<double>& wind)
   {
     wind[0] = sin(6.0 * x[1]);
     wind[1] = cos(6.0 * x[0]);
@@ -136,7 +136,7 @@ public:
 
   /// Doc the solution. DocInfo object stores flags/labels for where the
   /// output gets written to
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 private:
   /// \short Update the problem specs before solve: Reset boundary conditions
@@ -155,18 +155,18 @@ private:
   /// \short Create Advection Diffusion flux elements on boundary b of
   /// the Mesh pointed to by bulk_mesh_pt and add them to the Mesh
   /// object pointed to by surface_mesh_pt
-  void create_flux_elements(const unsigned &b,
-                            Mesh *const &bulk_mesh_pt,
-                            Mesh *const &surface_mesh_pt);
+  void create_flux_elements(const unsigned& b,
+                            Mesh* const& bulk_mesh_pt,
+                            Mesh* const& surface_mesh_pt);
 
   /// \short Delete Advection Diffusion flux elements and wipe the surface mesh
-  void delete_flux_elements(Mesh *const &surface_mesh_pt);
+  void delete_flux_elements(Mesh* const& surface_mesh_pt);
 
   /// Pointer to the "bulk" mesh
-  RefineableRectangularQuadMesh<ELEMENT> *Bulk_mesh_pt;
+  RefineableRectangularQuadMesh<ELEMENT>* Bulk_mesh_pt;
 
   /// Pointer to the "surface" mesh
-  Mesh *Surface_mesh_pt;
+  Mesh* Surface_mesh_pt;
 
   /// Pointer to source function
   AdvectionDiffusionEquations<2>::AdvectionDiffusionSourceFctPt Source_fct_pt;
@@ -251,7 +251,7 @@ TwoMeshFluxAdvectionDiffusionProblem<ELEMENT>::
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to AdvectionDiffusion bulk element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
     // Set the source function pointer
     el_pt->source_fct_pt() = Source_fct_pt;
@@ -268,8 +268,8 @@ TwoMeshFluxAdvectionDiffusionProblem<ELEMENT>::
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to AdvectionDiffusion flux element
-    AdvectionDiffusionFluxElement<ELEMENT> *el_pt =
-      dynamic_cast<AdvectionDiffusionFluxElement<ELEMENT> *>(
+    AdvectionDiffusionFluxElement<ELEMENT>* el_pt =
+      dynamic_cast<AdvectionDiffusionFluxElement<ELEMENT>*>(
         Surface_mesh_pt->element_pt(e));
 
     // Set the pointer to the prescribed flux function
@@ -306,7 +306,7 @@ void TwoMeshFluxAdvectionDiffusionProblem<
       for (unsigned n = 0; n < n_node; n++)
       {
         // Get pointer to node
-        Node *nod_pt = Bulk_mesh_pt->boundary_node_pt(i, n);
+        Node* nod_pt = Bulk_mesh_pt->boundary_node_pt(i, n);
 
         // Extract nodal coordinates from node:
         Vector<double> x(2);
@@ -329,7 +329,7 @@ void TwoMeshFluxAdvectionDiffusionProblem<
 //========================================================================
 template<class ELEMENT>
 void TwoMeshFluxAdvectionDiffusionProblem<ELEMENT>::doc_solution(
-  DocInfo &doc_info)
+  DocInfo& doc_info)
 {
   // Doc refinement levels in bulk mesh
   unsigned min_refinement_level;
@@ -390,7 +390,7 @@ void TwoMeshFluxAdvectionDiffusionProblem<ELEMENT>::doc_solution(
 //=======================================================================
 template<class ELEMENT>
 void TwoMeshFluxAdvectionDiffusionProblem<ELEMENT>::create_flux_elements(
-  const unsigned &b, Mesh *const &bulk_mesh_pt, Mesh *const &surface_mesh_pt)
+  const unsigned& b, Mesh* const& bulk_mesh_pt, Mesh* const& surface_mesh_pt)
 {
   // How many bulk elements are adjacent to boundary b?
   unsigned n_element = bulk_mesh_pt->nboundary_element(b);
@@ -399,14 +399,14 @@ void TwoMeshFluxAdvectionDiffusionProblem<ELEMENT>::create_flux_elements(
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    ELEMENT *bulk_elem_pt =
-      dynamic_cast<ELEMENT *>(bulk_mesh_pt->boundary_element_pt(b, e));
+    ELEMENT* bulk_elem_pt =
+      dynamic_cast<ELEMENT*>(bulk_mesh_pt->boundary_element_pt(b, e));
 
     // Find the index of the face of element e along boundary b
     int face_index = bulk_mesh_pt->face_index_at_boundary(b, e);
 
     // Build the corresponding prescribed-flux element
-    AdvectionDiffusionFluxElement<ELEMENT> *flux_element_pt =
+    AdvectionDiffusionFluxElement<ELEMENT>* flux_element_pt =
       new AdvectionDiffusionFluxElement<ELEMENT>(bulk_elem_pt, face_index);
 
     // Add the prescribed-flux element to the surface mesh
@@ -421,7 +421,7 @@ void TwoMeshFluxAdvectionDiffusionProblem<ELEMENT>::create_flux_elements(
 //=======================================================================
 template<class ELEMENT>
 void TwoMeshFluxAdvectionDiffusionProblem<ELEMENT>::delete_flux_elements(
-  Mesh *const &surface_mesh_pt)
+  Mesh* const& surface_mesh_pt)
 {
   // How many surface elements are in the surface mesh
   unsigned n_element = surface_mesh_pt->nelement();
@@ -469,8 +469,8 @@ void TwoMeshFluxAdvectionDiffusionProblem<ELEMENT>::actions_after_adapt()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to Advection Diffusion flux element
-    AdvectionDiffusionFluxElement<ELEMENT> *el_pt =
-      dynamic_cast<AdvectionDiffusionFluxElement<ELEMENT> *>(
+    AdvectionDiffusionFluxElement<ELEMENT>* el_pt =
+      dynamic_cast<AdvectionDiffusionFluxElement<ELEMENT>*>(
         Surface_mesh_pt->element_pt(e));
 
     // Set the pointer to the prescribed flux function

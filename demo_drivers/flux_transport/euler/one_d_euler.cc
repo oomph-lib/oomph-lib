@@ -47,7 +47,7 @@ namespace Global
 {
   double Gamma = 1.4;
 
-  void initial_left(Vector<double> &u, const bool &sod)
+  void initial_left(Vector<double>& u, const bool& sod)
   {
     // Sod
     double ro, vel, pres;
@@ -73,7 +73,7 @@ namespace Global
     u[2] = m;
   }
 
-  void initial_right(Vector<double> &u, const bool &sod)
+  void initial_right(Vector<double>& u, const bool& sod)
   {
     double ro, vel, pres;
     // Sod
@@ -110,8 +110,8 @@ class OneDimMesh : public DGMesh
 {
 public:
   /// Mesh Constructor. The argument is the desired number of elements
-  OneDimMesh(const unsigned &n_element,
-             TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper)
+  OneDimMesh(const unsigned& n_element,
+             TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
   {
     double X_min = -1.0;
     double X_max = 1.0;
@@ -129,14 +129,14 @@ public:
       // First element
       std::vector<bool> boundary_info(finite_element_pt(0)->nnode(), false);
       boundary_info[0] = true;
-      dynamic_cast<ELEMENT *>(element_pt(0))
+      dynamic_cast<ELEMENT*>(element_pt(0))
         ->construct_boundary_nodes_and_faces(
           this, boundary_info, time_stepper_pt);
 
       // Construct normal nodes for middle elements
       for (unsigned e = 1; e < n_element - 1; e++)
       {
-        dynamic_cast<ELEMENT *>(element_pt(e))
+        dynamic_cast<ELEMENT*>(element_pt(e))
           ->construct_nodes_and_faces(this, time_stepper_pt);
       }
 
@@ -145,7 +145,7 @@ public:
       boundary_info.resize(n_node, false);
       boundary_info[0] = false;
       boundary_info[n_node - 1] = true;
-      dynamic_cast<ELEMENT *>(element_pt(n_element - 1))
+      dynamic_cast<ELEMENT*>(element_pt(n_element - 1))
         ->construct_boundary_nodes_and_faces(
           this, boundary_info, time_stepper_pt);
     }
@@ -160,9 +160,9 @@ public:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Locally cache the element
-      FiniteElement *elem_pt = finite_element_pt(e);
+      FiniteElement* elem_pt = finite_element_pt(e);
       // Locally cache the pointer to the first node
-      Node *nod_pt = elem_pt->node_pt(0);
+      Node* nod_pt = elem_pt->node_pt(0);
       // Set it's position
       nod_pt->x(0) = X_min + e * el_length;
       // Add to the Mesh's list of nodes
@@ -208,22 +208,22 @@ public:
   } // End of constructor
 
   /// Output the face element
-  void output_faces(std::ostream &outfile)
+  void output_faces(std::ostream& outfile)
   {
     // Loop over the elements
     unsigned n_element = this->nelement();
     for (unsigned e = 0; e < n_element; e++)
     {
-      dynamic_cast<ELEMENT *>(element_pt(e))->output_faces(outfile);
+      dynamic_cast<ELEMENT*>(element_pt(e))->output_faces(outfile);
     }
   }
 
   // Find the neighbour
-  void neighbour_finder(FiniteElement *const &bulk_element_pt,
-                        const int &face_index,
-                        const Vector<double> &s_bulk,
-                        FaceElement *&face_element_pt,
-                        Vector<double> &s_face)
+  void neighbour_finder(FiniteElement* const& bulk_element_pt,
+                        const int& face_index,
+                        const Vector<double>& s_bulk,
+                        FaceElement*& face_element_pt,
+                        Vector<double>& s_face)
   {
     // The face coordinate is always a vector of size zero
     s_face.resize(0);
@@ -244,14 +244,14 @@ public:
             {
               // Right face of previous element
               face_element_pt =
-                dynamic_cast<ELEMENT *>(Element_pt[e - 1])->face_element_pt(1);
+                dynamic_cast<ELEMENT*>(Element_pt[e - 1])->face_element_pt(1);
             }
             // Otherwie just set the face to be the face of the first element
             else
             {
               face_element_pt =
                 // dynamic_cast<ELEMENT*>(Element_pt[n_element-1])->face_element_pt(1);
-                dynamic_cast<ELEMENT *>(Element_pt[e])->face_element_pt(0);
+                dynamic_cast<ELEMENT*>(Element_pt[e])->face_element_pt(0);
             }
             break;
 
@@ -262,14 +262,14 @@ public:
             {
               // Left face of next element
               face_element_pt =
-                dynamic_cast<ELEMENT *>(Element_pt[e + 1])->face_element_pt(0);
+                dynamic_cast<ELEMENT*>(Element_pt[e + 1])->face_element_pt(0);
             }
             // Otherwie make periodic
             else
             {
               face_element_pt =
                 // dynamic_cast<ELEMENT*>(Element_pt[0])->face_element_pt(0);
-                dynamic_cast<ELEMENT *>(Element_pt[e])->face_element_pt(1);
+                dynamic_cast<ELEMENT*>(Element_pt[e])->face_element_pt(1);
             }
             break;
 
@@ -310,7 +310,7 @@ public:
   }
 
   // Setup the initial conditions
-  void set_initial_conditions(const double &dt, const bool &sod)
+  void set_initial_conditions(const double& dt, const bool& sod)
   {
     this->initialise_dt(dt);
     const unsigned n_element = Problem::mesh_pt()->nelement();
@@ -327,12 +327,12 @@ public:
       }
 
       // Cache the element
-      FiniteElement *const elem_pt = mesh_pt()->finite_element_pt(e);
+      FiniteElement* const elem_pt = mesh_pt()->finite_element_pt(e);
       const unsigned n_node = elem_pt->nnode();
       for (unsigned n = 0; n < n_node; n++)
       {
         // Cache the node
-        Node *nod_pt = elem_pt->node_pt(n);
+        Node* nod_pt = elem_pt->node_pt(n);
         if (left)
         {
           Global::initial_left(initial_u, sod);
@@ -360,7 +360,7 @@ public:
     }
   }
 
-  void parameter_study(const bool &sod)
+  void parameter_study(const bool& sod)
   {
     this->enable_mass_matrix_reuse();
     this->time() = 0.0;
@@ -430,11 +430,11 @@ template<class ELEMENT>
 class DGProblem : public EulerProblem
 {
   /// Pointer to a slope limiter
-  SlopeLimiter *Slope_limiter_pt;
+  SlopeLimiter* Slope_limiter_pt;
 
 public:
   /// Problem constructor:
-  DGProblem(const unsigned &n_element)
+  DGProblem(const unsigned& n_element)
   {
     // Make the formulation discontinuous
     this->enable_discontinuous_formulation();

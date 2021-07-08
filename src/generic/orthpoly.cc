@@ -34,7 +34,7 @@ namespace oomph
   namespace Orthpoly
   {
     // Calculates the Gauss Lobatto Legendre abscissas for degree p = NNode-1
-    void gll_nodes(const unsigned &Nnode, Vector<double> &x)
+    void gll_nodes(const unsigned& Nnode, Vector<double>& x)
     {
       double z, zold, del;
       unsigned p = Nnode - 1;
@@ -91,7 +91,7 @@ namespace oomph
     }
 
     // This version of gll_nodes calculates the abscissas AND weights
-    void gll_nodes(const unsigned &Nnode, Vector<double> &x, Vector<double> &w)
+    void gll_nodes(const unsigned& Nnode, Vector<double>& x, Vector<double>& w)
     {
       gll_nodes(Nnode, x);
       // Now calculate the corresponding weights
@@ -105,7 +105,7 @@ namespace oomph
     }
 
     // Calculates the Gauss Legendre abscissas of degree p=Nnode-1
-    void gl_nodes(const unsigned &Nnode, Vector<double> &x)
+    void gl_nodes(const unsigned& Nnode, Vector<double>& x)
     {
       double z, zold, del;
       unsigned p = Nnode - 1;
@@ -148,7 +148,7 @@ namespace oomph
     }
 
     // This version of gl_nodes calculates the abscissas AND weights
-    void gl_nodes(const unsigned &Nnode, Vector<double> &x, Vector<double> &w)
+    void gl_nodes(const unsigned& Nnode, Vector<double>& x, Vector<double>& w)
     {
       gl_nodes(Nnode, x);
       // Now calculate the corresponding weights

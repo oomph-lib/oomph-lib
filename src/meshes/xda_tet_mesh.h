@@ -64,7 +64,7 @@ namespace oomph
     /// obtained from the access function oomph_lib_boundary_ids(...).
     /// Timestepper defaults to steady pseudo-timestepper.
     XdaTetMesh(const std::string xda_file_name,
-               TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper);
+               TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
     /// \short Setup boundary coordinate on boundary b while is
     /// temporarily flattened to simplex faces. Boundary coordinates are the
@@ -75,8 +75,8 @@ namespace oomph
     /// x direction with the outer unit normal computed by
     /// the face elements (or its negative if switch_normal is set
     /// to true).
-    void setup_boundary_coordinates(const unsigned &b,
-                                    const bool &switch_normal)
+    void setup_boundary_coordinates(const unsigned& b,
+                                    const bool& switch_normal)
     {
       std::ofstream outfile;
       setup_boundary_coordinates(b, switch_normal, outfile);
@@ -91,9 +91,9 @@ namespace oomph
     /// x direction with the outer unit normal computed by
     /// the face elements (or its negative if switch_normal is set
     /// to true). Doc faces in output file.
-    void setup_boundary_coordinates(const unsigned &b,
-                                    const bool &switch_normal,
-                                    std::ofstream &outfile);
+    void setup_boundary_coordinates(const unsigned& b,
+                                    const bool& switch_normal,
+                                    std::ofstream& outfile);
 
     /// \short Access function to the number of distinct boundaries specified
     /// in the original xda enumeration.
@@ -104,7 +104,7 @@ namespace oomph
 
     /// \short Access functions to the Vector of oomph-lib boundary ids
     /// that make up boundary b in the original xda enumeration
-    Vector<unsigned> oomph_lib_boundary_ids(const unsigned &xda_boundary_id)
+    Vector<unsigned> oomph_lib_boundary_ids(const unsigned& xda_boundary_id)
     {
       return Boundary_id[xda_boundary_id];
     }
@@ -131,7 +131,7 @@ namespace oomph
     /// \short Constructor. Boundary coordinates are setup
     /// automatically.
     SolidXdaTetMesh(const std::string xda_file_name,
-                    TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+                    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       XdaTetMesh<ELEMENT>(xda_file_name, time_stepper_pt)
     {
       // Assign the Lagrangian coordinates

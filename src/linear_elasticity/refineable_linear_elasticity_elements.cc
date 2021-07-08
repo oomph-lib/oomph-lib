@@ -40,7 +40,7 @@ namespace oomph
   template<unsigned DIM>
   void RefineableLinearElasticityEquations<DIM>::
     fill_in_generic_contribution_to_residuals_linear_elasticity(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag)
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag)
   {
 #ifdef PARANOID
 
@@ -296,10 +296,10 @@ namespace oomph
   /// Get error against and norm of exact solution
   template<unsigned DIM>
   void PRefineableQLinearElasticityElement<DIM>::compute_energy_error(
-    std::ostream &outfile,
+    std::ostream& outfile,
     FiniteElement::SteadyExactSolutionFctPt exact_grad_pt,
-    double &error,
-    double &norm)
+    double& error,
+    double& norm)
   {
     // Initialise
     error = 0.0;

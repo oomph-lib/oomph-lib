@@ -49,9 +49,9 @@ namespace oomph
   ///  This version supports hanging nodes
   //==============================================================
   void RefineablePolarNavierStokesEquations::
-    fill_in_generic_residual_contribution(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian,
-                                          DenseMatrix<double> &mass_matrix,
+    fill_in_generic_residual_contribution(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian,
+                                          DenseMatrix<double>& mass_matrix,
                                           unsigned flag)
   {
     // Find out how many nodes there are

@@ -46,7 +46,7 @@ namespace Global_Physical_Variables
   double Sigma0 = 1.0e3;
 
   /// Pointer to Data object that stores external pressure
-  Data *P_ext_data_pt = 0;
+  Data* P_ext_data_pt = 0;
 
   /// \short Min. pressure. Only used in steady runs during parameter
   /// incrementation. Use 1.5 for values of Re to
@@ -74,10 +74,10 @@ namespace Global_Physical_Variables
   /// \short Load function: Apply a constant external pressure to the wall.
   /// Note:  This is the load without the fluid contribution!
   /// Fluid load gets added on by FSIWallElement.
-  void load(const Vector<double> &xi,
-            const Vector<double> &x,
-            const Vector<double> &N,
-            Vector<double> &load)
+  void load(const Vector<double>& xi,
+            const Vector<double>& x,
+            const Vector<double>& N,
+            Vector<double>& load)
   {
     for (unsigned i = 0; i < 2; i++)
     {
@@ -110,7 +110,7 @@ namespace BL_Squash
 
   /// \short Mapping [0,1] -> [0,1] that re-distributes
   /// nodal points across the channel width
-  double squash_fct(const double &s)
+  double squash_fct(const double& s)
   {
     // Default return
     double y = s;
@@ -146,14 +146,14 @@ class UndeformedWall : public GeomObject
 public:
   /// \short Constructor: arguments are the starting point and the height
   /// above y=0.
-  UndeformedWall(const double &x0, const double &h) : GeomObject(1, 2)
+  UndeformedWall(const double& x0, const double& h) : GeomObject(1, 2)
   {
     X0 = x0;
     H = h;
   }
 
   /// \short Position vector at Lagrangian coordinate zeta
-  void position(const Vector<double> &zeta, Vector<double> &r) const
+  void position(const Vector<double>& zeta, Vector<double>& r) const
   {
     // Position Vector
     r[0] = zeta[0] + X0;
@@ -163,9 +163,9 @@ public:
   /// \short Parametrised position on object: r(zeta). Evaluated at
   /// previous timestep. t=0: current time; t>0: previous
   /// timestep. Calls steady version.
-  void position(const unsigned &t,
-                const Vector<double> &zeta,
-                Vector<double> &r) const
+  void position(const unsigned& t,
+                const Vector<double>& zeta,
+                Vector<double>& r) const
   {
     // Use the steady version
     position(zeta, r);
@@ -177,10 +177,10 @@ public:
   /// \f$ \frac{dR_i}{d \zeta_\alpha}\f$ = drdzeta(alpha,i).
   /// \f$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}\f$ =
   /// ddrdzeta(alpha,beta,i). Evaluated at current time.
-  virtual void d2position(const Vector<double> &zeta,
-                          Vector<double> &r,
-                          DenseMatrix<double> &drdzeta,
-                          RankThreeTensor<double> &ddrdzeta) const
+  virtual void d2position(const Vector<double>& zeta,
+                          Vector<double>& r,
+                          DenseMatrix<double>& drdzeta,
+                          RankThreeTensor<double>& ddrdzeta) const
   {
     // Position vector
     r[0] = zeta[0] + X0;
@@ -290,16 +290,16 @@ class FSICollapsibleChannelProblem : public virtual Problem
 public:
   /// \short Constructor: The arguments are the number of elements and
   /// the lengths of the domain.
-  FSICollapsibleChannelProblem(const unsigned &nup,
-                               const unsigned &ncollapsible,
-                               const unsigned &ndown,
-                               const unsigned &ny,
-                               const double &lup,
-                               const double &lcollapsible,
-                               const double &ldown,
-                               const double &ly,
-                               const bool &displ_control,
-                               const bool &steady_flag);
+  FSICollapsibleChannelProblem(const unsigned& nup,
+                               const unsigned& ncollapsible,
+                               const unsigned& ndown,
+                               const unsigned& ny,
+                               const double& lup,
+                               const double& lcollapsible,
+                               const double& ldown,
+                               const double& ly,
+                               const bool& displ_control,
+                               const bool& steady_flag);
 
   /// Destructor
   ~FSICollapsibleChannelProblem()
@@ -313,19 +313,19 @@ public:
 
   /// \short Unsteady run; virtual so it can be overloaded in derived problem
   /// classes. Specify timestep or use default of 0.1
-  virtual void unsteady_run(const double &dt = 0.1);
+  virtual void unsteady_run(const double& dt = 0.1);
 
   /// Access function for the specific bulk (fluid) mesh
-  AlgebraicCollapsibleChannelMesh<ELEMENT> *bulk_mesh_pt()
+  AlgebraicCollapsibleChannelMesh<ELEMENT>* bulk_mesh_pt()
   {
     // Upcast from pointer to the Mesh base class to the specific
     // element type that we're using here.
-    return dynamic_cast<AlgebraicCollapsibleChannelMesh<ELEMENT> *>(
+    return dynamic_cast<AlgebraicCollapsibleChannelMesh<ELEMENT>*>(
       Bulk_mesh_pt);
   }
 
   /// Access function for the wall mesh
-  OneDLagrangianMesh<FSIHermiteBeamElement> *wall_mesh_pt()
+  OneDLagrangianMesh<FSIHermiteBeamElement>* wall_mesh_pt()
   {
     return Wall_mesh_pt;
 
@@ -353,26 +353,26 @@ public:
   }
 
   /// Doc the steady solution
-  virtual void doc_solution_steady(DocInfo &doc_info,
-                                   ofstream &trace_file,
-                                   const double &cpu,
-                                   const unsigned &niter);
+  virtual void doc_solution_steady(DocInfo& doc_info,
+                                   ofstream& trace_file,
+                                   const double& cpu,
+                                   const unsigned& niter);
 
   /// Doc the unsteady solution
-  virtual void doc_solution_unsteady(DocInfo &doc_info,
-                                     ofstream &trace_file,
-                                     const double &cpu,
-                                     const unsigned &niter);
+  virtual void doc_solution_unsteady(DocInfo& doc_info,
+                                     ofstream& trace_file,
+                                     const double& cpu,
+                                     const unsigned& niter);
 
   /// Apply initial conditions
   void set_initial_condition();
 
 protected:
   /// \short Dump problem to disk to allow for restart.
-  void dump_it(ofstream &dump_file);
+  void dump_it(ofstream& dump_file);
 
   /// \short Read problem for restart from specified restart file.
-  void restart(ifstream &restart_file);
+  void restart(ifstream& restart_file);
 
   /// Number of elements in the x direction in the upstream part of the channel
   unsigned Nup;
@@ -401,32 +401,32 @@ protected:
   double Ly;
 
   /// Pointer to the "bulk" mesh
-  AlgebraicCollapsibleChannelMesh<ELEMENT> *Bulk_mesh_pt;
+  AlgebraicCollapsibleChannelMesh<ELEMENT>* Bulk_mesh_pt;
 
   /// \short Pointer to the mesh that contains the displacement control element
-  Mesh *Displ_control_mesh_pt;
+  Mesh* Displ_control_mesh_pt;
 
   /// Use displacement control?
   bool Displ_control;
 
   /// Pointer to the "wall" mesh
-  OneDLagrangianMesh<FSIHermiteBeamElement> *Wall_mesh_pt;
+  OneDLagrangianMesh<FSIHermiteBeamElement>* Wall_mesh_pt;
 
   /// Pointer to the left control node
-  Node *Left_node_pt;
+  Node* Left_node_pt;
 
   /// Pointer to right control node
-  Node *Right_node_pt;
+  Node* Right_node_pt;
 
   /// Pointer to control node on the wall
-  Node *Wall_node_pt;
+  Node* Wall_node_pt;
 
   /// Flag for steady run
   bool Steady_flag;
 
   /// Pointer to GeomObject at which displacement control is applied
   /// (or at which wall displacement is monitored in unsteady runs)
-  GeomObject *Ctrl_geom_obj_pt;
+  GeomObject* Ctrl_geom_obj_pt;
 
   /// \short Vector of local coordinates of displacement control point
   /// in Ctrl_geom_obj_pt
@@ -434,7 +434,7 @@ protected:
 
   ///\short Pointer to geometric object (one Lagrangian, two Eulerian
   /// coordinates) that will be built from the wall mesh
-  MeshAsGeomObject *Wall_geom_object_pt;
+  MeshAsGeomObject* Wall_geom_object_pt;
 
   /// Counter for Newton iterations
   unsigned Newton_iter;
@@ -449,16 +449,16 @@ protected:
 //===============================================================
 template<class ELEMENT>
 FSICollapsibleChannelProblem<ELEMENT>::FSICollapsibleChannelProblem(
-  const unsigned &nup,
-  const unsigned &ncollapsible,
-  const unsigned &ndown,
-  const unsigned &ny,
-  const double &lup,
-  const double &lcollapsible,
-  const double &ldown,
-  const double &ly,
-  const bool &displ_control,
-  const bool &steady_flag)
+  const unsigned& nup,
+  const unsigned& ncollapsible,
+  const unsigned& ndown,
+  const unsigned& ny,
+  const double& lup,
+  const double& lcollapsible,
+  const double& ldown,
+  const double& ly,
+  const bool& displ_control,
+  const bool& steady_flag)
 {
   // Initialise number of Newton iterations
   Newton_iter = 0;
@@ -501,14 +501,14 @@ FSICollapsibleChannelProblem<ELEMENT>::FSICollapsibleChannelProblem(
   add_time_stepper_pt(new BDF<2>);
 
   // Create a dummy Steady timestepper that stores two history values
-  Steady<2> *wall_time_stepper_pt = new Steady<2>;
+  Steady<2>* wall_time_stepper_pt = new Steady<2>;
 
   // Add the wall timestepper to the Problem's collection of timesteppers.
   add_time_stepper_pt(wall_time_stepper_pt);
 
   // Geometric object that represents the undeformed wall:
   // A straight line at height y=ly; starting at x=lup.
-  UndeformedWall *undeformed_wall_pt = new UndeformedWall(lup, ly);
+  UndeformedWall* undeformed_wall_pt = new UndeformedWall(lup, ly);
 
   // Create the "wall" mesh with FSI Hermite elements
   Wall_mesh_pt = new OneDLagrangianMesh<FSIHermiteBeamElement>(
@@ -545,14 +545,14 @@ FSICollapsibleChannelProblem<ELEMENT>::FSICollapsibleChannelProblem(
   Displ_control_mesh_pt = new Mesh;
 
   // Choose element in which displacement control is applied:
-  SolidFiniteElement *controlled_element_pt =
-    dynamic_cast<SolidFiniteElement *>(Ctrl_geom_obj_pt);
+  SolidFiniteElement* controlled_element_pt =
+    dynamic_cast<SolidFiniteElement*>(Ctrl_geom_obj_pt);
 
   // Fix the displacement in the vertical (1) direction...
   unsigned controlled_direction = 1;
 
   // Pointer to displacement control element
-  DisplacementControlElement *displ_control_el_pt;
+  DisplacementControlElement* displ_control_el_pt;
 
   // Build displacement control element
   displ_control_el_pt =
@@ -610,7 +610,7 @@ FSICollapsibleChannelProblem<ELEMENT>::FSICollapsibleChannelProblem(
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -701,8 +701,8 @@ FSICollapsibleChannelProblem<ELEMENT>::FSICollapsibleChannelProblem(
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast to the specific element type
-    FSIHermiteBeamElement *elem_pt =
-      dynamic_cast<FSIHermiteBeamElement *>(wall_mesh_pt()->element_pt(e));
+    FSIHermiteBeamElement* elem_pt =
+      dynamic_cast<FSIHermiteBeamElement*>(wall_mesh_pt()->element_pt(e));
 
     // Set physical parameters for each element:
     elem_pt->sigma0_pt() = &Global_Physical_Variables::Sigma0;
@@ -777,7 +777,7 @@ FSICollapsibleChannelProblem<ELEMENT>::FSICollapsibleChannelProblem(
   num_nod = bulk_mesh_pt()->nboundary_node(ibound);
   for (unsigned inod = 0; inod < num_nod; inod++)
   {
-    static_cast<AlgebraicNode *>(bulk_mesh_pt()->boundary_node_pt(ibound, inod))
+    static_cast<AlgebraicNode*>(bulk_mesh_pt()->boundary_node_pt(ibound, inod))
       ->set_auxiliary_node_update_fct_pt(
         FSI_functions::apply_no_slip_on_moving_wall);
   }
@@ -799,10 +799,10 @@ FSICollapsibleChannelProblem<ELEMENT>::FSICollapsibleChannelProblem(
 //============================================================================
 template<class ELEMENT>
 void FSICollapsibleChannelProblem<ELEMENT>::doc_solution_steady(
-  DocInfo &doc_info,
-  ofstream &trace_file,
-  const double &cpu,
-  const unsigned &niter)
+  DocInfo& doc_info,
+  ofstream& trace_file,
+  const double& cpu,
+  const unsigned& niter)
 {
   ofstream some_file;
   char filename[100];
@@ -850,10 +850,10 @@ void FSICollapsibleChannelProblem<ELEMENT>::doc_solution_steady(
 //============================================================================
 template<class ELEMENT>
 void FSICollapsibleChannelProblem<ELEMENT>::doc_solution_unsteady(
-  DocInfo &doc_info,
-  ofstream &trace_file,
-  const double &cpu,
-  const unsigned &niter)
+  DocInfo& doc_info,
+  ofstream& trace_file,
+  const double& cpu,
+  const unsigned& niter)
 {
   ofstream some_file;
   char filename[100];
@@ -903,7 +903,7 @@ void FSICollapsibleChannelProblem<ELEMENT>::doc_solution_unsteady(
 /// Dump the solution to disk to allow for restart
 //========================================================================
 template<class ELEMENT>
-void FSICollapsibleChannelProblem<ELEMENT>::dump_it(ofstream &dump_file)
+void FSICollapsibleChannelProblem<ELEMENT>::dump_it(ofstream& dump_file)
 {
   // Number of submeshes must agree when dumping/restarting so
   // temporarily add displacement control mesh back in before dumping...
@@ -941,7 +941,7 @@ void FSICollapsibleChannelProblem<ELEMENT>::dump_it(ofstream &dump_file)
 /// Read solution from disk for restart
 //========================================================================
 template<class ELEMENT>
-void FSICollapsibleChannelProblem<ELEMENT>::restart(ifstream &restart_file)
+void FSICollapsibleChannelProblem<ELEMENT>::restart(ifstream& restart_file)
 {
   // Read external pressure
 
@@ -1009,7 +1009,7 @@ void FSICollapsibleChannelProblem<ELEMENT>::set_initial_condition()
   }
 
   // Pointer to restart file
-  ifstream *restart_file_pt = 0;
+  ifstream* restart_file_pt = 0;
 
   // Restart?
   //---------
@@ -1177,7 +1177,7 @@ void FSICollapsibleChannelProblem<ELEMENT>::steady_run()
 /// Unsteady run. Specify timestep or use default of 0.1.
 //============================================================================
 template<class ELEMENT>
-void FSICollapsibleChannelProblem<ELEMENT>::unsteady_run(const double &dt)
+void FSICollapsibleChannelProblem<ELEMENT>::unsteady_run(const double& dt)
 {
   // Set initial value for external pressure (on the wall stiffness scale).
   // Will be overwritten by restart data if a restart file (and pressure

@@ -45,16 +45,16 @@ using namespace std;
 namespace Global
 {
   // Set a one dimensional constant wind in the x-direction
-  void constant_wind(const oomph::Vector<double> &x,
-                     oomph::Vector<double> &wind)
+  void constant_wind(const oomph::Vector<double>& x,
+                     oomph::Vector<double>& wind)
   {
     wind.resize(1);
     wind[0] = 1.0;
   }
 
-  void initial_condition(const double &time,
-                         const Vector<double> &x,
-                         Vector<double> &u)
+  void initial_condition(const double& time,
+                         const Vector<double>& x,
+                         Vector<double>& u)
   {
     u[0] = sin(8.0 * atan(1.0) * x[0]);
   }
@@ -70,8 +70,8 @@ class OneDimMesh : public DGMesh
 {
 public:
   /// Mesh Constructor. The argument is the desired number of elements
-  OneDimMesh(const unsigned &n_element,
-             TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper)
+  OneDimMesh(const unsigned& n_element,
+             TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
   {
     double X_min = 0.0;
     double X_max = 1.0;
@@ -89,14 +89,14 @@ public:
       // First element
       std::vector<bool> boundary_info(finite_element_pt(0)->nnode(), false);
       boundary_info[0] = true;
-      dynamic_cast<ELEMENT *>(element_pt(0))
+      dynamic_cast<ELEMENT*>(element_pt(0))
         ->construct_boundary_nodes_and_faces(
           this, boundary_info, time_stepper_pt);
 
       // Construct normal nodes for middle elements
       for (unsigned e = 1; e < n_element - 1; e++)
       {
-        dynamic_cast<ELEMENT *>(element_pt(e))
+        dynamic_cast<ELEMENT*>(element_pt(e))
           ->construct_nodes_and_faces(this, time_stepper_pt);
       }
 
@@ -105,7 +105,7 @@ public:
       boundary_info.resize(n_node, false);
       boundary_info[0] = false;
       boundary_info[n_node - 1] = true;
-      dynamic_cast<ELEMENT *>(element_pt(n_element - 1))
+      dynamic_cast<ELEMENT*>(element_pt(n_element - 1))
         ->construct_boundary_nodes_and_faces(
           this, boundary_info, time_stepper_pt);
     }
@@ -120,9 +120,9 @@ public:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Locally cache the element
-      FiniteElement *elem_pt = finite_element_pt(e);
+      FiniteElement* elem_pt = finite_element_pt(e);
       // Locally cache the pointer to the first node
-      Node *nod_pt = elem_pt->node_pt(0);
+      Node* nod_pt = elem_pt->node_pt(0);
       // Set it's position
       nod_pt->x(0) = e * el_length;
       // Add to the Mesh's list of nodes
@@ -165,22 +165,22 @@ public:
   } // End of constructor
 
   /// Output the face element
-  void output_faces(std::ostream &outfile)
+  void output_faces(std::ostream& outfile)
   {
     // Loop over the elements
     unsigned n_element = this->nelement();
     for (unsigned e = 0; e < n_element; e++)
     {
-      dynamic_cast<ELEMENT *>(element_pt(e))->output_faces(outfile);
+      dynamic_cast<ELEMENT*>(element_pt(e))->output_faces(outfile);
     }
   }
 
   // Find the neighbour
-  void neighbour_finder(FiniteElement *const &bulk_element_pt,
-                        const int &face_index,
-                        const Vector<double> &s_bulk,
-                        FaceElement *&face_element_pt,
-                        Vector<double> &s_face)
+  void neighbour_finder(FiniteElement* const& bulk_element_pt,
+                        const int& face_index,
+                        const Vector<double>& s_bulk,
+                        FaceElement*& face_element_pt,
+                        Vector<double>& s_face)
   {
     // The face coordinate is always a vector of size zero
     s_face.resize(0);
@@ -201,13 +201,13 @@ public:
             {
               // Right face of previous element
               face_element_pt =
-                dynamic_cast<ELEMENT *>(Element_pt[e - 1])->face_element_pt(1);
+                dynamic_cast<ELEMENT*>(Element_pt[e - 1])->face_element_pt(1);
             }
             // Otherwie make periodic
             else
             {
               face_element_pt =
-                dynamic_cast<ELEMENT *>(Element_pt[n_element - 1])
+                dynamic_cast<ELEMENT*>(Element_pt[n_element - 1])
                   ->face_element_pt(1);
               // dynamic_cast<ELEMENT*>(Element_pt[e])->face_element_pt(0);
             }
@@ -220,13 +220,13 @@ public:
             {
               // Left face of next element
               face_element_pt =
-                dynamic_cast<ELEMENT *>(Element_pt[e + 1])->face_element_pt(0);
+                dynamic_cast<ELEMENT*>(Element_pt[e + 1])->face_element_pt(0);
             }
             // Otherwie make periodic
             else
             {
               face_element_pt =
-                dynamic_cast<ELEMENT *>(Element_pt[0])->face_element_pt(0);
+                dynamic_cast<ELEMENT*>(Element_pt[0])->face_element_pt(0);
               // dynamic_cast<ELEMENT*>(Element_pt[e])->face_element_pt(1);
             }
             break;
@@ -270,7 +270,7 @@ public:
   }
 
   /// Compute the complete errors in the problem
-  void compute_error(const double &t, Vector<double> &error)
+  void compute_error(const double& t, Vector<double>& error)
   {
     error[0] = 0.0;
 
@@ -281,7 +281,7 @@ public:
     // Do the timestep
     for (unsigned e = 0; e < n_element; e++)
     {
-      dynamic_cast<ScalarAdvectionEquations<1> *>(
+      dynamic_cast<ScalarAdvectionEquations<1>*>(
         Problem::mesh_pt()->element_pt(e))
         ->compute_error(
           std::cout, Global::initial_condition, t, local_error, local_norm);
@@ -290,7 +290,7 @@ public:
   }
 
   // Setup the initial conditions
-  void set_initial_conditions(const double &dt)
+  void set_initial_conditions(const double& dt)
   {
     this->initialise_dt(dt);
     const unsigned n_element = Problem::mesh_pt()->nelement();
@@ -306,12 +306,12 @@ public:
     // Set to a given function
     for (unsigned e = 0; e < n_element; e++)
     {
-      FiniteElement *const elem_pt = mesh_pt()->finite_element_pt(e);
+      FiniteElement* const elem_pt = mesh_pt()->finite_element_pt(e);
       const unsigned n_node = elem_pt->nnode();
       for (unsigned n = 0; n < n_node; n++)
       {
         // Cache the node
-        Node *nod_pt = elem_pt->node_pt(n);
+        Node* nod_pt = elem_pt->node_pt(n);
         // Set the x-coordinate
         x[0] = nod_pt->x(0);
         // Get the initial condition
@@ -335,16 +335,16 @@ public:
   /// This virtual so that it can be overloaded in the discontinuous problem
   /// to setup the coupling degrees of freedom for implicit timestepping
   /// when required.
-  virtual void assign_equation_numbers(const bool &explicit_timestepper)
+  virtual void assign_equation_numbers(const bool& explicit_timestepper)
   {
     // The default is simply to assign the equation numbers
     std::cout << assign_eqn_numbers() << " Equation numbers assigned "
               << std::endl;
   }
 
-  void parameter_study(std::ostream &trace,
-                       const bool &explicit_timestepper,
-                       const bool &disc)
+  void parameter_study(std::ostream& trace,
+                       const bool& explicit_timestepper,
+                       const bool& disc)
   {
     // Defer assignment of the equation numbers until the parameter study
     // so that the inclusion of coupling terms between faces can be
@@ -412,7 +412,7 @@ class DGProblem : public AdvectionProblem
 public:
   /// Assign the equations number associated with the problem
   /// AFTER setting up any potential coupling between the faces.
-  virtual void assign_equation_numbers(const bool &explicit_timestepper)
+  virtual void assign_equation_numbers(const bool& explicit_timestepper)
   {
     // Make the formulation discontinuous if we have an explicit timestepper
     if (explicit_timestepper)
@@ -421,7 +421,7 @@ public:
     }
 
     // Setup the coupling between the faces
-    dynamic_cast<OneDimMesh<ELEMENT> *>(this->mesh_pt())
+    dynamic_cast<OneDimMesh<ELEMENT>*>(this->mesh_pt())
       ->setup_face_neighbour_info(!explicit_timestepper);
 
     // The default is simply to assign the equation numbers
@@ -430,7 +430,7 @@ public:
   }
 
   /// Problem constructor:
-  DGProblem(const unsigned &n_element)
+  DGProblem(const unsigned& n_element)
   {
     // Create a OneDimMesh Mesh object and set it to be the problem's mesh.
     // The element type, TwoNodePoissonElement, is passed  as a template
@@ -442,7 +442,7 @@ public:
     // Set the wind function
     for (unsigned e = 0; e < n_element; e++)
     {
-      dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e))->wind_fct_pt() =
+      dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))->wind_fct_pt() =
         &Global::constant_wind;
     }
   }
@@ -460,7 +460,7 @@ class ContProblem : public AdvectionProblem
 {
 public:
   /// Problem constructor:
-  ContProblem(const unsigned &n_element) : AdvectionProblem()
+  ContProblem(const unsigned& n_element) : AdvectionProblem()
   {
     // Create a OneDimMesh Mesh object and set it to be the problem's mesh.
     // The element type, TwoNodePoissonElement, is passed  as a template
@@ -480,7 +480,7 @@ public:
     // Set the wind function
     for (unsigned e = 0; e < n_element; e++)
     {
-      dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e))->wind_fct_pt() =
+      dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))->wind_fct_pt() =
         &Global::constant_wind;
     }
   }

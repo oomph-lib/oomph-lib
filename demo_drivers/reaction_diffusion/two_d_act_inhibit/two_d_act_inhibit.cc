@@ -58,7 +58,7 @@ namespace GlobalVariables
   double A = -0.1;
 
   // Simple reaction kinetics
-  void activator_inhibitor_reaction(const Vector<double> &C, Vector<double> &R)
+  void activator_inhibitor_reaction(const Vector<double>& C, Vector<double>& R)
   {
     // Inhibitor loss is linearly proportional to concentrations of activator
     // and inhibitor
@@ -69,8 +69,8 @@ namespace GlobalVariables
   }
 
   /// Derivative of simple reaction kinetics above
-  void activator_inhibitor_reaction_derivative(const Vector<double> &C,
-                                               DenseMatrix<double> &dRdC)
+  void activator_inhibitor_reaction_derivative(const Vector<double>& C,
+                                               DenseMatrix<double>& dRdC)
   {
     dRdC(0, 0) = 1.0;
     dRdC(0, 1) = 1.0;
@@ -89,7 +89,7 @@ class ActivatorInhibitorProblem : public Problem
 {
 public:
   /// Constructor, number of elements in the x and y directions
-  ActivatorInhibitorProblem(const unsigned &nx, const unsigned &ny);
+  ActivatorInhibitorProblem(const unsigned& nx, const unsigned& ny);
 
   /// Update the problem specs after solve (empty)
   void actions_after_newton_solve() {}
@@ -98,7 +98,7 @@ public:
   void actions_before_newton_solve() {}
 
   /// Timestep the problem with constant timestep dt for nstep steps
-  void timestep(const double &dt, const unsigned &nstep);
+  void timestep(const double& dt, const unsigned& nstep);
 };
 
 //========================================================================
@@ -106,7 +106,7 @@ public:
 //========================================================================
 template<class ELEMENT>
 ActivatorInhibitorProblem<ELEMENT>::ActivatorInhibitorProblem(
-  const unsigned &nx, const unsigned &ny)
+  const unsigned& nx, const unsigned& ny)
 {
   // Allocate the timestepper
   add_time_stepper_pt(new BDF<2>); // SEG FAULT for Steady<0>
@@ -117,7 +117,7 @@ ActivatorInhibitorProblem<ELEMENT>::ActivatorInhibitorProblem(
 
   // Sort out the periodic boundaries (miss out the ends)
   // Storage for the corners
-  Vector<Node *> corners_pt(4);
+  Vector<Node*> corners_pt(4);
   // Find the number of nodes on the vertical boundary
   unsigned n_node = mesh_pt()->nboundary_node(1);
   if (n_node > 0)
@@ -150,7 +150,7 @@ ActivatorInhibitorProblem<ELEMENT>::ActivatorInhibitorProblem(
   unsigned n_element = mesh_pt()->nelement();
   for (unsigned e = 0; e < n_element; e++)
   {
-    ELEMENT *elem_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* elem_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
     // Set the timescales
     elem_pt->tau_pt() = &GlobalVariables::Tau;
@@ -174,8 +174,8 @@ ActivatorInhibitorProblem<ELEMENT>::ActivatorInhibitorProblem(
 /// Function to timestep the problem
 //======================================================================
 template<class ELEMENT>
-void ActivatorInhibitorProblem<ELEMENT>::timestep(const double &dt,
-                                                  const unsigned &nstep)
+void ActivatorInhibitorProblem<ELEMENT>::timestep(const double& dt,
+                                                  const unsigned& nstep)
 
 {
   // Set the initial concentrations of the reagents --- the homogeneous state
@@ -197,7 +197,7 @@ void ActivatorInhibitorProblem<ELEMENT>::timestep(const double &dt,
   for (unsigned n = 0; n < n_node; n++)
   {
     // Local pointer to the node
-    Node *nod_pt = mesh_pt()->node_pt(n);
+    Node* nod_pt = mesh_pt()->node_pt(n);
     // Get the absolute value of the parameter A
     double a13 = pow(std::abs(GlobalVariables::A), (1.0 / 3.0));
 

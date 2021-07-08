@@ -47,9 +47,9 @@ namespace oomph
   //=============================================================================
   template<>
   BiharmonicFluxElement<2>::BiharmonicFluxElement(
-    FiniteElement *const &bulk_el_pt,
-    const int &face_index,
-    const unsigned &b) :
+    FiniteElement* const& bulk_el_pt,
+    const int& face_index,
+    const unsigned& b) :
     FaceGeometry<BiharmonicElement<2>>(), FaceElement()
   {
     // Let the bulk element build the FaceElement, i.e. setup the pointers
@@ -75,7 +75,7 @@ namespace oomph
   /// The jacobian of the 1D face element is computed which is dt/ds_t
   //=============================================================================
   template<>
-  double BiharmonicFluxElement<2>::J_eulerian(const Vector<double> &s) const
+  double BiharmonicFluxElement<2>::J_eulerian(const Vector<double>& s) const
   {
     // Find the number of nodes
     unsigned n_node = this->nnode();
@@ -125,8 +125,8 @@ namespace oomph
   //=============================================================================
   template<>
   void BiharmonicFluxElement<
-    2>::fill_in_generic_residual_contribution_biharmonic_flux(Vector<double>
-                                                                &residual)
+    2>::fill_in_generic_residual_contribution_biharmonic_flux(Vector<double>&
+                                                                residual)
   {
     // Find out how many nodes there are in the face element
     unsigned n_node = this->nnode();

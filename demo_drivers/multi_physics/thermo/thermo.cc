@@ -57,7 +57,7 @@ class QThermalPVDElement :
 {
 private:
   /// Pointer to a private data member, the thermal expansion coefficient
-  double *Alpha_pt;
+  double* Alpha_pt;
 
   /// The static default value of Alpha
   static double Default_Physical_Constant_Value;
@@ -74,26 +74,26 @@ public:
   ///\short The required number of values stored at the nodes is the sum of the
   /// required values of the two single-physics elements. Note that this step is
   /// generic for any multi-physics element of this type.
-  unsigned required_nvalue(const unsigned &n) const
+  unsigned required_nvalue(const unsigned& n) const
   {
     return (QUnsteadyHeatElement<DIM, 3>::required_nvalue(n) +
             QPVDElement<DIM, 3>::required_nvalue(n));
   }
 
   /// Access function for the thermal expansion coefficient (const version)
-  const double &alpha() const
+  const double& alpha() const
   {
     return *Alpha_pt;
   }
 
   /// Access function for the pointer to the thermal expansion coefficientr
-  double *&alpha_pt()
+  double*& alpha_pt()
   {
     return Alpha_pt;
   }
 
   ///  Overload the standard output function with the broken default
-  void output(ostream &outfile)
+  void output(ostream& outfile)
   {
     FiniteElement::output(outfile);
   }
@@ -101,7 +101,7 @@ public:
   /// \short Output function:
   ///  Output x, y, u, v, p, theta at Nplot^DIM plot points
   // Start of output function
-  void output(ostream &outfile, const unsigned &nplot)
+  void output(ostream& outfile, const unsigned& nplot)
   {
     // vector of local coordinates
     Vector<double> s(DIM);
@@ -136,20 +136,20 @@ public:
   } // End of output function
 
   /// \short C-style output function: Broken default
-  void output(FILE *file_pt)
+  void output(FILE* file_pt)
   {
     FiniteElement::output(file_pt);
   }
 
   ///  \short C-style output function: Broken default
-  void output(FILE *file_pt, const unsigned &n_plot)
+  void output(FILE* file_pt, const unsigned& n_plot)
   {
     FiniteElement::output(file_pt, n_plot);
   }
 
   /// \short Output function for an exact solution: Broken default
-  void output_fct(ostream &outfile,
-                  const unsigned &Nplot,
+  void output_fct(ostream& outfile,
+                  const unsigned& Nplot,
                   FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
   {
     FiniteElement::output_fct(outfile, Nplot, exact_soln_pt);
@@ -157,9 +157,9 @@ public:
 
   /// \short Output function for a time-dependent exact solution:
   /// Broken default.
-  void output_fct(ostream &outfile,
-                  const unsigned &Nplot,
-                  const double &time,
+  void output_fct(ostream& outfile,
+                  const unsigned& Nplot,
+                  const double& time,
                   FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
   {
     FiniteElement::output_fct(outfile, Nplot, time, exact_soln_pt);
@@ -167,7 +167,7 @@ public:
 
   /// \short Compute norm of solution: use the version in the unsteady heat
   /// class
-  void compute_norm(double &el_norm)
+  void compute_norm(double& el_norm)
   {
     QUnsteadyHeatElement<DIM, 3>::compute_norm(el_norm);
   }
@@ -177,11 +177,11 @@ public:
   /// Plot at a given number of plot points and compute L2 error
   /// and L2 norm of velocity solution over element
   /// Call the broken default
-  void compute_error(ostream &outfile,
+  void compute_error(ostream& outfile,
                      FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
-                     const double &time,
-                     double &error,
-                     double &norm)
+                     const double& time,
+                     double& error,
+                     double& norm)
   {
     FiniteElement::compute_error(outfile, exact_soln_pt, time, error, norm);
   }
@@ -191,20 +191,20 @@ public:
   /// Plot at a given number of plot points and compute L2 error
   /// and L2 norm of velocity solution over element
   /// Call the broken default
-  void compute_error(ostream &outfile,
+  void compute_error(ostream& outfile,
                      FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-                     double &error,
-                     double &norm)
+                     double& error,
+                     double& norm)
   {
     FiniteElement::compute_error(outfile, exact_soln_pt, error, norm);
   }
 
   /// \short Overload the growth function in the advection-diffusion equations.
   /// to be temperature-dependent.
-  void get_isotropic_growth(const unsigned &ipt,
-                            const Vector<double> &s,
-                            const Vector<double> &xi,
-                            double &gamma) const
+  void get_isotropic_growth(const unsigned& ipt,
+                            const Vector<double>& s,
+                            const Vector<double>& xi,
+                            double& gamma) const
   {
     // The growth is the undeformed coefficient plus linear thermal
     // expansion
@@ -214,7 +214,7 @@ public:
   /// \short Calculate the contribution to the residual vector.
   /// We assume that the vector has been initialised to zero
   /// before this function is called.
-  void fill_in_contribution_to_residuals(Vector<double> &residuals)
+  void fill_in_contribution_to_residuals(Vector<double>& residuals)
   {
     // Call the residuals of the advection-diffusion eqautions
     UnsteadyHeatEquations<DIM>::fill_in_contribution_to_residuals(residuals);
@@ -225,8 +225,8 @@ public:
   ///\short Compute the element's residual Vector and the jacobian matrix
   /// We assume that the residuals vector and jacobian matrix have been
   /// initialised to zero before calling this function
-  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                        DenseMatrix<double> &jacobian)
+  void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                        DenseMatrix<double>& jacobian)
   {
     // Just call standard finite difference for a SolidFiniteElement so
     // that variations in the nodal positions are taken into account
@@ -255,7 +255,7 @@ namespace Global_Physical_Variables
   double Nu = 0.3; // ADJUST
 
   /// We need a constitutive law for the solid mechanics
-  ConstitutiveLaw *Constitutive_law_pt;
+  ConstitutiveLaw* Constitutive_law_pt;
 
 } // namespace Global_Physical_Variables
 
@@ -293,9 +293,9 @@ public:
   /// \short Overloaded version of the problem's access function to
   /// the mesh. Recasts the pointer to the base Mesh object to
   /// the actual mesh type.
-  ElasticRectangularQuadMesh<ELEMENT> *mesh_pt()
+  ElasticRectangularQuadMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<ElasticRectangularQuadMesh<ELEMENT> *>(
+    return dynamic_cast<ElasticRectangularQuadMesh<ELEMENT>*>(
       Problem::mesh_pt());
   }
 
@@ -339,7 +339,7 @@ ThermalProblem<ELEMENT>::ThermalProblem()
     for (unsigned n = 0; n < n_boundary_node; n++)
     {
       // Get the pointer to the node
-      Node *nod_pt = mesh_pt()->boundary_node_pt(0, n);
+      Node* nod_pt = mesh_pt()->boundary_node_pt(0, n);
       // Pin the temperature at the node
       nod_pt->pin(0);
       // Set the temperature to 0.0 (cooled)
@@ -350,7 +350,7 @@ ThermalProblem<ELEMENT>::ThermalProblem()
     n_boundary_node = mesh_pt()->nboundary_node(2);
     for (unsigned n = 0; n < n_boundary_node; n++)
     {
-      Node *nod_pt = mesh_pt()->boundary_node_pt(2, n);
+      Node* nod_pt = mesh_pt()->boundary_node_pt(2, n);
       // Pin the temperature at the node
       nod_pt->pin(0);
       // Set the temperature to 1.0 (heated)
@@ -361,14 +361,13 @@ ThermalProblem<ELEMENT>::ThermalProblem()
     n_boundary_node = mesh_pt()->nboundary_node(1);
     for (unsigned n = 0; n < n_boundary_node; n++)
     {
-      static_cast<SolidNode *>(mesh_pt()->boundary_node_pt(1, n))
+      static_cast<SolidNode*>(mesh_pt()->boundary_node_pt(1, n))
         ->pin_position(0);
     }
 
     // We need to completely fix the lower-right corner of the block to
     // prevent vertical rigid-body motions
-    static_cast<SolidNode *>(mesh_pt()->boundary_node_pt(1, 0))
-      ->pin_position(1);
+    static_cast<SolidNode*>(mesh_pt()->boundary_node_pt(1, 0))->pin_position(1);
   }
 
   // Complete the build of all elements so they are fully functional
@@ -380,7 +379,7 @@ ThermalProblem<ELEMENT>::ThermalProblem()
   for (unsigned int i = 0; i < n_element; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the coefficient of thermal expansion
     el_pt->alpha_pt() = &Global_Physical_Variables::Alpha;
@@ -422,7 +421,7 @@ void ThermalProblem<ELEMENT>::doc_solution()
 //=====================================================================
 /// Driver code for 2D Thermoelasticity problem
 //====================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // "Big G" Linear constitutive equations:
   Global_Physical_Variables::Constitutive_law_pt = new GeneralisedHookean(

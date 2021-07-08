@@ -91,7 +91,7 @@ namespace oomph
     }
 
     /// Broken copy constructor.
-    TrilinosPreconditionerBase(const TrilinosPreconditionerBase &)
+    TrilinosPreconditionerBase(const TrilinosPreconditionerBase&)
     {
       BrokenCopy::broken_copy("TrilinosPreconditionerBase");
     }
@@ -118,21 +118,21 @@ namespace oomph
     /// \short Function to setup a preconditioner for the linear system defined
     /// by the oomph-lib oomph_matrix_pt and Epetra epetra_matrix_pt matrices.
     /// This method is called by Trilinos solvers.
-    void setup(Epetra_CrsMatrix *epetra_matrix_pt);
+    void setup(Epetra_CrsMatrix* epetra_matrix_pt);
 
     /// \short applies the preconditioner
-    void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+    void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
 
     /// Access function to Epetra_preconditioner_pt.
     /// For use with \c TrilinosAztecOOSolver
-    Epetra_Operator *&epetra_operator_pt()
+    Epetra_Operator*& epetra_operator_pt()
     {
       return Epetra_preconditioner_pt;
     }
 
     /// Access function to Epetra_preconditioner_pt (const version)
     /// For use with \c TrilinosAztecOOSolver
-    Epetra_Operator *epetra_operator_pt() const
+    Epetra_Operator* epetra_operator_pt() const
     {
       return Epetra_preconditioner_pt;
     }
@@ -141,15 +141,15 @@ namespace oomph
     /// \short Function to set up a specific Trilinos preconditioner.
     /// This is called by setup(...).
     virtual void setup_trilinos_preconditioner(
-      Epetra_CrsMatrix *epetra_matrix_pt) = 0;
+      Epetra_CrsMatrix* epetra_matrix_pt) = 0;
 
     /// \short The preconditioner which will be set up using function
     /// setup_trilinos_preconditioner(...)
-    Epetra_Operator *Epetra_preconditioner_pt;
+    Epetra_Operator* Epetra_preconditioner_pt;
 
     /// \short Pointer used to store the epetra matrix - only used when this
     /// preconditioner is setup using the oomph-lib interface
-    Epetra_CrsMatrix *Epetra_matrix_pt;
+    Epetra_CrsMatrix* Epetra_matrix_pt;
   };
 
   //============================================================================
@@ -176,7 +176,7 @@ namespace oomph
     virtual ~TrilinosMLPreconditioner() {}
 
     /// Broken copy constructor.
-    TrilinosMLPreconditioner(const TrilinosMLPreconditioner &)
+    TrilinosMLPreconditioner(const TrilinosMLPreconditioner&)
     {
       BrokenCopy::broken_copy("TrilinosMLPreconditioner");
     }
@@ -264,7 +264,7 @@ namespace oomph
   protected:
     /// \short Function to set up the ML preconditioner. It is assumed
     /// Trilinos_matrix_pt points to a suitable matrix.
-    void setup_trilinos_preconditioner(Epetra_CrsMatrix *epetra_matrix_pt);
+    void setup_trilinos_preconditioner(Epetra_CrsMatrix* epetra_matrix_pt);
 
     // Parameter list of control flags for the preconditioner
     Teuchos::ParameterList ML_parameters;
@@ -294,7 +294,7 @@ namespace oomph
     virtual ~TrilinosIFPACKPreconditioner() {}
 
     /// Broken copy constructor.
-    TrilinosIFPACKPreconditioner(const TrilinosIFPACKPreconditioner &)
+    TrilinosIFPACKPreconditioner(const TrilinosIFPACKPreconditioner&)
     {
       BrokenCopy::broken_copy("TrilinosIFPACKPreconditioner");
     }
@@ -318,25 +318,25 @@ namespace oomph
     }
 
     /// Access function for ILU_fill_level
-    int &ilu_fill_level()
+    int& ilu_fill_level()
     {
       return ILU_fill_level;
     }
 
     /// Access function for ILUT_fill_level
-    double &ilut_fill_level()
+    double& ilut_fill_level()
     {
       return ILUT_fill_level;
     }
 
     /// Access function for the absolute threshold
-    double &absolute_threshold()
+    double& absolute_threshold()
     {
       return Absolute_threshold;
     }
 
     /// Access function for the relative threshold
-    double &relative_threshold()
+    double& relative_threshold()
     {
       return Relative_threshold;
     }
@@ -344,7 +344,7 @@ namespace oomph
   protected:
     /// \short Function to set up an IFPACK preconditioner. It is assumed
     /// Trilinos_matrix_pt points to a suitable matrix.
-    void setup_trilinos_preconditioner(Epetra_CrsMatrix *epetra_matrix_pt);
+    void setup_trilinos_preconditioner(Epetra_CrsMatrix* epetra_matrix_pt);
 
     /// Type of ILU preconditioner
     std::string Preconditioner_type;

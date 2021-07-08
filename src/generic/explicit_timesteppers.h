@@ -74,13 +74,13 @@ namespace oomph
     ExplicitTimeSteppableObject() {}
 
     /// Broken copy constructor
-    ExplicitTimeSteppableObject(const ExplicitTimeSteppableObject &)
+    ExplicitTimeSteppableObject(const ExplicitTimeSteppableObject&)
     {
       BrokenCopy::broken_copy("ExplicitTimeSteppableObject");
     }
 
     /// Broken assignment operator
-    void operator=(const ExplicitTimeSteppableObject &)
+    void operator=(const ExplicitTimeSteppableObject&)
     {
       BrokenCopy::broken_assign("ExplicitTimeSteppableObject");
     }
@@ -90,20 +90,20 @@ namespace oomph
 
     ///\short A single virtual function that returns the residuals
     /// vector multiplied by the inverse mass matrix
-    virtual void get_dvaluesdt(DoubleVector &minv_res);
+    virtual void get_dvaluesdt(DoubleVector& minv_res);
 
     /// Function that gets the values of the dofs in the object
-    virtual void get_dofs(DoubleVector &dofs) const;
+    virtual void get_dofs(DoubleVector& dofs) const;
 
     /// Function that gets the history values of the dofs in the object
-    virtual void get_dofs(const unsigned &t, DoubleVector &dofs) const;
+    virtual void get_dofs(const unsigned& t, DoubleVector& dofs) const;
 
     /// Function that sets the values of the dofs in the object
-    virtual void set_dofs(const DoubleVector &dofs);
+    virtual void set_dofs(const DoubleVector& dofs);
 
     /// Function that adds the values to the dofs
-    virtual void add_to_dofs(const double &lambda,
-                             const DoubleVector &increment_dofs);
+    virtual void add_to_dofs(const double& lambda,
+                             const DoubleVector& increment_dofs);
 
     /// \short Empty virtual function to do anything needed before a stage of
     /// an explicit time step (Runge-Kutta steps contain multiple stages per
@@ -126,11 +126,11 @@ namespace oomph
 
     ///\short Broken virtual function that should be overloaded to
     /// return access to the local time in the object
-    virtual double &time();
+    virtual double& time();
 
     /// \short Virtual function that should be overloaded to return a pointer to
     /// a Time object.
-    virtual Time *time_pt() const;
+    virtual Time* time_pt() const;
   };
 
   //=====================================================================
@@ -148,13 +148,13 @@ namespace oomph
     ExplicitTimeStepper() {}
 
     /// Broken copy constructor
-    ExplicitTimeStepper(const ExplicitTimeStepper &)
+    ExplicitTimeStepper(const ExplicitTimeStepper&)
     {
       BrokenCopy::broken_copy("ExplicitTimeStepper");
     }
 
     /// Broken assignment operator
-    void operator=(const ExplicitTimeStepper &)
+    void operator=(const ExplicitTimeStepper&)
     {
       BrokenCopy::broken_assign("ExplicitTimeStepper");
     }
@@ -164,8 +164,8 @@ namespace oomph
 
     /// Pure virtual function that is used to advance time in the object
     // referenced by object_pt by an amount dt
-    virtual void timestep(ExplicitTimeSteppableObject *const &object_pt,
-                          const double &dt) = 0;
+    virtual void timestep(ExplicitTimeSteppableObject* const& object_pt,
+                          const double& dt) = 0;
   };
 
   ///===========================================================
@@ -181,21 +181,21 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    Euler(const Euler &)
+    Euler(const Euler&)
     {
       BrokenCopy::broken_copy("Euler");
     }
 
     /// Broken assignment operator
-    void operator=(const Euler &)
+    void operator=(const Euler&)
     {
       BrokenCopy::broken_assign("Euler");
     }
 
     /// \short Overload function that is used to advance time in the object
     /// reference by object_pt by an amount dt
-    void timestep(ExplicitTimeSteppableObject *const &object_pt,
-                  const double &dt);
+    void timestep(ExplicitTimeSteppableObject* const& object_pt,
+                  const double& dt);
   };
 
   ///===========================================================
@@ -212,21 +212,21 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    RungeKutta(const RungeKutta &)
+    RungeKutta(const RungeKutta&)
     {
       BrokenCopy::broken_copy("RungeKutta");
     }
 
     /// Broken assignment operator
-    void operator=(const RungeKutta &)
+    void operator=(const RungeKutta&)
     {
       BrokenCopy::broken_assign("RungeKutta");
     }
 
     /// Function that is used to advance time in the object
     // reference by object_pt by an amount dt
-    void timestep(ExplicitTimeSteppableObject *const &object_pt,
-                  const double &dt);
+    void timestep(ExplicitTimeSteppableObject* const& object_pt,
+                  const double& dt);
   };
 
   ///===========================================================
@@ -243,20 +243,20 @@ namespace oomph
     LowStorageRungeKutta();
 
     /// Broken copy constructor
-    LowStorageRungeKutta(const LowStorageRungeKutta &)
+    LowStorageRungeKutta(const LowStorageRungeKutta&)
     {
       BrokenCopy::broken_copy("LowStorageRungeKutta");
     }
 
     /// Broken assignment operator
-    void operator=(const LowStorageRungeKutta &)
+    void operator=(const LowStorageRungeKutta&)
     {
       BrokenCopy::broken_assign("LowStorageRungeKutta");
     }
 
     /// Function that is used to advance the solution by time dt
-    void timestep(ExplicitTimeSteppableObject *const &object_pt,
-                  const double &dt);
+    void timestep(ExplicitTimeSteppableObject* const& object_pt,
+                  const double& dt);
   };
 
   ///===========================================================
@@ -277,24 +277,24 @@ namespace oomph
     EBDF3() {}
 
     /// Broken copy constructor
-    EBDF3(const EBDF3 &)
+    EBDF3(const EBDF3&)
     {
       BrokenCopy::broken_copy("EBDF3");
     }
 
     /// Broken assignment operator
-    void operator=(const EBDF3 &)
+    void operator=(const EBDF3&)
     {
       BrokenCopy::broken_assign("EBDF3");
     }
 
-    void set_weights(const double &dtn,
-                     const double &dtnm1,
-                     const double &dtnm2);
+    void set_weights(const double& dtn,
+                     const double& dtnm1,
+                     const double& dtnm2);
 
     /// Function that is used to advance the solution by time dt
-    void timestep(ExplicitTimeSteppableObject *const &object_pt,
-                  const double &dt);
+    void timestep(ExplicitTimeSteppableObject* const& object_pt,
+                  const double& dt);
   };
 
 } // namespace oomph

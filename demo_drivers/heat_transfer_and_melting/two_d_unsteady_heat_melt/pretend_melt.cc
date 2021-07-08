@@ -58,7 +58,7 @@ using namespace MathematicalConstants;
 namespace ProblemParameters
 {
   /// Get flux applied along boundary x=0.
-  void flux(const double &time, const Vector<double> &x, double &flux)
+  void flux(const double& time, const Vector<double>& x, double& flux)
   {
     flux = 20.0 * sin(2.0 * 4.0 * MathematicalConstants::Pi * time);
   }
@@ -118,7 +118,7 @@ public:
   }
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 private:
   /// Create flux elements
@@ -132,14 +132,14 @@ private:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Get pointer to the bulk element that is adjacent to boundary b
-      ELEMENT *bulk_elem_pt =
-        dynamic_cast<ELEMENT *>(Bulk_mesh_pt->boundary_element_pt(b, e));
+      ELEMENT* bulk_elem_pt =
+        dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(b, e));
 
       // What is the face index of element e along boundary b
       int face_index = Bulk_mesh_pt->face_index_at_boundary(b, e);
 
       // Build the corresponding prescribed-flux element
-      UnsteadyHeatFluxPseudoMeltElement<ELEMENT> *flux_element_pt =
+      UnsteadyHeatFluxPseudoMeltElement<ELEMENT>* flux_element_pt =
         new UnsteadyHeatFluxPseudoMeltElement<ELEMENT>(bulk_elem_pt,
                                                        face_index);
 
@@ -156,8 +156,8 @@ private:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Get pointer to the bulk element that is adjacent to boundary b
-      ELEMENT *bulk_elem_pt =
-        dynamic_cast<ELEMENT *>(Bulk_mesh_pt->boundary_element_pt(b, e));
+      ELEMENT* bulk_elem_pt =
+        dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(b, e));
 
       // What is the face index of element e along boundary b
       int face_index = Bulk_mesh_pt->face_index_at_boundary(b, e);
@@ -165,7 +165,7 @@ private:
       if (CommandLineArgs::command_line_flag_has_been_set("--melt_everywhere"))
       {
         // Build the corresponding prescribed-flux element
-        UnsteadyHeatFluxPseudoMeltElement<ELEMENT> *flux_element_pt =
+        UnsteadyHeatFluxPseudoMeltElement<ELEMENT>* flux_element_pt =
           new UnsteadyHeatFluxPseudoMeltElement<ELEMENT>(bulk_elem_pt,
                                                          face_index);
 
@@ -175,7 +175,7 @@ private:
       else
       {
         // Build the corresponding prescribed-flux element
-        UnsteadyHeatFluxElement<ELEMENT> *flux_element_pt =
+        UnsteadyHeatFluxElement<ELEMENT>* flux_element_pt =
           new UnsteadyHeatFluxElement<ELEMENT>(bulk_elem_pt, face_index);
 
         // Add the prescribed-flux element to the surface mesh
@@ -224,8 +224,8 @@ private:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Upcast from GeneralisedElement to UnsteadyHeat flux element
-      UnsteadyHeatFluxPseudoMeltElement<ELEMENT> *el_pt =
-        dynamic_cast<UnsteadyHeatFluxPseudoMeltElement<ELEMENT> *>(
+      UnsteadyHeatFluxPseudoMeltElement<ELEMENT>* el_pt =
+        dynamic_cast<UnsteadyHeatFluxPseudoMeltElement<ELEMENT>*>(
           Surface_melt_mesh_pt->element_pt(e));
 
       // Set the pointer to the prescribed flux function
@@ -248,8 +248,8 @@ private:
       if (CommandLineArgs::command_line_flag_has_been_set("--melt_everywhere"))
       {
         // Upcast from GeneralisedElement to UnsteadyHeat flux element
-        UnsteadyHeatFluxPseudoMeltElement<ELEMENT> *el_pt =
-          dynamic_cast<UnsteadyHeatFluxPseudoMeltElement<ELEMENT> *>(
+        UnsteadyHeatFluxPseudoMeltElement<ELEMENT>* el_pt =
+          dynamic_cast<UnsteadyHeatFluxPseudoMeltElement<ELEMENT>*>(
             Surface_mesh_pt->element_pt(e));
 
         // Set the pointer to the prescribed flux function
@@ -268,8 +268,8 @@ private:
       else
       {
         // Upcast from GeneralisedElement to UnsteadyHeat flux element
-        UnsteadyHeatFluxElement<ELEMENT> *el_pt =
-          dynamic_cast<UnsteadyHeatFluxElement<ELEMENT> *>(
+        UnsteadyHeatFluxElement<ELEMENT>* el_pt =
+          dynamic_cast<UnsteadyHeatFluxElement<ELEMENT>*>(
             Surface_mesh_pt->element_pt(e));
 
         // Set the pointer to the prescribed flux function
@@ -279,13 +279,13 @@ private:
   }
 
   /// Pointers to specific mesh
-  RefineableTriangleMesh<ELEMENT> *Bulk_mesh_pt;
+  RefineableTriangleMesh<ELEMENT>* Bulk_mesh_pt;
 
   /// Pointer to the "surface" mesh
-  Mesh *Surface_melt_mesh_pt;
+  Mesh* Surface_melt_mesh_pt;
 
   /// Pointer to the "surface" mesh
-  Mesh *Surface_mesh_pt;
+  Mesh* Surface_mesh_pt;
 
   /// ID of flux boundary
   unsigned Flux_boundary_id;
@@ -317,13 +317,13 @@ UnsteadyHeatProblem<ELEMENT>::UnsteadyHeatProblem()
   add_time_stepper_pt(new BDF<2>);
 
   // Pointer to the closed curve that defines the outer boundary
-  TriangleMeshClosedCurve *closed_curve_pt = 0;
+  TriangleMeshClosedCurve* closed_curve_pt = 0;
 
   // Build outer boundary as Polygon
 
   // The boundary is bounded by three distinct boundaries, each
   // represented by its own polyline
-  Vector<TriangleMeshCurveSection *> boundary_polyline_pt(3);
+  Vector<TriangleMeshCurveSection*> boundary_polyline_pt(3);
 
   // Vertex coordinates on boundary
   Vector<Vector<double>> bound_coords(4);
@@ -388,7 +388,7 @@ UnsteadyHeatProblem<ELEMENT>::UnsteadyHeatProblem()
 
   // Create the triangle mesh polygon for outer boundary
   //----------------------------------------------------
-  TriangleMeshPolygon *outer_polygon =
+  TriangleMeshPolygon* outer_polygon =
     new TriangleMeshPolygon(boundary_polyline_pt);
 
   // Set the pointer
@@ -410,7 +410,7 @@ UnsteadyHeatProblem<ELEMENT>::UnsteadyHeatProblem()
                                                      time_stepper_pt());
 
   // Set error estimator for bulk mesh
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   Bulk_mesh_pt->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Set element size limits
@@ -451,7 +451,7 @@ UnsteadyHeatProblem<ELEMENT>::UnsteadyHeatProblem()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void UnsteadyHeatProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void UnsteadyHeatProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -488,7 +488,7 @@ void UnsteadyHeatProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
           doc_info.directory().c_str(),
           doc_info.number());
   some_file.open(filename);
-  unsigned nnod = dynamic_cast<UnsteadyHeatFluxPseudoMeltElement<ELEMENT> *>(
+  unsigned nnod = dynamic_cast<UnsteadyHeatFluxPseudoMeltElement<ELEMENT>*>(
                     Surface_melt_mesh_pt->element_pt(0))
                     ->nnode();
   Surface_melt_mesh_pt->output(some_file, nnod);
@@ -522,7 +522,7 @@ void UnsteadyHeatProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
 //=======start_of_main====================================================
 /// \short Driver code for unsteady heat equation
 //========================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

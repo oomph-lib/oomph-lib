@@ -240,7 +240,7 @@ namespace oomph
     unsigned n_non_halo_element_local = 0;
     for (unsigned e = 0; e < n_element; e++)
     {
-      GeneralisedElement *elem_pt = this->mesh_pt()->element_pt(e);
+      GeneralisedElement* elem_pt = this->mesh_pt()->element_pt(e);
 #ifdef OOMPH_HAS_MPI
       // Ignore halo elements
       if (!elem_pt->is_halo())
@@ -312,7 +312,7 @@ namespace oomph
     // Find pointers to all the halo dofs
     // There may be more of these than required by my_eqns
     //(but should not be less)
-    std::map<unsigned, double *> halo_data_pt;
+    std::map<unsigned, double*> halo_data_pt;
     this->get_all_halo_data(halo_data_pt);
 
     // Now setup the Halo_dofs
@@ -323,7 +323,7 @@ namespace oomph
   /// Distribute the problem without doc; report stats if required.
   /// Returns actual partitioning used, e.g. for restart.
   //==================================================================
-  Vector<unsigned> Problem::distribute(const bool &report_stats)
+  Vector<unsigned> Problem::distribute(const bool& report_stats)
   {
     // Set dummy doc paramemters
     DocInfo doc_info;
@@ -344,7 +344,7 @@ namespace oomph
   /// Returns actual partitioning used, e.g. for restart.
   //==================================================================
   Vector<unsigned> Problem::distribute(
-    const Vector<unsigned> &element_partition, const bool &report_stats)
+    const Vector<unsigned>& element_partition, const bool& report_stats)
   {
 #ifdef PARANOID
     bool has_non_zero_entry = false;
@@ -379,8 +379,8 @@ namespace oomph
   /// Distribute the problem and doc to specified DocInfo.
   /// Returns actual partitioning used, e.g. for restart.
   //==================================================================
-  Vector<unsigned> Problem::distribute(DocInfo &doc_info,
-                                       const bool &report_stats)
+  Vector<unsigned> Problem::distribute(DocInfo& doc_info,
+                                       const bool& report_stats)
   {
     // Set the sizes of the input and output vectors
     unsigned n_element = mesh_pt()->nelement();
@@ -399,9 +399,9 @@ namespace oomph
   /// Returns actual partitioning used, e.g. for restart.
   //==================================================================
   Vector<unsigned> Problem::distribute(
-    const Vector<unsigned> &element_partition,
-    DocInfo &doc_info,
-    const bool &report_stats)
+    const Vector<unsigned>& element_partition,
+    DocInfo& doc_info,
+    const bool& report_stats)
   {
     // Storage for number of processors and number of elements in global mesh
     int n_proc = this->communicator_pt()->nproc();
@@ -447,8 +447,8 @@ namespace oomph
       if (n_mesh == 0)
       {
         // Check refinement levels
-        if (TreeBasedRefineableMeshBase *mmesh_pt =
-              dynamic_cast<TreeBasedRefineableMeshBase *>(mesh_pt(0)))
+        if (TreeBasedRefineableMeshBase* mmesh_pt =
+              dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(0)))
         {
           unsigned min_ref_level = 0;
           unsigned max_ref_level = 0;
@@ -466,8 +466,8 @@ namespace oomph
         {
           // Check refinement levels for each mesh individually
           // (one mesh is allowed to be "more uniformly refined" than another)
-          if (TreeBasedRefineableMeshBase *mmesh_pt =
-                dynamic_cast<TreeBasedRefineableMeshBase *>(mesh_pt(i_mesh)))
+          if (TreeBasedRefineableMeshBase* mmesh_pt =
+                dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(i_mesh)))
           {
             unsigned min_ref_level = 0;
             unsigned max_ref_level = 0;
@@ -523,7 +523,7 @@ namespace oomph
 #endif
 
         // Need to partition the global mesh before distributing
-        Mesh *global_mesh_pt = mesh_pt();
+        Mesh* global_mesh_pt = mesh_pt();
 
         // Vector listing the affiliation of each element
         unsigned nelem = global_mesh_pt->nelement();
@@ -650,8 +650,8 @@ namespace oomph
         {
           // Check if the only one mesh is an structured mesh
           bool structured_mesh = true;
-          TriangleMeshBase *tri_mesh_pt =
-            dynamic_cast<TriangleMeshBase *>(mesh_pt(0));
+          TriangleMeshBase* tri_mesh_pt =
+            dynamic_cast<TriangleMeshBase*>(mesh_pt(0));
           if (tri_mesh_pt != 0)
           {
             structured_mesh = false;
@@ -663,7 +663,7 @@ namespace oomph
             Base_mesh_element_number_plus_one.clear();
             for (unsigned e = 0; e < n_ele; e++)
             {
-              GeneralisedElement *el_pt = global_mesh_pt->element_pt(e);
+              GeneralisedElement* el_pt = global_mesh_pt->element_pt(e);
               Base_mesh_element_number_plus_one[el_pt] = e + 1;
               Base_mesh_element_pt[e] = el_pt;
             } // for (e<n_ele)
@@ -679,8 +679,8 @@ namespace oomph
           std::vector<bool> is_structured_mesh(n_mesh);
           for (unsigned i_mesh = 0; i_mesh < n_mesh; i_mesh++)
           {
-            TriangleMeshBase *tri_mesh_pt =
-              dynamic_cast<TriangleMeshBase *>(mesh_pt(i_mesh));
+            TriangleMeshBase* tri_mesh_pt =
+              dynamic_cast<TriangleMeshBase*>(mesh_pt(i_mesh));
             if (tri_mesh_pt != 0)
             {
               // Set the flags to indicate this is not an structured
@@ -713,7 +713,7 @@ namespace oomph
               const unsigned n_ele = mesh_pt(i_mesh)->nelement();
               for (unsigned e = 0; e < n_ele; e++)
               {
-                GeneralisedElement *el_pt = mesh_pt(i_mesh)->element_pt(e);
+                GeneralisedElement* el_pt = mesh_pt(i_mesh)->element_pt(e);
                 Base_mesh_element_number_plus_one[el_pt] = counter + 1;
                 Base_mesh_element_pt[counter] = el_pt;
                 // Inrease the global element number
@@ -756,7 +756,7 @@ namespace oomph
         }
 
         // Distribute the (sub)meshes (i.e. sort out their halo lookup schemes)
-        Vector<GeneralisedElement *> deleted_element_pt;
+        Vector<GeneralisedElement*> deleted_element_pt;
         if (n_mesh == 0)
         {
           global_mesh_pt->distribute(this->communicator_pt(),
@@ -792,7 +792,7 @@ namespace oomph
         unsigned n_del = deleted_element_pt.size();
         for (unsigned e = 0; e < n_del; e++)
         {
-          GeneralisedElement *el_pt = deleted_element_pt[e];
+          GeneralisedElement* el_pt = deleted_element_pt[e];
           unsigned old_el_number = Base_mesh_element_number_plus_one[el_pt] - 1;
           Base_mesh_element_number_plus_one[el_pt] = 0;
           Base_mesh_element_pt[old_el_number] = 0;
@@ -867,10 +867,10 @@ namespace oomph
   /// any user; the default is to use METIS to perform the partitioning
   /// (with a bit of cleaning up afterwards to sort out "special cases").
   //==================================================================
-  void Problem::partition_global_mesh(Mesh *&global_mesh_pt,
-                                      DocInfo &doc_info,
-                                      Vector<unsigned> &element_domain,
-                                      const bool &report_stats)
+  void Problem::partition_global_mesh(Mesh*& global_mesh_pt,
+                                      DocInfo& doc_info,
+                                      Vector<unsigned>& element_domain,
+                                      const bool& report_stats)
   {
     // Storage for number of processors and current processor
     int n_proc = this->communicator_pt()->nproc();
@@ -1042,8 +1042,8 @@ namespace oomph
   /// relative to it will be possible once this function
   /// has been called.
   //==================================================================
-  void Problem::prune_halo_elements_and_nodes(DocInfo &doc_info,
-                                              const bool &report_stats)
+  void Problem::prune_halo_elements_and_nodes(DocInfo& doc_info,
+                                              const bool& report_stats)
   {
     // Storage for number of processors and current processor
     int n_proc = this->communicator_pt()->nproc();
@@ -1094,13 +1094,13 @@ namespace oomph
 
         // Associate all elements with root in current Base mesh
         unsigned nel = Base_mesh_element_pt.size();
-        std::map<GeneralisedElement *, unsigned>
+        std::map<GeneralisedElement*, unsigned>
           old_base_element_number_plus_one;
         std::vector<bool> old_root_is_halo_or_non_existent(nel, true);
         for (unsigned e = 0; e < nel; e++)
         {
           // Get the base element
-          GeneralisedElement *base_el_pt = Base_mesh_element_pt[e];
+          GeneralisedElement* base_el_pt = Base_mesh_element_pt[e];
 
           // Does it exist locally?
           if (base_el_pt != 0)
@@ -1112,8 +1112,8 @@ namespace oomph
             }
 
             // Not refineable: It's only the element iself
-            RefineableElement *ref_el_pt = 0;
-            ref_el_pt = dynamic_cast<RefineableElement *>(base_el_pt);
+            RefineableElement* ref_el_pt = 0;
+            ref_el_pt = dynamic_cast<RefineableElement*>(base_el_pt);
             if (ref_el_pt == 0)
             {
               old_base_element_number_plus_one[base_el_pt] = e + 1;
@@ -1121,7 +1121,7 @@ namespace oomph
             // Refineable: Get entire tree of elements
             else
             {
-              Vector<Tree *> tree_pt;
+              Vector<Tree*> tree_pt;
               ref_el_pt->tree_pt()->stick_all_tree_nodes_into_vector(tree_pt);
               unsigned ntree = tree_pt.size();
               for (unsigned t = 0; t < ntree; t++)
@@ -1146,7 +1146,7 @@ namespace oomph
         unsigned nel_base_old = nel;
 
         // Prune the halo elements and nodes of the mesh(es)
-        Vector<GeneralisedElement *> deleted_element_pt;
+        Vector<GeneralisedElement*> deleted_element_pt;
         unsigned n_mesh = nsub_mesh();
         if (n_mesh == 0)
         {
@@ -1180,11 +1180,11 @@ namespace oomph
         // all element in "tree order"), find the roots
         // (which are either non-refineable elements or refineable elements
         // whose tree representations are TreeRoots)
-        std::map<FiniteElement *, bool> root_el_done;
+        std::map<FiniteElement*, bool> root_el_done;
 
         // Vector storing vectors of pointers to new base elements associated
         // with the same old base element
-        Vector<Vector<GeneralisedElement *>>
+        Vector<Vector<GeneralisedElement*>>
           new_base_element_associated_with_old_base_element(nel_base_old);
 
         unsigned n_meshes = n_mesh;
@@ -1205,8 +1205,8 @@ namespace oomph
         nel = 0;
         for (unsigned i_mesh = 0; i_mesh < n_meshes; i_mesh++)
         {
-          TriangleMeshBase *tri_mesh_pt =
-            dynamic_cast<TriangleMeshBase *>(mesh_pt(i_mesh));
+          TriangleMeshBase* tri_mesh_pt =
+            dynamic_cast<TriangleMeshBase*>(mesh_pt(i_mesh));
           if (!(tri_mesh_pt != 0))
           {
             // Mark the mesh as structured mesh
@@ -1233,11 +1233,11 @@ namespace oomph
             for (unsigned e = 0; e < nele_submesh; e++)
             {
               // Get the element
-              GeneralisedElement *el_pt = mesh_pt(i_mesh)->element_pt(e);
+              GeneralisedElement* el_pt = mesh_pt(i_mesh)->element_pt(e);
 
               // Not refineable: It's definitely a new base element
-              RefineableElement *ref_el_pt = 0;
-              ref_el_pt = dynamic_cast<RefineableElement *>(el_pt);
+              RefineableElement* ref_el_pt = 0;
+              ref_el_pt = dynamic_cast<RefineableElement*>(el_pt);
               if (ref_el_pt == 0)
               {
                 unsigned old_base_el_no =
@@ -1251,7 +1251,7 @@ namespace oomph
               {
                 // Is it a tree root (after pruning)? In that case it's
                 // a new base element
-                if (dynamic_cast<TreeRoot *>(ref_el_pt->tree_pt()))
+                if (dynamic_cast<TreeRoot*>(ref_el_pt->tree_pt()))
                 {
                   unsigned old_base_el_no =
                     old_base_element_number_plus_one[el_pt] - 1;
@@ -1262,7 +1262,7 @@ namespace oomph
                 else
                 {
                   // Get associated root element
-                  FiniteElement *root_el_pt =
+                  FiniteElement* root_el_pt =
                     ref_el_pt->tree_pt()->root_pt()->object_pt();
 
                   if (!root_el_done[root_el_pt])
@@ -1379,7 +1379,7 @@ namespace oomph
             for (unsigned j = 0; j < n_new_root; j++)
             {
               // Store new root/base element
-              GeneralisedElement *el_pt =
+              GeneralisedElement* el_pt =
                 new_base_element_associated_with_old_base_element[e][j];
               Base_mesh_element_pt[count] = el_pt;
               Base_mesh_element_number_plus_one[el_pt] = count + 1;
@@ -1521,7 +1521,7 @@ namespace oomph
   /// create or resize the Time object so that it contains the appropriate
   /// number of levels of storage.
   //================================================================
-  void Problem::add_time_stepper_pt(TimeStepper *const &time_stepper_pt)
+  void Problem::add_time_stepper_pt(TimeStepper* const& time_stepper_pt)
   {
     // Add the timestepper to the vector
     Time_stepper_pt.push_back(time_stepper_pt);
@@ -1563,7 +1563,7 @@ namespace oomph
   /// ensure that a time object has been created.
   //================================================================
   void Problem::set_explicit_time_stepper_pt(
-    ExplicitTimeStepper *const &explicit_time_stepper_pt)
+    ExplicitTimeStepper* const& explicit_time_stepper_pt)
   {
     // Set the explicit time stepper
     Explicit_time_stepper_pt = explicit_time_stepper_pt;
@@ -1701,7 +1701,7 @@ namespace oomph
     }
 
     // Make temporary c-style array to avoid over-writing in Gatherv below
-    double *el_ass_time = new double[nel];
+    double* el_ass_time = new double[nel];
     for (unsigned e = 0; e < nel; e++)
     {
       el_ass_time[e] = Elemental_assembly_time[e];
@@ -1958,7 +1958,7 @@ namespace oomph
   /// between multiple meshes).
   //================================================================
   unsigned long Problem::assign_eqn_numbers(
-    const bool &assign_local_eqn_numbers)
+    const bool& assign_local_eqn_numbers)
   {
     // Check that the global mesh has been build
 #ifdef PARANOID
@@ -2101,7 +2101,7 @@ namespace oomph
       // If there is only one mesh
       if (n_sub_mesh == 0)
       {
-        if (SpineMesh *const spine_mesh_pt = dynamic_cast<SpineMesh *>(Mesh_pt))
+        if (SpineMesh* const spine_mesh_pt = dynamic_cast<SpineMesh*>(Mesh_pt))
         {
           n_dof = spine_mesh_pt->assign_global_spine_eqn_numbers(Dof_pt);
         }
@@ -2112,8 +2112,8 @@ namespace oomph
         // Assign global equation numbers first
         for (unsigned i = 0; i < n_sub_mesh; i++)
         {
-          if (SpineMesh *const spine_mesh_pt =
-                dynamic_cast<SpineMesh *>(Sub_mesh_pt[i]))
+          if (SpineMesh* const spine_mesh_pt =
+                dynamic_cast<SpineMesh*>(Sub_mesh_pt[i]))
           {
             n_dof = spine_mesh_pt->assign_global_spine_eqn_numbers(Dof_pt);
           }
@@ -2315,7 +2315,7 @@ namespace oomph
   /// element; etc) is the unknown with a certain global equation number.
   /// Output stream defaults to oomph_info.
   //================================================================
-  void Problem::describe_dofs(std::ostream &out) const
+  void Problem::describe_dofs(std::ostream& out) const
   {
     // Check that the global mesh has been build
 #ifdef PARANOID
@@ -2381,7 +2381,7 @@ namespace oomph
     // If there is only one mesh:
     if (n_sub_mesh == 0)
     {
-      if (SpineMesh *const spine_mesh_pt = dynamic_cast<SpineMesh *>(Mesh_pt))
+      if (SpineMesh* const spine_mesh_pt = dynamic_cast<SpineMesh*>(Mesh_pt))
       {
         std::string in(" in Problem's Only SpineMesh.");
         spine_mesh_pt->describe_spine_dofs(out, in);
@@ -2393,8 +2393,8 @@ namespace oomph
       // Assign global equation numbers first
       for (unsigned i = 0; i < n_sub_mesh; i++)
       {
-        if (SpineMesh *const spine_mesh_pt =
-              dynamic_cast<SpineMesh *>(Sub_mesh_pt[i]))
+        if (SpineMesh* const spine_mesh_pt =
+              dynamic_cast<SpineMesh*>(Sub_mesh_pt[i]))
         {
           std::stringstream conversion;
           conversion << " in Sub-SpineMesh " << i << ".";
@@ -2433,7 +2433,7 @@ namespace oomph
   /// Get the vector of dofs, i.e. a vector containing the current
   /// values of all unknowns.
   //================================================================
-  void Problem::get_dofs(DoubleVector &dofs) const
+  void Problem::get_dofs(DoubleVector& dofs) const
   {
     // Find number of dofs
     const unsigned long n_dof = ndof();
@@ -2449,7 +2449,7 @@ namespace oomph
   }
 
   /// Get history values of dofs in a double vector.
-  void Problem::get_dofs(const unsigned &t, DoubleVector &dofs) const
+  void Problem::get_dofs(const unsigned& t, DoubleVector& dofs) const
   {
 #ifdef PARANOID
     if (distributed())
@@ -2482,10 +2482,10 @@ namespace oomph
     // Next element internal data
     for (unsigned i = 0, ni = mesh_pt()->nelement(); i < ni; i++)
     {
-      GeneralisedElement *ele_pt = mesh_pt()->element_pt(i);
+      GeneralisedElement* ele_pt = mesh_pt()->element_pt(i);
       for (unsigned j = 0, nj = ele_pt->ninternal_data(); j < nj; j++)
       {
-        Data *d_pt = ele_pt->internal_data_pt(j);
+        Data* d_pt = ele_pt->internal_data_pt(j);
         for (unsigned k = 0, nk = d_pt->nvalue(); k < nk; k++)
         {
           int eqn_number = d_pt->eqn_number(k);
@@ -2500,7 +2500,7 @@ namespace oomph
     // Now the nodes
     for (unsigned i = 0, ni = mesh_pt()->nnode(); i < ni; i++)
     {
-      Node *node_pt = mesh_pt()->node_pt(i);
+      Node* node_pt = mesh_pt()->node_pt(i);
       for (unsigned j = 0, nj = node_pt->nvalue(); j < nj; j++)
       {
         // For each node get the equation number and copy out the value.
@@ -2521,8 +2521,8 @@ namespace oomph
   /// Bool is true if some data was removed -- this usually requires
   /// re-running through certain parts of the equation numbering procedure.
   //======================================================================
-  void Problem::remove_duplicate_data(Mesh *const &mesh_pt,
-                                      bool &actually_removed_some_data)
+  void Problem::remove_duplicate_data(Mesh* const& mesh_pt,
+                                      bool& actually_removed_some_data)
   {
     //    //   // Taken out again by MH -- clutters up output
     //    // Doc timings if required
@@ -2553,24 +2553,24 @@ namespace oomph
     // but this is a total killer! Memory allocation is extremely
     // costly and only relatively few entries are used so use
     // map:
-    std::map<unsigned, Node *> global_node_pt;
+    std::map<unsigned, Node*> global_node_pt;
 
     // Only do each retained node once
-    std::map<Node *, bool> node_done;
+    std::map<Node*, bool> node_done;
 
     // Loop over existing "normal" elements in mesh
     unsigned n_element = mesh_pt->nelement();
     for (unsigned e = 0; e < n_element; e++)
     {
-      FiniteElement *el_pt =
-        dynamic_cast<FiniteElement *>(mesh_pt->element_pt(e));
+      FiniteElement* el_pt =
+        dynamic_cast<FiniteElement*>(mesh_pt->element_pt(e));
       if (el_pt != 0)
       {
         // Loop over nodes
         unsigned n_node = el_pt->nnode();
         for (unsigned j = 0; j < n_node; j++)
         {
-          Node *nod_pt = el_pt->node_pt(j);
+          Node* nod_pt = el_pt->node_pt(j);
 
           // Have we already done the node?
           if (!node_done[nod_pt])
@@ -2596,7 +2596,7 @@ namespace oomph
             if (first_non_negative_eqn_number_plus_one == 0)
             {
               // Is it a solid node?
-              SolidNode *solid_nod_pt = dynamic_cast<SolidNode *>(nod_pt);
+              SolidNode* solid_nod_pt = dynamic_cast<SolidNode*>(nod_pt);
               if (solid_nod_pt != 0)
               {
                 // Loop over values stored at node (if any) to find
@@ -2623,19 +2623,19 @@ namespace oomph
             }
 
             // Take into account master nodes too
-            if (dynamic_cast<RefineableElement *>(el_pt) != 0)
+            if (dynamic_cast<RefineableElement*>(el_pt) != 0)
             {
-              int n_cont_int_values = dynamic_cast<RefineableElement *>(el_pt)
+              int n_cont_int_values = dynamic_cast<RefineableElement*>(el_pt)
                                         ->ncont_interpolated_values();
               for (int i_cont = -1; i_cont < n_cont_int_values; i_cont++)
               {
                 if (nod_pt->is_hanging(i_cont))
                 {
-                  HangInfo *hang_pt = nod_pt->hanging_pt(i_cont);
+                  HangInfo* hang_pt = nod_pt->hanging_pt(i_cont);
                   unsigned n_master = hang_pt->nmaster();
                   for (unsigned m = 0; m < n_master; m++)
                   {
-                    Node *master_nod_pt = hang_pt->master_node_pt(m);
+                    Node* master_nod_pt = hang_pt->master_node_pt(m);
                     if (!node_done[master_nod_pt])
                     {
                       node_done[master_nod_pt] = true;
@@ -2660,8 +2660,8 @@ namespace oomph
                       {
                         // If this master is a SolidNode then add its extra
                         // eqn numbers
-                        SolidNode *master_solid_nod_pt =
-                          dynamic_cast<SolidNode *>(master_nod_pt);
+                        SolidNode* master_solid_nod_pt =
+                          dynamic_cast<SolidNode*>(master_nod_pt);
                         if (master_solid_nod_pt != 0)
                         {
                           // Loop over values stored at node (if any) to find
@@ -2706,7 +2706,7 @@ namespace oomph
     }
 
     // Set to record duplicate nodes scheduled to be killed
-    std::set<Node *> killed_nodes;
+    std::set<Node*> killed_nodes;
 
     // Now loop over the other processors from highest to lowest
     // (i.e. if there is a duplicate between these containers
@@ -2721,7 +2721,7 @@ namespace oomph
         unsigned n_element = mesh_pt->nexternal_halo_element(iproc);
         for (unsigned e_ext = 0; e_ext < n_element; e_ext++)
         {
-          FiniteElement *finite_ext_el_pt = dynamic_cast<FiniteElement *>(
+          FiniteElement* finite_ext_el_pt = dynamic_cast<FiniteElement*>(
             mesh_pt->external_halo_element_pt(iproc, e_ext));
           if (finite_ext_el_pt != 0)
           {
@@ -2729,7 +2729,7 @@ namespace oomph
             unsigned n_node = finite_ext_el_pt->nnode();
             for (unsigned j = 0; j < n_node; j++)
             {
-              Node *nod_pt = finite_ext_el_pt->node_pt(j);
+              Node* nod_pt = finite_ext_el_pt->node_pt(j);
 
               // Loop over values stored at node (if any) to find
               // the first non-negative eqn number
@@ -2750,7 +2750,7 @@ namespace oomph
               if (first_non_negative_eqn_number_plus_one == 0)
               {
                 // Is it a solid node?
-                SolidNode *solid_nod_pt = dynamic_cast<SolidNode *>(nod_pt);
+                SolidNode* solid_nod_pt = dynamic_cast<SolidNode*>(nod_pt);
                 if (solid_nod_pt != 0)
                 {
                   // Loop over values stored at node (if any) to find
@@ -2775,7 +2775,7 @@ namespace oomph
               // and we don't give a damn...)
               if (first_non_negative_eqn_number_plus_one > 0)
               {
-                Node *existing_node_pt =
+                Node* existing_node_pt =
                   global_node_pt[first_non_negative_eqn_number_plus_one - 1];
 
                 // Does this node already exist?
@@ -2786,11 +2786,11 @@ namespace oomph
 
                   // It's a duplicate, so store the duplicated one for
                   // later killing...
-                  Node *duplicated_node_pt = nod_pt;
+                  Node* duplicated_node_pt = nod_pt;
                   if (!node_done[duplicated_node_pt])
                   {
                     // Remove node from all boundaries
-                    std::set<unsigned> *boundaries_pt;
+                    std::set<unsigned>* boundaries_pt;
                     duplicated_node_pt->get_boundaries_pt(boundaries_pt);
                     if (boundaries_pt != 0)
                     {
@@ -2828,10 +2828,10 @@ namespace oomph
 
                   // Check that hang status of exiting and replacement node
                   // matches
-                  if (dynamic_cast<RefineableElement *>(finite_ext_el_pt) != 0)
+                  if (dynamic_cast<RefineableElement*>(finite_ext_el_pt) != 0)
                   {
                     int n_cont_inter_values =
-                      dynamic_cast<RefineableElement *>(finite_ext_el_pt)
+                      dynamic_cast<RefineableElement*>(finite_ext_el_pt)
                         ->ncont_interpolated_values();
                     for (int i_cont = -1; i_cont < n_cont_inter_values;
                          i_cont++)
@@ -2877,7 +2877,7 @@ namespace oomph
                                        << " master nodes are: \n";
                           for (unsigned k = 0; k < n_master_replace; k++)
                           {
-                            Node *master_nod_pt =
+                            Node* master_nod_pt =
                               existing_node_pt->hanging_pt(i_cont)
                                 ->master_node_pt(k);
                             unsigned ndim = master_nod_pt->ndim();
@@ -2904,7 +2904,7 @@ namespace oomph
                                        << " master nodes are: \n";
                           for (unsigned k = 0; k < n_master_orig; k++)
                           {
-                            Node *master_nod_pt = finite_ext_el_pt->node_pt(j)
+                            Node* master_nod_pt = finite_ext_el_pt->node_pt(j)
                                                     ->hanging_pt(i_cont)
                                                     ->master_node_pt(k);
                             unsigned ndim = master_nod_pt->ndim();
@@ -2937,21 +2937,21 @@ namespace oomph
 
               // Do the same for any master nodes of that (possibly replaced)
               // node
-              if (dynamic_cast<RefineableElement *>(finite_ext_el_pt) != 0)
+              if (dynamic_cast<RefineableElement*>(finite_ext_el_pt) != 0)
               {
                 int n_cont_inter_values =
-                  dynamic_cast<RefineableElement *>(finite_ext_el_pt)
+                  dynamic_cast<RefineableElement*>(finite_ext_el_pt)
                     ->ncont_interpolated_values();
                 for (int i_cont = -1; i_cont < n_cont_inter_values; i_cont++)
                 {
                   if (finite_ext_el_pt->node_pt(j)->is_hanging(i_cont))
                   {
-                    HangInfo *hang_pt =
+                    HangInfo* hang_pt =
                       finite_ext_el_pt->node_pt(j)->hanging_pt(i_cont);
                     unsigned n_master = hang_pt->nmaster();
                     for (unsigned m = 0; m < n_master; m++)
                     {
-                      Node *master_nod_pt = hang_pt->master_node_pt(m);
+                      Node* master_nod_pt = hang_pt->master_node_pt(m);
                       unsigned n_val = master_nod_pt->nvalue();
                       unsigned first_non_negative_eqn_number_plus_one = 0;
                       for (unsigned i_val = 0; i_val < n_val; i_val++)
@@ -2968,8 +2968,8 @@ namespace oomph
                       // eqn numbers associated with solid data (if any)
                       if (first_non_negative_eqn_number_plus_one == 0)
                       {
-                        SolidNode *solid_master_nod_pt =
-                          dynamic_cast<SolidNode *>(master_nod_pt);
+                        SolidNode* solid_master_nod_pt =
+                          dynamic_cast<SolidNode*>(master_nod_pt);
                         if (solid_master_nod_pt != 0)
                         {
                           // Loop over values stored at node (if any) to find
@@ -2998,7 +2998,7 @@ namespace oomph
                       // damn...)
                       if (first_non_negative_eqn_number_plus_one > 0)
                       {
-                        Node *existing_node_pt = global_node_pt
+                        Node* existing_node_pt = global_node_pt
                           [first_non_negative_eqn_number_plus_one - 1];
 
                         // Does this node already exist?
@@ -3009,12 +3009,12 @@ namespace oomph
 
                           // It's a duplicate, so store the duplicated one for
                           // later killing...
-                          Node *duplicated_node_pt = master_nod_pt;
+                          Node* duplicated_node_pt = master_nod_pt;
 
                           if (!node_done[duplicated_node_pt])
                           {
                             // Remove node from all boundaries
-                            std::set<unsigned> *boundaries_pt;
+                            std::set<unsigned>* boundaries_pt;
                             duplicated_node_pt->get_boundaries_pt(
                               boundaries_pt);
                             if (boundaries_pt != 0)
@@ -3042,7 +3042,7 @@ namespace oomph
                           // Sanity check: setting replacement master
                           // node for non-hanging node? Sign of really
                           // f***ed up code.
-                          Node *tmp_nod_pt = finite_ext_el_pt->node_pt(j);
+                          Node* tmp_nod_pt = finite_ext_el_pt->node_pt(j);
                           if (!tmp_nod_pt->is_hanging(i_cont))
                           {
                             std::ostringstream error_stream;
@@ -3097,7 +3097,7 @@ namespace oomph
     } // end loop over processors
 
     // Now kill all the deleted nodes
-    for (std::set<Node *>::iterator it = killed_nodes.begin();
+    for (std::set<Node*>::iterator it = killed_nodes.begin();
          it != killed_nodes.end();
          it++)
     {
@@ -3165,7 +3165,7 @@ namespace oomph
       if (domain != my_rank)
       {
         // Deal with sub-meshes one-by-one if required
-        Mesh *my_mesh_pt = 0;
+        Mesh* my_mesh_pt = 0;
 
         // Loop over submeshes
         for (unsigned imesh = 0; imesh < n_mesh_loop; imesh++)
@@ -3180,20 +3180,20 @@ namespace oomph
           }
 
           // Make backup of external halo node pointers with this domain
-          Vector<Node *> backup_pt(my_mesh_pt->external_halo_node_pt(domain));
+          Vector<Node*> backup_pt(my_mesh_pt->external_halo_node_pt(domain));
 
           // How many do we have currently?
           unsigned nnod = backup_pt.size();
 
           // Prepare storage for updated halo nodes
-          Vector<Node *> new_external_halo_node_pt;
+          Vector<Node*> new_external_halo_node_pt;
           new_external_halo_node_pt.reserve(nnod);
 
           // Loop over external halo nodes with this domain
           for (unsigned j = 0; j < nnod; j++)
           {
             // Get pointer to node
-            Node *nod_pt = backup_pt[j];
+            Node* nod_pt = backup_pt[j];
 
             // Has it been nulled out?
             if (nod_pt == 0)
@@ -3283,7 +3283,7 @@ namespace oomph
         unsigned count = receive_displacement[send_rank];
 
         // Deal with sub-meshes one-by-one if required
-        Mesh *my_mesh_pt = 0;
+        Mesh* my_mesh_pt = 0;
 
         // Loop over submeshes
         for (unsigned imesh = 0; imesh < n_mesh_loop; imesh++)
@@ -3298,7 +3298,7 @@ namespace oomph
           }
 
           // Make backup of external haloed node pointers with this domain
-          Vector<Node *> backup_pt =
+          Vector<Node*> backup_pt =
             my_mesh_pt->external_haloed_node_pt(send_rank);
 
           // Unpack until we reach "end of data" indicator (-1) for this mesh
@@ -3322,14 +3322,14 @@ namespace oomph
           unsigned nnod = backup_pt.size();
 
           // Prepare storage for updated haloed nodes
-          Vector<Node *> new_external_haloed_node_pt;
+          Vector<Node*> new_external_haloed_node_pt;
           new_external_haloed_node_pt.reserve(nnod);
 
           // Loop over external haloed nodes with this domain
           for (unsigned j = 0; j < nnod; j++)
           {
             // Get pointer to node
-            Node *nod_pt = backup_pt[j];
+            Node* nod_pt = backup_pt[j];
 
             // Has it been nulled out?
             if (nod_pt != 0)
@@ -3353,7 +3353,7 @@ namespace oomph
   //=======================================================================
   /// Function that sets the values of the dofs in the object
   //======================================================================
-  void Problem::set_dofs(const DoubleVector &dofs)
+  void Problem::set_dofs(const DoubleVector& dofs)
   {
     const unsigned long n_dof = this->ndof();
 #ifdef PARANOID
@@ -3375,7 +3375,7 @@ namespace oomph
   }
 
   /// Set history values of dofs
-  void Problem::set_dofs(const unsigned &t, DoubleVector &dofs)
+  void Problem::set_dofs(const unsigned& t, DoubleVector& dofs)
   {
 #ifdef PARANOID
     if (distributed())
@@ -3405,10 +3405,10 @@ namespace oomph
     // Next element internal data
     for (unsigned i = 0, ni = mesh_pt()->nelement(); i < ni; i++)
     {
-      GeneralisedElement *ele_pt = mesh_pt()->element_pt(i);
+      GeneralisedElement* ele_pt = mesh_pt()->element_pt(i);
       for (unsigned j = 0, nj = ele_pt->ninternal_data(); j < nj; j++)
       {
-        Data *d_pt = ele_pt->internal_data_pt(j);
+        Data* d_pt = ele_pt->internal_data_pt(j);
         for (unsigned k = 0, nk = d_pt->nvalue(); k < nk; k++)
         {
           int eqn_number = d_pt->eqn_number(k);
@@ -3423,7 +3423,7 @@ namespace oomph
     // Now the nodes
     for (unsigned i = 0, ni = mesh_pt()->nnode(); i < ni; i++)
     {
-      Node *node_pt = mesh_pt()->node_pt(i);
+      Node* node_pt = mesh_pt()->node_pt(i);
       for (unsigned j = 0, nj = node_pt->nvalue(); j < nj; j++)
       {
         // For each node get the equation number and copy out the value.
@@ -3438,7 +3438,7 @@ namespace oomph
 
   /// Set history values of dofs from the type of vector stored in
   /// problem::Dof_pt.
-  void Problem::set_dofs(const unsigned &t, Vector<double *> &dof_pt)
+  void Problem::set_dofs(const unsigned& t, Vector<double*>& dof_pt)
   {
 #ifdef PARANOID
     if (distributed())
@@ -3472,7 +3472,7 @@ namespace oomph
     // nodes
     for (unsigned i = 0, ni = mesh_pt()->nnode(); i < ni; i++)
     {
-      Node *node_pt = mesh_pt()->node_pt(i);
+      Node* node_pt = mesh_pt()->node_pt(i);
       for (unsigned j = 0, nj = node_pt->nvalue(); j < nj; j++)
       {
         // For each node get the equation number and copy in the value.
@@ -3487,10 +3487,10 @@ namespace oomph
     // and non-nodal data inside elements
     for (unsigned i = 0, ni = mesh_pt()->nelement(); i < ni; i++)
     {
-      GeneralisedElement *ele_pt = mesh_pt()->element_pt(i);
+      GeneralisedElement* ele_pt = mesh_pt()->element_pt(i);
       for (unsigned j = 0, nj = ele_pt->ninternal_data(); j < nj; j++)
       {
-        Data *data_pt = ele_pt->internal_data_pt(j);
+        Data* data_pt = ele_pt->internal_data_pt(j);
         // For each node get the equation number and copy in the value.
         int eqn_number = data_pt->eqn_number(j);
         if (eqn_number >= 0)
@@ -3504,8 +3504,8 @@ namespace oomph
   //===================================================================
   /// Function that adds the values to the dofs
   //==================================================================
-  void Problem::add_to_dofs(const double &lambda,
-                            const DoubleVector &increment_dofs)
+  void Problem::add_to_dofs(const double& lambda,
+                            const DoubleVector& increment_dofs)
   {
     const unsigned long n_dof = this->ndof();
     for (unsigned long l = 0; l < n_dof; l++)
@@ -3518,7 +3518,7 @@ namespace oomph
   /// Return the residual vector multiplied by the inverse mass matrix
   /// Virtual so that it can be overloaded for mpi problems
   //=========================================================================
-  void Problem::get_inverse_mass_matrix_times_residuals(DoubleVector &Mres)
+  void Problem::get_inverse_mass_matrix_times_residuals(DoubleVector& Mres)
   {
     // This function does not make sense for assembly handlers other than the
     // default, so complain if we try to call it with another handler
@@ -3553,8 +3553,8 @@ namespace oomph
       for (unsigned e = 0; e < n_element; e++)
       {
         // Cache the element
-        DGElement *const elem_pt =
-          dynamic_cast<DGElement *>(Problem::mesh_pt()->element_pt(e));
+        DGElement* const elem_pt =
+          dynamic_cast<DGElement*>(Problem::mesh_pt()->element_pt(e));
 
         // Find the elemental inverse mass matrix times residuals
         const unsigned n_el_dofs = elem_pt->ndof();
@@ -3605,7 +3605,7 @@ namespace oomph
         // Use a custom assembly handler to assemble and invert the mass matrix
 
         // Store the old assembly handler
-        AssemblyHandler *old_assembly_handler_pt = this->assembly_handler_pt();
+        AssemblyHandler* old_assembly_handler_pt = this->assembly_handler_pt();
         // Set the assembly handler to the explicit timestep handler
         this->assembly_handler_pt() = new ExplicitTimeStepHandler;
 
@@ -3623,7 +3623,7 @@ namespace oomph
     }
   }
 
-  void Problem::get_dvaluesdt(DoubleVector &f)
+  void Problem::get_dvaluesdt(DoubleVector& f)
   {
     // Loop over timesteppers: make them (temporarily) steady and store their
     // is_steady status.
@@ -3652,7 +3652,7 @@ namespace oomph
   //================================================================
   /// Get the total residuals Vector for the problem
   //================================================================
-  void Problem::get_residuals(DoubleVector &residuals)
+  void Problem::get_residuals(DoubleVector& residuals)
   {
     // Three different cases; if MPI_Helpers::MPI_has_been_initialised=true
     // this means MPI_Helpers::init() has been called.  This could happen on a
@@ -3691,7 +3691,7 @@ namespace oomph
     // IF the vector has distribution setup then use that
     // ELSE determine the distribution based on the
     // distributed_matrix_distribution enum
-    LinearAlgebraDistribution *dist_pt = 0;
+    LinearAlgebraDistribution* dist_pt = 0;
     if (residuals.built())
     {
       dist_pt = new LinearAlgebraDistribution(residuals.distribution_pt());
@@ -3724,7 +3724,7 @@ namespace oomph
             dist_pt = new LinearAlgebraDistribution(Dof_distribution_pt);
             break;
           case Default_matrix_distribution:
-            LinearAlgebraDistribution *uniform_dist_pt =
+            LinearAlgebraDistribution* uniform_dist_pt =
               new LinearAlgebraDistribution(Communicator_pt, nrow, true);
             bool use_problem_dist = true;
             unsigned nproc = Communicator_pt->nproc();
@@ -3754,7 +3754,7 @@ namespace oomph
     }
 
     // Locally cache pointer to assembly handler
-    AssemblyHandler *const assembly_handler_pt = Assembly_handler_pt;
+    AssemblyHandler* const assembly_handler_pt = Assembly_handler_pt;
 
     // Build and zero the residuals
     residuals.build(dist_pt, 0.0);
@@ -3769,7 +3769,7 @@ namespace oomph
       for (unsigned long e = 0; e < Element_pt_range; e++)
       {
         // Get the pointer to the element
-        GeneralisedElement *elem_pt = Mesh_pt->element_pt(e);
+        GeneralisedElement* elem_pt = Mesh_pt->element_pt(e);
         // Find number of dofs in the element
         unsigned n_element_dofs = assembly_handler_pt->ndof(elem_pt);
         // Set up an array
@@ -3789,19 +3789,19 @@ namespace oomph
     else
     {
       // Store the current assembly handler
-      AssemblyHandler *const old_assembly_handler_pt = Assembly_handler_pt;
+      AssemblyHandler* const old_assembly_handler_pt = Assembly_handler_pt;
       // Create a new assembly handler that only assembles the residuals
       Assembly_handler_pt =
         new ParallelResidualsHandler(old_assembly_handler_pt);
 
       // Setup memory for parallel sparse assemble
       // No matrix so all size zero
-      Vector<int *> column_index;
-      Vector<int *> row_start;
-      Vector<double *> value;
+      Vector<int*> column_index;
+      Vector<int*> row_start;
+      Vector<double*> value;
       Vector<unsigned> nnz;
       // One set of residuals of sizer one
-      Vector<double *> res(1);
+      Vector<double*> res(1);
 
       // Call the parallel sparse assemble, that should only assemble residuals
       parallel_sparse_assemble(
@@ -3828,8 +3828,8 @@ namespace oomph
   /// The matrix type DenseDoubleMatrix is not distributable and therefore
   /// the residual vector is also assumed to be non distributable.
   //=============================================================================
-  void Problem::get_jacobian(DoubleVector &residuals,
-                             DenseDoubleMatrix &jacobian)
+  void Problem::get_jacobian(DoubleVector& residuals,
+                             DenseDoubleMatrix& jacobian)
   {
     // get the number of degrees of freedom
     unsigned n_dof = ndof();
@@ -3893,14 +3893,14 @@ namespace oomph
     jacobian.initialise(0.0);
 
     // Locally cache pointer to assembly handler
-    AssemblyHandler *const assembly_handler_pt = Assembly_handler_pt;
+    AssemblyHandler* const assembly_handler_pt = Assembly_handler_pt;
 
     // Loop over all the elements
     unsigned long n_element = Mesh_pt->nelement();
     for (unsigned long e = 0; e < n_element; e++)
     {
       // Get the pointer to the element
-      GeneralisedElement *elem_pt = Mesh_pt->element_pt(e);
+      GeneralisedElement* elem_pt = Mesh_pt->element_pt(e);
       // Find number of dofs in the element
       unsigned n_element_dofs = assembly_handler_pt->ndof(elem_pt);
       // Set up an array
@@ -3935,7 +3935,7 @@ namespace oomph
   /// their distribution will computed based on:
   /// Distributed_problem_matrix_distribution.
   //=============================================================================
-  void Problem::get_jacobian(DoubleVector &residuals, CRDoubleMatrix &jacobian)
+  void Problem::get_jacobian(DoubleVector& residuals, CRDoubleMatrix& jacobian)
   {
     // Three different cases; if MPI_Helpers::MPI_has_been_initialised=true
     // this means MPI_Helpers::setup() has been called.  This could happen on a
@@ -3956,9 +3956,9 @@ namespace oomph
     // The generalised Vector<Vector<>> structure is required
     // for the most general interface to sparse_assemble() which allows
     // the assembly of multiple matrices at once.
-    Vector<int *> column_index(1);
-    Vector<int *> row_start(1);
-    Vector<double *> value(1);
+    Vector<int*> column_index(1);
+    Vector<int*> row_start(1);
+    Vector<double*> value(1);
     Vector<unsigned> nnz(1);
 
 #ifdef PARANOID
@@ -3995,7 +3995,7 @@ namespace oomph
 #endif
 
     // Allocate generalised storage format for passing to sparse_assemble()
-    Vector<double *> res(1);
+    Vector<double*> res(1);
 
     // number of rows
     unsigned nrow = this->ndof();
@@ -4004,7 +4004,7 @@ namespace oomph
     // IF the jacobian has distribution setup then use that
     // ELSE determine the distribution based on the
     // distributed_matrix_distribution enum
-    LinearAlgebraDistribution *dist_pt = 0;
+    LinearAlgebraDistribution* dist_pt = 0;
     if (jacobian.distribution_built())
     {
       dist_pt = new LinearAlgebraDistribution(jacobian.distribution_pt());
@@ -4036,7 +4036,7 @@ namespace oomph
             dist_pt = new LinearAlgebraDistribution(Dof_distribution_pt);
             break;
           case Default_matrix_distribution:
-            LinearAlgebraDistribution *uniform_dist_pt =
+            LinearAlgebraDistribution* uniform_dist_pt =
               new LinearAlgebraDistribution(Communicator_pt, nrow, true);
             bool use_problem_dist = true;
             unsigned nproc = Communicator_pt->nproc();
@@ -4096,7 +4096,7 @@ namespace oomph
       }
       else
       {
-        LinearAlgebraDistribution *temp_dist_pt =
+        LinearAlgebraDistribution* temp_dist_pt =
           new LinearAlgebraDistribution(Communicator_pt, dist_pt->nrow(), true);
         parallel_sparse_assemble(
           temp_dist_pt, column_index, row_start, value, nnz, res);
@@ -4121,7 +4121,7 @@ namespace oomph
   /// in the case when the jacobian matrix is in column-compressed storage
   /// format.
   //=============================================================================
-  void Problem::get_jacobian(DoubleVector &residuals, CCDoubleMatrix &jacobian)
+  void Problem::get_jacobian(DoubleVector& residuals, CCDoubleMatrix& jacobian)
   {
     // Three different cases; if MPI_Helpers::MPI_has_been_initialised=true
     // this means MPI_Helpers::setup() has been called.  This could happen on a
@@ -4182,12 +4182,12 @@ namespace oomph
     // The generalised Vector<Vector<>> structure is required
     // for the most general interface to sparse_assemble() which allows
     // the assembly of multiple matrices at once.
-    Vector<int *> row_index(1);
-    Vector<int *> column_start(1);
-    Vector<double *> value(1);
+    Vector<int*> row_index(1);
+    Vector<int*> column_start(1);
+    Vector<double*> value(1);
 
     // Allocate generalised storage format for passing to sparse_assemble()
-    Vector<double *> res(1);
+    Vector<double*> res(1);
 
     // allocate storage for the number of non-zeros in each matrix
     Vector<unsigned> nnz(1);
@@ -4196,7 +4196,7 @@ namespace oomph
     bool compressed_row_flag = false;
 
     // get the distribution for the residuals
-    LinearAlgebraDistribution *dist_pt;
+    LinearAlgebraDistribution* dist_pt;
     if (!residuals.built())
     {
       dist_pt =
@@ -4248,7 +4248,7 @@ namespace oomph
     const unsigned n_global_data = nglobal_data();
     for (unsigned i = 0; i < n_global_data; i++)
     {
-      Data *const local_data_pt = Global_data_pt[i];
+      Data* const local_data_pt = Global_data_pt[i];
       const unsigned n_value = local_data_pt->nvalue();
       for (unsigned j = 0; j < n_value; j++)
       {
@@ -4268,7 +4268,7 @@ namespace oomph
       const unsigned n_node = Mesh_pt->nnode();
       for (unsigned n = 0; n < n_node; n++)
       {
-        Node *const local_node_pt = Mesh_pt->node_pt(n);
+        Node* const local_node_pt = Mesh_pt->node_pt(n);
         const unsigned n_value = local_node_pt->nvalue();
         for (unsigned j = 0; j < n_value; j++)
         {
@@ -4280,8 +4280,8 @@ namespace oomph
         }
 
         // Try to cast to a solid node
-        SolidNode *const local_solid_node_pt =
-          dynamic_cast<SolidNode *>(local_node_pt);
+        SolidNode* const local_solid_node_pt =
+          dynamic_cast<SolidNode*>(local_node_pt);
         // If we are successful
         if (local_solid_node_pt)
         {
@@ -4310,11 +4310,11 @@ namespace oomph
       const unsigned n_element = Mesh_pt->nelement();
       for (unsigned e = 0; e < n_element; e++)
       {
-        GeneralisedElement *const local_element_pt = Mesh_pt->element_pt(e);
+        GeneralisedElement* const local_element_pt = Mesh_pt->element_pt(e);
         const unsigned n_internal = local_element_pt->ninternal_data();
         for (unsigned i = 0; i < n_internal; i++)
         {
-          Data *const local_data_pt = local_element_pt->internal_data_pt(i);
+          Data* const local_data_pt = local_element_pt->internal_data_pt(i);
           const unsigned n_value = local_data_pt->nvalue();
           for (unsigned j = 0; j < n_value; j++)
           {
@@ -4336,7 +4336,7 @@ namespace oomph
         const unsigned n_node = Sub_mesh_pt[m]->nnode();
         for (unsigned n = 0; n < n_node; n++)
         {
-          Node *const local_node_pt = Sub_mesh_pt[m]->node_pt(n);
+          Node* const local_node_pt = Sub_mesh_pt[m]->node_pt(n);
           const unsigned n_value = local_node_pt->nvalue();
           for (unsigned j = 0; j < n_value; j++)
           {
@@ -4348,8 +4348,8 @@ namespace oomph
           }
 
           // Try to cast to a solid node
-          SolidNode *const local_solid_node_pt =
-            dynamic_cast<SolidNode *>(local_node_pt);
+          SolidNode* const local_solid_node_pt =
+            dynamic_cast<SolidNode*>(local_node_pt);
           // If we are successful
           if (local_solid_node_pt)
           {
@@ -4378,12 +4378,12 @@ namespace oomph
         const unsigned n_element = Sub_mesh_pt[m]->nelement();
         for (unsigned e = 0; e < n_element; e++)
         {
-          GeneralisedElement *const local_element_pt =
+          GeneralisedElement* const local_element_pt =
             Sub_mesh_pt[m]->element_pt(e);
           const unsigned n_internal = local_element_pt->ninternal_data();
           for (unsigned i = 0; i < n_internal; i++)
           {
-            Data *const local_data_pt = local_element_pt->internal_data_pt(i);
+            Data* const local_data_pt = local_element_pt->internal_data_pt(i);
             const unsigned n_value = local_data_pt->nvalue();
             for (unsigned j = 0; j < n_value; j++)
             {
@@ -4419,11 +4419,11 @@ namespace oomph
   /// the public flag Problem::Sparse_assembly_method.
   //=====================================================================
   void Problem::sparse_assemble_row_or_column_compressed(
-    Vector<int *> &column_or_row_index,
-    Vector<int *> &row_or_column_start,
-    Vector<double *> &value,
-    Vector<unsigned> &nnz,
-    Vector<double *> &residuals,
+    Vector<int*>& column_or_row_index,
+    Vector<int*>& row_or_column_start,
+    Vector<double*>& value,
+    Vector<unsigned>& nnz,
+    Vector<double*>& residuals,
     bool compressed_row_flag)
   {
     // Choose the actual method
@@ -4518,11 +4518,11 @@ namespace oomph
   ///                      arguments is as stated in square brackets].
   //=====================================================================
   void Problem::sparse_assemble_row_or_column_compressed_with_maps(
-    Vector<int *> &column_or_row_index,
-    Vector<int *> &row_or_column_start,
-    Vector<double *> &value,
-    Vector<unsigned> &nnz,
-    Vector<double *> &residuals,
+    Vector<int*>& column_or_row_index,
+    Vector<int*>& row_or_column_start,
+    Vector<double*>& value,
+    Vector<unsigned>& nnz,
+    Vector<double*>& residuals,
     bool compressed_row_flag)
   {
     // Total number of elements
@@ -4556,11 +4556,11 @@ namespace oomph
     const unsigned n_matrix = column_or_row_index.size();
 
     // Locally cache pointer to assembly handler
-    AssemblyHandler *const assembly_handler_pt = Assembly_handler_pt;
+    AssemblyHandler* const assembly_handler_pt = Assembly_handler_pt;
 
 #ifdef OOMPH_HAS_MPI
     bool doing_residuals = false;
-    if (dynamic_cast<ParallelResidualsHandler *>(Assembly_handler_pt) != 0)
+    if (dynamic_cast<ParallelResidualsHandler*>(Assembly_handler_pt) != 0)
     {
       doing_residuals = true;
     }
@@ -4665,7 +4665,7 @@ namespace oomph
 #endif
 
         // Get the pointer to the element
-        GeneralisedElement *elem_pt = mesh_pt()->element_pt(e);
+        GeneralisedElement* elem_pt = mesh_pt()->element_pt(e);
 
 #ifdef OOMPH_HAS_MPI
         // Ignore halo elements
@@ -4856,11 +4856,11 @@ namespace oomph
   ///                      arguments is as stated in square brackets].
   //=====================================================================
   void Problem::sparse_assemble_row_or_column_compressed_with_lists(
-    Vector<int *> &column_or_row_index,
-    Vector<int *> &row_or_column_start,
-    Vector<double *> &value,
-    Vector<unsigned> &nnz,
-    Vector<double *> &residuals,
+    Vector<int*>& column_or_row_index,
+    Vector<int*>& row_or_column_start,
+    Vector<double*>& value,
+    Vector<unsigned>& nnz,
+    Vector<double*>& residuals,
     bool compressed_row_flag)
   {
     // Total number of elements
@@ -4894,11 +4894,11 @@ namespace oomph
     const unsigned n_matrix = column_or_row_index.size();
 
     // Locally cache pointer to assembly handler
-    AssemblyHandler *const assembly_handler_pt = Assembly_handler_pt;
+    AssemblyHandler* const assembly_handler_pt = Assembly_handler_pt;
 
 #ifdef OOMPH_HAS_MPI
     bool doing_residuals = false;
-    if (dynamic_cast<ParallelResidualsHandler *>(Assembly_handler_pt) != 0)
+    if (dynamic_cast<ParallelResidualsHandler*>(Assembly_handler_pt) != 0)
     {
       doing_residuals = true;
     }
@@ -4992,7 +4992,7 @@ namespace oomph
       Vector<DenseMatrix<double>> el_jacobian(n_matrix);
 
       // Pointer to a single list to be used during the assembly
-      std::list<std::pair<unsigned, double>> *list_pt;
+      std::list<std::pair<unsigned, double>>* list_pt;
 
       // Loop over the all elements
       for (unsigned long e = el_lo; e <= el_hi; e++)
@@ -5006,7 +5006,7 @@ namespace oomph
 #endif
 
         // Get the pointer to the element
-        GeneralisedElement *elem_pt = mesh_pt()->element_pt(e);
+        GeneralisedElement* elem_pt = mesh_pt()->element_pt(e);
 
 #ifdef OOMPH_HAS_MPI
         // Ignore halo elements
@@ -5265,11 +5265,11 @@ namespace oomph
   ///                      arguments is as stated in square brackets].
   //=====================================================================
   void Problem::sparse_assemble_row_or_column_compressed_with_vectors_of_pairs(
-    Vector<int *> &column_or_row_index,
-    Vector<int *> &row_or_column_start,
-    Vector<double *> &value,
-    Vector<unsigned> &nnz,
-    Vector<double *> &residuals,
+    Vector<int*>& column_or_row_index,
+    Vector<int*>& row_or_column_start,
+    Vector<double*>& value,
+    Vector<unsigned>& nnz,
+    Vector<double*>& residuals,
     bool compressed_row_flag)
   {
     // Total number of elements
@@ -5303,11 +5303,11 @@ namespace oomph
     const unsigned n_matrix = column_or_row_index.size();
 
     // Locally cache pointer to assembly handler
-    AssemblyHandler *const assembly_handler_pt = Assembly_handler_pt;
+    AssemblyHandler* const assembly_handler_pt = Assembly_handler_pt;
 
 #ifdef OOMPH_HAS_MPI
     bool doing_residuals = false;
-    if (dynamic_cast<ParallelResidualsHandler *>(Assembly_handler_pt) != 0)
+    if (dynamic_cast<ParallelResidualsHandler*>(Assembly_handler_pt) != 0)
     {
       doing_residuals = true;
     }
@@ -5401,7 +5401,7 @@ namespace oomph
 #endif
 
         // Get the pointer to the element
-        GeneralisedElement *elem_pt = mesh_pt()->element_pt(e);
+        GeneralisedElement* elem_pt = mesh_pt()->element_pt(e);
 
 #ifdef OOMPH_HAS_MPI
         // Ignore halo elements
@@ -5612,11 +5612,11 @@ namespace oomph
   ///                      arguments is as stated in square brackets].
   //=====================================================================
   void Problem::sparse_assemble_row_or_column_compressed_with_two_vectors(
-    Vector<int *> &column_or_row_index,
-    Vector<int *> &row_or_column_start,
-    Vector<double *> &value,
-    Vector<unsigned> &nnz,
-    Vector<double *> &residuals,
+    Vector<int*>& column_or_row_index,
+    Vector<int*>& row_or_column_start,
+    Vector<double*>& value,
+    Vector<unsigned>& nnz,
+    Vector<double*>& residuals,
     bool compressed_row_flag)
   {
     // Total number of elements
@@ -5650,11 +5650,11 @@ namespace oomph
     const unsigned n_matrix = column_or_row_index.size();
 
     // Locally cache pointer to assembly handler
-    AssemblyHandler *const assembly_handler_pt = Assembly_handler_pt;
+    AssemblyHandler* const assembly_handler_pt = Assembly_handler_pt;
 
 #ifdef OOMPH_HAS_MPI
     bool doing_residuals = false;
-    if (dynamic_cast<ParallelResidualsHandler *>(Assembly_handler_pt) != 0)
+    if (dynamic_cast<ParallelResidualsHandler*>(Assembly_handler_pt) != 0)
     {
       doing_residuals = true;
     }
@@ -5752,7 +5752,7 @@ namespace oomph
 #endif
 
         // Get the pointer to the element
-        GeneralisedElement *elem_pt = mesh_pt()->element_pt(e);
+        GeneralisedElement* elem_pt = mesh_pt()->element_pt(e);
 
 #ifdef OOMPH_HAS_MPI
         // Ignore halo elements
@@ -5970,11 +5970,11 @@ namespace oomph
   ///                      arguments is as stated in square brackets].
   //=====================================================================
   void Problem::sparse_assemble_row_or_column_compressed_with_two_arrays(
-    Vector<int *> &column_or_row_index,
-    Vector<int *> &row_or_column_start,
-    Vector<double *> &value,
-    Vector<unsigned> &nnz,
-    Vector<double *> &residuals,
+    Vector<int*>& column_or_row_index,
+    Vector<int*>& row_or_column_start,
+    Vector<double*>& value,
+    Vector<unsigned>& nnz,
+    Vector<double*>& residuals,
     bool compressed_row_flag)
   {
     // Total number of elements
@@ -6008,11 +6008,11 @@ namespace oomph
     const unsigned n_matrix = column_or_row_index.size();
 
     // Locally cache pointer to assembly handler
-    AssemblyHandler *const assembly_handler_pt = Assembly_handler_pt;
+    AssemblyHandler* const assembly_handler_pt = Assembly_handler_pt;
 
 #ifdef OOMPH_HAS_MPI
     bool doing_residuals = false;
-    if (dynamic_cast<ParallelResidualsHandler *>(Assembly_handler_pt) != 0)
+    if (dynamic_cast<ParallelResidualsHandler*>(Assembly_handler_pt) != 0)
     {
       doing_residuals = true;
     }
@@ -6055,15 +6055,15 @@ namespace oomph
     // Set up two vector of vectors to store the entries of each  matrix,
     // indexed by either the column or row. The entries of the vector for
     // each matrix correspond to all the rows or columns of that matrix.
-    Vector<unsigned **> matrix_row_or_col_indices(n_matrix);
-    Vector<double **> matrix_values(n_matrix);
+    Vector<unsigned**> matrix_row_or_col_indices(n_matrix);
+    Vector<double**> matrix_values(n_matrix);
 
     // Loop over the number of matrices being assembled and resize
     // each vector of vectors to the number of rows or columns of the matrix
     for (unsigned m = 0; m < n_matrix; m++)
     {
-      matrix_row_or_col_indices[m] = new unsigned *[ndof];
-      matrix_values[m] = new double *[ndof];
+      matrix_row_or_col_indices[m] = new unsigned*[ndof];
+      matrix_values[m] = new double*[ndof];
     }
 
     // Resize the residuals vectors
@@ -6126,7 +6126,7 @@ namespace oomph
 #endif
 
         // Get the pointer to the element
-        GeneralisedElement *elem_pt = mesh_pt()->element_pt(e);
+        GeneralisedElement* elem_pt = mesh_pt()->element_pt(e);
 
 #ifdef OOMPH_HAS_MPI
         // Ignore halo elements
@@ -6227,8 +6227,8 @@ namespace oomph
                           unsigned new_allocation =
                             ncoef[m][eqn_number] +
                             Sparse_assemble_with_arrays_allocation_increment;
-                          double *new_values = new double[new_allocation];
-                          unsigned *new_indices = new unsigned[new_allocation];
+                          double* new_values = new double[new_allocation];
+                          unsigned* new_indices = new unsigned[new_allocation];
                           for (unsigned c = 0; c < ncoef[m][eqn_number]; c++)
                           {
                             new_values[c] = matrix_values[m][eqn_number][c];
@@ -6275,8 +6275,8 @@ namespace oomph
                           unsigned new_allocation =
                             ncoef[m][unknown] +
                             Sparse_assemble_with_arrays_allocation_increment;
-                          double *new_values = new double[new_allocation];
-                          unsigned *new_indices = new unsigned[new_allocation];
+                          double* new_values = new double[new_allocation];
+                          unsigned* new_indices = new unsigned[new_allocation];
                           for (unsigned c = 0; c < ncoef[m][unknown]; c++)
                           {
                             new_values[c] = matrix_values[m][unknown][c];
@@ -6413,10 +6413,10 @@ namespace oomph
   /// the elements in the range el_lo to el_hi contribute on this
   /// processor
   //=======================================================================
-  void Problem::get_my_eqns(AssemblyHandler *const &assembly_handler_pt,
-                            const unsigned &el_lo,
-                            const unsigned &el_hi,
-                            Vector<unsigned> &my_eqns)
+  void Problem::get_my_eqns(AssemblyHandler* const& assembly_handler_pt,
+                            const unsigned& el_lo,
+                            const unsigned& el_hi,
+                            Vector<unsigned>& my_eqns)
   {
     // Index to keep track of the equations counted
     unsigned my_eqns_index = 0;
@@ -6425,7 +6425,7 @@ namespace oomph
     for (unsigned long e = el_lo; e <= el_hi; e++)
     {
       // Get the pointer to the element
-      GeneralisedElement *elem_pt = this->mesh_pt()->element_pt(e);
+      GeneralisedElement* elem_pt = this->mesh_pt()->element_pt(e);
 
       // Ignore halo elements
       if (!elem_pt->is_halo())
@@ -6460,12 +6460,12 @@ namespace oomph
   /// on multiple processors.
   //=============================================================================
   void Problem::parallel_sparse_assemble(
-    const LinearAlgebraDistribution *const &target_dist_pt,
-    Vector<int *> &column_indices,
-    Vector<int *> &row_start,
-    Vector<double *> &values,
-    Vector<unsigned> &nnz,
-    Vector<double *> &residuals)
+    const LinearAlgebraDistribution* const& target_dist_pt,
+    Vector<int*>& column_indices,
+    Vector<int*>& row_start,
+    Vector<double*>& values,
+    Vector<unsigned>& nnz,
+    Vector<double*>& residuals)
   {
     // Time assembly
     double t_start = TimingHelpers::timer();
@@ -6517,10 +6517,10 @@ namespace oomph
     const unsigned n_matrix = column_indices.size();
 
     // Locally cache pointer to assembly handler
-    AssemblyHandler *const assembly_handler_pt = Assembly_handler_pt;
+    AssemblyHandler* const assembly_handler_pt = Assembly_handler_pt;
 
     bool doing_residuals = false;
-    if (dynamic_cast<ParallelResidualsHandler *>(Assembly_handler_pt) != 0)
+    if (dynamic_cast<ParallelResidualsHandler*>(Assembly_handler_pt) != 0)
     {
       doing_residuals = true;
     }
@@ -6578,15 +6578,15 @@ namespace oomph
     // Set up two vector of vectors to store the entries of each  matrix,
     // indexed by either the column or row. The entries of the vector for
     // each matrix correspond to all the rows or columns of that matrix.
-    Vector<unsigned **> matrix_col_indices(n_matrix);
-    Vector<double **> matrix_values(n_matrix);
+    Vector<unsigned**> matrix_col_indices(n_matrix);
+    Vector<double**> matrix_values(n_matrix);
 
     // Loop over the number of matrices being assembled and resize
     // each vector of vectors to the number of rows or columns of the matrix
     for (unsigned m = 0; m < n_matrix; m++)
     {
-      matrix_col_indices[m] = new unsigned *[my_n_eqn];
-      matrix_values[m] = new double *[my_n_eqn];
+      matrix_col_indices[m] = new unsigned*[my_n_eqn];
+      matrix_values[m] = new double*[my_n_eqn];
       for (unsigned i = 0; i < my_n_eqn; i++)
       {
         matrix_col_indices[m][i] = 0;
@@ -6595,7 +6595,7 @@ namespace oomph
     }
 
     // Resize the residuals vectors
-    Vector<double *> residuals_data(n_vector);
+    Vector<double*> residuals_data(n_vector);
     for (unsigned v = 0; v < n_vector; v++)
     {
       residuals_data[v] = new double[my_n_eqn];
@@ -6653,7 +6653,7 @@ namespace oomph
         }
 
         // Get the pointer to the element
-        GeneralisedElement *elem_pt = mesh_pt()->element_pt(e);
+        GeneralisedElement* elem_pt = mesh_pt()->element_pt(e);
 
         // Ignore halo elements
         if (!elem_pt->is_halo())
@@ -6825,8 +6825,8 @@ namespace oomph
                         unsigned new_allocation =
                           ncoef[m][eqn_number] +
                           Sparse_assemble_with_arrays_allocation_increment;
-                        double *new_values = new double[new_allocation];
-                        unsigned *new_indices = new unsigned[new_allocation];
+                        double* new_values = new double[new_allocation];
+                        unsigned* new_indices = new unsigned[new_allocation];
                         for (unsigned c = 0; c < ncoef[m][eqn_number]; c++)
                         {
                           new_values[c] = matrix_values[m][eqn_number][c];
@@ -6932,8 +6932,8 @@ namespace oomph
 
         // Now shrink the storage to what we actually need
         unsigned new_allocation = ncoef[m][e];
-        double *new_values = new double[new_allocation];
-        unsigned *new_indices = new unsigned[new_allocation];
+        double* new_values = new double[new_allocation];
+        unsigned* new_indices = new unsigned[new_allocation];
         for (unsigned c = 0; c < ncoef[m][e]; c++)
         {
           new_values[c] = matrix_values[m][e][c];
@@ -7005,8 +7005,8 @@ namespace oomph
     }
 
     // next post the sends and recvs to the corresponding processors
-    Vector<unsigned *> temp_send_storage(nproc);
-    Vector<unsigned *> temp_recv_storage(nproc);
+    Vector<unsigned*> temp_send_storage(nproc);
+    Vector<unsigned*> temp_recv_storage(nproc);
     Vector<MPI_Request> send_nnz_reqs;
     Vector<MPI_Request> recv_nnz_reqs;
     for (unsigned p = 0; p < nproc; p++)
@@ -7045,11 +7045,11 @@ namespace oomph
     // ==============================================
 
     // storage
-    Vector<unsigned *> eqns_for_proc(nproc);
-    DenseMatrix<double *> residuals_for_proc(nproc, n_vector);
-    DenseMatrix<unsigned *> row_start_for_proc(nproc, n_matrix);
-    DenseMatrix<unsigned *> column_indices_for_proc(nproc, n_matrix);
-    DenseMatrix<double *> values_for_proc(nproc, n_matrix);
+    Vector<unsigned*> eqns_for_proc(nproc);
+    DenseMatrix<double*> residuals_for_proc(nproc, n_vector);
+    DenseMatrix<unsigned*> row_start_for_proc(nproc, n_matrix);
+    DenseMatrix<unsigned*> column_indices_for_proc(nproc, n_matrix);
+    DenseMatrix<double*> values_for_proc(nproc, n_matrix);
 
     // equation numbers
     for (unsigned p = 0; p < nproc; p++)
@@ -7163,11 +7163,11 @@ namespace oomph
     // =====================================================================
 
     // storage
-    Vector<unsigned *> eqns_from_proc(nproc);
-    DenseMatrix<double *> residuals_from_proc(nproc, n_vector);
-    DenseMatrix<unsigned *> row_start_from_proc(nproc, n_matrix);
-    DenseMatrix<unsigned *> column_indices_from_proc(nproc, n_matrix);
-    DenseMatrix<double *> values_from_proc(nproc, n_matrix);
+    Vector<unsigned*> eqns_from_proc(nproc);
+    DenseMatrix<double*> residuals_from_proc(nproc, n_vector);
+    DenseMatrix<unsigned*> row_start_from_proc(nproc, n_matrix);
+    DenseMatrix<unsigned*> column_indices_from_proc(nproc, n_matrix);
+    DenseMatrix<double*> values_from_proc(nproc, n_matrix);
 
     // allocate and post sends and recvs
     double base;
@@ -7382,9 +7382,9 @@ namespace oomph
       {
         nnz_allocation = std::max(nnz_allocation, nnz_from_proc(p, m));
       }
-      Vector<double *> values_chunk(1);
+      Vector<double*> values_chunk(1);
       values_chunk[0] = new double[nnz_allocation];
-      Vector<int *> column_indices_chunk(1);
+      Vector<int*> column_indices_chunk(1);
       column_indices_chunk[0] = new int[nnz_allocation];
       Vector<unsigned> ncoef_in_chunk(1, 0);
       Vector<unsigned> size_of_chunk(1, 0);
@@ -7716,8 +7716,8 @@ namespace oomph
   //================================================================
   /// \short Get the full Jacobian by finite differencing
   //================================================================
-  void Problem::get_fd_jacobian(DoubleVector &residuals,
-                                DenseMatrix<double> &jacobian)
+  void Problem::get_fd_jacobian(DoubleVector& residuals,
+                                DenseMatrix<double>& jacobian)
   {
 #ifdef OOMPH_HAS_MPI
 
@@ -7779,15 +7779,15 @@ namespace oomph
   /// \short Get derivative of the residuals vector wrt a global parameter
   /// This is required in continuation problems
   //=======================================================================
-  void Problem::get_derivative_wrt_global_parameter(double *const &parameter_pt,
-                                                    DoubleVector &result)
+  void Problem::get_derivative_wrt_global_parameter(double* const& parameter_pt,
+                                                    DoubleVector& result)
   {
     // If we are doing the calculation analytically then call the appropriate
     // handler and then calling get_residuals
     if (is_dparameter_calculated_analytically(parameter_pt))
     {
       // Locally cache pointer to assembly handler
-      AssemblyHandler *const old_assembly_handler_pt = Assembly_handler_pt;
+      AssemblyHandler* const old_assembly_handler_pt = Assembly_handler_pt;
       // Create a new assembly handler that replaces get_residuals by
       // get_dresiduals_dparameter for each element
       Assembly_handler_pt =
@@ -7877,9 +7877,9 @@ namespace oomph
   /// level.
   //========================================================================
   void Problem::get_hessian_vector_products(
-    DoubleVectorWithHaloEntries const &Y,
-    Vector<DoubleVectorWithHaloEntries> const &C,
-    Vector<DoubleVectorWithHaloEntries> &product)
+    DoubleVectorWithHaloEntries const& Y,
+    Vector<DoubleVectorWithHaloEntries> const& C,
+    Vector<DoubleVectorWithHaloEntries>& product)
   {
     // How many vector products must we construct
     const unsigned n_vec = C.size();
@@ -7889,7 +7889,7 @@ namespace oomph
     // LinearAlgebraDistribution(Communicator_pt,n_dof,false);
 
     // Cache the assembly hander
-    AssemblyHandler *const assembly_handler_pt = Assembly_handler_pt;
+    AssemblyHandler* const assembly_handler_pt = Assembly_handler_pt;
 
     // Rebuild the results vectors and initialise to zero
     // use the same distribution of the vector Y
@@ -7922,7 +7922,7 @@ namespace oomph
       for (unsigned long e = 0; e < Element_pt_range; e++)
       {
         // Get the pointer to the element
-        GeneralisedElement *elem_pt = Mesh_pt->element_pt(e);
+        GeneralisedElement* elem_pt = Mesh_pt->element_pt(e);
 // Do not loop over halo elements
 #ifdef OOMPH_HAS_MPI
         if (!elem_pt->is_halo())
@@ -8055,7 +8055,7 @@ namespace oomph
       const unsigned long n_element = this->mesh_pt()->nelement();
       for (unsigned long e = 0; e < n_element; e++)
       {
-        GeneralisedElement *elem_pt = this->mesh_pt()->element_pt(e);
+        GeneralisedElement* elem_pt = this->mesh_pt()->element_pt(e);
         // Ignore halo's of course
 #ifdef OOMPH_HAS_MPI
         if (!elem_pt->is_halo())
@@ -8202,10 +8202,10 @@ namespace oomph
   //==================================================================
   /// Solve the eigenproblem
   //==================================================================
-  void Problem::solve_eigenproblem(const unsigned &n_eval,
-                                   Vector<std::complex<double>> &eigenvalue,
-                                   Vector<DoubleVector> &eigenvector,
-                                   const bool &steady)
+  void Problem::solve_eigenproblem(const unsigned& n_eval,
+                                   Vector<std::complex<double>>& eigenvalue,
+                                   Vector<DoubleVector>& eigenvector,
+                                   const bool& steady)
   {
     // If the boolean flag is steady, then make all the timesteppers steady
     // before solving the eigenproblem. This will "switch off" the
@@ -8256,9 +8256,9 @@ namespace oomph
   /// WARNING: temporarily this method only works with non-distributed
   /// matrices
   //===================================================================
-  void Problem::get_eigenproblem_matrices(CRDoubleMatrix &mass_matrix,
-                                          CRDoubleMatrix &main_matrix,
-                                          const double &shift)
+  void Problem::get_eigenproblem_matrices(CRDoubleMatrix& mass_matrix,
+                                          CRDoubleMatrix& main_matrix,
+                                          const double& shift)
   {
     // Three different cases again here:
     // 1) Compiled with MPI, but run in serial
@@ -8312,17 +8312,17 @@ namespace oomph
 #endif
 
     // Store the old assembly handler
-    AssemblyHandler *old_assembly_handler_pt = Assembly_handler_pt;
+    AssemblyHandler* old_assembly_handler_pt = Assembly_handler_pt;
     // Now setup the eigenproblem handler, pass in the value of the shift
     Assembly_handler_pt = new EigenProblemHandler(shift);
 
     // Prepare the storage formats.
-    Vector<int *> column_or_row_index(2);
-    Vector<int *> row_or_column_start(2);
-    Vector<double *> value(2);
+    Vector<int*> column_or_row_index(2);
+    Vector<int*> row_or_column_start(2);
+    Vector<double*> value(2);
     Vector<unsigned> nnz(2);
     // Allocate pointer to residuals, although not used in these problems
-    Vector<double *> residuals_vectors(0);
+    Vector<double*> residuals_vectors(0);
 
     // total number of rows in each matrix
     unsigned nrow = this->ndof();
@@ -8331,7 +8331,7 @@ namespace oomph
     // IF the jacobian has distribution setup then use that
     // ELSE determine the distribution based on the
     // distributed_matrix_distribution enum
-    LinearAlgebraDistribution *dist_pt = 0;
+    LinearAlgebraDistribution* dist_pt = 0;
     if (main_matrix.distribution_built())
     {
       dist_pt = new LinearAlgebraDistribution(main_matrix.distribution_pt());
@@ -8363,7 +8363,7 @@ namespace oomph
             dist_pt = new LinearAlgebraDistribution(Dof_distribution_pt);
             break;
           case Default_matrix_distribution:
-            LinearAlgebraDistribution *uniform_dist_pt =
+            LinearAlgebraDistribution* uniform_dist_pt =
               new LinearAlgebraDistribution(Communicator_pt, nrow, true);
             bool use_problem_dist = true;
             unsigned nproc = Communicator_pt->nproc();
@@ -8451,7 +8451,7 @@ namespace oomph
       }
       else
       {
-        LinearAlgebraDistribution *temp_dist_pt =
+        LinearAlgebraDistribution* temp_dist_pt =
           new LinearAlgebraDistribution(Communicator_pt, dist_pt->nrow(), true);
         parallel_sparse_assemble(temp_dist_pt,
                                  column_or_row_index,
@@ -8600,7 +8600,7 @@ namespace oomph
   //======================================================================
   /// Assign the eigenvector passed to the function to the dofs
   //======================================================================
-  void Problem::assign_eigenvector_to_dofs(DoubleVector &eigenvector)
+  void Problem::assign_eigenvector_to_dofs(DoubleVector& eigenvector)
   {
     unsigned long n_dof = ndof();
     // Check that the eigenvector has the correct size
@@ -8630,8 +8630,8 @@ namespace oomph
   /// Add the eigenvector passed to the function to the dofs with
   /// magnitude epsilon
   //======================================================================
-  void Problem::add_eigenvector_to_dofs(const double &epsilon,
-                                        const DoubleVector &eigenvector)
+  void Problem::add_eigenvector_to_dofs(const double& epsilon,
+                                        const DoubleVector& eigenvector)
   {
     unsigned long n_dof = ndof();
     // Check that the eigenvector has the correct size
@@ -8875,7 +8875,7 @@ namespace oomph
 
       // Subtract the new values from the true dofs
       dx.redistribute(Dof_distribution_pt);
-      double *dx_pt = dx.values_pt();
+      double* dx_pt = dx.values_pt();
       unsigned ndof_local = Dof_distribution_pt->nrow_local();
 
       if (Use_globally_convergent_newton_method)
@@ -9021,12 +9021,12 @@ namespace oomph
   /// Helper function for the globally convergent Newton solver
   //========================================================================
   void Problem::globally_convergent_line_search(
-    const Vector<double> &x_old,
-    const double &half_residual_squared_old,
-    DoubleVector &gradient,
-    DoubleVector &newton_dir,
-    double &half_residual_squared,
-    const double &stpmax)
+    const Vector<double>& x_old,
+    const double& half_residual_squared_old,
+    DoubleVector& gradient,
+    DoubleVector& newton_dir,
+    double& half_residual_squared,
+    const double& stpmax)
   {
     const double min_fct_decrease = 1.0e-4;
     double convergence_tol_on_x = 1.0e-16;
@@ -9163,7 +9163,7 @@ namespace oomph
   /// adaptations of all refineable submeshes are performed to
   /// achieve the the error targets specified in the refineable submeshes.
   //========================================================================
-  void Problem::steady_newton_solve(unsigned const &max_adapt)
+  void Problem::steady_newton_solve(unsigned const& max_adapt)
   {
     // Find out how many timesteppers there are
     unsigned n_time_steppers = ntime_stepper();
@@ -9192,7 +9192,7 @@ namespace oomph
       }
     }
     // Catch any exceptions thrown in the Newton solver
-    catch (NewtonSolverError &error)
+    catch (NewtonSolverError& error)
     {
       oomph_info << std::endl
                  << "USER-DEFINED ERROR IN NEWTON SOLVER " << std::endl;
@@ -9246,7 +9246,7 @@ namespace oomph
   /// parameter of the problem is passed as a pointer to the routine. The
   /// number of Newton steps taken is returned
   //==========================================================================
-  unsigned Problem::newton_solve_continuation(double *const &parameter_pt)
+  unsigned Problem::newton_solve_continuation(double* const& parameter_pt)
   {
     // Set up memory for z
     // unsigned long n_dofs = ndof();
@@ -9265,8 +9265,8 @@ namespace oomph
   /// routine, as is the sign of the Jacobian and a Vector in which
   /// to store the derivatives wrt the parameter, if required.
   //==================================================================
-  unsigned Problem::newton_solve_continuation(double *const &parameter_pt,
-                                              DoubleVector &z)
+  unsigned Problem::newton_solve_continuation(double* const& parameter_pt,
+                                              DoubleVector& z)
   {
     // Find the total number of dofs
     // unsigned long n_dofs = ndof();
@@ -9378,7 +9378,7 @@ namespace oomph
       // simultaneously. This is because the block decomposition involves
       // solves with two different matrices and storing both at once to
       // allow general resolves would be more expensive than necessary.
-      if (dynamic_cast<BlockHopfLinearSolver *>(Linear_solver_pt))
+      if (dynamic_cast<BlockHopfLinearSolver*>(Linear_solver_pt))
       {
         // Get the vector dresiduals/dparameter
         z.clear();
@@ -9390,7 +9390,7 @@ namespace oomph
         DoubleVector input_z(z);
 
         // Solve the system for the two right-hand sides.
-        dynamic_cast<BlockHopfLinearSolver *>(Linear_solver_pt)
+        dynamic_cast<BlockHopfLinearSolver*>(Linear_solver_pt)
           ->solve_for_two_rhs(this, y, input_z, z);
       }
       // Otherwise
@@ -9428,8 +9428,8 @@ namespace oomph
       // Now calculate the dot products of the derivative and the solutions
       // of the linear system
       // Cache pointers to the data in the distributed vectors
-      double *const y_pt = y.values_pt();
-      double *const z_pt = z.values_pt();
+      double* const y_pt = y.values_pt();
+      double* const z_pt = z.values_pt();
       for (unsigned long l = 0; l < ndof_local; l++)
       {
         uderiv_dot_y += dof_derivative(l) * y_pt[l];
@@ -9584,7 +9584,7 @@ namespace oomph
   /// problems, in which the number of degrees of freedom changes and so
   /// the appropriate derivatives must be calculated for the new variables.
   //=========================================================================
-  void Problem::calculate_continuation_derivatives(double *const &parameter_pt)
+  void Problem::calculate_continuation_derivatives(double* const& parameter_pt)
   {
     // Find the number of degrees of freedom in the problem
     const unsigned long n_dofs = ndof();
@@ -9598,7 +9598,7 @@ namespace oomph
     // If it's the block hopf solver need to solve for both RHS
     // at once, but this would all be alleviated if we have the solve
     // for the non-residuals RHS.
-    if (dynamic_cast<BlockHopfLinearSolver *>(Linear_solver_pt))
+    if (dynamic_cast<BlockHopfLinearSolver*>(Linear_solver_pt))
     {
       // Get the vector dresiduals/dparameter
       get_derivative_wrt_global_parameter(parameter_pt, z);
@@ -9609,7 +9609,7 @@ namespace oomph
       DoubleVector dummy(&dist, 0.0), input_z(z);
 
       // Solve for the two RHSs
-      dynamic_cast<BlockHopfLinearSolver *>(Linear_solver_pt)
+      dynamic_cast<BlockHopfLinearSolver*>(Linear_solver_pt)
         ->solve_for_two_rhs(this, dummy, input_z, z);
     }
     // Otherwise we can use the normal resolve
@@ -9660,7 +9660,7 @@ namespace oomph
   /// output from the newton_solve_continuation function. The derivatives
   /// are stored in the ContinuationParameters namespace.
   //===================================================================
-  void Problem::calculate_continuation_derivatives(const DoubleVector &z)
+  void Problem::calculate_continuation_derivatives(const DoubleVector& z)
   {
     // Calculate the continuation derivatives
     calculate_continuation_derivatives_helper(z);
@@ -9687,7 +9687,7 @@ namespace oomph
   /// required for continuation using finite differences.
   //===================================================================
   void Problem::calculate_continuation_derivatives_fd(
-    double *const &parameter_pt)
+    double* const& parameter_pt)
   {
     // Calculate the continuation derivatives
     calculate_continuation_derivatives_fd_helper(parameter_pt);
@@ -9715,7 +9715,7 @@ namespace oomph
   /// within the problem
   //======================================================================
   bool Problem::does_pointer_correspond_to_problem_data(
-    double *const &parameter_pt)
+    double* const& parameter_pt)
   {
     // Firstly check the global data
     const unsigned n_global = Global_data_pt.size();
@@ -9739,7 +9739,7 @@ namespace oomph
     // If there is only one mesh
     if (n_sub_mesh == 0)
     {
-      if (SpineMesh *const spine_mesh_pt = dynamic_cast<SpineMesh *>(Mesh_pt))
+      if (SpineMesh* const spine_mesh_pt = dynamic_cast<SpineMesh*>(Mesh_pt))
       {
         if (spine_mesh_pt->does_pointer_correspond_to_spine_data(parameter_pt))
         {
@@ -9753,8 +9753,8 @@ namespace oomph
       // Assign global equation numbers first
       for (unsigned i = 0; i < n_sub_mesh; i++)
       {
-        if (SpineMesh *const spine_mesh_pt =
-              dynamic_cast<SpineMesh *>(Sub_mesh_pt[i]))
+        if (SpineMesh* const spine_mesh_pt =
+              dynamic_cast<SpineMesh*>(Sub_mesh_pt[i]))
         {
           if (spine_mesh_pt->does_pointer_correspond_to_spine_data(
                 parameter_pt))
@@ -9779,7 +9779,7 @@ namespace oomph
   /// output from the newton_solve_continuation function. The derivatives
   /// are stored in the ContinuationParameters namespace.
   //===================================================================
-  void Problem::calculate_continuation_derivatives_helper(const DoubleVector &z)
+  void Problem::calculate_continuation_derivatives_helper(const DoubleVector& z)
   {
     // Find the number of degrees of freedom in the problem
     // unsigned long n_dofs = ndof();
@@ -9804,7 +9804,7 @@ namespace oomph
     // Calculate the local contribution to the Continuation direction
     Continuation_direction = 0.0;
     // Cache the pointer to z
-    double *const local_z_pt = local_z.values_pt();
+    double* const local_z_pt = local_z.values_pt();
     for (unsigned long l = 0; l < ndof_local; l++)
     {
       Continuation_direction -= dof_derivative(l) * local_z_pt[l];
@@ -9872,7 +9872,7 @@ namespace oomph
   /// required for continuation using finite differences.
   //===================================================================
   void Problem::calculate_continuation_derivatives_fd_helper(
-    double *const &parameter_pt)
+    double* const& parameter_pt)
   {
     // Find the number of values
     // const unsigned long n_dofs = this->ndof();
@@ -9947,7 +9947,7 @@ namespace oomph
   /// bifurcation detection. If we are not tracking a bifurcation then
   /// an error will be thrown by the AssemblyHandler
   //====================================================================
-  double *Problem::bifurcation_parameter_pt() const
+  double* Problem::bifurcation_parameter_pt() const
   {
     return Assembly_handler_pt->bifurcation_parameter_pt();
   }
@@ -9958,7 +9958,7 @@ namespace oomph
   /// then an error will be thrown by the AssemblyHandler
   //======================================================================
   void Problem::get_bifurcation_eigenfunction(
-    Vector<DoubleVector> &eigenfunction)
+    Vector<DoubleVector>& eigenfunction)
   {
     // Simply call the appropriate assembly handler function
     Assembly_handler_pt->get_eigenfunction(eigenfunction);
@@ -9969,8 +9969,8 @@ namespace oomph
   /// handler and initialising it using the parameter addressed
   /// by parameter_pt.
   //============================================================
-  void Problem::activate_fold_tracking(double *const &parameter_pt,
-                                       const bool &block_solve)
+  void Problem::activate_fold_tracking(double* const& parameter_pt,
+                                       const bool& block_solve)
   {
     // Reset the assembly handler to default
     reset_assembly_handler_to_default();
@@ -9995,9 +9995,9 @@ namespace oomph
   /// assembly handler and initialising it using the parameter addressed by
   /// parameter_pt.
   //============================================================
-  void Problem::activate_bifurcation_tracking(double *const &parameter_pt,
-                                              const DoubleVector &eigenvector,
-                                              const bool &block_solve)
+  void Problem::activate_bifurcation_tracking(double* const& parameter_pt,
+                                              const DoubleVector& eigenvector,
+                                              const bool& block_solve)
   {
     // Reset the assembly handler to default
     reset_assembly_handler_to_default();
@@ -10022,10 +10022,10 @@ namespace oomph
   /// assembly handler and initialising it using the parameter addressed by
   /// parameter_pt.
   //============================================================
-  void Problem::activate_bifurcation_tracking(double *const &parameter_pt,
-                                              const DoubleVector &eigenvector,
-                                              const DoubleVector &normalisation,
-                                              const bool &block_solve)
+  void Problem::activate_bifurcation_tracking(double* const& parameter_pt,
+                                              const DoubleVector& eigenvector,
+                                              const DoubleVector& normalisation,
+                                              const bool& block_solve)
   {
     // Reset the assembly handler to default
     reset_assembly_handler_to_default();
@@ -10052,9 +10052,9 @@ namespace oomph
   /// by parameter_pt and a symmetry vector. The boolean flag is
   /// used to specify whether a block solver is used, default is true.
   //===================================================================
-  void Problem::activate_pitchfork_tracking(double *const &parameter_pt,
-                                            const DoubleVector &symmetry_vector,
-                                            const bool &block_solve)
+  void Problem::activate_pitchfork_tracking(double* const& parameter_pt,
+                                            const DoubleVector& symmetry_vector,
+                                            const bool& block_solve)
   {
     // Reset the assembly handler to default
     reset_assembly_handler_to_default();
@@ -10081,8 +10081,8 @@ namespace oomph
   /// handler and initialising it using the parameter addressed
   /// by parameter_pt.
   //============================================================
-  void Problem::activate_hopf_tracking(double *const &parameter_pt,
-                                       const bool &block_solve)
+  void Problem::activate_hopf_tracking(double* const& parameter_pt,
+                                       const bool& block_solve)
   {
     // Reset the assembly handler to default
     reset_assembly_handler_to_default();
@@ -10108,11 +10108,11 @@ namespace oomph
   /// by parameter_pt and the frequency and null vectors
   /// specified.
   //============================================================
-  void Problem::activate_hopf_tracking(double *const &parameter_pt,
-                                       const double &omega,
-                                       const DoubleVector &null_real,
-                                       const DoubleVector &null_imag,
-                                       const bool &block_solve)
+  void Problem::activate_hopf_tracking(double* const& parameter_pt,
+                                       const double& omega,
+                                       const DoubleVector& null_real,
+                                       const DoubleVector& null_imag,
+                                       const bool& block_solve)
   {
     // Reset the assembly handler to default
     reset_assembly_handler_to_default();
@@ -10155,9 +10155,9 @@ namespace oomph
   /// arc-length according to criteria based upon the desired number of Newton
   /// Iterations per solve.
   //=====================================================================
-  double Problem::arc_length_step_solve(double *const &parameter_pt,
-                                        const double &ds,
-                                        const unsigned &max_adapt)
+  double Problem::arc_length_step_solve(double* const& parameter_pt,
+                                        const double& ds,
+                                        const unsigned& max_adapt)
   {
     // First check that we shouldn't use the other interface
     // by checking that the parameter isn't already stored as data
@@ -10239,10 +10239,10 @@ namespace oomph
   /// arc-length according to criteria based upon the desired number of Newton
   /// Iterations per solve.
   //=====================================================================
-  double Problem::arc_length_step_solve(Data *const &data_pt,
-                                        const unsigned &data_index,
-                                        const double &ds,
-                                        const unsigned &max_adapt)
+  double Problem::arc_length_step_solve(Data* const& data_pt,
+                                        const unsigned& data_index,
+                                        const double& ds,
+                                        const unsigned& max_adapt)
   {
     // Firstly check that the data is pinned
     if (!data_pt->is_pinned(data_index))
@@ -10301,7 +10301,7 @@ namespace oomph
     } // End of continuation time stepper case
 
     // Now make a pointer to the (newly allocated) data object
-    double *parameter_pt = data_pt->value_pt(data_index);
+    double* parameter_pt = data_pt->value_pt(data_index);
     // Call the helper function, this will change the parameter_pt if
     // the data storage is changed (if the timestepper has to be changed,
     // which happens if this is the first time that a continuation step is
@@ -10329,7 +10329,7 @@ namespace oomph
     // If there is only one mesh
     if (n_sub_mesh == 0)
     {
-      if (SpineMesh *const spine_mesh_pt = dynamic_cast<SpineMesh *>(Mesh_pt))
+      if (SpineMesh* const spine_mesh_pt = dynamic_cast<SpineMesh*>(Mesh_pt))
       {
         spine_mesh_pt->set_consistent_pinned_spine_values_for_continuation(
           &Continuation_time_stepper);
@@ -10342,8 +10342,8 @@ namespace oomph
       // Assign global equation numbers first
       for (unsigned i = 0; i < n_sub_mesh; i++)
       {
-        if (SpineMesh *const spine_mesh_pt =
-              dynamic_cast<SpineMesh *>(Sub_mesh_pt[i]))
+        if (SpineMesh* const spine_mesh_pt =
+              dynamic_cast<SpineMesh*>(Sub_mesh_pt[i]))
         {
           spine_mesh_pt->set_consistent_pinned_spine_values_for_continuation(
             &Continuation_time_stepper);
@@ -10366,9 +10366,9 @@ namespace oomph
   /// arc-length according to criteria based upon the desired number of Newton
   /// Iterations per solve.
   //=====================================================================
-  double Problem::arc_length_step_solve_helper(double *const &parameter_pt,
-                                               const double &ds,
-                                               const unsigned &max_adapt)
+  double Problem::arc_length_step_solve_helper(double* const& parameter_pt,
+                                               const double& ds,
+                                               const unsigned& max_adapt)
   {
     //----------------------MAKE THE PROBLEM STEADY-----------------------
     // Loop over the timesteppers and make them (temporarily) steady.
@@ -10549,7 +10549,7 @@ namespace oomph
           count = newton_solve_continuation(parameter_pt, z);
         }
         // Catch any exceptions thrown in the Newton solver
-        catch (NewtonSolverError &error)
+        catch (NewtonSolverError& error)
         {
           // Check whether it's the linear solver
           if (error.linear_solver_error)
@@ -10762,7 +10762,7 @@ namespace oomph
   //=======================================================================
   /// Take an explicit timestep of size dt
   //======================================================================
-  void Problem::explicit_timestep(const double &dt, const bool &shift_values)
+  void Problem::explicit_timestep(const double& dt, const bool& shift_values)
   {
 #ifdef PARANOID
     if (this->explicit_time_stepper_pt() == 0)
@@ -10796,7 +10796,7 @@ namespace oomph
   /// This does not include any kind of adaptativity. If the solution fails to
   /// converge the program will end.
   //========================================================================
-  void Problem::unsteady_newton_solve(const double &dt)
+  void Problem::unsteady_newton_solve(const double& dt)
   {
     // We shift the values, so shift_values is true
     unsteady_newton_solve(dt, true);
@@ -10809,8 +10809,8 @@ namespace oomph
   /// The boolean flag shift_values is used to control whether the time values
   /// should be shifted or not.
   //========================================================================
-  void Problem::unsteady_newton_solve(const double &dt,
-                                      const bool &shift_values)
+  void Problem::unsteady_newton_solve(const double& dt,
+                                      const bool& shift_values)
   {
     // Shift the time values and the dts, according to the control flag
     if (shift_values)
@@ -10849,7 +10849,7 @@ namespace oomph
       newton_solve();
     }
     // Catch any exceptions thrown in the Newton solver
-    catch (NewtonSolverError &error)
+    catch (NewtonSolverError& error)
     {
       oomph_info << std::endl
                  << "USER-DEFINED ERROR IN NEWTON SOLVER " << std::endl;
@@ -10898,8 +10898,8 @@ namespace oomph
   /// the global error norm per timestep. The routine returns the value an
   /// estimate of the next value of dt that should be taken.
   //=======================================================================
-  double Problem::adaptive_unsteady_newton_solve(const double &dt_desired,
-                                                 const double &epsilon)
+  double Problem::adaptive_unsteady_newton_solve(const double& dt_desired,
+                                                 const double& epsilon)
   {
     // We always want to shift the time values
     return adaptive_unsteady_newton_solve(dt_desired, epsilon, true);
@@ -10917,9 +10917,9 @@ namespace oomph
   /// This behaviour can be over-ruled by setting the protected
   /// boolean Problem::Keep_temporal_error_below_tolerance to false.
   //========================================================================
-  double Problem::adaptive_unsteady_newton_solve(const double &dt_desired,
-                                                 const double &epsilon,
-                                                 const bool &shift_values)
+  double Problem::adaptive_unsteady_newton_solve(const double& dt_desired,
+                                                 const double& epsilon,
+                                                 const bool& shift_values)
   {
     // First, we need to backup the existing dofs, in case the timestep is
     // rejected
@@ -11004,7 +11004,7 @@ namespace oomph
         newton_solve();
       }
       // Catch any exceptions thrown
-      catch (NewtonSolverError &error)
+      catch (NewtonSolverError& error)
       {
         // If it's a solver error then die
         if (error.linear_solver_error ||
@@ -11215,12 +11215,12 @@ namespace oomph
   /// 1: true] does what it says.]
   //========================================================================
   double Problem::doubly_adaptive_unsteady_newton_solve_helper(
-    const double &dt_desired,
-    const double &epsilon,
-    const unsigned &max_adapt,
-    const unsigned &suppress_resolve_after_spatial_adapt_flag,
-    const bool &first,
-    const bool &shift_values)
+    const double& dt_desired,
+    const double& epsilon,
+    const unsigned& max_adapt,
+    const unsigned& suppress_resolve_after_spatial_adapt_flag,
+    const bool& first,
+    const bool& shift_values)
   {
     // Store the initial time
     double initial_time = time_pt()->time();
@@ -11349,7 +11349,7 @@ namespace oomph
   /// Assign the values for an impulsive start and also set the initial
   /// values of the previous dts to both be dt
   //======================================================================
-  void Problem::assign_initial_values_impulsive(const double &dt)
+  void Problem::assign_initial_values_impulsive(const double& dt)
   {
     // First initialise the dts and set the weights
     initialise_dt(dt);
@@ -11361,7 +11361,7 @@ namespace oomph
   /// Return the current value of continuous time. If not Time object
   /// has been assigned, then throw an error
   //======================================================================
-  double &Problem::time()
+  double& Problem::time()
   {
     if (Time_pt == 0)
     {
@@ -11402,7 +11402,7 @@ namespace oomph
   /// the number of new equation numbers.
   //=========================================================================
   unsigned long Problem::set_timestepper_for_all_data(
-    TimeStepper *const &time_stepper_pt, const bool &preserve_existing_data)
+    TimeStepper* const& time_stepper_pt, const bool& preserve_existing_data)
   {
     // Set the timestepper for the master mesh's nodal and elemental data
     // to be the
@@ -11515,7 +11515,7 @@ namespace oomph
       // Copy the time stepper's predictor pt into problem's explicit time
       // stepper pt (unless problem already has its own explicit time
       // stepper).
-      ExplicitTimeStepper *ets_pt = time_stepper_pt()->explicit_predictor_pt();
+      ExplicitTimeStepper* ets_pt = time_stepper_pt()->explicit_predictor_pt();
 #ifdef PARANOID
       if (ets_pt == 0)
       {
@@ -11647,8 +11647,8 @@ namespace oomph
       for (unsigned e = 0; e < n_element; e++)
       {
         // Cache the element
-        DGElement *const elem_pt =
-          dynamic_cast<DGElement *>(Problem::mesh_pt()->element_pt(e));
+        DGElement* const elem_pt =
+          dynamic_cast<DGElement*>(Problem::mesh_pt()->element_pt(e));
         elem_pt->enable_mass_matrix_reuse();
       }
     }
@@ -11672,8 +11672,8 @@ namespace oomph
       for (unsigned e = 0; e < n_element; e++)
       {
         // Cache the element
-        DGElement *const elem_pt =
-          dynamic_cast<DGElement *>(Problem::mesh_pt()->element_pt(e));
+        DGElement* const elem_pt =
+          dynamic_cast<DGElement*>(Problem::mesh_pt()->element_pt(e));
         elem_pt->disable_mass_matrix_reuse();
       }
     }
@@ -11690,7 +11690,7 @@ namespace oomph
   /// one. This functionality is required, e.g. for
   /// multigrid computations.
   //=========================================================================
-  void Problem::copy(Problem *orig_problem_pt)
+  void Problem::copy(Problem* orig_problem_pt)
   {
     // Copy time
     //----------
@@ -11751,12 +11751,12 @@ namespace oomph
       for (unsigned long i = 0; i < n_node; i++)
       {
         // Try to cast to elastic node
-        SolidNode *el_node_pt =
-          dynamic_cast<SolidNode *>(mesh_pt(m)->node_pt(i));
+        SolidNode* el_node_pt =
+          dynamic_cast<SolidNode*>(mesh_pt(m)->node_pt(i));
         if (el_node_pt != 0)
         {
-          SolidNode *el_node_orig_pt =
-            dynamic_cast<SolidNode *>(orig_problem_pt->mesh_pt(m)->node_pt(i));
+          SolidNode* el_node_orig_pt =
+            dynamic_cast<SolidNode*>(orig_problem_pt->mesh_pt(m)->node_pt(i));
           el_node_pt->copy(el_node_orig_pt);
         }
         else
@@ -11800,7 +11800,7 @@ namespace oomph
       unsigned n_element = mesh_pt(m)->nelement();
       for (unsigned e = 0; e < n_element; e++)
       {
-        GeneralisedElement *el_pt = mesh_pt(m)->element_pt(e);
+        GeneralisedElement* el_pt = mesh_pt(m)->element_pt(e);
         unsigned n_internal = el_pt->ninternal_data();
         if (n_internal > 0)
         {
@@ -11834,7 +11834,7 @@ namespace oomph
   /// adaptive refinement in bifurcation tracking or in multigrid problems.
   /// ALH: WILL NOT BE NECESSARY IN BIFURCATION TRACKING IN LONG RUN...
   //=========================================================================
-  Problem *Problem::make_copy()
+  Problem* Problem::make_copy()
   {
     std::ostringstream error_stream;
     error_stream
@@ -11851,7 +11851,7 @@ namespace oomph
   /// Dump refinement pattern of all refineable meshes and all  generic
   /// Problem data to file for restart.
   //=========================================================================
-  void Problem::dump(std::ofstream &dump_file) const
+  void Problem::dump(std::ofstream& dump_file) const
   {
     // Number of submeshes?
     unsigned n_mesh = nsub_mesh();
@@ -11864,8 +11864,8 @@ namespace oomph
     if (n_mesh == 0)
     {
       // Dump level of refinement before pruning
-      if (TreeBasedRefineableMeshBase *mmesh_pt =
-            dynamic_cast<TreeBasedRefineableMeshBase *>(mesh_pt(0)))
+      if (TreeBasedRefineableMeshBase* mmesh_pt =
+            dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(0)))
       {
         dump_file << mmesh_pt->uniform_refinement_level_when_pruned()
                   << " # uniform refinement when pruned " << std::endl;
@@ -11885,8 +11885,8 @@ namespace oomph
       // Loop over submeshes to dump level of refinement before pruning
       for (unsigned imesh = 0; imesh < n_mesh; imesh++)
       {
-        if (TreeBasedRefineableMeshBase *mmesh_pt =
-              dynamic_cast<TreeBasedRefineableMeshBase *>(mesh_pt(imesh)))
+        if (TreeBasedRefineableMeshBase* mmesh_pt =
+              dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(imesh)))
         {
           dump_file << mmesh_pt->uniform_refinement_level_when_pruned()
                     << " # uniform refinement when pruned " << std::endl;
@@ -11910,7 +11910,7 @@ namespace oomph
     Vector<int> base_element_processor(n, -1);
     for (unsigned e = 0; e < n; e++)
     {
-      GeneralisedElement *el_pt = Base_mesh_element_pt[e];
+      GeneralisedElement* el_pt = Base_mesh_element_pt[e];
       if (el_pt != 0)
       {
         if (!el_pt->is_halo())
@@ -11957,14 +11957,14 @@ namespace oomph
     if (n_mesh == 0)
     {
       // Dump single mesh refinement pattern (if mesh is refineable)
-      if (TreeBasedRefineableMeshBase *mmesh_pt =
-            dynamic_cast<TreeBasedRefineableMeshBase *>(mesh_pt(0)))
+      if (TreeBasedRefineableMeshBase* mmesh_pt =
+            dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(0)))
       {
         mmesh_pt->dump_refinement(dump_file);
       }
 #ifdef OOMPH_HAS_TRIANGLE_LIB
       // Dump triangle mesh TriangulateIO which represents mesh topology
-      TriangleMeshBase *mmesh_pt = dynamic_cast<TriangleMeshBase *>(mesh_pt(0));
+      TriangleMeshBase* mmesh_pt = dynamic_cast<TriangleMeshBase*>(mesh_pt(0));
       if (mmesh_pt != 0 && mmesh_pt->use_triangulateio_restart())
       {
 #ifdef OOMPH_HAS_MPI
@@ -11989,15 +11989,15 @@ namespace oomph
       for (unsigned imesh = 0; imesh < n_mesh; imesh++)
       {
         // Dump single mesh refinement pattern (if mesh is refineable)
-        if (TreeBasedRefineableMeshBase *mmesh_pt =
-              dynamic_cast<TreeBasedRefineableMeshBase *>(mesh_pt(imesh)))
+        if (TreeBasedRefineableMeshBase* mmesh_pt =
+              dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(imesh)))
         {
           mmesh_pt->dump_refinement(dump_file);
         }
 #ifdef OOMPH_HAS_TRIANGLE_LIB
         // Dump triangle mesh TriangulateIO which represents mesh topology
-        TriangleMeshBase *mmesh_pt =
-          dynamic_cast<TriangleMeshBase *>(mesh_pt(imesh));
+        TriangleMeshBase* mmesh_pt =
+          dynamic_cast<TriangleMeshBase*>(mesh_pt(imesh));
         if (mmesh_pt != 0 && mmesh_pt->use_triangulateio_restart())
         {
 #ifdef OOMPH_HAS_MPI
@@ -12070,7 +12070,7 @@ namespace oomph
   /// file for restart. Return flag to indicate if the restart was from
   /// steady or unsteady solution.
   //=========================================================================
-  void Problem::read(std::ifstream &restart_file, bool &unsteady_restart)
+  void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
   {
     // Check if the file is actually open as it won't be if it doesn't
     // exist! In that case we're almost certainly restarting the run on
@@ -12144,8 +12144,8 @@ namespace oomph
       nrefinement_for_mesh[i] = std::atoi(input_string.c_str());
 
       // Get pointer to sub-mesh in incarnation as tree-based refineable mesh
-      TreeBasedRefineableMeshBase *ref_mesh_pt =
-        dynamic_cast<TreeBasedRefineableMeshBase *>(mesh_pt(i));
+      TreeBasedRefineableMeshBase* ref_mesh_pt =
+        dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(i));
 
       // If it's not a tree-based refineable mesh, ignore the following
       if (ref_mesh_pt == 0)
@@ -12400,13 +12400,13 @@ namespace oomph
     {
       // Working with TreeBasedRefineableMeshBase mesh
       unsigned local_load_balance_required_flag = 0;
-      if (dynamic_cast<TreeBasedRefineableMeshBase *>(mesh_pt(0)))
+      if (dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(0)))
       {
         const int my_rank = this->communicator_pt()->my_rank();
         unsigned nel = mesh_pt()->nelement();
         for (unsigned e = 0; e < nel; e++)
         {
-          GeneralisedElement *el_pt = mesh_pt()->element_pt(e);
+          GeneralisedElement* el_pt = mesh_pt()->element_pt(e);
           if (!el_pt->is_halo())
           {
             // Get element number (plus one) in base element enumeration
@@ -12418,11 +12418,11 @@ namespace oomph
             // element
             if (el_number_in_base_mesh_plus_one == 0)
             {
-              FaceElement *face_el_pt = dynamic_cast<FaceElement *>(el_pt);
+              FaceElement* face_el_pt = dynamic_cast<FaceElement*>(el_pt);
               if (face_el_pt != 0)
               {
                 // Get corresponding bulk element
-                FiniteElement *bulk_el_pt = face_el_pt->bulk_element_pt();
+                FiniteElement* bulk_el_pt = face_el_pt->bulk_element_pt();
 
                 // Use its element number (plus one) in base element enumeration
                 el_number_in_base_mesh_plus_one =
@@ -12523,8 +12523,8 @@ namespace oomph
     if (n_mesh == 0)
     {
       // Refine single mesh (if it's refineable)
-      if (TreeBasedRefineableMeshBase *mmesh_pt =
-            dynamic_cast<TreeBasedRefineableMeshBase *>(mesh_pt(0)))
+      if (TreeBasedRefineableMeshBase* mmesh_pt =
+            dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(0)))
       {
         // When we get in here the problem has been constructed
         // by the constructor and the mesh is its original unrefined
@@ -12537,7 +12537,7 @@ namespace oomph
       }
 #ifdef OOMPH_HAS_TRIANGLE_LIB
       // Regenerate mesh from triangulate IO if it's a triangular mesh
-      TriangleMeshBase *mmesh_pt = dynamic_cast<TriangleMeshBase *>(mesh_pt(0));
+      TriangleMeshBase* mmesh_pt = dynamic_cast<TriangleMeshBase*>(mesh_pt(0));
       if (mmesh_pt != 0 && mmesh_pt->use_triangulateio_restart())
       {
 #ifdef OOMPH_HAS_MPI
@@ -12579,8 +12579,8 @@ namespace oomph
       for (unsigned imesh = 0; imesh < n_mesh; imesh++)
       {
         // Refine single mesh (if its refineable)
-        if (TreeBasedRefineableMeshBase *mmesh_pt =
-              dynamic_cast<TreeBasedRefineableMeshBase *>(mesh_pt(imesh)))
+        if (TreeBasedRefineableMeshBase* mmesh_pt =
+              dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(imesh)))
         {
           // When we get in here the problem has been constructed
           // by the constructor and the mesh is its original unrefined
@@ -12593,8 +12593,8 @@ namespace oomph
         }
 #ifdef OOMPH_HAS_TRIANGLE_LIB
         // Regenerate mesh from triangulate IO if it's a triangular mesh
-        TriangleMeshBase *mmesh_pt =
-          dynamic_cast<TriangleMeshBase *>(mesh_pt(imesh));
+        TriangleMeshBase* mmesh_pt =
+          dynamic_cast<TriangleMeshBase*>(mesh_pt(imesh));
         if (mmesh_pt != 0 && mmesh_pt->use_triangulateio_restart())
         {
 #ifdef OOMPH_HAS_MPI
@@ -12925,8 +12925,8 @@ namespace oomph
 #ifdef OOMPH_HAS_TRIANGLE_LIB
       // Here update the polyline representation if working with
       // triangle base meshes
-      if (TriangleMeshBase *mmesh_pt =
-            dynamic_cast<TriangleMeshBase *>(mesh_pt(m)))
+      if (TriangleMeshBase* mmesh_pt =
+            dynamic_cast<TriangleMeshBase*>(mesh_pt(m)))
       {
         // In charge of updating the polylines representation to the
         // current refinement/unrefinement level after restart, it
@@ -12977,7 +12977,7 @@ namespace oomph
   /// Set all timesteps to the same value, dt, and assign
   /// weights for all timesteppers in the problem.
   //===================================================================
-  void Problem::initialise_dt(const double &dt)
+  void Problem::initialise_dt(const double& dt)
   {
     // Initialise the timesteps in the Problem's time object
     Time_pt->initialise_dt(dt);
@@ -13000,7 +13000,7 @@ namespace oomph
   /// Set the value of the timesteps to be equal to the values passed in
   /// a vector and assign weights for all timesteppers in the problem
   //========================================================================
-  void Problem::initialise_dt(const Vector<double> &dt)
+  void Problem::initialise_dt(const Vector<double>& dt)
   {
     // Initialise the timesteps in the Problem's time object
     Time_pt->initialise_dt(dt);
@@ -13098,10 +13098,10 @@ namespace oomph
   /// a suitable combination of the errors in the base flow and the
   /// eigenfunction. The bifurcation type is passed as an argument
   //=====================================================================
-  void Problem::bifurcation_adapt_helper(unsigned &n_refined,
-                                         unsigned &n_unrefined,
-                                         const unsigned &bifurcation_type,
-                                         const bool &actually_adapt)
+  void Problem::bifurcation_adapt_helper(unsigned& n_refined,
+                                         unsigned& n_unrefined,
+                                         const unsigned& bifurcation_type,
+                                         const bool& actually_adapt)
   {
     // Storage for eigenfunction from the problem
     Vector<DoubleVector> eigenfunction;
@@ -13109,14 +13109,14 @@ namespace oomph
     this->get_bifurcation_eigenfunction(eigenfunction);
 
     // Get the bifurcation parameter
-    double *parameter_pt = this->bifurcation_parameter_pt();
+    double* parameter_pt = this->bifurcation_parameter_pt();
 
     // Get the frequency parameter if tracking a Hopf bifurcation
     double omega = 0.0;
     // If we're tracking a Hopf then also get the frequency
     if (bifurcation_type == 3)
     {
-      omega = dynamic_cast<HopfHandler *>(assembly_handler_pt())->omega();
+      omega = dynamic_cast<HopfHandler*>(assembly_handler_pt())->omega();
     }
 
     // If we're tracking a Pitchfork get the slack parameter (Hack)
@@ -13153,16 +13153,16 @@ namespace oomph
         if (N_mesh == 0)
         {
           // Can we refine the mesh
-          if (TreeBasedRefineableMeshBase *mmesh_pt =
-                dynamic_cast<TreeBasedRefineableMeshBase *>(
+          if (TreeBasedRefineableMeshBase* mmesh_pt =
+                dynamic_cast<TreeBasedRefineableMeshBase*>(
                   Copy_of_problem_pt[c]->mesh_pt(0)))
           {
             // Is the adapt flag set
             if (mmesh_pt->is_adaptation_enabled())
             {
               // Now get the original problem's mesh if it's refineable
-              if (TreeBasedRefineableMeshBase *original_mesh_pt =
-                    dynamic_cast<TreeBasedRefineableMeshBase *>(
+              if (TreeBasedRefineableMeshBase* original_mesh_pt =
+                    dynamic_cast<TreeBasedRefineableMeshBase*>(
                       this->mesh_pt(0)))
               {
                 mmesh_pt->refine_base_mesh_as_in_reference_mesh(
@@ -13193,16 +13193,16 @@ namespace oomph
           for (unsigned m = 0; m < N_mesh; m++)
           {
             // Can we refine the submesh
-            if (TreeBasedRefineableMeshBase *mmesh_pt =
-                  dynamic_cast<TreeBasedRefineableMeshBase *>(
+            if (TreeBasedRefineableMeshBase* mmesh_pt =
+                  dynamic_cast<TreeBasedRefineableMeshBase*>(
                     Copy_of_problem_pt[c]->mesh_pt(m)))
             {
               // Is the adapt flag set
               if (mmesh_pt->is_adaptation_enabled())
               {
                 // Now get the original problem's mesh
-                if (TreeBasedRefineableMeshBase *original_mesh_pt =
-                      dynamic_cast<TreeBasedRefineableMeshBase *>(
+                if (TreeBasedRefineableMeshBase* original_mesh_pt =
+                      dynamic_cast<TreeBasedRefineableMeshBase*>(
                         this->mesh_pt(m)))
                 {
                   mmesh_pt->refine_base_mesh_as_in_reference_mesh(
@@ -13390,7 +13390,7 @@ namespace oomph
   /// a suitable combination of the errors in the base flow and the
   /// eigenfunction. The bifurcation type is passed as an argument
   //=====================================================================
-  void Problem::bifurcation_adapt_doc_errors(const unsigned &bifurcation_type)
+  void Problem::bifurcation_adapt_doc_errors(const unsigned& bifurcation_type)
   {
     // Dummy arguments
     unsigned n_refined, n_unrefined;
@@ -13407,7 +13407,7 @@ namespace oomph
   /// Return # of refined/unrefined elements. On return from this
   /// function, Problem can immediately be solved again.
   //======================================================================
-  void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
+  void Problem::adapt(unsigned& n_refined, unsigned& n_unrefined)
   {
     double t_start_total = 0.0;
     if (Global_timings::Doc_comprehensive_timings)
@@ -13461,19 +13461,19 @@ namespace oomph
           if (N_mesh == 0)
           {
             // Can we refine the mesh
-            if (TreeBasedRefineableMeshBase *mmesh_pt =
-                  dynamic_cast<TreeBasedRefineableMeshBase *>(
+            if (TreeBasedRefineableMeshBase* mmesh_pt =
+                  dynamic_cast<TreeBasedRefineableMeshBase*>(
                     Copy_of_problem_pt[c]->mesh_pt(0)))
             {
               // Is the adapt flag set
               if (mmesh_pt->is_adaptation_enabled())
               {
                 // Now get the original problem's mesh if it's refineable
-                if (TreeBasedRefineableMeshBase *original_mesh_pt =
-                      dynamic_cast<TreeBasedRefineableMeshBase *>(
+                if (TreeBasedRefineableMeshBase* original_mesh_pt =
+                      dynamic_cast<TreeBasedRefineableMeshBase*>(
                         this->mesh_pt(0)))
                 {
-                  if (dynamic_cast<SolidMesh *>(original_mesh_pt) != 0)
+                  if (dynamic_cast<SolidMesh*>(original_mesh_pt) != 0)
                   {
                     oomph_info
                       << "Info/Warning: Adaptive Continuation is broken in "
@@ -13496,14 +13496,14 @@ namespace oomph
                   << std::endl;
               }
             }
-            else if (TriangleMeshBase *tmesh_pt =
-                       dynamic_cast<TriangleMeshBase *>(
+            else if (TriangleMeshBase* tmesh_pt =
+                       dynamic_cast<TriangleMeshBase*>(
                          Copy_of_problem_pt[c]->mesh_pt(0)))
             {
-              if (TriangleMeshBase *original_mesh_pt =
-                    dynamic_cast<TriangleMeshBase *>(this->mesh_pt(0)))
+              if (TriangleMeshBase* original_mesh_pt =
+                    dynamic_cast<TriangleMeshBase*>(this->mesh_pt(0)))
               {
-                if (dynamic_cast<SolidMesh *>(original_mesh_pt) != 0)
+                if (dynamic_cast<SolidMesh*>(original_mesh_pt) != 0)
                 {
                   oomph_info
                     << "Info/Warning: Adaptive Continuation is broken in "
@@ -13526,8 +13526,8 @@ namespace oomph
                 const unsigned n_node = original_mesh_pt->nnode();
                 for (unsigned n = 0; n < n_node; ++n)
                 {
-                  Node *const nod_pt = original_mesh_pt->node_pt(n);
-                  Node *const new_node_pt = tmesh_pt->node_pt(n);
+                  Node* const nod_pt = original_mesh_pt->node_pt(n);
+                  Node* const new_node_pt = tmesh_pt->node_pt(n);
                   unsigned n_dim = nod_pt->ndim();
                   for (unsigned i = 0; i < n_dim; ++i)
                   {
@@ -13554,19 +13554,19 @@ namespace oomph
             for (unsigned m = 0; m < N_mesh; m++)
             {
               // Can we refine the submesh
-              if (TreeBasedRefineableMeshBase *mmesh_pt =
-                    dynamic_cast<TreeBasedRefineableMeshBase *>(
+              if (TreeBasedRefineableMeshBase* mmesh_pt =
+                    dynamic_cast<TreeBasedRefineableMeshBase*>(
                       Copy_of_problem_pt[c]->mesh_pt(m)))
               {
                 // Is the adapt flag set
                 if (mmesh_pt->is_adaptation_enabled())
                 {
                   // Now get the original problem's mesh
-                  if (TreeBasedRefineableMeshBase *original_mesh_pt =
-                        dynamic_cast<TreeBasedRefineableMeshBase *>(
+                  if (TreeBasedRefineableMeshBase* original_mesh_pt =
+                        dynamic_cast<TreeBasedRefineableMeshBase*>(
                           this->mesh_pt(m)))
                   {
-                    if (dynamic_cast<SolidMesh *>(original_mesh_pt) != 0)
+                    if (dynamic_cast<SolidMesh*>(original_mesh_pt) != 0)
                     {
                       oomph_info
                         << "Info/Warning: Adaptive Continuation is broken in "
@@ -13590,14 +13590,14 @@ namespace oomph
                     << std::endl;
                 }
               }
-              else if (TriangleMeshBase *tmesh_pt =
-                         dynamic_cast<TriangleMeshBase *>(
+              else if (TriangleMeshBase* tmesh_pt =
+                         dynamic_cast<TriangleMeshBase*>(
                            Copy_of_problem_pt[c]->mesh_pt(m)))
               {
-                if (TriangleMeshBase *original_mesh_pt =
-                      dynamic_cast<TriangleMeshBase *>(this->mesh_pt(m)))
+                if (TriangleMeshBase* original_mesh_pt =
+                      dynamic_cast<TriangleMeshBase*>(this->mesh_pt(m)))
                 {
-                  if (dynamic_cast<SolidMesh *>(original_mesh_pt) != 0)
+                  if (dynamic_cast<SolidMesh*>(original_mesh_pt) != 0)
                   {
                     oomph_info
                       << "Info/Warning: Adaptive Continuation is broken in "
@@ -13620,8 +13620,8 @@ namespace oomph
                   const unsigned n_node = original_mesh_pt->nnode();
                   for (unsigned n = 0; n < n_node; ++n)
                   {
-                    Node *const nod_pt = original_mesh_pt->node_pt(n);
-                    Node *const new_node_pt = tmesh_pt->node_pt(n);
+                    Node* const nod_pt = original_mesh_pt->node_pt(n);
+                    Node* const new_node_pt = tmesh_pt->node_pt(n);
                     unsigned n_dim = nod_pt->ndim();
                     for (unsigned i = 0; i < n_dim; ++i)
                     {
@@ -13750,15 +13750,15 @@ namespace oomph
     if (Nmesh == 0)
     {
       // Refine single mesh if possible
-      if (RefineableMeshBase *mmesh_pt =
-            dynamic_cast<RefineableMeshBase *>(mesh_pt(0)))
+      if (RefineableMeshBase* mmesh_pt =
+            dynamic_cast<RefineableMeshBase*>(mesh_pt(0)))
       {
         if (mmesh_pt->is_adaptation_enabled())
         {
           double t_start = TimingHelpers::timer();
 
           // Get pointer to error estimator
-          ErrorEstimator *error_estimator_pt =
+          ErrorEstimator* error_estimator_pt =
             mmesh_pt->spatial_error_estimator_pt();
 
 #ifdef PARANOID
@@ -13837,13 +13837,13 @@ namespace oomph
       for (unsigned imesh = 0; imesh < Nmesh; imesh++)
       {
         // Refine single mesh uniformly if possible
-        if (RefineableMeshBase *mmesh_pt =
-              dynamic_cast<RefineableMeshBase *>(mesh_pt(imesh)))
+        if (RefineableMeshBase* mmesh_pt =
+              dynamic_cast<RefineableMeshBase*>(mesh_pt(imesh)))
         {
           double t_start = TimingHelpers::timer();
 
           // Get pointer to error estimator
-          ErrorEstimator *error_estimator_pt =
+          ErrorEstimator* error_estimator_pt =
             mmesh_pt->spatial_error_estimator_pt();
 
 #ifdef PARANOID
@@ -13976,7 +13976,7 @@ namespace oomph
   /// Return # of refined/unrefined elements. On return from this
   /// function, Problem can immediately be solved again.
   //======================================================================
-  void Problem::p_adapt(unsigned &n_refined, unsigned &n_unrefined)
+  void Problem::p_adapt(unsigned& n_refined, unsigned& n_unrefined)
   {
     double t_start_total = 0.0;
     if (Global_timings::Doc_comprehensive_timings)
@@ -14029,15 +14029,15 @@ namespace oomph
     if (Nmesh == 0)
     {
       // Refine single mesh if possible
-      if (RefineableMeshBase *mmesh_pt =
-            dynamic_cast<RefineableMeshBase *>(mesh_pt(0)))
+      if (RefineableMeshBase* mmesh_pt =
+            dynamic_cast<RefineableMeshBase*>(mesh_pt(0)))
       {
         if (mmesh_pt->is_p_adaptation_enabled())
         {
           double t_start = TimingHelpers::timer();
 
           // Get pointer to error estimator
-          ErrorEstimator *error_estimator_pt =
+          ErrorEstimator* error_estimator_pt =
             mmesh_pt->spatial_error_estimator_pt();
 
 #ifdef PARANOID
@@ -14116,13 +14116,13 @@ namespace oomph
       for (unsigned imesh = 0; imesh < Nmesh; imesh++)
       {
         // Refine single mesh uniformly if possible
-        if (RefineableMeshBase *mmesh_pt =
-              dynamic_cast<RefineableMeshBase *>(mesh_pt(imesh)))
+        if (RefineableMeshBase* mmesh_pt =
+              dynamic_cast<RefineableMeshBase*>(mesh_pt(imesh)))
         {
           double t_start = TimingHelpers::timer();
 
           // Get pointer to error estimator
-          ErrorEstimator *error_estimator_pt =
+          ErrorEstimator* error_estimator_pt =
             mmesh_pt->spatial_error_estimator_pt();
 
 #ifdef PARANOID
@@ -14256,9 +14256,9 @@ namespace oomph
   /// function, Problem can immediately be solved again.
   //========================================================================
   void Problem::adapt_based_on_error_estimates(
-    unsigned &n_refined,
-    unsigned &n_unrefined,
-    Vector<Vector<double>> &elemental_error)
+    unsigned& n_refined,
+    unsigned& n_unrefined,
+    Vector<Vector<double>>& elemental_error)
   {
     oomph_info << std::endl << std::endl;
     oomph_info << "Adapting problem:" << std::endl;
@@ -14279,8 +14279,8 @@ namespace oomph
     if (Nmesh == 0)
     {
       // Refine single mesh uniformly if possible
-      if (RefineableMeshBase *mmesh_pt =
-            dynamic_cast<RefineableMeshBase *>(Problem::mesh_pt(0)))
+      if (RefineableMeshBase* mmesh_pt =
+            dynamic_cast<RefineableMeshBase*>(Problem::mesh_pt(0)))
       {
         if (mmesh_pt->is_adaptation_enabled())
         {
@@ -14311,8 +14311,8 @@ namespace oomph
       for (unsigned imesh = 0; imesh < Nmesh; imesh++)
       {
         // Refine single mesh uniformly if possible
-        if (RefineableMeshBase *mmesh_pt =
-              dynamic_cast<RefineableMeshBase *>(Problem::mesh_pt(imesh)))
+        if (RefineableMeshBase* mmesh_pt =
+              dynamic_cast<RefineableMeshBase*>(Problem::mesh_pt(imesh)))
         {
           if (mmesh_pt->is_adaptation_enabled())
           {
@@ -14353,7 +14353,7 @@ namespace oomph
   /// (sub)mesh(es) in the elemental_error structure, which consists of
   /// a vector of elemental errors for each (sub)mesh.
   //========================================================================
-  void Problem::get_all_error_estimates(Vector<Vector<double>> &elemental_error)
+  void Problem::get_all_error_estimates(Vector<Vector<double>>& elemental_error)
   {
     // Number of submeshes?
     const unsigned Nmesh = nsub_mesh();
@@ -14365,14 +14365,14 @@ namespace oomph
       // There is only one mesh
       elemental_error.resize(1);
       // Refine single mesh uniformly if possible
-      if (RefineableMeshBase *mmesh_pt =
-            dynamic_cast<RefineableMeshBase *>(Problem::mesh_pt(0)))
+      if (RefineableMeshBase* mmesh_pt =
+            dynamic_cast<RefineableMeshBase*>(Problem::mesh_pt(0)))
       {
         // If we can adapt the mesh
         if (mmesh_pt->is_adaptation_enabled())
         {
           // Get pointer to error estimator
-          ErrorEstimator *error_estimator_pt =
+          ErrorEstimator* error_estimator_pt =
             mmesh_pt->spatial_error_estimator_pt();
 
 #ifdef PARANOID
@@ -14436,11 +14436,11 @@ namespace oomph
       for (unsigned imesh = 0; imesh < Nmesh; imesh++)
       {
         // Refine single mesh uniformly if possible
-        if (RefineableMeshBase *mmesh_pt =
-              dynamic_cast<RefineableMeshBase *>(Problem::mesh_pt(imesh)))
+        if (RefineableMeshBase* mmesh_pt =
+              dynamic_cast<RefineableMeshBase*>(Problem::mesh_pt(imesh)))
         {
           // Get pointer to error estimator
-          ErrorEstimator *error_estimator_pt =
+          ErrorEstimator* error_estimator_pt =
             mmesh_pt->spatial_error_estimator_pt();
 
 #ifdef PARANOID
@@ -14500,7 +14500,7 @@ namespace oomph
   //========================================================================
   /// \short Get max and min error for all elements in submeshes
   //========================================================================
-  void Problem::doc_errors(DocInfo &doc_info)
+  void Problem::doc_errors(DocInfo& doc_info)
   {
     // Get the bifurcation type
     int bifurcation_type = this->Assembly_handler_pt->bifurcation_type();
@@ -14520,11 +14520,11 @@ namespace oomph
     if (Nmesh == 0)
     {
       // Is the single mesh refineable?
-      if (RefineableMeshBase *mmesh_pt =
-            dynamic_cast<RefineableMeshBase *>(mesh_pt(0)))
+      if (RefineableMeshBase* mmesh_pt =
+            dynamic_cast<RefineableMeshBase*>(mesh_pt(0)))
       {
         // Get pointer to error estimator
-        ErrorEstimator *error_estimator_pt =
+        ErrorEstimator* error_estimator_pt =
           mmesh_pt->spatial_error_estimator_pt();
 
 #ifdef PARANOID
@@ -14568,11 +14568,11 @@ namespace oomph
       for (unsigned imesh = 0; imesh < Nmesh; imesh++)
       {
         // Is the single mesh refineable?
-        if (RefineableMeshBase *mmesh_pt =
-              dynamic_cast<RefineableMeshBase *>(mesh_pt(imesh)))
+        if (RefineableMeshBase* mmesh_pt =
+              dynamic_cast<RefineableMeshBase*>(mesh_pt(imesh)))
         {
           // Get pointer to error estimator
-          ErrorEstimator *error_estimator_pt =
+          ErrorEstimator* error_estimator_pt =
             mmesh_pt->spatial_error_estimator_pt();
 
 #ifdef PARANOID
@@ -14625,7 +14625,7 @@ namespace oomph
   /// the problem.
   //========================================================================
   void Problem::refine_selected_elements(
-    const Vector<unsigned> &elements_to_be_refined)
+    const Vector<unsigned>& elements_to_be_refined)
   {
     actions_before_adapt();
 
@@ -14636,8 +14636,8 @@ namespace oomph
     if (Nmesh == 0)
     {
       // Refine single mesh if possible
-      if (TreeBasedRefineableMeshBase *mmesh_pt =
-            dynamic_cast<TreeBasedRefineableMeshBase *>(mesh_pt(0)))
+      if (TreeBasedRefineableMeshBase* mmesh_pt =
+            dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(0)))
       {
         mmesh_pt->refine_selected_elements(elements_to_be_refined);
       }
@@ -14671,7 +14671,7 @@ namespace oomph
   /// by their pointers, then rebuild the problem.
   //========================================================================
   void Problem::refine_selected_elements(
-    const Vector<RefineableElement *> &elements_to_be_refined_pt)
+    const Vector<RefineableElement*>& elements_to_be_refined_pt)
   {
     actions_before_adapt();
 
@@ -14682,8 +14682,8 @@ namespace oomph
     if (Nmesh == 0)
     {
       // Refine single mesh if possible
-      if (TreeBasedRefineableMeshBase *mmesh_pt =
-            dynamic_cast<TreeBasedRefineableMeshBase *>(mesh_pt(0)))
+      if (TreeBasedRefineableMeshBase* mmesh_pt =
+            dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(0)))
       {
         mmesh_pt->refine_selected_elements(elements_to_be_refined_pt);
       }
@@ -14717,7 +14717,7 @@ namespace oomph
   /// by their numbers relative to the specified mesh, then rebuild the problem.
   //========================================================================
   void Problem::refine_selected_elements(
-    const unsigned &i_mesh, const Vector<unsigned> &elements_to_be_refined)
+    const unsigned& i_mesh, const Vector<unsigned>& elements_to_be_refined)
   {
     actions_before_adapt();
 
@@ -14735,8 +14735,8 @@ namespace oomph
     }
 
     // Refine single mesh if possible
-    if (TreeBasedRefineableMeshBase *mmesh_pt =
-          dynamic_cast<TreeBasedRefineableMeshBase *>(mesh_pt(i_mesh)))
+    if (TreeBasedRefineableMeshBase* mmesh_pt =
+          dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(i_mesh)))
     {
       mmesh_pt->refine_selected_elements(elements_to_be_refined);
     }
@@ -14763,8 +14763,8 @@ namespace oomph
   /// by their pointers, then rebuild the problem.
   //========================================================================
   void Problem::refine_selected_elements(
-    const unsigned &i_mesh,
-    const Vector<RefineableElement *> &elements_to_be_refined_pt)
+    const unsigned& i_mesh,
+    const Vector<RefineableElement*>& elements_to_be_refined_pt)
   {
     actions_before_adapt();
 
@@ -14782,8 +14782,8 @@ namespace oomph
     }
 
     // Refine single mesh if possible
-    if (TreeBasedRefineableMeshBase *mmesh_pt =
-          dynamic_cast<TreeBasedRefineableMeshBase *>(mesh_pt(i_mesh)))
+    if (TreeBasedRefineableMeshBase* mmesh_pt =
+          dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(i_mesh)))
     {
       mmesh_pt->refine_selected_elements(elements_to_be_refined_pt);
     }
@@ -14811,7 +14811,7 @@ namespace oomph
   /// rebuild the problem.
   //========================================================================
   void Problem::refine_selected_elements(
-    const Vector<Vector<unsigned>> &elements_to_be_refined)
+    const Vector<Vector<unsigned>>& elements_to_be_refined)
   {
     actions_before_adapt();
 
@@ -14821,8 +14821,8 @@ namespace oomph
     // Refine all submeshes if possible
     for (unsigned i_mesh = 0; i_mesh < n_mesh; i_mesh++)
     {
-      if (TreeBasedRefineableMeshBase *mmesh_pt =
-            dynamic_cast<TreeBasedRefineableMeshBase *>(mesh_pt(i_mesh)))
+      if (TreeBasedRefineableMeshBase* mmesh_pt =
+            dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(i_mesh)))
       {
         mmesh_pt->refine_selected_elements(elements_to_be_refined[i_mesh]);
       }
@@ -14848,7 +14848,7 @@ namespace oomph
   /// rebuild the problem.
   //========================================================================
   void Problem::refine_selected_elements(
-    const Vector<Vector<RefineableElement *>> &elements_to_be_refined_pt)
+    const Vector<Vector<RefineableElement*>>& elements_to_be_refined_pt)
   {
     actions_before_adapt();
 
@@ -14858,8 +14858,8 @@ namespace oomph
     // Refine all submeshes if possible
     for (unsigned i_mesh = 0; i_mesh < n_mesh; i_mesh++)
     {
-      if (TreeBasedRefineableMeshBase *mmesh_pt =
-            dynamic_cast<TreeBasedRefineableMeshBase *>(mesh_pt(i_mesh)))
+      if (TreeBasedRefineableMeshBase* mmesh_pt =
+            dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(i_mesh)))
       {
         mmesh_pt->refine_selected_elements(elements_to_be_refined_pt[i_mesh]);
       }
@@ -14885,7 +14885,7 @@ namespace oomph
   /// the problem.
   //========================================================================
   void Problem::p_refine_selected_elements(
-    const Vector<unsigned> &elements_to_be_refined)
+    const Vector<unsigned>& elements_to_be_refined)
   {
     actions_before_adapt();
 
@@ -14896,8 +14896,8 @@ namespace oomph
     if (Nmesh == 0)
     {
       // Refine single mesh if possible
-      if (TreeBasedRefineableMeshBase *mmesh_pt =
-            dynamic_cast<TreeBasedRefineableMeshBase *>(mesh_pt(0)))
+      if (TreeBasedRefineableMeshBase* mmesh_pt =
+            dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(0)))
       {
         mmesh_pt->p_refine_selected_elements(elements_to_be_refined);
       }
@@ -14932,7 +14932,7 @@ namespace oomph
   /// by their pointers, then rebuild the problem.
   //========================================================================
   void Problem::p_refine_selected_elements(
-    const Vector<PRefineableElement *> &elements_to_be_refined_pt)
+    const Vector<PRefineableElement*>& elements_to_be_refined_pt)
   {
     actions_before_adapt();
 
@@ -14943,8 +14943,8 @@ namespace oomph
     if (Nmesh == 0)
     {
       // Refine single mesh if possible
-      if (TreeBasedRefineableMeshBase *mmesh_pt =
-            dynamic_cast<TreeBasedRefineableMeshBase *>(mesh_pt(0)))
+      if (TreeBasedRefineableMeshBase* mmesh_pt =
+            dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(0)))
       {
         mmesh_pt->p_refine_selected_elements(elements_to_be_refined_pt);
       }
@@ -14979,7 +14979,7 @@ namespace oomph
   /// by their numbers relative to the specified mesh, then rebuild the problem.
   //========================================================================
   void Problem::p_refine_selected_elements(
-    const unsigned &i_mesh, const Vector<unsigned> &elements_to_be_refined)
+    const unsigned& i_mesh, const Vector<unsigned>& elements_to_be_refined)
   {
     OomphLibWarning(
       "p-refinement for multiple submeshes has not yet been tested.",
@@ -15002,8 +15002,8 @@ namespace oomph
     }
 
     // Refine single mesh if possible
-    if (TreeBasedRefineableMeshBase *mmesh_pt =
-          dynamic_cast<TreeBasedRefineableMeshBase *>(mesh_pt(i_mesh)))
+    if (TreeBasedRefineableMeshBase* mmesh_pt =
+          dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(i_mesh)))
     {
       mmesh_pt->p_refine_selected_elements(elements_to_be_refined);
     }
@@ -15030,8 +15030,8 @@ namespace oomph
   /// by their pointers, then rebuild the problem.
   //========================================================================
   void Problem::p_refine_selected_elements(
-    const unsigned &i_mesh,
-    const Vector<PRefineableElement *> &elements_to_be_refined_pt)
+    const unsigned& i_mesh,
+    const Vector<PRefineableElement*>& elements_to_be_refined_pt)
   {
     OomphLibWarning(
       "p-refinement for multiple submeshes has not yet been tested.",
@@ -15054,8 +15054,8 @@ namespace oomph
     }
 
     // Refine single mesh if possible
-    if (TreeBasedRefineableMeshBase *mmesh_pt =
-          dynamic_cast<TreeBasedRefineableMeshBase *>(mesh_pt(i_mesh)))
+    if (TreeBasedRefineableMeshBase* mmesh_pt =
+          dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(i_mesh)))
     {
       mmesh_pt->p_refine_selected_elements(elements_to_be_refined_pt);
     }
@@ -15083,7 +15083,7 @@ namespace oomph
   /// rebuild the problem.
   //========================================================================
   void Problem::p_refine_selected_elements(
-    const Vector<Vector<unsigned>> &elements_to_be_refined)
+    const Vector<Vector<unsigned>>& elements_to_be_refined)
   {
     OomphLibWarning(
       "p-refinement for multiple submeshes has not yet been tested.",
@@ -15098,8 +15098,8 @@ namespace oomph
     // Refine all submeshes if possible
     for (unsigned i_mesh = 0; i_mesh < n_mesh; i_mesh++)
     {
-      if (TreeBasedRefineableMeshBase *mmesh_pt =
-            dynamic_cast<TreeBasedRefineableMeshBase *>(mesh_pt(i_mesh)))
+      if (TreeBasedRefineableMeshBase* mmesh_pt =
+            dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(i_mesh)))
       {
         mmesh_pt->p_refine_selected_elements(elements_to_be_refined[i_mesh]);
       }
@@ -15125,7 +15125,7 @@ namespace oomph
   /// rebuild the problem.
   //========================================================================
   void Problem::p_refine_selected_elements(
-    const Vector<Vector<PRefineableElement *>> &elements_to_be_refined_pt)
+    const Vector<Vector<PRefineableElement*>>& elements_to_be_refined_pt)
   {
     OomphLibWarning(
       "p-refinement for multiple submeshes has not yet been tested.",
@@ -15140,8 +15140,8 @@ namespace oomph
     // Refine all submeshes if possible
     for (unsigned i_mesh = 0; i_mesh < n_mesh; i_mesh++)
     {
-      if (TreeBasedRefineableMeshBase *mmesh_pt =
-            dynamic_cast<TreeBasedRefineableMeshBase *>(mesh_pt(i_mesh)))
+      if (TreeBasedRefineableMeshBase* mmesh_pt =
+            dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(i_mesh)))
       {
         mmesh_pt->p_refine_selected_elements(elements_to_be_refined_pt[i_mesh]);
       }
@@ -15168,9 +15168,9 @@ namespace oomph
   /// to true if you want to prune immediately after refining the meshes
   /// individually.
   //========================================================================
-  void Problem::refine_uniformly_aux(const Vector<unsigned> &nrefine_for_mesh,
-                                     DocInfo &doc_info,
-                                     const bool &prune)
+  void Problem::refine_uniformly_aux(const Vector<unsigned>& nrefine_for_mesh,
+                                     DocInfo& doc_info,
+                                     const bool& prune)
   {
     double t_start = 0.0;
     if (Global_timings::Doc_comprehensive_timings)
@@ -15197,8 +15197,8 @@ namespace oomph
     if (n_mesh == 0)
     {
       // Refine single mesh uniformly if possible
-      if (RefineableMeshBase *mmesh_pt =
-            dynamic_cast<RefineableMeshBase *>(mesh_pt(0)))
+      if (RefineableMeshBase* mmesh_pt =
+            dynamic_cast<RefineableMeshBase*>(mesh_pt(0)))
       {
         unsigned nref = nrefine_for_mesh[0];
         for (unsigned i = 0; i < nref; i++)
@@ -15219,8 +15219,8 @@ namespace oomph
       for (unsigned imesh = 0; imesh < n_mesh; imesh++)
       {
         // Refine i-th submesh uniformly if possible
-        if (RefineableMeshBase *mmesh_pt =
-              dynamic_cast<RefineableMeshBase *>(mesh_pt(imesh)))
+        if (RefineableMeshBase* mmesh_pt =
+              dynamic_cast<RefineableMeshBase*>(mesh_pt(imesh)))
         {
           unsigned nref = nrefine_for_mesh[imesh];
           for (unsigned i = 0; i < nref; i++)
@@ -15312,9 +15312,9 @@ namespace oomph
   /// to true if you want to prune immediately after refining the meshes
   /// individually.
   //========================================================================
-  void Problem::p_refine_uniformly_aux(const Vector<unsigned> &nrefine_for_mesh,
-                                       DocInfo &doc_info,
-                                       const bool &prune)
+  void Problem::p_refine_uniformly_aux(const Vector<unsigned>& nrefine_for_mesh,
+                                       DocInfo& doc_info,
+                                       const bool& prune)
   {
     double t_start = 0.0;
     if (Global_timings::Doc_comprehensive_timings)
@@ -15341,8 +15341,8 @@ namespace oomph
     if (n_mesh == 0)
     {
       // Refine single mesh uniformly if possible
-      if (RefineableMeshBase *mmesh_pt =
-            dynamic_cast<RefineableMeshBase *>(mesh_pt(0)))
+      if (RefineableMeshBase* mmesh_pt =
+            dynamic_cast<RefineableMeshBase*>(mesh_pt(0)))
       {
         unsigned nref = nrefine_for_mesh[0];
         for (unsigned i = 0; i < nref; i++)
@@ -15368,8 +15368,8 @@ namespace oomph
       for (unsigned imesh = 0; imesh < n_mesh; imesh++)
       {
         // Refine i-th submesh uniformly if possible
-        if (RefineableMeshBase *mmesh_pt =
-              dynamic_cast<RefineableMeshBase *>(mesh_pt(imesh)))
+        if (RefineableMeshBase* mmesh_pt =
+              dynamic_cast<RefineableMeshBase*>(mesh_pt(imesh)))
         {
           unsigned nref = nrefine_for_mesh[imesh];
           for (unsigned i = 0; i < nref; i++)
@@ -15458,7 +15458,7 @@ namespace oomph
   /// Refine submesh i_mesh uniformly and rebuild problem;
   /// doc refinement process.
   //========================================================================
-  void Problem::refine_uniformly(const unsigned &i_mesh, DocInfo &doc_info)
+  void Problem::refine_uniformly(const unsigned& i_mesh, DocInfo& doc_info)
   {
     actions_before_adapt();
 
@@ -15477,8 +15477,8 @@ namespace oomph
 #endif
 
     // Refine single mesh uniformly if possible
-    if (RefineableMeshBase *mmesh_pt =
-          dynamic_cast<RefineableMeshBase *>(mesh_pt(i_mesh)))
+    if (RefineableMeshBase* mmesh_pt =
+          dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh)))
     {
       mmesh_pt->refine_uniformly(doc_info);
     }
@@ -15502,7 +15502,7 @@ namespace oomph
   /// p-refine submesh i_mesh uniformly and rebuild problem;
   /// doc refinement process.
   //========================================================================
-  void Problem::p_refine_uniformly(const unsigned &i_mesh, DocInfo &doc_info)
+  void Problem::p_refine_uniformly(const unsigned& i_mesh, DocInfo& doc_info)
   {
     actions_before_adapt();
 
@@ -15521,8 +15521,8 @@ namespace oomph
 #endif
 
     // Refine single mesh uniformly if possible
-    if (RefineableMeshBase *mmesh_pt =
-          dynamic_cast<RefineableMeshBase *>(mesh_pt(i_mesh)))
+    if (RefineableMeshBase* mmesh_pt =
+          dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh)))
     {
       mmesh_pt->p_refine_uniformly(doc_info);
     }
@@ -15563,8 +15563,8 @@ namespace oomph
     if (n_mesh == 0)
     {
       // Unrefine single mesh uniformly if possible
-      if (RefineableMeshBase *mmesh_pt =
-            dynamic_cast<RefineableMeshBase *>(mesh_pt(0)))
+      if (RefineableMeshBase* mmesh_pt =
+            dynamic_cast<RefineableMeshBase*>(mesh_pt(0)))
       {
         success_flag += mmesh_pt->unrefine_uniformly();
       }
@@ -15581,8 +15581,8 @@ namespace oomph
       for (unsigned imesh = 0; imesh < n_mesh; imesh++)
       {
         // Unrefine i-th submesh uniformly if possible
-        if (RefineableMeshBase *mmesh_pt =
-              dynamic_cast<RefineableMeshBase *>(mesh_pt(imesh)))
+        if (RefineableMeshBase* mmesh_pt =
+              dynamic_cast<RefineableMeshBase*>(mesh_pt(imesh)))
         {
           success_flag += mmesh_pt->unrefine_uniformly();
         }
@@ -15619,7 +15619,7 @@ namespace oomph
   /// 1 for failure (if unrefinement has reached the coarsest permitted
   /// level)
   //========================================================================
-  unsigned Problem::unrefine_uniformly(const unsigned &i_mesh)
+  unsigned Problem::unrefine_uniformly(const unsigned& i_mesh)
   {
     actions_before_adapt();
 
@@ -15641,8 +15641,8 @@ namespace oomph
 #endif
 
     // Unrefine single mesh uniformly if possible
-    if (RefineableMeshBase *mmesh_pt =
-          dynamic_cast<RefineableMeshBase *>(mesh_pt(i_mesh)))
+    if (RefineableMeshBase* mmesh_pt =
+          dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh)))
     {
       success_flag += mmesh_pt->unrefine_uniformly();
     }
@@ -15676,7 +15676,7 @@ namespace oomph
   /// p-unrefine (all) p-refineable (sub)mesh(es) uniformly and rebuild problem;
   /// doc refinement process.
   //========================================================================
-  void Problem::p_unrefine_uniformly(DocInfo &doc_info)
+  void Problem::p_unrefine_uniformly(DocInfo& doc_info)
   {
     actions_before_adapt();
 
@@ -15687,8 +15687,8 @@ namespace oomph
     if (n_mesh == 0)
     {
       // Unrefine single mesh uniformly if possible
-      if (RefineableMeshBase *mmesh_pt =
-            dynamic_cast<RefineableMeshBase *>(mesh_pt(0)))
+      if (RefineableMeshBase* mmesh_pt =
+            dynamic_cast<RefineableMeshBase*>(mesh_pt(0)))
       {
         mmesh_pt->p_unrefine_uniformly(doc_info);
       }
@@ -15709,8 +15709,8 @@ namespace oomph
       for (unsigned imesh = 0; imesh < n_mesh; imesh++)
       {
         // Unrefine i-th submesh uniformly if possible
-        if (RefineableMeshBase *mmesh_pt =
-              dynamic_cast<RefineableMeshBase *>(mesh_pt(imesh)))
+        if (RefineableMeshBase* mmesh_pt =
+              dynamic_cast<RefineableMeshBase*>(mesh_pt(imesh)))
         {
           mmesh_pt->p_unrefine_uniformly(doc_info);
         }
@@ -15735,7 +15735,7 @@ namespace oomph
   /// p-unrefine submesh i_mesh uniformly and rebuild problem;
   /// doc refinement process.
   //========================================================================
-  void Problem::p_unrefine_uniformly(const unsigned &i_mesh, DocInfo &doc_info)
+  void Problem::p_unrefine_uniformly(const unsigned& i_mesh, DocInfo& doc_info)
   {
     actions_before_adapt();
 
@@ -15754,8 +15754,8 @@ namespace oomph
 #endif
 
     // Refine single mesh uniformly if possible
-    if (RefineableMeshBase *mmesh_pt =
-          dynamic_cast<RefineableMeshBase *>(mesh_pt(i_mesh)))
+    if (RefineableMeshBase* mmesh_pt =
+          dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh)))
     {
       mmesh_pt->p_unrefine_uniformly(doc_info);
     }
@@ -15787,10 +15787,10 @@ namespace oomph
   /// the initial conditions; if first_timestep==true and shift==false
   /// shifting is performed anyway and a warning is issued.
   //========================================================================
-  void Problem::unsteady_newton_solve(const double &dt,
-                                      const unsigned &max_adapt,
-                                      const bool &first_timestep,
-                                      const bool &shift)
+  void Problem::unsteady_newton_solve(const double& dt,
+                                      const unsigned& max_adapt,
+                                      const bool& first_timestep,
+                                      const bool& shift)
   {
     // Do shifting or not?
     bool shift_it = shift;
@@ -15936,7 +15936,7 @@ namespace oomph
   /// \f[ {\bf J} {\bf x} = - \bf{r} \f].
   /// Performs at most max_adapt adaptations on all meshes.
   //========================================================================
-  void Problem::newton_solve(const unsigned &max_adapt)
+  void Problem::newton_solve(const unsigned& max_adapt)
   {
     // Max number of solves
     unsigned max_solve = max_adapt + 1;
@@ -16008,7 +16008,7 @@ namespace oomph
           newton_solve();
         }
         // Catch any exceptions thrown in the Newton solver
-        catch (NewtonSolverError &error)
+        catch (NewtonSolverError& error)
         {
           oomph_info << std::endl
                      << "USER-DEFINED ERROR IN NEWTON SOLVER " << std::endl;
@@ -16086,8 +16086,7 @@ namespace oomph
   /// Get all the halo data stored on this processor and store pointers
   /// to the data in a map, indexed by the gobal eqn number
   //====================================================================
-  void Problem::get_all_halo_data(
-    std::map<unsigned, double *> &map_of_halo_data)
+  void Problem::get_all_halo_data(std::map<unsigned, double*>& map_of_halo_data)
   {
     // Halo data is stored in the meshes, so kick the problem down to that
     // level
@@ -16112,7 +16111,7 @@ namespace oomph
   //========================================================================
   /// Check the halo/haloed/shared node/element schemes.
   //========================================================================
-  void Problem::check_halo_schemes(DocInfo &doc_info)
+  void Problem::check_halo_schemes(DocInfo& doc_info)
   {
     // The bulk of the stuff that was in this routine is mesh-based, and
     // should therefore drop into the Mesh base class.  All that needs to remain
@@ -16168,8 +16167,8 @@ namespace oomph
   /// on other processors. Bools control if we deal with data associated with
   /// external halo/ed elements/nodes or the "normal" halo/ed ones.
   //========================================================================
-  void Problem::synchronise_dofs(const bool &do_halos,
-                                 const bool &do_external_halos)
+  void Problem::synchronise_dofs(const bool& do_halos,
+                                 const bool& do_external_halos)
   {
     // Do we have submeshes?
     unsigned n_mesh_loop = 1;
@@ -16210,7 +16209,7 @@ namespace oomph
       if (rank != my_rank)
       {
         // Deal with sub-meshes one-by-one if required
-        Mesh *my_mesh_pt = 0;
+        Mesh* my_mesh_pt = 0;
 
         // Loop over submeshes
         for (unsigned imesh = 0; imesh < n_mesh_loop; imesh++)
@@ -16238,7 +16237,7 @@ namespace oomph
 
             // Now loop over haloed elements and prepare to add their
             // internal data to the big vector to be sent
-            Vector<GeneralisedElement *> haloed_elem_pt =
+            Vector<GeneralisedElement*> haloed_elem_pt =
               my_mesh_pt->haloed_element_pt(rank);
             unsigned nelem_haloed = haloed_elem_pt.size();
             for (unsigned e = 0; e < nelem_haloed; e++)
@@ -16335,7 +16334,7 @@ namespace oomph
         unsigned count = receive_displacement[send_rank];
 
         // Deal with sub-meshes one-by-one if required
-        Mesh *my_mesh_pt = 0;
+        Mesh* my_mesh_pt = 0;
 
         // Loop over submeshes
         for (unsigned imesh = 0; imesh < n_mesh_loop; imesh++)
@@ -16363,7 +16362,7 @@ namespace oomph
 
             // Get number of halo elements whose non-halo is
             // on process send_rank
-            Vector<GeneralisedElement *> halo_elem_pt =
+            Vector<GeneralisedElement*> halo_elem_pt =
               my_mesh_pt->halo_element_pt(send_rank);
 
             unsigned nelem_halo = halo_elem_pt.size();
@@ -16409,7 +16408,7 @@ namespace oomph
   ///  Synchronise equation numbers and return the total
   /// number of degrees of freedom in the overall problem
   //========================================================================
-  long Problem::synchronise_eqn_numbers(const bool &assign_local_eqn_numbers)
+  long Problem::synchronise_eqn_numbers(const bool& assign_local_eqn_numbers)
   {
     // number of equations on this processor, which at this stage is only known
     // by counting the number of dofs that have been added to the problem
@@ -16492,12 +16491,12 @@ namespace oomph
     unsigned nelem = mesh_pt()->nelement();
     for (unsigned e = 0; e < nelem; e++)
     {
-      GeneralisedElement *el_pt = mesh_pt()->element_pt(e);
+      GeneralisedElement* el_pt = mesh_pt()->element_pt(e);
 
       unsigned nintern_data = el_pt->ninternal_data();
       for (unsigned iintern = 0; iintern < nintern_data; iintern++)
       {
-        Data *int_data_pt = el_pt->internal_data_pt(iintern);
+        Data* int_data_pt = el_pt->internal_data_pt(iintern);
         unsigned nval = int_data_pt->nvalue();
         for (unsigned ival = 0; ival < nval; ival++)
         {
@@ -16517,7 +16516,7 @@ namespace oomph
     unsigned nnod = mesh_pt()->nnode();
     for (unsigned j = 0; j < nnod; j++)
     {
-      Node *nod_pt = mesh_pt()->node_pt(j);
+      Node* nod_pt = mesh_pt()->node_pt(j);
 
       // loop over ALL eqn numbers - variable number of values
       unsigned nval = nod_pt->nvalue();
@@ -16535,7 +16534,7 @@ namespace oomph
       }
 
       // Is this a solid node? If so, need to bump up its equation number(s)
-      SolidNode *solid_nod_pt = dynamic_cast<SolidNode *>(nod_pt);
+      SolidNode* solid_nod_pt = dynamic_cast<SolidNode*>(nod_pt);
 
       if (solid_nod_pt != 0)
       {
@@ -16653,8 +16652,8 @@ namespace oomph
   /// submeshes. Bools control if we deal with data associated with
   /// external halo/ed elements/nodes or the "normal" halo/ed ones.
   //===================================================================
-  void Problem::copy_haloed_eqn_numbers_helper(const bool &do_halos,
-                                               const bool &do_external_halos)
+  void Problem::copy_haloed_eqn_numbers_helper(const bool& do_halos,
+                                               const bool& do_external_halos)
   {
     // Do we have submeshes?
     unsigned n_mesh_loop = 1;
@@ -16693,7 +16692,7 @@ namespace oomph
       if (rank != my_rank)
       {
         // Deal with sub-meshes one-by-one if required
-        Mesh *my_mesh_pt = 0;
+        Mesh* my_mesh_pt = 0;
 
         // Loop over submeshes
         for (unsigned imesh = 0; imesh < n_mesh_loop; imesh++)
@@ -16719,7 +16718,7 @@ namespace oomph
 
             // Add the equation numbers associated with internal data
             // in the haloed elements
-            Vector<GeneralisedElement *> haloed_elem_pt =
+            Vector<GeneralisedElement*> haloed_elem_pt =
               my_mesh_pt->haloed_element_pt(rank);
             unsigned nelem_haloed = haloed_elem_pt.size();
             for (unsigned e = 0; e < nelem_haloed; e++)
@@ -16818,7 +16817,7 @@ namespace oomph
         unsigned count = receive_displacement[send_rank];
 
         // Deal with sub-meshes one-by-one if required
-        Mesh *my_mesh_pt = 0;
+        Mesh* my_mesh_pt = 0;
 
         // Loop over submeshes
         for (unsigned imesh = 0; imesh < n_mesh_loop; imesh++)
@@ -16846,7 +16845,7 @@ namespace oomph
 
             // Get number of halo elements whose non-halo is on
             // process send_rank
-            Vector<GeneralisedElement *> halo_elem_pt =
+            Vector<GeneralisedElement*> halo_elem_pt =
               my_mesh_pt->halo_element_pt(send_rank);
             unsigned nelem_halo = halo_elem_pt.size();
             for (unsigned e = 0; e < nelem_halo; e++)
@@ -16891,9 +16890,9 @@ namespace oomph
   /// in directory specified by DocInfo object.
   //==========================================================================
   void Problem::load_balance(
-    DocInfo &doc_info,
-    const bool &report_stats,
-    const Vector<unsigned> &input_target_domain_for_local_non_halo_element)
+    DocInfo& doc_info,
+    const bool& report_stats,
+    const Vector<unsigned>& input_target_domain_for_local_non_halo_element)
   {
     double start_t = TimingHelpers::timer();
 
@@ -16950,7 +16949,7 @@ namespace oomph
       //---------------------------------------------------------
       // to them for deletion
       //---------------------
-      Vector<Mesh *> old_mesh_pt;
+      Vector<Mesh*> old_mesh_pt;
       unsigned n_mesh = nsub_mesh();
       if (n_mesh == 0)
       {
@@ -17029,13 +17028,13 @@ namespace oomph
       }
 
       // Setup map linking element with target domain
-      std::map<GeneralisedElement *, unsigned>
+      std::map<GeneralisedElement*, unsigned>
         target_domain_for_local_non_halo_element_map;
       unsigned n_elem = mesh_pt()->nelement();
       unsigned count_non_halo_el = 0;
       for (unsigned e = 0; e < n_elem; e++)
       {
-        GeneralisedElement *el_pt = mesh_pt()->element_pt(e);
+        GeneralisedElement* el_pt = mesh_pt()->element_pt(e);
         if (!el_pt->is_halo())
         {
           target_domain_for_local_non_halo_element_map[el_pt] =
@@ -17060,7 +17059,7 @@ namespace oomph
       count_non_halo_el = 0;
       for (unsigned e = 0; e < n_elem; e++)
       {
-        GeneralisedElement *el_pt = mesh_pt()->element_pt(e);
+        GeneralisedElement* el_pt = mesh_pt()->element_pt(e);
         if (!el_pt->is_halo())
         {
           target_domain_for_local_non_halo_element.push_back(
@@ -17092,7 +17091,7 @@ namespace oomph
           for (unsigned i = 0; i < nsub_ele; i++)
           {
             // Get the element
-            GeneralisedElement *ele_pt = mesh_pt(i_mesh)->element_pt(i);
+            GeneralisedElement* ele_pt = mesh_pt(i_mesh)->element_pt(i);
             // ... and check if it is a nonhalo element
             if (!ele_pt->is_halo())
             {
@@ -17142,7 +17141,7 @@ namespace oomph
 
       // Vector to temporaly store pointers to unstructured meshes
       // (TriangleMeshBase)
-      Vector<TriangleMeshBase *> unstructured_mesh_pt;
+      Vector<TriangleMeshBase*> unstructured_mesh_pt;
       std::vector<bool> is_unstructured_mesh;
 
       // Flag to indicate that there are unstructured meshes as part of
@@ -17153,8 +17152,8 @@ namespace oomph
       if (n_mesh == 0)
       {
         // Check if it is a TriangleMeshBase mesh
-        if (TriangleMeshBase *tri_mesh_pt =
-              dynamic_cast<TriangleMeshBase *>(old_mesh_pt[0]))
+        if (TriangleMeshBase* tri_mesh_pt =
+              dynamic_cast<TriangleMeshBase*>(old_mesh_pt[0]))
         {
           // Add the pointer to the unstructured meshes container
           unstructured_mesh_pt.push_back(tri_mesh_pt);
@@ -17180,8 +17179,8 @@ namespace oomph
         for (unsigned i_mesh = 0; i_mesh < n_mesh; i_mesh++)
         {
           // Is it a TriangleMeshBase mesh
-          if (TriangleMeshBase *tri_mesh_pt =
-                dynamic_cast<TriangleMeshBase *>(old_mesh_pt[i_mesh]))
+          if (TriangleMeshBase* tri_mesh_pt =
+                dynamic_cast<TriangleMeshBase*>(old_mesh_pt[i_mesh]))
           {
             // Add the pointer to the unstructured meshes container
             unstructured_mesh_pt.push_back(tri_mesh_pt);
@@ -17308,8 +17307,8 @@ namespace oomph
       if (n_mesh == 0)
       {
         pruned_refinement_level[0] = 0;
-        TreeBasedRefineableMeshBase *ref_mesh_pt =
-          dynamic_cast<TreeBasedRefineableMeshBase *>(old_mesh_pt[0]);
+        TreeBasedRefineableMeshBase* ref_mesh_pt =
+          dynamic_cast<TreeBasedRefineableMeshBase*>(old_mesh_pt[0]);
         if (ref_mesh_pt != 0)
         {
           pruned_refinement_level[0] =
@@ -17334,8 +17333,8 @@ namespace oomph
         for (unsigned i_mesh = 0; i_mesh < n_old_sub_meshes; i_mesh++)
         {
           pruned_refinement_level[i_mesh] = 0;
-          TreeBasedRefineableMeshBase *ref_mesh_pt =
-            dynamic_cast<TreeBasedRefineableMeshBase *>(old_mesh_pt[i_mesh]);
+          TreeBasedRefineableMeshBase* ref_mesh_pt =
+            dynamic_cast<TreeBasedRefineableMeshBase*>(old_mesh_pt[i_mesh]);
           if (ref_mesh_pt != 0)
           {
             pruned_refinement_level[i_mesh] =
@@ -17393,8 +17392,8 @@ namespace oomph
         // Now adapt meshes manually
         if (n_mesh == 0)
         {
-          TreeBasedRefineableMeshBase *ref_mesh_pt =
-            dynamic_cast<TreeBasedRefineableMeshBase *>(mesh_pt());
+          TreeBasedRefineableMeshBase* ref_mesh_pt =
+            dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt());
           if (ref_mesh_pt != 0)
           {
             // Get min and max refinement level
@@ -17437,8 +17436,8 @@ namespace oomph
         {
           for (unsigned i_mesh = 0; i_mesh < n_mesh; i_mesh++)
           {
-            TreeBasedRefineableMeshBase *ref_mesh_pt =
-              dynamic_cast<TreeBasedRefineableMeshBase *>(mesh_pt(i_mesh));
+            TreeBasedRefineableMeshBase* ref_mesh_pt =
+              dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(i_mesh));
             if (ref_mesh_pt != 0)
             {
               // Get min and max refinement level
@@ -17561,7 +17560,7 @@ namespace oomph
           Base_mesh_element_number_plus_one.clear();
           for (unsigned e = 0; e < n_ele; e++)
           {
-            GeneralisedElement *el_pt = mesh_pt()->element_pt(e);
+            GeneralisedElement* el_pt = mesh_pt()->element_pt(e);
             Base_mesh_element_number_plus_one[el_pt] = e + 1;
             Base_mesh_element_pt[e] = el_pt;
           } // for (e<n_ele)
@@ -17595,7 +17594,7 @@ namespace oomph
             const unsigned n_ele = mesh_pt(i_mesh)->nelement();
             for (unsigned e = 0; e < n_ele; e++)
             {
-              GeneralisedElement *el_pt = mesh_pt(i_mesh)->element_pt(e);
+              GeneralisedElement* el_pt = mesh_pt(i_mesh)->element_pt(e);
               Base_mesh_element_number_plus_one[el_pt] = counter_base + 1;
               Base_mesh_element_pt[counter_base] = el_pt;
               // Inrease the global element number
@@ -17635,8 +17634,8 @@ namespace oomph
       unsigned n_element = mesh_pt()->nelement();
       for (unsigned e = 0; e < n_element; e++)
       {
-        FaceElement *face_el_pt =
-          dynamic_cast<FaceElement *>(mesh_pt()->finite_element_pt(e));
+        FaceElement* face_el_pt =
+          dynamic_cast<FaceElement*>(mesh_pt()->finite_element_pt(e));
         if (face_el_pt != 0)
         {
 #ifdef PARANOID
@@ -17647,7 +17646,7 @@ namespace oomph
           info << "================================================\n";
           oomph_info << info.str() << std::endl;
 #endif
-          FiniteElement *bulk_elem_pt = face_el_pt->bulk_element_pt();
+          FiniteElement* bulk_elem_pt = face_el_pt->bulk_element_pt();
           unsigned e_bulk = Base_mesh_element_number_plus_one[bulk_elem_pt];
 #ifdef PARANOID
           if (e_bulk == 0)
@@ -17665,7 +17664,7 @@ namespace oomph
 
       // Distribute the (sub)meshes
       //---------------------------
-      Vector<GeneralisedElement *> deleted_element_pt;
+      Vector<GeneralisedElement*> deleted_element_pt;
       if (n_mesh == 0)
       {
         // Only distribute (load balance strategy) if this is an
@@ -17755,7 +17754,7 @@ namespace oomph
       unsigned n_del = deleted_element_pt.size();
       for (unsigned e = 0; e < n_del; e++)
       {
-        GeneralisedElement *el_pt = deleted_element_pt[e];
+        GeneralisedElement* el_pt = deleted_element_pt[e];
         unsigned old_el_number = Base_mesh_element_number_plus_one[el_pt] - 1;
         Base_mesh_element_number_plus_one[el_pt] = 0;
         Base_mesh_element_pt[old_el_number] = 0;
@@ -17765,11 +17764,11 @@ namespace oomph
       // then prune here now
       if (some_mesh_has_been_pruned)
       {
-        Vector<GeneralisedElement *> deleted_element_pt;
+        Vector<GeneralisedElement*> deleted_element_pt;
         if (n_mesh == 0)
         {
-          TreeBasedRefineableMeshBase *ref_mesh_pt =
-            dynamic_cast<TreeBasedRefineableMeshBase *>(mesh_pt());
+          TreeBasedRefineableMeshBase* ref_mesh_pt =
+            dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt());
           if (ref_mesh_pt != 0)
           {
             ref_mesh_pt->prune_halo_elements_and_nodes(
@@ -17780,8 +17779,8 @@ namespace oomph
         {
           for (unsigned i_mesh = 0; i_mesh < n_mesh; i_mesh++)
           {
-            TreeBasedRefineableMeshBase *ref_mesh_pt =
-              dynamic_cast<TreeBasedRefineableMeshBase *>(mesh_pt(i_mesh));
+            TreeBasedRefineableMeshBase* ref_mesh_pt =
+              dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(i_mesh));
             if (ref_mesh_pt != 0)
             {
               ref_mesh_pt->prune_halo_elements_and_nodes(
@@ -17796,7 +17795,7 @@ namespace oomph
         unsigned n_del = deleted_element_pt.size();
         for (unsigned e = 0; e < n_del; e++)
         {
-          GeneralisedElement *el_pt = deleted_element_pt[e];
+          GeneralisedElement* el_pt = deleted_element_pt[e];
           unsigned old_el_number = Base_mesh_element_number_plus_one[el_pt] - 1;
           Base_mesh_element_number_plus_one[el_pt] = 0;
           Base_mesh_element_pt[old_el_number] = 0;
@@ -18022,11 +18021,11 @@ namespace oomph
   /// Send refinement information between processors
   //==========================================================================
   void Problem::send_refinement_info_helper(
-    Vector<unsigned> &old_domain_for_base_element,
-    Vector<unsigned> &new_domain_for_base_element,
-    const unsigned &max_refinement_level_overall,
-    std::map<unsigned, Vector<unsigned>> &flat_packed_refinement_info_for_root,
-    Vector<Vector<Vector<unsigned>>> &refinement_info_for_root_elements)
+    Vector<unsigned>& old_domain_for_base_element,
+    Vector<unsigned>& new_domain_for_base_element,
+    const unsigned& max_refinement_level_overall,
+    std::map<unsigned, Vector<unsigned>>& flat_packed_refinement_info_for_root,
+    Vector<Vector<Vector<unsigned>>>& refinement_info_for_root_elements)
   {
     // Number of processes etc.
     const int n_proc = this->communicator_pt()->nproc();
@@ -18052,7 +18051,7 @@ namespace oomph
     for (unsigned i_mesh = 0; i_mesh < max_mesh; i_mesh++)
     {
       // Choose the right mesh
-      Mesh *my_mesh_pt = 0;
+      Mesh* my_mesh_pt = 0;
       if (n_sub_mesh == 0)
       {
         my_mesh_pt = mesh_pt();
@@ -18063,8 +18062,8 @@ namespace oomph
       }
 
       // Only work with structured meshes
-      TriangleMeshBase *sub_mesh_pt =
-        dynamic_cast<TriangleMeshBase *>(mesh_pt(i_mesh));
+      TriangleMeshBase* sub_mesh_pt =
+        dynamic_cast<TriangleMeshBase*>(mesh_pt(i_mesh));
       if (!(sub_mesh_pt != 0))
       {
         // Loop over processors to find haloed elements -- need to
@@ -18072,7 +18071,7 @@ namespace oomph
         // halo counterparts!
         for (int p = 0; p < n_proc; p++)
         {
-          Vector<GeneralisedElement *> haloed_elem_pt =
+          Vector<GeneralisedElement*> haloed_elem_pt =
             my_mesh_pt->haloed_element_pt(p);
           unsigned nhaloed = haloed_elem_pt.size();
           for (unsigned h = 0; h < nhaloed; h++)
@@ -18638,12 +18637,12 @@ namespace oomph
   ///   be sent to each processor
   //==========================================================================
   void Problem::send_data_to_be_sent_during_load_balancing(
-    Vector<int> &send_n,
-    Vector<double> &send_data,
-    Vector<int> &send_displacement)
+    Vector<int>& send_n,
+    Vector<double>& send_data,
+    Vector<int>& send_displacement)
   {
     // Communicator info
-    OomphCommunicator *comm_pt = this->communicator_pt();
+    OomphCommunicator* comm_pt = this->communicator_pt();
     const int n_proc = comm_pt->nproc();
 
     // Storage for the number of data to be received from each processor
@@ -18698,7 +18697,7 @@ namespace oomph
     unsigned el_count = 0;
 
     // Only do each node once
-    Vector<std::map<Node *, bool>> node_done(n_proc);
+    Vector<std::map<Node*, bool>> node_done(n_proc);
 
     // Now use the received data to update the halo nodes
     for (int send_rank = 0; send_rank < n_proc; send_rank++)
@@ -18729,18 +18728,18 @@ namespace oomph
           count++;
 
           // Get pointer to base/root element from reverse lookup scheme
-          GeneralisedElement *root_el_pt = Base_mesh_element_pt[base_el_no];
+          GeneralisedElement* root_el_pt = Base_mesh_element_pt[base_el_no];
 
           // Vector for pointers to associated elements in batch
-          Vector<GeneralisedElement *> batch_el_pt;
+          Vector<GeneralisedElement*> batch_el_pt;
 
           // Is it a refineable element?
-          RefineableElement *ref_root_el_pt =
-            dynamic_cast<RefineableElement *>(root_el_pt);
+          RefineableElement* ref_root_el_pt =
+            dynamic_cast<RefineableElement*>(root_el_pt);
           if (ref_root_el_pt != 0)
           {
             // Get all leaves associated with this base/root element
-            Vector<Tree *> all_leaf_nodes_pt;
+            Vector<Tree*> all_leaf_nodes_pt;
             ref_root_el_pt->tree_pt()->stick_leaves_into_vector(
               all_leaf_nodes_pt);
 
@@ -18790,18 +18789,18 @@ namespace oomph
           // Now loop  over all elements in batch
           for (unsigned e = 0; e < nel; e++)
           {
-            GeneralisedElement *el_pt = batch_el_pt[e];
+            GeneralisedElement* el_pt = batch_el_pt[e];
             el_count++;
 
             // FE?
-            FiniteElement *fe_pt = dynamic_cast<FiniteElement *>(el_pt);
+            FiniteElement* fe_pt = dynamic_cast<FiniteElement*>(el_pt);
             if (fe_pt != 0)
             {
               // Loop over nodes
               unsigned nnod = fe_pt->nnode();
               for (unsigned j = 0; j < nnod; j++)
               {
-                Node *nod_pt = fe_pt->node_pt(j);
+                Node* nod_pt = fe_pt->node_pt(j);
                 if (!node_done[send_rank][nod_pt])
                 {
                   node_done[send_rank][nod_pt] = true;
@@ -18834,8 +18833,8 @@ namespace oomph
 #endif
 
                   // Check if it's actually a boundary node
-                  BoundaryNodeBase *bnod_pt =
-                    dynamic_cast<BoundaryNodeBase *>(nod_pt);
+                  BoundaryNodeBase* bnod_pt =
+                    dynamic_cast<BoundaryNodeBase*>(nod_pt);
                   if (bnod_pt != 0)
                   {
 #ifdef PARANOID
@@ -18872,7 +18871,7 @@ namespace oomph
 
                       // Get pointer to the map of indices associated with
                       // additional values created by face elements
-                      std::map<unsigned, unsigned> *map_pt =
+                      std::map<unsigned, unsigned>* map_pt =
                         bnod_pt
                           ->index_of_first_value_assigned_by_face_element_pt();
 
@@ -18965,16 +18964,16 @@ namespace oomph
   ///   element
   //==========================================================================
   void Problem::get_data_to_be_sent_during_load_balancing(
-    const Vector<unsigned> &target_domain_for_local_non_halo_element,
-    Vector<int> &send_n,
-    Vector<double> &send_data,
-    Vector<int> &send_displacement,
-    Vector<unsigned> &old_domain_for_base_element,
-    Vector<unsigned> &new_domain_for_base_element,
-    unsigned &max_refinement_level_overall)
+    const Vector<unsigned>& target_domain_for_local_non_halo_element,
+    Vector<int>& send_n,
+    Vector<double>& send_data,
+    Vector<int>& send_displacement,
+    Vector<unsigned>& old_domain_for_base_element,
+    Vector<unsigned>& new_domain_for_base_element,
+    unsigned& max_refinement_level_overall)
   {
     // Communicator info
-    OomphCommunicator *comm_pt = this->communicator_pt();
+    OomphCommunicator* comm_pt = this->communicator_pt();
     const int n_proc = comm_pt->nproc();
     const int my_rank = this->communicator_pt()->my_rank();
 
@@ -18985,13 +18984,13 @@ namespace oomph
     // ------------------------------------------------------------------------
 
     // Map to store whether the root element has been visited yet
-    std::map<RefineableElement *, bool> root_el_done;
+    std::map<RefineableElement*, bool> root_el_done;
 
 #ifdef PARANOID
 
     // Map for checking if all elements associated with same root
     // have the same target processor
-    std::map<RefineableElement *, unsigned> target_plus_one_for_root;
+    std::map<RefineableElement*, unsigned> target_plus_one_for_root;
 
 #endif
 
@@ -19001,7 +19000,7 @@ namespace oomph
     // Storage for (vector of) elements associated with target domain
     // (stored in map for sparsity): element_for_processor[d][e] is pointer
     // to e-th element that's supposed to move onto processor (domain) d.
-    std::map<unsigned, Vector<GeneralisedElement *>> element_for_processor;
+    std::map<unsigned, Vector<GeneralisedElement*>> element_for_processor;
 
     // Storage for the number of elements in a specified batch of leaf
     // elements, all of which are associated with the same root/base element:
@@ -19053,8 +19052,8 @@ namespace oomph
     for (unsigned i_mesh = 0; i_mesh < n_mesh; i_mesh++)
     {
       // Only work with structured meshes
-      TriangleMeshBase *sub_mesh_pt =
-        dynamic_cast<TriangleMeshBase *>(mesh_pt(i_mesh));
+      TriangleMeshBase* sub_mesh_pt =
+        dynamic_cast<TriangleMeshBase*>(mesh_pt(i_mesh));
       if (!(sub_mesh_pt != 0))
       {
         const unsigned nele = mesh_pt(i_mesh)->nelement();
@@ -19068,7 +19067,7 @@ namespace oomph
 
         for (unsigned e = 0; e < nele; e++)
         {
-          GeneralisedElement *el_pt = mesh_pt(i_mesh)->element_pt(e);
+          GeneralisedElement* el_pt = mesh_pt(i_mesh)->element_pt(e);
           if (!el_pt->is_halo())
           {
             // New non-halo: Where is this element supposed to go to?
@@ -19081,8 +19080,8 @@ namespace oomph
 
             // Is it a root element? (It is, trivially, if it's not refineable)
             //------------------------------------------------------------------
-            RefineableElement *ref_el_pt =
-              dynamic_cast<RefineableElement *>(el_pt);
+            RefineableElement* ref_el_pt =
+              dynamic_cast<RefineableElement*>(el_pt);
             if (ref_el_pt == 0)
             {
               // Not refineable so add element itself
@@ -19120,7 +19119,7 @@ namespace oomph
             else
             {
               // Get the root element
-              RefineableElement *root_el_pt = ref_el_pt->root_element_pt();
+              RefineableElement* root_el_pt = ref_el_pt->root_element_pt();
 
               // Has this root been visited yet?
               if (!root_el_done[root_el_pt])
@@ -19156,7 +19155,7 @@ namespace oomph
 #endif
 
                 // Package all leaves into batch of elements
-                Vector<Tree *> all_leaf_nodes_pt;
+                Vector<Tree*> all_leaf_nodes_pt;
                 root_el_pt->tree_pt()->stick_leaves_into_vector(
                   all_leaf_nodes_pt);
 
@@ -19175,7 +19174,7 @@ namespace oomph
                 for (unsigned i_leaf = 0; i_leaf < n_leaf; i_leaf++)
                 {
                   // Add element object at leaf
-                  RefineableElement *leaf_el_pt =
+                  RefineableElement* leaf_el_pt =
                     all_leaf_nodes_pt[i_leaf]->object_pt();
                   element_for_processor[target_domain].push_back(leaf_el_pt);
 
@@ -19290,7 +19289,7 @@ namespace oomph
         error_message << "Old domain for base element " << j << ": "
                       << Base_mesh_element_pt[j]
                       << "or its incarnation as refineable el: "
-                      << dynamic_cast<RefineableElement *>(
+                      << dynamic_cast<RefineableElement*>(
                            Base_mesh_element_pt[j])
                       << " which is of type "
                       << typeid(*Base_mesh_element_pt[j]).name()
@@ -19324,7 +19323,7 @@ namespace oomph
     send_data.clear();
 
     // Only do each node once (per processor!)
-    Vector<std::map<Node *, bool>> node_done(n_proc);
+    Vector<std::map<Node*, bool>> node_done(n_proc);
 
     // Loop over all processors. NOTE: We include current processor
     // since we have to refine local elements too -- store their data
@@ -19369,17 +19368,17 @@ namespace oomph
         for (unsigned e = 0; e < nel; e++)
         {
           // Get element
-          GeneralisedElement *el_pt = element_for_processor[rank][el_count];
+          GeneralisedElement* el_pt = element_for_processor[rank][el_count];
 
           // FE?
-          FiniteElement *fe_pt = dynamic_cast<FiniteElement *>(el_pt);
+          FiniteElement* fe_pt = dynamic_cast<FiniteElement*>(el_pt);
           if (fe_pt != 0)
           {
             // Loop over nodes
             unsigned nnod = fe_pt->nnode();
             for (unsigned j = 0; j < nnod; j++)
             {
-              Node *nod_pt = fe_pt->node_pt(j);
+              Node* nod_pt = fe_pt->node_pt(j);
 
               // Reconstruct the nodal values/position from the node's
               // possible hanging node representation to be on the safe side
@@ -19416,8 +19415,8 @@ namespace oomph
                 send_data.push_back(double(n_value));
 
                 // Check if it's a boundary node
-                BoundaryNodeBase *bnod_pt =
-                  dynamic_cast<BoundaryNodeBase *>(nod_pt);
+                BoundaryNodeBase* bnod_pt =
+                  dynamic_cast<BoundaryNodeBase*>(nod_pt);
 
                 // Not a boundary node
                 if (bnod_pt == 0)
@@ -19436,7 +19435,7 @@ namespace oomph
 #endif
                   // Get pointer to the map of indices associated with
                   // additional values created by face elements
-                  std::map<unsigned, unsigned> *map_pt =
+                  std::map<unsigned, unsigned>* map_pt =
                     bnod_pt->index_of_first_value_assigned_by_face_element_pt();
 
                   // No additional values created
@@ -19517,13 +19516,13 @@ namespace oomph
   /// .
   //==========================================================================
   void Problem::get_flat_packed_refinement_pattern_for_load_balancing(
-    const Vector<unsigned> &old_domain_for_base_element,
-    const Vector<unsigned> &new_domain_for_base_element,
-    const unsigned &max_refinement_level_overall,
-    std::map<unsigned, Vector<unsigned>> &flat_packed_refinement_info_for_root)
+    const Vector<unsigned>& old_domain_for_base_element,
+    const Vector<unsigned>& new_domain_for_base_element,
+    const unsigned& max_refinement_level_overall,
+    std::map<unsigned, Vector<unsigned>>& flat_packed_refinement_info_for_root)
   {
     // Map to store whether the root element has been visited yet
-    std::map<RefineableElement *, bool> root_el_done;
+    std::map<RefineableElement*, bool> root_el_done;
 
     // Get the number of submeshs, if there are no submeshes, then
     // increase the counter so that the loop below also work for the only
@@ -19537,22 +19536,22 @@ namespace oomph
     for (unsigned i_mesh = 0; i_mesh < n_mesh; i_mesh++)
     {
       // Only work with structured
-      TriangleMeshBase *sub_mesh_pt =
-        dynamic_cast<TriangleMeshBase *>(mesh_pt(i_mesh));
+      TriangleMeshBase* sub_mesh_pt =
+        dynamic_cast<TriangleMeshBase*>(mesh_pt(i_mesh));
       if (!(sub_mesh_pt != 0))
       {
         const unsigned nele_submesh = mesh_pt(i_mesh)->nelement();
         for (unsigned e = 0; e < nele_submesh; e++)
         {
           // Get pointer to element
-          GeneralisedElement *el_pt = mesh_pt(i_mesh)->element_pt(e);
+          GeneralisedElement* el_pt = mesh_pt(i_mesh)->element_pt(e);
 
           // Ignore halos
           if (!el_pt->is_halo())
           {
             // Is it refineable? No!
-            RefineableElement *ref_el_pt =
-              dynamic_cast<RefineableElement *>(el_pt);
+            RefineableElement* ref_el_pt =
+              dynamic_cast<RefineableElement*>(el_pt);
             if (ref_el_pt == 0)
             {
               // The element is not refineable - stick a zero in refinement_info
@@ -19573,7 +19572,7 @@ namespace oomph
             else
             {
               // Get the root element
-              RefineableElement *root_el_pt = ref_el_pt->root_element_pt();
+              RefineableElement* root_el_pt = ref_el_pt->root_element_pt();
 
               // Has this root been visited yet?
               if (!root_el_done[root_el_pt])
@@ -19594,7 +19593,7 @@ namespace oomph
                 root_element_number -= 1;
 
                 // Get all the nodes associated with this root element
-                Vector<Tree *> all_tree_nodes_pt;
+                Vector<Tree*> all_tree_nodes_pt;
                 root_el_pt->tree_pt()->stick_all_tree_nodes_into_vector(
                   all_tree_nodes_pt);
 
@@ -19672,8 +19671,8 @@ namespace oomph
   /// refinement; it's 1 if it's not to be refined.
   //==========================================================================
   void Problem::refine_distributed_base_mesh(
-    Vector<Vector<Vector<unsigned>>> &refinement_info_for_root_elements,
-    const unsigned &max_level_overall)
+    Vector<Vector<Vector<unsigned>>>& refinement_info_for_root_elements,
+    const unsigned& max_level_overall)
   {
     // Loop over sub meshes
     unsigned n_sub_mesh = nsub_mesh();
@@ -19681,7 +19680,7 @@ namespace oomph
     for (unsigned i_mesh = 0; i_mesh < max_mesh; i_mesh++)
     {
       // Choose the right mesh
-      Mesh *my_mesh_pt = 0;
+      Mesh* my_mesh_pt = 0;
       if (n_sub_mesh == 0)
       {
         my_mesh_pt = mesh_pt();
@@ -19713,7 +19712,7 @@ namespace oomph
         for (unsigned e = 0; e < n_el_on_this_proc; e++)
         {
           // Get the (root) element
-          FiniteElement *el_pt = my_mesh_pt->finite_element_pt(e);
+          FiniteElement* el_pt = my_mesh_pt->finite_element_pt(e);
 
           // What is its unique number in the base mesh
           unsigned root_el_no = Base_mesh_element_number_plus_one[el_pt];
@@ -19762,8 +19761,8 @@ namespace oomph
       }
 
       // Now do the actual refinement
-      TreeBasedRefineableMeshBase *ref_mesh_pt =
-        dynamic_cast<TreeBasedRefineableMeshBase *>(my_mesh_pt);
+      TreeBasedRefineableMeshBase* ref_mesh_pt =
+        dynamic_cast<TreeBasedRefineableMeshBase*>(my_mesh_pt);
       if (ref_mesh_pt != 0)
       {
         ref_mesh_pt->refine_base_mesh(to_be_refined_on_this_proc);
@@ -19794,7 +19793,7 @@ namespace oomph
     for (unsigned i_mesh = 0; i_mesh < max_mesh; i_mesh++)
     {
       // Choose the right mesh
-      Mesh *my_mesh_pt = 0;
+      Mesh* my_mesh_pt = 0;
       if (n_sub_mesh == 0)
       {
         my_mesh_pt = mesh_pt();
@@ -19805,8 +19804,8 @@ namespace oomph
       }
 
       // Only work with structured meshes
-      TriangleMeshBase *sub_mesh_pt =
-        dynamic_cast<TriangleMeshBase *>(my_mesh_pt);
+      TriangleMeshBase* sub_mesh_pt =
+        dynamic_cast<TriangleMeshBase*>(my_mesh_pt);
       if (!(sub_mesh_pt != 0))
       {
         // Storage for number of data to be sent to each processor
@@ -19829,14 +19828,14 @@ namespace oomph
           if (rank != my_rank)
           {
             // Get root haloed elements with that processor
-            Vector<GeneralisedElement *> root_haloed_elements_pt =
+            Vector<GeneralisedElement*> root_haloed_elements_pt =
               my_mesh_pt->root_haloed_element_pt(rank);
             unsigned nel = root_haloed_elements_pt.size();
 
             // Store element numbers for send
             for (unsigned e = 0; e < nel; e++)
             {
-              GeneralisedElement *el_pt = root_haloed_elements_pt[e];
+              GeneralisedElement* el_pt = root_haloed_elements_pt[e];
               send_data.push_back(Base_mesh_element_number_plus_one[el_pt]);
             }
           }
@@ -19906,14 +19905,14 @@ namespace oomph
             unsigned count = receive_displacement[send_rank];
 
             // Get root halo elements with that processor
-            Vector<GeneralisedElement *> root_halo_elements_pt =
+            Vector<GeneralisedElement*> root_halo_elements_pt =
               my_mesh_pt->root_halo_element_pt(send_rank);
             unsigned nel = root_halo_elements_pt.size();
 
             // Read in element numbers
             for (unsigned e = 0; e < nel; e++)
             {
-              GeneralisedElement *el_pt = root_halo_elements_pt[e];
+              GeneralisedElement* el_pt = root_halo_elements_pt[e];
               unsigned el_number_plus_one = receive_data[count++];
               Base_mesh_element_number_plus_one[el_pt] = el_number_plus_one;
               Base_mesh_element_pt[el_number_plus_one - 1] = el_pt;

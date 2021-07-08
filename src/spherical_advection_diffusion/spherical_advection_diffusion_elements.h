@@ -62,12 +62,12 @@ namespace oomph
     /// \short Function pointer to source function fct(x,f(x)) --
     /// x is a Vector!
     typedef void (*SphericalAdvectionDiffusionSourceFctPt)(
-      const Vector<double> &x, double &f);
+      const Vector<double>& x, double& f);
 
     /// \short Function pointer to wind function fct(x,w(x)) --
     /// x is a Vector!
     typedef void (*SphericalAdvectionDiffusionWindFctPt)(
-      const Vector<double> &x, Vector<double> &wind);
+      const Vector<double>& x, Vector<double>& wind);
 
     /// \short Constructor: Initialise the Source_fct_pt and Wind_fct_pt
     /// to null and set (pointer to) Peclet number to default
@@ -80,13 +80,13 @@ namespace oomph
 
     /// Broken copy constructor
     SphericalAdvectionDiffusionEquations(
-      const SphericalAdvectionDiffusionEquations &dummy)
+      const SphericalAdvectionDiffusionEquations& dummy)
     {
       BrokenCopy::broken_copy("SphericalAdvectionDiffusionEquations");
     }
 
     /// Broken assignment operator
-    void operator=(const SphericalAdvectionDiffusionEquations &)
+    void operator=(const SphericalAdvectionDiffusionEquations&)
     {
       BrokenCopy::broken_assign("SphericalAdvectionDiffusionEquations");
     }
@@ -105,10 +105,10 @@ namespace oomph
 
     /// \short du/dt at local node n.
     /// Uses suitably interpolated value for hanging nodes.
-    double du_dt_spherical_adv_diff(const unsigned &n) const
+    double du_dt_spherical_adv_diff(const unsigned& n) const
     {
       // Get the data's timestepper
-      TimeStepper *time_stepper_pt = this->node_pt(n)->time_stepper_pt();
+      TimeStepper* time_stepper_pt = this->node_pt(n)->time_stepper_pt();
 
       // Initialise dudt
       double dudt = 0.0;
@@ -135,7 +135,7 @@ namespace oomph
     void disable_ALE() {}
 
     /// Output with default number of plot points
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       unsigned nplot = 5;
       output(outfile, nplot);
@@ -143,10 +143,10 @@ namespace oomph
 
     /// \short Output FE representation of soln: r,z,u  at
     /// nplot^2 plot points
-    void output(std::ostream &outfile, const unsigned &nplot);
+    void output(std::ostream& outfile, const unsigned& nplot);
 
     /// C_style output with default number of plot points
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       unsigned n_plot = 5;
       output(file_pt, n_plot);
@@ -154,21 +154,21 @@ namespace oomph
 
     /// \short C-style output FE representation of soln: r,z,u  at
     /// n_plot^2 plot points
-    void output(FILE *file_pt, const unsigned &n_plot);
+    void output(FILE* file_pt, const unsigned& n_plot);
 
     /// Output exact soln: r,z,u_exact at nplot^2 plot points
-    void output_fct(std::ostream &outfile,
-                    const unsigned &nplot,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& nplot,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
 
     /// Get error against and norm of exact solution
-    void compute_error(std::ostream &outfile,
+    void compute_error(std::ostream& outfile,
                        FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-                       double &error,
-                       double &norm);
+                       double& error,
+                       double& norm);
 
     /// Access function: Pointer to source function
-    inline SphericalAdvectionDiffusionSourceFctPt &source_fct_pt()
+    inline SphericalAdvectionDiffusionSourceFctPt& source_fct_pt()
     {
       return Source_fct_pt;
     }
@@ -180,7 +180,7 @@ namespace oomph
     }
 
     /// Access function: Pointer to wind function
-    inline SphericalAdvectionDiffusionWindFctPt &wind_fct_pt()
+    inline SphericalAdvectionDiffusionWindFctPt& wind_fct_pt()
     {
       return Wind_fct_pt;
     }
@@ -194,25 +194,25 @@ namespace oomph
     // Access functions for the physical constants
 
     /// Peclet number
-    inline const double &pe() const
+    inline const double& pe() const
     {
       return *Pe_pt;
     }
 
     /// Pointer to Peclet number
-    inline double *&pe_pt()
+    inline double*& pe_pt()
     {
       return Pe_pt;
     }
 
     /// Peclet number multiplied by Strouhal number
-    inline const double &pe_st() const
+    inline const double& pe_st() const
     {
       return *PeSt_pt;
     }
 
     /// Pointer to Peclet number multipled by Strouha number
-    inline double *&pe_st_pt()
+    inline double*& pe_st_pt()
     {
       return PeSt_pt;
     }
@@ -221,9 +221,9 @@ namespace oomph
     /// virtual to allow overloading in multi-physics problems where
     /// the strength of the source function might be determined by
     /// another system of equations
-    inline virtual void get_source_spherical_adv_diff(const unsigned &ipt,
-                                                      const Vector<double> &x,
-                                                      double &source) const
+    inline virtual void get_source_spherical_adv_diff(const unsigned& ipt,
+                                                      const Vector<double>& x,
+                                                      double& source) const
     {
       // If no source function has been set, return zero
       if (Source_fct_pt == 0)
@@ -242,10 +242,10 @@ namespace oomph
     /// virtual to allow overloading in multi-physics problems where
     /// the wind function might be determined by
     /// another system of equations
-    inline virtual void get_wind_spherical_adv_diff(const unsigned &ipt,
-                                                    const Vector<double> &s,
-                                                    const Vector<double> &x,
-                                                    Vector<double> &wind) const
+    inline virtual void get_wind_spherical_adv_diff(const unsigned& ipt,
+                                                    const Vector<double>& s,
+                                                    const Vector<double>& x,
+                                                    Vector<double>& wind) const
     {
       // If no wind function has been set, return zero
       if (Wind_fct_pt == 0)
@@ -267,7 +267,7 @@ namespace oomph
     /// \mbox{flux}[i] = \nabla u = \mbox{d}u / \mbox{d} r
     /// + 1/r \mbox{d}u / \mbox{d} \theta
     /// \f]
-    void get_flux(const Vector<double> &s, Vector<double> &flux) const
+    void get_flux(const Vector<double>& s, Vector<double>& flux) const
     {
       // Find out how many nodes there are in the element
       const unsigned n_node = nnode();
@@ -300,7 +300,7 @@ namespace oomph
     }
 
     /// Add the element's contribution to its residual vector (wrapper)
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Call the generic residuals function with flag set to 0 and using
       // a dummy matrix
@@ -313,8 +313,8 @@ namespace oomph
 
     /// \short Add the element's contribution to its residual vector and
     /// the element Jacobian matrix (wrapper)
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       // Call the generic routine with the flag set to 1
       fill_in_generic_residual_contribution_spherical_adv_diff(
@@ -324,9 +324,9 @@ namespace oomph
     /// \short Add the element's contribution to its residual vector and
     /// the element Jacobian matrix (wrapper) and mass matrix
     void fill_in_contribution_to_jacobian_and_mass_matrix(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix)
     {
       // Call the generic routine with the flag set to 2
       fill_in_generic_residual_contribution_spherical_adv_diff(
@@ -335,7 +335,7 @@ namespace oomph
 
     /// Return FE representation of function value u(s) at local coordinate s
     inline double interpolated_u_spherical_adv_diff(
-      const Vector<double> &s) const
+      const Vector<double>& s) const
     {
       // Find number of nodes
       const unsigned n_node = nnode();
@@ -367,9 +367,9 @@ namespace oomph
     /// data. This is virtual so that it can be overloaded in the
     /// refineable version
     virtual void dinterpolated_u_adv_diff_ddata(
-      const Vector<double> &s,
-      Vector<double> &du_ddata,
-      Vector<unsigned> &global_eqn_number)
+      const Vector<double>& s,
+      Vector<double>& du_ddata,
+      Vector<unsigned>& global_eqn_number)
     {
       // Find number of nodes
       const unsigned n_node = nnode();
@@ -425,36 +425,36 @@ namespace oomph
     /// \short Shape/test functions and derivs w.r.t. to global coords at
     /// local coord. s; return  Jacobian of mapping
     virtual double dshape_and_dtest_eulerian_spherical_adv_diff(
-      const Vector<double> &s,
-      Shape &psi,
-      DShape &dpsidx,
-      Shape &test,
-      DShape &dtestdx) const = 0;
+      const Vector<double>& s,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const = 0;
 
     /// \short Shape/test functions and derivs w.r.t. to global coords at
     /// integration point ipt; return  Jacobian of mapping
     virtual double dshape_and_dtest_eulerian_at_knot_spherical_adv_diff(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidx,
-      Shape &test,
-      DShape &dtestdx) const = 0;
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const = 0;
 
     /// \short Add the element's contribution to its residual vector only
     /// (if flag=and/or element  Jacobian matrix
     virtual void fill_in_generic_residual_contribution_spherical_adv_diff(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix,
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
       unsigned flag);
 
     // Physical constants
 
     /// Pointer to global Peclet number
-    double *Pe_pt;
+    double* Pe_pt;
 
     /// Pointer to global Peclet number multiplied by Strouhal number
-    double *PeSt_pt;
+    double* PeSt_pt;
 
     /// Pointer to source function:
     SphericalAdvectionDiffusionSourceFctPt Source_fct_pt;
@@ -497,56 +497,56 @@ namespace oomph
 
     /// Broken copy constructor
     QSphericalAdvectionDiffusionElement(
-      const QSphericalAdvectionDiffusionElement<NNODE_1D> &dummy)
+      const QSphericalAdvectionDiffusionElement<NNODE_1D>& dummy)
     {
       BrokenCopy::broken_copy("QSphericalAdvectionDiffusionElement");
     }
 
     /// Broken assignment operator
-    void operator=(const QSphericalAdvectionDiffusionElement<NNODE_1D> &)
+    void operator=(const QSphericalAdvectionDiffusionElement<NNODE_1D>&)
     {
       BrokenCopy::broken_assign("QSphericalAdvectionDiffusionElement");
     }
 
     /// \short  Required  # of `values' (pinned or dofs)
     /// at node n
-    inline unsigned required_nvalue(const unsigned &n) const
+    inline unsigned required_nvalue(const unsigned& n) const
     {
       return Initial_Nvalue;
     }
 
     /// \short Output function:
     ///  r,z,u
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       SphericalAdvectionDiffusionEquations::output(outfile);
     }
 
     /// \short Output function:
     ///  r,z,u  at n_plot^2 plot points
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       SphericalAdvectionDiffusionEquations::output(outfile, n_plot);
     }
 
     /// \short C-style output function:
     ///  r,z,u
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       SphericalAdvectionDiffusionEquations::output(file_pt);
     }
 
     ///  \short C-style output function:
     ///   r,z,u at n_plot^2 plot points
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       SphericalAdvectionDiffusionEquations::output(file_pt, n_plot);
     }
 
     /// \short Output function for an exact solution:
     ///  r,z,u_exact at n_plot^2 plot points
-    void output_fct(std::ostream &outfile,
-                    const unsigned &n_plot,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& n_plot,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
     {
       SphericalAdvectionDiffusionEquations::output_fct(
@@ -557,20 +557,20 @@ namespace oomph
     /// Shape, test functions & derivs. w.r.t. to global coords. Return
     /// Jacobian.
     inline double dshape_and_dtest_eulerian_spherical_adv_diff(
-      const Vector<double> &s,
-      Shape &psi,
-      DShape &dpsidx,
-      Shape &test,
-      DShape &dtestdx) const;
+      const Vector<double>& s,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const;
 
     /// \short Shape, test functions & derivs. w.r.t. to global coords. at
     /// integration point ipt. Return Jacobian.
     inline double dshape_and_dtest_eulerian_at_knot_spherical_adv_diff(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidx,
-      Shape &test,
-      DShape &dtestdx) const;
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const;
 
   }; // End class QSphericalAdvectionDiffusionElement
 
@@ -585,11 +585,11 @@ namespace oomph
 
   template<unsigned NNODE_1D>
   double QSphericalAdvectionDiffusionElement<NNODE_1D>::
-    dshape_and_dtest_eulerian_spherical_adv_diff(const Vector<double> &s,
-                                                 Shape &psi,
-                                                 DShape &dpsidx,
-                                                 Shape &test,
-                                                 DShape &dtestdx) const
+    dshape_and_dtest_eulerian_spherical_adv_diff(const Vector<double>& s,
+                                                 Shape& psi,
+                                                 DShape& dpsidx,
+                                                 Shape& test,
+                                                 DShape& dtestdx) const
   {
     // Call the geometrical shape functions and derivatives
     double J = this->dshape_eulerian(s, psi, dpsidx);
@@ -618,11 +618,11 @@ namespace oomph
 
   template<unsigned NNODE_1D>
   double QSphericalAdvectionDiffusionElement<NNODE_1D>::
-    dshape_and_dtest_eulerian_at_knot_spherical_adv_diff(const unsigned &ipt,
-                                                         Shape &psi,
-                                                         DShape &dpsidx,
-                                                         Shape &test,
-                                                         DShape &dtestdx) const
+    dshape_and_dtest_eulerian_at_knot_spherical_adv_diff(const unsigned& ipt,
+                                                         Shape& psi,
+                                                         DShape& dpsidx,
+                                                         Shape& test,
+                                                         DShape& dtestdx) const
   {
     // Call the geometrical shape functions and derivatives
     double J = this->dshape_eulerian_at_knot(ipt, psi, dpsidx);
@@ -672,17 +672,17 @@ namespace oomph
     /// \short Function pointer to the prescribed-beta function fct(x,beta(x))
     /// -- x is a Vector!
     typedef void (*SphericalAdvectionDiffusionPrescribedBetaFctPt)(
-      const Vector<double> &x, double &beta);
+      const Vector<double>& x, double& beta);
 
     /// \short Function pointer to the prescribed-alpha function fct(x,alpha(x))
     /// -- x is a Vector!
     typedef void (*SphericalAdvectionDiffusionPrescribedAlphaFctPt)(
-      const Vector<double> &x, double &alpha);
+      const Vector<double>& x, double& alpha);
 
     /// \short Constructor, takes the pointer to the "bulk" element
     /// and the index of the face to be created
-    SphericalAdvectionDiffusionFluxElement(FiniteElement *const &bulk_el_pt,
-                                           const int &face_index);
+    SphericalAdvectionDiffusionFluxElement(FiniteElement* const& bulk_el_pt,
+                                           const int& face_index);
 
     /// Broken empty constructor
     SphericalAdvectionDiffusionFluxElement()
@@ -695,31 +695,31 @@ namespace oomph
 
     /// Broken copy constructor
     SphericalAdvectionDiffusionFluxElement(
-      const SphericalAdvectionDiffusionFluxElement &dummy)
+      const SphericalAdvectionDiffusionFluxElement& dummy)
     {
       BrokenCopy::broken_copy("SphericalAdvectionDiffusionFluxElement");
     }
 
     /// Broken assignment operator
-    void operator=(const SphericalAdvectionDiffusionFluxElement &)
+    void operator=(const SphericalAdvectionDiffusionFluxElement&)
     {
       BrokenCopy::broken_assign("SphericalAdvectionDiffusionFluxElement");
     }
 
     /// Access function for the prescribed-beta function pointer
-    SphericalAdvectionDiffusionPrescribedBetaFctPt &beta_fct_pt()
+    SphericalAdvectionDiffusionPrescribedBetaFctPt& beta_fct_pt()
     {
       return Beta_fct_pt;
     }
 
     /// Access function for the prescribed-alpha function pointer
-    SphericalAdvectionDiffusionPrescribedAlphaFctPt &alpha_fct_pt()
+    SphericalAdvectionDiffusionPrescribedAlphaFctPt& alpha_fct_pt()
     {
       return Alpha_fct_pt;
     }
 
     /// Add the element's contribution to its residual vector
-    inline void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    inline void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Call the generic residuals function with flag set to 0
       // using a dummy matrix
@@ -729,8 +729,8 @@ namespace oomph
 
     /// \short Add the element's contribution to its residual vector and
     /// its Jacobian matrix
-    inline void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                                 DenseMatrix<double> &jacobian)
+    inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                                 DenseMatrix<double>& jacobian)
     {
       // Call the generic routine with the flag set to 1
       fill_in_generic_residual_contribution_spherical_adv_diff_flux(
@@ -742,23 +742,23 @@ namespace oomph
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default (needed to break
     /// indeterminacy if bulk element is SolidElement)
-    double zeta_nodal(const unsigned &n,
-                      const unsigned &k,
-                      const unsigned &i) const
+    double zeta_nodal(const unsigned& n,
+                      const unsigned& k,
+                      const unsigned& i) const
     {
       return FaceElement::zeta_nodal(n, k, i);
     }
 
     /// \short Output function -- forward to broken version in FiniteElement
     /// until somebody decides what exactly they want to plot here...
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       FiniteElement::output(outfile);
     }
 
     /// \short Output function -- forward to broken version in FiniteElement
     /// until somebody decides what exactly they want to plot here...
-    void output(std::ostream &outfile, const unsigned &nplot)
+    void output(std::ostream& outfile, const unsigned& nplot)
     {
       FiniteElement::output(outfile, nplot);
     }
@@ -767,9 +767,9 @@ namespace oomph
     /// \short Function to compute the shape and test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
-    inline double shape_and_test(const Vector<double> &s,
-                                 Shape &psi,
-                                 Shape &test) const
+    inline double shape_and_test(const Vector<double>& s,
+                                 Shape& psi,
+                                 Shape& test) const
     {
       // Find number of nodes
       unsigned n_node = nnode();
@@ -790,9 +790,9 @@ namespace oomph
     /// \short Function to compute the shape and test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
-    inline double shape_and_test_at_knot(const unsigned &ipt,
-                                         Shape &psi,
-                                         Shape &test) const
+    inline double shape_and_test_at_knot(const unsigned& ipt,
+                                         Shape& psi,
+                                         Shape& test) const
     {
       // Find number of nodes
       unsigned n_node = nnode();
@@ -812,7 +812,7 @@ namespace oomph
 
     /// \short Function to calculate the prescribed beta at a given spatial
     /// position
-    void get_beta(const Vector<double> &x, double &beta)
+    void get_beta(const Vector<double>& x, double& beta)
     {
       // If the function pointer is zero return zero
       if (Beta_fct_pt == 0)
@@ -828,7 +828,7 @@ namespace oomph
 
     /// \short Function to calculate the prescribed alpha at a given spatial
     /// position
-    void get_alpha(const Vector<double> &x, double &alpha)
+    void get_alpha(const Vector<double>& x, double& alpha)
     {
       // If the function pointer is zero return zero
       if (Alpha_fct_pt == 0)
@@ -846,7 +846,7 @@ namespace oomph
     /// \short Add the element's contribution to its residual vector.
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void fill_in_generic_residual_contribution_spherical_adv_diff_flux(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag);
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag);
 
     /// Function pointer to the (global) prescribed-beta function
     SphericalAdvectionDiffusionPrescribedBetaFctPt Beta_fct_pt;
@@ -869,8 +869,8 @@ namespace oomph
   //===========================================================================
   template<class ELEMENT>
   SphericalAdvectionDiffusionFluxElement<ELEMENT>::
-    SphericalAdvectionDiffusionFluxElement(FiniteElement *const &bulk_el_pt,
-                                           const int &face_index) :
+    SphericalAdvectionDiffusionFluxElement(FiniteElement* const& bulk_el_pt,
+                                           const int& face_index) :
     FaceGeometry<ELEMENT>(), FaceElement()
 
   {
@@ -882,14 +882,14 @@ namespace oomph
 #ifdef PARANOID
     {
       // Check that the element is not a refineable 3d element
-      ELEMENT *elem_pt = dynamic_cast<ELEMENT *>(bulk_el_pt);
+      ELEMENT* elem_pt = dynamic_cast<ELEMENT*>(bulk_el_pt);
 
       // If it's three-d
       if (elem_pt->dim() == 3)
       {
         // Is it refineable
-        RefineableElement *ref_el_pt =
-          dynamic_cast<RefineableElement *>(elem_pt);
+        RefineableElement* ref_el_pt =
+          dynamic_cast<RefineableElement*>(elem_pt);
         if (ref_el_pt != 0)
         {
           if (this->has_hanging_nodes())
@@ -916,8 +916,8 @@ namespace oomph
     // We assume that the dimension of the full problem is the same
     // as the dimension of the node, if this is not the case you will have
     // to write custom elements, sorry
-    SphericalAdvectionDiffusionEquations *eqn_pt =
-      dynamic_cast<SphericalAdvectionDiffusionEquations *>(bulk_el_pt);
+    SphericalAdvectionDiffusionEquations* eqn_pt =
+      dynamic_cast<SphericalAdvectionDiffusionEquations*>(bulk_el_pt);
 
     // If the cast has failed die
     if (eqn_pt == 0)
@@ -950,7 +950,7 @@ namespace oomph
   template<class ELEMENT>
   void SphericalAdvectionDiffusionFluxElement<ELEMENT>::
     fill_in_generic_residual_contribution_spherical_adv_diff_flux(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag)
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag)
   {
     // Find out how many nodes there are
     const unsigned n_node = nnode();

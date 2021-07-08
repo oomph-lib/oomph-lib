@@ -82,7 +82,7 @@ namespace oomph
     /// Boundary_node_pt(b,n). Note that this is private to force
     /// the use of the add_boundary_node() function, which ensures
     /// that the reverse look-up schemes for the nodes are set up.
-    Vector<Vector<Node *>> Boundary_node_pt;
+    Vector<Vector<Node*>> Boundary_node_pt;
 
     /// Flag to indicate that the lookup schemes for elements that are adjacent
     /// to the boundaries has been set up.
@@ -90,7 +90,7 @@ namespace oomph
 
     /// \short Vector of Vector of pointers to elements on the boundaries:
     /// Boundary_element_pt(b,e)
-    Vector<Vector<FiniteElement *>> Boundary_element_pt;
+    Vector<Vector<FiniteElement*>> Boundary_element_pt;
 
     /// \short  For the e-th finite element on boundary b, this is the index of
     /// the face that lies along that boundary
@@ -99,44 +99,44 @@ namespace oomph
 #ifdef OOMPH_HAS_MPI
 
     /// Map of vectors holding the pointers to the root halo elements
-    std::map<unsigned, Vector<GeneralisedElement *>> Root_halo_element_pt;
+    std::map<unsigned, Vector<GeneralisedElement*>> Root_halo_element_pt;
 
     /// Map of vectors holding the pointers to the root haloed elements
-    std::map<unsigned, Vector<GeneralisedElement *>> Root_haloed_element_pt;
+    std::map<unsigned, Vector<GeneralisedElement*>> Root_haloed_element_pt;
 
     /// Map of vectors holding the pointers to the halo nodes
-    std::map<unsigned, Vector<Node *>> Halo_node_pt;
+    std::map<unsigned, Vector<Node*>> Halo_node_pt;
 
     /// Map of vectors holding the pointers to the haloed nodes
-    std::map<unsigned, Vector<Node *>> Haloed_node_pt;
+    std::map<unsigned, Vector<Node*>> Haloed_node_pt;
 
     /// Map of vectors holding the pointers to the shared nodes.
     /// These are all the nodes that are on two "neighbouring" processes
     /// (the halo(ed) lookup scheme depends upon which processor is in charge
     /// - a node which is on 3 processors, for example, will not feature in
     /// the halo(ed) lookup scheme between the two lowest-numbered processors)
-    std::map<unsigned, Vector<Node *>> Shared_node_pt;
+    std::map<unsigned, Vector<Node*>> Shared_node_pt;
 
     /// Pointer to communicator -- set to NULL if mesh is not distributed
-    OomphCommunicator *Comm_pt;
+    OomphCommunicator* Comm_pt;
 
     /// External halo(ed) elements are created as and when they are needed
     /// to act as source elements for the particular process's mesh.
     /// The storage is wiped and rebuilt every time the mesh is refined.
 
     /// Map of vectors holding the pointers to the external halo elements
-    std::map<unsigned, Vector<GeneralisedElement *>> External_halo_element_pt;
+    std::map<unsigned, Vector<GeneralisedElement*>> External_halo_element_pt;
 
     /// Map of vectors holding the pointers to the external haloed elements
-    std::map<unsigned, Vector<GeneralisedElement *>> External_haloed_element_pt;
+    std::map<unsigned, Vector<GeneralisedElement*>> External_haloed_element_pt;
 
     // External halo(ed) nodes are on the external halo(ed) elements
 
     /// Map of vectors holding the pointers to the external halo nodes
-    std::map<unsigned, Vector<Node *>> External_halo_node_pt;
+    std::map<unsigned, Vector<Node*>> External_halo_node_pt;
 
     /// Map of vectors holding the pointers to the external haloed nodes
-    std::map<unsigned, Vector<Node *>> External_haloed_node_pt;
+    std::map<unsigned, Vector<Node*>> External_haloed_node_pt;
 
     /// bool to indicate whether to keep all elements in a mesh as halos or not
     bool Keep_all_elements_as_halos;
@@ -152,7 +152,7 @@ namespace oomph
     /// \short Assign the global equation numbers in the Data stored at the
     /// nodes and also internal element Data. Also, build (via push_back) the
     /// Vector of pointers to the dofs (variables).
-    unsigned long assign_global_eqn_numbers(Vector<double *> &Dof_pt);
+    unsigned long assign_global_eqn_numbers(Vector<double*>& Dof_pt);
 
     /// \short Function to describe the dofs of the Mesh. The ostream
     /// specifies the output stream to which the description
@@ -162,8 +162,8 @@ namespace oomph
     /// built up incrementally as we descend through the
     /// call hierarchy of this function when called from
     /// Problem::describe_dofs(...)
-    void describe_dofs(std::ostream &out,
-                       const std::string &current_string) const;
+    void describe_dofs(std::ostream& out,
+                       const std::string& current_string) const;
 
     /// \short Function to describe the local dofs of the elements. The ostream
     /// specifies the output stream to which the description
@@ -173,18 +173,18 @@ namespace oomph
     /// built up incrementally as we descend through the
     /// call hierarchy of this function when called from
     /// Problem::describe_dofs(...)
-    void describe_local_dofs(std::ostream &out,
-                             const std::string &current_string) const;
+    void describe_local_dofs(std::ostream& out,
+                             const std::string& current_string) const;
 
     /// \short Assign the local equation numbers in all elements
     /// If the boolean argument is true then also store pointers to dofs
-    void assign_local_eqn_numbers(const bool &store_local_dof_pt);
+    void assign_local_eqn_numbers(const bool& store_local_dof_pt);
 
     /// Vector of pointers to nodes
-    Vector<Node *> Node_pt;
+    Vector<Node*> Node_pt;
 
     /// Vector of pointers to generalised elements
-    Vector<GeneralisedElement *> Element_pt;
+    Vector<GeneralisedElement*> Element_pt;
 
     /// \short Vector of boolean data that indicates whether the boundary
     /// coordinates have been set for the boundary
@@ -197,9 +197,9 @@ namespace oomph
     /// schemes and in the mesh's Node_pt vector. The new node is also
     /// addressed by node_pt on return from the function.
     void convert_to_boundary_node(
-      Node *&node_pt, const Vector<FiniteElement *> &finite_element_pt);
+      Node*& node_pt, const Vector<FiniteElement*>& finite_element_pt);
 
-    void convert_to_boundary_node(Node *&node_pt);
+    void convert_to_boundary_node(Node*& node_pt);
 
   public:
 #ifdef OOMPH_HAS_MPI
@@ -219,12 +219,12 @@ namespace oomph
     /// \short Typedef for function pointer to function that computes
     /// steady exact solution
     typedef void (FiniteElement::*SteadyExactSolutionFctPt)(
-      const Vector<double> &x, Vector<double> &soln);
+      const Vector<double>& x, Vector<double>& soln);
 
     /// \short Typedef for function pointer to function that computes unsteady
     /// exact solution
     typedef void (FiniteElement::*UnsteadyExactSolutionFctPt)(
-      const double &time, const Vector<double> &x, Vector<double> &soln);
+      const double& time, const Vector<double>& x, Vector<double>& soln);
 
     /// \short Boolean used to control warning about empty mesh level
     /// timestepper function
@@ -252,7 +252,7 @@ namespace oomph
     /// \short Constructor builds combined mesh from the meshes specified.
     /// Note: This simply merges the meshes' elements and nodes (ignoring
     /// duplicates; no boundary information etc. is created).
-    Mesh(const Vector<Mesh *> &sub_mesh_pt)
+    Mesh(const Vector<Mesh*>& sub_mesh_pt)
     {
 #ifdef OOMPH_HAS_MPI
       // Mesh hasn't been distributed: Null out pointer to communicator
@@ -265,7 +265,7 @@ namespace oomph
     /// \short Merge meshes.
     /// Note: This simply merges the meshes' elements and nodes (ignoring
     /// duplicates; no boundary information etc. is created).
-    void merge_meshes(const Vector<Mesh *> &sub_mesh_pt);
+    void merge_meshes(const Vector<Mesh*>& sub_mesh_pt);
 
     /// \short Interface for function that is used to setup the boundary
     /// information (Empty virtual function -- implement this for specific
@@ -276,13 +276,13 @@ namespace oomph
     /// next to mesh's boundaries. Doc in outfile (if it's open).
     /// (Empty virtual function -- implement this for specific
     /// Mesh classes)
-    virtual void setup_boundary_element_info(std::ostream &outfile) {}
+    virtual void setup_boundary_element_info(std::ostream& outfile) {}
 
     /// Virtual function to perform the reset boundary elements info rutines
     virtual void reset_boundary_element_info(
-      Vector<unsigned> &ntmp_boundary_elements,
-      Vector<Vector<unsigned>> &ntmp_boundary_elements_in_region,
-      Vector<FiniteElement *> &deleted_elements)
+      Vector<unsigned>& ntmp_boundary_elements,
+      Vector<Vector<unsigned>>& ntmp_boundary_elements_in_region,
+      Vector<FiniteElement*>& deleted_elements)
     {
       std::ostringstream error_stream;
       error_stream << "Empty default reset boundary element info function"
@@ -298,7 +298,7 @@ namespace oomph
     /// specifies the bulk element type (needed to create FaceElement
     /// of appropriate type on mesh boundary).
     template<class BULK_ELEMENT>
-    void doc_boundary_coordinates(const unsigned &b, std::ofstream &the_file)
+    void doc_boundary_coordinates(const unsigned& b, std::ofstream& the_file)
     {
       if (nelement() == 0) return;
       if (!Boundary_coordinate_exists[b])
@@ -318,13 +318,13 @@ namespace oomph
       for (unsigned e = 0; e < nel; e++)
       {
         // Get pointer to the bulk element that is adjacent to boundary b
-        FiniteElement *bulk_elem_pt = this->boundary_element_pt(b, e);
+        FiniteElement* bulk_elem_pt = this->boundary_element_pt(b, e);
 
         // Find the index of the face of element e along boundary b
         int face_index = this->face_index_at_boundary(b, e);
 
         // Create new face element
-        DummyFaceElement<BULK_ELEMENT> *el_pt =
+        DummyFaceElement<BULK_ELEMENT>* el_pt =
           new DummyFaceElement<BULK_ELEMENT>(bulk_elem_pt, face_index);
 
         // Specify boundary id in bulk mesh (needed to extract
@@ -367,13 +367,13 @@ namespace oomph
     /// \short Scale all nodal coordinates by given factor. Virtual
     /// so it can be overloaded in SolidMesh class where it also
     /// re-assigns the Lagrangian coordinates.
-    virtual void scale_mesh(const double &factor)
+    virtual void scale_mesh(const double& factor)
     {
       unsigned nnod = this->nnode();
       unsigned dim = this->node_pt(0)->ndim();
       for (unsigned j = 0; j < nnod; j++)
       {
-        Node *nod_pt = this->node_pt(j);
+        Node* nod_pt = this->node_pt(j);
         for (unsigned i = 0; i < dim; i++)
         {
           nod_pt->x(i) *= factor;
@@ -382,13 +382,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    Mesh(const Mesh &dummy)
+    Mesh(const Mesh& dummy)
     {
       BrokenCopy::broken_copy("Mesh");
     }
 
     /// Broken assignment operator
-    void operator=(const Mesh &)
+    void operator=(const Mesh&)
     {
       BrokenCopy::broken_assign("Mesh");
     }
@@ -435,47 +435,47 @@ namespace oomph
     }
 
     /// Return pointer to global node n
-    Node *&node_pt(const unsigned long &n)
+    Node*& node_pt(const unsigned long& n)
     {
       return Node_pt[n];
     }
 
     /// Return pointer to global node n (const version)
-    Node *node_pt(const unsigned long &n) const
+    Node* node_pt(const unsigned long& n) const
     {
       return Node_pt[n];
     }
 
     /// Return  pointer to element e
-    GeneralisedElement *&element_pt(const unsigned long &e)
+    GeneralisedElement*& element_pt(const unsigned long& e)
     {
       return Element_pt[e];
     }
 
     /// Return pointer to element e (const version)
-    GeneralisedElement *element_pt(const unsigned long &e) const
+    GeneralisedElement* element_pt(const unsigned long& e) const
     {
       return Element_pt[e];
     }
 
     /// Return reference to the Vector of elements
-    const Vector<GeneralisedElement *> &element_pt() const
+    const Vector<GeneralisedElement*>& element_pt() const
     {
       return Element_pt;
     }
 
     /// Return reference to the Vector of elements
-    Vector<GeneralisedElement *> &element_pt()
+    Vector<GeneralisedElement*>& element_pt()
     {
       return Element_pt;
     }
 
     /// \short Upcast (downcast?) to FiniteElement
     /// (needed to access FiniteElement member functions).
-    FiniteElement *finite_element_pt(const unsigned &e) const
+    FiniteElement* finite_element_pt(const unsigned& e) const
     {
 #ifdef PARANOID
-      FiniteElement *el_pt = dynamic_cast<FiniteElement *>(Element_pt[e]);
+      FiniteElement* el_pt = dynamic_cast<FiniteElement*>(Element_pt[e]);
       if (el_pt == 0)
       {
         // Error
@@ -487,24 +487,24 @@ namespace oomph
       }
       return el_pt;
 #else
-      return dynamic_cast<FiniteElement *>(Element_pt[e]);
+      return dynamic_cast<FiniteElement*>(Element_pt[e]);
 #endif
     }
 
     /// Return pointer to node n on boundary b
-    Node *&boundary_node_pt(const unsigned &b, const unsigned &n)
+    Node*& boundary_node_pt(const unsigned& b, const unsigned& n)
     {
       return Boundary_node_pt[b][n];
     }
 
     /// Return pointer to node n on boundary b
-    Node *boundary_node_pt(const unsigned &b, const unsigned &n) const
+    Node* boundary_node_pt(const unsigned& b, const unsigned& n) const
     {
       return Boundary_node_pt[b][n];
     }
 
     /// Set the number of boundaries in the mesh
-    void set_nboundary(const unsigned &nbound)
+    void set_nboundary(const unsigned& nbound)
     {
       Boundary_node_pt.resize(nbound);
       Boundary_coordinate_exists.resize(nbound, false);
@@ -515,13 +515,13 @@ namespace oomph
 
     /// \short Remove all information about nodes stored on the b-th
     /// boundary of the mesh
-    void remove_boundary_nodes(const unsigned &b);
+    void remove_boundary_nodes(const unsigned& b);
 
     //\ short Remove a node from the boundary b
-    void remove_boundary_node(const unsigned &b, Node *const &node_pt);
+    void remove_boundary_node(const unsigned& b, Node* const& node_pt);
 
     /// Add a (pointer to) a node to the b-th boundary
-    void add_boundary_node(const unsigned &b, Node *const &node_pt);
+    void add_boundary_node(const unsigned& b, Node* const& node_pt);
 
     /// Replace existing boundary node lookup schemes with new schemes created
     /// using the boundary data stored in the nodes.
@@ -535,12 +535,12 @@ namespace oomph
       const unsigned n_node = nnode();
       for (unsigned nd = 0; nd < n_node; nd++)
       {
-        Node *nd_pt = node_pt(nd);
+        Node* nd_pt = node_pt(nd);
 
         if (nd_pt->is_on_boundary())
         {
           // Get set of boundaries that the node is on
-          std::set<unsigned> *boundaries_pt;
+          std::set<unsigned>* boundaries_pt;
           nd_pt->get_boundaries_pt(boundaries_pt);
 
           // If needed then add more boundaries to this mesh
@@ -564,7 +564,7 @@ namespace oomph
     /// Indicate whether the i-th boundary has an intrinsic coordinate.
     // By default, if the array Boundary_coordinate has not been resized,
     // return false
-    bool boundary_coordinate_exists(const unsigned &i) const
+    bool boundary_coordinate_exists(const unsigned& i) const
     {
       if (Boundary_coordinate_exists.empty())
       {
@@ -610,13 +610,13 @@ namespace oomph
     unsigned nodal_dimension() const;
 
     /// Add a (pointer to a) node to the mesh
-    void add_node_pt(Node *const &node_pt)
+    void add_node_pt(Node* const& node_pt)
     {
       Node_pt.push_back(node_pt);
     }
 
     /// Add a (pointer to) an element to the mesh
-    void add_element_pt(GeneralisedElement *const &element_pt)
+    void add_element_pt(GeneralisedElement* const& element_pt)
     {
       Element_pt.push_back(element_pt);
     }
@@ -637,22 +637,22 @@ namespace oomph
     /// the bool flag is set to true. Such calls are typically made
     /// when the initial mesh is created and/or after a mesh has been
     /// refined repeatedly before the start of the computation.
-    virtual void node_update(const bool &update_all_solid_nodes = false);
+    virtual void node_update(const bool& update_all_solid_nodes = false);
 
     /// \short Re-order nodes in the order in which they appear in elements --
     /// can be overloaded for more efficient re-ordering
-    virtual void reorder_nodes(const bool &use_old_ordering = true);
+    virtual void reorder_nodes(const bool& use_old_ordering = true);
 
     /// \short Get a reordering of the nodes in the order in which they
     /// appear in elements -- can be overloaded for more efficient
     /// re-ordering
-    virtual void get_node_reordering(Vector<Node *> &reordering,
-                                     const bool &use_old_ordering = true) const;
+    virtual void get_node_reordering(Vector<Node*>& reordering,
+                                     const bool& use_old_ordering = true) const;
 
     /// \short Constuct a Mesh of FACE_ELEMENTs along the b-th boundary
     /// of the mesh (which contains elements of type BULK_ELEMENT)
     template<class BULK_ELEMENT, template<class> class FACE_ELEMENT>
-    void build_face_mesh(const unsigned &b, Mesh *const &face_mesh_pt)
+    void build_face_mesh(const unsigned& b, Mesh* const& face_mesh_pt)
     {
       // Find the number of nodes on the boundary
       unsigned nbound_node = nboundary_node(b);
@@ -668,7 +668,7 @@ namespace oomph
       for (unsigned e = 0; e < nbound_element; e++)
       {
         // Create the FaceElement
-        FACE_ELEMENT<BULK_ELEMENT> *face_element_pt =
+        FACE_ELEMENT<BULK_ELEMENT>* face_element_pt =
           new FACE_ELEMENT<BULK_ELEMENT>(boundary_element_pt(b, e),
                                          face_index_at_boundary(b, e));
 
@@ -690,7 +690,7 @@ namespace oomph
 
     /// \short Determine max and min area for all FiniteElements in the mesh
     /// (non-FiniteElements are ignored)
-    void max_and_min_element_size(double &max_size, double &min_size)
+    void max_and_min_element_size(double& max_size, double& min_size)
     {
       max_size = 0.0;
       min_size = DBL_MAX;
@@ -711,7 +711,7 @@ namespace oomph
       unsigned nel = nelement();
       for (unsigned e = 0; e < nel; e++)
       {
-        FiniteElement *fe_pt = finite_element_pt(e);
+        FiniteElement* fe_pt = finite_element_pt(e);
         if (fe_pt != 0)
         {
           size += fe_pt->size();
@@ -728,8 +728,8 @@ namespace oomph
     /// mode) during the assembly of the elements' Jacobian matrices.
     /// Inverted elements are output in inverted_element_file (if the
     /// stream is open).
-    void check_inverted_elements(bool &mesh_has_inverted_elements,
-                                 std::ofstream &inverted_element_file);
+    void check_inverted_elements(bool& mesh_has_inverted_elements,
+                                 std::ofstream& inverted_element_file);
 
     /// \short Check for inverted elements and report outcome
     /// in boolean variable. This visits all elements at their
@@ -737,7 +737,7 @@ namespace oomph
     /// mapping between local and global coordinates is positive --
     /// using the same test that would be carried out (but only in PARANOID
     /// mode) during the assembly of the elements' Jacobian matrices.
-    void check_inverted_elements(bool &mesh_has_inverted_elements)
+    void check_inverted_elements(bool& mesh_has_inverted_elements)
     {
       std::ofstream inverted_element_file;
       check_inverted_elements(mesh_has_inverted_elements,
@@ -746,18 +746,18 @@ namespace oomph
 
     /// \short Check for repeated nodes within a given spatial tolerance.
     /// Return (0/1) for (pass/fail).
-    unsigned check_for_repeated_nodes(const double &epsilon = 1.0e-12)
+    unsigned check_for_repeated_nodes(const double& epsilon = 1.0e-12)
     {
       oomph_info << "\n\nStarting check for repeated nodes...";
       bool failed = false;
       unsigned nnod = nnode();
       for (unsigned j = 0; j < nnod; j++)
       {
-        Node *nod1_pt = this->node_pt(j);
+        Node* nod1_pt = this->node_pt(j);
         unsigned dim = nod1_pt->ndim();
         for (unsigned k = j + 1; k < nnod; k++)
         {
-          Node *nod2_pt = this->node_pt(k);
+          Node* nod2_pt = this->node_pt(k);
           double dist = 0.0;
           for (unsigned i = 0; i < dim; i++)
           {
@@ -818,7 +818,7 @@ namespace oomph
     /// \short Prune nodes. Nodes that have been marked as obsolete are removed
     /// from the mesh (and its boundary-node scheme). Returns vector
     /// of pointers to deleted nodes.
-    Vector<Node *> prune_dead_nodes();
+    Vector<Node*> prune_dead_nodes();
 
     /// Return number of boundaries
     unsigned nboundary() const
@@ -827,14 +827,14 @@ namespace oomph
     }
 
     /// Return number of nodes on a particular boundary
-    unsigned long nboundary_node(const unsigned &ibound) const
+    unsigned long nboundary_node(const unsigned& ibound) const
     {
       return Boundary_node_pt[ibound].size();
     }
 
     /// Return pointer to e-th finite element on boundary b
-    FiniteElement *boundary_element_pt(const unsigned &b,
-                                       const unsigned &e) const
+    FiniteElement* boundary_element_pt(const unsigned& b,
+                                       const unsigned& e) const
     {
 #ifdef PARANOID
       if (!Lookup_for_elements_next_boundary_is_setup)
@@ -851,7 +851,7 @@ namespace oomph
     /// \short Find a node not on any boundary in mesh_pt (useful for pinning
     /// a single node in a purely Neumann problem so that it is fully
     /// determined).
-    Node *get_some_non_boundary_node() const
+    Node* get_some_non_boundary_node() const
     {
       for (unsigned nd = 0, nnd = nnode(); nd < nnd; nd++)
       {
@@ -870,7 +870,7 @@ namespace oomph
     }
 
     /// Return number of finite elements that are adjacent to boundary b
-    unsigned nboundary_element(const unsigned &b) const
+    unsigned nboundary_element(const unsigned& b) const
     {
 #ifdef PARANOID
       if (!Lookup_for_elements_next_boundary_is_setup)
@@ -887,7 +887,7 @@ namespace oomph
     /// \short For the e-th finite element on boundary b, return int to indicate
     /// the face_index of the face adjacent to the boundary. This is consistent
     /// with input required during the generation of FaceElements.
-    int face_index_at_boundary(const unsigned &b, const unsigned &e) const
+    int face_index_at_boundary(const unsigned& b, const unsigned& e) const
     {
 #ifdef PARANOID
       if (!Lookup_for_elements_next_boundary_is_setup)
@@ -902,12 +902,12 @@ namespace oomph
     }
 
     /// Dump the data in the mesh into a file for restart
-    virtual void dump(std::ofstream &dump_file,
-                      const bool &use_old_ordering = true) const;
+    virtual void dump(std::ofstream& dump_file,
+                      const bool& use_old_ordering = true) const;
 
     /// Dump the data in the mesh into a file for restart
-    void dump(const std::string &dump_file_name,
-              const bool &use_old_ordering = true) const
+    void dump(const std::string& dump_file_name,
+              const bool& use_old_ordering = true) const
     {
       std::ofstream dump_stream(dump_file_name.c_str());
 #ifdef PARANOID
@@ -922,14 +922,14 @@ namespace oomph
     }
 
     /// \short Read solution from restart file
-    virtual void read(std::ifstream &restart_file);
+    virtual void read(std::ifstream& restart_file);
 
     /// \short Output in paraview format into specified file. Breaks up each
     /// element into sub-elements for plotting purposes. We assume
     /// that all elements are of the same type (fct will break
     /// break (in paranoid mode) if paraview output fcts of the
     /// elements are inconsistent).
-    void output_paraview(std::ofstream &file_out, const unsigned &nplot) const;
+    void output_paraview(std::ofstream& file_out, const unsigned& nplot) const;
 
     /// \short Output in paraview format into specified file. Breaks up each
     /// element into sub-elements for plotting purposes. We assume
@@ -937,24 +937,24 @@ namespace oomph
     /// break (in paranoid mode) if paraview output fcts of the
     /// elements are inconsistent).
     void output_fct_paraview(
-      std::ofstream &file_out,
-      const unsigned &nplot,
+      std::ofstream& file_out,
+      const unsigned& nplot,
       FiniteElement::SteadyExactSolutionFctPt exact_soln_pt) const;
 
     /// Output for all elements
-    void output(std::ostream &outfile);
+    void output(std::ostream& outfile);
 
     /// Output at f(n_plot) points in each element
-    void output(std::ostream &outfile, const unsigned &n_plot);
+    void output(std::ostream& outfile, const unsigned& n_plot);
 
     /// Output for all elements (C-style output)
-    void output(FILE *file_pt);
+    void output(FILE* file_pt);
 
     /// Output at f(n_plot) points in each element (C-style output)
-    void output(FILE *file_pt, const unsigned &nplot);
+    void output(FILE* file_pt, const unsigned& nplot);
 
     /// Output for all elements
-    void output(const std::string &output_filename)
+    void output(const std::string& output_filename)
     {
       std::ofstream outfile;
       outfile.open(output_filename.c_str());
@@ -963,7 +963,7 @@ namespace oomph
     }
 
     /// Output at f(n_plot) points in each element
-    void output(const std::string &output_filename, const unsigned &n_plot)
+    void output(const std::string& output_filename, const unsigned& n_plot)
     {
       std::ofstream outfile;
       outfile.open(output_filename.c_str());
@@ -972,23 +972,23 @@ namespace oomph
     }
 
     /// Output a given Vector function at f(n_plot) points in each element
-    void output_fct(std::ostream &outfile,
-                    const unsigned &n_plot,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& n_plot,
                     FiniteElement::SteadyExactSolutionFctPt);
 
     /// \short Output a given time-dep. Vector function at f(n_plot) points in
     /// each element
-    void output_fct(std::ostream &outfile,
-                    const unsigned &n_plot,
-                    const double &time,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& n_plot,
+                    const double& time,
                     FiniteElement::UnsteadyExactSolutionFctPt);
 
     /// Output the nodes on the boundaries (into separate tecplot zones)
-    void output_boundaries(std::ostream &outfile);
+    void output_boundaries(std::ostream& outfile);
 
     /// Output the nodes on the boundaries (into separate tecplot zones).
     /// Specify filename
-    void output_boundaries(const std::string &output_filename)
+    void output_boundaries(const std::string& output_filename)
     {
       std::ofstream outfile;
       outfile.open(output_filename.c_str());
@@ -1011,7 +1011,7 @@ namespace oomph
     /// \short Set the timestepper associated with all nodal and elemental
     /// data stored in the mesh.
     void set_nodal_and_elemental_time_stepper(
-      TimeStepper *const &time_stepper_pt, const bool &preserve_existing_data)
+      TimeStepper* const& time_stepper_pt, const bool& preserve_existing_data)
     {
       this->set_nodal_time_stepper(time_stepper_pt, preserve_existing_data);
       this->set_elemental_internal_time_stepper(time_stepper_pt,
@@ -1023,30 +1023,30 @@ namespace oomph
     /// is virtual so that it can be overloaded in the appropriate Meshes.
     /// Examples include the SpineMeshes and adaptive triangle and tet meshes
     virtual void set_mesh_level_time_stepper(
-      TimeStepper *const &time_stepper_pt, const bool &preserve_existing_data);
+      TimeStepper* const& time_stepper_pt, const bool& preserve_existing_data);
 
     /// \short Set consistent values for pinned data in continuation
     void set_consistent_pinned_values_for_continuation(
-      ContinuationStorageScheme *const &continuation_stepper_pt);
+      ContinuationStorageScheme* const& continuation_stepper_pt);
 
     /// \short Does the double pointer correspond to any mesh data
-    bool does_pointer_correspond_to_mesh_data(double *const &parameter_pt);
+    bool does_pointer_correspond_to_mesh_data(double* const& parameter_pt);
 
     /// \short Set the timestepper associated with the nodal data in the mesh
-    void set_nodal_time_stepper(TimeStepper *const &time_stepper_pt,
-                                const bool &preserve_existing_data);
+    void set_nodal_time_stepper(TimeStepper* const& time_stepper_pt,
+                                const bool& preserve_existing_data);
 
     /// \short Set the timestepper associated with the internal data stored
     /// within elements in the meah
     void set_elemental_internal_time_stepper(
-      TimeStepper *const &time_stepper_pt, const bool &preserve_existing_data);
+      TimeStepper* const& time_stepper_pt, const bool& preserve_existing_data);
 
     /// \short Compute norm of solution by summing contributions of
     /// compute_norm(...) for all constituent elements in the mesh.
     /// What that norm means depends on what's defined in the element's
     /// function; may need to take the square root afterwards if the elements
     /// compute the square of the L2 norm, say.
-    virtual void compute_norm(double &norm)
+    virtual void compute_norm(double& norm)
     {
       // Initialse the norm
       norm = 0.0;
@@ -1058,7 +1058,7 @@ namespace oomph
       unsigned long n_element = Element_pt.size();
       for (unsigned long e = 0; e < n_element; e++)
       {
-        GeneralisedElement *el_pt = Element_pt[e];
+        GeneralisedElement* el_pt = Element_pt[e];
 
 #ifdef OOMPH_HAS_MPI
         // Compute error for each non-halo element
@@ -1074,11 +1074,11 @@ namespace oomph
     /// \short Plot error when compared against a given exact solution.
     ///  Also returns the norm  of the error and that of the exact solution
     virtual void compute_error(
-      std::ostream &outfile,
+      std::ostream& outfile,
       FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
-      const double &time,
-      double &error,
-      double &norm)
+      const double& time,
+      double& error,
+      double& norm)
     {
       // Initialse the norm and error
       norm = 0.0;
@@ -1091,7 +1091,7 @@ namespace oomph
       for (unsigned long e = 0; e < Element_pt_range; e++)
       {
         // Try to cast to FiniteElement
-        FiniteElement *el_pt = dynamic_cast<FiniteElement *>(Element_pt[e]);
+        FiniteElement* el_pt = dynamic_cast<FiniteElement*>(Element_pt[e]);
         if (el_pt == 0)
         {
           throw OomphLibError(
@@ -1120,10 +1120,10 @@ namespace oomph
     ///  exact solution. Also returns the norm  of the error and
     ///  that of the exact solution
     virtual void compute_error(
-      std::ostream &outfile,
+      std::ostream& outfile,
       FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-      double &error,
-      double &norm)
+      double& error,
+      double& norm)
     {
       // Initialise norm and error
       norm = 0.0;
@@ -1136,7 +1136,7 @@ namespace oomph
       for (unsigned long e = 0; e < Element_pt_range; e++)
       {
         // Try to cast to FiniteElement
-        FiniteElement *el_pt = dynamic_cast<FiniteElement *>(Element_pt[e]);
+        FiniteElement* el_pt = dynamic_cast<FiniteElement*>(Element_pt[e]);
         if (el_pt == 0)
         {
           throw OomphLibError(
@@ -1165,11 +1165,11 @@ namespace oomph
     ///  that of the exact solution. Version with vectors of norms and errors so
     ///  that different variables' norms and errors can be returned individually
     virtual void compute_error(
-      std::ostream &outfile,
+      std::ostream& outfile,
       FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
-      const double &time,
-      Vector<double> &error,
-      Vector<double> &norm)
+      const double& time,
+      Vector<double>& error,
+      Vector<double>& norm)
     {
       // Initialise norm and error
       unsigned n_error = error.size();
@@ -1190,7 +1190,7 @@ namespace oomph
       for (unsigned long e = 0; e < Element_pt_range; e++)
       {
         // Try to cast to FiniteElement
-        FiniteElement *el_pt = dynamic_cast<FiniteElement *>(Element_pt[e]);
+        FiniteElement* el_pt = dynamic_cast<FiniteElement*>(Element_pt[e]);
         if (el_pt == 0)
         {
           throw OomphLibError(
@@ -1231,10 +1231,10 @@ namespace oomph
     ///  that of the exact solution. Version with vectors of norms and errors so
     ///  that different variables' norms and errors can be returned individually
     virtual void compute_error(
-      std::ostream &outfile,
+      std::ostream& outfile,
       FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-      Vector<double> &error,
-      Vector<double> &norm)
+      Vector<double>& error,
+      Vector<double>& norm)
     {
       // Initialise norm and error
       unsigned n_error = error.size();
@@ -1255,7 +1255,7 @@ namespace oomph
       for (unsigned long e = 0; e < Element_pt_range; e++)
       {
         // Try to cast to FiniteElement
-        FiniteElement *el_pt = dynamic_cast<FiniteElement *>(Element_pt[e]);
+        FiniteElement* el_pt = dynamic_cast<FiniteElement*>(Element_pt[e]);
         if (el_pt == 0)
         {
           throw OomphLibError(
@@ -1304,7 +1304,7 @@ namespace oomph
 
     /// Read-only access fct to communicator (Null if mesh is not distributed,
     /// i.e. if we don't have mpi).
-    OomphCommunicator *communicator_pt() const
+    OomphCommunicator* communicator_pt() const
     {
 #ifdef OOMPH_HAS_MPI
       return Comm_pt;
@@ -1318,7 +1318,7 @@ namespace oomph
     /// Function to set communicator (mesh is assumed to be distributed if the
     /// communicator pointer is non-null). Only defined if mpi is enabled
     /// becaus Comm_pt itself is only defined when mpi is enabled.
-    void set_communicator_pt(OomphCommunicator *comm_pt)
+    void set_communicator_pt(OomphCommunicator* comm_pt)
     {
       Comm_pt = comm_pt;
     }
@@ -1339,19 +1339,19 @@ namespace oomph
     /// \short Distribute the problem and doc; make this virtual to allow
     /// overloading for particular meshes where further work is required.
     /// Add to vector of pointers to deleted elements.
-    virtual void distribute(OomphCommunicator *comm_pt,
-                            const Vector<unsigned> &element_domain,
-                            Vector<GeneralisedElement *> &deleted_element_pt,
-                            DocInfo &doc_info,
-                            const bool &report_stats,
-                            const bool &overrule_keep_as_halo_element_status);
+    virtual void distribute(OomphCommunicator* comm_pt,
+                            const Vector<unsigned>& element_domain,
+                            Vector<GeneralisedElement*>& deleted_element_pt,
+                            DocInfo& doc_info,
+                            const bool& report_stats,
+                            const bool& overrule_keep_as_halo_element_status);
 
     /// \short Distribute the problem
     /// Add to vector of pointers to deleted elements.
-    void distribute(OomphCommunicator *comm_pt,
-                    const Vector<unsigned> &element_domain,
-                    Vector<GeneralisedElement *> &deleted_element_pt,
-                    const bool &report_stats = false)
+    void distribute(OomphCommunicator* comm_pt,
+                    const Vector<unsigned>& element_domain,
+                    Vector<GeneralisedElement*>& deleted_element_pt,
+                    const bool& report_stats = false)
     {
       DocInfo doc_info;
       doc_info.disable_doc();
@@ -1371,8 +1371,8 @@ namespace oomph
     /// relative to it will be possible once this function
     /// has been called.
     void prune_halo_elements_and_nodes(
-      Vector<GeneralisedElement *> &deleted_element_pt,
-      const bool &report_stats = false)
+      Vector<GeneralisedElement*>& deleted_element_pt,
+      const bool& report_stats = false)
     {
       DocInfo doc_info;
       doc_info.disable_doc();
@@ -1386,36 +1386,36 @@ namespace oomph
     /// relative to it will be possible once this function
     /// has been called.
     void prune_halo_elements_and_nodes(
-      Vector<GeneralisedElement *> &deleted_element_pt,
-      DocInfo &doc_info,
-      const bool &report_stats);
+      Vector<GeneralisedElement*>& deleted_element_pt,
+      DocInfo& doc_info,
+      const bool& report_stats);
 
     /// \short Get efficiency of mesh distribution: In an ideal distribution
     /// without halo overhead, each processor would only hold its own
     /// elements. Efficieny per processor =  (number of non-halo elements)/
     /// (total number of elements).
-    void get_efficiency_of_mesh_distribution(double &av_efficiency,
-                                             double &max_efficiency,
-                                             double &min_efficiency);
+    void get_efficiency_of_mesh_distribution(double& av_efficiency,
+                                             double& max_efficiency,
+                                             double& min_efficiency);
 
     /// Doc the mesh distribution, to be processed with tecplot macros
-    void doc_mesh_distribution(DocInfo &doc_info);
+    void doc_mesh_distribution(DocInfo& doc_info);
 
     /// Check halo and shared schemes on the mesh
-    void check_halo_schemes(DocInfo &doc_info,
-                            double &max_permitted_error_for_halo_check);
+    void check_halo_schemes(DocInfo& doc_info,
+                            double& max_permitted_error_for_halo_check);
 
     /// \short Classify the halo and haloed nodes in the mesh. Virtual
     /// so it can be overloaded to perform additional functionality
     /// (such as synchronising hanging nodes) in refineable meshes, say.
-    virtual void classify_halo_and_haloed_nodes(DocInfo &doc_info,
-                                                const bool &report_stats);
+    virtual void classify_halo_and_haloed_nodes(DocInfo& doc_info,
+                                                const bool& report_stats);
 
     /// Classify the halo and haloed nodes in the mesh. Virtual
     /// so it can be overloaded to perform additional functionality
     /// (such as synchronising hanging nodes) in refineable meshes, say.
     virtual void classify_halo_and_haloed_nodes(
-      const bool &report_stats = false)
+      const bool& report_stats = false)
     {
       DocInfo doc_info;
       doc_info.disable_doc();
@@ -1433,32 +1433,32 @@ namespace oomph
     /// necessarily know that it shares a node with processor q. This
     /// information can be required, e.g. when synchronising hanging node
     /// schemes over all processors.
-    void synchronise_shared_nodes(const bool &report_stats);
+    void synchronise_shared_nodes(const bool& report_stats);
 
     /// \short Get all the halo data stored in the mesh and add pointers to
     /// the data to the map, indexed by global equation number
-    void get_all_halo_data(std::map<unsigned, double *> &map_of_halo_data);
+    void get_all_halo_data(std::map<unsigned, double*>& map_of_halo_data);
 
     /// \short Return vector of halo elements in this Mesh
     /// whose non-halo counterpart is held on processor p.
-    Vector<GeneralisedElement *> halo_element_pt(const unsigned &p)
+    Vector<GeneralisedElement*> halo_element_pt(const unsigned& p)
     {
       // Prepare vector
-      Vector<GeneralisedElement *> vec_el_pt;
+      Vector<GeneralisedElement*> vec_el_pt;
 
       // Loop over all root halo elements
       unsigned nelem = nroot_halo_element(p);
       for (unsigned e = 0; e < nelem; e++)
       {
-        GeneralisedElement *el_pt = root_halo_element_pt(p, e);
+        GeneralisedElement* el_pt = root_halo_element_pt(p, e);
 
         // Is it a refineable element?
-        RefineableElement *ref_el_pt = dynamic_cast<RefineableElement *>(el_pt);
+        RefineableElement* ref_el_pt = dynamic_cast<RefineableElement*>(el_pt);
         if (ref_el_pt != 0)
         {
           // Vector of pointers to leaves in tree emanating from
           // current root halo element
-          Vector<Tree *> leaf_pt;
+          Vector<Tree*> leaf_pt;
           ref_el_pt->tree_pt()->stick_leaves_into_vector(leaf_pt);
 
           // Loop over leaves and add their objects (the finite elements)
@@ -1479,24 +1479,24 @@ namespace oomph
 
     /// \short Return vector of haloed elements in this Mesh
     /// whose haloing counterpart is held on processor p.
-    Vector<GeneralisedElement *> haloed_element_pt(const unsigned &p)
+    Vector<GeneralisedElement*> haloed_element_pt(const unsigned& p)
     {
       // Prepare vector
-      Vector<GeneralisedElement *> vec_el_pt;
+      Vector<GeneralisedElement*> vec_el_pt;
 
       // Loop over all root haloed elements
       unsigned nelem = nroot_haloed_element(p);
       for (unsigned e = 0; e < nelem; e++)
       {
-        GeneralisedElement *el_pt = root_haloed_element_pt(p, e);
+        GeneralisedElement* el_pt = root_haloed_element_pt(p, e);
 
         // Is it a refineable element?
-        RefineableElement *ref_el_pt = dynamic_cast<RefineableElement *>(el_pt);
+        RefineableElement* ref_el_pt = dynamic_cast<RefineableElement*>(el_pt);
         if (ref_el_pt != 0)
         {
           // Vector of pointers to leaves in tree emanating from
           // current root haloed element
-          Vector<Tree *> leaf_pt;
+          Vector<Tree*> leaf_pt;
           ref_el_pt->tree_pt()->stick_leaves_into_vector(leaf_pt);
 
           // Loop over leaves and add their objects (the finite elements)
@@ -1532,7 +1532,7 @@ namespace oomph
     unsigned nroot_halo_element()
     {
       unsigned n = 0;
-      for (std::map<unsigned, Vector<GeneralisedElement *>>::iterator it =
+      for (std::map<unsigned, Vector<GeneralisedElement*>>::iterator it =
              Root_halo_element_pt.begin();
            it != Root_halo_element_pt.end();
            it++)
@@ -1544,29 +1544,29 @@ namespace oomph
 
     /// \short Number of root halo elements in this Mesh whose non-halo
     /// counterpart is held on processor p.
-    unsigned nroot_halo_element(const unsigned &p)
+    unsigned nroot_halo_element(const unsigned& p)
     {
       return Root_halo_element_pt[p].size();
     }
 
     /// \short Vector of pointers to root halo elements in this Mesh
     /// whose non-halo counterpart is held on processor p.
-    Vector<GeneralisedElement *> root_halo_element_pt(const unsigned &p)
+    Vector<GeneralisedElement*> root_halo_element_pt(const unsigned& p)
     {
       return Root_halo_element_pt[p];
     }
 
     /// \short Access fct to the e-th root halo element in this Mesh
     /// whose non-halo counterpart is held on processor p.
-    GeneralisedElement *&root_halo_element_pt(const unsigned &p,
-                                              const unsigned &e)
+    GeneralisedElement*& root_halo_element_pt(const unsigned& p,
+                                              const unsigned& e)
     {
       return Root_halo_element_pt[p][e];
     }
 
     /// \short Add root halo element whose non-halo counterpart is held
     /// on processor p to this Mesh.
-    void add_root_halo_element_pt(const unsigned &p, GeneralisedElement *&el_pt)
+    void add_root_halo_element_pt(const unsigned& p, GeneralisedElement*& el_pt)
     {
       Root_halo_element_pt[p].push_back(el_pt);
       el_pt->set_halo(p);
@@ -1576,7 +1576,7 @@ namespace oomph
     unsigned nhalo_node()
     {
       unsigned n = 0;
-      for (std::map<unsigned, Vector<Node *>>::iterator it =
+      for (std::map<unsigned, Vector<Node*>>::iterator it =
              Halo_node_pt.begin();
            it != Halo_node_pt.end();
            it++)
@@ -1588,10 +1588,10 @@ namespace oomph
 
     /// \short Number of halo nodes in this Mesh whose non-halo counterpart
     /// is held on processor p.
-    unsigned nhalo_node(const unsigned &p)
+    unsigned nhalo_node(const unsigned& p)
     {
       // Memory saving version of: return Halo_node_pt[p].size();
-      std::map<unsigned, Vector<Node *>>::iterator it = Halo_node_pt.find(p);
+      std::map<unsigned, Vector<Node*>>::iterator it = Halo_node_pt.find(p);
       if (it == Halo_node_pt.end())
       {
         return 0;
@@ -1601,14 +1601,14 @@ namespace oomph
 
     /// \short Add halo node whose non-halo counterpart is held
     /// on processor p to the storage scheme for halo nodes.
-    void add_halo_node_pt(const unsigned &p, Node *&nod_pt)
+    void add_halo_node_pt(const unsigned& p, Node*& nod_pt)
     {
       Halo_node_pt[p].push_back(nod_pt);
     }
 
     /// \short  Access fct to the j-th halo node in this Mesh
     /// whose non-halo counterpart is held on processor p.
-    Node *halo_node_pt(const unsigned &p, const unsigned &j)
+    Node* halo_node_pt(const unsigned& p, const unsigned& j)
     {
       return Halo_node_pt[p][j];
     }
@@ -1617,7 +1617,7 @@ namespace oomph
     unsigned nroot_haloed_element()
     {
       unsigned n = 0;
-      for (std::map<unsigned, Vector<GeneralisedElement *>>::iterator it =
+      for (std::map<unsigned, Vector<GeneralisedElement*>>::iterator it =
              Root_haloed_element_pt.begin();
            it != Root_haloed_element_pt.end();
            it++)
@@ -1629,10 +1629,10 @@ namespace oomph
 
     /// \short Number of root haloed elements in this Mesh whose non-halo
     /// counterpart is held on processor p.
-    unsigned nroot_haloed_element(const unsigned &p)
+    unsigned nroot_haloed_element(const unsigned& p)
     {
       // Memory saving version of: return Root_haloed_element_pt[p].size();
-      std::map<unsigned, Vector<GeneralisedElement *>>::iterator it =
+      std::map<unsigned, Vector<GeneralisedElement*>>::iterator it =
         Root_haloed_element_pt.find(p);
       if (it == Root_haloed_element_pt.end())
       {
@@ -1643,14 +1643,14 @@ namespace oomph
 
     /// \short Vector of pointers to root haloed elements in this Mesh
     /// whose non-halo counterpart is held on processor p.
-    Vector<GeneralisedElement *> root_haloed_element_pt(const unsigned &p)
+    Vector<GeneralisedElement*> root_haloed_element_pt(const unsigned& p)
     {
       // Memory saving version of:  return Root_haloed_element_pt[p];
-      std::map<unsigned, Vector<GeneralisedElement *>>::iterator it =
+      std::map<unsigned, Vector<GeneralisedElement*>>::iterator it =
         Root_haloed_element_pt.find(p);
       if (it == Root_haloed_element_pt.end())
       {
-        Vector<GeneralisedElement *> tmp;
+        Vector<GeneralisedElement*> tmp;
         return tmp;
       }
       return (*it).second;
@@ -1658,8 +1658,8 @@ namespace oomph
 
     /// \short Access fct to the e-th root haloed element in this Mesh
     /// whose non-halo counterpart is held on processor p.
-    GeneralisedElement *&root_haloed_element_pt(const unsigned &p,
-                                                const unsigned &e)
+    GeneralisedElement*& root_haloed_element_pt(const unsigned& p,
+                                                const unsigned& e)
     {
       return Root_haloed_element_pt[p][e];
     }
@@ -1669,8 +1669,8 @@ namespace oomph
     /// Note: This does not add the element to the storage scheme
     /// for elements as it's understood to naturally live on this
     /// processor anyway!
-    void add_root_haloed_element_pt(const unsigned &p,
-                                    GeneralisedElement *&el_pt)
+    void add_root_haloed_element_pt(const unsigned& p,
+                                    GeneralisedElement*& el_pt)
     {
       Root_haloed_element_pt[p].push_back(el_pt);
     }
@@ -1679,7 +1679,7 @@ namespace oomph
     unsigned nhaloed_node()
     {
       unsigned n = 0;
-      for (std::map<unsigned, Vector<Node *>>::iterator it =
+      for (std::map<unsigned, Vector<Node*>>::iterator it =
              Haloed_node_pt.begin();
            it != Haloed_node_pt.end();
            it++)
@@ -1691,10 +1691,10 @@ namespace oomph
 
     /// \short Number of haloed nodes in this Mesh whose haloed counterpart
     /// is held on processor p.
-    unsigned nhaloed_node(const unsigned &p)
+    unsigned nhaloed_node(const unsigned& p)
     {
       // Memory saving version of: return Haloed_node_pt[p].size();
-      std::map<unsigned, Vector<Node *>>::iterator it = Haloed_node_pt.find(p);
+      std::map<unsigned, Vector<Node*>>::iterator it = Haloed_node_pt.find(p);
       if (it == Haloed_node_pt.end())
       {
         return 0;
@@ -1704,14 +1704,14 @@ namespace oomph
 
     /// \short Access fct to the j-th haloed node in this Mesh
     /// whose halo counterpart is held on processor p.
-    Node *haloed_node_pt(const unsigned &p, const unsigned &j)
+    Node* haloed_node_pt(const unsigned& p, const unsigned& j)
     {
       return Haloed_node_pt[p][j];
     }
 
     /// \short Add haloed node whose halo counterpart is held
     /// on processor p to the storage scheme for haloed nodes.
-    void add_haloed_node_pt(const unsigned &p, Node *&nod_pt)
+    void add_haloed_node_pt(const unsigned& p, Node*& nod_pt)
     {
       Haloed_node_pt[p].push_back(nod_pt);
     }
@@ -1749,7 +1749,7 @@ namespace oomph
     unsigned nshared_node()
     {
       unsigned n = 0;
-      for (std::map<unsigned, Vector<Node *>>::iterator it =
+      for (std::map<unsigned, Vector<Node*>>::iterator it =
              Shared_node_pt.begin();
            it != Shared_node_pt.end();
            it++)
@@ -1762,7 +1762,7 @@ namespace oomph
     /// \short Doc shared nodes
     void doc_shared_nodes()
     {
-      for (std::map<unsigned, Vector<Node *>>::iterator it =
+      for (std::map<unsigned, Vector<Node*>>::iterator it =
              Shared_node_pt.begin();
            it != Shared_node_pt.end();
            it++)
@@ -1771,7 +1771,7 @@ namespace oomph
         for (unsigned j = 0; j < n; j++)
         {
           oomph_info << "Shared node with proc " << it->first << " ";
-          Node *nod_pt = it->second[j];
+          Node* nod_pt = it->second[j];
           unsigned ndim = nod_pt->ndim();
           for (unsigned i = 0; i < ndim; i++)
           {
@@ -1785,10 +1785,10 @@ namespace oomph
 
     /// \short Number of shared nodes in this Mesh who have a counterpart
     /// on processor p.
-    unsigned nshared_node(const unsigned &p)
+    unsigned nshared_node(const unsigned& p)
     {
       // Memory saving version of: return Shared_node_pt[p].size();
-      std::map<unsigned, Vector<Node *>>::iterator it = Shared_node_pt.find(p);
+      std::map<unsigned, Vector<Node*>>::iterator it = Shared_node_pt.find(p);
       if (it == Shared_node_pt.end())
       {
         return 0;
@@ -1798,7 +1798,7 @@ namespace oomph
 
     /// \short Access fct to the j-th shared node in this Mesh
     /// who has a counterpart on processor p.
-    Node *shared_node_pt(const unsigned &p, const unsigned &j)
+    Node* shared_node_pt(const unsigned& p, const unsigned& j)
     {
       return Shared_node_pt[p][j];
     }
@@ -1807,7 +1807,7 @@ namespace oomph
     /// Required for faster search in
     /// Missing_masters_functions::add_external_haloed_node_helper() and
     /// Missing_masters_functions::add_external_haloed_master_node_helper()
-    void get_shared_node_pt(const unsigned &p, Vector<Node *> &shared_node_pt)
+    void get_shared_node_pt(const unsigned& p, Vector<Node*>& shared_node_pt)
     {
       unsigned np = nshared_node(p);
       shared_node_pt.resize(np);
@@ -1820,7 +1820,7 @@ namespace oomph
     /// \short Add shared node whose counterpart is held
     /// on processor p to the storage scheme for shared nodes.
     /// (NB: ensure that this routine is called twice, once for each process)
-    void add_shared_node_pt(const unsigned &p, Node *&nod_pt)
+    void add_shared_node_pt(const unsigned& p, Node*& nod_pt)
     {
       Shared_node_pt[p].push_back(nod_pt);
     }
@@ -1829,26 +1829,26 @@ namespace oomph
     /// Average/max/min number of halo nodes over all processors.
     /// \b Careful: Involves MPI Broadcasts and must therefore
     /// be called on all processors!
-    void get_halo_node_stats(double &av_number,
-                             unsigned &max_number,
-                             unsigned &min_number);
+    void get_halo_node_stats(double& av_number,
+                             unsigned& max_number,
+                             unsigned& min_number);
 
     /// \short Get haloed node stats for this distributed mesh:
     /// Average/max/min number of haloed nodes over all processors.
     /// \b Careful: Involves MPI Broadcasts and must therefore
     /// be called on all processors!
-    void get_haloed_node_stats(double &av_number,
-                               unsigned &max_number,
-                               unsigned &min_number);
+    void get_haloed_node_stats(double& av_number,
+                               unsigned& max_number,
+                               unsigned& min_number);
 
     // External halo(ed) elements are "source/other" elements which are
     // on different processes to the element for which they are the source
 
     /// \short Output all external halo elements
-    void output_external_halo_elements(std::ostream &outfile,
-                                       const unsigned &n_plot = 5)
+    void output_external_halo_elements(std::ostream& outfile,
+                                       const unsigned& n_plot = 5)
     {
-      for (std::map<unsigned, Vector<GeneralisedElement *>>::iterator it =
+      for (std::map<unsigned, Vector<GeneralisedElement*>>::iterator it =
              External_halo_element_pt.begin();
            it != External_halo_element_pt.end();
            it++)
@@ -1859,15 +1859,15 @@ namespace oomph
     }
 
     /// \short Output all external halo elements with processor p
-    void output_external_halo_elements(const unsigned &p,
-                                       std::ostream &outfile,
-                                       const unsigned &n_plot = 5)
+    void output_external_halo_elements(const unsigned& p,
+                                       std::ostream& outfile,
+                                       const unsigned& n_plot = 5)
     {
       unsigned nel = External_halo_element_pt[p].size();
       for (unsigned e = 0; e < nel; e++)
       {
-        FiniteElement *fe_pt =
-          dynamic_cast<FiniteElement *>(External_halo_element_pt[p][e]);
+        FiniteElement* fe_pt =
+          dynamic_cast<FiniteElement*>(External_halo_element_pt[p][e]);
         if (fe_pt != 0)
         {
           fe_pt->output(outfile, n_plot);
@@ -1876,10 +1876,10 @@ namespace oomph
     }
 
     /// \short Output all external haloed elements
-    void output_external_haloed_elements(std::ostream &outfile,
-                                         const unsigned &n_plot = 5)
+    void output_external_haloed_elements(std::ostream& outfile,
+                                         const unsigned& n_plot = 5)
     {
-      for (std::map<unsigned, Vector<GeneralisedElement *>>::iterator it =
+      for (std::map<unsigned, Vector<GeneralisedElement*>>::iterator it =
              External_haloed_element_pt.begin();
            it != External_haloed_element_pt.end();
            it++)
@@ -1890,15 +1890,15 @@ namespace oomph
     }
 
     /// \short Output all external haloed elements with processor p
-    void output_external_haloed_elements(const unsigned &p,
-                                         std::ostream &outfile,
-                                         const unsigned &n_plot = 5)
+    void output_external_haloed_elements(const unsigned& p,
+                                         std::ostream& outfile,
+                                         const unsigned& n_plot = 5)
     {
       unsigned nel = External_haloed_element_pt[p].size();
       for (unsigned e = 0; e < nel; e++)
       {
-        FiniteElement *fe_pt =
-          dynamic_cast<FiniteElement *>(External_haloed_element_pt[p][e]);
+        FiniteElement* fe_pt =
+          dynamic_cast<FiniteElement*>(External_haloed_element_pt[p][e]);
         if (fe_pt != 0)
         {
           fe_pt->output(outfile, n_plot);
@@ -1910,7 +1910,7 @@ namespace oomph
     unsigned nexternal_halo_element()
     {
       unsigned n = 0;
-      for (std::map<unsigned, Vector<GeneralisedElement *>>::iterator it =
+      for (std::map<unsigned, Vector<GeneralisedElement*>>::iterator it =
              External_halo_element_pt.begin();
            it != External_halo_element_pt.end();
            it++)
@@ -1922,10 +1922,10 @@ namespace oomph
 
     /// \short Number of external halo elements in this Mesh whose non-halo
     /// counterpart is held on processor p.
-    unsigned nexternal_halo_element(const unsigned &p)
+    unsigned nexternal_halo_element(const unsigned& p)
     {
       // Memory saving version of: return External_halo_element_pt[p].size();
-      std::map<unsigned, Vector<GeneralisedElement *>>::iterator it =
+      std::map<unsigned, Vector<GeneralisedElement*>>::iterator it =
         External_halo_element_pt.find(p);
       if (it == External_halo_element_pt.end())
       {
@@ -1936,16 +1936,16 @@ namespace oomph
 
     /// \short Access fct to the e-th external halo element in this Mesh
     /// whose non-halo counterpart is held on processor p.
-    GeneralisedElement *&external_halo_element_pt(const unsigned &p,
-                                                  const unsigned &e)
+    GeneralisedElement*& external_halo_element_pt(const unsigned& p,
+                                                  const unsigned& e)
     {
       return External_halo_element_pt[p][e];
     }
 
     /// \short Add external halo element whose non-halo counterpart is held
     /// on processor p to this Mesh.
-    void add_external_halo_element_pt(const unsigned &p,
-                                      GeneralisedElement *&el_pt)
+    void add_external_halo_element_pt(const unsigned& p,
+                                      GeneralisedElement*& el_pt)
     {
       External_halo_element_pt[p].push_back(el_pt);
       el_pt->set_halo(p);
@@ -1955,7 +1955,7 @@ namespace oomph
     unsigned nexternal_haloed_element()
     {
       unsigned n = 0;
-      for (std::map<unsigned, Vector<GeneralisedElement *>>::iterator it =
+      for (std::map<unsigned, Vector<GeneralisedElement*>>::iterator it =
              External_haloed_element_pt.begin();
            it != External_haloed_element_pt.end();
            it++)
@@ -1967,10 +1967,10 @@ namespace oomph
 
     /// \short Number of external haloed elements in this Mesh whose non-halo
     /// counterpart is held on processor p.
-    unsigned nexternal_haloed_element(const unsigned &p)
+    unsigned nexternal_haloed_element(const unsigned& p)
     {
       // Memory saving version of: return External_haloed_element_pt[p].size();
-      std::map<unsigned, Vector<GeneralisedElement *>>::iterator it =
+      std::map<unsigned, Vector<GeneralisedElement*>>::iterator it =
         External_haloed_element_pt.find(p);
       if (it == External_haloed_element_pt.end())
       {
@@ -1981,22 +1981,22 @@ namespace oomph
 
     /// \short Access fct to the e-th external haloed element in this Mesh
     /// whose non-halo counterpart is held on processor p.
-    GeneralisedElement *&external_haloed_element_pt(const unsigned &p,
-                                                    const unsigned &e)
+    GeneralisedElement*& external_haloed_element_pt(const unsigned& p,
+                                                    const unsigned& e)
     {
       return External_haloed_element_pt[p][e];
     }
 
     /// \short Add external haloed element whose non-halo counterpart is held
     /// on processor p to the storage scheme for haloed elements.
-    unsigned add_external_haloed_element_pt(const unsigned &p,
-                                            GeneralisedElement *&el_pt);
+    unsigned add_external_haloed_element_pt(const unsigned& p,
+                                            GeneralisedElement*& el_pt);
 
     /// \short Total number of external halo nodes in this Mesh
     unsigned nexternal_halo_node()
     {
       unsigned n = 0;
-      for (std::map<unsigned, Vector<Node *>>::iterator it =
+      for (std::map<unsigned, Vector<Node*>>::iterator it =
              External_halo_node_pt.begin();
            it != External_halo_node_pt.end();
            it++)
@@ -2007,11 +2007,11 @@ namespace oomph
     }
 
     /// \short Get vector of pointers to all external halo nodes
-    void get_external_halo_node_pt(Vector<Node *> &external_halo_node_pt)
+    void get_external_halo_node_pt(Vector<Node*>& external_halo_node_pt)
     {
       unsigned n_total = nexternal_halo_node();
       external_halo_node_pt.reserve(n_total);
-      for (std::map<unsigned, Vector<Node *>>::iterator it =
+      for (std::map<unsigned, Vector<Node*>>::iterator it =
              External_halo_node_pt.begin();
            it != External_halo_node_pt.end();
            it++)
@@ -2037,10 +2037,10 @@ namespace oomph
 
     /// \short Number of external halo nodes in this Mesh whose non-halo
     /// (external) counterpart is held on processor p.
-    unsigned nexternal_halo_node(const unsigned &p)
+    unsigned nexternal_halo_node(const unsigned& p)
     {
       // Memory saving version of: return External_halo_node_pt[p].size();
-      std::map<unsigned, Vector<Node *>>::iterator it =
+      std::map<unsigned, Vector<Node*>>::iterator it =
         External_halo_node_pt.find(p);
       if (it == External_halo_node_pt.end())
       {
@@ -2051,7 +2051,7 @@ namespace oomph
 
     /// \short Add external halo node whose non-halo (external) counterpart
     /// is held on processor p to the storage scheme for halo nodes.
-    void add_external_halo_node_pt(const unsigned &p, Node *&nod_pt)
+    void add_external_halo_node_pt(const unsigned& p, Node*& nod_pt)
     {
       External_halo_node_pt[p].push_back(nod_pt);
       nod_pt->set_halo(p);
@@ -2059,20 +2059,20 @@ namespace oomph
 
     /// \short Access fct to the j-th external halo node in this Mesh
     /// whose non-halo external counterpart is held on processor p.
-    Node *&external_halo_node_pt(const unsigned &p, const unsigned &j)
+    Node*& external_halo_node_pt(const unsigned& p, const unsigned& j)
     {
       return External_halo_node_pt[p][j];
     }
 
     /// \short Access fct to vector  of  external halo node in this Mesh
     /// whose non-halo external counterpart is held on processor p. (read only)
-    Vector<Node *> external_halo_node_pt(const unsigned &p)
+    Vector<Node*> external_halo_node_pt(const unsigned& p)
     {
-      std::map<unsigned, Vector<Node *>>::iterator it =
+      std::map<unsigned, Vector<Node*>>::iterator it =
         External_halo_node_pt.find(p);
       if (it == External_halo_node_pt.end())
       {
-        Vector<Node *> tmp;
+        Vector<Node*> tmp;
         return tmp;
       }
       return (*it).second;
@@ -2080,14 +2080,14 @@ namespace oomph
 
     /// \short Set vector of external halo node in this Mesh
     /// whose non-halo external counterpart is held on processor p.
-    void set_external_halo_node_pt(const unsigned &p,
-                                   const Vector<Node *> &external_halo_node_pt)
+    void set_external_halo_node_pt(const unsigned& p,
+                                   const Vector<Node*>& external_halo_node_pt)
     {
       External_halo_node_pt[p] = external_halo_node_pt;
     }
 
     /// Null out specified external halo node (used when deleting duplicates)
-    void null_external_halo_node(const unsigned &p, Node *nod_pt);
+    void null_external_halo_node(const unsigned& p, Node* nod_pt);
 
     /// \short Consolidate external halo node storage by removing nulled out
     /// pointes in external halo and haloed schemes
@@ -2097,7 +2097,7 @@ namespace oomph
     unsigned nexternal_haloed_node()
     {
       unsigned n = 0;
-      for (std::map<unsigned, Vector<Node *>>::iterator it =
+      for (std::map<unsigned, Vector<Node*>>::iterator it =
              External_haloed_node_pt.begin();
            it != External_haloed_node_pt.end();
            it++)
@@ -2109,10 +2109,10 @@ namespace oomph
 
     /// \short Number of external haloed nodes in this Mesh
     /// whose halo (external) counterpart is held on processor p.
-    unsigned nexternal_haloed_node(const unsigned &p)
+    unsigned nexternal_haloed_node(const unsigned& p)
     {
       // Memory saving version of: return External_haloed_node_pt[p].size();
-      std::map<unsigned, Vector<Node *>>::iterator it =
+      std::map<unsigned, Vector<Node*>>::iterator it =
         External_haloed_node_pt.find(p);
       if (it == External_haloed_node_pt.end())
       {
@@ -2123,24 +2123,24 @@ namespace oomph
 
     /// \short Access fct to the j-th external haloed node in this Mesh
     /// whose halo external counterpart is held on processor p.
-    Node *&external_haloed_node_pt(const unsigned &p, const unsigned &j)
+    Node*& external_haloed_node_pt(const unsigned& p, const unsigned& j)
     {
       return External_haloed_node_pt[p][j];
     }
 
     /// \short Add external haloed node whose halo (external) counterpart
     /// is held on processor p to the storage scheme for haloed nodes.
-    unsigned add_external_haloed_node_pt(const unsigned &p, Node *&nod_pt);
+    unsigned add_external_haloed_node_pt(const unsigned& p, Node*& nod_pt);
 
     /// \short Access fct to vector of external haloed node in this Mesh
     /// whose halo external counterpart is held on processor p. (read only)
-    Vector<Node *> external_haloed_node_pt(const unsigned &p)
+    Vector<Node*> external_haloed_node_pt(const unsigned& p)
     {
-      std::map<unsigned, Vector<Node *>>::iterator it =
+      std::map<unsigned, Vector<Node*>>::iterator it =
         External_haloed_node_pt.find(p);
       if (it == External_haloed_node_pt.end())
       {
-        Vector<Node *> tmp;
+        Vector<Node*> tmp;
         return tmp;
       }
       return (*it).second;
@@ -2149,7 +2149,7 @@ namespace oomph
     /// \short Set vector of external haloed node in this Mesh
     /// whose halo external counterpart is held on processor p.
     void set_external_haloed_node_pt(
-      const unsigned &p, const Vector<Node *> &external_haloed_node_pt)
+      const unsigned& p, const Vector<Node*>& external_haloed_node_pt)
     {
       External_haloed_node_pt[p] = external_haloed_node_pt;
     }
@@ -2160,7 +2160,7 @@ namespace oomph
     std::set<int> external_halo_proc()
     {
       std::set<int> procs;
-      for (std::map<unsigned, Vector<Node *>>::iterator it =
+      for (std::map<unsigned, Vector<Node*>>::iterator it =
              External_halo_node_pt.begin();
            it != External_halo_node_pt.end();
            it++)
@@ -2173,12 +2173,12 @@ namespace oomph
     /// \short Creates the shared boundaries, only used in unstructured meshes
     /// In this case with the "TriangleMesh" class
     virtual void create_shared_boundaries(
-      OomphCommunicator *comm_pt,
-      const Vector<unsigned> &element_domain,
-      const Vector<GeneralisedElement *> &backed_up_el_pt,
-      const Vector<FiniteElement *> &backed_up_f_el_pt,
-      std::map<Data *, std::set<unsigned>> &processors_associated_with_data,
-      const bool &overrule_keep_as_halo_element_status)
+      OomphCommunicator* comm_pt,
+      const Vector<unsigned>& element_domain,
+      const Vector<GeneralisedElement*>& backed_up_el_pt,
+      const Vector<FiniteElement*>& backed_up_f_el_pt,
+      std::map<Data*, std::set<unsigned>>& processors_associated_with_data,
+      const bool& overrule_keep_as_halo_element_status)
     {
       std::ostringstream error_stream;
       error_stream << "Empty default create_shared_boundaries() method"
@@ -2193,7 +2193,7 @@ namespace oomph
     // Check if necessary to add the element as haloed or if it has been
     // previously added to the haloed scheme
     virtual unsigned try_to_add_root_haloed_element_pt(
-      const unsigned &p, GeneralisedElement *&el_pt)
+      const unsigned& p, GeneralisedElement*& el_pt)
     {
       std::ostringstream error_stream;
       error_stream << "Empty default try_to_add_root_haloed_element_pt() method"
@@ -2207,7 +2207,7 @@ namespace oomph
 
     // Check if necessary to add the node as haloed or if it has been
     // previously added to the haloed scheme
-    virtual unsigned try_to_add_haloed_node_pt(const unsigned &p, Node *&nod_pt)
+    virtual unsigned try_to_add_haloed_node_pt(const unsigned& p, Node*& nod_pt)
     {
       std::ostringstream error_stream;
       error_stream << "Empty default try_to_add_haloed_node_pt() method"
@@ -2249,13 +2249,13 @@ namespace oomph
     SolidMesh() {}
 
     /// Broken copy constructor
-    SolidMesh(const SolidMesh &dummy)
+    SolidMesh(const SolidMesh& dummy)
     {
       BrokenCopy::broken_copy("SolidMesh");
     }
 
     /// Broken assignment operator
-    void operator=(const SolidMesh &)
+    void operator=(const SolidMesh&)
     {
       BrokenCopy::broken_assign("SolidMesh");
     }
@@ -2263,7 +2263,7 @@ namespace oomph
     /// \short Constructor builds combined mesh from the meshes specified.
     /// Note: This simply merges the meshes' elements and nodes (ignoring
     /// duplicates; no boundary information etc. is created).
-    SolidMesh(const Vector<SolidMesh *> &sub_mesh_pt)
+    SolidMesh(const Vector<SolidMesh*>& sub_mesh_pt)
     {
 #ifdef OOMPH_HAS_MPI
       // Mesh hasn't been distributed: Null out pointer to communicator
@@ -2271,20 +2271,20 @@ namespace oomph
 #endif
 
       unsigned n = sub_mesh_pt.size();
-      Vector<Mesh *> sub_mesh_mesh_pt(n);
+      Vector<Mesh*> sub_mesh_mesh_pt(n);
       for (unsigned i = 0; i < n; i++)
       {
-        sub_mesh_mesh_pt[i] = static_cast<Mesh *>(sub_mesh_pt[i]);
+        sub_mesh_mesh_pt[i] = static_cast<Mesh*>(sub_mesh_pt[i]);
       }
       merge_meshes(sub_mesh_mesh_pt);
     }
 
     /// Return a pointer to the n-th global SolidNode
     // Can safely cast the nodes to SolidNodes
-    SolidNode *node_pt(const unsigned long &n)
+    SolidNode* node_pt(const unsigned long& n)
     {
 #ifdef PARANOID
-      if (!dynamic_cast<SolidNode *>(Node_pt[n]))
+      if (!dynamic_cast<SolidNode*>(Node_pt[n]))
       {
         std::ostringstream error_stream;
         error_stream << "Error: Node " << n << "is a "
@@ -2295,14 +2295,14 @@ namespace oomph
       }
 #endif
       // Return a static cast to the Node_pt
-      return (static_cast<SolidNode *>(Node_pt[n]));
+      return (static_cast<SolidNode*>(Node_pt[n]));
     }
 
     /// Return n-th SolidNodes on b-th boundary
-    SolidNode *boundary_node_pt(const unsigned &b, const unsigned &n)
+    SolidNode* boundary_node_pt(const unsigned& b, const unsigned& n)
     {
 #ifdef PARANOID
-      if (!dynamic_cast<SolidNode *>(Mesh::boundary_node_pt(b, n)))
+      if (!dynamic_cast<SolidNode*>(Mesh::boundary_node_pt(b, n)))
       {
         std::ostringstream error_stream;
         error_stream << "Error: Node " << n << "is a "
@@ -2312,17 +2312,17 @@ namespace oomph
           error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
       }
 #endif
-      return static_cast<SolidNode *>(Mesh::boundary_node_pt(b, n));
+      return static_cast<SolidNode*>(Mesh::boundary_node_pt(b, n));
     }
 
     /// \short Return the n-th local SolidNode in elemnet e.
     /// This is required to cast the nodes in a solid mesh to be
     /// SolidNodes and therefore allow access to the extra SolidNode data
-    SolidNode *element_node_pt(const unsigned long &e, const unsigned &n)
+    SolidNode* element_node_pt(const unsigned long& e, const unsigned& n)
     {
 #ifdef PARANOID
       // Try to cast to FiniteElement
-      FiniteElement *el_pt = dynamic_cast<FiniteElement *>(Element_pt[e]);
+      FiniteElement* el_pt = dynamic_cast<FiniteElement*>(Element_pt[e]);
       if (el_pt == 0)
       {
         // Error
@@ -2330,10 +2330,10 @@ namespace oomph
                             OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION);
       }
-      if (!dynamic_cast<SolidNode *>(el_pt->node_pt(n)))
+      if (!dynamic_cast<SolidNode*>(el_pt->node_pt(n)))
       {
         std::ostringstream error_message;
-        Node *np = el_pt->node_pt(n);
+        Node* np = el_pt->node_pt(n);
         error_message << "Error: Node " << n << " of element " << e << "is a "
                       << typeid(*np).name() << ", not an SolidNode"
                       << std::endl;
@@ -2344,8 +2344,8 @@ namespace oomph
       }
 #endif
       // Return a cast to an SolidNode
-      return (static_cast<SolidNode *>(
-        dynamic_cast<FiniteElement *>(Element_pt[e])->node_pt(n)));
+      return (static_cast<SolidNode*>(
+        dynamic_cast<FiniteElement*>(Element_pt[e])->node_pt(n)));
     }
 
     /// \short Make the current configuration the undeformed one by
@@ -2355,7 +2355,7 @@ namespace oomph
 
     /// \short Scale all nodal coordinates by given factor and re-assign the
     /// Lagrangian coordinates
-    void scale_mesh(const double &factor)
+    void scale_mesh(const double& factor)
     {
       Mesh::scale_mesh(factor);
 
@@ -2379,7 +2379,7 @@ namespace oomph
   {
   public:
     /// Constructor: Pass in the two vertex nodes
-    Edge(Node *node1_pt, Node *node2_pt)
+    Edge(Node* node1_pt, Node* node2_pt)
     {
       if (node1_pt == node2_pt)
       {
@@ -2405,19 +2405,19 @@ namespace oomph
     }
 
     /// Access to the first vertex node
-    Node *node1_pt() const
+    Node* node1_pt() const
     {
       return Node1_pt;
     }
 
     /// Access to the second vertex node
-    Node *node2_pt() const
+    Node* node2_pt() const
     {
       return Node2_pt;
     }
 
     /// Comparison operator
-    bool operator==(const Edge &other) const
+    bool operator==(const Edge& other) const
     {
       if ((Node1_pt == other.node1_pt()) && (Node2_pt == other.node2_pt()))
 
@@ -2431,7 +2431,7 @@ namespace oomph
     }
 
     /// Less-than operator
-    bool operator<(const Edge &other) const
+    bool operator<(const Edge& other) const
     {
       if (Node1_pt < other.node1_pt())
       {
@@ -2465,16 +2465,16 @@ namespace oomph
     /// connnect two boundary nodes?
     bool is_boundary_edge() const
     {
-      return ((dynamic_cast<BoundaryNodeBase *>(Node1_pt) != 0) &&
-              (dynamic_cast<BoundaryNodeBase *>(Node2_pt) != 0));
+      return ((dynamic_cast<BoundaryNodeBase*>(Node1_pt) != 0) &&
+              (dynamic_cast<BoundaryNodeBase*>(Node2_pt) != 0));
     }
 
   private:
     /// First vertex node
-    Node *Node1_pt;
+    Node* Node1_pt;
 
     /// Second vertex node
-    Node *Node2_pt;
+    Node* Node2_pt;
   };
 
   ///////////////////////////////////////////////////////////////////////
@@ -2499,8 +2499,8 @@ namespace oomph
     /// can handle any number in which case this test is skipped.
     //=================================================================
     template<class GEOM_ELEMENT_BASE, class ELEMENT>
-    void assert_geometric_element(const unsigned &dim,
-                                  const unsigned &nnode_1d = 0)
+    void assert_geometric_element(const unsigned& dim,
+                                  const unsigned& nnode_1d = 0)
     {
       // Only do tests in paranoia mode
 #ifndef PARANOID
@@ -2508,10 +2508,10 @@ namespace oomph
 #endif
 
       // Instantiate element
-      ELEMENT *el_pt = new ELEMENT;
+      ELEMENT* el_pt = new ELEMENT;
 
       // Can we cast to required geometric element base type
-      if (dynamic_cast<GEOM_ELEMENT_BASE *>(el_pt) == 0)
+      if (dynamic_cast<GEOM_ELEMENT_BASE*>(el_pt) == 0)
       {
         std::stringstream error_message;
         error_message << "You have specified an illegal element type! Element "
@@ -2571,16 +2571,16 @@ namespace oomph
   namespace ParaviewHelper
   {
     /// Write the pvd file header
-    extern void write_pvd_header(std::ofstream &pvd_file);
+    extern void write_pvd_header(std::ofstream& pvd_file);
 
     /// \short Add name of output file and associated continuous time
     /// to pvd file.
-    extern void write_pvd_information(std::ofstream &pvd_file,
-                                      const std::string &output_filename,
-                                      const double &time);
+    extern void write_pvd_information(std::ofstream& pvd_file,
+                                      const std::string& output_filename,
+                                      const double& time);
 
     /// Write the pvd file footer
-    extern void write_pvd_footer(std::ofstream &pvd_file);
+    extern void write_pvd_footer(std::ofstream& pvd_file);
 
   } // namespace ParaviewHelper
 
@@ -2594,7 +2594,7 @@ namespace oomph
     /// "before" second nodes. Dimension 0 checked first, then... until they
     /// are different (by more than tol=1e-10). If they are both in exactly
     /// the same place an error is thrown.
-    inline bool node_global_position_comparison(Node *nd1_pt, Node *nd2_pt)
+    inline bool node_global_position_comparison(Node* nd1_pt, Node* nd2_pt)
     {
       unsigned ndim = nd1_pt->ndim();
 

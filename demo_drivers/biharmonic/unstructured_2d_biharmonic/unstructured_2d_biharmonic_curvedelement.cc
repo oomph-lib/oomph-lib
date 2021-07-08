@@ -68,23 +68,23 @@ namespace oomph
   public:
     /// \short Function pointer to source function fct(x,f(x)) --
     /// x is a Vector!
-    typedef void (*SourceFctPt)(const Vector<double> &x, double &f);
+    typedef void (*SourceFctPt)(const Vector<double>& x, double& f);
 
     /// \short Function pointer to gradient of source function  fct(x,g(x)) --
     /// x is a Vector!
-    typedef void (*SourceFctGradientPt)(const Vector<double> &x,
-                                        Vector<double> &gradient);
+    typedef void (*SourceFctGradientPt)(const Vector<double>& x,
+                                        Vector<double>& gradient);
 
     /// \short Function pointer to the exact solutions --
     /// x is a Vector!
-    typedef void (*ExactSolnPt)(const Vector<double> &x,
-                                Vector<double> &exact_soln);
+    typedef void (*ExactSolnPt)(const Vector<double>& x,
+                                Vector<double>& exact_soln);
 
     /// Constructor (must initialise the Source_fct_pt to null)
     MyBiharmonicEquations() : Source_fct_pt(0), Source_fct_gradient_pt(0) {}
 
     /// Broken copy constructor
-    MyBiharmonicEquations(const MyBiharmonicEquations &dummy)
+    MyBiharmonicEquations(const MyBiharmonicEquations& dummy)
     {
       BrokenCopy::broken_copy("MyBiharmonicEquations");
     }
@@ -100,7 +100,7 @@ namespace oomph
     }
 
     /// Output with default number of plot points
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       const unsigned n_plot = 5;
       output(outfile, n_plot);
@@ -108,10 +108,10 @@ namespace oomph
 
     /// \short Output FE representation of soln: x,y,u or x,y,z,u at
     /// n_plot^DIM plot points
-    void output(std::ostream &outfile, const unsigned &n_plot);
+    void output(std::ostream& outfile, const unsigned& n_plot);
 
     /// C_style output with default number of plot points
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       const unsigned n_plot = 5;
       output(file_pt, n_plot);
@@ -119,21 +119,21 @@ namespace oomph
 
     /// \short C-style output FE representation of soln: x,y,u or x,y,z,u at
     /// n_plot^DIM plot points
-    void output(FILE *file_pt, const unsigned &n_plot);
+    void output(FILE* file_pt, const unsigned& n_plot);
 
     /// Output exact soln: x,y,u_exact or x,y,z,u_exact at n_plot^DIM plot
     /// points
-    void output_fct(std::ostream &outfile,
-                    const unsigned &n_plot,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& n_plot,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
 
     /// \short Output exact soln: x,y,u_exact or x,y,z,u_exact at
     /// n_plot^DIM plot points (dummy time-dependent version to
     /// keep intel compiler happy)
     virtual void output_fct(
-      std::ostream &outfile,
-      const unsigned &n_plot,
-      const double &time,
+      std::ostream& outfile,
+      const unsigned& n_plot,
+      const double& time,
       FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
     {
       throw OomphLibError(
@@ -143,17 +143,17 @@ namespace oomph
     }
 
     /// Get error against and norm of exact solution
-    void compute_error(std::ostream &outfile,
+    void compute_error(std::ostream& outfile,
                        FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-                       double &error,
-                       double &norm);
+                       double& error,
+                       double& norm);
 
     /// Dummy, time dependent error checker
-    void compute_error(std::ostream &outfile,
+    void compute_error(std::ostream& outfile,
                        FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
-                       const double &time,
-                       double &error,
-                       double &norm)
+                       const double& time,
+                       double& error,
+                       double& norm)
     {
       throw OomphLibError(
         "There is no time-dependent compute_error() for these elements",
@@ -162,7 +162,7 @@ namespace oomph
     }
 
     /// Access function: Pointer to source function
-    ExactSolnPt &exact_pt()
+    ExactSolnPt& exact_pt()
     {
       return Exact_soln_pt;
     }
@@ -174,7 +174,7 @@ namespace oomph
     }
 
     /// Access function: Pointer to source function
-    SourceFctPt &source_fct_pt()
+    SourceFctPt& source_fct_pt()
     {
       return Source_fct_pt;
     }
@@ -186,7 +186,7 @@ namespace oomph
     }
 
     /// Access function: Pointer to gradient of source function
-    SourceFctGradientPt &source_fct_gradient_pt()
+    SourceFctGradientPt& source_fct_gradient_pt()
     {
       return Source_fct_gradient_pt;
     }
@@ -198,15 +198,15 @@ namespace oomph
     }
 
     /// Get exact solutions at (Eulerian) position x.
-    inline virtual void get_exact_solution(const Vector<double> &x,
-                                           Vector<double> &exact_soln) const
+    inline virtual void get_exact_solution(const Vector<double>& x,
+                                           Vector<double>& exact_soln) const
     {
       (*Exact_soln_pt)(x, exact_soln);
     }
 
-    inline virtual void get_source_function(const unsigned &ipt,
-                                            const Vector<double> &x,
-                                            double &source) const
+    inline virtual void get_source_function(const unsigned& ipt,
+                                            const Vector<double>& x,
+                                            double& source) const
     {
       // If no source function has been set, return zero
       if (Source_fct_pt == 0)
@@ -221,10 +221,10 @@ namespace oomph
     }
 
     /// Get flux: flux[i] = du/dx_i
-    void get_flux(const Vector<double> &s, Vector<double> &flux) const {}
+    void get_flux(const Vector<double>& s, Vector<double>& flux) const {}
 
     /// Add the element's contribution to its residual vector (wrapper)
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Call the generic residuals function with flag set to 0
       // using a dummy matrix argument
@@ -234,8 +234,8 @@ namespace oomph
 
     /// Add the element's contribution to its residual vector and
     /// element Jacobian matrix (wrapper)
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       // Call the generic routine with the flag set to 1
       fill_in_generic_residual_contribution_biharmonic(residuals, jacobian, 1);
@@ -243,7 +243,7 @@ namespace oomph
 
     /// \short Return FE representation of function value
     /// at local coordinate s
-    inline Vector<double> interpolated_u(const Vector<double> &s)
+    inline Vector<double> interpolated_u(const Vector<double>& s)
     {
       // Find number of nodes
       const unsigned n_node = this->nnode();
@@ -287,44 +287,44 @@ namespace oomph
     /// \short Shape/test functions and derivs w.r.t. to global coords at
     /// local coord. s; return  Jacobian of mapping
     virtual double d2shape_and_d2test_eulerian_biharmonic(
-      const Vector<double> &s,
-      Shape &psi,
-      DShape &dpsidx,
-      DShape &d2psidx,
-      Shape &test,
-      DShape &dtestdx,
-      DShape &d2testdx) const = 0;
+      const Vector<double>& s,
+      Shape& psi,
+      DShape& dpsidx,
+      DShape& d2psidx,
+      Shape& test,
+      DShape& dtestdx,
+      DShape& d2testdx) const = 0;
     virtual double dshape_and_dtest_eulerian_biharmonic(
-      const Vector<double> &s,
-      Shape &psi,
-      DShape &dpsidx,
-      Shape &test,
-      DShape &dtestdx) const = 0;
+      const Vector<double>& s,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const = 0;
 
     /// \short Shape/test functions and derivs w.r.t. to global coords at
     /// integration point ipt; return  Jacobian of mapping
     virtual double d2shape_and_d2test_eulerian_at_knot_biharmonic(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidx,
-      DShape &d2psidx,
-      Shape &test,
-      DShape &dtestdx,
-      DShape &d2testdx) const = 0;
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      DShape& d2psidx,
+      Shape& test,
+      DShape& dtestdx,
+      DShape& d2testdx) const = 0;
 
     virtual double dshape_and_dtest_eulerian_at_knot_biharmonic(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidx,
-      Shape &test,
-      DShape &dtestdx) const = 0;
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const = 0;
 
     /// \short Compute element residual Vector only (if flag=and/or element
     /// Jacobian matrix
     virtual void fill_in_generic_residual_contribution_biharmonic(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      const unsigned &flag);
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag);
 
     /// Pointer to source function:
     SourceFctPt Source_fct_pt;
@@ -360,50 +360,50 @@ namespace oomph
     BiharmonicCurvedElement() : MyBiharmonicEquations<DIM, NNODE_1D>() {}
 
     /// Broken copy constructor
-    BiharmonicCurvedElement(const BiharmonicCurvedElement<DIM, NNODE_1D> &dummy)
+    BiharmonicCurvedElement(const BiharmonicCurvedElement<DIM, NNODE_1D>& dummy)
     {
       BrokenCopy::broken_copy("BiharmonicCurvedElement");
     }
 
     /// \short  Required  # of `values' (pinned or dofs)
     /// at node n
-    inline unsigned required_nvalue(const unsigned &n) const
+    inline unsigned required_nvalue(const unsigned& n) const
     {
       return Initial_Nvalue;
     }
 
     /// \short Output function:
     ///  x,y,u   or    x,y,z,u
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       MyBiharmonicEquations<DIM, NNODE_1D>::output(outfile);
     }
 
     ///  \short Output function:
     ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       MyBiharmonicEquations<DIM, NNODE_1D>::output(outfile, n_plot);
     }
 
     /// \short C-style output function:
     ///  x,y,u   or    x,y,z,u
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       MyBiharmonicEquations<DIM, NNODE_1D>::output(file_pt);
     }
 
     ///  \short C-style output function:
     ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       MyBiharmonicEquations<DIM, NNODE_1D>::output(file_pt, n_plot);
     }
 
     /// \short Output function for an exact solution:
     ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
-    void output_fct(std::ostream &outfile,
-                    const unsigned &n_plot,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& n_plot,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
     {
       MyBiharmonicEquations<DIM, NNODE_1D>::output_fct(
@@ -413,9 +413,9 @@ namespace oomph
     /// \short Output function for a time-dependent exact solution.
     ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
     /// (Calls the steady version)
-    void output_fct(std::ostream &outfile,
-                    const unsigned &n_plot,
-                    const double &time,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& n_plot,
+                    const double& time,
                     FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
     {
       MyBiharmonicEquations<DIM, NNODE_1D>::output_fct(
@@ -426,37 +426,37 @@ namespace oomph
     /// Shape, test functions & derivs. w.r.t. to global coords. Return
     /// Jacobian.
     inline double d2shape_and_d2test_eulerian_biharmonic(
-      const Vector<double> &s,
-      Shape &psi,
-      DShape &dpsidx,
-      DShape &d2psidx,
-      Shape &test,
-      DShape &dtestdx,
-      DShape &d2testdx) const;
+      const Vector<double>& s,
+      Shape& psi,
+      DShape& dpsidx,
+      DShape& d2psidx,
+      Shape& test,
+      DShape& dtestdx,
+      DShape& d2testdx) const;
 
-    inline double dshape_and_dtest_eulerian_biharmonic(const Vector<double> &s,
-                                                       Shape &psi,
-                                                       DShape &dpsidx,
-                                                       Shape &test,
-                                                       DShape &dtestdx) const;
+    inline double dshape_and_dtest_eulerian_biharmonic(const Vector<double>& s,
+                                                       Shape& psi,
+                                                       DShape& dpsidx,
+                                                       Shape& test,
+                                                       DShape& dtestdx) const;
 
     /// \short Shape, test functions & derivs. w.r.t. to global coords. at
     /// integration point ipt. Return Jacobian.
     inline double d2shape_and_d2test_eulerian_at_knot_biharmonic(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidx,
-      DShape &d2psidx,
-      Shape &test,
-      DShape &dtestdx,
-      DShape &d2testdx) const;
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      DShape& d2psidx,
+      Shape& test,
+      DShape& dtestdx,
+      DShape& d2testdx) const;
 
     inline double dshape_and_dtest_eulerian_at_knot_biharmonic(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidx,
-      Shape &test,
-      DShape &dtestdx) const;
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const;
   };
 
   ////////////////////////////////////////////////////////////////////
@@ -493,11 +493,11 @@ namespace oomph
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
   double BiharmonicCurvedElement<DIM, NNODE_1D>::
-    dshape_and_dtest_eulerian_biharmonic(const Vector<double> &s,
-                                         Shape &psi,
-                                         DShape &dpsidx,
-                                         Shape &test,
-                                         DShape &dtestdx) const
+    dshape_and_dtest_eulerian_biharmonic(const Vector<double>& s,
+                                         Shape& psi,
+                                         DShape& dpsidx,
+                                         Shape& test,
+                                         DShape& dtestdx) const
   {
     const double J = this->dbasis_c0_eulerian(s, psi, dpsidx);
     test = psi;
@@ -508,13 +508,13 @@ namespace oomph
 
   template<unsigned DIM, unsigned NNODE_1D>
   double BiharmonicCurvedElement<DIM, NNODE_1D>::
-    d2shape_and_d2test_eulerian_biharmonic(const Vector<double> &s,
-                                           Shape &psi,
-                                           DShape &dpsidx,
-                                           DShape &d2psidx,
-                                           Shape &test,
-                                           DShape &dtestdx,
-                                           DShape &d2testdx) const
+    d2shape_and_d2test_eulerian_biharmonic(const Vector<double>& s,
+                                           Shape& psi,
+                                           DShape& dpsidx,
+                                           DShape& d2psidx,
+                                           Shape& test,
+                                           DShape& dtestdx,
+                                           DShape& d2testdx) const
   {
     // Call the geometrical shape functions and derivatives
     const double J = this->d2basis_c0_eulerian(s, psi, dpsidx, d2psidx);
@@ -536,11 +536,11 @@ namespace oomph
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
   double BiharmonicCurvedElement<DIM, NNODE_1D>::
-    dshape_and_dtest_eulerian_at_knot_biharmonic(const unsigned &ipt,
-                                                 Shape &psi,
-                                                 DShape &dpsidx,
-                                                 Shape &test,
-                                                 DShape &dtestdx) const
+    dshape_and_dtest_eulerian_at_knot_biharmonic(const unsigned& ipt,
+                                                 Shape& psi,
+                                                 DShape& dpsidx,
+                                                 Shape& test,
+                                                 DShape& dtestdx) const
   {
     const double J =
       this->dshape_and_dtest_eulerian_at_knot(ipt, psi, dpsidx, test, dtestdx);
@@ -550,13 +550,13 @@ namespace oomph
 
   template<unsigned DIM, unsigned NNODE_1D>
   double BiharmonicCurvedElement<DIM, NNODE_1D>::
-    d2shape_and_d2test_eulerian_at_knot_biharmonic(const unsigned &ipt,
-                                                   Shape &psi,
-                                                   DShape &dpsidx,
-                                                   DShape &d2psidx,
-                                                   Shape &test,
-                                                   DShape &dtestdx,
-                                                   DShape &d2testdx) const
+    d2shape_and_d2test_eulerian_at_knot_biharmonic(const unsigned& ipt,
+                                                   Shape& psi,
+                                                   DShape& dpsidx,
+                                                   DShape& d2psidx,
+                                                   Shape& test,
+                                                   DShape& dtestdx,
+                                                   DShape& d2testdx) const
   {
     // Call the geometrical shape functions and derivatives
     const double J = this->d2shape_and_d2test_eulerian_at_knot(
@@ -586,9 +586,9 @@ namespace oomph
   template<unsigned DIM, unsigned NNODE_1D>
   void MyBiharmonicEquations<DIM, NNODE_1D>::
     fill_in_generic_residual_contribution_biharmonic(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      const unsigned &flag)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag)
   {
     // Find out how many nodes there are
     const unsigned n_node = this->nnode();
@@ -1027,8 +1027,8 @@ namespace oomph
   /// nplot points in each coordinate direction
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  void MyBiharmonicEquations<DIM, NNODE_1D>::output(std::ostream &outfile,
-                                                    const unsigned &nplot)
+  void MyBiharmonicEquations<DIM, NNODE_1D>::output(std::ostream& outfile,
+                                                    const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(DIM), x(DIM);
@@ -1072,8 +1072,8 @@ namespace oomph
   /// nplot points in each coordinate direction
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
-  void MyBiharmonicEquations<DIM, NNODE_1D>::output(FILE *file_pt,
-                                                    const unsigned &nplot)
+  void MyBiharmonicEquations<DIM, NNODE_1D>::output(FILE* file_pt,
+                                                    const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(DIM);
@@ -1111,8 +1111,8 @@ namespace oomph
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
   void MyBiharmonicEquations<DIM, NNODE_1D>::output_fct(
-    std::ostream &outfile,
-    const unsigned &nplot,
+    std::ostream& outfile,
+    const unsigned& nplot,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
   {
     // Vector of local coordinates
@@ -1166,10 +1166,10 @@ namespace oomph
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
   void MyBiharmonicEquations<DIM, NNODE_1D>::compute_error(
-    std::ostream &outfile,
+    std::ostream& outfile,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-    double &error,
-    double &norm)
+    double& error,
+    double& norm)
   {
     // Initialise
     error = 0.0;
@@ -1258,7 +1258,7 @@ namespace oomph
 namespace Physical_Variables
 {
   /// Exact solution as a Vector
-  void get_exact_u(const Vector<double> &x, Vector<double> &u)
+  void get_exact_u(const Vector<double>& x, Vector<double>& u)
   {
     u[0] = cos(x[0]) * exp(x[1]);
     u[1] = -1.0 * exp(x[1]) * sin(x[0]);
@@ -1269,7 +1269,7 @@ namespace Physical_Variables
   }
 
   /// Source function required to make the solution above an exact solution
-  void source_function(const Vector<double> &x, double &source)
+  void source_function(const Vector<double>& x, double& source)
   {
     source = 0.0;
   }
@@ -1286,9 +1286,9 @@ public:
   MyBiharmonicProblem(
     typename MyBiharmonicEquations<DIM, NNODE_1D>::SourceFctPt source_fct_pt,
     typename MyBiharmonicEquations<DIM, NNODE_1D>::ExactSolnPt exact_pt,
-    const string &node_file_name,
-    const string &element_file_name,
-    const string &poly_file_name);
+    const string& node_file_name,
+    const string& element_file_name,
+    const string& poly_file_name);
 
   /// Destructor (empty)
   ~MyBiharmonicProblem()
@@ -1304,7 +1304,7 @@ public:
 
   /// \short Doc the solution, pass the number of the case considered,
   /// so that output files can be distinguished.
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// Perform a nodal permutation in curved elements
   void nodal_permutation();
@@ -1327,9 +1327,9 @@ template<class ELEMENT, unsigned DIM, unsigned NNODE_1D>
 MyBiharmonicProblem<ELEMENT, DIM, NNODE_1D>::MyBiharmonicProblem(
   typename MyBiharmonicEquations<DIM, NNODE_1D>::SourceFctPt source_fct_pt,
   typename MyBiharmonicEquations<DIM, NNODE_1D>::ExactSolnPt exact_pt,
-  const string &node_file_name,
-  const string &element_file_name,
-  const string &poly_file_name) :
+  const string& node_file_name,
+  const string& element_file_name,
+  const string& poly_file_name) :
   Source_fct_pt(source_fct_pt), Exact_soln_pt(exact_pt)
 {
   Problem::mesh_pt() = new TriangleMesh<ELEMENT>(
@@ -1389,7 +1389,7 @@ MyBiharmonicProblem<ELEMENT, DIM, NNODE_1D>::MyBiharmonicProblem(
   for (unsigned n = 0; n < n_element; n++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *elem_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(n));
+    ELEMENT* elem_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(n));
     unsigned nnode = elem_pt->nnode();
 
     // Loop over nodes in an element to check whether it is a (curved)boundary
@@ -1437,7 +1437,7 @@ MyBiharmonicProblem<ELEMENT, DIM, NNODE_1D>::MyBiharmonicProblem(
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *elem_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* elem_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the source function pointer and all physical variables
     elem_pt->source_fct_pt() = Source_fct_pt;
@@ -1475,7 +1475,7 @@ void MyBiharmonicProblem<ELEMENT, DIM, NNODE_1D>::nodal_permutation()
   for (unsigned n = 0; n < n_element; n++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *elem_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(n));
+    ELEMENT* elem_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(n));
     // we need just three vertices
     unsigned n_node = 3;
 
@@ -1532,33 +1532,33 @@ void MyBiharmonicProblem<ELEMENT, DIM, NNODE_1D>::nodal_permutation()
       {
         if (position(2, 0) == x[0] && position(2, 1) == x[1])
         {
-          Node *first_pt = elem_pt->node_pt(0);
+          Node* first_pt = elem_pt->node_pt(0);
           elem_pt->node_pt(0) = elem_pt->node_pt(1);
           elem_pt->node_pt(1) = first_pt;
 
-          Node *second_pt = elem_pt->node_pt(3);
+          Node* second_pt = elem_pt->node_pt(3);
           elem_pt->node_pt(3) = elem_pt->node_pt(4);
           elem_pt->node_pt(5) = second_pt;
         }
         else if (position(1, 0) == bd_position(0, 0) &&
                  position(1, 1) == bd_position(0, 1))
         {
-          Node *first_pt = elem_pt->node_pt(2);
+          Node* first_pt = elem_pt->node_pt(2);
           elem_pt->node_pt(0) = elem_pt->node_pt(2);
           elem_pt->node_pt(2) = first_pt;
 
-          Node *second_pt = elem_pt->node_pt(3);
+          Node* second_pt = elem_pt->node_pt(3);
           elem_pt->node_pt(3) = elem_pt->node_pt(5);
           elem_pt->node_pt(5) = second_pt;
         }
         else
         {
-          Node *first_pt = elem_pt->node_pt(0);
+          Node* first_pt = elem_pt->node_pt(0);
           elem_pt->node_pt(0) = elem_pt->node_pt(2);
           elem_pt->node_pt(2) = elem_pt->node_pt(1);
           elem_pt->node_pt(1) = first_pt;
 
-          Node *second_pt = elem_pt->node_pt(3);
+          Node* second_pt = elem_pt->node_pt(3);
           elem_pt->node_pt(3) = elem_pt->node_pt(5);
           elem_pt->node_pt(5) = elem_pt->node_pt(4);
           elem_pt->node_pt(4) = second_pt;
@@ -1572,23 +1572,23 @@ void MyBiharmonicProblem<ELEMENT, DIM, NNODE_1D>::nodal_permutation()
           if (position(2, 0) == bd_position(1, 0) &&
               position(2, 1) == bd_position(1, 1))
           {
-            Node *first_pt = elem_pt->node_pt(1);
+            Node* first_pt = elem_pt->node_pt(1);
             elem_pt->node_pt(1) = elem_pt->node_pt(2);
             elem_pt->node_pt(2) = first_pt;
 
-            Node *second_pt = elem_pt->node_pt(4);
+            Node* second_pt = elem_pt->node_pt(4);
             elem_pt->node_pt(4) = elem_pt->node_pt(5);
             elem_pt->node_pt(5) = second_pt;
           }
         }
         else
         {
-          Node *first_pt = elem_pt->node_pt(0);
+          Node* first_pt = elem_pt->node_pt(0);
           elem_pt->node_pt(0) = elem_pt->node_pt(1);
           elem_pt->node_pt(1) = elem_pt->node_pt(2);
           elem_pt->node_pt(2) = first_pt;
 
-          Node *second_pt = elem_pt->node_pt(3);
+          Node* second_pt = elem_pt->node_pt(3);
           elem_pt->node_pt(3) = elem_pt->node_pt(4);
           elem_pt->node_pt(4) = elem_pt->node_pt(5);
           elem_pt->node_pt(5) = second_pt;
@@ -1618,7 +1618,7 @@ void MyBiharmonicProblem<ELEMENT, DIM, NNODE_1D>::actions_before_newton_solve()
     for (unsigned n = 0; n < n_node; n++)
     {
       // Get pointer to node
-      Node *nod_pt = mesh_pt()->boundary_node_pt(i, n);
+      Node* nod_pt = mesh_pt()->boundary_node_pt(i, n);
 
       // Extract nodal coordinates from node:
       Vector<double> x(2);
@@ -1643,7 +1643,7 @@ void MyBiharmonicProblem<ELEMENT, DIM, NNODE_1D>::actions_before_newton_solve()
 //========================================================================
 template<class ELEMENT, unsigned DIM, unsigned NNODE_1D>
 void MyBiharmonicProblem<ELEMENT, DIM, NNODE_1D>::doc_solution(
-  DocInfo &doc_info)
+  DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -1695,7 +1695,7 @@ void MyBiharmonicProblem<ELEMENT, DIM, NNODE_1D>::doc_solution(
 //======start_of_main==================================================
 /// Driver for 2D Biharmonic problem
 //=====================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   //---------------------------------
   // Check number of command line arguments: Need exactly two.

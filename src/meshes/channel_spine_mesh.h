@@ -51,16 +51,16 @@ namespace oomph
     /// regions 0,1 and 2, height mesh, pointer to the GeomObject defining the
     /// heightof the central region and pointer to timestepper (defaults to
     /// Steady timestepper)
-    ChannelSpineMesh(const unsigned &nx0,
-                     const unsigned &nx1,
-                     const unsigned &nx2,
-                     const unsigned &ny,
-                     const double &lx0,
-                     const double &lx1,
-                     const double &lx2,
-                     const double &h,
-                     GeomObject *wall_pt,
-                     TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper);
+    ChannelSpineMesh(const unsigned& nx0,
+                     const unsigned& nx1,
+                     const unsigned& nx2,
+                     const unsigned& ny,
+                     const double& lx0,
+                     const double& lx1,
+                     const double& lx2,
+                     const double& h,
+                     GeomObject* wall_pt,
+                     TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
     /// \short Constructor: Pass number of elements in x-direction in regions
     /// 0,1 and 2, number of elements in y-direction, length in x direction in
@@ -68,35 +68,35 @@ namespace oomph
     /// heightof the central region, a boolean flag to indicate whether or not
     /// the mesh is periodic and pointer to timestepper (defaults to Steady
     /// timestepper)
-    ChannelSpineMesh(const unsigned &nx0,
-                     const unsigned &nx1,
-                     const unsigned &nx2,
-                     const unsigned &ny,
-                     const double &lx0,
-                     const double &lx1,
-                     const double &lx2,
-                     const double &h,
-                     GeomObject *wall_pt,
-                     const bool &periodic_in_x,
-                     TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper);
+    ChannelSpineMesh(const unsigned& nx0,
+                     const unsigned& nx1,
+                     const unsigned& nx2,
+                     const unsigned& ny,
+                     const double& lx0,
+                     const double& lx1,
+                     const double& lx2,
+                     const double& h,
+                     GeomObject* wall_pt,
+                     const bool& periodic_in_x,
+                     TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
     /// \short Access functions for pointers to the \f$ i \f$ -th element in
     /// the left region.
-    FiniteElement *&left_element_pt(const unsigned long &i)
+    FiniteElement*& left_element_pt(const unsigned long& i)
     {
       return Left_element_pt[i];
     }
 
     /// \short Access functions for pointers to the \f$ i \f$ -th element in
     /// the centre region.
-    FiniteElement *&centre_element_pt(const unsigned long &i)
+    FiniteElement*& centre_element_pt(const unsigned long& i)
     {
       return Centre_element_pt[i];
     }
 
     /// \short Access functions for pointers to the \f$ i \f$ -th element in
     /// the right region.
-    FiniteElement *&right_element_pt(const unsigned long &i)
+    FiniteElement*& right_element_pt(const unsigned long& i)
     {
       return Right_element_pt[i];
     }
@@ -134,7 +134,7 @@ namespace oomph
     /// \short General node update function implements pure virtual function
     /// defined in SpineMesh base class and performs specific node update
     /// actions: along vertical spines
-    virtual void spine_node_update(SpineNode *spine_node_pt)
+    virtual void spine_node_update(SpineNode* spine_node_pt)
     {
       // Get spine node's fraction along the spine
       double W = spine_node_pt->fraction();
@@ -201,7 +201,7 @@ namespace oomph
     }
 
     /// Access function for spines in left region
-    Spine *&left_spine_pt(const unsigned long &i)
+    Spine*& left_spine_pt(const unsigned long& i)
     {
 #ifdef PARNOID
       if (i > Nleft_spine)
@@ -215,7 +215,7 @@ namespace oomph
     }
 
     /// Access function for spines in centre region
-    Spine *&centre_spine_pt(const unsigned long &i)
+    Spine*& centre_spine_pt(const unsigned long& i)
     {
       if (i > Ncentre_spine)
       {
@@ -230,7 +230,7 @@ namespace oomph
     }
 
     /// Access function for spines in right region
-    Spine *&right_spine_pt(const unsigned long &i)
+    Spine*& right_spine_pt(const unsigned long& i)
     {
       if (i > Nright_spine)
       {
@@ -263,30 +263,30 @@ namespace oomph
     }
 
     /// Access function to the GeomObject for upper wall
-    GeomObject *wall_pt()
+    GeomObject* wall_pt()
     {
       return Wall_pt;
     }
 
     /// Access function to the GeomObject for the straight upper wall
-    GeomObject *straight_wall_pt()
+    GeomObject* straight_wall_pt()
     {
       return Straight_wall_pt;
     }
 
   protected:
     /// Vector of pointers to element in the left region
-    Vector<FiniteElement *> Left_element_pt;
+    Vector<FiniteElement*> Left_element_pt;
 
     /// Vector of pointers to element in the centre region
-    Vector<FiniteElement *> Centre_element_pt;
+    Vector<FiniteElement*> Centre_element_pt;
 
     /// Vector of pointers to element in the right region
-    Vector<FiniteElement *> Right_element_pt;
+    Vector<FiniteElement*> Right_element_pt;
 
     /// \short Helper function to actually build the channel-spine mesh
     /// (called from various constructors)
-    virtual void build_channel_spine_mesh(TimeStepper *time_stepper_pt);
+    virtual void build_channel_spine_mesh(TimeStepper* time_stepper_pt);
 
     /// Number of elements in the left region
     unsigned Nx0;
@@ -316,10 +316,10 @@ namespace oomph
     unsigned Nright_spine;
 
     /// GeomObject for upper wall
-    GeomObject *Wall_pt;
+    GeomObject* Wall_pt;
 
     /// GeomObject for the straight upper wall
-    GeomObject *Straight_wall_pt;
+    GeomObject* Straight_wall_pt;
   };
 
 } // namespace oomph

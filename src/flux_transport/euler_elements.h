@@ -53,13 +53,13 @@ namespace oomph
     static double Default_Gamma_Value;
 
     // Pointer to the specific gas constant
-    double *Gamma_pt;
+    double* Gamma_pt;
 
     /// \short Storage for the average primitive values
-    double *Average_prim_value;
+    double* Average_prim_value;
 
     /// \short Storage for the approximated gradients
-    double *Average_gradient;
+    double* Average_gradient;
 
   protected:
     /// \short DIM momentum-components, a density and an energy are transported
@@ -69,7 +69,7 @@ namespace oomph
     }
 
     /// \short Return the flux as a function of the unknown
-    void flux(const Vector<double> &u, DenseMatrix<double> &f);
+    void flux(const Vector<double>& u, DenseMatrix<double>& f);
 
     /// \short Return the flux derivatives as a function of the unknowns
     // void dflux_du(const Vector<double> &u, RankThreeTensor<double> &df_du);
@@ -99,7 +99,7 @@ namespace oomph
     }
 
     /// Calculate the pressure from the unknowns
-    double pressure(const Vector<double> &u) const;
+    double pressure(const Vector<double>& u) const;
 
     /// \short Return the value of gamma
     double gamma() const
@@ -108,20 +108,20 @@ namespace oomph
     }
 
     /// \short Access function for the pointer to gamma
-    double *&gamma_pt()
+    double*& gamma_pt()
     {
       return Gamma_pt;
     }
 
     /// \short Access function for the pointer to gamma (const version)
-    double *const &gamma_pt() const
+    double* const& gamma_pt() const
     {
       return Gamma_pt;
     }
 
     ///\short The number of unknowns at each node is the number of flux
     /// components
-    inline unsigned required_nvalue(const unsigned &n) const
+    inline unsigned required_nvalue(const unsigned& n) const
     {
       return DIM + 2;
     }
@@ -129,11 +129,11 @@ namespace oomph
     /// Compute the error and norm of solution integrated over the element
     /// Does not plot the error in the outfile
     void compute_error(
-      std::ostream &outfile,
+      std::ostream& outfile,
       FiniteElement::UnsteadyExactSolutionFctPt exact_solution_pt,
-      const double &t,
-      Vector<double> &error,
-      Vector<double> &norm)
+      const double& t,
+      Vector<double>& error,
+      Vector<double>& norm)
     {
       // Find the number of fluxes
       const unsigned n_flux = this->nflux();
@@ -201,7 +201,7 @@ namespace oomph
 
     /// \short Output function:
     ///  x,y,u   or    x,y,z,u
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       unsigned nplot = 5;
       output(outfile, nplot);
@@ -209,7 +209,7 @@ namespace oomph
 
     /// \short Output function:
     ///  x,y,u   or    x,y,z,u at n_plot^DIM plot points
-    void output(std::ostream &outfile, const unsigned &n_plot);
+    void output(std::ostream& outfile, const unsigned& n_plot);
 
     void allocate_memory_for_averages()
     {
@@ -228,7 +228,7 @@ namespace oomph
     }
 
     /// \short Return access to the average gradient
-    double &average_gradient(const unsigned &i, const unsigned &j)
+    double& average_gradient(const unsigned& i, const unsigned& j)
     {
       if (Average_gradient == 0)
       {
@@ -240,7 +240,7 @@ namespace oomph
     }
 
     /// \short Return the average values
-    double &average_prim_value(const unsigned &i)
+    double& average_prim_value(const unsigned& i)
     {
       if (Average_prim_value == 0)
       {
@@ -266,7 +266,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    QSpectralEulerElement(const QSpectralEulerElement<DIM, NNODE_1D> &dummy)
+    QSpectralEulerElement(const QSpectralEulerElement<DIM, NNODE_1D>& dummy)
     {
       BrokenCopy::broken_copy("QSpectralEulerElement");
     }
@@ -285,14 +285,14 @@ namespace oomph
 
     /// \short Output function:
     ///  x,y,u   or    x,y,z,u
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       EulerEquations<DIM>::output(outfile);
     }
 
     /// \short Output function:
     ///  x,y,u   or    x,y,z,u at n_plot^DIM plot points
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       EulerEquations<DIM>::output(outfile, n_plot);
     }
@@ -337,20 +337,20 @@ namespace oomph
     /// Shape, test functions & derivs. w.r.t. to global coords. Return
     /// Jacobian.
     inline double dshape_and_dtest_eulerian_flux_transport(
-      const Vector<double> &s,
-      Shape &psi,
-      DShape &dpsidx,
-      Shape &test,
-      DShape &dtestdx) const;
+      const Vector<double>& s,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const;
 
     /// \short Shape, test functions & derivs. w.r.t. to global coords. at
     /// integration point ipt. Return Jacobian.
     inline double dshape_and_dtest_eulerian_at_knot_flux_transport(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidx,
-      Shape &test,
-      DShape &dtestdx) const;
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const;
   };
 
   // Inline functions:
@@ -363,11 +363,11 @@ namespace oomph
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
   double QSpectralEulerElement<DIM, NNODE_1D>::
-    dshape_and_dtest_eulerian_flux_transport(const Vector<double> &s,
-                                             Shape &psi,
-                                             DShape &dpsidx,
-                                             Shape &test,
-                                             DShape &dtestdx) const
+    dshape_and_dtest_eulerian_flux_transport(const Vector<double>& s,
+                                             Shape& psi,
+                                             DShape& dpsidx,
+                                             Shape& test,
+                                             DShape& dtestdx) const
   {
     // Call the geometrical shape functions and derivatives
     double J = this->dshape_eulerian(s, psi, dpsidx);
@@ -395,11 +395,11 @@ namespace oomph
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
   double QSpectralEulerElement<DIM, NNODE_1D>::
-    dshape_and_dtest_eulerian_at_knot_flux_transport(const unsigned &ipt,
-                                                     Shape &psi,
-                                                     DShape &dpsidx,
-                                                     Shape &test,
-                                                     DShape &dtestdx) const
+    dshape_and_dtest_eulerian_at_knot_flux_transport(const unsigned& ipt,
+                                                     Shape& psi,
+                                                     DShape& dpsidx,
+                                                     Shape& test,
+                                                     DShape& dtestdx) const
   {
     // Call the geometrical shape functions and derivatives
     double J = this->dshape_eulerian_at_knot(ipt, psi, dpsidx);
@@ -446,8 +446,8 @@ namespace oomph
 
   public:
     /// Constructor
-    DGEulerFaceElement(FiniteElement *const &element_pt,
-                       const int &face_index) :
+    DGEulerFaceElement(FiniteElement* const& element_pt,
+                       const int& face_index) :
       FaceGeometry<ELEMENT>(), DGFaceElement()
     {
       // Attach geometric information to the element
@@ -460,7 +460,7 @@ namespace oomph
       if (Nflux > 3)
       {
         this->set_integration_scheme(
-          dynamic_cast<ELEMENT *>(element_pt)->face_integration_pt());
+          dynamic_cast<ELEMENT*>(element_pt)->face_integration_pt());
       }
     }
 
@@ -469,9 +469,9 @@ namespace oomph
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default (needed to break
     /// indeterminacy if bulk element is SolidElement)
-    double zeta_nodal(const unsigned &n,
-                      const unsigned &k,
-                      const unsigned &i) const
+    double zeta_nodal(const unsigned& n,
+                      const unsigned& k,
+                      const unsigned& i) const
     {
       return FaceElement::zeta_nodal(n, k, i);
     }
@@ -484,17 +484,17 @@ namespace oomph
 
     /// Calculate the normal flux, so this is the dot product of the
     /// numerical flux with n_out
-    void numerical_flux(const Vector<double> &n_out,
-                        const Vector<double> &u_int,
-                        const Vector<double> &u_ext,
-                        Vector<double> &flux)
+    void numerical_flux(const Vector<double>& n_out,
+                        const Vector<double>& u_int,
+                        const Vector<double>& u_ext,
+                        Vector<double>& flux)
     {
       // Let's follow the yellow book and use local Lax-Friedrichs
       // This is almost certainly not the best flux to use ---
       // further investigation is required here.
       // Cache the bulk element
-      ELEMENT *cast_bulk_element_pt =
-        dynamic_cast<ELEMENT *>(this->bulk_element_pt());
+      ELEMENT* cast_bulk_element_pt =
+        dynamic_cast<ELEMENT*>(this->bulk_element_pt());
 
       // Find the dimension of the problem
       const unsigned dim = cast_bulk_element_pt->dim();
@@ -697,8 +697,8 @@ namespace oomph
 
   public:
     /// Constructor
-    DGEulerFaceReflectionElement(FiniteElement *const &element_pt,
-                                 const int &face_index) :
+    DGEulerFaceReflectionElement(FiniteElement* const& element_pt,
+                                 const int& face_index) :
       FaceGeometry<ELEMENT>(), DGFaceElement()
     {
       // Attach geometric information to the element
@@ -714,9 +714,9 @@ namespace oomph
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default (needed to break
     /// indeterminacy if bulk element is SolidElement)
-    double zeta_nodal(const unsigned &n,
-                      const unsigned &k,
-                      const unsigned &i) const
+    double zeta_nodal(const unsigned& n,
+                      const unsigned& k,
+                      const unsigned& i) const
     {
       return FaceElement::zeta_nodal(n, k, i);
     }
@@ -728,7 +728,7 @@ namespace oomph
     }
 
     /// We overload interpolated_u to reflect
-    void interpolated_u(const Vector<double> &s, Vector<double> &u)
+    void interpolated_u(const Vector<double>& s, Vector<double>& u)
     {
       // Get the standard interpolated_u
       DGFaceElement::interpolated_u(s, u);
@@ -781,7 +781,7 @@ namespace oomph
     }
 
     // Calculate averages
-    void calculate_element_averages(double *&average_value)
+    void calculate_element_averages(double*& average_value)
     {
       FluxTransportEquations<1>::calculate_element_averages(average_value);
     }
@@ -795,7 +795,7 @@ namespace oomph
     }
 
     // Dummy
-    Integral *face_integration_pt() const
+    Integral* face_integration_pt() const
     {
       return 0;
     }
@@ -817,9 +817,9 @@ namespace oomph
     ///\short Compute the residuals for the Navier--Stokes equations;
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void fill_in_generic_residual_contribution_flux_transport(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix,
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
       unsigned flag)
     {
       QSpectralEulerElement<1, NNODE_1D>::
@@ -904,7 +904,7 @@ namespace oomph
     }
 
     // Calculate averages
-    void calculate_element_averages(double *&average_value)
+    void calculate_element_averages(double*& average_value)
     {
       FluxTransportEquations<2>::calculate_element_averages(average_value);
     }
@@ -920,7 +920,7 @@ namespace oomph
 
     ~DGSpectralEulerElement() {}
 
-    Integral *face_integration_pt() const
+    Integral* face_integration_pt() const
     {
       return &Default_face_integration_scheme;
     }
@@ -941,9 +941,9 @@ namespace oomph
     ///\short Compute the residuals for the Navier--Stokes equations;
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void fill_in_generic_residual_contribution_flux_transport(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix,
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
       unsigned flag)
     {
       QSpectralEulerElement<2, NNODE_1D>::

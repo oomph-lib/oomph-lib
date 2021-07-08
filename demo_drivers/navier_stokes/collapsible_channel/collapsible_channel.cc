@@ -56,7 +56,7 @@ namespace BL_Squash
 
   /// \short Mapping [0,1] -> [0,1] that re-distributes
   /// nodal points across the channel width
-  double squash_fct(const double &s)
+  double squash_fct(const double& s)
   {
     // Default return
     double y = s;
@@ -119,12 +119,12 @@ public:
   /// one Lagrangian coordinate. Arguments: height at ends, x-coordinate of
   /// left end, length, amplitude of deflection, period of oscillation, and
   /// pointer to time object
-  OscillatingWall(const double &h,
-                  const double &x_left,
-                  const double &l,
-                  const double &a,
-                  const double &period,
-                  Time *time_pt) :
+  OscillatingWall(const double& h,
+                  const double& x_left,
+                  const double& l,
+                  const double& a,
+                  const double& period,
+                  Time* time_pt) :
     GeomObject(1, 2),
     H(h),
     Length(l),
@@ -140,22 +140,22 @@ public:
   ~OscillatingWall() {}
 
   /// Access function to the amplitude
-  double &amplitude()
+  double& amplitude()
   {
     return A;
   }
 
   /// Access function to the period
-  double &period()
+  double& period()
   {
     return T;
   }
 
   /// \short Position vector at Lagrangian coordinate zeta
   /// at time level t.
-  void position(const unsigned &t,
-                const Vector<double> &zeta,
-                Vector<double> &r) const
+  void position(const unsigned& t,
+                const Vector<double>& zeta,
+                Vector<double>& r) const
   {
     using namespace MathematicalConstants;
 
@@ -177,7 +177,7 @@ public:
   } // end of "unsteady" version
 
   /// \short "Current" position vector at Lagrangian coordinate zeta
-  void position(const Vector<double> &zeta, Vector<double> &r) const
+  void position(const Vector<double>& zeta, Vector<double>& r) const
   {
     position(0, zeta, r);
   }
@@ -208,7 +208,7 @@ private:
   double T;
 
   /// Pointer to the global time object
-  Time *Time_pt;
+  Time* Time_pt;
 
 }; // end of oscillating wall
 
@@ -227,10 +227,10 @@ namespace Global_Physical_Variables
   double P_up = 0.0;
 
   /// Traction required at the left boundary
-  void prescribed_traction(const double &t,
-                           const Vector<double> &x,
-                           const Vector<double> &n,
-                           Vector<double> &traction)
+  void prescribed_traction(const double& t,
+                           const Vector<double>& x,
+                           const Vector<double>& n,
+                           Vector<double>& traction)
   {
     traction.resize(2);
     traction[0] = P_up;
@@ -249,26 +249,26 @@ public:
   /// \short Constructor : the arguments are the number of elements,
   /// the length of the domain and the amplitude and period of
   /// the oscillations
-  CollapsibleChannelProblem(const unsigned &nup,
-                            const unsigned &ncollapsible,
-                            const unsigned &ndown,
-                            const unsigned &ny,
-                            const double &lup,
-                            const double &lcollapsible,
-                            const double &ldown,
-                            const double &ly,
-                            const double &amplitude,
-                            const double &period);
+  CollapsibleChannelProblem(const unsigned& nup,
+                            const unsigned& ncollapsible,
+                            const unsigned& ndown,
+                            const unsigned& ny,
+                            const double& lup,
+                            const double& lcollapsible,
+                            const double& ldown,
+                            const double& ly,
+                            const double& amplitude,
+                            const double& period);
 
   /// Empty destructor
   ~CollapsibleChannelProblem() {}
 
   /// Access function for the specific mesh
-  RefineableCollapsibleChannelMesh<ELEMENT> *bulk_mesh_pt()
+  RefineableCollapsibleChannelMesh<ELEMENT>* bulk_mesh_pt()
   {
     // Upcast from pointer to the Mesh base class to the specific
     // element type that we're using here.
-    return dynamic_cast<RefineableCollapsibleChannelMesh<ELEMENT> *>(
+    return dynamic_cast<RefineableCollapsibleChannelMesh<ELEMENT>*>(
       Bulk_mesh_pt);
 
   } // end of access to bulk mesh
@@ -292,17 +292,17 @@ public:
   void set_initial_condition();
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info, ofstream &trace_file);
+  void doc_solution(DocInfo& doc_info, ofstream& trace_file);
 
 private:
   /// Create the prescribed traction elements on boundary b
   /// of the bulk mesh and stick them into the surface mesh.
-  void create_traction_elements(const unsigned &b,
-                                Mesh *const &bulk_mesh_pt,
-                                Mesh *const &surface_mesh_pt);
+  void create_traction_elements(const unsigned& b,
+                                Mesh* const& bulk_mesh_pt,
+                                Mesh* const& surface_mesh_pt);
 
   /// Delete prescribed traction elements from the surface mesh
-  void delete_traction_elements(Mesh *const &surface_mesh_pt);
+  void delete_traction_elements(Mesh* const& surface_mesh_pt);
 
   /// Number of elements in the x direction in the upstream part of the channel
   unsigned Nup;
@@ -331,20 +331,20 @@ private:
   double Ly;
 
   /// Pointer to the geometric object that parametrises the "collapsible" wall
-  OscillatingWall *Wall_pt;
+  OscillatingWall* Wall_pt;
 
   /// Pointer to the "bulk" mesh
-  RefineableCollapsibleChannelMesh<ELEMENT> *Bulk_mesh_pt;
+  RefineableCollapsibleChannelMesh<ELEMENT>* Bulk_mesh_pt;
 
   /// \short Pointer to the "surface" mesh that contains the applied traction
   /// elements
-  Mesh *Surface_mesh_pt;
+  Mesh* Surface_mesh_pt;
 
   /// Pointer to the left control node
-  Node *Left_node_pt;
+  Node* Left_node_pt;
 
   /// Pointer to right control node
-  Node *Right_node_pt;
+  Node* Right_node_pt;
 
 }; // end of problem class
 
@@ -353,16 +353,16 @@ private:
 //===============================================================
 template<class ELEMENT>
 CollapsibleChannelProblem<ELEMENT>::CollapsibleChannelProblem(
-  const unsigned &nup,
-  const unsigned &ncollapsible,
-  const unsigned &ndown,
-  const unsigned &ny,
-  const double &lup,
-  const double &lcollapsible,
-  const double &ldown,
-  const double &ly,
-  const double &amplitude,
-  const double &period)
+  const unsigned& nup,
+  const unsigned& ncollapsible,
+  const unsigned& ndown,
+  const unsigned& ny,
+  const double& lup,
+  const double& lcollapsible,
+  const double& ldown,
+  const double& ly,
+  const double& amplitude,
+  const double& period)
 {
   // Number of elements
   Nup = nup;
@@ -436,8 +436,8 @@ CollapsibleChannelProblem<ELEMENT>::CollapsibleChannelProblem(
   build_global_mesh();
 
   // Set errror estimator  for bulk mesh
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
-  dynamic_cast<RefineableCollapsibleChannelMesh<ELEMENT> *>(Bulk_mesh_pt)
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
+  dynamic_cast<RefineableCollapsibleChannelMesh<ELEMENT>*>(Bulk_mesh_pt)
     ->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Loop over the elements to set up element-specific
@@ -446,7 +446,7 @@ CollapsibleChannelProblem<ELEMENT>::CollapsibleChannelProblem(
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -462,8 +462,8 @@ CollapsibleChannelProblem<ELEMENT>::CollapsibleChannelProblem(
   for (unsigned e = 0; e < n_el; e++)
   {
     // Upcast from GeneralisedElement to NavierStokes traction element
-    NavierStokesTractionElement<ELEMENT> *el_pt =
-      dynamic_cast<NavierStokesTractionElement<ELEMENT> *>(
+    NavierStokesTractionElement<ELEMENT>* el_pt =
+      dynamic_cast<NavierStokesTractionElement<ELEMENT>*>(
         Surface_mesh_pt->element_pt(e));
 
     // Set the pointer to the prescribed traction function
@@ -536,8 +536,8 @@ CollapsibleChannelProblem<ELEMENT>::CollapsibleChannelProblem(
 /// Doc the solution
 //============================================================================
 template<class ELEMENT>
-void CollapsibleChannelProblem<ELEMENT>::doc_solution(DocInfo &doc_info,
-                                                      ofstream &trace_file)
+void CollapsibleChannelProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
+                                                      ofstream& trace_file)
 {
   ofstream some_file;
   char filename[100];
@@ -584,7 +584,7 @@ void CollapsibleChannelProblem<ELEMENT>::doc_solution(DocInfo &doc_info,
 //============================================================================
 template<class ELEMENT>
 void CollapsibleChannelProblem<ELEMENT>::create_traction_elements(
-  const unsigned &b, Mesh *const &bulk_mesh_pt, Mesh *const &surface_mesh_pt)
+  const unsigned& b, Mesh* const& bulk_mesh_pt, Mesh* const& surface_mesh_pt)
 {
   // How many bulk elements are adjacent to boundary b?
   unsigned n_element = bulk_mesh_pt->nboundary_element(b);
@@ -593,14 +593,14 @@ void CollapsibleChannelProblem<ELEMENT>::create_traction_elements(
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    ELEMENT *bulk_elem_pt =
-      dynamic_cast<ELEMENT *>(bulk_mesh_pt->boundary_element_pt(b, e));
+    ELEMENT* bulk_elem_pt =
+      dynamic_cast<ELEMENT*>(bulk_mesh_pt->boundary_element_pt(b, e));
 
     // What is the index of the face of element e that lies along boundary b
     int face_index = bulk_mesh_pt->face_index_at_boundary(b, e);
 
     // Build the corresponding prescribed-traction element
-    NavierStokesTractionElement<ELEMENT> *traction_element_pt =
+    NavierStokesTractionElement<ELEMENT>* traction_element_pt =
       new NavierStokesTractionElement<ELEMENT>(bulk_elem_pt, face_index);
 
     // Add the prescribed-flux element to the surface mesh
@@ -615,7 +615,7 @@ void CollapsibleChannelProblem<ELEMENT>::create_traction_elements(
 //=======================================================================
 template<class ELEMENT>
 void CollapsibleChannelProblem<ELEMENT>::delete_traction_elements(
-  Mesh *const &surface_mesh_pt)
+  Mesh* const& surface_mesh_pt)
 {
   // How many surface elements are in the surface mesh
   unsigned n_element = surface_mesh_pt->nelement();
@@ -690,7 +690,7 @@ void CollapsibleChannelProblem<ELEMENT>::actions_before_implicit_timestep()
   for (unsigned inod = 0; inod < num_nod; inod++)
   {
     // Which node are we dealing with?
-    Node *node_pt = bulk_mesh_pt()->boundary_node_pt(ibound, inod);
+    Node* node_pt = bulk_mesh_pt()->boundary_node_pt(ibound, inod);
 
     // Apply no slip
     FSI_functions::apply_no_slip_on_moving_wall(node_pt);
@@ -730,8 +730,8 @@ void CollapsibleChannelProblem<ELEMENT>::actions_after_adapt()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to NavierStokesTractionElement element
-    NavierStokesTractionElement<ELEMENT> *el_pt =
-      dynamic_cast<NavierStokesTractionElement<ELEMENT> *>(
+    NavierStokesTractionElement<ELEMENT>* el_pt =
+      dynamic_cast<NavierStokesTractionElement<ELEMENT>*>(
         Surface_mesh_pt->element_pt(e));
 
     // Set the pointer to the prescribed traction function
@@ -745,7 +745,7 @@ void CollapsibleChannelProblem<ELEMENT>::actions_after_adapt()
 /// indicates validation run with coarse resolution and small number of
 /// timesteps.
 //=============================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

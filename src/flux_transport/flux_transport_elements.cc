@@ -41,8 +41,8 @@ namespace oomph
   /// finite-differences, but these can be overloaded in specific equations
   //========================================================================
   template<unsigned DIM>
-  void FluxTransportEquations<DIM>::dflux_du(const Vector<double> &u,
-                                             RankThreeTensor<double> &df_du)
+  void FluxTransportEquations<DIM>::dflux_du(const Vector<double>& u,
+                                             RankThreeTensor<double>& df_du)
   {
     // Find the number of fluxes
     const unsigned n_flux = nflux();
@@ -92,9 +92,9 @@ namespace oomph
   template<unsigned DIM>
   void FluxTransportEquations<DIM>::
     fill_in_generic_residual_contribution_flux_transport(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix,
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
       unsigned flag)
   {
     // Find the number of fluxes
@@ -251,7 +251,7 @@ namespace oomph
   //==================================================================
   template<unsigned DIM>
   double FluxTransportEquations<DIM>::interpolated_u_flux_transport(
-    const Vector<double> &s, const unsigned &i)
+    const Vector<double>& s, const unsigned& i)
   {
     // Find the number of nodes
     const unsigned n_node = this->nnode();
@@ -277,10 +277,10 @@ namespace oomph
   //======================================================================
   template<unsigned DIM>
   double FluxTransportEquations<DIM>::du_dt_flux_transport(
-    const unsigned &n, const unsigned &i) const
+    const unsigned& n, const unsigned& i) const
   {
     // Get the data's timestepper
-    TimeStepper *time_stepper_pt = this->node_pt(n)->time_stepper_pt();
+    TimeStepper* time_stepper_pt = this->node_pt(n)->time_stepper_pt();
 
     // Initialise dudt
     double dudt = 0.0;
@@ -309,7 +309,7 @@ namespace oomph
   //=================================================================
   template<unsigned DIM>
   void FluxTransportEquations<DIM>::calculate_element_averages(
-    double *&average_value)
+    double*& average_value)
   {
     // Find the number of fluxes
     const unsigned n_flux = this->nflux();
@@ -384,8 +384,8 @@ namespace oomph
   /// Output function, print the values of all unknowns
   //==================================================================
   template<unsigned DIM>
-  void FluxTransportEquations<DIM>::output(std::ostream &outfile,
-                                           const unsigned &nplot)
+  void FluxTransportEquations<DIM>::output(std::ostream& outfile,
+                                           const unsigned& nplot)
   {
     // Find the number of fluxes
     const unsigned n_flux = this->nflux();

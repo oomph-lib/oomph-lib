@@ -40,45 +40,45 @@ namespace oomph
 
   namespace deriv_functions
   {
-    inline Vector<double> cos(const double &time, const Vector<double> &x)
+    inline Vector<double> cos(const double& time, const Vector<double>& x)
     {
       Vector<double> values(1);
       values[0] = std::cos(time);
       return values;
     }
-    inline Vector<double> dcos(const double &t,
-                               const Vector<double> &x,
-                               const Vector<double> &u)
+    inline Vector<double> dcos(const double& t,
+                               const Vector<double>& x,
+                               const Vector<double>& u)
     {
       Vector<double> deriv(1, 0.0);
       deriv[0] = -1 * std::sin(t);
       return deriv;
     }
 
-    inline Vector<double> sin(const double &time, const Vector<double> &x)
+    inline Vector<double> sin(const double& time, const Vector<double>& x)
     {
       Vector<double> values(1);
       values[0] = std::sin(time);
       return values;
     }
-    inline Vector<double> dsin(const double &t,
-                               const Vector<double> &x,
-                               const Vector<double> &u)
+    inline Vector<double> dsin(const double& t,
+                               const Vector<double>& x,
+                               const Vector<double>& u)
     {
       Vector<double> deriv(1, 0.0);
       deriv[0] = std::cos(t);
       return deriv;
     }
 
-    inline Vector<double> exp(const double &time, const Vector<double> &x)
+    inline Vector<double> exp(const double& time, const Vector<double>& x)
     {
       Vector<double> values(1);
       values[0] = std::exp(time);
       return values;
     }
-    inline Vector<double> dexp(const double &t,
-                               const Vector<double> &x,
-                               const Vector<double> &u)
+    inline Vector<double> dexp(const double& t,
+                               const Vector<double>& x,
+                               const Vector<double>& u)
     {
       Vector<double> deriv(1, 0.0);
       deriv[0] = u[0];
@@ -86,7 +86,7 @@ namespace oomph
     }
 
     // A polynomial of degree 2
-    inline Vector<double> poly2(const double &time, const Vector<double> &x)
+    inline Vector<double> poly2(const double& time, const Vector<double>& x)
     {
       double b0 = 0.5, b1 = 0, b2 = 1;
 
@@ -94,9 +94,9 @@ namespace oomph
       values[0] = b2 * time * time + b1 * time + b0;
       return values;
     }
-    inline Vector<double> dpoly2(const double &t,
-                                 const Vector<double> &x,
-                                 const Vector<double> &u)
+    inline Vector<double> dpoly2(const double& t,
+                                 const Vector<double>& x,
+                                 const Vector<double>& u)
     {
       double b1 = 0, b2 = 1;
 
@@ -106,7 +106,7 @@ namespace oomph
     }
 
     // A polynomial of degree 3
-    inline Vector<double> poly3(const double &time, const Vector<double> &x)
+    inline Vector<double> poly3(const double& time, const Vector<double>& x)
     {
       double a0 = 0.5, a1 = 0, a2 = 0, a3 = 1;
 
@@ -114,9 +114,9 @@ namespace oomph
       values[0] = a3 * time * time * time + a2 * time * time + a1 * time + a0;
       return values;
     }
-    inline Vector<double> dpoly3(const double &t,
-                                 const Vector<double> &x,
-                                 const Vector<double> &u)
+    inline Vector<double> dpoly3(const double& t,
+                                 const Vector<double>& x,
+                                 const Vector<double>& u)
     {
       double a1 = 0, a2 = 0, a3 = 1;
 
@@ -126,8 +126,8 @@ namespace oomph
     }
 
     // stiff ode, example from Iserles pg. 54
-    inline Vector<double> stiff_test(const double &time,
-                                     const Vector<double> &x)
+    inline Vector<double> stiff_test(const double& time,
+                                     const Vector<double>& x)
     {
       Vector<double> x1(2), x2(2);
       x1[0] = 0;
@@ -140,9 +140,9 @@ namespace oomph
       values[1] = std::exp(-100 * time) * x1[1] + std::exp(-0.1 * time) * x2[1];
       return values;
     }
-    inline Vector<double> dstiff_test(const double &t,
-                                      const Vector<double> &x,
-                                      const Vector<double> &u)
+    inline Vector<double> dstiff_test(const double& t,
+                                      const Vector<double>& x,
+                                      const Vector<double>& u)
     {
       Vector<double> deriv(2, 0.0);
       deriv[0] = -100 * u[0] + u[1];
@@ -165,7 +165,7 @@ namespace oomph
       virtual ~DampedOscillation() {}
 
       /// Function call
-      Vector<double> operator()(const double &t, const Vector<double> &x) const
+      Vector<double> operator()(const double& t, const Vector<double>& x) const
       {
         Vector<double> values(1);
         values[0] = std::exp(-Beta * t) * std::sin(Omega * t);
@@ -173,9 +173,9 @@ namespace oomph
       }
 
       /// Derivative call
-      Vector<double> derivative(const double &t,
-                                const Vector<double> &x,
-                                const Vector<double> &u) const
+      Vector<double> derivative(const double& t,
+                                const Vector<double>& x,
+                                const Vector<double>& u) const
       {
         Vector<double> deriv(1, 0.0);
         deriv[0] = -Beta * std::exp(-Beta * t) * std::sin(Omega * t) +
@@ -202,7 +202,7 @@ namespace oomph
       virtual ~SimpleStiffTest() {}
 
       /// Function call
-      Vector<double> operator()(const double &t, const Vector<double> &x) const
+      Vector<double> operator()(const double& t, const Vector<double>& x) const
       {
         Vector<double> values(1);
         values[0] = std::exp(-Lambda * t) * Y_intial;
@@ -210,9 +210,9 @@ namespace oomph
       }
 
       /// Derivative call
-      Vector<double> derivative(const double &t,
-                                const Vector<double> &x,
-                                const Vector<double> &u) const
+      Vector<double> derivative(const double& t,
+                                const Vector<double>& x,
+                                const Vector<double>& u) const
       {
         Vector<double> deriv(1, 0.0);
         deriv[0] = -Lambda * u[0];
@@ -237,7 +237,7 @@ namespace oomph
       virtual ~OrderReductionTest() {}
 
       /// Function call
-      Vector<double> operator()(const double &t, const Vector<double> &x) const
+      Vector<double> operator()(const double& t, const Vector<double>& x) const
       {
         Vector<double> values(1);
         values[0] = std::sin(t);
@@ -245,9 +245,9 @@ namespace oomph
       }
 
       /// Derivative call
-      Vector<double> derivative(const double &t,
-                                const Vector<double> &x,
-                                const Vector<double> &u) const
+      Vector<double> derivative(const double& t,
+                                const Vector<double>& x,
+                                const Vector<double>& u) const
       {
         Vector<double> deriv(1, 0.0);
         deriv[0] = Lambda * u[0] - Lambda * std::sin(t) + std::cos(t);
@@ -261,7 +261,7 @@ namespace oomph
 
   namespace ODEFactories
   {
-    SolutionFunctorBase *exact_solutions_factory(const std::string &exact_name)
+    SolutionFunctorBase* exact_solutions_factory(const std::string& exact_name)
     {
       if (exact_name == "damped_oscillation")
       {

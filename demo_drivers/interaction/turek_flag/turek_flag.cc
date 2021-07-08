@@ -85,7 +85,7 @@ namespace Global_Parameters
   double Radius = 0.5;
 
   /// Pointer to constitutive law
-  ConstitutiveLaw *Constitutive_law_pt = 0;
+  ConstitutiveLaw* Constitutive_law_pt = 0;
 
   /// \short Timescale ratio for solid (dependent parameter
   /// assigned in set_parameters())
@@ -107,7 +107,7 @@ namespace Global_Parameters
   double Gravity = 0.0;
 
   /// Non-dimensional gravity as body force
-  void gravity(const double &time, const Vector<double> &xi, Vector<double> &b)
+  void gravity(const double& time, const Vector<double>& xi, Vector<double>& b)
   {
     b[0] = 0.0;
     b[1] = -Gravity;
@@ -124,7 +124,7 @@ namespace Global_Parameters
 
   /// \short Flux increases between Min_flux and Max_flux over
   /// period Ramp_period
-  double flux(const double &t)
+  double flux(const double& t)
   {
     if (t < Ramp_period)
     {
@@ -139,7 +139,7 @@ namespace Global_Parameters
   } // end of specification of ramped influx
 
   /// Set parameters for the various test cases
-  void set_parameters(const string &case_id)
+  void set_parameters(const string& case_id)
   {
     // Remember which case we're dealing with
     Case_ID = case_id;
@@ -363,22 +363,22 @@ class TurekProblem : public Problem
 {
 public:
   /// \short Constructor: Pass length and height of domain
-  TurekProblem(const double &length, const double &height);
+  TurekProblem(const double& length, const double& height);
 
   /// Access function for the fluid mesh
-  RefineableAlgebraicCylinderWithFlagMesh<FLUID_ELEMENT> *fluid_mesh_pt()
+  RefineableAlgebraicCylinderWithFlagMesh<FLUID_ELEMENT>* fluid_mesh_pt()
   {
     return Fluid_mesh_pt;
   }
 
   /// Access function for the solid mesh
-  ElasticRefineableRectangularQuadMesh<SOLID_ELEMENT> *&solid_mesh_pt()
+  ElasticRefineableRectangularQuadMesh<SOLID_ELEMENT>*& solid_mesh_pt()
   {
     return Solid_mesh_pt;
   }
 
   /// Access function for the i-th mesh of FSI traction elements
-  SolidMesh *&traction_mesh_pt(const unsigned &i)
+  SolidMesh*& traction_mesh_pt(const unsigned& i)
   {
     return Traction_mesh_pt[i];
   }
@@ -387,7 +387,7 @@ public:
   void actions_after_adapt();
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info, ofstream &trace_file);
+  void doc_solution(DocInfo& doc_info, ofstream& trace_file);
 
   /// Update function (empty)
   void actions_after_newton_solve() {}
@@ -408,16 +408,16 @@ private:
   void create_fsi_traction_elements();
 
   /// Pointer to solid mesh
-  ElasticRefineableRectangularQuadMesh<SOLID_ELEMENT> *Solid_mesh_pt;
+  ElasticRefineableRectangularQuadMesh<SOLID_ELEMENT>* Solid_mesh_pt;
 
   /// Pointer to fluid mesh
-  RefineableAlgebraicCylinderWithFlagMesh<FLUID_ELEMENT> *Fluid_mesh_pt;
+  RefineableAlgebraicCylinderWithFlagMesh<FLUID_ELEMENT>* Fluid_mesh_pt;
 
   /// Vector of pointers to mesh of FSI traction elements
-  Vector<SolidMesh *> Traction_mesh_pt;
+  Vector<SolidMesh*> Traction_mesh_pt;
 
   /// Combined mesh of traction elements -- only used for documentation
-  SolidMesh *Combined_traction_mesh_pt;
+  SolidMesh* Combined_traction_mesh_pt;
 
   /// Overall height of domain
   double Domain_height;
@@ -426,10 +426,10 @@ private:
   double Domain_length;
 
   /// Pointer to solid control node
-  Node *Solid_control_node_pt;
+  Node* Solid_control_node_pt;
 
   /// Pointer to fluid control node
-  Node *Fluid_control_node_pt;
+  Node* Fluid_control_node_pt;
 
 }; // end_of_problem_class
 
@@ -437,8 +437,8 @@ private:
 /// Constructor: Pass length and height of domain
 //======================================================================
 template<class FLUID_ELEMENT, class SOLID_ELEMENT>
-TurekProblem<FLUID_ELEMENT, SOLID_ELEMENT>::TurekProblem(const double &length,
-                                                         const double &height) :
+TurekProblem<FLUID_ELEMENT, SOLID_ELEMENT>::TurekProblem(const double& length,
+                                                         const double& height) :
   Domain_height(height), Domain_length(length)
 
 {
@@ -460,7 +460,7 @@ TurekProblem<FLUID_ELEMENT, SOLID_ELEMENT>::TurekProblem(const double &length,
   double l_y = Global_Parameters::H;
 
   // Create the flag timestepper (consistent with BDF<2> for fluid)
-  Newmark<2> *flag_time_stepper_pt = new Newmark<2>;
+  Newmark<2>* flag_time_stepper_pt = new Newmark<2>;
   add_time_stepper_pt(flag_time_stepper_pt);
 
   /// Left point on centreline of flag so that the top and bottom
@@ -482,11 +482,11 @@ TurekProblem<FLUID_ELEMENT, SOLID_ELEMENT>::TurekProblem(const double &length,
     n_x, n_y, l_x, l_y, origin, flag_time_stepper_pt);
 
   // Set error estimator for the solid mesh
-  Z2ErrorEstimator *solid_error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* solid_error_estimator_pt = new Z2ErrorEstimator;
   solid_mesh_pt()->spatial_error_estimator_pt() = solid_error_estimator_pt;
 
   // Element that contains the control point
-  FiniteElement *el_pt = solid_mesh_pt()->finite_element_pt(n_x * n_y / 2 - 1);
+  FiniteElement* el_pt = solid_mesh_pt()->finite_element_pt(n_x * n_y / 2 - 1);
 
   // How many nodes does it have?
   unsigned nnod = el_pt->nnode();
@@ -530,8 +530,8 @@ TurekProblem<FLUID_ELEMENT, SOLID_ELEMENT>::TurekProblem(const double &length,
     for (unsigned e = 0; e < n_face_element; e++)
     {
       // Cast the element pointer and specify boundary number
-      FSISolidTractionElement<SOLID_ELEMENT, 2> *elem_pt =
-        dynamic_cast<FSISolidTractionElement<SOLID_ELEMENT, 2> *>(
+      FSISolidTractionElement<SOLID_ELEMENT, 2>* elem_pt =
+        dynamic_cast<FSISolidTractionElement<SOLID_ELEMENT, 2>*>(
           Traction_mesh_pt[bound]->element_pt(e));
 
       // Specify boundary number
@@ -545,22 +545,22 @@ TurekProblem<FLUID_ELEMENT, SOLID_ELEMENT>::TurekProblem(const double &length,
   // Turn the three meshes of FSI traction elements into compound
   // geometric objects (one Lagrangian, two Eulerian coordinates)
   // that determine the boundary of the fluid mesh
-  MeshAsGeomObject *bottom_flag_pt = new MeshAsGeomObject(Traction_mesh_pt[0]);
+  MeshAsGeomObject* bottom_flag_pt = new MeshAsGeomObject(Traction_mesh_pt[0]);
 
-  MeshAsGeomObject *tip_flag_pt = new MeshAsGeomObject(Traction_mesh_pt[1]);
+  MeshAsGeomObject* tip_flag_pt = new MeshAsGeomObject(Traction_mesh_pt[1]);
 
-  MeshAsGeomObject *top_flag_pt = new MeshAsGeomObject(Traction_mesh_pt[2]);
+  MeshAsGeomObject* top_flag_pt = new MeshAsGeomObject(Traction_mesh_pt[2]);
 
   // Build fluid mesh
   //-----------------
 
   // Create a new Circle object as the central cylinder
-  Circle *cylinder_pt = new Circle(Global_Parameters::Centre_x,
+  Circle* cylinder_pt = new Circle(Global_Parameters::Centre_x,
                                    Global_Parameters::Centre_y,
                                    Global_Parameters::Radius);
 
   // Allocate the fluid timestepper
-  BDF<2> *fluid_time_stepper_pt = new BDF<2>;
+  BDF<2>* fluid_time_stepper_pt = new BDF<2>;
   add_time_stepper_pt(fluid_time_stepper_pt);
 
   // Build fluid mesh
@@ -584,7 +584,7 @@ TurekProblem<FLUID_ELEMENT, SOLID_ELEMENT>::TurekProblem(const double &length,
   Fluid_control_node_pt = Fluid_mesh_pt->node_pt(5);
 
   // Set error estimator for the fluid mesh
-  Z2ErrorEstimator *fluid_error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* fluid_error_estimator_pt = new Z2ErrorEstimator;
   fluid_mesh_pt()->spatial_error_estimator_pt() = fluid_error_estimator_pt;
 
   // Refine uniformly
@@ -678,8 +678,8 @@ TurekProblem<FLUID_ELEMENT, SOLID_ELEMENT>::TurekProblem(const double &length,
   for (unsigned i = 0; i < n_element; i++)
   {
     // Cast to a solid element
-    SOLID_ELEMENT *el_pt =
-      dynamic_cast<SOLID_ELEMENT *>(solid_mesh_pt()->element_pt(i));
+    SOLID_ELEMENT* el_pt =
+      dynamic_cast<SOLID_ELEMENT*>(solid_mesh_pt()->element_pt(i));
 
     // Set the constitutive law
     el_pt->constitutive_law_pt() = Global_Parameters::Constitutive_law_pt;
@@ -699,8 +699,8 @@ TurekProblem<FLUID_ELEMENT, SOLID_ELEMENT>::TurekProblem(const double &length,
   for (unsigned e = 0; e < nelem; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    FLUID_ELEMENT *el_pt =
-      dynamic_cast<FLUID_ELEMENT *>(fluid_mesh_pt()->element_pt(e));
+    FLUID_ELEMENT* el_pt =
+      dynamic_cast<FLUID_ELEMENT*>(fluid_mesh_pt()->element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Parameters::Re;
@@ -753,7 +753,7 @@ TurekProblem<FLUID_ELEMENT, SOLID_ELEMENT>::TurekProblem(const double &length,
   //----------------------------
 
   // Build iterative linear solver
-  GMRES<CRDoubleMatrix> *iterative_linear_solver_pt = new GMRES<CRDoubleMatrix>;
+  GMRES<CRDoubleMatrix>* iterative_linear_solver_pt = new GMRES<CRDoubleMatrix>;
 
   // Set maximum number of iterations
   iterative_linear_solver_pt->max_iter() = 100;
@@ -765,7 +765,7 @@ TurekProblem<FLUID_ELEMENT, SOLID_ELEMENT>::TurekProblem(const double &length,
   linear_solver_pt() = iterative_linear_solver_pt;
 
   // Build preconditioner
-  FSIPreconditioner *prec_pt = new FSIPreconditioner(this);
+  FSIPreconditioner* prec_pt = new FSIPreconditioner(this);
 
   // Set Navier Stokes mesh:
   prec_pt->set_navier_stokes_mesh(Fluid_mesh_pt);
@@ -791,10 +791,10 @@ TurekProblem<FLUID_ELEMENT, SOLID_ELEMENT>::TurekProblem(const double &length,
 #ifndef OOMPH_HAS_MPI
 
   // Create internal preconditioners used on Schur block
-  Preconditioner *P_matrix_preconditioner_pt = new HyprePreconditioner;
+  Preconditioner* P_matrix_preconditioner_pt = new HyprePreconditioner;
 
-  HyprePreconditioner *P_hypre_solver_pt =
-    static_cast<HyprePreconditioner *>(P_matrix_preconditioner_pt);
+  HyprePreconditioner* P_hypre_solver_pt =
+    static_cast<HyprePreconditioner*>(P_matrix_preconditioner_pt);
 
   // Set defaults parameters for use as preconditioner on Poisson-type
   // problem
@@ -914,7 +914,7 @@ template<class FLUID_ELEMENT, class SOLID_ELEMENT>
 void TurekProblem<FLUID_ELEMENT, SOLID_ELEMENT>::create_fsi_traction_elements()
 {
   // Container to collect all nodes in the traction meshes
-  std::set<SolidNode *> all_nodes;
+  std::set<SolidNode*> all_nodes;
 
   // Traction elements are located on boundaries 0-2:
   for (unsigned b = 0; b < 3; b++)
@@ -926,7 +926,7 @@ void TurekProblem<FLUID_ELEMENT, SOLID_ELEMENT>::create_fsi_traction_elements()
     for (unsigned e = 0; e < n_element; e++)
     {
       // Get pointer to the bulk element that is adjacent to boundary b
-      SOLID_ELEMENT *bulk_elem_pt = dynamic_cast<SOLID_ELEMENT *>(
+      SOLID_ELEMENT* bulk_elem_pt = dynamic_cast<SOLID_ELEMENT*>(
         solid_mesh_pt()->boundary_element_pt(b, e));
 
       // What is the index of the face of the element e along boundary b
@@ -951,7 +951,7 @@ void TurekProblem<FLUID_ELEMENT, SOLID_ELEMENT>::create_fsi_traction_elements()
   Combined_traction_mesh_pt = new SolidMesh(Traction_mesh_pt);
 
   // Stick nodes into combined traction mesh
-  for (std::set<SolidNode *>::iterator it = all_nodes.begin();
+  for (std::set<SolidNode*>::iterator it = all_nodes.begin();
        it != all_nodes.end();
        it++)
   {
@@ -965,7 +965,7 @@ void TurekProblem<FLUID_ELEMENT, SOLID_ELEMENT>::create_fsi_traction_elements()
 //==================================================================
 template<class FLUID_ELEMENT, class SOLID_ELEMENT>
 void TurekProblem<FLUID_ELEMENT, SOLID_ELEMENT>::doc_solution(
-  DocInfo &doc_info, ofstream &trace_file)
+  DocInfo& doc_info, ofstream& trace_file)
 {
   //  FSI_functions::doc_fsi<AlgebraicNode>(Fluid_mesh_pt,
   //                                        Combined_traction_mesh_pt,
@@ -1008,8 +1008,8 @@ void TurekProblem<FLUID_ELEMENT, SOLID_ELEMENT>::doc_solution(
     unsigned n_element = Traction_mesh_pt[i]->nelement();
     for (unsigned e = 0; e < n_element; e++)
     {
-      FSISolidTractionElement<SOLID_ELEMENT, 2> *el_pt =
-        dynamic_cast<FSISolidTractionElement<SOLID_ELEMENT, 2> *>(
+      FSISolidTractionElement<SOLID_ELEMENT, 2>* el_pt =
+        dynamic_cast<FSISolidTractionElement<SOLID_ELEMENT, 2>*>(
           Traction_mesh_pt[i]->element_pt(e));
 
       el_pt->output(some_file, 5);
@@ -1033,7 +1033,7 @@ void TurekProblem<FLUID_ELEMENT, SOLID_ELEMENT>::doc_solution(
 //=======start_of_main==================================================
 /// Driver
 //======================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

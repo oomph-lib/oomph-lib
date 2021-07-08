@@ -46,9 +46,9 @@ namespace oomph
   /// Work out the position derivative taking into account the movement
   /// relative to the original centre of mass
   //======================================================================
-  void ImmersedRigidBodyElement::dposition_dt(const Vector<double> &zeta,
-                                              const unsigned &j,
-                                              Vector<double> &drdt)
+  void ImmersedRigidBodyElement::dposition_dt(const Vector<double>& zeta,
+                                              const unsigned& j,
+                                              Vector<double>& drdt)
   {
     // Switch on time level
     switch (j)
@@ -122,10 +122,10 @@ namespace oomph
   /// Output the position of the centre of gravity including velocities
   /// and accelerations
   //======================================================================
-  void ImmersedRigidBodyElement::output_centre_of_gravity(std::ostream &outfile)
+  void ImmersedRigidBodyElement::output_centre_of_gravity(std::ostream& outfile)
   {
     // Get timestepper
-    TimeStepper *time_stepper_pt =
+    TimeStepper* time_stepper_pt =
       this->Centre_displacement_data_pt->time_stepper_pt();
 
     // Get first time derivatives of all displacement data
@@ -153,9 +153,9 @@ namespace oomph
   /// Obtain the external force and torque on the body from specified
   /// function pointers and also from a drag mesh, if there is one
   //=====================================================================
-  void ImmersedRigidBodyElement::get_force_and_torque(const double &time,
-                                                      Vector<double> &force,
-                                                      double &torque)
+  void ImmersedRigidBodyElement::get_force_and_torque(const double& time,
+                                                      Vector<double>& force,
+                                                      double& torque)
   {
     // Get external force
     if (External_force_fct_pt == 0)
@@ -191,7 +191,7 @@ namespace oomph
 
       for (unsigned e = 0; e < nel; e++)
       {
-        dynamic_cast<ElementWithDragFunction *>(Drag_mesh_pt->element_pt(e))
+        dynamic_cast<ElementWithDragFunction*>(Drag_mesh_pt->element_pt(e))
           ->get_drag_and_torque(element_drag_force, element_drag_torque);
         force[0] += element_drag_force[0];
         force[1] += element_drag_force[1];
@@ -206,7 +206,7 @@ namespace oomph
   /// appropriate load and geometric data from those elements and set
   /// as external data for this element.
   //=======================================================================
-  void ImmersedRigidBodyElement::set_drag_mesh(Mesh *const &drag_mesh_pt)
+  void ImmersedRigidBodyElement::set_drag_mesh(Mesh* const& drag_mesh_pt)
   {
     // Delete the external hijacked data
     this->delete_external_hijacked_data();
@@ -216,9 +216,9 @@ namespace oomph
     Drag_mesh_pt = drag_mesh_pt;
 
     // Allocate storage for all geometric data in the mesh
-    std::set<Data *> bulk_geometric_data_pt;
+    std::set<Data*> bulk_geometric_data_pt;
     // Allocate storage for all load data in the mesh
-    std::set<std::pair<Data *, unsigned>> bulk_load_data_pt;
+    std::set<std::pair<Data*, unsigned>> bulk_load_data_pt;
 
     // Loop over all elements in the drag mesh
     const unsigned n_element = drag_mesh_pt->nelement();
@@ -226,8 +226,8 @@ namespace oomph
     {
       // Cast the bulk element associated with each FaceElement to
       // an FSIFluidElement
-      FSIFluidElement *bulk_elem_pt = dynamic_cast<FSIFluidElement *>(
-        dynamic_cast<FaceElement *>(drag_mesh_pt->element_pt(e))
+      FSIFluidElement* bulk_elem_pt = dynamic_cast<FSIFluidElement*>(
+        dynamic_cast<FaceElement*>(drag_mesh_pt->element_pt(e))
           ->bulk_element_pt());
       // Check that the cast worked
       if (bulk_elem_pt == 0)
@@ -244,7 +244,7 @@ namespace oomph
     }
 
     // Need to add all these data as external data to this (Rigid Body) object
-    for (std::set<Data *>::iterator it = bulk_geometric_data_pt.begin();
+    for (std::set<Data*>::iterator it = bulk_geometric_data_pt.begin();
          it != bulk_geometric_data_pt.end();
          ++it)
     {
@@ -252,12 +252,12 @@ namespace oomph
     }
 
     // Now do the same but make custom data for the load data
-    for (std::set<std::pair<Data *, unsigned>>::iterator it =
+    for (std::set<std::pair<Data*, unsigned>>::iterator it =
            bulk_load_data_pt.begin();
          it != bulk_load_data_pt.end();
          ++it)
     {
-      Data *temp_data_pt = new HijackedData(it->second, it->first);
+      Data* temp_data_pt = new HijackedData(it->second, it->first);
       List_of_external_hijacked_data.push_back(
         this->add_external_data(temp_data_pt));
     }
@@ -266,7 +266,7 @@ namespace oomph
   //======================================================================
   /// Initialise the internal data
   //=====================================================================
-  void ImmersedRigidBodyElement::initialise(TimeStepper *const &time_stepper_pt)
+  void ImmersedRigidBodyElement::initialise(TimeStepper* const& time_stepper_pt)
   {
     // This could be calculated by an integral around the boundary
     Initial_centre_of_mass.resize(2, 0.0);
@@ -304,10 +304,10 @@ namespace oomph
   /// Calculate the contributions to the residuals and the jacobian
   //======================================================================
   void ImmersedRigidBodyElement::get_residuals_rigid_body_generic(
-    Vector<double> &residuals, DenseMatrix<double> &jacobian, const bool &flag)
+    Vector<double>& residuals, DenseMatrix<double>& jacobian, const bool& flag)
   {
     // Get timestepper and time
-    TimeStepper *timestepper_pt =
+    TimeStepper* timestepper_pt =
       this->Centre_displacement_data_pt->time_stepper_pt();
     double time = timestepper_pt->time();
 
@@ -386,10 +386,10 @@ namespace oomph
   /// centre of mass.
   //=======================================================================
   ImmersedRigidBodyTriangleMeshPolygon::ImmersedRigidBodyTriangleMeshPolygon(
-    const Vector<double> &hole_center,
-    const Vector<TriangleMeshCurveSection *> &boundary_polyline_pt,
-    TimeStepper *const &time_stepper_pt,
-    Data *const &centre_displacement_data_pt) :
+    const Vector<double>& hole_center,
+    const Vector<TriangleMeshCurveSection*>& boundary_polyline_pt,
+    TimeStepper* const& time_stepper_pt,
+    Data* const& centre_displacement_data_pt) :
     TriangleMeshCurve(boundary_polyline_pt),
     TriangleMeshClosedCurve(boundary_polyline_pt, hole_center),
     TriangleMeshPolygon(boundary_polyline_pt, hole_center),
@@ -554,7 +554,7 @@ namespace oomph
     unsigned npoly = this->ncurve_section();
     for (unsigned i = 0; i < npoly; i++)
     {
-      TriangleMeshPolyLine *poly_line_pt = this->polyline_pt(i);
+      TriangleMeshPolyLine* poly_line_pt = this->polyline_pt(i);
       unsigned nvertex = poly_line_pt->nvertex();
       for (unsigned j = 0; j < nvertex; j++)
       {
@@ -578,7 +578,7 @@ namespace oomph
 
     // Reset displacement and rotation ("non-previous-value"
     // history values stay)
-    TimeStepper *timestepper_pt =
+    TimeStepper* timestepper_pt =
       Centre_displacement_data_pt->time_stepper_pt();
     unsigned nprev = timestepper_pt->nprev_values();
     for (unsigned t = 0; t < nprev; t++)

@@ -67,7 +67,7 @@ namespace Global_Parameters
 namespace ExactSoln
 {
   /// Exact solution of the problem as a vector
-  void get_exact_u(const double &t, const Vector<double> &x, Vector<double> &u)
+  void get_exact_u(const double& t, const Vector<double>& x, Vector<double>& u)
   {
     double y = x[1];
     // I=sqrt(-1)
@@ -91,7 +91,7 @@ namespace ExactSoln
   }
 
   /// Exact solution of the problem as a scalar
-  void get_exact_u(const double &t, const double &y, double &u)
+  void get_exact_u(const double& t, const double& y, double& u)
   {
     // I=sqrt(-1)
     complex<double> I(0.0, 1.0);
@@ -122,10 +122,10 @@ class RayleighProblem : public Problem
 public:
   /// Constructor: Pass number of elements in x and y directions and
   /// lengths
-  RayleighProblem(const unsigned &nx,
-                  const unsigned &ny,
-                  const double &lx,
-                  const double &ly);
+  RayleighProblem(const unsigned& nx,
+                  const unsigned& ny,
+                  const double& lx,
+                  const double& ly);
 
   // Update before solve is empty
   void actions_before_newton_solve() {}
@@ -155,10 +155,10 @@ public:
   } // end of actions_before_implicit_timestep
 
   /// Run an unsteady simulation
-  void unsteady_run(DocInfo &doc_info);
+  void unsteady_run(DocInfo& doc_info);
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// \short Set initial condition (incl previous timesteps) according
   /// to specified function.
@@ -166,12 +166,12 @@ public:
 
 private:
   /// Fix pressure in element e at pressure dof pdof and set to pvalue
-  void fix_pressure(const unsigned &e,
-                    const unsigned &pdof,
-                    const double &pvalue)
+  void fix_pressure(const unsigned& e,
+                    const unsigned& pdof,
+                    const double& pvalue)
   {
     // Cast to proper element and fix pressure
-    dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e))
+    dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))
       ->fix_pressure(pdof, pvalue);
   }
 
@@ -184,10 +184,10 @@ private:
 /// Problem constructor
 //====================================================================
 template<class ELEMENT, class TIMESTEPPER>
-RayleighProblem<ELEMENT, TIMESTEPPER>::RayleighProblem(const unsigned &nx,
-                                                       const unsigned &ny,
-                                                       const double &lx,
-                                                       const double &ly)
+RayleighProblem<ELEMENT, TIMESTEPPER>::RayleighProblem(const unsigned& nx,
+                                                       const unsigned& ny,
+                                                       const double& lx,
+                                                       const double& ly)
 {
   // Allocate the timestepper
   add_time_stepper_pt(new TIMESTEPPER);
@@ -228,7 +228,7 @@ RayleighProblem<ELEMENT, TIMESTEPPER>::RayleighProblem(const unsigned &nx,
   for (unsigned e = 0; e < n_el; e++)
   {
     // Cast to a fluid element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
     // Set the Reynolds number, etc
     el_pt->re_pt() = &Global_Parameters::Re;
@@ -323,7 +323,7 @@ void RayleighProblem<ELEMENT, TIMESTEPPER>::set_initial_condition()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT, class TIMESTEPPER>
-void RayleighProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo &doc_info)
+void RayleighProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -382,8 +382,8 @@ void RayleighProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo &doc_info)
   unsigned n_control = 37;
   Vector<double> x(2), u(2);
   double time = time_pt()->time();
-  Node *node_pt =
-    dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(n_control))->node_pt(1);
+  Node* node_pt =
+    dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(n_control))->node_pt(1);
   x[0] = node_pt->x(0);
   x[1] = node_pt->x(1);
   ExactSoln::get_exact_u(time, x, u);
@@ -401,7 +401,7 @@ void RayleighProblem<ELEMENT, TIMESTEPPER>::doc_solution(DocInfo &doc_info)
 /// Unsteady run...
 //=============================================================================
 template<class ELEMENT, class TIMESTEPPER>
-void RayleighProblem<ELEMENT, TIMESTEPPER>::unsteady_run(DocInfo &doc_info)
+void RayleighProblem<ELEMENT, TIMESTEPPER>::unsteady_run(DocInfo& doc_info)
 {
   // Open trace file
   char filename[100];
@@ -489,7 +489,7 @@ void RayleighProblem<ELEMENT, TIMESTEPPER>::unsteady_run(DocInfo &doc_info)
 //===start_of_main======================================================
 /// Driver code for Rayleigh channel problem
 //======================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   /// Convert command line arguments (if any) into flags:
   if (argc == 1)

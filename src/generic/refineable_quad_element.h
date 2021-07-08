@@ -87,7 +87,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    RefineableQElement(const RefineableQElement<2> &dummy)
+    RefineableQElement(const RefineableQElement<2>& dummy)
     {
       BrokenCopy::broken_copy("RefineableQElement<2>");
     }
@@ -123,8 +123,8 @@ namespace oomph
     /// a pointer to that node. If not, return NULL (0).
     /// If the node is on a periodic boundary the flag is_periodic is true,
     /// otherwise it will be false.
-    virtual Node *node_created_by_neighbour(const Vector<double> &s_fraction,
-                                            bool &is_periodic);
+    virtual Node* node_created_by_neighbour(const Vector<double>& s_fraction,
+                                            bool& is_periodic);
 
     /// \short If a son of a neighbouring element has already created a node at
     /// a position corresponding to the local fractional position within the
@@ -132,8 +132,8 @@ namespace oomph
     /// a pointer to that node. If not, return NULL (0).
     /// If the node is on a periodic boundary the flag is_periodic is true,
     /// otherwise it will be false.
-    virtual Node *node_created_by_son_of_neighbour(
-      const Vector<double> &s_fraction, bool &is_periodic)
+    virtual Node* node_created_by_son_of_neighbour(
+      const Vector<double>& s_fraction, bool& is_periodic)
     {
       // It is impossible for this situation to arise in meshes
       // containing elements of uniform p-order. This is here so
@@ -145,34 +145,34 @@ namespace oomph
     /// Pointers to any new nodes will be returned in new_node_pt. If
     /// it is open, the positions of the new
     /// nodes will be written to the file stream new_nodes_file
-    virtual void build(Mesh *&mesh_pt,
-                       Vector<Node *> &new_node_pt,
-                       bool &was_already_built,
-                       std::ofstream &new_nodes_file);
+    virtual void build(Mesh*& mesh_pt,
+                       Vector<Node*>& new_node_pt,
+                       bool& was_already_built,
+                       std::ofstream& new_nodes_file);
 
     /// \short Check the integrity of the element: ensure that the position and
     /// values are continuous across the element edges
-    void check_integrity(double &max_error);
+    void check_integrity(double& max_error);
 
     ///  Print corner nodes, use colour
-    void output_corners(std::ostream &outfile, const std::string &colour) const;
+    void output_corners(std::ostream& outfile, const std::string& colour) const;
 
     /// Pointer to quadtree representation of this element
-    QuadTree *quadtree_pt()
+    QuadTree* quadtree_pt()
     {
-      return dynamic_cast<QuadTree *>(Tree_pt);
+      return dynamic_cast<QuadTree*>(Tree_pt);
     }
 
     /// Pointer to quadtree representation of this element
-    QuadTree *quadtree_pt() const
+    QuadTree* quadtree_pt() const
     {
-      return dynamic_cast<QuadTree *>(Tree_pt);
+      return dynamic_cast<QuadTree*>(Tree_pt);
     }
 
     /// \short Markup all hanging nodes & document the results in
     /// the output streams contained in the vector output_stream, if they
     /// are open.
-    void setup_hanging_nodes(Vector<std::ofstream *> &output_stream);
+    void setup_hanging_nodes(Vector<std::ofstream*>& output_stream);
 
     /// \short Perform additional hanging node procedures for variables
     /// that are not interpolated by all nodes (e.g. lower order interpolations
@@ -189,35 +189,35 @@ namespace oomph
     void setup_father_bounds();
 
     /// Determine Vector of boundary conditions along edge (N/S/W/E)
-    void get_edge_bcs(const int &edge, Vector<int> &bound_cons) const;
+    void get_edge_bcs(const int& edge, Vector<int>& bound_cons) const;
 
   public:
     /// \short Determine set of (mesh) boundaries that the
     /// element edge/vertex lives on
-    void get_boundaries(const int &edge, std::set<unsigned> &boundaries) const;
+    void get_boundaries(const int& edge, std::set<unsigned>& boundaries) const;
 
     /// \short Determine Vector of boundary conditions along edge
     /// (or on vertex) bound (S/W/N/E/SW/SE/NW/NE): For value ival
     /// on this boundary, bound_cons[ival]=1 if pinned and 0 if free.
-    void get_bcs(int bound, Vector<int> &bound_cons) const;
+    void get_bcs(int bound, Vector<int>& bound_cons) const;
 
     /// \short Return the value of the intrinsic boundary coordinate
     /// interpolated along the edge (S/W/N/E)
-    void interpolated_zeta_on_edge(const unsigned &boundary,
-                                   const int &edge,
-                                   const Vector<double> &s,
-                                   Vector<double> &zeta);
+    void interpolated_zeta_on_edge(const unsigned& boundary,
+                                   const int& edge,
+                                   const Vector<double>& s,
+                                   Vector<double>& zeta);
 
   protected:
     /// \short Internal helper function that is used to construct the
     /// hanging node schemes for the value_id-th interpolated value
-    void setup_hang_for_value(const int &value_id);
+    void setup_hang_for_value(const int& value_id);
 
     /// \short Internal helper function that is used to construct the
     /// hanging node schemes for the positions.
-    virtual void quad_hang_helper(const int &value_id,
-                                  const int &my_edge,
-                                  std::ofstream &output_hangfile);
+    virtual void quad_hang_helper(const int& value_id,
+                                  const int& my_edge,
+                                  std::ofstream& output_hangfile);
   };
 
   //========================================================================
@@ -237,7 +237,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    RefineableSolidQElement(const RefineableSolidQElement<2> &dummy)
+    RefineableSolidQElement(const RefineableSolidQElement<2>& dummy)
     {
       BrokenCopy::broken_copy("RefineableSolidQElement<2>");
     }
@@ -252,14 +252,14 @@ namespace oomph
     virtual ~RefineableSolidQElement() {}
 
     /// \short Final over-ride: Use version in QSolidElementBase
-    void set_macro_elem_pt(MacroElement *macro_elem_pt)
+    void set_macro_elem_pt(MacroElement* macro_elem_pt)
     {
       QSolidElementBase::set_macro_elem_pt(macro_elem_pt);
     }
 
     /// \short Final over-ride: Use version in QSolidElementBase
-    void set_macro_elem_pt(MacroElement *macro_elem_pt,
-                           MacroElement *undeformed_macro_elem_pt)
+    void set_macro_elem_pt(MacroElement* macro_elem_pt,
+                           MacroElement* undeformed_macro_elem_pt)
     {
       QSolidElementBase::set_macro_elem_pt(macro_elem_pt,
                                            undeformed_macro_elem_pt);
@@ -267,7 +267,7 @@ namespace oomph
 
     /// \short Use the generic finite difference routine defined in
     /// RefineableSolidElement to calculate the Jacobian matrix
-    void get_jacobian(Vector<double> &residuals, DenseMatrix<double> &jacobian)
+    void get_jacobian(Vector<double>& residuals, DenseMatrix<double>& jacobian)
     {
       RefineableSolidElement::get_jacobian(residuals, jacobian);
     }
@@ -275,22 +275,22 @@ namespace oomph
     /// \short Determine vector of solid (positional) boundary conditions
     /// along edge (N/S/W/E) [Pressure does not have to be included
     /// since it can't be subjected to bc at more than one node anyway]
-    void get_edge_solid_bcs(const int &edge,
-                            Vector<int> &solid_bound_cons) const;
+    void get_edge_solid_bcs(const int& edge,
+                            Vector<int>& solid_bound_cons) const;
 
     /// \short Determine vector of solid (positional) boundary conditions
     /// along edge (or on vertex) bound (S/W/N/E/SW/SE/NW/NE): For direction i,
     /// solid_bound_cons[i]=1 if displacement in this coordinate direction
     /// is pinned and 0 if it's free.
-    void get_solid_bcs(int bound, Vector<int> &solid_bound_cons) const;
+    void get_solid_bcs(int bound, Vector<int>& solid_bound_cons) const;
 
     /// \short Build the element, i.e. give it nodal positions, apply BCs, etc.
     /// Incl. documention into new_nodes_file
     // NOTE: FOR SOME REASON THIS NEEDS TO LIVE IN *.H TO WORK ON INTEL
-    void build(Mesh *&mesh_pt,
-               Vector<Node *> &new_node_pt,
-               bool &was_already_built,
-               std::ofstream &new_nodes_file)
+    void build(Mesh*& mesh_pt,
+               Vector<Node*>& new_node_pt,
+               bool& was_already_built,
+               std::ofstream& new_nodes_file)
     {
       using namespace QuadTreeNames;
 
@@ -308,15 +308,15 @@ namespace oomph
 
       // Which element (!) is my father? (We must have a father
       // since was_already_built is false...)
-      RefineableSolidQElement<2> *father_el_pt =
-        dynamic_cast<RefineableSolidQElement<2> *>(
+      RefineableSolidQElement<2>* father_el_pt =
+        dynamic_cast<RefineableSolidQElement<2>*>(
           Tree_pt->father_pt()->object_pt());
 
 #ifdef PARANOID
       // Currently we can't handle the case of generalised coordinates
       // since we haven't established how they should be interpolated
       // Buffer this case:
-      if (static_cast<SolidNode *>(father_el_pt->node_pt(0))
+      if (static_cast<SolidNode*>(father_el_pt->node_pt(0))
             ->nlagrangian_type() != 1)
       {
         throw OomphLibError(
@@ -413,7 +413,7 @@ namespace oomph
           father_el_pt->get_x_and_xi(s, x_fe, x, xi_fe, xi);
 
           // Cast the node to an Solid node
-          SolidNode *elastic_node_pt = static_cast<SolidNode *>(node_pt(n));
+          SolidNode* elastic_node_pt = static_cast<SolidNode*>(node_pt(n));
 
           for (unsigned i = 0; i < 2; i++)
           {
@@ -443,7 +443,7 @@ namespace oomph
           }
 
           // Are there any history values to be dealt with?
-          TimeStepper *time_stepper_pt =
+          TimeStepper* time_stepper_pt =
             father_el_pt->node_pt(0)->time_stepper_pt();
 
           // Number of history values (incl. present)

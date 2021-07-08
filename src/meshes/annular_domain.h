@@ -46,12 +46,12 @@ namespace oomph
     /// \short Constructor: Specify azimuthal fraction (1.0 is 360 degrees)
     /// number of macro elements in azimuthal and radial direction,
     /// inner radius and thickness. Rotate mesh by angle phi.
-    AnnularDomain(const double &azimuthal_fraction,
-                  const unsigned &ntheta,
-                  const unsigned &nr,
-                  const double &a,
-                  const double &h,
-                  const double &phi) :
+    AnnularDomain(const double& azimuthal_fraction,
+                  const unsigned& ntheta,
+                  const unsigned& nr,
+                  const double& a,
+                  const double& h,
+                  const double& phi) :
       Azimuthal_fraction(azimuthal_fraction),
       Inner_radius(a),
       Thickness(h),
@@ -70,13 +70,13 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    AnnularDomain(const AnnularDomain &)
+    AnnularDomain(const AnnularDomain&)
     {
       BrokenCopy::broken_copy("AnnularDomain");
     }
 
     /// Broken assignment operator
-    void operator=(const AnnularDomain &)
+    void operator=(const AnnularDomain&)
     {
       BrokenCopy::broken_assign("AnnularDomain");
     }
@@ -95,11 +95,11 @@ namespace oomph
     /// boundary i_direct (N/S/W/E) at time level t
     /// (t=0: present; t>0: previous):
     /// f(s).
-    void macro_element_boundary(const unsigned &t,
-                                const unsigned &i_macro,
-                                const unsigned &i_direct,
-                                const Vector<double> &s,
-                                Vector<double> &f);
+    void macro_element_boundary(const unsigned& t,
+                                const unsigned& i_macro,
+                                const unsigned& i_direct,
+                                const Vector<double>& s,
+                                Vector<double>& f);
 
   private:
     /// Azimuthal fraction
@@ -130,11 +130,11 @@ namespace oomph
   /// boundary idirect (N/S/W/E) at time level t
   /// (t=0: present; t>0: previous): f(s)
   //=================================================================
-  void AnnularDomain::macro_element_boundary(const unsigned &t,
-                                             const unsigned &imacro,
-                                             const unsigned &idirect,
-                                             const Vector<double> &s,
-                                             Vector<double> &f)
+  void AnnularDomain::macro_element_boundary(const unsigned& t,
+                                             const unsigned& imacro,
+                                             const unsigned& idirect,
+                                             const Vector<double>& s,
+                                             Vector<double>& f)
   {
     using namespace QuadTreeNames;
 

@@ -64,7 +64,7 @@ namespace Global_parameters
   unsigned Direction = 1;
 
   /// Blending function based on the rectangular function but made smoother
-  double b(const double &r)
+  double b(const double& r)
   {
     using namespace MathematicalConstants;
     if (Blend)
@@ -85,7 +85,7 @@ namespace Global_parameters
   }
 
   /// Cartesian coordinates centered at the point (0.5,1)
-  Vector<double> x1(const Vector<double> &coord)
+  Vector<double> x1(const Vector<double>& coord)
   {
     Vector<double> new_x(2);
     new_x[0] = 0.5 - coord[0];
@@ -101,7 +101,7 @@ namespace Global_parameters
   }
 
   /// Cartesian coordinates centered at the point (1.5,1)
-  Vector<double> x2(const Vector<double> &coord)
+  Vector<double> x2(const Vector<double>& coord)
   {
     Vector<double> new_x(2);
     new_x[0] = 1.5 - coord[0];
@@ -110,7 +110,7 @@ namespace Global_parameters
   }
 
   /// Polar coordinates (r,phi) centered at the point x
-  Vector<double> polar(const Vector<double> &coord)
+  Vector<double> polar(const Vector<double>& coord)
   {
     Vector<double> polar_coord(2);
 
@@ -124,19 +124,19 @@ namespace Global_parameters
   }
 
   /// Polar coordinates (r,phi) centered at the point (0.5,1)
-  Vector<double> polar1(const Vector<double> &coord)
+  Vector<double> polar1(const Vector<double>& coord)
   {
     return polar(x1(coord));
   }
 
   /// Polar coordinates (r,phi) centered at the point (1.5,1)
-  Vector<double> polar2(const Vector<double> &coord)
+  Vector<double> polar2(const Vector<double>& coord)
   {
     return polar(x2(coord));
   }
 
   /// function that contributs to u_exact
-  double f1_exact(const Vector<double> &coord)
+  double f1_exact(const Vector<double>& coord)
   {
     // Polar coordinates centered at the point (0.5,1)
     double r1 = polar1(coord)[0];
@@ -146,7 +146,7 @@ namespace Global_parameters
   } // End of function
 
   /// f1 function, in front of the C1 unknown
-  double f1(const Vector<double> &coord)
+  double f1(const Vector<double>& coord)
   {
     // Compute r1
     double r1 = polar1(coord)[0];
@@ -154,7 +154,7 @@ namespace Global_parameters
   }
 
   // gradient of f1 function, computed by sympy
-  Vector<double> grad_f1(const Vector<double> &coord)
+  Vector<double> grad_f1(const Vector<double>& coord)
   {
     using namespace MathematicalConstants;
     Vector<double> df1(2);
@@ -235,7 +235,7 @@ namespace Global_parameters
   }
 
   /// function that contributes to u_exact
-  double f2_exact(const Vector<double> &coord)
+  double f2_exact(const Vector<double>& coord)
   {
     // Polar coordinates centered at the point (1.5,1)
     double r2 = polar2(coord)[0];
@@ -245,7 +245,7 @@ namespace Global_parameters
   } // End of function
 
   /// f2 function, in front of the C2 unknown
-  double f2(const Vector<double> &coord)
+  double f2(const Vector<double>& coord)
   {
     // Compute r2
     double r2 = polar2(coord)[0];
@@ -254,7 +254,7 @@ namespace Global_parameters
   }
 
   /// gradient of f2 function
-  Vector<double> grad_f2(const Vector<double> &coord)
+  Vector<double> grad_f2(const Vector<double>& coord)
   {
     using namespace MathematicalConstants;
     Vector<double> df2(2);
@@ -326,7 +326,7 @@ namespace Global_parameters
   }
 
   // Exact solution of the problem
-  void get_exact_u(const Vector<double> &coord, Vector<double> &u)
+  void get_exact_u(const Vector<double>& coord, Vector<double>& u)
   {
     using namespace MathematicalConstants;
     u[0] = sin((Pi / 2.0) * coord[1]) * cos(coord[0]) + f1_exact(coord) +
@@ -334,7 +334,7 @@ namespace Global_parameters
   }
 
   /// Source function required to make the solution above an exact solution
-  void source_function(const Vector<double> &coord, double &source)
+  void source_function(const Vector<double>& coord, double& source)
   {
     using namespace MathematicalConstants;
 
@@ -410,7 +410,7 @@ public:
 
   /// \short Doc the solution. DocInfo object stores flags/labels for where the
   /// output gets written to
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 private:
   /// Pointer to source function
@@ -418,20 +418,20 @@ private:
 
   /// \short Pointer to the element defining the unknown C1 (Note: eqn element
   /// is templated by the wrapped element!)
-  SingularPoissonSolutionElement<ELEMENT>
-    *Singular_poisson_solution1_element_pt;
+  SingularPoissonSolutionElement<ELEMENT>*
+    Singular_poisson_solution1_element_pt;
 
   /// \short Pointer to the element defining the unknown C2 (Note: eqn element
   /// is templated by the wrapped element!)
-  SingularPoissonSolutionElement<ELEMENT>
-    *Singular_poisson_solution2_element_pt;
+  SingularPoissonSolutionElement<ELEMENT>*
+    Singular_poisson_solution2_element_pt;
 
   /// \short Pointer to the C mesh associated with the elements defining the
   /// unknowns C1 and C2
-  Mesh *Singular_poisson_solution_mesh_pt;
+  Mesh* Singular_poisson_solution_mesh_pt;
 
   /// Pointer to mesh with Poisson elements
-  Mesh *Poisson_mesh_pt;
+  Mesh* Poisson_mesh_pt;
 
 }; // end of problem class
 
@@ -481,7 +481,7 @@ PoissonProblem<ELEMENT>::PoissonProblem(
     unsigned n_node = Poisson_mesh_pt->nboundary_node(i);
     for (unsigned n = 0; n < n_node; n++)
     {
-      Node *nod_pt = Poisson_mesh_pt->boundary_node_pt(i, n);
+      Node* nod_pt = Poisson_mesh_pt->boundary_node_pt(i, n);
 
       // Pin
       nod_pt->pin(0);
@@ -522,7 +522,7 @@ PoissonProblem<ELEMENT>::PoissonProblem(
 
   // Number of nodes along element edge
   unsigned nnode_1d =
-    dynamic_cast<ELEMENT *>(Poisson_mesh_pt->element_pt(0))->nnode_1d();
+    dynamic_cast<ELEMENT*>(Poisson_mesh_pt->element_pt(0))->nnode_1d();
 
   // Boundary 0
 
@@ -530,7 +530,7 @@ PoissonProblem<ELEMENT>::PoissonProblem(
   for (unsigned e = 0; e < n_x; e++)
   {
     // Upcast from GeneralsedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Poisson_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Poisson_mesh_pt->element_pt(e));
     // Loop over the boundary nodes
     for (unsigned j = 0; j < nnode_1d; j++)
     {
@@ -555,7 +555,7 @@ PoissonProblem<ELEMENT>::PoissonProblem(
   {
     unsigned e = i * n_x + n_x - 1;
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Poisson_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Poisson_mesh_pt->element_pt(e));
     // Loop over the nodes
     for (unsigned k = 0; k < nnode_1d; k++)
     {
@@ -581,7 +581,7 @@ PoissonProblem<ELEMENT>::PoissonProblem(
   {
     unsigned e = i * n_x;
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Poisson_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Poisson_mesh_pt->element_pt(e));
     // Loop over the nodes
     for (unsigned k = 0; k < nnode_1d; k++)
     {
@@ -608,7 +608,7 @@ PoissonProblem<ELEMENT>::PoissonProblem(
   {
     unsigned e = (n_y - 1) * n_x + i;
     // Upcast from GeneralsedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Poisson_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Poisson_mesh_pt->element_pt(e));
     // Loop over the boundary nodes
     for (unsigned k = 0; k < nnode_1d; k++)
     {
@@ -633,8 +633,8 @@ PoissonProblem<ELEMENT>::PoissonProblem(
   // We begin by the first element on the left of the upper line of element
   unsigned n_el = n_x * (n_y - 1);
   // Upcast from GeneralisedElement to the present element
-  ELEMENT *first_el_pt =
-    dynamic_cast<ELEMENT *>(Poisson_mesh_pt->element_pt(n_el));
+  ELEMENT* first_el_pt =
+    dynamic_cast<ELEMENT*>(Poisson_mesh_pt->element_pt(n_el));
   // Initialise the x coordinate of the top right node of the first neumann
   // element
   double xstart = first_el_pt->nodal_position((nnode_1d - 1) * nnode_1d, 0);
@@ -647,8 +647,8 @@ PoissonProblem<ELEMENT>::PoissonProblem(
     // Increases the value of i
     istart++;
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt =
-      dynamic_cast<ELEMENT *>(Poisson_mesh_pt->element_pt(n_el + istart));
+    ELEMENT* el_pt =
+      dynamic_cast<ELEMENT*>(Poisson_mesh_pt->element_pt(n_el + istart));
     // Update the value of the x coordinate of the top right node of the right
     // element
     xstart = el_pt->nodal_position((nnode_1d - 1) * nnode_1d, 0);
@@ -658,8 +658,8 @@ PoissonProblem<ELEMENT>::PoissonProblem(
 
   // We begin by the istart-th element on the left of the upper line of elements
   // Upcast from GeneralisedElement to the present element
-  ELEMENT *istartth_el_pt =
-    dynamic_cast<ELEMENT *>(Poisson_mesh_pt->element_pt(n_el + istart));
+  ELEMENT* istartth_el_pt =
+    dynamic_cast<ELEMENT*>(Poisson_mesh_pt->element_pt(n_el + istart));
   // Initialise the x coordinate of the top right node of the last neumann
   // element
   double xlast = istartth_el_pt->nodal_position((nnode_1d - 1) * nnode_1d, 0);
@@ -672,8 +672,8 @@ PoissonProblem<ELEMENT>::PoissonProblem(
     // Increases the value of i
     ilast++;
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt =
-      dynamic_cast<ELEMENT *>(Poisson_mesh_pt->element_pt(n_el + ilast));
+    ELEMENT* el_pt =
+      dynamic_cast<ELEMENT*>(Poisson_mesh_pt->element_pt(n_el + ilast));
     // Update the value of the x coordinate of the top right node of the right
     // element
     xlast = el_pt->nodal_position((nnode_1d - 1) * nnode_1d, 0);
@@ -688,7 +688,7 @@ PoissonProblem<ELEMENT>::PoissonProblem(
   for (unsigned i = istart; i <= ilast; i++)
   {
     unsigned e = n_x * (n_y - 1) + i;
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Poisson_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Poisson_mesh_pt->element_pt(e));
     if (i == istart)
     {
       // Loop over the boundary nodes except the first one
@@ -756,8 +756,8 @@ PoissonProblem<ELEMENT>::PoissonProblem(
   Vector<double> s1_pt(2);
   s1_pt[0] = -1.0;
   s1_pt[1] = 1.0;
-  ELEMENT *el1_pt =
-    dynamic_cast<ELEMENT *>(Poisson_mesh_pt->element_pt(n_el + istart));
+  ELEMENT* el1_pt =
+    dynamic_cast<ELEMENT*>(Poisson_mesh_pt->element_pt(n_el + istart));
   Singular_poisson_solution1_element_pt->set_wrapped_poisson_element_pt(
     el1_pt, s1_pt, &Global_parameters::Direction);
 
@@ -792,8 +792,8 @@ PoissonProblem<ELEMENT>::PoissonProblem(
   Vector<double> s2_pt(2);
   s2_pt[0] = -1.0;
   s2_pt[1] = 1.0;
-  ELEMENT *el2_pt =
-    dynamic_cast<ELEMENT *>(Poisson_mesh_pt->element_pt(n_el + ilast + 1));
+  ELEMENT* el2_pt =
+    dynamic_cast<ELEMENT*>(Poisson_mesh_pt->element_pt(n_el + ilast + 1));
   Singular_poisson_solution2_element_pt->set_wrapped_poisson_element_pt(
     el2_pt, s2_pt, &Global_parameters::Direction);
 
@@ -818,7 +818,7 @@ PoissonProblem<ELEMENT>::PoissonProblem(
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralsedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Poisson_mesh_pt->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Poisson_mesh_pt->element_pt(i));
 
     // Set the source function pointer
     el_pt->source_fct_pt() = Source_fct_pt;
@@ -845,7 +845,7 @@ PoissonProblem<ELEMENT>::PoissonProblem(
 /// Doc the solution: doc_info contains labels/output directory etc.
 //========================================================================
 template<class ELEMENT>
-void PoissonProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void PoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -916,7 +916,7 @@ void PoissonProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
 //===== start_of_main=====================================================
 /// Driver code for 2D Poisson problem
 //========================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

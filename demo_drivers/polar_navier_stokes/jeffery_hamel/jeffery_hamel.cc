@@ -95,9 +95,9 @@ namespace Global_Physical_Variables
   bool new_outlet_region = true;
 
   /// Unused (but assigned) function to specify tractions
-  void traction_function(const double &time,
-                         const Vector<double> &x,
-                         Vector<double> &traction)
+  void traction_function(const double& time,
+                         const Vector<double>& x,
+                         Vector<double>& traction)
   {
     // Impose traction
     traction[0] = 0.0;
@@ -131,7 +131,7 @@ class PolarNSProblem : public Problem
 {
 private:
   /// Data object whose single value stores the external pressure
-  Data *External_pressure_data_pt;
+  Data* External_pressure_data_pt;
 
 public:
   /// Constructor
@@ -141,12 +141,12 @@ public:
   ~PolarNSProblem();
 
   /// Fix pressure in element e at pressure dof pdof and set to pvalue
-  void fix_pressure(const unsigned int &e,
-                    const unsigned int &pdof,
-                    const double &pvalue)
+  void fix_pressure(const unsigned int& e,
+                    const unsigned int& pdof,
+                    const double& pvalue)
   {
     // Cast to full element type and fix the pressure at that element
-    dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e))
+    dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))
       ->fix_pressure(pdof, pvalue);
   } // end of fix_pressure
 
@@ -363,7 +363,7 @@ public:
     // External_pressure_data_pt->pin(0);
 
     // pass flux element the external pressure data
-    FluxConstraint *flux_el_pt = this->mesh_pt()->flux_constraint_elt_pt();
+    FluxConstraint* flux_el_pt = this->mesh_pt()->flux_constraint_elt_pt();
 
     flux_el_pt->set_pressure_data(External_pressure_data_pt);
 
@@ -378,11 +378,11 @@ public:
   } // end of assign_external_pressure
 
   // Access function for the specific mesh
-  jh_mesh<ELEMENT> *mesh_pt()
+  jh_mesh<ELEMENT>* mesh_pt()
   {
     // Upcast from pointer to the Mesh base class to the specific
     // element type that we're using here.
-    return dynamic_cast<jh_mesh<ELEMENT> *>(Problem::mesh_pt());
+    return dynamic_cast<jh_mesh<ELEMENT>*>(Problem::mesh_pt());
   }
 
   // Experiment! - Still necessary as Alpha included in boundary conditions (if
@@ -394,7 +394,7 @@ public:
 
   // Output the solution at nplot points in each direction across an individual
   // element
-  void element_output(std::ostream &outfile, unsigned e, const unsigned &nplot);
+  void element_output(std::ostream& outfile, unsigned e, const unsigned& nplot);
 
   // Return the value of the external pressure
   double get_pext();
@@ -403,25 +403,25 @@ public:
   void set_pext(double p);
 
   // A method for computing the shear stress along both walls
-  void get_shear_stress(Vector<double> &shear_stress);
+  void get_shear_stress(Vector<double>& shear_stress);
 
   // Pin nodes on boundary to zero for outputting eigenfunction
   void pin_boundaries_to_zero();
 
   // Create and solve a streamfunction problem
-  void output_streamfunction(DocInfo &doc_info, bool eigen);
+  void output_streamfunction(DocInfo& doc_info, bool eigen);
 
   // Function to return a vector specifying the symmetry being broken
-  void get_symmetry(DoubleVector &symmetry, double pressure_norm);
+  void get_symmetry(DoubleVector& symmetry, double pressure_norm);
 
   // Function to return sign of the Jacobian
   int get_Jacobian_sign();
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   // Header for doc_solution
-  void header(ofstream &some_file);
+  void header(ofstream& some_file);
 
 }; // end_of_problem_class
 
@@ -429,12 +429,12 @@ public:
 /// Output an individual element
 //========================================================================
 template<class ELEMENT>
-void PolarNSProblem<ELEMENT>::element_output(std::ostream &outfile,
+void PolarNSProblem<ELEMENT>::element_output(std::ostream& outfile,
                                              unsigned e,
-                                             const unsigned &nplot)
+                                             const unsigned& nplot)
 {
   // Upcast from GeneralisedElement to the present element
-  ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+  ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
   el_pt->output(outfile, nplot);
 
@@ -466,27 +466,27 @@ void PolarNSProblem<ELEMENT>::set_pext(double p)
 // My function for calculating shear stress along walls
 //========================================================================
 template<class ELEMENT>
-void PolarNSProblem<ELEMENT>::get_shear_stress(Vector<double> &shear_stress)
+void PolarNSProblem<ELEMENT>::get_shear_stress(Vector<double>& shear_stress)
 {
   // Find the number of shear elements
   unsigned Nshear_lower = mesh_pt()->lower_stress_integral_elt_length();
   unsigned Nshear_upper = mesh_pt()->upper_stress_integral_elt_length();
 
   // Storage for element pointer
-  PolarStressIntegralElement<ELEMENT> *el_pt;
+  PolarStressIntegralElement<ELEMENT>* el_pt;
 
   // Storage for answer
   double lower = 0.0, upper = 0.0;
 
   for (unsigned e = 0; e < Nshear_lower; e++)
   {
-    el_pt = dynamic_cast<PolarStressIntegralElement<ELEMENT> *>(
+    el_pt = dynamic_cast<PolarStressIntegralElement<ELEMENT>*>(
       this->mesh_pt()->lower_stress_integral_elt_pt(e));
     lower += el_pt->get_shear_stress();
   }
   for (unsigned e = 0; e < Nshear_upper; e++)
   {
-    el_pt = dynamic_cast<PolarStressIntegralElement<ELEMENT> *>(
+    el_pt = dynamic_cast<PolarStressIntegralElement<ELEMENT>*>(
       this->mesh_pt()->upper_stress_integral_elt_pt(e));
     upper += el_pt->get_shear_stress();
   }
@@ -523,7 +523,7 @@ void PolarNSProblem<ELEMENT>::pin_boundaries_to_zero()
 // My function for outputting the streamfunction
 //========================================================================
 template<class ELEMENT>
-void PolarNSProblem<ELEMENT>::output_streamfunction(DocInfo &doc_info,
+void PolarNSProblem<ELEMENT>::output_streamfunction(DocInfo& doc_info,
                                                     bool eigen)
 {
   // Create a streamfunction problem
@@ -592,7 +592,7 @@ void PolarNSProblem<ELEMENT>::output_streamfunction(DocInfo &doc_info,
 // Function to output vector describing the symmetry being broken
 //========================================================================
 template<class ELEMENT>
-void PolarNSProblem<ELEMENT>::get_symmetry(DoubleVector &symmetry,
+void PolarNSProblem<ELEMENT>::get_symmetry(DoubleVector& symmetry,
                                            double pressure_norm)
 {
   // First store the current dof values
@@ -616,7 +616,7 @@ void PolarNSProblem<ELEMENT>::get_symmetry(DoubleVector &symmetry,
   for (unsigned e = 0; e < n_fluid; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
     Vector<double> s(2, 0.0);
     double r = el_pt->interpolated_x(s, 0);
@@ -687,7 +687,7 @@ PolarNSProblem<ELEMENT>::PolarNSProblem()
   Problem::mesh_pt() = new jh_mesh<ELEMENT>(Nx, Ny);
 
   // Set error estimator
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   // dynamic_cast<Refineable_r_mesh<ELEMENT>*>(mesh_pt())->
   // spatial_error_estimator_pt()=error_estimator_pt;
   mesh_pt()->spatial_error_estimator_pt() = error_estimator_pt;
@@ -705,7 +705,7 @@ PolarNSProblem<ELEMENT>::PolarNSProblem()
   for (unsigned e = 0; e < n_fluid; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -752,7 +752,7 @@ PolarNSProblem<ELEMENT>::~PolarNSProblem()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void PolarNSProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void PolarNSProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -769,7 +769,7 @@ void PolarNSProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
   unsigned n_fluid = mesh_pt()->fluid_elt_length();
   for (unsigned e = 0; e < n_fluid; e++)
   {
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
     el_pt->output(some_file, npts);
   }
   some_file.close();
@@ -777,7 +777,7 @@ void PolarNSProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
 } // end_of_doc_solution
 
 template<class ELEMENT>
-void PolarNSProblem<ELEMENT>::header(ofstream &some_file)
+void PolarNSProblem<ELEMENT>::header(ofstream& some_file)
 {
   using namespace Global_Physical_Variables;
   some_file << "# Refineable mesh"
@@ -853,7 +853,7 @@ int main()
   // Desired number eigenvalues
   unsigned n_eval = 6;
   // Set shift
-  static_cast<ARPACK *>(problem.eigen_solver_pt())->set_shift(0.4);
+  static_cast<ARPACK*>(problem.eigen_solver_pt())->set_shift(0.4);
 
   // Solve the eigenproblem
   cout << "facking" << endl;

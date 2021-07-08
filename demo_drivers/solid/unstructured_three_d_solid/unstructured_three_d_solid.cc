@@ -52,10 +52,10 @@ class MySolidTetgenMesh :
 {
 public:
   /// Constructor:
-  MySolidTetgenMesh(const std::string &node_file_name,
-                    const std::string &element_file_name,
-                    const std::string &face_file_name,
-                    TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+  MySolidTetgenMesh(const std::string& node_file_name,
+                    const std::string& element_file_name,
+                    const std::string& face_file_name,
+                    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
     TetgenMesh<ELEMENT>(
       node_file_name, element_file_name, face_file_name, time_stepper_pt)
   {
@@ -83,13 +83,13 @@ namespace Global_Parameters
   double Nu = 0.3;
 
   /// Create constitutive law
-  ConstitutiveLaw *Constitutive_law_pt = new GeneralisedHookean(&Nu);
+  ConstitutiveLaw* Constitutive_law_pt = new GeneralisedHookean(&Nu);
 
   /// Non-dim gravity
   double Gravity = 0.0;
 
   /// Non-dimensional gravity as body force
-  void gravity(const double &time, const Vector<double> &xi, Vector<double> &b)
+  void gravity(const double& time, const Vector<double>& xi, Vector<double>& b)
   {
     b[0] = -Gravity;
     b[1] = 0.0;
@@ -104,10 +104,10 @@ namespace Global_Parameters
   /// depend on the Lagrangian and Eulerian coordinates x and xi, and on the
   /// outer unit normal to the surface. Here we only need the outer unit
   /// normal.
-  void constant_pressure(const Vector<double> &xi,
-                         const Vector<double> &x,
-                         const Vector<double> &n,
-                         Vector<double> &traction)
+  void constant_pressure(const Vector<double>& xi,
+                         const Vector<double>& x,
+                         const Vector<double>& n,
+                         Vector<double>& traction)
   {
     unsigned dim = traction.size();
     for (unsigned i = 0; i < dim; i++)
@@ -132,17 +132,17 @@ public:
   ~UnstructuredSolidProblem() {}
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 private:
   /// Create traction elements
   void create_traction_elements();
 
   /// Bulk solid mesh
-  MySolidTetgenMesh<ELEMENT> *Solid_mesh_pt;
+  MySolidTetgenMesh<ELEMENT>* Solid_mesh_pt;
 
   /// Meshes of traction elements
-  Vector<SolidMesh *> Solid_traction_mesh_pt;
+  Vector<SolidMesh*> Solid_traction_mesh_pt;
 
   /// IDs of solid mesh boundaries where displacements are pinned
   Vector<unsigned> Pinned_solid_boundary_id;
@@ -196,7 +196,7 @@ UnstructuredSolidProblem<ELEMENT>::UnstructuredSolidProblem()
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Get node
-      SolidNode *nod_pt = Solid_mesh_pt->boundary_node_pt(b, inod);
+      SolidNode* nod_pt = Solid_mesh_pt->boundary_node_pt(b, inod);
 
       // Pin all directions
       for (unsigned i = 0; i < 3; i++)
@@ -218,7 +218,7 @@ UnstructuredSolidProblem<ELEMENT>::UnstructuredSolidProblem()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Cast to a solid element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Solid_mesh_pt->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Solid_mesh_pt->element_pt(i));
 
     // Set the constitutive law
     el_pt->constitutive_law_pt() = Global_Parameters::Constitutive_law_pt;
@@ -282,14 +282,14 @@ void UnstructuredSolidProblem<ELEMENT>::create_traction_elements()
     for (unsigned e = 0; e < n_element; e++)
     {
       // Get pointer to the bulk element that is adjacent to boundary b
-      ELEMENT *bulk_elem_pt =
-        dynamic_cast<ELEMENT *>(Solid_mesh_pt->boundary_element_pt(b, e));
+      ELEMENT* bulk_elem_pt =
+        dynamic_cast<ELEMENT*>(Solid_mesh_pt->boundary_element_pt(b, e));
 
       // What is the index of the face of the element e along boundary b
       int face_index = Solid_mesh_pt->face_index_at_boundary(b, e);
 
       // Create new element
-      SolidTractionElement<ELEMENT> *el_pt =
+      SolidTractionElement<ELEMENT>* el_pt =
         new SolidTractionElement<ELEMENT>(bulk_elem_pt, face_index);
 
       // Add it to the mesh
@@ -306,7 +306,7 @@ void UnstructuredSolidProblem<ELEMENT>::create_traction_elements()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void UnstructuredSolidProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void UnstructuredSolidProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -344,7 +344,7 @@ void UnstructuredSolidProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
 //============================start_main==================================
 /// Demonstrate how to solve an unstructured 3D solid problem
 //========================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

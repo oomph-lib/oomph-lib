@@ -90,13 +90,13 @@ namespace Global_Physical_Variables
   double Nu = 0.3;
 
   /// Pointer to constitutive law
-  ConstitutiveLaw *Constitutive_law_pt = 0;
+  ConstitutiveLaw* Constitutive_law_pt = 0;
 
   /// Mesh poisson ratio
   double Mesh_Nu = 0.1;
 
   /// Pointer to constitutive law for the mesh
-  ConstitutiveLaw *Mesh_constitutive_law_pt = 0;
+  ConstitutiveLaw* Mesh_constitutive_law_pt = 0;
 
 } // namespace Global_Physical_Variables
 
@@ -114,7 +114,7 @@ public:
   ~UnstructuredFSIProblem() {}
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// Actions before adapt
   void actions_before_adapt()
@@ -142,7 +142,7 @@ public:
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Get node
-      SolidNode *nod_pt = Solid_mesh_pt->boundary_node_pt(ibound, inod);
+      SolidNode* nod_pt = Solid_mesh_pt->boundary_node_pt(ibound, inod);
 
       // Pin both directions
       for (unsigned i = 0; i < 2; i++)
@@ -156,8 +156,8 @@ public:
     for (unsigned i = 0; i < n_element; i++)
     {
       // Cast to a solid element
-      SOLID_ELEMENT *el_pt =
-        dynamic_cast<SOLID_ELEMENT *>(Solid_mesh_pt->element_pt(i));
+      SOLID_ELEMENT* el_pt =
+        dynamic_cast<SOLID_ELEMENT*>(Solid_mesh_pt->element_pt(i));
 
       // Set the constitutive law
       el_pt->constitutive_law_pt() =
@@ -190,7 +190,7 @@ public:
           for (unsigned i = 0; i < 2; i++)
           {
             // Pin the node
-            SolidNode *nod_pt = Fluid_mesh_pt->boundary_node_pt(ibound, inod);
+            SolidNode* nod_pt = Fluid_mesh_pt->boundary_node_pt(ibound, inod);
             nod_pt->pin_position(i);
           }
         }
@@ -202,8 +202,8 @@ public:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Upcast from GeneralisedElement to the present element
-      FLUID_ELEMENT *el_pt =
-        dynamic_cast<FLUID_ELEMENT *>(Fluid_mesh_pt->element_pt(e));
+      FLUID_ELEMENT* el_pt =
+        dynamic_cast<FLUID_ELEMENT*>(Fluid_mesh_pt->element_pt(e));
 
       // Set the Reynolds number
       el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -260,7 +260,7 @@ public:
 
   /// Output function to compute the strain energy in the solid and the
   /// dissipation in the fluid and write to the output stream trace
-  void output_strain_and_dissipation(std::ostream &trace)
+  void output_strain_and_dissipation(std::ostream& trace)
   {
     double strain_energy = this->get_solid_strain_energy();
     double dissipation = this->get_fluid_dissipation();
@@ -283,14 +283,14 @@ private:
       for (unsigned e = 0; e < n_element; e++)
       {
         // Get pointer to the bulk element that is adjacent to boundary b
-        SOLID_ELEMENT *bulk_elem_pt = dynamic_cast<SOLID_ELEMENT *>(
+        SOLID_ELEMENT* bulk_elem_pt = dynamic_cast<SOLID_ELEMENT*>(
           Solid_mesh_pt->boundary_element_pt(b, e));
 
         // What is the index of the face of the element e along boundary b
         int face_index = Solid_mesh_pt->face_index_at_boundary(b, e);
 
         // Create new element
-        FSISolidTractionElement<SOLID_ELEMENT, 2> *el_pt =
+        FSISolidTractionElement<SOLID_ELEMENT, 2>* el_pt =
           new FSISolidTractionElement<SOLID_ELEMENT, 2>(bulk_elem_pt,
                                                         face_index);
 
@@ -343,14 +343,14 @@ private:
       for (unsigned e = 0; e < n_element; e++)
       {
         // Get pointer to the bulk fluid element that is adjacent to boundary b
-        FLUID_ELEMENT *bulk_elem_pt = dynamic_cast<FLUID_ELEMENT *>(
+        FLUID_ELEMENT* bulk_elem_pt = dynamic_cast<FLUID_ELEMENT*>(
           Fluid_mesh_pt->boundary_element_pt(b, e));
 
         // Find the index of the face of element e along boundary b
         int face_index = Fluid_mesh_pt->face_index_at_boundary(b, e);
 
         // Create new element
-        ImposeDisplacementByLagrangeMultiplierElement<FLUID_ELEMENT> *el_pt =
+        ImposeDisplacementByLagrangeMultiplierElement<FLUID_ELEMENT>* el_pt =
           new ImposeDisplacementByLagrangeMultiplierElement<FLUID_ELEMENT>(
             bulk_elem_pt, face_index);
 
@@ -366,7 +366,7 @@ private:
         unsigned nnod = el_pt->nnode();
         for (unsigned j = 0; j < nnod; j++)
         {
-          Node *nod_pt = el_pt->node_pt(j);
+          Node* nod_pt = el_pt->node_pt(j);
 
           // How many nodal values were used by the "bulk" element
           // that originally created this node?
@@ -422,8 +422,8 @@ private:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Cast to a solid element
-      SOLID_ELEMENT *el_pt =
-        dynamic_cast<SOLID_ELEMENT *>(Solid_mesh_pt->element_pt(e));
+      SOLID_ELEMENT* el_pt =
+        dynamic_cast<SOLID_ELEMENT*>(Solid_mesh_pt->element_pt(e));
 
       double pot_en, kin_en;
       el_pt->get_energy(pot_en, kin_en);
@@ -440,8 +440,8 @@ private:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Cast to a fluid element
-      FLUID_ELEMENT *el_pt =
-        dynamic_cast<FLUID_ELEMENT *>(Fluid_mesh_pt->element_pt(e));
+      FLUID_ELEMENT* el_pt =
+        dynamic_cast<FLUID_ELEMENT*>(Fluid_mesh_pt->element_pt(e));
       // Add to the dissipation
       dissipation += el_pt->dissipation();
     }
@@ -449,27 +449,27 @@ private:
   }
 
   /// Bulk solid mesh
-  RefineableSolidTriangleMesh<SOLID_ELEMENT> *Solid_mesh_pt;
+  RefineableSolidTriangleMesh<SOLID_ELEMENT>* Solid_mesh_pt;
 
 public:
   /// Bulk fluid mesh
-  RefineableSolidTriangleMesh<FLUID_ELEMENT> *Fluid_mesh_pt;
+  RefineableSolidTriangleMesh<FLUID_ELEMENT>* Fluid_mesh_pt;
 
 private:
   /// Vector of pointers to mesh of Lagrange multiplier elements
-  Vector<SolidMesh *> Lagrange_multiplier_mesh_pt;
+  Vector<SolidMesh*> Lagrange_multiplier_mesh_pt;
 
   /// Vectors of pointers to mesh of traction elements
-  Vector<SolidMesh *> Traction_mesh_pt;
+  Vector<SolidMesh*> Traction_mesh_pt;
 
   /// Triangle mesh polygon for outer boundary
-  TriangleMeshPolygon *Solid_outer_boundary_polyline_pt;
+  TriangleMeshPolygon* Solid_outer_boundary_polyline_pt;
 
   /// Triangle mesh polygon for outer boundary
-  TriangleMeshPolygon *Fluid_outer_boundary_polyline_pt;
+  TriangleMeshPolygon* Fluid_outer_boundary_polyline_pt;
 
   // GeomObject incarnation of fsi boundaries in solid mesh
-  Vector<MeshAsGeomObject *> Solid_fsi_boundary_pt;
+  Vector<MeshAsGeomObject*> Solid_fsi_boundary_pt;
 };
 
 //===============start_constructor========================================
@@ -493,7 +493,7 @@ UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::UnstructuredFSIProblem()
   //--------------------------------------------------------------
   // four separeate polyline segments
   //---------------------------------
-  Vector<TriangleMeshCurveSection *> solid_boundary_segment_pt(4);
+  Vector<TriangleMeshCurveSection*> solid_boundary_segment_pt(4);
 
   // Initialize boundary segment
   Vector<Vector<double>> bound_seg(2);
@@ -563,7 +563,7 @@ UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::UnstructuredFSIProblem()
   //----------------------
   double uniform_element_area = leaflet_width * leaflet_height / 20.0;
 
-  TriangleMeshClosedCurve *solid_closed_curve_pt =
+  TriangleMeshClosedCurve* solid_closed_curve_pt =
     Solid_outer_boundary_polyline_pt;
 
   // Use the TriangleMeshParameters object for gathering all
@@ -578,7 +578,7 @@ UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::UnstructuredFSIProblem()
     triangle_mesh_parameters_solid);
 
   // Set error estimator for bulk mesh
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   Solid_mesh_pt->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Set targets for spatial adaptivity
@@ -597,7 +597,7 @@ UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::UnstructuredFSIProblem()
   for (unsigned inod = 0; inod < num_nod; inod++)
   {
     // Get node
-    SolidNode *nod_pt = Solid_mesh_pt->boundary_node_pt(ibound, inod);
+    SolidNode* nod_pt = Solid_mesh_pt->boundary_node_pt(ibound, inod);
 
     // Pin both directions
     for (unsigned i = 0; i < 2; i++)
@@ -611,8 +611,8 @@ UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::UnstructuredFSIProblem()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Cast to a solid element
-    SOLID_ELEMENT *el_pt =
-      dynamic_cast<SOLID_ELEMENT *>(Solid_mesh_pt->element_pt(i));
+    SOLID_ELEMENT* el_pt =
+      dynamic_cast<SOLID_ELEMENT*>(Solid_mesh_pt->element_pt(i));
 
     // Set the constitutive law
     el_pt->constitutive_law_pt() =
@@ -626,7 +626,7 @@ UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::UnstructuredFSIProblem()
   //--------------------------------------------------------------
   // four separeate polyline segments
   //---------------------------------
-  Vector<TriangleMeshCurveSection *> fluid_boundary_segment_pt(8);
+  Vector<TriangleMeshCurveSection*> fluid_boundary_segment_pt(8);
 
   // The first three boundaries should be in common with the solid
   for (unsigned b = 0; b < 3; b++)
@@ -709,7 +709,7 @@ UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::UnstructuredFSIProblem()
   uniform_element_area = channel_length * channel_height / 40.0;
   ;
 
-  TriangleMeshClosedCurve *fluid_closed_curve_pt =
+  TriangleMeshClosedCurve* fluid_closed_curve_pt =
     Fluid_outer_boundary_polyline_pt;
 
   // Use the TriangleMeshParameters object for gathering all
@@ -724,7 +724,7 @@ UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::UnstructuredFSIProblem()
     triangle_mesh_parameters_fluid);
 
   // Set error estimator for bulk mesh
-  Z2ErrorEstimator *fluid_error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* fluid_error_estimator_pt = new Z2ErrorEstimator;
   Fluid_mesh_pt->spatial_error_estimator_pt() = fluid_error_estimator_pt;
 
   // Set targets for spatial adaptivity
@@ -763,7 +763,7 @@ UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::UnstructuredFSIProblem()
         for (unsigned i = 0; i < 2; i++)
         {
           // Pin the node
-          SolidNode *nod_pt = Fluid_mesh_pt->boundary_node_pt(ibound, inod);
+          SolidNode* nod_pt = Fluid_mesh_pt->boundary_node_pt(ibound, inod);
           nod_pt->pin_position(i);
         }
       }
@@ -775,8 +775,8 @@ UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::UnstructuredFSIProblem()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    FLUID_ELEMENT *el_pt =
-      dynamic_cast<FLUID_ELEMENT *>(Fluid_mesh_pt->element_pt(e));
+    FLUID_ELEMENT* el_pt =
+      dynamic_cast<FLUID_ELEMENT*>(Fluid_mesh_pt->element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -865,7 +865,7 @@ UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::UnstructuredFSIProblem()
 //========================================================================
 template<class FLUID_ELEMENT, class SOLID_ELEMENT>
 void UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::doc_solution(
-  DocInfo &doc_info)
+  DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -897,7 +897,7 @@ void UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::doc_solution(
 //===========start_main===================================================
 /// Demonstrate how to solve an unstructured solid problem
 //========================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

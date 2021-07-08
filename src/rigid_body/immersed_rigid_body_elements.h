@@ -102,21 +102,21 @@ namespace oomph
   public:
     /// \short Function pointer to function that specifies
     /// external force
-    typedef void (*ExternalForceFctPt)(const double &time,
-                                       Vector<double> &external_force);
+    typedef void (*ExternalForceFctPt)(const double& time,
+                                       Vector<double>& external_force);
 
     /// \short Function pointer to function that specifies
     /// external torque
-    typedef void (*ExternalTorqueFctPt)(const double &time,
-                                        double &external_torque);
+    typedef void (*ExternalTorqueFctPt)(const double& time,
+                                        double& external_torque);
 
   protected:
     /// \short Default constructor that intialises everything to
     /// zero. This is expected to be called only from derived clases
     /// such as the ImmersedRigidBodyTriangleMeshPolygon that can provided
     /// their own position() functions.
-    ImmersedRigidBodyElement(TimeStepper *const &time_stepper_pt,
-                             Data *const &centre_displacement_data_pt = 0) :
+    ImmersedRigidBodyElement(TimeStepper* const& time_stepper_pt,
+                             Data* const& centre_displacement_data_pt = 0) :
       Initial_Phi(0.0),
       Mass(0.0),
       Moment_of_inertia(0.0),
@@ -138,9 +138,9 @@ namespace oomph
   public:
     /// \short Constructor that takes an underlying geometric object:
     /// and timestepper.
-    ImmersedRigidBodyElement(GeomObject *const &geom_object_pt,
-                             TimeStepper *const &time_stepper_pt,
-                             Data *const &centre_displacement_data_pt = 0) :
+    ImmersedRigidBodyElement(GeomObject* const& geom_object_pt,
+                             TimeStepper* const& time_stepper_pt,
+                             Data* const& centre_displacement_data_pt = 0) :
       Initial_Phi(0.0),
       Mass(0.0),
       Moment_of_inertia(0.0),
@@ -173,25 +173,25 @@ namespace oomph
     }
 
     /// Access function for the initial angle
-    double &initial_phi()
+    double& initial_phi()
     {
       return Initial_Phi;
     }
 
     /// Access function for the initial centre of mass
-    double &initial_centre_of_mass(const unsigned &i)
+    double& initial_centre_of_mass(const unsigned& i)
     {
       return Initial_centre_of_mass[i];
     }
 
     /// Access function for the initial centre of mass (const version)
-    const double &initial_centre_of_mass(const unsigned &i) const
+    const double& initial_centre_of_mass(const unsigned& i) const
     {
       return Initial_centre_of_mass[i];
     }
 
     /// Overload the position to apply the rotation and translation
-    void position(const Vector<double> &xi, Vector<double> &r) const
+    void position(const Vector<double>& xi, Vector<double>& r) const
     {
       Vector<double> initial_x(2);
       Geom_object_pt->position(xi, initial_x);
@@ -199,9 +199,9 @@ namespace oomph
     }
 
     /// Overload to include the time history of the motion of the object
-    void position(const unsigned &t,
-                  const Vector<double> &xi,
-                  Vector<double> &r) const
+    void position(const unsigned& t,
+                  const Vector<double>& xi,
+                  Vector<double>& r) const
     {
       Vector<double> initial_x(2);
       Geom_object_pt->position(xi, initial_x);
@@ -209,9 +209,9 @@ namespace oomph
     }
 
     /// Work out the position derivative, including rigid body motion
-    void dposition_dt(const Vector<double> &zeta,
-                      const unsigned &j,
-                      Vector<double> &drdt);
+    void dposition_dt(const Vector<double>& zeta,
+                      const unsigned& j,
+                      Vector<double>& drdt);
 
     /// \short Destuctor: Cleanup if required
     ~ImmersedRigidBodyElement()
@@ -226,38 +226,38 @@ namespace oomph
 
     /// Access to dimensionless "mass" shape parameter that must be set by hand
     /// for non polygonal shapes
-    double &mass_shape()
+    double& mass_shape()
     {
       return Mass;
     }
 
     /// Access to dimensionless polar "moment of inertia" shape parameter
-    double &moment_of_inertia_shape()
+    double& moment_of_inertia_shape()
     {
       return Moment_of_inertia;
     }
 
     /// \short Pointer to Data for centre of gravity displacement.
     /// Values: 0: x-displ; 1: y-displ; 2: rotation angle.
-    Data *&centre_displacement_data_pt()
+    Data*& centre_displacement_data_pt()
     {
       return Centre_displacement_data_pt;
     }
 
     /// x-displacement of centre of mass
-    double &centre_x_displacement()
+    double& centre_x_displacement()
     {
       return *(Centre_displacement_data_pt->value_pt(0));
     }
 
     /// y-displacement of centre of mass
-    double &centre_y_displacement()
+    double& centre_y_displacement()
     {
       return *(Centre_displacement_data_pt->value_pt(1));
     }
 
     /// rotation of centre of mass
-    double &centre_rotation_angle()
+    double& centre_rotation_angle()
     {
       return *(Centre_displacement_data_pt->value_pt(2));
     }
@@ -275,13 +275,13 @@ namespace oomph
     }
 
     /// Pin the i-th coordinate of the centre of mass
-    void pin_centre_of_mass_coordinate(const unsigned &i)
+    void pin_centre_of_mass_coordinate(const unsigned& i)
     {
       Centre_displacement_data_pt->pin(i);
     }
 
     /// Unpin the i-th coordinate of the centre of mass
-    void unpin_centre_of_mass_coordinate(const unsigned &i)
+    void unpin_centre_of_mass_coordinate(const unsigned& i)
     {
       Centre_displacement_data_pt->unpin(i);
     }
@@ -299,10 +299,10 @@ namespace oomph
     }
 
     /// Output position velocity and acceleration of centre of gravity
-    void output_centre_of_gravity(std::ostream &outfile);
+    void output_centre_of_gravity(std::ostream& outfile);
 
     /// Get the contribution to the residuals
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Get generic function without jacobian terms
       get_residuals_rigid_body_generic(
@@ -310,8 +310,8 @@ namespace oomph
     }
 
     /// Get residuals including contribution to jacobian
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       // Get generic function, but don't bother to get jacobian terms
       bool flag = false;
@@ -341,7 +341,7 @@ namespace oomph
         unsigned nel = Drag_mesh_pt->nelement();
         for (unsigned e = 0; e < nel; e++)
         {
-          dynamic_cast<FaceElement *>(Drag_mesh_pt->element_pt(e))
+          dynamic_cast<FaceElement*>(Drag_mesh_pt->element_pt(e))
             ->bulk_element_pt()
             ->node_update();
         }
@@ -349,13 +349,13 @@ namespace oomph
     }
 
     /// \short After an external data change, update the nodal positions
-    inline void update_in_external_fd(const unsigned &i)
+    inline void update_in_external_fd(const unsigned& i)
     {
       node_update_adjacent_fluid_elements();
     }
 
     ///\short Do nothing to reset within finite-differencing of  external data
-    inline void reset_in_external_fd(const unsigned &i) {}
+    inline void reset_in_external_fd(const unsigned& i) {}
 
     ///\short After all external data finite-differencing, update nodal
     /// positions
@@ -365,13 +365,13 @@ namespace oomph
     }
 
     ///\short After an internal data change, update the nodal positions
-    inline void update_in_internal_fd(const unsigned &i)
+    inline void update_in_internal_fd(const unsigned& i)
     {
       node_update_adjacent_fluid_elements();
     }
 
     ///\short Do nothing to reset within finite-differencing of internal data
-    inline void reset_in_internal_fd(const unsigned &i) {}
+    inline void reset_in_internal_fd(const unsigned& i) {}
 
     ///\short After all internal data finite-differencing, update nodal
     /// positions
@@ -382,34 +382,34 @@ namespace oomph
 
     /// \short Get force and torque from specified fct pointers and
     /// drag mesh
-    void get_force_and_torque(const double &time,
-                              Vector<double> &force,
-                              double &torque);
+    void get_force_and_torque(const double& time,
+                              Vector<double>& force,
+                              double& torque);
 
     /// \short Access to function pointer to function that specifies
     /// external force
-    ExternalForceFctPt &external_force_fct_pt()
+    ExternalForceFctPt& external_force_fct_pt()
     {
       return External_force_fct_pt;
     }
 
     /// \short Access to function pointer to function that specifies
     /// external torque
-    ExternalTorqueFctPt &external_torque_fct_pt()
+    ExternalTorqueFctPt& external_torque_fct_pt()
     {
       return External_torque_fct_pt;
     }
 
     /// \short Access fct to mesh containing face elements that allow
     /// the computation of the drag on the body
-    Mesh *const &drag_mesh_pt()
+    Mesh* const& drag_mesh_pt()
     {
       return Drag_mesh_pt;
     }
 
     /// \short Function to set the drag mesh and add the appropriate load
     /// and geometric data as external data to the Rigid Body
-    void set_drag_mesh(Mesh *const &drag_mesh_pt);
+    void set_drag_mesh(Mesh* const& drag_mesh_pt);
 
     /// \short Function to clear the drag mesh and all associated external data
     void flush_drag_mesh()
@@ -430,68 +430,68 @@ namespace oomph
 
     /// \short Return pointer to the j-th (only) Data item that the object's
     /// shape depends on.
-    Data *geom_data_pt(const unsigned &j)
+    Data* geom_data_pt(const unsigned& j)
     {
       return this->Centre_displacement_data_pt;
     }
 
     /// \short Access function to the direction of gravity
-    Vector<double> *&g_pt()
+    Vector<double>*& g_pt()
     {
       return G_pt;
     }
 
     /// \short Access function for gravity
-    const Vector<double> &g() const
+    const Vector<double>& g() const
     {
       return *G_pt;
     }
 
     /// \short Access function for the pointer to the fluid Reynolds number
-    double *&re_pt()
+    double*& re_pt()
     {
       return Re_pt;
     }
 
     /// Access function for the fluid Reynolds number
-    const double &re() const
+    const double& re() const
     {
       return *Re_pt;
     }
 
     /// \short Access function for the pointer to the fluid Strouhal number
-    double *&st_pt()
+    double*& st_pt()
     {
       return St_pt;
     }
 
     /// Access function for the fluid Strouhal number
-    const double &st() const
+    const double& st() const
     {
       return *St_pt;
     }
 
     /// \short Access function for pointer to the fluid inverse Froude number
     /// (dimensionless gravitational loading)
-    double *&re_invfr_pt()
+    double*& re_invfr_pt()
     {
       return ReInvFr_pt;
     }
 
     /// Access to the fluid inverse Froude number
-    const double &re_invfr()
+    const double& re_invfr()
     {
       return *ReInvFr_pt;
     }
 
     /// \short Access function for the pointer to the density ratio
-    double *&density_ratio_pt()
+    double*& density_ratio_pt()
     {
       return Density_ratio_pt;
     }
 
     /// Access function for the the density ratio
-    const double &density_ratio() const
+    const double& density_ratio() const
     {
       return *Density_ratio_pt;
     }
@@ -500,9 +500,9 @@ namespace oomph
     /// \short Helper function to adjust the position in
     /// response to changes in position and angle of the solid
     /// about the centre of mass
-    inline void apply_rigid_body_motion(const unsigned &t,
-                                        const Vector<double> &initial_x,
-                                        Vector<double> &r) const
+    inline void apply_rigid_body_motion(const unsigned& t,
+                                        const Vector<double>& initial_x,
+                                        Vector<double>& r) const
     {
       // Scale relative to the centre of mass
       double X = initial_x[0] - Initial_centre_of_mass[0];
@@ -538,7 +538,7 @@ namespace oomph
     /// \short Return the equation number associated with the i-th
     /// centre of gravity displacment
     /// 0: x-displ; 1: y-displ; 2: rotation angle.
-    inline int centre_displacement_local_eqn(const unsigned &i)
+    inline int centre_displacement_local_eqn(const unsigned& i)
     {
       if (Displacement_data_is_internal)
       {
@@ -551,12 +551,12 @@ namespace oomph
     }
 
     /// \short Initialisation function
-    void initialise(TimeStepper *const &time_stepper_pt);
+    void initialise(TimeStepper* const& time_stepper_pt);
 
     /// Get residuals and/or Jacobian
-    void get_residuals_rigid_body_generic(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian,
-                                          const bool &flag);
+    void get_residuals_rigid_body_generic(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian,
+                                          const bool& flag);
 
     /// Storage for the external data that is formed from hijacked data
     /// that must be deleted by this element
@@ -593,11 +593,11 @@ namespace oomph
 
     /// \short Data for centre of gravity displacement.
     /// Values: 0: x-displ; 1: y-displ; 2: rotation angle.
-    Data *Centre_displacement_data_pt;
+    Data* Centre_displacement_data_pt;
 
   private:
     /// Underlying geometric object
-    GeomObject *Geom_object_pt;
+    GeomObject* Geom_object_pt;
 
     /// \short Function pointer to function that specifies
     /// external force
@@ -609,22 +609,22 @@ namespace oomph
 
     /// \short Mesh containing face elements that allow the computation of
     /// the drag on the body
-    Mesh *Drag_mesh_pt;
+    Mesh* Drag_mesh_pt;
 
     /// The direction of gravity
-    Vector<double> *G_pt;
+    Vector<double>* G_pt;
 
     /// Reynolds number of external fluid
-    double *Re_pt;
+    double* Re_pt;
 
     /// Strouhal number of external fluid
-    double *St_pt;
+    double* St_pt;
 
     /// Reynolds number divided by Froude number of external fluid
-    double *ReInvFr_pt;
+    double* ReInvFr_pt;
 
     /// Density ratio of the solid to the external fluid
-    double *Density_ratio_pt;
+    double* Density_ratio_pt;
 
     /// Static default value for physical constants
     static double Default_Physical_Constant_Value;
@@ -676,16 +676,16 @@ namespace oomph
     /// the two displacements of and the rotation angle about the polygon's
     /// centre of mass.
     ImmersedRigidBodyTriangleMeshPolygon(
-      const Vector<double> &hole_center,
-      const Vector<TriangleMeshCurveSection *> &boundary_polyline_pt,
-      TimeStepper *const &time_stepper_pt,
-      Data *const &centre_displacement_data_pt = 0);
+      const Vector<double>& hole_center,
+      const Vector<TriangleMeshCurveSection*>& boundary_polyline_pt,
+      TimeStepper* const& time_stepper_pt,
+      Data* const& centre_displacement_data_pt = 0);
 
     /// \short Empty Destuctor
     ~ImmersedRigidBodyTriangleMeshPolygon() {}
 
     /// Overload (again) the position to apply the rotation and translation
-    void position(const Vector<double> &xi, Vector<double> &r) const
+    void position(const Vector<double>& xi, Vector<double>& r) const
     {
       Vector<double> initial_x(2);
       this->get_initial_position(xi, initial_x);
@@ -693,9 +693,9 @@ namespace oomph
     }
 
     /// Overload (again) the position to apply the rotation and translation
-    void position(const unsigned &t,
-                  const Vector<double> &xi,
-                  Vector<double> &r) const
+    void position(const unsigned& t,
+                  const Vector<double>& xi,
+                  Vector<double>& r) const
     {
       Vector<double> initial_x(2);
       this->get_initial_position(xi, initial_x);
@@ -710,7 +710,7 @@ namespace oomph
 
   private:
     /// \short Get the initial position of the polygon
-    void get_initial_position(const Vector<double> &xi, Vector<double> &r) const
+    void get_initial_position(const Vector<double>& xi, Vector<double>& r) const
     {
       // Find the number of polylines (boundaries)
       unsigned n_poly = this->npolyline();
@@ -765,7 +765,7 @@ namespace oomph
       }
 
       // Cache the appropriate polyline
-      TriangleMeshPolyLine *const line_pt = this->polyline_pt(p);
+      TriangleMeshPolyLine* const line_pt = this->polyline_pt(p);
 
       // If we are at the first vertex in the polyline, return it
       if (xi[0] == Zeta_vertex[p][0])
@@ -822,7 +822,7 @@ namespace oomph
       for (unsigned p = 0; p < n_poly; ++p)
       {
         // Cache the pointer to the polyline
-        TriangleMeshPolyLine *const line_pt = this->polyline_pt(p);
+        TriangleMeshPolyLine* const line_pt = this->polyline_pt(p);
 
         // Find the number of vertices in the polyline
         unsigned n_vertex = line_pt->nvertex();

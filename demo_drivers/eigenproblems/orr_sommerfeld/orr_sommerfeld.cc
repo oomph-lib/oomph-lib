@@ -77,15 +77,15 @@ public:
 
   /// Access function: Nodal function value at local node n
   /// Uses suitably interpolated value for hanging nodes.
-  virtual double u(const unsigned &n, const unsigned &i) const = 0;
+  virtual double u(const unsigned& n, const unsigned& i) const = 0;
 
-  virtual double p(const unsigned &n, const unsigned &i) const = 0;
+  virtual double p(const unsigned& n, const unsigned& i) const = 0;
 
   virtual unsigned npres() const = 0;
 
-  virtual void pshape(const Vector<double> &s, Shape &psi) const = 0;
+  virtual void pshape(const Vector<double>& s, Shape& psi) const = 0;
 
-  void get_base_flow(const Vector<double> &s, double &U, double &Uz)
+  void get_base_flow(const Vector<double>& s, double& U, double& Uz)
   {
     // Get the coordinate
     double z = interpolated_x(s, 0);
@@ -95,23 +95,23 @@ public:
   }
 
   // Access function for the Reynolds number
-  double *&re_pt()
+  double*& re_pt()
   {
     return Re_pt;
   }
 
-  double *&a_real_pt()
+  double*& a_real_pt()
   {
     return A_Real_pt;
   }
 
-  double *&a_imag_pt()
+  double*& a_imag_pt()
   {
     return A_Imag_pt;
   }
 
   /// Output with default number of plot points
-  void output(ostream &outfile)
+  void output(ostream& outfile)
   {
     unsigned nplot = 5;
     output(outfile, nplot);
@@ -119,7 +119,7 @@ public:
 
   /// \short Output FE representation of soln: x,y,u or x,y,z,u at
   /// Nplot^DIM plot points
-  void output(ostream &outfile, const unsigned &nplot)
+  void output(ostream& outfile, const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(DIM);
@@ -154,9 +154,9 @@ public:
 
   /// Assemble the contributions to the jacobian and mass matrices
   void fill_in_contribution_to_jacobian_and_mass_matrix(
-    Vector<double> &residuals,
-    DenseMatrix<double> &jacobian,
-    DenseMatrix<double> &mass_matrix)
+    Vector<double>& residuals,
+    DenseMatrix<double>& jacobian,
+    DenseMatrix<double>& mass_matrix)
   {
     // Find out how many nodes there are
     unsigned n_node = nnode();
@@ -496,7 +496,7 @@ public:
   }
 
   /// Return FE representation of the pressure
-  inline double interpolated_p(const Vector<double> &s, const unsigned &i) const
+  inline double interpolated_p(const Vector<double>& s, const unsigned& i) const
   {
     unsigned n_pres = npres();
 
@@ -519,7 +519,7 @@ public:
   }
 
   /// Return FE representation of function value u(s) at local coordinate s
-  inline double interpolated_u(const Vector<double> &s, const unsigned &i) const
+  inline double interpolated_u(const Vector<double>& s, const unsigned& i) const
   {
     unsigned n_node = nnode();
 
@@ -544,15 +544,15 @@ public:
 protected:
   /// \short Shape/test functions and derivs w.r.t. to global coords at
   /// local coord. s; return  Jacobian of mapping
-  virtual double dshape_eulerian(const Vector<double> &s,
-                                 Shape &psi,
-                                 DShape &dpsidx) const = 0;
+  virtual double dshape_eulerian(const Vector<double>& s,
+                                 Shape& psi,
+                                 DShape& dpsidx) const = 0;
 
   /// \short Shape/test functions and derivs w.r.t. to global coords at
   /// integration point ipt; return  Jacobian of mapping
-  virtual double dshape_eulerian_at_knot(const unsigned &ipt,
-                                         Shape &psi,
-                                         DShape &dpsidx) const = 0;
+  virtual double dshape_eulerian_at_knot(const unsigned& ipt,
+                                         Shape& psi,
+                                         DShape& dpsidx) const = 0;
 
   /// Array to hold local eqn numbers: Local_eqn[n] (=-1 for BC)
   DenseMatrix<int> U_local_eqn;
@@ -561,9 +561,9 @@ protected:
   DenseMatrix<int> P_local_eqn;
 
 private:
-  double *Re_pt;
-  double *A_Real_pt;
-  double *A_Imag_pt;
+  double* Re_pt;
+  double* A_Real_pt;
+  double* A_Imag_pt;
 };
 
 ///////////////////////////////////////////////////////////////////////////
@@ -621,7 +621,7 @@ public:
 
   /// \short  Required  # of `values' (pinned or dofs)
   /// at node n
-  inline unsigned required_nvalue(const unsigned &n) const
+  inline unsigned required_nvalue(const unsigned& n) const
   {
     return Initial_Nvalue[n];
   }
@@ -629,20 +629,20 @@ public:
   /// \short Access functions for the nodal function values: Nodal
   /// value at local node n.
   /// Uses suitably interpolated value for hanging nodes.
-  inline double u(const unsigned &n, const unsigned &i) const
+  inline double u(const unsigned& n, const unsigned& i) const
   {
     return nodal_value(n, i);
   }
 
   /// Return value of p
-  inline double p(const unsigned &n, const unsigned &i) const
+  inline double p(const unsigned& n, const unsigned& i) const
   {
     return this->internal_data_pt(n)->value(i);
   }
 
   /// \short Output function:
   ///  x,y,u   or    x,y,z,u
-  void output(ostream &outfile)
+  void output(ostream& outfile)
   {
     OrrSommerfeldEquations<1>::output(outfile);
   }
@@ -654,13 +654,13 @@ public:
 
   ///  \short Output function:
   ///   x,y,u   or    x,y,z,u at Nplot^DIM plot points
-  void output(ostream &outfile, const unsigned &Nplot)
+  void output(ostream& outfile, const unsigned& Nplot)
   {
     OrrSommerfeldEquations<1>::output(outfile, Nplot);
   }
 
   // Set the pshape
-  void pshape(const Vector<double> &s, Shape &psi) const
+  void pshape(const Vector<double>& s, Shape& psi) const
   {
     // psi[0] = 0.5*(1.0 -s[0]);
     // psi[1] = 0.5*(1.0 + s[0]);
@@ -670,15 +670,15 @@ public:
 
 protected:
   /// Shape, test functions & derivs. w.r.t. to global coords. Return Jacobian.
-  inline double dshape_eulerian(const Vector<double> &s,
-                                Shape &psi,
-                                DShape &dpsidx) const;
+  inline double dshape_eulerian(const Vector<double>& s,
+                                Shape& psi,
+                                DShape& dpsidx) const;
 
   /// \short Shape, test functions & derivs. w.r.t. to global coords. at
   /// integration point ipt. Return Jacobian.
-  inline double dshape_eulerian_at_knot(const unsigned &ipt,
-                                        Shape &psi,
-                                        DShape &dpsidx) const;
+  inline double dshape_eulerian_at_knot(const unsigned& ipt,
+                                        Shape& psi,
+                                        DShape& dpsidx) const;
 
 private:
   /// \short Static array of ints to hold number of variables
@@ -696,7 +696,7 @@ private:
 //======================================================================
 template<unsigned NNODE_1D>
 double QOrrSommerfeldElement<1, NNODE_1D>::dshape_eulerian(
-  const Vector<double> &s, Shape &psi, DShape &dpsidx) const
+  const Vector<double>& s, Shape& psi, DShape& dpsidx) const
 {
   // Call the geometrical shape functions and derivatives
   double J = QElement<1, NNODE_1D>::dshape_eulerian(s, psi, dpsidx);
@@ -713,7 +713,7 @@ double QOrrSommerfeldElement<1, NNODE_1D>::dshape_eulerian(
 //======================================================================
 template<unsigned NNODE_1D>
 double QOrrSommerfeldElement<1, NNODE_1D>::dshape_eulerian_at_knot(
-  const unsigned &ipt, Shape &psi, DShape &dpsidx) const
+  const unsigned& ipt, Shape& psi, DShape& dpsidx) const
 {
   // Call the geometrical shape functions and derivatives
   double J = QElement<1, NNODE_1D>::dshape_eulerian_at_knot(ipt, psi, dpsidx);
@@ -776,22 +776,22 @@ template<class ELEMENT>
 class OrrSommerfeldProblem : public Problem
 {
 private:
-  double *A_real_pt;
+  double* A_real_pt;
 
-  EigenSolver *eigensolver_pt;
+  EigenSolver* eigensolver_pt;
 
 private:
   Gauss<1, 4> integral;
 
 public:
   /// Constructor: Pass number of elements and pointer to source function
-  OrrSommerfeldProblem(const unsigned &n_element, double *const &A_Real_pt);
+  OrrSommerfeldProblem(const unsigned& n_element, double* const& A_Real_pt);
 
   /// Destructor (empty)
   ~OrrSommerfeldProblem() {}
 
   /// Access function for the Real part of the wavenumber
-  double *&a_real_pt()
+  double*& a_real_pt()
   {
     return A_real_pt;
   }
@@ -804,7 +804,7 @@ public:
 
   /// \short Doc the solution, pass the number of the case considered,
   /// so that output files can be distinguished.
-  void doc_solution(const unsigned &label);
+  void doc_solution(const unsigned& label);
 
 }; // end of problem class
 
@@ -814,8 +814,8 @@ public:
 /// Specify function pointer to source function.
 //========================================================================
 template<class ELEMENT>
-OrrSommerfeldProblem<ELEMENT>::OrrSommerfeldProblem(const unsigned &n_element,
-                                                    double *const &A_REAL_PT) :
+OrrSommerfeldProblem<ELEMENT>::OrrSommerfeldProblem(const unsigned& n_element,
+                                                    double* const& A_REAL_PT) :
   A_real_pt(A_REAL_PT)
 {
   // Set the shift to be zero (the default)
@@ -824,13 +824,13 @@ OrrSommerfeldProblem<ELEMENT>::OrrSommerfeldProblem(const unsigned &n_element,
   // Actually, we want the real part, but the magnitude does and allows
   // us to use continuation, for some reason that I might eventaually
   // understand.
-  static_cast<ARPACK *>(eigen_solver_pt())->track_eigenvalue_magnitude();
+  static_cast<ARPACK*>(eigen_solver_pt())->track_eigenvalue_magnitude();
   // The eigenvalues to the right of the shift correspond to the eigenvalues
   // nearest the shift when tracking the magnitude.
-  static_cast<ARPACK *>(eigen_solver_pt())->get_eigenvalues_right_of_shift();
+  static_cast<ARPACK*>(eigen_solver_pt())->get_eigenvalues_right_of_shift();
   // Increase the dimension of the arnoldi subspace to 50 (otherwise the
   // test fails on the Intel architecture)
-  static_cast<ARPACK *>(eigen_solver_pt())->narnoldi() = 50;
+  static_cast<ARPACK*>(eigen_solver_pt())->narnoldi() = 50;
 
   // Set the minimum arc-length to be quite large, so that the system bails
   // quickly if there are problems
@@ -869,7 +869,7 @@ OrrSommerfeldProblem<ELEMENT>::OrrSommerfeldProblem(const unsigned &n_element,
   // Set up the elements
   for (unsigned e = 0; e < n_element; e++)
   {
-    ELEMENT *temp_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* temp_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
     temp_pt->re_pt() = &Param::Re;
     temp_pt->a_real_pt() = A_real_pt;
     temp_pt->a_imag_pt() = &Param::A_imag;
@@ -885,7 +885,7 @@ OrrSommerfeldProblem<ELEMENT>::OrrSommerfeldProblem(const unsigned &n_element,
 /// Doc the solution in tecplot format. Label files with label.
 //========================================================================
 template<class ELEMENT>
-void OrrSommerfeldProblem<ELEMENT>::doc_solution(const unsigned &label)
+void OrrSommerfeldProblem<ELEMENT>::doc_solution(const unsigned& label)
 {
   ofstream some_file;
   char filename[100];
@@ -910,7 +910,7 @@ void OrrSommerfeldProblem<ELEMENT>::doc_solution(const unsigned &label)
 class ZeroResidualGenElement : public GeneralisedElement
 {
   // This Element actually stores a pointer to the eigenvalue problem
-  OrrSommerfeldProblem<QOrrSommerfeldElement<1, 3>> *eigenvalue_problem_pt;
+  OrrSommerfeldProblem<QOrrSommerfeldElement<1, 3>>* eigenvalue_problem_pt;
 
 public:
   /// Simple constructor
@@ -932,17 +932,17 @@ public:
   }
 
   /// Access function for the the eigenvalue
-  double &eval()
+  double& eval()
   {
     return *(internal_data_pt(0)->value_pt(0));
   }
 
-  double *eval_pt()
+  double* eval_pt()
   {
     return internal_data_pt(0)->value_pt(0);
   }
 
-  void fill_in_contribution_to_residuals(Vector<double> &residuals)
+  void fill_in_contribution_to_residuals(Vector<double>& residuals)
   {
     // There is only one value
     unsigned n_dof = ndof();
@@ -971,12 +971,12 @@ public:
   }
 
   // Get the residuals
-  void get_residuals(Vector<double> &residuals)
+  void get_residuals(Vector<double>& residuals)
   {
     fill_in_contribution_to_residuals(residuals);
   }
 
-  void output(std::ostream &output, const unsigned &)
+  void output(std::ostream& output, const unsigned&)
   {
     eigenvalue_problem_pt->mesh_pt()->output(output, 5);
   }
@@ -985,10 +985,10 @@ public:
 /// Mini problem class for the continuation problem
 class ContinuationProblem : public Problem
 {
-  ZeroResidualGenElement *element_pt;
+  ZeroResidualGenElement* element_pt;
 
 public:
-  ContinuationProblem(const unsigned &n_element)
+  ContinuationProblem(const unsigned& n_element)
   {
     Param::N_element = n_element;
     // Create our single element

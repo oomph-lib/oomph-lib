@@ -45,7 +45,7 @@ namespace TestProblem
   bool Use_point_source_solution = false;
 
   /// Source function
-  void source(const Vector<double> &x, Vector<double> &f)
+  void source(const Vector<double>& x, Vector<double>& f)
   {
     if (Use_point_source_solution)
     {
@@ -66,7 +66,7 @@ namespace TestProblem
   double Mass_source_decay_exponent = 50.0;
 
   /// Mass source
-  void mass_source(const Vector<double> &x, double &m)
+  void mass_source(const Vector<double>& x, double& m)
   {
     if (Use_point_source_solution)
     {
@@ -80,10 +80,10 @@ namespace TestProblem
   }
 
   /// Pressure around the boundary of the domain
-  void boundary_pressure(const double &time,
-                         const Vector<double> &x,
-                         const Vector<double> &n,
-                         double &result)
+  void boundary_pressure(const double& time,
+                         const Vector<double>& x,
+                         const Vector<double>& n,
+                         double& result)
   {
     if (Use_point_source_solution)
     {
@@ -96,7 +96,7 @@ namespace TestProblem
   }
 
   /// Exact solution: q1,q2,div_q,p
-  void exact_soln(const Vector<double> &x, Vector<double> &soln)
+  void exact_soln(const Vector<double>& x, Vector<double>& soln)
   {
     if (Use_point_source_solution)
     {
@@ -132,7 +132,7 @@ namespace TestProblem
   /// has to be called before projection in unstructured
   /// adaptation
   template<class ELEMENT>
-  void edge_sign_setup(Mesh *mesh_pt)
+  void edge_sign_setup(Mesh* mesh_pt)
   {
     // The dictionary keeping track of edge signs
     std::map<Edge, unsigned> assignments;
@@ -141,7 +141,7 @@ namespace TestProblem
     unsigned n_element = mesh_pt->nelement();
     for (unsigned e = 0; e < n_element; e++)
     {
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt->element_pt(e));
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt->element_pt(e));
 
       // Assign edge signs: Loop over the vertex nodes (always
       // first 3 nodes for triangles)
@@ -186,7 +186,7 @@ public:
   DarcyProblem();
 
   /// Post-process results, using unsigned to label files
-  void doc_solution(const unsigned &label);
+  void doc_solution(const unsigned& label);
 
   /// Actions before Newton solve (empty)
   void actions_before_newton_solve() {}
@@ -245,17 +245,17 @@ private:
 #ifdef ADAPTIVE
 
   /// Pointer to the refineable "bulk" mesh
-  RefineableTriangleMesh<ELEMENT> *Bulk_mesh_pt;
+  RefineableTriangleMesh<ELEMENT>* Bulk_mesh_pt;
 
 #else
 
   /// Pointer to the "bulk" mesh
-  TriangleMesh<ELEMENT> *Bulk_mesh_pt;
+  TriangleMesh<ELEMENT>* Bulk_mesh_pt;
 
 #endif
 
   /// Mesh of boundary condition elements
-  Mesh *Surface_mesh_pt;
+  Mesh* Surface_mesh_pt;
 
   /// Trace file for results
   std::ofstream Trace_file;
@@ -271,17 +271,17 @@ DarcyProblem<ELEMENT>::DarcyProblem()
   //-----
 
   // Closed curve definiting outer boundary
-  TriangleMeshClosedCurve *outer_boundary_pt = 0;
+  TriangleMeshClosedCurve* outer_boundary_pt = 0;
 
   // Internal boundary to prevent problem with flux B.C.s
-  Vector<TriangleMeshOpenCurve *> inner_open_boundary_pt;
+  Vector<TriangleMeshOpenCurve*> inner_open_boundary_pt;
 
   Vector<double> zeta(1);
   Vector<double> posn(2);
 
-  Ellipse *outer_boundary_ellipse_pt = new Ellipse(1, 1);
+  Ellipse* outer_boundary_ellipse_pt = new Ellipse(1, 1);
 
-  Vector<TriangleMeshCurveSection *> outer_curvilinear_boundary_pt(2);
+  Vector<TriangleMeshCurveSection*> outer_curvilinear_boundary_pt(2);
 
   // First bit
   double zeta_start = 0.0;
@@ -380,7 +380,7 @@ void DarcyProblem<ELEMENT>::create_pressure_elements()
   for (unsigned n = 0; n < n_neigh; n++)
   {
     // Create the face element
-    DarcyFaceElement<ELEMENT> *pressure_element_pt =
+    DarcyFaceElement<ELEMENT>* pressure_element_pt =
       new DarcyFaceElement<ELEMENT>(
         Bulk_mesh_pt->boundary_element_pt(bound, n),
         Bulk_mesh_pt->face_index_at_boundary(bound, n));
@@ -407,7 +407,7 @@ void DarcyProblem<ELEMENT>::complete_problem_setup()
   unsigned n_element = Bulk_mesh_pt->nelement();
   for (unsigned e = 0; e < n_element; e++)
   {
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
     // Set source fcts
     el_pt->source_fct_pt() = TestProblem::source;
@@ -427,7 +427,7 @@ void DarcyProblem<ELEMENT>::complete_problem_setup()
 
   // Get the nodal index at which values representing edge fluxes
   // at flux interpolation points are stored
-  ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(0));
+  ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(0));
 
   // Where are the values stored?
   unsigned n = el_pt->nedge_flux_interpolation_point();
@@ -450,14 +450,14 @@ void DarcyProblem<ELEMENT>::complete_problem_setup()
     for (unsigned e = 0; e < n_boundary_element; e++)
     {
       // Upcast the current element to the actual type
-      ELEMENT *el_pt =
-        dynamic_cast<ELEMENT *>(Bulk_mesh_pt->boundary_element_pt(ibound, e));
+      ELEMENT* el_pt =
+        dynamic_cast<ELEMENT*>(Bulk_mesh_pt->boundary_element_pt(ibound, e));
 
       // Loop over the edges
       for (unsigned edge = 0; edge < 3; edge++)
       {
         // Get pointer to node that stores the edge flux dofs for this edge
-        Node *nod_pt = el_pt->edge_flux_node_pt(edge);
+        Node* nod_pt = el_pt->edge_flux_node_pt(edge);
 
         // Pin/set values for the flux degrees of freedom
         if (nod_pt->is_on_boundary(ibound))
@@ -472,7 +472,7 @@ void DarcyProblem<ELEMENT>::complete_problem_setup()
 
           // Build a temporary face element from which we'll extract
           // the outer unit normal
-          DarcyFaceElement<ELEMENT> *face_el_pt =
+          DarcyFaceElement<ELEMENT>* face_el_pt =
             new DarcyFaceElement<ELEMENT>(el_pt, f);
 
           // Loop over the flux interpolation points
@@ -555,7 +555,7 @@ void DarcyProblem<ELEMENT>::doc_shape_functions()
   unsigned nel = Bulk_mesh_pt->nelement();
   for (unsigned e = 0; e < nel; e++)
   {
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
     // Backup edge-based q values
     unsigned n_q_basis_edge = el_pt->nq_basis_edge();
@@ -583,7 +583,7 @@ void DarcyProblem<ELEMENT>::doc_shape_functions()
   //-------------------------------
   for (unsigned e = 0; e < nel; e++)
   {
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
     // Kill edge-based q values
     unsigned n_q_basis_edge = el_pt->nq_basis_edge();
@@ -611,14 +611,14 @@ void DarcyProblem<ELEMENT>::doc_shape_functions()
   //-----------------------------------------------------------------
   // one by one
   //-----------
-  MeshAsGeomObject *mesh_geom_obj_pt = new MeshAsGeomObject(Bulk_mesh_pt);
+  MeshAsGeomObject* mesh_geom_obj_pt = new MeshAsGeomObject(Bulk_mesh_pt);
   Vector<double> x(2, 0.0);
   Vector<double> s(2, 0.0);
 
   // Get pointer to GeomObject that contains this point and cast
-  GeomObject *geom_obj_pt = 0;
+  GeomObject* geom_obj_pt = 0;
   mesh_geom_obj_pt->locate_zeta(x, geom_obj_pt, s);
-  ELEMENT *el_pt = dynamic_cast<ELEMENT *>(geom_obj_pt);
+  ELEMENT* el_pt = dynamic_cast<ELEMENT*>(geom_obj_pt);
 
   // Number of plot points
   unsigned npts = 10;
@@ -634,7 +634,7 @@ void DarcyProblem<ELEMENT>::doc_shape_functions()
     // Get face index of face associated with this flux basis fct
     // and erect face element
     unsigned f = el_pt->face_index_of_q_edge_basis_fct(j);
-    DarcyFaceElement<ELEMENT> *face_el_pt =
+    DarcyFaceElement<ELEMENT>* face_el_pt =
       new DarcyFaceElement<ELEMENT>(el_pt, f);
 
     // Get outer unit normal halfway along edge
@@ -654,7 +654,7 @@ void DarcyProblem<ELEMENT>::doc_shape_functions()
     unsigned nel = Bulk_mesh_pt->nelement();
     for (unsigned e = 0; e < nel; e++)
     {
-      dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e))
+      dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e))
         ->output(some_file, npts);
     }
     some_file.close();
@@ -686,7 +686,7 @@ void DarcyProblem<ELEMENT>::doc_shape_functions()
     some_file.open(filename);
     for (unsigned e = 0; e < nel; e++)
     {
-      dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e))
+      dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e))
         ->output_with_projected_flux(some_file, npts, unit_normal);
     }
     some_file.close();
@@ -708,7 +708,7 @@ void DarcyProblem<ELEMENT>::doc_shape_functions()
     unsigned nel = Bulk_mesh_pt->nelement();
     for (unsigned e = 0; e < nel; e++)
     {
-      dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e))
+      dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e))
         ->output(some_file, npts);
     }
     some_file.close();
@@ -729,7 +729,7 @@ void DarcyProblem<ELEMENT>::doc_shape_functions()
     unsigned nel = Bulk_mesh_pt->nelement();
     for (unsigned e = 0; e < nel; e++)
     {
-      dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e))
+      dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e))
         ->output(some_file, npts);
     }
     some_file.close();
@@ -740,7 +740,7 @@ void DarcyProblem<ELEMENT>::doc_shape_functions()
   unsigned count = 0;
   for (unsigned e = 0; e < nel; e++)
   {
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
     // Reset edge-based q values
     unsigned n_q_basis_edge = el_pt->nq_basis_edge();
@@ -772,7 +772,7 @@ void DarcyProblem<ELEMENT>::doc_shape_functions()
 /// Write the solution and exact solution to file, and calculate the error
 //========================================================================
 template<class ELEMENT>
-void DarcyProblem<ELEMENT>::doc_solution(const unsigned &label)
+void DarcyProblem<ELEMENT>::doc_solution(const unsigned& label)
 {
   ofstream some_file;
   char filename[100];
@@ -836,7 +836,7 @@ void DarcyProblem<ELEMENT>::doc_solution(const unsigned &label)
 //=====================================================================
 /// Driver code for Darcy test problem
 //=====================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

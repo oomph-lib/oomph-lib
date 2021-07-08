@@ -51,7 +51,7 @@ namespace ConstSourceForPoisson
   double Strength = -1.0;
 
   /// Const source function
-  void get_source(const Vector<double> &x, double &source)
+  void get_source(const Vector<double>& x, double& source)
   {
     source = Strength;
   }
@@ -81,14 +81,14 @@ public:
   /// \short Overloaded version of the problem's access function to
   /// the mesh. Recasts the pointer to the base Mesh object to
   /// the actual mesh type.
-  FishMesh<ELEMENT> *mesh_pt()
+  FishMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<FishMesh<ELEMENT> *>(Problem::mesh_pt());
+    return dynamic_cast<FishMesh<ELEMENT>*>(Problem::mesh_pt());
   }
 
   /// \short Doc the solution. Output directory and labels are specified
   /// by DocInfo object
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 }; // end of problem class
 
@@ -127,7 +127,7 @@ FishPoissonProblem<ELEMENT>::FishPoissonProblem()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from FiniteElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the source function pointer
     el_pt->source_fct_pt() = &ConstSourceForPoisson::get_source;
@@ -142,7 +142,7 @@ FishPoissonProblem<ELEMENT>::FishPoissonProblem()
 /// Doc the solution in tecplot format.
 //========================================================================
 template<class ELEMENT>
-void FishPoissonProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void FishPoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];

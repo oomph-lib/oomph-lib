@@ -56,7 +56,7 @@ namespace oomph
   /// Get strain (3x3 entries; r, z, phi)
   //=======================================================================
   void AxisymmetricLinearElasticityEquations::get_strain(
-    const Vector<double> &s, DenseMatrix<double> &strain)
+    const Vector<double>& s, DenseMatrix<double>& strain)
   {
     // Find out how many nodes there are
     unsigned n_node = this->nnode();
@@ -160,7 +160,7 @@ namespace oomph
   //=======================================================================
   void AxisymmetricLinearElasticityEquations::
     fill_in_generic_contribution_to_residuals_axisymmetric_linear_elasticity(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag)
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned flag)
   {
     // Find out how many nodes there are
     unsigned n_node = this->nnode();
@@ -452,8 +452,8 @@ namespace oomph
   /// Output exact solution  r,z, u_r, u_z, u_theta
   //=======================================================================
   void AxisymmetricLinearElasticityEquations::output_fct(
-    std::ostream &outfile,
-    const unsigned &nplot,
+    std::ostream& outfile,
+    const unsigned& nplot,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
   {
     // Vector of local coordinates
@@ -503,9 +503,9 @@ namespace oomph
   /// Time dependent version
   //=======================================================================
   void AxisymmetricLinearElasticityEquations::output_fct(
-    std::ostream &outfile,
-    const unsigned &nplot,
-    const double &time,
+    std::ostream& outfile,
+    const unsigned& nplot,
+    const double& time,
     FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
   {
     // Vector of local coordinates
@@ -553,8 +553,8 @@ namespace oomph
   //=======================================================================
   /// Output: r,z, u_r, u_z, u_theta
   //=======================================================================
-  void AxisymmetricLinearElasticityEquations::output(std::ostream &outfile,
-                                                     const unsigned &nplot)
+  void AxisymmetricLinearElasticityEquations::output(std::ostream& outfile,
+                                                     const unsigned& nplot)
   {
     // Set output Vector
     Vector<double> s(2);
@@ -613,8 +613,8 @@ namespace oomph
   //=======================================================================
   /// C-style output:r,z, u_r, u_z, u_theta
   //=======================================================================
-  void AxisymmetricLinearElasticityEquations::output(FILE *file_pt,
-                                                     const unsigned &nplot)
+  void AxisymmetricLinearElasticityEquations::output(FILE* file_pt,
+                                                     const unsigned& nplot)
   {
     // Vector of local coordinates
     Vector<double> s(2);
@@ -656,10 +656,10 @@ namespace oomph
   /// and L2 norm of velocity solution over element.
   //=======================================================================
   void AxisymmetricLinearElasticityEquations::compute_error(
-    std::ostream &outfile,
+    std::ostream& outfile,
     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-    double &error,
-    double &norm)
+    double& error,
+    double& norm)
   {
     error = 0.0;
     norm = 0.0;
@@ -737,11 +737,11 @@ namespace oomph
   /// and L2 norm of velocity solution over element.
   //=======================================================================
   void AxisymmetricLinearElasticityEquations::compute_error(
-    std::ostream &outfile,
+    std::ostream& outfile,
     FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
-    const double &time,
-    double &error,
-    double &norm)
+    const double& time,
+    double& error,
+    double& norm)
   {
     error = 0.0;
     norm = 0.0;

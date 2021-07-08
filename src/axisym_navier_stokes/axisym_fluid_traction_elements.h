@@ -54,10 +54,10 @@ namespace oomph
     //=======================================================================
     /// Default load function (zero traction)
     //=======================================================================
-    extern void Zero_traction_fct(const double &time,
-                                  const Vector<double> &x,
-                                  const Vector<double> &N,
-                                  Vector<double> &load);
+    extern void Zero_traction_fct(const double& time,
+                                  const Vector<double>& x,
+                                  const Vector<double>& N,
+                                  Vector<double>& load);
 
   } // namespace AxisymmetricNavierStokesTractionElementHelper
 
@@ -82,21 +82,21 @@ namespace oomph
     /// applied traction. (Not all of the input arguments will be
     /// required for all specific load functions but the list should
     /// cover all cases)
-    void (*Traction_fct_pt)(const double &time,
-                            const Vector<double> &x,
-                            const Vector<double> &n,
-                            Vector<double> &result);
+    void (*Traction_fct_pt)(const double& time,
+                            const Vector<double>& x,
+                            const Vector<double>& n,
+                            Vector<double>& result);
 
     /// \short Get the traction vector: Pass number of integration point
     /// (dummy), Eulerian coordinate and normal vector and return the load
     /// vector (not all of the input arguments will be required for all specific
     /// load functions but the list should cover all cases). This function is
     /// virtual so it can be overloaded for FSI.
-    virtual void get_traction(const double &time,
-                              const unsigned &intpt,
-                              const Vector<double> &x,
-                              const Vector<double> &n,
-                              Vector<double> &traction) const
+    virtual void get_traction(const double& time,
+                              const unsigned& intpt,
+                              const Vector<double>& x,
+                              const Vector<double>& n,
+                              Vector<double>& traction) const
     {
       Traction_fct_pt(time, x, n, traction);
     }
@@ -106,13 +106,13 @@ namespace oomph
     // fill_in_contribution_to_residuals in fill_in_contribution_to_jacobian
     // which causes all kinds of pain if overloading later on
     void fill_in_contribution_to_residuals_axisymmetric_nst_traction(
-      Vector<double> &residuals);
+      Vector<double>& residuals);
 
   public:
     /// \short Constructor, which takes a "bulk" element and the
     /// value of the index and its limit
-    AxisymmetricNavierStokesTractionElement(FiniteElement *const &element_pt,
-                                            const int &face_index) :
+    AxisymmetricNavierStokesTractionElement(FiniteElement* const& element_pt,
+                                            const int& face_index) :
       FaceGeometry<ELEMENT>(), FaceElement()
     {
       // Attach the geometrical information to the element. N.B. This function
@@ -123,7 +123,7 @@ namespace oomph
       unsigned n_dim = element_pt->nodal_dimension();
 
       // Find the index at which the velocity unknowns are stored
-      ELEMENT *cast_element_pt = dynamic_cast<ELEMENT *>(element_pt);
+      ELEMENT* cast_element_pt = dynamic_cast<ELEMENT*>(element_pt);
       this->U_index_axisymmetric_nst_traction.resize(n_dim + 1);
       for (unsigned i = 0; i < n_dim + 1; i++)
       {
@@ -137,23 +137,23 @@ namespace oomph
     }
 
     /// Reference to the traction function pointer
-    void (*&traction_fct_pt())(const double &time,
-                               const Vector<double> &x,
-                               const Vector<double> &n,
-                               Vector<double> &traction)
+    void (*&traction_fct_pt())(const double& time,
+                               const Vector<double>& x,
+                               const Vector<double>& n,
+                               Vector<double>& traction)
     {
       return Traction_fct_pt;
     }
 
     /// Return the residuals
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       fill_in_contribution_to_residuals_axisymmetric_nst_traction(residuals);
     }
 
     /// Fill in contribution from Jacobian
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       // Call the residuals
       fill_in_contribution_to_residuals_axisymmetric_nst_traction(residuals);
@@ -164,15 +164,15 @@ namespace oomph
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default (needed to break
     /// indeterminacy if bulk element is SolidElement)
-    double zeta_nodal(const unsigned &n,
-                      const unsigned &k,
-                      const unsigned &i) const
+    double zeta_nodal(const unsigned& n,
+                      const unsigned& k,
+                      const unsigned& i) const
     {
       return FaceElement::zeta_nodal(n, k, i);
     }
 
     /// \short Output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       unsigned nplot = 5;
       output(outfile, nplot);
@@ -190,9 +190,9 @@ namespace oomph
 
     /// \short Write values of the k-th scalar field at the plot points. Needs
     /// to be implemented for each new specific element type.
-    void scalar_value_paraview(std::ofstream &file_out,
-                               const unsigned &k,
-                               const unsigned &nplot) const
+    void scalar_value_paraview(std::ofstream& file_out,
+                               const unsigned& k,
+                               const unsigned& nplot) const
     {
       // Number of dimensions
       unsigned n_dim = this->nodal_dimension();
@@ -274,7 +274,7 @@ namespace oomph
     /// \short Name of the i-th scalar field. Default implementation
     /// returns V1 for the first one, V2 for the second etc. Can (should!) be
     /// overloaded with more meaningful names in specific elements.
-    std::string scalar_name_paraview(const unsigned &i) const
+    std::string scalar_name_paraview(const unsigned& i) const
     {
       // Number of dimensions
       unsigned n_dim = this->nodal_dimension();
@@ -302,7 +302,7 @@ namespace oomph
     }
 
     /// \short Output function
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       // Number of dimensions
       unsigned n_dim = this->nodal_dimension();
@@ -382,13 +382,13 @@ namespace oomph
     }
 
     /// \short C_style output function
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
 
     /// \short C-style output function
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       FiniteElement::output(file_pt, n_plot);
     }
@@ -396,9 +396,9 @@ namespace oomph
     /// \short Compute traction vector at specified local coordinate
     /// Should only be used for post-processing; ignores dependence
     /// on integration point!
-    void traction(const double &time,
-                  const Vector<double> &s,
-                  Vector<double> &traction);
+    void traction(const double& time,
+                  const Vector<double>& s,
+                  Vector<double>& traction);
   };
 
   ///////////////////////////////////////////////////////////////////////
@@ -412,7 +412,7 @@ namespace oomph
   //=====================================================================
   template<class ELEMENT>
   void AxisymmetricNavierStokesTractionElement<ELEMENT>::traction(
-    const double &time, const Vector<double> &s, Vector<double> &traction)
+    const double& time, const Vector<double>& s, Vector<double>& traction)
   {
     unsigned n_dim = this->nodal_dimension();
 
@@ -438,7 +438,7 @@ namespace oomph
   template<class ELEMENT>
   void AxisymmetricNavierStokesTractionElement<ELEMENT>::
     fill_in_contribution_to_residuals_axisymmetric_nst_traction(
-      Vector<double> &residuals)
+      Vector<double>& residuals)
   {
     // Find out how many nodes there are
     unsigned n_node = nnode();
@@ -614,13 +614,13 @@ namespace oomph
     /// to distinguish the additional nodal values created by
     /// this element from thos created by other FaceElements.
     LinearisedFSIAxisymmetricNStNoSlipBCElementElement(
-      FiniteElement *const &bulk_el_pt,
-      const int &face_index,
-      const unsigned &id = 0);
+      FiniteElement* const& bulk_el_pt,
+      const int& face_index,
+      const unsigned& id = 0);
 
     /// Broken copy constructor
     LinearisedFSIAxisymmetricNStNoSlipBCElementElement(
-      const LinearisedFSIAxisymmetricNStNoSlipBCElementElement &dummy)
+      const LinearisedFSIAxisymmetricNStNoSlipBCElementElement& dummy)
     {
       BrokenCopy::broken_copy(
         "LinearisedFSIAxisymmetricNStNoSlipBCElementElement");
@@ -640,7 +640,7 @@ namespace oomph
 
     /// \short Access function for the pointer to the fluid Strouhal number
     /// (if not set, St defaults to 1)
-    double *&st_pt()
+    double*& st_pt()
     {
       return St_pt;
     }
@@ -652,7 +652,7 @@ namespace oomph
     }
 
     /// Add the element's contribution to its residual vector
-    inline void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    inline void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Call the generic residuals function with flag set to 0
       // using a dummy matrix argument
@@ -662,8 +662,8 @@ namespace oomph
 
     /// \short Add the element's contribution to its residual vector and its
     /// Jacobian matrix
-    inline void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                                 DenseMatrix<double> &jacobian)
+    inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                                 DenseMatrix<double>& jacobian)
     {
       // Call the generic routine with the flag set to 1
       fill_in_generic_residual_contribution_fsi_no_slip_axisym(
@@ -674,7 +674,7 @@ namespace oomph
     }
 
     /// Output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       // Dummy
       unsigned nplot = 0;
@@ -682,7 +682,7 @@ namespace oomph
     }
 
     /// Output function: Output at Gauss points; n_plot is ignored.
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       outfile << "ZONE\n";
 
@@ -706,8 +706,8 @@ namespace oomph
         interpolated_zeta(s_int, zeta);
 
         // Get velocity from adjacent solid
-        SOLID_BULK_ELEMENT *ext_el_pt =
-          dynamic_cast<SOLID_BULK_ELEMENT *>(external_element_pt(0, ipt));
+        SOLID_BULK_ELEMENT* ext_el_pt =
+          dynamic_cast<SOLID_BULK_ELEMENT*>(external_element_pt(0, ipt));
         Vector<double> s_ext(external_element_local_coord(0, ipt));
         Vector<double> dudt(3);
         ext_el_pt->interpolated_du_dt_axisymmetric_linear_elasticity(s_ext,
@@ -721,13 +721,13 @@ namespace oomph
     }
 
     /// C-style output function
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FaceGeometry<FLUID_BULK_ELEMENT>::output(file_pt);
     }
 
     /// C-style output function
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       FaceGeometry<FLUID_BULK_ELEMENT>::output(file_pt, n_plot);
     }
@@ -736,9 +736,9 @@ namespace oomph
     /// \short Function to compute the shape and test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
-    inline double shape_and_test(const Vector<double> &s,
-                                 Shape &psi,
-                                 Shape &test) const
+    inline double shape_and_test(const Vector<double>& s,
+                                 Shape& psi,
+                                 Shape& test) const
     {
       // Find number of nodes
       unsigned n_node = nnode();
@@ -759,9 +759,9 @@ namespace oomph
     /// \short Function to compute the shape and test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
-    inline double shape_and_test_at_knot(const unsigned &ipt,
-                                         Shape &psi,
-                                         Shape &test) const
+    inline double shape_and_test_at_knot(const unsigned& ipt,
+                                         Shape& psi,
+                                         Shape& test) const
     {
       // Find number of nodes
       unsigned n_node = nnode();
@@ -784,9 +784,9 @@ namespace oomph
     /// flag=1(or 0): do (or don't) compute the contribution to the
     /// Jacobian as well.
     void fill_in_generic_residual_contribution_fsi_no_slip_axisym(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      const unsigned &flag);
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag);
 
     /// The spatial dimension of the problem
     unsigned Dim;
@@ -798,7 +798,7 @@ namespace oomph
     unsigned Id;
 
     /// Pointer to fluid Strouhal number
-    double *St_pt;
+    double* St_pt;
   };
 
   //////////////////////////////////////////////////////////////////////
@@ -817,9 +817,9 @@ namespace oomph
   LinearisedFSIAxisymmetricNStNoSlipBCElementElement<FLUID_BULK_ELEMENT,
                                                      SOLID_BULK_ELEMENT>::
     LinearisedFSIAxisymmetricNStNoSlipBCElementElement(
-      FiniteElement *const &bulk_el_pt,
-      const int &face_index,
-      const unsigned &id) :
+      FiniteElement* const& bulk_el_pt,
+      const int& face_index,
+      const unsigned& id) :
     FaceGeometry<FLUID_BULK_ELEMENT>(), FaceElement()
   {
     // Set source element storage: one interaction with an external element
@@ -849,7 +849,7 @@ namespace oomph
     for (unsigned i = 0; i < 3; i++)
     {
       U_index_fsi_no_slip_axisym[i] =
-        dynamic_cast<FLUID_BULK_ELEMENT *>(bulk_el_pt)->u_index_axi_nst(i);
+        dynamic_cast<FLUID_BULK_ELEMENT*>(bulk_el_pt)->u_index_axi_nst(i);
     }
 
     // We need Dim+1 additional values for each FaceElement node
@@ -870,9 +870,9 @@ namespace oomph
   void LinearisedFSIAxisymmetricNStNoSlipBCElementElement<FLUID_BULK_ELEMENT,
                                                           SOLID_BULK_ELEMENT>::
     fill_in_generic_residual_contribution_fsi_no_slip_axisym(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      const unsigned &flag)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag)
   {
     // Find out how many nodes there are
     const unsigned n_node = nnode();
@@ -919,11 +919,10 @@ namespace oomph
       // Loop over nodes
       for (unsigned j = 0; j < n_node; j++)
       {
-        Node *nod_pt = node_pt(j);
+        Node* nod_pt = node_pt(j);
 
         // Cast to a boundary node
-        BoundaryNodeBase *bnod_pt =
-          dynamic_cast<BoundaryNodeBase *>(node_pt(j));
+        BoundaryNodeBase* bnod_pt = dynamic_cast<BoundaryNodeBase*>(node_pt(j));
 
         // Get the index of the first nodal value associated with
         // this FaceElement
@@ -940,8 +939,8 @@ namespace oomph
       }
 
       // Get velocity from adjacent solid
-      SOLID_BULK_ELEMENT *ext_el_pt =
-        dynamic_cast<SOLID_BULK_ELEMENT *>(external_element_pt(0, ipt));
+      SOLID_BULK_ELEMENT* ext_el_pt =
+        dynamic_cast<SOLID_BULK_ELEMENT*>(external_element_pt(0, ipt));
       Vector<double> s_ext(external_element_local_coord(0, ipt));
       Vector<double> dudt(3);
       ext_el_pt->interpolated_du_dt_axisymmetric_linear_elasticity(s_ext, dudt);
@@ -973,8 +972,8 @@ namespace oomph
               for (unsigned l2 = 0; l2 < n_node; l2++)
               {
                 // Cast to a boundary node
-                BoundaryNodeBase *bnod_pt =
-                  dynamic_cast<BoundaryNodeBase *>(node_pt(l2));
+                BoundaryNodeBase* bnod_pt =
+                  dynamic_cast<BoundaryNodeBase*>(node_pt(l2));
 
                 // Local unknown
                 int local_unknown = nodal_local_eqn(
@@ -994,8 +993,8 @@ namespace oomph
           // Now do the Lagrange multiplier equations
           //-----------------------------------------
           // Cast to a boundary node
-          BoundaryNodeBase *bnod_pt =
-            dynamic_cast<BoundaryNodeBase *>(node_pt(l));
+          BoundaryNodeBase* bnod_pt =
+            dynamic_cast<BoundaryNodeBase*>(node_pt(l));
 
           // Local eqn number:
           int local_eqn = nodal_local_eqn(

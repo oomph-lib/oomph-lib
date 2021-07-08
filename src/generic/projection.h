@@ -130,8 +130,8 @@ namespace oomph
     /// E.g. in Taylor Hood elements the fld-th velocities are stored
     /// at the fld-th value of the nodes; the pressures (the DIM-th
     /// field) are the DIM-th values at the vertex nodes etc.
-    virtual Vector<std::pair<Data *, unsigned>> data_values_of_field(
-      const unsigned &fld) = 0;
+    virtual Vector<std::pair<Data*, unsigned>> data_values_of_field(
+      const unsigned& fld) = 0;
 
     /// \short Number of fields of the problem, so e.g. for 2D Navier Stokes
     /// this would be 3 (for the two velocities and one pressure)
@@ -139,7 +139,7 @@ namespace oomph
 
     /// \short Number of history values to be stored for fld-th field
     /// (includes current value!)
-    virtual unsigned nhistory_values_for_projection(const unsigned &fld) = 0;
+    virtual unsigned nhistory_values_for_projection(const unsigned& fld) = 0;
 
     ///\short Number of history values to be stored when projecting
     /// the history values of the nodal coordinates (includes current value!)
@@ -148,11 +148,11 @@ namespace oomph
     /// \short Return number of values (pinned or not) associated with
     /// field fld within the element. This must correspond to the
     /// number of shape functions returned in jacobian_and_shape_of_field(...).
-    virtual unsigned nvalue_of_field(const unsigned &fld) = 0;
+    virtual unsigned nvalue_of_field(const unsigned& fld) = 0;
 
     /// \short Return local equation numbers associated with value ivalue
     /// of field fld within the element.
-    virtual int local_equation(const unsigned &fld, const unsigned &ivalue) = 0;
+    virtual int local_equation(const unsigned& fld, const unsigned& ivalue) = 0;
 
     /// \short Return Jacobian of mapping and the shape functions associated
     /// with field fld. The number of shape functions must match the
@@ -161,15 +161,15 @@ namespace oomph
     /// the "normal" nodal shape functions; if the element contains
     /// internal Data that is not associated with shape functions,
     /// simply set the corresonding shape function to 1.
-    virtual double jacobian_and_shape_of_field(const unsigned &fld,
-                                               const Vector<double> &s,
-                                               Shape &psi) = 0;
+    virtual double jacobian_and_shape_of_field(const unsigned& fld,
+                                               const Vector<double>& s,
+                                               Shape& psi) = 0;
 
     /// \short Return the fld-th field at local coordinates s
     /// at time-level time (time=0: current value; time>0: history values)
-    virtual double get_field(const unsigned &time,
-                             const unsigned &fld,
-                             const Vector<double> &s) = 0;
+    virtual double get_field(const unsigned& time,
+                             const unsigned& fld,
+                             const Vector<double>& s) = 0;
   };
 
   //=====================================================================
@@ -184,7 +184,7 @@ namespace oomph
   {
   protected:
     /// Overloaded version of fill_in_contribution_to_residuals
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Do projection
       if (Do_projection)
@@ -207,16 +207,16 @@ namespace oomph
     /// built up incrementally as we descend through the
     /// call hierarchy of this function when called from
     /// Problem::describe_dofs(...)
-    void describe_local_dofs(std::ostream &out,
-                             const std::string &current_string) const
+    void describe_local_dofs(std::ostream& out,
+                             const std::string& current_string) const
     {
       ElementWithExternalElement::describe_local_dofs(out, current_string);
       ELEMENT::describe_local_dofs(out, current_string);
     }
 
     /// Overloaded version of fill_in_contribution_to_jacobian
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       // Do projection
       if (Do_projection)
@@ -237,13 +237,12 @@ namespace oomph
     /// \short Residual for the projection step. Flag indicates if we
     /// want the Jacobian (1) or not (0). Virtual so it can be
     /// overloaded if necessary
-    virtual void residual_for_projection(Vector<double> &residuals,
-                                         DenseMatrix<double> &jacobian,
-                                         const unsigned &flag)
+    virtual void residual_for_projection(Vector<double>& residuals,
+                                         DenseMatrix<double>& jacobian,
+                                         const unsigned& flag)
     {
       // Am I a solid element
-      SolidFiniteElement *solid_el_pt =
-        dynamic_cast<SolidFiniteElement *>(this);
+      SolidFiniteElement* solid_el_pt = dynamic_cast<SolidFiniteElement*>(this);
 
       unsigned n_dim = dim();
 
@@ -274,13 +273,13 @@ namespace oomph
         double w = integral_pt()->weight(ipt);
 
         // Find same point in base mesh using external storage
-        FiniteElement *other_el_pt = 0;
+        FiniteElement* other_el_pt = 0;
         other_el_pt = this->external_element_pt(0, ipt);
         Vector<double> other_s(n_dim);
         other_s = this->external_element_local_coord(0, ipt);
 
-        ProjectableElement<ELEMENT> *cast_el_pt =
-          dynamic_cast<ProjectableElement<ELEMENT> *>(other_el_pt);
+        ProjectableElement<ELEMENT>* cast_el_pt =
+          dynamic_cast<ProjectableElement<ELEMENT>*>(other_el_pt);
 
         // Storage for the local equation and local unknown
         int local_eqn = 0, local_unknown = 0;
@@ -316,7 +315,7 @@ namespace oomph
 
             // Get the Lagrangian position in the other element
             double interpolated_xi_bar =
-              dynamic_cast<SolidFiniteElement *>(cast_el_pt)
+              dynamic_cast<SolidFiniteElement*>(cast_el_pt)
                 ->interpolated_xi(other_s, Projected_lagrangian);
 
             // Now loop over the nodes and position dofs
@@ -528,9 +527,9 @@ namespace oomph
 
     /// \short Use Eulerian coordinates for matching in locate_zeta
     /// when doing projection
-    double zeta_nodal(const unsigned &n,
-                      const unsigned &k,
-                      const unsigned &i) const
+    double zeta_nodal(const unsigned& n,
+                      const unsigned& k,
+                      const unsigned& i) const
     {
       if (Do_projection)
       {
@@ -626,27 +625,27 @@ namespace oomph
     }
 
     /// Field that is currently being projected
-    unsigned &projected_field()
+    unsigned& projected_field()
     {
       return Projected_field;
     }
 
     /// Which history value are we projecting?
-    unsigned &time_level_for_projection()
+    unsigned& time_level_for_projection()
     {
       return Time_level_for_projection;
     }
 
     /// \short When projecting the history values of the nodal coordinates,
     /// this is the coordinate we're projecting
-    unsigned &projected_coordinate()
+    unsigned& projected_coordinate()
     {
       return Projected_coordinate;
     }
 
     /// \short When projecting the Lagrangian coordinates this is
     /// the coordinate that is being projected
-    unsigned &projected_lagrangian_coordinate()
+    unsigned& projected_lagrangian_coordinate()
     {
       return Projected_lagrangian;
     }
@@ -740,7 +739,7 @@ namespace oomph
     }
 
     ///\short Project from base into the problem's own mesh.
-    void project(Mesh *base_mesh_pt, const bool &dont_project_positions = false)
+    void project(Mesh* base_mesh_pt, const bool& dont_project_positions = false)
     {
       // Use an iterative solver?
       if (Use_iterative_solver_for_projection)
@@ -754,7 +753,7 @@ namespace oomph
           // Create a Trilinos Solver
           Iterative_solver_projection_pt = new TrilinosAztecOOSolver;
           // Select CG as the linear solver
-          dynamic_cast<TrilinosAztecOOSolver *>(Iterative_solver_projection_pt)
+          dynamic_cast<TrilinosAztecOOSolver*>(Iterative_solver_projection_pt)
             ->solver_type() = TrilinosAztecOOSolver::CG;
         }
         else
@@ -858,7 +857,7 @@ namespace oomph
 
       // How many fields do we have to project?
       unsigned n_fields =
-        dynamic_cast<PROJECTABLE_ELEMENT *>(Problem::mesh_pt()->element_pt(0))
+        dynamic_cast<PROJECTABLE_ELEMENT*>(Problem::mesh_pt()->element_pt(0))
           ->nfields_for_projection();
 
       // Spatial dimension of the problem
@@ -870,8 +869,8 @@ namespace oomph
       // Set things up for coordinate projection
       for (unsigned e = 0; e < n_element; e++)
       {
-        PROJECTABLE_ELEMENT *el_pt = dynamic_cast<PROJECTABLE_ELEMENT *>(
-          Problem::mesh_pt()->element_pt(e));
+        PROJECTABLE_ELEMENT* el_pt =
+          dynamic_cast<PROJECTABLE_ELEMENT*>(Problem::mesh_pt()->element_pt(e));
 
         // Switch to projection
         el_pt->enable_projection();
@@ -882,8 +881,8 @@ namespace oomph
       // corresponding points in the two meshes)
       for (unsigned e = 0; e < n_element1; e++)
       {
-        PROJECTABLE_ELEMENT *el_pt =
-          dynamic_cast<PROJECTABLE_ELEMENT *>(base_mesh_pt->element_pt(e));
+        PROJECTABLE_ELEMENT* el_pt =
+          dynamic_cast<PROJECTABLE_ELEMENT*>(base_mesh_pt->element_pt(e));
 
         // Switch to projection
         el_pt->enable_projection();
@@ -918,7 +917,7 @@ namespace oomph
         // the unknown positions for this.
         // If we can cast the first element of the mesh to a solid element,
         // then assume that we have solid elements
-        if (dynamic_cast<SolidFiniteElement *>(
+        if (dynamic_cast<SolidFiniteElement*>(
               Problem::mesh_pt()->element_pt(0)))
         {
           // Store current positions
@@ -931,7 +930,7 @@ namespace oomph
 
           // Loop over the Lagrangian coordinate
           const unsigned n_lagrangian =
-            dynamic_cast<SolidNode *>(Problem::mesh_pt()->node_pt(0))
+            dynamic_cast<SolidNode*>(Problem::mesh_pt()->node_pt(0))
               ->nlagrangian();
 
           // Now loop over the lagrangian coordinates
@@ -986,8 +985,8 @@ namespace oomph
             for (unsigned n = 0; n < n_node; ++n)
             {
               // Cast it to a solid node
-              SolidNode *solid_node_pt =
-                dynamic_cast<SolidNode *>(Problem::mesh_pt()->node_pt(n));
+              SolidNode* solid_node_pt =
+                dynamic_cast<SolidNode*>(Problem::mesh_pt()->node_pt(n));
               // Now find number of types
               const unsigned n_position_type = solid_node_pt->nposition_type();
               // Find number of lagrangian types
@@ -1029,7 +1028,7 @@ namespace oomph
           // Now project the position histories
 
           // Check number of history values for coordinates
-          n_history_values = dynamic_cast<PROJECTABLE_ELEMENT *>(
+          n_history_values = dynamic_cast<PROJECTABLE_ELEMENT*>(
                                Problem::mesh_pt()->element_pt(0))
                                ->nhistory_values_for_coordinate_projection();
 
@@ -1080,7 +1079,7 @@ namespace oomph
                 for (unsigned n = 0; n < n_node; ++n)
                 {
                   // Cache the pointer to the node
-                  Node *nod_pt = Problem::mesh_pt()->node_pt(n);
+                  Node* nod_pt = Problem::mesh_pt()->node_pt(n);
                   // Find the number of generalised dofs
                   const unsigned n_position_type = nod_pt->nposition_type();
                   // Now copy all back
@@ -1120,11 +1119,11 @@ namespace oomph
           unsigned n_element = Problem::mesh_pt()->nelement();
           for (unsigned e = 0; e < n_element; e++)
           {
-            FiniteElement *el_pt = Problem::mesh_pt()->finite_element_pt(e);
+            FiniteElement* el_pt = Problem::mesh_pt()->finite_element_pt(e);
             unsigned nnod = el_pt->nnode();
             for (unsigned j = 0; j < nnod; j++)
             {
-              Node *nod_pt = el_pt->node_pt(j);
+              Node* nod_pt = el_pt->node_pt(j);
               if (nod_pt->nvalue() == 0)
               {
                 std::ostringstream error_stream;
@@ -1151,7 +1150,7 @@ namespace oomph
 #endif
 
           // Check number of history values for coordinates
-          n_history_values = dynamic_cast<PROJECTABLE_ELEMENT *>(
+          n_history_values = dynamic_cast<PROJECTABLE_ELEMENT*>(
                                Problem::mesh_pt()->element_pt(0))
                                ->nhistory_values_for_coordinate_projection();
 
@@ -1200,11 +1199,11 @@ namespace oomph
                 unsigned n_element = Problem::mesh_pt()->nelement();
                 for (unsigned e = 0; e < n_element; e++)
                 {
-                  PROJECTABLE_ELEMENT *new_el_pt =
-                    dynamic_cast<PROJECTABLE_ELEMENT *>(
+                  PROJECTABLE_ELEMENT* new_el_pt =
+                    dynamic_cast<PROJECTABLE_ELEMENT*>(
                       Problem::mesh_pt()->element_pt(e));
 
-                  Vector<std::pair<Data *, unsigned>> data =
+                  Vector<std::pair<Data*, unsigned>> data =
                     new_el_pt->data_values_of_field(0);
 
                   unsigned d_size = data.size();
@@ -1212,7 +1211,7 @@ namespace oomph
                   {
                     // Replace as coordinates
                     double coord = data[d].first->value(0, 0);
-                    dynamic_cast<Node *>(data[d].first)->x(time_level, i) =
+                    dynamic_cast<Node*>(data[d].first)->x(time_level, i) =
                       coord;
                   }
                 }
@@ -1230,8 +1229,8 @@ namespace oomph
       // Disable projection of coordinates
       for (unsigned e = 0; e < n_element; e++)
       {
-        PROJECTABLE_ELEMENT *el_pt = dynamic_cast<PROJECTABLE_ELEMENT *>(
-          Problem::mesh_pt()->element_pt(e));
+        PROJECTABLE_ELEMENT* el_pt =
+          dynamic_cast<PROJECTABLE_ELEMENT*>(Problem::mesh_pt()->element_pt(e));
 
         el_pt->set_project_values();
       }
@@ -1249,7 +1248,7 @@ namespace oomph
 
         // Check number of history values
         n_history_values =
-          dynamic_cast<PROJECTABLE_ELEMENT *>(Problem::mesh_pt()->element_pt(0))
+          dynamic_cast<PROJECTABLE_ELEMENT*>(Problem::mesh_pt()->element_pt(0))
             ->nhistory_values_for_projection(fld);
 
         // Loop over number of history values
@@ -1288,11 +1287,11 @@ namespace oomph
           {
             for (unsigned e = 0; e < n_element; e++)
             {
-              PROJECTABLE_ELEMENT *new_el_pt =
-                dynamic_cast<PROJECTABLE_ELEMENT *>(
+              PROJECTABLE_ELEMENT* new_el_pt =
+                dynamic_cast<PROJECTABLE_ELEMENT*>(
                   Problem::mesh_pt()->element_pt(e));
 
-              Vector<std::pair<Data *, unsigned>> data =
+              Vector<std::pair<Data*, unsigned>> data =
                 new_el_pt->data_values_of_field(fld);
 
               unsigned d_size = data.size();
@@ -1311,8 +1310,8 @@ namespace oomph
       // Reset parameters of external storage and interactions
       for (unsigned e = 0; e < n_element; e++)
       {
-        PROJECTABLE_ELEMENT *new_el_pt = dynamic_cast<PROJECTABLE_ELEMENT *>(
-          Problem::mesh_pt()->element_pt(e));
+        PROJECTABLE_ELEMENT* new_el_pt =
+          dynamic_cast<PROJECTABLE_ELEMENT*>(Problem::mesh_pt()->element_pt(e));
 
         // Flush information associated with the external elements
         new_el_pt->flush_all_external_element_storage();
@@ -1322,8 +1321,8 @@ namespace oomph
 
       for (unsigned e = 0; e < n_element1; e++)
       {
-        PROJECTABLE_ELEMENT *el_pt =
-          dynamic_cast<PROJECTABLE_ELEMENT *>(base_mesh_pt->element_pt(e));
+        PROJECTABLE_ELEMENT* el_pt =
+          dynamic_cast<PROJECTABLE_ELEMENT*>(base_mesh_pt->element_pt(e));
 
         // Flush information associated with the external elements
         el_pt->flush_all_external_element_storage();
@@ -1418,8 +1417,8 @@ namespace oomph
       // Deal with positional dofs if (pseudo-)solid element
       // If we can cast the first element to a SolidFiniteElement then
       // assume that we have a solid mesh
-      SolidFiniteElement *solid_el_pt =
-        dynamic_cast<SolidFiniteElement *>(Problem::mesh_pt()->element_pt(0));
+      SolidFiniteElement* solid_el_pt =
+        dynamic_cast<SolidFiniteElement*>(Problem::mesh_pt()->element_pt(0));
       if (solid_el_pt != 0)
       {
         const unsigned n_node = this->mesh_pt()->nnode();
@@ -1432,8 +1431,8 @@ namespace oomph
         for (unsigned n = 0; n < n_node; n++)
         {
           // Cache a pointer to a solid node
-          SolidNode *const solid_nod_pt =
-            dynamic_cast<SolidNode *>(this->mesh_pt()->node_pt(n));
+          SolidNode* const solid_nod_pt =
+            dynamic_cast<SolidNode*>(this->mesh_pt()->node_pt(n));
           // Now resize the appropriate storage
           Solid_backup[n].resize(n_position_type, n_dim);
 
@@ -1459,8 +1458,8 @@ namespace oomph
       // Deal with positional dofs if (pseudo-)solid element
       // If we can cast the first element to a SolidFiniteElement then
       // assume that we have a solid mesh
-      SolidFiniteElement *solid_el_pt =
-        dynamic_cast<SolidFiniteElement *>(Problem::mesh_pt()->element_pt(0));
+      SolidFiniteElement* solid_el_pt =
+        dynamic_cast<SolidFiniteElement*>(Problem::mesh_pt()->element_pt(0));
       if (solid_el_pt != 0)
       {
         const unsigned n_node = this->mesh_pt()->nnode();
@@ -1472,8 +1471,8 @@ namespace oomph
         for (unsigned n = 0; n < n_node; n++)
         {
           // Cache a pointer to a solid node
-          SolidNode *const solid_nod_pt =
-            dynamic_cast<SolidNode *>(this->mesh_pt()->node_pt(n));
+          SolidNode* const solid_nod_pt =
+            dynamic_cast<SolidNode*>(this->mesh_pt()->node_pt(n));
 
           for (unsigned i = 0; i < n_dim; i++)
           {
@@ -1497,11 +1496,11 @@ namespace oomph
       const unsigned n_element = Problem::mesh_pt()->nelement();
       for (unsigned e = 0; e < n_element; ++e)
       {
-        FiniteElement *el_pt = Problem::mesh_pt()->finite_element_pt(e);
+        FiniteElement* el_pt = Problem::mesh_pt()->finite_element_pt(e);
         unsigned nint = el_pt->ninternal_data();
         for (unsigned j = 0; j < nint; j++)
         {
-          Data *int_data_pt = el_pt->internal_data_pt(j);
+          Data* int_data_pt = el_pt->internal_data_pt(j);
           unsigned nval = int_data_pt->nvalue();
           for (unsigned i = 0; i < nval; i++)
           {
@@ -1512,7 +1511,7 @@ namespace oomph
         unsigned nnod = el_pt->nnode();
         for (unsigned j = 0; j < nnod; j++)
         {
-          Node *nod_pt = el_pt->node_pt(j);
+          Node* nod_pt = el_pt->node_pt(j);
           unsigned nval = nod_pt->nvalue();
           for (unsigned i = 0; i < nval; i++)
           {
@@ -1522,8 +1521,8 @@ namespace oomph
       }
 
       /// Do we have a solid mesh?
-      SolidFiniteElement *solid_el_pt =
-        dynamic_cast<SolidFiniteElement *>(Problem::mesh_pt()->element_pt(0));
+      SolidFiniteElement* solid_el_pt =
+        dynamic_cast<SolidFiniteElement*>(Problem::mesh_pt()->element_pt(0));
       if (solid_el_pt != 0)
       {
         // Find number of nodes
@@ -1542,8 +1541,8 @@ namespace oomph
         // Loop over the nodes
         for (unsigned n = 0; n < n_node; n++)
         {
-          SolidNode *solid_nod_pt =
-            dynamic_cast<SolidNode *>(this->mesh_pt()->node_pt(n));
+          SolidNode* solid_nod_pt =
+            dynamic_cast<SolidNode*>(this->mesh_pt()->node_pt(n));
           for (unsigned i = 0; i < n_dim; i++)
           {
             for (unsigned k = 0; k < n_position_type; k++)
@@ -1567,8 +1566,8 @@ namespace oomph
       for (unsigned e = 0; e < n_element; ++e)
       {
         // Cast the first element
-        PROJECTABLE_ELEMENT *new_el_pt = dynamic_cast<PROJECTABLE_ELEMENT *>(
-          Problem::mesh_pt()->element_pt(e));
+        PROJECTABLE_ELEMENT* new_el_pt =
+          dynamic_cast<PROJECTABLE_ELEMENT*>(Problem::mesh_pt()->element_pt(e));
         // Find the number of fields
         unsigned n_fields = new_el_pt->nfields_for_projection();
 
@@ -1576,7 +1575,7 @@ namespace oomph
         for (unsigned f = 0; f < n_fields; f++)
         {
           // Extract the data and value for the field
-          Vector<std::pair<Data *, unsigned>> data =
+          Vector<std::pair<Data*, unsigned>> data =
             new_el_pt->data_values_of_field(f);
           // Now loop over all the data and unpin the appropriate values
           unsigned d_size = data.size();
@@ -1588,8 +1587,8 @@ namespace oomph
       }
 
       /// Do we have a solid mesh?
-      SolidFiniteElement *solid_el_pt =
-        dynamic_cast<SolidFiniteElement *>(Problem::mesh_pt()->element_pt(0));
+      SolidFiniteElement* solid_el_pt =
+        dynamic_cast<SolidFiniteElement*>(Problem::mesh_pt()->element_pt(0));
       if (solid_el_pt != 0)
       {
         // Find number of nodes
@@ -1608,8 +1607,8 @@ namespace oomph
         // Loop over the nodes
         for (unsigned n = 0; n < n_node; n++)
         {
-          SolidNode *solid_nod_pt =
-            dynamic_cast<SolidNode *>(this->mesh_pt()->node_pt(n));
+          SolidNode* solid_nod_pt =
+            dynamic_cast<SolidNode*>(this->mesh_pt()->node_pt(n));
           for (unsigned i = 0; i < n_dim; i++)
           {
             for (unsigned k = 0; k < n_position_type; k++)
@@ -1622,7 +1621,7 @@ namespace oomph
     }
 
     /// \short Helper function to unpin the values of coordinate coord
-    void unpin_dofs_of_coordinate(const unsigned &coord)
+    void unpin_dofs_of_coordinate(const unsigned& coord)
     {
       // Loop over the nodes
       const unsigned n_node = Problem::mesh_pt()->nnode();
@@ -1639,8 +1638,8 @@ namespace oomph
       for (unsigned n = 0; n < n_node; ++n)
       {
         // Cache access to the Node as a solid node
-        SolidNode *solid_nod_pt =
-          static_cast<SolidNode *>(Problem::mesh_pt()->node_pt(n));
+        SolidNode* solid_nod_pt =
+          static_cast<SolidNode*>(Problem::mesh_pt()->node_pt(n));
         // Unpin all position types associated with the given coordinate
         for (unsigned k = 0; k < n_position_type; ++k)
         {
@@ -1650,7 +1649,7 @@ namespace oomph
     }
 
     /// \short Helper function to unpin the values of coordinate coord
-    void pin_dofs_of_coordinate(const unsigned &coord)
+    void pin_dofs_of_coordinate(const unsigned& coord)
     {
       // Loop over the nodes
       const unsigned n_node = Problem::mesh_pt()->nnode();
@@ -1667,8 +1666,8 @@ namespace oomph
       for (unsigned n = 0; n < n_node; ++n)
       {
         // Cache access to the Node as a solid node
-        SolidNode *solid_nod_pt =
-          static_cast<SolidNode *>(Problem::mesh_pt()->node_pt(n));
+        SolidNode* solid_nod_pt =
+          static_cast<SolidNode*>(Problem::mesh_pt()->node_pt(n));
         // Unpin all position types associated with the given coordinate
         for (unsigned k = 0; k < n_position_type; ++k)
         {
@@ -1678,15 +1677,15 @@ namespace oomph
     }
 
     /// Helper function to unpin dofs of fld-th field
-    void unpin_dofs_of_field(const unsigned &fld)
+    void unpin_dofs_of_field(const unsigned& fld)
     {
       unsigned n_element = Problem::mesh_pt()->nelement();
       for (unsigned e = 0; e < n_element; e++)
       {
-        PROJECTABLE_ELEMENT *new_el_pt = dynamic_cast<PROJECTABLE_ELEMENT *>(
-          Problem::mesh_pt()->element_pt(e));
+        PROJECTABLE_ELEMENT* new_el_pt =
+          dynamic_cast<PROJECTABLE_ELEMENT*>(Problem::mesh_pt()->element_pt(e));
 
-        Vector<std::pair<Data *, unsigned>> data =
+        Vector<std::pair<Data*, unsigned>> data =
           new_el_pt->data_values_of_field(fld);
 
         unsigned d_size = data.size();
@@ -1698,15 +1697,15 @@ namespace oomph
     }
 
     /// Helper function to unpin dofs of fld-th field
-    void pin_dofs_of_field(const unsigned &fld)
+    void pin_dofs_of_field(const unsigned& fld)
     {
       unsigned n_element = Problem::mesh_pt()->nelement();
       for (unsigned e = 0; e < n_element; e++)
       {
-        PROJECTABLE_ELEMENT *new_el_pt = dynamic_cast<PROJECTABLE_ELEMENT *>(
-          Problem::mesh_pt()->element_pt(e));
+        PROJECTABLE_ELEMENT* new_el_pt =
+          dynamic_cast<PROJECTABLE_ELEMENT*>(Problem::mesh_pt()->element_pt(e));
 
-        Vector<std::pair<Data *, unsigned>> data =
+        Vector<std::pair<Data*, unsigned>> data =
           new_el_pt->data_values_of_field(fld);
 
         unsigned d_size = data.size();
@@ -1718,13 +1717,13 @@ namespace oomph
     }
 
     /// Helper function to set time level for projection
-    void set_time_level_for_projection(const unsigned &time_level)
+    void set_time_level_for_projection(const unsigned& time_level)
     {
       unsigned n_element = Problem::mesh_pt()->nelement();
       for (unsigned e = 0; e < n_element; e++)
       {
-        PROJECTABLE_ELEMENT *el_pt = dynamic_cast<PROJECTABLE_ELEMENT *>(
-          Problem::mesh_pt()->element_pt(e));
+        PROJECTABLE_ELEMENT* el_pt =
+          dynamic_cast<PROJECTABLE_ELEMENT*>(Problem::mesh_pt()->element_pt(e));
 
         // Set what time we are dealing with
         el_pt->time_level_for_projection() = time_level;
@@ -1732,13 +1731,13 @@ namespace oomph
     }
 
     /// Set the coordinate for projection
-    void set_coordinate_for_projection(const unsigned &i)
+    void set_coordinate_for_projection(const unsigned& i)
     {
       unsigned n_element = Problem::mesh_pt()->nelement();
       for (unsigned e = 0; e < n_element; e++)
       {
-        PROJECTABLE_ELEMENT *new_el_pt = dynamic_cast<PROJECTABLE_ELEMENT *>(
-          Problem::mesh_pt()->element_pt(e));
+        PROJECTABLE_ELEMENT* new_el_pt =
+          dynamic_cast<PROJECTABLE_ELEMENT*>(Problem::mesh_pt()->element_pt(e));
 
         // Set that we are solving a projected coordinate problem
         new_el_pt->set_project_coordinates();
@@ -1749,13 +1748,13 @@ namespace oomph
     }
 
     /// Set the Lagrangian coordinate for projection
-    void set_lagrangian_coordinate_for_projection(const unsigned &i)
+    void set_lagrangian_coordinate_for_projection(const unsigned& i)
     {
       unsigned n_element = Problem::mesh_pt()->nelement();
       for (unsigned e = 0; e < n_element; e++)
       {
-        PROJECTABLE_ELEMENT *new_el_pt = dynamic_cast<PROJECTABLE_ELEMENT *>(
-          Problem::mesh_pt()->element_pt(e));
+        PROJECTABLE_ELEMENT* new_el_pt =
+          dynamic_cast<PROJECTABLE_ELEMENT*>(Problem::mesh_pt()->element_pt(e));
 
         // Set that we are solving a projected Lagrangian coordinate problem
         new_el_pt->set_project_lagrangian();
@@ -1766,13 +1765,13 @@ namespace oomph
     }
 
     /// Set current field for projection
-    void set_current_field_for_projection(const unsigned &fld)
+    void set_current_field_for_projection(const unsigned& fld)
     {
       unsigned n_element = Problem::mesh_pt()->nelement();
       for (unsigned e = 0; e < n_element; e++)
       {
-        PROJECTABLE_ELEMENT *new_el_pt = dynamic_cast<PROJECTABLE_ELEMENT *>(
-          Problem::mesh_pt()->element_pt(e));
+        PROJECTABLE_ELEMENT* new_el_pt =
+          dynamic_cast<PROJECTABLE_ELEMENT*>(Problem::mesh_pt()->element_pt(e));
 
         // Set current field
         new_el_pt->projected_field() = fld;
@@ -1790,10 +1789,10 @@ namespace oomph
     bool Use_iterative_solver_for_projection;
 
     // The iterative solver to solve the projection problem
-    IterativeLinearSolver *Iterative_solver_projection_pt;
+    IterativeLinearSolver* Iterative_solver_projection_pt;
 
     // The preconditioner for the solver
-    Preconditioner *Preconditioner_projection_pt;
+    Preconditioner* Preconditioner_projection_pt;
   };
 
 } // namespace oomph

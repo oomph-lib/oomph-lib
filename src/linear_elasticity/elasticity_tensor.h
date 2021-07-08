@@ -64,7 +64,7 @@ namespace oomph
 
     /// Member function that returns the i-th independent component of the
     /// elasticity tensor
-    virtual inline double independent_component(const unsigned &i) const
+    virtual inline double independent_component(const unsigned& i) const
     {
       return 0.0;
     }
@@ -73,10 +73,10 @@ namespace oomph
     /// (Note that this only captures over-runs in 3D but
     /// errors are likely to be caught in evaluation of the
     /// stress and strain tensors anyway...)
-    void range_check(const unsigned &i,
-                     const unsigned &j,
-                     const unsigned &k,
-                     const unsigned &l) const
+    void range_check(const unsigned& i,
+                     const unsigned& j,
+                     const unsigned& k,
+                     const unsigned& l) const
     {
       if ((i > 2) || (j > 2) || (k > 2) || (l > 2))
       {
@@ -121,10 +121,10 @@ namespace oomph
   public:
     ///\short Return the appropriate independent component
     /// via the index translation scheme (const version).
-    double operator()(const unsigned &i,
-                      const unsigned &j,
-                      const unsigned &k,
-                      const unsigned &l) const
+    double operator()(const unsigned& i,
+                      const unsigned& j,
+                      const unsigned& k,
+                      const unsigned& l) const
     {
       // Range check
 #ifdef PARANOID
@@ -135,11 +135,11 @@ namespace oomph
 
     /// \short Allow the values to be set (virtual function that must be
     /// overloaded if values can be set directly
-    virtual void set_value(const unsigned &i,
-                           const unsigned &j,
-                           const unsigned &k,
-                           const unsigned &l,
-                           const double &value)
+    virtual void set_value(const unsigned& i,
+                           const unsigned& j,
+                           const unsigned& k,
+                           const unsigned& l,
+                           const double& value)
     {
       std::stringstream error_stream;
       error_stream << "Broken base implementation.\n"
@@ -174,7 +174,7 @@ namespace oomph
     /// Young's modulus to the Young's modulus (or other reference stiffness)
     /// used to non-dimensionalise stresses and tractions in the governing
     /// equations).
-    IsotropicElasticityTensor(const double &nu, const double &E) :
+    IsotropicElasticityTensor(const double& nu, const double& E) :
       ElasticityTensor()
     {
       // Set the three indepdent components
@@ -187,7 +187,7 @@ namespace oomph
     /// \short Constructor. Passing in the value of the Poisson's ratio.
     /// Stresses and tractions in the governing equations are assumed
     /// to have been non-dimensionalised on Young's modulus.
-    IsotropicElasticityTensor(const double &nu) : ElasticityTensor()
+    IsotropicElasticityTensor(const double& nu) : ElasticityTensor()
     {
       // Set the three indepdent components
       C[0] = 0.0;
@@ -202,7 +202,7 @@ namespace oomph
     /// \short Constructur. Passing in the values of the two lame
     /// coefficients directly (interpreted as the ratios of these
     /// quantities to a reference stiffness used to non-dimensionalised
-    IsotropicElasticityTensor(const Vector<double> &lame)
+    IsotropicElasticityTensor(const Vector<double>& lame)
     {
       // Set the three independent componens
       C[0] = 0.0;
@@ -214,7 +214,7 @@ namespace oomph
     /// Young's modulus to the Young's modulus (or other reference stiffness)
     /// used to non-dimensionalise stresses and tractions in the governing
     /// equations).
-    void update_constitutive_parameters(const double &nu, const double &E = 1.0)
+    void update_constitutive_parameters(const double& nu, const double& E = 1.0)
     {
       // Set the three indepdent components
       C[0] = 0.0;
@@ -224,14 +224,14 @@ namespace oomph
     }
 
     /// Overload the independent coefficient function
-    inline double independent_component(const unsigned &i) const
+    inline double independent_component(const unsigned& i) const
     {
       return C[StaticIndex[i]];
     }
 
   private:
     // Set the values of the lame coefficients
-    void set_lame_coefficients(const double &lambda, const double &mu)
+    void set_lame_coefficients(const double& lambda, const double& mu)
     {
       C[1] = lambda + 2.0 * mu;
       C[2] = lambda;
@@ -260,17 +260,17 @@ namespace oomph
     }
 
     /// Overload the independent coefficient function
-    inline double independent_component(const unsigned &i) const
+    inline double independent_component(const unsigned& i) const
     {
       return C[i];
     }
 
     /// \short Allow the values to be set
-    void set_value(const unsigned &i,
-                   const unsigned &j,
-                   const unsigned &k,
-                   const unsigned &l,
-                   const double &value)
+    void set_value(const unsigned& i,
+                   const unsigned& j,
+                   const unsigned& k,
+                   const unsigned& l,
+                   const double& value)
     {
       C[this->Index[i][j][k][l]] = value;
     }

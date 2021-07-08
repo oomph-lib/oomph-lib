@@ -50,10 +50,10 @@ namespace oomph
   /// element numbers contained in \c vector to_be_refined[level][...]
   //========================================================================
   void TreeBasedRefineableMeshBase::get_refinement_pattern(
-    Vector<Vector<unsigned>> &to_be_refined)
+    Vector<Vector<unsigned>>& to_be_refined)
   {
     // Extract *all* elements from current (fully refined) mesh.
-    Vector<Tree *> all_tree_nodes_pt;
+    Vector<Tree*> all_tree_nodes_pt;
     forest_pt()->stick_all_tree_nodes_into_vector(all_tree_nodes_pt);
 
     // Find out maximum refinement level
@@ -113,10 +113,10 @@ namespace oomph
   /// going to be called (RefineableMeshBase::reduce_halo_layers or something)
   //========================================================================
   void TreeBasedRefineableMeshBase::get_elements_at_refinement_level(
-    unsigned &refinement_level, Vector<RefineableElement *> &level_elements)
+    unsigned& refinement_level, Vector<RefineableElement*>& level_elements)
   {
     // Extract *all* elements from current (fully refined) mesh.
-    Vector<Tree *> all_tree_nodes_pt;
+    Vector<Tree*> all_tree_nodes_pt;
     forest_pt()->stick_all_tree_nodes_into_vector(all_tree_nodes_pt);
 
     // Add the element to the vector if its level matches refinement_level
@@ -127,7 +127,7 @@ namespace oomph
       if (level == refinement_level)
       {
         level_elements.push_back(
-          dynamic_cast<RefineableElement *>(all_tree_nodes_pt[e]->object_pt()));
+          dynamic_cast<RefineableElement*>(all_tree_nodes_pt[e]->object_pt()));
       }
     }
   }
@@ -137,7 +137,7 @@ namespace oomph
   /// pattern (relative to original, unrefined mesh).
   //========================================================================
   void TreeBasedRefineableMeshBase::refine_base_mesh(
-    Vector<Vector<unsigned>> &to_be_refined)
+    Vector<Vector<unsigned>>& to_be_refined)
   {
     // Get mesh back to unrefined state
     unsigned my_max, my_min;
@@ -186,7 +186,7 @@ namespace oomph
       // Select relevant elements to be refined
       for (unsigned i = 0; i < n_to_be_refined; i++)
       {
-        dynamic_cast<RefineableElement *>(this->element_pt(to_be_refined[l][i]))
+        dynamic_cast<RefineableElement*>(this->element_pt(to_be_refined[l][i]))
           ->select_for_refinement();
       }
 
@@ -198,7 +198,7 @@ namespace oomph
   //========================================================================
   /// Refine base mesh according to refinement pattern in restart file
   //========================================================================
-  void TreeBasedRefineableMeshBase::refine(std::ifstream &restart_file)
+  void TreeBasedRefineableMeshBase::refine(std::ifstream& restart_file)
   {
     // Assign storage for refinement pattern
     Vector<Vector<unsigned>> to_be_refined;
@@ -214,7 +214,7 @@ namespace oomph
   /// Dump refinement pattern to allow for rebuild
   ///
   //========================================================================
-  void TreeBasedRefineableMeshBase::dump_refinement(std::ostream &outfile)
+  void TreeBasedRefineableMeshBase::dump_refinement(std::ostream& outfile)
   {
     // Assign storage for refinement pattern
     Vector<Vector<unsigned>> to_be_refined;
@@ -247,7 +247,7 @@ namespace oomph
   ///
   //========================================================================
   void TreeBasedRefineableMeshBase::read_refinement(
-    std::ifstream &restart_file, Vector<Vector<unsigned>> &to_be_refined)
+    std::ifstream& restart_file, Vector<Vector<unsigned>>& to_be_refined)
   {
     std::string input_string;
 
@@ -301,7 +301,7 @@ namespace oomph
   /// - Store # of refined/unrefined elements.
   /// - Doc refinement process (if required)
   //========================================================================
-  void TreeBasedRefineableMeshBase::adapt(const Vector<double> &elemental_error)
+  void TreeBasedRefineableMeshBase::adapt(const Vector<double>& elemental_error)
   {
     // Set the refinement tolerance to be the max permissible error
     double refine_tol = max_permitted_error();
@@ -342,7 +342,7 @@ namespace oomph
 
     // Note: Yes, this needs to be a map because we'll have to check
     // the refinement wishes of brothers (who we only access via pointers)
-    std::map<RefineableElement *, bool> wants_to_be_unrefined;
+    std::map<RefineableElement*, bool> wants_to_be_unrefined;
 
     // Initialise a variable to store the number of elements for refinment
     unsigned n_refine = 0;
@@ -352,8 +352,8 @@ namespace oomph
     for (unsigned long e = 0; e < Nelement; e++)
     {
       // (Cast) pointer to the element
-      RefineableElement *el_pt =
-        dynamic_cast<RefineableElement *>(this->element_pt(e));
+      RefineableElement* el_pt =
+        dynamic_cast<RefineableElement*>(this->element_pt(e));
 
       // Initially element is not to be refined
       el_pt->deselect_for_refinement();
@@ -429,8 +429,8 @@ namespace oomph
     for (unsigned long e = 0; e < Nelement; e++)
     {
       //(Cast) pointer to the element
-      RefineableElement *el_pt =
-        dynamic_cast<RefineableElement *>(this->element_pt(e));
+      RefineableElement* el_pt =
+        dynamic_cast<RefineableElement*>(this->element_pt(e));
 
       // hierher: This is a bit naughty... We want to put the
       // first son in charge -- the statement below assumes (correctly) that the
@@ -446,7 +446,7 @@ namespace oomph
         unsigned n_sons = el_pt->tree_pt()->father_pt()->nsons();
         for (unsigned ison = 0; ison < n_sons; ison++)
         {
-          if (!(wants_to_be_unrefined[dynamic_cast<RefineableElement *>(
+          if (!(wants_to_be_unrefined[dynamic_cast<RefineableElement*>(
                 el_pt->tree_pt()->father_pt()->son_pt(ison)->object_pt())]))
           {
             // One guy isn't cooperating and spoils the party.
@@ -570,7 +570,7 @@ namespace oomph
           {
             // Get the vector of halo elements whose non-halo counterpart
             // are on processor d
-            Vector<GeneralisedElement *> halo_elem_pt(this->halo_element_pt(d));
+            Vector<GeneralisedElement*> halo_elem_pt(this->halo_element_pt(d));
 
             // Create vector containing (0)1 to indicate that
             // halo element is (not) to be unrefined
@@ -578,7 +578,7 @@ namespace oomph
             Vector<int> halo_to_be_unrefined(nhalo, 0);
             for (unsigned e = 0; e < nhalo; e++)
             {
-              if (dynamic_cast<RefineableElement *>(halo_elem_pt[e])
+              if (dynamic_cast<RefineableElement*>(halo_elem_pt[e])
                     ->sons_to_be_unrefined())
               {
                 halo_to_be_unrefined[e] = 1;
@@ -610,7 +610,7 @@ namespace oomph
               {
                 // Get the vector of haloed elements on current processor
                 // with processor dd
-                Vector<GeneralisedElement *> haloed_elem_pt(
+                Vector<GeneralisedElement*> haloed_elem_pt(
                   this->haloed_element_pt(dd));
 
                 // Ask processor dd to send vector containing (0)1 for
@@ -634,10 +634,10 @@ namespace oomph
                 for (unsigned e = 0; e < nhaloed; e++)
                 {
                   if (((halo_to_be_unrefined[e] == 0) &&
-                       (dynamic_cast<RefineableElement *>(haloed_elem_pt[e])
+                       (dynamic_cast<RefineableElement*>(haloed_elem_pt[e])
                           ->sons_to_be_unrefined())) ||
                       ((halo_to_be_unrefined[e] == 1) &&
-                       (!dynamic_cast<RefineableElement *>(haloed_elem_pt[e])
+                       (!dynamic_cast<RefineableElement*>(haloed_elem_pt[e])
                            ->sons_to_be_unrefined())))
                   {
                     std::ostringstream error_message;
@@ -672,7 +672,7 @@ namespace oomph
           {
             // Get the vector of halo elements whose non-halo counterpart
             // are on processor d
-            Vector<GeneralisedElement *> halo_elem_pt(this->halo_element_pt(d));
+            Vector<GeneralisedElement*> halo_elem_pt(this->halo_element_pt(d));
 
             // Create vector containing (0)1 to indicate that
             // halo element is (not) to be refined
@@ -680,7 +680,7 @@ namespace oomph
             Vector<int> halo_to_be_refined(nhalo, 0);
             for (unsigned e = 0; e < nhalo; e++)
             {
-              if (dynamic_cast<RefineableElement *>(halo_elem_pt[e])
+              if (dynamic_cast<RefineableElement*>(halo_elem_pt[e])
                     ->to_be_refined())
               {
                 halo_to_be_refined[e] = 1;
@@ -712,7 +712,7 @@ namespace oomph
               {
                 // Get the vector of haloed elements on current processor
                 // with processor dd
-                Vector<GeneralisedElement *> haloed_elem_pt(
+                Vector<GeneralisedElement*> haloed_elem_pt(
                   this->haloed_element_pt(dd));
 
                 // Ask processor dd to send vector containing (0)1 for
@@ -736,10 +736,10 @@ namespace oomph
                 for (unsigned e = 0; e < nhaloed; e++)
                 {
                   if (((halo_to_be_refined[e] == 0) &&
-                       (dynamic_cast<RefineableElement *>(haloed_elem_pt[e])
+                       (dynamic_cast<RefineableElement*>(haloed_elem_pt[e])
                           ->to_be_refined())) ||
                       ((halo_to_be_refined[e] == 1) &&
-                       (!dynamic_cast<RefineableElement *>(haloed_elem_pt[e])
+                       (!dynamic_cast<RefineableElement*>(haloed_elem_pt[e])
                            ->to_be_refined())))
                   {
                     std::ostringstream error_message;
@@ -820,7 +820,7 @@ namespace oomph
   /// Get max/min refinement level
   //========================================================================
   void TreeBasedRefineableMeshBase::get_refinement_levels(
-    unsigned &min_refinement_level, unsigned &max_refinement_level)
+    unsigned& min_refinement_level, unsigned& max_refinement_level)
   {
     // Initialise
     min_refinement_level = UINT_MAX;
@@ -838,7 +838,7 @@ namespace oomph
       for (unsigned long e = 0; e < n_element; e++)
       {
         // Get the refinement level of the element
-        unsigned level = dynamic_cast<RefineableElement *>(this->element_pt(e))
+        unsigned level = dynamic_cast<RefineableElement*>(this->element_pt(e))
                            ->refinement_level();
 
         if (level > max_refinement_level) max_refinement_level = level;
@@ -914,7 +914,7 @@ namespace oomph
   ///   - QuadTreeNeighbours.mcr
   ///   .
   //=================================================================
-  void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo &doc_info)
+  void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
   {
 #ifdef OOMPH_HAS_MPI
     // Delete any external element storage before performing the adaptation
@@ -928,7 +928,7 @@ namespace oomph
     if (this->nelement() > 0)
     {
       // Pointer to mesh needs to be passed to some functions
-      Mesh *mesh_pt = this;
+      Mesh* mesh_pt = this;
 
       double t_start = 0.0;
       if (Global_timings::Doc_comprehensive_timings)
@@ -951,7 +951,7 @@ namespace oomph
       // Now elements have been created -- build all the leaves
       //-------------------------------------------------------
       // Firstly put all the elements into a vector
-      Vector<Tree *> leaf_nodes_pt;
+      Vector<Tree*> leaf_nodes_pt;
       Forest_pt->stick_leaves_into_vector(leaf_nodes_pt);
 
       if (Global_timings::Doc_comprehensive_timings)
@@ -975,7 +975,7 @@ namespace oomph
       // Build all elements and store vector of pointers to new nodes
       // (Note: build() checks if the element has been built
       // already, i.e. if it's not a new element).
-      Vector<Node *> new_node_pt;
+      Vector<Node*> new_node_pt;
       bool was_already_built;
       unsigned long num_tree_nodes = leaf_nodes_pt.size();
       for (unsigned long e = 0; e < num_tree_nodes; e++)
@@ -1029,13 +1029,13 @@ namespace oomph
       // If it has changed, then we need to adjust their positions.
       const unsigned n_boundary = this->nboundary();
       const unsigned mesh_dim = this->finite_element_pt(0)->dim();
-      Vector<std::set<Node *>> hanging_nodes_on_boundary_pt(n_boundary);
+      Vector<std::set<Node*>> hanging_nodes_on_boundary_pt(n_boundary);
 
       unsigned long n_node = this->nnode();
       for (unsigned long n = 0; n < n_node; n++)
       {
         // Get the pointer to the node
-        Node *nod_pt = this->node_pt(n);
+        Node* nod_pt = this->node_pt(n);
 
         // Get the number of values in the node
         unsigned n_value = nod_pt->nvalue();
@@ -1077,7 +1077,7 @@ namespace oomph
           }
 
           // If it's an algebraic node: Update its previous nodal positions too
-          AlgebraicNode *alg_node_pt = dynamic_cast<AlgebraicNode *>(nod_pt);
+          AlgebraicNode* alg_node_pt = dynamic_cast<AlgebraicNode*>(nod_pt);
           if (alg_node_pt != 0)
           {
             bool update_all_time_levels = true;
@@ -1086,7 +1086,7 @@ namespace oomph
 
           // If it's a Solid node, update Lagrangian coordinates
           // from its hanging node representation
-          SolidNode *solid_node_pt = dynamic_cast<SolidNode *>(nod_pt);
+          SolidNode* solid_node_pt = dynamic_cast<SolidNode*>(nod_pt);
           if (solid_node_pt != 0)
           {
             unsigned n_lagrangian = solid_node_pt->nlagrangian();
@@ -1106,7 +1106,7 @@ namespace oomph
             if (nod_pt->is_on_boundary())
             {
               // Storage for the boundaries on which the Node is located
-              std::set<unsigned> *boundaries_pt;
+              std::set<unsigned>* boundaries_pt;
               nod_pt->get_boundaries_pt(boundaries_pt);
               if (boundaries_pt != 0)
               {
@@ -1161,7 +1161,7 @@ namespace oomph
 
       // Stick all elements into a new vector
       //(note the leaves may have changed, so this is not duplicated work)
-      Vector<Tree *> tree_nodes_pt;
+      Vector<Tree*> tree_nodes_pt;
       Forest_pt->stick_leaves_into_vector(tree_nodes_pt);
 
       // Copy the elements into the mesh Vector
@@ -1181,7 +1181,7 @@ namespace oomph
         // saves some nodes that were regarded as obsolete by deleted
         // elements but are still required in some surviving ones
         // from a tragic early death...
-        FiniteElement *this_el_pt = this->finite_element_pt(e);
+        FiniteElement* this_el_pt = this->finite_element_pt(e);
         unsigned n_node = this_el_pt->nnode(); // caching pre-loop
         for (unsigned n = 0; n < n_node; n++)
         {
@@ -1205,7 +1205,7 @@ namespace oomph
       //----------------------
 
       // Output streams for the hanging nodes
-      Vector<std::ofstream *> hanging_output_files;
+      Vector<std::ofstream*> hanging_output_files;
       // Setup the output files for hanging nodes, this must be called
       // precisely once for the forest. Note that the files will only
       // actually be opened if doc_info.is_doc_enabled() is true
@@ -1272,7 +1272,7 @@ namespace oomph
 
       // Doc/check the neighbours
       //-------------------------
-      Vector<Tree *> all_tree_nodes_pt;
+      Vector<Tree*> all_tree_nodes_pt;
       Forest_pt->stick_all_tree_nodes_into_vector(all_tree_nodes_pt);
 
       // Check the neighbours
@@ -1310,7 +1310,7 @@ namespace oomph
         for (unsigned long n = 0; n < n_node; n++)
         {
           // Get the pointer to the node
-          Node *nod_pt = this->node_pt(n);
+          Node* nod_pt = this->node_pt(n);
           // Get the dimension
           unsigned n_dim = nod_pt->ndim();
           // Output the coordinates
@@ -1359,7 +1359,7 @@ namespace oomph
       }
 
       // Now we can prune the dead nodes from the mesh.
-      Vector<Node *> deleted_node_pt = this->prune_dead_nodes();
+      Vector<Node*> deleted_node_pt = this->prune_dead_nodes();
 
       if (Global_timings::Doc_comprehensive_timings)
       {
@@ -1400,7 +1400,7 @@ namespace oomph
 
           // If the nodes that were hanging are still hanging then remove them
           // from the set (note increment is not in for command for efficiencty)
-          for (std::set<Node *>::iterator it =
+          for (std::set<Node*>::iterator it =
                  hanging_nodes_on_boundary_pt[b].begin();
                it != hanging_nodes_on_boundary_pt[b].end();)
           {
@@ -1426,11 +1426,11 @@ namespace oomph
             for (unsigned e = 0; e < n_boundary_element; ++e)
             {
               // Get a pointer to the element
-              FiniteElement *el_pt = this->boundary_element_pt(b, e);
+              FiniteElement* el_pt = this->boundary_element_pt(b, e);
 
               // Do we have a solid element
-              SolidFiniteElement *solid_el_pt =
-                dynamic_cast<SolidFiniteElement *>(el_pt);
+              SolidFiniteElement* solid_el_pt =
+                dynamic_cast<SolidFiniteElement*>(el_pt);
 
               // Determine whether there is a macro element
               bool macro_present = (el_pt->macro_elem_pt() != 0);
@@ -1451,11 +1451,11 @@ namespace oomph
                 for (unsigned n = 0; n < n_el_node; n++)
                 {
                   // Cache pointer to the node
-                  Node *nod_pt = el_pt->node_pt(n);
+                  Node* nod_pt = el_pt->node_pt(n);
                   if (nod_pt->is_on_boundary(b))
                   {
                     // Is the Node in our set
-                    std::set<Node *>::iterator it =
+                    std::set<Node*>::iterator it =
                       hanging_nodes_on_boundary_pt[b].find(nod_pt);
 
                     // If we have found the Node then update the position
@@ -1473,8 +1473,8 @@ namespace oomph
                       const unsigned ntstorage = nod_pt->ntstorage();
 
                       // Do we have a solid node
-                      SolidNode *solid_node_pt =
-                        dynamic_cast<SolidNode *>(nod_pt);
+                      SolidNode* solid_node_pt =
+                        dynamic_cast<SolidNode*>(nod_pt);
                       if (solid_node_pt)
                       {
                         // Assign Lagrangian coordinates from undeformed
@@ -1544,7 +1544,7 @@ namespace oomph
 
         // Determine maximum number of values at any node in this type of
         // element
-        RefineableElement *el_pt = tree_nodes_pt[0]->object_pt();
+        RefineableElement* el_pt = tree_nodes_pt[0]->object_pt();
         // Initalise max_nval
         unsigned max_nval = 0;
         for (unsigned n = 0; n < el_pt->nnode(); n++)
@@ -1571,7 +1571,7 @@ namespace oomph
           for (unsigned n = 0; n < n_nod; n++)
           {
             // Get pointer to the node
-            Node *nod_pt = el_pt->node_pt(n);
+            Node* nod_pt = el_pt->node_pt(n);
             // Find the dimension of the node
             unsigned n_dim = nod_pt->ndim();
             // Write the nodal coordinates to the file
@@ -1614,7 +1614,7 @@ namespace oomph
         n_node = this->nnode();
         for (unsigned long n = 0; n < n_node; n++)
         {
-          Node *nod_pt = this->node_pt(n);
+          Node* nod_pt = this->node_pt(n);
           unsigned n_dim = nod_pt->ndim();
           for (unsigned i = 0; i < n_dim; i++)
           {
@@ -1634,7 +1634,7 @@ namespace oomph
         some_file.open(fullname.str().c_str());
         for (unsigned long n = 0; n < n_node; n++)
         {
-          Node *nod_pt = this->node_pt(n);
+          Node* nod_pt = this->node_pt(n);
 
           if (nod_pt->is_hanging())
           {
@@ -1662,7 +1662,7 @@ namespace oomph
         some_file.open(fullname.str().c_str());
         for (unsigned long n = 0; n < n_node; n++)
         {
-          Node *nod_pt = this->node_pt(n);
+          Node* nod_pt = this->node_pt(n);
           if (nod_pt->is_hanging())
           {
             unsigned n_dim = nod_pt->ndim();
@@ -1676,7 +1676,7 @@ namespace oomph
 
             for (unsigned imaster = 0; imaster < nmaster; imaster++)
             {
-              Node *master_nod_pt =
+              Node* master_nod_pt =
                 nod_pt->hanging_pt()->master_node_pt(imaster);
               unsigned n_dim = master_nod_pt->ndim();
               for (unsigned i = 0; i < n_dim; i++)
@@ -1701,7 +1701,7 @@ namespace oomph
           unsigned n_nod = this->nnode();
           for (unsigned long n = 0; n < n_nod; n++)
           {
-            Node *nod_pt = this->node_pt(n);
+            Node* nod_pt = this->node_pt(n);
             if (nod_pt->is_hanging(i))
             {
               if (nod_pt->hanging_pt(i) != nod_pt->hanging_pt())
@@ -1716,7 +1716,7 @@ namespace oomph
                 some_file << " 2 " << std::endl;
                 for (unsigned imaster = 0; imaster < nmaster; imaster++)
                 {
-                  Node *master_nod_pt =
+                  Node* master_nod_pt =
                     nod_pt->hanging_pt(i)->master_node_pt(imaster);
                   unsigned n_dim = master_nod_pt->ndim();
                   for (unsigned j = 0; j < n_dim; j++)
@@ -1748,13 +1748,13 @@ namespace oomph
   //========================================================================
   /// Refine mesh uniformly
   //========================================================================
-  void TreeBasedRefineableMeshBase::refine_uniformly(DocInfo &doc_info)
+  void TreeBasedRefineableMeshBase::refine_uniformly(DocInfo& doc_info)
   {
     // Select all elements for refinement
     unsigned long Nelement = this->nelement();
     for (unsigned long e = 0; e < Nelement; e++)
     {
-      dynamic_cast<RefineableElement *>(this->element_pt(e))
+      dynamic_cast<RefineableElement*>(this->element_pt(e))
         ->select_for_refinement();
     }
 
@@ -1765,15 +1765,15 @@ namespace oomph
   //========================================================================
   /// p-refine mesh uniformly
   //========================================================================
-  void TreeBasedRefineableMeshBase::p_refine_uniformly(DocInfo &doc_info)
+  void TreeBasedRefineableMeshBase::p_refine_uniformly(DocInfo& doc_info)
   {
     // Select all elements for refinement
     unsigned long Nelement = this->nelement();
     for (unsigned long e = 0; e < Nelement; e++)
     {
       // Get pointer to p-refineable element
-      PRefineableElement *el_pt =
-        dynamic_cast<PRefineableElement *>(this->element_pt(e));
+      PRefineableElement* el_pt =
+        dynamic_cast<PRefineableElement*>(this->element_pt(e));
       // Mark for p-refinement if possible. If not then p_adapt_mesh() will
       // report the error.
       if (el_pt != 0)
@@ -1791,7 +1791,7 @@ namespace oomph
   /// by their numbers.
   //========================================================================
   void TreeBasedRefineableMeshBase::refine_selected_elements(
-    const Vector<unsigned> &elements_to_be_refined)
+    const Vector<unsigned>& elements_to_be_refined)
   {
 #ifdef OOMPH_HAS_MPI
     if (this->is_mesh_distributed())
@@ -1812,7 +1812,7 @@ namespace oomph
     unsigned long nref = elements_to_be_refined.size();
     for (unsigned long e = 0; e < nref; e++)
     {
-      dynamic_cast<RefineableElement *>(
+      dynamic_cast<RefineableElement*>(
         this->element_pt(elements_to_be_refined[e]))
         ->select_for_refinement();
     }
@@ -1826,7 +1826,7 @@ namespace oomph
   /// by their pointers
   //========================================================================
   void TreeBasedRefineableMeshBase::refine_selected_elements(
-    const Vector<RefineableElement *> &elements_to_be_refined_pt)
+    const Vector<RefineableElement*>& elements_to_be_refined_pt)
   {
 #ifdef OOMPH_HAS_MPI
     if (this->is_mesh_distributed())
@@ -1858,7 +1858,7 @@ namespace oomph
   /// \short Refine to same degree as the reference mesh.
   //========================================================================
   void TreeBasedRefineableMeshBase::refine_base_mesh_as_in_reference_mesh(
-    TreeBasedRefineableMeshBase *const &ref_mesh_pt)
+    TreeBasedRefineableMeshBase* const& ref_mesh_pt)
   {
     // Assign storage for refinement pattern
     Vector<Vector<unsigned>> to_be_refined;
@@ -1879,7 +1879,7 @@ namespace oomph
   //========================================================================
   bool TreeBasedRefineableMeshBase::
     refine_base_mesh_as_in_reference_mesh_minus_one(
-      TreeBasedRefineableMeshBase *const &ref_mesh_pt)
+      TreeBasedRefineableMeshBase* const& ref_mesh_pt)
   {
     // Assign storage for refinement pattern
     Vector<Vector<unsigned>> to_be_refined;
@@ -1918,7 +1918,7 @@ namespace oomph
   /// cannot be performed, the code dies (provided PARANOID is enabled).
   //========================================================================
   void TreeBasedRefineableMeshBase::refine_as_in_reference_mesh(
-    TreeBasedRefineableMeshBase *const &ref_mesh_pt)
+    TreeBasedRefineableMeshBase* const& ref_mesh_pt)
   {
     oomph_info << "WARNING : This has not been checked comprehensively yet"
                << std::endl
@@ -1947,15 +1947,15 @@ namespace oomph
 #endif
 
     // Vector storing the elements of the uniformly unrefined mesh
-    Vector<Tree *> coarse_elements_pt;
+    Vector<Tree*> coarse_elements_pt;
 
     // Map storing which father elements have already been added to coarse mesh
     // (Default return is 0).
-    std::map<Tree *, unsigned> father_element_included;
+    std::map<Tree*, unsigned> father_element_included;
 
     // Extract active elements (=leaf nodes in the quadtree) from reference
     // mesh.
-    Vector<Tree *> leaf_nodes_pt;
+    Vector<Tree*> leaf_nodes_pt;
     ref_mesh_pt->forest_pt()->stick_leaves_into_vector(leaf_nodes_pt);
 
     // Loop over all elements (in their quadtree impersonation) and
@@ -1964,10 +1964,10 @@ namespace oomph
     for (unsigned e = 0; e < nelem; e++)
     {
       // Pointer to leaf node
-      Tree *leaf_pt = leaf_nodes_pt[e];
+      Tree* leaf_pt = leaf_nodes_pt[e];
 
       // Get pointer to father:
-      Tree *father_pt = leaf_pt->father_pt();
+      Tree* father_pt = leaf_pt->father_pt();
 
       // If we don't have a father we're at the root level in which
       // case this element can't be unrefined.
@@ -2059,16 +2059,16 @@ namespace oomph
     for (unsigned e = 0; e < nelem; e++)
     {
       // Get elements
-      FiniteElement *ref_el_pt = ref_mesh_pt->finite_element_pt(e);
-      FiniteElement *el_pt = this->finite_element_pt(e);
+      FiniteElement* ref_el_pt = ref_mesh_pt->finite_element_pt(e);
+      FiniteElement* el_pt = this->finite_element_pt(e);
 
       // Loop over nodes
       unsigned nnod = ref_el_pt->nnode();
       for (unsigned j = 0; j < nnod; j++)
       {
         // Get nodes
-        Node *ref_node_pt = ref_el_pt->node_pt(j);
-        Node *node_pt = el_pt->node_pt(j);
+        Node* ref_node_pt = ref_el_pt->node_pt(j);
+        Node* node_pt = el_pt->node_pt(j);
 
         // Check error in position
         double error = 0.0;
@@ -2180,22 +2180,22 @@ namespace oomph
   /// the node is regarded as its own master node which has weight 1.0.
   //==================================================================
   void TreeBasedRefineableMeshBase::complete_hanging_nodes_recursively(
-    Node *&nod_pt,
-    Vector<Node *> &master_nodes,
-    Vector<double> &hang_weights,
-    const int &i)
+    Node*& nod_pt,
+    Vector<Node*>& master_nodes,
+    Vector<double>& hang_weights,
+    const int& i)
   {
     // Is the node hanging in the variable i
     if (nod_pt->is_hanging(i))
     {
       // Loop over all master nodes
-      HangInfo *const hang_pt = nod_pt->hanging_pt(i);
+      HangInfo* const hang_pt = nod_pt->hanging_pt(i);
       unsigned nmaster = hang_pt->nmaster();
 
       for (unsigned m = 0; m < nmaster; m++)
       {
         // Get the master node
-        Node *master_nod_pt = hang_pt->master_node_pt(m);
+        Node* master_nod_pt = hang_pt->master_node_pt(m);
 
         // Keep in memory the size of the list before adding the nodes this
         // master node depends on. This is required so that the recursion is
@@ -2236,7 +2236,7 @@ namespace oomph
   /// hanging  nodes only depend on non-hanging nodes...
   //==================================================================
   void TreeBasedRefineableMeshBase::complete_hanging_nodes(
-    const int &ncont_interpolated_values)
+    const int& ncont_interpolated_values)
   {
     // Number of nodes in mesh
     unsigned long n_node = this->nnode();
@@ -2246,7 +2246,7 @@ namespace oomph
     for (unsigned long n = 0; n < n_node; n++)
     {
       // Assign a local pointer to the node
-      Node *nod_pt = this->node_pt(n);
+      Node* nod_pt = this->node_pt(n);
 
       // Loop over the values,
       // N.B. geometric hanging data is stored at the index -1
@@ -2261,14 +2261,14 @@ namespace oomph
           {
             // Find out the ultimate map of dependencies: Master nodes
             // and associated weights
-            Vector<Node *> master_nodes;
+            Vector<Node*> master_nodes;
             Vector<double> hanging_weights;
             complete_hanging_nodes_recursively(
               nod_pt, master_nodes, hanging_weights, i);
 
             // put them into a map to merge all the occurences of the same node
             // (add the weights)
-            std::map<Node *, double> hang_weights;
+            std::map<Node*, double> hang_weights;
             unsigned n_master = master_nodes.size();
             for (unsigned k = 0; k < n_master; k++)
             {
@@ -2277,11 +2277,11 @@ namespace oomph
             }
 
             // Create new hanging data (we know how many data there are)
-            HangInfo *hang_pt = new HangInfo(hang_weights.size());
+            HangInfo* hang_pt = new HangInfo(hang_weights.size());
 
             unsigned hang_weights_index = 0;
             // Copy the map into the HangInfo object
-            typedef std::map<Node *, double>::iterator IT;
+            typedef std::map<Node*, double>::iterator IT;
             for (IT it = hang_weights.begin(); it != hang_weights.end(); ++it)
             {
               hang_pt->set_master_node_pt(
@@ -2307,7 +2307,7 @@ namespace oomph
       for (unsigned long n = 0; n < n_node; n++)
       {
         // Set a local pointer to the node
-        Node *nod_pt = this->node_pt(n);
+        Node* nod_pt = this->node_pt(n);
 
         // Is it hanging?
         if (nod_pt->is_hanging(i))
@@ -2340,7 +2340,7 @@ namespace oomph
   /// (i.e. the hanging status of the haloed and halo layers disagrees)
   //========================================================================
   void TreeBasedRefineableMeshBase::synchronise_hanging_nodes(
-    const unsigned &ncont_interpolated_values)
+    const unsigned& ncont_interpolated_values)
   {
     // Store number of processors and current process
     MPI_Status status;
@@ -2378,7 +2378,7 @@ namespace oomph
         for (unsigned j = 0; j < nh; j++)
         {
           // Get node
-          Node *nod_pt = haloed_node_pt(d, j);
+          Node* nod_pt = haloed_node_pt(d, j);
 
           // Loop over the hanging status for each interpolated variable
           // (and the geometry)
@@ -2446,7 +2446,7 @@ namespace oomph
             for (unsigned j = 0; j < nh; j++)
             {
               // Get node
-              Node *nod_pt = halo_node_pt(dd, j);
+              Node* nod_pt = halo_node_pt(dd, j);
 
               // Loop over the hanging status for each interpolated variable
               // (and the geometry)
@@ -2508,7 +2508,7 @@ namespace oomph
 
     // Copy vector-based representation of shared nodes into
     // map for faster search
-    Vector<std::map<Node *, unsigned>> shared_node_map(n_proc);
+    Vector<std::map<Node*, unsigned>> shared_node_map(n_proc);
     for (int d = 0; d < n_proc; d++)
     {
       unsigned n = Shared_node_pt[d].size();
@@ -2551,7 +2551,7 @@ namespace oomph
         for (unsigned j = 0; j < nh; j++)
         {
           // Get node
-          Node *nod_pt = haloed_node_pt(d, j);
+          Node* nod_pt = haloed_node_pt(d, j);
 
           // Loop over the hanging status for each interpolated variable
           // (and the geometry)
@@ -2572,7 +2572,7 @@ namespace oomph
               bool found_all_masters = true;
 
               // Find master nodes of haloed node
-              HangInfo *hang_pt = nod_pt->hanging_pt(icont);
+              HangInfo* hang_pt = nod_pt->hanging_pt(icont);
               unsigned nhd_master = hang_pt->nmaster();
 
               // Add the number of master nodes to the hanging_nodes vector
@@ -2582,7 +2582,7 @@ namespace oomph
               for (unsigned m = 0; m < nhd_master; m++)
               {
                 // Get mth master node
-                Node *master_nod_pt = hang_pt->master_node_pt(m);
+                Node* master_nod_pt = hang_pt->master_node_pt(m);
 
                 //              //------------------------------------------
                 //              // Old direct search is much slower!
@@ -2627,7 +2627,7 @@ namespace oomph
                 int non_halo_proc_id = master_nod_pt->non_halo_proc_ID();
 
                 // Try to find node in map with proc d and get iterator to entry
-                std::map<Node *, unsigned>::iterator it =
+                std::map<Node*, unsigned>::iterator it =
                   shared_node_map[d].find(master_nod_pt);
 
                 // If it's not in there iterator points to end of
@@ -2673,7 +2673,7 @@ namespace oomph
                   {
                     if (shared_node_map[non_halo_proc_id].size() > 0)
                     {
-                      std::map<Node *, unsigned>::iterator it =
+                      std::map<Node*, unsigned>::iterator it =
                         shared_node_map[non_halo_proc_id].find(master_nod_pt);
 
                       // If it's not in there iterator points to end of
@@ -3083,7 +3083,7 @@ namespace oomph
               for (unsigned j = 0; j < nh; j++)
               {
                 // Get node
-                Node *nod_pt = halo_node_pt(dd, j);
+                Node* nod_pt = halo_node_pt(dd, j);
 
                 // Loop over the hanging status for each interpolated variable
                 // (and the geometry)
@@ -3099,7 +3099,7 @@ namespace oomph
                     unsigned nhd_master = unsigned(next_entry);
 
                     // Set up a new HangInfo for this node
-                    HangInfo *hang_pt = new HangInfo(nhd_master);
+                    HangInfo* hang_pt = new HangInfo(nhd_master);
 
                     // Now set up the master nodes and weights
                     for (unsigned m = 0; m < nhd_master; m++)
@@ -3123,7 +3123,7 @@ namespace oomph
                       if (shared_node_proc == unsigned(dd))
                       {
                         // Get node
-                        Node *master_nod_pt =
+                        Node* master_nod_pt =
                           shared_node_pt(dd, shared_node_id);
 
                         // Set as a master node (with corresponding weight)
@@ -3335,13 +3335,13 @@ namespace oomph
               count++;
 
               // Extract node from shared node lookup scheme
-              Node *master_nod_pt = shared_node_pt(
+              Node* master_nod_pt = shared_node_pt(
                 orig_sending_proc, shared_node_id_on_orig_sending_proc);
 
               // Now find it in shared halo scheme with the processor
               // that's sent the request
 
-              std::map<Node *, unsigned>::iterator it =
+              std::map<Node*, unsigned>::iterator it =
                 shared_node_map[send_rank].find(master_nod_pt);
 
               // If it's not in there iterator points to end of
@@ -3506,7 +3506,7 @@ namespace oomph
                 HangHelperStruct tmp = hang_info[hang_info_index];
 
                 // Extract node from shared node lookup scheme
-                Node *master_nod_pt = shared_node_pt(send_rank, index);
+                Node* master_nod_pt = shared_node_pt(send_rank, index);
 
                 // Set as a master node (with corresponding weight)
                 tmp.Hang_pt->set_master_node_pt(
@@ -3673,13 +3673,13 @@ namespace oomph
         double recv_doubles_index = 0;
 
         // Get halo elements with processor d
-        Vector<GeneralisedElement *> halo_element_pt(this->halo_element_pt(d));
+        Vector<GeneralisedElement*> halo_element_pt(this->halo_element_pt(d));
 
         // Loop over recieved indices
         while (recv_unsigneds_index < recv_unsigneds_count)
         {
           // Get (finite) element
-          FiniteElement *el_pt = dynamic_cast<FiniteElement *>(
+          FiniteElement* el_pt = dynamic_cast<FiniteElement*>(
             halo_element_pt[recv_unsigneds[d][recv_unsigneds_index++]]);
 
           // If we have a finite element...
@@ -3689,7 +3689,7 @@ namespace oomph
             unsigned n_dim = el_pt->dim();
 
             // Get node
-            Node *nod_pt =
+            Node* nod_pt =
               el_pt->node_pt(recv_unsigneds[d][recv_unsigneds_index++]);
 
             // Get current position
@@ -3749,10 +3749,10 @@ namespace oomph
             Vector<double> send_doubles;
 
             // Set to store nodes whose position requires adjustment
-            std::set<Node *> nodes_requiring_adjustment;
+            std::set<Node*> nodes_requiring_adjustment;
 
             // Get haloed elements with processor dd
-            Vector<GeneralisedElement *> haloed_element_pt(
+            Vector<GeneralisedElement*> haloed_element_pt(
               this->haloed_element_pt(dd));
 
             // Loop over haloed elements with processor dd
@@ -3760,8 +3760,8 @@ namespace oomph
             for (unsigned e = 0; e < nh; e++)
             {
               // Get (finite) element
-              FiniteElement *el_pt =
-                dynamic_cast<FiniteElement *>(haloed_element_pt[e]);
+              FiniteElement* el_pt =
+                dynamic_cast<FiniteElement*>(haloed_element_pt[e]);
 
               // If we have a finite element...
               if (el_pt != 0)
@@ -3774,7 +3774,7 @@ namespace oomph
                 for (unsigned j = 0; j < n_node; j++)
                 {
                   // Get node
-                  Node *nod_pt = el_pt->node_pt(j);
+                  Node* nod_pt = el_pt->node_pt(j);
 
                   // Only do non-hanging nodes
                   if (!nod_pt->is_hanging())
@@ -3898,7 +3898,7 @@ namespace oomph
   ///   threshold.
   //========================================================================
   void TreeBasedRefineableMeshBase::p_adapt(
-    const Vector<double> &elemental_error)
+    const Vector<double>& elemental_error)
   {
     // Set the refinement tolerance to be the max permissible error
     double refine_tol = this->max_permitted_error();
@@ -3944,8 +3944,8 @@ namespace oomph
     for (unsigned long e = 0; e < Nelement; e++)
     {
       //(Cast) pointer to the element
-      PRefineableElement *el_pt =
-        dynamic_cast<PRefineableElement *>(this->element_pt(e));
+      PRefineableElement* el_pt =
+        dynamic_cast<PRefineableElement*>(this->element_pt(e));
 
       // Check that we can p-refine the element
       if (el_pt != 0)
@@ -4097,7 +4097,7 @@ namespace oomph
             {
               // Get the vector of halo elements whose non-halo counterpart
               // are on processor d
-              Vector<GeneralisedElement *> halo_elem_pt(
+              Vector<GeneralisedElement*> halo_elem_pt(
                 this->halo_element_pt(d));
 
               // Create vector containing (0)1 to indicate that
@@ -4106,7 +4106,7 @@ namespace oomph
               Vector<int> halo_to_be_unrefined(nhalo, 0);
               for (unsigned e = 0; e < nhalo; e++)
               {
-                if (dynamic_cast<PRefineableElement *>(halo_elem_pt[e])
+                if (dynamic_cast<PRefineableElement*>(halo_elem_pt[e])
                       ->to_be_p_unrefined())
                 {
                   halo_to_be_unrefined[e] = 1;
@@ -4129,7 +4129,7 @@ namespace oomph
 
             {
               // Get the vector of haloed elements on current processor
-              Vector<GeneralisedElement *> haloed_elem_pt(
+              Vector<GeneralisedElement*> haloed_elem_pt(
                 this->haloed_element_pt(d));
 
               // Ask processor d to send vector containing (0)1 for
@@ -4152,10 +4152,10 @@ namespace oomph
               for (unsigned e = 0; e < nhaloed; e++)
               {
                 if (((halo_to_be_unrefined[e] == 0) &&
-                     (dynamic_cast<PRefineableElement *>(haloed_elem_pt[e])
+                     (dynamic_cast<PRefineableElement*>(haloed_elem_pt[e])
                         ->to_be_p_unrefined())) ||
                     ((halo_to_be_unrefined[e] == 1) &&
-                     (!dynamic_cast<PRefineableElement *>(haloed_elem_pt[e])
+                     (!dynamic_cast<PRefineableElement*>(haloed_elem_pt[e])
                          ->to_be_p_unrefined())))
                 {
                   std::ostringstream error_message;
@@ -4186,7 +4186,7 @@ namespace oomph
             {
               // Get the vector of halo elements whose non-halo counterpart
               // are on processor d
-              Vector<GeneralisedElement *> halo_elem_pt(
+              Vector<GeneralisedElement*> halo_elem_pt(
                 this->halo_element_pt(d));
 
               // Create vector containing (0)1 to indicate that
@@ -4195,7 +4195,7 @@ namespace oomph
               Vector<int> halo_to_be_refined(nhalo, 0);
               for (unsigned e = 0; e < nhalo; e++)
               {
-                if (dynamic_cast<PRefineableElement *>(halo_elem_pt[e])
+                if (dynamic_cast<PRefineableElement*>(halo_elem_pt[e])
                       ->to_be_p_refined())
                 {
                   halo_to_be_refined[e] = 1;
@@ -4216,7 +4216,7 @@ namespace oomph
 
             {
               // Get the vector of haloed elements on current processor
-              Vector<GeneralisedElement *> haloed_elem_pt(
+              Vector<GeneralisedElement*> haloed_elem_pt(
                 this->haloed_element_pt(d));
 
               // Ask processor d to send vector containing (0)1 for
@@ -4238,10 +4238,10 @@ namespace oomph
               for (unsigned e = 0; e < nhaloed; e++)
               {
                 if (((halo_to_be_refined[e] == 0) &&
-                     (dynamic_cast<PRefineableElement *>(haloed_elem_pt[e])
+                     (dynamic_cast<PRefineableElement*>(haloed_elem_pt[e])
                         ->to_be_p_refined())) ||
                     ((halo_to_be_refined[e] == 1) &&
-                     (!dynamic_cast<PRefineableElement *>(haloed_elem_pt[e])
+                     (!dynamic_cast<PRefineableElement*>(haloed_elem_pt[e])
                          ->to_be_p_refined())))
                 {
                   std::ostringstream error_message;
@@ -4374,7 +4374,7 @@ namespace oomph
   ///   - QuadTreeNeighbours.mcr
   ///   .
   //=================================================================
-  void TreeBasedRefineableMeshBase::p_adapt_mesh(DocInfo &doc_info)
+  void TreeBasedRefineableMeshBase::p_adapt_mesh(DocInfo& doc_info)
   {
 #ifdef OOMPH_HAS_MPI
     // Delete any external element storage before performing the adaptation
@@ -4428,13 +4428,13 @@ namespace oomph
       // If it has changed, then we need to adjust their positions.
       const unsigned n_boundary = this->nboundary();
       const unsigned mesh_dim = this->finite_element_pt(0)->dim();
-      Vector<std::set<Node *>> hanging_nodes_on_boundary_pt(n_boundary);
+      Vector<std::set<Node*>> hanging_nodes_on_boundary_pt(n_boundary);
 
       unsigned long n_node = this->nnode();
       for (unsigned long n = 0; n < n_node; n++)
       {
         // Get the pointer to the node
-        Node *nod_pt = this->node_pt(n);
+        Node* nod_pt = this->node_pt(n);
 
         // Get the number of values in the node
         unsigned n_value = nod_pt->nvalue();
@@ -4476,7 +4476,7 @@ namespace oomph
           }
 
           // If it's an algebraic node: Update its previous nodal positions too
-          AlgebraicNode *alg_node_pt = dynamic_cast<AlgebraicNode *>(nod_pt);
+          AlgebraicNode* alg_node_pt = dynamic_cast<AlgebraicNode*>(nod_pt);
           if (alg_node_pt != 0)
           {
             bool update_all_time_levels = true;
@@ -4485,7 +4485,7 @@ namespace oomph
 
           // If it's a Solid node, update Lagrangian coordinates
           // from its hanging node representation
-          SolidNode *solid_node_pt = dynamic_cast<SolidNode *>(nod_pt);
+          SolidNode* solid_node_pt = dynamic_cast<SolidNode*>(nod_pt);
           if (solid_node_pt != 0)
           {
             unsigned n_lagrangian = solid_node_pt->nlagrangian();
@@ -4505,7 +4505,7 @@ namespace oomph
             if (nod_pt->is_on_boundary())
             {
               // Storage for the boundaries on which the Node is located
-              std::set<unsigned> *boundaries_pt;
+              std::set<unsigned>* boundaries_pt;
               nod_pt->get_boundaries_pt(boundaries_pt);
               if (boundaries_pt != 0)
               {
@@ -4538,7 +4538,7 @@ namespace oomph
       }
 
       // Stick all elements into a vector
-      Vector<Tree *> tree_nodes_pt;
+      Vector<Tree*> tree_nodes_pt;
       this->forest_pt()->stick_leaves_into_vector(tree_nodes_pt);
 
       // Copy the elements into the mesh Vector
@@ -4549,7 +4549,7 @@ namespace oomph
         this->element_pt(e) = tree_nodes_pt[e]->object_pt();
 
         // Now loop over all nodes in element and mark them as non-obsolete
-        FiniteElement *this_el_pt = this->finite_element_pt(e);
+        FiniteElement* this_el_pt = this->finite_element_pt(e);
         unsigned n_node = this_el_pt->nnode(); // caching pre-loop
         for (unsigned n = 0; n < n_node; n++)
         {
@@ -4559,8 +4559,8 @@ namespace oomph
         // Mark up so that repeated refinements do not occur
         // (Required because refined element is the same element as the
         // original)
-        PRefineableElement *cast_el_pt =
-          dynamic_cast<PRefineableElement *>(this->element_pt(e));
+        PRefineableElement* cast_el_pt =
+          dynamic_cast<PRefineableElement*>(this->element_pt(e));
         cast_el_pt->deselect_for_p_refinement();
         cast_el_pt->deselect_for_p_unrefinement();
       }
@@ -4573,7 +4573,7 @@ namespace oomph
       //----------------------
 
       // Output streams for the hanging nodes
-      Vector<std::ofstream *> hanging_output_files;
+      Vector<std::ofstream*> hanging_output_files;
       // Setup the output files for hanging nodes, this must be called
       // precisely once for the forest. Note that the files will only
       // actually be opened if doc_info.Doc_flag is true
@@ -4643,22 +4643,22 @@ namespace oomph
       //         the node is set to A, say. Element A is p-refined and now
       //         nolonger has N as a node. However the node update element for N
       //         is still A but the node doesn't exist in A.
-      MacroElementNodeUpdateElementBase *first_macro_el_pt =
-        dynamic_cast<MacroElementNodeUpdateElementBase *>(this->element_pt(0));
+      MacroElementNodeUpdateElementBase* first_macro_el_pt =
+        dynamic_cast<MacroElementNodeUpdateElementBase*>(this->element_pt(0));
       if (first_macro_el_pt != 0)
       {
         // Now set the node update info elementwise
         for (unsigned e = 0; e < this->nelement(); e++)
         {
           // Cast to macro element
-          MacroElementNodeUpdateElementBase *macro_el_pt =
-            dynamic_cast<MacroElementNodeUpdateElementBase *>(
+          MacroElementNodeUpdateElementBase* macro_el_pt =
+            dynamic_cast<MacroElementNodeUpdateElementBase*>(
               this->element_pt(e));
           if (macro_el_pt != 0)
           {
             // Get vector of geometric objects from element (construct vector
             // via copy operation)
-            Vector<GeomObject *> geom_object_pt(macro_el_pt->geom_object_pt());
+            Vector<GeomObject*> geom_object_pt(macro_el_pt->geom_object_pt());
 
             // (Re)set node update info for all the nodes in the element
             macro_el_pt->set_node_update_info(geom_object_pt);
@@ -4670,7 +4670,7 @@ namespace oomph
 
       // Doc/check the neighbours
       //-------------------------
-      Vector<Tree *> all_tree_nodes_pt;
+      Vector<Tree*> all_tree_nodes_pt;
       this->forest_pt()->stick_all_tree_nodes_into_vector(all_tree_nodes_pt);
 
       // Check the neighbours
@@ -4708,7 +4708,7 @@ namespace oomph
         for (unsigned long n = 0; n < n_node; n++)
         {
           // Get the pointer to the node
-          Node *nod_pt = this->node_pt(n);
+          Node* nod_pt = this->node_pt(n);
           // Get the dimension
           unsigned n_dim = nod_pt->ndim();
           // Output the coordinates
@@ -4759,7 +4759,7 @@ namespace oomph
       }
 
       // Now we can prune the dead nodes from the mesh.
-      Vector<Node *> deleted_node_pt = this->prune_dead_nodes();
+      Vector<Node*> deleted_node_pt = this->prune_dead_nodes();
 
       if (Global_timings::Doc_comprehensive_timings)
       {
@@ -4800,7 +4800,7 @@ namespace oomph
 
           // If the nodes that were hanging are still hanging then remove them
           // from the set (note increment is not in for command for efficiencty)
-          for (std::set<Node *>::iterator it =
+          for (std::set<Node*>::iterator it =
                  hanging_nodes_on_boundary_pt[b].begin();
                it != hanging_nodes_on_boundary_pt[b].end();)
           {
@@ -4826,11 +4826,11 @@ namespace oomph
             for (unsigned e = 0; e < n_boundary_element; ++e)
             {
               // Get a pointer to the element
-              FiniteElement *el_pt = this->boundary_element_pt(b, e);
+              FiniteElement* el_pt = this->boundary_element_pt(b, e);
 
               // Do we have a solid element
-              SolidFiniteElement *solid_el_pt =
-                dynamic_cast<SolidFiniteElement *>(el_pt);
+              SolidFiniteElement* solid_el_pt =
+                dynamic_cast<SolidFiniteElement*>(el_pt);
 
               // Determine whether there is a macro element
               bool macro_present = (el_pt->macro_elem_pt() != 0);
@@ -4851,11 +4851,11 @@ namespace oomph
                 for (unsigned n = 0; n < n_el_node; n++)
                 {
                   // Cache pointer to the node
-                  Node *nod_pt = el_pt->node_pt(n);
+                  Node* nod_pt = el_pt->node_pt(n);
                   if (nod_pt->is_on_boundary(b))
                   {
                     // Is the Node in our set
-                    std::set<Node *>::iterator it =
+                    std::set<Node*>::iterator it =
                       hanging_nodes_on_boundary_pt[b].find(nod_pt);
                     // If we have found the Node then update the position
                     // to be consistent with the macro-element representation
@@ -4870,8 +4870,8 @@ namespace oomph
                       const unsigned ntstorage = nod_pt->ntstorage();
 
                       // Do we have a solid node
-                      SolidNode *solid_node_pt =
-                        dynamic_cast<SolidNode *>(nod_pt);
+                      SolidNode* solid_node_pt =
+                        dynamic_cast<SolidNode*>(nod_pt);
                       if (solid_node_pt)
                       {
                         // Assign Lagrangian coordinates from undeformed
@@ -4940,7 +4940,7 @@ namespace oomph
 
         // Determine maximum number of values at any node in this type of
         // element
-        RefineableElement *el_pt = tree_nodes_pt[0]->object_pt();
+        RefineableElement* el_pt = tree_nodes_pt[0]->object_pt();
         // Initalise max_nval
         unsigned max_nval = 0;
         for (unsigned n = 0; n < el_pt->nnode(); n++)
@@ -4968,7 +4968,7 @@ namespace oomph
           for (unsigned n = 0; n < n_nod; n++)
           {
             // Get pointer to the node
-            Node *nod_pt = el_pt->node_pt(n);
+            Node* nod_pt = el_pt->node_pt(n);
             // Find the dimension of the node
             unsigned n_dim = nod_pt->ndim();
             // Write the nodal coordinates to the file
@@ -5011,7 +5011,7 @@ namespace oomph
         n_node = this->nnode();
         for (unsigned long n = 0; n < n_node; n++)
         {
-          Node *nod_pt = this->node_pt(n);
+          Node* nod_pt = this->node_pt(n);
           unsigned n_dim = nod_pt->ndim();
           for (unsigned i = 0; i < n_dim; i++)
           {
@@ -5031,7 +5031,7 @@ namespace oomph
         some_file.open(fullname.str().c_str());
         for (unsigned long n = 0; n < n_node; n++)
         {
-          Node *nod_pt = this->node_pt(n);
+          Node* nod_pt = this->node_pt(n);
 
           if (nod_pt->is_hanging())
           {
@@ -5059,7 +5059,7 @@ namespace oomph
         some_file.open(fullname.str().c_str());
         for (unsigned long n = 0; n < n_node; n++)
         {
-          Node *nod_pt = this->node_pt(n);
+          Node* nod_pt = this->node_pt(n);
           if (nod_pt->is_hanging())
           {
             unsigned n_dim = nod_pt->ndim();
@@ -5073,7 +5073,7 @@ namespace oomph
 
             for (unsigned imaster = 0; imaster < nmaster; imaster++)
             {
-              Node *master_nod_pt =
+              Node* master_nod_pt =
                 nod_pt->hanging_pt()->master_node_pt(imaster);
               unsigned n_dim = master_nod_pt->ndim();
               for (unsigned i = 0; i < n_dim; i++)
@@ -5098,7 +5098,7 @@ namespace oomph
           unsigned n_nod = this->nnode();
           for (unsigned long n = 0; n < n_nod; n++)
           {
-            Node *nod_pt = this->node_pt(n);
+            Node* nod_pt = this->node_pt(n);
             if (nod_pt->is_hanging(i))
             {
               if (nod_pt->hanging_pt(i) != nod_pt->hanging_pt())
@@ -5113,7 +5113,7 @@ namespace oomph
                 some_file << " 2 " << std::endl;
                 for (unsigned imaster = 0; imaster < nmaster; imaster++)
                 {
-                  Node *master_nod_pt =
+                  Node* master_nod_pt =
                     nod_pt->hanging_pt(i)->master_node_pt(imaster);
                   unsigned n_dim = master_nod_pt->ndim();
                   for (unsigned j = 0; j < n_dim; j++)
@@ -5176,15 +5176,15 @@ namespace oomph
   /// p-unrefine mesh uniformly
   /// Unlike in h-refinement, we can simply p-unrefine each element in the mesh
   //========================================================================
-  void TreeBasedRefineableMeshBase::p_unrefine_uniformly(DocInfo &doc_info)
+  void TreeBasedRefineableMeshBase::p_unrefine_uniformly(DocInfo& doc_info)
   {
     // Select all elements for unrefinement
     unsigned long Nelement = this->nelement();
     for (unsigned long e = 0; e < Nelement; e++)
     {
       // Get pointer to p-refineable element
-      PRefineableElement *el_pt =
-        dynamic_cast<PRefineableElement *>(this->element_pt(e));
+      PRefineableElement* el_pt =
+        dynamic_cast<PRefineableElement*>(this->element_pt(e));
       // Mark for p-refinement if possible. If not then p_adapt_mesh() will
       // report the error.
       if (el_pt != 0)
@@ -5201,7 +5201,7 @@ namespace oomph
   /// p-refine mesh by refining the elements identified by their numbers.
   //========================================================================
   void TreeBasedRefineableMeshBase::p_refine_selected_elements(
-    const Vector<unsigned> &elements_to_be_refined)
+    const Vector<unsigned>& elements_to_be_refined)
   {
 #ifdef OOMPH_HAS_MPI
     if (this->is_mesh_distributed())
@@ -5223,7 +5223,7 @@ namespace oomph
     for (unsigned long e = 0; e < nref; e++)
     {
       // Get pointer to p-refineable element
-      PRefineableElement *el_pt = dynamic_cast<PRefineableElement *>(
+      PRefineableElement* el_pt = dynamic_cast<PRefineableElement*>(
         this->element_pt(elements_to_be_refined[e]));
       // Mark for p-refinement if possible. If not then p_adapt_mesh() will
       // report the error.
@@ -5241,7 +5241,7 @@ namespace oomph
   /// p-refine mesh by refining the elements identified by their pointers.
   //========================================================================
   void TreeBasedRefineableMeshBase::p_refine_selected_elements(
-    const Vector<PRefineableElement *> &elements_to_be_refined_pt)
+    const Vector<PRefineableElement*>& elements_to_be_refined_pt)
   {
 #ifdef OOMPH_HAS_MPI
     if (this->is_mesh_distributed())

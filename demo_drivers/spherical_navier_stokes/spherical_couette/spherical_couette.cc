@@ -69,8 +69,8 @@ class TorqueCalculationElement :
 public:
   /// Constructor, which takes a "bulk" element and the value of the index
   /// and its limit
-  TorqueCalculationElement(FiniteElement *const &element_pt,
-                           const int &face_index) :
+  TorqueCalculationElement(FiniteElement* const& element_pt,
+                           const int& face_index) :
     FaceGeometry<ELEMENT>(), FaceElement()
   {
     // Attach the geometrical information to the element. N.B. This function
@@ -107,8 +107,8 @@ public:
 
     double sum = 0.0;
 
-    ELEMENT *const bulk_elem_pt =
-      dynamic_cast<ELEMENT *>(this->bulk_element_pt());
+    ELEMENT* const bulk_elem_pt =
+      dynamic_cast<ELEMENT*>(this->bulk_element_pt());
 
     // Loop over the integration points
     for (unsigned ipt = 0; ipt < n_intpt; ipt++)
@@ -165,12 +165,12 @@ public:
   ~RefineableSphericalCouetteProblem();
 
   /// Fix pressure in element e at pressure dof pdof and set to pvalue
-  void fix_pressure(const unsigned &e,
-                    const unsigned &pdof,
-                    const double &pvalue)
+  void fix_pressure(const unsigned& e,
+                    const unsigned& pdof,
+                    const double& pvalue)
   {
     // Cast to full element type and fix the pressure at that element
-    dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e))
+    dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))
       ->fix_pressure(pdof, pvalue);
   } // end of fix_pressure
 
@@ -197,16 +197,16 @@ public:
   }
 
   // Access function for the specific mesh
-  RefineableRectangularQuadMesh<ELEMENT> *mesh_pt()
+  RefineableRectangularQuadMesh<ELEMENT>* mesh_pt()
   {
     // Upcast from pointer to the Mesh base class to the specific
     // element type that we're using here.
-    return dynamic_cast<RefineableRectangularQuadMesh<ELEMENT> *>(
+    return dynamic_cast<RefineableRectangularQuadMesh<ELEMENT>*>(
       Problem::mesh_pt());
   }
 
   /// Document the solution
-  void doc_solution(DocInfo &doc_info, std::ofstream &);
+  void doc_solution(DocInfo& doc_info, std::ofstream&);
 
   /// Compute the torque on the sphere
   double compute_torque();
@@ -242,7 +242,7 @@ RefineableSphericalCouetteProblem<ELEMENT>::RefineableSphericalCouetteProblem()
     n_r, n_theta, R_inner, R_outer, 0.0, pi);
 
   // Set error estimator
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   mesh_pt()->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Set the boundary conditions for this problem: All nodes are
@@ -290,7 +290,7 @@ RefineableSphericalCouetteProblem<ELEMENT>::RefineableSphericalCouetteProblem()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
     // Set the Reynolds number
     el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -325,7 +325,7 @@ void RefineableSphericalCouetteProblem<ELEMENT>::set_boundary_conditions()
   unsigned num_nod = mesh_pt()->nboundary_node(ibound);
   for (unsigned inod = 0; inod < num_nod; inod++)
   {
-    Node *nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
+    Node* nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
 
     Vector<double> x(2);
     x[0] = nod_pt->x(0);
@@ -342,7 +342,7 @@ void RefineableSphericalCouetteProblem<ELEMENT>::set_boundary_conditions()
   num_nod = mesh_pt()->nboundary_node(ibound);
   for (unsigned inod = 0; inod < num_nod; inod++)
   {
-    Node *nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
+    Node* nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
 
     Vector<double> x(2);
     x[0] = nod_pt->x(0);
@@ -361,7 +361,7 @@ void RefineableSphericalCouetteProblem<ELEMENT>::set_boundary_conditions()
   num_nod = mesh_pt()->nboundary_node(ibound);
   for (unsigned inod = 0; inod < num_nod; inod++)
   {
-    Node *nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
+    Node* nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
 
     Vector<double> x(2);
     x[0] = nod_pt->x(0);
@@ -378,7 +378,7 @@ void RefineableSphericalCouetteProblem<ELEMENT>::set_boundary_conditions()
   num_nod = mesh_pt()->nboundary_node(ibound);
   for (unsigned inod = 0; inod < num_nod; inod++)
   {
-    Node *nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
+    Node* nod_pt = mesh_pt()->boundary_node_pt(ibound, inod);
 
     Vector<double> x(2);
     x[0] = nod_pt->x(0);
@@ -410,8 +410,8 @@ RefineableSphericalCouetteProblem<ELEMENT>::~RefineableSphericalCouetteProblem()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void RefineableSphericalCouetteProblem<ELEMENT>::doc_solution(DocInfo &doc_info,
-                                                              std::ofstream &)
+void RefineableSphericalCouetteProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
+                                                              std::ofstream&)
 {
   ofstream some_file;
   char filename[100];
@@ -451,14 +451,14 @@ double RefineableSphericalCouetteProblem<ELEMENT>::compute_torque()
   for (unsigned e = 0; e < n_bound_element; e++)
   {
     // Get pointer to the bulk element
-    ELEMENT *bulk_elem_pt =
-      dynamic_cast<ELEMENT *>(this->mesh_pt()->boundary_element_pt(bound, e));
+    ELEMENT* bulk_elem_pt =
+      dynamic_cast<ELEMENT*>(this->mesh_pt()->boundary_element_pt(bound, e));
 
     // FInd the face index
     int face_index = this->mesh_pt()->face_index_at_boundary(bound, e);
 
     // Build the flux element
-    TorqueCalculationElement<ELEMENT> *torque_element_pt =
+    TorqueCalculationElement<ELEMENT>* torque_element_pt =
       new TorqueCalculationElement<ELEMENT>(bulk_elem_pt, face_index);
 
     // Now calculate the torque

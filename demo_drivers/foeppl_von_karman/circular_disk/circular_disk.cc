@@ -51,14 +51,14 @@ namespace TestSoln
   double r_b = 0.1;
 
   // Storage for the pressures in the bubble and outside of the bubble
-  Data *p_b_pt = 0;
-  Data *p_0_pt = 0;
+  Data* p_b_pt = 0;
+  Data* p_0_pt = 0;
 
   // The volume of the bubble region under the membrane
   double prescribed_volume = 0.01;
 
   // Assigns the value of pressure depending on the position (x,y)
-  void get_pressure(const Vector<double> &x, double &pressure)
+  void get_pressure(const Vector<double>& x, double& pressure)
   {
     double r = sqrt(x[0] * x[0] + x[1] * x[1]);
 
@@ -72,12 +72,12 @@ namespace TestSoln
     }
   }
 
-  void get_airy_forcing(const Vector<double> &x, double &airy_forcing)
+  void get_airy_forcing(const Vector<double>& x, double& airy_forcing)
   {
     airy_forcing = 0;
   }
 
-  void zero(const Vector<double> &x, Vector<double> &u)
+  void zero(const Vector<double>& x, Vector<double>& u)
   {
     u[0] = 0.0;
   }
@@ -143,7 +143,7 @@ public:
   }
 
   /// Doc the solution
-  void doc_solution(const std::string &comment = "");
+  void doc_solution(const std::string& comment = "");
 
 private:
   /// Doc info object for labeling output
@@ -158,18 +158,18 @@ private:
 
   /// Pointers to specific mesh
   // RefineableTriangleMesh<ELEMENT>* My_mesh_pt;
-  RefineableTriangleMesh<ELEMENT> *My_mesh_pt;
+  RefineableTriangleMesh<ELEMENT>* My_mesh_pt;
 
   /// Mesh for the volume constraint element
-  Mesh *Volume_constraint_mesh_pt;
+  Mesh* Volume_constraint_mesh_pt;
 
   /// Single volume constraint element instance
-  FoepplvonKarmanVolumeConstraintElement<ELEMENT, RefineableTriangleMesh>
-    *Volume_constraint_element_pt;
+  FoepplvonKarmanVolumeConstraintElement<ELEMENT, RefineableTriangleMesh>*
+    Volume_constraint_element_pt;
 
   /// Temporary storage for the pressure used when switching between instances
   /// of volume constraint element
-  double *Temp_pressure_pt;
+  double* Temp_pressure_pt;
 
   Vector<unsigned> Bubble_regions;
 
@@ -207,11 +207,11 @@ UnstructuredFvKProblem<ELEMENT>::UnstructuredFvKProblem(double element_area) :
 
   double A = 1.0;
   double B = 1.0;
-  Ellipse *outer_boundary_ellipse_pt = new Ellipse(A, B);
+  Ellipse* outer_boundary_ellipse_pt = new Ellipse(A, B);
 
-  TriangleMeshClosedCurve *outer_boundary_pt = 0;
+  TriangleMeshClosedCurve* outer_boundary_pt = 0;
 
-  Vector<TriangleMeshCurveSection *> outer_curvilinear_boundary_pt(2);
+  Vector<TriangleMeshCurveSection*> outer_curvilinear_boundary_pt(2);
 
   // First bit
   double zeta_start = 0.0;
@@ -235,10 +235,10 @@ UnstructuredFvKProblem<ELEMENT>::UnstructuredFvKProblem(double element_area) :
 
   A = TestSoln::r_b;
   B = TestSoln::r_b;
-  Ellipse *inner_boundary_ellipse_pt = new Ellipse(A, B);
+  Ellipse* inner_boundary_ellipse_pt = new Ellipse(A, B);
 
-  Vector<TriangleMeshClosedCurve *> inner_boundary_pt(1);
-  Vector<TriangleMeshCurveSection *> inner_curvilinear_boundary_pt(2);
+  Vector<TriangleMeshClosedCurve*> inner_boundary_pt(1);
+  Vector<TriangleMeshCurveSection*> inner_curvilinear_boundary_pt(2);
 
   // First part
   zeta_start = 0.0;
@@ -269,7 +269,7 @@ UnstructuredFvKProblem<ELEMENT>::UnstructuredFvKProblem(double element_area) :
     new TriangleMeshClosedCurve(inner_curvilinear_boundary_pt);
 
   // Diameter boundary line
-  Vector<TriangleMeshOpenCurve *> inner_open_boundary_pt(4);
+  Vector<TriangleMeshOpenCurve*> inner_open_boundary_pt(4);
 
   Vector<Vector<double>> vertex_coord(2, Vector<double>(2));
 
@@ -279,18 +279,18 @@ UnstructuredFvKProblem<ELEMENT>::UnstructuredFvKProblem(double element_area) :
   vertex_coord[1][0] = 0.0;
   vertex_coord[1][1] = -TestSoln::r_b;
 
-  TriangleMeshPolyLine *inner_open_polyline1_pt =
+  TriangleMeshPolyLine* inner_open_polyline1_pt =
     new TriangleMeshPolyLine(vertex_coord, Inner_boundary2);
 
   inner_open_polyline1_pt->connect_initial_vertex_to_curviline(
-    dynamic_cast<TriangleMeshCurviLine *>(outer_curvilinear_boundary_pt[1]),
+    dynamic_cast<TriangleMeshCurviLine*>(outer_curvilinear_boundary_pt[1]),
     1.5 * MathematicalConstants::Pi);
 
   inner_open_polyline1_pt->connect_final_vertex_to_curviline(
-    dynamic_cast<TriangleMeshCurviLine *>(inner_curvilinear_boundary_pt[1]),
+    dynamic_cast<TriangleMeshCurviLine*>(inner_curvilinear_boundary_pt[1]),
     1.5 * MathematicalConstants::Pi);
 
-  Vector<TriangleMeshCurveSection *> inner_boundary_line1_pt(1);
+  Vector<TriangleMeshCurveSection*> inner_boundary_line1_pt(1);
   inner_boundary_line1_pt[0] = inner_open_polyline1_pt;
 
   inner_open_boundary_pt[0] =
@@ -302,14 +302,14 @@ UnstructuredFvKProblem<ELEMENT>::UnstructuredFvKProblem(double element_area) :
   vertex_coord[1][0] = 0.0;
   vertex_coord[1][1] = 0.0;
 
-  TriangleMeshPolyLine *inner_open_polyline2_pt =
+  TriangleMeshPolyLine* inner_open_polyline2_pt =
     new TriangleMeshPolyLine(vertex_coord, Inner_boundary3);
 
   inner_open_polyline2_pt->connect_initial_vertex_to_curviline(
-    dynamic_cast<TriangleMeshCurviLine *>(inner_curvilinear_boundary_pt[1]),
+    dynamic_cast<TriangleMeshCurviLine*>(inner_curvilinear_boundary_pt[1]),
     1.5 * MathematicalConstants::Pi);
 
-  Vector<TriangleMeshCurveSection *> inner_boundary_line2_pt(1);
+  Vector<TriangleMeshCurveSection*> inner_boundary_line2_pt(1);
   inner_boundary_line2_pt[0] = inner_open_polyline2_pt;
 
   inner_open_boundary_pt[1] =
@@ -321,17 +321,17 @@ UnstructuredFvKProblem<ELEMENT>::UnstructuredFvKProblem(double element_area) :
   vertex_coord[1][0] = 0.0;
   vertex_coord[1][1] = TestSoln::r_b;
 
-  TriangleMeshPolyLine *inner_open_polyline3_pt =
+  TriangleMeshPolyLine* inner_open_polyline3_pt =
     new TriangleMeshPolyLine(vertex_coord, Inner_boundary4);
 
   inner_open_polyline3_pt->connect_initial_vertex_to_polyline(
     inner_open_polyline2_pt, 1);
 
   inner_open_polyline3_pt->connect_final_vertex_to_curviline(
-    dynamic_cast<TriangleMeshCurviLine *>(inner_curvilinear_boundary_pt[0]),
+    dynamic_cast<TriangleMeshCurviLine*>(inner_curvilinear_boundary_pt[0]),
     0.5 * MathematicalConstants::Pi);
 
-  Vector<TriangleMeshCurveSection *> inner_boundary_line3_pt(1);
+  Vector<TriangleMeshCurveSection*> inner_boundary_line3_pt(1);
   inner_boundary_line3_pt[0] = inner_open_polyline3_pt;
 
   inner_open_boundary_pt[2] =
@@ -343,18 +343,18 @@ UnstructuredFvKProblem<ELEMENT>::UnstructuredFvKProblem(double element_area) :
   vertex_coord[1][0] = 0.0;
   vertex_coord[1][1] = 1.0;
 
-  TriangleMeshPolyLine *inner_open_polyline4_pt =
+  TriangleMeshPolyLine* inner_open_polyline4_pt =
     new TriangleMeshPolyLine(vertex_coord, Inner_boundary5);
 
   inner_open_polyline4_pt->connect_initial_vertex_to_curviline(
-    dynamic_cast<TriangleMeshCurviLine *>(inner_curvilinear_boundary_pt[0]),
+    dynamic_cast<TriangleMeshCurviLine*>(inner_curvilinear_boundary_pt[0]),
     0.5 * MathematicalConstants::Pi);
 
   inner_open_polyline4_pt->connect_final_vertex_to_curviline(
-    dynamic_cast<TriangleMeshCurviLine *>(outer_curvilinear_boundary_pt[0]),
+    dynamic_cast<TriangleMeshCurviLine*>(outer_curvilinear_boundary_pt[0]),
     0.5 * MathematicalConstants::Pi);
 
-  Vector<TriangleMeshCurveSection *> inner_boundary_line4_pt(1);
+  Vector<TriangleMeshCurveSection*> inner_boundary_line4_pt(1);
   inner_boundary_line4_pt[0] = inner_open_polyline4_pt;
 
   inner_open_boundary_pt[3] =
@@ -375,7 +375,7 @@ UnstructuredFvKProblem<ELEMENT>::UnstructuredFvKProblem(double element_area) :
 
   My_mesh_pt = new RefineableTriangleMesh<ELEMENT>(mesh_parameters);
 
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   My_mesh_pt->spatial_error_estimator_pt() = error_estimator_pt;
 
   My_mesh_pt->max_element_size() = 0.2;
@@ -443,7 +443,7 @@ void UnstructuredFvKProblem<ELEMENT>::complete_problem_setup()
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Get node
-      Node *nod_pt = My_mesh_pt->boundary_node_pt(ibound, inod);
+      Node* nod_pt = My_mesh_pt->boundary_node_pt(ibound, inod);
 
       // Pin unknown values
       nod_pt->pin(0);
@@ -456,7 +456,7 @@ void UnstructuredFvKProblem<ELEMENT>::complete_problem_setup()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(My_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(My_mesh_pt->element_pt(e));
 
     // Set the pressure function pointers and the physical constants
     el_pt->eta_pt() = &TestSoln::eta;
@@ -474,7 +474,7 @@ void UnstructuredFvKProblem<ELEMENT>::complete_problem_setup()
     for (unsigned e = 0; e < n_element; e++)
     {
       // Upcast from GeneralisedElement to the present element
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(
         My_mesh_pt->region_element_pt(Bubble_regions[r], e));
 
       el_pt->set_volume_constraint_pressure_data_as_external_data(
@@ -505,7 +505,7 @@ void UnstructuredFvKProblem<ELEMENT>::apply_boundary_conditions()
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Get node
-      Node *nod_pt = this->My_mesh_pt->boundary_node_pt(ibound, inod);
+      Node* nod_pt = this->My_mesh_pt->boundary_node_pt(ibound, inod);
 
       // Extract nodal coordinates from node:
       Vector<double> x(2);
@@ -520,7 +520,7 @@ void UnstructuredFvKProblem<ELEMENT>::apply_boundary_conditions()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void UnstructuredFvKProblem<ELEMENT>::doc_solution(const std::string &comment)
+void UnstructuredFvKProblem<ELEMENT>::doc_solution(const std::string& comment)
 {
   ofstream some_file;
   char filename[100];
@@ -610,7 +610,7 @@ void UnstructuredFvKProblem<ELEMENT>::doc_solution(const std::string &comment)
       n_inner_el = My_mesh_pt->nregion_element(Bubble_regions[r]);
       for (unsigned e = 0; e < n_inner_el; e++)
       {
-        ELEMENT *el_pt = dynamic_cast<ELEMENT *>(
+        ELEMENT* el_pt = dynamic_cast<ELEMENT*>(
           My_mesh_pt->region_element_pt(Bubble_regions[r], e));
         if (el_pt != 0)
         {
@@ -646,7 +646,7 @@ void UnstructuredFvKProblem<ELEMENT>::doc_solution(const std::string &comment)
 //=======start_of_main========================================
 /// Driver code for demo of inline triangle mesh generation
 //============================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

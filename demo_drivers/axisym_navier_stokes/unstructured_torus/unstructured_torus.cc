@@ -65,9 +65,9 @@ class GeneralCircle : public GeomObject
 public:
   /// Constructor that takes the centre position and raidus of the circle
   /// as its arguments
-  GeneralCircle(const double &centre_x,
-                const double &centre_y,
-                const double &radius) :
+  GeneralCircle(const double& centre_x,
+                const double& centre_y,
+                const double& radius) :
     GeomObject(1, 2), Centre_x(centre_x), Centre_y(centre_y), Radius(radius)
   {
   }
@@ -76,7 +76,7 @@ public:
   virtual ~GeneralCircle() {}
 
   /// Lagrangian coordinate xi
-  void position(const Vector<double> &xi, Vector<double> &r) const
+  void position(const Vector<double>& xi, Vector<double>& r) const
   {
     r[0] = Centre_x + Radius * cos(xi[0]);
     r[1] = Centre_y + Radius * sin(xi[0]);
@@ -84,9 +84,9 @@ public:
 
   /// Return the position of the circle as a function of time
   /// (doesn't move as a function of time)
-  void position(const unsigned &t,
-                const Vector<double> &xi,
-                Vector<double> &r) const
+  void position(const unsigned& t,
+                const Vector<double>& xi,
+                Vector<double>& r) const
   {
     position(xi, r);
   }
@@ -216,8 +216,8 @@ class UnstructuredTorusProblem : public Problem
 public:
   /// \short Constructor taking the maximum refinement level and
   /// the minimum and maximum error targets.
-  UnstructuredTorusProblem(const double &min_error_target,
-                           const double &max_error_target);
+  UnstructuredTorusProblem(const double& min_error_target,
+                           const double& max_error_target);
 
   /// \short Calculate the square of the l2 norm
   double calculate_square_of_l2_norm()
@@ -230,7 +230,7 @@ public:
     const unsigned n_element = this->mesh_pt()->nelement();
     for (unsigned e = 0; e < n_element; e++)
     {
-      sum += dynamic_cast<ELEMENT *>(this->mesh_pt()->element_pt(e))
+      sum += dynamic_cast<ELEMENT*>(this->mesh_pt()->element_pt(e))
                ->square_of_l2_norm();
     }
     return sum;
@@ -266,17 +266,17 @@ public:
   }
 
   /// Set boundary conditions on the walls
-  void set_boundary_conditions(const double &time);
+  void set_boundary_conditions(const double& time);
 
   /// Function that is used to run the parameter study
-  void solve_system(const double &dt,
-                    const unsigned &nstep,
-                    const std::string &directory);
+  void solve_system(const double& dt,
+                    const unsigned& nstep,
+                    const std::string& directory);
 
   /// Return a pointer to the specific mesh used
-  RefineableTriangleMesh<ELEMENT> *mesh_pt()
+  RefineableTriangleMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<RefineableTriangleMesh<ELEMENT> *>(Problem::mesh_pt());
+    return dynamic_cast<RefineableTriangleMesh<ELEMENT>*>(Problem::mesh_pt());
   }
   /// \short Update the problem specs before next timestep:
   void actions_before_implicit_timestep()
@@ -295,7 +295,7 @@ public:
       // Cast to the particular element type, this is necessary because
       // the base elements don't have the member functions that we're about
       // to call!
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
       // There is no need for ALE
       el_pt->disable_ALE();
@@ -322,7 +322,7 @@ public:
       for (unsigned n = 0; n < n_boundary_node; ++n)
       {
         // Now move the boundary nodes exactly onto the geometric object
-        Node *const nod_pt = this->mesh_pt()->boundary_node_pt(b, n);
+        Node* const nod_pt = this->mesh_pt()->boundary_node_pt(b, n);
         if (geom_object)
         {
           nod_pt->get_coordinates_on_boundary(b, b_coord);
@@ -346,7 +346,7 @@ public:
     this->set_boundary_conditions(this->time());
 
     // Pin a single pressure value
-    dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(0))->fix_pressure(0, 0.0);
+    dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(0))->fix_pressure(0, 0.0);
   }
 };
 
@@ -356,7 +356,7 @@ public:
 //============================================================================
 template<class ELEMENT>
 UnstructuredTorusProblem<ELEMENT>::UnstructuredTorusProblem(
-  const double &min_error_target, const double &max_error_target)
+  const double& min_error_target, const double& max_error_target)
 {
   using namespace Global_Physical_Variables;
 
@@ -365,7 +365,7 @@ UnstructuredTorusProblem<ELEMENT>::UnstructuredTorusProblem(
 
   // Create the domain for the mesh, which consists of a circle of
   // radius Radius and centred at (1/Delta, 0)
-  GeomObject *area_pt = new GeneralCircle(1.0 / Delta, 0.0, Radius);
+  GeomObject* area_pt = new GeneralCircle(1.0 / Delta, 0.0, Radius);
 
   // Specify the number of boundary points
   unsigned n_points = 11;
@@ -377,7 +377,7 @@ UnstructuredTorusProblem<ELEMENT>::UnstructuredTorusProblem(
   //--------------------------------------------------------------
   // four separeate polyline segments
   //---------------------------------
-  Vector<TriangleMeshPolyLine *> boundary_segment_pt(2);
+  Vector<TriangleMeshPolyLine*> boundary_segment_pt(2);
 
   // Initialize boundary segment
   Vector<Vector<double>> bound_seg(n_points);
@@ -433,7 +433,7 @@ UnstructuredTorusProblem<ELEMENT>::UnstructuredTorusProblem(
   //   TriangleMeshPolygon(boundary_segment_pt);
 
   // No holes
-  Vector<TriangleMeshClosedCurve *> Inner_hole_pt;
+  Vector<TriangleMeshClosedCurve*> Inner_hole_pt;
 
   // Now create the mesh
   double uniform_element_area = 0.2;
@@ -444,7 +444,7 @@ UnstructuredTorusProblem<ELEMENT>::UnstructuredTorusProblem(
   // this->time_stepper_pt());
 
   // Build the two parts of the curvilinear boundary
-  Vector<TriangleMeshCurveSection *> curvilinear_boundary_pt(2);
+  Vector<TriangleMeshCurveSection*> curvilinear_boundary_pt(2);
 
   double zeta_start = 0.0;
   double zeta_end = MathematicalConstants::Pi;
@@ -464,7 +464,7 @@ UnstructuredTorusProblem<ELEMENT>::UnstructuredTorusProblem(
   Vector<double> hole_coords(2);
   hole_coords[0] = 0.0;
   hole_coords[1] = 0.0;
-  TriangleMeshClosedCurve *curvilinear_outer_boundary_pt =
+  TriangleMeshClosedCurve* curvilinear_outer_boundary_pt =
     new TriangleMeshClosedCurve(curvilinear_boundary_pt);
 
   //  //Set the boundaries
@@ -491,7 +491,7 @@ UnstructuredTorusProblem<ELEMENT>::UnstructuredTorusProblem(
     triangle_mesh_parameters, this->time_stepper_pt());
 
   // Set error estimator
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   mesh_pt()->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Error targets for adaptive refinement
@@ -505,7 +505,7 @@ UnstructuredTorusProblem<ELEMENT>::UnstructuredTorusProblem(
     // Cast to the particular element type, this is necessary because
     // the base elements don't have the member functions that we're about
     // to call!
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
     // There is no need for ALE
     el_pt->disable_ALE();
@@ -533,7 +533,7 @@ UnstructuredTorusProblem<ELEMENT>::UnstructuredTorusProblem(
     for (unsigned n = 0; n < n_boundary_node; ++n)
     {
       // Now move the boundary nodes exactly onto the geometric object
-      Node *const nod_pt = this->mesh_pt()->boundary_node_pt(b, n);
+      Node* const nod_pt = this->mesh_pt()->boundary_node_pt(b, n);
       nod_pt->get_coordinates_on_boundary(b, b_coord);
       // Let's find boundary coordinates of the new node
       this->mesh_pt()->boundary_geom_object_pt(b)->position(b_coord, new_x);
@@ -552,7 +552,7 @@ UnstructuredTorusProblem<ELEMENT>::UnstructuredTorusProblem(
   }
 
   // Pin a single pressure value
-  dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(0))->fix_pressure(0, 0.0);
+  dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(0))->fix_pressure(0, 0.0);
 
   // Setup all the equation numbering and look-up schemes
   std::cout << assign_eqn_numbers() << std::endl;
@@ -564,7 +564,7 @@ UnstructuredTorusProblem<ELEMENT>::UnstructuredTorusProblem(
 //========================================================================
 template<class ELEMENT>
 void UnstructuredTorusProblem<ELEMENT>::set_boundary_conditions(
-  const double &time)
+  const double& time)
 {
   // NOTE: The default value of all parameters is zero, so we need only
   // set the values that are non-zero on the boundary, i.e. the swirl
@@ -594,7 +594,7 @@ void UnstructuredTorusProblem<ELEMENT>::set_boundary_conditions(
 //==========================================================================
 template<class ELEMENT>
 void UnstructuredTorusProblem<ELEMENT>::solve_system(
-  const double &dt, const unsigned &nstep, const std::string &directory)
+  const double& dt, const unsigned& nstep, const std::string& directory)
 {
   using namespace Global_Physical_Variables;
 

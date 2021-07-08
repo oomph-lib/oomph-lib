@@ -53,10 +53,10 @@ namespace oomph
     //=======================================================================
     /// Default load function (zero traction)
     //=======================================================================
-    void Zero_traction_fct(const double &time,
-                           const Vector<double> &x,
-                           const Vector<double> &N,
-                           Vector<double> &load)
+    void Zero_traction_fct(const double& time,
+                           const Vector<double>& x,
+                           const Vector<double>& N,
+                           Vector<double>& load)
     {
       unsigned n_dim = load.size();
       for (unsigned i = 0; i < n_dim; i++)
@@ -88,21 +88,21 @@ namespace oomph
     /// applied traction. (Not all of the input arguments will be
     /// required for all specific load functions but the list should
     /// cover all cases)
-    void (*Traction_fct_pt)(const double &time,
-                            const Vector<double> &x,
-                            const Vector<double> &n,
-                            Vector<double> &result);
+    void (*Traction_fct_pt)(const double& time,
+                            const Vector<double>& x,
+                            const Vector<double>& n,
+                            Vector<double>& result);
 
     /// \short Get the traction vector: Pass number of integration point
     /// (dummy), Eulerian coordinate and normal vector and return the load
     /// vector (not all of the input arguments will be required for all specific
     /// load functions but the list should cover all cases). This function is
     /// virtual so it can be overloaded for FSI.
-    virtual void get_traction(const double &time,
-                              const unsigned &intpt,
-                              const Vector<double> &x,
-                              const Vector<double> &n,
-                              Vector<double> &traction)
+    virtual void get_traction(const double& time,
+                              const unsigned& intpt,
+                              const Vector<double>& x,
+                              const Vector<double>& n,
+                              Vector<double>& traction)
     {
       Traction_fct_pt(time, x, n, traction);
     }
@@ -112,13 +112,13 @@ namespace oomph
     // fill_in_contribution_to_residuals in fill_in_contribution_to_jacobian
     // which causes all kinds of pain if overloading later on
     void fill_in_contribution_to_residuals_axisymmetric_linear_elasticity_traction(
-      Vector<double> &residuals);
+      Vector<double>& residuals);
 
   public:
     /// \short Constructor, which takes a "bulk" element and the
     /// value of the index and its limit
     AxisymmetricLinearElasticityTractionElement(
-      FiniteElement *const &element_pt, const int &face_index) :
+      FiniteElement* const& element_pt, const int& face_index) :
       FaceGeometry<ELEMENT>(), FaceElement()
     {
       // Attach the geometrical information to the element. N.B. This function
@@ -129,7 +129,7 @@ namespace oomph
       unsigned n_dim = element_pt->nodal_dimension();
 
       // Find the index at which the displacement unknowns are stored
-      ELEMENT *cast_element_pt = dynamic_cast<ELEMENT *>(element_pt);
+      ELEMENT* cast_element_pt = dynamic_cast<ELEMENT*>(element_pt);
       this->U_index_axisymmetric_linear_elasticity_traction.resize(n_dim + 1);
       for (unsigned i = 0; i < n_dim + 1; i++)
       {
@@ -143,24 +143,24 @@ namespace oomph
     }
 
     /// Reference to the traction function pointer
-    void (*&traction_fct_pt())(const double &time,
-                               const Vector<double> &x,
-                               const Vector<double> &n,
-                               Vector<double> &traction)
+    void (*&traction_fct_pt())(const double& time,
+                               const Vector<double>& x,
+                               const Vector<double>& n,
+                               Vector<double>& traction)
     {
       return Traction_fct_pt;
     }
 
     /// Return the residuals
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       fill_in_contribution_to_residuals_axisymmetric_linear_elasticity_traction(
         residuals);
     }
 
     /// Fill in contribution from Jacobian
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       // Call the residuals
       fill_in_contribution_to_residuals_axisymmetric_linear_elasticity_traction(
@@ -172,22 +172,22 @@ namespace oomph
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default (needed to break
     /// indeterminacy if bulk element is SolidElement)
-    double zeta_nodal(const unsigned &n,
-                      const unsigned &k,
-                      const unsigned &i) const
+    double zeta_nodal(const unsigned& n,
+                      const unsigned& k,
+                      const unsigned& i) const
     {
       return FaceElement::zeta_nodal(n, k, i);
     }
 
     /// \short Output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       unsigned nplot = 5;
       output(outfile, nplot);
     }
 
     /// \short Output function
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       // Number of dimensions
       unsigned n_dim = this->nodal_dimension();
@@ -268,13 +268,13 @@ namespace oomph
     }
 
     /// \short C_style output function
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FiniteElement::output(file_pt);
     }
 
     /// \short C-style output function
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       FiniteElement::output(file_pt, n_plot);
     }
@@ -282,9 +282,9 @@ namespace oomph
     /// \short Compute traction vector at specified local coordinate
     /// Should only be used for post-processing; ignores dependence
     /// on integration point!
-    void traction(const double &time,
-                  const Vector<double> &s,
-                  Vector<double> &traction);
+    void traction(const double& time,
+                  const Vector<double>& s,
+                  Vector<double>& traction);
   };
 
   ///////////////////////////////////////////////////////////////////////
@@ -298,7 +298,7 @@ namespace oomph
   //=====================================================================
   template<class ELEMENT>
   void AxisymmetricLinearElasticityTractionElement<ELEMENT>::traction(
-    const double &time, const Vector<double> &s, Vector<double> &traction)
+    const double& time, const Vector<double>& s, Vector<double>& traction)
   {
     unsigned n_dim = this->nodal_dimension();
 
@@ -324,7 +324,7 @@ namespace oomph
   template<class ELEMENT>
   void AxisymmetricLinearElasticityTractionElement<ELEMENT>::
     fill_in_contribution_to_residuals_axisymmetric_linear_elasticity_traction(
-      Vector<double> &residuals)
+      Vector<double>& residuals)
   {
     // Find out how many nodes there are
     unsigned n_node = nnode();
@@ -489,7 +489,7 @@ namespace oomph
     /// \short Pointer to the ratio, \f$ Q \f$ , of the stress used to
     /// non-dimensionalise the fluid stresses to the stress used to
     /// non-dimensionalise the solid stresses.
-    double *Q_pt;
+    double* Q_pt;
 
     /// \short Static default value for the ratio of stress scales
     /// used in the fluid and solid equations (default is 1.0)
@@ -503,13 +503,13 @@ namespace oomph
     // fill_in_contribution_to_residuals in fill_in_contribution_to_jacobian
     // which causes all kinds of pain if overloading later on
     void fill_in_contribution_to_residuals_axisym_fsi_traction(
-      Vector<double> &residuals);
+      Vector<double>& residuals);
 
   public:
     /// \short Constructor, which takes a "bulk" element and the
     /// value of the index and its limit
     FSIAxisymmetricLinearElasticityTractionElement(
-      FiniteElement *const &element_pt, const int &face_index) :
+      FiniteElement* const& element_pt, const int& face_index) :
       FaceGeometry<ELASTICITY_BULK_ELEMENT>(),
       FaceElement(),
       Q_pt(&Default_Q_Value)
@@ -526,8 +526,8 @@ namespace oomph
       unsigned n_dim = element_pt->nodal_dimension();
 
       // Find the index at which the displacement unknowns are stored
-      ELASTICITY_BULK_ELEMENT *cast_element_pt =
-        dynamic_cast<ELASTICITY_BULK_ELEMENT *>(element_pt);
+      ELASTICITY_BULK_ELEMENT* cast_element_pt =
+        dynamic_cast<ELASTICITY_BULK_ELEMENT*>(element_pt);
       this->U_index_axisym_fsi_traction.resize(n_dim + 1);
       for (unsigned i = 0; i < n_dim + 1; i++)
       {
@@ -537,14 +537,14 @@ namespace oomph
     }
 
     /// Return the residuals
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       fill_in_contribution_to_residuals_axisym_fsi_traction(residuals);
     }
 
     /// Fill in contribution from Jacobian
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       // Call the residuals
       fill_in_contribution_to_residuals_axisym_fsi_traction(residuals);
@@ -558,20 +558,20 @@ namespace oomph
     /// \f$ Q = (\omega a)^2 \rho/E \f$, i.e. the
     /// ratio between the inertial fluid stress and the solid's elastic
     /// modulus E.
-    const double &q() const
+    const double& q() const
     {
       return *Q_pt;
     }
 
     /// \short Return a pointer the ratio of stress scales used to
     /// non-dimensionalise the fluid and solid equations.
-    double *&q_pt()
+    double*& q_pt()
     {
       return Q_pt;
     }
 
     /// \short Output function
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       /// Dummy
       unsigned nplot = 0;
@@ -580,7 +580,7 @@ namespace oomph
 
     /// \short Output function: Plot traction etc at Gauss points
     /// nplot is ignored.
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       // Dimension
       unsigned n_dim = this->nodal_dimension();
@@ -611,8 +611,8 @@ namespace oomph
         interpolated_zeta(s_int, zeta);
 
         // Get bulk element for traction
-        NAVIER_STOKES_BULK_ELEMENT *ext_el_pt =
-          dynamic_cast<NAVIER_STOKES_BULK_ELEMENT *>(
+        NAVIER_STOKES_BULK_ELEMENT* ext_el_pt =
+          dynamic_cast<NAVIER_STOKES_BULK_ELEMENT*>(
             this->external_element_pt(0, ipt));
         Vector<double> s_ext(this->external_element_local_coord(0, ipt));
 
@@ -628,13 +628,13 @@ namespace oomph
     }
 
     /// \short C_style output function
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       FaceGeometry<ELASTICITY_BULK_ELEMENT>::output(file_pt);
     }
 
     /// \short C-style output function
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       FaceGeometry<ELASTICITY_BULK_ELEMENT>::output(file_pt, n_plot);
     }
@@ -661,7 +661,7 @@ namespace oomph
     ELASTICITY_BULK_ELEMENT,
     NAVIER_STOKES_BULK_ELEMENT>::
     fill_in_contribution_to_residuals_axisym_fsi_traction(
-      Vector<double> &residuals)
+      Vector<double>& residuals)
   {
     // Find out how many nodes there are
     unsigned n_node = nnode();
@@ -781,8 +781,8 @@ namespace oomph
       double W = w * sqrt(Adet);
 
       // Get bulk element for traction
-      NAVIER_STOKES_BULK_ELEMENT *ext_el_pt =
-        dynamic_cast<NAVIER_STOKES_BULK_ELEMENT *>(
+      NAVIER_STOKES_BULK_ELEMENT* ext_el_pt =
+        dynamic_cast<NAVIER_STOKES_BULK_ELEMENT*>(
           this->external_element_pt(0, ipt));
       Vector<double> s_ext(this->external_element_local_coord(0, ipt));
 

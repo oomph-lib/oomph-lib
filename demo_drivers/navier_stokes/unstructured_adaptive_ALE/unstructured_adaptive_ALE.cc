@@ -63,7 +63,7 @@ namespace oomph
     /// Vector of Data object containing the three values (x-displacement,
     /// y-displacement and rotation angle) for the polygons' centreline
     /// motion.
-    Vector<Data *> Centre_displacement_data_pt;
+    Vector<Data*> Centre_displacement_data_pt;
 
     /// Doc info
     DocInfo Doc_info;
@@ -79,7 +79,7 @@ namespace oomph
     double Lambda_sq = 0.0;
 
     /// Constitutive law used to determine the mesh deformation
-    ConstitutiveLaw *Constitutive_law_pt = 0;
+    ConstitutiveLaw* Constitutive_law_pt = 0;
 
     /// Trace file
     ofstream Trace_file;
@@ -108,7 +108,7 @@ namespace oomph
     }
 
     /// Set error value for post-processing
-    void set_error(const double &error)
+    void set_error(const double& error)
     {
       Error = error;
     }
@@ -141,7 +141,7 @@ namespace oomph
     }
 
     /// Overload output function
-    void output(std::ostream &outfile, const unsigned &nplot)
+    void output(std::ostream& outfile, const unsigned& nplot)
     {
       // Assign dimension
       unsigned el_dim = 2;
@@ -553,7 +553,7 @@ public:
       for (unsigned inod = 0; inod < num_nod; inod++)
       {
         // Get node
-        Node *nod_pt = Fluid_mesh_pt->boundary_node_pt(ibound, inod);
+        Node* nod_pt = Fluid_mesh_pt->boundary_node_pt(ibound, inod);
 
         // Pin everywhere apart from in/outflow (boundaries 0 and 2)
         // where we only impose parallel flow)
@@ -564,7 +564,7 @@ public:
         nod_pt->pin(1);
 
         // Pin pseudo-solid positions apart from hole boundary we want to move
-        SolidNode *solid_node_pt = dynamic_cast<SolidNode *>(nod_pt);
+        SolidNode* solid_node_pt = dynamic_cast<SolidNode*>(nod_pt);
 
         // Unpin the position of all the nodes on hole boundaries
         // since they will be moved using Lagrange Multiplier
@@ -592,7 +592,7 @@ public:
     for (unsigned e = 0; e < n_element; e++)
     {
       // Upcast from GeneralisedElement to the present element
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Fluid_mesh_pt->element_pt(e));
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Fluid_mesh_pt->element_pt(e));
 
       // Set the Reynolds number
       el_pt->re_pt() = &Problem_Parameter::Re;
@@ -619,7 +619,7 @@ public:
       for (unsigned inod = 0; inod < num_nod; inod++)
       {
         // Get node
-        Node *nod_pt = this->Fluid_mesh_pt->boundary_node_pt(ibound, inod);
+        Node* nod_pt = this->Fluid_mesh_pt->boundary_node_pt(ibound, inod);
 
         // Get number of previous (history) values
         unsigned n_prev = nod_pt->time_stepper_pt()->nprev_values();
@@ -635,17 +635,17 @@ public:
   }
 
   /// Doc the solution
-  void doc_solution(const std::string &comment = "",
-                    const bool &project = false);
+  void doc_solution(const std::string& comment = "",
+                    const bool& project = false);
 
   /// Compute the error estimates and assign to elements for plotting
-  void compute_error_estimate(double &max_err, double &min_err);
+  void compute_error_estimate(double& max_err, double& min_err);
 
   /// Sanity check: Doc boundary coordinates from mesh and GeomObject
   void doc_boundary_coordinates();
 
   /// Get the TriangleMeshPolygon objects
-  Vector<TriangleMeshPolygon *> &inner_hole_pt()
+  Vector<TriangleMeshPolygon*>& inner_hole_pt()
   {
     return Inner_hole_pt;
   }
@@ -675,16 +675,16 @@ private:
   } // end of delete_lagrange_multiplier_elements
 
   /// Pointers to mesh of Lagrange multiplier elements
-  SolidMesh *Lagrange_multiplier_mesh_pt;
+  SolidMesh* Lagrange_multiplier_mesh_pt;
 
   /// Pointers to Fluid_mesh
-  RefineableSolidTriangleMesh<ELEMENT> *Fluid_mesh_pt;
+  RefineableSolidTriangleMesh<ELEMENT>* Fluid_mesh_pt;
 
   /// Vector storing pointer to the hole polygon
-  Vector<TriangleMeshPolygon *> Inner_hole_pt;
+  Vector<TriangleMeshPolygon*> Inner_hole_pt;
 
   /// Triangle mesh polygon for outer boundary
-  TriangleMeshPolygon *Outer_boundary_polyline_pt;
+  TriangleMeshPolygon* Outer_boundary_polyline_pt;
 
 }; // end_of_problem_class
 
@@ -714,7 +714,7 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
   //--------------------------------------------------------------
   // four separeate polyline segments
   //---------------------------------
-  Vector<TriangleMeshCurveSection *> boundary_segment_pt(4);
+  Vector<TriangleMeshCurveSection*> boundary_segment_pt(4);
 
   // Initialize boundary segment
   Vector<Vector<double>> bound_seg(2);
@@ -802,7 +802,7 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
   double y_center = 0.5;
   double A = 0.1;
   double B = 0.25;
-  Ellipse *egg_hole_pt = new Ellipse(A, B);
+  Ellipse* egg_hole_pt = new Ellipse(A, B);
 
   // Define the vector of angle value to build the hole
   Vector<double> zeta(1);
@@ -816,7 +816,7 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
 
   // This hole is bounded by two distinct boundaries, each
   // represented by its own polyline
-  Vector<TriangleMeshCurveSection *> hole_segment_pt(2);
+  Vector<TriangleMeshCurveSection*> hole_segment_pt(2);
 
   // Vertex coordinates
   Vector<Vector<double>> bound_hole(ppoints);
@@ -944,9 +944,9 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
   //----------------------
   double uniform_element_area = 0.2;
 
-  TriangleMeshClosedCurve *closed_curve_pt = Outer_boundary_polyline_pt;
+  TriangleMeshClosedCurve* closed_curve_pt = Outer_boundary_polyline_pt;
   unsigned nh = Inner_hole_pt.size();
-  Vector<TriangleMeshClosedCurve *> hole_pt(nh);
+  Vector<TriangleMeshClosedCurve*> hole_pt(nh);
   for (unsigned i = 0; i < nh; i++)
   {
     hole_pt[i] = Inner_hole_pt[i];
@@ -967,7 +967,7 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
     triangle_mesh_parameters, this->time_stepper_pt());
 
   // Set error estimator for bulk mesh
-  Z2ErrorEstimator *error_estimator_pt = new Z2ErrorEstimator;
+  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
   Fluid_mesh_pt->spatial_error_estimator_pt() = error_estimator_pt;
 
   // Set targets for spatial adaptivity
@@ -1049,7 +1049,7 @@ void UnstructuredFluidProblem<ELEMENT>::doc_boundary_coordinates()
   for (unsigned b = 0; b < n_boundary; b++)
   {
     // Get geometric object for b-th bounday
-    GeomObject *boundary_geom_obj_pt =
+    GeomObject* boundary_geom_obj_pt =
       Fluid_mesh_pt->boundary_geom_object_pt(b);
 
     // Only bother to do anything if there is a geometric object
@@ -1091,8 +1091,8 @@ void UnstructuredFluidProblem<ELEMENT>::doc_boundary_coordinates()
   for (unsigned e = 0; e < n_face_element; e++)
   {
     // Cast the element pointer
-    ImposeDisplacementByLagrangeMultiplierElement<ELEMENT> *el_pt =
-      dynamic_cast<ImposeDisplacementByLagrangeMultiplierElement<ELEMENT> *>(
+    ImposeDisplacementByLagrangeMultiplierElement<ELEMENT>* el_pt =
+      dynamic_cast<ImposeDisplacementByLagrangeMultiplierElement<ELEMENT>*>(
         Lagrange_multiplier_mesh_pt->element_pt(e));
 
     // Doc boundary coordinate
@@ -1146,7 +1146,7 @@ void UnstructuredFluidProblem<ELEMENT>::create_lagrange_multiplier_elements()
   for (unsigned b = 0; b < n_boundary; b++)
   {
     // Get the geometric object associated with the boundary
-    GeomObject *boundary_geom_obj_pt =
+    GeomObject* boundary_geom_obj_pt =
       Fluid_mesh_pt->boundary_geom_object_pt(b);
 
     // Only bother to do anything if there is a geometric object
@@ -1160,8 +1160,8 @@ void UnstructuredFluidProblem<ELEMENT>::create_lagrange_multiplier_elements()
       {
         // Get pointer to the bulk fluid element that is
         // adjacent to boundary b
-        ELEMENT *bulk_elem_pt =
-          dynamic_cast<ELEMENT *>(Fluid_mesh_pt->boundary_element_pt(b, e));
+        ELEMENT* bulk_elem_pt =
+          dynamic_cast<ELEMENT*>(Fluid_mesh_pt->boundary_element_pt(b, e));
 
         // Find the index of the face of element e along boundary b
         int face_index = Fluid_mesh_pt->face_index_at_boundary(b, e);
@@ -1169,7 +1169,7 @@ void UnstructuredFluidProblem<ELEMENT>::create_lagrange_multiplier_elements()
         // Create new element. Note that we use different Lagrange
         // multiplier fields for each distinct boundary (here indicated
         // by b.
-        ImposeDisplacementByLagrangeMultiplierElement<ELEMENT> *el_pt =
+        ImposeDisplacementByLagrangeMultiplierElement<ELEMENT>* el_pt =
           new ImposeDisplacementByLagrangeMultiplierElement<ELEMENT>(
             bulk_elem_pt, face_index, b);
 
@@ -1185,7 +1185,7 @@ void UnstructuredFluidProblem<ELEMENT>::create_lagrange_multiplier_elements()
         unsigned nnod = el_pt->nnode();
         for (unsigned j = 0; j < nnod; j++)
         {
-          Node *nod_pt = el_pt->node_pt(j);
+          Node* nod_pt = el_pt->node_pt(j);
 
           // How many nodal values were used by the "bulk" element
           // that originally created this node?
@@ -1213,8 +1213,8 @@ void UnstructuredFluidProblem<ELEMENT>::create_lagrange_multiplier_elements()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void UnstructuredFluidProblem<ELEMENT>::doc_solution(const std::string &comment,
-                                                     const bool &project)
+void UnstructuredFluidProblem<ELEMENT>::doc_solution(const std::string& comment,
+                                                     const bool& project)
 {
   oomph_info << "Docing step: " << Problem_Parameter::Doc_info.number()
              << std::endl;
@@ -1224,7 +1224,7 @@ void UnstructuredFluidProblem<ELEMENT>::doc_solution(const std::string &comment,
              << Problem_Parameter::Centre_displacement_data_pt[0]->value(0)
              << "\n"
              << "centre of mass: "
-             << dynamic_cast<ImmersedRigidBodyTriangleMeshPolygon *>(
+             << dynamic_cast<ImmersedRigidBodyTriangleMeshPolygon*>(
                   Inner_hole_pt[0])
                   ->initial_centre_of_mass(0)
              << std::endl;
@@ -1263,13 +1263,13 @@ void UnstructuredFluidProblem<ELEMENT>::doc_solution(const std::string &comment,
   for (unsigned e = 0; e < nel; e++)
   {
     square_of_l2_norm +=
-      dynamic_cast<ELEMENT *>(this->Fluid_mesh_pt->element_pt(e))
+      dynamic_cast<ELEMENT*>(this->Fluid_mesh_pt->element_pt(e))
         ->square_of_l2_norm();
   }
   Problem_Parameter::Norm_file << sqrt(square_of_l2_norm) << "\n";
 
   some_file.open(filename);
-  some_file << dynamic_cast<ELEMENT *>(this->Fluid_mesh_pt->element_pt(0))
+  some_file << dynamic_cast<ELEMENT*>(this->Fluid_mesh_pt->element_pt(0))
                  ->variable_identifier();
   this->Fluid_mesh_pt->output(some_file, npts);
   some_file << "TEXT X = 25, Y = 78, CS=FRAME T = \"Global Step "
@@ -1299,11 +1299,11 @@ void UnstructuredFluidProblem<ELEMENT>::doc_solution(const std::string &comment,
 /// Compute error estimates and assign to elements for plotting
 //========================================================================
 template<class ELEMENT>
-void UnstructuredFluidProblem<ELEMENT>::compute_error_estimate(double &max_err,
-                                                               double &min_err)
+void UnstructuredFluidProblem<ELEMENT>::compute_error_estimate(double& max_err,
+                                                               double& min_err)
 {
   // Get error estimator
-  ErrorEstimator *err_est_pt = Fluid_mesh_pt->spatial_error_estimator_pt();
+  ErrorEstimator* err_est_pt = Fluid_mesh_pt->spatial_error_estimator_pt();
 
   // Get/output error estimates
   unsigned nel = Fluid_mesh_pt->nelement();
@@ -1312,7 +1312,7 @@ void UnstructuredFluidProblem<ELEMENT>::compute_error_estimate(double &max_err,
   // We need a dynamic cast, get_element_errors from the Fluid_mesh_pt
   // Dynamic cast is used because get_element_errors require a Mesh* ans
   // not a SolidMesh*
-  Mesh *fluid_mesh_pt = dynamic_cast<Mesh *>(Fluid_mesh_pt);
+  Mesh* fluid_mesh_pt = dynamic_cast<Mesh*>(Fluid_mesh_pt);
   err_est_pt->get_element_errors(fluid_mesh_pt, elemental_error);
 
   // Set errors for post-processing and find extrema
@@ -1320,7 +1320,7 @@ void UnstructuredFluidProblem<ELEMENT>::compute_error_estimate(double &max_err,
   min_err = DBL_MAX;
   for (unsigned e = 0; e < nel; e++)
   {
-    dynamic_cast<MyTaylorHoodElement *>(Fluid_mesh_pt->element_pt(e))
+    dynamic_cast<MyTaylorHoodElement*>(Fluid_mesh_pt->element_pt(e))
       ->set_error(elemental_error[e]);
 
     max_err = std::max(max_err, elemental_error[e]);
@@ -1331,7 +1331,7 @@ void UnstructuredFluidProblem<ELEMENT>::compute_error_estimate(double &max_err,
 //============================================================
 /// Driver code for moving block problem
 //============================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // feenableexcept(FE_INVALID | FE_DIVBYZERO | FE_OVERFLOW | FE_UNDERFLOW);
 

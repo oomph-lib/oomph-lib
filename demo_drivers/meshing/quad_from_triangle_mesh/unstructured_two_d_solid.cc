@@ -57,10 +57,10 @@ class ElasticQuadFromTriangleMesh :
 public:
   /// \short Constructor:
   ElasticQuadFromTriangleMesh(
-    const std::string &node_file_name,
-    const std::string &element_file_name,
-    const std::string &poly_file_name,
-    TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+    const std::string& node_file_name,
+    const std::string& element_file_name,
+    const std::string& poly_file_name,
+    TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
     QuadFromTriangleMesh<ELEMENT>(
       node_file_name, element_file_name, poly_file_name, time_stepper_pt)
   {
@@ -73,7 +73,7 @@ public:
     unsigned n_node = this->nnode();
     for (unsigned j = 0; j < n_node; j++)
     {
-      Node *nod_pt = this->node_pt(j);
+      Node* nod_pt = this->node_pt(j);
 
       // Boundary 1 is lower boundary
       if (abs(nod_pt->x(1)) < 10e-14)
@@ -98,7 +98,7 @@ public:
 
   // Calculate the L2 norm of the displacement u=R-r to overload the
   // compute_norm function in the GeneralisedElement base class
-  void compute_norm(double &norm)
+  void compute_norm(double& norm)
   {
     // Initialse the norm
     norm = 0.0;
@@ -111,7 +111,7 @@ public:
     for (unsigned long e = 0; e < n_element; e++)
     {
       // Get a pointer to the e'th element
-      ELEMENT *el_pt = dynamic_cast<ELEMENT *>(this->element_pt(e));
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(this->element_pt(e));
 
 #ifdef OOMPH_HAS_MPI
       // Compute error for each non-halo element
@@ -128,7 +128,7 @@ public:
 
   // Calculate the L2 norm of the displacement u=R-r to overload the
   // compute_norm function in the GeneralisedElement base class
-  void el_compute_norm(ELEMENT *el_pt, double &el_norm)
+  void el_compute_norm(ELEMENT* el_pt, double& el_norm)
   {
     // Initialise el_norm to 0.0
     el_norm = 0.0;
@@ -207,13 +207,13 @@ namespace Global_Physical_Variables
   double Nu = 0.3;
 
   /// Pointer to constitutive law
-  ConstitutiveLaw *Constitutive_law_pt = 0;
+  ConstitutiveLaw* Constitutive_law_pt = 0;
 
   /// Non-dim gravity
   double Gravity = 0.0;
 
   /// Non-dimensional gravity as body force
-  void gravity(const double &time, const Vector<double> &xi, Vector<double> &b)
+  void gravity(const double& time, const Vector<double>& xi, Vector<double>& b)
   {
     b[0] = 0.0;
     b[1] = -Gravity;
@@ -227,10 +227,10 @@ namespace Global_Physical_Variables
   /// depend on the Lagrangian and Eulerian coordinates x and xi, and on the
   /// outer unit normal to the surface. Here we only need the outer unit
   /// normal.
-  void constant_pressure(const Vector<double> &xi,
-                         const Vector<double> &x,
-                         const Vector<double> &n,
-                         Vector<double> &traction)
+  void constant_pressure(const Vector<double>& xi,
+                         const Vector<double>& x,
+                         const Vector<double>& n,
+                         Vector<double>& traction)
   {
     unsigned dim = traction.size();
     for (unsigned i = 0; i < dim; i++)
@@ -259,10 +259,10 @@ public:
 
 private:
   /// Bulk mesh
-  ElasticQuadFromTriangleMesh<ELEMENT> *Solid_mesh_pt;
+  ElasticQuadFromTriangleMesh<ELEMENT>* Solid_mesh_pt;
 
   /// Pointer to mesh of traction elements
-  SolidMesh *Traction_mesh_pt;
+  SolidMesh* Traction_mesh_pt;
 
   /// Trace file
   ofstream Trace_file;
@@ -297,14 +297,14 @@ UnstructuredSolidProblem<ELEMENT>::UnstructuredSolidProblem()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    ELEMENT *bulk_elem_pt =
-      dynamic_cast<ELEMENT *>(Solid_mesh_pt->boundary_element_pt(b, e));
+    ELEMENT* bulk_elem_pt =
+      dynamic_cast<ELEMENT*>(Solid_mesh_pt->boundary_element_pt(b, e));
 
     // Find the index of the face of element e along boundary b
     int face_index = Solid_mesh_pt->face_index_at_boundary(b, e);
 
     // Create solid traction element
-    SolidTractionElement<ELEMENT> *el_pt =
+    SolidTractionElement<ELEMENT>* el_pt =
       new SolidTractionElement<ELEMENT>(bulk_elem_pt, face_index);
 
     // Add to mesh
@@ -330,7 +330,7 @@ UnstructuredSolidProblem<ELEMENT>::UnstructuredSolidProblem()
   for (unsigned inod = 0; inod < num_nod; inod++)
   {
     // Get node
-    SolidNode *nod_pt = Solid_mesh_pt->boundary_node_pt(ibound, inod);
+    SolidNode* nod_pt = Solid_mesh_pt->boundary_node_pt(ibound, inod);
 
     // Pin both directions
     for (unsigned i = 0; i < 2; i++)
@@ -352,7 +352,7 @@ UnstructuredSolidProblem<ELEMENT>::UnstructuredSolidProblem()
   for (unsigned i = 0; i < n_element; i++)
   {
     // Cast to a solid element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Solid_mesh_pt->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Solid_mesh_pt->element_pt(i));
 
     // Set the constitutive law
     el_pt->constitutive_law_pt() =
@@ -426,7 +426,7 @@ void UnstructuredSolidProblem<ELEMENT>::doc_solution()
 //===========start_main===================================================
 /// Demonstrate how to solve an unstructured solid problem
 //========================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);
@@ -529,8 +529,8 @@ int main(int argc, char **argv)
       for (unsigned e = 0; e < n_element; e++)
       {
         // Cast the element to the equation base of our 2D elastiticy elements
-        PVDEquationsWithPressure<2> *cast_el_pt =
-          dynamic_cast<PVDEquationsWithPressure<2> *>(
+        PVDEquationsWithPressure<2>* cast_el_pt =
+          dynamic_cast<PVDEquationsWithPressure<2>*>(
             problem.mesh_pt()->element_pt(e));
 
         // If the cast was successful, it's a bulk element,

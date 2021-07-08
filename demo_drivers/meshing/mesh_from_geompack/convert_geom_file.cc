@@ -36,7 +36,7 @@
 #include <math.h>
 using namespace std;
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Convert argument to strings that specify the input file name
   string mesh_file_name(argv[1]);

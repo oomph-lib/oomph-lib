@@ -72,10 +72,10 @@ namespace oomph
     /// Takes the position  along a boundary (s) in the macro element coordinate
     /// scheme and returns the value of the boundary condition at that point
     /// (u).
-    typedef void (*DirichletBCFctPt)(const double &s, double &u);
+    typedef void (*DirichletBCFctPt)(const double& s, double& u);
 
     /// \short Definition of the Source Function.
-    typedef void (*BiharmonicSourceFctPt)(const Vector<double> &x, double &f);
+    typedef void (*BiharmonicSourceFctPt)(const Vector<double>& x, double& f);
 
     /// \short Constructor
     BiharmonicProblem()
@@ -112,11 +112,11 @@ namespace oomph
     /// \short documents the solution, and if an exact solution is provided,
     /// then the error between the numerical and exact solution is presented
     void doc_solution(
-      DocInfo &doc_info,
+      DocInfo& doc_info,
       FiniteElement::SteadyExactSolutionFctPt exact_soln_pt = 0);
 
     /// \short Access function to the bulk element mesh pt
-    Mesh *bulk_element_mesh_pt()
+    Mesh* bulk_element_mesh_pt()
     {
       return Bulk_element_mesh_pt;
     }
@@ -127,7 +127,7 @@ namespace oomph
     void build_bulk_mesh(
       const unsigned n_x,
       const unsigned n_y,
-      TopologicallyRectangularDomain *domain_pt,
+      TopologicallyRectangularDomain* domain_pt,
       HermiteQuadMesh<BiharmonicElement<2>>::MeshSpacingFnPtr spacing_fn = 0)
     {
       if (spacing_fn == 0)
@@ -170,7 +170,7 @@ namespace oomph
       for (unsigned i = 0; i < n_bulk_element; i++)
       {
         // upcast from generalised element to specific element
-        BiharmonicElement<2> *element_pt = dynamic_cast<BiharmonicElement<2> *>(
+        BiharmonicElement<2>* element_pt = dynamic_cast<BiharmonicElement<2>*>(
           Bulk_element_mesh_pt->element_pt(i));
 
         // set the source function pointer
@@ -180,14 +180,14 @@ namespace oomph
 
     /// \short Imposes the prescribed dirichlet BCs u (u_fn) and
     /// du/dn (dudn_fn) dirichlet BCs by 'pinning'
-    void set_dirichlet_boundary_condition(const unsigned &b,
+    void set_dirichlet_boundary_condition(const unsigned& b,
                                           DirichletBCFctPt u_fn = 0,
                                           DirichletBCFctPt dudn_fn = 0);
 
     /// \short Imposes the prescribed Neumann BCs laplacian(u)  (flux0_fct_pt)
     /// and dlaplacian(u)/dn (flux1_fct_pt) with flux edge elements
     void set_neumann_boundary_condition(
-      const unsigned &b,
+      const unsigned& b,
       BiharmonicFluxElement<2>::FluxFctPt flux0_fct_pt,
       BiharmonicFluxElement<2>::FluxFctPt flux1_fct_pt = 0);
 
@@ -198,10 +198,10 @@ namespace oomph
     /// \short Mesh for BiharmonicElement<DIM> only - the block preconditioner
     /// assemble the global equation number to block number mapping from
     /// elements in this mesh only
-    Mesh *Bulk_element_mesh_pt;
+    Mesh* Bulk_element_mesh_pt;
 
     /// \short mesh for face elements
-    Mesh *Face_element_mesh_pt;
+    Mesh* Face_element_mesh_pt;
   };
 
   //=============================================================================
@@ -228,7 +228,7 @@ namespace oomph
     /// scheme and returns the fluid velocity normal (dpsi/dt) to the boundary
     /// (u[0]) and the fluid velocity tangential (dpsidn) to the boundary
     /// (u[1]).
-    typedef void (*FluidBCFctPt)(const double &s, Vector<double> &u);
+    typedef void (*FluidBCFctPt)(const double& s, Vector<double>& u);
 
     /// constructor
     BiharmonicFluidProblem()
@@ -258,7 +258,7 @@ namespace oomph
     /// \short documents the solution, and if an exact solution is provided,
     /// then the error between the numerical and exact solution is presented
     void doc_solution(
-      DocInfo &doc_info,
+      DocInfo& doc_info,
       FiniteElement::SteadyExactSolutionFctPt exact_soln_pt = 0);
 
   protected:
@@ -266,8 +266,8 @@ namespace oomph
     /// or along boundary v_n = 0 and v_t = 0. User must presribe the
     /// streamfunction psi to ensure dpsi/dt = 0 is imposed at all points on the
     /// boundary and not just at the nodes
-    void impose_solid_boundary_on_edge(const unsigned &b,
-                                       const double &psi = 0);
+    void impose_solid_boundary_on_edge(const unsigned& b,
+                                       const double& psi = 0);
 
     /// \short Impose a traction free edge - i.e. v_t = 0 or dpsi/dn = 0. In
     /// general dpsi/dn = 0 can only be imposed using equation elements to set
@@ -276,12 +276,12 @@ namespace oomph
     /// automatically in this function. For a more detailed description of the
     /// equations see the description of the class
     /// BiharmonicFluidBoundaryElement
-    void impose_traction_free_edge(const unsigned &b);
+    void impose_traction_free_edge(const unsigned& b);
 
     /// \short Impose a prescribed fluid flow comprising the velocity normal to
     /// the boundary (u_imposed_fn[0]) and the velocity tangential to the
     /// boundary (u_imposed_fn[1])
-    void impose_fluid_flow_on_edge(const unsigned &b,
+    void impose_fluid_flow_on_edge(const unsigned& b,
                                    FluidBCFctPt u_imposed_fn);
 
   private:
@@ -303,7 +303,7 @@ namespace oomph
   {
   public:
     // constructor
-    BiharmonicFluidBoundaryElement(Node *node_pt, const unsigned s_fixed_index)
+    BiharmonicFluidBoundaryElement(Node* node_pt, const unsigned s_fixed_index)
     {
       // set the node pt
       this->node_pt(0) = node_pt;
@@ -313,31 +313,31 @@ namespace oomph
     }
 
     /// Output function -- does nothing
-    void output(std::ostream &outfile) {}
+    void output(std::ostream& outfile) {}
 
     /// \short Output function -- does nothing
-    void output(std::ostream &outfile, const unsigned &n_plot) {}
+    void output(std::ostream& outfile, const unsigned& n_plot) {}
 
     /// \short Output function -- does nothing
-    void output_fluid_velocity(std::ostream &outfile, const unsigned &n_plot) {}
+    void output_fluid_velocity(std::ostream& outfile, const unsigned& n_plot) {}
 
     /// C-style output function -- does nothing
-    void output(FILE *file_pt) {}
+    void output(FILE* file_pt) {}
 
     /// \short C-style output function -- does nothing
-    void output(FILE *file_pt, const unsigned &n_plot) {}
+    void output(FILE* file_pt, const unsigned& n_plot) {}
 
     /// compute_error -- does nothing
-    void compute_error(std::ostream &outfile,
+    void compute_error(std::ostream& outfile,
                        FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-                       double &error,
-                       double &norm)
+                       double& error,
+                       double& norm)
     {
     }
 
     /// \short Compute the elemental residual vector - wrapper function called
     /// by get_residuals in GeneralisedElement
-    inline void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    inline void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // create a dummy matrix
       DenseDoubleMatrix dummy(1);
@@ -349,8 +349,8 @@ namespace oomph
 
     /// \short Compute the elemental residual vector and jacobian matrix -
     /// wrapper function called by get_jacobian in GeneralisedElement
-    inline void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                                 DenseMatrix<double> &jacobian)
+    inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                                 DenseMatrix<double>& jacobian)
     {
       // call generic routine with flag set to 1
       fill_in_generic_residual_contribution_biharmonic_boundary(
@@ -361,7 +361,7 @@ namespace oomph
     /// matrix if JFLAG = 0
     /// Imposes the equations :  du/ds_n = dt/ds_n * ds_t/dt * du/dt
     virtual void fill_in_generic_residual_contribution_biharmonic_boundary(
-      Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned JFLAG);
+      Vector<double>& residuals, DenseMatrix<double>& jacobian, unsigned JFLAG);
 
   private:
     // fixed local coordinate index on boundary

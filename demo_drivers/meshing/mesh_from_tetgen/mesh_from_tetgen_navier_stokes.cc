@@ -57,10 +57,10 @@ class NavierStokesProblem : public Problem
 {
 public:
   /// Constructor: Pass DocInfo object and file names
-  NavierStokesProblem(DocInfo &doc_info,
-                      const string &node_file_name,
-                      const string &element_file_name,
-                      const string &face_file_name);
+  NavierStokesProblem(DocInfo& doc_info,
+                      const string& node_file_name,
+                      const string& element_file_name,
+                      const string& face_file_name);
 
   /// Destructor (empty)
   ~NavierStokesProblem() {}
@@ -82,9 +82,9 @@ public:
   void doc_solution();
 
   // Access function for the specific mesh
-  TetgenMesh<ELEMENT> *mesh_pt()
+  TetgenMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<TetgenMesh<ELEMENT> *>(Problem::mesh_pt());
+    return dynamic_cast<TetgenMesh<ELEMENT>*>(Problem::mesh_pt());
   }
 
 private:
@@ -98,10 +98,10 @@ private:
 //========================================================================
 template<class ELEMENT>
 NavierStokesProblem<ELEMENT>::NavierStokesProblem(
-  DocInfo &doc_info,
-  const string &node_file_name,
-  const string &element_file_name,
-  const string &face_file_name) :
+  DocInfo& doc_info,
+  const string& node_file_name,
+  const string& element_file_name,
+  const string& face_file_name) :
   Doc_info(doc_info)
 {
   // Create mesh
@@ -155,7 +155,7 @@ NavierStokesProblem<ELEMENT>::NavierStokesProblem(
   for (unsigned i = 0; i < n_element; i++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(i));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
     // Set the Reynolds number, etc
     el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -212,7 +212,7 @@ void NavierStokesProblem<ELEMENT>::doc_solution()
 //=start_of_main=======================================================
 /// 3D Navier Stokes on an unstructured mesh
 //=====================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

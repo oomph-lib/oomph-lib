@@ -74,7 +74,7 @@ namespace oomph
 
     /// Broken copy constructor
     TPMLFourierDecomposedHelmholtzElement(
-      const TPMLFourierDecomposedHelmholtzElement<NNODE_1D> &dummy)
+      const TPMLFourierDecomposedHelmholtzElement<NNODE_1D>& dummy)
     {
       BrokenCopy::broken_copy("TPMLFourierDecomposedHelmholtzElement");
     }
@@ -92,43 +92,43 @@ namespace oomph
 
     /// \short  Access function for Nvalue: # of `values' (pinned or dofs)
     /// at node n (always returns the same value at every node, 2)
-    inline unsigned required_nvalue(const unsigned &n) const
+    inline unsigned required_nvalue(const unsigned& n) const
     {
       return Initial_Nvalue;
     }
 
     /// \short Output function:
     ///  r,z,u
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       PMLFourierDecomposedHelmholtzEquations::output(outfile);
     }
 
     ///  \short Output function:
     ///   r,z,u  n_plot^2 plot points
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       PMLFourierDecomposedHelmholtzEquations::output(outfile, n_plot);
     }
 
     /// \short C-style output function:
     ///  r,z,u   or    x,y,z,u
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       PMLFourierDecomposedHelmholtzEquations::output(file_pt);
     }
 
     ///  \short C-style output function:
     ///   r,z,u  at n_plot^2 plot points
-    void output(FILE *file_pt, const unsigned &n_plot)
+    void output(FILE* file_pt, const unsigned& n_plot)
     {
       PMLFourierDecomposedHelmholtzEquations::output(file_pt, n_plot);
     }
 
     /// \short Output function for an exact solution:
     ///  r,z,u_exact
-    void output_fct(std::ostream &outfile,
-                    const unsigned &n_plot,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& n_plot,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
     {
       PMLFourierDecomposedHelmholtzEquations::output_fct(
@@ -137,9 +137,9 @@ namespace oomph
 
     /// \short Output function for a time-dependent exact solution.
     ///  x,y,u_exact (calls the steady version)
-    void output_fct(std::ostream &outfile,
-                    const unsigned &n_plot,
-                    const double &time,
+    void output_fct(std::ostream& outfile,
+                    const unsigned& n_plot,
+                    const double& time,
                     FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
     {
       PMLFourierDecomposedHelmholtzEquations::output_fct(
@@ -150,20 +150,20 @@ namespace oomph
     /// Shape, test functions & derivs. w.r.t. to global coords. Return
     /// Jacobian.
     inline double dshape_and_dtest_eulerian_pml_fourier_decomposed_helmholtz(
-      const Vector<double> &s,
-      Shape &psi,
-      DShape &dpsidx,
-      Shape &test,
-      DShape &dtestdx) const;
+      const Vector<double>& s,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const;
 
     /// Shape, test functions & derivs. w.r.t. to global coords. Return
     /// Jacobian.
     inline double dshape_and_dtest_eulerian_at_knot_pml_fourier_decomposed_helmholtz(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidx,
-      Shape &test,
-      DShape &dtestdx) const;
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const;
 
     /// \short Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.
@@ -180,7 +180,7 @@ namespace oomph
 
     /// \short Get 'flux' for Z2 error recovery:  Standard flux from
     /// UnsteadyHeat equations
-    void get_Z2_flux(const Vector<double> &s, Vector<double> &flux)
+    void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
       Vector<std::complex<double>> complex_flux(2);
       this->get_flux(s, complex_flux);
@@ -199,7 +199,7 @@ namespace oomph
     }
 
     /// \short Pointer to the j-th vertex node in the element
-    Node *vertex_node_pt(const unsigned &j) const
+    Node* vertex_node_pt(const unsigned& j) const
     {
       return TElement<2, NNODE_1D>::vertex_node_pt(j);
     }
@@ -220,11 +220,11 @@ namespace oomph
   template<unsigned NNODE_1D>
   double TPMLFourierDecomposedHelmholtzElement<NNODE_1D>::
     dshape_and_dtest_eulerian_pml_fourier_decomposed_helmholtz(
-      const Vector<double> &s,
-      Shape &psi,
-      DShape &dpsidx,
-      Shape &test,
-      DShape &dtestdx) const
+      const Vector<double>& s,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const
   {
     unsigned n_node = this->nnode();
 
@@ -253,11 +253,11 @@ namespace oomph
   template<unsigned NNODE_1D>
   double TPMLFourierDecomposedHelmholtzElement<NNODE_1D>::
     dshape_and_dtest_eulerian_at_knot_pml_fourier_decomposed_helmholtz(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidx,
-      Shape &test,
-      DShape &dtestdx) const
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const
   {
     // Call the geometrical shape functions and derivatives
     double J = this->dshape_eulerian_at_knot(ipt, psi, dpsidx);

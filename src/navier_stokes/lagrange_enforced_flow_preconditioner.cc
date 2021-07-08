@@ -38,11 +38,11 @@ namespace oomph
   {
     /// \short CG with diagonal preconditioner for W-block subsidiary linear
     /// systems.
-    Preconditioner *get_w_cg_preconditioner()
+    Preconditioner* get_w_cg_preconditioner()
     {
 #ifdef OOMPH_HAS_TRILINOS
       InnerIterationPreconditioner<TrilinosAztecOOSolver,
-                                   MatrixBasedDiagPreconditioner> *prec_pt =
+                                   MatrixBasedDiagPreconditioner>* prec_pt =
         new InnerIterationPreconditioner<TrilinosAztecOOSolver,
                                          MatrixBasedDiagPreconditioner>;
 
@@ -68,11 +68,11 @@ namespace oomph
     /// \short Hypre Boomer AMG setting for the augmented momentum block
     /// of a 2D Navier-Stokes problem using the simple form of the viscous
     /// term (for serial code).
-    Preconditioner *boomer_amg_for_2D_momentum_simple_visc()
+    Preconditioner* boomer_amg_for_2D_momentum_simple_visc()
     {
 #ifdef OOMPH_HAS_HYPRE
       // Create a new HyprePreconditioner
-      HyprePreconditioner *hypre_preconditioner_pt = new HyprePreconditioner;
+      HyprePreconditioner* hypre_preconditioner_pt = new HyprePreconditioner;
 
       // Coarsening strategy
       // 1 = classical RS with no boundary treatment (not recommended in
@@ -106,11 +106,11 @@ namespace oomph
     /// \short Hypre Boomer AMG setting for the augmented momentum block
     /// of a 2D Navier-Stokes problem using the stress divergence form of the
     /// viscous term (for serial code).
-    Preconditioner *boomer_amg_for_2D_momentum_stressdiv_visc()
+    Preconditioner* boomer_amg_for_2D_momentum_stressdiv_visc()
     {
 #ifdef OOMPH_HAS_HYPRE
       // Create a new HyprePreconditioner
-      HyprePreconditioner *hypre_preconditioner_pt = new HyprePreconditioner;
+      HyprePreconditioner* hypre_preconditioner_pt = new HyprePreconditioner;
 
       // Coarsening strategy
       // 1 = classical RS with no boundary treatment (not recommended in
@@ -143,11 +143,11 @@ namespace oomph
 
     /// \short Hypre Boomer AMG setting for the augmented momentum block
     /// of a 3D Navier-Stokes problem (for serial code).
-    Preconditioner *boomer_amg_for_3D_momentum()
+    Preconditioner* boomer_amg_for_3D_momentum()
     {
 #ifdef OOMPH_HAS_HYPRE
       // Create a new HyprePreconditioner
-      HyprePreconditioner *hypre_preconditioner_pt = new HyprePreconditioner;
+      HyprePreconditioner* hypre_preconditioner_pt = new HyprePreconditioner;
 
       // Coarsening strategy
       // 1 = classical RS with no boundary treatment (not recommended in
@@ -180,11 +180,11 @@ namespace oomph
 
     /// \short Hypre Boomer AMG setting for the augmented momentum block
     /// of a 3D Navier-Stokes problem (for serial code).
-    Preconditioner *boomer_amg2v22_for_3D_momentum()
+    Preconditioner* boomer_amg2v22_for_3D_momentum()
     {
 #ifdef OOMPH_HAS_HYPRE
       // Create a new HyprePreconditioner
-      HyprePreconditioner *hypre_preconditioner_pt = new HyprePreconditioner;
+      HyprePreconditioner* hypre_preconditioner_pt = new HyprePreconditioner;
 
       // Coarsening strategy
       // 1 = classical RS with no boundary treatment (not recommended in
@@ -217,11 +217,11 @@ namespace oomph
 
     /// \short Hypre Boomer AMG setting for the 2D Poisson problem
     /// (for serial code).
-    Preconditioner *boomer_amg_for_2D_poisson_problem()
+    Preconditioner* boomer_amg_for_2D_poisson_problem()
     {
 #ifdef OOMPH_HAS_HYPRE
       // Create a new HyprePreconditioner
-      HyprePreconditioner *hypre_preconditioner_pt = new HyprePreconditioner;
+      HyprePreconditioner* hypre_preconditioner_pt = new HyprePreconditioner;
 
       // Coarsening strategy
       // 1 = classical RS with no boundary treatment (not recommended in
@@ -254,11 +254,11 @@ namespace oomph
 
     /// \short Hypre Boomer AMG setting for the 3D Poisson problem
     /// (for serial code).
-    Preconditioner *boomer_amg_for_3D_poisson_problem()
+    Preconditioner* boomer_amg_for_3D_poisson_problem()
     {
 #ifdef OOMPH_HAS_HYPRE
       // Create a new HyprePreconditioner
-      HyprePreconditioner *hypre_preconditioner_pt = new HyprePreconditioner;
+      HyprePreconditioner* hypre_preconditioner_pt = new HyprePreconditioner;
 
       // Coarsening strategy
       // 1 = classical RS with no boundary treatment (not recommended in
@@ -299,7 +299,7 @@ namespace oomph
   /// \short Apply the preconditioner.
   /// r is the residual (rhs), z will contain the solution.
   void LagrangeEnforcedFlowPreconditioner::preconditioner_solve(
-    const DoubleVector &r, DoubleVector &z)
+    const DoubleVector& r, DoubleVector& z)
   {
 #ifdef PARANOID
     if (Preconditioner_has_been_setup == false)
@@ -354,7 +354,7 @@ namespace oomph
 
       // Apply the inverse.
       const unsigned vec_nrow_local = temp_vec.nrow_local();
-      double *vec_values_pt = temp_vec.values_pt();
+      double* vec_values_pt = temp_vec.values_pt();
       for (unsigned i = 0; i < vec_nrow_local; i++)
       {
         vec_values_pt[i] = vec_values_pt[i] * Inv_w_diag_values[l_i][i];
@@ -407,7 +407,7 @@ namespace oomph
   /// \short Set the meshes,
   /// the first mesh in the vector must be the bulk mesh.
   void LagrangeEnforcedFlowPreconditioner::set_meshes(
-    const Vector<Mesh *> &mesh_pt)
+    const Vector<Mesh*>& mesh_pt)
   {
     // There should be at least two meshes passed to this preconditioner.
     const unsigned nmesh = mesh_pt.size();
@@ -722,7 +722,7 @@ namespace oomph
     // -----------------------------------------------------------------------
 
     // Extract the velocity blocks.
-    DenseMatrix<CRDoubleMatrix *> v_aug_pt(
+    DenseMatrix<CRDoubleMatrix*> v_aug_pt(
       N_velocity_doftypes, N_velocity_doftypes, 0);
 
     for (unsigned row_i = 0; row_i < N_velocity_doftypes; row_i++)
@@ -787,8 +787,8 @@ namespace oomph
       // Step 3.1: Location and extraction of non-zero mass matrices.
 
       // Storage for the current Lagrange block mass matrices.
-      Vector<CRDoubleMatrix *> mm_pt;
-      Vector<CRDoubleMatrix *> mmt_pt;
+      Vector<CRDoubleMatrix*> mm_pt;
+      Vector<CRDoubleMatrix*> mmt_pt;
 
       // Block type for the Lagrange multiplier.
       const unsigned lgr_block_num = N_fluid_doftypes + l_i;
@@ -803,7 +803,7 @@ namespace oomph
       for (unsigned col_i = 0; col_i < N_velocity_doftypes; col_i++)
       {
         // Get the block matrix for this block column.
-        CRDoubleMatrix *mm_temp_pt = new CRDoubleMatrix;
+        CRDoubleMatrix* mm_temp_pt = new CRDoubleMatrix;
         this->get_block(lgr_block_num, col_i, *mm_temp_pt);
 
         // Check if this is non-zero
@@ -839,7 +839,7 @@ namespace oomph
       for (unsigned mm_i = 0; mm_i < n_mm; mm_i++)
       {
         // Get the block matrix for this block column.
-        CRDoubleMatrix *mm_temp_pt = new CRDoubleMatrix;
+        CRDoubleMatrix* mm_temp_pt = new CRDoubleMatrix;
         this->get_block(mm_locations[mm_i], lgr_block_num, *mm_temp_pt);
 
         if (mm_temp_pt->nnz() > 0)
@@ -868,7 +868,7 @@ namespace oomph
       //  Step 3.2: Create inv_w and store its diagonal entries.
 
       // Storage for inv_w
-      CRDoubleMatrix *inv_w_pt =
+      CRDoubleMatrix* inv_w_pt =
         new CRDoubleMatrix(this->Block_distribution_pt[lgr_block_num]);
 
       // Get the number of local rows for this Lagrange block.
@@ -1011,8 +1011,8 @@ namespace oomph
     // -----------------------------------------------------------------------
 
     // First we determine if we're using a block preconditioner or not.
-    BlockPreconditioner<CRDoubleMatrix> *navier_stokes_block_preconditioner_pt =
-      dynamic_cast<BlockPreconditioner<CRDoubleMatrix> *>(
+    BlockPreconditioner<CRDoubleMatrix>* navier_stokes_block_preconditioner_pt =
+      dynamic_cast<BlockPreconditioner<CRDoubleMatrix>*>(
         Navier_stokes_preconditioner_pt);
     Navier_stokes_preconditioner_is_block_preconditioner = true;
     if (navier_stokes_block_preconditioner_pt == 0)
@@ -1198,7 +1198,7 @@ namespace oomph
   /// \short Function to set a new momentum matrix preconditioner
   /// (inexact solver)
   void LagrangeEnforcedFlowPreconditioner::set_navier_stokes_preconditioner(
-    Preconditioner *new_ns_preconditioner_pt)
+    Preconditioner* new_ns_preconditioner_pt)
   {
     // Check if pointer is non-zero.
     if (new_ns_preconditioner_pt == 0)

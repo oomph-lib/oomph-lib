@@ -37,7 +37,7 @@ using namespace oomph;
 /// Presence of command line arguments indicates validation run with
 /// coarse resolution and small number of timesteps.
 //=============================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

@@ -66,7 +66,7 @@ namespace Global_Parameters
 namespace ExactSoln
 {
   /// Exact solution of the problem as a vector
-  void get_exact_u(const double &t, const Vector<double> &x, Vector<double> &u)
+  void get_exact_u(const double& t, const Vector<double>& x, Vector<double>& u)
   {
     double y = x[1];
     // I=sqrt(-1)
@@ -90,10 +90,10 @@ namespace ExactSoln
   }
 
   /// Traction required at the top boundary
-  void prescribed_traction(const double &t,
-                           const Vector<double> &x,
-                           const Vector<double> &n,
-                           Vector<double> &traction)
+  void prescribed_traction(const double& t,
+                           const Vector<double>& x,
+                           const Vector<double>& n,
+                           Vector<double>& traction)
   {
     double y = x[1];
     // I=sqrt(-1)
@@ -127,10 +127,10 @@ class RayleighTractionProblem : public Problem
 public:
   /// Constructor: Pass number of elements in x and y directions and
   /// lengths
-  RayleighTractionProblem(const unsigned &nx,
-                          const unsigned &ny,
-                          const double &lx,
-                          const double &ly);
+  RayleighTractionProblem(const unsigned& nx,
+                          const unsigned& ny,
+                          const double& lx,
+                          const double& ly);
 
   /// Update before solve is empty
   void actions_before_newton_solve() {}
@@ -142,10 +142,10 @@ public:
   void actions_before_implicit_timestep() {}
 
   /// Run an unsteady simulation
-  void unsteady_run(DocInfo &doc_info);
+  void unsteady_run(DocInfo& doc_info);
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
   /// \short Set initial condition (incl previous timesteps) according
   /// to specified function.
@@ -154,16 +154,16 @@ public:
   /// \short Create traction elements on boundary b of the Mesh pointed
   /// to by bulk_mesh_pt and add them to the Mesh object pointed to by
   /// surface_mesh_pt
-  void create_traction_elements(const unsigned &b,
-                                Mesh *const &bulk_mesh_pt,
-                                Mesh *const &surface_mesh_pt);
+  void create_traction_elements(const unsigned& b,
+                                Mesh* const& bulk_mesh_pt,
+                                Mesh* const& surface_mesh_pt);
 
 private:
   /// Pointer to the "bulk" mesh
-  RectangularQuadMesh<ELEMENT> *Bulk_mesh_pt;
+  RectangularQuadMesh<ELEMENT>* Bulk_mesh_pt;
 
   /// Pointer to the "surface" mesh
-  Mesh *Surface_mesh_pt;
+  Mesh* Surface_mesh_pt;
 
   /// Trace file
   ofstream Trace_file;
@@ -175,7 +175,7 @@ private:
 //====================================================================
 template<class ELEMENT, class TIMESTEPPER>
 RayleighTractionProblem<ELEMENT, TIMESTEPPER>::RayleighTractionProblem(
-  const unsigned &nx, const unsigned &ny, const double &lx, const double &ly)
+  const unsigned& nx, const unsigned& ny, const double& lx, const double& ly)
 {
   // Allocate the timestepper
   add_time_stepper_pt(new TIMESTEPPER);
@@ -233,7 +233,7 @@ RayleighTractionProblem<ELEMENT, TIMESTEPPER>::RayleighTractionProblem(
   for (unsigned e = 0; e < n_el; e++)
   {
     // Cast to a fluid element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
     // Set the Reynolds number, etc
     el_pt->re_pt() = &Global_Parameters::Re;
@@ -246,8 +246,8 @@ RayleighTractionProblem<ELEMENT, TIMESTEPPER>::RayleighTractionProblem(
   for (unsigned e = 0; e < n_el; e++)
   {
     // Upcast from GeneralisedElement to traction element
-    NavierStokesTractionElement<ELEMENT> *el_pt =
-      dynamic_cast<NavierStokesTractionElement<ELEMENT> *>(
+    NavierStokesTractionElement<ELEMENT>* el_pt =
+      dynamic_cast<NavierStokesTractionElement<ELEMENT>*>(
         Surface_mesh_pt->element_pt(e));
 
     // Set the pointer to the prescribed traction function
@@ -329,7 +329,7 @@ void RayleighTractionProblem<ELEMENT, TIMESTEPPER>::set_initial_condition()
 //========================================================================
 template<class ELEMENT, class TIMESTEPPER>
 void RayleighTractionProblem<ELEMENT, TIMESTEPPER>::doc_solution(
-  DocInfo &doc_info)
+  DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -387,8 +387,7 @@ void RayleighTractionProblem<ELEMENT, TIMESTEPPER>::doc_solution(
   // Get time, position and exact soln
   Vector<double> x(2), u(2);
   double time = time_pt()->time();
-  Node *node_pt =
-    dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(37))->node_pt(1);
+  Node* node_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(37))->node_pt(1);
   x[0] = node_pt->x(0);
   x[1] = node_pt->x(1);
   ExactSoln::get_exact_u(time, x, u);
@@ -409,7 +408,7 @@ void RayleighTractionProblem<ELEMENT, TIMESTEPPER>::doc_solution(
 //=======================================================================
 template<class ELEMENT, class TIMESTEPPER>
 void RayleighTractionProblem<ELEMENT, TIMESTEPPER>::create_traction_elements(
-  const unsigned &b, Mesh *const &bulk_mesh_pt, Mesh *const &surface_mesh_pt)
+  const unsigned& b, Mesh* const& bulk_mesh_pt, Mesh* const& surface_mesh_pt)
 {
   // How many bulk elements are adjacent to boundary b?
   unsigned n_element = bulk_mesh_pt->nboundary_element(b);
@@ -418,14 +417,14 @@ void RayleighTractionProblem<ELEMENT, TIMESTEPPER>::create_traction_elements(
   for (unsigned e = 0; e < n_element; e++)
   {
     // Get pointer to the bulk element that is adjacent to boundary b
-    ELEMENT *bulk_elem_pt =
-      dynamic_cast<ELEMENT *>(bulk_mesh_pt->boundary_element_pt(b, e));
+    ELEMENT* bulk_elem_pt =
+      dynamic_cast<ELEMENT*>(bulk_mesh_pt->boundary_element_pt(b, e));
 
     // What is the index of the face of element e along boundary b
     int face_index = bulk_mesh_pt->face_index_at_boundary(b, e);
 
     // Build the corresponding prescribed-flux element
-    NavierStokesTractionElement<ELEMENT> *flux_element_pt =
+    NavierStokesTractionElement<ELEMENT>* flux_element_pt =
       new NavierStokesTractionElement<ELEMENT>(bulk_elem_pt, face_index);
 
     // Add the prescribed-flux element to the surface mesh
@@ -440,7 +439,7 @@ void RayleighTractionProblem<ELEMENT, TIMESTEPPER>::create_traction_elements(
 //=============================================================================
 template<class ELEMENT, class TIMESTEPPER>
 void RayleighTractionProblem<ELEMENT, TIMESTEPPER>::unsteady_run(
-  DocInfo &doc_info)
+  DocInfo& doc_info)
 {
   // Open trace file
   char filename[100];
@@ -528,7 +527,7 @@ void RayleighTractionProblem<ELEMENT, TIMESTEPPER>::unsteady_run(
 //===start_of_main======================================================
 /// Driver code for Rayleigh-type problem
 //======================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   /// Convert command line arguments (if any) into flags:
   if (argc == 1)

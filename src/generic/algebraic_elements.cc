@@ -48,12 +48,12 @@ namespace oomph
   /// father element.
   //========================================================================
   void AlgebraicElementBase::setup_algebraic_node_update(
-    Node *&node_pt,
-    const Vector<double> &s_father,
-    FiniteElement *father_el_pt) const
+    Node*& node_pt,
+    const Vector<double>& s_father,
+    FiniteElement* father_el_pt) const
   {
     // Turn node into algebraic node
-    AlgebraicNode *alg_node_pt = dynamic_cast<AlgebraicNode *>(node_pt);
+    AlgebraicNode* alg_node_pt = dynamic_cast<AlgebraicNode*>(node_pt);
 
     // Get number of nodes in father element
     unsigned nnod_father = father_el_pt->nnode();
@@ -67,7 +67,7 @@ namespace oomph
     for (unsigned j = 0; j < nnod_father; j++)
     {
       // Get vector of ids and add them to map
-      dynamic_cast<AlgebraicNode *>(father_el_pt->node_pt(j))
+      dynamic_cast<AlgebraicNode*>(father_el_pt->node_pt(j))
         ->node_update_fct_id(id);
       unsigned n_id = id.size();
       for (unsigned i = 0; i < n_id; i++)
@@ -93,8 +93,8 @@ namespace oomph
     // Loop over all node udate functions -- since it's shared by
     // nodes we may as well read the required data  from the first
     // node in the father.
-    AlgebraicNode *father_node_pt =
-      dynamic_cast<AlgebraicNode *>(father_el_pt->node_pt(0));
+    AlgebraicNode* father_node_pt =
+      dynamic_cast<AlgebraicNode*>(father_el_pt->node_pt(0));
     for (unsigned i = 0; i < n_update_id; i++)
     {
       // Actual id:
@@ -105,7 +105,7 @@ namespace oomph
       {
         // Get vector of geometric objects involved in specified node update
         // function (create vector by copy operation)
-        Vector<GeomObject *> geom_obj_pt(
+        Vector<GeomObject*> geom_obj_pt(
           father_node_pt->vector_geom_object_pt(id));
 
         // Loop over reference values and obtain the
@@ -136,7 +136,7 @@ namespace oomph
         {
           // Get reference values at node in father by copy operation
           Vector<double> father_ref_value(
-            dynamic_cast<AlgebraicNode *>(father_el_pt->node_pt(j_father))
+            dynamic_cast<AlgebraicNode*>(father_el_pt->node_pt(j_father))
               ->vector_ref_value(id));
 
           // Loop over reference values
@@ -147,7 +147,7 @@ namespace oomph
         }
 
         // Get mesh that implements the update operation
-        AlgebraicMesh *mesh_pt = father_node_pt->mesh_pt(id);
+        AlgebraicMesh* mesh_pt = father_node_pt->mesh_pt(id);
 
         // Setup node update info for node
         alg_node_pt->add_node_update_info(id, // id
@@ -195,13 +195,13 @@ namespace oomph
   /// Default dummy mesh to point to for nodes for which no remesh
   /// fct is defined
   //========================================================================
-  AlgebraicMesh *AlgebraicNode::Dummy_mesh_pt = &AlgebraicNode::Dummy_mesh;
+  AlgebraicMesh* AlgebraicNode::Dummy_mesh_pt = &AlgebraicNode::Dummy_mesh;
 
   //========================================================================
   /// Zero-sized default dummy vector of geom objects to point to for nodes
   /// for which no remesh fct is defined
   //========================================================================
-  Vector<GeomObject *> AlgebraicNode::Dummy_geom_object_pt;
+  Vector<GeomObject*> AlgebraicNode::Dummy_geom_object_pt;
 
   //========================================================================
   /// Zero-sized default dummy vector of reference values
@@ -223,7 +223,7 @@ namespace oomph
   /// function.
   //========================================================================
   void AlgebraicNode::node_update(
-    const bool &update_all_time_levels_for_new_node)
+    const bool& update_all_time_levels_for_new_node)
   {
     // Number of time levels that need to be updated
     unsigned ntime;
@@ -252,7 +252,7 @@ namespace oomph
       unsigned nmaster = hanging_pt()->nmaster();
       for (unsigned imaster = 0; imaster < nmaster; imaster++)
       {
-        dynamic_cast<AlgebraicNode *>(hanging_pt()->master_node_pt(imaster))
+        dynamic_cast<AlgebraicNode*>(hanging_pt()->master_node_pt(imaster))
           ->node_update();
       }
     }
@@ -267,9 +267,9 @@ namespace oomph
         for (unsigned t = 0; t < ntime; t++)
         {
           // Update nodal position
-          AlgebraicMesh *mesh_pt = Mesh_pt.begin()->second;
+          AlgebraicMesh* mesh_pt = Mesh_pt.begin()->second;
           // Not sure why I need this intermediate variable....
-          AlgebraicNode *node_pt = this;
+          AlgebraicNode* node_pt = this;
           mesh_pt->algebraic_node_update(t, node_pt);
         }
       }

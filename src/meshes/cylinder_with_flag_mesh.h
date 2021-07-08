@@ -56,18 +56,18 @@ namespace oomph
     /// of the centre of the cylinder and its radius. Timestepper defaults to
     /// Steady default timestepper.
     CylinderWithFlagMesh(
-      Circle *cylinder_pt,
-      GeomObject *top_flag_pt,
-      GeomObject *bottom_flag_pt,
-      GeomObject *tip_flag_pt,
-      const double &length,
-      const double &height,
-      const double &flag_length,
-      const double &flag_height,
-      const double &centre_x,
-      const double &centre_y,
-      const double &a,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper);
+      Circle* cylinder_pt,
+      GeomObject* top_flag_pt,
+      GeomObject* bottom_flag_pt,
+      GeomObject* tip_flag_pt,
+      const double& length,
+      const double& height,
+      const double& flag_length,
+      const double& flag_height,
+      const double& centre_x,
+      const double& centre_y,
+      const double& a,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper);
 
     /// Destructor: Kill the domain
     virtual ~CylinderWithFlagMesh()
@@ -76,14 +76,14 @@ namespace oomph
     }
 
     /// Access function to the domain
-    CylinderWithFlagDomain *domain_pt()
+    CylinderWithFlagDomain* domain_pt()
     {
       return Domain_pt;
     }
 
   protected:
     /// Pointer to the domain
-    CylinderWithFlagDomain *Domain_pt;
+    CylinderWithFlagDomain* Domain_pt;
 
   }; // end of mesh class
 
@@ -106,18 +106,18 @@ namespace oomph
     /// of the centre of the cylinder and its radius. Timestepper defaults to
     /// Steady default timestepper.
     RefineableCylinderWithFlagMesh(
-      Circle *cylinder_pt,
-      GeomObject *top_flag_pt,
-      GeomObject *bottom_flag_pt,
-      GeomObject *tip_flag_pt,
-      const double &length,
-      const double &height,
-      const double &flag_length,
-      const double &flag_height,
-      const double &centre_x,
-      const double &centre_y,
-      const double &a,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      Circle* cylinder_pt,
+      GeomObject* top_flag_pt,
+      GeomObject* bottom_flag_pt,
+      GeomObject* tip_flag_pt,
+      const double& length,
+      const double& height,
+      const double& flag_length,
+      const double& flag_height,
+      const double& centre_x,
+      const double& centre_y,
+      const double& a,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       CylinderWithFlagMesh<ELEMENT>(cylinder_pt,
                                     top_flag_pt,
                                     bottom_flag_pt,
@@ -161,18 +161,18 @@ namespace oomph
     /// of the centre of the cylinder and its radius. Timestepper defaults to
     /// Steady default timestepper.
     AlgebraicCylinderWithFlagMesh(
-      Circle *cylinder_pt,
-      GeomObject *top_flag_pt,
-      GeomObject *bottom_flag_pt,
-      GeomObject *tip_flag_pt,
-      const double &length,
-      const double &height,
-      const double &flag_length,
-      const double &flag_height,
-      const double &centre_x,
-      const double &centre_y,
-      const double &a,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      Circle* cylinder_pt,
+      GeomObject* top_flag_pt,
+      GeomObject* bottom_flag_pt,
+      GeomObject* tip_flag_pt,
+      const double& length,
+      const double& height,
+      const double& flag_length,
+      const double& flag_height,
+      const double& centre_x,
+      const double& centre_y,
+      const double& a,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       CylinderWithFlagMesh<ELEMENT>(cylinder_pt,
                                     top_flag_pt,
                                     bottom_flag_pt,
@@ -213,7 +213,7 @@ namespace oomph
 
     /// \short Set geometric object that defines the
     /// bottom face of the flag
-    void set_bottom_flag_pt(GeomObject *bottom_flag_pt)
+    void set_bottom_flag_pt(GeomObject* bottom_flag_pt)
     {
       // Need to alter the domain's bottom_flag_pt too
       this->domain_pt()->bottom_flag_pt() = bottom_flag_pt;
@@ -222,7 +222,7 @@ namespace oomph
 
     /// \short Set the geometric object that defines the
     /// top face of the flag
-    void set_top_flag_pt(GeomObject *top_flag_pt)
+    void set_top_flag_pt(GeomObject* top_flag_pt)
     {
       this->domain_pt()->top_flag_pt() = top_flag_pt;
       Top_flag_pt = top_flag_pt;
@@ -230,7 +230,7 @@ namespace oomph
 
     /// \short Set the geometric object that defines the
     /// tip of the flag
-    void set_tip_flag_pt(GeomObject *tip_flag_pt)
+    void set_tip_flag_pt(GeomObject* tip_flag_pt)
     {
       this->domain_pt()->tip_flag_pt() = tip_flag_pt;
       Tip_flag_pt = tip_flag_pt;
@@ -238,21 +238,21 @@ namespace oomph
 
     /// \short Read-only access to geometric object that defines the
     /// bottom face of the flag
-    GeomObject *bottom_flag_pt() const
+    GeomObject* bottom_flag_pt() const
     {
       return Bottom_flag_pt;
     }
 
     /// \short Read-only access to geometric object that defines the
     /// top face of the flag
-    GeomObject *top_flag_pt() const
+    GeomObject* top_flag_pt() const
     {
       return Top_flag_pt;
     }
 
     /// \short Read-only access to geometric object that defines the
     /// tip of the flag
-    GeomObject *tip_flag_pt() const
+    GeomObject* tip_flag_pt() const
     {
       return Tip_flag_pt;
     }
@@ -260,54 +260,54 @@ namespace oomph
     /// \short Update the geometric references that are used
     /// to update node after mesh adaptation.
     /// Empty -- no update of node update required without adaptativity
-    void update_node_update(AlgebraicNode *&node_pt) {}
+    void update_node_update(AlgebraicNode*& node_pt) {}
 
     /// \short Update nodal position at time level t (t=0: present;
     /// t>0: previous)
-    void algebraic_node_update(const unsigned &t, AlgebraicNode *&node_pt);
+    void algebraic_node_update(const unsigned& t, AlgebraicNode*& node_pt);
 
   protected:
     /// Function to setup the algebraic node update
     void setup_algebraic_node_update();
 
     /// Helper function
-    void node_update_I(const unsigned &t, AlgebraicNode *&node_pt);
+    void node_update_I(const unsigned& t, AlgebraicNode*& node_pt);
 
     /// Helper function
-    void node_update_II(const unsigned &t, AlgebraicNode *&node_pt);
+    void node_update_II(const unsigned& t, AlgebraicNode*& node_pt);
 
     /// Helper function
-    void node_update_III(const unsigned &t, AlgebraicNode *&node_pt);
+    void node_update_III(const unsigned& t, AlgebraicNode*& node_pt);
 
     /// Helper function
-    void node_update_IV(const unsigned &t, AlgebraicNode *&node_pt);
+    void node_update_IV(const unsigned& t, AlgebraicNode*& node_pt);
 
     /// Helper function
-    void node_update_V(const unsigned &t, AlgebraicNode *&node_pt);
+    void node_update_V(const unsigned& t, AlgebraicNode*& node_pt);
 
     /// Helper function
-    void node_update_VI(const unsigned &t, AlgebraicNode *&node_pt);
+    void node_update_VI(const unsigned& t, AlgebraicNode*& node_pt);
 
     /// Helper function
-    void node_update_VII(const unsigned &t, AlgebraicNode *&node_pt);
+    void node_update_VII(const unsigned& t, AlgebraicNode*& node_pt);
 
     /// Helper function
-    void node_update_VIII(const unsigned &t, AlgebraicNode *&node_pt);
+    void node_update_VIII(const unsigned& t, AlgebraicNode*& node_pt);
 
     /// Helper function
-    void node_update_IX(const unsigned &t, AlgebraicNode *&node_pt);
+    void node_update_IX(const unsigned& t, AlgebraicNode*& node_pt);
 
     /// Cylinder
-    GeomObject *Cylinder_pt;
+    GeomObject* Cylinder_pt;
 
     /// Top flag
-    GeomObject *Top_flag_pt;
+    GeomObject* Top_flag_pt;
 
     /// Bottom flag
-    GeomObject *Bottom_flag_pt;
+    GeomObject* Bottom_flag_pt;
 
     /// Tip flag
-    GeomObject *Tip_flag_pt;
+    GeomObject* Tip_flag_pt;
 
     /// Length of the domain
     double Length;
@@ -350,18 +350,18 @@ namespace oomph
     /// of the centre of the cylinder and its radius. Timestepper defaults to
     /// Steady default timestepper.
     RefineableAlgebraicCylinderWithFlagMesh(
-      Circle *cylinder_pt,
-      GeomObject *top_flag_pt,
-      GeomObject *bottom_flag_pt,
-      GeomObject *tip_flag_pt,
-      const double &length,
-      const double &height,
-      const double &flag_length,
-      const double &flag_height,
-      const double &centre_x,
-      const double &centre_y,
-      const double &a,
-      TimeStepper *time_stepper_pt = &Mesh::Default_TimeStepper) :
+      Circle* cylinder_pt,
+      GeomObject* top_flag_pt,
+      GeomObject* bottom_flag_pt,
+      GeomObject* tip_flag_pt,
+      const double& length,
+      const double& height,
+      const double& flag_length,
+      const double& flag_height,
+      const double& centre_x,
+      const double& centre_y,
+      const double& a,
+      TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper) :
       CylinderWithFlagMesh<ELEMENT>(cylinder_pt,
                                     top_flag_pt,
                                     bottom_flag_pt,
@@ -393,7 +393,7 @@ namespace oomph
 
     /// \short Update the node update data for specified node following
     /// any mesh adapation
-    void update_node_update(AlgebraicNode *&node_pt);
+    void update_node_update(AlgebraicNode*& node_pt);
   };
 
 } // namespace oomph

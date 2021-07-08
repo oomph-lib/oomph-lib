@@ -44,13 +44,13 @@ namespace oomph
   {
   public:
     /// Constructor:  Pass x and y-coords of centre and radius
-    SimpleCircle(const double &x_c, const double &y_c, const double &r) :
+    SimpleCircle(const double& x_c, const double& y_c, const double& r) :
       GeomObject(1, 2), X_c(x_c), Y_c(y_c), R(r)
     {
     }
 
     /// \short Position Vector at Lagrangian coordinate zeta
-    void position(const Vector<double> &zeta, Vector<double> &r) const
+    void position(const Vector<double>& zeta, Vector<double>& r) const
     {
       // Position vector
       r[0] = X_c + R * cos(zeta[0]);
@@ -60,9 +60,9 @@ namespace oomph
     /// \short Position Vector at Lagrangian coordinate zeta  at time level t
     /// (t=0: present; t>0: previous level). Steady object, so we
     /// simply forward the call to the steady version.
-    void position(const unsigned &t,
-                  const Vector<double> &zeta,
-                  Vector<double> &r) const
+    void position(const unsigned& t,
+                  const Vector<double>& zeta,
+                  Vector<double>& r) const
     {
       position(zeta, r);
     }
@@ -94,7 +94,7 @@ namespace oomph
   {
   public:
     /// Constructor:  Pass x and y-coords of centre and radius (all pinned)
-    GeneralCircle(const double &x_c, const double &y_c, const double &r) :
+    GeneralCircle(const double& x_c, const double& y_c, const double& r) :
       GeomObject(1, 2)
     {
       // Create Data: We have one Data item with 3 values. The Data object
@@ -134,7 +134,7 @@ namespace oomph
     /// Geom_data_pt[0]->value(1) = Y_c;
     /// Geom_data_pt[0]->value(2) = R;
     /// \endcode
-    GeneralCircle(Data *geom_data_pt) : GeomObject(1, 2)
+    GeneralCircle(Data* geom_data_pt) : GeomObject(1, 2)
     {
 #ifdef PARANOID
       if (geom_data_pt->nvalue() != 3)
@@ -171,7 +171,7 @@ namespace oomph
     } // end of destructor
 
     /// \short Position Vector at Lagrangian coordinate zeta
-    void position(const Vector<double> &zeta, Vector<double> &r) const
+    void position(const Vector<double>& zeta, Vector<double>& r) const
     {
       // Extract data
       double X_c = Geom_data_pt[0]->value(0);
@@ -187,27 +187,27 @@ namespace oomph
     /// \short Position Vector at Lagrangian coordinate zeta  at time level t
     /// (t=0: present; t>0: previous level). Steady object, so we
     /// simply forward the call to the steady version.
-    void position(const unsigned &t,
-                  const Vector<double> &zeta,
-                  Vector<double> &r) const
+    void position(const unsigned& t,
+                  const Vector<double>& zeta,
+                  Vector<double>& r) const
     {
       position(zeta, r);
     }
 
     /// Access function to x-coordinate of centre of circle
-    double &x_c()
+    double& x_c()
     {
       return *Geom_data_pt[0]->value_pt(0);
     }
 
     /// Access function to y-coordinate of centre of circle
-    double &y_c()
+    double& y_c()
     {
       return *Geom_data_pt[0]->value_pt(1);
     }
 
     /// Access function to radius of circle
-    double &R()
+    double& R()
     {
       return *Geom_data_pt[0]->value_pt(2);
     }
@@ -220,14 +220,14 @@ namespace oomph
 
     /// \short Return pointer to the j-th Data item that the object's
     /// shape depends on
-    Data *geom_data_pt(const unsigned &j)
+    Data* geom_data_pt(const unsigned& j)
     {
       return Geom_data_pt[j];
     }
 
   protected:
     /// \short Vector of pointers to Data items that affects the object's shape
-    Vector<Data *> Geom_data_pt;
+    Vector<Data*> Geom_data_pt;
 
     /// Do I need to clean up?
     bool Must_clean_up;

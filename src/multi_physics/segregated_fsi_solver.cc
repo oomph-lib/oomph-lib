@@ -295,9 +295,9 @@ namespace oomph
   /// Change is computed relative to the reference values stored when
   /// store_solid_dofs() was last called.
   //============================================================================
-  void SegregatableFSIProblem::get_solid_change(double &rms_change,
-                                                double &max_change,
-                                                double &rms_norm)
+  void SegregatableFSIProblem::get_solid_change(double& rms_change,
+                                                double& max_change,
+                                                double& rms_norm)
   {
     // Initialise
     rms_change = 0.0;
@@ -974,7 +974,7 @@ namespace oomph
       conv_data = segregated_solve();
     }
     // Catch any exceptions thrown in the segregated solver
-    catch (SegregatedSolverError &error)
+    catch (SegregatedSolverError& error)
     {
       if (!error.Ran_out_of_iterations)
       {
@@ -1018,7 +1018,7 @@ namespace oomph
   /// that contains the vital stats of the iteration.
   //============================================================================
   PicardConvergenceData SegregatableFSIProblem::unsteady_segregated_solve(
-    const double &dt)
+    const double& dt)
   {
     // We shift the values, so shift_values is true
     return unsteady_segregated_solve(dt, true);
@@ -1030,7 +1030,7 @@ namespace oomph
   /// that contains the vital stats of the iteration.
   //============================================================================
   PicardConvergenceData SegregatableFSIProblem::unsteady_segregated_solve(
-    const double &dt, const bool &shift_values)
+    const double& dt, const bool& shift_values)
   {
     // Shift the time values and the dts according to the control flag
     if (shift_values)
@@ -1067,7 +1067,7 @@ namespace oomph
       conv_data = segregated_solve();
     }
     // Catch any exceptions thrown in the segregated solver
-    catch (SegregatedSolverError &error)
+    catch (SegregatedSolverError& error)
     {
       if (!error.Ran_out_of_iterations)
       {
@@ -1095,14 +1095,14 @@ namespace oomph
   /// identify_fluid_and_solid_dofs(...).
   //============================================================================
   void SegregatableFSIProblem::setup_segregated_solver(
-    const bool &full_setup_of_fluid_and_solid_dofs)
+    const bool& full_setup_of_fluid_and_solid_dofs)
   {
     // If we are doing a full setup
     if (full_setup_of_fluid_and_solid_dofs)
     {
       // Identify the fluid and solid Data
-      Vector<Data *> fluid_data_pt;
-      Vector<Data *> solid_data_pt;
+      Vector<Data*> fluid_data_pt;
+      Vector<Data*> solid_data_pt;
       identify_fluid_and_solid_dofs(
         fluid_data_pt, solid_data_pt, Fluid_mesh_pt, Solid_mesh_pt);
 

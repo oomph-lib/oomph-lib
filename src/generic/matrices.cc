@@ -50,7 +50,7 @@ namespace oomph
   /// Complete LU solve (overwrites RHS with solution). This is the
   /// generic version which should not need to be over-written.
   //============================================================================
-  void DoubleMatrixBase::solve(DoubleVector &rhs)
+  void DoubleMatrixBase::solve(DoubleVector& rhs)
   {
 #ifdef PARANOID
     if (Linear_solver_pt == 0)
@@ -74,7 +74,7 @@ namespace oomph
   /// Complete LU solve (Nothing gets overwritten!). This generic
   /// version should never need to be overwritten
   //============================================================================
-  void DoubleMatrixBase::solve(const DoubleVector &rhs, DoubleVector &soln)
+  void DoubleMatrixBase::solve(const DoubleVector& rhs, DoubleVector& soln)
   {
 #ifdef PARANOID
     if (Linear_solver_pt == 0)
@@ -92,7 +92,7 @@ namespace oomph
   /// Complete LU solve (overwrites RHS with solution). This is the
   /// generic version which should not need to be over-written.
   //============================================================================
-  void DoubleMatrixBase::solve(Vector<double> &rhs)
+  void DoubleMatrixBase::solve(Vector<double>& rhs)
   {
 #ifdef PARANOID
     if (Linear_solver_pt == 0)
@@ -116,7 +116,7 @@ namespace oomph
   /// Complete LU solve (Nothing gets overwritten!). This generic
   /// version should never need to be overwritten
   //============================================================================
-  void DoubleMatrixBase::solve(const Vector<double> &rhs, Vector<double> &soln)
+  void DoubleMatrixBase::solve(const Vector<double>& rhs, Vector<double>& soln)
   {
 #ifdef PARANOID
     if (Linear_solver_pt == 0)
@@ -147,7 +147,7 @@ namespace oomph
   /// Constructor to build a square n by n matrix.
   /// Set the default linear solver to be DenseLU
   //==============================================================
-  DenseDoubleMatrix::DenseDoubleMatrix(const unsigned long &n) :
+  DenseDoubleMatrix::DenseDoubleMatrix(const unsigned long& n) :
     DenseMatrix<double>(n)
   {
     Linear_solver_pt = Default_linear_solver_pt = new DenseLU;
@@ -157,8 +157,8 @@ namespace oomph
   /// Constructor to build a matrix with n rows and m columns.
   /// Set the default linear solver to be DenseLU
   //=================================================================
-  DenseDoubleMatrix::DenseDoubleMatrix(const unsigned long &n,
-                                       const unsigned long &m) :
+  DenseDoubleMatrix::DenseDoubleMatrix(const unsigned long& n,
+                                       const unsigned long& m) :
     DenseMatrix<double>(n, m)
   {
     Linear_solver_pt = Default_linear_solver_pt = new DenseLU;
@@ -169,9 +169,9 @@ namespace oomph
   /// with initial value initial_val
   /// Set the default linear solver to be DenseLU
   //=====================================================================
-  DenseDoubleMatrix::DenseDoubleMatrix(const unsigned long &n,
-                                       const unsigned long &m,
-                                       const double &initial_val) :
+  DenseDoubleMatrix::DenseDoubleMatrix(const unsigned long& n,
+                                       const unsigned long& m,
+                                       const double& initial_val) :
     DenseMatrix<double>(n, m, initial_val)
   {
     Linear_solver_pt = Default_linear_solver_pt = new DenseLU;
@@ -193,25 +193,25 @@ namespace oomph
   void DenseDoubleMatrix::ludecompose()
   {
     // Use the default (DenseLU) solver to ludecompose the matrix
-    static_cast<DenseLU *>(Default_linear_solver_pt)->factorise(this);
+    static_cast<DenseLU*>(Default_linear_solver_pt)->factorise(this);
   }
 
   //============================================================================
   ///  Back substitute an LU decomposed matrix.
   //============================================================================
-  void DenseDoubleMatrix::lubksub(DoubleVector &rhs)
+  void DenseDoubleMatrix::lubksub(DoubleVector& rhs)
   {
     // Use the default (DenseLU) solver to perform the backsubstitution
-    static_cast<DenseLU *>(Default_linear_solver_pt)->backsub(rhs, rhs);
+    static_cast<DenseLU*>(Default_linear_solver_pt)->backsub(rhs, rhs);
   }
 
   //============================================================================
   ///  Back substitute an LU decomposed matrix.
   //============================================================================
-  void DenseDoubleMatrix::lubksub(Vector<double> &rhs)
+  void DenseDoubleMatrix::lubksub(Vector<double>& rhs)
   {
     // Use the default (DenseLU) solver to perform the backsubstitution
-    static_cast<DenseLU *>(Default_linear_solver_pt)->backsub(rhs, rhs);
+    static_cast<DenseLU*>(Default_linear_solver_pt)->backsub(rhs, rhs);
   }
 
   //============================================================================
@@ -221,7 +221,7 @@ namespace oomph
   /// - \c eigen_val[i] is the i-th eigenvalue; same ordering as in eigenvectors
   //============================================================================
   void DenseDoubleMatrix::eigenvalues_by_jacobi(
-    Vector<double> &eigen_vals, DenseMatrix<double> &eigen_vect) const
+    Vector<double>& eigen_vals, DenseMatrix<double>& eigen_vect) const
   {
 #ifdef PARANOID
     // Check Matrix is square
@@ -289,8 +289,8 @@ namespace oomph
   //============================================================================
   ///  Multiply the matrix by the vector x: soln=Ax
   //============================================================================
-  void DenseDoubleMatrix::multiply(const DoubleVector &x,
-                                   DoubleVector &soln) const
+  void DenseDoubleMatrix::multiply(const DoubleVector& x,
+                                   DoubleVector& soln) const
   {
 #ifdef PARANOID
     // Check to see if x.size() = ncol().
@@ -365,8 +365,8 @@ namespace oomph
     soln.initialise(0.0);
 
     // Multiply the matrix A, by the vector x
-    const double *x_pt = x.values_pt();
-    double *soln_pt = soln.values_pt();
+    const double* x_pt = x.values_pt();
+    double* soln_pt = soln.values_pt();
     for (unsigned long i = 0; i < N; i++)
     {
       for (unsigned long j = 0; j < M; j++)
@@ -379,8 +379,8 @@ namespace oomph
   //=================================================================
   /// Multiply the transposed matrix by the vector x: soln=A^T x
   //=================================================================
-  void DenseDoubleMatrix::multiply_transpose(const DoubleVector &x,
-                                             DoubleVector &soln) const
+  void DenseDoubleMatrix::multiply_transpose(const DoubleVector& x,
+                                             DoubleVector& soln) const
   {
 #ifdef PARANOID
     // Check to see if x.size() = ncol().
@@ -446,7 +446,7 @@ namespace oomph
     // if soln is not setup then setup the distribution
     if (!soln.built())
     {
-      LinearAlgebraDistribution *dist_pt = new LinearAlgebraDistribution(
+      LinearAlgebraDistribution* dist_pt = new LinearAlgebraDistribution(
         x.distribution_pt()->communicator_pt(), this->ncol(), false);
       soln.build(dist_pt, 0.0);
       delete dist_pt;
@@ -456,8 +456,8 @@ namespace oomph
     soln.initialise(0.0);
 
     // Matrix vector product
-    double *soln_pt = soln.values_pt();
-    const double *x_pt = x.values_pt();
+    double* soln_pt = soln.values_pt();
+    const double* x_pt = x.values_pt();
     for (unsigned long i = 0; i < N; i++)
     {
       for (unsigned long j = 0; j < M; j++)
@@ -474,8 +474,8 @@ namespace oomph
   /// reduced_matrix. Note: Diagonal entries are retained regardless
   /// of their size.
   //=================================================================
-  void DenseDoubleMatrix::matrix_reduction(const double &alpha,
-                                           DenseDoubleMatrix &reduced_matrix)
+  void DenseDoubleMatrix::matrix_reduction(const double& alpha,
+                                           DenseDoubleMatrix& reduced_matrix)
   {
     reduced_matrix.resize(N, M, 0.0);
     // maximum value in a row
@@ -513,8 +513,8 @@ namespace oomph
   //=============================================================================
   /// Function to multiply this matrix by the DenseDoubleMatrix  matrix_in.
   //=============================================================================
-  void DenseDoubleMatrix::multiply(const DenseDoubleMatrix &matrix_in,
-                                   DenseDoubleMatrix &result)
+  void DenseDoubleMatrix::multiply(const DenseDoubleMatrix& matrix_in,
+                                   DenseDoubleMatrix& result)
   {
 #ifdef PARANOID
     // check matrix dimensions are compatable
@@ -575,11 +575,11 @@ namespace oomph
   /// off from value, so make sure the vector has been shrunk
   /// to its correct length.
   //=======================================================================
-  CCDoubleMatrix::CCDoubleMatrix(const Vector<double> &value,
-                                 const Vector<int> &row_index,
-                                 const Vector<int> &column_start,
-                                 const unsigned long &n,
-                                 const unsigned long &m) :
+  CCDoubleMatrix::CCDoubleMatrix(const Vector<double>& value,
+                                 const Vector<int>& row_index,
+                                 const Vector<int>& column_start,
+                                 const unsigned long& n,
+                                 const unsigned long& m) :
     CCMatrix<double>(value, row_index, column_start, n, m)
   {
     Linear_solver_pt = Default_linear_solver_pt = new SuperLUSolver;
@@ -597,21 +597,21 @@ namespace oomph
   //===================================================================
   void CCDoubleMatrix::ludecompose()
   {
-    static_cast<SuperLUSolver *>(Default_linear_solver_pt)->factorise(this);
+    static_cast<SuperLUSolver*>(Default_linear_solver_pt)->factorise(this);
   }
 
   //===================================================================
   /// Do the backsubstitution
   //===================================================================
-  void CCDoubleMatrix::lubksub(DoubleVector &rhs)
+  void CCDoubleMatrix::lubksub(DoubleVector& rhs)
   {
-    static_cast<SuperLUSolver *>(Default_linear_solver_pt)->backsub(rhs, rhs);
+    static_cast<SuperLUSolver*>(Default_linear_solver_pt)->backsub(rhs, rhs);
   }
 
   //===================================================================
   ///  Multiply the matrix by the vector x
   //===================================================================
-  void CCDoubleMatrix::multiply(const DoubleVector &x, DoubleVector &soln) const
+  void CCDoubleMatrix::multiply(const DoubleVector& x, DoubleVector& soln) const
   {
 #ifdef PARANOID
     // Check to see if x.size() = ncol().
@@ -677,7 +677,7 @@ namespace oomph
     // if soln is not setup then setup the distribution
     if (!soln.built())
     {
-      LinearAlgebraDistribution *dist_pt = new LinearAlgebraDistribution(
+      LinearAlgebraDistribution* dist_pt = new LinearAlgebraDistribution(
         x.distribution_pt()->communicator_pt(), this->nrow(), false);
       soln.build(dist_pt, 0.0);
       delete dist_pt;
@@ -687,8 +687,8 @@ namespace oomph
     soln.initialise(0.0);
 
     // multiply
-    double *soln_pt = soln.values_pt();
-    const double *x_pt = x.values_pt();
+    double* soln_pt = soln.values_pt();
+    const double* x_pt = x.values_pt();
     for (unsigned long j = 0; j < N; j++)
     {
       for (long k = Column_start[j]; k < Column_start[j + 1]; k++)
@@ -703,8 +703,8 @@ namespace oomph
   //=================================================================
   /// Multiply the  transposed matrix by the vector x: soln=A^T x
   //=================================================================
-  void CCDoubleMatrix::multiply_transpose(const DoubleVector &x,
-                                          DoubleVector &soln) const
+  void CCDoubleMatrix::multiply_transpose(const DoubleVector& x,
+                                          DoubleVector& soln) const
   {
 #ifdef PARANOID
     // Check to see if x.size() = ncol().
@@ -770,7 +770,7 @@ namespace oomph
     // if soln is not setup then setup the distribution
     if (!soln.built())
     {
-      LinearAlgebraDistribution *dist_pt = new LinearAlgebraDistribution(
+      LinearAlgebraDistribution* dist_pt = new LinearAlgebraDistribution(
         x.distribution_pt()->communicator_pt(), this->ncol(), false);
       soln.build(dist_pt, 0.0);
       delete dist_pt;
@@ -780,8 +780,8 @@ namespace oomph
     soln.initialise(0.0);
 
     // Matrix vector product
-    double *soln_pt = soln.values_pt();
-    const double *x_pt = x.values_pt();
+    double* soln_pt = soln.values_pt();
+    const double* x_pt = x.values_pt();
     for (unsigned long i = 0; i < N; i++)
     {
       for (long k = Column_start[i]; k < Column_start[i + 1]; k++)
@@ -808,8 +808,8 @@ namespace oomph
   ///           fly' using a vector of vectors. Not particularly impressive
   ///           on the platforms we tried...
   //=============================================================================
-  void CCDoubleMatrix::multiply(const CCDoubleMatrix &matrix_in,
-                                CCDoubleMatrix &result)
+  void CCDoubleMatrix::multiply(const CCDoubleMatrix& matrix_in,
+                                CCDoubleMatrix& result)
   {
 #ifdef PARANOID
     // check matrix dimensions are compatible
@@ -832,19 +832,19 @@ namespace oomph
     unsigned long Nnz = 0;
 
     // pointers to arrays which store result
-    int *Column_start;
-    double *Value;
-    int *Row_index;
+    int* Column_start;
+    double* Value;
+    int* Row_index;
 
     // get pointers to matrix_in
-    const int *matrix_in_col_start = matrix_in.column_start();
-    const int *matrix_in_row_index = matrix_in.row_index();
-    const double *matrix_in_value = matrix_in.value();
+    const int* matrix_in_col_start = matrix_in.column_start();
+    const int* matrix_in_row_index = matrix_in.row_index();
+    const double* matrix_in_value = matrix_in.value();
 
     // get pointers to this matrix
-    const double *this_value = this->value();
-    const int *this_col_start = this->column_start();
-    const int *this_row_index = this->row_index();
+    const double* this_value = this->value();
+    const int* this_col_start = this->column_start();
+    const int* this_row_index = this->row_index();
 
     // set method
     unsigned method = Matrix_matrix_multiply_method;
@@ -962,7 +962,7 @@ namespace oomph
     else if (method == 2)
     {
       // generate array of maps to store values for result
-      std::map<int, double> *result_maps = new std::map<int, double>[M];
+      std::map<int, double>* result_maps = new std::map<int, double>[M];
 
       // run through columns of this matrix
       for (unsigned long this_col = 0; this_col < M; this_col++)
@@ -1135,8 +1135,8 @@ namespace oomph
   /// reduced_matrix. Note: Diagonal entries are retained regardless
   /// of their size.
   //=================================================================
-  void CCDoubleMatrix::matrix_reduction(const double &alpha,
-                                        CCDoubleMatrix &reduced_matrix)
+  void CCDoubleMatrix::matrix_reduction(const double& alpha,
+                                        CCDoubleMatrix& reduced_matrix)
   {
     // number of columns in matrix
     long n_coln = ncol();
@@ -1186,7 +1186,7 @@ namespace oomph
     }
 
     // Build the matrix from the compressed format
-    dynamic_cast<CCDoubleMatrix &>(reduced_matrix)
+    dynamic_cast<CCDoubleMatrix&>(reduced_matrix)
       .build(B_value, B_column_index, B_row_start, nrow(), ncol());
   }
 
@@ -1217,15 +1217,15 @@ namespace oomph
   //=============================================================================
   /// Copy constructor
   //=============================================================================
-  CRDoubleMatrix::CRDoubleMatrix(const CRDoubleMatrix &other_matrix)
+  CRDoubleMatrix::CRDoubleMatrix(const CRDoubleMatrix& other_matrix)
   {
     // copy the distribution
     this->build_distribution(other_matrix.distribution_pt());
 
     // copy coefficients
-    const double *values_pt = other_matrix.value();
-    const int *column_indices = other_matrix.column_index();
-    const int *row_start = other_matrix.row_start();
+    const double* values_pt = other_matrix.value();
+    const int* column_indices = other_matrix.column_index();
+    const int* row_start = other_matrix.row_start();
 
     // This is the local nnz.
     const unsigned nnz = other_matrix.nnz();
@@ -1235,9 +1235,9 @@ namespace oomph
     const unsigned nrow_local = other_matrix.nrow_local();
 
     // Storage for the (yet to be copied) data.
-    double *my_values_pt = new double[nnz];
-    int *my_column_indices = new int[nnz];
-    int *my_row_start = new int[nrow_local + 1];
+    double* my_values_pt = new double[nnz];
+    int* my_column_indices = new int[nnz];
+    int* my_row_start = new int[nrow_local + 1];
 
     // Copying over the data.
     std::copy(values_pt, values_pt + nnz, my_values_pt);
@@ -1268,7 +1268,7 @@ namespace oomph
   /// matrix
   //=============================================================================
   CRDoubleMatrix::CRDoubleMatrix(
-    const LinearAlgebraDistribution *distribution_pt)
+    const LinearAlgebraDistribution* distribution_pt)
   {
     this->build_distribution(distribution_pt);
 
@@ -1292,11 +1292,11 @@ namespace oomph
   /// well as the vector of values, vector of column indices,vector of row
   /// starts.
   //=============================================================================
-  CRDoubleMatrix::CRDoubleMatrix(const LinearAlgebraDistribution *dist_pt,
-                                 const unsigned &ncol,
-                                 const Vector<double> &value,
-                                 const Vector<int> &column_index,
-                                 const Vector<int> &row_start)
+  CRDoubleMatrix::CRDoubleMatrix(const LinearAlgebraDistribution* dist_pt,
+                                 const unsigned& ncol,
+                                 const Vector<double>& value,
+                                 const Vector<int>& column_index,
+                                 const Vector<int>& row_start)
   {
     // build the compressed row matrix
     CR_matrix.build(
@@ -1333,7 +1333,7 @@ namespace oomph
   //=============================================================================
   /// Rebuild the matrix - assembles an empty matrix with a defined distribution
   //=============================================================================
-  void CRDoubleMatrix::build(const LinearAlgebraDistribution *distribution_pt)
+  void CRDoubleMatrix::build(const LinearAlgebraDistribution* distribution_pt)
   {
     this->clear();
     this->build_distribution(distribution_pt);
@@ -1347,7 +1347,7 @@ namespace oomph
   /// position will also be given
   //=============================================================================
   bool CRDoubleMatrix::entries_are_sorted(
-    const bool &doc_unordered_entries) const
+    const bool& doc_unordered_entries) const
   {
 #ifdef OOMPH_HAS_MPI
     // We only need to produce a warning if the matrix is distributed
@@ -1373,8 +1373,8 @@ namespace oomph
     // Acquire access to the value, row_start and column_index arrays from
     // the CR matrix. Since we do not change anything in row_start_pt we
     // give it the const prefix
-    const int *column_index_pt = this->column_index();
-    const int *row_start_pt = this->row_start();
+    const int* column_index_pt = this->column_index();
+    const int* row_start_pt = this->row_start();
 
     // Loop over the rows of matrix
     for (unsigned i = 0; i < n_rows; i++)
@@ -1455,9 +1455,9 @@ namespace oomph
     // Acquire access to the value, row_start and column_index arrays from
     // the CR matrix. Since we do not change anything in row_start_pt we
     // give it the const prefix
-    double *value_pt = this->value();
-    int *column_index_pt = this->column_index();
-    const int *row_start_pt = this->row_start();
+    double* value_pt = this->value();
+    int* column_index_pt = this->column_index();
+    const int* row_start_pt = this->row_start();
 
     // Resize the Index_of_diagonal_entries vector
     Index_of_diagonal_entries.resize(n_rows, 0);
@@ -1652,11 +1652,11 @@ namespace oomph
   /// well as the vector of values, vector of column indices,vector of row
   /// starts.
   //=============================================================================
-  void CRDoubleMatrix::build(const LinearAlgebraDistribution *distribution_pt,
-                             const unsigned &ncol,
-                             const Vector<double> &value,
-                             const Vector<int> &column_index,
-                             const Vector<int> &row_start)
+  void CRDoubleMatrix::build(const LinearAlgebraDistribution* distribution_pt,
+                             const unsigned& ncol,
+                             const Vector<double>& value,
+                             const Vector<int>& column_index,
+                             const Vector<int>& row_start)
   {
     // clear
     this->clear();
@@ -1674,10 +1674,10 @@ namespace oomph
   //=============================================================================
   /// \short method to rebuild the matrix, but not the distribution
   //=============================================================================
-  void CRDoubleMatrix::build(const unsigned &ncol,
-                             const Vector<double> &value,
-                             const Vector<int> &column_index,
-                             const Vector<int> &row_start)
+  void CRDoubleMatrix::build(const unsigned& ncol,
+                             const Vector<double>& value,
+                             const Vector<int>& column_index,
+                             const Vector<int>& row_start)
   {
     // call the underlying build method
     CR_matrix.clean_up_memory();
@@ -1690,11 +1690,11 @@ namespace oomph
   //=============================================================================
   /// \short method to rebuild the matrix, but not the distribution
   //=============================================================================
-  void CRDoubleMatrix::build_without_copy(const unsigned &ncol,
-                                          const unsigned &nnz,
-                                          double *value,
-                                          int *column_index,
-                                          int *row_start)
+  void CRDoubleMatrix::build_without_copy(const unsigned& ncol,
+                                          const unsigned& nnz,
+                                          double* value,
+                                          int* column_index,
+                                          int* row_start)
   {
     // call the underlying build method
     CR_matrix.clean_up_memory();
@@ -1723,13 +1723,13 @@ namespace oomph
 #endif
 
     // factorise using superlu or superlu dist if we oomph has mpi
-    static_cast<SuperLUSolver *>(Default_linear_solver_pt)->factorise(this);
+    static_cast<SuperLUSolver*>(Default_linear_solver_pt)->factorise(this);
   }
 
   //=============================================================================
   /// Do back-substitution
   //=============================================================================
-  void CRDoubleMatrix::lubksub(DoubleVector &rhs)
+  void CRDoubleMatrix::lubksub(DoubleVector& rhs)
   {
 #ifdef PARANOID
     // check that the rhs vector is setup
@@ -1755,14 +1755,14 @@ namespace oomph
 
     // backsub
     DoubleVector rhs_copy(rhs);
-    static_cast<SuperLUSolver *>(Default_linear_solver_pt)
+    static_cast<SuperLUSolver*>(Default_linear_solver_pt)
       ->backsub(rhs_copy, rhs);
   }
 
   //=============================================================================
   ///  Multiply the matrix by the vector x
   //=============================================================================
-  void CRDoubleMatrix::multiply(const DoubleVector &x, DoubleVector &soln) const
+  void CRDoubleMatrix::multiply(const DoubleVector& x, DoubleVector& soln) const
   {
 #ifdef PARANOID
     // check that this matrix is built
@@ -1841,11 +1841,11 @@ namespace oomph
     else
     {
       unsigned n = this->nrow();
-      const int *row_start = CR_matrix.row_start();
-      const int *column_index = CR_matrix.column_index();
-      const double *value = CR_matrix.value();
-      double *soln_pt = soln.values_pt();
-      const double *x_pt = x.values_pt();
+      const int* row_start = CR_matrix.row_start();
+      const int* column_index = CR_matrix.column_index();
+      const double* value = CR_matrix.value();
+      double* soln_pt = soln.values_pt();
+      const double* x_pt = x.values_pt();
       for (unsigned long i = 0; i < n; i++)
       {
         soln_pt[i] = 0.0;
@@ -1862,8 +1862,8 @@ namespace oomph
   //=================================================================
   /// Multiply the transposed matrix by the vector x: soln=A^T x
   //=================================================================
-  void CRDoubleMatrix::multiply_transpose(const DoubleVector &x,
-                                          DoubleVector &soln) const
+  void CRDoubleMatrix::multiply_transpose(const DoubleVector& x,
+                                          DoubleVector& soln) const
   {
 #ifdef PARANOID
     // check that this matrix is built
@@ -1904,7 +1904,7 @@ namespace oomph
     // if soln is not setup then setup the distribution
     if (!soln.built())
     {
-      LinearAlgebraDistribution *dist_pt =
+      LinearAlgebraDistribution* dist_pt =
         new LinearAlgebraDistribution(x.distribution_pt()->communicator_pt(),
                                       this->ncol(),
                                       this->distributed());
@@ -1934,11 +1934,11 @@ namespace oomph
     else
     {
       unsigned n = this->nrow();
-      const int *row_start = CR_matrix.row_start();
-      const int *column_index = CR_matrix.column_index();
-      const double *value = CR_matrix.value();
-      double *soln_pt = soln.values_pt();
-      const double *x_pt = x.values_pt();
+      const int* row_start = CR_matrix.row_start();
+      const int* column_index = CR_matrix.column_index();
+      const double* value = CR_matrix.value();
+      double* soln_pt = soln.values_pt();
+      const double* x_pt = x.values_pt();
       // Matrix vector product
       for (unsigned long i = 0; i < n; i++)
       {
@@ -1972,8 +1972,8 @@ namespace oomph
   /// In a distributed matrix, only Trilinos Epetra Matrix Matrix multiply
   /// is available.
   //=============================================================================
-  void CRDoubleMatrix::multiply(const CRDoubleMatrix &matrix_in,
-                                CRDoubleMatrix &result) const
+  void CRDoubleMatrix::multiply(const CRDoubleMatrix& matrix_in,
+                                CRDoubleMatrix& result) const
   {
 #ifdef PARANOID
     // check that this matrix is built
@@ -2029,19 +2029,19 @@ namespace oomph
       unsigned long Nnz = 0;
 
       // pointers to arrays which store result
-      int *Row_start = 0;
-      double *Value = 0;
-      int *Column_index = 0;
+      int* Row_start = 0;
+      double* Value = 0;
+      int* Column_index = 0;
 
       // get pointers to matrix_in
-      const int *matrix_in_row_start = matrix_in.row_start();
-      const int *matrix_in_column_index = matrix_in.column_index();
-      const double *matrix_in_value = matrix_in.value();
+      const int* matrix_in_row_start = matrix_in.row_start();
+      const int* matrix_in_column_index = matrix_in.column_index();
+      const double* matrix_in_value = matrix_in.value();
 
       // get pointers to this matrix
-      const double *this_value = this->value();
-      const int *this_row_start = this->row_start();
-      const int *this_column_index = this->column_index();
+      const double* this_value = this->value();
+      const int* this_row_start = this->row_start();
+      const int* this_column_index = this->column_index();
 
       // clock_t clock1 = clock();
 
@@ -2160,7 +2160,7 @@ namespace oomph
       else if (method == 2)
       {
         // generate array of maps to store values for result
-        std::map<int, double> *result_maps = new std::map<int, double>[N];
+        std::map<int, double>* result_maps = new std::map<int, double>[N];
 
         // run through rows of this matrix
         for (unsigned long this_row = 0; this_row < N; this_row++)
@@ -2344,8 +2344,8 @@ namespace oomph
   /// reduced_matrix. Note: Diagonal entries are retained regardless
   /// of their size.
   //=================================================================
-  void CRDoubleMatrix::matrix_reduction(const double &alpha,
-                                        CRDoubleMatrix &reduced_matrix)
+  void CRDoubleMatrix::matrix_reduction(const double& alpha,
+                                        CRDoubleMatrix& reduced_matrix)
   {
     // number of rows in matrix
     long n_row = nrow_local();
@@ -2357,9 +2357,9 @@ namespace oomph
     Vector<double> B_value;
 
     // get pointers to the underlying data
-    const int *row_start = CR_matrix.row_start();
-    const int *column_index = CR_matrix.column_index();
-    const double *value = CR_matrix.value();
+    const int* row_start = CR_matrix.row_start();
+    const int* column_index = CR_matrix.column_index();
+    const double* value = CR_matrix.value();
 
     // k is counter for the number of entries in the reduced matrix
     unsigned k = 0;
@@ -2401,7 +2401,7 @@ namespace oomph
     }
 
     // Build the matrix from the compressed format
-    dynamic_cast<CRDoubleMatrix &>(reduced_matrix)
+    dynamic_cast<CRDoubleMatrix&>(reduced_matrix)
       .build(this->ncol(), B_value, B_column_index, B_row_start);
   }
 
@@ -2410,7 +2410,7 @@ namespace oomph
   /// using new and returned. The calling method is responsible for the
   /// destruction of the new matrix.
   //=============================================================================
-  CRDoubleMatrix *CRDoubleMatrix::global_matrix() const
+  CRDoubleMatrix* CRDoubleMatrix::global_matrix() const
   {
 #ifdef OOMPH_HAS_MPI
     // if this matrix is not distributed then this method is redundant
@@ -2433,7 +2433,7 @@ namespace oomph
     int nproc = this->distribution_pt()->communicator_pt()->nproc();
 
     // get the nnzs on the other processors
-    int *dist_nnz_pt = new int[nproc];
+    int* dist_nnz_pt = new int[nproc];
     MPI_Allgather(&nnz,
                   1,
                   MPI_INT,
@@ -2443,8 +2443,8 @@ namespace oomph
                   this->distribution_pt()->communicator_pt()->mpi_comm());
 
     // create a int vector of first rows and nrow local and compute nnz global
-    int *dist_first_row = new int[nproc];
-    int *dist_nrow_local = new int[nproc];
+    int* dist_first_row = new int[nproc];
+    int* dist_nrow_local = new int[nproc];
     int nnz_global = 0;
     for (int p = 0; p < nproc; p++)
     {
@@ -2454,7 +2454,7 @@ namespace oomph
     }
 
     // compute the offset for the values and column index data
-    int *nnz_offset = new int[nproc];
+    int* nnz_offset = new int[nproc];
     nnz_offset[0] = 0;
     for (int p = 1; p < nproc; p++)
     {
@@ -2464,14 +2464,14 @@ namespace oomph
     // get pointers to the (current) distributed data
     // const_cast required because MPI requires non-const data when sending
     // data
-    int *dist_row_start = const_cast<int *>(this->row_start());
-    int *dist_column_index = const_cast<int *>(this->column_index());
-    double *dist_value = const_cast<double *>(this->value());
+    int* dist_row_start = const_cast<int*>(this->row_start());
+    int* dist_column_index = const_cast<int*>(this->column_index());
+    double* dist_value = const_cast<double*>(this->value());
 
     // space for the global matrix
-    int *global_row_start = new int[nrow + 1];
-    int *global_column_index = new int[nnz_global];
-    double *global_value = new double[nnz_global];
+    int* global_row_start = new int[nrow + 1];
+    int* global_column_index = new int[nnz_global];
+    double* global_value = new double[nnz_global];
 
     // get the row starts
     MPI_Allgatherv(dist_row_start,
@@ -2517,11 +2517,11 @@ namespace oomph
     }
 
     // create the global distribution
-    LinearAlgebraDistribution *dist_pt = new LinearAlgebraDistribution(
+    LinearAlgebraDistribution* dist_pt = new LinearAlgebraDistribution(
       this->distribution_pt()->communicator_pt(), nrow, false);
 
     // create the matrix
-    CRDoubleMatrix *matrix_pt = new CRDoubleMatrix(dist_pt);
+    CRDoubleMatrix* matrix_pt = new CRDoubleMatrix(dist_pt);
 
     // copy of distribution taken so delete
     delete dist_pt;
@@ -2555,7 +2555,7 @@ namespace oomph
   /// the same Communicator.
   //============================================================================
   void CRDoubleMatrix::redistribute(
-    const LinearAlgebraDistribution *const &dist_pt)
+    const LinearAlgebraDistribution* const& dist_pt)
   {
 #ifdef OOMPH_HAS_MPI
 #ifdef PARANOID
@@ -2600,9 +2600,9 @@ namespace oomph
       unsigned long ncol = this->ncol();
 
       // current data
-      int *current_row_start = this->row_start();
-      int *current_column_index = this->column_index();
-      double *current_value = this->value();
+      int* current_row_start = this->row_start();
+      int* current_column_index = this->column_index();
+      double* current_value = this->value();
 
       // get the rank and the number of processors
       int my_rank = this->distribution_pt()->communicator_pt()->my_rank();
@@ -2724,7 +2724,7 @@ namespace oomph
         }
 
         // allocate new storage for the new row_start
-        int *new_row_start = new int[new_nrow_local[my_rank] + 1];
+        int* new_row_start = new int[new_nrow_local[my_rank] + 1];
 
         // wait for recvs to complete
         unsigned n_recv_req = nnz_recv_req.size();
@@ -2751,8 +2751,8 @@ namespace oomph
         }
 
         // allocate storage for the values and column indices
-        int *new_column_index = new int[nnz_count];
-        double *new_value = new double[nnz_count];
+        int* new_column_index = new int[nnz_count];
+        double* new_value = new double[nnz_count];
 
         // post the sends and recvs for the matrix data
         Vector<MPI_Request> recv_req;
@@ -2967,7 +2967,7 @@ namespace oomph
         int nproc = this->distribution_pt()->communicator_pt()->nproc();
 
         // get the nnzs on the other processors
-        int *dist_nnz_pt = new int[nproc];
+        int* dist_nnz_pt = new int[nproc];
         MPI_Allgather(&nnz,
                       1,
                       MPI_INT,
@@ -2978,8 +2978,8 @@ namespace oomph
 
         // create an int array of first rows and nrow local and
         // compute nnz global
-        int *dist_first_row = new int[nproc];
-        int *dist_nrow_local = new int[nproc];
+        int* dist_first_row = new int[nproc];
+        int* dist_nrow_local = new int[nproc];
         for (int p = 0; p < nproc; p++)
         {
           dist_first_row[p] = this->first_row(p);
@@ -3004,14 +3004,14 @@ namespace oomph
         }
 
         // get pointers to the (current) distributed data
-        int *dist_row_start = this->row_start();
-        int *dist_column_index = this->column_index();
-        double *dist_value = this->value();
+        int* dist_row_start = this->row_start();
+        int* dist_column_index = this->column_index();
+        double* dist_value = this->value();
 
         // space for the global matrix
-        int *global_row_start = new int[nrow + 1];
-        int *global_column_index = new int[nnz_count];
-        double *global_value = new double[nnz_count];
+        int* global_row_start = new int[nrow + 1];
+        int* global_column_index = new int[nnz_count];
+        double* global_value = new double[nnz_count];
 
         // post the sends and recvs for the matrix data
         Vector<MPI_Request> recv_req;
@@ -3188,7 +3188,7 @@ namespace oomph
         }
 
         // rebuild the matrix
-        LinearAlgebraDistribution *dist_pt = new LinearAlgebraDistribution(
+        LinearAlgebraDistribution* dist_pt = new LinearAlgebraDistribution(
           this->distribution_pt()->communicator_pt(), nrow, false);
         this->build(dist_pt);
         this->build_without_copy(
@@ -3213,18 +3213,18 @@ namespace oomph
         unsigned first_row = dist_pt->first_row();
 
         // get pointers to the (current) distributed data
-        int *global_row_start = this->row_start();
-        int *global_column_index = this->column_index();
-        double *global_value = this->value();
+        int* global_row_start = this->row_start();
+        int* global_column_index = this->column_index();
+        double* global_value = this->value();
 
         // determine the number of non zeros required by this processor
         unsigned nnz = global_row_start[first_row + nrow_local] -
                        global_row_start[first_row];
 
         // allocate
-        int *dist_row_start = new int[nrow_local + 1];
-        int *dist_column_index = new int[nnz];
-        double *dist_value = new double[nnz];
+        int* dist_row_start = new int[nrow_local + 1];
+        int* dist_column_index = new int[nnz];
+        double* dist_value = new double[nnz];
 
         // copy
         int offset = global_row_start[first_row];
@@ -3250,7 +3250,7 @@ namespace oomph
   //=============================================================================
   /// Compute transpose of matrix
   //=============================================================================
-  void CRDoubleMatrix::get_matrix_transpose(CRDoubleMatrix *result) const
+  void CRDoubleMatrix::get_matrix_transpose(CRDoubleMatrix* result) const
   {
     // Get the number of non_zeros
     unsigned long nnon_zeros = this->nnz();
@@ -3286,9 +3286,9 @@ namespace oomph
 
     // Acquire access to the value, row_start and column_index
     // arrays from the CR matrix
-    const double *value_pt = this->value();
-    const int *row_start_pt = this->row_start();
-    const int *column_index_pt = this->column_index();
+    const double* value_pt = this->value();
+    const int* row_start_pt = this->row_start();
+    const int* column_index_pt = this->column_index();
 
     // Allocate space for the row_start and column_index vectors
     // associated with the transpose of the current matrix.
@@ -3406,8 +3406,8 @@ namespace oomph
     // compute the local norm
     unsigned nrow_local = this->nrow_local();
     double n = 0;
-    const int *row_start = CR_matrix.row_start();
-    const double *value = CR_matrix.value();
+    const int* row_start = CR_matrix.row_start();
+    const double* value = CR_matrix.value();
     for (unsigned i = 0; i < nrow_local; i++)
     {
       double a = 0;
@@ -3493,8 +3493,8 @@ namespace oomph
   //=============================================================================
   /// Element-wise addition of this matrix with matrix_in.
   //=============================================================================
-  void CRDoubleMatrix::add(const CRDoubleMatrix &matrix_in,
-                           CRDoubleMatrix &result_matrix) const
+  void CRDoubleMatrix::add(const CRDoubleMatrix& matrix_in,
+                           CRDoubleMatrix& result_matrix) const
   {
 #ifdef PARANOID
     // Check if this matrix is built.
@@ -3579,14 +3579,14 @@ namespace oomph
     res_row_start.reserve(nrow_local + 1);
 
     // The row_start and column_indices
-    const int *this_column_indices = this->column_index();
-    const int *this_row_start = this->row_start();
-    const int *in_column_indices = matrix_in.column_index();
-    const int *in_row_start = matrix_in.row_start();
+    const int* this_column_indices = this->column_index();
+    const int* this_row_start = this->row_start();
+    const int* in_column_indices = matrix_in.column_index();
+    const int* in_row_start = matrix_in.row_start();
 
     // Values from this matrix and matrix_in.
-    const double *this_values = this->value();
-    const double *in_values = matrix_in.value();
+    const double* this_values = this->value();
+    const double* in_values = matrix_in.value();
 
     // The first entry in row_start is always zero.
     res_row_start.push_back(0);
@@ -3654,13 +3654,13 @@ namespace oomph
     /// testing or small problems only.
     //============================================================================
     void create_uniformly_distributed_matrix(
-      const unsigned &nrow,
-      const unsigned &ncol,
-      const OomphCommunicator *const comm_pt,
-      const Vector<double> &values,
-      const Vector<int> &column_indices,
-      const Vector<int> &row_start,
-      CRDoubleMatrix &matrix_out)
+      const unsigned& nrow,
+      const unsigned& ncol,
+      const OomphCommunicator* const comm_pt,
+      const Vector<double>& values,
+      const Vector<int>& column_indices,
+      const Vector<int>& row_start,
+      CRDoubleMatrix& matrix_out)
     {
 #ifdef PARANOID
       // Check if the communicator exists.
@@ -3708,7 +3708,7 @@ namespace oomph
     //============================================================================
     /// Compute infinity (maximum) norm of sub blocks as if it was one matrix
     //============================================================================
-    double inf_norm(const DenseMatrix<CRDoubleMatrix *> &matrix_pt)
+    double inf_norm(const DenseMatrix<CRDoubleMatrix*>& matrix_pt)
     {
       // The number of block rows and columns
       const unsigned nblockrow = matrix_pt.nrow();
@@ -3757,7 +3757,7 @@ namespace oomph
 #ifdef OOMPH_HAS_MPI
 
       // The communicator pointer from block (0,0)
-      const OomphCommunicator *const comm_pt =
+      const OomphCommunicator* const comm_pt =
         matrix_pt(0, 0)->distribution_pt()->communicator_pt();
 
 #ifdef PARANOID
@@ -3922,10 +3922,10 @@ namespace oomph
           for (unsigned block_col_i = 0; block_col_i < nblockcol; block_col_i++)
           {
             // Locally cache the pointer to the current block.
-            CRDoubleMatrix *block_pt = matrix_pt(block_row_i, block_col_i);
+            CRDoubleMatrix* block_pt = matrix_pt(block_row_i, block_col_i);
 
-            const int *row_start = block_pt->row_start();
-            const double *value = block_pt->value();
+            const int* row_start = block_pt->row_start();
+            const double* value = block_pt->value();
 
             // Loop through the values
             for (int val_i = row_start[local_row_i];
@@ -3979,7 +3979,7 @@ namespace oomph
     /// "make sense", there is a paranoid check for this.
     //============================================================================
     double gershgorin_eigenvalue_estimate(
-      const DenseMatrix<CRDoubleMatrix *> &matrix_pt)
+      const DenseMatrix<CRDoubleMatrix*>& matrix_pt)
     {
       // The number of block rows and columns
       const unsigned nblockrow = matrix_pt.nrow();
@@ -4029,7 +4029,7 @@ namespace oomph
 
       // The communicator pointer from block (0,0)
       // All communicators should be the same, we check this next.
-      const OomphCommunicator *const comm_pt =
+      const OomphCommunicator* const comm_pt =
         matrix_pt(0, 0)->distribution_pt()->communicator_pt();
 
 #ifdef PARANOID
@@ -4194,10 +4194,10 @@ namespace oomph
           for (unsigned block_col_i = 0; block_col_i < nblockcol; block_col_i++)
           {
             // Locally cache the pointer to the current block.
-            CRDoubleMatrix *block_pt = matrix_pt(block_row_i, block_col_i);
+            CRDoubleMatrix* block_pt = matrix_pt(block_row_i, block_col_i);
 
-            const int *row_start = block_pt->row_start();
-            const double *value = block_pt->value();
+            const int* row_start = block_pt->row_start();
+            const double* value = block_pt->value();
 
             // Loop through the values
             for (int val_i = row_start[local_row_i];
@@ -4210,10 +4210,10 @@ namespace oomph
 
           // Now minus the diagonal entry...
           // Locate the diagonal block matrix.
-          double *s_values = matrix_pt(block_row_i, block_row_i)->value();
-          int *s_column_index =
+          double* s_values = matrix_pt(block_row_i, block_row_i)->value();
+          int* s_column_index =
             matrix_pt(block_row_i, block_row_i)->column_index();
-          int *s_row_start = matrix_pt(block_row_i, block_row_i)->row_start();
+          int* s_row_start = matrix_pt(block_row_i, block_row_i)->row_start();
           // int s_nrow_local =
           // matrix_pt(block_row_i,block_row_i)->nrow_local();
           int s_first_row = matrix_pt(block_row_i, block_row_i)->first_row();
@@ -4322,8 +4322,8 @@ namespace oomph
     /// NOTE: ALL the matrices pointed to by matrix_pt has to be built. This is
     /// not the case with concatenate_without_communication(...)
     //============================================================================
-    void concatenate(const DenseMatrix<CRDoubleMatrix *> &matrix_pt,
-                     CRDoubleMatrix &result_matrix)
+    void concatenate(const DenseMatrix<CRDoubleMatrix*>& matrix_pt,
+                     CRDoubleMatrix& result_matrix)
     {
       // The number of block rows and block columns.
       unsigned matrix_nrow = matrix_pt.nrow();
@@ -4427,7 +4427,7 @@ namespace oomph
 #endif
 
       // The communicator pointer from block (0,0)
-      const OomphCommunicator *const comm_pt =
+      const OomphCommunicator* const comm_pt =
         matrix_pt(0, 0)->distribution_pt()->communicator_pt();
 
       // Check if the block (0,0) is distributed or not.
@@ -4607,14 +4607,14 @@ namespace oomph
                  block_col_i++)
             {
               // Get the current block.
-              CRDoubleMatrix *current_block_pt =
+              CRDoubleMatrix* current_block_pt =
                 matrix_pt(block_row_i, block_col_i);
 
               // Get the values, column_indices and row_start for this block.
-              double *current_block_values = current_block_pt->value();
-              int *current_block_column_indices =
+              double* current_block_values = current_block_pt->value();
+              int* current_block_column_indices =
                 current_block_pt->column_index();
-              int *current_block_row_start = current_block_pt->row_start();
+              int* current_block_row_start = current_block_pt->row_start();
 
               for (int val_i = current_block_row_start[row_i];
                    val_i < current_block_row_start[row_i + 1];
@@ -4670,7 +4670,7 @@ namespace oomph
         }
 
         // Get the pointer to the result distribution, for convenience...
-        LinearAlgebraDistribution *res_distribution_pt =
+        LinearAlgebraDistribution* res_distribution_pt =
           result_matrix.distribution_pt();
 
         // loop over the sub blocks to calculate the global_eqn, get the values
@@ -4716,7 +4716,7 @@ namespace oomph
                  block_col_i++)
             {
               // Get the row_start
-              int *current_block_row_start =
+              int* current_block_row_start =
                 matrix_pt(block_row_i, block_col_i)->row_start();
 
               // Update the nnz for this row.
@@ -4751,14 +4751,14 @@ namespace oomph
                  block_col_i++)
             {
               // Cache the pointer to the current block for convenience.
-              CRDoubleMatrix *current_block_pt =
+              CRDoubleMatrix* current_block_pt =
                 matrix_pt(block_row_i, block_col_i);
 
               // Values, column indices and row_start for the current block.
-              double *current_block_values = current_block_pt->value();
-              int *current_block_column_indices =
+              double* current_block_values = current_block_pt->value();
+              int* current_block_column_indices =
                 current_block_pt->column_index();
-              int *current_block_row_start = current_block_pt->row_start();
+              int* current_block_row_start = current_block_pt->row_start();
 
               // Loop though the values and column_indices
               for (int val_i = current_block_row_start[sub_local_eqn];
@@ -5195,10 +5195,10 @@ namespace oomph
     /// distributions of the individual blocks.
     //============================================================================
     void concatenate_without_communication(
-      const Vector<LinearAlgebraDistribution *> &row_distribution_pt,
-      const Vector<LinearAlgebraDistribution *> &col_distribution_pt,
-      const DenseMatrix<CRDoubleMatrix *> &matrix_pt,
-      CRDoubleMatrix &result_matrix)
+      const Vector<LinearAlgebraDistribution*>& row_distribution_pt,
+      const Vector<LinearAlgebraDistribution*>& col_distribution_pt,
+      const DenseMatrix<CRDoubleMatrix*>& matrix_pt,
+      CRDoubleMatrix& result_matrix)
     {
       // The number of block rows and block columns.
       unsigned matrix_nrow = matrix_pt.nrow();
@@ -5478,7 +5478,7 @@ namespace oomph
       for (unsigned block_row_i = 0; block_row_i < matrix_nrow; block_row_i++)
       {
         // Get the distribution from the first block in this row.
-        LinearAlgebraDistribution *block_row_distribution_pt =
+        LinearAlgebraDistribution* block_row_distribution_pt =
           row_distribution_pt[block_row_i];
 
         // Loop through the block columns
@@ -5487,7 +5487,7 @@ namespace oomph
           if (matrix_pt(block_row_i, block_col_i) != 0)
           {
             // Get the distribution for this block.
-            LinearAlgebraDistribution *current_block_distribution_pt =
+            LinearAlgebraDistribution* current_block_distribution_pt =
               matrix_pt(block_row_i, block_col_i)->distribution_pt();
 
             // Ensure that the in matrices is a square block matrix.
@@ -5511,7 +5511,7 @@ namespace oomph
 #endif
 
       // The communicator pointer from the first row_distribution_pt
-      const OomphCommunicator *const comm_pt =
+      const OomphCommunicator* const comm_pt =
         row_distribution_pt[0]->communicator_pt();
 
       // Renamed for so it makes more sense.
@@ -5673,7 +5673,7 @@ namespace oomph
       unsigned nproc = comm_pt->nproc();
 
       // Cache the result distribution pointer for convenience.
-      LinearAlgebraDistribution *res_distribution_pt =
+      LinearAlgebraDistribution* res_distribution_pt =
         result_matrix.distribution_pt();
 
       // nrow_local for the result matrix
@@ -5752,9 +5752,9 @@ namespace oomph
       // CALLGRIND_START_INSTRUMENTATION;
 
       // storage for the result matrix.
-      int *res_row_start = new int[res_nrow_local + 1];
-      int *res_column_index = new int[res_nnz];
-      double *res_value = new double[res_nnz];
+      int* res_row_start = new int[res_nrow_local + 1];
+      int* res_column_index = new int[res_nnz];
+      double* res_value = new double[res_nnz];
 
       // initialise the zero-th entry
       res_row_start[0] = 0;
@@ -5778,9 +5778,9 @@ namespace oomph
             if (matrix_pt(i, j) != 0)
             {
               // get pointers for the elements in the current block
-              int *b_row_start = matrix_pt(i, j)->row_start();
-              int *b_column_index = matrix_pt(i, j)->column_index();
-              double *b_value = matrix_pt(i, j)->value();
+              int* b_row_start = matrix_pt(i, j)->row_start();
+              int* b_column_index = matrix_pt(i, j)->column_index();
+              double* b_value = matrix_pt(i, j)->value();
 
               // memcpy( &dst[dstIdx], &src[srcIdx], numElementsToCopy * sizeof(
               // Element ) );
@@ -5853,9 +5853,9 @@ namespace oomph
     /// matrices.
     //============================================================================
     void concatenate_without_communication(
-      const Vector<LinearAlgebraDistribution *> &block_distribution_pt,
-      const DenseMatrix<CRDoubleMatrix *> &matrix_pt,
-      CRDoubleMatrix &result_matrix)
+      const Vector<LinearAlgebraDistribution*>& block_distribution_pt,
+      const DenseMatrix<CRDoubleMatrix*>& matrix_pt,
+      CRDoubleMatrix& result_matrix)
     {
 #ifdef PARANOID
       // The number of block rows and block columns.

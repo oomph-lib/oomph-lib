@@ -80,8 +80,8 @@ namespace oomph
     /// built up incrementally as we descend through the
     /// call hierarchy of this function when called from
     /// Problem::describe_dofs(...)
-    void describe_local_dofs(std::ostream &out,
-                             const std::string &current_string) const
+    void describe_local_dofs(std::ostream& out,
+                             const std::string& current_string) const
     {
       BASIC::describe_local_dofs(out, current_string);
       SOLID::describe_local_dofs(out, current_string);
@@ -89,13 +89,13 @@ namespace oomph
 
     /// \short Compute norm of solution: use the version in the BASIC
     /// class if there's any ambiguity
-    void compute_norm(double &el_norm)
+    void compute_norm(double& el_norm)
     {
       BASIC::compute_norm(el_norm);
     }
 
     /// \short The required number of values is the sum of the two
-    unsigned required_nvalue(const unsigned &n) const
+    unsigned required_nvalue(const unsigned& n) const
     {
       return BASIC::required_nvalue(n) + SOLID::required_nvalue(n);
     }
@@ -120,7 +120,7 @@ namespace oomph
 
     /// \short Final override for the residuals function. Contributions are
     /// added from both underlying element types
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Call the basic equations first
       BASIC::fill_in_contribution_to_residuals(residuals);
@@ -130,8 +130,8 @@ namespace oomph
 
     /// \short Final override for jacobian function: Contributions are
     /// included from both the underlying element types
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       // Call the basic equations first
       BASIC::fill_in_contribution_to_jacobian(residuals, jacobian);
@@ -145,9 +145,9 @@ namespace oomph
     /// \short Final override for mass matrix function: contributions
     /// are included from both the underlying element types
     void fill_in_contribution_to_jacobian_and_mass_matrix(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix)
     {
       // Call the basic equations first
       BASIC::fill_in_contribution_to_jacobian_and_mass_matrix(
@@ -174,7 +174,7 @@ namespace oomph
 
     /// \short Fill in the shape derivatives of the BASIC equations
     /// w.r.t. the solid position dofs
-    void fill_in_shape_derivatives(DenseMatrix<double> &jacobian)
+    void fill_in_shape_derivatives(DenseMatrix<double>& jacobian)
     {
       // Default is to use finite differences
       if (Shape_derivs_by_direct_fd)
@@ -244,7 +244,7 @@ namespace oomph
 
     /// \short Fill in the derivatives of the BASIC equations
     /// w.r.t. the solid position dofs
-    void fill_in_shape_derivatives_by_fd(DenseMatrix<double> &jacobian)
+    void fill_in_shape_derivatives_by_fd(DenseMatrix<double>& jacobian)
     {
       // Flag to indicate if we use first or second order FD
       // bool use_first_order_fd=false;
@@ -338,7 +338,7 @@ namespace oomph
             if (local_unknown >= 0)
             {
               // Store a pointer to the (generalised) Eulerian nodal position
-              double *const value_pt = &(this->node_pt(n)->x_gen(k, i));
+              double* const value_pt = &(this->node_pt(n)->x_gen(k, i));
 
               // Save the old value of the (generalised) Eulerian nodal position
               const double old_var = *value_pt;
@@ -411,38 +411,38 @@ namespace oomph
     /// by adding the position Data to the set that's passed in.
     /// (This functionality is required in FSI problems; set is used to
     /// avoid double counting).
-    void identify_geometric_data(std::set<Data *> &geometric_data_pt)
+    void identify_geometric_data(std::set<Data*>& geometric_data_pt)
     {
       // Loop over the node update data and add to the set
       const unsigned n_node = this->nnode();
       for (unsigned j = 0; j < n_node; j++)
       {
         geometric_data_pt.insert(
-          dynamic_cast<SolidNode *>(this->node_pt(j))->variable_position_pt());
+          dynamic_cast<SolidNode*>(this->node_pt(j))->variable_position_pt());
       }
     }
 
     /// Overload the output function: Call that of the basic element
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       BASIC::output(outfile);
     }
 
     /// \short Output function: Plot at n_p plot points using the basic
     /// element's output function
-    void output(std::ostream &outfile, const unsigned &n_p)
+    void output(std::ostream& outfile, const unsigned& n_p)
     {
       BASIC::output(outfile, n_p);
     }
 
     /// Overload the output function: Call that of the basic element
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       BASIC::output(file_pt);
     }
 
     /// Output function is just the same as the basic equations
-    void output(FILE *file_pt, const unsigned &n_p)
+    void output(FILE* file_pt, const unsigned& n_p)
     {
       BASIC::output(file_pt, n_p);
     }
@@ -458,17 +458,17 @@ namespace oomph
     /// Also calculates the norm of the error and that of the exact flux.
     /// Use version in BASIC element
     void compute_exact_Z2_error(
-      std::ostream &outfile,
+      std::ostream& outfile,
       FiniteElement::SteadyExactSolutionFctPt exact_flux_pt,
-      double &error,
-      double &norm)
+      double& error,
+      double& norm)
     {
       BASIC::compute_exact_Z2_error(outfile, exact_flux_pt, error, norm);
     }
 
     /// 'Flux' vector for Z2 error estimation: Error estimation
     /// is based on error in BASIC element
-    void get_Z2_flux(const Vector<double> &s, Vector<double> &flux)
+    void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
       BASIC::get_Z2_flux(s, flux);
     }
@@ -480,7 +480,7 @@ namespace oomph
     }
 
     /// \short Pointer to the j-th vertex node in the element
-    Node *vertex_node_pt(const unsigned &j) const
+    Node* vertex_node_pt(const unsigned& j) const
     {
       return BASIC::vertex_node_pt(j);
     }
@@ -522,7 +522,7 @@ namespace oomph
     /// retain their DOF type numbering and the SOLID elements
     /// DOF type numbers are incremented by nbasic_dof_types().
     void get_dof_numbers_for_unknowns(
-      std::list<std::pair<unsigned long, unsigned>> &dof_lookup_list) const
+      std::list<std::pair<unsigned long, unsigned>>& dof_lookup_list) const
     {
       // get the solid list
       std::list<std::pair<unsigned long, unsigned>> solid_list;
@@ -596,15 +596,15 @@ namespace oomph
     /// built up incrementally as we descend through the
     /// call hierarchy of this function when called from
     /// Problem::describe_dofs(...)
-    void describe_local_dofs(std::ostream &out,
-                             const std::string &current_string) const
+    void describe_local_dofs(std::ostream& out,
+                             const std::string& current_string) const
     {
       BASIC::describe_local_dofs(out, current_string);
       SOLID::describe_local_dofs(out, current_string);
     }
 
     /// \short The required number of values is the sum of the two
-    unsigned required_nvalue(const unsigned &n) const
+    unsigned required_nvalue(const unsigned& n) const
     {
       return BASIC::required_nvalue(n) + SOLID::required_nvalue(n);
     }
@@ -639,7 +639,7 @@ namespace oomph
 
     ///\short Final override for residuals function: adds contributions
     /// from both underlying element types
-    void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       // Call the basic equations first
       BASIC::fill_in_contribution_to_residuals(residuals);
@@ -649,8 +649,8 @@ namespace oomph
 
     ///\short Final override for jacobian function: Calls get_jacobian() for
     /// both of the underlying element types
-    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
     {
       // Call the basic equations first
       BASIC::fill_in_contribution_to_jacobian(residuals, jacobian);
@@ -665,9 +665,9 @@ namespace oomph
     /// \short Final override for mass matrix function: contributions
     /// are included from both the underlying element types
     void fill_in_contribution_to_jacobian_and_mass_matrix(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix)
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix)
     {
       // Call the basic equations first
       BASIC::fill_in_contribution_to_jacobian_and_mass_matrix(
@@ -683,7 +683,7 @@ namespace oomph
     /// \short Fill in the derivatives of the BASIC equations
     /// w.r.t. to the solid position dofs, taking hanging nodes
     /// into account
-    void fill_in_shape_derivatives_by_fd(DenseMatrix<double> &jacobian)
+    void fill_in_shape_derivatives_by_fd(DenseMatrix<double>& jacobian)
     {
       // Find the number of nodes
       const unsigned n_node = this->nnode();
@@ -734,7 +734,7 @@ namespace oomph
       for (unsigned n = 0; n < n_node; n++)
       {
         // Get pointer to the local node
-        Node *const local_node_pt = this->node_pt(n);
+        Node* const local_node_pt = this->node_pt(n);
 
         // If the node is not a hanging node
         if (local_node_pt->is_hanging() == false)
@@ -755,7 +755,7 @@ namespace oomph
         else
         {
           // Find the local hanging object
-          HangInfo *hang_info_pt = local_node_pt->hanging_pt();
+          HangInfo* hang_info_pt = local_node_pt->hanging_pt();
           // Loop over the master nodes
           const unsigned n_master = hang_info_pt->nmaster();
           for (unsigned m = 0; m < n_master; m++)
@@ -826,7 +826,7 @@ namespace oomph
         else
         {
           // Find the local hanging object
-          HangInfo *hang_info_pt =
+          HangInfo* hang_info_pt =
             this->solid_pressure_node_pt(l)->hanging_pt(solid_p_index);
           // Loop over the master nodes
           const unsigned n_master = hang_info_pt->nmaster();
@@ -854,7 +854,7 @@ namespace oomph
       for (unsigned l = 0; l < n_node; l++)
       {
         // Get the pointer to the node
-        Node *const local_node_pt = this->node_pt(l);
+        Node* const local_node_pt = this->node_pt(l);
 
         // If the node is not a hanging node
         if (local_node_pt->is_hanging() == false)
@@ -870,7 +870,7 @@ namespace oomph
               if (local_unknown >= 0)
               {
                 // Store a pointer to the (generalised) Eulerian nodal position
-                double *const value_pt = &(local_node_pt->x_gen(k, i));
+                double* const value_pt = &(local_node_pt->x_gen(k, i));
 
                 // Save the old value of the (generalised) Eulerian nodal
                 // position
@@ -938,13 +938,13 @@ namespace oomph
         else
         {
           // Find the local hanging object
-          HangInfo *hang_info_pt = local_node_pt->hanging_pt();
+          HangInfo* hang_info_pt = local_node_pt->hanging_pt();
           // Loop over the master nodes
           const unsigned n_master = hang_info_pt->nmaster();
           for (unsigned m = 0; m < n_master; m++)
           {
             // Get the pointer to the master node
-            Node *const master_node_pt = hang_info_pt->master_node_pt(m);
+            Node* const master_node_pt = hang_info_pt->master_node_pt(m);
 
             // Get the local equation numbers for the master node
             DenseMatrix<int> Position_local_eqn_at_node =
@@ -962,7 +962,7 @@ namespace oomph
                 {
                   // Store a pointer to the (generalised) Eulerian nodal
                   // position
-                  double *const value_pt = &(master_node_pt->x_gen(k, i));
+                  double* const value_pt = &(master_node_pt->x_gen(k, i));
 
                   // Save the old value of the (generalised) Eulerian nodal
                   // position
@@ -1043,7 +1043,7 @@ namespace oomph
     /// by adding the position Data to the set that's passed in.
     /// (This functionality is required in FSI problems; set is used to
     /// avoid double counting). Refineable version includes hanging nodes
-    void identify_geometric_data(std::set<Data *> &geometric_data_pt)
+    void identify_geometric_data(std::set<Data*>& geometric_data_pt)
     {
       // Loop over the node update data and add to the set
       const unsigned n_node = this->nnode();
@@ -1053,7 +1053,7 @@ namespace oomph
         if (this->node_pt(j)->is_hanging())
         {
           // Find the local hang info object
-          HangInfo *hang_info_pt = this->node_pt(j)->hanging_pt();
+          HangInfo* hang_info_pt = this->node_pt(j)->hanging_pt();
 
           // Find the number of master nodes
           unsigned n_master = hang_info_pt->nmaster();
@@ -1062,19 +1062,19 @@ namespace oomph
           for (unsigned m = 0; m < n_master; m++)
           {
             // Get the m-th master node
-            Node *Master_node_pt = hang_info_pt->master_node_pt(m);
+            Node* Master_node_pt = hang_info_pt->master_node_pt(m);
 
             // Add to set
-            geometric_data_pt.insert(dynamic_cast<SolidNode *>(Master_node_pt)
-                                       ->variable_position_pt());
+            geometric_data_pt.insert(
+              dynamic_cast<SolidNode*>(Master_node_pt)->variable_position_pt());
           }
         }
         // Not hanging
         else
         {
           // Add node itself to set
-          geometric_data_pt.insert(dynamic_cast<SolidNode *>(this->node_pt(j))
-                                     ->variable_position_pt());
+          geometric_data_pt.insert(
+            dynamic_cast<SolidNode*>(this->node_pt(j))->variable_position_pt());
         }
       }
     }
@@ -1088,7 +1088,7 @@ namespace oomph
     }
 
     /// Call rebuild_from_sons() for both of the underlying element types
-    void rebuild_from_sons(Mesh *&mesh_pt)
+    void rebuild_from_sons(Mesh*& mesh_pt)
     {
       BASIC::rebuild_from_sons(mesh_pt);
       SOLID::rebuild_from_sons(mesh_pt);
@@ -1096,9 +1096,9 @@ namespace oomph
 
     /// Call get_interpolated_values(...) for both of the underlying element
     /// types
-    void get_interpolated_values(const unsigned &t,
-                                 const Vector<double> &s,
-                                 Vector<double> &values)
+    void get_interpolated_values(const unsigned& t,
+                                 const Vector<double>& s,
+                                 Vector<double>& values)
     {
       Vector<double> basic_values;
       BASIC::get_interpolated_values(t, s, basic_values);
@@ -1123,8 +1123,8 @@ namespace oomph
 
     /// Call get_interpolated_values(...) for both of the underlying element
     /// types
-    void get_interpolated_values(const Vector<double> &s,
-                                 Vector<double> &values)
+    void get_interpolated_values(const Vector<double>& s,
+                                 Vector<double>& values)
     {
       Vector<double> basic_values;
       BASIC::get_interpolated_values(s, basic_values);
@@ -1149,7 +1149,7 @@ namespace oomph
 
     /// \short We must compose the underlying interpolating nodes from
     /// the BASIC and SOLID equations, the BASIC ones are first
-    Node *interpolating_node_pt(const unsigned &n, const int &value_id)
+    Node* interpolating_node_pt(const unsigned& n, const int& value_id)
     {
       // Find the number of interpolated values in the BASIC equations
       int n_basic_values = BASIC::ncont_interpolated_values();
@@ -1168,9 +1168,9 @@ namespace oomph
 
     /// \short The pressure nodes are the corner nodes, so when value_id==0,
     /// the fraction is the same as the 1d node number, 0 or 1.
-    double local_one_d_fraction_of_interpolating_node(const unsigned &n1d,
-                                                      const unsigned &i,
-                                                      const int &value_id)
+    double local_one_d_fraction_of_interpolating_node(const unsigned& n1d,
+                                                      const unsigned& i,
+                                                      const int& value_id)
     {
       // Find the number of interpolated values in the BASIC equations
       int n_basic_values = BASIC::ncont_interpolated_values();
@@ -1193,8 +1193,8 @@ namespace oomph
     /// pressure nodes must be calculated by using the same methods as
     /// the geometric nodes, but by recalling that there are only two pressure
     /// nodes per edge.
-    Node *get_interpolating_node_at_local_coordinate(const Vector<double> &s,
-                                                     const int &value_id)
+    Node* get_interpolating_node_at_local_coordinate(const Vector<double>& s,
+                                                     const int& value_id)
     {
       // Find the number of interpolated values in the BASIC equations
       int n_basic_values = BASIC::ncont_interpolated_values();
@@ -1214,7 +1214,7 @@ namespace oomph
 
     /// \short The number of 1d pressure nodes is 2, otherwise we have
     /// the positional nodes
-    unsigned ninterpolating_node_1d(const int &value_id)
+    unsigned ninterpolating_node_1d(const int& value_id)
     {
       // Find the number of interpolated values in the BASIC equations
       int n_basic_values = BASIC::ncont_interpolated_values();
@@ -1233,7 +1233,7 @@ namespace oomph
 
     /// \short The number of pressure nodes is 2^DIM. The number of
     /// velocity nodes is the same as the number of geometric nodes.
-    unsigned ninterpolating_node(const int &value_id)
+    unsigned ninterpolating_node(const int& value_id)
     {
       // Find the number of interpolated values in the BASIC equations
       int n_basic_values = BASIC::ncont_interpolated_values();
@@ -1252,9 +1252,9 @@ namespace oomph
 
     /// \short The basis interpolating the pressure is given by pshape().
     //// The basis interpolating the velocity is shape().
-    void interpolating_basis(const Vector<double> &s,
-                             Shape &psi,
-                             const int &value_id) const
+    void interpolating_basis(const Vector<double>& s,
+                             Shape& psi,
+                             const int& value_id) const
     {
       // Find the number of interpolated values in the BASIC equations
       int n_basic_values = BASIC::ncont_interpolated_values();
@@ -1280,7 +1280,7 @@ namespace oomph
 
     /// 'Flux' vector for Z2 error estimation: Error estimation
     /// is based on error in BASIC element
-    void get_Z2_flux(const Vector<double> &s, Vector<double> &flux)
+    void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
       BASIC::get_Z2_flux(s, flux);
     }
@@ -1296,19 +1296,19 @@ namespace oomph
 
     /// \short Build function: Call the one for the SOLID element since it
     /// calls the one basic build function automatically.
-    void build(Mesh *&mesh_pt,
-               Vector<Node *> &new_node_pt,
-               bool &was_already_built,
-               std::ofstream &new_nodes_file)
+    void build(Mesh*& mesh_pt,
+               Vector<Node*>& new_node_pt,
+               bool& was_already_built,
+               std::ofstream& new_nodes_file)
     {
       SOLID::build(mesh_pt, new_node_pt, was_already_built, new_nodes_file);
     }
 
     /// \short Build function: Call the one for the SOLID element since it
     /// calls the one basic build function automatically.
-    void build(Mesh *&mesh_pt,
-               Vector<Node *> &new_node_pt,
-               bool &was_already_built)
+    void build(Mesh*& mesh_pt,
+               Vector<Node*>& new_node_pt,
+               bool& was_already_built)
     {
       SOLID::build(mesh_pt, new_node_pt, was_already_built);
     }
@@ -1328,13 +1328,13 @@ namespace oomph
     }
 
     /// \short Pointer to the j-th vertex node in the element
-    Node *vertex_node_pt(const unsigned &j) const
+    Node* vertex_node_pt(const unsigned& j) const
     {
       return BASIC::vertex_node_pt(j);
     }
 
     /// \short Compute norm of solution. Use version in BASIC element.
-    void compute_norm(double &norm)
+    void compute_norm(double& norm)
     {
       BASIC::compute_norm(norm);
     }
@@ -1343,10 +1343,10 @@ namespace oomph
     /// Also calculates the norm of the error and that of the exact flux.
     /// Use version in BASIC element
     void compute_exact_Z2_error(
-      std::ostream &outfile,
+      std::ostream& outfile,
       FiniteElement::SteadyExactSolutionFctPt exact_flux_pt,
-      double &error,
-      double &norm)
+      double& error,
+      double& norm)
     {
       BASIC::compute_exact_Z2_error(outfile, exact_flux_pt, error, norm);
     }
@@ -1359,25 +1359,25 @@ namespace oomph
     }
 
     /// Overload the output function: Use that of the BASIC element
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       BASIC::output(outfile);
     }
 
     /// Output function, plotting at n_p points: Use that of the BASIC element
-    void output(std::ostream &outfile, const unsigned &n_p)
+    void output(std::ostream& outfile, const unsigned& n_p)
     {
       BASIC::output(outfile, n_p);
     }
 
     /// Overload the output function: Use that of the BASIC element
-    void output(FILE *file_pt)
+    void output(FILE* file_pt)
     {
       BASIC::output(file_pt);
     }
 
     /// Output function: Use that of the BASIC element
-    void output(FILE *file_pt, const unsigned &n_p)
+    void output(FILE* file_pt, const unsigned& n_p)
     {
       BASIC::output(file_pt, n_p);
     }
@@ -1412,7 +1412,7 @@ namespace oomph
     /// retain their DOF type numbering and the SOLID elements
     /// DOF type numbers are incremented by nbasic_dof_types().
     void get_dof_numbers_for_unknowns(
-      std::list<std::pair<unsigned long, unsigned>> &dof_lookup_list) const
+      std::list<std::pair<unsigned long, unsigned>>& dof_lookup_list) const
     {
       // get the solid list
       std::list<std::pair<unsigned long, unsigned>> solid_list;

@@ -65,7 +65,7 @@ namespace Global_Parameters
   IsotropicElasticityTensor E(Nu);
 
   /// The exact solution for infinite depth case
-  void exact_solution(const Vector<double> &x, Vector<double> &u)
+  void exact_solution(const Vector<double>& x, Vector<double>& u)
   {
     u[0] = -Amplitude * cos(2.0 * MathematicalConstants::Pi * x[0] / Lx) *
            exp(2.0 * MathematicalConstants::Pi * (x[1] - Ly)) /
@@ -76,10 +76,10 @@ namespace Global_Parameters
   }
 
   /// The traction function
-  void periodic_traction(const double &time,
-                         const Vector<double> &x,
-                         const Vector<double> &n,
-                         Vector<double> &result)
+  void periodic_traction(const double& time,
+                         const Vector<double>& x,
+                         const Vector<double>& n,
+                         Vector<double>& result)
   {
     result[0] = -Amplitude * cos(2.0 * MathematicalConstants::Pi * x[0] / Lx);
     result[1] = -Amplitude * sin(2.0 * MathematicalConstants::Pi * x[0] / Lx);
@@ -95,10 +95,10 @@ class PeriodicLoadProblem : public Problem
 public:
   /// \short Constructor: Pass number of elements in x and y directions
   /// and lengths
-  PeriodicLoadProblem(const unsigned &nx,
-                      const unsigned &ny,
-                      const double &lx,
-                      const double &ly);
+  PeriodicLoadProblem(const unsigned& nx,
+                      const unsigned& ny,
+                      const double& lx,
+                      const double& ly);
 
   /// Update before solve is empty
   void actions_before_newton_solve() {}
@@ -107,17 +107,17 @@ public:
   void actions_after_newton_solve() {}
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 private:
   /// Allocate traction elements on the top surface
   void assign_traction_elements();
 
   /// Pointer to the bulk mesh
-  Mesh *Bulk_mesh_pt;
+  Mesh* Bulk_mesh_pt;
 
   /// Pointer to the mesh of traction elements
-  Mesh *Surface_mesh_pt;
+  Mesh* Surface_mesh_pt;
 
 }; // end_of_problem_class
 
@@ -126,10 +126,10 @@ private:
 /// directions and size of domain.
 //====================================================================
 template<class ELEMENT>
-PeriodicLoadProblem<ELEMENT>::PeriodicLoadProblem(const unsigned &nx,
-                                                  const unsigned &ny,
-                                                  const double &lx,
-                                                  const double &ly)
+PeriodicLoadProblem<ELEMENT>::PeriodicLoadProblem(const unsigned& nx,
+                                                  const unsigned& ny,
+                                                  const double& lx,
+                                                  const double& ly)
 {
   // Now create the mesh with periodic boundary conditions in x direction
   bool periodic_in_x = true;
@@ -148,7 +148,7 @@ PeriodicLoadProblem<ELEMENT>::PeriodicLoadProblem(const unsigned &nx,
   for (unsigned inod = 0; inod < num_nod; inod++)
   {
     // Get pointer to node
-    Node *nod_pt = Bulk_mesh_pt->boundary_node_pt(ibound, inod);
+    Node* nod_pt = Bulk_mesh_pt->boundary_node_pt(ibound, inod);
 
     // Pinned in x & y at the bottom and set value
     nod_pt->pin(0);
@@ -185,7 +185,7 @@ PeriodicLoadProblem<ELEMENT>::PeriodicLoadProblem(const unsigned &nx,
   for (unsigned e = 0; e < n_el; e++)
   {
     // Cast to a bulk element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
     // Set the elasticity tensor
     el_pt->elasticity_tensor_pt() = &Global_Parameters::E;
@@ -196,8 +196,8 @@ PeriodicLoadProblem<ELEMENT>::PeriodicLoadProblem(const unsigned &nx,
   for (unsigned e = 0; e < n_traction; e++)
   {
     // Cast to a surface element
-    LinearElasticityTractionElement<ELEMENT> *el_pt =
-      dynamic_cast<LinearElasticityTractionElement<ELEMENT> *>(
+    LinearElasticityTractionElement<ELEMENT>* el_pt =
+      dynamic_cast<LinearElasticityTractionElement<ELEMENT>*>(
         Surface_mesh_pt->element_pt(e));
 
     // Set the applied traction
@@ -229,7 +229,7 @@ void PeriodicLoadProblem<ELEMENT>::assign_traction_elements()
   for (unsigned n = 0; n < n_neigh; n++)
   {
     // Create the face element
-    FiniteElement *traction_element_pt =
+    FiniteElement* traction_element_pt =
       new LinearElasticityTractionElement<ELEMENT>(
         Bulk_mesh_pt->boundary_element_pt(bound, n),
         Bulk_mesh_pt->face_index_at_boundary(bound, n));
@@ -244,7 +244,7 @@ void PeriodicLoadProblem<ELEMENT>::assign_traction_elements()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void PeriodicLoadProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void PeriodicLoadProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -283,7 +283,7 @@ void PeriodicLoadProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
 //===start_of_main======================================================
 /// Driver code for PeriodicLoad linearly elastic problem
 //======================================================================
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   // Number of elements in x-direction
   unsigned nx = 5;

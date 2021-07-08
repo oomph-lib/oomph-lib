@@ -69,11 +69,11 @@ private:
 public:
   /// \short Constructor, which "builds" the mesh. The arguments are the number
   /// of elements in each zone, the radius of the disc
-  CylinderMesh(const unsigned &nx1,
-               const unsigned &nx2,
-               const unsigned &ny1,
-               const unsigned &ny2,
-               const double &radius) :
+  CylinderMesh(const unsigned& nx1,
+               const unsigned& nx2,
+               const unsigned& ny1,
+               const unsigned& ny2,
+               const double& radius) :
     // Call a protected constructor of the rectangular quad mesh
     // that sets internal variables, but does not actually build the
     // mesh. The arguments are the total number of elements in the x
@@ -198,10 +198,10 @@ public:
   /// \short Constructor:
   /// Nr: Number of elements in the r (radial) direction
   /// Nz: Number of elements in the z (axial) direction
-  RotatingProblem(const unsigned &Nr1,
-                  const unsigned &Nr2,
-                  const unsigned &Nz1,
-                  const unsigned &Nz2);
+  RotatingProblem(const unsigned& Nr1,
+                  const unsigned& Nr2,
+                  const unsigned& Nz1,
+                  const unsigned& Nz2);
 
   /// Set boundary conditions on the walls
   void set_boundary_conditions();
@@ -210,9 +210,9 @@ public:
   void solve_system();
 
   /// Return a pointer to the specific mesh used
-  CylinderMesh<ELEMENT> *mesh_pt()
+  CylinderMesh<ELEMENT>* mesh_pt()
   {
-    return dynamic_cast<CylinderMesh<ELEMENT> *>(Problem::mesh_pt());
+    return dynamic_cast<CylinderMesh<ELEMENT>*>(Problem::mesh_pt());
   }
 
   /// No actions to be taken after each solve step
@@ -230,10 +230,10 @@ public:
 /// Nz2: Number of elements in the upper region in z (axial) direction
 //============================================================================
 template<class ELEMENT>
-RotatingProblem<ELEMENT>::RotatingProblem(const unsigned &Nr1,
-                                          const unsigned &Nr2,
-                                          const unsigned &Nz1,
-                                          const unsigned &Nz2) :
+RotatingProblem<ELEMENT>::RotatingProblem(const unsigned& Nr1,
+                                          const unsigned& Nr2,
+                                          const unsigned& Nz1,
+                                          const unsigned& Nz2) :
   Re(0.0) // Initialise value of Re to zero
 {
   // Now create the mesh, a generic square mesh, the boundaries of the mesh
@@ -250,7 +250,7 @@ RotatingProblem<ELEMENT>::RotatingProblem(const unsigned &Nr1,
     // Cast to the particular element type, this is necessary because
     // the base elements don't have the member functions that we're about
     // to call!
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
     // There is no need for ALE
     el_pt->disable_ALE();
@@ -286,7 +286,7 @@ RotatingProblem<ELEMENT>::RotatingProblem(const unsigned &Nr1,
   }
 
   // Pin a single pressure value
-  dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(0))->fix_pressure(0, 0.0);
+  dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(0))->fix_pressure(0, 0.0);
 
   // Setup all the equation numbering and look-up schemes
   cout << assign_eqn_numbers() << std::endl;

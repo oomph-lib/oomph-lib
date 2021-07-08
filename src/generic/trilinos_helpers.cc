@@ -41,8 +41,8 @@ namespace oomph
   /// uniformly distributed. If the oomph_vec is distributed then the
   /// Epetra_Vector returned will have the same distribution as oomph_vec.
   //=============================================================================
-  Epetra_Vector *TrilinosEpetraHelpers::create_distributed_epetra_vector(
-    const DoubleVector &oomph_vec)
+  Epetra_Vector* TrilinosEpetraHelpers::create_distributed_epetra_vector(
+    const DoubleVector& oomph_vec)
   {
 #ifdef PARANOID
     // check the the oomph lib vector is setup
@@ -56,7 +56,7 @@ namespace oomph
 #endif
 
     // create the corresponding Epetra_Map
-    LinearAlgebraDistribution *dist_pt = 0;
+    LinearAlgebraDistribution* dist_pt = 0;
     if (oomph_vec.distributed())
     {
       dist_pt = new LinearAlgebraDistribution(oomph_vec.distribution_pt());
@@ -66,7 +66,7 @@ namespace oomph
       dist_pt = new LinearAlgebraDistribution(
         oomph_vec.distribution_pt()->communicator_pt(), oomph_vec.nrow(), true);
     }
-    Epetra_Map *epetra_map_pt = create_epetra_map(dist_pt);
+    Epetra_Map* epetra_map_pt = create_epetra_map(dist_pt);
 
     // first first coefficient of the oomph vector to be inserted into the
     // Epetra_Vector
@@ -79,8 +79,8 @@ namespace oomph
     // copy the values into the oomph-lib vector
     // const_cast OK because Epetra_Vector construction is Copying values and
     // therefore does not modify data.
-    double *v_pt = const_cast<double *>(oomph_vec.values_pt());
-    Epetra_Vector *epetra_vec_pt =
+    double* v_pt = const_cast<double*>(oomph_vec.values_pt());
+    Epetra_Vector* epetra_vec_pt =
       new Epetra_Vector(Copy, *epetra_map_pt, v_pt + offset);
 
     // clean up
@@ -100,8 +100,8 @@ namespace oomph
   /// returned will have the same distribution as dist.
   /// The coefficient values are not set.
   //=============================================================================
-  Epetra_Vector *TrilinosEpetraHelpers::create_distributed_epetra_vector(
-    const LinearAlgebraDistribution *dist_pt)
+  Epetra_Vector* TrilinosEpetraHelpers::create_distributed_epetra_vector(
+    const LinearAlgebraDistribution* dist_pt)
   {
 #ifdef PARANOID
     // check the the oomph lib vector is setup
@@ -115,7 +115,7 @@ namespace oomph
 #endif
 
     // create the corresponding Epetra_Map
-    LinearAlgebraDistribution *target_dist_pt = 0;
+    LinearAlgebraDistribution* target_dist_pt = 0;
     if (dist_pt->distributed())
     {
       target_dist_pt = new LinearAlgebraDistribution(dist_pt);
@@ -125,10 +125,10 @@ namespace oomph
       target_dist_pt = new LinearAlgebraDistribution(
         dist_pt->communicator_pt(), dist_pt->nrow(), true);
     }
-    Epetra_Map *epetra_map_pt = create_epetra_map(target_dist_pt);
+    Epetra_Map* epetra_map_pt = create_epetra_map(target_dist_pt);
 
     // create epetra_vector
-    Epetra_Vector *epetra_vec_pt = new Epetra_Vector(*epetra_map_pt, false);
+    Epetra_Vector* epetra_vec_pt = new Epetra_Vector(*epetra_map_pt, false);
 
     // clean up
     delete epetra_map_pt;
@@ -146,8 +146,8 @@ namespace oomph
   /// The oomph-lib DoubleVector and the returned Epetra_Vector will have the
   /// the same distribution.
   //=============================================================================
-  Epetra_Vector *TrilinosEpetraHelpers::create_epetra_vector_view_data(
-    DoubleVector &oomph_vec)
+  Epetra_Vector* TrilinosEpetraHelpers::create_epetra_vector_view_data(
+    DoubleVector& oomph_vec)
   {
 #ifdef PARANOID
     // check the the oomph lib vector is setup
@@ -161,11 +161,11 @@ namespace oomph
 #endif
 
     // create the corresponding Epetra_Map
-    Epetra_Map *epetra_map_pt = create_epetra_map(oomph_vec.distribution_pt());
+    Epetra_Map* epetra_map_pt = create_epetra_map(oomph_vec.distribution_pt());
 
     // copy the values into the oomph-lib vector
-    double *v_pt = oomph_vec.values_pt();
-    Epetra_Vector *epetra_vec_pt =
+    double* v_pt = oomph_vec.values_pt();
+    Epetra_Vector* epetra_vec_pt =
       new Epetra_Vector(View, *epetra_map_pt, v_pt);
 
     // clean up
@@ -181,7 +181,7 @@ namespace oomph
   /// be identical
   //=============================================================================
   void TrilinosEpetraHelpers::copy_to_oomphlib_vector(
-    const Epetra_Vector *epetra_vec_pt, DoubleVector &oomph_vec)
+    const Epetra_Vector* epetra_vec_pt, DoubleVector& oomph_vec)
   {
 #ifdef PARANOID
     // check the the oomph lib vector is setup
@@ -198,7 +198,7 @@ namespace oomph
     if (oomph_vec.distributed())
     {
       // extract values from epetra_v_pt
-      double *v_values;
+      double* v_values;
       epetra_vec_pt->ExtractView(&v_values);
 
       // copy the values
@@ -222,7 +222,7 @@ namespace oomph
       else
       {
         // get the local values
-        double *local_values;
+        double* local_values;
         epetra_vec_pt->ExtractView(&local_values);
 
         // my rank
@@ -288,9 +288,9 @@ namespace oomph
   /// The LinearAlgebraDistribution argument dist_pt should specify the
   /// distribution of the object this matrix will operate on.
   //=============================================================================
-  Epetra_CrsMatrix *TrilinosEpetraHelpers::create_distributed_epetra_matrix(
-    const CRDoubleMatrix *oomph_matrix_pt,
-    const LinearAlgebraDistribution *dist_pt)
+  Epetra_CrsMatrix* TrilinosEpetraHelpers::create_distributed_epetra_matrix(
+    const CRDoubleMatrix* oomph_matrix_pt,
+    const LinearAlgebraDistribution* dist_pt)
   {
 #ifdef PARANOID
     if (!oomph_matrix_pt->built())
@@ -319,12 +319,12 @@ namespace oomph
     // get pointers to the matrix values, column indices etc
     // const_cast is safe because we use the Epetra_Vector "Copy" construction
     // method
-    int *column = const_cast<int *>(oomph_matrix_pt->column_index());
-    double *value = const_cast<double *>(oomph_matrix_pt->value());
-    int *row_start = const_cast<int *>(oomph_matrix_pt->row_start());
+    int* column = const_cast<int*>(oomph_matrix_pt->column_index());
+    double* value = const_cast<double*>(oomph_matrix_pt->value());
+    int* row_start = const_cast<int*>(oomph_matrix_pt->row_start());
 
     // create the corresponding Epetra_Map
-    LinearAlgebraDistribution *target_dist_pt = 0;
+    LinearAlgebraDistribution* target_dist_pt = 0;
     if (oomph_matrix_pt->distributed())
     {
       target_dist_pt =
@@ -337,7 +337,7 @@ namespace oomph
         oomph_matrix_pt->nrow(),
         true);
     }
-    Epetra_Map *epetra_map_pt = create_epetra_map(target_dist_pt);
+    Epetra_Map* epetra_map_pt = create_epetra_map(target_dist_pt);
 
     // first first coefficient of the oomph vector to be inserted into the
     // Epetra_Vector
@@ -352,14 +352,14 @@ namespace oomph
     unsigned first_row = target_dist_pt->first_row();
 
     // store the number of non zero entries per row
-    int *nnz_per_row = new int[nrow_local];
+    int* nnz_per_row = new int[nrow_local];
     for (unsigned row = 0; row < nrow_local; row++)
     {
       nnz_per_row[row] = row_start[row + offset + 1] - row_start[offset + row];
     }
 
     // create the matrix
-    Epetra_CrsMatrix *epetra_matrix_pt =
+    Epetra_CrsMatrix* epetra_matrix_pt =
       new Epetra_CrsMatrix(Copy, *epetra_map_pt, nnz_per_row, true);
 
     // insert the values
@@ -387,7 +387,7 @@ namespace oomph
     }
 
     // complete the build of the trilinos matrix
-    LinearAlgebraDistribution *target_col_dist_pt = 0;
+    LinearAlgebraDistribution* target_col_dist_pt = 0;
     if (dist_pt->distributed())
     {
       target_col_dist_pt = new LinearAlgebraDistribution(dist_pt);
@@ -397,7 +397,7 @@ namespace oomph
       target_col_dist_pt = new LinearAlgebraDistribution(
         dist_pt->communicator_pt(), dist_pt->nrow(), true);
     }
-    Epetra_Map *epetra_domain_map_pt = create_epetra_map(target_col_dist_pt);
+    Epetra_Map* epetra_domain_map_pt = create_epetra_map(target_col_dist_pt);
 #ifdef PARANOID
     int err = 0;
     err =
@@ -432,14 +432,14 @@ namespace oomph
   {
   public:
     /// Constructor: Pass number of first column and the number of local columns
-    DistributionPredicate(const int &first_col, const int &ncol_local) :
+    DistributionPredicate(const int& first_col, const int& ncol_local) :
       First_col(first_col), Last_col(first_col + ncol_local - 1)
     {
     }
 
     /// \short Comparison operator: is column col in the range
     /// between (including) First_col and Last_col
-    bool operator()(const int &col)
+    bool operator()(const int& col)
     {
       if (col >= First_col && col <= Last_col)
       {
@@ -470,9 +470,9 @@ namespace oomph
   /// For AztecOO, the column map is ordered such that the local rows are
   /// first.
   //=============================================================================
-  Epetra_CrsMatrix *TrilinosEpetraHelpers::
+  Epetra_CrsMatrix* TrilinosEpetraHelpers::
     create_distributed_epetra_matrix_for_aztecoo(
-      CRDoubleMatrix *oomph_matrix_pt)
+      CRDoubleMatrix* oomph_matrix_pt)
   {
 #ifdef PARANOID
     if (!oomph_matrix_pt->built())
@@ -487,12 +487,12 @@ namespace oomph
     // get pointers to the matrix values, column indices etc
     // const_cast is safe because we use the Epetra_Vector "Copy" construction
     // method
-    int *column = const_cast<int *>(oomph_matrix_pt->column_index());
-    double *value = const_cast<double *>(oomph_matrix_pt->value());
-    int *row_start = const_cast<int *>(oomph_matrix_pt->row_start());
+    int* column = const_cast<int*>(oomph_matrix_pt->column_index());
+    double* value = const_cast<double*>(oomph_matrix_pt->value());
+    int* row_start = const_cast<int*>(oomph_matrix_pt->row_start());
 
     // create the corresponding Epetra_Map
-    LinearAlgebraDistribution *target_dist_pt = 0;
+    LinearAlgebraDistribution* target_dist_pt = 0;
     if (oomph_matrix_pt->distributed())
     {
       target_dist_pt =
@@ -505,7 +505,7 @@ namespace oomph
         oomph_matrix_pt->nrow(),
         true);
     }
-    Epetra_Map *epetra_map_pt = create_epetra_map(target_dist_pt);
+    Epetra_Map* epetra_map_pt = create_epetra_map(target_dist_pt);
 
     // create the epetra column map
 
@@ -514,7 +514,7 @@ namespace oomph
     int ncol_local = oomph_matrix_pt->nrow_local();
 
     // Build colum map
-    Epetra_Map *epetra_col_map_pt = 0;
+    Epetra_Map* epetra_col_map_pt = 0;
     {
       // Vector of column indices; on processor goes first
       std::vector<int> col_index_vector;
@@ -562,7 +562,7 @@ namespace oomph
 #else
 
     int ncol = oomph_matrix_pt->ncol();
-    Epetra_Map *epetra_col_map_pt =
+    Epetra_Map* epetra_col_map_pt =
       new Epetra_LocalMap(ncol, 0, Epetra_SerialComm());
 
 #endif
@@ -580,14 +580,14 @@ namespace oomph
     unsigned first_row = target_dist_pt->first_row();
 
     // store the number of non zero entries per row
-    int *nnz_per_row = new int[nrow_local];
+    int* nnz_per_row = new int[nrow_local];
     for (unsigned row = 0; row < nrow_local; ++row)
     {
       nnz_per_row[row] = row_start[row + offset + 1] - row_start[offset + row];
     }
 
     // create the matrix
-    Epetra_CrsMatrix *epetra_matrix_pt = new Epetra_CrsMatrix(
+    Epetra_CrsMatrix* epetra_matrix_pt = new Epetra_CrsMatrix(
       Copy, *epetra_map_pt, *epetra_col_map_pt, nnz_per_row, true);
 
     // insert the values
@@ -652,9 +652,9 @@ namespace oomph
   /// as the matrix, unless a distribution is predefined in the solution
   /// vector in which case the vector will be returned with that distribution.
   //============================================================================
-  void TrilinosEpetraHelpers::multiply(const CRDoubleMatrix *oomph_matrix_pt,
-                                       const DoubleVector &oomph_x,
-                                       DoubleVector &oomph_y)
+  void TrilinosEpetraHelpers::multiply(const CRDoubleMatrix* oomph_matrix_pt,
+                                       const DoubleVector& oomph_x,
+                                       DoubleVector& oomph_y)
   {
 #ifdef PARANOID
     // check that this matrix is built
@@ -699,15 +699,15 @@ namespace oomph
     }
 
     // convert matrix1 to epetra matrix
-    Epetra_CrsMatrix *epetra_matrix_pt = create_distributed_epetra_matrix(
+    Epetra_CrsMatrix* epetra_matrix_pt = create_distributed_epetra_matrix(
       oomph_matrix_pt, oomph_x.distribution_pt());
 
     // convert x to Trilinos vector
-    Epetra_Vector *epetra_x_pt = create_distributed_epetra_vector(oomph_x);
+    Epetra_Vector* epetra_x_pt = create_distributed_epetra_vector(oomph_x);
 
     // create Trilinos vector for soln ( 'viewing' the contents of the oomph-lib
     // matrix)
-    Epetra_Vector *epetra_y_pt = create_distributed_epetra_vector(oomph_y);
+    Epetra_Vector* epetra_y_pt = create_distributed_epetra_vector(oomph_y);
 
     // do the multiply
 #ifdef PARANOID
@@ -748,10 +748,10 @@ namespace oomph
   /// same distribution as matrix1
   /// \b NOTE 3. All matrices must share the same communicator.
   //=============================================================================
-  void TrilinosEpetraHelpers::multiply(const CRDoubleMatrix &matrix_1,
-                                       const CRDoubleMatrix &matrix_2,
-                                       CRDoubleMatrix &matrix_soln,
-                                       const bool &use_ml)
+  void TrilinosEpetraHelpers::multiply(const CRDoubleMatrix& matrix_1,
+                                       const CRDoubleMatrix& matrix_2,
+                                       CRDoubleMatrix& matrix_soln,
+                                       const bool& use_ml)
   {
 #ifdef PARANOID
     // check that matrix 1 is built
@@ -828,18 +828,18 @@ namespace oomph
     }
 
     // create matrix 1
-    Epetra_CrsMatrix *epetra_matrix_1_pt =
+    Epetra_CrsMatrix* epetra_matrix_1_pt =
       create_distributed_epetra_matrix(&matrix_1, matrix_2.distribution_pt());
 
     // create matrix 2
     LinearAlgebraDistribution matrix_2_column_dist(
       matrix_2.distribution_pt()->communicator_pt(), matrix_2.ncol(), true);
-    Epetra_CrsMatrix *epetra_matrix_2_pt =
+    Epetra_CrsMatrix* epetra_matrix_2_pt =
       create_distributed_epetra_matrix(&matrix_2, &matrix_2_column_dist);
 
     // create the Trilinos epetra matrix to hold solution - will have same map
     // (and number of rows) as matrix_1
-    Epetra_CrsMatrix *solution_pt;
+    Epetra_CrsMatrix* solution_pt;
 
     // do the multiplication
     // ---------------------
@@ -937,9 +937,9 @@ namespace oomph
 #endif
 
     // extract values from Epetra matrix row by row
-    double *value = new double[nnz_local];
-    int *column_index = new int[nnz_local];
-    int *row_start = new int[nrow_local + 1];
+    double* value = new double[nnz_local];
+    int* column_index = new int[nnz_local];
+    int* row_start = new int[nrow_local + 1];
     int ptr = 0;
     int num_entries = 0;
     int first = matrix_soln.first_row();
@@ -970,20 +970,20 @@ namespace oomph
   //=============================================================================
   /// create an Epetra_Map corresponding to the LinearAlgebraDistribution
   //=============================================================================
-  Epetra_Map *TrilinosEpetraHelpers::create_epetra_map(
-    const LinearAlgebraDistribution *const dist_pt)
+  Epetra_Map* TrilinosEpetraHelpers::create_epetra_map(
+    const LinearAlgebraDistribution* const dist_pt)
   {
 #ifdef OOMPH_HAS_MPI
     if (dist_pt->distributed())
     {
       unsigned first_row = dist_pt->first_row();
       unsigned nrow_local = dist_pt->nrow_local();
-      int *my_global_rows = new int[nrow_local];
+      int* my_global_rows = new int[nrow_local];
       for (unsigned i = 0; i < nrow_local; ++i)
       {
         my_global_rows[i] = first_row + i;
       }
-      Epetra_Map *epetra_map_pt =
+      Epetra_Map* epetra_map_pt =
         new Epetra_Map(dist_pt->nrow(),
                        nrow_local,
                        my_global_rows,

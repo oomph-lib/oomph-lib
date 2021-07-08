@@ -49,9 +49,9 @@ namespace oomph
     /// \short Constructor: Pass pointer to GeomObject that represents the
     /// (upper) curved boundary of the fish's body, and the start and end values
     /// of the Lagrangian coordinates along the GeomObject.
-    FishDomain(GeomObject *back_pt,
-               const double &xi_nose,
-               const double &xi_tail) :
+    FishDomain(GeomObject* back_pt,
+               const double& xi_nose,
+               const double& xi_tail) :
       Xi_nose(xi_nose), Xi_tail(xi_tail), Back_pt(back_pt)
     {
       // Set values for private data members that are describe
@@ -73,13 +73,13 @@ namespace oomph
     } // end of constructor
 
     /// Broken copy constructor
-    FishDomain(const FishDomain &)
+    FishDomain(const FishDomain&)
     {
       BrokenCopy::broken_copy("FishDomain");
     }
 
     /// Broken assignment operator
-    void operator=(const FishDomain &)
+    void operator=(const FishDomain&)
     {
       BrokenCopy::broken_assign("FishDomain");
     }
@@ -91,31 +91,31 @@ namespace oomph
     }
 
     /// x-position of fin tip
-    double &x_fin()
+    double& x_fin()
     {
       return X_fin;
     }
 
     /// y-position of fin tip
-    double &y_fin()
+    double& y_fin()
     {
       return Y_fin;
     }
 
     /// x-position of mouth
-    double &x_mouth()
+    double& x_mouth()
     {
       return X_mouth;
     }
 
     /// Start coordinate on wall (near nose)
-    double &xi_nose()
+    double& xi_nose()
     {
       return Xi_nose;
     }
 
     /// End coordinate on wall (near tail)
-    double &xi_tail()
+    double& xi_tail()
     {
       return Xi_tail;
     }
@@ -127,11 +127,11 @@ namespace oomph
     /// Vector rather than a scalar -- this is unavoidable because
     /// this function implements the pure virtual function in the
     /// Domain base class.
-    void macro_element_boundary(const unsigned &t,
-                                const unsigned &i_macro,
-                                const unsigned &i_direct,
-                                const Vector<double> &zeta,
-                                Vector<double> &r);
+    void macro_element_boundary(const unsigned& t,
+                                const unsigned& i_macro,
+                                const unsigned& i_direct,
+                                const Vector<double>& zeta,
+                                Vector<double>& r);
 
   private:
     /// "Nose" limit for the (1D) coordinates along the wall
@@ -150,52 +150,52 @@ namespace oomph
     double X_mouth;
 
     /// Pointer to the fish's back
-    GeomObject *Back_pt;
+    GeomObject* Back_pt;
 
     /// \short Boundary of upper body macro element zeta \f$ \in [-1,1] \f$
-    void r_upper_body_N(const unsigned &t,
-                        const Vector<double> &zeta,
-                        Vector<double> &f);
+    void r_upper_body_N(const unsigned& t,
+                        const Vector<double>& zeta,
+                        Vector<double>& f);
 
     /// \short Boundary of upper body macro element zeta \f$ \in [-1,1] \f$
-    void r_upper_body_W(const unsigned &t,
-                        const Vector<double> &zeta,
-                        Vector<double> &f);
+    void r_upper_body_W(const unsigned& t,
+                        const Vector<double>& zeta,
+                        Vector<double>& f);
 
     /// \short Boundary of upper body macro element zeta \f$ \in [-1,1] \f$
-    void r_upper_body_S(const unsigned &t,
-                        const Vector<double> &zeta,
-                        Vector<double> &f);
+    void r_upper_body_S(const unsigned& t,
+                        const Vector<double>& zeta,
+                        Vector<double>& f);
 
     /// \short Boundary of upper body macro element zeta \f$ \in [-1,1] \f$
-    void r_upper_body_E(const unsigned &t,
-                        const Vector<double> &zeta,
-                        Vector<double> &f);
+    void r_upper_body_E(const unsigned& t,
+                        const Vector<double>& zeta,
+                        Vector<double>& f);
 
     /// \short Boundary of upper fin macro element zeta \f$ \in [-1,1] \f$
-    void r_upper_fin_N(const unsigned &t,
-                       const Vector<double> &zeta,
-                       Vector<double> &f);
+    void r_upper_fin_N(const unsigned& t,
+                       const Vector<double>& zeta,
+                       Vector<double>& f);
 
     /// \short Boundary of upper fin macro element zeta \f$ \in [-1,1] \f$
-    void r_upper_fin_W(const unsigned &t,
-                       const Vector<double> &zeta,
-                       Vector<double> &f);
+    void r_upper_fin_W(const unsigned& t,
+                       const Vector<double>& zeta,
+                       Vector<double>& f);
 
     /// \short Boundary of upper fin macro element zeta \f$ \in [-1,1] \f$
-    void r_upper_fin_S(const unsigned &t,
-                       const Vector<double> &zeta,
-                       Vector<double> &f);
+    void r_upper_fin_S(const unsigned& t,
+                       const Vector<double>& zeta,
+                       Vector<double>& f);
 
     /// \short Boundary of upper fin macro element zeta \f$ \in [-1,1] \f$
-    void r_upper_fin_E(const unsigned &t,
-                       const Vector<double> &zeta,
-                       Vector<double> &f);
+    void r_upper_fin_E(const unsigned& t,
+                       const Vector<double>& zeta,
+                       Vector<double>& f);
 
     /// \short Boundary of lower body macro element zeta \f$ \in [-1,1] \f$
-    void r_lower_body_N(const unsigned &t,
-                        const Vector<double> &zeta,
-                        Vector<double> &f)
+    void r_lower_body_N(const unsigned& t,
+                        const Vector<double>& zeta,
+                        Vector<double>& f)
     {
       // North of lower body is element is south of upper one.
       // Direction of the coordinate stays the same.
@@ -205,9 +205,9 @@ namespace oomph
     }
 
     /// \short Boundary of lower body macro element zeta \f$ \in [-1,1] \f$
-    void r_lower_body_W(const unsigned &t,
-                        const Vector<double> &zeta,
-                        Vector<double> &f)
+    void r_lower_body_W(const unsigned& t,
+                        const Vector<double>& zeta,
+                        Vector<double>& f)
     {
       // West of lower body is element is west of upper one.
       // Direction of the coordinate is inverted
@@ -220,9 +220,9 @@ namespace oomph
 
     ///\short Southern boundary of lower body macro element zeta \f$\in [-1,1]
     ///\f$
-    void r_lower_body_S(const unsigned &t,
-                        const Vector<double> &zeta,
-                        Vector<double> &f)
+    void r_lower_body_S(const unsigned& t,
+                        const Vector<double>& zeta,
+                        Vector<double>& f)
     {
       // South of lower body is element is north of upper one.
       // Direction of the coordinate stays the same.
@@ -232,9 +232,9 @@ namespace oomph
     }
 
     /// \short Boundary of lower body macro element zeta \f$ \in [-1,1] \f$
-    void r_lower_body_E(const unsigned &t,
-                        const Vector<double> &zeta,
-                        Vector<double> &f)
+    void r_lower_body_E(const unsigned& t,
+                        const Vector<double>& zeta,
+                        Vector<double>& f)
     {
       // East of lower body is element is east of upper one.
       // Direction of the coordinate is inverted.
@@ -246,9 +246,9 @@ namespace oomph
     }
 
     /// \short Boundary of lower fin macro element zeta \f$ \in [-1,1] \f$
-    void r_lower_fin_N(const unsigned &t,
-                       const Vector<double> &zeta,
-                       Vector<double> &f)
+    void r_lower_fin_N(const unsigned& t,
+                       const Vector<double>& zeta,
+                       Vector<double>& f)
     {
       // North of lower fin is element is south of upper one.
       // Direction of the coordinate stays the same.
@@ -258,9 +258,9 @@ namespace oomph
     }
 
     /// \short Boundary of lower fin macro element zeta \f$ \in [-1,1] \f$
-    void r_lower_fin_W(const unsigned &t,
-                       const Vector<double> &zeta,
-                       Vector<double> &f)
+    void r_lower_fin_W(const unsigned& t,
+                       const Vector<double>& zeta,
+                       Vector<double>& f)
     {
       // West of lower fin is element is west of upper one.
       // Direction of the coordinate is inverted
@@ -272,9 +272,9 @@ namespace oomph
     }
 
     /// \short Boundary of lower fin macro element zeta \f$ \in [-1,1] \f$
-    void r_lower_fin_S(const unsigned &t,
-                       const Vector<double> &zeta,
-                       Vector<double> &f)
+    void r_lower_fin_S(const unsigned& t,
+                       const Vector<double>& zeta,
+                       Vector<double>& f)
     {
       // South of lower fin is element is north of upper one.
       // Direction of the coordinate stays the same.
@@ -284,9 +284,9 @@ namespace oomph
     }
 
     /// \short Boundary of lower fin macro element zeta \f$ \in [-1,1] \f$
-    void r_lower_fin_E(const unsigned &t,
-                       const Vector<double> &zeta,
-                       Vector<double> &f)
+    void r_lower_fin_E(const unsigned& t,
+                       const Vector<double>& zeta,
+                       Vector<double>& f)
     {
       // East of lower fin is element is east of upper one.
       // Direction of the coordinate is inverted.
@@ -311,11 +311,11 @@ namespace oomph
   /// this function implements the pure virtual function in the
   /// Domain base class.
   //=================================================================
-  void FishDomain::macro_element_boundary(const unsigned &t,
-                                          const unsigned &imacro,
-                                          const unsigned &idirect,
-                                          const Vector<double> &zeta,
-                                          Vector<double> &r)
+  void FishDomain::macro_element_boundary(const unsigned& t,
+                                          const unsigned& imacro,
+                                          const unsigned& idirect,
+                                          const Vector<double>& zeta,
+                                          Vector<double>& r)
   {
     using namespace QuadTreeNames;
 
@@ -478,9 +478,9 @@ namespace oomph
   //=================================================================
   /// Northern edge of upper fin macro element; \f$ \zeta \in [-1,1] \f$
   //=================================================================
-  void FishDomain::r_upper_fin_N(const unsigned &t,
-                                 const Vector<double> &zeta,
-                                 Vector<double> &r)
+  void FishDomain::r_upper_fin_N(const unsigned& t,
+                                 const Vector<double>& zeta,
+                                 Vector<double>& r)
   {
     // Right end of fish back
     Vector<double> x(1);
@@ -501,9 +501,9 @@ namespace oomph
   //=================================================================
   /// Western edge of upper fin macro element; \f$ \zeta \in [-1,1] \f$
   //=================================================================
-  void FishDomain::r_upper_fin_W(const unsigned &t,
-                                 const Vector<double> &zeta,
-                                 Vector<double> &r)
+  void FishDomain::r_upper_fin_W(const unsigned& t,
+                                 const Vector<double>& zeta,
+                                 Vector<double>& r)
   {
     // Right end of fish back
     Vector<double> x(1);
@@ -518,9 +518,9 @@ namespace oomph
   //=================================================================
   /// Southern edge of upper fin macro element; \f$ \zeta \in [-1,1] \f$
   //=================================================================
-  void FishDomain::r_upper_fin_S(const unsigned &t,
-                                 const Vector<double> &zeta,
-                                 Vector<double> &r)
+  void FishDomain::r_upper_fin_S(const unsigned& t,
+                                 const Vector<double>& zeta,
+                                 Vector<double>& r)
   {
     // Right end of fish back
     Vector<double> x(1);
@@ -535,9 +535,9 @@ namespace oomph
   //=================================================================
   /// Eastern edge of upper fin macro element; \f$ \zeta \in [-1,1] \f$
   //=================================================================
-  void FishDomain::r_upper_fin_E(const unsigned &t,
-                                 const Vector<double> &zeta,
-                                 Vector<double> &r)
+  void FishDomain::r_upper_fin_E(const unsigned& t,
+                                 const Vector<double>& zeta,
+                                 Vector<double>& r)
   {
     // Straight vertical line from top of fin
     r[0] = X_fin;
@@ -547,9 +547,9 @@ namespace oomph
   //===============start_of_r_upper_body_N==============================
   /// Northern edge of upper body macro element; \f$ \zeta \in [-1,1] \f$
   //=====================================================================
-  void FishDomain::r_upper_body_N(const unsigned &t,
-                                  const Vector<double> &zeta,
-                                  Vector<double> &r)
+  void FishDomain::r_upper_body_N(const unsigned& t,
+                                  const Vector<double>& zeta,
+                                  Vector<double>& r)
   {
     // Lagrangian coordinate along curved "back"
     Vector<double> x(1);
@@ -563,9 +563,9 @@ namespace oomph
   //================start_of_r_upper_body_E=============================
   /// Eastern edge of upper body macro element; \f$ \zeta \in [-1,1] \f$
   //=====================================================================
-  void FishDomain::r_upper_body_E(const unsigned &t,
-                                  const Vector<double> &zeta,
-                                  Vector<double> &r)
+  void FishDomain::r_upper_body_E(const unsigned& t,
+                                  const Vector<double>& zeta,
+                                  Vector<double>& r)
   {
     // Top right corner (tail end) of body
     Vector<double> r_top(2);
@@ -586,9 +586,9 @@ namespace oomph
   //==================start_of_r_upper_body_S============================
   /// Southern edge of upper body macro element; \f$ \zeta \in [-1,1] \f$
   //=====================================================================
-  void FishDomain::r_upper_body_S(const unsigned &t,
-                                  const Vector<double> &zeta,
-                                  Vector<double> &r)
+  void FishDomain::r_upper_body_S(const unsigned& t,
+                                  const Vector<double>& zeta,
+                                  Vector<double>& r)
   {
     // Top right (tail) corner of fish body
     Vector<double> r_top(2);
@@ -605,9 +605,9 @@ namespace oomph
   //===============start_of_r_upper_body_W==============================
   /// Western edge of upper body macro element; \f$ \zeta \in [-1,1] \f$
   //====================================================================
-  void FishDomain::r_upper_body_W(const unsigned &t,
-                                  const Vector<double> &zeta,
-                                  Vector<double> &r)
+  void FishDomain::r_upper_body_W(const unsigned& t,
+                                  const Vector<double>& zeta,
+                                  Vector<double>& r)
   {
     // Top left (mouth) corner of curved boundary of upper body
     Vector<double> r_top(2);

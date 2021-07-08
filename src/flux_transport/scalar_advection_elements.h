@@ -51,8 +51,8 @@ namespace oomph
   class ScalarAdvectionEquations : public FluxTransportEquations<DIM>
   {
     /// \short Typedef for a wind function as a possible function of position
-    typedef void (*ScalarAdvectionWindFctPt)(const Vector<double> &x,
-                                             Vector<double> &wind);
+    typedef void (*ScalarAdvectionWindFctPt)(const Vector<double>& x,
+                                             Vector<double>& wind);
 
     /// \short Function pointer to the wind function
     ScalarAdvectionWindFctPt Wind_fct_pt;
@@ -65,16 +65,16 @@ namespace oomph
     }
 
     /// \short Return the flux as a function of the unknown
-    void flux(const Vector<double> &u, DenseMatrix<double> &f);
+    void flux(const Vector<double>& u, DenseMatrix<double>& f);
 
     /// \short Return the flux derivatives as a function of the unknowns
-    void dflux_du(const Vector<double> &u, RankThreeTensor<double> &df_du);
+    void dflux_du(const Vector<double>& u, RankThreeTensor<double>& df_du);
 
     ///\short Return the wind at a given position
-    inline virtual void get_wind_scalar_adv(const unsigned &ipt,
-                                            const Vector<double> &s,
-                                            const Vector<double> &x,
-                                            Vector<double> &wind) const
+    inline virtual void get_wind_scalar_adv(const unsigned& ipt,
+                                            const Vector<double>& s,
+                                            const Vector<double>& x,
+                                            Vector<double>& wind) const
     {
       // If no wind function has been set, return zero
       if (Wind_fct_pt == 0)
@@ -98,7 +98,7 @@ namespace oomph
     }
 
     /// Access function: Pointer to wind function
-    ScalarAdvectionWindFctPt &wind_fct_pt()
+    ScalarAdvectionWindFctPt& wind_fct_pt()
     {
       return Wind_fct_pt;
     }
@@ -110,7 +110,7 @@ namespace oomph
     }
 
     ///\short The number of unknowns at each node is the number of values
-    unsigned required_nvalue(const unsigned &n) const
+    unsigned required_nvalue(const unsigned& n) const
     {
       return 1;
     }
@@ -118,11 +118,11 @@ namespace oomph
     /// Compute the error and norm of solution integrated over the element
     /// Does not plot the error in the outfile
     void compute_error(
-      std::ostream &outfile,
+      std::ostream& outfile,
       FiniteElement::UnsteadyExactSolutionFctPt initial_condition_pt,
-      const double &t,
-      Vector<double> &error,
-      Vector<double> &norm)
+      const double& t,
+      Vector<double>& error,
+      Vector<double>& norm)
     {
       // Find the number of fluxes
       const unsigned n_flux = this->nflux();
@@ -214,7 +214,7 @@ namespace oomph
 
     /// Broken copy constructor
     QSpectralScalarAdvectionElement(
-      const QSpectralScalarAdvectionElement<DIM, NNODE_1D> &dummy)
+      const QSpectralScalarAdvectionElement<DIM, NNODE_1D>& dummy)
     {
       BrokenCopy::broken_copy("QSpectralScalarAdvectionElement");
     }
@@ -233,21 +233,21 @@ namespace oomph
 
     /// \short  Required  # of `values' (pinned or dofs)
     /// at node n
-    inline unsigned required_nvalue(const unsigned &n) const
+    inline unsigned required_nvalue(const unsigned& n) const
     {
       return 1;
     }
 
     /// \short Output function:
     ///  x,y,u   or    x,y,z,u
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       ScalarAdvectionEquations<DIM>::output(outfile);
     }
 
     /// \short Output function:
     ///  x,y,u   or    x,y,z,u at n_plot^DIM plot points
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       ScalarAdvectionEquations<DIM>::output(outfile, n_plot);
     }
@@ -292,20 +292,20 @@ namespace oomph
     /// Shape, test functions & derivs. w.r.t. to global coords. Return
     /// Jacobian.
     inline double dshape_and_dtest_eulerian_flux_transport(
-      const Vector<double> &s,
-      Shape &psi,
-      DShape &dpsidx,
-      Shape &test,
-      DShape &dtestdx) const;
+      const Vector<double>& s,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const;
 
     /// \short Shape, test functions & derivs. w.r.t. to global coords. at
     /// integration point ipt. Return Jacobian.
     inline double dshape_and_dtest_eulerian_at_knot_flux_transport(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidx,
-      Shape &test,
-      DShape &dtestdx) const;
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const;
   };
 
   // Inline functions:
@@ -318,11 +318,11 @@ namespace oomph
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
   double QSpectralScalarAdvectionElement<DIM, NNODE_1D>::
-    dshape_and_dtest_eulerian_flux_transport(const Vector<double> &s,
-                                             Shape &psi,
-                                             DShape &dpsidx,
-                                             Shape &test,
-                                             DShape &dtestdx) const
+    dshape_and_dtest_eulerian_flux_transport(const Vector<double>& s,
+                                             Shape& psi,
+                                             DShape& dpsidx,
+                                             Shape& test,
+                                             DShape& dtestdx) const
   {
     // Call the geometrical shape functions and derivatives
     double J = this->dshape_eulerian(s, psi, dpsidx);
@@ -350,11 +350,11 @@ namespace oomph
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
   double QSpectralScalarAdvectionElement<DIM, NNODE_1D>::
-    dshape_and_dtest_eulerian_at_knot_flux_transport(const unsigned &ipt,
-                                                     Shape &psi,
-                                                     DShape &dpsidx,
-                                                     Shape &test,
-                                                     DShape &dtestdx) const
+    dshape_and_dtest_eulerian_at_knot_flux_transport(const unsigned& ipt,
+                                                     Shape& psi,
+                                                     DShape& dpsidx,
+                                                     Shape& test,
+                                                     DShape& dtestdx) const
   {
     // Call the geometrical shape functions and derivatives
     double J = this->dshape_eulerian_at_knot(ipt, psi, dpsidx);
@@ -397,8 +397,8 @@ namespace oomph
   {
   public:
     /// Constructor
-    DGScalarAdvectionFaceElement(FiniteElement *const &element_pt,
-                                 const int &face_index) :
+    DGScalarAdvectionFaceElement(FiniteElement* const& element_pt,
+                                 const int& face_index) :
       FaceGeometry<ELEMENT>(), DGFaceElement()
     {
       // Attach geometric information to the element
@@ -415,17 +415,17 @@ namespace oomph
 
     /// Calculate the normal flux, so this is the dot product of the
     /// numerical flux with n_in
-    void numerical_flux(const Vector<double> &n_out,
-                        const Vector<double> &u_int,
-                        const Vector<double> &u_ext,
-                        Vector<double> &flux)
+    void numerical_flux(const Vector<double>& n_out,
+                        const Vector<double>& u_int,
+                        const Vector<double>& u_ext,
+                        Vector<double>& flux)
     {
       const unsigned dim = this->nodal_dimension();
       Vector<double> Wind(dim);
       Vector<double> s, x;
       // Dummy integration point
       unsigned ipt = 0;
-      dynamic_cast<ELEMENT *>(this->bulk_element_pt())
+      dynamic_cast<ELEMENT*>(this->bulk_element_pt())
         ->get_wind_scalar_adv(ipt, s, x, Wind);
 
       // Now we can work this out for standard upwind advection
@@ -484,7 +484,7 @@ namespace oomph
     }
 
     // Calculate averages
-    void calculate_element_averages(double *&average_value)
+    void calculate_element_averages(double*& average_value)
     {
       FluxTransportEquations<1>::calculate_element_averages(average_value);
     }
@@ -512,9 +512,9 @@ namespace oomph
     ///\short Compute the residuals for the Navier--Stokes equations;
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void fill_in_generic_residual_contribution_flux_transport(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix,
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
       unsigned flag)
     {
       QSpectralScalarAdvectionElement<1, NNODE_1D>::
@@ -530,7 +530,7 @@ namespace oomph
     /// overloaded specific elements in which time and memory saving tricks can
     /// be applied)
     //============================================================================
-    void get_inverse_mass_matrix_times_residuals(Vector<double> &minv_res)
+    void get_inverse_mass_matrix_times_residuals(Vector<double>& minv_res)
     {
       // If there are external data this is not going to work
       if (nexternal_data() > 0)
@@ -612,7 +612,7 @@ namespace oomph
 
   public:
     // Calculate averages
-    void calculate_element_averages(double *&average_value)
+    void calculate_element_averages(double*& average_value)
     {
       FluxTransportEquations<2>::calculate_element_averages(average_value);
     }
@@ -647,9 +647,9 @@ namespace oomph
     ///\short Compute the residuals for the Navier--Stokes equations;
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void fill_in_generic_residual_contribution_flux_transport(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix,
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
       unsigned flag)
     {
       QSpectralScalarAdvectionElement<2, NNODE_1D>::
@@ -688,7 +688,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    QScalarAdvectionElement(const QScalarAdvectionElement<DIM, NNODE_1D> &dummy)
+    QScalarAdvectionElement(const QScalarAdvectionElement<DIM, NNODE_1D>& dummy)
     {
       BrokenCopy::broken_copy("QScalarAdvectionElement");
     }
@@ -702,21 +702,21 @@ namespace oomph
 
     /// \short  Required  # of `values' (pinned or dofs)
     /// at node n
-    inline unsigned required_nvalue(const unsigned &n) const
+    inline unsigned required_nvalue(const unsigned& n) const
     {
       return 1;
     }
 
     /// \short Output function:
     ///  x,y,u   or    x,y,z,u
-    void output(std::ostream &outfile)
+    void output(std::ostream& outfile)
     {
       ScalarAdvectionEquations<DIM>::output(outfile);
     }
 
     /// \short Output function:
     ///  x,y,u   or    x,y,z,u at n_plot^DIM plot points
-    void output(std::ostream &outfile, const unsigned &n_plot)
+    void output(std::ostream& outfile, const unsigned& n_plot)
     {
       ScalarAdvectionEquations<DIM>::output(outfile, n_plot);
     }
@@ -761,20 +761,20 @@ namespace oomph
     /// Shape, test functions & derivs. w.r.t. to global coords. Return
     /// Jacobian.
     inline double dshape_and_dtest_eulerian_flux_transport(
-      const Vector<double> &s,
-      Shape &psi,
-      DShape &dpsidx,
-      Shape &test,
-      DShape &dtestdx) const;
+      const Vector<double>& s,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const;
 
     /// \short Shape, test functions & derivs. w.r.t. to global coords. at
     /// integration point ipt. Return Jacobian.
     inline double dshape_and_dtest_eulerian_at_knot_flux_transport(
-      const unsigned &ipt,
-      Shape &psi,
-      DShape &dpsidx,
-      Shape &test,
-      DShape &dtestdx) const;
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const;
   };
 
   // Inline functions:
@@ -787,11 +787,11 @@ namespace oomph
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
   double QScalarAdvectionElement<DIM, NNODE_1D>::
-    dshape_and_dtest_eulerian_flux_transport(const Vector<double> &s,
-                                             Shape &psi,
-                                             DShape &dpsidx,
-                                             Shape &test,
-                                             DShape &dtestdx) const
+    dshape_and_dtest_eulerian_flux_transport(const Vector<double>& s,
+                                             Shape& psi,
+                                             DShape& dpsidx,
+                                             Shape& test,
+                                             DShape& dtestdx) const
   {
     // Call the geometrical shape functions and derivatives
     double J = this->dshape_eulerian(s, psi, dpsidx);
@@ -819,11 +819,11 @@ namespace oomph
   //======================================================================
   template<unsigned DIM, unsigned NNODE_1D>
   double QScalarAdvectionElement<DIM, NNODE_1D>::
-    dshape_and_dtest_eulerian_at_knot_flux_transport(const unsigned &ipt,
-                                                     Shape &psi,
-                                                     DShape &dpsidx,
-                                                     Shape &test,
-                                                     DShape &dtestdx) const
+    dshape_and_dtest_eulerian_at_knot_flux_transport(const unsigned& ipt,
+                                                     Shape& psi,
+                                                     DShape& dpsidx,
+                                                     Shape& test,
+                                                     DShape& dtestdx) const
   {
     // Call the geometrical shape functions and derivatives
     double J = this->dshape_eulerian_at_knot(ipt, psi, dpsidx);
@@ -883,7 +883,7 @@ namespace oomph
     }
 
     // Calculate averages
-    void calculate_element_averages(double *&average_value)
+    void calculate_element_averages(double*& average_value)
     {
       FluxTransportEquations<1>::calculate_element_averages(average_value);
     }
@@ -913,9 +913,9 @@ namespace oomph
     ///\short Compute the residuals for the Navier--Stokes equations;
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void fill_in_generic_residual_contribution_flux_transport(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix,
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
       unsigned flag)
     {
       QScalarAdvectionElement<1, NNODE_1D>::
@@ -956,7 +956,7 @@ namespace oomph
     }
 
     // Calculate averages
-    void calculate_element_averages(double *&average_value)
+    void calculate_element_averages(double*& average_value)
     {
       FluxTransportEquations<2>::calculate_element_averages(average_value);
     }
@@ -989,9 +989,9 @@ namespace oomph
     ///\short Compute the residuals for the Navier--Stokes equations;
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void fill_in_generic_residual_contribution_flux_transport(
-      Vector<double> &residuals,
-      DenseMatrix<double> &jacobian,
-      DenseMatrix<double> &mass_matrix,
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      DenseMatrix<double>& mass_matrix,
       unsigned flag)
     {
       QScalarAdvectionElement<2, NNODE_1D>::

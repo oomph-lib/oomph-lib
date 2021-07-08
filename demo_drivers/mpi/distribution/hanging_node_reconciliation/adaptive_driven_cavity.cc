@@ -134,16 +134,16 @@ public:
   } // end_of_actions_after_adapt
 
   /// Doc the solution
-  void doc_solution(DocInfo &doc_info);
+  void doc_solution(DocInfo& doc_info);
 
 private:
   /// Fix pressure in element e at pressure dof pdof and set to pvalue
-  void fix_pressure(const unsigned &e,
-                    const unsigned &pdof,
-                    const double &pvalue)
+  void fix_pressure(const unsigned& e,
+                    const unsigned& pdof,
+                    const double& pvalue)
   {
     // Cast to proper element and fix pressure
-    dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e))
+    dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))
       ->fix_pressure(pdof, pvalue);
   } // end_of_fix_pressure
 
@@ -171,7 +171,7 @@ RefineableDrivenCavityProblem<ELEMENT>::RefineableDrivenCavityProblem()
   double l_y = 1.0;
 
   // Build and assign mesh
-  RefineableRectangularQuadMesh<ELEMENT> *my_mesh_pt =
+  RefineableRectangularQuadMesh<ELEMENT>* my_mesh_pt =
     new RefineableRectangularQuadMesh<ELEMENT>(n_x, n_y, l_x, l_y);
   Problem::mesh_pt() = my_mesh_pt;
 
@@ -213,7 +213,7 @@ RefineableDrivenCavityProblem<ELEMENT>::RefineableDrivenCavityProblem()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(mesh_pt()->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
     // Set the Reynolds number, etc
     el_pt->re_pt() = &Global_Physical_Variables::Re;
   } // end loop over elements
@@ -234,7 +234,7 @@ RefineableDrivenCavityProblem<ELEMENT>::RefineableDrivenCavityProblem()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void RefineableDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
+void RefineableDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 {
   ofstream some_file;
   char filename[100];
@@ -255,7 +255,7 @@ void RefineableDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
     unsigned nnod = mesh_pt()->nnode();
     for (unsigned j = 0; j < nnod; j++)
     {
-      Node *nod_pt = mesh_pt()->node_pt(j);
+      Node* nod_pt = mesh_pt()->node_pt(j);
       some_file << nod_pt->x(0) << " " << nod_pt->x(1) << " ";
       int nval = nod_pt->nvalue();
       for (int i = -1; i < nval; i++)
@@ -289,7 +289,7 @@ void RefineableDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo &doc_info)
 //==start_of_main======================================================
 /// Driver for RefineableDrivenCavity test problem
 //=====================================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
 #ifdef OOMPH_HAS_MPI
 

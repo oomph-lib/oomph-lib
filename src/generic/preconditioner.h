@@ -59,13 +59,13 @@ namespace oomph
     Preconditioner() : Matrix_pt(0), Comm_pt(0), Setup_time(0){};
 
     /// Broken copy constructor
-    Preconditioner(const Preconditioner &)
+    Preconditioner(const Preconditioner&)
     {
       BrokenCopy::broken_copy("Preconditioner");
     }
 
     /// Broken assignment operator
-    void operator=(const Preconditioner &)
+    void operator=(const Preconditioner&)
     {
       BrokenCopy::broken_assign("Preconditioner");
     }
@@ -76,20 +76,20 @@ namespace oomph
     /// \short Apply the preconditioner. Pure virtual generic interface
     /// function. This method should apply the preconditioner operator to the
     /// vector r and return the vector z.
-    virtual void preconditioner_solve(const DoubleVector &r,
-                                      DoubleVector &z) = 0;
+    virtual void preconditioner_solve(const DoubleVector& r,
+                                      DoubleVector& z) = 0;
 
     /// \short Setup the preconditioner: store the matrix pointer and the
     /// communicator pointer then call preconditioner specific setup()
     /// function.
-    void setup(DoubleMatrixBase *matrix_pt)
+    void setup(DoubleMatrixBase* matrix_pt)
     {
       // Store matrix pointer
       set_matrix_pt(matrix_pt);
 
       // Extract and store communicator pointer
-      DistributableLinearAlgebraObject *dist_obj_pt =
-        dynamic_cast<DistributableLinearAlgebraObject *>(matrix_pt);
+      DistributableLinearAlgebraObject* dist_obj_pt =
+        dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt);
       if (dist_obj_pt != 0)
       {
         set_comm_pt(dist_obj_pt->distribution_pt()->communicator_pt());
@@ -108,7 +108,7 @@ namespace oomph
     /// \short Compatability layer for old preconditioners where problem
     /// pointers were needed. The problem pointer is only used to get a
     /// communicator pointer.
-    void setup(const Problem *problem_pt, DoubleMatrixBase *matrix_pt)
+    void setup(const Problem* problem_pt, DoubleMatrixBase* matrix_pt)
     {
       ObsoleteCode::obsolete();
       setup(matrix_pt);
@@ -122,7 +122,7 @@ namespace oomph
     virtual void clean_up_memory() {}
 
     /// Get function for matrix pointer.
-    virtual DoubleMatrixBase *matrix_pt() const
+    virtual DoubleMatrixBase* matrix_pt() const
     {
 #ifdef PARANOID
       if (Matrix_pt == 0)
@@ -137,13 +137,13 @@ namespace oomph
     }
 
     /// \short Set the matrix pointer.
-    virtual void set_matrix_pt(DoubleMatrixBase *matrix_pt)
+    virtual void set_matrix_pt(DoubleMatrixBase* matrix_pt)
     {
       Matrix_pt = matrix_pt;
     }
 
     /// Get function for comm pointer.
-    virtual const OomphCommunicator *comm_pt() const
+    virtual const OomphCommunicator* comm_pt() const
     {
       // If we are using MPI then the comm pointer should not be null.
 #ifdef OOMPH_HAS_MPI
@@ -165,7 +165,7 @@ namespace oomph
     }
 
     /// \short Set the communicator pointer
-    virtual void set_comm_pt(const OomphCommunicator *const comm_pt)
+    virtual void set_comm_pt(const OomphCommunicator* const comm_pt)
     {
       Comm_pt = comm_pt;
     }
@@ -183,8 +183,8 @@ namespace oomph
     /// be in CR form but since that assumption is hard coded all over
     /// BlockPreconditioner we're safe.
     virtual void turn_into_subsidiary_block_preconditioner(
-      BlockPreconditioner<CRDoubleMatrix> *master_block_prec_pt,
-      const Vector<unsigned> &doftype_in_master_preconditioner_coarse)
+      BlockPreconditioner<CRDoubleMatrix>* master_block_prec_pt,
+      const Vector<unsigned>& doftype_in_master_preconditioner_coarse)
     {
     }
 
@@ -193,19 +193,19 @@ namespace oomph
     /// preconditioner is also a block preconditioner then things need to
     /// happen. Version for coarsening dof-types.
     virtual void turn_into_subsidiary_block_preconditioner(
-      BlockPreconditioner<CRDoubleMatrix> *master_block_prec_pt,
-      const Vector<unsigned> &doftype_in_master_preconditioner_coarse,
-      const Vector<Vector<unsigned>> &doftype_coarsen_map_coarse)
+      BlockPreconditioner<CRDoubleMatrix>* master_block_prec_pt,
+      const Vector<unsigned>& doftype_in_master_preconditioner_coarse,
+      const Vector<Vector<unsigned>>& doftype_coarsen_map_coarse)
     {
     }
 
   private:
     /// Storage for a pointer to the matrix.
-    DoubleMatrixBase *Matrix_pt;
+    DoubleMatrixBase* Matrix_pt;
 
     /// \short Storage for a pointer to the communicator. Null
     /// if the preconditioner should not be distributed.
-    const OomphCommunicator *Comm_pt;
+    const OomphCommunicator* Comm_pt;
 
     /// The time it takes to set up this preconditioner.
     double Setup_time;
@@ -222,13 +222,13 @@ namespace oomph
     IdentityPreconditioner() {}
 
     /// Broken copy constructor
-    IdentityPreconditioner(const IdentityPreconditioner &)
+    IdentityPreconditioner(const IdentityPreconditioner&)
     {
       BrokenCopy::broken_copy("IdentityPreconditioner");
     }
 
     /// Broken assignment operator
-    void operator=(const IdentityPreconditioner &)
+    void operator=(const IdentityPreconditioner&)
     {
       BrokenCopy::broken_assign("IdentityPreconditioner");
     }
@@ -240,8 +240,8 @@ namespace oomph
     virtual void setup()
     {
       // first attempt to cast to DistributableLinearAlgebraObject
-      DistributableLinearAlgebraObject *dist_matrix_pt =
-        dynamic_cast<DistributableLinearAlgebraObject *>(matrix_pt());
+      DistributableLinearAlgebraObject* dist_matrix_pt =
+        dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt());
 
       // if it is a distributable matrix
       if (dist_matrix_pt != 0)
@@ -262,7 +262,7 @@ namespace oomph
 
     /// \short Apply the preconditioner. This method should apply the
     /// preconditioner operator to the vector r and return the vector z.
-    virtual void preconditioner_solve(const DoubleVector &r, DoubleVector &z)
+    virtual void preconditioner_solve(const DoubleVector& r, DoubleVector& z)
     {
 #ifdef PARANOID
       if (*r.distribution_pt() != *this->distribution_pt())

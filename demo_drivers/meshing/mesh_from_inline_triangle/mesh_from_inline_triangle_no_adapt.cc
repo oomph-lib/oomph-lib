@@ -53,13 +53,13 @@ namespace TanhSolnForPoisson
   double TanPhi = 0.0;
 
   /// Exact solution as a Vector
-  void get_exact_u(const Vector<double> &x, Vector<double> &u)
+  void get_exact_u(const Vector<double>& x, Vector<double>& u)
   {
     u[0] = tanh(1.0 - Alpha * (TanPhi * x[0] - x[1]));
   }
 
   /// Source function required to make the solution above an exact solution
-  void get_source(const Vector<double> &x, double &source)
+  void get_source(const Vector<double>& x, double& source)
   {
     source = 2.0 * tanh(-1.0 + Alpha * (TanPhi * x[0] - x[1])) *
                (1.0 - pow(tanh(-1.0 + Alpha * (TanPhi * x[0] - x[1])), 2.0)) *
@@ -71,7 +71,7 @@ namespace TanhSolnForPoisson
 
   /// \short Zero function -- used to compute norm of the computed solution by
   /// computing the norm of the error when compared against this.
-  void zero(const Vector<double> &x, Vector<double> &u)
+  void zero(const Vector<double>& x, Vector<double>& u)
   {
     u[0] = 0.0;
   }
@@ -105,7 +105,7 @@ public:
   }
 
   /// Doc the solution
-  void doc_solution(const std::string &comment = "");
+  void doc_solution(const std::string& comment = "");
 
 private:
   /// Doc info object for labeling output
@@ -119,7 +119,7 @@ private:
   void complete_problem_setup();
 
   /// Pointers to specific mesh
-  TriangleMesh<ELEMENT> *My_mesh_pt;
+  TriangleMesh<ELEMENT>* My_mesh_pt;
 
   /// Trace file to document norm of solution
   ofstream Trace_file;
@@ -143,10 +143,10 @@ UnstructuredPoissonProblem<ELEMENT>::UnstructuredPoissonProblem()
   double y_center = 0.0;
   double A = 1.0;
   double B = 1.0;
-  Ellipse *outer_boundary_ellipse_pt = new Ellipse(A, B);
+  Ellipse* outer_boundary_ellipse_pt = new Ellipse(A, B);
 
   // Pointer to the closed curve that defines the outer boundary
-  TriangleMeshClosedCurve *closed_curve_pt = 0;
+  TriangleMeshClosedCurve* closed_curve_pt = 0;
 
   // Build outer boundary as Polygon?
   //---------------------------------
@@ -162,7 +162,7 @@ UnstructuredPoissonProblem<ELEMENT>::UnstructuredPoissonProblem()
 
     // The boundary is bounded by two distinct boundaries, each
     // represented by its own polyline
-    Vector<TriangleMeshCurveSection *> boundary_polyline_pt(2);
+    Vector<TriangleMeshCurveSection*> boundary_polyline_pt(2);
 
     // Vertex coordinates on boundary
     Vector<Vector<double>> bound_coords(n_seg + 1);
@@ -208,7 +208,7 @@ UnstructuredPoissonProblem<ELEMENT>::UnstructuredPoissonProblem()
 
     // Create the triangle mesh polygon for outer boundary
     //----------------------------------------------------
-    TriangleMeshPolygon *outer_boundary_polygon_pt =
+    TriangleMeshPolygon* outer_boundary_polygon_pt =
       new TriangleMeshPolygon(boundary_polyline_pt);
 
     // Enable redistribution of polylines
@@ -223,7 +223,7 @@ UnstructuredPoissonProblem<ELEMENT>::UnstructuredPoissonProblem()
   else
   {
     // Provide storage for pointers to the two parts of the curvilinear boundary
-    Vector<TriangleMeshCurveSection *> outer_curvilinear_boundary_pt(2);
+    Vector<TriangleMeshCurveSection*> outer_curvilinear_boundary_pt(2);
 
     // First bit
     //----------
@@ -245,7 +245,7 @@ UnstructuredPoissonProblem<ELEMENT>::UnstructuredPoissonProblem()
 
     // Combine to curvilinear boundary
     //--------------------------------
-    TriangleMeshClosedCurve *curvilinear_outer_boundary_pt =
+    TriangleMeshClosedCurve* curvilinear_outer_boundary_pt =
       new TriangleMeshClosedCurve(outer_curvilinear_boundary_pt);
 
     // Set the pointer
@@ -254,7 +254,7 @@ UnstructuredPoissonProblem<ELEMENT>::UnstructuredPoissonProblem()
 
   // Now build the holes
   //====================
-  Vector<TriangleMeshClosedCurve *> hole_pt(2);
+  Vector<TriangleMeshClosedCurve*> hole_pt(2);
 
   // Build polygonal hole
   //=====================
@@ -264,7 +264,7 @@ UnstructuredPoissonProblem<ELEMENT>::UnstructuredPoissonProblem()
   y_center = 0.5;
   A = 0.1;
   B = 0.1;
-  Ellipse *polygon_ellipse_pt = new Ellipse(A, B);
+  Ellipse* polygon_ellipse_pt = new Ellipse(A, B);
 
   // Number of segments defining upper and lower half of the hole
   unsigned n_seg = 6;
@@ -272,7 +272,7 @@ UnstructuredPoissonProblem<ELEMENT>::UnstructuredPoissonProblem()
 
   // This hole is bounded by two distinct boundaries, each
   // represented by its own polyline
-  Vector<TriangleMeshCurveSection *> hole_polyline_pt(2);
+  Vector<TriangleMeshCurveSection*> hole_polyline_pt(2);
 
   // First boundary of polygonal hole
   //---------------------------------
@@ -333,10 +333,10 @@ UnstructuredPoissonProblem<ELEMENT>::UnstructuredPoissonProblem()
   // Build second hole: Another ellipse
   A = 0.2;
   B = 0.1;
-  Ellipse *ellipse_pt = new Ellipse(A, B);
+  Ellipse* ellipse_pt = new Ellipse(A, B);
 
   // Build the two parts of the curvilinear boundary
-  Vector<TriangleMeshCurveSection *> curvilinear_boundary_pt(2);
+  Vector<TriangleMeshCurveSection*> curvilinear_boundary_pt(2);
 
   // First part of curvilinear boundary
   //-----------------------------------
@@ -361,7 +361,7 @@ UnstructuredPoissonProblem<ELEMENT>::UnstructuredPoissonProblem()
   Vector<double> hole_coords(2);
   hole_coords[0] = 0.0;
   hole_coords[1] = 0.0;
-  Vector<TriangleMeshClosedCurve *> curvilinear_hole_pt(1);
+  Vector<TriangleMeshClosedCurve*> curvilinear_hole_pt(1);
   hole_pt[1] =
     new TriangleMeshClosedCurve(curvilinear_boundary_pt, hole_coords);
 
@@ -416,7 +416,7 @@ void UnstructuredPoissonProblem<ELEMENT>::complete_problem_setup()
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Get node
-      Node *nod_pt = My_mesh_pt->boundary_node_pt(ibound, inod);
+      Node* nod_pt = My_mesh_pt->boundary_node_pt(ibound, inod);
 
       // Pin one-and-only unknown value
       nod_pt->pin(0);
@@ -428,7 +428,7 @@ void UnstructuredPoissonProblem<ELEMENT>::complete_problem_setup()
   for (unsigned e = 0; e < n_element; e++)
   {
     // Upcast from GeneralisedElement to the present element
-    ELEMENT *el_pt = dynamic_cast<ELEMENT *>(My_mesh_pt->element_pt(e));
+    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(My_mesh_pt->element_pt(e));
 
     // Set the source function pointer
     el_pt->source_fct_pt() = &TanhSolnForPoisson::get_source;
@@ -453,7 +453,7 @@ void UnstructuredPoissonProblem<ELEMENT>::apply_boundary_conditions()
     for (unsigned inod = 0; inod < num_nod; inod++)
     {
       // Get node
-      Node *nod_pt = this->My_mesh_pt->boundary_node_pt(ibound, inod);
+      Node* nod_pt = this->My_mesh_pt->boundary_node_pt(ibound, inod);
 
       // Extract nodal coordinates from node:
       Vector<double> x(2);
@@ -476,7 +476,7 @@ void UnstructuredPoissonProblem<ELEMENT>::apply_boundary_conditions()
 //========================================================================
 template<class ELEMENT>
 void UnstructuredPoissonProblem<ELEMENT>::doc_solution(
-  const std::string &comment)
+  const std::string& comment)
 {
   ofstream some_file;
   char filename[100];
@@ -531,7 +531,7 @@ void UnstructuredPoissonProblem<ELEMENT>::doc_solution(
 //=======start_of_main========================================
 /// Driver code for demo of inline triangle mesh generation
 //============================================================
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   // Store command line arguments
   CommandLineArgs::setup(argc, argv);

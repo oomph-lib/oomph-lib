@@ -71,10 +71,10 @@ namespace oomph
   /// Use ARPACK to solve an eigen problem that is assembled by elements in
   /// a mesh in a Problem object.
   //==========================================================================
-  void ARPACK::solve_eigenproblem(Problem *const &problem_pt,
-                                  const int &n_eval,
-                                  Vector<std::complex<double>> &eigenvalue,
-                                  Vector<DoubleVector> &eigenvector)
+  void ARPACK::solve_eigenproblem(Problem* const& problem_pt,
+                                  const int& n_eval,
+                                  Vector<std::complex<double>>& eigenvalue,
+                                  Vector<DoubleVector>& eigenvector)
   {
     bool Verbose = false;
 
@@ -131,17 +131,17 @@ namespace oomph
     int lworkl = 3 * ncv * ncv + 6 * ncv;
 
     // Array that holds the final set of Arnoldi basis vectors
-    double **v = new double *;
+    double** v = new double*;
     *v = new double[ncv * n];
     // Leading dimension of v (n)
     int ldv = n;
 
     // Residual vector
-    double *resid = new double[n];
+    double* resid = new double[n];
     // Workspace vector
-    double *workd = new double[3 * n];
+    double* workd = new double[3 * n];
     // Workspace vector
-    double *workl = new double[lworkl];
+    double* workl = new double[lworkl];
 
     bmat[0] = 'G';
     // If we require eigenvalues to the left of the shift
@@ -401,14 +401,14 @@ namespace oomph
     // Array to select which Ritz vectors are computed
     int select[ncv];
     // Array that holds the real part of the eigenvalues
-    double *eval_real = new double[nconv + 1];
+    double* eval_real = new double[nconv + 1];
     // Array that holds the imaginary part of the eigenvalues
-    double *eval_imag = new double[nconv + 1];
+    double* eval_imag = new double[nconv + 1];
 
     // Workspace
-    double *workev = new double[3 * ncv];
+    double* workev = new double[3 * ncv];
     // Array to hold the eigenvectors
-    double **z = new double *;
+    double** z = new double*;
     *z = new double[(nconv + 1) * n];
 
     // Error flag
@@ -537,10 +537,10 @@ namespace oomph
   /// Use LAPACK to solve an eigen problem that is assembled by elements in
   /// a mesh in a Problem object.
   //==========================================================================
-  void LAPACK_QZ::solve_eigenproblem(Problem *const &problem_pt,
-                                     const int &n_eval,
-                                     Vector<std::complex<double>> &eigenvalue,
-                                     Vector<DoubleVector> &eigenvector)
+  void LAPACK_QZ::solve_eigenproblem(Problem* const& problem_pt,
+                                     const int& n_eval,
+                                     Vector<std::complex<double>>& eigenvalue,
+                                     Vector<DoubleVector>& eigenvector)
   {
     // Some character identifiers for use in the LAPACK routine
     // Do not calculate the left eigenvectors
@@ -569,8 +569,8 @@ namespace oomph
 
     // Storage for the matrices in the packed form required by the LAPACK
     // routine
-    double *M = new double[padded_n * padded_n];
-    double *A = new double[padded_n * padded_n];
+    double* M = new double[padded_n * padded_n];
+    double* A = new double[padded_n * padded_n];
 
     // TEMPORARY
     // only use non-distributed matrices and vectors
@@ -610,12 +610,12 @@ namespace oomph
     }
 
     // Temporary eigenvalue storage
-    double *alpha_r = new double[n];
-    double *alpha_i = new double[n];
-    double *beta = new double[n];
+    double* alpha_r = new double[n];
+    double* alpha_i = new double[n];
+    double* beta = new double[n];
     // Temporary eigenvector storage
-    double *vec_left = new double[1];
-    double *vec_right = new double[n * n];
+    double* vec_left = new double[1];
+    double* vec_right = new double[n * n];
 
     // Workspace for the LAPACK routine
     std::vector<double> work(1, 0.0);
@@ -704,10 +704,10 @@ namespace oomph
   /// matrices.
   //==========================================================================
   void LAPACK_QZ::find_eigenvalues(
-    const ComplexMatrixBase &A,
-    const ComplexMatrixBase &M,
-    Vector<std::complex<double>> &eigenvalue,
-    Vector<Vector<std::complex<double>>> &eigenvector)
+    const ComplexMatrixBase& A,
+    const ComplexMatrixBase& M,
+    Vector<std::complex<double>>& eigenvalue,
+    Vector<Vector<std::complex<double>>>& eigenvector)
   {
     // Some character identifiers for use in the LAPACK routine
     // Do not calculate the left eigenvectors
@@ -720,8 +720,8 @@ namespace oomph
 
     // Storage for the matrices in the packed form required by the LAPACK
     // routine
-    double *M_linear = new double[2 * n * n];
-    double *A_linear = new double[2 * n * n];
+    double* M_linear = new double[2 * n * n];
+    double* A_linear = new double[2 * n * n];
 
     // Now convert the matrices into the appropriate packed form
     unsigned index = 0;
@@ -739,11 +739,11 @@ namespace oomph
     }
 
     // Temporary eigenvalue storage
-    double *alpha = new double[2 * n];
-    double *beta = new double[2 * n];
+    double* alpha = new double[2 * n];
+    double* beta = new double[2 * n];
     // Temporary eigenvector storage
-    double *vec_left = new double[2];
-    double *vec_right = new double[2 * n * n];
+    double* vec_left = new double[2];
+    double* vec_right = new double[2 * n * n];
 
     // Workspace for the LAPACK routine
     std::vector<double> work(2, 0.0);

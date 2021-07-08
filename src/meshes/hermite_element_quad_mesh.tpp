@@ -51,7 +51,7 @@ namespace oomph
   //=============================================================================
   template<class ELEMENT>
   void HermiteQuadMesh<ELEMENT>::set_position_of_node(
-    const unsigned &node_num_x, const unsigned &node_num_y, Node *node_pt)
+    const unsigned& node_num_x, const unsigned& node_num_y, Node* node_pt)
   {
     // get the generalised macro element position of the node
     DenseMatrix<double> m_gen(4, 2);
@@ -117,9 +117,9 @@ namespace oomph
   //=============================================================================
   template<class ELEMENT>
   void HermiteQuadMesh<ELEMENT>::set_position_of_boundary_node(
-    const unsigned &node_num_x,
-    const unsigned &node_num_y,
-    BoundaryNode<Node> *node_pt)
+    const unsigned& node_num_x,
+    const unsigned& node_num_y,
+    BoundaryNode<Node>* node_pt)
   {
     // get the generalised macro element position of the node
     DenseMatrix<double> m_gen(4, 2, 0.0);
@@ -199,9 +199,9 @@ namespace oomph
   //=============================================================================
   template<class ELEMENT>
   void HermiteQuadMesh<ELEMENT>::generalised_macro_element_position_of_node(
-    const unsigned &node_num_x,
-    const unsigned &node_num_y,
-    DenseMatrix<double> &m_gen)
+    const unsigned& node_num_x,
+    const unsigned& node_num_y,
+    DenseMatrix<double>& m_gen)
   {
     // obtain position of node
     Vector<double> s_macro_N(2);
@@ -600,7 +600,7 @@ namespace oomph
   /// \short Generic mesh construction function to build the mesh
   //=============================================================================
   template<class ELEMENT>
-  void HermiteQuadMesh<ELEMENT>::build_mesh(TimeStepper *time_stepper_pt)
+  void HermiteQuadMesh<ELEMENT>::build_mesh(TimeStepper* time_stepper_pt)
   {
     // Mesh can only be built with 2D QHermiteElements.
     MeshChecker::assert_geometric_element<QHermiteElementBase, ELEMENT>(2);
@@ -647,7 +647,7 @@ namespace oomph
 
     // set the position of the boundary node
     set_position_of_boundary_node(
-      0, 0, dynamic_cast<BoundaryNode<Node> *>(Node_pt[node_count]));
+      0, 0, dynamic_cast<BoundaryNode<Node>*>(Node_pt[node_count]));
 
     // Increment the node number
     node_count++;
@@ -669,7 +669,7 @@ namespace oomph
 
     // set the position of the node
     set_position_of_boundary_node(
-      1, 0, dynamic_cast<BoundaryNode<Node> *>(Node_pt[node_count]));
+      1, 0, dynamic_cast<BoundaryNode<Node>*>(Node_pt[node_count]));
 
     // Increment the node number
     node_count++;
@@ -691,7 +691,7 @@ namespace oomph
 
     // set the position of the boundary node
     set_position_of_boundary_node(
-      0, 1, dynamic_cast<BoundaryNode<Node> *>(Node_pt[node_count]));
+      0, 1, dynamic_cast<BoundaryNode<Node>*>(Node_pt[node_count]));
 
     // Increment the node number
     node_count++;
@@ -718,7 +718,7 @@ namespace oomph
     {
       // set the position of the boundary node
       set_position_of_boundary_node(
-        1, 1, dynamic_cast<BoundaryNode<Node> *>(Node_pt[node_count]));
+        1, 1, dynamic_cast<BoundaryNode<Node>*>(Node_pt[node_count]));
     }
     else
     {
@@ -758,7 +758,7 @@ namespace oomph
 
       // set the position of the boundary node
       set_position_of_boundary_node(
-        j + 1, 0, dynamic_cast<BoundaryNode<Node> *>(Node_pt[node_count]));
+        j + 1, 0, dynamic_cast<BoundaryNode<Node>*>(Node_pt[node_count]));
 
       // Increment the node number
       node_count++;
@@ -783,7 +783,7 @@ namespace oomph
       // set the position of the (boundary) node
       if (Nelement[0] == 1)
         set_position_of_boundary_node(
-          j + 1, 1, dynamic_cast<BoundaryNode<Node> *>(Node_pt[node_count]));
+          j + 1, 1, dynamic_cast<BoundaryNode<Node>*>(Node_pt[node_count]));
       else
         set_position_of_node(j + 1, 1, Node_pt[node_count]);
 
@@ -832,9 +832,7 @@ namespace oomph
 
       // set the position of the boundary node
       set_position_of_boundary_node(
-        Nelement[0],
-        0,
-        dynamic_cast<BoundaryNode<Node> *>(Node_pt[node_count]));
+        Nelement[0], 0, dynamic_cast<BoundaryNode<Node>*>(Node_pt[node_count]));
 
       // if not periodic mesh
       if (Xperiodic == false)
@@ -859,7 +857,7 @@ namespace oomph
         set_position_of_boundary_node(
           Nelement[0] - 1,
           1,
-          dynamic_cast<BoundaryNode<Node> *>(
+          dynamic_cast<BoundaryNode<Node>*>(
             finite_element_pt(Nelement[0] - 2)->node_pt(3)));
 
       // UPPER RIGHT NODE
@@ -891,9 +889,7 @@ namespace oomph
 
       // set the position of the boundary node
       set_position_of_boundary_node(
-        Nelement[0],
-        1,
-        dynamic_cast<BoundaryNode<Node> *>(Node_pt[node_count]));
+        Nelement[0], 1, dynamic_cast<BoundaryNode<Node>*>(Node_pt[node_count]));
 
       // Increment the node number
       if (Xperiodic == false)
@@ -936,7 +932,7 @@ namespace oomph
 
       // set the position of the boundary node
       set_position_of_boundary_node(
-        0, i + 1, dynamic_cast<BoundaryNode<Node> *>(Node_pt[node_count]));
+        0, i + 1, dynamic_cast<BoundaryNode<Node>*>(Node_pt[node_count]));
 
       // Increment the node number
       node_count++;
@@ -965,7 +961,7 @@ namespace oomph
       // set the position of the (boundary) node
       if (Nelement[0] == 1)
         set_position_of_boundary_node(
-          1, i + 1, dynamic_cast<BoundaryNode<Node> *>(Node_pt[node_count]));
+          1, i + 1, dynamic_cast<BoundaryNode<Node>*>(Node_pt[node_count]));
       else
         set_position_of_node(1, i + 1, Node_pt[node_count]);
 
@@ -1063,7 +1059,7 @@ namespace oomph
         set_position_of_boundary_node(
           Nelement[0],
           i + 1,
-          dynamic_cast<BoundaryNode<Node> *>(Node_pt[node_count]));
+          dynamic_cast<BoundaryNode<Node>*>(Node_pt[node_count]));
 
         // Increment the node number
         node_count++;
@@ -1106,9 +1102,7 @@ namespace oomph
 
       // set position of boundary node
       set_position_of_boundary_node(
-        0,
-        Nelement[1],
-        dynamic_cast<BoundaryNode<Node> *>(Node_pt[node_count]));
+        0, Nelement[1], dynamic_cast<BoundaryNode<Node>*>(Node_pt[node_count]));
 
       // Increment the node number
       node_count++;
@@ -1124,9 +1118,7 @@ namespace oomph
 
       // set position of boundary node
       set_position_of_boundary_node(
-        1,
-        Nelement[1],
-        dynamic_cast<BoundaryNode<Node> *>(Node_pt[node_count]));
+        1, Nelement[1], dynamic_cast<BoundaryNode<Node>*>(Node_pt[node_count]));
 
       // Increment the node number
       node_count++;
@@ -1173,7 +1165,7 @@ namespace oomph
         set_position_of_boundary_node(
           j + 1,
           Nelement[1],
-          dynamic_cast<BoundaryNode<Node> *>(Node_pt[node_count]));
+          dynamic_cast<BoundaryNode<Node>*>(Node_pt[node_count]));
 
         // Increment the node number
         node_count++;
@@ -1238,7 +1230,7 @@ namespace oomph
         set_position_of_boundary_node(
           Nelement[0],
           Nelement[1],
-          dynamic_cast<BoundaryNode<Node> *>(Node_pt[node_count]));
+          dynamic_cast<BoundaryNode<Node>*>(Node_pt[node_count]));
 
         // Increment the node number
         node_count++;
@@ -1260,7 +1252,7 @@ namespace oomph
   //================================================================
   template<class ELEMENT>
   void HermiteQuadMesh<ELEMENT>::setup_boundary_element_info(
-    std::ostream &outfile)
+    std::ostream& outfile)
   {
     bool doc = false;
     if (outfile) doc = true;
@@ -1275,12 +1267,11 @@ namespace oomph
     Face_index_at_boundary.resize(nbound);
 
     // Temporary vector of sets of pointers to elements on the boundaries:
-    Vector<Vector<FiniteElement *>> vector_of_boundary_element_pt;
+    Vector<Vector<FiniteElement*>> vector_of_boundary_element_pt;
     vector_of_boundary_element_pt.resize(nbound);
 
     // Matrix map for working out the fixed local coord for elements on boundary
-    MapMatrixMixed<unsigned, FiniteElement *, Vector<int> *>
-      boundary_identifier;
+    MapMatrixMixed<unsigned, FiniteElement*, Vector<int>*> boundary_identifier;
 
     // Loop over elements
     //-------------------
@@ -1288,7 +1279,7 @@ namespace oomph
     for (unsigned e = 0; e < nel; e++)
     {
       // Get pointer to element
-      FiniteElement *fe_pt = finite_element_pt(e);
+      FiniteElement* fe_pt = finite_element_pt(e);
 
       if (doc) outfile << "Element: " << e << " " << fe_pt << std::endl;
 
@@ -1310,7 +1301,7 @@ namespace oomph
 
             // Get pointer to vector of boundaries that this
             // node lives on
-            std::set<unsigned> *boundaries_pt = 0;
+            std::set<unsigned>* boundaries_pt = 0;
             fe_pt->node_pt(j)->get_boundaries_pt(boundaries_pt);
 
             // If the node lives on some boundaries....
@@ -1400,13 +1391,13 @@ namespace oomph
       // Loop over elements that have at least one corner node on this boundary
       //-----------------------------------------------------------------------
       unsigned e_count = 0;
-      typedef Vector<FiniteElement *>::iterator IT;
+      typedef Vector<FiniteElement*>::iterator IT;
       for (IT it = vector_of_boundary_element_pt[i].begin();
            it != vector_of_boundary_element_pt[i].end();
            it++)
       {
         // Recover pointer to element
-        FiniteElement *fe_pt = *it;
+        FiniteElement* fe_pt = *it;
 
         // Initialise count for boundary identiers (-2,-1,1,2)
         std::map<int, unsigned> count;
@@ -1524,7 +1515,7 @@ namespace oomph
         // Loop over elements on given boundary
         for (unsigned e = 0; e < nel; e++)
         {
-          FiniteElement *fe_pt = Boundary_element_pt[i][e];
+          FiniteElement* fe_pt = Boundary_element_pt[i][e];
           outfile << "Boundary element:" << fe_pt
                   << " Face index of element along boundary is "
                   << Face_index_at_boundary[i][e] << std::endl;
