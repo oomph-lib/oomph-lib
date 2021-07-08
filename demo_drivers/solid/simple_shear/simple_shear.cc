@@ -38,7 +38,7 @@
 #include "solid.h"
 
 // The mesh
-#include "meshes/simple_cubic_mesh.template.h"
+#include "meshes/simple_cubic_mesh.h"
 
 using namespace std;
 
@@ -395,10 +395,10 @@ int main()
     }
 
     /*{
-     //Set up the problem with pure displacement formulation
-     SimpleShearProblem<QPVDElementWithPressure<3> > problem(true);
-     problem.run("RESLT_pres_incomp");
-     }*/
+  //Set up the problem with pure displacement formulation
+  SimpleShearProblem<QPVDElementWithPressure<3> > problem(true);
+  problem.run("RESLT_pres_incomp");
+  }*/
 
     {
       // Set up the problem with pure displacement formulation
@@ -407,9 +407,9 @@ int main()
     }
 
     /*{
-     //Set up the problem with pure displacement formulation
-     SimpleShearProblem<QPVDElementWithContinuousPressure<3> > problem(true);
-     problem.run("RESLT_cont_pres_incomp");
-     }*/
+  //Set up the problem with pure displacement formulation
+  SimpleShearProblem<QPVDElementWithContinuousPressure<3> > problem(true);
+  problem.run("RESLT_cont_pres_incomp");
+  }*/
   }
 }

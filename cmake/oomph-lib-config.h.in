@@ -1,0 +1,20 @@
+#ifndef OOMPH_LIB_CONFIG_H
+#define OOMPH_LIB_CONFIG_H
+
+#include <string>
+
+#define PROJECT_NAME "@PROJECT_NAME@"
+#define OOMPH_VERSION @oomphlib_VERSION@
+#define OOMPH_MAJOR_VERSION @oomphlib_VERSION_MAJOR@
+#define OOMPH_MINOR_VERSION @oomphlib_VERSION_MINOR@
+#define OOMPH_PATCH_VERSION @oomphlib_VERSION_PATCH@
+#define OOMPH_TWEAK_VERSION @oomphlib_VERSION_TWEAK@
+
+#define OOMPH_INTSIZE @OOMPH_INTSIZE@
+#if OOMPH_INTSIZE == 64
+#define OOMPH_INT int64_t
+#else
+#define OOMPH_INT int32_t
+#endif
+
+#endif // OOMPH_LIB_CONFIG_H

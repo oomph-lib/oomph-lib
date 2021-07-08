@@ -42,7 +42,7 @@
 #include <cmath>
 
 // oomph-lib includes
-#include "generic.h" // ../generic/Qelements.h"
+#include "generic.h" // generic/Qelements.h"
 
 namespace oomph
 {

@@ -803,7 +803,7 @@ AM_CONDITIONAL(WANT_MPI_VARIABLENP, test x$run_mpi_self_tests_variablenp = xtrue
 							of a static library],
                [dynamic_linking_for_trilinos_requested=true],
                [dynamic_linking_for_trilinos_requested=false])
-  
+
 
 # Pass result of test to automake (makefiles can now check for
 # status of WANT_DYNAMIC_BUILD_OF_TRILINOS in any Makefile.am)
@@ -1502,9 +1502,9 @@ else \
   fi
 fi
 
-# Indicate that Trilinos has already been built (so we don't bother trying# to install        
-# it again if there's a tar file available!)                                                  
-AM_CONDITIONAL(ALREADY_HAVE_BUILT_HYPRE, test x$hypre_has_already_been_built = xtrue)  
+# Indicate that Trilinos has already been built (so we don't bother trying# to install
+# it again if there's a tar file available!)
+AM_CONDITIONAL(ALREADY_HAVE_BUILT_HYPRE, test x$hypre_has_already_been_built = xtrue)
 
 #Tell everybody about it...
 AM_CONDITIONAL(OOMPH_HAS_HYPRE, test x$have_hypre = xtrue)
@@ -1763,7 +1763,7 @@ else \
   fi
 fi
 
-# Indicate that Trilinos has already been built (so we don't bother trying# to install 
+# Indicate that Trilinos has already been built (so we don't bother trying# to install
 # it again if there's a tar file available!)
 AM_CONDITIONAL(ALREADY_HAVE_BUILT_TRILINOS, test x$trilinos_has_already_been_built = xtrue)
 
@@ -2035,7 +2035,7 @@ else \
         AC_SUBST(SCALAPACK_LIB) \
         have_scalapack=true; \
     fi; \
-    all_specifiable_mumps_etc_libraries_available=false; \     
+    all_specifiable_mumps_etc_libraries_available=false; \
 fi
 
 
@@ -2102,7 +2102,7 @@ else \
         AC_SUBST(BLACS_LIB) \
         have_blacs=true; \
     fi; \
-    all_specifiable_mumps_etc_libraries_available=false; \      
+    all_specifiable_mumps_etc_libraries_available=false; \
 fi
 
 
@@ -2164,7 +2164,7 @@ else \
         AC_SUBST(PORD_LIB) \
         have_pord=true; \
     fi; \
-    all_specifiable_mumps_etc_libraries_available=false; \     
+    all_specifiable_mumps_etc_libraries_available=false; \
 fi
 
 
@@ -2259,7 +2259,7 @@ else \
         echo "after which it will be: " $MUMPS_DIR ; \
         have_mumps=true; \
     fi; \
-    all_specifiable_mumps_etc_libraries_available=false; \  
+    all_specifiable_mumps_etc_libraries_available=false; \
 fi
 
 
@@ -2284,7 +2284,7 @@ if test x$all_specifiable_mumps_etc_libraries_available = xfalse; then \
       echo "         will still be listed (but this should be harmless).";\
       echo "=====================================================================";\
       have_mumps=false;
-   fi; \ 
+   fi; \
 fi
 
 
@@ -2324,7 +2324,7 @@ AC_SUBST(MUMPS_INCLUDE)
 echo "all_specifiable_mumps_etc_libraries_available " $all_specifiable_mumps_etc_libraries_available
 if test x$all_specifiable_mumps_etc_libraries_available = xfalse; then \
    echo "Possibly rebuilding mumps etc. libraries (if there's a tar file)"; \
-else \   
+else \
    echo "Already have mumps etc libraries built elsewhere so not doing it again"; \
    will_build_mumps_and_scalapack=false; \
 fi

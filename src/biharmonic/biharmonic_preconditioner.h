@@ -40,7 +40,7 @@
 #include "../generic/block_preconditioner.h"
 #include "../generic/hijacked_elements.h"
 #include "biharmonic_elements.h"
-#include "../meshes/hermite_element_quad_mesh.template.h"
+#include "../meshes/hermite_element_quad_mesh.h"
 #include "../generic/SuperLU_preconditioner.h"
 #include "../generic/general_purpose_preconditioners.h"
 

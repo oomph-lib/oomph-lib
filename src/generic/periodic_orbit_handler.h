@@ -42,8 +42,7 @@
 #include "problem.h"
 #include "assembly_handler.h"
 #include "refineable_line_spectral_element.h"
-#include "../meshes/one_d_mesh.template.h"
-#include "../meshes/one_d_mesh.template.cc"
+#include "../meshes/one_d_mesh.h"
 
 namespace oomph
 {

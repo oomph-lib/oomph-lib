@@ -1,7 +1,7 @@
 #! /bin/sh
 
 # Get the OOPMH-LIB root directory from a makefile
-OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
+OOMPH_ROOT_DIR=$1
 
 
 #Set the number of tests to be checked
@@ -33,10 +33,10 @@ echo " " >> validation.log
 cat circle0.dat circle1.dat > circle_results.dat
 
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/circle_results.dat.gz \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/circle_results.dat.gz \
     circle_results.dat  >> validation.log
 fi
 
@@ -59,10 +59,10 @@ echo " " >> validation.log
 cat RESLT/trace.dat > circle_element_results.dat
 
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/circle_element_results.dat.gz \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/circle_element_results.dat.gz \
     circle_element_results.dat  >> validation.log
 fi
 mv RESLT RESLT_circle
@@ -87,10 +87,10 @@ cat RESLT/soln0.dat RESLT/soln10.dat RESLT/soln20.dat \
   > doc_sparse.dat
 
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/doc_sparse.dat.gz \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/doc_sparse.dat.gz \
     doc_sparse.dat  >> validation.log
 fi
 mv RESLT RESLT_doc_sparse_macro_node_update
@@ -117,10 +117,10 @@ cat RESLT/soln0.dat RESLT_coupled/soln0.dat RESLT_coupled/soln_1_0.dat  RESLT_co
 mv RESLT RESLT_algebraic
 mv RESLT_coupled RESLT_coupled_algebraic
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/alg.dat.gz\
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/alg.dat.gz\
      alg.dat >> validation.log
 fi
 
@@ -145,10 +145,10 @@ echo " " >> validation.log
 cat RESLT/soln0.dat  > macro.dat
 mv RESLT RESLT_coupled_macro
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/macro.dat.gz\
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/macro.dat.gz\
      macro.dat >> validation.log
 fi
 
@@ -175,10 +175,10 @@ cat RESLT/soln0.dat RESLT_coupled/soln0.dat > old_macro.dat
 mv RESLT RESLT_old_macro
 mv RESLT_coupled RESLT_coupled_old_macro
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/old_macro.dat.gz\
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/old_macro.dat.gz\
      old_macro.dat >> validation.log
 fi
 
@@ -202,10 +202,10 @@ echo " " >> validation.log
 cat RESLT/soln0.dat  > macro_non_ref.dat
 mv RESLT RESLT_coupled_macro_non_ref
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/macro_non_ref.dat.gz\
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/macro_non_ref.dat.gz\
      macro_non_ref.dat >> validation.log
 fi
 
@@ -213,7 +213,7 @@ fi
 
 # Append output to global validation log file
 #--------------------------------------------
-cat validation.log >> ../../../../validation.log
+cat validation.log >> $OOMPH_ROOT_DIR/validation.log
 
 
 cd ..
@@ -228,7 +228,7 @@ cd ..
 # 0 if all tests has passed.
 # 1 if some tests failed.
 # 2 if there are more 'OK' than expected.
-. $OOMPH_ROOT_DIR/bin/validate_ok_count
+. $OOMPH_ROOT_DIR/scripts/validate_ok_count
 
 # Never get here
 exit 10

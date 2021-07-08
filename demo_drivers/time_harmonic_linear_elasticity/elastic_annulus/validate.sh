@@ -1,7 +1,7 @@
 #! /bin/sh
 
 # Get the OOPMH-LIB root directory from a makefile
-OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
+OOMPH_ROOT_DIR=$1
 
 
 #Set the number of tests to be checked
@@ -32,10 +32,10 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/elast_soln2.dat > adaptive_results.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/adaptive_results.dat.gz   \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/adaptive_results.dat.gz   \
     adaptive_results.dat 0.1 1.0e-10  >> validation.log
 fi
 mv RESLT RESLT_adapt
@@ -56,10 +56,10 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/elast_soln2.dat > non_adaptive_results.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/non_adaptive_results.dat.gz   \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/non_adaptive_results.dat.gz   \
     non_adaptive_results.dat 0.1 1.0e-10 >> validation.log
 fi
 mv RESLT RESLT_non_adapt
@@ -81,10 +81,10 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/norm0.dat RESLT/norm1.dat > unstructured_adaptive_results.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/unstructured_adaptive_results.dat.gz   \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/unstructured_adaptive_results.dat.gz   \
     unstructured_adaptive_results.dat  4.0 1.0e-12 >> validation.log
 fi
 mv RESLT RESLT_unstructured_adapt
@@ -105,10 +105,10 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/norm0.dat RESLT/norm1.dat > unstructured_results.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/unstructured_results.dat.gz   \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/unstructured_results.dat.gz   \
     unstructured_results.dat 0.1 1.0e-10 >> validation.log
 fi
 mv RESLT RESLT_unstructured
@@ -123,7 +123,7 @@ mv RESLT RESLT_unstructured
 
 # Append output to global validation log file
 #--------------------------------------------
-cat validation.log >> ../../../../validation.log
+cat validation.log >> $OOMPH_ROOT_DIR/validation.log
 
 
 cd ..
@@ -136,7 +136,7 @@ cd ..
 # 0 if all tests has passed.
 # 1 if some tests failed.
 # 2 if there are more 'OK' than expected.
-. $OOMPH_ROOT_DIR/bin/validate_ok_count
+. $OOMPH_ROOT_DIR/scripts/validate_ok_count
 
 # Never get here
 exit 10

@@ -347,7 +347,7 @@ namespace oomph
     void setup_trilinos_preconditioner(Epetra_CrsMatrix* epetra_matrix_pt);
 
     /// Type of ILU preconditioner
-    string Preconditioner_type;
+    std::string Preconditioner_type;
 
     /// Level of fill for "ILU"
     int ILU_fill_level;

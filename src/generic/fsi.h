@@ -44,7 +44,7 @@
 #include "face_element_as_geometric_object.h"
 #include "integral.h"
 #include "problem.h"
-#include "multi_domain.template.cc"
+#include "multi_domain.h"
 
 namespace oomph
 {

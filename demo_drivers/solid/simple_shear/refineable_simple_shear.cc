@@ -39,7 +39,7 @@
 #include "solid.h"
 
 // The fish mesh
-#include "meshes/simple_cubic_mesh.template.h"
+#include "meshes/simple_cubic_mesh.h"
 
 using namespace std;
 

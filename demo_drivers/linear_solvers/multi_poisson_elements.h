@@ -39,10 +39,10 @@
 #include <sstream>
 
 // OOMPH-LIB headers
-#include "../generic/projection.h"
-#include "../generic/nodes.h"
-#include "../generic/Qelements.h"
-#include "../generic/oomph_utilities.h"
+#include "generic/projection.h"
+#include "generic/nodes.h"
+#include "generic/Qelements.h"
+#include "generic/oomph_utilities.h"
 
 namespace oomph
 {

@@ -1,4 +1,3 @@
-//Hand-written combined header file for the two lapack routines
-//reqired by superlu
-int lsame_(char *ca, char *cb);
-int xerbla_(char *srname, int *info);
+// This file was generated automatically during the CMake process and
+// it will be remade automatically
+#include <oomph_lapack/oomph_required_lapack_routines.h>

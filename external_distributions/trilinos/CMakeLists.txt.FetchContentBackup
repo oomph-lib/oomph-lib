@@ -1,0 +1,111 @@
+# ==============================================================================
+# Build the Trilinos library
+# ==============================================================================
+list(APPEND CMAKE_MESSAGE_INDENT " ")
+message(STATUS "Entered trilinos subdirectory")
+
+# ------------------------------------------------------------------------------
+# NOTE: There is an issue with the CMakeLists.txt file in the master branch of
+# the Trilinos project which limits us from using the latest release (i.e.
+# Release 13.0.1 as of 31/05/21). This has been patched; see PRs here:
+# https://github.com/trilinos/Trilinos/issues/8177 and here:
+# https://github.com/trilinos/Trilinos/pull/8184 for details. We're not cloning
+# the master branch (where this fix has been applied) because this forces us to
+# use C++14. Instead, we'll just patch the commits.
+# ------------------------------------------------------------------------------
+
+# # Desired installation location and the location of the library files and #
+# library headers
+set(INSTALL_SUBDIR TRILINOS_installation)
+set(TRILINOS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/${INSTALL_SUBDIR}")
+
+# The patch file and how to apply it set(PATCH_FILE
+# 0001-Patch-of-CMakeLists.txt-for-FetchContents.patch). Patch above is for the
+# latest version of Trilinos. Patch below is for Trilinos 11.8.1.
+set(PATCH_FILE 0001-Patch-of-CMakeLists.txt-for-oomph-lib-export.patch)
+set(PATCH_COMMAND
+    ${CMAKE_COMMAND}
+    -E
+    copy_if_different
+    ${CMAKE_CURRENT_SOURCE_DIR}/patches/${PATCH_FILE}
+    <SOURCE_DIR>
+    &&
+    git
+    checkout
+    <SOURCE_DIR>/CMakeLists.txt
+    &&
+    git
+    apply
+    <SOURCE_DIR>/${PATCH_FILE})
+
+# Specify build options
+set(CMAKE_INSTALL_PREFIX ${TRILINOS_DIR})
+set(Trilinos_SET_GROUP_AND_PERMISSIONS_ON_INSTALL_BASE_DIR
+    ${CMAKE_INSTALL_PREFIX})
+set(BUILD_SHARED_LIBS ${BUILD_SHARED_LIBS})
+set(CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE})
+set(CMAKE_VERBOSE_MAKEFILE OFF)
+set(CMAKE_C_COMPILER ${CMAKE_C_COMPILER})
+set(CMAKE_CXX_COMPILER ${CMAKE_CXX_COMPILER})
+set(CMAKE_Fortran_COMPILER ${CMAKE_Fortran_COMPILER})
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}")
+set(TPL_ENABLE_MPI ${OOMPH_HAS_MPI})
+set(TPL_ENABLE_BLAS ON)
+set(TPL_ENABLE_LAPACK ON)
+set(Trilinos_ENABLE_TESTS OFF)
+set(Trilinos_ENABLE_EXAMPLES OFF)
+set(Trilinos_ENABLE_ALL_PACKAGES OFF)
+set(Trilinos_ENABLE_ALL_OPTIONAL_PACKAGES OFF)
+set(TPL_ENABLE_Netcdf OFF)
+set(Trilinos_ENABLE_AztecOO ON)
+set(Trilinos_ENABLE_Amesos ON)
+set(Trilinos_ENABLE_Anasazi ON)
+set(Trilinos_ENABLE_Epetra ON)
+set(Trilinos_ENABLE_EpetraExt ON)
+set(Trilinos_ENABLE_Ifpack ON)
+set(Trilinos_ENABLE_Kokkos OFF)
+set(Trilinos_ENABLE_ML ON)
+# set(Trilinos_ENABLE_PyTrilinos OFF)
+set(Trilinos_ENABLE_Teuchos ON)
+# set(Trilinos_ENABLE_Tpetra ON)
+set(Trilinos_ENABLE_Triutils ON)
+# set(Trilinos_ENABLE_Xpetra OFF) set(Trilinos_ENABLE_Belos ON)
+
+# Download Trilinos
+include(FetchContent)
+FetchContent_Declare(
+  Trilinos
+  GIT_REPOSITORY https://github.com/trilinos/Trilinos.git
+  GIT_TAG trilinos-release-11-8-1
+  PATCH_COMMAND ${PATCH_COMMAND}
+  GIT_PROGRESS TRUE
+  GIT_SHALLOW TRUE)
+FetchContent_MakeAvailable(Trilinos)
+
+# Add OOMPH_HAS_TRILINOS to the compiler flags to define the symbol and make the
+# accumulated compiler flags visible in the parent scope
+list(APPEND EXTERNAL_DIST_CXX_DEFINITIONS OOMPH_HAS_TRILINOS)
+set(EXTERNAL_DIST_CXX_DEFINITIONS ${EXTERNAL_DIST_CXX_DEFINITIONS} PARENT_SCOPE)
+
+# Add the Trilinos libraries to the list of external distribution libraries and
+# make the updated variable value visible to the parent scope
+list(
+  APPEND
+  EXTERNAL_DIST_LIBS
+  ml
+  ifpack
+  amesos
+  anasazi
+  aztecoo
+  epetraext
+  triutils
+  epetra)
+set(EXTERNAL_DIST_LIBS ${EXTERNAL_DIST_LIBS} PARENT_SCOPE)
+
+# Define an internal project variable to indicate that we possess this library
+set(OOMPH_HAS_TRILINOS TRUE CACHE INTERNAL "")
+
+message(VERBOSE "Leaving trilinos subdirectory")
+# ------------------------------------------------------------------------------

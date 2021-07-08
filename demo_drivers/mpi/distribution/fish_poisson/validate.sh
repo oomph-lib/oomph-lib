@@ -1,16 +1,18 @@
 #! /bin/sh
 
 # Get the OOPMH-LIB root directory from a makefile
-OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
+OOMPH_ROOT_DIR=$1
 
+# Receive the mpirun command as the first argument
+MPI_RUN_COMMAND="$2"
 
 #Set the number of tests to be checked
 NUM_TESTS=3
 
 # Doc what we're using to run tests on two processors
-echo " " 
+echo " "
 echo "Running mpi tests with mpi run command: " $MPI_RUN_COMMAND
-echo " " 
+echo " "
 
 # Setup validation directory
 #---------------------------
@@ -20,7 +22,6 @@ mkdir Validation
 
 cd Validation
 cp ../*partition.dat .
-
 
 #----------------------------------------------------------------------
 
@@ -39,36 +40,36 @@ mkdir RESLT_fully_automatic
 # the existence of the new directory
 sleep 5
 
-$MPI_RUN_COMMAND ../fish_poisson > OUTPUT_fish_poisson
+$MPI_RUN_COMMAND ../fish_poisson >OUTPUT_fish_poisson
 echo "done"
-echo " " >> validation.log
-echo "Fish poisson validation" >> validation.log
-echo "------------------------------------" >> validation.log
-echo " " >> validation.log
-echo "Validation directory: " >> validation.log
-echo " " >> validation.log
-echo "  " `pwd` >> validation.log
-echo " " >> validation.log
+echo " " >>validation.log
+echo "Fish poisson validation" >>validation.log
+echo "------------------------------------" >>validation.log
+echo " " >>validation.log
+echo "Validation directory: " >>validation.log
+echo " " >>validation.log
+echo "  " $(pwd) >>validation.log
+echo " " >>validation.log
 cat RESLT_select_refine/soln0_on_proc0.dat RESLT_select_refine/soln0_on_proc1.dat \
     RESLT_select_refine/soln1_on_proc0.dat RESLT_select_refine/soln1_on_proc1.dat \
     RESLT_select_refine/soln2_on_proc0.dat RESLT_select_refine/soln2_on_proc1.dat \
-    > fish_poisson_select_results.dat
+    >fish_poisson_select_results.dat
 cat RESLT_incremental2/soln1_on_proc0.dat RESLT_incremental2/soln1_on_proc1.dat \
     RESLT_incremental2/soln6_on_proc0.dat RESLT_incremental2/soln6_on_proc1.dat \
     RESLT_incremental2/soln16_on_proc0.dat RESLT_incremental2/soln16_on_proc1.dat \
-    > fish_poisson_incremental_results.dat
+    >fish_poisson_incremental_results.dat
 cat RESLT_fully_automatic/soln0_on_proc0.dat RESLT_fully_automatic/soln0_on_proc1.dat \
-    > fish_poisson_automatic_results.dat
+    >fish_poisson_automatic_results.dat
 
-if test "$1" = "no_fpdiff"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+if test "$3" = "no_fpdiff"; then
+    echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >>validation.log
 else
-../../../../../bin/fpdiff.py ../validata/fish_poisson_select_results.dat.gz  \
-         fish_poisson_select_results.dat >> validation.log
-../../../../../bin/fpdiff.py ../validata/fish_poisson_incremental_results.dat.gz  \
-         fish_poisson_incremental_results.dat >> validation.log
-../../../../../bin/fpdiff.py ../validata/fish_poisson_automatic_results.dat.gz  \
-         fish_poisson_automatic_results.dat >> validation.log
+    $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/fish_poisson_select_results.dat.gz \
+        fish_poisson_select_results.dat >>validation.log
+    $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/fish_poisson_incremental_results.dat.gz \
+        fish_poisson_incremental_results.dat >>validation.log
+    $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/fish_poisson_automatic_results.dat.gz \
+        fish_poisson_automatic_results.dat >>validation.log
 fi
 
 mkdir RESLT_fish_poisson
@@ -79,21 +80,18 @@ mv RESLT_fully_automatic RESLT_fish_poisson
 #----------------------------------------------------------------------
 
 # Append log to main validation log
-cat validation.log >> ../../../../../validation.log
+cat validation.log >>$OOMPH_ROOT_DIR/validation.log
 
 cd ..
 
-
-
 #######################################################################
-
 
 #Check that we get the correct number of OKs
 # validate_ok_count will exit with status
 # 0 if all tests has passed.
 # 1 if some tests failed.
 # 2 if there are more 'OK' than expected.
-. $OOMPH_ROOT_DIR/bin/validate_ok_count
+. $OOMPH_ROOT_DIR/scripts/validate_ok_count
 
 # Never get here
 exit 10

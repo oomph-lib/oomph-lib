@@ -2534,10 +2534,10 @@ namespace oomph
                                   global_row_start);
 
     // clean up
-    delete dist_first_row;
-    delete dist_nrow_local;
-    delete nnz_offset;
-    delete dist_nnz_pt;
+    delete[] dist_first_row;
+    delete[] dist_nrow_local;
+    delete[] nnz_offset;
+    delete[] dist_nnz_pt;
 
     // and return
     return matrix_pt;

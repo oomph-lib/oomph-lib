@@ -1,7 +1,7 @@
 #! /bin/sh
 
 # Get the OOPMH-LIB root directory from a makefile
-OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
+OOMPH_ROOT_DIR=$1
 
 
 #Set the number of tests to be checked
@@ -33,10 +33,10 @@ echo " " >> validation.log
 cat RESLT/soln0.dat RESLT/soln5.dat > bous_convection_results.dat
 
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/results.dat.gz   \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/results.dat.gz   \
     bous_convection_results.dat 0.1 1.0e-8  >> validation.log
 fi
 
@@ -59,10 +59,10 @@ echo " " >> validation.log
 cat RESLT/soln0.dat RESLT/soln5.dat > bous_convection_fd_results.dat
 
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/results.dat.gz   \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/results.dat.gz   \
     bous_convection_fd_results.dat 0.1 5.0e-7  >> validation.log
 fi
 
@@ -84,10 +84,10 @@ echo " " >> validation.log
 cat RESLT/soln0.dat RESLT/soln5.dat > bous_convection_anal_results.dat
 
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/results.dat.gz   \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/results.dat.gz   \
     bous_convection_anal_results.dat 0.1 5.0e-7  >> validation.log
 fi
 
@@ -109,10 +109,10 @@ echo " " >> validation.log
 cat RESLT/soln0.dat RESLT/soln1.dat > ref_bous_convection_results.dat
 
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/ref_results.dat.gz   \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/ref_results.dat.gz   \
    ref_bous_convection_results.dat  0.1 1.0e-7 >> validation.log
 fi
 
@@ -138,10 +138,10 @@ cat RESLT/fluid_soln0.dat RESLT/fluid_soln5.dat \
     RESLT/temperature_soln0.dat RESLT/temperature_soln5.dat \
     > multi_domain_b_convection.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/multi_domain_b_convection.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/multi_domain_b_convection.dat.gz  \
          multi_domain_b_convection.dat 0.1 1.5e-7 >> validation.log
 fi
 
@@ -167,10 +167,10 @@ cat RESLT/fluid_soln0.dat RESLT/fluid_soln1.dat \
     RESLT/temperature_soln0.dat RESLT/temperature_soln1.dat \
     > multi_domain_ref_b_convection.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/multi_domain_ref_b_convection.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/multi_domain_ref_b_convection.dat.gz  \
          multi_domain_ref_b_convection.dat 0.1 1.0e-7 >> validation.log
 fi
 
@@ -197,10 +197,10 @@ cat RESLT/fluid_soln0.dat RESLT/fluid_soln1.dat \
     RESLT/temperature_soln0.dat RESLT/temperature_soln1.dat \
     > multi_domain_ref_b_convection_fd_for_external_data.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/multi_domain_ref_b_convection.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/multi_domain_ref_b_convection.dat.gz  \
          multi_domain_ref_b_convection_fd_for_external_data.dat 0.1 1.0e-7 >> validation.log
 fi
 
@@ -209,7 +209,7 @@ mv RESLT RESLT_multi_domain_ref_b_convection_fd_for_external_data
 
 # Append output to global validation log file
 #--------------------------------------------
-cat validation.log >> ../../../../validation.log
+cat validation.log >> $OOMPH_ROOT_DIR/validation.log
 
 
 cd ..
@@ -224,7 +224,7 @@ cd ..
 # 0 if all tests has passed.
 # 1 if some tests failed.
 # 2 if there are more 'OK' than expected.
-. $OOMPH_ROOT_DIR/bin/validate_ok_count
+. $OOMPH_ROOT_DIR/scripts/validate_ok_count
 
 # Never get here
 exit 10

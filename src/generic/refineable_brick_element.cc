@@ -1422,7 +1422,6 @@ namespace oomph
               // Get the fractional position of the node in the direction of
               // s[2]
               s_fraction[2] = local_one_d_fraction_of_node(i2, 2);
-
               // Local coordinate in father element
               s[2] = s_lo[2] + (s_hi[2] - s_lo[2]) * s_fraction[2];
 

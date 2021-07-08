@@ -1,0 +1,46 @@
+
+# Check that we get the correct number of OKs
+# This is to be sourced from validate.sh files.
+# The variable NUM_TESTS should be set in the validate.sh files.
+OK_COUNT=`grep -c 'OK' Validation/validation.log`
+if  [ $OK_COUNT -eq $NUM_TESTS ]; then
+ echo " "
+ echo "======================================================================"
+ echo " " 
+ echo "All tests in" 
+ echo " " 
+ echo "    `pwd`    "
+ echo " "
+ echo "passed successfully."
+ echo " "
+ echo "======================================================================"
+ echo " " 
+ exit 0
+else
+  if [ $OK_COUNT -lt $NUM_TESTS ]; then
+   echo " "
+   echo "======================================================================"
+   echo " " 
+   echo "Only $OK_COUNT of $NUM_TESTS test(s) passed; see"
+   echo " " 
+   echo "    `pwd`/Validation/validation.log"
+   echo " " 
+   echo "for details" 
+   echo " " 
+   echo "======================================================================"
+   echo " "
+   exit 1
+  else 
+   echo " "
+   echo "======================================================================"
+   echo " " 
+   echo "More OKs than tests! Need to update NUM_TESTS in"
+   echo " " 
+   echo "    `pwd`/validate.sh"
+   echo " "
+   echo "======================================================================"
+   echo " "
+   exit 2
+  fi
+fi
+

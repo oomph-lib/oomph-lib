@@ -30,9 +30,11 @@
 // Non-inline functions for the PerturbedSpineNode, PerturbedSpineElement
 // and PerturbedSpineMesh classes
 
+#include <cstdlib>
+
 // oomph-lib headers
 #include "generic.h"
-#include <cstdlib>
+#include "perturbed_spines.h"
 
 namespace oomph
 {

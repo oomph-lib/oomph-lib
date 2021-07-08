@@ -1,0 +1,126 @@
+#!/bin/bash
+#
+# Copyright (C) 2007- Angelo Simone (TU Delft)
+# Licensed under the GNU LGPL Version 2.1
+#
+# Wrapper for oomph-converter.py
+#
+#
+# Created on 20070905
+# Last revision by Jeremy CHU VAN on 20110708
+#
+# Report bugs to a.simone@tudelft.nl
+#
+#############################################
+#
+
+# -- usage string and function
+usagestr="\n
+NAME\n
+\toomph-convert - wrapper to oomph-converter.py for converting from oomph-lib tecplot format to VTK XML\n
+\n
+\n Make sure that the directory that contains this script is in the path
+\n because it contains other helper scripts.
+\n 
+\n
+SYNOPSIS\n
+\toomph-convert [OPTIONS] [input_file.dat] \n
+\n
+\n
+OPTIONS\n
+\t-h  \t display this help text and exit\n
+\t-z  \t add trailing zeros to the output filename \n
+\t-p2  \t extract only 2D points with values in data\n
+\t-p3  \t extract only 3D points with values in data\n
+\t-o  \t ovewrite output files (otherwise skip conversion if they already exist)\n
+\n
+\n
+TYPICAL USAGE EXAMPLES\n
+\toomph-convert -h                    \t\t\t\t  -> display help text  \n
+\toomph-convert soln12.dat              \t\t\t  -> generate soln12.vtu \n
+\toomph-convert -z soln12.dat           \t\t\t  -> generate soln00012.vtu \n
+\toomph-convert soln.dat              \t\t\t\t  -> generate soln.vtu \n
+\toomph-convert -z soln.dat             \t\t\t  -> generate soln00000.vtu \n
+\toomph-convert soln\*.dat              \t\t\t  -> generate soln\*.vtu \n
+\toomph-convert -z soln\*.dat           \t\t\t  -> generate soln0000\*.vtu \n
+\toomph-convert soln.dat soln12.dat       \t\t  -> generate soln.vtu and soln12.vtu \n
+\toomph-convert -z soln.dat soln12.dat    \t\t  -> generate soln00000.vtu and soln00012.vtu \n
+\toomph-convert -p2 soln.dat soln12.dat    \t\t  -> generate soln.vtp and soln12.vtp \n
+\toomph-convert -p2 -z soln.dat soln12.dat    \t\t  -> generate soln00000.vtp and soln00012.vtp \n
+  "
+
+usage() {
+  echo -e $usagestr
+}
+
+# -- we want at least one parameter (it may be a flag or an argument)
+if [ -z "$1" ]; then
+        usage
+        exit 1
+fi
+
+# -- parse command line arguments
+zeroflag=
+pointflag=
+dimflag=0
+oflag=
+while getopts "hzpo23" OPTIONS; do
+    case ${OPTIONS} in
+        h)      usage
+                exit 0
+                ;;
+        z)      zeroflag=-z
+                ;;
+	p)      pointflag=-p
+	        ;;
+	2)      dimflag=2
+	        ;;
+	3)      dimflag=3
+	        ;;
+        o)      oflag=-o
+                ;;
+        \?)     # getopts issues an error message
+                usage
+                exit 1
+                ;;
+    esac
+done
+shift `expr $OPTIND - 1`
+
+# -- we want at least one file name
+if [ $# -eq 0 ]; then
+        usage
+        exit 1
+fi
+
+# -- convert the files
+if [ $dimflag -eq 0 ] ; then
+    while [ $# -ne 0 ] ; do
+	filename=$1
+	echo  
+	echo  
+	echo -- Processing $filename
+        # Remove everything after first "." in filename, "." included
+	filenametrunc=${filename%\.*} 
+        # Assume that this lives in the bin directory (or some other
+        # directory that's in the path...
+	oomph-convert.py $oflag $zeroflag $filename $filenametrunc.vtu
+	shift
+    done
+
+else
+    while [ $# -ne 0 ] ; do
+	filename=$1
+	echo  
+	echo  
+	echo -- Processing $filename
+         # Remove everything after first "." in filename, "." included
+	filenametrunc=${filename%\.*} 
+
+        # Assume that this lives in the bin directory (or some other
+        # directory that's in the path...
+	oomph-convert.py $oflag $zeroflag $pointflag$dimflag $filename $filenametrunc.vtp
+	shift
+    done
+
+fi

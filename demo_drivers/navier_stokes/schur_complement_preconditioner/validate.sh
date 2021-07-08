@@ -1,7 +1,7 @@
 #! /bin/sh
 
 # Get the OOPMH-LIB root directory from a makefile
-OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
+OOMPH_ROOT_DIR=$1
 
 
 #Set the number of tests to be checked
@@ -42,13 +42,13 @@ RESLT/soln14.dat  RESLT/soln2.dat  RESLT/soln9.dat \
 RESLT/soln15.dat  RESLT/soln3.dat \
      > two_d_fp.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 
 echo "Results: " >> validation.log
 
-../../../../bin/fpdiff.py ../validata/two_d_fp.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/two_d_fp.dat.gz  \
          two_d_fp.dat 0.1 1.0e-12 >> validation.log
 
 echo "Iteration counts (allowing for 20% variation): " >> validation.log
@@ -67,7 +67,7 @@ echo "       In the latter case, not even the number of " >> validation.log
 echo "       lines in the iter* files will match.] " >> validation.log
 
 
-../../../../bin/fpdiff.py ../validata/iter_two_d.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/iter_two_d.dat.gz  \
          iter_two_d.dat 20.0 1.0E-10 >> validation.log
 
 fi
@@ -103,13 +103,13 @@ RESLT/soln2.dat   RESLT/soln8.dat \
 RESLT/soln3.dat   RESLT/soln9.dat \
      > three_d_fp.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 
 echo "Results: " >> validation.log
 
-../../../../bin/fpdiff.py ../validata/three_d_fp.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/three_d_fp.dat.gz  \
          three_d_fp.dat 0.1 1.0e-9 >> validation.log
 
 echo "Iteration counts (allowing for 50% variation): " >> validation.log
@@ -128,7 +128,7 @@ echo "       In the latter case, not even the number of " >> validation.log
 echo "       lines in the iter* files will match.] " >> validation.log
 
 
-../../../../bin/fpdiff.py ../validata/iter_three_d.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/iter_three_d.dat.gz  \
          iter_three_d.dat 50.0 1.0E-10>> validation.log
 
 fi
@@ -140,7 +140,7 @@ mv RESLT RESLT_three_d_fp
 
 
 # Append log to main validation log
-cat validation.log >> ../../../../validation.log
+cat validation.log >> $OOMPH_ROOT_DIR/validation.log
 
 cd ..
 
@@ -154,7 +154,7 @@ cd ..
 # 0 if all tests has passed.
 # 1 if some tests failed.
 # 2 if there are more 'OK' than expected.
-. $OOMPH_ROOT_DIR/bin/validate_ok_count
+. $OOMPH_ROOT_DIR/scripts/validate_ok_count
 
 # Never get here
 exit 10

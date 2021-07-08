@@ -37,7 +37,7 @@
 #include "constitutive.h"
 
 // The mesh
-#include "meshes/simple_cubic_mesh.template.h"
+#include "meshes/simple_cubic_mesh.h"
 
 // The mesh
 #include "meshes/quarter_tube_mesh.h"

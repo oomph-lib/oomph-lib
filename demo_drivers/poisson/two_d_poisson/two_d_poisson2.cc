@@ -39,7 +39,7 @@
 // precompiled and instantiated with the required element type
 // in the separate file, two_d_poisson2_mesh.cc to avoid
 // recompilation.
-#include "meshes/simple_rectangular_quadmesh.template.h"
+#include "meshes/simple_rectangular_quadmesh.h"
 
 using namespace std;
 

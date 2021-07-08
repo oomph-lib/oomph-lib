@@ -208,7 +208,6 @@ namespace oomph
                                 const Vector<double>& zeta,
                                 Vector<double>& r);
 
-    /// Rotate the domain (for axisymmetric problems)
     void enable_rotate_domain()
     {
       Rotate_domain = true;
@@ -221,8 +220,6 @@ namespace oomph
     }
 
   private:
-    /// \short Northern boundary of the macro element imacro in the
-    /// upstream (part=0) or downstream (part=1) sections
     void r_N_straight(const Vector<double>& zeta,
                       Vector<double>& r,
                       const unsigned& imacro,

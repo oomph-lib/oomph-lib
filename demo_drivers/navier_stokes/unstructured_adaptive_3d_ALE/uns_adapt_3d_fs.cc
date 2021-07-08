@@ -39,8 +39,6 @@
 
 // Get the mesh
 #include "meshes/tetgen_mesh.h"
-
-//#include "../../../external_src/oomph_tetgen/tetgen.h"
 #include "oomph_tetgen.h"
 
 using namespace std;

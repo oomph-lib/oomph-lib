@@ -37,7 +37,7 @@
 #include "generic.h"
 #include "navier_stokes.h"
 #include "advection_diffusion_reaction.h"
-#include "meshes/rectangular_quadmesh.template.cc"
+#include "meshes/rectangular_quadmesh.h"
 
 using namespace std;
 

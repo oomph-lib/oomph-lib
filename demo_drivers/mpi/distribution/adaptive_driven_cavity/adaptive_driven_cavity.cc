@@ -281,7 +281,6 @@ int main(int argc, char** argv)
     if (CommandLineArgs::Argc == 1)
     {
 #ifdef OOMPH_HAS_MPI
-
       // Provide storage for each element's partition number
       const unsigned n_element = problem.mesh_pt()->nelement();
       Vector<unsigned> out_element_partition(n_element);

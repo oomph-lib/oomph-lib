@@ -51,7 +51,7 @@
 #include "spines.h"
 
 // Include to fill in additional_setup_shared_node_scheme() function
-#include "refineable_mesh.template.cc"
+#include "refineable_mesh.h"
 
 namespace oomph
 {

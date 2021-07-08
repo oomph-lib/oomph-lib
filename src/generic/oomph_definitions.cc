@@ -34,6 +34,7 @@
 #include "stacktrace.h"
 #endif
 #include "oomph_definitions.h"
+#include <sstream>
 
 namespace oomph
 {

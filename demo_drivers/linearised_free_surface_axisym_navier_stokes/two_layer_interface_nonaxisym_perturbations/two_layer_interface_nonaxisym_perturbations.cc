@@ -34,17 +34,14 @@
 #include "generic.h"
 
 // Linearised axisymmetric Navier-Stokes headers
-#include "linearised_axisym_navier_stokes_elements.h"
 #include "linearised_axisym_navier_stokes_elements.cc"
 #include "multi_domain_linearised_axisym_navier_stokes_elements.h"
 
 // Interface headers
 #include "fluid_interface.h"
-#include "linearised_axisymmetric_fluid_interface_elements.h"
 #include "linearised_axisymmetric_fluid_interface_elements.cc"
 
 // Perturbed spine headers
-#include "perturbed_spines.h"
 #include "perturbed_spines.cc"
 
 // Bessel function headers
@@ -52,8 +49,7 @@
 
 // The mesh
 #include "meshes/two_layer_spine_mesh.h"
-#include "two_layer_perturbed_spine_mesh.template.h"
-#include "two_layer_perturbed_spine_mesh.template.cc"
+#include "two_layer_perturbed_spine_mesh.h"
 
 // Catch floating point exceptions
 #include <fenv.h>

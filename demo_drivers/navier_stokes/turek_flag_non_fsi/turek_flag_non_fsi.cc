@@ -47,7 +47,6 @@
 #include "meshes/cylinder_with_flag_mesh.h"
 
 using namespace std;
-
 using namespace oomph;
 
 //#define USE_MACRO_ELEMENTS

@@ -1,7 +1,10 @@
 #! /bin/sh
 
 # Get the OOPMH-LIB root directory from a makefile
-OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
+OOMPH_ROOT_DIR=$1
+
+# Receive the mpirun command as the first argument
+MPI_RUN_COMMAND="$2"
 
 if [ ! -f pseudo_solid_collapsible_tube ]; then
     echo " "
@@ -61,20 +64,20 @@ cat  RESLT_proc0/solid_soln3.dat  RESLT_proc0/solid_soln4.dat \
      RESLT_proc1/fluid_soln3.dat  RESLT_proc1/fluid_soln4.dat \
      > results.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$3" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../../bin/fpdiff.py ../validata/results.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/results.dat.gz  \
          results.dat 6.0 3.0e-5 >> validation.log
 fi
 
 # check iteration counts -- allow for 10% difference
 grep iterations RESLT_proc1/OUTPUT.1 | awk '{print $5}' > iter_counts.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$3" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../../bin/fpdiff.py ../validata/iter_counts.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/iter_counts.dat.gz  \
          iter_counts.dat 10.0 1.0e-12 >> validation.log
 fi
 
@@ -82,7 +85,7 @@ fi
 #---------------------------------------------------------------------
 
 # Append log to main validation log
-cat validation.log >> ../../../../../validation.log
+cat validation.log >> $OOMPH_ROOT_DIR/validation.log
 
 cd ..
 
@@ -96,7 +99,7 @@ cd ..
 # 0 if all tests has passed.
 # 1 if some tests failed.
 # 2 if there are more 'OK' than expected.
-. $OOMPH_ROOT_DIR/bin/validate_ok_count
+. $OOMPH_ROOT_DIR/scripts/validate_ok_count
 
 # Never get here
 exit 10

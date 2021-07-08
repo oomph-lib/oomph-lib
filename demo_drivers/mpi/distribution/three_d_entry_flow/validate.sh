@@ -1,8 +1,10 @@
 #! /bin/sh
 
 # Get the OOPMH-LIB root directory from a makefile
-OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
+OOMPH_ROOT_DIR=$1
 
+# Receive the mpirun command as the first argument
+MPI_RUN_COMMAND="$2"
 
 #Set the number of tests to be checked
 NUM_TESTS=2
@@ -52,12 +54,12 @@ cat RESLT_CR/soln1_on_proc0.dat RESLT_CR/soln1_on_proc1.dat \
     RESLT_CR/soln3_on_proc0.dat RESLT_CR/soln3_on_proc1.dat \
     > three_d_entry_flow_CR_results.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$3" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../../bin/fpdiff.py ../validata/three_d_entry_flow_TH_results.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/three_d_entry_flow_TH_results.dat.gz  \
          three_d_entry_flow_TH_results.dat >> validation.log
-../../../../../bin/fpdiff.py ../validata/three_d_entry_flow_CR_results.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/three_d_entry_flow_CR_results.dat.gz  \
          three_d_entry_flow_CR_results.dat >> validation.log
 fi
 
@@ -68,7 +70,7 @@ mv RESLT_CR RESLT_three_d_entry_flow
 #----------------------------------------------------------------------
 
 # Append log to main validation log
-cat validation.log >> ../../../../../validation.log
+cat validation.log >> $OOMPH_ROOT_DIR/validation.log
 
 cd ..
 
@@ -82,7 +84,7 @@ cd ..
 # 0 if all tests has passed.
 # 1 if some tests failed.
 # 2 if there are more 'OK' than expected.
-. $OOMPH_ROOT_DIR/bin/validate_ok_count
+. $OOMPH_ROOT_DIR/scripts/validate_ok_count
 
 # Never get here
 exit 10

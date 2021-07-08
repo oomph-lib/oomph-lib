@@ -36,8 +36,7 @@
 #endif
 
 #include "mesh.h"
-#include "../meshes/rectangular_quadmesh.template.h"
-#include "../meshes/rectangular_quadmesh.template.cc"
+#include "../meshes/rectangular_quadmesh.h"
 
 namespace oomph
 {

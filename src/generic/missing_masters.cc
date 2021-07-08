@@ -32,7 +32,6 @@
 
 // oomph-lib header
 #include "missing_masters.h"
-#include "missing_masters.template.cc"
 #include "mesh.h"
 #include "algebraic_elements.h"
 #include "macro_element_node_update_element.h"

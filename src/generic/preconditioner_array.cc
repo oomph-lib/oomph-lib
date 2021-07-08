@@ -901,7 +901,7 @@ namespace oomph
           nnz_recv[i][p] = nnz_recv_temp[(i * nproc) + p];
         }
       }
-      delete nnz_recv_temp;
+      delete[] nnz_recv_temp;
 
       // get the number of nnzs to be received from each processor
 
@@ -1462,7 +1462,7 @@ namespace oomph
           nnz_recv[i][p] = nnz_recv_temp[(i * nproc) + p];
         }
       }
-      delete nnz_recv_temp;
+      delete[] nnz_recv_temp;
 
       // get the number of nnzs to be received from each processor
 

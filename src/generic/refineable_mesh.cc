@@ -38,7 +38,6 @@
 
 #include "refineable_mesh.h"
 // Include to fill in additional_synchronise_hanging_nodes() function
-#include "refineable_mesh.template.cc"
 
 namespace oomph
 {

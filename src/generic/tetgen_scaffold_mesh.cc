@@ -1292,5 +1292,4 @@ namespace oomph
     }
 
   } // end of constructor
-
 } // namespace oomph

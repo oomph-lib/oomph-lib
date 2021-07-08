@@ -1,5 +1,3 @@
-
-
 /*----------------------------------------------------------------
    Interface to distributed SuperLU, created by JWB by adapting
    code in the superlu distribution, i.e. files /SRC/pdgssvx.c
@@ -27,16 +25,20 @@
 */
 #include <math.h>
 #ifdef USING_OOMPH_SUPERLU_DIST
-#include "oomph_superlu_dist_3.0.h"
+#ifdef OOMPH_BLEEDING_EDGE
+#include "oomph_superlu_dist_7.0.0.h"
 #else
-#include<superlu_defs.h>
-#include<superlu_ddefs.h>
-#include<Cnames.h>
-#include<machines.h>
-#include<psymbfact.h>
-#include<supermatrix.h>
-#include<old_colamd.h>
-#include<util_dist.h>
+#include "oomph_superlu_dist_3.0.h"
+#endif
+#else
+#include <superlu_defs.h>
+#include <superlu_ddefs.h>
+#include <Cnames.h>
+#include <machines.h>
+#include <psymbfact.h>
+#include <supermatrix.h>
+#include <old_colamd.h>
+#include <util_dist.h>
 #endif
 
 

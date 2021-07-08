@@ -1,7 +1,7 @@
 #! /bin/sh
 
 # Get the OOPMH-LIB root directory from a makefile
-OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
+OOMPH_ROOT_DIR=$1
 
 
 #Set the number of tests to be checked
@@ -39,10 +39,10 @@ cat RESLT/soln0.dat \
     RESLT/soln3.dat \
     > osc_ring_alg_results.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/osc_ring_alg_results.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/osc_ring_alg_results.dat.gz  \
          osc_ring_alg_results.dat >> validation.log
 fi
 
@@ -74,10 +74,10 @@ cat RESLT/soln0.dat \
     RESLT_restarted/soln2.dat \
     > osc_ring_macro_results.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/osc_ring_alg_results.dat.gz  \
+$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/osc_ring_alg_results.dat.gz  \
          osc_ring_alg_results.dat >> validation.log
 fi
 
@@ -90,7 +90,7 @@ mv RESLT_restarted RESLT_osc_ring_macro_restarted
 
 
 # Append log to main validation log
-cat validation.log >> ../../../../validation.log
+cat validation.log >> $OOMPH_ROOT_DIR/validation.log
 
 cd ..
 
@@ -104,7 +104,7 @@ cd ..
 # 0 if all tests has passed.
 # 1 if some tests failed.
 # 2 if there are more 'OK' than expected.
-. $OOMPH_ROOT_DIR/bin/validate_ok_count
+. $OOMPH_ROOT_DIR/scripts/validate_ok_count
 
 # Never get here
 exit 10

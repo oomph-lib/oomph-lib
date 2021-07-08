@@ -39,7 +39,7 @@
 #endif
 
 // OOMPH-LIB headers
-#include "../../../src/generic/Qelements.h"
+#include "../generic/Qelements.h"
 
 namespace oomph
 {
